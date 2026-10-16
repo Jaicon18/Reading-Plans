@@ -1564,3 +1564,70 @@ Se carga (b) por 53.3 y RFI con (a).
 ## Calificador
 rangos_v6 (Referencias (examen)): 6" stud 4,905.24 (piers), FRP 337.35 (door 112), FRT plywood 6,606.30 (nailbase
 de piers), metal stud blocking hasta 774.43.
+
+# ADENDA v60 — 16-oct-2026 · ESTABILIDAD: HERRAMIENTAS DETERMINISTAS (studs por nodo, board por face) + reglas 60.x
+
+## De dónde salió
+Pruebas paralelas #10A y #10B con el MISMO skill v59: 78.6 % las dos, pero varias familias salieron muy distintas
+entre sí (5/8" board 14,302 vs 17,363 SF; 6" stud 5,746 vs 4,893 LF; furring 703 vs 1,450). Causa (ARBITRAJE_10.md):
+tres decisiones quedaban al juicio del agente sin herramienta — (1) cómo contar studs extra de juntas, (2) si
+"layers" es total o por face, (3) a qué familia va cada track y cuántas corridas tiene un detalle de sección.
+Un take-off que cambia de una corrida a otra no es confiable aunque una corrida salga bien. Desde v60 esos
+cálculos los hace una HERRAMIENTA; el agente solo declara datos leídos del plano.
+
+## ⛔ REGLA 60.0 — HERRAMIENTAS OBLIGATORIAS (en py/, corridas por bitacora.py run)
+- `studs_nodos.py <entrada.json> <salida.json>`: TODOS los studs de walls (6", 3-5/8", 1-5/8", 2-1/2", parapet si
+  aplica) salen de aquí. Entrada: walls [id, tag, stud_size, length_ft (neto, 59.3), oc_in, rows, height_ft
+  (60.3/59.13), zones (@12" solo en building corners, S1.xx), openings (ro_w_ft, head_ft, sill_ft)] + nodes
+  [L / T(branch, through) / X / free / vendor_end]. Cada wall declara sus 2 extremos en nodos; si no, la tool falla.
+- `board_caras.py <entrada.json> <salida.json>`: TODO board de walls (5/8" regular, MR, ballistic, 3/8") sale de
+  aquí, FACE POR FACE. Entrada: details {layers_per_face, k_panel} + walls [detail, length_printed_ft (cota
+  impresa, manda), length_vector_ft, faces (room, board, layers, height_ft, deduct_sf, k_customer)].
+- Los números del Excel para esas familias son los totales de esas salidas (se citan las salidas en "source").
+- `bitacora.py compuerta` exige que ambas se hayan corrido (si no, NO ENTREGABLE).
+
+## ⛔ REGLA 60.1 — STUDS POR NODO, UNA VEZ
+L +1, T +1 al branch, X +2, extremo libre 0, office front contra vendor frame (10/A12.01) +1 TOTAL por wall
+(no por row). La zona @12" de S1.11 n.5 va solo a 6 ft de las BUILDING corners declaradas, nunca en cada punta.
+
+## ⛔ REGLA 60.2 — LAYERS POR FACE (ANULA "layers TOTALES" de la sección de partition types)
+Cada face lleva sus layers, validadas contra el detalle del tipo (BOA 5/A12.01 G: 2 por face). La cota impresa
+manda sobre el vector; diferencia > 0.25 ft = DISCREPANCIA anotada. Prohibido un campo "layers" total.
+
+## ⛔ REGLA 60.3 — ALTURA DE STUD EXTERIOR
+= B.O.D. del wall (59.13) − peralte (d) de la perimeter beam de S2.xx cuando el detalle para el stud en un
+deflection track bajo la viga (BOA 10/S5.10). Nunca B.O.D.
+
+## ⛔ REGLA 60.4 — SUSTRATO DE CLADDING NO ES FURRING
+Hat channel / Z-girt / furring del metal panel, ACM o stucco es del instalador del cladding: renglón EXCLUDED +
+RFI con delta; nunca en la familia furring channel (BOA 2/A09.31 EPS-5).
+
+## ⛔ REGLA 60.5 — HEADER LF UNA VEZ POR ABERTURA
+Header = (R.O. + 1'-4") × 1. El tipo del header schedule (single/double track, 2-CSJ, box) va en la descripción;
+el número de members NO multiplica el LF. Recessed accessories no son header.
+
+## ⛔ REGLA 60.6 — CORRIDAS DE UN DETALLE DE SECCIÓN
+En cada detalle de sección (roof step, parapet, soffit, bulkhead) se cuentan las corridas de stud
+independientes; cada una lleva su bottom y top track y su bracing (BOA 4/A02.02 roof step: 3 corridas).
+
+## ⛔ REGLA 60.7 — BRACING SOBRE TODAS LAS CORRIDAS
+53.4 se calcula sobre la lista completa de corridas verticales: walls, parapet ≥ 4 ft, canopy framing, column
+wraps, grille box, vestibule heads, CSR drop — no solo walls.
+
+## ⛔ REGLA 60.8 — FAMILIA DEL TRACK POR ORIENTACIÓN
+Studs verticales entre dos tracks → bottom / top (incluye vestibule heads, bulkheads de door, grille head).
+Framing horizontal (joists, ceiling, fondo de soffit, fascia box del canopy) → ceiling / soffit track.
+
+## ⛔ REGLA 60.9 — SCHEDULE QUE SE CONTRADICE
+Si descripción y catálogo de una fila dan medidas distintas, se carga la que coincide con el dibujo + RFI con el
+delta. 53.3 (más material) es solo para medida NO impresa.
+
+## ⛔ REGLA 60.10 — HUECO QUE CABE EN EL MÓDULO
+Un recessed ≤ 14 3/8" (stud bay) o ≤ el espaciado del furring en ceiling no lleva framed opening.
+
+## ⛔ REGLA 60.11 — C1 / MR
+Partition type sin cota de altura (break line) → board a deck (53.3) con 59.13 por wall; MR solo en las faces del
+chase con fixture, sin caras de extremo.
+
+## Calificador
+rangos_v7: 6" stud 4,901.63–5,049.41 (la parte interior de la referencia estaba bajo el mínimo de 53.2); MR 258.83.
