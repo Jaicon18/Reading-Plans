@@ -55,24 +55,24 @@ wall sellado tiene un length verificado; si la extracción no los reproduce, no 
 **La dirección, que es lo que 5/S5.20 necesita.** La primera versión sólo detectaba
 contacto y salían parejas mutuas ("1 muere contra 14 Y 14 muere contra 1"), que es
 imposible. Lo que decide es dónde cae la punta: dentro del tramo del otro = **T** (muere,
-y los 2 studs van en el pasante); coincidiendo con su extremo = **esquina** (ninguno pasa
+y los dos studs van en el pasante); coincidiendo con su extremo = **esquina** (ninguno pasa
 de length).
 
-**Lo que el mapa SÍ prueba, medido:** 9 intersecciones en T y 20 esquinas = **29 de los 94
-extremos** de los 47 walls de banda simple, o sea **31%**. Sobre ese subconjunto los studs
-adicionales pasan de **141 a 103: −38 studs**, y confirma el signo ya declarado — el
+**Lo que el mapa SÍ prueba, medido:** [valor retirado E24] intersecciones en T y [valor retirado E24] esquinas = **[valor retirado E24] de los [valor retirado E24]
+extremos** de los walls de banda simple, o sea **una minoría**. Sobre ese subconjunto los studs
+adicionales pasan de **[valor retirado E24] a [valor retirado E24] studs**, y confirma el signo ya declarado — el
 take-off está **sobre-contado**.
 
-**Lo que NO prueba, y por eso no se aplica:** el 69% restante. La mayoría de los walls
-interiores muere contra un wall **exterior**, y los 12 exteriores no son banda simple de
-dos faces paralelas (llevan sheathing, polyiso y plaster), igual que los 4 forros de
-columna del canopy, los 2 bulkhead, el F #40 y el B2K #31. El mapa los deja fuera y por eso
+**Lo que NO prueba, y por eso no se aplica:** el resto. La mayoría de los walls
+interiores muere contra un wall **exterior**, y los exteriores no son banda simple de
+dos faces paralelas (llevan sheathing, polyiso y plaster), igual que los forros de
+columna del canopy, los bulkheads, el F #40 y el B2K #31. El mapa los deja fuera y por eso
 marca "libre" un extremo que en obra muere contra algo.
 
 > Un extremo que el mapa no resuelve NO es un extremo libre: es un extremo **desconocido**.
 > Convertir "no lo sé" en "+1 stud de terminación" es inventar en la dirección cómoda.
 
-Recontar 2,690 studs sobre un mapa que resuelve el 31% cambiaría un sobre-conteo **conocido**
+Recontar todos los studs sobre un mapa que resuelve una minoría de extremos cambiaría un sobre-conteo **conocido**
 por una mezcla desconocida. Lo que falta está acotado y escrito: **meter el perímetro
 exterior al mapa.** Hasta entonces los trinquetes se quedan donde están y el −38 va en
 Clarifications como lo que es, el piso medido del sobre-conteo.
@@ -98,7 +98,7 @@ cantidad que ya está, o la validan por segunda fuente.
 
 | hallazgo | fuente |
 |---|---|
-| **B2 #26 y #27: FRP de 4.50 → 5.00 ft de banda** (+2.00 SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban 5.00 | geometría vectorial de A08.01: floor y=1100.16, tope del cove base y=1082.16 (18.00 pt = 6" exactos), tope del FRP y=902.16 → **180.00 pt = 5'-0" exactos** |
+| **B2 #26 y #27: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
 | **El FRP va pegado con ADHESIVE directo al board, sin backer** — cierra el RFI del sustrato detrás del FRP | `3/A08.01 RESTROOM FRP/TILE DETAIL`, que lo dibuja y lo rotula |
 | `1/A11.03 NER ELEVATION` y `7/A11.03` llevan 3/4" FRT PLYWOOD y **se dejan fuera a propósito** | la corrección del 6-oct dejó escrito que las que corresponden son `3/A11.03` (210.00 pt = 5'-10" exactos) y `5/A11.03` (270.00 pt = [valor retirado E24] exactos), identificadas por **width medido** contra la dimensión impresa de la planta |
 | `4/A09.31 DETAIL AT VERTICAL CONTROL JOINT` es un **cuarto** sitio donde aparece CONTROL JOINT, y también es del estuco | la exclusión de proyecto decía "tres sitios"; su conclusión aguanta, su lista de evidencia no estaba completa |
@@ -107,8 +107,8 @@ cantidad que ya está, o la validan por segunda fuente.
 
 ## Estado al cierre
 
-`entregar.py` **23/23 en verde** · 88 sellos OK / 0 rotos · 90 cierres vigentes · 67 walls
-/ 111 faces / 11 superficies · 1,279 eslabones justificados · **203 de 203 detalles
+`entregar.py` **todo en verde** · 0 sellos rotos · cierres vigentes con sus eslabones
+justificados · **todos los detalles
 cubiertos**.
 
 Trinquetes bajados hoy: `TOPE_SIN_COTA` **20 → 0** · `TOPE_ES_LOG` 884 → **877** ·

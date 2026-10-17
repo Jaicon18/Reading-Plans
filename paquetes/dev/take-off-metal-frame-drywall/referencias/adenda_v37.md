@@ -42,7 +42,7 @@ sheathing. Hay que abrir el zoom antes de concluir.
 |---|---|---|
 | wall exterior | un `600S137-33` de slab a T/STUD | `600S137-33` de slab a **B.O.D. [valor retirado E24]** |
 | tope del wall | top track común | **DEFLECTION TRACK** (6/S5.10, 10/S5.10) |
-| parapet | la misma pieza, seguida | **6 walls nuevos**, tag `EXT-PARAPET`, `600S162-54 @16"` con `600T125-54` arriba y abajo |
+| parapet | la misma pieza, seguida | **[valor retirado E24] walls nuevos**, tag `EXT-PARAPET`, `600S162-54 @16"` con `600T125-54` arriba y abajo |
 | studs del parapet | — | + 2 por cada HSS post @ 5'-0" O.C. |
 | anchorage del infill | — | **PAFs @ 12" O.C.** a la steel beam |
 | `T/ STUD HP [valor retirado E24]` | DERIVADO | **CONFIRMADO** — impreso en `A/A09.21`, hoja que no había abierto |
@@ -93,7 +93,7 @@ Ahora le pregunta a `resumen_global.SRC`, que es el único que sabe dónde vive 
 
 **`idioma_es.HOMOGRAFOS` estaba declarado y nunca se restaba de `PAL`.** El detector contaba
 `no` y `exterior` como evidencia de español y marcaba como españolas frases en inglés
-(`"S2.20, T/STEEL, NO SLOPE"`). Además `y=283.8` aportaba una "y" y `O.C.` una "o".
+(`"S2.20, T/STEEL, NO SLOPE"`). Además `y=<coordenada>` aportaba una "y" y `O.C.` una "o".
 
 > **Un detector que marca inglés como español vuelve inútil el trinquete:** el tope sube por
 > falsos positivos y las frases que SÍ están en español se esconden entre ellos.
@@ -113,7 +113,7 @@ cierra el pipe, el SIGPIPE mata el proceso y el `json.dump` final nunca corre.
 ## 5. El furring de columna es un LAZO CERRADO
 
 `verif_columnas` rechazó las cuatro columnas de marquesina (`5/A09.25`) porque la face de
-plywood mide 6.08 LF contra 5.67 LF de eje de stud. En un wall eso es un error; en un lazo
+plywood mide más LF que el eje de stud. En un wall eso es un error; en un lazo
 cerrado el board **envuelve** el stud y pasa exactamente 2 espesores en cada uno de los
 4 vértices.
 
@@ -143,7 +143,7 @@ steel columns, y 15 detalles estructurales de S3.20 / S5.10 / S5.30.
 
 1. **El BOX del pier de storefront.** Las dimensions impresas de `1/A09.25` salen de los ejes F/G
    y de la face del storefront, **no de las cuatro faces del pier**, y no cierran contra el
-   contorno dibujado. En juego: ~170 SF de board y ~20 studs.
+   contorno dibujado. En juego: [valor retirado E24] SF de board y [valor retirado E24] studs.
 2. **El width de la tira** de `3/4" FRT PLYWOOD` y del retorno de board. Los cinco detalles
    que cortan el marco del opening rotulan el material y **ninguno acota el width**.
 

@@ -20,27 +20,27 @@ y **la razón la tuvo un lado distinto en cada uno**:
 
 | wall | ubicación decía | faces decían | quién tenía razón | efecto |
 |---|---|---|---|---|
-| **A1 #4** | "entry from Central Zone" | Corridor 111 / Corridor 111 (face 2) | **las faces** | fiarse de la ubicación habría subido una face a 12.00 ft → **+15 SF que no existen** |
+| **A1 #4** | "entry from Central Zone" | Corridor 111 / Corridor 111 (face 2) | **las faces** | fiarse de la ubicación habría subido una face a [valor retirado E24] ft → **+[valor retirado E24] SF que no existen** |
 | **A1 #2** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad (los dos bands a [valor retirado E24]) |
 | **A1 #3** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad |
-| **A1 #7** | Break Room 118 (una sola) | Break Room 118 / **Break Room 118** | **ninguno** | la face ESTE es Cash Window 116, ceiling ACT-4 9'-0" → **faltaban 0.87 SF** |
+| **A1 #7** | Break Room 118 (una sola) | Break Room 118 / **Break Room 118** | **ninguno** | la face ESTE es Cash Window 116, ceiling ACT-4 [valor retirado E24] → **faltaban [valor retirado E24] SF** |
 
 ### Cómo se resolvió cada uno — el método, que es lo reusable
 
 **A1 #4 — la retícula del ceiling cruza el wall.** En A02.01 **no hay ningún wall horizontal**
-que cruce la banda x 1134-1224 entre y=1000 y y=1229, y en el RCP **la retícula pasa de largo
+que cruce la banda del wall en su tramo, y en el RCP **la retícula pasa de largo
 sobre el wall**, con un solo tag en esa banda: el `ACT-4 [valor retirado E24]` de CORRIDOR 111. El corridor
 sigue al norte del wall. Las dos faces son corridor y el sealed estaba bien.
 
 **A1 #2 y #3 — el corridor no llega al nicho.** A02.01 pone el MW01 contra la face OESTE del #2
-y el MW07 contra la face SUR del #3, y el corridor queda al oeste del wall vertical de
-x=1224-1228, fuera del nicho. Las faces interiores pasan a llamarse **MW01 niche**.
+y el MW07 contra la face SUR del #3, y el corridor queda al oeste del wall vertical que
+lo cierra, fuera del nicho. Las faces interiores pasan a llamarse **MW01 niche**.
 *Pendiente declarado:* el RCP dibuja **tres callouts (1, 2 y 6) justo sobre el nicho**, así que su
 ceiling puede tener condición propia; esos detalles no se abrieron.
 
-**A1 #7 — ausencia de wall = continuidad de room.** En la banda y 1324-1356 **no hay ningún wall
-vertical entre x=1530.24 y x=1640**, así que el espacio al este del #7 es continuo con el room
-tag `CASH WINDOW 116` de x=1739; el room tag `BREAK 118` está en (1533, 1472), al **sur** del
+**A1 #7 — ausencia de wall = continuidad de room.** En la banda del wall **no hay ningún wall
+vertical entre su face y el room tag**, así que el espacio al este del #7 es continuo con el room
+tag `CASH WINDOW 116`; el room tag `BREAK 118` está al **sur** del
 wall A1-6. Y cuadra con el propio A1-6, cuya face norte ya estaba sellada como Cash Window 116.
 
 > **Para saber a qué room da una face: buscar el room tag más cercano EN LÍNEA RECTA sin cruzar
@@ -56,20 +56,19 @@ tiene razón** — eso exige el plano; lo que hace es impedir que la discrepanci
 
 **Cómo se evita que sea ruido**, que es como una compuerta se acaba apagando: sólo se compara
 cuando la `ubicación` tiene la forma limpia `<room A> / <room B>`. Se descarta en cuanto el texto
-trae coordenadas (`y 1120.68/1128.48`), paréntesis, o una barra dentro de una sigla (`T/STUD`):
-ahí la barra no separa rooms. Un primer intento sin ese filtro daba **16 hits de los que 11 eran
+trae coordenadas (`y <n>/<n>`), paréntesis, o una barra dentro de una sigla (`T/STUD`):
+ahí la barra no separa rooms. Un primer intento sin ese filtro daba **muchos hits, casi todos
 artefactos del parser** — habría sido ruido puro.
 
-`test_verif_caras.py` fija los cuatro casos reales **y los falsos positivos que NO debe cazar**,
-9 comprobaciones.
+`test_verif_caras.py` fija los cuatro casos reales **y los falsos positivos que NO debe cazar**.
 
 ---
 
 ## EL OTRO HALLAZGO DEL DÍA: A1 #4, `[DERIVADO]` → `[CONFIRMADO]`
 
-El cierre decía *"90.00 pt / 18 = 5.000 ft, **dimensión de diseño limpia**"* — que es otra forma
+El cierre decía *"<pt> / <escala> = <length redondo>, **dimensión de diseño limpia**"* — que es otra forma
 de decir "el número redondo sugiere que hay una dimensión impresa". La hay: A02.01 imprime
-`5'-0"` y sus dos ticks de 45° están en **x=1133.9 y x=1223.9**, exactamente los dos extremos del
+la dimension y sus dos ticks de 45° caen **exactamente** en los dos extremos del
 wall.
 
 > **Si un length "redondo" te hace pensar que hay una dimensión impresa, búscala y localiza sus
@@ -80,6 +79,6 @@ Es el caso inverso del A1 #6 (allí el valor venía de píxeles con etiqueta de 
 valor es la dimensión con etiqueta de derivación). Las dos salen de la misma jerarquía:
 **printed dimension > dimension-string sum > pixels**.
 
-**Estado: 17/17 compuertas pasan · 88 sellos OK / 0 rotos · tipo A1 CERRADO, 9 walls, [valor retirado E24] LF.**
+**Estado: todas las compuertas pasan · 0 sellos rotos · tipo A1 CERRADO.**
 
 ---

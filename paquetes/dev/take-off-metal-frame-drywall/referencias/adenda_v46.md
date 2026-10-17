@@ -18,8 +18,8 @@ Al aplicarla aparecieron **tres renglones que estaban comprando exactamente su n
 
 | renglón | antes | ahora |
 |---|---|---|
-| **Blocking FRT / 2X FRT wood** | 748.00 LF, **0 % de waste** | 6 % → compra **792.88 LF** |
-| **Acoustical sealant** | 2,652.66 LF, **sin waste** | 6 % → compra **2,811.82 LF** (113 tubos, eran 107) |
+| **Blocking FRT / 2X FRT wood** | neto, **0 % de waste** | 6 % → compra neto × 1.06 |
+| **Acoustical sealant** | neto, **sin waste** | 6 % → compra neto × 1.06 (y suben los tubos) |
 | **PVC trim del FRP** | iba **dentro del renglón de metal trim, a 15 %** | renglón propio a **6 %** |
 
 El wood blocking llevaba semanas en **0 esperando su número** — era un PENDIENTE declarado del
@@ -28,7 +28,7 @@ libro — justamente porque "no es metal ni board" y la regla vieja no tenía re
 El sealant era el **único material medido del plano en todo el libro que compraba su neto
 exacto**. Es una longitud medida run por run, no un yield, así que entra en "todo lo demás".
 
-El PVC trim estaba escondido dentro del renglón de metal trim tomando 15 %. Hoy son 4.00 LF y la
+El PVC trim estaba escondido dentro del renglón de metal trim tomando 15 %. Hoy son pocos LF y la
 diferencia son centavos — pero el run del mop sink sigue **PENDIENTE**, y el día que entre, el
 error crece solo.
 

@@ -1,4 +1,4 @@
-# ADENDA v26 — 28-sep-2026 · lo que salió de la auditoría adversarial de BofA Broomfield
+# ADENDA v26 — 28-sep-2026 · lo que salió de la auditoría adversarial de un proyecto anterior
 
 Estas reglas salieron de auditar un take-off **que ya tenía 73 sellos verificando**. La auditoría encontró **14 hallazgos reales**. El sello prueba que el cierre es COHERENTE consigo mismo; no prueba que sea CORRECTO. Por eso la auditoría es un paso del cierre, no un extra.
 
@@ -24,7 +24,7 @@ Qué buscar, **por orden de cuánto dinero mueve**:
 
 ## REGLA — El perfil de stud se lee del PARTITION SCHEDULE, nunca de una tabla propia
 
-Error real: A5 y B2 se cuantificaron con stud de 3-5/8" cuando el schedule de A12.01 los da de **6"** — 1,225 LF mal clasificados. La tabla de perfiles del generador se había escrito a mano y nadie la volvió a mirar.
+Error real: A5 y B2 se cuantificaron con stud de 3-5/8" cuando el schedule de A12.01 los da de **6"** — [valor retirado E24] LF mal clasificados. La tabla de perfiles del generador se había escrito a mano y nadie la volvió a mirar.
 
 **Verificación obligatoria: la aritmética del propio schedule tiene que cerrar.**
 `stud + capas de board = WALL THICKNESS`
@@ -37,7 +37,7 @@ Y el thickness medido en planta lo confirma por tercera vez (7.28" y 7.20" contr
 
 El generador del Excel enruta cada line item a una columna. **Si aparece una line item que ninguna columna recoge, el libro NO se genera** (aserción de sobrantes, con el número de wall y el nombre de la line item en el mensaje).
 
-Sin eso se perdieron, ya cuantificados y sellados: 165.67 LF de aberturas enmarcadas, [valor retirado E24] LF de gypsum edge trim, 6.00 LF de blocking del roof hatch, 18 refuerzos de stud y 100.80 SF de board W.R.
+Sin eso se perdieron, ya cuantificados y sellados: [valor retirado E24] LF de aberturas enmarcadas, [valor retirado E24] LF de gypsum edge trim, [valor retirado E24] LF de blocking del roof hatch, [valor retirado E24] refuerzos de stud y [valor retirado E24] SF de board W.R.
 
 **Corolario:** toda hoja del libro tiene que estar REFERENCIADA por el resumen de materiales. Una hoja huérfana es material que no se cobra. Se comprueba leyendo las fórmulas del resumen y viendo que mencionen todas las hojas.
 
@@ -53,7 +53,7 @@ Cuando dos renglones comparten prefijo (`BOARD_WR:baño 114` y `BOARD_WR:baño 1
 
 Un texto de operación viejo **no es cosmético: hay herramientas que lo LEEN**.
 
-En el wall 31 la reauditoría bajó el length de [valor retirado E24] a [valor retirado E24] ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el valor viejo, no cuadró con el SF sellado y **le inventó una deducción de 7.84 SF a un wall sin openings** — la única deducción fantasma de las 107 faces.
+En un wall la reauditoría bajó el length de [valor retirado E24] a [valor retirado E24] ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el valor viejo, no cuadró con el SF sellado y **le inventó una deducción de [valor retirado E24] SF a un wall sin openings** — la única deducción fantasma de todas las faces.
 
 **Para corregir un cierre ya sellado:** un script que (a) arregla el texto, (b) **verifica line item por line item que ningún valor numérico cambió**, y (c) recalcula el sello. Nunca editar el JSON a mano: eso rompe el sello sin dejar rastro de qué se tocó.
 
@@ -61,7 +61,7 @@ En el wall 31 la reauditoría bajó el length de [valor retirado E24] a [valor r
 
 Cuando dos cierres tocan el mismo elemento, la fuente que manda es la del **WALL** — ahí es donde el wall se cierra completo. La otra **sigue listándolo**, porque el registro tiene que estar completo, pero lo reporta aparte y no lo suma. **Nunca se borra el registro.**
 
-En BofA, 10 penetraciones de MEP estaban en el cierre de su wall (renglón `ABERTURA_MEP_HEAD_SILL` + studs dentro de `STUD`) y otra vez en el cierre del cruce MEP: `FRAMED_OPENING_MEP` bajó de 95.67 a 43.00 LF y `REFUERZO_STUD_MEP` de 38 a 18 pz.
+En un proyecto anterior, [valor retirado E24] penetraciones de MEP estaban en el cierre de su wall (renglón `ABERTURA_MEP_HEAD_SILL` + studs dentro de `STUD`) y otra vez en el cierre del cruce MEP: `FRAMED_OPENING_MEP` bajó de [valor retirado E24] a [valor retirado E24] LF y `REFUERZO_STUD_MEP` de [valor retirado E24] a [valor retirado E24] pz.
 
 **Señal de alarma:** un cierre que excluye HEADER diciendo "este wall no tiene opening" mientras su propio `STUD` suma studs de abertura y lleva renglón de head/sill. Esa contradicción interna es la huella del doble conteo.
 
@@ -69,13 +69,13 @@ En BofA, 10 penetraciones de MEP estaban en el cierre de su wall (renglón `ABER
 
 Un wall que cruza un eje de cambio de deck tiene **DOS alturas de stud**, y el cierre ya lo escribe:
 
-> `tramo HI [valor retirado E24] ft: floor(180.8/16)+1 = 12 a [valor retirado E24] ft; tramo LOW 3.93 ft: floor(47.2/16)+1 = 3 a [valor retirado E24] ft`
+> `tramo HI [valor retirado E24] ft: floor([valor retirado E24]/16)+1 = [valor retirado E24] a [valor retirado E24] ft; tramo LOW [valor retirado E24] ft: floor([valor retirado E24]/16)+1 = [valor retirado E24] a [valor retirado E24] ft`
 
-Multiplicar piezas × una sola height lo falsea (wall 14: 230.63 contra 223.66 LF reales). El LF de material se calcula **tramo por tramo**, y los studs adicionales (terminación, jambs, cripples) van a la **height declarada del wall**, no a la mayor de los tramos.
+Multiplicar piezas × una sola height lo falsea (en un caso real: [valor retirado E24] contra [valor retirado E24] LF reales). El LF de material se calcula **tramo por tramo**, y los studs adicionales (terminación, jambs, cripples) van a la **height declarada del wall**, no a la mayor de los tramos.
 
 ## REGLA — Un material distinto va en su propio renglón de compra
 
-El `5/8" EXTERIOR GYPSUM SHEATHING` de la face interior del parapet **no** es gypsum board interior: es otro material, a otro precio, y además **solo existe del deck al tope**. Iban 798.38 SF mezclados con el board interior.
+El `5/8" EXTERIOR GYPSUM SHEATHING` de la face interior del parapet **no** es gypsum board interior: es otro material, a otro precio, y además **solo existe del deck al tope**. Iban [valor retirado E24] SF mezclados con el board interior.
 
 **Regla general: si el cierre le puso un label textual distinto, es otro renglón de compra.** El label del plano es el criterio, no el prefijo de la clave.
 
@@ -98,7 +98,7 @@ Barrer el set completo por `CONTROL JOINT` y `EXPANSION JOINT`. Si solo aparecen
 
 1. el barrido citado (dónde se buscó y qué sí apareció),
 2. el **contraste** (los detalles SÍ rotulan corner bead, casing bead y shadow molding uno por uno, así que la omisión no es descuido de rotulación),
-3. el **RFI con la norma**: ASTM C840 y GA-216 piden junta en paños corridos de más de 30 ft y en ceilings de más de 2,500 SF; si ningún wall ni cielo llega, por norma podría no hacer falta ninguna, y se pide confirmación por escrito antes del award.
+3. el **RFI con la norma**: ASTM C840 y GA-216 piden junta en paños corridos de más de 30 ft y en ceilings de más de 2,500 SF; si ningún wall ni cielo llega, por norma podría no hacer falta ninguna, y se pide confirmación por escrito antes del award. [ciego-ok]
 
 **`CONTROL_JOINT` es line item OBLIGATORIA de la compuerta.**
 
@@ -110,11 +110,11 @@ La compuerta verificaba que una door **no** llevara sill, pero no exigía que un
 
 ## REGLA — Cada abertura con SU PROPIO width
 
-El header y el sill se calculan con el **width propio de cada abertura**, nunca con el de la window típica. Error real: `header = n × (8.00 + 1.333)` aplicado a una puerta de [valor retirado E24] y a un R.O. de ATM de [valor retirado E24]. La fórmula correcta suma abertura por abertura: `sum(ancho_propio_i + 1.333)`. Lo mismo para sill y para cripples.
+El header y el sill se calculan con el **width propio de cada abertura**, nunca con el de la window típica. Error real: `header = n × (<width típico> + 1'-4")` aplicado a una puerta de [valor retirado E24] y a un R.O. de ATM de [valor retirado E24]. La fórmula correcta suma abertura por abertura: `sum(ancho_propio_i + 1'-4")`. Lo mismo para sill y para cripples.
 
 ## REGLA — Un hueco de EQUIPO se mide en el detalle del equipo, no en el claro de la planta
 
-El claro grueso que se ve en planta puede ser el **NICHO** (zona engrosada donde se aloja el equipo), no el hueco. Los dos conviven y se parecen: en BofA el nicho del ATM drive-up mide 5'-2" y el R.O. sólo **[valor retirado E24]**.
+El claro grueso que se ve en planta puede ser el **NICHO** (zona engrosada donde se aloja el equipo), no el hueco. Los dos conviven y se parecen: en un proyecto anterior el nicho del ATM drive-up medía [valor retirado E24] y el R.O. sólo **[valor retirado E24]**.
 
 Procedimiento: buscar el detalle de **ELEVACIÓN** del equipo (ahí va el R.O. acotado) y cruzarlo contra el claro en la **face** del wall en planta. Si coinciden, es el hueco; si el claro de planta es mucho mayor, lo que se midió fue el nicho.
 
@@ -128,7 +128,7 @@ Si el nicho lleva un sustrato distinto al de la fachada, hay que **RESTAR esa á
 
 Un detalle a 3/4"=1'-0" son **54 pt/ft**; a 1½"=1'-0", **108**; a 3"=1'-0", **216**.
 
-Antes de usar la escala para medir algo NO acotado, hay que **reproducir con ella una dimension IMPRESA del mismo detalle**. En BofA: el R.O. medido dio 140.88 pt ÷ 54 = 2.609 ft contra el `2'-7 1/4"` impreso — eso valida la escala; recién entonces se midió la height del nicho (324.00 pt ÷ 54 = **6.000 ft exactos**), que además coincidía con el `6'-0"` impreso. Sin esa validación previa, la medición no es [DERIVADO]: es adivinanza.
+Antes de usar la escala para medir algo NO acotado, hay que **reproducir con ella una dimension IMPRESA del mismo detalle**. Ej. de un proyecto anterior: el R.O. medido (pt ÷ escala del detalle) reprodujo la dimension impresa del R.O. — eso valida la escala; recién entonces se midió la height del nicho, que además coincidía con su dimension impresa. Sin esa validación previa, la medición no es [DERIVADO]: es adivinanza.
 
 ## REGLA — Registro de cadenas: los tramos suman el total y los claros salen redondos
 
@@ -136,7 +136,7 @@ Todo eje o fachada se cierra con la **lista de tramos** (de → a, en pt y en ft
 
 **Control:** un claro de abertura tiene que dar cifra redonda — 144.00 pt = 8'-0" de window, 60.00 pt = [valor retirado E24] de door. Si un claro no da redondo, el quiebre está mal leído: no se redondea, se vuelve a leer.
 
-Y las dimensions impresas del perímetro se cruzan contra lo medido: `57'-6 1/2"` contra face exterior a face exterior (1,036.02 pt ÷ 18 = 57.557 ft, diferencia 0.19"), `26'-3"` contra el paño de storefront (472.44 pt ÷ 18 = 26.247 ft, diferencia 0.04").
+Y las dimensions impresas del perímetro se cruzan contra lo medido (p. ej. la total de face exterior a face exterior y la del paño de storefront, cada una contra pt ÷ escala); la diferencia tiene que quedar en fracciones de pulgada.
 
 ## REGLA — El título y la leyenda del plano marcado no se salen del recuadro
 
@@ -146,7 +146,7 @@ El título se **envuelve por palabras** dentro del width del recuadro. Cada entr
 
 `7/A09.33 TYPICAL CEILING TRANSITION DETAIL` pide una transición vertical de 6" con `3 5/8" METAL STUD KICKER AT 48" O.C.`, board por dos faces, dos corner beads y shadow molding, donde un cielo de gyp muere contra un cielo programado a otra height.
 
-Se corrió una prueba mecánica para separar las aristas que mueren contra wall de las que mueren contra ACT, y **no resuelve** las aristas de los baños (2% y 11% de cobertura en aristas que son claramente wall). Antes que inventar el número, la line item quedó en la lista de pendientes **con lo que costaría por LF** (1.00 SF de board, un kicker cada 4 ft, dos runs de corner bead y una de shadow molding) y con el perímetro total de los ceilings (167.68 LF) como dimension superior.
+Se corrió una prueba mecánica para separar las aristas que mueren contra wall de las que mueren contra ACT, y **no resuelve** las aristas de los baños (cobertura muy baja en aristas que son claramente wall). Antes que inventar el número, la line item quedó en la lista de pendientes **con lo que costaría por LF** ([valor retirado E24] SF de board, un kicker cada 4 ft, dos runs de corner bead y una de shadow molding) y con el perímetro total de los ceilings ([valor retirado E24] LF) como dimension superior.
 
 Una prueba mecánica que no resuelve no se "ajusta hasta que dé": se declara que no resuelve.
 

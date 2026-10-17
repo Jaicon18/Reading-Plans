@@ -44,14 +44,14 @@ A04.01 (RCP)
 
 | eslabón | qué aporta |
 |---|---|
-| `A02.01` / `A04.01` | el length (48.047 ft) y la posición |
+| `A02.01` / `A04.01` | el length y la posición |
 | `D/A09.22` | el fondo, y lo confirma contra la planta |
 | `7/A09.26` | la composición y los datums `T/STUD [valor retirado E24]` − `B/STUD [valor retirado E24]` |
 | `7/S5.20` | el perfil `362S137-33` y el 16" O.C., que **ningún detalle de canopy rotula** |
 
-Y de paso la cadena resolvió un pleito abierto hacía días: los `3'-1 3/4"` de D/A09.22 y los
-`2.467 ft` medidos en planta **nunca estuvieron en conflicto**. Localizando los dos ticks de
-la dimension en el vector del PDF (x=2154.12 y x=2379.84, escala 72 pt/ft calibrada contra tres
+Y de paso la cadena resolvió un pleito abierto hacía días: la dimension de D/A09.22 y los
+`[valor retirado E24] ft` medidos en planta **nunca estuvieron en conflicto**. Localizando los dos ticks de
+la dimension en el vector del PDF (coordenada x de cada tick, escala en pt/ft calibrada contra tres
 datums) se ve que la dimension va de **eje 8** a **fascia**, no de face de wall a fascia. La
 diferencia son exactamente los **8"** que 7/A09.26 imprime arriba. Dos caminos independientes,
 a dos escalas distintas, a una milésima de pie.

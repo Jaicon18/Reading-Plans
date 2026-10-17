@@ -2,7 +2,7 @@
 
 ## De dónde salió
 
-Rodolfo preguntó si podía hacer un take-off completo solo. La respuesta salió de mirar **quién encontró cada error** en BofA.
+Rodolfo preguntó si podía hacer un take-off completo solo. La respuesta salió de mirar **quién encontró cada error** en un proyecto anterior.
 
 La auditoría adversarial encontró 14 — perfil de stud mal clasificado, doble conteo de MEP, sheathing facturado como board interior, el wall inclinado que el cruce de MEP se saltaba callado. Pero los que encontró **él** son de otra clase:
 
@@ -10,7 +10,7 @@ La auditoría adversarial encontró 14 — perfil de stud mal clasificado, doble
 |---|---|
 | "¿estás checando las wet areas?" | faltaban 3 de 4 zonas |
 | "accesorios incluye taping, screws, pines" | faltaban 5 line items completas |
-| "¿los jamb studs van al deck? ¿seguro?" | → salieron 56 LF de head track doble |
+| "¿los jamb studs van al deck? ¿seguro?" | → salieron [valor retirado E24] LF de head track doble |
 
 **Ninguno lo caza una compuerta de aritmética, porque una compuerta solo revisa lo que a alguien se le ocurrió revisar.**
 
@@ -44,9 +44,9 @@ Hasta la v33 cada regla fue **reactiva** — una por incidente. Faltaba la que c
 
 Donde la flute del deck corre **paralela** al track no hay valle donde clavar: hay que poner un purlin de 16 ga cruzando mínimo dos flutes y clavar ahí. **La palabra "purlin" no aparecía ni una vez** en los cierres ni en el Excel.
 
-**139.21 LF agregados.** Salen de 185.61 LF de top track en los 21 walls que corren este-oeste y suben al deck, a 0.75 LF de purlin por LF de track — una pieza de 1'-6" por fastening, con los pines a 2'-0" O.C. que pide 4/A12.01.
+**[valor retirado E24] LF agregados.** Salen del LF de top track de los walls que corren paralelos a la flute y suben al deck, a (largo de pieza ÷ spacing de pines) LF de purlin por LF de track — una pieza por fastening, con los pines al O.C. que pide el detalle (p. ej. 4/A12.01).
 
-Dirección de la flute **[DERIVADO]**: el deck Type B salva entre joists; las joists de S2.20 corren norte-sur, luego las flutes corren este-oeste. El propio detalle dice `VIF FLUTE DIRECTION`, así que va declarado en Clarifications, y los exteriores y el wall inclinado quedan en Pending (hasta ~180 LF más).
+Dirección de la flute **[DERIVADO]**: el deck Type B salva entre joists; las joists de S2.20 corren norte-sur, luego las flutes corren este-oeste. El propio detalle dice `VIF FLUTE DIRECTION`, así que va declarado en Clarifications, y los exteriores y el wall inclinado quedan en Pending (hasta [valor retirado E24] LF más).
 
 ### El bulkhead de cielo lleva más de lo que decía el pendiente
 

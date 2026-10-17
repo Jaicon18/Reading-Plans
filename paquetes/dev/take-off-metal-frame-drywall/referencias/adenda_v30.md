@@ -4,7 +4,7 @@
 
 Rodolfo: *"¿estás checando todas las wet areas y el tipo de gyp que lleva ahí? No veo que lo hayas hecho."*
 
-Tenía razón. Había **100.80 SF de W.R. board** y eran **únicamente las dos faces del chase**. El barrido completo encontró tres zonas más.
+Tenía razón. Había **[valor retirado E24] SF de W.R. board** y eran **únicamente las dos faces del chase**. El barrido completo encontró tres zonas más.
 
 ## REGLA — Censo por CUARTO, cruzando TRES fuentes
 
@@ -26,7 +26,7 @@ Tenía razón. Había **100.80 SF de W.R. board** y eran **únicamente las dos f
 
 Son **dos aparatos en dos walls distintas**:
 
-- El **lavabo** va en el chase → 100.80 SF, ya estaban.
+- El **lavabo** va en el chase → [valor retirado E24] SF, ya estaban.
 - El **inodoro** va contra la **face interior del wall exterior oeste** (probado con `D/A08.01 RESTROOM ELEVATION D`, que lo dibuja de perfil con su barra TA-3). Esa face estaba como gyp **regular**.
 
 **Faltaban [valor retirado E24] SF.** W.R. total: 100.80 → **[valor retirado E24] SF**.
@@ -39,7 +39,7 @@ Son **dos aparatos en dos walls distintas**:
 
 Su marcador cae dentro del **JANITOR CLOSET 112** y su línea guía apunta a la face del wall oeste. `5/A08.01 PLAN SECTION @ MOP SINK` lo dibuja en **esquina**, con FRP en **las dos walls**, más `PVC EDGE TRIM MOLDING`, `PVC INSIDE CORNER TRIM MOLDING`, `TILING FLANGE` y `CLEAR SEALANT`.
 
-**Cero cuantificado.** Alto **CONFIRMADO** (4'-0" de dimension impresa); width **PENDIENTE** — el aparato no viene acotado en A02.01, A08.01 ni en el Plumbing Fixture Schedule. No se inventa: se da la dimension superior para precio (24" → 16.00 SF; 28" → [valor retirado E24] SF).
+**Cero cuantificado.** Alto **CONFIRMADO** (4'-0" de dimension impresa); width **PENDIENTE** — el aparato no viene acotado en A02.01, A08.01 ni en el Plumbing Fixture Schedule. No se inventa: se da la dimension superior para precio (24" → [valor retirado E24] SF; 28" → [valor retirado E24] SF).
 
 ### 3. El Break Room tiene fregadero y el plano no le pone nada
 
@@ -51,7 +51,7 @@ El Finish Plan le rotula al 118 sólo `P-15` / `VCT-2` / `B-12`: ni FRP, ni tile
 
 ### 4. Dos cantidades sin desglose
 
-Los dos renglones `BOARD_WR` de 50.40 SF tenían la **operación vacía**. Una cantidad sin desglose rastreable no se entrega: ahora queda escrito qué son (las dos faces del chase, 5.04 LF × 10.00 ft cada una, la wall del lavabo).
+Los dos renglones `BOARD_WR` de [valor retirado E24] SF tenían la **operación vacía**. Una cantidad sin desglose rastreable no se entrega: ahora queda escrito qué son (las dos faces del chase, [valor retirado E24] LF × [valor retirado E24] ft cada una, la wall del lavabo).
 
 ## REGLA — Una nota que nombra DOS aparatos hay que leerla como DOS walls
 
@@ -75,6 +75,6 @@ Y el cierre guarda la frase de cobertura: *"los 4 cuartos con aparato de plomer�
 
 La misma área **sale** del renglón de gyp regular. El total de board no cambia; lo que cambia es el **tipo** — y eso sí cambia el precio, porque cada tipo lleva su propio waste y su propio costo.
 
-Regular: 16,465.34 → **16,352.40 SF** · W.R.: 100.80 → **[valor retirado E24] SF**.
+Regular: [valor retirado E24] → **[valor retirado E24] SF** · W.R.: [valor retirado E24] → **[valor retirado E24] SF**.
 
 ---

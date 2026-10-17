@@ -18,8 +18,8 @@ Y la que la destapó:
 
 Rodolfo pidió un handoff completo para continuar el take-off en otra sesión. Un handoff obliga
 a mirar la **etiqueta** de cada dato en vez de la cantidad, y ahí salió: el mismo `[valor retirado E24]`
-sacado del mismo `B.O.D.` de S2.20 estaba sellado `[CONFIRMADO]` en 12 walls y `[DERIVADO]` en
-4. El culpable era una línea de `cerrar_A1K.py` que etiquetaba **por el valor**:
+sacado del mismo `B.O.D.` de S2.20 estaba sellado `[CONFIRMADO]` en [valor retirado E24] walls y `[DERIVADO]` en
+[valor retirado E24]. El culpable era una línea de `cerrar_A1K.py` que etiquetaba **por el valor**:
 
 <!-- GLOSARIO:INICIO -->
 ```python

@@ -12,7 +12,7 @@ El juego completo de planos marcados es **entregable obligatorio de todo take-of
 
 | hoja | cuántas |
 |---|---|
-| **una por cada partition type** del schedule que tenga instancias | las que haya (en BofA: A1, A1K, A5, B, B2, B2K, C1, F, G, G1, bulkhead = 11) |
+| **una por cada partition type** del schedule que tenga instancias | las que haya (p. ej. A1, B, C1, F, bulkhead…) |
 | **walls exteriores** | 1 |
 | **ceilings de gypsum board** | 1 |
 | **soffits** (y canopy si el proyecto lo tiene) | 1 |

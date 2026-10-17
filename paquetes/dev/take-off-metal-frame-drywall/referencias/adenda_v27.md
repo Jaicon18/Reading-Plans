@@ -8,12 +8,12 @@ El wall A1 #8 decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" p
 
 | fila | tramo | alto | por qué |
 |---|---|---|---|
-| Corridor 111 | [valor retirado E24] LF (face oeste completa) | 9.000 | — |
-| Break Room 118 | 3.12 LF | 9.000 | ACT-5 a [valor retirado E24] + 6" |
-| Electrical 120 | 6.24 LF | 12.830 | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
-| NER 121 | 7.70 LF | 12.700 | mismo key note, deck interpolado |
+| Corridor 111 | [valor retirado E24] LF (face oeste completa) | [valor retirado E24] | — |
+| Break Room 118 | [valor retirado E24] LF | [valor retirado E24] | ACT-5 a [valor retirado E24] + 6" |
+| Electrical 120 | [valor retirado E24] LF | [valor retirado E24] | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
+| NER 121 | [valor retirado E24] LF | [valor retirado E24] | mismo key note, deck interpolado |
 
-3.12 + 6.24 + 7.70 = **[valor retirado E24] LF** = el length del wall. El generador sumaba `1+1+1+1`.
+la suma de los tramos = **[valor retirado E24] LF** = el length del wall. El generador sumaba `1+1+1+1`.
 
 **Lo grave no es el 4. Es que nada lo atrapó.** Los sellos prueban que el cierre es coherente consigo mismo. La aserción de sobrantes prueba que ninguna line item se cae. Pero **nada probaba que una columna de resumen significara lo que dice su encabezado**. El board estaba bien (sale face por face), así que ningún control de cantidad lo iba a ver.
 
@@ -29,7 +29,7 @@ capas = Σ(capas_cara × largo_cara) ÷ largo_muro
 
 ([valor retirado E24] + 3.12 + 6.24 + 7.70) ÷ [valor retirado E24] = **2.00** ✓
 
-Si un tramo de un lado no lleva board, el resultado da un decimal honesto — el wall 28 da **1.97**, porque 0.33 ft de su lado este (donde muere un wall perpendicular) no lleva board de ese wall. Ese decimal **es información, no un error de redondeo**: no se fuerza a 2.
+Si un tramo de un lado no lleva board, el resultado da un decimal honesto — en un caso real un wall dio **[valor retirado E24]**, porque un tramo de su lado este (donde muere un wall perpendicular) no lleva board de ese wall. Ese decimal **es información, no un error de redondeo**: no se fuerza a 2.
 
 ## La pregunta que hay que hacerle a cada columna
 
@@ -61,7 +61,7 @@ Corre **antes de escribir una sola celda**. Nueve comprobaciones, cada una proba
 | E | `(bottom + top) ÷ largo` = 2 runs por row | track duplicado o faltante |
 | F | `stud LF ÷ pz` dentro de `[0.60, 1.05] × altura` | height aplastada en un wall de dos alturas |
 
-**El margen del 5% en B no es laxitud, es geometría:** un wall inclinado tiene faces de length distinto y el `largo` es el EJE. El wall 40 tipo F tiene faces de 17.458 y 18.067 con eje 17.762 — la face larga pasa del eje un 1.7%, legítimamente. Cero tolerancia lo habría rechazado. Eso lo descubrió la propia compuerta en su primera run.
+**El margen del 5% en B no es laxitud, es geometría:** un wall inclinado tiene faces de length distinto y el `largo` es el EJE. En un caso real, un wall inclinado tenía faces de [valor retirado E24] y [valor retirado E24] con eje [valor retirado E24] — la face larga pasaba del eje, dentro del margen, legítimamente. Cero tolerancia lo habría rechazado. Eso lo descubrió la propia compuerta en su primera run.
 
 ## REGLA — Una compuerta que nunca se ha visto fallar no sirve
 
@@ -71,6 +71,6 @@ Una compuerta que solo se ha corrido sobre datos buenos no prueba nada: prueba q
 
 ## REGLA — El decimal raro se investiga, no se redondea
 
-`1.97` layers no es ruido. Es 0.33 ft de un lado sin board, y la razón está en el cierre. Antes de redondear cualquier resultado que "casi" da redondo, hay que saber de dónde sale la diferencia. Si no se sabe, no se redondea: se investiga.
+Un número de layers no entero no es ruido. Es un tramo de un lado sin board, y la razón está en el cierre. Antes de redondear cualquier resultado que "casi" da redondo, hay que saber de dónde sale la diferencia. Si no se sabe, no se redondea: se investiga.
 
 ---

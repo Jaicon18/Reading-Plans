@@ -47,8 +47,8 @@ va directo a la imagen y ningún detalle de una hoja que ya se está tocando que
 |---|---|
 | CANOPY-84 | se cerró con geometría de planta. `D/A9.22` lo corta y da fondo, framing y datums: nunca se abrió |
 | el mismo día | SÍ abrí `D/A9.22` — para los datums del parapet — y no me pregunté qué más gobierna. **Un detalle no es de quien lo abre: es de todo lo que corta** |
-| el track del canopy | `96.09 LF`, DERIVADO, `fuente: None`. Legal para la compuerta de entonces, y sin ningún detalle detrás |
-| el fondo del canopy 84 | mis **2.467 ft** medidos en planta contra **3'-0"** (dos fuentes del plano) y **3'-1 3/4"** de `D/A9.22` |
+| el track del canopy | `[valor retirado E24] LF`, DERIVADO, `fuente: None`. Legal para la compuerta de entonces, y sin ningún detalle detrás |
+| el fondo del canopy 84 | mis **[valor retirado E24] ft** medidos en planta contra **[valor retirado E24]** (dos fuentes del plano) y **[valor retirado E24]** de `D/A9.22` |
 
 ## Las compuertas
 

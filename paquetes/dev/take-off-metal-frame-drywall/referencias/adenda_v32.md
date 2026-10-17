@@ -77,7 +77,7 @@ Mismo procedimiento que `resellar_b2k.py`, que es el único seguro:
 2. Se extraen **todos** los números del objeto con su ruta, antes y después, y se exige que sean idénticos. Si uno se movió, **no se escribe nada**.
 3. Se recalcula el sello con la misma función del closer.
 
-Resultado en BofA: **46 archivos, 25 con texto traducido, 77 bloques resellados, 0 números movidos.** Los 77 sellos siguen verificando.
+Resultado en un proyecto anterior: **[valor retirado E24] archivos, [valor retirado E24] con texto traducido, [valor retirado E24] bloques resellados, 0 números movidos.** Todos los sellos siguen verificando.
 
 ## Los documentos históricos se CONGELAN, no se traducen
 

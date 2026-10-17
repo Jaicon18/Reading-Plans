@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 4-oct-2026 (v38). Reemplaza cualquier versión anterior.
+Versión 17-oct-2026 (v69). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas), que va primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -15,9 +15,376 @@ Da todas las pasadas de verificación que hagan falta, directamente, sin pregunt
 
 Cada vez que aparezca un error o una limitación de método, no basta reportarlo: crea la SOLUCIÓN, déjala escrita como regla reutilizable, guárdala en memoria en el MISMO turno y actualiza este skill.
 
-**Cómo se entrega el protocolo actualizado.** Separa claramente lo que el usuario tiene que copiar y pegar de todo lo demás; el resumen de qué cambió va FUERA del bloque copiable, arriba, para que no se le cuele al pegar. El texto a pegar va en su propio bloque delimitado, publicado como artifact HTML **con botón de copiar al portapapeles**. OJO CON EL LÍMITE: su caja de instrucciones personales aguanta ~3,000 caracteres, así que el protocolo completo NUNCA va ahí — el protocolo completo vive en este skill, y el system prompt lleva solo un bloque corto que dispara el skill y repite los no-negociables. Si una regla nueva toca un no-negociable, actualiza LAS DOS cosas y entrégale los dos bloques, cada uno con su propio botón de copiar, separados y rotulados.
+**Cómo se entrega el protocolo actualizado.** Separa claramente lo que el usuario tiene que copiar y pegar de todo lo demás; el resumen de qué cambió va FUERA del bloque copiable, arriba, para que no se le cuele al pegar. El texto a pegar va en su propio bloque delimitado, publicado como artifact HTML **con botón de copiar al portapapeles**. OJO CON EL LÍMITE: su caja de instrucciones personales aguanta unos 3 mil caracteres, así que el protocolo completo NUNCA va ahí — el protocolo completo vive en este skill, y el system prompt lleva solo un bloque corto que dispara el skill y repite los no-negociables. Si una regla nueva toca un no-negociable, actualiza LAS DOS cosas y entrégale los dos bloques, cada uno con su propio botón de copiar, separados y rotulados.
 
-## CÓMO ESTÁ ORGANIZADO ESTE SKILL — LECTURA OBLIGATORIA (v51)
+# PROTOCOLO v69 — FLUJO POR ETAPAS (manda sobre todo lo que sigue)
+
+Fecha: 2026-10-17. **Reemplaza al PROTOCOLO v68 y a todas las adendas.** Orden de autoridad: §0 Criterios del
+estimador > este protocolo (etapas + §1–§15) > REFERENCIA DE MÉTODO (más abajo) > `referencias/`.
+**Protocolo CIEGO (E24):** reglas generales; los casos anteriores se citan solo por N/HOJA, nunca con cantidad,
+cota, R.O. ni conteo. Ningún número de este texto es una respuesta.
+
+**Por qué v69.** La misma versión del skill daba resultados distintos entre corridas: el inventario de tags y la
+partición de walls se hacían a ojo, en una sola lectura, sin nada contra qué compararla. Desde v69 el conteo lo hace
+un script, el plano se lee DOS veces de forma independiente, un script compara las dos lecturas contra el
+inventario, y toda diferencia queda escrita. **Ningún error llega al Excel sin alerta.**
+
+## Etapas y carpeta (reanudable)
+
+```
+plano.pdf
+ 1 INVENTARIO   inventario.py            → <dir>/1_inventario/inventario.json + inventario.md + recortes/
+ 2 LECTURA      subagentes A  ┐ (no se ven)→ <dir>/2_lectura/A/*.json → etapas.py unir → canon_A.json
+                subagentes B  ┘            → <dir>/2_lectura/B/*.json → etapas.py unir → canon_B.json
+ 3 DOBLE LECT.  comparar.py              → <dir>/3_revision/revision.md + revision.json + img/
+                resolución con imagen    → <dir>/3_revision/resolucion.md + <dir>/4_canon/takeoff_canon.json
+ 4 CÁLCULO      canon.py, accesorios.py, partition_types.py … (tools existentes, §2)  → out/
+ 5 ENTREGA      plantilla_excel.py + revision.md + etapas.py compuerta + bitacora.py compuerta
+```
+
+`<dir>` = `$TAKEOFF_WORK/etapas`. Cada etapa escribe su salida en disco ANTES de pasar a la siguiente. Una sesión
+cortada (límite de uso, contexto, contenedor) se reanuda con `python3 etapas.py estado <dir>`: dice cuál es la
+primera etapa que falta y su comando. Una etapa que ya está en disco no se rehace, salvo que su entrada cambie
+(entonces se rehacen ella y las siguientes; la compuerta detecta una revisión vencida).
+
+## Subagentes: ninguna sesión carga todo
+
+- El **orquestador** lanza las etapas, lee sus archivos de salida y conduce la resolución. No lee el set completo.
+- **Etapa 2** se parte en tareas chicas: UNA hoja de planta o UN grupo de tags del inventario por subagente.
+- **A y B son subagentes distintos.** Reciben el mismo PDF, la misma parte del inventario y este protocolo; ninguno
+  recibe el trabajo del otro (ni archivos, ni imágenes, ni números, ni resúmenes). El orquestador no pasa cifras
+  de una lectura a la otra.
+- **Etapa 3**: el script compara; cada ítem a resolver (o grupo chico) lo resuelve un subagente con imagen.
+- Cada subagente guarda su salida en disco antes de terminar; si se corta, se relanza solo esa tarea.
+
+## Etapa 1 — INVENTARIO (script, ANTES de leer)
+
+`python3 inventario.py plano.pdf <dir>/1_inventario` — índice de hojas (title block), types del schedule, cada
+partition tag con id (`PTnnnn`), hoja, página, coordenadas y recorte PNG con el tag circulado y **verificado al
+reabrirlo**; vista de cada hoja con los tags numerados; ambiguos (NO contados, con motivo); tags fuera de schedule
+(→ RFI); detail bubbles N/HOJA; hojas NO INVENTARIABLES (raster). rc 1 si un recorte no verifica: no se sigue.
+
+- Esta etapa ES el barrido por tag: `inventario.md` es la lista numerada + imagen circulada de CADA ubicación.
+  Modo atendido: se muestra al estimador y se espera su confirmación. Modo desatendido: queda como punto de
+  revisión de la entrega.
+- Hoja NO INVENTARIABLE → esa hoja se barre a mano con imagen (REFERENCIA: barrido y grafía) y se declara.
+- El **type por defecto** ("ALL PARTITIONS TO BE TYPE 'X' U.N.O.") no tiene tags: se barre por geometría
+  (REFERENCIA) y sus walls van sin `tag_ids`, con `default_type_source` N/HOJA.
+
+## Etapa 2 — LECTURA (tareas chicas; A y B independientes)
+
+Cada tarea entrega un fragmento JSON (`2_lectura/A/<hoja-o-grupo>.json`) con el esquema de §4 y, en cada wall:
+`id`, `tag`, `sheet` (+ `page` si el sheet number se repite en el PDF), `tag_ids` (ids del inventario que usó),
+`length_ft` con `source` N/HOJA y estado [CONFIRMADO] / [DERIVADO] / [PENDIENTE], `band {ori, c0, c1, lo, hi}` en pt
+de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
+
+- **Partición de walls = `particion.py` (`MODO_DEFAULT`; hoy "tramo", = PT2 / PT3).** La regla es del estimador
+  y está pendiente de su decisión: no se cambia sin su orden. Ninguna lectura inventa otra.
+- Todo tag del inventario de la tarea termina en un wall o en `tags_descartados [{id, motivo, imagen}]`; el
+  descarte NO silencia la alerta: el estimador lo cierra en la Etapa 3.
+- A lee el canon completo (walls + §2 P4–P8b, también por tareas chicas); B lee como mínimo los walls (P3). Lo que
+  solo leyó A pasa por el back-check ciego (P12).
+- Unión: `python3 etapas.py unir <dir>/2_lectura/A <dir>/2_lectura/canon_A.json` (idem B). Falla si dos
+  fragmentos repiten un id o traen constantes distintas (escala).
+
+## Etapa 3 — DOBLE LECTURA COMPARADA
+
+`python3 comparar.py canon_A.json canon_B.json inventario.json <dir>/3_revision --pdf plano.pdf` → `revision.md`
+(inglés, corta), `revision.json`, `img/` (A azul, B naranja, tag rojo). Parte A y B con la MISMA regla.
+
+- **ALERTAS:** todo tag del inventario sin wall en A ni en B · todo wall en una hoja sin tag de su type · todo type
+  que no está en el schedule (→ RFI si el tag existe en el plano).
+- Coinciden (|ΔLF| ≤ 2 %) → se toma. Difieren / solo A / solo B / alerta → se abre el plano en ese punto (imagen
+  circulada, reabierta) y se decide con N/HOJA, **o** queda como ítem de revisión del estimador [PENDIENTE] con las
+  dos cifras y su delta. **NUNCA se elige en silencio ni se promedia.**
+- Cada decisión va a `3_revision/resolucion.md` (ítem → decisión → N/HOJA → imagen). El canon conciliado va a
+  `4_canon/takeoff_canon.json`.
+
+## Etapa 4 — CÁLCULO
+
+Las tools existentes sobre el canon CONCILIADO, nunca sobre A o B: `canon.py`, `framed_openings.py`,
+`accesorios.py`, `partition_types.py`, `alcance_filtro.py`, `contar_tags.py`, `vigas_sobre_walls.py` (§2 P9–P10).
+Nada se suma a mano (§6).
+
+## Etapa 5 — ENTREGA
+
+Excel (`plantilla_excel.py armar` + `verificar`) + `revision.md` (lista corta para el estimador: lo que quedó como
+ítem de revisión, con delta e imagen) + **compuerta de etapas**: `python3 etapas.py compuerta <dir>` FALLA si falta
+`inventario.json`, `canon_A.json`, `canon_B.json` o `revision.json`, si la revisión es más vieja que sus entradas
+o no cubre exactamente los tags del inventario, si el inventario tiene recortes sin verificar, o si **algún tag
+del inventario queda sin wall y sin alerta**. Después, `bitacora.py compuerta` (§8). Si una falla: NO ENTREGABLE.
+
+---
+
+## 0. Criterios del estimador — reglas generales para TODO proyecto
+
+Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa (entonces RFI). Tool entre [ ].
+
+- **E1** Header / box beam: largo de cada pieza = R.O. + 1'-4" (8" de bearing por lado). [headers]
+- **E2** Header por PIEZAS: LF = (R.O. + 1'-4") × piezas × qty; piezas = fila del header schedule o 4 en box. [headers, closer]
+- **E3** Parapet bay por bay entre posts (decisión del usuario, cálculo aprobado): bays = ROUNDUP(L / post) por
+  straight run; run con ≥ 2 bays: studs por bay = MAX(5, 2 + ROUNDUP((bay − 0.6) / oc) − 1); run de UN bay (stub
+  ≤ spacing de posts, p. ej. un key note de stub): 2 + ROUNDUP((L − 0.6) / oc) − 1, sin mínimo; × (T/STUD −
+  B.O.D.). Run = tramos contiguos de una grid line aunque cambie la altura (nunca un lado N/E/S/W); largo en el
+  eje del stud. [canon `parapet`]
+- **E4** Hanger wire en PCS con la altura de cada hanger por room; LF = Σ PCS × altura (DERIVADO). [canon]
+- **E5** Ballistic sigue todo el contorno, con jogs y retornos (`ballistic_jogs`, sin walls fantasma). [canon]
+- **E6** Board sobre ballistic: misma face, del tope del panel a estructura. [board_caras]
+- **E7** Transición con kicker: studs verticales a estructura ADEMÁS del kicker. [canon]
+- **E8** Column wraps: bottom + top track = perímetro de faces; face = **cadena FOS impresa completa** (todos
+  los eslabones, `fos_chain`); una decisión que usó un solo eslabón cede ante el plano. [corridas, canon]
+- **E9** Ceiling track en transición: arriba y abajo. **E10** Bottom track en doors NO se descuenta. [corridas]
+- **E11** "BOX HEADER AS NEEDED" SÍ se cuenta; tamaño no impreso = RFI. **E12** Ductos / FD en walls NO se
+  enmarcan (sí llevan plate de reinforcement, A2). [headers]
+- **E13** Canopy soffit: track en los dos extremos de los joists; fascia y wall medidas por separado
+  (`wall_line_ft`), nunca L × 2. [corridas]
+- **E14** Ceiling suspendido del RCP = furring, salvo detalle con joists (`joist_source`). [canon]
+- **E15** R.O. impreso del estimador manda. **E16** Storefront con lintel HSS / steel en S*: 0 metal stud header.
+- **E17** Preguntas al usuario UNA A LA VEZ, con imagen, hojas y opciones con delta; solo criterio comercial.
+- **E18** Sill DOUBLE en R.O. > 4'-0"; doors sin sill. **E19** "BOX BEAM OR STEEL FRAMING AS REQUIRED" = metal
+  stud box beam. **E20** Todo box = 4 piezas. **E21** La fila del header schedule no se baja. **E22** "CONT. BOX
+  BEAM" = un run por frente × 4. [headers]
+- **E23** Antes de preguntar, buscar en TODAS las hojas y la spec: si el plano contesta, decidir con N/HOJA +
+  imagen; si no, RFI con delta + supuesto declarado. Rangos internos los decide Claude con evidencia.
+- **E24** Protocolo, SKILL, referencias/ y tools / tests entregables CIEGOS: sin cantidades, cotas, R.O.,
+  conteos ni coordenadas de la referencia de examen; esos tests viven en `tests_arbitraje/`. [test_ciego]
+- **E25** Cada capa del sheathing se sigue hasta su remate; nailbase que sube al parapet = T/STUD del parapet. [canon]
+- **E26** Walls bajo un miembro S* paran bajo él: `stops_under_beam` con la marca W de ESA viga (una por línea,
+  peralte AISC) o motivo + RFI. [vigas_sobre_walls]
+- **E27** Dos pruebas, mismo plano, mismo número: todo dato que varió entre pruebas es un campo obligatorio con
+  N/HOJA y una regla en tool (§14). Ningún valor se toma de "lectura visual".
+- **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
+  **Partition types (§13)** con la convención del calificador.
+
+---
+
+## 1. Reglas que siguen siempre
+
+1. **#0 HONESTIDAD DIMENSIONAL.** [CONFIRMADO] cota impresa + N/HOJA · [DERIVADO] operación escrita ·
+   [PENDIENTE]. Nunca escalar a ojo. Si no se distingue con certeza, se dice y se para.
+2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Leer
+   el CUERPO del detalle (notas, leaders, "INVERT ..."); si dos detalles traen el concepto, se citan los dos. Un
+   detalle es de todo lo que corta. Si no aplica, motivo.
+3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada. Antes de "sin tag", leaders finos;
+   antes de "no está en el set", grep en todo el set. "ALL ..." = schedule completo ítem por ítem.
+   El conteo de tags lo hace `inventario.py` (Etapa 1); a mano solo en hojas NO INVENTARIABLES.
+4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. Hojas rotadas:
+   `page.rotation_matrix` para medir, `derotation_matrix` para dibujar.
+5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
+6. **EJES.** Nunca dos ejes, fachadas o frentes en un número.
+7. **AMBIGÜEDAD = RFI** con delta. Se carga la opción de más material solo si la medida NO está impresa (53.3).
+8. **ERRORES.** Error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
+9. **PRUEBAS.** Una prueba NO modifica tools: propuesta (diff + test) en `PARA REVISAR/`; el arbitraje la integra.
+10. **REGISTRO.** Un renglón resuelto no se reescribe: `registro.py anexar <id> "<evidencia>"` agrega hojas o
+    corrige una cita sin cambiar el estado. Una nota NO APLICA cita TODAS las hojas del escaneo con su motivo.
+
+---
+
+## 2. Pasos por etapa (cada uno con `bitacora.py run`)
+
+- **Preparación:** P0 mapa de hojas y schedules (`arranque.py`, instala pikepdf / pymupdf) · P1 alcances
+  (`alcances.py escanear`) · P2 `registro.py crear`.
+- **Etapa 1:** `inventario.py` antes de medir nada.
+- **Etapa 2** (A y B por separado, tareas chicas): P3 walls (largo neto, cota, line, band, `sheet`, `tag_ids`) +
+  nodes. Solo A sigue: P4 alturas (`vigas_sobre_walls.py`, `altura_stud.py`, deck_breaks) · P5 faces (room, board,
+  layers, altura, aberturas) · P6 aberturas + header schedule con PIEZAS · P7 corridas no-wall (§5), parapets por
+  grid line · P8 ceilings, fachadas, canopies, parapets + nailbase, blocking, plywood, trim · P8b accesorios (P/M
+  registrado, ATM, jambs, LEVEL 5, access panels) · `etapas.py unir`.
+- **Etapa 3:** `comparar.py` + resolución con imagen → canon conciliado.
+- **Etapa 4:** P9 `canon.py takeoff_canon.json out/ --fo fo_in.json` · P10 `contar_tags.py`, `framed_openings.py`,
+  `alcance_filtro.py`.
+- **Etapa 5:** P11 `plantilla_excel.py armar … --familias out/familias_out.json` + evidencia (`planmark.py`) · P12
+  back-check ciego, `test_ciego.py`, `etapas.py compuerta`, `bitacora.py compuerta`.
+
+Nunca `| head` / `| tail` detrás de una tool. Prohibido escribir a mano una cantidad de §6: §1.9 + RFI con delta.
+
+---
+
+## 3. Qué es juicio y qué no
+
+Juicio (N/HOJA + imagen): todo lo que se mide o se lee del plano (largos, alturas, R.O., bandas, faces, flute,
+filas del schedule, penetraciones, bordes con jamb return, tags LEVEL 5) y los RFIs. Todo lo demás: tool.
+
+## 4. `takeoff_canon.json` — esquema v68 (+ v69)
+
+Todo número medido lleva `source` (N/HOJA); constantes `{value, source}`. Esquema completo: docstrings de las
+tools y `test_canon*.py`. Las tools fallan si falta un campo obligatorio:
+- header: `pieces` + `pieces_source`; box = 4; CONT. `continuous_run` + `wall`; ducto / FD = NOT_FRAMED;
+  storefront `structure` + `structure_source`. parapet: `line` (grid), `ori`, `axis`, `from_ft`, `to_ft`,
+  `length_basis: "stud_cl"`, `facade`. canopy_soffit `wall_line_ft`. wraps / piers: `parts` o `faces_ft` +
+  `fos_chain`. Facades: `parapet_t_stud_ft`, `nailbase_top_ft` / `_bottom_ft` o `parapet_face_of`. Faces por
+  tramo: `side` + `length_ft` + `length_source`. Framed openings `width_source`.
+- accesorios: `mep_sweep {sheets, registro {dx_pt, dy_pt, matches ≥ 25, source}, source}`, `mep_penetrations`;
+  ATM `atm_recess {width_ft, sistered_h_ft, furring_rows, *_status, *_source}`; abertura exterior `jamb_return` +
+  source y storefront `jambs [{abuts, source}] × 2`; `head_build {head_ft, head_chain_in, box_depth_ft, n_box,
+  board_in}`; `level5_tags` + items con `base_ft`; `access_panels`; `accesorios_rfi` / `accesorios_none`.
+- v68 (§14): `wet_fixtures[].back_source`; `ballistic_jogs` o motivo; `plies_blocking`; blocking `label`;
+  `plywood_strips[].material` (nailbase_5_8_polyiso | frt_5_8_ext | frt_5_8 | frt_3_4); ceiling `detail`;
+  `deck_breaks`; tile_base `perimeter_basis` (+ `gross_ft`) e `inside_corners {value, vertices,
+  outside_corners}`; transición `edges` + `vertical_studs {bod_ft, ceiling_ft}`; `soffit_bottom_layers`.
+  parapet / column_wrap / pier solo en `walls`. Bottom track sin descuento de doors; sin insulation.
+- v69 (etapas): cada wall `sheet` (+ `page` si el sheet number se repite), `tag_ids` del inventario y su
+  recorte; fragmento con `tags_descartados [{id, motivo, imagen}]`. `canon.py` ignora estos campos.
+
+---
+
+## 5. Elementos (lista cerrada) → familia del track
+
+| Familia | Elementos |
+|---|---|
+| bottom track + top / deflection track (L × rows c/u, sin descuento de doors) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
+| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2 fijo), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (fascia + wall), joist (2) |
+
+La familia sale del ELEMENTO, no de la orientación.
+
+---
+
+## 6. Familias que DEBEN salir de las tools (sin PENDING)
+
+Studs (studs_nodos + joists + kickers + verticales + wraps / parts) y parapet (E3) · tracks, bracing, purlin
+(corridas) · header / sill por piezas (headers) · furring, carrying, hanger PCS + LF · board (board_caras) · glass
+mat, EXTERIOR sheathing, FRT plywood por material (E25) · cement board, FRP, sealant · blocking, trim · framed
+openings MEP · las 15 de accesorios (§12).
+
+---
+
+## 7. Criterios fijos (fórmulas; sin valores de proyecto)
+
+- **Studs**: campo 1 + Σ ROUNDUP(zona / oc); cripples FLOOR(R.O. / oc); 4 jambs por abertura (no ductos / FD).
+  Nodos: L +1 · T +1 · X +2 · free 0 · vendor_end +1 · split −1 × rows · abut 0; T entre G/G1 = abut; partition
+  contra exterior = T. Exterior: H = B.O.D. − d. Un remate de 4" en un office front = extremo del wall que llega.
+- **Board**: L × H × layers − abertura, face por face; face con dos rooms = tramos; un lining no tiene face del
+  lado que forra. Ballistic L × min(tope, H) por todo el contorno; 3/8" sobre el tope. A1/A5 con ceiling =
+  ceiling + 6" del detalle (salvo "TO UNDERSIDE OF DECK"). **MR** solo detrás de toilet / lavatory.
+- **Wraps / piers**: face = cadena FOS completa; studs por face o `studs_drawn`; dos sistemas = `parts`.
+- **Bracing**: rows = ROUNDUP(H × 12 / 48) − 1; LF = rows × L × rows de stud. **Purlin**: 0.75 × L de top track a
+  deck paralelo al flute, una pieza por corrida, también transiciones y bulkheads.
+- **Header / sill**: barrido cerrado (doors, ventanas, ATMs, office fronts, box beams, "AS NEEDED", grilles,
+  ductos / FD, lintels S*, cada "HOLD"); R.O. ≤ stud bay → 0; sill (R.O. + 1'-4") × piezas.
+- **Ceilings**: carrying (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying ROUNDUP((largo − 1) / 4) +
+  1; framed_soffit con `drop_lines` = bordes que en el RCP dan a un ceiling.
+- **Transiciones**: kickers @48" + verticales a estructura (D7); kicker sin largo impreso = h / sin(ángulo).
+- **Exterior (E25)**: glass mat = base strip + banda T/STUD − B/STUD; nailbase T/BASE → T/STUD − banda −
+  aberturas, por facade, TODAS las facades.
+- **Blocking**: por stud row con face > largo de hoja; FRT solo rotulado (grep "FRT" / "PLYWOOD" / "BLOCKING"
+  antes de "sin rótulo"); ancho = schedule o contorno, nunca la cota de ubicación.
+- **FRP / sealant / trim**: FRP = perímetro neto del tile_base × top + mop sink; sealant por detalle (doors
+  abajo); trim = callouts + bordes de jamb return (A5) × 2 + transiciones × 2.
+- **Framed openings MEP**: max(ancho, largo) ≤ módulo → 0; air devices / ductos de wall NOT_FRAMED; `sweep` M + E;
+  `tag_counts` con sufijo normalizado; `width_source`.
+- **Cladding**: hat channel / Z-girt / lath EXCLUDED + RFI. **Insulation**: EXCLUDED siempre.
+
+---
+
+## 8. Compuerta (NO ENTREGABLE si falla)
+
+0. `etapas.py compuerta <dir>` PASA: inventario, canon A, canon B y revisión en disco; revisión vigente y que
+   cubre exactamente los tags del inventario; ningún tag sin wall y sin alerta; recortes verificados.
+1. `inventario.py`, `canon.py`, `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
+2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
+3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
+4. `bitacora.py compuerta` completa; RFIs con delta; toda abertura, corrida, face y ceiling con source.
+5. Back-check ciego familia por familia; `test_alcances.py` OK contra el Excel final.
+6. `plantilla_excel.py armar … --familias familias_out.json` + `verificar` dentro de `bitacora.py compuerta`:
+   15 familias de accesorios, Partition Takeoff (§13) sin renglón PENDING, compra §15 (Inputs reales, waste una
+   vez, plywood por material, sealant exterior aparte, NET en su unidad), RFIs sin duplicados con delta, Excel
+   íntegro en inglés. Familia PENDIENTE = NO SE ARMA. `contar_tags.py`, `vigas_sobre_walls.py`, `test_ciego.py` y `test_ciego_v69.py` rc 0.
+
+---
+
+## 9. Reglas anuladas o corregidas (sin valores)
+
+- **v68**: "5 en todo bay" → mínimo 5 solo en runs de ≥ 2 bays; stick por corte + 15 % → waste una vez; FRT
+  plywood en un renglón → por material; sealant exterior dentro del acoustical → renglón propio; PVC edge bruto →
+  neto; extra framing de ductos → error (E12); vertical stud de transición = escalón → a estructura; jog
+  descartado → suma al vecino (PT3).
+- v67 y anteriores: ARBITRAJE_13 a 16 (fuera del paquete de pruebas).
+
+## 10. Anti-varianza
+
+Es el flujo por etapas: inventario por script antes de leer (Etapa 1); dos lecturas independientes comparadas por
+script contra el inventario (Etapa 3); una sola regla de partición (`particion.MODO_DEFAULT`); criterio = constante
+con fuente; cada regla en una tool con test que falla con el dato malo (sintético); ningún acierto cuenta si no
+fue ciego (E24).
+
+## 11. Reglas con test (cada una falla con el dato malo, sintético)
+
+R15–R36 (v66–v67) siguen. v68: R37 E3 exacta (test_canon) · R38–R48 §14 (test_canon_v68, test_accesorios) ·
+R49 PT (test_partition_types_v68) · R50 compra §15 (test_plantilla_v68) · R51 arranque instala pikepdf / pymupdf.
+v69: R52 inventario (test_inventario) · R53 partición (test_particion) · R54 doble lectura (test_comparar) ·
+R55 compuerta y unión de etapas (test_etapas) · R56 ciego genérico (test_ciego_v69).
+
+---
+
+## 12. Accesorios y extras (accesorios.py; NET, el waste lo pone la plantilla)
+
+Siempre incluidos (criterio del estimador): trims, taping, drywall screws, framing screws, track pins. Ninguna
+familia se omite: sin dato = PENDIENTE (bloquea el Excel) → se resuelve del plano (E23) o `accesorios_rfi` con
+delta. Waste 15 % en metal; lo no metal con el factor del board; yields sin waste. Insulation EXCLUDED siempre.
+
+| # | Familia | Regla (fuente: el detalle típico del set) |
+|---|---|---|
+| A1 | additional head track (LF, metal) | R.O. > 4'-0" en walls: (R.O. + 2 × bearing) × qty; openings_extra con box propio → RFI con delta (2/S5.20, 9/S5.20) |
+| A2 | stud reinforcement MEP (PCS) | barrido P/M REGISTRADO (≥ 25 coincidencias) o PENDIENTE; una vez por (wall, xy); Σ qty × MAX(1, ROUNDUP(ancho / O.C.)) (o `studs_cut`); pipe ≤ 1" o `in_cavity` = 0; ductos / FD llevan plate (6/S5.20) |
+| A3 | extra framing ATM (LF, metal) | (ROUNDUP(ancho / O.C.) + 1) × alto sistered + filas de furring × ancho; dato no impreso → CRITERIO + RFI; extra framing de ducto / FD = error (E12) |
+| A4 | 2-1/2" CFMF coiling grille head (LF, metal) | (ROUNDUP(L / O.C.) + 1) × (Σ cadena impresa del head − n box × peralte − board) |
+| A5 | gypsum board jamb return (SF) | bordes (R.O. + 2 jambs − sill + sill; storefront: head + jambs con `abuts: wall` × head) × ancho; ancho no acotado = RFI |
+| A6 | PVC trim at FRP (LF) | 2 × perímetro NETO de doors + inside corners × top + 2 × doors × top + mop sink; inside − outside = 4 |
+| A7 | PAFs and duct sleeves (PCS) | ROUNDUP(L / spacing) por run de parapet + 1 sleeve por ducto / FD en wall |
+| A8 | access panel (PCS) | marcadores del RCP / notas M-P sobre GWB (no ACT) |
+| A9–A11 | drywall screws · joint compound · joint tape | yield × (5/8" regular + MR + 3/8"); sin sheathing, glass mat, ballistic, FRT |
+| A12 | framing screws (PCS) | 4 × piezas de stud instaladas (studs_nodos + `pcs` de canon); sin joists |
+| A13 | slab pins (PCS) | bottom track interior sobre losa × rows / spacing más cerrado; otros spacings = RFI |
+| A14 | expansion anchors (PCS) | bottom track exterior sobre losa / spacing exterior |
+| A15 | Level 5 finish (SF) | Σ L × (alto − base) por cada tag LEVEL 5 del finish schedule; tag sin item = PENDIENTE |
+
+Nombres EXACTOS del renglón: `accesorios.NOMBRES_EXCEL`.
+
+## 13. Partition types (partition_types.py; hoja Partition Takeoff)
+
+| # | Regla |
+|---|---|
+| PT1 | Type = tag del plano; exterior → `EXT-<stud>CFMF`; parapet → `EXT-PARAPET` (un wall por straight run: `ori` + `axis`, step = otro wall; sin geometría = PENDING); door_bulkhead → `BULKHEAD-<familia del tag>` (G1 → G); canopy column → `CANOPY-COL`; pier con tag interior = su tag (el tag manda). |
+| PT2 | Un wall = tramo recto de un type entre esquinas o extremos: colineales (≤ 3") y contiguos (≤ 6") se unen; no se parte por altura, room, T ni abertura. Un renglón por wall (ids con "+"). |
+| PT3 | Jog / return ≤ 1'-0" que toca un wall del mismo type: no es wall; su LF SE SUMA al vecino ("incl. jog"). |
+| PT4 | Office bulkheads colineales de un frente = UN wall (run del CONT. BOX BEAM). |
+| PT5 | storefront cripples, vestibule / grille heads, roof step, fascia, canopy soffit, transiciones, bulkheads y soffits de ceiling → bloque `TYPE OTHER FRAMING (NOT A PARTITION)`. |
+| PT7 | Chase = un wall por cara con tag; wrap / pier interior = caras con board de su detalle; wrap exterior = cadena FOS. |
+| PT8 | Un wall termina en la CARA del wall / frame que cruza; se parte donde otro type o un alcove ocupa la línea; largo con cota impresa si existe. |
+| PT6 | Formato: `TYPE <nombre>` en la col. A; renglón `"<type>  #<id>  -  <location>"` + Length; TOTAL con la col. A vacía y texto en la B; OTHER FRAMING después del TOTAL. |
+
+## 14. Reglas de determinismo v68 (lo que varió entre dos pruebas; canon / accesorios fallan sin el dato)
+
+| # | Regla |
+|---|---|
+| D1 | MR solo en la cara del respaldo / carrier del fixture (`back_source`); la pared de grab bars no es "behind". |
+| D2 | Ballistic y 3/8" siguen el contorno con jogs declarados; cada face customer con cota o vector. |
+| D3 | FRP, cement board y PVC sobre el perímetro NETO de doors; `net` exige `gross_ft` = net + doors. |
+| D4 | Esquinas del FRP: polígono rectilíneo → inside + outside = vértices, inside − outside = 4. |
+| D5 | Blocking: rótulo literal decide FRT / metal; plies del remate del detalle; nada rotulado BLOCKING va como plywood. |
+| D6 | Ceiling suspendido cita su detalle; el sistema del detalle manda (soffit con studs = framed_soffit, sin hangers). |
+| D7 | Transición: `edges` contra otro ceiling (contra wall no); vertical stud a estructura = B.O.D. − ceiling; no en un framed_soffit (sus bordes son drop_lines). |
+| D8 | parapet, column_wrap, pier y transición se cuentan aunque estén en `runs` o fallan (nada se pierde sin aviso). |
+| D9 | Wall que cruza un quiebre de deck (`deck_breaks`) se parte en dos alturas. |
+| D10 | Storefront: cada jamb declara su remate (wall / pier / frame / none); solo wall suma jamb return. |
+| D11 | Grille head = cadena impresa completa; ATM recess por dato con estado; MEP sweep registrado. |
+| D12 | Framing screws = Inputs B21 × piezas del canon vigente (nunca un conteo heredado). |
+
+## 15. Compra y presentación (plantilla_excel v68)
+
+Hoja Inputs con las filas del estimador (B5 / B6 waste, B9 SF por sheet, B10 stud, B11 track, B15 sealant LF por
+tube, B16 C.R., B17 hat, B18 trim, B20–B24 yields, B25 anchors); toda cita `Inputs!Bn` existe. Pieces =
+ROUNDUP(NET × (1 + waste) / stock), waste una sola vez. Selling unit: sticks, runs, sheets, tubes (acoustical y
+exterior), hanger wire LF continuous coil + renglón PCS. Yields con fórmula viva (joint compound = Inputs B23,
+criterio del estimador; un back-check no lo cambia). FRT plywood un renglón por material y espesor
+(`frt_plywood_by_material`); sealant exterior (`sealant_exterior_lf`) aparte; NET de familia solo en su unidad;
+RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en inglés (`verificar` rechaza español).
+
+---
+
+# REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
+
+## CÓMO ESTÁ ORGANIZADO ESTE SKILL — LECTURA OBLIGATORIA (v51; v69: el PROTOCOLO v69 va primero)
 
 Este archivo trae las reglas centrales, el protocolo, el checklist, las súper reglas ⛔ de las
 adendas y las reglas vigentes de operación (v48–v51). El detalle de las herramientas y de las
@@ -82,7 +449,7 @@ Reglas de ese formato:
 - Las columnas de stud van en **LF de material**, una columna por medida de stud. Nunca mezcles dos medidas en una columna.
 - `Labor (Hrs)` se deja vacía salvo que el usuario dé su tabla de productividad.
 - El archivo se entrega con **fórmulas vivas**, no con resultados pegados: al cambiar una height o un tamaño de hoja, todo tiene que recalcularse solo.
-- **Toda cantidad lleva su desglose rastreable** (pieza por pieza, face por face, o la operación completa). Un número escrito a mano sin desglose — como un total de blocking "93.5 LF" sin lista de accesorios — no se entrega: en Greeley BLDG ese número recontado dio 66 LF.
+- **Toda cantidad lleva su desglose rastreable** (pieza por pieza, face por face, o la operación completa). Un número escrito a mano sin desglose — como un total de blocking escrito sin lista de accesorios — no se entrega: en un proyecto anterior ese número, recontado pieza por pieza, salió muy distinto.
 
 ## ORDEN FIJO DE PRESENTACIÓN
 
@@ -90,7 +457,7 @@ Los walls se presentan agrupados **por tipo**, y dentro de cada tipo **de mayor 
 
 ## NUMERACIÓN DE WALLS — UNA SOLA, FIJADA EN EL BARRIDO
 
-El número de wall se asigna **una sola vez**, al cerrar el barrido completo por tag, agrupando por tag (orden alfabético del tag) y dentro de cada tag por posición. Ese número es el identificador permanente del wall en todo el proyecto: mapa, tablas, imágenes de evidencia, resumen de materiales y clarifications. Ventaja de agrupar por tag: el rango del número ya dice el tipo sin mirar nada más.
+El número de wall se asigna **una sola vez**, al cerrar la Etapa 3 (canon conciliado), agrupando por tag (orden alfabético del tag) y dentro de cada tag por posición. Ese número es el identificador permanente del wall en todo el proyecto: mapa, tablas, imágenes de evidencia, resumen de materiales y clarifications. Ventaja de agrupar por tag: el rango del número ya dice el tipo sin mirar nada más.
 
 Si una tabla se ordena distinto (p.ej. de mayor a menor para comparar contra un take-off manual), eso es solo el **orden de las filas**: el número impreso en cada fila sigue siendo el del barrido. **Prohibido renumerar entre entregas.** Dos numeraciones en el mismo proyecto es un error grave: el usuario circula un número en la hoja que se le entregó y la respuesta apunta a otro wall. Un wall que aparece después (en una verificación) recibe un número NUEVO libre del rango de su tipo; los existentes no se tocan.
 
@@ -118,7 +485,7 @@ Si algo no se distingue con certeza en una imagen, dilo y detente — nunca pres
 
 `altura del ceiling del cuarto − altura del header del elemento = la banda de muro que falta`
 
-Si da más que cero, ahí hay material que alguien tiene que construir. Y hay que hacerla **por face**, porque el ceiling cambia de cuarto a cuarto: en un caso real la misma abertura dejaba **1'-0"** por la face de la oficina (ceiling 9'-0") y **[valor retirado E24]** por la face del lobby (ceiling 11'-6"), y el board seguía hasta el deck por las dos.
+Si da más que cero, ahí hay material que alguien tiene que construir. Y hay que hacerla **por face**, porque el ceiling cambia de cuarto a cuarto: en un caso real la misma abertura dejaba una banda distinta por la face de la oficina y por la face del lobby (ceilings a alturas distintas), y el board seguía hasta el deck por las dos.
 
 **Si lleva gyp, lleva metal.** Nunca se cuantifica board sin su soporte. Arriba de una abertura el soporte es, como mínimo: **header o box beam** del opening · **jamb studs** · **studs cortos del bulkhead** a su O.C. · **track arriba y abajo** (el de abajo se apoya sobre el header) · **bracing** si la height lo pide · **corner bead** en el canto inferior · **shadow molding** donde muere contra el scheduled ceiling · **sealant**. Busca el DETALLE PROPIO del bulkhead en Partition Types antes de derivar nada: suele existir y suele traer line items que no están en el detalle del wall (blocking de plywood bajo el box beam, molding, bead).
 
@@ -181,8 +548,8 @@ Antes de medir por píxeles, comprueba si el PDF es vectorial (`pdfplumber`: `pa
 5. **Sigue la línea guía con criterio de parada.** Prueba TODOS los extremos de leader del tag, no solo el del segmento más largo, y quédate con el que aterriza en una banda cuyo thickness coincide con el del schedule. Sin criterio de parada, la cadena sigue cualquier línea del mismo lineweight y termina sobre millwork o sobre nada.
 6. **Empareja cada dimension impresa con SU línea de dimension.** Comprueba que el length de esa línea ÷ escala sea igual al valor del texto (±1"). Si no se empareja, no se usa. Dos dimensions iguales en el mismo plano pueden ser dos walls paralelos distintos, no una repetida.
 7. **Deduplica al final.** Un mismo wall puede llevar más de un tag. Deduplica por identidad de banda (misma orientación + los mismos dos niveles de face + tramos que se solapan). Cuidado con lo contrario: dos walls COLINEALES adyacentes de tipo distinto comparten una face y NO son duplicados — se distinguen porque el otro nivel de face difiere. Verifica con imagen antes de fusionar dos tags en un wall.
-8. **Líneas a trazos (walls "above") se miden por la LÍNEA, no por un trazo.** Un par dashed se mide del primer al último trazo de toda la run; el final de un trazo no es el final del wall. Y un QUIEBRE en el patrón del dash (trazo corto + hueco distinto al período) marca un cambio de tag: allí empieza otro wall (en Greeley: L.3 31.79 ft + B.3 8.69 ft, no un L.3 de 37.92).
-9. **El length de un wall exterior sale de las faces INTERIORES vectoriales**, no de la dimension de grids menos un thickness supuesto: el grid no siempre está en la face exterior (en Greeley el grid A estaba 3 5/8" dentro).
+8. **Líneas a trazos (walls "above") se miden por la LÍNEA, no por un trazo.** Un par dashed se mide del primer al último trazo de toda la run; el final de un trazo no es el final del wall. Y un QUIEBRE en el patrón del dash (trazo corto + hueco distinto al período) marca un cambio de tag: allí empieza otro wall (en un proyecto anterior un solo tramo eran en realidad dos walls de tags distintos).
+9. **El length de un wall exterior sale de las faces INTERIORES vectoriales**, no de la dimension de grids menos un thickness supuesto: el grid no siempre está en la face exterior (en un proyecto anterior el grid caía dentro del wall).
 
 ## MEDICIÓN POR PÍXELES (solo si el PDF no es vectorial y no hay dimension impresa)
 
@@ -219,7 +586,7 @@ Antes de usar una elevación, verifica con LAS CUATRO:
 3. **Orden de los ejes de grid impresos en la elevación** — mirando al norte el oeste queda a la izquierda; al sur, el este a la izquierda; al este, el norte a la izquierda; al oeste, el norte a la derecha.
 4. **El CONTENIDO cuadra con la planta** — si muestra la entrada con storefront, esa fachada debe tener el vestíbulo y sus doors en planta; si muestra wall ciego con una door, debe dar a cuartos de servicio.
 
-**El mismo cuidado con las plantas ampliadas: una puede venir girada 180° o espejada respecto del floor plan.** Antes de asignarle nada, verifícala con TRES rasgos independientes del propio dibujo (de qué lado están las doors, dónde caen los muebles fijos, dónde los aparatos), nunca con el rótulo. Caso real: la planta ampliada de baños venía girada 180°, y sin detectarlo los accesorios se habrían asignado a la face opuesta del wall. Otro caso real (Greeley BLDG): las elevaciones exteriores A3.0/A3.1 venían espejadas E-O respecto de la planta.
+**El mismo cuidado con las plantas ampliadas: una puede venir girada 180° o espejada respecto del floor plan.** Antes de asignarle nada, verifícala con TRES rasgos independientes del propio dibujo (de qué lado están las doors, dónde caen los muebles fijos, dónde los aparatos), nunca con el rótulo. Caso real: la planta ampliada de baños venía girada 180°, y sin detectarlo los accesorios se habrían asignado a la face opuesta del wall. Otro caso real: un par de elevaciones exteriores venía espejado E-O respecto de la planta.
 
 **Y los rótulos NORTH/SOUTH de las elevaciones interiores pueden venir transpuestos respecto del rombo de planta.** Verificado en tres cuartos de un mismo set: el número del vértice del rombo coincidía con el Finish Plan y el título de la sheet salía invertido en N/S (en E/W sí casaban). **Manda el rombo cruzado con el Finish Plan, no el título**, y se declara como RFI porque otros trades leen las mismas hojas.
 
@@ -253,7 +620,7 @@ Orden para dimensions de perímetro: 1) Floor Plan (CL/CL), 2) Demolition Plan, 
 
 **Datos que suelen estar fuera de arquitectura:** si el Metal Stud Schedule, el Brace Schedule, el Header Schedule o el Fastener Schedule no aparecen en Partition Types, búscalos en las hojas ESTRUCTURALES (serie S, "Cold Formed Steel Framing Details"). La height de deck (B.O.D.) suele estar en el Roof Framing Plan estructural, acotada por zona.
 
-**Y un material puede no estar en ninguna especificación: búscalo por lo que ES, no por su nombre comercial.** Caso real: la palabra "KEVLAR" aparecía UNA sola vez en 95 hojas (el legend del floor plan) y no había sección de especificación; el producto real estaba escrito dentro de un detalle como `3/8" UL752 LISTED LEVEL-2 FIBERGLASS (BULLET RESISTANT, NIJ TYPE II)`. Método: volcar el set entero con `pdftotext` a un .txt y buscar por sinónimos del material (para ése: BULLET, BALLISTIC, UL752, NIJ, LEVEL-2, ARMOR, FIBERGLASS, SECURITY) antes de declarar que el set no lo especifica.
+**Y un material puede no estar en ninguna especificación: búscalo por lo que ES, no por su nombre comercial.** Caso real: la palabra "KEVLAR" aparecía UNA sola vez en todo el set (el legend del floor plan) y no había sección de especificación; el producto real estaba escrito dentro de un detalle como `3/8" UL752 LISTED LEVEL-2 FIBERGLASS (BULLET RESISTANT, NIJ TYPE II)`. Método: volcar el set entero con `pdftotext` a un .txt y buscar por sinónimos del material (para ése: BULLET, BALLISTIC, UL752, NIJ, LEVEL-2, ARMOR, FIBERGLASS, SECURITY) antes de declarar que el set no lo especifica.
 
 Valida cruzado: misma longitud en 2 fuentes independientes = [CONFIRMADO] alto. Los segmentos deben sumar el total declarado, salvo que los ticks sean dobles (ver arriba).
 
@@ -266,7 +633,7 @@ El board para donde su detalle diga, **medido contra el ceiling del cuarto QUE E
 Para saber qué ceiling tiene cada cuarto hay que leer el RCP **cuarto por cuarto**, no de memoria ni por la nota general:
 - La nota general ("all ceiling heights shall be 8'-6\" unless noted otherwise") solo rige donde no hay tag.
 - Un cuarto **sin tag de ceiling** no es "el default": revisa sus key notes. "OPEN TO STRUCTURE ABOVE" es un key note, y se confirma además porque dentro del cuarto **no hay grid de ceiling dibujado**.
-- Sigue el leader de cada tag de ceiling: un tag `GB` junto a un cuarto puede pertenecer al **soffit**, no al cuarto, y el cuarto tener otro ceiling distinto. Y el tag de un cuarto puede estar FUERA del edificio con leader (en Greeley el office traía su tag [valor retirado E24] debajo de la planta).
+- Sigue el leader de cada tag de ceiling: un tag `GB` junto a un cuarto puede pertenecer al **soffit**, no al cuarto, y el cuarto tener otro ceiling distinto. Y el tag de un cuarto puede estar FUERA del edificio con leader (en un proyecto anterior el office traía su tag debajo de la planta).
 
 ## HEIGHT DE DECK — ZONAS Y PENDIENTE
 
@@ -277,8 +644,8 @@ El B.O.D. casi nunca es uno solo para todo el edificio. En el Roof Framing Plan:
 - Comprueba la pendiente: (diferencia de elevación ÷ distancia) debería dar una pendiente de techo estándar (p.ej. 1/4" por pie). Si no da, leíste mal una de las dos.
 - **Para cotizar, usa el extremo ALTO de la zona en pendiente**, no un valor interpolado por wall: los studs se cortan a la condición más alta de la zona y una height que se desliza no es construible. Declara el criterio y el delta de usar el extremo bajo (o la height real de cada wall).
 - **Excepción declarada:** la face interior de un wall EXTERIOR que corre a lo largo de un eje (alero alto o bajo) va a la height real de ese eje, porque ahí la height no se desliza.
-- **Relee esta sección ANTES de programar el script de alturas.** En Greeley BLDG se interpoló wall por wall y hubo que rehacer el cálculo.
-- **Arma el B.O. deck layer por layer desde los detalles estructurales**, no de memoria: bearing + asiento del joist + nailer (si lo hay) + sub-purlin. En Greeley el detalle 1/S3.21 traía un 2x6 plano como nailer sobre el joist: el deck quedó a bearing + 9.5", no + 8".
+- **Relee esta sección ANTES de programar el script de alturas.** En un proyecto anterior se interpoló wall por wall y hubo que rehacer el cálculo.
+- **Arma el B.O. deck layer por layer desde los detalles estructurales**, no de memoria: bearing + asiento del joist + nailer (si lo hay) + sub-purlin. Ej.: un detalle de tipo 1/S3.21 traía un 2x6 plano como nailer sobre el joist, y el deck quedaba más alto que bearing + asiento.
 - Un wall que cae justo sobre la línea de zona se declara PENDIENTE, no se asigna a ojo.
 - **Corroboración barata del B.O.D.:** las Wall Sections suelen rotular `T/ STEEL` con la misma elevación; si dos secciones a lados distintos de un eje dudoso dan el mismo número, esa zona no cambia ahí.
 
@@ -307,17 +674,17 @@ Además del back-check del usuario (que va SIEMPRE en un chat nuevo, a ciegas), 
 - **Un refutador por verificador**: toma cada diferencia y trata de demostrar que el take-off estaba bien. Solo se corrige lo que sobrevive.
 - **Lo que devuelve un agente NO es una cantidad**: es evidencia citada que el hilo principal recomprueba por geometría antes de aceptarla.
 - Lo que queda sin resolver pasa a RFI con delta y a "Revisar en la mañana". Los errores encontrados se guardan en memoria y en este skill el mismo turno.
-- Caso real: en un solo edificio la verificación cambió el deck, los lengths E/O, dos aberturas exteriores, el ceiling de sales, el blocking de baños, y encontró 4 walls que faltaban y 6 line items de alcance nuevas.
+- Caso real: en un solo edificio la verificación cambió el deck, los lengths E/O, dos aberturas exteriores, el ceiling de sales, el blocking de baños, y encontró walls que faltaban y line items de alcance nuevas.
 
 ## LOS MARKUPS AJENOS NO SON FUENTE
 
-Un bid set puede traer **anotaciones de Bluebeam de otro estimador dibujadas encima del plano** — se ven como líneas de colores pegadas a los walls y es facilísimo leerlas como si fueran elementos constructivos. En BofA Broomfield el floor plan traía 117 anotaciones, 57 de un estimador.
+Un bid set puede traer **anotaciones de Bluebeam de otro estimador dibujadas encima del plano** — se ven como líneas de colores pegadas a los walls y es facilísimo leerlas como si fueran elementos constructivos. En un proyecto anterior el floor plan traía decenas de anotaciones de otro estimador.
 
 **PRIMER PASO DE TODO PROYECTO: generar una copia del set SIN `/Annots` con pikepdf y renderizar SIEMPRE desde esa copia.** `pdftoppm` RENDERIZA las anotaciones, así que un recorte "crudo" del original no es crudo. Filtrar `page.annots` después de mirar la imagen llega tarde: para entonces ya se interpretó.
 
 La geometría de `pdfplumber` (`page.lines`) SÍ está limpia también en el original — las anotaciones no entran en el content stream —, así que el riesgo es exclusivamente de lectura VISUAL.
 
-Y no se usan como fuente de medida **ni siquiera de cruce**. Orden del usuario: está entrenando el método para dejar de depender de Bluebeam. Caso real de por qué importa: un markup ajeno de 7.27 ft sobre un wall que medía 3.71 ft hizo perseguir durante varios pasos una diferencia que no existía — su trazo abarcaba el wall más la door más el arranque del tramo siguiente.
+Y no se usan como fuente de medida **ni siquiera de cruce**. Orden del usuario: está entrenando el método para dejar de depender de Bluebeam. Caso real de por qué importa: un markup ajeno de casi el doble del largo real del wall hizo perseguir durante varios pasos una diferencia que no existía — su trazo abarcaba el wall más la door más el arranque del tramo siguiente.
 
 ## LAS TRES AUTOVERIFICACIONES DE UNA MEDIDA
 
@@ -329,12 +696,12 @@ Una medida es autosuficiente cuando se verifica sola, sin take-off ajeno:
 
 ## GRANULARIDAD Y MARCADO
 
-- La unidad de trabajo es el **TIPO de wall completo**, con todas sus instancias juntas — si un tipo tiene 16 walls, se hacen los 16. Nunca todos los tipos de golpe, nunca un wall suelto. Ceilings: por CUARTO. Soffits: uno por uno.
+- La unidad de trabajo es el **TIPO de wall completo**, con todas sus instancias juntas — si un tipo tiene N walls, se hacen los N. Nunca todos los tipos de golpe, nunca un wall suelto. Ceilings: por CUARTO. Soffits: uno por uno.
 - El marcado va **siempre sobre la hoja completa** (el usuario necesita ver el plano entero para detectar lo que se escapó), con **un solo tipo marcado a la vez**, rotulado con el número oficial de wall. Marcas grandes, legibles a escala de hoja, con leyenda. Los recortes de detalle van ADEMÁS, nunca en vez de.
 - **ESTILO DE MARCADO APROBADO POR EL USUARIO (26-sep-2026), se usa igual en cada proyecto:** hoja COMPLETA a 300 dpi desde la copia sin markups · **un solo tipo por imagen** · **rectángulo sobre la extensión real** de cada wall · etiqueta en caja de color con el **número oficial + el LF**, unida al wall por una línea guía corta · **azul para los walls con tag y rojo para los que no lo tienen** · auto-test de tinta en las 7 sondas antes de escribir el archivo. Palabras suyas: "la manera como estás marcando las walls está perfecta y me gusta, así tienes que hacerlo en cada proyecto".
 - **Un wall es un TRAMO, no un punto: márcalo con un rectángulo sobre su extensión real**, no con un círculo — un círculo no dice dónde empieza ni dónde acaba el wall, que es justo lo que el usuario necesita revisar. Las aberturas se marcan dentro, en otro color. Si el wall tiene una door, la marca se parte en piezas sólidas a cada lado del opening (el auto-test de tinta aborta si el punto de prueba cae en el opening); la cantidad sigue siendo la del wall completo.
 - **El paquete de imágenes de cada tipo, antes de cuantificar y sin que lo pida:** (1) hoja completa marcada con TODAS las ubicaciones y sus números oficiales; (2) recortes de zona con las mismas marcas, uno por agrupación geográfica; (3) recorte cerrado y LIMPIO (sin marcar, alta resolución) de CADA ubicación; (4) el DETALLE del tipo en Partition Types, leído completo y medido por geometría; (5) todo renderizado desde la copia sin `/Annots`, y cada imagen reabierta antes de entregarla. Después del paquete: lista numerada + PAUSA.
-- **LA TABLA DE BANDAS DEL DIBUJO SALE DE LOS CIERRES SELLADOS, NUNCA DE LA MEMORIA.** Las coordenadas de cada wall marcado se leen del JSON sellado de ese wall (el campo con la derivación del length, que lleva las faces y el run). Re-teclearlas a mano metió **6 errores de dibujo en un solo proyecto**, con las cantidades intactas. El peor: un wall al que se le puso la banda de OTRO wall porque los dos medían casi lo mismo (3.71 vs 3.69 ft) — la trampa de "que el total coincida numéricamente no prueba que sea ese wall". **Nunca asignes una banda por coincidencia de LF**: siempre por tag+leader o por la geometría que el cierre dejó escrita.
+- **LA TABLA DE BANDAS DEL DIBUJO SALE DE LOS CIERRES SELLADOS, NUNCA DE LA MEMORIA.** Las coordenadas de cada wall marcado se leen del JSON sellado de ese wall (el campo con la derivación del length, que lleva las faces y el run). Re-teclearlas a mano metió **varios errores de dibujo en un solo proyecto**, con las cantidades intactas. El peor: un wall al que se le puso la banda de OTRO wall porque los dos medían casi lo mismo (diferencia de centésimas de pie) — la trampa de "que el total coincida numéricamente no prueba que sea ese wall". **Nunca asignes una banda por coincidencia de LF**: siempre por tag+leader o por la geometría que el cierre dejó escrita.
 - **VERIFICACIÓN MECÁNICA DE TODAS LAS BANDAS ANTES DE ABRIR UNA SOLA IMAGEN** (`verif_bandas.py`, ver su contrato). Revisar 40-60 bandas a ojo, una por una, es lo que vuelve lento el trabajo y además no atrapa el error. La máquina las chequea todas en segundos contra la geometría vectorial y solo se abre imagen donde ella marca algo. **La verificación visual sigue siendo obligatoria**, pero dirigida: primero la máquina, después los ojos.
 - **Hay clases de elemento que NO son un tramo recto, y marcarlas como banda es marcarlas mal:**
   - **Column enclosure / pilastra / chase (tag dentro de una caja cerrada):** se marca como **CAJA**, y el LF rotulado es el **PERÍMETRO FURRADO** (solo las faces expuestas), no el length de una face. El sondeo de tinta va sobre el PERÍMETRO: por dentro la caja está hueca y sondear el centro abortaría un marcado correcto. La caja se localiza por coincidencia EXACTA de dimensión (width × alto en pulgadas del cierre → pt) contra los pares de líneas de lineweight de wall, y se confirma porque la face furrada del cierre queda a un thickness de furring hacia dentro de la arista.
@@ -402,7 +769,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - Studs adicionales (terminación, intersección, esquina, jambs) se CUENTAN, nunca solo se advierten. Recalcular clips con el total.
 - **Jambs:** el número de jamb studs por opening lo decide el Header Schedule DEL PROYECTO, no un supuesto. Si el detalle pide jamb doble solo por encima de cierto width, cuenta sencillo abajo de ese width y declara el delta de la alternativa. Cuenta también los cripple studs sobre el header y los LF de head track del calibre que pida el schedule.
 - **Un opening puede morir ENTRE DOS TIPOS de wall**, cuando el tipo cambia justo en la door: una jamb queda en un tipo y la otra en el otro. Ese opening no está "dentro" de ningún wall y se cae entre pasadas sin que nadie lo note. Se carga COMPLETO (header + los 4 jamb studs) a UNO de los dos walls, se escribe en el cierre a cuál y por qué, y la pasada del otro tipo lo EXCLUYE citando ese cierre. El length del wall no cambia: sigue siendo de extremo a extremo de su propio tramo.
-- **Aberturas de walls exteriores: salen de los STOREFRONT FRAMES, no del door schedule.** Cada frame trae su R.O. y su sill; una door dentro de un frame no es la abertura, el frame lo es. Un frame con sill alto deja un **knee wall** abajo que se SUMA de vuelta — con su board Y su metal, como cualquier sill (ver la SUPER REGLA). Caso real: se descontó solo una puerta de 24 SF cuando su frame medía 196 SF, y bajo otro frame había un knee wall de 3'-2". El board que "wraps at jambs" alrededor del storefront es line item propia (returns + corner bead).
+- **Aberturas de walls exteriores: salen de los STOREFRONT FRAMES, no del door schedule.** Cada frame trae su R.O. y su sill; una door dentro de un frame no es la abertura, el frame lo es. Un frame con sill alto deja un **knee wall** abajo que se SUMA de vuelta — con su board Y su metal, como cualquier sill (ver la SUPER REGLA). Caso real: se descontó solo el área de la puerta cuando el frame completo era varias veces mayor, y bajo otro frame había un knee wall sin contar. El board que "wraps at jambs" alrededor del storefront es line item propia (returns + corner bead).
 - Jerarquía de medición: dimension impresa > geometría vectorial del PDF > suma de cadena > píxeles (píxeles solo calibrados y validados, nunca sustituyen).
 - Ningún número "de paso": cada dimension escrita responde ¿a qué línea pertenece? ¿qué mide? ¿está completa en la imagen?
 - Height por layer: confirma por detalle hasta dónde sube cada layer. Sustrato especial y acabado solo hasta finish height.
@@ -426,9 +793,9 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - Nunca empezar otra zona sin terminar la actual (todo cuantificado o EXCLUDED, registro actualizado).
 - Al preguntar "de dónde sacaste X": citar hoja/detalle exacto de cada dato por separado.
 - **El wall termina en su END CAP, no en la primera jamb.** Recorre los segmentos dibujados de las dos faces y une un hueco SOLO cuando hay un end cap (línea perpendicular de lineweight de wall que abarca exactamente el thickness) a AMBOS lados: eso es una door opening y el wall sigue. Si falta el end cap de un lado, ahí termina. Una tolerancia ciega de hueco NO sirve: con poca tolerancia el wall sale corto y con mucha se dispara, porque une walls distintos que comparten una face.
-- **Una "banda" de wall NO es un par de coordenadas válido para toda la hoja.** Una misma alineación puede llevar tramos de TIPOS DISTINTOS y espesores distintos: en un caso real la alineación `x = 1123.08 / 1133.88` llevaba un B2 de 7.20", un G1 de 8.48" (cuya otra face estaba en `x = 1121.16`) y un officefront de marco de 3.1 pt — unirlo todo inventó walls de 13 y 15 ft que no existen. La banda se re-deriva POR TAG, y solo cuenta el tramo donde EXISTEN LAS DOS FACES con lineweight de wall **y** la separación es igual al WALL THICKNESS del schedule de ESE tipo (±0.35"). Control barato: si las dos faces tienen coberturas muy distintas a lo largo del tramo, la banda está mezclando tipos.
+- **Una "banda" de wall NO es un par de coordenadas válido para toda la hoja.** Una misma alineación puede llevar tramos de TIPOS DISTINTOS y espesores distintos: en un caso real una sola alineación llevaba dos types de espesor distinto y un officefront de marco delgado — unirlo todo inventó walls que no existen. La banda se re-deriva POR TAG, y solo cuenta el tramo donde EXISTEN LAS DOS FACES con lineweight de wall **y** la separación es igual al WALL THICKNESS del schedule de ESE tipo (±0.35"). Control barato: si las dos faces tienen coberturas muy distintas a lo largo del tramo, la banda está mezclando tipos.
 - **Un wall run puede llevar VARIOS TAGS en serie.** Al run completo hay que restarle las porciones que gobiernan los otros tags, usando sus dimensions impresas cuando existan. Nunca asignes el run completo a un solo tag. Si no se distingue dónde termina uno y empieza el otro, decláralo y pregunta.
-- **Declara si el LF es face-a-face o centro-a-centro.** Una polilínea de Bluebeam se dibuja hasta el EJE del wall perpendicular; la banda dibujada se mide face to face. Para framing el centro-a-centro es el correcto — el track corre por debajo del wall que cruza — así que suma medio thickness del wall perpendicular en cada extremo que muera contra otro wall. La diferencia es sistemática, de 0.2 a 0.8 ft por wall.
+- **Declara si el LF es face-a-face o centro-a-centro.** Una polilínea de Bluebeam se dibuja hasta el EJE del wall perpendicular; la banda dibujada se mide face to face. Para framing el centro-a-centro es el correcto — el track corre por debajo del wall que cruza — así que suma medio thickness del wall perpendicular en cada extremo que muera contra otro wall. La diferencia es sistemática: medio thickness del wall perpendicular por cada extremo.
 - **El registro entre dos hojas se vota con el FONDO ARQUITECTÓNICO, nunca con las burbujas de eje.** El círculo de la burbuja no siempre cae igual respecto de la línea de eje: en un set real las hojas de plomería tenían 3.6 pt de corrimiento (2.4" a escala de planta), suficiente para inventar un cruce de MEP donde solo estaba la línea del wall exterior. Se votan los SEGMENTOS LENGTHS DE WALL (lw ≥ 1.0, ≥ 50 pt) exigiendo ≥ 25 coincidentes en cada dirección. Si una hoja no llega a ese mínimo (las de piping y los RCP a menudo no), esa hoja NO se usa para cruce geométrico y se revisa a ojo, declarándolo.
 - **Un cruce de MEP real SOBRESALE por fuera de las dos faces.** Una línea que TERMINA en la face del wall es fondo arquitectónico, no una penetración: se exige ≥ 3 pt de sobresalir por cada lado y se filtra por lineweight (un hatch de 0.24 no es un ducto). Los ductos vienen en PAREJAS de líneas paralelas y la separación entre la pareja ES el width del ducto. **Ojo con el ducto dibujado partido:** si el CAD corta el ducto en la face y mete un conector flexible, el filtro de "un solo segmento que sobresale" no lo ve — hay que detectar también el corredor, o sea la línea que llega al wall por los DOS lados.
 - **Blocking de millwork, por tipo de mueble:** base cabinet o counter contra wall = **1 run horizontal** al rail superior, LF = length del run. Wall/upper cabinet = **2 runs** (rail alto y rail bajo). Standards de shelf ajustable = **vertical por standard**, LF = height × nº de standards. Counter que muere de canto contra el wall = **1 cleat vertical** de la height del counter. Wall stop de door = **2'-0" por tope** cuando el plano no lo ubica (length que garantiza agarre en dos studs a 16" O.C.).
@@ -437,8 +804,8 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - **La numeración de walls no se vuelve a derivar nunca** (ver arriba). Un segundo sistema de numeración destruye la trazabilidad de todo lo ya revisado.
 - **Soffits siempre separados de ceilings y de walls**, y ninguno se cuantifica sin su detalle abierto y citado.
 - Cuarto con varias alturas de cielo bajo un mismo room tag: no siempre hace falta mapear el límite exacto en planta — confirma con el usuario si basta SF total + alturas de drop + Div 05 por zona.
-- **Una dimension con `EQ` a los lados es un TRAMO ACOTADO, no el length del wall.** Caso real: el wall vertical de una oficina medía [valor retirado E24] (dimension impresa y geometría coincidiendo) y la dimension de 8'-0" con EQ arriba y abajo era el **office front**, con 1'-3" de wall sólido a cada lado. Como el officefront es Div 08, cuantificar el wall completo es cotizar board donde va vidrio. En todo wall con officefront o storefront, separa el tramo ajeno del wall sólido antes de cuantificar board — **y después aplica la SUPER REGLA al tramo ajeno, porque encima de él casi siempre hay bulkhead nuestro**.
-- **El B.O.D. varía por zona y el tag de ceiling no define la height.** En el mismo proyecto el ACT-4 estaba a 9'-0" en un cuarto y a [valor retirado E24] en otro: se lee la dimension impresa de cada cuarto, una por una.
+- **Una dimension con `EQ` a los lados es un TRAMO ACOTADO, no el length del wall.** Caso real: el wall vertical de una oficina tenía su dimension impresa (coincidiendo con la geometría) y la dimension con EQ arriba y abajo era el **office front**, con un tramo de wall sólido a cada lado. Como el officefront es Div 08, cuantificar el wall completo es cotizar board donde va vidrio. En todo wall con officefront o storefront, separa el tramo ajeno del wall sólido antes de cuantificar board — **y después aplica la SUPER REGLA al tramo ajeno, porque encima de él casi siempre hay bulkhead nuestro**.
+- **El B.O.D. varía por zona y el tag de ceiling no define la height.** En un mismo proyecto un mismo tag de ACT estaba a una altura en un cuarto y a otra en otro: se lee la dimension impresa de cada cuarto, una por una.
 - **Una pendiente de techo hecha con TAPERED INSULATION no mueve el B.O.D.** Si el Roof Plan dice `TAPERED INSULATION ON METAL DECK`, el deck está nivelado y la caída va por encima: el B.O.D. es constante en la zona y el stud no varía. La flecha `SLOPE` marca el drenaje, no una inclinación estructural. Compruébalo antes de repartir alturas — pero esa nota tampoco anula dos B.O.D. distintos rotulados en dos líneas de viga: cuenta todos los marcadores de la hoja antes de decidir.
 - **Antes de asignar un B.O.D. por posición, verifica que las dos hojas no estén espejadas.** Compara los ejes de grid de la estructural contra los de la arquitectónica: si el orden coincide y la diferencia es un offset constante, no hay espejo. Una nota como `BUILDING FOOTPRINT MIRRORED NORTH-SOUTH` suele referirse al prototipo, no a esa sheet — pero se verifica, no se supone.
 - **Un wall que cruza la línea (HI)/(LOW) lleva DOS alturas de stud**, y se parte por esa línea. Los ticks de su dimension impresa dicen dónde arranca y termina el tramo de cada tag: no se deduce desde el extremo del run.
@@ -449,7 +816,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - **Lo que hay ARRIBA y lo que hay DEBAJO de una abertura es material nuestro hasta que se demuestre lo contrario** (ver la SUPER REGLA). Las dos restas —`ceiling − header` arriba y `sill − piso` abajo— se hacen en TODA abertura, por face, y cada resultado va en renglón propio. Del board solo se deduce la abertura NETA (`header − sill`), nunca el rectángulo de piso a ceiling.
 - **La banda de un wall se fija con la pareja de faces de lineweight ALTO (≥1.1), nunca con la primera pareja que cuadre de thickness.** Un detector que acepta lw ≥ 0.5 para no perder tramos puede devolver una banda formada por las líneas INTERIORES del wall: mismo thickness, mismo LF, pero desplazada ~1 pt y anclada donde no es. Se comprueba imprimiendo el lineweight de las dos faces elegidas.
 - **Todo cache de render lleva la IDENTIDAD DE LA FUENTE en su clave.** Un cache con clave `pg<pagina>_<dpi>` reusa el PNG del PDF CON markups cuando ya se pidió la copia limpia, y anula en silencio la regla de los markups. La clave lleva `sha256(path + mtime + tamaño)`. Regla general: una regla que depende de "usar el archivo correcto" no está cumplida hasta que el cache también distinga el archivo.
-- **Un md5 distinto entre dos copias limpias NO significa contenido distinto**: pikepdf y las librerías de PDF no escriben bytes deterministas. Antes de dar la alarma se compara el CONTENIDO — hash de `page.lines` y de `page.rects` de la hoja de trabajo, y conteo de `annots`. En un caso real las tres copias dieron 79,052 líneas y 1,903 rects con el MISMO hash, y solo el original traía anotaciones; eso además vuelve a probar que la geometría vectorial del original está limpia y que el riesgo de los markups es exclusivamente VISUAL.
+- **Un md5 distinto entre dos copias limpias NO significa contenido distinto**: pikepdf y las librerías de PDF no escriben bytes deterministas. Antes de dar la alarma se compara el CONTENIDO — hash de `page.lines` y de `page.rects` de la hoja de trabajo, y conteo de `annots`. En un caso real las tres copias dieron el MISMO hash de líneas y rects, y solo el original traía anotaciones; eso además vuelve a probar que la geometría vectorial del original está limpia y que el riesgo de los markups es exclusivamente VISUAL.
 - **Verificación con agentes: se les pide REFUTAR, no confirmar.** Si el usuario autoriza subagentes o workflows, cada agente recibe por escrito el contexto completo (ruta del PDF limpio, mapa de hojas, escala, la tabla de elementos con coordenadas y las reglas de estado) y la consigna "por defecto asume que esto está mal hasta que la evidencia te obligue a aceptarlo". Un "verifica esto" produce asentimiento; un "refuta esto" produce hallazgos. **Lo que entrega un agente NO es una cantidad**: es evidencia citada que el hilo principal recomprueba por geometría antes de aceptarla — en un caso real, de dos alarmas de agentes una era una corrección real y la otra era falsa. Y al final va un **crítico de completitud** que no repite el trabajo sino que busca el hueco: qué hoja no abrió nadie, qué afirmación quedó sin atacar, dónde se contradicen dos agentes.
 - **Tile: cement board por criterio de oficio aunque el plano diga MR** — se cotiza cement board y se declara el alterno (MR según planos) con su delta en RFI/Clarifications.
 
@@ -469,8 +836,8 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 12. Usar una dimension sin saber qué mide → emparejarla con su propia línea de dimension (length ÷ escala = valor, ±1").
 13. Bottom y top track en una sola columna → separados en TODAS las tablas, más la columna "condición del top track".
 14. Slip track sin DESIGNACIÓN → comprobar por separado si el detalle lo pide y si algún schedule le da perfil y calibre.
-15. **Medir el tramo entre cruces en vez del wall** (55% corto contra un manual) → END CAP a ambos lados, no tolerancia ciega.
-16. Face-a-face vs centro-a-centro → diferencia sistemática de 0.2 a 0.8 ft; declarar siempre cuál se usa.
+15. **Medir el tramo entre cruces en vez del wall** (muy corto contra un manual) → END CAP a ambos lados, no tolerancia ciega.
+16. Face-a-face vs centro-a-centro → diferencia sistemática de medio thickness por extremo; declarar siempre cuál se usa.
 17. Un wall run con varios tags en serie → restarle las porciones de los otros tags con sus dimensions impresas.
 18. **Dos numeraciones de wall en el mismo proyecto** → una sola, fijada en el barrido; si ya hay dos, tabla de equivalencia.
 19. Contradecir al usuario sobre tu propia hoja sin reabrirla → reabrir ESE archivo entregado y recortar la zona que él señala.
@@ -500,22 +867,22 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 43. **Walls "above" sin cuantificar el soporte** → un wall colgado necesita su soporte CFS: hangers a cada cuerda de joist que cruza + struts.
 44. **Interpolar la height wall por wall en un techo en pendiente** → la regla ya existía (extremo ALTO de la zona) y se programó el cálculo sin releerla.
 45. **B.O. deck sin el nailer** → armarlo layer por layer desde el detalle sub-joist-to-joist; un 2x6 plano olvidado son +1.5" en todo lo que va al deck.
-46. **Aberturas exteriores desde el door schedule** → salen de los storefront frames (R.O. + sill); se dejó de descontar 172 SF de un frame y se omitió un knee wall.
-47. **Length exterior = dimension de grid − thickness supuesto** → medir las faces interiores vectoriales (49.81 ft, no 49.42).
+46. **Aberturas exteriores desde el door schedule** → salen de los storefront frames (R.O. + sill); se dejó de descontar casi todo un frame y se omitió un knee wall.
+47. **Length exterior = dimension de grid − thickness supuesto** → medir las faces interiores vectoriales.
 48. **Wall a trazos medido hasta el final de un trazo, y quiebre del patrón ignorado** → medir la línea completa; el quiebre del dash marca cambio de tag.
 49. **Profundidad de soffit tomada de una dimension del RCP que era de la fila de ACT** → emparejar cada dimension con sus ticks; el detalle del soffit manda.
-50. **Cantidad sin desglose** (blocking de baños 93.5 LF escrito a mano) → toda cantidad con su lista pieza por pieza; recontado dio 66 LF.
+50. **Cantidad sin desglose** (blocking de baños escrito a mano) → toda cantidad con su lista pieza por pieza; recontado salió muy distinto.
 51. **Soffit sin todas sus faces y backer doble contado** → cada soffit: fondo + face vertical + retorno + tapas; un backer que el detalle pone en la face del wall ya está en ese wall.
 52. **Walls pequeños o sin tag que se escapan** (medias walls y furring sin tag) → el barrido por grafía (#30) incluye rectángulos cerrados sin hatch y furring pegado a walls exteriores.
 53. **Alcance fuera de las partitions que no se barrió** (shelf de water heater en CFS, returns de storefront, light wells, access panels, cut-outs de chases) → el crítico de completitud barre TODAS las hojas antes de entregar.
-54. **Contar solo el wall sólido de una alineación con office front y dejar fuera el BULKHEAD de encima** (el error que motivó la SUPER REGLA) → el office front moría a 8'-0" y el ceiling estaba a 9'-0": 1'-0" de wall continuo sobre los [valor retirado E24] de cada abertura, en seis oficinas, sin contar. Los detalles "OFFICE BULKHEAD @ DOOR" y "@ GLASS PANEL" lo traían entero: `2 LAYERS 5/8" GYPSUM WALL BOARD TO EXTEND TO UNDERSIDE OF DECK`, doble row de stud con isolator, `CONT. SLIP TRACK`, `CONT. BOX BEAM`, `3/4" FRT PLYWOOD BLOCKING`, `CORNER BEAD` y `SHADOW MOLDING`. Eran 1,354 SF de board más su metal. **Y el error tiene su mitad simétrica abajo:** el sill bajo una window o un pass-through es otra banda con su propio board y su propio metal (cripple studs + sill track), y lo único que se deduce del wall es la ABERTURA NETA entre header y sill, no el rectángulo de piso a ceiling.
+54. **Contar solo el wall sólido de una alineación con office front y dejar fuera el BULKHEAD de encima** (el error que motivó la SUPER REGLA) → el office front moría bajo el ceiling: una banda de wall continuo sobre cada abertura, en todas las oficinas, sin contar. Los detalles "OFFICE BULKHEAD @ DOOR" y "@ GLASS PANEL" lo traían entero: `2 LAYERS 5/8" GYPSUM WALL BOARD TO EXTEND TO UNDERSIDE OF DECK`, doble row de stud con isolator, `CONT. SLIP TRACK`, `CONT. BOX BEAM`, `3/4" FRT PLYWOOD BLOCKING`, `CORNER BEAD` y `SHADOW MOLDING`. Era mucho board más su metal. **Y el error tiene su mitad simétrica abajo:** el sill bajo una window o un pass-through es otra banda con su propio board y su propio metal (cripple studs + sill track), y lo único que se deduce del wall es la ABERTURA NETA entre header y sill, no el rectángulo de piso a ceiling.
 55. **Fijar la banda con la pareja de faces equivocada** → el detector acepta lw ≥ 0.5 para no perder tramos y puede devolver las líneas INTERIORES del wall: mismo thickness y mismo LF, pero ~1 pt desplazada.
 56. **El cache de render anula la regla de los markups en silencio** → la clave del cache lleva la identidad del archivo fuente (`sha256(path+mtime+tamaño)`), no solo página y dpi.
 57. **Dar la alarma por un md5 distinto entre dos copias limpias** → comparar CONTENIDO (hash de `page.lines` y `page.rects`, conteo de `annots`), no bytes: las librerías de PDF no escriben salida determinista.
 58. **Pedirle a un agente que "verifique"** → se le pide REFUTAR, con contexto completo por escrito, y su salida es evidencia citada que el hilo principal recomprueba, nunca una cantidad.
 
 59. **Re-teclear a mano las coordenadas del dibujo en vez de leerlas del cierre sellado** → 6 bandas mal en un proyecto con las cantidades intactas; la tabla de marcado se deriva de los JSON sellados y se chequea con `verif_bandas.py`.
-60. **Asignar una banda por coincidencia de LF** → un wall quedó dibujado encima de otro que medía casi lo mismo (3.71 vs 3.69 ft). La banda se asigna por tag+leader o por la geometría escrita en el cierre, nunca por el número.
+60. **Asignar una banda por coincidencia de LF** → un wall quedó dibujado encima de otro que medía casi lo mismo (diferencia de centésimas de pie). La banda se asigna por tag+leader o por la geometría escrita en el cierre, nunca por el número.
 61. **Marcar una column enclosure como si fuera un tramo de wall** → se marca como CAJA, con el LF = perímetro furrado, y el sondeo de tinta sobre el perímetro (el centro está hueco).
 62. **Marcar un bulkhead con las faces de los walls vecinos** → sus extremos son las tapas de jamb; usar las faces mete de más el width de la jamb del officefront ([valor retirado E24] en vez de [valor retirado E24]).
 63. **Descartar una banda buena porque una face no llega al lineweight de wall** → hay faces dibujadas como triple línea fina; reintentar a lw ≥ 0.55 y confirmar con imagen.
@@ -524,17 +891,15 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 
 ## BARRIDO COMPLETO POR TAG + PAUSA OBLIGATORIA
 
-Un mismo tag puede aparecer en varios walls, en zonas no contiguas del plano. Antes de dar por cuantificado un tipo, recorre TODO el floor plan localizando CADA repetición de ese tag y haz lista numerada de ubicaciones. Cerrar un tag tras cuantificar solo su primera aparición deja walls enteros sin cuantificar en silencio.
-
-Verifica además que no exista ningún tag con un nombre que no tengas contemplado: revisa todas las palabras del mismo tamaño de texto dentro del área del plano, no solo los tags que ya conoces. Abre imagen de cada candidato dudoso — las burbujas de callout de elevación pueden compartir height de texto con los tags.
-
-**Un tag de partition es una palabra dentro de una CAJA REAL** — un rectángulo verdadero de 10–26 pt de lado, lineweight ≤ 0.7, con sus dos verticales de igual extensión y sus dos horizontales casando con sus x. Exigir la caja descarta de una vez las burbujas de eje de grid, que comparten el texto (una "B" o una "G" sueltas) pero no la caja. El censo de tags con caja real tiene que reproducir la numeración oficial del proyecto: si no cuadra, falta un tag o sobra un falso positivo. **Si los tags del set son rombos o hexágonos** (no caja), el censo se hace por layer de texto dentro de la hoja de planta, filtrando por el patrón de los tipos del legend (p.ej. `A.3`, `G.6`), y se verifica cada uno en imagen. **Cada tag del censo tiene que terminar en un wall cuantificado.**
-
-**Todo candidato SIN LEADER se abre en IMAGEN antes de descartarlo:** puede ser una burbuja de eje (se descarta) o un tag legítimo cuyo leader el detector no encontró. Toda discrepancia contra la numeración oficial se resuelve mirando, nunca aflojando la tolerancia.
+**v69:** el censo de tags (cada repetición, tags no contemplados, caja real / rombo / hexágono, candidatos sin
+leader, falsos positivos de grid bubbles) lo hace `inventario.py` en la Etapa 1, con lista numerada, recorte
+circulado verificado y ambiguos NO contados con su motivo. A mano, solo en hojas NO INVENTARIABLES, con el mismo
+criterio: un tag es una palabra dentro de su símbolo real, todo candidato dudoso se abre en imagen, y **cada tag
+del censo tiene que terminar en un wall cuantificado** (Etapa 3 lo alerta si no).
 
 **Y el tipo POR DEFECTO del set no se cuantifica por tags.** Si el floor plan trae una nota tipo `ALL PARTITIONS TO BE TYPE 'X', UNLESS OTHERWISE NOTED`, todo wall sin tag es de ese tipo y hay que encontrarlo por barrido geométrico. El método que funciona: resolver la banda de CADA tag conocido → marcarlas TODAS en una hoja completa → mirar buscando wall SIN marca → medir solo esas zonas. Es marcar la hoja al revés: para ver el hueco, no el wall. Antes de cargarlo al tipo por defecto, **léele el perfil de lineweight**: 4+ líneas finas (lw 0.48–0.60) dentro de 2"–3" es storefront (Div 08), y una sola línea gruesa continua es vidrio — busca texto `R.O.` o `CLEAR FINISHED OPENING` al lado antes de darlo por wall.
 
-Al terminar el barrido, NUNCA pases directo a cuantificar. Muestra la lista numerada Y una imagen circulada de CADA ubicación, y DETENTE a esperar confirmación explícita del usuario de que la lista está completa. El conocimiento que el usuario tiene del plano es el filtro final.
+Al terminar el barrido (Etapa 1), NUNCA pases directo a cuantificar. Muestra la lista numerada Y una imagen circulada de CADA ubicación (`inventario.md`), y DETENTE a esperar confirmación explícita del usuario de que la lista está completa. El conocimiento que el usuario tiene del plano es el filtro final.
 
 **Modo desatendido (el usuario pidió "hazlo completo sin preguntarme").** Cada pausa obligatoria se convierte en un punto de revisión documentado: la lista y sus imágenes circuladas se entregan igual, cada medida faltante queda [PENDIENTE] con su RFI en vez de preguntarse, y la entrega trae una pestaña "Revisar en la mañana" (en español) con todo lo que él normalmente habría confirmado, cada punto con su delta.
 
@@ -549,7 +914,7 @@ El barrido por tag tiene un segundo camino que lo verifica, y es obligatorio usa
 
 Cómo separar el hatch real del ruido: las diagonales de un hatch van a **paso constante**. Se mide ese paso en una banda conocida y se calcula `densidad = nº de diagonales ÷ (largo ÷ paso + 1)`. En un hatch de verdad da ≈ 1.00; en un falso positivo (las diagonales sueltas de una door leaf, la X de un recuadro, un swing aproximado) baja a 0.4 o menos.
 
-Caso real: 4 bandas con hatch en toda la hoja — una de 7.68" (el tipo con 1 tag) y tres de 5.2" (el tipo con 3 tags); correspondencia 1:1, con densidades de 1.00–1.04 contra 0.11–0.40 de los descartados.
+Caso real: las bandas con hatch de la hoja correspondieron 1:1 con los tags de sus types (clasificadas por espesor), con densidad ≈ 1.00 contra ≤ 0.4 de los descartados.
 
 **Todo length NO EXPLICADO se parte por coordenada hasta que cada trozo tenga dueño** — tipo nuestro, otra división, o hueco — y ningún trozo queda sin nombre. Se comprueba leyendo el rótulo dentro del tramo y el perfil de líneas.
 
@@ -582,7 +947,7 @@ Cada penetración se evalúa **individualmente** contra el umbral de 1/4 de hoja
 
 NUNCA mezcles exteriores con interiores. Orden inviolable: Pasada 1 (exteriores, face afuera) → Pasada 2 (esos mismos exteriores, face adentro; "by future tenant" solo aplica si el wall es NUEVO) → Pasada 3 (interiores). Declara al inicio de cada respuesta qué pasada trabajas.
 
-**PASO 4 — Recorrer el Floor Plan** por cuadrantes, con Construction Legend. Aplica el barrido completo por tag, su verificación cruzada por grafía y su pausa obligatoria.
+**PASO 4 — Recorrer el Floor Plan** por cuadrantes, con Construction Legend. El barrido por tag es la Etapa 1 (`inventario.py`); la verificación cruzada por grafía y la pausa obligatoria siguen.
 
 **PASO 4A — Filtro de alcance.** Clasifica cada tramo: (1) construcción nueva Div05/09 → cuantificar; (2) patch and repair → área SF como allowance, sin waste, citando la nota; (3) fuera de alcance (storefront=Div08, "to remain", mampostería=Div04, vendor) → listar con motivo. Un tramo puede tener varias zonas de alcance distinto — mapéalas, no asumas uniformidad. **Y de todo tramo que salga fuera de alcance, aplica la SUPER REGLA a lo que quede ENCIMA y DEBAJO.**
 
@@ -687,7 +1052,7 @@ el detalle que dio el dato que se fue a buscar: se para cuando la cantidad está
 MEP → schedule. No basta citar el último detalle: va el camino entero, para que el estimador
 abra las imágenes en el mismo orden en que se leyeron.
 
-### El ejemplo que la originó — canopy 84
+### El ejemplo que la originó — un canopy
 
 ```
 A04.01 (RCP)
@@ -700,17 +1065,16 @@ A04.01 (RCP)
 
 | eslabón | qué aporta |
 |---|---|
-| `A02.01` / `A04.01` | el length (48.047 ft) y la posición |
+| `A02.01` / `A04.01` | el length y la posición |
 | `D/A09.22` | el fondo, y lo confirma contra la planta |
 | `7/A09.26` | la composición y los datums `T/STUD [valor retirado E24]` − `B/STUD [valor retirado E24]` |
 | `7/S5.20` | el perfil `362S137-33` y el 16" O.C., que **ningún detalle de canopy rotula** |
 
-Y de paso la cadena resolvió un pleito abierto hacía días: los `3'-1 3/4"` de D/A09.22 y los
-`2.467 ft` medidos en planta **nunca estuvieron en conflicto**. Localizando los dos ticks de
-la dimension en el vector del PDF (x=2154.12 y x=2379.84, escala 72 pt/ft calibrada contra tres
-datums) se ve que la dimension va de **eje 8** a **fascia**, no de face de wall a fascia. La
-diferencia son exactamente los **8"** que 7/A09.26 imprime arriba. Dos caminos independientes,
-a dos escalas distintas, a una milésima de pie.
+Y de paso la cadena resolvió un pleito abierto hacía días: la dimension de D/A09.22 y el largo
+medido en planta **nunca estuvieron en conflicto**. Localizando los dos ticks de la dimension en
+el vector del PDF (escala calibrada contra tres datums) se ve que la dimension va del **eje** a la
+**fascia**, no de face de wall a fascia; la diferencia es exactamente el offset que 7/A09.26
+imprime arriba. Dos caminos independientes, a dos escalas distintas, cerrando.
 
 
 ### Desde `referencias/adenda_v39.md`
@@ -802,7 +1166,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - verif_bandas.py — compuerta del DIBUJO
   - wallgeom.py — motor de medición (EN VALIDACIÓN)
   - arranque.py — Paso 0 mecánico en un solo comando
-- **`adenda_v26.md`** — ADENDA v26 — 28-sep-2026 · lo que salió de la auditoría adversarial de BofA Broomfield
+- **`adenda_v26.md`** — ADENDA v26 — 28-sep-2026 · lo que salió de la auditoría adversarial de un proyecto anterior
   - LA AUDITORÍA ADVERSARIAL ES UN PASO DEL CIERRE
   - REGLA — El perfil de stud se lee del PARTITION SCHEDULE, nunca de una tabla propia
   - REGLA — Ninguna line item se cae en silencio: el generador FALLA si sobra una
@@ -955,16 +1319,22 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - Lo que se pagó, no lo que se eximió
   - Estado de la entrega
 
+# ADENDAS v48–v60 (historia; sus reglas siguen salvo que el PROTOCOLO v69 diga otra cosa)
+
+> **v61 → v69:** desde v61 el agente solo mide el plano y lo escribe en `takeoff_canon.json`; las cantidades de
+> toda familia con tool salen de las tools. Los protocolos v61–v68 se retiraron de este archivo; los reemplaza el
+> PROTOCOLO v69 del inicio. Cualquier regla 50.x–60.x que choque con él queda ANULADA (§9).
+
 # ADENDA v48 — 11-oct-2026 · UNA SOLA CARPETA DE HERRAMIENTAS, Y TODO LO NUEVO VUELVE A ELLA
 
 ## Lo que se corrigió, y por qué importa
 
-Las 117 herramientas vigentes no vivían en `_herramientas/`: estaban dentro de la carpeta de
-un proyecto (`Bank of America - Broomfield/.../2 - Take-Off Claude/Herramientas`), y en
+Las herramientas vigentes no vivían en `_herramientas/`: estaban dentro de la carpeta de
+un proyecto (`<proyecto>/.../2 - Take-Off Claude/Herramientas`), y en
 `_herramientas/_herramientas_py/` quedaba un kit viejo del 26-sep con versiones distintas de
 `closer.py`, `arranque.py` y `planmark.py`. Un take-off nuevo que siguiera la regla al pie de
 la letra habría copiado las versiones viejas. Se consolidó todo en **`_herramientas/py/`**
-(122 archivos: 117 de BOA + `zoom.py`, `registro2.py`, `cotas.py`, `tagband.py` rescatados del
+(las del proyecto + `zoom.py`, `registro2.py`, `cotas.py`, `tagband.py` rescatados del
 kit viejo + `gdrive_fetch.py`) y el kit viejo se eliminó.
 
 ## REGLA 48.1 — LAS HERRAMIENTAS SE TOMAN SIEMPRE DE `_herramientas/py/`
@@ -1005,7 +1375,7 @@ regenera de memoria mientras exista en `py/`.
 ## Lo que se corrigió, y por qué importa
 
 Las entregas de varios proyectos caían todas sueltas en una sola carpeta `Claude outputs`
-(la vieja ya tenía unos 27 archivos de BOA mezclados de distintas fechas). Con la automatización corriendo
+(la vieja ya tenía archivos de un proyecto mezclados de distintas fechas). Con la automatización corriendo
 proyectos sin supervisión, eso las revolvería. Además, la service account `takeoff-reader`
 solo puede crear archivos dentro de una **unidad compartida** (una cuenta de servicio no tiene
 espacio propio en un Drive personal), así que la carpeta de entregas se movió a la unidad
@@ -1101,7 +1471,7 @@ respaldo en `_progreso/` y un resumen de qué falta.
 
 ## Qué cambió
 
-El SKILL.md pasó de 3,047 líneas (258 KB) a un archivo central más `referencias/` con 23
+El SKILL.md pasó de un archivo único de más de 250 KB a un archivo central más `referencias/` con 23
 archivos (herramientas + adendas v26–v47 + estructura de carpeta). Se carga en tres niveles:
 nombre y descripción siempre; este archivo cuando se pide un take-off; cada archivo de
 `referencias/` en el momento que marca la tabla de LECTURA OBLIGATORIA, y TODOS antes del
@@ -1124,12 +1494,12 @@ adenda sin esas tres cosas.
 
 # ADENDA v52 — 14-oct-2026 · LISTA FIJA DE ALCANCES Y HERRAMIENTAS SIN DATOS DE OTRO PROYECTO
 
-## Por qué (error real, prueba automática BOA 13-oct-2026)
+## Por qué (error real, prueba automática 13-oct-2026)
 
 La prueba automática se entregó con `registro.py entregable` en 0 y aun así le faltaban alcances
 COMPLETOS: ceiling suspension (furring channel, carrying channel, hanger wire, ceiling track), el
 canopy (soffit, fascia, CANOPY-COL) y el exterior FRT plywood sheathing (dejado como "alternate").
-Calificación contra el take-off del usuario: 24.9%. El back-check confirmó con hoja+detalle que la
+El back-check confirmó con hoja+detalle que la
 referencia tenía razón. Causa: el registro solo tenía lo que Claude VIO; lo que nunca vio no estaba
 en la lista y la compuerta no podía echarlo de menos.
 
@@ -1150,11 +1520,11 @@ En el PASO 3, junto con el registro, y SIEMPRE (con o sin preguntas):
    `alcances.py compuerta <registro.json> <escaneo.json> <Excel final>` → tiene que dar `ALCANCES OK`.
    ALC-12 (ceiling suspension) exige TODAS sus partes. No hay entrega con NO ENTREGABLE.
 
-## REGLA 52.2 — CARPETA DE TRABAJO POR VARIABLE, NUNCA /home/claude/boa
+## REGLA 52.2 — CARPETA DE TRABAJO POR VARIABLE, NUNCA UNA RUTA FIJA
 
 Las herramientas de `py/` leen su carpeta de trabajo de `TAKEOFF_WORK` y la de salida de
-`TAKEOFF_OUT` (antes estaban fijas en `/home/claude/boa` y `/mnt/user-data/outputs`, que en la nube
-no existen o traen datos de BOA). Al empezar cada take-off: `export TAKEOFF_WORK=<carpeta del
+`TAKEOFF_OUT` (antes estaban fijas en una carpeta de un proyecto y en `/mnt/user-data/outputs`, que en la nube
+no existen o traen datos de otro proyecto). Al empezar cada take-off: `export TAKEOFF_WORK=<carpeta del
 proyecto>/work TAKEOFF_OUT=<carpeta del proyecto>/out` y crear las dos.
 
 ## REGLA 52.3 — `py/` SOLO TIENE HERRAMIENTAS GENERALES
@@ -1188,7 +1558,7 @@ diferentes), y así no se puede revisar ni calificar igual. Desde v52:
 
 # ADENDA v53 — 14-oct-2026 · CRITERIOS DEL ESTIMADOR (aprobados uno por uno por el usuario)
 
-Origen: el arbitraje de la prueba #2 de BOA (ARBITRAJE.md, 14-oct) encontró 8 partidas donde el plano
+Origen: el arbitraje de una prueba (ARBITRAJE.md, 14-oct) encontró partidas donde el plano
 no decide y cada estimador cuenta distinto. El usuario aprobó estos criterios el 14-oct-2026. Son
 OBLIGATORIOS en todo take-off y en todo back-check; una excepción solo la decide el usuario.
 
@@ -1230,52 +1600,51 @@ Doors no. Largo = R.O. + 8" por lado.
 ## ⛔ REGLA 53.8 — CLASIFICACIÓN: MANDA EL DETALLE
 Si un elemento tiene burbuja de detalle propia, se cuenta con ese detalle aunque haya un tag cercano; si
 tag y detalle se contradicen, gana el detalle + RFI. Walls sin tag = el tipo de la nota general de la
-planta (BOA: nota A de A02.01, A1). Las caras de un chase húmedo se miden cara por cara.
+planta (ej.: nota A de A02.01). Las caras de un chase húmedo se miden cara por cara.
 
 ## REGLA 53.9 — HALLAZGOS DEL ARBITRAJE (protocolo)
-1. FRP: la altura impresa se mide SOBRE el cove base (BOA: 5'-0" sobre 6" base, A-D/A08.01).
+1. FRP: la altura impresa se mide SOBRE el cove base (ej.: A-D/A08.01).
 2. Acoustical sealant sigue el detalle de CADA partition type (2×, 4× o 0 lados); el exterior y el
    parapet NO llevan acoustical sealant salvo que su detalle lo diga.
 3. "SEALANT AT BASE OF GYPSUM" exterior es su PROPIO renglón (no acoustical).
 4. Glass mat sheathing y FRT plywood de column wraps / piers salen de sus detalles de pared exterior:
-   se buscan siempre (en BOA los omitió una prueba).
-5. Moisture resistant board va donde lo diga la nota (BOA: chase detrás de toilet y lavatory).
+   se buscan siempre (una prueba los omitió).
+5. Moisture resistant board va donde lo diga la nota (ej.: chase detrás de toilet y lavatory).
 
-# ADENDA v54 — 15-oct-2026 · ERRORES DEL ARBITRAJE DE LA PRUEBA #4 (BOA)
+# ADENDA v54 — 15-oct-2026 · ERRORES DEL ARBITRAJE DE LA PRUEBA #4
 
-Origen: el árbitro de la prueba #4 (ARBITRAJE.md, 15-oct) revisó 5 familias contra el plano. Ganó la
-prueba en 1, la referencia en 1, y ninguna en 3. Cada error es ahora una regla. OBLIGATORIAS en todo
+Origen: el árbitro de la prueba #4 (ARBITRAJE.md, 15-oct) revisó familias contra el plano. Cada error es ahora una regla. OBLIGATORIAS en todo
 take-off y back-check.
 
 ## ⛔ REGLA 54.1 — FRAMED OPENINGS DE FIXTURES
 Todo recessed fixture dentro de framing (GWB ceiling, soffit, canopy de CFMF exterior) lleva framed
 opening = 2 × largo del schedule + 2 ends por fixture. El ancho de los ends sale del cutsheet; si no
-está impreso, queda [PENDIENTE] + RFI. Largo: luminaire schedule (BOA: E00.01). Conteo: tags del
-lighting plan (BOA: E02.01). PROHIBIDO medir el largo en el RCP. Antes de cerrar, barrer TODOS los tipos
-de la familia (BOA: UU1…UU6, R-11A/B/C/CE) y listar cada tag con su imagen circulada.
-Error que la originó: la prueba #4 midió el canopy en el RCP (477.6 LF), le faltaron UU1, UU5, UU6 y
-los 2 R-11A; el schedule da 686 LF solo en el canopy.
+está impreso, queda [PENDIENTE] + RFI. Largo: luminaire schedule (ej.: E00.01). Conteo: tags del
+lighting plan (ej.: E02.01). PROHIBIDO medir el largo en el RCP. Antes de cerrar, barrer TODOS los tipos
+de la familia (todos los tipos del luminaire schedule) y listar cada tag con su imagen circulada.
+Error que la originó: una prueba midió el canopy en el RCP y le faltaron tipos del schedule, que
+daba bastante más.
 
 ## ⛔ REGLA 54.2 — TRACK POR POSICIÓN + DUPLICADOS
 Bottom, top y deflection track van en renglones SEPARADOS. Un callout "TOP & BOT." genera DOS renglones,
-nunca uno dentro de la familia bottom track (BOA: 11/S5.10, 600T125-54).
+nunca uno dentro de la familia bottom track (ej.: 11/S5.10).
 54.2b: dos renglones de la misma familia con el mismo neto y la misma cita = duplicado. Se corrige
-antes de entregar (BOA: canopy track 480.82 LF contado dos veces con 7/A09.26).
+antes de entregar (ej.: un canopy track contado dos veces con 7/A09.26).
 
 ## ⛔ REGLA 54.3 — MATERIAL DEL BLOCKING
-El material lo dice el detalle. "STUD BLOCKING 362CR22" / blocking at edge of gypboard (BOA: 4/S5.20)
+El material lo dice el detalle. "STUD BLOCKING 362CR22" / blocking at edge of gypboard (ej.: 4/S5.20)
 = METAL, renglón propio "Stud blocking 362CR22". FRT / FRTW solo donde el detalle lo rotule. Barrer
 también las elevaciones interiores (artwork, monitores, TV) y las notas de hoja (millwork, toilet
-accessories, wall stops). Parapet blocking BOA = 4/A09.26.
+accessories, wall stops). Ej.: parapet blocking = 4/A09.26.
 
 ## ⛔ REGLA 54.4 — ACOUSTICAL SEALANT CORRIDA POR CORRIDA
 Tabla por partition type: corridas top / bottom × caras, leída de CADA detalle. Cantidad = Σ largo ×
 corridas. PROHIBIDO usar el punto medio de un rango. Línea dibujada sin rótulo = RFI con su delta
-(BOA: base de G sin rótulo, −201.34 LF; "SEALANT" del office front 9/A12.01, +90 LF).
+(ej.: base de un type sin rótulo; "SEALANT" del office front 9/A12.01).
 
 ## ⛔ REGLA 54.5 — SHEATHING SOLO DONDE SE ROTULA
 Cada capa de sheathing (glass mat, exterior gyp, FRT plywood) va solo donde un detalle la rotule.
-Sobre storefront manda el head detail (BOA: 2/A09.26 = steel header, SIN glass mat). Los descuentos de
+Sobre storefront manda el head detail (ej.: 2/A09.26 = steel header, SIN glass mat). Los descuentos de
 aberturas del Material Summary deben ser IGUALES a los del Partition Takeoff, renglón por renglón; se
 comparan antes de entregar. Deck con pendiente → B.O.D. promedio del tramo, por fachada (nunca juntar
 dos fachadas en un número). Nota: 53.5 (parapet exterior gyp sheathing sobre storefront) sigue igual;
@@ -1286,16 +1655,16 @@ Cada N/HOJA debe coincidir con el título del detalle que contiene la nota citad
 abre cada cita y se confirma. Errores encontrados: 6/A09.26 (STOREFRONT BASE) citado para el parapet
 blocking (correcto 4/A09.26); 7/A09.26 (SIDE CANOPY) citado para el glass mat (correcto 5 y 3/A09.26).
 
-# ADENDA v55 — 15-oct-2026 · ERRORES DE LA PRUEBA #5 Y DE SU ARBITRAJE (BOA)
+# ADENDA v55 — 15-oct-2026 · ERRORES DE LA PRUEBA #5 Y DE SU ARBITRAJE
 
-Origen: (a) los 5 agentes adversariales de la prueba #5 encontraron errores y alcances sin cuantificar;
-(b) el árbitro de la prueba #5 (ARBITRAJE.md, 15-oct) revisó 8 familias contra el plano. Cada error es
+Origen: (a) los agentes adversariales de la prueba #5 encontraron errores y alcances sin cuantificar;
+(b) el árbitro de la prueba #5 (ARBITRAJE.md, 15-oct) revisó familias contra el plano. Cada error es
 ahora una regla. OBLIGATORIAS en todo take-off y back-check. Los criterios 53.x aprobados por el usuario
 siguen mandando: si una regla de aquí choca con un 53.x, gana el 53.x.
 
 ## ⛔ REGLA 55.1 — EL CRÍTICO DE COMPLETITUD SE CORRE SIEMPRE
 Antes de entregar, un agente revisa hoja por hoja (incluidas las que nadie citó) buscando alcances sin
-cuantificar. En la prueba #5 encontró 7 alcances completos fuera: roof step (4/A02.02), coiling grille
+cuantificar. En una prueba encontró alcances completos fuera: roof step (4/A02.02), coiling grille
 (2-4/A08.21), heads del vestíbulo (A12.10), ATM (5,6/A08.11), roof hatch y ladder, lockers, CSR plywood
 (9/A12.08). Lista de hojas nunca citadas = punto de revisión obligatorio.
 
@@ -1308,7 +1677,7 @@ suma de tramos debe cerrar con el perímetro.
 
 ## ⛔ REGLA 55.3 — PARAPET
 - Extensión de un parapet alto (T.O. PARAPET 2): se lee en las CUATRO elevaciones, no solo en la sección
-  (BOA: la torre corre de G a D).
+  (ej.: una torre que corre entre dos grids).
 - Infill (11/S5.10): bay por bay entre HSS posts = 1 stud a cada lado de cada post + @16" dentro del bay;
   nunca @16" continuo + 2 por post.
 - Sheathing del parapet, cara roof side: LF de cara interior × (T/STUD − B.O.D.). T.O. PARAPET es el tope
@@ -1324,7 +1693,7 @@ la retícula del RCP del cuarto vecino, no el nombre del cuarto más cercano.
 Las corridas de abajo se descuentan en cada door R.O. (no hay sealant cruzando el vano).
 
 ## ⛔ REGLA 55.6 — MOISTURE RESISTANT BOARD
-Va solo en las caras donde se apoya un toilet o lavatory según el plano ampliado y su nota (BOA: nota
+Va solo en las caras donde se apoya un toilet o lavatory según el plano ampliado y su nota (ej.: nota
 F/A08.01 = solo el chase C1). Se desglosa muro por muro.
 
 ## REGLA 55.7 — HERRAMIENTAS (ya corregidas el 15-oct)
@@ -1336,9 +1705,9 @@ F/A08.01 = solo el chase C1). Se desglosa muro por muro.
 El árbitro propuso "studs extra solo si un detalle los pide". Choca con el criterio 53.2 aprobado por el
 usuario (+1 por esquina/T, +2 por jamb). No se aplica; queda para que el usuario decida.
 
-# ADENDA v56 — 15-oct-2026 · ERRORES DE LA PRUEBA #6 Y DE SU ARBITRAJE (BOA)
+# ADENDA v56 — 15-oct-2026 · ERRORES DE LA PRUEBA #6 Y DE SU ARBITRAJE
 
-Origen: prueba #6 (skill v55) y su árbitro (ARBITRAJE.md, 15-oct, 8 familias). Cada error es ahora una
+Origen: prueba #6 (skill v55) y su árbitro (ARBITRAJE.md, 15-oct). Cada error es ahora una
 regla. OBLIGATORIAS en todo take-off y back-check. Los criterios 53.x aprobados por el usuario siguen
 mandando. Decisiones del usuario del 15-oct ("haz lo mejor para el proyecto") quedan anotadas.
 
@@ -1349,37 +1718,37 @@ escribir el primer número al modelo (refuerza 50.1; la #4 y la #6 lo hicieron a
 ## ⛔ REGLA 56.2 — NOTAS GENERALES ESTRUCTURALES ANTES DE LOS DETALLES S5
 Antes de S5.xx se leen las notas generales S1.xx ("LIGHT GAUGE STEEL FRAMING"): gauge mínimo, O.C. en
 esquinas, deflection clips. Si S1.xx y un detalle o schedule NO coinciden en gauge / O.C., va a RFI con
-las DOS cantidades; el take-off lleva la de MÁS material (53.3) marcada [DERIVADO] (BOA: S1.11 nota 5
-600S162-54 @16" y @12" a 6 ft de esquinas vs 7/S5.20 600S137-33 @16").
+las DOS cantidades; el take-off lleva la de MÁS material (53.3) marcada [DERIVADO] (ej.: S1.11 nota 5
+vs 7/S5.20).
 
 ## ⛔ REGLA 56.3 — UNA CAPA DE DETALLE DE BASE O BANDA VA SOLO DONDE SE DIBUJA
 Una capa que solo aparece en un detalle de base o de banda se cuenta solo donde ese detalle la dibuja.
 Antes de extenderla a todo el muro, se revisa el detalle con zoom de 300 dpi o más y se circula la
-evidencia. BOA (decidido 15-oct): 5/8" glass mat solo de T/SLAB a T/BASE 0'-6" (5/A09.26, 9/A09.27) y en
+evidencia. Ej. (decidido 15-oct): 5/8" glass mat solo en la banda de base que dibuja su detalle (5/A09.26, 9/A09.27) y en
 la banda del canopy (3 y 7/A09.26); arriba, el FRT plywood bonded polyiso va directo al stud.
 
 ## ⛔ REGLA 56.4 — DONDE TERMINA EL STUD DEL MURO
-Si el detalle estructural (BOA 10/S5.10) corta el muro en un deflection track bajo la viga, los studs del
+Si el detalle estructural (ej. 10/S5.10) corta el muro en un deflection track bajo la viga, los studs del
 muro terminan ahí. El parapet es infill aparte (11/S5.10) en TODO el perímetro.
 
 ## ⛔ REGLA 56.5 — UN MURO NUEVO SE UBICA CON IMAGEN ANTES DE SUMARLO
 Un muro nuevo que mide lo mismo que uno ya contado es el mismo muro. Todo muro nuevo (sobre todo de torre o
-parapet) se ubica con imagen circulada en la planta o el roof plan antes de sumarlo (BOA: no existen muros
-de torre en grid 4 ni en grid D; la #6 sumó 408.7 SF de sheathing en ellos).
+parapet) se ubica con imagen circulada en la planta o el roof plan antes de sumarlo (ej.: una prueba sumó
+sheathing en muros de torre que no existen).
 
 ## ⛔ REGLA 56.6 — SEALANT = BEADS DIBUJADOS
 Las corridas de sealant son los beads dibujados en cada detalle. Un símbolo igual al que tiene rótulo en
-otro detalle del mismo set SÍ es sealant (BOA: G/G1 en 5/A12.01). El sealant de base exterior no cruza
-storefronts ni doors. Un tipo cuyo detalle no dibuja bead no lleva sealant (BOA: F, 12/A12.01).
+otro detalle del mismo set SÍ es sealant (ej.: G/G1 en 5/A12.01). El sealant de base exterior no cruza
+storefronts ni doors. Un tipo cuyo detalle no dibuja bead no lleva sealant (ej.: F, 12/A12.01).
 
 ## ⛔ REGLA 56.7 — BULKHEAD DE OFFICE FRONT
-La altura sale del HOLD impreso en la elevación interior (BOA 2/A11.01 "8'-0 1/2" HOLD TYP. FROM SLAB"),
+La altura sale del HOLD impreso en la elevación interior (ej. 2/A11.01 "… HOLD TYP. FROM SLAB"),
 no del ceiling de la oficina.
 
 ## REGLA 56.8 — STUD BLOCKING SIN UBICACIÓN
-Si el detalle de blocking es NTS y no da ubicación (BOA 4/S5.20 "PROVIDE BLOCKING AT THE EDGE OF
+Si el detalle de blocking es NTS y no da ubicación (ej. 4/S5.20 "PROVIDE BLOCKING AT THE EDGE OF
 GYPBOARD"), se lleva una fila en la junta horizontal del board donde el muro es más alto que el largo del
-board, + RFI con las opciones (BOA: 466 LF, exteriores + G/G1).
+board, + RFI con las opciones (ej.: exteriores + types de doble capa).
 
 ## REGLA 56.9 — TRIMS SIN CALLOUT
 El metal trim que no tiene callout en ningún detalle pero que pide el criterio 53.1 va en su propio renglón
@@ -1392,7 +1761,7 @@ en su familia.
 # ADENDA v57 — 15-oct-2026 · 4a COMPUERTA: BITÁCORA DE TOOLS OBLIGATORIAS
 
 ## De dónde salió
-En las pruebas BOA #1–#6 la sesión a veces NO corrió las tools que el skill exige (registro creado
+En las primeras pruebas la sesión a veces NO corrió las tools que el skill exige (registro creado
 tarde; closer.py, planmark.py, verif_* y entregar.py saltados) y aun así entregó. Las 3 compuertas que
 había revisaban el RESULTADO, no si el TRABAJO se hizo. Una regla escrita se salta a las 2 de la mañana;
 esta compuerta no.
@@ -1434,15 +1803,15 @@ Probada fallando en 13 casos (`test_bitacora.py`, regla 44.3).
 # ADENDA v58 — 16-oct-2026 · ARBITRAJE DE LA PRUEBA #8 (studs, track, sill, framed openings, blocking, unidades de compra)
 
 ## De dónde salió
-Prueba BOA #8 (v57): 60.7 % de materials, la mejor hasta hoy. Ocho familias seguían MAL. El arbitraje
-contra el plano (carpeta "ARBITRAJE prueba 8 (2026-10-15)", ARBITRAJE_8.md, 18 imágenes circuladas)
-decidió cada una. Las reglas siguientes son generales; BOA aparece solo como ejemplo.
+Prueba #8 (v57): varias familias seguían MAL. El arbitraje
+contra el plano (carpeta "ARBITRAJE prueba 8 (2026-10-15)", ARBITRAJE_8.md, imágenes circuladas)
+decidió cada una. Las reglas siguientes son generales; los detalles citados son solo ejemplos de tipo.
 
 ## ⛔ REGLA 58.0 — UNIDADES DE COMPRA (plantilla_excel.py corregido)
 `plantilla_excel.py` (py/, test_plantilla 18/18) ya no compra mal:
 - todo stud vendido por stick lleva `"cut_ft"` (largo típico de corte) en takeoff.json; sin él NO valida.
   Piezas = studs de ese largo ÷ INT(stock / cut_ft). Un stud de 12–15 ft sale 1 por stick de 20 ft;
-- las hojas se cuentan por el AxB de `selling_unit` ("4x8 sheet" = 32 SF; "4x12" = 48 SF);
+- las hojas se cuentan por el AxB de `selling_unit` (A × B = SF por hoja: "4x8 sheet", "4x12");
 - batt, Level 5 y todo lo que se compra por SF: `selling_unit` "SF" (sin AxB, sin "sheet");
 - piezas de schedule (EA/PCS con net <= 20, p. ej. access panels) van sin waste; `"waste_pct"` lo fija si hace falta;
 - sealant se vende por tubo/LF, nunca "piece 10 ft".
@@ -1450,7 +1819,7 @@ decidió cada una. Las reglas siguientes son generales; BOA aparece solo como ej
 ## ⛔ REGLA 58.1 — UN STUD POR POSICIÓN
 Nunca stud completo y cripple en la misma posición. Dentro del R.O. de una door: 0 field studs (solo
 king + jack + cripples arriba). Bajo un storefront de slab a head: NO hay studs; sobre un steel header
-van cripples a largo real (BOA 2/A09.26). Los field studs dentro de un R.O. se restan.
+van cripples a largo real (ej. 2/A09.26). Los field studs dentro de un R.O. se restan.
 
 ## ⛔ REGLA 58.2 — EL NOMBRE DEL RENGLÓN DECIDE LA FAMILIA DEL TRACK
 - Track de fascia, soffit, CSR y bulkhead horizontal → "Ceiling / soffit track", nunca bottom/top.
@@ -1490,20 +1859,20 @@ por el arbitraje #8) en Referencias (examen).
 # ADENDA v59 — 16-oct-2026 · ARBITRAJE DE LA PRUEBA #9 (largos netos, bandas, parapet, esquinas, piers, purlin)
 
 ## De dónde salió
-Prueba BOA #9 (v58): 76.8 % de materials (rangos_v6). 3 familias MAL y 9 CERCA. El arbitraje contra el plano
-(carpeta "ARBITRAJE prueba 9 (2026-10-16)", ARBITRAJE_9.md, 19 imágenes) encontró 3 causas generales:
+Prueba #9 (v58): familias MAL y CERCA. El arbitraje contra el plano
+(carpeta "ARBITRAJE prueba 9 (2026-10-16)", ARBITRAJE_9.md, imágenes) encontró 3 causas generales:
 (a) largos de muro que entran en el muro perpendicular, en el door frame o se duplican;
 (b) reglas de conteo que el agente interpreta a su manera (parapet, esquinas a 12", extremos de doble fila);
 (c) un revisor adversarial que contradijo una regla ⛔ y se aplicó.
-Las reglas son generales; BOA aparece solo como ejemplo.
+Las reglas son generales; los detalles citados son solo ejemplos de tipo.
 
 ## ⛔ REGLA 59.1 — PURLIN / ANCLAJE AL DECK ES REGLA DE TRACK, NO DE SOFFIT
 Todo track que se fija al deck (top track de partitions a deck, soffits, bulkheads, roof step, heads) se clasifica
 por su dirección contra el flute. Dirección del flute = perpendicular a los miembros que soportan el deck en el roof
-framing plan, por zona. Donde corre paralelo y el set dibuja purlin/anclaje especial (BOA 10/A09.33), cantidad =
-LF de track × (largo de pieza ÷ spacing de fasteners impreso) [DERIVADO] (BOA 1'-6" / 2'-0" = 0.75). Doble fila =
+framing plan, por zona. Donde corre paralelo y el set dibuja purlin/anclaje especial (ej. 10/A09.33), cantidad =
+LF de track × (largo de pieza ÷ spacing de fasteners impreso) [DERIVADO]. Doble fila =
 una pieza. Detalle VIF → CRITERIO + RFI con la otra dirección. (En v58 esta regla estaba en el párrafo de Soffits y
-la #9 solo la aplicó al soffit: 18 LF en vez de 214.)
+la #9 solo la aplicó al soffit.)
 
 ## ⛔ REGLA 59.2 — BANDAS EN JUNTAS: ALTO DEL DETALLE, LF DE LA LÍNEA DE MURO, MISMA BANDA EN TODAS LAS FILAS
 El alto de una banda (glass mat, sheathing, blocking) sale de las elevaciones impresas en el DETALLE de la junta
@@ -1530,7 +1899,7 @@ board). Caras = cotas impresas del detalle; studs por 53.2. Prohibido "~N" escal
 
 ## ⛔ REGLA 59.7 — EXTREMOS DE MURO DE DOBLE FILA
 +1 stud por fila solo en esquina/T dibujada. Un extremo libre contra vendor frame/storefront lleva lo que dibuje
-su jamb detail (BOA 10/A12.01: 1 METAL STUD de cierre por muro, no uno por fila).
+su jamb detail (ej. 10/A12.01: un METAL STUD de cierre por muro, no uno por fila).
 
 ## ⛔ REGLA 59.8 — 58.4 ES COMPUERTA, Y UN ADVERSARIAL NO DEROGA UNA REGLA ⛔
 Header/sill se rechaza si el ancho impreso ≤ claro del stud bay (14 3/8" @ 16"). Cajas de servicio en muro (ice
@@ -1561,15 +1930,11 @@ Con dos B.O.D. impresos en una zona con pendiente, la altura de cada muro = inte
 Con 56.8 se entregan dos valores: (a) exteriores + muros de doble capa; (b) toda cara con board > largo de hoja.
 Se carga (b) por 53.3 y RFI con (a).
 
-## Calificador
-rangos_v6 (Referencias (examen)): 6" stud 4,905.24 (piers), FRP [valor retirado E24] (door 112), FRT plywood [valor retirado E24] (nailbase
-de piers), metal stud blocking hasta [valor retirado E24].
-
 # ADENDA v60 — 16-oct-2026 · ESTABILIDAD: HERRAMIENTAS DETERMINISTAS (studs por nodo, board por face) + reglas 60.x
 
 ## De dónde salió
-Pruebas paralelas #10A y #10B con el MISMO skill v59: 78.6 % las dos, pero varias familias salieron muy distintas
-entre sí (5/8" board 14,302 vs 17,363 SF; 6" stud 5,746 vs 4,893 LF; furring 703 vs 1,450). Causa (ARBITRAJE_10.md):
+Pruebas paralelas #10A y #10B con el MISMO skill v59: la misma calificación, pero varias familias salieron muy distintas
+entre sí (5/8" board, 6" stud, furring). Causa (ARBITRAJE_10.md):
 tres decisiones quedaban al juicio del agente sin herramienta — (1) cómo contar studs extra de juntas, (2) si
 "layers" es total o por face, (3) a qué familia va cada track y cuántas corridas tiene un detalle de sección.
 Un take-off que cambia de una corrida a otra no es confiable aunque una corrida salga bien. Desde v60 esos
@@ -1591,16 +1956,16 @@ L +1, T +1 al branch, X +2, extremo libre 0, office front contra vendor frame (1
 (no por row). La zona @12" de S1.11 n.5 va solo a 6 ft de las BUILDING corners declaradas, nunca en cada punta.
 
 ## ⛔ REGLA 60.2 — LAYERS POR FACE (ANULA "layers TOTALES" de la sección de partition types)
-Cada face lleva sus layers, validadas contra el detalle del tipo (BOA 5/A12.01 G: 2 por face). La cota impresa
-manda sobre el vector; diferencia > 0.25 ft = DISCREPANCIA anotada. Prohibido un campo "layers" total.
+Cada face lleva sus layers, validadas contra el detalle del tipo (ej. 5/A12.01). La cota impresa
+manda sobre el vector; diferencia > 3" = DISCREPANCIA anotada. Prohibido un campo "layers" total.
 
 ## ⛔ REGLA 60.3 — ALTURA DE STUD EXTERIOR
 = B.O.D. del wall (59.13) − peralte (d) de la perimeter beam de S2.xx cuando el detalle para el stud en un
-deflection track bajo la viga (BOA 10/S5.10). Nunca B.O.D.
+deflection track bajo la viga (ej. 10/S5.10). Nunca B.O.D.
 
 ## ⛔ REGLA 60.4 — SUSTRATO DE CLADDING NO ES FURRING
 Hat channel / Z-girt / furring del metal panel, ACM o stucco es del instalador del cladding: renglón EXCLUDED +
-RFI con delta; nunca en la familia furring channel (BOA 2/A09.31 EPS-5).
+RFI con delta; nunca en la familia furring channel (ej. 2/A09.31 EPS-5).
 
 ## ⛔ REGLA 60.5 — HEADER LF UNA VEZ POR ABERTURA
 Header = (R.O. + 1'-4") × 1. El tipo del header schedule (single/double track, 2-CSJ, box) va en la descripción;
@@ -1608,7 +1973,7 @@ el número de members NO multiplica el LF. Recessed accessories no son header.
 
 ## ⛔ REGLA 60.6 — CORRIDAS DE UN DETALLE DE SECCIÓN
 En cada detalle de sección (roof step, parapet, soffit, bulkhead) se cuentan las corridas de stud
-independientes; cada una lleva su bottom y top track y su bracing (BOA 4/A02.02 roof step: 3 corridas).
+independientes; cada una lleva su bottom y top track y su bracing (ej. 4/A02.02 roof step).
 
 ## ⛔ REGLA 60.7 — BRACING SOBRE TODAS LAS CORRIDAS
 53.4 se calcula sobre la lista completa de corridas verticales: walls, parapet ≥ 4 ft, canopy framing, column
@@ -1628,281 +1993,3 @@ Un recessed ≤ 14 3/8" (stud bay) o ≤ el espaciado del furring en ceiling no 
 ## ⛔ REGLA 60.11 — C1 / MR
 Partition type sin cota de altura (break line) → board a deck (53.3) con 59.13 por wall; MR solo en las faces del
 chase con fixture, sin caras de extremo.
-
-## Calificador
-rangos_v7: 6" stud [valor retirado E24]–[valor retirado E24] (la parte interior de la referencia estaba bajo el mínimo de 53.2); MR [valor retirado E24].
-
-# ADENDA v61 — 16-oct-2026 · CAMBIO DE ESTRATEGIA: PROTOCOLO CORTO + takeoff_canon.json + canon.py
-
-## ⛔ REGLA 61.0 — ESTE PROTOCOLO MANDA SOBRE TODAS LAS ADENDAS ANTERIORES
-Las pruebas #11A/#11B (v60) bajaron a 55.4/67.9 porque las adendas acumuladas se contradicen y cada corrida
-eligió distinto. Desde v61 el agente SOLO mide el plano y lo escribe UNA vez en `takeoff_canon.json`; las
-cantidades de toda familia con tool salen de `canon.py` (que corre studs_nodos, board_caras, corridas, headers).
-Herramientas OBLIGATORIAS (py/, siempre por `bitacora.py run`; la compuerta las exige):
-`canon.py`, `framed_openings.py`, `alcance_filtro.py`, además de arranque, alcances, registro, closer, planmark,
-plantilla_excel validar/armar, registro entregable, alcances compuerta y back-check.
-Prohibido sumar a mano una familia que tenga tool. Si la tool no cubre un caso: se agrega el caso a la tool con
-su test (dato malo que falla) y se anota en PARA REVISAR; nunca se suma por fuera.
-Cualquier regla 50.x–60.x que choque con el protocolo siguiente queda ANULADA (ver §9 del protocolo).
-
-> **v68 (2026-10-17):** los textos de PROTOCOLO v61 a v67 se retiraron de este archivo; los reemplaza
-> íntegramente el PROTOCOLO v68 que va al final (E24: sin valores de un proyecto de examen).
-
-# PROTOCOLO v68 — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
-
-Fecha: 2026-10-17 · arbitraje de dos pruebas ciegas: determinismo, compra y presentación. **REEMPLAZA a PROTOCOLO
-v67 y anteriores y a todas las adendas.** Orden de autoridad: §0 Criterios del estimador > este texto > referencias / rangos /
-arbitrajes. **Protocolo CIEGO (E24):** reglas generales; los casos de proyectos anteriores se citan solo por
-N/HOJA, nunca con cantidad, cota, R.O. ni conteo. Ningún número de este texto es una respuesta.
-
----
-
-## 0. Criterios del estimador — reglas generales para TODO proyecto
-
-Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa (entonces RFI). Tool entre [ ].
-
-- **E1** Header / box beam: largo de cada pieza = R.O. + 1'-4" (8" de bearing por lado). [headers]
-- **E2** Header por PIEZAS: LF = (R.O. + 1'-4") × piezas × qty; piezas = fila del header schedule o 4 en box. [headers, closer]
-- **E3** Parapet bay por bay entre posts (decisión del usuario, cálculo aprobado): bays = ROUNDUP(L / post) por
-  straight run; run con ≥ 2 bays: studs por bay = MAX(5, 2 + ROUNDUP((bay − 0.6) / oc) − 1); run de UN bay (stub
-  ≤ spacing de posts, p. ej. un key note de stub): 2 + ROUNDUP((L − 0.6) / oc) − 1, sin mínimo; × (T/STUD −
-  B.O.D.). Run = tramos contiguos de una grid line aunque cambie la altura (nunca un lado N/E/S/W); largo en el
-  eje del stud. [canon `parapet`]
-- **E4** Hanger wire en PCS con la altura de cada hanger por room; LF = Σ PCS × altura (DERIVADO). [canon]
-- **E5** Ballistic sigue todo el contorno, con jogs y retornos (`ballistic_jogs`, sin walls fantasma). [canon]
-- **E6** Board sobre ballistic: misma face, del tope del panel a estructura. [board_caras]
-- **E7** Transición con kicker: studs verticales a estructura ADEMÁS del kicker. [canon]
-- **E8** Column wraps: bottom + top track = perímetro de faces; face = **cadena FOS impresa completa** (todos
-  los eslabones, `fos_chain`); una decisión que usó un solo eslabón cede ante el plano. [corridas, canon]
-- **E9** Ceiling track en transición: arriba y abajo. **E10** Bottom track en doors NO se descuenta. [corridas]
-- **E11** "BOX HEADER AS NEEDED" SÍ se cuenta; tamaño no impreso = RFI. **E12** Ductos / FD en walls NO se
-  enmarcan (sí llevan plate de reinforcement, A2). [headers]
-- **E13** Canopy soffit: track en los dos extremos de los joists; fascia y wall medidas por separado
-  (`wall_line_ft`), nunca L × 2. [corridas]
-- **E14** Ceiling suspendido del RCP = furring, salvo detalle con joists (`joist_source`). [canon]
-- **E15** R.O. impreso del estimador manda. **E16** Storefront con lintel HSS / steel en S*: 0 metal stud header.
-- **E17** Preguntas al usuario UNA A LA VEZ, con imagen, hojas y opciones con delta; solo criterio comercial.
-- **E18** Sill DOUBLE en R.O. > 4'-0"; doors sin sill. **E19** "BOX BEAM OR STEEL FRAMING AS REQUIRED" = metal
-  stud box beam. **E20** Todo box = 4 piezas. **E21** La fila del header schedule no se baja. **E22** "CONT. BOX
-  BEAM" = un run por frente × 4. [headers]
-- **E23** Antes de preguntar, buscar en TODAS las hojas y la spec: si el plano contesta, decidir con N/HOJA +
-  imagen; si no, RFI con delta + supuesto declarado. Rangos internos los decide Claude con evidencia.
-- **E24** Protocolo, SKILL, referencias/ y tools / tests entregables CIEGOS: sin cantidades, cotas, R.O.,
-  conteos ni coordenadas de la referencia de examen; esos tests viven en `tests_arbitraje/`. [test_ciego]
-- **E25** Cada capa del sheathing se sigue hasta su remate; nailbase que sube al parapet = T/STUD del parapet. [canon]
-- **E26** Walls bajo un miembro S* paran bajo él: `stops_under_beam` con la marca W de ESA viga (una por línea,
-  peralte AISC) o motivo + RFI. [vigas_sobre_walls]
-- **E27** Dos pruebas, mismo plano, mismo número: todo dato que varió entre pruebas es un campo obligatorio con
-  N/HOJA y una regla en tool (§14). Ningún valor se toma de "lectura visual".
-- **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
-  **Partition types (§13)** con la convención del calificador.
-
----
-
-## 1. Reglas que siguen siempre
-
-1. **#0 HONESTIDAD DIMENSIONAL.** [CONFIRMADO] cota impresa + N/HOJA · [DERIVADO] operación escrita ·
-   [PENDIENTE]. Nunca escalar a ojo. Si no se distingue con certeza, se dice y se para.
-2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Leer
-   el CUERPO del detalle (notas, leaders, "INVERT ..."); si dos detalles traen el concepto, se citan los dos. Un
-   detalle es de todo lo que corta. Si no aplica, motivo.
-3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada. Antes de "sin tag", leaders finos;
-   antes de "no está en el set", grep en todo el set. "ALL ..." = schedule completo ítem por ítem.
-4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. Hojas rotadas:
-   `page.rotation_matrix` para medir, `derotation_matrix` para dibujar.
-5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
-6. **EJES.** Nunca dos ejes, fachadas o frentes en un número.
-7. **AMBIGÜEDAD = RFI** con delta. Se carga la opción de más material solo si la medida NO está impresa (53.3).
-8. **ERRORES.** Error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
-9. **PRUEBAS.** Una prueba NO modifica tools: propuesta (diff + test) en `PARA REVISAR/`; el arbitraje la integra.
-10. **REGISTRO.** Un renglón resuelto no se reescribe: `registro.py anexar <id> "<evidencia>"` agrega hojas o
-    corrige una cita sin cambiar el estado. Una nota NO APLICA cita TODAS las hojas del escaneo con su motivo.
-
----
-
-## 2. Pasos (cada uno con `bitacora.py run`)
-
-P0 mapa de hojas y schedules (`arranque.py`, instala pikepdf / pymupdf) · P1 alcances (`alcances.py escanear`) ·
-P2 `registro.py crear` · P3 walls (largo neto, cota, line, band) + nodes · P3b `inventario.py` · P4 alturas
-(`vigas_sobre_walls.py`, `altura_stud.py`, deck_breaks) · P5 faces (room, board, layers, altura, aberturas) · P6
-aberturas + header schedule con PIEZAS · P7 corridas no-wall (§5), parapets por grid line · P8 ceilings, fachadas,
-canopies, parapets + nailbase, blocking, plywood, trim · P8b accesorios (P/M registrado, ATM, jambs, LEVEL 5,
-access panels) · P9 `canon.py takeoff_canon.json out/ --fo fo_in.json` · P10 `contar_tags.py`,
-`framed_openings.py`, `alcance_filtro.py` · P11 `plantilla_excel.py armar … --familias out/familias_out.json` +
-evidencia (`planmark.py`) · P12 back-check ciego, `test_ciego.py`, `bitacora.py compuerta`.
-Nunca `| head` / `| tail` detrás de una tool. Prohibido escribir a mano una cantidad de §6: §1.9 + RFI con delta.
-
----
-
-## 3. Qué es juicio y qué no
-
-Juicio (N/HOJA + imagen): todo lo que se mide o se lee del plano (largos, alturas, R.O., bandas, faces, flute,
-filas del schedule, penetraciones, bordes con jamb return, tags LEVEL 5) y los RFIs. Todo lo demás: tool.
-
-## 4. `takeoff_canon.json` — esquema v68
-
-Todo número medido lleva `source` (N/HOJA); constantes `{value, source}`. Esquema completo: docstrings de las
-tools y `test_canon*.py`. Las tools fallan si falta un campo obligatorio:
-- header: `pieces` + `pieces_source`; box = 4; CONT. `continuous_run` + `wall`; ducto / FD = NOT_FRAMED;
-  storefront `structure` + `structure_source`. parapet: `line` (grid), `ori`, `axis`, `from_ft`, `to_ft`,
-  `length_basis: "stud_cl"`, `facade`. canopy_soffit `wall_line_ft`. wraps / piers: `parts` o `faces_ft` +
-  `fos_chain`. Facades: `parapet_t_stud_ft`, `nailbase_top_ft` / `_bottom_ft` o `parapet_face_of`. Faces por
-  tramo: `side` + `length_ft` + `length_source`. Framed openings `width_source`.
-- accesorios: `mep_sweep {sheets, registro {dx_pt, dy_pt, matches ≥ 25, source}, source}`, `mep_penetrations`;
-  ATM `atm_recess {width_ft, sistered_h_ft, furring_rows, *_status, *_source}`; abertura exterior `jamb_return` +
-  source y storefront `jambs [{abuts, source}] × 2`; `head_build {head_ft, head_chain_in, box_depth_ft, n_box,
-  board_in}`; `level5_tags` + items con `base_ft`; `access_panels`; `accesorios_rfi` / `accesorios_none`.
-- v68 (§14): `wet_fixtures[].back_source`; `ballistic_jogs` o motivo; `plies_blocking`; blocking `label`;
-  `plywood_strips[].material` (nailbase_5_8_polyiso | frt_5_8_ext | frt_5_8 | frt_3_4); ceiling `detail`;
-  `deck_breaks`; tile_base `perimeter_basis` (+ `gross_ft`) e `inside_corners {value, vertices,
-  outside_corners}`; transición `edges` + `vertical_studs {bod_ft, ceiling_ft}`; `soffit_bottom_layers`.
-  parapet / column_wrap / pier solo en `walls`. Bottom track sin descuento de doors; sin insulation.
-
----
-
-## 5. Elementos (lista cerrada) → familia del track
-
-| Familia | Elementos |
-|---|---|
-| bottom track + top / deflection track (L × rows c/u, sin descuento de doors) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
-| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2 fijo), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (fascia + wall), joist (2) |
-
-La familia sale del ELEMENTO, no de la orientación.
-
----
-
-## 6. Familias que DEBEN salir de las tools (sin PENDING)
-
-Studs (studs_nodos + joists + kickers + verticales + wraps / parts) y parapet (E3) · tracks, bracing, purlin
-(corridas) · header / sill por piezas (headers) · furring, carrying, hanger PCS + LF · board (board_caras) · glass
-mat, EXTERIOR sheathing, FRT plywood por material (E25) · cement board, FRP, sealant · blocking, trim · framed
-openings MEP · las 15 de accesorios (§12).
-
----
-
-## 7. Criterios fijos (fórmulas; sin valores de proyecto)
-
-- **Studs**: campo 1 + Σ ROUNDUP(zona / oc); cripples FLOOR(R.O. / oc); 4 jambs por abertura (no ductos / FD).
-  Nodos: L +1 · T +1 · X +2 · free 0 · vendor_end +1 · split −1 × rows · abut 0; T entre G/G1 = abut; partition
-  contra exterior = T. Exterior: H = B.O.D. − d. Un remate de 4" en un office front = extremo del wall que llega.
-- **Board**: L × H × layers − abertura, face por face; face con dos rooms = tramos; un lining no tiene face del
-  lado que forra. Ballistic L × min(tope, H) por todo el contorno; 3/8" sobre el tope. A1/A5 con ceiling =
-  ceiling + 6" del detalle (salvo "TO UNDERSIDE OF DECK"). **MR** solo detrás de toilet / lavatory.
-- **Wraps / piers**: face = cadena FOS completa; studs por face o `studs_drawn`; dos sistemas = `parts`.
-- **Bracing**: rows = ROUNDUP(H × 12 / 48) − 1; LF = rows × L × rows de stud. **Purlin**: 0.75 × L de top track a
-  deck paralelo al flute, una pieza por corrida, también transiciones y bulkheads.
-- **Header / sill**: barrido cerrado (doors, ventanas, ATMs, office fronts, box beams, "AS NEEDED", grilles,
-  ductos / FD, lintels S*, cada "HOLD"); R.O. ≤ stud bay → 0; sill (R.O. + 1'-4") × piezas.
-- **Ceilings**: carrying (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying ROUNDUP((largo − 1) / 4) +
-  1; framed_soffit con `drop_lines` = bordes que en el RCP dan a un ceiling.
-- **Transiciones**: kickers @48" + verticales a estructura (D7); kicker sin largo impreso = h / sin(ángulo).
-- **Exterior (E25)**: glass mat = base strip + banda T/STUD − B/STUD; nailbase T/BASE → T/STUD − banda −
-  aberturas, por facade, TODAS las facades.
-- **Blocking**: por stud row con face > largo de hoja; FRT solo rotulado (grep "FRT" / "PLYWOOD" / "BLOCKING"
-  antes de "sin rótulo"); ancho = schedule o contorno, nunca la cota de ubicación.
-- **FRP / sealant / trim**: FRP = perímetro neto del tile_base × top + mop sink; sealant por detalle (doors
-  abajo); trim = callouts + bordes de jamb return (A5) × 2 + transiciones × 2.
-- **Framed openings MEP**: max(ancho, largo) ≤ módulo → 0; air devices / ductos de wall NOT_FRAMED; `sweep` M + E;
-  `tag_counts` con sufijo normalizado; `width_source`.
-- **Cladding**: hat channel / Z-girt / lath EXCLUDED + RFI. **Insulation**: EXCLUDED siempre.
-
----
-
-## 8. Compuerta (NO ENTREGABLE si falla)
-
-1. `inventario.py`, `canon.py`, `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
-2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
-3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
-4. `bitacora.py compuerta` completa; RFIs con delta; toda abertura, corrida, face y ceiling con source.
-5. Back-check ciego familia por familia; `test_alcances.py` OK contra el Excel final.
-6. `plantilla_excel.py armar … --familias familias_out.json` + `verificar` dentro de `bitacora.py compuerta`:
-   15 familias de accesorios, Partition Takeoff (§13) sin renglón PENDING, compra §15 (Inputs reales, waste una
-   vez, plywood por material, sealant exterior aparte, NET en su unidad), RFIs sin duplicados con delta, Excel
-   íntegro en inglés. Familia PENDIENTE = NO SE ARMA. `contar_tags.py`, `vigas_sobre_walls.py`, `test_ciego.py` rc 0.
-
----
-
-## 9. Reglas anuladas o corregidas (sin valores)
-
-- **v68**: "5 en todo bay" → mínimo 5 solo en runs de ≥ 2 bays; stick por corte + 15 % → waste una vez; FRT
-  plywood en un renglón → por material; sealant exterior dentro del acoustical → renglón propio; PVC edge bruto →
-  neto; extra framing de ductos → error (E12); vertical stud de transición = escalón → a estructura; jog
-  descartado → suma al vecino (PT3).
-- v67 y anteriores: ARBITRAJE_13 a 16 (fuera del paquete de pruebas).
-
-## 10. Anti-varianza
-
-Una lectura por dato; criterio = constante con fuente; cada regla en una tool con test que falla con el dato
-malo (sintético); inventario antes que totales; > 2 % entre agentes → diff de canons → regla; ningún acierto
-cuenta si no fue ciego (E24).
-
-## 11. Reglas con test (cada una falla con el dato malo, sintético)
-
-R15–R36 (v66–v67) siguen. v68: R37 E3 exacta (test_canon) · R38–R48 §14 (test_canon_v68, test_accesorios) ·
-R49 PT (test_partition_types_v68) · R50 compra §15 (test_plantilla_v68) · R51 arranque instala pikepdf / pymupdf.
-
----
-
-## 12. Accesorios y extras (accesorios.py; NET, el waste lo pone la plantilla)
-
-Siempre incluidos (criterio del estimador): trims, taping, drywall screws, framing screws, track pins. Ninguna
-familia se omite: sin dato = PENDIENTE (bloquea el Excel) → se resuelve del plano (E23) o `accesorios_rfi` con
-delta. Waste 15 % en metal; lo no metal con el factor del board; yields sin waste. Insulation EXCLUDED siempre.
-
-| # | Familia | Regla (fuente: el detalle típico del set) |
-|---|---|---|
-| A1 | additional head track (LF, metal) | R.O. > 4'-0" en walls: (R.O. + 2 × bearing) × qty; openings_extra con box propio → RFI con delta (2/S5.20, 9/S5.20) |
-| A2 | stud reinforcement MEP (PCS) | barrido P/M REGISTRADO (≥ 25 coincidencias) o PENDIENTE; una vez por (wall, xy); Σ qty × MAX(1, ROUNDUP(ancho / O.C.)) (o `studs_cut`); pipe ≤ 1" o `in_cavity` = 0; ductos / FD llevan plate (6/S5.20) |
-| A3 | extra framing ATM (LF, metal) | (ROUNDUP(ancho / O.C.) + 1) × alto sistered + filas de furring × ancho; dato no impreso → CRITERIO + RFI; extra framing de ducto / FD = error (E12) |
-| A4 | 2-1/2" CFMF coiling grille head (LF, metal) | (ROUNDUP(L / O.C.) + 1) × (Σ cadena impresa del head − n box × peralte − board) |
-| A5 | gypsum board jamb return (SF) | bordes (R.O. + 2 jambs − sill + sill; storefront: head + jambs con `abuts: wall` × head) × ancho; ancho no acotado = RFI |
-| A6 | PVC trim at FRP (LF) | 2 × perímetro NETO de doors + inside corners × top + 2 × doors × top + mop sink; inside − outside = 4 |
-| A7 | PAFs and duct sleeves (PCS) | ROUNDUP(L / spacing) por run de parapet + 1 sleeve por ducto / FD en wall |
-| A8 | access panel (PCS) | marcadores del RCP / notas M-P sobre GWB (no ACT) |
-| A9–A11 | drywall screws · joint compound · joint tape | yield × (5/8" regular + MR + 3/8"); sin sheathing, glass mat, ballistic, FRT |
-| A12 | framing screws (PCS) | 4 × piezas de stud instaladas (studs_nodos + `pcs` de canon); sin joists |
-| A13 | slab pins (PCS) | bottom track interior sobre losa × rows / spacing más cerrado; otros spacings = RFI |
-| A14 | expansion anchors (PCS) | bottom track exterior sobre losa / spacing exterior |
-| A15 | Level 5 finish (SF) | Σ L × (alto − base) por cada tag LEVEL 5 del finish schedule; tag sin item = PENDIENTE |
-
-Nombres EXACTOS del renglón: `accesorios.NOMBRES_EXCEL`.
-
-## 13. Partition types (partition_types.py; hoja Partition Takeoff)
-
-| # | Regla |
-|---|---|
-| PT1 | Type = tag del plano; exterior → `EXT-<stud>CFMF`; parapet → `EXT-PARAPET` (un wall por straight run: `ori` + `axis`, step = otro wall; sin geometría = PENDING); door_bulkhead → `BULKHEAD-<familia del tag>` (G1 → G); canopy column → `CANOPY-COL`; pier con tag interior = su tag (el tag manda). |
-| PT2 | Un wall = tramo recto de un type entre esquinas o extremos: colineales (≤ 3") y contiguos (≤ 6") se unen; no se parte por altura, room, T ni abertura. Un renglón por wall (ids con "+"). |
-| PT3 | Jog / return ≤ 1'-0" que toca un wall del mismo type: no es wall; su LF SE SUMA al vecino ("incl. jog"). |
-| PT4 | Office bulkheads colineales de un frente = UN wall (run del CONT. BOX BEAM). |
-| PT5 | storefront cripples, vestibule / grille heads, roof step, fascia, canopy soffit, transiciones, bulkheads y soffits de ceiling → bloque `TYPE OTHER FRAMING (NOT A PARTITION)`. |
-| PT7 | Chase = un wall por cara con tag; wrap / pier interior = caras con board de su detalle; wrap exterior = cadena FOS. |
-| PT8 | Un wall termina en la CARA del wall / frame que cruza; se parte donde otro type o un alcove ocupa la línea; largo con cota impresa si existe. |
-| PT6 | Formato: `TYPE <nombre>` en la col. A; renglón `"<type>  #<id>  -  <location>"` + Length; TOTAL con la col. A vacía y texto en la B; OTHER FRAMING después del TOTAL. |
-
-## 14. Reglas de determinismo v68 (lo que varió entre dos pruebas; canon / accesorios fallan sin el dato)
-
-| # | Regla |
-|---|---|
-| D1 | MR solo en la cara del respaldo / carrier del fixture (`back_source`); la pared de grab bars no es "behind". |
-| D2 | Ballistic y 3/8" siguen el contorno con jogs declarados; cada face customer con cota o vector. |
-| D3 | FRP, cement board y PVC sobre el perímetro NETO de doors; `net` exige `gross_ft` = net + doors. |
-| D4 | Esquinas del FRP: polígono rectilíneo → inside + outside = vértices, inside − outside = 4. |
-| D5 | Blocking: rótulo literal decide FRT / metal; plies del remate del detalle; nada rotulado BLOCKING va como plywood. |
-| D6 | Ceiling suspendido cita su detalle; el sistema del detalle manda (soffit con studs = framed_soffit, sin hangers). |
-| D7 | Transición: `edges` contra otro ceiling (contra wall no); vertical stud a estructura = B.O.D. − ceiling; no en un framed_soffit (sus bordes son drop_lines). |
-| D8 | parapet, column_wrap, pier y transición se cuentan aunque estén en `runs` o fallan (nada se pierde sin aviso). |
-| D9 | Wall que cruza un quiebre de deck (`deck_breaks`) se parte en dos alturas. |
-| D10 | Storefront: cada jamb declara su remate (wall / pier / frame / none); solo wall suma jamb return. |
-| D11 | Grille head = cadena impresa completa; ATM recess por dato con estado; MEP sweep registrado. |
-| D12 | Framing screws = Inputs B21 × piezas del canon vigente (nunca un conteo heredado). |
-
-## 15. Compra y presentación (plantilla_excel v68)
-
-Hoja Inputs con las filas del estimador (B5 / B6 waste, B9 SF por sheet, B10 stud, B11 track, B15 sealant LF por
-tube, B16 C.R., B17 hat, B18 trim, B20–B24 yields, B25 anchors); toda cita `Inputs!Bn` existe. Pieces =
-ROUNDUP(NET × (1 + waste) / stock), waste una sola vez. Selling unit: sticks, runs, sheets, tubes (acoustical y
-exterior), hanger wire LF continuous coil + renglón PCS. Yields con fórmula viva (joint compound = Inputs B23,
-criterio del estimador; un back-check no lo cambia). FRT plywood un renglón por material y espesor
-(`frt_plywood_by_material`); sealant exterior (`sealant_exterior_lf`) aparte; NET de familia solo en su unidad;
-RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en inglés (`verificar` rechaza español).

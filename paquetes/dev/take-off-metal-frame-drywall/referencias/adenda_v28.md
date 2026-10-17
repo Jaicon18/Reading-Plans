@@ -8,18 +8,18 @@ Rodolfo preguntó por qué dos walls G idénticos tenían distinto número de st
 
 | | #45 | #46 |
 |---|---|---|
-| length | 11.770 LF | 11.770 LF |
+| length | [valor retirado E24] LF | idéntico |
 | height · O.C. · rows | [valor retirado E24] · 16" · 2 | idénticos |
-| campo `(floor([valor retirado E24]×12/16)+1) × 2` | 18 | 18 |
+| campo `(floor([valor retirado E24]×12/16)+1) × 2` | [valor retirado E24] | [valor retirado E24] |
 | terminación (2 extremos × 2 rows) | 4 | 4 |
-| **studs de abertura enmarcada de MEP** | **0** | **8** |
-| **total** | **22** | **30** |
+| **studs de abertura enmarcada de MEP** | **0** | **[valor retirado E24]** |
+| **total** | **[valor retirado E24]** | **[valor retirado E24]** |
 
-El #46 tiene **2 penetraciones** en M01.01 (un `8"x10"` y un `10"ø`), cada una con 2 studs por row: 2 × 2 × 2 = 8.
+El #46 tiene **[valor retirado E24] penetraciones** de ducto en M01.01, cada una con dos studs por row: penetraciones × 2 × rows.
 
 El #45 tuvo **un solo impacto y fue descartado con motivo**: en E02.01 el rótulo a 17 pt es `OS` con su `A` — un occupancy sensor montado en el wall, no una penetración. Una línea de lineweight bajo que muere en la face no atraviesa nada.
 
-El gyp es idéntico y está bien: [valor retirado E24] × [valor retirado E24] × 2 layers = **361.93 SF por face** en los dos. Los huecos de ducto (≈1 SF) no se deducen — está declarado en el cierre del cruce MEP, no escondido.
+El gyp es idéntico y está bien: [valor retirado E24] × [valor retirado E24] × 2 layers = **[valor retirado E24] SF por face** en los dos. Los huecos de ducto (de área despreciable) no se deducen — está declarado en el cierre del cruce MEP, no escondido.
 
 **REGLA:** antes de dudar de dos elementos iguales con distinto conteo, comparar **campo / terminación / studs por separado**. La diferencia casi siempre está en un solo sumando, y ese sumando tiene nombre.
 
@@ -42,7 +42,7 @@ El wall **40** —el inclinado a 30° entre el 24 HR VESTIBULE 101 y el ATM ROOM
 
 Y el cierre guarda la frase de cobertura, para que se vea de un vistazo:
 
-> *los 57 walls del proyecto están cubiertos: 20 con penetración, 36 declarados sin penetración, 3 con falso positivo descartado*
+> *los [valor retirado E24] walls del proyecto están cubiertos: [valor retirado E24] con penetración, [valor retirado E24] declarados sin penetración, [valor retirado E24] con falso positivo descartado*
 
 ## REGLA — Un `continue` por tipo de geometría es una bomba
 

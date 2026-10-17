@@ -10,7 +10,7 @@ Rodolfo pidió revisar el Excel entero otra vez. Esta pasada **no miró los cier
 
 | renglón | qué pasaba | efecto |
 |---|---|---|
-| **Trim** (corner bead, casing bead, shadow molding) | salía **sin waste** por estar bajo el encabezado "accesorios" | **+77.22 LF** sin comprar |
+| **Trim** (corner bead, casing bead, shadow molding) | salía **sin waste** por estar bajo el encabezado "accesorios" | **+[valor retirado E24] LF** sin comprar |
 | **Trim**, conversión a piezas | dividido entre el length de **stud (20 ft)** | 26 tramos pedidos, **60** reales |
 | **Bracing** `1-1/2" C.R. channel` | dividido entre el length de **track (10 ft)** | 304 pedidos, **190** reales |
 | **Carrying channel** (es el mismo C.R. channel) | igual, entre 10 ft | 28 pedidos, **18** reales |

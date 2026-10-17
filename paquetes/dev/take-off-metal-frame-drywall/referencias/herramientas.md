@@ -106,7 +106,7 @@ Cada emisión lleva un **sello sha256** del contenido, que cambia si se toca cua
 
 **Qué hace.** Antes de cuantificar un tipo, cuenta los WALLS REALES de ese tipo (no los tags) y compara contra lo que el cierre declara. `auditar(page_index, tag, espesor_del_schedule, esperados)`.
 
-**La regla que hace cumplir.** Dos tags son el MISMO wall solo si su leader aterriza en **LA MISMA BANDA** — misma orientación Y los mismos dos niveles de face (±0.06 pt). **Distinta orientación = walls distintos, por cerca que estén los tags.** Nace de un error real: dos tags a 35 pt uno del otro se dieron por el mismo wall y se perdió un wall entero de 11.83 LF, porque uno apuntaba a un wall vertical y el otro a uno horizontal.
+**La regla que hace cumplir.** Dos tags son el MISMO wall solo si su leader aterriza en **LA MISMA BANDA** — misma orientación Y los mismos dos niveles de face (±0.06 pt). **Distinta orientación = walls distintos, por cerca que estén los tags.** Nace de un error real: dos tags muy cercanos uno del otro se dieron por el mismo wall y se perdió un wall entero, porque uno apuntaba a un wall vertical y el otro a uno horizontal.
 
 **Qué bloquea.** Lanza `BarridoRechazado` si el nº de bandas distintas no coincide con el que declara el cierre, o si algún tag se queda sin banda. No hay modo "seguir con advertencias". Elige la banda por CERCANÍA DE LA PUNTA del leader y solo desempata por error de thickness: al revés es como se pierde un wall. Mide cada wall por el TRAMO que contiene la punta, nunca por la extensión de la face en toda la hoja, puenteando huecos solo con end cap a los dos lados.
 
@@ -165,3 +165,15 @@ Las palabras de todas las páginas se extraen UNA vez y se cachean: la primera r
 
 **Prueba de aceptación:** correrlo sobre un set YA hecho a mano y comparar mapa de hojas y censo de tags contra lo que salió entonces. Si no cuadra exacto, no reemplaza el Paso 0 — solo ayuda a revisarlo.
 ---
+
+## Herramientas de etapas (v69)
+
+Flujo completo en el PROTOCOLO v69 de SKILL.md. Todas genéricas (nada de un proyecto en el código), con test.
+
+| Tool | Etapa | Qué hace | Test |
+|---|---|---|---|
+| `inventario.py <pdf> <out_dir>` | 1 | índice de hojas, types del schedule, cada partition tag con id, hoja, coordenadas y recorte circulado verificado; ambiguos sin contar; hojas no inventariables | `test_inventario.py` |
+| `particion.py canon.json [--modo tramo\|run]` | 2–3 | regla única de partición de walls; `MODO_DEFAULT` = "tramo" hasta que decida el estimador | `test_particion.py` |
+| `comparar.py A.json B.json inventario.json out_dir --pdf plano.pdf` | 3 | empareja las dos lecturas, cruza contra el inventario y escribe `revision.md` / `revision.json` / `img/` con alertas | `test_comparar.py` |
+| `etapas.py estado\|compuerta <dir>` · `etapas.py unir <carpeta> <canon.json>` | 1–5 | dónde quedó la corrida (reanudar), compuerta de etapas, unión de fragmentos de una lectura | `test_etapas.py` |
+| `test_ciego_v69.py <SKILL.md\|carpeta>` | 5 | E24 genérico: sin nombres de proyecto, cantidades, miles, resultados ni coordenadas | autoprueba incluida |
