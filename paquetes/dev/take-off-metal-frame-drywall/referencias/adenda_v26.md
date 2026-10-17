@@ -53,7 +53,7 @@ Cuando dos renglones comparten prefijo (`BOARD_WR:baño 114` y `BOARD_WR:baño 1
 
 Un texto de operación viejo **no es cosmético: hay herramientas que lo LEEN**.
 
-En el wall 31 la reauditoría bajó el length de 1.77 a [valor retirado E24] ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el 1.77, no cuadró con el SF sellado y **le inventó una deducción de 7.84 SF a un wall sin openings** — la única deducción fantasma de las 107 faces.
+En el wall 31 la reauditoría bajó el length de [valor retirado E24] a [valor retirado E24] ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el valor viejo, no cuadró con el SF sellado y **le inventó una deducción de 7.84 SF a un wall sin openings** — la única deducción fantasma de las 107 faces.
 
 **Para corregir un cierre ya sellado:** un script que (a) arregla el texto, (b) **verifica line item por line item que ningún valor numérico cambió**, y (c) recalcula el sello. Nunca editar el JSON a mano: eso rompe el sello sin dejar rastro de qué se tocó.
 
@@ -69,7 +69,7 @@ En BofA, 10 penetraciones de MEP estaban en el cierre de su wall (renglón `ABER
 
 Un wall que cruza un eje de cambio de deck tiene **DOS alturas de stud**, y el cierre ya lo escribe:
 
-> `tramo HI 15.07 ft: floor(180.8/16)+1 = 12 a [valor retirado E24] ft; tramo LOW 3.93 ft: floor(47.2/16)+1 = 3 a [valor retirado E24] ft`
+> `tramo HI [valor retirado E24] ft: floor(180.8/16)+1 = 12 a [valor retirado E24] ft; tramo LOW 3.93 ft: floor(47.2/16)+1 = 3 a [valor retirado E24] ft`
 
 Multiplicar piezas × una sola height lo falsea (wall 14: 230.63 contra 223.66 LF reales). El LF de material se calcula **tramo por tramo**, y los studs adicionales (terminación, jambs, cripples) van a la **height declarada del wall**, no a la mayor de los tramos.
 

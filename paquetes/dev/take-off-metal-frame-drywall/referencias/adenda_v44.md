@@ -54,7 +54,7 @@ ninguno con un tag MW en la clave, y concluí: *"ninguno es de millwork"*. Cuant
 | MW06A | B #19 | 3 standards × 2.74 ft = 8.22 LF |
 | MW07 | A5 #15 | line item propia `BLOCKING:millwork`, 3 runs × 6.625 = [valor retirado E24] LF |
 | MW08, MW12, MW13 | B2 #28, A1 #9 | |
-| MW18 | F #40 | 3.34 LF |
+| MW18 | F #40 | [valor retirado E24] LF |
 | MW21 | A1 #5 | |
 
 Mi método era «1 run × length» para todo. El del take-off ya distinguía standards de

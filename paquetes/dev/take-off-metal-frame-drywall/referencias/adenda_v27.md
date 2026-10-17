@@ -8,12 +8,12 @@ El wall A1 #8 decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" p
 
 | fila | tramo | alto | por qué |
 |---|---|---|---|
-| Corridor 111 | 17.06 LF (face oeste completa) | 9.000 | — |
+| Corridor 111 | [valor retirado E24] LF (face oeste completa) | 9.000 | — |
 | Break Room 118 | 3.12 LF | 9.000 | ACT-5 a [valor retirado E24] + 6" |
 | Electrical 120 | 6.24 LF | 12.830 | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
 | NER 121 | 7.70 LF | 12.700 | mismo key note, deck interpolado |
 
-3.12 + 6.24 + 7.70 = **17.06 LF** = el length del wall. El generador sumaba `1+1+1+1`.
+3.12 + 6.24 + 7.70 = **[valor retirado E24] LF** = el length del wall. El generador sumaba `1+1+1+1`.
 
 **Lo grave no es el 4. Es que nada lo atrapó.** Los sellos prueban que el cierre es coherente consigo mismo. La aserción de sobrantes prueba que ninguna line item se cae. Pero **nada probaba que una columna de resumen significara lo que dice su encabezado**. El board estaba bien (sale face por face), así que ningún control de cantidad lo iba a ver.
 
@@ -27,7 +27,7 @@ El wall A1 #8 decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" p
 capas = Σ(capas_cara × largo_cara) ÷ largo_muro
 ```
 
-(17.06 + 3.12 + 6.24 + 7.70) ÷ 17.06 = **2.00** ✓
+([valor retirado E24] + 3.12 + 6.24 + 7.70) ÷ [valor retirado E24] = **2.00** ✓
 
 Si un tramo de un lado no lleva board, el resultado da un decimal honesto — el wall 28 da **1.97**, porque 0.33 ft de su lado este (donde muere un wall perpendicular) no lleva board de ese wall. Ese decimal **es información, no un error de redondeo**: no se fuerza a 2.
 
