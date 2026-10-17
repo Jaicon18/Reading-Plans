@@ -37,7 +37,7 @@ Y el thickness medido en planta lo confirma por tercera vez (7.28" y 7.20" contr
 
 El generador del Excel enruta cada line item a una columna. **Si aparece una line item que ninguna columna recoge, el libro NO se genera** (aserción de sobrantes, con el número de wall y el nombre de la line item en el mensaje).
 
-Sin eso se perdieron, ya cuantificados y sellados: 165.67 LF de aberturas enmarcadas, 122.67 LF de gypsum edge trim, 6.00 LF de blocking del roof hatch, 18 refuerzos de stud y 100.80 SF de board W.R.
+Sin eso se perdieron, ya cuantificados y sellados: 165.67 LF de aberturas enmarcadas, [valor retirado E24] LF de gypsum edge trim, 6.00 LF de blocking del roof hatch, 18 refuerzos de stud y 100.80 SF de board W.R.
 
 **Corolario:** toda hoja del libro tiene que estar REFERENCIADA por el resumen de materiales. Una hoja huérfana es material que no se cobra. Se comprueba leyendo las fórmulas del resumen y viendo que mencionen todas las hojas.
 
@@ -53,7 +53,7 @@ Cuando dos renglones comparten prefijo (`BOARD_WR:baño 114` y `BOARD_WR:baño 1
 
 Un texto de operación viejo **no es cosmético: hay herramientas que lo LEEN**.
 
-En el wall 31 la reauditoría bajó el length de 1.77 a 1.26 ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el 1.77, no cuadró con el SF sellado y **le inventó una deducción de 7.84 SF a un wall sin openings** — la única deducción fantasma de las 107 faces.
+En el wall 31 la reauditoría bajó el length de 1.77 a [valor retirado E24] ft y reescaló todos los valores sin tocar las cadenas. El generador del Excel, que reconstruye `L × H` de cada face leyendo la operación, tomó el 1.77, no cuadró con el SF sellado y **le inventó una deducción de 7.84 SF a un wall sin openings** — la única deducción fantasma de las 107 faces.
 
 **Para corregir un cierre ya sellado:** un script que (a) arregla el texto, (b) **verifica line item por line item que ningún valor numérico cambió**, y (c) recalcula el sello. Nunca editar el JSON a mano: eso rompe el sello sin dejar rastro de qué se tocó.
 
@@ -69,7 +69,7 @@ En BofA, 10 penetraciones de MEP estaban en el cierre de su wall (renglón `ABER
 
 Un wall que cruza un eje de cambio de deck tiene **DOS alturas de stud**, y el cierre ya lo escribe:
 
-> `tramo HI 15.07 ft: floor(180.8/16)+1 = 12 a 15.375 ft; tramo LOW 3.93 ft: floor(47.2/16)+1 = 3 a 13.052 ft`
+> `tramo HI 15.07 ft: floor(180.8/16)+1 = 12 a [valor retirado E24] ft; tramo LOW 3.93 ft: floor(47.2/16)+1 = 3 a [valor retirado E24] ft`
 
 Multiplicar piezas × una sola height lo falsea (wall 14: 230.63 contra 223.66 LF reales). El LF de material se calcula **tramo por tramo**, y los studs adicionales (terminación, jambs, cripples) van a la **height declarada del wall**, no a la mayor de los tramos.
 
@@ -110,11 +110,11 @@ La compuerta verificaba que una door **no** llevara sill, pero no exigía que un
 
 ## REGLA — Cada abertura con SU PROPIO width
 
-El header y el sill se calculan con el **width propio de cada abertura**, nunca con el de la window típica. Error real: `header = n × (8.00 + 1.333)` aplicado a una puerta de 3'-4" y a un R.O. de ATM de 2'-2 1/8". La fórmula correcta suma abertura por abertura: `sum(ancho_propio_i + 1.333)`. Lo mismo para sill y para cripples.
+El header y el sill se calculan con el **width propio de cada abertura**, nunca con el de la window típica. Error real: `header = n × (8.00 + 1.333)` aplicado a una puerta de [valor retirado E24] y a un R.O. de ATM de [valor retirado E24]. La fórmula correcta suma abertura por abertura: `sum(ancho_propio_i + 1.333)`. Lo mismo para sill y para cripples.
 
 ## REGLA — Un hueco de EQUIPO se mide en el detalle del equipo, no en el claro de la planta
 
-El claro grueso que se ve en planta puede ser el **NICHO** (zona engrosada donde se aloja el equipo), no el hueco. Los dos conviven y se parecen: en BofA el nicho del ATM drive-up mide 5'-2" y el R.O. sólo **2'-2 1/8"**.
+El claro grueso que se ve en planta puede ser el **NICHO** (zona engrosada donde se aloja el equipo), no el hueco. Los dos conviven y se parecen: en BofA el nicho del ATM drive-up mide 5'-2" y el R.O. sólo **[valor retirado E24]**.
 
 Procedimiento: buscar el detalle de **ELEVACIÓN** del equipo (ahí va el R.O. acotado) y cruzarlo contra el claro en la **face** del wall en planta. Si coinciden, es el hueco; si el claro de planta es mucho mayor, lo que se midió fue el nicho.
 
@@ -134,7 +134,7 @@ Antes de usar la escala para medir algo NO acotado, hay que **reproducir con ell
 
 Todo eje o fachada se cierra con la **lista de tramos** (de → a, en pt y en ft) que suma **exactamente** el total declarado. Los quiebres se leen de los extremos de las faces de lineweight de wall; los huecos son los **claros entre esas faces**.
 
-**Control:** un claro de abertura tiene que dar cifra redonda — 144.00 pt = 8'-0" de window, 60.00 pt = 3'-4" de door. Si un claro no da redondo, el quiebre está mal leído: no se redondea, se vuelve a leer.
+**Control:** un claro de abertura tiene que dar cifra redonda — 144.00 pt = 8'-0" de window, 60.00 pt = [valor retirado E24] de door. Si un claro no da redondo, el quiebre está mal leído: no se redondea, se vuelve a leer.
 
 Y las dimensions impresas del perímetro se cruzan contra lo medido: `57'-6 1/2"` contra face exterior a face exterior (1,036.02 pt ÷ 18 = 57.557 ft, diferencia 0.19"), `26'-3"` contra el paño de storefront (472.44 pt ÷ 18 = 26.247 ft, diferencia 0.04").
 

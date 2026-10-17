@@ -84,7 +84,7 @@ El paso 4 ("guardarla") ahora incluye **regenerar el entregable**:
 
 ## Error de la propia compuerta, cazado en su primer arranque
 
-`entregar.py` leía el resultado de los sellos tomando la **última línea** de `resumen_total.py`. Pero ese script sigue imprimiendo renglones de material después del TOTAL, así que la última línea era `TRIM_CEILING ... 12.01` y la compuerta reportó **"SELLO ROTO"** con los 77 sellos intactos. Una falsa alarma en el primer minuto de vida.
+`entregar.py` leía el resultado de los sellos tomando la **última línea** de `resumen_total.py`. Pero ese script sigue imprimiendo renglones de material después del TOTAL, así que la última línea era `TRIM_CEILING ... [valor retirado E24]` y la compuerta reportó **"SELLO ROTO"** con los 77 sellos intactos. Una falsa alarma en el primer minuto de vida.
 
 > **REGLA — La salida de otra herramienta se parsea por CONTENIDO, nunca por posición.**
 > Se busca el renglón que dice `sellos OK`. Si no aparece ninguno, eso también es falla —

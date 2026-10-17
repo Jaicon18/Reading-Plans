@@ -9,7 +9,7 @@ El wall A1 #8 decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" p
 | fila | tramo | alto | por qué |
 |---|---|---|---|
 | Corridor 111 | 17.06 LF (face oeste completa) | 9.000 | — |
-| Break Room 118 | 3.12 LF | 9.000 | ACT-5 a 8'-6" + 6" |
+| Break Room 118 | 3.12 LF | 9.000 | ACT-5 a [valor retirado E24] + 6" |
 | Electrical 120 | 6.24 LF | 12.830 | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
 | NER 121 | 7.70 LF | 12.700 | mismo key note, deck interpolado |
 

@@ -21,7 +21,7 @@ y **la razón la tuvo un lado distinto en cada uno**:
 | wall | ubicación decía | faces decían | quién tenía razón | efecto |
 |---|---|---|---|---|
 | **A1 #4** | "entry from Central Zone" | Corridor 111 / Corridor 111 (face 2) | **las faces** | fiarse de la ubicación habría subido una face a 12.00 ft → **+15 SF que no existen** |
-| **A1 #2** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad (los dos bands a 8'-6") |
+| **A1 #2** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad (los dos bands a [valor retirado E24]) |
 | **A1 #3** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad |
 | **A1 #7** | Break Room 118 (una sola) | Break Room 118 / **Break Room 118** | **ninguno** | la face ESTE es Cash Window 116, ceiling ACT-4 9'-0" → **faltaban 0.87 SF** |
 
@@ -29,7 +29,7 @@ y **la razón la tuvo un lado distinto en cada uno**:
 
 **A1 #4 — la retícula del ceiling cruza el wall.** En A02.01 **no hay ningún wall horizontal**
 que cruce la banda x 1134-1224 entre y=1000 y y=1229, y en el RCP **la retícula pasa de largo
-sobre el wall**, con un solo tag en esa banda: el `ACT-4 8'-6"` de CORRIDOR 111. El corridor
+sobre el wall**, con un solo tag en esa banda: el `ACT-4 [valor retirado E24]` de CORRIDOR 111. El corridor
 sigue al norte del wall. Las dos faces son corridor y el sealed estaba bien.
 
 **A1 #2 y #3 — el corridor no llega al nicho.** A02.01 pone el MW01 contra la face OESTE del #2
@@ -80,6 +80,6 @@ Es el caso inverso del A1 #6 (allí el valor venía de píxeles con etiqueta de 
 valor es la dimensión con etiqueta de derivación). Las dos salen de la misma jerarquía:
 **printed dimension > dimension-string sum > pixels**.
 
-**Estado: 17/17 compuertas pasan · 88 sellos OK / 0 rotos · tipo A1 CERRADO, 9 walls, 78.37 LF.**
+**Estado: 17/17 compuertas pasan · 88 sellos OK / 0 rotos · tipo A1 CERRADO, 9 walls, [valor retirado E24] LF.**
 
 ---

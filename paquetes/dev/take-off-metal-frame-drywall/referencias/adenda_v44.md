@@ -52,7 +52,7 @@ ninguno con un tag MW en la clave, y concluí: *"ninguno es de millwork"*. Cuant
 | MW01 | A1 #2, A1 #3 | free edge + backing del printer cabinet, con el #3 razonando que el gabinete apoya en el #2 |
 | MW05 | B #19 | 3 standards × 7.00 ft = 21.00 LF |
 | MW06A | B #19 | 3 standards × 2.74 ft = 8.22 LF |
-| MW07 | A5 #15 | line item propia `BLOCKING:millwork`, 3 runs × 6.625 = 19.88 LF |
+| MW07 | A5 #15 | line item propia `BLOCKING:millwork`, 3 runs × 6.625 = [valor retirado E24] LF |
 | MW08, MW12, MW13 | B2 #28, A1 #9 | |
 | MW18 | F #40 | 3.34 LF |
 | MW21 | A1 #5 | |

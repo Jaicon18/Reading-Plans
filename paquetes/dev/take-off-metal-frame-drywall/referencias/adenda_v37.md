@@ -40,15 +40,15 @@ sheathing. Hay que abrir el zoom antes de concluir.
 
 | | antes | ahora |
 |---|---|---|
-| wall exterior | un `600S137-33` de slab a T/STUD | `600S137-33` de slab a **B.O.D. 15'-4 1/2"** |
+| wall exterior | un `600S137-33` de slab a T/STUD | `600S137-33` de slab a **B.O.D. [valor retirado E24]** |
 | tope del wall | top track común | **DEFLECTION TRACK** (6/S5.10, 10/S5.10) |
 | parapet | la misma pieza, seguida | **6 walls nuevos**, tag `EXT-PARAPET`, `600S162-54 @16"` con `600T125-54` arriba y abajo |
 | studs del parapet | — | + 2 por cada HSS post @ 5'-0" O.C. |
 | anchorage del infill | — | **PAFs @ 12" O.C.** a la steel beam |
-| `T/ STUD HP 19'-8"` | DERIVADO | **CONFIRMADO** — impreso en `A/A09.21`, hoja que no había abierto |
+| `T/ STUD HP [valor retirado E24]` | DERIVADO | **CONFIRMADO** — impreso en `A/A09.21`, hoja que no había abierto |
 
 El B.O.D. queda CONFIRMADO por dos fuentes independientes: `S2.20` lo rotula `B.O.D. EL.
-15'-4 1/2" NO SLOPE` y `H/A09.23` lo repite como `T/ STEEL 15'-4 1/2"`.
+[valor retirado E24] NO SLOPE` y `H/A09.23` lo repite como `T/ STEEL [valor retirado E24]`.
 
 ### El bridging no cruza el deflection track
 
@@ -70,7 +70,7 @@ El B.O.D. queda CONFIRMADO por dos fuentes independientes: `S2.20` lo rotula `B.
 **`5/8" GLASS MAT SHEATHING`** con la flecha apoyada en la face EXTERIOR del `6" METAL STUD
 FRAMING`. `7/A09.26` lo repite a media height.
 
-**Las OCHO secciones de wall del set no lo nombran ni una vez.** Son **2,939.76 SF** de
+**Las OCHO secciones de wall del set no lo nombran ni una vez.** Son **[valor retirado E24] SF** de
 board que no estaban en el take-off.
 
 La extensión se acotó con un barrido de las 95 hojas por `GLASS MAT`/`GLASS-MAT`: solo

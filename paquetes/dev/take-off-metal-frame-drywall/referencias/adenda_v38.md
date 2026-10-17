@@ -46,7 +46,7 @@ A04.01 (RCP)
 |---|---|
 | `A02.01` / `A04.01` | el length (48.047 ft) y la posición |
 | `D/A09.22` | el fondo, y lo confirma contra la planta |
-| `7/A09.26` | la composición y los datums `T/STUD 12'-7"` − `B/STUD 10'-8 5/8"` |
+| `7/A09.26` | la composición y los datums `T/STUD [valor retirado E24]` − `B/STUD [valor retirado E24]` |
 | `7/S5.20` | el perfil `362S137-33` y el 16" O.C., que **ningún detalle de canopy rotula** |
 
 Y de paso la cadena resolvió un pleito abierto hacía días: los `3'-1 3/4"` de D/A09.22 y los

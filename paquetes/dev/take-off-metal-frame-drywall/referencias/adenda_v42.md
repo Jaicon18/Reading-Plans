@@ -9,7 +9,7 @@
 
 Y la que la destapó:
 
-> **Una ELEVACIÓN no es una HEIGHT.** S2.20 imprime una elevación (`B.O.D. EL. 15'-4 1/2"`);
+> **Una ELEVACIÓN no es una HEIGHT.** S2.20 imprime una elevación (`B.O.D. EL. [valor retirado E24]`);
 > la height del stud es esa elevación **menos** el datum `T/SLAB 0'-0"`. Que las dos cifras
 > coincidan pasa sólo porque el datum vale cero. **Una resta sigue siendo una resta**, así que
 > es `[DERIVADO]` y tiene que escribir la cuenta.
@@ -17,17 +17,17 @@ Y la que la destapó:
 ## CÓMO SE ENCONTRÓ (armando el HANDOFF, no revisando cantidades)
 
 Rodolfo pidió un handoff completo para continuar el take-off en otra sesión. Un handoff obliga
-a mirar la **etiqueta** de cada dato en vez de la cantidad, y ahí salió: el mismo `15.375`
+a mirar la **etiqueta** de cada dato en vez de la cantidad, y ahí salió: el mismo `[valor retirado E24]`
 sacado del mismo `B.O.D.` de S2.20 estaba sellado `[CONFIRMADO]` en 12 walls y `[DERIVADO]` en
 4. El culpable era una línea de `cerrar_A1K.py` que etiquetaba **por el valor**:
 
 <!-- GLOSARIO:INICIO -->
 ```python
-alto = Val(bod,'DERIVADO',operacion=fbod) if bod != 15.375 else Val(bod,'CONFIRMADO',fuente=fbod)
+alto = Val(bod,'DERIVADO',operacion=fbod) if bod != [valor retirado E24] else Val(bod,'CONFIRMADO',fuente=fbod)
 ```
 <!-- GLOSARIO:FIN -->
 
-o sea "si vale 15.375 es CONFIRMADO". **La etiqueta describe cómo se obtuvo el número, nunca
+o sea "si vale [valor retirado E24] es CONFIRMADO". **La etiqueta describe cómo se obtuvo el número, nunca
 cuánto vale.**
 
 ## POR QUÉ `verif_confirmado` NO LO CAZABA — el hueco más grande que tuvo esa compuerta
@@ -60,7 +60,7 @@ real**: se revirtió el sello del A1K #11 a `CONFIRMADO`, la compuerta lo marcó
 Trinquete declarado en 0.
 
 Lo que sigue abierto, y va al handoff como pendiente numerado: **27 `alto_board` citan
-`5/A12.01 PARTITION G` para el valor 15.375, y ese detalle no imprime ese número** — da la REGLA
+`5/A12.01 PARTITION G` para el valor [valor retirado E24], y ese detalle no imprime ese número** — da la REGLA
 ("to underside of structure"); el valor sale de S2.20. Un número correcto con la fuente
 equivocada es el mismo error de `5/F de S5.20`.
 

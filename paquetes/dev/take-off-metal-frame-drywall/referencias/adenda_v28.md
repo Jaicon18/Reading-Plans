@@ -9,8 +9,8 @@ Rodolfo preguntó por qué dos walls G idénticos tenían distinto número de st
 | | #45 | #46 |
 |---|---|---|
 | length | 11.770 LF | 11.770 LF |
-| height · O.C. · rows | 15.375 · 16" · 2 | idénticos |
-| campo `(floor(11.77×12/16)+1) × 2` | 18 | 18 |
+| height · O.C. · rows | [valor retirado E24] · 16" · 2 | idénticos |
+| campo `(floor([valor retirado E24]×12/16)+1) × 2` | 18 | 18 |
 | terminación (2 extremos × 2 rows) | 4 | 4 |
 | **studs de abertura enmarcada de MEP** | **0** | **8** |
 | **total** | **22** | **30** |
@@ -19,7 +19,7 @@ El #46 tiene **2 penetraciones** en M01.01 (un `8"x10"` y un `10"ø`), cada una 
 
 El #45 tuvo **un solo impacto y fue descartado con motivo**: en E02.01 el rótulo a 17 pt es `OS` con su `A` — un occupancy sensor montado en el wall, no una penetración. Una línea de lineweight bajo que muere en la face no atraviesa nada.
 
-El gyp es idéntico y está bien: 11.77 × 15.375 × 2 layers = **361.93 SF por face** en los dos. Los huecos de ducto (≈1 SF) no se deducen — está declarado en el cierre del cruce MEP, no escondido.
+El gyp es idéntico y está bien: [valor retirado E24] × [valor retirado E24] × 2 layers = **361.93 SF por face** en los dos. Los huecos de ducto (≈1 SF) no se deducen — está declarado en el cierre del cruce MEP, no escondido.
 
 **REGLA:** antes de dudar de dos elementos iguales con distinto conteo, comparar **campo / terminación / studs por separado**. La diferencia casi siempre está en un solo sumando, y ese sumando tiene nombre.
 
@@ -32,7 +32,7 @@ if ori == 'D':
     continue
 ```
 
-El wall **40** —el inclinado a 30° entre el 24 HR VESTIBULE 101 y el ATM ROOM 102, 17.76 LF— se saltaba **en silencio**. No aparecía ni en la lista de "con penetración", ni en la de "sin penetración", ni en la de falsos positivos.
+El wall **40** —el inclinado a 30° entre el 24 HR VESTIBULE 101 y el ATM ROOM 102, [valor retirado E24] LF— se saltaba **en silencio**. No aparecía ni en la lista de "con penetración", ni en la de "sin penetración", ni en la de falsos positivos.
 
 **Nunca se evaluó, y nada lo decía.** Los sellos verificaban, las cantidades cuadraban, la auditoría adversarial no lo vio.
 

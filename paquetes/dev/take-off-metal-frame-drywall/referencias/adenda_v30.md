@@ -29,7 +29,7 @@ Son **dos aparatos en dos walls distintas**:
 - El **lavabo** va en el chase → 100.80 SF, ya estaban.
 - El **inodoro** va contra la **face interior del wall exterior oeste** (probado con `D/A08.01 RESTROOM ELEVATION D`, que lo dibuja de perfil con su barra TA-3). Esa face estaba como gyp **regular**.
 
-**Faltaban 112.94 SF.** W.R. total: 100.80 → **213.74 SF**.
+**Faltaban [valor retirado E24] SF.** W.R. total: 100.80 → **[valor retirado E24] SF**.
 
 ### 2. El FRP del mop sink no estaba cuantificado
 
@@ -39,7 +39,7 @@ Son **dos aparatos en dos walls distintas**:
 
 Su marcador cae dentro del **JANITOR CLOSET 112** y su línea guía apunta a la face del wall oeste. `5/A08.01 PLAN SECTION @ MOP SINK` lo dibuja en **esquina**, con FRP en **las dos walls**, más `PVC EDGE TRIM MOLDING`, `PVC INSIDE CORNER TRIM MOLDING`, `TILING FLANGE` y `CLEAR SEALANT`.
 
-**Cero cuantificado.** Alto **CONFIRMADO** (4'-0" de dimension impresa); width **PENDIENTE** — el aparato no viene acotado en A02.01, A08.01 ni en el Plumbing Fixture Schedule. No se inventa: se da la dimension superior para precio (24" → 16.00 SF; 28" → 18.67 SF).
+**Cero cuantificado.** Alto **CONFIRMADO** (4'-0" de dimension impresa); width **PENDIENTE** — el aparato no viene acotado en A02.01, A08.01 ni en el Plumbing Fixture Schedule. No se inventa: se da la dimension superior para precio (24" → 16.00 SF; 28" → [valor retirado E24] SF).
 
 ### 3. El Break Room tiene fregadero y el plano no le pone nada
 
@@ -75,6 +75,6 @@ Y el cierre guarda la frase de cobertura: *"los 4 cuartos con aparato de plomer�
 
 La misma área **sale** del renglón de gyp regular. El total de board no cambia; lo que cambia es el **tipo** — y eso sí cambia el precio, porque cada tipo lleva su propio waste y su propio costo.
 
-Regular: 16,465.34 → **16,352.40 SF** · W.R.: 100.80 → **213.74 SF**.
+Regular: 16,465.34 → **16,352.40 SF** · W.R.: 100.80 → **[valor retirado E24] SF**.
 
 ---

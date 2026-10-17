@@ -118,7 +118,7 @@ Si algo no se distingue con certeza en una imagen, dilo y detente — nunca pres
 
 `altura del ceiling del cuarto − altura del header del elemento = la banda de muro que falta`
 
-Si da más que cero, ahí hay material que alguien tiene que construir. Y hay que hacerla **por face**, porque el ceiling cambia de cuarto a cuarto: en un caso real la misma abertura dejaba **1'-0"** por la face de la oficina (ceiling 9'-0") y **3'-6"** por la face del lobby (ceiling 11'-6"), y el board seguía hasta el deck por las dos.
+Si da más que cero, ahí hay material que alguien tiene que construir. Y hay que hacerla **por face**, porque el ceiling cambia de cuarto a cuarto: en un caso real la misma abertura dejaba **1'-0"** por la face de la oficina (ceiling 9'-0") y **[valor retirado E24]** por la face del lobby (ceiling 11'-6"), y el board seguía hasta el deck por las dos.
 
 **Si lleva gyp, lleva metal.** Nunca se cuantifica board sin su soporte. Arriba de una abertura el soporte es, como mínimo: **header o box beam** del opening · **jamb studs** · **studs cortos del bulkhead** a su O.C. · **track arriba y abajo** (el de abajo se apoya sobre el header) · **bracing** si la height lo pide · **corner bead** en el canto inferior · **shadow molding** donde muere contra el scheduled ceiling · **sealant**. Busca el DETALLE PROPIO del bulkhead en Partition Types antes de derivar nada: suele existir y suele traer line items que no están en el detalle del wall (blocking de plywood bajo el box beam, molding, bead).
 
@@ -266,7 +266,7 @@ El board para donde su detalle diga, **medido contra el ceiling del cuarto QUE E
 Para saber qué ceiling tiene cada cuarto hay que leer el RCP **cuarto por cuarto**, no de memoria ni por la nota general:
 - La nota general ("all ceiling heights shall be 8'-6\" unless noted otherwise") solo rige donde no hay tag.
 - Un cuarto **sin tag de ceiling** no es "el default": revisa sus key notes. "OPEN TO STRUCTURE ABOVE" es un key note, y se confirma además porque dentro del cuarto **no hay grid de ceiling dibujado**.
-- Sigue el leader de cada tag de ceiling: un tag `GB` junto a un cuarto puede pertenecer al **soffit**, no al cuarto, y el cuarto tener otro ceiling distinto. Y el tag de un cuarto puede estar FUERA del edificio con leader (en Greeley el office traía su tag 10'-6" debajo de la planta).
+- Sigue el leader de cada tag de ceiling: un tag `GB` junto a un cuarto puede pertenecer al **soffit**, no al cuarto, y el cuarto tener otro ceiling distinto. Y el tag de un cuarto puede estar FUERA del edificio con leader (en Greeley el office traía su tag [valor retirado E24] debajo de la planta).
 
 ## HEIGHT DE DECK — ZONAS Y PENDIENTE
 
@@ -339,9 +339,9 @@ Una medida es autosuficiente cuando se verifica sola, sin take-off ajeno:
 - **Hay clases de elemento que NO son un tramo recto, y marcarlas como banda es marcarlas mal:**
   - **Column enclosure / pilastra / chase (tag dentro de una caja cerrada):** se marca como **CAJA**, y el LF rotulado es el **PERÍMETRO FURRADO** (solo las faces expuestas), no el length de una face. El sondeo de tinta va sobre el PERÍMETRO: por dentro la caja está hueca y sondear el centro abortaría un marcado correcto. La caja se localiza por coincidencia EXACTA de dimensión (width × alto en pulgadas del cierre → pt) contra los pares de líneas de lineweight de wall, y se confirma porque la face furrada del cierre queda a un thickness de furring hacia dentro de la arista.
   - **Wall inclinado:** rectángulo ROTADO sobre el eje del wall, nunca degradado a círculo.
-  - **Bulkhead o header sobre un opening:** se marca sobre el OPENING, así que **0% de face de wall es correcto por definición**. Sus extremos son las **tapas de jamb** de thickness completo, no las faces de los walls vecinos: tomar las faces mete de más el width de la jamb del officefront (4" en un caso real, openings de 7'-10" en vez de los 7'-6" `HOLD CLEAR FINISHED OPENING`).
+  - **Bulkhead o header sobre un opening:** se marca sobre el OPENING, así que **0% de face de wall es correcto por definición**. Sus extremos son las **tapas de jamb** de thickness completo, no las faces de los walls vecinos: tomar las faces mete de más el width de la jamb del officefront (4" en un caso real, openings de [valor retirado E24] en vez de los [valor retirado E24] `HOLD CLEAR FINISHED OPENING`).
 - **Una face puede estar dibujada FINA.** Antes de declarar que una banda está mal por falta de face, reintenta con lw ≥ 0.55: hay walls cuya face se dibuja como triple línea fina (acabado / board / stud) mientras la otra va en lineweight de wall. Se confirma con imagen y se anota.
-- **Toda corrección de cantidad tiene que llegar TAMBIÉN al dibujo.** Caso real: un wall siguió dibujado con 1.77 LF un mes después de que la reauditoría lo bajara a 1.26 LF — la corrección estaba en el cierre y en el documento, pero no en la tabla del plano. Una corrección se aplica el MISMO turno a las cuatro cosas: **cierre sellado · documento del proyecto · tabla de bandas del plano · resumen global**.
+- **Toda corrección de cantidad tiene que llegar TAMBIÉN al dibujo.** Caso real: un wall siguió dibujado con 1.77 LF un mes después de que la reauditoría lo bajara a [valor retirado E24] LF — la corrección estaba en el cierre y en el documento, pero no en la tabla del plano. Una corrección se aplica el MISMO turno a las cuatro cosas: **cierre sellado · documento del proyecto · tabla de bandas del plano · resumen global**.
 - **Verificación visual final, sobre la imagen YA MARCADA.** Se reabre cada hoja entregada y se recorta la zona de las bandas **desde esa hoja marcada**, no desde coordenadas calculadas, confirmando que cada rectángulo cae sobre un wall que lleva el tag de ese tipo. Si un recorte no ubica con certeza: recorte amplio de contexto primero, zoom cerrado después.
 - **Si en el barrido faltó una ubicación, faltó el wall.** La hoja marcada de un tipo tiene que mostrar TODAS sus instancias y su total tiene que coincidir con el LF sellado de ese tipo. El título de la hoja lleva el tipo, el nº de walls y el LF total, y ese total se toma del resumen global, no se escribe a mano.
 - **Si hay detalles, ábrelos: siempre los hay.** Ningún tipo se cuantifica sin barrer las hojas de detalles buscando todo lo que lo toque. Y la llamada a un detalle no siempre está en el floor plan: los head y jamb de cada door salen del **Door Schedule**, en sus columnas HEAD / JAMB / SILL.
@@ -437,8 +437,8 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - **La numeración de walls no se vuelve a derivar nunca** (ver arriba). Un segundo sistema de numeración destruye la trazabilidad de todo lo ya revisado.
 - **Soffits siempre separados de ceilings y de walls**, y ninguno se cuantifica sin su detalle abierto y citado.
 - Cuarto con varias alturas de cielo bajo un mismo room tag: no siempre hace falta mapear el límite exacto en planta — confirma con el usuario si basta SF total + alturas de drop + Div 05 por zona.
-- **Una dimension con `EQ` a los lados es un TRAMO ACOTADO, no el length del wall.** Caso real: el wall vertical de una oficina medía 10'-6" (dimension impresa y geometría coincidiendo) y la dimension de 8'-0" con EQ arriba y abajo era el **office front**, con 1'-3" de wall sólido a cada lado. Como el officefront es Div 08, cuantificar el wall completo es cotizar board donde va vidrio. En todo wall con officefront o storefront, separa el tramo ajeno del wall sólido antes de cuantificar board — **y después aplica la SUPER REGLA al tramo ajeno, porque encima de él casi siempre hay bulkhead nuestro**.
-- **El B.O.D. varía por zona y el tag de ceiling no define la height.** En el mismo proyecto el ACT-4 estaba a 9'-0" en un cuarto y a 8'-6" en otro: se lee la dimension impresa de cada cuarto, una por una.
+- **Una dimension con `EQ` a los lados es un TRAMO ACOTADO, no el length del wall.** Caso real: el wall vertical de una oficina medía [valor retirado E24] (dimension impresa y geometría coincidiendo) y la dimension de 8'-0" con EQ arriba y abajo era el **office front**, con 1'-3" de wall sólido a cada lado. Como el officefront es Div 08, cuantificar el wall completo es cotizar board donde va vidrio. En todo wall con officefront o storefront, separa el tramo ajeno del wall sólido antes de cuantificar board — **y después aplica la SUPER REGLA al tramo ajeno, porque encima de él casi siempre hay bulkhead nuestro**.
+- **El B.O.D. varía por zona y el tag de ceiling no define la height.** En el mismo proyecto el ACT-4 estaba a 9'-0" en un cuarto y a [valor retirado E24] en otro: se lee la dimension impresa de cada cuarto, una por una.
 - **Una pendiente de techo hecha con TAPERED INSULATION no mueve el B.O.D.** Si el Roof Plan dice `TAPERED INSULATION ON METAL DECK`, el deck está nivelado y la caída va por encima: el B.O.D. es constante en la zona y el stud no varía. La flecha `SLOPE` marca el drenaje, no una inclinación estructural. Compruébalo antes de repartir alturas — pero esa nota tampoco anula dos B.O.D. distintos rotulados en dos líneas de viga: cuenta todos los marcadores de la hoja antes de decidir.
 - **Antes de asignar un B.O.D. por posición, verifica que las dos hojas no estén espejadas.** Compara los ejes de grid de la estructural contra los de la arquitectónica: si el orden coincide y la diferencia es un offset constante, no hay espejo. Una nota como `BUILDING FOOTPRINT MIRRORED NORTH-SOUTH` suele referirse al prototipo, no a esa sheet — pero se verifica, no se supone.
 - **Un wall que cruza la línea (HI)/(LOW) lleva DOS alturas de stud**, y se parte por esa línea. Los ticks de su dimension impresa dicen dónde arranca y termina el tramo de cada tag: no se deduce desde el extremo del run.
@@ -508,7 +508,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 51. **Soffit sin todas sus faces y backer doble contado** → cada soffit: fondo + face vertical + retorno + tapas; un backer que el detalle pone en la face del wall ya está en ese wall.
 52. **Walls pequeños o sin tag que se escapan** (medias walls y furring sin tag) → el barrido por grafía (#30) incluye rectángulos cerrados sin hatch y furring pegado a walls exteriores.
 53. **Alcance fuera de las partitions que no se barrió** (shelf de water heater en CFS, returns de storefront, light wells, access panels, cut-outs de chases) → el crítico de completitud barre TODAS las hojas antes de entregar.
-54. **Contar solo el wall sólido de una alineación con office front y dejar fuera el BULKHEAD de encima** (el error que motivó la SUPER REGLA) → el office front moría a 8'-0" y el ceiling estaba a 9'-0": 1'-0" de wall continuo sobre los 7'-6" de cada abertura, en seis oficinas, sin contar. Los detalles "OFFICE BULKHEAD @ DOOR" y "@ GLASS PANEL" lo traían entero: `2 LAYERS 5/8" GYPSUM WALL BOARD TO EXTEND TO UNDERSIDE OF DECK`, doble row de stud con isolator, `CONT. SLIP TRACK`, `CONT. BOX BEAM`, `3/4" FRT PLYWOOD BLOCKING`, `CORNER BEAD` y `SHADOW MOLDING`. Eran 1,354 SF de board más su metal. **Y el error tiene su mitad simétrica abajo:** el sill bajo una window o un pass-through es otra banda con su propio board y su propio metal (cripple studs + sill track), y lo único que se deduce del wall es la ABERTURA NETA entre header y sill, no el rectángulo de piso a ceiling.
+54. **Contar solo el wall sólido de una alineación con office front y dejar fuera el BULKHEAD de encima** (el error que motivó la SUPER REGLA) → el office front moría a 8'-0" y el ceiling estaba a 9'-0": 1'-0" de wall continuo sobre los [valor retirado E24] de cada abertura, en seis oficinas, sin contar. Los detalles "OFFICE BULKHEAD @ DOOR" y "@ GLASS PANEL" lo traían entero: `2 LAYERS 5/8" GYPSUM WALL BOARD TO EXTEND TO UNDERSIDE OF DECK`, doble row de stud con isolator, `CONT. SLIP TRACK`, `CONT. BOX BEAM`, `3/4" FRT PLYWOOD BLOCKING`, `CORNER BEAD` y `SHADOW MOLDING`. Eran 1,354 SF de board más su metal. **Y el error tiene su mitad simétrica abajo:** el sill bajo una window o un pass-through es otra banda con su propio board y su propio metal (cripple studs + sill track), y lo único que se deduce del wall es la ABERTURA NETA entre header y sill, no el rectángulo de piso a ceiling.
 55. **Fijar la banda con la pareja de faces equivocada** → el detector acepta lw ≥ 0.5 para no perder tramos y puede devolver las líneas INTERIORES del wall: mismo thickness y mismo LF, pero ~1 pt desplazada.
 56. **El cache de render anula la regla de los markups en silencio** → la clave del cache lleva la identidad del archivo fuente (`sha256(path+mtime+tamaño)`), no solo página y dpi.
 57. **Dar la alarma por un md5 distinto entre dos copias limpias** → comparar CONTENIDO (hash de `page.lines` y `page.rects`, conteo de `annots`), no bytes: las librerías de PDF no escriben salida determinista.
@@ -517,7 +517,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 59. **Re-teclear a mano las coordenadas del dibujo en vez de leerlas del cierre sellado** → 6 bandas mal en un proyecto con las cantidades intactas; la tabla de marcado se deriva de los JSON sellados y se chequea con `verif_bandas.py`.
 60. **Asignar una banda por coincidencia de LF** → un wall quedó dibujado encima de otro que medía casi lo mismo (3.71 vs 3.69 ft). La banda se asigna por tag+leader o por la geometría escrita en el cierre, nunca por el número.
 61. **Marcar una column enclosure como si fuera un tramo de wall** → se marca como CAJA, con el LF = perímetro furrado, y el sondeo de tinta sobre el perímetro (el centro está hueco).
-62. **Marcar un bulkhead con las faces de los walls vecinos** → sus extremos son las tapas de jamb; usar las faces mete de más el width de la jamb del officefront (7'-10" en vez de 7'-6").
+62. **Marcar un bulkhead con las faces de los walls vecinos** → sus extremos son las tapas de jamb; usar las faces mete de más el width de la jamb del officefront ([valor retirado E24] en vez de [valor retirado E24]).
 63. **Descartar una banda buena porque una face no llega al lineweight de wall** → hay faces dibujadas como triple línea fina; reintentar a lw ≥ 0.55 y confirmar con imagen.
 64. **Corregir una cantidad y no corregir el dibujo** → un wall siguió dibujado con el valor viejo un mes después de la reauditoría. Toda corrección toca las cuatro cosas el mismo turno: cierre, documento, tabla de bandas y resumen global.
 65. **Dejar el entregable solo en el chat** → todo entregable se escribe también en la carpeta del proyecto en la PC del usuario, en cuanto queda verificado (ver ARCHIVO).
@@ -702,7 +702,7 @@ A04.01 (RCP)
 |---|---|
 | `A02.01` / `A04.01` | el length (48.047 ft) y la posición |
 | `D/A09.22` | el fondo, y lo confirma contra la planta |
-| `7/A09.26` | la composición y los datums `T/STUD 12'-7"` − `B/STUD 10'-8 5/8"` |
+| `7/A09.26` | la composición y los datums `T/STUD [valor retirado E24]` − `B/STUD [valor retirado E24]` |
 | `7/S5.20` | el perfil `362S137-33` y el 16" O.C., que **ningún detalle de canopy rotula** |
 
 Y de paso la cadena resolvió un pleito abierto hacía días: los `3'-1 3/4"` de D/A09.22 y los
@@ -780,7 +780,7 @@ Y su recíproca, que es la que cuesta más:
 
 Y la que la destapó:
 
-> **Una ELEVACIÓN no es una HEIGHT.** S2.20 imprime una elevación (`B.O.D. EL. 15'-4 1/2"`);
+> **Una ELEVACIÓN no es una HEIGHT.** S2.20 imprime una elevación (`B.O.D. EL. [valor retirado E24]`);
 > la height del stud es esa elevación **menos** el datum `T/SLAB 0'-0"`. Que las dos cifras
 > coincidan pasa sólo porque el datum vale cero. **Una resta sigue siendo una resta**, así que
 > es `[DERIVADO]` y tiene que escribir la cuenta.
@@ -1562,8 +1562,8 @@ Con 56.8 se entregan dos valores: (a) exteriores + muros de doble capa; (b) toda
 Se carga (b) por 53.3 y RFI con (a).
 
 ## Calificador
-rangos_v6 (Referencias (examen)): 6" stud 4,905.24 (piers), FRP 337.35 (door 112), FRT plywood 6,606.30 (nailbase
-de piers), metal stud blocking hasta 774.43.
+rangos_v6 (Referencias (examen)): 6" stud 4,905.24 (piers), FRP [valor retirado E24] (door 112), FRT plywood [valor retirado E24] (nailbase
+de piers), metal stud blocking hasta [valor retirado E24].
 
 # ADENDA v60 — 16-oct-2026 · ESTABILIDAD: HERRAMIENTAS DETERMINISTAS (studs por nodo, board por face) + reglas 60.x
 
@@ -1630,7 +1630,7 @@ Partition type sin cota de altura (break line) → board a deck (53.3) con 59.13
 chase con fixture, sin caras de extremo.
 
 ## Calificador
-rangos_v7: 6" stud 4,901.63–5,049.41 (la parte interior de la referencia estaba bajo el mínimo de 53.2); MR 258.83.
+rangos_v7: 6" stud [valor retirado E24]–[valor retirado E24] (la parte interior de la referencia estaba bajo el mínimo de 53.2); MR [valor retirado E24].
 
 # ADENDA v61 — 16-oct-2026 · CAMBIO DE ESTRATEGIA: PROTOCOLO CORTO + takeoff_canon.json + canon.py
 
@@ -1645,876 +1645,50 @@ Prohibido sumar a mano una familia que tenga tool. Si la tool no cubre un caso: 
 su test (dato malo que falla) y se anota en PARA REVISAR; nunca se suma por fuera.
 Cualquier regla 50.x–60.x que choque con el protocolo siguiente queda ANULADA (ver §9 del protocolo).
 
-# PROTOCOLO v61 — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
+> **v66 (2026-10-17):** los textos de PROTOCOLO v61, v62, v64, v65 y v65b se retiraron de este archivo: los
+> reemplaza íntegramente el PROTOCOLO v66 que va al final (E24: tampoco traían valores de un proyecto de examen).
 
-Fecha: 2026-10-16 · Nace del arbitraje #11 (pruebas #11A y #11B con skill v60).
-**Este protocolo REEMPLAZA las adendas acumuladas del skill (≈170 KB).** Donde una adenda anterior
-contradiga este texto, manda este texto. Las adendas quedan como historia, no como instrucción.
+# PROTOCOLO v66 — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
 
----
-
-## 0. Por qué cambia la estrategia
-
-- Pruebas #10A/#10B (v59): 78.6 / 78.6. Pruebas #11A/#11B (v60): 55.4 / 67.9.
-- En #11 las familias que calculó una tool (studs_nodos.py, board_caras.py) salieron **iguales** entre A y B.
-  Todas las que bajaron se armaron **a mano**: la misma geometría se declaró dos veces con criterios distintos.
-- Las adendas se contradicen entre sí (ej.: 58.2 c "bottom/top track solo para walls" contra 60.8 "track por
-  orientación") y el agente elige una sin decirlo.
-- Solución: **el agente solo MIDE el plano y lo escribe UNA vez en `takeoff_canon.json`. Las cantidades las
-  calculan las tools.** El juicio queda en medir, leer detalles y escribir RFIs.
+Fecha: 2026-10-17 · arbitraje #15A / #15B. **REEMPLAZA a PROTOCOLO v65b, v65, v64, v62, v61 y a todas las
+adendas.** Orden de autoridad: §0 Criterios del estimador > este texto > referencias / rangos / arbitrajes.
+**Protocolo CIEGO (E24):** reglas generales; los casos de proyectos anteriores se citan solo por N/HOJA, nunca
+con cantidad, cota, R.O. ni conteo. Ningún número de este texto es una respuesta.
 
 ---
 
-## 1. Reglas que siguen siempre (no cambian)
-
-1. **#0 HONESTIDAD DIMENSIONAL.** Cada número lleva estado: [CONFIRMADO] (cota impresa + N/HOJA),
-   [DERIVADO] (operación escrita) o [PENDIENTE]. Nunca escalar el PDF a ojo. Si algo no se distingue con
-   certeza, se dice y se para.
-2. **DETALLES.** Si una burbuja apunta a un elemento, ese detalle es su fuente. La cadena se sigue completa:
-   tag → schedule → detalle del tipo → detalles que ese detalle llama. Toda partida cita N/HOJA.
-   Un detalle es de todo lo que corta. Si no aplica, se declara con motivo.
-3. **BARRIDO.** Cada tag se busca en TODO el plano antes de cerrarlo; al final lista numerada + imagen
-   circulada de cada ubicación.
-4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; se reabre antes de entregar.
-5. **IDIOMA.** El entregable va íntegro en inglés; términos del trade siempre en inglés.
-6. **EJES.** Nunca se juntan dos ejes o fachadas en un número.
-7. **AMBIGÜEDAD = RFI** con el delta de cada alternativa. Nunca elegir en silencio. Se carga la opción de
-   más material solo si la medida NO está impresa (53.3).
-8. **ERRORES.** Cada error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
-
----
-
-## 2. Pasos (en orden; cada paso se corre con `bitacora.py run`)
-
-| Paso | Qué hace el agente | Tool |
-|---|---|---|
-| P0 | Mapa de hojas, partition schedule, notas generales | `arranque.py` |
-| P1 | Lista fija de alcances | `alcances.py escanear` |
-| P2 | Registro antes del primer número | `registro.py crear` |
-| P3 | **Medir walls** (tag, largo neto 59.3, cota impresa si existe, line + from/to) y **nodos** | → `walls`, `nodes` |
-| P4 | **Alturas**: B.O.D. por wall (59.13), d de la perimeter beam (60.3) | `altura_stud.py` → `height_ft` |
-| P5 | **Faces** de cada wall: room, board, layers por face, altura de board, aberturas netas | → `walls[].faces` |
-| P6 | **Aberturas** de cada wall: R.O., head, sill, with_sill, header metal / steel_by_others | → `walls[].openings` |
-| P7 | **Corridas que no son walls** (parapet, roof step, fascia, CSR, transiciones, column wraps, vestibule heads, grille) con su ELEMENTO (§5) | → `walls` (si tienen studs verticales) o `runs` (horizontales) |
-| P8 | **Ceilings** (room, system, área, span, run), **fachadas + canopies** (banda), **parapets**, **blocking items**, **plywood strips** | → bloques de §4 |
-| P9 | `canon.py takeoff_canon.json out/` — genera entradas y corre studs_nodos, board_caras, corridas, headers; suma familias | `canon.py` |
-| P10 | MEP framed openings y filtro de alcance | `framed_openings.py`, `alcance_filtro.py` |
-| P11 | Excel desde `familias_out.json` + RFIs + evidencia | `plantilla_excel.py`, `planmark.py` |
-| P12 | Back-check ciego y compuerta | back-check, `bitacora.py compuerta` |
-
-**Prohibido** escribir a mano una cantidad de una familia que tenga tool (§6). Si la tool no cubre un caso,
-se agrega el caso a la tool con su test; no se suma por fuera.
-
----
-
-## 3. Qué es juicio y qué no
-
-| Juicio del agente (se documenta con N/HOJA e imagen) | NO es juicio (lo hace la tool) |
-|---|---|
-| Largos, alturas, R.O., áreas, spans medidos o impresos | Studs por nodo, cripples, jambs (studs_nodos) |
-| Tipo de nodo de cada extremo (L, T, X, free, vendor_end, split, abut) | Board por face, ballistic, 3/8" (board_caras) |
-| Elemento de cada corrida (lista cerrada §5) | Familia de cada track, bracing, purlin (corridas) |
-| Header metal vs steel by others (con fuente) | Header y sill LF (headers) |
-| Sistema de ceiling (furring / stud_joist con fuente) | Furring, carrying, hanger (canon ceilings) |
-| Qué fachadas tienen canopy y su LF de banda | Glass mat y nailbase con la MISMA banda (canon) |
-| Plies y rótulo de cada blocking | Edge blocking por stud row; FRT vs metal (canon) |
-| RFIs y su delta | Totales por familia con nombre del calificador |
-
----
-
-## 4. `takeoff_canon.json` — esquema
-
-Todo número medido lleva su `source` (N/HOJA). Las constantes llevan `{value, source}`.
-
-```json
-{
-  "project": "...", "bid_set": "...",
-  "constants": {
-    "bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"},
-    "sheet_len_ft": {"value": 12, "source": "4/S5.20"},
-    "stud_bay_in": {"value": 14.375, "source": "60.10"},
-    "furring_oc_in": {"value": 16, "source": "RFI-xx"},
-    "carrying_oc_in": {"value": 48, "source": "RFI-xx"},
-    "hanger_oc_in": {"value": 48, "source": "RFI-xx"}
-  },
-  "details": {"3/A12.01": {"layers_per_face": 1},
-              "4/A12.01": {"layers_per_face": 1, "k_panel": {"panel_to_ft": 8.0}}},
-  "walls": [{
-    "id": "N1", "tag": "EXT", "element": "wall",
-    "stud_size": "6\"", "oc_in": 16, "rows": 1,
-    "length_ft": 26.0, "length_printed_ft": null,
-    "height_ft": 14.362,
-    "line": "G", "from_ft": 0.0, "to_ft": 26.0,
-    "zones": [{"from_ft": 0, "to_ft": 6, "oc_in": 12}],
-    "purlin": false,
-    "detail": "C/A09.21",
-    "faces": [{"room": "100", "board": "5/8 regular", "layers": 1, "height_ft": 14.362, "deduct_sf": 0}],
-    "openings": [{"ref": "GL-2 #1", "kind": "window", "ro_w_ft": 8.0, "head_ft": 8.5, "sill_ft": 6.5,
-                  "with_sill": true, "header": "metal", "source": "A09.02"}],
-    "source": "A02.01"}],
-  "nodes": [{"id": "a", "kind": "free", "wall": "N1"},
-            {"id": "b", "kind": "split", "walls": ["W2a", "W2b"], "why": "grid B"},
-            {"id": "c", "kind": "abut", "wall": "G8", "into": "G6", "source": "10/A12.01"}],
-  "runs": [{"id": "J1", "element": "canopy_soffit", "orientation": "horizontal", "length_ft": 55.47,
-            "source": "7/A09.26"}],
-  "section_details": [{"source": "4/A02.02", "runs": 3}],
-  "ceiling_details": ["7/A09.33", "8/A09.33", "10/A09.33", "7/A09.26"],
-  "ceilings": [{"room": "113", "system": "furring", "area_sf": 75.7, "span_ft": 8.0, "run_ft": 9.46,
-                "source": "A04.01"}],
-  "facades": [{"id": "N", "base_strip_lf": 27.67, "solid_lf": 27.67, "height_nailbase_ft": 16.917,
-               "openings_sf": 16.0, "has_canopy": true, "source": "A09.02"}],
-  "canopies": [{"id": "C-N", "facade": "N", "band_lf": 27.67, "source": "7/A09.26"}],
-  "band": {"height_ft": {"value": 1.924, "source": "7/A09.26"}},
-  "parapets": [{"id": "PAR-N", "lf": 55.62, "roofside_h_ft": 2.042, "plies_blocking": 2,
-                "source": "4/A09.26"}],
-  "blocking_items": [{"ref": "artwork 4x4", "lf": 5.333, "material": "metal", "width_in": 48,
-                      "source": "A11.01"}],
-  "plywood_strips": [{"ref": "GL-2 #1", "lf": 32.0, "width_ft": 0.583, "source": "10/A09.27"}],
-  "openings_extra": []
-}
-```
-
-Reglas del esquema:
-- **Todo stud vertical está en `walls`**, también parapet, roof step, fascia, CSR sides, transiciones,
-  column wraps, vestibule heads, grille head. El campo `element` decide la familia del track.
-- `line` + `from_ft` / `to_ft`: obligatorios en exteriores y en todo lo que comparte línea (piers,
-  storefront, column furring). Dos tramos que se solapan en la misma line = error (doble conteo).
-- `length_printed_ft` manda sobre el vector (diferencia > 0.25 ft = DISCREPANCIA anotada).
-- `faces[].layers` = layers **por face** (nunca total). `k_customer: true` en la face customer de ballistic.
-- Ballistic: el largo de la face customer incluye los jogs que esa face recorre (BOA A1K SW = 1.74 + 0.61).
-  El largo neto termina en la cara del wall que la recibe (BOA B2K = 1.26, no 1.693).
-
----
-
-## 5. Elementos (lista cerrada) → familia del track
-
-| Familia | Elementos |
-|---|---|
-| **bottom track** + **top / deflection track** (L × rows CADA UNO) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
-| **track de ceilings / soffits** (L × track_lines) | ceiling_perimeter (1), soffit_drop (2), ceiling_transition (2), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (2), joist (2) |
-
-- **60.8 v61 (anula 60.8 v60):** la familia sale del ELEMENTO, no de la orientación. Un fascia box o un
-  soffit drop tiene studs verticales entre dos tracks y **sigue siendo ceiling / soffit track** (58.2 c).
-- Una corrida cuya source está en `ceiling_details` no puede ser elemento WALL (la tool falla).
-- `track_lines` distinto del default exige `track_lines_source`.
-- Storefront con steel header: `storefront_cripples` (bottom track sobre el header + top bajo la viga).
-
----
-
-## 6. Familia → tool → bloque
-
-| Familia | Tool | Bloque del canon |
-|---|---|---|
-| 6", 3-5/8", 1-5/8", 2-1/2", parapet stud | studs_nodos.py | walls + nodes |
-| 5/8" regular, MR, ballistic, 3/8" | board_caras.py | walls[].faces (+ ceilings[].area_sf) |
-| bottom, top, ceiling/soffit track, bracing, purlin | corridas.py v61 | walls (element) + runs |
-| header, sill track | headers.py | walls[].openings, openings_extra |
-| furring, carrying, hanger (+ 3-5/8" ceiling joists) | canon.py | ceilings |
-| glass mat, nailbase (FRT plywood SF) | canon.py | facades + canopies + band |
-| 5/8" EXTERIOR sheathing, parapet FRT blocking | canon.py | parapets |
-| metal stud blocking, FRT blocking | canon.py | walls (edge) + blocking_items |
-| FRT plywood strips de aberturas | canon.py | plywood_strips |
-| framed openings MEP | framed_openings.py | (propia entrada) |
-| filtro de alcance (cladding) | alcance_filtro.py | Material Summary |
-
----
-
-## 7. Criterios fijos (los que quedan vigentes, compactos)
-
-**Studs (53.2 + 60.1 v61)**
-- Campo = 1 + Σ ROUNDUP(zona / oc); dentro de cada R.O. = FLOOR(R.O. / oc) → cripples de largo real;
-  4 jambs por abertura (king + jack por lado).
-- Nodos: L +1 · T +1 al branch · X +2 · free 0 · vendor_end +1 total (no × rows) ·
-  **split −1 × rows** (un wall continuo partido en dos registros: el stud del corte ya está en el primero) ·
-  **abut 0** (el extremo muere contra un stud ya contado; ej. G largo contra el stub del office front,
-  10/A12.01; exige source).
-- Zona @12" de S1.11 n.5 solo a 6 ft de las BUILDING corners declaradas.
-- Exterior: H = B.O.D. − d de la perimeter beam (60.3); por bay si cambia el perfil.
-
-**Board (60.2)**: SF = L × H × layers − abertura neta, face por face. Ballistic = L × min(8, H) en la face
-customer; 3/8" = L × (H − 8) en la misma face (4/A12.01). Fórmula confirmada en el arbitraje #11.
-
-**Tracks (60.6, 60.8 v61)**: cada corrida independiente de un detalle de sección lleva su bottom y top.
-Bottom y top se reportan por separado (L × rows cada uno).
-
-**Bracing (53.4, 60.7)**: rows = ROUNDUP(H × 12 / 48) − 1 sobre TODAS las corridas verticales;
-LF = rows × L × rows de stud (53.4 literal). La tool informa el LF que cruza vanos sin studs como RFI con delta.
-
-**Purlin (10/A09.33)**: 0.75 × L de top track a deck **paralelo al flute** (convención de la referencia).
-
-**Header (53.6, 60.5)**: (R.O. + 1'-4") × 1 por abertura; los members no multiplican. "BOX BEAM OR STEEL
-FRAMING AS REQUIRED" = metal + RFI (53.3). Steel by others solo con fuente que lo diga.
-Coiling grille 4/A08.21: DOS 6" CFMF BOX BEAM HEADER.
-
-**Sill (53.7, 58.4)**: (R.O. + 1'-4") en aberturas con sill; barrer M-plan por fire dampers / ductos en
-walls; recessed sin tamaño impreso = PENDIENTE + RFI.
-
-**Ceilings**: legend A04.01 "SUSPENDED GWB" = furring (system furring). Si un detalle dibuja otra
-estructura (6/A09.33 "3 5/8" METAL STUD FRAMING @16"" en trimless fixtures) se declara `stud_joist` con
-su source **y** RFI con el delta furring ↔ stud. Carrying = (ROUNDUP((run − 1)/4) + 1) × span; hangers
-@48" sobre cada carrying channel (método de la ref v4).
-
-**Transiciones de ceiling (7/A09.33)**: studs verticales deck → ceiling + kickers @48"; tracks arriba y
-abajo = ceiling_transition (familia ceiling/soffit track).
-
-**Exterior (59.2)**: glass mat = base strip (T/SLAB a T/BASE 0'-6") + banda de canopy en CADA fachada con
-canopy (7/A09.26, 3/A09.26, F/A09.22, 15/A09.27); el nailbase descuenta la MISMA banda. Una fachada con
-canopy sin banda = error.
-
-**Parapet**: el contorno sale del roof plan (A02.02). Un elemento "BEYOND" en una elevación es una cara ya
-vista desde otro lado, no un wall nuevo; solo se agrega un retorno si el roof plan lo dibuja (BOA: solo el
-stub de keynote 10).
-
-**Blocking (58.6, 59.14 v61)**
-- Edge of gypboard (4/S5.20): UNA fila por STUD ROW (no por face) en walls con alguna face > largo de hoja.
-- FRT solo donde el detalle rotula BLOCKING / FRT BLOCKING; sin material → 362CR22 metal + RFI.
-- Dispositivos ≤ stud bay sin rótulo (phones, sanitizers, clocks, hooks, brackets) → sin blocking.
-- "3/4" FRT PLYWOOD" en head / sill / jambs de aberturas (10, 11/A09.27) = FRT plywood (SF), nunca
-  blocking LF ni sill track.
-- Parapet blocking: plies dibujados (4/A09.26: 2 plies).
-
-**Framed openings MEP (54.1, 58.5, 60.9, 60.10)**: max(ancho, largo) ≤ módulo (stud bay o furring
-spacing) → 0; descripción vs catálogo → el que coincide con el dibujo + RFI.
-
-**Cladding (60.4)**: hat channel / Z-girt / lath del cladding = EXCLUDED + RFI.
-
----
-
-## 8. Compuerta (NO ENTREGABLE si falla)
-
-1. `canon.py` corre sin error sobre el `takeoff_canon.json` final.
-2. Todas las cantidades de familias con tool salen de `familias_out.json` (el Excel cita ese archivo).
-3. `bitacora.py compuerta`: arranque, alcances, registro, canon (y dentro studs_nodos, board_caras,
-   corridas, headers), framed_openings, alcance_filtro, plantilla_excel validar/armar, planmark, back-check.
-4. Cada RFI tiene delta. Cada abertura, corrida y face tiene source.
-5. Back-check ciego compara contra `familias_out.json` familia por familia.
-
----
-
-## 9. Adendas que este protocolo ANULA o corrige
-
-| Adenda | Estado |
-|---|---|
-| "layers TOTALES contando las dos faces" (partition types) | ANULADA (60.2) |
-| 60.8 v60 "familia del track por orientación" | ANULADA → §5 (60.8 v61) |
-| 59.14 (b) "toda cara con board > largo de hoja" | CORREGIDA → por stud row |
-| 61.6 propuesta #11A (transiciones = corrida completa) | ACEPTADA con familia ceiling/soffit track |
-| 61.7 propuesta #11A (retornos "beyond" de la torre como parapet) | RECHAZADA (A02.02 no los dibuja) |
-| 60.1 sin split / abut | AMPLIADA (§7) |
-| Bracing sobre huecos (ADV2-H1 #11B) | RFI con delta; familia 53.4 literal |
-| Cualquier suma a mano de una familia con tool | PROHIBIDA |
-
-Las demás reglas 53.x–60.x que no contradicen este texto siguen como criterio de lectura; si una choca con
-este protocolo, manda el protocolo y el choque se anota como RFI interno del skill.
-
-# PROTOCOLO v62 — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
-
-Fecha: 2026-10-16 · Nace del arbitraje #12 (pruebas #12A y #12B con skill v61).
-**REEMPLAZA a PROTOCOLO_v61.md y a todas las adendas.** Donde algo anterior contradiga este texto, manda este.
-
----
-
-## 0. Estado y por qué cambia
-
-- #10B (v59) 82.1 · #12A (v61) 67.9 · #12B (v61) 66.1.
-- Lo que salió de una tool salió IGUAL o CERCA en A y B (5/8" regular, tracks, 3-5/8", MR, FRT plywood,
-  bracing, purlin). Lo que falló fue lo que **no tenía tool**: hanger wire (PCS en vez de LF), metal trim
-  (PENDING), parapet (contado @16" continuo), y aberturas omitidas en silencio (header 5 veces MAL).
-- La referencia de header estaba mal: las storefront heads de line F y grid 2 están sobre HSS9x5x5/8 (S2.20).
-- v62: **toda familia de §6 sale de canon.py con número**. Ninguna queda PENDING. Si falta un dato, canon.py
-  falla y dice cuál.
-
----
-
-## 1. Reglas que siguen siempre
-
-1. **#0 HONESTIDAD DIMENSIONAL.** [CONFIRMADO] cota impresa + N/HOJA · [DERIVADO] operación escrita ·
-   [PENDIENTE]. Nunca escalar a ojo. Si no se distingue con certeza, se dice y se para.
-2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Toda
-   partida cita N/HOJA. Un detalle es de todo lo que corta. Si no aplica, motivo.
-3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada.
-4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. En hojas
-   rotadas (A09.2x, A09.01) convertir coordenadas con `page.rotation_matrix` antes de circular.
-5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
-6. **EJES.** Nunca dos ejes o fachadas en un número.
-7. **AMBIGÜEDAD = RFI** con delta. Se carga la opción de más material solo si la medida NO está impresa (53.3).
-8. **ERRORES.** Error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
-
----
-
-## 2. Pasos (cada uno con `bitacora.py run`)
-
-| Paso | Qué hace el agente | Tool |
-|---|---|---|
-| P0 | Mapa de hojas, partition schedule, notas generales | `arranque.py` |
-| P1 | Lista fija de alcances | `alcances.py escanear` |
-| P2 | Registro antes del primer número | `registro.py crear` |
-| P3 | Walls (largo neto, cota impresa, line + from/to) y nodes | → `walls`, `nodes` |
-| P4 | Alturas: B.O.D. por wall, d de perimeter beam; deck en pendiente = promedio (55.3) | `altura_stud.py` |
-| P5 | Faces: room, board, layers por face, altura, aberturas netas | → `walls[].faces` |
-| P6 | **Barrido de aberturas** (§7 Header) → `opening_schedule` + `walls[].openings` + `openings_extra` | — |
-| P7 | Corridas no-wall con su ELEMENTO (§5); parapets como walls `element: parapet` con `straight_run` | → `walls` / `runs` |
-| P8 | Ceilings (ns/ew, área, perímetro, drop), fachadas + canopies + banda, parapets, blocking, plywood, **trim** | → bloques §4 |
-| P9 | `canon.py takeoff_canon.json out/` | `canon.py` |
-| P10 | MEP framed openings (con `sweep` M + E) y filtro de alcance | `framed_openings.py`, `alcance_filtro.py` |
-| P11 | Excel desde `familias_out.json` + RFIs + evidencia | `plantilla_excel.py`, `planmark.py` |
-| P12 | Back-check ciego y compuerta | back-check, `bitacora.py compuerta` |
-
-**Prohibido** escribir a mano una cantidad de una familia de §6. Si la tool no cubre el caso, se agrega a la
-tool con su test (y se sube con la entrega); nunca un script suelto.
-
----
-
-## 3. Qué es juicio y qué no
-
-| Juicio del agente (N/HOJA + imagen) | NO es juicio (tool) |
-|---|---|
-| Largos, alturas, R.O., áreas, perímetros, drops medidos o impresos | Studs por nodo, cripples, jambs |
-| Tipo de nodo (L, T, X, free, vendor_end, split, abut) | Parapet studs por bay |
-| Elemento de cada corrida (§5) y `straight_run` de parapets | Familia de cada track, bracing, purlin |
-| Header metal / steel_by_others (con fuente) y la lista barrida | Header y sill LF; cierre de la lista |
-| Sistema de ceiling (furring / stud_joist / canopy_joist / framed_soffit) | Furring, carrying, hanger LF, perimeter track |
-| Bandas de canopy; trim_items rotulados; jamb returns | Glass mat, nailbase, metal trim |
-| RFIs y su delta | Totales con nombre del calificador |
-
----
-
-## 4. `takeoff_canon.json` — esquema v62
-
-Todo número medido lleva `source` (N/HOJA). Las constantes llevan `{value, source}`.
-
-```json
-{
-  "constants": {
-    "bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"},
-    "sheet_len_ft": {"value": 12, "source": "4/S5.20"},
-    "stud_bay_in": {"value": 14.375, "source": "60.10"},
-    "furring_oc_in": {"value": 16, "source": "RFI-xx"},
-    "carrying_oc_in": {"value": 48, "source": "RFI-xx"},
-    "hanger_oc_in": {"value": 48, "source": "RFI-xx"},
-    "carrying_direction": {"value": "N-S", "source": "RFI-xx"},
-    "parapet_post_spacing_ft": {"value": 5.0, "source": "6/S5.10"},
-    "transition_trim_per_lf": {"value": 2, "source": "7/A09.33"}
-  },
-  "walls": [{"id": "N1", "tag": "EXT", "element": "wall", "stud_size": "6\"", "oc_in": 16, "rows": 1,
-             "length_ft": 26.0, "height_ft": 14.362, "line": "G", "from_ft": 0, "to_ft": 26.0,
-             "detail": "C/A09.21", "faces": [...],
-             "openings": [{"ref": "GL-2 #1", "kind": "window", "location": "exterior", "ro_w_ft": 8.0,
-                           "head_ft": 8.5, "sill_ft": 6.5, "with_sill": true, "header": "metal",
-                           "jamb_return": true, "jamb_return_source": "11/A09.27", "source": "A09.02"}],
-             "source": "A02.01"},
-            {"id": "PAR-E1", "element": "parapet", "stud_size": "6\" parapet", "oc_in": 16,
-             "length_ft": 50.71, "height_ft": 2.042, "straight_run": "E", "source": "11/S5.10"},
-            {"id": "TR104", "element": "ceiling_transition", "stud_size": "3-5/8\"", "length_ft": 77.03,
-             "height_ft": 4.375, "kickers": {"oc_in": 48, "length_ft": 1.5, "source": "7/A09.33"},
-             "source": "7/A09.33"},
-            {"id": "CS-E", "element": "canopy_soffit", "track_lines": 1, "track_lines_source": "7/A09.26", "...": ""}],
-  "nodes": [...],
-  "opening_schedule": {"sources": ["A00.30", "A09.01", "A12.10", "A08.11", "A08.21", "S2.20", "M01.01"],
-                       "items": [{"ref": "door 112"}, {"ref": "N storefront (line F)"}],
-                       "none": [{"ref": "duct A1 #9", "why": "8\" dia. <= stud bay (60.10)"}]},
-  "openings_extra": [{"ref": "coiling grille 103", "kind": "grille", "ro_w_ft": 13.333, "beams": 2,
-                      "beams_source": "4/A08.21", "source": "1/A08.21"},
-                     {"ref": "N storefront (line F)", "kind": "storefront", "location": "exterior",
-                      "ro_w_ft": 41.6, "header": "steel_by_others",
-                      "header_source": "S2.20 HSS9x5x5/8 (LLV); 2/A09.26", "source": "A09.01"}],
-  "ceilings": [{"room": "104", "system": "furring", "area_sf": 510.8, "ns_ft": 30.0, "ew_ft": 17.027,
-                "perimeter_ft": 94.05, "hanger_drop_ft": {"value": 4.375, "source": "S2.20; A04.01"},
-                "source": "A04.01"},
-               {"room": "116 CSR soffit bottom", "system": "framed_soffit", "area_sf": 41.0,
-                "ns_ft": 3.42, "ew_ft": 12.01, "source": "10/A09.33"},
-               {"room": "N canopy soffit", "system": "canopy_joist", "area_sf": 177.6, "...": ""}],
-  "trim_items": [{"ref": "office bulkhead 8,9/A12.01", "kind": "corner_bead", "lf": 45.0, "qty": 4,
-                  "source": "8/A12.01"}],
-  "bottom_track_deduct_doors": null,
-  "facades": [...], "canopies": [...], "band": {...}, "parapets": [...],
-  "blocking_items": [...], "plywood_strips": [...], "runs": [...], "section_details": [...],
-  "ceiling_details": [...], "details": {...}
-}
-```
-
-Reglas del esquema (canon.py falla si no se cumplen):
-- **Parapet** = wall con `element: parapet`; NO pasa por studs_nodos ni lleva nodos. Tramos de un mismo run
-  recto con alturas distintas comparten `straight_run`. Un stud "parapet" fuera de ese elemento = error.
-- **Ceilings suspendidos** (furring, stud_joist): `perimeter_ft` (genera el ceiling_perimeter track; un run
-  `ceiling_perimeter` a mano = error) y `hanger_drop_ft` {value, source} = B.O.D. − altura del ceiling.
-- Con `carrying_direction` cada ceiling declara `ns_ft` y `ew_ft` (no span/run). Si `area_sf` < 98 % del
-  rectángulo, es polígono: carrying y furring usan la cuerda media (área / ancho).
-- Un room con "soffit" no puede ser furring ni stud_joist → `framed_soffit` (board 5/8" + joists, sin carrying
-  ni hangers) o `canopy_joist` (FRT plywood + joists).
-- `opening_schedule` obligatorio si hay aberturas; `sources` con un plan S* y un M-plan; cada item declarado
-  una vez (metal, steel_by_others con `header_source`, o `none` con `why`).
-- Storefront dentro de un wall G/G1 = error (office front = stubs vendor_end + door_bulkhead, 59.7).
-- `trim_items` obligatorio (lista vacía solo con `trim_none_reason`). Hay `ceiling_transition` → hace falta
-  `transition_trim_per_lf`.
-- Ya vigentes: solapes en la misma line, canopy sin banda, steel sin fuente, FRT sin rótulo, fascia como wall,
-  `track_lines` distinto del default sin fuente, `layers` POR FACE, `length_printed_ft` manda (> 0.25 ft =
-  DISCREPANCIA).
-
----
-
-## 5. Elementos (lista cerrada) → familia del track
-
-| Familia | Elementos |
-|---|---|
-| bottom track + top / deflection track (L × rows CADA UNO) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
-| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (2), joist (2) |
-
-La familia sale del ELEMENTO, no de la orientación. Una corrida cuya source está en `ceiling_details` no
-puede ser WALL. Storefront con steel header: `storefront_cripples` (bottom track sobre el HSS + top bajo la viga).
-
----
-
-## 6. Familias que DEBEN salir de canon.py (sin PENDING)
-
-| Familia (nombre del calificador) | Cálculo | Bloque |
-|---|---|---|
-| 6", 3-5/8", 1-5/8", 2-1/2" stud | studs_nodos (+ ceiling joists, kickers) | walls + nodes + ceilings |
-| 6" parapet stud | por bay (§7) | walls element parapet |
-| bottom track, top / deflection track, track de ceilings / soffits | corridas v62 | walls + runs + ceilings.perimeter_ft |
-| bracing C.R. channel, purlin (track to deck) | corridas v62 | walls |
-| header / box beam, sill track | headers v62 | openings + opening_schedule |
-| furring channel, carrying channel, hanger wire (LF) | canon ceilings | ceilings |
-| 5/8" gyp board regular, 5/8" MR, ballistic panel, 3/8" gyp board | board_caras + ceilings | faces |
-| 5/8" glass mat, 5/8" EXTERIOR gyp sheathing, FRT plywood (SF) | canon exterior / parapets / strips | facades, canopies, parapets |
-| FRT blocking, metal stud blocking | canon blocking | walls + blocking_items |
-| metal trim (corner bead, casing, shadow molding) | canon trim | trim_items + jamb_return + transitions |
-| framed openings MEP | framed_openings v62 | propia entrada con `sweep` |
-
-`familias_out.json` trae la lista `obligatorias`; el Excel no puede tener una de ellas en PENDING.
-
----
-
-## 7. Criterios fijos
-
-**Studs (53.2, 60.1)**: campo 1 + Σ ROUNDUP(zona / oc); dentro de cada R.O. FLOOR(R.O. / oc) cripples; 4
-jambs por abertura. Nodos: L +1 · T +1 al branch · X +2 · free 0 · vendor_end +1 total · split −1 × rows ·
-abut 0 (con source). Zona @12" de S1.11 n.5 solo a 6 ft de BUILDING corners. Exterior: H = B.O.D. − d.
-
-**Parapet (59.4, v62)**: por straight run, bays = ROUNDUP(L / post) (6/S5.10 posts @5'-0" max); studs por bay
-= 2 (11/S5.10 "ONE STUD EA. SIDE OF EA. POST") + ROUNDUP((bay − 0.6) / 1.333) − 1; LF = studs × H ponderada.
-Deck en pendiente: H = T/STUD − B.O.D. promedio del tramo (55.3; BOA B-A 4.625, no 4.886). BOA: 980.02.
-
-**Board (60.2)**: SF = L × H × layers − abertura neta, face por face. Ballistic = L × min(8, H) customer;
-3/8" = L × (H − 8).
-
-**Tracks (60.6, 60.8)**: bottom y top por separado (L × rows). Doors NO se descuentan salvo
-`bottom_track_deduct_doors` con fuente (la tool da el delta como RFI).
-
-**Bracing (53.4)**: rows = ROUNDUP(H × 12 / 48) − 1; LF = rows × L × rows de stud; vanos = RFI.
-
-**Purlin (10/A09.33, 59.1)**: 0.75 × L de top track a deck paralelo al flute, **una pieza por corrida** (doble
-row G = 1). Incluye roof step inner row y vestibule head que llegan a deck.
-
-**Header (53.6, 60.5, v62)**: (R.O. + 1'-4") × 1 por abertura; members no multiplican; **beams** distintos sí
-(grille 4/A08.21 = 2). Barrido obligatorio: door schedule, ventanas, storefronts, ATMs, grille, box beams y
-"BOX HEADER AS NEEDED", ductos / FD del M-plan, **y el plan estructural por lintels** (S2.20 HSS9x5x5/8 (LLV)
-en line F y grid 2 = steel by others). "BOX BEAM OR STEEL AS REQUIRED" sin lintel en S* = metal + RFI.
-R.O. ≤ stud bay = sin header. Recessed accessories (FEC, TA-xx, hand dryer) nunca son header. BOA = 240.65.
-
-**Sill (53.7, 58.4)**: (R.O. + 1'-4") en aberturas con sill; FD 14x14 caben en el stud bay (60.10) → 0 + RFI.
-
-**Ceilings**: legend "SUSPENDED GWB" = furring; 6/A09.33 = stud_joist + RFI. Orientación del carrying
-única para el proyecto (BOA N-S). Carrying = (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying =
-ROUNDUP((largo − 1) / 4) + 1; **hanger wire LF = hangers × drop**. CSR soffit 10/A09.33 = framed_soffit.
-Canopy soffit 7/A09.26, 15/16/A09.27 = canopy_joist.
-
-**Transiciones (7/A09.33)**: studs verticales + kickers @48" (`kickers`); track = ceiling_transition; trim =
-L × 2 (corner bead + shadow molding).
-
-**Metal trim (v62)**: callouts rotulados (8,9/A12.01 corner bead + shadow molding; 10/A12.01 office jamb
-corner bead; 4/A12.01 casing beads; 10/A09.33 soffit corner bead; 6/A09.33 gypsum edge trim) en
-`trim_items`; jamb returns (53.1) = bordes × 2 (corner bead + casing bead); transiciones × 2.
-
-**Exterior (59.2)**: glass mat = base strip + banda de canopy en cada fachada con canopy; nailbase descuenta
-la misma banda.
-
-**Parapet sheathing / blocking**: contorno de A02.02; "BEYOND" no es wall nuevo; blocking = plies dibujados
-(4/A09.26: 2).
-
-**Blocking (58.6, 59.14)**: edge = una fila por STUD ROW con face > largo de hoja; FRT solo donde se rotula;
-dispositivos ≤ stud bay sin rótulo → nada; 3/4" FRT plywood de aberturas = FRT plywood SF.
-
-**Framed openings MEP (54.1, 58.5, 60.9, 60.10, v62)**: max(ancho, largo) ≤ módulo → 0. `sweep` con una hoja
-M y una E; los air devices de los GWB ceilings (SD / slot diffusers TBDI-10 de M01.01) se declaran o se da
-el motivo. BOA ≈ 940.
-
-**Cladding (60.4)**: hat channel / Z-girt / lath = EXCLUDED + RFI.
-
----
-
-## 8. Compuerta (NO ENTREGABLE si falla)
-
-1. `canon.py` corre sin error sobre el canon final; ninguna familia `obligatorias` en 0 sin motivo.
-2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
-3. `bitacora.py compuerta`: arranque, alcances (con familias.py v62 disponible), registro, canon,
-   framed_openings, alcance_filtro, plantilla_excel validar/armar, planmark, back-check.
-4. Cada RFI con delta; cada abertura, corrida, face y ceiling con source.
-5. Back-check ciego familia por familia contra `familias_out.json`.
-
----
-
-## 9. Dónde las pruebas perdieron tiempo (y qué hacer)
-
-| Paso | Qué pasó | Qué hacer |
-|---|---|---|
-| P3 | Wall F diagonal medido dos veces (#12B) | largo = promedio de las dos faces vectoriales; emparejar cada cota con sus ticks |
-| P3 | Office fronts como storefront de 4 jambs × 2 rows (#12B) | canon.py lo rechaza; stubs con vendor_end + door_bulkhead |
-| P3 | W13 partido en grid B con jog dibujado (#12B) | partir en el jog real; split por B.O.D. solo sin jog |
-| P6 | Storefront heads, ductos y 2.º box beam del grille omitidos (A y B) | `opening_schedule` cerrado con S* y M-plan |
-| P8 | Hanger en PCS, trim PENDING, kickers sin tool (A y B) | canon v62 los calcula; los datos son obligatorios |
-| P8 | Canopy soffit y track_lines con scripts sueltos (A canon.py modificado, B scripts_12b.zip) | integrados en canon v62 |
-| P9 | closer.py rechazó un stub de 0.33 ft por redondeo (#12B) | tolerancia 0.02 + 0.02 / L |
-| P12 | `alcances.py compuerta` imposible sin familias.py (A y B) | familias.py se baja siempre con las tools |
-| P12 | 24 min de compuertas en #12A | correr `canon.py` y `framed_openings.py` antes del Excel; la compuerta solo verifica |
-| Imágenes | marcas fuera de lugar en hojas rotadas | `rotation_matrix` antes de circular |
-
----
-
-## 10. Adendas / reglas anuladas o corregidas
-
-| Regla | Estado |
-|---|---|
-| "layers TOTALES contando las dos faces" | ANULADA (60.2) |
-| 60.8 v60 familia por orientación | ANULADA → §5 |
-| 59.14 (b) "toda cara" | CORREGIDA → por stud row |
-| 61.7 retornos "beyond" como parapet | RECHAZADA |
-| Parapet @16" continuo por studs_nodos (v61) | ANULADA → por bay (§7) |
-| hanger wire en PCS (canon v61) | ANULADA → LF |
-| purlin × rows (corridas v61) | ANULADA → una pieza (59.1) |
-| Ref v4: storefront heads de line F / grid 2 como metal header (60.31) | CORREGIDA → steel by others (S2.20) |
-| Ref v4: ductos 12" con header 4.67 | CORREGIDA → 60.10 (0) + RFI |
-| Metal trim / hanger / parapet PENDING | PROHIBIDO |
-| Cualquier suma a mano de una familia de §6 | PROHIBIDA |
-
-# PROTOCOLO v64 — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
-
-Fecha: 2026-10-16 · Nace de las 16 decisiones (+ E17) del estimador (usuario) sobre el arbitraje #13.
-**REEMPLAZA a PROTOCOLO_v63.md y a todas las adendas.** Orden de autoridad: §0 Criterios del estimador >
-este texto > referencias / rangos / arbitrajes anteriores.
-
----
-
-## 0. Criterios del estimador (usuario 2026-10-16) — reglas generales para TODO proyecto
-
-Mandan sobre la referencia, los rangos y cualquier arbitraje, salvo que el plano diga otra cosa (entonces RFI).
-
-| # | Regla general | Tool que la hace cumplir |
-|---|---|---|
-| E1 | **Header / box beam: largo** de cada pieza = R.O. + 1'-4" (8" de bearing a cada lado). | headers.py |
-| E2 | **Header / box beam: material por PIEZAS.** LF = (R.O. + 1'-4") × piezas × qty. Piezas = fila del header schedule por span (single track 1, double track 2, 2-C 2, 3 o 4 piezas si así lo dice) o, en box headers / box beams, TODAS las piezas que dibuja el detalle del box. Nunca LF de línea. Detalles generales que piden pieza adicional (p. ej. "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0"") se aplican; si contradicen al schedule, se carga el schedule + RFI con delta. | headers.py (`pieces` por fila / `pieces` + `pieces_source`), closer.py |
-| E3 | **Parapet studs bay por bay** entre posts estructurales: 2 studs por post (uno a cada lado) + intermedios @ O.C.; bays = ROUNDUP(L / spacing de posts) por tramo recto; × (T/STUD − B.O.D.). | canon.py (`element: parapet`) |
-| E4 | **Hanger wire en PCS** (número de hangers) con la altura de cada hanger (B.O.D. − ceiling) por room; el LF = Σ PCS × altura es renglón DERIVADO. | canon.py `hanger_pcs` |
-| E5 | **Ballistic panel** sigue todo el contorno del wall que lo lleva, incluidos jogs y retornos (no se corta en el primer cambio de dirección). | inventario / faces |
-| E6 | **Board sobre ballistic** (3/8" u otro): misma face que el ballistic, desde su tope (8'-0") hasta estructura. | board_caras |
-| E7 | **Transición de ceiling con kicker**: se cuentan los studs verticales (dashed) a estructura ADEMÁS del kicker. | canon.py `vertical_studs` obligatorio |
-| E8 | **Column wraps**: bottom + top track (perímetro de faces) y studs a su altura. | corridas.py |
-| E9 | **Ceiling track en transición**: track arriba (deck) y abajo (ceiling) = 2 líneas. | corridas.py |
-| E10 | **Bottom track en doors NO se descuenta**: corre completo. | corridas.py rechaza el descuento |
-| E11 | **"BOX HEADER AS NEEDED" SÍ se cuenta**, por piezas × largo; tamaño no impreso = RFI. | headers.py |
-| E12 | **Ductos y fire dampers en walls NO se enmarcan**: sin header ni sill ni jambs, cualquiera sea su tamaño. | headers.py (`duct`/`fire_damper` = NOT_FRAMED), framed_openings.py, closer.py |
-| E13 | **Canopy soffit**: track en LOS DOS extremos de los joists (fascia y wall) = 2 líneas. | canon.py / corridas.py |
-| E14 | **Ceiling suspendido** del RCP (hangers + carrying) = furring channel, NO 3-5/8" joists, salvo que un detalle dibuje joists (`joist_source`). | canon.py |
-| E15 | **R.O. impreso del estimador manda** cuando hay dos lecturas (BOA GL-2 109/110 = 8'-0"). | dato |
-| E16 | **Storefront con lintel estructural** (HSS / steel en el plan S* o "STEEL HEADER FRAMING"): steel by others, 0 metal stud header. "BOX BEAM OR STEEL AS REQUIRED" sin lintel en S* = metal + RFI. | headers.py `structure` |
-| E17 | **Preguntas al usuario UNA A LA VEZ**: cada una con su imagen circulada, la secuencia de hojas de donde sale (plano → detalle → sección) y las opciones con su delta. Nunca bloques largos de preguntas; la siguiente solo después de recibir la respuesta. Los RFIs del entregable pueden ir en tabla, pero al preguntarlos se presentan uno por uno. | protocolo (§1.7) |
-
-**Sill track** (consecuencia de E1/E2): (R.O. + 1'-4") × piezas; si el detalle de head se "INVIERTE PARA SILL"
-(BOA 2/S5.20), el sill lleva las mismas piezas que la head track (double > 4'-0"). Doors nunca llevan sill.
-
----
-
-## 1. Reglas que siguen siempre
-
-1. **#0 HONESTIDAD DIMENSIONAL.** [CONFIRMADO] cota impresa + N/HOJA · [DERIVADO] operación escrita ·
-   [PENDIENTE]. Nunca escalar a ojo. Si no se distingue con certeza, se dice y se para.
-2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Toda
-   partida cita N/HOJA. Un detalle es de todo lo que corta. Si no aplica, motivo.
-3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada.
-4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. Hojas rotadas:
-   convertir coordenadas con `page.rotation_matrix` antes de circular.
-5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
-6. **EJES.** Nunca dos ejes o fachadas en un número.
-7. **AMBIGÜEDAD = RFI** con delta. Se carga la opción de más material solo si la medida NO está impresa (53.3).
-   **Preguntas al usuario (E17): UNA A LA VEZ**, cada una con imagen circulada + secuencia de hojas
-   (plano → detalle → sección) + opciones con su delta; la siguiente solo después de la respuesta.
-8. **ERRORES.** Error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
-
----
-
-## 2. Pasos (cada uno con `bitacora.py run`)
-
-| Paso | Qué hace el agente | Tool |
-|---|---|---|
-| P0 | Mapa de hojas, partition schedule, notas generales | `arranque.py` |
-| P1 | Lista fija de alcances | `alcances.py escanear` |
-| P2 | Registro antes del primer número | `registro.py crear` |
-| P3 | Walls (largo neto, cota impresa, line + from/to, band en la planta) y nodes | → `walls`, `nodes` |
-| P3b | Inventario cerrado (bandas, solapes, apilados, MR, purlin, zonas) | `inventario.py` |
-| P4 | Alturas: B.O.D. por wall, d de perimeter beam; deck en pendiente = promedio (55.3) | `altura_stud.py` |
-| P5 | Faces: room, board, layers por face, altura, aberturas netas | → `walls[].faces` |
-| P6 | **Barrido de aberturas + header schedule con PIEZAS** (§7 Header) | → `header_schedule`, `sill_rule`, `opening_schedule`, `openings` |
-| P7 | Corridas no-wall con su ELEMENTO (§5); parapets `element: parapet` con `straight_run` | → `walls` / `runs` |
-| P8 | Ceilings (ns/ew, área, perímetro, drop), fachadas + canopies + banda, parapets, blocking, plywood, trim | → bloques §4 |
-| P9 | `canon.py takeoff_canon.json out/` | `canon.py` |
-| P10 | MEP framed openings (con `sweep` M + E) y filtro de alcance | `framed_openings.py`, `alcance_filtro.py` |
-| P11 | Excel desde `familias_out.json` + RFIs + evidencia | `plantilla_excel.py`, `planmark.py` |
-| P12 | Back-check ciego y compuerta | back-check, `bitacora.py compuerta` |
-
-Nunca `| head` / `| tail` detrás de una tool: `bitacora.py run` guarda la salida en `bitacora_logs/`.
-**Prohibido** escribir a mano una cantidad de una familia de §6; si la tool no cubre el caso, se agrega a la
-tool con su test.
-
----
-
-## 3. Qué es juicio y qué no
-
-| Juicio del agente (N/HOJA + imagen) | NO es juicio (tool) |
-|---|---|
-| Largos, alturas, R.O., áreas, perímetros, drops medidos o impresos | Studs por nodo, cripples, jambs |
-| Banda de cada wall en la planta y su zona de deck | Solapes, duplicados, apilados, altura por zona |
-| Qué fixture hay detrás de cada face | Qué face lleva MR |
-| Dirección del flute (una vez, con fuente) | Qué wall lleva purlin |
-| Filas del header schedule y piezas de cada box (con imagen) | Header y sill LF por piezas; cierre de la lista |
-| Lintel estructural sí / no (plan S*) | 0 metal header si hay lintel |
-| Sistema de ceiling y altura de hanger por room | Furring, carrying, hanger PCS y LF derivado |
-| RFIs y su delta | Totales con nombre del calificador |
-
----
-
-## 4. `takeoff_canon.json` — esquema v64 (v63 + lo marcado v64)
-
-Todo número medido lleva `source` (N/HOJA). Las constantes llevan `{value, source}`.
-
-```json
-{
-  "constants": {"bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"}, "stud_bay_in": {...},
-    "furring_oc_in": {...}, "carrying_oc_in": {...}, "hanger_oc_in": {...}, "carrying_direction": {...},
-    "parapet_post_spacing_ft": {"value": 5.0, "source": "6/S5.10"}, "transition_trim_per_lf": {...},
-    "plan_scale_pt_per_ft": {...}, "deck_flute_dir": {...}, "deck_zones": {...},
-    "canopy_beam_split": {"value": false, "source": "..."},
-    "canopy_soffit_track_lines": {"value": 2, "source": "criterio del estimador E13"}},
-  "header_schedule": {"source": "7/S5.20", "rows": [                                        // v64
-    {"max_span_ft": 3.333, "type": "SINGLE TRACK 18 GA", "pieces": 1, "piece": "track"},
-    {"max_span_ft": 6.0, "type": "DOUBLE TRACK 18 GA", "pieces": 2, "piece": "track"},
-    {"max_span_ft": 8.0, "type": "2-362CSJ20", "pieces": 2, "piece": "362CSJ20"}]},
-  "sill_rule": {"double_over_ft": 4.0, "source": "2/S5.20"},                                 // v64
-  "walls": [{"id": "N1", "tag": "EXT", "...": "",
-             "openings": [{"ref": "GL-2 #1", "kind": "window", "ro_w_ft": 8.0, "head_ft": 8.5, "sill_ft": 6.5,
-                           "with_sill": true, "header_type": "6\" C box beam", "header_type_source": "11/A09.27",
-                           "pieces": 2, "pieces_source": "11/A09.27", "piece": "6\" C box",   // v64
-                           "source": "11/A09.27"}]},
-            {"id": "TR104", "element": "ceiling_transition", "kickers": {"oc_in": 48, "length_ft": 1.5,
-             "source": "7/A09.33"}, "vertical_studs": {"oc_in": 16, "height_ft": 4.375, "source": "7/A09.33"}}],
-  "openings_extra": [
-    {"ref": "N storefront", "kind": "storefront", "location": "exterior", "ro_w_ft": 41.6,
-     "structure": "HSS", "structure_source": "S2.20", "source": "2/A09.26"},                // v64
-    {"ref": "FD 14x14", "kind": "fire_damper", "ro_w_ft": 1.333, "qty": 4, "source": "M01.01"},  // v64: 0
-    {"ref": "coiling grille 103", "kind": "grille", "ro_w_ft": 13.333, "beams": 2, "beams_source": "4/A08.21",
-     "header_type": "6\" CFMF BOX BEAM", "header_type_source": "4/A08.21", "pieces": 2,
-     "pieces_source": "4/A08.21", "source": "A08.21"}],
-  "ceilings": [{"room": "104", "system": "furring", "area_sf": 510.8, "ns_ft": 30.0, "ew_ft": 17.027,
-                "perimeter_ft": 94.05, "hanger_drop_ft": {"value": 4.375, "source": "S2.20; A04.01"},
-                "source": "A04.01"},
-               {"room": "X", "system": "stud_joist", "joist_source": "6/A09.33", "...": ""}],   // v64
-  "opening_schedule": {...}, "wet_fixtures": [...], "tile_base": [...], "nodes": [...], "trim_items": [...],
-  "facades": [...], "canopies": [...], "band": {...}, "parapets": [...], "blocking_items": [...],
-  "plywood_strips": [...], "runs": [...], "section_details": [...], "ceiling_details": [...], "details": {...}
-}
-```
-
-Reglas del esquema (las tools fallan si no se cumplen):
-- **v64 header**: cada fila de `header_schedule` lleva `pieces`; `header_type` exige `pieces` + `pieces_source`;
-  span fuera del schedule sin header_type → error (RFI + piezas del detalle). Campos `members`/`multiplier`/
-  `plies` prohibidos. Tolerancia de span 1/16".
-- **v64 ductos / FD**: `kind: duct | fire_damper` → NOT_FRAMED (0 header, 0 sill). framed_openings no los
-  manda a `to_header_sill`.
-- **v64 storefront**: exterior exige `structure_source` + `structure` (HSS | steel | none); HSS/steel → 0.
-- **v64 bottom track**: `bottom_track_deduct_doors` true = error.
-- **v64 canopy_soffit / ceiling_transition**: track_lines 2; column_wrap con bottom y top.
-- **v64 kickers** exigen `vertical_studs`; **stud_joist** exige `joist_source`.
-- **v63 band, solapes, apilados, MR, purlin, zonas, canopy, cement board**: como v63 (inventario.py y canon.py).
-- **Parapet** = wall `element: parapet`, sin studs_nodos ni nodos; tramos de un run recto comparten `straight_run`.
-- **Ceilings suspendidos**: `perimeter_ft` y `hanger_drop_ft` {value, source} = B.O.D. − altura del ceiling.
-  Con `carrying_direction`: `ns_ft` y `ew_ft`; área < 98 % del rectángulo = polígono (cuerda media).
-- Room con "soffit" → `framed_soffit` o `canopy_joist`, nunca furring / stud_joist.
-- `opening_schedule` obligatorio si hay aberturas, con un plan S* y un M-plan en `sources`; cada item una vez.
-- Storefront dentro de un wall G/G1 = error (office front = stubs vendor_end + door_bulkhead, 59.7).
-- `trim_items` obligatorio; con `ceiling_transition` hace falta `transition_trim_per_lf`.
-
----
-
-## 5. Elementos (lista cerrada) → familia del track
-
-| Familia | Elementos |
-|---|---|
-| bottom track + top / deflection track (L × rows CADA UNO, sin descuento de doors) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
-| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2 fijo), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (2 fijo), joist (2) |
-
-La familia sale del ELEMENTO, no de la orientación.
-
----
-
-## 6. Familias que DEBEN salir de canon.py (sin PENDING)
-
-| Familia | Cálculo | Bloque |
-|---|---|---|
-| 6", 3-5/8", 1-5/8", 2-1/2" stud | studs_nodos (+ ceiling joists, kickers, vertical studs de transición) | walls + nodes + ceilings |
-| 6" parapet stud | por bay (E3) | walls element parapet |
-| bottom, top / deflection, track de ceilings / soffits | corridas v64 | walls + runs + ceilings.perimeter_ft |
-| bracing C.R. channel, purlin | corridas | walls |
-| header / box beam, sill track | **headers v64 por piezas** (+ `header_por_pieza`) | openings + header_schedule + sill_rule |
-| furring, carrying, hanger wire (LF derivado) + **hanger PCS por room** | canon ceilings | ceilings |
-| 5/8" regular, 5/8" MR, ballistic, 3/8" gyp board | board_caras + ceilings | faces |
-| 5/8" glass mat, 5/8" EXTERIOR gyp sheathing, FRT plywood (SF) | canon exterior / fascia_box | facades, canopies |
-| cement board | canon tile_base | tile_base |
-| FRT blocking, metal stud blocking | canon blocking | walls + blocking_items |
-| metal trim | canon trim | trim_items + jamb_return + transitions |
-| framed openings MEP | framed_openings v64 | propia entrada con `sweep` |
-
----
-
-## 7. Criterios fijos
-
-**Studs (53.2, 60.1)**: campo 1 + Σ ROUNDUP(zona / oc); cripples FLOOR(R.O. / oc); 4 jambs por abertura
-(ductos / FD no llevan jambs, E12). Nodos: L +1 · T +1 · X +2 · free 0 · vendor_end +1 · split −1 × rows ·
-abut 0. Exterior: H = B.O.D. − d.
-
-**Parapet (E3)**: bays = ROUNDUP(L / post) (6/S5.10 posts @5'-0" max); studs por bay = 2 (11/S5.10) +
-ROUNDUP((bay − 0.6) / 1.333) − 1 = 5 en bay de 5'-0"; LF = studs × (T/STUD − B.O.D.). BOA 997.19.
-
-**Board (60.2)**: SF = L × H × layers − abertura neta, face por face. Ballistic = L × min(8, H) siguiendo todo
-el contorno (E5; BOA incluye el jog 0.61 del A1K SW = 83.55 SF); 3/8" = misma face, L × (H − 8) (E6; BOA
-62.95).
-
-**MR**: solo detrás de toilet / lavatory (F/A08.01); drinking fountain no. BOA 258.86.
-
-**Canopy beam en la cavidad**: wall continuo (`canopy_beam_split` false) salvo decisión + RFI.
-
-**Tracks (E8, E9, E10, E13)**: bottom y top por separado (L × rows), sin descontar doors. Column wraps
-(5/A09.25): bottom + top track = 4 faces × ancho de face, studs a su altura. Transición 7/A09.33: track
-arriba y abajo. Canopy soffit: track en fascia y en wall. BOA: bottom = top = 1,347.53; ceilings / soffits
-1,323.03.
-
-**Bracing (53.4)**: rows = ROUNDUP(H × 12 / 48) − 1; LF = rows × L × rows de stud; vanos = RFI.
-
-**Purlin (10/A09.33, 59.1)**: 0.75 × L de top track a deck paralelo al flute (`deck_flute_dir`), una pieza
-por corrida.
-
-**Header (E1, E2, E11, E12, E16)**:
-1. Barrido cerrado: door schedule (R.O. = ancho + 2 × face del frame si no está impreso, [DERIVADO]),
-   ventanas, ATMs, office fronts, box beams, "BOX HEADER AS NEEDED", coiling grille, ductos / FD del M-plan
-   y plan estructural por lintels.
-2. Piezas: abrir TODOS los detalles de la hoja del header schedule (S5.20 en BOA: 7 schedule, 9 opng in non-
-   load-brg walls, 2 head track) y el detalle de cada box; contar las piezas dibujadas (C toe-to-toe = 2;
-   2 C + 2 track = 4). Imagen circulada de cada fila y de cada box.
-3. Walls exteriores non-load-bearing (S1.11) sin fila exterior en el schedule → detalle general de non-load-
-   brg (9/S5.20: double @ > 4'-0").
-4. Lintel HSS / steel (S*) → 0 (E16). Ductos / FD → 0 (E12). R.O. ≤ stud bay → 0 (60.10). Recessed
-   accessories nunca son header.
-5. BOA: **408.89 LF** (línea 240.65): track 82.76 · 6" C box GL-2 112.00 · C box office fronts 106.00 ·
-   vestibule box 49.46 · 6" CFMF box grille 58.67 (header_por_piezas.md; RFIs H1–H6).
-
-**Sill (E2 + detalle)**: (R.O. + 1'-4") × piezas en aberturas con sill; 2/S5.20 "INVERT DETAIL FOR SILL
-CONDITION" → double > 4'-0". BOA **119.09**: ATMs 3.58 + 3.51 (1 pieza) + 6 GL-2 × 9.333 × 2. Ductos / FD 0.
-
-**Ceilings (E4, E14)**: legend "SUSPENDED GWB" = furring (BOA Waiting 104 furring 808.88 total, sin 3-5/8"
-joists). Carrying = (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying = ROUNDUP((largo − 1) / 4)
-+ 1. **Hanger wire = PCS por room + altura (B.O.D. − ceiling)**; LF = Σ PCS × altura (BOA 112 PCS / 524.78 LF).
-CSR soffit 10/A09.33 = framed_soffit; canopy soffit = canopy_joist.
-
-**Transiciones (E7, E9)**: kickers @48" + studs verticales a estructura (`vertical_studs`; BOA +258.13 3-5/8"
-→ 6,486.02); track arriba y abajo (+154.06); trim = L × 2.
-
-**Metal trim**: callouts rotulados en `trim_items`; jamb returns = bordes × 2; transiciones × 2.
-
-**Exterior (59.2)**: glass mat = base strip + banda de canopy en cada fachada con canopy; nailbase descuenta
-la misma banda. Fascia box sheathing = L × (T/STUD − B/STUD fascia) (7/A09.26: 1.864).
-
-**Blocking (58.6, 59.14)**: una fila por STUD ROW con face > largo de hoja; FRT solo donde se rotula.
-
-**Framed openings MEP**: max(ancho, largo) ≤ módulo → 0; air devices / ductos / FD de wall → NOT_FRAMED (E12);
-`sweep` con hoja M y E.
-
-**Cladding (60.4)**: hat channel / Z-girt / lath = EXCLUDED + RFI.
-
----
-
-## 8. Compuerta (NO ENTREGABLE si falla)
-
-1. `inventario.py` y `canon.py` corren sin error; ninguna familia `obligatorias` en 0 sin motivo.
-2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`; header con
-   `header_por_pieza` y hanger con `hanger_pcs` en el Excel.
-3. `closer.py`: HEADER = Σ (R.O. + 1'-4") × piezas; abertura sin piezas con HEADER cuantificado = rechazo;
-   ducto con header / sill = rechazo.
-4. `bitacora.py compuerta` completa; cada RFI con delta; cada abertura, corrida, face y ceiling con source.
-5. Back-check ciego familia por familia contra `familias_out.json`.
-
----
-
-## 9. Adendas / reglas anuladas o corregidas
-
-| Regla | Estado |
-|---|---|
-| Header (R.O. + 1'-4") × 1, "members no multiplican" (60.5, v60–v63) | **ANULADA → E2 por piezas** |
-| Header BOA 240.65 / 305.63 (ref v4) | **CORREGIDA → 408.89** |
-| Sill BOA 63.09 / 72.76 | **CORREGIDA → 119.09** (2/S5.20) |
-| Ductos > stud bay a header / sill (58.4) | **ANULADA → E12** |
-| `bottom_track_deduct_doors` con fuente (v62) | **ANULADA → E10** |
-| `canopy_soffit_track_lines` 1 o 2 (v63) | **ANULADA → 2 (E13)** |
-| Hanger wire solo LF (v62) | **CORREGIDA → PCS + altura, LF derivado (E4)** |
-| Ballistic 74.00 / 3/8" 57.07 (planta, arb #13) | **CORREGIDA → 83.55 / 62.95 (E5, E6)** |
-| Waiting 104 stud_joist (6/A09.33) | **ANULADA → furring (E14)** |
-| Kicker sin studs verticales | **ANULADA → E7** |
-| layers totales, familia por orientación, parapet @16" continuo, purlin × rows, MR por room húmedo, walls partidos a criterio, sumas a mano | ANULADAS (v60–v63) |
-
----
-
-## 10. Estrategia anti-varianza
-
-1. Una sola lectura por dato (banda en la planta).
-2. Criterio = constante del proyecto con fuente; los criterios del estimador (§0) ya no son elegibles.
-3. Cada regla en una tool con test que falla con el dato malo.
-4. Comparar inventarios antes que totales; > 2 % entre agentes → diff de canons → regla nueva.
-
-# PROTOCOLO v65b — Take-off Metal Frame & Drywall (Div. 05 / Div. 09)
-
-Fecha: 2026-10-17 · v65 + decisiones del usuario #18–#22 (header / sill, E18–E22).
-**REEMPLAZA a PROTOCOLO_v65.md, v64 y a todas las adendas.** Orden de autoridad: §0 Criterios del estimador >
-este texto > referencias / rangos / arbitrajes anteriores.
-
----
-
-## 0. Criterios del estimador (usuario 2026-10-16 / 17) — reglas generales para TODO proyecto
+## 0. Criterios del estimador — reglas generales para TODO proyecto
 
 Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa (entonces RFI).
 
-| # | Regla general | Tool que la hace cumplir |
+| # | Regla general | Tool |
 |---|---|---|
 | E1 | **Header / box beam: largo** de cada pieza = R.O. + 1'-4" (8" de bearing a cada lado). | headers.py |
-| E2 | **Header: material por PIEZAS.** LF = (R.O. + 1'-4") × piezas × qty. Piezas = fila del header schedule por span (single track 1, double 2, 2-C 2) o 4 en todo box (E20). Nunca LF de línea. | headers.py, closer.py |
-| E3 | **Parapet studs bay por bay** entre posts: 2 por post (uno a cada lado) + intermedios @ O.C.; bays = ROUNDUP(L / spacing) por tramo recto; × (T/STUD − B.O.D.). | canon.py (`element: parapet`) |
+| E2 | **Header por PIEZAS:** LF = (R.O. + 1'-4") × piezas × qty. Piezas = fila del header schedule (single track 1, double 2, 2-C 2) o 4 en todo box (E20). Nunca LF de línea. | headers.py, closer.py |
+| E3 | **Parapet studs bay por bay** entre posts: 2 por post + intermedios @ O.C.; bays = ROUNDUP(L / post) por straight run; studs por bay = 2 + ROUNDUP((bay − 0.6) / oc) − 1; × (T/STUD − B.O.D.). v66: straight run = tramos contiguos de una línea aunque cambie la altura; largo en el eje del stud. | canon.py `parapet` |
 | E4 | **Hanger wire en PCS** con la altura de cada hanger (B.O.D. − ceiling) por room; LF = Σ PCS × altura, DERIVADO. | canon.py `hanger_pcs` |
-| E5 | **Ballistic panel** sigue todo el contorno del wall que lo lleva, incluidos jogs y retornos (no se corta en el primer cambio de dirección). | inventario / faces |
-| E6 | **Board sobre ballistic** (3/8" u otro): misma face que el ballistic, desde su tope (8'-0") hasta estructura. | board_caras |
-| E7 | **Transición de ceiling con kicker**: se cuentan los studs verticales (dashed) a estructura ADEMÁS del kicker. | canon.py `vertical_studs` obligatorio |
-| E8 | **Column wraps**: bottom + top track (perímetro de faces), studs a su altura. | corridas.py |
+| E5 | **Ballistic panel** sigue todo el contorno del wall que lo lleva, con jogs y retornos (`ballistic_jogs`, sin walls fantasma). | canon.py |
+| E6 | **Board sobre ballistic** (3/8" u otro): misma face, desde el tope del panel hasta estructura. | board_caras |
+| E7 | **Transición con kicker**: studs verticales (dashed) a estructura ADEMÁS del kicker. | canon.py `vertical_studs` |
+| E8 | **Column wraps**: bottom + top track (perímetro de faces = FOS impreso), studs a su altura. | corridas.py |
 | E9 | **Ceiling track en transición**: arriba (deck) y abajo (ceiling) = 2 líneas. | corridas.py |
-| E10 | **Bottom track en doors NO se descuenta**: corre completo. | corridas.py |
-| E11 | **"BOX HEADER AS NEEDED" SÍ se cuenta**, por piezas × largo; tamaño no impreso = RFI. | headers.py |
-| E12 | **Ductos y fire dampers en walls NO se enmarcan**: sin header ni sill ni jambs, cualquiera sea su tamaño. | headers.py (`duct`/`fire_damper` = NOT_FRAMED), framed_openings.py, closer.py |
-| E13 | **Canopy soffit**: track en LOS DOS extremos de los joists (fascia y wall) = 2 líneas. | canon.py / corridas.py |
-| E14 | **Ceiling suspendido** del RCP (hangers + carrying) = furring channel, NO 3-5/8" joists, salvo que un detalle dibuje joists (`joist_source`). | canon.py |
-| E15 | **R.O. impreso del estimador manda** cuando hay dos lecturas (GL-2 109/110 = 8'-0"). | dato |
-| E16 | **Storefront con lintel estructural** (HSS / steel en S* o "STEEL HEADER FRAMING"): steel by others, 0 metal stud header. | headers.py `structure` |
-| E17 | **Preguntas al usuario UNA A LA VEZ**: imagen circulada + secuencia de hojas (plano → detalle → sección) + opciones con delta; la siguiente solo después de la respuesta. RFIs del entregable pueden ir en tabla. | protocolo (§1.7) |
-| E18 | **Sill track DOUBLE en R.O. > 4'-0"** siempre (2/S5.20 "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG >4'-0"" + "INVERT DETAIL FOR SILL CONDITION"); sin `sill_rule` se aplica 4.0 / 2/S5.20; bajarlo = error. Doors nunca llevan sill. | headers.py |
-| E19 | **"METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED"** (GL-2, 11/A09.27) = METAL STUD BOX BEAM; `or_steel` / GL-2 con steel = error. | headers.py, canon.py |
-| E20 | **Todo box beam / box header = 4 PIEZAS** (2 C + 2 track): GL-2 11/A09.27, office front 8,9/A12.01, grille 4/A08.21 (× 2 beams), vestibule 4-7/A12.10, door 123 14/A09.27, drive-up ATM 6/A08.11. | headers.py |
-| E21 | **El header schedule no se baja**: door 102 R.O. 3'-10" = DOUBLE TRACK (7/S5.20 ≤ 6'-0"), no 1 por 9/S5.20. | headers.py |
-| E22 | **"CONT. BOX BEAM" = UN run continuo por frente** (no por abertura) × 4: `continuous_run`, `wall` = línea, qty 1, largo medido [DERIVADO] + imagen + RFI si no hay cota. Dos frentes = dos runs (EJES). | headers.py |
-
-`header_params` (v65) ya no existe: canon.py y headers.py lo rechazan.
+| E10 | **Bottom track en doors NO se descuenta**. | corridas.py |
+| E11 | **"BOX HEADER AS NEEDED" SÍ se cuenta**, piezas × largo; tamaño no impreso = RFI. | headers.py |
+| E12 | **Ductos y fire dampers en walls NO se enmarcan** (sin header, sill ni jambs). | headers.py, framed_openings.py |
+| E13 | **Canopy soffit**: track en LOS DOS extremos de los joists; línea de fascia y línea de wall **medidas por separado** (`wall_line_ft`), nunca L × 2. | corridas.py |
+| E14 | **Ceiling suspendido** del RCP = furring channel, no joists, salvo detalle que dibuje joists (`joist_source`). | canon.py |
+| E15 | **R.O. impreso del estimador manda** cuando hay dos lecturas. | dato |
+| E16 | **Storefront con lintel estructural** (HSS / steel en S*): steel by others, 0 metal stud header. | headers.py |
+| E17 | **Preguntas al usuario UNA A LA VEZ**: imagen circulada + secuencia de hojas + opciones con delta. Solo criterio del estimador que el plano no contesta. | protocolo |
+| E18 | **Sill track DOUBLE en R.O. > 4'-0"** (head track adicional invertido para sill del detalle del schedule). Doors nunca llevan sill. | headers.py |
+| E19 | **"METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED"** = METAL STUD BOX BEAM (`or_steel: true`); steel = error. | headers.py, canon.py |
+| E20 | **Todo box beam / box header = 4 PIEZAS** (2 C + 2 track); grille con 2 beams = 2 × 4. | headers.py |
+| E21 | **El header schedule no se baja**: la fila del span manda. | headers.py |
+| E22 | **"CONT. BOX BEAM" = UN run continuo por frente** × 4 (`continuous_run`, `wall` = línea); dos frentes = dos runs. | headers.py |
+| E23 | **Antes de preguntar, buscar en TODAS las hojas y la spec.** Si el plano contesta: decidir con N/HOJA + imagen. Si no: RFI con delta + supuesto declarado. Rangos internos los decide Claude con evidencia. | protocolo |
+| E24 | **Protocolo y tools CIEGOS**: el SKILL, referencias/ y toda tool o test que reciben las pruebas no traen valores de la referencia de examen (cantidades, cotas, R.O., conteos, coordenadas). Tests con datos de examen viven en `tests_arbitraje/` (fuera del paquete). `test_ciego.py` falla si hay fuga. | test_ciego.py |
+| E25 | **Cada capa del sheathing se sigue en la sección hasta su remate** (coping, soffit, base). Si la nailbase sube al parapet, su tope = T/STUD del parapet (`nailbase_top_ft`, `parapet_t_stud_ft`) o tira `parapet_face_of`. | canon.py `_exterior` |
+| E26 | **Walls bajo un miembro estructural** (viga / joist del plan S*) paran bajo ese miembro: `vigas_sobre_walls.py` los detecta; el agente lee perfil y peralte en S* → `stops_under_beam` o motivo + RFI. | vigas_sobre_walls.py, altura_stud.py |
 
 ---
 
@@ -2522,19 +1696,21 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
 
 1. **#0 HONESTIDAD DIMENSIONAL.** [CONFIRMADO] cota impresa + N/HOJA · [DERIVADO] operación escrita ·
    [PENDIENTE]. Nunca escalar a ojo. Si no se distingue con certeza, se dice y se para.
-2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Toda
-   partida cita N/HOJA. Un detalle es de todo lo que corta. Si no aplica, motivo.
-3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada.
+2. **DETALLES.** La burbuja manda. Cadena completa: tag → schedule → detalle del tipo → detalles llamados. Leer
+   el CUERPO del detalle (notas, leaders, "INVERT DETAIL FOR ..."), no solo el título; si dos detalles traen el
+   concepto, se citan los dos. Un detalle es de todo lo que corta. Si no aplica, motivo.
+3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada. Antes de "sin tag", buscar leaders
+   finos que crucen la band desde un tag cercano. Antes de un RFI "no está en el set", grep del término en todo el
+   texto del set. Nota "ALL ..." = recorrer el schedule completo ítem por ítem.
 4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. Hojas rotadas:
-   `page.rotation_matrix` antes de circular.
+   `page.rotation_matrix` para medir, `derotation_matrix` para dibujar.
 5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
-6. **EJES.** Nunca dos ejes o fachadas en un número.
+6. **EJES.** Nunca dos ejes, fachadas o frentes en un número.
 7. **AMBIGÜEDAD = RFI** con delta. Se carga la opción de más material solo si la medida NO está impresa (53.3).
-   **Preguntas al usuario (E17): UNA A LA VEZ**, cada una con imagen circulada + secuencia de hojas
-   (plano → detalle → sección) + opciones con su delta; la siguiente solo después de la respuesta.
 8. **ERRORES.** Error nuevo = regla + test que falle con el dato malo + tool corregida, el mismo turno.
-9. **PRUEBAS.** Una prueba NO modifica tools a mitad de prueba: cambio propuesto (diff + test) en
-   `PARA REVISAR/` y sigue con lo que la tool da; el arbitraje lo integra.
+9. **PRUEBAS.** Una prueba NO modifica tools: propuesta (diff + test) en `PARA REVISAR/`; el arbitraje la integra.
+10. **REGISTRO.** Un renglón resuelto no se reescribe: `registro.py anexar <id> "<evidencia>"` agrega hojas o
+    corrige una cita sin cambiar el estado. Una nota NO APLICA cita TODAS las hojas del escaneo con su motivo.
 
 ---
 
@@ -2547,18 +1723,18 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
 | P2 | Registro antes del primer número | `registro.py crear` |
 | P3 | Walls (largo neto, cota, line + from/to, band) y nodes | → `walls`, `nodes` |
 | P3b | Inventario cerrado (bandas, solapes, apilados, MR, purlin, zonas) | `inventario.py` |
-| P4 | Alturas: B.O.D. por wall, d de perimeter beam; deck en pendiente = promedio (55.3) | `altura_stud.py` |
-| P5 | Faces: room, board, layers por face, altura, aberturas netas | → `walls[].faces` |
-| P6 | **Barrido de aberturas + header schedule con PIEZAS** (§7 Header) | → `header_schedule`, `sill_rule`, `opening_schedule`, `openings` |
-| P7 | Corridas no-wall con su ELEMENTO (§5); parapets `element: parapet` con `straight_run` | → `walls` / `runs` |
-| P8 | Ceilings (ns/ew, área, perímetro, drop), fachadas + canopies + banda, parapets, blocking, plywood, trim | → bloques §4 |
+| P4 | Alturas: B.O.D. por wall; walls bajo viga/joist (E26) | `vigas_sobre_walls.py`, `altura_stud.py` |
+| P5 | Faces: room, board, layers, altura, aberturas; face con dos rooms = tramos `side` + `length_ft` | → `walls[].faces` |
+| P6 | Barrido de aberturas + header schedule con PIEZAS | → `header_schedule`, `sill_rule`, `opening_schedule` |
+| P7 | Corridas no-wall con su ELEMENTO (§5); parapets por línea (E3) | → `walls` / `runs` |
+| P8 | Ceilings, fachadas + canopies + banda, parapets + nailbase (E25), blocking, plywood, trim | → bloques §4 |
 | P9 | `canon.py takeoff_canon.json out/` | `canon.py` |
-| P10 | Fixtures por tag en hoja E (`tag_counts`), MEP framed openings (`sweep` M + E), alcance | `contar_tags.py`, `framed_openings.py`, `alcance_filtro.py` |
+| P10 | Fixtures por tag (`tag_counts`, sufijo de circuito normalizado), MEP framed openings, alcance | `contar_tags.py`, `framed_openings.py`, `alcance_filtro.py` |
 | P11 | Excel desde `familias_out.json` + RFIs + evidencia | `plantilla_excel.py`, `planmark.py` |
 | P12 | Back-check ciego y compuerta | back-check, `bitacora.py compuerta` |
 
-Nunca `| head` / `| tail` detrás de una tool (`bitacora.py run` guarda en `bitacora_logs/`). **Prohibido**
-escribir a mano una cantidad de §6; si la tool no cubre el caso: §1.9 + RFI con delta.
+Nunca `| head` / `| tail` detrás de una tool. Prohibido escribir a mano una cantidad de §6; si la tool no cubre
+el caso: §1.9 + RFI con delta. `bitacora.py compuerta` se corre directo o por `run` (no se rechaza a sí misma).
 
 ---
 
@@ -2567,41 +1743,41 @@ escribir a mano una cantidad de §6; si la tool no cubre el caso: §1.9 + RFI co
 | Juicio (N/HOJA + imagen) | NO es juicio (tool) |
 |---|---|
 | Largos, alturas, R.O., áreas, perímetros, drops medidos o impresos | Studs por nodo, cripples, jambs |
-| Banda de cada wall en la planta y su zona de deck | Solapes, duplicados, apilados, altura por zona |
+| Banda de cada wall y su zona de deck; miembro S* sobre el wall | Solapes, apilados, altura por zona, walls bajo viga (detección) |
 | Qué fixture hay detrás de cada face | Qué face lleva MR |
-| Dirección del flute (una vez, con fuente) | Qué wall lleva purlin |
-| Filas del header schedule; R.O. y largo de cada run CONT. (imagen) | Header / sill LF por piezas (box = 4); cierre |
-| Lintel estructural sí / no (plan S*) | 0 metal header si hay lintel |
-| Sistema de ceiling y altura de hanger por room | Furring, carrying, hanger PCS y LF derivado |
+| Dirección del flute (una vez, con fuente) | Qué wall / transición lleva purlin |
+| Filas del header schedule; largo de cada run CONT. | Header / sill LF por piezas; cierre |
+| Línea y tramo de cada parapet; T/STUD de cada sección | Bays, studs por bay, agrupación por línea |
+| Sistema de ceiling y altura de hanger | Furring, carrying, hanger PCS |
+| Studs dibujados en un detalle de pier / wrap | Familia de cada parte (`parts`) |
 | RFIs y su delta | Totales con nombre del calificador |
 
 ---
 
-## 4. `takeoff_canon.json` — esquema v65b
+## 4. `takeoff_canon.json` — esquema v66
 
-Todo número medido lleva `source` (N/HOJA). Las constantes llevan `{value, source}`.
+Todo número medido lleva `source` (N/HOJA). Constantes `{value, source}`. Esquema completo: docstrings de
+`canon.py`, `headers.py`, `corridas.py`, `board_caras.py`, `framed_openings.py` y `test_canon*.py`.
+Bloques: `constants`, `header_schedule`, `sill_rule`, `walls` (`faces`, `openings`, `band`), `nodes`,
+`openings_extra`, `opening_schedule`, `ceilings`, `runs`, `facades`, `canopies`, `band`, `parapets`,
+`blocking_items`, `plywood_strips`, `trim_items`, `wet_fixtures`, `tile_base`, `frp`, `sealant_items`,
+`sealant_base_exterior`, `level5_items`, `ballistic_jogs`, `section_details`, `ceiling_details`, `details`.
 
-Esquema completo: docstrings de `canon.py` / `headers.py` / `framed_openings.py` y `test_canon.py`.
-Bloques: `constants`, `header_schedule`, `sill_rule`, `walls`
-(`faces`, `openings`, `band`), `nodes`, `openings_extra`, `opening_schedule`, `ceilings`, `runs`, `facades`,
-`canopies`, `band`, `parapets`, `blocking_items`, `plywood_strips`, `trim_items`, `wet_fixtures`,
-`tile_base`, **`frp`**, **`sealant_items`**, **`sealant_base_exterior`**, **`level5_items`** (v65),
-`section_details`, `ceiling_details`, `details` (cada uno con **`sealant`** v65).
-
-Reglas del esquema (las tools fallan si no se cumplen; detalle en los docstrings):
-- header: `pieces` por fila y con `header_type` (+ `pieces_source`); box = 4; CONT. BOX BEAM con
-  `continuous_run` + `wall`; `or_steel`; `members`/`multiplier`/`plies`/`header_params` prohibidos; ducto /
-  FD = NOT_FRAMED; storefront exterior con `structure` + `structure_source` (HSS/steel → 0).
-- bottom track sin descuento de doors; canopy_soffit y ceiling_transition track_lines 2; kickers con
-  `vertical_studs`; stud_joist con `joist_source`.
-- v63: band, solapes, apilados, MR, purlin, zonas, canopy, cement board (inventario.py y canon.py).
-- Parapet = `element: parapet` sin nodos, `straight_run` por run recto. Ceilings suspendidos con `perimeter_ft`,
-  `hanger_drop_ft` {value, source}, `ns_ft`/`ew_ft`; polígono si área < 98 % del rectángulo; soffit nunca
-  furring / stud_joist.
-- `opening_schedule` con plan S* y M-plan; storefront dentro de G/G1 = error; `trim_items` obligatorio.
-- **v65** (§11): `ceiling_transition` y `column_wrap` fuera de studs_nodos; `roof_step_rows_drawn`,
-  `ballistic_contour_ft`, `band.t_stud_ft/b_stud_ft`, `frp`, `details[*].sealant`, `drop_lines` +
-  `soffit_of`, `framing_wall`, fascia_box en walls, T G-G prohibido, `tag_counts`, sin insulation.
+Reglas del esquema (las tools fallan si no se cumplen):
+- header: `pieces` + `pieces_source` por fila; box = 4; CONT. con `continuous_run` + `wall`; `or_steel`;
+  ducto / FD = NOT_FRAMED; storefront exterior con `structure` + `structure_source`. Nada de `header_params`.
+- **v66 parapet**: `element: parapet` con `line`, `from_ft`, `to_ft`, `length_basis: "stud_cl"` y `facade`.
+- **v66 canopy_soffit**: `wall_line_ft {value, source}` además de `length_ft` (línea de fascia).
+- **v66 ballistic_jogs**: `[{ref, length_ft, height_ft, detail, faces_5_8, source}]` (entran en
+  `ballistic_contour_ft`).
+- **v66 column_wrap / pier** con dos sistemas: `parts [{stud_size, studs_drawn {value, source}}]`.
+- **v66 facades con parapet**: `parapet_t_stud_ft`, `nailbase_top_ft`, `nailbase_bottom_ft` {value, source},
+  `height_nailbase_ft` = top − bottom; o `plywood_strips[].parapet_face_of`.
+- **v66 faces por tramo**: `side` A|B + `length_ft` + `length_source`; Σ tramos del side = largo del wall.
+- **v66 framed openings**: `width_source` por item.
+- framed_soffit `drop_lines` = bordes del soffit que en el RCP dan a un ceiling (no a una partición).
+- bottom track sin descuento de doors; ceiling_transition y canopy_soffit 2 líneas; kickers con
+  `vertical_studs`; stud_joist con `joist_source`; `roof_step_rows_drawn`; `tag_counts`; sin insulation.
 
 ---
 
@@ -2609,167 +1785,131 @@ Reglas del esquema (las tools fallan si no se cumplen; detalle en los docstrings
 
 | Familia | Elementos |
 |---|---|
-| bottom track + top / deflection track (L × rows CADA UNO, sin descuento de doors) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
-| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2 fijo), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (2 fijo), joist (2) |
+| bottom track + top / deflection track (L × rows c/u, sin descuento de doors) | wall, parapet, roof_step, pier, column_wrap, chase, vestibule_head, grille_head, grille_box, door_bulkhead, storefront_cripples |
+| track de ceilings / soffits (L × track_lines) | ceiling_perimeter (1, lo genera canon), soffit_drop (2), ceiling_transition (2 fijo), ceiling_bulkhead (2), soffit_side (2), soffit_bottom (2), fascia_box (2), canopy_soffit (fascia + wall), joist (2) |
 
 La familia sale del ELEMENTO, no de la orientación.
 
 ---
 
-## 6. Familias que DEBEN salir de canon.py (sin PENDING)
+## 6. Familias que DEBEN salir de las tools (sin PENDING)
 
 | Familia | Cálculo | Bloque |
 |---|---|---|
-| 6", 3-5/8", 1-5/8", 2-1/2" stud | studs_nodos (+ ceiling joists, kickers, vertical studs de transición) | walls + nodes + ceilings |
-| 6" parapet stud | por bay (E3) | walls element parapet |
-| bottom, top / deflection, track de ceilings / soffits | corridas v64 | walls + runs + ceilings.perimeter_ft |
-| bracing C.R. channel, purlin | corridas | walls |
-| header / box beam, sill track | **headers v65b por piezas** (+ `header_por_pieza`) | openings + header_schedule + sill_rule |
-| furring, carrying, hanger wire (LF derivado) + **hanger PCS por room** | canon ceilings | ceilings |
-| 5/8" regular, 5/8" MR, ballistic, 3/8" gyp board | board_caras + ceilings | faces |
-| 5/8" glass mat, 5/8" EXTERIOR gyp sheathing, FRT plywood (SF) | canon exterior / fascia_box | facades, canopies |
-| cement board | canon tile_base | tile_base |
-| **FRP** (v65) | perímetro neto de tile_base × top + mop sink | frp |
-| **acoustical sealant** (v65) | por detalle: L × (bottom + top faces) − doors × bottom + items + base exterior | details[*].sealant, sealant_items |
-| Level 5 finish (v65, si aplica) | SF por item | level5_items |
-| FRT blocking, metal stud blocking | canon blocking | walls + blocking_items |
-| metal trim | canon trim | trim_items + jamb_return + transitions |
-| framed openings MEP | framed_openings v64 | propia entrada con `sweep` |
+| 6", 3-5/8", 1-5/8", 2-1/2" stud | studs_nodos + joists + kickers + verticales + wraps / parts | walls, nodes, ceilings |
+| 6" parapet stud | por bay y por línea (E3) | walls `parapet` |
+| bottom, top, track de ceilings / soffits | corridas | walls, runs, ceilings |
+| bracing, purlin | corridas | walls |
+| header / box beam, sill track | headers por piezas (+ `header_por_pieza`) | openings + schedule |
+| furring, carrying, hanger (PCS + LF) | canon ceilings | ceilings |
+| 5/8" regular, MR, ballistic, 3/8" | board_caras + ceilings + ballistic_jogs | faces |
+| glass mat, EXTERIOR gyp sheathing, FRT plywood | canon exterior (E25) / fascia_box / strips | facades, canopies, parapets |
+| cement board, FRP, acoustical sealant, Level 5 | canon | tile_base, frp, details, level5_items |
+| FRT blocking, metal stud blocking, metal trim | canon | blocking_items, trim_items |
+| framed openings MEP | framed_openings | `sweep`, `tag_counts` |
 
 ---
 
-## 7. Criterios fijos
+## 7. Criterios fijos (fórmulas; sin valores de proyecto)
 
-**Studs (53.2, 60.1)**: campo 1 + Σ ROUNDUP(zona / oc); cripples FLOOR(R.O. / oc); 4 jambs por abertura
-(ductos / FD no llevan jambs, E12). Nodos: L +1 · T +1 · X +2 · free 0 · vendor_end +1 · split −1 × rows ·
-abut 0. Exterior: H = B.O.D. − d.
+**Studs (53.2, 60.1)**: campo 1 + Σ ROUNDUP(zona / oc); cripples FLOOR(R.O. / oc); 4 jambs por abertura (no en
+ductos / FD). Nodos: L +1 · T +1 · X +2 · free 0 · vendor_end +1 · split −1 × rows · abut 0. T entre G/G1 =
+abut. Un partition que llega a un wall exterior = T, igual que los demás de su tipo. Exterior: H = B.O.D. − d.
+Un remate de wall de 4" en un office front es el extremo del wall que llega, no un stub aparte.
 
-**Parapet (E3)**: bays = ROUNDUP(L / post) (6/S5.10 posts @5'-0" max); studs por bay = 2 (11/S5.10) +
-ROUNDUP((bay − 0.6) / 1.333) − 1 = 5 en bay de 5'-0"; LF = studs × (T/STUD − B.O.D.). BOA 997.19.
+**Parapet (E3)**: medir cada tramo en el eje del stud (cara exterior − offset del detalle del parapet); los
+tramos contiguos de una línea forman un run aunque cambie la altura (cada tramo con su sección); bays por run.
 
-**Board (60.2)**: SF = L × H × layers − abertura neta, face por face. Ballistic = L × min(8, H) siguiendo todo
-el contorno (E5; BOA incluye el jog 0.61 del A1K SW = 83.55 SF); 3/8" = misma face, L × (H − 8) (E6; BOA
-62.95).
+**Board (60.2)**: SF = L × H × layers − abertura, face por face; una face que da a dos rooms = tramos. Un wall
+que forra (lining) la cara de otro no tiene face del lado del wall que forra. Ballistic = L × min(tope, H)
+siguiendo todo el contorno; 3/8" = misma face sobre el tope. A1/A5 con ceiling: board = ceiling + 6" del detalle
+(salvo detalle "TO UNDERSIDE OF DECK").
 
-**MR**: solo detrás de toilet / lavatory (F/A08.01); drinking fountain no. BOA 258.86.
+**MR**: solo detrás de toilet / lavatory del detalle de baños; drinking fountain no.
 
-**Canopy beam en cavidad**: wall continuo (`canopy_beam_split` false) salvo decisión + RFI.
+**Column wraps / piers**: face = FOS impreso (no FOS + acabado); studs por face o `studs_drawn`; si el detalle
+dibuja dos sistemas (ej. L interior 3-5/8" + L exterior 6" CFMF), `parts`.
 
-**Tracks (E8, E9, E10, E13)**: bottom y top por separado (L × rows), sin descontar doors. Column wraps
-(5/A09.25): bottom + top track = 4 faces × ancho de face, studs a su altura. Transición 7/A09.33: track
-arriba y abajo. Canopy soffit: track en fascia y en wall. BOA: bottom = top = 1,347.53; ceilings / soffits
-1,323.03.
+**Tracks (E8–E10, E13)**: bottom y top por separado; transición arriba y abajo; canopy soffit fascia + wall.
 
 **Bracing (53.4)**: rows = ROUNDUP(H × 12 / 48) − 1; LF = rows × L × rows de stud; vanos = RFI.
 
-**Purlin (10/A09.33, 59.1)**: 0.75 × L de top track a deck paralelo al flute (`deck_flute_dir`), una pieza
-por corrida.
+**Purlin (59.1)**: 0.75 × L de top track a deck paralelo al flute, una pieza por corrida; incluye transiciones y
+bulkheads con track a deck.
 
-**Header (E1, E2, E11, E12, E16, E19–E22)**:
-1. Barrido cerrado: door schedule (R.O. = ancho + 2 × face del frame si no está impreso, [DERIVADO]),
-   ventanas, ATMs, office fronts, box beams, "BOX HEADER AS NEEDED", coiling grille, ductos / FD del M-plan,
-   lintels del plan S* y cada "HOLD" de la planta (abierta "OPEN TO BEYOND" o appliance = N/A con motivo).
-2. Piezas: abrir TODOS los detalles de la hoja del schedule (BOA S5.20: 7, 9, 2) y el head de cada abertura;
-   box = 4 (E20); imagen de cada fila y box. Exterior non-load-bearing sin fila → 9/S5.20.
-3. Lintel HSS / steel (S*) → 0 (E16). Ductos / FD → 0 (E12). R.O. ≤ stud bay → 0 (60.10). Recessed
-   accessories nunca son header.
-4. BOA (header_v65b.md): **791.96 LF** = doors track 60.67 + 10.33 · door 123 box 18.67 · walk-up ATM 3.58 ·
-   drive-up ATM box 14.04 · GL-2 224.00 · office front EAST run 39.98 → 165.25 · WEST run 18'-5 1/2" → 79.17 ·
-   vestibule 67.92 + 31.00 · grille 117.33. RFIs H2–H6.
+**Header (E1, E2, E11, E12, E16, E18–E22)**: barrido cerrado (door schedule, ventanas, ATMs, office fronts, box
+beams, "AS NEEDED", grilles, ductos / FD del M-plan, lintels S*, cada "HOLD": abierta "OPEN TO BEYOND" o
+appliance = N/A con motivo); piezas de la fila o 4 en box; R.O. ≤ stud bay → 0; recessed accessories nunca.
 
-**Sill (E18)**: (R.O. + 1'-4") × piezas en aberturas con sill. BOA **119.09**: ATMs 3.58 + 3.51 (1 pieza) +
-6 GL-2 × 9.333 × 2. Ductos / FD 0.
+**Sill (E18)**: (R.O. + 1'-4") × piezas en aberturas con sill; ductos / FD 0.
 
-**Ceilings (E4, E14)**: "SUSPENDED GWB" = furring (BOA Waiting 104, sin 3-5/8" joists; furring 808.88). Carrying = (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying = ROUNDUP((largo − 1) / 4)
-+ 1. **Hanger wire = PCS por room + altura (B.O.D. − ceiling)**; LF = Σ PCS × altura (BOA 112 PCS / 524.78 LF).
-CSR soffit 10/A09.33 = framed_soffit; canopy soffit = canopy_joist.
+**Ceilings (E4, E14)**: carrying = (ROUNDUP((ancho − 1) / 4) + 1) × largo; hangers por carrying =
+ROUNDUP((largo − 1) / 4) + 1; hanger PCS + altura por room. CSR / soffit = framed_soffit con `drop_lines` del
+RCP: cada borde que da a un ceiling lleva su línea de drop studs (10/A09.33 dibuja STL STUD donde el soffit
+encuentra el scheduled ceiling; la partición solo donde existe).
 
-**Transiciones (E7, E9, R1)**: kickers @48" + studs verticales a estructura (BOA +258.13 → 6,486.02); kicker
-sin largo impreso = 4.375 / sin 45 = 6.187; track arriba y abajo (+154.06); trim = L × 2.
+**Transiciones (E7, E9)**: kickers @48" + verticales; kicker sin largo impreso = h / sin(ángulo dibujado).
 
-**Metal trim**: callouts en `trim_items`; jamb returns = bordes × 2; transiciones × 2.
+**Exterior (59.2, E25)**: glass mat = base strip + banda T/STUD − B/STUD del detalle de la banda; nailbase =
+T/BASE → T/STUD (del parapet si sigue al parapet) − banda − aberturas, por facade, con TODAS las facades.
 
-**Exterior (59.2, R9)**: glass mat = base strip + banda de canopy por fachada con canopy; nailbase descuenta
-la misma banda. Banda = T/STUD − B/STUD del detalle (7/A09.26 12'-7" − 10'-7 1/4" = 1.979), nunca
-T/CANOPY − B/CANOPY de la elevación. Fascia box sheathing = L × (T/STUD − B/STUD fascia) (7/A09.26: 1.864).
+**Blocking (58.6)**: por STUD ROW con face > largo de hoja; FRT solo donde se rotula (grep de "FRT" /
+"PLYWOOD" / "BLOCKING" en A11/A12/A03 y key notes antes de "sin rótulo"; un detalle de partición que dibuja
+blocking aplica a cada wall de ese tipo). Ancho de un ítem = schedule o contorno, nunca la cota de ubicación.
 
-**Blocking (58.6, 59.14)**: una fila por STUD ROW con face > largo de hoja; FRT solo donde se rotula.
+**FRP / sealant / trim**: FRP = perímetro neto del tile_base (todas las doors) × top + mop sink; sealant por
+detalle (beads dibujados, doors abajo); trim = callouts + jamb returns × 2 + transiciones × 2.
 
-**FRP (R10, 59.10)**: perímetro neto de tile_base (TODAS las doors, incluidas las de cuartos vecinos que abren
-hacia él) × top + mop sink. BOA (67.6 − 3.33) × 5.0 + 2 × 2.0 × 4.0 = **337.35**; cement board 32.13.
+**Framed openings MEP**: max(ancho, largo) ≤ módulo → 0; air devices / ductos de wall = NOT_FRAMED; `sweep` M + E;
+`tag_counts` de `contar_tags.py` (sufijo ",x" normalizado; Σ qty ≤ dibujados); `width_source` por item.
 
-**Acoustical sealant (R11, 59.12)**: BOA 3/A12.01 2/0, 1/A12.01 2/2, 4/A12.01 2/2, 5/A12.01 2/0 (bead solo
-abajo), C1 / F / exterior 0; doors descuentan abajo; bulkhead 8, 9/A12.01 en `sealant_items` (top + head
-2 × 45 c/u, RFI); + `sealant_base_exterior` 209.18. BOA ≈ 1,188–1,201.
-
-**Insulation**: batt insulation EXCLUDED siempre (criterio del usuario); canon la rechaza.
-
-**Board A1/A5 (3/A12.01)**: el detalle imprime la cota 6" sobre SCHEDULED CEILING (studs a estructura, VARIES):
-board = ceiling + 6" en faces con ceiling; a estructura solo donde no hay ceiling. Imagen en cada face.
-
-**Framed openings MEP**: max(ancho, largo) ≤ módulo → 0; air devices / ductos / FD de wall → NOT_FRAMED (E12);
-`sweep` con hoja M y E; fixtures: `tag_counts` de `contar_tags.py` (Σ qty ≤ dibujados; menor con
-`excluded_qty_why`; BOA UU3 = 9).
-
-**Cladding (60.4)**: hat channel / Z-girt / lath = EXCLUDED + RFI.
+**Cladding (60.4)**: hat channel / Z-girt / lath = EXCLUDED + RFI. **Insulation**: EXCLUDED siempre.
 
 ---
 
 ## 8. Compuerta (NO ENTREGABLE si falla)
 
-1. `inventario.py` y `canon.py` corren sin error; ninguna familia `obligatorias` en 0 sin motivo.
-2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`; header con
-   `header_por_pieza` y hanger con `hanger_pcs` en el Excel.
-3. `closer.py`: HEADER = Σ (R.O. + 1'-4") × piezas; sin piezas o ducto con header / sill = rechazo.
+1. `inventario.py`, `canon.py`, `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
+2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
+3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
 4. `bitacora.py compuerta` completa; RFIs con delta; toda abertura, corrida, face y ceiling con source.
-5. Back-check ciego familia por familia contra `familias_out.json`.
-6. (v65) FRP y acoustical sealant con número desde canon.py; `test_alcances.py` OK contra el Excel final.
+5. Back-check ciego familia por familia; `test_alcances.py` OK contra el Excel final.
 
 ---
 
-## 9. Reglas anuladas o corregidas
+## 9. Reglas anuladas o corregidas (sin valores)
 
-- **v65b**: `header_params` → E18–E22; box 2 → 4 piezas; office front por abertura → run; door 123 /
-  drive-up ATM → box; BOA header 408.89 → 791.96 (rangos v11).
-- v64: header × 1 → E2 por piezas; sill → 119.09;
-  ductos a header/sill → E12; descuento de doors en bottom track → E10; canopy soffit 1 línea → 2 (E13);
-  hanger solo LF → PCS + altura (E4); ballistic 74.00 / 3/8" 57.07 → 83.55 / 62.95; Waiting 104 joists →
-  furring (E14); kicker sin verticales → E7.
-- **v65**: transición por studs_nodos → R1; column_wrap como wall recto → R2; banda de la elevación → R9;
-  sealant / FRP a mano (sellar.py) → R10, R11; rangos v10 6" stud y bracing mín → propuesta en
-  correcciones_rangos_v10.json.
-- v60–v63: layers totales, familia por orientación, parapet @16" continuo, purlin × rows, MR por room
-  húmedo, walls partidos a criterio, sumas a mano.
+- **v66**: parapet por `straight_run` libre → por línea (E3); largos de parapet a cara exterior → eje del stud;
+  canopy soffit L × 2 → fascia + wall (E13); jogs ballistic como walls → `ballistic_jogs`; pier en una sola
+  familia → `parts`; nailbase cortada en el stud top del wall → E25; "10/A09.33 = 1 drop line" → drop lines del
+  RCP; detección de GL-2 por nombre de abertura → `or_steel`; contar_tags exacto → sufijo normalizado;
+  bitácora que se rechazaba a sí misma → AST; registro sin anexo → `anexar`; protocolo con respuestas → E24.
+- v65b / v65 / v64 / v60–v63: ver ARBITRAJE_13 a 15 (fuera del paquete de pruebas).
 
 ---
 
 ## 10. Estrategia anti-varianza
 
-1. Una sola lectura por dato (banda en la planta).
-2. Criterio = constante del proyecto con fuente; los criterios del estimador (§0) ya no son elegibles.
-3. Cada regla en una tool con test que falla con el dato malo.
-4. Inventarios antes que totales; > 2 % entre agentes → diff de canons → regla nueva.
+1. Una sola lectura por dato. 2. Criterio = constante del proyecto con fuente. 3. Cada regla en una tool con
+test que falla con el dato malo (datos sintéticos). 4. Inventarios antes que totales; > 2 % entre agentes →
+diff de canons → regla nueva. 5. Ninguna prueba ve la respuesta (E24): un acierto solo cuenta si fue ciego.
 
 ---
 
-## 11. Reglas v65 (arbitraje #14, 2026-10-17) — cada una con test que falla con v64
+## 11. Reglas v66 (arbitraje #15A / #15B) — cada una con test que falla con v65b
 
-| # | Regla | Tool |
+| # | Regla | Tool / test |
 |---|---|---|
-| R1 | ceiling_transition fuera de studs_nodos; height = vertical_studs; kicker = h / sin(ángulo) | canon `_kickers` |
-| R2 | column_wrap: studs por face (`faces_ft`) o `studs_drawn`; abut contra la caja = 0 | canon `_column_wraps` |
-| R3 | `roof_step_rows_drawn` = walls roof_step (4/A02.02 = 3) | canon `_v65_checks` |
-| R4 | fascia_box en walls (runs no cuentan studs) | canon |
-| R5 | "BOX HEADER AS NEEDED" → `framing_wall` vestibule_head | canon |
-| R6 | framed_soffit `drop_lines` = walls con `soffit_of` | canon |
-| R7 | T entre G/G1 prohibido → abut | canon |
-| R8 | `ballistic_contour_ft` = Σ faces k_customer | canon |
-| R9 | banda glass mat T/STUD − B/STUD | canon `_exterior` |
-| R10 | FRP desde tile_base (doors 59.10) + mop sink; obligatorio | canon `_frp` |
-| R11 | acoustical sealant por detalle; obligatorio | canon `_sealant` |
-| R12 | door entre walls (`jamb_wall`) exige head_ft: cripples + bottom/top track R.O. | canon `_jambs_extra` |
-| R13 | fixtures: `tag_counts` (contar_tags.py, obligatoria en bitácora) | framed_openings |
-| R14 | ~~header_params~~ → reglas E18–E22 (v65b, `test_v65b_*` en test_headers.py y test_canon.py) | headers.py, canon.py |
-
-Deltas: ARBITRAJE_14.md. Extras: banda diagonal `ori: D` con p0/p1 (inventario.py); `plantilla_excel.py`
-usa el largo de la selling unit ("piece 8 ft" → ROUNDUP(LF / 8)); Level 5 con `level5_items`.
+| R15 | parapet: run por línea contigua; `length_basis` stud_cl | canon `_parapet_runs` / test_canon `test_v66_parapet_run_por_linea` |
+| R16 | canopy soffit `wall_line_ft` | corridas / test_canon_v66 |
+| R17 | `ballistic_jogs` sin studs | canon `_ballistic_jogs` / test_canon_v66 |
+| R18 | wraps / piers `parts` por sistema | canon `_column_wraps` / test_canon_v66 |
+| R19 | nailbase a T/STUD del parapet (E25) | canon `_exterior` / test_canon_v66 |
+| R20 | purlin en transición / bulkhead | inventario `PURLIN_ELEMS` / test_canon_v66 |
+| R21 | faces por tramo (dos rooms) | board_caras / test_board_caras |
+| R22 | sufijo de circuito en tags | contar_tags / test_contar_tags |
+| R23 | bitácora por AST | bitacora `usa` / test_bitacora_usa |
+| R24 | `registro.py anexar` | registro / test_registro_v66 |
+| R25 | `width_source` | framed_openings / test_framed_openings |
+| R26 | walls bajo miembro S* (E26) | vigas_sobre_walls / test_vigas_sobre_walls |
+| R27 | protocolo y tools ciegos (E24) | test_ciego.py (tests_arbitraje/) |
