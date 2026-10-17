@@ -20,28 +20,28 @@ y **la razón la tuvo un lado distinto en cada uno**:
 
 | wall | ubicación decía | faces decían | quién tenía razón | efecto |
 |---|---|---|---|---|
-| **A1 #4** | "entry from Central Zone" | Corridor 111 / Corridor 111 (face 2) | **las faces** | fiarse de la ubicación habría subido una face a [valor retirado E24] ft → **+[valor retirado E24] SF que no existen** |
-| **A1 #2** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad (los dos bands a [valor retirado E24]) |
-| **A1 #3** | MW01 niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor 111** | **la ubicación** | el nombre, no la cantidad |
-| **A1 #7** | Break Room 118 (una sola) | Break Room 118 / **Break Room 118** | **ninguno** | la face ESTE es Cash Window 116, ceiling ACT-4 [valor retirado E24] → **faltaban [valor retirado E24] SF** |
+| **A1 #n** | "entry from Central Zone" | Corridor [room] / Corridor [room] (face 2) | **las faces** | fiarse de la ubicación habría subido una face a [valor retirado E24] ft → **+[valor retirado E24] SF que no existen** |
+| **A1 #n** | MWxx niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor [room]** | **la ubicación** | el nombre, no la cantidad (los dos bands a [valor retirado E24]) |
+| **A1 #n** | MWxx niche / Calling Cubes 122 | Calling Cubes 122 / **Corridor [room]** | **la ubicación** | el nombre, no la cantidad |
+| **A1 #n** | Break Room [room] (una sola) | Break Room [room] / **Break Room [room]** | **ninguno** | la face ESTE es Cash Window 116, ceiling ACT-4 [valor retirado E24] → **faltaban [valor retirado E24] SF** |
 
 ### Cómo se resolvió cada uno — el método, que es lo reusable
 
-**A1 #4 — la retícula del ceiling cruza el wall.** En A02.01 **no hay ningún wall horizontal**
+**A1 #n — la retícula del ceiling cruza el wall.** En A02.01 **no hay ningún wall horizontal**
 que cruce la banda del wall en su tramo, y en el RCP **la retícula pasa de largo
 sobre el wall**, con un solo tag en esa banda: el `ACT-4 [valor retirado E24]` de CORRIDOR 111. El corridor
 sigue al norte del wall. Las dos faces son corridor y el sealed estaba bien.
 
-**A1 #2 y #3 — el corridor no llega al nicho.** A02.01 pone el MW01 contra la face OESTE del #2
-y el MW07 contra la face SUR del #3, y el corridor queda al oeste del wall vertical que
-lo cierra, fuera del nicho. Las faces interiores pasan a llamarse **MW01 niche**.
+**A1 #n y #3 — el corridor no llega al nicho.** A02.01 pone el MWxx contra la face OESTE del #2
+y el MWxx contra la face SUR del #3, y el corridor queda al oeste del wall vertical que
+lo cierra, fuera del nicho. Las faces interiores pasan a llamarse **MWxx niche**.
 *Pendiente declarado:* el RCP dibuja **tres callouts (1, 2 y 6) justo sobre el nicho**, así que su
 ceiling puede tener condición propia; esos detalles no se abrieron.
 
-**A1 #7 — ausencia de wall = continuidad de room.** En la banda del wall **no hay ningún wall
+**A1 #n — ausencia de wall = continuidad de room.** En la banda del wall **no hay ningún wall
 vertical entre su face y el room tag**, así que el espacio al este del #7 es continuo con el room
 tag `CASH WINDOW 116`; el room tag `BREAK 118` está al **sur** del
-wall A1-6. Y cuadra con el propio A1-6, cuya face norte ya estaba sellada como Cash Window 116.
+wall A1-nn. Y cuadra con el propio A1-nn, cuya face norte ya estaba sellada como Cash Window 116.
 
 > **Para saber a qué room da una face: buscar el room tag más cercano EN LÍNEA RECTA sin cruzar
 > ningún wall.** Un room tag al otro lado de un wall no es el de esa face, y la ausencia de wall
@@ -64,7 +64,7 @@ artefactos del parser** — habría sido ruido puro.
 
 ---
 
-## EL OTRO HALLAZGO DEL DÍA: A1 #4, `[DERIVADO]` → `[CONFIRMADO]`
+## EL OTRO HALLAZGO DEL DÍA: A1 #n, `[DERIVADO]` → `[CONFIRMADO]`
 
 El cierre decía *"<pt> / <escala> = <length redondo>, **dimensión de diseño limpia**"* — que es otra forma
 de decir "el número redondo sugiere que hay una dimensión impresa". La hay: A02.01 imprime
@@ -75,7 +75,7 @@ wall.
 > ticks. O está, y el valor es `[CONFIRMADO]`; o no está, y hay que decirlo. "Dimensión de diseño
 > limpia" no es ninguna de las dos.**
 
-Es el caso inverso del A1 #6 (allí el valor venía de píxeles con etiqueta de dimensión; aquí el
+Es el caso inverso del A1 #n (allí el valor venía de píxeles con etiqueta de dimensión; aquí el
 valor es la dimensión con etiqueta de derivación). Las dos salen de la misma jerarquía:
 **printed dimension > dimension-string sum > pixels**.
 

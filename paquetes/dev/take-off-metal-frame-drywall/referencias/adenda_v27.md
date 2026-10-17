@@ -4,14 +4,14 @@
 
 Rodolfo leyó el Excel y preguntó: *"¿por qué este tiene 4 layers?"*
 
-El wall A1 #8 decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" por face). Lo que tiene son **4 filas de face**, porque su lado este da a tres cuartos con ceilings distintos:
+El wall A1 #n decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" por face). Lo que tiene son **4 filas de face**, porque su lado este da a tres cuartos con ceilings distintos:
 
 | fila | tramo | alto | por qué |
 |---|---|---|---|
-| Corridor 111 | [valor retirado E24] LF (face oeste completa) | [valor retirado E24] | — |
-| Break Room 118 | [valor retirado E24] LF | [valor retirado E24] | ACT-5 a [valor retirado E24] + 6" |
+| Corridor [room] | [valor retirado E24] LF (face oeste completa) | [valor retirado E24] | — |
+| Break Room [room] | [valor retirado E24] LF | [valor retirado E24] | ACT-5 a [valor retirado E24] + 6" |
 | Electrical 120 | [valor retirado E24] LF | [valor retirado E24] | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
-| NER 121 | [valor retirado E24] LF | [valor retirado E24] | mismo key note, deck interpolado |
+| NER [room] | [valor retirado E24] LF | [valor retirado E24] | mismo key note, deck interpolado |
 
 la suma de los tramos = **[valor retirado E24] LF** = el length del wall. El generador sumaba `1+1+1+1`.
 

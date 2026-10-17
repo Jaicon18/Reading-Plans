@@ -17,13 +17,13 @@ Un barrido wall-por-wall —*"¿hay un tag MW a 42 pt de esta banda?"*— sólo 
 cae cerca del wall que uno está cerrando, y hereda todos los errores de la geometría con
 la que mide esa cercanía.
 
-**La prueba de que no basta: MW11.** Los cierres A1K-11, A1K-12, A1K-13 y G-41 a G-49 lo
-NOMBRAN nueve veces, todas para decir que no apoya en ellos —*"MW11 está contra la face
-OESTE del wall exterior, a más de [valor retirado E24] pt al este"*, *"MW11 está a [valor retirado E24] pt = [valor retirado E24] ft de G-47,
+**La prueba de que no basta: MWxx.** Los cierres A1K-nn, A1K-nn, A1K-nn y G-nn a G-nn lo
+NOMBRAN nueve veces, todas para decir que no apoya en ellos —*"MWxx está contra la face
+OESTE del wall exterior, a más de [valor retirado E24] pt al este"*, *"MWxx está a [valor retirado E24] pt = [valor retirado E24] ft de G-nn,
 no contra él"*. **Las nueve tienen razón y ninguna lo recoge.** Un huérfano perfecto: cada
 wall acierta al decir que no es suyo, y el elemento se cae por la grieta.
 
-**Segunda prueba: MW06A.** El MILLWORK SCHEDULE de A00.30 lo lista UNA vez; 8/A08.01 lo
+**Segunda prueba: MWxx.** El MILLWORK SCHEDULE de A00.30 lo lista UNA vez; 8/A08.01 lo
 dibuja DOS veces dentro de JANITOR CLOSET 112. Un tag de schedule es una línea; una
 instancia dibujada es otra cosa. **El barrido cuenta instancias, no líneas de schedule.**
 
@@ -49,13 +49,13 @@ ninguno con un tag MW en la clave, y concluí: *"ninguno es de millwork"*. Cuant
 
 | MW | ya estaba en | método |
 |---|---|---|
-| MW01 | A1 #2, A1 #3 | free edge + backing del printer cabinet, con el #3 razonando que el gabinete apoya en el #2 |
-| MW05 | B #19 | standards × height de cada uno |
-| MW06A | B #19 | standards × height de cada uno |
-| MW07 | A5 #15 | line item propia `BLOCKING:millwork`, runs × length |
-| MW08, MW12, MW13 | B2 #28, A1 #9 | |
-| MW18 | F #40 | [valor retirado E24] LF |
-| MW21 | A1 #5 | |
+| MWxx | A1 #n, A1 #n | free edge + backing del printer cabinet, con el #3 razonando que el gabinete apoya en el #2 |
+| MWxx | B #n | standards × height de cada uno |
+| MWxx | B #n | standards × height de cada uno |
+| MWxx | A5 #n | line item propia `BLOCKING:millwork`, runs × length |
+| MWxx, MWxx, MWxx | B2 #n, A1 #n | |
+| MWxx | F #n | [valor retirado E24] LF |
+| MWxx | A1 #n | |
 
 Mi método era «1 run × length» para todo. El del take-off ya distinguía standards de
 cleats de runs. **Habría empeorado el take-off y habría inflado el bid.**
@@ -64,7 +64,7 @@ cleats de runs. **Habría empeorado el take-off y habría inflado el bid.**
 
 1. **La clave no es el contenido.** `BLOCKING` a secas puede ser blocking de millwork: lo
    dice la OPERACIÓN, no la clave. Es el mismo error que ya había retractado en este
-   proyecto con el A5 #16 —leer el campo que NOMBRA en vez del que CUANTIFICA— disfrazado
+   proyecto con el A5 #n —leer el campo que NOMBRA en vez del que CUANTIFICA— disfrazado
    de otra cosa: ahora era leer la clave en vez del texto.
 2. **El roll-up no leía todos los archivos.** Sólo `$TAKEOFF_WORK/*_cierres.json`. Los
    cierres por wall de A1, A5, B, B2, B2K y C1 viven en `/mnt/user-data/outputs/**`. No
@@ -96,7 +96,7 @@ distintas que nunca hay que confundir**:
 
 ```
 cierres()            -> los VIGENTES.  Para SUMAR.      Es lo que va al Excel.
-cierres(todos=True)  -> todos.         Para COBERTURA.  "¿algún cierre nombra el MW11?"
+cierres(todos=True)  -> todos.         Para COBERTURA.  "¿algún cierre nombra el MWxx?"
 ```
 
 Sumar con el conjunto de cobertura infla el total. Preguntar cobertura con el conjunto
@@ -108,7 +108,7 @@ vigente deja fuera cierres reales. **Las dos equivocaciones se cometieron el mis
 
 La primera versión de `verif_blocking_schedule.py` contaba cualquier mención del tag
 dentro de una franja de 2500 caracteres que tuviera la palabra `BLOCK`. Con esa regla
-**pasaba con el defecto presente**: las exclusiones de los walls G y A1K nombran "MW11"
+**pasaba con el defecto presente**: las exclusiones de los walls G y A1K nombran "MWxx"
 para decir que está lejos, y esas frases la satisfacían.
 
 Lo probé borrando el archivo que arreglaba el problema. Dio `tags sin renglón: 0`, `EXIT 0`.
@@ -117,7 +117,7 @@ Lo probé borrando el archivo que arreglaba el problema. Dio `tags sin renglón:
 > Antes de confiar en una, hay que BORRAR lo que arregló y verla fallar.
 
 La versión buena recorre la **estructura** del cierre, no texto suelto. Probada: con el
-archivo en su lugar, EXIT 0; sin él, rechaza nombrando MW11 y MW06A.
+archivo en su lugar, EXIT 0; sin él, rechaza nombrando MWxx y MWxx.
 
 **Esto se aplica a toda compuerta nueva, sin excepción: no se declara su trinquete hasta
 haber reintroducido el defecto y haberla visto rechazar.**
@@ -128,15 +128,15 @@ haber reintroducido el defecto y haberla visto rechazar.**
 
 | concepto | antes | después | fuente |
 |---|---|---|---|
-| BLOCKING millwork | MW11 huérfano, 1 de 2 MW06A | **+[valor retirado E24] LF** ([valor retirado E24] total) | nota C de A02.01 + SHEET NOTE D de A12.04/05/06 + 8/A08.01 |
-| C1 #36 length | [valor retirado E24] LF **[CONFIRMADO sin dimension]** | **[valor retirado E24] LF [DERIVADO]**, operación escrita | printed dimensions en A02.01 |
-| C1 #37 y #39: studs | [valor retirado E24] pz c/u | **[valor retirado E24] pz c/u** (toe-to-toe stud post) | 8/S5.20 MECH. CHASE FRAMING IN WALL |
+| BLOCKING millwork | MWxx huérfano, 1 de 2 MWxx | **+[valor retirado E24] LF** ([valor retirado E24] total) | nota C de A02.01 + SHEET NOTE D de A12.04/05/06 + 8/A08.01 |
+| C1 #n length | [valor retirado E24] LF **[CONFIRMADO sin dimension]** | **[valor retirado E24] LF [DERIVADO]**, operación escrita | printed dimensions en A02.01 |
+| C1 #n y #39: studs | [valor retirado E24] pz c/u | **[valor retirado E24] pz c/u** (toe-to-toe stud post) | 8/S5.20 MECH. CHASE FRAMING IN WALL |
 | ceilings: CORNER_BEAD, PERIMETER_ANGLE, SHADOW_MOLDING, BRACING_SÍSMICO | **sin renglón** (ni cantidad ni exclusión) | exclusiones con motivo verificado + alterno [valor retirado E24] LF | 7/A09.33 y 3/A09.33 |
 | C1 board 6" sobre ceiling | supuesto escondido en una operación | exclusión declarada, delta [valor retirado E24] SF | 6/A12.01 contra 2, 3 y 12/A12.01 |
 | eje B como línea de zona B.O.D. | [DERIVADO] del par de vigas de S2.20 | confirmado por hoja propia | **9/S5.10 ROOF STEP AT GRID B** |
 | A6 y A8 | tipo sin revisar | fuera de alcance, cero tags en A02.01 | barrido de tags |
 
-Y una corrección de Regla #0 que atrapó una compuerta el mismo día: C1 #36 se selló
+Y una corrección de Regla #0 que atrapó una compuerta el mismo día: C1 #n se selló
 primero como **[valor retirado E24] [CONFIRMADO]**, y ese valor no es ninguna printed dimension: es la SUMA de
 tres. `verif_confirmado` lo rechazó. **Una cuenta sobre una printed dimension es [DERIVADO] con
 su operación escrita**, aunque cada sumando sea [CONFIRMADO].

@@ -56,7 +56,7 @@ no lo juzga — exige **coherencia**:
 
 Es la versión de compuerta de la regla que ya había cazado los ocho `alto_board` del A5 ("dos
 tipos con dos etiquetas distintas para la misma cuenta"). Probada **viéndola fallar sobre el dato
-real**: se revirtió el sello del A1K #11 a `CONFIRMADO`, la compuerta lo marcó, y se restauró.
+real**: se revirtió el sello del A1K #n a `CONFIRMADO`, la compuerta lo marcó, y se restauró.
 Trinquete declarado en 0.
 
 Lo que sigue abierto, y va al handoff como pendiente numerado: **27 `alto_board` citan
@@ -66,7 +66,7 @@ equivocada es el mismo error de `5/F de S5.20`.
 
 ## UNA NORMALIZACIÓN DUPLICADA SE DESINCRONIZA SOLA
 
-Al pasar el registro de los walls A1 #2/#3/#7 por `verif_respuesta.py` se marcó por `caras` y
+Al pasar el registro de los walls A1 #n/#3/#7 por `verif_respuesta.py` se marcó por `caras` y
 `largo` **entre acentos graves** — nombres de CAMPO del cierre. El mismo texto **pasaba** la
 compuerta de documentos y **fallaba** la de prosa: había **tres** normalizaciones distintas del
 código (`traducir_docs.py` saltaba bloque cercado e `inline code`, `verif_idioma.py` sólo

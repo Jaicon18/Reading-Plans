@@ -1284,7 +1284,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - ⛔ REGLA INVIOLABLE
   - LOS CUATRO CASOS QUE LA ORIGINARON, el mismo día
   - LA COMPUERTA: `verif_caras.py` (paso 12 de 17)
-  - EL OTRO HALLAZGO DEL DÍA: A1 #4, `[DERIVADO]` → `[CONFIRMADO]`
+  - EL OTRO HALLAZGO DEL DÍA: A1 #n, `[DERIVADO]` → `[CONFIRMADO]`
 - **`adenda_v42.md`** — ADENDA v42 — 8-oct-2026 · UNA ELEVACIÓN NO ES UNA HEIGHT, Y UN `[CONFIRMADO]` TIENE QUE CITAR SU PRINTED DIMENSION
   - ⛔ REGLA INVIOLABLE
   - CÓMO SE ENCONTRÓ (armando el HANDOFF, no revisando cantidades)

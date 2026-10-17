@@ -27,7 +27,7 @@ Tenía razón. Había **[valor retirado E24] SF de W.R. board** y eran **únicam
 Son **dos aparatos en dos walls distintas**:
 
 - El **lavabo** va en el chase → [valor retirado E24] SF, ya estaban.
-- El **inodoro** va contra la **face interior del wall exterior oeste** (probado con `D/A08.01 RESTROOM ELEVATION D`, que lo dibuja de perfil con su barra TA-3). Esa face estaba como gyp **regular**.
+- El **inodoro** va contra la **face interior del wall exterior oeste** (probado con `D/A08.01 RESTROOM ELEVATION D`, que lo dibuja de perfil con su barra TA-nn). Esa face estaba como gyp **regular**.
 
 **Faltaban [valor retirado E24] SF.** W.R. total: 100.80 → **[valor retirado E24] SF**.
 
@@ -45,7 +45,7 @@ Su marcador cae dentro del **JANITOR CLOSET 112** y su línea guía apunta a la 
 
 `P01.01 keyed note 1`: *"...ROUTE LOW VOLTAGE WIRING DOWN TO FLOODSTOP PANEL **BELOW BREAK SINK**"*.
 
-El Finish Plan le rotula al 118 sólo `P-15` / `VCT-2` / `B-12`: ni FRP, ni tile, ni nota de W.R.
+El Finish Plan le rotula al 118 sólo `P-nn` / `VCT-2` / `B-nn`: ni FRP, ni tile, ni nota de W.R.
 
 **El contraste es lo que decide que no es olvido de rotulación:** el mismo Finish Plan **sí** le pone key note 6 al mop sink, y A08.01 **sí** trae su nota F para los baños. El plano no lo pide aquí → **RFI + alterno**, no se cuantifica.
 

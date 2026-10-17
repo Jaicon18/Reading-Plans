@@ -66,7 +66,7 @@ take-off está **sobre-contado**.
 **Lo que NO prueba, y por eso no se aplica:** el resto. La mayoría de los walls
 interiores muere contra un wall **exterior**, y los exteriores no son banda simple de
 dos faces paralelas (llevan sheathing, polyiso y plaster), igual que los forros de
-columna del canopy, los bulkheads, el F #40 y el B2K #31. El mapa los deja fuera y por eso
+columna del canopy, los bulkheads, el F #n y el B2K #n. El mapa los deja fuera y por eso
 marca "libre" un extremo que en obra muere contra algo.
 
 > Un extremo que el mapa no resuelve NO es un extremo libre: es un extremo **desconocido**.
@@ -98,7 +98,7 @@ cantidad que ya está, o la validan por segunda fuente.
 
 | hallazgo | fuente |
 |---|---|
-| **B2 #26 y #27: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
+| **B2 #n y #27: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
 | **El FRP va pegado con ADHESIVE directo al board, sin backer** — cierra el RFI del sustrato detrás del FRP | `3/A08.01 RESTROOM FRP/TILE DETAIL`, que lo dibuja y lo rotula |
 | `1/A11.03 NER ELEVATION` y `7/A11.03` llevan 3/4" FRT PLYWOOD y **se dejan fuera a propósito** | la corrección del 6-oct dejó escrito que las que corresponden son `3/A11.03` (210.00 pt = 5'-10" exactos) y `5/A11.03` (270.00 pt = [valor retirado E24] exactos), identificadas por **width medido** contra la dimensión impresa de la planta |
 | `4/A09.31 DETAIL AT VERTICAL CONTROL JOINT` es un **cuarto** sitio donde aparece CONTROL JOINT, y también es del estuco | la exclusión de proyecto decía "tres sitios"; su conclusión aguanta, su lista de evidencia no estaba completa |

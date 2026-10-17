@@ -135,8 +135,8 @@ Se admitió **con la aritmética, no con una exención**: pasa solo si el exceso
 | `3/4" FRT PLYWOOD` perímetro de openings | 11/A09.27, 10/A09.27, 1·2·3/A09.25 |
 | `GYPSUM BOARD JAMB RETURN` | 11/A09.27, 2/A09.26 |
 
-Excluidos con motivo leído de su propio texto, uno por uno y nunca en bloque: estuco PT-3 y
-PT-03 (Div 09 24 00, lath y screed del plasterer, citando `6/A09.31`), bollards, HSS posts,
+Excluidos con motivo leído de su propio texto, uno por uno y nunca en bloque: estuco PT-nn y
+PT-nn (Div 09 24 00, lath y screed del plasterer, citando `6/A09.31`), bollards, HSS posts,
 steel columns, y 15 detalles estructurales de S3.20 / S5.10 / S5.30.
 
 ### Dos RFIs nuevos, porque no se inventa lo que no se distingue
