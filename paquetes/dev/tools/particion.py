@@ -12,6 +12,9 @@ v70 — door_bulkhead se tipa BULKHEAD-<familia> (familia = letras iniciales del
 partition_types.py R7: G1 -> G, G -> G, A1K -> A; sin tag usa `bulkhead_of`): el bulkhead nunca se une con sus
 walls G / G1. La unión de "tramo" es por componentes conexas (union-find): el resultado no depende del orden de
 los walls en el canon.
+v70c — REGLA DE EJES (estimador: "nunca juntar dos ejes o fachadas en un número"): en modo "run" los walls
+EXTERIORES (type que empieza con EXT, o contiene PARAPET o CFMF, o wall con location "exterior" / exterior true)
+NO encadenan esquinas: se cortan en cada cambio de dirección, un wall por fachada / eje. Los interiores siguen igual.
 
 MODOS
   "tramo"  un wall por cada tramo RECTO de un type: segmentos colineales (ejes a <= tol_line_ft) y contiguos
@@ -20,6 +23,7 @@ MODOS
   "run"    un wall por RUN CONTINUO del mismo type aunque tenga quiebres: los tramos rectos se encadenan cuando el
            extremo de uno toca el extremo del otro (esquina L, jog, step). Una T (extremo contra el COSTADO del
            otro) NO encadena: el que llega termina en la cara del que sigue.
+           Excepción (v70c): exteriores / parapets / CFMF se cortan en cada cambio de dirección (un wall por eje).
 Nunca se une entre hojas distintas ni entre types distintos (BULKHEAD-G es otro type que G). Segmento sin `band` = wall propio + aviso.
 
 Geometría del canon (la misma de partition_types.py): band = {ori: H|V, c0, c1 (caras, perpendicular), lo, hi
@@ -63,6 +67,14 @@ def tipo(w):
         base = t or norm_type(w.get("bulkhead_of"))
         return f"BULKHEAD-{familia(base)}" if base else "BULKHEAD"
     return t
+
+
+def es_exterior(t, w=None):
+    """v70c: ¿type / wall exterior? (EXT*, *PARAPET*, *CFMF*, o location "exterior" / exterior true en el canon)."""
+    t = norm_type(t)
+    if t.startswith("EXT") or "PARAPET" in t or "CFMF" in t:
+        return True
+    return bool(w) and (str(w.get("location") or "").lower() == "exterior" or w.get("exterior") is True)
 
 
 def hoja(w):
@@ -164,7 +176,10 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
     out = OrderedDict()
     for (t, sh, pg), ws in grupos.items():
         tramos = _tramos(ws, esc, tol_line_ft, tol_gap_ft)
-        if modo == "run":
+        if modo == "run" and any(es_exterior(t, w) for w in ws):
+            # v70c (EJES): exterior = un wall por tramo recto (fachada / eje); el cambio de dirección corta
+            walls = [{"ids": list(x["ids"]), "lf": x["lf"], "tramos": 1, "geos": [x["geo"]]} for x in tramos]
+        elif modo == "run":
             # componentes conexas por extremos que se tocan
             walls = []
             for comp in _raices(len(tramos), lambda i, j: _tocan(tramos[i], tramos[j], esc, tol_gap_ft)):

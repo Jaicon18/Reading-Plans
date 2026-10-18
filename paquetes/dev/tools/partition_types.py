@@ -20,7 +20,8 @@ REGLA
     particion.MODO_DEFAULT ("run"): un RUN CONTINUO del mismo type con quiebres o esquinas = UN wall (los tramos se
     encadenan extremo con extremo; una T no encadena; nunca entre hojas). Se conservan el tipado PT1 (EXT-6CFMF,
     EXT-PARAPET, BULKHEAD-<familia>, CANOPY-COL…), PT4 (door_bulkheads colineales de un frente = UN wall aunque
-    los separen stubs) y PT5 (OTHER FRAMING). La regla 2-3 de abajo es la del modo "tramo" (`modo="tramo"`).
+    los separen stubs) y PT5 (OTHER FRAMING). v70c (EJES): exteriores (EXT*, PARAPET, CFMF) NO encadenan esquinas:
+    un wall por fachada / eje (particion.es_exterior). La regla 2-3 de abajo es la del modo "tramo" (`modo="tramo"`).
  2. Un wall = el tramo RECTO de un mismo type entre esquinas o extremos. Dos segmentos del canon del mismo type,
     colineales (centro de banda a <= 3") y contiguos (hueco <= 6") son UN wall: no se parte por zona de
     altura, por room del otro lado, por T que llega, ni por abertura. LF del wall = suma de sus largos.
@@ -284,6 +285,8 @@ def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos):
         if b is None and not w.get("_no_unir"):
             avisos.append(f"{w['id']} ({t}) sin band: wall propio, no se puede unir con colineales")
         c = {"id": w["id"], "tag": "T", "element": "wall", "length_ft": _lf(w), "sheet": "_"}
+        if particion.es_exterior(t, w):             # v70c (EJES): exterior se corta por fachada / eje
+            c["exterior"] = True
         if b is not None:
             c["band"] = b
         sint.append(c)

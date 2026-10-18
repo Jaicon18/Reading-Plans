@@ -31,7 +31,7 @@ inventario, y toda diferencia queda escrita. **Ningún error llega al Excel sin 
 
 **v70 (2026-10-18) — cambios que mandan.** (1) Partición de walls decidida por el estimador: **un run continuo del
 mismo partition type con quiebres o esquinas = 1 wall** (E28; `particion.MODO_DEFAULT = "run"`, también en [ciego-ok]
-`partition_types.py`). (2) El inventario de la Etapa 1 se llama `inventario_tags.py` (el `inventario.py` que importa
+`partition_types.py`). Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). (2) El inventario de la Etapa 1 se llama `inventario_tags.py` (el `inventario.py` que importa
 `canon.py` es el inventario cerrado de walls; son dos tools distintas). (3) Compuerta nueva `esquinas.py`: cada esquina
 con un solo dueño y ninguna door fuera de todo wall (R70.2 / R70.3). (4) Reglas R70.1–R70.9 (§16): ceiling
 suspendido por leyenda, extensión por hatch, ballistic por contorno, piers por parte, vanos de storefront, yields de
@@ -171,7 +171,7 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
   N/HOJA y una regla en tool (§14). Ningún valor se toma de "lectura visual".
 - **E28** Partición de walls (decisión del estimador, todo proyecto): **un run continuo del mismo partition type
   con quiebres o esquinas = 1 wall**. El LF del wall es la suma de sus tramos; una T no encadena (el que llega [ciego-ok]
-  termina en la cara del que sigue); nunca se une entre hojas ni entre types. [particion, partition_types]
+  termina en la cara del que sigue); nunca se une entre hojas ni entre types. Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). [particion, partition_types]
 - **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
   **Partition types (§13)** con la convención del calificador.
 

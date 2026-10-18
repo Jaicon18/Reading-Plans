@@ -4,6 +4,7 @@
 - MODO_DEFAULT = "run" (decisión del estimador): un run en L de 2 segmentos = 1 wall; una T no encadena.
 - door_bulkhead = BULKHEAD-<familia>: dos stubs G + un bulkhead entre ellos -> 3 grupos, nunca 1.
 - "tramo" por componentes conexas: el resultado no depende del orden de los walls.
+- v70c EJES: exterior (EXT / PARAPET / CFMF / location exterior) en L = 2 walls; interior en L = 1.
 """
 import os
 import random
@@ -88,6 +89,19 @@ def test_tramo_no_depende_del_orden():
         rnd.shuffle(ws)
         for modo in P.MODOS:
             assert grupos(P.particion(canon(ws), modo)) == grupos(P.particion(canon(base), modo)), modo
+
+
+def test_v70c_ejes_exterior_en_l_se_corta():
+    """Regla EJES: en "run" un perímetro exterior en L = 2 walls (uno por fachada / eje); interior en L = 1."""
+    for tag, kw in (("EXT", {}), ("EXT-6CFMF", {}), ("PARAPET", {}), ("6CFMF", {}), ("X1", {"location": "exterior"}),
+                    ("X1", {"exterior": True})):
+        c = canon([w("E1", tag, "H", 100, 0, 180, **kw), w("E2", tag, "V", 180, 100, 280, **kw)])
+        assert len(grupos(P.particion(c))) == 2, (tag, kw, grupos(P.particion(c)))
+    c = canon([w("I1", "X1", "H", 100, 0, 180), w("I2", "X1", "V", 180, 100, 280)])
+    assert grupos(P.particion(c)) == [("X1", ("I1", "I2"))]
+    # exterior colineal y contiguo en el MISMO eje sigue siendo 1 wall
+    c = canon([w("E1", "EXT", "H", 100, 0, 180), w("E2", "EXT", "H", 100, 182, 300)])
+    assert grupos(P.particion(c)) == [("EXT", ("E1", "E2"))]
 
 
 if __name__ == "__main__":

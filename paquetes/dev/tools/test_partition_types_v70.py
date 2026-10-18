@@ -49,8 +49,21 @@ def test_pt1_y_pt5_se_conservan():
              W("vh", "VEST", "H", 900, 0, 90, el="vestibule_head")]
     walls[1]["band"].update(c0=537, c1=543, lo=0, hi=180)
     r = partition_types(dict(C, walls=walls))
-    assert r["types"]["EXT-6CFMF"]["walls"] == 1, r["types"]                  # run en L del EXT = 1 wall
+    assert r["types"]["EXT-6CFMF"]["walls"] == 2, r["types"]                  # v70c EJES: EXT en L = 2 walls
     assert [o["id"] for o in r["other_framing"]] == ["vh"]
+
+
+def test_v70c_ejes_exterior_en_l_dos_walls_interior_uno():
+    """Regla EJES: perímetro exterior en L = 2 walls (uno por fachada); interior en L = 1 wall (run)."""
+    ext = [W("e1", "EXT", "H", 100, 0, 180, stud="6\""), W("e2", "EXT", "V", 180, 100, 280, stud="6\"")]
+    r = partition_types(dict(C, walls=ext))["types"]["EXT-6CFMF"]
+    assert r["walls"] == 2 and abs(r["lf"] - 20.0) < 1e-6, r
+    par = [dict(x, element="parapet", tag="PARAPET", stud_size="6\" parapet") for x in ext]
+    assert partition_types(dict(C, walls=par))["types"]["EXT-PARAPET"]["walls"] == 2
+    loc = [dict(x, tag="P9", location="exterior") for x in ext]          # exterior por location del canon
+    assert partition_types(dict(C, walls=loc))["types"]["EXT-6CFMF"]["walls"] == 2
+    inn = [W("i1", "P1", "H", 100, 0, 180), W("i2", "P1", "V", 180, 100, 280)]
+    assert partition_types(dict(C, walls=inn))["types"]["P1"]["walls"] == 1
 
 
 if __name__ == "__main__":
