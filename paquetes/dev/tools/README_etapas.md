@@ -1,6 +1,13 @@
 # Etapas 1 y 3 — inventario por script y doble lectura comparada
 
 Herramientas nuevas, aparte de las tools v68 (no las modifican). Python 3 + pymupdf (+ numpy).
+
+**v70 — nombre de la Etapa 1:** el inventario de tags por script es `inventario_tags.py` (+ `test_inventario_tags.py`).
+En v69 se llamaba `inventario.py` y, al copiarlo encima de las tools, tapaba a **`inventario.py` = inventario cerrado
+de WALLS** (bandas, solapes, apilados, MR, purlin, zonas; v63) que `canon.py` importa (`inventario.verificar`,
+`inventario.PURLIN_ELEMS`) y que `bitacora.py` exige. Los dos conviven: `inventario_tags.py` = Etapa 1 (tags del
+PDF), `inventario.py` = verificación de walls dentro de `canon.py`. `test_sin_colisiones.py` falla si vuelven a
+chocar. Las salidas de la Etapa 1 siguen siendo `1_inventario/inventario.json` + `inventario.md` + `recortes/`.
 Son GENÉRICAS: ningún tag, hoja, coordenada ni nombre de proyecto vive en el código; todo sale del PDF.
 
 ## Por qué
@@ -15,7 +22,7 @@ los hacía el modelo a ojo. Estas herramientas sacan esa parte del ojo y hacen v
 plano.pdf
    │
    ▼
-1. inventario.py plano.pdf inv/            → inv/inventario.json + inventario.md + recortes/
+1. inventario_tags.py plano.pdf inv/       → inv/inventario.json + inventario.md + recortes/
    │   (índice de hojas, types del schedule, cada tag con hoja + coordenadas + PNG circulado y verificado)
    │
    ├──────────────────────────────┐
@@ -60,17 +67,18 @@ su motivo, los tags en símbolo que **no están en el schedule**, y las hojas **
 
 | Archivo | Qué hace | Test |
 |---|---|---|
-| `inventario.py <pdf> <out_dir> [--dpi 150] [--sin-recortes]` | Etapa 1: índice de hojas (title block), types del schedule (títulos "PARTITION TYPE …" + columnas de la hoja de schedule), ocurrencias (partition tags, ambiguos, candidatos fuera de schedule, door / window tags, detail bubbles N/HOJA, referencias N/HOJA en texto, keynotes, cotas), conteo por type y hoja, recorte PNG por ocurrencia con el tag circulado y **verificado al reabrirlo** (anillo rojo en su lugar, tinta del tag en el centro, texto bajo la marca = el tag) y una vista por hoja de planta. Coordenadas en pt de la página ROTADA (como el PNG). Sale con código 1 si algún PNG no verifica. | `test_inventario.py` |
-| `particion.py canon.json [--modo run\|tramo] [salida.json]` | Regla de partición de walls como parámetro: **tramo** = un wall por tramo recto (colineales ≤ 3" y contiguos ≤ 6" se unen; jog ≤ 1'-0" se suma al vecino); **run** = un wall por run continuo aunque tenga quiebres (los tramos se encadenan extremo con extremo; una T no encadena). Nunca une hojas ni types distintos. | `test_particion.py` |
-| `comparar.py A.json B.json inventario.json out_dir [--modo] [--pdf] [--radio-ft 5]` | Etapa 3 (arriba). | `test_comparar.py` |
-| `etapas.py estado\|compuerta <dir>` · `etapas.py unir <carpeta> <canon.json>` (v69) | Dónde quedó la corrida (reanudar); compuerta de etapas (falla si falta inventario / canon A / canon B / revisión, si la revisión está vencida o no cubre el inventario, o si un tag queda sin wall y sin alerta); unión de los fragmentos de una lectura. | `test_etapas.py` |
+| `inventario_tags.py <pdf> <out_dir> [--dpi 150] [--sin-recortes]` | Etapa 1: índice de hojas (title block), types del schedule (títulos "PARTITION TYPE …" + columnas de la hoja de schedule), ocurrencias (partition tags, ambiguos, candidatos fuera de schedule, door / window tags, detail bubbles N/HOJA, referencias N/HOJA en texto, keynotes, cotas), conteo por type y hoja, recorte PNG por ocurrencia con el tag circulado y **verificado al reabrirlo** (anillo rojo en su lugar, tinta del tag en el centro, texto bajo la marca = el tag) y una vista por hoja de planta. Coordenadas en pt de la página ROTADA (como el PNG). Ids únicos en todas las listas (v70): `PT` tag contado, `PA` ambiguo, `PC` candidato fuera del schedule (con su propio recorte verificado), `PX` texto fuera de planta, `DW` door / window, `DB` / `DR` detail bubble / referencia en texto, `KN` keynote, `CO` cota. Sale con código 1 si algún PNG no verifica. | `test_inventario_tags.py`, `test_inventario_tags_v70.py` |
+| `particion.py canon.json [--modo run\|tramo] [salida.json]` | Regla de partición de walls como parámetro: **tramo** = un wall por tramo recto (colineales ≤ 3" y contiguos ≤ 6" se unen; jog ≤ 1'-0" se suma al vecino); **run** = un wall por run continuo aunque tenga quiebres (los tramos se encadenan extremo con extremo; una T no encadena). Nunca une hojas ni types distintos. v70: default **run**; `door_bulkhead` = type `BULKHEAD-<familia>` (G1 → G; nunca se une con sus walls G / G1); unión por componentes conexas (no depende del orden). | `test_particion.py`, `test_particion_v70.py` |
+| `comparar.py A.json B.json inventario.json out_dir [--modo] [--pdf] [--radio-ft 5]` | Etapa 3 (arriba). v70: los candidatos `PC####` entran al cruce (sin wall → alerta "tag sin wall"); rechaza (rc 1) una lectura con `page` 0-based. | `test_comparar.py`, `test_etapas_v70.py` |
+| `etapas.py estado\|compuerta <dir>` · `etapas.py unir <carpeta> <canon.json> [--inventario inv.json]` (v69, v70) | Dónde quedó la corrida (reanudar); compuerta de etapas (falla si falta inventario / canon A / canon B / revisión, si la revisión está vencida o no cubre el inventario, o si un tag —incluidos los candidatos `PC`— queda sin wall y sin alerta); unión de los fragmentos de una lectura. v70 `unir`: tipo distinto entre fragmentos = ERROR (sin crash); `notes` distintas → `{fragmento: texto}` + aviso; convención de `band` (caras ≤ 2 ft, largo ±3 % / 1 ft o `band_length_ok_reason`, "banda traspuesta"); `page` 1-based contra el inventario; refs de openings contra `opening_schedule` (la tarea de openings fija las refs primero, Etapa 2a). | `test_etapas.py`, `test_etapas_v70.py` |
 | `test_ciego_v69.py <SKILL.md\|carpeta>` (v69) | E24 genérico sobre el skill. | autoprueba |
+| `test_sin_colisiones.py [carpeta]` (v70) | Falla si `canon.inventario` no es el inventario de walls (`verificar`, `PURLIN_ELEMS`), si `inventario_tags` no expone `inventario()`, o si un módulo de la carpeta no expone los nombres que otros módulos leen de él. | autoprueba |
 
 ### La regla de partición: una sola constante
 
-`particion.py`: `MODO_DEFAULT = "tramo"`. Mientras el estimador no decida, queda en "tramo". Para cambiarla
-se edita esa línea (o se pasa `--modo run` a `particion.py` / `comparar.py`). Las dos lecturas SIEMPRE se
-parten con la misma regla dentro de `comparar.py`.
+`particion.py`: `MODO_DEFAULT = "run"` (v70, decisión del estimador: un run continuo del mismo partition type con
+quiebres o esquinas = un solo wall; una T no encadena). "tramo" queda como opción (`--modo tramo` en `particion.py` /
+`comparar.py`). Las dos lecturas SIEMPRE se parten con la misma regla dentro de `comparar.py`.
 
 ## Campos del canon que usan estas herramientas
 
@@ -79,11 +87,15 @@ Del `takeoff_canon.json` v68, en `walls[]`: `id`, `tag`, `length_ft`, `element` 
 Campos opcionales que conviene escribir en cada lectura:
 
 - `sheet` (sheet number de la planta donde está el wall). Si falta, se toma el primer sheet number de `source`.
-- `page` (página del PDF) cuando el set repite un sheet number en varias páginas.
+- `page` (página del PDF, **1-based** como el visor) cuando el set repite un sheet number en varias páginas.
+  `etapas.py unir` y `comparar.py` rechazan `page` = página del inventario − 1 (0-based).
+- `band` con la convención `{ori, c0, c1 (caras, perpendicular), lo, hi (extensión)}` en pt de la hoja.
 - `tag_ids`: los ids del inventario (`PT0012` …) del tag que la lectura usó para ese wall. Con eso el cruce
   tag ↔ wall es exacto; sin eso se hace por distancia (`--radio-ft`, default 5 ft).
 
-`canon.py` ignora estos campos extra.
+`canon.py` los reconoce como campos del esquema (`canon.WALL_KEYS`). v70: una clave de wall fuera del esquema
+CON números = error en `canon.py` (nombra el campo correcto, p. ej. plywood → plywood_strips); sin números = aviso;
+los sufijos `_info`, `_note`, `_check`, `_source`, `_status`… marcan traza que ninguna tool lee.
 
 ## Límites conocidos
 

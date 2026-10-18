@@ -3,8 +3,15 @@
 los reporta como "walls" según el modo pedido.
 
 Por qué existe: dos lecturas del mismo plano daban walls por type distintos porque cada una partía a su manera
-(una contaba cada tramo, otra el run completo con sus quiebres). Mientras el estimador no decida la convención,
-la regla vive en UNA constante y las dos lecturas se parten con la misma.
+(una contaba cada tramo, otra el run completo con sus quiebres). La regla vive en UNA constante y las dos lecturas
+se parten con la misma.
+
+v70 — DECISIÓN TOMADA (criterio del estimador): MODO_DEFAULT = "run". Un run continuo del mismo partition type con
+quiebres o esquinas = 1 wall. "tramo" queda como opción (--modo tramo) para comparar o para un set que lo pida.
+v70 — door_bulkhead se tipa BULKHEAD-<familia> (familia = letras iniciales del tag, convención de
+partition_types.py R7: G1 -> G, G -> G, A1K -> A; sin tag usa `bulkhead_of`): el bulkhead nunca se une con sus
+walls G / G1. La unión de "tramo" es por componentes conexas (union-find): el resultado no depende del orden de
+los walls en el canon.
 
 MODOS
   "tramo"  un wall por cada tramo RECTO de un type: segmentos colineales (ejes a <= tol_line_ft) y contiguos
@@ -13,7 +20,7 @@ MODOS
   "run"    un wall por RUN CONTINUO del mismo type aunque tenga quiebres: los tramos rectos se encadenan cuando el
            extremo de uno toca el extremo del otro (esquina L, jog, step). Una T (extremo contra el COSTADO del
            otro) NO encadena: el que llega termina en la cara del que sigue.
-Nunca se une entre hojas distintas ni entre types distintos. Segmento sin `band` = wall propio + aviso.
+Nunca se une entre hojas distintas ni entre types distintos (BULKHEAD-G es otro type que G). Segmento sin `band` = wall propio + aviso.
 
 Geometría del canon (la misma de partition_types.py): band = {ori: H|V, c0, c1 (caras, perpendicular), lo, hi
 (extensión)} en pt de la hoja; escala constants.plan_scale_pt_per_ft.value (default 18). Hoja del wall: `sheet`
@@ -27,7 +34,7 @@ import re
 import sys
 from collections import OrderedDict
 
-MODO_DEFAULT = "tramo"     # <- ÚNICA constante a cambiar cuando el estimador decida ("tramo" | "run")
+MODO_DEFAULT = "run"       # v70: decisión del estimador (run continuo con quiebres = 1 wall); "tramo" = opción
 MODOS = ("tramo", "run")
 JOG_MAX_FT = 1.0
 TOL_LINE_FT = 0.25        # colineales: ejes a <= 3"
@@ -41,6 +48,21 @@ SHEET_IN_SRC = re.compile(r"(?:^|[\s/;(,])([A-Z]{1,3}-?\d{1,3}(?:\.\d{1,3}[A-Z]?
 
 def norm_type(tag):
     return re.sub(r"\s+", "-", str(tag or "").strip().upper())
+
+
+def familia(tag):
+    """Familia del tag = letras iniciales (misma convención que partition_types._familia, R7): G1 -> G, A1K -> A."""
+    m = re.match(r"[A-Z]+", tag or "")
+    return m.group(0) if m else tag
+
+
+def tipo(w):
+    """Type de partición del segmento. door_bulkhead -> BULKHEAD-<familia del tag (o de bulkhead_of)>."""
+    t = norm_type(w.get("tag"))
+    if w.get("element") == "door_bulkhead":
+        base = t or norm_type(w.get("bulkhead_of"))
+        return f"BULKHEAD-{familia(base)}" if base else "BULKHEAD"
+    return t
 
 
 def hoja(w):
@@ -71,26 +93,46 @@ def extremos(g):
     return [(lo, eje), (hi, eje)] if ori == "H" else [(eje, lo), (eje, hi)]
 
 
+def _raices(n, une):
+    """Union-find: componentes conexas de n nodos con la relación une(i, j). -> lista de listas de índices (orden
+    estable: por el menor índice de cada componente)."""
+    padre = list(range(n))
+
+    def raiz(i):
+        while padre[i] != i:
+            padre[i] = padre[padre[i]]
+            i = padre[i]
+        return i
+    for i in range(n):
+        for j in range(i + 1, n):
+            if raiz(i) != raiz(j) and une(i, j):
+                padre[raiz(i)] = raiz(j)
+    comp = OrderedDict()
+    for i in range(n):
+        comp.setdefault(raiz(i), []).append(i)
+    return list(comp.values())
+
+
 def _tramos(ws, esc, tol_line_ft, tol_gap_ft):
-    """Une colineales y contiguos del mismo type y hoja en tramos rectos."""
+    """Une colineales y contiguos del mismo type y hoja en tramos rectos. v70: componentes conexas (la unión voraz
+    contra el primer tramo que tocaba NO era transitiva y dependía del orden de los walls)."""
+    gs = [geo(w) for w in ws]
+
+    def une(i, j):
+        a, b = gs[i], gs[j]
+        if a is None or b is None or a[0] != b[0] or abs(a[1] - b[1]) > tol_line_ft * esc:
+            return False
+        return a[2] <= b[3] + tol_gap_ft * esc and a[3] >= b[2] - tol_gap_ft * esc
     tramos = []
-    for w in ws:
-        g = geo(w)
-        L = float(w["length_ft"])
-        hecho = False
-        if g is not None:
-            for t in tramos:
-                tg = t["geo"]
-                if tg is None or tg[0] != g[0] or abs(tg[1] - g[1]) > tol_line_ft * esc:
-                    continue
-                if g[2] <= tg[3] + tol_gap_ft * esc and g[3] >= tg[2] - tol_gap_ft * esc:
-                    t["ids"].append(w["id"])
-                    t["lf"] += L
-                    t["geo"] = (tg[0], tg[1], min(tg[2], g[2]), max(tg[3], g[3]), max(tg[4], g[4]))
-                    hecho = True
-                    break
-        if not hecho:
-            tramos.append({"ids": [w["id"]], "lf": L, "geo": g})
+    for comp in _raices(len(ws), une):
+        comp = sorted(comp, key=lambda i: (gs[i][2] if gs[i] else 0.0, str(ws[i]["id"])))
+        g = [gs[i] for i in comp if gs[i] is not None]
+        tg = None
+        if g:
+            ejes = sorted(x[1] for x in g)
+            tg = (g[0][0], ejes[len(ejes) // 2], min(x[2] for x in g), max(x[3] for x in g), max(x[4] for x in g))
+        tramos.append({"ids": [ws[i]["id"] for i in comp], "lf": sum(float(ws[i]["length_ft"]) for i in comp),
+                       "geo": tg})
     return tramos
 
 
@@ -112,33 +154,21 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
         if w.get("element") in NO_PARTITION:
             otros.append(w["id"])
             continue
-        t = norm_type(w.get("tag"))
+        t = tipo(w)
         sh, pg = hoja(w)
         if geo(w) is None:
-            avisos.append(f"{w['id']} ({t}, {sh}) sin band: wall propio, no se puede unir")
+            ori = (w.get("band") or {}).get("ori") if isinstance(w.get("band"), dict) else None
+            avisos.append(f"{w['id']} ({t}, {sh}) sin band" + (f" H|V (ori {ori})" if ori else "")
+                          + ": wall propio, no se puede unir")
         grupos.setdefault((t, sh, pg), []).append(w)
     out = OrderedDict()
     for (t, sh, pg), ws in grupos.items():
         tramos = _tramos(ws, esc, tol_line_ft, tol_gap_ft)
         if modo == "run":
             # componentes conexas por extremos que se tocan
-            n = len(tramos)
-            padre = list(range(n))
-
-            def raiz(i):
-                while padre[i] != i:
-                    padre[i] = padre[padre[i]]
-                    i = padre[i]
-                return i
-            for i in range(n):
-                for j in range(i + 1, n):
-                    if _tocan(tramos[i], tramos[j], esc, tol_gap_ft):
-                        padre[raiz(i)] = raiz(j)
-            comp = OrderedDict()
-            for i in range(n):
-                comp.setdefault(raiz(i), []).append(tramos[i])
             walls = []
-            for parts in comp.values():
+            for comp in _raices(len(tramos), lambda i, j: _tocan(tramos[i], tramos[j], esc, tol_gap_ft)):
+                parts = [tramos[i] for i in comp]
                 walls.append({"ids": [x for p in parts for x in p["ids"]], "lf": sum(p["lf"] for p in parts),
                               "tramos": len(parts), "geos": [p["geo"] for p in parts]})
         else:

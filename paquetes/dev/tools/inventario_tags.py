@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""inventario.py — ETAPA 1 del take-off: inventario por SCRIPT de lo que el plano dice (no de lo que el ojo cree ver).
+"""inventario_tags.py — ETAPA 1 del take-off: inventario por SCRIPT de lo que el plano dice (no de lo que el ojo cree ver).
 
 Por qué existe: en pruebas ciegas la misma versión del skill dio walls por tag distintos entre corridas (un type con
 4 walls contra 8, otro con 12 contra 9). El conteo de tags lo hacía el modelo a ojo. Aquí sale del texto del PDF.
@@ -28,7 +28,10 @@ Single-letter types (B, G, F...) se confunden con grid bubbles: solo cuentan si 
 símbolo coinciden (±15 % / ±40 %) con los de los types de varios caracteres de ESA hoja. Si no hay referencia en la
 hoja, van a partition_ambiguo con su motivo (nunca se cuentan en silencio).
 
-Uso:  python3 inventario.py <pdf> <out_dir> [--dpi 150] [--sin-recortes]
+v70: archivo renombrado (antes `inventario.py` en v69) para no pisar a inventario.py, el inventario cerrado de
+WALLS que importa canon.py (inventario.verificar). Las salidas siguen llamándose inventario.json / inventario.md.
+
+Uso:  python3 inventario_tags.py <pdf> <out_dir> [--dpi 150] [--sin-recortes]
 Salida: <out_dir>/inventario.json, <out_dir>/inventario.md, <out_dir>/recortes/*.png
 """
 import hashlib
@@ -373,7 +376,8 @@ def ocurrencias(doc, hojas, cache, tipos):
                 s = sim(w) if h.get("titulo_planta") else None
                 if s:
                     out["partition_candidato"].append(_occ("partition_candidato", dict(w, t=t), h,
-                                                           {"simbolo": s, "motivo": "forma de tag dentro de símbolo, "
+                                                           {"type": t, "fuera_de_schedule": True,
+                                                            "simbolo": s, "motivo": "forma de tag dentro de símbolo, "
                                                             "NO está en el schedule de partition types"}))
             if DOOR_RE.match(t) or WINDOW_RE.match(t):
                 s = sim(w) if h.get("titulo_planta") else None
@@ -387,6 +391,10 @@ def ocurrencias(doc, hojas, cache, tipos):
                 if s:
                     out["keynote"].append(_occ("keynote", dict(w, t=t), h, {"simbolo": s}))
     return out
+
+
+PREFIJOS = {"partition_tag": "PT", "partition_ambiguo": "PA", "partition_candidato": "PC", "partition_texto": "PX",
+            "door_window_tag": "DW", "detail_bubble": "DB", "detail_ref_text": "DR", "keynote": "KN", "cota": "CO"}
 
 
 def clasificar(hojas, occ):
@@ -442,9 +450,18 @@ def clasificar(hojas, occ):
     occ["partition_texto"] = sorted(txt, key=lambda o: (o["type"], o["page"]))
     for h in hojas:
         h.setdefault("es_planta_partition", False)
+    # v70: prefijo PROPIO por lista (antes k[:2]: partition_ambiguo / partition_candidato / partition_texto daban
+    # todos PA####, detail_bubble / detail_ref_text DE####) -> ids únicos en TODO `ocurrencias`
+    for k in PREFIJOS:
+        occ.setdefault(k, [])
+    usados = set()
     for k, lst in occ.items():
+        pre = PREFIJOS.get(k) or k[:2].upper()
+        if pre in usados:
+            raise ValueError(f"prefijo de id {pre} repetido entre listas de ocurrencias ({k})")
+        usados.add(pre)
         for n, o in enumerate(lst, 1):
-            o["id"] = f"{k[:2].upper()}{n:04d}" if k != "partition_tag" else f"PT{n:04d}"
+            o["id"] = f"{pre}{n:04d}"
     return occ
 
 
@@ -610,7 +627,7 @@ def resumen_types(tipos, occ, hojas):
 def md(inv):
     L = [f"# Inventario por script — {inv['pdf']}", "",
          f"md5 `{inv['md5']}` · {inv['pages']} páginas · coordenadas en pt de la página ROTADA (como el PNG) · "
-         f"generado por inventario.py (sin lectura a ojo)", "",
+         f"generado por inventario_tags.py (sin lectura a ojo)", "",
          "## Partition types (del schedule / leyenda del PDF)", ""]
     for t in inv["partition_types"]["schedule"]:
         L.append(f"- **{t['type']}** — {'; '.join(t['fuentes'][:3])}")
@@ -640,7 +657,14 @@ def md(inv):
     cand = Counter(o["text"] for o in inv["ocurrencias"]["partition_candidato"])
     L += ["", "## Tags en símbolo que NO están en el schedule (posible type faltante en el schedule → RFI)", "",
           ", ".join(f"{k} ×{v}" for k, v in sorted(cand.items())) or "ninguno", "",
-          "## Otras ocurrencias (conteo)", ""]
+          "Cada candidato (`PC####`) entra al cruce de comparar.py / etapas.py compuerta: una lectura lo toma "
+          "(wall con ese tag) o queda alerta \"tag sin wall\".", ""]
+    for o in inv["ocurrencias"]["partition_candidato"]:
+        L.append(f"- `{o['id']}` {o['text']} — {o['sheet']} p.{o['page']} @ ({o['center_pt'][0]:.0f}, "
+                 f"{o['center_pt'][1]:.0f})" + (f" · ![{o['id']}](recortes/{o['png']}) "
+                                                f"{'✔' if o.get('png_verificado') else '✘ NO VERIFICADO'}"
+                                                if o.get("png") else ""))
+    L += ["", "## Otras ocurrencias (conteo)", ""]
     for k in ("partition_texto", "door_window_tag", "detail_bubble", "detail_ref_text", "keynote", "cota"):
         L.append(f"- {k}: {len(inv['ocurrencias'].get(k, []))}")
     L += ["", "## Hojas NO inventariables por script", ""]
@@ -668,7 +692,9 @@ def inventario(pdf, out_dir, dpi=150, con_recortes=True):
                       "buscar (¿schedule raster? revisar a mano y declararlo)")
     occ = clasificar(hojas, ocurrencias(doc, hojas, cache, tipos))
     if con_recortes:
-        fallas = recortes(doc, occ["partition_tag"] + occ["partition_ambiguo"], os.path.join(out_dir, "recortes"), dpi)
+        # v70: los candidatos (tag en símbolo fuera del schedule) llevan su propio recorte verificado
+        fallas = recortes(doc, occ["partition_tag"] + occ["partition_ambiguo"] + occ.get("partition_candidato", []),
+                          os.path.join(out_dir, "recortes"), dpi)
         avisos += [f"PNG NO VERIFICADO: {f}" for f in fallas]
         _, fov = overview(doc, hojas, occ, os.path.join(out_dir, "recortes"))
         avisos += [f"PNG NO VERIFICADO: {f}" for f in fov]

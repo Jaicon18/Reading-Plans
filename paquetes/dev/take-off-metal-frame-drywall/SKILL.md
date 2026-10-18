@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 17-oct-2026 (v69). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas), que va primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 18-oct-2026 (v70). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -29,11 +29,19 @@ partición de walls se hacían a ojo, en una sola lectura, sin nada contra qué 
 un script, el plano se lee DOS veces de forma independiente, un script compara las dos lecturas contra el
 inventario, y toda diferencia queda escrita. **Ningún error llega al Excel sin alerta.**
 
+**v70 (2026-10-18) — cambios que mandan.** (1) Partición de walls decidida por el estimador: **un run continuo del
+mismo partition type con quiebres o esquinas = 1 wall** (E28; `particion.MODO_DEFAULT = "run"`, también en [ciego-ok]
+`partition_types.py`). (2) El inventario de la Etapa 1 se llama `inventario_tags.py` (el `inventario.py` que importa
+`canon.py` es el inventario cerrado de walls; son dos tools distintas). (3) Compuerta nueva `esquinas.py`: cada esquina
+con un solo dueño y ninguna door fuera de todo wall (R70.2 / R70.3). (4) Reglas R70.1–R70.9 (§16): ceiling
+suspendido por leyenda, extensión por hatch, ballistic por contorno, piers por parte, vanos de storefront, yields de
+Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `page` 1-based y refs de aberturas.
+
 ## Etapas y carpeta (reanudable)
 
 ```
 plano.pdf
- 1 INVENTARIO   inventario.py            → <dir>/1_inventario/inventario.json + inventario.md + recortes/
+ 1 INVENTARIO   inventario_tags.py       → <dir>/1_inventario/inventario.json + inventario.md + recortes/
  2 LECTURA      subagentes A  ┐ (no se ven)→ <dir>/2_lectura/A/*.json → etapas.py unir → canon_A.json
                 subagentes B  ┘            → <dir>/2_lectura/B/*.json → etapas.py unir → canon_B.json
  3 DOBLE LECT.  comparar.py              → <dir>/3_revision/revision.md + revision.json + img/
@@ -59,7 +67,7 @@ primera etapa que falta y su comando. Una etapa que ya está en disco no se reha
 
 ## Etapa 1 — INVENTARIO (script, ANTES de leer)
 
-`python3 inventario.py plano.pdf <dir>/1_inventario` — índice de hojas (title block), types del schedule, cada
+`python3 inventario_tags.py plano.pdf <dir>/1_inventario` — índice de hojas (title block), types del schedule, cada
 partition tag con id (`PTnnnn`), hoja, página, coordenadas y recorte PNG con el tag circulado y **verificado al
 reabrirlo**; vista de cada hoja con los tags numerados; ambiguos (NO contados, con motivo); tags fuera de schedule
 (→ RFI); detail bubbles N/HOJA; hojas NO INVENTARIABLES (raster). rc 1 si un recorte no verifica: no se sigue.
@@ -78,8 +86,14 @@ Cada tarea entrega un fragmento JSON (`2_lectura/A/<hoja-o-grupo>.json`) con el 
 `length_ft` con `source` N/HOJA y estado [CONFIRMADO] / [DERIVADO] / [PENDIENTE], `band {ori, c0, c1, lo, hi}` en pt
 de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
 
-- **Partición de walls = `particion.py` (`MODO_DEFAULT`; hoy "tramo", = PT2 / PT3).** La regla es del estimador
-  y está pendiente de su decisión: no se cambia sin su orden. Ninguna lectura inventa otra.
+- **Partición de walls = `particion.py` (`MODO_DEFAULT = "run"`, E28, decisión del estimador).** Un run continuo
+  del mismo type con quiebres o esquinas es UN wall; su LF = suma de sus tramos. Ninguna lectura inventa otra.
+- **Refs de aberturas primero (Etapa 2a):** la tarea del opening schedule escribe las refs (`opening_schedule`) antes
+  que las tareas de walls; los walls usan esas refs tal cual. `etapas.py unir` falla con una ref que no está en la
+  lista o con la misma abertura en dos lugares.
+- `page` es 1-based (la página del PDF como la cuenta un lector, la misma del inventario); `unir` y `comparar.py`
+  rechazan una lectura con páginas contadas desde 0.
+- `band = {ori, c0, c1 (CARAS, perpendicular), lo, hi (EXTENSIÓN)}`: `unir` falla con una banda traspuesta.
 - Todo tag del inventario de la tarea termina en un wall o en `tags_descartados [{id, motivo, imagen}]`; el
   descarte NO silencia la alerta: el estimador lo cierra en la Etapa 3.
 - A lee el canon completo (walls + §2 P4–P8b, también por tareas chicas); B lee como mínimo los walls (P3). Lo que
@@ -138,7 +152,9 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
   enmarcan (sí llevan plate de reinforcement, A2). [headers]
 - **E13** Canopy soffit: track en los dos extremos de los joists; fascia y wall medidas por separado
   (`wall_line_ft`), nunca L × 2. [corridas]
-- **E14** Ceiling suspendido del RCP = furring, salvo detalle con joists (`joist_source`). [canon]
+- **E14** Ceiling suspendido del RCP = furring, salvo detalle con joists (`joist_source`). v70 (R70.1): el detalle
+  tiene que estar LLAMADO sobre ESE ceiling (burbuja o tag en el RCP, `system_callout`); un detalle típico local
+  (trimless fixture, bulkhead, transición) no cambia el sistema del field; conflicto = RFI con delta. [canon]
 - **E15** R.O. impreso del estimador manda. **E16** Storefront con lintel HSS / steel en S*: 0 metal stud header.
 - **E17** Preguntas al usuario UNA A LA VEZ, con imagen, hojas y opciones con delta; solo criterio comercial.
 - **E18** Sill DOUBLE en R.O. > 4'-0"; doors sin sill. **E19** "BOX BEAM OR STEEL FRAMING AS REQUIRED" = metal
@@ -153,6 +169,9 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
   peralte AISC) o motivo + RFI. [vigas_sobre_walls]
 - **E27** Dos pruebas, mismo plano, mismo número: todo dato que varió entre pruebas es un campo obligatorio con
   N/HOJA y una regla en tool (§14). Ningún valor se toma de "lectura visual".
+- **E28** Partición de walls (decisión del estimador, todo proyecto): **un run continuo del mismo partition type
+  con quiebres o esquinas = 1 wall**. El LF del wall es la suma de sus tramos; una T no encadena (el que llega [ciego-ok]
+  termina en la cara del que sigue); nunca se une entre hojas ni entre types. [particion, partition_types]
 - **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
   **Partition types (§13)** con la convención del calificador.
 
@@ -167,7 +186,7 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
    detalle es de todo lo que corta. Si no aplica, motivo.
 3. **BARRIDO.** Cada tag en TODO el plano; lista numerada + imagen circulada. Antes de "sin tag", leaders finos;
    antes de "no está en el set", grep en todo el set. "ALL ..." = schedule completo ítem por ítem.
-   El conteo de tags lo hace `inventario.py` (Etapa 1); a mano solo en hojas NO INVENTARIABLES.
+   El conteo de tags lo hace `inventario_tags.py` (Etapa 1); a mano solo en hojas NO INVENTARIABLES.
 4. **EVIDENCIA VISUAL.** Imagen circulada de todo lo que se afirma; reabrirla antes de entregar. Hojas rotadas:
    `page.rotation_matrix` para medir, `derotation_matrix` para dibujar.
 5. **IDIOMA.** Entregable íntegro en inglés; términos del trade en inglés.
@@ -184,7 +203,7 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
 
 - **Preparación:** P0 mapa de hojas y schedules (`arranque.py`, instala pikepdf / pymupdf) · P1 alcances
   (`alcances.py escanear`) · P2 `registro.py crear`.
-- **Etapa 1:** `inventario.py` antes de medir nada.
+- **Etapa 1:** `inventario_tags.py` antes de medir nada.
 - **Etapa 2** (A y B por separado, tareas chicas): P3 walls (largo neto, cota, line, band, `sheet`, `tag_ids`) +
   nodes. Solo A sigue: P4 alturas (`vigas_sobre_walls.py`, `altura_stud.py`, deck_breaks) · P5 faces (room, board,
   layers, altura, aberturas) · P6 aberturas + header schedule con PIEZAS · P7 corridas no-wall (§5), parapets por
@@ -279,8 +298,11 @@ openings MEP · las 15 de accesorios (§12).
 ## 8. Compuerta (NO ENTREGABLE si falla)
 
 0. `etapas.py compuerta <dir>` PASA: inventario, canon A, canon B y revisión en disco; revisión vigente y que
-   cubre exactamente los tags del inventario; ningún tag sin wall y sin alerta; recortes verificados.
-1. `inventario.py`, `canon.py`, `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
+   cubre exactamente los tags del inventario (también los tags fuera de schedule, `PC####`); ningún tag sin wall y
+   sin alerta; recortes verificados.
+0b. `esquinas.py takeoff_canon.json` PASA (R70.2 / R70.3): cada esquina con UN dueño; ningún hueco colineal sin
+   explicar (una door va dentro del run). Excepción solo declarada con motivo (`corners_ok`, `gaps_ok`).
+1. `inventario_tags.py`, `canon.py` (con el `inventario.py` de walls), `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
 2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
 3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
 4. `bitacora.py compuerta` completa; RFIs con delta; toda abertura, corrida, face y ceiling con source.
@@ -298,7 +320,9 @@ openings MEP · las 15 de accesorios (§12).
   plywood en un renglón → por material; sealant exterior dentro del acoustical → renglón propio; PVC edge bruto →
   neto; extra framing de ductos → error (E12); vertical stud de transición = escalón → a estructura; jog
   descartado → suma al vecino (PT3).
-- v67 y anteriores: ARBITRAJE_13 a 16 (fuera del paquete de pruebas).
+- **v70**: partición "tramo" (un wall por tramo recto) → "run" (E28); `inventario.py` de la Etapa 1 →
+  `inventario_tags.py`; ceiling con joists por un detalle típico no llamado → suspendido (R70.1).
+- v67 y anteriores: ARBITRAJE_13 a 18 (fuera del paquete de pruebas).
 
 ## 10. Anti-varianza
 
@@ -313,6 +337,14 @@ R15–R36 (v66–v67) siguen. v68: R37 E3 exacta (test_canon) · R38–R48 §14 
 R49 PT (test_partition_types_v68) · R50 compra §15 (test_plantilla_v68) · R51 arranque instala pikepdf / pymupdf.
 v69: R52 inventario (test_inventario) · R53 partición (test_particion) · R54 doble lectura (test_comparar) ·
 R55 compuerta y unión de etapas (test_etapas) · R56 ciego genérico (test_ciego_v69).
+v70: R57 partición run por defecto + bulkhead tipado + unión transitiva (test_particion_v70) · R58 sin colisión de
+módulos (test_sin_colisiones) · R59 ids únicos y candidatos fuera de schedule en la compuerta (test_inventario_tags)
+· R60 unir: tipos de clave, notes por fragmento, banda traspuesta, page 1-based, refs de aberturas (test_etapas_v70)
+· R61 canon: canopy_soffit en walls, elementos con board sin faces, campos fuera de esquema, operación de
+canopy_joist, deck_breaks por hoja, ceiling con sistema no llamado, pier por parte (test_canon_v70) · R62 jamb return
+con sill de brake metal (test_accesorios_v70) · R63 verificar: renglón con tool en 0 (test_plantilla_v70) · R64
+esquinas y huecos (test_esquinas) · R65 storefront steel en closer (test_closer_v70) · R66 fuentes con paréntesis
+(test_headers_v70).
 
 ---
 
@@ -345,12 +377,12 @@ Nombres EXACTOS del renglón: `accesorios.NOMBRES_EXCEL`.
 | # | Regla |
 |---|---|
 | PT1 | Type = tag del plano; exterior → `EXT-<stud>CFMF`; parapet → `EXT-PARAPET` (un wall por straight run: `ori` + `axis`, step = otro wall; sin geometría = PENDING); door_bulkhead → `BULKHEAD-<familia del tag>` (G1 → G); canopy column → `CANOPY-COL`; pier con tag interior = su tag (el tag manda). |
-| PT2 | Un wall = tramo recto de un type entre esquinas o extremos: colineales (≤ 3") y contiguos (≤ 6") se unen; no se parte por altura, room, T ni abertura. Un renglón por wall (ids con "+"). |
-| PT3 | Jog / return ≤ 1'-0" que toca un wall del mismo type: no es wall; su LF SE SUMA al vecino ("incl. jog"). |
+| PT2 | Un wall = RUN continuo de un type (E28, `particion.MODO_DEFAULT = "run"`): los tramos rectos se encadenan extremo con extremo (esquina L, jog, step); colineales (≤ 3") y contiguos (≤ 6") se unen; una T no encadena; no se parte por altura, room ni abertura. Un renglón por wall (ids con "+"). |
+| PT3 | Jog / return ≤ 1'-0" que toca un wall del mismo type: no es wall; su LF SE SUMA al vecino ("incl. jog"). En modo run queda dentro del run. |
 | PT4 | Office bulkheads colineales de un frente = UN wall (run del CONT. BOX BEAM). |
 | PT5 | storefront cripples, vestibule / grille heads, roof step, fascia, canopy soffit, transiciones, bulkheads y soffits de ceiling → bloque `TYPE OTHER FRAMING (NOT A PARTITION)`. |
 | PT7 | Chase = un wall por cara con tag; wrap / pier interior = caras con board de su detalle; wrap exterior = cadena FOS. |
-| PT8 | Un wall termina en la CARA del wall / frame que cruza; se parte donde otro type o un alcove ocupa la línea; largo con cota impresa si existe. |
+| PT8 | Cotas de cara de finish a cara de finish (nota del set): cada esquina tiene UN dueño (R70.2, `esquinas.py`); la door va dentro del run (R70.3). Un wall termina en la CARA del wall / frame que cruza; se parte donde otro type o un alcove ocupa la línea; largo con cota impresa si existe. |
 | PT6 | Formato: `TYPE <nombre>` en la col. A; renglón `"<type>  #<id>  -  <location>"` + Length; TOTAL con la col. A vacía y texto en la B; OTHER FRAMING después del TOTAL. |
 
 ## 14. Reglas de determinismo v68 (lo que varió entre dos pruebas; canon / accesorios fallan sin el dato)
@@ -379,6 +411,20 @@ exterior), hanger wire LF continuous coil + renglón PCS. Yields con fórmula vi
 criterio del estimador; un back-check no lo cambia). FRT plywood un renglón por material y espesor
 (`frt_plywood_by_material`); sealant exterior (`sealant_exterior_lf`) aparte; NET de familia solo en su unidad;
 RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en inglés (`verificar` rechaza español).
+
+## 16. Reglas v70 (arbitraje de dos pruebas ciegas; cada una con tool o compuerta)
+
+| # | Regla | Dónde |
+|---|---|---|
+| R70.1 | Ceiling con hatch / leyenda "SUSPENDED GYPSUM BOARD" = suspension system (furring channel + carrying channel + hanger wire). Otro sistema (stud joists, framed soffit) solo si un detalle está LLAMADO sobre ESE ceiling (`system_callout {detail, on_plan: true, source}`); un detalle típico local (trimless fixture, bulkhead) no cambia el field. Conflicto → RFI con el delta de cada sistema. | canon.py |
+| R70.2 | Cada esquina L / T tiene UN dueño: un wall llega a la cara exterior del otro y el otro arranca en su cara. Ni esquina sin dueño ni doble. Vale también para exteriores. | `esquinas.py` (compuerta 0b) |
+| R70.3 | La door va DENTRO del run: un R.O. entre dos walls colineales es parte del wall (las doors no se descuentan). Un hueco colineal sin explicar = falla; un cambio de type justo en la door no saca la door de ambos walls. | `esquinas.py` |
+| R70.4 | La extensión de un type marcado con hatch (ballistic / K, rated) es la del hatch, también sobre el wall que llega; el cambio de type cae donde termina el hatch, no en el jamb de la door vecina. | lectura (P3) + imagen |
+| R70.5 | Ballistic panel y la capa sobre él = contorno de la CARA del cliente (con jogs) × alto del panel; nunca el LF de framing (que incluye la esquina propia). | canon (`ballistic_jogs`, D2) |
+| R70.6 | Pier / wrap con `parts`: el LF de cada partition type = solo las caras de SU parte (p. ej. la L interior con gyp); las caras exteriores son del sistema exterior. Nunca el perímetro del box para un type interior. | canon.py |
+| R70.7 | Vanos de storefront / curtain wall (vidrio desde el piso): fuera del LF del type exterior (convención declarada en Clarifications); el framing sobre el head = OTHER FRAMING (`storefront_cripples`). Anchors, slab pins y base sealant solo sobre bottom track real (sin vanos). | canon / accesorios |
+| R70.8 | Yields (drywall screws, joint compound, joint tape) = celda del estimador en Inputs. Un fastener schedule impreso (estructural) va a Clarifications; no cambia el yield. | plantilla_excel verificar |
+| R70.9 | Grille / head: el alto del framing = Σ de TODA la cadena impresa entre la base y el top del miembro superior dibujado (`head_chain_in` con todos los eslabones). | accesorios.py (A4, D11) |
 
 ---
 
@@ -892,7 +938,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 ## BARRIDO COMPLETO POR TAG + PAUSA OBLIGATORIA
 
 **v69:** el censo de tags (cada repetición, tags no contemplados, caja real / rombo / hexágono, candidatos sin
-leader, falsos positivos de grid bubbles) lo hace `inventario.py` en la Etapa 1, con lista numerada, recorte
+leader, falsos positivos de grid bubbles) lo hace `inventario_tags.py` en la Etapa 1, con lista numerada, recorte
 circulado verificado y ambiguos NO contados con su motivo. A mano, solo en hojas NO INVENTARIABLES, con el mismo
 criterio: un tag es una palabra dentro de su símbolo real, todo candidato dudoso se abre en imagen, y **cada tag
 del censo tiene que terminar en un wall cuantificado** (Etapa 3 lo alerta si no).
@@ -947,7 +993,7 @@ Cada penetración se evalúa **individualmente** contra el umbral de 1/4 de hoja
 
 NUNCA mezcles exteriores con interiores. Orden inviolable: Pasada 1 (exteriores, face afuera) → Pasada 2 (esos mismos exteriores, face adentro; "by future tenant" solo aplica si el wall es NUEVO) → Pasada 3 (interiores). Declara al inicio de cada respuesta qué pasada trabajas.
 
-**PASO 4 — Recorrer el Floor Plan** por cuadrantes, con Construction Legend. El barrido por tag es la Etapa 1 (`inventario.py`); la verificación cruzada por grafía y la pausa obligatoria siguen.
+**PASO 4 — Recorrer el Floor Plan** por cuadrantes, con Construction Legend. El barrido por tag es la Etapa 1 (`inventario_tags.py`); la verificación cruzada por grafía y la pausa obligatoria siguen.
 
 **PASO 4A — Filtro de alcance.** Clasifica cada tramo: (1) construcción nueva Div05/09 → cuantificar; (2) patch and repair → área SF como allowance, sin waste, citando la nota; (3) fuera de alcance (storefront=Div08, "to remain", mampostería=Div04, vendor) → listar con motivo. Un tramo puede tener varias zonas de alcance distinto — mapéalas, no asumas uniformidad. **Y de todo tramo que salga fuera de alcance, aplica la SUPER REGLA a lo que quede ENCIMA y DEBAJO.**
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Tests de inventario.py con un PDF SINTÉTICO armado aquí mismo (ningún dato de un proyecto real).
-Correr: python3 test_inventario.py"""
+"""Tests de inventario_tags.py (Etapa 1) con un PDF SINTÉTICO armado aquí mismo (ningún dato de un proyecto real).
+Correr: python3 test_inventario_tags.py"""
 import json
 import os
 import sys
@@ -9,7 +9,7 @@ import tempfile
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 import pymupdf as fitz  # noqa: E402
-import inventario as I  # noqa: E402
+import inventario_tags as I  # noqa: E402
 
 PROYECTO = "DEMO PROJECT 0000"
 

@@ -172,8 +172,9 @@ Flujo completo en el PROTOCOLO v69 de SKILL.md. Todas genéricas (nada de un pro
 
 | Tool | Etapa | Qué hace | Test |
 |---|---|---|---|
-| `inventario.py <pdf> <out_dir>` | 1 | índice de hojas, types del schedule, cada partition tag con id, hoja, coordenadas y recorte circulado verificado; ambiguos sin contar; hojas no inventariables | `test_inventario.py` |
-| `particion.py canon.json [--modo tramo\|run]` | 2–3 | regla única de partición de walls; `MODO_DEFAULT` = "tramo" hasta que decida el estimador | `test_particion.py` |
+| `inventario_tags.py <pdf> <out_dir>` (v70; antes `inventario.py`, que ahora es solo el inventario de walls de `canon.py`) | 1 | índice de hojas, types del schedule, cada partition tag con id único (PT / PA / PC…), hoja, coordenadas y recorte circulado verificado; ambiguos sin contar; candidatos fuera de schedule entran en la compuerta; hojas no inventariables | `test_inventario_tags.py`, `test_inventario_tags_v70.py` |
+| `particion.py canon.json [--modo tramo\|run]` | 2–3 | regla única de partición de walls; `MODO_DEFAULT` = "run" (E28, decisión del estimador); door_bulkhead = BULKHEAD-<familia>; unión transitiva | `test_particion.py`, `test_particion_v70.py` |
+| `esquinas.py canon.json` (v70) | 4–5 | R70.2 cada esquina con un dueño; R70.3 hueco colineal = door fuera del run; excepciones `corners_ok` / `gaps_ok` con motivo | `test_esquinas.py` |
 | `comparar.py A.json B.json inventario.json out_dir --pdf plano.pdf` | 3 | empareja las dos lecturas, cruza contra el inventario y escribe `revision.md` / `revision.json` / `img/` con alertas | `test_comparar.py` |
 | `etapas.py estado\|compuerta <dir>` · `etapas.py unir <carpeta> <canon.json>` | 1–5 | dónde quedó la corrida (reanudar), compuerta de etapas, unión de fragmentos de una lectura | `test_etapas.py` |
 | `test_ciego_v69.py <SKILL.md\|carpeta>` | 5 | E24 genérico: sin nombres de proyecto, cantidades, miles, resultados ni coordenadas | autoprueba incluida |

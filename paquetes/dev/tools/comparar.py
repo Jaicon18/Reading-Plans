@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """comparar.py — ETAPA 3: doble lectura comparada. Empareja los walls de dos lecturas INDEPENDIENTES del mismo plano
-(canon A y canon B) y los cruza contra el inventario por script (inventario.py). Hace visible cualquier diferencia
+(canon A y canon B) y los cruza contra el inventario por script (inventario_tags.py, Etapa 1;
+no confundir con inventario.py = inventario cerrado de walls de canon.py). Hace visible cualquier diferencia
 en vez de que una lectura pise a la otra en silencio.
 
 Qué hace
@@ -9,11 +10,15 @@ Qué hace
      (solo si la diferencia es <= LF_MATCH_MAX; se marca "match por LF").
      Clasifica: coincide (|ΔLF| <= 2 %), difiere (con delta), solo en A, solo en B.
   3. Cruza contra el inventario:
-       - todo tag del inventario (partition_tag) sin wall cercano de su type en NINGUNA lectura = ALERTA "tag sin wall"
+       - todo tag del inventario (partition_tag y, v70, partition_candidato = tag en símbolo fuera del schedule,
+         ids PC####) sin wall cercano de su type en NINGUNA lectura = ALERTA "tag sin wall"
          (cercano = el wall cita el id del tag en `tag_ids`, o su band pasa a <= radio_ft del centro del tag);
        - todo wall cuyo type no está en el schedule del inventario = ALERTA "type no inventariado";
        - type del schedule con walls en una hoja donde el inventario no tiene ningún tag de ese type = ALERTA.
   4. Una imagen por diferencia y por alerta con posición (A = azul, B = naranja, tag = rojo), reabierta y verificada.
+
+v70: una lectura con `page` 0-based (page del wall = página del inventario − 1 para su hoja) se RECHAZA
+(ValueError / rc 1): con la página corrida todo el cruce tag ↔ wall da alertas falsas.
 
 Salida: <out_dir>/revision.md (corta, en inglés, para el estimador) + revision.json + img/*.png
 
@@ -110,8 +115,40 @@ def _tag_ids(canon):
     return {w["id"]: set(w.get("tag_ids") or []) for w in canon.get("walls") or []}
 
 
+def tags_inventario(inv):
+    """Tags que el cruce exige cubrir: partition_tag + partition_candidato (v70; type = texto del tag)."""
+    oc = inv.get("ocurrencias") or {}
+    return list(oc.get("partition_tag") or []) + [dict(o, type=o.get("type") or o.get("text"), candidato=True)
+                                                    for o in oc.get("partition_candidato") or []]
+
+
+def paginas_0based(canon, inv, lado=""):
+    """v70: walls cuyo `page` = página del inventario − 1 para su hoja (page escrito 0-based). -> lista de mensajes."""
+    pags = defaultdict(set)
+    for h in inv.get("sheets") or []:
+        if h.get("sheet") and h.get("page") is not None:
+            pags[str(h["sheet"])].add(int(h["page"]))
+    out = []
+    for w in canon.get("walls") or []:
+        sh, pg = w.get("sheet") or w.get("plan_sheet"), w.get("page")
+        if not sh or pg is None or str(sh) not in pags:
+            continue
+        try:
+            pg = int(pg)
+        except (TypeError, ValueError):
+            continue
+        if pg not in pags[str(sh)] and pg + 1 in pags[str(sh)]:
+            out.append(f"{lado}{w.get('id')}: page {pg} pero el inventario tiene {sh} en la página {pg + 1} — "
+                       f"page 0-based (page es 1-based, como el visor del PDF)")
+    return out
+
+
 def comparar(canon_a, canon_b, inv, modo=None, radio_ft=RADIO_FT):
     modo = modo or P.MODO_DEFAULT
+    malos = paginas_0based(canon_a, inv, "lectura A ") + paginas_0based(canon_b, inv, "lectura B ")
+    if malos:
+        raise ValueError(f"{len(malos)} wall(s) con page 0-based; corregir la lectura antes de comparar: "
+                         + "; ".join(malos[:10]) + (" …" if len(malos) > 10 else ""))
     pa, pb = P.particion(canon_a, modo), P.particion(canon_b, modo)
     esc = pa["escala_pt_por_ft"]
     if abs(pb["escala_pt_por_ft"] - esc) > 1e-6:
@@ -123,7 +160,7 @@ def comparar(canon_a, canon_b, inv, modo=None, radio_ft=RADIO_FT):
     mapa = {h["sheet"]: h["page"] for h in inv.get("sheets") or [] if h.get("sheet") and cnt[h["sheet"]] == 1}
     sched = [t["type"] for t in (inv.get("partition_types") or {}).get("schedule") or []]
     cand = {o["text"] for o in (inv.get("ocurrencias") or {}).get("partition_candidato") or []}
-    tags = (inv.get("ocurrencias") or {}).get("partition_tag") or []
+    tags = tags_inventario(inv)
 
     def filas(p, lado):
         out = []
@@ -178,6 +215,8 @@ def comparar(canon_a, canon_b, inv, modo=None, radio_ft=RADIO_FT):
             alertas.append({"kind": "tag sin wall", "type": o["type"], "sheet": o["sheet"], "page": o["page"],
                             "tag": o, "detalle": f"tag {o['id']} {o['type']} has no wall of its type within "
                                                  f"{radio_ft} ft in reading A nor B"
+                            + (" (tag in a symbol that is NOT in the partition schedule: missing type or RFI)"
+                               if o.get("candidato") else "")
                             + (f" ({nv} wall(s) of that type without geometry could not be checked)" if nv else "")})
     tags_por = defaultdict(int)
     for o in tags:
@@ -366,7 +405,11 @@ def main(argv):
     ca, cb, inv = (json.load(open(x)) for x in a[:3])
     out = a[3]
     os.makedirs(out, exist_ok=True)
-    rev = comparar(ca, cb, inv, opts["--modo"], float(opts["--radio-ft"] or RADIO_FT))
+    try:
+        rev = comparar(ca, cb, inv, opts["--modo"], float(opts["--radio-ft"] or RADIO_FT))
+    except ValueError as e:
+        print(f"ERROR comparar.py: {e}", file=sys.stderr)
+        return 1
     pdf = opts["--pdf"] or inv.get("pdf_path")
     fallas = imagenes(rev, pdf, os.path.join(out, "img"))
     rev["avisos"] += fallas
