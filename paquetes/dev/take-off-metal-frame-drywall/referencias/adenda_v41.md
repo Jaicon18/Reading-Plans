@@ -29,7 +29,7 @@ y **la razón la tuvo un lado distinto en cada uno**:
 
 **A1 #n — la retícula del ceiling cruza el wall.** En A02.01 **no hay ningún wall horizontal**
 que cruce la banda del wall en su tramo, y en el RCP **la retícula pasa de largo
-sobre el wall**, con un solo tag en esa banda: el `ACT-4 [valor retirado E24]` de CORRIDOR 111. El corridor
+sobre el wall**, con un solo tag en esa banda: el `ACT-4 [valor retirado E24]` de CORRIDOR [room]. El corridor
 sigue al norte del wall. Las dos faces son corridor y el sealed estaba bien.
 
 **A1 #n y #3 — el corridor no llega al nicho.** A02.01 pone el MWxx contra la face OESTE del #2

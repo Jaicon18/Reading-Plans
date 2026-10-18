@@ -42,4 +42,4 @@ estimador (partición "run"). Paquete CIEGO: SKILL.md, referencias/ y tools/ sin
 ## Pendiente conocido
 - Los canons reales de 18A/18B ya no cargan con canon.py v70 (las nuevas reglas los rechazan con motivo): es lo
   esperado; ver ARBITRAJE_18 para qué marca cada regla.
-- 3-5/8" stud: después de Waiting 104 quedan +315 (18A) / +141 (18B) sobre el rango sin arbitrar con plano.
+- 3-5/8" stud: después de Waiting [room] quedan +315 (18A) / +141 (18B) sobre el rango sin arbitrar con plano.

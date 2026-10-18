@@ -32,7 +32,7 @@ if ori == 'D':
     continue
 ```
 
-El wall **40** —el inclinado a 30° entre el 24 HR VESTIBULE 101 y el ATM ROOM 102, [valor retirado E24] LF— se saltaba **en silencio**. No aparecía ni en la lista de "con penetración", ni en la de "sin penetración", ni en la de falsos positivos.
+El wall **40** —el inclinado a 30° entre el 24 HR VESTIBULE [room] y el ATM ROOM [room], [valor retirado E24] LF— se saltaba **en silencio**. No aparecía ni en la lista de "con penetración", ni en la de "sin penetración", ni en la de falsos positivos.
 
 **Nunca se evaluó, y nada lo decía.** Los sellos verificaban, las cantidades cuadraban, la auditoría adversarial no lo vio.
 
