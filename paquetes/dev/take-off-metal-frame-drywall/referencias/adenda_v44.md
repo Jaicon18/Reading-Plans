@@ -24,7 +24,7 @@ no contra él"*. **Las nueve tienen razón y ninguna lo recoge.** Un huérfano p
 wall acierta al decir que no es suyo, y el elemento se cae por la grieta.
 
 **Segunda prueba: MWxx.** El MILLWORK SCHEDULE de A00.30 lo lista UNA vez; 8/A08.01 lo
-dibuja DOS veces dentro de JANITOR CLOSET 112. Un tag de schedule es una línea; una
+dibuja DOS veces dentro de JANITOR CLOSET [room]. Un tag de schedule es una línea; una
 instancia dibujada es otra cosa. **El barrido cuenta instancias, no líneas de schedule.**
 
 > Un schedule es una lista cerrada. Si el take-off no tiene un renglón por cada línea de
@@ -49,7 +49,7 @@ ninguno con un tag MW en la clave, y concluí: *"ninguno es de millwork"*. Cuant
 
 | MW | ya estaba en | método |
 |---|---|---|
-| MWxx | A1 #n, A1 #n | free edge + backing del printer cabinet, con el #3 razonando que el gabinete apoya en el #2 |
+| MWxx | A1 #n, A1 #n | free edge + backing del printer cabinet, con el #n razonando que el gabinete apoya en el #n |
 | MWxx | B #n | standards × height de cada uno |
 | MWxx | B #n | standards × height de cada uno |
 | MWxx | A5 #n | line item propia `BLOCKING:millwork`, runs × length |
@@ -130,7 +130,7 @@ haber reintroducido el defecto y haberla visto rechazar.**
 |---|---|---|---|
 | BLOCKING millwork | MWxx huérfano, 1 de 2 MWxx | **+[valor retirado E24] LF** ([valor retirado E24] total) | nota C de A02.01 + SHEET NOTE D de A12.04/05/06 + 8/A08.01 |
 | C1 #n length | [valor retirado E24] LF **[CONFIRMADO sin dimension]** | **[valor retirado E24] LF [DERIVADO]**, operación escrita | printed dimensions en A02.01 |
-| C1 #n y #39: studs | [valor retirado E24] pz c/u | **[valor retirado E24] pz c/u** (toe-to-toe stud post) | 8/S5.20 MECH. CHASE FRAMING IN WALL |
+| C1 #n y #n: studs | [valor retirado E24] pz c/u | **[valor retirado E24] pz c/u** (toe-to-toe stud post) | 8/S5.20 MECH. CHASE FRAMING IN WALL |
 | ceilings: CORNER_BEAD, PERIMETER_ANGLE, SHADOW_MOLDING, BRACING_SÍSMICO | **sin renglón** (ni cantidad ni exclusión) | exclusiones con motivo verificado + alterno [valor retirado E24] LF | 7/A09.33 y 3/A09.33 |
 | C1 board 6" sobre ceiling | supuesto escondido en una operación | exclusión declarada, delta [valor retirado E24] SF | 6/A12.01 contra 2, 3 y 12/A12.01 |
 | eje B como línea de zona B.O.D. | [DERIVADO] del par de vigas de S2.20 | confirmado por hoja propia | **9/S5.10 ROOF STEP AT GRID B** |

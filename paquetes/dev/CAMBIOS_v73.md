@@ -1,4 +1,4 @@
-# CAMBIOS v73 (2026-10-19) — la compuerta revisa consistencia con el plano
+# CAMBIOS v73 / v73b (2026-10-19) — la compuerta revisa consistencia con el plano
 
 Arbitraje de una prueba ciega (v72b): la compuerta de reglas inviolables dio OK y dos familias salieron fuera de
 rango con la regla escrita (ballistic / 3/8" y stud reinforcement MEP). Causa: los chequeos revisaban la FORMA del
@@ -43,3 +43,10 @@ consistencia y cierra los huecos de tools que reportó la prueba. Ningún valor 
 - Suite completa desde el zip desempacado en carpeta limpia: todas OK (`correr_suite.py`).
 - test_ciego_v69 sobre SKILL + referencias + docs de tools: 0 hallazgos. test_ciego_tools (con la lista externa del
   árbitro): 0 hallazgos.
+
+## v73b (revisión de ceguera del zip v73)
+- referencias/: quitados nombres y números reales de rooms y números de wall que quedaban en adendas viejas
+  (v27, v28, v30, v41, v44, v45): ahora "[room]" / "#n" / "wall A".
+- test_ciego_tools.py revisa también SKILL.md, referencias/*.md y los .md de tools: rooms con número 1xx (incl.
+  "calling cubes" y "break"), nombres propios de room de un set, "#<dígito>" suelto junto a un type y, con la lista
+  externa, cantidades de examen.

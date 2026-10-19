@@ -98,7 +98,7 @@ cantidad que ya está, o la validan por segunda fuente.
 
 | hallazgo | fuente |
 |---|---|
-| **B2 #n y #27: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
+| **B2 #n y #n: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
 | **El FRP va pegado con ADHESIVE directo al board, sin backer** — cierra el RFI del sustrato detrás del FRP | `3/A08.01 RESTROOM FRP/TILE DETAIL`, que lo dibuja y lo rotula |
 | `1/A11.03 NER ELEVATION` y `7/A11.03` llevan 3/4" FRT PLYWOOD y **se dejan fuera a propósito** | la corrección del 6-oct dejó escrito que las que corresponden son `3/A11.03` (210.00 pt = 5'-10" exactos) y `5/A11.03` (270.00 pt = [valor retirado E24] exactos), identificadas por **width medido** contra la dimensión impresa de la planta |
 | `4/A09.31 DETAIL AT VERTICAL CONTROL JOINT` es un **cuarto** sitio donde aparece CONTROL JOINT, y también es del estuco | la exclusión de proyecto decía "tres sitios"; su conclusión aguanta, su lista de evidencia no estaba completa |

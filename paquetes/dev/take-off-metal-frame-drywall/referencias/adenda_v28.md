@@ -6,7 +6,7 @@ Rodolfo preguntó por qué dos walls G idénticos tenían distinto número de st
 
 ## No era error: los studs de abertura
 
-| | #45 | #46 |
+| | wall A | wall B |
 |---|---|---|
 | length | [valor retirado E24] LF | idéntico |
 | height · O.C. · rows | [valor retirado E24] · 16" · 2 | idénticos |
@@ -15,9 +15,9 @@ Rodolfo preguntó por qué dos walls G idénticos tenían distinto número de st
 | **studs de abertura enmarcada de MEP** | **0** | **[valor retirado E24]** |
 | **total** | **[valor retirado E24]** | **[valor retirado E24]** |
 
-El #46 tiene **[valor retirado E24] penetraciones** de ducto en M01.01, cada una con dos studs por row: penetraciones × 2 × rows.
+El wall B tiene **[valor retirado E24] penetraciones** de ducto en M01.01, cada una con dos studs por row: penetraciones × 2 × rows.
 
-El #45 tuvo **un solo impacto y fue descartado con motivo**: en E02.01 el rótulo a 17 pt es `OS` con su `A` — un occupancy sensor montado en el wall, no una penetración. Una línea de lineweight bajo que muere en la face no atraviesa nada.
+El wall A tuvo **un solo impacto y fue descartado con motivo**: en E02.01 el rótulo a 17 pt es `OS` con su `A` — un occupancy sensor montado en el wall, no una penetración. Una línea de lineweight bajo que muere en la face no atraviesa nada.
 
 El gyp es idéntico y está bien: [valor retirado E24] × [valor retirado E24] × 2 layers = **[valor retirado E24] SF por face** en los dos. Los huecos de ducto (de área despreciable) no se deducen — está declarado en el cierre del cruce MEP, no escondido.
 

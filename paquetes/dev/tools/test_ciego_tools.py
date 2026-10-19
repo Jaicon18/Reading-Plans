@@ -45,8 +45,12 @@ P1_ESTRICTO = ("P1 estricto", re.compile(r"BOA(?!RD)|\bBofA\b|Broomfield|Bank of
                                          r"|/home/claude/boa|/home/user/boa|boa20", re.I))
 
 
-P6 = re.compile(r"(?i)\b(room|office|restroom|corridor|break ?room|storage|janitor|vestibule|lobby|wellness|"
-                r"electrical|work ?room|men|women|cash window|teller|calling)\b[^\n\"']{0,15}?\b1\d\d[A-Z]?\b")
+P6 = re.compile(r"(?i)\b(room|office|restroom|corridor|break ?room|break|storage|janitor|vestibule|lobby|wellness|"
+                r"electrical|work ?room|men|women|cash window|teller|calling|calling cubes)\b[^\n\"']{0,15}?\b1\d\d[A-Z]?\b")
+# v73b: en los .md (SKILL + referencias/) además: nombre propio de room de un set ("Calling Cubes", "Cash Window") y
+# número de wall suelto junto a un type ("A1 #3", "del #2", "este del #7"); los genéricos usan "#n" / "[room]".
+P6_MD = re.compile(r"\b(Calling Cubes|CALLING CUBES|Cash Window|CASH WINDOW)\b")   # nombre propio, no el tipo de abertura
+P7_MD = re.compile(r"(?:\b[A-H]\d?K?\s*#\d+\b|\b(?:del|al|el|wall|y)\s+#\d+\b)")
 P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
 P7 = re.compile(r"^(?:[A-H]\d?K?|EXT-\d+)-\d{1,2}[a-z]?$")
 _VALORES = None
@@ -205,7 +209,51 @@ def autoprueba():
     hl = revisar_literales(lit_malo, "lm", [12.345])
     assert {h.split(": ")[1] for h in hl} >= {"P6 room real", "P7 wall ID real", "P8 cantidad de la referencia"}, hl
     assert revisar_literales(lit_bueno, "lb", [12.345]) == [], revisar_literales(lit_bueno, "lb", [12.345])
+    md_malo = "La face ESTE es Cash Window 908.\nA1 #3 contra la face OESTE del #2.\nBreak 118 al sur.\n"
+    md_bueno = "La face ESTE es [room].\nA1 #n contra la face OESTE del #n. Ver 6/A12.01 y §4; regla #0.\n"
+    assert len(revisar_md(md_malo, "m")) == 3, revisar_md(md_malo, "m")
+    assert revisar_md(md_bueno, "b") == [], revisar_md(md_bueno, "b")
     return "autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, 0 falsos positivos)"
+
+
+def revisar_md(texto, nombre="<md>"):
+    """v73b: P6 / P7 / P8 sobre el texto de SKILL.md y referencias/*.md (antes solo lo revisaba test_ciego_v69, que no
+    tiene rooms ni números de wall)."""
+    hall = []
+    for n, ln in enumerate(texto.splitlines(), 1):
+        if OK in ln:
+            continue
+        for et, rx in (("P6 room real", P6), ("P6 room real", P6_MD), ("P7 wall ID real", P7_MD)):
+            m = rx.search(ln)
+            if m:
+                hall.append(f"{nombre}:{n}: {et}: …{ln[max(0, m.start() - 30):m.end() + 30].strip()}…")
+                break
+        if _VALORES:
+            import bisect
+            for m in re.finditer(r"(?<![\d.])\d+\.\d{2,3}(?![\d])", ln):
+                v = float(m.group(0))
+                if ln[max(0, m.start() - 4):m.start()].rstrip().endswith(("/A", "A", "S", "/S")) or \
+                        re.search(r"[A-Z]\d{0,2}$", ln[max(0, m.start() - 3):m.start()]):
+                    continue                                   # número de hoja (A12.01, S5.20)
+                i = bisect.bisect_left(_VALORES, v - 0.0005)
+                if i < len(_VALORES) and abs(_VALORES[i] - v) <= 0.0005 and \
+                        abs(v * 48 - round(v * 48)) / 48 > 0.0035:
+                    hall.append(f"{nombre}:{n}: P8 cantidad de la referencia: {m.group(0)}")
+    return hall
+
+
+def archivos_md(d):
+    out = []
+    sk = None
+    for c in (os.environ.get("TAKEOFF_SKILL"), os.path.join(d, "..", "take-off-metal-frame-drywall")):
+        if c and os.path.isfile(os.path.join(c, "SKILL.md")):
+            sk = c
+            break
+    if sk:
+        for base, _, fs in os.walk(sk):
+            out += [os.path.join(base, f) for f in sorted(fs) if f.endswith(".md")]
+    out += [os.path.join(d, f) for f in sorted(os.listdir(d)) if f.endswith(".md")]
+    return out
 
 
 def archivos(argv):
@@ -234,6 +282,9 @@ def main(argv):
         if b not in ("test_ciego.py", "test_ciego_v69.py", "test_ciego_tools.py"):
             hall += revisar_fuente(t, b)
         hall += revisar_literales(t, b, _VALORES) if b != "test_ciego_tools.py" else []
+    if not a:                                        # v73b: también SKILL.md, referencias/*.md y los .md de tools
+        for f in archivos_md(os.path.dirname(os.path.abspath(__file__))):
+            hall += revisar_md(open(f, encoding="utf-8").read(), os.path.relpath(f))
     for h in hall:
         print(h)
     print(f"test_ciego_tools: {len(fs)} archivo(s) (tests y fixtures incluidos), P8 con "

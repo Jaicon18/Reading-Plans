@@ -10,7 +10,7 @@ El wall A1 #n decía **Layers 4**. No tiene 4 layers: tiene **2** (una de 5/8" p
 |---|---|---|---|
 | Corridor [room] | [valor retirado E24] LF (face oeste completa) | [valor retirado E24] | — |
 | Break Room [room] | [valor retirado E24] LF | [valor retirado E24] | ACT-5 a [valor retirado E24] + 6" |
-| Electrical 120 | [valor retirado E24] LF | [valor retirado E24] | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
+| Electrical [room] | [valor retirado E24] LF | [valor retirado E24] | A04.01 key note 1 `OPEN TO STRUCTURE ABOVE` |
 | NER [room] | [valor retirado E24] LF | [valor retirado E24] | mismo key note, deck interpolado |
 
 la suma de los tramos = **[valor retirado E24] LF** = el length del wall. El generador sumaba `1+1+1+1`.
