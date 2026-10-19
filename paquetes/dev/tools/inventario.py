@@ -229,7 +229,7 @@ def _purlin(data, bandas):
             runs.setdefault(k, []).append(w["id"])
     dob = {k: v for k, v in runs.items() if len(v) > 1}
     if dob:
-        raise ValueError(f"roof_step con purlin en más de una fila del mismo run: {dob} — una pieza (59.1, #13B RS-3)")
+        raise ValueError(f"roof_step con purlin en más de una fila del mismo run: {dob} — una pieza (59.1)")
 
 
 def _rfi_split(data):

@@ -1,4 +1,4 @@
-# CAMBIOS v73 / v73b / v73c (2026-10-19) — la compuerta revisa consistencia con el plano
+# CAMBIOS v73 / v73b / v73c / v73d (2026-10-19) — la compuerta revisa consistencia con el plano
 
 Arbitraje de una prueba ciega (v72b): la compuerta de reglas inviolables dio OK y dos familias salieron fuera de
 rango con la regla escrita (ballistic / 3/8" y stud reinforcement MEP). Causa: los chequeos revisaban la FORMA del
@@ -58,3 +58,17 @@ consistencia y cierra los huecos de tools que reportó la prueba. Ningún valor 
 - tools/: comentarios de dataset.py, verif_callouts.py, closer.py y herramientas.md sin rooms, doors ni valores del set.
 - test_ciego_tools.py: P9 (baño / puerta / fila / vestíbulo / muro / wall / door + número, 1xx entre comillas o
   corchetes, CIELO-nn) y P10 (número en un renglón de "Ejemplo real") en .md y en comentarios / docstrings de tools.
+
+## v73d (enfoque sistemático: dos paquetes)
+- **v73d-dev**: todo (tests, fixtures, adendas completas) para desarrollo.
+- **v73d-ciego**: el que usan las pruebas, armado por `tools/armar_ciego.py` (vive solo en dev):
+  sin test_*.py ni fixtures (solo `test_smoke_ciego.py`, canon 100 % inventado, y los dos checkers), sin las tools
+  muertas (auditor, hoja_detalle_img, localizar, cruzar_mep); adendas reescritas GENÉRICAS conservando cada título de
+  regla (fuera tablas y bloques de código; todo número que no sea medida genérica pasa a "<n>"); REGLAS_INVIOLABLES.md
+  regenerada con el catálogo del árbol ciego. El armador NO arma el zip si `test_ciego_tools.py --estricto` da > 0.
+- `test_ciego_tools.py --estricto`: P11 número junto a wall / muro / door / puerta / room / canopy / cielo / fila / tag;
+  P12 ids de cierre PALABRA-nn; P13 nombres de archivo con prefijo de proyecto; [ciego-ok] solo en tablas genéricas
+  con fuente de fabricante; revisa .md, comentarios, docstrings y textos del código de producción.
+- Código de producción: fuera los ejemplos con datos del set en comentarios y mensajes (canopy, CSR soffit, tags de
+  acabado del set, números de wall, filas del libro); los sets de claves de resumen_* ya no traen un código de
+  acabado del set.

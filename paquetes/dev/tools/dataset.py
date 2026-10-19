@@ -169,8 +169,8 @@ def muros():
             caras = [c for c in caras if 'sheathing' not in (c['cara'] or '').lower()]
             # CAPAS = capas TOTALES contando las dos caras, no la suma de las filas.
             # Un lado que da a varios cuartos con cielos distintos se parte en varias
-            # filas de cara, y sumarlas da 4 donde solo hay 2 capas (muros 8, 21, 23,
-            # 27 y 28). Se calcula por CAPA-PIES / largo del muro, que es lo que la
+            # filas de cara, y sumarlas da 4 donde solo hay 2 capas (varios walls de
+            # una prueba). Se calcula por CAPA-PIES / largo del muro, que es lo que la
             # columna Layers del formato quiere decir. Corregido 28-sep-2026.
             _L = w['largo']['v'] or 0
             capas = (round(sum(c['capas'] * (c['largo'] or 0) for c in caras) / _L, 2)

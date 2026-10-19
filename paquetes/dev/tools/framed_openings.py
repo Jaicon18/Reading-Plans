@@ -34,7 +34,7 @@ REGLAS:
   - LF = 2 x (largo + ancho) x qty   (round: 4 x diámetro x qty, hueco cuadrado)
   - v62 (arbitraje #12): con items de ceiling, "sweep" es obligatorio: {"sheets": [...] con al menos una
     hoja M (air devices / slot diffusers en GWB) y una E (fixtures)}; si no hay ningún air_device de ceiling
-    se exige sweep.no_air_devices_why. #12A no barrió M01.01 y omitió las SD slot diffusers (TBDI-10) de los
+    se exige sweep.no_air_devices_why. #12A no barrió M01.01 y omitió las SD slot diffusers (TBDI-nn) de los
     GWB ceilings de varios rooms (ref v4 <n> LF) -> <n> contra <n>.
   - v65 (arbitraje #14): con fixtures (category light) de ceiling, "tag_counts" es obligatorio = salida de
     contar_tags.py sobre la hoja E ({tag: {"count": n, "sheet": "E02.01"}}). Por tag: Σ qty <= count; si es

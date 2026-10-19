@@ -33,9 +33,9 @@ PDF = VD.PDF
 CACHE = f'{_TW}/callouts_cache.json'
 
 # LA CADENA SE SIGUE HASTA EL FINAL (orden de Rodolfo, 2-oct-2026: "tienes que revisar todos
-# y cada uno de los detalles, por ejemplo en el canopy 84 son 3... pero en otros habra mas").
+# y cada uno de los detalles, por ejemplo en un canopy son varios... pero en otros habra mas").
 #
-# Un detalle LLAMA A OTRO detalle. El canopy 84 son TRES eslabones:
+# Un detalle LLAMA A OTRO detalle. En un canopy son varios eslabones:
 #   soffit plan (burbuja D/A9.22) -> D/A09.22 SECTION (burbuja 7/A09.26) -> 7/A09.26 SIDE CANOPY
 # y la seccion D sola llama a CINCO (4/A09.26, 7/A09.26, 11/A09.27, 10/A09.27, 5/A09.26).
 #

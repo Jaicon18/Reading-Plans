@@ -19,7 +19,7 @@ ENTRADA:
 
 Bloques OPCIONALES nuevos en takeoff_canon.json (todos con source):
   constants.<yield> {value, source}  sobrescribe el default del estimador (tabla DEFAULTS).
-  constants.level5_tags {value: ["WC-18", ...], source}  tags del finish schedule que dicen LEVEL 5.
+  constants.level5_tags {value: ["WC-nn", ...], source}  tags del finish schedule que dicen LEVEL 5.
   level5_items[].wc_tag, level5_items[].base_ft {value, source}  (altura neta = h - base, key note de la base).
   walls[grille_head].stud_len_ft {value, source}  o  walls[grille_head].head_build
       {head_ft, box_depth_ft, n_box, board_in, source}  (largo del 2-1/2" entre los dos box beams).
@@ -262,7 +262,7 @@ def penetraciones(data, fo):
         sal.append(p)
     out[:] = sal
     vistos = {str(p["ref"]) for p in out}
-    # v72 (R72.5, arbitraje #20): el mismo fire damper listado en el opening_schedule ("FD-1 ... 14x14") y en el
+    # v72 (R72.5, arbitraje #20): el mismo fire damper listado en el opening_schedule ("FD-n ... WxH") y en el
     # barrido (mep_penetrations "FD ... 14x14") se contaba dos veces: se descuenta por tamaño (multiconjunto WxH).
     fd_barrido = Counter(_tam(p["ref"]) for p in out if re.match(r"(?i)^\s*(FD|fire damper)", str(p["ref"])) and _tam(p["ref"]))
     for it in (data.get("opening_schedule") or {}).get("items") or []:

@@ -135,7 +135,7 @@ def verificar(path):
         if isinstance(f, str) and f.startswith('=SUM('):
             m = re.match(r'=SUM\([A-Z]+(\d+):[A-Z]+(\d+)\)', f)
             if m and (int(m.group(1)) > 5 or int(m.group(2)) < ultP):
-                F.append('Partition Takeoff col %s: el rango %s no cubre las filas 5..%d'
+                F.append('Partition Takeoff col %s: el rango %s no cubre los renglones de datos (5..%d)'
                          % (CL(c), f, ultP))
 
     # ---- 2. toda referencia cruzada del resumen apunta a una fila de TOTALES ----

@@ -132,7 +132,7 @@ def test_roof_step_una_purlin_por_run_13b():
     rs = [{"id": f"RS-{i}", "element": "roof_step", "stud_size": "3-5/8\"", "length_ft": 50.0, "height_ft": h,
            "straight_run": "B", "purlin": p, "source": "4/A02.02"} for i, h, p in ((1, 3.3, False), (2, 3.49, True),
                                                                                     (3, 1.18, True))]
-    _falla(D(*rs, deck_flute_dir={"value": "H", "source": "S2.20"}), "una pieza (59.1, #13B RS-3)")
+    _falla(D(*rs, deck_flute_dir={"value": "H", "source": "S2.20"}), "una pieza (59.1)")
     rs[2]["purlin"] = False
     I.verificar(D(*rs, deck_flute_dir={"value": "H", "source": "S2.20"}))
 

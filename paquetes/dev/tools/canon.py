@@ -77,7 +77,7 @@ v65 (arbitraje #14A/#14B, 17-oct-2026) — lo que todavía variaba o faltaba ent
 v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — header / sill son REGLAS, no parámetros:
   - header_params se rechaza (v65 lo pasaba a headers.py con default = v64).
   - #19 abertura con "OR STEEL" (or_steel: true u "OR STEEL" en header_type) y header steel_by_others = error.
-  - #20 box = 4 piezas, #21 door <ref> double, #18 sill double > 4'-0", #22 office front CONT. BOX BEAM un run por
+  - #20 box = 4 piezas, door <ref> double (#21), #18 sill double > 4'-0", #22 office front CONT. BOX BEAM un run por
     frente (continuous_run + wall): los valida headers.py; canon pasa continuous_run / or_steel.
 
 v66 (arbitraje #15A/#15B, 17-oct-2026) — reglas deterministas nuevas (cada una con test en test_canon_v66.py):
@@ -353,7 +353,7 @@ def generar(data):
                                     else {})) for w in walls] + [dict(r, id=r["id"]) for r in runs_extra])
     for r in runs_extra:
         if r.get("element") in ("parapet", "column_wrap", "pier") or _es_parapet(r):
-            # v68: sus studs solo se cuentan desde walls (E3 / wraps); en runs se perdían sin aviso (como TR-104 #16B)
+            # v68: sus studs solo se cuentan desde walls (E3 / wraps); en runs se perdían sin aviso (como una transición TR-nnn de una prueba)
             raise ValueError(f"{r['id']}: element {r.get('element')} va en walls, no en runs (sus studs salen de "
                              f"walls; v68)")
         if r.get("element") == "ceiling_perimeter":
@@ -469,7 +469,7 @@ def _v65b_or_steel(o, hdr):
 def _v65_checks(data):
     """Reglas deterministas del arbitraje #14 (17-oct-2026) que no necesitan totales."""
     if data.get("header_params") is not None:
-        raise ValueError("header_params ya no existe (v65b): sill double > 4'-0\", GL-2 metal box, box = 4 piezas, "
+        raise ValueError("header_params ya no existe (v65b): sill double > 4'-0\", window metal box, box = 4 piezas, "
                          "door double y office front continuo son reglas (decisiones usuario #18-#22)")
     walls = data.get("walls") or []
     por_id = {w["id"]: w for w in walls}
@@ -629,7 +629,7 @@ def _v68_checks(data):
         d = c.get("detail")
         if c.get("system") in SUSP and not d and not str(c.get("detail_none_reason") or "").strip():
             raise ValueError(f"{c['room']}: ceiling suspendido sin detail (N/HOJA) ni detail_none_reason (v68: #16B "
-                             f"116 CSR soffit 10/A09.33 como furring con hangers)")
+                             f"un CSR soffit de detalle propio como furring con hangers)")
         cs = (det.get(d) or {}).get("ceiling_system") if d else None
         if cs and cs != c.get("system"):
             raise ValueError(f"{c['room']}: system {c.get('system')} != details['{d}'].ceiling_system {cs}")

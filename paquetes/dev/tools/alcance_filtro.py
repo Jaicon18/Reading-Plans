@@ -11,7 +11,7 @@ ENTRADA (JSON):
 {
   "rows": [{
       "id": "M12", "family": "furring channel",
-      "description": "7/8\" hat channel @ 16\" O.C. at EPS-5 metal panel",
+      "description": "7/8\" hat channel @ 16\" O.C. at EPS-n metal panel",
       "qty": 746.0, "unit": "LF", "source": "2/A09.31",
       "substrate_of": "cladding",                     # opcional: drywall | cladding (obligatorio si ambiguo)
       "substrate_source": "2/A09.31"}]                # obligatorio con substrate_of

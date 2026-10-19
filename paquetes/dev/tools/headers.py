@@ -34,7 +34,7 @@ v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — REGLAS fijas, ya no pará
   #18 sill: DOUBLE sill track en R.O. > 4'-0" SIEMPRE (2/S5.20 "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG >4'-0""
       + "INVERT DETAIL FOR SILL CONDITION"). Sin sill_rule en la entrada se aplica 4'-0" / 2/S5.20. sill_pieces
       menor que la regla = error.
-  #19 "METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED" (GL-2, 11/A09.27): METAL STUD BOX BEAM. Abertura con
+  #19 "METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED" (window head detail): METAL STUD BOX BEAM. Abertura con
       or_steel: true u "OR STEEL" en header_type -> structure HSS / steel = error (v66: sin nombres de un proyecto).
   #20 TODO box beam / box header ("BOX" en header_type) = 4 PIEZAS (2 C + 2 track). pieces != 4 = error.
       Casos típicos: storefront / glazing box, office front, coiling grille, vestibule head, door exterior con

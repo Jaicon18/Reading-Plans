@@ -24,7 +24,7 @@ COMO SE DERIVA EL ORDEN, sin teclearlo a mano:
      El detalle que esa seccion llama = nivel 2. Y asi.
   3. Los SCHEDULES (S5.20, A12.01, A00.30...) van SIEMPRE al final aunque el grafo les de
      poca profundidad: no son un eslabon de la cadena, son la tabla donde se mira el perfil
-     despues de saber que elemento es. El canopy 84 lo muestra: 7/A09.26 no rotula spacing,
+     despues de saber que elemento es. Un canopy lo muestra: 7/A09.26 no rotula spacing,
      asi que el ultimo eslabon real es 7/S5.20 y ahi termina.
   4. Dentro de un mismo nivel se ordena por hoja y por etiqueta, para que dos runs del
      generador den exactamente la misma cadena.

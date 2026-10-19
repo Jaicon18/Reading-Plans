@@ -293,7 +293,7 @@ def types_schedule(hojas, cache):
 
 # -------------------------------------------------------------------------------------------------- ocurrencias
 def _firma(t):
-    """Forma de un sheet number: Z09.01 y Z9.01 -> 'L9.9'; EQ-2 -> 'L-9' (para no tomar equipos por hojas)."""
+    """Forma de un sheet number: Z09.01 y Z9.01 -> 'L9.9'; EQn-n -> 'L-9' (para no tomar equipos por hojas)."""
     return re.sub(r"[A-Z]+", "L", re.sub(r"\d+", "9", t))
 
 

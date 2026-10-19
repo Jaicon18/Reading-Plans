@@ -1125,8 +1125,8 @@ EJEMPLO = {
                    "selling_unit": "stick 20 ft", "stock": 20, "cut_ft": 12.0, "source": "Partition Takeoff; 3/A12.01"},
                   {"material": "5/8\" gypsum board, regular", "unit": "SF", "net": 480.0, "metal": False,
                    "selling_unit": "4x12 ft sheet", "source": "Partition Takeoff col Board"}],
-    "rfis": [{"id": "RFI-01", "pregunta": "Height of wall #1 not dimensioned", "delta": "+/- 24 SF"}],
-    "revisar": [{"n": 1, "punto": "Confirm height of wall #1", "hoja_detalle": "3/A12.01", "imagen": "R01.jpg"}],
+    "rfis": [{"id": "RFI-01", "pregunta": "Height of wall W1 not dimensioned", "delta": "+/- 24 SF"}],
+    "revisar": [{"n": 1, "punto": "Confirm height of wall W1", "hoja_detalle": "3/A12.01", "imagen": "R01.jpg"}],
     "alcances": [{"id": "ALC-01", "nombre": "Interior partition framing", "estado": "CUANTIFICADO",
                   "nota": "Partition Takeoff"}],
 }

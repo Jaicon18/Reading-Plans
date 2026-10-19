@@ -23,7 +23,7 @@ Uso:
         Los pendiente_rfi pasan (salen en la lista PARA REVISAR).
 
 Para marcar un alcance:
-  registro.py marcar <registro.json> ALC-07 verificado "Takeoff fila 12-18, Ceilings GWB; 1/A04.01"
+  registro.py marcar <registro.json> ALC-07 verificado "Takeoff renglones de ceilings GWB; N/HOJA del RCP"
   registro.py marcar <registro.json> ALC-21 verificado "NO APLICA: A02.01 sin shaft walls; S1.14 solo cita shaft de elevador existente"
 """
 import json, os, re, subprocess, sys

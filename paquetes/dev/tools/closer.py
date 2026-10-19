@@ -71,7 +71,7 @@ BOARDLIKE = ("BOARD",)
 # hojas S podia declararse CONFIRMADO. Ahora acepta las dos numeraciones reales:
 #   con punto   A02.01 A12.01 S5.20 S2.20 A4.01 M01.01 P01.02 E02.01
 #   con guion   A-410 A-101 S-201   (exactamente 3 digitos, para no tragarse codigos
-#                                    de material como P-15, GL-3, B-11, TS-1, CT-12C)
+#                                    de material como P-nn, GL-n, B-nn, TS-n, CT-nnX)
 RE_HOJA = re.compile(r"\b[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")
 RE_DET = re.compile(r"\b\d{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")
 RE_NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")   # v70: 7/S5.20, J/A09.23

@@ -56,6 +56,14 @@ P7_MD = re.compile(r"(?:\b[A-H]\d?K?\s*#\d+\b|\b(?:del|al|el|wall|y)\s+#\d+\b)")
 P9_MD = re.compile(r"(?i)\b(baño|bano|fila|vest[ií]bulo|cuarto|sala|room)\s+#?1\d\d\b"
                    r"|\b(puerta|muro|wall|door)\s+#?(1\d\d|\d{2})\b"
                    r"|['\"`\[]1\d\d[A-Z]?['\"`\]]|\bCIELO-\d+\b|\bal 1\d\d\b")
+# v73d (--estricto, zip ciego): cualquier número junto a wall / muro / door / puerta / room / canopy / cielo / fila / tag;
+# ids de cierre PALABRA-nn; nombres BOA_*; [ciego-ok] solo vale en tablas genéricas con fuente de fabricante.
+P11_EST = re.compile(r"(?i)\b(walls?|muros?|doors?|puertas?|rooms?|canopy|cielos?|filas?|tags?)\s*#?\[?\d+(?![\w.])|"
+                     r"(?<![\w./])(?![1-3]\s+walls\b)\d+\s*(?:walls?|muros?|doors?|puertas?|rooms?|tags?)\b")
+P12_EST = re.compile(r"\b(?!RFI-|ALC-|ADV|GA-|LEVEL-|ISO-|ASTM-)[A-Z]{2,}-\d+[A-Z]?\b")
+P13_EST = re.compile(r"BOA_")
+OK_FABRICANTE = re.compile(r"(?i)AISC|GA-216|ASTM|manufacturer|fabricante|SSMA|UL ?\d")
+ESTRICTO = [False]
 P10_MD = re.compile(r"(?i)ejemplo real[^\n]*?\b\d{2,}\b")
 P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
 P7 = re.compile(r"^(?:[A-H]\d?K?|EXT-\d+)-\d{1,2}[a-z]?$")
@@ -228,8 +236,15 @@ def revisar_md(texto, nombre="<md>"):
     tiene rooms ni números de wall)."""
     hall = []
     for n, ln in enumerate(texto.splitlines(), 1):
-        if OK in ln:
+        if OK in ln and not (ESTRICTO[0] and not OK_FABRICANTE.search(ln)):
             continue
+        if ESTRICTO[0]:
+            for et, rx in (("P11 número junto a wall/door/room/tag", P11_EST), ("P12 id de cierre del set", P12_EST),
+                           ("P13 nombre BOA_", P13_EST)):
+                m = rx.search(ln)
+                if m:
+                    hall.append(f"{nombre}:{n}: {et}: …{ln[max(0, m.start() - 30):m.end() + 30].strip()}…")
+                    break
         for et, rx in (("P6 room real", P6), ("P6 room real", P6_MD), ("P7 wall ID real", P7_MD),
                        ("P9 room / door / wall real", P9_MD), ("P10 ejemplo real con número", P10_MD)):
             m = rx.search(ln)
@@ -265,6 +280,20 @@ def _comentarios(texto):
     return "\n".join(ln if i + 1 in keep else "" for i, ln in enumerate(lineas))
 
 
+def _literales(texto):
+    """Cada literal de texto del código en su propio renglón (sin docstrings, que ya revisa _comentarios)."""
+    try:
+        arbol = ast.parse(texto)
+    except SyntaxError:
+        return ""
+    doc = _docstring_lineas(arbol)
+    out = []
+    for nodo in ast.walk(arbol):
+        if isinstance(nodo, ast.Constant) and isinstance(nodo.value, str) and nodo.lineno not in doc:
+            out.append(nodo.value.replace("\n", " "))
+    return "\n".join(out)
+
+
 def archivos_md(d):
     out = []
     sk = None
@@ -289,6 +318,9 @@ def archivos(argv):
 def main(argv):
     print(autoprueba())
     a = list(argv[1:])
+    if "--estricto" in a:
+        ESTRICTO[0] = True
+        a.remove("--estricto")
     if "--valores" in a:
         i = a.index("--valores")
         valores(a[i + 1])
@@ -306,6 +338,8 @@ def main(argv):
             hall += revisar_fuente(t, b)
             if not b.startswith("test_"):              # v73c: P6–P10 en comentarios y docstrings de las tools
                 hall += revisar_md(_comentarios(t), b)
+                if ESTRICTO[0]:                           # v73d: y en los textos (mensajes, nombres) del código
+                    hall += revisar_md(_literales(t), b + "(textos)")
         hall += revisar_literales(t, b, _VALORES) if b != "test_ciego_tools.py" else []
     if not a:                                        # v73b: también SKILL.md, referencias/*.md y los .md de tools
         for f in archivos_md(os.path.dirname(os.path.abspath(__file__))):

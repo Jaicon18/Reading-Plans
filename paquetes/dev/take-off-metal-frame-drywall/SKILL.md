@@ -589,7 +589,7 @@ Por qué: en una prueba ciega la compuerta v72b dio OK y dos familias salieron f
 
 Tools nuevas v73: `cotas_banda.py`, `chequeos_v73.py`, `planmark.py` (contrato de referencias/herramientas.md),
 `glosario.py`, `vocab_trade.py`, `verif_respuesta.py`, `indice_set.py` genérico (arma su cache con pymupdf).
-`test_ciego_tools.py` revisa también test_*.py y fixtures (rooms 1xx, ids de wall de planta, cantidades de una lista
+`test_ciego_tools.py` revisa también test_*.py y fixtures (rooms de tres dígitos, ids de wall de planta, cantidades de una lista
 externa de examen que NO viaja en el paquete).
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
@@ -642,7 +642,7 @@ Los términos de oficio van SIEMPRE en inglés, nunca traducidos: jambs, dimensi
 
 Todo take-off se entrega en el formato del usuario, **"Organized Partition Takeoff Estimator"**, y **en inglés**. Una fila por line item — partitions y también scope que no es partition (floor demo, áreas de FRP). Al final, fila de totales y debajo la conversión a unidad de compra.
 
-Columnas base, en este orden: `Partition / Scope` · `Length (LF)` · `Height (FT)` · `Layers` · `6" Metal Stud (LF)` · `3-5/8" Metal Stud (LF)` · `5/8" Gyp Board (SF)` · `FRP-1 (SF)` · `FRP-2 (SF)` · `Durock (SF)` · `Demolition (SF)` · `Labor (Hrs)`.
+Columnas base, en este orden: `Partition / Scope` · `Length (LF)` · `Height (FT)` · `Layers` · `6" Metal Stud (LF)` · `3-5/8" Metal Stud (LF)` · `5/8" Gyp Board (SF)` · `FRP-n (SF)` · `Durock (SF)` · `Demolition (SF)` · `Labor (Hrs)`.
 
 Aritmética del formato:
 - Board SF = `Length × Height × Layers`.
@@ -2175,7 +2175,7 @@ deflection track bajo la viga (ej. 10/S5.10). Nunca B.O.D.
 
 ## ⛔ REGLA 60.4 — SUSTRATO DE CLADDING NO ES FURRING
 Hat channel / Z-girt / furring del metal panel, ACM o stucco es del instalador del cladding: renglón EXCLUDED +
-RFI con delta; nunca en la familia furring channel (ej. 2/A09.31 EPS-5).
+RFI con delta; nunca en la familia furring channel (ej. un panel EPS-n).
 
 ## ⛔ REGLA 60.5 — HEADER LF UNA VEZ POR ABERTURA
 Header = (R.O. + 1'-4") × 1. El tipo del header schedule (single/double track, 2-CSJ, box) va en la descripción;

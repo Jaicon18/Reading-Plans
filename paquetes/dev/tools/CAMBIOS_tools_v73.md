@@ -18,6 +18,6 @@ Cambiadas:
 - indice_set.py: genérico, sin coordenadas de un set; arma su propio cache (P05).
 - registro.py: `corregir` (F01).
 - eval_takeoff.py: rango min == max manda; _partition_types; modo "consistencia" no califica; bloque OTHER no sobra.
-- test_ciego_tools.py: revisa test_*.py y fixtures; P6 rooms 1xx, P7 ids de wall de planta, P8 lista externa.
-- tests con datos sintéticos (rooms 9xx, ids X / Y / Q, hojas Z): test_canon, test_closer, test_headers,
+- test_ciego_tools.py: revisa test_*.py y fixtures; P6 rooms de tres dígitos, P7 ids de wall de planta, P8 lista externa.
+- tests con datos sintéticos (rooms, ids y hojas inventados): test_canon, test_closer, test_headers,
   test_inventario, test_studs_nodos, test_corridas, test_etapas_v70, test_esquinas, test_framed_openings…
