@@ -22,7 +22,7 @@ def canon():
         w("S2", "X1", "H", 100, 182, 360),         # colineal y contiguo a S1 (hueco 2 pt)
         w("S3", "X1", "V", 360, 100, 280),         # esquina L al final de S2
         w("S4", "X1", "V", 90, 102, 280),          # T contra el costado de S1
-        w("S5", "X1", "V", 0, 100, 114.4),         # jog 0.8 ft en el extremo de S1
+        w("S5", "X1", "V", 0, 100, 114.4),         # jog 0.8 ft en el extremo de S1  [ciego-ok]
         w("S6", "X1", "H", 100, 0, 180, sheet="Z1.02"),   # misma geometría, otra hoja
         {"id": "S7", "tag": "X1", "length_ft": 4.0, "sheet": "Z1.01"},   # sin band
         w("S8", "X2", "H", 100, 362, 400),         # otro type colineal: no se une

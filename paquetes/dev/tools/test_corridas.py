@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests de corridas.py v62 (+ arbitraje #12) con las corridas reales de BOA Broomfield #11A (arbitraje #11).
+"""Tests de corridas.py v62 (+ arbitraje #12) con las corridas de un proyecto de prueba #11A (arbitraje #11).
 Correr: python3 test_corridas.py"""
 import os
 import sys
@@ -79,7 +79,7 @@ def test_purlin_doble_row_una_pieza():
 
 def test_bottom_track_doors_rfi_y_descuento():
     """#12A RFI-30: door 3.0 en wall 16.5 x 1 row: bottom 16.5 sin descuento + RFI con el delta."""
-    run = {"id": "A1-8", "element": "wall", "orientation": "vertical", "length_ft": 16.5, "height_ft": 15.25,
+    run = {"id": "W-t", "element": "wall", "orientation": "vertical", "length_ft": 16.5, "height_ft": 15.25,
            "openings": [{"kind": "door", "ro_w_ft": 3.0, "sill_ft": 0, "head_ft": 7.333}], "source": "3/A12.01"}
     d = {"bracing": {"spacing_in": 48, "source": "F/1/S5.20"}, "runs": [dict(run)]}
     o = C.calcular(d)
@@ -134,7 +134,7 @@ def test_dato_malo_fascia_como_bottom_top():
 
 
 def test_dato_malo_drop_declarado_como_wall():
-    """#11B: drop/transición de Waiting 104 (7/A09.33) declarado 'wall' para cargarlo a bottom/top."""
+    """#11B: drop/transición de Waiting 904 (7/A09.33) declarado 'wall' para cargarlo a bottom/top."""
     d = otras_sinteticas()
     d["runs"][3]["element"] = "wall"
     t = C.calcular(d)["totales_lf"]

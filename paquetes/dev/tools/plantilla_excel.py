@@ -534,8 +534,8 @@ _YIELD_RX = {   # familia -> regex sobre la operación de accesorios.py: (yield,
     "joint compound": re.compile(_NUM + r" x \(.*= " + _NUM + r" SF\)"),
     "joint tape": re.compile(_NUM + r" x \(.*= " + _NUM + r" SF\)"),
     "framing screws": re.compile(_NUM + r" x (\d+) (?:piezas|stud pieces)"),
-    "slab pins": re.compile(r"sobre losa " + _NUM + r" LF.*/ " + _NUM + r" ="),
-    "expansion anchors": re.compile(r"sobre losa " + _NUM + r" LF.*/ " + _NUM + r" ="),
+    "slab pins": re.compile(r"(?:sobre losa|on slab) " + _NUM + r" LF.*/ " + _NUM + r" ="),
+    "expansion anchors": re.compile(r"(?:sobre losa|on slab) " + _NUM + r" LF.*/ " + _NUM + r" ="),
 }
 _DIV = ("slab pins", "expansion anchors")      # driver / yield (spacing); el resto yield x driver
 _DRIVER_EN = {"drywall screws": "SF of board", "joint compound": "SF of board", "joint tape": "SF of board",
@@ -618,6 +618,50 @@ def _slug(t):
     return re.sub(r"[^a-z0-9]+", "-", str(t).lower()).strip("-")[:24]
 
 
+# v73 (R73.3, arbitraje #21): nombre de renglón de la PLANTILLA del estimador por familia (genérico: ningún dato de
+# proyecto; {th} / {oc} salen del canon vía familias_out.nombres_contexto). Un renglón que cita su familia toma este
+# nombre aunque la corrida haya escrito otro: el calificador y el estimador leen siempre el mismo renglón.
+NOMBRES_PLANTILLA = {
+    "6\" stud (todos los gauges)": "6\" metal stud (LF of material)",
+    "3-5/8\" stud (todos los gauges)": "3-5/8\" metal stud (LF of material)",
+    "1-5/8\" stud": "1-5/8\" metal stud (LF of material)",
+    "6\" parapet stud": "6\" parapet infill stud (LF of material)",
+    "track de ceilings / soffits": "Track, ceilings / soffits / canopy",
+    "bracing C.R. channel": "Bracing 1-1/2\" C.R. channel{oc}",
+    "header / box beam": "Header / metal stud box beam",
+    "sill track": "Sill track",
+    "framed openings MEP": "Framed openings - MEP, light slots and diffusers",
+    "purlin (track to deck)": "Purlin, top track to deck",
+    "furring channel": "Furring channel (ceilings)",
+    "carrying channel": "Carrying channel (ceilings)",
+    "hanger wire": "Hanger wire",
+    "5/8\" gyp board regular (walls + ceilings)": "5/8\" gypsum board, regular",
+    "5/8\" gyp MOISTURE RESISTANT": "5/8\" gypsum board, MOISTURE RESISTANT",
+    "5/8\" EXTERIOR gyp sheathing": "5/8\" EXTERIOR gypsum sheathing",
+    "5/8\" glass mat sheathing": "5/8\" glass mat sheathing (exterior face of the stud)",
+    "ballistic panel": "Ballistic panel {th}UL752",
+    "3/8\" gyp board": "3/8\" gypsum board",
+    "FRP": "FRP panels",
+    "cement board": "Cement board (substrate under the FRP cove base band)",
+    "FRT blocking": "Blocking FRT / 2X FRT wood",
+    "metal trim (corner bead, casing, shadow molding)": "METAL trim - corner bead, casing bead, shadow molding, "
+                                                        "gypsum edge trim",
+    "acoustical sealant": "Acoustical sealant",
+}
+BLK_NOMBRES = {"edge": "Stud blocking at edge of gypboard (structural detail)",
+               "items": "Metal stud blocking at wall-mounted items (notes)"}
+
+
+def nombre_plantilla(fam, fo):
+    n = NOMBRES_PLANTILLA.get(fam)
+    if not n:
+        return None
+    c = fo.get("nombres_contexto") or {}
+    th = str(c.get("ballistic_th") or "")
+    oc = c.get("bracing_oc_in")
+    return n.format(th=(th + " ") if th else "", oc=f" @ {oc:g}\" O.C." if isinstance(oc, (int, float)) else "")
+
+
 def fusionar(d, fo):
     """v72b: deja en el takeoff la huella de `fo` (_familias_sha); armar la compara con la carpeta de trabajo.
     Material Summary de accesorios + RFIs + exclusiones + Partition Takeoff desde familias_out.json (v67) y,
@@ -642,6 +686,18 @@ def fusionar(d, fo):
     def _fam_de(m):
         return m.get("familia") or (lambda g: g.group(1) if g else None)(
             re.search(r"familias_out\.json[^']*'([^']+)'", str(m.get("source", ""))))
+    # v73 (R73.3, arbitraje #21): el track sale con los renglones de la PLANTILLA del estimador (por elemento: parapet,
+    # roof step / heads; el resto por tamaño de stud) que da canon.py en track_by_element. Los renglones de track
+    # que haya escrito la corrida se reemplazan: el nombre del renglón no depende de la lectura.
+    tpe = fo.get("track_by_element") or {}
+    if tpe.get("bottom") or tpe.get("top"):
+        fams_t = {"bottom": "bottom track (todos)", "top": "top / deflection track (todos)"}
+        d = dict(d, materials=[m for m in d["materials"] if _fam_de(m) not in fams_t.values()])
+        for k, fam_t in fams_t.items():
+            for nombre, v in (tpe.get(k) or {}).items():
+                d["materials"].append({"material": nombre, "unit": "LF", "net": float(v), "metal": True,
+                                       "selling_unit": "run 10 ft", "stock": 10,
+                                       "source": f"familias_out.json track_by_element '{fam_t}' (R73.3)"})
     cuenta = Counter((_fam_de(m), str(m["unit"]).lower()) for m in d["materials"] if _fam_de(m) in fam_canon)
     repartidas = {}
     for m in d["materials"]:
@@ -654,6 +710,14 @@ def fusionar(d, fo):
         if fam in fam_canon and fam not in acc["familias"] and cuenta[(fam, str(m["unit"]).lower())] > 1:
             repartidas.setdefault(fam, []).append(m)             # v72 R71.8b: renglón parcial, NET propio
             mats.append(m)
+            continue
+        if fam in fam_canon and fam not in acc["familias"] and nombre_plantilla(fam, fo):
+            m = dict(m, material=nombre_plantilla(fam, fo))       # v73 (R73.3): nombre de la plantilla
+        if fam == "metal stud blocking (362CR / STUD BLOCKING)" and fo.get("metal_blocking_by_origin") and \
+                cuenta[(fam, str(m["unit"]).lower())] == 1:
+            for k, v in fo["metal_blocking_by_origin"].items():  # v73: edge del detalle y notas, renglones aparte
+                mats.append(dict(m, material=BLK_NOMBRES.get(k, k), net=float(v),
+                                 source=f"familias_out.json metal_blocking_by_origin '{fam}' ({k})"))
             continue
         if fam in fam_canon and fam not in acc["familias"]:     # v67: el NET sale del canon vigente
             uf = _unidad_familia(fo, fam)
@@ -1054,7 +1118,7 @@ EJEMPLO = {
     "proyecto": "Proyecto de ejemplo", "bid_set": "bid_set.pdf", "fecha": "2026-10-14",
     "inputs": {"waste_metal": 0.15, "waste_no_metal": 0.06, "sheet_w_ft": 4, "sheet_l_ft": 12,
                "stud_stock_ft": 20, "track_stock_ft": 10},
-    "walls": [{"type": "A1", "wall": "1", "location": "Corridor 101 north", "length_lf": 20.0,
+    "walls": [{"type": "A1", "wall": "1", "location": "Corridor 901 north", "length_lf": 20.0,
                "height_ft": 12.0, "stud_size": "3-5/8\"", "stud_oc_in": 16, "layers": 2, "board_sf": 480.0,
                "source": "3/A12.01", "status": "CONFIRMADO"}],
     "materials": [{"material": "3-5/8\" metal stud 362S137-33", "unit": "LF", "net": 300.0, "metal": True,

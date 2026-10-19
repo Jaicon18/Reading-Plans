@@ -43,7 +43,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 if AQUI not in sys.path:
     sys.path.insert(0, AQUI)
 
-VERSION = "v72b"
+VERSION = "v73"
 NHOJA = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,3}-?\d{1,3}\.\d{1,3}")
 HOJA = re.compile(r"\b[A-Z]{1,3}-?\d{1,3}\.\d{1,3}")
 NO_APLICA = re.compile(r"^\s*NO APLICA\s*:\s*\S.{10,}", re.I | re.S)
@@ -288,12 +288,20 @@ def a_etapas(ctx):
     return [("etapas", x, "etapas.py compuerta sin fallas") for x in fallas]
 
 
+def _revisar_mod(m, mod, ctx):
+    if mod == "chequeos_v72":
+        return m.revisar(ctx.canon, ctx.salidas.get("vigas_out.json"))
+    if mod == "chequeos_v73":
+        return m.revisar(ctx.canon, ctx.salidas.get("familias_out.json"))
+    return m.revisar(ctx.canon)
+
+
 def _de_modulo(mod, prefijo):
     def fn(ctx):
         if ctx.canon is None:
             return []
         m = __import__(mod)
-        r = m.revisar(ctx.canon) if mod != "chequeos_v72" else m.revisar(ctx.canon, ctx.salidas.get("vigas_out.json"))
+        r = _revisar_mod(m, mod, ctx)
         return [(prefijo, x, "sin falla") for x in r["fallas"] if True]
     return fn
 
@@ -305,7 +313,7 @@ def _filtro(mod, patron, desc, nombre):
         if ctx.canon is None:
             return []
         m = __import__(mod)
-        r = m.revisar(ctx.canon) if mod != "chequeos_v72" else m.revisar(ctx.canon, ctx.salidas.get("vigas_out.json"))
+        r = _revisar_mod(m, mod, ctx)
         return [(x.split(" ")[1] if len(x.split(" ")) > 1 else mod, x, desc) for x in r["fallas"] if rx.search(x)]
     CHEQUEOS[nombre] = (fn, desc)
 
@@ -320,6 +328,16 @@ for _r, _d in (("R72.1", "type K por hatch medido; sin segmento sin tag tipado K
                ("R72.6", "faces[].side A | B | END"), ("R72.10", "FRP con jogs medidos"),
                ("R72.11", "ATM con alternativas")):
     _filtro("chequeos_v72", r"^" + re.escape(_r) + r"\b", _d, "A_" + _r.replace(".", "_"))
+# v73 (arbitraje #21): consistencia con el plano, no solo forma (cota impresa del type K, contorno sin esquinas dobles,
+# MEP solo de mep.cruces)
+for _r, _d in (("R73.1", "type K: la cota impresa junto al tramo manda (dim_scan de cotas_banda.py)"),
+               ("R73.2", "contorno ballistic sin esquinas contadas dos veces (bands de walls K y jogs)"),
+               ("R73.3", "plywood_strips con uso (renglón de la plantilla)"),
+               ("R73.5", "stud reinforcement MEP = solo cruces de ducto de mep.cruces; lo demás a RFI"),
+               ("R73.6", "deflection clips declarados (nota general o none_reason con hoja)"),
+               ("R73.7", "segmento sin tag con espesor de otro type no entra al type por defecto"),
+               ("R73.8", "la operación escrita cuadra (aritmética del *_op = su valor)")):
+    _filtro("chequeos_v73", r"^" + re.escape(_r) + r"\b", _d, "A_" + _r.replace(".", "_"))
 
 
 @chequeo("A_VIGAS_OUT", "vigas_out.json (salida de vigas_sobre_walls.py) está para revisar R72.4 / E26")
@@ -659,12 +677,12 @@ def a_anchors(ctx):
         for f in sal.get("filas") or []:
             op = str(f.get("operacion") or "")
             if f.get("familia") == "expansion anchors":
-                m = re.search(r"exterior sobre losa ([\d.]+) LF \((\d+) walls\)", op)
+                m = re.search(r"exterior (?:sobre losa|bottom track on slab) ([\d.]+) LF \((\d+) walls\)", op)
                 if m and (abs(float(m.group(1)) - ext_lf) > 0.05 or int(m.group(2)) != n_ext):
                     out.append((f"expansion anchors ({nombre})", f"{m.group(1)} LF / {m.group(2)} walls",
                                 f"{round(ext_lf, 2)} LF / {n_ext} walls: solo element wall exterior (R72.8)"))
             if f.get("familia") == "slab pins":
-                m = re.search(r"interior sobre losa ([\d.]+) LF", op)
+                m = re.search(r"interior (?:sobre losa|bottom track on slab) ([\d.]+) LF", op)
                 if m and abs(float(m.group(1)) - int_lf) > 0.05:
                     out.append((f"slab pins ({nombre})", f"{m.group(1)} LF", f"{round(int_lf, 2)} LF (A13, R72.8)"))
     return out
@@ -745,6 +763,10 @@ def a_wrap_fos(ctx):
         if not (w.get("parts") or w.get("faces_ft")):
             out.append((w.get("id"), "sin parts ni faces_ft", "parts o faces_ft + faces_ft_source (E8)"))
         fc = w.get("fos_chain")
+        # v73 (P02 de la prueba 21B): canon.py exige la forma {value: [eslabones ft], source}; la lista suelta de
+        # v72b también vale. Las dos tools aceptan ahora la misma forma.
+        if isinstance(fc, dict):
+            fc = fc.get("value") if str(fc.get("source") or "").strip() else None
         if not w.get("parts") and (not isinstance(fc, list) or not fc):
             out.append((w.get("id"), "sin fos_chain", "fos_chain con TODOS los eslabones impresos (E8)"))
     return out

@@ -23,7 +23,7 @@ def caso():
         "header_schedule": SCH,
         "sill_rule": {"double_over_ft": 4.0, "source": "2/S5.20"},
         "openings": [
-            {"ref": "door 101", "wall": "W1", "kind": "door", "location": "interior", "ro_w_ft": 3.333,
+            {"ref": "door 901", "wall": "W1", "kind": "door", "location": "interior", "ro_w_ft": 3.333,
              "source": "A00.30"},
             {"ref": "W-A", "wall": "W9", "kind": "window", "location": "exterior", "ro_w_ft": 7.0, "qty": 5,
              "with_sill": True, "header_type": "6\" C box beam", "header_type_source": "11/A09.27",
@@ -92,7 +92,7 @@ def test_tipo_y_piezas_del_schedule():
     d = caso()
     d["openings"].append({"ref": "door D2", "wall": "W2", "kind": "door", "ro_w_ft": 4.5, "source": "A00.30"})
     r = {x["ref"]: x for x in H.calcular(d)["renglones"]}
-    assert r["door 101"]["header_type"] == "SINGLE TRACK 18 GA" and r["door 101"]["pieces"] == 1
+    assert r["door 901"]["header_type"] == "SINGLE TRACK 18 GA" and r["door 901"]["pieces"] == 1
     assert r["door D2"]["header_type"] == "DOUBLE TRACK 18 GA" and abs(r["door D2"]["header_lf"] - (4.5 + B) * 2) < 0.01
     assert "CONT. BOX BEAM" in r["office front"]["description"]
     assert abs(r["office front"]["header_lf"] - (36.5 + B) * 4) < 0.01    # (run + 1'-4") x 4 piezas, un run
@@ -208,8 +208,8 @@ def _falla(d, txt):
 
 
 def test_dato_malo_12_recessed_como_opening():
-    """#12A FEC-2 recess 3.0 ft y #12B TA-13 hand dryer 1.425 ft entraron como kind 'opening' (+4.33, +5.52)."""
-    for ref, ro in (("FEC-2 recess", 3.0), ("TA-13 hand dryer recess Men 113", 1.425)):
+    """#12A FEC-2 recess <n> ft y #12B TA-13 hand dryer <n> ft entraron como kind 'opening' (+4.33, +5.52)."""
+    for ref, ro in (("FEC-2 recess", 3.0), ("TA-93 hand dryer recess Men 913", 1.425)):
         d = {"openings": [{"ref": ref, "wall": "B", "kind": "opening", "ro_w_ft": ro, "source": "A08.01"}]}
         _falla(d, "recessed accessory")
 

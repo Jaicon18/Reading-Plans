@@ -144,7 +144,7 @@ POR_ID = {
     "D6": A("A_CEILING_SYS"), "D7": A("A_TRANSICION"), "D8": A("A_PARAPET"), "D9": A("A_DECK_BREAKS"),
     "D10": A("A_STOREFRONT"), "D11": A("A_VIGENCIA", "A_R72_11", "A_MEP_SWEEP"), "D12": A("A_VIGENCIA"),
     "R70.1": A("A_CEILING_SYS"), "R70.2": A("A_ESQUINAS"), "R70.3": A("A_ESQUINAS"), "R70.4": A("A_R72_1"),
-    "R70.5": A("A_BALLISTIC"), "R70.6": A("A_WRAP_FOS", "A_R72_3"), "R70.7": A("A_ANCHORS", "A_STOREFRONT"),
+    "R70.5": A("A_BALLISTIC", "A_R73_2"), "R70.6": A("A_WRAP_FOS", "A_R72_3"), "R70.7": A("A_ANCHORS", "A_STOREFRONT"),
     "R70.8": A("A_EXCEL"), "R70.9": A("A_VIGENCIA"),
     "R71.1": A("A_R71_1"), "R71.2": A("A_R71_2", "A_R72_3"), "R71.3": A("A_R71_3"), "R71.4": B("G_VENDOR"),
     "R71.5": A("A_R71_5"), "R71.6": B("G_RECESSED"), "R71.7": B("G_IMG"), "R71.8": A("A_EXCEL"),
@@ -152,8 +152,15 @@ POR_ID = {
     "R71.13": A("A_LAYERS_FACE", "A_VIGENCIA"), "R71.14": A("A_R72_4", "A_VIGAS_OUT"), "R71.15": A("A_ANCHORS"),
     "R71.16": A("A_VIGENCIA", "A_RFI_DELTA"),
     "R72.1": A("A_R72_1"), "R72.2": A("A_R72_2"), "R72.3": A("A_R72_3"), "R72.4": A("A_R72_4", "A_VIGAS_OUT"),
-    "R72.5": A("A_R72_5"), "R72.6": A("A_R72_6"), "R72.7": A("A_VIGENCIA"), "R72.8": A("A_ANCHORS"),
-    "R72.9": A("A_VIGENCIA"), "R72.10": A("A_R72_10", "A_FRP"), "R72.11": A("A_R72_11"), "R72.12": A("A_EXCEL"),
+    "R72.5": A("A_R72_5", "A_R73_5"), "R72.6": A("A_R72_6"), "R72.7": A("A_VIGENCIA"), "R72.8": A("A_ANCHORS"),
+    "R72.9": A("A_VIGENCIA", "A_R73_5"), "R72.10": A("A_R72_10", "A_FRP"), "R72.11": A("A_R72_11"),
+    "R72.12": A("A_EXCEL"),
+    # v73 (arbitraje #21): consistencia con el plano, no solo forma
+    "R73.1": A("A_R73_1", "A_R72_1"), "R73.2": A("A_R73_2", "A_BALLISTIC"), "R73.3": A("A_EXCEL", "A_VIGENCIA", "A_R73_3"),
+    "R73.4": B("G_PROCESO"), "R73.5": A("A_R73_5", "A_R72_5"), "R73.6": A("A_R73_6"), "R73.7": A("A_R73_7"),
+    "R73.8": A("A_R73_8", "A_ESTADO_DIM"), "R73.9": A("A_EXCEL"), "R73.10": B("G_TIPO"), "R73.11": B("G_ABERTURA"),
+    "R73.12": A("A_BLOCKING", "A_VIGENCIA"), "R73.13": B("G_CARA"), "R73.14": B("G_ALTO"), "R73.15": B("G_PROCESO"),
+    "R73.16": A("A_TRANSICION", "A_VIGENCIA"), "R73.17": B("G_LARGO"), "R73.18": A("A_VIGENCIA"),
     # adendas del SKILL
     "REGLA 48.1": C("anulada por el paquete autocontenido (CAMBIOS_v72: el zip trae TODAS las tools; una prueba baja "
                     "solo el zip) — la regla de fondo (una sola fuente de tools) sigue en E24 / A_CIEGO + test_reglas"),
@@ -248,6 +255,11 @@ REGLAS_TEXTO = [
     ("S:§4", r"v68 \(§14\)", A("A_MR", "A_BLOCKING", "A_PLYWOOD", "A_CEILING_SYS", "A_DECK_BREAKS", "A_FRP",
                                "A_TRANSICION", "A_PARAPET")),
     ("S:§4", r"v69 \(etapas\)", A("A_TAG_IDS", "A_DESCARTADOS")),
+    # v73: campos que exige la compuerta (§20)
+    ("S:§4", r"dim_scan", A("A_R73_1")), ("S:§4", r"ballistic_jogs\[\]\.band", A("A_R73_2")),
+    ("S:§4", r"mep_penetrations\[\]", A("A_R73_5", "A_R72_5")), ("S:§4", r"deflection_clips", A("A_R73_6")),
+    ("S:§4", r"thickness_measured_in", A("A_R73_7")), ("S:§4", r"plywood_strips\[\]\.uso", A("A_R73_3")),
+    ("S:§4", r"_op.{0,30}aritmética", A("A_R73_8")),
     ("S:§5", r".", A("A_VIGENCIA", "A_TRACK_RUNS")),
     ("S:6-familias", r".", A("A_VIGENCIA", "A_ACCESORIOS")),
     ("S:§7", r"Studs:", A("A_VIGENCIA")),

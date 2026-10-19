@@ -31,7 +31,7 @@ Error real: A5 y B2 se cuantificaron con stud de 3-5/8" cuando el schedule de A1
 - 6" + 5/8" + 5/8" = **7 1/4"** ✓
 - 3 5/8" + 5/8" + 5/8" = **4 7/8"** ✓
 
-Y el thickness medido en planta lo confirma por tercera vez (7.28" y 7.20" contra 7 1/4"). Tres fuentes independientes, o no se usa.
+Y el thickness medido en planta lo confirma por tercera vez (dos medidas en planta contra el WALL THICKNESS del schedule). Tres fuentes independientes, o no se usa.
 
 ## REGLA — Ninguna line item se cae en silencio: el generador FALLA si sobra una
 

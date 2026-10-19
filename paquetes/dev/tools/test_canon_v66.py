@@ -13,7 +13,7 @@ import test_canon as T  # noqa: E402
 
 
 def test_ballistic_jogs_sin_walls_fantasma():
-    """#15A modeló dos jogs del contorno ballistic como walls A1K de 0.6 ft: studs y dos faces de 5/8" de más.
+    """#15A modeló dos jogs del contorno ballistic como walls A1K de <n> ft: studs y dos faces de 5/8" de más.
     v66: ballistic_jogs suma ballistic + 3/8" + las faces de 5/8" que diga el detalle, sin studs."""
     d = T.base()
     d["details"]["4/A12.01"] = {"layers_per_face": 1, "k_panel": {"panel_to_ft": 8.0},
@@ -103,7 +103,7 @@ def test_purlin_en_transicion_paralela_al_flute():
 
 
 def test_canopy_soffit_wall_line_corridas():
-    """#15B: canopy_soffit L x 2 (las dos líneas a largo de fascia) +100 LF. v66: fascia + wall medidas aparte."""
+    """#15B: canopy_soffit L x 2 (las dos líneas a largo de fascia) <n> LF. v66: fascia + wall medidas aparte."""
     import corridas as C
     base = {"bracing": {"spacing_in": 48, "source": "F/1/S5.20"}, "section_details": [], "ceiling_details": [],
             "runs": [{"id": "CS", "element": "canopy_soffit", "orientation": "horizontal", "length_ft": 40.0,

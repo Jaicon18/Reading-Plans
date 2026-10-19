@@ -160,7 +160,7 @@ def test_cli_rc():
 
 
 def test_v65_qty_contra_tags_dibujados():
-    """#14B: UU3 canopy norte cargado x 5; E02.01 dibuja 9 tags UU3 (contar_tags.py) -> +25.66 LF."""
+    """#14B: UU3 canopy norte cargado x 5; E02.01 dibuja <n> tags UU3 (contar_tags.py) -> <n> LF."""
     d = caso()
     d["tag_counts"]["SLOT-1"]["count"] = 9                 # el plano dibuja 9, el item dice 4
     _falla(d, "sin excluded_qty_why")

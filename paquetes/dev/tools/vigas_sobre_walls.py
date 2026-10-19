@@ -39,7 +39,7 @@ RX_GRID_LET = re.compile(r"^[A-Z](\.\d)?$")
 PT_FT = 18.0          # escala de verificación (1/4" = 1'-0"); solo para reportar covered_ft
 # v68 (#16A: un solo peralte W12x19 para walls bajo W14x30 / W14x22 / W18x35): peralte nominal d (in) de las marcas
 # W más comunes en planta de techo (AISC Steel Construction Manual, tabla 1-1). Una marca fuera de la tabla -> d_source.
-AISC_D_IN = {"W8X10": 7.89, "W8X18": 8.14, "W10X12": 9.87, "W10X19": 10.2, "W12X14": 11.9, "W12X16": 12.0,
+AISC_D_IN = {"W8X10": 7.89, "W8X18": 8.14, "W10X12": 9.87, "W10X19": 10.2, "W12X14": 11.9, "W12X16": 12.0,  # [ciego-ok] tabla AISC genérica
              "W12X19": 12.2, "W12X22": 12.3, "W12X26": 12.2, "W14X22": 13.7, "W14X26": 13.9, "W14X30": 13.8,
              "W16X26": 15.7, "W18X35": 17.7, "W18X40": 17.9, "W21X44": 20.7}
 RX_MARCA = re.compile(r"^W\d{1,2}X\d{2,3}$")

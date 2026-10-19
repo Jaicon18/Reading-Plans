@@ -177,6 +177,15 @@ def _():
     assert abs(g["lf"] - 13.333) < 0.01, g
 
 
+@caso("R72.7 v73: stub sin tag lejos (> 3 ft) de todo wall con tag del type no se suma (aviso; revisar type)")
+def _():
+    import particion
+    ws = [V("G1", "G", 0, 9, 0, 54, 3.0, tags=("PT1",)), V("G5", "G", 400, 409, 189, 195, 0.333, tags=())]
+    r = particion.particion(canon(ws), "eje")
+    assert r["types"]["G"]["walls"] == 2, r["types"]["G"]
+    assert any("NO toca" in a for a in r.get("avisos") or []), r.get("avisos")
+
+
 @caso("protección: grupo sin tag de más de 6\" sigue siendo UN wall (alcove)")
 def _():
     import particion
@@ -216,21 +225,22 @@ def _mep_data(**kw):
     return d
 
 
-@caso("R72.5 FD de openings_extra y del barrido con el mismo tamaño se cuenta UNA vez")
+@caso("R72.5 FD de openings_extra y del barrido con el mismo tamaño se cuenta UNA vez (v73: en el RFI)")
 def _():
     A, o = _acc()
     d = _mep_data(openings_extra=[{"ref": "FD-1 R-2 14x14 room", "kind": "fire_damper", "width_in": 14, "wall": "W1"}],
                   mep_penetrations=[{"ref": "FD R-2 14x14", "wall": "W1", "width_in": 14, "xy": [10, 4],
                                      "source": "6/S5.01; M1.01"}])
     A.stud_reinforcement(d, None, o)
-    assert o.fam[A.F_REINF] == 1, o.filas
+    assert o.fam[A.F_REINF] == 0, o.filas
+    assert sum(r["delta"] for r in o.rfis if r["familia"] == A.F_REINF) == 1, o.rfis
 
 
 @caso("R72.9 plates por fila de studs (double row = 2) con RFI de la alternativa")
 def _():
     A, o = _acc()
     d = _mep_data(mep_penetrations=[{"ref": "duct 8x10", "wall": "G1", "width_in": 8, "xy": [10, 54],
-                                     "source": "6/S5.01; M1.01"}])
+                                     "method": "mep.cruces", "kind": "duct", "source": "6/S5.01; M1.01"}])
     A.stud_reinforcement(d, None, o)
     assert o.fam[A.F_REINF] == 2, o.filas
     assert any(r["familia"] == A.F_REINF and r["delta"] == -1 for r in o.rfis), o.rfis

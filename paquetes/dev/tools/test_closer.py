@@ -58,7 +58,7 @@ def t02():
 def t03():
     Val(1.0, 'PENDIENTE')                                       # pendiente con valor
 def t04():
-    w = muro_ok(); w.abertura('puerta', '110', 3.0, 7.0, head='10/A12.02', sill='x'); w.emit()
+    w = muro_ok(); w.abertura('puerta', '910', 3.0, 7.0, head='10/A12.02', sill='x'); w.emit()
 def t05():
     w = muro_ok(); w.abertura('ventana', 'W1', 8.0, 2.0); w.emit()   # abertura sin head
 def t06():
@@ -79,7 +79,7 @@ def t12():
     del w.partidas['BOARD:Cuarto B']
     w.emit()
 def t13():
-    w = muro_ok(); w.abertura('puerta', '110', 3.0, 7.0, head='10/A12.02'); w.emit()
+    w = muro_ok(); w.abertura('puerta', '910', 3.0, 7.0, head='10/A12.02'); w.emit()
 def t14():
     w = muro_ok(); w.partida('CLIPS', Val(7, 'DERIVADO', operacion='mal ; 3/A12.01 TYPICAL PARTITION'), 'pz'); w.emit()
 
@@ -133,7 +133,7 @@ def t20_v68_minimo_descuenta_ro():
     6 + 4 jambs = 10. Antes exigía 8 + 4 = 12 y obligaba a inflar STUD."""
     w = muro_ok()
     w.partida('STUD', Val(10, 'DERIVADO', operacion='campo 8 - 2 dentro de R.O. + 4 jambs ; 7/S5.20'), 'pz')
-    w.abertura('puerta', '110', 3.0, 7.0, head='10/A12.02')
+    w.abertura('puerta', '910', 3.0, 7.0, head='10/A12.02')
     w.emit()
 
 
@@ -176,7 +176,7 @@ def main():
         print('  FALLO  v64 header por piezas / ducto: %s' % e); fallos += 1
 
     print('== v62 TOLERANCIA RELATIVA EN WALLS < 1 FT (#12B) ==')
-    # stub G de 0.33 ft doble row: corridas da 0.67 + 0.67 (0.3333 x 2 redondeado) -> 4.06 runs vs 4.00
+    # stub G de 0.33 ft doble row: corridas da 0.67 + 0.67 (0.3333 x 2 redondeado) -> 4.06 runs vs 4.00  [ciego-ok]
     try:
         w = muro_ok(hileras=2, num=3, largo=0.33)
         w.partida('TRACK_BOTTOM', Val(0.67, 'DERIVADO', operacion='0.3333 x 2 ; 5/A12.01 PARTITION G'), 'LF')
@@ -198,7 +198,7 @@ def main():
     from closer import RE_HOJA
     debe = ['A02.01', 'A12.01', 'S2.20', 'S5.20', 'S1.10', 'A4.01', 'M01.01',
             'P01.02', 'E02.01', 'A-410', 'A-101', 'S-201']
-    nodebe = ['P-15', 'GL-3', 'B-11', 'TS-1', 'CT-12C', 'MW11', 'WC-3', 'FEC-1', 'DFC-1A']
+    nodebe = ['P-95', 'GL-9', 'QB-91', 'TS-9', 'CT-99C', 'MW91', 'WC-9', 'FEC-9', 'DFC-9A']
     for s in debe:
         if RE_HOJA.search(s): print('  ok     acepta %s' % s)
         else: print('  FALLO  rechaza la hoja real %s' % s); fallos += 1

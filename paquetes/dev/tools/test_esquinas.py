@@ -58,7 +58,7 @@ def test_cruce_no_es_esquina():
 
 def test_hueco_colineal_de_door_falla_y_gaps_ok_lo_explica():
     a = W("a", "H", 100, 107, 0, 100)
-    b = W("b", "H", 100, 107, 160, 300, tag="Y")     # hueco 60 pt = 3.333 ft (una door)
+    b = W("b", "H", 100, 107, 160, 300, tag="Y")     # hueco 60 pt = 3.333 ft (una door)  [ciego-ok]
     r = E.revisar(canon(a, b))
     assert any("hueco colineal 3.333" in x for x in r["fallas"]), r
     r2 = E.revisar(canon(a, b, gaps_ok=[{"between": ["a", "b"], "reason": "corridor opening without frame"}]))

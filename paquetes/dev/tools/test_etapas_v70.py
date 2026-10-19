@@ -90,7 +90,7 @@ def test_c_banda_traspuesta_y_fuera_de_convencion():
     assert any("A2" in x and "banda traspuesta" in x for x in err) and rc == 1, err
     assert not any("A1" in x for x in err), err
     ancho = w("A3", "X1", 500, 0, 180)
-    ancho["band"].update(c0=480, c1=530)                                         # 2.8 ft entre caras
+    ancho["band"].update(c0=480, c1=530)                                         # 2.8 ft entre caras  [ciego-ok]
     largo = w("A4", "X1", 700, 0, 180, length_ft=14.0)                           # banda 10 ft vs 14 ft
     ok = w("A5", "X1", 900, 0, 180, length_ft=11.5, band_length_ok_reason="cota impresa 11'-6\" (length_source)")
     soffit = w("S1", "X1", 1100, 0, 180, element="soffit_side")
@@ -142,13 +142,13 @@ def test_d_comparar_rechaza_page_0_based():
 
 
 def test_e_refs_de_openings():
-    sched = {"source": "sintético", "items": [{"ref": "D-1"}, {"ref": "D-2"}]}
-    a = w("A1", "X1", 100, 0, 180, openings=[{"ref": "D-1", "ro_w_ft": 3, "head_ft": 7}])
+    sched = {"source": "sintético", "items": [{"ref": "QD-1"}, {"ref": "QD-2"}]}
+    a = w("A1", "X1", 100, 0, 180, openings=[{"ref": "QD-1", "ro_w_ft": 3, "head_ft": 7}])
     b = w("A2", "X1", 300, 0, 180, openings=[{"ref": "door 1 (otro nombre)", "ro_w_ft": 3, "head_ft": 7}])
-    _, err, _, rc = unir(canon([a], opening_schedule=sched), canon([b], openings_extra=[{"ref": "D-9"}]))
+    _, err, _, rc = unir(canon([a], opening_schedule=sched), canon([b], openings_extra=[{"ref": "QD-9"}]))
     m = [x for x in err if x.startswith("openings:")]
-    assert m and "door 1 (otro nombre)" in m[0] and "D-9" in m[0] and "Etapa 2a" in m[0] and rc == 1, err
-    _, err, _, rc = unir(canon([a], opening_list=["D-1", "D-2"]))
+    assert m and "door 1 (otro nombre)" in m[0] and "QD-9" in m[0] and "Etapa 2a" in m[0] and rc == 1, err
+    _, err, _, rc = unir(canon([a], opening_list=["QD-1", "QD-2"]))
     assert err == [] and rc == 0, err
 
 

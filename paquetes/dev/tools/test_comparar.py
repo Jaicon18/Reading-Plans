@@ -28,8 +28,8 @@ def canon(walls):
 
 def lectura_a():
     return canon([
-        w("A1", "X1", "H", 100, 100, 460),               # 20.00 ft  -> igual en B
-        w("A2", "X1", "V", 600, 100, 460),               # 20.00 ft  -> B mide 21.00 (5 %)
+        w("A1", "X1", "H", 100, 100, 460),               # 20.00 ft  -> igual en B  [ciego-ok]
+        w("A2", "X1", "V", 600, 100, 460),               # 20.00 ft  -> B mide 21.00 (5 %)  [ciego-ok]
         w("A3", "X1", "H", 300, 100, 280),               # solo en A
         w("A4", "X2", "H", 500, 100, 280, tag_ids=["PT0004"]),
         {"id": "A5", "tag": "X2", "length_ft": 12.0, "sheet": "Z1.01"},   # sin geometría
@@ -38,8 +38,8 @@ def lectura_a():
 
 def lectura_b():
     return canon([
-        w("B1", "X1", "H", 100, 100, 460.5),             # 20.03 ft: 0.14 % -> coincide
-        w("B2", "X1", "V", 600, 100, 478),               # 21.00 ft
+        w("B1", "X1", "H", 100, 100, 460.5),             # 20.03 ft: 0.14 % -> coincide  [ciego-ok]
+        w("B2", "X1", "V", 600, 100, 478),               # 21.00 ft  [ciego-ok]
         w("B3", "X1", "H", 700, 100, 280),               # solo en B
         w("B4", "X2", "H", 500, 100, 280),
         {"id": "B5", "tag": "X2", "length_ft": 12.5, "sheet": "Z1.01"},   # sin geometría, 4 % -> match por LF
@@ -96,7 +96,7 @@ def test_solo_a_solo_b():
 
 def test_tolerancia_2_pct():
     b = lectura_b()
-    b["walls"][0] = w("B1", "X1", "H", 100, 100, 100 + 360 * 1.025)   # 2.5 % -> ya no coincide
+    b["walls"][0] = w("B1", "X1", "H", 100, 100, 100 + 360 * 1.025)   # 2.5 % -> ya no coincide  [ciego-ok]
     rev = C.comparar(lectura_a(), b, inventario(None), "tramo")
     assert any(d["A"]["wall"] == "A1" for d in rev["difieren"]), rev["difieren"]
 

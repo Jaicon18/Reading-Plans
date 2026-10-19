@@ -114,7 +114,7 @@ def test_r70_8_yield_desde_inputs():
         assert e and "yield must come from Inputs" in e[0] and "Drywall screws" in e[0], e
         libro_yields(x, 1200.0, j_screws=None)                    # sin celda de Inputs citada: falla
         assert [e for e in P.verificar_excel(x) if "R70.8" in e]
-        libro_yields(x, 1200.0, net_tape=380.0)                   # tape fuera de 0.5 %: falla
+        libro_yields(x, 1200.0, net_tape=380.0)                   # tape fuera de 0.5 %: falla  [ciego-ok]
         assert [e for e in P.verificar_excel(x) if "R70.8" in e and "tape" in e]
 
 

@@ -133,19 +133,37 @@ def m_mep(c):
     c["mep_penetrations"] = [{"ref": "duct 8in", "wall": "W1", "dia_in": 8, "source": "M1.01"}]
 
 
+def m_r73_2(c):
+    c["walls"].append(W("K2", tag="X1K", hatch_extent={"value_ft": 5.0, "source": "Z1.01", "img": "img/evid.png"},
+                        dim_scan={"found": [], "source": "cotas_banda.py"}))
+    c["ballistic_jogs"] = [{"ref": "jog", "length_ft": 0.5, "height_ft": 9.0, "detail": "1/Z5.01", "faces_5_8": 1,
+                            "source": "Z1.01"}]
+
+
+def m_r73_5(d):
+    c = leer(d)
+    c["mep_penetrations"] = [{"ref": "duct 8", "wall": "W1", "width_in": 8, "xy": [450, 403], "method": "mep.cruces",
+                              "kind": "duct", "source": "M1.01"}]
+    guardar(d, c)
+    p = P(d, "out", "familias_out.json")
+    o = json.load(open(p))
+    o["familias"]["stud reinforcement MEP"] = 5.0
+    jw(p, o)
+
+
 def m_side(c):
     c["walls"][0]["faces"][0]["side"] = "N"
 
 
 def m_frp_jogs(c):
-    c["tile_base"] = [{"room": "101", "perimeter_ft": 30.0, "perimeter_basis": "net",
+    c["tile_base"] = [{"room": "901", "perimeter_ft": 30.0, "perimeter_basis": "net",
                        "gross_ft": {"value": 30.0, "source": "Z6.01"}, "doors": [],
                        "inside_corners": {"value": 7, "vertices": 10, "outside_corners": 3, "source": "Z6.01"},
                        "source": "Z6.01"}]
 
 
 def m_frp_net(c):
-    c["tile_base"] = [{"room": "101", "perimeter_ft": 30.0, "perimeter_basis": "net",
+    c["tile_base"] = [{"room": "901", "perimeter_ft": 30.0, "perimeter_basis": "net",
                        "gross_ft": {"value": 36.0, "source": "Z6.01"}, "doors": [{"ref": "D1", "ro_w_ft": 3.0}],
                        "inside_corners": {"value": 4, "vertices": 4, "outside_corners": 0, "source": "Z6.01"},
                        "source": "Z6.01"}]
@@ -167,7 +185,7 @@ def m_ciego(tmp):
     sk = P(tmp, "take-off-metal-frame-drywall")
     os.makedirs(P(tmp, "tools"))
     os.makedirs(sk)
-    open(P(sk, "SKILL.md"), "w").write("Regla general.\nEl muro mide 1,234 LF en Broomfield.\n")
+    open(P(sk, "SKILL.md"), "w").write("Regla general.\nEl muro mide 1,234 LF en Broomfield.\n")  # [ciego-ok] caso malo sintético de A_CIEGO
     return P(tmp, "tools")
 
 
@@ -190,6 +208,17 @@ MALOS = {
     "A_R72_6": (con_canon(m_side), None),
     "A_R72_10": (con_canon(m_frp_jogs), None),
     "A_R72_11": (con_canon(m_atm), None),
+    "A_R73_1": (agregar_wall(tag="X1K", hatch_extent={"value_ft": 5.0, "source": "Z1.01", "img": "img/evid.png"}),
+                None),
+    "A_R73_2": (con_canon(m_r73_2), None),
+    "A_R73_5": (m_r73_5, None),
+    "A_R73_3": (con_canon(lambda c: c.__setitem__("plywood_strips", [{"ref": "p1", "lf": 4.0, "width_ft": 1.0,
+                                                                       "material": "frt_3_4", "source": "Z1.01"}])), None),
+    "A_R73_6": (con_canon(lambda c: c.pop("deflection_clips")), None),
+    "A_R73_8": (con_canon(lambda c: c["walls"][0].update(length_op="1.5 + 2.25 + 1.0 = 5.0")), None),
+    "A_R73_7": (con_canon(lambda c: (c.setdefault("partition_schedule", []).append(
+        {"type": "X1", "thickness_in": 4.875, "source": "1/Z5.01"}), c["walls"].append(
+        W("XU", tag_ids=[], default_type_source="Z1.01 note A", thickness_measured_in=8.5)))), None),
     "A_VIGAS_OUT": (lambda d: os.remove(P(d, "out", "vigas_out.json")), None),
     "A_ESTADO_DIM": (con_canon(lambda c: c["walls"][0].update(length_status="DERIVADO",
                                                               length_source="Z1.01 ~10 ft a ojo")), None),
@@ -216,7 +245,7 @@ MALOS = {
     "A_MR": (con_canon(lambda c: c["walls"][0]["faces"][0].update(board="5/8 MR")), None),
     "A_LAYERS_FACE": (con_canon(lambda c: c["walls"][0].update(layers=2)), None),
     "A_WRAP_FOS": (agregar_wall(tag="CW", element="column_wrap"), None),
-    "A_CEILING_SYS": (con_canon(lambda c: c.__setitem__("ceilings", [{"room": "101", "system": "stud_joist",
+    "A_CEILING_SYS": (con_canon(lambda c: c.__setitem__("ceilings", [{"room": "901", "system": "stud_joist",
                                                                       "source": "Z4.01"}])), None),
     "A_CANOPY": (con_canon(lambda c: c.__setitem__("runs", [{"id": "CS1", "element": "canopy_soffit"}])), None),
     "A_HANGER": (None, hook_fresco("familias_out.json", lambda o: (o["familias"].__setitem__("hanger wire", 5.0),

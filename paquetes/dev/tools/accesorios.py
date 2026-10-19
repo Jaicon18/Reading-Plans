@@ -76,9 +76,11 @@ F_ANCH = "expansion anchors"
 F_JC = "joint compound"
 F_JT = "joint tape"
 F_L5 = "Level 5 finish"
+F_CLIPS = "deflection clips"
 
 UNIDAD = {F_AHT: "lf", F_REINF: "pcs", F_XATM: "lf", F_GRILLE: "lf", F_JR: "sf", F_PVC: "lf", F_PAF: "pcs",
-          F_AP: "pcs", F_DWS: "pcs", F_FS: "pcs", F_PINS: "pcs", F_ANCH: "pcs", F_JC: "lb", F_JT: "lf", F_L5: "sf"}
+          F_AP: "pcs", F_DWS: "pcs", F_FS: "pcs", F_PINS: "pcs", F_ANCH: "pcs", F_JC: "lb", F_JT: "lf", F_L5: "sf",
+          F_CLIPS: "pcs"}
 # Desperdicio que aplica plantilla_excel.py (criterio del estimador: 15 % metal; no-metal = mismo factor que el
 # board; yields de accesorios sin desperdicio, igual que la referencia).
 WASTE = {F_AHT: "metal", F_XATM: "metal", F_GRILLE: "metal", F_JR: "board", F_PVC: "board", F_L5: "board"}
@@ -100,6 +102,7 @@ NOMBRES_EXCEL = {
     F_JC: "Joint compound, all purpose",
     F_JT: "Joint tape, paper",
     F_L5: "Level 5 finish",
+    F_CLIPS: "Deflection clips at non-load-bearing walls to structure",
 }
 EXCLUIDAS = {"batt insulation": "EXCLUDED (estimator standing order: no insulation)"}
 NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}\d")
@@ -217,11 +220,11 @@ def additional_head_track(data, o):
             delta += (ro + 2 * b) * q
             det.append(op["ref"])
     if delta > EPS:
-        o.rfis.append({"familia": F_AHT, "tema": "aberturas con box propio (openings_extra) > 4'-0\": ¿llevan "
-                       "también el head track adicional de 2/S5.20?", "delta": round(delta, 2),
+        o.rfis.append({"familia": F_AHT, "tema": "openings with their own box (openings_extra) > 4'-0\": do they "
+                       "also take the additional head track of 2/S5.20?", "delta": round(delta, 2),
                        "unidad": "lf", "items": det})
     if n == 0 and delta <= EPS:
-        o.add(F_AHT, 0.0, "DERIVADO", smn, "sin aberturas > 4'-0\" en walls de studs")
+        o.add(F_AHT, 0.0, "DERIVADO", smn, "no openings > 4'-0\" in stud walls")
 
 
 def penetraciones(data, fo):
@@ -244,6 +247,7 @@ def penetraciones(data, fo):
                     "width_in": float(p["width_in"] if p.get("width_in") is not None else p["dia_in"]),
                     "dia_in": p.get("dia_in"), "studs_cut": p.get("studs_cut"), "xy": p.get("xy"),
                     "in_cavity": p.get("in_cavity"), "in_cavity_source": p.get("in_cavity_source"),
+                    "method": p.get("method"), "kind": p.get("kind"),
                     "qty": int(p.get("qty", 1)), "source": src(p, p["ref"]), "_mp": True})
     # v72 (R72.5): un FD de walls[].openings / openings_extra que el barrido (mep_penetrations) ya trae con el mismo
     # tamaño WxH es el mismo fire damper: se cuenta una vez (la del barrido, que trae xy).
@@ -316,8 +320,8 @@ def stud_reinforcement(data, fo, o):
     por (wall, xy); pipe que corre DENTRO de la cavidad sin cruzar stud (in_cavity + source) = 0 plates."""
     sw = data.get("mep_sweep")
     if not isinstance(sw, dict) or not str(sw.get("source") or "").strip():
-        o.pend(F_REINF, "sin mep_sweep {sheets, source, registro}: barrer TODAS las hojas P y M (pipes, ductos, "
-                        "conduit > hueco del web) contra los walls de studs y declarar mep_penetrations; 6/S5.20")
+        o.pend(F_REINF, "no mep_sweep {sheets, source, registro}: sweep ALL P and M sheets (pipes, ducts, "
+                        "conduit > web hole) against the stud walls and declare mep_penetrations; 6/S5.20")
         return
     hs = [str(h).upper() for h in sw.get("sheets") or []]
     if not any(re.match(r"^(\w+/)?P\d", h) for h in hs) or not any(re.match(r"^(\w+/)?M\d", h) for h in hs):
@@ -335,6 +339,7 @@ def stud_reinforcement(data, fo, o):
     vistos = set()
     rows_de = {str(w.get("id")): w.get("rows", 1) for w in data.get("walls") or []}
     delta_rows = 0
+    fuera = {"manual": [], "pipe": [], "otros": []}      # v73 (R73.5): fuera de la familia, a RFI con su delta
     for p in pens:
         if VISUAL_RE.search(str(p.get("source"))):
             raise ValueError(f"{p['ref']}: penetración con fuente visual; va con xy del barrido registrado (v68)")
@@ -355,6 +360,20 @@ def stud_reinforcement(data, fo, o):
             continue
         sc = p.get("studs_cut")
         rows = int((rows_de.get(str(p.get("wall"))) or 1))
+        n_alt = int(sc["value"]) * p["qty"] if isinstance(sc, dict) else \
+            max(1, math.ceil(p["width_in"] / float(p["oc_in"]) - EPS)) * rows * p["qty"]
+        # v73 (R73.5, arbitraje #21): la familia es SOLO cruces de ducto que da mep.cruces. Un cruce manual, un pipe
+        # > 1" (plate del detalle de penetración) o un ducto / fire damper de otra lista va a RFI con su delta.
+        clase = None
+        if not p.get("_mp") or str(p.get("method") or "") != "mep.cruces":
+            clase = "manual" if p.get("_mp") else "otros"
+        elif str(p.get("kind") or "duct") not in ("duct", "duct_sleeve"):
+            clase = "pipe"
+        if clase:
+            fuera[clase].append((p["ref"], n_alt))
+            o.add(F_REINF, 0, "CRITERIO", f"6/S5.20; {p['source']}",
+                  f"{p['ref']}: not a duct crossing from mep.cruces = 0 in the family (R73.5); RFI +{n_alt}")
+            continue
         if isinstance(sc, dict):
             n = int(sc["value"])
             src(sc, f"{p['ref']}.studs_cut")         # override con su fuente; sin él lo calcula la tool (R72.9)
@@ -369,9 +388,17 @@ def stud_reinforcement(data, fo, o):
                   f"= {v}")
         o.add(F_REINF, v, "CRITERIO", f"6/S5.20; {p['source']}", op)
     if delta_rows:
-        o.rfis.append({"familia": F_REINF, "tema": "plates en walls de doble fila de studs: una por fila cortada "
-                       "(R72.9) vs una por cruce", "delta": -delta_rows, "unidad": "pcs",
-                       "alternativa": "una plate por cruce aunque el wall tenga dos filas"})
+        o.rfis.append({"familia": F_REINF, "tema": "plates at double-row stud walls: one per cut row (R72.9) vs one "
+                       "per crossing", "delta": -delta_rows, "unidad": "pcs",
+                       "alternativa": "one plate per crossing even when the wall has two stud rows"})
+    temas = {"manual": "crossings read by hand (not found by mep.cruces): confirm each one on the M / P sheets",
+             "pipe": "pipes over 1 in. through the stud web: the penetration detail draws a plate",
+             "otros": "duct / fire damper openings listed outside the registered MEP sweep"}
+    for k, lst in fuera.items():
+        if lst:
+            o.rfis.append({"familia": F_REINF, "tema": f"{temas[k]} (R73.5)", "delta": sum(v for _, v in lst),
+                           "unidad": "pcs", "items": [r for r, _ in lst][:40],
+                           "alternativa": "add them to the stud reinforcement count"})
 
 
 def extra_framing(data, o):
@@ -443,8 +470,8 @@ def extra_framing(data, o):
               f"{round(lf, 2)} LF")
         hubo = True
     if not hubo:
-        o.pend(F_XATM, "sin atm_recess en la abertura del ATM ni extra_framing[]: el detalle del ATM dibuja "
-                       "studs sistered + furring en el recess; declarar con su N/HOJA")
+        o.pend(F_XATM, "no atm_recess at the ATM opening and no extra_framing[]: the ATM detail draws "
+                       "sistered studs + furring at the recess; declare them with their detail reference")
 
 
 def _atm_obligatorio(data):
@@ -511,9 +538,9 @@ def grille_head(data, o):
                   f"{hb['box_depth_ft']} - {hb.get('board_in', 0)}/12 = {round(sl, 3)}")
             est = "DERIVADO"
         else:
-            o.pend(F_GRILLE, f"{w['id']}: grille head sin head_build {{head_ft, head_chain_in, box_depth_ft, n_box, "
-                             f"board_in, source}} ni stud_len_ft: el 2-1/2\" va ENTRE los dos box beams (cotas impresas del "
-                             f"detalle del head; nunca height_ft)")
+            o.pend(F_GRILLE, f"{w['id']}: grille head without head_build {{head_ft, head_chain_in, box_depth_ft, n_box, "
+                             f"board_in, source}} or stud_len_ft: the 2-1/2\" goes BETWEEN the two box beams (printed "
+                             f"dimensions of the head detail; never height_ft)")
             continue
         lf = n * sl
         o.add(F_GRILLE, lf, est, s, f"{w['id']}: (ROUNDUP({L}/{round(oc, 3)})+1) = {n} x {op} = {round(lf, 2)}")
@@ -541,8 +568,8 @@ def jamb_return(data, o):
             lf += e
             det.append(f"{op['ref']} {round(e, 2)} [{op.get('jamb_return_source', '-')}]")
     if lf <= EPS:
-        o.pend(F_JR, "ninguna abertura con jamb_return: barrer las secciones de head/sill/jamb (GYPSUM BOARD "
-                     "JAMB RETURN BEYOND) y marcar jamb_return + jamb_return_source")
+        o.pend(F_JR, "no opening with jamb_return: sweep the head / sill / jamb sections (GYPSUM BOARD "
+                     "JAMB RETURN BEYOND) and mark jamb_return + jamb_return_source")
         return
     sf = lf * float(wd)
     o.add(F_JR, sf, "CRITERIO", swd, f"edges {round(lf, 2)} LF x {wd} ft = {round(sf, 2)} SF [{'; '.join(det)}]")
@@ -637,7 +664,7 @@ def pvc_trim(data, o):
         if str(data.get("frp_none_reason") or "").strip():
             o.add(F_PVC, 0.0, "DERIVADO", "frp_none_reason", data["frp_none_reason"])
         else:
-            o.pend(F_PVC, "sin bloque frp")
+            o.pend(F_PVC, "no frp block in the canon")
         return
     top = float(fr["top_ft"]["value"])
     ic_def, sic = k(data, "frp_inside_corners_per_room")
@@ -703,10 +730,10 @@ def _jogs_frp(r, ic, nic, nv, sc, top, o):
         raise ValueError(f"tile_base {r}: 4 + vértices de los jogs ({extra}) != vertices {nv} (R72.10)")
     quita = sum(2 if j["kind"] == "notch" else 1 for j in jogs if float(j["depth_in"]) < JOG_TRIM_MIN_IN)
     if quita:
-        o.rfis.append({"familia": F_PVC, "tema": f"room {r}: {quita} inside corner(s) en jogs < {JOG_TRIM_MIN_IN:g}\" "
-                       f"sin PVC trim (R72.10)", "delta": round(quita * top, 2), "unidad": "lf",
-                       "alternativa": "trim en todos los vértices del polígono"})
-    return nic - quita, f"{sc}; jogs < {JOG_TRIM_MIN_IN:g}\" sin trim (R72.10)" if quita else sc
+        o.rfis.append({"familia": F_PVC, "tema": f"room {r}: {quita} inside corner(s) at jogs < {JOG_TRIM_MIN_IN:g}\" "
+                       f"without PVC trim (R72.10)", "delta": round(quita * top, 2), "unidad": "lf",
+                       "alternativa": "trim at every vertex of the polygon"})
+    return nic - quita, f"{sc}; jogs < {JOG_TRIM_MIN_IN:g}\" without trim (R72.10)" if quita else sc
 
 
 def _runs_parapet(par):
@@ -751,7 +778,7 @@ def pafs(data, fo, o):
         o.add(F_PAF, ns, "DERIVADO", "; ".join(sorted({str(p["source"]) for p in duc})),
               "duct sleeves = " + " + ".join(f"{p['ref']} x{p['qty']}" for p in duc) + f" = {ns}")
     if not par and not ns:
-        o.add(F_PAF, 0.0, "DERIVADO", "-", "sin parapet ni ductos en walls")
+        o.add(F_PAF, 0.0, "DERIVADO", "-", "no parapet and no ducts in walls")
 
 
 def _es_ducto(p):
@@ -778,8 +805,8 @@ def access_panels(data, fo, o):
             o.add(F_AP, int(it.get("qty", 1)), "CONFIRMADO", it.get("source", "fo_in"), f"{it.get('tag')}")
             n += int(it.get("qty", 1))
     if n == 0:
-        o.pend(F_AP, "sin access panels declarados (access_panels[] o fo_in category access_panel): barrer key "
-                     "notes del RCP y notas M/P de access panels en GWB")
+        o.pend(F_AP, "no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP "
+                     "key notes and the M / P notes for access panels in GWB")
 
 
 def board_yields(data, fam, o):
@@ -837,7 +864,7 @@ def framing_screws(data, fam_out, studs_out, o):
         o.avisos.append("framing screws sin studs_out.json: faltan las piezas de walls de studs_nodos")
     n, det = piezas(fam_out, studs_out)
     if n == 0:
-        o.pend(F_FS, "sin piezas de stud (pasar --studs studs_out.json)")
+        o.pend(F_FS, "no stud pieces (pass --studs studs_out.json)")
         return
     v = int(y) * n
     o.add(F_FS, v, "DERIVADO", s, f"{y} x {n} stud pieces [{'; '.join(det[:12])}{' ...' if len(det) > 12 else ''}]"
@@ -879,26 +906,26 @@ def pins_anchors(data, o):
     inte, ext = track_slab(data, sinf)
     if sinf:
         lsf = sum(x[1] for x in sinf)
-        o.rfis.append({"familia": F_ANCH, "tema": "partes sin tag de piers / boxes (" + ", ".join(x[0] for x in sinf)
-                       + ") sin anclaje en el schedule (R72.8)", "delta": round(lsf / float(sa), 2), "unidad": "pcs",
-                       "alternativa": "cargarlas como exterior walls (expansion anchors)"})
+        o.rfis.append({"familia": F_ANCH, "tema": "untagged parts of piers / boxes (" + ", ".join(x[0] for x in sinf)
+                       + ") without anchorage in the schedule (R72.8)", "delta": round(lsf / float(sa), 2), "unidad": "pcs",
+                       "alternativa": "carry them as exterior walls (expansion anchors)"})
     li = sum(x[1] for x in inte)
     le = sum(x[1] for x in ext)
     if li > EPS:
         v = li / float(sp)
-        o.add(F_PINS, v, "DERIVADO", ssp, f"bottom track interior sobre losa {round(li, 2)} LF ({len(inte)} walls, "
+        o.add(F_PINS, v, "DERIVADO", ssp, f"interior bottom track on slab {round(li, 2)} LF ({len(inte)} walls, "
               f"x rows) / {sp} = {round(v, 2)}")
-        o.rfis.append({"familia": F_PINS, "tema": "spacing del pin: 12\" (anchorage interior) vs 16\" (fastener "
-                       "schedule) vs 24\" (caja del tipo K)", "delta_16in": round(li / (16 / 12) - v, 2),
+        o.rfis.append({"familia": F_PINS, "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener "
+                       "schedule) vs 24\" (type K box)", "delta_16in": round(li / (16 / 12) - v, 2),
                        "delta_24in": round(li / 2.0 - v, 2), "unidad": "pcs"})
     else:
-        o.pend(F_PINS, "sin bottom track interior sobre losa")
+        o.pend(F_PINS, "no interior bottom track on slab")
     if le > EPS:
         v = le / float(sa)
-        o.add(F_ANCH, v, "DERIVADO", ssa, f"bottom track exterior sobre losa {round(le, 2)} LF ({len(ext)} walls) "
+        o.add(F_ANCH, v, "DERIVADO", ssa, f"exterior bottom track on slab {round(le, 2)} LF ({len(ext)} walls) "
               f"/ {round(float(sa), 4)} = {round(v, 2)}")
     else:
-        o.add(F_ANCH, 0.0, "DERIVADO", ssa, "sin walls exteriores sobre losa")
+        o.add(F_ANCH, 0.0, "DERIVADO", ssa, "no exterior walls on slab")
 
 
 def level5(data, o):
@@ -928,7 +955,7 @@ def level5(data, o):
         for it in items:
             have |= {x.strip().upper() for x in re.split(r"[/,+]", str(it.get("wc_tag") or "")) if x.strip()}
         if not tags.get("value") and not items:
-            o.add(F_L5, 0.0, "DERIVADO", tags["source"], "finish schedule sin LEVEL 5")
+            o.add(F_L5, 0.0, "DERIVADO", tags["source"], "finish schedule without LEVEL 5")
             return
         for t in tags.get("value") or []:
             if str(t).strip().upper() not in have:
@@ -939,7 +966,48 @@ def level5(data, o):
         o.avisos.append("Level 5 sin constants.level5_tags (tags del finish schedule con 'LEVEL 5'): cobertura "
                         "no verificable")
     if not items:
-        o.pend(F_L5, "sin level5_items")
+        o.pend(F_L5, "no level5_items")
+
+
+def deflection_clips(data, studs_out, o):
+    """v73 (P04 de la prueba 21B): una nota general que pide DEFLECTION CLIPS en walls no portantes no tenía familia.
+    canon `deflection_clips`:
+      {note_source, slip_track_source?}  nota que los pide (+ detalle de type que dibuja slip track, si lo hay);
+      {none_reason, source}               el set no los pide (barrido de notas S / A citado).
+    pcs = Σ studs completos (pcs_full de studs_out) de los walls con to_deck. Si la nota los pide Y el detalle del
+    type dibuja slip / deflection track, las dos lecturas existen: 0 en la familia + RFI con el delta (n)."""
+    dc = data.get("deflection_clips")
+    if not isinstance(dc, dict):
+        # la compuerta (chequeos_v73 R73.6) exige el bloque en el canon; aquí no se inventa una cantidad
+        o.add(F_CLIPS, 0.0, "CRITERIO", "-", "deflection_clips not declared in the canon (R73.6 gate requires it)")
+        o.avisos.append("deflection_clips sin declarar: R73.6 lo rechaza en la compuerta")
+        return
+    if str(dc.get("none_reason") or "").strip():
+        o.add(F_CLIPS, 0.0, "DERIVADO", src(dc, "deflection_clips"), f"not applicable: {dc['none_reason']}")
+        return
+    note = str(dc.get("note_source") or "").strip()
+    if not note:
+        raise ValueError("deflection_clips: note_source (nota que pide los clips) o none_reason + source")
+    to_deck = {str(w.get("id")) for w in data.get("walls") or [] if w.get("to_deck")}
+    n, k = 0, 0
+    for w in (studs_out or {}).get("walls") or []:
+        if str(w.get("id")) in to_deck:
+            n += int(w.get("pcs_full") or 0)
+            k += 1
+    if not studs_out:
+        o.pend(F_CLIPS, "deflection clips need studs_out.json (pcs_full of walls to structure)")
+        return
+    slip = str(dc.get("slip_track_source") or "").strip()
+    if slip:
+        o.add(F_CLIPS, 0.0, "CRITERIO", f"{note}; {slip}",
+              f"general note asks for deflection clips and the type details draw a slip track: 0 carried, "
+              f"RFI +{n} ({k} walls to structure)")
+        o.rfis.append({"familia": F_CLIPS, "tema": "deflection clips: the general note asks for them at "
+                       "non-load-bearing walls and the partition details draw a slip / deflection track (R73.6)",
+                       "delta": n, "unidad": "pcs",
+                       "alternativa": f"one clip per full-height stud of the {k} walls to structure"})
+        return
+    o.add(F_CLIPS, float(n), "DERIVADO", note, f"{n} full-height studs of {k} walls to structure")
 
 
 def calcular(fam_out, data, studs_out=None, fo=None):
@@ -957,6 +1025,7 @@ def calcular(fam_out, data, studs_out=None, fo=None):
     framing_screws(data, fam_out, studs_out, o)
     pins_anchors(data, o)
     level5(data, o)
+    deflection_clips(data, studs_out, o)
     for r in data.get("accesorios_rfi") or []:          # lo que ningún plano contesta: RFI con delta
         f = r.get("familia")
         if f not in FAMS:

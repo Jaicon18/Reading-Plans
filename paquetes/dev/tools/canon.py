@@ -161,17 +161,95 @@ PLY_NAMES = {
     "frt_3_4": "3/4\" FRT plywood",
 }
 PLY = {}                                           # material -> SF (se llena en calcular)
+# v73 (arbitraje #21, R73.3): renglón de compra por USO con el nombre de la plantilla del estimador (un renglón por
+# material, espesor y uso). `plywood_strips[].uso` lo declara; sin él se infiere del texto (pier / column / canopy).
+PLY_USO_NOMBRE = {
+    "nailbase": "Exterior sheathing {th} FRT plywood bonded to polyiso (nailbase)",
+    "canopy_soffit": "{th} FRT plywood sheathing (canopy and soffits)",
+    "column_wrap": "{th} FRT plywood at canopy column wraps",
+    "pier": "{th} FRT plywood at storefront piers",
+    "substrate": "FRT plywood substrate ({tin} in.)",
+}
+PLY_USOS = tuple(PLY_USO_NOMBRE)
+PLY_TH = {"nailbase_5_8_polyiso": "5/8", "frt_5_8_ext": "5/8", "frt_5_8": "5/8", "frt_3_4": "3/4"}
+PLY_USO = {}                                       # nombre de plantilla -> SF
+BLK_ORIGEN = {}                                    # v73: metal blocking por origen (edge del detalle / notas)
 SEAL = {}                                          # acoustical / exterior -> LF
 F_PLY = "FRT plywood (SF)"
 RX_MADERA = re.compile(r"\bFRTW?\b|F\.R\.T\.|FIRE[ -]?(TREATED|RETARDANT)|\b2X\b|\bWOOD\b|PLYWOOD", re.I)
 RX_FRT_LABEL = re.compile(r"\bFRTW?\b|F\.R\.T\.|FIRE[ -]?(TREATED|RETARDANT)", re.I)
 
 
-def _ply(fam, mat, sf):
+def _ply(fam, mat, sf, uso="substrate"):
     if mat not in PLY_NAMES:
         raise ValueError(f"FRT plywood material '{mat}' fuera de {sorted(PLY_NAMES)} (v68: un renglón por material)")
+    if uso not in PLY_USOS:
+        raise ValueError(f"FRT plywood uso '{uso}' fuera de {list(PLY_USOS)} (v73)")
     fam[F_PLY] += sf
     PLY[mat] = PLY.get(mat, 0.0) + sf
+    th = PLY_TH[mat]
+    n = PLY_USO_NOMBRE[uso].format(th=th + '"', tin=th)
+    PLY_USO[n] = PLY_USO.get(n, 0.0) + sf
+
+
+def _uso_strip(s):
+    u = s.get("uso")
+    if u:
+        return u
+    t = " ".join(str(s.get(k) or "") for k in ("ref", "element", "source", "location", "material", "label"))
+    if re.search(r"polyiso|nailbase|bonded", t, re.I):
+        return "nailbase"
+    if re.search(r"\bcolumn", t, re.I):
+        return "column_wrap"
+    if re.search(r"\bpiers?\b", t, re.I):
+        return "pier"
+    if re.search(r"canopy|fascia|soffit", t, re.I):
+        return "canopy_soffit"
+    return "substrate"
+
+
+TRACK_PARAPET = ("parapet",)
+TRACK_HEADS = ("roof_step", "vestibule_head", "fascia_box", "ceiling_bulkhead", "soffit_side")
+TRACK_NOMBRES = {   # v73 (R73.3): renglones de track de la plantilla del estimador
+    "parapet": ("Parapet bottom track", "Parapet top track"),
+    "heads": ("Bottom track - roof step and heads (vestibule / soffit)",
+              "Top track - roof step and heads (vestibule / soffit)"),
+    "size": ("Bottom track {sz}", "Top / deflection track {sz}"),
+    "otro": ("Bottom track - other (openings between walls, see source)",
+             "Top / deflection track - other (openings between walls, see source)"),
+}
+
+
+def track_by_element(data, co, fam):
+    """{"bottom": {renglón: LF}, "top": {renglón: LF}}: la familia de track repartida por ELEMENTO (parapet, roof step /
+    heads) y, para el resto, por TAMAÑO de stud del wall (R71.8 + R73.3). Σ renglones = familia (el resto que corridas
+    no explica, p. ej. track sobre openings entre walls, va a 'other'). Nombres = plantilla del estimador."""
+    tam = {}
+    for w in (data.get("walls") or []) + (data.get("runs") or []):
+        m = re.search(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")', str(w.get("stud_size") or ""))
+        if m:
+            tam[str(w.get("id"))] = m.group(1)
+    out = {"bottom": {}, "top": {}}
+    for r in co.get("renglones") or []:
+        el = r.get("element")
+        wid = str(r.get("id") or "").split(":", 1)[-1]
+        if el in TRACK_PARAPET:
+            nb, nt = TRACK_NOMBRES["parapet"]
+        elif el in TRACK_HEADS:
+            nb, nt = TRACK_NOMBRES["heads"]
+        else:
+            sz = tam.get(wid) or r.get("stud_size")
+            nb, nt = (x.format(sz=sz) for x in TRACK_NOMBRES["size"]) if sz else TRACK_NOMBRES["otro"]
+        for k, n, v in (("bottom", nb, r.get("bottom_lf")), ("top", nt, r.get("top_lf"))):
+            if v:
+                out[k][n] = out[k].get(n, 0.0) + float(v)
+    for k, f, no in (("bottom", "bottom track (todos)", TRACK_NOMBRES["otro"][0]),
+                     ("top", "top / deflection track (todos)", TRACK_NOMBRES["otro"][1])):
+        resto = float(fam.get(f, 0.0)) - sum(out[k].values())
+        if resto > 0.01:
+            out[k][no] = out[k].get(no, 0.0) + resto
+        out[k] = {n: round(v, 2) for n, v in out[k].items() if v > EPS}
+    return out
 
 
 def _no_nodos(w):
@@ -607,7 +685,7 @@ detail detail_source faces faces_ft faces_ft_source faces_note faces_none_reason
 vertical_studs edges drop_line soffit_of openings track_lines track_lines_source wall_line_ft bulkhead_of
 bottom_track_lf head_build exterior in_cavity in_cavity_source source source_chain status notes note tag_ids
 tags_descartados band_length_ok_reason img evidence_png type_source type_status default_type_source adjacent_to
-adjacent_source wet_fixtures k_customer studs_drawn
+adjacent_source wet_fixtures k_customer studs_drawn hatch_extent dim_scan
 """.split())
 TRAZA_SUFIJOS = ("_info", "_note", "_notes", "_check", "_source", "_status", "_img", "_reason", "_basis", "_desc",
                  "_op")
@@ -1167,7 +1245,7 @@ def _ceilings(data, fam, filas):
             joist = n_f * lf_
             fam[F_36] += joist
             if sysm == "canopy_joist":                 # #12A: soffit exterior, sheathing ext grade FRT plywood
-                _ply(fam, "frt_5_8_ext", area)
+                _ply(fam, "frt_5_8_ext", area, "canopy_soffit")
                 bd = f"5/8\" exterior grade FRT plywood {area} SF"
             else:
                 fam[F_GYP] += area
@@ -1295,7 +1373,7 @@ def _fascia_sheathing(data, fam, filas):
         if not hs:
             raise ValueError(f"{w['id']}: fascia_box sin height_source (T/STUD - B/STUD de la fascia, 7/A09.26)")
         sf = float(w["length_ft"]) * float(w["height_ft"])
-        _ply(fam, "frt_5_8_ext", sf)
+        _ply(fam, "frt_5_8_ext", sf, "canopy_soffit")
         filas.append({"familia": "FRT plywood (SF)", "ref": w["id"], "source": hs, "material": "frt_5_8_ext",
                       "operacion": f"fascia_box sheathing {w['length_ft']} x {w['height_ft']} = {round(sf, 2)} SF "
                                    f"(5/8\" ext. grade FRT plywood, 7/A09.26)"})
@@ -1398,7 +1476,7 @@ def _exterior(data, fam, filas):
         band = band_por_fac[k] * band_h
         nail = float(f["solid_lf"]) * float(f["height_nailbase_ft"]) - float(f.get("openings_sf", 0)) - band
         fam["5/8\" glass mat sheathing"] += base + band
-        _ply(fam, "nailbase_5_8_polyiso", nail)
+        _ply(fam, "nailbase_5_8_polyiso", nail, "nailbase")
         filas.append({"familia": "exterior", "facade": k, "source": src,
                       "operacion": f"glass mat base {round(base, 2)} + banda {band_por_fac[k]} x {band_h} = "
                                    f"{round(band, 2)}; nailbase {f['solid_lf']} x {f['height_nailbase_ft']} - "
@@ -1429,6 +1507,7 @@ def _parapets_blocking(data, fam, filas, avisos):
                 n = min(len(hi), rows) if rows > 1 else 1
                 edge += float(w["length_ft"]) * n
         fam["metal stud blocking (362CR / STUD BLOCKING)"] += edge
+        BLK_ORIGEN["edge"] = BLK_ORIGEN.get("edge", 0.0) + edge
         filas.append({"familia": "blocking edge", "source": sl["source"],
                       "operacion": f"sum L x stud rows con face > {L_hoja} ft = {round(edge, 2)} (por stud row, "
                                    f"no por face)"})
@@ -1445,12 +1524,14 @@ def _parapets_blocking(data, fam, filas, avisos):
                              f"PLYWOOD) — 'PROVIDE BLOCKING' a secas = metal (58.6, v68)")
         k = "FRT blocking" if mat == "FRT" else "metal stud blocking (362CR / STUD BLOCKING)"
         fam[k] += float(it["lf"])
+        if mat != "FRT":
+            BLK_ORIGEN["items"] = BLK_ORIGEN.get("items", 0.0) + float(it["lf"])
         filas.append({"familia": k, "ref": it["ref"], "source": src, "operacion": f"{it['lf']} LF"})
     for s in data.get("plywood_strips") or []:
         src = _src(s, s["ref"])
         mat = _strip_material(s)
         sf = float(s["lf"]) * float(s["width_ft"])
-        _ply(fam, mat, sf)
+        _ply(fam, mat, sf, _uso_strip(s))
         filas.append({"familia": "FRT plywood (SF)", "ref": s["ref"], "source": src, "material": mat,
                       "operacion": f"strip {s['lf']} x {s['width_ft']} = {round(sf, 2)} SF (no es blocking ni sill)"})
 
@@ -1513,6 +1594,8 @@ def calcular(data, outdir=None, fo=None):
     _v65_checks(data)
     _v68_checks(data)
     PLY.clear()
+    PLY_USO.clear()
+    BLK_ORIGEN.clear()
     SEAL.clear()
     studs_in, board_in, corr_in, hdr_in, avisos = generar(data)
     avisos += av70
@@ -1576,7 +1659,19 @@ def calcular(data, outdir=None, fo=None):
                           "lf_derivado": round(sum(h["pcs"] * h["altura_ft"] for h in HANGERS), 2)}}
     out["materiales"] = _materiales(fam, out["hanger_pcs"])
     # v68 (contrato con plantilla_excel): FRT plywood por material y sealant exterior aparte del acoustical
-    out["frt_plywood_by_material"] = {PLY_NAMES[k]: round(v, 2) for k, v in PLY.items() if v > EPS}
+    # v73 (R73.3): por material, espesor Y uso, con el nombre de renglón de la plantilla del estimador
+    out["frt_plywood_by_material"] = {k: round(v, 2) for k, v in PLY_USO.items() if v > EPS}
+    out["track_by_element"] = track_by_element(data, co, fam)
+    # v73 (R73.3): contexto para los nombres de la plantilla y metal blocking por origen (edge vs notas)
+    out["metal_blocking_by_origin"] = {k: round(v, 2) for k, v in BLK_ORIGEN.items() if v > EPS}
+    th = ""
+    for d_ in (data.get("details") or {}).values():
+        if isinstance(d_, dict) and isinstance(d_.get("k_panel"), dict):
+            m_ = re.search(r'(\d+/\d+)"', str(d_["k_panel"].get("panel") or ""))
+            th = th or (m_.group(1) + '"' if m_ else "")
+    sp = (data.get("constants") or {}).get("bracing_spacing_in")
+    sp = sp.get("value") if isinstance(sp, dict) else sp
+    out["nombres_contexto"] = {"ballistic_th": th, "bracing_oc_in": sp}
     out["sealant_exterior_lf"] = round(SEAL.get("exterior", 0.0), 2)
     # v67: accesorios y extras (ACCESORIOS_REGLAS) + partition types (CONVENCION_PARTITION_TYPES)
     acc = accesorios.calcular(out, data, st, _fo(data, fo))

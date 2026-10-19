@@ -26,7 +26,7 @@ def base():
         "walls": [
             {"id": "N1", "tag": "EXT", "stud_size": "6\"", "oc_in": 16, "rows": 1, "length_ft": 26.0,
              "height_ft": 14.25, "line": "G", "from_ft": 0.0, "to_ft": 26.0, "detail": "C/A09.21",
-             "faces": [{"room": "100", "board": "5/8 regular", "layers": 1, "height_ft": 14.25}],
+             "faces": [{"room": "900", "board": "5/8 regular", "layers": 1, "height_ft": 14.25}],
              "openings": [{"ref": "GL-2 #1", "kind": "window", "ro_w_ft": 7.0, "head_ft": 8.5, "sill_ft": 6.5,
                            "with_sill": True, "source": "A09.02", "header_type": "6\" C box beam",
                            "header_type_source": "11/A09.27", "pieces": 4, "pieces_source": "11/A09.27",
@@ -37,8 +37,8 @@ def base():
              "source": "2/A09.25"},
             {"id": "I1", "tag": "A1", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1, "length_ft": 10.0,
              "height_ft": 15.25, "detail": "3/A12.01", "purlin": True,
-             "faces": [{"room": "104", "board": "5/8 regular", "layers": 1, "height_ft": 15.25},
-                       {"room": "122", "board": "5/8 regular", "layers": 1, "height_ft": 9.0}],
+             "faces": [{"room": "904", "board": "5/8 regular", "layers": 1, "height_ft": 15.25},
+                       {"room": "922", "board": "5/8 regular", "layers": 1, "height_ft": 9.0}],
              "openings": [], "source": "A02.01"},
             {"id": "FAS", "tag": "OTHER", "element": "fascia_box", "stud_size": "3-5/8\" canopy", "oc_in": 16,
              "rows": 1, "length_ft": 30.0, "height_ft": 1.75, "openings": [], "source": "7/A09.26", "facade": "N",
@@ -49,10 +49,10 @@ def base():
                   {"id": "e", "kind": "free", "wall": "I1"}, {"id": "f", "kind": "free", "wall": "FAS"},
                   {"id": "g", "kind": "free", "wall": "FAS"}],
         "ceiling_details": ["7/A09.26", "7/A09.33", "10/A09.33"],
-        "ceilings": [{"room": "113", "system": "furring", "area_sf": 76.0, "span_ft": 8.0, "run_ft": 9.5,
+        "ceilings": [{"room": "913", "system": "furring", "area_sf": 76.0, "span_ft": 8.0, "run_ft": 9.5,
                       "perimeter_ft": 35.0, "hanger_drop_ft": {"value": 4.25, "source": "S2.20"},
                       "source": "A04.01", "detail_none_reason": "A04.01 sin burbuja de detalle (sintético)"},
-                     {"room": "104", "system": "stud_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
+                     {"room": "904", "system": "stud_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
                       "perimeter_ft": 17.5, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
                       "joist_source": "6/A09.33", "source": "6/A09.33", "detail": "6/A09.33"}],
         "header_schedule": {"source": "7/S5.20", "rows": [
@@ -77,10 +77,10 @@ def base():
                             "source": "3/A08.21"}],
         "plywood_strips": [{"ref": "GL-2 #1 head/sill/jambs", "lf": 32.0, "width_ft": 0.583, "source": "10/A09.27",
                             "material": "frt_3_4"}],
-        "tile_base": [{"room": "113", "perimeter_ft": 35.0, "perimeter_basis": "net",
+        "tile_base": [{"room": "913", "perimeter_ft": 35.0, "perimeter_basis": "net",
                        "gross_ft": {"value": 35.0, "source": "1/A08.01"}, "height_ft": {"value": 0.5, "source": "CT-12C 6\" A08.01"},
                        "doors": [], "source": "A08.01"}],
-        "frp": {"top_ft": {"value": 5.0, "source": "A/A08.01"}, "rooms": ["113"]},
+        "frp": {"top_ft": {"value": 5.0, "source": "A/A08.01"}, "rooms": ["913"]},
     }
 
 
@@ -228,9 +228,9 @@ def test_v66_parapet_run_por_linea():
 
 
 def test_hanger_wire_lf_ref_v4():
-    """Waiting 104 (ref v4): 6 carrying x 30 ft, 9 hangers c/u = 54 x drop <n> = <n> LF. #12A/#12B: 121/126 PCS."""
+    """Waiting 904 (ref v4): 6 carrying x 30 ft, 9 hangers c/u = 54 x drop <n> = <n> LF. """
     d = base()
-    d["ceilings"] = [{"room": "104", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
+    d["ceilings"] = [{"room": "904", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
                       "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20; A04.01"},
                       "source": "A04.01"}]
     o = K.calcular(d)
@@ -245,9 +245,9 @@ def test_hanger_wire_lf_ref_v4():
 
 
 def test_ceiling_poligono_cuerda_media():
-    """#12B 24 HR Vestibule 101: <n> x 15.77 pero área 152 (polígono). Rectángulo daba carrying 69.15."""
+    """#12B Vestibule 901: <n> x <n> pero área <n> (polígono)."""
     d = base()
-    d["ceilings"] = [{"room": "101", "system": "furring", "detail_none_reason": "sintético", "area_sf": 160.0, "span_ft": 14.0, "run_ft": 16.0,
+    d["ceilings"] = [{"room": "901", "system": "furring", "detail_none_reason": "sintético", "area_sf": 160.0, "span_ft": 14.0, "run_ft": 16.0,
                       "perimeter_ft": 50.0, "hanger_drop_ft": {"value": 5.375, "source": "S2.20"},
                       "source": "A04.01"}]
     f = K.calcular(d)["familias"]
@@ -302,7 +302,7 @@ def test_orientacion_del_proyecto():
     d = base()
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "RFI-05"}
     _falla(d, "ns_ft y ew_ft")
-    d["ceilings"] = [{"room": "104", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "ns_ft": 30.0, "ew_ft": 17.5,
+    d["ceilings"] = [{"room": "904", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "ns_ft": 30.0, "ew_ft": 17.5,
                       "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
                       "source": "A04.01"}]
     f = K.calcular(d)["familias"]
@@ -338,7 +338,7 @@ def test_metal_trim_con_numero():
     o = K.calcular(d)
     # <n> + ventana 8.0 head + 2 x (8.5 - 6.5) jambs + 8.0 sill = 20 -> x 2 = 40 + <n> x 2
     assert abs(o["familias"]["metal trim (corner bead, casing, shadow molding)"] - (40.0 + 36 + 150.0)) < 0.01
-    # kickers @48": ROUNDUP(75 / 4) + 1 = 20 x 1.5 = 30.0 LF a 3-5/8"
+    # kickers @48": ROUNDUP(75 / 4) + 1 = 20 x 1.5 = 30.0 LF a 3-5/8"  [ciego-ok]
     assert any(r["familia"] == "kickers" and "30.0" in r["operacion"] for r in o["filas"]), o["filas"]
 
 
@@ -346,9 +346,9 @@ def test_storefront_en_g_rechazado():
     """#12B: office fronts modelados como storefront de 4 jambs x 2 rows dentro del G (59.7)."""
     d = base()
     d["walls"][2]["tag"] = "G"
-    d["walls"][2]["openings"] = [{"ref": "office front 105", "kind": "storefront", "ro_w_ft": 7.5, "head_ft": 7.333,
+    d["walls"][2]["openings"] = [{"ref": "office front 905", "kind": "storefront", "ro_w_ft": 7.5, "head_ft": 7.333,
                                   "source": "A11.01"}]
-    d["opening_schedule"]["items"].append({"ref": "office front 105"})
+    d["opening_schedule"]["items"].append({"ref": "office front 905"})
     _falla(d, "storefront dentro de un wall G")
 
 
@@ -392,11 +392,11 @@ def test_track_lines_por_wall_12b():
 
 
 def test_jamb_wall_abertura_entre_walls_13a():
-    """#13A: door 111 BOA muere entre el stub A1 y el wall A5; sin jamb_wall sus 4 jambs no se contaban."""
+    """#13A: door [n] muere entre el stub A1 y el wall A5; sin jamb_wall sus 4 jambs no se contaban."""
     d = base()
-    d["openings_extra"] = [{"ref": "door 111", "kind": "door", "location": "interior", "ro_w_ft": 3.333, "qty": 1,
+    d["openings_extra"] = [{"ref": "door 911", "kind": "door", "location": "interior", "ro_w_ft": 3.333, "qty": 1,
                             "with_sill": False, "source": "A00.30", "jamb_wall": "I1", "jamb_wall_source": "A02.01"}]
-    d["opening_schedule"]["items"].append({"ref": "door 111"})
+    d["opening_schedule"]["items"].append({"ref": "door 911"})
     _falla(copy.deepcopy(d), "sin head_ft")               # v65 (#14A): sin head no hay cripples ni track
     d["openings_extra"][0]["head_ft"] = 7.0
     b0 = K.calcular(base())["familias"]
@@ -416,8 +416,8 @@ def test_jamb_wall_abertura_entre_walls_13a():
 
 
 def test_joist_dir_canopy_13b():
-    """13B: canopy N (ns 4.0, ew 42.32) con carrying_direction N-S daba 4 joists x 42.32 = 169 LF (paralelos al muro);
-    7/A09.26 los dibuja de muro a fascia: ROUNDUP(42.32/1.333)+1 = 33 x 4.0 = 132 LF."""
+    """13B: canopy N (ns 4.0, ew 42.32) con carrying_direction N-S daba 4 joists x 42.32 = 169 LF (paralelos al muro);  # [ciego-ok]
+    7/A09.26 los dibuja de muro a fascia: ROUNDUP(42.32/1.333)+1 = 33 x 4.0 = 132 LF. [ciego-ok]"""
     d = base()
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "RFI-07"}
     d["ceilings"] = [{"room": "canopy soffit N", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 169.28, "ns_ft": 4.0, "ew_ft": 42.32,
@@ -453,7 +453,7 @@ def test_v63_canopy_facade_glass_mat_13a():
 
 
 def test_v63_canopy_soffit_track_lines_del_proyecto():
-    """#13A cargó 1 línea de track en el canopy soffit y #13B 2 (default): 189.7 vs 377.6 LF."""
+    """#13A cargó 1 línea de track en el canopy soffit y #13B 2 (default): 189.7 vs <n> LF."""
     d = base()
     d.setdefault("runs", []).append({"id": "CS", "tag": "OTHER", "element": "canopy_soffit", "orientation": "horizontal",
                                      "stud_size": "3-5/8\" canopy", "oc_in": 16, "rows": 1, "length_ft": 20.0,
@@ -507,9 +507,9 @@ def test_v64_header_por_piezas_desde_canon():
     del d["walls"][0]["openings"][0]["pieces"]
     _falla(d, "pieces")
     d = base()
-    d["walls"][2]["openings"] = [{"ref": "door 113", "kind": "door", "ro_w_ft": 3.0, "head_ft": 7.333,
+    d["walls"][2]["openings"] = [{"ref": "door 913", "kind": "door", "ro_w_ft": 3.0, "head_ft": 7.333,
                                   "source": "A00.30"}]
-    d["opening_schedule"]["items"].append({"ref": "door 113"})
+    d["opening_schedule"]["items"].append({"ref": "door 913"})
     o = K.calcular(d)
     assert abs(o["familias"]["header / box beam"] - (33.33 + 4.333)) < 0.02, o["familias"]["header / box beam"]
     assert abs(o["header_por_pieza"]["track"] - 4.333) < 0.01, o["header_por_pieza"]
@@ -540,7 +540,7 @@ def test_v64_kickers_con_studs_verticales():
     _falla(d, "vertical_studs")
     tr["vertical_studs"] = {"oc_in": 16, "height_ft": 4.5, "source": "7/A09.33", "bod_ft": {"value": 13.5, "source": "S2.20"}, "ceiling_ft": {"value": 9.0, "source": "A04.01"}}
     o = K.calcular(d)
-    # ROUNDUP(<n> / 1.333) + 1 = 59 x <n> = <n> (BOA +<n>)
+    # ROUNDUP(<n> / 1.333) + 1 = 59 x <n> = <n>
     v = [r for r in o["filas"] if r["familia"] == "vertical studs @ transition"]
     assert len(v) == 1 and "58 studs x 4.5 = 261.0" in v[0]["operacion"], v
 
@@ -567,7 +567,7 @@ def _tr(h=4.5, **k):
 
 def test_v65_transicion_sin_studs_nodos_14a_14b():
     """#14A: TR-104 de <n> ft pasaba por studs_nodos (258.12) ADEMÁS de vertical_studs (258.12) = doble.
-    #14B: height_ft 1.0 inventado (59 LF fantasma). Kicker sin largo impreso = <n> / sin 45 = <n> (ref <n>)."""
+    #14B: height_ft 1.0 inventado (<n> LF fantasma). Kicker sin largo impreso = <n> / sin 45 = <n> (ref <n>)."""
     d = base()
     d["constants"]["transition_trim_per_lf"] = {"value": 2, "source": "7/A09.33"}
     s0 = K.calcular(d)["familias"]["3-5/8\" stud (todos los gauges)"]
@@ -608,11 +608,11 @@ def test_v65_column_wrap_por_face():
 
 
 def test_v65_roof_step_filas_dibujadas():
-    """4/A02.02 dibuja 3 filas de studs; #14A cargó 2 (RS-1, RS-2 de 2.323) = −122.3 LF."""
+    """El detalle del roof step dibuja 3 filas de studs; una lectura cargó 2 (sintético)."""
     d = base()
     for i, h in enumerate((2.323, 2.323)):
         d["walls"].append({"id": f"RS-{i}", "tag": "RS", "element": "roof_step", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
-                           "rows": 1, "length_ft": 51.73, "height_ft": h, "source": "4/A02.02"})
+                           "rows": 1, "length_ft": 50.0, "height_ft": h, "source": "4/A02.02"})
         d["nodes"] += [{"id": f"r{i}a", "kind": "free", "wall": f"RS-{i}"}, {"id": f"r{i}b", "kind": "free", "wall": f"RS-{i}"}]
     _falla(copy.deepcopy(d), "roof_step_rows_drawn")
     d["constants"]["roof_step_rows_drawn"] = {"value": 3, "source": "4/A02.02"}
@@ -623,7 +623,7 @@ def test_v65_roof_step_filas_dibujadas():
 
 
 def test_v65_fascia_box_obligatoria_con_canopy_joist():
-    """#14A no declaró fascia_box (−348.8 LF 3-5/8" de los studs de fascia)."""
+    """#14A no declaró fascia_box (<n> LF 3-5/8" de los studs de fascia)."""
     d = base()
     d["ceilings"].append({"room": "N canopy soffit", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 100.0, "ns_ft": 4.0,
                           "ew_ft": 25.0, "span_ft": 25.0, "run_ft": 4.0, "source": "7/A09.26", "facade": "N"})
@@ -679,15 +679,15 @@ def test_v65b_header_y_sill_son_reglas():
 def test_v65_T_entre_G_es_abut():
     """#14A: T del G largo contra el stub del office front (que ya tiene vendor_end) = +1/row doble (<n> LF)."""
     d = base()
-    d["walls"] += [{"id": "G-44", "tag": "G", "stud_size": "1-5/8\"", "oc_in": 16, "rows": 2, "length_ft": 11.5,
+    d["walls"] += [{"id": "X-44", "tag": "G", "stud_size": "1-5/8\"", "oc_in": 16, "rows": 2, "length_ft": 11.5,
                     "height_ft": 15.25, "source": "A02.01"},
-                   {"id": "GS-45", "tag": "G", "stud_size": "1-5/8\"", "oc_in": 16, "rows": 2, "length_ft": 3.25,
+                   {"id": "XS-45", "tag": "G", "stud_size": "1-5/8\"", "oc_in": 16, "rows": 2, "length_ft": 3.25,
                     "height_ft": 15.25, "source": "A02.01"}]
-    d["nodes"] += [{"id": "ga", "kind": "T", "branch": "G-44", "through": "GS-45"},
-                   {"id": "gb", "kind": "free", "wall": "G-44"},
-                   {"id": "s1", "kind": "vendor_end", "wall": "GS-45"}, {"id": "s2", "kind": "vendor_end", "wall": "GS-45"}]
+    d["nodes"] += [{"id": "ga", "kind": "T", "branch": "X-44", "through": "XS-45"},
+                   {"id": "gb", "kind": "free", "wall": "X-44"},
+                   {"id": "s1", "kind": "vendor_end", "wall": "XS-45"}, {"id": "s2", "kind": "vendor_end", "wall": "XS-45"}]
     _falla(copy.deepcopy(d), "-> abut")
-    d["nodes"][-4] = {"id": "ga", "kind": "abut", "wall": "G-44", "into": "GS-45", "source": "10/A12.01"}
+    d["nodes"][-4] = {"id": "ga", "kind": "abut", "wall": "X-44", "into": "XS-45", "source": "10/A12.01"}
     K.calcular(d)
 
 
@@ -728,24 +728,24 @@ def test_v65_banda_glass_mat_t_stud_b_stud():
 
 
 def test_v65_frp_bloque_obligatorio():
-    """#14B FALTA FRP; #14A 357.90 (sin door 112, mop sink 2.5 ft). arb9: (<n> - <n>) x 5.0 + 2 x 2 x 4 = <n>."""
+    """#14B FALTA FRP; #14A 357.90 (sin door 912, mop sink <n> ft). arb9: (<n> - <n>) x 5.0 + 2 x 2 x 4 = <n>."""
     d = base()
     del d["frp"]
     _falla(copy.deepcopy(d), "frp_none_reason")
-    d["tile_base"] = [{"room": "113", "perimeter_ft": 38.0, "perimeter_basis": "gross",
-                       "doors": [{"ref": "113", "ro_w_ft": 3.5}, {"ref": "112", "ro_w_ft": 3.5}],
+    d["tile_base"] = [{"room": "913", "perimeter_ft": 38.0, "perimeter_basis": "gross",
+                       "doors": [{"ref": "913", "ro_w_ft": 3.5}, {"ref": "912", "ro_w_ft": 3.5}],
                        "height_ft": {"value": 0.5, "source": "3/A08.01"}, "source": "1/A08.01"},
-                      {"room": "114", "perimeter_ft": 34.0, "perimeter_basis": "net", "doors": [{"ref": "114", "ro_w_ft": 3.0}],
+                      {"room": "914", "perimeter_ft": 34.0, "perimeter_basis": "net", "doors": [{"ref": "914", "ro_w_ft": 3.0}],
                        "gross_ft": {"value": 37.0, "source": "1/A08.01"},
                        "height_ft": {"value": 0.5, "source": "3/A08.01"}, "source": "1/A08.01"}]
-    d["frp"] = {"top_ft": {"value": 5.0, "source": "A-D/A08.01"}, "rooms": ["113", "114"],
+    d["frp"] = {"top_ft": {"value": 5.0, "source": "A-D/A08.01"}, "rooms": ["913", "914"],
                 "mop_sink": {"sides": 2, "width_ft": 2.0, "height_ft": 4.0, "source": "4/A08.01; P00.01"}}
     # perímetro NETO del tile_base (doors ya fuera, 59.10) x 5.0 + mop sink 2 x 2.0 x 4.0
     assert abs(K.calcular(d)["familias"]["FRP"] - ((31.0 + 34.0) * 5.0 + 16.0)) < 0.02
     sin = copy.deepcopy(d)
     del sin["tile_base"][0]["doors"]
     _falla(sin, "declarar doors")
-    sin = copy.deepcopy(d)                                   # v68: #16A neto sin door 112 / #16B bruto sin descontar
+    sin = copy.deepcopy(d)                                   # v68: #16A neto sin door 912 / #16B bruto sin descontar
     del sin["tile_base"][0]["perimeter_basis"]
     _falla(sin, "perimeter_basis")
     sin = copy.deepcopy(d)                                   # v68: "net" que es el bruto (#16A) = error
@@ -763,14 +763,14 @@ def test_v65_sealant_por_detalle():
     del d["details"]["3/A12.01"]["sealant"]
     _falla(copy.deepcopy(d), "sealant {bottom_faces")
     d = base()
-    d["walls"][2]["openings"] = [{"ref": "door 120", "kind": "door", "ro_w_ft": 3.333, "head_ft": 7.0,
+    d["walls"][2]["openings"] = [{"ref": "door 920", "kind": "door", "ro_w_ft": 3.333, "head_ft": 7.0,
                                   "source": "A00.30"}]
-    d["opening_schedule"]["items"].append({"ref": "door 120"})
+    d["opening_schedule"]["items"].append({"ref": "door 920"})
     d["sealant_items"] = [{"ref": "office bulkhead top 9/A12.01", "lf": 45.0, "faces": 2, "source": "9/A12.01"}]
     d["sealant_base_exterior"] = {"lf": 26.0, "source": "C/A09.21"}
     d["walls"].append({"id": "DB-1", "tag": "G", "element": "door_bulkhead", "stud_size": "1-5/8\"", "oc_in": 16,
                        "rows": 2, "length_ft": 7.5, "height_ft": 7.333, "detail": "3/A12.01", "source": "8/A12.01",
-                       "faces": [{"room": "105", "board": "5/8 regular", "layers": 1, "height_ft": 7.333}]})
+                       "faces": [{"room": "905", "board": "5/8 regular", "layers": 1, "height_ft": 7.333}]})
     d["nodes"] += [{"id": "db1", "kind": "free", "wall": "DB-1"}, {"id": "db2", "kind": "free", "wall": "DB-1"}]
     f = K.calcular(d)["familias"]
     # el bulkhead no hereda el bead del tipo (sus beads 8, 9/A12.01 van en sealant_items)
@@ -782,7 +782,7 @@ def test_v65_insulation_excluida_y_level5():
     d["insulation_items"] = [{"ref": "batt", "sf": 100}]
     _falla(d, "EXCLUDED")
     d = base()
-    d["level5_items"] = [{"ref": "WC-18 office 108", "wc_tag": "WC-18", "l_ft": 10.0, "h_ft": 9.0,
+    d["level5_items"] = [{"ref": "WC-18 office 908", "wc_tag": "WC-18", "l_ft": 10.0, "h_ft": 9.0,
                           "base_ft": {"value": 0.5, "source": "A05.01 kn 12"}, "source": "A11.04"}]
     _falla(copy.deepcopy(d), "level5_tags")                     # v67: tags del finish schedule obligatorios
     d["constants"]["level5_tags"] = {"value": ["WC-18"], "source": "A00.40"}
@@ -815,7 +815,7 @@ def test_v67_framing_screws_pcs_explicitos():
     d = _solo([_par("A", 18.0, 4.0)])
     o = K.calcular(d)
     fila = [r for r in o["filas"] if r["familia"] == "6\" parapet stud"][0]
-    assert fila["pcs"] == 4 * 5                                   # 4 bays x 5 studs
+    assert fila["pcs"] == 4 * 5                                   # 4 bays x 5 studs  [ciego-ok]
     assert o["familias"]["framing screws"] == 4 * fila["pcs"], o["familias"]["framing screws"]
 
 
@@ -860,7 +860,7 @@ def test_v67_trim_jamb_return_mismos_bordes():
 
 
 def test_v68_parapet_stub_de_un_bay_usa_formula():
-    """v68 E3 exacta: el mínimo de 5 studs vale en los bays de un run dividido por posts (nb >= 2); un run de un
+    """v68 E3 exacta: el mínimo de 5 studs vale en los bays de un run dividido por posts (nb >= 2); un run de un  # [ciego-ok]
     solo bay (stub <= spacing de posts) usa 2 + ROUNDUP((L - 0.6)/oc) - 1 (números inventados)."""
     d = _solo([_par("A", 18.0, 4.0)])
     f = [r for r in K.calcular(copy.deepcopy(d))["filas"] if r["familia"] == "6\" parapet stud"][0]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests de studs_nodos.py con datos de BOA Broomfield (arbitraje #10). Correr: python3 test_studs_nodos.py"""
+"""Tests de studs_nodos.py con datos de un proyecto de prueba (arbitraje #10). Correr: python3 test_studs_nodos.py"""
 import copy
 import os
 import sys
@@ -91,22 +91,22 @@ def test_dato_malo_abertura_ancha():
 
 
 def _par_split(kind_corte):
-    d = {"walls": [{"id": "A5-1a", "stud_size": "6\"", "length_ft": 11.948, "oc_in": 16, "rows": 1, "height_ft": 15.25},
-                   {"id": "A5-1b", "stud_size": "6\"", "length_ft": 3.759, "oc_in": 16, "rows": 1, "height_ft": 13.0}],
-         "nodes": [{"id": "a", "kind": "free", "wall": "A5-1a"}, {"id": "b", "kind": "free", "wall": "A5-1b"}]}
+    d = {"walls": [{"id": "X5-1a", "stud_size": "6\"", "length_ft": 11.948, "oc_in": 16, "rows": 1, "height_ft": 15.25},
+                   {"id": "X5-1b", "stud_size": "6\"", "length_ft": 3.759, "oc_in": 16, "rows": 1, "height_ft": 13.0}],
+         "nodes": [{"id": "a", "kind": "free", "wall": "X5-1a"}, {"id": "b", "kind": "free", "wall": "X5-1b"}]}
     if kind_corte == "split":
-        d["nodes"].append({"id": "c", "kind": "split", "walls": ["A5-1a", "A5-1b"], "why": "grid B"})
+        d["nodes"].append({"id": "c", "kind": "split", "walls": ["X5-1a", "X5-1b"], "why": "grid B"})
     else:   # dato malo de #11B: el corte declarado como dos extremos libres
-        d["nodes"] += [{"id": "c1", "kind": "free", "wall": "A5-1a"}, {"id": "c2", "kind": "free", "wall": "A5-1b"}]
+        d["nodes"] += [{"id": "c1", "kind": "free", "wall": "X5-1a"}, {"id": "c2", "kind": "free", "wall": "X5-1b"}]
     return d
 
 
 def test_split_no_duplica_stud_del_corte():
     bien = {r["id"]: r for r in S.contar(_par_split("split"))["walls"]}
     mal = {r["id"]: r for r in S.contar(_par_split("free"))["walls"]}
-    # un wall continuo de 15.707 ft tendría ROUNDUP(15.707/1.333)+1 = 13 studs; partido: 10 + 4 = 14 con 'free'
-    assert bien["A5-1a"]["pcs_full"] + bien["A5-1b"]["pcs_full"] == 13, bien
-    assert mal["A5-1a"]["pcs_full"] + mal["A5-1b"]["pcs_full"] == 14, mal
+    # un wall continuo de 15.707 ft tendría ROUNDUP(15.707/1.333)+1 = 13 studs; partido: 10 + 4 = 14 con 'free'  [ciego-ok]
+    assert bien["X5-1a"]["pcs_full"] + bien["X5-1b"]["pcs_full"] == 13, bien
+    assert mal["X5-1a"]["pcs_full"] + mal["X5-1b"]["pcs_full"] == 14, mal
 
 
 def test_split_entre_tipos_distintos_falla():
@@ -133,9 +133,9 @@ def test_abut_office_front_g_22():
 
 def test_abut_sin_source_falla():
     d = _par_split("split")
-    d["nodes"] = [{"id": "a", "kind": "free", "wall": "A5-1a"}, {"id": "b", "kind": "free", "wall": "A5-1b"},
-                  {"id": "c", "kind": "abut", "wall": "A5-1a", "into": "A5-1b"},
-                  {"id": "d", "kind": "free", "wall": "A5-1b"}]
+    d["nodes"] = [{"id": "a", "kind": "free", "wall": "X5-1a"}, {"id": "b", "kind": "free", "wall": "X5-1b"},
+                  {"id": "c", "kind": "abut", "wall": "X5-1a", "into": "X5-1b"},
+                  {"id": "d", "kind": "free", "wall": "X5-1b"}]
     _falla(d, "abut exige source")
 
 

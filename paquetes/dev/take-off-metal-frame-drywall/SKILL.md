@@ -5,7 +5,11 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 19-oct-2026 (v72b). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 19-oct-2026 (v73). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+
+**Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
+planos: `python3 tools/correr_suite.py` (instala dependencias si faltan, arma la estructura en carpeta limpia y corre
+toda la suite; rc 0 = todo OK) y `python3 tools/test_ciego_tools.py`. Ningún parche ni script extra.
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -297,6 +301,18 @@ tools y `test_canon*.py`. Las tools fallan si falta un campo obligatorio:
 
 ---
 
+**Campos v73 (la compuerta los exige; ver §20):**
+- walls K: `dim_scan` = salida de `python3 tools/cotas_banda.py plano.pdf <página> '<band>'` (cotas impresas junto
+  al tramo); si una cota compatible existe, length_ft = esa cota y CONFIRMADO, o `dim_scan.no_aplica` con hoja.
+- `ballistic_jogs[].band` {ori, c0, c1, lo, hi, sheet} medida en vector, solo entre las caras de las dos líneas K.
+- `mep_penetrations[]`: `method` ("mep.cruces" o "manual") y `kind` (duct / pipe / fire_damper); solo los ductos de
+  mep.cruces entran a la familia.
+- `deflection_clips`: {note_source, slip_track_source?} o {none_reason, source}.
+- segmento sin tag tipado por nota general: `thickness_measured_in` (o "= N in" en thickness_check) y, si no coincide
+  con el type, el type de la schedule con ese espesor o `default_type_rfi {alternativas, source}`.
+- `plywood_strips[].uso`: substrate / pier / column_wrap / canopy_soffit / nailbase.
+- `*_op` con forma "aritmética = N": la operación tiene que dar N y N es el valor del campo.
+
 ## 5. Elementos (lista cerrada) → familia del track
 
 | Familia | Elementos |
@@ -543,6 +559,38 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 ## 19. v72b — reglas inviolables (compuerta de reglas; ninguna regla depende de que la corrida se acuerde)
 
 Catálogo: todas las reglas extraídas del texto (SKILL.md + referencias/; cuenta y lista con `python3 reglas_catalogo.py`), cada una con tipo a / b / c y su chequeo o spec de evidencia. Tools: `reglas.py` (compuerta, absorbe `chequeos_v71`, `chequeos_v72`, `esquinas.py` y la compuerta de etapas), `reglas_catalogo.py`, `reglas_clasificacion.py`, `fixture_reglas.py` (proyecto sintético que pasa), `test_reglas.py` (un test por regla: caso que viola falla, caso correcto pasa), `test_ciego_tools.py` (E24 también en las tools). Tabla: `referencias/REGLAS_INVIOLABLES.md` (se regenera con `python3 reglas.py tabla`).
+
+## 20. Reglas v73 (arbitraje de una prueba ciega: la compuerta revisa CONSISTENCIA con el plano, no solo forma)
+
+Por qué: en una prueba ciega la compuerta v72b dio OK y dos familias salieron fuera de rango con la regla escrita
+(ballistic / 3/8" y stud reinforcement MEP). La compuerta revisaba que el dato existiera (hatch medido, face customer,
+`method` del cruce) y no que fuera el del plano. Desde v73 cada regla de abajo tiene chequeo (a) o evidencia (b).
+
+| Regla | Texto | Tool / compuerta |
+|---|---|---|
+| R73.1 | Type K: si el plano imprime la cota del tramo, el largo ES esa cota (CONFIRMADO), no la extensión del hatch medida en vector. Todo wall K lleva `dim_scan` = salida de `cotas_banda.py` (cotas paralelas a su banda); una cota compatible (± 35 %) que no se usa = falla, salvo `dim_scan.no_aplica` con hoja. | chequeos_v73 + cotas_banda.py |
+| R73.2 | Contorno ballistic sin esquinas dobles: `ballistic_jogs[]` lleva `band`; ninguna banda K (walls + jogs) se solapa con otra en los dos ejes > 1 pt, y dos walls K paralelos del mismo contorno no se solapan a lo largo del eje (un tramo no llega hasta donde empieza el otro). El jog va solo entre las caras de las dos líneas. | chequeos_v73 |
+| R73.3 | Nombres de renglón = los de la PLANTILLA del estimador: `plantilla_excel.fusionar` renombra todo renglón que cita su familia (`NOMBRES_PLANTILLA`), arma el track por ELEMENTO (parapet, roof step / heads) y el resto por tamaño de stud desde `track_by_element` de canon.py, el FRT plywood por material, espesor y USO (`plywood_strips[].uso`: substrate / pier / column_wrap / canopy_soffit / nailbase) y el metal blocking por origen (edge del detalle / notas). Nunca un renglón "other framing" que mezcle elementos. | plantilla_excel + canon |
+| R73.4 | Registro: un renglón resuelto que se marcó mal se corrige con `registro.py corregir <id> <estado> "<motivo>"` (entrada nueva que manda; el historial guarda la anterior). Antes de marcar un renglón de alcance se corre la misma evidencia que `alcances.py compuerta`. | registro.py |
+| R73.5 | Stud reinforcement MEP = SOLO cruces de DUCTO que da `mep.cruces` (`method: "mep.cruces"`, `kind: duct`), plates = MAX(1, ROUNDUP(ancho / O.C.)) × rows. Cruce manual, pipe > 1" (el detalle de penetración le pone plate) y fire damper / ducto de otra lista NO entran: RFI con su delta. | accesorios + chequeos_v73 |
+| R73.6 | `deflection_clips` declarado: {note_source, slip_track_source?} si una nota general pide clips en walls no portantes (con slip track dibujado en el type: 0 + RFI con delta = studs completos de walls a estructura), o {none_reason, source} con las hojas barridas. | accesorios + chequeos_v73 |
+| R73.7 | Un segmento sin tag tipado por la nota general ("UNLESS OTHERWISE NOTED") tiene que medir el espesor del type de la nota (± 0.5"); si mide otro, es del type de la schedule con ese espesor (el wall con tag que toca) o `default_type_rfi` con las dos lecturas. | chequeos_v73 |
+| R73.8 | La operación escrita cuadra: en walls / openings, `*_op` "aritmética = N" da N y N es el valor del campo (una cadena tipeada distinta de su suma = falla). | chequeos_v73 |
+| R73.9 | Todo texto que una tool escribe al Excel (RFIs, operaciones, pendientes) va en inglés; `test_accesorios` / `test_v72` corren `plantilla_excel.verificar` sobre los casos que disparan RFIs. | accesorios + plantilla_excel |
+| R73.10 | Cambio de type sobre una línea recta: en el nodo dibujado entre los dos tags (T / esquina), nunca en un jamb ni a mitad de una door; sin nodo, PENDIENTE con las dos lecturas (RFI con delta). | evidencia (b) |
+| R73.11 | Jamb return por BORDE (head, sill, cada jamb), cada uno con su detalle: suma solo si el detalle dibuja / rotula gypsum board en el retorno; brake metal, solid sill o frame sobre FRT plywood = 0 con la cita. | evidencia (b) |
+| R73.12 | Todo detalle cuya nota pide BLOCKING (2X, FRT, plywood, stud blocking) genera su `blocking_items` (o NO APLICA citado); material no impreso = CRITERIO + RFI con el delta de moverlo a la otra familia. | canon (blocking) |
+| R73.13 | Corner bead en toda esquina exterior de un box (column wrap, pier, C1 box): vértices convexos expuestos × alto del board. | evidencia (b) |
+| R73.14 | Alto de backboard / plywood de elevación: la cota manda desde donde arranca su línea de cota; si arranca en el piso y una nota dice "INSTALL x AFF", el alto es cota − x solo si la cota incluye ese tramo (se cita el arranque). | evidencia (b) |
+| R73.15 | Sealant y trim de una misma interfaz con otro trade (head y jambs de un frame de vendor) se cargan iguales en los dos bordes, cada uno con su detalle. | evidencia (b) |
+| R73.16 | Un borde de ceiling que ya es `ceiling_transition` / `soffit_side` no se vuelve a cargar como perímetro; la otra lectura va como RFI con delta. | corridas / canon |
+| R73.17 | Cotas impresas de returns dentro del contorno de un wall con tag (furring, monitor, nicho) suman a ese wall (`length_op` las nombra). | evidencia (b) |
+| R73.18 | Stub sin tag ≤ 6" se suma al wall con tag del mismo frente solo si está a ≤ 3 ft (R72.7 corregida); más lejos queda wall propio con aviso para revisar su type (R73.7). | particion.py |
+
+Tools nuevas v73: `cotas_banda.py`, `chequeos_v73.py`, `planmark.py` (contrato de referencias/herramientas.md),
+`glosario.py`, `vocab_trade.py`, `verif_respuesta.py`, `indice_set.py` genérico (arma su cache con pymupdf).
+`test_ciego_tools.py` revisa también test_*.py y fixtures (rooms 1xx, ids de wall de planta, cantidades de una lista
+externa de examen que NO viaja en el paquete).
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 

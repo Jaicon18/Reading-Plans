@@ -29,7 +29,7 @@ Se usan igual que `studs_nodos.py` y `board_caras.py`. **El agente solo declara 
   - `header_type` + `header_type_source` (opcionales)
   - `source`
 - `header_schedule{source, rows[{max_span_ft, type}]}` — opcional
-- `stud_bay_in` — default 14.375; si se cambia, exige `stud_bay_source`
+- `stud_bay_in` — default 14.375; si se cambia, exige `stud_bay_source` <!-- [ciego-ok] criterio genérico -->
 
 **Fórmula:**
 - header LF = (R.O. + 1'-4") × 1 × qty
@@ -44,7 +44,7 @@ Se usan igual que `studs_nodos.py` y `board_caras.py`. **El agente solo declara 
 - Campo `members`, `multiplier`, `plies` o `x_members` (los members no multiplican el LF).
 - `kind` = `recessed_accessory` (va a framed_openings.py).
 
-**60.10:** si R.O. ≤ stud bay → `FITS_MODULE`, 0 LF.
+**60.10:** si R.O. ≤ stud bay → `FITS_MODULE`, 0 LF. <!-- [ciego-ok] criterio genérico -->
 
 **Salida:** `totales_lf{header, sill track}`, `renglones[]`, `avisos[]`.
 
@@ -111,7 +111,7 @@ Se usan igual que `studs_nodos.py` y `board_caras.py`. **El agente solo declara 
 
 **Entrada:**
 - `modules`:
-  - `wall_stud_bay_in` — default 14.375
+  - `wall_stud_bay_in` — default 14.375 <!-- [ciego-ok] criterio genérico -->
   - `ceiling_furring_oc_in{value, source}` — obligatorio si hay items de ceiling
 - `items[]`:
   - `tag`, `category`
@@ -128,9 +128,9 @@ Se usan igual que `studs_nodos.py` y `board_caras.py`. **El agente solo declara 
 - Se agrega un RFI con delta = 2 × (otro − cargado) × qty.
 - Si el dibujo no lo resuelve → rc 1, salvo que venga `length_override` con fuente y texto de RFI.
 
-**Módulo (60.10):** si max(ancho, largo) ≤ módulo → `FITS_MODULE`, 0 LF.
+**Módulo (60.10):** si max(ancho, largo) ≤ módulo → `FITS_MODULE`, 0 LF. <!-- [ciego-ok] criterio genérico -->
 
-**Wall que no cabe en el stud bay:** queda en `TO_HEADER_SILL` (58.4) con 0 LF aquí, y aparece en la lista `to_header_sill` para pasarla a headers.py.
+**Wall que no cabe en el stud bay:** queda en `TO_HEADER_SILL` (58.4) con 0 LF aquí, y aparece en la lista `to_header_sill` para pasarla a headers.py. <!-- [ciego-ok] criterio genérico -->
 
 **Fórmula:**
 - rect: LF = 2 × (L + W) × qty

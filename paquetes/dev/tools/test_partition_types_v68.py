@@ -39,7 +39,7 @@ def P(i, ln, a, L, ori=None, axis=None):
 
 
 def test_r6_parapet_straight_run_geometrico():
-    # misma etiqueta de lado ("N") pero dos ejes distintos (step de 2.5 ft) = 2 walls + el step = 3
+    # misma etiqueta de lado ("N") pero dos ejes distintos (step de 2.5 ft) = 2 walls + el step = 3  [ciego-ok]
     c = dict(C, walls=[P("a", "N", 0, 12, "H", 0.0), P("s", "N", 12, 2.5, "V", 12.0), P("b", "N", 14.5, 30, "H", 2.5)])
     t = partition_types(c)["types"]["EXT-PARAPET"]
     chk("R6 step entre ejes parte el run", t["walls"] == 3 and abs(t["lf"] - 44.5) < 1e-9 and t["status"] == "OK", t)

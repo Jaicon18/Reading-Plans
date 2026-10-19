@@ -69,7 +69,7 @@ def test_net_del_canon_vigente():
     d["materials"].append({"material": "6\" metal stud", "unit": "LF", "net": 1.0, "metal": True, "stock": 20,
                            "cut_ft": 10, "source": "familias_out.json (canon.py): '6\" stud (todos los gauges)'; 1/X12.01"})
     m = {x["material"]: x for x in P.fusionar(d, fo)["materials"]}
-    chk("NET del canon vigente", m["6\" metal stud"]["net"] == 321.0, m["6\" metal stud"])
+    chk("NET del canon vigente", m["6\" metal stud (LF of material)"]["net"] == 321.0, m["6\" metal stud (LF of material)"])
 
 
 def test_pendiente_no_se_arma():

@@ -194,7 +194,7 @@ def _mr(data):
     for x in fx:
         if x.get("kind") not in MR_FIXTURES:
             raise ValueError(f"wet_fixture {x.get('ref')}: kind {x.get('kind')} no lleva MR "
-                             f"({', '.join(MR_FIXTURES)}; un drinking fountain NO — #13B C1-3)")
+                             f"({', '.join(MR_FIXTURES)}; un drinking fountain NO — #13B)")
         if not str(x.get("source") or "").strip():
             raise ValueError(f"wet_fixture {x.get('ref')}: falta source")
         pedidas.add((x["wall"], str(x["room"])))

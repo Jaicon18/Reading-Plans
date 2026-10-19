@@ -19,6 +19,9 @@ Uso:
   registro.py marcar   <registro.json> <id> verificado "<evidencia>"
   registro.py marcar   <registro.json> <id> pendiente_rfi "<RFI-## motivo>"
   registro.py anexar   <registro.json> <id> "<evidencia adicional>"   (v66: solo verificado / pendiente_rfi)
+  registro.py corregir <registro.json> <id> <estado> "<motivo y evidencia nueva>"   (v73, F01: un renglón ya
+                       resuelto que se marcó MAL se corrige con una entrada nueva que MANDA; el historial guarda la
+                       anterior. Nunca se borra ni se edita a mano.)
   registro.py estado   <registro.json>                    (resumen por tipo y por estado)
   registro.py entregable <registro.json>                  (exit 1 si queda algo pendiente)
 
@@ -140,6 +143,31 @@ def anexar(path, rid, texto):
     raise RegistroRoto(f"id no existe: {rid}")
 
 
+def corregir(path, rid, nuevo, nota):
+    """v73 (F01 de la prueba 21B): un renglón verificado / pendiente_rfi marcado mal no se podía revertir (marcar no
+    permite verificado -> otro; anexar no cambia el estado) y las compuertas seguían leyendo la nota mala. corregir
+    agrega al historial una entrada CORRECCION con el estado y la nota anteriores y deja el estado y la nota nuevos:
+    la última entrada manda (las compuertas leen r["estado"] / r["nota"]). Requiere motivo; pendiente_rfi exige RFI."""
+    reg = leer(path)
+    if nuevo not in ESTADOS:
+        raise RegistroRoto(f"estado inválido: {nuevo}")
+    if not nota.strip():
+        raise RegistroRoto("corregir exige el motivo y la evidencia nueva")
+    if nuevo == "pendiente_rfi" and "RFI" not in nota.upper():
+        raise RegistroRoto("pendiente_rfi exige el número de RFI en la nota")
+    for r in reg["renglones"]:
+        if r["id"] == rid:
+            if r["estado"] not in ("verificado", "pendiente_rfi"):
+                raise RegistroRoto(f"{rid}: corregir es para renglones ya resueltos (está {r['estado']}; usar marcar)")
+            r["historial"].append([time.strftime("%Y-%m-%d %H:%M"), r["estado"], nuevo,
+                                   "CORRECCION (antes: " + r["nota"] + "): " + nota])
+            r["estado"], r["nota"] = nuevo, nota
+            r["corregido"] = int(r.get("corregido", 0)) + 1
+            _guardar(path, reg)
+            return r
+    raise RegistroRoto(f"id no existe: {rid}")
+
+
 def resumen(reg):
     por = {}
     for r in reg["renglones"]:
@@ -169,6 +197,8 @@ if __name__ == "__main__":
             reg = agregar(a[1], _cargar(a[2])); print(f"OK total: {reg['total']} renglones")
         elif len(a) == 5 and a[0] == "marcar":
             r = marcar(a[1], a[2], a[3], a[4]); print(f"OK {r['id']}: {r['estado']}")
+        elif len(a) == 5 and a[0] == "corregir":
+            r = corregir(a[1], a[2], a[3], a[4]); print(f"OK {r['id']}: {r['estado']} (corrección #{r['corregido']})")
         elif len(a) == 4 and a[0] == "anexar":
             r = anexar(a[1], a[2], a[3]); print(f"OK {r['id']}: {r['estado']} + anexo")
         elif len(a) == 2 and a[0] == "estado":

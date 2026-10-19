@@ -61,7 +61,8 @@ MODO_DEFAULT = "eje"       # v71: arbitraje #19 (línea recta por tag; sin tag s
 MODOS = ("tramo", "run", "eje")
 GAP_ABERTURA_MAX_FT = 7.0  # v71: hueco colineal máximo que se cruza, y solo con un R.O. del wall dentro (R70.3)
 JOG_MAX_FT = 1.0
-STUB_MAX_FT = 0.5         # v72 (R72.7): grupo suelto sin tag <= 6" = stub, se suma al wall con tag más cercano
+STUB_MAX_FT = 0.5         # v72 (R72.7): grupo suelto sin tag <= 6" = stub, se suma al wall con tag que toca
+STUB_DIST_MAX_FT = 3.0    # v73 (arbitraje #21): solo si ese wall está a <= 3 ft (remate del mismo frente); más lejos = aviso
 TOL_LINE_FT = 0.25        # colineales: ejes a <= 3"
 TOL_GAP_FT = 0.5          # contiguos / extremos que se tocan: hueco <= 6" (más el espesor del wall)
 ESCALA_DEFAULT = 18.0
@@ -252,6 +253,12 @@ def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_
                     return min(math.dist(p, q) for k in ks for p in extremos(tramos[k]["geo"])
                                for q in extremos(tramos[c]["geo"]))
                 c = min(con, key=lambda c: (dist(c), -tramos[c]["lf"], c))
+                if dist(c) > (STUB_DIST_MAX_FT + tramos[c]["geo"][4] / esc) * esc:
+                    avisos.append(f"{'+'.join(x for k in ks for x in tramos[k]['ids'])} ({t}, {sh}) stub sin tag <= "
+                                  f"{STUB_MAX_FT} ft que NO toca ningún wall con tag del type (más cercano a "
+                                  f"{round(dist(c) / esc, 2)} ft): revisar su type por espesor (R73.7); queda wall propio")
+                    quedan.append(ks)
+                    continue
                 dest[c] += ks
                 avisos.append(f"{'+'.join(x for k in ks for x in tramos[k]['ids'])} ({t}, {sh}) stub sin tag <= "
                               f"{STUB_MAX_FT} ft: sumado al wall con tag más cercano (R72.7), no es wall propio")

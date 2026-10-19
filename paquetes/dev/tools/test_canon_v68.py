@@ -21,9 +21,9 @@ def _falla(d, txt):
 def test_mr_solo_detras_del_fixture():
     """#16B: 5/8 MR en el exterior wall (pared lateral de grab bars) además del chase."""
     d = T.base()
-    d["walls"][2]["faces"][1] = {"room": "122", "board": "5/8 MR", "layers": 1, "height_ft": 9.0}
+    d["walls"][2]["faces"][1] = {"room": "922", "board": "5/8 MR", "layers": 1, "height_ft": 9.0}
     _falla(copy.deepcopy(d), "5/8 MR sin wet_fixture")
-    d["wet_fixtures"] = [{"ref": "LAV", "kind": "lavatory", "wall": "I1", "room": "122", "source": "1/A08.01"}]
+    d["wet_fixtures"] = [{"ref": "LAV", "kind": "lavatory", "wall": "I1", "room": "922", "source": "1/A08.01"}]
     _falla(copy.deepcopy(d), "back_source")
     d["wet_fixtures"][0]["back_source"] = "1/A08.01 lavatory contra I1; P00.01 carrier"
     f = K.calcular(d)["familias"]
@@ -88,7 +88,7 @@ def test_ceiling_detalle_manda_el_sistema():
 
 
 def test_quiebre_de_deck():
-    """#16A B2-CA y #16B A5-01 cruzan grid B (cambio de B.O.D.) con una sola altura."""
+    """walls que cruzan un grid (cambio de B.O.D.) con una sola altura."""
     d = T.base()
     del d["constants"]["deck_breaks"]
     _falla(copy.deepcopy(d), "deck_breaks")

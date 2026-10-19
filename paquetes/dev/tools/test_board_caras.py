@@ -14,15 +14,15 @@ DET = {"5/A12.01": {"layers_per_face": 2},
 def caso():
     return {"details": copy.deepcopy(DET), "walls": [
         {"id": "W45", "tag": "G", "detail": "5/A12.01", "length_printed_ft": 11.5,
-         "faces": [{"room": "Office 106", "board": "5/8 regular", "layers": 2, "height_ft": 15.25},
-                   {"room": "Office 107", "board": "5/8 regular", "layers": 2, "height_ft": 15.25}]},
+         "faces": [{"room": "Office 906", "board": "5/8 regular", "layers": 2, "height_ft": 15.25},
+                   {"room": "Office 907", "board": "5/8 regular", "layers": 2, "height_ft": 15.25}]},
         {"id": "W11", "tag": "A1K", "detail": "4/A12.01", "length_vector_ft": 2.57, "length_printed_ft": 3.5,
          "faces": [{"room": "Teller", "board": "5/8 regular", "layers": 1, "height_ft": 15.25},
                    {"room": "Customer", "board": "5/8 regular", "layers": 1, "height_ft": 15.25,
                     "k_customer": True}]},
         {"id": "W26", "tag": "B2K", "detail": "4/A12.01", "length_vector_ft": 1.25,
-         "faces": [{"room": "Office 108", "board": "5/8 regular", "layers": 1, "height_ft": 15.25},
-                   {"room": "Waiting 104", "board": "5/8 regular", "layers": 1, "height_ft": 15.25,
+         "faces": [{"room": "Office 908", "board": "5/8 regular", "layers": 1, "height_ft": 15.25},
+                   {"room": "Waiting 904", "board": "5/8 regular", "layers": 1, "height_ft": 15.25,
                     "k_customer": True}]},
     ]}
 

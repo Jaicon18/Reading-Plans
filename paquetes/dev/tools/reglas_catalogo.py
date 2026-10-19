@@ -28,8 +28,11 @@ import re
 import sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-SKILL_DIRS = (os.path.join(AQUI, "..", "take-off-metal-frame-drywall"), os.path.join(AQUI, "take-off-metal-frame-drywall"),
-              os.path.join(AQUI, ".."))
+# v73: $TAKEOFF_SKILL primero (skill instalado en otra ruta: la prueba 21B corrió 37/45 por "SKILL.md fuera de ruta")
+SKILL_DIRS = tuple(x for x in (os.environ.get("TAKEOFF_SKILL"),
+                               os.path.join(AQUI, "..", "take-off-metal-frame-drywall"),
+                               os.path.join(AQUI, "take-off-metal-frame-drywall"), os.path.join(AQUI, ".."),
+                               os.path.expanduser("~/.claude/skills/take-off-metal-frame-drywall")) if x)
 
 ID_EXPL = re.compile(r"\*\*(E\d{1,2}|R7\d\.\d{1,2}b?|PT\d|D\d{1,2}|A\d{1,2}(?:–A\d{1,2})?)\*\*")
 ID_TABLA = re.compile(r"^\|\s*(R7\d\.\d{1,2}b?|PT\d|D\d{1,2}|A\d{1,2}(?:–A\d{1,2})?)\s*\|")

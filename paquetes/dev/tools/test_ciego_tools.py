@@ -17,6 +17,15 @@ Excepciones GENÉRICAS de P2/P4 (no dependen de ningún proyecto; cada una es un
   - conversión de hoja: "AxB … N SF" con N = A·B en la misma línea ("4x8 sheet = 32 SF").
 Una línea con el marcador `[ciego-ok]` se permite (criterio general que necesita el número; se revisa a mano).
 
+v73 (arbitraje #21): también test_*.py y fixtures (antes se saltaban), y sobre los LITERALES de texto y número:
+  P6 room real: texto con room / office / restroom / corridor… + número 1xx, o el valor de "room" = 1xx
+     (los datos sintéticos usan rooms 9xx);
+  P7 wall ID real: literal con forma de id de wall de un type de planta "A1-3", "C1-5", "A1K-2", "B2-2a",
+     "EXT-8-1" (los sintéticos usan X / Y / Z / W: "X1-1", "WZ");
+  P8 cantidad de una referencia: un literal numérico igual (±0.0005) a un valor de la lista EXTERNA de valores de
+     examen (`--valores <json>` o $CIEGO_VALORES). La lista vive FUERA del paquete (la arma el árbitro); sin
+     lista, P8 solo corre su autoprueba.
+
 Uso:  python3 test_ciego_tools.py            autoprueba sintética + barrido de la carpeta de este archivo
       python3 test_ciego_tools.py a.py b.py  solo esos archivos (más la autoprueba)
 rc 0 = OK; rc 1 = hallazgos (archivo:línea: patrón: texto).
@@ -36,6 +45,56 @@ P1_ESTRICTO = ("P1 estricto", re.compile(r"BOA(?!RD)|\bBofA\b|Broomfield|Bank of
                                          r"|/home/claude/boa|/home/user/boa|boa20", re.I))
 
 
+P6 = re.compile(r"(?i)\b(room|office|restroom|corridor|break ?room|storage|janitor|vestibule|lobby|wellness|"
+                r"electrical|work ?room|men|women|cash window|teller|calling)\b[^\n\"']{0,15}?\b1\d\d[A-Z]?\b")
+P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
+P7 = re.compile(r"^(?:[A-H]\d?K?|EXT-\d+)-\d{1,2}[a-z]?$")
+_VALORES = None
+
+
+def valores(path=None):
+    """Lista externa de valores de examen (P8); None si no hay."""
+    global _VALORES
+    path = path or os.environ.get("CIEGO_VALORES")
+    if path and os.path.isfile(path):
+        import json
+        _VALORES = sorted(float(x) for x in json.load(open(path, encoding="utf-8")))
+    return _VALORES
+
+
+def revisar_literales(texto, nombre="<texto>", vals=None):
+    """P6 / P7 sobre literales de texto y P8 sobre literales numéricos (ast)."""
+    hall = []
+    lineas = texto.splitlines()
+    try:
+        arbol = ast.parse(texto)
+    except SyntaxError:
+        return hall
+    claves_room = set()
+    for nodo in ast.walk(arbol):
+        if isinstance(nodo, ast.Dict):
+            for k, v in zip(nodo.keys, nodo.values):
+                if isinstance(k, ast.Constant) and k.value in ("room", "rooms") and isinstance(v, ast.Constant):
+                    claves_room.add(id(v))
+    for nodo in ast.walk(arbol):
+        if not isinstance(nodo, ast.Constant) or OK in lineas[nodo.lineno - 1]:
+            continue
+        v = nodo.value
+        if isinstance(v, str):
+            m = P6.search(v)
+            if m or (id(nodo) in claves_room and P6_VALOR.match(v.strip())):
+                hall.append(f"{nombre}:{nodo.lineno}: P6 room real: {v[:60]!r}")
+            elif P7.match(v.strip()):
+                hall.append(f"{nombre}:{nodo.lineno}: P7 wall ID real: {v!r}")
+        elif isinstance(v, float) and vals:
+            import bisect
+            i = bisect.bisect_left(vals, v - 0.0005)
+            en_grilla = abs(v * 48 - round(v * 48)) / 48 <= 0.0035     # cota de pies-pulgadas a 1/4" (genérica)
+            if i < len(vals) and abs(vals[i] - v) <= 0.0005 and not en_grilla:
+                hall.append(f"{nombre}:{nodo.lineno}: P8 cantidad de la referencia: {v}")
+    return hall
+
+
 _UMBRAL = re.compile(r"(±|\+/-|[<>]=?|≤|≥|dentro de)\s*$")
 _HOJA = re.compile(r"\b(\d{1,2})\s?x\s?(\d{1,2})\b")
 
@@ -52,6 +111,8 @@ def _generico(et, frag, m):
         return True
     if m.start() > 0 and frag[m.start() - 1] == ".":
         return True
+    if num and re.search(r"walls?\b", txt) and float(num.group(0).rstrip(",") or 9) <= 3:
+        return True                                   # regla de corte ("= 1 wall", "2 walls"), no un conteo de obra
     if num and re.search(r"\bSF\b", txt):
         n = float(num.group(0).replace(",", ""))
         if any(int(a) * int(b) == n for a, b in _HOJA.findall(frag)):
@@ -137,27 +198,46 @@ def autoprueba():
     assert lineas_malas == {"1", "3", "5", "6"}, hm
     assert any("P3" in h for h in hm) and any("P4" in h for h in hm), hm
     assert hb == [], hb
-    return "autoprueba OK (4/4 líneas malas detectadas, 0 falsos positivos en una fuente genérica)"
+    lit_malo = ('W = {"id": "C1-5", "room": "113", "location": "Office 108 north"}\n'      # SINTÉTICOS con forma real
+                'L = 12.345\n')
+    lit_bueno = ('W = {"id": "X1-5", "room": "913", "location": "Office 908 north", "ref": "RFI-1", "s": "R-1"}\n'
+                 'L = 12.5\nAISC = 7.5  # [ciego-ok] tabla\n')
+    hl = revisar_literales(lit_malo, "lm", [12.345])
+    assert {h.split(": ")[1] for h in hl} >= {"P6 room real", "P7 wall ID real", "P8 cantidad de la referencia"}, hl
+    assert revisar_literales(lit_bueno, "lb", [12.345]) == [], revisar_literales(lit_bueno, "lb", [12.345])
+    return "autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, 0 falsos positivos)"
 
 
 def archivos(argv):
     if argv:
         return argv
     d = os.path.dirname(os.path.abspath(__file__))
-    return [os.path.join(d, f) for f in sorted(os.listdir(d))
-            if f.endswith(".py") and not f.startswith("test_")]
+    return [os.path.join(d, f) for f in sorted(os.listdir(d)) if f.endswith(".py")]
 
 
 def main(argv):
     print(autoprueba())
-    fs = archivos(argv[1:])
+    a = list(argv[1:])
+    if "--valores" in a:
+        i = a.index("--valores")
+        valores(a[i + 1])
+        del a[i:i + 2]
+    else:
+        valores()
+    fs = archivos(a)
     hall = []
     for f in fs:
         with open(f, encoding="utf-8") as fh:
-            hall += revisar_fuente(fh.read(), os.path.basename(f))
+            t = fh.read()
+        b = os.path.basename(f)
+        # los patrones de texto de los tests de ciego son sus casos malos a propósito
+        if b not in ("test_ciego.py", "test_ciego_v69.py", "test_ciego_tools.py"):
+            hall += revisar_fuente(t, b)
+        hall += revisar_literales(t, b, _VALORES) if b != "test_ciego_tools.py" else []
     for h in hall:
         print(h)
-    print(f"test_ciego_tools: {len(fs)} archivo(s), {len(hall)} hallazgo(s) -> " + ("OK" if not hall else "FALLA"))
+    print(f"test_ciego_tools: {len(fs)} archivo(s) (tests y fixtures incluidos), P8 con "
+          f"{len(_VALORES) if _VALORES else 0} valores externos, {len(hall)} hallazgo(s) -> " + ("OK" if not hall else "FALLA"))
     return 0 if not hall else 1
 
 

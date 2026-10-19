@@ -103,7 +103,9 @@ def test_head_track():
 
 def test_reinforcement_y_sleeves():
     o = A.calcular(fam_base(), canon_base(), STUDS)
-    chk("1 plate por stud cortado x qty", o["familias"]["stud reinforcement MEP"] == 2)
+    # v73 (R73.5): un FD de openings_extra (fuera del barrido mep.cruces) no entra en la familia: RFI con su delta
+    chk("FD fuera de mep.cruces = 0 en la familia + RFI", o["familias"]["stud reinforcement MEP"] == 0 and any(
+        r["familia"] == "stud reinforcement MEP" and r["delta"] == 2 for r in o["rfis"]), o["rfis"])
     # PAFs: ROUNDUP(10.5)=11 + ROUNDUP(4)=4 + 2 sleeves
     chk("PAFs por run + sleeves", o["familias"]["PAFs and duct sleeves"] == 17, o["familias"]["PAFs and duct sleeves"])
     c = canon_base()
@@ -130,20 +132,31 @@ def _err(nombre, c, frase, studs=STUDS):
 
 def test_v67_reinforcement_pipes():
     c = canon_base()
-    c["mep_penetrations"] = [{"ref": "pipe chico", "wall": "W1", "dia_in": 1.0, "qty": 3, "source": "P1.01"},
-                             {"ref": "pipe 3", "wall": "W1", "dia_in": 3.0, "qty": 2, "source": "P1.01"},
+    c["mep_penetrations"] = [{"ref": "pipe chico", "wall": "W1", "dia_in": 1.0, "qty": 3, "source": "P1.01",
+                              "method": "mep.cruces", "kind": "pipe"},
+                             {"ref": "pipe 3", "wall": "W1", "dia_in": 3.0, "qty": 2, "source": "P1.01",
+                              "method": "mep.cruces", "kind": "pipe"},
                              {"ref": "duct 2 studs", "wall": "W2", "width_in": 10, "qty": 1, "source": "M1.01",
+                              "method": "mep.cruces", "kind": "duct",
                               "studs_cut": {"value": 2, "source": "M1.01 (cruza un stud de cada row)"}}]
     o = A.calcular(fam_base(), c, STUDS)
-    chk("pipe <= 1in sin plate; pipe 3in 1 x 2; studs_cut declarado", o["familias"]["stud reinforcement MEP"]
-        == 2 + 0 + 2 + 2, o["familias"]["stud reinforcement MEP"])
+    # v73 (R73.5): solo ductos de mep.cruces en la familia; pipe > 1" a RFI (+2); FD de openings_extra a RFI
+    chk("pipe <= 1in sin plate; pipe 3in a RFI; studs_cut declarado", o["familias"]["stud reinforcement MEP"]
+        == 2, o["familias"]["stud reinforcement MEP"])
+    chk("RFI de pipes > 1in con delta 2", any("pipes over 1 in" in r["tema"] and r["delta"] == 2 for r in o["rfis"]),
+        o["rfis"])
 
 
 def test_reinforcement_ancho():
     c = canon_base()
-    c["mep_penetrations"] = [{"ref": "duct wide", "wall": "W1", "width_in": 30, "qty": 1, "source": "M1.01"}]
+    c["mep_penetrations"] = [{"ref": "duct wide", "wall": "W1", "width_in": 30, "qty": 1, "source": "M1.01",
+                              "method": "mep.cruces", "kind": "duct"}]
     o = A.calcular(fam_base(), c, STUDS)
-    chk("ducto de 30\" @16\" corta 2 studs", o["familias"]["stud reinforcement MEP"] == 2 + 2)
+    chk("ducto de 30\" @16\" corta 2 studs", o["familias"]["stud reinforcement MEP"] == 2)
+    c["mep_penetrations"][0]["method"] = "manual"
+    o = A.calcular(fam_base(), c, STUDS)
+    chk("v73 cruce manual = 0 en la familia + RFI", o["familias"]["stud reinforcement MEP"] == 0 and any(
+        "read by hand" in r["tema"] and r["delta"] == 2 for r in o["rfis"]), o["rfis"])
 
 
 def test_grille():
@@ -302,7 +315,7 @@ def test_v67_atm_obligatorio():
 
 def test_nombres_y_unidades():
     o = A.calcular(fam_base(), canon_base(), STUDS)
-    chk("15 familias", len(o["familias"]) == 15)
+    chk("16 familias (v73: deflection clips)", len(o["familias"]) == 16)
     chk("toda fila con source", all(r["source"] for r in o["filas"]))
     n = o["nombres_excel"]
     chk("v67 un renglón de Material Summary por familia", set(n) == set(o["familias"]))
@@ -334,7 +347,7 @@ def test_v68_registro_y_visual():
     c["mep_penetrations"] = [{"ref": "pipe in cavity", "wall": "W2", "dia_in": 3.0, "in_cavity": True,
                               "in_cavity_source": "5/X12.01", "source": "P1.01"}]
     o = A.calcular(fam_base(), c, STUDS)
-    chk("v68 pipe dentro de la cavidad = 0", o["familias"]["stud reinforcement MEP"] == 2)
+    chk("v68 pipe dentro de la cavidad = 0", o["familias"]["stud reinforcement MEP"] == 0)
 
 
 def test_v68_grille_cadena():

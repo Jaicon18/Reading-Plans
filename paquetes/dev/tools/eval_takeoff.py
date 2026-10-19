@@ -205,7 +205,13 @@ def evaluate(ref_path, cand_path, tol=0.02, close=0.10, rangos=None):
                                         "dif": None, "puntos": 0.0, "ref_renglones": r_["renglones"]})
                 continue
             rg = rangos.get(f) or {}
-            if rg.get("min") is not None and rg.get("max") is not None and rg["max"] > rg["min"]:
+            if str(rg.get("modo") or "") == "consistencia":     # v73: no califica contra un número viejo de la ref
+                res["familias"].append({"familia": f, "ref": r_["net"], "cand": c_["net"], "estado": "CONSISTENCIA",
+                                        "dif": None, "puntos": None, "ref_renglones": r_["renglones"],
+                                        "cand_renglones": c_["renglones"]})
+                continue
+            # v73 (arbitraje #21): min == max es una decisión de valor fijo y manda sobre el número de la ref
+            if rg.get("min") is not None and rg.get("max") is not None and rg["max"] >= rg["min"]:
                 est, d, pts = grade_rango(rg["min"], rg["max"], c_["net"], tol, close)
             else:
                 est, d, pts = grade(r_["net"], c_["net"], tol, close)
@@ -236,12 +242,21 @@ def evaluate(ref_path, cand_path, tol=0.02, close=0.10, rangos=None):
                                      "cand_lf": None, "estado": "FALTA", "dif": None, "puntos": 0.0})
                 continue
             c = cp[t]
-            est, d, pts = grade(r["lf"], c["lf"], tol, close)
-            if c["walls"] != r["walls"] and est == "IGUAL":
+            # v73: los rangos de types (_partition_types) mandan sobre la hoja de la ref (LF y número de walls)
+            tr = (rangos.get("_partition_types") or {}).get(t) or {}
+            lo, hi = tr.get("lf_min", tr.get("lf")), tr.get("lf_max", tr.get("lf"))
+            wlo = tr.get("walls_min", tr.get("walls", r["walls"]))
+            whi = tr.get("walls_max", tr.get("walls", r["walls"]))
+            if lo is not None and hi is not None:
+                est, d, pts = grade_rango(lo, hi, c["lf"], tol, close)
+                est = est.replace(" (rango)", "")
+            else:
+                est, d, pts = grade(r["lf"], c["lf"], tol, close)
+            if not (wlo <= c["walls"] <= whi) and est == "IGUAL":
                 est, pts = "CERCA", 0.5                  # mismos LF pero distinto número de walls: revisar
             res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": c["walls"],
                                  "cand_lf": c["lf"], "estado": est, "dif": d, "puntos": pts})
-        res["types_sobran"] = [{"type": t, **cp[t]} for t in sorted(cp) if t not in rp]
+        res["types_sobran"] = [{"type": t, **cp[t]} for t in sorted(cp) if t not in rp and not t.startswith("OTHER")]
 
     def pct(items):
         return round(100 * sum(x["puntos"] for x in items) / len(items), 1) if items else None

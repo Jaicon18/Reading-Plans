@@ -194,3 +194,22 @@ que existe y valor; c: fusionadas). Escribe `reglas_out.json` y `REGLAS_FALLAS.m
 `plantilla_excel.py armar` la llama en proceso y no escribe el Excel sin OK; `etapas.py compuerta` y
 `bitacora.py compuerta` también. `reglas.py faltantes <dir>` = plantilla de la evidencia que falta;
 `reglas.py tabla` = tabla regla → tipo → chequeo → test.
+
+## v73 — tools nuevas (contratos)
+
+- **cotas_banda.py** — `dim_scan(pdf, pagina_1based, band, win=72)` → `{found: [{text, value_ft, center, dist_pt}],
+  source}`: cotas pies-pulgadas impresas PARALELAS a la banda de un wall, a ≤ `win` pt y con centro dentro del tramo.
+  Coordenadas de la página mostrada (rotada), las del canon. Lo exige R73.1 en todo wall K. Test: test_v73.
+- **chequeos_v73.py** — R73.1 (cota impresa del type K), R73.2 (contorno K sin esquinas dobles), R73.5 (MEP solo
+  de mep.cruces), R73.6 (deflection clips declarados), R73.7 (type por espesor de segmentos sin tag), R73.8
+  (operación escrita cuadra). `reglas.py compuerta` los corre (A_R73_x). Test: test_v73 + test_reglas.
+- **planmark.py** — el contrato de arriba (marcado verificado, `overview()` y `sheet()`); test_planmark sobre un PDF
+  sintético con los 6 tests obligatorios.
+- **glosario.py / vocab_trade.py** — `traducir(t)`, `faltas(t)` (dato y prosa; la normalización del código vive en
+  `vocab_trade.sin_codigo`). **verif_respuesta.py** — compuerta de la respuesta final (adenda v40). Tests:
+  test_glosario, test_verif_respuesta.
+- **indice_set.py** — genérico: arma su cache de palabras con pymupdf si no está; página del índice por el texto
+  "DRAWING / SHEET INDEX"; columnas por la x de los números de hoja. Test: test_indice_set (PDF sintético).
+- **registro.py corregir** — corrección de un renglón resuelto (la última entrada manda; historial). Test:
+  test_registro_v73.
+- **correr_suite.py** — dependencias + estructura + suite completa desde carpeta limpia.

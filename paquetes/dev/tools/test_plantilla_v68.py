@@ -134,8 +134,8 @@ def test_compra_inputs_y_desperdicio_una_vez():
     chk("sheet / B9", any("Inputs!$B$9" in str(r[7]) for k, r in f.items() if "plywood" in k))
     s = [k for k in f if k.startswith("Acoustical sealant")][0]
     chk("sealant en tubes / B15", "Inputs!$B$15" in f[s][7] and "tube" in f[s][6], f[s])
-    chk("hanger wire LF continuous coil", "coil" in str(f["Hanger wire 12 ga"][6]), f["Hanger wire 12 ga"])
-    # desperdicio una vez: stud de 100 LF, 15 % -> ROUNDUP(115 / 20) = 6 (antes 1 stick por corte de 13 ft = 9)
+    chk("hanger wire LF continuous coil", "coil" in str(f["Hanger wire"][6]), f["Hanger wire"])
+    # desperdicio una vez: stud de 100 LF, 15 % -> ROUNDUP(115 / 20) = 6 (antes 1 stick por corte de 13 ft = 9)  [ciego-ok]
     stud = {"material": "6\" metal stud 600S137-33", "unit": "LF", "net": 100.0, "metal": True, "stock": 20,
             "cut_ft": 13, "selling_unit": "stick 20 ft", "source": "1/X12.01"}
     chk("stud: ROUNDUP(Purchase / Inputs B10)", P.formula_piezas(stud, 9) == "=ROUNDUP(F9/Inputs!$B$10,0)",
