@@ -33,13 +33,14 @@ def grupos(r):
 
 
 def test_default_es_run():
-    assert P.MODO_DEFAULT == "run", P.MODO_DEFAULT
-    assert P.particion(canon([w("A", "X1", "H", 100, 0, 90)]))["modo"] == "run"
+    """v71: el default pasó a "eje" (arbitraje #19); "run" sigue como opción explícita."""
+    assert P.MODO_DEFAULT == "eje" and "run" in P.MODOS, P.MODO_DEFAULT
+    assert P.particion(canon([w("A", "X1", "H", 100, 0, 90)]), "run")["modo"] == "run"
 
 
 def test_l_de_dos_segmentos_es_un_wall_por_default():
     c = canon([w("L1", "X1", "H", 100, 0, 180), w("L2", "X1", "V", 180, 100, 280)])
-    r = P.particion(c)
+    r = P.particion(c, "run")
     assert grupos(r) == [("X1", ("L1", "L2"))], grupos(r)
     r2 = P.particion(c, "tramo")                         # la opción tramo sigue partiendo en la esquina
     assert len(grupos(r2)) == 2, grupos(r2)
@@ -96,12 +97,12 @@ def test_v70c_ejes_exterior_en_l_se_corta():
     for tag, kw in (("EXT", {}), ("EXT-6CFMF", {}), ("PARAPET", {}), ("6CFMF", {}), ("X1", {"location": "exterior"}),
                     ("X1", {"exterior": True})):
         c = canon([w("E1", tag, "H", 100, 0, 180, **kw), w("E2", tag, "V", 180, 100, 280, **kw)])
-        assert len(grupos(P.particion(c))) == 2, (tag, kw, grupos(P.particion(c)))
+        assert len(grupos(P.particion(c, "run"))) == 2, (tag, kw, grupos(P.particion(c, "run")))
     c = canon([w("I1", "X1", "H", 100, 0, 180), w("I2", "X1", "V", 180, 100, 280)])
-    assert grupos(P.particion(c)) == [("X1", ("I1", "I2"))]
+    assert grupos(P.particion(c, "run")) == [("X1", ("I1", "I2"))]
     # exterior colineal y contiguo en el MISMO eje sigue siendo 1 wall
     c = canon([w("E1", "EXT", "H", 100, 0, 180), w("E2", "EXT", "H", 100, 182, 300)])
-    assert grupos(P.particion(c)) == [("EXT", ("E1", "E2"))]
+    assert grupos(P.particion(c, "run")) == [("EXT", ("E1", "E2"))]
 
 
 if __name__ == "__main__":

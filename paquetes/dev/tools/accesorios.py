@@ -129,7 +129,7 @@ DEFAULTS = {
 BOARD_DRIVER = ("5/8\" gyp board regular (walls + ceilings)", "5/8\" gyp MOISTURE RESISTANT", "3/8\" gyp board")
 STUD_FAMS = ("6\" stud", "3-5/8\" stud", "1-5/8\" stud", "6\" parapet stud", "2-1/2\" stud")
 PEN_KINDS = ("duct", "fire_damper", "pipe", "mep", "duct_sleeve")
-ON_SLAB = ("wall", "column_wrap", "pier")          # bottom track sobre losa (pins / anchors)
+ON_SLAB = ("wall", "column_wrap", "pier", "chase")  # bottom track sobre losa (pins / anchors); v71: chase apoya en losa
 NOT_ON_SLAB = ("door_bulkhead", "vestibule_head", "grille_head", "roof_step", "parapet", "fascia_box",
                "ceiling_transition", "ceiling_bulkhead", "soffit_side", "canopy_soffit", "storefront_cripples")
 
@@ -626,6 +626,28 @@ def pvc_trim(data, o):
               f"{wdt} + vertical ends 2 x {h} = {round(lf, 2)}")
 
 
+def _runs_parapet(par):
+    """v71 (A7, arbitraje #19): los walls de parapet del mismo run (misma `run` / `run_id`, o colineales y contiguos
+    por `band`) suman su largo antes del ROUNDUP; sin dato de run, cada wall es su run. -> [(ids, L)]."""
+    import particion
+    grupos, sueltos = {}, []
+    for w in par:
+        rid = w.get("run") or w.get("run_id")
+        if rid:
+            grupos.setdefault(("R", str(rid)), []).append(w)
+        else:
+            sueltos.append(w)
+    out = [([str(x.get("id", x.get("ref"))) for x in ws], sum(float(x["length_ft"]) for x in ws))
+           for ws in grupos.values()]
+    con_band = [dict(w, id=str(w.get("id", w.get("ref")))) for w in sueltos if particion.geo(w) is not None]
+    sin_band = [w for w in sueltos if particion.geo(w) is None]
+    if con_band:
+        for t in particion._tramos(con_band, 18.0, particion.TOL_LINE_FT, particion.TOL_GAP_FT):
+            out.append((t["ids"], t["lf"]))
+    out += [([str(w.get("id", w.get("ref")))], float(w["length_ft"])) for w in sin_band]
+    return out
+
+
 def pafs(data, fo, o):
     """Parapet infill: bottom track al steel beam con PAFs @ 12" O.C. MAX -> por run ROUNDUP(L / sp); + duct
     sleeves = una por penetración de ducto / fire damper en wall."""
@@ -634,10 +656,10 @@ def pafs(data, fo, o):
           [r for r in data.get("runs") or [] if r.get("element") == "parapet"]
     tot = 0
     det = []
-    for w in par:
-        n = math.ceil(float(w["length_ft"]) / float(sp) - EPS)
+    for ids, L in _runs_parapet(par):                # v71 (A7): ROUNDUP por RUN, no por wall
+        n = math.ceil(L / float(sp) - EPS)
         tot += n
-        det.append(f"{w.get('id', w.get('ref'))} ROUNDUP({w['length_ft']}/{sp})={n}")
+        det.append(f"{'+'.join(ids)} ROUNDUP({round(L, 3)}/{sp})={n}")
     if par:
         o.add(F_PAF, tot, "DERIVADO", ssp, f"PAFs parapet: {'; '.join(det)} = {tot}")
     duc = [p for p in penetraciones(data, fo) if _es_ducto(p)]

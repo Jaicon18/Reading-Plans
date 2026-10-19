@@ -76,9 +76,10 @@ su motivo, los tags en símbolo que **no están en el schedule**, y las hojas **
 
 ### La regla de partición: una sola constante
 
-`particion.py`: `MODO_DEFAULT = "run"` (v70, decisión del estimador: un run continuo del mismo partition type con
-quiebres o esquinas = un solo wall; una T no encadena). Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). (v70c: `particion.es_exterior` — type EXT*, PARAPET o CFMF, o `location` "exterior"). "tramo" queda como opción (`--modo tramo` en `particion.py` /
-`comparar.py`). Las dos lecturas SIEMPRE se parten con la misma regla dentro de `comparar.py`.
+`particion.py`: `MODO_DEFAULT = "eje"` (v71, E28: un wall = una línea recta de un type; esquina / jog / T entre dos
+líneas con tag corta; segmento sin tag se suma al wall con tag que toca; grupo sin tag = un wall; exteriores y
+parapets por eje / fachada). Cada wall del canon lleva `tag_ids`. "run" (v70) y "tramo" quedan como opciones
+(`--modo run|tramo` en `particion.py` / `comparar.py`). Las dos lecturas SIEMPRE se parten con la misma regla dentro de `comparar.py`.
 
 ## Campos del canon que usan estas herramientas
 

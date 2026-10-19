@@ -22,7 +22,7 @@ v70: una lectura con `page` 0-based (page del wall = página del inventario − 
 
 Salida: <out_dir>/revision.md (corta, en inglés, para el estimador) + revision.json + img/*.png
 
-Uso:  python3 comparar.py canon_A.json canon_B.json inventario.json out_dir [--modo run|tramo] [--pdf plano.pdf]
+Uso:  python3 comparar.py canon_A.json canon_B.json inventario.json out_dir [--modo eje|run|tramo] [--pdf plano.pdf]
                          [--radio-ft 5]
 """
 import json

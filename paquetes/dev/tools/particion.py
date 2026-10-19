@@ -16,7 +16,24 @@ v70c — REGLA DE EJES (estimador: "nunca juntar dos ejes o fachadas en un núme
 EXTERIORES (type que empieza con EXT, o contiene PARAPET o CFMF, o wall con location "exterior" / exterior true)
 NO encadenan esquinas: se cortan en cada cambio de dirección, un wall por fachada / eje. Los interiores siguen igual.
 
+v71 — MODO "eje" (DEFAULT). Arbitraje #19: con "run" faltaban walls en todos los types interiores. Comparando wall
+por wall el canon contra la lista de walls del estimador, el estimador corta así (regla general, verificable):
+  1. Un wall = una LÍNEA RECTA (eje) de un type: los segmentos colineales y contiguos del mismo type se unen (pieza
+     partida por un wall que los cruza en T, por un beam o por un grid = mismo wall). La door / R.O. va DENTRO del
+     wall (R70.3); un hueco colineal solo se cruza si un R.O. de esos walls cae en él (aviso). Un hueco vacío
+     (alcove, pasillo) o con otro type (door_bulkhead, storefront) corta.
+  2. Una ESQUINA (L), un JOG (eje desplazado) o una T entre dos líneas CON TAG = dos walls (cada tag marca su
+     wall; dos tags sobre la misma línea = 1 wall).
+  3. Un segmento SIN tag (return, jog, cierre) se suma al wall con tag que toca por el extremo (el más largo si
+     toca dos). Un grupo conexo SIN ningún tag (p. ej. un alcove en U sin tag) = 1 wall: es el caso del criterio
+     del estimador ("run continuo con quiebres = 1 wall").
+     Sin tag_ids en todo el type: anclas = tramos > jog_max_ft; return / jog <= jog_max_ft se suma al que toca.
+  4. Exteriores / parapets / CFMF: un wall por eje / fachada (regla 1), nunca se encadenan esquinas.
+  5. Box cerrado (pier, column wrap; sin band H|V) = 1 wall.
+  Si un type no trae `tag_ids` en ningún segmento, se corta en cada esquina (regla 1) y se avisa.
+
 MODOS
+  "eje"    (default v71) reglas 1-5 de arriba.
   "tramo"  un wall por cada tramo RECTO de un type: segmentos colineales (ejes a <= tol_line_ft) y contiguos
            (hueco <= tol_gap_ft) se unen; un quiebre / esquina empieza otro wall. Jog / return <= jog_max_ft que
            toca un wall del mismo type se suma a ese wall (no es wall propio).
@@ -30,7 +47,7 @@ Geometría del canon (la misma de partition_types.py): band = {ori: H|V, c0, c1 
 (extensión)} en pt de la hoja; escala constants.plan_scale_pt_per_ft.value (default 18). Hoja del wall: `sheet`
 (o `plan_sheet`); si falta, el primer sheet number que aparezca en `source`.
 
-Uso:  python3 particion.py takeoff_canon.json [--modo run|tramo] [salida.json]
+Uso:  python3 particion.py takeoff_canon.json [--modo eje|run|tramo] [salida.json]
 """
 import json
 import math
@@ -38,8 +55,9 @@ import re
 import sys
 from collections import OrderedDict
 
-MODO_DEFAULT = "run"       # v70: decisión del estimador (run continuo con quiebres = 1 wall); "tramo" = opción
-MODOS = ("tramo", "run")
+MODO_DEFAULT = "eje"       # v71: arbitraje #19 (línea recta por tag; sin tag se suma; grupo sin tag = run)
+MODOS = ("tramo", "run", "eje")
+GAP_ABERTURA_MAX_FT = 7.0  # v71: hueco colineal máximo que se cruza, y solo con un R.O. del wall dentro (R70.3)
 JOG_MAX_FT = 1.0
 TOL_LINE_FT = 0.25        # colineales: ejes a <= 3"
 TOL_GAP_FT = 0.5          # contiguos / extremos que se tocan: hueco <= 6" (más el espesor del wall)
@@ -148,6 +166,85 @@ def _tramos(ws, esc, tol_line_ft, tol_gap_ft):
     return tramos
 
 
+def _tags(w):
+    return [str(x) for x in (w.get("tag_ids") or []) if x]
+
+
+def _tramos_eje(ws, esc, tol_line_ft, tol_gap_ft, avisos_gap):
+    """Regla 1 (v71): colineales del mismo type unidos si se tocan (hueco <= tol_gap). Un hueco mayor solo se cruza
+    si un R.O. de uno de los dos walls (`openings[].xy_pt`) cae dentro (la door es parte del wall, R70.3). Un hueco
+    vacío (alcove, pasillo, otro type, bulkhead, storefront) corta."""
+    gs = [geo(w) for w in ws]
+
+    def une(i, j):
+        a, b = gs[i], gs[j]
+        if a is None or b is None or a[0] != b[0] or abs(a[1] - b[1]) > tol_line_ft * esc:
+            return False
+        if a[2] <= b[3] + tol_gap_ft * esc and a[3] >= b[2] - tol_gap_ft * esc:
+            return True
+        g0, g1 = (a[3], b[2]) if a[3] < b[2] else (b[3], a[2])
+        if g1 - g0 > GAP_ABERTURA_MAX_FT * esc:
+            return False
+        for k in (i, j):                          # R70.3: un R.O. de estos walls cae en el hueco -> mismo wall
+            for o in ws[k].get("openings") or []:
+                xy = o.get("xy_pt") if isinstance(o, dict) else None
+                if isinstance(xy, (list, tuple)) and len(xy) == 2:
+                    pos = float(xy[0] if a[0] == "H" else xy[1])
+                    if g0 - 1.0 <= pos <= g1 + 1.0:
+                        avisos_gap.append(f"{ws[i]['id']} / {ws[j]['id']}: hueco con el R.O. {o.get('ref')} dentro "
+                                          f"-> mismo wall (R70.3: el R.O. va DENTRO del wall en el canon)")
+                        return True
+        return False
+    tramos = []
+    for comp in _raices(len(ws), une):
+        comp = sorted(comp, key=lambda i: (gs[i][2] if gs[i] else 0.0, str(ws[i]["id"])))
+        g = [gs[i] for i in comp if gs[i] is not None]
+        tg = None
+        if g:
+            ejes = sorted(x[1] for x in g)
+            tg = (g[0][0], ejes[len(ejes) // 2], min(x[2] for x in g), max(x[3] for x in g), max(x[4] for x in g))
+        tramos.append({"ids": [ws[i]["id"] for i in comp], "lf": sum(float(ws[i]["length_ft"]) for i in comp),
+                       "geo": tg, "tags": sorted({t for i in comp for t in _tags(ws[i])})})
+    return tramos
+
+
+def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_MAX_FT):
+    """Reglas 2-5 (v71) sobre los tramos rectos de un type / hoja."""
+    def fila(parts, sin_tag=None):
+        d = {"ids": [x for p in parts for x in p["ids"]], "lf": sum(p["lf"] for p in parts), "tramos": len(parts),
+             "geos": [p["geo"] for p in parts], "tags": sorted({x for p in parts for x in p["tags"]})}
+        if sin_tag:
+            d["sin_tag_sumado"] = sin_tag
+        return d
+    if exterior:
+        return [fila([p]) for p in tramos]
+    if any(p["tags"] for p in tramos):
+        con = [k for k, p in enumerate(tramos) if p["tags"]]
+    else:                                         # sin tag_ids: ancla = tramo > jog_max (return / jog se suma)
+        con = [k for k, p in enumerate(tramos) if p["lf"] > jog_max_ft + 1e-9] or list(range(len(tramos)))
+        if len(tramos) > 1:
+            avisos.append(f"{t} ({sh}): ningún segmento trae tag_ids; corte en cada esquina (regla 1 de eje), "
+                          f"returns / jogs <= {jog_max_ft} ft se suman al tramo que tocan")
+    sin = [k for k in range(len(tramos)) if k not in con]
+    dest = {k: [k] for k in con}
+    sueltos = []
+    for comp in _raices(len(sin), lambda i, j: _tocan(tramos[sin[i]], tramos[sin[j]], esc, tol_gap_ft)):
+        ks = [sin[i] for i in comp]
+        toca = [c for c in con if any(_tocan(tramos[k], tramos[c], esc, tol_gap_ft) for k in ks)]
+        if toca:
+            c = max(toca, key=lambda c: (tramos[c]["lf"], -c))
+            dest[c] += ks
+        else:
+            sueltos.append(ks)
+    out = []
+    for c in con:
+        extra = [x for k in dest[c][1:] for x in tramos[k]["ids"]]
+        out.append(fila([tramos[k] for k in dest[c]], extra or None))
+    for ks in sueltos:
+        out.append(fila([tramos[k] for k in ks]))
+    return out
+
+
 def _tocan(a, b, esc, tol_gap_ft):
     """¿Algún extremo de a toca algún extremo de b? (esquina L / jog / step; no T)."""
     if a["geo"] is None or b["geo"] is None:
@@ -175,8 +272,15 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
         grupos.setdefault((t, sh, pg), []).append(w)
     out = OrderedDict()
     for (t, sh, pg), ws in grupos.items():
-        tramos = _tramos(ws, esc, tol_line_ft, tol_gap_ft)
-        if modo == "run" and any(es_exterior(t, w) for w in ws):
+        if modo == "eje":
+            ext = es_exterior(t) or all(es_exterior(t, w) for w in ws)   # un pier exterior no vuelve exterior al type
+            tramos = _tramos_eje(ws, esc, tol_line_ft, tol_gap_ft, avisos)
+            walls = _walls_eje(tramos, esc, tol_gap_ft, ext, t, sh, avisos, jog_max_ft)
+        else:
+            tramos = _tramos(ws, esc, tol_line_ft, tol_gap_ft)
+        if modo == "eje":
+            pass                                  # walls ya armados arriba (reglas 1-5)
+        elif modo == "run" and any(es_exterior(t, w) for w in ws):
             # v70c (EJES): exterior = un wall por tramo recto (fachada / eje); el cambio de dirección corta
             walls = [{"ids": list(x["ids"]), "lf": x["lf"], "tramos": 1, "geos": [x["geo"]]} for x in tramos]
         elif modo == "run":
@@ -186,7 +290,7 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
                 parts = [tramos[i] for i in comp]
                 walls.append({"ids": [x for p in parts for x in p["ids"]], "lf": sum(p["lf"] for p in parts),
                               "tramos": len(parts), "geos": [p["geo"] for p in parts]})
-        else:
+        else:                                     # "tramo"
             jogs = [x for x in tramos if x["lf"] <= jog_max_ft + 1e-9]
             if len(jogs) == len(tramos):
                 jogs = []

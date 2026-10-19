@@ -51,8 +51,8 @@ def test_jog():
     r = partition_types(c, modo="tramo")["types"]["P2"]
     # v68 R10: el jog no es wall aparte pero su LF suma al wall vecino (modo "tramo")
     chk("jog <= 1 ft: no es wall, su LF suma", r["walls"] == 2 and len(r["jogs"]) == 1 and abs(r["lf"] - 16.5) < 1e-9, r)
-    # v70 (E28, modo "run" por default): a + jog + b es UN run continuo con quiebres = 1 wall
-    r = partition_types(c)["types"]["P2"]
+    # v70 (E28, modo "run"): a + jog + b es UN run continuo con quiebres = 1 wall (v71: run ya no es el default)
+    r = partition_types(c, modo="run")["types"]["P2"]
     chk("v70 run: jog dentro del run", r["walls"] == 1 and abs(r["lf"] - 16.5) < 1e-9, r)
     c = dict(C, walls=[W("j", "P3", 0.5, H(10, 0, 9))])
     chk("si es el único de su type, cuenta", partition_types(c)["types"]["P3"]["walls"] == 1)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """plantilla_excel.py — UN SOLO formato de Excel para todo take-off de metal frame y drywall.
 
-Por qué (pruebas BOA 13/14-oct-2026): cada corrida armó un Excel distinto (hojas, columnas y
+Por qué (pruebas de 13/14-oct-2026): cada corrida armó un Excel distinto (hojas, columnas y
 nombres diferentes). Así no se puede revisar ni calificar igual. Desde v52, el take-off escribe
 sus datos en un JSON y ESTE script arma el Excel, siempre con las mismas hojas y columnas
 (las del take-off del usuario: Inputs, Partition Takeoff, Material Summary, ...).
@@ -35,7 +35,7 @@ Uso:
 
 Formato del JSON (todas las cantidades NET, sin waste: el waste lo pone el Excel):
 {
- "proyecto": "Bank of America - Broomfield, CO", "bid_set": "...pdf", "fecha": "2026-10-14",
+ "proyecto": "<project name, city>", "bid_set": "...pdf", "fecha": "2026-10-14",
  "inputs": {"waste_metal": 0.15, "waste_no_metal": 0.06, "sheet_w_ft": 4, "sheet_l_ft": 12,
             "stud_stock_ft": 20, "track_stock_ft": 10},
  "walls": [ {"type": "A1", "wall": "8", "location": "Corridor 111 east", "length_lf": 18.5,
@@ -848,6 +848,43 @@ def verificar_excel(xlsx, salidas=None):
     carpetas = [os.path.dirname(os.path.abspath(xlsx))] + [str(x) for x in (salidas or [])]
     err += verificar_salidas(wb, carpetas)
     err += verificar_r708(wf)
+    err += verificar_r71_track(wb)
+    return err
+
+
+TAM_STUD = re.compile(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")')
+
+
+def verificar_r71_track(wb):
+    """R71.8 (v71, arbitraje #19): bottom track y top / deflection track se compran POR TAMAÑO de stud (un renglón por
+    tamaño, más el track de parapet / otro gauge en el suyo); la suma = la familia. Con >= 2 tamaños de stud en
+    Partition Takeoff, un renglón único "all sizes" (o faltar un tamaño) = falla."""
+    err = []
+    if "Partition Takeoff" not in wb.sheetnames or "Material Summary" not in wb.sheetnames:
+        return err
+    ws = wb["Partition Takeoff"]
+    col, tams = None, set()
+    for r in ws.iter_rows(values_only=True):
+        if col is None:
+            for k, v in enumerate(r):
+                if str(v or "").strip().lower() == "stud size":
+                    col = k
+            continue
+        if col < len(r) and r[col]:
+            m = TAM_STUD.match(str(r[col]).strip())
+            if m:
+                tams.add(m.group(1))
+    if len(tams) < 2:
+        return err
+    nombres = [str(r[0] or "") for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True)]
+    if not any(re.search(r"^(bottom|top|deflection)\b[^,]*track", n, re.I) for n in nombres):
+        return err                                  # sin renglones de track: lo cubre la lista de familias obligatorias
+    for clase, rx in (("bottom track", r"^bottom track"), ("top / deflection track", r"^top( /)? ?(deflection )?track|^deflection track")):
+        filas = [n for n in nombres if re.search(rx, n, re.I)]
+        falta = sorted(t for t in tams if not any(t in n for n in filas))
+        if falta:
+            err.append(f"Material Summary: {clase} sin renglón por tamaño para {', '.join(falta)} (R71.8: un renglón por "
+                       f"tamaño de stud; 'all sizes' no basta)")
     return err
 
 

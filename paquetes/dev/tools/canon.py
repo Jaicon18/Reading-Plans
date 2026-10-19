@@ -64,7 +64,7 @@ v65 (arbitraje #14A/#14B, 17-oct-2026) — lo que todavía variaba o faltaba ent
   - framed_soffit exige drop_lines {value, source} = walls soffit_side / ceiling_bulkhead con soffit_of = room
     (10/A09.33: 1 drop line, el otro borde es la partición; #14B 2 lados +69).
   - nodo T entre dos walls G/G1 (10/A12.01) = error -> abut (arb11; #14A +<n> LF 1-5/8").
-  - ballistic: constants.ballistic_contour_ft {value, source} = Σ largo de faces con k_panel (E5; BOA <n>).
+  - ballistic: constants.ballistic_contour_ft {value, source} = Σ largo de faces con k_panel (E5).
   - glass mat: band.t_stud_ft y band.b_stud_ft {value, source}; altura = T/STUD − B/STUD (7/A09.26 <n>;
     #14A 2.167 de la elevación T/CANOPY − B/CANOPY = +34 SF).
   - FRP (familia obligatoria): bloque frp {top_ft, rooms (tile_base), mop_sink} o frp_none_reason (#14B FALTA).
@@ -338,7 +338,7 @@ def generar(data):
                         **{k: o[k] for k in ("header_type", "header_type_source", "beams", "beams_source",
                                              "structure_source", "structure", "pieces", "pieces_source",
                                              "piece", "sill_pieces", "sill_pieces_source", "continuous_run",
-                                             "or_steel") if k in o}})
+                                             "or_steel", "run_ends", "run_ends_source") if k in o}})
     for c in data.get("ceilings") or []:
         if c.get("system") in SUSP:
             if c.get("perimeter_ft") is None:
@@ -402,7 +402,7 @@ def _v65_checks(data):
         n = _c(data, "roof_step_rows_drawn", -1)
         if n == -1:
             raise ValueError("constants.roof_step_rows_drawn {value, source} obligatoria con roof_step (filas de "
-                             "studs que dibuja el detalle; BOA 4/A02.02 = 3, #14A cargó 2)")
+                             "studs que dibuja el detalle)")
         if len(rs) != int(n):
             raise ValueError(f"roof_step: {len(rs)} walls declarados != roof_step_rows_drawn {int(n)} (una pieza por "
                              f"fila dibujada en el detalle, cada una con su altura)")
@@ -745,7 +745,7 @@ def _hoja_wall(w):
 
 def _frp(data, fam, filas):
     """v65: FRP = perímetro neto de tile_base de cada room x top_ft + mop sink (59.10: TODAS las doors del cuarto,
-    también las de cuartos vecinos que abren hacia él). BOA (<n> - <n>) x 5.0 + 2 x 2.0 x 4.0 = <n>."""
+    también las de cuartos vecinos que abren hacia él)."""
     fr = data.get("frp")
     if fr is None:
         if not str(data.get("frp_none_reason") or "").strip():
@@ -894,7 +894,7 @@ def _parapet_studs(data, fam, filas):
 
 def _jambs_extra(data, fam, filas):
     """#13A: una abertura que muere ENTRE dos walls (openings_extra) no tiene wall propio en studs_nodos y sus 4 jamb
-    studs se perdían en silencio (door 111 BOA). Con "jamb_wall" (+ "jamb_wall_source") se cargan los 4 jambs (king +
+    studs se perdían en silencio. Con "jamb_wall" (+ "jamb_wall_source") se cargan los 4 jambs (king +
     jack por lado, 53.2) a ESE wall, altura completa x rows, en la familia de su stud.
     v65 (#14A ADV1-3): con head_ft también los cripples sobre el head (FLOOR(R.O./oc) x (H - head) x rows) y el
     bottom + top track sobre el R.O. (el track de los dos walls termina en las jambs; bottom continuo, E10)."""

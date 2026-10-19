@@ -38,6 +38,8 @@ La compuerta FALLA si:
   - algún partition tag del inventario no tiene wall en la lectura A ni en la B y tampoco tiene alerta "tag sin wall";
   - v70: existe <dir>/4_canon/takeoff_canon.json y esquinas.revisar da fallas (R70.2 esquina sin dueño / doble,
     R70.3 hueco colineal sin gaps_ok) -> "esquinas: …".
+  - v71: chequeos_v71.revisar sobre el mismo canon (R71.1 north_arrow con facades, R71.2 box contado dos veces,
+    R71.3 accesorios de bulkhead > Σ vanos, R71.5 tag descartado "por otra tarea") -> "v71: …".
 Avisos (no fallan, se listan): walls sin `sheet` o sin `tag_ids`, tags ambiguos del inventario (no contados),
 hojas no inventariables, ítems de revisión pendientes (difieren / solo A / solo B / alertas).
 """
@@ -158,6 +160,8 @@ def compuerta(d):
         else:
             import esquinas
             fallas += [f"esquinas: {x}" for x in esquinas.revisar(a["canon_final"][1])["fallas"]]
+            import chequeos_v71                 # v71: R71.1 flecha norte, R71.2 box doble, R71.3, R71.5
+            fallas += [f"v71: {x}" for x in chequeos_v71.revisar(a["canon_final"][1])["fallas"]]
     n = {k: len(rev.get(k) or []) for k in ("difieren", "solo_A", "solo_B", "alertas")}
     if any(n.values()):
         avisos.append("revision.md pendiente para el estimador: " + " · ".join(f"{k} {v}" for k, v in n.items()))

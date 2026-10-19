@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 18-oct-2026 (v70). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 19-oct-2026 (v71). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -29,9 +29,19 @@ partición de walls se hacían a ojo, en una sola lectura, sin nada contra qué 
 un script, el plano se lee DOS veces de forma independiente, un script compara las dos lecturas contra el
 inventario, y toda diferencia queda escrita. **Ningún error llega al Excel sin alerta.**
 
-**v70 (2026-10-18) — cambios que mandan.** (1) Partición de walls decidida por el estimador: **un run continuo del
-mismo partition type con quiebres o esquinas = 1 wall** (E28; `particion.MODO_DEFAULT = "run"`, también en [ciego-ok]
-`partition_types.py`). Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). (2) El inventario de la Etapa 1 se llama `inventario_tags.py` (el `inventario.py` que importa
+**v71 (2026-10-19) — cambios que mandan (sobre v70).** (1) Partición de walls = **modo "eje"** (E28 reescrita,
+`particion.MODO_DEFAULT = "eje"`): un wall es UNA línea recta de un type; cada tag marca su wall; una esquina, un jog
+o una T entre dos líneas con tag corta; el segmento sin tag (return, jog, cierre) se suma al wall con tag que toca;
+un grupo conexo SIN ningún tag (alcove) es UN wall; exteriores y parapets, un wall por eje / fachada. El modo "run"
+de v70 juntaba walls que el estimador cuenta separados. (2) Compuerta `chequeos_v71.py` dentro de
+`etapas.py compuerta`: flecha norte obligatoria con fachadas, pier contado dos veces, accesorios de bulkhead sobre
+el run, tag descartado "por otra tarea". (3) Track por tamaño de stud en el Material Summary (R71.8,
+`track_por_tamano.py` + `verificar`). (4) Headers: box "ASSUMED" prohibido; CONT. BOX BEAM declara `run_ends`.
+(5) `mep.py` sin offsets de ningún proyecto (registro en cada corrida); `vigas_sobre_walls.py` pide decisión con dos
+vigas paralelas de rótulo distinto; Layers ponderado por largo de face. Reglas R71.1–R71.16 en §17.
+
+**v70 (2026-10-18) — cambios que siguen.** (1) Partición por el criterio del estimador (E28; v71 la precisa como
+modo "eje", ver arriba). Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). (2) El inventario de la Etapa 1 se llama `inventario_tags.py` (el `inventario.py` que importa
 `canon.py` es el inventario cerrado de walls; son dos tools distintas). (3) Compuerta nueva `esquinas.py`: cada esquina
 con un solo dueño y ninguna door fuera de todo wall (R70.2 / R70.3). (4) Reglas R70.1–R70.9 (§16): ceiling
 suspendido por leyenda, extensión por hatch, ballistic por contorno, piers por parte, vanos de storefront, yields de
@@ -86,8 +96,10 @@ Cada tarea entrega un fragmento JSON (`2_lectura/A/<hoja-o-grupo>.json`) con el 
 `length_ft` con `source` N/HOJA y estado [CONFIRMADO] / [DERIVADO] / [PENDIENTE], `band {ori, c0, c1, lo, hi}` en pt
 de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
 
-- **Partición de walls = `particion.py` (`MODO_DEFAULT = "run"`, E28, decisión del estimador).** Un run continuo
-  del mismo type con quiebres o esquinas es UN wall; su LF = suma de sus tramos. Ninguna lectura inventa otra.
+- **Partición de walls = `particion.py` (`MODO_DEFAULT = "eje"`, E28 v71).** Cada wall del canon lleva sus
+  `tag_ids` (el tag del plano que lo marca) y su `band`; la tool arma los walls (línea recta por tag, segmentos sin
+  tag sumados al wall con tag que tocan, grupo sin tag = un wall). Ninguna lectura inventa otra partición; un
+  segmento sin `tag_ids` en un type que los usa es un return / cierre, no un wall.
 - **Refs de aberturas primero (Etapa 2a):** la tarea del opening schedule escribe las refs (`opening_schedule`) antes
   que las tareas de walls; los walls usan esas refs tal cual. `etapas.py unir` falla con una ref que no está en la
   lista o con la misma abertura en dos lugares.
@@ -169,9 +181,16 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
   peralte AISC) o motivo + RFI. [vigas_sobre_walls]
 - **E27** Dos pruebas, mismo plano, mismo número: todo dato que varió entre pruebas es un campo obligatorio con
   N/HOJA y una regla en tool (§14). Ningún valor se toma de "lectura visual".
-- **E28** Partición de walls (decisión del estimador, todo proyecto): **un run continuo del mismo partition type
-  con quiebres o esquinas = 1 wall**. El LF del wall es la suma de sus tramos; una T no encadena (el que llega [ciego-ok]
-  termina en la cara del que sigue); nunca se une entre hojas ni entre types. Excepción: walls exteriores y parapets se cortan por fachada/eje (nunca juntar dos ejes o fachadas). [particion, partition_types]
+- **E28** Partición de walls (criterio del estimador, precisado en v71 comparando wall por wall contra su lista;
+  todo proyecto). **Un wall = UNA línea recta (eje) de un partition type**, con estas reglas verificables:
+  (1) segmentos colineales y contiguos del mismo type = el mismo wall, aunque los parta un wall que cruza en T, un
+  beam o un grid; la door / R.O. va DENTRO del wall (R70.3); un hueco vacío (alcove, pasillo) o con otro type
+  (door_bulkhead, storefront) corta. (2) Una esquina L, un jog o una T entre dos líneas CON tag = dos walls; dos
+  tags sobre la misma línea = un wall. (3) Un segmento SIN tag (return, jog, cierre de furring) se suma al wall con
+  tag que toca por el extremo; un grupo conexo sin ningún tag (p. ej. un alcove en U) = un wall ("run continuo con
+  quiebres", la frase del estimador). (4) Exteriores y parapets: un wall por eje / fachada; nunca juntar dos ejes o
+  fachadas. (5) Box cerrado (pier, column wrap) = un wall. El LF del wall es la suma de sus segmentos; nunca se une
+  entre hojas ni entre types. [particion, partition_types]
 - **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
   **Partition types (§13)** con la convención del calificador.
 
@@ -302,6 +321,8 @@ openings MEP · las 15 de accesorios (§12).
    sin alerta; recortes verificados.
 0b. `esquinas.py takeoff_canon.json` PASA (R70.2 / R70.3): cada esquina con UN dueño; ningún hueco colineal sin
    explicar (una door va dentro del run). Excepción solo declarada con motivo (`corners_ok`, `gaps_ok`).
+0c. `chequeos_v71.py takeoff_canon.json` PASA (también corre dentro de `etapas.py compuerta`): R71.1 flecha norte,
+   R71.2 box contado dos veces, R71.3 accesorios de bulkhead > Σ vanos, R71.5 (un tag descartado "por otra tarea").
 1. `inventario_tags.py`, `canon.py` (con el `inventario.py` de walls), `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
 2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
 3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
@@ -310,7 +331,7 @@ openings MEP · las 15 de accesorios (§12).
 6. `plantilla_excel.py armar … --familias familias_out.json` + `verificar` dentro de `bitacora.py compuerta`:
    15 familias de accesorios, Partition Takeoff (§13) sin renglón PENDING, compra §15 (Inputs reales, waste una
    vez, plywood por material, sealant exterior aparte, NET en su unidad), RFIs sin duplicados con delta, Excel
-   íntegro en inglés. Familia PENDIENTE = NO SE ARMA. `contar_tags.py`, `vigas_sobre_walls.py`, `test_ciego.py` y `test_ciego_v69.py` rc 0.
+   íntegro en inglés; bottom / top track un renglón por tamaño de stud (R71.8). Familia PENDIENTE = NO SE ARMA. `contar_tags.py`, `vigas_sobre_walls.py`, `test_ciego.py` y `test_ciego_v69.py` rc 0.
 
 ---
 
@@ -322,7 +343,11 @@ openings MEP · las 15 de accesorios (§12).
   descartado → suma al vecino (PT3).
 - **v70**: partición "tramo" (un wall por tramo recto) → "run" (E28); `inventario.py` de la Etapa 1 →
   `inventario_tags.py`; ceiling con joists por un detalle típico no llamado → suspendido (R70.1).
-- v67 y anteriores: ARBITRAJE_13 a 18 (fuera del paquete de pruebas).
+- **v71**: partición "run" (todo run con esquinas = un wall) → "eje" (E28 v71: línea recta por tag, segmentos sin
+  tag sumados, grupo sin tag = un wall); Layers = Σ de layers de las faces → ponderado por largo; track "all sizes"
+  → por tamaño; box header supuesto → 0 + RFI; offsets de registro MEP escritos en una tool → derivados en cada
+  corrida.
+- v67 y anteriores: ARBITRAJE_13 a 19 (fuera del paquete de pruebas).
 
 ## 10. Anti-varianza
 
@@ -345,6 +370,11 @@ canopy_joist, deck_breaks por hoja, ceiling con sistema no llamado, pier por par
 con sill de brake metal (test_accesorios_v70) · R63 verificar: renglón con tool en 0 (test_plantilla_v70) · R64
 esquinas y huecos (test_esquinas) · R65 storefront steel en closer (test_closer_v70) · R66 fuentes con paréntesis
 (test_headers_v70).
+v71 (todo en test_v71): R67 partición eje (esquina entre tags, return sin tag, grupo sin tag, dos tags en una línea,
+hueco vacío / con R.O., T y bulkhead, exterior por eje, pier no vuelve exterior al type, sin tags) · R68
+partition_types pasa tag_ids · R69 Layers ponderado · R70 mep.py sin offsets ni página fija · R71 chequeos_v71
+(R71.1 / R71.2 / R71.3 / R71.5) y su llamada en etapas · R72 headers ASSUMED / run_ends · R73 track por tamaño
+(verificar + track_por_tamano) · R74 vigas paralelas con rótulo distinto y rótulo con un solo dueño.
 
 ---
 
@@ -377,8 +407,8 @@ Nombres EXACTOS del renglón: `accesorios.NOMBRES_EXCEL`.
 | # | Regla |
 |---|---|
 | PT1 | Type = tag del plano; exterior → `EXT-<stud>CFMF`; parapet → `EXT-PARAPET` (un wall por straight run: `ori` + `axis`, step = otro wall; sin geometría = PENDING); door_bulkhead → `BULKHEAD-<familia del tag>` (G1 → G); canopy column → `CANOPY-COL`; pier con tag interior = su tag (el tag manda). |
-| PT2 | Un wall = RUN continuo de un type (E28, `particion.MODO_DEFAULT = "run"`): los tramos rectos se encadenan extremo con extremo (esquina L, jog, step); colineales (≤ 3") y contiguos (≤ 6") se unen; una T no encadena; no se parte por altura, room ni abertura. Un renglón por wall (ids con "+"). |
-| PT3 | Jog / return ≤ 1'-0" que toca un wall del mismo type: no es wall; su LF SE SUMA al vecino ("incl. jog"). En modo run queda dentro del run. |
+| PT2 | Un wall = UNA línea recta de un type (E28 v71, `particion.MODO_DEFAULT = "eje"`): colineales (≤ 3") y contiguos (≤ 6") se unen; una esquina / jog / T entre dos líneas con tag corta; segmento sin tag se suma al wall con tag que toca; grupo sin tag = un wall; no se parte por altura, room ni abertura. Un renglón por wall (ids con "+"). Columna Layers = Σ(layers × largo de face) / LF del wall, 2 decimales. |
+| PT3 | Jog / return sin tag (o ≤ 1'-0" en un type sin tags): no es wall; su LF SE SUMA al wall que toca ("incl. jog"). |
 | PT4 | Office bulkheads colineales de un frente = UN wall (run del CONT. BOX BEAM). |
 | PT5 | storefront cripples, vestibule / grille heads, roof step, fascia, canopy soffit, transiciones, bulkheads y soffits de ceiling → bloque `TYPE OTHER FRAMING (NOT A PARTITION)`. |
 | PT7 | Chase = un wall por cara con tag; wrap / pier interior = caras con board de su detalle; wrap exterior = cadena FOS. |
@@ -425,6 +455,27 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R70.7 | Vanos de storefront / curtain wall (vidrio desde el piso): fuera del LF del type exterior (convención declarada en Clarifications); el framing sobre el head = OTHER FRAMING (`storefront_cripples`). Anchors, slab pins y base sealant solo sobre bottom track real (sin vanos). | canon / accesorios |
 | R70.8 | Yields (drywall screws, joint compound, joint tape) = celda del estimador en Inputs. Un fastener schedule impreso (estructural) va a Clarifications; no cambia el yield. | plantilla_excel verificar |
 | R70.9 | Grille / head: el alto del framing = Σ de TODA la cadena impresa entre la base y el top del miembro superior dibujado (`head_chain_in` con todos los eslabones). | accesorios.py (A4, D11) |
+
+## 17. Reglas v71 (arbitraje de dos pruebas ciegas; cada una con tool, compuerta o regla de lectura)
+
+| # | Regla | Dónde |
+|---|---|---|
+| R71.1 | La letra de cada fachada sale de la FLECHA NORTE de la planta (`constants.north_arrow {value up/down/left/right, source, img}`); el título de una elevación nunca la define. Título contra flecha = RFI, la flecha manda. | chequeos_v71 (compuerta 0c) |
+| R71.2 | Pier / box con dos sistemas se carga UNA vez por parte: o `parts` en el registro interior, o un registro exterior, nunca los dos (misma huella BOX = falla salvo `same_box_ok` con motivo). La L exterior de un pier de storefront sin cadena impresa propia = RFI con delta. | chequeos_v71 |
+| R71.3 | Accesorios de un door bulkhead (sealant, corner bead, blocking) van sobre el ANCHO de los vanos (Σ door_bulkhead), no sobre el run del box beam. | chequeos_v71 |
+| R71.4 | Todo extremo de office front (vendor_end) cita su jamb detail y genera sus accesorios (corner bead, FRT, sealant) según lo que el detalle dibuja. | lectura + accesorios |
+| R71.5 | Un tag nunca se descarta "por ser de otra tarea / lectura": se mide o se descarta con motivo de PLANO. | chequeos_v71 |
+| R71.6 | Barrido de recessed accessories / FEC: un renglón por tag de la leyenda (`recessed_sweep [{tag, recessed, width_in o null, wall, source}]`); sin ancho impreso = 0 + RFI con delta. | lectura + framed_openings |
+| R71.7 | Todo recorte se hace renderizando la página COMPLETA en su orientación mostrada y recortando en píxel (pt × zoom); el mapa hoja → página sale del inventario, nunca escrito a mano. | marcado / evidencia |
+| R71.8 | Bottom track y top / deflection track: un renglón de compra por tamaño de stud (y gauge distinto, p. ej. parapet); la suma = la familia; lo que no es de walls va en un renglón "other" con su fuente. | plantilla_excel verificar + track_por_tamano.py |
+| R71.9 | Penetraciones MEP: registro de cada hoja MEP derivado EN LA CORRIDA (`mep.registro`, verificado contra un rasgo inconfundible con imagen); un cruce = una línea que sobresale de las DOS caras; un ducto que cruza un wall cuenta una vez por wall; lista con wall, ducto e imagen. Nunca offsets copiados de otra corrida. | mep.py + accesorios |
+| R71.10 | Header que ningún schedule / detalle llama = cero LF + RFI con delta; nunca un box "assumed". | headers.py |
+| R71.11 | CONT. BOX BEAM declara `run_ends` ("jamb_to_jamb" del primer al último jamb, o "wall_to_wall" hasta los walls de los extremos) con fuente; si el detalle no lo dibuja, RFI con el delta de las dos. | headers.py |
+| R71.12 | Partición "eje" (E28 v71); cada wall del canon con `tag_ids`. | particion.py / partition_types.py |
+| R71.13 | Layers del Partition Takeoff = Σ(layers × largo de face) / LF del wall; una cara partida por room no suma otra layer. | partition_types.py |
+| R71.14 | Wall bajo viga: manda la viga cuyo EJE cae dentro de la band; dos vigas paralelas a ≤ 1 ft con rótulo distinto = decisión con imagen (RFI); cada rótulo tiene un solo dueño (la viga más cercana). | vigas_sobre_walls.py |
+| R71.15 | Expansion anchors / slab pins: el driver es el bottom track de los elementos que el detalle de anclaje nombra (p. ej. "exterior walls"); column wraps, piers o cajas que el detalle no nombra van con su fuente o como RFI con delta, nunca mezclados en silencio. | accesorios (lectura) |
+| R71.16 | Cripples de door_bulkhead / storefront / vestibule head: la regla de studs del modelo como wall se mantiene (coincide con la convención del estimador); el vendor_end compartido entre bulkhead y stub va a RFI (decide el estimador), no se cambia en silencio. | studs (sin cambio) |
 
 ---
 

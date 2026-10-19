@@ -5,8 +5,8 @@ v64 (decisiones del usuario/estimador, 2026-10-16 — mandan sobre ref v4, rango
   #1  largo de cada pieza = R.O. + 1'-4" (8" de bearing a cada lado).
   #2  LF de MATERIAL = (R.O. + 1'-4") x PIEZAS x qty. Las piezas salen del header schedule (7/S5.20: SINGLE
       TRACK = 1, DOUBLE TRACK = 2, 2-362CSJ20 = 2 ...) o del detalle del box (box headers / box beams: TODAS
-      las piezas que forman el box, con pieces_source). Antes (v60-v63) se cargaba LF de LÍNEA (x 1): BOA
-      <n> línea -> <n> por piezas.
+      las piezas que forman el box, con pieces_source). Antes (v60-v63) se cargaba LF de LÍNEA (x 1): eso
+      subcontaba el box.
   #12 ductos y fire dampers en walls NO se enmarcan: kind duct | fire_damper -> NOT_FRAMED, 0 header y 0 sill
       (sin importar el tamaño).
   #16 storefront con lintel estructural (HSS / steel en el plan S*): structure "HSS" | "steel" -> 0 metal stud
@@ -37,14 +37,16 @@ v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — REGLAS fijas, ya no pará
   #19 "METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED" (GL-2, 11/A09.27): METAL STUD BOX BEAM. Abertura con
       or_steel: true u "OR STEEL" en header_type -> structure HSS / steel = error (v66: sin nombres de un proyecto).
   #20 TODO box beam / box header ("BOX" en header_type) = 4 PIEZAS (2 C + 2 track). pieces != 4 = error.
-      BOA: GL-2 11/A09.27, office front 8,9/A12.01, grille 4/A08.21, vestibule 4-7/A12.10, door 123 14/A09.27,
-      drive-up ATM 6/A08.11.
-  #21 header_type que no es box no puede bajar las piezas del header schedule (door 102 R.O. <n> -> 7/S5.20
-      DOUBLE TRACK, 2 piezas; 9/S5.20 "> 4'-0"" no lo baja a 1).
+      Casos típicos: storefront / glazing box, office front, coiling grille, vestibule head, door exterior con
+      box, ATM recess.
+  R71.10 (v71) header_type "ASSUMED" / "NOT PRINTED" = error: header no llamado = 0 + RFI.
+  R71.11 (v71) CONT. BOX BEAM declara run_ends "jamb_to_jamb" | "wall_to_wall" (+ run_ends_source o rfi).
+  #21 header_type que no es box no puede bajar las piezas del header schedule (una door cuyo R.O. cae en
+      DOUBLE TRACK del schedule = 2 piezas; una nota general "> 4'-0"" no lo baja a 1).
   #22 "CONT." BOX BEAM (office front 8,9/A12.01) = UN run continuo a lo largo de todo el frente: una sola abertura
       con continuous_run: true, qty 1, wall = línea del frente, ro_w_ft = largo del run medido (source + RFI si
       no hay cota). Por abertura (qty > 1, o varias con el mismo detalle en la misma línea) = error. Dos frentes
-      (BOA: east 105-108 y west 109-110) = dos runs (EJES).
+      (dos líneas de office front) = dos runs (EJES).
 
 SALIDA: totales_lf {"header", "sill track"}, por_pieza {piece: LF}, renglones (operación en cada uno), avisos.
 
@@ -134,7 +136,7 @@ def _reglas_v65b(data):
     """Decisiones del usuario #18-#22: reglas fijas, se valida cada abertura antes de calcular."""
     if data.get("header_params") is not None:
         raise ValueError("header_params ya no existe (v65b): las decisiones del usuario #18-#22 son reglas fijas "
-                         "(sill double > 4'-0\", GL-2 metal box, box = 4 piezas, door 102 double, office front "
+                         "(sill double > 4'-0\", glazing metal box, box = 4 piezas, door en DOUBLE TRACK, office front "
                          "continuo)")
     cont = {}
     for o in data.get("openings") or []:
@@ -144,6 +146,13 @@ def _reglas_v65b(data):
                 o.get("structure") in ("HSS", "steel"):
             raise ValueError(f"{ref}: 'METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED' = METAL STUD BOX BEAM "
                              f"(decisión usuario #19, 11/A09.27) — no es steel by others")
+        if re.search(r"ASSUM|NOT PRINTED|NO IMPRESO|SUPUEST|TYPICAL ASSUMED", ht):
+            raise ValueError(f"{ref}: header_type '{o.get('header_type')}' no impreso (R71.10, arbitraje #19): un header "
+                             f"que ningún schedule / detalle llama = 0 LF + RFI con el delta; nunca un box supuesto")
+        if "CONT" in ht and o.get("run_ends") not in ("jamb_to_jamb", "wall_to_wall"):
+            raise ValueError(f"{ref}: CONT. BOX BEAM sin run_ends 'jamb_to_jamb' | 'wall_to_wall' (+ run_ends_source): "
+                             f"el largo del run (del primer al último jamb, o hasta los walls de los extremos) se "
+                             f"declara; si el detalle no lo dibuja, RFI con el delta de las dos (R71.11)")
         if "BOX" in ht and o.get("pieces") != BOX_PIECES:
             raise ValueError(f"{ref}: box beam / box header = {BOX_PIECES} piezas (2 C + 2 track, decisión usuario "
                              f"#20); vino pieces {o.get('pieces')!r}")
@@ -279,7 +288,7 @@ def calcular(data):
                     if ro <= mx + SPAN_TOL:
                         if pz < n:
                             raise ValueError(f"{ref}: {pz} pieza(s) < {n} del header schedule ({t}, {ssrc}) para "
-                                             f"R.O. {_ftin(ro)} — el schedule manda (decisión usuario #21, door 102)")
+                                             f"R.O. {_ftin(ro)} — el schedule manda (decisión usuario #21)")
                         break
         elif "pieces" in o:
             raise ValueError(f"{ref}: 'pieces' sin header_type + header_type_source")

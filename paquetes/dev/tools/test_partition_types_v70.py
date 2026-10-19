@@ -19,8 +19,8 @@ def W(i, tag, ori, eje, lo, hi, el="wall", stud="3-5/8\"", rows=1):
 
 def test_run_en_l_mismo_type_una_fila():
     c = dict(C, walls=[W("a", "P1", "H", 100, 0, 180), W("b", "P1", "V", 180, 100, 280)])
-    t = partition_types(c)
-    assert t["modo"] == particion.MODO_DEFAULT == "run"
+    t = partition_types(c, modo="run")                                       # v71: default "eje"; run explícito
+    assert t["modo"] == "run" and particion.MODO_DEFAULT == "eje"
     r = t["types"]["P1"]
     assert r["walls"] == 1 and r["filas"][0]["wall"] == "a+b" and abs(r["lf"] - 20.0) < 1e-6, r
     assert partition_types(c, modo="tramo")["types"]["P1"]["walls"] == 2     # opción tramo: corta en la esquina
@@ -56,14 +56,14 @@ def test_pt1_y_pt5_se_conservan():
 def test_v70c_ejes_exterior_en_l_dos_walls_interior_uno():
     """Regla EJES: perímetro exterior en L = 2 walls (uno por fachada); interior en L = 1 wall (run)."""
     ext = [W("e1", "EXT", "H", 100, 0, 180, stud="6\""), W("e2", "EXT", "V", 180, 100, 280, stud="6\"")]
-    r = partition_types(dict(C, walls=ext))["types"]["EXT-6CFMF"]
+    r = partition_types(dict(C, walls=ext), modo="run")["types"]["EXT-6CFMF"]
     assert r["walls"] == 2 and abs(r["lf"] - 20.0) < 1e-6, r
     par = [dict(x, element="parapet", tag="PARAPET", stud_size="6\" parapet") for x in ext]
-    assert partition_types(dict(C, walls=par))["types"]["EXT-PARAPET"]["walls"] == 2
+    assert partition_types(dict(C, walls=par), modo="run")["types"]["EXT-PARAPET"]["walls"] == 2
     loc = [dict(x, tag="P9", location="exterior") for x in ext]          # exterior por location del canon
-    assert partition_types(dict(C, walls=loc))["types"]["EXT-6CFMF"]["walls"] == 2
+    assert partition_types(dict(C, walls=loc), modo="run")["types"]["EXT-6CFMF"]["walls"] == 2
     inn = [W("i1", "P1", "H", 100, 0, 180), W("i2", "P1", "V", 180, 100, 280)]
-    assert partition_types(dict(C, walls=inn))["types"]["P1"]["walls"] == 1
+    assert partition_types(dict(C, walls=inn), modo="run")["types"]["P1"]["walls"] == 1
 
 
 if __name__ == "__main__":

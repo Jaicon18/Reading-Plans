@@ -666,7 +666,7 @@ def test_v65b_header_y_sill_son_reglas():
     _falla(d3, "#19")
     d4 = copy.deepcopy(d)
     of = {"ref": "office front E", "wall": "OF-E", "kind": "opening", "ro_w_ft": 7.5, "qty": 4,
-          "header_type": "CONT. BOX BEAM", "header_type_source": "8/A12.01", "pieces": 4,
+          "header_type": "CONT. BOX BEAM", "run_ends": "jamb_to_jamb", "header_type_source": "8/A12.01", "pieces": 4,
           "pieces_source": "8/A12.01", "source": "A02.01"}
     d4["openings_extra"] = [of]
     d4["opening_schedule"]["items"].append({"ref": "office front E"})

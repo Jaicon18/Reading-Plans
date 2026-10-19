@@ -186,6 +186,31 @@ def _bsf(w, bsf):
     return bsf.get(w["id"], 0.0)
 
 
+def _layers(sel, L):
+    """v71 (arbitraje #19, propuesta P1 de la prueba): Layers = Σ(layers_face × largo_face) / LF del wall, 2 decimales
+    (la convención del estimador: un wall de 2 caras con 1 layer = 2.00; una cara partida por room NO suma otra
+    layer). Face sin `length_ft`: largo completo del wall, pero las faces sin largo del mismo `side` cuentan una vez
+    (la de más layers). Face con height_ft 0 no cuenta."""
+    if not L:
+        return 0
+    tot = 0.0
+    for w in sel:
+        lw = _lf(w)
+        sin_largo = {}
+        for k, f in enumerate(w.get("faces") or []):
+            if f.get("height_ft") is not None and float(f.get("height_ft") or 0) <= 0:
+                continue
+            n = int(f.get("layers", 1) or 0)
+            if f.get("length_ft") is not None:
+                tot += n * float(f["length_ft"])
+            elif f.get("side") is not None:
+                sin_largo[f["side"]] = max(sin_largo.get(f["side"], 0), n)
+            else:
+                sin_largo[("_", k)] = n
+        tot += sum(sin_largo.values()) * lw
+    return round(tot / L, 2)
+
+
 def _fila(ws, ids, bsf):
     por = {w["id"]: w for w in ws}
     sel = [por[i] for i in ids]
@@ -197,7 +222,7 @@ def _fila(ws, ids, bsf):
         "CONFIRMADO" if all(w.get("length_printed_ft") is not None for w in sel) else "DERIVADO")
     return {"ids": ids, "wall": "+".join(ids), "lf": round(L, 3), "height_ft": round(h, 3),
             "stud_size": str(w0.get("stud_size") or "-"), "oc_in": w0.get("oc_in", 16), "rows": int(w0.get("rows", 1)),
-            "layers": sum(int(f.get("layers", 1)) for f in w0.get("faces") or []) or 0,
+            "layers": _layers(sel, L),
             "board_sf": round(sum(_bsf(w, bsf) for w in sel), 2),
             "location": " + ".join(dict.fromkeys(_loc(w) for w in sel)),
             "source": "; ".join(dict.fromkeys(str(w.get("detail") or w.get("source") or "-") for w in sel)),
@@ -284,8 +309,9 @@ def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos):
         b = None if w.get("_no_unir") else _banda_sintetica(w, esc)
         if b is None and not w.get("_no_unir"):
             avisos.append(f"{w['id']} ({t}) sin band: wall propio, no se puede unir con colineales")
-        c = {"id": w["id"], "tag": "T", "element": "wall", "length_ft": _lf(w), "sheet": "_"}
-        if particion.es_exterior(t, w):             # v70c (EJES): exterior se corta por fachada / eje
+        c = {"id": w["id"], "tag": "T", "element": "wall", "length_ft": _lf(w), "sheet": "_",
+             "tag_ids": list(w.get("tag_ids") or []), "openings": w.get("openings") or []}   # v71: modo eje
+        if particion.es_exterior(t) or all(particion.es_exterior(t, x) for x in ws):   # v70c (EJES) / v71
             c["exterior"] = True
         if b is not None:
             c["band"] = b
