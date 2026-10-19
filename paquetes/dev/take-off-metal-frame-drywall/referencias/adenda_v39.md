@@ -39,7 +39,7 @@ era.
 
 ## CÓMO SE HACE CUMPLIR, QUE ES LA PARTE QUE NO SE OLVIDA
 
-`glosario.py` pasó de 97 a **151 entradas**. `traducir_materiales.py` las aplica a los
+`glosario.py` pasó de <n> a **<n> entradas**. `traducir_materiales.py` las aplica a los
 **cierres sellados** probando que ningún número se movió y resellando. Y se agregó
 `traducir_docs.py`, que las aplica a los **documentos .md** con tres salvaguardas:
 
@@ -116,7 +116,7 @@ siguió cazando, **con razón: la copia es la que se manda**. `traducir_docs.py`
   que renombrarla en el **mismo** paso, no antes.
 
 **Estado tras la adenda: 14/14 compuertas pasan · 88 sellos OK / 0 rotos · 0 nombres de material
-en español en los archivos finales · atraso de prosa 154 (libro) y 972 (hoja de evidencia), los
+en español en los archivos finales · atraso de prosa <n> (libro) y <n> (hoja de evidencia), los
 dos sólo bajan.**
 
 ---

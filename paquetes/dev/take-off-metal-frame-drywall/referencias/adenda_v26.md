@@ -47,7 +47,7 @@ Sin eso se perdieron, ya cuantificados y sellados: [valor retirado E24] LF de ab
 {k.split(':')[0]: v for k, p in P.items()}   # MAL: sobrescribe
 ```
 
-Cuando dos renglones comparten prefijo (`BOARD_WR:baño 114` y `BOARD_WR:baño 113`) se pierde la mitad. Siempre acumular.
+Cuando dos renglones comparten prefijo (`BOARD_WR:baño [room A]` y `BOARD_WR:baño [room B]`) se pierde la mitad. Siempre acumular.
 
 ## REGLA — Cuando se corrige una cantidad, se corrige el TEXTO el mismo turno
 

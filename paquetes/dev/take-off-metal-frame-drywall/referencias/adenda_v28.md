@@ -65,7 +65,7 @@ Un `continue` no deja rastro: ni en el resultado, ni en el log, ni en el sello. 
 
 ## Probado viéndolo fallar
 
-Quitando el wall 40 de la lista, el cierre se niega:
+Quitando un wall (#n) de la lista, el cierre se niega:
 
 ```
 CRUCE MEP INCOMPLETO: los muros [40] no estan ni en PEN, ni en SIN_PEN, ni en FALSOS.

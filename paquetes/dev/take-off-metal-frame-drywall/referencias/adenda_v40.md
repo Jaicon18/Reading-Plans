@@ -55,7 +55,7 @@ Fue el impulso equivocado y hay que dejarlo escrito para no repetirlo:
 |---|---|---|
 | **qué revisa** | el DATO: texto dentro del cierre sellado → Excel | la PROSA: chat, documentos, literales de los generadores |
 | **ejemplos** | board, stud, track, joint compound, corner bead | wall, door, dimension, line item, swing, hinged |
-| **por qué no se fusionan** | — | `muro`, `largo`, `partidas` y `puerta` son **CLAVES del cierre** (121, 90 y 111 veces) y `puerta` es un **VALOR que gobierna la lógica** (`clase: puerta` decide si la abertura lleva sólo header o header **y** sill) |
+| **por qué no se fusionan** | — | `muro`, `largo`, `partidas` y `puerta` son **CLAVES del cierre** (<n>, <n> y <n> veces) y `puerta` es un **VALOR que gobierna la lógica** (`clase: puerta` decide si la abertura lleva sólo header o header **y** sill) |
 
 Meterlas en una sola habría **roto la lógica del cierre para arreglar la redacción del chat**.
 Es el mismo criterio que ya tenía `dataset.CLASE_EN`: se traduce la salida, nunca el dato.
@@ -103,7 +103,7 @@ Al vocabulario del trade se le pone su propio contador, visible y aparte, **que 
 no toca a propósito) y **290** celdas del libro (la hoja de evidencia cita el texto sellado, y
 ese atraso se paga traduciendo el **generador**).
 
-Los otros dos trinquetes bajaron en la misma pasada: libro **154 → 145**, evidencia
+Los otros dos trinquetes bajaron en la misma pasada: libro **<n> → <n>**, evidencia
 **970 → 964**.
 
 **Estado: 16/16 compuertas pasan · 88 sellos OK / 0 rotos · 0 nombres de material en español en

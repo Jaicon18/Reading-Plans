@@ -16,7 +16,7 @@
 
 **Cuidado con la orientación del punto de prueba.** Si la banda se describe como `(c0,c1)` = faces y `(lo,hi)` = extensión, el centro de una banda HORIZONTAL es `(x=(lo+hi)/2, y=(c0+c1)/2)` — al revés de la vertical. Escrito al revés, el auto-test de tinta tira "FACTOR DE ESCALA MAL" y no escribe nada, que es exactamente lo que debe pasar: la compuerta atrapa el bug antes de que salga la imagen.
 
-**Walls con door:** el punto de prueba de un wall con opening puede caer en el hueco; se marca en piezas sólidas a cada lado del opening (p.ej. `102` y `1021`).
+**Walls con door:** el punto de prueba de un wall con opening puede caer en el hueco; se marca en piezas sólidas a cada lado del opening (p.ej. `<n>` y `<n>1`).
 
 **Tests obligatorios:**
 1. Factor correcto sobre un lote de tags reales → todos pasan, tinta típica 0.15–0.40.

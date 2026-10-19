@@ -29,7 +29,7 @@ Son **dos aparatos en dos walls distintas**:
 - El **lavabo** va en el chase → [valor retirado E24] SF, ya estaban.
 - El **inodoro** va contra la **face interior del wall exterior oeste** (probado con `D/A08.01 RESTROOM ELEVATION D`, que lo dibuja de perfil con su barra TA-nn). Esa face estaba como gyp **regular**.
 
-**Faltaban [valor retirado E24] SF.** W.R. total: 100.80 → **[valor retirado E24] SF**.
+**Faltaban [valor retirado E24] SF.** W.R. total: [valor retirado E24] → **[valor retirado E24] SF**.
 
 ### 2. El FRP del mop sink no estaba cuantificado
 
@@ -45,7 +45,7 @@ Su marcador cae dentro del **JANITOR CLOSET [room]** y su línea guía apunta a 
 
 `P01.01 keyed note 1`: *"...ROUTE LOW VOLTAGE WIRING DOWN TO FLOODSTOP PANEL **BELOW BREAK SINK**"*.
 
-El Finish Plan le rotula al 118 sólo `P-nn` / `VCT-2` / `B-nn`: ni FRP, ni tile, ni nota de W.R.
+El Finish Plan le rotula a ese [room] sólo `P-nn` / `VCT-2` / `B-nn`: ni FRP, ni tile, ni nota de W.R.
 
 **El contraste es lo que decide que no es olvido de rotulación:** el mismo Finish Plan **sí** le pone key note 6 al mop sink, y A08.01 **sí** trae su nota F para los baños. El plano no lo pide aquí → **RFI + alterno**, no se cuantifica.
 
@@ -64,7 +64,7 @@ Generalización: toda nota que enumere aparatos, elementos o condiciones se desc
 Todo cuarto con aparato de plomería aparece en el censo con su resolución — cuantificado o RFI declarado. **Si alguno queda sin resolver, el cierre no se emite:**
 
 ```
-BARRIDO DE ZONAS HUMEDAS INCOMPLETO: ['118'] sin resolver.
+BARRIDO DE ZONAS HUMEDAS INCOMPLETO: ['[room]'] sin resolver.
 Un cuarto con agua que no esta resuelto no es un cuarto seco:
 es un cuarto sin revisar. No se emitio nada.
 ```

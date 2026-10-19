@@ -426,8 +426,8 @@ class Wall:
 # ---------------------------------------------------------------------------------------
 # `round()` DE PYTHON NO REDONDEA COMO LA OBRA (10-oct-2026).
 # Hace banker's rounding (el .5 va al par: round(0.125,2)=0.12) y ademas muchos decimales no
-# son exactos en binario: 3.71 x 9.50 da 35.245, y round() lo baja a 35.24 porque el valor
-# real es 35.2449999... El estimador que recalcule 3.71 x 9.50 a mano escribe 35.25 y no le
+# son exactos en binario: 1.15 x 9.50 da 10.925, y round() lo baja a 10.92 porque el valor
+# real es 10.9249999... El estimador que recalcule 1.15 x 9.50 a mano escribe 10.93 y no le
 # cuadra el sello por un centesimo -- y un centesimo que no cuadra obliga a rehacer la
 # verificacion entera para descubrir que no era nada.
 #

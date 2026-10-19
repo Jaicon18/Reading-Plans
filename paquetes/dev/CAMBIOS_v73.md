@@ -1,4 +1,4 @@
-# CAMBIOS v73 / v73b (2026-10-19) — la compuerta revisa consistencia con el plano
+# CAMBIOS v73 / v73b / v73c (2026-10-19) — la compuerta revisa consistencia con el plano
 
 Arbitraje de una prueba ciega (v72b): la compuerta de reglas inviolables dio OK y dos familias salieron fuera de
 rango con la regla escrita (ballistic / 3/8" y stud reinforcement MEP). Causa: los chequeos revisaban la FORMA del
@@ -50,3 +50,11 @@ consistencia y cierra los huecos de tools que reportó la prueba. Ningún valor 
 - test_ciego_tools.py revisa también SKILL.md, referencias/*.md y los .md de tools: rooms con número 1xx (incl.
   "calling cubes" y "break"), nombres propios de room de un set, "#<dígito>" suelto junto a un type y, con la lista
   externa, cantidades de examen.
+
+## v73c (segunda revisión de ceguera)
+- SKILL.md: el "ejemplo real" de cadena door → Door Schedule → detalle pasa a genérico ([door n], N/HOJA).
+- referencias/: rooms y números en español o sin palabra de room (baño, fila, vestíbulo, "al 1xx", ['1xx']),
+  ids de cierre del set (CIELO-nn), wall / muro + número y conteos de corridas pasadas -> [room] / #n / <n>.
+- tools/: comentarios de dataset.py, verif_callouts.py, closer.py y herramientas.md sin rooms, doors ni valores del set.
+- test_ciego_tools.py: P9 (baño / puerta / fila / vestíbulo / muro / wall / door + número, 1xx entre comillas o
+  corchetes, CIELO-nn) y P10 (número en un renglón de "Ejemplo real") en .md y en comentarios / docstrings de tools.

@@ -68,7 +68,7 @@ entre marcadores de glosario abajo, porque citarlos es justo lo que la compuerta
 `sellador` y `envolvente de columna`.
 <!-- GLOSARIO:FIN -->
 documentos escritos antes de que existiera el glosario, y que seguían en español en su PC.
-Se traducen con `G.traducir()` comprobando que ningún número se mueva — 154 y 194 números
+Se traducen con `G.traducir()` comprobando que ningún número se mueva — <n> y <n> números
 intactos — y se vuelven a escribir allá.
 
 ## Sin shell en su PC, el diff se hace por TAMAÑO

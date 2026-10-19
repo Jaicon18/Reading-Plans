@@ -88,7 +88,7 @@ ordena por `(serie, número, subnúmero)`, nunca por su cadena de caracteres.
 
 ## Lo que la columna destapó el primer día
 
-Los **cinco ceilings GWB** (`CIELO-70` a `CIELO-74`) terminan su cadena en `A04.01` y **no citan
+Los **ceilings GWB** (`CIELO-nn`) terminan su cadena en `A04.01` y **no citan
 ni un detalle**: se cerraron con el tag del RCP y la geometría del cuarto. El área y el
 perímetro no cambian por eso; lo que **no está verificado** es la suspensión (calibre y
 espaciamiento de hanger, carrying y furring channel) y la condición de borde de cada cuarto.

@@ -24,9 +24,9 @@ de los baños. La cita prueba que el material va; el número es una cuenta.
 > Es la regla de la v42 —*"un detalle de tipo da la REGLA, no el VALOR"*— aplicada a una
 > cantidad en vez de a una height.
 
-**El que queda, declarado en vez de escondido.** `CIELO-70 ACCESS_PANEL = 1 ea` no es una
-dimensión: es un **conteo leído directo de la hoja** (se recorrieron los 12 key notes de
-A04.01 y el único "2' X 2' LOCKING ACCESS PANEL" cae en el Vestíbulo 100). No hay printed
+**El que queda, declarado en vez de escondido.** `CIELO-nn ACCESS_PANEL = [valor retirado E24]` no es una
+dimensión: es un **conteo leído directo de la hoja** (se recorrieron todos los key notes del
+RCP y el único "LOCKING ACCESS PANEL" cae en un [room]). No hay printed
 dimension que citar y tampoco hay operación que escribir, así que bajarlo a `[DERIVADO]`
 sería tan falso como dejarlo. Va en `CONTEOS_DIRECTOS` con su motivo, y la regla no se
 debilita para nadie más.

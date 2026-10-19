@@ -50,7 +50,7 @@ def v(p):
 
 def _agr(P):
     """Suma por prefijo. Un dict comprehension SOBRESCRIBE cuando dos renglones
-    comparten prefijo (BOARD_WR:bano 114 y BOARD_WR:bano 113) y se pierde la mitad."""
+    comparten prefijo (BOARD_WR:bano <room A> y BOARD_WR:bano <room B>) y se pierde la mitad."""
     out = {}
     for k, p in P.items():
         base = k.split(':', 1)[0]
@@ -93,8 +93,8 @@ def _stud_lf(p, pz, alto):
         extra = pz - sum(int(n) for n, _ in tr)          # terminacion, jambas, cripples
         if extra > 0:
             # los studs adicionales (terminacion, jambas, cripples) van a la altura
-            # DECLARADA del muro, no a la mayor de los tramos: en el muro 16 las 4
-            # jambas de la puerta 122 estan en la zona baja.
+            # DECLARADA del muro, no a la mayor de los tramos: en un wall partido las
+            # jambas de una door pueden estar en la zona baja.
             lf += extra * float(alto or 0)
         return round(lf, 2)
     return round(pz * (alto or 0), 2)

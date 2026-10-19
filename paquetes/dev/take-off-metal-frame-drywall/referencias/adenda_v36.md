@@ -66,7 +66,7 @@ citara esa hoja.
 tan ciega como no haber empezado.
 
 **`closer.py` — exigencia nueva.** Antes la hoja se pedía solo a CONFIRMADO. Ahora toda
-line item, CONFIRMADO o DERIVADO, lleva su cita `N/HOJA`. Destapó que **180 de 362 line items
+line item, CONFIRMADO o DERIVADO, lleva su cita `N/HOJA`. Destapó que **<n> de <n> line items
 selladas (50%) no tienen cita de hoja + detalle**.
 
 ## Dos bugs propios al escribir la compuerta, los dos de normalización

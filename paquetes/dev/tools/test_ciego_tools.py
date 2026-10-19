@@ -51,6 +51,12 @@ P6 = re.compile(r"(?i)\b(room|office|restroom|corridor|break ?room|break|storage
 # número de wall suelto junto a un type ("A1 #3", "del #2", "este del #7"); los genéricos usan "#n" / "[room]".
 P6_MD = re.compile(r"\b(Calling Cubes|CALLING CUBES|Cash Window|CASH WINDOW)\b")   # nombre propio, no el tipo de abertura
 P7_MD = re.compile(r"(?:\b[A-H]\d?K?\s*#\d+\b|\b(?:del|al|el|wall|y)\s+#\d+\b)")
+# v73c: en español o sin palabra de room delante: baño / puerta / fila / vestíbulo / muro / wall / door + número; un 1xx
+# entre comillas o corchetes; un id de cierre del set (CIELO-70); cualquier número en un renglón de "Ejemplo real".
+P9_MD = re.compile(r"(?i)\b(baño|bano|fila|vest[ií]bulo|cuarto|sala|room)\s+#?1\d\d\b"
+                   r"|\b(puerta|muro|wall|door)\s+#?(1\d\d|\d{2})\b"
+                   r"|['\"`\[]1\d\d[A-Z]?['\"`\]]|\bCIELO-\d+\b|\bal 1\d\d\b")
+P10_MD = re.compile(r"(?i)ejemplo real[^\n]*?\b\d{2,}\b")
 P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
 P7 = re.compile(r"^(?:[A-H]\d?K?|EXT-\d+)-\d{1,2}[a-z]?$")
 _VALORES = None
@@ -209,9 +215,10 @@ def autoprueba():
     hl = revisar_literales(lit_malo, "lm", [12.345])
     assert {h.split(": ")[1] for h in hl} >= {"P6 room real", "P7 wall ID real", "P8 cantidad de la referencia"}, hl
     assert revisar_literales(lit_bueno, "lb", [12.345]) == [], revisar_literales(lit_bueno, "lb", [12.345])
-    md_malo = "La face ESTE es Cash Window 908.\nA1 #3 contra la face OESTE del #2.\nBreak 118 al sur.\n"
+    md_malo = ("La face ESTE es Cash Window 908.\nA1 #3 contra la face OESTE del #2.\nBreak 118 al sur.\n"
+               "BOARD_WR:baño 114.\nEjemplo real: puerta 108.\n['118'] sin resolver.\n")
     md_bueno = "La face ESTE es [room].\nA1 #n contra la face OESTE del #n. Ver 6/A12.01 y §4; regla #0.\n"
-    assert len(revisar_md(md_malo, "m")) == 3, revisar_md(md_malo, "m")
+    assert len(revisar_md(md_malo, "m")) == 6, revisar_md(md_malo, "m")
     assert revisar_md(md_bueno, "b") == [], revisar_md(md_bueno, "b")
     return "autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, 0 falsos positivos)"
 
@@ -223,7 +230,8 @@ def revisar_md(texto, nombre="<md>"):
     for n, ln in enumerate(texto.splitlines(), 1):
         if OK in ln:
             continue
-        for et, rx in (("P6 room real", P6), ("P6 room real", P6_MD), ("P7 wall ID real", P7_MD)):
+        for et, rx in (("P6 room real", P6), ("P6 room real", P6_MD), ("P7 wall ID real", P7_MD),
+                       ("P9 room / door / wall real", P9_MD), ("P10 ejemplo real con número", P10_MD)):
             m = rx.search(ln)
             if m:
                 hall.append(f"{nombre}:{n}: {et}: …{ln[max(0, m.start() - 30):m.end() + 30].strip()}…")
@@ -232,7 +240,8 @@ def revisar_md(texto, nombre="<md>"):
             import bisect
             for m in re.finditer(r"(?<![\d.])\d+\.\d{2,3}(?![\d])", ln):
                 v = float(m.group(0))
-                if ln[max(0, m.start() - 4):m.start()].rstrip().endswith(("/A", "A", "S", "/S")) or \
+                if re.search(r"(?i)(regla|\()\s*$", ln[max(0, m.start() - 7):m.start()]) or \
+                        ln[max(0, m.start() - 4):m.start()].rstrip().endswith(("/A", "A", "S", "/S")) or \
                         re.search(r"[A-Z]\d{0,2}$", ln[max(0, m.start() - 3):m.start()]):
                     continue                                   # número de hoja (A12.01, S5.20)
                 i = bisect.bisect_left(_VALORES, v - 0.0005)
@@ -240,6 +249,20 @@ def revisar_md(texto, nombre="<md>"):
                         abs(v * 48 - round(v * 48)) / 48 > 0.0035:
                     hall.append(f"{nombre}:{n}: P8 cantidad de la referencia: {m.group(0)}")
     return hall
+
+
+def _comentarios(texto):
+    """Texto de comentarios y docstrings (los renglones que no lo son quedan vacíos: los números de línea se conservan)."""
+    lineas = texto.splitlines()
+    keep = set()
+    try:
+        for tok in tokenize.generate_tokens(io.StringIO(texto).readline):
+            if tok.type == tokenize.COMMENT:
+                keep.add(tok.start[0])
+        keep |= _docstring_lineas(ast.parse(texto))
+    except (tokenize.TokenError, IndentationError, SyntaxError):
+        return ""
+    return "\n".join(ln if i + 1 in keep else "" for i, ln in enumerate(lineas))
 
 
 def archivos_md(d):
@@ -281,6 +304,8 @@ def main(argv):
         # los patrones de texto de los tests de ciego son sus casos malos a propósito
         if b not in ("test_ciego.py", "test_ciego_v69.py", "test_ciego_tools.py"):
             hall += revisar_fuente(t, b)
+            if not b.startswith("test_"):              # v73c: P6–P10 en comentarios y docstrings de las tools
+                hall += revisar_md(_comentarios(t), b)
         hall += revisar_literales(t, b, _VALORES) if b != "test_ciego_tools.py" else []
     if not a:                                        # v73b: también SKILL.md, referencias/*.md y los .md de tools
         for f in archivos_md(os.path.dirname(os.path.abspath(__file__))):

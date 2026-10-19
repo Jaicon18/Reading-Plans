@@ -153,9 +153,9 @@ def citados():
     import cadena_detalles as _CD   # la compuerta y la cadena usan el MISMO lector de citas
     # BUG CORREGIDO 3-oct-2026: el glob '*_cierre*.json' solo veia los cierres que se
     # guardan agrupados (EXT_cierres.json, G_cierres_v2.json...) y NO los que se guardan
-    # uno por muro (out/B2/B2_v2_muro_25.json, out/A1/..., out/C1/...). La compuerta daba
+    # uno por muro (out/<type>/<type>_v2_muro_<n>.json, out/A1/..., out/C1/...). La compuerta daba
     # por NO CITADOS detalles que si estaban citados -- 11/A12.04 y 7/A12.04 viven en el
-    # afirmar_alcance del muro 30 desde hace dias. Ahora se pregunta a resumen_global, que
+    # afirmar_alcance de un wall desde hace dias. Ahora se pregunta a resumen_global, que
     # es el unico que sabe donde vive cada cierre sellado del proyecto.
     import resumen_global as _RG
     archivos = []
