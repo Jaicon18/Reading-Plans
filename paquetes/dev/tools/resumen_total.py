@@ -5,8 +5,8 @@ resumen_global.py solo entiende cierres de WALL (los que llevan 'length'). Este 
 ademas los elementos que no son walls -- ceilings, soffits y marquesina -- que se miden en
 SF y no en LF, y vuelve a verificar TODOS los sellos.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import json, glob, collections, hashlib, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -15,9 +15,9 @@ import resumen_global as RG
 
 B = f'{_TW}'
 NOMURO = collections.OrderedDict([
-    ('CEILINGS GWB (70-74)', B + '/CIELOS_cierres.json'),
-    ('SOFFIT CSR (80)',    B + '/SOFFITS_cierres.json'),
-    ('MARQUESINA (81-85)', B + '/CANOPY_cierres.json'),
+    ('CEILINGS GWB',        B + '/CIELOS_cierres.json'),
+    ('SOFFIT',             B + '/SOFFITS_cierres.json'),
+    ('MARQUESINA',         B + '/CANOPY_cierres.json'),
 ])
 # Bloques que no son ni muro ni superficie: se cuentan como ELEMENTOS y sus partidas
 # entran al gran total igual que las demas. Sus sellos se verifican con el mismo control.
@@ -112,7 +112,7 @@ if __name__ == '__main__':
         v = GR[k]
         # CORREGIDO 6-oct-2026: la unidad se LEE DEL CIERRE, no de una lista escrita a mano.
         # Habia un set `LFBOARD = {'PLYWOOD_FRT', 'BOARD_3_8'}` que imprimia en LF dos partidas
-        # que TODOS los cierres sellan en SF: 152.48 SF de plywood FRT salian rotulados LF.
+        # que TODOS los cierres sellan en SF: <n> SF de plywood FRT salian rotulados LF.
         # Una unidad mal rotulada en el resumen de materiales se cotiza mal, y el numero de
         # abajo es correcto, asi que nada lo delata.
         us = sorted(x for x in UNI.get(k, set()) if x)

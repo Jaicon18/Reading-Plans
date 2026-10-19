@@ -2,7 +2,7 @@
 """inventario_tags.py — ETAPA 1 del take-off: inventario por SCRIPT de lo que el plano dice (no de lo que el ojo cree ver).
 
 Por qué existe: en pruebas ciegas la misma versión del skill dio walls por tag distintos entre corridas (un type con
-4 walls contra 8, otro con 12 contra 9). El conteo de tags lo hacía el modelo a ojo. Aquí sale del texto del PDF.
+<n> walls contra <n>, otro con <n> contra <n>). El conteo de tags lo hacía el modelo a ojo. Aquí sale del texto del PDF.
 
 GENÉRICO: ningún tag, hoja, coordenada ni nombre de proyecto vive en este archivo. Todo sale del PDF recibido.
 

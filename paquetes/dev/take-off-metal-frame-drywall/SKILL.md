@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 19-oct-2026 (v72). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 19-oct-2026 (v72b). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -16,6 +16,10 @@ Da todas las pasadas de verificación que hagan falta, directamente, sin pregunt
 Cada vez que aparezca un error o una limitación de método, no basta reportarlo: crea la SOLUCIÓN, déjala escrita como regla reutilizable, guárdala en memoria en el MISMO turno y actualiza este skill.
 
 **Cómo se entrega el protocolo actualizado.** Separa claramente lo que el usuario tiene que copiar y pegar de todo lo demás; el resumen de qué cambió va FUERA del bloque copiable, arriba, para que no se le cuele al pegar. El texto a pegar va en su propio bloque delimitado, publicado como artifact HTML **con botón de copiar al portapapeles**. OJO CON EL LÍMITE: su caja de instrucciones personales aguanta unos 3 mil caracteres, así que el protocolo completo NUNCA va ahí — el protocolo completo vive en este skill, y el system prompt lleva solo un bloque corto que dispara el skill y repite los no-negociables. Si una regla nueva toca un no-negociable, actualiza LAS DOS cosas y entrégale los dos bloques, cada uno con su propio botón de copiar, separados y rotulados.
+
+## ⛔ REGLAS INVIOLABLES: ninguna regla se interpreta ni se omite; reglas.py compuerta manda.
+
+Orden del estimador (v72b): las reglas están hechas para respetarse. TODA regla de este SKILL y de `referencias/` está en el catálogo (`reglas_catalogo.py`) con su tipo (`reglas_clasificacion.py`, tabla en `referencias/REGLAS_INVIOLABLES.md`): (a) verificable con datos → chequeo automático; (b) juicio de plano → evidencia POR CASO (N/HOJA o la hoja de la medida + imagen que existe + valor) en el campo del canon que la regla nombra o en `4_canon/evidencias_reglas.json` [{regla, caso, source, img, valor}] (proceso: {regla, caso: "corrida", archivo, valor}; lo que no aplica: "NO APLICA: <motivo>"); (c) redundante u obsoleta → fusionada en la regla vigente que se revisa. `python3 reglas.py compuerta <dir>` escribe `reglas_out.json` + `REGLAS_FALLAS.md` y sale rc 1 con UNA sola falla. `plantilla_excel.py armar` la corre él mismo y NO escribe el Excel si no da OK (el libro sale sellado); `etapas.py compuerta` y `bitacora.py compuerta` la corren también. No hay flag de override; una regla nueva sin clasificar hace fallar la compuerta y `test_reglas.py`. Lo que falta de evidencia se lista con `python3 reglas.py faltantes <dir>`.
 
 # PROTOCOLO v69 — FLUJO POR ETAPAS (manda sobre todo lo que sigue)
 
@@ -133,6 +137,10 @@ de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
   `inside_corners.jogs [{depth_in, kind notch|step, source}]`; ATM con dato CRITERIO con `alternativas`.
 - **v72 — checklist de la tarea de exteriores / aberturas:** todo "BOX HEADER AS NEEDED" lleva su `vestibule_head`;
   las column wraps del canopy (detalle de canopy column) se leen en la tarea de exteriores (las dos lecturas).
+- **v72b — evidencia (b) en la lectura:** cada caso que una regla (b) pide lleva su cita, su imagen (ruta dentro de
+  la carpeta de trabajo, que viaja con ella) y su valor en el campo del canon que nombra la spec (p. ej. wall:
+  `length_source` + `length_op` + `img`; face: `room` + `height_source`; detalle: `source` + `img`); lo que no tiene
+  campo propio va a `4_canon/evidencias_reglas.json`. `reglas.py faltantes <dir>` da la lista exacta.
 - Unión: `python3 etapas.py unir <dir>/2_lectura/A <dir>/2_lectura/canon_A.json` (idem B). Falla si dos
   fragmentos repiten un id o traen constantes distintas (escala).
 
@@ -349,6 +357,9 @@ openings MEP · las 15 de accesorios (§12).
 0d. `chequeos_v72.py takeoff_canon.json --vigas vigas_out.json` PASA (también dentro de `etapas.py compuerta`, que
    busca `vigas_out.json` en `4_canon/` u `out/`): R72.1 type K por hatch, R72.2 diagonal, R72.3 `part_of`, R72.4
    vigas_sobre_walls manda, R72.5 MEP de `mep.cruces` y FD una vez, R72.6 side A|B, R72.10 jogs del FRP, R72.11 ATM.
+0e. `reglas.py compuerta <dir>` PASA (v72b): TODAS las reglas del catálogo, (a) con datos y (b) con evidencia por
+   caso; corre dentro de `plantilla_excel.py armar`, `etapas.py compuerta` y `bitacora.py compuerta` (modo final con
+   el Excel: sello vigente). Una sola falla = NO SE ARMA / NO ENTREGABLE.
 1. `inventario_tags.py`, `canon.py` (con el `inventario.py` de walls), `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
 2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
 3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
@@ -528,6 +539,10 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R72.12 | Track por tamaño (R71.8b): los renglones por tamaño de una familia conservan su NET y suman la familia (± 0.1); `fusionar` nunca les pone el total. `verificar` compara Σ contra `familias_out.json` de las salidas. | plantilla_excel.py |
 
 ---
+
+## 19. v72b — reglas inviolables (compuerta de reglas; ninguna regla depende de que la corrida se acuerde)
+
+Catálogo: todas las reglas extraídas del texto (SKILL.md + referencias/; cuenta y lista con `python3 reglas_catalogo.py`), cada una con tipo a / b / c y su chequeo o spec de evidencia. Tools: `reglas.py` (compuerta, absorbe `chequeos_v71`, `chequeos_v72`, `esquinas.py` y la compuerta de etapas), `reglas_catalogo.py`, `reglas_clasificacion.py`, `fixture_reglas.py` (proyecto sintético que pasa), `test_reglas.py` (un test por regla: caso que viola falla, caso correcto pasa), `test_ciego_tools.py` (E24 también en las tools). Tabla: `referencias/REGLAS_INVIOLABLES.md` (se regenera con `python3 reglas.py tabla`).
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 

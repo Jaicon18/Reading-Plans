@@ -10,25 +10,25 @@ criterio no se puede unificar y el take-off queda con cuatro criterios convivien
 POR QUE NO SE PUDO ANTES, Y QUE CAMBIO. Las fuentes de geometria que habia no pasaban
 ninguna prueba: `bandas_por_tipo.json` trae geometrias duplicadas, `inventario.json`
 resulto tener CINCO bandas (todas C1), y `wallgeom.py` lleva su propio letrero de que
-acierta 1 de 3. Se extrajo de nuevo desde el vector de A02.01 y la primera version
-reprodujo 36% de los largos sellados -- no servia. El defecto no era la extraccion: era
+acierta <n> de <n>. Se extrajo de nuevo desde el vector de A02.01 y la primera version
+reprodujo <n>% de los largos sellados -- no servia. El defecto no era la extraccion: era
 la CONVENCION DE EXTREMOS. Una banda de wall son dos caras paralelas, y las dos caras NO
 terminan en el mismo punto: en cada encuentro una sigue y la otra se corta. Tomando la
 INTERSECCION de las dos caras el wall sale corto; tomando la UNION sale su largo real.
 
-    Con interseccion: 24 de 67.   Con union: 41 de 47 walls de banda simple = 87%.
+    Con interseccion: <n> de <n>.   Con union: <n> de <n> walls de banda simple = <n>%.
 
     Una fuente de geometria no se usa porque exista: se usa porque PASA una prueba, y la
     prueba se escribe antes de mirar el resultado.
 
-QUE QUEDA FUERA, declarado: los 20 walls que no son banda simple de dos caras paralelas
--- los 12 exteriores (llevan sheathing, polyiso y plaster, no dos lineas), los 4 forros
-de columna de canopy (lazo cerrado), los 2 bulkhead del office front (dos filas de stud
-con SOUNDGUARD en medio), el F #40 (inclinado) y el B2K #31 (balistico). Para esos la
+QUE QUEDA FUERA, declarado: los walls que no son banda simple de dos caras paralelas
+-- exteriores (llevan sheathing, polyiso y plaster, no dos lineas), forros de columna
+(lazo cerrado), bulkheads de doble fila de stud (con SOUNDGUARD en medio), walls
+inclinados y walls balisticos (NO_BANDA, abajo: lista del proyecto). Para esos la
 adyacencia se declara a mano desde su propio cierre, que ya la trae escrita en prosa.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import collections
 import json
@@ -39,17 +39,18 @@ T = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, T)
 
 PT_FT = 18.0
-TOL_LARGO = 0.45      # ft; lo peor que quedo en la validacion fue 0.407
+TOL_LARGO = 0.45      # ft; tolerancia de largo banda vs sellado
 TOL_PUNTA = 9.0       # pt; cuanto puede separarse una punta del eje del otro wall
-NO_BANDA = ('BULKHEAD-G', 'CANOPY-COL', 'EXT-6CFMF', 'EXT-PARAPET', 'F', 'B2K')
+# tags / bloques del PROYECTO que no son banda simple: $ADYACENCIA_NO_BANDA, separados por coma
+NO_BANDA = tuple(x.strip() for x in _os_rutas.environ.get('ADYACENCIA_NO_BANDA', '').split(',') if x.strip())
 
 
 def _bandas_union():
     try:
-        import bandas_v3 as BV             # extractor de bandas DEL PROYECTO (BOA: A02.01)
+        import bandas_v3 as BV             # extractor de bandas DEL PROYECTO (su floor plan)
     except ImportError:
-        sys.exit("adyacencia: falta bandas_v3.py de ESTE proyecto (el de BOA vive en "
-                 "_herramientas/py/_proyectos/BOA Broomfield/; no se usa en otro proyecto)")
+        sys.exit("adyacencia: falta bandas_v3.py de ESTE proyecto (vive en "
+                 "_herramientas/py/_proyectos/<proyecto>/; no se usa en otro proyecto)")
     segs = BV._segmentos()
     por = collections.defaultdict(list)
     for ori, c, lo, hi in segs:
@@ -106,7 +107,7 @@ def _contacto(a, b):
 
       T       la punta de `a` cae DENTRO del tramo de `b`, lejos de sus dos extremos
               -> `a` MUERE, `b` PASA. Es la condicion de 5/S5.20 WALL INTERSECTION
-                 FRAMING: los 2 studs extra van en `b`, y `a` se atornilla sin stud propio.
+                 FRAMING: los dos studs extra van en `b`, y `a` se atornilla sin stud propio.
       esquina las dos puntas coinciden -> ninguno pasa de largo, los dos terminan ahi.
               Es 5/S5.20 INTERIOR/EXTERIOR CORNER FRAMING, que es otra cuenta y por eso
               no se mezcla con la anterior.

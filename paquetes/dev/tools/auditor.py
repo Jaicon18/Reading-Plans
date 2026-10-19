@@ -2,7 +2,7 @@
 """auditor.py - Compuerta de BARRIDO: cuenta MUROS REALES por tipo, no tags.
 
 Nace del error del 24-sep-2026 en el tipo B: dos tags a 35 pt uno del otro se
-dieron por el mismo muro y se perdio un muro entero de 11.83 LF. Uno apuntaba a
+dieron por el mismo muro y se perdio un muro entero de <n> LF. Uno apuntaba a
 un muro VERTICAL y el otro a uno HORIZONTAL.
 
 LA REGLA QUE HACE CUMPLIR: dos tags son el MISMO muro solo si su leader aterriza
@@ -11,13 +11,13 @@ Distinta orientacion = muros distintos, por cerca que esten los tags.
 
 Uso:
     from auditor import auditar
-    auditar(page_index=23, tag='B', espesor_in=4.875, esperados=6)
+    auditar(page_index=<n>, tag='<tag>', espesor_in=<n>, esperados=<n>)
 
 Lanza BarridoRechazado si el numero de bandas distintas no coincide con lo que
 dice el cierre. No hay modo "seguir con advertencias".
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import sys, itertools, collections
 sys.path.insert(0, f'{_TW}')
@@ -138,10 +138,11 @@ def auditar(page_index, tag, espesor_in, esperados=None, verbose=True):
 
 
 if __name__ == '__main__':
-    ESQ = {'A5': 7.25, 'B': 4.875, 'B2': 7.25, 'B2K': 7.625, 'C1': 4.25,
-           'G': 6.125, 'G1': 8.0, 'A1': 4.875, 'A1K': 5.25}
-    t = sys.argv[1]
+    # uso: auditor.py <page_index> <tag> <espesor_in> [esperados]  (espesor del schedule del proyecto)
+    if len(sys.argv) < 4:
+        sys.exit('uso: python3 auditor.py <page_index> <tag> <espesor_in> [esperados]')
+    pg, t, esp = int(sys.argv[1]), sys.argv[2], float(sys.argv[3])
     try:
-        auditar(23, t, ESQ[t], int(sys.argv[2]) if len(sys.argv) > 2 else None)
+        auditar(pg, t, esp, int(sys.argv[4]) if len(sys.argv) > 4 else None)
     except BarridoRechazado as ex:
         print('\nBARRIDO RECHAZADO:', ex)

@@ -32,8 +32,8 @@ COMO SE DERIVA EL ORDEN, sin teclearlo a mano:
 No inventa eslabones: solo ORDENA los que el cierre ya cita. Si un cierre cita poco, la
 cadena sale corta -- y eso es justamente lo que hay que ver.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import json, os, re, sys, collections
 
@@ -45,7 +45,7 @@ CACHE = f'{_TW}/detalles_cache.json'
 # A12.04/A12.05" -- hace que el patron lea la COLA del primer numero de hoja como si fuera
 # una etiqueta de detalle: `01/A09.02`, `04/A12.05`. Son detalles que NO EXISTEN, y acababan
 # impresos en la cadena del Excel mandando al estimador a buscar una imagen que no esta.
-# 75 apariciones de `01/A09.02` solo en BofA. Defensa doble: (1) si justo antes de la
+# <n> apariciones de un `01/HOJA` falso en un solo proyecto. Defensa doble: (1) si justo antes de la
 # etiqueta hay cola de numero de hoja, se descarta; (2) ninguna etiqueta real lleva CERO A
 # LA IZQUIERDA -- un detalle es 1, 11, D; nunca 01.
 CITA = re.compile(r'([A-Z]{1,2}\d{1,2}\.)?\b([0-9]{1,2}|[A-Z])\s*/\s*([A-Z]{1,2}\d{1,2}\.\d{2})\b')
@@ -216,7 +216,7 @@ def cadena(obj, entrada=None, prof=None, g=None):
 
     out = ['%s/%s' % (n, real(h)) for n, h in sorted(citas_de(obj), key=clave)]
 
-    # HOJAS CITADAS SIN NUMERO DE DETALLE (agregado 5-oct-2026, verificando el muro A1 #8).
+    # HOJAS CITADAS SIN NUMERO DE DETALLE (agregado 5-oct-2026, verificando un muro).
     # Una fuente puede ser la HOJA ENTERA y no un detalle: la altura de stud sale del B.O.D.
     # de S2.20, que es un marcador de elevacion sin vineta, y la altura de board sale del tag
     # de cielo de A04.01, que tampoco es un detalle. La secuencia las omitia y el renglon del

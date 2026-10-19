@@ -2,12 +2,12 @@
 """verif_blocking_schedule.py -- COMPUERTA: cada tag de un schedule que se monta en wall
 tiene que aparecer en el take-off, con cantidad de BLOCKING o con exclusion que lo NOMBRE.
 
-ORIGEN (10-oct-2026, barrido de los 95 detalles sin abrir). El take-off tenia blocking en
-11 renglones y ninguno era de millwork, salvo MW18 (<n> LF) dentro del cierre del wall
-F #40. Faltaban 72.19 LF: diez unidades de millwork apoyadas contra partition, cada una con
-su length impreso en su propio plan de A12.03 / A12.04 / A12.05 / A12.06.
+ORIGEN (10-oct-2026, barrido de los detalles sin abrir). El take-off tenia blocking en
+<n> renglones y ninguno era de millwork, salvo una unidad (<n> LF) dentro del cierre de un
+wall. Faltaban <n> LF: <n> unidades de millwork apoyadas contra partition, cada una con
+su length impreso en su propio plan de millwork.
 
-NO FALTO LA FUENTE. La fuente estaba citada TEXTUAL dentro del cierre del wall F #40 desde
+NO FALTO LA FUENTE. La fuente estaba citada TEXTUAL dentro del cierre de un wall desde
 hacia semanas -- general note C de A02.01, "CONTRACTOR SHALL PROVIDE BLOCKING FOR ALL
 EQUIPMENT AND ACCESSORIES MOUNTED ON WALLS" -- y ademas repetida en la SHEET NOTE D de tres
 hojas de millwork: "PROVIDE FRTW BLOCKING AT ALL MILLWORK VERTICAL SURFACE CLEATS AND
@@ -21,8 +21,8 @@ LO QUE FALLO FUE LA DIRECCION DEL BARRIDO:
 Un barrido por wall solo puede encontrar lo que cae cerca del wall que uno esta cerrando,
 y hereda todos los errores de la geometria con la que mide esa cercania. Un barrido por tag
 no puede saltarse nada, porque la lista de tags es FINITA y esta IMPRESA en un schedule.
-Ademas el barrido por tag encuentra las repeticiones: MW06A esta listado UNA vez en el
-MILLWORK SCHEDULE de A00.30 y dibujado DOS veces en JANITOR CLOSET 112 (8/A08.01).
+Ademas el barrido por tag encuentra las repeticiones: un tag listado UNA vez en el
+MILLWORK SCHEDULE y dibujado DOS veces en el mismo room.
 
     Un schedule es una lista cerrada. Si el take-off no tiene un renglon por cada
     linea de esa lista, el que falta no se ve -- no hay nada que lo delate.
@@ -32,8 +32,8 @@ BLOCKING que lo nombra, o hay una exclusion que lo nombra. Callarse no es una op
 
 TOPE = 0 desde el primer dia. Un schedule nuevo se declara aqui, no se olvida.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import glob
 import json
@@ -43,18 +43,25 @@ import re
 RAIZ = f'{_TW}'
 SALIDAS = f'{_TO}'
 
-# Schedules de elementos que se montan en wall. Cada uno con la hoja donde esta impreso y
-# la lista EXACTA de tags que publica. Se leen de la hoja, no de memoria.
-SCHEDULES = {
-    'MILLWORK SCHEDULE (A00.30)': [
-        'MW01', 'MW05', 'MW06A', 'MW07', 'MW08', 'MW11', 'MW12', 'MW13', 'MW18', 'MW21'],
-}
+# LOS DATOS SON DEL PROYECTO y se leen de $TAKEOFF_WORK/blocking_schedules.json (E24):
+#   {"schedules": {"<SCHEDULE (hoja)>": ["<tag>", ...]},     lista EXACTA que publica la hoja
+#    "instancias": {"<tag>": n},                              tags dibujados mas de una vez
+#    "excluidos": {"<tag>": "<motivo>"}}                      sin blocking en ningun wall
+# Se leen de la hoja, no de memoria. Sin el archivo no hay schedule declarado y la compuerta
+# lo dice (0 schedules) en vez de pasar en silencio con una lista de otro proyecto.
+def _datos():
+    try:
+        return json.load(open(os.path.join(_TW, 'blocking_schedules.json'), encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+
+_D = _datos()
+SCHEDULES = dict(_D.get('schedules') or {})
 
 # Tags con mas de una instancia dibujada en planta. El schedule los lista una sola vez.
-# Se declara aqui para que la compuerta exija una partida POR INSTANCIA.
-INSTANCIAS = {
-    'MW06A': 2,   # 8/A08.01: uno en el wall oeste y otro contra el wall exterior este
-}
+# Se declara para que la compuerta exija una partida POR INSTANCIA.
+INSTANCIAS = dict(_D.get('instancias') or {})
 
 TOPE_TAGS_SIN_RENGLON = 0
 
@@ -62,9 +69,9 @@ TOPE_TAGS_SIN_RENGLON = 0
 # --------------------------------------------------------------------------------------
 # PRIMERA VERSION DE ESTA COMPUERTA: DECORATIVA. Hay que dejarlo escrito.
 # Contaba una mencion del tag dentro de una ventana de 2500 caracteres que tuviera la
-# palabra BLOCK. Con esa regla, la compuerta PASABA con los 72.19 LF todavia faltando: los
-# cierres de los walls G, A1K y C1 ya traian exclusiones de BLOCKING que NOMBRAN "MW11" y
-# "MW18" para decir que estan lejos de ESE wall, y esas mismas frases la satisfacian. Se
+# palabra BLOCK. Con esa regla, la compuerta PASABA con los <n> LF todavia faltando: los
+# cierres de otros walls ya traian exclusiones de BLOCKING que NOMBRAN tags de millwork
+# para decir que estan lejos de ESE wall, y esas mismas frases la satisfacian. Se
 # probo quitando MWBLOCKING_cierres.json: dio "tags sin renglon: 0" y EXIT 0.
 #
 #     Una compuerta que pasa con el defecto presente no es una compuerta.
@@ -74,12 +81,12 @@ TOPE_TAGS_SIN_RENGLON = 0
 # acepta dos cosas, las dos verificables una por una:
 #   (1) una PARTIDA cuya clave empieza con BLOCKING y cuyo texto NOMBRA el tag, o
 #   (2) el tag esta en EXCLUIDOS_PROYECTO de este archivo, con motivo escrito.
-# Una nota per-wall del estilo "MW11 esta a 196 pt de este muro" ya NO resuelve el tag:
+# Una nota per-wall del estilo "<tag> esta a <n> pt de este muro" ya NO resuelve el tag:
 # dice donde NO va, no donde SI va, y es justo la frase que hacia pasar la version mala.
 
 # Tags que de verdad no llevan blocking en ningun wall del proyecto. Lista cerrada, con
-# motivo escrito. Vacia hoy: las diez unidades del schedule llevan blocking.
-EXCLUIDOS_PROYECTO = {}
+# motivo escrito (blocking_schedules.json, "excluidos").
+EXCLUIDOS_PROYECTO = dict(_D.get('excluidos') or {})
 
 
 def _cierres():

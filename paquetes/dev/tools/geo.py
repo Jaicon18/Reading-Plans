@@ -4,12 +4,13 @@
 REGLA 41: siempre la copia SIN /Annots.
 Escala floor plan A02.01: 1/4"=1'-0" -> 18.0 pt/ft, 1.5 pt por pulgada real.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, pickle, math
 
-PDF = f'{_TW}/BOA_SIN_MARKUPS.pdf'
+PDF = f'{_TW}/{_PRE}_SIN_MARKUPS.pdf'
 PT_FT = 18.0
 PT_IN = 1.5
 CACHE = f'{_TW}/.geocache'

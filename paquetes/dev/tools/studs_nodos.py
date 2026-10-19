@@ -16,7 +16,7 @@ ENTRADA (JSON):
       "rows": 2,                      # 2 = doble row (G/G1/bulkhead)
       "height_ft": <n>,            # stud completo; lado alto si hay pendiente (53.2)
       "zones": [{"from_ft": 0, "to_ft": 6, "oc_in": 12}],   # opcional: S1.11 n.5, 6 ft de BUILDING CORNER
-      "openings": [{"ref": "door 112", "ro_w_ft": 3.333, "head_ft": 7.0, "sill_ft": 0.0}]
+      "openings": [{"ref": "door <ref>", "ro_w_ft": 3.333, "head_ft": 7.0, "sill_ft": 0.0}]
   }],
   "nodes": [
       {"id": "N1", "kind": "T", "branch": "W36", "through": "W57"},   # +1 al branch (x rows del branch)
@@ -43,10 +43,10 @@ FÓRMULA (53.2 + 60.1):
   LF                   = completos x height_ft + cripples x (height_ft - head) + cripples x sill
 SALIDA: por wall {pcs_full, cripples, lf, operacion} y total por stud_size.
 
-Cambio v61 (arbitraje #11, 16-oct-2026): #11B partió walls continuos (A5-1a/1b, W-W2a/2b) y declaró los dos
+Cambio v61 (arbitraje #11, 16-oct-2026): #11B partió walls continuos (ids <ref>a / <ref>b) y declaró los dos
 extremos del corte como 'free' -> el stud del corte salía dos veces. #11A/#11B declararon la punta de los G
 largos contra el stub del office front como T (+1 por row) cuando 10/A12.01 ya pone el stud de cierre en el
-stub -> +2 por G largo (+215 LF de 1-5/8"). Nuevos nodos 'split' y 'abut'.
+stub -> +2 por G largo (+<n> LF de 1-5/8"). Nuevos nodos 'split' y 'abut'.
 
 Uso:  python3 studs_nodos.py entrada.json [salida.json]
 """

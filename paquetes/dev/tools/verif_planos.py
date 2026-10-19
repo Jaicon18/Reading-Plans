@@ -9,14 +9,14 @@ dice un LF y el Excel dice otro, el plano gana en campo y pierde el presupuesto.
 
 Que exige:
  1. Suma de las bandas AZULES de un muro = 'largo' de su cierre sellado. Se SUMA porque un
-    elemento se dibuja en varias bandas cuando tiene vanos o quiebres (el bulkhead 54 son
-    4 vanos de 7.50 = 30.00 LF, no 4 muros de 7.50).
+    elemento se dibuja en varias bandas cuando tiene vanos o quiebres (un bulkhead de
+    <n> vanos iguales = <n> x vano LF, no <n> muros).
  2. El total del encabezado de cada tipo = suma de los cierres de ese tipo.
  3. COBERTURA: todo muro sellado esta marcado en EXACTAMENTE una hoja. Un muro sellado que
     no aparece en ningun plano es un muro que el de campo no va a construir.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, json, glob
 

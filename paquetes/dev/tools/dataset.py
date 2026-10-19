@@ -3,8 +3,8 @@
 
 No recalcula nada: lee el JSON sellado de cada elemento. Si un sello no cuadra, aborta.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import sys, os, re, json, glob, hashlib, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -31,23 +31,18 @@ def _cadena(obj, entrada):
 
 B = f'{_TW}'
 
-# perfil de stud por tag, con su fuente
-PERFIL = {
- 'A1':        ('3-5/8"', '362S137-33', 16, '7/S5.20 METAL STUD PROPERTIES, fila 3 5/8", APPLICATION "INTERIOR WALLS @ 16" O.C."'),
- 'A1K':       ('3-5/8"', '362S137-68', 24, '4/A12.01 fila A1K: "14 GA. METAL STUDS @ 24" O.C. MAX" (balistico; mas grueso que el 33 mil del schedule)'),
- 'A5':        ('6"', '600S137-33', 16, 'A12.01 PARTITION SCHEDULE, fila "A5 | 6\" | -- | -- | 5/8\" | 7 1/4\" | YES": stud de 6" y WALL THICKNESS 7 1/4" = 6 + 5/8 + 5/8. El thickness medido en planta (10.92 pt = 7.28") lo confirma'),
- 'B':         ('3-5/8"', '362S137-33', 16, 'A12.01 PARTITION SCHEDULE, fila "B | 3 5/8\" | -- | -- | 5/8\" | 4 7/8\" | YES" = 3 5/8 + 5/8 + 5/8'),
- 'B2':        ('6"', '600S137-33', 16, 'A12.01 PARTITION SCHEDULE, fila "B2 | 6\" | -- | -- | 5/8\" | 7 1/4\" | YES". El propio cierre nombra 600S137-33 y 600T125-33, y el thickness medido (10.80 pt = 7.20") cuadra con 7 1/4"'),
- 'B2K':       ('6"',     '600S137-68', 24, '4/A12.01: "14 GA. METAL STUDS @ 24" O.C. MAX"; alma y ala de la fila de 6" de S5.20, calibre 68 mil'),
- 'C1':        ('3-5/8"', '362S137-33', 16, '7/S5.20 METAL STUD PROPERTIES, fila 3 5/8"'),
- 'F':         ('3-5/8"', '362S137-33', 16, '12/A12.01 PARTITION TYPE F, rotulado TEXTUALMENTE 3 5/8" @ 16" O.C.'),
- 'G':         ('1-5/8"', '162S-family', 16, '5/A12.01 PARTITION G: stud 1 5/8" en DOBLE ROW; 16" O.C. de 7/S5.20'),
- 'G1':        ('1-5/8"', '162S-family', 16, '5/A12.01 fila G1: stud 1 5/8", doble row'),
- 'BULKHEAD-G':('1-5/8"', '162S-family', 16, '8 y 9/A12.01 BULKHEAD del office front: stud 1 5/8" (familia G), doble row'),
- 'EXT-PARAPET':('6" 54mil', '600S162-54', 16, '11/S5.10 PARAPET INFILL FRAMING: "PARAPET WALL INFILL FRAMING TO BE 600S162-54 @ 16\" W/ 600T125-54 TOP & BOT." -- 54 mil, NO los 33 mil del wall de abajo'),
- 'CANOPY-COL':('3-5/8"', '362S137-33', 16, '5/A09.25 DETAIL @ CANOPY COLUMN: "STUCCO SYSTEM (PT-03) ON 5/8\" EXTERIOR GRADE FRT PLYWOOD ON 3-5/8\" METAL FRAMING"'),
- 'EXT-6CFMF': ('6"',     '600S137-33', 16, '7/S5.20 fila 6", APPLICATION "EXTERIOR WALLS @ 16" O.C."; H/A09.23 rotula "6" CFMF"'),
-}
+# perfil de stud por tag, con su fuente. Es DATO DEL PROYECTO (E24): se lee de
+# $TAKEOFF_WORK/perfil_tipos.json = {"<tag>": ["<stud size>", "<designacion SSMA>", <oc_in>, "<N/HOJA + texto>"]}.
+# Un tag sin fila sale '?' / PENDIENTE (nunca un perfil de otro proyecto).
+def _perfil():
+    try:
+        return {t: tuple(v) for t, v in json.load(open(os.path.join(B, 'perfil_tipos.json'),
+                                                       encoding='utf-8')).items()}
+    except (OSError, ValueError, TypeError, AttributeError):
+        return {}
+
+
+PERFIL = _perfil()
 
 def v(p):
     return (p or {}).get('val', {}).get('v')
@@ -84,12 +79,12 @@ def sello_ok(x):
 
 def _stud_lf(p, pz, alto):
     """LF de material de stud. Un wall que cruza el eje B puede tener DOS alturas, y el
-    cierre lo escribe en su operacion ("tramo HI <n>ft: ...=12 a <n>ft; tramo LOW
-    3.93ft: ...=3 a <n>ft"). Multiplicar piezas x una sola height lo falsea."""
+    cierre lo escribe en su operacion ("tramo HI <n>ft: ...=<n> a <n>ft; tramo LOW
+    <n>ft: ...=<n> a <n>ft"). Multiplicar piezas x una sola height lo falsea."""
     op = ((p or {}).get('val') or {}).get('operacion') or ''
     tr = re.findall(r'=\s*(\d+)\s*a\s*([\d.]+)\s*ft', op)
     if not tr:
-        # otra forma del mismo dato: "campo: HI 0.94ft=1 + LOW 4.47ft=4 -> 5"
+        # otra forma del mismo dato: "campo: HI <n>ft=<n> + LOW <n>ft=<n> -> <n>"
         m = re.search(r'HI\s*[\d.]+\s*ft\s*=\s*(\d+).*?LOW\s*[\d.]+\s*ft\s*=\s*(\d+)', op)
         if m:   # v66 (E24): antes traía las alturas de un proyecto fijas en el código
             raise ValueError("operación HI/LOW sin alturas: escribir 'n a H ft' por zona (alturas del proyecto)")
@@ -254,8 +249,8 @@ def otros_bloques():
                      ('MISC SCOPE', 'PUNTOS345_cierres.json'),
                      ('WET AREAS', 'HUMEDAS_cierres.json'),
                      # 10-oct-2026: los dos huecos de blocking de millwork que el barrido
-                     # wall-por-wall no podia cerrar (MW11 huerfano entre nueve cierres que
-                     # lo nombran para decir que no es suyo, y la 2a instancia de MW06A).
+                     # wall-por-wall no podia cerrar (un tag huerfano entre varios cierres que
+                     # lo nombran para decir que no es suyo, y la 2a instancia de otro).
                      ('MILLWORK BLOCKING', 'MWBLOCKING_cierres.json')]:
         p = os.path.join(B, f)
         if not os.path.exists(p):

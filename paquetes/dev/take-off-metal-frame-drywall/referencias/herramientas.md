@@ -185,3 +185,12 @@ Flujo completo en el PROTOCOLO v69 de SKILL.md. Todas genéricas (nada de un pro
 | `comparar.py A.json B.json inventario.json out_dir --pdf plano.pdf` | 3 | empareja las dos lecturas, cruza contra el inventario y escribe `revision.md` / `revision.json` / `img/` con alertas | `test_comparar.py` |
 | `etapas.py estado\|compuerta <dir>` · `etapas.py unir <carpeta> <canon.json>` | 1–5 | dónde quedó la corrida (reanudar), compuerta de etapas, unión de fragmentos de una lectura | `test_etapas.py` |
 | `test_ciego_v69.py <SKILL.md\|carpeta>` | 5 | E24 genérico: sin nombres de proyecto, cantidades, miles, resultados ni coordenadas | autoprueba incluida |
+
+## reglas.py — compuerta de reglas inviolables (v72b)
+
+`python3 reglas.py compuerta <work_dir> [--excel <final.xlsx>]` revisa TODAS las reglas del catálogo (a: datos del
+canon, de las salidas recalculadas con canon.py, de la bitácora y del Excel; b: evidencia por caso con cita, imagen
+que existe y valor; c: fusionadas). Escribe `reglas_out.json` y `REGLAS_FALLAS.md`; rc 1 con una sola falla.
+`plantilla_excel.py armar` la llama en proceso y no escribe el Excel sin OK; `etapas.py compuerta` y
+`bitacora.py compuerta` también. `reglas.py faltantes <dir>` = plantilla de la evidencia que falta;
+`reglas.py tabla` = tabla regla → tipo → chequeo → test.

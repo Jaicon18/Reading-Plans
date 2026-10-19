@@ -2,8 +2,8 @@
 """resumen_global.py -- consolida TODOS los cierres sellados del proyecto y saca
 NETO / WASTE / COMPRA por line item, mas la verificacion de sellos.
 Un numero que no salga de aqui no esta entregado."""
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import json, glob, collections, hashlib, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -11,22 +11,20 @@ from closer import waste
 
 O = f'{_TO}'
 B = f'{_TW}'
-SRC = collections.OrderedDict([
-    ('A1  (1-10)',      [O + '/A1/A1_v2_muro_*.json']),
-    ('A1K (11-13)',     [B + '/A1K_cierres.json']),
-    ('A5  (14-17)',     [O + '/A5_muro_*.json']),
-    ('B   (18-24)',     [O + '/B_muro_*.json', O + '/B/B_muro_*.json']),
-    ('B2  (25-30)',     [O + '/B2/B2_v2_muro_*.json']),
-    ('B2K (31)',        [O + '/B2K/B2K_muro_*.json']),
-    ('C1  (32-39)',     [O + '/C1/C1_env_*.json', O + '/C1/C1_muro_*.json']),
-    ('F   (40)',        [B + '/F_cierre.json']),
-    ('G   (41-49)',     [B + '/G_cierres_v2.json']),
-    ('G   (52)',        [B + '/G52_cierre_v2.json']),
-    ('G1  (50,51,53)',  [B + '/G1_cierres.json']),
-    ('BULKHEAD (54,55)',[B + '/BULKHEAD_cierres.json']),
-    ('EXTERIORES (60-65)',[B + '/EXT_cierres.json']),
-    ('CANOPY COLUMNS (66-69)',[B + '/COLCANOPY_cierres.json']),
-])
+# BLOQUES DE CIERRES DE WALL, por type. La agrupacion y la numeracion de walls son DEL
+# PROYECTO (E24): se leen de $TAKEOFF_WORK/bloques_walls.json, en orden:
+#   [["<type> (<rango de walls>)", ["{OUT}/<glob>", "{WORK}/<archivo>.json", ...]], ...]
+# {OUT} = TAKEOFF_OUT, {WORK} = TAKEOFF_WORK. Sin el archivo: [] (no se inventa un proyecto).
+def _src():
+    try:
+        filas = json.load(open(os.path.join(B, 'bloques_walls.json'), encoding='utf-8'))
+    except (OSError, ValueError):
+        filas = []
+    return collections.OrderedDict(
+        (t, [p.replace('{OUT}', O).replace('{WORK}', B) for p in pats]) for t, pats in filas)
+
+
+SRC = _src()
 UN = {'STUD': 'pz', 'FASTENER_PWR_DRIVEN': 'pz', 'OPENING_DUCT': 'ea'}
 SF = {'BOARD', 'NIVEL5', 'FRP', 'FRP WC-3', 'CEMENT_BOARD', 'CEMENT BOARD', 'PLYWOOD_3-4_FRT',
       'SUSTRATO_PLYWOOD', 'PANEL_BALISTICO_3-8_UL752', 'BOARD_3-8',

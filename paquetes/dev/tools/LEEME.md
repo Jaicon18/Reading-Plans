@@ -193,3 +193,10 @@ Se usan igual que `studs_nodos.py` y `board_caras.py`. **El agente solo declara 
 3. **Ceiling/soffit track de framing horizontal.** El ARBITRAJE no da fórmula. La tool exige `track_lines`, declarado por el agente con su fuente.
 4. **53.4 bracing.** Se usó la fórmula de la tabla del ARBITRAJE: ROUNDUP(H/4) − 1. El espaciado (48") no se fija en la tool: viene de `bracing.spacing_in` con su fuente, porque cambia según el proyecto. La adenda no trae un umbral aparte para el "parapet ≥ 4 ft": con H = 4 ft la fórmula ya da 0 rows.
 5. **60.10 en ceiling.** "Cabe en el módulo" se tomó como max(largo, ancho) ≤ espaciado del furring. Por eso un slot largo y angosto sí lleva framed opening. Esto coincide con el veredicto del arbitraje: slots contados, downlights de 3.5" no.
+
+## v72b — compuerta de reglas inviolables
+
+`reglas.py compuerta <work_dir> [--excel <final.xlsx>]` revisa TODAS las reglas del skill (catálogo de
+`reglas_catalogo.py`, tipo en `reglas_clasificacion.py`). `plantilla_excel.py armar` la corre y no escribe el Excel
+sin OK; `etapas.py compuerta` y `bitacora.py compuerta` también. Tests: `test_reglas.py` (un test por regla),
+`test_ciego_tools.py` (E24 en las tools). `fixture_reglas.py` = proyecto sintético mínimo que pasa la compuerta.

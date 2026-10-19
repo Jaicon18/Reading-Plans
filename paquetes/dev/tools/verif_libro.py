@@ -18,8 +18,9 @@ Hallazgos que originaron cada comprobacion (28-sep-2026):
   - el trim se dividia entre el largo de STUD (20 ft), cuando viene en 8 y 10
   - un PENDIENTE (RETORNO_BOARD_RANURA) salia como 0.00 y en el Excel ni aparecia
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import re, sys, os
 from openpyxl import load_workbook
@@ -260,7 +261,7 @@ def verificar(path):
     # Los numeros pueden estar perfectos y el entregable seguir incompleto: quien revisa el
     # bid no puede ver, leyendo Clarifications, si el board va bruto o neto. Dos licitantes
     # con el mismo plano y distinta politica de deduccion no son comparables, y el que
-    # deduce parece mas barato sin serlo. Origen: 29-sep-2026, 626.88 SF deducidos en 21
+    # deduce parece mas barato sin serlo. Origen: 29-sep-2026, <n> SF deducidos en <n>
     # aberturas y ni un renglon que lo declarara.
     ded_col = None
     for c in range(1, P.max_column + 1):
@@ -316,7 +317,7 @@ def exigir(path):
 
 
 if __name__ == '__main__':
-    p = sys.argv[1] if len(sys.argv) > 1 else f'{_TW}/out/BOA_Broomfield_Takeoff.xlsx'
+    p = sys.argv[1] if len(sys.argv) > 1 else f'{_TW}/out/{_PRE}_Takeoff.xlsx'
     try:
         F = verificar(p)
     except LibroRechazado as e:

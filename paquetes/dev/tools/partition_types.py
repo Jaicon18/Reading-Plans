@@ -25,7 +25,7 @@ REGLA
  2. Un wall = el tramo RECTO de un mismo type entre esquinas o extremos. Dos segmentos del canon del mismo type,
     colineales (centro de banda a <= 3") y contiguos (hueco <= 6") son UN wall: no se parte por zona de
     altura, por room del otro lado, por T que llega, ni por abertura. LF del wall = suma de sus largos.
- 3. Jog / stub: segmento de largo <= jog_max_ft (default 1.0 ft, del orden del espesor de la partición) que no
+ 3. Jog / stub: segmento de largo <= jog_max_ft (default JOG_MAX_FT, del orden del espesor de la partición) que no
     es el único de su type: NO es wall ni entra en el LF del type; se lista aparte (su metal y board siguen en el
     canon). Office bulkheads: todos los door_bulkhead colineales de un frente = UN wall (run continuo del box
     beam, decisión #22), LF = suma de los bulkheads.

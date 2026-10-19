@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """cache_detalles.py -- barre el PDF UNA vez y guarda que detalle vive en que hoja.
 
-Extraer palabras de 95 hojas tarda minutos; la compuerta tiene que correr en segundos o
+Extraer palabras de un set completo tarda minutos; la compuerta tiene que correr en segundos o
 nadie la corre. Se cachea por paginas, en tandas, y el cache se invalida solo si cambia el
 PDF (se guarda su tamano y su mtime).
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, json, subprocess, collections
 
@@ -58,8 +58,8 @@ def _titulos(ws, tol=9.0):
     """Detalles por su RENGLON DE TITULO: `11 PARAPET INFILL FRAMING  3/4" = 1'-0"`.
 
     La deteccion por BURBUJA (un numero encima de un numero de hoja) solo ve una de las dos
-    formas en que un set rotula sus detalles. En BofA Broomfield las hojas estructurales
-    (S5.10, S5.20) y las secciones (A09.21/22/23) no llevan burbuja dentro del dibujo: su
+    formas en que un set rotula sus detalles. En la prueba <proyecto> las hojas estructurales
+    (serie S5) y las secciones de muro (serie A09) no llevan burbuja dentro del dibujo: su
     inventario real es el renglon de titulo al pie de cada detalle. Con solo la burbuja, la
     compuerta daba 0 detalles en TODA la serie S -- justo donde esta el PARAPET INFILL
     FRAMING que se me escapo.
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
 
 def paginas(idxs):
-    """Cachea SOLO las paginas que se le piden. El barrido completo de 94 hojas tarda
+    """Cachea SOLO las paginas que se le piden. El barrido completo del set tarda
     minutos; las hojas que el take-off usa de verdad son ~17."""
     import pdfplumber, warnings
     warnings.filterwarnings('ignore')

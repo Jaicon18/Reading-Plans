@@ -8,14 +8,14 @@ las corre y suma las familias con los NOMBRES del calificador.
 
 v62 (arbitraje #12, 16-oct-2026) — lo que #12A y #12B tuvieron que dejar PENDING o agregar por fuera:
   - 6" parapet stud POR BAY entre HSS posts (59.4, 11/S5.10 "ONE STUD EA. SIDE OF EA. POST", posts @5'-0" max
-    6/S5.10): walls element parapet NO pasan por studs_nodos (#12A 751 / #12B 788 contaban @16" continuo).
+    6/S5.10): walls element parapet NO pasan por studs_nodos (#12A <n> / #12B <n> contaban @16" continuo).
   - hanger wire en LF (= hangers x drop deck -> ceiling; convención ref v4). Sin drop -> ValueError.
   - metal trim (corner bead, casing bead, shadow molding) con número: trim_items + jamb returns + transiciones.
   - ceilings: canopy_joist (#12A) y framed_soffit (CSR 10/A09.33) = joists sin carrying ni hangers; un soffit
-    no puede ser furring ni stud_joist (#12A CSR como furring +<n>; #12B CSR con carrying +24.02).
+    no puede ser furring ni stud_joist (#12A CSR como furring +<n>; #12B CSR con carrying +<n>).
   - ceilings: orientación fija del proyecto (constants.carrying_direction + ns_ft/ew_ft) y polígono por cuerda
-    media (área / ancho) (#12B 101 como rectángulo +22.2 carrying).
-  - ceiling_perimeter track generado desde ceilings[].perimeter_ft (#12B no lo declaró: -194.3).
+    media (área / ancho) (#12B room <ref> como rectángulo +<n> carrying).
+  - ceiling_perimeter track generado desde ceilings[].perimeter_ft (#12B no lo declaró: -<n>).
   - track_lines por wall con su source (#12B), kickers 7/A09.33 en ceiling_transition, purlin una pieza en
     doble row (59.1, corridas v62), bottom track con descuento de doors solo con fuente (corridas v62).
   - storefront dentro de un wall G/G1 -> ValueError (office fronts = stubs vendor_end + door_bulkhead, 59.7).
@@ -23,8 +23,8 @@ v62 (arbitraje #12, 16-oct-2026) — lo que #12A y #12B tuvieron que dejar PENDI
     vestibule box headers, ductos de M-plan) — cada una debe quedar declarada UNA vez (metal, steel_by_others
     con fuente o fits_module). Header salió MAL 5 veces por omisiones silenciosas.
 
-v63 (arbitraje #13, 16-oct-2026) — la VARIANZA entre dos agentes con el mismo skill (#13A 1,350 / #13B 1,507 LF
-de track; MR 259 / 361; 1-5/8" 4,183 / 4,398) salió del inventario de walls, no de las fórmulas:
+v63 (arbitraje #13, 16-oct-2026) — la VARIANZA entre dos agentes con el mismo skill (#13A <n> / #13B <n> LF
+de track; MR <n> / <n>; 1-5/8" <n> / <n>) salió del inventario de walls, no de las fórmulas:
   - inventario.verificar() corre aquí si hay constants.plan_scale_pt_per_ft (y bitacora.py exige inventario.py):
     bandas en planta, solapes, walls apilados, MR por fixture, purlin por flute, altura por zona.
   - glass mat: todo canopy_soffit / fascia_box declara su `facade`, y esa facade DEBE llevar has_canopy y banda
@@ -33,7 +33,7 @@ de track; MR 259 / 361; 1-5/8" 4,183 / 4,398) salió del inventario de walls, no
     plywood_strip de fascia a mano = error (#13A <n> de banda / #13B <n>, los dos a mano).
   - canopy_soffit: track_lines = constants.canopy_soffit_track_lines (una sola vez para el proyecto; #13A 1 / #13B 2).
   - cement board (tile cove base CT, 58.7) con tool: bloque tile_base o tile_base_none_reason (#13A FALTA).
-  - jamb_wall (#13A door 111) y joist_dir de canopy_joist (#13B) integrados.
+  - jamb_wall (#13A door <ref>) y joist_dir de canopy_joist (#13B) integrados.
 
 v64 (decisiones del usuario/estimador, 2026-10-16 — mandan sobre ref v4, rangos y arbitrajes):
   - header por PIEZAS (#1, #2): header_schedule (con pieces por fila) y sill_rule pasan a headers.py; las
@@ -44,29 +44,29 @@ v64 (decisiones del usuario/estimador, 2026-10-16 — mandan sobre ref v4, rango
     "hanger wire" es renglón DERIVADO = suma PCS x altura.
   - kickers 7/A09.33 (#7): exigen vertical_studs {oc_in, height_ft, bod_ft, ceiling_ft, source} (los studs dashed
     a estructura; v68: height_ft = bod_ft - ceiling_ft, nunca el escalón entre ceilings).
-  - Waiting 104 (#14): system stud_joist exige joist_source (detalle que dibuje joists); un ceiling suspended
+  - room <ref> (#14): system stud_joist exige joist_source (detalle que dibuje joists); un ceiling suspended
     del RCP sin ese detalle es furring.
   - canopy soffit (#13): constants.canopy_soffit_track_lines = 2 (track en los dos extremos de los joists).
   - bottom track en doors (#10): sin descuento (corridas.py rechaza bottom_track_deduct_doors true).
 
 v65 (arbitraje #14A/#14B, 17-oct-2026) — lo que todavía variaba o faltaba entre dos agentes con v64:
   - ceiling_transition NO pasa por studs_nodos (sus studs son kickers + vertical_studs): #14A <n> ft de alto
-    contaba los verticales DOS veces (+258.12); #14B height_ft 1.0 inventado (+59.0). height_ft del elemento =
+    contaba los verticales DOS veces (+<n>); #14B height_ft <n> inventado (+<n>). height_ft del elemento =
     vertical_studs.height_ft (bracing, track). Kicker sin largo impreso = vertical_studs.height_ft / sin(angle)
     (45 deg dibujado, 53.3): #14A <n> / #14B <n> a mano.
   - column_wrap NO pasa por studs_nodos: studs = Σ (ROUNDUP(face / oc) + 1) por face (faces_ft) o studs_drawn
-    {value, source}; 5/A09.25 4 faces x <n> = 8 studs (A y B 5 = −126 LF).
-  - roof_step: constants.roof_step_rows_drawn {value, source} = cantidad de walls roof_step (4/A02.02 dibuja 3
-    filas; #14A 2 = −122.3 LF).
-  - canopy_joist exige fascia_box en cada facade de canopy (o fascia_none_reason): #14A sin fascia (−348.8 LF).
+    {value, source}; 5/A09.25 4 faces x <n> = <n> studs (A y B <n> = −<n> LF).
+  - roof_step: constants.roof_step_rows_drawn {value, source} = cantidad de walls roof_step (4/A02.02 dibuja <n>
+    filas; #14A <n> = −<n> LF).
+  - canopy_joist exige fascia_box en cada facade de canopy (o fascia_none_reason): #14A sin fascia (−<n> LF).
   - "BOX HEADER AS NEEDED" (openings_extra) exige framing_wall = vestibule_head existente (#14B sin vestibule
-    heads: −102.1 LF 3-5/8", −22.1 bracing).
+    heads: −<n> LF 3-5/8", −<n> bracing).
   - framed_soffit exige drop_lines {value, source} = walls soffit_side / ceiling_bulkhead con soffit_of = room
-    (10/A09.33: 1 drop line, el otro borde es la partición; #14B 2 lados +69).
+    (10/A09.33: 1 drop line, el otro borde es la partición; #14B 2 lados +<n>).
   - nodo T entre dos walls G/G1 (10/A12.01) = error -> abut (arb11; #14A +<n> LF 1-5/8").
   - ballistic: constants.ballistic_contour_ft {value, source} = Σ largo de faces con k_panel (E5).
   - glass mat: band.t_stud_ft y band.b_stud_ft {value, source}; altura = T/STUD − B/STUD (7/A09.26 <n>;
-    #14A 2.167 de la elevación T/CANOPY − B/CANOPY = +34 SF).
+    #14A <n> de la elevación T/CANOPY − B/CANOPY = +<n> SF).
   - FRP (familia obligatoria): bloque frp {top_ft, rooms (tile_base), mop_sink} o frp_none_reason (#14B FALTA).
   - acoustical sealant (familia obligatoria): details[*].sealant {bottom_faces, top_faces, source} por cada
     detail con faces, menos R.O. de doors en las corridas de abajo (55.5) + sealant_items + sealant_base_exterior.
@@ -77,7 +77,7 @@ v65 (arbitraje #14A/#14B, 17-oct-2026) — lo que todavía variaba o faltaba ent
 v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — header / sill son REGLAS, no parámetros:
   - header_params se rechaza (v65 lo pasaba a headers.py con default = v64).
   - #19 abertura con "OR STEEL" (or_steel: true u "OR STEEL" en header_type) y header steel_by_others = error.
-  - #20 box = 4 piezas, #21 door 102 double, #18 sill double > 4'-0", #22 office front CONT. BOX BEAM un run por
+  - #20 box = 4 piezas, #21 door <ref> double, #18 sill double > 4'-0", #22 office front CONT. BOX BEAM un run por
     frente (continuous_run + wall): los valida headers.py; canon pasa continuous_run / or_steel.
 
 v66 (arbitraje #15A/#15B, 17-oct-2026) — reglas deterministas nuevas (cada una con test en test_canon_v66.py):
@@ -101,7 +101,7 @@ v67 (accesorios y partition types, 17-oct-2026):
   - partition_types.py corre dentro de calcular(): out["partition_types"] = types de la hoja Partition Takeoff.
   - grille_head NO pasa por studs_nodos (NO_NODOS): su 2-1/2" sale de accesorios.grille_head() desde head_build.
   - Level 5: constants.level5_tags {value, source} obligatorio con level5_items; base descontada en accesorios.
-  - E3 (decisión usuario #3): 5 studs por bay como mínimo en TODO bay (2 en posts + 3 intermedios), aunque el
+  - E3 (decisión usuario #3): cinco studs por bay como mínimo en TODO bay (dos en posts + tres intermedios), aunque el
     bay mida menos que el spacing de posts; bays más largos suman intermedios @ O.C.
   - column_wrap con fos_chain {value: [eslabones ft], source}: cada face = Σ de la cadena FOS impresa completa.
   - filas de studs con "pcs" explícito (framing screws = 4 x piezas del conteo actual).
@@ -110,7 +110,7 @@ v67 (accesorios y partition types, 17-oct-2026):
 v70 (paquete v70, pruebas #18A / #18B):
   - canopy_soffit en `walls` -> ValueError: doble cuenta de los canopy joists (van en `runs` / ceilings canopy_joist).
   - roof_step, ceiling_transition, soffit_side, ceiling_bulkhead, vestibule_head, grille_head: su detalle dibuja
-    board -> `faces` (no vacío) o `faces_none_reason` obligatorio (antes faces [] contaba 0 SF en silencio).
+    board -> `faces` (no vacío) o `faces_none_reason` obligatorio (antes faces [] contaba cero SF en silencio).
   - claves de un wall fuera del esquema (WALL_KEYS): con números (número, o dict / lista con números) ->
     ValueError que nombra la clave y el campo del esquema (plywood -> plywood_strips, blocking -> blocking_items…);
     sin números -> aviso. Sufijos de traza aceptados: _info, _note(s), _check, _source, _status, _img, _reason,
@@ -262,7 +262,7 @@ def _ceil_dims(data, c):
             raise ValueError("constants.carrying_direction debe ser N-S | E-W")
         if "ns_ft" not in c or "ew_ft" not in c:
             raise ValueError(f"{c.get('room')}: con carrying_direction declarar ns_ft y ew_ft (no span/run: "
-                             f"la orientación es del proyecto, no de cada room — #12A 104 cruzado)")
+                             f"la orientación es del proyecto, no de cada room — #12A room <ref> cruzado)")
         ns, ew = float(c["ns_ft"]), float(c["ew_ft"])
         return (ns, ew) if d == "N-S" else (ew, ns)
     return float(c["span_ft"]), float(c["run_ft"])
@@ -343,7 +343,7 @@ def generar(data):
         if c.get("system") in SUSP:
             if c.get("perimeter_ft") is None:
                 raise ValueError(f"{c['room']}: ceiling {c['system']} sin perimeter_ft (ceiling_perimeter track, "
-                                 f"#12B -194.3)")
+                                 f"#12B -<n>)")
             runs.append({"id": "CP:" + str(c["room"]), "element": "ceiling_perimeter", "orientation": "horizontal",
                          "length_ft": float(c["perimeter_ft"]), "source": _src(c, c["room"])})
     for r in runs_extra:
@@ -392,7 +392,7 @@ def _v65_checks(data):
     """Reglas deterministas del arbitraje #14 (17-oct-2026) que no necesitan totales."""
     if data.get("header_params") is not None:
         raise ValueError("header_params ya no existe (v65b): sill double > 4'-0\", GL-2 metal box, box = 4 piezas, "
-                         "door 102 double y office front continuo son reglas (decisiones usuario #18-#22)")
+                         "door double y office front continuo son reglas (decisiones usuario #18-#22)")
     walls = data.get("walls") or []
     por_id = {w["id"]: w for w in walls}
     tags = {w["id"]: str(w.get("tag") or "").upper() for w in walls}
@@ -410,12 +410,12 @@ def _v65_checks(data):
     for r in data.get("runs") or []:
         if r.get("element") == "fascia_box":
             raise ValueError(f"{r['id']}: fascia_box en runs no cuenta studs — va en walls (3-5/8\" studs @16\" "
-                             f"T/STUD - B/STUD, 7/A09.26; v65, #14A −348.8 LF)")
+                             f"T/STUD - B/STUD, 7/A09.26; v65, #14A −<n> LF)")
     cj = [c for c in data.get("ceilings") or [] if c.get("system") == "canopy_joist"]
     if cj and not str(data.get("fascia_none_reason") or "").strip():
         if not any(w.get("element") == "fascia_box" for w in walls):
             raise ValueError("canopy_joist sin fascia_box en walls — la fascia (T/STUD - B/STUD, 7/A09.26) lleva studs "
-                             "3-5/8\" y track; o fascia_none_reason (v65, #14A −348.8 LF)")
+                             "3-5/8\" y track; o fascia_none_reason (v65, #14A −<n> LF)")
     # BOX HEADER AS NEEDED -> framing_wall (vestibule_head)
     for o in data.get("openings_extra") or []:
         if "AS NEEDED" in str(o.get("header_type") or "").upper():
@@ -423,7 +423,7 @@ def _v65_checks(data):
             if fw not in por_id or por_id[fw].get("element") != "vestibule_head":
                 raise ValueError(f"{o['ref']}: 'BOX HEADER AS NEEDED' sin framing_wall (vestibule_head) — 4-7/A12.10 "
                                  f"'METAL STUD FRAMING & BOX HEADER AS NEEDED': los studs sobre el storefront se "
-                                 f"cuentan (v65, #14B −102.1 LF)")
+                                 f"cuentan (v65, #14B −<n> LF)")
     # framed_soffit -> drop_lines
     for c in data.get("ceilings") or []:
         if c.get("system") != "framed_soffit":
@@ -438,7 +438,7 @@ def _v65_checks(data):
         lineas = {w.get("drop_line", w["id"]) for w in ds}
         if len(lineas) != int(dl["value"]):
             raise ValueError(f"{c['room']}: {len(lineas)} drop line(s) declaradas (soffit_of) != drop_lines "
-                             f"{int(dl['value'])} (#14B 2 lados = +69 LF; tramos de una línea comparten drop_line)")
+                             f"{int(dl['value'])} (#14B 2 lados = +<n> LF; tramos de una línea comparten drop_line)")
     # T entre dos G/G1 -> abut
     for n in data.get("nodes") or []:
         if n.get("kind") == "T" and tags.get(n.get("branch")) in GG and tags.get(n.get("through")) in GG:
@@ -464,7 +464,7 @@ def _v65_checks(data):
                              "completo con jogs, medido una vez: Σ faces customer + ballistic_jogs)")
         if abs(kl - float(bc)) > 0.05:
             raise ValueError(f"ballistic: Σ largo de faces k_customer {round(kl, 3)} != ballistic_contour_ft {bc} "
-                             f"(#14A 9.837 con el A1K SW 1.16; #14B 9.98 con 2.98 en vez de 3'-5\")")
+                             f"(#14A <n> con el A1K SW <n>; #14B <n> con <n> en vez de la cota impresa)")
     del det
     if data.get("level5_items") and "level5_tags" not in (data.get("constants") or {}):
         raise ValueError("constants.level5_tags {value, source} obligatorio con level5_items (v67): tags del "
@@ -559,7 +559,7 @@ def _v68_checks(data):
     cb = (data.get("constants") or {}).get("deck_breaks")
     if cb is None and not str(data.get("deck_breaks_none_reason") or "").strip():
         raise ValueError("constants.deck_breaks {value: [{ori_walls: H|V, coord_pt, sheet}], source} o deck_breaks_none_reason "
-                         "obligatorio (v68: #16A B2-CA, #16B A5-01 cruzan grid B con una sola altura)")
+                         "obligatorio (v68: #16A y #16B, un wall cada uno, cruzan un grid con una sola altura)")
     for br in (cb or {}).get("value") or []:
         _src(cb, "constants.deck_breaks")
         for w in walls:
@@ -762,7 +762,7 @@ def _frp(data, fam, filas):
         t = tb[str(r)]
         if "doors" not in t:
             raise ValueError(f"tile_base {r}: con FRP declarar doors [{{ref, ro_w_ft}}] (59.10: todas, incl. las de "
-                             f"cuartos vecinos que abren hacia él; #14A sin door 112)")
+                             f"cuartos vecinos que abren hacia él; #14A sin door <ref>)")
         net, op_n = _perim_neto(t)
         sf = net * float(top["value"])
         fam[F_FRP] += sf
@@ -953,7 +953,7 @@ def _kickers(data, fam, filas):
             raise ValueError(f"{w['id']}: ceiling_transition con kickers sin vertical_studs {{oc_in, height_ft, "
                              f"source}} — los studs verticales a estructura se cuentan además del kicker "
                              f"(decisión usuario #7, 7/A09.33)")
-        # v68 (#16A <n> = 3 bordes contra ACT; #16B <n> sumó el borde contra wall): edges [{edge, against,
+        # v68 (#16A <n> = <n> bordes contra ACT; #16B <n> sumó el borde contra wall): edges [{edge, against,
         # length_ft, source}] obligatorio; solo cuentan los bordes contra otro ceiling; length_ft = su suma.
         eds = w.get("edges")
         if not isinstance(eds, list) or not eds:
@@ -986,9 +986,9 @@ def _kickers(data, fam, filas):
         if abs(float(bd["value"]) - float(cl["value"]) - vh) > 0.02:
             raise ValueError(f"{w['id']}: vertical_studs.height_ft {vh} != B.O.D. {bd['value']} - ceiling "
                              f"{cl['value']} (a estructura, no el escalón entre ceilings; v68)")
-        if abs(float(w["height_ft"]) - vh) > 0.01:     # v65: #14B height_ft 1.0 inventado
+        if abs(float(w["height_ft"]) - vh) > 0.01:     # v65: #14B height_ft <n> inventado
             raise ValueError(f"{w['id']}: height_ft {w['height_ft']} != vertical_studs.height_ft {vh} — el elemento "
-                             f"mide B.O.D. - ceiling (bracing y track salen de aquí; v65, #14B 1.0)")
+                             f"mide B.O.D. - ceiling (bracing y track salen de aquí; v65, #14B <n>)")
         if k.get("length_ft") is not None and not str(k.get("length_printed_source") or "").strip():
             raise ValueError(f"{w['id']}: kickers.length_ft a mano sin length_printed_source — sin largo impreso el "
                              f"largo = vertical_studs.height_ft / sin(angle_deg) (v65, 53.3)")
@@ -1018,7 +1018,7 @@ def _kickers(data, fam, filas):
 
 def _column_wraps(data, fam, filas):
     """v65: column_wrap = studs por face (cada face lleva sus studs de esquina): Σ (ROUNDUP(face/oc) + 1), o los
-    studs_drawn {value, source} que dibuja el detalle. 5/A09.25: 4 faces x <n> -> 8 studs (A y B 5)."""
+    studs_drawn {value, source} que dibuja el detalle. 5/A09.25: 4 faces x <n> -> <n> studs (A y B <n>)."""
     for w in data.get("walls") or []:
         if w.get("element") != "column_wrap" and not (w.get("element") == "pier" and w.get("parts")):
             continue                                  # v68: pier con parts = mismo trato que column_wrap (#16A)
@@ -1081,7 +1081,7 @@ HANGERS = []
 
 def _ballistic_jogs(data, fam, filas):
     """v66 (E5, #15A): jog / retorno del contorno ballistic sin wall propio. #15A los modeló como walls A1K de
-    0.6 ft (studs y dos faces de 5/8" fantasma). Cada jog: ballistic L x min(panel_to, H), 3/8" L x (H - panel_to)
+    <n> ft (studs y dos faces de 5/8" fantasma). Cada jog: ballistic L x min(panel_to, H), 3/8" L x (H - panel_to)
     y 5/8" L x H x faces_5_8 (la face que el detalle cubre; 0 si ya está en la face del wall vecino)."""
     det = data.get("details") or {}
     for j in data.get("ballistic_jogs") or []:
@@ -1142,7 +1142,7 @@ def _ceilings(data, fam, filas):
                              f"canopy_joist, sin furring/carrying/hangers (#12A furring, #12B carrying)")
         if sysm == "stud_joist" and not str(c.get("joist_source") or "").strip():
             raise ValueError(f"{c['room']}: stud_joist sin joist_source — un ceiling suspended (hangers + carrying) "
-                             f"del RCP es furring salvo que un detalle dibuje joists (decisión usuario #14, Waiting 104)")
+                             f"del RCP es furring salvo que un detalle dibuje joists (decisión usuario #14)")
         span, run = _ceil_dims(data, c)               # span: largo del carrying; run: atravesado por el carrying
         area = float(c["area_sf"])
         poligono = area < span * run * 0.98
@@ -1260,7 +1260,7 @@ def _canopy_facades(data, fac, can):
     elems = [w for w in (data.get("walls") or []) + (data.get("runs") or []) if w.get("element") in CANOPY_ELEMS]
     con_banda = {c.get("facade") for c in can}
     cs = [e for e in elems if e["element"] == "canopy_soffit"]
-    if cs:                                         # #13A 1 línea / #13B 2 (default): +188 LF entre agentes
+    if cs:                                         # #13A 1 línea / #13B 2 (default): +<n> LF entre agentes
         n = _c(data, "canopy_soffit_track_lines", -1)
         if n == -1:
             raise ValueError("constants.canopy_soffit_track_lines {value 2, source} obligatoria si hay canopy_soffit "

@@ -168,8 +168,10 @@ def test_compuerta_candidato_sin_wall_y_sin_alerta():
         os.makedirs(os.path.join(d, "3_revision"))
         p = os.path.join(d, "3_revision", "revision.json")
         json.dump(rev, open(p, "w"))
-        f, _ = T.compuerta(d)
+        f, _ = T.estructura(d)
         assert f == [], f                                   # con su alerta: pasa (queda a la vista)
+        f, _ = T.compuerta(d)                               # v72b: sin canon conciliado reglas.py no da OK
+        assert any(x.startswith("reglas:") for x in f), f
         rev["alertas"] = [x for x in rev["alertas"] if (x.get("tag") or {}).get("id") != "PC0001"]
         json.dump(rev, open(p, "w"))
         f, _ = T.compuerta(d)
@@ -196,7 +198,7 @@ def test_compuerta_corre_esquinas_sobre_el_canon_final():
         time.sleep(0.02)
         os.makedirs(os.path.join(d, "3_revision"))
         json.dump(C.comparar(a, b, inv), open(os.path.join(d, "3_revision", "revision.json"), "w"))
-        f, _ = T.compuerta(d)
+        f, _ = T.estructura(d)
         assert f == [], f                                        # sin canon final: no se revisan esquinas
         os.makedirs(os.path.join(d, "4_canon"))
         p = os.path.join(d, "4_canon", "takeoff_canon.json")

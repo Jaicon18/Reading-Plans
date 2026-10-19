@@ -4,15 +4,26 @@ marcarlo sobre la hoja. Barre todas las bandas del espesor del tipo y le asigna 
 la banda cuyo largo coincide con su LF, usando como desempate las coordenadas que el propio
 cierre dejo escritas en su campo `operacion`.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import sys, os, json, glob, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bandas
 
-ESP = {'A1': 7.32, 'B': 7.32, 'A5': 10.92, 'B2': 10.86, 'B2K': 11.52,
-       'C1': 6.36, 'G': 9.24, 'G1': 12.72, 'A1K': 7.80}
+# DATOS DEL PROYECTO (E24), en $TAKEOFF_WORK/localizar.json:
+#   {"pagina": <page_index de la planta>, "espesor_pt": {"<tag>": <pt>},
+#    "tipos": {"<tag>": ["<glob relativo a TAKEOFF_OUT>", ...]}}
+def _cfg():
+    try:
+        return json.load(open(os.path.join(_TW, 'localizar.json'), encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+
+_C = _cfg()
+PAGINA = _C.get('pagina')
+ESP = dict(_C.get('espesor_pt') or {})
 
 
 def coords_del_texto(d):
@@ -22,7 +33,9 @@ def coords_del_texto(d):
 
 def localizar(tipo, files, tol_ft=0.60):
     esp = ESP[tipo]
-    bs = bandas.bandas(23, esp, tol=0.55, min_len=5.0)
+    if PAGINA is None:
+        sys.exit('localizar: falta "pagina" en localizar.json (TAKEOFF_WORK)')
+    bs = bandas.bandas(PAGINA, esp, tol=0.55, min_len=5.0)
     out, sobran = [], []
     for f in files:
         d = json.load(open(f, encoding='utf-8'))
@@ -45,14 +58,7 @@ def localizar(tipo, files, tol_ft=0.60):
     return out, sobran
 
 
-TIPOS = {
- 'A1':  [f'{_TO}/A1/A1_v2_muro_*.json'],
- 'A5':  [f'{_TO}/A5_muro_*.json'],
- 'B':   [f'{_TO}/B_muro_*.json', f'{_TO}/B/B_muro_*.json'],
- 'B2':  [f'{_TO}/B2/B2_v2_muro_*.json'],
- 'B2K': [f'{_TO}/B2K/B2K_muro_*.json'],
- 'C1':  [f'{_TO}/C1/C1_env_*.json', f'{_TO}/C1/C1_muro_*.json'],
-}
+TIPOS = {t: [os.path.join(_TO, p) for p in pats] for t, pats in (_C.get('tipos') or {}).items()}
 
 if __name__ == '__main__':
     todo = {}

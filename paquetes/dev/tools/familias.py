@@ -106,7 +106,7 @@ FAMILIAS = [
 
 
 # v61 (arbitraje #11): un renglón de FRT plywood que menciona "jambs/head/sill" no es sill track ni header
-# (#11B: 235.98 LF de "FRT plywood 3/4\" opening liner (jambs/head/sill)" contaron como sill track).
+# (#11B: <n> LF de "FRT plywood 3/4\" opening liner (jambs/head/sill)" contaron como sill track).
 # v62 (arbitraje #12): el calificador clasificaba "5/8\" FRT plywood ... backboards" como 5/8" gyp regular y
 # "Framed opening ... (3-5/8\" metal stud)" como 3-5/8" stud (#12A/#12B). Un renglón de plywood / nailbase
 # nunca es gyp board; un framed opening nunca es una familia de stud (va a "framed openings MEP").

@@ -2,11 +2,11 @@
 """corpus.py -- EL UNICO lugar donde se pregunta "¿cuales son los cierres?".
 
 ORIGEN (10-oct-2026). Durante el barrido de detalles hice un roll-up de las partidas de
-blocking para ver si faltaba el de millwork. Leia `/home/claude/boa/*_cierres.json` y nada
-mas. Los cierres por wall de los tipos A1, A5, B, B2, B2K y C1 NO viven ahi: viven en
-`/mnt/user-data/outputs/**`. Crei que el proyecto tenia 11 renglones de blocking y 303.98 LF
-cuando tiene 45 y 779.20 LF, declare que faltaba TODO el blocking de millwork, y cuantifique
-72.19 LF que en su mayoria ya estaban -- ocho de diez unidades ya cerradas, varias con mejor
+blocking para ver si faltaba el de millwork. Leia `$TAKEOFF_WORK/*_cierres.json` y nada
+mas. Los cierres por wall de varios tipos NO viven ahi: viven en
+`/mnt/user-data/outputs/**`. Crei que el proyecto tenia <n> renglones de blocking y <n> LF
+cuando tiene <n> y <n> LF, declare que faltaba TODO el blocking de millwork, y cuantifique
+<n> LF que en su mayoria ya estaban -- la mayoria de las unidades ya cerradas, varias con mejor
 metodo que el mio.
 
     Un inventario que no declara su alcance no es un inventario, es una muestra.
@@ -15,8 +15,8 @@ metodo que el mio.
 SEGUNDA LECCION, de la primera version de ESTE archivo. Al arreglarlo escribi aqui una lista
 de globs nueva. Mal: ya existia la lista buena, `resumen_global.SRC` mas `verif_vigencia`,
 que es la que de verdad alimenta el Excel y que ya distingue los cierres SUPERADOS (los
-G_cierres.json contra G_cierres_v2.json). Mi lista nueva leia 103 cierres incluyendo los
-superados y daba 18,706 SF de board donde el entregable tiene 11,834.
+G_cierres.json contra G_cierres_v2.json). Mi lista nueva leia <n> cierres incluyendo los
+superados y daba <n> SF de board donde el entregable tiene <n>.
 
     Crear una segunda fuente de verdad para arreglar un error de alcance
     es volver a cometerlo, con mas pasos.
@@ -27,13 +27,13 @@ distintas que nunca hay que confundir:
 
     cierres()              -> los VIGENTES. Para SUMAR. Es lo que va al Excel.
     cierres(todos=True)    -> todos, superados incluidos. Para preguntar COBERTURA
-                              ("¿algun cierre, el que sea, nombra el MW11?").
+                              ("¿algun cierre, el que sea, nombra el tag <ref>?").
 
 Sumar con el conjunto de cobertura infla el total. Preguntar cobertura con el conjunto
 vigente deja fuera cierres reales. Las dos equivocaciones se cometieron el mismo dia.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import glob
 import json

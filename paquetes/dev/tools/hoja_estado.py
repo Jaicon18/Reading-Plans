@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-"""hoja_estado.py -- genera BOA_ESTADO.md DESDE EL LIBRO, no a mano.
+"""hoja_estado.py -- genera <PREFIJO>_ESTADO.md DESDE EL LIBRO, no a mano.
 
-Por que existe: el 28-sep BOA_ESTADO.md seguia diciendo "73 elementos" y "W.R. 100.80 SF"
-un dia despues de que el libro dijera 77 y <n>. Un documento de estado escrito a mano
+Por que existe: el 28-sep el ESTADO.md seguia diciendo "<n> elementos" y "W.R. <n> SF"
+un dia despues de que el libro dijera <n> y <n>. Un documento de estado escrito a mano
 se queda viejo por la misma razon que el Excel: nadie lo vuelve a escribir cuando cambia
 un numero. La regla de vigencia vale tambien para el resumen que el usuario lee.
 
 Aqui la tabla de compra se LEE del .xlsx recien generado. Si el libro cambia, este
 documento cambia solo.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, subprocess, datetime
 import openpyxl
@@ -20,9 +21,9 @@ import verif_vigencia as VV
 import glosario as G
 
 B = f'{_TW}'
-DEST = [f'{_TO}/entrega/BOA_ESTADO.md']
+DEST = [f'{_TO}/entrega/{_PRE}_ESTADO.md']
 
-CAB = """# BOA Broomfield - ESTADO DEL TAKE-OFF - %(fecha)s
+CAB = """# %(proyecto)s - ESTADO DEL TAKE-OFF - %(fecha)s
 
 > Este documento se GENERA del Excel (`tools/hoja_estado.py`). No se escribe a mano: un
 > resumen escrito a mano se queda viejo igual que el libro.
@@ -89,6 +90,7 @@ def main(xlsx=VV.LIBRO):
     v = VV.verificar(xlsx)
     txt = CAB % {
         'fecha': datetime.date.today().strftime('%d-%b-%Y'),
+        'proyecto': _os_rutas.environ.get('TAKEOFF_PROYECTO', _PRE),
         'sellos': _titulo(sellos),
         'bloques': '```\n' + '\n'.join(bloques) + '\n```' if bloques else '',
         'compra': tabla_compra(xlsx),
@@ -103,7 +105,7 @@ def main(xlsx=VV.LIBRO):
     for d in DEST:
         os.makedirs(os.path.dirname(d), exist_ok=True)
         open(d, 'w', encoding='utf-8').write(txt)
-    print('BOA_ESTADO.md regenerado desde el libro ->', DEST[0])
+    print(f'{_PRE}_ESTADO.md regenerado desde el libro ->', DEST[0])
     return DEST[0]
 
 

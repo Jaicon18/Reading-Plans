@@ -4,7 +4,7 @@
 Orden de Rodolfo, 2-oct-2026: "siempre se tiene que usar los detalles que marcan los planos
 ya que ahi esta la informacion que se necesita, nunca saltarse esta regla."
 
-QUE LA ORIGINO. La marquesina de la fachada este (CANOPY-84) se cerro con geometria medida
+QUE LA ORIGINO. La marquesina de una fachada se cerro con geometria medida
 en planta. `D/A9.22` es la seccion que la corta y da su fondo, su framing y sus datums: nunca
 se abrio. Y el MISMO dia yo si abri D/A9.22 -- para los datums del parapeto -- sin preguntarme
 que mas gobierna. Un detalle no es de quien lo abre: es de TODO lo que corta.
@@ -20,8 +20,8 @@ QUE EXIGE. Toda burbuja `<etiqueta>/<hoja>` de una hoja de PLANTA tiene que esta
   (b) declarada en NO_APLICAN con su motivo escrito.
 Lo que no este en ninguna de las dos para la entrega.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, json, glob, collections
 
@@ -58,7 +58,10 @@ def norm(h):
     return '%s%d.%s' % (m.group(1), int(m.group(2)), m.group(3)) if m else h.strip()
 
 
-PLANTAS = ('A2.01', 'A2.02', 'A4.01', 'A8.01', 'A8.11')     # en forma canonica (sin cero)
+# Hojas de PLANTA del set (forma canonica, sin cero). Default = numeracion AIA usual (floor plan,
+# roof plan, RCP, enlarged plans); el set real se declara en $TAKEOFF_PLANTAS ("A2.01,A4.01,...").
+PLANTAS = tuple(x.strip() for x in (_os_rutas.environ.get('TAKEOFF_PLANTAS') or 'A2.01,A2.02,A4.01,A8.01').split(',')
+                if x.strip())
 # Series donde viven los detalles a los que las plantas remiten, tambien canonicas.
 DETALLES = ('A9.', 'A12.', 'A11.', 'S5.', 'S3.', 'S2.')
 
@@ -71,95 +74,18 @@ def _es_fuente(rot):
     return r in PLANTAS or any(r.startswith(p) for p in DETALLES)
 
 
-NO_APLICAN = {
-    # hoja -> {etiqueta: motivo}. Se declara MIRANDO el detalle, nunca para callar la
-    # compuerta. Cada motivo dice QUE se leyo en ese detalle y por que no deja partida.
-    'A12.10': {'1': '24 HR VESTIBULE PLAN: planta de puertas del vestibulo con lectores de '
-                    'tarjeta, hojas activas y botones accesibles. Es layout de Div 08 43 13 '
-                    '(aluminum storefront) y Div 28 (control de acceso). No rotula ningun '
-                    'material de framing ni de board, y los muros del vestibulo ya estan '
-                    'cerrados por su tag en A02.01. Contraste: 1/A09.25, que si rotula '
-                    '"3 5/8\" METAL STUD" y "5/8\" GYPSUM BOARD", SI deja partida.'},
+# hoja -> {etiqueta: motivo}. Se declara MIRANDO el detalle, nunca para callar la
+# compuerta. Cada motivo dice QUE se leyo en ese detalle y por que no deja partida.
+# Es DATO DEL PROYECTO (E24): vive en $TAKEOFF_WORK/callouts_no_aplican.json, no aqui.
+def _no_aplican():
+    try:
+        d = json.load(open(os.path.join(_TW, 'callouts_no_aplican.json'), encoding='utf-8'))
+        return {h: dict(v) for h, v in d.items()}
+    except (OSError, ValueError, TypeError, AttributeError):
+        return {}
 
-    # ---- S3.20 FOUNDATION DETAILS -------------------------------------------------
-    # Leidos uno por uno con det_region. De los 13 detalles de la hoja, solo 2 y 9
-    # rotulan "LT. GA. FRAMING & CONNX REF. LT. GA. NOTES & DETAILS" (base de muro
-    # exterior y base de columna de canopy): ESOS DOS SI se citan. Los cinco de abajo
-    # no nombran framing ligero en ninguna parte de su cuerpo.
-    'S3.20': {
-        '3': 'TYP. GRADE BEAM @ ENTRY: viga de cimentacion en la entrada. Rotula '
-             '"CL OF PIER", "EXIST. GRADE", "SIDEWALK WHERE ... NOTED ON SITE PLAN", '
-             'armado y void forms. Div 03 30 00 (concreto colado en sitio). No rotula '
-             'LT. GA. FRAMING, ni track, ni board. Contraste con 2/S3.20, la misma '
-             'familia de detalle, que SI pone "LT. GA. FRAMING & CONNX REF. LT. GA. '
-             'NOTES & DETAILS" y por eso SI se cita en el bottom track del muro exterior.',
-        '5': 'TYPICAL STRUCTURAL STOOP: losa estructural de acceso sobre void forms, '
-             '"STRUCTURED SLAB REF. DEPTH", "SIDEWALK WHERE ... NOTED ON SITE PLAN". '
-             'Div 03 30 00. Ningun material de Div 05 40 00 ni Div 09 29 00 rotulado.',
-        '6': 'TYP. PERIM. GR. BM @ COLUMN: viga perimetral donde aterriza una columna '
-             'de acero. Rotula "STEEL COLUMN TYPE & BASEPLATE & ANCHOR BOLTS REF. '
-             'SCHEDULE". Es Div 03 30 00 mas Div 05 12 00 (acero estructural y su '
-             'placa base con anclas). La columna la instala el montador de acero. '
-             'Nuestro stud de 6" corre por fuera y ya esta contado en el muro exterior '
-             'como metal corrido (no se deduce por columna).',
-        '7': 'TYP. GRADE BEAM AT INTER. COL.: igual que 6 pero en columna interior. '
-             '"STEEL COLUMN TYPE & BASEPLATE", "BASEPLATE & ANCHOR BOLTS". Div 03 + '
-             'Div 05 12 00. No rotula framing ligero ni board.',
-        '8': 'TYP. INTERIOR GRADE BEAM: viga de cimentacion interior con su armado y '
-             'la palabra "COLUMN". Div 03 30 00. Los muros interiores arrancan de losa '
-             'con bottom track pineado, condicion que ya quedo cerrada por el tipo de '
-             'particion; esta hoja no aporta material nuestro.',
-    },
 
-    # ---- S5.10 LIGHT GAUGE / STEEL DETAILS ----------------------------------------
-    # Leidos uno por uno. 6 y 10 ("SECTION AT PERIMETER") rotulan "DEFLECTION TRACK
-    # PER LT. GA. MFR." y 11 es PARAPET INFILL FRAMING: esos SI se citan. Los de abajo
-    # son conexiones soldadas y empernadas de acero estructural.
-    'S5.10': {
-        '4': 'PERIMETER ROOF EDGE: "L3x3x1/4 CONT. (BUTT-WELD SPLICES)" con soldadura '
-             '3/16 continua sobre "BEAM REF. PLAN" y "STANDARD SHEAR CONNX". Es el '
-             'angulo de borde de losa de techo: Div 05 12 00, lo pone el montador de '
-             'acero. Contraste con 6/S5.10, el detalle de al lado, que ademas del '
-             'mismo angulo SI rotula "DEFLECTION TRACK PER LT. GA. MFR." y "LT. GA. '
-             'FRAMING": ese SI deja partida nuestra.',
-        '8': 'CANOPY BM @ DRAIN LOCS: viga de canopy en los puntos de drenaje. Rotula '
-             '"1/2\" CAP PLATE", "3/8\" STIFF. PL", soldaduras 5/16 N.S. & F.S., '
-             '"STANDARD AISC SHEAR CONNECTION", conexiones MC3/MC5/SC3/SC4 y el '
-             'COLUMN BASEPLATE SCHEDULE (CB1..CB6, anclas de 3/4" y 1"). Div 05 12 00 '
-             'completo. El drywall del canopy cuelga de esta viga pero el material de '
-             'esta lamina es todo acero estructural soldado en taller y en campo.',
-        '9': 'ROOF STEP AT GRID B: escalon de techo entre dos vigas de acero. '
-             '"PL 1/2 x 5 w/ (4) 3/4\" DIA. A325-X BOLTS TYP. TOP & BOTT.", '
-             '"L3x3x1/4 x CONT.", soldadura 1/4. Div 05 12 00. Ningun material nuestro.',
-        '12': 'STEEL BMS TO STEEL COL. CONNX: conexiones de viga a columna de acero. '
-              'Div 05 12 00 por definicion. No toca framing ligero ni board.',
-        '13': 'CANOPY STEP SECTION: escalon entre viga de canopy y viga de techo, '
-              '"L3x3x1/4 CONT. (BUTT-WELD SPLICES)", soldadura 3/16, y manda '
-              '"REF. 6/S5.10 FOR ADDL INFO.". El material de ESTE detalle es acero '
-              'estructural (Div 05 12 00); el framing ligero que menciona por '
-              'referencia vive en 6/S5.10, que SI se cita en el deflection track.',
-    },
-
-    # ---- S5.30 BRACED FRAME ELEVATIONS --------------------------------------------
-    # Los cinco son la misma familia: elevaciones de los marcos arriostrados.
-    'S5.30': {
-        '2': 'VERT. BRACE ELEVATION - GRID 3: elevacion del marco arriostrado en el '
-             'eje 3. Rotula "HSS4x4x1/4" y "HSS5x5x1/4" como diagonales, "COL. REF. '
-             'PLAN", "BM REF. PLAN" y "BRACE FRAME FORCES ARE ULTIMATE". Div 05 12 00: '
-             'lo fabrica y monta el acerero. Impacto en lo nuestro: ninguno en '
-             'cantidad. El stud de 6" del muro exterior y el de 3 5/8" del interior '
-             'corren a 16" O.C. como metal corrido sin deducir, y la diagonal queda '
-             'dentro del cavity; el recorte de stud en la diagonal no agrega material, '
-             'solo mano de obra, y se declara en Clarifications.',
-        '3': 'VERT. BRACE ELEVATION - GRID 8: mismo marco arriostrado en el eje 8, '
-             'mismas diagonales HSS y mismas fuerzas ultimas. Div 05 12 00.',
-        '4': 'VERT. BRACE ELEVATION - GRID A: "HSS5x5x1/4" entre columna y viga de '
-             'plano, con los nodos 1A/1C/1D de S5.30. Div 05 12 00.',
-        '5': 'VERT. BRACE ELEVATION - GRID G: mismo caso que 4, en el eje G. '
-             'Div 05 12 00.',
-        '6': 'VERT. BRACE ELEVATION - GRID B: mismo caso, en el eje B. Div 05 12 00.',
-    },
-}
+NO_APLICAN = _no_aplican()
 
 
 class CalloutSinUsar(Exception):

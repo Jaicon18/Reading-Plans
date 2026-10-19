@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """verif_motivos.py -- COMPUERTA: ningun eslabon de la cadena sin motivo y sin dato.
 
-ORDEN DE RODOLFO (6-oct-2026, tras preguntar por la cadena del muro A1 #8): cada eslabon de
+ORDEN DE RODOLFO (6-oct-2026, tras preguntar por la cadena de un muro): cada eslabon de
 la secuencia se escribe como `N/HOJA -- motivo -- dato extraido (o "no aplica: motivo")`, y
 `cadena_detalles` RECHAZA un eslabon sin motivo y sin dato.
 
@@ -23,8 +23,8 @@ cierre, asi que un eslabon nuevo entra sin que nadie lo decida. Si entra sin mot
 columna `Detail sequence` crece y el Excel parece mas documentado cuando en realidad quedo
 menos auditable. Esta compuerta vuelve imposible ese crecimiento silencioso.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import json, os, sys, collections
 

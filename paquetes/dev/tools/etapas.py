@@ -38,6 +38,8 @@ La compuerta FALLA si:
   - algún partition tag del inventario no tiene wall en la lectura A ni en la B y tampoco tiene alerta "tag sin wall";
   - v70: existe <dir>/4_canon/takeoff_canon.json y esquinas.revisar da fallas (R70.2 esquina sin dueño / doble,
     R70.3 hueco colineal sin gaps_ok) -> "esquinas: …".
+  - v72b: reglas.py compuerta (TODAS las reglas del skill: a con datos, b con evidencia por caso) sobre la misma
+    carpeta; cualquier falla -> "reglas: …" y la compuerta FALLA (sin canon conciliado también falla).
   - v71: chequeos_v71.revisar sobre el mismo canon (R71.1 north_arrow con facades, R71.2 box contado dos veces,
     R71.3 accesorios de bulkhead > Σ vanos, R71.5 tag descartado "por otra tarea") -> "v71: …".
 Avisos (no fallan, se listan): walls sin `sheet` o sin `tag_ids`, tags ambiguos del inventario (no contados),
@@ -100,8 +102,28 @@ def estado(d):
     return lineas, sig or "todas las etapas en disco: correr etapas.py compuerta y después canon.py / Excel"
 
 
-def compuerta(d):
-    """-> (fallas, avisos)."""
+def compuerta(d, _desde_reglas=False):
+    """-> (fallas, avisos). v72b: además corre reglas.py compuerta (reglas inviolables) sobre la misma carpeta; sus
+    fallas entran como "reglas: …" (detalle en <d>/REGLAS_FALLAS.md). `_desde_reglas` = llamada interna de
+    reglas.py (que ya revisa el resto): devuelve solo la estructura de etapas."""
+    f, av = estructura(d, _desde_reglas)
+    if _desde_reglas:
+        return f, av
+    import reglas
+    out = reglas.compuerta(d, desde="etapas")
+    try:
+        reglas.escribir(out, d)
+    except OSError:
+        pass
+    if not out["ok"]:
+        f.append(f"reglas: {out['n_fallas']} falla(s) de reglas inviolables (reglas.py compuerta; ver "
+                 f"{os.path.join(d, 'REGLAS_FALLAS.md')})")
+        f += [f"reglas: {x['regla']} | {x['elemento']} | {x['valor']}" for x in out["fallas"][:30]]
+    return f, av
+
+
+def estructura(d, _desde_reglas=False):
+    """Compuerta de estructura de etapas (v69–v72): archivos, revisión vigente, tags con wall o alerta."""
     a = cargar(d)
     fallas, avisos = [], []
     for k, nombre, _ in ARCHIVOS[:4]:
@@ -154,7 +176,7 @@ def compuerta(d):
         avisos.append(f"{len(amb)} tag(s) ambiguo(s) en el inventario (no contados): decide el estimador")
     for h in inv.get("no_inventariables") or []:
         avisos.append(f"hoja NO INVENTARIABLE POR SCRIPT p.{h.get('page')} {h.get('sheet') or ''}: {h.get('motivo')}")
-    if "canon_final" in a:                      # v70: R70.2 / R70.3 sobre el canon conciliado (esquinas.py)
+    if "canon_final" in a and not _desde_reglas:  # v70: R70.2 / R70.3 sobre el canon conciliado (esquinas.py)
         if a["canon_final"][2]:
             fallas.append(f"takeoff_canon.json no es JSON válido ({a['canon_final'][2]})")
         else:

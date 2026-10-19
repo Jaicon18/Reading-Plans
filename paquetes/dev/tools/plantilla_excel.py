@@ -26,8 +26,9 @@ equivocada -> 0 LF y ninguna compuerta lo vio). Las salidas se buscan junto al E
 
 Uso:
   plantilla_excel.py validar <takeoff.json>              exit 1 si el JSON no cumple el formato
-  plantilla_excel.py armar   <takeoff.json> <salida.xlsx> [--familias familias_out.json]
-                                                         valida, arma el Excel y recalcula fórmulas
+  plantilla_excel.py armar   <takeoff.json> <salida.xlsx> --familias <work>/out/familias_out.json [--trabajo <work>]
+                                                         v72b: corre reglas.py compuerta <work>; si no da OK NO
+                                                         escribe el Excel (sin override); el libro sale sellado
   plantilla_excel.py verificar <excel.xlsx> [--salidas dir]  familias de accesorios + hoja Partition Takeoff +
                                                          renglones en 0 contra la salida de la tool que citan
                                                          + R70.8 (yields de drywall screws / compound / tape)
@@ -38,11 +39,11 @@ Formato del JSON (todas las cantidades NET, sin waste: el waste lo pone el Excel
  "proyecto": "<project name, city>", "bid_set": "...pdf", "fecha": "2026-10-14",
  "inputs": {"waste_metal": 0.15, "waste_no_metal": 0.06, "sheet_w_ft": 4, "sheet_l_ft": 12,
             "stud_stock_ft": 20, "track_stock_ft": 10},
- "walls": [ {"type": "A1", "wall": "8", "location": "Corridor 111 east", "length_lf": 18.5,
-             "height_ft": 12.89, "stud_size": "3-5/8\"", "stud_oc_in": 16, "layers": 2,
-             "board_sf": 349.65, "source": "3/A12.01", "status": "CONFIRMADO"} ],
+ "walls": [ {"type": "A1", "wall": "<ref>", "location": "<room> east", "length_lf": <n>,
+             "height_ft": <n>, "stud_size": "3-5/8\"", "stud_oc_in": 16, "layers": 2,
+             "board_sf": <n>, "source": "3/A12.01", "status": "CONFIRMADO"} ],
  "materials": [ {"material": "3-5/8\" metal stud 362S137-33", "unit": "LF", "net": <n>,
-                 "metal": true, "selling_unit": "stick 20 ft", "stock": 20, "cut_ft": 12.89,
+                 "metal": true, "selling_unit": "stick 20 ft", "stock": 20, "cut_ft": <n>,
                  "source": "Partition Takeoff col ...; 3/A12.01"} ],
  Opcionales por material: "cut_ft" (OBLIGATORIO en studs con stock: largo típico de corte),
  "sheet_sf" (si selling_unit no trae AxB), "waste_pct" (fija el waste de esa fila).
@@ -339,7 +340,33 @@ ESTADO_EN = {"CONFIRMADO": "CONFIRMED", "DERIVADO": "DERIVED", "PENDIENTE": "PEN
 HOJA_REVISAR, HOJA_ALCANCES = "Review Items", "Scope Checklist"
 
 
-def armar(d, salida):
+def sha_familias(fo):
+    """v72b: huella del contenido de familias_out.json (la que fusionar deja en el takeoff y armar compara)."""
+    import hashlib
+    return hashlib.sha256(json.dumps(fo, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def armar(d, salida, trabajo):
+    """v72b (REGLAS INVIOLABLES): NO escribe el Excel si `reglas.py compuerta <trabajo>` no da OK. La llama aquí, en
+    proceso; no hay parámetro ni flag que la salte. Además: el takeoff tiene que venir de `fusionar` con el
+    familias_out.json de ESA carpeta de trabajo (mismo contenido), y el libro sale sellado (hoja oculta _reglas)
+    con la huella de la corrida: bitacora.py compuerta rechaza un Excel sin sello o con sello vencido."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import reglas
+    if not trabajo or not os.path.isdir(trabajo):
+        raise reglas.ReglasNoOK("NO SE ARMA: falta la carpeta de trabajo (reglas.py compuerta corre sobre ella)")
+    if not d.get("_familias_sha"):
+        raise reglas.ReglasNoOK("NO SE ARMA: el takeoff no pasó por fusionar con familias_out.json (--familias)")
+    ctx = reglas.Ctx(trabajo)
+    fo_p = os.path.join(ctx.out_dir, "familias_out.json") if ctx.out_dir else None
+    if not fo_p or sha_familias(json.load(open(fo_p, encoding="utf-8"))) != d["_familias_sha"]:
+        raise reglas.ReglasNoOK("NO SE ARMA: --familias no es el familias_out.json de la carpeta de trabajo "
+                                f"({fo_p})")
+    out = reglas.exigir(trabajo)                    # lanza ReglasNoOK si una sola regla falla
+    return _escribir(d, salida, out)
+
+
+def _escribir(d, salida, out_reglas):
     import openpyxl
     from openpyxl.utils import get_column_letter as L
     S = _estilos()
@@ -433,6 +460,8 @@ def armar(d, salida):
         for i, col in enumerate(w.columns, 1):
             ancho = max((len(str(c.value)) for c in col if c.value is not None), default=8)
             w.column_dimensions[L(i)].width = min(max(10, ancho + 2), 60)
+    import reglas
+    reglas.sellar(wb, out_reglas)
     wb.save(salida)
     return _recalcular(salida)
 
@@ -590,7 +619,8 @@ def _slug(t):
 
 
 def fusionar(d, fo):
-    """Material Summary de accesorios + RFIs + exclusiones + Partition Takeoff desde familias_out.json (v67) y,
+    """v72b: deja en el takeoff la huella de `fo` (_familias_sha); armar la compara con la carpeta de trabajo.
+    Material Summary de accesorios + RFIs + exclusiones + Partition Takeoff desde familias_out.json (v67) y,
     v68: un renglón por material / espesor de FRT plywood, sealant exterior aparte, yields con su celda de Inputs
     y fórmula viva, NET de familia solo en su misma unidad, hanger wire en PCS + LF, RFIs sin duplicados."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -717,6 +747,7 @@ def fusionar(d, fo):
                     "layers": f["layers"], "board_sf": f["board_sf"], "source": f["source"], "status": f["status"]}
         d["walls"] = [row(t, f) for t, x in pt["types"].items() for f in x["filas"]]
         d["other_framing"] = [row(str(o.get("element")), dict(o, wall=o["id"])) for o in pt.get("other_framing") or []]
+    d["_familias_sha"] = sha_familias(fo)
     return d
 
 
@@ -1037,6 +1068,17 @@ EJEMPLO = {
 }
 
 
+def carpeta_de(familias_p):
+    """v72b: carpeta de trabajo de un familias_out.json (out/ → la carpeta con el canon conciliado)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import reglas
+    base = os.path.dirname(os.path.abspath(familias_p))
+    for c in (os.environ.get("TAKEOFF_WORK"), os.path.join(base, ".."), os.path.join(base, "..", "etapas"), base):
+        if c and os.path.isdir(c) and reglas.buscar_canon(c):
+            return os.path.abspath(c)
+    return None
+
+
 def main():
     a = sys.argv[1:]
     if len(a) == 2 and a[0] == "validar":
@@ -1045,21 +1087,28 @@ def main():
             print("ERROR ", e)
         print("FORMATO OK" if not err else f"FORMATO CON {len(err)} ERRORES")
         sys.exit(1 if err else 0)
-    elif len(a) in (3, 5) and a[0] == "armar":
+    elif len(a) in (3, 5, 7) and a[0] == "armar":
         d = json.load(open(a[1], encoding="utf-8"))
-        if len(a) == 5:
-            if a[3] != "--familias":
-                sys.exit(__doc__)
-            try:
-                d = fusionar(d, json.load(open(a[4], encoding="utf-8")))
-            except ValueError as e:
-                sys.exit(f"NO SE ARMA: {e}")
+        op = dict(zip(a[3::2], a[4::2]))
+        if set(op) - {"--familias", "--trabajo"}:
+            sys.exit(__doc__)
+        if "--familias" not in op:
+            sys.exit("NO SE ARMA: armar exige --familias familias_out.json (§8.6, 52.4) y la compuerta de reglas")
+        try:
+            d = fusionar(d, json.load(open(op["--familias"], encoding="utf-8")))
+        except ValueError as e:
+            sys.exit(f"NO SE ARMA: {e}")
         err = validar(d)
         if err:
             for e in err:
                 print("ERROR ", e)
             sys.exit(f"NO SE ARMA: {len(err)} errores de formato")
-        print("OK", a[2], "-", armar(d, a[2]))
+        import reglas
+        trabajo = op.get("--trabajo") or carpeta_de(op["--familias"])
+        try:
+            print("OK", a[2], "-", armar(d, a[2], trabajo))
+        except reglas.ReglasNoOK as e:
+            sys.exit(f"NO SE ARMA: {e}")
     elif len(a) in (2, 4) and a[0] == "verificar":
         if len(a) == 4 and a[2] != "--salidas":
             sys.exit(__doc__)

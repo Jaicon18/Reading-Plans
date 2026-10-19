@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """verif_citas.py -- COMPUERTA: toda cita N/HOJA que ESCRIBE el take-off existe de verdad.
 
-QUE LA ORIGINO (5-oct-2026, verificando el muro A1 #8 paso a paso con Rodolfo).
+QUE LA ORIGINO (5-oct-2026, verificando un muro paso a paso con Rodolfo).
 El bracing de TODOS los muros se citaba como "5/F de S5.20". En S5.20 el detalle 5 es
 `TYPICAL WALL FRAMING CONNX`; el sub-detalle `F. BRIDGING AND BRACING - CONTINUOUS BRIDGING`
 esta dentro del detalle 1 `TYPICAL WALL FRAMING DETAILS`. La cita mandaba al estimador y al
-revisor a un detalle que no dice nada de bracing. 73 archivos la arrastraban.
+revisor a un detalle que no dice nada de bracing. <n> archivos la arrastraban.
 
 verif_callouts mira el sentido PLANO -> take-off (todo detalle senalado se usa).
 Esta mira el sentido contrario, take-off -> hoja: todo numero que yo escribo tiene que
@@ -15,15 +15,16 @@ COMO SABE QUE DETALLES EXISTEN. No por el grafo de burbujas (una burbuja puede f
 por los ROTULOS DE DETALLE de la propia hoja: renglon con numero + titulo en mayusculas +
 escala (NTS, 3" = 1'-0", 1/4" = 1'-0"...).  Es el mismo renglon que lee un humano.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, json, glob, collections
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cadena_detalles as CD
 
-PDF = f'{_TW}/BOA_SIN_MARKUPS.pdf'
+PDF = f'{_TW}/{_PRE}_SIN_MARKUPS.pdf'
 CACHE = f'{_TW}/rotulos_detalle_cache.json'
 ESCALA = re.compile(r'\bNTS\b|\d\s*(?:\d/\d)?\s*"\s*=\s*\d', re.I)
 NUM = re.compile(r'^\d{1,2}$')

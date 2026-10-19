@@ -2,8 +2,8 @@
 """motivos_cadena.py -- POR QUE la cadena pasa por cada eslabon, y QUE saco de el.
 
 ORIGEN (6-oct-2026). Rodolfo preguntó, desde un chat normal: "dime para que abriste cada uno
-en la secuencia y que extrajiste de el", y pegó la cadena del wall A1 #8. La columna
-`Detail sequence` del Excel solo traía los NUMEROS. Sin la sesión original, 9 de los 26
+en la secuencia y que extrajiste de el", y pegó la cadena de un wall. La columna
+`Detail sequence` del Excel solo traía los NUMEROS. Sin la sesión original, <n> de los <n>
 eslabones no se pudieron justificar. La cadena existía y no se podía auditar: decía por dónde
 pasó la lectura, no qué aportó cada paso.
 
@@ -26,8 +26,8 @@ COMO SE REPARTE EL TRABAJO (lo declarado es lo mínimo, lo demás se deriva):
      wall A1 solo entra como CONTRASTE para probar que el A1 lleva una sola run. Declarar
      una clase fija habría sido falso en la mitad de los walls.
 
-Esto resuelve además el otro hallazgo de ese día: los eslabones "injustificables" del A1 #8
-(A09.01, A00.01, A09.27, A09.33, E02.01, P01.01, P01.02) son todos **fuente de una EXCLUSION**
+Esto resuelve además el otro hallazgo de ese día: los eslabones "injustificables" de ese wall
+(hojas de elevaciones, de notas generales, de secciones, E y P) son todos **fuente de una EXCLUSION**
 -- la cadena va ahí para probar que ahí no hay material nuestro, no para sacar una cantidad.
 Y `1/A12.01` y `4/A12.01` son detalles de OTRO tipo de partition citados como CONTRASTE. Una
 vez que la clase se deriva del campo, eso se lee solo y no hay que recordarlo.
@@ -70,12 +70,7 @@ CLASE_EN = {'DIMENSION': 'Dimension', 'CANTIDAD': 'Quantity', 'ABERTURA': 'Openi
 # Se DECLARAN uno por uno. Cada uno tiene que traer su motivo en CONTENIDO diciendo por que
 # se descarto, y `verif_motivos` lo comprueba: un descarte sin motivo es peor que no
 # declararlo, porque parece verificado.
-DESCARTADOS = {
-            '7/A11.03': 'abierta y descartada: es la elevacion del rack TECH 1/TECH 2 y no dibuja '
-                'plywood; la del plywood es 5/A11.03',
-    '9/A00.41': 'no es cita del take-off: es la referencia del propio plano (key note 1 de '
-                'A02.01)',
-}
+DESCARTADOS = {}   # E24: vaciado — eran descartes de detalle de un proyecto de examen; se llena por proyecto
 
 
 def clase_de(campo):
@@ -194,7 +189,7 @@ def rastro(obj, esl, cs=None):
         if _cita_en(x, esl):
             # OJO: la CLASE se saca de la ruta COMPLETA, no de la abreviada. `_corto` quita
             # el prefijo `partidas.` y vuelve `caras[` en `cara[`, asi que clasificar sobre
-            # la abreviada dejaba sin clase 274 de 1137 renglones -- toda partida y toda
+            # la abreviada dejaba sin clase <n> de <n> renglones -- toda partida y toda
             # altura de board salian con '?'. La abreviada es solo para MOSTRAR.
             out.append((clase_de(r), _corto(r), _frase(x, esl)))
     out.sort(key=lambda t: (ORDEN_CLASE.index(t[0]) if t[0] in ORDEN_CLASE else 9, t[1]))

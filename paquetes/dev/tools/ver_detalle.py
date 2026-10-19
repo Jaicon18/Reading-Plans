@@ -4,14 +4,15 @@
 El dibujo de un detalle vive ARRIBA de su burbuja de rotulo. Se recorta desde la burbuja
 hacia arriba y hacia los lados, con margen, y a 200 dpi para que el texto chico se lea.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, subprocess
 from PIL import Image
 
 NUM = re.compile(r'^\d{1,2}$')
-PDF = f'{_TW}/BOA_SIN_MARKUPS.pdf'
+PDF = f'{_TW}/{_PRE}_SIN_MARKUPS.pdf'
 
 
 def burbuja(idx, rot, n):

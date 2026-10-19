@@ -15,8 +15,9 @@ Pending Items y no se teclea al lado.
 NO SE REDONDEA: los valores van con los decimales del sello. Un handoff redondeado obliga al
 que lo recibe a volver a medir.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, json, pickle, collections, datetime
 
@@ -25,39 +26,43 @@ import resumen_global as RG
 import dataset as DS
 
 B = f'{_TW}'
-DEST_MD = f'{_TO}/entrega/BOA_HANDOFF.md'
+DEST_MD = f'{_TO}/entrega/{_PRE}_HANDOFF.md'
 MAPA = B + '/.mapa_hojas.pkl'
 
 
 # ---------------------------------------------------------------- 1. PROYECTO Y SET
+# Los datos del PROYECTO (nombre, sitio, set, alcance, ubicaciones confirmadas, decisiones
+# aprobadas, adendas, notas de faltantes) NO viven en esta tool: se leen de
+# $TAKEOFF_WORK/handoff_proyecto.json (o de la ruta en $TAKEOFF_HANDOFF_JSON). Sin ese archivo
+# cada dato sale [PENDIENTE]: la tool no trae valores de ningun proyecto (E24).
 # Los datos generales van con su hoja citada. El numero de hojas NO se escribe a mano:
-# se cuenta del mapa leido de los title blocks. (La carta de RFIs decia "95 hojas" y el
-# PDF trae 94 paginas -- un numero escrito a mano que nadie volvio a comprobar.)
-PROYECTO = [
- ('Project',            'Bank of America Financial Center 2.0 - Broomfield, CO', 'A00.00 cover sheet'),
- ('Site',               'NWC Hwy 7 and Palisade Pkwy, Broomfield, CO 80023', 'A00.00'),
- ('Project type',       'Ground-up new financial center, single story, slab on grade, steel frame', 'A00.00'),
- ('Building Gross SF',  '4,260 SF building + 850 SF drive-through = 5,110 SF total gross', 'A00.00'),
- ('Building height',    "20'-0\", single story", 'A00.00'),
- ('Occupancy Group',    'B - Business', 'A00.00 code analysis'),
- ('Construction Type',  'II-B', 'A00.00 code analysis'),
- ('Levels',             'LEVEL 1 only. There is no second level, so every quantity in this '
-                        'handoff is LEVEL 1; the "by level" breakdown has one level by design.',
-                        'A00.00 "single story"'),
- ('Architect',          'Nelson Architecture, Inc.', 'title block'),
- ('Set',                'PERMIT SET / BID SET', 'title block'),
+# se cuenta del mapa leido de los title blocks.
+CFG_JSON = _os_rutas.environ.get("TAKEOFF_HANDOFF_JSON", f'{_TW}/handoff_proyecto.json')
+
+
+def _cfg():
+    try:
+        return json.load(open(CFG_JSON, encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+
+CFG = _cfg()
+PROYECTO = [tuple(x) for x in CFG.get('proyecto') or [
+ ('Project', '[PENDIENTE] project name not loaded (handoff_proyecto.json)', 'cover sheet'),
+ ('Site', '[PENDIENTE]', 'cover sheet'),
+ ('Set', '[PENDIENTE]', 'title block'),
  ('Scope of this take-off', 'CSI Division 05 40 00 Cold-Formed Metal Framing and Division '
-                        '09 20 00 / 09 29 00 Gypsum Board Assemblies', 'JC Hunter scope'),
- ('Demolition',         'The set has NO interior Demolition Plan (only civil C2.0), consistent '
-                        'with ground-up: no existing-wall rule applies and no patch allowance '
-                        'is carried.', 'A00.00 drawing index'),
-]
+                        '09 20 00 / 09 29 00 Gypsum Board Assemblies', 'scope'),
+]]
+TITULO = CFG.get('titulo') or '<proyecto>'
+NIVEL = CFG.get('nivel') or 'LEVEL 1'
 
 
 def mapa_hojas():
     """El indice COMPLETO del set, leido del title block de cada pagina del PDF.
 
-    No es el `Sheet Index` del libro: ese lista solo las 19 hojas de las que se saco un
+    No es el `Sheet Index` del libro: ese lista solo las <n> hojas de las que se saco un
     numero. Rodolfo pidio TODAS las hojas del bid set, asi que se lee pagina por pagina.
     """
     if not os.path.exists(MAPA):
@@ -157,7 +162,7 @@ def cantidades(MT):
             fila = dict(tag=tag, muro=w.get('muro'), ubic=w.get('ubicacion', ''),
                         largo=L, largo_est=Le, largo_src=Lr,
                         alto=H, alto_est=He, alto_src=Hr,
-                        oc=w.get('oc'), nivel='LEVEL 1',
+                        oc=w.get('oc'), nivel=NIVEL,
                         caras=[], partidas=[], aberturas=w.get('aberturas') or [],
                         excl=w.get('excluidas') or {}, sello=w.get('sello'))
             for c in w.get('caras', []):
@@ -181,27 +186,13 @@ def cantidades(MT):
 # mas delicado del documento, porque es el unico que no se puede verificar contra el plano.
 #
 # Asi que se declara lo que CONSTA, con donde consta, y lo demas sale [PENDIENTE].
-CONFIRMADO_POR_USUARIO = {
- 'numeracion': ('CONFIRMADO', 'Rodolfo fijo la numeracion oficial de walls el 13-sep-2026: '
-    'A1 #1-10 / A1K #11-13 / A5 #14-17 / B #18-24 / B2 #25-30 / B2K #31 / C1 #32-39 / '
-    'F #40 / G #41-49 / G1 #50-51, agrupada por tag, y ANULO la numeracion por longitud '
-    'descendente y el plano BOA_48_muros_numerados.png. Consta en el registro del proyecto.'),
- 'soffits_19_69': ('CONFIRMADO', 'El 15-sep-2026 ordeno AGREGAR los 19.69 LF de ceiling '
-    'transition que faltaban contra su take-off manual (247.85 contra 228.16 LF).'),
- 'este_suma_tramos': ('CONFIRMADO', 'El usuario DETECTO el error del eje ESTE: el 72\'-8 1/4" '
-    'se habia armado sumando tramos de una dimension string con ticks DOBLES, que mide cuartos '
-    'face to face y no incluye el thickness de los 6 walls perpendiculares.'),
+CONFIRMADO_POR_USUARIO = {k: tuple(v) for k, v in (CFG.get('confirmado_por_usuario') or {
  'barrido_por_tag': ('PENDIENTE', 'La regla del 12-sep-2026 exige parar al cerrar el barrido '
     'de cada tag y esperar confirmacion explicita de que la lista de ubicaciones esta completa. '
-    'El registro del proyecto deja el barrido de A02.01 como "EN CURSO, pendiente de '
-    'confirmacion del usuario" y su proximo paso escrito es exactamente "mostrar al usuario la '
-    'lista numerada de ubicaciones por tag y esperar su confirmacion explicita". NO consta en '
-    'ningun archivo que esa confirmacion se haya dado tag por tag. Lo que SI consta es el '
-    'barrido verificado por codigo (los 51 tags de A02.01 extraidos del texto del PDF, con su '
-    'imagen circulada) y la compuerta de planos marcados, que comprueba que el LF rotulado en '
-    'el plano de cada tipo coincide con el cierre sellado. Son dos cosas distintas y el handoff '
-    'no las puede presentar como una.'),
-}
+    'NO consta en ningun archivo que esa confirmacion se haya dado tag por tag (cargarla en '
+    'handoff_proyecto.json con donde consta). El barrido verificado por codigo y la compuerta '
+    'de planos marcados son otra cosa y el handoff no las puede presentar como una.'),
+}).items()}
 
 
 # ---------------------------------------------------------------- 5. LO QUE FALTA
@@ -248,8 +239,7 @@ def rfis():
 # ---------------------------------------------------------------- 7. REGLAS, TEXTUALES
 # Se CITAN de las adendas, no se parafrasean: Rodolfo pidio "textuales". Cada adenda se lee
 # del archivo, asi que si se corrige una, el handoff la cita corregida.
-ADENDAS = ['adenda_v39_2026-10-07.md', 'adenda_v40_2026-10-07.md',
-           'adenda_v41_2026-10-08.md', 'adenda_v42_2026-10-08.md']
+ADENDAS = list(CFG.get('adendas') or [])      # nombres de archivo, en handoff_proyecto.json
 DOCS = f'{_TO}/entrega'
 
 
@@ -280,43 +270,11 @@ def reglas():
 # ---------------------------------------------------------------- 8. LO QUE EL USUARIO APROBO
 # Cada supuesto con el mensaje que lo aprobo. Un supuesto sin quien lo aprobo no es un
 # supuesto aprobado: es un supuesto mio, y va en la seccion de pendientes.
-APROBADO = [
- ('No insulation', 'Located and cited everywhere it occurs and EXCLUDED with the motive '
-  'written in every closure. The drawings DO call for it (the A1K row of 4/A12.01 reads '
-  'INSULATION YES and the detail draws the cavity); the delta is declared in Clarifications '
-  'and in Pending Items #22.',
-  'Standing scope order from Rodolfo: no insulation, no cabinets, no light fixtures.'),
- ('No cabinets, no light fixtures', 'Same treatment: located, cited, EXCLUDED with motive.',
-  'Same standing scope order.'),
- ('Waste 15% metal / 6% board', 'Applied on NET, by type, each type separately, and shown in '
-  'its own NET / WASTE / PURCHASE columns, never buried in a takeoff figure.',
-  'Standing order from Rodolfo.'),
- ('Storefront and officefront are Division 08',
-  'The DFC-1A officefront of offices 105-110 is bought and installed through the bank vendor '
-  '(note N of the Door Schedule, A00.30) and the aluminium storefront AF-2 with GL-2 glazing '
-  'is Division 08. Only the bulkhead above the officefront and its framing are ours.',
-  'Confirmed as scope by Rodolfo; the drawing note is quoted in Clarifications.'),
- ('South zone deck height taken at the HIGH end',
-  "In the sloped bay the B.O.D. runs from 13'-0 5/8\" to 12'-6 3/8\". The quote uses the high "
-  'end of each wall, interpolated at the y of that wall by bod_s(y), because studs are cut to '
-  'the highest condition of the zone. Total variation of the zone is 6 1/4".',
-  'Criterion adopted and recorded 2026-09-15; it moves under 1% of the board SF.'),
- ('Track-to-slab fastener spacing at 12" O.C.',
-  'Three values live in the set: 12" O.C. (SILL TRACK ANCHORAGE of 7/S5.20, interior walls), '
-  '16" O.C. (FASTENER SCHEDULE next to 3/S5.20) and 2\'-0" O.C. (the box of 4/A12.01, which '
-  'governs its own type). The tightest, 12" O.C., is quoted and the difference goes to '
-  'Clarifications and to Pending Items #4.',
-  'Criterion adopted; it is an open RFI, priced on the safe side meanwhile.'),
- ('Cementitious backer board under any tile',
-  'Trade judgement that prevails over what the drawing shows, with the difference noted.',
-  'Standing order from Rodolfo.'),
- ('Accesorios always include trims, taping, drywall screws, framing screws and track pins',
-  'No line item is left out of the accessory group.', 'Standing order from Rodolfo.'),
- ('Everything in English', 'Material, tool, component, process and abbreviation names of the '
-  'drywall and metal frame trades are written in English in every deliverable and in every '
-  'response, enforced by verif_idioma.py and verif_respuesta.py.',
-  'Permanent inviolable instruction from Rodolfo, 7-oct-2026, quoted in full in adenda v39.'),
-]
+APROBADO = [tuple(x) for x in CFG.get('aprobado') or [
+ ('[PENDIENTE]', 'No approved assumption loaded (handoff_proyecto.json, key "aprobado").',
+  'Each one needs the message that approved it.'),
+]]
+NOTAS_FALTANTES = list(CFG.get('notas_faltantes') or [])   # 5.5: tags / hojas / zonas sin barrer
 
 
 # ================================================================ EL DOCUMENTO
@@ -337,8 +295,7 @@ def escribir(dest=DEST_MD):
     hoy = datetime.date.today().isoformat()
     w('# HANDOFF - Metal Framing & Drywall take-off')
     w('')
-    w('**Bank of America Financial Center 2.0 - Broomfield, CO** · CSI Division 05 Metals and '
-      'Division 09 Finishes · JC Hunter')
+    w('**%s** · CSI Division 05 Metals and Division 09 Finishes' % TITULO)
     w('')
     w('Written %s so another session can pick this take-off up without re-deriving anything. '
       'Every figure below is read from the SEALED closure of its wall, not retyped: the state '
@@ -351,16 +308,11 @@ def escribir(dest=DEST_MD):
       'and the addenda. Re-run it after any correction instead of editing it: a handoff edited '
       'by hand goes stale and the person who receives it has no way to tell.')
     w('')
-    w('> **Why some quoted evidence below is still in Spanish, and what it tells you.** The '
-      'citation and operation strings are quoted from the SEAL, word for word. Rewriting them '
-      'into English would make the quote disagree with the seal, so they are never rewritten '
-      'here - the language debt is paid by translating the GENERATOR and re-running the closer. '
-      'Every one of the Spanish terms left in quoted evidence belongs to the four types `A5`, '
-      '`B`, `B2K` and `C1` - 344 of 344, measured - and those are exactly the four blocks that '
-      'have NO generator at all (see 5.4). The 12 types that do have a closer came out 100% in '
-      'English after the re-run. So the language debt and the orphan-closure debt are the same '
-      'debt, and writing `cerrar_A5.py`, `cerrar_B.py`, `cerrar_B2K.py` and `cerrar_C1.py` '
-      'clears both. That is the single highest-value task waiting for the next session.')
+    w('> **Why some quoted evidence below may still be in Spanish.** The citation and operation '
+      'strings are quoted from the SEAL, word for word. Rewriting them into English would make '
+      'the quote disagree with the seal, so they are never rewritten here - the language debt is '
+      'paid by translating the GENERATOR and re-running the closer. A sealed closure with no '
+      'generator (see 5.4) cannot pay that debt, so both debts are cleared by writing its closer.')
     w('')
 
     # ---------------------------------------------------------------- 1
@@ -464,11 +416,11 @@ def escribir(dest=DEST_MD):
     w('')
     w('## 3. Quantities taken so far')
     w('')
-    w('By tag, then by wall, then by location. The building has ONE level, so every row is '
-      'LEVEL 1. Each line item carries the value exactly as sealed, its unit, its state and - '
+    w('By tag, then by wall, then by location. Level of every row: %s (project data). '
+      'Each line item carries the value exactly as sealed, its unit, its state and - '
       'for every `[DERIVADO]` - the operation that produced it, quoted in full and not '
       'shortened. The sheet citations are inside those operations, which is where they were '
-      'sealed.')
+      'sealed.' % NIVEL)
     w('')
     w('Waste is NOT in these figures: they are NET. The NET / WASTE / PURCHASE columns are on '
       'the `Material Summary` sheet of the workbook, at 15%% on metal and 6%% on board, by type.')
@@ -537,7 +489,7 @@ def escribir(dest=DEST_MD):
     w('')
     w('### The numbered location list per tag, as sealed')
     w('')
-    w('This is the official wall numbering Rodolfo fixed on 13-sep-2026, with the location '
+    w('This is the official wall numbering, with the location '
       'string of each sealed closure. The marked-plan gate checks that the LF labelled on the '
       'marked drawing of each type equals the sealed closure, so the list and the drawings '
       'cannot drift apart.')
@@ -565,14 +517,14 @@ def escribir(dest=DEST_MD):
             w('| %s | #%s | %s | %s |' % (x['tag'], x['muro'], x['partida'],
                                           (x['motivo'] or '').replace('|', '/')))
     else:
-        w('None. No line item of the 67 sealed walls carries the state `[PENDIENTE]`. The open '
-          'questions are in 5.2, 5.3 and section 6 instead.')
+        w('None. No line item of the %d sealed walls carries the state `[PENDIENTE]`. The open '
+          'questions are in 5.2, 5.3 and section 6 instead.' % sum(len(x) for x in MT.values()))
     w('')
     w('### 5.2 `[CONFIRMADO]` fields that cite no printed dimension - the honest weak spot')
     w('')
     w('**%d fields** are sealed `[CONFIRMADO]` whose source text carries no printed dimension '
       'at all, so the claim cannot be checked. `verif_confirmado.py` was skipping these in '
-      'silence until 8-oct-2026: it verified 15 fields and passed over %d. The backlog is now '
+      'silence until 8-oct-2026: it passed over all %d. The backlog is now '
       'a declared ratchet at %d that can only go down, printed on every run.'
       % (len(F['confirmado_sin_cota']), len(F['confirmado_sin_cota']),
          F['confirmado_sin_cota_tope']))
@@ -604,20 +556,21 @@ def escribir(dest=DEST_MD):
             w('| `%s` | %s | %s | %s |' % (x['campo'], _f(x['valor'], 3),
                                            ', '.join(x['hojas']), det))
         w('')
-        w('**The `alto_board` row is the one that matters most.** `5/A12.01 PARTITION G` gives '
-          'the RULE ("to underside of structure"); it does not print 15\'-4 1/2". That value '
-          'comes from S2.20. A right number with the wrong source is the same defect as the '
-          '`5/F of S5.20` bracing citation, and it has to be fixed in the GENERATOR of each '
+        w('**A height row (`alto_stud` / `alto_board`) is the one that matters most.** A type '
+          'detail gives the RULE ("to underside of structure"); it does not print the height, '
+          'which comes from the structural sheet. A right number with the wrong source is a '
+          'citation defect, and it has to be fixed in the GENERATOR of each '
           'closer, never in the sealed JSON - a citation fixed in the JSON comes back the next '
           'time the closer runs.')
     else:
         w('None open.')
     w('')
-    w('### 5.4 Sealed closures with NO generator - 19 of the 67 walls')
-    w('')
     import verif_reproducible as VR
     hu = VR.huerfanos()
-    w('**The four blocks below have a sealed closure in the delivery folder and NO closer '
+    n_hu, n_tot = sum(n for _b, n in hu), len(Q)
+    w('### 5.4 Sealed closures with NO generator - %d of the %d walls' % (n_hu, n_tot))
+    w('')
+    w('**The blocks below have a sealed closure in the delivery folder and NO closer '
       'script that produces it.** Only readers touch them (`resumen_global`, `localizar`) and '
       'two scripts PATCH them after the fact (`reetiquetar_a5_alto.py`, `resellar_b2k.py`), '
       'which is itself the proof that they have already had to be edited from outside.')
@@ -636,29 +589,18 @@ def escribir(dest=DEST_MD):
       'declared closers, with the backlog as a ratchet at %d blocks that can only go down.'
       % VR.TOPE_HUERFANOS)
     w('')
-    w('The numbers of those 19 walls are sealed and verified - the seal check passes on all 67 '
+    w('The numbers of those %d walls are sealed and verified - the seal check passes on all %d '
       'and the marked-plan gate matches their labelled LF. What is missing is the ability to '
-      'REGENERATE them, which is what makes a number maintainable rather than merely correct.')
+      'REGENERATE them, which is what makes a number maintainable rather than merely correct.'
+      % (n_hu, n_tot))
     w('')
     w('### 5.5 Tags, sheets and zones not swept')
     w('')
-    w('- **Tags with no wall sealed:** `A5K`, `A6`, `A8` have a row in the A12.01 schedule and '
-      'ZERO occurrences in A02.01, verified by extracting the text of the PDF and not only '
-      'visually. `[CONFIRMADO]` that they are not used in the plan; A08.01 was checked too and '
-      'has no partition tags of its own.')
-    w('- **`B2K`** is a real tag in the plan (NW corner of Cash Window 116, wall #31) and has '
-      'NO row in the A12.01 schedule. Quantified from the 6" row plus the 14 GA note of '
-      '4/A12.01; it stays an RFI.')
-    w('- **Sheets never opened:** %d details are listed as not opened in '
-      '`BOA_COBERTURA_DE_DETALLES.md`, which is generated from the citation gate. That document '
-      'is the authority on what has not been read; it is regenerated on every delivery run.'
-      % 93)
-    w('- **Type C1 wall #36** counts 10.00 LF of front while the box measures 9.293 ft plus two '
-      '8" returns: about 0.63 ft of return board is missing. Known, not yet corrected.')
-    w('- **The three RCP callouts (1, 2, 6) over the MW01 niche** were not opened and are '
-      'declared pending.')
-    w('- **Free-edge blocking of `4/S5.20`** has been swept on the A1 type and on the types '
-      'closed after the rule was written. The types closed BEFORE it still need the sweep.')
+    w('- **Details never opened** are listed in '
+      f'`{_PRE}_COBERTURA_DE_DETALLES.md`, which is generated from the citation gate. That document '
+      'is the authority on what has not been read; it is regenerated on every delivery run.')
+    for nota in NOTAS_FALTANTES:          # del proyecto: handoff_proyecto.json, "notas_faltantes"
+        w('- %s' % str(nota).replace(chr(10), ' '))
     w('')
 
     # ---------------------------------------------------------------- 6

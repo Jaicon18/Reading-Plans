@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """contar_tags.py v65 — cuenta las fixtures por TAG en una hoja del bid set (texto vectorial), DETERMINISTA.
 
-Por qué existe (arbitraje #14, 17-oct-2026): #14B cargó UU3 (canopy norte) x 5 cuando E02.01 dibuja 9 tags UU3
-(+25.66 LF de framed openings). El conteo a ojo varía entre agentes; el texto del PDF no.
+Por qué existe (arbitraje #14, 17-oct-2026): #14B cargó un tag de fixture x <n> cuando la hoja E dibuja <n> tags
+(+<n> LF de framed openings). El conteo a ojo varía entre agentes; el texto del PDF no.
 
 Uso:
   python3 contar_tags.py bidset.pdf E02.01 UU1 UU2 UU3 R-11B [--png salida.png] [--json salida.json]

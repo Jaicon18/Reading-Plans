@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """alcances.py — lista FIJA de alcances (scopes) que todo take-off de metal frame y drywall revisa.
 
-Por qué existe (prueba BOA 13-oct-2026): el registro solo tenía lo que Claude VIO; alcances completos
+Por qué existe (prueba <proyecto> 13-oct-2026): el registro solo tenía lo que Claude VIO; alcances completos
 (ceiling suspension, canopy, exterior FRT plywood) nunca entraron al registro y el take-off se dio por
 entregado. Esta lista no depende de lo que se vio: cada alcance entra al registro desde el inicio y
 tiene que cerrarse CUANTIFICADO o NO APLICA (con hoja y motivo).

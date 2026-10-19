@@ -63,7 +63,7 @@ def main():
 
     # 1. carpeta vacía: falla por los cuatro archivos; estado pide la etapa 1
     with tempfile.TemporaryDirectory() as d:
-        f, _ = T.compuerta(d)
+        f, _ = T.estructura(d)
         check(len(f) == 4 and all(x.startswith("falta") for x in f), f"1 vacía: {f}")
         _, sig = T.estado(d)
         check(sig.startswith("ETAPA 1"), f"1 estado: {sig}")
@@ -71,13 +71,15 @@ def main():
     # 2. todo en disco: PT0003 sin wall en A ni B -> comparar lo alerta -> PASA (la alerta queda a la vista)
     with tempfile.TemporaryDirectory() as d:
         armar(d, inventario(), A, B)
-        f, av = T.compuerta(d)
+        f, av = T.estructura(d)
         check(f == [], f"2 debería pasar: {f}")
+        fc, _ = T.compuerta(d)
+        check(any(x.startswith("reglas:") for x in fc), f"2 v72b: sin canon conciliado reglas.py falla: {fc}")
         check(any("tag_ids" in x for x in av), f"2 aviso tag_ids: {av}")
         check(any("alertas 1" in x for x in av), f"2 aviso alertas: {av}")
         _, sig = T.estado(d)
         check(sig.startswith("ETAPA 3→4"), f"2 estado: {sig}")
-        check(T.main(["etapas.py", "compuerta", d]) == 0, "2 rc")
+        check(T.main(["etapas.py", "compuerta", d]) == 1, "2 rc (v72b: reglas.py sin canon)")
 
     # 3. revisión manipulada: se borra la alerta de PT0003 -> FALLA "sin wall y sin alerta"
     with tempfile.TemporaryDirectory() as d:
@@ -124,17 +126,25 @@ def main():
             json.dump(o, open(os.path.join(d, n), "w"))
         time.sleep(0.02)
         open(os.path.join(d, "revision.json"), "w").write("{roto")
-        f, _ = T.compuerta(d)
+        f, _ = T.estructura(d)
         check(len(f) == 1 and "no es JSON válido" in f[0], f"7: {f}")
         json.dump(C.comparar(A, B, inventario()), open(os.path.join(d, "revision.json"), "w"))
-        f, _ = T.compuerta(d)
+        f, _ = T.estructura(d)
         check(f == [], f"7 plano: {f}")
+
+    # 9. v72b: proyecto sintético completo (fixture_reglas) -> la compuerta corre reglas.py y PASA
+    with tempfile.TemporaryDirectory() as d:
+        import fixture_reglas
+        fixture_reglas.crear(d)
+        f, _ = T.compuerta(d)
+        check(f == [], f"9 fixture: {f}")
+        check(os.path.isfile(os.path.join(d, "reglas_out.json")), "9 reglas_out.json")
 
     # 8. un tag sin wall en una lectura pero con wall en la otra -> no falla (queda como ítem de revisión)
     with tempfile.TemporaryDirectory() as d:
         B2 = canon([w("B1", "X1", 100, 100, 460), w("B2", "X2", 300, 100, 460), w("B3", "X2", 900, 850, 950)])
         armar(d, inventario(), A, B2)
-        f, av = T.compuerta(d)
+        f, av = T.estructura(d)
         check(f == [], f"8: {f}")
         check(any("solo_B 1" in x for x in av), f"8 aviso: {av}")
 

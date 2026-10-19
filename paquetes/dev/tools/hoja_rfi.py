@@ -9,8 +9,9 @@ Entra a la carta todo pendiente cuya columna "Ask" apunte a alguien FUERA de la 
 -- arquitecto, plomeria, campo. Los que dependen de una decision del estimador NO son RFI
 y se listan aparte, para que se vea que no se olvidaron.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, datetime, re
 
@@ -18,8 +19,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import glosario as G
 from openpyxl import load_workbook
 
-LIBRO = f'{_TW}/out/BOA_Broomfield_Takeoff.xlsx'
-DEST = f'{_TO}/entrega/BOA_RFI_al_arquitecto.md'
+LIBRO = f'{_TW}/out/{_PRE}_Takeoff.xlsx'
+DEST = f'{_TO}/entrega/{_PRE}_RFI_al_arquitecto.md'
 FUERA = ('architect', 'plumbing', 'field')       # a quien se le pregunta
 
 
@@ -37,9 +38,9 @@ def leer_pendientes(xlsx=LIBRO):
 
 ENCABEZADO = """# REQUEST FOR INFORMATION — Metal Framing & Drywall
 
-**Proyecto:** Bank of America · Broomfield, CO — NWC Hwy 7 and Palisade Pkwy · CO1-111
-**Set:** Permit / Bid Set, 95 hojas · **Arquitecto:** Nelson Architecture, Inc.
-**De:** JC Hunter · **Fecha:** %(fecha)s · **Alcance:** CSI Div. 05 Metals y Div. 09 Finishes
+**Proyecto:** %(proyecto)s
+**Set:** %(set)s · **Arquitecto:** %(arquitecto)s
+**De:** %(de)s · **Fecha:** %(fecha)s · **Alcance:** CSI Div. 05 Metals y Div. 09 Finishes
 
 ---
 
@@ -99,7 +100,12 @@ def main(xlsx=LIBRO, dest=DEST):
         lin.append('- **%s** (%s) — %s  *Impacto: %s*'
                    % (p['item'], p['area'], (p['det'] or '')[:220].rstrip() + '…', p['imp']))
 
+    _e = _os_rutas.environ.get                # datos del PROYECTO: variables de entorno, no la tool
     txt = (ENCABEZADO % {'fecha': datetime.date.today().strftime('%d-%b-%Y'),
+                         'proyecto': _e('TAKEOFF_PROYECTO', '<proyecto>'),
+                         'set': _e('TAKEOFF_SET', '[PENDIENTE] set / hojas'),
+                         'arquitecto': _e('TAKEOFF_ARQUITECTO', '[PENDIENTE]'),
+                         'de': _e('TAKEOFF_CONTRATISTA', '[PENDIENTE]'),
                          'n': len(rfi), 'n_precio': n_precio}
            + '\n'.join(cuerpo)
            + CIERRE % {'dec': '\n'.join(lin)})

@@ -20,6 +20,9 @@ v67 (17-oct-2026): la compuerta EXIGE ademas
     convencion de types (plantilla_excel.verificar_excel: bloques TYPE, nombres EXT-6CFMF / EXT-PARAPET /
     BULKHEAD-<tag> / CANOPY-COL / OTHER FRAMING, TOTAL fuera de la columna A);
   - contar_tags.py, vigas_sobre_walls.py y test_ciego.py (E24) con rc=0.
+v72b (reglas inviolables): la compuerta corre reglas.py compuerta EN PROCESO en modo final (carpeta de trabajo
+  con takeoff_canon.json, el Excel con el sello de reglas vigente) y exige además una corrida de
+  `reglas.py compuerta` anotada en la bitácora con rc 0. Sin carpeta de trabajo: NO ENTREGABLE. No hay override.
 v68 (arbitraje #16): la misma llamada a plantilla_excel.verificar_excel exige además compra y presentación:
   toda cita "Inputs!Bn" existe; Pieces = ROUNDUP(Purchase / stock) (desperdicio una vez); FRT plywood un renglón
   por material y espesor; sealant exterior aparte del acoustical y en tubes; hanger wire LF en continuous coil;
@@ -152,10 +155,48 @@ OBLIGATORIAS = [
     ("plantilla_excel.py", "armar", ("takeoff", "excel"), "Excel armado del takeoff.json vigente"),
     ("registro.py", "entregable", ("registro",), "0 renglones pendientes (50.5)"),
     ("alcances.py", "compuerta", ("registro", "excel"), "ALCANCES OK contra el Excel final"),
+    ("reglas.py", "compuerta", (), "v72b: reglas inviolables (reglas.py compuerta <work_dir> --excel <final>)"),
 ]
 
 
-def compuerta(takeoff, registro, excel):
+def carpeta_trabajo(takeoff, excel):
+    """v72b: la carpeta con 4_canon/takeoff_canon.json (o takeoff_canon.json) de esta entrega."""
+    import reglas
+    cands = []
+    for base in (os.environ.get("TAKEOFF_WORK"), os.path.dirname(os.path.abspath(takeoff)),
+                 os.path.dirname(os.path.abspath(excel))):
+        if base:
+            cands += [base, os.path.join(base, "etapas"), os.path.join(base, ".."), os.path.join(base, "..", "etapas")]
+    for c in cands:
+        if os.path.isdir(c) and reglas.buscar_canon(c):
+            return os.path.abspath(c)
+    return None
+
+
+def compuerta(takeoff, registro, excel, _desde_reglas=False):
+    """v72b: además corre reglas.py compuerta en modo final (con el Excel: sello vigente + verificar_excel) sobre la
+    carpeta de trabajo. `_desde_reglas` = llamada interna de reglas.py (evita la vuelta)."""
+    fallas_r = []
+    if not _desde_reglas:
+        import reglas
+        w = carpeta_trabajo(takeoff, excel)
+        if w is None:
+            fallas_r.append("REGLAS: no encuentro la carpeta de trabajo con takeoff_canon.json ($TAKEOFF_WORK o junto "
+                            "al takeoff.json): reglas.py compuerta no se puede correr -> NO ENTREGABLE")
+        else:
+            out = reglas.compuerta(w, excel=excel)
+            try:
+                reglas.escribir(out, w)
+            except OSError:
+                pass
+            if not out["ok"]:
+                fallas_r.append("REGLAS: %d falla(s) de reglas inviolables (ver %s)"
+                                % (out["n_fallas"], os.path.join(w, "REGLAS_FALLAS.md")))
+                fallas_r += ["REGLAS: %s | %s | %s" % (x["regla"], x["elemento"], x["valor"]) for x in out["fallas"][:30]]
+    return fallas_r + _compuerta(takeoff, registro, excel, _desde_reglas)
+
+
+def _compuerta(takeoff, registro, excel, _desde_reglas=False):
     rows = leer()
     fallas = []
     if not rows:
@@ -171,6 +212,8 @@ def compuerta(takeoff, registro, excel):
         return fallas
     idx = {}
     for tool, sub, vig, desc in OBLIGATORIAS:
+        if _desde_reglas and tool == "reglas.py":
+            continue
         if tool.startswith("usa:"):
             cand = [(i, r) for i, r in enumerate(rows) if tool[4:] in r.get("usa", [])]
         else:

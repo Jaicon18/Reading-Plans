@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """alcance_filtro.py — clasifica renglones del Material Summary por alcance, DETERMINISTA (regla 60.4).
 
-Por qué existe (arbitraje #10, 16-oct-2026): una corrida sumó 746 LF de "7/8\" hat channel @16\" O.C." del
-sistema de metal panel a la familia furring channel (+746 LF). El sustrato del cladding (hat channel /
+Por qué existe (arbitraje #10, 16-oct-2026): una corrida sumó <n> LF de "7/8\" hat channel @16\" O.C." del
+sistema de metal panel a la familia furring channel (+<n> LF). El sustrato del cladding (hat channel /
 Z-girt / furring del metal panel, ACM, stucco, lath) es del instalador del cladding: EXCLUDED + RFI.
 Ojo: el furring channel de drywall TAMBIÉN es un hat channel 7/8"; por eso "hat channel" solo no basta:
 sin contexto de cladding la tool exige que el agente declare de qué es sustrato (no adivina).

@@ -2,9 +2,9 @@
 """board_caras.py — board DETERMINISTA face por face, regla 60.2.
 
 Por qué existe (arbitraje #10A/#10B, 16-oct-2026): con el mismo skill v59,
-  - 5/8" regular: A 14,302 vs B 17,363. A cargó G/G1 con "layers 2" = TOTAL (1 por face); 5/A12.01 dibuja
-    2 layers POR FACE (9/A12.01 "2 LAYERS 5/8\" GYPSUM WALL BOARD"). -3,234 SF.
-  - ballistic / 3/8": A usó A1K 2.57 y 2.63 ft cuando A02.01 imprime <n>; B midió B2K hasta dentro del
+  - 5/8" regular: A <n> vs B <n> SF. A cargó G/G1 con "layers 2" = TOTAL (1 por face); 5/A12.01 dibuja
+    2 layers POR FACE (9/A12.01 "2 LAYERS 5/8\" GYPSUM WALL BOARD"). -<n> SF.
+  - ballistic / 3/8": A usó A1K <n> y <n> ft cuando A02.01 imprime <n>; B midió B2K hasta dentro del
     wall G (<n> vs <n> neto).
   - MR: A sumó la cara del extremo del chase; B tomó board a ceiling + 6" contra 53.3.
 El campo ambiguo "layers" (¿total o por face?) desaparece: aquí solo existe layers POR FACE, y se valida
@@ -16,11 +16,11 @@ ENTRADA (JSON):
               "4/A12.01": {"layers_per_face": 1, "k_panel": {"panel_to_ft": 8.0}}},
   "walls": [{
      "id": "W11", "tag": "A1K", "detail": "4/A12.01",
-     "length_vector_ft": 2.57,            # medido (cara a cara, 59.3)
+     "length_vector_ft": <n>,             # medido (cara a cara, 59.3)
      "length_printed_ft": <n>,          # cota impresa si existe -> MANDA (#0)
      "faces": [
-        {"room": "Teller side", "board": "5/8 regular", "layers": 1, "height_ft": <n>, "deduct_sf": 0},
-        {"room": "Customer", "board": "5/8 regular", "layers": 1, "height_ft": <n>, "k_customer": true}
+        {"room": "Room A", "board": "5/8 regular", "layers": 1, "height_ft": <n>, "deduct_sf": 0},
+        {"room": "Room B", "board": "5/8 regular", "layers": 1, "height_ft": <n>, "k_customer": true}
      ]}]
 }
 REGLAS:

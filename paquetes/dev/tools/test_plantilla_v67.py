@@ -10,7 +10,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import openpyxl  # noqa: E402
 import accesorios as A  # noqa: E402
 import partition_types as PT  # noqa: E402
-import plantilla_excel as P  # noqa: E402
+import plantilla_excel as P
+# v72b: estos tests revisan el FORMATO del libro con familias sintéticas; armar() exige reglas.py compuerta OK
+# sobre una carpeta de trabajo real. El libro de aquí lleva un sello de test, que bitacora / reglas --excel rechazan.
+SELLO_TEST = {"huella": {"version": "test"}}  # noqa: E402
 import test_accesorios as TA  # noqa: E402
 
 OK = []
@@ -83,7 +86,7 @@ def test_excel_convencion():
     d = P.fusionar(takeoff(), familias_out())
     with tempfile.TemporaryDirectory() as t:
         x = os.path.join(t, "t.xlsx")
-        P.armar(d, x)
+        P._escribir(d, x, SELLO_TEST)
         chk("verificar_excel OK", P.verificar_excel(x) == [], P.verificar_excel(x))
         wb = openpyxl.load_workbook(x)
         ws = wb["Partition Takeoff"]

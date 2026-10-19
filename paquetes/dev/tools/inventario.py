@@ -2,19 +2,19 @@
 """inventario.py v63 — INVENTARIO CERRADO de walls contra la planta. Obligatoria (bitacora.py).
 
 Por qué existe (arbitraje #13, 16-oct-2026): con el mismo skill v62 y el mismo plano, #13A y #13B
-sacaron 1,350 vs 1,507 LF de track, 259 vs 361 SF de MR y 4,183 vs 4,398 LF de 1-5/8". Todas las
+sacaron <n> vs <n> LF de track, <n> vs <n> SF de MR y <n> vs <n> LF de 1-5/8". Todas las
 diferencias vinieron de QUÉ walls existen y dónde empiezan/terminan, no de las fórmulas:
-  - #13B G-4 corrió <n> ft desde la cara del exterior jog de line J (3'-10 1/2") cuando el G arranca
-    en esa cara: <n> (A02.01). +4.6 ft x 2 rows.            -> solape PARALELO con otro wall.
-  - #13A B2K / A1K-S2 de 2.2 ft entrando al G/A1K (planta: <n> / 1.16). -> solape en T más allá del
+  - #13B corrió un wall <n> ft desde la cara de un jog exterior cuando el wall arranca
+    en esa cara (cota impresa en la planta): +<n> ft x <n> rows.  -> solape PARALELO con otro wall.
+  - #13A un stub de <n> ft entrando al wall que lo recibe (planta: <n>). -> solape en T más allá del
     espesor del wall que recibe.
-  - #13B partió los exterior walls en "pieza baja" + "pieza alta" en la canopy beam (lines Fu, 8u, 2u,
-    3u, Ju): +152.5 LF de bottom y de top track con ids nuevos.    -> walls APILADOS en la misma huella.
-  - #13B cargó MR (5/8" MR) al nicho del drinking fountain del corridor (C1-3, +102 SF): F/A08.01 pide
-    MR "BEHIND TOILET AND LAVATORY" y los dos van en las faces del chase C1 (enlarged plan A08.01).
-  - #13B puso purlin en los 6 door bulkheads (perpendiculares al flute, como los stubs GS que no la
-    llevan) y en una 2.ª fila del roof step (RS-3): +72.4 LF.
-  - #13B (bug propio): B2-2a/b tomaron la altura del HI por un id viejo -> altura por zona.
+  - #13B partió los exterior walls en "pieza baja" + "pieza alta" en la canopy beam (varias grid
+    lines): +<n> LF de bottom y de top track con ids nuevos.     -> walls APILADOS en la misma huella.
+  - #13B cargó MR (5/8" MR) al nicho del drinking fountain del corridor (+<n> SF): el detalle de MR pide
+    "BEHIND TOILET AND LAVATORY" y los dos van en las faces del chase (enlarged plan).
+  - #13B puso purlin en los door bulkheads (perpendiculares al flute, como los stubs que no la
+    llevan) y en una 2.ª fila del roof step: +<n> LF.
+  - #13B (bug propio): dos walls tomaron la altura del HI por un id viejo -> altura por zona.
 
 Cada regla es determinista: el agente solo MIDE (banda en la planta, zona, fixture) y la tool decide.
 
@@ -43,7 +43,7 @@ ELEMENTOS_BANDA = ("wall", "pier", "storefront_cripples", "door_bulkhead", "colu
 PURLIN_ELEMS = ("wall", "door_bulkhead", "vestibule_head", "roof_step", "chase",
                 "ceiling_transition", "ceiling_bulkhead")   # v66: track a deck de transiciones / bulkheads (10/A09.33)
 MR_FIXTURES = ("water_closet", "lavatory", "urinal", "mop_sink", "shower")    # F/A08.01 + 53.x
-TOL_FT = 0.15          # largo banda vs canon: 0.15 ft + 1 %
+TOL_FT = 0.15          # largo banda vs canon: TOL_FT + 1 %
 JUNTA_FT = 0.10        # holgura de junta permitida más allá del espesor del wall que recibe
 PARALELO_FT = 0.25     # dos walls paralelos a menos de esto y corriendo juntos = el mismo framing
 

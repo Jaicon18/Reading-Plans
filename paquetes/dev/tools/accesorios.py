@@ -113,8 +113,8 @@ ATM_RE = re.compile(r"\bATM\b", re.I)
 # El canon los sobrescribe con constants.<clave> {value, source}.
 DEFAULTS = {
     "drywall_screws_per_sf": (1.2, "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)"),
-    "joint_compound_lb_per_sf": (0.072, "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)"),
-    "joint_tape_lf_per_sf": (0.37, "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)"),
+    "joint_compound_lb_per_sf": (0.072, "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)"),  # [ciego-ok] criterio genérico del estimador
+    "joint_tape_lf_per_sf": (0.37, "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)"),  # [ciego-ok] criterio genérico del estimador
     "framing_screws_per_stud": (4, "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)"),
     "slab_pin_spacing_ft": (1.0, "Estimator criterion (Handoff - Approved: tightest of the three in the set, "
                                  "SILL TRACK ANCHORAGE interior @ 12\" O.C.)"),
@@ -123,7 +123,7 @@ DEFAULTS = {
     "header_bearing_ft": (8.0 / 12.0, "Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)"),
     "addl_head_track_min_ro_ft": (4.0, "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\""),
     "jamb_return_width_ft": (0.5, "Estimator criterion (return width = 6\" stud depth, not dimensioned; "
-                                  "RFI with delta at 0.20 ft)"),
+                                  "RFI with delta at 0.20 ft)"),  # [ciego-ok] criterio genérico del estimador
     "frp_inside_corners_per_room": (4, "Estimator criterion (4 inside corners per rectangular room)"),
 }
 
@@ -547,7 +547,7 @@ def jamb_return(data, o):
     sf = lf * float(wd)
     o.add(F_JR, sf, "CRITERIO", swd, f"edges {round(lf, 2)} LF x {wd} ft = {round(sf, 2)} SF [{'; '.join(det)}]")
     o.rfis.append({"familia": F_JR, "tema": "jamb return width not dimensioned", "delta": round(lf * (0.2 - wd), 2),
-                   "unidad": "sf", "alternativa": "0.20 ft (frame at mid-wall)"})
+                   "unidad": "sf", "alternativa": "0.20 ft (frame at mid-wall)"})  # [ciego-ok] criterio genérico del estimador
 
 
 def _jr_declarado(data):

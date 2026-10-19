@@ -4,8 +4,9 @@
 Se escribe leyendo la compuerta, no a mano: si mañana se abre un detalle o se declara uno
 como no aplicable, el documento cambia solo.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, json, datetime
 
@@ -13,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import verif_detalles as VD
 import glosario as G
 
-DEST = f'{_TO}/entrega/BOA_COBERTURA_DE_DETALLES.md'
+DEST = f'{_TO}/entrega/{_PRE}_COBERTURA_DE_DETALLES.md'
 TIT = f'{_TW}/titulos_cache.json'
 
 
@@ -26,7 +27,7 @@ def main(dest=DEST):
     n_bar = sum(len(VD.BARRIDO.get(h, {})) for h in uni)
     n_fal = sum(len(s) for _, s, _ in faltan)
 
-    L = ['# COBERTURA DE DETALLES — BofA Broomfield',
+    L = ['# COBERTURA DE DETALLES — %s' % _PRE,
          '',
          'Generado %s por `verif_detalles.py`. **No se escribe a mano**: sale de la '
          'compuerta, así que si se abre un detalle o se declara uno no aplicable, este '
@@ -82,14 +83,11 @@ def main(dest=DEST):
         for n, m in sorted(VD.NO_APLICAN[h].items()):
             L.append('| `%s` | %d | %s |' % (h, n, m))
 
-    L += ['', '## Lo que encontró en su primera run', '',
-          '**`1X1X1 16GA PURLIN` del top track al deck** — A09.33 lo rotula y la palabra '
-          'no aparecía ni una vez en el take-off. **139.21 LF agregados.**', '',
-          '**`8/A09.33 TYPICAL BULKHEAD DETAIL`** — describe la transición de cielo con '
-          '`3 5/8" METAL STUD FRAMING AND TRACK @ 16" O.C.` más bracing @ 48", bastante '
-          'más que el *kicker @ 48"* que decía el pendiente del perímetro.', '',
-          '**9 falsos positivos** — detalles que sí se leyeron pero citados en prosa '
-          '(*"el detalle C1"* en vez de `6/A12.01`). De ahí la regla: **una cita que una '
+    L += ['', '## Por qué existe esta compuerta', '',
+          'Un material que un detalle rotula (p. ej. un purlin del top track al deck) y que '
+          'no aparece ni una vez en el take-off solo se encuentra abriendo CADA detalle.', '',
+          'Un detalle que sí se leyó pero se cita en prosa (*"el detalle del tipo"* en vez de '
+          '`N/HOJA`) cuenta como no abierto. De ahí la regla: **una cita que una '
           'máquina no puede leer no se puede auditar.**']
 
     txt = G.traducir('\n'.join(L))

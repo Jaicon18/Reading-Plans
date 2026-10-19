@@ -27,7 +27,7 @@ Reglas que hace cumplir (todas bloqueantes):
   WASTE      metal 15%, board 6%, sobre neto, por tipo
   COMPLETO   las 11 line items presentes o EXCLUIDAS con motivo
 
-Origen: BofA Broomfield, 18-sep-2026, despues de afirmar que unos detalles
+Origen: prueba <proyecto>, 18-sep-2026, despues de afirmar que unos detalles
 aplicaban sin haber seguido la cadena de referencia.
 """
 
@@ -43,28 +43,23 @@ PARTIDAS_OBLIGATORIAS = (
     "BOARD", "INSULATION", "SEALANT", "BLOCKING", "PATCH", "CONTROL_JOINT",
 )
 
-# Exclusion de alcance de PROYECTO para la junta de control: el motivo es el mismo en los
-# 57 muros y se barrio el set completo una sola vez. Se aplica sola si el cierre no dijo
+# Exclusion de alcance de PROYECTO para la junta de control: el motivo es el mismo en todos
+# los muros y se barre el set completo una sola vez. Se aplica sola si el cierre no dijo
 # nada, para que ningun muro quede sin el renglon -- pero queda VISIBLE en cada cierre.
-CONTROL_JOINT_PROYECTO = (
-    "EXCLUDED. Se barrio el set completo (95 hojas) buscando 'CONTROL JOINT' y "
-    "'EXPANSION JOINT'. Solo aparece en tres sitios y NINGUNO es de gypsum board: "
-    "(1) la lista de abreviaturas de la portada, que define 'CJ  CONTROL JOINT'; "
-    "(2) la hoja civil de pavimentos, con su propio schedule de juntas segun la American "
-    "Concrete Pavement Association; y (3) la leyenda de materiales exteriores de "
-    "A09.01/A09.02, textual: 'CJ CONTROL JOINT; PAINT TO MATCH STUCCO FINISH COLOR' -- "
-    "esa es la junta del ESTUCO (PT-3/PT-4), Div 09 24 00, del plasterer. "
-    "El set no rotula ni detalla ninguna junta de control de gypsum board, ni en A12.01 "
-    "ni en los detalles de A09.27/A09.33, y no hay seccion de especificaciones 09 29 00 "
-    "en el bid set. Contraste: los detalles de A09.33 SI rotulan corner bead, casing bead "
-    "y shadow molding uno por uno, asi que la omision de la junta de control no es "
-    "descuido de rotulacion. Por eso NO se cuantifica. "
+# El texto del barrido es DEL PROYECTO (hojas, sitios donde aparece, maximos medidos): va en
+# $TAKEOFF_CONTROL_JOINT_MOTIVO. Sin el, sale el motivo generico de abajo, que exige el RFI.
+import os as _os_cj
+CONTROL_JOINT_PROYECTO = _os_cj.environ.get("TAKEOFF_CONTROL_JOINT_MOTIVO") or (
+    "EXCLUDED. Se barre el set completo buscando 'CONTROL JOINT' y 'EXPANSION JOINT' "
+    "(abreviaturas, civiles, leyendas de materiales exteriores, schedule de partitions, "
+    "detalles de ceilings y specs 09 29 00). Una junta de estuco / plaster (Div 09 24 00) o "
+    "de pavimento NO es de gypsum board. Si el set no rotula ni detalla ninguna junta de "
+    "control de gypsum board, NO se cuantifica. "
     "RFI: ASTM C840 y GA-216 piden junta de control en paños de gypsum de mas de 30 ft "
-    "corridos y en ceilings de mas de 2,500 SF (50 ft sin junta). Aqui ningun wall llega a "
-    "30 ft (el mayor es el exterior este con 76.30 LF, pero va interrumpido por 4 windows) "
-    "y ningun cielo de gyp pasa de 510.80 SF, asi que por norma podria no hacer falta "
-    "ninguna. Se pide confirmacion por escrito antes del award; si el arquitecto las "
-    "quiere, se valorizan como alterno."
+    "corridos y en ceilings de mas de 2,500 SF (50 ft sin junta); se compara con el wall "  # [ciego-ok] norma
+    "mas largo sin interrupcion y el ceiling de gyp mas grande del proyecto. Se pide "
+    "confirmacion por escrito antes del award; si el arquitecto las quiere, se valorizan "
+    "como alterno."
 )
 
 METAL = ("STUD", "TRACK_BOTTOM", "TRACK_TOP", "HEADER", "BRACING", "CLIPS")
@@ -182,7 +177,7 @@ class Wall:
     def base(self, largo_ft: Val, alto_stud_ft: Val, oc_in, brace_sp_in, hileras=1):
         """rows = numero de ROWS DE STUD del wall.
 
-        Un wall acustico de doble row (tipo G de BofA: dos rows de 1 5/8" con
+        Un wall acustico de doble row (p. ej. dos rows de 1 5/8" con
         Soundguard isolator entre ellas) lleva DOS juegos de track y DOS rows de
         studs, o sea 4 runs de track, no 2. Antes esto era incerrable: la compuerta
         exigia 2.00 runs siempre y rechazaba el cierre correcto."""
@@ -221,7 +216,7 @@ class Wall:
         # los detalles y cita la hoja y los detalles").
         #
         # Antes la hoja se exigia SOLO a CONFIRMADO; a DERIVADO le bastaba escribir la
-        # operacion. Por ese hueco salio el track de la marquesina -- 96.09 LF, DERIVADO,
+        # operacion. Por ese hueco salio el track de la marquesina -- <n> LF, DERIVADO,
         # `fuente: None` -- un numero legal para la compuerta y sin ningun detalle detras.
         # Una derivacion tambien descansa sobre algo DIBUJADO, y eso tiene hoja y numero.
         #
@@ -269,7 +264,7 @@ class Wall:
         if not self.caras:
             F.append("el wall no tiene ni una face definida")
 
-        # 1. completitud de partidas (admite renglones por cara: "BOARD:Cuarto 122")
+        # 1. completitud de partidas (admite renglones por cara: "BOARD:<cuarto>")
         def prefijos(d):
             return {k.split(":", 1)[0] for k in d}
         def _at2(a, k):
@@ -311,7 +306,7 @@ class Wall:
                     corridas = tot / self.largo.v
                     esperado = 2.0 * self.hileras
                     # v62 (#12B): cada LF viene redondeado a 0.01 -> el cociente puede errar 0.01 / L por
-                    # renglón; un stub de 0.33 ft daba 4.02 vs 4.00 y se rechazaba con tolerancia fija 0.02.
+                    # renglón; un stub corto daba 4.02 vs 4.00 y se rechazaba con tolerancia fija 0.02.
                     tol = 0.02 + 0.02 / max(self.largo.v, 0.01)
                     if abs(corridas - esperado) > tol + 1e-9:
                         F.append(f"TRACK: LF total {tot:.2f} / length {self.largo.v:.2f} "

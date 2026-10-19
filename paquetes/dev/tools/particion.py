@@ -7,7 +7,7 @@ Por qué existe: dos lecturas del mismo plano daban walls por type distintos por
 se parten con la misma.
 
 v70 — DECISIÓN TOMADA (criterio del estimador): MODO_DEFAULT = "run". Un run continuo del mismo partition type con
-quiebres o esquinas = 1 wall. "tramo" queda como opción (--modo tramo) para comparar o para un set que lo pida.
+quiebres o esquinas = un wall. "tramo" queda como opción (--modo tramo) para comparar o para un set que lo pida.
 v70 — door_bulkhead se tipa BULKHEAD-<familia> (familia = letras iniciales del tag, convención de
 partition_types.py R7: G1 -> G, G -> G, A1K -> A; sin tag usa `bulkhead_of`): el bulkhead nunca se une con sus
 walls G / G1. La unión de "tramo" es por componentes conexas (union-find): el resultado no depende del orden de
@@ -23,13 +23,13 @@ por wall el canon contra la lista de walls del estimador, el estimador corta as�
      wall (R70.3); un hueco colineal solo se cruza si un R.O. de esos walls cae en él (aviso). Un hueco vacío
      (alcove, pasillo) o con otro type (door_bulkhead, storefront) corta.
   2. Una ESQUINA (L), un JOG (eje desplazado) o una T entre dos líneas CON TAG = dos walls (cada tag marca su
-     wall; dos tags sobre la misma línea = 1 wall).
+     wall; dos tags sobre la misma línea = un wall).
   3. Un segmento SIN tag (return, jog, cierre) se suma al wall con tag que toca por el extremo (el más largo si
-     toca dos). Un grupo conexo SIN ningún tag (p. ej. un alcove en U sin tag) = 1 wall: es el caso del criterio
-     del estimador ("run continuo con quiebres = 1 wall").
+     toca dos). Un grupo conexo SIN ningún tag (p. ej. un alcove en U sin tag) = un wall: es el caso del criterio
+     del estimador ("run continuo con quiebres = un wall").
      Sin tag_ids en todo el type: anclas = tramos > jog_max_ft; return / jog <= jog_max_ft se suma al que toca.
   4. Exteriores / parapets / CFMF: un wall por eje / fachada (regla 1), nunca se encadenan esquinas.
-  5. Box cerrado (pier, column wrap; sin band H|V) = 1 wall.
+  5. Box cerrado (pier, column wrap; sin band H|V) = un wall.
   6. (v72, R72.7) Un grupo suelto SIN tag de largo total <= STUB_MAX_FT (6") no es wall: es el stub de un jamb o el
      remate de un frente cortado por otro type; su LF se suma al wall con tag más cercano del mismo type.
   Si un type no trae `tag_ids` en ningún segmento, se corta en cada esquina (regla 1) y se avisa.

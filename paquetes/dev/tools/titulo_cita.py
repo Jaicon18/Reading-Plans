@@ -6,8 +6,8 @@ Hace falta porque verif_citas solo sabe si el NUMERO existe.  "5/S5.20" existe
 dentro de 1/S5.20.  Un numero que existe y no corresponde es el error peor,
 porque pasa cualquier revision que solo compare numeros.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, json, collections, warnings
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

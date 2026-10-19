@@ -2,10 +2,10 @@
 """hoja_indice.py -- genera 00_INDICE_DE_ARCHIVOS.md LEYENDO la carpeta de entrega.
 
 Por que existe (error del 01-oct-2026):
-    El indice estaba escrito a mano. Decia "77 elementos" cuando ya eran 78, "58 scripts"
-    cuando ya eran 72, "la carta de RFIs todavia no existe" cuando ya existia, y seguia
+    El indice estaba escrito a mano. Decia "<n> elementos" cuando ya eran <n>, "<n> scripts"
+    cuando ya eran <n>, "la carta de RFIs todavia no existe" cuando ya existia, y seguia
     pidiendo borrar un plano que Rodolfo ya habia borrado. Es el MISMO patron que ya
-    habia obligado a generar BOA_ESTADO.md y la carta de RFIs desde el libro: un
+    habia obligado a generar el ESTADO.md y la carta de RFIs desde el libro: un
     documento escrito a mano se queda viejo y MIENTE, y el indice es justo el documento
     que se abre primero. Si miente el indice, no sirve nada de lo que apunta.
 
@@ -15,8 +15,9 @@ Regla que impone:
     libro. Un archivo que esta en la carpeta y no en el indice es imposible, y un archivo
     que esta en el indice y no en la carpeta tambien.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, glob, json, datetime
 
@@ -57,16 +58,11 @@ GRUPOS = [
 
 # Descripcion de los .md de respaldo. El que no este aqui toma su propio titulo H1, para
 # que un documento nuevo aparezca igual en el indice en vez de desaparecer en silencio.
+# Solo los documentos que generan las tools: los cierres propios de cada proyecto van por su H1.
 DOCS = {
- 'BOA_ESTADO.md': '**Resumen del estado.** Se genera LEYENDO el Excel, no se escribe a mano',
- 'BOA_RFI_al_arquitecto.md': '**La carta de RFIs**, lista para mandar. Se genera de la hoja `Pending Items`',
- 'BOA_COBERTURA_DE_DETALLES.md': '**Que detalle del set se abrio y cual no**, con el motivo de cada exclusion. Se genera de la compuerta `verif_detalles.py`',
- 'BOA_AUDITORIA_correcciones_2026-09-28.md': 'Los 14 hallazgos de la auditoria adversarial y como se corrigio cada uno',
- 'BOA_EXTERIORES_cerrado.md': 'Cierre completo de los walls exteriores, pasadas 1 y 2',
- 'BOA_CIELOS_GWB_cerrado.md': 'Cierre de los ceilings de board',
- 'BOA_SOFFITS.md': 'Cierre del soffit CSR y la marquesina',
- 'BOA_SOFFITS_metal_frame.md': 'La metal framing de los soffits, por separado',
- 'BOA_correccion_planos_marcados.md': 'Los 6 errores de dibujo del 27-sep y su correccion',
+ f'{_PRE}_ESTADO.md': '**Resumen del estado.** Se genera LEYENDO el Excel, no se escribe a mano',
+ f'{_PRE}_RFI_al_arquitecto.md': '**La carta de RFIs**, lista para mandar. Se genera de la hoja `Pending Items`',
+ f'{_PRE}_COBERTURA_DE_DETALLES.md': '**Que detalle del set se abrio y cual no**, con el motivo de cada exclusion. Se genera de la compuerta `verif_detalles.py`',
  'PROMPT_take-off_VIGENTE.md': '**El prompt que va en settings.** Nombre fijo: se REEMPLAZA, no se versiona',
  'SKILL_take-off_VIGENTE.md': '**El protocolo completo**, con el porque de cada regla. Nombre fijo',
 }
@@ -120,7 +116,7 @@ def _estado(xlsx):
     wb.close()
     # Los pendientes NO se vuelven a leer aqui: su lector es hoja_rfi.leer_pendientes, el
     # mismo que escribe la carta. Leerlos por mi cuenta, buscando la columna por nombre,
-    # dio 18 renglones vacios -- la hoja no tiene encabezado 'ask'/'item', va por posicion.
+    # dio <n> renglones vacios -- la hoja no tiene encabezado 'ask'/'item', va por posicion.
     # Un renglon vacio en el indice es peor que ninguno: parece que el pendiente existe y
     # no dice cual.
     import hoja_rfi as RFI
@@ -130,7 +126,7 @@ def _estado(xlsx):
 
 def main(xlsx=None, dest=DEST):
     import glosario as G
-    xlsx = xlsx or os.path.join(ENTREGA, 'BOA_Broomfield_Takeoff.xlsx')
+    xlsx = xlsx or os.path.join(ENTREGA, f'{_PRE}_Takeoff.xlsx')
     hojas, pend = _estado(xlsx)
 
     import verif_planos as VP
@@ -142,7 +138,7 @@ def main(xlsx=None, dest=DEST):
     n_ins = len(json.load(open(mani, encoding='utf-8'))['fuentes'])\
         if os.path.exists(mani) else 0
     # Los elementos sellados no son solo muros: tambien cielos, soffits, marquesina y los
-    # cierres sueltos. Decir "57" cuando el sello dice 78 es la clase de numero que luego
+    # cierres sueltos. Decir "<n> muros" cuando el sello dice <n> elementos es la clase de numero que luego
     # alguien cita como total del proyecto.
     #
     # Y NO se vuelve a contar aqui: el dueno de ese numero es resumen_total.py, el mismo que
@@ -175,7 +171,7 @@ def main(xlsx=None, dest=DEST):
     n_fal = sum(len(s) for _, s, _ in faltan)
 
     L = ['# INDICE DE ARCHIVOS -- Take-Off Claude',
-         '## Bank of America - Broomfield, CO - Permit Set / Bid Set', '',
+         '## %s' % _os_rutas.environ.get('TAKEOFF_PROYECTO', _PRE), '',
          'Generado **%s** por `hoja_indice.py`, el ultimo paso de `entregar.py`. '
          '**No se escribe a mano**: lista lo que la carpeta TIENE, contado por el sistema '
          'de archivos, y lo que el estado sellado DICE, leido de los cierres y del libro. '
@@ -253,11 +249,11 @@ def main(xlsx=None, dest=DEST):
     L += ['---', '', '# 5. Lo que falta para cerrar el proyecto', '',
           '**%d pendientes**, cada uno con su motivo y a quien pedirselo en la hoja '
           '`Pending Items` del Excel. La carta lista para mandar es '
-          '`BOA_RFI_al_arquitecto.md`.' % len(pend), '',
+          f'`{_PRE}_RFI_al_arquitecto.md`.' % len(pend), '',
           '| pendiente | a quien |', '|---|---|']
     L += ['| %s | %s |' % (i[:90], a) for i, a in pend]
     L += ['', 'Y **%d detalles del set sin abrir** -- la lista esta en '
-          '`BOA_COBERTURA_DE_DETALLES.md`.' % n_fal, '']
+          f'`{_PRE}_COBERTURA_DE_DETALLES.md`.' % n_fal, '']
 
     txt = G.traducir('\n'.join(L))
     open(dest, 'w', encoding='utf-8').write(txt)

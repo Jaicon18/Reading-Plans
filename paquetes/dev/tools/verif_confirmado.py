@@ -6,17 +6,17 @@ REGLA #0 DE RODOLFO, su propia definicion: `[CONFIRMADO]` = cota impresa, citand
 no hay terreno intermedio, y la jerarquia que las ordena es: **cota impresa > suma de cadena >
 pixeles**; los pixeles sirven para verificar o desambiguar, nunca para sustituir.
 
-ORIGEN (7-oct-2026, verificando el muro A1 #6). El cierre citaba, correctamente, la cota
-impresa `5'-6"` de A02.01 -- ticks comprobados en x=1522.9 y x=1622.2, que son justo los dos
-extremos del muro -- y sellaba **5.51**. Pero 5'-6" son **5.500 ft**. El 5.51 es la medicion
-por geometria (99.24 pt / 18 = 5.513) redondeada: o sea, el numero que se sello salio de los
-PIXELES y llevaba la etiqueta de la COTA. El error es de 0.013 ft y no habria roto nada; lo
+ORIGEN (7-oct-2026, verificando un muro). El cierre citaba, correctamente, la cota
+impresa de la planta -- ticks comprobados en los dos extremos del muro -- y sellaba la
+medicion por geometria (pt / 18 a 1/4"=1'-0") redondeada a 2 decimales, que no era la cota:
+o sea, el numero que se sello salio de los PIXELES y llevaba la etiqueta de la COTA. El
+error era de milesimas de ft y no habria roto nada; lo
 que importa es que la etiqueta decia una cosa y el numero venia de otra, y asi es como un
 valor medido se cuela con la autoridad de uno impreso.
 
 QUE EXIGE, sin escapatorias:
     todo numero `[CONFIRMADO]` cuyo texto cite una o mas cotas impresas tiene que ser IGUAL a
-    alguna de ellas, con la tolerancia del redondeo a 2 decimales (0.005 ft).
+    alguna de ellas, con la tolerancia del redondeo a 2 decimales (TOL, abajo).
 
 Un multiplo, una suma, una cota mas el espesor de un detalle -- 4 openings x <n>, o
 `<n> del ceiling + 6" del detalle 3/A12.01` -- NO son cota impresa: son un CALCULO, y por la
@@ -29,8 +29,8 @@ OJO CON LA ESCALA (falso positivo real): el rotulo de escala de un detalle -- `3
 ft, y entonces TODA partida que citara un detalle salia marcada. Se descarta el `1'-0"` que
 viene inmediatamente despues de un `=`.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import json, os, re, sys
 
@@ -48,8 +48,8 @@ ESCALA = re.compile(r"=\s*$")    # lo que va justo antes de la cota
 # UN [CONFIRMADO] QUE NO CITA NINGUNA COTA ES EL HUECO MAS GRANDE QUE TUVO ESTA COMPUERTA
 # (8-oct-2026). La version original hacia `if cs and not any(...)`: si el texto citado no
 # traia NINGUNA cota impresa, no se revisaba nada y el campo pasaba en silencio. Medido el
-# dia que se encontro: 15 campos citaban cota y cuadraban, y **67 no citaban ninguna**. O
-# sea que la compuerta verificaba 15 de 82 y su "OK" era casi vacio.
+# dia que se encontro: <n> campos citaban cota y cuadraban, y **<n> no citaban ninguna**. O
+# sea que la compuerta verificaba <n> de <n> y su "OK" era casi vacio.
 #
 # > [CONFIRMADO] significa "este valor ES la cota impresa de la hoja que cito". Si el texto
 # > no trae ninguna cota, la afirmacion no se puede comprobar, y una afirmacion que no se
@@ -57,11 +57,10 @@ ESCALA = re.compile(r"=\s*$")    # lo que va justo antes de la cota
 # > PENDIENTE.
 #
 # Se encontro armando el HANDOFF, porque un handoff obliga a mirar la etiqueta de cada dato
-# en vez de la cantidad. Lo destapo `verif_coherencia.py` al ver el MISMO <n> de S2.20
-# sellado CONFIRMADO en 12 walls y DERIVADO en 4.
+# en vez de la cantidad. Lo destapo `verif_coherencia.py` al ver el MISMO <n> de la hoja estructural
+# sellado CONFIRMADO en <n> walls y DERIVADO en <n>.
 #
-# PAGADO 67 -> 26 el mismo dia, arreglando los GENERADORES de cerrar_G_v2, cerrar_G1,
-# cerrar_G52_v2, cerrar_F y cerrar_A1K: eran la height de stud etiquetada CONFIRMADO sobre una
+# PAGADO <n> -> <n> el mismo dia, arreglando los GENERADORES (closers) de varios types: eran la height de stud etiquetada CONFIRMADO sobre una
 # ELEVACION, y el alto_board etiquetado CONFIRMADO citando el detalle de tipo, que da la REGLA
 # ("to underside of structure") y no el VALOR. Ahora los dos son DERIVADO con su operacion y la
 # cita nombra las DOS hojas: A12.01 la regla, S2.20 el valor.
@@ -69,12 +68,12 @@ ESCALA = re.compile(r"=\s*$")    # lo que va justo antes de la cota
 # de hoy por una deuda que ya venia, pero el numero se imprime en cada corrida y tiene que
 # ir bajando -- igual que TOPE_ES. Se paga ARREGLANDO EL GENERADOR, no la salida.
 # ---------------------------------------------------------------------- 10-oct-2026
-# ATRASO SALDADO: 20 -> 1. Los 19 que se pagaron eran DOS clases, no diecinueve casos:
+# ATRASO SALDADO: <n> -> <n>. Los que se pagaron eran DOS clases, no <n> casos:
 #
-#  (a) 4 campos `alto_stud` de los walls exteriores etiquetados [CONFIRMADO] citando el
+#  (a) <n> campos `alto_stud` de los walls exteriores etiquetados [CONFIRMADO] citando el
 #      B.O.D. La height es esa ELEVACION menos el datum T/SLAB 0'-0": una RESTA. Es la
 #      regla de la adenda v42 que ya se habia aplicado al A1K y que aqui seguia pendiente.
-#  (b) 15 cantidades que citaban el detalle que establece el ITEM y no el VALOR -- el
+#  (b) <n> cantidades que citaban el detalle que establece el ITEM y no el VALOR -- el
 #      sheathing del canopy, sus TEKS, el corner bead / blocking / trim del soffit, el
 #      board W.R. de los banos. La cita prueba que el material VA; el numero es una
 #      cuenta. Es la misma regla de la v42 ("un detalle de tipo da la REGLA, no el
@@ -85,15 +84,17 @@ ESCALA = re.compile(r"=\s*$")    # lo que va justo antes de la cota
 # EL QUE QUEDA, declarado con su motivo. No es una cota: es un CONTEO leido directo de la
 # hoja, y esos no tienen cota que citar. Se deja a la vista en vez de debilitar la regla
 # o de inventarle una cota.
-CONTEOS_DIRECTOS = {
- ('CIELOS CIELO-70', 'partidas.ACCESS_PANEL.val'):
-   'No es una dimension, es un CONTEO: se recorrieron los 12 key notes de A04.01 y sus '
-   'marcadores sobre la planta, y el unico "2\' X 2\' LOCKING ACCESS PANEL" (key note 4) '
-   'cae dentro del VESTIBULE 100. El valor 1 ea sale de contar marcadores en la hoja, no '
-   'de medir nada, asi que no hay printed dimension que citar. Se declara en vez de '
-   'bajarlo a [DERIVADO], porque DERIVADO obliga a escribir una operacion y aqui no hay '
-   'operacion: hay una lectura directa.',
-}
+# Los conteos directos son DEL PROYECTO (elemento, campo y motivo): se leen de
+# $TAKEOFF_WORK/conteos_directos.json = [{"elemento": ..., "campo": ..., "motivo": ...}].
+def _conteos_directos():
+    p = os.path.join(B, 'conteos_directos.json')
+    try:
+        return {(d['elemento'], d['campo']): d['motivo'] for d in json.load(open(p, encoding='utf-8'))}
+    except (OSError, ValueError, KeyError, TypeError):
+        return {}
+
+
+CONTEOS_DIRECTOS = _conteos_directos()
 
 TOPE_SIN_COTA = 0
 

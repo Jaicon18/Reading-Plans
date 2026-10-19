@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 """verif_caras.py -- COMPUERTA: los rooms que nombra la ubicacion son los de las faces.
 
-ORIGEN (8-oct-2026, verificando los walls A1 #2, #3, #4 y #7). Cuatro walls seguidos con el
+ORIGEN (8-oct-2026, verificando walls de un mismo type). Varios walls seguidos con el
 mismo patron: la `ubicacion` nombraba dos rooms y las `caras` nombraban otros.
 
-  A1 #2 y #3  ubicacion "MW01 niche / Calling Cubes 122"  ->  faces Calling Cubes 122 y
-              **Corridor 111**. El corridor no llega al nicho: queda al oeste del wall
-              vertical de x=1224-1228. La height no cambiaba (los dos bands a <n>), pero el
-              nombre si, y el nombre es lo que lee quien compra y quien instala.
-  A1 #7       las DOS faces decian "Break Room 118". La ESTE da a CASH WINDOW 116, cuyo
-              ceiling es ACT-4 a 9'-0" -> board a 9.50, no 9.00. **+0.87 SF** que faltaban.
-  A1 #4       el caso contrario: las dos faces decian "Corridor 111" y la ubicacion decia
-              "entry from Central Zone". Ahi las faces TENIAN razon -- se comprobo que la
-              reticula del ceiling cruza el wall sin interrupcion -- y fiarse de la ubicacion
-              habria subido una face a 12.00 ft y metido +15 SF que no existen.
+  caso 1      la ubicacion nombraba un nicho y un room; las faces, ese room y un corridor
+              que no llega al nicho (queda del otro lado de un wall vecino). La height no
+              cambiaba, pero el nombre si, y el nombre es lo que lee quien compra y quien
+              instala.
+  caso 2      las DOS faces decian el mismo room. Una da a otro room, con otro ceiling ->
+              otra altura de board: faltaban <n> SF.
+  caso 3      el caso contrario: las faces TENIAN razon y la ubicacion no -- se comprobo que
+              la reticula del ceiling cruza el wall sin interrupcion -- y fiarse de la
+              ubicacion habria subido una face y metido +<n> SF que no existen.
 
 > **Ninguno de los dos lados manda por si solo: cuando la ubicacion y las faces no coinciden,
 > hay que ir al plano.** Lo que esta compuerta hace es IMPEDIR que la discrepancia pase
@@ -30,14 +29,18 @@ import os, re, sys, unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import resumen_global as RG
 
-# Discrepancias REALES ya verificadas contra el plano, con su motivo escrito.
-DECLARADAS = {
-    'A1 #6': ('La ubicacion dice "Break Room 118 / Future FCAM" y la face se llama Cash '
-              'Window 116: el area FUTURE FCAM esta DENTRO del room Cash Window 116, y asi lo '
-              'dice la propia operacion de la height. Comprobado en A04.01.'),
-    'G #47': ('La ubicacion dice "teller line" y la face "Teller line": es el mismo room, '
-              'escrito con mayuscula distinta.'),
-}
+# Discrepancias REALES ya verificadas contra el plano, con su motivo escrito. Son DEL
+# PROYECTO: se leen de $TAKEOFF_WORK/caras_declaradas.json = {"<tag> #<n>": "<motivo>"}.
+def _declaradas():
+    import json
+    p = os.path.join(os.environ.get('TAKEOFF_WORK', os.getcwd()), 'caras_declaradas.json')
+    try:
+        return dict(json.load(open(p, encoding='utf-8')))
+    except (OSError, ValueError, TypeError):
+        return {}
+
+
+DECLARADAS = _declaradas()
 
 
 def _norm(t):

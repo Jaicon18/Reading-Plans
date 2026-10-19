@@ -16,15 +16,15 @@ Historia:
       y #11B. El canopy fascia box (7/A09.26), los lados del CSR soffit (10/A09.33) y las transiciones de
       ceiling (7/A09.33) TIENEN studs verticales entre dos tracks, pero la referencia (arbitraje #8, regla
       58.2 c) los lleva en "track de ceilings / soffits": bottom/top track es SOLO de walls. #11A movió
-      fascia + CSR + transiciones a bottom/top (+357 LF, ceiling -480); #11B movió los drops de Waiting 104.
+      fascia + CSR + transiciones a bottom/top (+<n> LF, ceiling -<n>); #11B movió los drops de room <ref>.
       Ahora la familia sale del ELEMENTO (lista cerrada); la orientación solo decide el bracing.
       Además: bottom y top se reportan POR SEPARADO (cada uno = L x rows), purlin = 0.75 x L de top track
       a deck paralelo al flute (10/A09.33), y el bracing NO cruza el vacío de una abertura.
   v62 (arbitraje #12, 16-oct-2026): (a) purlin = UNA pieza por corrida aunque el wall tenga 2 rows de stud
       (59.1; ref v4 "double-row G counted once: one purlin across >= 2 flutes spans both 1-5/8\" tracks").
-      #12A y #12B multiplicaban por rows (+60.2 LF en los G). (b) bottom track puede descontar el R.O. de las
+      #12A y #12B multiplicaban por rows (+<n> LF en los walls de doble row). (b) bottom track puede descontar el R.O. de las
       doors SOLO si el take-off lo declara con fuente (bottom_track_deduct_doors {value, source}); sin eso
-      L x rows y la tool informa el delta como RFI (#12A RFI-30, -63 LF).
+      L x rows y la tool informa el delta como RFI (#12A RFI, -<n> LF).
 
 ENTRADA (JSON):
 {

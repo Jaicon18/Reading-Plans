@@ -10,7 +10,10 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import openpyxl  # noqa: E402
-import plantilla_excel as P  # noqa: E402
+import plantilla_excel as P
+# v72b: estos tests revisan el FORMATO del libro con familias sintéticas; armar() exige reglas.py compuerta OK
+# sobre una carpeta de trabajo real. El libro de aquí lleva un sello de test, que bitacora / reglas --excel rechazan.
+SELLO_TEST = {"huella": {"version": "test"}}  # noqa: E402
 import test_plantilla_v67 as T7  # noqa: E402
 
 OK = []
@@ -82,7 +85,7 @@ def armado(d=None, fo=None):
     d = P.fusionar(d or takeoff(), fo or fo_base())
     t = tempfile.mkdtemp()
     x = os.path.join(t, "t.xlsx")
-    P.armar(d, x)
+    P._escribir(d, x, SELLO_TEST)
     return d, x
 
 
@@ -138,7 +141,7 @@ def test_compra_inputs_y_desperdicio_una_vez():
     chk("stud: ROUNDUP(Purchase / Inputs B10)", P.formula_piezas(stud, 9) == "=ROUNDUP(F9/Inputs!$B$10,0)",
         P.formula_piezas(stud, 9))
     d2 = dict(T7.takeoff(), materials=[stud])
-    t = tempfile.mkdtemp(); x2 = os.path.join(t, "s.xlsx"); P.armar(d2, x2)
+    t = tempfile.mkdtemp(); x2 = os.path.join(t, "s.xlsx"); P._escribir(d2, x2, SELLO_TEST)
     chk("stud: 6 sticks", filas_ms(x2)[stud["material"]][7] == 6, filas_ms(x2)[stud["material"]])
     wb = openpyxl.load_workbook(x2); ws = wb["Material Summary"]
     ws["H4"] = "=ROUNDUP(ROUNDUP(F4/13,0)/MAX(1,INT(20/13)),0)"; y = os.path.join(t, "m.xlsx"); wb.save(y)

@@ -10,17 +10,17 @@ Por que las dos: el protocolo dice "verifica el rotulo real en el title block de
 (el indice puede estar desfasado)" y tambien "nunca declares una hoja faltante sin haber
 barrido TODO el PDF por rotulo". Ninguna de las dos fuentes sola alcanza:
   - el indice trae hojas que el set puede no incluir (las civiles C*, por ejemplo);
-  - el lector de title block se equivoca donde el rotulo tiene otra forma: leyo A02.02 en
-    tres paginas seguidas y en A03.01 tomo texto de la PLANTA como titulo.
+  - el lector de title block se equivoca donde el rotulo tiene otra forma: leyo la misma hoja en
+    varias paginas seguidas y en A03.01 tomo texto de la PLANTA como titulo.
 Asi que el indice manda para el TITULO y el title block manda para QUE PAGINA del PDF es, y
 donde se contradicen el handoff lo DICE en vez de elegir.
 
 El indice de A00.00 esta en COLUMNAS. Reconstruir por renglon completo mezcla la columna de
-consultores y la de revisiones con el titulo ("A09.21 WALL SECTIONS Tel: (817) 328-3217").
-La columna vecina empieza en x=2754, asi que el titulo se corta ahi.
+consultores y la de revisiones con el titulo ("<hoja> WALL SECTIONS Tel: <telefono>").
+La columna vecina empieza en X_FIN_TITULO, asi que el titulo se corta ahi.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, pickle, json, collections
 
@@ -75,7 +75,7 @@ def revisiones():
 
 
 def paginas():
-    """[(page_index, hoja_leida_del_title_block, titulo_leido)] de las 94 paginas."""
+    """[(page_index, hoja_leida_del_title_block, titulo_leido)] de todas las paginas."""
     f = pickle.load(open(MAPA, 'rb'))
     return [(x['page_index'], x['hoja'], x['titulo']) for x in f]
 
@@ -124,10 +124,10 @@ def cotejo():
 
 # ---------------------------------------------------------------------------------------
 # EL NUMERO DE HOJA DEL TITLE BLOCK ES EL TEXTO MAS GRANDE QUE TIENE SU FORMA (8-oct-2026).
-# El detector de `arranque.py` dejo 20 de 94 paginas sin numero y leyo mal otras: en A03.01
+# El detector de `arranque.py` dejo <n> paginas sin numero y leyo mal otras: en A03.01
 # tomo texto de la PLANTA como titulo. El rotulo del title block se imprime a ~37 pt y nada
 # mas en la hoja se le acerca, asi que ordenar por TAMANO DE LETRA lo resuelve sin depender
-# de en que esquina este. Comprobado: con esta regla la pagina 74 sale M00.04, que el otro
+# de en que esquina este. Comprobado: con esta regla salen hojas M que el otro
 # detector no leia.
 RE_NUM_TB = re.compile(r'^([A-Z]{1,2}\d{2}\.\d{2}|[A-Z]\d\.\d{1,2})$')
 SIZE_MIN = 20.0                  # el rotulo va a ~37 pt; las referencias internas a ~12
@@ -144,7 +144,7 @@ def numero_de_title_block(ws):
 
 
 def paginas_por_tamano():
-    """[(page_index, hoja, tamano)] de las 94 paginas, con el detector por tamano."""
+    """[(page_index, hoja, tamano)] de todas las paginas, con el detector por tamano."""
     DW = pickle.load(open(WORDS, 'rb'))
     out = []
     for d in sorted(DW, key=lambda x: x['i']):
@@ -154,12 +154,11 @@ def paginas_por_tamano():
 
 
 def reconciliar():
-    """Cuadra 94 paginas contra 92 hojas del indice, y DICE con que las cuadra.
+    """Cuadra las paginas del PDF contra las hojas del indice, y DICE con que las cuadra.
 
-    Resultado del set de BofA: las 94 paginas son las 92 hojas del Drawing Index mas DOS
-    copias extra de A02.02 ROOF PLAN, que el PDF trae tres veces (paginas 25, 26 y 27,
-    verificadas una por una contra el PDF, no contra el cache). 92 + 2 = 94: el set no le
-    falta ninguna hoja del indice y no trae ninguna que el indice no liste.
+    Caso tipico: paginas = hojas del Drawing Index + copias extra de una hoja que el PDF trae
+    repetida (verificadas una por una contra el PDF, no contra el cache). indice + extras =
+    paginas: el set no le falta ninguna hoja del indice y no trae ninguna que el indice no liste.
     """
     idx = dict(indice())
     pag = paginas_por_tamano()
@@ -175,11 +174,11 @@ def reconciliar():
                 duplicadas=extra, sin_pagina=falta, fuera_del_indice=nolista)
 
 
-# LAS 18 PAGINAS SIN ROTULO LEGIBLE SON LAS 18 HOJAS CIVILES Y DE LANDSCAPE -- por CUENTA,
+# LAS N PAGINAS SIN ROTULO LEGIBLE SON LAS N HOJAS CIVILES Y DE LANDSCAPE -- por CUENTA,
 # no por lectura. El title block del consultor civil tiene otro formato y el lector no saca
 # su numero. La asignacion es una DERIVACION y se entrega como tal:
-#   18 paginas sin rotulo (1, 3..19) y exactamente 18 hojas del indice sin pagina
-#   (C1.0..C7.4 = 16 civiles, L1.0 y L1.1 = 2 de landscape), en el MISMO orden del indice.
+#   N paginas sin rotulo y exactamente N hojas del indice sin pagina
+#   (civiles C* y de landscape L*), en el MISMO orden del indice.
 # No se declara CONFIRMADO porque nadie leyo esos title blocks. Lo que hace que la
 # incertidumbre no cueste nada es otra cosa, y se dice: son hojas CIVILES y de LANDSCAPE,
 # fuera de Div 05 y Div 09 por completo, asi que ninguna cantidad del take-off las cita.

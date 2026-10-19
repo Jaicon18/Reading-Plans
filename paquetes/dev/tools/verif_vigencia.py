@@ -21,15 +21,16 @@ Como lo prueba:
     DESACTUALIZADO. mtime no basta: copiar un archivo o hacerle touch lo falsea; el
     hash no.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, json, glob, time, hashlib, collections
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 B = f'{_TW}'
 T = os.path.dirname(os.path.abspath(__file__))
-LIBRO = B + '/out/BOA_Broomfield_Takeoff.xlsx'
+LIBRO = B + f'/out/{_PRE}_Takeoff.xlsx'
 
 
 class LibroDesactualizado(Exception):
@@ -80,7 +81,7 @@ SUPERADOS = {
 }
 NO_SON_CIERRES = {
     'CIELOS_perimetro.json': 'geometria de apoyo, no lleva partidas',
-    'ADYACENCIA.json': 'mapa de que wall muere contra cual, salida de adyacencia.py. Es geometria de apoyo para unificar el criterio de studs adicionales bajo 5/S5.20, no lleva partidas y por eso el Excel no lo lee. Mientras resuelva solo el 31% de los extremos NO se usa para recontar: lo que prueba (-38 studs en los 47 walls de banda simple) va declarado en Clarifications como piso medido del sobre-conteo, no aplicado a ninguna cantidad sellada.',
+    'ADYACENCIA.json': 'mapa de que wall muere contra cual, salida de adyacencia.py. Es geometria de apoyo para unificar el criterio de studs adicionales bajo 5/S5.20, no lleva partidas y por eso el Excel no lo lee. Mientras no resuelva todos los extremos NO se usa para recontar: lo que prueba (el delta de studs en los walls de banda simple) va declarado en Clarifications como piso medido del sobre-conteo, no aplicado a ninguna cantidad sellada.',
     'MEP_cruces.json':       'insumo de cerrar_mep.py, no es cierre sellado',
     'bandas_por_tipo.json':  'control del barrido de tags',
     'bandas_restantes.json': 'control del barrido de tags',

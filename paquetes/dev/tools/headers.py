@@ -23,7 +23,7 @@ ENTRADA (JSON):
                {"max_span_ft": 8.0,   "type": "2-362CSJ20",         "pieces": 2, "piece": "362CSJ20"}]},
   "sill_rule": {"double_over_ft": 4.0, "source": "2/S5.20"},  # opcional
   "openings": [{
-      "ref": "door 112", "wall": "W36", "kind": "door",    # door|window|atm|storefront|opening|grille|duct|fire_damper
+      "ref": "door <ref>", "wall": "W1", "kind": "door",    # door|window|atm|storefront|opening|grille|duct|fire_damper
       "location": "interior", "ro_w_ft": 3.333, "qty": 1, "with_sill": false, "source": "A00.30",
       "header_type": "BOX 2 C", "header_type_source": "9/A12.01",     # opcional; manda sobre el schedule
       "pieces": 2, "pieces_source": "9/A12.01", "piece": "C box",     # obligatorio con header_type
@@ -32,7 +32,7 @@ ENTRADA (JSON):
 }
 v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — REGLAS fijas, ya no parámetros ("header_params" se rechaza):
   #18 sill: DOUBLE sill track en R.O. > 4'-0" SIEMPRE (2/S5.20 "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG >4'-0""
-      + "INVERT DETAIL FOR SILL CONDITION"). Sin sill_rule en la entrada se aplica 4.0 ft / 2/S5.20. sill_pieces
+      + "INVERT DETAIL FOR SILL CONDITION"). Sin sill_rule en la entrada se aplica 4'-0" / 2/S5.20. sill_pieces
       menor que la regla = error.
   #19 "METAL STUD BOX BEAM OR STEEL FRAMING AS REQUIRED" (GL-2, 11/A09.27): METAL STUD BOX BEAM. Abertura con
       or_steel: true u "OR STEEL" en header_type -> structure HSS / steel = error (v66: sin nombres de un proyecto).
@@ -44,7 +44,7 @@ v65b (DECISIONES DEL USUARIO #18-#22, 17-oct-2026) — REGLAS fijas, ya no pará
   #21 header_type que no es box no puede bajar las piezas del header schedule (una door cuyo R.O. cae en
       DOUBLE TRACK del schedule = 2 piezas; una nota general "> 4'-0"" no lo baja a 1).
   #22 "CONT." BOX BEAM (office front 8,9/A12.01) = UN run continuo a lo largo de todo el frente: una sola abertura
-      con continuous_run: true, qty 1, wall = línea del frente, ro_w_ft = largo del run medido (source + RFI si
+      con continuous_run: true, qty = 1; wall = línea del frente, ro_w_ft = largo del run medido (source + RFI si
       no hay cota). Por abertura (qty > 1, o varias con el mismo detalle en la misma línea) = error. Dos frentes
       (dos líneas de office front) = dos runs (EJES).
 

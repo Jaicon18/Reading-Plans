@@ -15,8 +15,9 @@ donde se pide lo que no era.
 
 Donde revisa: el .xlsx entregable hoja por hoja, y los .md de la carpeta de entrega.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, glob, re
 
@@ -26,9 +27,9 @@ import idioma_es as IE
 
 # TRINQUETE DE TRADUCCION (orden de Rodolfo, 2-oct-2026: el entregable va INTEGRO en ingles).
 #
-# El libro tenia 188 celdas con frases enteras en espanol que la compuerta de MATERIALES no
-# podia ver, porque no llevan ningun nombre de material: "cara oeste completa, Corridor 111".
-# Traducir las 687 frases de los 21 generadores es trabajo de varias pasadas.
+# El libro tenia <n> celdas con frases enteras en espanol que la compuerta de MATERIALES no
+# podia ver, porque no llevan ningun nombre de material: "cara oeste completa, <room>".
+# Traducir las <n> frases de los <n> generadores es trabajo de varias pasadas.
 #
 # Mientras tanto NO se deja la compuerta apagada ni se declara una excepcion abierta, que es
 # como una deuda se vuelve permanente. Se pone un TRINQUETE: la compuerta falla si el numero
@@ -55,31 +56,30 @@ TOPE_ES = 100
 # Es una lista distinta de glosario.py a proposito: `muro`, `largo`, `partidas` y `puerta` son
 # CLAVES o VALORES del cierre, asi que no pueden entrar al glosario sin romper la logica --
 # pero en PROSA si tienen que escribirse wall, length, line items y door.
-# Hoy quedan 36 en los documentos, contados POR RENGLON igual que la compuerta de material
+# Quedaban <n> en los documentos, contados POR RENGLON igual que la compuerta de material
 # (casi todos dentro de bloques de codigo citados, que el
-# corrector no toca a proposito) y 290 celdas del libro (la hoja de evidencia cita el texto
+# corrector no toca a proposito) y <n> celdas del libro (la hoja de evidencia cita el texto
 # sellado, y ese atraso se paga traduciendo el GENERADOR). Los dos solo pueden BAJAR.
 # EL HANDOFF SE CUENTA APARTE, con su propio trinquete, y NO se exime (8-oct-2026).
-# `BOA_HANDOFF.md` es un documento GENERADO que cita el texto SELLADO de cada wall palabra
+# `<PREFIJO>_HANDOFF.md` es un documento GENERADO que cita el texto SELLADO de cada wall palabra
 # por palabra. Reescribir esas citas en ingles las volveria FALSAS: el renglon diria una cosa
 # y el sello otra -- el mismo motivo por el que `Detail log` tiene su propio TOPE_ES_LOG.
 # Lo que vale guardar es DE DONDE sale el atraso, porque es una sola deuda con dos caras:
-# los terminos en espanol que quedan en texto sellado son EXACTAMENTE los de los 4 bloques
-# HUERFANOS (tipos A5, B, B2K y C1 -- 344 de 344, medido). La regla de traduccion dice "se
-# traduce el GENERADOR, no la salida", y para esos cuatro NO HAY generador que traducir
-# (ver `verif_reproducible.huerfanos`). Asi que este trinquete baja cuando se escriban
-# `cerrar_A5.py`, `cerrar_B.py`, `cerrar_B2K.py` y `cerrar_C1.py`, no antes, y es la medida
-# de esa deuda. Los 12 tipos que SI tienen closer quedaron en ingles al 100%.
-HANDOFF = 'BOA_HANDOFF.md'
-TOPE_VOCAB_HANDOFF = 8            # 10-oct-2026: 9 -> 8
+# los terminos en espanol que quedan en texto sellado son los de los bloques HUERFANOS
+# (cierres sellados sin closer). La regla de traduccion dice "se traduce el GENERADOR, no la
+# salida", y para esos NO HAY generador que traducir (ver `verif_reproducible.huerfanos`).
+# Asi que este trinquete baja cuando se escriban sus closers, no antes, y es la medida de esa
+# deuda. Los types que SI tienen closer quedan en ingles al re-correrlos.
+HANDOFF = f'{_PRE}_HANDOFF.md'
+TOPE_VOCAB_HANDOFF = 8            # trinquete del proyecto en curso: solo baja
 
-TOPE_VOCAB_DOCS = 25           # 10-oct-2026: 36 -> 27 -> 25
+TOPE_VOCAB_DOCS = 25           # trinquete del proyecto en curso: solo baja
 TOPE_VOCAB_LIBRO = 0
 # Cuarto grupo: las hojas Handoff del libro, con su propia cuenta (8-oct-2026).
-TOPE_VOCAB_HANDOFF_XLSX = 0    # 10-oct-2026: 17 -> 16 -> 0
+TOPE_VOCAB_HANDOFF_XLSX = 0    # trinquete: solo baja
 
 HOJA_EVIDENCIA = 'Detail log' 
-TOPE_ES_LOG = 877          # 10-oct-2026: 884 -> 877 al traducir MOT_CANTO de cerrar_A1_v2
+TOPE_ES_LOG = 877          # trinquete del proyecto en curso: solo baja
 
 # LAS HOJAS DEL HANDOFF citan el texto SELLADO igual que `Detail log`, asi que van con su
 # PROPIO tope y NO exentas (8-oct-2026). Reescribir la cita la volveria falsa: el renglon
@@ -88,9 +88,9 @@ TOPE_ES_LOG = 877          # 10-oct-2026: 884 -> 877 al traducir MOT_CANTO de ce
 # le pone otro contador visible, nunca una exencion.
 HOJAS_HANDOFF = ('Handoff - Types', 'Handoff - Open Items', 'Handoff - Locations',
                  'Handoff - Bid Set', 'Handoff - Approved')
-TOPE_ES_HANDOFF_XLSX = 24      # 10-oct-2026: 34 -> 24
+TOPE_ES_HANDOFF_XLSX = 24      # trinquete del proyecto en curso: solo baja
 
-LIBRO = f'{_TW}/out/BOA_Broomfield_Takeoff.xlsx'
+LIBRO = f'{_TW}/out/{_PRE}_Takeoff.xlsx'
 DOCS = f'{_TO}/entrega'
 
 

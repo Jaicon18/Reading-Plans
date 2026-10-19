@@ -16,7 +16,7 @@ Secuencia (no se puede saltar ningun paso):
     2. verif_planos   -> el LF ROTULADO en cada plano marcado contra su cierre sellado.
     3. excel.main()   -> regenera, recalcula, audita el libro y sella el manifiesto.
     4. verif_vigencia -> prueba por hash que el .xlsx refleja TODOS los insumos de hoy.
-    5. hoja_estado    -> reescribe BOA_ESTADO.md LEYENDO el libro (no a mano: se quedaba
+    5. hoja_estado    -> reescribe <PREFIJO>_ESTADO.md LEYENDO el libro (no a mano: se quedaba
                          viejo por la misma razon que el Excel).
     6. hoja_rfi       -> la carta de RFIs, leida de Pending Items.
     7. hoja_detalles  -> el registro de cobertura de detalles, leido de la compuerta
@@ -29,8 +29,8 @@ Secuencia (no se puede saltar ningun paso):
                          irreproducible.
     9. hoja_indice    -> 00_INDICE_DE_ARCHIVOS.md CONTANDO la carpeta ya poblada. Por eso
                          va despues de la copia: lista lo que hay, no lo que yo creo que
-                         hay. Estaba escrito a mano y decia 77 elementos cuando eran 78,
-                         58 scripts cuando eran 72, y que la carta de RFIs no existia
+                         hay. Estaba escrito a mano y decia <n> elementos cuando eran <n>,
+                         <n> scripts cuando eran <n>, y que la carta de RFIs no existia
                          cuando ya existia.
    11. verif_confirmado -> todo [CONFIRMADO] vale la COTA IMPRESA que cita, no la medicion
                          por pixeles. Una cuenta sobre una cota es [DERIVADO].
@@ -47,8 +47,8 @@ Secuencia (no se puede saltar ningun paso):
                          Va al final: revisa TODO lo que acaba de escribirse, indice
                          incluido.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, glob, shutil, subprocess
 
@@ -165,8 +165,8 @@ def main():
             print('    - %-18s %-24s sellado %-9s cota(s) %s' % (et, r[:24], v, cs))
         print('    Regla #0: [CONFIRMADO] es la COTA IMPRESA; una cuenta sobre ella es '
               '[DERIVADO] y obliga a escribir la operacion. Jerarquia: cota impresa > suma '
-              'de cadena > pixeles. Origen (7-oct-2026): el muro A1 #6 citaba la cota 5\'-6\" '
-              '(5.500) y sellaba 5.51, que es la medicion por pixeles redondeada.')
+              'de cadena > pixeles. Origen (7-oct-2026): un muro citaba una cota impresa '
+              'y sellaba la medicion por pixeles redondeada.')
         return 1
     print('    OK: todo [CONFIRMADO] vale exactamente la cota impresa que cita')
 
@@ -179,8 +179,8 @@ def main():
             print('    - %-12s %s' % (et, (ub or '')[:62]))
             print('          faces %s  |  ningun face nombra %s' % (caras, falta))
         print('    Ir al PLANO: ninguno de los dos lados manda por si solo. Origen (8-oct-2026): '
-              'el A1 #7 tenia las dos faces como Break Room 118 y la ESTE es Cash Window 116, '
-              'ceiling ACT-4 a 9\'-0\" -- faltaban 0.87 SF de board. Y el A1 #4 era al reves: '
+              'un muro tenia sus dos faces con el mismo room y una era otro room, con otro ceiling '
+              '-- faltaba board. Y en otro era al reves: '
               'ahi las faces tenian razon y la ubicacion no.')
         return 1
     print('    OK: cada face nombra uno de los rooms de su ubicacion')
@@ -189,7 +189,7 @@ def main():
     import verif_reproducible as VRP
     # LA PREGUNTA RECIPROCA, primero: ¿cada cierre sellado TIENE un generador? La lista de
     # closers esta escrita a mano, asi que sin esto la compuerta solo mide lo que alguien se
-    # acordo de anotar -- y habia 19 walls (A5, B, B2K, C1) con cierre sellado y NINGUN
+    # acordo de anotar -- y habia <n> walls con cierre sellado y NINGUN
     # generador. Un cierre sin generador no esta congelado: esta HUERFANO.
     hu = VRP.huerfanos()
     print('    cierres HUERFANOS (sellados, sin closer que los produzca): %d bloque(s), '
@@ -242,10 +242,10 @@ def main():
         for sch, t, n, hay in _f:
             print('    %-34s %-8s %d instancia(s), %d renglon(es)' % (sch, t, n, hay))
         print('    Un schedule es una lista cerrada: si el take-off no tiene un renglon por')
-        print('    cada linea, el que falta no se ve. Origen: MW11, huerfano entre nueve')
-        print('    cierres que lo nombran para decir que no es suyo.')
+        print('    cada linea, el que falta no se ve. Origen: un tag de millwork huerfano entre')
+        print('    varios cierres que lo nombran para decir que no es suyo.')
         return 1
-    print('    OK: los %d tags del MILLWORK SCHEDULE de A00.30 tienen su renglon'
+    print('    OK: los %d tags de los schedules declarados tienen su renglon'
           % sum(len(v) for v in VBS.SCHEDULES.values()))
 
     print('17/23 COHERENCIA DE ETIQUETAS (el mismo dato de la misma hoja, una sola etiqueta)')
@@ -273,7 +273,7 @@ def main():
             print('    - %-12s motivo que no dice nada' % e)
         for e, d in sind:
             print('    - %-12s en la cadena y ningun campo del cierre lo cita' % e)
-        print('    Origen (6-oct-2026): de los 27 eslabones del muro A1 #8, 9 no se pudieron '
+        print('    Origen (6-oct-2026): en la cadena de un muro, varios eslabones no se pudieron '
               'justificar. Una secuencia sin "por que" no se puede auditar.')
         return 1
     print('    OK: los eslabones de todas las cadenas traen motivo declarado y dato sellado')
@@ -307,7 +307,7 @@ def main():
 
     print('22/23  IDIOMA (nombre de material en ingles)')
     # Va DESPUES de regenerar el estado: revisa los archivos FINALES. Corriendo antes leia
-    # el BOA_ESTADO.md viejo y reportaba una falta que el paso siguiente ya arreglaba.
+    # el <PREFIJO>_ESTADO.md viejo y reportaba una falta que el paso siguiente ya arreglaba.
     import verif_idioma as VI
     fi = VI.verificar(out)
     if fi:

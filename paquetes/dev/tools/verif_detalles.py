@@ -9,9 +9,9 @@ El punto ciego que esta compuerta ataca (1-oct-2026, a pregunta de Rodolfo):
     se le ocurrio revisar.
 
     Y ese es justo el patron de lo que se me escapa: condiciones que SI estan dibujadas y
-    que no se que tengo que buscar. El head track doble de vanos > 4'-0" (56 LF) estaba
-    rotulado en 2/S5.20 desde el principio. Las zonas humedas estaban en la nota F de
-    A08.01 y en el key note 6 del Finish Plan. Nadie las escondio: no las abri.
+    que no se que tengo que buscar. El head track doble de vanos > 4'-0" (<n> LF) estaba
+    rotulado en 2/S5.20 desde el principio. Las zonas humedas estaban en una nota del
+    enlarged plan y en un key note del Finish Plan. Nadie las escondio: no las abri.
 
 Que hace: arma el UNIVERSO de detalles de las hojas que el propio take-off declara como
 fuente -- si un cierre cita A12.01, entonces TODOS los detalles dibujados en A12.01 son
@@ -21,15 +21,16 @@ queda sin citar se reporta como SIN ABRIR.
 No decide si un detalle aplica o no: eso lo decide quien lo lee. Lo que impide es cerrar
 sin haberlo mirado.
 """
-import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (antes fijas en /home/claude/boa)
-_TW = _os_rutas.environ.get("TAKEOFF_WORK", "/home/claude/boa")
+import os as _os_rutas  # rutas de trabajo: TAKEOFF_WORK / TAKEOFF_OUT (por defecto, el directorio actual)
+_TW = _os_rutas.environ.get("TAKEOFF_WORK", _os_rutas.getcwd())
+_PRE = _os_rutas.environ.get("TAKEOFF_PREFIJO", "PROYECTO")  # prefijo de los archivos del proyecto
 _TO = _os_rutas.environ.get("TAKEOFF_OUT", "/mnt/user-data/outputs")
 import os, sys, re, json, glob, collections
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import resumen_global as RG
 
-PDF = f'{_TW}/BOA_SIN_MARKUPS.pdf'
+PDF = f'{_TW}/{_PRE}_SIN_MARKUPS.pdf'
 B = f'{_TW}'
 EXTRA = ['CIELOS_cierres.json', 'SOFFITS_cierres.json', 'CANOPY_cierres.json',
          'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS345_cierres.json',
@@ -55,17 +56,17 @@ NO_APLICAN = {}   # v66 (E24): vaciado — era el barrido de detalles de un proy
 
 
 # ---------------------------------------------------------------------- 10-oct-2026
-# BARRIDO COMPLETO. Las 26 hojas que el take-off usa se recorrieron detalle por detalle
-# el 10-oct-2026, a 300-900 dpi, y cada uno quedo en uno de dos estados: CITADO por un
-# cierre, o declarado aqui con su motivo. El registro largo esta en
-# BOA_BARRIDO_DE_DETALLES.md.
+# BARRIDO COMPLETO. Las hojas que el take-off usa se recorren detalle por detalle,
+# a 300-900 dpi, y cada uno queda en uno de dos estados: CITADO por un
+# cierre, o declarado aqui con su motivo. El registro largo va en
+# <PREFIJO>_BARRIDO_DE_DETALLES.md.
 #
-# Por que este diccionario es DISTINTO de NO_APLICAN: hasta hoy la compuerta contaba 90
+# Por que este diccionario es DISTINTO de NO_APLICAN: la compuerta contaba <n>
 # "sin abrir" y la mayoria SI se habian mirado -- lo que faltaba era DECLARARLO. Pero
-# muchos de esos 90 no son "no aplicables": son detalles que SI aplican y que RESPALDAN
+# muchos de esos no son "no aplicables": son detalles que SI aplican y que RESPALDAN
 # una cantidad que ya esta en el take-off, o que la VALIDAN por segunda fuente
-# (8/A09.33 confirma el bracing a 48" del bulkhead; 9/S5.10 ROOF STEP AT GRID B confirma
-# el escalon de deck en el eje B; 4 y 5/A09.33 confirman la composicion del canopy).
+# (p. ej. un BULKHEAD DETAIL confirma el bracing del bulkhead; un ROOF STEP confirma
+# el escalon de deck en su eje; las secciones del canopy confirman su composicion).
 # Meterlos en NO_APLICAN diria que no aplican, y es falso.
 #
 #     Declarar un detalle que SI aplica como "no aplicable" es mentir en la direccion
@@ -146,7 +147,7 @@ CACHE = f'{_TW}/detalles_cache.json'
 
 
 def verificar(pdf_path=PDF, solo=None):
-    """Lee el CACHE, no el PDF: barrer 94 hojas tarda minutos y una compuerta que tarda
+    """Lee el CACHE, no el PDF: barrer el set completo tarda minutos y una compuerta que tarda
     minutos no se corre. cache_detalles.py lo llena una vez por proyecto."""
     cit = citados()
     objetivo = set(solo) if solo else set(cit)          # hojas que el take-off usa
@@ -164,8 +165,8 @@ def verificar(pdf_path=PDF, solo=None):
     # UNA HOJA CITADA QUE NO ESTA EN EL CACHE NO SE PUEDE DAR POR CUBIERTA.
     # Error real del 2-oct-2026: el cierre del exterior citaba A09.21, A09.22, A09.23,
     # A09.26 y S5.10/S5.20, ninguna estaba cacheada, y la compuerta las dejo caer en
-    # SILENCIO -- informaba "73 detalles, 20 pendientes" sin haber mirado las hojas donde
-    # estaban el T/ STUD LP <n>, el T.O. PARAPET 2 = 20'-0" y el PARAPET INFILL FRAMING.
+    # SILENCIO -- informaba "<n> detalles, <n> pendientes" sin haber mirado las hojas donde
+    # estaban el T/ STUD, el T.O. PARAPET y el PARAPET INFILL FRAMING.
     # Una compuerta que ignora lo que no cacheo no es una compuerta: es un espejo de lo que
     # ya miraste. Ahora revienta y dice cuales faltan.
     sin_cache = sorted(objetivo - cacheadas)

@@ -2,12 +2,12 @@
 """framed_openings.py v64 — LF de framed openings MEP por perímetro, DETERMINISTA (reglas 60.9, 60.10, 58.4).
 
 v64 (decisión del usuario #12, 2026-10-16): ductos / fire dampers / air devices de wall NO se enmarcan como
-abertura: sin header ni sill aunque no quepan en el stud bay -> estado NOT_FRAMED, 0 LF, y NO van a
-to_header_sill (BOA: -<n> header, -<n> sill). Solo los items de wall que no son de aire (access panel,
+abertura: sin header ni sill aunque no quepan en el stud bay -> estado NOT_FRAMED, sin LF, y NO van a
+to_header_sill (prueba <proyecto>: -<n> header, -<n> sill). Solo los items de wall que no son de aire (access panel,
 other) y no caben en el stud bay siguen a headers.py (TO_HEADER_SILL).
 
 Por qué existe (arbitraje #10, 16-oct-2026): una corrida cargó la medida del catálogo cuando la descripción
-y el dibujo daban otra (+64 LF) y contó downlights de 3.5" que caben entre furring (+28 LF); la otra metió
+y el dibujo daban otra (+<n> LF) y contó downlights que caben entre furring (+<n> LF); la otra metió
 ductos de wall más grandes que el stud bay (van a header/sill, 58.4). Aquí la tool decide con reglas fijas.
 
 ENTRADA (JSON):
@@ -24,22 +24,22 @@ ENTRADA (JSON):
       "source": "E00.01"}]
 }
 REGLAS:
-  - largo (60.9): si desc y catalog difieren (> 0.01 ft) se carga el que coincide con drawn (tol 0.05 ft)
+  - largo (60.9): si desc y catalog difieren (> 0.01 ft) se carga el que coincide con drawn (tol ± 0.05 ft)
     + RFI con delta = 2 x (otro - cargado) x qty. Si drawn no coincide con ninguno o no existe ->
     ValueError, salvo length_override con source y texto de RFI. 53.3 NO aplica (la medida sí está impresa).
-  - módulo (60.10): max(ancho, largo) <= módulo -> 0 LF (FITS_MODULE). Módulo: wall = stud bay;
+  - módulo (60.10): max(ancho, largo) <= módulo -> sin LF (FITS_MODULE). Módulo: wall = stud bay;
     ceiling = ceiling_furring_oc_in.
-  - wall que NO cabe en el stud bay -> 0 LF aquí: air_device / duct / fire damper -> NOT_FRAMED (decisión
+  - wall que NO cabe en el stud bay -> sin LF aquí: air_device / duct / fire damper -> NOT_FRAMED (decisión
     usuario #12); el resto -> TO_HEADER_SILL (58.4, va a headers.py).
   - LF = 2 x (largo + ancho) x qty   (round: 4 x diámetro x qty, hueco cuadrado)
   - v62 (arbitraje #12): con items de ceiling, "sweep" es obligatorio: {"sheets": [...] con al menos una
     hoja M (air devices / slot diffusers en GWB) y una E (fixtures)}; si no hay ningún air_device de ceiling
     se exige sweep.no_air_devices_why. #12A no barrió M01.01 y omitió las SD slot diffusers (TBDI-10) de los
-    GWB ceilings de 100/101/113/114 (ref v4 <n> LF) -> 818.75 contra 927-952.
+    GWB ceilings de varios rooms (ref v4 <n> LF) -> <n> contra <n>.
   - v65 (arbitraje #14): con fixtures (category light) de ceiling, "tag_counts" es obligatorio = salida de
     contar_tags.py sobre la hoja E ({tag: {"count": n, "sheet": "E02.01"}}). Por tag: Σ qty <= count; si es
     menor, cada item del tag declara excluded_qty_why (p. ej. "4 en ACT, no GWB"); mayor = error. #14B cargó
-    UU3 x 5 cuando E02.01 dibuja 9 (+25.66 LF).
+    un tag x <n> cuando la hoja E dibuja <n> (+<n> LF).
   - v66 (arbitraje #15A): width_source obligatorio por item (#15A tomó el ancho del código de catálogo sin
     citarlo): N/HOJA + de dónde sale (cota, schedule, catálogo).
 SALIDA: totales_lf {"framed openings MEP"} + renglones con source + rfis (delta LF) + to_header_sill.
