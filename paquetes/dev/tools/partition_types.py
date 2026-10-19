@@ -51,6 +51,11 @@ v68 (arbitraje #16, mismo plano dio types distintos en dos pruebas):
  R11 Aviso (no cambia el LF) si el extremo de un wall entra en la banda de un wall perpendicular de otro type más
     que la mitad de su espesor: el wall termina en la CARA del que cruza, no en su eje (corregir en el canon).
 
+v72 (arbitraje #20, R72.3): un pier / box partido en dos registros (parte exterior sin tag + registro con tag) es
+    UN wall en la cuenta: la parte sin tag (`part_of` o solape BOX >= 50 % con un registro con tag) va a
+    other_framing como element "pier_part" (su metal y board siguen en el canon). Antes la parte exterior sumaba un
+    wall EXT por pier.
+
 Uso:  python3 partition_types.py takeoff_canon.json [salida.json] [--board board_out.json]
 """
 import json
@@ -361,10 +366,18 @@ def partition_types(canon, board_out=None, jog_max_ft=JOG_MAX_FT, tol_line_ft=TO
     otros, avisos = [], []
     bsf = _board_por_wall(board_out)
     walls = _expandir(walls)
+    import chequeos_v72                             # v72 (R72.3): un box = un wall (el registro con tag)
+    partes = chequeos_v72.partes_de_box(walls)
     tipos = {}
     for w in walls:
         t = tipo(w, tags_wall)
         tipos[w["id"]] = t
+        if w["id"] in partes:
+            otros.append(dict(_fila([w], [w["id"]], bsf), id=w["id"], element="pier_part", tag=w.get("tag"),
+                              part_of=partes[w["id"]]))
+            avisos.append(f"{w['id']} ({t}) parte sin tag del box {partes[w['id']]}: fuera de la cuenta de walls "
+                          f"(R72.3); su material sigue en el canon")
+            continue
         if t is None:
             otros.append(dict(_fila([w], [w["id"]], bsf), id=w["id"], element=w.get("element"), tag=w.get("tag")))
             continue

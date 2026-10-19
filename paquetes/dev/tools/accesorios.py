@@ -55,6 +55,7 @@ Uso:  python3 accesorios.py familias_out.json takeoff_canon.json salida.json [--
 import json
 import math
 import re
+from collections import Counter
 import sys
 
 EPS = 1e-6
@@ -243,10 +244,30 @@ def penetraciones(data, fo):
                     "width_in": float(p["width_in"] if p.get("width_in") is not None else p["dia_in"]),
                     "dia_in": p.get("dia_in"), "studs_cut": p.get("studs_cut"), "xy": p.get("xy"),
                     "in_cavity": p.get("in_cavity"), "in_cavity_source": p.get("in_cavity_source"),
-                    "qty": int(p.get("qty", 1)), "source": src(p, p["ref"])})
+                    "qty": int(p.get("qty", 1)), "source": src(p, p["ref"]), "_mp": True})
+    # v72 (R72.5): un FD de walls[].openings / openings_extra que el barrido (mep_penetrations) ya trae con el mismo
+    # tamaño WxH es el mismo fire damper: se cuenta una vez (la del barrido, que trae xy).
+    fd_mp = Counter(_tam(p["ref"]) for p in data.get("mep_penetrations") or []
+                    if re.match(r"(?i)^\s*(FD|fire damper)", str(p.get("ref"))) and _tam(p.get("ref")))
+    sal = []
+    for p in out:
+        t = _tam(p["ref"])
+        if not p.get("_mp") and t and fd_mp[t] > 0 and re.match(r"(?i)^\s*(FD|fire damper)", str(p["ref"])):
+            fd_mp[t] -= 1
+            continue
+        sal.append(p)
+    out[:] = sal
     vistos = {str(p["ref"]) for p in out}
+    # v72 (R72.5, arbitraje #20): el mismo fire damper listado en el opening_schedule ("FD-1 ... 14x14") y en el
+    # barrido (mep_penetrations "FD ... 14x14") se contaba dos veces: se descuenta por tamaño (multiconjunto WxH).
+    fd_barrido = Counter(_tam(p["ref"]) for p in out if re.match(r"(?i)^\s*(FD|fire damper)", str(p["ref"])) and _tam(p["ref"]))
     for it in (data.get("opening_schedule") or {}).get("items") or []:
         r = str(it.get("ref"))
+        es_fd = it.get("kind") == "fire_damper" or re.match(r"(?i)^\s*(FD|fire damper)", r)
+        if r not in vistos and es_fd and (it.get("in_mep_penetrations") or fd_barrido[_tam(r)] > 0):
+            if not it.get("in_mep_penetrations"):
+                fd_barrido[_tam(r)] -= 1
+            continue
         if r not in vistos and (str(it.get("kind")) in PEN_KINDS or re.match(r"(?i)^(FD|fire damper|duct)\b", r)):
             out.append({"ref": r, "wall": it.get("wall"), "oc_in": 16, "width_in": _ancho_ref(it),
                         "qty": int(it.get("qty", 1)), "source": it.get("source") or "opening_schedule"})
@@ -256,6 +277,11 @@ def penetraciones(data, fo):
                         "width_in": float(it.get("width_in") or 0), "qty": int(it.get("qty", 1)),
                         "source": it.get("source") or "fo_in"})
     return out
+
+
+def _tam(ref):
+    m = re.search(r"(\d+)\s*[xX×]\s*(\d+)", str(ref))
+    return f"{m.group(1)}x{m.group(2)}" if m else None
 
 
 def _ancho_ref(it):
@@ -307,6 +333,8 @@ def stud_reinforcement(data, fo, o):
         o.add(F_REINF, 0.0, "DERIVADO", sw["source"], f"registered sweep {hs}: no penetrations in stud walls")
         return
     vistos = set()
+    rows_de = {str(w.get("id")): w.get("rows", 1) for w in data.get("walls") or []}
+    delta_rows = 0
     for p in pens:
         if VISUAL_RE.search(str(p.get("source"))):
             raise ValueError(f"{p['ref']}: penetración con fuente visual; va con xy del barrido registrado (v68)")
@@ -326,14 +354,24 @@ def stud_reinforcement(data, fo, o):
                   f"{p['ref']}: dia {p['dia_in']}\" <= 1\" centered in web = no plate")
             continue
         sc = p.get("studs_cut")
+        rows = int((rows_de.get(str(p.get("wall"))) or 1))
         if isinstance(sc, dict):
             n = int(sc["value"])
-            src(sc, f"{p['ref']}.studs_cut")
+            src(sc, f"{p['ref']}.studs_cut")         # override con su fuente; sin él lo calcula la tool (R72.9)
+            v = n * p["qty"]
+            op = f"{p['ref']}: {p['qty']} x studs_cut {n} = {v}"
         else:
+            # v72 (R72.9): studs cortados = MAX(1, ROUNDUP(ancho / O.C.)) por fila de studs del wall (double row = 2)
             n = max(1, math.ceil(p["width_in"] / float(p["oc_in"]) - EPS))
-        v = n * p["qty"]
-        o.add(F_REINF, v, "CRITERIO", f"6/S5.20; {p['source']}",
-              f"{p['ref']}: {p['qty']} x MAX(1, ROUNDUP({round(p['width_in'], 2)}/{p['oc_in']})) = {v}")
+            v = n * rows * p["qty"]
+            delta_rows += n * (rows - 1) * p["qty"]
+            op = (f"{p['ref']}: {p['qty']} x MAX(1, ROUNDUP({round(p['width_in'], 2)}/{p['oc_in']})) x {rows} row(s) "
+                  f"= {v}")
+        o.add(F_REINF, v, "CRITERIO", f"6/S5.20; {p['source']}", op)
+    if delta_rows:
+        o.rfis.append({"familia": F_REINF, "tema": "plates en walls de doble fila de studs: una por fila cortada "
+                       "(R72.9) vs una por cruce", "delta": -delta_rows, "unidad": "pcs",
+                       "alternativa": "una plate por cruce aunque el wall tenga dos filas"})
 
 
 def extra_framing(data, o):
@@ -378,10 +416,22 @@ def extra_framing(data, o):
                   f"{op['ref']}: sistered (ROUNDUP({wd}/{round(oc, 3)})+1) = {n} x {ar['sistered_h_ft']} = "
                   f"{round(lf_s, 2)} + furring {ar.get('furring_rows', 0)} x {wd} = {round(lf_f, 2)}")
             if estado == "CRITERIO":
-                o.rfis.append({"familia": F_XATM, "tema": f"{op['ref']}: ATM recess not fully dimensioned "
-                               f"(width {est[0]}, sistered height {est[1]}, furring rows {est[2]})",
-                               "delta": round(wd + float(ar["sistered_h_ft"]), 2), "unidad": "lf",
-                               "alternativa": "+/- one furring row and one sistered stud"})
+                alts = ar.get("alternativas")
+                if not isinstance(alts, list) or not alts:
+                    o.avisos.append(f"{op['ref']}.atm_recess CRITERIO sin alternativas (R72.11: la compuerta "
+                                    f"chequeos_v72 lo rechaza; cada lectura posible del detalle con su delta)")
+                    alts = [{"label": "+/- one furring row and one sistered stud",
+                             "sistered_h_ft": ar["sistered_h_ft"], "width_ft": wd + oc,
+                             "furring_rows": int(ar.get("furring_rows", 0)) + 1}]
+                for al in alts:
+                    awd = float(al.get("width_ft", wd))
+                    an = math.ceil(awd / oc - EPS) + 1
+                    alf = an * float(al.get("sistered_h_ft", ar["sistered_h_ft"])) + \
+                        int(al.get("furring_rows", ar.get("furring_rows", 0))) * awd
+                    o.rfis.append({"familia": F_XATM, "tema": f"{op['ref']}: ATM recess not fully dimensioned "
+                                   f"(width {est[0]}, sistered height {est[1]}, furring rows {est[2]})",
+                                   "alternativa": str(al.get("label") or al), "delta": round(alf - lf_s - lf_f, 2),
+                                   "unidad": "lf"})
             hubo = True
     for it in data.get("extra_framing") or []:
         s = src(it, it.get("ref", "extra_framing"))
@@ -610,6 +660,7 @@ def pvc_trim(data, o):
             if nic + int(no_) != int(nv) or nic - int(no_) != 4:
                 raise ValueError(f"tile_base {r}: inside {nic} + outside {no_} != vertices {nv} o inside - outside "
                                  f"!= 4 (polígono rectilíneo; v68)")
+            nic, sc = _jogs_frp(r, ic, nic, int(nv), sc, top, o)
         else:
             nic, sc, est = int(ic_def), sic, "CRITERIO"
         nd = len(t.get("doors") or [])
@@ -624,6 +675,38 @@ def pvc_trim(data, o):
         lf = max(0, sides - 1) * h + sides * wdt + 2 * h
         o.add(F_PVC, lf, "DERIVADO", s, f"mop sink: inside corner {max(0, sides - 1)} x {h} + top edge {sides} x "
               f"{wdt} + vertical ends 2 x {h} = {round(lf, 2)}")
+
+
+JOG_TRIM_MIN_IN = 6.0     # v72 (R72.10): un jog del polígono del FRP de menos de 6" no lleva inside corner trim
+
+
+def _jogs_frp(r, ic, nic, nv, sc, top, o):
+    """v72 (R72.10, arbitraje #20: dos corridas contaron 4 y 7 inside corners en el mismo cuarto): con más de 4
+    vértices, inside_corners.jogs [{depth_in, kind: notch|step, source}] es obligatorio (notch = 4 vértices: 2 inside
+    + 2 outside; step = 2 vértices: 1 + 1). Un jog con depth_in < JOG_TRIM_MIN_IN (carrier, espesor de acabado) no
+    agrega inside corners: se descuenta y queda RFI con el delta. -> (inside corners, fuente)."""
+    if nv <= 4:
+        return nic, sc
+    jogs = ic.get("jogs")
+    if not isinstance(jogs, list) or not jogs:
+        o.avisos.append(f"tile_base {r}.inside_corners con {nv} vértices sin jogs [{{depth_in, kind, source}}] "
+                        f"(R72.10: la compuerta chequeos_v72 lo rechaza)")
+        return nic, sc
+    extra = 0
+    for j in jogs:
+        kind = str(j.get("kind"))
+        if kind not in ("notch", "step") or j.get("depth_in") is None:
+            raise ValueError(f"tile_base {r}.inside_corners.jogs: kind notch|step y depth_in obligatorios ({j})")
+        src(j, f"tile_base {r}.inside_corners.jogs")
+        extra += 4 if kind == "notch" else 2
+    if 4 + extra != nv:
+        raise ValueError(f"tile_base {r}: 4 + vértices de los jogs ({extra}) != vertices {nv} (R72.10)")
+    quita = sum(2 if j["kind"] == "notch" else 1 for j in jogs if float(j["depth_in"]) < JOG_TRIM_MIN_IN)
+    if quita:
+        o.rfis.append({"familia": F_PVC, "tema": f"room {r}: {quita} inside corner(s) en jogs < {JOG_TRIM_MIN_IN:g}\" "
+                       f"sin PVC trim (R72.10)", "delta": round(quita * top, 2), "unidad": "lf",
+                       "alternativa": "trim en todos los vértices del polígono"})
+    return nic - quita, f"{sc}; jogs < {JOG_TRIM_MIN_IN:g}\" sin trim (R72.10)" if quita else sc
 
 
 def _runs_parapet(par):
@@ -761,22 +844,44 @@ def framing_screws(data, fam_out, studs_out, o):
           f" = {v}")
 
 
-def track_slab(data):
-    """Bottom track sobre losa por wall (sin descuento de doors, decisión #10): L x rows."""
+def track_slab(data, sin_fuente=None):
+    """Bottom track sobre losa por wall (sin descuento de doors, decisión #10): L x rows.
+    v72 (R72.8 = R71.15 como tool, arbitraje #20): expansion anchors solo para element "wall" exterior (lo que nombra
+    el schedule de anclaje: "exterior walls"). Un column_wrap / chase exterior va con los pins (criterio del
+    estimador) salvo `anchorage {value: anchors|pins, source N/HOJA}`; la parte sin tag de un box (R72.3) no entra en
+    ninguno sin `anchorage`: va a `sin_fuente` (RFI con delta)."""
+    import chequeos_v72
+    partes = chequeos_v72.partes_de_box(data.get("walls") or [])
     inte, ext = [], []
     for w in data.get("walls") or []:
         el = w.get("element", "wall")
         if el in NOT_ON_SLAB or el not in ON_SLAB:
             continue
         lf = float(w["length_ft"]) * int(w.get("rows", 1))
-        (ext if es_exterior(w) else inte).append((w["id"], lf))
+        an = w.get("anchorage")
+        if isinstance(an, dict) and an.get("value") in ("anchors", "pins"):
+            if not NHOJA.search(str(an.get("source") or "")):
+                raise ValueError(f"{w['id']}.anchorage sin source N/HOJA")
+            (ext if an["value"] == "anchors" else inte).append((w["id"], lf))
+            continue
+        if w["id"] in partes:
+            if sin_fuente is not None:
+                sin_fuente.append((w["id"], lf))
+            continue
+        (ext if es_exterior(w) and el == "wall" else inte).append((w["id"], lf))
     return inte, ext
 
 
 def pins_anchors(data, o):
     sp, ssp = k(data, "slab_pin_spacing_ft")
     sa, ssa = k(data, "anchor_spacing_ft")
-    inte, ext = track_slab(data)
+    sinf = []
+    inte, ext = track_slab(data, sinf)
+    if sinf:
+        lsf = sum(x[1] for x in sinf)
+        o.rfis.append({"familia": F_ANCH, "tema": "partes sin tag de piers / boxes (" + ", ".join(x[0] for x in sinf)
+                       + ") sin anclaje en el schedule (R72.8)", "delta": round(lsf / float(sa), 2), "unidad": "pcs",
+                       "alternativa": "cargarlas como exterior walls (expansion anchors)"})
     li = sum(x[1] for x in inte)
     le = sum(x[1] for x in ext)
     if li > EPS:

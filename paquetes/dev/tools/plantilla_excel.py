@@ -54,6 +54,7 @@ Formato del JSON (todas las cantidades NET, sin waste: el waste lo pone el Excel
 }
 """
 import json, os, re, shutil, subprocess, sys, tempfile
+from collections import Counter
 
 UNITS = {"LF", "SF", "EA", "PCS", "LB"}
 STATUS = {"CONFIRMADO", "DERIVADO", "PENDIENTE"}
@@ -605,14 +606,25 @@ def fusionar(d, fo):
     d["inputs"] = dict(d.get("inputs") or {})
     fam_canon = fo.get("familias") or {}
     mats = []
+    # v72 (R71.8b, arbitraje #20): una familia citada por >= 2 renglones de su misma unidad está REPARTIDA (track por
+    # tamaño): el NET de cada renglón se respeta y la suma tiene que dar la familia (± 0.1); nunca se le pone el total
+    # de la familia a cada renglón (antes: 8 renglones x total = track x 8).
+    def _fam_de(m):
+        return m.get("familia") or (lambda g: g.group(1) if g else None)(
+            re.search(r"familias_out\.json[^']*'([^']+)'", str(m.get("source", ""))))
+    cuenta = Counter((_fam_de(m), str(m["unit"]).lower()) for m in d["materials"] if _fam_de(m) in fam_canon)
+    repartidas = {}
     for m in d["materials"]:
         n = str(m["material"]).lower()
         if any(re.search(rx, n) for rx in REEMPLAZA):
             continue
         if n.startswith("2-1/2\"") and not float(fam_canon.get("2-1/2\" stud", 0) or 0):
             continue                                       # el 2-1/2" del grille lo da accesorios
-        fam = m.get("familia") or (lambda g: g.group(1) if g else None)(
-            re.search(r"familias_out\.json[^']*'([^']+)'", str(m.get("source", ""))))
+        fam = _fam_de(m)
+        if fam in fam_canon and fam not in acc["familias"] and cuenta[(fam, str(m["unit"]).lower())] > 1:
+            repartidas.setdefault(fam, []).append(m)             # v72 R71.8b: renglón parcial, NET propio
+            mats.append(m)
+            continue
         if fam in fam_canon and fam not in acc["familias"]:     # v67: el NET sale del canon vigente
             uf = _unidad_familia(fo, fam)
             if uf and uf.lower() != str(m["unit"]).lower():   # v68 (#16A hanger wire): NET en SU unidad
@@ -620,6 +632,11 @@ def fusionar(d, fo):
                                  f"{uf.upper()}: el NET de una familia solo va en un renglón de su misma unidad")
             m = dict(m, net=float(fam_canon[fam]))
         mats.append(m)
+    for fam, ms in repartidas.items():
+        tot = sum(float(x.get("net") or 0) for x in ms)
+        if abs(tot - float(fam_canon[fam])) > 0.1:
+            raise ValueError(f"familia '{fam}' repartida en {len(ms)} renglones suma {round(tot, 2)} != familia "
+                             f"{fam_canon[fam]} (R71.8b: los renglones por tamaño suman la familia)")
     # v68: FRT plywood, un renglón por material y espesor
     FRT = "FRT plywood (SF)"
     frt_rows = [m for m in mats if familias.familia(m["material"], str(m["unit"]).lower()) == FRT]
@@ -848,14 +865,33 @@ def verificar_excel(xlsx, salidas=None):
     carpetas = [os.path.dirname(os.path.abspath(xlsx))] + [str(x) for x in (salidas or [])]
     err += verificar_salidas(wb, carpetas)
     err += verificar_r708(wf)
-    err += verificar_r71_track(wb)
+    err += verificar_r71_track(wb, _track_familia(carpetas))
     return err
+
+
+def _track_familia(carpetas):
+    """v72 R71.8b: totales de bottom / top track de familias_out.json (si está en las carpetas de salidas)."""
+    for c in carpetas:
+        p = os.path.join(c, "familias_out.json")
+        if os.path.isfile(p):
+            try:
+                f = (json.load(open(p, encoding="utf-8")) or {}).get("familias") or {}
+            except ValueError:
+                return None
+            out = {}
+            for k, v in f.items():
+                if re.match(r"^bottom track", k, re.I):
+                    out["bottom track"] = float(v)
+                elif re.match(r"^top( /)? ?(deflection )?track", k, re.I):
+                    out["top / deflection track"] = float(v)
+            return out or None
+    return None
 
 
 TAM_STUD = re.compile(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")')
 
 
-def verificar_r71_track(wb):
+def verificar_r71_track(wb, fam_total=None):
     """R71.8 (v71, arbitraje #19): bottom track y top / deflection track se compran POR TAMAÑO de stud (un renglón por
     tamaño, más el track de parapet / otro gauge en el suyo); la suma = la familia. Con >= 2 tamaños de stud en
     Partition Takeoff, un renglón único "all sizes" (o faltar un tamaño) = falla."""
@@ -879,12 +915,22 @@ def verificar_r71_track(wb):
     nombres = [str(r[0] or "") for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True)]
     if not any(re.search(r"^(bottom|top|deflection)\b[^,]*track", n, re.I) for n in nombres):
         return err                                  # sin renglones de track: lo cubre la lista de familias obligatorias
+    netos = {}
+    for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True):
+        if r and r[0] and len(r) > 2 and isinstance(r[2], (int, float)) and not isinstance(r[2], bool):
+            netos.setdefault(str(r[0]), float(r[2]))
     for clase, rx in (("bottom track", r"^bottom track"), ("top / deflection track", r"^top( /)? ?(deflection )?track|^deflection track")):
         filas = [n for n in nombres if re.search(rx, n, re.I)]
         falta = sorted(t for t in tams if not any(t in n for n in filas))
         if falta:
             err.append(f"Material Summary: {clase} sin renglón por tamaño para {', '.join(falta)} (R71.8: un renglón por "
                        f"tamaño de stud; 'all sizes' no basta)")
+        # v72 R71.8b: Σ renglones por tamaño = familia (familias_out.json de las salidas); el bug de fusión ponía el
+        # total de la familia en cada renglón parcial (track x N)
+        vals = [round(netos[n], 2) for n in filas if n in netos and netos[n] > 0]
+        if fam_total and clase in fam_total and vals:
+            if abs(sum(vals) - fam_total[clase]) > 0.1 * max(1, len(vals)):
+                err.append(f"Material Summary: Σ {clase} {round(sum(vals), 2)} != familia {fam_total[clase]} (R71.8b)")
     return err
 
 

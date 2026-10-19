@@ -30,6 +30,8 @@ por wall el canon contra la lista de walls del estimador, el estimador corta as�
      Sin tag_ids en todo el type: anclas = tramos > jog_max_ft; return / jog <= jog_max_ft se suma al que toca.
   4. Exteriores / parapets / CFMF: un wall por eje / fachada (regla 1), nunca se encadenan esquinas.
   5. Box cerrado (pier, column wrap; sin band H|V) = 1 wall.
+  6. (v72, R72.7) Un grupo suelto SIN tag de largo total <= STUB_MAX_FT (6") no es wall: es el stub de un jamb o el
+     remate de un frente cortado por otro type; su LF se suma al wall con tag más cercano del mismo type.
   Si un type no trae `tag_ids` en ningún segmento, se corta en cada esquina (regla 1) y se avisa.
 
 MODOS
@@ -59,6 +61,7 @@ MODO_DEFAULT = "eje"       # v71: arbitraje #19 (línea recta por tag; sin tag s
 MODOS = ("tramo", "run", "eje")
 GAP_ABERTURA_MAX_FT = 7.0  # v71: hueco colineal máximo que se cruza, y solo con un R.O. del wall dentro (R70.3)
 JOG_MAX_FT = 1.0
+STUB_MAX_FT = 0.5         # v72 (R72.7): grupo suelto sin tag <= 6" = stub, se suma al wall con tag más cercano
 TOL_LINE_FT = 0.25        # colineales: ejes a <= 3"
 TOL_GAP_FT = 0.5          # contiguos / extremos que se tocan: hueco <= 6" (más el espesor del wall)
 ESCALA_DEFAULT = 18.0
@@ -236,6 +239,25 @@ def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_
             dest[c] += ks
         else:
             sueltos.append(ks)
+    # v72 (R72.7, arbitraje #20): un grupo suelto SIN tag de largo total <= STUB_MAX_FT (stub de jamb / remate de un
+    # frente cortado por un bulkhead u otro type) no es wall propio: su LF se suma al wall con tag más cercano del
+    # mismo type (por distancia entre extremos). Dos corridas lo contaban distinto (wall propio vs sumado).
+    if con:
+        quedan = []
+        for ks in sueltos:
+            if sum(tramos[k]["lf"] for k in ks) <= STUB_MAX_FT + 1e-9 and all(tramos[k]["geo"] for k in ks):
+                def dist(c):
+                    if tramos[c]["geo"] is None:
+                        return 1e18
+                    return min(math.dist(p, q) for k in ks for p in extremos(tramos[k]["geo"])
+                               for q in extremos(tramos[c]["geo"]))
+                c = min(con, key=lambda c: (dist(c), -tramos[c]["lf"], c))
+                dest[c] += ks
+                avisos.append(f"{'+'.join(x for k in ks for x in tramos[k]['ids'])} ({t}, {sh}) stub sin tag <= "
+                              f"{STUB_MAX_FT} ft: sumado al wall con tag más cercano (R72.7), no es wall propio")
+            else:
+                quedan.append(ks)
+        sueltos = quedan
     out = []
     for c in con:
         extra = [x for k in dest[c][1:] for x in tramos[k]["ids"]]

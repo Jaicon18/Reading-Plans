@@ -17,6 +17,11 @@ SALIDA: lista {wall, tag, ori, beam_lw, covered_ft, pct, beam_axis_pt, profile, 
 del rótulo más cercano a la viga en la hoja S y su peralte AISC) — cada uno con imagen y la decisión
 stops_under_beam {profile, depth_ft, source} en el canon (altura_stud.py), o motivo si no aplica.
 
+v72 (arbitraje #20, R72.4): la salida de esta tool MANDA sobre la lectura del texto de R71.14. Un adversarial que
+reponía la altura de deck a walls que la tool da bajo viga ("eje 1.56 pt fuera de la band, lectura estricta") hizo
+que dos corridas difirieran: la tolerancia es --tol (3 pt por defecto) y cualquier excepción va en el canon como
+`beam_override {motivo, source N/HOJA, img}` (chequeos_v72 R72.4 lo revisa contra vigas_out.json).
+
 Uso:
   python3 vigas_sobre_walls.py bidset.pdf <hoja S, ej. S2.20> <hoja A, ej. A02.01> takeoff_canon.json [--lw 2.0]
          [--tol 3.0] [--map sx,dx,sy,dy] [--json salida.json]

@@ -162,6 +162,19 @@ def compuerta(d):
             fallas += [f"esquinas: {x}" for x in esquinas.revisar(a["canon_final"][1])["fallas"]]
             import chequeos_v71                 # v71: R71.1 flecha norte, R71.2 box doble, R71.3, R71.5
             fallas += [f"v71: {x}" for x in chequeos_v71.revisar(a["canon_final"][1])["fallas"]]
+            import chequeos_v72                 # v72: R72.1 K por hatch, R72.2 diagonal, R72.3 partes de box,
+            vig = None                          #      R72.4 vigas_sobre_walls manda, R72.5 MEP, R72.6 side A|B
+            for pv in (os.path.join(d, "4_canon", "vigas_out.json"), os.path.join(d, "..", "out", "vigas_out.json"),
+                       os.path.join(d, "out", "vigas_out.json")):
+                if os.path.isfile(pv):
+                    try:
+                        vig = json.load(open(pv))
+                    except ValueError:
+                        fallas.append(f"{pv}: JSON inválido")
+                    break
+            if vig is None:
+                avisos.append("v72: sin vigas_out.json (4_canon/ u out/): R72.4 no se pudo revisar")
+            fallas += [f"v72: {x}" for x in chequeos_v72.revisar(a["canon_final"][1], vig)["fallas"]]
     n = {k: len(rev.get(k) or []) for k in ("difieren", "solo_A", "solo_B", "alertas")}
     if any(n.values()):
         avisos.append("revision.md pendiente para el estimador: " + " · ".join(f"{k} {v}" for k, v in n.items()))
@@ -194,6 +207,24 @@ def _fusion_escalar(cont, k, v, f, origen, okey, errores, avisos, ctx):
         origen[okey] = f
         return
     prev = cont[k]
+    if _num(prev) is not None and _num(v) is not None and _num(prev) == _num(v):
+        return                                    # v72 (P-02): 18 y 18.0 son el mismo valor
+    if isinstance(prev, dict) and isinstance(v, dict) and "value" in prev and "value" in v \
+            and _num(prev["value"]) is not None and _num(prev["value"]) == _num(v.get("value")):
+        # v72 (P-02): misma constante {value, source} con fuentes distintas -> una, fuentes unidas + aviso
+        if prev.get("source") != v.get("source"):
+            prev["source"] = " | ".join(x for x in (str(prev.get("source") or ""), str(v.get("source") or "")) if x)
+            avisos.append(f"{ctx}: mismo valor {prev['value']} en {origen.get(okey)} y {f}; fuentes unidas")
+        for kk, vv in v.items():
+            prev.setdefault(kk, vv)
+        return
+    if okey[1] is None and str(k).lower() in META_KEYS and not isinstance(prev, (list, dict)) \
+            and not isinstance(v, (list, dict)) and prev != v:
+        # v72 (P-02): escalar de primer nivel (fragment, stage, sheet, page, reader...) = metadato del fragmento
+        cont[k] = {origen.get(okey): prev, f: v}
+        origen.setdefault("_por_fragmento", set()).add(okey)
+        avisos.append(f"{ctx}: metadato distinto en {origen.get(okey)} y {f} -> {{fragmento: valor}}")
+        return
     if okey in origen.get("_por_fragmento", set()):
         if isinstance(v, str):
             prev[f] = v
@@ -209,6 +240,18 @@ def _fusion_escalar(cont, k, v, f, origen, okey, errores, avisos, ctx):
         avisos.append(f"{ctx}: texto distinto en {origen.get(okey)} y {f} -> unido como {{fragmento: texto}}")
         return
     errores.append(f"{ctx}: {origen.get(okey)} y {f} traen valores distintos ({prev!r} vs {v!r})")
+
+
+META_KEYS = {"fragment", "fragmento", "stage", "etapa", "sheet", "hoja", "page", "pagina", "reader", "lector",
+             "lectura", "coord_note", "img_overview", "task", "tarea"}   # v72 (P-02): metadatos del fragmento
+
+
+def _num(x):
+    if isinstance(x, bool):
+        return None
+    if isinstance(x, (int, float)):
+        return float(x)
+    return None
 
 
 def _escala(canon):

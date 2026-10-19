@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 19-oct-2026 (v71). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 19-oct-2026 (v72). Reemplaza cualquier versión anterior. **Se empieza por el PROTOCOLO v69 (flujo por etapas) con los cambios v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
@@ -29,7 +29,22 @@ partición de walls se hacían a ojo, en una sola lectura, sin nada contra qué 
 un script, el plano se lee DOS veces de forma independiente, un script compara las dos lecturas contra el
 inventario, y toda diferencia queda escrita. **Ningún error llega al Excel sin alerta.**
 
-**v71 (2026-10-19) — cambios que mandan (sobre v70).** (1) Partición de walls = **modo "eje"** (E28 reescrita,
+**v72 (2026-10-19) — cambios que mandan (sobre v71).** Origen: dos corridas con el MISMO skill difirieron porque
+reglas ESCRITAS se aplicaban a criterio de cada lectura. Desde v72 cada una es una compuerta o una tool:
+(1) Compuerta nueva `chequeos_v72.py` dentro de `etapas.py compuerta` (0d de §8): type K por hatch medido (R72.1),
+wall diagonal = promedio de sus dos caras (R72.2), parte sin tag de un pier / box con `part_of` (R72.3), la salida
+de `vigas_sobre_walls.py` manda sobre cualquier lectura "estricta" (R72.4), cruces MEP = salida de `mep.cruces`
+(R72.5), `faces[].side` A | B | END (R72.6), FRP con jogs medidos (R72.10), ATM con alternativas (R72.11).
+(2) `partition_types.py`: un pier / box = UN wall (el registro con tag); la parte exterior sin tag va a OTHER
+FRAMING (R72.3). `particion.py`: un stub sin tag de ≤ 6" no es wall propio, se suma al wall con tag más cercano
+(R72.7). (3) `accesorios.py`: expansion anchors solo para walls exteriores (column wrap → pins; parte de box → RFI,
+R72.8); FD del schedule y del barrido se cuentan una vez (R72.5); plates por fila de studs (R72.9); jog del FRP
+< 6" sin inside corner trim (R72.10); ATM con un RFI por alternativa (R72.11). (4) `plantilla_excel.py`: renglones
+por tamaño de una familia respetan su NET y suman la familia (R72.12 / R71.8b; antes cada renglón recibía el total).
+(5) `etapas.py unir`: 18 = 18.0, misma constante con fuentes distintas se une, metadatos por fragmento (P-02).
+(6) `cruzar_diagonal.py` genérico (sin `mep.OFF`), `idioma_es.py` viaja en el paquete. Reglas R72.1–R72.12 en §18.
+
+**v71 (2026-10-19) — cambios que siguen (sobre v70).** (1) Partición de walls = **modo "eje"** (E28 reescrita,
 `particion.MODO_DEFAULT = "eje"`): un wall es UNA línea recta de un type; cada tag marca su wall; una esquina, un jog
 o una T entre dos líneas con tag corta; el segmento sin tag (return, jog, cierre) se suma al wall con tag que toca;
 un grupo conexo SIN ningún tag (alcove) es UN wall; exteriores y parapets, un wall por eje / fachada. El modo "run"
@@ -110,6 +125,14 @@ de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
   descarte NO silencia la alerta: el estimador lo cierra en la Etapa 3.
 - A lee el canon completo (walls + §2 P4–P8b, también por tareas chicas); B lee como mínimo los walls (P3). Lo que
   solo leyó A pasa por el back-check ciego (P12).
+- **v72 — datos que la compuerta exige en la lectura (§18):** `faces[].side` = A | B | END (A = cara norte u oeste,
+  B = sur o este; BOX = A; nunca N/S/E/W); todo wall de type K (panel balístico) con `hatch_extent {value_ft, source,
+  img}` medido en vector y ningún segmento sin tag tipado K (el jog con hatch va a `ballistic_jogs`); wall diagonal
+  con `band.faces_top` y `band.faces_bottom`; la parte exterior sin tag de un pier con `part_of`; cada
+  `mep_penetrations[]` con `xy` y `method: "mep.cruces"` (o `manual {motivo, img}`); FRP con más de 4 vértices con
+  `inside_corners.jogs [{depth_in, kind notch|step, source}]`; ATM con dato CRITERIO con `alternativas`.
+- **v72 — checklist de la tarea de exteriores / aberturas:** todo "BOX HEADER AS NEEDED" lleva su `vestibule_head`;
+  las column wraps del canopy (detalle de canopy column) se leen en la tarea de exteriores (las dos lecturas).
 - Unión: `python3 etapas.py unir <dir>/2_lectura/A <dir>/2_lectura/canon_A.json` (idem B). Falla si dos
   fragmentos repiten un id o traen constantes distintas (escala).
 
@@ -323,6 +346,9 @@ openings MEP · las 15 de accesorios (§12).
    explicar (una door va dentro del run). Excepción solo declarada con motivo (`corners_ok`, `gaps_ok`).
 0c. `chequeos_v71.py takeoff_canon.json` PASA (también corre dentro de `etapas.py compuerta`): R71.1 flecha norte,
    R71.2 box contado dos veces, R71.3 accesorios de bulkhead > Σ vanos, R71.5 (un tag descartado "por otra tarea").
+0d. `chequeos_v72.py takeoff_canon.json --vigas vigas_out.json` PASA (también dentro de `etapas.py compuerta`, que
+   busca `vigas_out.json` en `4_canon/` u `out/`): R72.1 type K por hatch, R72.2 diagonal, R72.3 `part_of`, R72.4
+   vigas_sobre_walls manda, R72.5 MEP de `mep.cruces` y FD una vez, R72.6 side A|B, R72.10 jogs del FRP, R72.11 ATM.
 1. `inventario_tags.py`, `canon.py` (con el `inventario.py` de walls), `vigas_sobre_walls.py` corren sin error; ninguna familia obligatoria en 0 sin motivo.
 2. Todas las cantidades de §6 salen de `familias_out.json` / `framed_openings_out.json`.
 3. `closer.py`: header = Σ (R.O. + 1'-4") × piezas; ducto con header / sill = rechazo.
@@ -374,7 +400,12 @@ v71 (todo en test_v71): R67 partición eje (esquina entre tags, return sin tag, 
 hueco vacío / con R.O., T y bulkhead, exterior por eje, pier no vuelve exterior al type, sin tags) · R68
 partition_types pasa tag_ids · R69 Layers ponderado · R70 mep.py sin offsets ni página fija · R71 chequeos_v71
 (R71.1 / R71.2 / R71.3 / R71.5) y su llamada en etapas · R72 headers ASSUMED / run_ends · R73 track por tamaño
-(verificar + track_por_tamano) · R74 vigas paralelas con rótulo distinto y rótulo con un solo dueño.
+(verificar + track_por_tamano) · R74 vigas paralelas con rótulo distinto y rótulo con un solo dueño. **v72 (`test_v72.py`, 18 tests; 17 fallan
+con las tools v71, el otro es protección):** R72.1 type K por hatch y segmento sin tag · R72.2 diagonal por promedio
+de caras · R72.3 `part_of` y un box = un wall · R72.4 vigas_sobre_walls manda · R72.5 MEP de mep.cruces y FD una vez
+(compuerta y accesorios) · R72.6 side A|B y face END en board_caras · R72.7 stub ≤ 6" y protección del alcove · R72.8 anchors · R72.9 plates
+por fila · R72.10 jogs del FRP · R72.11 ATM con alternativas · R72.12 fusionar / verificar track por tamaño · P-02
+unir con metadatos.
 
 ---
 
@@ -473,9 +504,28 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R71.11 | CONT. BOX BEAM declara `run_ends` ("jamb_to_jamb" del primer al último jamb, o "wall_to_wall" hasta los walls de los extremos) con fuente; si el detalle no lo dibuja, RFI con el delta de las dos. | headers.py |
 | R71.12 | Partición "eje" (E28 v71); cada wall del canon con `tag_ids`. | particion.py / partition_types.py |
 | R71.13 | Layers del Partition Takeoff = Σ(layers × largo de face) / LF del wall; una cara partida por room no suma otra layer. | partition_types.py |
-| R71.14 | Wall bajo viga: manda la viga cuyo EJE cae dentro de la band; dos vigas paralelas a ≤ 1 ft con rótulo distinto = decisión con imagen (RFI); cada rótulo tiene un solo dueño (la viga más cercana). | vigas_sobre_walls.py |
+| R71.14 | Wall bajo viga: manda la viga cuyo EJE cae dentro de la band ± la tolerancia de `vigas_sobre_walls.py` (`--tol`, 3 pt; v72: la tool manda, nunca una lectura "estricta" del texto, R72.4); dos vigas paralelas a ≤ 1 ft con rótulo distinto = decisión con imagen (RFI); cada rótulo tiene un solo dueño (la viga más cercana). | vigas_sobre_walls.py |
 | R71.15 | Expansion anchors / slab pins: el driver es el bottom track de los elementos que el detalle de anclaje nombra (p. ej. "exterior walls"); column wraps, piers o cajas que el detalle no nombra van con su fuente o como RFI con delta, nunca mezclados en silencio. | accesorios (lectura) |
 | R71.16 | Cripples de door_bulkhead / storefront / vestibule head: la regla de studs del modelo como wall se mantiene (coincide con la convención del estimador); el vendor_end compartido entre bulkhead y stub va a RFI (decide el estimador), no se cambia en silencio. | studs (sin cambio) |
+
+---
+
+## 18. Reglas v72 (arbitraje de dos pruebas ciegas; cada una con tool o compuerta — ninguna depende de la lectura)
+
+| # | Regla | Dónde |
+|---|---|---|
+| R72.1 | Type K (panel balístico): LF del wall K = extensión del HATCH medida en vector (`hatch_extent {value_ft, source, img}`), no la esquina ni el return. Un segmento SIN tag nunca es wall K: con hatch va a `ballistic_jogs` (board) y su framing al type base; sin hatch, al type base. Contorno ballistic = Σ caras customer de walls K con hatch + `ballistic_jogs` (R70.5). | chequeos_v72 (0d) |
+| R72.2 | Wall diagonal (band ori D): `faces_top` y `faces_bottom` medidas en vector; length_ft = promedio de los dos largos de cara (eje). Una sola cara o un extremo a ojo = falla. | chequeos_v72 |
+| R72.3 | Pier / box partido en partes: la parte sin tag lleva `part_of` (id del registro con tag). En la cuenta de walls un box = UN wall (el del tag); la parte va a OTHER FRAMING como `pier_part`. Exterior walls = un wall por eje / fachada, sin piers. | chequeos_v72 + partition_types |
+| R72.4 | `vigas_sobre_walls.py` manda: un wall que la tool da bajo viga lleva `stops_under_beam` o `beam_override {motivo, source N/HOJA, img}`; ningún adversarial cambia la altura "por lectura estricta" de R71.14. | chequeos_v72 |
+| R72.5 | MEP: la lista de cruces es la salida de `mep.cruces` (`method: "mep.cruces"`, con `xy`); un cruce que la tool no ve va `manual {motivo, img}`. El mismo fire damper del opening schedule / openings_extra y del barrido (mismo tamaño WxH) se cuenta UNA vez. | chequeos_v72 + accesorios |
+| R72.6 | `faces[].side` = A \| B \| END (A = norte u oeste, B = sur o este, BOX = A; END = cara de extremo / return de un box: `board_caras.py` la acepta con length_ft + length_source, fuera de Σ(side) = L). Nunca letras de brújula. | chequeos_v72 + board_caras |
+| R72.7 | Stub sin tag de ≤ 6" (remate de un frente cortado por un bulkhead u otro type) no es wall propio: su LF se suma al wall con tag más cercano del mismo type. Un grupo sin tag más largo (alcove) sigue siendo un wall. | particion.py |
+| R72.8 | Expansion anchors = bottom track de element `wall` exterior (lo que nombra el schedule de anclaje). Column wrap / chase exterior → pins (criterio del estimador) salvo `anchorage {value, source N/HOJA}`; parte sin tag de un box → ninguno + RFI con delta. | accesorios.py |
+| R72.9 | Stud reinforcement MEP: plates = MAX(1, ROUNDUP(ancho / O.C.)) × filas de studs del wall (double row = 2; regla "REGISTRO ENTRE HOJAS Y CRUCE DE MEP"), con RFI de la alternativa "una por cruce". `studs_cut` solo como override con fuente. | accesorios.py |
+| R72.10 | PVC trim del FRP: con más de 4 vértices, `inside_corners.jogs [{depth_in, kind notch|step, source}]`; un jog < 6" (carrier, espesor de acabado) no lleva inside corner trim (se descuenta + RFI con delta). | chequeos_v72 + accesorios |
+| R72.11 | ATM recess: la cota de OTRO elemento (box beam, plinth) no es el alto del stud sistered; un dato no impreso = CRITERIO con `alternativas [{label, width_ft, sistered_h_ft, furring_rows}]`, un RFI con delta por alternativa. | chequeos_v72 + accesorios |
+| R72.12 | Track por tamaño (R71.8b): los renglones por tamaño de una familia conservan su NET y suman la familia (± 0.1); `fusionar` nunca les pone el total. `verificar` compara Σ contra `familias_out.json` de las salidas. | plantilla_excel.py |
 
 ---
 
