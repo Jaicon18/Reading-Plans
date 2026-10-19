@@ -1069,7 +1069,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 35. **Mapear coordenadas sobre un recorte que se redujo para verlo** → la escala efectiva es `F × (ancho_final / ancho_original)`, no `F`.
 36. **Tomar un bid set parcial (solo fueling/canopy) como si fuera el edificio** → Paso 0: confirmar qué paquete es; si no hay Partition Types ni RCP, el alcance puede ser CERO y se entrega así, con cada cero justificado.
 37. **Herramientas probadas solo con PDFs de prueba cómodos** → el primer set real destapó 3 bugs (rótulo por zona fija, censo sin schedule, track ×2 por renglón).
-38. **arranque.py con pdfplumber sobre un set grande** (97 MB, 73 hojas: >20 min sin terminar) → para el mapa de hojas usar `pdftotext -f N -l N -bbox` por página; pdfplumber solo en las hojas de planta.
+38. **arranque.py con pdfplumber sobre un set grande** (un set grande en MB y hojas: >20 min sin terminar) → para el mapa de hojas usar `pdftotext -f N -l N -bbox` por página; pdfplumber solo en las hojas de planta.
 39. **Marca de planmark sobre un wall con door** → el punto de prueba cae en el opening y el gate aborta (correcto); se marca en piezas a cada lado.
 40. **Set con walls de Wood** → el alcance metal se reduce a slip track + soportes CFS de soffits; la wood va INFO Div 06 con RFI.
 41. **Tags en rombo/hexágono** → `tagband` no los ve como caja; censo por layer de texto dentro de la hoja de planta + verificación visual.
@@ -1141,7 +1141,7 @@ Cada penetración se evalúa **individualmente** contra el umbral de 1/4 de hoja
 
 ## PROTOCOLO DE EJECUCIÓN
 
-**PASO 0 — ¿Qué paquete es este set?** Lee el índice y confirma que el set contiene el EDIFICIO (floor plan, Partition Types, RCP). Un bid set puede ser un paquete parcial — canopy, site/civil, MEP — sin obra de interior. Si no hay Partition Types, floor plan ni RCP, el alcance Div 05/09 puede ser CERO: dilo en la primera línea, justifica cada cero con su hoja, y NO fabriques un take-off. Caso real (un fueling set de 27 hojas): canopy, deck, gutter y framing del fascia son del fabricante del canopy, el fascia es "by others" y el soffit es pan deck expuesto; lo único posiblemente nuestro eran los column wraps sin detalle → RFI con alterno valorizado, fuera del base. Ojo al contar columnas de canopy: suelen ser 2 por isla, no una. Confirma también el SISTEMA de framing: si el legend dice WOOD STUDS, aplica la sección SETS CON WALLS DE Wood.
+**PASO 0 — ¿Qué paquete es este set?** Lee el índice y confirma que el set contiene el EDIFICIO (floor plan, Partition Types, RCP). Un bid set puede ser un paquete parcial — canopy, site/civil, MEP — sin obra de interior. Si no hay Partition Types, floor plan ni RCP, el alcance Div 05/09 puede ser CERO: dilo en la primera línea, justifica cada cero con su hoja, y NO fabriques un take-off. Caso real (un set de otro proyecto): canopy, deck, gutter y framing del fascia son del fabricante del canopy, el fascia es "by others" y el soffit es pan deck expuesto; lo único posiblemente nuestro eran los column wraps sin detalle → RFI con alterno valorizado, fuera del base. Ojo al contar columnas de canopy: suelen ser 2 por isla, no una. Confirma también el SISTEMA de framing: si el legend dice WOOD STUDS, aplica la sección SETS CON WALLS DE Wood.
 
 **PASO 0 — Mapa de hojas.** Corre primero `arranque.py <pdf>` (ver su sección propia): automatiza la parte mecánica de este paso — copia sin markups, verifica layer vectorial, renderiza, lee el rótulo de cada page_index y arma el mapa, ubica por título el Drawing Index y los schedules, y da un censo preliminar de tags. Se detiene en un punto de control; revísalo antes de seguir. En sets grandes (más de ~40 hojas o ~50 MB) el mapa se arma con `pdftotext` por página. Lee el Drawing Index de la portada a alta resolución. Tabla: título → número → página PDF. Busca por TÍTULO, no por número. Verifica el rótulo real en el title block de cada página — la forma barata de hacerlo es extraer el texto de la esquina inferior derecha de cada página y leer ahí el número de hoja, en vez de contar callouts (si el title block de este set no está ahí, `arranque.py --title-block-zona` se ajusta). **Guarda el mapa page_index → hoja**, y recuerda que `pdftoppm` nombra el PNG con el número 1-based: "...-24.png" es page_index 23. Revisa el Revision Log. Nunca declares una hoja "faltante" sin barrer TODO el PDF por rótulo.
 
@@ -1376,7 +1376,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - verif_bandas.py — compuerta del DIBUJO
   - wallgeom.py — motor de medición (EN VALIDACIÓN)
   - arranque.py — Paso 0 mecánico en un solo comando
-- **`adenda_v26.md`** — ADENDA v26 — 28-sep-2026 · lo que salió de la auditoría adversarial de un proyecto anterior
+- **`adenda_v26.md`** — ADENDA v<n> — <n>-sep-<n> · lo que salió de la auditoría adversarial de un proyecto anterior
   - LA AUDITORÍA ADVERSARIAL ES UN PASO DEL CIERRE
   - REGLA — El perfil de stud se lee del PARTITION SCHEDULE, nunca de una tabla propia
   - REGLA — Ninguna line item se cae en silencio: el generador FALLA si sobra una
@@ -1395,14 +1395,14 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - REGLA — Registro de cadenas: los tramos suman el total y los claros salen redondos
   - REGLA — El título y la leyenda del plano marcado no se salen del recuadro
   - REGLA — Lo que no se resuelve, se declara; no se inventa
-- **`adenda_v27.md`** — ADENDA v27 — 28-sep-2026 · la compuerta de SIGNIFICADO de columna
+- **`adenda_v27.md`** — ADENDA v<n> — <n>-sep-<n> · la compuerta de SIGNIFICADO de columna
   - De dónde salió
   - REGLA — Una columna de resumen no se entrega sin una recomputación independiente
   - La pregunta que hay que hacerle a cada columna
   - Qué verifica la compuerta (`verif_columnas.py`)
   - REGLA — Una compuerta que nunca se ha visto fallar no sirve
   - REGLA — El decimal raro se investiga, no se redondea
-- **`adenda_v28.md`** — ADENDA v28 — 28-sep-2026 · la compuerta de COBERTURA
+- **`adenda_v28.md`** — ADENDA v<n> — <n>-sep-<n> · la compuerta de COBERTURA
   - De dónde salió
   - No era error: los studs de abertura
   - El hueco de verdad
@@ -1410,7 +1410,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - REGLA — Un `continue` por tipo de geometría es una bomba
   - Cómo se cerró
   - Probado viéndolo fallar
-- **`adenda_v29.md`** — ADENDA v29 — 28-sep-2026 · la compuerta del LIBRO
+- **`adenda_v29.md`** — ADENDA v<n> — <n>-sep-<n> · la compuerta del LIBRO
   - De dónde salió
   - Los cinco errores de dinero, todos de la misma raíz
   - REGLA — La familia del material manda sobre el waste y sobre el length de compra
@@ -1419,14 +1419,14 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - REGLA — Auditar un libro SIN RECALCULAR reporta decenas de fallos fantasma
   - La compuerta: `verif_libro.py`
   - Lo que sigue sin resolverse, y se dice
-- **`adenda_v30.md`** — ADENDA v30 — 28-sep-2026 · barrido de ZONAS HÚMEDAS
+- **`adenda_v30.md`** — ADENDA v<n> — <n>-sep-<n> · barrido de ZONAS HÚMEDAS
   - De dónde salió
   - REGLA — Censo por CUARTO, cruzando TRES fuentes
   - Lo que salió
   - REGLA — Una nota que nombra DOS aparatos hay que leerla como DOS walls
   - REGLA — El censo de zonas húmedas lleva compuerta de cobertura
   - REGLA — El W.R. es RECLASIFICACIÓN, no board nuevo
-- **`adenda_v31.md`** — ADENDA v31 — 28-sep-2026 · NINGÚN CAMBIO ESTÁ TERMINADO HASTA QUE EL EXCEL SE REGENERA
+- **`adenda_v31.md`** — ADENDA v<n> — <n>-sep-<n> · NINGÚN CAMBIO ESTÁ TERMINADO HASTA QUE EL EXCEL SE REGENERA
   - De dónde salió
   - El riesgo que cubre
   - REGLA
@@ -1434,7 +1434,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - UNA SOLA PUERTA DE SALIDA — `entregar.py`
   - Corolario para el ORDEN PERMANENTE
   - Error de la propia compuerta, cazado en su primer arranque
-- **`adenda_v32.md`** — ADENDA v32 — 29-sep-2026 · TODO NOMBRE DE MATERIAL SE ESCRIBE EN INGLÉS
+- **`adenda_v32.md`** — ADENDA v<n> — <n>-sep-<n> · TODO NOMBRE DE MATERIAL SE ESCRIBE EN INGLÉS
   - De dónde salió
   - REGLA
   - Glosario
@@ -1442,7 +1442,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - Tres cosas que costaron y no hay que repetir
   - Para tocar un cierre YA SELLADO — `traducir_materiales.py`
   - Los documentos históricos se CONGELAN, no se traducen
-- **`adenda_v33.md`** — ADENDA v33 — 29-sep-2026 · EL JUEGO DE PLANOS MARCADOS ES AUTOMÁTICO
+- **`adenda_v33.md`** — ADENDA v<n> — <n>-sep-<n> · EL JUEGO DE PLANOS MARCADOS ES AUTOMÁTICO
   - De dónde salió
   - REGLA — No se pregunta, no se ofrece, no se espera
   - Qué compone el juego, sin faltar ninguno
@@ -1451,51 +1451,51 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - Sigue valiendo todo lo de antes
 - **`estructura_carpeta.md`** — ESTRUCTURA DE CARPETA, EN CADA PROYECTO
   - Una sola versión vigente, no una pila de versiones
-- **`adenda_v34.md`** — ADENDA v34 — 1-oct-2026 · COMPUERTA DE COBERTURA DE DETALLES
+- **`adenda_v34.md`** — ADENDA v<n> — <n>-oct-<n> · COMPUERTA DE COBERTURA DE DETALLES
   - De dónde salió
   - REGLA — No se cierra un proyecto sin haber abierto cada detalle de cada hoja que se usó
   - Lo que encontró en su primera run
   - REGLA — Una cita que una máquina no puede leer no se puede auditar
   - Cómo se usa en un proyecto nuevo
-- **`adenda_v35.md`** — ADENDA v35 — 1-oct-2026 (noche)
+- **`adenda_v35.md`** — ADENDA v<n> — <n>-oct-<n> (noche)
   - El índice se genera, no se escribe (`hoja_indice.py`)
   - Tres reglas nuevas, cada una de un error cometido hoy
   - La carpeta de entrega es el espejo, y tiene que estar completa
   - Sin shell en su PC, el diff se hace por TAMAÑO
-- **`adenda_v36.md`** — ADENDA v36 — 2-oct-2026 · LA CADENA DE DETALLES SE SIGUE HASTA EL FINAL
+- **`adenda_v36.md`** — ADENDA v<n> — <n>-oct-<n> · LA CADENA DE DETALLES SE SIGUE HASTA EL FINAL
   - Las cuatro partes de la regla
   - Qué lo originó
   - Las compuertas
   - Dos bugs propios al escribir la compuerta, los dos de normalización
-- **`adenda_v37.md`** — ADENDA v37 — 3-oct-2026 · LOS 42 CALLOUTS, CERRADOS
+- **`adenda_v37.md`** — ADENDA v<n> — <n>-oct-<n> · LOS <n> CALLOUTS, CERRADOS
   - 1. El RFI del parapet se CIERRA — el infill de `11/S5.10` SÍ se ubica
   - 2. Una layer que las secciones NO rotulan y los detalles SÍ
   - 3. Dos bugs de compuerta — las dos miraban menos de lo que creían
   - 4. Trampa operativa: `| head` mata el script antes de que escriba
   - 5. El furring de columna es un LAZO CERRADO
   - 6. Lo que la cadena destapó, en line items
-- **`adenda_v38.md`** — ADENDA v38 — 4-oct-2026 · EL ORDEN DE TRABAJO: PLANO → CADENA → TOTAL → EXCEL
+- **`adenda_v38.md`** — ADENDA v<n> — <n>-oct-<n> · EL ORDEN DE TRABAJO: PLANO → CADENA → TOTAL → EXCEL
   - ⛔ SUPER REGLA INVIOLABLE
   - La herramienta: `cadena_detalles.py`
   - Lo que la columna destapó el primer día
   - CORRECCIÓN DEL MISMO DÍA — dos errores que la columna destapó en cuanto se miró
-- **`adenda_v39.md`** — ADENDA v39 — 7-oct-2026 · EL VOCABULARIO DEL TRADE VA EN INGLÉS, SIEMPRE
+- **`adenda_v39.md`** — ADENDA v<n> — <n>-oct-<n> · EL VOCABULARIO DEL TRADE VA EN INGLÉS, SIEMPRE
   - ⛔ REGLA INVIOLABLE
   - CÓMO SE HACE CUMPLIR, QUE ES LA PARTE QUE NO SE OLVIDA
   - LOS TRES ERRORES QUE DESTAPÓ APLICARLA (y las reglas que dejan)
-- **`adenda_v40.md`** — ADENDA v40 — 7-oct-2026 · LA REGLA DEL INGLÉS SE VERIFICA, NO SE PROMETE
+- **`adenda_v40.md`** — ADENDA v<n> — <n>-oct-<n> · LA REGLA DEL INGLÉS SE VERIFICA, NO SE PROMETE
   - ⛔ LO QUE PASÓ, y por eso existe esta adenda
   - LA COMPUERTA: `verif_respuesta.py`
   - POR QUÉ HACEN FALTA DOS LISTAS, Y NO UNA
   - LOS FALSOS AMIGOS QUE SALIERON AL CORRERLO SOBRE EL TEXTO DE VERDAD
   - ALCANCE: también el generador, no sólo la salida
   - TERCER TRINQUETE
-- **`adenda_v41.md`** — ADENDA v41 — 8-oct-2026 · EL ROOM DE CADA FACE SE VERIFICA, NO SE HEREDA
+- **`adenda_v41.md`** — ADENDA v<n> — <n>-oct-<n> · EL ROOM DE CADA FACE SE VERIFICA, NO SE HEREDA
   - ⛔ REGLA INVIOLABLE
   - LOS CUATRO CASOS QUE LA ORIGINARON, el mismo día
   - LA COMPUERTA: `verif_caras.py` (paso 12 de 17)
   - EL OTRO HALLAZGO DEL DÍA: A1 #n, `[DERIVADO]` → `[CONFIRMADO]`
-- **`adenda_v42.md`** — ADENDA v42 — 8-oct-2026 · UNA ELEVACIÓN NO ES UNA HEIGHT, Y UN `[CONFIRMADO]` TIENE QUE CITAR SU PRINTED DIMENSION
+- **`adenda_v42.md`** — ADENDA v<n> — <n>-oct-<n> · UNA ELEVACIÓN NO ES UNA HEIGHT, Y UN `[CONFIRMADO]` TIENE QUE CITAR SU PRINTED DIMENSION
   - ⛔ REGLA INVIOLABLE
   - CÓMO SE ENCONTRÓ (armando el HANDOFF, no revisando cantidades)
   - POR QUÉ `verif_confirmado` NO LO CAZABA — el hueco más grande que tuvo esa compuerta
@@ -1503,25 +1503,25 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - UNA NORMALIZACIÓN DUPLICADA SE DESINCRONIZA SOLA
   - EL MAPA DE HOJAS SE CRUZA CON DOS FUENTES, Y SE DICE DÓNDE NO CUADRAN
   - EL REGISTRO DE LO QUE EL USUARIO CONFIRMÓ NO EXISTÍA COMO ARCHIVO
-- **`adenda_v44.md`** — ADENDA v44 — 10-oct-2026
-  - Barrido de los 95 detalles sin abrir, y el error que cometí en medio
+- **`adenda_v44.md`** — ADENDA v<n> — <n>-oct-<n>
+  - Barrido de los detalles sin abrir, y el error que cometí en medio
   - REGLA 44.1 — BARRIDO POR TAG DE SCHEDULE, NO POR WALL
   - REGLA 44.2 — UN ROLL-UP POR CLAVE NO ES UN INVENTARIO DE CONTENIDO
   - REGLA 44.3 — UNA COMPUERTA NO SE DA POR BUENA HASTA VERLA FALLAR
   - Lo que el barrido movió, ya sellado
-- **`adenda_v45.md`** — ADENDA v45 — 10-oct-2026 (tarde)
+- **`adenda_v45.md`** — ADENDA v<n> — <n>-oct-<n> (tarde)
   - Cobertura de detalles a cero, atraso de [CONFIRMADO] a cero, y el mapa de adyacencia
   - REGLA 45.1 — UNA CITA QUE PRUEBA QUE EL MATERIAL VA NO PRUEBA CUÁNTO HAY
   - REGLA 45.2 — UN EXTREMO QUE EL MAPA NO RESUELVE NO ES UN EXTREMO LIBRE
-  - COBERTURA DE DETALLES: 90 PENDIENTES → 0
+  - COBERTURA DE DETALLES: <n> PENDIENTES → 0
   - Estado al cierre
-- **`adenda_v46.md`** — ADENDA v46 — 11-oct-2026
+- **`adenda_v46.md`** — ADENDA v<n> — <n>-oct-<n>
   - La regla de waste, ampliada, y los tres renglones que destapó
   - REGLA 46.1 — UNA REGLA ESCRITA COMO DOS LISTAS DEJA HUECOS; ESCRITA COMO PARTITION, NO
   - REGLA 46.2 — DOS CELDAS QUE SIGNIFICAN LO MISMO SON DOS FUENTES DE VERDAD
   - Lo que NO lleva waste, y por qué — explícito para no volver a preguntarlo
   - RFIs
-- **`adenda_v47.md`** — ADENDA v47 — 11-oct-2026
+- **`adenda_v47.md`** — ADENDA v<n> — <n>-oct-<n>
   - Lo que se corrigió, y por qué importa
   - REGLA 47.1 — UNA COMPUERTA QUE CUENTA POR RENGLÓN NO PUEDE VER LA CERCA
   - El test, y la prueba de que falla sin el arreglo

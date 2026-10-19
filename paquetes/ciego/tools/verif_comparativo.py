@@ -2,10 +2,10 @@
 """verif_comparativo.py -- COMPUERTA DEL COMPARATIVO.
 
 Error real, 29-sep-2026: declare "panel balistico 3/8 UL752 -- solo Claude" cuando su CSV
-SI traia una banda `A1K 3/8" GYP BOARD`. La fila existia en su archivo y yo la habia
+SI traia una banda `<type K> 3/8" GYP BOARD`. La fila existia en su archivo y yo la habia
 dejado sin pareja, asi que salio como exclusiva mia. Declarar exclusivo algo que el otro
 si tiene es la peor falla de un comparativo: manda a discutir una partida que en realidad
-esta en los dos, y esconde la diferencia verdadera (18.14 vs <n> SF).
+esta en los dos, y esconde la diferencia verdadera (<n> vs <n> SF).
 
 Lo que exige:
  1. RUTEO TOTAL: cada Subject del CSV cae en un grupo del MAPA o esta declarado como

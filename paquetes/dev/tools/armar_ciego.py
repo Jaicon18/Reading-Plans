@@ -10,7 +10,8 @@ rooms, doors, walls, conteos y largos). Esta tool lo resuelve por construcción:
      cambia): fuera tablas y bloques de código (datos de corridas) y todo número que no sea una medida genérica
      (fracciones y pulgadas, pies-pulgadas, %, gauge, ids de regla / versión, N/HOJA, fechas, numeración de lista)
      pasa a "<n>";
-  3. REGLAS_INVIOLABLES.md se regenera con el catálogo del árbol ciego;
+  3. el índice de adendas del SKILL se regenera desde esos títulos limpios y REGLAS_INVIOLABLES.md con el catálogo
+     del árbol ciego;
   4. corre test_ciego_tools.py --estricto sobre el árbol ciego: si no da 0 hallazgos, NO arma el zip.
 Uso: python3 armar_ciego.py <raiz_dev (con SKILL y tools)> <destino> [--zip salida.zip]
 """
@@ -87,6 +88,17 @@ def armar(raiz, dest):
             p = os.path.join(rd, f)
             txt = open(p, encoding="utf-8").read()
             open(p, "w", encoding="utf-8").write(generico(txt))
+    # v73e: el índice de adendas del SKILL se regenera desde los títulos ya limpios de cada adenda
+    sp = os.path.join(dest, SKILL, "SKILL.md")
+    sk = open(sp, encoding="utf-8").read()
+    for f in sorted(os.listdir(rd)):
+        if f.startswith("adenda_v") and f.endswith(".md"):
+            tit = next((ln[2:].strip() for ln in open(os.path.join(rd, f), encoding="utf-8").read().splitlines()
+                        if ln.startswith("# ")), None)
+            if tit:
+                sk = re.sub(r"(?m)^- \*\*`" + re.escape(f) + r"`\*\* — .*$",
+                            lambda _m, f=f, t=tit: f"- **`{f}`** — {t}", sk)
+    open(sp, "w", encoding="utf-8").write(sk)
     env = dict(os.environ, TAKEOFF_SKILL=os.path.join(dest, SKILL))
     tab = subprocess.run([sys.executable, "-I", os.path.join(td, "reglas.py"), "tabla"], capture_output=True, text=True,
                          env=env)

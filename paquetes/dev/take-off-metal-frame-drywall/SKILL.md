@@ -1069,7 +1069,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 35. **Mapear coordenadas sobre un recorte que se redujo para verlo** → la escala efectiva es `F × (ancho_final / ancho_original)`, no `F`.
 36. **Tomar un bid set parcial (solo fueling/canopy) como si fuera el edificio** → Paso 0: confirmar qué paquete es; si no hay Partition Types ni RCP, el alcance puede ser CERO y se entrega así, con cada cero justificado.
 37. **Herramientas probadas solo con PDFs de prueba cómodos** → el primer set real destapó 3 bugs (rótulo por zona fija, censo sin schedule, track ×2 por renglón).
-38. **arranque.py con pdfplumber sobre un set grande** (97 MB, 73 hojas: >20 min sin terminar) → para el mapa de hojas usar `pdftotext -f N -l N -bbox` por página; pdfplumber solo en las hojas de planta.
+38. **arranque.py con pdfplumber sobre un set grande** (un set grande en MB y hojas: >20 min sin terminar) → para el mapa de hojas usar `pdftotext -f N -l N -bbox` por página; pdfplumber solo en las hojas de planta.
 39. **Marca de planmark sobre un wall con door** → el punto de prueba cae en el opening y el gate aborta (correcto); se marca en piezas a cada lado.
 40. **Set con walls de Wood** → el alcance metal se reduce a slip track + soportes CFS de soffits; la wood va INFO Div 06 con RFI.
 41. **Tags en rombo/hexágono** → `tagband` no los ve como caja; censo por layer de texto dentro de la hoja de planta + verificación visual.
@@ -1141,7 +1141,7 @@ Cada penetración se evalúa **individualmente** contra el umbral de 1/4 de hoja
 
 ## PROTOCOLO DE EJECUCIÓN
 
-**PASO 0 — ¿Qué paquete es este set?** Lee el índice y confirma que el set contiene el EDIFICIO (floor plan, Partition Types, RCP). Un bid set puede ser un paquete parcial — canopy, site/civil, MEP — sin obra de interior. Si no hay Partition Types, floor plan ni RCP, el alcance Div 05/09 puede ser CERO: dilo en la primera línea, justifica cada cero con su hoja, y NO fabriques un take-off. Caso real (un fueling set de 27 hojas): canopy, deck, gutter y framing del fascia son del fabricante del canopy, el fascia es "by others" y el soffit es pan deck expuesto; lo único posiblemente nuestro eran los column wraps sin detalle → RFI con alterno valorizado, fuera del base. Ojo al contar columnas de canopy: suelen ser 2 por isla, no una. Confirma también el SISTEMA de framing: si el legend dice WOOD STUDS, aplica la sección SETS CON WALLS DE Wood.
+**PASO 0 — ¿Qué paquete es este set?** Lee el índice y confirma que el set contiene el EDIFICIO (floor plan, Partition Types, RCP). Un bid set puede ser un paquete parcial — canopy, site/civil, MEP — sin obra de interior. Si no hay Partition Types, floor plan ni RCP, el alcance Div 05/09 puede ser CERO: dilo en la primera línea, justifica cada cero con su hoja, y NO fabriques un take-off. Caso real (un set de otro proyecto): canopy, deck, gutter y framing del fascia son del fabricante del canopy, el fascia es "by others" y el soffit es pan deck expuesto; lo único posiblemente nuestro eran los column wraps sin detalle → RFI con alterno valorizado, fuera del base. Ojo al contar columnas de canopy: suelen ser 2 por isla, no una. Confirma también el SISTEMA de framing: si el legend dice WOOD STUDS, aplica la sección SETS CON WALLS DE Wood.
 
 **PASO 0 — Mapa de hojas.** Corre primero `arranque.py <pdf>` (ver su sección propia): automatiza la parte mecánica de este paso — copia sin markups, verifica layer vectorial, renderiza, lee el rótulo de cada page_index y arma el mapa, ubica por título el Drawing Index y los schedules, y da un censo preliminar de tags. Se detiene en un punto de control; revísalo antes de seguir. En sets grandes (más de ~40 hojas o ~50 MB) el mapa se arma con `pdftotext` por página. Lee el Drawing Index de la portada a alta resolución. Tabla: título → número → página PDF. Busca por TÍTULO, no por número. Verifica el rótulo real en el title block de cada página — la forma barata de hacerlo es extraer el texto de la esquina inferior derecha de cada página y leer ahí el número de hoja, en vez de contar callouts (si el title block de este set no está ahí, `arranque.py --title-block-zona` se ajusta). **Guarda el mapa page_index → hoja**, y recuerda que `pdftoppm` nombra el PNG con el número 1-based: "...-24.png" es page_index 23. Revisa el Revision Log. Nunca declares una hoja "faltante" sin barrer TODO el PDF por rótulo.
 
@@ -1467,7 +1467,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - Qué lo originó
   - Las compuertas
   - Dos bugs propios al escribir la compuerta, los dos de normalización
-- **`adenda_v37.md`** — ADENDA v37 — 3-oct-2026 · LOS 42 CALLOUTS, CERRADOS
+- **`adenda_v37.md`** — ADENDA v37 — 3-oct-2026 · LOS CALLOUTS, CERRADOS
   - 1. El RFI del parapet se CIERRA — el infill de `11/S5.10` SÍ se ubica
   - 2. Una layer que las secciones NO rotulan y los detalles SÍ
   - 3. Dos bugs de compuerta — las dos miraban menos de lo que creían
@@ -1504,7 +1504,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - EL MAPA DE HOJAS SE CRUZA CON DOS FUENTES, Y SE DICE DÓNDE NO CUADRAN
   - EL REGISTRO DE LO QUE EL USUARIO CONFIRMÓ NO EXISTÍA COMO ARCHIVO
 - **`adenda_v44.md`** — ADENDA v44 — 10-oct-2026
-  - Barrido de los 95 detalles sin abrir, y el error que cometí en medio
+  - Barrido de los detalles sin abrir, y el error que cometí en medio
   - REGLA 44.1 — BARRIDO POR TAG DE SCHEDULE, NO POR WALL
   - REGLA 44.2 — UN ROLL-UP POR CLAVE NO ES UN INVENTARIO DE CONTENIDO
   - REGLA 44.3 — UNA COMPUERTA NO SE DA POR BUENA HASTA VERLA FALLAR
@@ -1513,7 +1513,7 @@ Qué contiene cada archivo. Si una tarea toca uno de estos temas, abre su archiv
   - Cobertura de detalles a cero, atraso de [CONFIRMADO] a cero, y el mapa de adyacencia
   - REGLA 45.1 — UNA CITA QUE PRUEBA QUE EL MATERIAL VA NO PRUEBA CUÁNTO HAY
   - REGLA 45.2 — UN EXTREMO QUE EL MAPA NO RESUELVE NO ES UN EXTREMO LIBRE
-  - COBERTURA DE DETALLES: 90 PENDIENTES → 0
+  - COBERTURA DE DETALLES: <n> PENDIENTES → 0
   - Estado al cierre
 - **`adenda_v46.md`** — ADENDA v46 — 11-oct-2026
   - La regla de waste, ampliada, y los tres renglones que destapó

@@ -40,11 +40,10 @@ NO_SON_DETALLE = {
 # Citas que el lector NO encuentra pero que SI existen, comprobadas a ojo en la hoja.
 # Cada una lleva la evidencia; sin evidencia escrita no entra aqui.
 VERIFICADAS = {
-    '6/A11.01': ('Comprobado a 600 dpi el 5-oct-2026 (recorte x 400-1100, y 1530-1600 de la '
-                 'pagina 46): la hoja SI rotula la vineta 6 sobre A11.01, titulo "OFFICE 2 - '
-                 'SOUTH", escala 1/2" = 1\'-0". El lector no la saca porque el rotulo de hoja '
-                 'bajo esa burbuja no se extrae como palabra suelta.'),
 }
+# Forma de cada entrada (se llena por proyecto, nunca en el paquete):
+#   'N/HOJA': ('Comprobado a <dpi> el <fecha> (recorte de la hoja): la hoja SI rotula la viñeta N sobre HOJA, '
+#              'titulo y escala del rotulo. Motivo por el que el lector no la saca.')
 
 
 def de_pagina(ws, rot):

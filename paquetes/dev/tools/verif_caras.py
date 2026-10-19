@@ -20,7 +20,7 @@ mismo patron: la `ubicacion` nombraba dos rooms y las `caras` nombraban otros.
 
 COMO SE EVITA QUE SEA RUIDO (que es como una compuerta se acaba apagando): solo se compara
 cuando la `ubicacion` tiene la forma limpia `<room A> / <room B>`. Se descarta en cuanto el
-texto trae coordenadas (`y 1120.68/1128.48`), parentesis, o una barra dentro de una sigla
+texto trae coordenadas (`y <c0>/<c1>`), parentesis, o una barra dentro de una sigla
 (`T/STUD`): ahi la barra no separa rooms. Las discrepancias ya EXPLICADAS se declaran una por
 una con su motivo, nunca se aflojan en silencio.
 """

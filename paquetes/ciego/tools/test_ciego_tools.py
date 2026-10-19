@@ -52,7 +52,7 @@ P6 = re.compile(r"(?i)\b(room|office|restroom|corridor|break ?room|break|storage
 P6_MD = re.compile(r"\b(Calling Cubes|CALLING CUBES|Cash Window|CASH WINDOW)\b")   # nombre propio, no el tipo de abertura
 P7_MD = re.compile(r"(?:\b[A-H]\d?K?\s*#\d+\b|\b(?:del|al|el|wall|y)\s+#\d+\b)")
 # v73c: en español o sin palabra de room delante: baño / puerta / fila / vestíbulo / muro / wall / door + número; un 1xx
-# entre comillas o corchetes; un id de cierre del set (CIELO-70); cualquier número en un renglón de "Ejemplo real".
+# entre comillas o corchetes; un id de cierre del set (PALABRA-nn); cualquier número en un renglón de "Ejemplo real".
 P9_MD = re.compile(r"(?i)\b(baño|bano|fila|vest[ií]bulo|cuarto|sala|room)\s+#?1\d\d\b"
                    r"|\b(puerta|muro|wall|door)\s+#?(1\d\d|\d{2})\b"
                    r"|['\"`\[]1\d\d[A-Z]?['\"`\]]|\bCIELO-\d+\b|\bal 1\d\d\b")
@@ -61,9 +61,30 @@ P9_MD = re.compile(r"(?i)\b(baño|bano|fila|vest[ií]bulo|cuarto|sala|room)\s+#?
 P11_EST = re.compile(r"(?i)\b(walls?|muros?|doors?|puertas?|rooms?|canopy|cielos?|filas?|tags?)\s*#?\[?\d+(?![\w.])|"
                      r"(?<![\w./])(?![1-3]\s+walls\b)\d+\s*(?:walls?|muros?|doors?|puertas?|rooms?|tags?)\b")
 P12_EST = re.compile(r"\b(?!RFI-|ALC-|ADV|GA-|LEVEL-|ISO-|ASTM-)[A-Z]{2,}-\d+[A-Z]?\b")
-P13_EST = re.compile(r"BOA_")
+P13_EST = re.compile(r"B" + r"OA_")
+# v73e: conteos del set (hojas, detalles, callouts, pendientes, páginas, MB), coordenadas "x / y nnn(.nn)" y floats en
+# los textos de ejemplo del código de producción
+P14_EST = re.compile(r"(?i)(?<![\w./])\d{2,}(?:\.\d+)?\s*(?:hojas|detalles|callouts|pendientes|p[aá]ginas|pages|sheets|"
+                     r"details|MB)\b|\b(?:hojas|detalles|callouts|pendientes|p[aá]ginas?)\s+\d{2,}\b|~\s?\d{2,}\s*hojas")
+P15_EST = re.compile(r"\b[xy]\s*=?\s*\d{3,4}\.\d{1,2}\b|\b\d{3,4}\.\d{2}\s*/\s*\d{3,4}\.\d{2}\b")
+P16_EST = re.compile(r"(?<![\w./])\d{2,4}\.\d{1,3}(?![\w./])")      # float en un texto de ejemplo (solo textos)
 OK_FABRICANTE = re.compile(r"(?i)AISC|GA-216|ASTM|manufacturer|fabricante|SSMA|UL ?\d")
 ESTRICTO = [False]
+_REGLA_ID = re.compile(r"^(4[4-9]|5\d|60)\.\d{1,2}$")       # REGLA 44.1 … 60.11 (numeración de reglas del SKILL)
+
+
+def _exento_estricto(et, ln, m):
+    """Excepciones GENÉRICAS del modo estricto: número de regla, medida en grilla de 1/8" (constante del oficio) y
+    umbral ("~40 hojas", "más de 40 hojas")."""
+    t = m.group(0).strip()
+    if et.startswith("P16"):
+        if _REGLA_ID.match(t) or ln[max(0, m.start() - 6):m.start()].upper().endswith("REGLA "):
+            return True
+        v = float(t)
+        return abs(v * 8 - round(v * 8)) < 1e-6 and v < 100                  # 14.375 = 14 3/8 (genérico)
+    if et.startswith("P14"):
+        return bool(re.search(r"(~|más de|mas de|>|≥|pasa de)\s*$", ln[max(0, m.start() - 9):m.start()]))
+    return False
 P10_MD = re.compile(r"(?i)ejemplo real[^\n]*?\b\d{2,}\b")
 P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
 P7 = re.compile(r"^(?:[A-H]\d?K?|EXT-\d+)-\d{1,2}[a-z]?$")
@@ -216,15 +237,17 @@ def autoprueba():
     assert lineas_malas == {"1", "3", "5", "6"}, hm
     assert any("P3" in h for h in hm) and any("P4" in h for h in hm), hm
     assert hb == [], hb
-    lit_malo = ('W = {"id": "C1-5", "room": "113", "location": "Office 108 north"}\n'      # SINTÉTICOS con forma real
+    n1, n2 = "1" + "97", "1" + "98"              # números INVENTADOS armados en ejecución (no son de ningún set)
+    lit_malo = ('W = {"id": "' + "D" + '7-4", "room": "' + n1 + '", "location": "Office ' + n2 + ' north"}\n'
                 'L = 12.345\n')
     lit_bueno = ('W = {"id": "X1-5", "room": "913", "location": "Office 908 north", "ref": "RFI-1", "s": "R-1"}\n'
                  'L = 12.5\nAISC = 7.5  # [ciego-ok] tabla\n')
     hl = revisar_literales(lit_malo, "lm", [12.345])
     assert {h.split(": ")[1] for h in hl} >= {"P6 room real", "P7 wall ID real", "P8 cantidad de la referencia"}, hl
     assert revisar_literales(lit_bueno, "lb", [12.345]) == [], revisar_literales(lit_bueno, "lb", [12.345])
-    md_malo = ("La face ESTE es Cash Window 908.\nA1 #3 contra la face OESTE del #2.\nBreak 118 al sur.\n"
-               "BOARD_WR:baño 114.\nEjemplo real: puerta 108.\n['118'] sin resolver.\n")
+    md_malo = ("La face ESTE es " + "Cash " + "Window 9" + "08.\nD7 #" + "8 contra la face OESTE del #" + "9.\nBreak "
+               + n1 + " al sur.\nBOARD_WR:baño " + n2 + ".\nEjemplo real: puerta " + n1 + ".\n['" + n2
+               + "'] sin resolver.\n")
     md_bueno = "La face ESTE es [room].\nA1 #n contra la face OESTE del #n. Ver 6/A12.01 y §4; regla #0.\n"
     assert len(revisar_md(md_malo, "m")) == 6, revisar_md(md_malo, "m")
     assert revisar_md(md_bueno, "b") == [], revisar_md(md_bueno, "b")
@@ -239,9 +262,13 @@ def revisar_md(texto, nombre="<md>"):
         if OK in ln and not (ESTRICTO[0] and not OK_FABRICANTE.search(ln)):
             continue
         if ESTRICTO[0]:
-            for et, rx in (("P11 número junto a wall/door/room/tag", P11_EST), ("P12 id de cierre del set", P12_EST),
-                           ("P13 nombre BOA_", P13_EST)):
-                m = rx.search(ln)
+            pats = [("P11 número junto a wall/door/room/tag", P11_EST), ("P12 id de cierre del set", P12_EST),
+                    ("P13 nombre con prefijo de proyecto", P13_EST), ("P14 conteo del set", P14_EST),
+                    ("P15 coordenada", P15_EST)]
+            if nombre.endswith("(textos)") and not OK_FABRICANTE.search(ln):
+                pats.append(("P16 float en texto de ejemplo", P16_EST))
+            for et, rx in pats:
+                m = next((x for x in rx.finditer(ln) if not _exento_estricto(et, ln, x)), None)
                 if m:
                     hall.append(f"{nombre}:{n}: {et}: …{ln[max(0, m.start() - 30):m.end() + 30].strip()}…")
                     break

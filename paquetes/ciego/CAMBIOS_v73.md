@@ -1,4 +1,4 @@
-# CAMBIOS v73 / v73b / v73c / v73d (2026-10-19) — la compuerta revisa consistencia con el plano
+# CAMBIOS v73 / v73b / v73c / v73d / v73e (2026-10-19) — la compuerta revisa consistencia con el plano
 
 Arbitraje de una prueba ciega (v72b): la compuerta de reglas inviolables dio OK y dos familias salieron fuera de
 rango con la regla escrita (ballistic / 3/8" y stud reinforcement MEP). Causa: los chequeos revisaban la FORMA del
@@ -72,3 +72,13 @@ consistencia y cierra los huecos de tools que reportó la prueba. Ningún valor 
 - Código de producción: fuera los ejemplos con datos del set en comentarios y mensajes (canopy, CSR soffit, tags de
   acabado del set, números de wall, filas del libro); los sets de claves de resumen_* ya no traen un código de
   acabado del set.
+
+## v73e
+- Fuentes: SKILL (conteos de callouts / detalles / pendientes / tamaño de un set), herramientas.md, verif_citas.py
+  (entrada con página, recorte y título de un detalle real → solo la forma), verif_caras.py (coordenadas),
+  verif_comparativo.py (subject y SF reales), alcance_filtro.py (qty de ejemplo inventada), cache_detalles.py.
+- armar_ciego.py regenera el índice de adendas del SKILL desde los títulos ya limpios.
+- test_ciego_tools --estricto: P14 conteos del set (hojas / detalles / callouts / pendientes / páginas / MB), P15
+  coordenadas "x / y nnn.nn", P16 floats en textos de ejemplo del código de producción; excepciones genéricas solo
+  para números de regla (44.x–60.x), medidas en grilla de 1/8" y umbrales ("~40 hojas"). Las muestras negativas del
+  autotest se arman en ejecución con números inventados.

@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
 def paginas(idxs):
     """Cachea SOLO las paginas que se le piden. El barrido completo del set tarda
-    minutos; las hojas que el take-off usa de verdad son ~17."""
+    minutos; las hojas que el take-off usa de verdad son una fracción."""
     import pdfplumber, warnings
     warnings.filterwarnings('ignore')
     st = os.stat(PDF)
