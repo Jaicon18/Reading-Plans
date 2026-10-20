@@ -33,7 +33,7 @@ import resumen_global as RG
 PDF = f'{_TW}/{_PRE}_SIN_MARKUPS.pdf'
 B = f'{_TW}'
 EXTRA = ['CIELOS_cierres.json', 'SOFFITS_cierres.json', 'CANOPY_cierres.json',
-         'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS345_cierres.json',
+         'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS_cierres.json',
          'HUMEDAS_cierres.json']
 
 # 1-2 digitos antes del punto. Con `\d{2}` fijo, TODA la serie estructural (S2.20, S5.10,

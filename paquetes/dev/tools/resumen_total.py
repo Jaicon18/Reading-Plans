@@ -24,7 +24,7 @@ NOMURO = collections.OrderedDict([
 OTROS = collections.OrderedDict([
     ('CRUCE MEP (penetr.)',   B + '/MEP_cierre.json'),
     ('HUECOS de luminaria',   B + '/HUECOS_cierre.json'),
-    ('PUNTOS 3-4-5',          B + '/PUNTOS345_cierres.json'),
+    ('PUNTOS (misc)',         B + '/PUNTOS_cierres.json'),
     ('ZONAS HUMEDAS',         B + '/HUMEDAS_cierres.json'),
 ])
 METALP = {'STUD', 'STUD_3-5-8', 'TRACK_BOTTOM', 'TRACK_TOP', 'TRACK_EXTREMOS_DE_STUD',

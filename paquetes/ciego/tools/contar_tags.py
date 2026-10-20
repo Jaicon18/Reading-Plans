@@ -5,7 +5,7 @@ Por qué existe (arbitraje #14, 17-oct-2026): #14B cargó un tag de fixture x <n
 (+<n> LF de framed openings). El conteo a ojo varía entre agentes; el texto del PDF no.
 
 Uso:
-  python3 contar_tags.py bidset.pdf E02.01 UU1 UU2 UU3 R-11B [--png salida.png] [--json salida.json]
+  python3 contar_tags.py bidset.pdf <hoja E> <tag> [<tag> ...] [--png salida.png] [--json salida.json]
 Busca la página cuyo número de hoja (el texto con forma de sheet number de mayor tamaño) es la hoja pedida;
 cuenta las palabras IGUALES al tag (no substrings) y devuelve {tag: {"count", "sheet", "page", "pts": [[x, y]...]}}.
 Con --png dibuja un círculo rojo en cada ocurrencia (evidencia visual; reabrirla antes de entregar).
@@ -41,7 +41,7 @@ RX_SUFIJO = re.compile(r",[A-Za-z0-9]{0,3}$")
 
 
 def normalizar(texto):
-    """'R-11C,d' -> 'R-11C'; 'R-11C,' -> 'R-11C'; 'UU3' -> 'UU3'. Solo el sufijo de circuito al final."""
+    """'R-11C,d' -> 'R-11C'; 'R-11C,' -> 'R-11C'; 'XX3' -> 'XX3'. Solo el sufijo de circuito al final."""
     return RX_SUFIJO.sub("", str(texto).strip())
 
 

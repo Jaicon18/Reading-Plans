@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """adyacencia.py -- que wall MUERE contra cual, en A02.01, con su prueba.
 
-PARA QUE. `5/S5.20 TYPICAL WALL FRAMING CONNX` pone los DOS studs extra de una
+PARA QUE. El detalle estructural de conexion de walls (N/HOJA) pone los DOS studs extra de una
 interseccion en el wall PASANTE; el que muere contra el se atornilla con
 3/4"-#10 PAN HEAD TEK @ 24" O.C. y no lleva stud propio por ese extremo. Para aplicar esa
 regla hay que saber quien pasa y quien muere, y eso es un MAPA DE ADYACENCIA. Sin el, el
@@ -102,14 +102,14 @@ def _contacto(a, b):
     """Clasifica el contacto de una punta de `a` con `b`: 'T', 'esquina' o None.
 
     DIRECCION. La primera version solo detectaba CONTACTO, y por eso salian parejas
-    mutuas ("1 muere contra 14 Y 14 muere contra 1"), que es imposible: en una
+    mutuas ("A muere contra B Y B muere contra A"), que es imposible: en una
     interseccion uno pasa y el otro muere. Lo que decide es DONDE cae la punta:
 
       T       la punta de `a` cae DENTRO del tramo de `b`, lejos de sus dos extremos
-              -> `a` MUERE, `b` PASA. Es la condicion de 5/S5.20 WALL INTERSECTION
-                 FRAMING: los dos studs extra van en `b`, y `a` se atornilla sin stud propio.
+              -> `a` MUERE, `b` PASA. Es la condicion del detalle estructural de interseccion
+                 (N/HOJA): los dos studs extra van en `b`, y `a` se atornilla sin stud propio.
       esquina las dos puntas coinciden -> ninguno pasa de largo, los dos terminan ahi.
-              Es 5/S5.20 INTERIOR/EXTERIOR CORNER FRAMING, que es otra cuenta y por eso
+              Es el detalle de esquina interior / exterior (N/HOJA), que es otra cuenta y por eso
               no se mezcla con la anterior.
     """
     if a['ori'] == b['ori']:

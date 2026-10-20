@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 19-oct-2026 (v73). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 20-oct-2026 (v74). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
 planos: `python3 tools/correr_suite.py` (instala dependencias si faltan, arma la estructura en carpeta limpia y corre
@@ -121,8 +121,9 @@ de la hoja, y la ruta de su recorte circulado (reabierto y verificado).
 
 - **Partición de walls = `particion.py` (`MODO_DEFAULT = "eje"`, E28 v71).** Cada wall del canon lleva sus
   `tag_ids` (el tag del plano que lo marca) y su `band`; la tool arma los walls (línea recta por tag, segmentos sin
-  tag sumados al wall con tag que tocan, grupo sin tag = un wall). Ninguna lectura inventa otra partición; un
-  segmento sin `tag_ids` en un type que los usa es un return / cierre, no un wall.
+  tag sumados al wall con tag que tocan, grupo sin tag = un wall) con las reglas entre types de §21 (R74.1–R74.6:
+  espesor de la línea, stub aparte, nicho, frente de bulkheads, box duplicado, nombre exterior). Ninguna lectura
+  inventa otra partición; un segmento sin `tag_ids` en un type que los usa es un return / cierre, no un wall.
 - **Refs de aberturas primero (Etapa 2a):** la tarea del opening schedule escribe las refs (`opening_schedule`) antes
   que las tareas de walls; los walls usan esas refs tal cual. `etapas.py unir` falla con una ref que no está en la
   lista o con la misma abertura en dos lugares.
@@ -225,7 +226,11 @@ Mandan sobre referencia, rangos y arbitrajes, salvo que el plano diga otra cosa 
   tag que toca por el extremo; un grupo conexo sin ningún tag (p. ej. un alcove en U) = un wall ("run continuo con
   quiebres", la frase del estimador). (4) Exteriores y parapets: un wall por eje / fachada; nunca juntar dos ejes o
   fachadas. (5) Box cerrado (pier, column wrap) = un wall. El LF del wall es la suma de sus segmentos; nunca se une
-  entre hojas ni entre types. [particion, partition_types]
+  entre hojas ni entre types. (v74, §21) Un segmento sin tag con el espesor de otro type de su línea es de ese type
+  (R74.1); un stub sin tag ≤ 6" que no toca un wall con tag de su type no es wall ni LF de la lista (R74.2); un
+  grupo sin tag que cierra el hueco entre dos tramos colineales de otro type es un nicho, no un wall (R74.3);
+  bulkheads colineales de un frente = un wall (R74.4); box duplicado sin tag no cuenta (R74.5). [particion,
+  partition_types]
 - **Accesorios (§12)** siempre incluidos; ninguno se omite; sin dato = PENDIENTE que bloquea el Excel.
   **Partition types (§13)** con la convención del calificador.
 
@@ -547,7 +552,7 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R72.4 | `vigas_sobre_walls.py` manda: un wall que la tool da bajo viga lleva `stops_under_beam` o `beam_override {motivo, source N/HOJA, img}`; ningún adversarial cambia la altura "por lectura estricta" de R71.14. | chequeos_v72 |
 | R72.5 | MEP: la lista de cruces es la salida de `mep.cruces` (`method: "mep.cruces"`, con `xy`); un cruce que la tool no ve va `manual {motivo, img}`. El mismo fire damper del opening schedule / openings_extra y del barrido (mismo tamaño WxH) se cuenta UNA vez. | chequeos_v72 + accesorios |
 | R72.6 | `faces[].side` = A \| B \| END (A = norte u oeste, B = sur o este, BOX = A; END = cara de extremo / return de un box: `board_caras.py` la acepta con length_ft + length_source, fuera de Σ(side) = L). Nunca letras de brújula. | chequeos_v72 + board_caras |
-| R72.7 | Stub sin tag de ≤ 6" (remate de un frente cortado por un bulkhead u otro type) no es wall propio: su LF se suma al wall con tag más cercano del mismo type. Un grupo sin tag más largo (alcove) sigue siendo un wall. | particion.py |
+| R72.7 | Stub sin tag de ≤ 6" (remate de un frente cortado por un bulkhead u otro type) no es wall propio. (v74: su LF ya NO se suma al wall más cercano: va aparte, R74.2.) Un grupo sin tag más largo sigue siendo un wall, salvo nicho (R74.3). | particion.py |
 | R72.8 | Expansion anchors = bottom track de element `wall` exterior (lo que nombra el schedule de anclaje). Column wrap / chase exterior → pins (criterio del estimador) salvo `anchorage {value, source N/HOJA}`; parte sin tag de un box → ninguno + RFI con delta. | accesorios.py |
 | R72.9 | Stud reinforcement MEP: plates = MAX(1, ROUNDUP(ancho / O.C.)) × filas de studs del wall (double row = 2; regla "REGISTRO ENTRE HOJAS Y CRUCE DE MEP"), con RFI de la alternativa "una por cruce". `studs_cut` solo como override con fuente. | accesorios.py |
 | R72.10 | PVC trim del FRP: con más de 4 vértices, `inside_corners.jogs [{depth_in, kind notch|step, source}]`; un jog < 6" (carrier, espesor de acabado) no lleva inside corner trim (se descuenta + RFI con delta). | chequeos_v72 + accesorios |
@@ -585,12 +590,34 @@ Por qué: en una prueba ciega la compuerta v72b dio OK y dos familias salieron f
 | R73.15 | Sealant y trim de una misma interfaz con otro trade (head y jambs de un frame de vendor) se cargan iguales en los dos bordes, cada uno con su detalle. | evidencia (b) |
 | R73.16 | Un borde de ceiling que ya es `ceiling_transition` / `soffit_side` no se vuelve a cargar como perímetro; la otra lectura va como RFI con delta. | corridas / canon |
 | R73.17 | Cotas impresas de returns dentro del contorno de un wall con tag (furring, monitor, nicho) suman a ese wall (`length_op` las nombra). | evidencia (b) |
-| R73.18 | Stub sin tag ≤ 6" se suma al wall con tag del mismo frente solo si está a ≤ 3 ft (R72.7 corregida); más lejos queda wall propio con aviso para revisar su type (R73.7). | particion.py |
+| R73.18 | (Reemplazada por R74.2 en v74.) Stub sin tag ≤ 6": no es wall propio; su type se revisa por espesor (R73.7 / R74.1). | particion.py |
 
 Tools nuevas v73: `cotas_banda.py`, `chequeos_v73.py`, `planmark.py` (contrato de referencias/herramientas.md),
 `glosario.py`, `vocab_trade.py`, `verif_respuesta.py`, `indice_set.py` genérico (arma su cache con pymupdf).
 `test_ciego_tools.py` revisa también test_*.py y fixtures (rooms de tres dígitos, ids de wall de planta, cantidades de una lista
 externa de examen que NO viaja en el paquete).
+
+## 21. Reglas v74 (estudio de partición: wall por wall contra la lista del estimador, dos lecturas)
+
+Origen: dos lecturas del mismo plano daban walls por type distintos a la lista del estimador en A1 / G / G1 (y una
+sacaba un exterior de más). Se alinearon los walls de la lista con los segmentos de cada canon, uno por uno; cada
+diferencia de CONTEO se explicó con una de estas reglas genéricas (ningún número, conteo ni wall de un proyecto).
+Las diferencias de LF que quedan son de lectura (cota, cara, esquina) y van como RFI con delta, no como regla.
+Tools: `particion.py` (modo "eje") y `partition_types.py` dan lo mismo (test_particion_v74.py); `inventario.py`
+avisa R74.1 / R74.5 para que la lectura corrija el canon.
+
+| Regla | Texto | Dónde |
+|---|---|---|
+| R74.1 | Type por espesor en la LÍNEA: un segmento sin tag (tipado por la nota general) cuyo espesor de band no es el de su type (± 1/2" contra la mediana de los walls con tag de ese type en la hoja) toma el type de los walls con tag de su misma línea (colineales y encadenados sin hueco vacío, de cualquier type) que tienen su espesor. Es el return / remate de un frente, no un wall del type por defecto. Con dos candidatos o ninguno: no se retipa (y R73.7 pide la lectura). | particion.py / partition_types.py / inventario.py |
+| R74.2 | Stub aparte: un grupo sin tag ≤ 6" que no toca por el extremo a un wall con tag de su type no es wall de la lista ni suma LF al type (la lista mide cada wall de cara a cara sin el stub); va a `stubs` / OTHER FRAMING "stub" y su material sigue en el canon. Si toca por el extremo a un wall con tag, es su return y se suma. | particion.py / partition_types.py |
+| R74.3 | Nicho / alcove: un grupo sin tag (más de un tramo) cuyos dos extremos libres caen sobre dos tramos colineales distintos de una línea de OTRO type, cerrando el hueco entre ellos, es un nicho de esa línea: no es wall de la lista; va a `anexos` / OTHER FRAMING "alcove" con su LF (material en el canon). Un grupo sin tag que no abre en otra línea sigue siendo UN wall. | particion.py / partition_types.py |
+| R74.4 | Frente de bulkheads: door_bulkheads colineales cuyos huecos cubren tramos colineales de otros types (returns del frente) o son cortos (≤ el hueco de abertura del modo eje) = UN wall por frente; un hueco largo y vacío separa dos frentes. | particion.py / partition_types.py |
+| R74.5 | Box duplicado: un box / pier sin tag con la misma huella (solape ≥ 50 %) que un registro con tag es el mismo elemento leído dos veces: no cuenta (el tag del plano manda). El inventario lo avisa para declarar `part_of`. | particion.py / inventario.py |
+| R74.6 | Nombre exterior único: wall / pier exterior con stud conocido → `EXT-<stud>CFMF`; parapet → `EXT-PARAPET`; canopy column → `CANOPY-COL` (los mismos nombres en particion.py y partition_types.py). | particion.py |
+
+Lo que NO se convirtió en regla (queda RFI con delta en cada take-off): esquina L entre types distintos medida libre
+entre caras (sin dueño) contra R70.2 (un dueño); fin de un wall K en la caja del hatch contra el jog; door que la
+lista descuenta contra R70.3 (va dentro del wall).
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 
@@ -1006,7 +1033,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 - **Una "banda" de wall NO es un par de coordenadas válido para toda la hoja.** Una misma alineación puede llevar tramos de TIPOS DISTINTOS y espesores distintos: en un caso real una sola alineación llevaba dos types de espesor distinto y un officefront de marco delgado — unirlo todo inventó walls que no existen. La banda se re-deriva POR TAG, y solo cuenta el tramo donde EXISTEN LAS DOS FACES con lineweight de wall **y** la separación es igual al WALL THICKNESS del schedule de ESE tipo (±0.35"). Control barato: si las dos faces tienen coberturas muy distintas a lo largo del tramo, la banda está mezclando tipos.
 - **Un wall run puede llevar VARIOS TAGS en serie.** Al run completo hay que restarle las porciones que gobiernan los otros tags, usando sus dimensions impresas cuando existan. Nunca asignes el run completo a un solo tag. Si no se distingue dónde termina uno y empieza el otro, decláralo y pregunta.
 - **Declara si el LF es face-a-face o centro-a-centro.** Una polilínea de Bluebeam se dibuja hasta el EJE del wall perpendicular; la banda dibujada se mide face to face. Para framing el centro-a-centro es el correcto — el track corre por debajo del wall que cruza — así que suma medio thickness del wall perpendicular en cada extremo que muera contra otro wall. La diferencia es sistemática: medio thickness del wall perpendicular por cada extremo.
-- **El registro entre dos hojas se vota con el FONDO ARQUITECTÓNICO, nunca con las burbujas de eje.** El círculo de la burbuja no siempre cae igual respecto de la línea de eje: en un set real las hojas de plomería tenían 3.6 pt de corrimiento (2.4" a escala de planta), suficiente para inventar un cruce de MEP donde solo estaba la línea del wall exterior. Se votan los SEGMENTOS LENGTHS DE WALL (lw ≥ 1.0, ≥ 50 pt) exigiendo ≥ 25 coincidentes en cada dirección. Si una hoja no llega a ese mínimo (las de piping y los RCP a menudo no), esa hoja NO se usa para cruce geométrico y se revisa a ojo, declarándolo.
+- **El registro entre dos hojas se vota con el FONDO ARQUITECTÓNICO, nunca con las burbujas de eje.** El círculo de la burbuja no siempre cae igual respecto de la línea de eje: en un set real las hojas de plomería tenían unos pocos pt de corrimiento (varias pulgadas a escala de planta), suficiente para inventar un cruce de MEP donde solo estaba la línea del wall exterior. Se votan los SEGMENTOS LENGTHS DE WALL (lw ≥ 1.0, ≥ 50 pt) exigiendo ≥ 25 coincidentes en cada dirección. Si una hoja no llega a ese mínimo (las de piping y los RCP a menudo no), esa hoja NO se usa para cruce geométrico y se revisa a ojo, declarándolo.
 - **Un cruce de MEP real SOBRESALE por fuera de las dos faces.** Una línea que TERMINA en la face del wall es fondo arquitectónico, no una penetración: se exige ≥ 3 pt de sobresalir por cada lado y se filtra por lineweight (un hatch de 0.24 no es un ducto). Los ductos vienen en PAREJAS de líneas paralelas y la separación entre la pareja ES el width del ducto. **Ojo con el ducto dibujado partido:** si el CAD corta el ducto en la face y mete un conector flexible, el filtro de "un solo segmento que sobresale" no lo ve — hay que detectar también el corredor, o sea la línea que llega al wall por los DOS lados.
 - **Blocking de millwork, por tipo de mueble:** base cabinet o counter contra wall = **1 run horizontal** al rail superior, LF = length del run. Wall/upper cabinet = **2 runs** (rail alto y rail bajo). Standards de shelf ajustable = **vertical por standard**, LF = height × nº de standards. Counter que muere de canto contra el wall = **1 cleat vertical** de la height del counter. Wall stop de door = **2'-0" por tope** cuando el plano no lo ubica (length que garantiza agarre en dos studs a 16" O.C.).
 - **El Hardware Group de cada door decide si hay blocking de wall stop.** La nota `PROVIDE BLOCKING AT EACH WALL STOP` no aplica a todas las doors: hay que abrir el Hardware Schedule grupo por grupo y ver cuál lista `1 EA WALL STOP`, cuál lista `FLOOR STOP` y cuál no lleva tope. Verificación cruzada gratis: la door leaf dibujada abierta, medida en planta, debe morir contra un wall en los grupos que sí llevan wall stop.
@@ -1058,7 +1085,7 @@ Algunos prototipos (p.ej. 7-Eleven 9350 CST-WOOD) enmarcan las partitions con st
 24. **Confundir un markup de Bluebeam con el dibujo** → copia sin `/Annots` como primer paso; `page.annots` antes de interpretar cualquier línea de color.
 25. **Confundir un tramo acotado con `EQ` con el length del wall** → la resta lo delata: wall − tramo, entre los dos EQ, da medida redonda.
 26. **Tratar una banda como dos coordenadas válidas para toda la hoja** → re-derivar la banda por tag, exigiendo las dos faces y el thickness del schedule.
-27. **Registrar dos hojas por las burbujas de eje** → votar el fondo arquitectónico; las burbujas mienten hasta 3.6 pt.
+27. **Registrar dos hojas por las burbujas de eje** → votar el fondo arquitectónico; las burbujas pueden mentir varios pt.
 28. **Dar por cruce cualquier línea que toque la banda** → un cruce real sobresale ≥ 3 pt por fuera de las dos faces.
 29. **Opening que muere entre dos tipos de wall** → cargarlo completo a uno y excluirlo en la pasada del otro, citando el cierre.
 30. **Contar el tipo solo por tag** → contarlo también por su grafía y comparar; la densidad de hatch separa lo real del ruido.
@@ -1266,9 +1293,9 @@ abra las imágenes en el mismo orden en que se leyeron.
 
 ```
 A04.01 (RCP)
-   └─ D/A09.22 SECTION D          largo en planta, y el fondo
-         └─ 7/A09.26 @ SIDE CANOPY   composición y datums de la fascia
-               └─ 7/S5.20 METAL STUD PROPERTIES   perfil y 16" O.C.
+   └─ D/A09.22 <título de la sección>   largo en planta, y el fondo
+         └─ 7/A09.26 <título del detalle>   composición y datums de la fascia
+               └─ 7/S5.20 <título del detalle>   perfil y 16" O.C.
 ```
 
 **Ningún eslabón da la cantidad solo:**
@@ -1906,7 +1933,7 @@ Las corridas de abajo se descuentan en cada door R.O. (no hay sealant cruzando e
 Va solo en las caras donde se apoya un toilet o lavatory según el plano ampliado y su nota (ej.: nota
 F/A08.01 = solo el chase C1). Se desglosa muro por muro.
 
-## REGLA 55.7 — HERRAMIENTAS (ya corregidas el 15-oct)
+## REGLA 55.7 — HERRAMIENTAS (ya corregidas)
 - alcances.py ahora rotula cada página con el número del title block (letra más grande). Antes salía la
   hoja más citada (A02.01 salía "A9.22").
 - familias.py (calificador) ahora tiene familia propia de purlin y de stud blocking metálico.
@@ -1965,7 +1992,7 @@ El metal trim que no tiene callout en ningún detalle pero que pide el criterio 
 "metal trim (criterio 53.1)". El gypsum edge trim se nombra "metal trim - gypsum edge trim" para que entre
 en su familia.
 
-## REGLA 56.10 — HERRAMIENTAS (corregidas el 15-oct)
+## REGLA 56.10 — HERRAMIENTAS (corregidas)
 `plantilla_excel.py validar` ya acepta citas con letra (C/A09.21, H/A09.23).
 
 # ADENDA v57 — 15-oct-2026 · 4a COMPUERTA: BITÁCORA DE TOOLS OBLIGATORIAS

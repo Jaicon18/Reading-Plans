@@ -46,7 +46,7 @@ del documento entero. Se probó que se cierra.
 La primera versión del test usaba la palabra `capas` contra `revisar_docs`. Pasó de
 inmediato… porque `revisar_docs` usa el diccionario de **nombres de material**, donde
 `capas` no está. **Un test escrito con una palabra que el detector ignora pasa siempre y no
-prueba nada** — exactamente la compuerta decorativa del 10-oct-2026
+prueba nada** — exactamente la compuerta decorativa de una versión anterior
 (`verif_blocking_schedule` v1). Se reescribió con `tablero`, que ya está probado arriba en
 el mismo archivo como término que la compuerta SÍ caza en prosa, y entonces el caso
 empezó a tener valor.

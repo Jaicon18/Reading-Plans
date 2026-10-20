@@ -291,7 +291,7 @@ def _jogs_r10(filas, jog_max_ft):
     return cuenta
 
 
-def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos):
+def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos, ctx=None, aparte=None):
     """v70 (E28): los walls de UN type se agrupan con particion.particion (modo = particion.MODO_DEFAULT, "run": un run
     continuo con quiebres / esquinas = un wall; una T no encadena). Sobre eso: parapets sin geometría (solo `line`)
     se unen por línea contigua (R6 viejo, PENDIENTE); chase por cara no se une (R8); PT4: door_bulkheads colineales
@@ -324,7 +324,12 @@ def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos):
     # en "tramo" los jogs se resuelven abajo con R10 (al vecino más cercano), no con la regla de extremos de particion
     r = particion.particion({"constants": {"plan_scale_pt_per_ft": {"value": esc}}, "walls": sint}, modo,
                             jog_max_ft=-1.0 if modo == "tramo" else jog_max_ft, tol_line_ft=tol_line_ft,
-                            tol_gap_ft=tol_gap_ft)
+                            tol_gap_ft=tol_gap_ft, ctx=ctx, tipo_ctx=t)
+    if aparte is not None:                          # v74 (R74.2 / R74.3): stubs y nichos fuera de la lista
+        tt = (r["types"].get("T") or {})
+        aparte["stubs"] += tt.get("stubs") or []
+        aparte["anexos"] += tt.get("anexos") or []
+    avisos += [a.replace("(T, _)", f"({t})") for a in r.get("avisos") or [] if "R74.2" in a or "R74.3" in a]
     filas = [{"ids": list(f["ids"]), "lf": f["lf"], "bands": f.get("bands") or [], "jog": []}
              for f in (r["types"].get("T") or {}).get("filas") or []]
     if modo == "tramo":
@@ -334,7 +339,7 @@ def _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos):
     def es_bh(f):
         return all(por_id[i].get("element") == "door_bulkhead" for i in f["ids"])
     bh = [f for f in filas if es_bh(f) and f["bands"]]
-    if len(bh) > 1:
+    if len(bh) > 1 and ctx is None:                 # v74: en modo "eje" con contexto lo resuelve particion (R74.4)
         tol = tol_line_ft * esc
 
         def colineal(a, b):
@@ -368,10 +373,18 @@ def partition_types(canon, board_out=None, jog_max_ft=JOG_MAX_FT, tol_line_ft=TO
     walls = _expandir(walls)
     import chequeos_v72                             # v72 (R72.3): un box = un wall (el registro con tag)
     partes = chequeos_v72.partes_de_box(walls)
-    tipos = {}
+    tipos = {w["id"]: tipo(w, tags_wall) for w in walls}
+    # v74 (R74.1): segmento sin tag con el espesor de los walls con tag de su línea toma ese type (por hoja real)
+    ctx_hoja = particion.contexto([w for w in walls if w["id"] not in partes and tipos[w["id"]] is not None], tipos)
+    retip = particion.retipar(ctx_hoja, esc, tol_line_ft, tol_gap_ft)
+    for k, (nt, motivo) in retip.items():
+        tipos[k] = nt
+        avisos.append(motivo)
+    # contexto para R74.3 / R74.4 con la convención de esta tool (todas las hojas juntas, sheet "_")
+    ctx = [dict(c, type=tipos[c["id"]], sheet="_") for c in ctx_hoja]
+    aparte_por_t = {}
     for w in walls:
-        t = tipo(w, tags_wall)
-        tipos[w["id"]] = t
+        t = tipos[w["id"]]
         if w["id"] in partes:
             otros.append(dict(_fila([w], [w["id"]], bsf), id=w["id"], element="pier_part", tag=w.get("tag"),
                               part_of=partes[w["id"]]))
@@ -388,7 +401,14 @@ def partition_types(canon, board_out=None, jog_max_ft=JOG_MAX_FT, tol_line_ft=TO
             m = _pendiente(w)
             if m:
                 avisos.append(f"{w['id']} ({t}) PENDIENTE: {m}")
-        filas, jogs = _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos)
+        ap = aparte_por_t.setdefault(t, {"stubs": [], "anexos": []})
+        filas, jogs = _agrupar(t, ws, esc, modo, jog_max_ft, tol_line_ft, tol_gap_ft, avisos,
+                               ctx=ctx if modo == "eje" else None, aparte=ap)
+        por_id = {w["id"]: w for w in ws}
+        for el, lst in (("stub", ap["stubs"]), ("alcove", ap["anexos"])):
+            for x in lst:                           # v74: fuera de la lista de walls; su material sigue en el canon
+                otros.append(dict(_fila(ws, x["ids"], bsf), id="+".join(x["ids"]), element=el, tag=t,
+                                  regla=x.get("regla"), abre_en=x.get("abre_en")))
         ricas = []
         for f in filas:
             r = _fila(ws, f["ids"], bsf)

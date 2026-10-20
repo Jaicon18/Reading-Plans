@@ -37,7 +37,7 @@ Son **dos aparatos en dos walls distintas**:
 
 > **`FRP FROM FLOOR TO 4'-0" AFF, WIDTH TO MATCH WIDTH OF MOP SINK AT BOTH SIDES`**
 
-Su marcador cae dentro del **JANITOR CLOSET [room]** y su línea guía apunta a la face del wall oeste. `5/A08.01 PLAN SECTION @ MOP SINK` lo dibuja en **esquina**, con FRP en **las dos walls**, más `PVC EDGE TRIM MOLDING`, `PVC INSIDE CORNER TRIM MOLDING`, `TILING FLANGE` y `CLEAR SEALANT`.
+Su marcador cae dentro del **JANITOR CLOSET [room]** y su línea guía apunta a la face del wall oeste. La plan section del mop sink (`N/HOJA`) lo dibuja en **esquina**, con FRP en **las dos walls**, más `PVC EDGE TRIM MOLDING`, `PVC INSIDE CORNER TRIM MOLDING`, `TILING FLANGE` y `CLEAR SEALANT`.
 
 **Cero cuantificado.** Alto **CONFIRMADO** (4'-0" de dimension impresa); width **PENDIENTE** — el aparato no viene acotado en A02.01, A08.01 ni en el Plumbing Fixture Schedule. No se inventa: se da la dimension superior para precio (24" → [valor retirado E24] SF; 28" → [valor retirado E24] SF).
 

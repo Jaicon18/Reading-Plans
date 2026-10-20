@@ -149,7 +149,7 @@ def calcular(data):
         tc = data.get("tag_counts")
         if not isinstance(tc, dict) or not tc:
             raise ValueError("tag_counts ausente: contar las fixtures por tag en la hoja E con contar_tags.py "
-                             "(v65, #14B UU3 5 vs 9 dibujados)")
+                             "(v65, #14B: qty cargada menor que los tags dibujados)")
         por_tag = {}
         for it in luces:
             por_tag.setdefault(it["tag"], []).append(it)
@@ -162,7 +162,7 @@ def calcular(data):
                 raise ValueError(f"{tg}: qty {q} > {c['count']} dibujados en {c['sheet']} (contar_tags.py)")
             if q < int(c["count"]) and not all(str(i.get("excluded_qty_why") or "").strip() for i in its):
                 raise ValueError(f"{tg}: qty {q} < {c['count']} dibujados en {c['sheet']} sin excluded_qty_why "
-                                 f"(v65: #14B UU3 5 de 9)")
+                                 f"(v65: #14B, qty menor que los dibujados sin motivo)")
     tot, filas, rfis, a_hs, vistos = 0.0, [], [], [], set()
     for it in items:
         tag = it.get("tag")

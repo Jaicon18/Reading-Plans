@@ -39,7 +39,7 @@ import resumen_global as RG
 
 B = f'{_TW}'
 BLOQUES = ('CIELOS_cierres.json', 'SOFFITS_cierres.json', 'CANOPY_cierres.json',
-           'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS345_cierres.json',
+           'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS_cierres.json',
            'HUMEDAS_cierres.json')
 TOL = 0.005                      # el redondeo a 2 decimales, y nada mas
 COTA = re.compile(r"(\d+)\s*'\s*-\s*(\d+)(?:\s+(\d+)\s*/\s*(\d+))?\s*\"")

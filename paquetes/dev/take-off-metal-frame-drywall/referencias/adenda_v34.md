@@ -50,7 +50,7 @@ Dirección de la flute **[DERIVADO]**: el deck Type B salva entre joists; las jo
 
 ### El bulkhead de cielo lleva más de lo que decía el pendiente
 
-`8/A09.33 TYPICAL BULKHEAD DETAIL` describe la transición de cielo con **`3 5/8" METAL STUD FRAMING AND TRACK @ 16" O.C.`** más bracing @ 48", board, corner L bead y shadow molding — bastante más que el "kicker @ 48"" que decía el pendiente del perímetro de transición.
+El detalle típico de bulkhead (`N/HOJA`) describe la transición de cielo con **`3 5/8" METAL STUD FRAMING AND TRACK @ 16" O.C.`** más bracing @ 48", board, corner L bead y shadow molding — bastante más que el "kicker @ 48"" que decía el pendiente del perímetro de transición.
 
 ---
 

@@ -76,7 +76,7 @@ Un solo renglón de "bottom track" que mezcla 1-5/8", 3-5/8" y 6" no sirve para 
 
 `5'-0" TO TOP OF FRP` con un cove base de 6" debajo da una banda de FRP de **4'-6"**, no de 5'-0".
 
-Lo que lo prueba es el **ORDEN DE LAYERS del detalle**. En `8/A08.01 RESTROOM FRP/TILE DETAIL`, de arriba abajo:
+Lo que lo prueba es el **ORDEN DE LAYERS del detalle**. En el detalle de FRP / tile del restroom (`N/HOJA`), de arriba abajo:
 `PVC EDGE TRIM MOLDING` · `FRP PANEL` · `ADHESIVE` · `PVC EDGE TRIM MOLDING` · `CLEAR SEALANT` · `CERAMIC TILE COVE BASE` · `CERAMIC TILE FLOOR TILE`
 
 El FRP **apoya** sobre el cove base con su propio edge trim y sealant; no corre por detrás. Para el alto de cualquier banda de acabado hay que **restar lo que va debajo**, y el detalle es lo que dice si va encima o por detrás.
@@ -93,7 +93,7 @@ Barrer el set completo por `CONTROL JOINT` y `EXPANSION JOINT`. Si solo aparecen
 
 ## REGLA — Una abertura con sill obliga a su sill track, y la compuerta lo exige
 
-La compuerta verificaba que una door **no** llevara sill, pero no exigía que una abertura **con** sill declarado trajera su `SILL_TRACK`. Faltaba uno (el framed opening de un ducto de 8" con marco cerrado en los cuatro lados por `6/S5.20 WEB PENETRATION`).
+La compuerta verificaba que una door **no** llevara sill, pero no exigía que una abertura **con** sill declarado trajera su `SILL_TRACK`. Faltaba uno (el framed opening de un ducto de 8" con marco cerrado en los cuatro lados por el detalle estructural de penetración en el web (`N/HOJA`)).
 
 `SILL_TRACK` es line item obligatoria; se auto-excluye con motivo preciso **solo** cuando ninguna abertura del wall declara sill.
 
@@ -133,7 +133,7 @@ El título se **envuelve por palabras** dentro del width del recuadro. Cada entr
 
 ## REGLA — Lo que no se resuelve, se declara; no se inventa
 
-`7/A09.33 TYPICAL CEILING TRANSITION DETAIL` pide una transición vertical de 6" con `3 5/8" METAL STUD KICKER AT 48" O.C.`, board por dos faces, dos corner beads y shadow molding, donde un cielo de gyp muere contra un cielo programado a otra height.
+El detalle típico de transición de cielo (`N/HOJA`) pide una transición vertical de 6" con `3 5/8" METAL STUD KICKER AT 48" O.C.`, board por dos faces, dos corner beads y shadow molding, donde un cielo de gyp muere contra un cielo programado a otra height.
 
 Se corrió una prueba mecánica para separar las aristas que mueren contra wall de las que mueren contra ACT, y **no resuelve** las aristas de los baños (cobertura muy baja en aristas que son claramente wall). Antes que inventar el número, la line item quedó en la lista de pendientes **con lo que costaría por LF** ([valor retirado E24] SF de board, un kicker cada <n> ft, dos runs de corner bead y una de shadow molding) y con el perímetro total de los ceilings ([valor retirado E24] LF) como dimension superior.
 

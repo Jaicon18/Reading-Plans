@@ -18,7 +18,7 @@ del rótulo más cercano a la viga en la hoja S y su peralte AISC) — cada uno 
 stops_under_beam {profile, depth_ft, source} en el canon (altura_stud.py), o motivo si no aplica.
 
 v72 (arbitraje #20, R72.4): la salida de esta tool MANDA sobre la lectura del texto de R71.14. Un adversarial que
-reponía la altura de deck a walls que la tool da bajo viga ("eje 1.56 pt fuera de la band, lectura estricta") hizo
+reponía la altura de deck a walls que la tool da bajo viga ("eje <n> pt fuera de la band, lectura estricta") hizo
 que dos corridas difirieran: la tolerancia es --tol (3 pt por defecto) y cualquier excepción va en el canon como
 `beam_override {motivo, source N/HOJA, img}` (chequeos_v72 R72.4 lo revisa contra vigas_out.json).
 
@@ -37,7 +37,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RX_GRID_NUM = re.compile(r"^\d{1,2}(\.\d)?$")
 RX_GRID_LET = re.compile(r"^[A-Z](\.\d)?$")
 PT_FT = 18.0          # escala de verificación (1/4" = 1'-0"); solo para reportar covered_ft
-# v68 (#16A: un solo peralte W12x19 para walls bajo W14x30 / W14x22 / W18x35): peralte nominal d (in) de las marcas
+# v68 (#16A: un solo peralte para walls bajo vigas de marcas distintas): peralte nominal d (in) de las marcas
 # W más comunes en planta de techo (AISC Steel Construction Manual, tabla 1-1). Una marca fuera de la tabla -> d_source.
 AISC_D_IN = {"W8X10": 7.89, "W8X18": 8.14, "W10X12": 9.87, "W10X19": 10.2, "W12X14": 11.9, "W12X16": 12.0,  # [ciego-ok] tabla AISC genérica
              "W12X19": 12.2, "W12X22": 12.3, "W12X26": 12.2, "W14X22": 13.7, "W14X26": 13.9, "W14X30": 13.8,

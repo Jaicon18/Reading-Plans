@@ -146,8 +146,8 @@ def _fuera_del_glosario(lineas):
     El codigo se quita AQUI y no en cada compuerta. Las tres compuertas que cuentan por
     renglon (`revisar_docs`, `vocab_pendiente`, `handoff_pendiente`) llamaban `faltas` con
     UNA linea a la vez, y una linea sola no sabe si viene dentro de un bloque cercado: solo
-    alcanza a ver los backticks de `inline code`. Resultado medido el 11-oct-2026: de los 51
-    terminos que la compuerta reportaba en los documentos, 5 eran CODIGO -- la formula
+    alcanza a ver los backticks de `inline code`. Resultado medido: de los
+    terminos que la compuerta reportaba en los documentos, una parte eran CODIGO -- la formula
     `capas = Sigma(capas_cara x largo_cara) / largo_muro` y un arbol de detalles. Traducir esos
     5 habria CORROMPIDO la formula (el nombre del campo sellado es `capas_cara`) para
     contentar a la compuerta. El detector y el corrector tienen que normalizar igual, y la

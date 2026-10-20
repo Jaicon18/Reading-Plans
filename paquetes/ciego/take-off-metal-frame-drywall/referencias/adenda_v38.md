@@ -31,7 +31,7 @@ el detalle que dio el dato que se fue a buscar: se para cuando la cantidad está
 MEP → schedule. No basta citar el último detalle: va el camino entero, para que el estimador
 abra las imágenes en el mismo orden en que se leyeron.
 
-### El ejemplo que la originó — canopy <n>
+### El ejemplo que la originó — un canopy
 
 (ejemplo de una corrida retirado del paquete ciego)
 
@@ -41,8 +41,8 @@ abra las imágenes en el mismo orden en que se leyeron.
 Y de paso la cadena resolvió un pleito abierto hacía días: la dimension de D/A09.22 y los
 `[valor retirado E24] ft` medidos en planta **nunca estuvieron en conflicto**. Localizando los dos ticks de
 la dimension en el vector del PDF (coordenada x de cada tick, escala en pt/ft calibrada contra tres
-datums) se ve que la dimension va de **eje <n>** a **fascia**, no de face de wall a fascia. La
-diferencia son exactamente los **8"** que 7/A09.26 imprime arriba. Dos caminos independientes,
+datums) se ve que la dimension va de **un eje de grilla** a **fascia**, no de face de wall a fascia. La
+diferencia es exactamente la medida que el detalle del canopy (N/HOJA) imprime arriba. Dos caminos independientes,
 a dos escalas distintas, a una milésima de pie.
 
 ## La herramienta: `cadena_detalles.py`

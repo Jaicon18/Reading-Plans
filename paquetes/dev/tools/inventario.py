@@ -76,7 +76,7 @@ def _bandas(data, scale, avisos):
                              f"contra la planta (v63, #13A/#13B: walls solapados o apilados)")
         if b.get("ori") not in ("H", "V", "BOX", "D") or not str(b.get("sheet") or "").strip():
             raise ValueError(f"{w['id']}: band.ori H|V|BOX|D y band.sheet obligatorios")
-        if b["ori"] == "D":                             # 14B: wall diagonal (F a 30 deg, A02.01): eje p0-p1 en pt
+        if b["ori"] == "D":                             # 14B: wall diagonal (ni H ni V): eje p0-p1 en pt
             p0, p1 = b.get("p0"), b.get("p1")
             if not (isinstance(p0, list) and isinstance(p1, list) and len(p0) == 2 and len(p1) == 2):
                 raise ValueError(f"{w['id']}: band D exige p0 [x,y] y p1 [x,y] (eje del wall en pt)")
@@ -263,6 +263,17 @@ def verificar(data):
     for w in data.get("walls") or []:
         k = f"{w.get('element', 'wall')}:{w.get('tag')}"
         lf[k] = round(lf.get(k, 0.0) + float(w["length_ft"]) * int(w.get("rows", 1)), 2)
+    # v74 (R74.1 / R74.5): el inventario avisa lo que la partición va a retipar o descontar, para que la lectura lo
+    # corrija en el canon (el type del segmento y el box duplicado son de la lectura, no de la tool).
+    try:
+        import particion
+        dups = particion.duplicados(data.get("walls") or [])
+        ctx = particion.contexto([w for w in data.get("walls") or [] if w["id"] not in dups])
+        av += [m for _, m in particion.retipar(ctx, scale).values()]
+        av += [f"{k} sin tag con la huella del box {v} (con tag): mismo elemento leído dos veces (R74.5); declarar "
+               f"part_of" for k, v in dups.items()]
+    except ImportError:
+        pass
     rfi = _rfi_split(data)
     if rfi and not _const(data, "canopy_beam_split"):
         tot = round(sum(r["bottom_track_lf"] for r in rfi), 2)

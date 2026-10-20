@@ -44,16 +44,16 @@ bandas (todas C<n>) y `wallgeom.py` lleva su propio letrero de que acierta <n> d
 de nuevo del vector de A02.<n> **y se escribió la prueba antes de mirar el resultado**: cada
 wall sellado tiene un length verificado; si la extracción no los reproduce, no sirve.
 
-- Primera versión: **36%**. No servía.
+- Primera versión: reproducía **menos de la mitad** de los lengths sellados. No servía.
 - El defecto no era la extracción, era la **convención de extremos**. Las dos faces de un
   wall no terminan en el mismo punto: en cada encuentro una sigue y la otra se corta.
-  Tomando la **unión** en vez de la intersección: **<n> de <n> = 87%**.
+  Tomando la **unión** en vez de la intersección: **la gran mayoría** de los lengths sellados se reproduce.
 
 > Una fuente de geometría no se usa porque exista: se usa porque PASA una prueba, y la
 > prueba se escribe antes de mirar el resultado.
 
 **La dirección, que es lo que 5/S5.20 necesita.** La primera versión sólo detectaba
-contacto y salían parejas mutuas ("<n> muere contra <n> Y <n> muere contra 1"), que es
+contacto y salían parejas mutuas ("A muere contra B Y B muere contra A"), que es
 imposible. Lo que decide es dónde cae la punta: dentro del tramo del otro = **T** (muere,
 y los dos studs van en el pasante); coincidiendo con su extremo = **esquina** (ninguno pasa
 de length).
@@ -79,16 +79,16 @@ Clarifications como lo que es, el piso medido del sobre-conteo.
 
 ---
 
-## COBERTURA DE DETALLES: <n> PENDIENTES → <n>
+## COBERTURA DE DETALLES: PENDIENTES → <n>
 
-Los <n> detalles de las <n> hojas que el take-off usa quedaron, cada uno, citado por un
-cierre o **declarado con su motivo**. Hasta hoy la compuerta contaba 90 "sin abrir" y la
+Todos los detalles de las hojas que el take-off usa quedaron, cada uno, citado por un
+cierre o **declarado con su motivo**. Hasta hoy la compuerta contaba muchos "sin abrir" y la
 mayoría **sí** se habían mirado: lo que faltaba era declararlo.
 
 > Un detalle mirado y no declarado se ve igual que uno nunca abierto. Eso vacía la
 > compuerta en las dos direcciones: no distingue lo que falta de lo que ya se resolvió.
 
-Y el bucket es **nuevo, no `NO_APLICAN`**: muchos de esos <n> sí aplican y respaldan una
+Y el bucket es **nuevo, no `NO_APLICAN`**: muchos de esos pendientes sí aplican y respaldan una
 cantidad que ya está, o la validan por segunda fuente.
 
 > Declarar un detalle que SÍ aplica como "no aplicable" es mentir en la dirección cómoda:

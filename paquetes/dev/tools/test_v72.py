@@ -163,7 +163,7 @@ def _():
 
 
 # ---------------- particion (R72.7) ----------------
-@caso("R72.7 stub sin tag <= 6\" no es wall propio; se suma al wall con tag más cercano")
+@caso("R72.7 -> R74.2 stub sin tag <= 6\" no es wall propio; no toca un wall con tag: va a stubs, sin LF en el type")
 def _():
     import particion
     ws = [V("G1", "G", 0, 9, 0, 54, 3.0, tags=("PT1",)),
@@ -174,16 +174,17 @@ def _():
     r = particion.particion(canon(ws), "eje")
     g = r["types"]["G"]
     assert g["walls"] == 2, g
-    assert abs(g["lf"] - 13.333) < 0.01, g
+    assert abs(g["lf"] - 13.0) < 0.01, g                     # v74: la lista mide de cara a cara sin el stub
+    assert [x["ids"] for x in g.get("stubs") or []] == [["G5"]], g
 
 
-@caso("R72.7 v73: stub sin tag lejos (> 3 ft) de todo wall con tag del type no se suma (aviso; revisar type)")
+@caso("R72.7 -> R74.2: stub sin tag lejos de todo wall con tag del type: tampoco es wall (stubs + aviso)")
 def _():
     import particion
     ws = [V("G1", "G", 0, 9, 0, 54, 3.0, tags=("PT1",)), V("G5", "G", 400, 409, 189, 195, 0.333, tags=())]
     r = particion.particion(canon(ws), "eje")
-    assert r["types"]["G"]["walls"] == 2, r["types"]["G"]
-    assert any("NO toca" in a for a in r.get("avisos") or []), r.get("avisos")
+    assert r["types"]["G"]["walls"] == 1, r["types"]["G"]
+    assert any("R74.2" in a for a in r.get("avisos") or []), r.get("avisos")
 
 
 @caso("protección: grupo sin tag de más de 6\" sigue siendo UN wall (alcove)")

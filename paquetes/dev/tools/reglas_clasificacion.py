@@ -161,6 +161,9 @@ POR_ID = {
     "R73.8": A("A_R73_8", "A_ESTADO_DIM"), "R73.9": A("A_EXCEL"), "R73.10": B("G_TIPO"), "R73.11": B("G_ABERTURA"),
     "R73.12": A("A_BLOCKING", "A_VIGENCIA"), "R73.13": B("G_CARA"), "R73.14": B("G_ALTO"), "R73.15": B("G_PROCESO"),
     "R73.16": A("A_TRANSICION", "A_VIGENCIA"), "R73.17": B("G_LARGO"), "R73.18": A("A_VIGENCIA"),
+    # v74 (estudio de partición): reglas de la tool de partición, con test sintético por regla
+    "R74.1": A("A_VIGENCIA"), "R74.2": A("A_VIGENCIA"), "R74.3": A("A_VIGENCIA"), "R74.4": A("A_VIGENCIA"),
+    "R74.5": A("A_VIGENCIA", "A_R72_3"), "R74.6": A("A_VIGENCIA"),
     # adendas del SKILL
     "REGLA 48.1": C("anulada por el paquete autocontenido (CAMBIOS_v72: el zip trae TODAS las tools; una prueba baja "
                     "solo el zip) — la regla de fondo (una sola fuente de tools) sigue en E24 / A_CIEGO + test_reglas"),

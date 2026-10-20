@@ -58,7 +58,7 @@ def fuentes():
         for p in patrones:
             out.extend(sorted(glob.glob(p)))
     for f in ('CIELOS_cierres.json', 'SOFFITS_cierres.json', 'CANOPY_cierres.json',
-              'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS345_cierres.json',
+              'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS_cierres.json',
               'HUMEDAS_cierres.json',
               'MWBLOCKING_cierres.json'):           # superficies y otros bloques
         p = os.path.join(B, f)
@@ -77,7 +77,7 @@ def fuentes():
 # compuerta persigue. Un cierre que no este aqui ni en fuentes() es HUERFANO y falla.
 SUPERADOS = {
     'G_cierres.json':  'reemplazado por G_cierres_v2.json (resumen_global.SRC lee el v2)',
-    'G52_cierre.json': 'reemplazado por G52_cierre_v2.json (resumen_global.SRC lee el v2)',
+    'EJEMPLO_cierre.json': 'reemplazado por EJEMPLO_cierre_v2.json (resumen_global.SRC lee el v2)',
 }
 NO_SON_CIERRES = {
     'CIELOS_perimetro.json': 'geometria de apoyo, no lleva partidas',

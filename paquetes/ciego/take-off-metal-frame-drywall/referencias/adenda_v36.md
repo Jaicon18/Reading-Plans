@@ -21,9 +21,9 @@ fuente para un dato que ya tenía una.
 **<n>. La cadena se sigue hasta el final.** Un detalle llama a otro detalle. Se recorre nivel
 por nivel hasta que no quede burbuja, y se abren TODOS los eslabones, no solo el último.
 
-Canopy <n>, tres niveles:
+Un canopy, tres niveles:
 `soffit plan (burbuja D/A9.22)` → `D/A9.22 SECTION` (burbuja `7/A9.26` sobre la marquesina)
-→ `7/A9.26 SECTION DETAIL @ SIDE CANOPY`
+→ `7/A9.26 <título del detalle>`
 
 Y `D/A9.22` sola llama a cinco: `4/A9.26` parapet SIM · `7/A9.26` canopy · `11/A9.27`
 storefront head · `10/A9.27` storefront sill · `5/A9.26` ACM base.
@@ -60,8 +60,8 @@ citara esa hoja.
 tan ciega como no haber empezado.
 
 **`closer.py` — exigencia nueva.** Antes la hoja se pedía solo a CONFIRMADO. Ahora toda
-line item, CONFIRMADO o DERIVADO, lleva su cita `N/HOJA`. Destapó que **<n> de <n> line items
-selladas (50%) no tienen cita de hoja + detalle**.
+line item, CONFIRMADO o DERIVADO, lleva su cita `N/HOJA`. Destapó que **una parte grande de las line items
+selladas no tiene cita de hoja + detalle**.
 
 ## Dos bugs propios al escribir la compuerta, los dos de normalización
 

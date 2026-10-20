@@ -80,5 +80,5 @@ consistencia y cierra los huecos de tools que reportó la prueba. Ningún valor 
 - armar_ciego.py regenera el índice de adendas del SKILL desde los títulos ya limpios.
 - test_ciego_tools --estricto: P14 conteos del set (hojas / detalles / callouts / pendientes / páginas / MB), P15
   coordenadas "x / y nnn.nn", P16 floats en textos de ejemplo del código de producción; excepciones genéricas solo
-  para números de regla (44.x–60.x), medidas en grilla de 1/8" y umbrales ("~40 hojas"). Las muestras negativas del
+  para números de regla (44.x–60.x), medidas en grilla de 1/8" y umbrales precedidos de "~". Las muestras negativas del
   autotest se arman en ejecución con números inventados.

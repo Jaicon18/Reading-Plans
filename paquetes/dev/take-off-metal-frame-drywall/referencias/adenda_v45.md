@@ -44,16 +44,16 @@ bandas (todas C1) y `wallgeom.py` lleva su propio letrero de que acierta 1 de 3.
 de nuevo del vector de A02.01 **y se escribió la prueba antes de mirar el resultado**: cada
 wall sellado tiene un length verificado; si la extracción no los reproduce, no sirve.
 
-- Primera versión: **36%**. No servía.
+- Primera versión: reproducía **menos de la mitad** de los lengths sellados. No servía.
 - El defecto no era la extracción, era la **convención de extremos**. Las dos faces de un
   wall no terminan en el mismo punto: en cada encuentro una sigue y la otra se corta.
-  Tomando la **unión** en vez de la intersección: **41 de 47 = 87%**.
+  Tomando la **unión** en vez de la intersección: **la gran mayoría** de los lengths sellados se reproduce.
 
 > Una fuente de geometría no se usa porque exista: se usa porque PASA una prueba, y la
 > prueba se escribe antes de mirar el resultado.
 
 **La dirección, que es lo que 5/S5.20 necesita.** La primera versión sólo detectaba
-contacto y salían parejas mutuas ("1 muere contra 14 Y 14 muere contra 1"), que es
+contacto y salían parejas mutuas ("A muere contra B Y B muere contra A"), que es
 imposible. Lo que decide es dónde cae la punta: dentro del tramo del otro = **T** (muere,
 y los dos studs van en el pasante); coincidiendo con su extremo = **esquina** (ninguno pasa
 de length).
@@ -79,16 +79,16 @@ Clarifications como lo que es, el piso medido del sobre-conteo.
 
 ---
 
-## COBERTURA DE DETALLES: 90 PENDIENTES → 0
+## COBERTURA DE DETALLES: PENDIENTES → 0
 
-Los 203 detalles de las 26 hojas que el take-off usa quedaron, cada uno, citado por un
-cierre o **declarado con su motivo**. Hasta hoy la compuerta contaba 90 "sin abrir" y la
+Todos los detalles de las hojas que el take-off usa quedaron, cada uno, citado por un
+cierre o **declarado con su motivo**. Hasta hoy la compuerta contaba muchos "sin abrir" y la
 mayoría **sí** se habían mirado: lo que faltaba era declararlo.
 
 > Un detalle mirado y no declarado se ve igual que uno nunca abierto. Eso vacía la
 > compuerta en las dos direcciones: no distingue lo que falta de lo que ya se resolvió.
 
-Y el bucket es **nuevo, no `NO_APLICAN`**: muchos de esos 90 sí aplican y respaldan una
+Y el bucket es **nuevo, no `NO_APLICAN`**: muchos de esos pendientes sí aplican y respaldan una
 cantidad que ya está, o la validan por segunda fuente.
 
 > Declarar un detalle que SÍ aplica como "no aplicable" es mentir en la dirección cómoda:
@@ -99,9 +99,9 @@ cantidad que ya está, o la validan por segunda fuente.
 | hallazgo | fuente |
 |---|---|
 | **B2 #n y #n: FRP de [valor retirado E24] → [valor retirado E24] ft de banda** (+[valor retirado E24] SF). Dos criterios convivían para la misma banda del mismo baño: los cierres del 52 y del exterior oeste ya usaban [valor retirado E24] | geometría vectorial de A08.01: y del floor, del tope del cove base y del tope del FRP; cada diferencia en pt ÷ escala da una **dimension exacta** |
-| **El FRP va pegado con ADHESIVE directo al board, sin backer** — cierra el RFI del sustrato detrás del FRP | `3/A08.01 RESTROOM FRP/TILE DETAIL`, que lo dibuja y lo rotula |
-| `1/A11.03 NER ELEVATION` y `7/A11.03` llevan 3/4" FRT PLYWOOD y **se dejan fuera a propósito** | la corrección del 6-oct dejó escrito que las que corresponden son `3/A11.03` (210.00 pt = 5'-10" exactos) y `5/A11.03` (270.00 pt = [valor retirado E24] exactos), identificadas por **width medido** contra la dimensión impresa de la planta |
-| `4/A09.31 DETAIL AT VERTICAL CONTROL JOINT` es un **cuarto** sitio donde aparece CONTROL JOINT, y también es del estuco | la exclusión de proyecto decía "tres sitios"; su conclusión aguanta, su lista de evidencia no estaba completa |
+| **El FRP va pegado con ADHESIVE directo al board, sin backer** — cierra el RFI del sustrato detrás del FRP | `3/A08.01` (el detalle de FRP), que lo dibuja y lo rotula |
+| `1/A11.03` (una elevación) y `7/A11.03` llevan 3/4" FRT PLYWOOD y **se dejan fuera a propósito** | la corrección del 6-oct dejó escrito que las que corresponden son `3/A11.03` (210.00 pt = 5'-10" exactos) y `5/A11.03` (270.00 pt = [valor retirado E24] exactos), identificadas por **width medido** contra la dimensión impresa de la planta |
+| `4/A09.31` (detalle de control joint) es un **cuarto** sitio donde aparece CONTROL JOINT, y también es del estuco | la exclusión de proyecto decía "tres sitios"; su conclusión aguanta, su lista de evidencia no estaba completa |
 
 ---
 

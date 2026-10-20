@@ -15,7 +15,7 @@ MOUNTING LOCATIONS".
 
 LO QUE FALLO FUE LA DIRECCION DEL BARRIDO:
 
-    Se barrio WALL POR WALL -- "¿hay un tag MW a 42 pt de ESTA banda?" --
+    Se barrio WALL POR WALL -- "¿hay un tag MW a <n> pt de ESTA banda?" --
     y nunca TAG POR TAG     -- "¿contra que wall apoya CADA MW del schedule?"
 
 Un barrido por wall solo puede encontrar lo que cae cerca del wall que uno esta cerrando,

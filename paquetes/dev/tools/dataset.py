@@ -246,7 +246,7 @@ def otros_bloques():
     out = []
     for grupo, f in [('MEP PENETRATIONS', 'MEP_cierre.json'),
                      ('RECESSED FIXTURE OPENINGS', 'HUECOS_cierre.json'),
-                     ('MISC SCOPE', 'PUNTOS345_cierres.json'),
+                     ('MISC SCOPE', 'PUNTOS_cierres.json'),
                      ('WET AREAS', 'HUMEDAS_cierres.json'),
                      # 10-oct-2026: los dos huecos de blocking de millwork que el barrido
                      # wall-por-wall no podia cerrar (un tag huerfano entre varios cierres que

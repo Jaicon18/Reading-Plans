@@ -59,8 +59,8 @@ tipos con dos etiquetas distintas para la misma cuenta"). Probada **viéndola fa
 real**: se revirtió el sello del A1K #n a `CONFIRMADO`, la compuerta lo marcó, y se restauró.
 Trinquete declarado en 0.
 
-Lo que sigue abierto, y va al handoff como pendiente numerado: **27 `alto_board` citan
-`5/A12.01 PARTITION G` para el valor [valor retirado E24], y ese detalle no imprime ese número** — da la REGLA
+Lo que sigue abierto, y va al handoff como pendiente numerado: **varios `alto_board` citan
+el detalle del partition type (`N/A12.xx`) para el valor [valor retirado E24], y ese detalle no imprime ese número** — da la REGLA
 ("to underside of structure"); el valor sale de S2.20. Un número correcto con la fuente
 equivocada es el mismo error de `5/F de S5.20`.
 
@@ -84,25 +84,26 @@ deja de servir.
 ## EL MAPA DE HOJAS SE CRUZA CON DOS FUENTES, Y SE DICE DÓNDE NO CUADRAN
 
 El PASO 0 se volvió herramienta (`indice_set.py`), con las dos fuentes que manda el protocolo:
-el **DRAWING INDEX de A00.00** (92 hojas) y el **title block de cada página** (94 páginas).
+el **DRAWING INDEX de la hoja de portada** (N hojas) y el **title block de cada página** (P páginas).
 
-- **El número de hoja del title block es el texto MÁS GRANDE que tiene su forma** (~37 pt). El
-  detector anterior dejaba 20 de 94 páginas sin número y en A03.01 tomaba texto de la PLANTA
+- **El número de hoja del title block es el texto MÁS GRANDE que tiene su forma.** El
+  detector anterior dejaba varias páginas sin número y en una planta tomaba texto del dibujo
   como título. Ordenar por tamaño de letra lo resuelve sin depender de en qué esquina esté.
-- **El set trae `A02.02 ROOF PLAN` TRES veces** (páginas 25, 26 y 27), verificado página por
-  página contra el PDF. Y eso cuadra la aritmética: **92 hojas del índice + 2 copias = 94
-  páginas.** No falta ninguna hoja del índice y no hay ninguna que el índice no liste.
-- Las **18 páginas sin rótulo legible** son las **18 hojas civiles y de landscape** (C1.0–C7.4,
-  L1.0, L1.1): el title block del consultor civil tiene otro formato. Se asignan **`[DERIVADO]`
+- **Un set puede traer la MISMA hoja repetida** en páginas seguidas; se verifica página por
+  página contra el PDF. Y eso cuadra la aritmética: **hojas del índice + copias repetidas =
+  páginas del PDF.** Se comprueba que no falte ninguna hoja del índice y que no haya ninguna
+  que el índice no liste.
+- Las **páginas sin rótulo legible** suelen ser las **hojas civiles y de landscape** (serie C y
+  serie L): el title block del consultor civil tiene otro formato. Se asignan **`[DERIVADO]`
   por posición** con la cuenta escrita, nunca `[CONFIRMADO]`, y se dice por qué la
   incertidumbre no cuesta: son Div 02/31/32, fuera de Div 05 y Div 09.
-- **Revision log leído, 8 revisiones; la vigente es `IF Permit · 08/26/2025`.** La carta de RFIs
-  traía `95 hojas` escrito a mano: son **94 páginas / 92 hojas**. Un número escrito a mano que
-  nadie volvió a comprobar.
+- **Se lee el revision log y se anota cuál es la revisión vigente.** Un conteo de hojas escrito
+  a mano (en una carta de RFIs, en un correo) no se copia: se vuelve a contar contra el PDF.
+  Un número escrito a mano que nadie volvió a comprobar no es un dato.
 
 ## EL REGISTRO DE LO QUE EL USUARIO CONFIRMÓ NO EXISTÍA COMO ARCHIVO
 
-La regla del 12-sep-2026 manda parar al cerrar el barrido de cada tag y esperar confirmación
+La regla vigente manda parar al cerrar el barrido de cada tag y esperar confirmación
 explícita. Ese registro vivía en el chat.
 
 > **REGLA: lo que el usuario confirmó se guarda como DATO, igual que una printed dimension.** Un handoff que

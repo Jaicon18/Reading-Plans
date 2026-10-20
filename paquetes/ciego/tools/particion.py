@@ -34,6 +34,30 @@ por wall el canon contra la lista de walls del estimador, el estimador corta as�
      remate de un frente cortado por otro type; su LF se suma al wall con tag más cercano del mismo type.
   Si un type no trae `tag_ids` en ningún segmento, se corta en cada esquina (regla 1) y se avisa.
 
+v74 — ESTUDIO DE PARTICIÓN (arbitraje wall por wall contra la lista del estimador, dos canons). Reglas genéricas
+nuevas del modo "eje" (sin números de ningún proyecto; cada una con su test sintético en test_particion_v74.py):
+  R74.1 TYPE POR ESPESOR EN LA LÍNEA. Un segmento SIN tag (tipado por la nota general) cuyo espesor de band no es el
+        de su type (|Δ| > ESPESOR_TOL_IN contra la mediana de los walls CON tag de ese type en la hoja) toma el type
+        de los walls CON tag de la misma LÍNEA (colineales y encadenados sin hueco vacío, de cualquier type) que sí
+        tienen su espesor. Es el return / remate de un office front: es del frente, no del type por defecto.
+  R74.2 STUB APARTE. Un grupo suelto SIN tag de largo <= STUB_MAX_FT que NO toca por el extremo a un wall CON tag de
+        su type no es wall de la lista ni suma LF al type: va a `stubs` (su metal y su board siguen en el canon).
+        Reemplaza a R72.7 / R73.18 (sumarlo al wall con tag más cercano): la lista del estimador mide ese wall de
+        cara a cara sin el stub. Un stub que SÍ toca por el extremo a un wall con tag es su return (regla 3).
+  R74.3 NICHO / ALCOVE. Un grupo SIN tag (más de un tramo) cuyos dos extremos libres caen sobre dos tramos
+        COLINEALES de una misma línea de OTRO type, cerrando el hueco entre ellos, es un nicho de esa línea (alcove
+        de drinking fountain, recess de equipo): no es wall de la lista; va a `anexos` con su LF (material en el
+        canon). Un grupo sin tag que no abre en otra línea sigue siendo UN wall (regla 3).
+  R74.4 FRENTE DE BULKHEADS. door_bulkheads colineales (type BULKHEAD-*) cuyos huecos están cubiertos por tramos
+        colineales de otros types (los returns del frente) o son cortos (<= GAP_ABERTURA_MAX_FT: stub / jamb) = UN
+        wall por frente (PT4 de partition_types, ahora también aquí: comparar.py y partition_types dan lo mismo).
+        Un hueco largo y vacío separa dos frentes.
+  R74.5 DUPLICADO DE BOX. Un box / pier SIN tag con la misma huella (solape >= 50 %) que un registro CON tag es el
+        mismo elemento leído dos veces (R72.3): no cuenta; va a `duplicados`. El tag del plano manda.
+  R74.6 NOMBRE EXTERIOR. wall / pier exterior con stud conocido -> EXT-<stud>CFMF; parapet -> EXT-PARAPET; canopy
+        column -> CANOPY-COL (los nombres de partition_types.py R1): dos lecturas que escriben "EXT" y "EXT-6CFMF"
+        ya no salen como dos types.
+
 MODOS
   "eje"    (default v71) reglas 1-5 de arriba.
   "tramo"  un wall por cada tramo RECTO de un type: segmentos colineales (ejes a <= tol_line_ft) y contiguos
@@ -62,8 +86,8 @@ MODOS = ("tramo", "run", "eje")
 GAP_ABERTURA_MAX_FT = 7.0  # v71: hueco colineal máximo que se cruza, y solo con un R.O. del wall dentro (R70.3)
 JOG_MAX_FT = 1.0
 STUB_MAX_FT = 0.5         # v72 (R72.7): grupo suelto sin tag <= 6" = stub, se suma al wall con tag que toca
-STUB_DIST_MAX_FT = 3.0    # v73 (arbitraje #21): solo si ese wall está a <= 3 ft (remate del mismo frente); más lejos = aviso
 TOL_LINE_FT = 0.25        # colineales: ejes a <= 3"
+ESPESOR_TOL_IN = 0.5      # v74 (R74.1): mismo espesor de band = a <= 1/2" (la mitad de la diferencia entre dos types de stud vecinos)
 TOL_GAP_FT = 0.5          # contiguos / extremos que se tocan: hueco <= 6" (más el espesor del wall)
 ESCALA_DEFAULT = 18.0
 NO_PARTITION = ("storefront_cripples", "vestibule_head", "grille_head", "roof_step", "fascia_box", "canopy_soffit",
@@ -82,12 +106,26 @@ def familia(tag):
     return m.group(0) if m else tag
 
 
+def _stud(w):
+    m = re.match(r"\s*(\d+(?:-\d+/\d+)?)", str(w.get("stud_size") or ""))
+    return m.group(1) if m else None
+
+
 def tipo(w):
-    """Type de partición del segmento. door_bulkhead -> BULKHEAD-<familia del tag (o de bulkhead_of)>."""
+    """Type de partición del segmento. door_bulkhead -> BULKHEAD-<familia del tag (o de bulkhead_of)>.
+    v74 (R74.6): nombres de partition_types R1 (EXT-<stud>CFMF, EXT-PARAPET, CANOPY-COL)."""
     t = norm_type(w.get("tag"))
-    if w.get("element") == "door_bulkhead":
+    el = w.get("element")
+    if el == "door_bulkhead":
         base = t or norm_type(w.get("bulkhead_of"))
         return f"BULKHEAD-{familia(base)}" if base else "BULKHEAD"
+    if el == "parapet":
+        return "EXT-PARAPET"
+    if t.replace("-", "") in ("CANOPYCOL", "CANOPYCOLUMN"):
+        return "CANOPY-COL"
+    if el in ("wall", "pier") and (t.startswith("EXT") or str(w.get("location") or "").lower() == "exterior") \
+            and "PARAPET" not in t and _stud(w):
+        return f"EXT-{_stud(w)}CFMF"
     return t
 
 
@@ -212,8 +250,12 @@ def _tramos_eje(ws, esc, tol_line_ft, tol_gap_ft, avisos_gap):
     return tramos
 
 
-def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_MAX_FT):
-    """Reglas 2-5 (v71) sobre los tramos rectos de un type / hoja."""
+def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_MAX_FT, ctx=None, aparte=None,
+               tipo_ctx=None, sheet_ctx=None):
+    """Reglas 2-5 (v71) sobre los tramos rectos de un type / hoja. v74: R74.2 (stub aparte) y R74.3 (nicho); lo que
+    no es wall de la lista va a `aparte` = {"stubs": [...], "anexos": [...]} con su LF."""
+    aparte = {"stubs": [], "anexos": []} if aparte is None else aparte
+
     def fila(parts, sin_tag=None):
         d = {"ids": [x for p in parts for x in p["ids"]], "lf": sum(p["lf"] for p in parts), "tramos": len(parts),
              "geos": [p["geo"] for p in parts], "tags": sorted({x for p in parts for x in p["tags"]})}
@@ -240,37 +282,163 @@ def _walls_eje(tramos, esc, tol_gap_ft, exterior, t, sh, avisos, jog_max_ft=JOG_
             dest[c] += ks
         else:
             sueltos.append(ks)
-    # v72 (R72.7, arbitraje #20): un grupo suelto SIN tag de largo total <= STUB_MAX_FT (stub de jamb / remate de un
-    # frente cortado por un bulkhead u otro type) no es wall propio: su LF se suma al wall con tag más cercano del
-    # mismo type (por distancia entre extremos). Dos corridas lo contaban distinto (wall propio vs sumado).
-    if con:
-        quedan = []
-        for ks in sueltos:
-            if sum(tramos[k]["lf"] for k in ks) <= STUB_MAX_FT + 1e-9 and all(tramos[k]["geo"] for k in ks):
-                def dist(c):
-                    if tramos[c]["geo"] is None:
-                        return 1e18
-                    return min(math.dist(p, q) for k in ks for p in extremos(tramos[k]["geo"])
-                               for q in extremos(tramos[c]["geo"]))
-                c = min(con, key=lambda c: (dist(c), -tramos[c]["lf"], c))
-                if dist(c) > (STUB_DIST_MAX_FT + tramos[c]["geo"][4] / esc) * esc:
-                    avisos.append(f"{'+'.join(x for k in ks for x in tramos[k]['ids'])} ({t}, {sh}) stub sin tag <= "
-                                  f"{STUB_MAX_FT} ft que NO toca ningún wall con tag del type (más cercano a "
-                                  f"{round(dist(c) / esc, 2)} ft): revisar su type por espesor (R73.7); queda wall propio")
-                    quedan.append(ks)
-                    continue
-                dest[c] += ks
-                avisos.append(f"{'+'.join(x for k in ks for x in tramos[k]['ids'])} ({t}, {sh}) stub sin tag <= "
-                              f"{STUB_MAX_FT} ft: sumado al wall con tag más cercano (R72.7), no es wall propio")
-            else:
-                quedan.append(ks)
-        sueltos = quedan
+    # v74 (R74.2, reemplaza R72.7 / R73.18): un grupo suelto SIN tag <= STUB_MAX_FT que no toca por el extremo a un
+    # wall con tag de su type (si lo tocara, ya es su return arriba) no es wall de la lista ni suma LF al type: la lista
+    # del estimador mide cada wall de cara a cara sin el stub. Va a `stubs`; su metal y board siguen en el canon.
+    # v74 (R74.3): un grupo suelto SIN tag que cierra el hueco entre dos tramos colineales de una línea de OTRO type es
+    # un nicho de esa línea (alcove): va a `anexos`.
+    quedan = []
+    for ks in sueltos:
+        ids = [x for k in ks for x in tramos[k]["ids"]]
+        lf = round(sum(tramos[k]["lf"] for k in ks), 3)
+        if con and lf <= STUB_MAX_FT + 1e-9:
+            aparte["stubs"].append({"ids": ids, "lf": lf, "regla": "R74.2"})
+            avisos.append(f"{'+'.join(ids)} ({t}, {sh}) stub sin tag <= {STUB_MAX_FT} ft que no toca un wall con tag de "
+                          f"su type: no es wall de la lista ni suma LF (R74.2); su material sigue en el canon")
+            continue
+        ni = nicho([tramos[k]["geo"] for k in ks], tipo_ctx or t, sheet_ctx or sh, ctx, esc,
+                   tol_gap_ft=tol_gap_ft) if ctx else None
+        if ni:
+            aparte["anexos"].append({"ids": ids, "lf": lf, "regla": "R74.3", "abre_en": [ni[0], ni[1]],
+                                     "type_linea": ni[2]})
+            avisos.append(f"{'+'.join(ids)} ({t}, {sh}) grupo sin tag que cierra el hueco entre {ni[0]} y {ni[1]} "
+                          f"({ni[2]}): nicho / alcove de esa línea, no es wall de la lista (R74.3)")
+            continue
+        quedan.append(ks)
+    sueltos = quedan
     out = []
     for c in con:
         extra = [x for k in dest[c][1:] for x in tramos[k]["ids"]]
         out.append(fila([tramos[k] for k in dest[c]], extra or None))
     for ks in sueltos:
         out.append(fila([tramos[k] for k in ks]))
+    return out
+
+# ------------------------------------------------------------------ v74: contexto entre types (R74.1 / R74.3 / R74.4)
+def _espesor_in(g, esc):
+    return g[4] / esc * 12.0
+
+
+def _colineal(a, b, esc, tol_line_ft):
+    return a is not None and b is not None and a[0] == b[0] and abs(a[1] - b[1]) <= tol_line_ft * esc
+
+
+def _contiguo(a, b, esc, tol_gap_ft):
+    return a[2] <= b[3] + tol_gap_ft * esc and a[3] >= b[2] - tol_gap_ft * esc
+
+
+def _lineas(ctx, esc, tol_line_ft, tol_gap_ft):
+    """Líneas físicas de la hoja: segmentos con band H|V de CUALQUIER type, colineales y encadenados sin hueco
+    vacío (hueco <= tol_gap). -> {id: n de línea}."""
+    idx = [k for k, c in enumerate(ctx) if c["geo"] is not None]
+    comp = _raices(len(idx), lambda i, j: ctx[idx[i]]["sheet"] == ctx[idx[j]]["sheet"]
+                   and _colineal(ctx[idx[i]]["geo"], ctx[idx[j]]["geo"], esc, tol_line_ft)
+                   and _contiguo(ctx[idx[i]]["geo"], ctx[idx[j]]["geo"], esc, tol_gap_ft))
+    return {ctx[idx[i]]["id"]: n for n, cs in enumerate(comp) for i in cs}
+
+
+def retipar(ctx, esc, tol_line_ft=TOL_LINE_FT, tol_gap_ft=TOL_GAP_FT, tol_in=ESPESOR_TOL_IN):
+    """R74.1: {id: (type nuevo, motivo)} para segmentos SIN tag cuyo espesor es el de los walls con tag de su línea y
+    no el de su type. Solo element wall con band H|V; el type por defecto necesita walls con tag en la hoja para
+    tener un espesor de referencia (si no, no se toca)."""
+    linea = _lineas(ctx, esc, tol_line_ft, tol_gap_ft)
+    ref = {}
+    for c in ctx:
+        if c["tags"] and c["geo"] is not None and c["element"] == "wall":
+            ref.setdefault((c["type"], c["sheet"]), []).append(_espesor_in(c["geo"], esc))
+    med = {k: sorted(v)[len(v) // 2] for k, v in ref.items()}
+    out = {}
+    for c in ctx:
+        if c["tags"] or c["geo"] is None or c["element"] != "wall" or c["id"] not in linea:
+            continue
+        e = _espesor_in(c["geo"], esc)
+        propio = med.get((c["type"], c["sheet"]))
+        if propio is None or abs(e - propio) <= tol_in:
+            continue
+        cand = sorted({o["type"] for o in ctx if o is not c and o["tags"] and o["element"] == "wall"
+                       and o["geo"] is not None and linea.get(o["id"]) == linea[c["id"]]
+                       and abs(_espesor_in(o["geo"], esc) - e) <= tol_in and o["type"] != c["type"]})
+        if len(cand) == 1:
+            out[c["id"]] = (cand[0], f"{c['id']} sin tag mide {round(e, 2)} in y su type {c['type']} {round(propio, 2)} "
+                                     f"in: toma el type {cand[0]} de los walls con tag de su línea (R74.1)")
+    return out
+
+
+def _extremos_libres(geos, esc, tol_gap_ft):
+    """Extremos de un grupo de tramos que no tocan a otro tramo del mismo grupo."""
+    libres = []
+    for k, g in enumerate(geos):
+        for p in extremos(g):
+            lim = g[4] + tol_gap_ft * esc
+            if not any(o is not g and (math.dist(p, q) <= lim or _sobre(p, o, lim)) for o in geos for q in extremos(o)):
+                libres.append(p)
+    return libres
+
+
+def _sobre(p, g, lim):
+    """¿El punto p cae sobre la band g (dentro de su largo y a <= lim de su eje)?"""
+    ori, eje, lo, hi, esp = g
+    a, b = (p[0], p[1]) if ori == "H" else (p[1], p[0])
+    return lo - lim <= a <= hi + lim and abs(b - eje) <= esp / 2.0 + lim
+
+
+def nicho(geos, tipo_grupo, sheet, ctx, esc, tol_line_ft=TOL_LINE_FT, tol_gap_ft=TOL_GAP_FT):
+    """R74.3: si los dos extremos libres del grupo caen sobre dos tramos colineales DISTINTOS de una misma línea de
+    otro type (el grupo cierra el hueco entre ellos) -> (id_a, id_b, type de la línea); si no, None."""
+    geos = [g for g in geos if g is not None]
+    if len(geos) < 2:
+        return None
+    libres = _extremos_libres(geos, esc, tol_gap_ft)
+    if len(libres) != 2:
+        return None
+    lim = tol_gap_ft * esc
+
+    def toca(p):
+        return [o for o in ctx if o["geo"] is not None and o["sheet"] == sheet and o["type"] != tipo_grupo
+                and _sobre(p, o["geo"], lim)]
+    for a in toca(libres[0]):
+        for b in toca(libres[1]):
+            if a is not b and a["type"] == b["type"] and _colineal(a["geo"], b["geo"], esc, tol_line_ft):
+                return a["id"], b["id"], a["type"]
+    return None
+
+
+def _frente_bulkheads(walls, ctx, t, sh, esc, tol_line_ft, tol_gap_ft):
+    """R74.4: walls BULKHEAD-* colineales cuyo hueco lo cubren tramos colineales de otros types (returns del frente)
+    = UN wall por frente."""
+    if len(walls) < 2:
+        return walls
+    otros = [c["geo"] for c in ctx if c["geo"] is not None and c["sheet"] == sh and c["type"] != t]
+
+    def cubierto(a, b):
+        """¿El hueco entre a y b (colineales) está cubierto por tramos colineales de otros types?"""
+        g0, g1 = (a[3], b[2]) if a[3] < b[2] else (b[3], a[2])
+        if g1 <= g0 + GAP_ABERTURA_MAX_FT * esc:    # hueco corto (stub / jamb entre bulkheads): mismo frente (PT4)
+            return True
+        tramos = sorted((o[2], o[3]) for o in otros if _colineal(o, a, esc, tol_line_ft) and o[3] >= g0 - 1
+                        and o[2] <= g1 + 1)
+        x = g0
+        for lo, hi in tramos:
+            if lo > x + tol_gap_ft * esc:
+                return False
+            x = max(x, hi)
+        return x >= g1 - tol_gap_ft * esc
+
+    def une(i, j):
+        for a in walls[i]["geos"]:
+            for b in walls[j]["geos"]:
+                if a is not None and b is not None and _colineal(a, b, esc, tol_line_ft) and cubierto(a, b):
+                    return True
+        return False
+    out = []
+    for comp in _raices(len(walls), une):
+        ps = [walls[i] for i in comp]
+        d = {"ids": [x for p in ps for x in p["ids"]], "lf": sum(p["lf"] for p in ps),
+             "tramos": sum(p.get("tramos", 1) for p in ps), "geos": [g for p in ps for g in p["geos"]],
+             "tags": sorted({x for p in ps for x in p.get("tags") or []})}
+        if len(ps) > 1:
+            d["frente"] = "R74.4"
+        out.append(d)
     return out
 
 
@@ -282,17 +450,58 @@ def _tocan(a, b, esc, tol_gap_ft):
     return any(math.dist(p, q) <= lim for p in extremos(a["geo"]) for q in extremos(b["geo"]))
 
 
-def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_LINE_FT, tol_gap_ft=TOL_GAP_FT):
+def contexto(walls, tipos=None):
+    """v74: todos los segmentos de partición (con su type) para las reglas entre types (R74.1 / R74.3 / R74.4).
+    `tipos` = {id: type} si el llamador ya los tiene (partition_types); si no, tipo(w)."""
+    ctx = []
+    for w in walls:
+        if w.get("element") in NO_PARTITION:
+            continue
+        ctx.append({"id": w["id"], "type": (tipos or {}).get(w["id"]) or tipo(w), "sheet": hoja(w)[0],
+                    "element": w.get("element") or "wall", "tags": _tags(w), "geo": geo(w)})
+    return ctx
+
+
+def duplicados(walls):
+    """R74.5 (= R72.3): {id sin tag: id con tag} de boxes / piers con la misma huella (solape >= 50 %)."""
+    try:
+        import chequeos_v72
+    except ImportError:
+        return {}
+    return chequeos_v72.partes_de_box([w for w in walls if w.get("element") not in NO_PARTITION])
+
+
+def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_LINE_FT, tol_gap_ft=TOL_GAP_FT,
+              ctx=None, tipo_ctx=None):
+    """`ctx` / `tipo_ctx` (v74): contexto externo de todos los types (partition_types agrupa un type a la vez con
+    walls sintéticos; `tipo_ctx` es el type real de ese grupo). Sin ctx, el modo "eje" lo arma del canon."""
     if modo not in MODOS:
         raise ValueError(f"modo '{modo}' no existe: {MODOS}")
     esc = escala(canon)
     grupos = OrderedDict()
     otros, avisos = [], []
-    for w in canon.get("walls") or []:
+    walls_c = canon.get("walls") or []
+    retip, dups = {}, {}
+    externo = ctx is not None
+    ctx = list(ctx or [])
+    if modo == "eje" and not externo:             # v74: reglas entre types (R74.1 / R74.3 / R74.4 / R74.5)
+        dups = duplicados(walls_c)
+        ctx = contexto([w for w in walls_c if w["id"] not in dups])
+        retip = retipar(ctx, esc, tol_line_ft, tol_gap_ft)
+        for c in ctx:
+            if c["id"] in retip:
+                c["type"] = retip[c["id"]][0]
+        avisos += [m for _, m in retip.values()]
+        avisos += [f"{k} sin tag con la huella del box {v} (con tag): el mismo elemento leído dos veces, no cuenta "
+                   f"(R74.5 / R72.3)" for k, v in dups.items()]
+    aparte = OrderedDict()
+    for w in walls_c:
         if w.get("element") in NO_PARTITION:
             otros.append(w["id"])
             continue
-        t = tipo(w)
+        if w["id"] in dups:
+            continue
+        t = retip[w["id"]][0] if w["id"] in retip else tipo(w)
         sh, pg = hoja(w)
         if geo(w) is None:
             ori = (w.get("band") or {}).get("ori") if isinstance(w.get("band"), dict) else None
@@ -304,7 +513,13 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
         if modo == "eje":
             ext = es_exterior(t) or all(es_exterior(t, w) for w in ws)   # un pier exterior no vuelve exterior al type
             tramos = _tramos_eje(ws, esc, tol_line_ft, tol_gap_ft, avisos)
-            walls = _walls_eje(tramos, esc, tol_gap_ft, ext, t, sh, avisos, jog_max_ft)
+            ap = aparte.setdefault(t, {"stubs": [], "anexos": []})
+            tr, shr = (tipo_ctx or t, "_") if externo else (t, sh)       # type / hoja con que se busca en ctx
+            walls = _walls_eje(tramos, esc, tol_gap_ft, ext, t, sh, avisos, jog_max_ft,
+                               ctx=[dict(c, sheet=shr if externo else c["sheet"]) for c in ctx] if ctx else None,
+                               aparte=ap, tipo_ctx=tr, sheet_ctx=shr)
+            if tr.startswith("BULKHEAD"):
+                walls = _frente_bulkheads(walls, ctx, tr, shr, esc, tol_line_ft, tol_gap_ft)
         else:
             tramos = _tramos(ws, esc, tol_line_ft, tol_gap_ft)
         if modo == "eje":
@@ -359,7 +574,11 @@ def particion(canon, modo=MODO_DEFAULT, jog_max_ft=JOG_MAX_FT, tol_line_ft=TOL_L
         d["filas"] += walls
         d["walls"] += len(walls)
         d["lf"] = round(d["lf"] + sum(w["lf"] for w in walls), 3)
+    for t, ap in aparte.items():
+        if t in out and (ap["stubs"] or ap["anexos"]):
+            out[t]["stubs"], out[t]["anexos"] = ap["stubs"], ap["anexos"]
     return {"modo": modo, "types": out, "other_framing": otros, "avisos": avisos, "escala_pt_por_ft": esc,
+            "retipados": {k: v[0] for k, v in retip.items()}, "duplicados": dups,
             "regla": {"jog_max_ft": jog_max_ft, "tol_line_ft": tol_line_ft, "tol_gap_ft": tol_gap_ft}}
 
 

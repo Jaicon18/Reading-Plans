@@ -128,7 +128,7 @@ def _sill_pz(o, regla, ref):
     n = _int1(o["sill_pieces"], f"{ref}.sill_pieces")
     if n < regla:
         raise ValueError(f"{ref}: sill_pieces {n} < {regla} — DOUBLE sill track en R.O. > 4'-0\" (decisión usuario "
-                         f"#18, 2/S5.20 INVERT DETAIL FOR SILL CONDITION)")
+                         f"#18, detalle de sill invertido N/HOJA)")
     return n
 
 

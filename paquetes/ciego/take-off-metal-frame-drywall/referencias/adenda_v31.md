@@ -6,7 +6,7 @@ Rodolfo: *"¿ya actualizaste el excel sheet? Si no, hazlo, y crea regla que cada
 
 ## El riesgo que cubre
 
-Se corrige un cierre — el width de una banda de FRP, la height de un wall, el W.R. gypsum board de una zona húmeda. La corrección queda **sellada**. `resumen_total` dice **<n> sellos OK / <n> rotos**. Todo verde.
+Se corrige un cierre — el width de una banda de FRP, la height de un wall, el W.R. gypsum board de una zona húmeda. La corrección queda **sellada**. `resumen_total` dice **todos los sellos OK / <n> rotos**. Todo verde.
 
 Y el único papel que alguien usa para comprar material sigue diciendo lo viejo.
 
@@ -64,7 +64,7 @@ El paso <n> ("guardarla") ahora incluye **regenerar el entregable**:
 
 ## Error de la propia compuerta, cazado en su primer arranque
 
-`entregar.py` leía el resultado de los sellos tomando la **última línea** de `resumen_total.py`. Pero ese script sigue imprimiendo renglones de material después del TOTAL, así que la última línea era `TRIM_CEILING ... [valor retirado E24]` y la compuerta reportó **"SELLO ROTO"** con los <n> sellos intactos. Una falsa alarma en el primer minuto de vida.
+`entregar.py` leía el resultado de los sellos tomando la **última línea** de `resumen_total.py`. Pero ese script sigue imprimiendo renglones de material después del TOTAL, así que la última línea era `TRIM_CEILING ... [valor retirado E24]` y la compuerta reportó **"SELLO ROTO"** con todos los sellos intactos. Una falsa alarma en el primer minuto de vida.
 
 > **REGLA — La salida de otra herramienta se parsea por CONTENIDO, nunca por posición.**
 > Se busca el renglón que dice `sellos OK`. Si no aparece ninguno, eso también es falla —

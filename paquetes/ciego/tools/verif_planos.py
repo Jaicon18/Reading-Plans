@@ -82,7 +82,7 @@ def marcados():
             continue
         a, h = out.get(int(n), (0.0, 'EXTERIORES'))
         out[int(n)] = (a + float(m.group(1)), h)
-    # El parapet infill (160-165) y el forro de las columnas de marquesina (66-69) van en
+    # El parapet infill y el forro de las columnas de marquesina (sus walls propios) van en
     # su propia hoja: se construyen con otro perfil y en otro momento que el muro de abajo.
     try:
         import hoja_parapeto as PP         # generador DEL PROYECTO (no vive en _herramientas/py)

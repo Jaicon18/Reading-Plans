@@ -110,7 +110,7 @@ Cada emisión lleva un **sello sha256** del contenido, que cambia si se toca cua
 
 **Qué bloquea.** Lanza `BarridoRechazado` si el nº de bandas distintas no coincide con el que declara el cierre, o si algún tag se queda sin banda. No hay modo "seguir con advertencias". Elige la banda por CERCANÍA DE LA PUNTA del leader y solo desempata por error de thickness: al revés es como se pierde un wall. Mide cada wall por el TRAMO que contiene la punta, nunca por la extensión de la face en toda la hoja, puenteando huecos solo con end cap a los dos lados.
 
-**LÍMITE HONESTO, comprobado: el auditor FLAGEA, NO DECIDE.** En su reauditoría real acertó **1 de 5**. Falla cuando (a) el leader real no se detecta o se detecta al revés, (b) dos lecturas de la misma face difieren ~1 pt y parten una banda en dos, (c) el tag está en una envolvente cerrada y no en una banda. Por eso **cada bandera se resuelve ABRIENDO LA IMAGEN**, nunca aflojando tolerancias, y sus números NO sustituyen al cierre: lo que decide es reconstruir la derivación escrita y contrastarla con el dibujo.
+**LÍMITE HONESTO, comprobado: el auditor FLAGEA, NO DECIDE.** En su reauditoría real acertó **una minoría** de los casos. Falla cuando (a) el leader real no se detecta o se detecta al revés, (b) dos lecturas de la misma face difieren ~1 pt y parten una banda en dos, (c) el tag está en una envolvente cerrada y no en una banda. Por eso **cada bandera se resuelve ABRIENDO LA IMAGEN**, nunca aflojando tolerancias, y sus números NO sustituyen al cierre: lo que decide es reconstruir la derivación escrita y contrastarla con el dibujo.
 
 **Tests obligatorios.** (a) Dos tags perpendiculares cercanos → devuelve DOS bandas, no una. (b) Un tag cuyo leader apunta a una envolvente cerrada → lo reporta sin banda en vez de inventarle una. (c) El nº de bandas de un tipo ya cerrado y verificado coincide con el cierre.
 
@@ -133,7 +133,7 @@ Cada emisión lleva un **sello sha256** del contenido, que cambia si se toca cua
 
 Encierra el procedimiento de medición desde `page.lines`: escala derivada del rótulo, filtro de lineweight para faces de wall, pares de faces candidatos ordenados por error de thickness contra el schedule, selección del run por la punta del leader, puenteo de aberturas solo con end cap a ambos lados, y corte del run donde empieza el dominio de otro tag.
 
-**No usar para cantidades hasta que acierte 3 de 3 contra un patrón que NO haya salido de Claude** — mediciones del usuario o dimensions impresas. En su última validación acertó 1 de 3: falla al desempatar dos pares de faces con errores de thickness casi iguales. Mientras tanto, la medición se hace con el procedimiento manual del skill y cada wall se verifica con imagen.
+**No usar para cantidades hasta que acierte TODOS los casos contra un patrón que NO haya salido de Claude** — mediciones del usuario o dimensions impresas. En su última validación falló la mayoría: falla al desempatar dos pares de faces con errores de thickness casi iguales. Mientras tanto, la medición se hace con el procedimiento manual del skill y cada wall se verifica con imagen.
 
 ## arranque.py — Paso 0 mecánico en un solo comando
 

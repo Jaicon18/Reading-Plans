@@ -4,7 +4,7 @@
 INSTRUCCION PERMANENTE DE RODOLFO, 7-oct-2026 (regla inviolable): todo nombre de material,
 herramienta, componente, proceso, abreviatura y vocabulario tecnico de drywall y metal frame
 va en INGLES; la prosa puede ir en espanol. `traducir_materiales.py` ya lo hace con los
-CIERRES; esto lo hace con los documentos, que es donde quedaron 116 apariciones.
+CIERRES; esto lo hace con los documentos, que es donde quedaban la mayoria de las apariciones.
 
 TRES SALVAGUARDAS, cada una por una forma distinta de romper un documento:
 

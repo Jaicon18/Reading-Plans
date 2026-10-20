@@ -19,7 +19,7 @@ import resumen_global as RG
 
 B = f'{_TW}'
 EXTRA = ['CIELOS_cierres.json', 'SOFFITS_cierres.json', 'CANOPY_cierres.json',
-         'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS345_cierres.json',
+         'MEP_cierre.json', 'HUECOS_cierre.json', 'PUNTOS_cierres.json',
          'HUMEDAS_cierres.json']
 
 

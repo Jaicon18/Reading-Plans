@@ -20,11 +20,20 @@ Una línea con el marcador `[ciego-ok]` se permite (criterio general que necesit
 v73 (arbitraje #21): también test_*.py y fixtures (antes se saltaban), y sobre los LITERALES de texto y número:
   P6 room real: texto con room / office / restroom / corridor… + número 1xx, o el valor de "room" = 1xx
      (los datos sintéticos usan rooms 9xx);
-  P7 wall ID real: literal con forma de id de wall de un type de planta "A1-3", "C1-5", "A1K-2", "B2-2a",
-     "EXT-8-1" (los sintéticos usan X / Y / Z / W: "X1-1", "WZ");
+  P7 wall ID real: literal con forma de id de wall de un type de planta "<type>-<n>", "<type>K-<n>",
+     "<type>-<n><letra>", "EXT-<grid>-<n>" (type = letra A–H con dígito opcional; los sintéticos usan X / Y / Z / W);
   P8 cantidad de una referencia: un literal numérico igual (±0.0005) a un valor de la lista EXTERNA de valores de
      examen (`--valores <json>` o $CIEGO_VALORES). La lista vive FUERA del paquete (la arma el árbitro); sin
      lista, P8 solo corre su autoprueba.
+
+v74 (--estricto, sobre SKILL.md + referencias/ + comentarios / docstrings / textos de las tools de producción):
+  P17 conteo de una corrida: "<n> sin abrir", "contra <n>", "<n> de <n>", "<n> sellos", "de <n> a <n>";
+  P18 porcentaje concreto (no umbral, no 0 / 100 %, no criterio de waste / margen) en una adenda;
+  P19 nombre de archivo con prefijo de wall / punto del set ("<LETRAS><nn>_algo"), id "UU<n>", "<type> a <n> deg";
+  P20 fecha absoluta (AAAA-MM-DD, D-mes, MM/DD/AAAA) en referencias/;
+  P21 coordenada pt con dos decimales (<nnn(n)>.<nn>);
+  P22 título de detalle en MAYÚSCULAS (3+ palabras) pegado a una cita N/HOJA (la cita sola es genérica).
+Cada patrón nuevo tiene muestra mala (armada en ejecución, números inventados) y buena en la autoprueba.
 
 Uso:  python3 test_ciego_tools.py            autoprueba sintética + barrido de la carpeta de este archivo
       python3 test_ciego_tools.py a.py b.py  solo esos archivos (más la autoprueba)
@@ -68,6 +77,19 @@ P14_EST = re.compile(r"(?i)(?<![\w./])\d{2,}(?:\.\d+)?\s*(?:hojas|detalles|callo
                      r"details|MB)\b|\b(?:hojas|detalles|callouts|pendientes|p[aá]ginas?)\s+\d{2,}\b|~\s?\d{2,}\s*hojas")
 P15_EST = re.compile(r"\b[xy]\s*=?\s*\d{3,4}\.\d{1,2}\b|\b\d{3,4}\.\d{2}\s*/\s*\d{3,4}\.\d{2}\b")
 P16_EST = re.compile(r"(?<![\w./])\d{2,4}\.\d{1,3}(?![\w./])")      # float en un texto de ejemplo (solo textos)
+# v74: conteos de una corrida, porcentajes de resultado, nombres / ids / ángulos del set, fechas, coordenadas pt y
+# títulos reales de detalle junto a su cita (formas genéricas: ningún número de un set)
+P17_EST = re.compile(r"(?i)(?<![\w./])\d+\s*[\"“”']?\s*sin abrir\b|\bcontra\s+\d+(?![\w./\"'%]|\s*(?:pt|ft|in|LF|SF)\b)"
+                     r"|(?<![\w./<])\d+\s+de\s+\d+(?![\w./\"'%])|(?<![\w./])\d+\s+sellos\b"
+                     r"|\b(?:de|desde)\s+\d{2,}\s+a\s+\d+(?![\w./\"'%])")
+P18_EST = re.compile(r"(?<![\w./])\d+(?:[.,]\d+)?\s?%")
+_P18_OK = re.compile(r"(?i)waste|merma|margen|tolerancia|umbral|tope|m[aá]ximo|m[ií]nimo|metal|board")
+P19_EST = re.compile(r"\b[A-Z]{1,8}\d{2,}_[A-Za-z]\w*|\bUU\d+\b|\b[A-H]\d?K?\s+a\s+\d+\s*(?:deg|°|grados)\b")
+P20_EST = re.compile(r"(?i)\b(?:19|20)\d{2}-\d{2}-\d{2}\b|\b\d{1,2}/\d{1,2}/(?:19|20)\d{2}\b"
+                     r"|\b\d{1,2}-(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic|jan|apr|aug|dec)[a-z]*\b")
+P21_EST = re.compile(r"(?<![\w./])\d{3,4}\.\d{2}(?![\w/])")
+P22_EST = re.compile(r"\b\d{1,2}/[A-Z]{1,2}-?\d{1,3}\.\d{1,3}`?\s+(?:@\s+|[A-Z][A-Z0-9/&.,'()-]+\s+){2,}"
+                     r"(?:@\s+)?[A-Z][A-Z0-9/&.,'()-]+")
 OK_FABRICANTE = re.compile(r"(?i)AISC|GA-216|ASTM|manufacturer|fabricante|SSMA|UL ?\d")
 ESTRICTO = [False]
 _REGLA_ID = re.compile(r"^(4[4-9]|5\d|60)\.\d{1,2}$")       # REGLA 44.1 … 60.11 (numeración de reglas del SKILL)
@@ -84,6 +106,17 @@ def _exento_estricto(et, ln, m):
         return abs(v * 8 - round(v * 8)) < 1e-6 and v < 100                  # 14.375 = 14 3/8 (genérico)
     if et.startswith("P14"):
         return bool(re.search(r"(~|más de|mas de|>|≥|pasa de)\s*$", ln[max(0, m.start() - 9):m.start()]))
+    antes = ln[max(0, m.start() - 12):m.start()]
+    if et.startswith("P17") and (re.search(r"(?i)\b(paso|etapa|step)[\s*]*$", antes)
+                                 or re.match(r"0\s", t)):
+        return True                                             # "paso <n> de <n>" del protocolo; "0 sellos rotos"
+    if et.startswith(("P17", "P18")) and re.search(r"(±|\+/-|[<>]=?|≤|≥|dentro de|hasta|más de|mas de|~)\s*$", antes):
+        return True                                                            # umbral / tolerancia
+    if et.startswith("P18"):
+        v = float(re.match(r"[\d.,]+", t).group(0).replace(",", "."))
+        return v in (0, 100) or bool(_P18_OK.search(ln))                      # 0 / 100 % o criterio de compra
+    if et.startswith("P21"):
+        return bool(_REGLA_ID.match(t))
     return False
 P10_MD = re.compile(r"(?i)ejemplo real[^\n]*?\b\d{2,}\b")
 P6_VALOR = re.compile(r"^1\d\d[A-Z]?$")
@@ -251,7 +284,43 @@ def autoprueba():
     md_bueno = "La face ESTE es [room].\nA1 #n contra la face OESTE del #n. Ver 6/A12.01 y §4; regla #0.\n"
     assert len(revisar_md(md_malo, "m")) == 6, revisar_md(md_malo, "m")
     assert revisar_md(md_bueno, "b") == [], revisar_md(md_bueno, "b")
-    return "autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, 0 falsos positivos)"
+    # P7: las cuatro formas de id de wall de un set, armadas en ejecución (type inventado, números inventados)
+    for forma in ("G" + "4-7", "G" + "4K-7", "G" + "4-7b", "EXT-" + "6-2"):
+        assert P7.match(forma), forma
+    assert not any(P7.match(x) for x in ("X1-1", "WZ", "RFI-1")), "P7 falso positivo"
+    # v74: P17–P22 (modo estricto), una muestra mala y una buena por patrón; números armados en ejecución
+    a, b, c = "6" + "3", "1" + "7", "2" + "9"
+    malos = {
+        "P17": ["la compuerta contaba " + a + ' "sin abrir"', "salía " + b + " muere contra " + c,
+                "leía " + b + " de " + c + " renglones", "los " + a + " sellos intactos", "bajó de " + a + "1 a " + b],
+        "P18": ["selladas (" + a + "%) sin cita", "primera versión: **" + c + "%**"],
+        "P19": ["G" + b + "_cierre.json", "PUNTOS" + a + "_cierres.json", "UU" + b[0] + " dibujados",
+                "wall diagonal (F a " + c + " deg)"],
+        "P20": ["la regla del " + b + "-sep-20" + c, "vigente al 20" + c + "-0" + b[1] + "-" + b, "IF Permit 0"
+                + b[1] + "/" + c + "/20" + b],
+        "P21": ["burbuja en " + a + b + "." + c + " pt"],
+        "P22": ["ver `" + b[0] + "/A" + c + ".0" + b[1] + " TYPICAL BULKHEAD TRANSITION DETAIL` arriba"],
+    }
+    buenos = ["cada tag en su wall; la compuerta revisa contra el plano",           # P17
+              "margen del 5% en B; dentro de 0.5 %; tolerancia ± 2 %; en 0%",      # P18
+              "MEP_cierre.json y PUNTOS_cierres.json; tag XX3; wall diagonal (ni H ni V)",  # P19
+              "versión v74 del protocolo; ver regla R74.2 y REGLA 55.7",            # P20
+              "a 1/4\"=1'-0\" son 18 pt/ft; 5/8\" = 11.25 pt; hoja A12.01; REGLA 56.10",    # P21
+              "cita 7/A09.26 y 5/S5.20; detalle `N/HOJA <título del detalle>`; 5/8\" GYP. BD. @ 16\" O.C.",  # P22
+              "LA COMPUERTA: verif_caras.py (paso 12 de 17); hasta 3 de 5 casos"]
+    ESTRICTO[0], previo = True, ESTRICTO[0]
+    try:
+        for et, muestras in malos.items():
+            for s in muestras:
+                h = revisar_md(s, "referencias/adenda_v99.md")
+                assert any(et in x for x in h), (et, s, h)
+        for s in buenos:
+            h = revisar_md(s, "referencias/adenda_v99.md")
+            assert h == [], (s, h)
+    finally:
+        ESTRICTO[0] = previo
+    return ("autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, P17–P22 estrictos, "
+            "0 falsos positivos)")
 
 
 def revisar_md(texto, nombre="<md>"):
@@ -264,7 +333,13 @@ def revisar_md(texto, nombre="<md>"):
         if ESTRICTO[0]:
             pats = [("P11 número junto a wall/door/room/tag", P11_EST), ("P12 id de cierre del set", P12_EST),
                     ("P13 nombre con prefijo de proyecto", P13_EST), ("P14 conteo del set", P14_EST),
-                    ("P15 coordenada", P15_EST)]
+                    ("P15 coordenada", P15_EST), ("P17 conteo de una corrida", P17_EST),
+                    ("P19 nombre / id / ángulo del set", P19_EST), ("P21 coordenada pt", P21_EST),
+                    ("P22 título de detalle junto a su cita", P22_EST)]
+            if "adenda_v" in nombre:
+                pats.append(("P18 porcentaje de resultado", P18_EST))
+            if "referencias" in nombre:
+                pats.append(("P20 fecha absoluta", P20_EST))
             if nombre.endswith("(textos)") and not OK_FABRICANTE.search(ln):
                 pats.append(("P16 float en texto de ejemplo", P16_EST))
             for et, rx in pats:
@@ -332,6 +407,9 @@ def archivos_md(d):
         for base, _, fs in os.walk(sk):
             out += [os.path.join(base, f) for f in sorted(fs) if f.endswith(".md")]
     out += [os.path.join(d, f) for f in sorted(os.listdir(d)) if f.endswith(".md")]
+    raiz = os.path.join(d, "..")                     # v74: también los .md de la raíz del zip (CAMBIOS_*.md)
+    if sk and os.path.abspath(os.path.join(sk, "..")) == os.path.abspath(raiz):
+        out += [os.path.join(raiz, f) for f in sorted(os.listdir(raiz)) if f.endswith(".md")]
     return out
 
 

@@ -5,7 +5,7 @@ callouts que el plano señala quedaron usados o declarados, y `entregar.py` pasa
 
 ## 1. El RFI del parapet se CIERRA — el infill de `11/S5.10` SÍ se ubica
 
-La v35 decía que `11/S5.10 PARAPET INFILL FRAMING` "no se ubica en ningún plano" y lo dejó
+La v35 decía que `11/S5.10` (el detalle de infill del parapet) "no se ubica en ningún plano" y lo dejó
 como RFI contra la lectura arquitectónica de `6" CFMF` corrido. **Estaba mal.** La cadena de
 detalles lo resuelve sin preguntar a nadie:
 
@@ -46,15 +46,15 @@ El B.O.D. queda CONFIRMADO por dos fuentes independientes: `S2.20` lo rotula `B.
 
 ## 2. Una layer que las secciones NO rotulan y los detalles SÍ
 
-`5/A09.26 SECTION DETAIL @ ACM BASE` y `9/A09.27 SECTION DETAIL @ METAL PANEL BASE` rotulan
+`5/A09.26` y `9/A09.27` (los detalles de base del revestimiento) rotulan
 **`5/8" GLASS MAT SHEATHING`** con la flecha apoyada en la face EXTERIOR del `6" METAL STUD
 FRAMING`. `7/A09.26` lo repite a media height.
 
 **Las OCHO secciones de wall del set no lo nombran ni una vez.** Son **[valor retirado E24] SF** de
 board que no estaban en el take-off.
 
-La extensión se acotó con un barrido de las <n> hojas por `GLASS MAT`/`GLASS-MAT`: solo
-aparece en A09.<n> y A09.<n>, y **nunca por encima del deck** — `4/A09.26 @ PARAPET` no la
+La extensión se acotó con un barrido de todas las hojas por `GLASS MAT`/`GLASS-MAT`: solo
+aparece en A09.<n> y A09.<n>, y **nunca por encima del deck** — el detalle del parapet (`4/A09.26`) no la
 lleva. Por eso corre de slab a B.O.D. y no sigue al parapet.
 
 > **REGLA.** Antes de dar por completa la composición de un wall, barrer el set por el NOMBRE
@@ -80,7 +80,7 @@ Ahora le pregunta a `resumen_global.SRC`, que es el único que sabe dónde vive 
 
 Corregido con `PAL = set(FUNC.split()) - set(HOMOGRAFOS)` y un `NO_PALABRA` que borra
 coordenadas (`x=`, `y=`) y abreviaturas de obra (`O.C.`, `T.O.`, `N.T.S.`, `V.I.F.`, `TYP.`).
-195 "celdas en español" → **<n> reales**. `TOPE_ES` <n> → <n>.
+Las "celdas en español" bajaron a **las reales** (los falsos positivos salieron) y `TOPE_ES` bajó al mismo número.
 
 ## 4. Trampa operativa: `| head` mata el script antes de que escriba
 

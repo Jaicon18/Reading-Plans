@@ -356,7 +356,7 @@ def escribir(dest=DEST_MD):
     w('')
     w('Read from the DRAWING INDEX of A00.00 for the title, and from the title block of each '
       'page for the PDF page. The sheet number in a title block is the LARGEST text that has '
-      'its shape (about 37 pt), which is what makes it readable without depending on which '
+      'its shape, which is what makes it readable without depending on which '
       'corner it sits in.')
     w('')
     w('| Sheet | Title | PDF page | State |')

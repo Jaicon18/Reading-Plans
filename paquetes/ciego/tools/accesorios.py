@@ -313,7 +313,7 @@ def _registro(sw):
 
 
 def stud_reinforcement(data, fo, o):
-    """6/S5.20 PENETRATION THRU STUDS: "16 GAUGE PLATE REINFORCEMENT REQD AT PENETRATIONS", flanges no se cortan.
+    """Detalle estructural de penetración en studs (N/HOJA): plate de refuerzo en cada penetración, flanges no se cortan.
     pcs = Σ qty x studs cortados; studs cortados = MAX(1, ROUNDUP(ancho / O.C.)). Los ductos / fire dampers NO se
     enmarcan (decisión #12: sin header ni sill) pero el stud que cortan sí lleva su plate.
     v68: barrido REGISTRADO obligatorio (mep_sweep.registro); ninguna fuente "visual"; cada penetración una sola vez

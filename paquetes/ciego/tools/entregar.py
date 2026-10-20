@@ -12,7 +12,7 @@ Por que existe este archivo y no solo la regla escrita:
     copia. Si algo no cuadra, NO copia y dice exactamente que.
 
 Secuencia (no se puede saltar ningun paso):
-    1. resumen_total  -> los 77 sellos intactos. Un sello roto para todo aqui.
+    1. resumen_total  -> todos los sellos intactos. Un sello roto para todo aqui.
     2. verif_planos   -> el LF ROTULADO en cada plano marcado contra su cierre sellado.
     3. excel.main()   -> regenera, recalcula, audita el libro y sella el manifiesto.
     4. verif_vigencia -> prueba por hash que el .xlsx refleja TODOS los insumos de hoy.
@@ -215,7 +215,7 @@ def main():
     print('14/23 STUDS ADICIONALES (un extra dice que es, y un criterio por condicion)')
     import verif_studs_adicionales as VSA
     if VSA.main():
-        print('    Origen: 5/S5.20 WALL INTERSECTION FRAMING, abierto el 10-oct-2026. Los dos '
+        print('    Origen: el detalle estructural de interseccion de walls (N/HOJA). Los dos '
               'studs extra van en el muro PASANTE; el que muere contra el se atornilla y no '
               'lleva stud propio.')
         return 1
@@ -230,7 +230,7 @@ def main():
               % (len(_vig), CORP.TOPE_CIERRES_MIN))
         print('    Un inventario que no declara su alcance es una muestra, y una muestra')
         print('    parcial no prueba que algo falte: prueba que no estaba donde se miro.')
-        print('    Origen: 10-oct-2026, roll-up de blocking que leia 11 de 45 renglones.')
+        print('    Origen: un roll-up de blocking que leia solo una parte de los renglones.')
         return 1
     print('    OK: el corpus no encogio')
 
@@ -363,8 +363,8 @@ def main():
               '%d -- NO SE ENTREGA. Si subio, es texto NUEVO escrito en espanol: se escribe '
               'en ingles desde el principio.' % (nh, VI.TOPE_VOCAB_HANDOFF))
         return 1
-    print('    atraso del handoff: %d terminos (tope %d, solo baja). Bajo de 439 a 9 el '
-          '10-oct-2026 al escribir los 4 closers que faltaban: la deuda de idioma y la de '
+    print('    atraso del handoff: %d terminos (tope %d, solo baja). Bajo de cientos a unos '
+          'pocos al escribir los closers que faltaban: la deuda de idioma y la de '
           'cierres huerfanos eran la misma deuda.' % (nh, VI.TOPE_VOCAB_HANDOFF))
 
     print('=' * 72)
