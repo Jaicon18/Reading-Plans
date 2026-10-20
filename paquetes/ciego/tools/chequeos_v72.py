@@ -21,7 +21,7 @@ aplicaban a criterio de cada lectura. Cada regla que una corrida dejó de aplica
   R72.5  MEP (6/S5.20): cada `mep_penetrations[]` trae `xy` y `method` = "mep.cruces" (salida de la tool) o
          `manual {motivo, img}`; ref repetida por tamaño contra el opening_schedule (FD / fire damper) = falla (el
          mismo FD contado por el schedule y por el barrido); `studs_cut` solo con source N/HOJA.
-  R72.11 atm_recess con un dato CRITERIO trae `alternativas` [{label, width_ft, sistered_h_ft, furring_rows}]: cada
+  R72.11 (v77 D1) atm_recess sin fórmula sistered + furring (la wall completa del ATM). Antes: `alternativas`; cada
          lectura posible del detalle con su delta (accesorios emite un RFI por alternativa).
   R72.10 tile_base.inside_corners con > 4 vértices trae `jogs` [{depth_in, kind notch|step, source}]: un jog de menos
          de 6" (carrier, espesor de acabado) no lleva inside corner trim (accesorios lo descuenta con RFI).
@@ -237,20 +237,21 @@ def r72_5(canon):
 
 
 def r72_7(canon):
-    """R72.11 (ATM): atm_recess con algún dato CRITERIO trae alternativas [{label, ...}] (cada lectura del detalle
-    con su delta); la cota de otro elemento (box beam, plinth) no es el alto del sistered."""
+    """R72.11 (ATM), v77 (decisión del usuario D1): el framing del ATM = la wall completa donde está (studs piso a
+    deck + bottom + top runner). atm_recess solo lleva {source N/HOJA, drawn}; la fórmula vieja (width_ft,
+    sistered_h_ft, furring_rows, alternativas, *_status) es falla; atm_recess fuera de un wall también."""
     f = []
-    ops = [op for w in canon.get("walls") or [] for op in w.get("openings") or []] + \
-        list(canon.get("openings_extra") or [])
-    for op in ops:
-        ar = op.get("atm_recess") if isinstance(op, dict) else None
-        if not isinstance(ar, dict):
-            continue
-        if any(ar.get(f"{k}_status") == "CRITERIO" for k in ("width", "sistered_h", "furring_rows")):
-            al = ar.get("alternativas")
-            if not isinstance(al, list) or not al or not all(isinstance(x, dict) and x.get("label") for x in al):
-                f.append(f"R72.11 {op.get('ref')}: atm_recess con dato CRITERIO sin alternativas [{{label, width_ft, "
-                         f"sistered_h_ft, furring_rows}}] (cada lectura posible del detalle con su delta)")
+    viejos = ("width_ft", "sistered_h_ft", "furring_rows", "alternativas", "width_status", "sistered_h_status",
+              "furring_rows_status")
+    for w in canon.get("walls") or []:
+        for op in w.get("openings") or []:
+            ar = op.get("atm_recess") if isinstance(op, dict) else None
+            if isinstance(ar, dict) and any(k in ar for k in viejos):
+                f.append(f"R72.11 {op.get('ref')}: atm_recess con la fórmula sistered + furring (D1 v77: el framing "
+                         f"del ATM es la wall completa {w.get('id')}, studs piso a deck + bottom + top runner)")
+    for op in canon.get("openings_extra") or []:
+        if isinstance(op, dict) and op.get("atm_recess"):
+            f.append(f"R72.11 {op.get('ref')}: atm_recess fuera de un wall (D1 v77: va en el wall que contiene el ATM)")
     return f
 
 

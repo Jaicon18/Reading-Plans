@@ -681,6 +681,9 @@ def md(inv):
 
 def inventario(pdf, out_dir, dpi=150, con_recortes=True):
     os.makedirs(out_dir, exist_ok=True)
+    import copia_limpia                       # v77 (R76.7 e): siempre sobre la copia SIN /Annots
+    pdf_original = pdf
+    pdf, _ = copia_limpia.copia_limpia(pdf)
     doc = fitz.open(pdf)
     md5 = hashlib.md5(open(pdf, "rb").read()).hexdigest()
     cache = [{"words": palabras(p), "lines": lineas(p)} for p in doc]
@@ -702,7 +705,8 @@ def inventario(pdf, out_dir, dpi=150, con_recortes=True):
     if malas:
         avisos.append("detail bubbles que citan una hoja que NO está en el índice (¿numeración distinta o hoja "
                       "faltante? → RFI): " + ", ".join(f"{k} ×{v}" for k, v in sorted(malas.items())))
-    inv = {"pdf": os.path.basename(pdf), "pdf_path": os.path.abspath(pdf), "md5": md5, "pages": doc.page_count,
+    inv = {"pdf": os.path.basename(pdf), "pdf_path": os.path.abspath(pdf), "pdf_original": os.path.abspath(pdf_original),
+           "md5": md5, "pages": doc.page_count,
            "coord_system": "pt, página rotada (display); origen arriba-izquierda, igual que el PNG renderizado",
            "sheets": hojas,
            "partition_types": {"schedule": tipos, "conteo": None},

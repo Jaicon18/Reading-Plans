@@ -143,7 +143,7 @@ def test_e_deck_breaks_por_hoja():
 
 
 def _techo(sysm, **kw):
-    c = {"room": "R9", "system": sysm, "area_sf": 120.0, "span_ft": 12.0, "run_ft": 10.0, "source": "Z4.01"}
+    c = {"room": "R9", "system": sysm, "area_sf": 120.0, "span_ft": 12.0, "run_ft": 10.0, "ns_ft": 12.0, "ew_ft": 10.0, "source": "Z4.01"}
     c.update(kw)
     return c
 
@@ -171,7 +171,7 @@ def test_r70_1_system_callout():
 
 
 def _pier(L, **kw):
-    w = {"id": "PR-1", "tag": "Q7", "element": "pier", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
+    w = {"id": "PR-1", "tag": "Q7", "element": "pier", "jamb_strips_none_reason": "Z9.25 sintético", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
          "length_ft": L, "height_ft": 12.0, "source": "1/Z9.25", "detail": "1/Z9.25",
          "parts": [{"stud_size": "6\"", "studs_drawn": {"value": 4, "source": "1/Z9.25"}},
                    {"stud_size": "3-5/8\"", "studs_drawn": {"value": 4, "source": "1/Z9.25"}}],

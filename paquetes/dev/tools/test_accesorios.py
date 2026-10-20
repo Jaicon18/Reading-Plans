@@ -291,12 +291,12 @@ def test_extra_framing():
     c = canon_base()
     c["walls"][0]["openings"][0]["atm_recess"] = {"width_ft": 4.0, "sistered_h_ft": 6.0, "furring_rows": 3,
                                                    "source": "6/X8.11"}
-    _err("atm recess sin width_source = error", c, "width_source")
-    c["walls"][0]["openings"][0]["atm_recess"]["width_source"] = "X2.01"
-    c["walls"][0]["openings"][0]["atm_recess"].update({"width_status": "CONFIRMADO", "sistered_h_status": "CONFIRMADO", "sistered_h_source": "6/X8.11",
-         "furring_rows_status": "CONFIRMADO", "furring_rows_source": "6/X8.11"})
+    _err("v77 D1: fórmula sistered + furring = error", c, "D1")
+    c["walls"][0]["openings"][0]["atm_recess"] = {"source": "6/X8.11", "drawn": "STUD SISTERED (sintético)"}
+    _err("v77 D1: atm_recess sin la wall movida por canon = error", c, "canon.py")
+    c["_atm_wall"] = [{"ref": c["walls"][0]["openings"][0]["ref"], "wall": "W1", "lf": 100.0, "op": "sintético"}]
     o = A.calcular(fam_base(), c, STUDS)
-    chk("atm recess", abs(o["familias"]["extra framing ATM"] - ((3 + 1) * 6.0 + 3 * 4.0)) < 0.011)
+    chk("v77 D1: extra framing ATM = wall movida", abs(o["familias"]["extra framing ATM"] - 100.0) < 0.011)
 
 
 def test_v67_atm_obligatorio():
@@ -304,12 +304,10 @@ def test_v67_atm_obligatorio():
     c["walls"][0]["openings"].append({"ref": "ATM drive-up", "kind": "window", "ro_w_ft": 3.0, "head_ft": 6.0,
                                       "sill_ft": 3.0, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN"})
     _err("ATM sin atm_recess = error", c, "ATM")
-    c["walls"][0]["openings"][-1]["atm_recess"] = {"width_ft": 3.0, "sistered_h_ft": 6.0, "furring_rows": 2,
-                                                   "source": "X8.11", "width_source": "X2.01"}
+    c["walls"][0]["openings"][-1]["atm_recess"] = {"source": "X8.11", "drawn": "STUD SISTERED (sintético)"}
     _err("atm_recess sin N/HOJA = error", c, "N/HOJA")
     c["walls"][0]["openings"][-1]["atm_recess"]["source"] = "6/X8.11"
-    c["walls"][0]["openings"][-1]["atm_recess"].update({"width_status": "CONFIRMADO", "sistered_h_status": "CONFIRMADO", "sistered_h_source": "6/X8.11",
-         "furring_rows_status": "CONFIRMADO", "furring_rows_source": "6/X8.11"})
+    c["_atm_wall"] = [{"ref": "ATM drive-up", "wall": "W1", "lf": 50.0, "op": "sintético"}]
     o = A.calcular(fam_base(), c, STUDS)
     chk("ATM con recess = DERIVADO", o["estado"]["extra framing ATM"] == "DERIVADO")
 
@@ -388,18 +386,8 @@ def test_v68_access_panel_sin_doble_conteo():
 
 def test_v68_atm_estados_y_e12():
     c = canon_base()
-    c["walls"][0]["openings"].append({"ref": "ATM 2", "kind": "window", "ro_w_ft": 2.0, "head_ft": 5.0,
-                                      "sill_ft": 3.0, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
-                                      "atm_recess": {"width_ft": 4.0, "width_source": "X2.01 vector",
-                                                     "width_status": "DERIVADO", "sistered_h_ft": 6.0,
-                                                     "sistered_h_source": "6/X8.11", "sistered_h_status": "CONFIRMADO",
-                                                     "furring_rows": 3, "furring_rows_source": "6/X8.11",
-                                                     "furring_rows_status": "DERIVADO", "source": "6/X8.11"}})
-    o = A.calcular(fam_base(), c, STUDS)
-    chk("v68 ATM con dato DERIVADO = CRITERIO + RFI", o["estado"]["extra framing ATM"] == "CRITERIO" and
-        any(r["familia"] == "extra framing ATM" for r in o["rfis"]))
-    del c["walls"][0]["openings"][-1]["atm_recess"]["width_status"]
-    _err("v68 ATM sin width_status = error", c, "width_status")
+    c["extra_framing"] = [{"ref": "ATM 2", "kind": "atm_recess", "lf": 40.0, "source": "6/X8.11"}]
+    _err("v77 D1: extra_framing kind atm_recess a mano = error", c, "D1")
     c = canon_base()
     c["extra_framing"] = [{"ref": "duct 8x10 framing", "kind": "mep", "lf": 6.0, "source": "M1.01"}]
     _err("v68 extra framing de ducto = error (E12)", c, "E12")

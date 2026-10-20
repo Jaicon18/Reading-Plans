@@ -208,7 +208,9 @@ def test_etapas_llama_v71():
 def _hdr(**kw):
     o = {"ref": "F1", "wall": "W1", "kind": "opening", "ro_w_ft": 30.0, "continuous_run": True, "qty": 1,
          "header_type": "CONT. BOX BEAM", "header_type_source": "9/Z5.01", "pieces": 4,
-         "pieces_source": "9/Z5.01", "piece": "C box", "source": "Z1.01"}
+         "pieces_source": "9/Z5.01", "piece": "C box", "source": "Z1.01",
+         "front_line": {"sheet": "Z1.01", "ori": "V", "c_pt": 100.0, "jambs_pt": [0.0, 540.0],
+                        "scale_pt_per_ft": 18.0, "source": "Z1.01"}}
     o.update(kw)
     return {"openings": [o]}
 

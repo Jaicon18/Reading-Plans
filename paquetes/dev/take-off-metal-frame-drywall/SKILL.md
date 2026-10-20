@@ -293,7 +293,8 @@ tools y `test_canon*.py`. Las tools fallan si falta un campo obligatorio:
   `fos_chain`. Facades: `parapet_t_stud_ft`, `nailbase_top_ft` / `_bottom_ft` o `parapet_face_of`. Faces por
   tramo: `side` + `length_ft` + `length_source`. Framed openings `width_source`.
 - accesorios: `mep_sweep {sheets, registro {dx_pt, dy_pt, matches ≥ 25, source}, source}`, `mep_penetrations`;
-  ATM `atm_recess {width_ft, sistered_h_ft, furring_rows, *_status, *_source}`; abertura exterior `jamb_return` +
+  ATM `atm_recess {source N/HOJA, drawn}` (v77 D1: el framing es la wall completa del ATM) o
+  `atm_recess_none_reason`; abertura exterior `jamb_return` +
   source y storefront `jambs [{abuts, source}] × 2`; `head_build {head_ft, head_chain_in, box_depth_ft, n_box,
   board_in}`; `level5_tags` + items con `base_ft`; `access_panels`; `accesorios_rfi` / `accesorios_none`.
 - v68 (§14): `wet_fixtures[].back_source`; `ballistic_jogs` o motivo; `plies_blocking`; blocking `label`;
@@ -451,7 +452,7 @@ delta. Waste 15 % en metal; lo no metal con el factor del board; yields sin wast
 |---|---|---|
 | A1 | additional head track (LF, metal) | R.O. > 4'-0" en walls: (R.O. + 2 × bearing) × qty; openings_extra con box propio → RFI con delta (2/S5.20, 9/S5.20) |
 | A2 | stud reinforcement MEP (PCS) | barrido P/M REGISTRADO (≥ 25 coincidencias) o PENDIENTE; una vez por (wall, xy); Σ qty × MAX(1, ROUNDUP(ancho / O.C.)) (o `studs_cut`); pipe ≤ 1" o `in_cavity` = 0; ductos / FD llevan plate (6/S5.20) |
-| A3 | extra framing ATM (LF, metal) | (ROUNDUP(ancho / O.C.) + 1) × alto sistered + filas de furring × ancho; dato no impreso → CRITERIO + RFI; extra framing de ducto / FD = error (E12) |
+| A3 | extra framing ATM (LF, metal) | v77 (D1): la wall COMPLETA donde está el ATM: studs de esa wall (studs_nodos, piso a deck) + bottom runner + top runner; canon.py los mueve de su familia de stud / track (la wall se cuenta una vez); sin sistered ni furring aparte; extra framing de ducto / FD = error (E12) |
 | A4 | 2-1/2" CFMF coiling grille head (LF, metal) | (ROUNDUP(L / O.C.) + 1) × (Σ cadena impresa del head − n box × peralte − board) |
 | A5 | gypsum board jamb return (SF) | bordes (R.O. + 2 jambs − sill + sill; storefront: head + jambs con `abuts: wall` × head) × ancho; ancho no acotado = RFI |
 | A6 | PVC trim at FRP (LF) | 2 × perímetro NETO de doors + inside corners × top + 2 × doors × top + mop sink; inside − outside = 4 |
@@ -533,7 +534,7 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R71.8 | Bottom track y top / deflection track: un renglón de compra por tamaño de stud (y gauge distinto, p. ej. parapet); la suma = la familia; lo que no es de walls va en un renglón "other" con su fuente. | plantilla_excel verificar + track_por_tamano.py |
 | R71.9 | Penetraciones MEP: registro de cada hoja MEP derivado EN LA CORRIDA (`mep.registro`, verificado contra un rasgo inconfundible con imagen); un cruce = una línea que sobresale de las DOS caras; un ducto que cruza un wall cuenta una vez por wall; lista con wall, ducto e imagen. Nunca offsets copiados de otra corrida. | mep.py + accesorios |
 | R71.10 | Header que ningún schedule / detalle llama = cero LF + RFI con delta; nunca un box "assumed". | headers.py |
-| R71.11 | CONT. BOX BEAM declara `run_ends` ("jamb_to_jamb" del primer al último jamb, o "wall_to_wall" hasta los walls de los extremos) con fuente; si el detalle no lo dibuja, RFI con el delta de las dos. | headers.py |
+| R71.11 | CONT. BOX BEAM declara `run_ends` = "jamb_to_jamb" (v77 D2: de la primera a la última jamb del frente; "wall_to_wall" ya no se acepta) con `front_line` (R77.2). | headers.py |
 | R71.12 | Partición "eje" (E28 v71); cada wall del canon con `tag_ids`. | particion.py / partition_types.py |
 | R71.13 | Layers del Partition Takeoff = Σ(layers × largo de face) / LF del wall; una cara partida por room no suma otra layer. | partition_types.py |
 | R71.14 | Wall bajo viga: manda la viga cuyo EJE cae dentro de la band ± la tolerancia de `vigas_sobre_walls.py` (`--tol`, 3 pt; v72: la tool manda, nunca una lectura "estricta" del texto, R72.4); dos vigas paralelas a ≤ 1 ft con rótulo distinto = decisión con imagen (RFI); cada rótulo tiene un solo dueño (la viga más cercana). | vigas_sobre_walls.py |
@@ -556,7 +557,7 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R72.8 | Expansion anchors = bottom track de element `wall` exterior (lo que nombra el schedule de anclaje). Column wrap / chase exterior → pins (criterio del estimador) salvo `anchorage {value, source N/HOJA}`; parte sin tag de un box → ninguno + RFI con delta. | accesorios.py |
 | R72.9 | Stud reinforcement MEP: plates = MAX(1, ROUNDUP(ancho / O.C.)) × filas de studs del wall (double row = 2; regla "REGISTRO ENTRE HOJAS Y CRUCE DE MEP"), con RFI de la alternativa "una por cruce". `studs_cut` solo como override con fuente. | accesorios.py |
 | R72.10 | PVC trim del FRP: con más de 4 vértices, `inside_corners.jogs [{depth_in, kind notch|step, source}]`; un jog < 6" (carrier, espesor de acabado) no lleva inside corner trim (se descuenta + RFI con delta). | chequeos_v72 + accesorios |
-| R72.11 | ATM recess: la cota de OTRO elemento (box beam, plinth) no es el alto del stud sistered; un dato no impreso = CRITERIO con `alternativas [{label, width_ft, sistered_h_ft, furring_rows}]`, un RFI con delta por alternativa. | chequeos_v72 + accesorios |
+| R72.11 | (v77, D1) ATM recess: el framing es la wall completa del ATM (R77.1); la fórmula sistered + furring y sus `alternativas` ya no existen (compuerta: falla si aparecen). | chequeos_v72 + accesorios |
 | R72.12 | Track por tamaño (R71.8b): los renglones por tamaño de una familia conservan su NET y suman la familia (± 0.1); `fusionar` nunca les pone el total. `verificar` compara Σ contra `familias_out.json` de las salidas. | plantilla_excel.py |
 
 ---
@@ -636,11 +637,8 @@ de alcove y desde qué cara se medía un return. Cada una es compuerta: canon.py
 | R75.6 | Un alcove (R74.3) nunca es dueño de la esquina con el wall de su línea: sus lados terminan en la cara de ese wall y el wall de la línea llega a la cara exterior del alcove. | chequeos_v75.py `alcove_con_esquina` |
 | R75.7 | Return corto (≤ 2 ft) que sale de un tramo largo del mismo wall con tag se mide desde la cara EXTERIOR del tramo (= la cota impresa del return, de cara a cara del contorno); medirlo desde la cara interior le quita un espesor por return. Si el plano lo acota distinto: `return_basis {value: "inner_face", source}`. Un box chico (todos sus tramos ≤ 2 ft) no aplica. | chequeos_v75.py `returns_sin_esquina` |
 
-Pendiente del estimador (NO se decide en la corrida; cada respuesta entra en un solo lugar): extra framing ATM en
-`atm_recess {width_ft, sistered_h_ft, furring_rows}` del canon (accesorios.py); header / box beam en el largo del CONT.
-BOX BEAM y su bearing (headers.py, `header_por_pieza`); 3/4" FRT plywood en piers en el uso "pier" del strip (canon.py
-`_uso_strip`); sill track en el double sill track por ancho de abertura (headers.py, `with_sill`). Mientras no haya
-respuesta, cada una sale con el criterio vigente y su RFI con delta.
+Los cuatro pendientes del estimador (extra framing ATM, header / box beam, 3/4" FRT plywood en piers, sill track)
+quedaron DECIDIDOS en v77: ver §24 (D1-D6).
 
 ## 23. Reglas v76 (arbitraje de dos pruebas ciegas: hand-off entre tareas, jogs entre caras, box con tag)
 
@@ -664,8 +662,25 @@ regla es compuerta: canon.py (o la tool que se nombra) no termina si no se cumpl
 
 Sin cambio (decisión del arbitraje, con motivo): clips de bridging (la plantilla del estimador no los compra;
 closer.py los usa como control) y bracing de parapets (cada tramo usa su altura: un tramo bajo da 0 filas).
-Pendientes del estimador: los de §22, más el track de perímetro en un borde de transición (R76.6 aplica R73.16; la
-otra lectura va como RFI con delta).
+Pendientes del estimador: decididos en v77 (§24); el borde de transición quedó confirmado (D6: sin track de
+perímetro del ceiling en ese borde).
+
+## 24. Reglas v77 (decisiones del usuario D1-D6 en Bluebeam; mandan sobre cualquier criterio anterior)
+
+Origen: el estimador revisó en Bluebeam los cuatro pendientes de §22 y el borde de transición. Cada decisión es regla
+GENÉRICA con compuerta y test sintético (test_v77.py). R77.3 es la regla del usuario y es inviolable.
+
+| Regla | Texto | Dónde |
+|---|---|---|
+| R77.1 | (D1) Extra framing ATM = la wall COMPLETA donde está el ATM (todo su largo): sus studs de piso a deck (los de studs_nodos de esa wall) + bottom runner + top runner. No se suman studs sistered ni filas de furring aparte. La wall se cuenta UNA vez: canon.py mueve sus studs y runners de la familia de stud / track de su partition type a "extra framing ATM" (el LF del type y su board no cambian). El ATM cuyo detalle dibuja framing extra en el recess declara `atm_recess {source N/HOJA, drawn: texto rotulado}`; si el detalle solo dibuja el R.O., `atm_recess_none_reason`. La fórmula vieja (width_ft, sistered_h_ft, furring_rows, alternativas), `extra_framing` kind atm_recess a mano o atm_recess fuera de un wall = error. | canon.py `_atm_wall`; accesorios.py `atm_recess_valido`; chequeos_v72 R72.11 |
+| R77.2 | (D2) Todo box beam / box header = 4 piezas × (R.O. + 1'-4"). El CONT. BOX BEAM de un office front es UN run continuo de la PRIMERA a la ÚLTIMA jamb del frente + 1'-4", × 4 (nunca por abertura): declara `front_line {sheet, ori, c_pt, jambs_pt [primera, última], scale_pt_per_ft, source}`, ro_w_ft = jambs / escala; `run_ends` = jamb_to_jamb; dos runs sobre la misma línea = error. Los demás headers llevan las piezas del HEADER SCHEDULE impreso; las piezas de cada fila = su rótulo (SINGLE 1, DOUBLE 2, "2-…" 2); largo = R.O. + 1'-4". | headers.py `_front_line`, `_piezas_rotulo`, `_reglas_v65b` |
+| R77.3 | (D3, inviolable) "Léelo y haz lo que ellos te dicen": si un schedule o detalle impreso contesta, se aplica sin RFI ni pregunta. Si el dato no está impreso, se mide por geometría vectorial a la escala impresa del detalle, verificada contra una cota o un espesor impreso del mismo detalle (`scale_check`), con imagen marcada y [DERIVADO]. | chequeos_v77.py (strips); headers.py (schedule) |
+| R77.4 | (D4) 3/4" FRT plywood en piers de storefront: el detalle lo rotula SOLO como strip en cada jamb del storefront; las caras del pier (nailbase: AWB on FRT plywood bonded to polyiso, y gypsum board) NO van en ese renglón. Cada strip `uso: pier` declara `width_pt` + `scale_pt_per_ft` + `scale_check {printed_in, measured_pt}` (D3), `width_ft` = width_pt / escala, `jambs` × `height_ft` (alto impreso, `height_source`) = `lf`, `plies` del rótulo y `layers_drawn`; más capas dibujadas que el rótulo singular = plies del rótulo + `rfi` con delta. Todo pier declara `jamb_strips [refs]` o `jamb_strips_none_reason` con hoja. | chequeos_v77.py `r77_4` (lo llama canon.py) |
+| R77.5 | (D5) Sill track: "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0"" + "INVERT DETAIL FOR SILL CONDITION" → R.O. > 4'-0" = (R.O. + 1'-4") × 2; ≤ 4'-0" × 1; solo aberturas con sill (una door con `with_sill` = error). Una abertura cuyo detalle acota el R.O. desde una línea de sill (cota de sill impresa) lleva `with_sill: true`. | headers.py |
+| R77.6 | (D6) En un borde de transición el ceiling NO lleva track de perímetro propio (el detalle de la transición lo remata con shadow molding): canon.py resta del perímetro los bordes `edge_of` (R73.16 / R76.6 confirmadas). | chequeos_v76.py `bordes_transicion`; canon.py `generar` |
+| R77.7 | Un ceiling suspendido exige `constants.carrying_direction {value N-S \| E-W, source}` (UNA dirección para el proyecto, impresa o RFI con el delta de la otra) y cada room `ns_ft` / `ew_ft`; sin ella cada corrida tomaba el lado largo por room. | canon.py `_ceil_dims` |
+| R77.8 | R76.7 sin falsos bloqueos: A_BLOCKING reconoce el rótulo con puntos (F\.?R\.?T\.?); el detector de español del Excel quita rutas, nombres de archivo, ids y coordenadas antes de buscar; vigas_sobre_walls solo cruza bands de la hoja de planta pedida (band.sheet); bitácora escribe con lock y resuelve symlinks (realpath); inventario_tags.py y alcances.py leen siempre la copia limpia del bid set (copia_limpia.py, sin /Annots). | reglas.py; plantilla_excel.py; vigas_sobre_walls.py; bitacora.py; copia_limpia.py |
+| R77.9 | Millwork empotrado en una partición (la elevación / sección del cabinet dibuja la partición arriba: "SCHED. PARTITION") = abertura enmarcada: header del schedule por su R.O. impreso; el tramo de partición acotado frente al cabinet es de su type (un tramo acotado sin dueño = falta de inventario). | lectura (inventario + headers.py) |
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 

@@ -171,6 +171,10 @@ POR_ID = {
     "R76.1": A("A_VIGENCIA"), "R76.2": A("A_VIGENCIA"), "R76.3": A("A_VIGENCIA", "A_BALLISTIC"),
     "R76.4": A("A_VIGENCIA"), "R76.5": A("A_VIGENCIA"), "R76.6": A("A_VIGENCIA", "A_TRANSICION"),
     "R76.7": A("A_BLOCKING", "A_VIGENCIA"), "R76.8": A("A_EXCEL", "A_BITACORA"), "R76.9": A("A_VIGENCIA", "A_WRAP_FOS"),
+    # v77 (decisiones del usuario D1-D6, arbitraje #25): compuertas en canon / headers / chequeos_v77 (vigencia)
+    "R77.1": A("A_R72_11", "A_VIGENCIA"), "R77.2": A("A_VIGENCIA"), "R77.3": A("A_VIGENCIA"),
+    "R77.4": A("A_VIGENCIA"), "R77.5": A("A_SILL", "A_VIGENCIA"), "R77.6": A("A_TRANSICION", "A_VIGENCIA"),
+    "R77.7": A("A_VIGENCIA"), "R77.8": A("A_BLOCKING", "A_EXCEL", "A_BITACORA"), "R77.9": A("A_VIGENCIA"),
     # adendas del SKILL
     "REGLA 48.1": C("anulada por el paquete autocontenido (CAMBIOS_v72: el zip trae TODAS las tools; una prueba baja "
                     "solo el zip) — la regla de fondo (una sola fuente de tools) sigue en E24 / A_CIEGO + test_reglas"),

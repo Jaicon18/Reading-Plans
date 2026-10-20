@@ -586,6 +586,8 @@ def a_track_runs(ctx):
     for r in co.get("renglones") or []:
         if r.get("element") not in ("wall", "parapet", "chase", "pier", "column_wrap"):
             continue
+        if r.get("moved_to"):                       # v77 D1: runners de la wall del ATM en "extra framing ATM"
+            continue
         b, t = _f(r.get("bottom_lf"), 0), _f(r.get("top_lf"), 0)
         if b <= 0 or t <= 0:
             out.append((r.get("id"), f"bottom {b} / top {t}", "bottom Y top track > 0 (2 runs mínimo)"))
@@ -893,6 +895,10 @@ def a_cladding(ctx):
     return out
 
 
+# v77 (R76.7 a): el rótulo impreso puede venir con puntos ("F.R.T.", 4/A09.26 de un set): F\.?R\.?T\.? lo reconoce
+RX_FRT_ROTULO = re.compile(r"\bF\.?R\.?T\.?(?:W\b)?|fire.?(retardant|treated)", re.I)
+
+
 @chequeo("A_BLOCKING", "58.6 / D5 / 54.3: blocking en LF, material del rótulo (FRT solo rotulado), plies con fuente")
 def a_blocking(ctx):
     out = []
@@ -906,10 +912,10 @@ def a_blocking(ctx):
         if not lab.strip():
             out.append((b.get("ref") or b.get("id"), "sin label / material", "rótulo literal del detalle (D5)"))
         elif re.search(r"\bFRT|FRTW|fire.?retardant", _txt(b.get("material")), re.I) and \
-                not re.search(r"\bFRT|FRTW|fire.?(retardant|treated)", _txt(b.get("label"),
+                not RX_FRT_ROTULO.search(_txt(b.get("label"),
                                                                              (b.get("frt_basis") or {}).get("source")
                                                                              if isinstance(b.get("frt_basis"), dict)
-                                                                             else None), re.I):
+                                                                             else None)):
             # v76: solo el RÓTULO impreso (o frt_basis con la nota que hace FRT la madera); el source no cuenta: un
             # "NOT labeled FRT" en el source pasaba el regex (regla inviolable: ningún texto para satisfacer un regex)
             out.append((b.get("ref") or b.get("id"), "FRT sin rótulo FRT", "FRT solo donde el detalle lo rotula (54.3); "

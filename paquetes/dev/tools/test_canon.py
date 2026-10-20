@@ -13,7 +13,8 @@ import canon as K  # noqa: E402
 C = {"nailbase_polyiso_in": {"value": "2 1/2\"", "source": "D/Z9.22 sintético"}, "bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"}, "sheet_len_ft": {"value": 12, "source": "4/S5.20"},
      "stud_bay_in": {"value": 14.375, "source": "60.10"}, "furring_oc_in": {"value": 16, "source": "RFI-11"},
      "carrying_oc_in": {"value": 48, "source": "RFI-11"}, "hanger_oc_in": {"value": 48, "source": "RFI-11"},
-     "deck_breaks": {"value": [], "source": "S2.20 NO SLOPE (sintético)"}}
+     "deck_breaks": {"value": [], "source": "S2.20 NO SLOPE (sintético)"},
+     "carrying_direction": {"value": "N-S", "source": "RFI-CEIL-DIR (sintético, R77.7)"}}
 
 
 def base():
@@ -34,7 +35,7 @@ def base():
                            "sill_return": True, "sill_return_source": "9/X9.01", "sill_return_label": "GYPSUM BOARD RETURN",
                            "substrate_none_reason": "sintético: el strip de la abertura va en plywood_strips (v76 R76.4)"}],
              "source": "A02.01"},
-            {"id": "P1", "tag": "PIER", "element": "pier", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
+            {"id": "P1", "tag": "PIER", "element": "pier", "jamb_strips_none_reason": "Z9.25 sintético: pier sin storefront jamb", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
              "length_ft": 1.667, "height_ft": 14.25, "line": "G", "from_ft": 26.0, "to_ft": 27.667,
              "source": "2/A09.25"},
             {"id": "I1", "tag": "A1", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1, "length_ft": 10.0,
@@ -51,10 +52,10 @@ def base():
                   {"id": "e", "kind": "free", "wall": "I1"}, {"id": "f", "kind": "free", "wall": "FAS"},
                   {"id": "g", "kind": "free", "wall": "FAS"}],
         "ceiling_details": ["7/A09.26", "7/A09.33", "10/A09.33"],
-        "ceilings": [{"room": "913", "system": "furring", "area_sf": 76.0, "span_ft": 8.0, "run_ft": 9.5,
+        "ceilings": [{"room": "913", "system": "furring", "area_sf": 76.0, "span_ft": 8.0, "run_ft": 9.5, "ns_ft": 8.0, "ew_ft": 9.5,
                       "perimeter_ft": 35.0, "hanger_drop_ft": {"value": 4.25, "source": "S2.20"},
                       "source": "A04.01", "detail_none_reason": "A04.01 sin burbuja de detalle (sintético)"},
-                     {"room": "904", "system": "stud_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
+                     {"room": "904", "system": "stud_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5, "ns_ft": 30.0, "ew_ft": 17.5,
                       "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
                       "joist_source": "6/A09.33", "source": "6/A09.33", "detail": "6/A09.33"}],
         "header_schedule": {"source": "7/S5.20", "rows": [
@@ -245,7 +246,7 @@ def test_v66_parapet_run_por_linea():
 def test_hanger_wire_lf_ref_v4():
     """Waiting 904 (ref v4): 6 carrying x 30 ft, 9 hangers c/u = 54 x drop <n> = <n> LF. """
     d = base()
-    d["ceilings"] = [{"room": "904", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
+    d["ceilings"] = [{"room": "904", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5, "ns_ft": 30.0, "ew_ft": 17.5,
                       "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20; A04.01"},
                       "source": "A04.01"}]
     o = K.calcular(d)
@@ -262,7 +263,7 @@ def test_hanger_wire_lf_ref_v4():
 def test_ceiling_poligono_cuerda_media():
     """#12B Vestibule 901: <n> x <n> pero área <n> (polígono)."""
     d = base()
-    d["ceilings"] = [{"room": "901", "system": "furring", "detail_none_reason": "sintético", "area_sf": 160.0, "span_ft": 14.0, "run_ft": 16.0,
+    d["ceilings"] = [{"room": "901", "system": "furring", "detail_none_reason": "sintético", "area_sf": 160.0, "span_ft": 14.0, "run_ft": 16.0, "ns_ft": 14.0, "ew_ft": 16.0,
                       "perimeter_ft": 50.0, "hanger_drop_ft": {"value": 5.375, "source": "S2.20"},
                       "source": "A04.01"}]
     f = K.calcular(d)["familias"]
@@ -281,7 +282,7 @@ def test_soffit_no_es_furring_ni_suspendido():
     d = base()
     f0 = K.calcular(d)["familias"]
     d["ceilings"].append({"room": "116 CSR soffit bottom", "system": "framed_soffit", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 41.0,
-                          "span_ft": 12.0, "run_ft": 3.42, "source": "10/A09.33",
+                          "span_ft": 12.0, "run_ft": 3.42, "ns_ft": 12.0, "ew_ft": 3.42, "source": "10/A09.33",
                           "drop_lines": {"value": 1, "source": "10/A09.33"}})
     _falla(copy.deepcopy(d), "drop line")                  # v65: sin el drop wall declarado
     d["walls"].append({"id": "CSR-D", "tag": "CSR", "element": "ceiling_bulkhead", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"",
@@ -317,7 +318,12 @@ def test_orientacion_del_proyecto():
     """#12A 104 con span/run cruzados (furring 420 vs <n>). Con carrying_direction la orientación es fija."""
     d = base()
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "RFI-05"}
+    for c in d["ceilings"]:
+        c.pop("ns_ft", None), c.pop("ew_ft", None)
     _falla(d, "ns_ft y ew_ft")
+    del d["constants"]["carrying_direction"]
+    _falla(d, "R77.7")                                 # v77: suspendido sin dirección del proyecto = error
+    d["constants"]["carrying_direction"] = {"value": "N-S", "source": "RFI-05"}
     d["ceilings"] = [{"room": "904", "system": "furring", "detail_none_reason": "sintético", "area_sf": 525.0, "ns_ft": 30.0, "ew_ft": 17.5,
                       "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
                       "source": "A04.01"}]
@@ -644,7 +650,7 @@ def test_v65_fascia_box_obligatoria_con_canopy_joist():
     """#14A no declaró fascia_box (<n> LF 3-5/8" de los studs de fascia)."""
     d = base()
     d["ceilings"].append({"room": "N canopy soffit", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 100.0, "ns_ft": 4.0,
-                          "ew_ft": 25.0, "span_ft": 25.0, "run_ft": 4.0, "source": "7/A09.26", "facade": "N"})
+                          "ew_ft": 25.0, "span_ft": 25.0, "run_ft": 4.0, "ns_ft": 25.0, "ew_ft": 4.0, "source": "7/A09.26", "facade": "N"})
     _run_canopy(d)
     K.calcular(d)                                        # base tiene FAS (fascia_box, facade N)
     sin = copy.deepcopy(d)
@@ -690,7 +696,9 @@ def test_v65b_header_y_sill_son_reglas():
     d4["openings_extra"] = [of]
     d4["opening_schedule"]["items"].append({"ref": "office front E"})
     _falla(copy.deepcopy(d4), "#22")
-    of.update(qty=1, ro_w_ft=36.5, continuous_run=True)
+    of.update(qty=1, ro_w_ft=36.5, continuous_run=True,
+              front_line={"sheet": "Z1.01", "ori": "V", "c_pt": 100.0, "jambs_pt": [0.0, 657.0],
+                          "scale_pt_per_ft": 18.0, "source": "Z1.01"})
     f = K.calcular(d4)["familias"]
     assert abs(f["header / box beam"] - (33.33 + (36.5 + 16 / 12) * 4)) < 0.02, f["header / box beam"]
 

@@ -127,7 +127,13 @@ def perfil(viga, rotulos, max_pt=36.0, otras=None):
 CERCA_PT = 18.0       # v71: otra viga paralela con eje a <= 1 ft de la band = candidata (ambigüedad si su rótulo difiere)
 
 
-def cruzar(vigas, walls, tol=3.0, min_ft=1.0):
+def hoja_band(w):
+    """v77 (R76.7 c): la hoja de la band (band.sheet, si no w.sheet). Coordenadas de otra hoja no se cruzan."""
+    b = w.get("band") or {}
+    return str(b.get("sheet") or w.get("sheet") or "").strip().upper()
+
+
+def cruzar(vigas, walls, tol=3.0, min_ft=1.0, hoja=None):
     """vigas: [{"p0": (x, y), "p1": (x, y), "lw": w}] en coordenadas de la planta A.
     walls: walls del canon con band {ori, c0, c1, lo, hi}. Devuelve los walls bajo viga.
     v71 (P4): manda la viga cuyo EJE cae dentro de la band; si otra viga paralela con OTRO rótulo tiene el eje a
@@ -138,6 +144,8 @@ def cruzar(vigas, walls, tol=3.0, min_ft=1.0):
         b = w.get("band")
         if not b or b.get("ori") not in ("H", "V"):
             continue
+        if hoja and hoja_band(w) and hoja_band(w) != str(hoja).strip().upper():
+            continue                     # v77 (R76.7 c): band de otra hoja (p. ej. roof plan): no son coords de esta planta
         c0, c1 = sorted((float(b["c0"]), float(b["c1"])))
         lo, hi = sorted((float(b["lo"]), float(b["hi"])))
         mejor, cands = None, []
@@ -270,12 +278,15 @@ def main(argv):
             p0, p1 = a_planta((v["p0"], v["p1"]), mapa)
             vigas.append({"p0": p0, "p1": p1, "lw": v["lw"], "perfil": pf})
         walls = json.load(open(canon)).get("walls") or []
-        res = cruzar(vigas, walls, float(opts["--tol"]))
+        res = cruzar(vigas, walls, float(opts["--tol"]), hoja=hoja_a)
+        otras = sorted({hoja_band(w) for w in walls if w.get("band") and hoja_band(w)
+                        and hoja_band(w) != hoja_a.strip().upper()})
     except (ValueError, KeyError, OSError) as e:
         print(f"ERROR vigas_sobre_walls.py: {e}", file=sys.stderr)
         return 1
     out = {"registro_A_a_S": {"sx": round(mapa[0], 5), "dx": round(mapa[1], 2), "sy": round(mapa[2], 5),
-                              "dy": round(mapa[3], 2)}, "vigas": len(vigas), "walls_bajo_viga": res}
+                              "dy": round(mapa[3], 2)}, "vigas": len(vigas), "walls_bajo_viga": res,
+           "hoja_planta": hoja_a, "bands_de_otras_hojas": otras}
     s = json.dumps(out, indent=1)
     if opts["--json"]:
         open(opts["--json"], "w").write(s)

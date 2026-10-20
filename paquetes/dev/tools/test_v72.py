@@ -267,26 +267,20 @@ def _():
     assert any(r["familia"] == A.F_PVC and abs(r["delta"] - 10.0) < 0.01 for r in o.rfis), o.rfis
 
 
-@caso("R72.11 ATM recess con dato CRITERIO sin alternativas = falla de compuerta; con alternativas = RFI con delta")
+@caso("R72.11 (v77 D1) atm_recess con la fórmula sistered + furring = falla; {source, drawn} en su wall = OK")
 def _():
-    A, o = _acc()
     ar = {"width_ft": 2.2, "width_status": "CONFIRMADO", "width_source": "5/A8.11", "sistered_h_ft": 6.0,
-          "sistered_h_status": "CRITERIO", "sistered_h_source": "6/A8.11", "furring_rows": 0,
-          "furring_rows_status": "CRITERIO", "furring_rows_source": "6/A8.11", "rfi": "RFI-1", "source": "6/A8.11"}
+          "source": "6/A8.11"}
     d = canon([H("W1", "EXT", 0, 8, 0, 200, 10.0, oc_in=16, openings=[{"ref": "ATM-1", "kind": "atm",
                                                                       "atm_recess": ar}])])
     import chequeos_v72 as C
     assert any("R72.11" in x for x in C.revisar(d)["fallas"])
-    A.extra_framing(d, o)
-    assert any("R72.11" in x for x in o.avisos), o.avisos
-    A, o = _acc()
-    ar["alternativas"] = [{"label": "sistered to the deck", "sistered_h_ft": 12.0}]
+    d["walls"][0]["openings"][0]["atm_recess"] = {"source": "6/A8.11", "drawn": "STUD SISTERED"}
     assert not [x for x in C.revisar(d)["fallas"] if "R72.11" in x]
-    A.extra_framing(d, o)
-    assert any(r["familia"] == A.F_XATM and abs(r["delta"] - 18.0) < 0.01 for r in o.rfis), o.rfis
+    d["openings_extra"] = [{"ref": "ATM-2", "kind": "atm", "atm_recess": {"source": "6/A8.11", "drawn": "x"}}]
+    assert any("R72.11" in x and "ATM-2" in x for x in C.revisar(d)["fallas"])
 
 
-# ---------------- plantilla_excel (R71.8b) ----------------
 @caso("R71.8b fusionar respeta renglones por tamaño y exige que sumen la familia")
 def _():
     import plantilla_excel as PEX

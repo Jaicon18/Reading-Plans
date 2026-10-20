@@ -141,6 +141,7 @@ import accesorios  # noqa: E402   v67: familias de accesorios / extras
 import partition_types  # noqa: E402   v67: types de la hoja Partition Takeoff
 import chequeos_v75  # noqa: E402   v75: R75.5 / R75.6 / R75.7 (arbitraje #23)
 import chequeos_v76  # noqa: E402   v76: R76.1-R76.5 (arbitraje #24)
+import chequeos_v77  # noqa: E402   v77: R77.4 (decisiones del usuario D3 / D4, arbitraje #25)
 
 EPS = 1e-6
 F_PAR = "6\" parapet stud"
@@ -395,11 +396,18 @@ def _ceil_dims(data, c):
         d = str(_c(data, "carrying_direction")).upper().replace("–", "-")
         if d not in ("N-S", "E-W"):
             raise ValueError("constants.carrying_direction debe ser N-S | E-W")
+        if ("ns_ft" not in c or "ew_ft" not in c) and c.get("system") not in SUSP and "span_ft" in c:
+            return float(c["span_ft"]), float(c["run_ft"])     # v77: joists (soffit) con su span propio
         if "ns_ft" not in c or "ew_ft" not in c:
             raise ValueError(f"{c.get('room')}: con carrying_direction declarar ns_ft y ew_ft (no span/run: "
                              f"la orientación es del proyecto, no de cada room — #12A room <ref> cruzado)")
         ns, ew = float(c["ns_ft"]), float(c["ew_ft"])
         return (ns, ew) if d == "N-S" else (ew, ns)
+    if c.get("system") in SUSP:
+        # v77: sin dirección del proyecto cada corrida tomaba el lado largo por room y el carrying channel variaba
+        # entre corridas. La dirección es UNA para el proyecto: impresa (source) o RFI con delta.
+        raise ValueError(f"{c.get('room')}: ceiling {c.get('system')} sin constants.carrying_direction {{value N-S | "
+                         f"E-W, source N/HOJA o rfi con el delta de la otra dirección}} (R77.7)")
     return float(c["span_ft"]), float(c["run_ft"])
 
 
@@ -473,7 +481,8 @@ def generar(data):
                         **{k: o[k] for k in ("header_type", "header_type_source", "beams", "beams_source",
                                              "structure_source", "structure", "pieces", "pieces_source",
                                              "piece", "sill_pieces", "sill_pieces_source", "continuous_run",
-                                             "or_steel", "run_ends", "run_ends_source") if k in o}})
+                                             "or_steel", "run_ends", "run_ends_source", "front_line",
+                                             "with_sill_source") if k in o}})
     bordes = chequeos_v76.bordes_transicion(data, SUSP)      # v76 (R76.6): R73.16 hecha compuerta
     for c in data.get("ceilings") or []:
         if c.get("system") in SUSP:
@@ -737,7 +746,7 @@ BOARD_ELEMS = ("roof_step", "ceiling_transition", "soffit_side", "ceiling_bulkhe
 # Claves que canon.py y las tools que reciben los walls (inventario, partition_types, accesorios, studs_nodos,
 # board_caras, corridas, headers, particion / comparar / etapas v69) leen de un wall, + campos de traza de etapas.
 WALL_KEYS = frozenset("""
-id tag element location room sheet plan_sheet page band line from_ft to_ft axis ori straight_run split_of front
+id tag element jamb_strips location room sheet plan_sheet page band line from_ft to_ft axis ori straight_run split_of front
 facade chase length_ft length_source length_status length_printed_ft length_printed_source length_vector_ft
 length_basis length_op height_ft height_source height_status height_op height_avg_ft zones zones_source zone
 to_deck to_deck_source stops_under_beam canopy_beam break_reason stud_size stud_source stud_size_source
@@ -1032,6 +1041,48 @@ def _parapet_studs(data, fam, filas):
                       "operacion": f"L {round(L, 3)} -> ROUNDUP(L/{post}) = {nb} bays de {round(bay, 3)}; "
                                    f"{spb} studs/bay ({'MAX(' + str(int(spb_min)) + ', ' if nb >= 2 else '(1 bay: '}2 + ROUNDUP(({round(bay, 3)}-0.6)/{round(oc, 3)})-1)) = "
                                    f"{nb * spb} x H ponderada {round(h, 4)} = {round(lf, 2)}"})
+
+
+
+def _atm_wall(data, fam, filas, st, co):
+    """v77 (decisión del usuario D1): el framing del ATM = la wall COMPLETA donde está el ATM (todo su largo), studs de
+    piso a deck + bottom runner + top runner, sin sistered ni furring aparte. La wall se cuenta UNA vez: sus studs
+    (studs_nodos) y sus runners (corridas) salen de las familias de stud / track y van a "extra framing ATM"
+    (accesorios.py los suma desde data["_atm_wall"]). Compuertas: la abertura con atm_recess está en un wall que pasa
+    por studs_nodos y corridas; dos ATM en la misma wall = una sola vez."""
+    data["_atm_wall"] = []
+    st_w = {str(x.get("id")): x for x in (st or {}).get("walls") or []}
+    co_w = {str(r.get("id")): r for r in (co or {}).get("renglones") or []}
+    hechas = set()
+    for w in data.get("walls") or []:
+        for o in w.get("openings") or []:
+            if not o.get("atm_recess"):
+                continue
+            accesorios.atm_recess_valido(o, f"{w['id']} {o['ref']}")
+            wid = str(w["id"])
+            if wid in hechas:
+                data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": 0.0,
+                                          "op": f"wall {wid} already carried once (D1)"})
+                continue
+            if _es_parapet(w) or _no_nodos(w) or wid not in st_w or ("W:" + wid) not in co_w:
+                raise ValueError(f"{wid} {o['ref']}: atm_recess en un elemento sin studs_nodos / corridas (D1 v77: el "
+                                 f"ATM va en el wall que lo contiene y ese wall se mueve completo)")
+            sw, cw = st_w[wid], co_w["W:" + wid]
+            slf = float(sw.get("lf") or 0.0)
+            b, t = float(cw.get("bottom_lf") or 0.0), float(cw.get("top_lf") or 0.0)
+            k = next((f for key, f in STUD_FAM if key in str(w.get("stud_size", "")).lower()), None)
+            if k is None or slf <= EPS or b <= EPS or t <= EPS:
+                raise ValueError(f"{wid}: wall del ATM sin studs o sin bottom / top runner (D1 v77)")
+            fam[k] -= slf
+            fam["bottom track (todos)"] -= b
+            fam["top / deflection track (todos)"] -= t
+            cw["bottom_lf"], cw["top_lf"] = 0.0, 0.0
+            cw["moved_to"] = "extra framing ATM (D1)"
+            hechas.add(wid)
+            lf = slf + b + t
+            op = (f"ATM wall {wid} (D1): studs {round(slf, 2)} ({sw.get('operacion', '')[:90]}) + bottom runner "
+                  f"{round(b, 2)} + top runner {round(t, 2)} = {round(lf, 2)}; moved out of {k} and bottom / top track")
+            data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": round(lf, 4), "op": op})
 
 
 def _jambs_extra(data, fam, filas):
@@ -1780,6 +1831,7 @@ def calcular(data, outdir=None, fo=None):
         fam["header / box beam"] += he["totales_lf"]["header"]
         fam["sill track"] += he["totales_lf"]["sill track"]
         avisos += he.get("avisos", [])
+    _atm_wall(data, fam, filas, st, co)                  # v77 D1: la wall del ATM, una sola vez
     _jambs_extra(data, fam, filas)
     _kickers(data, fam, filas)
     _column_wraps(data, fam, filas)
@@ -1789,6 +1841,7 @@ def calcular(data, outdir=None, fo=None):
     _trim(data, fam, filas)
     _fascia_sheathing(data, fam, filas)
     chequeos_v76.verificar(data, accesorios.es_exterior)   # v76: R76.1-R76.5 (después de las compuertas previas)
+    chequeos_v77.verificar(data)                        # v77: R77.4 strips de pier (D3 / D4)
     _column_wrap_sheathing(data, fam, filas)            # v76 R76.2
     _opening_substrate(data, fam, filas)                # v76 R76.4
     _tile_base(data, fam, filas)

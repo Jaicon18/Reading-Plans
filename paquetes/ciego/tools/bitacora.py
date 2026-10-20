@@ -32,7 +32,12 @@ v68 (arbitraje #16): la misma llamada a plantilla_excel.verificar_excel exige ad
 import ast
 import hashlib, json, os, re, subprocess, sys, time
 
-BIT = os.environ.get("BITACORA") or os.path.abspath("bitacora.jsonl")
+# v77 (R76.7 d): la bitácora y las rutas se resuelven con realpath (un symlink al mismo archivo es el mismo archivo)
+BIT = os.path.realpath(os.environ.get("BITACORA") or "bitacora.jsonl")
+
+
+def _ruta(p):
+    return os.path.realpath(p)
 
 
 def sha(path):
@@ -54,11 +59,21 @@ def _hash_renglon(r):
 
 
 def anotar(reg):
-    prev = leer()
-    reg["prev"] = _hash_renglon(prev[-1]) if prev else "0"
-    reg["ts"] = time.strftime("%Y-%m-%dT%H:%M:%S")
-    with open(BIT, "a", encoding="utf-8") as f:
-        f.write(json.dumps(reg, ensure_ascii=False) + "\n")
+    """v77 (R76.7 d): lock exclusivo (fcntl) entre leer el último renglón y escribir: dos tools que anotan a la vez
+    (subagentes en paralelo) ya no rompen la cadena de hashes."""
+    import fcntl
+    with open(BIT + ".lock", "a") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        try:
+            prev = leer()
+            reg["prev"] = _hash_renglon(prev[-1]) if prev else "0"
+            reg["ts"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+            with open(BIT, "a", encoding="utf-8") as f:
+                f.write(json.dumps(reg, ensure_ascii=False) + "\n")
+                f.flush()
+                os.fsync(f.fileno())
+        finally:
+            fcntl.flock(lk, fcntl.LOCK_UN)
 
 
 # librerias sin linea de comandos: cuentan cuando las IMPORTA el script que se corrio
@@ -109,7 +124,7 @@ def run(tool, args):
     log = os.path.join(logdir, "%s_%s.log" % (os.path.basename(tool), time.strftime("%Y%m%dT%H%M%S")))
     with open(log, "w", encoding="utf-8") as fo:
         p = subprocess.run([sys.executable, tool] + args, stdout=fo, stderr=subprocess.STDOUT)
-    hashes = {os.path.abspath(a): sha(a) for a in args if os.path.isfile(a)}
+    hashes = {_ruta(a): sha(a) for a in args if os.path.isfile(a)}
     anotar({"tool": os.path.basename(tool), "args": args, "rc": p.returncode, "hashes": hashes,
             "usa": usa(tool), "log": log})
     try:
@@ -133,8 +148,13 @@ def cadena_ok(rows):
 
 
 def _vigente(r, path):
-    p = os.path.abspath(path)
-    return os.path.isfile(p) and r["hashes"].get(p) == sha(p)
+    """v77: busca por realpath (y por abspath, renglones viejos); un symlink apunta al mismo archivo."""
+    p = _ruta(path)
+    if not os.path.isfile(p):
+        return False
+    h = sha(p)
+    return h in (r["hashes"].get(p), r["hashes"].get(os.path.abspath(path))) or \
+        any(_ruta(k) == p and v == h for k, v in r["hashes"].items())
 
 
 # (tool, subcomando o None, archivos que deben estar VIGENTES en esa corrida, descripcion)
@@ -266,7 +286,7 @@ def backcheck(informe, excel):
     if not os.path.isfile(excel):
         sys.exit("BACKCHECK RECHAZADO: no existe el Excel " + excel)
     anotar({"tool": "BACKCHECK", "args": [informe, excel], "rc": 0,
-            "hashes": {os.path.abspath(informe): sha(informe), os.path.abspath(excel): sha(excel)}})
+            "hashes": {_ruta(informe): sha(informe), _ruta(excel): sha(excel)}})
     print("OK back-check anotado")
 
 

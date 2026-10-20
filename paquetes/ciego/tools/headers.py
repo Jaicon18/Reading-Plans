@@ -132,15 +132,52 @@ def _sill_pz(o, regla, ref):
     return n
 
 
+LINEA_TOL_PT = 6.0        # v77 D2: dos runs CONT. BOX BEAM con la línea a <= 6 pt = el mismo frente
+
+
+def _front_line(o, ref):
+    """v77 (decisión del usuario D2): CONT. BOX BEAM declara front_line {sheet, ori H|V, c_pt, jambs_pt [primera,
+    última], scale_pt_per_ft, source}; ro_w_ft = |última - primera| / escala (la jamb impresa o el tick de la cota)."""
+    fl = o.get("front_line")
+    if not isinstance(fl, dict) or any(k not in fl for k in ("sheet", "ori", "c_pt", "jambs_pt", "scale_pt_per_ft")):
+        raise ValueError(f"{ref}: CONT. BOX BEAM sin front_line {{sheet, ori, c_pt, jambs_pt [primera, última], "
+                         f"scale_pt_per_ft, source}} (D2 v77: el run se mide de la primera a la última jamb del frente)")
+    _src(fl.get("source"), f"{ref}.front_line")
+    if fl["ori"] not in ("H", "V") or not isinstance(fl["jambs_pt"], list) or len(fl["jambs_pt"]) != 2:
+        raise ValueError(f"{ref}.front_line: ori H|V y jambs_pt [primera, última]")
+    largo = abs(float(fl["jambs_pt"][1]) - float(fl["jambs_pt"][0])) / _pos(fl["scale_pt_per_ft"], f"{ref}.scale")
+    if abs(largo - float(o.get("ro_w_ft") or 0)) > 0.02:
+        raise ValueError(f"{ref}: ro_w_ft {o.get('ro_w_ft')} != primera a última jamb {round(largo, 4)} ft "
+                         f"(front_line.jambs_pt / escala; D2 v77)")
+
+
+def _piezas_rotulo(t):
+    """v77 D2: piezas que dice el TEXTO de la fila del header schedule: SINGLE = 1, DOUBLE = 2, '2-...' = 2."""
+    t = str(t).upper()
+    m = re.match(r"\s*(\d+)\s*-", t)
+    if m:
+        return int(m.group(1))
+    if "SINGLE" in t:
+        return 1
+    if "DOUBLE" in t:
+        return 2
+    if "TRIPLE" in t:
+        return 3
+    return None
+
+
 def _reglas_v65b(data):
     """Decisiones del usuario #18-#22: reglas fijas, se valida cada abertura antes de calcular."""
     if data.get("header_params") is not None:
         raise ValueError("header_params ya no existe (v65b): las decisiones del usuario #18-#22 son reglas fijas "
                          "(sill double > 4'-0\", glazing metal box, box = 4 piezas, door en DOUBLE TRACK, office front "
                          "continuo)")
-    cont = {}
+    cont, lineas = {}, []
     for o in data.get("openings") or []:
         ref = str(o.get("ref", ""))
+        if o.get("kind") == "door" and o.get("with_sill"):
+            raise ValueError(f"{ref}: door con with_sill (decisión del usuario D5: sill track solo en aberturas con "
+                             f"sill; una door no lleva sill)")
         ht = str(o.get("header_type") or "").upper()
         if (o.get("or_steel") or "OR STEEL" in ht) and \
                 o.get("structure") in ("HSS", "steel"):
@@ -149,10 +186,9 @@ def _reglas_v65b(data):
         if re.search(r"ASSUM|NOT PRINTED|NO IMPRESO|SUPUEST|TYPICAL ASSUMED", ht):
             raise ValueError(f"{ref}: header_type '{o.get('header_type')}' no impreso (R71.10, arbitraje #19): un header "
                              f"que ningún schedule / detalle llama = 0 LF + RFI con el delta; nunca un box supuesto")
-        if "CONT" in ht and o.get("run_ends") not in ("jamb_to_jamb", "wall_to_wall"):
-            raise ValueError(f"{ref}: CONT. BOX BEAM sin run_ends 'jamb_to_jamb' | 'wall_to_wall' (+ run_ends_source): "
-                             f"el largo del run (del primer al último jamb, o hasta los walls de los extremos) se "
-                             f"declara; si el detalle no lo dibuja, RFI con el delta de las dos (R71.11)")
+        if "CONT" in ht and o.get("run_ends") != "jamb_to_jamb":
+            raise ValueError(f"{ref}: CONT. BOX BEAM run_ends = 'jamb_to_jamb' (decisión del usuario D2, v77: el run del "
+                             f"office front va de la PRIMERA a la ÚLTIMA jamb del frente + 1'-4\" x 4; wall_to_wall ya no)")
         if "BOX" in ht and o.get("pieces") != BOX_PIECES:
             raise ValueError(f"{ref}: box beam / box header = {BOX_PIECES} piezas (2 C + 2 track, decisión usuario "
                              f"#20); vino pieces {o.get('pieces')!r}")
@@ -163,11 +199,20 @@ def _reglas_v65b(data):
             if not str(o.get("wall") or "").strip():
                 raise ValueError(f"{ref}: CONT. BOX BEAM sin 'wall' (línea del frente) — un run por frente; dos "
                                  f"frentes = dos runs, nunca un número para dos líneas (decisión usuario #22, EJES)")
+            _front_line(o, ref)
             k = (str(o.get("header_type_source") or ""), str(o["wall"]))
             if k in cont:
                 raise ValueError(f"{ref}: CONT. BOX BEAM {k[0]} en {k[1]} ya declarado en '{cont[k]}' — un solo run "
                                  f"continuo por frente (decisión usuario #22)")
             cont[k] = ref
+            fl = o["front_line"]                                   # v77 D2: dos runs sobre la MISMA línea = error
+            for r2, f2 in lineas:
+                if f2["sheet"] == fl["sheet"] and f2["ori"] == fl["ori"] and \
+                        abs(float(f2["c_pt"]) - float(fl["c_pt"])) <= LINEA_TOL_PT:
+                    raise ValueError(f"{ref}: CONT. BOX BEAM sobre la misma línea de frente que '{r2}' ({fl['sheet']} "
+                                     f"{fl['ori']} {fl['c_pt']} pt): un run continuo por frente, de la primera a la "
+                                     f"última jamb + 1'-4\" x 4, no por abertura (decisión del usuario D2)")
+            lineas.append((ref, fl))
         elif o.get("continuous_run"):
             raise ValueError(f"{ref}: continuous_run solo con header_type CONT. BOX BEAM")
 
@@ -187,6 +232,10 @@ def calcular(data):
             if "pieces" not in r:
                 raise ValueError(f"header_schedule fila {r.get('type')}: falta 'pieces' (decisión usuario #2: el LF "
                                  f"es por piezas: SINGLE TRACK 1, DOUBLE TRACK 2, 2-362CSJ20 2)")
+            nr = _piezas_rotulo(r["type"])
+            if nr is not None and r["pieces"] != nr:
+                raise ValueError(f"header_schedule fila '{r['type']}': pieces {r['pieces']} != {nr} que dice el rótulo "
+                                 f"impreso (decisión del usuario D2: SINGLE 1, DOUBLE 2, '2-...' 2)")
             filas_sch.append((_pos(r["max_span_ft"], "header_schedule.max_span_ft"), str(r["type"]),
                               _int1(r["pieces"], f"header_schedule {r.get('type')}.pieces"),
                               str(r.get("piece") or r["type"])))

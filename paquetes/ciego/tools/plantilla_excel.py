@@ -319,12 +319,31 @@ def en(t):
     return t
 
 
+# v77 (R76.7 b): rutas, nombres de archivo, ids de wall, coordenadas "x / y <pt>" y elevaciones "EL." no son texto:
+# daban falso español y bloqueaban la entrega. Se quitan antes de buscar español.
+NO_TEXTO = [re.compile(x, re.I) for x in (
+    r"(?:[A-Za-z]:)?(?:[/\\][\w.\-]+){2,}[/\\]?",               # rutas
+    r"\b[\w\-]+\.(?:png|jpe?g|json|jsonl|xlsx|pdf|md|py|txt|csv|zip)\b",  # nombres de archivo
+    r"\b[A-Za-z]*\d[\w]*(?:-[\w]+)+\b|\b[A-Za-z]+(?:-[A-Za-z]*\d[\w]*)+\b",  # ids con dígitos y guiones
+    r"\b[xy]\s*[=:]?\s*-?\d+(?:\.\d+)?",                          # coordenadas x / y
+    r"\bEL\.\s*[\d']?",                                            # elevación EL.
+)]
+
+
+def _sin_ids(t):
+    for rx in NO_TEXTO:
+        t = rx.sub(" ", t)
+    return t
+
+
 def es_texto_es(t):
-    """[] si el texto está en inglés; motivo si no (función de idioma_es + palabras sueltas y acentos)."""
+    """[] si el texto está en inglés; motivo si no (función de idioma_es + palabras sueltas y acentos).
+    v77: rutas, archivos, ids y coordenadas se quitan antes (R76.7 b)."""
     if not isinstance(t, str) or len(t) < 4:
         return []
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import idioma_es as IE
+    t = _sin_ids(t)
     return IE.es_espanol(t) or sorted({m.group(0).lower() for m in ES_SUELTO.finditer(t)})
 
 
@@ -728,6 +747,8 @@ def fusionar(d, fo):
             m = dict(m, net=float(fam_canon[fam]))
         mats.append(m)
     for fam, ms in repartidas.items():
+        if fam == "FRT plywood (SF)" and fo.get("frt_plywood_by_material"):
+            continue      # v77: sus renglones se rehacen abajo desde frt_plywood_by_material (por material y uso)
         tot = sum(float(x.get("net") or 0) for x in ms)
         if abs(tot - float(fam_canon[fam])) > 0.1:
             raise ValueError(f"familia '{fam}' repartida en {len(ms)} renglones suma {round(tot, 2)} != familia "

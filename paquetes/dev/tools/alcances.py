@@ -73,6 +73,9 @@ def _sheet_of(text, n):
 
 
 def escanear(pdf):
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import copia_limpia                       # v77 (R76.7 e): siempre sobre la copia SIN /Annots
+    pdf, _ = copia_limpia.copia_limpia(pdf)
     pages = _pages(pdf)
     res = {"pdf": os.path.basename(pdf), "paginas": len(pages), "alcances": {}}
     for aid, nombre, rx, _, _ in ALCANCES:

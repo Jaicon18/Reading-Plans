@@ -18,6 +18,11 @@ SCH = {"source": "7/S5.20", "rows": [
 B = 16 / 12
 
 
+def FL(ro, c=100.0):
+    """v77 D2: front_line sintético (jamb a jamb = ro x 18 pt)."""
+    return {"sheet": "Z1.01", "ori": "V", "c_pt": c, "jambs_pt": [0.0, ro * 18.0], "scale_pt_per_ft": 18.0, "source": "Z1.01"}
+
+
 def caso():
     return {
         "header_schedule": SCH,
@@ -29,6 +34,7 @@ def caso():
              "with_sill": True, "header_type": "6\" C box beam", "header_type_source": "11/A09.27",
              "pieces": 4, "pieces_source": "11/A09.27", "piece": "6\" C box", "source": "11/A09.27"},
             {"ref": "office front", "wall": "W4", "kind": "opening", "ro_w_ft": 36.5, "continuous_run": True,
+             "front_line": FL(36.5),
              "header_type": "CONT. BOX BEAM", "run_ends": "jamb_to_jamb", "header_type_source": "9/A12.01", "pieces": 4,
              "pieces_source": "9/A12.01", "piece": "C box", "source": "A02.01"},
         ]}
@@ -51,8 +57,8 @@ def lista_sintetica():
               "source": "5/A08.11"}, **box("6/A08.11", "C box")),
         dict({"ref": "W-A", "kind": "window", "ro_w_ft": 7.0, "qty": 5, "with_sill": True, "or_steel": True,
               "source": "11/A09.27"}, **box("11/A09.27", "6\" C box")),
-        dict({"ref": "front 1", "wall": "OF-1", "ro_w_ft": 36.5, "source": "A02.01"}, **cont),
-        dict({"ref": "front 2", "wall": "OF-2", "ro_w_ft": 17.0, "source": "A02.01"}, **cont),
+        dict({"ref": "front 1", "wall": "OF-1", "ro_w_ft": 36.5, "source": "A02.01", "front_line": FL(36.5)}, **cont),
+        dict({"ref": "front 2", "wall": "OF-2", "ro_w_ft": 17.0, "source": "A02.01", "front_line": FL(17.0, 300)}, **cont),
         dict({"ref": "vestibule A", "kind": "opening", "ro_w_ft": 14.0, "source": "1/A12.10"},
              **box("4/A12.10", "C box")),
         dict({"ref": "grille G", "kind": "grille", "ro_w_ft": 12.0, "beams": 2,
@@ -314,10 +320,10 @@ def test_v65b_22_office_front_un_run_continuo():
           "header_type": "CONT. BOX BEAM", "run_ends": "jamb_to_jamb", "header_type_source": "8/A12.01", "pieces": 4,
           "pieces_source": "8/A12.01", "source": "A02.01"}
     _falla({"openings": [of]}, "#22")                                             # por abertura
-    run = dict(of, ref="office front E", qty=1, ro_w_ft=36.5, continuous_run=True)
+    run = dict(of, ref="office front E", qty=1, ro_w_ft=36.5, continuous_run=True, front_line=FL(36.5))
     _falla({"openings": [run, dict(run, ref="office front E2")]}, "#22")           # dos runs en la misma línea
     _falla({"openings": [dict(run, wall="")]}, "wall")
-    w = dict(run, ref="office front W", wall="OF-W", ro_w_ft=17.0)
+    w = dict(run, ref="office front W", wall="OF-W", ro_w_ft=17.0, front_line=FL(17.0, 300))
     t = H.calcular({"openings": [run, w]})["totales_lf"]["header"]
     assert abs(t - ((36.5 + B) * 4 + (17.0 + B) * 4)) < 0.02, t          # un run por frente
     _falla({"openings": [dict(_gl2(), continuous_run=True)]}, "continuous_run")

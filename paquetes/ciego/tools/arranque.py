@@ -472,5 +472,9 @@ if __name__ == '__main__':
     r = arrancar(sys.argv[1],
                  int(sys.argv[2]) if len(sys.argv) > 2 else None,
                  int(sys.argv[3]) if len(sys.argv) > 3 else None)
-    json.dump({k: v for k, v in r.items() if k != 'hojas'},
-              open('/tmp/claude-0/arranque.json', 'w'), indent=1, ensure_ascii=False)
+    # v77 (R76.7 e): arranque.json en la carpeta de trabajo (antes una ruta fija) y las tools siguientes sobre la copia limpia
+    salida = os.path.join(os.environ.get('TAKEOFF_WORK') or os.getcwd(), 'arranque.json')
+    json.dump({k: v for k, v in r.items() if k != 'hojas'}, open(salida, 'w'), indent=1, ensure_ascii=False)
+    print('arranque.json -> %s' % salida)
+    print('SIGUIENTE (copia limpia): alcances.py escanear "%s" alcances.json ; inventario_tags.py "%s" <dir>/1_inventario'
+          % (r['pdf_limpio'], r['pdf_limpio']))

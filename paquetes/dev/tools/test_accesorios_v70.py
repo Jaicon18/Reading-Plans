@@ -83,11 +83,9 @@ def _atm(c, status, rfi=None):
 
 
 def test_atm_recess_criterio_con_rfi():
-    o = A.calcular(fam_base(), _atm(canon_base(), "CRITERIO", "RFI-X-1"), STUDS)
-    assert o["estado"]["extra framing ATM"] == "CRITERIO", o["estado"]["extra framing ATM"]
-    assert any(r["familia"] == "extra framing ATM" for r in o["rfis"])
-    _err(_atm(canon_base(), "CRITERIO"), "rfi")
-    _err(_atm(canon_base(), "SUPUESTO", "RFI-X-1"), "CRITERIO")
+    """v77 (D1): la fórmula del recess (con o sin CRITERIO / rfi) ya no existe: el framing es la wall completa."""
+    _err(_atm(canon_base(), "CRITERIO", "RFI-X-1"), "D1")
+    _err(_atm(canon_base(), "CONFIRMADO"), "D1")
 
 
 def _gh(chain, src="4/X8.21", **kw):
