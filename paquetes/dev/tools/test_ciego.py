@@ -1,5 +1,5 @@
 """test_ciego.py — E24 (protocolo ciego). Falla si el SKILL, referencias/ o una tool entregable contiene un valor
-BOA de la referencia (cantidad, cota, R.O. o conteo). La lista vive en tests_arbitraje/valores_referencia.json y
+del proyecto de examen tomado de la referencia (cantidad, cota, R.O. o conteo). La lista vive en tests_arbitraje/valores_referencia.json y
 NUNCA se entrega a pruebas.
 
 Uso:  python3 -I test_ciego.py <zip|carpeta|archivo> [...]  [--valores valores_referencia.json]
@@ -9,7 +9,7 @@ Exit 0 = ciego; 1 = fuga (lista archivo:línea:valor).
 v67: la tool viaja en tools/ (selftest con números inventados). Sin valores_referencia.json (prueba: la lista
 NUNCA se entrega) corre el MODO PRUEBA: falla si la ruta trae material de arbitraje (tests_arbitraje/,
 valores_referencia.json, ARBITRAJE_*.md, VERIFICACION_*.md, DECISIONES_*.md); con la lista, el chequeo completo.
-bitacora.py compuerta exige su corrida con rc=0.
+bitacora.py compuerta exige su corrida con rc=0 (o la de test_ciego_tools.py). v76: viaja también en el paquete ciego.
 """
 import json, os, re, sys, zipfile
 

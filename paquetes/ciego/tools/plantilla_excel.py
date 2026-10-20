@@ -648,6 +648,7 @@ NOMBRES_PLANTILLA = {
                                                         "gypsum edge trim",
     "acoustical sealant": "Acoustical sealant",
 }
+WOOD_NOMBRE = "Blocking 2X wood (not labeled FRT)"
 BLK_NOMBRES = {"edge": "Stud blocking at edge of gypboard (structural detail)",
                "items": "Metal stud blocking at wall-mounted items (notes)"}
 
@@ -731,6 +732,32 @@ def fusionar(d, fo):
         if abs(tot - float(fam_canon[fam])) > 0.1:
             raise ValueError(f"familia '{fam}' repartida en {len(ms)} renglones suma {round(tot, 2)} != familia "
                              f"{fam_canon[fam]} (R71.8b: los renglones por tamaño suman la familia)")
+    # v76 (arbitraje #24): stud por elemento (framed soffit) en su renglón de la plantilla, dentro de su familia: el
+    # renglón general baja lo mismo (Σ = familia)
+    for fam, dd in (fo.get("stud_by_element") or {}).items():
+        tot_e = sum(float(v) for v in dd.values())
+        if tot_e <= 0:
+            continue
+        base = [i for i, m in enumerate(mats) if _fam_de(m) == fam and str(m["unit"]).lower() == "lf"
+                or m["material"] == nombre_plantilla(fam, fo)]
+        if len(base) != 1:
+            raise ValueError(f"stud_by_element '{fam}': {len(base)} renglones base de la familia (se espera 1)")
+        mb = mats[base[0]]
+        mats[base[0]] = dict(mb, net=round(float(mb["net"]) - tot_e, 2))
+        for n, v in dd.items():
+            mats.append(dict(mb, material=n, net=float(v), familia=fam,
+                             source=f"familias_out.json stud_by_element '{fam}' (v76)"))
+    # v76: blocking de madera 2X sin rótulo FRT en su renglón, dentro de la familia de madera (Σ = familia)
+    wl = float(fo.get("wood_blocking_lf") or 0)
+    if wl > 0:
+        bi = [i for i, m in enumerate(mats) if _fam_de(m) == "FRT blocking" or m["material"] ==
+              nombre_plantilla("FRT blocking", fo)]
+        if len(bi) != 1:
+            raise ValueError(f"wood_blocking_lf: {len(bi)} renglones de 'FRT blocking' (se espera 1)")
+        mb = mats[bi[0]]
+        mats[bi[0]] = dict(mb, net=round(float(mb["net"]) - wl, 2))
+        mats.append(dict(mb, material=WOOD_NOMBRE, net=wl, familia="FRT blocking",
+                         source="familias_out.json wood_blocking_lf 'FRT blocking' (v76)"))
     # v68: FRT plywood, un renglón por material y espesor
     FRT = "FRT plywood (SF)"
     frt_rows = [m for m in mats if familias.familia(m["material"], str(m["unit"]).lower()) == FRT]
@@ -989,17 +1016,30 @@ TAM_STUD = re.compile(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")')
 def verificar_r71_track(wb, fam_total=None):
     """R71.8 (v71, arbitraje #19): bottom track y top / deflection track se compran POR TAMAÑO de stud (un renglón por
     tamaño, más el track de parapet / otro gauge en el suyo); la suma = la familia. Con >= 2 tamaños de stud en
-    Partition Takeoff, un renglón único "all sizes" (o faltar un tamaño) = falla."""
+    Partition Takeoff, un renglón único "all sizes" (o faltar un tamaño) = falla.
+    v76 (arbitraje #24): (1) un renglón es de bottom / top track si familias.py lo pone en esa familia (la MISMA regla
+    que canon.verificar_track_nombres y que el calificador): "Parapet bottom track", "Bottom track - roof step..." y
+    "... - other framing" suman; antes solo los que empezaban con "Bottom track" / "Top track" y la Σ no daba la
+    familia. (2) Los tamaños que exigen renglón propio salen de las filas de partition types; un tamaño que solo
+    aparece en OTHER FRAMING (grille head, cripples...) va en el renglón "other framing" de track_by_element (R75.2)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import familias
     err = []
     if "Partition Takeoff" not in wb.sheetnames or "Material Summary" not in wb.sheetnames:
         return err
     ws = wb["Partition Takeoff"]
-    col, tams = None, set()
+    col, tams, bloque_otro = None, set(), False
     for r in ws.iter_rows(values_only=True):
         if col is None:
             for k, v in enumerate(r):
                 if str(v or "").strip().lower() == "stud size":
                     col = k
+            continue
+        c0 = str(r[0] or "").strip() if r else ""
+        if c0.upper().startswith("TYPE "):
+            bloque_otro = OTHER_TYPE.upper() in c0.upper()
+            continue
+        if bloque_otro:
             continue
         if col < len(r) and r[col]:
             m = TAM_STUD.match(str(r[col]).strip())
@@ -1007,20 +1047,23 @@ def verificar_r71_track(wb, fam_total=None):
                 tams.add(m.group(1))
     if len(tams) < 2:
         return err
-    nombres = [str(r[0] or "") for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True)]
-    if not any(re.search(r"^(bottom|top|deflection)\b[^,]*track", n, re.I) for n in nombres):
-        return err                                  # sin renglones de track: lo cubre la lista de familias obligatorias
+    filas_ms = [(str(r[0] or ""), str(r[1] or "").strip().lower() if len(r) > 1 else "")
+                for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r]
     netos = {}
     for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True):
         if r and r[0] and len(r) > 2 and isinstance(r[2], (int, float)) and not isinstance(r[2], bool):
             netos.setdefault(str(r[0]), float(r[2]))
-    for clase, rx in (("bottom track", r"^bottom track"), ("top / deflection track", r"^top( /)? ?(deflection )?track|^deflection track")):
-        filas = [n for n in nombres if re.search(rx, n, re.I)]
+    fam_de = {"bottom track": "bottom track (todos)", "top / deflection track": "top / deflection track (todos)"}
+    clases = {clase: [n for n, u in filas_ms if n and u == "lf" and familias.familia(n, u) == f]
+              for clase, f in fam_de.items()}            # en su unidad: los pins / anchors del track van en PCS
+    if not any(clases.values()):
+        return err                                  # sin renglones de track: lo cubre la lista de familias obligatorias
+    for clase, filas in clases.items():
         falta = sorted(t for t in tams if not any(t in n for n in filas))
         if falta:
             err.append(f"Material Summary: {clase} sin renglón por tamaño para {', '.join(falta)} (R71.8: un renglón por "
                        f"tamaño de stud; 'all sizes' no basta)")
-        # v72 R71.8b: Σ renglones por tamaño = familia (familias_out.json de las salidas); el bug de fusión ponía el
+        # v72 R71.8b: Σ renglones de la familia = familia (familias_out.json de las salidas); el bug de fusión ponía el
         # total de la familia en cada renglón parcial (track x N)
         vals = [round(netos[n], 2) for n in filas if n in netos and netos[n] > 0]
         if fam_total and clase in fam_total and vals:

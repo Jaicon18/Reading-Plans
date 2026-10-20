@@ -133,8 +133,11 @@ def test_frt_plywood_por_material_y_sealant_aparte():
     d = T.base()
     d["plywood_strips"].append({"ref": "backboard", "lf": 10.0, "width_ft": 8.0, "source": "A11.03",
                                 "material": "frt_3_4"})
-    d["plywood_strips"].append({"ref": "column wrap 5/8\" ext grade", "lf": 6.0, "width_ft": 10.0,
-                                "source": "5/A09.25", "material": "frt_5_8_ext"})
+    d["walls"].append({"id": "CW1", "tag": "CANOPY-COL", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "stud_size": "3-5/8\"", "oc_in": 16,
+                       "rows": 1, "length_ft": 6.0, "height_ft": 10.0, "faces_ft": [1.5, 1.5, 1.5, 1.5],
+                       "fos_chain": {"value": [1.5], "source": "5/A09.25 FOS"}, "source": "5/A09.25",
+                       "sheathing": {"material": "frt_5_8_ext", "source": "5/A09.25 'EXT. GRADE FRT PLYWOOD'"}})
+    d["nodes"] += [{"id": "cw1", "kind": "free", "wall": "CW1"}]           # v76 (R76.2): sheathing del wrap
     d["sealant_base_exterior"] = {"lf": 40.0, "source": "5/A09.26"}
     o = K.calcular(d)
     m = {x["key"]: x for x in o["materiales"]}
@@ -208,7 +211,7 @@ def test_transicion_vertical_studs_a_estructura():
     """#16A <n> (B.O.D. - GB) vs #16B <n> (escalón GB/ACT) en la misma transición: el vertical stud va a estructura."""
     d = T.base()
     d["constants"]["transition_trim_per_lf"] = {"value": 2, "source": "7/X9.33"}
-    tr = {"id": "TRX", "tag": "OTHER", "element": "ceiling_transition", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
+    tr = {"id": "TRX", "tag": "OTHER", "element": "ceiling_transition", "edge_of": [], "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
           "rows": 1, "length_ft": 12.0, "height_ft": 0.5, "source": "7/X9.33",
           "edges": [{"edge": "N", "against": "ACT", "length_ft": 12.0, "source": "X4.01"}],
           "kickers": {"oc_in": 48, "angle_deg": 45, "source": "7/X9.33"},

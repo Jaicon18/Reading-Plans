@@ -29,7 +29,7 @@ def test_a_canopy_soffit_en_walls_rechazado():
     cs = {"id": "CS-1", "tag": "OTHER", "element": "canopy_soffit", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
           "length_ft": 20.0, "height_ft": 3.0, "openings": [], "facade": "N", "source": "1/Z9.01",
           "wall_line_ft": {"value": 18.0, "source": "Z1.01"}}
-    d["ceilings"] = [{"room": "canopy N", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 80.0, "ns_ft": 4.0, "ew_ft": 20.0,
+    d["ceilings"] = [{"room": "canopy N", "system": "canopy_joist", "facade": "N", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 80.0, "ns_ft": 4.0, "ew_ft": 20.0,
                       "source": "2/Z9.01"}]
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "sintético"}
     mal = copy.deepcopy(d)
@@ -96,7 +96,12 @@ def _evalua(op):
 def test_d_operacion_canopy_joist_imprime_el_run():
     d = base()
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "sintético"}
-    d["ceilings"] = [{"room": "canopy X", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": round(47.9 * 12.6, 2), "ns_ft": 12.6,
+    d["constants"]["canopy_soffit_track_lines"] = {"value": 2, "source": "sintético"}
+    d.setdefault("runs", []).append({"id": "CS-X", "tag": "OTHER", "element": "canopy_soffit", "stud_size": "3-5/8\"",
+                                     "oc_in": 16, "rows": 1, "length_ft": 20.0, "height_ft": 3.0, "facade": "N",
+                                     "orientation": "horizontal", "source": "1/Z9.01",
+                                     "wall_line_ft": {"value": 18.0, "source": "Z1.01"}})
+    d["ceilings"] = [{"room": "canopy X", "system": "canopy_joist", "facade": "N", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": round(47.9 * 12.6, 2), "ns_ft": 12.6,
                       "ew_ft": 47.9, "joist_dir": {"value": "N-S", "source": "7/Z9.04"}, "source": "3/Z9.04"}]
     out = K.calcular(d)
     op = [f["operacion"] for f in out["filas"] if f.get("room") == "canopy X"][0]
@@ -105,7 +110,7 @@ def test_d_operacion_canopy_joist_imprime_el_run():
     assert calc == n == 37, (op, calc, n)
     assert abs(largo - 12.6) < 1e-9 and abs(lf - n * largo) < 0.01, op
     # oc que no es exacto en 3 decimales y run justo en el borde: el texto sigue reproduciendo n
-    d["ceilings"] = [{"room": "canopy Y", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 64.0, "ns_ft": 4.0, "ew_ft": 16.0,
+    d["ceilings"] = [{"room": "canopy Y", "system": "canopy_joist", "facade": "N", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 64.0, "ns_ft": 4.0, "ew_ft": 16.0,
                       "joist_dir": {"value": "N-S", "source": "7/Z9.04"}, "source": "3/Z9.04"}]
     out = K.calcular(d)
     op = [f["operacion"] for f in out["filas"] if f.get("room") == "canopy Y"][0]
@@ -178,18 +183,18 @@ def _pier(L, **kw):
 
 
 def test_r70_6_pier_interior_no_suma_perimetro():
-    try:
-        K._v70_checks({"walls": [_pier(7.5)]}, [])
-        raise AssertionError("perímetro completo aceptado")
-    except ValueError as e:
-        assert "R70.6" in str(e) and "PR-1" in str(e), e
+    import partition_types as PT
+    # v76 (R76.5): con caras interiores con largo, el LF del type = esas caras aunque length_ft sea el perímetro
+    K._v70_checks({"walls": [_pier(7.5)]}, [])
+    assert abs(PT._lf(_pier(7.5)) - 3.0) < 1e-9
     K._v70_checks({"walls": [_pier(3.0)]}, [])                                   # caras interiores
-    K._v70_checks({"walls": [_pier(7.5, type_lf_basis="RFI: caja completa por criterio")]}, [])
     K._v70_checks({"walls": [_pier(7.5, tag="EXT")]}, [])                        # exterior: no aplica
-    p = _pier(7.5)
-    p["parts"][0]["faces_ft"], p["parts"][1]["faces_ft"] = [2.0, 2.5], [1.5, 1.5]
+    sin_largo = _pier(7.5)
+    for f in sin_largo["faces"]:
+        f.pop("length_ft")
+    sin_largo["parts"][0]["faces_ft"], sin_largo["parts"][1]["faces_ft"] = [2.0, 2.5], [1.5, 1.5]
     try:
-        K._v70_checks({"walls": [p]}, [])
+        K._v70_checks({"walls": [sin_largo]}, [])
         raise AssertionError("perímetro por parts aceptado")
     except ValueError as e:
         assert "R70.6" in str(e), e

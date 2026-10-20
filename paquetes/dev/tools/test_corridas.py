@@ -21,7 +21,7 @@ def otras_sinteticas():
              "height_ft": 7.25, "source": "10/A09.33"},
             {"id": "CSR-E", "element": "soffit_side", "orientation": "vertical", "length_ft": 12.0,
              "height_ft": 7.25, "source": "10/A09.33"},
-            {"id": "TR104", "element": "ceiling_transition", "orientation": "vertical", "length_ft": 75.0,
+            {"id": "TR104", "element": "ceiling_transition", "edge_of": [], "orientation": "vertical", "length_ft": 75.0,
              "height_ft": 4.5, "source": "7/A09.33"},
             {"id": "RSTEP-1", "element": "roof_step", "orientation": "vertical", "length_ft": 50.0,
              "height_ft": 3.1, "source": "4/A02.02"},
@@ -33,7 +33,7 @@ def otras_sinteticas():
              "height_ft": 5.375, "source": "6/A12.10"},
             {"id": "GRILLE", "element": "grille_head", "orientation": "vertical", "length_ft": 12.0,
              "height_ft": 1.5, "source": "4/A08.21"},
-            {"id": "COLWRAP-1", "element": "column_wrap", "orientation": "vertical", "length_ft": 5.0,
+            {"id": "COLWRAP-1", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "orientation": "vertical", "length_ft": 5.0,
              "height_ft": 10.5, "source": "5/A09.25"},
         ]}
 
@@ -96,7 +96,7 @@ def test_bottom_track_doors_rfi_y_descuento():
 def test_v64_column_wrap_bottom_y_top():
     """Decisión usuario #8 (5/A09.25): 4 faces x 1'-3" = 5.0 -> bottom 5.0 y top 5.0."""
     d = {"bracing": {"spacing_in": 48, "source": "F/1/S5.20"},
-         "runs": [{"id": "CW", "element": "column_wrap", "orientation": "vertical", "length_ft": 4 * 15 / 12,
+         "runs": [{"id": "CW", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "orientation": "vertical", "length_ft": 4 * 15 / 12,
                    "height_ft": 10.5, "source": "5/A09.25"}]}
     t = C.calcular(d)["totales_lf"]
     assert abs(t["bottom track (todos)"] - 5.0) < 0.01 and abs(t["top / deflection track (todos)"] - 5.0) < 0.01

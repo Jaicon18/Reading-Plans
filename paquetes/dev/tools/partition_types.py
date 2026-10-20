@@ -51,6 +51,10 @@ v68 (arbitraje #16, mismo plano dio types distintos en dos pruebas):
  R11 Aviso (no cambia el LF) si el extremo de un wall entra en la banda de un wall perpendicular de otro type más
     que la mitad de su espesor: el wall termina en la CARA del que cruza, no en su eje (corregir en el canon).
 
+v76 (R76.5, arbitraje #24): un pier / column_wrap con tag de partition type (letras + dígito, sin EXT) es fila de
+    ESE type aunque su `location` sea exterior: el tag manda (antes location exterior lo pasaba a EXT-<stud>CFMF y el
+    type del tag perdía walls). Sus partes sin tag siguen R72.3.
+
 v72 (arbitraje #20, R72.3): un pier / box partido en dos registros (parte exterior sin tag + registro con tag) es
     UN wall en la cuenta: la parte sin tag (`part_of` o solape BOX >= 50 % con un registro con tag) va a
     other_framing como element "pier_part" (su metal y board siguen en el canon). Antes la parte exterior sumaba un
@@ -66,6 +70,7 @@ from collections import OrderedDict, Counter
 OTHER = ("storefront_cripples", "vestibule_head", "grille_head", "roof_step", "fascia_box", "canopy_soffit",
          "ceiling_transition", "ceiling_bulkhead", "soffit_side")
 JOG_MAX_FT = 1.0
+TAG_TYPE = re.compile(r"^[A-Z]{1,3}\d{1,2}[A-Z]?$")   # v76: tag de partition type (letra(s) + dígito)
 TOL_LINE_FT = 0.25   # misma línea: centros de banda a <= 3"
 TOL_GAP_FT = 0.5    # contiguos: hueco <= 6"
 
@@ -91,6 +96,8 @@ def tipo(w, tags_wall):
     ext = tag.startswith("EXT") or w.get("location") == "exterior"
     if el in OTHER:
         return None
+    if el in ("pier", "column_wrap") and TAG_TYPE.match(tag) and not tag.startswith("EXT"):
+        return tag            # v76 (R76.5): un box / pier con tag de partition type sigue en su type (location no manda)
     if el == "parapet":
         return "EXT-PARAPET"
     if el in ("wall", "pier") and ext:
@@ -118,18 +125,19 @@ def _parapet_geo(w, esc=18.0):
 
 
 INTERIOR_NO = ("EXTERIOR", "EXT", "OUTSIDE")
+RX_CARA_EXT = re.compile(r"EXTERIOR|NO\s+GYP|OUTSIDE", re.I)   # v76: la misma regla que canon.py (R70.6 / R76.5)
 
 
 def _lf(w, avisos=None):
     """LF del wall en la hoja (R9): column_wrap / pier interior = caras con board; el resto = length_ft."""
     if w.get("element") in ("column_wrap", "pier") and not _norm(w.get("tag")).startswith(("EXT", "CANOPY")):
         caras = [f for f in w.get("faces") or [] if float(f.get("height_ft") or 0) > 0
-                 and str(f.get("room") or "").upper() not in INTERIOR_NO]
+                 and str(f.get("room") or "").upper() not in INTERIOR_NO and not RX_CARA_EXT.search(str(f.get("room") or ""))]
         if caras and all(f.get("length_ft") is not None for f in caras):
-            return sum(float(f["length_ft"]) for f in caras)
+            return sum(float(f["length_ft"]) for f in caras) + float(w.get("_lf_extra") or 0)
         if avisos is not None:
             avisos.append(f"{w['id']} ({w.get('tag')}): caras sin length_ft; LF = length_ft (perímetro) - R9")
-    return float(w["length_ft"])
+    return float(w["length_ft"]) + float(w.get("_lf_extra") or 0)
 
 
 def _pendiente(w):
@@ -374,6 +382,23 @@ def partition_types(canon, board_out=None, jog_max_ft=JOG_MAX_FT, tol_line_ft=TO
     import chequeos_v72                             # v72 (R72.3): un box = un wall (el registro con tag)
     partes = chequeos_v72.partes_de_box(walls)
     tipos = {w["id"]: tipo(w, tags_wall) for w in walls}
+    # v76 (R76.5): la parte sin tag de un box con tag de partition type que tiene caras interiores con board suma esas
+    # caras al LF del box (el box sigue siendo UNA fila de su type); la parte exterior (R72.3) no suma
+    por_id_w = {w["id"]: w for w in walls}
+    extra = {}
+    for cid, pid in partes.items():
+        pw, cw = por_id_w.get(pid), por_id_w.get(cid)
+        if not pw or not cw or not TAG_TYPE.match(_norm(pw.get("tag"))) or _norm(pw.get("tag")).startswith("EXT"):
+            continue
+        if cw.get("location") == "exterior":
+            continue
+        lc = [float(f["length_ft"]) for f in cw.get("faces") or [] if f.get("board") and f.get("length_ft") is not None
+              and float(f.get("height_ft") or 0) > 0 and str(f.get("room") or "").upper() not in INTERIOR_NO
+              and not RX_CARA_EXT.search(str(f.get("room") or ""))]
+        if lc:
+            extra[pid] = extra.get(pid, 0.0) + sum(lc)
+    if extra:
+        walls = [dict(w, _lf_extra=extra[w["id"]]) if w["id"] in extra else w for w in walls]
     # v74 (R74.1): segmento sin tag con el espesor de los walls con tag de su línea toma ese type (por hoja real)
     ctx_hoja = particion.contexto([w for w in walls if w["id"] not in partes and tipos[w["id"]] is not None], tipos)
     retip = particion.retipar(ctx_hoja, esc, tol_line_ft, tol_gap_ft)
@@ -389,7 +414,8 @@ def partition_types(canon, board_out=None, jog_max_ft=JOG_MAX_FT, tol_line_ft=TO
             otros.append(dict(_fila([w], [w["id"]], bsf), id=w["id"], element="pier_part", tag=w.get("tag"),
                               part_of=partes[w["id"]]))
             avisos.append(f"{w['id']} ({t}) parte sin tag del box {partes[w['id']]}: fuera de la cuenta de walls "
-                          f"(R72.3); su material sigue en el canon")
+                          f"(R72.3); su material sigue en el canon"
+                          + ("; sus caras interiores suman al LF del box (R76.5)" if partes[w["id"]] in extra else ""))
             continue
         if t is None:
             otros.append(dict(_fila([w], [w["id"]], bsf), id=w["id"], element=w.get("element"), tag=w.get("tag")))

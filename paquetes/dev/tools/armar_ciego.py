@@ -26,7 +26,7 @@ SKILL = "take-off-metal-frame-drywall"
 FUERA = re.compile(r"^(test_.*|fixture_reglas|armar_ciego|auditor|hoja_detalle_img|localizar|cruzar_mep)\.py$")
 # auditor / hoja_detalle_img / localizar / cruzar_mep: tools muertas (dependen de módulos que no viajan desde v66 o
 # están retiradas) y nadie las importa: no van al paquete ciego.
-QUEDAN = ("test_ciego_tools.py", "test_ciego_v69.py", "test_smoke_ciego.py")
+QUEDAN = ("test_ciego_tools.py", "test_ciego_v69.py", "test_smoke_ciego.py", "test_ciego.py")   # v76: + test_ciego.py (bitácora)
 GENERICO = re.compile(
     r"\d+(?:-\d+/\d+|\s\d+/\d+)?\s?\"|\d+/\d+\"?|\d+'\s?-\s?\d+(?:\s\d+/\d+)?\"?"      # pulgadas / pies-pulgadas
     r"|\d+(?:[.,]\d+)?\s?%|\b\d+\s?(?:ga|GA|gauge|mil)\b|\b\d{3}[ST]\d{3}-\d{2}\b"     # %, gauge, designación

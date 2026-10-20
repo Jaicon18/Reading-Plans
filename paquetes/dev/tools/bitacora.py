@@ -150,7 +150,9 @@ OBLIGATORIAS = [
     ("vigas_sobre_walls.py", None, (), "walls bajo viga del plan S* (v66, E26): stops_under_beam o motivo"),
     ("framed_openings.py", None, (), "framed openings MEP deterministas (PROTOCOLO v61 P10)"),
     ("alcance_filtro.py", None, (), "filtro de alcance / cladding EXCLUDED (PROTOCOLO v61 P10, 60.4)"),
-    ("test_ciego.py", None, (), "protocolo ciego E24: skill y tools sin valores de examen (v67)"),
+    # v76 (arbitraje #24): test_ciego.py viaja en el paquete ciego; también vale test_ciego_tools.py (cualquiera de
+    # los dos con rc 0). Antes el ciego no lo traía y la compuerta nunca daba OK en una prueba.
+    ("test_ciego.py|test_ciego_tools.py", None, (), "protocolo ciego E24: skill y tools sin valores de examen (v67)"),
     ("plantilla_excel.py", "validar", ("takeoff",), "formato del takeoff.json (52.4)"),
     ("plantilla_excel.py", "armar", ("takeoff", "excel"), "Excel armado del takeoff.json vigente"),
     ("registro.py", "entregable", ("registro",), "0 renglones pendientes (50.5)"),
@@ -217,7 +219,7 @@ def _compuerta(takeoff, registro, excel, _desde_reglas=False):
         if tool.startswith("usa:"):
             cand = [(i, r) for i, r in enumerate(rows) if tool[4:] in r.get("usa", [])]
         else:
-            cand = [(i, r) for i, r in enumerate(rows) if r.get("tool") == tool
+            cand = [(i, r) for i, r in enumerate(rows) if r.get("tool") in tool.split("|")
                     and (sub is None or (r["args"][:1] == [sub]))]
         if not cand:
             fallas.append("NUNCA SE CORRIO %s %s -- %s" % (

@@ -190,10 +190,11 @@ def _():
     canon.PLY.clear()
     canon.PLY_USO.clear()
     fam = {canon.F_PLY: 0.0}
+    canon.POLY[0] = '9-1/2"'                        # v76: espesor impreso del polyiso (constants.nailbase_polyiso_in)
     canon._ply(fam, "frt_3_4", 10.0, canon._uso_strip({"ref": "s1", "uso": "pier"}))
     canon._ply(fam, "frt_5_8", 5.0, canon._uso_strip({"ref": "s2", "source": "5/8 FRT plywood bonded to polyiso"}))
     assert canon.PLY_USO == {'3/4" FRT plywood at storefront piers': 10.0,
-                             'Exterior sheathing 5/8" FRT plywood bonded to polyiso (nailbase)': 5.0}, canon.PLY_USO
+                             'Exterior sheathing 5/8" FRT plywood bonded to 9-1/2" polyiso': 5.0}, canon.PLY_USO
 
 
 @caso("calificador: rango min == max manda sobre la ref; _partition_types y modo consistencia")

@@ -767,8 +767,13 @@ def a_wrap_fos(ctx):
         # v72b también vale. Las dos tools aceptan ahora la misma forma.
         if isinstance(fc, dict):
             fc = fc.get("value") if str(fc.get("source") or "").strip() else None
-        if not w.get("parts") and (not isinstance(fc, list) or not fc):
-            out.append((w.get("id"), "sin fos_chain", "fos_chain con TODOS los eslabones impresos (E8)"))
+        fcf = w.get("fos_chain_faces")             # v76: caja parcial, una entrada por face (cadena o vector)
+        ok_fcf = isinstance(fcf, list) and fcf and len(fcf) == len(w.get("faces_ft") or []) and \
+            all(isinstance(e, dict) and str(e.get("source") or "").strip() and
+                (e.get("value") or str(e.get("measured_op") or "").strip()) for e in fcf)
+        if not w.get("parts") and (not isinstance(fc, list) or not fc) and not ok_fcf:
+            out.append((w.get("id"), "sin fos_chain", "fos_chain con TODOS los eslabones impresos, o fos_chain_faces "
+                        "por face en una caja parcial (E8, v76)"))
     return out
 
 
@@ -901,8 +906,14 @@ def a_blocking(ctx):
         if not lab.strip():
             out.append((b.get("ref") or b.get("id"), "sin label / material", "rótulo literal del detalle (D5)"))
         elif re.search(r"\bFRT|FRTW|fire.?retardant", _txt(b.get("material")), re.I) and \
-                not re.search(r"\bFRT|FRTW|fire.?retardant", _txt(b.get("label"), b.get("source")), re.I):
-            out.append((b.get("ref") or b.get("id"), "FRT sin rótulo FRT", "FRT solo donde el detalle lo rotula (54.3)"))
+                not re.search(r"\bFRT|FRTW|fire.?(retardant|treated)", _txt(b.get("label"),
+                                                                             (b.get("frt_basis") or {}).get("source")
+                                                                             if isinstance(b.get("frt_basis"), dict)
+                                                                             else None), re.I):
+            # v76: solo el RÓTULO impreso (o frt_basis con la nota que hace FRT la madera); el source no cuenta: un
+            # "NOT labeled FRT" en el source pasaba el regex (regla inviolable: ningún texto para satisfacer un regex)
+            out.append((b.get("ref") or b.get("id"), "FRT sin rótulo FRT", "FRT solo donde el detalle lo rotula (54.3); "
+                        "2X / WOOD sin FRT = material wood"))
     return out
 
 

@@ -61,7 +61,7 @@ def _():
     co = {"renglones": [{"id": "r:Y-1", "element": "wall", "bottom_lf": 10, "top_lf": 10},
                         {"id": "r:Y-2", "element": "wall", "bottom_lf": 2, "top_lf": 2},          # alcove (wall sin fila)
                         {"id": "r:Z-9", "element": "storefront_cripples", "bottom_lf": 4, "top_lf": 4},
-                        {"id": "r:Z-8", "element": "column_wrap", "bottom_lf": 3, "top_lf": 3}]}
+                        {"id": "r:Z-8", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "bottom_lf": 3, "top_lf": 3}]}
     fam = {"bottom track (todos)": 19, "top / deflection track (todos)": 19}
     pt = {"types": {"Y": {"filas": [{"ids": ["Y-1"], "wall": "Y-1"}]}, "W": {"filas": [{"ids": ["Z-8"]}]}}}
     out = canon.track_by_element(data, co, fam, pt)
@@ -76,7 +76,7 @@ def _():
 
 def _op(**kw):
     o = {"ref": "Q-1", "kind": "window", "ro_w_ft": 5.0, "head_ft": 7.0, "sill_ft": 3.0, "with_sill": True,
-         "jamb_return": True, "jamb_return_source": "3/Z9.01", "jamb_return_label": "GYPSUM BOARD JAMB RETURN"}
+         "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "3/Z9.01", "jamb_return_label": "GYPSUM BOARD JAMB RETURN"}
     o.update(kw)
     return o
 

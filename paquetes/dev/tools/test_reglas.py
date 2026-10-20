@@ -59,7 +59,7 @@ def W(id_, **kw):
 def OP(**kw):
     o = {"ref": "OP1", "kind": "window", "ro_w_ft": 3.0, "head_ft": 7.0, "head_source": "Z1.01", "sill_ft": 3.0,
          "sill_source": "Z1.01", "with_sill": True, "source": "Z1.01", "header_type": "track", "pieces": 1,
-         "pieces_source": "1/Z5.01", "jamb_return": False, "jamb_return_source": "1/Z5.01"}
+         "pieces_source": "1/Z5.01", "jamb_return": False, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "1/Z5.01"}
     o.update(kw)
     return o
 
@@ -333,7 +333,7 @@ def caso_para(trigger, c, d):
         "walls_k": {"tag": "X1K"}, "walls_deck": {"to_deck": True}, "walls_2row": {"rows": 2},
         "walls_sin_tag": {"tag_ids": []}, "walls_cadena": {"length_source": "Z1.01 sum of the string 2'+3'"},
         "faces": {"faces": [{"board": "5/8 regular", "layers": 1}]},
-        "soffits": {"element": "soffit_side"}, "cajas": {"element": "column_wrap"}, "parapets": {"element": "parapet"},
+        "soffits": {"element": "soffit_side"}, "cajas": {"element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)"}, "parapets": {"element": "parapet"},
         "otros_framing": {"element": "vestibule_head"}, "pendientes": {"length_status": "PENDIENTE"},
     }
     if trigger in nuevos:

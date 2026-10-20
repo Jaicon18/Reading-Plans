@@ -23,7 +23,7 @@ def canon_base():
             {"id": "W1", "tag": "P1", "element": "wall", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
              "length_ft": 20.0, "height_ft": 10.0,
              "openings": [{"ref": "win 1", "kind": "window", "ro_w_ft": 6.0, "head_ft": 7.0, "sill_ft": 3.0,
-                           "with_sill": True, "jamb_return": True, "jamb_return_source": "9/X9.01", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
+                           "with_sill": True, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "9/X9.01", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
                            "sill_return": True, "sill_return_source": "9/X9.01", "sill_return_label": "GYPSUM BOARD RETURN"},
                           {"ref": "door 1", "kind": "door", "ro_w_ft": 3.0, "head_ft": 7.0, "sill_ft": 0}]},
             {"id": "W2", "tag": "P2", "element": "wall", "stud_size": "1-5/8\"", "oc_in": 16, "rows": 2,
@@ -45,7 +45,7 @@ def canon_base():
             {"ref": "FD 10x10", "kind": "fire_damper", "ro_w_ft": 10 / 12, "qty": 2, "source": "M1.01"},
             {"ref": "box run", "kind": "opening", "ro_w_ft": 12.0, "qty": 1, "continuous_run": True},
             {"ref": "sf 1", "kind": "storefront", "ro_w_ft": 10.0, "head_ft": 8.0, "structure": "HSS",
-             "jamb_return": True, "jamb_return_source": "2/X9.26", "jamb_return_label": "GYPSUM BOARD JAMB RETURN", "wall_jambs": 1,
+             "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "2/X9.26", "jamb_return_label": "GYPSUM BOARD JAMB RETURN", "wall_jambs": 1,
              "wall_jambs_source": "X2.01", "jambs": [{"abuts": "wall", "source": "X2.01"},
                                                      {"abuts": "pier", "source": "1/X9.25"}]},
         ],
@@ -302,7 +302,7 @@ def test_extra_framing():
 def test_v67_atm_obligatorio():
     c = canon_base()
     c["walls"][0]["openings"].append({"ref": "ATM drive-up", "kind": "window", "ro_w_ft": 3.0, "head_ft": 6.0,
-                                      "sill_ft": 3.0, "jamb_return": True, "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN"})
+                                      "sill_ft": 3.0, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN"})
     _err("ATM sin atm_recess = error", c, "ATM")
     c["walls"][0]["openings"][-1]["atm_recess"] = {"width_ft": 3.0, "sistered_h_ft": 6.0, "furring_rows": 2,
                                                    "source": "X8.11", "width_source": "X2.01"}
@@ -389,7 +389,7 @@ def test_v68_access_panel_sin_doble_conteo():
 def test_v68_atm_estados_y_e12():
     c = canon_base()
     c["walls"][0]["openings"].append({"ref": "ATM 2", "kind": "window", "ro_w_ft": 2.0, "head_ft": 5.0,
-                                      "sill_ft": 3.0, "jamb_return": True, "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
+                                      "sill_ft": 3.0, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
                                       "atm_recess": {"width_ft": 4.0, "width_source": "X2.01 vector",
                                                      "width_status": "DERIVADO", "sistered_h_ft": 6.0,
                                                      "sistered_h_source": "6/X8.11", "sistered_h_status": "CONFIRMADO",

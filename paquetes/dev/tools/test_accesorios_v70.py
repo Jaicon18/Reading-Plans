@@ -77,7 +77,7 @@ def _atm(c, status, rfi=None):
     if rfi:
         ar["rfi"] = rfi
     c["walls"][0]["openings"].append({"ref": "ATM 9", "kind": "window", "ro_w_ft": 2.0, "head_ft": 5.0,
-                                      "sill_ft": 3.0, "jamb_return": True, "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
+                                      "sill_ft": 3.0, "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "6/X8.11", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
                                       "atm_recess": ar})
     return c
 

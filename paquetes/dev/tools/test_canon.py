@@ -10,7 +10,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 import canon as K  # noqa: E402
 
-C = {"bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"}, "sheet_len_ft": {"value": 12, "source": "4/S5.20"},
+C = {"nailbase_polyiso_in": {"value": "2 1/2\"", "source": "D/Z9.22 sintético"}, "bracing_spacing_in": {"value": 48, "source": "F/1/S5.20"}, "sheet_len_ft": {"value": 12, "source": "4/S5.20"},
      "stud_bay_in": {"value": 14.375, "source": "60.10"}, "furring_oc_in": {"value": 16, "source": "RFI-11"},
      "carrying_oc_in": {"value": 48, "source": "RFI-11"}, "hanger_oc_in": {"value": 48, "source": "RFI-11"},
      "deck_breaks": {"value": [], "source": "S2.20 NO SLOPE (sintético)"}}
@@ -30,8 +30,9 @@ def base():
              "openings": [{"ref": "GL-2 #1", "kind": "window", "ro_w_ft": 7.0, "head_ft": 8.5, "sill_ft": 6.5,
                            "with_sill": True, "source": "A09.02", "header_type": "6\" C box beam",
                            "header_type_source": "11/A09.27", "pieces": 4, "pieces_source": "11/A09.27",
-                           "jamb_return": True, "jamb_return_source": "11/A09.27", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
-                           "sill_return": True, "sill_return_source": "9/X9.01", "sill_return_label": "GYPSUM BOARD RETURN"}],
+                           "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "11/A09.27", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
+                           "sill_return": True, "sill_return_source": "9/X9.01", "sill_return_label": "GYPSUM BOARD RETURN",
+                           "substrate_none_reason": "sintético: el strip de la abertura va en plywood_strips (v76 R76.4)"}],
              "source": "A02.01"},
             {"id": "P1", "tag": "PIER", "element": "pier", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
              "length_ft": 1.667, "height_ft": 14.25, "line": "G", "from_ft": 26.0, "to_ft": 27.667,
@@ -54,7 +55,7 @@ def base():
                       "perimeter_ft": 35.0, "hanger_drop_ft": {"value": 4.25, "source": "S2.20"},
                       "source": "A04.01", "detail_none_reason": "A04.01 sin burbuja de detalle (sintético)"},
                      {"room": "904", "system": "stud_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 525.0, "span_ft": 30.0, "run_ft": 17.5,
-                      "perimeter_ft": 17.5, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
+                      "perimeter_ft": 95.0, "hanger_drop_ft": {"value": 4.5, "source": "S2.20"},
                       "joist_source": "6/A09.33", "source": "6/A09.33", "detail": "6/A09.33"}],
         "header_schedule": {"source": "7/S5.20", "rows": [
             {"max_span_ft": 3.333, "type": "SINGLE TRACK 18 GA", "pieces": 1, "piece": "track"},
@@ -66,6 +67,8 @@ def base():
         "facades": [{"id": "N", "base_strip_lf": 27.667, "solid_lf": 27.667, "height_nailbase_ft": 16.75,
                      "openings_sf": 16.0, "has_canopy": True, "source": "A09.02"}],
         "canopies": [{"id": "C-N", "facade": "N", "band_lf": 27.667, "source": "7/A09.26"}],
+        "canopy_soffit_none": [{"facade": "N", "reason": "sintético: fascia sin soffit framed (v76 R76.1)",
+                                "source": "7/Z9.26 sintético"}],
         "band": {"t_stud_ft": {"value": 12.5, "source": "7/A09.26"}, "b_stud_ft": {"value": 10.5, "source": "7/A09.26"},
                  "height_ft": {"value": 2.0, "source": "7/A09.26"}},
         "parapets": [{"id": "PAR-N", "lf": 27.667, "roofside_h_ft": 2.0,
@@ -85,13 +88,24 @@ def base():
     }
 
 
+def _run_canopy(d):
+    """v76 (R76.1): un canopy_joist lleva su run canopy_soffit (track de los joists)."""
+    d["constants"]["canopy_soffit_track_lines"] = {"value": 2, "source": "decisión usuario #13"}
+    d.setdefault("runs", []).append({"id": "CS-N", "tag": "OTHER", "element": "canopy_soffit", "stud_size": "3-5/8\"",
+                                     "oc_in": 16, "rows": 1, "length_ft": 25.0, "height_ft": 3.0, "facade": "N",
+                                     "orientation": "horizontal", "source": "7/Z9.26 sintético",
+                                     "wall_line_ft": {"value": 24.0, "source": "Z1.01 sintético"}})
+    return d
+
+
 def test_familias():
     f = K.calcular(base())["familias"]
     # tracks: N1 26 + P1 1.667 + I1 10 (bottom y top cada uno); fascia 2 x 30 a ceiling/soffit
     assert abs(f["bottom track (todos)"] - 37.667) < 0.01, f
     assert abs(f["top / deflection track (todos)"] - 37.667) < 0.01, f
     # fascia 2 x 30 + ceiling_perimeter generado desde ceilings (<n> + <n>)
-    assert abs(f["track de ceilings / soffits"] - (60.0 + 35.0 + 17.5)) < 0.01, f
+    # v76 (R76.6): perimeter_ft = perímetro COMPLETO (30 x 17.5 -> 95); sin transiciones no se descuenta nada
+    assert abs(f["track de ceilings / soffits"] - (60.0 + 35.0 + 95.0)) < 0.01, f
     assert abs(f["purlin (track to deck)"] - 7.5) < 0.01, f
     # header (7 + 1.333) x 4 piezas (box 11/A09.27, #20); sill (7 + 1.333) x 2 (double > 4'-0" 2/S5.20, #18)
     assert abs(f["header / box beam"] - 33.33) < 0.01 and abs(f["sill track"] - 16.67) < 0.01, f
@@ -288,8 +302,9 @@ def test_soffit_no_es_furring_ni_suspendido():
 def test_canopy_joist_12a():
     """v61.1 (#12A) integrado: canopy soffit = joists 3-5/8 + FRT plywood, sin carrying / hangers / furring."""
     d = base()
-    d["ceilings"] = [{"room": "N canopy soffit", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 100.0, "span_ft": 25.0,
+    d["ceilings"] = [{"room": "N canopy soffit", "system": "canopy_joist", "facade": "N", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 100.0, "span_ft": 25.0,
                       "run_ft": 4.0, "source": "7/A09.26"}]
+    _run_canopy(d)
     d2 = base()
     d2["ceilings"] = []
     f, f0 = K.calcular(d)["familias"], K.calcular(d2)["familias"]
@@ -328,7 +343,7 @@ def test_metal_trim_con_numero():
     _falla(d, "trim_items ausente")
     d = base()
     d["walls"][0]["openings"][0].update(jamb_return=True, jamb_return_source="11/A09.27", jamb_return_label="GYPSUM BOARD JAMB RETURN")
-    d["walls"].append({"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"",
+    d["walls"].append({"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "edge_of": [], "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"",
                        "oc_in": 16, "rows": 1, "length_ft": 75.0, "height_ft": 4.5, "source": "7/A09.33", "edges": [{"edge": "W", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}, {"edge": "N", "against": "ACT", "length_ft": 15.0, "source": "A04.01"}, {"edge": "E", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}], 
                        "kickers": {"oc_in": 48, "length_ft": 1.5, "source": "7/A09.33",
                                    "length_printed_source": "7/A09.33 (test)"},
@@ -360,7 +375,7 @@ def test_opening_schedule_cerrado():
     d["opening_schedule"]["items"].append({"ref": "N storefront (line F)"})
     _falla(d, "sin declarar")
     d["openings_extra"] = [{"ref": "N storefront (line F)", "kind": "storefront", "location": "exterior", "jamb_return": False,
-                            "jamb_return_source": "2/A09.26",
+                            "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "2/A09.26",
                             "ro_w_ft": 41.6, "header": "steel_by_others",
                             "header_source": "S2.20 HSS9x5x5/8 (LLV); 2/A09.26", "source": "A09.01"}]
     f = K.calcular(d)["familias"]
@@ -421,8 +436,9 @@ def test_joist_dir_canopy_13b():
     7/A09.26 los dibuja de muro a fascia: ROUNDUP(42.32/1.333)+1 = 33 x 4.0 = 132 LF. [ciego-ok]"""
     d = base()
     d["constants"]["carrying_direction"] = {"value": "N-S", "source": "RFI-07"}
-    d["ceilings"] = [{"room": "canopy soffit N", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 169.28, "ns_ft": 4.0, "ew_ft": 42.32,
+    d["ceilings"] = [{"room": "canopy soffit N", "system": "canopy_joist", "facade": "N", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 169.28, "ns_ft": 4.0, "ew_ft": 42.32,
                       "source": "3/A09.26"}]
+    _run_canopy(d)
     f0 = K.calcular(d)["familias"]
     d["ceilings"][0]["joist_dir"] = {"value": "N-S", "source": "7/A09.26"}
     f1 = K.calcular(d)["familias"]
@@ -442,6 +458,7 @@ def test_v63_canopy_facade_glass_mat_13a():
                        "oc_in": 16, "rows": 1, "length_ft": 20.0, "height_ft": 1.75, "openings": [],
                        "source": "15/A09.27", "facade": "W", "height_source": "7/A09.26"})
     d["nodes"] += [{"id": "w1", "kind": "free", "wall": "FAS-W"}, {"id": "w2", "kind": "free", "wall": "FAS-W"}]
+    d["canopy_soffit_none"].append({"facade": "W", "reason": "sintético (v76 R76.1)", "source": "15/Z9.27 sintético"})
     _falla(d, "facade W: tiene fascia_box FAS-W pero has_canopy false")
     d["facades"][-1]["has_canopy"] = True
     d["canopies"].append({"id": "C-W", "facade": "W", "band_lf": 20.0, "source": "15/A09.27"})
@@ -524,7 +541,7 @@ def test_v64_ductos_y_storefront_hss_cero():
                             "source": "M01.01"},
                            {"ref": "N storefront", "kind": "storefront", "location": "exterior", "ro_w_ft": 41.6,
                             "structure": "HSS", "structure_source": "S2.20", "source": "2/A09.26",
-                            "jamb_return": False, "jamb_return_source": "2/A09.26"}]
+                            "jamb_return": False, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "2/A09.26"}]
     f = K.calcular(d)["familias"]
     assert abs(f["header / box beam"] - 33.33) < 0.01 and abs(f["sill track"] - 16.67) < 0.01, f
 
@@ -533,7 +550,7 @@ def test_v64_kickers_con_studs_verticales():
     """Decisión usuario #7 (7/A09.33): además del kicker, los studs verticales (dashed) a estructura."""
     d = base()
     d["constants"]["transition_trim_per_lf"] = {"value": 2, "source": "7/A09.33"}
-    tr = {"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
+    tr = {"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "edge_of": [], "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
           "rows": 1, "length_ft": 75.0, "height_ft": 4.5, "source": "7/A09.33", "edges": [{"edge": "W", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}, {"edge": "N", "against": "ACT", "length_ft": 15.0, "source": "A04.01"}, {"edge": "E", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}], 
           "kickers": {"oc_in": 48, "length_ft": 1.5, "source": "7/A09.33", "length_printed_source": "test"}}
     d["walls"].append(tr)
@@ -559,7 +576,7 @@ def test_v64_waiting_104_furring_no_joists():
 # ---------------- v65 (arbitraje #14A / #14B, 17-oct-2026) ----------------
 
 def _tr(h=4.5, **k):
-    w = {"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
+    w = {"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "edge_of": [], "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"", "oc_in": 16,
          "rows": 1, "length_ft": 75.0, "height_ft": h, "source": "7/A09.33", "edges": [{"edge": "W", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}, {"edge": "N", "against": "ACT", "length_ft": 15.0, "source": "A04.01"}, {"edge": "E", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}], 
          "kickers": dict({"oc_in": 48, "angle_deg": 45, "source": "7/A09.33"}, **k),
          "vertical_studs": {"oc_in": 16, "height_ft": 4.5, "source": "7/A09.33", "bod_ft": {"value": 13.5, "source": "S2.20"}, "ceiling_ft": {"value": 9.0, "source": "A04.01"}}}
@@ -590,7 +607,7 @@ def test_v65_column_wrap_por_face():
     """5/A09.25: 4 faces x <n> -> 8 studs por wrap (A y B 5 con studs_nodos: 52.5 en vez de 84)."""
     d = base()
     s0 = K.calcular(d)["familias"]["3-5/8\" stud (todos los gauges)"]
-    cw = {"id": "CW-1", "tag": "CANOPY-COL", "element": "column_wrap", "stud_size": "3-5/8\"", "oc_in": 16,
+    cw = {"id": "CW-1", "tag": "CANOPY-COL", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "stud_size": "3-5/8\"", "oc_in": 16,
           "rows": 1, "length_ft": 5.0, "height_ft": 10.5, "source": "5/A09.25"}
     d["walls"].append(cw)
     d["nodes"] += [{"id": "w1", "kind": "free", "wall": "CW-1"}, {"id": "w2", "kind": "free", "wall": "CW-1"}]
@@ -628,6 +645,7 @@ def test_v65_fascia_box_obligatoria_con_canopy_joist():
     d = base()
     d["ceilings"].append({"room": "N canopy soffit", "system": "canopy_joist", "system_callout": {"detail": "9/Z9.33", "on_plan": True, "source": "sintético: bubble sobre este ceiling"}, "area_sf": 100.0, "ns_ft": 4.0,
                           "ew_ft": 25.0, "span_ft": 25.0, "run_ft": 4.0, "source": "7/A09.26", "facade": "N"})
+    _run_canopy(d)
     K.calcular(d)                                        # base tiene FAS (fascia_box, facade N)
     sin = copy.deepcopy(d)
     sin["walls"] = [w for w in sin["walls"] if w["id"] != "FAS"]
@@ -822,7 +840,7 @@ def test_v67_framing_screws_pcs_explicitos():
 
 def test_v67_canopy_column_cadena_fos_completa():
     d = base()
-    cw = {"id": "CW-1", "tag": "CANOPY-COL", "element": "column_wrap", "stud_size": "3-5/8\"", "oc_in": 16,
+    cw = {"id": "CW-1", "tag": "CANOPY-COL", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "stud_size": "3-5/8\"", "oc_in": 16,
           "rows": 1, "length_ft": 4.0, "height_ft": 10.0, "source": "5/A09.25", "faces_ft": [1.0] * 4,
           "fos_chain": {"value": [1.0, 0.25], "source": "5/A09.25"}}
     d["walls"].append(cw)
@@ -851,7 +869,7 @@ def test_v67_trim_jamb_return_mismos_bordes():
     d["opening_schedule"]["items"].append({"ref": "SF-1"})
     d["openings_extra"] = [{"ref": "SF-1", "kind": "storefront", "location": "exterior", "ro_w_ft": 10.0,
                             "head_ft": 8.0, "header": "steel_by_others", "header_source": "S2.20 HSS",
-                            "jamb_return": True, "jamb_return_source": "2/A09.26", "jamb_return_label": "GYPSUM BOARD JAMB RETURN", "wall_jambs": 1,
+                            "jamb_return": True, "substrate_none_reason": "sintético (v76 R76.4)", "jamb_return_source": "2/A09.26", "jamb_return_label": "GYPSUM BOARD JAMB RETURN", "wall_jambs": 1,
                             "wall_jambs_source": "A02.01", "source": "A02.01",
                             "jambs": [{"abuts": "wall", "source": "A02.01"}, {"abuts": "pier", "source": "1/A09.25"}]}]
     o = K.calcular(d)

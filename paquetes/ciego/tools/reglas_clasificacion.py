@@ -167,6 +167,10 @@ POR_ID = {
     # v75 (arbitraje #23): compuertas en canon.py / accesorios.py / chequeos_v75.py (ValueError si no se cumplen)
     "R75.1": A("A_VIGENCIA"), "R75.2": A("A_VIGENCIA"), "R75.3": A("A_VIGENCIA"), "R75.4": A("A_VIGENCIA"),
     "R75.5": A("A_VIGENCIA"), "R75.6": A("A_VIGENCIA"), "R75.7": A("A_VIGENCIA"),
+    # v76 (arbitraje #24): compuertas en canon.py / chequeos_v76.py / partition_types.py / plantilla_excel.py
+    "R76.1": A("A_VIGENCIA"), "R76.2": A("A_VIGENCIA"), "R76.3": A("A_VIGENCIA", "A_BALLISTIC"),
+    "R76.4": A("A_VIGENCIA"), "R76.5": A("A_VIGENCIA"), "R76.6": A("A_VIGENCIA", "A_TRANSICION"),
+    "R76.7": A("A_BLOCKING", "A_VIGENCIA"), "R76.8": A("A_EXCEL", "A_BITACORA"), "R76.9": A("A_VIGENCIA", "A_WRAP_FOS"),
     # adendas del SKILL
     "REGLA 48.1": C("anulada por el paquete autocontenido (CAMBIOS_v72: el zip trae TODAS las tools; una prueba baja "
                     "solo el zip) — la regla de fondo (una sola fuente de tools) sigue en E24 / A_CIEGO + test_reglas"),

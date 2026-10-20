@@ -89,7 +89,7 @@ P20_EST = re.compile(r"(?i)\b(?:19|20)\d{2}-\d{2}-\d{2}\b|\b\d{1,2}/\d{1,2}/(?:1
                      r"|\b\d{1,2}-(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic|jan|apr|aug|dec)[a-z]*\b")
 P21_EST = re.compile(r"(?<![\w./])\d{3,4}\.\d{2}(?![\w/])")
 # v75 (arbitraje #23): fugas menores que P7 / P19 no veían en textos y comentarios
-P18B_EST = re.compile(r"(?:(?<=[−+])|(?<=[−+] ))\d+(?:[.,]\d+)?\s?%")                             # "−13 %" en un comentario
+P18B_EST = re.compile(r"(?:(?<=[−+])|(?<=[−+] ))\d+(?:[.,]\d+)?\s?%")                             # "<signo><n> %" en un comentario
 P23_EST = re.compile(r"(?<![\w/.-])[A-H]\d?K?-\d{1,2}[a-z]?(?![\w/.-])")          # id de wall "<type>-<n>[letra]"
 P24_EST = re.compile(r"\b(?:grid|line)\s+[A-Z](?:\d{1,2})?(?![\w/-])")               # grid / line con su letra real
 # lista de types reales "X1 / Y / Y1": al menos un type de una sola letra (los ids de regla D3 / A6 siempre llevan dígito)

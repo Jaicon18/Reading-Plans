@@ -14,28 +14,38 @@ import test_canon as T  # noqa: E402
 
 def test_ballistic_jogs_sin_walls_fantasma():
     """#15A modeló dos jogs del contorno ballistic como walls A1K de <n> ft: studs y dos faces de 5/8" de más.
-    v66: ballistic_jogs suma ballistic + 3/8" + las faces de 5/8" que diga el detalle, sin studs."""
+    v66: ballistic_jogs suma ballistic + 3/8" + las faces de 5/8" que diga el detalle, sin studs.
+    v76 (R76.3): el jog sale de las bandas de los dos walls K (hueco entre caras) y lleva su band."""
     d = T.base()
     d["details"]["4/A12.01"] = {"layers_per_face": 1, "k_panel": {"panel_to_ft": 8.0},
                                 "sealant": {"bottom_faces": 2, "top_faces": 2, "source": "4/A12.01"}}
-    d["walls"].append({"id": "K1", "tag": "A1K", "stud_size": "3-5/8\"", "oc_in": 24, "rows": 1, "length_ft": 3.5,
-                       "height_ft": 12.0, "detail": "4/A12.01", "source": "A02.01",
-                       "length_source": "A02.01 vector (sintético)",
-                       "faces": [{"room": "c", "board": "5/8 regular", "layers": 1, "height_ft": 12.0,
-                                  "k_customer": True}]})
-    d["nodes"] += [{"id": "k1a", "kind": "free", "wall": "K1"}, {"id": "k1b", "kind": "free", "wall": "K1"}]
-    d["constants"]["ballistic_contour_ft"] = {"value": 3.5, "source": "A02.01"}
+    for wid, c0, c1, lo, hi in (("K1", 100.0, 106.0, 200.0, 263.0), ("K2", 115.0, 121.0, 263.0, 290.0)):
+        d["walls"].append({"id": wid, "tag": "A1K", "stud_size": "3-5/8\"", "oc_in": 24, "rows": 1,
+                           "length_ft": round((hi - lo) / 18, 4), "height_ft": 12.0, "detail": "4/A12.01",
+                           "source": "A02.01", "length_source": "A02.01 vector (sintético)",
+                           "band": {"ori": "H", "c0": c0, "c1": c1, "lo": lo, "hi": hi, "sheet": "Z1.01"},
+                           "faces": [{"room": "c", "board": "5/8 regular", "layers": 1, "height_ft": 12.0,
+                                      "k_customer": True}]})
+        d["nodes"] += [{"id": wid + "a", "kind": "free", "wall": wid}, {"id": wid + "b", "kind": "free", "wall": wid}]
+    d["constants"]["ballistic_contour_ft"] = {"value": 5.0, "source": "A02.01"}
     d["ballistic_jogs"] = []
-    f0 = K.calcular(copy.deepcopy(d))["familias"]
-    d["ballistic_jogs"] = [{"ref": "jog SW", "length_ft": 0.5, "height_ft": 12.0, "detail": "4/A12.01",
-                            "faces_5_8": 1, "source": "A02.01"}]
+    T._falla(copy.deepcopy(d), "falta el jog")                       # R76.3: el step exige su jog
+    jog = {"ref": "jog SW", "length_ft": 0.5, "height_ft": 12.0, "detail": "4/A12.01", "faces_5_8": 1,
+           "source": "A02.01", "band": {"ori": "V", "c0": 260.0, "c1": 266.0, "lo": 106.0, "hi": 115.0,
+                                        "sheet": "Z1.01"}}
+    d["ballistic_jogs"] = [dict(jog)]
     T._falla(copy.deepcopy(d), "!= ballistic_contour_ft")        # el jog entra en el contorno
-    d["constants"]["ballistic_contour_ft"] = {"value": 4.0, "source": "A02.01"}
-    f1 = K.calcular(copy.deepcopy(d))["familias"]
-    assert abs(f1["ballistic panel"] - f0["ballistic panel"] - 0.5 * 8.0) < 0.01
-    assert abs(f1["3/8\" gyp board"] - f0["3/8\" gyp board"] - 0.5 * 4.0) < 0.01
-    assert abs(f1[K.F_GYP] - f0[K.F_GYP] - 0.5 * 12.0) < 0.01
-    assert f1[K.F_36] == f0[K.F_36]                                 # sin studs
+    d["constants"]["ballistic_contour_ft"] = {"value": 5.5, "source": "A02.01"}
+    K.calcular(copy.deepcopy(d))
+    fam = {"ballistic panel": 0.0, "3/8\" gyp board": 0.0, K.F_GYP: 0.0, K.F_36: 0.0}
+    K._ballistic_jogs(d, fam, [])
+    assert abs(fam["ballistic panel"] - 0.5 * 8.0) < 0.01
+    assert abs(fam["3/8\" gyp board"] - 0.5 * 4.0) < 0.01
+    assert abs(fam[K.F_GYP] - 0.5 * 12.0) < 0.01
+    assert fam[K.F_36] == 0.0                                       # sin studs
+    malo = copy.deepcopy(d)
+    malo["ballistic_jogs"][0]["band"]["lo"] = 100.0                 # cara exterior a cara: cruza el espesor de K1
+    T._falla(malo, "R76.3")
     malo = copy.deepcopy(d)
     del malo["ballistic_jogs"][0]["faces_5_8"]
     T._falla(malo, "faces_5_8")
@@ -49,7 +59,7 @@ def test_column_wrap_por_partes():
     3-5/8" METAL FRAMING + L exterior 6" CFMF), cada parte va a su familia con los studs dibujados."""
     d = T.base()
     s0 = K.calcular(copy.deepcopy(d))["familias"]
-    pier = {"id": "PIER-X", "tag": "PIER", "element": "column_wrap", "stud_size": "mixed", "oc_in": 16, "rows": 1,
+    pier = {"id": "PIER-X", "tag": "PIER", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "stud_size": "mixed", "oc_in": 16, "rows": 1,
             "length_ft": 6.0, "height_ft": 14.0, "source": "2/A09.25",
             "parts": [{"stud_size": "3-5/8\"", "studs_drawn": {"value": 4, "source": "2/A09.25"}},
                       {"stud_size": "6\"", "studs_drawn": {"value": 3, "source": "2/A09.25"}}]}

@@ -208,7 +208,7 @@ def _():
     A, o = _acc()
     ext, inte = _pier()
     ext["part_of"] = "PC"
-    col = {"id": "COL", "tag": "CANOPY-COL", "element": "column_wrap", "location": "exterior", "length_ft": 6.0,
+    col = {"id": "COL", "tag": "CANOPY-COL", "element": "column_wrap", "sheathing_none_reason": "sintético (v76 R76.2)", "location": "exterior", "length_ft": 6.0,
            "tag_ids": [], "band": {"ori": "BOX", "c0": 500, "c1": 520, "lo": 500, "hi": 520}}
     fac = H("E1", "EXT-6CFMF", 0, 8, 0, 360, 20.0, tags=(), location="exterior")
     data = canon([fac, ext, inte, col])

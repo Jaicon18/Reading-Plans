@@ -140,6 +140,7 @@ import inventario  # noqa: E402
 import accesorios  # noqa: E402   v67: familias de accesorios / extras
 import partition_types  # noqa: E402   v67: types de la hoja Partition Takeoff
 import chequeos_v75  # noqa: E402   v75: R75.5 / R75.6 / R75.7 (arbitraje #23)
+import chequeos_v76  # noqa: E402   v76: R76.1-R76.5 (arbitraje #24)
 
 EPS = 1e-6
 F_PAR = "6\" parapet stud"
@@ -162,10 +163,11 @@ PLY_NAMES = {
     "frt_3_4": "3/4\" FRT plywood",
 }
 PLY = {}                                           # material -> SF (se llena en calcular)
+POLY = [""]                                        # v76: espesor impreso del polyiso del nailbase (constants)
 # v73 (arbitraje #21, R73.3): renglón de compra por USO con el nombre de la plantilla del estimador (un renglón por
 # material, espesor y uso). `plywood_strips[].uso` lo declara; sin él se infiere del texto (pier / column / canopy).
 PLY_USO_NOMBRE = {
-    "nailbase": "Exterior sheathing {th} FRT plywood bonded to polyiso (nailbase)",
+    "nailbase": "Exterior sheathing {th} FRT plywood bonded to {poly} polyiso",   # v76: nombre de la plantilla
     "canopy_soffit": "{th} FRT plywood sheathing (canopy and soffits)",
     "column_wrap": "{th} FRT plywood at canopy column wraps",
     "pier": "{th} FRT plywood at storefront piers",
@@ -175,6 +177,8 @@ PLY_USOS = tuple(PLY_USO_NOMBRE)
 PLY_TH = {"nailbase_5_8_polyiso": "5/8", "frt_5_8_ext": "5/8", "frt_5_8": "5/8", "frt_3_4": "3/4"}
 PLY_USO = {}                                       # nombre de plantilla -> SF
 BLK_ORIGEN = {}                                    # v73: metal blocking por origen (edge del detalle / notas)
+BLK_MADERA = {}                                    # v76: blocking de madera no FRT (renglón propio)
+STUD_ELEM = {}                                     # v76: {familia: {renglón: LF}} (framed soffit en su renglón)
 SEAL = {}                                          # acoustical / exterior -> LF
 F_PLY = "FRT plywood (SF)"
 RX_MADERA = re.compile(r"\bFRTW?\b|F\.R\.T\.|FIRE[ -]?(TREATED|RETARDANT)|\b2X\b|\bWOOD\b|PLYWOOD", re.I)
@@ -189,8 +193,24 @@ def _ply(fam, mat, sf, uso="substrate"):
     fam[F_PLY] += sf
     PLY[mat] = PLY.get(mat, 0.0) + sf
     th = PLY_TH[mat]
-    n = PLY_USO_NOMBRE[uso].format(th=th + '"', tin=th)
+    if uso == "nailbase" and not POLY[0]:
+        raise ValueError("constants.nailbase_polyiso_in {value: '<espesor impreso>\"', source N/HOJA} obligatoria con "
+                         "nailbase (renglón 'Exterior sheathing ... bonded to <espesor> polyiso'; v76)")
+    n = PLY_USO_NOMBRE[uso].format(th=th + '"', tin=th, poly=POLY[0])
     PLY_USO[n] = PLY_USO.get(n, 0.0) + sf
+
+
+def _polyiso(data):
+    """v76 (arbitraje #24): el renglón del nailbase lleva el espesor IMPRESO del polyiso (nombre de la plantilla del
+    estimador): constants.nailbase_polyiso_in {value: '<n>"', source N/HOJA} obligatoria si hay nailbase."""
+    c = (data.get("constants") or {}).get("nailbase_polyiso_in")
+    if c is None:
+        return ""                                      # _ply falla si después hay nailbase
+    v = str(c.get("value") or "").strip() if isinstance(c, dict) else ""
+    if not v or not chequeos_v76.NHOJA.search(str(c.get("source") or "")):
+        raise ValueError("constants.nailbase_polyiso_in {value, source N/HOJA} (v76)")
+    v = re.sub(r"^(\d+)\s+(\d+/\d+)", r"\1-\2", v)            # 2 1/2" -> 2-1/2"
+    return v if v.endswith('"') else v + '"'
 
 
 def _uso_strip(s):
@@ -454,13 +474,17 @@ def generar(data):
                                              "structure_source", "structure", "pieces", "pieces_source",
                                              "piece", "sill_pieces", "sill_pieces_source", "continuous_run",
                                              "or_steel", "run_ends", "run_ends_source") if k in o}})
+    bordes = chequeos_v76.bordes_transicion(data, SUSP)      # v76 (R76.6): R73.16 hecha compuerta
     for c in data.get("ceilings") or []:
         if c.get("system") in SUSP:
             if c.get("perimeter_ft") is None:
                 raise ValueError(f"{c['room']}: ceiling {c['system']} sin perimeter_ft (ceiling_perimeter track, "
                                  f"#12B -<n>)")
+            chequeos_v76.r76_6_perimetro(c)
+            resta = bordes.get(str(c["room"]), 0.0)
             runs.append({"id": "CP:" + str(c["room"]), "element": "ceiling_perimeter", "orientation": "horizontal",
-                         "length_ft": float(c["perimeter_ft"]), "source": _src(c, c["room"])})
+                         "length_ft": round(float(c["perimeter_ft"]) - resta, 4), "source": _src(c, c["room"])
+                         + (f" (perímetro {c['perimeter_ft']} - transiciones {round(resta, 3)}, R76.6)" if resta else "")})
     for r in runs_extra:
         rr = dict(r)
         for k in ("line", "from_ft", "to_ft"):
@@ -718,11 +742,12 @@ facade chase length_ft length_source length_status length_printed_ft length_prin
 length_basis length_op height_ft height_source height_status height_op height_avg_ft zones zones_source zone
 to_deck to_deck_source stops_under_beam canopy_beam break_reason stud_size stud_source stud_size_source
 stud_size_status gauge gauge_source stud_gauge oc_in oc_source rows rows_source purlin purlin_source purlin_note
-detail detail_source faces faces_ft faces_ft_source faces_note faces_none_reason fos_chain parts kickers
+detail detail_source faces faces_ft faces_ft_source faces_note faces_none_reason fos_chain fos_chain_faces parts kickers
 vertical_studs edges drop_line soffit_of openings track_lines track_lines_source wall_line_ft bulkhead_of
 bottom_track_lf head_build exterior in_cavity in_cavity_source source source_chain status notes note tag_ids
 tags_descartados band_length_ok_reason img evidence_png type_source type_status default_type_source adjacent_to
-adjacent_source wet_fixtures k_customer studs_drawn hatch_extent dim_scan
+adjacent_source wet_fixtures k_customer studs_drawn hatch_extent dim_scan sheathing edge_of
+beam_override part_of same_box_ok opening_ref type_change_rfi anchorage orientation sheets_searched
 """.split())
 TRAZA_SUFIJOS = ("_info", "_note", "_notes", "_check", "_source", "_status", "_img", "_reason", "_basis", "_desc",
                  "_op")
@@ -834,6 +859,8 @@ def _r70_6(walls):
                     if f.get("board") and float(f.get("height_ft") or 0) > 0
                     and not RX_CARA_EXT.search(str(f.get("room") or "")))
         L = float(w["length_ft"])
+        if inter > EPS and all(f.get("length_ft") is not None for f in w.get("faces") or [] if f.get("board")):
+            continue          # v76 (R76.5): partition_types toma el LF del type de las caras interiores con board
         if abs(L - perim) <= 0.02 and inter < perim - 0.02:
             raise ValueError(f"{w['id']}: {w['element']} {w.get('tag')} con parts: length_ft {L} = perímetro completo de "
                              f"la caja {round(perim, 3)} (incluye la parte exterior) — R70.6: el LF del type interior = "
@@ -1170,6 +1197,23 @@ def _column_wraps(data, fam, filas):
         elif w.get("faces_ft"):
             fs = [float(x) for x in w["faces_ft"]]
             fc = w.get("fos_chain")                   # v67: face = cadena FOS impresa COMPLETA (todos los eslabones)
+            fcf = w.get("fos_chain_faces")            # v76: caja parcial = una cadena (o medida en vector) POR cara
+            if fcf is not None:
+                if fc is not None:
+                    raise ValueError(f"{w['id']}: fos_chain y fos_chain_faces a la vez (una u otra; v76)")
+                if not isinstance(fcf, list) or len(fcf) != len(fs):
+                    raise ValueError(f"{w['id']}: fos_chain_faces debe tener una entrada por face de faces_ft ({len(fs)})")
+                for i_, (f_, e_) in enumerate(zip(fs, fcf)):
+                    if not isinstance(e_, dict) or not str(e_.get("source") or "").strip():
+                        raise ValueError(f"{w['id']}.fos_chain_faces[{i_}]: {{value: [eslabones] | measured_op, source}}")
+                    if e_.get("value") is not None:
+                        cad = sum(float(x) for x in e_["value"])
+                        if abs(cad - f_) > 0.02:
+                            raise ValueError(f"{w['id']}.fos_chain_faces[{i_}]: face {f_} != Σ cadena {round(cad, 3)} "
+                                             f"({e_['source']}; v76)")
+                    elif not str(e_.get("measured_op") or "").strip():
+                        raise ValueError(f"{w['id']}.fos_chain_faces[{i_}]: sin cadena impresa -> measured_op (vector) "
+                                         f"+ source (v76)")
             if fc is not None:
                 if not isinstance(fc, dict) or not str(fc.get("source") or "").strip():
                     raise ValueError(f"{w['id']}: fos_chain {{value: [eslabones ft], source}}")
@@ -1287,6 +1331,10 @@ def _ceilings(data, fam, filas):
             else:
                 fam[F_GYP] += area
                 bd = f"board {area} SF"
+                det_ = str((c.get("system_callout") or {}).get("detail") or c.get("detail") or "").strip()
+                nom_ = f"3-5/8\" stud, framed soffit {det_} (LF)".replace("  ", " ")   # v76: renglón propio
+                STUD_ELEM.setdefault(F_36, {})
+                STUD_ELEM[F_36][nom_] = STUD_ELEM[F_36].get(nom_, 0.0) + joist
             filas.append({"familia": "ceilings", "room": c["room"], "source": src,
                           "operacion": f"{sysm}: {_op_joists(cuenta, f_oc, n_f, lf_, joist)} LF 3-5/8\" joists; "
                                        f"sin carrying ni hangers; {bd}"})
@@ -1414,6 +1462,44 @@ def _fascia_sheathing(data, fam, filas):
         filas.append({"familia": "FRT plywood (SF)", "ref": w["id"], "source": hs, "material": "frt_5_8_ext",
                       "operacion": f"fascia_box sheathing {w['length_ft']} x {w['height_ft']} = {round(sf, 2)} SF "
                                    f"(5/8\" ext. grade FRT plywood, 7/A09.26)"})
+
+
+def _column_wrap_sheathing(data, fam, filas):
+    """v76 (R76.2): sheathing de column wrap / pier sin board = Σ faces_ft x alto (lo declara walls[].sheathing)."""
+    for w, mat, sf, op in chequeos_v76.sheathing_column_wraps(data):
+        _ply(fam, mat, sf, "column_wrap")
+        filas.append({"familia": F_PLY, "ref": w["id"], "source": w["sheathing"]["source"], "material": mat,
+                      "operacion": f"column_wrap sheathing {op} (R76.2)"})
+
+
+def _opening_substrate(data, fam, filas):
+    """v76 (R76.4): strip de substrate en head / jambs (/ sill) de aberturas exteriores con label de plywood.
+    Bordes: storefront = R.O. + jambs contra wall x head (en un pier el plywood es otra decisión); ventana / door /
+    ATM = R.O. + 2 x (head - sill) + R.O. si substrate.sill true. SF = bordes x opening_substrate_width_ft."""
+    ops = [op for op in chequeos_v76.aberturas_ext(data, accesorios.es_exterior)
+           if isinstance(op.get("substrate"), dict) and chequeos_v76.RX_PLY.search(str(op["substrate"]["label"]))]
+    if not ops:
+        return
+    wd = data["constants"]["opening_substrate_width_ft"]
+    for op in ops:
+        sb = op["substrate"]
+        mat = sb.get("material")
+        if mat not in PLY_NAMES:
+            raise ValueError(f"{op.get('ref')}: substrate.material {mat!r} fuera de {sorted(PLY_NAMES)} (R76.4)")
+        ro = float(op["ro_w_ft"])
+        if str(op.get("kind")) == "storefront":
+            nj = accesorios._wall_jambs(op) if op.get("jambs") is not None else 0
+            e = ro + nj * float(op["head_ft"])
+            op_t = f"R.O. {ro} + {nj} jamb(s) contra wall x {op['head_ft']}"
+        else:
+            hj = float(op["head_ft"]) - float(op.get("sill_ft", 0) or 0)
+            e = ro + 2 * hj + (ro if sb.get("sill") else 0.0)
+            op_t = f"R.O. {ro} + 2 x {round(hj, 4)}" + (f" + sill {ro}" if sb.get("sill") else "")
+        sf = e * float(wd["value"])
+        _ply(fam, mat, sf, "substrate")
+        filas.append({"familia": F_PLY, "ref": f"{op.get('ref')} substrate", "source": sb["source"], "material": mat,
+                      "operacion": f"opening substrate ({op_t}) = {round(e, 3)} LF x {wd['value']} = {round(sf, 2)} SF "
+                                   f"(R76.4)"})
 
 
 def _perim_neto(t):
@@ -1556,12 +1642,26 @@ def _parapets_blocking(data, fam, filas, avisos):
             avisos.append(f"{it['ref']}: {it['width_in']}\" <= stud bay {bay}\" sin rótulo -> sin blocking "
                           f"(anclaje a stud)")
             continue
+        if mat not in ("metal", "FRT", "wood"):
+            raise ValueError(f"{it['ref']}: blocking material metal | FRT | wood (v76: wood = 2X / WOOD sin rótulo FRT)")
         if mat == "FRT" and not RX_MADERA.search(lab):
             raise ValueError(f"{it['ref']}: FRT blocking solo donde el detalle lo rotula (label FRT / FRTW / 2X / WOOD / "
                              f"PLYWOOD) — 'PROVIDE BLOCKING' a secas = metal (58.6, v68)")
-        k = "FRT blocking" if mat == "FRT" else "metal stud blocking (362CR / STUD BLOCKING)"
+        # v76 (arbitraje #24): madera rotulada 2X / WOOD SIN FRT en el rótulo = material wood (su renglón), salvo
+        # frt_basis {source N/HOJA} (la nota que hace FRT toda la madera). Nunca se escribe "FRT" en otro campo para
+        # que pase un chequeo (regla inviolable 0.R76).
+        if mat == "FRT" and not RX_FRT_LABEL.search(lab) and re.search(r"\b2X\b|\bWOOD\b", lab, re.I):
+            fb = it.get("frt_basis")
+            if not isinstance(fb, dict) or not chequeos_v76.NHOJA.search(str(fb.get("source") or "")):
+                raise ValueError(f"{it['ref']}: rótulo '{lab}' sin FRT -> material wood (renglón propio) o frt_basis "
+                                 f"{{source N/HOJA}} con la nota que hace FRT toda la madera (v76)")
+        if mat == "wood" and (RX_FRT_LABEL.search(lab) or not re.search(r"\b2X\b|\bWOOD\b", lab, re.I)):
+            raise ValueError(f"{it['ref']}: material wood = rótulo 2X / WOOD sin FRT (rótulo '{lab}')")
+        k = "FRT blocking" if mat in ("FRT", "wood") else "metal stud blocking (362CR / STUD BLOCKING)"
         fam[k] += float(it["lf"])
-        if mat != "FRT":
+        if mat == "wood":
+            BLK_MADERA["wood"] = BLK_MADERA.get("wood", 0.0) + float(it["lf"])
+        if mat == "metal":
             BLK_ORIGEN["items"] = BLK_ORIGEN.get("items", 0.0) + float(it["lf"])
         filas.append({"familia": k, "ref": it["ref"], "source": src, "operacion": f"{it['lf']} LF"})
     for s in data.get("plywood_strips") or []:
@@ -1633,6 +1733,9 @@ def calcular(data, outdir=None, fo=None):
     PLY.clear()
     PLY_USO.clear()
     BLK_ORIGEN.clear()
+    STUD_ELEM.clear()
+    BLK_MADERA.clear()
+    POLY[0] = _polyiso(data)
     SEAL.clear()
     studs_in, board_in, corr_in, hdr_in, avisos = generar(data)
     avisos += av70
@@ -1685,6 +1788,9 @@ def calcular(data, outdir=None, fo=None):
     _parapets_blocking(data, fam, filas, avisos)
     _trim(data, fam, filas)
     _fascia_sheathing(data, fam, filas)
+    chequeos_v76.verificar(data, accesorios.es_exterior)   # v76: R76.1-R76.5 (después de las compuertas previas)
+    _column_wrap_sheathing(data, fam, filas)            # v76 R76.2
+    _opening_substrate(data, fam, filas)                # v76 R76.4
     _tile_base(data, fam, filas)
     _frp(data, fam, filas)
     _sealant(data, fam, filas)
@@ -1700,6 +1806,9 @@ def calcular(data, outdir=None, fo=None):
     out["frt_plywood_by_material"] = {k: round(v, 2) for k, v in PLY_USO.items() if v > EPS}
     # v73 (R73.3): contexto para los nombres de la plantilla y metal blocking por origen (edge vs notas)
     out["metal_blocking_by_origin"] = {k: round(v, 2) for k, v in BLK_ORIGEN.items() if v > EPS}
+    # v76: renglones de stud por elemento (framed soffit) dentro de su familia; plantilla_excel los separa
+    out["wood_blocking_lf"] = round(BLK_MADERA.get("wood", 0.0), 2)   # v76: dentro de "FRT blocking", renglón aparte
+    out["stud_by_element"] = {f: {n: round(v, 2) for n, v in d.items() if v > EPS} for f, d in STUD_ELEM.items()}
     th = ""
     for d_ in (data.get("details") or {}).values():
         if isinstance(d_, dict) and isinstance(d_.get("k_panel"), dict):
