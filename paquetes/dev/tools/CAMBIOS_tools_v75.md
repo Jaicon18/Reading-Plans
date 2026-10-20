@@ -11,3 +11,4 @@
   sill_return.
 - test_ciego_tools.py: P23 / P24 / P25 (estricto).
 - inventario.py, studs_nodos.py, dataset.py: textos genéricos.
+- v75b: textos genéricos (canon.py, familias.py, partition_types.py, inventario.py, README_etapas.md); test_ciego_tools P25 con comas y P18 con signo en comentarios.

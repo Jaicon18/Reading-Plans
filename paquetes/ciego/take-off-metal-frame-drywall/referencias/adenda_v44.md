@@ -58,7 +58,7 @@ cleats de runs. **Habría empeorado el take-off y habría inflado el bid.**
    proyecto con el A5 #n —leer el campo que NOMBRA en vez del que CUANTIFICA— disfrazado
    de otra cosa: ahora era leer la clave en vez del texto.
 2. **El roll-up no leía todos los archivos.** Sólo `$TAKEOFF_WORK/*_cierres.json`. Los
-   cierres por wall de A1, A5, B, B<n>, B<n>K y C<n> viven en `/mnt/user-data/outputs/**`. No
+   cierres por wall de cada type viven en `/mnt/user-data/outputs/**`. No
    son [valor retirado E24] renglones y [valor retirado E24] LF: son **[valor retirado E24] renglones y [valor retirado E24] LF**.
 
 > Un inventario que no declara su alcance no es un inventario, es una muestra.

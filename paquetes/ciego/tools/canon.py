@@ -214,7 +214,7 @@ TRACK_HEADS = ("roof_step", "vestibule_head", "fascia_box", "ceiling_bulkhead", 
 TRACK_NOMBRES = {   # v73 (R73.3): renglones de track de la plantilla del estimador
     "parapet": ("Parapet bottom track", "Parapet top track"),
     # v75 (R75.1, arbitraje #23): el nombre de un renglón de track nunca lleva "ceiling" ni "soffit": el calificador y el
-    # estimador lo leerían como track de ceilings (#23A / #23B: el renglón de heads caía en esa familia, bottom/top −13 %)
+    # estimador lo leerían como track de ceilings (en dos pruebas ciegas el renglón de heads caía en esa familia y bottom / top quedaba baja)
     "heads": ("Bottom track - roof step and heads (vestibule / bulkhead)",
               "Top track - roof step and heads (vestibule / bulkhead)"),
     "size": ("Bottom track {sz}", "Top / deflection track {sz}"),

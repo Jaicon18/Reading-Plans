@@ -43,7 +43,7 @@ ELEMENTOS_BANDA = ("wall", "pier", "storefront_cripples", "door_bulkhead", "colu
 PURLIN_ELEMS = ("wall", "door_bulkhead", "vestibule_head", "roof_step", "chase",
                 "ceiling_transition", "ceiling_bulkhead")   # v66: track a deck de transiciones / bulkheads (10/A09.33)
 MR_FIXTURES = ("water_closet", "lavatory", "urinal", "mop_sink", "shower")    # F/A08.01 + 53.x
-TOL_FT = 0.15          # largo banda vs canon: TOL_FT + 1 %
+TOL_FT = 0.15          # largo banda vs canon: TOL_FT más el 1 % del largo
 JUNTA_FT = 0.10        # holgura de junta permitida más allá del espesor del wall que recibe
 PARALELO_FT = 0.25     # dos walls paralelos a menos de esto y corriendo juntos = el mismo framing
 

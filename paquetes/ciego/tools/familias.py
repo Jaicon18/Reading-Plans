@@ -112,7 +112,7 @@ FAMILIAS = [
 # nunca es gyp board; un framed opening nunca es una familia de stud (va a "framed openings MEP").
 _FO = r"framed opening"
 # v75 (R75.1, arbitraje #23): "Bottom / Top track - ... (vestibule / soffit)" caía en el track de ceilings (primera familia
-# que casa) y la familia bottom / top quedaba −13 %. Un renglón que EMPIEZA con bottom / top es de su familia.
+# que casa) y la familia bottom / top quedaba baja. Un renglón que EMPIEZA con bottom / top es de su familia.
 EXCLUYE = {"sill track": r"plywood|liner", "header / box beam": r"plywood|liner",
            "track de ceilings / soffits": r"^\s*(bottom|top)\b",
            "5/8\" gyp board regular (walls + ceilings)": r"plywood|nailbase",

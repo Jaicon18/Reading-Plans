@@ -3,7 +3,8 @@
 Origen: dos pruebas ciegas limpias del mismo set. Lo que más puntos quitaba no era una cantidad mal medida sino una
 CLASIFICACIÓN: un renglón de track con "soffit" en el nombre caía en la familia de track de ceilings. Las demás
 diferencias venían de reglas escritas en el SKILL sin compuerta en una tool (R73.10, R73.11, R73.17). Cada cambio es
-genérico (ningún número, wall ni room de un proyecto) y tiene test con datos sintéticos (test_v75.py).
+genérico (ningún número, wall ni room de un proyecto) y tiene test con datos sintéticos (test_v75.py). Los tests y
+fixtures viven solo en el paquete dev; el paquete ciego lleva test_smoke_ciego.py y los checkers de ciego.
 
 ## Track (R75.1 / R75.2)
 - canon.py: renglones de track de roof step / heads sin "ceiling" ni "soffit" en el nombre; compuerta
@@ -35,4 +36,10 @@ genérico (ningún número, wall ni room de un proyecto) y tiene test con datos 
 - extra framing ATM; header / box beam; 3/4" FRT plywood en piers; sill track.
 
 ## Sin cambio (decisiones del usuario)
-- 3-5/8" stud, A1, G, G1, B2K y Exterior 6" CFMF de las pruebas: aceptados. MEP fuera de calificación.
+- Varias familias y types de las pruebas aceptados por el estimador. MEP fuera de calificación.
+
+## v75b (auditoría de ceguera del zip ciego)
+- Comentarios de canon.py / familias.py sin porcentaje de resultado; CAMBIOS sin la lista de types aceptados;
+  partition_types.py, README_etapas.md y una adenda con types sintéticos o genéricos.
+- test_ciego_tools.py --estricto: P25 también con listas separadas por comas; P18 en comentarios de tools
+  (porcentaje con signo = resultado de una corrida). Sin cambio de lógica de cálculo.

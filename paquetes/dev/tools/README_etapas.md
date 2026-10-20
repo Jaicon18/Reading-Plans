@@ -107,7 +107,7 @@ los sufijos `_info`, `_note`, `_check`, `_source`, `_status`… marcan traza que
 - Types del schedule: hace falta un título "PARTITION [TYPE] …" / "WALL TYPE …" o una hoja de schedule cuyo
   título diga PARTITION / WALL TYPE. Si el schedule es raster o no tiene esos rótulos, no hay types y el
   inventario lo avisa.
-- Tags de una sola letra (B, G, F…) se parecen a grid bubbles y letras de sellos: solo cuentan si el tamaño de
+- Tags de una sola letra (X, Y, Z…) se parecen a grid bubbles y letras de sellos: solo cuentan si el tamaño de
   letra y el radio del símbolo coinciden con los tags de varios caracteres de ESA hoja; si no, van a ambiguos.
 - Dos tags iguales encimados (dos tags del mismo type a menos de un símbolo) se cuentan los dos y se marcan "SUPERPUESTO":
   ¿duplicado o dos walls? lo decide el estimador.

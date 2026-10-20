@@ -8,7 +8,7 @@ nombraba los types no-partition a su manera (EXT / PARAPET / BULK / CANOPY / RS 
 
 REGLA
  1. Type de cada elemento del canon:
-      element wall, tag interior          -> el tag del plano (A1, A1K, B2, C1, G, G1 ...)
+      element wall, tag interior          -> el tag del plano (X1, X1K, Y2, Z1 ...)
       element wall / pier exterior (EXT*) -> "EXT-<stud>CFMF"   (6" -> EXT-6CFMF)
       element parapet                     -> "EXT-PARAPET"
       element door_bulkhead               -> "BULKHEAD-<tag del wall que interrumpe>" (G -> BULKHEAD-G)
