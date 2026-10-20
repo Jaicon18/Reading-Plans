@@ -24,8 +24,8 @@ ENTRADA (JSON):
       {"id": "N3", "kind": "X", "walls": ["W1", "W2"]},               # +2 al primero
       {"id": "N4", "kind": "free", "wall": "W42"},                    # extremo libre: 0 (ya está en el +1)
       {"id": "N5", "kind": "vendor_end", "wall": "W42"},              # office front 10/A12.01: +1 TOTAL (no x rows)
-      {"id": "N6", "kind": "split", "walls": ["A5-1a", "A5-1b"],      # v61: UN wall continuo partido en 2 registros
-       "why": "cambio de altura en grid B"},                          #   (grid, altura): -1 x rows al segundo
+      {"id": "N6", "kind": "split", "walls": ["X1-1a", "X1-1b"],      # v61: UN wall continuo partido en 2 registros
+       "why": "cambio de altura en un grid"},                         #   (grid, altura): -1 x rows al segundo
       {"id": "N7", "kind": "abut", "wall": "W36", "into": "W43",       # v61: extremo contra un wall cuyo stud de
        "source": "10/A12.01"}                                          #   cierre YA está contado: 0
   ]

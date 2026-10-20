@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 20-oct-2026 (v74). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 20-oct-2026 (v75). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
 planos: `python3 tools/correr_suite.py` (instala dependencias si faltan, arma la estructura en carpeta limpia y corre
@@ -599,8 +599,8 @@ externa de examen que NO viaja en el paquete).
 
 ## 21. Reglas v74 (estudio de partición: wall por wall contra la lista del estimador, dos lecturas)
 
-Origen: dos lecturas del mismo plano daban walls por type distintos a la lista del estimador en A1 / G / G1 (y una
-sacaba un exterior de más). Se alinearon los walls de la lista con los segmentos de cada canon, uno por uno; cada
+Origen: dos lecturas del mismo plano daban un número de walls por type distinto al de la lista del estimador en
+varios types (y una sacaba un wall exterior de más). Se alinearon los walls de la lista con los segmentos de cada canon, uno por uno; cada
 diferencia de CONTEO se explicó con una de estas reglas genéricas (ningún número, conteo ni wall de un proyecto).
 Las diferencias de LF que quedan son de lectura (cota, cara, esquina) y van como RFI con delta, no como regla.
 Tools: `particion.py` (modo "eje") y `partition_types.py` dan lo mismo (test_particion_v74.py); `inventario.py`
@@ -618,6 +618,29 @@ avisa R74.1 / R74.5 para que la lectura corrija el canon.
 Lo que NO se convirtió en regla (queda RFI con delta en cada take-off): esquina L entre types distintos medida libre
 entre caras (sin dueño) contra R70.2 (un dueño); fin de un wall K en la caja del hatch contra el jog; door que la
 lista descuenta contra R70.3 (va dentro del wall).
+
+## 22. Reglas v75 (arbitraje de dos pruebas ciegas: clasificación del track, jamb return por borde, cambios de type)
+
+Origen: dos pruebas ciegas limpias. El track salía bien en total pero un renglón caía en la familia equivocada por
+una palabra de su nombre; el jamb return variaba entre corridas porque el sill se asumía y un storefront no se
+declaraba; tres types quedaban CERCA por dónde se cortaba el type (jamb contra nodo), quién era dueño de una esquina
+de alcove y desde qué cara se medía un return. Cada una es compuerta: canon.py no termina si no se cumple.
+
+| Regla | Texto | Dónde |
+|---|---|---|
+| R75.1 | El nombre de un renglón de track nunca lleva "ceiling" ni "soffit" salvo el track de ceilings: el calificador y el estimador clasifican por el nombre. Todo renglón de `track_by_element` cae en SU familia (bottom / top) con familias.py; un renglón que empieza con "Bottom" / "Top" nunca es track de ceilings. | canon.py `verificar_track_nombres`; familias.py |
+| R75.2 | "Bottom / Top track {size}" = track de los walls de la Partition Takeoff (con tag o sin tag: alcove, stub) + elementos que son fila de un type (column wrap, bulkhead, pier de un type). Un ELEMENTO que no es fila de la Partition Takeoff (cripples, grille head, parte de pier sin type) va al renglón "other framing" por elemento; roof step / heads a su renglón. La suma sigue siendo la familia. | canon.py `track_by_element(…, pt)` |
+| R75.3 | Jamb return por BORDE con su texto impreso: abertura con return declara `jamb_return_label` (lo que rotula el detalle) y suma solo si dice gypsum / GYP / GWB; "LINE OF JAMB RETURN BEYOND" sin gypsum no basta (frame sobre FRT plywood = false con la cita). Con sill, `sill_return` true / false + `sill_return_source` es obligatorio (brake metal / solid sill / FRT plywood = false); true lleva `sill_return_label` con gypsum. Nunca se asume. | accesorios.py `_sill_return`, `_label_gyp` |
+| R75.4 | Framing de storefront (`storefront_cripples`) implica su abertura: cada uno se empareja con un storefront declarado (`opening_ref` o el mismo ancho dentro de la tolerancia de cota) con su jamb return; si no, el storefront no se barrió. | accesorios.py `_storefront_de_cripples` |
+| R75.5 | R73.10 hecha compuerta: dos walls de type distinto en la misma banda que se tocan cambian de type en un nodo dibujado (cara de un wall perpendicular que llega a la línea); en un jamb o a mitad de door es error salvo `type_change_rfi {alternativas, delta_lf, source}`. La door queda dentro del wall cuyo tag la comparte en la línea. | chequeos_v75.py `verificar_r75_5` |
+| R75.6 | Un alcove (R74.3) nunca es dueño de la esquina con el wall de su línea: sus lados terminan en la cara de ese wall y el wall de la línea llega a la cara exterior del alcove. | chequeos_v75.py `alcove_con_esquina` |
+| R75.7 | Return corto (≤ 2 ft) que sale de un tramo largo del mismo wall con tag se mide desde la cara EXTERIOR del tramo (= la cota impresa del return, de cara a cara del contorno); medirlo desde la cara interior le quita un espesor por return. Si el plano lo acota distinto: `return_basis {value: "inner_face", source}`. Un box chico (todos sus tramos ≤ 2 ft) no aplica. | chequeos_v75.py `returns_sin_esquina` |
+
+Pendiente del estimador (NO se decide en la corrida; cada respuesta entra en un solo lugar): extra framing ATM en
+`atm_recess {width_ft, sistered_h_ft, furring_rows}` del canon (accesorios.py); header / box beam en el largo del CONT.
+BOX BEAM y su bearing (headers.py, `header_por_pieza`); 3/4" FRT plywood en piers en el uso "pier" del strip (canon.py
+`_uso_strip`); sill track en el double sill track por ancho de abertura (headers.py, `with_sill`). Mientras no haya
+respuesta, cada una sale con el criterio vigente y su RFI con delta.
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 

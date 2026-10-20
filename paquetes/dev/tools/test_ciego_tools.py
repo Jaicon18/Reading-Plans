@@ -88,6 +88,11 @@ P19_EST = re.compile(r"\b[A-Z]{1,8}\d{2,}_[A-Za-z]\w*|\bUU\d+\b|\b[A-H]\d?K?\s+a
 P20_EST = re.compile(r"(?i)\b(?:19|20)\d{2}-\d{2}-\d{2}\b|\b\d{1,2}/\d{1,2}/(?:19|20)\d{2}\b"
                      r"|\b\d{1,2}-(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic|jan|apr|aug|dec)[a-z]*\b")
 P21_EST = re.compile(r"(?<![\w./])\d{3,4}\.\d{2}(?![\w/])")
+# v75 (arbitraje #23): fugas menores que P7 / P19 no veían en textos y comentarios
+P23_EST = re.compile(r"(?<![\w/.-])[A-H]\d?K?-\d{1,2}[a-z]?(?![\w/.-])")          # id de wall "<type>-<n>[letra]"
+P24_EST = re.compile(r"\b(?:grid|line)\s+[A-Z](?:\d{1,2})?(?![\w/-])")               # grid / line con su letra real
+# lista de types reales "X1 / Y / Y1": al menos un type de una sola letra (los ids de regla D3 / A6 siempre llevan dígito)
+P25_EST = re.compile(r"(?<![\w/])[A-H]\d?K?(?:\s+/\s+[A-H]\d?K?){2,}(?![\w/.])")
 P22_EST = re.compile(r"\b\d{1,2}/[A-Z]{1,2}-?\d{1,3}\.\d{1,3}`?\s+(?:@\s+|[A-Z][A-Z0-9/&.,'()-]+\s+){2,}"
                      r"(?:@\s+)?[A-Z][A-Z0-9/&.,'()-]+")
 OK_FABRICANTE = re.compile(r"(?i)AISC|GA-216|ASTM|manufacturer|fabricante|SSMA|UL ?\d")
@@ -99,6 +104,8 @@ def _exento_estricto(et, ln, m):
     """Excepciones GENÉRICAS del modo estricto: número de regla, medida en grilla de 1/8" (constante del oficio) y
     umbral ("~40 hojas", "más de 40 hojas")."""
     t = m.group(0).strip()
+    if et.startswith("P25"):                     # v75: sin un type de una sola letra es una lista de ids de regla
+        return not any(re.fullmatch(r"[A-H]K?", x.strip()) for x in t.split("/"))
     if et.startswith("P16"):
         if _REGLA_ID.match(t) or ln[max(0, m.start() - 6):m.start()].upper().endswith("REGLA "):
             return True
@@ -300,6 +307,10 @@ def autoprueba():
                 + b[1] + "/" + c + "/20" + b],
         "P21": ["burbuja en " + a + b + "." + c + " pt"],
         "P22": ["ver `" + b[0] + "/A" + c + ".0" + b[1] + " TYPICAL BULKHEAD TRANSITION DETAIL` arriba"],
+        "P23": ["mismo framing (#" + b + "B " + "E" + "-" + c[0] + " sobre el jog)", "walls " + "D" + b[0] + "-" + b[1] + "a / "
+                + "D" + b[0] + "-" + b[1] + "b"],
+        "P24": ["cambio de altura en " + "grid " + "Q", "sobre el jog de " + "line " + "K" + b[0]],
+        "P25": ["daban walls distintos en " + "C" + b[0] + " / " + "E" + " / " + "E" + b[0] + " (y otra cosa)"],
     }
     buenos = ["cada tag en su wall; la compuerta revisa contra el plano",           # P17
               "margen del 5% en B; dentro de 0.5 %; tolerancia ± 2 %; en 0%",      # P18
@@ -307,7 +318,9 @@ def autoprueba():
               "versión v74 del protocolo; ver regla R74.2 y REGLA 55.7",            # P20
               "a 1/4\"=1'-0\" son 18 pt/ft; 5/8\" = 11.25 pt; hoja A12.01; REGLA 56.10",    # P21
               "cita 7/A09.26 y 5/S5.20; detalle `N/HOJA <título del detalle>`; 5/8\" GYP. BD. @ 16\" O.C.",  # P22
-              "LA COMPUERTA: verif_caras.py (paso 12 de 17); hasta 3 de 5 casos"]
+              "LA COMPUERTA: verif_caras.py (paso 12 de 17); hasta 3 de 5 casos",
+              "walls X1-1a / X1-1b sintéticos; R73.10 y R-1; grid de la hoja; la línea del wall; S5-20",  # P23/P24
+              "los types de la lista (X1 / Y / Y1 sintéticos); 5/8\" / 3/4\" FRT; reglas D3 / D4 / A6; G/G1 de una regla; eje Y tags"]
     ESTRICTO[0], previo = True, ESTRICTO[0]
     try:
         for et, muestras in malos.items():
@@ -319,7 +332,7 @@ def autoprueba():
             assert h == [], (s, h)
     finally:
         ESTRICTO[0] = previo
-    return ("autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, P17–P22 estrictos, "
+    return ("autoprueba OK (4/4 líneas malas detectadas, P6/P7/P8 en literales, P17–P25 estrictos, "
             "0 falsos positivos)")
 
 
@@ -335,7 +348,9 @@ def revisar_md(texto, nombre="<md>"):
                     ("P13 nombre con prefijo de proyecto", P13_EST), ("P14 conteo del set", P14_EST),
                     ("P15 coordenada", P15_EST), ("P17 conteo de una corrida", P17_EST),
                     ("P19 nombre / id / ángulo del set", P19_EST), ("P21 coordenada pt", P21_EST),
-                    ("P22 título de detalle junto a su cita", P22_EST)]
+                    ("P22 título de detalle junto a su cita", P22_EST),
+                    ("P23 id de wall del set", P23_EST), ("P24 grid / línea del set", P24_EST),
+                    ("P25 lista de types del set", P25_EST)]
             if "adenda_v" in nombre:
                 pats.append(("P18 porcentaje de resultado", P18_EST))
             if "referencias" in nombre:

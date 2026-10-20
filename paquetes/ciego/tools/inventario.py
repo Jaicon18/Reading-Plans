@@ -124,7 +124,7 @@ def _solapes(bandas, scale):
                     raise ValueError(f"{w1['id']}/{w2['id']}: adjacent_to sin adjacent_source (detalle del tipo)")
                 if not adj and gap <= par and largo > junta + 0.4 * scale:
                     raise ValueError(f"{w1['id']} y {w2['id']}: corren uno junto al otro {round(largo / scale, 2)} ft "
-                                     f"(mismo framing contado dos veces — #13B G-4 sobre el jog de line J)")
+                                     f"(mismo framing contado dos veces: un wall sobre el jog de otro)")
                 continue
             if ix1 <= ix0 or iy1 <= iy0:
                 continue

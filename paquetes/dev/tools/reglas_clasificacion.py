@@ -164,6 +164,9 @@ POR_ID = {
     # v74 (estudio de partición): reglas de la tool de partición, con test sintético por regla
     "R74.1": A("A_VIGENCIA"), "R74.2": A("A_VIGENCIA"), "R74.3": A("A_VIGENCIA"), "R74.4": A("A_VIGENCIA"),
     "R74.5": A("A_VIGENCIA", "A_R72_3"), "R74.6": A("A_VIGENCIA"),
+    # v75 (arbitraje #23): compuertas en canon.py / accesorios.py / chequeos_v75.py (ValueError si no se cumplen)
+    "R75.1": A("A_VIGENCIA"), "R75.2": A("A_VIGENCIA"), "R75.3": A("A_VIGENCIA"), "R75.4": A("A_VIGENCIA"),
+    "R75.5": A("A_VIGENCIA"), "R75.6": A("A_VIGENCIA"), "R75.7": A("A_VIGENCIA"),
     # adendas del SKILL
     "REGLA 48.1": C("anulada por el paquete autocontenido (CAMBIOS_v72: el zip trae TODAS las tools; una prueba baja "
                     "solo el zip) — la regla de fondo (una sola fuente de tools) sigue en E24 / A_CIEGO + test_reglas"),

@@ -139,6 +139,7 @@ import studs_nodos  # noqa: E402
 import inventario  # noqa: E402
 import accesorios  # noqa: E402   v67: familias de accesorios / extras
 import partition_types  # noqa: E402   v67: types de la hoja Partition Takeoff
+import chequeos_v75  # noqa: E402   v75: R75.5 / R75.6 / R75.7 (arbitraje #23)
 
 EPS = 1e-6
 F_PAR = "6\" parapet stud"
@@ -212,18 +213,51 @@ TRACK_PARAPET = ("parapet",)
 TRACK_HEADS = ("roof_step", "vestibule_head", "fascia_box", "ceiling_bulkhead", "soffit_side")
 TRACK_NOMBRES = {   # v73 (R73.3): renglones de track de la plantilla del estimador
     "parapet": ("Parapet bottom track", "Parapet top track"),
-    "heads": ("Bottom track - roof step and heads (vestibule / soffit)",
-              "Top track - roof step and heads (vestibule / soffit)"),
+    # v75 (R75.1, arbitraje #23): el nombre de un renglón de track nunca lleva "ceiling" ni "soffit": el calificador y el
+    # estimador lo leerían como track de ceilings (#23A / #23B: el renglón de heads caía en esa familia, bottom/top −13 %)
+    "heads": ("Bottom track - roof step and heads (vestibule / bulkhead)",
+              "Top track - roof step and heads (vestibule / bulkhead)"),
     "size": ("Bottom track {sz}", "Top / deflection track {sz}"),
+    # v75 (R75.2): un ELEMENTO (no wall) que no es fila de la Partition Takeoff (cripples, grille head, partes de pier
+    # sin type...) va por elemento, no al renglón por tamaño: el renglón {sz} = walls (con tag o sin tag: alcove, stub)
+    # + elementos que sí son fila de un type (column wrap, bulkhead, pier de un type)
+    "elemento": ("Bottom track - other framing (not a partition type, see source)",
+                 "Top / deflection track - other framing (not a partition type, see source)"),
     "otro": ("Bottom track - other (openings between walls, see source)",
              "Top / deflection track - other (openings between walls, see source)"),
 }
+TRACK_FAM = {"bottom": "bottom track (todos)", "top": "top / deflection track (todos)"}
 
 
-def track_by_element(data, co, fam):
+def ids_partition_takeoff(pt):
+    """v75 (R75.2): ids de los walls que son FILA de la Partition Takeoff (types de partition_types.py)."""
+    out = set()
+    for x in ((pt or {}).get("types") or {}).values():
+        for f in x.get("filas") or []:
+            out.update(str(i) for i in (f.get("ids") or []))
+            if f.get("wall") is not None:
+                out.add(str(f["wall"]))
+    return out
+
+
+def verificar_track_nombres(tbe):
+    """v75 (R75.1) compuerta: cada renglón de track_by_element cae en SU familia (bottom / top) con familias.py."""
+    import familias
+    malos = [(k, n, familias.familia(n, "lf")) for k, d in tbe.items() for n in d
+             if familias.familia(n, "lf") != TRACK_FAM[k]]
+    if malos:
+        raise ValueError("R75.1: renglón de track fuera de su familia (nombre con ceiling / soffit u otro): "
+                         + "; ".join(f"{k} '{n}' -> {f}" for k, n, f in malos))
+    return True
+
+
+def track_by_element(data, co, fam, pt=None):
     """{"bottom": {renglón: LF}, "top": {renglón: LF}}: la familia de track repartida por ELEMENTO (parapet, roof step /
     heads) y, para el resto, por TAMAÑO de stud del wall (R71.8 + R73.3). Σ renglones = familia (el resto que corridas
-    no explica, p. ej. track sobre openings entre walls, va a 'other'). Nombres = plantilla del estimador."""
+    no explica, p. ej. track sobre openings entre walls, va a 'other'). Nombres = plantilla del estimador.
+    v75 (R75.2): con `pt` (partition_types), un elemento (no wall) que no es fila de la Partition Takeoff va al renglón
+    'other framing' por elemento; walls y elementos de un type siguen en su renglón por tamaño."""
+    en_pt = ids_partition_takeoff(pt) if pt else None
     tam = {}
     for w in (data.get("walls") or []) + (data.get("runs") or []):
         m = re.search(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")', str(w.get("stud_size") or ""))
@@ -237,6 +271,8 @@ def track_by_element(data, co, fam):
             nb, nt = TRACK_NOMBRES["parapet"]
         elif el in TRACK_HEADS:
             nb, nt = TRACK_NOMBRES["heads"]
+        elif en_pt is not None and el not in (None, "wall") and wid not in en_pt:
+            nb, nt = TRACK_NOMBRES["elemento"]      # R75.2: elemento (no wall) que no es fila de la Partition Takeoff
         else:
             sz = tam.get(wid) or r.get("stud_size")
             nb, nt = (x.format(sz=sz) for x in TRACK_NOMBRES["size"]) if sz else TRACK_NOMBRES["otro"]
@@ -249,6 +285,7 @@ def track_by_element(data, co, fam):
         if resto > 0.01:
             out[k][no] = out[k].get(no, 0.0) + resto
         out[k] = {n: round(v, 2) for n, v in out[k].items() if v > EPS}
+    verificar_track_nombres(out)
     return out
 
 
@@ -1661,7 +1698,6 @@ def calcular(data, outdir=None, fo=None):
     # v68 (contrato con plantilla_excel): FRT plywood por material y sealant exterior aparte del acoustical
     # v73 (R73.3): por material, espesor Y uso, con el nombre de renglón de la plantilla del estimador
     out["frt_plywood_by_material"] = {k: round(v, 2) for k, v in PLY_USO.items() if v > EPS}
-    out["track_by_element"] = track_by_element(data, co, fam)
     # v73 (R73.3): contexto para los nombres de la plantilla y metal blocking por origen (edge vs notas)
     out["metal_blocking_by_origin"] = {k: round(v, 2) for k, v in BLK_ORIGEN.items() if v > EPS}
     th = ""
@@ -1685,6 +1721,10 @@ def calcular(data, outdir=None, fo=None):
     out["obligatorias"] = OBLIGATORIAS + [f for f in accesorios.FAMS if f not in OBLIGATORIAS]
     out["excluidas"] = {"batt insulation": "EXCLUDED (criterio del estimador: no insulation)"}
     out["partition_types"] = partition_types.partition_types(data, bo)
+    chequeos_v75.verificar_r75_5(data)                    # v75: cambio de type colineal en un nodo (R73.10)
+    chequeos_v75.verificar_v75(data, out["partition_types"])   # v75: alcove sin esquina; returns desde la cara exterior
+    # v75 (R75.2): después de partition_types (el renglón por tamaño = walls de la Partition Takeoff)
+    out["track_by_element"] = track_by_element(data, co, fam, out["partition_types"])
     if outdir:
         os.makedirs(outdir, exist_ok=True)
         for n, d in (("studs_in.json", studs_in), ("board_in.json", board_in), ("corridas_in.json", corr_in),

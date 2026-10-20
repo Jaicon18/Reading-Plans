@@ -1,0 +1,38 @@
+# CAMBIOS v75 — clasificación del track, jamb return por borde, cambios de type (arbitraje de dos pruebas ciegas)
+
+Origen: dos pruebas ciegas limpias del mismo set. Lo que más puntos quitaba no era una cantidad mal medida sino una
+CLASIFICACIÓN: un renglón de track con "soffit" en el nombre caía en la familia de track de ceilings. Las demás
+diferencias venían de reglas escritas en el SKILL sin compuerta en una tool (R73.10, R73.11, R73.17). Cada cambio es
+genérico (ningún número, wall ni room de un proyecto) y tiene test con datos sintéticos (test_v75.py).
+
+## Track (R75.1 / R75.2)
+- canon.py: renglones de track de roof step / heads sin "ceiling" ni "soffit" en el nombre; compuerta
+  `verificar_track_nombres`: cada renglón de `track_by_element` cae en su familia (bottom / top) con familias.py.
+- familias.py: un renglón que empieza con "Bottom" / "Top" nunca es track de ceilings (EXCLUYE).
+- canon.py `track_by_element(data, co, fam, pt)`: se calcula después de partition_types; "Bottom / Top track {size}"
+  = walls de la Partition Takeoff + elementos que son fila de un type; un elemento que no es fila (cripples, grille
+  head, parte de pier sin type) va al renglón "other framing". La suma sigue siendo la familia.
+
+## Jamb return (R75.3 / R75.4)
+- accesorios.py: con sill, `sill_return` true / false + fuente es obligatorio (antes, sin el campo, se sumaba el sill);
+  todo borde con return de gyp declara el texto impreso (`jamb_return_label` / `sill_return_label`) y debe rotular
+  gypsum. El trim de canon.py usa los mismos bordes.
+- accesorios.py: cada `storefront_cripples` se empareja con un storefront declarado (opening_ref o mismo ancho).
+
+## Partition types (R75.5 / R75.6 / R75.7) — chequeos_v75.py, llamados por canon.py
+- R75.5: cambio de type colineal en un nodo dibujado (R73.10 hecha compuerta); en un jamb = error salvo
+  `type_change_rfi`.
+- R75.6: un alcove no es dueño de la esquina con el wall de su línea.
+- R75.7: return corto de un tramo largo del mismo wall se mide desde la cara exterior (cota impresa del return), o
+  `return_basis` declarado.
+
+## Ciego
+- Fugas menores retiradas (SKILL §21, inventario.py, studs_nodos.py).
+- test_ciego_tools.py --estricto: P23 id de wall "<type>-<n>", P24 "grid / line <letra>", P25 lista de 3+ types
+  con uno de una sola letra; muestras malas y buenas en la autoprueba.
+
+## Pendiente del estimador (sin cambio; SKILL §22 dice dónde entra cada respuesta)
+- extra framing ATM; header / box beam; 3/4" FRT plywood en piers; sill track.
+
+## Sin cambio (decisiones del usuario)
+- 3-5/8" stud, A1, G, G1, B2K y Exterior 6" CFMF de las pruebas: aceptados. MEP fuera de calificación.

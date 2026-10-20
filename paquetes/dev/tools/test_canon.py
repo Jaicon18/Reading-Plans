@@ -30,7 +30,8 @@ def base():
              "openings": [{"ref": "GL-2 #1", "kind": "window", "ro_w_ft": 7.0, "head_ft": 8.5, "sill_ft": 6.5,
                            "with_sill": True, "source": "A09.02", "header_type": "6\" C box beam",
                            "header_type_source": "11/A09.27", "pieces": 4, "pieces_source": "11/A09.27",
-                           "jamb_return": True, "jamb_return_source": "11/A09.27"}],
+                           "jamb_return": True, "jamb_return_source": "11/A09.27", "jamb_return_label": "GYPSUM BOARD JAMB RETURN",
+                           "sill_return": True, "sill_return_source": "9/X9.01", "sill_return_label": "GYPSUM BOARD RETURN"}],
              "source": "A02.01"},
             {"id": "P1", "tag": "PIER", "element": "pier", "stud_size": "3-5/8\"", "oc_in": 16, "rows": 1,
              "length_ft": 1.667, "height_ft": 14.25, "line": "G", "from_ft": 26.0, "to_ft": 27.667,
@@ -326,7 +327,7 @@ def test_metal_trim_con_numero():
     del d["trim_items"]
     _falla(d, "trim_items ausente")
     d = base()
-    d["walls"][0]["openings"][0].update(jamb_return=True, jamb_return_source="11/A09.27")
+    d["walls"][0]["openings"][0].update(jamb_return=True, jamb_return_source="11/A09.27", jamb_return_label="GYPSUM BOARD JAMB RETURN")
     d["walls"].append({"id": "TR104", "tag": "OTHER", "element": "ceiling_transition", "faces_none_reason": "sintético (v70): el board no es objeto de este test", "stud_size": "3-5/8\"",
                        "oc_in": 16, "rows": 1, "length_ft": 75.0, "height_ft": 4.5, "source": "7/A09.33", "edges": [{"edge": "W", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}, {"edge": "N", "against": "ACT", "length_ft": 15.0, "source": "A04.01"}, {"edge": "E", "against": "ACT", "length_ft": 30.0, "source": "A04.01"}], 
                        "kickers": {"oc_in": 48, "length_ft": 1.5, "source": "7/A09.33",
@@ -850,7 +851,7 @@ def test_v67_trim_jamb_return_mismos_bordes():
     d["opening_schedule"]["items"].append({"ref": "SF-1"})
     d["openings_extra"] = [{"ref": "SF-1", "kind": "storefront", "location": "exterior", "ro_w_ft": 10.0,
                             "head_ft": 8.0, "header": "steel_by_others", "header_source": "S2.20 HSS",
-                            "jamb_return": True, "jamb_return_source": "2/A09.26", "wall_jambs": 1,
+                            "jamb_return": True, "jamb_return_source": "2/A09.26", "jamb_return_label": "GYPSUM BOARD JAMB RETURN", "wall_jambs": 1,
                             "wall_jambs_source": "A02.01", "source": "A02.01",
                             "jambs": [{"abuts": "wall", "source": "A02.01"}, {"abuts": "pier", "source": "1/A09.25"}]}]
     o = K.calcular(d)

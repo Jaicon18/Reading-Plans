@@ -552,18 +552,21 @@ def jamb_return(data, o):
     return (no acotado: criterio del estimador con RFI)."""
     wd, swd = k(data, "jamb_return_width_ft")
     _jr_declarado(data)
+    _storefront_de_cripples(data)
     lf = 0.0
     det = []
     for w in data.get("walls") or []:
         for op in w.get("openings") or []:
             _sill_return(op)                              # v70: valida sill_return / source en toda abertura
             if op.get("jamb_return"):
+                _label_gyp(op, "jamb_return_source", "jamb_return_label", "jamb / head")   # v75 R75.3
                 e = _edge(op)
                 lf += e
                 det.append(f"{op['ref']} {round(e, 2)} [{op.get('jamb_return_source', '-')}]")
     for op in data.get("openings_extra") or []:
         _sill_return(op)
         if op.get("jamb_return"):
+            _label_gyp(op, "jamb_return_source", "jamb_return_label", "jamb / head")   # v75 R75.3
             e = _edge(op)
             lf += e
             det.append(f"{op['ref']} {round(e, 2)} [{op.get('jamb_return_source', '-')}]")
@@ -633,6 +636,9 @@ def _sill_return(op):
     (p. ej. brake metal): el return y su trim no llevan el borde del sill. El double sill track (headers.py) NO
     cambia: depende de with_sill. -> True si el sill lleva return."""
     if "sill_return" not in op:
+        if op.get("jamb_return") and op.get("with_sill"):   # v75 (R75.3, #23A / #23B): nunca se asume el sill
+            raise ValueError(f"{op.get('ref')}: jamb return con sill sin sill_return true|false + sill_return_source "
+                             f"(lee el detalle del SILL: brake metal / solid sill / FRT plywood = false; R75.3)")
         return True
     v = op["sill_return"]
     if not isinstance(v, bool):
@@ -640,7 +646,51 @@ def _sill_return(op):
     if v is False and not NHOJA.search(str(op.get("sill_return_source") or "")):
         raise ValueError(f"{op.get('ref')}: sill_return false sin sill_return_source N/HOJA (el detalle del sill que "
                          f"dibuja otro remate; v70)")
+    if v is True and op.get("jamb_return"):
+        _label_gyp(op, "sill_return_source", "sill_return_label", "sill")
     return v
+
+
+GYP_RX = re.compile(r"\bGYP|\bGWB\b|GYPSUM", re.I)
+
+
+def _label_gyp(op, k_src, k_lab, borde):
+    """v75 (R75.3, arbitraje #23): un borde de jamb return suma solo si su detalle ROTULA gypsum board en el retorno.
+    Se declara el texto impreso leído (label) y su N/HOJA; "LINE OF JAMB RETURN BEYOND" sin la palabra gypsum no
+    basta (el borde puede ser frame sobre FRT plywood o brake metal)."""
+    if not NHOJA.search(str(op.get(k_src) or "")):
+        raise ValueError(f"{op.get('ref')}: {borde} con return de gyp sin {k_src} N/HOJA (R75.3)")
+    lab = str(op.get(k_lab) or "").strip()
+    if not lab:
+        raise ValueError(f"{op.get('ref')}: {borde} con return de gyp sin {k_lab} (texto impreso del detalle que "
+                         f"rotula el retorno; R75.3)")
+    if not GYP_RX.search(lab):
+        raise ValueError(f"{op.get('ref')}: {k_lab} '{lab[:60]}' no rotula gypsum board: ese borde no lleva return "
+                         f"de gyp (jamb_return / sill_return false con la cita; R75.3)")
+
+
+def _storefront_de_cripples(data):
+    """v75 (R75.4, #23A): framing sobre / bajo un storefront (cripples, head) implica la abertura. Cada elemento
+    storefront_cripples se empareja con un storefront declarado (opening_ref o mismo ancho ± 0.1 ft); si no, el
+    storefront no se barrió y su jamb return / trim se pierde en silencio."""
+    sf = [op for op in (data.get("openings_extra") or []) if str(op.get("kind")) == "storefront"] + \
+         [op for w in data.get("walls") or [] for op in w.get("openings") or [] if str(op.get("kind")) == "storefront"]
+    refs = {str(op.get("ref")) for op in sf}
+    falta = []
+    for w in (data.get("walls") or []) + (data.get("runs") or []):
+        if w.get("element") != "storefront_cripples":
+            continue
+        if w.get("opening_ref") is not None:
+            if str(w["opening_ref"]) not in refs:
+                falta.append(f"{w.get('id')} (opening_ref {w['opening_ref']} no declarado)")
+            continue
+        lf = w.get("length_ft", w.get("lf"))
+        if lf is None or not any(abs(float(op.get("ro_w_ft") or 0) - float(lf)) <= 0.1 for op in sf):
+            falta.append(str(w.get("id")))
+    if falta:
+        raise ValueError(f"storefront_cripples sin storefront declarado {falta}: declara la abertura en openings_extra "
+                         f"(kind storefront, ro_w_ft, head_ft, jamb_return + jamb_return_source + jambs) o "
+                         f"opening_ref; R75.4")
 
 
 def _edge(op):

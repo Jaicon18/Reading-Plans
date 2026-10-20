@@ -78,7 +78,7 @@ def sello_ok(x):
                           .encode()).hexdigest()[:16] == x.get('sello')
 
 def _stud_lf(p, pz, alto):
-    """LF de material de stud. Un wall que cruza el eje B puede tener DOS alturas, y el
+    """LF de material de stud. Un wall que cruza un eje de cambio de deck puede tener DOS alturas, y el
     cierre lo escribe en su operacion ("tramo HI <n>ft: ...=<n> a <n>ft; tramo LOW
     <n>ft: ...=<n> a <n>ft"). Multiplicar piezas x una sola height lo falsea."""
     op = ((p or {}).get('val') or {}).get('operacion') or ''
