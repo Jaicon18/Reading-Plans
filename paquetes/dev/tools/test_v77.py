@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""test_v77.py — decisiones del usuario D1-D6 (D1 corregida en v77b), R77.10 y compuertas R76.7 a-e. Cada caso falla con el dato
+"""test_v77.py — decisiones del usuario D1-D6 (D1 reemplazada por U1 en v77c), R77.10 y compuertas R76.7 a-e. Cada caso falla con el dato
 malo y pasa con el bueno. Datos SINTÉTICOS (walls / rooms 9xx, hojas Z / X, coordenadas inventadas)."""
 import copy
 import json
@@ -47,66 +47,56 @@ def _atm_canon():
     return d
 
 
-# ------------------------------------------------------------------------------------------------------ D1
-@caso("D1 v77b: la partición interior del walk-up ATM completa (studs + 2 runners) = extra framing; sigue en su type")
+# ------------------------------------------------------------------------------------------------------ D1 / U1
+@caso("U1 v77c (manda sobre D1): extra framing ATM = 0; la wall del ATM lleva su metal en su type; nada se resta")
 def _():
     import canon as K
     d = _atm_canon()
     sin = copy.deepcopy(d)
     sin["walls"][2]["openings"][0].pop("atm_recess")
     sin["walls"][2]["openings"][0]["atm_recess_none_reason"] = "1/X8.11 sintético: solo R.O."
-    td = tempfile.mkdtemp()
-    f0, out = K.calcular(sin)["familias"], K.calcular(copy.deepcopy(d), td)
+    f0, out = K.calcular(sin)["familias"], K.calcular(copy.deepcopy(d), tempfile.mkdtemp())
     f1 = out["familias"]
-    atm = f1["extra framing ATM"]
+    assert abs(f1["extra framing ATM"]) < 1e-9, f1["extra framing ATM"]              # malo: la wall completa (> 0)
     for k in ('3-5/8" stud (todos los gauges)', "bottom track (todos)", "top / deflection track (todos)"):
-        assert abs(f0[k] - f1[k]) < 0.01, (k, f0[k], f1[k])            # nada se resta (convención del estimador)
-    st = {x["id"]: x for x in json.load(open(os.path.join(td, "studs_out.json")))["walls"]}
-    assert atm > 2 * 10.0 + 100, atm                                     # studs piso a deck + 2 runners de 10 ft
-    assert abs(atm - (st["I1"]["lf"] + 20.0)) < 0.02, (atm, st["I1"]["lf"])
-    rf = [r for r in out.get("rfis_accesorios") or [] if r.get("familia") == "extra framing ATM"]
-    assert rf and rf[0]["delta"] < 0, rf                                 # RFI: contarla una sola vez
+        assert abs(f0[k] - f1[k]) < 0.01, (k, f0[k], f1[k])
+    assert out["estado_accesorios"]["extra framing ATM"] == "DERIVADO"
+    assert not [r for r in out.get("rfis_accesorios") or [] if r.get("familia") == "extra framing ATM"]
 
 
-@caso("D1 v77b: atm_recess en wall exterior (drive-up) = error; sin to_deck = error; fórmula vieja = error; 2 ATM")
+@caso("U1 v77c: ATM en wall exterior pasa con 0; fórmula vieja / extra a mano = error; lo impreso = RFI, no suma")
 def _():
     import canon as K
     import chequeos_v72 as C72
     d = _atm_canon()
-    d["walls"][2]["location"] = "exterior"
-    falla(K.calcular, d, texto="exterior")
-    assert any("exterior" in x for x in C72.r72_7(d))
-    d = _atm_canon()
-    d["walls"][2]["openings"][0]["location"] = "exterior"
-    falla(K.calcular, d, texto="exterior")
-    d = _atm_canon()
-    d["walls"][2].pop("to_deck")
-    falla(K.calcular, d, texto="to_deck")
+    d["walls"][2]["location"] = "exterior"                             # drive-up: su framing en su type, 0 extra
+    assert abs(K.calcular(d)["familias"]["extra framing ATM"]) < 1e-9
+    assert not C72.r72_7(d)
     d = _atm_canon()
     d["walls"][2]["openings"][0]["atm_recess"].update(width_ft=4.0, sistered_h_ft=6.0, furring_rows=3)
-    falla(K.calcular, d, texto="D1")
+    falla(K.calcular, d, texto="U1")
+    assert any("R72.11" in x for x in C72.r72_7(d))
     d = _atm_canon()
     d["walls"][2]["openings"][0]["atm_recess"].pop("drawn")
     falla(K.calcular, d, texto="drawn")
-    d = _atm_canon()
-    d["extra_framing"] = [{"ref": "ATM 9", "kind": "atm_recess", "lf": 30.0, "source": "1/X8.11"}]
-    falla(K.calcular, d, texto="D1")
-    d = _atm_canon()                                                    # drive-up en la exterior: none_reason, pasa
-    d["walls"][0]["openings"].append({"ref": "ATM 11", "kind": "atm", "location": "exterior", "ro_w_ft": 2.0,
-                                      "head_ft": 5.0, "sill_ft": 2.5, "with_sill": True, "source": "6/X8.11",
-                                      "jamb_return": False, "jamb_return_source": "6/X8.11",
-                                      "substrate_none_reason": "6/X8.11 sintético",
-                                      "atm_recess_none_reason": "6/X8.11 sintético: drive-up en la wall exterior"})
-    d["opening_schedule"]["items"].append({"ref": "ATM 11"})
-    K.calcular(d)
-    d = _atm_canon()
-    o2 = dict(d["walls"][2]["openings"][0], ref="ATM 10")
-    d["walls"][2]["openings"].append(o2)
-    d["opening_schedule"]["items"].append({"ref": "ATM 10"})
+    for ef in ({"ref": "ATM 9", "kind": "atm_recess", "lf": 30.0, "source": "1/X8.11"},
+               {"ref": "ATM 9 sistered", "kind": "other", "lf": 30.0, "source": "1/X8.11"}):
+        d = _atm_canon()
+        d["extra_framing"] = [ef]
+        falla(K.calcular, d, texto="U1")
+        assert any("R72.11" in x for x in C72.r72_7(d))
+    d = _atm_canon()                                                    # extra impreso sin texto que lo pida = error
+    d["walls"][2]["openings"][0]["atm_recess"]["extra_printed"] = {"source": "6/X8.11", "text": "ATM SURROUND",
+                                                                   "lf": 12.0, "op": "sintético"}
+    falla(K.calcular, d, texto="U1")
+    d["walls"][2]["openings"][0]["atm_recess"]["extra_printed"]["text"] = "2 1/2\" METAL STUD SISTERED (sintético)"
     out = K.calcular(d)
-    mov = d["_atm_wall"]
-    assert [m["lf"] > 0 for m in mov] == [True, False], mov          # la wall una sola vez
-    assert abs(out["familias"]["extra framing ATM"] - mov[0]["lf"]) < 0.01
+    assert abs(out["familias"]["extra framing ATM"]) < 1e-9          # no se suma en silencio
+    rf = [r for r in out.get("rfis_accesorios") or [] if r.get("familia") == "extra framing ATM"]
+    assert rf and abs(rf[0]["delta"] - 12.0) < 1e-9, rf             # sale como RFI con su delta
+    d = _atm_canon()                                                    # ATM en un elemento sin nodos = error
+    d["walls"][2]["openings"][0]["atm_recess"]["source"] = "X8.11"
+    falla(K.calcular, d, texto="N/HOJA")
 
 
 @caso("R77.10 el largo del wall corre a través de la door hasta la esquina: R.O. fuera del band = falla")

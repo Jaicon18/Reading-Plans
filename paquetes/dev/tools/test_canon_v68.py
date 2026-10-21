@@ -145,8 +145,9 @@ def test_frt_plywood_por_material_y_sealant_aparte():
     assert abs(tot - o["familias"]["FRT plywood (SF)"]) < 0.05
     assert abs(m["frt_3_4"]["net"] - (80.0 + 32.0 * 0.583)) < 0.02, m["frt_3_4"]
     assert m["frt_5_8_ext"]["unit"] == "SF" and m["nailbase_5_8_polyiso"]["net"] > 0
-    assert m["exterior"]["net"] == 40.0 and m["acoustical"]["net"] > 0
-    assert abs(m["exterior"]["net"] + m["acoustical"]["net"] - o["familias"]["acoustical sealant"]) < 0.05
+    assert m["exterior"]["net"] == 40.0 and "acoustical" not in m                  # v77c U8: EXCLUIDO
+    assert abs(m["exterior"]["net"] - o["familias"]["sealant at base of gypsum (exterior)"]) < 0.05
+    assert "acoustical sealant" in o["excluidas"]
     assert all(x["material"].isascii() for x in o["materiales"])          # nombres del Excel en inglés
     # contrato con plantilla_excel (v68): por material + sealant exterior, y plantilla los acepta
     import plantilla_excel as P

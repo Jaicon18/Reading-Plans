@@ -21,6 +21,7 @@ Calificación de cada renglón:
   SOBRA    está en el candidato y no en la referencia -> se reporta, no suma ni resta
 Con --rangos (15-oct-2026): las familias de CRITERIO de la referencia definitiva tienen un rango
 [min, max]; dentro del rango = IGUAL, fuera se mide contra el borde más cercano.
+Con modo "excluir" (v77c, U8) la familia está EXCLUIDA: sin renglón = EXCLUIDA OK (1 punto); con renglón = MAL.
 Exit code: 0 si la calificación total >= --pass (95% por defecto), 1 si no.
 """
 import argparse, difflib, json, re, sys
@@ -193,6 +194,15 @@ def evaluate(ref_path, cand_path, tol=0.02, close=0.10, rangos=None):
         rf, cf = por_familia(rm), por_familia(cm)
         res["familias"] = []
         for f in [x[0] for x in FAMILIAS]:
+            rg = rangos.get(f) or {}
+            if str(rg.get("modo") or "") == "excluir":           # v77c (U8): familia EXCLUIDA en todos los proyectos
+                c_ = cf.get(f)
+                malo = c_ is not None and abs(c_["net"]) > 1e-9
+                res["familias"].append({"familia": f, "ref": 0.0, "cand": c_["net"] if c_ else None,
+                                        "estado": "MAL (excluida, trae renglón)" if malo else "EXCLUIDA OK",
+                                        "dif": None, "puntos": 0.0 if malo else 1.0,
+                                        "cand_renglones": c_["renglones"] if c_ else []})
+                continue
             if f not in rf and f not in cf:
                 continue
             r_, c_ = rf.get(f), cf.get(f)

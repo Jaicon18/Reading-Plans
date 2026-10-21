@@ -125,7 +125,7 @@ def test_familias():
     assert abs(f["5/8\" EXTERIOR gyp sheathing"] - 27.667 * 2.0) < 0.01, f
     # v65: FRP = perímetro tile_base x top 5.0; sealant I1 (3/A12.01 abajo, 2 faces) = 10 x 2
     assert abs(f["FRP"] - 35.0 * 5.0) < 0.01, f
-    assert abs(f["acoustical sealant"] - 20.0) < 0.01, f
+    assert "acoustical sealant" not in f and f.get("sealant at base of gypsum (exterior)", 0) == 0, f   # v77c U8
 
 
 def _falla(d, txt):
@@ -784,11 +784,11 @@ def test_v65_frp_bloque_obligatorio():
 
 
 def test_v65_sealant_por_detalle():
-    """5/A12.01 G: bead solo ABAJO en las dos faces (#14A lo cargó arriba: mismo LF pero otra regla); doors se
-    descuentan de la corrida de abajo (55.5); un detalle sin sealant declarado falla (#14B sin sealant)."""
+    """v77c (U8, R77.12, manda sobre v65): acoustical sealant EXCLUIDO en todos los proyectos: los beads de los
+    detalles y sealant_items NO se calculan (aviso + exclusión); solo el sealant at base of gypsum (exterior)."""
     d = base()
     del d["details"]["3/A12.01"]["sealant"]
-    _falla(copy.deepcopy(d), "sealant {bottom_faces")
+    assert "acoustical sealant" not in K.calcular(copy.deepcopy(d))["familias"]      # ya no se exige
     d = base()
     d["walls"][2]["openings"] = [{"ref": "door 920", "kind": "door", "ro_w_ft": 3.333, "head_ft": 7.0,
                                   "source": "A00.30"}]
@@ -801,7 +801,12 @@ def test_v65_sealant_por_detalle():
     d["nodes"] += [{"id": "db1", "kind": "free", "wall": "DB-1"}, {"id": "db2", "kind": "free", "wall": "DB-1"}]
     f = K.calcular(d)["familias"]
     # el bulkhead no hereda el bead del tipo (sus beads 8, 9/A12.01 van en sealant_items)
-    assert abs(f["acoustical sealant"] - ((10.0 * 2 - 3.333 * 2) + 90.0 + 26.0)) < 0.01, f["acoustical sealant"]
+    assert "acoustical sealant" not in f, f
+    assert abs(f["sealant at base of gypsum (exterior)"] - 26.0) < 0.01, f
+    o = K.calcular(copy.deepcopy(d))
+    assert "acoustical sealant" in o["excluidas"] and any("EXCLUDED (U8)" in a for a in o["avisos"])
+    d["sealant_base_exterior"]["label"] = "ACOUSTICAL SEALANT"
+    _falla(d, "U8")
 
 
 def test_v65_insulation_excluida_y_level5():

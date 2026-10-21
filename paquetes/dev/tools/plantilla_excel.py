@@ -50,7 +50,9 @@ Formato del JSON (todas las cantidades NET, sin waste: el waste lo pone el Excel
  Filas en SF: "4x8 sheet" -> 32 SF por pieza; sin AxB ni "sheet" (batt, Level 5) -> se compran por SF.
  EA/PCS con net <= 20 (piezas de schedule) van sin waste salvo "waste_pct".
  "rfis": [ {"id": "RFI-01", "pregunta": "...", "delta": "..."} ],
- "revisar": [ {"n": 1, "punto": "...", "hoja_detalle": "6/A12.01", "imagen": "R01.jpg"} ],
+ "revisar": [ {"n": 1, "total": N, "fase": "floor_plan" | "detalle", "type": "A1" (floor_plan),
+               "orden_plano": 1 (detalle), "punto": "...", "hoja_detalle": "6/A12.01", "imagen": "R01.jpg"} ],
+   (v77c U9/U10: orden floor plan por type A-Z, después detalles por orden_plano; ordenar_revisar lo hace)
  "alcances": [ {"id": "ALC-01", "nombre": "...", "estado": "CUANTIFICADO | NO APLICA | RFI", "nota": "..."} ]
 }
 """
@@ -64,6 +66,56 @@ WALL_KEYS = ["type", "wall", "location", "length_lf", "height_ft", "stud_size", 
 MAT_KEYS = ["material", "unit", "net", "metal", "source"]
 
 
+# v77c (decisiones del usuario U9 / U10, R77.13 / R77.14): preguntas al estimador / PARA REVISAR. Orden OBLIGATORIO:
+# 1) FLOOR PLAN: las partitions en orden ALFABÉTICO de type; 2) los DETALLES que marca el floor plan, en el orden en
+# que el floor plan los marca. Se anuncia el total ("N preguntas en total, una a la vez") y cada item lleva n/N.
+FASES_REV = ("floor_plan", "detalle")
+NHOJA_REV = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,2}\d{1,2}\.\d{1,2}\b")
+
+
+def _nat(t):
+    return [int(x) if x.isdigit() else x for x in re.split(r"(\d+)", str(t).upper())]
+
+
+def clave_revisar(x):
+    f = str(x.get("fase") or "")
+    if f == "floor_plan":
+        return (0, _nat(x.get("type")), 0)
+    return (1, [], int(x.get("orden_plano") or 0))
+
+
+def ordenar_revisar(lst):
+    """Ordena (floor plan por type A→Z; después detalles por orden_plano) y numera n = 1..N con total N."""
+    out = sorted((dict(x) for x in lst), key=clave_revisar)
+    for i, x in enumerate(out, 1):
+        x["n"], x["total"] = i, len(out)
+    return out
+
+
+def revisar_err(lst):
+    err = []
+    for i, x in enumerate(lst or []):
+        f = x.get("fase")
+        if f not in FASES_REV:
+            err.append(f"revisar[{i}]: fase {f!r} (U10: 'floor_plan' con su type, o 'detalle' con orden_plano)")
+            continue
+        if f == "floor_plan" and not str(x.get("type") or "").strip():
+            err.append(f"revisar[{i}]: floor_plan sin type (U10: partitions en orden alfabético de type)")
+        if f == "detalle" and (not isinstance(x.get("orden_plano"), int) or x["orden_plano"] < 1 or
+                               not NHOJA_REV.search(str(x.get("hoja_detalle") or ""))):
+            err.append(f"revisar[{i}]: detalle sin orden_plano (entero >= 1, orden en que el floor plan lo marca) o "
+                       f"sin N/HOJA en hoja_detalle (U10)")
+    if err:
+        return err
+    if [clave_revisar(x) for x in lst] != sorted(clave_revisar(x) for x in lst):
+        err.append("revisar: fuera del orden obligatorio (U10: floor plan por type A→Z, después los detalles en el "
+                   "orden del floor plan); usar ordenar_revisar")
+    if [x.get("n") for x in lst] != list(range(1, len(lst) + 1)) or \
+            any(x.get("total") != len(lst) for x in lst):
+        err.append(f"revisar: numeración n/N incompleta (U9: n = 1..{len(lst)} y total = {len(lst)} en cada item)")
+    return err
+
+
 def validar(d):
     err = []
     for k in ("proyecto", "bid_set", "fecha", "inputs", "walls", "materials", "rfis", "revisar", "alcances"):
@@ -71,6 +123,8 @@ def validar(d):
             err.append(f"falta la clave '{k}'")
     if err:
         return err
+    err += acoustical_err(d["materials"])                 # v77c U8 (R77.12)
+    err += revisar_err(d["revisar"])                       # v77c U9 / U10 (R77.13 / R77.14)
     for i, w in enumerate(d["walls"]):
         for k in WALL_KEYS:
             if k not in w or w[k] in ("", None):
@@ -466,9 +520,14 @@ def _escribir(d, salida, out_reglas):
     for x in rfis_vigentes(d["rfis"]):
         ws.append([x.get("id"), en(x.get("pregunta")), en(fmt_delta(x.get("delta"), x.get("unidad")))])
     ws = wb.create_sheet(HOJA_REVISAR)
-    ws.append(["#", "Item", "Sheet + detail", "Image"])
+    nrev = len(d["revisar"])
+    ws.append([f"{nrev} questions in total, asked ONE at a time in this order: floor plan (partition types A-Z), "
+               f"then the details the floor plan calls, in order"])
+    ws.append(["#", "Phase", "Type / order", "Item", "Sheet + detail", "Image"])
     for x in d["revisar"]:
-        ws.append([x.get("n"), en(x.get("punto")), x.get("hoja_detalle"), x.get("imagen")])
+        fase = "Floor plan" if x.get("fase") == "floor_plan" else "Detail"
+        ws.append([f"{x.get('n')}/{nrev}", fase, x.get("type") if x.get("fase") == "floor_plan" else
+                   x.get("orden_plano"), en(x.get("punto")), x.get("hoja_detalle"), x.get("imagen")])
     ws = wb.create_sheet(HOJA_ALCANCES)
     ws.append(["Scope ID", "Scope", "Status", "Note (quantity, NOT APPLICABLE + sheet, or RFI)"])
     for x in d["alcances"]:
@@ -619,7 +678,28 @@ SEAL_EXT = re.compile(r"base of gyp|exterior", re.I)
 SEAL_EXT_NOMBRE = "Sealant at base of gypsum (exterior, not acoustical)"
 
 
-def sealant_exterior(fo, fam="acoustical sealant"):
+SEAL_EXT_FAM = "sealant at base of gypsum (exterior)"
+EXCLUIDAS_SIEMPRE = {"acoustical sealant": "EXCLUDED in all projects (estimator standing order): no acoustical "
+                                           "sealant row and no quantity"}   # v77c U8 (R77.12)
+
+
+def acoustical_err(materials):
+    """v77c (U8, R77.12): un renglón de acoustical sealant (por nombre o por familia) = error: está EXCLUIDO en todos
+    los proyectos. El sealant at base of gypsum (exterior, not acoustical) no es acoustical."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import familias
+    err = []
+    for m in materials:
+        n = str(m.get("material") or m.get("name") or "")
+        u = str(m.get("unit") or "").lower()
+        if (re.search(r"(?<!not )acoustic", n, re.I) and re.search(r"sealant|caulk", n, re.I)) or \
+                familias.familia(n, u) == "acoustical sealant":
+            err.append(f"renglón '{n[:60]}': acoustical sealant EXCLUIDO en todos los proyectos (U8): sin renglón ni "
+                       f"cantidad; va en Clarifications como exclusión")
+    return err
+
+
+def sealant_exterior(fo, fam=SEAL_EXT_FAM):
     if fo.get("sealant_exterior_lf") is not None:
         return float(fo["sealant_exterior_lf"])
     v = 0.0
@@ -665,7 +745,7 @@ NOMBRES_PLANTILLA = {
     "FRT blocking": "Blocking FRT / 2X FRT wood",
     "metal trim (corner bead, casing, shadow molding)": "METAL trim - corner bead, casing bead, shadow molding, "
                                                         "gypsum edge trim",
-    "acoustical sealant": "Acoustical sealant",
+    SEAL_EXT_FAM: SEAL_EXT_NOMBRE,                    # v77c U8: el acoustical sealant está EXCLUIDO (sin renglón)
 }
 WOOD_NOMBRE = "Blocking 2X wood (not labeled FRT)"
 BLK_NOMBRES = {"edge": "Stud blocking at edge of gypboard (structural detail)",
@@ -790,17 +870,11 @@ def fusionar(d, fo):
         for k, v in des.items():
             mats.append({"material": k, "unit": "SF", "net": v, "metal": False, "selling_unit": "sheet",
                          "source": f"familias_out.json FRT plywood by material; {cit or 'canon rows'}"})
-    # v68: sealant exterior (base of gypsum) en su propio renglón
+    # v68: sealant exterior (base of gypsum) en su propio renglón; v77c (U8): el acoustical sealant está EXCLUIDO
     ext = sealant_exterior(fo)
-    if ext > 0 and not any(SEAL_EXT.search(str(m["material"])) and "sealant" in str(m["material"]).lower()
-                           and not re.search(r"(?<!not )acoustic", str(m["material"]), re.I) for m in mats):
-        for i, m in enumerate(mats):
-            if familias.familia(m["material"], str(m["unit"]).lower()) == "acoustical sealant":
-                nom = "Acoustical sealant" if SEAL_EXT.search(str(m["material"])) else m["material"]
-                mats[i] = dict(m, material=nom, net=round(float(m["net"]) - ext, 2))   # (#16A: el nombre mezclaba)
-                break
+    if ext > 0 and not any(familias.familia(m["material"], str(m["unit"]).lower()) == SEAL_EXT_FAM for m in mats):
         mats.append({"material": SEAL_EXT_NOMBRE, "unit": "LF", "net": ext, "metal": False,
-                     "source": "familias_out.json acoustical sealant rows 'base of gypsum (exterior)'"})
+                     "source": "familias_out.json sealant_exterior_lf 'base of gypsum (exterior)'"})
     # v68: hanger wire en PCS además del LF
     hp = (fo.get("hanger_pcs") or {}).get("total_pcs")
     if hp and not any("hanger" in str(m["material"]).lower() and str(m["unit"]).upper() in ("PCS", "EA")
@@ -846,8 +920,12 @@ def fusionar(d, fo):
                      "pregunta": en(f"{r['familia']}: {r.get('tema', '')}"),
                      "delta": fmt_delta(delta, r.get("unidad"))})
     d["rfis"] = rfis_vigentes(rfis + [x for x in d["rfis"] if not str(x.get("id", "")).startswith("RFI-ACC")])
+    d["revisar"] = ordenar_revisar(d.get("revisar") or [])     # v77c U9 / U10
     alc = list(d["alcances"])
-    for k, why in (fo.get("excluidas") or {}).items():
+    for k, why in EXCLUIDAS_SIEMPRE.items():              # v77c U8: la exclusión manda sobre lo que escribió la corrida
+        alc = [dict(a, estado="NO APLICA", nota=f"EXCLUDED: {why}") if k.lower() in str(a.get("nombre", "")).lower()
+               else a for a in alc]
+    for k, why in list((fo.get("excluidas") or {}).items()) + list(EXCLUIDAS_SIEMPRE.items()):
         if not any(k.lower() in str(a.get("nombre", "")).lower() for a in alc):
             alc.append({"id": f"ALC-X{len(alc) + 1}", "nombre": k, "estado": "NO APLICA", "nota": en(why)})
     d["alcances"] = alc
@@ -1004,11 +1082,41 @@ def verificar_excel(xlsx, salidas=None):
                        f"dato obligatorio: se resuelve en el canon antes de entregar)")
     if not tipos:
         err.append("Partition Takeoff sin bloques 'TYPE <nombre>'")
+    err += verificar_v77c(wb)
     err += verificar_v68(wb, wf)
     carpetas = [os.path.dirname(os.path.abspath(xlsx))] + [str(x) for x in (salidas or [])]
     err += verificar_salidas(wb, carpetas)
     err += verificar_r708(wf)
     err += verificar_r71_track(wb, _track_familia(carpetas))
+    return err
+
+
+def verificar_v77c(wb):
+    """v77c: U8 (sin renglón de acoustical sealant; exclusión escrita en Scope Checklist) y U9 / U10 (Review Items con
+    el total anunciado, n/N consecutivo, floor plan por type A→Z antes que los detalles en su orden)."""
+    err = []
+    mats = [{"material": r[0], "unit": r[1]} for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True)
+            if r and r[0] and len(r) > 2 and isinstance(r[2], (int, float))]
+    err += [f"Material Summary: {e}" for e in acoustical_err(mats)]
+    if HOJA_ALCANCES in wb.sheetnames:
+        filas = [" ".join(str(c or "") for c in r) for r in wb[HOJA_ALCANCES].iter_rows(values_only=True)]
+        if not any(re.search(r"acoustical sealant", f, re.I) and re.search(r"EXCLUDED", f) for f in filas):
+            err.append("Scope Checklist sin la exclusión de acoustical sealant (U8: EXCLUDED en todos los proyectos)")
+    if HOJA_REVISAR in wb.sheetnames:
+        rr = [r for r in wb[HOJA_REVISAR].iter_rows(values_only=True)]
+        if len(rr) < 2 or [str(c or "") for c in rr[1][:3]] != ["#", "Phase", "Type / order"]:
+            err.append("Review Items en formato viejo (U9 / U10: primera fila con el total, columnas #, Phase, Type / order)")
+        elif not re.match(r"\d+ questions in total", str(rr[0][0] or "")):
+            err.append("Review Items sin el total anunciado en la primera fila (U9: 'N questions in total ...')")
+        else:
+            n = int(re.match(r"(\d+)", str(rr[0][0])).group(1))
+            items = [r for r in rr[2:] if r and r[0]]
+            if [str(r[0]) for r in items] != [f"{i}/{n}" for i in range(1, n + 1)]:
+                err.append(f"Review Items: numeración n/N no consecutiva o distinta del total {n} (U9)")
+            claves = [(0, _nat(r[2]), 0) if r[1] == "Floor plan" else
+                      (1, [], int(r[2]) if str(r[2] or "").isdigit() else 10 ** 6) for r in items]
+            if claves != sorted(claves):
+                err.append("Review Items fuera del orden obligatorio (U10: floor plan por type A-Z, luego detalles)")
     return err
 
 
@@ -1190,7 +1298,8 @@ EJEMPLO = {
                   {"material": "5/8\" gypsum board, regular", "unit": "SF", "net": 480.0, "metal": False,
                    "selling_unit": "4x12 ft sheet", "source": "Partition Takeoff col Board"}],
     "rfis": [{"id": "RFI-01", "pregunta": "Height of wall W1 not dimensioned", "delta": "+/- 24 SF"}],
-    "revisar": [{"n": 1, "punto": "Confirm height of wall W1", "hoja_detalle": "3/A12.01", "imagen": "R01.jpg"}],
+    "revisar": [{"n": 1, "total": 1, "fase": "floor_plan", "type": "A1", "punto": "Confirm height of wall W1",
+                 "hoja_detalle": "3/A12.01", "imagen": "R01.jpg"}],
     "alcances": [{"id": "ALC-01", "nombre": "Interior partition framing", "estado": "CUANTIFICADO",
                   "nota": "Partition Takeoff"}],
 }

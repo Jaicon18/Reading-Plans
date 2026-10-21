@@ -68,8 +68,8 @@ v65 (arbitraje #14A/#14B, 17-oct-2026) — lo que todavía variaba o faltaba ent
   - glass mat: band.t_stud_ft y band.b_stud_ft {value, source}; altura = T/STUD − B/STUD (7/A09.26 <n>;
     #14A <n> de la elevación T/CANOPY − B/CANOPY = +<n> SF).
   - FRP (familia obligatoria): bloque frp {top_ft, rooms (tile_base), mop_sink} o frp_none_reason (#14B FALTA).
-  - acoustical sealant (familia obligatoria): details[*].sealant {bottom_faces, top_faces, source} por cada
-    detail con faces, menos R.O. de doors en las corridas de abajo (55.5) + sealant_items + sealant_base_exterior.
+  - v77c (U8): acoustical sealant EXCLUIDO en todos los proyectos (sin renglón ni cálculo; exclusión en
+    Clarifications); solo sealant_base_exterior (sealant at base of gypsum, exterior) se cuantifica, familia propia.
   - door entre dos walls (jamb_wall + head_ft): cripples FLOOR(R.O./oc) x (H − head) + bottom/top track R.O.
     (#14A, ADV1-3).
   - level 5 (level5_items, SF) y batt insulation EXCLUDED siempre (criterio del usuario: "no insulation").
@@ -153,7 +153,8 @@ JOIST_ONLY = ("canopy_joist", "framed_soffit")   # joists 3-5/8" sin carrying ni
 TRIM_KINDS = {"corner_bead", "casing_bead", "shadow_molding", "edge_trim", "j_bead"}
 NO_NODOS = ("ceiling_transition", "column_wrap", "grille_head")  # v65 + v67: grille 2-1/2" -> accesorios.py
 F_FRP = "FRP"
-F_SEAL = "acoustical sealant"
+F_SEAL = "sealant at base of gypsum (exterior)"   # v77c U8: el acoustical sealant está EXCLUIDO
+F_SEAL_AC = "acoustical sealant"
 F_L5 = "Level 5 finish"
 GG = ("G", "G1")                                   # double row 10/A12.01: junta G-G = abut
 # v68: FRT plywood por material / espesor (un renglón de compra por material; la familia del calificador suma todo)
@@ -180,7 +181,9 @@ PLY_USO = {}                                       # nombre de plantilla -> SF
 BLK_ORIGEN = {}                                    # v73: metal blocking por origen (edge del detalle / notas)
 BLK_MADERA = {}                                    # v76: blocking de madera no FRT (renglón propio)
 STUD_ELEM = {}                                     # v76: {familia: {renglón: LF}} (framed soffit en su renglón)
-SEAL = {}                                          # acoustical / exterior -> LF
+SEAL = {}                                          # exterior -> LF (v77c U8: acoustical EXCLUIDO)
+EXCL_SEAL_AC = ("EXCLUDED in all projects (estimator standing order): no acoustical sealant row and no "
+                "quantity; listed in Clarifications as an exclusion")
 F_PLY = "FRT plywood (SF)"
 RX_MADERA = re.compile(r"\bFRTW?\b|F\.R\.T\.|FIRE[ -]?(TREATED|RETARDANT)|\b2X\b|\bWOOD\b|PLYWOOD", re.I)
 RX_FRT_LABEL = re.compile(r"\bFRTW?\b|F\.R\.T\.|FIRE[ -]?(TREATED|RETARDANT)", re.I)
@@ -929,47 +932,26 @@ def _frp(data, fam, filas):
 
 
 def _sealant(data, fam, filas):
-    """v65: acoustical sealant por detalle (59.12): cada detail con faces declara sealant {bottom_faces, top_faces,
-    source}; LF = L x (bottom + top) - Σ R.O. de doors x bottom_faces (55.5). Beads de un detalle de bulkhead /
-    head van en sealant_items (no se propagan al tipo). La familia del calificador suma también
-    sealant_base_exterior (sealant at base of gypsum, exterior)."""
+    """v77c (decisión del usuario U8, R77.12): ACOUSTICAL SEALANT EXCLUIDO EN TODOS LOS PROYECTOS: sin renglón ni
+    cálculo; va en Clarifications / Scope Checklist como exclusión (out["excluidas"]). details[*].sealant y
+    sealant_items de un canon viejo no se calculan (aviso con lo que se dejó fuera). Solo se cuantifica el
+    sealant_base_exterior ("sealant at base of gypsum", exterior), que NO es acoustical: familia propia."""
     det = data.get("details") or {}
-    usados = sorted({w.get("detail") for w in data.get("walls") or [] if w.get("faces")})
-    if not usados:
-        return
-    for d in usados:
-        sp = (det.get(d) or {}).get("sealant")
-        if not isinstance(sp, dict) or not str(sp.get("source") or "").strip():
-            raise ValueError(f"details['{d}'].sealant {{bottom_faces, top_faces, source}} obligatorio (0 con source "
-                             f"si el detalle no dibuja bead; v65, #14B sin sealant)")
-    for w in data.get("walls") or []:
-        if not w.get("faces") or w.get("element") == "door_bulkhead":
-            continue                                   # bulkhead del office front: sus beads (8, 9/A12.01) van en sealant_items
-        sp = det[w["detail"]]["sealant"]
-        b, t = int(sp["bottom_faces"]), int(sp["top_faces"])
-        if b + t == 0:
-            continue
-        L = float(w.get("length_printed_ft") or w["length_ft"])
-        doors = sum(float(o["ro_w_ft"]) for o in w.get("openings") or [] if o.get("kind", "door") == "door")
-        lf = L * (b + t) - doors * b
-        fam[F_SEAL] += lf
-        SEAL["acoustical"] = SEAL.get("acoustical", 0.0) + lf
-        filas.append({"familia": F_SEAL, "wall": w["id"], "source": sp["source"],
-                      "operacion": f"{L} x ({b} bottom + {t} top) - doors {round(doors, 3)} x {b} = {round(lf, 2)}"})
-    for it in data.get("sealant_items") or []:
-        src = _src(it, it.get("ref", "sealant"))
-        lf = float(it["lf"]) * int(it.get("faces", 1))
-        fam[F_SEAL] += lf
-        SEAL["acoustical"] = SEAL.get("acoustical", 0.0) + lf
-        filas.append({"familia": F_SEAL, "ref": it["ref"], "source": src,
-                      "operacion": f"{it['lf']} x {it.get('faces', 1)} face(s) = {round(lf, 2)}"})
+    viejos = sorted(d for d, x in det.items() if isinstance(x, dict) and isinstance(x.get("sealant"), dict) and
+                    int(x["sealant"].get("bottom_faces") or 0) + int(x["sealant"].get("top_faces") or 0) > 0)
+    if viejos or data.get("sealant_items"):
+        SEAL["_ignorado"] = (f"acoustical sealant EXCLUDED (U8): not computed from details {viejos} "
+                             f"{'+ sealant_items' if data.get('sealant_items') else ''}".strip())
     be = data.get("sealant_base_exterior")
     if be:
         src = _src(be, "sealant_base_exterior")
+        if re.search(r"acoustic", f"{be.get('label', '')} {src}", re.I) and not re.search(r"not acoustic",
+                                                                                           f"{be.get('label', '')} {src}", re.I):
+            raise ValueError("sealant_base_exterior rotulado acoustical: el acoustical sealant está EXCLUIDO (U8)")
         fam[F_SEAL] += float(be["lf"])
         SEAL["exterior"] = SEAL.get("exterior", 0.0) + float(be["lf"])
         filas.append({"familia": F_SEAL, "ref": "sealant at base of gypsum (exterior)", "source": src,
-                      "operacion": f"{be['lf']} LF (no acústico; la familia del calificador lo suma)"})
+                      "operacion": f"{be['lf']} LF (not acoustical)"})
 
 
 def _level5(data, fam, filas):
@@ -1045,54 +1027,32 @@ def _parapet_studs(data, fam, filas):
 
 
 def _atm_wall(data, fam, filas, st, co):
-    """v77b (decisión del usuario D1, corregida): el extra framing del ATM = la PARTICIÓN INTERIOR que CONTIENE la
-    unidad ATM de lobby (walk-up), la que el detalle del ATM llama sobre esa wall: la wall COMPLETA (todo su largo),
-    studs de piso a deck (studs_nodos de esa wall) + bottom runner + top runner; sin sistered ni furring aparte.
-    La wall exterior de un drive-up NO es el extra framing del ATM: su framing queda en su type exterior
-    (atm_recess en una wall exterior = error; ese ATM declara atm_recess_none_reason).
-    Convención del estimador: la wall SIGUE en su partition type y en sus familias de stud / track (nada se resta); el
-    renglón "extra framing ATM" se suma aparte (RFI con el delta si se contara una sola vez).
-    Compuertas: wall interior que pasa por studs_nodos y corridas, con to_deck true; dos ATM en la misma wall = una vez."""
+    """v77c (decisión del usuario U1, R77.11): el framing de un recess de ATM / equipo empotrado está en la wall que
+    lo contiene: su partition type lleva todo su metal (studs_nodos + corridas) y el renglón "extra framing ATM" = 0;
+    no se agrega renglón, ni sistered, ni furring, salvo lo que un detalle impreso pida explícitamente
+    (atm_recess.extra_printed -> RFI con delta, accesorios.py). Vale igual en una partición interior (walk-up) o en
+    una wall exterior (drive-up). Compuerta: la wall del ATM pasa por studs_nodos y corridas (si no, el metal del
+    recess no está en ningún type); la fórmula vieja = error (accesorios.atm_recess_valido)."""
     data["_atm_wall"] = []
     st_w = {str(x.get("id")): x for x in (st or {}).get("walls") or []}
     co_w = {str(r.get("id")): r for r in (co or {}).get("renglones") or []}
-    hechas = set()
     for w in data.get("walls") or []:
         for o in w.get("openings") or []:
             if not o.get("atm_recess"):
                 continue
             accesorios.atm_recess_valido(o, f"{w['id']} {o['ref']}")
             wid = str(w["id"])
-            if accesorios.es_exterior(w) or o.get("location") == "exterior":
-                raise ValueError(f"{wid} {o['ref']}: atm_recess en una wall exterior (D1 v77b: el extra framing del ATM "
-                                 f"es la partición interior que contiene el ATM de lobby / walk-up; el framing de la "
-                                 f"wall exterior del drive-up queda en su type exterior: declarar atm_recess_none_reason)")
-            if wid in hechas:
-                data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": 0.0,
-                                          "op": f"wall {wid} already carried once (D1)"})
-                continue
             if _es_parapet(w) or _no_nodos(w) or wid not in st_w or ("W:" + wid) not in co_w:
-                raise ValueError(f"{wid} {o['ref']}: atm_recess en un elemento sin studs_nodos / corridas (D1 v77b: el "
-                                 f"ATM va en la partición que lo contiene y esa wall se cuenta completa)")
-            if w.get("to_deck") is not True:
-                raise ValueError(f"{wid} {o['ref']}: la wall del ATM sin to_deck true (D1 v77b: studs de piso a deck "
-                                 f"con top y bottom runner; el alto sale de B.O.D. con su fuente)")
-            sw, cw = st_w[wid], co_w["W:" + wid]
-            slf = float(sw.get("lf") or 0.0)
-            b, t = float(cw.get("bottom_lf") or 0.0), float(cw.get("top_lf") or 0.0)
-            k = next((f for key, f in STUD_FAM if key in str(w.get("stud_size", "")).lower()), None)
-            if k is None or slf <= EPS or b <= EPS or t <= EPS:
-                raise ValueError(f"{wid}: wall del ATM sin studs o sin bottom / top runner (D1 v77b)")
-            hechas.add(wid)
-            lf = slf + b + t
-            op = (f"ATM wall {wid} (D1 v77b, interior partition containing the walk-up ATM, floor to deck): studs "
-                  f"{round(slf, 2)} ({sw.get('operacion', '')[:90]}) + bottom runner {round(b, 2)} + top runner "
-                  f"{round(t, 2)} = {round(lf, 2)}; the wall also stays in its partition type and in {k} / bottom / "
-                  f"top track (estimator convention; RFI delta if counted once: -{round(slf, 2)} stud, "
-                  f"-{round(b, 2)} bottom, -{round(t, 2)} top)")
-            data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": round(lf, 4), "op": op,
-                                      "rfi_una_vez": {k: -round(slf, 2), "bottom track (todos)": -round(b, 2),
-                                                      "top / deflection track (todos)": -round(t, 2)}})
+                raise ValueError(f"{wid} {o['ref']}: atm_recess en un elemento sin studs_nodos / corridas (U1 v77c: el "
+                                 f"framing del recess está en la wall que lo contiene; esa wall tiene que estar en "
+                                 f"su type con studs y bottom / top track)")
+            slf = float(st_w[wid].get("lf") or 0.0)
+            cw = co_w["W:" + wid]
+            if slf <= EPS or float(cw.get("bottom_lf") or 0.0) <= EPS or float(cw.get("top_lf") or 0.0) <= EPS:
+                raise ValueError(f"{wid}: wall del ATM sin studs o sin bottom / top track en su type (U1 v77c)")
+            op = (f"ATM recess {o['ref']} in wall {wid} (type {w.get('type', '?')}): its framing is in that wall "
+                  f"(studs {round(slf, 2)} LF + bottom / top track in its type); extra framing = 0 (U1)")
+            data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": 0.0, "op": op})
 
 
 def _jambs_extra(data, fam, filas):
@@ -1743,7 +1703,7 @@ FAMS = ["2-1/2\" stud", "6\" stud (todos los gauges)", F_36, "1-5/8\" stud", F_P
         "metal stud blocking (362CR / STUD BLOCKING)", F_TRIM, "cement board", F_FRP, F_SEAL, F_L5]
 # familias que DEBEN salir de canon.py con número (PROTOCOLO_v62 §6); framed openings MEP sale de
 # framed_openings.py y se agrega con --fo
-OBLIGATORIAS = [f for f in FAMS if f not in ("2-1/2\" stud", F_L5)]
+OBLIGATORIAS = [f for f in FAMS if f not in ("2-1/2\" stud", F_L5, F_SEAL)]   # v77c U8: sealant exterior opcional
 STUD_FAM = (("parapet", F_PAR), ("2-1/2\"", "2-1/2\" stud"), ("6\"", "6\" stud (todos los gauges)"),
             ("3-5/8\"", F_36), ("1-5/8\"", "1-5/8\" stud"))
 BOARD_FAM = {"5/8 regular": F_GYP, "5/8 MR": "5/8\" gyp MOISTURE RESISTANT",
@@ -1770,9 +1730,6 @@ def _materiales(fam, hp):
     tot = sum(PLY.values())
     if abs(tot - fam[F_PLY]) > 0.05:
         raise ValueError(f"FRT plywood: Σ por material {round(tot, 2)} != familia {round(fam[F_PLY], 2)}")
-    if SEAL.get("acoustical", 0.0) > EPS:
-        out.append({"material": "Acoustical sealant", "family": F_SEAL, "key": "acoustical", "unit": "LF",
-                    "net": round(SEAL["acoustical"], 2)})
     if SEAL.get("exterior", 0.0) > EPS:
         out.append({"material": "Sealant at base of gypsum (exterior, not acoustical)", "family": F_SEAL,
                     "key": "exterior", "unit": "LF", "net": round(SEAL["exterior"], 2)})
@@ -1841,7 +1798,7 @@ def calcular(data, outdir=None, fo=None):
         fam["header / box beam"] += he["totales_lf"]["header"]
         fam["sill track"] += he["totales_lf"]["sill track"]
         avisos += he.get("avisos", [])
-    _atm_wall(data, fam, filas, st, co)                  # v77b D1: la partición del walk-up ATM, aparte
+    _atm_wall(data, fam, filas, st, co)                  # v77c U1: el recess del ATM está en su wall (0 extra)
     _jambs_extra(data, fam, filas)
     _kickers(data, fam, filas)
     _column_wraps(data, fam, filas)
@@ -1891,7 +1848,10 @@ def calcular(data, outdir=None, fo=None):
     out["rfis_accesorios"] = acc["rfis"]
     out["estado_accesorios"] = acc["estado"]
     out["obligatorias"] = OBLIGATORIAS + [f for f in accesorios.FAMS if f not in OBLIGATORIAS]
-    out["excluidas"] = {"batt insulation": "EXCLUDED (criterio del estimador: no insulation)"}
+    out["excluidas"] = {"batt insulation": "EXCLUDED (criterio del estimador: no insulation)",
+                        F_SEAL_AC: EXCL_SEAL_AC}
+    if SEAL.get("_ignorado"):
+        out["avisos"].append(SEAL["_ignorado"])
     out["partition_types"] = partition_types.partition_types(data, bo)
     chequeos_v75.verificar_r75_5(data)                    # v75: cambio de type colineal en un nodo (R73.10)
     chequeos_v75.verificar_v75(data, out["partition_types"])   # v75: alcove sin esquina; returns desde la cara exterior

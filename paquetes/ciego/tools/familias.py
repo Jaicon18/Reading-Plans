@@ -6,6 +6,8 @@ ningún proyecto ni del take-off de referencia: solo cómo leer la hoja de mater
 familia pertenece cada renglón.
 Cambio v62 (16-oct-2026, arbitraje #12): EXCLUYE plywood|nailbase de 5/8" gyp regular y "framed opening"
 de las familias de stud.
+Cambio v77c (U8): el sealant exterior (base of gypsum) es familia propia; "acoustical sealant" queda solo para
+renglones acoustical, que están EXCLUIDOS en todos los proyectos (el calificador los marca MAL con modo "excluir").
 Cambio 15-oct-2026: familia propia para el blocking METÁLICO (362CR / STUD BLOCKING), que ya no se
 suma al FRT blocking (arbitraje prueba #4, regla 54.3); y familia propia de purlin antes de las de
 track, que se sumaba al top track (arbitraje prueba #5).
@@ -99,7 +101,8 @@ FAMILIAS = [
     ("FRP", "sf", r'\bfrp\b', r''),
     ("FRT plywood (SF)", "sf", r'plywood', r''),
     ("metal trim (corner bead, casing, shadow molding)", "lf", r'corner bead|casing|shadow|metal trim', r''),
-    ("acoustical sealant", "lf", r'sealant', r''),
+    ("sealant at base of gypsum (exterior)", "lf", r'sealant', r'base of gyp|exterior'),   # v77c U8: familia propia
+    ("acoustical sealant", "lf", r'sealant', r''),            # v77c U8: EXCLUIDA (rangos modo "excluir")
     ("metal stud blocking (362CR / STUD BLOCKING)", "lf", r'blocking', r'362cr|stud blocking|metal'),
     ("FRT blocking", "lf", r'blocking', r''),
 ]

@@ -267,7 +267,7 @@ def _():
     assert any(r["familia"] == A.F_PVC and abs(r["delta"] - 10.0) < 0.01 for r in o.rfis), o.rfis
 
 
-@caso("R72.11 (v77b D1) atm_recess sistered + furring = falla; en wall exterior = falla; {source, drawn} en la partición = OK")
+@caso("R72.11 (v77c U1) atm_recess sistered + furring = falla; en wall exterior = OK (0 extra); extra a mano = falla")
 def _():
     ar = {"width_ft": 2.2, "width_status": "CONFIRMADO", "width_source": "5/A8.11", "sistered_h_ft": 6.0,
           "source": "6/A8.11"}
@@ -278,8 +278,11 @@ def _():
     d["walls"][0]["openings"][0]["atm_recess"] = {"source": "1/A8.11", "drawn": "WU ATM"}
     assert not [x for x in C.revisar(d)["fallas"] if "R72.11" in x]
     d["walls"][0]["tag"] = "EXT"
-    assert any("R72.11" in x and "exterior" in x for x in C.revisar(d)["fallas"])
+    assert not [x for x in C.revisar(d)["fallas"] if "R72.11" in x]
     d["walls"][0]["tag"] = "A1"
+    d["extra_framing"] = [{"ref": "ATM-1 sistered", "kind": "other", "lf": 9.0, "source": "6/A8.11"}]
+    assert any("R72.11" in x and "ATM-1" in x for x in C.revisar(d)["fallas"])
+    d.pop("extra_framing")
     d["openings_extra"] = [{"ref": "ATM-2", "kind": "atm", "atm_recess": {"source": "6/A8.11", "drawn": "x"}}]
     assert any("R72.11" in x and "ATM-2" in x for x in C.revisar(d)["fallas"])
 

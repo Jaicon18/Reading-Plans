@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 21-oct-2026 (v77b; §24 manda: D1 corregida y R77.10). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+Versión 21-oct-2026 (v77c; §25 manda: decisiones del usuario U1–U11; §24 sigue salvo R77.1, reemplazada por R77.11). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
 
 **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
 planos: `python3 tools/correr_suite.py` (instala dependencias si faltan, arma la estructura en carpeta limpia y corre
@@ -293,8 +293,8 @@ tools y `test_canon*.py`. Las tools fallan si falta un campo obligatorio:
   `fos_chain`. Facades: `parapet_t_stud_ft`, `nailbase_top_ft` / `_bottom_ft` o `parapet_face_of`. Faces por
   tramo: `side` + `length_ft` + `length_source`. Framed openings `width_source`.
 - accesorios: `mep_sweep {sheets, registro {dx_pt, dy_pt, matches ≥ 25, source}, source}`, `mep_penetrations`;
-  ATM de lobby `atm_recess {source N/HOJA, drawn}` (v77b D1: el extra framing es la partición interior completa que
-  lo contiene; el drive-up en una wall exterior lleva `atm_recess_none_reason`) o
+  ATM `atm_recess {source N/HOJA, drawn}` (v77c U1: el framing del recess está en la wall que lo contiene; extra
+  framing ATM = 0; framing adicional impreso explícito en `extra_printed {source, text, lf, op}` = RFI) o
   `atm_recess_none_reason`; abertura exterior `jamb_return` +
   source y storefront `jambs [{abuts, source}] × 2`; `head_build {head_ft, head_chain_in, box_depth_ft, n_box,
   board_in}`; `level5_tags` + items con `base_ft`; `access_panels`; `accesorios_rfi` / `accesorios_none`.
@@ -453,7 +453,7 @@ delta. Waste 15 % en metal; lo no metal con el factor del board; yields sin wast
 |---|---|---|
 | A1 | additional head track (LF, metal) | R.O. > 4'-0" en walls: (R.O. + 2 × bearing) × qty; openings_extra con box propio → RFI con delta (2/S5.20, 9/S5.20) |
 | A2 | stud reinforcement MEP (PCS) | barrido P/M REGISTRADO (≥ 25 coincidencias) o PENDIENTE; una vez por (wall, xy); Σ qty × MAX(1, ROUNDUP(ancho / O.C.)) (o `studs_cut`); pipe ≤ 1" o `in_cavity` = 0; ductos / FD llevan plate (6/S5.20) |
-| A3 | extra framing ATM (LF, metal) | v77b (D1 corregida): la partición interior COMPLETA que contiene el ATM de lobby (walk-up), studs de esa wall (studs_nodos, piso a deck) + bottom runner + top runner; la wall sigue en su type y sus familias (RFI con el delta de contarla una vez); la wall exterior del drive-up no entra (queda en su type exterior); sin sistered ni furring aparte; extra framing de ducto / FD = error (E12) |
+| A3 | extra framing ATM (LF, metal) | v77c (U1, R77.11): = 0. El framing de un recess de ATM / equipo empotrado está en la wall que lo contiene (su partition type lleva todo su metal); sin renglón, sin sistered, sin furring; lo que un detalle impreso pida explícitamente va en `atm_recess.extra_printed` y sale como RFI con su delta (nunca se suma en silencio); extra framing de ducto / FD = error (E12) |
 | A4 | 2-1/2" CFMF coiling grille head (LF, metal) | (ROUNDUP(L / O.C.) + 1) × (Σ cadena impresa del head − n box × peralte − board) |
 | A5 | gypsum board jamb return (SF) | bordes (R.O. + 2 jambs − sill + sill; storefront: head + jambs con `abuts: wall` × head) × ancho; ancho no acotado = RFI |
 | A6 | PVC trim at FRP (LF) | 2 × perímetro NETO de doors + inside corners × top + 2 × doors × top + mop sink; inside − outside = 4 |
@@ -501,8 +501,8 @@ Nombres EXACTOS del renglón: `accesorios.NOMBRES_EXCEL`.
 
 Hoja Inputs con las filas del estimador (B5 / B6 waste, B9 SF por sheet, B10 stud, B11 track, B15 sealant LF por
 tube, B16 C.R., B17 hat, B18 trim, B20–B24 yields, B25 anchors); toda cita `Inputs!Bn` existe. Pieces =
-ROUNDUP(NET × (1 + waste) / stock), waste una sola vez. Selling unit: sticks, runs, sheets, tubes (acoustical y
-exterior), hanger wire LF continuous coil + renglón PCS. Yields con fórmula viva (joint compound = Inputs B23,
+ROUNDUP(NET × (1 + waste) / stock), waste una sola vez. Selling unit: sticks, runs, sheets, tubes (sealant
+exterior; acoustical EXCLUIDO, R77.12), hanger wire LF continuous coil + renglón PCS. Yields con fórmula viva (joint compound = Inputs B23,
 criterio del estimador; un back-check no lo cambia). FRT plywood un renglón por material y espesor
 (`frt_plywood_by_material`); sealant exterior (`sealant_exterior_lf`) aparte; NET de familia solo en su unidad;
 RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en inglés (`verificar` rechaza español).
@@ -558,7 +558,7 @@ RFIs `RFI-ACC-<familia>` sin duplicados ni cerrados, delta legible; todo en ingl
 | R72.8 | Expansion anchors = bottom track de element `wall` exterior (lo que nombra el schedule de anclaje). Column wrap / chase exterior → pins (criterio del estimador) salvo `anchorage {value, source N/HOJA}`; parte sin tag de un box → ninguno + RFI con delta. | accesorios.py |
 | R72.9 | Stud reinforcement MEP: plates = MAX(1, ROUNDUP(ancho / O.C.)) × filas de studs del wall (double row = 2; regla "REGISTRO ENTRE HOJAS Y CRUCE DE MEP"), con RFI de la alternativa "una por cruce". `studs_cut` solo como override con fuente. | accesorios.py |
 | R72.10 | PVC trim del FRP: con más de 4 vértices, `inside_corners.jogs [{depth_in, kind notch|step, source}]`; un jog < 6" (carrier, espesor de acabado) no lleva inside corner trim (se descuenta + RFI con delta). | chequeos_v72 + accesorios |
-| R72.11 | (v77b, D1) ATM: el extra framing es la partición interior completa del ATM de lobby (R77.1); la fórmula sistered + furring y sus `alternativas` ya no existen y atm_recess en una wall exterior (drive-up) = falla (compuerta). | chequeos_v72 + accesorios + canon |
+| R72.11 | (v77c, U1) ATM: extra framing ATM = 0 (R77.11): el framing del recess está en la wall que lo contiene; la fórmula sistered + furring y sus `alternativas` ya no existen; `extra_framing` de ATM a mano = falla (compuerta). | chequeos_v72 + accesorios + canon |
 | R72.12 | Track por tamaño (R71.8b): los renglones por tamaño de una familia conservan su NET y suman la familia (± 0.1); `fusionar` nunca les pone el total. `verificar` compara Σ contra `familias_out.json` de las salidas. | plantilla_excel.py |
 
 ---
@@ -673,7 +673,7 @@ GENÉRICA con compuerta y test sintético (test_v77.py). R77.3 es la regla del u
 
 | Regla | Texto | Dónde |
 |---|---|---|
-| R77.1 | (D1, corregida en v77b) Extra framing ATM = la PARTICIÓN INTERIOR que CONTIENE la unidad ATM de lobby (walk-up), la que el detalle del ATM llama sobre esa wall (burbuja / callout en la wall): la wall COMPLETA (todo su largo), studs @ O.C. impreso de piso a deck (`to_deck: true`, alto por B.O.D. con su fuente; los de studs_nodos de esa wall) + bottom runner + top runner. Nada de studs sistered ni filas de furring aparte. La wall exterior de un drive-up NO es este renglón: su framing queda en su type exterior y ese ATM declara `atm_recess_none_reason` con la hoja (atm_recess en una wall exterior = error). Convención del estimador: la partición SIGUE en su partition type (LF, board) y en sus familias de stud / track (nada se resta); el renglón "extra framing ATM" va aparte y canon.py emite el RFI con el delta de contarla una sola vez. El walk-up declara `atm_recess {source N/HOJA del detalle que lo llama, drawn: texto rotulado}`. La fórmula vieja (width_ft, sistered_h_ft, furring_rows, alternativas), `extra_framing` kind atm_recess a mano o atm_recess fuera de un wall = error. | canon.py `_atm_wall`; accesorios.py `atm_recess_valido`; chequeos_v72 R72.11 |
+| R77.1 | (D1; REEMPLAZADA en v77c por R77.11 / U1: extra framing ATM = 0; lo que sigue es historia) (D1, corregida en v77b) Extra framing ATM = la PARTICIÓN INTERIOR que CONTIENE la unidad ATM de lobby (walk-up), la que el detalle del ATM llama sobre esa wall (burbuja / callout en la wall): la wall COMPLETA (todo su largo), studs @ O.C. impreso de piso a deck (`to_deck: true`, alto por B.O.D. con su fuente; los de studs_nodos de esa wall) + bottom runner + top runner. Nada de studs sistered ni filas de furring aparte. La wall exterior de un drive-up NO es este renglón: su framing queda en su type exterior y ese ATM declara `atm_recess_none_reason` con la hoja (atm_recess en una wall exterior = error). Convención del estimador: la partición SIGUE en su partition type (LF, board) y en sus familias de stud / track (nada se resta); el renglón "extra framing ATM" va aparte y canon.py emite el RFI con el delta de contarla una sola vez. El walk-up declara `atm_recess {source N/HOJA del detalle que lo llama, drawn: texto rotulado}`. La fórmula vieja (width_ft, sistered_h_ft, furring_rows, alternativas), `extra_framing` kind atm_recess a mano o atm_recess fuera de un wall = error. | canon.py `_atm_wall`; accesorios.py `atm_recess_valido`; chequeos_v72 R72.11 |
 | R77.2 | (D2) Todo box beam / box header = 4 piezas × (R.O. + 1'-4"). El CONT. BOX BEAM de un office front es UN run continuo de la PRIMERA a la ÚLTIMA jamb del frente + 1'-4", × 4 (nunca por abertura): declara `front_line {sheet, ori, c_pt, jambs_pt [primera, última], scale_pt_per_ft, source}`, ro_w_ft = jambs / escala; `run_ends` = jamb_to_jamb; dos runs sobre la misma línea = error. Los demás headers llevan las piezas del HEADER SCHEDULE impreso; las piezas de cada fila = su rótulo (SINGLE 1, DOUBLE 2, "2-…" 2); largo = R.O. + 1'-4". | headers.py `_front_line`, `_piezas_rotulo`, `_reglas_v65b` |
 | R77.3 | (D3, inviolable) "Léelo y haz lo que ellos te dicen": si un schedule o detalle impreso contesta, se aplica sin RFI ni pregunta. Si el dato no está impreso, se mide por geometría vectorial a la escala impresa del detalle, verificada contra una cota o un espesor impreso del mismo detalle (`scale_check`), con imagen marcada y [DERIVADO]. | chequeos_v77.py (strips); headers.py (schedule) |
 | R77.4 | (D4) 3/4" FRT plywood en piers de storefront: el detalle lo rotula SOLO como strip en cada jamb del storefront; las caras del pier (nailbase: AWB on FRT plywood bonded to polyiso, y gypsum board) NO van en ese renglón. Cada strip `uso: pier` declara `width_pt` + `scale_pt_per_ft` + `scale_check {printed_in, measured_pt}` (D3), `width_ft` = width_pt / escala, `jambs` × `height_ft` (alto impreso, `height_source`) = `lf`, `plies` del rótulo y `layers_drawn`; más capas dibujadas que el rótulo singular = plies del rótulo + `rfi` con delta. Todo pier declara `jamb_strips [refs]` o `jamb_strips_none_reason` con hoja. | chequeos_v77.py `r77_4` (lo llama canon.py) |
@@ -683,6 +683,26 @@ GENÉRICA con compuerta y test sintético (test_v77.py). R77.3 es la regla del u
 | R77.8 | R76.7 sin falsos bloqueos: A_BLOCKING reconoce el rótulo con puntos (F\.?R\.?T\.?); el detector de español del Excel quita rutas, nombres de archivo, ids y coordenadas antes de buscar; vigas_sobre_walls solo cruza bands de la hoja de planta pedida (band.sheet); bitácora escribe con lock y resuelve symlinks (realpath); inventario_tags.py y alcances.py leen siempre la copia limpia del bid set (copia_limpia.py, sin /Annots). | reglas.py; plantilla_excel.py; vigas_sobre_walls.py; bitacora.py; copia_limpia.py |
 | R77.9 | Millwork empotrado en una partición (la elevación / sección del cabinet dibuja la partición arriba: "SCHED. PARTITION") = abertura enmarcada: header del schedule por su R.O. impreso; el tramo de partición acotado frente al cabinet es de su type (un tramo acotado sin dueño = falta de inventario). | lectura (inventario + headers.py) |
 | R77.10 | (decisión del usuario, v77b) El largo de un wall corre A TRAVÉS de sus doors hasta la esquina o la intersección donde termina: el R.O. de la door queda DENTRO del largo del wall (confirma R70.3 / E10); nunca se corta el wall en la jamb dejando el tramo de la door sin dueño, aunque la door esté pegada a la esquina. Con `band {p0, p1}` y `openings[].xy_pt` (centro del R.O. en planta) un R.O. fuera del largo del wall (± 6") = falla. | chequeos_v77.py `r77_10` (lo llama canon.py); particion.py (R70.3) |
+
+
+## 25. Reglas v77c (decisiones del usuario U1–U11 en Bluebeam; mandan sobre §24 y todo lo anterior)
+
+Origen: el estimador revisó en Bluebeam las pruebas y la referencia. Cada decisión es regla GENÉRICA con compuerta y
+test sintético (test_v77.py U1, test_v77c.py). Los valores del proyecto viven solo en la referencia y en los rangos
+del árbitro; aquí no hay ningún número de un proyecto.
+
+| Regla | Texto | Dónde |
+|---|---|---|
+| R77.11 | (U1, reemplaza a R77.1) El framing de un recess de ATM / equipo empotrado está en la wall que lo contiene: su partition type lleva todo su metal (studs @ O.C., bottom y top track). El renglón "extra framing ATM" = 0 (DERIVADO, con la fuente del detalle): no se agrega renglón, ni studs sistered, ni furring, ni se mueve la wall a otro renglón. Solo si un detalle impreso pide EXPLÍCITAMENTE framing adicional en el recess, se declara `atm_recess.extra_printed {source N/HOJA, text literal impreso, lf, op}` y sale como RFI con su delta para el estimador (no se suma). Vale igual en una partición interior o en una wall exterior. Compuerta: la wall del ATM pasa por studs_nodos y corridas; `extra_framing` de ATM a mano, la fórmula vieja o un `extra_printed` sin texto impreso = error. Lo que antes se agrupaba en ese renglón (extras de otras walls) vuelve a su type. | canon.py `_atm_wall`; accesorios.py `atm_recess_valido`, `extra_framing`; chequeos_v72 R72.11 |
+| R77.12 | (U8) ACOUSTICAL SEALANT EXCLUIDO EN TODOS LOS PROYECTOS: sin renglón, sin cálculo, sin RFI de cantidad; va en Clarifications / Scope Checklist como exclusión ("EXCLUDED in all projects, estimator standing order"). El "sealant at base of gypsum" exterior NO es acoustical: sigue, en su renglón y su familia propia. Compuertas: canon.py no calcula `details[*].sealant` ni `sealant_items` (aviso con lo que se dejó fuera) y pone la exclusión en `excluidas`; alcances.py ALC-19 se cierra "EXCLUIDO: ..." y un Excel con renglón de acoustical sealant = falla; plantilla_excel `validar` / `verificar` rechazan el renglón; el calificador usa el modo "excluir". Anula 54.4, 55.5 y 53.9 punto 2. | canon.py `_sealant`; alcances.py `EXCLUIDOS`; plantilla_excel.py `acoustical_err`, `verificar_v77c`; familias.py; eval_takeoff.py |
+| R77.13 | (U9) Preguntas al estimador: primero se anuncia el total ("tengo N preguntas en total, te las haré una a la vez") y se hace UNA pregunta por turno, corta. En una corrida automática las preguntas van a PARA REVISAR numeradas n/N con el total anunciado en la primera fila. Compuerta: `revisar_err` (n = 1..N, total en cada item) y `verificar_v77c` (primera fila "N questions in total", columna # = n/N). | plantilla_excel.py `ordenar_revisar`, `revisar_err`, `verificar_v77c` |
+| R77.14 | (U10) Procedimiento OBLIGATORIO de revisión con el estimador (orden de las preguntas y de PARA REVISAR): 1) FLOOR PLAN, las partitions en orden ALFABÉTICO de type (orden natural: A2 antes que A10); 2) al terminar el floor plan, los DETALLES que marca el floor plan, en el orden en que el floor plan los marca. Cada item declara `fase` ("floor_plan" con `type`, o "detalle" con `orden_plano` y N/HOJA). Compuerta: item sin fase / type / orden_plano = error; fuera de orden = error (`ordenar_revisar` lo ordena y numera). | plantilla_excel.py |
+| R77.15 | (U11) Mensajes al usuario cortos, sin tablas largas: un paso, una pregunta, lo esencial; el detalle va en los archivos. | lectura (proceso) |
+| R77.16 | (U7) Studs de una wall = posiciones @ O.C. + 1 + los extras de nodo: +1 en cada esquina L y +1 al branch en cada intersección T (R60.1, studs_nodos); nunca a ojo ni por promedio. | studs_nodos.py (test_v77c U7) |
+
+Sin regla nueva (con motivo): U2 ya es R77.10 (el largo de un wall corre a través de sus doors hasta la esquina /
+intersección). U3–U6 son medidas del proyecto (largos de walls y returns sin tag): se leen con R77.10 + R77.3 (lo
+impreso manda; lo no impreso, por vector verificado) y viven solo en la referencia del árbitro.
 
 # REFERENCIA DE MÉTODO (v38–v68) — subordinada al PROTOCOLO v69
 
@@ -1906,7 +1926,7 @@ planta (ej.: nota A de A02.01). Las caras de un chase húmedo se miden cara por 
 
 ## REGLA 53.9 — HALLAZGOS DEL ARBITRAJE (protocolo)
 1. FRP: la altura impresa se mide SOBRE el cove base (ej.: A-D/A08.01).
-2. Acoustical sealant sigue el detalle de CADA partition type (2×, 4× o 0 lados); el exterior y el
+2. (ANULADO en v77c por R77.12 / U8: acoustical sealant EXCLUIDO) Acoustical sealant sigue el detalle de CADA partition type (2×, 4× o 0 lados); el exterior y el
    parapet NO llevan acoustical sealant salvo que su detalle lo diga.
 3. "SEALANT AT BASE OF GYPSUM" exterior es su PROPIO renglón (no acoustical).
 4. Glass mat sheathing y FRT plywood de column wraps / piers salen de sus detalles de pared exterior:
@@ -1940,6 +1960,7 @@ también las elevaciones interiores (artwork, monitores, TV) y las notas de hoja
 accessories, wall stops). Ej.: parapet blocking = 4/A09.26.
 
 ## ⛔ REGLA 54.4 — ACOUSTICAL SEALANT CORRIDA POR CORRIDA
+**ANULADA en v77c por R77.12 (U8): acoustical sealant EXCLUIDO en todos los proyectos.** Texto histórico:
 Tabla por partition type: corridas top / bottom × caras, leída de CADA detalle. Cantidad = Σ largo ×
 corridas. PROHIBIDO usar el punto medio de un rango. Línea dibujada sin rótulo = RFI con su delta
 (ej.: base de un type sin rótulo; "SEALANT" del office front 9/A12.01).
@@ -1992,6 +2013,7 @@ por su espesor medido contra el schedule antes de aplicar la serie. Una franja d
 la retícula del RCP del cuarto vecino, no el nombre del cuarto más cercano.
 
 ## ⛔ REGLA 55.5 — ACOUSTICAL SEALANT EN DOORS
+**ANULADA en v77c por R77.12 (U8): acoustical sealant EXCLUIDO.** Texto histórico:
 Las corridas de abajo se descuentan en cada door R.O. (no hay sealant cruzando el vano).
 
 ## ⛔ REGLA 55.6 — MOISTURE RESISTANT BOARD

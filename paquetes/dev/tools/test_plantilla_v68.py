@@ -39,7 +39,8 @@ def fo_base():
     fo = T7.familias_out()
     fo = copy.deepcopy(fo)
     fo["familias"][FRT] = 100.0 + 40.0 + 25.0 + 10.0
-    fo["familias"]["acoustical sealant"] = 90.0
+    fo["familias"]["sealant at base of gypsum (exterior)"] = 12.5     # v77c U8: acoustical EXCLUIDO
+    fo["sealant_exterior_lf"] = 12.5
     fo["familias"]["hanger wire"] = 33.0
     fo["hanger_pcs"] = {"total_pcs": 11}
     fo["filas"] += [
@@ -50,7 +51,7 @@ def fo_base():
         {"familia": FRT, "ref": "electrical room 3/4\" FRT plywood backboard", "source": "X11.03",
          "operacion": "strip 5 x 5 = 25 SF"},
         {"familia": FRT, "ref": "pier 3/4\" FRT plywood", "valor": 10.0, "source": "1/X9.25", "operacion": "x"},
-        {"familia": "acoustical sealant", "ref": "sealant at base of gypsum (exterior)", "source": "5/X9.26",
+        {"familia": "sealant at base of gypsum (exterior)", "ref": "sealant at base of gypsum (exterior)", "source": "5/X9.26",
          "operacion": "12.5 LF (not acoustical)"}]
     return fo
 
@@ -60,8 +61,6 @@ def takeoff():
     d["materials"] += [
         {"material": "FRT plywood (nailbase / fascia / strips)", "unit": "SF", "net": 1.0, "metal": False,
          "selling_unit": "4x8 sheet", "source": f"familias_out.json '{FRT}'; 1/X9.21"},
-        {"material": "Acoustical sealant", "unit": "LF", "net": 1.0, "metal": False, "selling_unit": "LF",
-         "source": "familias_out.json 'acoustical sealant'; 1/X12.01"},
         {"material": "Hanger wire 12 ga", "unit": "LF", "net": 1.0, "metal": True, "selling_unit": "roll",
          "source": "familias_out.json 'hanger wire'; 3/X9.33"},
         {"material": "Bracing 1-1/2\" C.R. channel @ 48\" O.C.", "unit": "LF", "net": 100.0, "metal": True,
@@ -132,7 +131,7 @@ def test_compra_inputs_y_desperdicio_una_vez():
     chk("trim stick / B18", "Inputs!$B$18" in f["Metal trim - corner bead"][7] and v["Metal trim - corner bead"][7] == 12)
     chk("track run / B11", "Inputs!$B$11" in f["Bottom track 3-5/8\""][7] and v["Bottom track 3-5/8\""][7] == 12)
     chk("sheet / B9", any("Inputs!$B$9" in str(r[7]) for k, r in f.items() if "plywood" in k))
-    s = [k for k in f if k.startswith("Acoustical sealant")][0]
+    s = [k for k in f if k.startswith("Sealant at base of gypsum")][0]
     chk("sealant en tubes / B15", "Inputs!$B$15" in f[s][7] and "tube" in f[s][6], f[s])
     chk("hanger wire LF continuous coil", "coil" in str(f["Hanger wire"][6]), f["Hanger wire"])
     # desperdicio una vez: stud de 100 LF, 15 % -> ROUNDUP(115 / 20) = 6 (antes 1 stick por corte de 13 ft = 9)  [ciego-ok]
@@ -177,21 +176,24 @@ def test_yields_inputs_reales():
 
 
 def test_sealant_exterior_aparte():
+    """v77c (U8, R77.12): sealant exterior en su renglón; acoustical sealant EXCLUIDO (sin renglón; exclusión escrita)."""
     d, x = armado()
     m = {r["material"]: r for r in d["materials"]}
     chk("sealant exterior en su renglón", m[P.SEAL_EXT_NOMBRE]["net"] == 12.5, m.get(P.SEAL_EXT_NOMBRE))
-    chk("acoustical sin el exterior", m["Acoustical sealant"]["net"] == 77.5, m["Acoustical sealant"])
+    chk("U8: sin renglón de acoustical sealant", not [k for k in m if "acoustical sealant" in k.lower()
+                                                      and "not acoustical" not in k.lower()], list(m))
+    chk("U8: exclusión en Scope Checklist", any("acoustical sealant" in str(a.get("nombre", "")).lower() and
+                                                "EXCLUDED" in str(a.get("nota", "")) for a in d["alcances"]), d["alcances"])
+    chk("U8: Excel bueno pasa", not [e for e in P.verificar_excel(x) if "U8" in e], P.verificar_excel(x))
     d3 = takeoff()
-    for m3 in d3["materials"]:
-        if m3["material"] == "Acoustical sealant":
-            m3["material"] = "Acoustical sealant (partitions) and sealant at base exterior"
-    m3 = {r["material"]: r for r in P.fusionar(d3, fo_base())["materials"]}
-    chk("renglón mezclado se separa y se renombra", m3.get("Acoustical sealant", {}).get("net") == 77.5
-        and m3[P.SEAL_EXT_NOMBRE]["net"] == 12.5, list(m3))
+    d3["materials"].append({"material": "Acoustical sealant", "unit": "LF", "net": 5.0, "metal": False,
+                            "selling_unit": "tube", "source": "1/X12.01"})
+    chk("U8: takeoff con renglón acoustical = error", any("U8" in e for e in P.validar(P.fusionar(d3, fo_base()))))
     wb = openpyxl.load_workbook(x); ws = wb["Material Summary"]
-    ws.append(["Acoustical sealant and sealant at base of gypsum exterior", "LF", 1, 0, 0, 1, "tube", "=ROUNDUP(F1/Inputs!$B$15,0)"])
+    ws.append(["Acoustical sealant", "LF", 10, 0, 0, 10, "tube", "=ROUNDUP(F1/Inputs!$B$15,0)"])
     y = os.path.join(os.path.dirname(x), "s.xlsx"); wb.save(y)
-    chk("verificar: sealant mezclado", any("mezcla sealant" in e for e in P.verificar_excel(y)))
+    chk("U8: verificar rechaza el renglón de acoustical sealant", any("U8" in e for e in P.verificar_excel(y)),
+        P.verificar_excel(y))
 
 
 def test_ingles():

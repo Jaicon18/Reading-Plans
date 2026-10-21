@@ -291,12 +291,12 @@ def test_extra_framing():
     c = canon_base()
     c["walls"][0]["openings"][0]["atm_recess"] = {"width_ft": 4.0, "sistered_h_ft": 6.0, "furring_rows": 3,
                                                    "source": "6/X8.11"}
-    _err("v77 D1: fórmula sistered + furring = error", c, "D1")
+    _err("U1: fórmula sistered + furring = error", c, "U1")
     c["walls"][0]["openings"][0]["atm_recess"] = {"source": "6/X8.11", "drawn": "STUD SISTERED (sintético)"}
-    _err("v77 D1: atm_recess sin la wall movida por canon = error", c, "canon.py")
-    c["_atm_wall"] = [{"ref": c["walls"][0]["openings"][0]["ref"], "wall": "W1", "lf": 100.0, "op": "sintético"}]
+    _err("U1: atm_recess sin la verificación de canon = error", c, "canon.py")
+    c["_atm_wall"] = [{"ref": c["walls"][0]["openings"][0]["ref"], "wall": "W1", "lf": 0.0, "op": "sintético"}]
     o = A.calcular(fam_base(), c, STUDS)
-    chk("v77 D1: extra framing ATM = wall movida", abs(o["familias"]["extra framing ATM"] - 100.0) < 0.011)
+    chk("U1: extra framing ATM = 0", abs(o["familias"]["extra framing ATM"]) < 1e-9)
 
 
 def test_v67_atm_obligatorio():
@@ -307,7 +307,7 @@ def test_v67_atm_obligatorio():
     c["walls"][0]["openings"][-1]["atm_recess"] = {"source": "X8.11", "drawn": "STUD SISTERED (sintético)"}
     _err("atm_recess sin N/HOJA = error", c, "N/HOJA")
     c["walls"][0]["openings"][-1]["atm_recess"]["source"] = "6/X8.11"
-    c["_atm_wall"] = [{"ref": "ATM drive-up", "wall": "W1", "lf": 50.0, "op": "sintético"}]
+    c["_atm_wall"] = [{"ref": "ATM drive-up", "wall": "W1", "lf": 0.0, "op": "sintético"}]
     o = A.calcular(fam_base(), c, STUDS)
     chk("ATM con recess = DERIVADO", o["estado"]["extra framing ATM"] == "DERIVADO")
 
@@ -387,7 +387,7 @@ def test_v68_access_panel_sin_doble_conteo():
 def test_v68_atm_estados_y_e12():
     c = canon_base()
     c["extra_framing"] = [{"ref": "ATM 2", "kind": "atm_recess", "lf": 40.0, "source": "6/X8.11"}]
-    _err("v77 D1: extra_framing kind atm_recess a mano = error", c, "D1")
+    _err("U1: extra_framing kind atm_recess a mano = error", c, "U1")
     c = canon_base()
     c["extra_framing"] = [{"ref": "duct 8x10 framing", "kind": "mep", "lf": 6.0, "source": "M1.01"}]
     _err("v68 extra framing de ducto = error (E12)", c, "E12")

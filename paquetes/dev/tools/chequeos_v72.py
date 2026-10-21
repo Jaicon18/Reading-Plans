@@ -21,8 +21,8 @@ aplicaban a criterio de cada lectura. Cada regla que una corrida dejó de aplica
   R72.5  MEP (6/S5.20): cada `mep_penetrations[]` trae `xy` y `method` = "mep.cruces" (salida de la tool) o
          `manual {motivo, img}`; ref repetida por tamaño contra el opening_schedule (FD / fire damper) = falla (el
          mismo FD contado por el schedule y por el barrido); `studs_cut` solo con source N/HOJA.
-  R72.11 (v77b D1) atm_recess sin fórmula sistered + furring (la partición interior completa que contiene el ATM de
-         lobby / walk-up); atm_recess en una wall exterior (drive-up) = falla (su framing queda en su type exterior).
+  R72.11 (v77c U1) atm_recess sin fórmula sistered + furring: el framing del recess está en la wall que lo contiene;
+         extra framing ATM = 0; extra_framing de ATM a mano = falla.
   R72.10 tile_base.inside_corners con > 4 vértices trae `jogs` [{depth_in, kind notch|step, source}]: un jog de menos
          de 6" (carrier, espesor de acabado) no lleva inside corner trim (accesorios lo descuenta con RFI).
   R72.6  faces[].side = A | B | END (A = cara norte u oeste, B = sur o este; BOX = A); nunca letras de brújula.
@@ -237,10 +237,10 @@ def r72_5(canon):
 
 
 def r72_7(canon):
-    """R72.11 (ATM), v77b (decisión del usuario D1, corregida): el extra framing del ATM = la partición interior
-    completa que contiene el ATM de lobby / walk-up (studs piso a deck + bottom + top runner). atm_recess solo lleva
-    {source N/HOJA, drawn}; la fórmula vieja (width_ft, sistered_h_ft, furring_rows, alternativas, *_status) es
-    falla; atm_recess fuera de un wall o en una wall exterior (drive-up) también."""
+    """R72.11 (ATM), v77c (decisión del usuario U1, R77.11): el framing de un recess de ATM / equipo empotrado está en
+    la wall que lo contiene; extra framing ATM = 0. atm_recess lleva {source N/HOJA, drawn} (y extra_printed solo con
+    texto impreso, que sale como RFI); la fórmula vieja (width_ft, sistered_h_ft, furring_rows, alternativas,
+    *_status) es falla; atm_recess fuera de un wall o extra_framing de ATM a mano también."""
     f = []
     viejos = ("width_ft", "sistered_h_ft", "furring_rows", "alternativas", "width_status", "sistered_h_status",
               "furring_rows_status")
@@ -248,17 +248,14 @@ def r72_7(canon):
         for op in w.get("openings") or []:
             ar = op.get("atm_recess") if isinstance(op, dict) else None
             if isinstance(ar, dict) and any(k in ar for k in viejos):
-                f.append(f"R72.11 {op.get('ref')}: atm_recess con la fórmula sistered + furring (D1 v77b: el extra "
-                         f"framing del ATM es la partición completa {w.get('id')}, studs piso a deck + bottom + top "
-                         f"runner)")
-            ext = str(w.get("tag") or "").upper().startswith("EXT") or w.get("location") == "exterior" or \
-                w.get("exterior") is True or (isinstance(op, dict) and op.get("location") == "exterior")
-            if ar and ext:
-                f.append(f"R72.11 {op.get('ref')}: atm_recess en la wall exterior {w.get('id')} (D1 v77b: el drive-up "
-                         f"queda en su type exterior; el extra framing es la partición interior del walk-up)")
+                f.append(f"R72.11 {op.get('ref')}: atm_recess con la fórmula sistered + furring (U1 v77c: el framing "
+                         f"del recess está en la wall {w.get('id')}; extra framing ATM = 0)")
     for op in canon.get("openings_extra") or []:
         if isinstance(op, dict) and op.get("atm_recess"):
-            f.append(f"R72.11 {op.get('ref')}: atm_recess fuera de un wall (D1 v77b: va en la partición que contiene el ATM)")
+            f.append(f"R72.11 {op.get('ref')}: atm_recess fuera de un wall (U1 v77c: va en la wall que lo contiene)")
+    for it in canon.get("extra_framing") or []:
+        if isinstance(it, dict) and (it.get("kind") == "atm_recess" or re.search(r"\bATM\b", str(it.get("ref")), re.I)):
+            f.append(f"R72.11 {it.get('ref')}: extra_framing de ATM a mano (U1 v77c: extra framing ATM = 0)")
     return f
 
 
