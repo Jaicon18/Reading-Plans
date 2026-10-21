@@ -6,21 +6,25 @@ Control de versiones de los skills de take-off de metal frame y drywall.
 
 | Carpeta / archivo | Qué es |
 |---|---|
-| `skills/take-off-metal-frame-drywall/` | Skill principal de take-off (Div. 05 / Div. 09) |
-| `skills/back-check-take-off/` | Skill de back-check independiente |
+| `paquetes/dev/` | Paquete de desarrollo vigente (v77c): `take-off-metal-frame-drywall/` + `tools/` + `CAMBIOS_*.md` |
+| `paquetes/ciego/` | Paquete ciego vigente (v77c), el que se usa en las pruebas automáticas |
+| `skills/back-check-take-off/` | Skill de back-check |
 | `skills/precios-materiales-fbm/` | Skill de precios FBM |
+| `historial/` | Nota de cambios de cada versión (v54 a v77c) |
 | `ERRORES.md` | Registro de cada error y su regla, por versión |
 
-## Flujo para actualizar un skill
+Cada versión v58 a v77c es un commit propio, en orden. El contenido de `paquetes/` es idéntico
+a los zips de Drive (`JC HUNTER PROJECTS/Claude outputs`).
 
-1. Editar el skill en `skills/`.
-2. Agregar la fila en `ERRORES.md`.
-3. Commit: `vNN: <regla en una línea>`.
-4. Subir el skill actualizado a claude.ai (Settings → Capabilities → Skills).
+## Flujo para una versión nueva
+
+1. Poner el contenido del zip nuevo en `paquetes/dev/` y `paquetes/ciego/`.
+2. Copiar su `CAMBIOS_vNN.md` a `historial/vNN.md` y agregar la fila en `ERRORES.md`.
+3. Commit: `vNN: <cambio en una línea>`.
 
 Para ver qué cambió entre versiones: historial de commits en GitHub.
-Para volver a una versión anterior: tomar el skill de ese commit y subirlo otra vez.
+Para volver a una versión anterior: tomar `paquetes/` de ese commit y volver a armar el zip.
 
 ## Nota
 
-Las herramientas (`_herramientas/py/`) viven en Google Drive y no están en este repo todavía.
+El skill instalado en claude.ai es la v57. Las versiones v58 a v77c solo están en Drive y en este repo.
