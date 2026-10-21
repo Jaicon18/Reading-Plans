@@ -23,7 +23,7 @@ Bloques OPCIONALES nuevos en takeoff_canon.json (todos con source):
   level5_items[].wc_tag, level5_items[].base_ft {value, source}  (altura neta = h - base, key note de la base).
   walls[grille_head].stud_len_ft {value, source}  o  walls[grille_head].head_build
       {head_ft, box_depth_ft, n_box, board_in, source}  (largo del 2-1/2" entre los dos box beams).
-  extra_framing [{ref, lf | pcs+len_ft, kind (mep|other), source}]   (v77: atm_recess sale de la wall)
+  extra_framing [{ref, lf | pcs+len_ft, kind (mep|other), source}]   (v77b: atm_recess = la partición del walk-up ATM)
   mep_penetrations [{ref, wall, width_in, qty, source}]  (penetraciones en walls, 6/S5.20)
   access_panels [{ref, qty, source}]
   tile_base[].inside_corners {value, vertices, outside_corners, source}  (esquinas interiores del cuarto con FRP;
@@ -35,8 +35,9 @@ v67 (integración, 17-oct-2026) — reglas que cierran los huecos de la verifica
     mep_penetrations[] acepta dia_in (pipe redondo): <= 1" centrado en el web = 0 plates (6/S5.20).
   - extra framing ATM: si hay una abertura ATM (kind atm o "ATM" en el ref) el canon DEBE declarar
     atm_recess {source N/HOJA, drawn} o atm_recess_none_reason. Si no: ValueError.
-    v77 (D1): el framing del ATM = la wall completa donde está (studs piso a deck + bottom + top runner);
-    canon.py los mueve de las familias de stud / track a esta; sin sistered ni furring aparte.
+    v77b (D1 corregida): el extra framing del ATM = la partición interior completa que contiene el ATM de lobby
+    (walk-up), studs piso a deck + bottom + top runner; la wall sigue en su type y sus familias (convención del
+    estimador, RFI con el delta de contarla una vez); la wall exterior del drive-up no entra; sin sistered ni furring.
   - jamb return: toda abertura exterior (wall EXT* / location exterior, storefront, window, ATM) DECLARA
     jamb_return true|false + jamb_return_source (la sección que se leyó); storefront con return declara
     wall_jambs + wall_jambs_source. Si no: ValueError.
@@ -407,30 +408,32 @@ ATM_VIEJOS = ("width_ft", "width_source", "width_status", "sistered_h_ft", "sist
 
 
 def atm_recess_valido(op, ctx=None):
-    """v77 (decisión del usuario D1): el framing del ATM = la wall COMPLETA donde está el ATM (todo su largo), studs de
-    piso a deck + bottom runner + top runner. No se suman studs sistered ni filas de furring aparte. El bloque
-    atm_recess solo declara la fuente impresa {source N/HOJA, drawn: texto rotulado}; la fórmula vieja
-    (width_ft / sistered_h_ft / furring_rows / alternativas) es error."""
+    """v77b (decisión del usuario D1, corregida): el extra framing del ATM = la partición interior COMPLETA que
+    contiene el ATM de lobby (walk-up), studs de piso a deck + bottom runner + top runner. No se suman studs sistered
+    ni filas de furring aparte. El bloque atm_recess solo declara la fuente impresa {source N/HOJA del detalle que
+    llama el ATM sobre esa wall, drawn: texto rotulado}; la fórmula vieja (width_ft / sistered_h_ft / furring_rows /
+    alternativas) es error."""
     ar = op.get("atm_recess")
     ctx = ctx or str(op.get("ref"))
     viejos = [k for k in ATM_VIEJOS if k in (ar or {})]
     if viejos:
-        raise ValueError(f"{ctx}.atm_recess: {', '.join(viejos)} ya no existen (D1 v77: el framing del ATM = la wall "
-                         f"completa donde está el ATM, studs piso a deck + bottom + top runner; sin sistered ni furring "
-                         f"aparte). Declarar atm_recess {{source N/HOJA, drawn}}")
+        raise ValueError(f"{ctx}.atm_recess: {', '.join(viejos)} ya no existen (D1 v77b: el extra framing del ATM = la "
+                         f"partición interior completa que contiene el ATM de lobby, studs piso a deck + bottom + top "
+                         f"runner; sin sistered ni furring aparte). Declarar atm_recess {{source N/HOJA, drawn}}")
     s = src(ar, f"{ctx}.atm_recess")
     if not NHOJA.search(str(s)):
         raise ValueError(f"{ctx}.atm_recess.source debe citar el detalle N/HOJA del ATM")
     if not str(ar.get("drawn") or "").strip():
-        raise ValueError(f"{ctx}.atm_recess.drawn: el texto que el detalle rotula en el recess (D1 v77)")
+        raise ValueError(f"{ctx}.atm_recess.drawn: el texto que el detalle rotula en el recess (D1 v77b)")
     return s
 
 
 def extra_framing(data, o):
-    """Extra framing ATM (v77, decisión del usuario D1): la wall completa donde está el ATM. canon.py mueve los studs
-    (studs_nodos de esa wall) + su bottom y top runner (corridas) de sus familias a esta (una sola vez: la wall NO
-    queda en las familias de stud / track de su partition type) y los deja en data["_atm_wall"]. Aquí solo se suman.
-    extra_framing kind "atm_recess" = error (la wall sale de su registro); kind "mep" de un ducto / FD = error (E12)."""
+    """Extra framing ATM (v77b, decisión del usuario D1 corregida): la partición interior completa que contiene el ATM
+    de lobby (walk-up). canon.py la calcula (studs_nodos de esa wall + su bottom y top runner de corridas, una sola
+    vez por wall) y la deja en data["_atm_wall"]; la wall SIGUE en su partition type y en sus familias de stud /
+    track (convención del estimador) y el delta de contarla una sola vez sale como RFI. Aquí solo se suman.
+    extra_framing kind "atm_recess" = error; kind "mep" de un ducto / FD = error (E12)."""
     hubo = False
     _atm_obligatorio(data)
     movidos = {str(x["ref"]): x for x in data.get("_atm_wall") or []}
@@ -441,21 +444,26 @@ def extra_framing(data, o):
             s = atm_recess_valido(op, f"{w.get('id')} {op['ref']}")
             m = movidos.get(str(op["ref"]))
             if m is None:
-                raise ValueError(f"{op['ref']}: atm_recess sin la wall movida por canon.py (D1 v77: accesorios.py "
-                                 f"corre dentro de canon.calcular, que mueve studs + runners de la wall {w.get('id')})")
+                raise ValueError(f"{op['ref']}: atm_recess sin la wall calculada por canon.py (D1 v77b: accesorios.py "
+                                 f"corre dentro de canon.calcular, que calcula studs + runners de la wall {w.get('id')})")
             if m.get("lf"):
                 o.add(F_XATM, m["lf"], "DERIVADO", s + "; " + str(w.get("source") or w.get("detail") or ""),
                       m["op"])
+                if m.get("rfi_una_vez"):
+                    o.rfis.append({"familia": F_XATM, "tema": f"ATM wall {m['wall']} counted once (D1)",
+                                   "delta": round(sum(m["rfi_una_vez"].values()), 2), "unidad": "lf",
+                                   "items": [f"{k} {v}" for k, v in m["rfi_una_vez"].items()],
+                                   "alternativa": "take the ATM wall out of its stud / track families"})
             hubo = True
     for op in data.get("openings_extra") or []:
         if op.get("atm_recess"):
             raise ValueError(f"{op.get('ref')}: atm_recess en openings_extra: el ATM va en la wall que lo contiene "
-                             f"(D1 v77: el framing es esa wall completa)")
+                             f"(D1 v77b: el framing es esa partición completa)")
     for it in data.get("extra_framing") or []:
         s = src(it, it.get("ref", "extra_framing"))
         if it.get("kind") == "atm_recess":
-            raise ValueError(f"{it.get('ref')}: extra_framing kind atm_recess a mano: D1 v77 lo saca de la wall del ATM "
-                             f"(atm_recess en la abertura; canon.py mueve studs + runners de esa wall)")
+            raise ValueError(f"{it.get('ref')}: extra_framing kind atm_recess a mano: D1 v77b lo calcula desde la wall del ATM "
+                             f"(atm_recess en la abertura; canon.py suma studs + runners de esa partición)")
         if it.get("kind") == "mep" and DUCT_RE.search(str(it.get("ref"))):
             raise ValueError(f"{it.get('ref')}: extra framing de un ducto / FD (E12: no se enmarca; el plate va a "
                              f"stud reinforcement MEP), v68")
@@ -465,7 +473,7 @@ def extra_framing(data, o):
         hubo = True
     if not hubo:
         o.pend(F_XATM, "no atm_recess at the ATM opening and no extra_framing[]: the ATM detail draws extra "
-                       "framing at the recess; declare atm_recess {source, drawn} (D1: the whole ATM wall)")
+                       "framing at the recess; declare atm_recess {source, drawn} (D1: the whole interior partition that contains the walk-up ATM)")
 
 
 def _atm_obligatorio(data):
@@ -481,8 +489,9 @@ def _atm_obligatorio(data):
         if str(op.get("atm_recess_none_reason") or "").strip():
             continue
         raise ValueError(f"{op['ref']}: abertura ATM sin atm_recess {{source N/HOJA, drawn}} ni atm_recess_none_reason "
-                         f"(D1 v77: si el detalle del ATM dibuja framing extra en el recess, el framing del ATM = la "
-                         f"wall completa donde está; si solo dibuja el R.O., atm_recess_none_reason con la hoja)")
+                         f"(D1 v77b: el ATM de lobby / walk-up en una partición interior lleva atm_recess y su extra "
+                         f"framing = esa partición completa; el drive-up en una wall exterior lleva "
+                         f"atm_recess_none_reason con la hoja: su framing queda en su type exterior)")
 
 
 RX_CADENA = re.compile(r"\b(chain|cadena)\b", re.I)

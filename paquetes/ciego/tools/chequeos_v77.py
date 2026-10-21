@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""chequeos_v77.py — compuertas de las decisiones del usuario D3 / D4 (arbitraje #25). Las llama canon.py.
+"""chequeos_v77.py — compuertas de las decisiones del usuario D3 / D4 y del largo de wall a través de doors (R77.10).
+Las llama canon.py.
 
 R77.4 (D4, 3/4" FRT plywood en piers de storefront): el detalle del pier rotula el plywood SOLO como strip en cada
   jamb del storefront; las caras del pier (nailbase: AWB on FRT plywood bonded to polyiso, y gypsum board) NO van en
@@ -7,12 +8,17 @@ R77.4 (D4, 3/4" FRT plywood en piers de storefront): el detalle del pier rotula 
     - label = el rótulo impreso del strip (no "BONDED", "POLYISO", "AWB", "GYPSUM": eso es la cara);
     - width_ft medido por vector (D3): width_pt + scale_pt_per_ft (escala impresa del detalle) + scale_check
       {printed_in, measured_pt} (un espesor o una cota impresa del mismo detalle, ±5 %); width_ft = width_pt / escala;
-    - jambs (int) y height_ft con height_source (alto impreso, p. ej. T/GLAZING): lf = jambs x height_ft;
+    - jambs (int) y height_ft con height_source (alto impreso del head del storefront): lf = jambs x height_ft;
     - plies (int) y layers_drawn (int): si el dibujo muestra más capas que el rótulo (singular) -> plies del rótulo y
       `rfi` con el delta obligatorio.
   Todo elemento pier declara jamb_strips [refs de plywood_strips] o jamb_strips_none_reason (con N/HOJA).
 R77.3 (D3): un dato medido por vector lleva su verificación de escala contra algo impreso (scale_check).
+R77.10 (decisión del usuario, largo de wall): el largo de un wall corre A TRAVÉS de sus doors hasta la esquina /
+  intersección; el R.O. de una door del wall cae DENTRO del largo del wall. Con constants.plan_scale_pt_per_ft, band
+  {p0, p1} y openings[].xy_pt (centro del R.O. en la planta): R.O. fuera de [p0, p1] (± 6") = falla (el wall se cortó
+  en la jamb y dejó la door afuera).
 """
+import math
 import re
 
 NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}\d")
@@ -72,8 +78,44 @@ def r77_4(data):
     return f
 
 
+def _esc(data):
+    e = (data.get("constants") or {}).get("plan_scale_pt_per_ft")
+    e = e.get("value") if isinstance(e, dict) else e
+    try:
+        return float(e) if e else None
+    except (TypeError, ValueError):
+        return None
+
+
+def r77_10(data, tol_ft=0.5):
+    f, esc = [], _esc(data)
+    if not esc:
+        return f
+    for w in data.get("walls") or []:
+        b = w.get("band") or {}
+        p0, p1 = b.get("p0"), b.get("p1")
+        if not (p0 and p1):
+            continue
+        dx, dy = float(p1[0]) - float(p0[0]), float(p1[1]) - float(p0[1])
+        lp = math.hypot(dx, dy)
+        if lp <= 0:
+            continue
+        largo = lp / esc
+        for o in w.get("openings") or []:
+            xy = o.get("xy_pt") if isinstance(o, dict) else None
+            if str(o.get("kind")) != "door" or not xy:
+                continue
+            t = ((float(xy[0]) - float(p0[0])) * dx + (float(xy[1]) - float(p0[1])) * dy) / lp / esc
+            r = float(o.get("ro_w_ft") or 0.0) / 2.0
+            if t - r < -tol_ft or t + r > largo + tol_ft:
+                f.append(f"R77.10 {w.get('id')} {o.get('ref')}: el R.O. ({round(t - r, 2)} a {round(t + r, 2)} ft) "
+                         f"cae fuera del largo del wall (0 a {round(largo, 2)} ft): el largo corre a través de la "
+                         f"door hasta la esquina / intersección")
+    return f
+
+
 def revisar(data):
-    return {"fallas": r77_4(data)}
+    return {"fallas": r77_4(data) + r77_10(data)}
 
 
 def verificar(data):

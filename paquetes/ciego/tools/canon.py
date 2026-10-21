@@ -141,7 +141,7 @@ import accesorios  # noqa: E402   v67: familias de accesorios / extras
 import partition_types  # noqa: E402   v67: types de la hoja Partition Takeoff
 import chequeos_v75  # noqa: E402   v75: R75.5 / R75.6 / R75.7 (arbitraje #23)
 import chequeos_v76  # noqa: E402   v76: R76.1-R76.5 (arbitraje #24)
-import chequeos_v77  # noqa: E402   v77: R77.4 (decisiones del usuario D3 / D4, arbitraje #25)
+import chequeos_v77  # noqa: E402   v77: R77.4 (decisiones del usuario D3 / D4); v77b: R77.10 (largo a través de doors)
 
 EPS = 1e-6
 F_PAR = "6\" parapet stud"
@@ -1045,11 +1045,14 @@ def _parapet_studs(data, fam, filas):
 
 
 def _atm_wall(data, fam, filas, st, co):
-    """v77 (decisión del usuario D1): el framing del ATM = la wall COMPLETA donde está el ATM (todo su largo), studs de
-    piso a deck + bottom runner + top runner, sin sistered ni furring aparte. La wall se cuenta UNA vez: sus studs
-    (studs_nodos) y sus runners (corridas) salen de las familias de stud / track y van a "extra framing ATM"
-    (accesorios.py los suma desde data["_atm_wall"]). Compuertas: la abertura con atm_recess está en un wall que pasa
-    por studs_nodos y corridas; dos ATM en la misma wall = una sola vez."""
+    """v77b (decisión del usuario D1, corregida): el extra framing del ATM = la PARTICIÓN INTERIOR que CONTIENE la
+    unidad ATM de lobby (walk-up), la que el detalle del ATM llama sobre esa wall: la wall COMPLETA (todo su largo),
+    studs de piso a deck (studs_nodos de esa wall) + bottom runner + top runner; sin sistered ni furring aparte.
+    La wall exterior de un drive-up NO es el extra framing del ATM: su framing queda en su type exterior
+    (atm_recess en una wall exterior = error; ese ATM declara atm_recess_none_reason).
+    Convención del estimador: la wall SIGUE en su partition type y en sus familias de stud / track (nada se resta); el
+    renglón "extra framing ATM" se suma aparte (RFI con el delta si se contara una sola vez).
+    Compuertas: wall interior que pasa por studs_nodos y corridas, con to_deck true; dos ATM en la misma wall = una vez."""
     data["_atm_wall"] = []
     st_w = {str(x.get("id")): x for x in (st or {}).get("walls") or []}
     co_w = {str(r.get("id")): r for r in (co or {}).get("renglones") or []}
@@ -1060,29 +1063,36 @@ def _atm_wall(data, fam, filas, st, co):
                 continue
             accesorios.atm_recess_valido(o, f"{w['id']} {o['ref']}")
             wid = str(w["id"])
+            if accesorios.es_exterior(w) or o.get("location") == "exterior":
+                raise ValueError(f"{wid} {o['ref']}: atm_recess en una wall exterior (D1 v77b: el extra framing del ATM "
+                                 f"es la partición interior que contiene el ATM de lobby / walk-up; el framing de la "
+                                 f"wall exterior del drive-up queda en su type exterior: declarar atm_recess_none_reason)")
             if wid in hechas:
                 data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": 0.0,
                                           "op": f"wall {wid} already carried once (D1)"})
                 continue
             if _es_parapet(w) or _no_nodos(w) or wid not in st_w or ("W:" + wid) not in co_w:
-                raise ValueError(f"{wid} {o['ref']}: atm_recess en un elemento sin studs_nodos / corridas (D1 v77: el "
-                                 f"ATM va en el wall que lo contiene y ese wall se mueve completo)")
+                raise ValueError(f"{wid} {o['ref']}: atm_recess en un elemento sin studs_nodos / corridas (D1 v77b: el "
+                                 f"ATM va en la partición que lo contiene y esa wall se cuenta completa)")
+            if w.get("to_deck") is not True:
+                raise ValueError(f"{wid} {o['ref']}: la wall del ATM sin to_deck true (D1 v77b: studs de piso a deck "
+                                 f"con top y bottom runner; el alto sale de B.O.D. con su fuente)")
             sw, cw = st_w[wid], co_w["W:" + wid]
             slf = float(sw.get("lf") or 0.0)
             b, t = float(cw.get("bottom_lf") or 0.0), float(cw.get("top_lf") or 0.0)
             k = next((f for key, f in STUD_FAM if key in str(w.get("stud_size", "")).lower()), None)
             if k is None or slf <= EPS or b <= EPS or t <= EPS:
-                raise ValueError(f"{wid}: wall del ATM sin studs o sin bottom / top runner (D1 v77)")
-            fam[k] -= slf
-            fam["bottom track (todos)"] -= b
-            fam["top / deflection track (todos)"] -= t
-            cw["bottom_lf"], cw["top_lf"] = 0.0, 0.0
-            cw["moved_to"] = "extra framing ATM (D1)"
+                raise ValueError(f"{wid}: wall del ATM sin studs o sin bottom / top runner (D1 v77b)")
             hechas.add(wid)
             lf = slf + b + t
-            op = (f"ATM wall {wid} (D1): studs {round(slf, 2)} ({sw.get('operacion', '')[:90]}) + bottom runner "
-                  f"{round(b, 2)} + top runner {round(t, 2)} = {round(lf, 2)}; moved out of {k} and bottom / top track")
-            data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": round(lf, 4), "op": op})
+            op = (f"ATM wall {wid} (D1 v77b, interior partition containing the walk-up ATM, floor to deck): studs "
+                  f"{round(slf, 2)} ({sw.get('operacion', '')[:90]}) + bottom runner {round(b, 2)} + top runner "
+                  f"{round(t, 2)} = {round(lf, 2)}; the wall also stays in its partition type and in {k} / bottom / "
+                  f"top track (estimator convention; RFI delta if counted once: -{round(slf, 2)} stud, "
+                  f"-{round(b, 2)} bottom, -{round(t, 2)} top)")
+            data["_atm_wall"].append({"ref": o["ref"], "wall": wid, "lf": round(lf, 4), "op": op,
+                                      "rfi_una_vez": {k: -round(slf, 2), "bottom track (todos)": -round(b, 2),
+                                                      "top / deflection track (todos)": -round(t, 2)}})
 
 
 def _jambs_extra(data, fam, filas):
@@ -1831,7 +1841,7 @@ def calcular(data, outdir=None, fo=None):
         fam["header / box beam"] += he["totales_lf"]["header"]
         fam["sill track"] += he["totales_lf"]["sill track"]
         avisos += he.get("avisos", [])
-    _atm_wall(data, fam, filas, st, co)                  # v77 D1: la wall del ATM, una sola vez
+    _atm_wall(data, fam, filas, st, co)                  # v77b D1: la partición del walk-up ATM, aparte
     _jambs_extra(data, fam, filas)
     _kickers(data, fam, filas)
     _column_wraps(data, fam, filas)
@@ -1841,7 +1851,7 @@ def calcular(data, outdir=None, fo=None):
     _trim(data, fam, filas)
     _fascia_sheathing(data, fam, filas)
     chequeos_v76.verificar(data, accesorios.es_exterior)   # v76: R76.1-R76.5 (después de las compuertas previas)
-    chequeos_v77.verificar(data)                        # v77: R77.4 strips de pier (D3 / D4)
+    chequeos_v77.verificar(data)                        # v77: R77.4 strips de pier (D3 / D4); v77b: R77.10
     _column_wrap_sheathing(data, fam, filas)            # v76 R76.2
     _opening_substrate(data, fam, filas)                # v76 R76.4
     _tile_base(data, fam, filas)

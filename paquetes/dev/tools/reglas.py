@@ -586,8 +586,6 @@ def a_track_runs(ctx):
     for r in co.get("renglones") or []:
         if r.get("element") not in ("wall", "parapet", "chase", "pier", "column_wrap"):
             continue
-        if r.get("moved_to"):                       # v77 D1: runners de la wall del ATM en "extra framing ATM"
-            continue
         b, t = _f(r.get("bottom_lf"), 0), _f(r.get("top_lf"), 0)
         if b <= 0 or t <= 0:
             out.append((r.get("id"), f"bottom {b} / top {t}", "bottom Y top track > 0 (2 runs mínimo)"))
@@ -895,7 +893,7 @@ def a_cladding(ctx):
     return out
 
 
-# v77 (R76.7 a): el rótulo impreso puede venir con puntos ("F.R.T.", 4/A09.26 de un set): F\.?R\.?T\.? lo reconoce
+# v77 (R76.7 a): el rótulo impreso puede venir con puntos ("F.R.T." en el rótulo de un detalle): F\.?R\.?T\.? lo reconoce
 RX_FRT_ROTULO = re.compile(r"\bF\.?R\.?T\.?(?:W\b)?|fire.?(retardant|treated)", re.I)
 
 

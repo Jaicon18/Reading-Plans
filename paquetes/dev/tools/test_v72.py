@@ -267,16 +267,19 @@ def _():
     assert any(r["familia"] == A.F_PVC and abs(r["delta"] - 10.0) < 0.01 for r in o.rfis), o.rfis
 
 
-@caso("R72.11 (v77 D1) atm_recess con la fórmula sistered + furring = falla; {source, drawn} en su wall = OK")
+@caso("R72.11 (v77b D1) atm_recess sistered + furring = falla; en wall exterior = falla; {source, drawn} en la partición = OK")
 def _():
     ar = {"width_ft": 2.2, "width_status": "CONFIRMADO", "width_source": "5/A8.11", "sistered_h_ft": 6.0,
           "source": "6/A8.11"}
-    d = canon([H("W1", "EXT", 0, 8, 0, 200, 10.0, oc_in=16, openings=[{"ref": "ATM-1", "kind": "atm",
-                                                                      "atm_recess": ar}])])
+    d = canon([H("W1", "A1", 0, 8, 0, 200, 10.0, oc_in=16, openings=[{"ref": "ATM-1", "kind": "atm",
+                                                                     "atm_recess": ar}])])
     import chequeos_v72 as C
     assert any("R72.11" in x for x in C.revisar(d)["fallas"])
-    d["walls"][0]["openings"][0]["atm_recess"] = {"source": "6/A8.11", "drawn": "STUD SISTERED"}
+    d["walls"][0]["openings"][0]["atm_recess"] = {"source": "1/A8.11", "drawn": "WU ATM"}
     assert not [x for x in C.revisar(d)["fallas"] if "R72.11" in x]
+    d["walls"][0]["tag"] = "EXT"
+    assert any("R72.11" in x and "exterior" in x for x in C.revisar(d)["fallas"])
+    d["walls"][0]["tag"] = "A1"
     d["openings_extra"] = [{"ref": "ATM-2", "kind": "atm", "atm_recess": {"source": "6/A8.11", "drawn": "x"}}]
     assert any("R72.11" in x and "ATM-2" in x for x in C.revisar(d)["fallas"])
 

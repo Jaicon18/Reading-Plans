@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""test_v77.py — decisiones del usuario D1-D6 (arbitraje #25) y compuertas R76.7 a-e. Cada caso falla con el dato
+"""test_v77.py — decisiones del usuario D1-D6 (D1 corregida en v77b), R77.10 y compuertas R76.7 a-e. Cada caso falla con el dato
 malo y pasa con el bueno. Datos SINTÉTICOS (walls / rooms 9xx, hojas Z / X, coordenadas inventadas)."""
 import copy
 import json
@@ -38,37 +38,50 @@ def _atm_canon():
     import test_canon as T
     d = T.base()
     w = [x for x in d["walls"] if x["id"] == "I1"][0]
+    w["to_deck"] = True
     w["openings"] = [{"ref": "ATM 9", "kind": "atm", "ro_w_ft": 2.25, "head_ft": 5.0, "sill_ft": 2.5,
-                      "with_sill": True, "source": "6/X8.11", "jamb_return": False, "jamb_return_source": "6/X8.11",
-                      "substrate_none_reason": "6/X8.11 sintético",
-                      "atm_recess": {"source": "6/X8.11", "drawn": "STUD SISTERED TO STUD (sintético)"}}]
+                      "with_sill": True, "source": "1/X8.11", "jamb_return": False, "jamb_return_source": "1/X8.11",
+                      "substrate_none_reason": "1/X8.11 sintético",
+                      "atm_recess": {"source": "1/X8.11", "drawn": "WU ATM (sintético)"}}]
     d["opening_schedule"]["items"].append({"ref": "ATM 9"})
     return d
 
 
 # ------------------------------------------------------------------------------------------------------ D1
-@caso("D1 la wall del ATM completa (studs + 2 runners) pasa a extra framing ATM y sale de stud / track (una vez)")
+@caso("D1 v77b: la partición interior del walk-up ATM completa (studs + 2 runners) = extra framing; sigue en su type")
 def _():
     import canon as K
     d = _atm_canon()
     sin = copy.deepcopy(d)
     sin["walls"][2]["openings"][0].pop("atm_recess")
-    sin["walls"][2]["openings"][0]["atm_recess_none_reason"] = "6/X8.11 sintético: solo R.O."
-    f0, out = K.calcular(sin)["familias"], K.calcular(copy.deepcopy(d))
+    sin["walls"][2]["openings"][0]["atm_recess_none_reason"] = "1/X8.11 sintético: solo R.O."
+    td = tempfile.mkdtemp()
+    f0, out = K.calcular(sin)["familias"], K.calcular(copy.deepcopy(d), td)
     f1 = out["familias"]
     atm = f1["extra framing ATM"]
-    d36 = f0['3-5/8" stud (todos los gauges)'] - f1['3-5/8" stud (todos los gauges)']
-    db = f0["bottom track (todos)"] - f1["bottom track (todos)"]
-    dt = f0["top / deflection track (todos)"] - f1["top / deflection track (todos)"]
-    assert abs(db - 10.0) < 0.01 and abs(dt - 10.0) < 0.01, (db, dt)
-    assert d36 > 100 and abs(atm - (d36 + db + dt)) < 0.02, (atm, d36, db, dt)
-    trk = out["track_by_element"]
-    assert abs(sum(trk["bottom"].values()) - f1["bottom track (todos)"]) < 0.02, trk
+    for k in ('3-5/8" stud (todos los gauges)', "bottom track (todos)", "top / deflection track (todos)"):
+        assert abs(f0[k] - f1[k]) < 0.01, (k, f0[k], f1[k])            # nada se resta (convención del estimador)
+    st = {x["id"]: x for x in json.load(open(os.path.join(td, "studs_out.json")))["walls"]}
+    assert atm > 2 * 10.0 + 100, atm                                     # studs piso a deck + 2 runners de 10 ft
+    assert abs(atm - (st["I1"]["lf"] + 20.0)) < 0.02, (atm, st["I1"]["lf"])
+    rf = [r for r in out.get("rfis_accesorios") or [] if r.get("familia") == "extra framing ATM"]
+    assert rf and rf[0]["delta"] < 0, rf                                 # RFI: contarla una sola vez
 
 
-@caso("D1 fórmula vieja (width / sistered / furring) = error; atm_recess fuera de un wall = error; dos ATM, una wall")
+@caso("D1 v77b: atm_recess en wall exterior (drive-up) = error; sin to_deck = error; fórmula vieja = error; 2 ATM")
 def _():
     import canon as K
+    import chequeos_v72 as C72
+    d = _atm_canon()
+    d["walls"][2]["location"] = "exterior"
+    falla(K.calcular, d, texto="exterior")
+    assert any("exterior" in x for x in C72.r72_7(d))
+    d = _atm_canon()
+    d["walls"][2]["openings"][0]["location"] = "exterior"
+    falla(K.calcular, d, texto="exterior")
+    d = _atm_canon()
+    d["walls"][2].pop("to_deck")
+    falla(K.calcular, d, texto="to_deck")
     d = _atm_canon()
     d["walls"][2]["openings"][0]["atm_recess"].update(width_ft=4.0, sistered_h_ft=6.0, furring_rows=3)
     falla(K.calcular, d, texto="D1")
@@ -76,8 +89,16 @@ def _():
     d["walls"][2]["openings"][0]["atm_recess"].pop("drawn")
     falla(K.calcular, d, texto="drawn")
     d = _atm_canon()
-    d["extra_framing"] = [{"ref": "ATM 9", "kind": "atm_recess", "lf": 30.0, "source": "6/X8.11"}]
+    d["extra_framing"] = [{"ref": "ATM 9", "kind": "atm_recess", "lf": 30.0, "source": "1/X8.11"}]
     falla(K.calcular, d, texto="D1")
+    d = _atm_canon()                                                    # drive-up en la exterior: none_reason, pasa
+    d["walls"][0]["openings"].append({"ref": "ATM 11", "kind": "atm", "location": "exterior", "ro_w_ft": 2.0,
+                                      "head_ft": 5.0, "sill_ft": 2.5, "with_sill": True, "source": "6/X8.11",
+                                      "jamb_return": False, "jamb_return_source": "6/X8.11",
+                                      "substrate_none_reason": "6/X8.11 sintético",
+                                      "atm_recess_none_reason": "6/X8.11 sintético: drive-up en la wall exterior"})
+    d["opening_schedule"]["items"].append({"ref": "ATM 11"})
+    K.calcular(d)
     d = _atm_canon()
     o2 = dict(d["walls"][2]["openings"][0], ref="ATM 10")
     d["walls"][2]["openings"].append(o2)
@@ -86,6 +107,19 @@ def _():
     mov = d["_atm_wall"]
     assert [m["lf"] > 0 for m in mov] == [True, False], mov          # la wall una sola vez
     assert abs(out["familias"]["extra framing ATM"] - mov[0]["lf"]) < 0.01
+
+
+@caso("R77.10 el largo del wall corre a través de la door hasta la esquina: R.O. fuera del band = falla")
+def _():
+    import chequeos_v77 as C77
+    d = {"constants": {"plan_scale_pt_per_ft": 18.0},
+         "walls": [{"id": "W9", "band": {"sheet": "Z2.01", "ori": "H", "p0": [100.0, 50.0], "p1": [280.0, 50.0]},
+                    "openings": [{"ref": "door 9A", "kind": "door", "ro_w_ft": 3.3333, "xy_pt": [310.0, 50.0]}]}]}
+    assert C77.r77_10(d) and "R77.10" in C77.r77_10(d)[0]               # wall cortado en la jamb: door afuera
+    d["walls"][0]["band"]["p1"] = [340.0, 50.0]                         # largo hasta la esquina, door adentro
+    assert C77.r77_10(d) == []
+    d["walls"][0]["openings"][0].pop("xy_pt")
+    assert C77.r77_10(d) == []
 
 
 # ------------------------------------------------------------------------------------------------------ D2
