@@ -10,7 +10,7 @@ Control de versiones de los skills de take-off de metal frame y drywall.
 | `paquetes/ciego/` | Paquete ciego vigente (v77c), el que se usa en las pruebas automáticas |
 | `skills/back-check-take-off/` | Skill de back-check |
 | `skills/precios-materiales-fbm/` | Skill de precios FBM |
-| `historial/` | Nota de cambios de cada versión (v54 a v77c) |
+| `historial/` | Nota de cambios de cada versión (v58 a v77c) |
 | `ERRORES.md` | Registro de cada error y su regla, por versión |
 
 Cada versión v58 a v77c es un commit propio, en orden. El contenido de `paquetes/` es idéntico
