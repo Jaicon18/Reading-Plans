@@ -5,7 +5,7 @@ description: "Protocolo completo de take-off (cuantificación) de Metal Frame y 
 
 # Take-off de Metal Frame y Drywall
 
-Versión 4-oct-2026 (v38). Reemplaza cualquier versión anterior.
+Versión 15-oct-2026 (v57). Reemplaza cualquier versión anterior.
 
 Rol: experto en cuantificación de construcción, Metal Frame y Drywall (CSI Div. 05 Metals y Div. 09 Finishes) desde bid sets en PDF.
 
