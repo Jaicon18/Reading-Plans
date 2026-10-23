@@ -1,0 +1,25 @@
+ARBITRAJE #20 + PAQUETE v72 (take-off BOA Broomfield, metal frame / drywall). Sin el usuario, sin preguntas. Español con términos del trade en inglés. No menciones costos. Si te detiene un límite de uso, al reanudar continúa donde quedaste. Usa pocos subagentes a la vez (máximo 3) para no agotar el límite de uso.
+
+ARRANQUE: lee /opt/takeoff/STATUS.txt; si dice "pending", corre UNA vez `python3 -I /opt/takeoff/bootstrap.py` (no lo abras); si falla por un módulo, `python3 -m pip install --quiet --upgrade cffi cryptography requests pikepdf pymupdf openpyxl` (o con --break-system-packages) y reintenta una vez. NUNCA leas, imprimas ni uses gdrive_sa_json / GDRIVE_SA_JSON: Drive SOLO por `python3 -I /opt/takeoff/gdrive_fetch.py <comando> ...`, como comando solo, rutas absolutas, `get` a carpeta limpia. Si auto mode bloquea algo, NO lo rodees: anótalo y termina.
+
+TÚ ERES EL ÁRBITRO (no una prueba): puedes abrir la referencia y los resultados. En Claude outputs (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc):
+- Pruebas: "BOA Broomfield - PRUEBA automatica 2026-10-17 (20A v71)" (Excel 1uKtsiG9douKK0Ah8pN9rDEx1aS8o9ehy) y "(20B v71)" (Excel 1mEmgcLW9dv-hiV2SJer21UpbwvmQ0Ues), con su canon, canon_A/canon_B, revision.md, PARA REVISAR, Back-check y propuestas.
+- Referencia: carpeta "Referencias (examen)" → BOA_Broomfield_REFERENCIA_v4_definitiva.xlsx (usa `list`). Rangos vigentes: rangos_v16.json (183erYXxyAxkZnb3LyJQuKUa29Av2PgpQ) + correcciones_rangos_v17.json del ARBITRAJE 19 (A1 walls 9–10; A5 LF 39.12–42.76).
+- Criterio del estimador (AUTORIDAD, decisión del usuario 18-oct): partición "eje" de v71 = cortar en cada esquina entre tags, no en doors; exteriores/parapets un wall por eje/fachada; nunca juntar dos ejes.
+- Bid set: `get 11IXNHfdM94K8kwL1RHo8clIoTQbezVBp /home/user/arb/boa.pdf`. Skill v71: zip 1xchS2Sp-xaIN4H6A4kZzWcVYcFI2PMd6 (md5 39369c508aa64c057f40c85b00af2111). Tools: capas anteriores (tools v68 1hdes6cMoHmzboTNLa-bGF8Ey5qilc8Mv, tools/ del zip v70c 1UaoK8KiIb2PRnUdv6qkiHS-d2oLBYVcm) + tools/ del zip v71 (mandan).
+
+CALIFICACIÓN (grader local, rangos_v17): #20A 83.3 % (materials 88.1, types 78.6) ← MEJOR CIEGO; #20B 76.8 % (78.6 / 75.0). Anterior mejor 77.4. Meta 90 % en dos pruebas ciegas.
+- MAL comunes: extra framing ATM 18 vs 109.87 (rango; RFI-ARB18-2 abierto: ciérralo con plano o con delta); B2K LF 1.77–2.21 vs 1.26 (contorno; RFI-ARB18-3).
+- 20A: stud reinforcement MEP 71 vs 18 (¿ductos enmarcados? regla "ductos NO se enmarcan").
+- 20B: 3/8" gyp 73.8 y ballistic 94.9 (R70.5 no aplicada otra vez: ¿por qué una regla escrita no se aplica? hazla compuerta en tool); PVC trim at FRP 245 vs 211; expansion anchors 370 vs 326 (RFI-ARB19-3: canopy column wraps y piers sin fuente en 7/S5.20 → decide con plano); A1K LF 10.09 vs 7.99–8.60.
+- Walls: EXT-6CFMF 8 vs 6 en las dos (¿qué walls exteriores corta la referencia por eje? compara uno por uno); G 11 vs 10; G1 4 vs 3 (20A); F 16.91 vs 17.76.
+- Variación entre corridas: 20A vs 20B difieren 6.5 puntos con el mismo skill. Identifica qué decisiones cambian entre corridas y conviértelas en reglas de tool o compuertas para que no dependan de la lectura.
+- Propuestas de las pruebas: R71.8b (suma de renglones por tamaño = familia; bug de plantilla que multiplicó track ×8 en 20B), side A/B, etapas.py unir con metadatos, mep.OFF en cruzar_diagonal (test_sin_colisiones falla), R.O. de doors = leaf + 4" medido en vector, beams fuera de banda por 1.5 pt (R71.14), board_caras con end returns, canon.py zones en parapets.
+
+TAREAS:
+1) ARBITRAJE renglón por renglón de cada MAL/CERCA: (a) error de la prueba → regla/tool para v72; (b) error de referencia/rango → correcciones_rangos_v18.json SOLO con evidencia impresa citada (N/HOJA + imagen); (c) ambiguo → RFI con delta de cada alternativa. Nunca elijas en silencio.
+2) Estabilidad: lista de decisiones que variaron entre 20A y 20B y cómo v72 las fija.
+3) PAQUETE v72 (CIEGO y GENÉRICO: ningún valor, conteo, room, tag numerado ni resultado de BOA en SKILL ni referencias/): reglas (a), compuertas nuevas, arreglos de tools confirmados, tests para cada cambio; test ciego vigente TIENE que dar OK. Zip v72 con take-off-metal-frame-drywall/ (SKILL.md + referencias/) + tools/ (TODAS las tools de nivel superior necesarias, para que una prueba baje solo el zip v72) + tests pasando; md5 del zip y del SKILL.md.
+
+SALIDA: en Claude outputs crea "ARBITRAJE 20A-20B y PAQUETE v72 (2026-10-19)" con ARBITRAJE_20.md, correcciones_rangos_v18.json (solo con evidencia), el zip v72, tools/ y CAMBIOS_v72.md. Sube con put. No borres ni sobrescribas nada; no toques LISTO/PROCESADO.
+RESUMEN FINAL corto: 1) veredictos por MAL; 2) estabilidad: decisiones fijadas; 3) correcciones de rangos con evidencia; 4) file id + md5 del zip v72, md5 del SKILL, folder id de tools/; 5) tests y test ciego.

@@ -1,0 +1,182 @@
+# Calificación del take-off: 41.3%
+
+- Materiales por familia (cantidad NET): **36.90%**
+- Partition types (LF y número de walls): **45.80%**
+- Tolerancia: IGUAL ≤ 2%, CERCA ≤ 10%
+
+
+## Materiales por familia (calificación principal)
+
+| Familia | Referencia | Candidato | Dif | Estado |
+|---|---|---|---|---|
+| 6" parapet stud | 997.19 | 1,124.75 | 12.8% | MAL (rango) |
+| 6" stud (todos los gauges) | 4,525.47 | 4,916.56 | 7.3% | CERCA (rango) |
+| 3-5/8" stud (todos los gauges) | 6,227.89 | 6,736.80 | 0.0% | IGUAL (rango) |
+| 1-5/8" stud | 3,860.10 | 4,106.10 | 5.0% | CERCA (rango) |
+| purlin (track to deck) | 214.40 | 231.75 | 0.0% | IGUAL (rango) |
+| track de ceilings / soffits | 1,168.97 | 633.27 | 52.1% | MAL (rango) |
+| bottom track (todos) | 1,269.56 | 1,753.10 | 30.1% | MAL (rango) |
+| top / deflection track (todos) | 1,269.56 | 1,753.10 | 30.1% | MAL (rango) |
+| header / box beam | 305.63 | 281.74 | 64.4% | MAL (rango) |
+| sill track | 67.76 | 65.76 | 44.8% | MAL (rango) |
+| bracing C.R. channel | 2,624.23 | 2,724.80 | 0.0% | IGUAL (rango) |
+| framed openings MEP | 970.32 | 918.00 | — | NO CALIFICA (excluir) |
+| furring channel | 808.88 | 705.53 | 9.1% | CERCA (rango) |
+| carrying channel | 316.77 | 235.18 | 0.0% | IGUAL (rango) |
+| hanger wire | 524.78 | 347.25 | 0.0% | IGUAL (rango) |
+| 5/8" gyp MOISTURE RESISTANT | 261.80 | 258.96 | 0.0% | IGUAL (rango) |
+| 5/8" EXTERIOR gyp sheathing | 944.60 | 1,144.21 | 17.0% | MAL (rango) |
+| 5/8" glass mat sheathing | 462.00 | 314.29 | 18.8% | MAL (rango) |
+| 3/8" gyp board | 57.04 | 62.95 | 0.0% | IGUAL (rango) |
+| ballistic panel | 74.00 | 83.55 | 0.0% | IGUAL (rango) |
+| 5/8" gyp board regular (walls + ceilings) | 17,450.60 | 17,926.98 | 2.6% | CERCA (rango) |
+| cement board | 33.80 | 31.88 | 0.0% | IGUAL (rango) |
+| FRP | 354.00 | 334.80 | 0.0% | IGUAL (rango) |
+| FRT plywood (SF) | 6,507.01 | 7,014.20 | 2.3% | CERCA (rango) |
+| metal trim (corner bead, casing, shadow molding) | 1,267.55 | 1,216.84 | 0.0% | IGUAL (rango) |
+| acoustical sealant | 1,166.70 | 1,411.66 | 3.2% | CERCA (rango) |
+| metal stud blocking (362CR / STUD BLOCKING) | 466.00 | 873.14 | 12.7% | MAL (rango) |
+| FRT blocking | 1,083.90 | 1,311.98 | 19.3% | MAL (rango) |
+| additional head track | 56.00 | 110.72 | 0.0% | IGUAL (rango) |
+| stud reinforcement MEP | 18.00 | — | — | FALTA |
+| 2-1/2" CFMF coiling grille head | 7.85 | 28.50 | 172.7% | MAL (rango) |
+| extra framing ATM | 109.87 | — | — | FALTA |
+| gypsum board jamb return | 95.94 | — | — | FALTA |
+| Level 5 finish | 874.83 | 909.77 | 4.0% | CERCA (rango) |
+| PVC trim at FRP | 211.20 | — | — | FALTA |
+| PAFs and duct sleeves | 275.00 | — | — | FALTA |
+| access panel | 1.00 | — | — | FALTA |
+| drywall screws | 21,323.33 | — | — | FALTA |
+| framing screws | 5,252.00 | — | — | FALTA |
+| slab pins | 515.71 | — | — | FALTA |
+| expansion anchors | 326.46 | — | — | FALTA |
+| joint compound | 1,279.40 | — | — | FALTA |
+| joint tape | 6,574.69 | — | — | FALTA |
+
+Renglón por renglón (depende de cómo cada take-off nombra y separa los renglones): 13.20%
+
+## Materiales que no salieron iguales (53 de 57)
+
+| Material | Unit | Referencia | Candidato | Dif | Estado |
+|---|---|---|---|---|---|
+| 6" metal stud 600S137-33 / -68 (LF of material) | lf | 4,525.47 | 1,480.33 | 67.3% | MAL |
+| 6" parapet infill stud 600S162-54 @ 16" O.C. (LF of material | lf | 997.19 | 1,124.75 | 12.8% | MAL |
+| 3-5/8" metal stud 362S137-33 / -68 (LF of material) | lf | 6,123.12 | 152.03 | 97.5% | MAL |
+| 1-5/8" metal stud (LF of material) | lf | 3,860.10 | 4,106.10 | 6.4% | CERCA |
+| Bottom track 6" | lf | 293.04 | 1.26 | 99.6% | MAL |
+| Bottom track 3-5/8" | lf | 244.34 | 231.91 | 5.1% | CERCA |
+| Parapet bottom track 600T125-54 (PAF to steel beam) | lf | 269.37 | — | — | FALTA |
+| Parapet top track 600T125-54 | lf | 269.37 | — | — | FALTA |
+| Bottom track - roof step 4/A02.02, vestibule heads 4-7/A12.1 | lf | 176.84 | — | — | FALTA |
+| Top track - roof step 4/A02.02, vestibule heads 4-7/A12.10,  | lf | 176.84 | — | — | FALTA |
+| Top / deflection track 6" | lf | 293.04 | 261.98 | 10.6% | MAL |
+| Top / deflection track 3-5/8" | lf | 244.34 | 10.44 | 95.7% | MAL |
+| Track, ceilings / soffits / canopy | lf | 1,168.97 | 441.04 | 62.3% | MAL |
+| Bracing 1-1/2" C.R. channel @ 48" O.C. | lf | 2,624.23 | 2,724.80 | 3.8% | CERCA |
+| Additional head track at openings over 4'-0" wide | lf | 56.00 | 110.72 | 97.7% | MAL |
+| Header / metal stud box beam | lf | 305.63 | — | — | FALTA |
+| Sill track | lf | 67.76 | — | — | FALTA |
+| Framed openings - MEP, light slots and diffusers | lf | 970.32 | — | — | FALTA |
+| Stud reinforcement at MEP penetrations | pcs | 18.00 | — | — | FALTA |
+| 3-5/8" stud, CSR soffit 10/A09.33 (LF) | lf | 104.77 | — | — | FALTA |
+| 2-1/2" CFMF @ 16" O.C. at coiling grille head (4/A08.21) | lf | 7.85 | — | — | FALTA |
+| Purlin 1x1x1 16 ga, top track to deck | lf | 214.40 | 231.75 | 8.1% | CERCA |
+| Furring channel (ceilings) | lf | 808.88 | — | — | FALTA |
+| Carrying channel (ceilings) | lf | 316.77 | — | — | FALTA |
+| Hanger wire | lf | 524.78 | 347.25 | 33.8% | MAL |
+| Extra framing - sistered stud and furring at the ATM recess | lf | 109.87 | — | — | FALTA |
+| 5/8" gypsum board, regular | sf | 17,450.60 | 16,562.72 | 5.1% | CERCA |
+| 5/8" EXTERIOR gypsum sheathing (deck to top of parapet) | sf | 944.60 | 1,144.21 | 21.1% | MAL |
+| FRP WC-3 | sf | 354.00 | — | — | FALTA |
+| Cement board (substrate under the FRP cove base band) | sf | 33.80 | — | — | FALTA |
+| Exterior sheathing 5/8" FRT plywood bonded to 2-1/2" polyiso | sf | 3,754.28 | 4,226.91 | 12.6% | MAL |
+| 5/8" glass mat sheathing (exterior face of the stud) | sf | 462.00 | — | — | FALTA |
+| Gypsum board jamb return at openings | sf | 95.94 | — | — | FALTA |
+| Ballistic panel 3/8" UL752 | sf | 74.00 | 83.55 | 12.9% | MAL |
+| 3/8" gypsum board | sf | 57.04 | 62.95 | 10.4% | MAL |
+| FRT plywood substrate | sf | 632.49 | — | — | FALTA |
+| Level 5 finish | sf | 874.83 | 909.77 | 4.0% | CERCA |
+| 5/8" FRT plywood sheathing (canopy and soffits) | sf | 1,872.88 | 2,245.94 | 19.9% | MAL |
+| METAL trim - corner bead, casing bead, shadow molding, gypsu | lf | 1,267.55 | 16.00 | 98.7% | MAL |
+| PVC trim - edge trim molding and inside corner molding at th | lf | 211.20 | — | — | FALTA |
+| Power-driven fasteners and duct sleeves | pcs | 275.00 | — | — | FALTA |
+| Blocking FRT / 2X FRT wood | lf | 1,083.90 | 273.02 | 74.8% | MAL |
+| Acoustical sealant | lf | 957.52 | 1,005.31 | 5.0% | CERCA |
+| Access panel 2'x2' | pcs | 1.00 | — | — | FALTA |
+| 5/8" FRT plywood at canopy column wraps | sf | 220.50 | — | — | FALTA |
+| 3/4" FRT plywood at storefront piers | sf | 26.86 | 541.35 | 1915.5% | MAL |
+| Stud blocking 362CR22 at edge of gypboard (4/S5.20) | lf | 466.00 | 766.14 | 64.4% | MAL |
+| Drywall screws 1-1/4" bugle head | pcs | 21,323.33 | — | — | FALTA |
+| Framing screws, pan head self-drilling | pcs | 5,252.00 | — | — | FALTA |
+| Power-driven fasteners, slab pins for the bottom track | pcs | 515.71 | — | — | FALTA |
+| Expansion anchors Hilti 1/4" Kwik Bolt II, exterior bottom t | pcs | 326.46 | — | — | FALTA |
+| Joint compound, all purpose | lb | 1,279.40 | — | — | FALTA |
+| Joint tape, paper | lf | 6,574.69 | — | — | FALTA |
+
+## Materiales que solo están en el candidato (SOBRA)
+
+- 3-5/8" metal stud 362S137-33 (A1, B, C1, F, CSR, transition bulkheads, (lf): 4,588.52
+- 6" metal stud 14 GA @ 24" O.C. (B2K ballistic, schedule row missing -> (lf): 46.12
+- 6" metal stud 600S162-54 exterior @16" / @12" within 6 ft of corners (lf): 3,390.11
+- 2-1/2" metal stud (coiling grille fascia cripples) (lf): 28.50
+- 3-5/8" metal stud canopy fascia + column wraps (lf): 759.43
+- 3-5/8" metal stud canopy soffit joists @16" (lf): 1,075.43
+- 3-5/8" metal stud CSR soffit bottom framing @16" (lf): 37.59
+- 3-5/8" top track - continuous slip track 362T200-33 slip (designation  (lf): 231.91
+- 3-5/8" 14 GA bottom track 362T125-68 (lf): 10.44
+- 6" interior bottom track 600T125-33 (lf): 84.91
+- 6" interior top track - continuous slip track 600T200-33 slip (designa (lf): 84.91
+- 6" 14 GA top track - continuous slip track 600T200-68 slip (designatio (lf): 1.26
+- 6" exterior bottom track 600T125-33 (lf): 261.98
+- 6" parapet bottom track 600T125-54 (lf): 314.89
+- 6" parapet top track 600T125-54 (lf): 314.89
+- 3-5/8" bottom track other runs (CSR side walls, transition bulkheads,  (lf): 557.00
+- 3-5/8" top track other runs (same runs, fixed to structure) (lf): 557.00
+- Ceiling / soffit track - GWB ceiling perimeter (wall angle) (lf): 192.23
+- Header / box beam at openings (S5.20 header schedule; 8,9/A12.01 cont. (lf): 281.74
+- Sill track at window / ATM openings / 16" duct (lf): 65.76
+- Bracing clip / attachment at C.R. channel (F/S5.20 attach each side) (pcs): 5,662.00
+- Vertical deflection clips at exterior studs (S1.11 note 2) (pcs): 210.00
+- 1-1/2" carrying channel @ 48" O.C. - GWB ceilings (lf): 235.18
+- 7/8" furring channel @ 16" O.C. - GWB ceilings (lf): 705.53
+- 3-5/8" metal stud kickers @ 48" at GWB ceiling transition 104 (7/A09.3 (lf): 123.80
+- Framed openings for recessed fixtures - canopy soffit (54.1) (lf): 686.00
+- Framed openings in GWB ceilings / CSR soffit (R-11C/CE x4, R-11A x2, a (lf): 232.00
+- 5/8" gypsum board regular - GWB ceilings, CSR soffit, ceiling transiti (sf): 1,364.26
+- 5/8" glass mat sheathing (base strip slab-T/BASE 0'-6" + canopy beam b (sf): 314.29
+- FRP panel WC-3 (restrooms 5'-0" over 6" base; janitor mop sink 0-4'-0" (sf): 334.80
+- Cementitious backer board under tile cove base (58.7) (sf): 31.88
+- Mineral wool insulation - roof step and drive-up ATM (4/A02.02, 6/A08. (sf): 353.31
+- Batt insulation in partitions + restroom ceiling sound batt (KN11) (sf): 5,635.98
+- Corner bead (53.1) (lf): 724.25
+- Casing bead / J-bead at board stops: exterior opening returns, grille  (lf): 289.39
+- Shadow molding (where drawn) (lf): 187.20
+- Sealant at office front jambs (10/A12.01 SEALANT, 2 beads) (lf): 193.01
+- 3/4" FRT plywood blocking - parapet top under coping, 2 plies (4/A09.2 (lf): 629.77
+- 3/4" FRT plywood blocking - office bulkheads and jambs (8,9,10/A12.01) (lf): 149.17
+- 3/4" FRT plywood blocking - returns at exterior openings (10,11/A09.27 (lf): 235.98
+- 5/8" FRT plywood blocking - CSR soffit (9/A12.08) (lf): 24.04
+- Metal stud blocking 362CR22 - wall stops, artwork, wall equipment (58. (lf): 107.00
+
+## Partition types que no salieron iguales (11 de 14)
+
+| Type | Walls ref | Walls cand | LF ref | LF cand | Dif | Estado |
+|---|---|---|---|---|---|---|
+| A1 | 9 | 12 | 78.37 | 93.15 | 2.5% | CERCA (rango) |
+| A1K | 3 | 3 | 7.99 | 9.18 | 6.8% | CERCA (rango) |
+| A5 | 4 | 4 | 39.12 | 37.78 | 3.4% | CERCA (rango) |
+| B2 | 4 | 3 | 38.73 | 47.14 | 21.7% | MAL |
+| BULKHEAD-G | 2 | — | 45.00 | — | — | EN OTRA HOJA (Material Summary) |
+| C1 | 8 | 8 | 48.77 | 61.01 | 24.3% | MAL (rango) |
+| CANOPY-COL | 4 | — | 22.67 | — | — | EN OTRA HOJA (Material Summary) |
+| EXT-6CFMF | 6 | — | 217.64 | — | — | FALTA |
+| EXT-PARAPET | 6 | — | 217.64 | — | — | FALTA |
+| G | 10 | 11 | 80.88 | 81.90 | 1.3% | CERCA |
+| G1 | 3 | 3 | 17.11 | 18.46 | 7.9% | CERCA |
+
+## Types que solo están en el candidato (SOBRA)
+
+- BULKHEAD: 6 walls, 45.00 LF
+- EXT: 11 walls, 261.98 LF
+
+Antes de dar un MAL por error de Claude, abre el renglón: a veces la referencia o el emparejamiento de nombres es el que está mal (regla del artículo: leer cada resultado).

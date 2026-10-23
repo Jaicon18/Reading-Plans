@@ -1,0 +1,107 @@
+{
+ "_meta": {
+  "fecha": "2026-10-16",
+  "origen": "ARBITRAJE prueba 8 vs referencia v4 (BOA Broomfield)",
+  "nota": "Valores NET en la unidad de la familia de familias.py. Cada cifra [DERIVADO] con su operacion; las cotas [CONFIRMADO] citan N/HOJA."
+ },
+ "6\" stud (todos los gauges)": {
+  "valor_correcto": 4751.49,
+  "min": 4417.16,
+  "max": 4751.49,
+  "estado": "RFI",
+  "unidad": "lf",
+  "motivo": "Exterior de la v4 (3,274.49, opcion S1.11) se mantiene. El interior 6\" (A5/B2/B2K, 1,250.98) quedo de la v3 sin re-medir y viola 53.2: A5 #14 lleva 15 pcs en 19'-0\" (minimo ROUNDUP(19/1.333)+1 = 16) y A5 #15 lleva 9 pcs en 11.00 LF (minimo 10). Re-derivado con 53.2 sobre las longitudes vector de la prueba #8 y aberturas bien tratadas (field studs dentro del R.O. se quitan, cripples a largo real, door-head infill = solo king+jack + cripples): 1,477.00 LF.",
+  "operacion": "[DERIVADO] 3,274.49 (exterior v4) + 1,477.00 (interior: #30 12x15.375=184.5; #31 3x15.375=46.1; #32 18x15.375=276.8; #33 6x13.052=78.3; #34 4x13.052+cripples 10.8=63.0; #35 63.0; #50 10x15.375+cripples 13.4=167.2; #51 27x13.052+cripples 43.1=395.5; #52 12x13.052=156.6; #55 B2K 3x15.375=46.1) = 4,751.49. MIN = 3,141.46 (exterior 7/S5.20) + 1,275.70 (interior sin studs de esquina/T: 1,477.00 - 8x15.375 - 6x13.052) = 4,417.16.",
+  "evidencia": "10/S5.10 (studs paran en DEFLECTION TRACK bajo la perimeter beam); 2/A09.26 (STEEL HEADER FRAMING, T/OPENING ELEV. 8'-6\", no hay stud bajo el storefront); S2.20 (HSS9x5x5/8 lintels grid F y grid 2, W18x35 grid F 4-7, W12x19 grid F 7-8); A02.01 (19'-0\" impreso muro A5 Calling Cubes 122; doors 116 y 122)"
+ },
+ "track de ceilings / soffits": {
+  "valor_correcto": 1217.91,
+  "min": 886.77,
+  "max": 1230.51,
+  "estado": "CRITERIO",
+  "unidad": "lf",
+  "motivo": "La v4 puso el track de los dos extremos de los soffit joists del canopy con el largo de la linea del muro (2 x 184.92 = 369.84). Los joists van de la fascia al muro (7/A09.26, 3/A09.26): un extremo en la linea del muro y el otro en la linea interior de la fascia. El propio perimetro del soffit medido por la v4 da 418.78 LF (RFI-G3-2 de la v4). Sin cota, 53.3 manda la opcion de MAS material.",
+  "operacion": "[DERIVADO] 1,168.97 - 369.84 + 418.78 (perimetro soffit W+N+E 369.99 + sur 48.79, vector A04.01 de la v4) = 1,217.91",
+  "evidencia": "7/A09.26 (fascia box T/STUD 12'-7\" a B/STUD 10'-8 5/8\", soffit framing fascia-a-muro); 3/A09.26; 10/A09.33 CONT. TRACK (CSR soffit)"
+ },
+ "bottom track (todos)": {
+  "valor_correcto": 1328.2,
+  "min": 1314.87,
+  "max": 1343.33,
+  "estado": "DERIVADO",
+  "unidad": "lf",
+  "motivo": "Faltan en la v4: (a) bottom track de los cripples 6\" sobre el steel header del storefront (2/A09.26: 6\" metal stud framing to deck sobre STEEL HEADER FRAMING; la v4 cuenta esos cripples en el 6\" stud pero sin track); (b) track del 2-1/2\" CFMF @16\" O.C. del head del coiling grille (4/A08.21, la v4 solo lleva el stud).",
+  "operacion": "[DERIVADO] 1,269.56 + 45.31 (storefront N 26.25 + N vestibule 12.56 + W vestibule 6.50, mismos largos de la v4) + 13.33 (clear opening 13'-4\" [CONFIRMADO 1/A08.21]) = 1,328.20. Rango = el de la v4 desplazado lo mismo.",
+  "evidencia": "2/A09.26; 4/A08.21; S2.20 (HSS9x5x5/8 sobre storefront)"
+ },
+ "top / deflection track (todos)": {
+  "valor_correcto": 1328.2,
+  "min": 1314.87,
+  "max": 1343.33,
+  "estado": "DERIVADO",
+  "unidad": "lf",
+  "motivo": "Igual que bottom: el top / deflection track bajo la perimeter beam corre tambien sobre el storefront (ahi estan los cripples, 10/S5.10 + 2/A09.26) y el 2-1/2\" del grille lleva su track arriba.",
+  "operacion": "[DERIVADO] 1,269.56 + 45.31 + 13.33 = 1,328.20",
+  "evidencia": "10/S5.10; 2/A09.26; 4/A08.21"
+ },
+ "sill track": {
+  "valor_correcto": 96.1,
+  "min": 72.76,
+  "max": 96.1,
+  "estado": "CRITERIO",
+  "unidad": "lf",
+  "motivo": "La v4 lleva solo 2 duct openings de 1'-0\". M01.01 dibuja 4 FD en muros de Electrical 120 / NER 121 con tamano impreso (R-2 14x14 x2, S-2 12x8, S-2 12x12). Ademas hay 7 recessed items en stud walls: TA-2 x2 (RECESSED PAPER TOWEL), TA-13 x2 (RECESS KIT), TA-14 x2 (RECESSED WASTE) en A08.01 y FEC-1 (FIRE EXTINGUISHER CABINET) en A00.40. Tamanos no impresos -> 2'-0\" + RFI (53.3). Knox box 7\" W [CONFIRMADO A00.40] cabe en el stud bay: no lleva sill track. FEC-2 es EXTINGUISHER BRACKET (surface): no lleva.",
+  "operacion": "[DERIVADO] 56.00 (6 GL-2 x 9.333) + 3.58 + 3.51 (ATMs) + FD 2x(1.167+1.333) + 2x(1.000+1.333) = 9.67 + recessed 7 x (2.0+1.333) = 23.33 -> 96.10. MIN 72.76 = sin recessed items.",
+  "evidencia": "M01.01 (FD x4 con duct size); A08.01 TOILET ACCESSORY LEGENDS; A00.40 FEC-1 / FEC-2; 1/S5.20 sill; 9/S5.20 OPNG IN NON-LOAD-BRG WALLS"
+ },
+ "framed openings MEP": {
+  "valor_correcto": 927.32,
+  "min": 927.32,
+  "max": 952.39,
+  "estado": "DERIVADO",
+  "unidad": "lf",
+  "motivo": "Los 43.00 LF de 'MEP wall penetrations' (v3, 26 penetraciones, nunca re-medidos, [PENDIENTE] en la propia v4) son aberturas en muros: van a header + sill track (53.6/53.7) o a stud reinforcement (6/S5.20), no a esta familia. Se quitan para no contar dos veces. El resto de la v4 se confirma (canopy UU 686, R-11 112, access panel KN4 8, slot diffusers SD 121.32).",
+  "operacion": "[DERIVADO] 970.32 - 43.00 = 927.32. MAX = 927.32 + 25.07 ends [PENDIENTE] (8.75 + 10.32 + 6.0 de la v4).",
+  "evidencia": "M01.01 (SD, TYP. 4 corridas de 3 secciones en GB ceiling Vestibule 100/101); A04.01 keynote 4 (2'x2' LOCKING ACCESS PANEL); E00.01 + E02.01; 4,5,6/A09.33"
+ },
+ "FRT blocking": {
+  "valor_correcto": 1004.9,
+  "min": 627.41,
+  "max": 1100.06,
+  "estado": "CRITERIO",
+  "unidad": "lf",
+  "motivo": "Regla 54.3: FRT / FRTW solo donde el detalle lo rotula. La v4 metio en FRT 79 LF cuyo rotulo NO dice FRT: wall stops 18.00 (A00.30 note D 'PROVIDE BLOCKING AT EACH WALL STOP.'), equipment + lockers 29.00 (A02.01 note C / keynote 5 'PROVIDE BLOCKING ... AS REQUIRED'), artwork 32.00 (A11.04 solo rotula ARTWORK). Pasan a metal stud blocking 362CR22 (4/S5.20) con RFI de material. Se confirma el resto (parapet 2 plies dibujados en 4/A09.26, office front 9/10 A12.01, 8/A12.10, 3/A08.21, millwork note D, toilet accessories note E, 3/A09.30, 13/A12.02).",
+  "operacion": "[DERIVADO] 1,083.90 - 18.00 - 29.00 - 32.00 = 1,004.90; min 706.41 - 79 = 627.41; max 1,179.06 - 79 = 1,100.06",
+  "evidencia": "4/A09.26 (3/4\" F.R.T. PLYWOOD BLOCKING AS REQUIRED, 2 plies); A00.30 note D; 8/A12.10 FRT BLOCKING; 3/A08.21 FRT WOOD BLOCKING (TYP)"
+ },
+ "metal stud blocking (362CR / STUD BLOCKING)": {
+  "valor_correcto": 545.0,
+  "min": 280.0,
+  "max": 746.0,
+  "estado": "CRITERIO",
+  "unidad": "lf",
+  "motivo": "Recibe los 79 LF que salen de FRT blocking (54.3).",
+  "operacion": "[DERIVADO] 466.00 + 79.00 = 545.00; min 201 + 79; max 667 + 79",
+  "evidencia": "4/S5.20 STUD BLOCKING 362CR22 (TYP.); A00.30 note D; A02.01 note C"
+ },
+ "cement board": {
+  "valor_correcto": 33.8,
+  "min": 0.0,
+  "max": 33.8,
+  "estado": "CRITERIO",
+  "unidad": "sf",
+  "motivo": "La v4 SI lleva el renglon (33.8 SF, standing order 'Cementitious backer board under any tile', Handoff - Approved), pero rangos.json lo dejo en 0 con una nota de una version vieja de familias.py (decia que el renglon caia en FRP). Con familias.py vigente (15-oct) el renglon 'Cement board (substrate under the FRP cove base band)' cae en 'cement board' (probado). Se corrige el rango, no el take-off.",
+  "operacion": "[DERIVADO] 67.6 LF de CT-12C cove base x 0.50 ft = 33.80 SF (v4)",
+  "evidencia": "3/A08.01 RESTROOM FRP/TILE DETAIL (CERAMIC TILE COVE BASE AS SCHEDULED, CT-12C) ; Handoff - Approved de la v4"
+ },
+ "FRP": {
+  "valor_correcto": 354.0,
+  "min": 338.0,
+  "max": 356.67,
+  "estado": "CRITERIO",
+  "unidad": "sf",
+  "motivo": "rangos.json sumaba el cement board dentro de FRP (387.80). Con familias.py vigente FRP queda solo con FRP WC-3.",
+  "operacion": "[DERIVADO] 387.80 - 33.80 = 354.00",
+  "evidencia": "A-D/A08.01; A05.01 keynote 6"
+ }
+}

@@ -1,0 +1,191 @@
+<title>Estado BOA en voz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: una columna de lectura, barra de audio fija abajo, párrafo activo resaltado */
+:root {
+  --bg: #f4f5f2; --fg: #1c1f22; --muted: #5a6066; --line: #d6d9d2;
+  --accent: #2f6b8a; --hl: #dcebf2; --bar: #ffffff; --ok: #2e7d4f; --warn: #a8621a;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #15181b; --fg: #e9ebe7; --muted: #a2a8ae; --line: #33383d;
+  --accent: #6fb2d4; --hl: #1f3440; --bar: #1c2024; --ok: #6cc28f; --warn: #e3a35c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #15181b; --fg: #e9ebe7; --muted: #a2a8ae; --line: #33383d;
+  --accent: #6fb2d4; --hl: #1f3440; --bar: #1c2024; --ok: #6cc28f; --warn: #e3a35c; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 18px; line-height: 1.6; }
+.wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 150px; }
+h1 { font-family: var(--display); font-size: 1.8rem; line-height: 1.15; margin: 0 0 4px; text-wrap: balance; }
+.sub { color: var(--muted); font-family: var(--display); font-size: .92rem; margin: 0 0 24px; }
+h2 { font-family: var(--display); font-size: 1.1rem; margin: 26px 0 6px; color: var(--accent); }
+p { margin: 0 0 12px; padding: 4px 8px; border-radius: 6px; transition: background .2s; }
+p.on { background: var(--hl); }
+.tbl { overflow-x: auto; margin: 0 0 12px; }
+table { border-collapse: collapse; font-family: var(--display); font-size: .92rem; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--bar); border-top: 1px solid var(--line);
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
+button { font-family: var(--display); font-weight: 700; font-size: 1rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+  padding: 12px 18px; border-radius: 8px; cursor: pointer; min-width: 110px; }
+button.main { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.status { font-family: var(--display); color: var(--muted); font-size: .9rem; min-width: 120px; text-align: center; }
+@media (prefers-reduced-motion: reduce) { p { transition: none; } }
+</style>
+
+<div class="wrap">
+  <h1>Estado del take-off BOA Broomfield</h1>
+  <p class="sub">Actualizado 21-oct, 4:20 p.m., hora de Los Ángeles.</p>
+  <div id="texto">
+    <h2>La veintinueve B sacó ochenta y cuatro punto siete</h2>
+    <p>Las dos fallan en lo mismo: el ATM, el B2K, el glass mat y el CSR soffit. Aprendí algo importante: las herramientas ya calculan bien, pero la lectura del plano sigue variando. Por eso, el arbitraje veintinueve, que lancé a las cuatro y dieciocho, va a probar cada arreglo con dos lectores ciegos antes de darlo por bueno.</p>
+    <h2>La veintinueve A sacó ochenta y tres punto nueve</h2>
+    <p>Bajó otra vez. El extra framing del ATM salió en veintitrés pies contra cuarenta y nueve punto ocho siete: la lectura del detalle seis de A08.11 sigue fallando. También se pasó el jamb return, se quedó corto el glass mat, y el B2K y el A5 salieron un poco cortos. Lo bueno: ya no contó doble el EXT, y el stud blocking ya salió.</p>
+    <p>La veintinueve B está por terminar. Con las dos juntas lanzo el siguiente arbitraje.</p>
+    <h2>Versión ochenta y pruebas veintinueve</h2>
+    <p>La versión ochenta ya está lista y el paquete ciego salió limpio. Arregla el choque entre las dos herramientas, los tramos apilados contados doble, el ATM desde la cota impresa y el stud blocking que se perdía. Con esas herramientas, los datos de la veintiocho A darían noventa y siete por ciento, y los de la veintiocho B, noventa y seis.</p>
+    <p>A las doce y veinte lancé las pruebas veintinueve A y veintinueve B.</p>
+    <h2>Pruebas veintiocho: bajaron</h2>
+    <p>La veintiocho A sacó ochenta y seis punto ocho por ciento. Bajó porque contó doble unos tramos apilados del EXT, y eso infló el track y los anchors. Además, el ATM sigue corto y se le olvidó el stud blocking del detalle cuatro de S5.20.</p>
+    <p>La veintiocho B no sacó Excel. Dos herramientas de la versión setenta y nueve se contradicen en el CSR soffit. El error es mío, del paquete.</p>
+    <p>A las once y dieciocho lancé el arbitraje veintiocho para arreglar todo eso y armar la versión ochenta.</p>
+    <h2>Pruebas veintiocho en marcha</h2>
+    <p>La versión setenta y nueve ya está lista y el paquete ciego salió limpio. Arregla el header del coiling grille, el extra framing del ATM con los sistered studs y el furring de tu detalle, y el hanger wire. Con esas herramientas, los datos de la veintisiete B darían noventa y siete por ciento.</p>
+    <p>A las ocho y veintiuno lancé las pruebas veintiocho A y veintiocho B.</p>
+    <h2>Prueba veintisiete</h2>
+    <p>La veintisiete B sacó noventa y dos punto tres por ciento, con partition types al cien. Bajaron los materials por tres cosas: el header del coiling grille se pasó, el extra framing del ATM se quedó corto y el hanger wire salió alto. La veintisiete A no corrió porque el sistema de permisos la detuvo al arrancar.</p>
+    <p>A las siete y veintiuno lancé el arreglo de esas tres cosas.</p>
+    <h2>Pruebas veintiséis</h2>
+    <p>La veintiséis B sacó noventa y cuatro punto ocho por ciento, sin nada mal. La veintiséis A sacó ochenta y nueve punto cinco: le fallaron el B2K y el header del coiling grille, y el A5 quedó cerca.</p>
+    <p>A las dos y dieciocho lancé el arreglo de esos errores, con tus últimas respuestas y los markups para Bluebeam.</p>
+    <h2>Versión setenta y siete lista, con una duda</h2>
+    <p>El arbitraje veinticinco ya terminó la versión setenta y siete con tus decisiones de hoy. Con esas herramientas, los datos de las pruebas veinticinco darían noventa y seis punto nueve y noventa y cuatro punto cinco por ciento, sin nada mal.</p>
+    <p>Antes de lanzar las pruebas veintiséis necesito confirmar contigo cómo entendió tu respuesta del ATM. El árbitro tomó toda la pared del ATM como extra framing, trescientos ochenta y un pies, y la quitó de los studs de seis pulgadas para no contarla dos veces. La otra lectura es que esa pared ya está en su partition type y el extra framing es cero.</p>
+    <h2>Dos pruebas veinticinco arriba del noventa</h2>
+    <p>La veinticinco B sacó noventa y dos punto seis por ciento: materials ochenta y ocho punto ocho, y partition types noventa y seis punto cuatro. Junto con el noventa y cinco de la A, son dos pruebas ciegas y limpias arriba del noventa, y en las dos lo único mal es el extra framing del ATM, que tú ya contestaste.</p>
+    <p>La B quedó dos punto cuatro puntos abajo de la A. La razón: en partition types partió distinto el A5 y el A1 junto a calling cubes y la door ciento dieciséis, y sacó cuarenta y cinco punto siete pies de A5 contra tus treinta y nueve punto uno. En materials se pasó un poco en carrying channel y acoustical sealant.</p>
+    <p>A las cuatro y dieciocho lancé el arbitraje veinticinco. Va a meter tus decisiones de hoy, corregir tu referencia con ellas y armar la versión setenta y siete.</p>
+    <h2>La veinticinco A sacó noventa y cinco</h2>
+    <p>La prueba veinticinco A, con la versión setenta y seis, sacó noventa y cinco por ciento: materials noventa, y partition types cien. Es la mejor prueba ciega y limpia hasta ahora, cuatro puntos arriba de la veinticuatro.</p>
+    <p>Solo queda una familia mal: el extra framing del ATM, con dieciocho pies contra tus ciento nueve punto ocho siete. Eso ya lo contestaste hoy: la pared diagonal completa, de piso a deck, con runners arriba y abajo. Entra en la versión setenta y siete.</p>
+    <p>Hoy también cerramos todo el punto seis en Bluebeam: box beams por cuatro, headers con las piezas del schedule, el plywood de los piers medido, el sill track doble y el track de ceilings en la transición. La veinticinco B sigue trabajando.</p>
+    <h2>Versión setenta y seis y pruebas veinticinco</h2>
+    <p>El arbitraje veinticuatro ya terminó. Encontró por qué las dos pruebas fallaban en cosas distintas: la veinticuatro A dejó la canopy soffit para otra tarea y nadie la tomó, no puso el sheathing de los column wraps y contó dos veces unos bordes del track de ceilings. La veinticuatro B pasó dos C1 a otro type. Ahora las herramientas generan eso solas.</p>
+    <p>Con las herramientas nuevas, los datos de las dos pruebas darían noventa y cuatro punto cuatro y noventa y cinco punto seis por ciento. Lo único que queda mal en las dos es el extra framing del ATM, que es tu pregunta seis A.</p>
+    <p>Hay una decisión más para ti, cuando contestes la seis: en el track de ceilings, tu referencia cuenta tres tracks en los bordes de transición del Waiting ciento cuatro, y la regla dice uno. La diferencia es de setenta y siete pies.</p>
+    <p>Revisé el paquete ciego y está limpio. A las once veintiuno lancé las pruebas veinticinco A y veinticinco B con la versión setenta y seis.</p>
+    <h2>Dos pruebas limpias arriba del noventa</h2>
+    <p>Las pruebas veinticuatro A y veinticuatro B, con la versión setenta y cinco, sacaron noventa punto seis y noventa punto ocho por ciento. Son dos pruebas ciegas y limpias arriba de la meta del noventa.</p>
+    <p>La veinticuatro A sacó cien por ciento en partition types, pero en materials se le fueron el 3-5/8 stud, el track de ceilings, el FRT plywood y el ballistic panel. La veinticuatro B sacó ochenta y ocho punto ocho en materials, pero movió dos C1 de las columnas del vestíbulo a otro type.</p>
+    <p>Aún no es perfecto: cada corrida falla en cosas distintas, y el extra framing del ATM sigue mal en las dos, esperando tu respuesta. A las diez y diecisiete lancé el arbitraje veinticuatro para que las dos corridas den lo mismo.</p>
+    <h2>Pruebas veinticuatro en marcha</h2>
+    <p>El arbitraje veintitrés ya terminó. El track de parapet y roof step caía en ceilings porque el nombre del renglón decía soffit; ya quedó en walls. También arregló el jamb return y el largo del B2, el A5 y el C1.</p>
+    <p>Con esas herramientas, los datos de las pruebas veintitrés A y B darían noventa y seis por ciento. Eso no es una prueba ciega, por eso a las seis veintinueve de la mañana lancé las pruebas veinticuatro A y veinticuatro B con la versión setenta y cinco.</p>
+    <h2>Resultado de la veintitrés B</h2>
+    <p>La veintitrés B sacó ochenta y siete punto dos por ciento: materials ochenta y cinco, y partition types ochenta y nueve punto tres. Quedó cuatro puntos abajo de la veintitrés A.</p>
+    <p>La razón: el mismo problema del track que en la A, más el gypsum board jamb return, que salió en ciento un pies cuadrados, arriba del rango. En partition types, el B2, el A5 y el C1 salieron con el largo un poco distinto, entre dos y seis por ciento.</p>
+    <p>El track sale mal igual en las dos pruebas. Unos trescientos cincuenta pies de track de parapet, roof step y otros quedan en la familia de ceilings, y tú los cuentas como bottom y top track de walls. Es un error de clasificación y se puede arreglar.</p>
+    <p>A las cinco y veintitrés de la mañana lancé el arbitraje veintitrés para arreglar eso y armar la versión setenta y cinco.</p>
+    <h2>Primera prueba limpia arriba del noventa</h2>
+    <p>La veintitrés A, con la versión setenta y cuatro, sacó noventa y uno punto tres por ciento: materials ochenta y seis punto dos, y partition types noventa y seis punto cuatro. Es la primera prueba con paquete limpio, sin datos del proyecto, que pasa la meta del noventa.</p>
+    <p>Salió dos punto cinco puntos abajo de la veinte A. La razón está en el track: el de ceilings y soffits salió en mil seiscientos treinta y cuatro pies contra tus mil ciento sesenta y nueve, y el bottom y top track de walls en mil ciento setenta y cuatro contra tus mil doscientos setenta. Parece que unos tramos se pasaron de walls a ceilings. También sigue mal el extra framing del ATM, que es tu pregunta seis A.</p>
+    <p>La veintitrés B sigue trabajando.</p>
+    <h2>Exterior aceptado</h2>
+    <p>Aceptaste también el exterior seis pulgadas. Con eso la veinte A sube a noventa y tres punto ocho por ciento, con partition types en noventa y seis punto cuatro. La veintiuno B queda en ochenta y nueve. Lo único que sigue mal en la veinte A es el extra framing del ATM.</p>
+    <h2>Pasamos el noventa por ciento</h2>
+    <p>Con tu decisión de aceptar lo que dicen las pruebas en todo menos el exterior de seis pulgadas, recalifiqué todo. La veinte A ahora saca noventa y dos punto uno por ciento: materials noventa y uno punto dos, y partition types noventa y dos punto nueve. Es la primera prueba ciega arriba de la meta del noventa.</p>
+    <p>La veintiuno B saca ochenta y nueve punto cero, casi en la meta.</p>
+    <p>Lo único que queda en partition types es el exterior seis pulgadas CFMF: tú tienes seis walls y las pruebas ocho. Ya le pedí a la sesión de estudio que arregle solo eso y arme la versión setenta y cuatro.</p>
+    <h2>Pruebas veintidós en marcha</h2>
+    <p>El paquete ciego ya quedó limpio de todas las respuestas de tu referencia. Le quedan detalles menores, como conteos de trabajo interno, que no ayudan a sacar las cantidades. Esos se limpian en la siguiente versión.</p>
+    <p>A las tres cincuenta y nueve de la tarde lancé las pruebas veintidós A y veintidós B con la versión setenta y tres. Son las primeras pruebas con un paquete revisado línea por línea, así que su calificación es la más honesta hasta ahora.</p>
+    <h2>Limpieza del paquete</h2>
+    <p>Revisé tres veces el paquete de la versión setenta y tres, y cada vez aparecieron más datos de este proyecto, sobre todo en notas viejas y en los tests internos. Arreglarlo uno por uno no sirve, así que pedí un cambio de fondo.</p>
+    <p>Ahora habrá dos paquetes. Uno de desarrollo, con todo. Otro ciego para las pruebas, sin los tests viejos ni las notas que tengan números del proyecto, y con un revisor más estricto. Cuando salga limpio lanzo las pruebas veintidós A y veintidós B.</p>
+    <h2>Arbitraje veintiuno terminado</h2>
+    <p>El arbitraje veintiuno ya terminó. La regla del tres octavos sí se aplicó; lo que falló fueron los largos del contorno del K. Uno se midió sobre el dibujo aunque tenía la cota impresa encima. Con el plano, el ballistic panel sale bien.</p>
+    <p>En el stud reinforcement de MEP se contaron cruces a mano, pipes y fire dampers. Con la regla nueva salen veinticuatro, dentro de tu rango. La compuerta ahora compara contra el plano y no solo revisa que el dato exista.</p>
+    <p>La versión setenta y tres pasa sus cincuenta y un tests. Al revisarla encontré un archivo de referencias con nombres de rooms de este proyecto. Ya pedí que lo limpie. Cuando quede limpio lanzo las pruebas veintidós A y veintidós B.</p>
+    <h2>Resultado de la prueba veintiuno B</h2>
+    <p>La veintiuno B sacó setenta y siete punto tres por ciento. Materials sacó ochenta y tres punto tres y partition types setenta y uno punto cuatro. No superó a la veinte A, que sigue siendo la mejor con ochenta y tres punto tres.</p>
+    <p>Volvieron a fallar el tres octavos con el ballistic panel y el stud reinforcement de MEP, aunque ya eran reglas inviolables. Eso quiere decir que la compuerta no las está revisando bien. También quedaron veintiún walls exteriores sin su type.</p>
+    <p>A las dos y dieciocho de la tarde lancé el arbitraje veintiuno. Va a revisar cada falla contra el plano, arreglar esa compuerta y armar la versión setenta y tres, ya limpia de datos del proyecto, para que las pruebas no necesiten ningún parche.</p>
+    <h2>Pruebas veintiuno en marcha</h2>
+    <p>La versión setenta y dos B ya está lista. Tiene seiscientas sesenta y ocho reglas, y si se rompe una sola, el Excel no se escribe. Pasaron sus cuarenta y cinco tests.</p>
+    <p>Antes de lanzar las pruebas revisé que el paquete fuera ciego. Algunos tests internos traían datos de este proyecto, como números de rooms y nombres de walls. Los limpié con un parche y los tests siguen pasando cuarenta y cinco de cuarenta y cinco.</p>
+    <p>A las diez y media de la mañana lancé las pruebas veintiuno A y veintiuno B con esa versión. Cuando terminen te doy la calificación.</p>
+    <p>La veintiuno B va avanzando. La veintiuno A se detuvo al empezar: el sistema de seguridad no la dejó correr el parche de limpieza. No voy a saltarme ese bloqueo, así que necesito que decidas cómo seguimos.</p>
+    <h2>Reglas inviolables</h2>
+    <p>El arbitraje veinte terminó. Encontró catorce decisiones que cambiaban entre una corrida y otra, y ya las fijó en las tools de la versión setenta y dos. Con esas compuertas, ni la veinte A ni la veinte B habrían podido entregar su Excel con los errores que tuvieron.</p>
+    <p>Como pediste, ahora todas las reglas se vuelven inviolables. A las nueve y diecisiete de la mañana lancé la versión setenta y dos B. Revisa cada regla del skill, y si una sola se rompe, no se escribe el Excel. Las reglas que dependen de leer el plano exigen su evidencia, con hoja, imagen y valor.</p>
+    <p>Cuando quede lista, lanzo las pruebas veintiuno con esa versión.</p>
+    <h2>Resultado de las pruebas veinte</h2>
+    <p>Terminaron las pruebas veinte con la versión setenta y uno. La veinte A sacó ochenta y tres punto tres por ciento. Es la mejor prueba ciega hasta ahora; la anterior mejor era setenta y siete punto cuatro.</p>
+    <p>En la veinte A, materials sacó ochenta y ocho punto uno y partition types setenta y ocho punto seis. Con tu regla de cortar en cada esquina, ya salen bien el A1, el A5, el C1 y los parapets.</p>
+    <p>La veinte B sacó setenta y seis punto ocho. Todavía hay diferencia entre una corrida y otra: en la B volvió a fallar el tres octavos y el ballistic panel.</p>
+    <p>Lo que sigue fallando en las dos: el extra framing del ATM, el B2K y los walls exteriores, que salen ocho contra tus seis.</p>
+    <p>Ya lancé el arbitraje veinte a las cinco y veintidós de la mañana. Va a revisar cada falla contra el plano y a convertir en reglas fijas las decisiones que cambian entre corridas. Después vienen las pruebas veintiuno con la versión setenta y dos.</p>
+    <h2>Resultado de las pruebas diecinueve</h2>
+    <p>Terminaron las dos pruebas con la versión setenta. La diecinueve B sacó setenta y siete punto cuatro por ciento. Es la nueva mejor prueba ciega; la anterior era setenta y seis punto dos.</p>
+    <p>En materials subió a ochenta y seis punto nueve por ciento. En partition types se quedó en sesenta y siete punto nueve.</p>
+    <p>La diecinueve A sacó sesenta y ocho punto cinco. Todavía hay mucha diferencia entre una corrida y otra.</p>
+    <div class="tbl"><table>
+      <tr><th>Prueba</th><th>Total</th><th>Materials</th><th>Partition types</th></tr>
+      <tr><td>19B (v70)</td><td>77.4 %</td><td>86.9 %</td><td>67.9 %</td></tr>
+      <tr><td>18B (v69)</td><td>76.2 %</td><td>84.5 %</td><td>67.9 %</td></tr>
+      <tr><td>18A (v69)</td><td>71.5 %</td><td>75.0 %</td><td>67.9 %</td></tr>
+      <tr><td>19A (v70)</td><td>68.5 %</td><td>76.2 %</td><td>60.7 %</td></tr>
+    </table></div>
+    <h2>Lo que falla ahora</h2>
+    <p>Con la regla nueva de un wall por run, ahora el skill junta de más. En el A1 salieron seis walls contra tus nueve, y en el G ocho contra diez. Hay que encontrar en qué puntos cortas tú un run: en las doors, en las T con otro type, o en los cambios de altura.</p>
+    <p>El LF de algunos types sigue un poco alto, y falla el extra framing del ATM.</p>
+    <h2>Siguiente paso</h2>
+    <p>El arbitraje diecinueve ya terminó y la versión setenta y uno está lista. Con tu decisión de usar lo de tu referencia, el skill corta un wall en cada esquina entre tags y ya no en las doors. Con esa regla salen los mismos walls que en tu take-off.</p>
+    <h2>Resultado del método original</h2>
+    <p>La prueba diecinueve C, con el método original de un solo agente, sacó sesenta y uno punto tres por ciento. Con la misma versión del skill, el método por etapas sacó setenta y siete punto cuatro. Ganó el método por etapas.</p>
+    <p>La diecinueve C cambió los nombres de varios renglones del Excel, y eso le bajó calificación. Pero también se le fueron cosas de verdad: Level 5, metal trim y framed openings salieron muy cortos.</p>
+    <p>A las doce y treinta y seis de la mañana lancé la prueba veinte A, con la versión setenta y uno y el método por etapas. Después viene la veinte B, para tener dos pruebas ciegas con la misma versión.</p>
+  </div>
+</div>
+
+<div class="bar">
+  <button id="play" class="main" type="button">Escuchar</button>
+  <button id="stop" type="button">Detener</button>
+  <span id="st" class="status">Listo</span>
+</div>
+
+<script>
+(function () {
+  var ps = Array.prototype.slice.call(document.querySelectorAll('#texto p'));
+  var synth = window.speechSynthesis, i = 0, playing = false, paused = false;
+  var btn = document.getElementById('play'), st = document.getElementById('st');
+  function voz() {
+    if (!synth) return null;
+    var vs = synth.getVoices();
+    return vs.find(function (v) { return /^es(-|_)(MX|US|419)/i.test(v.lang); }) ||
+           vs.find(function (v) { return /^es/i.test(v.lang); }) || null;
+  }
+  function mark(n) { ps.forEach(function (p, k) { p.classList.toggle('on', k === n); }); }
+  function next() {
+    if (i >= ps.length) { stop(); st.textContent = 'Terminado'; return; }
+    var u = new SpeechSynthesisUtterance(ps[i].textContent);
+    var v = voz(); if (v) u.voice = v; u.lang = v ? v.lang : 'es-MX'; u.rate = 1;
+    u.onend = function () { if (playing && !paused) { i++; next(); } };
+    mark(i); ps[i].scrollIntoView({ block: 'center', behavior: 'smooth' });
+    synth.speak(u);
+  }
+  function stop() { if (synth) synth.cancel(); playing = false; paused = false; i = 0; mark(-1); btn.textContent = 'Escuchar'; st.textContent = 'Listo'; }
+  btn.addEventListener('click', function () {
+    if (!synth) { st.textContent = 'Este navegador no tiene voz'; return; }
+    if (!playing) { playing = true; paused = false; btn.textContent = 'Pausa'; st.textContent = 'Hablando'; next(); }
+    else if (!paused) { paused = true; synth.pause(); btn.textContent = 'Seguir'; st.textContent = 'En pausa'; }
+    else { paused = false; synth.resume(); btn.textContent = 'Pausa'; st.textContent = 'Hablando'; }
+  });
+  document.getElementById('stop').addEventListener('click', stop);
+  if (synth && synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () {};
+})();
+</script>

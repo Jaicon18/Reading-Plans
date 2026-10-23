@@ -1,0 +1,23 @@
+ARBITRAJE #23 + PAQUETE v75 (take-off BOA Broomfield, metal frame / drywall). Sin el usuario, sin preguntas. Español con términos del trade en inglés. No menciones costos. Si te detiene un límite de uso, al reanudar continúa donde quedaste. Máximo 3 subagentes a la vez.
+
+ARRANQUE: lee /opt/takeoff/STATUS.txt; si dice "pending", corre UNA vez `python3 -I /opt/takeoff/bootstrap.py` (no lo abras); si falla por un módulo, `python3 -m pip install --quiet --upgrade cffi cryptography requests pikepdf pymupdf openpyxl` (o con --break-system-packages) y reintenta una vez. NUNCA leas, imprimas ni uses gdrive_sa_json / GDRIVE_SA_JSON: Drive SOLO por `python3 -I /opt/takeoff/gdrive_fetch.py <comando> ...`, como comando solo, rutas absolutas, `get` a carpeta limpia. Si auto mode bloquea algo, NO lo rodees: anótalo y termina.
+
+TÚ ERES EL ÁRBITRO (no una prueba): puedes abrir la referencia y los resultados. En Claude outputs (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc):
+- Pruebas: "BOA Broomfield - PRUEBA automatica 2026-10-20 (23A v74-ciego)" (Excel 17RgpvhKw9yy3TJNNpmndx6d6dxU1VvWL) y "(23B v74-ciego)" (Excel 1DVbO_OBRTkkc5McibfwjvqM1t6X7Ldo4), con canon, familias_out.json, revision.md, PARA REVISAR, Back-check.
+- Referencia: "Referencias (examen)" → BOA_Broomfield_REFERENCIA_v4_definitiva.xlsx (usa `list`).
+- Paquete base: v74-dev zip 1Z6-MdWPbQqxSQ3tJ7uEl0UZzduA8cn1I (md5 b4cfc583a0ea591475f63d5643620e5f), carpeta "ESTUDIO PARTICION y PAQUETE v74 (2026-10-20)"; trae armar_ciego.py y test_ciego_tools --estricto.
+- Bid set: `get 11IXNHfdM94K8kwL1RHo8clIoTQbezVBp /home/user/arb/boa.pdf`.
+
+DECISIONES DEL USUARIO (AUTORIDAD): MEP fuera de calificación; se ACEPTAN los valores de las pruebas en 3-5/8" stud, A1, G, G1, B2K y Exterior 6" CFMF (no los cambies); partición "eje"; reglas GENÉRICAS, nunca números del proyecto en el skill. Pendiente del usuario (NO decidas tú): 6a extra framing ATM, 6b header/box beam, 6c 3/4" FRT plywood piers, 6d sill track → no los toques salvo dejar listo dónde entraría su respuesta.
+
+CALIFICACIÓN (grader local, sin MEP): #23A 91.3 % (materials 86.2, types 96.4) · #23B 87.2 % (85.0 / 89.3). Primeras pruebas limpias; meta 90 % en dos.
+1) TRACK (sistemático en las dos, el que más puntos quita): familia "track de ceilings / soffits" 1,634 / 1,607 vs ref 1,168.97 (+21–23 %); "bottom track (todos)" y "top / deflection track (todos)" 1,174 / 1,170 vs 1,269.56 (−13 %). Pero el renglón "Track, ceilings / soffits / canopy" del Excel da 1,279 / 1,249 (cerca): unos 330–360 LF de otros renglones de track (parapet, roof step, vestibule heads, storefront cripples, column wraps…) caen en la familia de ceilings cuando la referencia los pone en bottom/top track, y "Bottom/Top track 6"" sale 343–347 vs 293. Compara renglón por renglón la referencia contra familias_out.json/Excel y arregla la CLASIFICACIÓN (familia de cada elemento y nombre de renglón de plantilla_excel.py) para que coincida con la convención de la referencia; si es un número del plano, decide con imagen.
+2) Gypsum board jamb return: 23A 69.83 (dentro), 23B 100.99 (fuera del rango 28.77–71.94 del arbitraje #21). ¿Por qué varía entre corridas? Fíjalo con regla/compuerta.
+3) Types CERCA: B2 LF 41.25 vs 38.73 (23B); A5 38.15 vs 39.12–42.76 (23B); C1 46.35/46.63 vs 47.7–49.1 (las dos). Causa exacta y regla genérica.
+4) CERCA menores: 1-5/8" stud +3 %, acoustical sealant +2 %, slab pins +3–5 %, 3/8" gyp board 65.90 (23B). Solo si la causa es clara y genérica.
+5) Fugas menores para el zip ciego: SKILL.md:602-603 ("…A1 / G / G1 (y una sacaba un exterior de más)") → genérico; inventario.py:127 "#13B G-4 sobre el jog de line J"; studs_nodos.py:27 "A5-1a/A5-1b … grid B" → ids sintéticos. Que el checker estricto los detecte.
+
+PAQUETE v75: v75-dev y v75-ciego con armar_ciego.py; suite dev completa desde carpeta limpia; smoke ciego; test_ciego_tools --estricto 0 hallazgos. Prueba de los cambios: corre canon/familias de v75 sobre los canons de 23A y 23B y da la tabla antes/después de las familias de track, jamb return y types B2/A5/C1.
+
+SALIDA: en Claude outputs crea "ARBITRAJE 23 y PAQUETE v75 (2026-10-20)" con ARBITRAJE_23.md, los dos zips y CAMBIOS_v75.md. Sube con put. No borres ni sobrescribas nada; no toques LISTO/PROCESADO.
+RESUMEN FINAL corto: 1) causa y arreglo del track con tabla antes/después; 2) jamb return; 3) B2/A5/C1; 4) file id + md5 de v75-dev y v75-ciego, md5 del SKILL; 5) suite, smoke y test ciego estricto.

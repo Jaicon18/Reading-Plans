@@ -1,0 +1,31 @@
+ARBITRAJE #25 + PAQUETE v77 (take-off BOA Broomfield, metal frame / drywall). Sin el usuario, sin preguntas. Español con términos del trade en inglés. No menciones costos. Si te detiene un límite de uso, al reanudar continúa donde quedaste. Máximo 3 subagentes a la vez.
+
+ARRANQUE: lee /opt/takeoff/STATUS.txt; si dice "pending", corre UNA vez `python3 -I /opt/takeoff/bootstrap.py` (no lo abras); si falla por un módulo, `python3 -m pip install --quiet --upgrade cffi cryptography requests pikepdf pymupdf openpyxl` (o con --break-system-packages) y reintenta una vez. NUNCA leas, imprimas ni uses gdrive_sa_json / GDRIVE_SA_JSON: Drive SOLO por `python3 -I /opt/takeoff/gdrive_fetch.py <comando> ...`, como comando solo, rutas absolutas, `get` a carpeta limpia. Si auto mode bloquea algo, NO lo rodees: anótalo y termina.
+
+TÚ ERES EL ÁRBITRO (no una prueba): puedes abrir la referencia y los resultados. En Claude outputs (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc):
+- Pruebas: "BOA Broomfield - PRUEBA automatica 2026-10-20 (25A v76-ciego)" (Excel 1LDoThWMNP1g7I96esVBbqNnkPtjEDyZT) y "(25B v76-ciego)" (Excel 1BOW3tNIYpaZkeM1KlPRGoueWc6AXrP7f), con canon, familias_out.json, revision.md, PARA REVISAR, Back-check.
+- Referencia: "Referencias (examen)" → BOA_Broomfield_REFERENCIA_v4_definitiva.xlsx (usa `list`).
+- Paquete base: v76-dev zip 1p2uWjY-o7AnuZZyY4xrWrSYnlZjSQdGh (md5 9b9f83d9cac9caf078228916d12796aa), carpeta "ARBITRAJE 24 y PAQUETE v76 (2026-10-20)"; trae armar_ciego.py y test_ciego_tools --estricto.
+- Bid set: `get 11IXNHfdM94K8kwL1RHo8clIoTQbezVBp /home/user/arb/boa.pdf`.
+
+CALIFICACIÓN (grader local, sin MEP): #25A 95.0 % (materials 90.0, types 100) · #25B 92.6 % (88.8 / 96.4). Único MAL de familia en las dos: extra framing ATM (18 / 22.42 vs 109.87).
+
+DECISIONES DEL USUARIO (AUTORIDAD; tomadas hoy en Bluebeam; conviértelas en reglas GENÉRICAS + compuerta + test, sin números del proyecto en el skill):
+D1 (ATM recess): el framing del ATM = la wall completa donde está el ATM (todo su largo), studs de piso a deck + bottom runner + top runner. NO sumar sistered studs ni filas de furring aparte. La wall se cuenta una sola vez (no duplicar con su partition type).
+D2 (box beam / header): todo box beam / box header = 4 piezas × largo. El CONT. BOX BEAM de un office front = continuo, de la primera a la última jamb del frente + 1'-4", × 4 (no por abertura). Los headers llevan las piezas que dice el HEADER SCHEDULE impreso (aquí 7/S5.20: non load brg ≤3'-4" SINGLE TRACK = 1 pieza; ≤6'-0" DOUBLE TRACK = 2; ≤8'-0" 2-362CSJ20 = 2; load bearing "2-…" = 2), largo = R.O. + 1'-4".
+D3 (regla del usuario, inviolable): "léelo y haz lo que ellos te dicen": si un schedule o detalle impreso contesta, se aplica sin RFI ni pregunta. Si un dato no está impreso, se mide por geometría vectorial a la escala impresa del detalle, verificada contra una cota o un espesor impreso, con imagen marcada y [DERIVADO].
+D4 (3/4" FRT plywood en storefront piers): 1/A09.25 y 2/A09.25 rotulan 3/4" FRT PLYWOOD solo como strip en cada jamb del storefront; las caras del pier son nailbase (AWB on 5/8" FRT plywood bonded to polyiso) + 5/8" gypsum board y NO van en ese renglón. Ancho del strip = medido por vector (D3) × alto impreso (T/GLAZING). El dibujo muestra 2 capas con rótulo singular → 1 ply + RFI con delta.
+D5 (sill track): 2/S5.20 "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG >4'-0"" + nota "INVERT DETAIL FOR SILL CONDITION" → sill track doble en openings > 4'-0" (R.O. + 1'-4") × 2; ≤ 4'-0" × 1; solo aberturas con sill.
+D6 (track de ceilings en transición): 7/A09.33 remata el ceiling con shadow molding, sin track propio → en un borde de transición NO se suma track de perímetro del ceiling (confirma R73.16/R76.6).
+
+TAREAS:
+1) Implementa D1–D6 en tools (accesorios.py / canon.py / plantilla) con compuertas y tests (malo/bueno). D1: atm_recess pasa a "wall completa piso a deck + 2 runners"; borra la fórmula de sistered+furring.
+2) Corrige la REFERENCIA con D1–D6 (archivo NUEVO "BOA_Broomfield_REFERENCIA_v5.xlsx" en tu carpeta de salida; no toques la v4): recalcula header/box beam, sill track, 3/4" FRT plywood piers, track de ceilings y extra framing ATM desde el plano con N/HOJA y operación escrita. Entrega también RANGOS_v22_propuesta.md con los valores nuevos (son solo para el árbitro/estimador; NUNCA en el zip ciego).
+3) Compuertas que bloquearon datos verdaderos (R76.7): (a) A_BLOCKING no reconoce "F.R.T." con puntos (4/A09.26) → regex F\.?R\.?T\.? + test; (b) el detector de español de plantilla_excel.py verificar marca rutas/nombres de archivo y "EL"/"y" de ids o coordenadas → excluir rutas e ids + test; (c) vigas_sobre_walls ignora band.sheet; (d) bitacora sin lock de escritura y sin resolver symlinks; (e) inventario_tags/alcances deben correr sobre la copia limpia del bid set (arranque.py la pasa).
+4) Varianza 25A vs 25B: A5 45.75 vs 39.12 (25B; split A5/A1 en calling cubes y door 116 sin cota impresa), carrying channel 353.10 vs 316.77, acoustical sealant 1,437 vs 1,167, header 759.67 vs 796.7. Causa y regla genérica si es clara; si no, RFI con delta.
+5) NO cambies los criterios de partición ni los valores aceptados de 3-5/8" stud, A1, G, G1, B2K y Exterior 6" CFMF: el usuario los está revisando uno por uno; sus respuestas irán en v78.
+
+PAQUETE v77: v77-dev y v77-ciego con armar_ciego.py; suite dev completa desde carpeta limpia; smoke ciego; test_ciego_tools --estricto 0 hallazgos (también contra los valores de la referencia v5). Prueba: corre las tools v77 sobre los canons de 25A y 25B y da la tabla antes/después (contra referencia v4 y contra v5) de ATM, header/box beam, sill track, FRT plywood piers, track de ceilings y A5.
+
+SALIDA: en Claude outputs crea "ARBITRAJE 25 y PAQUETE v77 (2026-10-20)" con ARBITRAJE_25.md, CAMBIOS_v77.md, los dos zips, BOA_Broomfield_REFERENCIA_v5.xlsx, RANGOS_v22_propuesta.md, img/. Sube con put. No borres ni sobrescribas nada; no toques LISTO/PROCESADO.
+RESUMEN FINAL corto: 1) D1–D6 implementadas (regla, compuerta, test); 2) referencia v5: tabla v4 → v5 con operación; 3) compuertas arregladas; 4) varianza 25A/25B; 5) file id + md5 de v77-dev y v77-ciego, md5 del SKILL ciego; 6) suite, smoke y test ciego estricto; 7) tabla antes/después.

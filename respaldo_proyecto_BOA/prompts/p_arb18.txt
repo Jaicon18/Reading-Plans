@@ -1,0 +1,30 @@
+ARBITRAJE #18 + PAQUETE v70 (take-off BOA Broomfield, metal frame / drywall). Sin el usuario, sin preguntas. Español con términos del trade en inglés. No menciones costos. Si te detiene un límite de uso, al reanudar continúa donde quedaste.
+
+ARRANQUE: lee /opt/takeoff/STATUS.txt; si dice "pending", corre UNA vez `python3 -I /opt/takeoff/bootstrap.py` (no lo abras); si falla por un módulo, `python3 -m pip install --quiet --upgrade cffi cryptography requests pikepdf pymupdf openpyxl` (o con --break-system-packages) y reintenta una vez. NUNCA leas, imprimas ni uses gdrive_sa_json / GDRIVE_SA_JSON: Drive SOLO por `python3 -I /opt/takeoff/gdrive_fetch.py <comando> ...`, como comando solo, rutas absolutas, `get` a carpeta limpia. Si auto mode bloquea algo, NO lo rodees: anótalo y termina.
+
+TÚ ERES EL ÁRBITRO (no una prueba): puedes abrir la referencia y los resultados. En Claude outputs (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc):
+- Pruebas: "BOA Broomfield - PRUEBA automatica 2026-10-17 (18A v69)" (Excel 1zMuM1-K3UctTDIhX4ITP5Zyie8b7En2E) y "(18B v69)" (Excel 1rR_UQ1AWBlQP2JCdqluNdAxxf35oU-Yj), con su takeoff_canon/canon_A/canon_B/revision.md/PARA REVISAR.
+- Referencia: carpeta "Referencias (examen)" → BOA_Broomfield_REFERENCIA_v4_definitiva.xlsx (usa `list` para encontrarla). Rangos vigentes del calificador: rangos_v15.json (17zZqwnMn5FMdZu3uGLZFrkrFyjDbnQSa).
+- Criterio del estimador (AUTORIDAD): CRITERIO_ESTIMADOR_particion_walls.md (1sMQaagZDosVT2WX7kecHQxbg9PdQnaQz): un run continuo del mismo type con quiebres/esquinas = 1 wall (modo "run"). Las pruebas #18 NO lo aplicaron (lo rechazaron por regla de ceguera) y usaron "tramo".
+- Bid set: `get 11IXNHfdM94K8kwL1RHo8clIoTQbezVBp /home/user/arb/boa.pdf`. Skill v69b: zip 1Nl5W0CWAZ5iyR1XING3X7bcKceuPql43 (md5 9470468b27f9ef8b497b10d43979a781).
+
+CALIFICACIÓN (grader local, rangos_v15): #18A 67.8 % (materials 75.0, types 60.7); #18B 72.6 % (84.5 / 60.7). Mejor ciego previo 69.0. MAL comunes a las dos:
+- furring channel ≈364–398 LF vs 808.88 (ambas faltan ~410–445 LF).
+- 3/8" gyp board 70–74 vs 57.04 (rango 62.95); ballistic panel 91–96 vs 74 (rango 83.55).
+- extra framing ATM 22–40 vs 49.87–51.41.
+- types: A1 12 walls vs 9 (LF 88–90 vs 78.37), A1K 9.1 vs 7.99, B2K 1.8–2.2 vs 1.26, G1 18.8–19.3 vs 17.11 (LF ~12–15 % arriba de forma sistemática); 18A C1 55.66 vs 48.77 y EXT-6CFMF 244.64 vs 217.64.
+- 18A: 3-5/8" stud 7,403 vs 6,553–6,668; drywall screws 33,666 vs 21,323; expansion anchors 367 vs 326; grille head 4.93 vs 10.43.
+
+TAREAS:
+1) ARBITRAJE renglón por renglón de cada MAL/CERCA: ¿quién tiene razón según el PLANO (cota impresa + N/HOJA + imagen)? Clasifica: (a) error de la prueba → regla/tool para v70; (b) error de la referencia/rango → propuesta en correcciones_rangos_v16.json SOLO con evidencia impresa citada; (c) ambiguo → RFI con delta de cada alternativa. Nunca elijas en silencio. Para LF de types ~12–15 % arriba: determina la convención (¿centerline vs cara, a través de doors, extremos?) con cotas impresas.
+2) Con el criterio "run", recuenta los walls por type del canon de 18B y reporta cuántos quedan (sin tocar la referencia).
+3) PAQUETE v70 (CIEGO y GENÉRICO: ningún valor, conteo ni resultado de BOA en SKILL ni referencias/):
+   - particion.py: MODO_DEFAULT = "run"; agregar al §0 "Criterios del estimador" del SKILL: "un run continuo del mismo partition type con quiebres o esquinas = 1 wall".
+   - Renombrar el inventario de etapas a inventario_tags.py (choque de nombre con el inventario.py que importa canon.py) y ajustar etapas.py/README/SKILL.
+   - Corregir lo que las pruebas reportaron en PARA REVISAR: inventario repite ids (B2K fuera de la lista de la compuerta); etapas.py unir con claves de tipo distinto y bandas traspuestas; páginas contadas desde 0; refs de aberturas fijadas antes de las tareas de walls; canon.py debe avisar/rechazar canopy_soffit dentro de walls, roof step/transición sin board y campos fuera del esquema; jamb return con sill de brake metal; plantilla_excel verificar falla si un renglón con tool queda en 0 cuando la tool da >0.
+   - Las reglas generales que salgan del arbitraje (a).
+   - Tests para cada cambio; correr test_ciego_v69.py (o el test ciego vigente) sobre el SKILL nuevo y TIENE que dar OK.
+   - Zip v70 con take-off-metal-frame-drywall/ (SKILL.md + referencias/) + tools/ (todas las tools nuevas o modificadas de nivel superior) + tests pasando; md5 del zip y del SKILL.md.
+
+SALIDA: en Claude outputs crea "ARBITRAJE 18A-18B y PAQUETE v70 (2026-10-18)" con ARBITRAJE_18.md (tabla renglón por renglón con veredicto y N/HOJA), correcciones_rangos_v16.json (solo con evidencia), el zip v70, tools/ y CAMBIOS_v70.md. Sube con put. No borres ni sobrescribas nada; no toques LISTO/PROCESADO.
+RESUMEN FINAL corto: 1) veredictos por MAL (prueba / referencia / ambiguo); 2) walls por type con modo run; 3) correcciones de rangos propuestas con su evidencia; 4) file id + md5 del zip v70, md5 del SKILL, folder id de tools/; 5) tests y test ciego.
