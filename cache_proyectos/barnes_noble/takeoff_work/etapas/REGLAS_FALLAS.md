@@ -1,6 +1,6 @@
 # REGLAS_FALLAS — reglas.py compuerta (v73)
 
-Carpeta: `/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work/etapas` · reglas: 789 (a 397 · b 210 · c 182) · fallas: **6** · **NO OK**
+Carpeta: `/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work/etapas` · reglas: 791 (a 399 · b 210 · c 182) · fallas: **6** · **NO OK**
 
 ## Fallas por regla
 
