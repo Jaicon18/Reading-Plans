@@ -264,6 +264,15 @@ def main(argv):
         print(__doc__)
         return 2
     pdf, hoja_s, hoja_a, canon = a
+    if hoja_s.strip().upper() == "NONE":                 # v80e: set sin plan estructural (lo dice el índice)
+        out = {"registro_A_a_S": None, "vigas": 0, "walls_bajo_viga": [], "hoja_planta": hoja_a,
+               "sin_hoja_s": "the bid set index has no structural (S) sheet: no beam lines to cross; walls to deck "
+                             "keep B.O. deck height (beams / joists only on architectural sections -> RFI)"}
+        s = json.dumps(out, indent=1)
+        if opts["--json"]:
+            open(opts["--json"], "w").write(s)
+        print(s)
+        return 0
     try:
         import pymupdf
         doc = pymupdf.open(pdf)

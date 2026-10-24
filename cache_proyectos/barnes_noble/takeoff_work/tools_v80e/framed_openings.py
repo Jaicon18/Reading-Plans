@@ -144,7 +144,7 @@ def calcular(data):
         if not isinstance(sw, dict):
             raise ValueError("sweep ausente: barrer M-plan (air devices) y E-plan (fixtures) de los GWB ceilings (v62)")
         hojas = [str(h) for h in sw.get("sheets") or []]
-        if not any(re.match(r"^M\d", h) for h in hojas) or not any(re.match(r"^E\d", h) for h in hojas):
+        if not any(re.match(r"^M-?\d", h) for h in hojas) or not any(re.match(r"^E-?\d", h) for h in hojas):
             raise ValueError(f"sweep.sheets {hojas}: falta hoja M (air devices) o E (fixtures) (v62)")
         if not any(it.get("location") == "ceiling" and it.get("category") == "air_device" for it in items) \
                 and not str(sw.get("no_air_devices_why") or "").strip():

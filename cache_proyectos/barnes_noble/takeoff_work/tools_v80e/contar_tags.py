@@ -20,10 +20,13 @@ import json
 import re
 import sys
 
-RX_SHEET = re.compile(r"[A-Z]{1,2}\d{1,2}\.\d{2}")
+RX_SHEET = re.compile(r"[A-Z]{1,2}(?:\d{1,2}\.\d{2}|-?\d{3}[A-Z]?)")   # v80e: también A-101
 
 
 def pagina_de_hoja(doc, hoja):
+    m = re.fullmatch(r"(.+)@p(\d+)", hoja)            # v80e: sheet number vectorizado -> "E-101@p35" (página 1-based)
+    if m:
+        return int(m.group(2)) - 1
     for i, p in enumerate(doc):
         best = (0, None)
         for b in p.get_text("dict")["blocks"]:
