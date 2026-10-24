@@ -1,0 +1,63 @@
+import json, math, pymupdf as fitz
+from PIL import Image, ImageDraw, ImageFont
+K = '/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work'
+E = K + '/etapas'
+PDF = '/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/bidset/bidset_SIN_MARKUPS.pdf'
+c = json.load(open(E + '/4_canon/takeoff_canon.json'))
+fo = json.load(open(E + '/4_canon/out/familias_out.json'))
+pt = fo['partition_types']
+ORDER = "1A 1 1B 1C 2 5 3 4 H1 H2A H2B H3A H3B E2 E1 F I A B D C".split()
+PAL = [(230,25,25),(0,115,215),(0,150,60),(255,128,0),(140,50,190),(0,175,190),(215,25,150),(150,100,25),(90,90,90),
+       (200,170,0),(0,90,60),(120,0,0),(0,0,140),(255,90,160),(60,160,255),(170,110,255),(100,200,80),(255,60,0),(0,130,130),(130,0,130),(200,80,40)]
+COL = {t: PAL[i % len(PAL)] for i, t in enumerate(ORDER)}
+byid = {w['id']: w for w in c['walls']}
+def pts(w):
+    b = w['band']
+    if b['ori'] == 'H':
+        e = (b['c0'] + b['c1']) / 2; return [(b['lo'], e), (b['hi'], e)]
+    if b['ori'] == 'V':
+        e = (b['c0'] + b['c1']) / 2; return [(e, b['lo']), (e, b['hi'])]
+    if b['ori'] == 'D':
+        return [tuple(b['p0']), tuple(b['p1'])]
+    return [(b['c0'], b['lo']), (b['c1'], b['lo']), (b['c1'], b['hi']), (b['c0'], b['hi']), (b['c0'], b['lo'])]
+rows = [(t, f) for t, v in pt['types'].items() for f in v['filas']] + [('OTHER FRAMING', dict(o, wall=o['id'], ids=[o['id']])) for o in pt['other_framing']]
+doc = fitz.open(PDF)
+try:
+    font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 22)
+    fbig = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 40)
+except OSError:
+    font = fbig = ImageFont.load_default()
+for sheet, pg, dpi, clip in (('A-101', 6, 110, fitz.Rect(150, 380, 2150, 1560)), ('A-221', 15, 100, fitz.Rect(150, 40, 2200, 920))):
+    p = doc[pg - 1]; pix = p.get_pixmap(dpi=dpi, clip=clip)
+    im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+    im = Image.blend(im, Image.new('RGB', im.size, 'white'), 0.35)
+    dr = ImageDraw.Draw(im); z = dpi / 72
+    def P(q): return ((q[0] - clip.x0) * z, (q[1] - clip.y0) * z)
+    tot = {}
+    for t, f in rows:
+        ws = [byid[i] for i in f['ids'] if i in byid and (byid[i]['band'].get('sheet') or byid[i]['sheet']) == sheet]
+        if not ws: continue
+        col = COL.get(t.upper(), (170, 110, 255))
+        tot[t] = tot.get(t, 0) + f['lf']
+        best = None
+        for w in ws:
+            q = [P(x) for x in pts(w)]
+            dr.line(q, fill=col, width=7 if sheet == 'A-101' else 9)
+            L = math.dist(q[0], q[-1]) if len(q) == 2 else 0
+            if best is None or L > best[0]: best = (L, q)
+        q = best[1]; mx, my = (q[0][0] + q[-1][0]) / 2, (q[0][1] + q[-1][1]) / 2
+        lab = f['wall'] if len(f['wall']) <= 26 else f['ids'][0] + '+' + str(len(f['ids']) - 1)
+        tw = dr.textlength(lab, font=font)
+        dr.rectangle([mx + 6, my - 26, mx + 10 + tw, my - 2], fill='white', outline=col)
+        dr.text((mx + 8, my - 26), lab, fill=col, font=font)
+    # leyenda en orden del schedule
+    ly = 70; lx = 20
+    dr.text((lx, 15), f'Barnes & Noble - Colorado Springs, CO | {sheet} | partitions by type | 2026-10-24', fill='black', font=fbig)
+    for t in ORDER + ['OTHER FRAMING']:
+        if t not in tot: continue
+        col = COL.get(t, (170, 110, 255))
+        dr.rectangle([lx, ly, lx + 60, ly + 18], fill=col)
+        dr.text((lx + 70, ly - 4), f'TYPE {t}   {round(tot[t], 2)} LF', fill='black', font=font)
+        ly += 30
+    out = E + f'/7_imagenes/{sheet}_partitions_by_type.png'
+    im.save(out); print(out, im.size, {k: round(v, 2) for k, v in tot.items()})

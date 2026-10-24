@@ -66,6 +66,9 @@ ALCANCES = [
 EXCLUIDOS = {"ALC-19": ("acoustical sealant", "EXCLUIDO: acoustical sealant excluded in all projects (estimator "
                                                "standing order); sound attenuation insulation excluded (no insulation)")}
 SHEET_RE = re.compile(r"\b[A-Z]{1,2}\d{1,2}\.\d{2}\b")
+# v80e (R80e.13): las citas de una nota NO APLICA aceptan también hojas con guion (A-410, M-102, A-226A) y la
+# página "pN" que escanear() usa cuando la hoja no tiene un ID con punto (bid sets con texto vectorizado).
+CITA_RE = re.compile(r"\b(?:[A-Z]{1,2}\d{1,2}\.\d{2}|[A-Z]{1,2}-\d{2,3}[A-Z]?|p\d{1,3})\b")
 
 
 def _pages(pdf):
@@ -159,7 +162,7 @@ def compuerta(registro_path, esc, xlsx):
             continue
         hojas_pdf = sorted({h["hoja"] for h in esc["alcances"][aid]["hallazgos"]})
         if nota.strip().upper().startswith("NO APLICA"):
-            citadas = set(SHEET_RE.findall(nota))
+            citadas = set(CITA_RE.findall(nota))
             if not citadas:
                 fallas.append(f"{aid} {nombre}: NO APLICA sin citar hoja")
             elif hojas_pdf and not (citadas & set(hojas_pdf)):

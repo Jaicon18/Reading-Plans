@@ -266,6 +266,7 @@ REGLAS_TEXTO = [
     ("S:§26|S:26-", r".", A("A_VIGENCIA")),            # v78: §26 (W1-W4 + R78.x, tools con test_v78_*)
     ("S:§27|S:27-", r".", A("A_VIGENCIA")),            # v79: §27 (R79.x, tools con test_v79.py)
     ("S:§28|S:28-", r".", A("A_VIGENCIA")),            # v80: §28 (R80.x, test_v80.py + test_consistencia_tools.py)
+    ("S:§29|S:29-", r".", A("A_VIGENCIA")),            # v80e: §29 (R80e.x, corrida Barnes & Noble)
     ("S:§0", r"Accesorios", A("A_ACCESORIOS")),
     # §1
     ("S:§1", r"HONESTIDAD", A("A_ESTADO_DIM")),
