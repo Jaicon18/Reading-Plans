@@ -12,3 +12,8 @@
 - Option A: take off with the counts (rows per detail included): stock room ~387 LF (7/A-413, 3 rows), receiving 69 LF (8A/A-413, 4 rows), office ~86 LF (3,4/A-412, 4 rows), break room cabinets 10.7 LF (6/A-412, 2 rows), restrooms 10 pcs 3/4" FRT plywood (21, 26/A-201).
 - Cafe menu boards (4/A-226A): continuous 3/4" FRT plywood strip, 31" high, full length of wall C-E1-S (23.46 LF, A-221) = 60.6 SF (DERIVED: 23.46 x 31/12).
 - Q2 CLOSED 100%.
+
+## 2026-10-24 — RFI-11 W.R. board in wet rooms
+- Option A: W.R. gyp bd on ALL faces of Women's 109, Men's 108, Janitor 107 (A-410 "*" note, note 7, 2/A-410, A-101 general note 8), new walls only (EXT-07 faces are existing -> patch & repair allowance).
+- Quantity to recompute from canon faces at update time: takeoff.json delta says 935.4 SF, audit says ~1,326 SF (Men's 284.4 + Women's 248.8 + Janitor 793.0) -> reconcile from faces, cite both.
+- Plan governs over skill rule D1 when the plan explicitly asks W.R. on every face (general, all projects).
