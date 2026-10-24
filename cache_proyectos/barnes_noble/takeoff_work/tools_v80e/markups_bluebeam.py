@@ -6,7 +6,9 @@ Line, editable; nunca una imagen rasterizada) sobre el eje del wall en la hoja d
 aparezca en el Markups List de Bluebeam y se pueda revisar / editar / medir:
   - Subject  = partition type (particion.tipo: tag, EXT-<stud>CFMF, EXT-PARAPET, BULKHEAD-<familia>, CANOPY-COL);
                elementos no-partition (partition_types.OTHER) = "OTHER FRAMING";
-  - Contents = "TYPE · LF · N/HOJA · id"   (N/HOJA = el detalle que trae el canon; sin detalle, la hoja);
+  - Contents = "TYPE · LF · H · SF · N/HOJA · id"   (v80e: H = altura del canon, SF = LF x H; sin altura = PENDING;
+               N/HOJA = el detalle que trae el canon; sin detalle, la hoja); /Measure con la escala de la hoja
+               (constants.plan_scale_pt_per_ft) para que Bluebeam mida Length a escala;
   - Author (/T) = "Take-off"; /NM = "TO-<id>" (la llave con la que `verificar` empareja wall ↔ annot);
   - color por type con PALETA FIJA y determinista (types ordenados alfabéticamente → PALETA[i]; OTHER FRAMING
     siempre lavanda con punteado largo; más types que colores → se repite el color con punteado corto).
@@ -66,7 +68,8 @@ OPACIDAD = 0.85
 TOL_PT = 3.0         # verificar: vértices a <= TOL_PT del eje del canon (medio espesor de una partición típica)
 TOL_COLOR = 0.02
 HOJA_RX = re.compile(r"\b[A-Z]{1,3}-?(?:\d{1,3}\.\d{1,3}|\d{3}[A-Z]?(?![\w.]))\b")
-NHOJA_RX = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,3}-?(?:\d{1,3}\.\d{1,3}|\d{3}[A-Z]?(?![\w.]))\b")
+MT_POLYLENGTH = 130   # /MeasurementTypes de un Polylength de Bluebeam Revu
+NHOJA_RX = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,3}-?\d{1,4}(?:\.\d{1,3})?[A-Z]?\b")
 
 
 # ----------------------------------------------------------------------------------------------- canon
@@ -126,8 +129,68 @@ def cita(w):
     return str((w.get("band") or {}).get("sheet") or w.get("sheet") or "")
 
 
+def altura(w):
+    """Altura del wall en ft (height_ft numérico o {value}); None si el canon no la trae (PENDING)."""
+    h = w.get("height_ft")
+    if isinstance(h, dict):
+        h = h.get("value")
+    try:
+        h = float(h)
+    except (TypeError, ValueError):
+        return None
+    return h if h > 0 else None
+
+
+def ftin(x):
+    pulg = round(x * 12.0 * 8.0) / 8.0
+    ft, inch = int(pulg // 12), pulg - 12 * int(pulg // 12)
+    s = f"{inch:.3f}".rstrip("0").rstrip(".")
+    return f"{ft}'-{s}\""
+
+
 def contenido(w):
-    return f"{tipo(w)} · {lf(w):.2f} LF · {cita(w)} · {w['id']}"
+    """v80e (usuario 24-oct, todo proyecto): Contents = TYPE · LF · H · SF · N/HOJA · id.
+    SF = LF x H (área del wall, una cara); sin altura en el canon -> H PENDING · SF PENDING (nunca se inventa)."""
+    h = altura(w)
+    hs = f"H {ftin(h)} · {lf(w) * h:,.1f} SF" if h else "H PENDING · SF PENDING"
+    return f"{tipo(w)} · {lf(w):.2f} LF · {hs} · {cita(w)} · {w['id']}"
+
+
+def escala(canon, sheet=None):
+    """pt de la hoja por ft real (constants.plan_scale_pt_per_ft, número o {value}); None si no está.
+    v80f (R80e.15): si constants.plan_scale_by_sheet trae la hoja, manda esa (un set con planta a 1/8" y planta
+    ampliada a 1/2" mediría 4x mal con una sola escala)."""
+    k = (canon or {}).get("constants") or {}
+    v = (k.get("plan_scale_by_sheet") or {}).get(sheet) if sheet else None
+    if v is None:
+        v = k.get("plan_scale_pt_per_ft")
+    if isinstance(v, dict):
+        v = v.get("value")
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return None
+    return v if v > 0 else None
+
+
+def _measure(doc, annot, pt_per_ft):
+    """v80e: diccionario /Measure (escala) para que Bluebeam muestre la columna Length en ft de la annot."""
+    from fractions import Fraction
+    pulg = Fraction(pt_per_ft).limit_denominator(1000) / 72   # pulgadas de papel por ft real (9 pt/ft = 1/8")
+    r = f"{pulg.numerator}/{pulg.denominator} in = 1 ft" if pulg.denominator != 1 else f"{pulg.numerator} in = 1 ft"
+    c = 1.0 / pt_per_ft
+    doc.xref_set_key(annot.xref, "Measure",
+                     f"<</Type/Measure/Subtype/RL/R({r})/X[<</Type/NumberFormat/U(ft)/C {c:.10f}/D 100>>]"
+                     f"/D[<</Type/NumberFormat/U(ft)/C 1/D 100>>]/A[<</Type/NumberFormat/U(sf)/C 1/D 100>>]>>")
+    doc.xref_set_key(annot.xref, "IT", "/PolyLineDimension")
+    doc.xref_set_key(annot.xref, "MeasurementTypes", str(MT_POLYLENGTH))
+
+
+def _depth(doc, annot, h_ft):
+    """v80e: Depth de Bluebeam = altura del wall (ft decimales); Bluebeam calcula Wall Area = Length x Depth.
+    Formato de Revu: /Depth <ft> + /DepthUnit [<</Type/NumberFormat/U(ft)/C 1/864/D 100/FD true/SS()>>]."""
+    doc.xref_set_key(annot.xref, "Depth", f"{h_ft:.6g}")
+    doc.xref_set_key(annot.xref, "DepthUnit", "[<</Type/NumberFormat/U(ft)/C .001157407/D 100/FD true/SS()>>]")
 
 
 # ----------------------------------------------------------------------------------------------- geometría
@@ -291,7 +354,7 @@ def _annot(doc, page, pts_disp, rgb, dashes, subject, content, autor, nombre):
     import pymupdf as fitz
     M = page.derotation_matrix
     q = [fitz.Point(x, y) * M for x, y in pts_disp]
-    a = page.add_line_annot(q[0], q[1]) if len(q) == 2 else page.add_polyline_annot(q)
+    a = page.add_polyline_annot(q)   # v80e: siempre PolyLine = Polylength de Bluebeam (Depth / Wall Area)
     a.set_info(title=autor, subject=subject, content=content)
     a.set_colors(stroke=rgb)
     a.set_border(width=ANCHO, dashes=list(dashes) if dashes else None)
@@ -320,7 +383,7 @@ def _leyenda(doc, canon, geo, sin, cols, nombre_canon):
     p.insert_text((40, y), TITULO_LEYENDA, fontsize=20, fontname="hebo")
     y += 20
     p.insert_text((40, y), f"Source: {nombre_canon} · one PDF annotation (Line / PolyLine) per wall on the plan "
-                           f"sheet where it was measured · Subject = type · Contents = TYPE · LF · DETAIL · id",
+                           f"sheet where it was measured · Subject = type · Contents = TYPE · LF · H · SF · DETAIL · id",
                   fontsize=8.5, fontname="helv")
     y += 26
     xs = (40, 130, 330, 400, 480, 560)
@@ -363,6 +426,20 @@ def _leyenda(doc, canon, geo, sin, cols, nombre_canon):
     return p.number
 
 
+def _page_labels(doc, hojas):
+    """v80e: Page Label = número de hoja (A-101…) en las páginas con markups, para la columna Page Label de
+    Bluebeam; las demás páginas conservan su número."""
+    if not hojas:
+        return
+    reglas, n = [], doc.page_count
+    for i in range(n):
+        if i in hojas:
+            reglas.append({"startpage": i, "prefix": str(hojas[i]), "style": "", "firstpagenum": 1})
+        elif i == 0 or (i - 1) in hojas:
+            reglas.append({"startpage": i, "prefix": "", "style": "D", "firstpagenum": i + 1})
+    doc.set_page_labels(reglas)
+
+
 def escribir(bid_pdf, canon_path, out_pdf, out_json=None):
     """Escribe el PDF de markups y su resumen JSON. -> resumen (dict)."""
     import pymupdf as fitz
@@ -371,6 +448,7 @@ def escribir(bid_pdf, canon_path, out_pdf, out_json=None):
     n_bid = doc.page_count
     geo, sin, notas = geometria(canon, doc)
     cols = colores(canon)
+    esc = escala(canon)
     por_hoja, por_type = {}, {}
     for w in walls(canon):
         g = geo.get(w["id"])
@@ -378,12 +456,18 @@ def escribir(bid_pdf, canon_path, out_pdf, out_json=None):
             continue
         t = tipo(w)
         rgb, dashes = cols[t]
-        _annot(doc, doc[g["page"]], g["pts"], rgb, dashes, t, contenido(w), AUTOR, NM_PREF + w["id"])
+        a = _annot(doc, doc[g["page"]], g["pts"], rgb, dashes, t, contenido(w), AUTOR, NM_PREF + w["id"])
+        esc_w = escala(canon, g.get("sheet")) or esc
+        if esc_w:
+            _measure(doc, a, esc_w)
+            if altura(w):
+                _depth(doc, a, altura(w))
         k = f"{g['sheet']} (p.{g['page'] + 1})"
         por_hoja[k] = por_hoja.get(k, 0) + 1
         por_type[t] = por_type.get(t, 0) + 1
     ley = _leyenda(doc, canon, geo, sin, cols, os.path.basename(str(canon_path)) if not isinstance(canon_path, dict)
                    else "takeoff_canon.json")
+    _page_labels(doc, {**{g["page"]: g["sheet"] for g in geo.values() if g.get("sheet")}, ley: "LEGEND"})
     doc.set_metadata(dict(doc.metadata or {}, keywords=f"{TOOL}; legend_page={ley + 1}; bid_pages={n_bid}",
                           creator=TOOL))
     os.makedirs(os.path.dirname(os.path.abspath(out_pdf)), exist_ok=True)
@@ -441,7 +525,7 @@ def _leer_annots(doc):
 def verificar(pdf, canon, tol=TOL_PT, detalle=None):
     """Abre el PDF de markups y lo compara con el canon. -> lista de fallas ([] = OK).
     Exige: una annot PolyLine / Line por wall con geometría (en su página), color del type, Subject = type,
-    Contents "TYPE · LF · N/HOJA · id", Author "Take-off", vértices sobre el eje del canon (<= tol pt) cubriendo sus
+    Contents "TYPE · LF · H · SF · N/HOJA · id", Author "Take-off", vértices sobre el eje del canon (<= tol pt) cubriendo sus
     dos extremos; ninguna annot "TO-" de un wall que no está en el canon; leyenda al final con cada type."""
     import pymupdf as fitz
     canon = _cargar(canon)
