@@ -749,11 +749,12 @@ NOMBRES_PLANTILLA = {
     "5/8\" gyp board regular (walls + ceilings)": "5/8\" gypsum board, regular",
     "5/8\" gyp MOISTURE RESISTANT": "5/8\" gypsum board, MOISTURE RESISTANT",
     "5/8\" EXTERIOR gyp sheathing": "5/8\" EXTERIOR gypsum sheathing",
+    "1/2\" EXTERIOR gyp sheathing": "1/2\" EXTERIOR gypsum sheathing",   # v80f R80e.16
     "5/8\" glass mat sheathing": "5/8\" glass mat sheathing (exterior face of the stud)",
     "ballistic panel": "Ballistic panel {th}UL752",
     "3/8\" gyp board": "3/8\" gypsum board",
     "FRP": "FRP panels",
-    "cement board": "Cement board (substrate under the FRP cove base band)",
+    "cement board": "Cement board (tile / FRP substrate)",   # v80f: nombre genérico
     "FRT blocking": "Blocking FRT / 2X FRT wood",
     "metal trim (corner bead, casing, shadow molding)": "METAL trim - corner bead, casing bead, shadow molding, "
                                                         "gypsum edge trim",
@@ -800,8 +801,9 @@ def familias_faltantes(mats, fo, fam_canon, acc, familias):
         if v <= 1e-9:
             continue
         uf = str(_unidad_familia(fo, fam) or "lf").upper()
-        base = {"unit": "PCS" if uf in ("PCS", "EA") else uf, "metal": True, "familia": fam,
-                "selling_unit": "piece", "source": f"familias_out.json '{fam}' (R80.4: canon family the run did not write)"}
+        # v80f (R80e.16): una familia en SF que cae aquí es board / sheathing (waste de board, hoja 4x8), no metal
+        base = {"unit": "PCS" if uf in ("PCS", "EA") else uf, "metal": uf != "SF", "familia": fam,
+                "selling_unit": "4x8 ft sheet" if uf == "SF" else "piece", "source": f"familias_out.json '{fam}' (R80.4: canon family the run did not write)"}
         if fam == "metal stud blocking (362CR / STUD BLOCKING)" and fo.get("metal_blocking_by_origin"):
             for k, x in fo["metal_blocking_by_origin"].items():
                 if float(x or 0) > 0:

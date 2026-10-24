@@ -101,6 +101,7 @@ FAMILIAS = [
     ("carrying channel", "lf", r'carrying', r'channel'),
     ("hanger wire", "lf", r'hanger', r'wire'),
     ("5/8\" gyp MOISTURE RESISTANT", "sf", r'moisture', r'gyp|board'),
+    ("1/2\" EXTERIOR gyp sheathing", "sf", r'1/2"', r'exterior.*sheath|sheath.*exterior'),   # v80f R80e.16
     ("5/8\" EXTERIOR gyp sheathing", "sf", r'exterior', r'gyp.*sheath|sheath.*gyp'),
     ("5/8\" glass mat sheathing", "sf", r'glass mat', r''),
     ("3/8\" gyp board", "sf", r'3/8"', r'gyp'),

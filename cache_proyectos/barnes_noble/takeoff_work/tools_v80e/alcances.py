@@ -43,7 +43,7 @@ ALCANCES = [
     ("ALC-06", "Bracing / bridging", r"BRIDGING|BRACING", ["bracing C.R. channel"], ["bracing", "bridging"]),
     ("ALC-07", "Gypsum board on walls (layers per type)", r"GYPSUM BOARD|GYP\.? BD|GWB", ['5/8" gyp board regular'], ["gypsum"]),
     ("ALC-08", "Moisture / abuse / special board at wet zones", r"MOISTURE RESIST|ABUSE|IMPACT RESIST|MR GYP", ['5/8" gyp MOISTURE RESISTANT'], ["moisture", "abuse"]),
-    ("ALC-09", "Exterior gypsum / glass mat sheathing", r"SHEATHING|GLASS MAT|DENSGLASS", ['5/8" EXTERIOR gyp sheathing', '5/8" glass mat sheathing'], ["sheathing"]),
+    ("ALC-09", "Exterior gypsum / glass mat sheathing", r"SHEATHING|GLASS MAT|DENSGLASS", ['5/8" EXTERIOR gyp sheathing', '5/8" glass mat sheathing', '1/2" EXTERIOR gyp sheathing'], ["sheathing"]),  # v80f R80e.16
     ("ALC-10", "FRT plywood sheathing / substrate", r"FRT PLYWOOD|FIRE.?RETARDANT.{0,20}PLYWOOD|PLYWOOD", ["FRT plywood (SF)"], ["plywood"]),
     ("ALC-11", "Gypsum board ceilings", r"GYPSUM (WALL)?BOARD CEILING|GYP\.? BD\.? CEILING|GWB CEILING|SUSPENDED GYPSUM", ['5/8" gyp board regular'], ["ceiling"]),
     ("ALC-12", "Ceiling suspension (furring / carrying channel / hanger wire / ceiling track)", r"SUSPENDED GYPSUM|HANGER|CARRYING CHANNEL|FURRING CHANNEL|MAIN RUNNER|GRID SYSTEM", ["furring channel", "carrying channel", "hanger wire", "track de ceilings / soffits"], ["furring", "carrying", "hanger"]),
