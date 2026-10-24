@@ -455,7 +455,51 @@
    "img": "img/A-101_B-A-101-18.png"
   },
   {
-   "id": "B-A-101-19",
+   "id": "B-A-101-19a",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Restroom front wall (untagged), west front line y=1339: Women's Restroom north wall incl. door 9",
+   "length_ft": 6.92,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector x 559.56 (face of corridor wall) -> 621.84 (owns corner with return) = 62.28 pt. Printed chain 6\"+3'-4\"+3'-1\" = 62.25 pt.",
+   "band": {
+    "ori": "H",
+    "c0": 1337.28,
+    "c1": 1341.0,
+    "lo": 559.56,
+    "hi": 621.84
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-19.png"
+  },
+  {
+   "id": "B-A-101-19b",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Restroom front wall (untagged), west return of drinking-fountain recess",
+   "length_ft": 1.39,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector y 1341.00 -> 1353.48 = 12.48 pt (between front line and recess back wall faces).",
+   "band": {
+    "ori": "V",
+    "c0": 618.12,
+    "c1": 621.84,
+    "lo": 1341.0,
+    "hi": 1353.48
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-19.png"
+  },
+  {
+   "id": "B-A-101-19c",
    "tag": "2",
    "element": "wall",
    "sheet": "A-101",
@@ -464,11 +508,11 @@
     "PT0029",
     "PT0030"
    ],
-   "location": "Restroom front wall: Women's / Men's Restroom and Janitor Closet north wall with drinking-fountain recess (tagged segment = recess back wall)",
-   "length_ft": 25.85,
+   "location": "Restroom front wall: drinking-fountain recess back wall (tagged segment)",
+   "length_ft": 4.87,
    "length_status": "DERIVED",
    "length_source": "A-101",
-   "length_op": "Tagged recess line y 1353.48-1357.32, x 618.12 -> 661.92 (43.80) + untagged returns x 618.12-621.84 and 658.20-661.92 (12.48 each) + untagged front line y 1337.28-1341.00: x 559.56 -> 621.84 (62.28, door 9 inside) and 658.20 -> 759.84 (101.64, door 8 and janitor door 7 inside). Sum 232.68 pt /9. Check printed chain 6\"+3'-4\"+3'-1\"+4'-0\"+3'-1\"+3'-4\"+6\" from 559.56 matches 564.06/594.06/621.81/657.81/685.56/715.56/720.06; 6\"+3'-0\"+6\" from 723.84 -> 759.84.",
+   "length_op": "Vector x 618.12 -> 661.92 = 43.80 pt (owns both recess corners). Printed 4'-0\" clear between returns.",
    "band": {
     "ori": "H",
     "c0": 1353.48,
@@ -477,44 +521,51 @@
     "hi": 661.92
    },
    "thickness_measured_in": 4.96,
-   "img": "img/A-101_B-A-101-19.png",
-   "segments": [
-    {
-     "ori": "H",
-     "c0": 1337.28,
-     "c1": 1341.0,
-     "lo": 559.56,
-     "hi": 621.84
-    },
-    {
-     "ori": "V",
-     "c0": 618.12,
-     "c1": 621.84,
-     "lo": 1341.0,
-     "hi": 1353.48
-    },
-    {
-     "ori": "H",
-     "c0": 1353.48,
-     "c1": 1357.32,
-     "lo": 618.12,
-     "hi": 661.92
-    },
-    {
-     "ori": "V",
-     "c0": 658.2,
-     "c1": 661.92,
-     "lo": 1341.0,
-     "hi": 1353.48
-    },
-    {
-     "ori": "H",
-     "c0": 1337.28,
-     "c1": 1341.0,
-     "lo": 658.2,
-     "hi": 759.84
-    }
-   ]
+   "img": "img/A-101_B-A-101-19.png"
+  },
+  {
+   "id": "B-A-101-19d",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Restroom front wall (untagged), east return of drinking-fountain recess",
+   "length_ft": 1.39,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector y 1341.00 -> 1353.48 = 12.48 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 658.2,
+    "c1": 661.92,
+    "lo": 1341.0,
+    "hi": 1353.48
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-19.png"
+  },
+  {
+   "id": "B-A-101-19e",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Restroom front wall (untagged), east front line y=1339: Men's Restroom and Janitor Closet north wall incl. doors 8 and 7, T with x=722 wall",
+   "length_ft": 11.29,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector x 658.20 -> 759.84 (face of x=761.7 wall) = 101.64 pt. Printed chain 3'-1\"+3'-4\"+6\" + 5\" wall + 6\"+3'-0\"+6\".",
+   "band": {
+    "ori": "H",
+    "c0": 1337.28,
+    "c1": 1341.0,
+    "lo": 658.2,
+    "hi": 759.84
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-19.png"
   },
   {
    "id": "B-A-101-20",
@@ -637,7 +688,7 @@
    "img": "img/A-101_B-A-101-24.png"
   },
   {
-   "id": "B-A-101-25",
+   "id": "B-A-101-25a",
    "tag": "3",
    "element": "wall",
    "sheet": "A-101",
@@ -645,11 +696,11 @@
    "tag_ids": [
     "PT0035"
    ],
-   "location": "Cafe Seating Area, west partial-height group: long wall + untagged east end pier (joined return)",
-   "length_ft": 15.67,
+   "location": "Cafe Seating Area, west partial-height group: long wall (tagged, TYP.)",
+   "length_ft": 12.0,
    "length_status": "CONFIRMED",
    "length_source": "A-101",
-   "length_op": "Printed 12'-0\" (between piers) + printed 3'-8\" (pier) = 15'-8\". Vector: tagged line y 1181.76-1185.48, x 1503.12 -> 1611.12 = 108.0 pt (12.00 ft) + untagged end pier x 1611.12-1614.84, y 1166.04 -> 1199.04 = 33.0 pt (3'-8\", T-return joined). 141.0/9.",
+   "length_op": "Printed 12'-0\" between pier faces; vector x 1503.12 -> 1611.12 = 108.0 pt.",
    "band": {
     "ori": "H",
     "c0": 1181.76,
@@ -658,26 +709,32 @@
     "hi": 1611.12
    },
    "thickness_measured_in": 4.96,
-   "img": "img/A-101_B-A-101-25.png",
-   "segments": [
-    {
-     "ori": "H",
-     "c0": 1181.76,
-     "c1": 1185.48,
-     "lo": 1503.12,
-     "hi": 1611.12
-    },
-    {
-     "ori": "V",
-     "c0": 1611.12,
-     "c1": 1614.84,
-     "lo": 1166.04,
-     "hi": 1199.04
-    }
-   ]
+   "img": "img/A-101_B-A-101-25.png"
   },
   {
-   "id": "B-A-101-26",
+   "id": "B-A-101-25b",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Cafe Seating Area, west partial-height group: untagged end pier (T-return of the long wall)",
+   "length_ft": 3.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 3'-8\"; vector y 1166.04 -> 1199.04 = 33.0 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 1611.12,
+    "c1": 1614.84,
+    "lo": 1166.04,
+    "hi": 1199.04
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-25.png"
+  },
+  {
+   "id": "B-A-101-26a",
    "tag": "3",
    "element": "wall",
    "sheet": "A-101",
@@ -685,11 +742,11 @@
    "tag_ids": [
     "PT0036"
    ],
-   "location": "Cafe Seating Area, east partial-height group: long wall + untagged west end pier (joined return)",
-   "length_ft": 15.67,
+   "location": "Cafe Seating Area, east partial-height group: long wall (tagged, TYP.)",
+   "length_ft": 12.0,
    "length_status": "CONFIRMED",
    "length_source": "A-101",
-   "length_op": "Printed 12'-0\" (between piers) + printed 3'-8\" (pier) = 15'-8\". Vector: tagged line y 1181.76-1185.48, x 1725.12 -> 1833.12 = 108.0 pt (12.00 ft) + untagged end pier x 1721.28-1725.12, y 1166.04 -> 1199.04 = 33.0 pt. 141.0/9.",
+   "length_op": "Printed 12'-0\" between pier faces; vector x 1725.12 -> 1833.12 = 108.0 pt.",
    "band": {
     "ori": "H",
     "c0": 1181.76,
@@ -698,23 +755,29 @@
     "hi": 1833.12
    },
    "thickness_measured_in": 4.96,
-   "img": "img/A-101_B-A-101-26.png",
-   "segments": [
-    {
-     "ori": "H",
-     "c0": 1181.76,
-     "c1": 1185.48,
-     "lo": 1725.12,
-     "hi": 1833.12
-    },
-    {
-     "ori": "V",
-     "c0": 1721.28,
-     "c1": 1725.12,
-     "lo": 1166.04,
-     "hi": 1199.04
-    }
-   ]
+   "img": "img/A-101_B-A-101-26.png"
+  },
+  {
+   "id": "B-A-101-26b",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Cafe Seating Area, east partial-height group: untagged end pier (T-return of the long wall)",
+   "length_ft": 3.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 3'-8\"; vector y 1166.04 -> 1199.04 = 33.0 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 1721.28,
+    "c1": 1725.12,
+    "lo": 1166.04,
+    "hi": 1199.04
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-26.png"
   },
   {
    "id": "B-A-101-27",
@@ -741,7 +804,7 @@
    "img": "img/A-101_B-A-101-27.png"
   },
   {
-   "id": "B-A-101-28",
+   "id": "B-A-101-28a",
    "tag": "4",
    "element": "wall",
    "sheet": "A-101",
@@ -749,23 +812,123 @@
    "tag_ids": [
     "PT0037"
    ],
-   "location": "Sales Area, hourglass display feature: north end cap (U-shaped box, printed 9'-0\" wide)",
-   "length_ft": 15.16,
-   "length_status": "DERIVED",
+   "location": "Hourglass display feature, north end cap: bar",
+   "length_ft": 9.0,
+   "length_status": "CONFIRMED",
    "length_source": "A-101",
-   "length_op": "Centerline of hatched ring: bar 77.28 + 2 end returns 12.54 + stubs to arc junctions 17.25+16.83 = 136.44 pt /9. Outer bar = printed 9'-0\" (1545.48 -> 1626.48 = 81.0 pt). Box outer 81.0 x 16.56 pt, hollow 73.56 x 8.52 pt.",
+   "length_op": "Printed 9'-0\" (outer, 1545.48 -> 1626.48 = 81.0 pt); owns both outer corners.",
    "band": {
-    "ori": "BOX",
-    "x0": 1545.48,
-    "y0": 833.76,
-    "x1": 1626.48,
-    "y1": 850.32
+    "ori": "H",
+    "c0": 833.76,
+    "c1": 837.48,
+    "lo": 1545.48,
+    "hi": 1626.48
    },
    "thickness_measured_in": 4.96,
    "img": "img/A-101_B-A-101-28.png"
   },
   {
-   "id": "B-A-101-29",
+   "id": "B-A-101-28b",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, north end cap: west end return",
+   "length_ft": 1.43,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector 837.48 -> 850.32 = 12.84 pt (outer face; inner face 8.52 pt).",
+   "band": {
+    "ori": "V",
+    "c0": 1545.48,
+    "c1": 1549.2,
+    "lo": 837.48,
+    "hi": 850.32
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-28.png"
+  },
+  {
+   "id": "B-A-101-28c",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, north end cap: east end return",
+   "length_ft": 1.43,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector 837.48 -> 850.32 = 12.84 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 1622.76,
+    "c1": 1626.48,
+    "lo": 837.48,
+    "hi": 850.32
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-28.png"
+  },
+  {
+   "id": "B-A-101-28d",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, north end cap: west angled leg from end return to curved wall",
+   "length_ft": 1.77,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline chord p0->p1 = 15.94 pt; faces 15.30 / 16.59 pt (avg 15.94).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1548.72,
+     848.16
+    ],
+    "p1": [
+     1563.72,
+     842.76
+    ],
+    "faces_top": 1.7,
+    "faces_bottom": 1.84
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-28.png"
+  },
+  {
+   "id": "B-A-101-28e",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, north end cap: east angled leg from end return to curved wall",
+   "length_ft": 1.72,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline chord p0->p1 = 15.51 pt; faces 14.58 / 16.43 pt (avg 15.51).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1623.24,
+     848.1
+    ],
+    "p1": [
+     1608.66,
+     842.82
+    ],
+    "faces_top": 1.62,
+    "faces_bottom": 1.83
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-28.png"
+  },
+  {
+   "id": "B-A-101-29a",
    "tag": "4",
    "element": "wall",
    "sheet": "A-101",
@@ -773,11 +936,11 @@
    "tag_ids": [
     "PT0037"
    ],
-   "location": "Sales Area, hourglass display feature: west curved wall (R=32'-9\")",
-   "length_ft": 25.08,
-   "length_status": "CONFIRMED",
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 1/6 from north (tagged)",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
    "length_source": "A-101",
-   "length_op": "Printed arc length 25'-1\" (= 225.75 pt). Vector: R32'-9\" face arc (1562.73,1065.72)->(1562.65,845.09) = 226.14 pt (25.13 ft), computed R = 32.74 ft; opposite face incl. merged middle zone and cap penetration = 236.07 pt (26.23 ft); chord 220.63 pt. Arcs of both curved walls merge (touch) between y 922 and 989.",
+   "length_op": "Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
    "band": {
     "ori": "D",
     "p0": [
@@ -785,17 +948,157 @@
      845.09
     ],
     "p1": [
-     1562.73,
-     1065.72
+     1574.5,
+     880.84
     ],
-    "faces_top": 25.13,
-    "faces_bottom": 26.23
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
    },
    "thickness_measured_in": 3.47,
    "img": "img/A-101_B-A-101-29.png"
   },
   {
-   "id": "B-A-101-30",
+   "id": "B-A-101-29b",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 2/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1574.5,
+     880.84
+    ],
+    "p1": [
+     1581.7,
+     917.81
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-29c",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 3/6 from north",
+   "length_ft": 4.19,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1581.7,
+     917.81
+    ],
+    "p1": [
+     1584.12,
+     955.4
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-29d",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 4/6 from north",
+   "length_ft": 4.19,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1584.12,
+     955.4
+    ],
+    "p1": [
+     1581.73,
+     992.99
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-29e",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 5/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1581.73,
+     992.99
+    ],
+    "p1": [
+     1574.56,
+     1029.96
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-29f",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 6/6 from north",
+   "length_ft": 4.19,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1574.56,
+     1029.96
+    ],
+    "p1": [
+     1562.73,
+     1065.72
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-30a",
    "tag": "4",
    "element": "wall",
    "sheet": "A-101",
@@ -803,11 +1106,11 @@
    "tag_ids": [
     "PT0037"
    ],
-   "location": "Sales Area, hourglass display feature: east curved wall (R=32'-9\")",
-   "length_ft": 25.08,
-   "length_status": "CONFIRMED",
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 1/6 from north (tagged)",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
    "length_source": "A-101",
-   "length_op": "Printed arc length 25'-1\". Vector: R32'-9\" face polyline (1610.04,845.28)->(1609.92,1065.48) = 225.67 pt (25.07 ft), computed R = 32.72 ft; opposite face = 235.86 pt (26.21 ft).",
+   "length_op": "Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.",
    "band": {
     "ori": "D",
     "p0": [
@@ -815,35 +1118,273 @@
      845.28
     ],
     "p1": [
-     1609.92,
-     1065.48
+     1598.3,
+     880.98
     ],
-    "faces_top": 25.07,
-    "faces_bottom": 26.21
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
    },
    "thickness_measured_in": 3.47,
    "img": "img/A-101_B-A-101-30.png"
   },
   {
-   "id": "B-A-101-31",
+   "id": "B-A-101-30b",
    "tag": "4",
    "element": "wall",
    "sheet": "A-101",
    "page": 6,
-   "tag_ids": [
-    "PT0037"
-   ],
-   "location": "Sales Area, hourglass display feature: south end cap (TYP. copy of tagged north cap, untagged)",
-   "length_ft": 15.15,
+   "tag_ids": [],
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 2/6 from north",
+   "length_ft": 4.18,
    "length_status": "DERIVED",
    "length_source": "A-101",
-   "length_op": "Centerline of hatched ring: bar 77.28 + 2 returns 12.60 + stubs 17.27+16.57 = 136.31 pt /9. Outer bar 81.0 pt = 9'-0\" (printed dims 5\" + 8'-2\" + 5\" at south cap). Mirror of north cap; tag PT0037 says TYP.",
+   "length_op": "Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.",
    "band": {
-    "ori": "BOX",
-    "x0": 1545.48,
-    "y0": 1060.68,
-    "x1": 1626.48,
-    "y1": 1077.24
+    "ori": "D",
+    "p0": [
+     1598.3,
+     880.98
+    ],
+    "p1": [
+     1591.08,
+     917.86
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-30c",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 3/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1591.08,
+     917.86
+    ],
+    "p1": [
+     1588.68,
+     955.37
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-30d",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 4/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1588.68,
+     955.37
+    ],
+    "p1": [
+     1591.07,
+     992.87
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-30e",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 5/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1591.07,
+     992.87
+    ],
+    "p1": [
+     1598.15,
+     1029.78
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-30f",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 6/6 from north",
+   "length_ft": 4.18,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.59 pt.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1598.15,
+     1029.78
+    ],
+    "p1": [
+     1609.92,
+     1065.48
+    ],
+    "faces_top": 4.18,
+    "faces_bottom": 4.18
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-31a",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, south end cap: bar (untagged TYP. copy of the PT0037 north cap)",
+   "length_ft": 9.0,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 9'-0\" (outer, 1545.48 -> 1626.48 = 81.0 pt); owns both outer corners.",
+   "band": {
+    "ori": "H",
+    "c0": 1073.52,
+    "c1": 1077.24,
+    "lo": 1545.48,
+    "hi": 1626.48
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-31.png"
+  },
+  {
+   "id": "B-A-101-31b",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, south end cap: west end return (untagged TYP. copy of the PT0037 north cap)",
+   "length_ft": 1.43,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector 1060.68 -> 1073.52 = 12.84 pt (outer face; inner face 8.52 pt).",
+   "band": {
+    "ori": "V",
+    "c0": 1545.48,
+    "c1": 1549.2,
+    "lo": 1060.68,
+    "hi": 1073.52
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-31.png"
+  },
+  {
+   "id": "B-A-101-31c",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, south end cap: east end return (untagged TYP. copy of the PT0037 north cap)",
+   "length_ft": 1.43,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector 1060.68 -> 1073.52 = 12.84 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 1622.76,
+    "c1": 1626.48,
+    "lo": 1060.68,
+    "hi": 1073.52
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-31.png"
+  },
+  {
+   "id": "B-A-101-31d",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, south end cap: west angled leg from end return to curved wall (untagged TYP. copy of the PT0037 north cap)",
+   "length_ft": 1.75,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline chord p0->p1 = 15.73 pt; faces 14.92 / 16.55 pt (avg 15.73).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1548.96,
+     1062.78
+    ],
+    "p1": [
+     1563.78,
+     1068.06
+    ],
+    "faces_top": 1.66,
+    "faces_bottom": 1.84
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-31.png"
+  },
+  {
+   "id": "B-A-101-31e",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [],
+   "location": "Hourglass display feature, south end cap: east angled leg from end return to curved wall (untagged TYP. copy of the PT0037 north cap)",
+   "length_ft": 1.68,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline chord p0->p1 = 15.09 pt; faces 14.27 / 15.90 pt (avg 15.09).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1623.06,
+     1062.78
+    ],
+    "p1": [
+     1608.84,
+     1067.82
+    ],
+    "faces_top": 1.59,
+    "faces_bottom": 1.77
    },
    "thickness_measured_in": 4.96,
    "img": "img/A-101_B-A-101-31.png"

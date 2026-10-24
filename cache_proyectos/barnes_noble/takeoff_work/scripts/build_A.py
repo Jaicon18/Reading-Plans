@@ -2,7 +2,9 @@
 alturas, caras, aberturas. Salida: fragmentos en 2_lectura/A/."""
 import json, os, math
 BN = '/home/user/Reading-Plans/cache_proyectos/barnes_noble'
+FINAL = os.environ.get('MODO') == 'final'
 OUT = BN + '/takeoff_work/etapas/2_lectura/A'
+OUT_W = BN + '/takeoff_work/etapas/4_canon/fragmentos' if FINAL else OUT
 wc = {w['wall_id']: w for w in json.load(open(BN + '/walls_coords.json'))['walls']}
 inv = json.load(open(BN + '/takeoff_work/etapas/1_inventario/inventario.json'))
 # tag_ids (inventario PTnnnn) -> wall de la caché (asignación por cercanía, verificada con imagen)
@@ -116,7 +118,93 @@ for wid, w in wc.items():
                                  band=band_de(sid, s, t, sheet)))
 for sh, L in walls.items():
     print(sh, len(L), round(sum(w['length_ft'] for w in L), 2))
-json.dump(walls, open(OUT + '/_walls_tmp.json', 'w'), indent=1)
+json.dump(walls, open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/_walls_tmp.json', 'w'), indent=1)
+
+
+# ---------------------------------------------------------------- ETAPA 3: resolución (solo MODO=final)
+RESOL = []
+if FINAL:
+    CB = {w['id']: w for w in json.load(open(BN + '/takeoff_work/etapas/2_lectura/canon_B.json'))['walls']}
+    def from_b(w, bid):
+        b = CB[bid]
+        w['band'] = dict(b['band'], sheet=w['sheet']); w['length_ft'] = b['length_ft']
+        w['length_op'] = f"Stage 3 resolution: geometry of reading B {bid} ({b.get('length_op', 'vector')})"
+        w['length_status'] = 'DERIVED'
+    for w in walls['A-101']:
+        if w['id'] == 'W2-05':
+            from_b(w, 'B-A-101-18')
+            w['location'] = "Corridor 110 east wall / Women's 109 (starts at the restroom front line)"
+    m = {'W2-06.1': 'B-A-101-19a', 'W2-06.2': 'B-A-101-19b', 'W2-06.3': 'B-A-101-19c', 'W2-06.4': 'B-A-101-19d',
+         'W2-06.5': 'B-A-101-19e'}
+    for w in walls['A-101']:
+        if w['id'] in m:
+            from_b(w, m[w['id']])
+    RESOL.append({'item': 'Type 2 corridor east wall W2-05 / restroom front W2-06 (review items 10, 11)',
+                  'decision': 'Reading B: W2-05 starts at the restroom front line (y=1337), 7.92 LF; W2-06 segments measured face to face with one owner per corner (R70.2 / R75.7), 25.86 LF total (= cache 25.86)',
+                  'source': 'A-101', 'img': '3_revision/res/res_W205.png', 'delta_lf': round(7.92 - 12.92 + 25.86 - 26.68, 2)})
+    t4 = [w for w in walls['A-101'] if w['tag'] == '4']
+    base4 = dict(t4[0]); walls['A-101'] = [w for w in walls['A-101'] if w['tag'] != '4']
+    for bid, b in CB.items():
+        if b.get('tag') == '4':
+            nw = dict(base4)
+            for k in ('openings', 'faces', 'type_change_rfi'):
+                nw.pop(k, None)
+            nw.update({'id': 'W4-' + bid.split('-')[-1], 'tag_ids': b.get('tag_ids') or [], 'location': b.get('location', base4['location']),
+                       'length_ft': b['length_ft'], 'band': dict(b['band'], sheet='A-101'), 'length_status': b.get('length_status', 'DERIVED'),
+                       'length_op': f"Stage 3 resolution: reading B {bid} ({b.get('length_op', '')})", 'img': 'img_cache/B&N_A-101_walls_by_type.png'})
+            walls['A-101'].append(nw)
+    RESOL.append({'item': 'Type 4 center feature caps and curved walls (review items 12-22, 28-30, 42-48)',
+                  'decision': 'Reading B: each cap is an open U (9\'-0" bar + two returns + two legs into the curved walls), not a closed box; curved walls = printed 25\'-1" (6 chords). RFI-18: face-average arc 25.68 LF each (+1.20 LF)',
+                  'source': '4/A-410', 'img': '3_revision/res/res_T4n.png', 'delta_lf': round(80.83 - 86.2, 2)})
+    for w in walls['A-221']:
+        if w['id'] == 'C-E1-P.1':
+            w.update({'tag': 'I', 'tag_ids': ['PT0050'], 'detail': 'I/A-221', 'detail_source': 'I/A-221', 'source': 'I/A-221',
+                      'stud_size': '6"', 'stud_source': 'I/A-221', 'location': '1\'-0" return at the top of the Workroom door pier (I tag)'})
+        if w['id'] == 'C-E1-P.2':
+            w['tag_ids'] = ['PT0045']
+
+    # R75.7: return corto (<= 2 ft) medido desde la cara EXTERIOR del tramo al que vuelve
+    def ext_return(rid, runid, sheet='A-101', esc=9.0):
+        ws = {w['id']: w for w in walls[sheet]}
+        r, run = ws[rid], ws[runid]
+        br, bu = r['band'], run['band']
+        if br['ori'] == 'V' and bu['ori'] == 'H':
+            near, far = (bu['c1'], bu['c0']) if abs(br['lo'] - bu['c1']) < abs(br['hi'] - bu['c0']) else (bu['c0'], bu['c1'])
+            if abs(br['lo'] - near) <= abs(br['hi'] - near): br['lo'] = round(min(far, br['lo']), 2)
+            else: br['hi'] = round(max(far, br['hi']), 2)
+            L = (br['hi'] - br['lo']) / esc
+        else:
+            near_lo = abs(br['lo'] - bu['c0']) < abs(br['hi'] - bu['c0']) or abs(br['lo'] - bu['c1']) < abs(br['hi'] - bu['c1'])
+            if near_lo: br['lo'] = round(min(bu['c0'], bu['c1'], br['lo']), 2)
+            else: br['hi'] = round(max(bu['c0'], bu['c1'], br['hi']), 2)
+            L = (br['hi'] - br['lo']) / esc
+        r['length_ft'] = round(L, 2)
+        r['length_op'] += f"; R75.7 return measured from the outer face of {runid} = {round(L, 2)} ft"
+    for rid, runid in (('W2-06.2', 'W2-06.1'), ('W2-06.2', 'W2-06.3'), ('W2-06.4', 'W2-06.3'), ('W2-06.4', 'W2-06.5'), ('W4-28b', 'W4-28a'), ('W4-28c', 'W4-28a'),
+                       ('W4-31b', 'W4-31a'), ('W4-31c', 'W4-31a')):
+        ext_return(rid, runid)
+
+    # R70.2: esquinas exteriores sin dueño -> el primer wall llega a la cara exterior del segundo
+    def own_corner(a_id, b_id, sheet='A-101', esc=9.0):
+        ws = {w['id']: w for w in walls[sheet]}
+        a, b = ws[a_id], ws[b_id]
+        ba, bb = a['band'], b['band']
+        lo_c, hi_c = min(bb['c0'], bb['c1']), max(bb['c0'], bb['c1'])
+        old = a['length_ft']
+        if abs(ba['lo'] - (lo_c + hi_c) / 2) < abs(ba['hi'] - (lo_c + hi_c) / 2):
+            ba['lo'] = round(lo_c, 2)
+        else:
+            ba['hi'] = round(hi_c, 2)
+        a['length_ft'] = round((ba['hi'] - ba['lo']) / esc, 2)
+        a['length_op'] = a.get('length_op', '') + f"; R70.2 corner with {b_id}: runs to its outer face ({old} -> {a['length_ft']})"
+        return round(a['length_ft'] - old, 2)
+    dd = 0.0
+    for a_id, b_id in (('EXT-01', 'EXT-03'), ('EXT-02', 'EXT-18'), ('EXT-10', 'EXT-11'), ('EXT-13', 'EXT-14'), ('EXT-16', 'EXT-15')):
+        dd += own_corner(a_id, b_id)
+    RESOL.append({'item': 'Exterior corners without owner (esquinas.py R70.2)', 'decision': 'EXT-01, EXT-02, EXT-10, EXT-13, EXT-16 run to the outer face of the wall they meet (one owner per corner)',
+                  'source': 'A-101', 'img': '1_inventario/recortes/OVERVIEW_A-101_p6.png', 'delta_lf': round(dd, 2)})
+    RESOL.append({'item': 'Workroom door pier 1\'-0" return (review items 23, 40, 50)', 'decision': 'Reading B: the I tag (PT0050) leader lands on the 1\'-0" return -> type I 1.00 LF; the E1 tag (PT0045) marks the 2\'-8" HOLD pier -> E1 2.11 LF',
+                  'source': '1/A-221', 'img': '3_revision/res/res_E1I.png', 'delta_lf': 0.0})
 
 # ---------------------------------------------------------------- caras (board por face)
 RCP = 'A-121'
@@ -166,6 +254,11 @@ FACES = {
 for k in ('W3-01', 'W3-02', 'W3-03', 'W3-04', 'W3-05', 'W3-06', 'W4-02', 'W4-03'):
     FACES[k] = [('A', 'Cafe Seating 102' if k.startswith('W3') else S), ('B', S)]
 CEIL['Sales Area 101 (partial wall)'] = CEIL['Cafe Seating 102']
+if FINAL:
+    FACES['W2-05'] = [('A', 'Corridor 110'), ('B', "Women's Restroom 109")]
+    for w in walls['A-101']:
+        if w['tag'] == '4':
+            FACES[w['id']] = [('A', S), ('B', S)]
 for k in ('W4-01', 'W4-04'):
     for i in range(1, 5):
         FACES[f'{k}.{i}'] = [('A', S)]
@@ -206,7 +299,7 @@ for sh in walls:
             for f in fl:
                 f['height_ft'] = w['height_ft']; f['height_source'] = DET[t] + ' T.O. WALL (board full height)'
         w['faces'] = fl
-json.dump(walls, open(OUT + '/_walls_tmp.json', 'w'), indent=1)
+json.dump(walls, open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/_walls_tmp.json', 'w'), indent=1)
 print('faces ok')
 
 # ---------------------------------------------------------------- Cafe (A-221): caras y FRT plywood
@@ -264,8 +357,8 @@ for w in walls['A-221']:
             f['height_source'] = f"{DET[t]} 1/2\" cementitious board both sides, B.O. slab to T.O. stud {H} ft"
         if t in ('A', 'B'):
             strip(w, 'A', 'Cafe 103 (customer side)', H, f'{DET[t]} "3/4" FRT PLYWOOD (SUBSTRATE)" to T.O. stud', mat='frt_3_4', label='3/4" FRT PLYWOOD')
-json.dump(walls, open(OUT + '/_walls_tmp.json', 'w'), indent=1)
-json.dump(strips, open(OUT + '/_strips_tmp.json', 'w'), indent=1)
+json.dump(walls, open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/_walls_tmp.json', 'w'), indent=1)
+json.dump(strips, open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/_strips_tmp.json', 'w'), indent=1)
 print('cafe ok', len(strips))
 
 
@@ -273,7 +366,7 @@ print('cafe ok', len(strips))
 KN = {k['id']: k for k in json.load(open(OUT + '/img_cache/keynotes_p6.json'))}
 for i, kid in enumerate([26, 27, 28, 29, 30, 64, 65, 66, 67]):
     k = KN[kid]
-    walls['A-101'].append({'id': f'CW-{i + 1:02d}', 'tag': 'C25', 'element': 'column_wrap', 'sheet': 'A-101', 'page': 6,
+    walls['A-101'].append({'id': f'CW-{i + 1:02d}', 'tag': '', 'keynote': 'C25', 'element': 'column_wrap', 'sheet': 'A-101', 'page': 6,
         'location': 'Sales Area 101 - existing column, new 24"x24" GWB surround (keynote C25)',
         'source': 'A-101', 'detail': 'C25/A-101', 'detail_source': 'A-101 construction plan key note C25',
         'stud_size': '3-5/8"', 'stud_source': 'A-101 key note C25 "OVER 3 5/8" METAL FRAMING"', 'oc_in': 16,
@@ -372,7 +465,7 @@ for sh in walls:
             nodes.append({'id': f"N{len(nodes) + 1}", 'kind': 'free', 'wall': v['id'], 'source': 'closed box (other end)'})
 from collections import Counter
 print('nodes', Counter(n['kind'] for n in nodes))
-json.dump(nodes, open(OUT + '/_nodes_tmp.json', 'w'), indent=1)
+json.dump(nodes, open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/_nodes_tmp.json', 'w'), indent=1)
 
 # ---------------------------------------------------------------- cambios de type sin nodo dibujado (R75.5 / R73.10)
 TCR = {
@@ -402,7 +495,7 @@ for t in ('3', '4'):
                  'lf': round(lf, 2), 'source': DET[t],
                  'op': f"top edges 2 x {round(top2, 2)} + 1 x {round(top1, 2)} (cap box outer face) + {nfree} free end(s) x 2 corners x {h} ft = {round(lf, 2)}"})
 cb = [w for w in walls['A-101'] if w['tag'] == '4' and len(w.get('faces') or []) == 1]
-trim.append({'ref': 'Corner bead - type 4 cap boxes outside vertical corners', 'kind': 'corner_bead', 'lf_each': 7.5,
+if not FINAL: trim.append({'ref': 'Corner bead - type 4 cap boxes outside vertical corners', 'kind': 'corner_bead', 'lf_each': 7.5,
              'qty': 8, 'lf': 60.0, 'source': '4/A-410',
              'op': '2 cap boxes x 4 outside corners x 7\'-6" (T.O. wall 4/A-410) = 60.0'})
 trim.append({'ref': 'Corner bead - corridor recess (drinking fountain alcove, W2-06) outside corners', 'kind': 'corner_bead',
@@ -481,7 +574,7 @@ descartes = [
 ]
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007']
-frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007']
+frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
 general = {
  'project': 'Barnes & Noble - Colorado Springs, CO (3173 Cinema Point) - bid set 250918',
  'constants': {'plan_scale_pt_per_ft': {'value': 9.0, 'source': 'A-101 1/8"=1\'-0" (grid C-D 30\'-0" CL/CL = 270 pt)'},
@@ -496,6 +589,10 @@ general = {
  'plywood_strips': strips,
  'nodes': nodes,
  'trim_items': trim,
+ **({'corners_ok': [{'walls': list(p), 'reason': 'R75.7 (estimator rule): a short return (<= 2 ft) is measured from the OUTER face of the run it returns to, so return and run share the corner square by rule; esquinas.py R70.2 flags it as double - package inconsistency reported (PARA_REVISAR)'}
+                    for p in (('W2-06.1', 'W2-06.2'), ('W2-06.3', 'W2-06.2'), ('W2-06.3', 'W2-06.4'), ('W2-06.5', 'W2-06.4'),
+                              ('W4-28a', 'W4-28b'), ('W4-28a', 'W4-28c'), ('W4-31a', 'W4-31b'), ('W4-31a', 'W4-31c'))],
+     'gaps_ok': [{'between': ['W2-06.1', 'W2-06.5'], 'reason': 'Drinking fountain recess (key note C26, A-101): the corridor wall steps back; the gap is closed by W2-06.2 / W2-06.3 / W2-06.4'}]} if FINAL else {}),
  'ceilings': ceilings,
  'deflection_clips': {'none_reason': 'Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 "SLOTTED DEFLECTION", A-410 partition note 7 "PROVIDE DEFLECTION TRACK AS REQUIRED"); no deflection clips called', 'source': '3/A-410'},
  'accesorios_rfi': [
@@ -513,8 +610,11 @@ general = {
  'deck_breaks_none_reason': 'No stepped deck breaks: deck slopes continuously, B.O. DECK 24\'-0" (2/A-400B, west) to 25\'-7" (2/A-400A, east), 25\'-0" at 1/A-400A and 1/A-400B; interior walls to deck loaded at 25\'-0" - RFI-03',
 }
 for sh, fr in frag_walls.items():
-    json.dump(fr, open(OUT + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)
-json.dump(general, open(OUT + '/general.json', 'w'), indent=1, ensure_ascii=False)
+    os.makedirs(OUT_W, exist_ok=True)
+    json.dump(fr, open(OUT_W + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)
+json.dump(general, open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)
+if FINAL:
+    json.dump(RESOL, open(BN + '/takeoff_work/etapas/3_revision/resolucion_items.json', 'w'), indent=1, ensure_ascii=False)
 for f in ('_walls_tmp.json', '_strips_tmp.json', '_nodes_tmp.json'):
-    os.remove(OUT + '/' + f)
+    os.path.exists('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/' + f) and os.remove('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/lecturaA/' + f)
 print('fragments written')
