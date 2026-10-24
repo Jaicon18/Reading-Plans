@@ -15,9 +15,9 @@
    "oc_source": "1A/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-01",
    "tag_ids": [
@@ -35,6 +35,12 @@
    },
    "faces": [],
    "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1A/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 6.08,
+   "thickness_check": "faces 555.84 / 560.4 pt on A-101 = 6.08 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1A/A-410); deflection per A-410 partition note 7",
    "type_change_rfi": {
     "alternativas": [
      "1A/1 change at W2-03 centerline x=498.5 pt (cache reading; printed 15'-7\" to face of W2-03 supports it)",
@@ -59,9 +65,9 @@
    "oc_source": "1/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-02",
    "tag_ids": [
@@ -79,7 +85,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 6.08,
+   "thickness_check": "faces 555.84 / 560.4 pt on A-101 = 6.08 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1A",
@@ -96,9 +108,9 @@
    "oc_source": "1A/A-410",
    "height_ft": 24.0,
    "height_source": "B.O. DECK ABOVE EL. 24'-0\" V.I.F. - 2/A-400B (west facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-03",
    "tag_ids": [
@@ -117,12 +129,21 @@
    },
    "faces": [],
    "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1A/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 6.08,
+   "thickness_check": "faces 351.54 / 356.1 pt on A-101 = 6.08 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1A/A-410); deflection per A-410 partition note 7",
    "openings": [
     {
      "ref": "Door 13",
      "kind": "door",
      "ro_w_ft": 6.33,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_13.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 6.33 ft (A-500 door 13 EXISTING V.I.F.; furring gap 6.33 ft (A-101 vector) - RFI-10)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 13 EXISTING V.I.F.; furring gap 6.33 ft (A-101 vector) - RFI-10",
      "xy_pt": [
       353.82,
@@ -153,9 +174,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 24.0,
    "height_source": "B.O. DECK ABOVE EL. 24'-0\" V.I.F. - 2/A-400B (west facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-04",
    "tag_ids": [
@@ -173,16 +194,46 @@
      253.2,
      1202.8
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "faces_top": [
+     [
+      357.72,
+      1146.3
+     ],
+     [
+      253.2,
+      1202.8
+     ]
+    ],
+    "faces_bottom": [
+     [
+      351.37,
+      1135.32
+     ],
+     [
+      247.32,
+      1192.62
+     ]
+    ]
    },
    "faces": [],
    "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 16.91,
+   "thickness_check": "normal through the ends hits faces at -3.35 / 9.33 pt",
+   "faces_avg_info": 13.2,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7",
    "openings": [
     {
      "ref": "Door 12",
      "kind": "door",
      "ro_w_ft": 10.0,
      "head_ft": 10.0,
+     "img": "4_canon/img/opn/Door_12.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 10.0 ft (A-500 door 12 type D EXISTING V.I.F. (overhead); gap 10.00 ft along the angled wall (A-101 vector); head not printed - RFI-10)",
+     "head_source": "A-500 door 12 EXISTING V.I.F. (head not printed) - RFI-10",
      "source": "A-500 door 12 type D EXISTING V.I.F. (overhead); gap 10.00 ft along the angled wall (A-101 vector); head not printed - RFI-10",
      "xy_pt": [
       300.8,
@@ -213,9 +264,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 24.0,
    "height_source": "B.O. DECK ABOVE EL. 24'-0\" V.I.F. - 2/A-400B (west facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-05",
    "tag_ids": [
@@ -233,10 +284,37 @@
      308.3,
      1408.6
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "faces_top": [
+     [
+      263.49,
+      1200.04
+     ],
+     [
+      316.78,
+      1406.33
+     ]
+    ],
+    "faces_bottom": [
+     [
+      241.87,
+      1205.83
+     ],
+     [
+      297.06,
+      1411.61
+     ]
+    ]
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 29.85,
+   "thickness_check": "normal through the ends hits faces at -10.66 / 11.73 pt",
+   "faces_avg_info": 23.67,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -253,9 +331,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-06",
    "tag_ids": [
@@ -272,7 +350,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1406.1 / 1415.58 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1",
@@ -289,9 +373,9 @@
    "oc_source": "1/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-07",
    "tag_ids": [
@@ -309,12 +393,21 @@
    },
    "faces": [],
    "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 6.08,
+   "thickness_check": "faces 1408.56 / 1413.12 pt on A-101 = 6.08 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1/A-410); deflection per A-410 partition note 7",
    "openings": [
     {
      "ref": "Door 10",
      "kind": "door",
      "ro_w_ft": 3.49,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_10.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.49 ft (A-500 door 10 EXISTING V.I.F.; furring gap 3.49 ft (A-101 vector) - RFI-10)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 10 EXISTING V.I.F.; furring gap 3.49 ft (A-101 vector) - RFI-10",
      "xy_pt": [
       535.7,
@@ -345,9 +438,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-09",
    "tag_ids": [
@@ -364,7 +457,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1406.1 / 1415.58 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -381,9 +480,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-10",
    "tag_ids": [
@@ -400,7 +499,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1406.1 / 1415.58 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -417,9 +522,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-11",
    "tag_ids": [
@@ -436,7 +541,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1923.18 / 1932.66 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -453,9 +564,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-12",
    "tag_ids": [
@@ -472,7 +583,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1923.18 / 1932.66 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1C",
@@ -489,9 +606,9 @@
    "oc_source": "1C/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-13",
    "tag_ids": [
@@ -508,7 +625,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 8.0,
+   "thickness_check": "faces 1167.36 / 1173.36 pt on A-101 = 8.0 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1C/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1C",
@@ -525,9 +648,9 @@
    "oc_source": "1C/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-14",
    "tag_ids": [
@@ -544,7 +667,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 8.0,
+   "thickness_check": "faces 1972.68 / 1978.68 pt on A-101 = 8.0 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1C/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1C",
@@ -561,9 +690,9 @@
    "oc_source": "1C/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-15",
    "tag_ids": [
@@ -580,7 +709,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 8.0,
+   "thickness_check": "faces 1972.68 / 1978.68 pt on A-101 = 8.0 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1C/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1C",
@@ -597,9 +732,9 @@
    "oc_source": "1C/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-16",
    "tag_ids": [
@@ -616,7 +751,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1C/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 8.0,
+   "thickness_check": "faces 795.6 / 801.6 pt on A-101 = 8.0 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1C/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -633,9 +774,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-17",
    "tag_ids": [
@@ -652,7 +793,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1923.18 / 1932.66 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "1B",
@@ -669,9 +816,9 @@
    "oc_source": "1B/A-410",
    "height_ft": 25.583,
    "height_source": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "EXT-18",
    "tag_ids": [
@@ -688,7 +835,13 @@
     "sheet": "A-101"
    },
    "faces": [],
-   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only"
+   "faces_none_reason": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 12.64,
+   "thickness_check": "faces 1923.18 / 1932.66 pt on A-101 = 12.64 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_1C_1A_1B_1.png",
+   "top_track": "top track to underside of deck (furring full height, R-21 batt to deck per 1B/A-410); deflection per A-410 partition note 7"
   },
   {
    "tag": "2",
@@ -705,9 +858,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-01",
    "tag_ids": [
@@ -741,12 +894,21 @@
      "height_source": "OPEN TO DECK (A-121) - board to deck, 2/A-410 \"EXTEND GYPSUM BOARD TO DECK IN LOCATIONS WITH NO CEILING\" = wall height 25.0"
     }
    ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 605.28 / 609.12 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 14",
      "kind": "door",
      "ro_w_ft": 3.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_14.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.0 ft (A-500 door 14 3'-0\" x 7'-0\"; vector gap 3.00 ft (A-101))",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 14 3'-0\" x 7'-0\"; vector gap 3.00 ft (A-101)",
      "xy_pt": [
       1898.8,
@@ -774,9 +936,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-02",
    "tag_ids": [],
@@ -807,7 +969,14 @@
      "height_ft": 25.0,
      "height_source": "OPEN TO DECK (A-121) - board to deck, 2/A-410 = wall height 25.0"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1486.68 / 1490.52 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "2",
@@ -824,9 +993,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-03",
    "tag_ids": [
@@ -873,12 +1042,21 @@
      "length_source": "A-101 (vector, split at room boundary)"
     }
    ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 496.58 / 500.42 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 11",
      "kind": "door",
      "ro_w_ft": 4.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_11.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 4.0 ft (A-500 door 11 4'-0\" x 7'-0\"; vector gap 4.00 ft)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 11 4'-0\" x 7'-0\"; vector gap 4.00 ft",
      "xy_pt": [
       498.5,
@@ -906,9 +1084,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-04",
    "tag_ids": [
@@ -966,12 +1144,21 @@
      "length_source": "A-101 (vector, split at room boundary)"
     }
    ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1288.53 / 1292.37 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 4",
      "kind": "door",
      "ro_w_ft": 3.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_4.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.0 ft (A-500 door 4 3'-0\" x 7'-0\"; vector gap 3.00 ft)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 4 3'-0\" x 7'-0\"; vector gap 3.00 ft",
      "xy_pt": [
       534.7,
@@ -999,9 +1186,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-05",
    "tag_ids": [
@@ -1017,7 +1204,7 @@
     "hi": 1408.56,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1036,7 +1223,12 @@
      "height_source": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410)",
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 555.84 / 559.56 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410"
   },
   {
    "tag": "2",
@@ -1053,9 +1245,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-06.1",
    "tag_ids": [
@@ -1072,7 +1264,7 @@
     "hi": 621.84,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1092,12 +1284,20 @@
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11"
     }
    ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1337.28 / 1341.0 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 9",
      "kind": "door",
      "ro_w_ft": 3.33,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_9.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.33 ft (A-500 door 9 3'-0\" x 7'-0\"; vector gap 3.33 ft (frame))",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 9 3'-0\" x 7'-0\"; vector gap 3.33 ft (frame)",
      "xy_pt": [
       579.1,
@@ -1125,9 +1325,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-06.2",
    "tag_ids": [],
@@ -1141,7 +1341,7 @@
     "hi": 1357.32,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1160,7 +1360,13 @@
      "height_ft": 9.5,
      "height_source": "ACT-3 9'-0\" (A-121) + 6\" above suspended ceiling (A-410 partition note 3, 2/A-410) = 9.5"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 618.12 / 621.84 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
    "tag": "2",
@@ -1177,9 +1383,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-06.3",
    "tag_ids": [],
@@ -1193,7 +1399,7 @@
     "hi": 661.92,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1225,7 +1431,13 @@
      "length_ft": 2.46,
      "length_source": "A-101 (vector, split at room boundary)"
     }
-   ]
+   ],
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1353.48 / 1357.32 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
    "tag": "2",
@@ -1242,9 +1454,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-06.4",
    "tag_ids": [],
@@ -1258,7 +1470,7 @@
     "hi": 1357.32,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1277,7 +1489,13 @@
      "height_source": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410)",
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 658.2 / 661.92 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
    "tag": "2",
@@ -1294,9 +1512,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-06.5",
    "tag_ids": [],
@@ -1310,7 +1528,7 @@
     "hi": 759.84,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -1343,12 +1561,21 @@
      "length_source": "A-101 (vector, split at room boundary)"
     }
    ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1337.28 / 1341.0 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)",
    "openings": [
     {
      "ref": "Door 8",
      "kind": "door",
      "ro_w_ft": 3.33,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_8.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.33 ft (A-500 door 8 3'-0\" x 7'-0\"; vector gap 3.33 ft (frame))",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 8 3'-0\" x 7'-0\"; vector gap 3.33 ft (frame)",
      "xy_pt": [
       700.6,
@@ -1364,6 +1591,9 @@
      "kind": "door",
      "ro_w_ft": 3.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_7.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.0 ft (A-500 door 7 3'-0\" x 7'-0\"; vector gap 3.00 ft)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 7 3'-0\" x 7'-0\"; vector gap 3.00 ft",
      "xy_pt": [
       741.9,
@@ -1391,9 +1621,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-07",
    "tag_ids": [
@@ -1428,7 +1658,13 @@
      "height_source": "OPEN TO DECK (A-121) - board to deck, 2/A-410; greenboard per A-410 partition note 7 = wall height 25.0",
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 720.03 / 723.87 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410"
   },
   {
    "tag": "2",
@@ -1445,9 +1681,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-08",
    "tag_ids": [],
@@ -1492,12 +1728,22 @@
      "height_source": "ACT-3 9'-0\" (A-121) + 6\" (A-410 partition note 3, 2/A-410) = 9.5"
     }
    ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 759.78 / 763.62 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)",
    "openings": [
     {
      "ref": "Door 5",
      "kind": "door",
      "ro_w_ft": 3.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_5.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.0 ft (A-500 door 5 3'-0\" x 7'-0\"; vector gap 3.00 ft)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 5 3'-0\" x 7'-0\"; vector gap 3.00 ft",
      "xy_pt": [
       761.7,
@@ -1525,9 +1771,9 @@
    "oc_source": "2/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W2-09",
    "tag_ids": [
@@ -1561,12 +1807,21 @@
      "height_source": "ACT-3 9'-0\" (A-121) + 6\" (A-410 partition note 3, 2/A-410) = 9.5"
     }
    ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 931.03 / 934.87 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 6",
      "kind": "door",
      "ro_w_ft": 3.0,
      "head_ft": 7.0,
+     "img": "4_canon/img/opn/Door_6.png",
+     "ro_w_op": "gap between the jamb faces measured in vector = 3.0 ft (A-500 door 6 3'-0\" x 7'-0\"; vector gap 3.00 ft)",
+     "head_source": "A-500 door schedule height",
      "source": "A-500 door 6 3'-0\" x 7'-0\"; vector gap 3.00 ft",
      "xy_pt": [
       932.95,
@@ -1594,9 +1849,9 @@
    "oc_source": "5/A-410",
    "height_ft": 25.0,
    "height_source": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W5-01",
    "tag_ids": [
@@ -1631,7 +1886,13 @@
      "height_source": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410)",
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 7.04,
+   "thickness_check": "faces 637.21 / 642.49 pt on A-101 = 7.04 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_5_bracing_toptrack.png",
+   "top_track": "deep leg slip track at underside of deck - 3/A-410, 5/A-410"
   },
   {
    "tag": "3",
@@ -1648,9 +1909,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-01",
    "tag_ids": [
@@ -1683,7 +1944,13 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1499.28 / 1503.12 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410"
   },
   {
    "tag": "3",
@@ -1700,9 +1967,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-02",
    "tag_ids": [
@@ -1735,7 +2002,13 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1181.73 / 1185.57 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410"
   },
   {
    "tag": "3",
@@ -1752,9 +2025,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-05",
    "tag_ids": [],
@@ -1785,7 +2058,14 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1611.03 / 1614.87 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "3",
@@ -1802,9 +2082,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-03",
    "tag_ids": [
@@ -1837,7 +2117,13 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1181.73 / 1185.57 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410"
   },
   {
    "tag": "3",
@@ -1854,9 +2140,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-06",
    "tag_ids": [],
@@ -1887,7 +2173,14 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1721.28 / 1725.12 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "3",
@@ -1904,9 +2197,9 @@
    "oc_source": "3/A-410",
    "height_ft": 8.0,
    "height_source": "8'-0\" A.F.F. T.O. WALL - 3/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W3-04",
    "tag_ids": [
@@ -1939,7 +2232,13 @@
      "height_ft": 8.0,
      "height_source": "3/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 1833.03 / 1836.87 pt on A-101 = 5.12 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 8'-0\" A.F.F. (open top, capped by board) - 3/A-410"
   },
   {
    "tag": "4",
@@ -1956,9 +2255,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-28a",
    "tag_ids": [
@@ -1974,7 +2273,7 @@
     "hi": 1626.48,
     "sheet": "A-101"
    },
-   "length_status": "CONFIRMED",
+   "length_status": "CONFIRMADO",
    "faces": [
     {
      "side": "A",
@@ -1992,7 +2291,12 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 833.76 / 837.48 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410"
   },
   {
    "tag": "4",
@@ -2009,9 +2313,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-28b",
    "tag_ids": [],
@@ -2025,7 +2329,7 @@
     "hi": 850.32,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2043,7 +2347,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1545.48 / 1549.2 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2060,9 +2370,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-28c",
    "tag_ids": [],
@@ -2076,7 +2386,7 @@
     "hi": 850.32,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2094,7 +2404,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1622.76 / 1626.48 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2111,9 +2427,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-28d",
    "tag_ids": [],
@@ -2129,11 +2445,29 @@
      1563.72,
      842.76
     ],
-    "faces_top": 1.7,
-    "faces_bottom": 1.84,
+    "faces_top": [
+     [
+      1547.64,
+      845.16
+     ],
+     [
+      1563.08,
+      840.98
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1549.41,
+      850.07
+     ],
+     [
+      1564.66,
+      845.38
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2151,7 +2485,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 6.96,
+   "thickness_check": "normal through the ends hits faces at -3.19 / 2.03 pt",
+   "faces_avg_info": 1.78,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2168,9 +2509,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-28e",
    "tag_ids": [],
@@ -2186,11 +2527,29 @@
      1608.66,
      842.82
     ],
-    "faces_top": 1.62,
-    "faces_bottom": 1.83,
+    "faces_top": [
+     [
+      1622.59,
+      849.9
+     ],
+     [
+      1607.73,
+      845.37
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1624.27,
+      845.25
+     ],
+     [
+      1609.29,
+      841.08
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2208,7 +2567,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 6.59,
+   "thickness_check": "normal through the ends hits faces at -1.92 / 3.03 pt",
+   "faces_avg_info": 1.73,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2225,9 +2591,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29a",
    "tag_ids": [
@@ -2245,11 +2611,29 @@
      1574.5,
      880.84
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1565.79,
+      844.05
+     ],
+     [
+      1576.3,
+      880.24
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1560.77,
+      845.71
+     ],
+     [
+      1573.23,
+      881.26
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2267,7 +2651,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 7.06,
+   "thickness_check": "normal through the ends hits faces at -3.31 / 1.99 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410"
   },
   {
    "tag": "4",
@@ -2284,9 +2674,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29b",
    "tag_ids": [],
@@ -2302,11 +2692,29 @@
      1581.7,
      917.81
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1576.5,
+      880.45
+     ],
+     [
+      1583.67,
+      917.43
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1573.19,
+      881.09
+     ],
+     [
+      1580.37,
+      918.07
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2324,7 +2732,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.5,
+   "thickness_check": "normal through the ends hits faces at -2.04 / 1.33 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2341,9 +2756,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29c",
    "tag_ids": [],
@@ -2359,11 +2774,29 @@
      1584.12,
      955.4
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1583.91,
+      917.67
+     ],
+     [
+      1587.24,
+      955.2
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1580.35,
+      917.9
+     ],
+     [
+      1584.12,
+      955.4
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2381,7 +2814,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.76,
+   "thickness_check": "normal through the ends hits faces at -2.21 / 1.36 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2398,9 +2838,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29d",
    "tag_ids": [],
@@ -2416,11 +2856,29 @@
      1581.73,
      992.99
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1586.87,
+      955.57
+     ],
+     [
+      1582.99,
+      993.07
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1583.06,
+      955.33
+     ],
+     [
+      1580.37,
+      992.9
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2438,7 +2896,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 5.08,
+   "thickness_check": "normal through the ends hits faces at -2.75 / 1.06 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2455,9 +2920,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29e",
    "tag_ids": [],
@@ -2473,11 +2938,29 @@
      1574.56,
      1029.96
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1583.19,
+      993.27
+     ],
+     [
+      1577.79,
+      1030.59
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1580.4,
+      992.73
+     ],
+     [
+      1573.12,
+      1029.68
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2495,7 +2978,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 3.8,
+   "thickness_check": "normal through the ends hits faces at -1.49 / 1.36 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2512,9 +3002,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29f",
    "tag_ids": [],
@@ -2530,11 +3020,29 @@
      1562.73,
      1065.72
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1577.77,
+      1031.02
+     ],
+     [
+      1565.31,
+      1066.57
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1573.17,
+      1029.5
+     ],
+     [
+      1560.32,
+      1064.92
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2552,7 +3060,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 6.46,
+   "thickness_check": "normal through the ends hits faces at -3.38 / 1.47 pt",
+   "faces_avg_info": 4.19,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2569,9 +3084,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30a",
    "tag_ids": [
@@ -2589,11 +3104,29 @@
      1598.3,
      880.98
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1613.29,
+      846.35
+     ],
+     [
+      1599.62,
+      881.41
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1608.23,
+      844.69
+     ],
+     [
+      1595.93,
+      880.2
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2611,7 +3144,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 7.09,
+   "thickness_check": "normal through the ends hits faces at -3.42 / 1.9 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410"
   },
   {
    "tag": "4",
@@ -2628,9 +3167,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30b",
    "tag_ids": [],
@@ -2646,11 +3185,29 @@
      1591.08,
      917.86
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1599.67,
+      881.25
+     ],
+     [
+      1592.31,
+      918.1
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1595.67,
+      880.46
+     ],
+     [
+      1588.59,
+      917.37
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2668,7 +3225,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 5.43,
+   "thickness_check": "normal through the ends hits faces at -1.39 / 2.68 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2685,9 +3249,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30c",
    "tag_ids": [],
@@ -2703,11 +3267,29 @@
      1588.68,
      955.37
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1592.34,
+      917.94
+     ],
+     [
+      1588.68,
+      955.37
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1588.28,
+      917.68
+     ],
+     [
+      1587.17,
+      955.27
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2725,7 +3307,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 5.42,
+   "thickness_check": "normal through the ends hits faces at -1.26 / 2.81 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2742,9 +3331,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30d",
    "tag_ids": [],
@@ -2760,11 +3349,29 @@
      1591.07,
      992.87
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1589.74,
+      955.3
+     ],
+     [
+      1592.3,
+      992.79
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1585.34,
+      955.58
+     ],
+     [
+      1589.3,
+      992.98
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2782,7 +3389,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 5.87,
+   "thickness_check": "normal through the ends hits faces at -1.06 / 3.34 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2799,9 +3413,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30e",
    "tag_ids": [],
@@ -2817,11 +3431,29 @@
      1598.15,
      1029.78
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1592.27,
+      992.64
+     ],
+     [
+      1599.5,
+      1029.52
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1589.02,
+      993.26
+     ],
+     [
+      1594.95,
+      1030.39
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2839,7 +3471,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.42,
+   "thickness_check": "normal through the ends hits faces at -1.23 / 2.09 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2856,9 +3495,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30f",
    "tag_ids": [],
@@ -2874,11 +3513,29 @@
      1609.92,
      1065.48
     ],
-    "faces_top": 4.18,
-    "faces_bottom": 4.18,
+    "faces_top": [
+     [
+      1599.46,
+      1029.35
+     ],
+     [
+      1611.73,
+      1064.88
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1597.0,
+      1030.16
+     ],
+     [
+      1606.76,
+      1066.52
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2896,7 +3553,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 3.45,
+   "thickness_check": "normal through the ends hits faces at -1.38 / 1.21 pt",
+   "faces_avg_info": 4.18,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2913,9 +3577,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-31a",
    "tag_ids": [],
@@ -2929,7 +3593,7 @@
     "hi": 1626.48,
     "sheet": "A-101"
    },
-   "length_status": "CONFIRMED",
+   "length_status": "CONFIRMADO",
    "faces": [
     {
      "side": "A",
@@ -2947,7 +3611,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1073.52 / 1077.24 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -2964,9 +3634,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-31b",
    "tag_ids": [],
@@ -2980,7 +3650,7 @@
     "hi": 1077.24,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -2998,7 +3668,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1545.48 / 1549.2 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -3015,9 +3691,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-31c",
    "tag_ids": [],
@@ -3031,7 +3707,7 @@
     "hi": 1077.24,
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -3049,7 +3725,13 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 4.96,
+   "thickness_check": "faces 1622.76 / 1626.48 pt on A-101 = 4.96 in",
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -3066,9 +3748,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-31d",
    "tag_ids": [],
@@ -3084,11 +3766,29 @@
      1563.78,
      1068.06
     ],
-    "faces_top": 1.66,
-    "faces_bottom": 1.84,
+    "faces_top": [
+     [
+      1549.6,
+      1060.99
+     ],
+     [
+      1564.16,
+      1067.0
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1547.91,
+      1065.72
+     ],
+     [
+      1563.15,
+      1069.82
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -3106,7 +3806,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 6.69,
+   "thickness_check": "normal through the ends hits faces at -1.9 / 3.12 pt",
+   "faces_avg_info": 1.75,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "tag": "4",
@@ -3123,9 +3830,9 @@
    "oc_source": "4/A-410",
    "height_ft": 7.5,
    "height_source": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_source": "A-101",
-   "status": "DERIVED",
+   "status": "DERIVADO",
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-31e",
    "tag_ids": [],
@@ -3141,11 +3848,29 @@
      1608.84,
      1067.82
     ],
-    "faces_top": 1.59,
-    "faces_bottom": 1.77,
+    "faces_top": [
+     [
+      1624.02,
+      1065.48
+     ],
+     [
+      1609.46,
+      1069.56
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1622.43,
+      1061.01
+     ],
+     [
+      1608.42,
+      1066.62
+     ]
+    ],
     "sheet": "A-101"
    },
-   "length_status": "DERIVED",
+   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -3163,7 +3888,14 @@
      "height_ft": 7.5,
      "height_source": "4/A-410 T.O. WALL (board full height)"
     }
-   ]
+   ],
+   "thickness_measured_in": 6.32,
+   "thickness_check": "normal through the ends hits faces at -2.86 / 1.88 pt",
+   "faces_avg_info": 1.68,
+   "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
+   "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
+   "top_track": "fixed top track at T.O. wall 7'-6\" A.F.F. - 4/A-410",
+   "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
    "id": "CW-01",
@@ -3182,7 +3914,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3211,7 +3943,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3220,7 +3952,9 @@
     "lo": 796.9,
     "hi": 814.9,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-02",
@@ -3239,7 +3973,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3268,7 +4002,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3277,7 +4011,9 @@
     "lo": 797.0,
     "hi": 815.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-03",
@@ -3296,7 +4032,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3325,7 +4061,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3334,7 +4070,9 @@
     "lo": 796.9,
     "hi": 814.9,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-04",
@@ -3353,7 +4091,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3382,7 +4120,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3391,7 +4129,9 @@
     "lo": 797.0,
     "hi": 815.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-05",
@@ -3410,7 +4150,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3439,7 +4179,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3448,7 +4188,9 @@
     "lo": 796.9,
     "hi": 814.9,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-06",
@@ -3467,7 +4209,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3496,7 +4238,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3505,7 +4247,9 @@
     "lo": 1154.0,
     "hi": 1172.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-07",
@@ -3524,7 +4268,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3553,7 +4297,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3562,7 +4306,9 @@
     "lo": 1154.0,
     "hi": 1172.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-08",
@@ -3581,7 +4327,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3610,7 +4356,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3619,7 +4365,9 @@
     "lo": 1154.0,
     "hi": 1172.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   },
   {
    "id": "CW-09",
@@ -3638,7 +4386,7 @@
    "oc_source": "default 16\" O.C. (not printed) - RFI-17",
    "height_ft": 8.0,
    "height_source": "A-101 key note C25 \"FROM SLAB TO 8'-0\" AFF\"",
-   "height_status": "CONFIRMED",
+   "height_status": "CONFIRMADO",
    "length_ft": 8.0,
    "length_source": "A-101 key note C25 24\"x24\" = 4 faces x 2'-0\"",
    "length_op": "4 x 2.0 = 8.0",
@@ -3667,7 +4415,7 @@
     }
    ],
    "tag_ids": [],
-   "status": "CONFIRMED",
+   "status": "CONFIRMADO",
    "img": "img_cache/keynotes_contactos.png",
    "band": {
     "ori": "BOX",
@@ -3676,7 +4424,9 @@
     "lo": 1154.0,
     "hi": 1172.0,
     "sheet": "A-101"
-   }
+   },
+   "length_status": "DERIVADO",
+   "detail_img": "4_canon/img/det/A101_keynotes_C25.png"
   }
  ],
  "tags_descartados": [

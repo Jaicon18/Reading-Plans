@@ -331,7 +331,7 @@ def stud_reinforcement(data, fo, o):
                         "conduit > web hole) against the stud walls and declare mep_penetrations")
         return
     hs = [str(h).upper() for h in sw.get("sheets") or []]
-    if not any(re.match(r"^(\w+/)?P\d", h) for h in hs) or not any(re.match(r"^(\w+/)?M\d", h) for h in hs):
+    if not any(re.match(r"^(\w+/)?P-?\d", h) for h in hs) or not any(re.match(r"^(\w+/)?M-?\d", h) for h in hs):
         raise ValueError("mep_sweep.sheets debe incluir hojas P* y M* (pipes y ductos que cruzan walls)")
     if VISUAL_RE.search(str(sw.get("source"))):
         raise ValueError("mep_sweep.source dice lectura visual: el barrido va registrado (registro2.py / mep.py), v68")

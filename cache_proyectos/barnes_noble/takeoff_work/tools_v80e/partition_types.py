@@ -111,6 +111,8 @@ def tipo(w, tags_wall):
         # el type del wall interrumpido: mismo stud y rows (G/G1 double row 1-5/8") -> el más común
         same = [t for (s, r, t) in tags_wall.get("_sig", []) if s == _stud_in(w) and r == int(w.get("rows", 1))]
         return f"BULKHEAD-{_familia(Counter(same).most_common(1)[0][0])}" if same else "BULKHEAD"
+    if el == "column_wrap" and not tag:
+        return None           # v80e: column wrap sin tag de partition type (key note) = OTHER FRAMING
     return tag
 
 

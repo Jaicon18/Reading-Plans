@@ -134,7 +134,7 @@ def validar(d):
                 err.append(f"walls[{i}]: '{k}' debe ser número >= 0")
         if w.get("status") not in STATUS:
             err.append(f"walls[{i}]: status debe ser {sorted(STATUS)}")
-        if w.get("source") and not re.search(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}\d", str(w["source"])) and w.get("status") != "PENDIENTE":
+        if w.get("source") and not re.search(r"\b[0-9A-Z]{1,3}/[A-Z]{1,2}-?\d", str(w["source"])) and w.get("status") != "PENDIENTE":
             err.append(f"walls[{i}]: source debe citar DETALLE/HOJA (forma N/HOJA)")
     nombres = set()
     for i, m in enumerate(d["materials"]):
@@ -480,15 +480,23 @@ def _escribir(d, salida, out_reglas):
         return [f"{t}  #{w['wall']}  -  {en(w['location'])}", str(w["wall"]), w["length_lf"], w["height_ft"],
                 w["layers"], w["stud_size"], w["stud_oc_in"], w["board_sf"], en(w["location"]),
                 en(w["source"]), f"[{ESTADO_EN.get(w['status'], w['status'])}]"]
-    first_data = ws.max_row + 1
+    if d.get("type_order"):                           # v80e (§0.F): orden del Partition Schedule del proyecto
+        rank = {str(t).upper(): i for i, t in enumerate(d["type_order"])}
+        orden.sort(key=lambda t: rank.get(str(t).upper(), len(rank)))
+    subt = []
     for t in orden:
         ws.append([f"TYPE {t}"]); ws.cell(ws.max_row, 1).font = S["tipo"]; ws.cell(ws.max_row, 1).fill = S["tf"]
-        for w in [x for x in d["walls"] if x["type"] == t]:
+        f0 = ws.max_row + 1
+        for w in sorted([x for x in d["walls"] if x["type"] == t], key=lambda x: _nat(x["wall"])):   # por Wall ID
             ws.append(fila_wall(t, w))
-    last = ws.max_row
+        f1 = ws.max_row
+        # v80e (§0.F): SUBTOTAL por type; texto en la col. B (la A vacía: no es un wall)
+        ws.append([None, f"SUBTOTAL TYPE {t}", f"=SUM(C{f0}:C{f1})", None, None, None, None, f"=SUM(H{f0}:H{f1})"])
+        ws.cell(ws.max_row, 2).font = S["tipo"]
+        subt.append(ws.max_row)
     # v67: texto del total en la col. B (con texto en la A el calificador lo suma como un wall del último TYPE)
-    ws.append([None, "TOTAL - PARTITIONS", f"=SUM(C{first_data}:C{last})", None, None, None, None,
-               f"=SUM(H{first_data}:H{last})"])
+    ws.append([None, "TOTAL - PARTITIONS (GRAND TOTAL)", "=" + "+".join(f"C{r}" for r in subt) if subt else 0,
+               None, None, None, None, "=" + "+".join(f"H{r}" for r in subt) if subt else 0])
     ws.cell(ws.max_row, 2).font = S["tipo"]
     if d.get("other_framing"):
         ws.append([]); ws.append([f"TYPE {OTHER_TYPE}"])

@@ -984,6 +984,10 @@ def a_mep_sweep(ctx):
         regs = [sw.get("registro")] if sw.get("registro") else list((sw.get("registros") or {}).values()) \
             if isinstance(sw.get("registros"), dict) else (sw.get("registros") or [])
     for r in regs:
+        nu = r.get("no_usable") if isinstance(r, dict) else None
+        if isinstance(nu, dict) and str(nu.get("motivo") or "").strip() and HOJA.search(_txt(nu.get("source"))) \
+                and ctx.resolver_img(nu.get("img")):
+            continue        # v80e (R80.1 con mep.py): registro < 25 -> la hoja NO se usa para cruces y se declara
         if isinstance(r, dict) and (_f(r.get("matches"), 0) or 0) < 25:
             out.append(("mep_sweep.registro", r.get("matches"), "≥ 25 coincidencias por dirección (R71.9)"))
     return out

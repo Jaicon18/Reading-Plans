@@ -1,6 +1,6 @@
 """Lectura A: normaliza el caché (PARTITIONS_STEP1_rev1 + walls_coords) al esquema del canon y completa
 alturas, caras, aberturas. Salida: fragmentos en 2_lectura/A/."""
-import json, os, math
+import json, os, math, re
 BN = '/home/user/Reading-Plans/cache_proyectos/barnes_noble'
 FINAL = os.environ.get('MODO') == 'final'
 OUT = BN + '/takeoff_work/etapas/2_lectura/A'
@@ -398,6 +398,119 @@ for sid, line, ori, c, lo, hi, h, loc in SS:
         'band': ({'ori': 'H', 'c0': c - 2.6, 'c1': c + 2.6, 'lo': lo, 'hi': hi, 'sheet': 'A-221'} if ori == 'H'
                  else {'ori': 'V', 'c0': c - 2.6, 'c1': c + 2.6, 'lo': lo, 'hi': hi, 'sheet': 'A-221'})})
 
+
+# ---------------------------------------------------------------- evidencia por campo (reglas.py, modo final)
+import pymupdf as _fz
+_DOC = _fz.open('/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/bidset/bidset_SIN_MARKUPS.pdf')
+_SEG = {}
+def _segs(pg):
+    if pg not in _SEG:
+        p = _DOC[pg - 1]; M = p.rotation_matrix; L = []
+        for dr in p.get_drawings():
+            for it in dr['items']:
+                if it[0] == 'l':
+                    L.append((_fz.Point(it[1]) * M, _fz.Point(it[2]) * M))
+                elif it[0] == 'c':
+                    pts = [_fz.Point(q) * M for q in it[1:5]]
+                    prev = pts[0]
+                    for k in range(1, 9):
+                        t = k / 8; a = (1 - t) ** 3; b = 3 * (1 - t) ** 2 * t; c = 3 * (1 - t) * t * t; d_ = t ** 3
+                        q = _fz.Point(a * pts[0].x + b * pts[1].x + c * pts[2].x + d_ * pts[3].x,
+                                      a * pts[0].y + b * pts[1].y + c * pts[2].y + d_ * pts[3].y)
+                        L.append((prev, q)); prev = q
+        _SEG[pg] = L
+    return _SEG[pg]
+def _hit(pg, p, n, lim):
+    """cara más lejana a cada lado dentro de lim (la propia línea del eje cuenta como t = 0)."""
+    best = {1: None, -1: None}
+    for a, b in _segs(pg):
+        dx, dy = b.x - a.x, b.y - a.y
+        den = n[0] * dy - n[1] * dx
+        if abs(den) < 1e-9: continue
+        t = ((a.x - p[0]) * dy - (a.y - p[1]) * dx) / den       # p + t n
+        u = ((a.x - p[0]) * n[1] - (a.y - p[1]) * n[0]) / den
+        if -0.02 <= u <= 1.02 and abs(t) <= lim:
+            for sg in ((1, -1) if abs(t) < 0.3 else ((1,) if t > 0 else (-1,))):
+                tt = 0.0 if abs(t) < 0.3 else t
+                if best[sg] is None or abs(tt) > abs(best[sg]): best[sg] = tt
+    return best
+STATUS_ES = {'CONFIRMED': 'CONFIRMADO', 'DERIVED': 'DERIVADO', 'PENDING': 'PENDIENTE'}
+TOPT = {'2': 'deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410',
+        '5': 'deep leg slip track at underside of deck - 3/A-410, 5/A-410',
+        '3': 'fixed top track at T.O. wall 8\'-0" A.F.F. (open top, capped by board) - 3/A-410',
+        '4': 'fixed top track at T.O. wall 7\'-6" A.F.F. - 4/A-410',
+        'E1': 'top track to underside of deck - E/A-221', 'E2': 'top track to underside of deck - E/A-221',
+        'I': 'top track to underside of deck - I/A-221', 'F': 'top track at bottom of nested stud bracing - F/A-221',
+        'H1': 'top track (break line, height not printed) - G/A-221', 'H2a': 'top track (break line) - G/A-221',
+        'H2b': 'top track (break line) - G/A-221', 'H3a': 'top track (break line) - H/A-221', 'H3b': 'top track (break line) - H/A-221',
+        'A': 'fixed top track under countertop - A/A-221', 'B': 'fixed top track under countertop - B/A-221',
+        'C': 'fixed top track under countertop - C/A-221', 'D': 'fixed top track at 1\'-0" - D/A-221'}
+DIMG = {'A-410': ('4_canon/img/det/A410_details_4_3_2.png', '4_canon/img/det/A410_details_1C_1A_1B_1.png', '4_canon/img/det/A410_details_5_bracing_toptrack.png'),
+        'A-221': ('4_canon/img/det/A221_sections_E_F_G.png', '4_canon/img/det/A221_sections_H_I.png', '4_canon/img/det/A221_counters_A_B_C_D.png')}
+def dimg(det):
+    n, sh = det.split('/') if '/' in det else ('', det)
+    if sh == 'A-410':
+        return DIMG['A-410'][1] if n in ('1', '1A', '1B', '1C') else (DIMG['A-410'][2] if n == '5' else DIMG['A-410'][0])
+    if sh == 'A-221':
+        if n in ('A', 'B', 'C', 'D'): return DIMG['A-221'][2]
+        if n in ('H', 'I'): return DIMG['A-221'][1]
+        if n == '2': return '4_canon/img/det/A221_soffit_sections_2_3.png'
+        return DIMG['A-221'][0]
+    return '4_canon/img/det/A101_keynotes_C25.png'
+def evidencia(walls):
+    for sh, L in walls.items():
+        esc = SCALE[sh]; pg = 6 if sh == 'A-101' else 15
+        con_tag = {w['id'].split('.')[0] for w in L if w.get('tag_ids')}
+        for w in L:
+            for k in ('length_status', 'height_status', 'status'):
+                v = str(w.get(k) or ('DERIVED' if k != 'height_status' else 'CONFIRMED')).upper()
+                w[k] = STATUS_ES.get(v, v if v in STATUS_ES.values() else 'DERIVADO')
+            if w['tag'] in ('H1', 'H2a', 'H2b', 'H3a', 'H3b', 'F'):
+                w['height_status'] = 'DERIVADO'
+                w['height_op'] = 'not printed -> B.O. deck 25\'-0" (1/A-400B) per rule 53.3 / 60.11 (more material) - RFI-06'
+                w['sheets_searched'] = 'A-221 (sections E-I, 1-3), A-225 (finish plan and details 1-10), A-226A / A-226B (cafe elevations: finish tops 11\'-0", 11\'-6", 15\'-0" only), A-121 (RCP), A-400B, A-410, A-002 specifications: no top of stud printed'
+                w['pending_reason'] = 'stud height of the cafe partition not printed (break line at the top of the section)'
+            if w['tag'] == 'I':
+                w['sheets_searched'] = 'A-221 (I/A-221, 1/A-221), A-225, A-226A / A-226B (WD-1 top not printed), A-121'
+                w['pending_reason'] = 'top of WD-1 (split between FRT plywood and GWB on the cafe face) not printed - RFI-08'
+            if w.get('length_status') == 'CONFIRMADO' and not re.search(r'[A-Z]-\d{3}', str(w.get('length_source'))):
+                w['length_status'] = 'DERIVADO'
+            b = w['band']
+            if b['ori'] in ('H', 'V'):
+                w['thickness_measured_in'] = round(abs(b['c1'] - b['c0']) / esc * 12, 2)
+                w['thickness_check'] = f"faces {b['c0']} / {b['c1']} pt on {sh} = {w['thickness_measured_in']} in"
+            elif b['ori'] == 'D':
+                (x0, y0), (x1, y1) = b['p0'], b['p1']
+                ux, uy = x1 - x0, y1 - y0; ll = math.hypot(ux, uy); n = (-uy / ll, ux / ll)
+                lim = HALF[sh].get(w['tag'], 2.5) * (2.2 if w['tag'] in ('1B',) else 1.0) + 1.5
+                h0, h1 = _hit(pg, (x0, y0), n, lim), _hit(pg, (x1, y1), n, lim)
+                if all(h0[s_] is not None and h1[s_] is not None for s_ in (1, -1)):
+                    ft = [[round(x0 + h0[-1] * n[0], 2), round(y0 + h0[-1] * n[1], 2)], [round(x1 + h1[-1] * n[0], 2), round(y1 + h1[-1] * n[1], 2)]]
+                    fb = [[round(x0 + h0[1] * n[0], 2), round(y0 + h0[1] * n[1], 2)], [round(x1 + h1[1] * n[0], 2), round(y1 + h1[1] * n[1], 2)]]
+                    b['faces_top'], b['faces_bottom'] = ft, fb
+                    lt, lb = math.dist(*ft) / esc, math.dist(*fb) / esc
+                    w['thickness_measured_in'] = round((abs(h0[1]) + abs(h0[-1])) / esc * 12, 2)
+                    w['thickness_check'] = f"normal through the ends hits faces at {round(h0[-1], 2)} / {round(h0[1], 2)} pt"
+                    w['faces_avg_info'] = round((lt + lb) / 2, 2)
+                    if abs(w['length_ft'] - (lt + lb) / 2) > 0.05:
+                        w['length_op'] = w.get('length_op', '') + f"; faces {round(lt, 2)} / {round(lb, 2)} -> average {round((lt + lb) / 2, 2)} (R72.2)"
+                        w['length_ft'] = round((lt + lb) / 2, 2)
+            if b['ori'] != 'BOX':
+                w['length_basis'] = 'axis (centerline of the stud) between nodes; face to face where taken from reading B'
+            w['detail_img'] = dimg(w.get('detail') or '')
+            w['img'] = w.get('img') or dimg(w.get('detail') or '')
+            if w['tag'] in TOPT:
+                w['top_track'] = TOPT[w['tag']]
+            elif w['tag'] in ('1', '1A', '1B', '1C'):
+                w['top_track'] = 'top track to underside of deck (furring full height, R-21 batt to deck per ' + DET[w['tag']] + '); deflection per A-410 partition note 7'
+            if w.get('element') == 'wall' and w['tag'] and not w.get('tag_ids'):
+                par = w['id'].split('.')[0]
+                w['untagged_reason'] = (f"segment of wall {par} (tag on its first segment); joins the tagged wall per particion.py eje"
+                                        if par in con_tag else 'untagged return / TYP. copy of a tagged element on ' + sh + ' - joins the tagged wall it touches (particion.py eje)') + f' ({sh})'
+
+if FINAL:
+    evidencia(walls)
+
 # ---------------------------------------------------------------- nodos (L / T / free) desde las bands
 def ends(w):
     b = w['band']
@@ -481,6 +594,36 @@ for sh in walls:
         if w['id'] in TCR:
             w['type_change_rfi'] = TCR[w['id']]
 
+
+TITLES = {'1/A-410': 'Exterior CMU', '1A/A-410': 'Exterior - Split-Faced CMU', '1B/A-410': 'Exterior Wall - Stone at CMU',
+          '1C/A-410': 'Exterior Wall - Stone at Stud', '2/A-410': 'Non-Rated Full Height Partition', '3/A-410': 'Non-Rated Partial Height Partition',
+          '4/A-410': 'Non-Rated Partial Height Partition', '5/A-410': 'Non-Rated Full Height Partition',
+          'E/A-221': 'Section Wall Typ. E1/E2', 'F/A-221': 'Section Wall Typ. F', 'G/A-221': 'Section Wall Typ. H1/H2',
+          'H/A-221': 'Section Wall Typ. H3', 'I/A-221': 'Section Wall Typ. I', 'A/A-221': 'Section Through Front Counter',
+          'B/A-221': 'Section Wall Typ. B', 'C/A-221': 'Section Wall Typ. C', 'D/A-221': 'Section Wall Typ. D',
+          '2/A-221': 'Soffit Section - Cafe Sales Area', 'C25/A-101': 'Key note C25 - existing column, new 24"x24" GWB surround over 3-5/8" metal framing from slab to 8\'-0" AFF'}
+NOTES = {'1/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, R-21 batt full height to underside of deck, vapor barrier, 10" CMU (re: structural)',
+         '1A/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, R-21 batt to deck, 10" split faced CMU',
+         '1B/A-410': '8" metal stud, 5/8" gyp bd BY FUTURE TENANT, 1/2" exterior gyp sheathing, weather barrier, 1" air gap, 4" stone veneer',
+         '1C/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, 10" CMU, 4" stone veneer',
+         '2/A-410': '3-5/8" studs @16" to bottom of nested stud bracing (see schedule for gauge); 5/8" gyp each side; extend gyp to deck where no ceiling; restroom/cafe walls W.R. gyp on wet side to B.O. gyp ceiling; calls 3/A-410 (top track, slotted deflection) and 5/A-410 (lateral bracing)',
+         '3/A-410': '3-5/8" studs @16" to bottom of nested stud bracing; T.O. wall 8\'-0" A.F.F.; 5/8" gyp both sides; F.R.P. over 5/8" plywood where shelving occurs; 3-5/8" x 20 ga track w/ (2) 1/4" Hilti Kwik HUS-EZ + moment clip (A/A-410)',
+         '4/A-410': 'as 3/A-410 with T.O. wall 7\'-6" A.F.F.', '5/A-410': '6" studs @16" to bottom of nested stud bracing; 5/8" gyp each side; restroom walls W.R. gyp to B.O. gyp ceiling',
+         'E/A-221': '6" metal studs @16" to underside of deck; E1 1/2" cement board, E2 5/8" FRT plywood; void at existing wall',
+         'F/A-221': '3-5/8" metal studs @16" to bottom of nested stud bracing; 5/8" FRT plywood', 'G/A-221': 'H1 = 6" stud, H2 = 3-5/8" stud; 5/8" FRT plywood + 5/8" gypsum board (sales); H2a 5/8" GWB + 5/8" FRT plywood; H2b 5/8" FRT both sides',
+         'H/A-221': '6" metal studs @16"; 5/8" gypsum board (Grab and Go); H3a plywood to top of WD-1, H3b plywood up to 8\'-0" (sales)',
+         'I/A-221': '6" metal studs @16"; 5/8" FRT plywood to top of WD-1, 5/8" GWB from top of WD-1 to deck',
+         'A/A-221': '3-5/8" metal studs @16"; 1/2" cementitious board + 3/4" FRT plywood substrate (customer side), FRP-1 over 1/2" cementitious board (cafe side); 2\'-8 1/2" B.O. slab to T.O. stud',
+         'B/A-221': '3-5/8" metal studs @16"; 3/4" FRT plywood + 1/2" cementitious board; 2\'-8 1/2"', 'C/A-221': '3-5/8" metal studs; 1/2" cementitious board both sides; 2\'-8 1/2"',
+         'D/A-221': '3-5/8" metal studs @16"; FRP-1 over 1/2" cementitious board; 1\'-0" B.O. slab to T.O. stud',
+         '2/A-221': '3-5/8" @16" metal stud up to deck at the open edge and at the 11\'-6" step, cross bracing as req\'d, 5/8" GWB, 5/8" F.R.T. plywood, WD-1, wood corner trim',
+         'C25/A-101': '24"x24" GWB surround over 3-5/8" metal framing, slab to 8\'-0" AFF'}
+SEAL = {'sealant_none_reason': 'CONT. ACOUSTICAL SEALANT drawn at the base (bottom runner) - EXCLUDED in all projects (estimator standing order R77.12); no exterior sealant at base of gypsum drawn', 'sealant_source': 'see detail'}
+DETAILS = {}
+for d_ in sorted(set(DET.values()) | {'C25/A-101', '2/A-221'}):
+    DETAILS[d_] = {'layers_per_face': 1, 'source': d_, 'layers_source': d_, 'img': dimg(d_), 'title': TITLES.get(d_, d_),
+                   'notes': NOTES.get(d_, ''), **SEAL}
+
 # ---------------------------------------------------------------- metal trim (corner bead)
 trim = []
 libres = Counter(n['wall'] for n in nodes if n['kind'] == 'free')
@@ -491,14 +634,14 @@ for t in ('3', '4'):
     h = ws[0]['height_ft']
     nfree = sum(libres[w['id']] for w in ws)
     lf = 2 * top2 + top1 + nfree * 2 * h
-    trim.append({'ref': f'Corner bead - type {t} partial height walls (top edges + free ends)', 'kind': 'corner_bead',
+    trim.append({'ref': f'Corner bead - type {t} partial height walls (top edges + free ends)', 'kind': 'corner_bead', 'img': dimg(DET[t]), 'label': 'corner bead at exposed edges (criterion 53.1)',
                  'lf': round(lf, 2), 'source': DET[t],
                  'op': f"top edges 2 x {round(top2, 2)} + 1 x {round(top1, 2)} (cap box outer face) + {nfree} free end(s) x 2 corners x {h} ft = {round(lf, 2)}"})
 cb = [w for w in walls['A-101'] if w['tag'] == '4' and len(w.get('faces') or []) == 1]
 if not FINAL: trim.append({'ref': 'Corner bead - type 4 cap boxes outside vertical corners', 'kind': 'corner_bead', 'lf_each': 7.5,
              'qty': 8, 'lf': 60.0, 'source': '4/A-410',
              'op': '2 cap boxes x 4 outside corners x 7\'-6" (T.O. wall 4/A-410) = 60.0'})
-trim.append({'ref': 'Corner bead - corridor recess (drinking fountain alcove, W2-06) outside corners', 'kind': 'corner_bead',
+trim.append({'ref': 'Corner bead - corridor recess (drinking fountain alcove, W2-06) outside corners', 'kind': 'corner_bead', 'img': '3_revision/res/res_W205.png', 'label': 'corner bead at outside corners (criterion 53.1)',
              'lf_each': 9.5, 'qty': 2, 'lf': 19.0, 'source': 'A-101',
              'op': '2 outside corners x 9.5 ft (ACT-3 9\'-0" + 6", corridor face) = 19.0'})
 
@@ -553,6 +696,9 @@ for sh in walls:
     for w in walls[sh]:
         for ref, ro, head, xy, kind, ssrc in OPN.get(w['id'], []):
             w.setdefault('openings', []).append({'ref': ref, 'kind': kind, 'ro_w_ft': ro, 'head_ft': head,
+                                                  'img': '4_canon/img/opn/' + ref.replace(' ', '_') + '.png',
+                                                  'ro_w_op': f"gap between the jamb faces measured in vector = {ro} ft ({ssrc})",
+                                                  'head_source': ('A-500 door schedule height' if ref not in ('Door 12',) else 'A-500 door 12 EXISTING V.I.F. (head not printed) - RFI-10'),
                                                   'source': ssrc, 'xy_pt': list(xy), 'header': 'not_called',
                                                   'header_source': HSRC, 'header_rfi': hrfi(ro),
                                                   'location': 'interior' if not w['tag'].startswith('1') else 'exterior',
@@ -584,7 +730,7 @@ general = {
                'carrying_oc_in': {'value': 48, 'source': '5/A-121 "1-1/2" CHANNEL @ 48" O.C. MAX"'},
                'hanger_oc_in': {'value': 48, 'source': '5/A-121 "HANGING WIRE TO STRUCTURE ABOVE AT 48" O.C. MAX"'},
                'bracing_spacing_in': {'value': 48, 'source': '5/A-410 lateral bracing CR 1-1/2" 16 ga @ 4\'-0" O.C. full wall height'}},
- 'details': {d: {'layers_per_face': 1, 'source': d} for d in sorted(set(DET.values()) | {'C25/A-101', '2/A-221'})},
+ 'details': DETAILS,
  'opening_schedule': opening_schedule,
  'plywood_strips': strips,
  'nodes': nodes,
@@ -597,7 +743,10 @@ general = {
  'deflection_clips': {'none_reason': 'Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 "SLOTTED DEFLECTION", A-410 partition note 7 "PROVIDE DEFLECTION TRACK AS REQUIRED"); no deflection clips called', 'source': '3/A-410'},
  'accesorios_rfi': [
    {'familia': 'stud reinforcement MEP', 'motivo': 'MEP sweep not registrable: mep.registro M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (mep.py rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.',
-    'delta': 'per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each', 'source': 'M-102'}],
+    'delta': 'per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each', 'source': 'M-102',
+    'img': '4_canon/img/M102_registro_check.png', 'fuentes_revisadas': 'M-102 HVAC plan (page 48); mep.py registro (20 / 14 votes); P-101A..P-102D plumbing sheets (pipes <= 1" in cavity); 6/A-410 and 7/A-410 penetration details'}],
+ 'mep_sweep': {'sheets': ['M-102', 'P-101A', 'P-101B', 'P-102A', 'P-102B'], 'source': 'M-102, P-101A, P-101B, P-102A, P-102B', 'registro': {'dx_pt': -131.04, 'dy_pt': -477.0, 'matches': 14, 'source': 'M-102 vs A-101 (mep.registro)',
+               'no_usable': {'motivo': 'registration below 25 matching wall segments (20 V / 14 H) and the check feature (type 4 center fixture) lands ~70 pt off -> sheet not used for geometric crossings (mep.py rule); stud reinforcement MEP to RFI', 'source': 'M-102', 'img': '4_canon/img/M102_registro_check.png'}}},
  'accesorios_none': [
    {'familia': 'extra framing ATM', 'why': 'No ATM / equipment recess in the set (A-101, A-500, A-221 reviewed)', 'source': 'A-101'},
    {'familia': 'gypsum board jamb return', 'why': 'No opening with a gypsum board return: doors in hollow metal frames (1/A-500); cased opening 2/A-500 is wood jamb + B-1 trim; storefronts are Div 08', 'source': '1/A-500'},

@@ -1,0 +1,422 @@
+[
+ {
+  "regla": "S:subagentes-ninguna-sesió:ce4728",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Orchestrator launched stages, read their output files and drove the resolution (3_revision/resolucion.md); the plan sheets read by the orchestrator were only the ones needed for decisions (A-101, A-221, A-410, A-400A/B, A-500, A-510, A-121, A-225, A-226A)."
+ },
+ {
+  "regla": "S:subagentes-ninguna-sesió:b02c6e",
+  "caso": "corrida",
+  "archivo": "2_lectura/B_input/BRIEF_B.md",
+  "valor": "Stage 2B split in small tasks: one subagent per plan sheet (A-101 and A-221); ceilings measured by a separate subagent (2_lectura/A/datos/ceilings_measured.json)."
+ },
+ {
+  "regla": "S:subagentes-ninguna-sesió:f40b96",
+  "caso": "corrida",
+  "archivo": "2_lectura/B_input/BRIEF_B.md",
+  "valor": "Readers A and B independent: B received only the PDF, its inventory tags and the brief (no cache, no reading A); only the printed scales were added to canon_B constants by the orchestrator (2_lectura/B/constants.json), and one procedural correction (split multi-segment walls) with no numbers."
+ },
+ {
+  "regla": "S:etapa-1-inventario-scrip:b4b53c",
+  "caso": "corrida",
+  "archivo": "1_inventario/inventario.md",
+  "valor": "A-101 and A-221 have vectorized text (NO INVENTARIABLE by script): swept by vector rhombus detection + visual reading on contact sheets (1_inventario/img/p6_contactos.png, p15_contactos.png), declared in inventario.json avisos / barrido_manual; every tag cropped, circled and re-opened."
+ },
+ {
+  "regla": "E17",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Unattended run (estimator asleep): no questions asked; every open point is a numbered question, one at a time, in PARA_REVISAR_EN_LA_MANANA.md and the Review Items sheet, with images, sheets and deltas."
+ },
+ {
+  "regla": "S:§1:9d79c7",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Package errors found in this run were fixed in the tools the same turn (tools_v80e: per-sheet scale, sheet-number regex without decimals, 8\" stud family, header not_called, case-insensitive types, S/M/E/P sheet regex with hyphen, column wrap without tag, no-S-sheet option, MEP not usable) and documented with their rule in PARA_REVISAR / skill update notes."
+ },
+ {
+  "regla": "S:§1:b6fe41",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "This is a production run, not a test: tool changes are kept separately (takeoff_work/tools_v80e) with the diff list in PROCESO_CORRIDA.md for the estimator to integrate."
+ },
+ {
+  "regla": "R73.4",
+  "caso": "corrida",
+  "archivo": "../registro.json",
+  "valor": "registro.py: alcance rows marked with registro.py marcar after the evidence; no row re-written by hand (corrections would use registro.py corregir)."
+ },
+ {
+  "regla": "R73.15",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no vendor frame interfaces with sealant / trim in our scope (acoustical sealant excluded R77.12; doors in hollow metal frames by others, no trim at frames)."
+ },
+ {
+  "regla": "R77.15",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Messages to the estimator are short; the detail is in the files (README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md)."
+ },
+ {
+  "regla": "S:formato-de-salida-del-take-off-obligator",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Excel built only with plantilla_excel.py (6 fixed sheets, English): Partition Takeoff one row per wall with subtotal per type and grand total; non-partition scope (column wraps, soffit sides, ceilings) in OTHER FRAMING / Material Summary."
+ },
+ {
+  "regla": "S:formato-de-salida-del-ta:4fca32",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no demolition in our scope (DM-101 demolition by GC; existing walls to remain are not quantified)."
+ },
+ {
+  "regla": "S:registro-de-dimension-strings-obligatori",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Lengths are vector measurements checked against printed dimensions (scale checks: A-101 grid C-D 30'-0\" = 270 pt, A-221 28'-5 7/8\" = 1025.6 pt; printed checks in length_op of each wall: 12'-11\", 15'-7\", 48'-4\", 3'-8\", 12'-0\", 12'-2\", 6'-2\", 25'-1\"); each wall carries its operation in the canon (length_op)."
+ },
+ {
+  "regla": "S:regla-1-notas-condicionales",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Conditional notes checked against their sheet: \"F.R.P. over 5/8\" plywood where shelving occurs\" (3/A-410, 4/A-410) -> fixture plan A-111 -> RFI; \"restroom/cafe walls only W.R. gyp\" (2/A-410) -> A-510 wet rooms -> RFI-11; \"extend gyp to deck where no ceiling\" -> A-121; \"BY FUTURE TENANT\" (1x/A-410) -> excluded RFI-01."
+ },
+ {
+  "regla": "S:verificación-adversarial-propia-antes-de",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "Own adversarial review: independent reading B (stage 3) + an adversarial completeness critic subagent that swept every sheet looking for missing scope (5_auditoria). Ultracode / workflows were not requested, so the 8-verifier workflow was not launched."
+ },
+ {
+  "regla": "S:verificación-adversarial:8fdb9b",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "NO APLICA: the 8-verifier workflow runs only when the estimator activates ultracode / workflows (not requested); replaced by reading B + completeness critic."
+ },
+ {
+  "regla": "S:verificación-adversarial:96dbeb",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "The critic was asked to REFUTE / find what is missing, with full written context (clean PDF path, sheet map, what is covered, what is excluded)."
+ },
+ {
+  "regla": "S:verificación-adversarial:a666df",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Each A/B difference was resolved by re-opening the plan at that point with an image (res_W205, res_T4n, res_E1I) - only what survived was changed."
+ },
+ {
+  "regla": "S:verificación-adversarial:68ec15",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Agent outputs were taken as cited evidence and re-checked by geometry in the main thread before use (e.g. ceilings_measured.json areas vs A-121 tags, B segments vs vector bands)."
+ },
+ {
+  "regla": "S:verificación-adversarial:ff3032",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Unresolved items go to RFI with delta and to PARA_REVISAR_EN_LA_MANANA.md; package errors recorded in PROCESO_CORRIDA.md for the skill update."
+ },
+ {
+  "regla": "S:los-markups-ajenos-no-son-fuente",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "The bid set carries 9,864 foreign annotations (Bluebeam squares / ink); every render and vector read used the clean copy bidset_SIN_MARKUPS.pdf (copia_limpia.py)."
+ },
+ {
+  "regla": "S:los-markups-ajenos-no-so:db7106",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "First step: copia_limpia.py made the copy without /Annots (9,864 removed); all crops come from that copy."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:33d529",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Work unit = partition type with all its instances (inventory per type, partition per type); ceilings per room; soffits one by one."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:e221c4",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Marked plans: one image per sheet, colour per type with legend in schedule order and Wall IDs (FINAL_FOR_REVIEW images) + the Bluebeam markups PDF."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:7f3ce3",
+  "caso": "corrida",
+  "archivo": "4_canon/takeoff_canon.json",
+  "valor": "Marked bands are read from the reconciled canon (band of each wall), never from memory."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:f79808",
+  "caso": "corrida",
+  "archivo": "4_canon/takeoff_canon.json",
+  "valor": "Every quantity correction of stage 3 went into the canon, then to Excel, markups and images regenerated from it."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:1f35f7",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Final visual check on the marked images: re-opened and zoomed wall by wall against the Excel before delivery."
+ },
+ {
+  "regla": "S:granularidad-y-marcado:f3c532",
+  "caso": "corrida",
+  "archivo": "1_inventario/inventario.md",
+  "valor": "Each type image shows all its instances; totals per type match the Partition Takeoff subtotals."
+ },
+ {
+  "regla": "S:sets-con-walls-de-wood",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: all partitions in this set are metal stud (A-410 details 1-5, A-221 sections); no wood framing."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:78de83",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Existing walls not quantified as new: A-101 construction legend (existing exterior wall / existing partition / new non-bearing / partial height), DM-101, A-510 and A-001 code notes checked; existing CMU = Div 04, only new furring counted."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:1e4580",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "CSI division check: storefront / vestibule doors (Div 08), millwork / counters finishes, FRP-1, WD-1 wood panels, light fixtures (Div 26) are not ours; only framing and board are."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:2f6dca",
+  "caso": "corrida",
+  "archivo": "4_canon/fo_in.json",
+  "valor": "Fixtures in GWB ceilings handled only as framed openings (framed_openings.py): D4 / D6 round downlights and CD-1 / EF-2 fit the 24\" module -> 0 LF."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:0ed0b9",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Types 1 / 1A / 1B / 1C are furring at existing CMU: CMU is Div 04 (not ours); only the stud furring on the interior face is counted, and its gyp bd is by future tenant (excluded)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:186e69",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Enlarged areas opened: Cafe (1/A-221, dash-dot on A-101), vestibule (A-210), toilet rooms (A-200), break room / office (A-412)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:612274",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Room names compared by shape between A-101, A-121, A-221 and A-510 (Cafe 103 / Cafe Sales; Grab & Go)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:00477b",
+  "caso": "corrida",
+  "archivo": "../bitacora.jsonl",
+  "valor": "Each closed stage was persisted on disk and committed to the repository branch the same step (git log; bitacora)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:8f6af6",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Estimator orders for this run (type 2 > 22 ft, cafe counted once, tenant gyp excluded, acoustical sealant excluded, cafe heights from A-225 or RFI) applied and recorded."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:a599e5",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Stages done in order (inventory -> A -> B -> compare -> resolution -> calculation -> Excel -> markups -> gates -> delivery); none started before the previous was on disk."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:83e3ad",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no estimator comment on a delivered file in this run."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:df31b7",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no wall hung \"above\" a ceiling: all partitions sit on the slab (A-410 details, A-221 sections)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:aeec62",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no walk-in coolers / beer cave in this store."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:9815d5",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no coolers or electrical rooms with special board in this set (A-510)."
+ },
+ {
+  "regla": "S:reglas-inviolables-error:e416fd",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "Agents were asked to refute with full written context (paths, sheet map, scale, coverage list)."
+ },
+ {
+  "regla": "S:verificación-cruzada-del-barrido-contar",
+  "caso": "corrida",
+  "archivo": "3_revision/revision.md",
+  "valor": "Second path by graphics: reading B measured every new partition by its grey fill / hatch on A-101 and A-221 without starting from the tags; comparar.py crossed both against the tag inventory (3 alerts, all closed)."
+ },
+ {
+  "regla": "S:verificación-cruzada-del:dad47a",
+  "caso": "corrida",
+  "archivo": "3_revision/revision.md",
+  "valor": "Counts by tag and by graphics agree for every interior type except the items closed in resolucion.md."
+ },
+ {
+  "regla": "S:verificación-cruzada-del:b2705e",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Walls without tag (returns, TYP. copies, column surrounds C25) and tags without wall (I finish callouts) were found and closed before quantifying."
+ },
+ {
+  "regla": "S:verificación-cruzada-del:549861",
+  "caso": "corrida",
+  "archivo": "3_revision/revision.md",
+  "valor": "Closed rectangles without hatch (type 4 caps, piers, E1 box) and furring bands on the exterior walls were included in the sweep."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:c7fb31",
+  "caso": "corrida",
+  "archivo": "0_mapa/SHEET_MAP.md",
+  "valor": "Step 0: the set contains the building (A-101 floor plan, A-410 partition types, A-121 RCP) - full interior package, no structural sheets."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:b92e94",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Step 0B: DM-101 demolition plan and A-101 construction legend read: existing CMU and existing partitions remain; new partitions per legend."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:9a8e30",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Step 1: code analysis on A-001 (tenant fit-out, Mercantile); non-rated partitions (A-410 titles \"Non-Rated\")."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:29966c",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Step 2: no Div 05 / 09 specification book in the bid set beyond A-002; stud gauges from the A-410 metal stud schedule (type 2 > 22 ft -> 14 ga SJ, estimator decision), fasteners from A-410 partition note 8."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:470877",
+  "caso": "corrida",
+  "archivo": "3_revision/resolucion.md",
+  "valor": "Step 4C: walls listed by type and location in text before quantifying (canon location field); exterior walls one per facade."
+ },
+ {
+  "regla": "S:protocolo-de-ejecución:19e4ec",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "Step 8: own adversarial check before delivery, then the gates (etapas, reglas, bitacora)."
+ },
+ {
+  "regla": "S:clarifications-para-el-bid-nunca-omitir",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Clarifications & Exclusions in the Scope Checklist / README_REVIEW: existing vs new, exclusions (gyp by future tenant, insulation, acoustical sealant, FRP, storefront Div 08, vestibule framing RFI), allowances none."
+ },
+ {
+  "regla": "REGLA 49.1",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: estimator order for this run: deliver in the repository (cache_proyectos/barnes_noble/FINAL_FOR_REVIEW_2026-10-24/), do NOT upload to Drive."
+ },
+ {
+  "regla": "REGLA 50.3",
+  "caso": "corrida",
+  "archivo": "../bitacora.jsonl",
+  "valor": "Progress backed up after each stage as a commit pushed to the repository branch (git history) instead of Drive _progreso (estimator order)."
+ },
+ {
+  "regla": "REGLA 50.4",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Session start: correr_suite.py (4/4 OK) and test_ciego_tools.py (0 findings) before reading plans; cache read first (PARTITIONS_STEP1_rev1.xlsx, walls_coords.json)."
+ },
+ {
+  "regla": "REGLA 52.2",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Tools run with TAKEOFF_WORK = takeoff_work and BITACORA inside it; no fixed paths of another project."
+ },
+ {
+  "regla": "REGLA 55.1",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "Completeness critic run sheet by sheet (including uncited sheets) before delivery."
+ },
+ {
+  "regla": "REGLA 56.8",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no blocking-at-board-edge detail in the set (edge_blocking_none_reason in the canon cites 2, 3, 4, 5/A-410)."
+ },
+ {
+  "regla": "REGLA 59.14",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "NO APLICA: no edge blocking detail (see 56.8)."
+ },
+ {
+  "regla": "v26:la-auditoría-adversarial-es-un-paso-del",
+  "caso": "corrida",
+  "archivo": "5_auditoria/AUDIT_COMPLETENESS.md",
+  "valor": "Adversarial audit report in three blocks (confirmed findings / ambiguous with RFI delta / checked and OK)."
+ },
+ {
+  "regla": "v26:regla-cuando-se-corrige-una-cantidad-se",
+  "caso": "corrida",
+  "archivo": "4_canon/takeoff_canon.json",
+  "valor": "When stage 3 changed a length the operation text (length_op) was rewritten with the new value (W2-05, W2-06, type 4, R75.7 returns, R70.2 corners)."
+ },
+ {
+  "regla": "v26:regla-juntas-de-control-si-el-set-no-las",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Set swept for CONTROL JOINT / EXPANSION JOINT: none drawn in the partitions or GWB ceilings (A-410, A-121, A-221) -> none quantified; listed in Clarifications."
+ },
+ {
+  "regla": "v27:regla-el-decimal-raro-se-investiga-no-se",
+  "caso": "corrida",
+  "archivo": "4_canon/out/familias_out.json",
+  "valor": "Layers per face are integers (1 per face); no fractional layer averages left unexplained (faces split by room carry their own length)."
+ },
+ {
+  "regla": "v33:regla-no-se-pregunta-no-se-ofrece-no-se",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Marked plans produced automatically (one image per sheet + Bluebeam markups PDF) in FINAL_FOR_REVIEW_2026-10-24."
+ },
+ {
+  "regla": "v35:el-índice-se-genera-no-se-escribe-hoja_i",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "File index of the delivery generated by script (FINAL_FOR_REVIEW file list), not typed by hand."
+ },
+ {
+  "regla": "v40:la-compuerta-verif_respuesta-py",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "The final summary message is written to a file and checked with verif_respuesta.py before sending."
+ },
+ {
+  "regla": "v42:el-mapa-de-hojas-se-cruza-con-dos-fuente",
+  "caso": "corrida",
+  "archivo": "0_mapa/SHEET_MAP.md",
+  "valor": "Sheet map from the two sources (A-000 drawing index + title block of each page); indice_set.py ran (bitacora) but could not read the vectorized text, so the cross was done visually with images."
+ },
+ {
+  "regla": "v42:el-registro-de-lo-que-el-usuario-confirm",
+  "caso": "corrida",
+  "archivo": "PROCESO_CORRIDA.md",
+  "valor": "Estimator confirmations of this run are stored as data (decisions list in PROCESO_CORRIDA.md and the RFI assumptions)."
+ }
+]
