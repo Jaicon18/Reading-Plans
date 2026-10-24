@@ -230,7 +230,9 @@ def markups_fallas(w, takeoff, excel):
     if not canon_p:
         return ["MARKUPS: sin takeoff_canon.json en %s: no se puede verificar el PDF de markups -> NO ENTREGABLE" % w]
     cd = os.path.dirname(canon_p)
-    dirs = [w, os.path.join(w, "out"), os.path.join(w, "4_canon"), cd, os.path.join(cd, "out"),
+    # v80f (R80e.17): también 6_markups (carpeta de etapas.py), donde markups_bluebeam deja su resumen
+    dirs = [w, os.path.join(w, "out"), os.path.join(w, "4_canon"), os.path.join(w, "6_markups"),
+            os.path.join(cd, "..", "6_markups"), cd, os.path.join(cd, "out"),
             os.path.join(cd, "..", "out"), os.path.dirname(os.path.abspath(excel)),
             os.path.dirname(os.path.abspath(takeoff)), os.environ.get("TAKEOFF_OUT")]
     return ["MARKUPS: " + f for f in MB.compuerta(canon_p, dirs)]

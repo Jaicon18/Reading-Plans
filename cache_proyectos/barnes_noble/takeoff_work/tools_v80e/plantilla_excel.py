@@ -801,9 +801,9 @@ def familias_faltantes(mats, fo, fam_canon, acc, familias):
         if v <= 1e-9:
             continue
         uf = str(_unidad_familia(fo, fam) or "lf").upper()
-        # v80f (R80e.16): una familia en SF que cae aquí es board / sheathing (waste de board, hoja 4x8), no metal
+        # v80f (R80e.16): una familia en SF que cae aquí es board / sheathing (waste de board, hoja de Inputs), no metal
         base = {"unit": "PCS" if uf in ("PCS", "EA") else uf, "metal": uf != "SF", "familia": fam,
-                "selling_unit": "4x8 ft sheet" if uf == "SF" else "piece", "source": f"familias_out.json '{fam}' (R80.4: canon family the run did not write)"}
+                "selling_unit": "4x12 ft sheet (Inputs)" if uf == "SF" else "piece", "source": f"familias_out.json '{fam}' (R80.4: canon family the run did not write)"}
         if fam == "metal stud blocking (362CR / STUD BLOCKING)" and fo.get("metal_blocking_by_origin"):
             for k, x in fo["metal_blocking_by_origin"].items():
                 if float(x or 0) > 0:
