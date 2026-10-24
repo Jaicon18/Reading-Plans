@@ -10,4 +10,5 @@
 
 ## 2026-10-24 — RFI-23 FRT blocking
 - Option A: take off with the counts (rows per detail included): stock room ~387 LF (7/A-413, 3 rows), receiving 69 LF (8A/A-413, 4 rows), office ~86 LF (3,4/A-412, 4 rows), break room cabinets 10.7 LF (6/A-412, 2 rows), restrooms 10 pcs 3/4" FRT plywood (21, 26/A-201).
-- Cafe menu boards (4/A-226A) FRT plywood: pending confirmation of quantity basis.
+- Cafe menu boards (4/A-226A): continuous 3/4" FRT plywood strip, 31" high, full length of wall C-E1-S (23.46 LF, A-221) = 60.6 SF (DERIVED: 23.46 x 31/12).
+- Q2 CLOSED 100%.
