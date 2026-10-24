@@ -1,0 +1,853 @@
+{
+ "walls": [
+  {
+   "id": "B-A-101-1",
+   "tag": "1A",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0001"
+   ],
+   "location": "North facade, west portion (exposed to EXTERIOR), Sales Area 101 - from NW inner corner to adjacent-tenant building edge",
+   "length_ft": 49.37,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face of furring y=560.40 pt, x 356.04 (west facade inner face) -> 800.40 (west edge of adjacent tenant building outline, no node drawn on wall): (800.40-356.04)/9 = 444.36/9. Furring lines 560.40 (finish face) / 557.64 / 555.84 (CMU inner face); CMU 548.64-555.84 = 7.2 pt (10\"). Face check: printed 15'-7\" from west inner face 356.04 to x=498 wall face 496.56 (140.52 pt = 15.61 ft). Transition point is an assumption, see doubts.",
+   "band": {
+    "ori": "H",
+    "c0": 555.84,
+    "c1": 560.4,
+    "lo": 356.04,
+    "hi": 800.4
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-1.png"
+  },
+  {
+   "id": "B-A-101-2",
+   "tag": "1",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0004",
+    "PT0005"
+   ],
+   "location": "North facade, east portion (abuts ADJACENT TENANT), Sales Area 101 and Storage 112",
+   "length_ft": 125.03,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=560.40, x 800.40 -> 1925.64 (east facade inner face): 1125.24/9. Runs behind Storage 112.",
+   "band": {
+    "ori": "H",
+    "c0": 555.84,
+    "c1": 560.4,
+    "lo": 800.4,
+    "hi": 1925.64
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-2.png"
+  },
+  {
+   "id": "B-A-101-3",
+   "tag": "1A",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0002",
+    "PT0003"
+   ],
+   "location": "West facade (EXTERIOR / Trash side), from NW inner corner to loading-zone angled wall",
+   "length_ft": 64.77,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face x=356.04, y 560.40 -> 1143.36 (meets inner face of angled loading wall). Includes door opening y 843.24-900.24 (6.33 ft). 582.96/9.",
+   "band": {
+    "ori": "V",
+    "c0": 351.6,
+    "c1": 356.04,
+    "lo": 560.4,
+    "hi": 1143.36
+   },
+   "thickness_measured_in": 5.92,
+   "img": "img/A-101_B-A-101-3.png"
+  },
+  {
+   "id": "B-A-101-4",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0010"
+   ],
+   "location": "Loading Zone angled wall (NE-SW diagonal with overhead door, keynote 12)",
+   "length_ft": 13.2,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Diagonal inner face from (356.04,1143.36) to (253.20,1202.76) = 118.76 pt /9. Overhead door opening (342.48,1151.16)-(259.20,1199.40) = 96.2 pt (10.69 ft) kept inside the wall; solid jambs only = 15.64+6.88 pt = 2.50 ft. CMU-face line of furring = 119.67 pt (13.30 ft).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     356.04,
+     1143.36
+    ],
+    "p1": [
+     253.2,
+     1202.76
+    ],
+    "faces_top": 13.2,
+    "faces_bottom": 13.3
+   },
+   "thickness_measured_in": 5.92,
+   "img": "img/A-101_B-A-101-4.png"
+  },
+  {
+   "id": "B-A-101-5",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0012"
+   ],
+   "location": "Loading Zone west angled facade (SW diagonal), Stock Room 111",
+   "length_ft": 23.67,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Diagonal inner face line from (253.20,1202.76) to (308.28,1408.56) = 213.04 pt /9. Stud-side line = 217.3 pt, CMU-face line = 220.03 pt (24.45 ft).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     253.2,
+     1202.76
+    ],
+    "p1": [
+     308.28,
+     1408.56
+    ],
+    "faces_top": 23.67,
+    "faces_bottom": 24.45
+   },
+   "thickness_measured_in": 6.05,
+   "img": "img/A-101_B-A-101-5.png"
+  },
+  {
+   "id": "B-A-101-6",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0016"
+   ],
+   "location": "South facade, west portion, Stock Room 111 (to west jamb of exterior door 10)",
+   "length_ft": 22.68,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=1408.56, x 308.28 (SW corner) -> 512.40 (west jamb of door 10). Check: printed 20'-11\" (308.28 -> 496.56 = 188.28 pt = 20.92 ft) + 5\" wall + 12.0 pt. Includes small opening x 399.84-422.40. 204.12/9. Transition assumed at door jamb, see doubts.",
+   "band": {
+    "ori": "H",
+    "c0": 1408.56,
+    "c1": 1413.12,
+    "lo": 308.28,
+    "hi": 512.4
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-6.png"
+  },
+  {
+   "id": "B-A-101-7",
+   "tag": "1",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0006",
+    "PT0007"
+   ],
+   "location": "South facade, middle portion: Corridor (door 10), Restrooms, Janitor, Break Room, Manager's Office, Cafe Workroom 104, Cafe 103",
+   "length_ft": 105.67,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=1408.56, x 512.40 -> 1463.40 (end of 3-line furring, start of storefront): 951.0/9. Includes exterior door 10 (512.40-551.40 = 4.33 ft). Check: printed 12'-11\" (1292.28 -> 1408.56) confirms the face. Portion x 1011.24-1463.40 sits behind the A-221 cafe wall (overlap, see report).",
+   "band": {
+    "ori": "H",
+    "c0": 1408.56,
+    "c1": 1413.12,
+    "lo": 512.4,
+    "hi": 1463.4
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-7.png"
+  },
+  {
+   "id": "B-A-101-8",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0014",
+    "PT0015"
+   ],
+   "location": "South facade, east portion: Cafe Seating Area (storefronts + piers) to SE corner",
+   "length_ft": 51.36,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=1408.56, x 1463.40 -> 1925.64 (SE inner corner): 462.24/9. Includes storefronts 1463.40-1607.40 and 1673.40-1817.40 (2 x 16.00 ft); solid piers 1607.40-1673.40 + 1817.40-1925.64 = 174.24 pt = 19.36 ft.",
+   "band": {
+    "ori": "H",
+    "c0": 1408.56,
+    "c1": 1413.12,
+    "lo": 1463.4,
+    "hi": 1925.64
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-8.png"
+  },
+  {
+   "id": "B-A-101-9",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0008",
+    "PT0009"
+   ],
+   "location": "East facade north axis (x=1925.64): pier at Storage 112, storefront, pier - Sales Area",
+   "length_ft": 26.8,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face x=1925.64, y 560.40 -> 801.60 (inner face of north jog): 241.2/9. Storefront 599.64-743.64 (16.00 ft) inside; solid piers 39.24+57.96 pt = 10.80 ft. Lines 1925.64/1928.40/1930.20 furring, CMU 1930.20-1937.40.",
+   "band": {
+    "ori": "V",
+    "c0": 1925.64,
+    "c1": 1930.2,
+    "lo": 560.4,
+    "hi": 801.6
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-9.png"
+  },
+  {
+   "id": "B-A-101-10",
+   "tag": "1C",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0017"
+   ],
+   "location": "East bump-out (Vestibule 100 zone), north jog wall",
+   "length_ft": 5.23,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=801.60, x 1925.64 -> 1972.68: 47.04/9.",
+   "band": {
+    "ori": "H",
+    "c0": 795.6,
+    "c1": 801.6,
+    "lo": 1925.64,
+    "hi": 1972.68
+   },
+   "thickness_measured_in": 8.0,
+   "img": "img/A-101_B-A-101-10.png"
+  },
+  {
+   "id": "B-A-101-11",
+   "tag": "1C",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0018",
+    "PT0019"
+   ],
+   "location": "East bump-out axis (x=1972.68): piers, storefront and Vestibule 100",
+   "length_ft": 40.64,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face x=1972.68, y 801.60 -> 1167.36: 365.76/9. Solid piers 801.60-839.76 and 1129.20-1167.36 = 76.32 pt = 8.48 ft; storefront/vestibule 839.76-1129.20 (32.16 ft) inside.",
+   "band": {
+    "ori": "V",
+    "c0": 1972.68,
+    "c1": 1978.68,
+    "lo": 801.6,
+    "hi": 1167.36
+   },
+   "thickness_measured_in": 8.0,
+   "img": "img/A-101_B-A-101-11.png"
+  },
+  {
+   "id": "B-A-101-12",
+   "tag": "1C",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0020"
+   ],
+   "location": "East bump-out, south jog wall",
+   "length_ft": 5.23,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face y=1167.36, x 1925.64 -> 1972.68: 47.04/9.",
+   "band": {
+    "ori": "H",
+    "c0": 1167.36,
+    "c1": 1173.36,
+    "lo": 1925.64,
+    "hi": 1972.68
+   },
+   "thickness_measured_in": 8.0,
+   "img": "img/A-101_B-A-101-12.png"
+  },
+  {
+   "id": "B-A-101-13",
+   "tag": "1B",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0011",
+    "PT0013"
+   ],
+   "location": "East facade south axis (x=1925.64): pier, storefront, pier - Cafe Seating Area",
+   "length_ft": 26.8,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Inner face x=1925.64, y 1167.36 -> 1408.56 (SE inner corner): 241.2/9. Storefront 1225.32-1369.32 (16.00 ft) inside; solid piers 57.96+39.24 pt = 10.80 ft.",
+   "band": {
+    "ori": "V",
+    "c0": 1925.64,
+    "c1": 1930.2,
+    "lo": 1167.36,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 6.08,
+   "img": "img/A-101_B-A-101-13.png"
+  },
+  {
+   "id": "B-A-101-14",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0021"
+   ],
+   "location": "Storage 112, west wall",
+   "length_ft": 5.0,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 5'-0\" (Storage clear depth 560.40 -> 605.28 = 44.88 pt = 4.99 ft). Wall stops at north furring face and at the face of the Storage south wall (corner owned by south wall).",
+   "band": {
+    "ori": "V",
+    "c0": 1486.68,
+    "c1": 1490.52,
+    "lo": 560.4,
+    "hi": 605.28
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-14.png"
+  },
+  {
+   "id": "B-A-101-15",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0021"
+   ],
+   "location": "Storage 112, south wall (incl. door 14) to east facade storefront jamb",
+   "length_ft": 49.2,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector x 1486.68 -> 1929.48 = 442.8 pt /9. Check: printed 48'-4\" clear (1490.52 -> 1925.64 = 435.12 pt = 48.35 ft) + 5\" wall + 3.84 pt end into furring zone. Door 14 (1885.32-1912.32) inside.",
+   "band": {
+    "ori": "H",
+    "c0": 605.28,
+    "c1": 609.12,
+    "lo": 1486.68,
+    "hi": 1929.48
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-15.png"
+  },
+  {
+   "id": "B-A-101-16",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0022",
+    "PT0023"
+   ],
+   "location": "West partition line x=498 (Sales/perimeter zone to the west, Stock Room 111 / Corridor 110 to the east), north furring to south furring",
+   "length_ft": 94.24,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector y 560.40 (north furring face) -> 1408.56 (south furring face) = 848.16 pt /9. Includes door 11 (1175.52-1211.52, 4.0 ft) and the T with the y=1290 wall. Check: printed 20'-11\" ends at its west face 496.56.",
+   "band": {
+    "ori": "V",
+    "c0": 496.56,
+    "c1": 500.4,
+    "lo": 560.4,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-16.png"
+  },
+  {
+   "id": "B-A-101-17",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0024",
+    "PT0025",
+    "PT0026"
+   ],
+   "location": "Back-of-house north wall y=1290 (Sales Area / Corridor, Restrooms, Janitor, Break Room, Manager's Office), from x=498 wall to Cafe Workroom wall",
+   "length_ft": 56.76,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector x 500.40 (face of x=498 wall) -> 1011.24 (end of 5\" gray fill where the 6\" cafe wall of A-221 starts) = 510.84 pt /9. Includes door 4 (521.16-548.16).",
+   "band": {
+    "ori": "H",
+    "c0": 1288.56,
+    "c1": 1292.28,
+    "lo": 500.4,
+    "hi": 1011.24
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-17.png"
+  },
+  {
+   "id": "B-A-101-18",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0028"
+   ],
+   "location": "Corridor 110 east wall (Women's Restroom west wall)",
+   "length_ft": 7.92,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector y 1337.28 (owns corner with restroom front wall) -> 1408.56 (south furring face) = 71.28 pt /9.",
+   "band": {
+    "ori": "V",
+    "c0": 555.84,
+    "c1": 559.56,
+    "lo": 1337.28,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-18.png"
+  },
+  {
+   "id": "B-A-101-19",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0029",
+    "PT0030"
+   ],
+   "location": "Restroom front wall: Women's / Men's Restroom and Janitor Closet north wall with drinking-fountain recess (tagged segment = recess back wall)",
+   "length_ft": 25.85,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Tagged recess line y 1353.48-1357.32, x 618.12 -> 661.92 (43.80) + untagged returns x 618.12-621.84 and 658.20-661.92 (12.48 each) + untagged front line y 1337.28-1341.00: x 559.56 -> 621.84 (62.28, door 9 inside) and 658.20 -> 759.84 (101.64, door 8 and janitor door 7 inside). Sum 232.68 pt /9. Check printed chain 6\"+3'-4\"+3'-1\"+4'-0\"+3'-1\"+3'-4\"+6\" from 559.56 matches 564.06/594.06/621.81/657.81/685.56/715.56/720.06; 6\"+3'-0\"+6\" from 723.84 -> 759.84.",
+   "band": {
+    "ori": "H",
+    "c0": 1353.48,
+    "c1": 1357.32,
+    "lo": 618.12,
+    "hi": 661.92
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-19.png",
+   "segments": [
+    {
+     "ori": "H",
+     "c0": 1337.28,
+     "c1": 1341.0,
+     "lo": 559.56,
+     "hi": 621.84
+    },
+    {
+     "ori": "V",
+     "c0": 618.12,
+     "c1": 621.84,
+     "lo": 1341.0,
+     "hi": 1353.48
+    },
+    {
+     "ori": "H",
+     "c0": 1353.48,
+     "c1": 1357.32,
+     "lo": 618.12,
+     "hi": 661.92
+    },
+    {
+     "ori": "V",
+     "c0": 658.2,
+     "c1": 661.92,
+     "lo": 1341.0,
+     "hi": 1353.48
+    },
+    {
+     "ori": "H",
+     "c0": 1337.28,
+     "c1": 1341.0,
+     "lo": 658.2,
+     "hi": 759.84
+    }
+   ]
+  },
+  {
+   "id": "B-A-101-20",
+   "tag": "5",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0032"
+   ],
+   "location": "Plumbing chase wall between Women's and Men's Restrooms",
+   "length_ft": 5.69,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Vector y 1357.32 (face of recess wall) -> 1408.56 (south furring face) = 51.24 pt /9. Thicker fill 5.28 pt.",
+   "band": {
+    "ori": "V",
+    "c0": 637.2,
+    "c1": 642.48,
+    "lo": 1357.32,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 7.04,
+   "img": "img/A-101_B-A-101-20.png"
+  },
+  {
+   "id": "B-A-101-21",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0031"
+   ],
+   "location": "Men's Restroom / Janitor Closet 107 separation wall",
+   "length_ft": 7.5,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 7'-6\" (1341.00 -> 1408.56 = 67.56 pt = 7.51 ft).",
+   "band": {
+    "ori": "V",
+    "c0": 720.12,
+    "c1": 723.84,
+    "lo": 1341.0,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-21.png"
+  },
+  {
+   "id": "B-A-101-22",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0031"
+   ],
+   "location": "Janitor Closet 107 / Break Room 106 wall (x=761.7), y=1290 wall to south furring, incl. door 5",
+   "length_ft": 12.92,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 12'-11\" (1292.28 -> 1408.56 = 116.28 pt = 12.92 ft); chain 6\"+3'-0\"+9'-5\" also printed. Door 1296.84-1323.84 inside.",
+   "band": {
+    "ori": "V",
+    "c0": 759.84,
+    "c1": 763.56,
+    "lo": 1292.28,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-22.png"
+  },
+  {
+   "id": "B-A-101-23",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0027"
+   ],
+   "location": "Break Room 106 / Manager's Office 105 wall (x=933), incl. door 6",
+   "length_ft": 12.92,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 12'-11\" (same faces 1292.28 -> 1408.56 = 116.28 pt); chain 6\"+3'-0\" at the door printed. Door 1296.84-1323.84 inside.",
+   "band": {
+    "ori": "V",
+    "c0": 931.08,
+    "c1": 934.8,
+    "lo": 1292.28,
+    "hi": 1408.56
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-23.png"
+  },
+  {
+   "id": "B-A-101-24",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0033"
+   ],
+   "location": "Cafe Seating Area, west partial-height group: west end pier",
+   "length_ft": 3.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 3'-8\" (1166.04 -> 1199.04 = 33.0 pt = 3.67 ft).",
+   "band": {
+    "ori": "V",
+    "c0": 1499.28,
+    "c1": 1503.12,
+    "lo": 1166.04,
+    "hi": 1199.04
+   },
+   "thickness_measured_in": 5.12,
+   "img": "img/A-101_B-A-101-24.png"
+  },
+  {
+   "id": "B-A-101-25",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0035"
+   ],
+   "location": "Cafe Seating Area, west partial-height group: long wall + untagged east end pier (joined return)",
+   "length_ft": 15.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 12'-0\" (between piers) + printed 3'-8\" (pier) = 15'-8\". Vector: tagged line y 1181.76-1185.48, x 1503.12 -> 1611.12 = 108.0 pt (12.00 ft) + untagged end pier x 1611.12-1614.84, y 1166.04 -> 1199.04 = 33.0 pt (3'-8\", T-return joined). 141.0/9.",
+   "band": {
+    "ori": "H",
+    "c0": 1181.76,
+    "c1": 1185.48,
+    "lo": 1503.12,
+    "hi": 1611.12
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-25.png",
+   "segments": [
+    {
+     "ori": "H",
+     "c0": 1181.76,
+     "c1": 1185.48,
+     "lo": 1503.12,
+     "hi": 1611.12
+    },
+    {
+     "ori": "V",
+     "c0": 1611.12,
+     "c1": 1614.84,
+     "lo": 1166.04,
+     "hi": 1199.04
+    }
+   ]
+  },
+  {
+   "id": "B-A-101-26",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0036"
+   ],
+   "location": "Cafe Seating Area, east partial-height group: long wall + untagged west end pier (joined return)",
+   "length_ft": 15.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 12'-0\" (between piers) + printed 3'-8\" (pier) = 15'-8\". Vector: tagged line y 1181.76-1185.48, x 1725.12 -> 1833.12 = 108.0 pt (12.00 ft) + untagged end pier x 1721.28-1725.12, y 1166.04 -> 1199.04 = 33.0 pt. 141.0/9.",
+   "band": {
+    "ori": "H",
+    "c0": 1181.76,
+    "c1": 1185.48,
+    "lo": 1725.12,
+    "hi": 1833.12
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-26.png",
+   "segments": [
+    {
+     "ori": "H",
+     "c0": 1181.76,
+     "c1": 1185.48,
+     "lo": 1725.12,
+     "hi": 1833.12
+    },
+    {
+     "ori": "V",
+     "c0": 1721.28,
+     "c1": 1725.12,
+     "lo": 1166.04,
+     "hi": 1199.04
+    }
+   ]
+  },
+  {
+   "id": "B-A-101-27",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0034"
+   ],
+   "location": "Cafe Seating Area, east partial-height group: east end pier",
+   "length_ft": 3.67,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed 3'-8\" (1166.04 -> 1199.04 = 33.0 pt).",
+   "band": {
+    "ori": "V",
+    "c0": 1833.12,
+    "c1": 1836.84,
+    "lo": 1166.04,
+    "hi": 1199.04
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-27.png"
+  },
+  {
+   "id": "B-A-101-28",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0037"
+   ],
+   "location": "Sales Area, hourglass display feature: north end cap (U-shaped box, printed 9'-0\" wide)",
+   "length_ft": 15.16,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline of hatched ring: bar 77.28 + 2 end returns 12.54 + stubs to arc junctions 17.25+16.83 = 136.44 pt /9. Outer bar = printed 9'-0\" (1545.48 -> 1626.48 = 81.0 pt). Box outer 81.0 x 16.56 pt, hollow 73.56 x 8.52 pt.",
+   "band": {
+    "ori": "BOX",
+    "x0": 1545.48,
+    "y0": 833.76,
+    "x1": 1626.48,
+    "y1": 850.32
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-28.png"
+  },
+  {
+   "id": "B-A-101-29",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0037"
+   ],
+   "location": "Sales Area, hourglass display feature: west curved wall (R=32'-9\")",
+   "length_ft": 25.08,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed arc length 25'-1\" (= 225.75 pt). Vector: R32'-9\" face arc (1562.73,1065.72)->(1562.65,845.09) = 226.14 pt (25.13 ft), computed R = 32.74 ft; opposite face incl. merged middle zone and cap penetration = 236.07 pt (26.23 ft); chord 220.63 pt. Arcs of both curved walls merge (touch) between y 922 and 989.",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1562.65,
+     845.09
+    ],
+    "p1": [
+     1562.73,
+     1065.72
+    ],
+    "faces_top": 25.13,
+    "faces_bottom": 26.23
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-29.png"
+  },
+  {
+   "id": "B-A-101-30",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0037"
+   ],
+   "location": "Sales Area, hourglass display feature: east curved wall (R=32'-9\")",
+   "length_ft": 25.08,
+   "length_status": "CONFIRMED",
+   "length_source": "A-101",
+   "length_op": "Printed arc length 25'-1\". Vector: R32'-9\" face polyline (1610.04,845.28)->(1609.92,1065.48) = 225.67 pt (25.07 ft), computed R = 32.72 ft; opposite face = 235.86 pt (26.21 ft).",
+   "band": {
+    "ori": "D",
+    "p0": [
+     1610.04,
+     845.28
+    ],
+    "p1": [
+     1609.92,
+     1065.48
+    ],
+    "faces_top": 25.07,
+    "faces_bottom": 26.21
+   },
+   "thickness_measured_in": 3.47,
+   "img": "img/A-101_B-A-101-30.png"
+  },
+  {
+   "id": "B-A-101-31",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "tag_ids": [
+    "PT0037"
+   ],
+   "location": "Sales Area, hourglass display feature: south end cap (TYP. copy of tagged north cap, untagged)",
+   "length_ft": 15.15,
+   "length_status": "DERIVED",
+   "length_source": "A-101",
+   "length_op": "Centerline of hatched ring: bar 77.28 + 2 returns 12.60 + stubs 17.27+16.57 = 136.31 pt /9. Outer bar 81.0 pt = 9'-0\" (printed dims 5\" + 8'-2\" + 5\" at south cap). Mirror of north cap; tag PT0037 says TYP.",
+   "band": {
+    "ori": "BOX",
+    "x0": 1545.48,
+    "y0": 1060.68,
+    "x1": 1626.48,
+    "y1": 1077.24
+   },
+   "thickness_measured_in": 4.96,
+   "img": "img/A-101_B-A-101-31.png"
+  }
+ ],
+ "tags_descartados": []
+}
