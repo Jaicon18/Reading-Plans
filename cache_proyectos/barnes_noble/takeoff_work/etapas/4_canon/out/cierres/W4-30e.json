@@ -1,0 +1,118 @@
+{
+  "muro": 53,
+  "tag": "4",
+  "ubicacion": "W4-30e - Hourglass display feature, east curved wall (R=32'-9\"), chord 5/6 from north (A-101)",
+  "largo": {
+    "v": 4.18,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "Stage 3 resolution: reading B B-A-101-30e (Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) (4/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 7.5,
+    "estado": "CONFIRMADO",
+    "fuente": "7'-6\" A.F.F. T.O. WALL - 4/A-410",
+    "operacion": "height per 7'-6\" A.F.F. T.O. WALL - 4/A-410",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Sales Area 101",
+      "alto_board": {
+        "v": 7.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "4/A-410 T.O. WALL (board full height) (4/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    },
+    {
+      "cuarto": "Sales Area 101",
+      "alto_board": {
+        "v": 7.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "4/A-410 T.O. WALL (board full height) (4/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 6,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(4.18, 16.0)] = 5 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 6 x 1 row(s) + 0 total = 6 full x 7.5 + cripples 0.0 LF = 45.0 LF [L N72 +1] (4/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 4.18,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 4.18 x 1 = 4.18; top 4.18 x 1 = 4.18; bracing ROUNDUP(7.5 x 12 / 48.0) - 1 = 1 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 4.18 (4/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 4.18,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 4.18 x 1 = 4.18; top 4.18 x 1 = 4.18; bracing ROUNDUP(7.5 x 12 / 48.0) - 1 = 1 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 4.18 (4/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 4.18,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 4.18 x 1 = 4.18; top 4.18 x 1 = 4.18; bracing ROUNDUP(7.5 x 12 / 48.0) - 1 = 1 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 4.18 (4/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Sales Area 101": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 31.35,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "4.18 x 7.5 x 1 - 0.0 = 31.35 (4/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A-101",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "2d3e8afdaaa66e98"
+}

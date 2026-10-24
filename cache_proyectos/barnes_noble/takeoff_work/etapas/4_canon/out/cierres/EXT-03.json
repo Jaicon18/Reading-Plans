@@ -1,0 +1,108 @@
+{
+  "muro": 3,
+  "tag": "1A",
+  "ubicacion": "EXT-03 - West facade (Trash / Exterior side), opening inside wall per R70.3 (A-101)",
+  "largo": {
+    "v": 64.78,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "vector centerline 64.78 ft (1A/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 24.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 24'-0\" V.I.F. - 2/A-400B (west facade)",
+    "operacion": "height per B.O. DECK ABOVE EL. 24'-0\" V.I.F. - 2/A-400B (west facade)",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "no board face",
+      "alto_board": {
+        "v": 0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "5/8\" GYP BD BY FUTURE TENANT (1A/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1A/A-410)",
+        "unidad": null
+      },
+      "tipo": "none",
+      "capas": 1
+    }
+  ],
+  "aberturas": [
+    {
+      "clase": "puerta",
+      "ref": "Door 13",
+      "w": 6.33,
+      "h": 7.0,
+      "head": "A-500 door schedule height",
+      "sill": null,
+      "piezas": null,
+      "header": "metal",
+      "header_source": null
+    }
+  ],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 55,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(64.78, 16.0)] = 50 - 4 dentro de R.O. + 4 jambs + nodos 1/row = 51 x 1 row(s) + 0 total = 51 full x 24.0 + cripples 68.0 LF = 1292.0 LF [L N4 +1] (1A/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 64.78,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 64.78 x 1 = 64.78; top 64.78 x 1 = 64.78; bracing ROUNDUP(24.0 x 12 / 48.0) - 1 = 5 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 323.9 (1A/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 64.78,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 64.78 x 1 = 64.78; top 64.78 x 1 = 64.78; bracing ROUNDUP(24.0 x 12 / 48.0) - 1 = 5 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 323.9 (1A/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 323.9,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 64.78 x 1 = 64.78; top 64.78 x 1 = 64.78; bracing ROUNDUP(24.0 x 12 / 48.0) - 1 = 5 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 323.9 (1A/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED here: header NOT CALLED - no header schedule; 1/A-500 draws no header; RFI-09 carries the delta",
+    "BOARD": "EXCLUDED: 5/8\" GYP BD BY FUTURE TENANT (1A/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1A/A-410)",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: its openings are Door 13 (puerta). Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "0386e103a65d3659"
+}

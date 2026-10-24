@@ -1,0 +1,96 @@
+{
+  "muro": 16,
+  "tag": "1B",
+  "ubicacion": "EXT-17 - East facade, pier north of Vestibule bump-out (A-101)",
+  "largo": {
+    "v": 6.44,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "vector centerline 6.44 ft (1B/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.583,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-7\" V.I.F. - 2/A-400A (east facade)",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "no board face",
+      "alto_board": {
+        "v": 0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1B/A-410)",
+        "unidad": null
+      },
+      "tipo": "none",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 6,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(6.44, 16.0)] = 6 - 0 dentro de R.O. + 0 jambs + nodos 0/row = 6 x 1 row(s) + 0 total = 6 full x 25.583 + cripples 0.0 LF = 153.5 LF [sin extras de nodo] (1B/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 6.44,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 6.44 x 1 = 6.44; top 6.44 x 1 = 6.44; bracing ROUNDUP(25.583 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 38.64 (1B/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 6.44,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 6.44 x 1 = 6.44; top 6.44 x 1 = 6.44; bracing ROUNDUP(25.583 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 38.64 (1B/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 38.64,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 6.44 x 1 = 6.44; top 6.44 x 1 = 6.44; bracing ROUNDUP(25.583 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 38.64 (1B/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A-101",
+    "BOARD": "EXCLUDED: 5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1B/A-410)",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "0aeeb70cd2a19a4b"
+}

@@ -47,7 +47,9 @@ RF = [
  ('RFI-20', 'Grab & Go header soffit (3/A-221, 6\'-2" x ~7"): framing to deck and its faces not dimensioned - not priced.', '3.73 SF GWB soffit + two faces 6.17 LF x (deck - 7\'-1")'),
  ('RFI-21', 'Cafe Seating GWB cloud edge: 6" fascia (4/A-121, measured on the detail, not dimensioned) and edge molding DGCM27.', '107.21 LF edge x 0.5 ft = 53.6 SF GWB + 107.21 LF edge trim'),
  ('RFI-22', 'Types 3 and 4: "F.R.P. over 5/8" plywood where shelving occurs" (3/A-410, 4/A-410) - fixture plan A-111 does not define the extent on the partial walls.', f'5/8" plywood + FRP on {lf(("3", "4"))} LF x height per face where shelving occurs'),
- ('RFI-23', 'Backing / blocking: P-201 water heater detail calls "PROVIDE 2x4 METAL STUD BACKING ON WALL", "(2) 1/4"x4" STEEL BACKING PLATES" and "STEEL BLOCKING BETWEEN STUDS @ ANCHOR LOCATION ONLY"; water heater location and mounting area not dimensioned on A-101 / P-101A. Blocking for restroom accessories / grab bars and wall-hung fixtures is not drawn on A-sheets. Not quantified - confirm locations and extent.', 'Per water heater: metal stud backing @ 2\'-0" O.C. over the mounting area + (2) 1/4"x4" steel backing plates (P-201); per grab bar / accessory: one blocking run = item length + 1\'-0" (nothing carried today)'),
+ ('RFI-23', 'FRT wood blocking / backing is called but not dimensioned: A-101 key notes C12 (12/A-412), C16 (8/A-413), C20 (6/A-412) "PROVIDE F.R.T. BLOCKING AS NEEDED"; 3/A-412 and 4/A-412 "F.R.T. BLOCKING IN WALL BEHIND GWB" (office); 13/A-412, 14/A-412 FRT wood blocking at cabinets / counter; 8A/A-413 "CONTINUOUS 2x4 F.R.T. WOOD BLOCKING (TYP.)" at receiving table; 7/A-413 and 7A/A-413 stock room shelving fastened to FRT wood blocking (C14, C27); P-201 water heater (EWH-2, unnumbered detail) 2x4 metal stud backing + steel backing plates. Rows / heights / extents not dimensioned - not quantified. Confirm extent or accept allowance.', 'Receiving table only: 17\'-3\" (8/A-413) x 3 rows read on 8A/A-413 = 51.75 LF 2x4 FRT [DERIVED, rows to verify]; office 3/A-412 + 4/A-412, breakroom 6/A-412, stock room shelving C14 / C27 (7/A-413) and water heater (P-201): + 1 row per shelf / counter line x elevation width - nothing carried today'),
+ ('RFI-24', 'Gypsum board control joints: none labeled or detailed on A-410, A-121, A-221 or A-510 ("CJ" only in the M-100 legend). ASTM C840 limits uninterrupted wall runs to 30 ft; type 2 walls W2-01 (48.77 LF), W2-03 (94.24 LF), W2-04 (56.76 LF) exceed it. Not carried - confirm.', 'Type 2: floor(L / 30) = 1 + 3 + 1 = 5 joints x 25.0 ft x 2 faces = + 250.0 LF control joint; if RFI-01 brings exterior gyp bd into scope: EXT-02 5 x 25.0 + EXT-03 2 x 24.0 + EXT-07 1 x 25.0 = + 198.0 LF (one face)'),
+ ('RFI-25', 'A-101 key note C5: "DEMISING PARTITION TO BE PATCHED AND REPAIRED TO MAINTAIN EXISTING FIRE RATING. PREPARE WALLS FOR NEW FINISH. ADD GWB/FURRING AS REQUIRED." Extent of patching and of added GWB / furring on the existing demising walls is not defined. Not carried - confirm scope and extent.', 'Allowance basis: demising wall LF x height x 1 face of 5/8" Type X gyp bd (+ furring if required) - LF of C5 walls to be confirmed on A-101; nothing carried today'),
 ]
 rfis = [{'id': a, 'pregunta': b, 'delta': d} for a, b, d in RF]
 REV = [
@@ -65,8 +67,6 @@ REV = [
  ('detalle', None, 5, 'Cafe framed soffit faces (RFI-14)', '2/A-221'),
  ('detalle', None, 6, 'Ceiling system / carrying direction / cloud grid (RFI-15)', '5/A-121'),
  ('detalle', None, 7, 'Vestibule ceiling box not priced (RFI-16)', '4/A-210'),
- ('detalle', None, 8, 'Finish level not specified (A-510 finish schedule): Level 4 assumed for joint compound / tape', 'A-510'),
- ('detalle', None, 9, 'Backing / blocking not quantified: water heater P-201 and restroom accessories (RFI-23)', 'P-201'),
 ]
 n = len(REV)
 revisar = []

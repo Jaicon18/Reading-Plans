@@ -1,0 +1,106 @@
+{
+  "muro": 68,
+  "tag": "I",
+  "ubicacion": "C-E1-P.1 - 1'-0\" return at the top of the Workroom door pier (I tag) (A-221)",
+  "largo": {
+    "v": 1.0,
+    "estado": "DERIVADO",
+    "fuente": "A-221",
+    "operacion": "vector centerline 1.0 ft (segment 1 of C-E1-P) (I/A-221)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Cafe 103",
+      "alto_board": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "I/A-221 \"5/8\" GWB FROM TOP OF WD-1 TO DECK\": WD-1 top not printed - GWB loaded full height (53.3) - RFI-08 (I/A-221)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 3,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(1.0, 16.0)] = 2 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 3 x 1 row(s) + 0 total = 3 full x 25.0 + cripples 0.0 LF = 75.0 LF [L N89 +1] (I/A-221)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 1.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.0 x 1 = 1.0; top 1.0 x 1 = 1.0; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 6.0 (I/A-221)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 1.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.0 x 1 = 1.0; top 1.0 x 1 = 1.0; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 6.0 (I/A-221)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 6.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.0 x 1 = 1.0; top 1.0 x 1 = 1.0; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 6.0 (I/A-221)",
+        "unidad": null
+      }
+    },
+    "BOARD:Cafe 103": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "1.0 x 25.0 x 1 - 0.0 = 25.0 (I/A-221)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A-221",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "ded68973520e19f9"
+}

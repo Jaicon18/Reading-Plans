@@ -72,9 +72,10 @@ BOARDLIKE = ("BOARD",)
 #   con punto   A02.01 A12.01 S5.20 S2.20 A4.01 M01.01 P01.02 E02.01
 #   con guion   A-410 A-101 S-201   (exactamente 3 digitos, para no tragarse codigos
 #                                    de material como P-nn, GL-n, B-nn, TS-n, CT-nnX)
-RE_HOJA = re.compile(r"\b[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")
-RE_DET = re.compile(r"\b\d{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")
-RE_NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3})\b")   # v70: 7/S5.20, J/A09.23
+# v80e (R80e.14): hoja con guion admite letra final (A-400A, A-226A).
+RE_HOJA = re.compile(r"\b[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3}[A-Z]?)\b")
+RE_DET = re.compile(r"\b\d{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3}[A-Z]?)\b")
+RE_NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}(?:\d{1,3}\.\d{1,2}|-\d{3}[A-Z]?)\b")   # v70: 7/S5.20, J/A09.23
 
 
 class CierreRechazado(Exception):
@@ -209,7 +210,8 @@ class Wall:
 
     # Una cita legible por maquina: `6/A12.01`, `D/A9.22`, `11/S5.10`. La hoja admite 1 o 2
     # digitos antes del punto, porque la serie estructural se escribe S5.20, no S05.20.
-    RE_CITA = re.compile(r'(?:\d{1,2}|[A-Z])\s*/\s*[A-Z]{1,2}\d{1,2}\.\d{2}')
+    # v80e (R80e.14): también hojas con guion y 3 dígitos (2/A-410, 1A/A-410, G/A-221, I/A-221).
+    RE_CITA = re.compile(r'(?:\d{1,2}|[A-Z]|\d[A-Z])\s*/\s*[A-Z]{1,2}(?:\d{1,2}\.\d{2}|-\d{3}[A-Z]?)')
 
     def partida(self, nombre, val: Val, unidad, formula=None):
         # TODA PARTIDA CITA HOJA + DETALLE (orden de Rodolfo, 2-oct-2026: "nunca dejes de usar

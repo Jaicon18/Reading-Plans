@@ -1,0 +1,106 @@
+{
+  "muro": 67,
+  "tag": "E1",
+  "ubicacion": "C-E1-S - South wall, Cafe Sales 103 (in front of exterior wall) (A-221)",
+  "largo": {
+    "v": 23.46,
+    "estado": "DERIVADO",
+    "fuente": "A-221",
+    "operacion": "vector centerline 23.46 ft (E/A-221)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Cafe 103",
+      "alto_board": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "E/A-221 \"E1-1/2\" CEMENT BOARD\"; height not printed (A-221 sections break at top; A-225 finish plan; A-226A elevations give finish tops only) - loaded to wall height per rule 53.3 - RFI-06 (E/A-221)",
+        "unidad": null
+      },
+      "tipo": "1/2 cement board",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 21,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(23.46, 16.0)] = 19 - 0 dentro de R.O. + 0 jambs + nodos 2/row = 21 x 1 row(s) + 0 total = 21 full x 25.0 + cripples 0.0 LF = 525.0 LF [L N87 +1; L N88 +1] (E/A-221)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 23.46,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 23.46 x 1 = 23.46; top 23.46 x 1 = 23.46; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 140.76 (E/A-221)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 23.46,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 23.46 x 1 = 23.46; top 23.46 x 1 = 23.46; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 140.76 (E/A-221)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 140.76,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 23.46 x 1 = 23.46; top 23.46 x 1 = 23.46; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 140.76 (E/A-221)",
+        "unidad": null
+      }
+    },
+    "BOARD:Cafe 103": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 586.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "23.46 x 25.0 x 1 - 0.0 = 586.5 (E/A-221)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A-221",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "696060df1b0d532f"
+}

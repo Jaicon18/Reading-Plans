@@ -1,0 +1,175 @@
+{
+  "muro": 27,
+  "tag": "2",
+  "ubicacion": "W2-06.5 - Restrooms 108/109 + Janitor 107 north run with chase jog (doors 9, 8, 7 inside) (A-101)",
+  "largo": {
+    "v": 11.29,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "Stage 3 resolution: geometry of reading B B-A-101-19e (Vector x 658.20 -> 759.84 (face of x=761.7 wall) = 101.64 pt. Printed chain 3'-1\"+3'-4\"+6\" + 5\" wall + 6\"+3'-0\"+6\".) (2/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Corridor 110",
+      "alto_board": {
+        "v": 9.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "ACT-3 9'-0\" (A-121) + 6\" above suspended ceiling (A-410 partition note 3, 2/A-410) = 9.5 (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    },
+    {
+      "cuarto": "Men's Restroom 108",
+      "alto_board": {
+        "v": 9.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410) (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    },
+    {
+      "cuarto": "Janitor Closet 107",
+      "alto_board": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "OPEN TO DECK (A-121) - board to deck, 2/A-410; greenboard per A-410 partition note 7 = wall height 25.0 (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    }
+  ],
+  "aberturas": [
+    {
+      "clase": "puerta",
+      "ref": "Door 8",
+      "w": 3.33,
+      "h": 7.0,
+      "head": "A-500 door schedule height",
+      "sill": null,
+      "piezas": null,
+      "header": "metal",
+      "header_source": null
+    },
+    {
+      "clase": "puerta",
+      "ref": "Door 7",
+      "w": 3.0,
+      "h": 7.0,
+      "head": "A-500 door schedule height",
+      "sill": null,
+      "piezas": null,
+      "header": "metal",
+      "header_source": null
+    }
+  ],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 19,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(11.29, 16.0)] = 10 - 4 dentro de R.O. + 8 jambs + nodos 1/row = 15 x 1 row(s) + 0 total = 15 full x 25.0 + cripples 72.0 LF = 447.0 LF [T N35 +1] (2/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 11.29,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 11.29 x 1 = 11.29; top 11.29 x 1 = 11.29; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 67.74 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 11.29,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 11.29 x 1 = 11.29; top 11.29 x 1 = 11.29; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 67.74 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 67.74,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 11.29 x 1 = 11.29; top 11.29 x 1 = 11.29; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 6.33 de vano] -> 67.74 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Corridor 110": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 107.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "11.29 x 9.5 x 1 - 0.0 = 107.25 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Men's Restroom 108": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 61.92,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "6.88 x 9.0 x 1 - 0.0 = 61.92 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Janitor Closet 107": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 110.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "4.41 x 25.0 x 1 - 0.0 = 110.25 (2/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED here: header NOT CALLED - no header schedule; 1/A-500 draws no header; RFI-09 carries the delta",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: its openings are Door 8 (puerta), Door 7 (puerta). Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "c41ac4e07edec979"
+}

@@ -1,0 +1,141 @@
+{
+  "muro": 18,
+  "tag": "2",
+  "ubicacion": "W2-01 - Storage 112 south wall (door 14, 3'-0\" printed, inside wall) (A-101)",
+  "largo": {
+    "v": 48.77,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "vector centerline 48.77 ft (2/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Storage 112",
+      "alto_board": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "OPEN TO DECK (A-121) - board to deck, 2/A-410 = wall height 25.0 (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    },
+    {
+      "cuarto": "Sales Area 101",
+      "alto_board": {
+        "v": 25.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "OPEN TO DECK (A-121) - board to deck, 2/A-410 \"EXTEND GYPSUM BOARD TO DECK IN LOCATIONS WITH NO CEILING\" = wall height 25.0 (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    }
+  ],
+  "aberturas": [
+    {
+      "clase": "puerta",
+      "ref": "Door 14",
+      "w": 3.0,
+      "h": 7.0,
+      "head": "A-500 door schedule height",
+      "sill": null,
+      "piezas": null,
+      "header": "metal",
+      "header_source": null
+    }
+  ],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 43,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(48.77, 16.0)] = 38 - 2 dentro de R.O. + 4 jambs + nodos 1/row = 41 x 1 row(s) + 0 total = 41 full x 25.0 + cripples 36.0 LF = 1061.0 LF [L N23 +1] (2/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 48.77,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 48.77 x 1 = 48.77; top 48.77 x 1 = 48.77; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 3.0 de vano] -> 292.62 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 48.77,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 48.77 x 1 = 48.77; top 48.77 x 1 = 48.77; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 3.0 de vano] -> 292.62 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 292.62,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 48.77 x 1 = 48.77; top 48.77 x 1 = 48.77; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) [fila 4.0 ft cruza 3.0 de vano] -> 292.62 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Storage 112": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 1219.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "48.77 x 25.0 x 1 - 0.0 = 1219.25 (2/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Sales Area 101": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 1219.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "48.77 x 25.0 x 1 - 0.0 = 1219.25 (2/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED here: header NOT CALLED - no header schedule; 1/A-500 draws no header; RFI-09 carries the delta",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: its openings are Door 14 (puerta). Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "1d29dee368faeaa6"
+}

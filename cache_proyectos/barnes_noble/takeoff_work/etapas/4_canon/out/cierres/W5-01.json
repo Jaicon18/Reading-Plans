@@ -1,0 +1,129 @@
+{
+  "muro": 31,
+  "tag": "5",
+  "ubicacion": "W5-01 - Plumbing wall between Women's 109 / Men's 108 (A-101)",
+  "largo": {
+    "v": 5.7,
+    "estado": "DERIVADO",
+    "fuente": "A-101",
+    "operacion": "vector centerline 5.7 ft (5/A-410)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 25.0,
+    "estado": "CONFIRMADO",
+    "fuente": "B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "operacion": "height per B.O. DECK ABOVE EL. 25'-0\" V.I.F. - 1/A-400A, 1/A-400B",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Women's Restroom 109",
+      "alto_board": {
+        "v": 9.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410) (5/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    },
+    {
+      "cuarto": "Men's Restroom 108",
+      "alto_board": {
+        "v": 9.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410) (5/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 regular",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 8,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(5.7, 16.0)] = 6 - 0 dentro de R.O. + 0 jambs + nodos 2/row = 8 x 1 row(s) + 0 total = 8 full x 25.0 + cripples 0.0 LF = 200.0 LF [T N42 +1; T N43 +1] (5/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 5.7,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 5.7 x 1 = 5.7; top 5.7 x 1 = 5.7; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 34.2 (5/A-410)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 5.7,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 5.7 x 1 = 5.7; top 5.7 x 1 = 5.7; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 34.2 (5/A-410)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 34.2,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 5.7 x 1 = 5.7; top 5.7 x 1 = 5.7; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 34.2 (5/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Women's Restroom 109": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 51.3,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "5.7 x 9.0 x 1 - 0.0 = 51.3 (5/A-410)",
+        "unidad": null
+      }
+    },
+    "BOARD:Men's Restroom 108": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 51.3,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "5.7 x 9.0 x 1 - 0.0 = 51.3 (5/A-410)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A-101",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
+    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
+    "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "599719ce220a147b"
+}
