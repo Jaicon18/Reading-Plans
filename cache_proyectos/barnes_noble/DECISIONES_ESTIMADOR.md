@@ -25,4 +25,5 @@
 
 ## 2026-10-24 — RFI-27 Type X
 - Option A: ALL 5/8" gyp bd on new walls = Type X (A-001A). Quantity recomputed after perimeter exclusion.
-- Pending sub-question: W.R. faces (RFI-11) as W.R. Type X or plain W.R.
+- W.R. faces (RFI-11) = 5/8" Type X W.R.
+- Q4 CLOSED 100%. Q5 (RFI-07) and Q6 (RFI-02) N/A after RFI-01 (perimeter existing). ALL QUESTIONS CLOSED.
