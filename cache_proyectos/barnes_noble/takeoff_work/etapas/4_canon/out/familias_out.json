@@ -1,37 +1,39 @@
 {
  "familias": {
   "2-1/2\" stud": 0.0,
-  "8\" stud (todos los gauges)": 2332.99,
-  "6\" stud (todos los gauges)": 2925.0,
-  "3-5/8\" stud (todos los gauges)": 16812.96,
+  "8\" stud (todos los gauges)": 0.0,
+  "6\" stud (todos los gauges)": 2900.0,
+  "3-5/8\" stud (todos los gauges)": 10120.39,
   "1-5/8\" stud": 0.0,
   "6\" parapet stud": 0.0,
-  "bottom track (todos)": 1051.87,
-  "top / deflection track (todos)": 1051.87,
+  "bottom track (todos)": 634.44,
+  "top / deflection track (todos)": 634.44,
   "track de ceilings / soffits": 385.99,
-  "bracing C.R. channel": 5230.74,
+  "bracing C.R. channel": 2827.81,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
   "sill track": 0.0,
   "furring channel": 493.02,
   "carrying channel": 341.09,
   "hanger wire": 1438.0,
-  "5/8\" gyp board regular (walls + ceilings)": 16562.77,
+  "5/8\" gyp board regular (walls + ceilings)": 981.38,
   "5/8\" gyp MOISTURE RESISTANT": 0.0,
   "ballistic panel": 0.0,
   "3/8\" gyp board": 0.0,
   "5/8\" glass mat sheathing": 0.0,
   "5/8\" EXTERIOR gyp sheathing": 0.0,
-  "1/2\" EXTERIOR gyp sheathing": 2469.22,
-  "FRT plywood (SF)": 2591.9,
-  "FRT blocking": 0.0,
+  "1/2\" EXTERIOR gyp sheathing": 0.0,
+  "FRT plywood (SF)": 2665.82,
+  "FRT blocking": 552.27,
+  "5/8\" gyp board Type X": 14557.36,
+  "5/8\" gyp Type X W.R.": 1024.02,
   "metal stud blocking (362CR / STUD BLOCKING)": 0.0,
   "metal trim (corner bead, casing, shadow molding)": 891.72,
   "cement board": 851.4,
   "FRP": 0.0,
   "sealant at base of gypsum (exterior)": 0.0,
   "Level 5 finish": 0.0,
-  "additional head track": 19.0,
+  "additional head track": 0.0,
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
@@ -39,9 +41,9 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19875.32,
-  "framing screws": 4556.0,
-  "slab pins": 1051.87,
+  "drywall screws": 19875.31,
+  "framing screws": 3080.0,
+  "slab pins": 634.44,
   "expansion anchors": 0.0,
   "joint compound": 1192.52,
   "joint tape": 6128.22,
@@ -146,6 +148,30 @@
    "room": "Cafe 103 - 11'-0\" GWB zone",
    "source": "A-121",
    "operacion": "framed_soffit: ROUNDUP(23.25/2)+1 = 13 joists x 4.716 = 61.31 LF 3-5/8\" joists; sin carrying ni hangers; board 109.65 SF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-STOCK",
+   "source": "7/A-413",
+   "operacion": "387.0 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-RECEIVING",
+   "source": "8A/A-413",
+   "operacion": "69.0 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-OFFICE",
+   "source": "4/A-412",
+   "operacion": "85.6 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-BREAK",
+   "source": "6/A-412",
+   "operacion": "10.67 LF"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -253,6 +279,20 @@
    "operacion": "strip 3.17 x 2.708 = 8.58 SF (no es blocking ni sill)"
   },
   {
+   "familia": "FRT plywood (SF)",
+   "ref": "MENU-BOARD-FRT",
+   "source": "4/A-226A",
+   "material": "frt_3_4",
+   "operacion": "strip 23.46 x 2.583 = 60.6 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "RESTROOM-BACKING-FRT",
+   "source": "21/A-201",
+   "material": "frt_3_4",
+   "operacion": "strip 13.33 x 1.0 = 13.33 SF (no es blocking ni sill)"
+  },
+  {
    "familia": "metal trim (corner bead, casing, shadow molding)",
    "ref": "Corner bead - type 3 partial height walls (top edges + free ends)",
    "kind": "corner_bead",
@@ -296,19 +336,11 @@
   },
   {
    "familia": "additional head track",
-   "valor": 7.66,
+   "valor": 0.0,
    "unidad": "lf",
-   "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
-   "operacion": "Door 13 (EXT-03): (6.33 + 2 x 0.667) x 1 = 7.66"
-  },
-  {
-   "familia": "additional head track",
-   "valor": 11.33,
-   "unidad": "lf",
-   "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
-   "operacion": "Door 12 (EXT-04): (10.0 + 2 x 0.667) x 1 = 11.33"
+   "estado": "DERIVADO",
+   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"",
+   "operacion": "no openings > 4'-0\" in stud walls"
   },
   {
    "familia": "stud reinforcement MEP",
@@ -360,11 +392,11 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19875.32,
+   "valor": 19875.31,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 19875.32"
+   "operacion": "1.2 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 19875.31"
   },
   {
    "familia": "joint compound",
@@ -372,7 +404,7 @@
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 1192.52"
+   "operacion": "0.072 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 1192.52"
   },
   {
    "familia": "joint tape",
@@ -380,23 +412,23 @@
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 6128.22"
+   "operacion": "0.37 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 6128.22"
   },
   {
    "familia": "framing screws",
-   "valor": 4556,
+   "valor": 3080,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 1139 stud pieces [studs_nodos 1031; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 4556"
+   "operacion": "4 x 770 stud pieces [studs_nodos 662; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3080"
   },
   {
    "familia": "slab pins",
-   "valor": 1051.87,
+   "valor": 634.44,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)",
-   "operacion": "interior bottom track on slab 1051.87 LF (87 walls, x rows) / 1.0 = 1051.87"
+   "operacion": "interior bottom track on slab 634.44 LF (70 walls, x rows) / 1.0 = 634.44"
   },
   {
    "familia": "expansion anchors",
@@ -456,9 +488,6 @@
   }
  ],
  "avisos": [
-  "Door 13: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(6.33 + 1.333) x 2 = 15.33 LF - RFI-09",
-  "Door 12: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(10.0 + 1.333) x 2 = 22.67 LF - RFI-09",
-  "Door 10: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.49 + 1.333) x 2 = 9.65 LF - RFI-09",
   "Door 14: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
   "Door 11: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(4.0 + 1.333) x 2 = 10.67 LF - RFI-09",
   "Door 4: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
@@ -468,23 +497,6 @@
   "Door 5: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
   "Door 6: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
   "Door 3: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(4.0 + 1.333) x 2 = 10.67 LF - RFI-09",
-  "EXT-01: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-02: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-03: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-04: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-05: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-06: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-07: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-09: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-10: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-11: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-12: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-13: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-14: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-15: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-16: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-17: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "EXT-18: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "W2-01: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "W2-02: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "W2-03: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
@@ -555,8 +567,8 @@
   "C-B: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "C-D: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "C-C: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "RFI bracing: 59.48 LF de C.R. channel cruzan vanos sin studs (53.4 literal). Delta si no se cruzan: -59.48 LF",
-  "RFI bottom track: 49.48 LF de R.O. de doors NO descontados. Delta si se descuentan: -49.48 LF",
+  "RFI bracing: 29.66 LF de C.R. channel cruzan vanos sin studs (53.4 literal). Delta si no se cruzan: -29.66 LF",
+  "RFI bottom track: 29.66 LF de R.O. de doors NO descontados. Delta si se descuentan: -29.66 LF",
   "batt insulation: EXCLUDED (criterio del usuario 'no insulation')",
   "PENDIENTE stud reinforcement MEP: mep_sweep.registro con 14 coincidencias (< 25): sin registro verificado no se cruza",
   "PENDIENTE extra framing ATM: no atm_recess at the ATM opening and no extra_framing[]: declare atm_recess {source, drawn} (R80.3: every piece printed in the recess is counted; nothing printed = 0) or accesorios_none",
@@ -664,7 +676,7 @@
    "family": "FRT plywood (SF)",
    "key": "frt_3_4",
    "unit": "SF",
-   "net": 63.48
+   "net": 137.4
   },
   {
    "material": "Hanger wire 12 ga",
@@ -678,7 +690,7 @@
  ],
  "frt_plywood_by_material": {
   "FRT plywood substrate (5/8 in.)": 2528.42,
-  "FRT plywood substrate (3/4 in.)": 63.48
+  "FRT plywood substrate (3/4 in.)": 137.4
  },
  "metal_blocking_by_origin": {},
  "wood_blocking_lf": 0.0,
@@ -694,7 +706,7 @@
  "sealant_exterior_lf": 0.0,
  "accesorios": {
   "familias": {
-   "additional head track": 19.0,
+   "additional head track": 0.0,
    "stud reinforcement MEP": 0.0,
    "extra framing ATM": 0.0,
    "2-1/2\" CFMF coiling grille head": 0.0,
@@ -702,9 +714,9 @@
    "PVC trim at FRP": 0.0,
    "PAFs and duct sleeves": 0.0,
    "access panel": 0.0,
-   "drywall screws": 19875.32,
-   "framing screws": 4556.0,
-   "slab pins": 1051.87,
+   "drywall screws": 19875.31,
+   "framing screws": 3080.0,
+   "slab pins": 634.44,
    "expansion anchors": 0.0,
    "joint compound": 1192.52,
    "joint tape": 6128.22,
@@ -712,7 +724,7 @@
    "deflection clips": 0.0
   },
   "estado": {
-   "additional head track": "CRITERIO",
+   "additional head track": "DERIVADO",
    "stud reinforcement MEP": "RFI",
    "extra framing ATM": "DERIVADO",
    "2-1/2\" CFMF coiling grille head": null,
@@ -778,8 +790,8 @@
   {
    "familia": "slab pins",
    "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener schedule) vs 24\" (type K box)",
-   "delta_16in": -262.97,
-   "delta_24in": -525.93,
+   "delta_16in": -158.61,
+   "delta_24in": -317.22,
    "unidad": "pcs"
   },
   {
@@ -790,7 +802,7 @@
   }
  ],
  "estado_accesorios": {
-  "additional head track": "CRITERIO",
+  "additional head track": "DERIVADO",
   "stud reinforcement MEP": "RFI",
   "extra framing ATM": "DERIVADO",
   "2-1/2\" CFMF coiling grille head": null,
@@ -813,327 +825,6 @@
  },
  "partition_types": {
   "types": {
-   "1A": {
-    "walls": 2,
-    "lf": 81.11,
-    "filas": [
-     {
-      "ids": [
-       "EXT-01"
-      ],
-      "wall": "EXT-01",
-      "lf": 16.33,
-      "height_ft": 25.0,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "North facade, west end (behind Trash / Stock Room)",
-      "source": "1A/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-03"
-      ],
-      "wall": "EXT-03",
-      "lf": 64.78,
-      "height_ft": 24.0,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "West facade (Trash / Exterior side), opening inside wall per R70.3",
-      "source": "1A/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     }
-    ],
-    "status": "OK",
-    "jogs": []
-   },
-   "1": {
-    "walls": 2,
-    "lf": 216.32,
-    "filas": [
-     {
-      "ids": [
-       "EXT-02"
-      ],
-      "wall": "EXT-02",
-      "lf": 159.35,
-      "height_ft": 25.0,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "North facade, Sales Area + Storage 112 (Adjacent Tenant side)",
-      "source": "1/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-07"
-      ],
-      "wall": "EXT-07",
-      "lf": 56.97,
-      "height_ft": 25.0,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "South facade, Corridor 110 to Manager's Office 105 (corridor door inside wall)",
-      "source": "1/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     }
-    ],
-    "status": "OK",
-    "jogs": []
-   },
-   "1B": {
-    "walls": 9,
-    "lf": 99.74,
-    "filas": [
-     {
-      "ids": [
-       "EXT-04"
-      ],
-      "wall": "EXT-04",
-      "lf": 13.2,
-      "height_ft": 24.0,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 316.8,
-      "location": "West, angled wall at Loading Zone (overhead door 12 inside wall)",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-05"
-      ],
-      "wall": "EXT-05",
-      "lf": 23.67,
-      "height_ft": 24.0,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 568.08,
-      "location": "West, long angled wall at Loading Zone / Stock Room 111",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-06"
-      ],
-      "wall": "EXT-06",
-      "lf": 21.13,
-      "height_ft": 25.0,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 528.25,
-      "location": "South facade, Stock Room 111",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-09"
-      ],
-      "wall": "EXT-09",
-      "lf": 7.33,
-      "height_ft": 25.0,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 183.25,
-      "location": "South facade, pier between storefronts (Cafe Seating 102)",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-10"
-      ],
-      "wall": "EXT-10",
-      "lf": 12.81,
-      "height_ft": 25.0,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 320.25,
-      "location": "South facade, SE corner pier",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-11"
-      ],
-      "wall": "EXT-11",
-      "lf": 4.36,
-      "height_ft": 25.583,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 111.54,
-      "location": "East facade, SE corner pier",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-12"
-      ],
-      "wall": "EXT-12",
-      "lf": 6.44,
-      "height_ft": 25.583,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 164.75,
-      "location": "East facade, pier south of Vestibule bump-out",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-17"
-      ],
-      "wall": "EXT-17",
-      "lf": 6.44,
-      "height_ft": 25.583,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 164.75,
-      "location": "East facade, pier north of Vestibule bump-out",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-18"
-      ],
-      "wall": "EXT-18",
-      "lf": 4.36,
-      "height_ft": 25.583,
-      "stud_size": "8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 1.0,
-      "board_sf": 111.54,
-      "location": "East facade, NE corner pier (Storage 112)",
-      "source": "1B/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     }
-    ],
-    "status": "OK",
-    "jogs": []
-   },
-   "1C": {
-    "walls": 4,
-    "lf": 20.26,
-    "filas": [
-     {
-      "ids": [
-       "EXT-13"
-      ],
-      "wall": "EXT-13",
-      "lf": 5.89,
-      "height_ft": 25.583,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "East facade, south return of Vestibule bump-out",
-      "source": "1C/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-14"
-      ],
-      "wall": "EXT-14",
-      "lf": 4.24,
-      "height_ft": 25.583,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "East facade, bump-out face south of Vestibule storefront",
-      "source": "1C/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-15"
-      ],
-      "wall": "EXT-15",
-      "lf": 4.24,
-      "height_ft": 25.583,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "East facade, bump-out face north of Vestibule storefront",
-      "source": "1C/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     },
-     {
-      "ids": [
-       "EXT-16"
-      ],
-      "wall": "EXT-16",
-      "lf": 5.89,
-      "height_ft": 25.583,
-      "stud_size": "3-5/8\"",
-      "oc_in": 16,
-      "rows": 1,
-      "layers": 0.0,
-      "board_sf": 0.0,
-      "location": "East facade, north return of Vestibule bump-out",
-      "source": "1C/A-410",
-      "status": "DERIVADO",
-      "pendiente": []
-     }
-    ],
-    "status": "OK",
-    "jogs": []
-   },
    "2": {
     "walls": 8,
     "lf": 273.57,
@@ -2427,8 +2118,6 @@
    }
   ],
   "avisos": [
-   "EXT-04 (1B) sin band: wall propio, no se puede unir con colineales",
-   "EXT-05 (1B) sin band: wall propio, no se puede unir con colineales",
    "W4-28d (4) sin band: wall propio, no se puede unir con colineales",
    "W4-28e (4) sin band: wall propio, no se puede unir con colineales",
    "W4-29a (4) sin band: wall propio, no se puede unir con colineales",
@@ -2445,10 +2134,6 @@
    "W4-30f (4) sin band: wall propio, no se puede unir con colineales",
    "W4-31d (4) sin band: wall propio, no se puede unir con colineales",
    "W4-31e (4) sin band: wall propio, no se puede unir con colineales",
-   "EXT-12 (1B) entra 0.667 ft en la banda de EXT-13 (1C): el wall termina en la CARA del que cruza (R11, corregir canon)",
-   "EXT-13 (1C) entra 0.78 ft en la banda de EXT-12 (1B): el wall termina en la CARA del que cruza (R11, corregir canon)",
-   "EXT-16 (1C) entra 0.78 ft en la banda de EXT-17 (1B): el wall termina en la CARA del que cruza (R11, corregir canon)",
-   "EXT-17 (1B) entra 0.667 ft en la banda de EXT-16 (1C): el wall termina en la CARA del que cruza (R11, corregir canon)",
    "C-A-2 (A) sin band: wall propio, no se puede unir con colineales"
   ],
   "modo": "eje",
@@ -2461,14 +2146,12 @@
  },
  "track_by_element": {
   "bottom": {
-   "Bottom track 3-5/8\"": 761.54,
-   "Bottom track 8\"": 99.74,
+   "Bottom track 3-5/8\"": 443.85,
    "Bottom track 6\"": 118.59,
    "Bottom track - other framing (not a partition type, see source)": 72.0
   },
   "top": {
-   "Top / deflection track 3-5/8\"": 761.54,
-   "Top / deflection track 8\"": 99.74,
+   "Top / deflection track 3-5/8\"": 443.85,
    "Top / deflection track 6\"": 118.59,
    "Top / deflection track - other framing (not a partition type, see source)": 72.0
   }

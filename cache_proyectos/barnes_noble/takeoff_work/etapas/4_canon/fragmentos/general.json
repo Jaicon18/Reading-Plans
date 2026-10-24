@@ -237,21 +237,6 @@
   },
   "items": [
    {
-    "ref": "Door 13",
-    "wall": "EXT-03",
-    "source": "A-500 door 13 EXISTING V.I.F.; furring gap 6.33 ft (A-101 vector) - RFI-10"
-   },
-   {
-    "ref": "Door 12",
-    "wall": "EXT-04",
-    "source": "A-500 door 12 type D EXISTING V.I.F. (overhead); gap 10.00 ft along the angled wall (A-101 vector); head not printed - RFI-10"
-   },
-   {
-    "ref": "Door 10",
-    "wall": "EXT-07",
-    "source": "A-500 door 10 EXISTING V.I.F.; furring gap 3.49 ft (A-101 vector) - RFI-10"
-   },
-   {
     "ref": "Door 14",
     "wall": "W2-01",
     "source": "A-500 door 14 3'-0\" x 7'-0\"; vector gap 3.00 ft (A-101)"
@@ -303,6 +288,18 @@
    {
     "ref": "Door 2",
     "source": "A-500"
+   },
+   {
+    "ref": "Door 10",
+    "source": "A-500"
+   },
+   {
+    "ref": "Door 12",
+    "source": "A-500"
+   },
+   {
+    "ref": "Door 13",
+    "source": "A-500"
    }
   ],
   "none": [
@@ -313,6 +310,18 @@
    {
     "ref": "Door 2",
     "why": "Vestibule interior storefront doors (alum/glass, type A) - storefront system (A-101 C1/C3, A-210), not in a partition"
+   },
+   {
+    "ref": "Door 10",
+    "why": "EXISTING door (A-500 EXISTING V.I.F.) in an EXISTING perimeter wall (RFI-01, 1/DM-101 key note 16 / 15) - no framing in our scope"
+   },
+   {
+    "ref": "Door 12",
+    "why": "EXISTING door (A-500 EXISTING V.I.F.) in an EXISTING perimeter wall (RFI-01, 1/DM-101 key note 16 / 15) - no framing in our scope"
+   },
+   {
+    "ref": "Door 13",
+    "why": "EXISTING door (A-500 EXISTING V.I.F.) in an EXISTING perimeter wall (RFI-01, 1/DM-101 key note 16 / 15) - no framing in our scope"
    }
   ]
  },
@@ -496,179 +505,40 @@
    "source": "B/A-221",
    "room": "Cafe 103 (customer side)",
    "op": "3.17 LF x 2.708 ft (B/A-221 \"3/4\" FRT PLYWOOD (SUBSTRATE)\" to T.O. stud)"
+  },
+  {
+   "ref": "MENU-BOARD-FRT",
+   "wall": "C-E1-S",
+   "lf": 23.46,
+   "width_ft": 2.583,
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "label": "3/4\" FRT PLYWOOD (menu boards 4/A-226A)",
+   "source": "4/A-226A",
+   "room": "Cafe 103",
+   "img": "5_auditoria/img/F_menuboard_frt_blocking_4-A226A.png",
+   "op": "continuous strip 31\" high x full length of C-E1-S 23.46 LF (A-221) = 60.6 SF (estimator decision RFI-23)"
+  },
+  {
+   "ref": "RESTROOM-BACKING-FRT",
+   "wall": "W2-06.5",
+   "lf": 13.33,
+   "width_ft": 1.0,
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "label": "3/4\" FIRE RETARDANT PLYWOOD BACKING BOARD (TYP) AT ALL GRAB BARS",
+   "source": "21/A-201",
+   "room": "Men's / Women's Restroom",
+   "img": "5_auditoria/img/F_grabbar_backing_21-A201.png",
+   "op": "10 pcs (6 grab bars, 2 lavatories, 2 baby changing stations; 21/A-201, 26/A-201) x 16\" stud bay (1.333 ft, 21/A-201) x 1.0 ft height ASSUMED (not printed - Review Item) = 13.33 SF"
   }
  ],
  "nodes": [
   {
-   "id": "N1",
-   "kind": "L",
-   "walls": [
-    "EXT-01",
-    "EXT-03"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N2",
-   "kind": "L",
-   "walls": [
-    "EXT-01",
-    "EXT-02"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N3",
-   "kind": "L",
-   "walls": [
-    "EXT-02",
-    "EXT-18"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N4",
-   "kind": "L",
-   "walls": [
-    "EXT-03",
-    "EXT-04"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N5",
-   "kind": "L",
-   "walls": [
-    "EXT-04",
-    "EXT-05"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N6",
-   "kind": "L",
-   "walls": [
-    "EXT-05",
-    "EXT-06"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N7",
-   "kind": "L",
-   "walls": [
-    "EXT-06",
-    "EXT-07"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N8",
-   "kind": "free",
-   "wall": "EXT-07",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N9",
-   "kind": "free",
-   "wall": "EXT-09",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N10",
-   "kind": "free",
-   "wall": "EXT-09",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N11",
-   "kind": "free",
-   "wall": "EXT-10",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N12",
-   "kind": "L",
-   "walls": [
-    "EXT-10",
-    "EXT-11"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N13",
-   "kind": "free",
-   "wall": "EXT-11",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N14",
-   "kind": "L",
-   "walls": [
-    "EXT-12",
-    "EXT-13"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N15",
-   "kind": "free",
-   "wall": "EXT-12",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N16",
-   "kind": "L",
-   "walls": [
-    "EXT-13",
-    "EXT-14"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N17",
-   "kind": "free",
-   "wall": "EXT-14",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N18",
-   "kind": "L",
-   "walls": [
-    "EXT-15",
-    "EXT-16"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N19",
-   "kind": "free",
-   "wall": "EXT-15",
-   "source": "A-101 (vector: free end)"
-  },
-  {
-   "id": "N20",
-   "kind": "L",
-   "walls": [
-    "EXT-16",
-    "EXT-17"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
-  },
-  {
-   "id": "N21",
-   "kind": "free",
-   "wall": "EXT-17",
-   "source": "A-101 (vector: free end)"
-  },
-  {
    "id": "N22",
-   "kind": "L",
-   "walls": [
-    "EXT-18",
-    "W2-01"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
+   "kind": "free",
+   "wall": "W2-01",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N23",
@@ -681,10 +551,9 @@
   },
   {
    "id": "N24",
-   "kind": "T",
-   "branch": "W2-02",
-   "through": "EXT-02",
-   "source": "A-101 (vector: end on the body of EXT-02)"
+   "kind": "free",
+   "wall": "W2-02",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N25",
@@ -722,10 +591,9 @@
   },
   {
    "id": "N30",
-   "kind": "T",
-   "branch": "W2-05",
-   "through": "EXT-07",
-   "source": "A-101 (vector: end on the body of EXT-07)"
+   "kind": "free",
+   "wall": "W2-05",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N31",
@@ -779,10 +647,9 @@
   },
   {
    "id": "N37",
-   "kind": "T",
-   "branch": "W2-07",
-   "through": "EXT-07",
-   "source": "A-101 (vector: end on the body of EXT-07)"
+   "kind": "free",
+   "wall": "W2-07",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N38",
@@ -793,10 +660,9 @@
   },
   {
    "id": "N39",
-   "kind": "T",
-   "branch": "W2-08",
-   "through": "EXT-07",
-   "source": "A-101 (vector: end on the body of EXT-07)"
+   "kind": "free",
+   "wall": "W2-08",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N40",
@@ -807,10 +673,9 @@
   },
   {
    "id": "N41",
-   "kind": "T",
-   "branch": "W2-09",
-   "through": "EXT-07",
-   "source": "A-101 (vector: end on the body of EXT-07)"
+   "kind": "free",
+   "wall": "W2-09",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N42",
@@ -821,10 +686,9 @@
   },
   {
    "id": "N43",
-   "kind": "T",
-   "branch": "W5-01",
-   "through": "EXT-07",
-   "source": "A-101 (vector: end on the body of EXT-07)"
+   "kind": "free",
+   "wall": "W5-01",
+   "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
    "id": "N44",
@@ -1386,6 +1250,44 @@
    "lf": 107.21,
    "source": "4/A-121",
    "op": "cloud perimeter 107.21 LF (A-121 measured) x 1 = 107.21 (audit F-06; fascia board strip height not printed - RFI-21)"
+  }
+ ],
+ "blocking_items": [
+  {
+   "ref": "BLK-STOCK",
+   "lf": 387.0,
+   "material": "FRT",
+   "label": "FASTEN STEEL SHELVING TO FRT WOOD BLOCKING IN PARTITION (C14 / C27 shelving)",
+   "source": "7/A-413",
+   "op": "about 43 shelving units x 3'-0\" x 3 rows = 387 LF (audit count on A-111 / A-101 C14, C27; estimator decision RFI-23)",
+   "img": "5_auditoria/img/F_shelving_blocking_7-A413.png"
+  },
+  {
+   "ref": "BLK-RECEIVING",
+   "lf": 69.0,
+   "material": "FRT",
+   "label": "CONTINUOUS 2x4 F.R.T. WOOD BLOCKING (TYP.)",
+   "source": "8A/A-413",
+   "op": "receiving table 17'-3\" (8/A-413) x 4 rows (8A/A-413) = 69.0 LF",
+   "img": "5_auditoria/img/F_receiving_blocking_8A-A413.png"
+  },
+  {
+   "ref": "BLK-OFFICE",
+   "lf": 85.6,
+   "material": "FRT",
+   "label": "F.R.T. BLOCKING IN WALL BEHIND GWB (C12)",
+   "source": "4/A-412",
+   "op": "Manager's Office elevations 3/A-412 + 4/A-412 about 12.9 + 8.5 = 21.4 ft x 4 rows = 85.6 LF (widths scaled on the elevations)",
+   "img": "5_auditoria/img/F_office_frt_blocking_3-4-A412.png"
+  },
+  {
+   "ref": "BLK-BREAK",
+   "lf": 10.67,
+   "material": "FRT",
+   "label": "C20 (A-101): PROVIDE F.R.T. BLOCKING AS NEEDED - kitchenette cabinets",
+   "source": "6/A-412",
+   "op": "cabinet run 2'-9\" + 2'-7\" = 5'-4\" x 2 rows = 10.67 LF (existing wall EXT-07: remove / replace gyp per A-413 general note)",
+   "img": "5_auditoria/img/F_kitchenette_blocking_6-A412.png"
   }
  ],
  "corners_ok": [

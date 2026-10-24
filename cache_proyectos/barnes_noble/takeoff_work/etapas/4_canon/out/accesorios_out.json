@@ -1,6 +1,6 @@
 {
  "familias": {
-  "additional head track": 19.0,
+  "additional head track": 0.0,
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
@@ -8,9 +8,9 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19875.32,
-  "framing screws": 4556.0,
-  "slab pins": 1051.87,
+  "drywall screws": 19875.31,
+  "framing screws": 3080.0,
+  "slab pins": 634.44,
   "expansion anchors": 0.0,
   "joint compound": 1192.52,
   "joint tape": 6128.22,
@@ -44,7 +44,7 @@
   "Level 5 finish": "board"
  },
  "estado": {
-  "additional head track": "CRITERIO",
+  "additional head track": "DERIVADO",
   "stud reinforcement MEP": "RFI",
   "extra framing ATM": "DERIVADO",
   "2-1/2\" CFMF coiling grille head": null,
@@ -64,19 +64,11 @@
  "filas": [
   {
    "familia": "additional head track",
-   "valor": 7.66,
+   "valor": 0.0,
    "unidad": "lf",
-   "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
-   "operacion": "Door 13 (EXT-03): (6.33 + 2 x 0.667) x 1 = 7.66"
-  },
-  {
-   "familia": "additional head track",
-   "valor": 11.33,
-   "unidad": "lf",
-   "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
-   "operacion": "Door 12 (EXT-04): (10.0 + 2 x 0.667) x 1 = 11.33"
+   "estado": "DERIVADO",
+   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"",
+   "operacion": "no openings > 4'-0\" in stud walls"
   },
   {
    "familia": "stud reinforcement MEP",
@@ -128,11 +120,11 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19875.32,
+   "valor": 19875.31,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 19875.32"
+   "operacion": "1.2 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 19875.31"
   },
   {
    "familia": "joint compound",
@@ -140,7 +132,7 @@
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 1192.52"
+   "operacion": "0.072 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 1192.52"
   },
   {
    "familia": "joint tape",
@@ -148,23 +140,23 @@
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (16562.77 + 0.0 + 0.0 = 16562.77 SF) = 6128.22"
+   "operacion": "0.37 x (981.38 + 0.0 + 0.0 + 14557.36 + 1024.02 = 16562.76 SF) = 6128.22"
   },
   {
    "familia": "framing screws",
-   "valor": 4556,
+   "valor": 3080,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 1139 stud pieces [studs_nodos 1031; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 4556"
+   "operacion": "4 x 770 stud pieces [studs_nodos 662; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3080"
   },
   {
    "familia": "slab pins",
-   "valor": 1051.87,
+   "valor": 634.44,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)",
-   "operacion": "interior bottom track on slab 1051.87 LF (87 walls, x rows) / 1.0 = 1051.87"
+   "operacion": "interior bottom track on slab 634.44 LF (70 walls, x rows) / 1.0 = 634.44"
   },
   {
    "familia": "expansion anchors",
@@ -235,8 +227,8 @@
   {
    "familia": "slab pins",
    "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener schedule) vs 24\" (type K box)",
-   "delta_16in": -262.97,
-   "delta_24in": -525.93,
+   "delta_16in": -158.61,
+   "delta_24in": -317.22,
    "unidad": "pcs"
   },
   {

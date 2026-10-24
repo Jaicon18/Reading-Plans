@@ -137,7 +137,8 @@ DEFAULTS = {
     "frp_inside_corners_per_room": (4, "Estimator criterion (4 inside corners per rectangular room)"),
 }
 
-BOARD_DRIVER = ("5/8\" gyp board regular (walls + ceilings)", "5/8\" gyp MOISTURE RESISTANT", "3/8\" gyp board")
+BOARD_DRIVER = ("5/8\" gyp board regular (walls + ceilings)", "5/8\" gyp MOISTURE RESISTANT", "3/8\" gyp board",
+                "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.")   # v80f R80e.18
 STUD_FAMS = ("6\" stud", "3-5/8\" stud", "1-5/8\" stud", "6\" parapet stud", "2-1/2\" stud")
 PEN_KINDS = ("duct", "fire_damper", "pipe", "mep", "duct_sleeve")
 ON_SLAB = ("wall", "column_wrap", "pier", "chase")  # bottom track sobre losa (pins / anchors); v71: chase apoya en losa

@@ -734,8 +734,82 @@ descartes = [
  {'id': 'PT0049', 'motivo': 'I tag (SIM.) points to the exposed end face of a wall (finish callout at wall end, I/A-221), not a wall line.', 'imagen': '1_inventario/recortes/PT0049_I_A-221_p15.png'},
  {'id': 'PT0050', 'motivo': 'I tag at the Workroom door pier: marks the inside face finish of the E1 pier (1\'-0" x 2\'-8" HOLD), not a separate wall line - pier counted as E1 (C-E1-P).', 'owner': 'C-E1-P.1', 'imagen': '1_inventario/recortes/PT0050_I_A-221_p15.png'},
 ]
+# ---------------------------------------------------------------- REV1 (decisiones del estimador 2026-10-24, DECISIONES_ESTIMADOR.md)
+REV1 = os.environ.get('REV1') == '1'
+blocking = []
+existing_excluded = []
+if REV1:
+    PER = ('1', '1A', '1B', '1C')
+    RFI01 = ('EXISTING - EXCLUDED (estimator decision RFI-01, 2026-10-24): perimeter walls types 1 / 1A / 1B / 1C are existing - '
+             '1/DM-101 legend (solid = to remain) + key note 3, A-101 Construction Legend (existing exterior wall / existing '
+             'partition), A-002 "PERIMETER STUDS, INSULATION, VAPOR BARRIER F/I BY LL". Framing, track, bracing and 1B sheathing '
+             'excluded; interior face patch & repair = allowance (amount blank).')
+    existing_excluded = [w for w in walls['A-101'] if w['tag'] in PER]
+    ids = {w['id'] for w in existing_excluded}
+    walls['A-101'] = [w for w in walls['A-101'] if w['tag'] not in PER]
+    vistos = set()
+    for w in existing_excluded:
+        for t_ in w.get('tag_ids') or []:
+            if t_ in vistos:
+                continue
+            vistos.add(t_)
+            descartes.append({'id': t_, 'motivo': f"Type {w['tag']} tag on {w['id']} ({w['location']}): " + RFI01,
+                              'imagen': f"1_inventario/recortes/{t_}_{w['tag']}_A-101_p6.png"})
+    nn = []
+    for n_ in nodes:
+        ws_ = set(n_.get('walls') or []) | {n_.get('wall'), n_.get('branch'), n_.get('through'), n_.get('into')}
+        if ws_ & ids:
+            otros = [x for x in ws_ - ids if x]
+            for o_ in otros:   # el extremo del wall nuevo muere contra el wall existente: extremo libre (stud de cierre)
+                nn.append({'id': n_['id'], 'kind': 'free', 'wall': o_,
+                           'source': 'A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud'})
+            continue
+        nn.append(n_)
+    nodes[:] = nn
+    # aberturas de los walls existentes: puertas existentes, sin trabajo nuestro
+    opening_schedule['items'] = [i_ for i_ in opening_schedule['items'] if i_.get('wall') not in ids]
+    for d_ in ('Door 10', 'Door 12', 'Door 13'):
+        opening_schedule['items'].append({'ref': d_, 'source': 'A-500'})
+        opening_schedule['none'].append({'ref': d_, 'why': 'EXISTING door (A-500 EXISTING V.I.F.) in an EXISTING perimeter wall (RFI-01, 1/DM-101 key note 16 / 15) - no framing in our scope'})
+    # board: Type X en walls nuevos (RFI-27); W.R. Type X en caras de wet rooms (RFI-11)
+    WET = ("Women's Restroom 109", "Men's Restroom 108", 'Janitor Closet 107')
+    ALCOVE = {('W2-06.2', 'B'), ('W2-06.3', 'A'), ('W2-06.4', 'A')}
+    for sh in walls:
+        for w in walls[sh]:
+            for f in w.get('faces') or []:
+                if f['board'] != '5/8 regular':
+                    continue
+                if f['room'] in WET or (w['id'], f['side']) in ALCOVE:
+                    f['board'] = '5/8 type X WR'
+                    f['board_source'] = ('W.R. on all wet-room faces (estimator decision RFI-11): A-410 "*" note "PROVIDE 5/8" WATER RESISTANT GYP. BD AT '
+                                         'JANITOR\'S CLOSET, DRINKING FOUNTAIN, KITCHEN AND ALL TOILET LOCATIONS", partition note 7, 2/A-410; Type X per A-001A (RFI-27)')
+                else:
+                    f['board'] = '5/8 type X'
+                    f['board_source'] = '5/8" Type X on all new walls (estimator decision RFI-27): A-001A Div 09 A.2'
+    # FRT blocking (RFI-23, conteos del estimador con hileras)
+    for ref, lf, lab, src, op in (
+        ('BLK-STOCK', 387.0, 'FASTEN STEEL SHELVING TO FRT WOOD BLOCKING IN PARTITION (C14 / C27 shelving)', '7/A-413',
+         'about 43 shelving units x 3\'-0" x 3 rows = 387 LF (audit count on A-111 / A-101 C14, C27; estimator decision RFI-23)'),
+        ('BLK-RECEIVING', 69.0, 'CONTINUOUS 2x4 F.R.T. WOOD BLOCKING (TYP.)', '8A/A-413',
+         'receiving table 17\'-3" (8/A-413) x 4 rows (8A/A-413) = 69.0 LF'),
+        ('BLK-OFFICE', 85.6, 'F.R.T. BLOCKING IN WALL BEHIND GWB (C12)', '4/A-412',
+         "Manager's Office elevations 3/A-412 + 4/A-412 about 12.9 + 8.5 = 21.4 ft x 4 rows = 85.6 LF (widths scaled on the elevations)"),
+        ('BLK-BREAK', 10.67, 'C20 (A-101): PROVIDE F.R.T. BLOCKING AS NEEDED - kitchenette cabinets', '6/A-412',
+         'cabinet run 2\'-9" + 2\'-7" = 5\'-4" x 2 rows = 10.67 LF (existing wall EXT-07: remove / replace gyp per A-413 general note)')):
+        IMGB = {'BLK-STOCK': 'F_shelving_blocking_7-A413.png', 'BLK-RECEIVING': 'F_receiving_blocking_8A-A413.png',
+                'BLK-OFFICE': 'F_office_frt_blocking_3-4-A412.png', 'BLK-BREAK': 'F_kitchenette_blocking_6-A412.png'}
+        blocking.append({'ref': ref, 'lf': lf, 'material': 'FRT', 'label': lab, 'source': src, 'op': op,
+                         'img': '5_auditoria/img/' + IMGB[ref]})
+    ce1s = [w for w in walls['A-221'] if w['id'].startswith('C-E1-S')][0]
+    strips.append({'ref': 'MENU-BOARD-FRT', 'wall': ce1s['id'], 'lf': 23.46, 'width_ft': round(31 / 12, 3), 'material': 'frt_3_4',
+                   'uso': 'substrate', 'label': '3/4" FRT PLYWOOD (menu boards 4/A-226A)', 'source': '4/A-226A', 'room': 'Cafe 103',
+                   'img': '5_auditoria/img/F_menuboard_frt_blocking_4-A226A.png', 'op': 'continuous strip 31" high x full length of C-E1-S 23.46 LF (A-221) = 60.6 SF (estimator decision RFI-23)'})
+    strips.append({'ref': 'RESTROOM-BACKING-FRT', 'wall': 'W2-06.5', 'lf': 13.33, 'width_ft': 1.0, 'material': 'frt_3_4',
+                   'uso': 'substrate', 'label': '3/4" FIRE RETARDANT PLYWOOD BACKING BOARD (TYP) AT ALL GRAB BARS', 'source': '21/A-201',
+                   'room': "Men's / Women's Restroom", 'img': '5_auditoria/img/F_grabbar_backing_21-A201.png', 'op': '10 pcs (6 grab bars, 2 lavatories, 2 baby changing stations; 21/A-201, 26/A-201) x 16" stud bay (1.333 ft, 21/A-201) x 1.0 ft height ASSUMED (not printed - Review Item) = 13.33 SF'})
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
-frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007']
+frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
 general = {
  'project': 'Barnes & Noble - Colorado Springs, CO (3173 Cinema Point) - bid set 250918',
@@ -751,6 +825,7 @@ general = {
  'plywood_strips': strips,
  'nodes': nodes,
  'trim_items': trim,
+ **({'blocking_items': blocking} if blocking else {}),
  **({'corners_ok': [{'walls': list(p), 'reason': 'R75.7 (estimator rule): a short return (<= 2 ft) is measured from the OUTER face of the run it returns to, so return and run share the corner square by rule; esquinas.py R70.2 flags it as double - package inconsistency reported (PARA_REVISAR)'}
                     for p in (('W2-06.1', 'W2-06.2'), ('W2-06.3', 'W2-06.2'), ('W2-06.3', 'W2-06.4'), ('W2-06.5', 'W2-06.4'),
                               ('W4-28a', 'W4-28b'), ('W4-28a', 'W4-28c'), ('W4-31a', 'W4-31b'), ('W4-31a', 'W4-31c'))],

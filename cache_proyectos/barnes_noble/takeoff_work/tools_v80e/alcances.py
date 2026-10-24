@@ -41,8 +41,8 @@ ALCANCES = [
     ("ALC-04", "Top / deflection and bottom track", r"DEFLECTION|SLIP TRACK|TOP TRACK", ["bottom track", "top / deflection track"], ["track"]),
     ("ALC-05", "Headers, sills and jambs at openings", r"HEADER|SILL|JAMB", ["header / box beam", "sill track"], ["header", "sill"]),
     ("ALC-06", "Bracing / bridging", r"BRIDGING|BRACING", ["bracing C.R. channel"], ["bracing", "bridging"]),
-    ("ALC-07", "Gypsum board on walls (layers per type)", r"GYPSUM BOARD|GYP\.? BD|GWB", ['5/8" gyp board regular'], ["gypsum"]),
-    ("ALC-08", "Moisture / abuse / special board at wet zones", r"MOISTURE RESIST|ABUSE|IMPACT RESIST|MR GYP", ['5/8" gyp MOISTURE RESISTANT'], ["moisture", "abuse"]),
+    ("ALC-07", "Gypsum board on walls (layers per type)", r"GYPSUM BOARD|GYP\.? BD|GWB", ['5/8" gyp board regular', '5/8" gyp board Type X', '5/8" gyp Type X W.R.'], ["gypsum"]),  # v80f R80e.18
+    ("ALC-08", "Moisture / abuse / special board at wet zones", r"MOISTURE RESIST|ABUSE|IMPACT RESIST|MR GYP", ['5/8" gyp MOISTURE RESISTANT', '5/8" gyp Type X W.R.'], ["moisture", "abuse"]),  # v80f R80e.18
     ("ALC-09", "Exterior gypsum / glass mat sheathing", r"SHEATHING|GLASS MAT|DENSGLASS", ['5/8" EXTERIOR gyp sheathing', '5/8" glass mat sheathing', '1/2" EXTERIOR gyp sheathing'], ["sheathing"]),  # v80f R80e.16
     ("ALC-10", "FRT plywood sheathing / substrate", r"FRT PLYWOOD|FIRE.?RETARDANT.{0,20}PLYWOOD|PLYWOOD", ["FRT plywood (SF)"], ["plywood"]),
     ("ALC-11", "Gypsum board ceilings", r"GYPSUM (WALL)?BOARD CEILING|GYP\.? BD\.? CEILING|GWB CEILING|SUSPENDED GYPSUM", ['5/8" gyp board regular'], ["ceiling"]),

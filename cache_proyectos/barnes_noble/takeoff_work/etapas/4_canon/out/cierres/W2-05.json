@@ -1,5 +1,5 @@
 {
-  "muro": 22,
+  "muro": 5,
   "tag": "2",
   "ubicacion": "W2-05 - Corridor 110 east wall / Women's 109 (starts at the restroom front line) (A-101)",
   "largo": {
@@ -29,7 +29,7 @@
         "operacion": "ACT-3 9'-0\" (A-121) + 6\" above suspended ceiling (A-410 partition note 3, 2/A-410) = 9.5 (2/A-410)",
         "unidad": null
       },
-      "tipo": "5/8 regular",
+      "tipo": "5/8 type X",
       "capas": 1
     },
     {
@@ -41,7 +41,7 @@
         "operacion": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410) (2/A-410)",
         "unidad": null
       },
-      "tipo": "5/8 regular",
+      "tipo": "5/8 type X WR",
       "capas": 1
     }
   ],
@@ -51,10 +51,10 @@
       "unidad": "pcs",
       "formula": null,
       "val": {
-        "v": 9,
+        "v": 8,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(7.92, 16.0)] = 7 - 0 dentro de R.O. + 0 jambs + nodos 2/row = 9 x 1 row(s) + 0 total = 9 full x 25.0 + cripples 0.0 LF = 225.0 LF [L N29 +1; T N30 +1] (2/A-410)",
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(7.92, 16.0)] = 7 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 8 x 1 row(s) + 0 total = 8 full x 25.0 + cripples 0.0 LF = 200.0 LF [L N29 +1] (2/A-410)",
         "unidad": null
       }
     },
@@ -118,12 +118,12 @@
     "HEADER": "EXCLUDED: wall has no opening on A-101",
     "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
     "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
-    "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
-    "PATCH": "EXCLUDED here: only existing demising partitions get patching (A-101 key note C5); extent not defined - RFI-25",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items with the estimator counts (7/A-413, 8A/A-413, 4/A-412, 6/A-412 - RFI-23), not per wall",
+    "PATCH": "EXCLUDED here: patch & repair applies to the EXISTING perimeter walls only (1/DM-101 key note 3, A-101 C5) = allowance, amount blank (RFI-01 / RFI-25)",
     "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
     "CONTROL_JOINT": "EXCLUDED: no gypsum board control joint is labeled or detailed on A-410 (1A/A-410..5/A-410), A-121, A-221 or A-510; 'CJ' appears only in the M-100 legend. Walls over 30 ft are listed in RFI-24 (ASTM C840) with the delta.",
     "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
   },
   "alcance": [],
-  "sello": "dd30ec974348b710"
+  "sello": "75aac7e53daa8ccb"
 }

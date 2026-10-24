@@ -2003,19 +2003,23 @@ FAMS = ["2-1/2\" stud", "8\" stud (todos los gauges)", "6\" stud (todos los gaug
         "furring channel", "carrying channel", "hanger wire", F_GYP,
         "5/8\" gyp MOISTURE RESISTANT", "ballistic panel", "3/8\" gyp board", "5/8\" glass mat sheathing",
         "5/8\" EXTERIOR gyp sheathing", "1/2\" EXTERIOR gyp sheathing", "FRT plywood (SF)", "FRT blocking",
+        "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.",   # v80f R80e.18
         "metal stud blocking (362CR / STUD BLOCKING)", F_TRIM, "cement board", F_FRP, F_SEAL, F_L5]
 # familias que DEBEN salir de canon.py con número (PROTOCOLO_v62 §6); framed openings MEP sale de
 # framed_openings.py y se agrega con --fo
 # v80e: 8" stud y 1/2" exterior gyp sheathing son familias opcionales (solo si el set las dibuja)
 OBLIGATORIAS = [f for f in FAMS if f not in ("2-1/2\" stud", "8\" stud (todos los gauges)",
-                                             "1/2\" EXTERIOR gyp sheathing", F_L5, F_SEAL)]   # v77c U8: sealant exterior opcional
+                                             "1/2\" EXTERIOR gyp sheathing", F_L5, F_SEAL,
+                                             "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.")]   # v77c U8: sealant exterior opcional
 STUD_FAM = (("parapet", F_PAR), ("2-1/2\"", "2-1/2\" stud"), ("6\"", "6\" stud (todos los gauges)"),
             ("3-5/8\"", F_36), ("1-5/8\"", "1-5/8\" stud"),
             ("8\"", "8\" stud (todos los gauges)"))  # v80e: 8" exterior stud, AL FINAL ('8"' está dentro de '3-5/8"')
 BOARD_FAM = {"5/8 regular": F_GYP, "5/8 MR": "5/8\" gyp MOISTURE RESISTANT",
              "ballistic panel": "ballistic panel", "3/8 gyp": "3/8\" gyp board",
              # v80e: caras con cement board (detalle de wall / counter) y sheathing exterior de 1/2" en un wall
-             "1/2 cement board": "cement board", "1/2 exterior gyp sheathing": "1/2\" EXTERIOR gyp sheathing"}
+             "1/2 cement board": "cement board", "1/2 exterior gyp sheathing": "1/2\" EXTERIOR gyp sheathing",
+             # v80f (R80e.18): Type X y Type X W.R. cuando el set / el estimador los pide
+             "5/8 type X": "5/8\" gyp board Type X", "5/8 type X WR": "5/8\" gyp Type X W.R."}
 
 
 def _fo(data, fo):

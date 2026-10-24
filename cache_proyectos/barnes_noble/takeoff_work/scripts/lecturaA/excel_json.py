@@ -57,6 +57,32 @@ RF = [
  ('RFI-30', 'Access panels: M-100 general note 30 and E general note 12 "THE GENERAL CONTRACTOR SHALL INSTALL ACCESS PANELS"; A-002 F/I tenant contractor; quantity not shown on any sheet. Not carried.', 'Install only: allowance of 4 to 6 panels in the GWB ceilings (restrooms, Cafe bands / soffit, vestibule)'),
 ]
 rfis = [{'id': a, 'pregunta': b, 'delta': d} for a, b, d in RF]
+
+# ---- REV1 (DECISIONES_ESTIMADOR.md, 2026-10-24): RFIs cerrados / N/A con la decisión aplicada
+import os
+REV1 = os.environ.get('REV1') == '1'
+if REV1:
+    fam = fo['familias']
+    D = 'CLOSED - estimator decision 2026-10-24 (rev1): '
+    NA = 'N/A after RFI-01 (perimeter walls existing, rev1): '
+    OV = {
+     'RFI-01': (D + 'perimeter walls types 1 / 1A / 1B / 1C are EXISTING (1/DM-101 legend solid = to remain + key note 3 "EXTERIOR WALL PATCH AND REPAIR AS REQUIRED TO MAINTAIN EXISTING FIRE RATING"; A-101 Construction Legend "EXISTING EXTERIOR WALL" / "EXISTING PARTITION"; A-002 "PERIMETER STUDS, INSULATION, VAPOR BARRIER F/I BY LL"). Perimeter framing (studs, track, bracing, 1B sheathing) EXCLUDED. Interior face patch & repair (1/DM-101 key note 3, A-101 C5) = ALLOWANCE, amount: $ ________ (blank, estimator to fill).',
+                'Applied: - 417.43 LF of perimeter walls (17 walls); 3-5/8" stud 16,812.96 -> 10,120.39 LF; 8" stud 2,332.99 -> 0; 1/2" exterior sheathing 2,469.22 -> 0 SF; bottom / top track 1,051.87 -> 634.44 LF each; bracing 5,230.74 -> 2,827.81 LF. Allowance: blank.'),
+     'RFI-02': (NA + 'the north 1A / 1 boundary no longer affects the take-off (both types are existing, excluded).', 'none'),
+     'RFI-07': (NA + 'exterior furring 3-5/8" over 22\'-0" (types 1, 1A, 1C) is existing, excluded.', 'none'),
+     'RFI-10': (NA + 'doors 10, 12, 13 are existing doors in existing perimeter walls (A-500 EXISTING V.I.F.); no framing in our scope.', 'none'),
+     'RFI-26': (NA + 'type 1B (and its 1/2" exterior gyp sheathing) is existing, excluded.', 'none'),
+     'RFI-11': (D + 'W.R. gyp bd on ALL faces of Women\'s 109, Men\'s 108, Janitor 107 and the drinking fountain alcove corridor faces (W2-06.2 / .3 / .4) - A-410 "*" note "PROVIDE 5/8" WATER RESISTANT GYP. BD AT JANITOR\'S CLOSET, DRINKING FOUNTAIN, KITCHEN AND ALL TOILET LOCATIONS", A-410 partition note 7, 2/A-410, A-101 general note 8 (plan governs over skill rule D1). New walls only: EXT-07 faces and the break room kitchenette wall (south wall = EXT-07, 7/A-412) are existing -> patch & repair allowance.',
+                f'Applied: 5/8" Type X W.R. = {fam.get(chr(53)+"/8\" gyp Type X W.R.", 0):,.2f} SF face by face (Women\'s 226.62 + Men\'s 223.02 + Janitor 485.75 + alcove corridor 88.63). Reconciles the rev0 figures: 935.4 SF (rev0 delta, restroom/janitor faces only) and ~1,326 SF (audit, included EXT-07 faces now existing).'),
+     'RFI-23': (D + 'FRT blocking taken off with the counts and rows per detail: stock room shelving 7/A-413 (3 rows), receiving table 8A/A-413 (4 rows), Manager\'s Office 3, 4/A-412 (4 rows), break room cabinets 6/A-412 (2 rows); restroom backing 21, 26/A-201 (10 pcs 3/4" FRT plywood); Cafe menu boards 4/A-226A continuous 3/4" FRT plywood 31" high x C-E1-S.',
+                f'Applied: FRT blocking {fam.get("FRT blocking", 0):,.2f} LF (387.0 + 69.0 + 85.6 + 10.67); 3/4" FRT plywood + 60.61 SF menu boards (23.46 x 31/12) + 13.33 SF restroom backing (10 pcs x 16" bay x 12" height ASSUMED - Review Item). Water heater backing (P-201) and W-3 surface blocking (1/A-414, by GC / fixture installer) not carried.'),
+     'RFI-27': (D + 'all 5/8" gyp bd on NEW walls = Type X (A-001A Div 09 A.2); W.R. faces = 5/8" Type X W.R. GWB ceilings stay 5/8" regular (decision covers walls; 4/A-121, 5/A-121 call Type X - confirm ceilings).',
+                f'Applied: 5/8" Type X {fam.get(chr(53)+"/8\" gyp board Type X", 0):,.2f} SF + Type X W.R. {fam.get(chr(53)+"/8\" gyp Type X W.R.", 0):,.2f} SF; regular remains {fam.get(chr(53)+"/8\" gyp board regular (walls + ceilings)", 0):,.2f} SF (GWB ceilings). If ceilings are Type X too: + that SF moves to Type X.'),
+     'RFI-25': ('Merged into RFI-01 allowance (rev1): demising / perimeter wall patch & repair (A-101 C5, 1/DM-101 key note 3) = ALLOWANCE, amount blank.', 'Allowance: $ ________ (blank)'),
+    }
+    for r in rfis:
+        if r['id'] in OV:
+            r['pregunta'], r['delta'] = OV[r['id']]
 REV = [
  ('floor_plan', '1', None, 'South facade 1B / 1 boundary and Cafe overlap (RFI-02, RFI-05)', 'A-101'),
  ('floor_plan', '1A', None, 'North facade 1A / 1 boundary: W2-03 vs adjacent tenant edge, 33.54 LF (RFI-02)', 'A-101'),
@@ -73,6 +99,10 @@ REV = [
  ('detalle', None, 6, 'Ceiling system / carrying direction / cloud grid (RFI-15)', '5/A-121'),
  ('detalle', None, 7, 'Vestibule ceiling box not priced (RFI-16)', '4/A-210'),
 ]
+if REV1:
+    REV = [x for x in REV if x[1] not in ('1', '1A', '1B') and 'RFI-19' not in x[3] or (x[0] == 'detalle')]
+    REV = [x for x in REV if not (x[0] == 'floor_plan' and x[1] in ('1', '1A', '1B'))]
+    REV.append(('detalle', None, 8, 'Restroom FRT plywood backing: 10 pcs at 16" stud bay, height NOT printed - 12" assumed (13.33 SF); confirm grab bar / lavatory / baby changing backing size (RFI-23)', '21/A-201'))
 n = len(REV)
 revisar = []
 for i, (fa, t, o, p, h) in enumerate(REV, 1):
