@@ -3,3 +3,4 @@
 | Fecha/hora (local usuario) | Sesión actual | Semana | Qué corría | Notas |
 |---|---|---|---|---|
 | 2026-10-23 23:40 | 8 % (reset sáb 1:30 AM) | 5 % (reset vie 3:00 AM) | B&N take-off nocturno 10 pasos recién arrancado (~06:00 UTC) | Usage credits OFF: al llegar al límite se detiene, no cobra extra |
+| 2026-10-24 ~02:05 | ? | ? | B&N take-off 10 pasos TERMINADO: sesión nocturna $77.02 (precio lista), ~2 h 05 min | Pedir captura al usuario para calibrar
