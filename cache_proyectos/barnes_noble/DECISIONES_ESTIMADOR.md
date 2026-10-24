@@ -22,3 +22,7 @@
 
 ## Excel update instruction
 - Every estimator decision + my comments (source N/SHEET, reasoning, derived operation, alternatives/deltas) go INTO the Excel in the existing columns only ("Where it comes from", "Source (DETAIL/SHEET)", Notes/Status, Review Items, Pending Items, Scope Checklist). No new sheets or columns.
+
+## 2026-10-24 — RFI-27 Type X
+- Option A: ALL 5/8" gyp bd on new walls = Type X (A-001A). Quantity recomputed after perimeter exclusion.
+- Pending sub-question: W.R. faces (RFI-11) as W.R. Type X or plain W.R.
