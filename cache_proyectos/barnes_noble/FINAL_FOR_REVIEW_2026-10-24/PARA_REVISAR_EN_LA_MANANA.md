@@ -15,16 +15,19 @@ Corrida desatendida del 24-oct-2026. Los términos del trade van en inglés.
    - un crítico de completitud barrió las 69 hojas. De sus 16 hallazgos: 3 entraron como cantidad (sheathing 1B, corner bead de los columns C25, trim del cloud del Cafe) y el resto como RFI.
 7. **Excel.** Formato fijo de 6 hojas, en inglés, con las partitions en el orden del schedule y un subtotal por type. Las fórmulas están recalculadas.
 8. **Markups Bluebeam.** 91 markups Polylength, con la escala de cada hoja (A-101 a 1/8", A-221 a 1/2") y Depth = altura del wall.
-9. **Compuertas.** reglas, alcances, registro y etapas: OK. El back-check independiente está en `takeoff_work/etapas/5_auditoria/BACKCHECK.md`.
+9. **Compuertas.** reglas, alcances, registro, etapas y bitácora: OK. El back-check independiente dio **PASS WITH COMMENTS**.
+   - Medido a ciegas, todo type quedó a menos de 2% del Excel. La aritmética está bien.
+   - Su hallazgo de sheet count (4x8 contra los 4x12 de Inputs) ya está corregido: 366 hojas de 5/8" y 55 de sheathing.
+   - El informe está en `takeoff_work/etapas/5_auditoria/BACKCHECK.md`.
 10. **Entrega.** En esta carpeta:
     - `Take-off/` (Excel);
-    - `Planos marcados/` (PDF de markups + imágenes);
+    - `Planos marcados/` (PDF de markups, imágenes por hoja y `by_type/` con una imagen por type);
     - `Proposal/` (Proposal con los precios en blanco);
     - el README en inglés.
 
 ## Errores del skill corregidos en esta corrida
 
-Las reglas R80e.1–R80e.16 están en el §29 del SKILL.md. Los arreglos más importantes:
+Las reglas R80e.1–R80e.17 están en el §29 del SKILL.md. Los arreglos más importantes:
 - **Regex de hojas:** no aceptaban hojas con guion (A-410, A-400A). Corregido en closer.py, alcances.py y markups.
 - **Escala:** había una sola para todo el set. Ahora cada hoja usa la suya (A-101 9 pt/ft, A-221 36 pt/ft).
 - **Familias que faltaban:** 8" stud y 1/2" exterior sheathing.
@@ -46,9 +49,10 @@ Las reglas R80e.1–R80e.16 están en el §29 del SKILL.md. Los arreglos más im
 5. Los 3-5/8" studs de 24'-0" a 25'-7" pasan el límite de 22'-0" de A-410. Para el type 2 ya está tu decisión (14 ga + diagonal bracing). ¿Aplico lo mismo a los types 1 / 1A / 1C (RFI-07)?
 6. Proposal: ¿a quién va dirigido (GC / contacto), con qué teléfono y e-mail, y qué T&M rates uso?
 7. Proposal: conservé el membrete de JC Hunter (3200 S. Wadsworth Blvd., Lakewood). ¿Es correcto?
+8. Back-check: en la fachada norte, la línea del adjacent tenant pasaría ~33.4 LF de type 1 a 1A (RFI-02). El framing cuesta lo mismo. ¿Uso esa línea como límite?
 
 ## Costo aproximado
 
 No tengo un medidor de costo dentro de la sesión.
-- **Lo que sí sé:** el crítico de completitud usó unos 289k tokens y el back-check es un subagente aparte.
+- **Lo que sí sé:** el crítico de completitud usó unos 289k tokens y el back-check unos 174k.
 - **Costo exacto:** hay que verlo en el panel de uso de claude.ai.

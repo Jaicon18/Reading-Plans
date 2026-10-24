@@ -7,7 +7,7 @@ Run: 2026-10-24, unattended. Skill take-off-metal-frame-drywall v80e (+ run patc
 | Folder | File |
 |---|---|
 | Take-off/ | `Barnes_Noble_ColoradoSprings_Takeoff_FINAL.xlsx` (6 sheets, formulas recalculated) |
-| Planos marcados/ | `Barnes_Noble_ColoradoSprings_FINAL_markups.pdf` (Bluebeam Polylength markups, A-101 1/8" and A-221 1/2" scales, Depth = wall height) + images per sheet / type |
+| Planos marcados/ | `Barnes_Noble_ColoradoSprings_FINAL_markups.pdf` (Bluebeam Polylength markups, A-101 1/8" and A-221 1/2" scales, Depth = wall height) + images per sheet, plus `by_type/` (one image per type) |
 | Proposal/ | `Barnes_Noble_ColoradoSprings_Proposal_FINAL.xlsx` (prices BLANK) |
 
 ## Partition LF by type (Partition Takeoff, in schedule order)
@@ -40,4 +40,5 @@ These are floor-plan points by type, plus detail points in plan order. Each come
 - `registro.py entregable` OK.
 - closer: 78 walls sealed. planmark and markups verified.
 - Independent completeness audit (16 findings incorporated as quantities or RFIs).
-- Back-check: see `takeoff_work/etapas/5_auditoria/BACKCHECK.md`.
+- Independent back-check: PASS WITH COMMENTS. Blind LF is within 2% on every type checked. Its sheet-count finding is fixed (4x12 per Inputs). See `takeoff_work/etapas/5_auditoria/BACKCHECK.md`.
+- `bitacora.py compuerta`: BITACORA OK (17 mandatory tools current + back-check).
