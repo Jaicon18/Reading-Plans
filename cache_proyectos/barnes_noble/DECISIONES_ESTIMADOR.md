@@ -17,3 +17,5 @@
 - Option A: W.R. gyp bd on ALL faces of Women's 109, Men's 108, Janitor 107 (A-410 "*" note, note 7, 2/A-410, A-101 general note 8), new walls only (EXT-07 faces are existing -> patch & repair allowance).
 - Quantity to recompute from canon faces at update time: takeoff.json delta says 935.4 SF, audit says ~1,326 SF (Men's 284.4 + Women's 248.8 + Janitor 793.0) -> reconcile from faces, cite both.
 - Plan governs over skill rule D1 when the plan explicitly asks W.R. on every face (general, all projects).
+- Also W.R. at drinking fountain alcove (W2-06.2/.3/.4, corridor side) and break room kitchenette wall behind the sink (6/A-412): measure faces at update time.
+- Q3 CLOSED 100%.
