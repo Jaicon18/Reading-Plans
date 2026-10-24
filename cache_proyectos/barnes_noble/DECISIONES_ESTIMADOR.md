@@ -19,3 +19,6 @@
 - Plan governs over skill rule D1 when the plan explicitly asks W.R. on every face (general, all projects).
 - Also W.R. at drinking fountain alcove (W2-06.2/.3/.4, corridor side) and break room kitchenette wall behind the sink (6/A-412): measure faces at update time.
 - Q3 CLOSED 100%.
+
+## Excel update instruction
+- Every estimator decision + my comments (source N/SHEET, reasoning, derived operation, alternatives/deltas) go INTO the Excel in the existing columns only ("Where it comes from", "Source (DETAIL/SHEET)", Notes/Status, Review Items, Pending Items, Scope Checklist). No new sheets or columns.
