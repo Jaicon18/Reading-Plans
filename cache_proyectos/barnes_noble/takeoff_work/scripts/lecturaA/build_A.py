@@ -272,6 +272,12 @@ for sh in walls:
         if t in ('1', '1A', '1C', '1B'):
             w['faces'] = []
             w['faces_none_reason'] = NONE_EXT % DET[t]
+            if t == '1B':   # auditoría F-01: 1/2" exterior gyp sheathing de 1B/A-410 (cara exterior, altura del wall)
+                w['faces'] = [{'side': 'A' if w['location'].split()[0].rstrip(',') in ('West', 'North') else 'B', 'room': 'Exterior face (sheathing)', 'board': '1/2 exterior gyp sheathing',
+                               'layers': 1, 'height_ft': w['height_ft'],
+                               'height_source': '1B/A-410 1/2" EXTERIOR GYP SHEATHING full stud height = wall height '
+                                                + str(w['height_ft']) + ' (product vs glass mat A-001A: RFI-26)'}]
+                w['faces_none_reason'] += '; 1/2" exterior gyp sheathing carried on the exterior face (1B/A-410)'
             continue
         spec = FACES.get(wid)
         if spec is None:
@@ -645,6 +651,11 @@ trim.append({'ref': 'Corner bead - corridor recess (drinking fountain alcove, W2
              'lf_each': 9.5, 'qty': 2, 'lf': 19.0, 'source': 'A-101',
              'op': '2 outside corners x 9.5 ft (ACT-3 9\'-0" + 6", corridor face) = 19.0'})
 
+trim.append({'ref': 'Corner bead - column surrounds C25 (9 ea) outside corners', 'kind': 'corner_bead',
+             'img': '5_auditoria/img/F_C25_column_surround_A101.png', 'label': 'corner bead at outside corners (criterion 53.1)',
+             'lf_each': 8.0, 'qty': 36, 'lf': 288.0, 'source': 'A-101',
+             'op': 'A-101 key note C25 24"x24" GWB surround slab to 8\'-0" A.F.F.: 9 columns x 4 outside corners x 8.0 ft = 288.0 (audit F-05; open top edge 72 LF PENDING)'})
+
 
 # ---------------------------------------------------------------- ceilings GWB (A-121; medidos en ceilings_measured.json)
 CM = {c['room']: c for c in json.load(open(OUT + '/datos/ceilings_measured.json'))}
@@ -671,6 +682,11 @@ ceilings = [
       system_callout={'detail': '2/A-221', 'cuts_this': True, 'cut_on': ['A-221'], 'source': '2/A-221 Soffit Section - Cafe Sales Area (cuts the 11\'-0" zone on 1/A-221)'},
       drop_lines={'value': 2, 'source': '2/A-221: stud lines up to deck at the outer open edge (N + E) and at the 11\'-6" step (inner)'}),
 ]
+_cl = CM['Cafe Seating Area - GWB cloud']['perimeter_ft']
+for _k, _lab in (('corner_bead', 'Corner bead - Cafe Seating GWB cloud bottom edge'), ('j_bead', 'J-bead - Cafe Seating GWB cloud top of fascia')):
+    trim.append({'ref': _lab, 'kind': _k, 'img': '5_auditoria/img/F_cloud_jbead_cornerbead_4-A121.png',
+                 'label': '4/A-121 J-BEAD at top of fascia + DUR-A-BEAD corner bead at bottom edge', 'lf': round(_cl, 2),
+                 'source': '4/A-121', 'op': f'cloud perimeter {round(_cl, 2)} LF (A-121 measured) x 1 = {round(_cl, 2)} (audit F-06; fascia board strip height not printed - RFI-21)'})
 
 # ---------------------------------------------------------------- aberturas
 HSRC = 'A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)'

@@ -21,15 +21,15 @@
   "hileras": 1,
   "caras": [
     {
-      "cuarto": "no board face",
+      "cuarto": "Exterior face (sheathing)",
       "alto_board": {
-        "v": 0,
+        "v": 25.0,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1B/A-410)",
+        "operacion": "1B/A-410 1/2\" EXTERIOR GYP SHEATHING full stud height = wall height 25.0 (product vs glass mat A-001A: RFI-26) (1B/A-410)",
         "unidad": null
       },
-      "tipo": "none",
+      "tipo": "1/2 exterior gyp sheathing",
       "capas": 1
     }
   ],
@@ -78,11 +78,21 @@
         "operacion": "bottom 7.33 x 1 = 7.33; top 7.33 x 1 = 7.33; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 43.98 (1B/A-410)",
         "unidad": null
       }
+    },
+    "BOARD:Exterior face (sheathing)": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 183.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "7.33 x 25.0 x 1 - 0.0 = 183.25 (1B/A-410)",
+        "unidad": null
+      }
     }
   },
   "excluidas": {
     "HEADER": "EXCLUDED: wall has no opening on A-101",
-    "BOARD": "EXCLUDED: 5/8\" GYP BD BY FUTURE TENANT (1B/A-410): gyp bd EXCLUDED from our scope (estimator decision) - RFI-01; framing only (1B/A-410)",
     "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); see Scope Checklist",
     "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
     "BLOCKING": "EXCLUDED here: FRT blocking called without extent (C12/C16/C20 on A-101, 3/A-412, 4/A-412, 8A/A-413, 7/A-413) - RFI-23",
@@ -92,5 +102,5 @@
     "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
   },
   "alcance": [],
-  "sello": "985e6bb77e3abe7d"
+  "sello": "f0c7418cdaa4e12d"
 }

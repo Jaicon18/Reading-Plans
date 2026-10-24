@@ -143,16 +143,23 @@
    "ubicacion": "Exterior gypsum / glass mat sheathing",
    "fuente": "alcances.py (lista fija); el PDF lo menciona en p50",
    "estado": "verificado",
-   "nota": "NO APLICA: no exterior gyp / glass mat sheathing in partition types A-410; M-301 (p50) 'plastic sheathing' is temporary protection, not wall sheathing",
+   "nota": "1/2\" exterior gyp sheathing 1B/A-410 quantified 2,469.22 SF (type 1B walls x wall height, exterior face); product vs glass mat (A-001A) RFI-26. Earlier NO APLICA was wrong (audit F-01: 1B/A-410 calls the sheathing; M-301 (p50) mention was unrelated)",
    "historial": [
     [
      "2026-10-24 07:20",
      "pendiente",
      "verificado",
      "NO APLICA: no exterior gyp / glass mat sheathing in partition types A-410; M-301 (p50) 'plastic sheathing' is temporary protection, not wall sheathing"
+    ],
+    [
+     "2026-10-24 07:46",
+     "verificado",
+     "verificado",
+     "CORRECCION (antes: NO APLICA: no exterior gyp / glass mat sheathing in partition types A-410; M-301 (p50) 'plastic sheathing' is temporary protection, not wall sheathing): 1/2\" exterior gyp sheathing 1B/A-410 quantified 2,469.22 SF (type 1B walls x wall height, exterior face); product vs glass mat (A-001A) RFI-26. Earlier NO APLICA was wrong (audit F-01: 1B/A-410 calls the sheathing; M-301 (p50) mention was unrelated)"
     ]
    ],
-   "huella": "434309db93a04220854de7912d7951ec1307dedef86401b3772d8b673247cebc"
+   "huella": "434309db93a04220854de7912d7951ec1307dedef86401b3772d8b673247cebc",
+   "corregido": 1
   },
   {
    "id": "ALC-10",
@@ -290,17 +297,24 @@
    "tipo": "alcance",
    "ubicacion": "Framed openings (MEP, access panels, diffusers)",
    "fuente": "alcances.py (lista fija); el PDF lo menciona en C81.61, p36, p40, p46, p48, p50, p52",
-   "estado": "verificado",
-   "nota": "NO APLICA: no framed MEP opening or access panel drawn in GWB walls or ceilings (A-121 ceiling key notes, M-102, P-101A reviewed); access panels furnished by MEP trades per E-201 (p40) and M-100 (p46) notes",
+   "estado": "pendiente_rfi",
+   "nota": "RFI-30 access panels: M-100 general note 30 (p46) / E-201 (p40) 'GC SHALL INSTALL ACCESS PANELS', quantity not shown; no framed MEP opening drawn in GWB walls (A-121, M-102, P-101A). Earlier NO APLICA corrected (audit A-06)",
    "historial": [
     [
      "2026-10-24 07:20",
      "pendiente",
      "verificado",
      "NO APLICA: no framed MEP opening or access panel drawn in GWB walls or ceilings (A-121 ceiling key notes, M-102, P-101A reviewed); access panels furnished by MEP trades per E-201 (p40) and M-100 (p46) notes"
+    ],
+    [
+     "2026-10-24 07:46",
+     "verificado",
+     "pendiente_rfi",
+     "CORRECCION (antes: NO APLICA: no framed MEP opening or access panel drawn in GWB walls or ceilings (A-121 ceiling key notes, M-102, P-101A reviewed); access panels furnished by MEP trades per E-201 (p40) and M-100 (p46) notes): RFI-30 access panels: M-100 general note 30 (p46) / E-201 (p40) 'GC SHALL INSTALL ACCESS PANELS', quantity not shown; no framed MEP opening drawn in GWB walls (A-121, M-102, P-101A). Earlier NO APLICA corrected (audit A-06)"
     ]
    ],
-   "huella": "940d3134fcf6c4a2b0fb53e79356e16043ae455d123bdf4be4c65d871e9ccc98"
+   "huella": "940d3134fcf6c4a2b0fb53e79356e16043ae455d123bdf4be4c65d871e9ccc98",
+   "corregido": 1
   },
   {
    "id": "ALC-18",
@@ -308,13 +322,19 @@
    "ubicacion": "Trim: corner bead, casing bead, control joints, reveals",
    "fuente": "alcances.py (lista fija); el PDF lo menciona en p46",
    "estado": "verificado",
-   "nota": "Metal trim (corner bead, casing / L-bead) per A-410 and A-121 details; M-100 (p46) CJ is a legend abbreviation",
+   "nota": "Metal trim (corner bead, casing / L-bead) per A-410 and A-121 details; M-100 (p46) CJ is a legend abbreviation | ANEXO: Audit F-05 / F-06 added: column surrounds C25 corner bead 288 LF (A-101) and Cafe cloud corner bead + J-bead 107.21 LF each (4/A-121); metal trim now 891.72 LF",
    "historial": [
     [
      "2026-10-24 07:20",
      "pendiente",
      "verificado",
      "Metal trim (corner bead, casing / L-bead) per A-410 and A-121 details; M-100 (p46) CJ is a legend abbreviation"
+    ],
+    [
+     "2026-10-24 07:46",
+     "verificado",
+     "verificado",
+     "ANEXO: Audit F-05 / F-06 added: column surrounds C25 corner bead 288 LF (A-101) and Cafe cloud corner bead + J-bead 107.21 LF each (4/A-121); metal trim now 891.72 LF"
     ]
    ],
    "huella": "7f9e2e302c179dadeb7239c9f39af203e9f44c1d5974f8e5f07f0d03517942d7"
