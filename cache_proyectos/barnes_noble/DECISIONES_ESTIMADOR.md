@@ -27,3 +27,7 @@
 - Option A: ALL 5/8" gyp bd on new walls = Type X (A-001A). Quantity recomputed after perimeter exclusion.
 - W.R. faces (RFI-11) = 5/8" Type X W.R.
 - Q4 CLOSED 100%. Q5 (RFI-07) and Q6 (RFI-02) N/A after RFI-01 (perimeter existing). ALL QUESTIONS CLOSED.
+
+## rev1 questions (2026-10-24/25)
+- Q4 rev1 (patch & repair allowance amount): BLANK (already decided).
+- Q1 rev1: GWB ceilings (981.38 SF, 4/A-121, 5/A-121) -> Type X. CLOSED.
