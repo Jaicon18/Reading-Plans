@@ -32,3 +32,5 @@
 - Q4 rev1 (patch & repair allowance amount): BLANK (already decided).
 - Q1 rev1: GWB ceilings (981.38 SF, 4/A-121, 5/A-121) -> Type X. CLOSED.
 - Q2 rev1: restroom backing (21/A-201, 10 pcs 3/4" FRT plywood) height = 16" (one stud cavity). 13.33 SF @12" -> 17.78 SF (DERIVED: 13.33 x 16/12). CLOSED.
+- Q3 rev1: kitchenette W.R. on existing wall EXT-07 (7/A-412) stays INSIDE the patch & repair allowance. CLOSED.
+- ALL rev1 QUESTIONS CLOSED. Pending to apply (rev2): ceilings 981.38 SF -> Type X; restroom backing 16" (17.78 SF).
