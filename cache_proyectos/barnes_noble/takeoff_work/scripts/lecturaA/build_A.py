@@ -736,6 +736,12 @@ descartes = [
 ]
 # ---------------------------------------------------------------- REV1 (decisiones del estimador 2026-10-24, DECISIONES_ESTIMADOR.md)
 REV1 = os.environ.get('REV1') == '1'
+REV2 = os.environ.get('REV2') == '1'
+if REV2:
+    for c_ in ceilings:
+        if c_.get('system') != 'canopy_joist':
+            c_['board'] = '5/8 type X'
+            c_['board_source'] = '5/8" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2'
 blocking = []
 existing_excluded = []
 if REV1:
@@ -804,9 +810,9 @@ if REV1:
     strips.append({'ref': 'MENU-BOARD-FRT', 'wall': ce1s['id'], 'lf': 23.46, 'width_ft': round(31 / 12, 3), 'material': 'frt_3_4',
                    'uso': 'substrate', 'label': '3/4" FRT PLYWOOD (menu boards 4/A-226A)', 'source': '4/A-226A', 'room': 'Cafe 103',
                    'img': '5_auditoria/img/F_menuboard_frt_blocking_4-A226A.png', 'op': 'continuous strip 31" high x full length of C-E1-S 23.46 LF (A-221) = 60.6 SF (estimator decision RFI-23)'})
-    strips.append({'ref': 'RESTROOM-BACKING-FRT', 'wall': 'W2-06.5', 'lf': 13.33, 'width_ft': 1.0, 'material': 'frt_3_4',
+    strips.append({'ref': 'RESTROOM-BACKING-FRT', 'wall': 'W2-06.5', 'lf': 13.33, 'width_ft': (16 / 12 if REV2 else 1.0), 'material': 'frt_3_4',
                    'uso': 'substrate', 'label': '3/4" FIRE RETARDANT PLYWOOD BACKING BOARD (TYP) AT ALL GRAB BARS', 'source': '21/A-201',
-                   'room': "Men's / Women's Restroom", 'img': '5_auditoria/img/F_grabbar_backing_21-A201.png', 'op': '10 pcs (6 grab bars, 2 lavatories, 2 baby changing stations; 21/A-201, 26/A-201) x 16" stud bay (1.333 ft, 21/A-201) x 1.0 ft height ASSUMED (not printed - Review Item) = 13.33 SF'})
+                   'room': "Men's / Women's Restroom", 'img': '5_auditoria/img/F_grabbar_backing_21-A201.png', 'op': ('10 pcs x 16" stud bay (1.333 ft, 21/A-201) x 16" high (estimator decision rev2) = 13.33 x 16/12 = 17.78 SF' if REV2 else '10 pcs (6 grab bars, 2 lavatories, 2 baby changing stations; 21/A-201, 26/A-201) x 16" stud bay (1.333 ft, 21/A-201) x 1.0 ft height ASSUMED (not printed - Review Item) = 13.33 SF')})
 
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]

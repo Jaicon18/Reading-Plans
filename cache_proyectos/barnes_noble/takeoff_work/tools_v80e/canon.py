@@ -1478,7 +1478,7 @@ def _ceilings(data, fam, filas):
                 _ply(fam, "frt_5_8_ext", area, "canopy_soffit")
                 bd = f"5/8\" exterior grade FRT plywood {area} SF"
             else:
-                fam[F_GYP] += area
+                fam[BOARD_FAM.get(c.get("board") or "5/8 regular", F_GYP)] += area   # v80f R80e.19: board del ceiling
                 bd = f"board {area} SF"
                 det_ = str((c.get("system_callout") or {}).get("detail") or c.get("detail") or "").strip()
                 nom_ = f"3-5/8\" stud, framed soffit {det_} (LF)".replace("  ", " ")   # v76: renglón propio
@@ -1509,7 +1509,7 @@ def _ceilings(data, fam, filas):
             joist = n_f * lf_
             fam[F_36] += joist
             op = f"3-5/8\" ceiling joists ({src}) {n_f} x {round(lf_, 3)} = {round(joist, 2)} (no furring)"
-        fam[F_GYP] += area
+        fam[BOARD_FAM.get(c.get("board") or "5/8 regular", F_GYP)] += area   # v80f R80e.19: board del ceiling
         filas.append({"familia": "ceilings", "room": c["room"], "source": src,
                       "operacion": f"{op}; carrying ROUNDUP(({round(run, 3)}-1)/{round(c_oc, 3)})+1 = {n_c} x "
                                    f"{round(lc, 3)} = {round(carry, 2)}{' (polígono: cuerda media área/ancho)' if poligono else ''}; "

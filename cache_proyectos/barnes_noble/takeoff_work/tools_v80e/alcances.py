@@ -45,7 +45,7 @@ ALCANCES = [
     ("ALC-08", "Moisture / abuse / special board at wet zones", r"MOISTURE RESIST|ABUSE|IMPACT RESIST|MR GYP", ['5/8" gyp MOISTURE RESISTANT', '5/8" gyp Type X W.R.'], ["moisture", "abuse"]),  # v80f R80e.18
     ("ALC-09", "Exterior gypsum / glass mat sheathing", r"SHEATHING|GLASS MAT|DENSGLASS", ['5/8" EXTERIOR gyp sheathing', '5/8" glass mat sheathing', '1/2" EXTERIOR gyp sheathing'], ["sheathing"]),  # v80f R80e.16
     ("ALC-10", "FRT plywood sheathing / substrate", r"FRT PLYWOOD|FIRE.?RETARDANT.{0,20}PLYWOOD|PLYWOOD", ["FRT plywood (SF)"], ["plywood"]),
-    ("ALC-11", "Gypsum board ceilings", r"GYPSUM (WALL)?BOARD CEILING|GYP\.? BD\.? CEILING|GWB CEILING|SUSPENDED GYPSUM", ['5/8" gyp board regular'], ["ceiling"]),
+    ("ALC-11", "Gypsum board ceilings", r"GYPSUM (WALL)?BOARD CEILING|GYP\.? BD\.? CEILING|GWB CEILING|SUSPENDED GYPSUM", ['5/8" gyp board regular', '5/8" gyp board Type X'], ["ceiling"]),
     ("ALC-12", "Ceiling suspension (furring / carrying channel / hanger wire / ceiling track)", r"SUSPENDED GYPSUM|HANGER|CARRYING CHANNEL|FURRING CHANNEL|MAIN RUNNER|GRID SYSTEM", ["furring channel", "carrying channel", "hanger wire", "track de ceilings / soffits"], ["furring", "carrying", "hanger"]),
     ("ALC-13", "Soffits and bulkheads (framing + board)", r"SOFFIT|BULKHEAD", ["track de ceilings / soffits"], ["soffit", "bulkhead"]),
     ("ALC-14", "Canopy / marquee framing and sheathing", r"CANOPY|MARQUEE", [], ["canopy"]),

@@ -83,6 +83,16 @@ if REV1:
     for r in rfis:
         if r['id'] in OV:
             r['pregunta'], r['delta'] = OV[r['id']]
+    if os.environ.get('REV2') == '1':
+        R2 = 'rev2 (estimator decision 2026-10-25): '
+        for r in rfis:
+            if r['id'] == 'RFI-27':
+                r['pregunta'] = D + 'all 5/8" gyp bd on new walls AND GWB ceilings = Type X (A-001A Div 09 A.2; 4/A-121, 5/A-121 - ' + R2 + 'ceilings to Type X); W.R. faces = 5/8" Type X W.R. No 5/8" regular remains.'
+                r['delta'] = f'Applied: 5/8" Type X {fam.get(chr(53)+"/8\" gyp board Type X", 0):,.2f} SF (walls 14,557.36 + ceilings 981.38) + Type X W.R. {fam.get(chr(53)+"/8\" gyp Type X W.R.", 0):,.2f} SF; 5/8" regular 0.'
+            if r['id'] == 'RFI-23':
+                r['delta'] = r['delta'].replace('13.33 SF restroom backing (10 pcs x 16" bay x 12" height ASSUMED - Review Item)', '17.78 SF restroom backing (10 pcs x 16" bay x 16" high, ' + R2 + '13.33 x 16/12)')
+            if r['id'] == 'RFI-01':
+                r['pregunta'] += ' ' + R2 + 'break room kitchenette W.R. on existing EXT-07 (6/A-412, 7/A-412) is INSIDE this patch & repair allowance; allowance amount stays BLANK (decided).'
 REV = [
  ('floor_plan', '1', None, 'South facade 1B / 1 boundary and Cafe overlap (RFI-02, RFI-05)', 'A-101'),
  ('floor_plan', '1A', None, 'North facade 1A / 1 boundary: W2-03 vs adjacent tenant edge, 33.54 LF (RFI-02)', 'A-101'),
@@ -102,7 +112,7 @@ REV = [
 if REV1:
     REV = [x for x in REV if x[1] not in ('1', '1A', '1B') and 'RFI-19' not in x[3] or (x[0] == 'detalle')]
     REV = [x for x in REV if not (x[0] == 'floor_plan' and x[1] in ('1', '1A', '1B'))]
-    REV.append(('detalle', None, 8, 'Restroom FRT plywood backing: 10 pcs at 16" stud bay, height NOT printed - 12" assumed (13.33 SF); confirm grab bar / lavatory / baby changing backing size (RFI-23)', '21/A-201'))
+    os.environ.get('REV2') == '1' or REV.append(('detalle', None, 8, 'Restroom FRT plywood backing: 10 pcs at 16" stud bay, height NOT printed - 12" assumed (13.33 SF); confirm grab bar / lavatory / baby changing backing size (RFI-23)', '21/A-201'))
 n = len(REV)
 revisar = []
 for i, (fa, t, o, p, h) in enumerate(REV, 1):
