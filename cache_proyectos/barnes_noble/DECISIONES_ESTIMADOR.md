@@ -34,3 +34,6 @@
 - Q2 rev1: restroom backing (21/A-201, 10 pcs 3/4" FRT plywood) height = 16" (one stud cavity). 13.33 SF @12" -> 17.78 SF (DERIVED: 13.33 x 16/12). CLOSED.
 - Q3 rev1: kitchenette W.R. on existing wall EXT-07 (7/A-412) stays INSIDE the patch & repair allowance. CLOSED.
 - ALL rev1 QUESTIONS CLOSED. Pending to apply (rev2): ceilings 981.38 SF -> Type X; restroom backing 16" (17.78 SF).
+
+## Review Items (rev2 → rev3), one at a time
+- RI 1/11: W2-05 = 12.92 LF (reading A, printed 12'-11" on A-101 [CONFIRMED]); reading B 7.92 rejected. W2-06 stays 25.86 LF. +5.00 LF type 2. CLOSED.
