@@ -19,3 +19,22 @@
   - A-121 tags the outer L / counter zone as GWB 11'-0" and the storefront band as GWB 9'-0".
   - The elevation may be showing the bottom of the soffit on this face at 9'-0" + a 2'-0" WD-1 fascia.
   - It has to be checked against 2/A-221.
+
+## 2/A-221 Soffit Section – Cafe Sales Area (2026-10-26)
+- **Printed:**
+  - "3 5/8" @ 16" O.C. METAL STUD UP TO DECK" (both sides).
+  - "5/8" GWB" above the WD-1.
+  - "T.O. WD-1 SEE ELEVATION".
+  - "5/8" F.R.T. PLYWOOD" behind the WD-1, "CROSS BRACING AS REQ'D", "WOOD CORNER TRIM", and "5/8" GWB" at the soffit underside.
+- **Not printed:** no height of the soffit underside or of the top of the WD-1. The section sends the top of the WD-1 to the elevations.
+- Image: `5_A-221_2_soffit_section.png`.
+
+**Soffit height (9'-0" vs 11'-0"): NOT resolvable from 2/A-221.**
+- Underside of the east face: 6/A-226A ≈ 10'-10" (3" + 2'-5" + 2" + 8'-2"), which matches A-121 GWB 11'-0".
+- North face: 1/A-226A prints "9'-0" (SOFFIT)".
+- The conflict stays → RFI.
+
+| Face | WD-1 | GWB |
+|---|---|---|
+| East | 6/A-226A: from ≈ 10'-10" / 11'-0" to 15'-0" (printed "4'-0"" band + right-side dimension 15'-0") | Underside 5/8" GWB at ≈ 11'-0"; 5/8" GWB above 15'-0" up to deck (2/A-221 studs UP TO DECK; PT-3 in 6/A-226A, break line) |
+| North | 1/A-226A: from 9'-0" to 11'-0" ("9'-0" (SOFFIT)" + "2'-0""), then the WD-1 panel with the "BN CAFÉ" sign. Top: NOT dimensioned in 1/A-226A, 2/A-221 ("SEE ELEVATION") or 6/A-226A for this face. Not scaled. | Underside 5/8" GWB at 9'-0" (per 1/A-226A); 5/8" GWB above the WD-1 up to deck (PT-3, break line), no height printed |
