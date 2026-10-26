@@ -44,3 +44,4 @@
 - RI 5/11 (RFI-19): board height where a ceiling exists = ceiling + 6" (2/A-410). Kept. CLOSED.
 - RI 6/11 (RFI-04): 115 diagonal braces = 3-5/8" 20 ga stud, ~4 ft each at 45° top track to structure = 460 LF (DERIVED 115 x 4). Estimator choice; brace member/length not printed (keep note). CLOSED.
 - RI 7/11 (RFI-06): Cafe walls H1, H2a, H2b, H3a, H3b, F: STUDS TO DECK 25'-0" (1/A-400B draws Cafe walls floor to B.O. deck; A-226A breaks at top). BOARD per face = ceiling + 6" (A-410 note 3): Workroom face ACT-1 10'-0" -> 10'-6"; Grab & Go face GWB 7'-1" -> 7'-7"; Cafe open-to-deck face -> to deck; Cafe GWB bands 9'-0"/11'-0"/11'-6" faces -> ceiling + 6". Evidence ri07_rcp/. CLOSED.
+- RI 8/11 (RFI-08): type I (C-I) WD-1 top = 15'-0" AFF (6/A-226A, bubble on 1/A-221 looks west at C-I, verified). 5/8" FRT plywood floor to 15'-0" = 49.7 SF (DERIVED 3.31 x 15); GWB above per RI 7 rule. CLOSED.
