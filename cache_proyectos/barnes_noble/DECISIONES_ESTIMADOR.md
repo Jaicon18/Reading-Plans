@@ -39,3 +39,4 @@
 - RI 1/11: W2-05 = 12.92 LF (reading A, printed 12'-11" on A-101 [CONFIRMED]); reading B 7.92 rejected. W2-06 stays 25.86 LF. +5.00 LF type 2. CLOSED.
 - RI 2/11 part 1: type 4 caps = open U (9'-0" bar + 2 returns + 2 legs into curved walls), 11.86 LF each (reading B, 4/A-410 on A-101). Kept as is.
 - RI 2/11 part 2 (RFI-18): curved walls = face-average arc 25.68 LF each (+1.20 LF total vs printed 25'-1"), estimator choice. RI 2 CLOSED.
+- RI 3/11 (RFI-17 count): column surrounds C25 = 9 (CW-01..CW-09, A-101). CLOSED. (Stud spacing 16" assumed stays under RFI-17.)
