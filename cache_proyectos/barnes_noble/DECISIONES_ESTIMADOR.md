@@ -42,3 +42,4 @@
 - RI 3/11 (RFI-17 count): column surrounds C25 = 9 (CW-01..CW-09, A-101). CLOSED. (Stud spacing 16" assumed stays under RFI-17.)
 - RI 4/11: Workroom door pier (1/A-221): 1'-0" return = type I 1.00 LF (tag PT0050), pier = E1 2.11 LF (PT0045). Kept. CLOSED.
 - RI 5/11 (RFI-19): board height where a ceiling exists = ceiling + 6" (2/A-410). Kept. CLOSED.
+- RI 6/11 (RFI-04): 115 diagonal braces = 3-5/8" 20 ga stud, ~4 ft each at 45° top track to structure = 460 LF (DERIVED 115 x 4). Estimator choice; brace member/length not printed (keep note). CLOSED.
