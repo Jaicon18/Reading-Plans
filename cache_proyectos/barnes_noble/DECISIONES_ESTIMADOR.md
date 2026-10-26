@@ -40,3 +40,4 @@
 - RI 2/11 part 1: type 4 caps = open U (9'-0" bar + 2 returns + 2 legs into curved walls), 11.86 LF each (reading B, 4/A-410 on A-101). Kept as is.
 - RI 2/11 part 2 (RFI-18): curved walls = face-average arc 25.68 LF each (+1.20 LF total vs printed 25'-1"), estimator choice. RI 2 CLOSED.
 - RI 3/11 (RFI-17 count): column surrounds C25 = 9 (CW-01..CW-09, A-101). CLOSED. (Stud spacing 16" assumed stays under RFI-17.)
+- RI 4/11: Workroom door pier (1/A-221): 1'-0" return = type I 1.00 LF (tag PT0050), pier = E1 2.11 LF (PT0045). Kept. CLOSED.
