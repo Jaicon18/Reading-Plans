@@ -30,6 +30,9 @@ Los términos del trade van en inglés.
 | BE-17 | B&N rev6 (gauge) + rev7 C7-04 / C7-05 | Gauge por fila aplicado, pero los productos que dependen del gauge no se separan (8.A #8 vs #10, 2 vs 3 por conexión; 8.E Type S vs S-12) | Con el gauge de cada fila, recalcular framing screws y drywall screws por gauge | Un renglón por producto y gauge, con su conteo |
 | BE-18 | B&N rev6 GAP (ACT, Unistrut, seismic, caulk) | Ítem del set sin destino (ni cuantificado ni excluido ni RFI) | Matriz de cobertura Paso 12 | 0 GAP (cobertura 100 %) |
 | BE-19 | B&N rev7 C7-02 / C7-03 | Espaciamiento de fastener impreso reemplazado por un default no impreso (slab pins 12" vs 9/A-410 @ 24" y 8.F 2 rows @ 16"; X-EDNI 8.C vs 8/A-410 #8 @ 24") | Por cada fastener: buscar el espaciamiento en el detalle específico y en la nota típica; el detalle específico manda; conflicto = conservador impreso + RFI | Ningún fastener usa un espaciamiento no impreso sin RFI que cite los impresos |
+| BE-52 | B&N rev8 C8-03 | Una pasada anterior dio un ítem por "cubierto por el renglón X" (#8 screws de 8/A-410 → framing screws) y el renglón X no lo contenía | En cada revisión, todo "covered by row X" heredado se re-verifica contra el desglose del renglón X | Cada cobertura heredada aparece en el desglose del renglón citado |
+| BE-53 | B&N rev8 C8-02 | El delta de un RFI omitía un accesorio impreso en el mismo detalle que cita (A/A-410 "(1) #10-16 SCREW @ EACH FLANGE" fuera de RFI-28) | Por cada RFI con delta: leer todas las flechas del detalle citado y listar cada pieza impresa | El delta incluye todas las piezas impresas del detalle |
+| BE-56 | B&N rev8 C8-01 | Fastener de nota típica (8.F X-DNI) cargado sobre un largo cuya sección de type imprime otro anclaje (types 3/4: HUS-EZ + moment clip, A/A-410) | Por cada fastener con yield por LF: restar los largos cuyos types / detalles imprimen otro anclaje | Ningún LF lleva el fastener típico donde la sección del type imprime otro |
 
 ## B. Reglas de método (BOA Broomfield, aplican a todo proyecto)
 
@@ -56,11 +59,14 @@ Los términos del trade van en inglés.
 | BE-43 | §0.F | Formato del Excel cambiado | 6 hojas visibles fijas (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist) | Exactamente esas 6 visibles |
 | BE-44 | §0.F / R78.20–R78.24 | Markups Bluebeam ausentes o que no cuadran | PDF con una annot por wall (Subject = type, Depth = alto); Σ Length y Σ Wall Area por type = Excel | Cuadre por type ≤ 0.5 % |
 | BE-45 | §0.F | Proporciones fuera de rango sin explicación | board vs Σ LF × alto × caras; screws/SF; studs/LF según O.C.; track vs partitions; compound/tape vs board | Todo dentro de rango o explicado en el Excel |
-| BE-46 | B&N rev7 C7-06 | Dos espesores / productos en un mismo renglón (cement board 1/2" de A-221 + 5/8" de 22/A-201) | Leer el espesor impreso de cada fuente del desglose | Un espesor y un producto por renglón |
+| BE-46 | B&N rev7 C7-06 + rev8 C8-04 | Dos espesores / productos en un mismo renglón (cement board 1/2" de A-221 + 5/8" de 22/A-201); track 3-5/8" + 6" + ledger 8" + ceiling track en un renglón | Leer el espesor impreso de cada fuente del desglose | Un espesor y un producto por renglón |
 | BE-47 | B&N rev7 C7-07 / C7-08 | Cantidades o IDs en textos (RFI, Scope, README) que no coinciden con su renglón (585.27 vs 568.27; ALC-X26..X30 vs X40..X44) | Cruce automático de cada número y cada ID ALC- / RFI- citado contra Material Summary / Scope Checklist / Pending Items | Todo número e ID citado existe y coincide |
 | BE-48 | B&N rev7 C7-09 | Nombre de archivo interno en el PDF de markups ("Source: takeoff_canon.json" en la leyenda) | Buscar .json / .py / carpetas de trabajo en el texto de las páginas agregadas y en Contents de los markups | Ninguno |
 | BE-49 | B&N rev7 (verificación Paso 12) | Cota impresa atribuida al elemento equivocado (46'-0" del track LWT-01 cerca de la nube) | Antes de aplicar o corregir con una cota: seguir sus extension lines y cerrar la cadena con las cotas vecinas (1'-5" + 46'-0" + 1'-5" = 48'-10") | Cada cota usada pertenece al elemento cuantificado |
 | BE-50 | B&N rev7 N-03 | Traslape de alcance entre hojas A y E/M/P sin RFI (E-301 265119 soportes de luminarias por el EC vs wires en luminarias cargados por 5/A-121) | Por cada renglón del trade que una spec E/M/P asigne a otro contratista: RFI con delta | Todo traslape tiene RFI |
+| BE-51 | B&N rev8 C8-05 | Renglones en LF con selling unit "piece" y Pieces to buy = ROUNDUP(LF) (2x blocking, main / cross tee, molding, 16 ga wire) | Por cada renglón: Unit vs Selling unit vs fórmula de Pieces to buy | Pieces to buy en piezas reales (stock length de Inputs) o venta por LF / coil |
+| BE-54 | B&N rev8 C8-08 | Partición por producto (Type S / S-12) sobre board bruto por wall, con la deducción (base de cement board) aplicada solo al total | Recalcular cada partición por cara, aplicando cada deducción a las mismas caras | La suma por producto respeta las deducciones de cada cara |
+| BE-55 | B&N rev8 C8-07 | Códigos internos del plan check (C7-0x, C-0x, N-0x, "rev7 plan check") en textos al cliente | Buscar con regex en todas las hojas visibles y en el README | Ninguno |
 
 ---
 
@@ -130,3 +136,7 @@ Los términos del trade van en inglés.
 
 ## Corrida B&N rev8 (2026-10-27)
 Back-check final: LIBRARY 37 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev8_recheck.md`). Los 10 FAIL (BE-12, 15, 16, 17, 18, 19, 46, 47, 48, 50) quedan corregidos. Las lecciones nuevas están en la regla R80e.29 del skill v80o.
+
+
+## Corrida B&N rev8 — Paso 12 independiente (2026-10-27)
+46 pruebas: 32 PASS · 11 FAIL · 3 N/A. FAIL: BE-16 (C8-02, C8-03), BE-19 (C8-01), BE-40 (C8-08), BE-46 (C8-04), BE-47 (C8-06), BE-51…BE-56 (C8-05, C8-03, C8-02, C8-08, C8-07, C8-01). N/A: BE-26, 27, 28. Veredicto: NO PASA (cobertura 100 %, 0 GAP, 8 CORREGIR). Nota: el back-check rev8 (37/0) dejó C8-01/02/03/08 como "no bloqueantes"; son piezas impresas o reglas del skill → CORREGIR.
