@@ -9,7 +9,7 @@ There is no geometry change, so markups and images stay as in rev3 (`FINAL_FOR_R
 |---|---|---|---|
 | North soffit face SS-N, 5/8" FRT plywood behind WD-1 | 45.54 SF (9'-0" to 11'-0") | 91.08 SF (11'-0" to 15'-0") | RFI-14: soffit 11'-0" (A-121 governs); WD-1 top 15'-0" as the east face (6/A-226A) |
 | SS-N GWB height | 14 ft | 10 ft (15'-0" to deck) | RFI-14 |
-| 5/8" Type X | 15,579.48 + 91.08 = 15,670.56 SF | 15,579.48 SF | RFI-14 |
+| 5/8" Type X | 15,670.56 SF | 15,579.48 SF | RFI-14 |
 | FRT plywood 5/8" | 2,664.09 SF | 2,709.63 SF | RFI-14 |
 | FRT plywood 3/4" | 248.46 SF | 353.46 SF | RFI-16: vestibule posts 6 x 4 faces x 5" x 10.5 ft = 105.0 SF |
 | C25 stud spacing | 16" | 16" (no change) | RFI-17 |
