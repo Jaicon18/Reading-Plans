@@ -759,7 +759,9 @@ NOMBRES_PLANTILLA = {
     "USG channel molding (DGCM27)": "USG channel molding DGCM27",
     "USG angle molding (DGWM24)": "USG angle molding DGWM24",
     "clip angle (bracing / nested connections)": "Clip angle 16 ga (5/A-410 bracing clips + 7/A-210 nested header clips)",   # v80n R80e.27
-    "X-EDNI fasteners, top track to structure": "X-EDNI fasteners 0.145\" (Hilti), top track to structure (A-410 note 8.C)",
+    "#8 pan head screws, relief channel to structure": "#8 pan head self-tapping screws, relief channel to structure (8/A-410)",   # v80o
+    "P.A.F. at cross members": "P.A.F. 3/16\" x 3/8\" at cross member ends (8/A-410)",
+    "5/8\" cement board": "5/8\" cement board (tile base)",
     "plywood screws (Teks/3)": "Plywood screws #10-24 x 1-1/4\" Teks/3 (A-410 note 8.D)",
     "cement board screws": "Cement board screws 1-1/4\" (manufacturer spacing)",
     "nested inner runner (deflection head)": "Nested inner runner at the deflection head (3/A-410)",
@@ -770,7 +772,7 @@ NOMBRES_PLANTILLA = {
     "ballistic panel": "Ballistic panel {th}UL752",
     "3/8\" gyp board": "3/8\" gypsum board",
     "FRP": "FRP panels",
-    "cement board": "Cement board (tile / FRP substrate)",   # v80f: nombre genérico
+    "cement board": "1/2\" cement board / cementitious backer",   # v80o (BE-46): el 5/8" va en su renglón
     "FRT blocking": "Blocking FRT / 2X FRT wood",
     "metal trim (corner bead, casing, shadow molding)": "METAL trim - corner bead, casing bead, shadow molding, "
                                                         "gypsum edge trim",

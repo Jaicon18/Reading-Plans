@@ -55,21 +55,21 @@ Partitions total: no change, **569.82 LF**. Gauges per row (A-410 Metal Stud Sch
 ## 57 matrix rows (47 GAP + 10 CORREGIR) → destination
 | Matrix # | Item | Destination in rev7 |
 |---|---|---|
-| 7 | A-001A Div 05 D Unistrut space frame | EXCLUDED - Scope ALC-X27 (lighting / MEP / sign supports by those trades) |
+| 7 | A-001A Div 05 D Unistrut space frame | EXCLUDED - Scope ALC-X41 (lighting / MEP / sign supports by those trades) |
 | 20 | A-001A Div 09 A.8 Level 4 (C-05) | ALC-24 = QUANTIFIED, Level 4 printed |
-| 48 | A-002 Acoustical ceiling system | EXCLUDED - ALC-X26 (Div 09 51, ACT contractor) |
-| 51 | A-002 Cafe signage strut channel | EXCLUDED - ALC-X27; sign blocking carried (4/A-226A) |
-| 53 | A-002 Div 10 seismic bracing | EXCLUDED as a separate item - ALC-X29; ceiling bracing carried (RFI-38) |
+| 48 | A-002 Acoustical ceiling system | EXCLUDED - ALC-X40 (Div 09 51, ACT contractor) |
+| 51 | A-002 Cafe signage strut channel | EXCLUDED - ALC-X41; sign blocking carried (4/A-226A) |
+| 53 | A-002 Div 10 seismic bracing | EXCLUDED as a separate item - ALC-X43; ceiling bracing carried (RFI-38) |
 | 54 | A-002 FE cabinets | Row FRT blocking BLK-FE-CABINETS 16 LF + RFI-39 |
-| 61 | A-101 GN 8 caulk at base of wet walls | EXCLUDED - ALC-X28 (sealant, standing order) |
+| 61 | A-101 GN 8 caulk at base of wet walls | EXCLUDED - ALC-X42 (sealant, standing order) |
 | 74 | A-101 C11 FE cabinets | = #54 (row + RFI-39) |
 | 110 | 4/A-101 FRT wood header + base | = #54 (row + RFI-39) |
 | 115 | A-111 KN 9 FE cabinets | = #54 (duplicate) |
 | 143 | 5/A-121 16 ga tie wire | Scope ALC-12 note: consumable of the furring / carrying install |
 | 145 | 5/A-121 hangers at light fixtures | Row Hanger wire + 401.0 LF (29 hangers) |
 | 147 | 5/A-121 seismic splay wires (A-420 not in set) | Rows Hanger wire + 743.29 LF, 1-5/8" stud 131.42 LF + RFI-38 |
-| 148 | 5/A-121 ACT grid portion | EXCLUDED - ALC-X26 |
-| 149 | A-121 ACT ceiling tags | EXCLUDED - ALC-X26 |
+| 148 | 5/A-121 ACT grid portion | EXCLUDED - ALC-X40 |
+| 149 | A-121 ACT ceiling tags | EXCLUDED - ALC-X40 |
 | 154 | A-121 Grab & Go GWB 7'-1" | Ceiling 25.16 SF Type X + furring / carrying / hangers / perimeter track |
 | 170 | A-131 Janitor FRP-1 96" (C-02) | RFI-13 corrected (heights printed; installer open) |
 | 191 | 22/A-201 cement board base 1'-2" (C-03) | Row Cement board + 50.04 SF; Type X W.R. - 50.04 SF; RFI-12 closed (base) |
@@ -104,12 +104,12 @@ Partitions total: no change, **569.82 LF**. Gauges per row (A-410 Metal Stud Sch
 | 355 | Top Track Detail citation (C-07) | 3/A-410 everywhere (8/A-410 = Typ. Connection) |
 | 357 | 8/A-410 parallel to structure | Rows 3-5/8" / 6" stud cross members 705.0 LF + RFI-41 |
 | 361 | 6/A-410 stud reinforcement (C-08) | Marked skill default (not printed); RFI stays 0 |
-| 372 | 7/A-413 remove & replace existing GWB | Inside RFI-01 allowance - ALC-X30 |
+| 372 | 7/A-413 remove & replace existing GWB | Inside RFI-01 allowance - ALC-X44 |
 | 373 | 7A/A-413 surface mount blocking | RFI-48 |
 | 387 | A-500 door 4 location (C-09) | Labels: door 4 in W2-04 (not W2-05) |
 | 400 | 2/A-500 cased opening wood blocking | Row Blocking 2X wood 17.0 LF + RFI-49 |
 | 421 | A-510 Finish Notes 8 corner bead | Row Metal trim + 65.31 LF (soffit edges) |
-| 432 | A-510 ACT legend | EXCLUDED - ALC-X26 |
+| 432 | A-510 ACT legend | EXCLUDED - ALC-X40 |
 | 445 | 2/E-103 server room 4x8 FRT plywood BY GC | FRT plywood 3/4" + 32.0 SF + RFI-50 |
 | 454 | E-301 terminal board | = #445 |
 

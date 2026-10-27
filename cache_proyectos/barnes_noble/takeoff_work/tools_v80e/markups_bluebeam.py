@@ -465,8 +465,7 @@ def escribir(bid_pdf, canon_path, out_pdf, out_json=None):
         k = f"{g['sheet']} (p.{g['page'] + 1})"
         por_hoja[k] = por_hoja.get(k, 0) + 1
         por_type[t] = por_type.get(t, 0) + 1
-    ley = _leyenda(doc, canon, geo, sin, cols, os.path.basename(str(canon_path)) if not isinstance(canon_path, dict)
-                   else "takeoff_canon.json")
+    ley = _leyenda(doc, canon, geo, sin, cols, "the take-off Excel (Partition Takeoff)")   # v80o (BE-48): sin nombres de archivos
     _page_labels(doc, {**{g["page"]: g["sheet"] for g in geo.values() if g.get("sheet")}, ley: "LEGEND"})
     doc.set_metadata(dict(doc.metadata or {}, keywords=f"{TOOL}; legend_page={ley + 1}; bid_pages={n_bid}",
                           creator=TOOL))

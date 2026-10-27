@@ -287,7 +287,7 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
             r['delta'] = r['delta'].replace('(387.0 + 69.0 + 85.6 + 10.67)', '(387.0 + 69.0 + 85.6 + 10.67 + FE cabinets 16.0, rev7)')
     NEW7 = [
      ('RFI-38', 'Ceiling seismic bracing: A-121 Ceiling Notes 1 "SEE A-420 DRAWINGS REGARDING CEILING BRACING" - A-420 is not in the set; 5/A-121 draws splay wires @ 12\'-0" O.C. each way and a 1-5/8" x 16 ga metal joist post; A-002 Div 10 "SEISMIC BRACING" F/I by the tenant contractor. Carried conservatively on the GWB suspended ceilings.',
-      f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF (hanger wire row) + 1-5/8\" posts {MI['SEISMIC-STRUTS-5-A121']['qty']} LF; if not required (seismic category / A-420): minus both."),
+      f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF (hanger wire row) + 1-5/8\" posts {MI.get('SEISMIC-STRUTS-5-A121', MI.get('SEISMIC-VERTICAL-WIRE-5-A121'))['qty']} LF; if not required (seismic category / A-420): minus both."),
      ('RFI-39', 'Recessed fire extinguisher cabinets (A-101 C11, A-111 KN 9, 4/A-101 "F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET"): 4 in new walls (W2-01, W2-03 x 2, Cafe Workroom); cabinet width / rough opening not printed (Cosmopolitan fully recessed, Ambassador 1017F10).',
       'Carried 16.0 LF FRT 2x (4 x (2.0 + 2.0 ft)); each +1 ft of cabinet width = +8.0 LF FRT; jamb studs inside the field studs.'),
      ('RFI-40', '3/A-410 Top Track Detail: "METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER" with "DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK" read as a nested inner runner at every deflection head. Carried; confirm.',
@@ -326,8 +326,30 @@ def _limpia(t):
     return _re.sub(r'\s{2,}', ' ', _RX_INT.sub('', t)).replace(' ;', ';').replace(' .', '.') if isinstance(t, str) else t
 for r in rfis:
     r['pregunta'], r['delta'] = _limpia(r['pregunta']), _limpia(r['delta'])
+REV8 = os.environ.get('REV8') == '1'
+if REV8:   # rev8: Paso 12 2.ª pasada (PASO12_rev7/)
+    _fam = fo['familias']; MI = {m['ref']: m for m in c.get('misc_items') or []}
+    P8 = 'Paso 12 2nd pass (rev8): '
+    for r in rfis:
+        if r['id'] == 'RFI-38':
+            r['delta'] = f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF + vertical 16 ga wire at each brace point {MI['SEISMIC-VERTICAL-WIRE-5-A121']['qty']} LF (both in the hanger wire row); the 1-5/8\" x 16 ga metal joist framing @ 48\" on 5/A-121 is the horizontal carrying member (no post) - {P8}C7-01. If not required: minus both."
+        if r['id'] == 'RFI-46':
+            r['pregunta'] += ' ' + P8 + 'the same phrase is printed on the partition types 3 and 4 (3/A-410, 4/A-410): nested stud at the top of each wall.'
+            r['delta'] = f"Carried {MI['F-NESTED-BRACING']['qty']} LF (F) + {MI['NESTED-BRACING-T3-T4']['qty']} LF (types 3 / 4) 3-5/8\" stud; define member / elevation; if not required: minus both."
+        if r['id'] == 'RFI-53':
+            r['pregunta'] += ' ' + P8 + 'E-301 Sec. 265119: "THIS CONTRACTOR SHALL PROVIDE AND INSTALL ALL NECESSARY SUPPORT MEDIA FOR ALL LIGHTING FIXTURES ... FIXTURES SHALL NOT BE SUPPORTED FROM ROOF DECK" - overlap with the 5/A-121 fixture wires carried.'
+            r['delta'] += f" If the fixture supports are by the electrical contractor (E-301 265119): - {MI['HANGERS-FIXTURES-5-A121']['qty']} LF hanger wire (29 hangers)."
+        if r['id'] == 'RFI-51':
+            r['delta'] += (f" {P8}relief channel to structure carried with 8/A-410 #8 pan head screws ({MI['PAN-HEAD-8-A410']['qty']} pcs) + P.A.F. at cross members ({MI['PAF-CROSS-MEMBERS-8-A410']['qty']} pcs); "
+                           "note 8.C X-EDNI (2 rows @ 16\" = 720 pcs) is the alternative if the track bears directly on structural steel. Slab pins carried per note 8.F (2 rows @ 16\" X-DNI); 9/A-410 alternative 0.177\" PAF @ 24\" = - 640.61 pcs.")
+        if r['id'] == 'RFI-23':
+            r['delta'] = r['delta'].replace(f'{_fam.get("FRT blocking", 0):,.2f} LF', f'{_fam.get("FRT blocking", 0) - (fo.get("wood_blocking_lf") or 0):,.2f} LF FRT + 2X wood {fo.get("wood_blocking_lf") or 0:,.2f} LF (2/A-500)')
 if os.environ.get('REV7') == '1':
     d['inputs_notas'] = {'joint_compound_lb_per_sf': 'YIELD: 72 lb per 1,000 SF; Level 4 finish printed on A-001A Div 09 A.8 "PROVIDE AT A MINIMUM A LEVEL 4 FINISH".'}
+    if os.environ.get('REV8') == '1':
+        d['inputs_notas'].update({
+            'slab_pin_spacing_ft': 'YIELD: A-410 note 8.F X-DNI 2 rows at 16" O.C. = 0.667 ft per pin (9/A-410 PAF @ 24" = alternative, RFI).',
+            'drywall_screws_per_sf': 'YIELD: estimator 1.2 / SF; products per A-410 note 8.E (Type S 25/20 ga, Type S-12 18/16/14 ga) and A-001A Div 09 A.5.'})
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:
@@ -360,6 +382,8 @@ if REV5 and d.get('alcances'):
         _c7 = [x for x in c['ceilings'] if x.get('system') != 'canopy_joist']
         N5['ALC-11'] = f"Quantified (rev7): suspended GWB ceilings and soffits per A-121 (5/A-121, 4/A-121) and 2/A-221 = {sum(x['area_sf'] for x in _c7):,.2f} SF (incl. Grab & Go 7'-1\" 25.16 SF): 5/8\" Type X + restroom ceilings 5/8\" Type X W.R. (A-410 Partition Notes 2)."
         N5['ALC-12'] = N5['ALC-12'].replace('hanger wire 103 pcs', f"hanger wire {(fo.get('hanger_pcs') or {}).get('total_pcs')} pcs at 48\" + 29 at light fixtures")
+        if os.environ.get('REV8') == '1':
+            N5['ALC-16'] = N5['ALC-16'].replace(f"FRT blocking {_fam.get('FRT blocking', 0):,.2f} LF", f"FRT blocking {_fam.get('FRT blocking', 0) - (fo.get('wood_blocking_lf') or 0):,.2f} LF")
         N5['ALC-16'] = N5['ALC-16'].replace('(7/A-413 387.0, 8A/A-413 69.0, 3-4/A-412 85.6, 6/A-412 10.67)', '(7/A-413 387.0, 8A/A-413 69.0, 3-4/A-412 85.6, 6/A-412 10.67, 4/A-101 FE cabinets 16.0) + 2X wood 17.0 LF (2/A-500)')
         for x in d['alcances']:
             if x['id'] in ('ALC-24', 'ALC-17'):

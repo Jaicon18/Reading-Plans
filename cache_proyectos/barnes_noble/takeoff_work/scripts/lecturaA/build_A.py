@@ -1184,15 +1184,54 @@ if REV7:
                          'op': f'3/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.": {m["ref"][-1] == "3" and "3-5/8" or "6"}" track along {wid} = {val} LF (RFI-35)',
                          'img': m.get('img')})
 
+# ---------------------------------------------------------------- REV8 (Paso 12 2.ª pasada sobre rev7: PASO12_rev7/)
+REV8 = os.environ.get('REV8') == '1'
+if REV8:
+    P7I = '../../PASO12_rev7/img/'
+    # C7-01: 5/A-121 "1 5/8" x 16 GA. METAL JOIST FRAMING @ 48" O.C." is the horizontal carrying member, not a post;
+    # the vertical member at each brace point is "16 GA. WIRE 12'-0" O.C. EACH WAY"
+    for m in list(misc):
+        if m['ref'] == 'SEISMIC-STRUTS-5-A121':
+            misc.remove(m)
+            misc.append({'ref': 'SEISMIC-VERTICAL-WIRE-5-A121', 'familia': 'hanger wire', 'qty': m['qty'], 'unit': 'LF', 'source': '5/A-121',
+                         'op': m['op'].replace('"1 5/8\\" x 16 GA. METAL JOIST" compression post per brace group', '"16 GA. WIRE 12\'-0\\" O.C. EACH WAY AND WITHIN 6\'-0\\" OF EACH WALL" vertical wire at each brace point')
+                               + ' - Paso 12 C7-01: the 1-5/8" x 16 ga metal joist framing @ 48" O.C. on 5/A-121 is the horizontal carrying member (no post drawn)',
+                         'img': P7I + 'A-121_5_1-5-8-metal-joist-framing-48OC-horizontal.png'})
+    # C7-03: 8/A-410 (specific) governs over note 8.C: relief channel to steel with #8 pan head screws @ 24" O.C. + 6" from ends;
+    # cross members (1) 3/16" x 3/8" P.A.F. at each end
+    for m in list(misc):
+        if m['ref'] == 'X-EDNI-8C':
+            misc.remove(m)
+    FH8 = [w for w in wb7.values() if w.get('element') in ('wall', 'soffit_side') and float(w['height_ft']) >= 13.5]
+    n8 = sum(_m7.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in FH8)
+    misc.append({'ref': 'PAN-HEAD-8-A410', 'familia': '#8 pan head screws, relief channel to structure', 'qty': n8, 'unit': 'PCS', 'source': 'TYPCONN/A-410',
+                 'op': 'TYPCONN/A-410 "CONTINUOUS 20 GA. X 2" MIN DEEP RELIEF CHANNEL - ANCHOR TO STEEL PLATE WITH #8 PAN HEAD SELF TAPPING SCREWS AT 24" O.C. AND 6" FROM ENDS": sum(ROUNDUP(L / 2) + 1) over '
+                       + f'{len(FH8)} runs to structure ({round(sum(float(w["length_ft"]) for w in FH8), 2)} LF) = {n8} pcs (Paso 12 C7-03; note 8.C X-EDNI = alternative in RFI-51)',
+                 'img': P7I + 'A-410_8_typ-connection-8-screws-24OC-PAF.png'})
+    ncm = sum(_m7.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in FH8 if w['band']['ori'] == 'V')
+    misc.append({'ref': 'PAF-CROSS-MEMBERS-8-A410', 'familia': 'P.A.F. at cross members', 'qty': 2 * ncm, 'unit': 'PCS', 'source': 'TYPCONN/A-410',
+                 'op': f'TYPCONN/A-410 PARALLEL TO STRUCTURE "METAL STUD PER SCHEDULE W/ (1) 3/16" 3/8" P.A.F. AT EACH END": {ncm} cross members x 2 = {2 * ncm} pcs (RFI-41)',
+                 'img': P7I + 'A-410_8_typ-connection-8-screws-24OC-PAF.png'})
+    # C7-06: one thickness per row - 22/A-201 base = 5/8" cement board (its own family)
+    for m in misc:
+        if m['ref'] == 'RESTROOM-BASE-CEMENT':
+            m['familia'] = '5/8" cement board'
+    # N-01: types 3 / 4 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING" (same phrase as F/A-221) - RFI-46
+    t34 = [(w['id'], w['length_ft']) for w in walls['A-101'] if w['tag'] in ('3', '4')]
+    q34 = round(sum(v for _, v in t34), 2)
+    misc.append({'ref': 'NESTED-BRACING-T3-T4', 'familia': '3-5/8" stud (todos los gauges)', 'qty': q34, 'unit': 'LF', 'source': '3/A-410',
+                 'op': f'3/A-410, 4/A-410 (partition types 3, 4) "3 5/8\\" METAL STUDS @ 16\\" O.C. TO BOTTOM OF NESTED STUD BRACING": one nested stud at the top of each wall = type 3 38.68 + type 4 83.64 = {q34} LF (conservative; member not drawn - RFI-46)',
+                 'img': P7I + 'A-410_3-4_types-nested-stud-bracing.png'})
+
 if REV7:   # fasteners de plywood (8.D) y de cement board, sobre las cantidades finales
     psf = round(sum(float(x['lf']) * float(x['width_ft']) for x in strips), 2)
     npl = _m7.ceil(psf * 34 / 32)
     misc.append({'ref': 'PLYWOOD-SCREWS-8D', 'familia': 'plywood screws (Teks/3)', 'qty': npl, 'unit': 'PCS', 'source': 'A-410',
                  'op': f'A-410 Partition Notes 8.D "#10-24 X 1-1/4\\" TEKS/3 ... 24\\" O.C. FIELD, 12\\" O.C. PERIMETER": 4x8 sheet on studs @ 16" = 24 perimeter + 10 field = 34 screws / 32 SF; {psf} SF FRT plywood x 34/32 = {npl} pcs'})
     csf = round(sum((f.get('length_ft') or w['length_ft']) * f['height_ft'] for sh in walls for w in walls[sh] for f in w.get('faces') or [] if 'cement' in f['board'])
-                + sum(m['qty'] for m in misc if m['familia'] == 'cement board'), 2)
+                + sum(m['qty'] for m in misc if 'cement board' in m['familia'] and 'screw' not in m['familia']), 2)
     ncb = _m7.ceil(csf * 32 / 15)
-    misc.append({'ref': 'CEMENT-BOARD-SCREWS', 'familia': 'cement board screws', 'qty': ncb, 'unit': 'PCS', 'source': '22/A-201',
+    misc.append({'ref': 'CEMENT-BOARD-SCREWS', 'familia': 'cement board screws', 'qty': ncb, 'unit': 'PCS', 'source': 'E/A-221; A/A-221; B/A-221; C/A-221; D/A-221; 22/A-201',
                  'op': f'cement board screws @ 8" O.C. on studs @ 16" (manufacturer standard, spacing not printed - RFI-51): 3x5 board = 4 studs x 8 = 32 screws / 15 SF; {csf} SF x 32/15 = {ncb} pcs'})
 
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
@@ -1206,6 +1245,8 @@ general = {
                'furring_oc_in': {'value': 24, 'source': '5/A-121 "7/8" HAT CHANNEL FRAMING @ 24" O.C. MAX"'},
                'carrying_oc_in': {'value': 48, 'source': '5/A-121 "1-1/2" CHANNEL @ 48" O.C. MAX"'},
                'hanger_oc_in': {'value': 48, 'source': '5/A-121 "HANGING WIRE TO STRUCTURE ABOVE AT 48" O.C. MAX"'},
+               **({'slab_pin_spacing_ft': {'value': 0.666667, 'source': 'A-410 Partition Notes 8.F "0.145\" DIA. HILTI X-DNI FASTENER, 1\" MIN. LENGTH, 2 ROWS AT 16\" O.C." (printed, conservative) vs 9/A-410 "0.177 DIA. HILTI POWDER ACTUATED FASTENER W/ 3/4\" EMBEDMENT AT 24\"" - Paso 12 C7-02, RFI-ACC-slab-pins'},
+                   'drywall_screws_per_sf': {'value': 1.2, 'source': 'Estimator yield 1.2 screws / SF; products per A-410 Partition Notes 8.E (Type S on 25/20 ga, Type S-12 on 18/16 ga; field 12" ceilings, 24" walls) and A-001A Div 09 A.5'}} if os.environ.get('REV8') == '1' else {}),
                **({'addl_head_track_min_ro_ft': {'value': 3.9, 'source': 'RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4\'-0" per the A-500 door schedule, carried with head track R.O. + 1\'-4"'}} if REV5 else {}),
                'bracing_spacing_in': {'value': 48, 'source': '5/A-410 lateral bracing CR 1-1/2" 16 ga @ 4\'-0" O.C. full wall height'}},
  'details': DETAILS,

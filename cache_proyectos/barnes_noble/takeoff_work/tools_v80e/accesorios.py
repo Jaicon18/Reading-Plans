@@ -84,10 +84,12 @@ F_JC = "joint compound"
 F_JT = "joint tape"
 F_L5 = "Level 5 finish"
 F_CLIPS = "deflection clips"
+F_FS_HG = "framing screws heavy gauge"   # v80o (BE-17): 18/16/14 ga = otro producto (#10-16 x 3/4", 3 por conexión)
+F_DWS_HG = "drywall screws heavy gauge"   # v80o (BE-17): Type S-12 sobre studs 18/16/14 ga
 
 UNIDAD = {F_AHT: "lf", F_REINF: "pcs", F_XATM: "lf", F_GRILLE: "lf", F_JR: "sf", F_PVC: "lf", F_PAF: "pcs",
           F_AP: "pcs", F_DWS: "pcs", F_FS: "pcs", F_PINS: "pcs", F_ANCH: "pcs", F_JC: "lb", F_JT: "lf", F_L5: "sf",
-          F_CLIPS: "pcs"}
+          F_CLIPS: "pcs", F_FS_HG: "pcs", F_DWS_HG: "pcs"}
 # Desperdicio que aplica plantilla_excel.py (criterio del estimador: 15 % metal; no-metal = mismo factor que el
 # board; yields de accesorios sin desperdicio, igual que la referencia).
 WASTE = {F_AHT: "metal", F_XATM: "metal", F_GRILLE: "metal", F_JR: "board", F_PVC: "board", F_L5: "board"}
@@ -102,14 +104,16 @@ NOMBRES_EXCEL = {
     F_PVC: "PVC trim - edge trim molding and inside corner molding at the FRP",
     F_PAF: "Power-driven fasteners and duct sleeves",
     F_AP: "Access panel {med}",
-    F_DWS: "Drywall screws 1-1/4\" bugle head",
-    F_FS: "Framing screws, pan head self-drilling",
+    F_DWS: "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",
+    F_FS: "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs)",
     F_PINS: "Power-driven fasteners, slab pins for the bottom track",
     F_ANCH: "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C.",
     F_JC: "Joint compound, all purpose",
     F_JT: "Joint tape, paper",
     F_L5: "Level 5 finish",
     F_CLIPS: "Deflection clips at non-load-bearing walls to structure",
+    F_FS_HG: "Heavy-gauge framing screws #10-16 x 3/4\" pan head (18/16/14 ga studs)",
+    F_DWS_HG: "Type S-12 drywall screws #6 x 1-1/4\" (board on 18/16/14 ga studs)",
 }
 EXCLUIDAS = {"batt insulation": "EXCLUDED (estimator standing order: no insulation)"}
 NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}-?\d")   # v80k (R80e.22): hojas con guion (A-221)
@@ -1003,11 +1007,31 @@ def board_yields(data, fam, o):
             o.pend(f, "board driver = 0")
         return
     det = " + ".join(f"{round(float(fam.get(b, 0) or 0), 2)}" for b in BOARD_DRIVER)
+    hg = _pesados(data)
+    shg = 0.0
+    for w in data.get("walls") or []:
+        if w["id"] not in hg:
+            continue
+        ded = sum(float(op_.get("ro_w_ft", 0)) * float(op_.get("head_ft", 0)) for op_ in w.get("openings") or [])
+        for f_ in w.get("faces") or []:
+            if "cement" in str(f_.get("board")) or float(f_.get("height_ft") or 0) <= 0:
+                continue
+            L_ = float(f_.get("length_ft") or w["length_ft"])
+            shg += max(0.0, L_ * float(f_["height_ft"]) * int(f_.get("layers", 1)) - (ded if L_ >= w["length_ft"] - 0.01 else 0.0))
+    shg = round(min(shg, drv), 2)
     for f, key in ((F_DWS, "drywall_screws_per_sf"), (F_JC, "joint_compound_lb_per_sf"),
                    (F_JT, "joint_tape_lf_per_sf")):
         y, s = k(data, key)
-        v = float(y) * drv
-        o.add(f, v, "DERIVADO", s, f"{y} x ({det} = {round(drv, 2)} SF) = {round(v, 2)}")
+        base = drv - shg if f == F_DWS else drv
+        v = float(y) * base
+        if f == F_DWS and shg:
+            o.add(f, v, "DERIVADO", s, f"{y} x ({det} = {round(drv, 2)} - {shg} on 18/16/14 ga walls = {round(base, 2)} SF) = {round(v, 2)}")
+        else:
+            o.add(f, v, "DERIVADO", s, f"{y} x ({det} = {round(base, 2)} SF) = {round(v, 2)}")
+        if f == F_DWS:
+            y2, _ = k(data, key)
+            o.add(F_DWS_HG, float(y2) * shg, "DERIVADO", "A-410 Partition Notes 8.E: #6 x 1-1/4\" TYPE S-12 BUGLE HEAD SCREWS ... TO 18 GAUGE OR 16 GAUGE STUDS",
+                  f"{y2} x {shg} SF of board on the 18/16/14 ga walls ({', '.join(sorted(hg)) or 'none'}) = {round(float(y2) * shg, 2)}")
 
 
 PIEZAS_RE = (re.compile(r"=\s*(\d+)\s+studs"), re.compile(r"=\s*(\d+)\s+x\s+H"),
@@ -1043,6 +1067,14 @@ def piezas(fam_out, studs_out):
     return n, det
 
 
+RX_HG = re.compile(r"\b(1[0468])\s*ga", re.I)
+
+
+def _pesados(data):
+    """v80o (BE-17): walls con gauge 18/16/14 (o más pesado) declarado en el canon (gauge del Metal Stud Schedule)."""
+    return {w["id"] for w in data.get("walls") or [] if RX_HG.search(str(w.get("gauge") or ""))}
+
+
 def framing_screws(data, fam_out, studs_out, o):
     y, s = k(data, "framing_screws_per_stud")
     if not studs_out:
@@ -1051,9 +1083,18 @@ def framing_screws(data, fam_out, studs_out, o):
     if n == 0:
         o.pend(F_FS, "no stud pieces (pass --studs studs_out.json)")
         return
-    v = int(y) * n
-    o.add(F_FS, v, "DERIVADO", s, f"{y} x {n} stud pieces [{'; '.join(det[:12])}{' ...' if len(det) > 12 else ''}]"
-          f" = {v}")
+    hg = _pesados(data)
+    nh = sum(int(w.get("pcs_full", 0)) + int(w.get("cripples", 0)) for w in (studs_out or {}).get("walls") or []
+             if w.get("id") in hg)
+    nl = n - nh
+    v = int(y) * nl
+    o.add(F_FS, v, "DERIVADO", s, f"{y} x {nl} stud pieces [{'; '.join(det[:12])}{' ...' if len(det) > 12 else ''}"
+          f"{f' - {nh} heavy-gauge pieces' if nh else ''}] = {v}")
+    if nh:
+        o.add(F_FS_HG, 6 * nh, "DERIVADO", "A-410 Partition Notes 8.A: 18/16 GAUGE #10-16 x 3/4\" TEKS - MIN. 3 PER CONNECTION",
+              f"6 (3 per connection x 2 ends) x {nh} stud pieces of the 18/16/14 ga walls ({', '.join(sorted(hg))}) = {6 * nh}")
+    else:
+        o.add(F_FS_HG, 0.0, "DERIVADO", "A-410", "no 18/16/14 ga studs in the canon")
 
 
 def track_slab(data, sin_fuente=None):
@@ -1104,8 +1145,9 @@ def pins_anchors(data, o):
         v = li / float(sp)
         o.add(F_PINS, v, "DERIVADO", ssp, f"interior bottom track on slab {round(li, 2)} LF ({len(inte)} walls, "
               f"x rows) / {sp} = {round(v, 2)}")
-        o.rfis.append({"familia": F_PINS, "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener "
-                       "schedule) vs 24\" (type K box)", "delta_16in": round(li / (16 / 12) - v, 2),
+        o.rfis.append({"familia": F_PINS, "tema": f"pin spacing: carried one pin every {round(float(sp) * 12, 1)}\" "
+                       f"({str(ssp)[:140]}); alternatives: one row @ 16\" / one row @ 24\" (v80o: printed spacings, BE-19)",
+                       "delta_16in": round(li / (16 / 12) - v, 2),
                        "delta_24in": round(li / 2.0 - v, 2), "unidad": "pcs"})
     else:
         o.pend(F_PINS, "no interior bottom track on slab")

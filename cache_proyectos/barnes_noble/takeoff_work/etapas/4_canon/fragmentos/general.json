@@ -27,6 +27,14 @@
    "value": 48,
    "source": "5/A-121 \"HANGING WIRE TO STRUCTURE ABOVE AT 48\" O.C. MAX\""
   },
+  "slab_pin_spacing_ft": {
+   "value": 0.666667,
+   "source": "A-410 Partition Notes 8.F \"0.145\" DIA. HILTI X-DNI FASTENER, 1\" MIN. LENGTH, 2 ROWS AT 16\" O.C.\" (printed, conservative) vs 9/A-410 \"0.177 DIA. HILTI POWDER ACTUATED FASTENER W/ 3/4\" EMBEDMENT AT 24\"\" - Paso 12 C7-02, RFI-ACC-slab-pins"
+  },
+  "drywall_screws_per_sf": {
+   "value": 1.2,
+   "source": "Estimator yield 1.2 screws / SF; products per A-410 Partition Notes 8.E (Type S on 25/20 ga, Type S-12 on 18/16 ga; field 12\" ceilings, 24\" walls) and A-001A Div 09 A.5"
+  },
   "addl_head_track_min_ro_ft": {
    "value": 3.9,
    "source": "RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" per the A-500 door schedule, carried with head track R.O. + 1'-4\""
@@ -1562,7 +1570,7 @@
   },
   {
    "ref": "RESTROOM-BASE-CEMENT",
-   "familia": "cement board",
+   "familia": "5/8\" cement board",
    "qty": 50.04,
    "unit": "SF",
    "source": "22/A-201",
@@ -1614,15 +1622,6 @@
    "source": "3/A-410",
    "op": "3/A-410 \"METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER\" + \"DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK\": inner runner = length of every wall / soffit side to deck = W2-01 48.77 + W2-02 4.99 + W2-03 94.24 + W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-H2a 12.17 + C-H2b 1.95 + C-H3a 4.08 + C-H3b 6.17 + C-E2 29.3 + C-E1-S 23.46 + C-I-P.1 1.0 + C-E1-P.2 2.11 + C-E1-B 2.31 + C-F 3.26 + C-I 2.31 + SS-N 22.77 + SS-E 10.12 + SS-IN-N 20.0 + SS-IN-E 6.25 + SS-GG 6.167 = 479.85 LF (RFI-40 confirms the reading)",
    "img": "../../PASO12_rev6/img/A-410_3-top-track-detail.png"
-  },
-  {
-   "ref": "X-EDNI-8C",
-   "familia": "X-EDNI fasteners, top track to structure",
-   "qty": 720,
-   "unit": "PCS",
-   "source": "A-410",
-   "op": "A-410 Partition Notes (typical fastener) 8.C \"0.145\\\" DIA. HILTI X-EDNI ... 2 ROWS AT 16\\\" O.C. FOR CONTINUOUS APPLICATIONS SUCH AS TRACKS\": 479.85 LF deep leg track to structure x 2 rows / 1.333 ft = 720 pcs",
-   "img": "../../PASO12_rev6/img/A-410_partition-note-8C.png"
   },
   {
    "ref": "CROSS-MEMBERS-8-A410-3",
@@ -1694,15 +1693,6 @@
    "unit": "LF",
    "source": "5/A-121",
    "op": "5/A-121 splay wires 4 per brace group @ 12'-0\" O.C. each way, at 45 deg: groups Women's 1 x drop 16.0; Men's 1 x drop 16.0; Cafe 11'-6\" band 1 x drop 13.5; Cafe 9'-0\" band 1 x drop 16.0; Cafe cloud 4 x drop 13.0; Grab & Go 1 x drop 17.917 -> sum(groups x 4 x drop x 1.414) = 743.29 LF (conservative; A-420 not in the set - RFI-38)",
-   "img": "../../PASO12_rev6/img/A-121_detail-5-seismic-splay-wires.png"
-  },
-  {
-   "ref": "SEISMIC-STRUTS-5-A121",
-   "familia": "1-5/8\" stud",
-   "qty": 131.42,
-   "unit": "LF",
-   "source": "5/A-121",
-   "op": "5/A-121 \"1 5/8\\\" x 16 GA. METAL JOIST\" compression post per brace group: groups Women's 1 x drop 16.0; Men's 1 x drop 16.0; Cafe 11'-6\" band 1 x drop 13.5; Cafe 9'-0\" band 1 x drop 16.0; Cafe cloud 4 x drop 13.0; Grab & Go 1 x drop 17.917 -> sum(groups x drop) = 131.42 LF (conservative - RFI-38)",
    "img": "../../PASO12_rev6/img/A-121_detail-5-seismic-splay-wires.png"
   },
   {
@@ -1886,6 +1876,42 @@
    "img": "../../AUDITORIA_rev4/img/C4_A-410_8_firestop_track_ceiling_line.png"
   },
   {
+   "ref": "SEISMIC-VERTICAL-WIRE-5-A121",
+   "familia": "hanger wire",
+   "qty": 131.42,
+   "unit": "LF",
+   "source": "5/A-121",
+   "op": "5/A-121 \"16 GA. WIRE 12'-0\\\" O.C. EACH WAY AND WITHIN 6'-0\\\" OF EACH WALL\" vertical wire at each brace point: groups Women's 1 x drop 16.0; Men's 1 x drop 16.0; Cafe 11'-6\" band 1 x drop 13.5; Cafe 9'-0\" band 1 x drop 16.0; Cafe cloud 4 x drop 13.0; Grab & Go 1 x drop 17.917 -> sum(groups x drop) = 131.42 LF (conservative - RFI-38) - Paso 12 C7-01: the 1-5/8\" x 16 ga metal joist framing @ 48\" O.C. on 5/A-121 is the horizontal carrying member (no post drawn)",
+   "img": "../../PASO12_rev7/img/A-121_5_1-5-8-metal-joist-framing-48OC-horizontal.png"
+  },
+  {
+   "ref": "PAN-HEAD-8-A410",
+   "familia": "#8 pan head screws, relief channel to structure",
+   "qty": 291,
+   "unit": "PCS",
+   "source": "8/A-410",
+   "op": "8/A-410 \"CONTINUOUS 20 GA. X 2\" MIN DEEP RELIEF CHANNEL - ANCHOR TO STEEL PLATE WITH #8 PAN HEAD SELF TAPPING SCREWS AT 24\" O.C. AND 6\" FROM ENDS\": sum(ROUNDUP(L / 2) + 1) over 32 runs to structure (479.85 LF) = 291 pcs (Paso 12 C7-03; note 8.C X-EDNI = alternative in RFI-51)",
+   "img": "../../PASO12_rev7/img/A-410_8_typ-connection-8-screws-24OC-PAF.png"
+  },
+  {
+   "ref": "PAF-CROSS-MEMBERS-8-A410",
+   "familia": "P.A.F. at cross members",
+   "qty": 282,
+   "unit": "PCS",
+   "source": "8/A-410",
+   "op": "8/A-410 PARALLEL TO STRUCTURE \"METAL STUD PER SCHEDULE W/ (1) 3/16\" 3/8\" P.A.F. AT EACH END\": 141 cross members x 2 = 282 pcs (RFI-41)",
+   "img": "../../PASO12_rev7/img/A-410_8_typ-connection-8-screws-24OC-PAF.png"
+  },
+  {
+   "ref": "NESTED-BRACING-T3-T4",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 122.32,
+   "unit": "LF",
+   "source": "3/A-410",
+   "op": "3/A-410, 4/A-410 (partition types 3, 4) \"3 5/8\\\" METAL STUDS @ 16\\\" O.C. TO BOTTOM OF NESTED STUD BRACING\": one nested stud at the top of each wall = type 3 38.68 + type 4 83.64 = 122.32 LF (conservative; member not drawn - RFI-46)",
+   "img": "../../PASO12_rev7/img/A-410_3-4_types-nested-stud-bracing.png"
+  },
+  {
    "ref": "PLYWOOD-SCREWS-8D",
    "familia": "plywood screws (Teks/3)",
    "qty": 2331,
@@ -1898,7 +1924,7 @@
    "familia": "cement board screws",
    "qty": 1686,
    "unit": "PCS",
-   "source": "22/A-201",
+   "source": "E/A-221; A/A-221; B/A-221; C/A-221; D/A-221; 22/A-201",
    "op": "cement board screws @ 8\" O.C. on studs @ 16\" (manufacturer standard, spacing not printed - RFI-51): 3x5 board = 4 studs x 8 = 32 screws / 15 SF; 789.94 SF x 32/15 = 1686 pcs"
   }
  ],

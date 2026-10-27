@@ -155,7 +155,7 @@ F_GYP = "5/8\" gyp board regular (walls + ceilings)"
 # v80f (R80e.20): 8" joist (ceiling box) y USG drywall suspension grid (main tee / cross tee / moldings)
 F_J8 = "8\" joist"
 # v80n (R80e.27): accesorios impresos en los detalles (clips, fasteners de detalle, nested runner)
-F_NEW27 = ["clip angle (bracing / nested connections)", "X-EDNI fasteners, top track to structure", "plywood screws (Teks/3)", "cement board screws", "nested inner runner (deflection head)"]
+F_NEW27 = ["clip angle (bracing / nested connections)", "#8 pan head screws, relief channel to structure", "P.A.F. at cross members", "5/8\" cement board", "plywood screws (Teks/3)", "cement board screws", "nested inner runner (deflection head)"]
 F_MT, F_CT = "USG drywall main tee (DGLW26)", "USG drywall cross tee (DGLW424)"
 F_CM, F_AM = "USG channel molding (DGCM27)", "USG angle molding (DGWM24)"
 USG_GRID = "usg_grid"

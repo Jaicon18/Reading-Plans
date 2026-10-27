@@ -8,14 +8,16 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19442.26,
-  "framing screws": 3124.0,
-  "slab pins": 640.61,
+  "drywall screws": 6402.26,
+  "framing screws": 1940.0,
+  "slab pins": 960.91,
   "expansion anchors": 0.0,
   "joint compound": 1166.54,
   "joint tape": 5994.7,
   "Level 5 finish": 0.0,
-  "deflection clips": 0.0
+  "deflection clips": 0.0,
+  "framing screws heavy gauge": 1776.0,
+  "drywall screws heavy gauge": 13039.99
  },
  "unidades": {
   "additional head track": "lf",
@@ -33,7 +35,9 @@
   "joint compound": "lb",
   "joint tape": "lf",
   "Level 5 finish": "sf",
-  "deflection clips": "pcs"
+  "deflection clips": "pcs",
+  "framing screws heavy gauge": "pcs",
+  "drywall screws heavy gauge": "pcs"
  },
  "waste": {
   "additional head track": "metal",
@@ -59,7 +63,9 @@
   "joint compound": "DERIVADO",
   "joint tape": "DERIVADO",
   "Level 5 finish": "DERIVADO",
-  "deflection clips": "DERIVADO"
+  "deflection clips": "DERIVADO",
+  "framing screws heavy gauge": "DERIVADO",
+  "drywall screws heavy gauge": "DERIVADO"
  },
  "filas": [
   {
@@ -128,11 +134,19 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19442.26,
+   "valor": 6402.26,
    "unidad": "pcs",
    "estado": "DERIVADO",
-   "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 19442.26"
+   "source": "Estimator yield 1.2 screws / SF; products per A-410 Partition Notes 8.E (Type S on 25/20 ga, Type S-12 on 18/16 ga; field 12\" ceilings, 24\" walls) and A-001A Div 09 A.5",
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 - 10866.66 on 18/16/14 ga walls = 5335.22 SF) = 6402.26"
+  },
+  {
+   "familia": "drywall screws heavy gauge",
+   "valor": 13039.99,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A-410 Partition Notes 8.E: #6 x 1-1/4\" TYPE S-12 BUGLE HEAD SCREWS ... TO 18 GAUGE OR 16 GAUGE STUDS",
+   "operacion": "1.2 x 10866.66 SF of board on the 18/16/14 ga walls (C-F, C-H2a, C-H2b, W2-01, W2-02, W2-03, W2-04, W2-05, W2-06.1, W2-06.2, W2-06.3, W2-06.4, W2-06.5, W2-07, W2-08, W2-09) = 13039.99"
   },
   {
    "familia": "joint compound",
@@ -152,19 +166,27 @@
   },
   {
    "familia": "framing screws",
-   "valor": 3124,
+   "valor": 1940,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 781 stud pieces [studs_nodos 673; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12; C-I-E1.6\" 0; C-I-E2.6\" 0] = 3124"
+   "operacion": "4 x 485 stud pieces [studs_nodos 673; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12; C-I-E1.6\" 0; C-I-E2.6\" 0 - 296 heavy-gauge pieces] = 1940"
+  },
+  {
+   "familia": "framing screws heavy gauge",
+   "valor": 1776,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A-410 Partition Notes 8.A: 18/16 GAUGE #10-16 x 3/4\" TEKS - MIN. 3 PER CONNECTION",
+   "operacion": "6 (3 per connection x 2 ends) x 296 stud pieces of the 18/16/14 ga walls (C-F, C-H2a, C-H2b, W2-01, W2-02, W2-03, W2-04, W2-05, W2-06.1, W2-06.2, W2-06.3, W2-06.4, W2-06.5, W2-07, W2-08, W2-09) = 1776"
   },
   {
    "familia": "slab pins",
-   "valor": 640.61,
+   "valor": 960.91,
    "unidad": "pcs",
    "estado": "DERIVADO",
-   "source": "Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)",
-   "operacion": "interior bottom track on slab 640.61 LF (70 walls, x rows) / 1.0 = 640.61"
+   "source": "A-410 Partition Notes 8.F \"0.145\" DIA. HILTI X-DNI FASTENER, 1\" MIN. LENGTH, 2 ROWS AT 16\" O.C.\" (printed, conservative) vs 9/A-410 \"0.177 DIA. HILTI POWDER ACTUATED FASTENER W/ 3/4\" EMBEDMENT AT 24\"\" - Paso 12 C7-02, RFI-ACC-slab-pins",
+   "operacion": "interior bottom track on slab 640.61 LF (70 walls, x rows) / 0.666667 = 960.91"
   },
   {
    "familia": "expansion anchors",
@@ -234,9 +256,9 @@
  "rfis": [
   {
    "familia": "slab pins",
-   "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener schedule) vs 24\" (type K box)",
-   "delta_16in": -160.15,
-   "delta_24in": -320.31,
+   "tema": "pin spacing: carried one pin every 8.0\" (A-410 Partition Notes 8.F \"0.145\" DIA. HILTI X-DNI FASTENER, 1\" MIN. LENGTH, 2 ROWS AT 16\" O.C.\" (printed, conservative) vs 9/A-410 \"0.177 D); alternatives: one row @ 16\" / one row @ 24\" (v80o: printed spacings, BE-19)",
+   "delta_16in": -480.46,
+   "delta_24in": -640.61,
    "unidad": "pcs"
   },
   {
@@ -255,14 +277,16 @@
   "PVC trim at FRP": "PVC trim - edge trim molding and inside corner molding at the FRP",
   "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves",
   "access panel": "Access panel",
-  "drywall screws": "Drywall screws 1-1/4\" bugle head",
-  "framing screws": "Framing screws, pan head self-drilling",
+  "drywall screws": "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",
+  "framing screws": "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs)",
   "slab pins": "Power-driven fasteners, slab pins for the bottom track",
   "expansion anchors": "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C.",
   "joint compound": "Joint compound, all purpose",
   "joint tape": "Joint tape, paper",
   "Level 5 finish": "Level 5 finish",
-  "deflection clips": "Deflection clips at non-load-bearing walls to structure"
+  "deflection clips": "Deflection clips at non-load-bearing walls to structure",
+  "framing screws heavy gauge": "Heavy-gauge framing screws #10-16 x 3/4\" pan head (18/16/14 ga studs)",
+  "drywall screws heavy gauge": "Type S-12 drywall screws #6 x 1-1/4\" (board on 18/16/14 ga studs)"
  },
  "excluidas": {
   "batt insulation": "EXCLUDED (estimator standing order: no insulation)"
