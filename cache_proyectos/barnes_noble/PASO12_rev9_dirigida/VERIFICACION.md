@@ -116,3 +116,29 @@
 2. Inputs: 4 celdas de stock length (2x 8 ft, DGLW26 12 ft, DGLW424 4 ft, molding 12 ft). Apuntar a ellas H18, H22, H23, H24, H25 y H42.
 3. I55: lista por wall de las 485 piezas de 25/20 ga.
 4. Opcionales: I56 citar 8.F; G45 "each"; B49 quitar "RI 7".
+
+---
+
+## Recheck rev10 (commit b77163b), solo C8-04, C8-05 y C8-08 (R80e.30)
+
+**VEREDICTO rev10: PASA.**
+- Los 3 FAIL de rev9 quedaron corregidos.
+- Net, piezas y GRAND TOTAL son iguales a rev9.
+- BE-46, BE-47 y BE-51 dan PASS.
+
+| Ítem | Resultado | Lo que hay en rev10 |
+|---|---|---|
+| C8-04 | **OK** | MS A37 "Track 3-5/8" (14 ga 157.81 + 16 ga 5.00 + 20 ga 118.28)", que suma 281.09 ✓. A38 "Track 6" (16 ga 25.33 + 20 ga 118.73)", que suma 144.06 ✓. A39 "8" ledger track (gauge not printed, RFI-54)", y RFI-54 agrega el delta del ledger (12.67 LF; si es 16 ga como 8/A-210, solo cambia el precio) ✓. Las cifras coinciden con las que calculé en rev9 (img/06, img/07) |
+| C8-05 | **OK** | Inputs B26 2x 8 ft, B27 main tee 12 ft, B28 cross tee 4 ft, B29 molding 12 ft. H18 y H42 usan `Inputs!$B$26`; H22, H23 y H24/H25 usan B27, B28 y B29. Las piezas son 82, 19, 132, 11, 11 y 3, iguales a rev9 ✓. Ahora sí es verdad lo que dice MS A2. G45 = "each" ✓ |
+| C8-08 | **OK** | I55 trae la lista por wall de 25/20 ga: 50 walls que suman 377, más 9 column wraps × 12 = 108, total **485** ✓. Ningún wall de 14 ga (W2-xx, C-H2a/b, C-F) está en la lista ✓. 4 × 485 = 1,940 ✓ |
+
+**Lo que no cambió:**
+- Material Summary: Net y piezas iguales a rev9 en todos los renglones. Solo cambia el nombre de A37, A38 y A39.
+- Partition Takeoff: 0 celdas distintas. GRAND TOTAL 569.816 LF / 14,881.32 SF ✓.
+- También se aplicaron los opcionales: I56 cita "A-410 note 8.F (9/A-410 = alternate)" y ya no aparece "RI 7". El regex de códigos internos da 0 coincidencias.
+
+| Prueba | rev10 |
+|---|---|
+| BE-46 | PASS: cada renglón de track tiene su gauge, y el que no está impreso va a RFI |
+| BE-47 | PASS: lo que dice MS A2 es verdad. RFI-54 coincide con A39. 377 + 108 = 485 coincide con A55 |
+| BE-51 | PASS: stock lengths en Inputs B26 a B29 |
