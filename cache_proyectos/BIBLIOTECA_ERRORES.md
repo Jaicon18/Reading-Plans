@@ -127,3 +127,6 @@ Los términos del trade van en inglés.
 | BE-48 | FAIL | C7-09 |
 | BE-49 | PASS | rev7 nube 38'-10" correcta |
 | BE-50 | FAIL | N-03 |
+
+## Corrida B&N rev8 (2026-10-27)
+Back-check final: LIBRARY 37 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev8_recheck.md`). Los 10 FAIL (BE-12, 15, 16, 17, 18, 19, 46, 47, 48, 50) quedan corregidos. Las lecciones nuevas están en la regla R80e.29 del skill v80o.
