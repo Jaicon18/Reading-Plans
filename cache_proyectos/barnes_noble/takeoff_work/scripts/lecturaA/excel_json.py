@@ -302,7 +302,7 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
       'If T.O. WD-1 = 15\'-0" as on the Grab & Go header (6/A-226A): FRT plywood - 40.8 SF (4.08 x 10.0) and 5/8" Type X + 40.8 SF.'),
      ('RFI-45', '1/A-221 Workroom door pier (1\'-0" x 2\'-8" HOLD) against H2a with an internal void: the C-H2a Cafe face may be concealed along the pier.',
       'If concealed: - 2.67 x 25.0 = - 66.7 SF 5/8" Type X on C-H2a (pier faces carried as C-E1-P.2 / C-I-P.1).'),
-     ('RFI-46', 'F/A-221 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING": the nested stud bracing member is not drawn; studs carried to deck (estimator decision RI 7).',
+     ('RFI-46', 'F/A-221 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING": the nested stud bracing member is not drawn; studs carried to deck (estimator decision 2026-10-26).',
       f"Carried {MI['F-NESTED-BRACING']['qty']} LF 3-5/8\" (2 nested members); define member / elevation."),
      ('RFI-47', 'Plywood material / thickness conflicts on A-225: 5/A-225 die wall "3/4" THICK MARINE GRADE PLYWOOD" vs A/A-221, B/A-221 "3/4" FRT PLYWOOD SUBSTRATE" and A-410 "ALL PLYWOOD NEEDS TO BE FRT"; 10/A-225 "1/2" F.R.T. PLYWOOD SUBSTRATE" vs I/A-221, G/A-221, H/A-221 5/8" FRT plywood. Carried as FRT, thickness per the A-221 sections.',
       'Same SF; material / thickness change only: die wall 63.47 SF marine vs FRT; type I end faces 18.08 SF 1/2" instead of 5/8".'),
@@ -430,8 +430,10 @@ if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
                                             'Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; the other detail members (braces, bracing clips) are in the Tek screw row. ')
             r['delta'] = r['delta'].replace('= - 640.61 pcs', '= - 518.29 pcs (518.29 LF of interior bottom track on slab)')
             r['delta'] = r['delta'].replace('the other detail members (braces, bracing clips) are in the Tek screw row. ', '5/A-410 bracing clips are in the Tek screw row; diagonal brace end screws (3/A-410) are not printed and not carried (if 2 per end: + 512 #8). ')
+    _r54x = (" 8\" ledger (4/A-210 \"8\" LEDGER\"): gauge not printed; carried 12.67 LF of 8\" track - if 16 ga as the 8/A-210 nested members, no LF change (price only)."
+             if os.environ.get('REV10') == '1' else "")
     d['rfis'].append({'id': 'RFI-54', 'pregunta': 'Ceiling perimeter track at the suspended GWB ceilings (Women\'s 109, Men\'s 108, Cafe 103 bands 11\'-6" and 9\'-0", Grab & Go 7\'-1"): 5/A-121 draws the perimeter attachment but prints no track size; the stud size of the wall it attaches to varies.',
-                      'delta': f"Carried {_fam.get('track de ceilings / soffits', 0):,.2f} LF in its own row (size not printed). If the perimeter is the USG angle molding DGWM24 already carried: - {_fam.get('track de ceilings / soffits', 0):,.2f} LF of track; if 3-5/8\" track: no LF change (price only)."})
+                      'delta': f"Carried {_fam.get('track de ceilings / soffits', 0):,.2f} LF in its own row (size not printed). If the perimeter is the USG angle molding DGWM24 already carried: - {_fam.get('track de ceilings / soffits', 0):,.2f} LF of track; if 3-5/8\" track: no LF change (price only)." + _r54x})
     for x in d.get('alcances') or []:
         if x['id'] == 'ALC-04':
             x['nota'] = x['nota'].replace('X-EDNI fasteners 8.C', '8/A-410 #8 pan head screws + P.A.F. + #8 screws (own rows); X-EDNI 8.C = alternative in RFI-51')

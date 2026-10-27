@@ -1117,11 +1117,11 @@ if REV7:
     misc.append({'ref': 'SOFFIT-CROSS-BRACING-2-A221', 'familia': '3-5/8" stud (todos los gauges)', 'qty': nbr * 2 * 5.0, 'unit': 'LF', 'source': '2/A-221',
                  'op': f'2/A-221 "CROSS BRACING AS REQ\'D": (SS-N {wb7["SS-N"]["length_ft"]} + SS-E {wb7["SS-E"]["length_ft"]}) / 4 ft = {nbr} pairs x 2 x 5.0 ft = {nbr * 10.0} LF 3-5/8" stud (conservative; member / spacing not printed - RFI-42)',
                  'img': P12 + 'A-221_2-cross-bracing.png'})
-    # GAP: E2 Workroom face FRT to ACT-1 + 6" (same rule as the H1 / H2 Workroom faces, estimator precedent RI 7, A-410 Partition Notes 3)
+    # GAP: E2 Workroom face FRT to ACT-1 + 6" (same rule as the H1 / H2 Workroom faces, estimator decision 2026-10-26, A-410 Partition Notes 3)
     for st_ in strips:
         if st_['ref'] == 'C-E2-A-FRT':
             st_['width_ft'] = 10.5
-            st_['op'] = f"{st_['lf']} LF x 10.5 ft (Cafe Workroom ACT-1 10'-0\" (1/A-121) + 6\" - A-410 Partition Notes 3; same rule as the H1 / H2 Workroom faces, estimator precedent RI 7) - rev7 plan check"
+            st_['op'] = f"{st_['lf']} LF x 10.5 ft (Cafe Workroom ACT-1 10'-0\" (1/A-121) + 6\" - A-410 Partition Notes 3; same rule as the H1 / H2 Workroom faces, estimator decision 2026-10-26) - rev7 plan check"
     # GAP: H3b Sales face above the 8'-0" plywood (H/A-221 "H3b = PLYWOOD UP TO 8'-0""): GWB to deck (A-410 Partition Notes 2 full height)
     wb7['C-H3b']['faces'].append({'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 17.0,
                                   'height_source': 'GWB 8\'-0" (top of plywood, H/A-221) to deck 25\'-0" = 17.0 ft - A-410 Partition Notes 2 "GYP. BOARD ON BOTH SIDES FOR THE FULL HEIGHT OF THE STUDS" - rev7 plan check',
@@ -1289,6 +1289,17 @@ if REV9:
                {'from': 'track de ceilings / soffits', 'to': 'ceiling / soffit track 6"', 'items': t6,
                 'source': '3/A-410 (fire stop at ceiling line, 6" walls); 3/A-221 (6" metal studs); 8/A-210 (nested beam "6"x16 GA TOP & BOTTOM TRACK")'},
                {'from': 'track de ceilings / soffits', 'to': 'ledger track 8"', 'items': ['VEST-LEDGER'], 'source': '4/A-210 "8" LEDGER"'}]
+    if os.environ.get('REV10') == '1':   # rev10: gauge per row (track gauge = stud gauge, A-410 schedule note 2; 8/A-210 prints 16 GA)
+        def _g10(i):
+            if i.startswith('VEST-') and i != 'VEST-LEDGER':
+                return '16 ga'
+            if i == 'VEST-LEDGER':
+                return 'gauge not printed, RFI-54'
+            w = wb9.get(i[len('FIRESTOP-'):] if i.startswith('FIRESTOP-') else i)
+            g = _re9.search(r'\d+ ga', str((w or {}).get('gauge') or ''))
+            return g.group(0) if g else None
+        for sp in SPLITS9:
+            sp['gauges'] = {i: _g10(i) for i in sp['items']}
     # C8-08: 22/A-201 cement board base replaces gypsum board on these faces: per wall, for the board / screw split by gauge
     RR9 = ("Women's Restroom 109", "Men's Restroom 108")
     pw9 = {}
