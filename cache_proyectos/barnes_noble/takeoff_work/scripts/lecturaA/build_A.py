@@ -1023,12 +1023,12 @@ if REV7:
     DETAILS['3/A-221'] = {'layers_per_face': 1, 'source': '3/A-221', 'layers_source': '3/A-221', 'img': P12 + 'A-221_3-GrabGo-soffit.png',
                           'title': 'Soffit Section - Grab & Go', 'notes': '6" metal studs @ 16" O.C.; 5/8" pressure treated FRT plywood substrate full face; 5/8" GWB above T.O. WD-1 (15\'-0", 5/A-226A, 6/A-226A); GWB at the soffit bottom', **SEAL}
     ss['faces'] = [{'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 10.0,
-                    'height_source': "GWB from T.O. WD-1 15'-0\" (5/A-226A 11'-0\" + 4'-0\" WD-1; 6/A-226A 15'-0\") to deck 25'-0\" over the full-height FRT plywood (3/A-221) - Paso 12 C-01",
+                    'height_source': "GWB from T.O. WD-1 15'-0\" (5/A-226A 11'-0\" + 4'-0\" WD-1; 6/A-226A 15'-0\") to deck 25'-0\" over the full-height FRT plywood (3/A-221) - rev7 plan check C-01",
                     'board_source': TX}]
     # C-04: C-E1-S exposed Cafe face = 19'-0" HOLD (1/A-221)
     for f in wb7['C-E1-S']['faces']:
         f['length_ft'] = 19.0
-        f['length_source'] = '1/A-221 printed 19\'-0" HOLD (finished face to finished face: pier to SE box) - Paso 12 C-04'
+        f['length_source'] = '1/A-221 printed 19\'-0" HOLD (finished face to finished face: pier to SE box) - rev7 plan check C-04'
     wb7['C-E1-S']['faces'].append(dict(wb7['C-E1-S']['faces'][0], room='concealed: behind the Workroom door pier and inside the SE box (no cement board)',
                                        length_ft=round(wb7['C-E1-S']['length_ft'] - 19.0, 2), height_ft=0.0,
                                        length_source='1/A-221: wall length 23.46 - 19\'-0" HOLD exposed face',
@@ -1041,7 +1041,7 @@ if REV7:
     for m in misc:
         if m.get('source') == '6/A-210':
             m['source'] = '8/A-210' if 'BEAM' in m['ref'] else '7/A-210'
-            m['op'] = m['op'] + ' (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)'
+            m['op'] = m['op'] + ' (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - rev7 plan check C-06)'
     # C-03: 22/A-201 "1'-2" CEMENT BOARD BASE" (5/8" cement board, W.R. above) on the restroom faces of new walls
     RR = ("Women's Restroom 109", "Men's Restroom 108")
     rr = [(w['id'], f.get('length_ft') or w['length_ft']) for w in walls['A-101'] for f in w.get('faces') or [] if f['room'] in RR]
@@ -1049,7 +1049,7 @@ if REV7:
     cbx = round((lrr - drr) * 14 / 12, 2)
     opc = ' + '.join(f'{i} {v}' for i, v in rr) + f' = {lrr} LF - doors 8, 9 ({drr}) = {round(lrr - drr, 2)} LF x 1\'-2" = {cbx} SF'
     misc.append({'ref': 'RESTROOM-BASE-CEMENT', 'familia': 'cement board', 'qty': cbx, 'unit': 'SF', 'source': '22/A-201',
-                 'op': '5/8" CEMENT BOARD BASE 1\'-2" (22/A-201; A-001A Div 09 J.2): ' + opc + ' - Paso 12 C-03', 'img': P12 + 'A-201_22-tile-base.png'})
+                 'op': '5/8" CEMENT BOARD BASE 1\'-2" (22/A-201; A-001A Div 09 J.2): ' + opc + ' - rev7 plan check C-03', 'img': P12 + 'A-201_22-tile-base.png'})
     misc.append({'ref': 'RESTROOM-BASE-WR-DEDUCT', 'familia': '5/8" gyp Type X W.R.', 'qty': -cbx, 'unit': 'SF', 'source': '22/A-201',
                  'op': f'W.R. board replaced by the 1\'-2" cement board base on the same faces (22/A-201): - {cbx} SF', 'img': P12 + 'A-201_22-tile-base.png'})
     # GAP: gauges per type (A-410 Metal Stud Schedule; Partition Notes 5 "ALL METAL STUDS TO BE MIN. 20 GAUGE"; schedule note 2 track = stud)
@@ -1112,7 +1112,7 @@ if REV7:
     for st_ in strips:
         if st_['ref'] in ('SS-N-WD1-FRT', 'SS-E-WD1-FRT'):
             st_['width_ft'] = 14.0
-            st_['op'] = f"{st_['lf']} LF x 14.0 ft: 2/A-221 draws the 5/8\" F.R.T. plywood continuous from the soffit bottom 11'-0\" to deck 25'-0\" (WD-1 band 11'-0\" to 15'-0\", 5/8\" GWB over the plywood above) - Paso 12"
+            st_['op'] = f"{st_['lf']} LF x 14.0 ft: 2/A-221 draws the 5/8\" F.R.T. plywood continuous from the soffit bottom 11'-0\" to deck 25'-0\" (WD-1 band 11'-0\" to 15'-0\", 5/8\" GWB over the plywood above) - rev7 plan check"
     nbr = _m7.ceil((wb7['SS-N']['length_ft'] + wb7['SS-E']['length_ft']) / 4.0)
     misc.append({'ref': 'SOFFIT-CROSS-BRACING-2-A221', 'familia': '3-5/8" stud (todos los gauges)', 'qty': nbr * 2 * 5.0, 'unit': 'LF', 'source': '2/A-221',
                  'op': f'2/A-221 "CROSS BRACING AS REQ\'D": (SS-N {wb7["SS-N"]["length_ft"]} + SS-E {wb7["SS-E"]["length_ft"]}) / 4 ft = {nbr} pairs x 2 x 5.0 ft = {nbr * 10.0} LF 3-5/8" stud (conservative; member / spacing not printed - RFI-42)',
@@ -1121,10 +1121,10 @@ if REV7:
     for st_ in strips:
         if st_['ref'] == 'C-E2-A-FRT':
             st_['width_ft'] = 10.5
-            st_['op'] = f"{st_['lf']} LF x 10.5 ft (Cafe Workroom ACT-1 10'-0\" (1/A-121) + 6\" - A-410 Partition Notes 3; same rule as the H1 / H2 Workroom faces, estimator precedent RI 7) - Paso 12"
+            st_['op'] = f"{st_['lf']} LF x 10.5 ft (Cafe Workroom ACT-1 10'-0\" (1/A-121) + 6\" - A-410 Partition Notes 3; same rule as the H1 / H2 Workroom faces, estimator precedent RI 7) - rev7 plan check"
     # GAP: H3b Sales face above the 8'-0" plywood (H/A-221 "H3b = PLYWOOD UP TO 8'-0""): GWB to deck (A-410 Partition Notes 2 full height)
     wb7['C-H3b']['faces'].append({'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 17.0,
-                                  'height_source': 'GWB 8\'-0" (top of plywood, H/A-221) to deck 25\'-0" = 17.0 ft - A-410 Partition Notes 2 "GYP. BOARD ON BOTH SIDES FOR THE FULL HEIGHT OF THE STUDS" - Paso 12',
+                                  'height_source': 'GWB 8\'-0" (top of plywood, H/A-221) to deck 25\'-0" = 17.0 ft - A-410 Partition Notes 2 "GYP. BOARD ON BOTH SIDES FOR THE FULL HEIGHT OF THE STUDS" - rev7 plan check',
                                   'board_source': TX})
     # GAP: F/A-221 "TO BOTTOM OF NESTED STUD BRACING" - nested bracing member (conservative 2 runners)
     misc.append({'ref': 'F-NESTED-BRACING', 'familia': '3-5/8" stud (todos los gauges)', 'qty': round(2 * wb7['C-F']['length_ft'], 2), 'unit': 'LF', 'source': 'F/A-221',
@@ -1142,7 +1142,7 @@ if REV7:
     # GAP: Grab & Go GWB ceiling 7'-1" (1/A-121)
     ceilings.append({'room': 'Grab & Go', 'system': 'furring', 'area_sf': round(4.08 * 6.167, 2), 'perimeter_ft': round(2 * (4.08 + 6.167), 2),
                      'ns_ft': 6.167, 'ew_ft': 4.08, 'height_ft': 7.083, 'source': 'A-121',
-                     'area_op': "[DERIVED] 4.08 (C-H3a) x 6.167 (6'-2\" HOLD, 1/A-221) = 25.16 SF; tag \"GRAB & GO GWB 7'-1\" PT-7\" (1/A-121) - Paso 12",
+                     'area_op': "[DERIVED] 4.08 (C-H3a) x 6.167 (6'-2\" HOLD, 1/A-221) = 25.16 SF; tag \"GRAB & GO GWB 7'-1\" PT-7\" (1/A-121) - rev7 plan check",
                      'img': P12 + 'A-121_grab-and-go-gwb-7-1.png',
                      'hanger_drop_ft': {'value': 17.917, 'source': "B.O. deck 25'-0\" (1/A-400B) - ceiling 7'-1\" (A-121) - RFI-03"},
                      'detail': '5/A-121', 'board': '5/8 type X', 'board_source': '5/8" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2'})
@@ -1193,9 +1193,9 @@ if REV8:
     for m in list(misc):
         if m['ref'] == 'SEISMIC-STRUTS-5-A121':
             misc.remove(m)
-            misc.append({'ref': 'SEISMIC-VERTICAL-WIRE-5-A121', 'familia': 'hanger wire', 'qty': m['qty'], 'unit': 'LF', 'source': '5/A-121',
+            misc.append({'ref': 'SEISMIC-VERTICAL-WIRE-5-A121', 'familia': '16 ga wire (seismic brace points)', 'qty': m['qty'], 'unit': 'LF', 'source': '5/A-121',
                          'op': m['op'].replace('"1 5/8\\" x 16 GA. METAL JOIST" compression post per brace group', '"16 GA. WIRE 12\'-0\\" O.C. EACH WAY AND WITHIN 6\'-0\\" OF EACH WALL" vertical wire at each brace point')
-                               + ' - Paso 12 C7-01: the 1-5/8" x 16 ga metal joist framing @ 48" O.C. on 5/A-121 is the horizontal carrying member (no post drawn)',
+                               + ' - rev7 plan check C7-01: the 1-5/8" x 16 ga metal joist framing @ 48" O.C. on 5/A-121 is the horizontal carrying member (no post drawn)',
                          'img': P7I + 'A-121_5_1-5-8-metal-joist-framing-48OC-horizontal.png'})
     # C7-03: 8/A-410 (specific) governs over note 8.C: relief channel to steel with #8 pan head screws @ 24" O.C. + 6" from ends;
     # cross members (1) 3/16" x 3/8" P.A.F. at each end
@@ -1206,7 +1206,7 @@ if REV8:
     n8 = sum(_m7.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in FH8)
     misc.append({'ref': 'PAN-HEAD-8-A410', 'familia': '#8 pan head screws, relief channel to structure', 'qty': n8, 'unit': 'PCS', 'source': 'TYPCONN/A-410',
                  'op': 'TYPCONN/A-410 "CONTINUOUS 20 GA. X 2" MIN DEEP RELIEF CHANNEL - ANCHOR TO STEEL PLATE WITH #8 PAN HEAD SELF TAPPING SCREWS AT 24" O.C. AND 6" FROM ENDS": sum(ROUNDUP(L / 2) + 1) over '
-                       + f'{len(FH8)} runs to structure ({round(sum(float(w["length_ft"]) for w in FH8), 2)} LF) = {n8} pcs (Paso 12 C7-03; note 8.C X-EDNI = alternative in RFI-51)',
+                       + f'{len(FH8)} runs to structure ({round(sum(float(w["length_ft"]) for w in FH8), 2)} LF) = {n8} pcs (rev7 plan check C7-03; note 8.C X-EDNI = alternative in RFI-51)',
                  'img': P7I + 'A-410_8_typ-connection-8-screws-24OC-PAF.png'})
     ncm = sum(_m7.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in FH8 if w['band']['ori'] == 'V')
     misc.append({'ref': 'PAF-CROSS-MEMBERS-8-A410', 'familia': 'P.A.F. at cross members', 'qty': 2 * ncm, 'unit': 'PCS', 'source': 'TYPCONN/A-410',
@@ -1216,6 +1216,11 @@ if REV8:
     for m in misc:
         if m['ref'] == 'RESTROOM-BASE-CEMENT':
             m['familia'] = '5/8" cement board'
+    # BE-16: 5/A-410 "(4) TEK SCREWS" per clip angle; 7/A-210 "(4) #10-16 SCREWS" per clip
+    ncl5 = [m for m in misc if m['ref'] == 'CLIP-ANGLES-5-A410'][0]['qty']
+    misc.append({'ref': 'TEK-SCREWS-CLIPS', 'familia': 'Tek screws at clip angles', 'qty': ncl5 * 4 + 4 * 4, 'unit': 'PCS', 'source': '5/A-410; 7/A-210',
+                 'op': f'5/A-410 "2\" x 2\" 16 GA. CLIP ANGLE ... (4) TEK SCREWS": {ncl5} clips x 4 = {ncl5 * 4} + 7/A-210 "(4) #10-16 SCREWS": 4 clips x 4 = 16; total {ncl5 * 4 + 16} pcs',
+                 'img': '../../PASO12_rev6/img/A-410_5-lateral-bracing-clip-angle.png'})
     # N-01: types 3 / 4 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING" (same phrase as F/A-221) - RFI-46
     t34 = [(w['id'], w['length_ft']) for w in walls['A-101'] if w['tag'] in ('3', '4')]
     q34 = round(sum(v for _, v in t34), 2)
@@ -1245,7 +1250,7 @@ general = {
                'furring_oc_in': {'value': 24, 'source': '5/A-121 "7/8" HAT CHANNEL FRAMING @ 24" O.C. MAX"'},
                'carrying_oc_in': {'value': 48, 'source': '5/A-121 "1-1/2" CHANNEL @ 48" O.C. MAX"'},
                'hanger_oc_in': {'value': 48, 'source': '5/A-121 "HANGING WIRE TO STRUCTURE ABOVE AT 48" O.C. MAX"'},
-               **({'slab_pin_spacing_ft': {'value': 0.666667, 'source': 'A-410 Partition Notes 8.F "0.145\" DIA. HILTI X-DNI FASTENER, 1\" MIN. LENGTH, 2 ROWS AT 16\" O.C." (printed, conservative) vs 9/A-410 "0.177 DIA. HILTI POWDER ACTUATED FASTENER W/ 3/4\" EMBEDMENT AT 24\"" - Paso 12 C7-02, RFI-ACC-slab-pins'},
+               **({'slab_pin_spacing_ft': {'value': 0.666667, 'source': 'A-410 note 8.F X-DNI 2 rows @ 16" O.C. (printed, conservative); 9/A-410 0.177" PAF @ 24" = alternative'},
                    'drywall_screws_per_sf': {'value': 1.2, 'source': 'Estimator yield 1.2 screws / SF; products per A-410 Partition Notes 8.E (Type S on 25/20 ga, Type S-12 on 18/16 ga; field 12" ceilings, 24" walls) and A-001A Div 09 A.5'}} if os.environ.get('REV8') == '1' else {}),
                **({'addl_head_track_min_ro_ft': {'value': 3.9, 'source': 'RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4\'-0" per the A-500 door schedule, carried with head track R.O. + 1\'-4"'}} if REV5 else {}),
                'bracing_spacing_in': {'value': 48, 'source': '5/A-410 lateral bracing CR 1-1/2" 16 ga @ 4\'-0" O.C. full wall height'}},
@@ -1283,7 +1288,7 @@ def _ren(o):   # rev5 (audit rev4 row 21): the type I return carries its type in
     t = json.dumps(o, ensure_ascii=False)
     if REV5:
         t = t.replace('C-E1-P.1', 'C-I-P.1')
-    if os.environ.get('REV7') == '1':   # Paso 12 C-07 / C-08: Top Track Detail = 3/A-410; 8/A-410 = Typ. Connection Detail
+    if os.environ.get('REV7') == '1':   # rev7 plan check C-07 / C-08: Top Track Detail = 3/A-410; 8/A-410 = Typ. Connection Detail
         t = t.replace('8/A-410', '3/A-410').replace('TYPCONN/A-410', '8/A-410')
         t = t.replace('(6/A-410 penetration details)', '(skill default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only)')
         t = t.replace('6/A-410 and 7/A-410 penetration details', '6/A-410 and 7/A-410 (pipe firestopping only; no reinforcement plate printed)')

@@ -246,7 +246,7 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
     _fam = fo['familias']
     MI = {m['ref']: m for m in c.get('misc_items') or []}
     _cmq = round(sum(m['qty'] for k, m in MI.items() if k.startswith('CROSS-MEMBERS')), 2)
-    P7 = 'Paso 12 (rev7): '
+    P7 = 'Plan check (rev7): '
     OV7 = {
      'RFI-34': ('CLOSED - ' + P7 + 'T.O. WD-1 at the Grab & Go header = 15\'-0" (5/A-226A 11\'-0" + 4\'-0" WD-1; 6/A-226A 15\'-0"). 3/A-221: 5/8" FRT plywood full face, 5/8" GWB over it above T.O. WD-1.',
                 'Applied: + 6.167 x 10.0 = 61.67 SF 5/8" Type X (15\'-0" to deck); FRT plywood unchanged (110.49 SF).'),
@@ -258,8 +258,8 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
                 f"Carried per wall (Material Summary breakdown) = {round(sum(m['qty'] for k, m in MI.items() if k.startswith('FIRESTOP-')), 2)} LF; if not required: minus that LF."),
     }
     OV7['RFI-04'] = ('CLOSED - Review Item rev3 (estimator decision 2026-10-26): type 2 > 22 ft: 3-5/8" 14 ga SJ + diagonal braces @ 32" O.C. to structure (3/A-410 Top Track Detail "PROVIDE DIAGONAL BRACING AT 32" O.C. TO STRUCTURE ABOVE (TYP.)"); brace member / length not printed - estimator choice 3-5/8" 20 ga stud x 4 ft at 45 deg. ' + P7 + 'same precedent applied to the Cafe 3-5/8" walls to deck (C-H2a, C-H2b, C-F): 14 ga SJ + 11 diagonal braces = 44.0 LF.',
-                     f'Applied: {braces} braces x 4.0 ft = {braces*4:.1f} LF (type 2) + 44.0 LF (Cafe) 3-5/8" 20 ga stud (member and length = estimator choice). Citation history: rev0-rev2 cited the partition type 3 section, rev3-rev6 cited 8/A-410 (that bubble is the Typ. Connection Detail); the Top Track Detail is bubble 3/A-410 (Paso 12 C-07).')
-    OV7['RFI-35'] = ('3/A-410 Top Track Detail "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP." (rev5-rev6 cited 8/A-410, which is the Typ. Connection Detail - Paso 12 C-07): applied to every full-height wall with a ceiling on at least one face (1/A-121); carried; confirm with the GC.', OV7['RFI-35'][1])
+                     f'Applied: {braces} braces x 4.0 ft = {braces*4:.1f} LF (type 2) + 44.0 LF (Cafe) 3-5/8" 20 ga stud (member and length = estimator choice). Citation history: rev0-rev2 cited the partition type 3 section, rev3-rev6 cited 8/A-410 (that bubble is the Typ. Connection Detail); the Top Track Detail is bubble 3/A-410 (rev7 plan check C-07).')
+    OV7['RFI-35'] = ('3/A-410 Top Track Detail "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP." (rev5-rev6 cited 8/A-410, which is the Typ. Connection Detail - rev7 plan check C-07): applied to every full-height wall with a ceiling on at least one face (1/A-121); carried; confirm with the GC.', OV7['RFI-35'][1])
     _cbx = MI['RESTROOM-BASE-CEMENT']['qty']
     _wr7 = _fam.get(chr(53) + '/8" gyp Type X W.R.', 0); _tx7 = _fam.get(chr(53) + '/8" gyp board Type X', 0)
     _cl7 = [x for x in c['ceilings'] if x.get('board') == '5/8 type X' and x.get('system') != 'canopy_joist']
@@ -286,7 +286,7 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
         if r['id'] == 'RFI-23':
             r['delta'] = r['delta'].replace('(387.0 + 69.0 + 85.6 + 10.67)', '(387.0 + 69.0 + 85.6 + 10.67 + FE cabinets 16.0, rev7)')
     NEW7 = [
-     ('RFI-38', 'Ceiling seismic bracing: A-121 Ceiling Notes 1 "SEE A-420 DRAWINGS REGARDING CEILING BRACING" - A-420 is not in the set; 5/A-121 draws splay wires @ 12\'-0" O.C. each way and a 1-5/8" x 16 ga metal joist post; A-002 Div 10 "SEISMIC BRACING" F/I by the tenant contractor. Carried conservatively on the GWB suspended ceilings.',
+     ('RFI-38', 'Ceiling seismic bracing: A-121 Ceiling Notes 1 "SEE A-420 DRAWINGS REGARDING CEILING BRACING" - A-420 is not in the set; 5/A-121 draws splay wires and a 16 ga wire @ 12\'-0" O.C. each way at each brace point (the 1-5/8" x 16 ga metal joist framing @ 48" is the horizontal carrying member); A-002 Div 10 "SEISMIC BRACING" F/I by the tenant contractor. Carried conservatively on the GWB suspended ceilings.',
       f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF (hanger wire row) + 1-5/8\" posts {MI.get('SEISMIC-STRUTS-5-A121', MI.get('SEISMIC-VERTICAL-WIRE-5-A121'))['qty']} LF; if not required (seismic category / A-420): minus both."),
      ('RFI-39', 'Recessed fire extinguisher cabinets (A-101 C11, A-111 KN 9, 4/A-101 "F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET"): 4 in new walls (W2-01, W2-03 x 2, Cafe Workroom); cabinet width / rough opening not printed (Cosmopolitan fully recessed, Ambassador 1017F10).',
       'Carried 16.0 LF FRT 2x (4 x (2.0 + 2.0 ft)); each +1 ft of cabinet width = +8.0 LF FRT; jamb studs inside the field studs.'),
@@ -317,7 +317,7 @@ if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ
      ('RFI-53', 'Light fixtures in the Cafe GWB bands (11\'-6" and 9\'-0", 1/A-121): fixture count in the bands not taken; 5/A-121 "PROVIDE ADDITIONAL WIRE SUPPORT AT ALL LIGHT FIXTURES".',
       'Each fixture in a band = + 1 hanger x 13.5 / 16.0 ft wire.'),
      ('RFI-51', 'Fastener counts not printed: 7/A-210 3"x3"x16 ga clip angles (count per header end); cement board screw spacing (manufacturer standard 8" O.C. used); plywood screws per A-410 note 8.D (24" field / 12" perimeter on 4x8 sheets).',
-      f"Carried: clip angles 7/A-210 4 pcs; cement board screws {MI['CEMENT-BOARD-SCREWS']['qty']} pcs; plywood screws {MI['PLYWOOD-SCREWS-8D']['qty']} pcs - adjust to the estimator yields. Framing screws count the stud pieces of the walls and column wraps (781); the detail members (braces, cross members, posts, bracing) add about + 724 screws. Slab pins at 12\" O.C. (estimator criterion); A-410 note 8.F (2 rows at 16\" O.C. into concrete) = about + 321 pins."),
+      f"Carried: clip angles 7/A-210 4 pcs; cement board screws {MI['CEMENT-BOARD-SCREWS']['qty']} pcs; plywood screws {MI['PLYWOOD-SCREWS-8D']['qty']} pcs - adjust to the estimator yields. Framing screws count the stud pieces of the walls and column wraps (781); the detail members (braces, cross members, bracing) add about + 724 screws. 9/A-410 calls #8 screws stud to track while note 8.A calls #10-16 on 18/16 ga - carried per 8.A."),
     ]
     rfis += [{'id': a, 'pregunta': b, 'delta': dd} for a, b, dd in NEW7]
 import re as _re
@@ -329,10 +329,10 @@ for r in rfis:
 REV8 = os.environ.get('REV8') == '1'
 if REV8:   # rev8: Paso 12 2.ª pasada (PASO12_rev7/)
     _fam = fo['familias']; MI = {m['ref']: m for m in c.get('misc_items') or []}
-    P8 = 'Paso 12 2nd pass (rev8): '
+    P8 = 'Plan check (rev8): '
     for r in rfis:
         if r['id'] == 'RFI-38':
-            r['delta'] = f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF + vertical 16 ga wire at each brace point {MI['SEISMIC-VERTICAL-WIRE-5-A121']['qty']} LF (both in the hanger wire row); the 1-5/8\" x 16 ga metal joist framing @ 48\" on 5/A-121 is the horizontal carrying member (no post) - {P8}C7-01. If not required: minus both."
+            r['delta'] = f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF (hanger wire row) + vertical 16 ga wire at each brace point {MI['SEISMIC-VERTICAL-WIRE-5-A121']['qty']} LF (16 ga wire row); the 1-5/8\" x 16 ga metal joist framing @ 48\" on 5/A-121 is the horizontal carrying member (no post) - {P8}C7-01. If not required: minus both."
         if r['id'] == 'RFI-46':
             r['pregunta'] += ' ' + P8 + 'the same phrase is printed on the partition types 3 and 4 (3/A-410, 4/A-410): nested stud at the top of each wall.'
             r['delta'] = f"Carried {MI['F-NESTED-BRACING']['qty']} LF (F) + {MI['NESTED-BRACING-T3-T4']['qty']} LF (types 3 / 4) 3-5/8\" stud; define member / elevation; if not required: minus both."
