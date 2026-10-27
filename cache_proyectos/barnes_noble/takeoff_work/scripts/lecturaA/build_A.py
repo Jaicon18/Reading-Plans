@@ -1218,8 +1218,11 @@ if REV8:
             m['familia'] = '5/8" cement board'
     # BE-16: 5/A-410 "(4) TEK SCREWS" per clip angle; 7/A-210 "(4) #10-16 SCREWS" per clip
     ncl5 = [m for m in misc if m['ref'] == 'CLIP-ANGLES-5-A410'][0]['qty']
-    misc.append({'ref': 'TEK-SCREWS-CLIPS', 'familia': 'Tek screws at clip angles', 'qty': ncl5 * 4 + 4 * 4, 'unit': 'PCS', 'source': '5/A-410; 7/A-210',
-                 'op': f'5/A-410 "2\" x 2\" 16 GA. CLIP ANGLE ... (4) TEK SCREWS": {ncl5} clips x 4 = {ncl5 * 4} + 7/A-210 "(4) #10-16 SCREWS": 4 clips x 4 = 16; total {ncl5 * 4 + 16} pcs',
+    # 7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16" O.C" (top + bottom runner) on the 12.667 ft nested header (6/A-210)
+    import math as _m7
+    nrt = 2 * 2 * (_m7.ceil(12.667 / (16 / 12)) + 1)
+    misc.append({'ref': 'TEK-SCREWS-CLIPS', 'familia': 'Tek screws at clip angles', 'qty': ncl5 * 4 + 16 + nrt, 'unit': 'PCS', 'source': '5/A-410; 7/A-210; A-410 note 8.A',
+                 'op': f'5/A-410 "2\" x 2\" 16 GA. CLIP ANGLE ... (4) TEK SCREWS": {ncl5} clips x 4 = {ncl5 * 4} + 7/A-210 "(4) #10-16 SCREWS": 4 clips x 4 = 16 + 7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16\" O.C" top and bottom runner: 2 runners x 2 x (ROUNDUP(12.667 / 1.333) + 1) = {nrt}; total {ncl5 * 4 + 16 + nrt} pcs. Size: 5/A-410 prints none; the clip is 16 ga, so A-410 note 8.A "18/16 GAUGE - #10 - 16 X 3/4\" TEKS" applies (7/A-210 prints #10-16)',
                  'img': '../../PASO12_rev6/img/A-410_5-lateral-bracing-clip-angle.png'})
     # N-01: types 3 / 4 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING" (same phrase as F/A-221) - RFI-46
     t34 = [(w['id'], w['length_ft']) for w in walls['A-101'] if w['tag'] in ('3', '4')]
