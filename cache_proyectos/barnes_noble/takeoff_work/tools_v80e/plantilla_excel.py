@@ -749,6 +749,11 @@ NOMBRES_PLANTILLA = {
     "5/8\" gyp board regular (walls + ceilings)": "5/8\" gypsum board, regular",
     "5/8\" gyp MOISTURE RESISTANT": "5/8\" gypsum board, MOISTURE RESISTANT",
     "5/8\" gyp board Type X": "5/8\" gypsum board, Type X",   # v80f R80e.18
+    "8\" joist": "8\" metal joist (ceiling box)",   # v80f R80e.20
+    "USG drywall main tee (DGLW26)": "USG drywall suspension main tee DGLW26",
+    "USG drywall cross tee (DGLW424)": "USG drywall suspension cross tee DGLW424",
+    "USG channel molding (DGCM27)": "USG channel molding DGCM27",
+    "USG angle molding (DGWM24)": "USG angle molding DGWM24",
     "5/8\" gyp Type X W.R.": "5/8\" gypsum board, Type X W.R. (water resistant)",
     "5/8\" EXTERIOR gyp sheathing": "5/8\" EXTERIOR gypsum sheathing",
     "1/2\" EXTERIOR gyp sheathing": "1/2\" EXTERIOR gypsum sheathing",   # v80f R80e.16

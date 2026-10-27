@@ -1,12 +1,12 @@
 {
   "muro": 5,
   "tag": "2",
-  "ubicacion": "W2-05 - Corridor 110 east wall / Women's 109 (starts at the restroom front line) (A-101)",
+  "ubicacion": "W2-05 - Corridor 110 / Women's 109 (door 4 inside wall) (A-101)",
   "largo": {
-    "v": 7.92,
+    "v": 12.92,
     "estado": "DERIVADO",
     "fuente": "A-101",
-    "operacion": "Stage 3 resolution: geometry of reading B B-A-101-18 (Vector y 1337.28 (owns corner with restroom front wall) -> 1408.56 (south furring face) = 71.28 pt /9.) (2/A-410)",
+    "operacion": "vector centerline 12.92 ft (2/A-410)",
     "unidad": null
   },
   "alto_stud": {
@@ -20,6 +20,18 @@
   "brace_sp": 48,
   "hileras": 1,
   "caras": [
+    {
+      "cuarto": "Corridor 110",
+      "alto_board": {
+        "v": 9.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "ACT-3 9'-0\" (A-121) + 6\" above suspended ceiling (A-410 partition note 3, 2/A-410) = 9.5 (2/A-410)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X",
+      "capas": 1
+    },
     {
       "cuarto": "Corridor 110",
       "alto_board": {
@@ -51,10 +63,10 @@
       "unidad": "pcs",
       "formula": null,
       "val": {
-        "v": 8,
+        "v": 12,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(7.92, 16.0)] = 7 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 8 x 1 row(s) + 0 total = 8 full x 25.0 + cripples 0.0 LF = 200.0 LF [L N29 +1] (2/A-410)",
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(12.92, 16.0)] = 11 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 12 x 1 row(s) + 0 total = 12 full x 25.0 + cripples 0.0 LF = 300.0 LF [T N29 +1] (2/A-410)",
         "unidad": null
       }
     },
@@ -62,10 +74,10 @@
       "unidad": "LF",
       "formula": null,
       "val": {
-        "v": 7.92,
+        "v": 12.92,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "bottom 7.92 x 1 = 7.92; top 7.92 x 1 = 7.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 47.52 (2/A-410)",
+        "operacion": "bottom 12.92 x 1 = 12.92; top 12.92 x 1 = 12.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 77.52 (2/A-410)",
         "unidad": null
       }
     },
@@ -73,10 +85,10 @@
       "unidad": "LF",
       "formula": null,
       "val": {
-        "v": 7.92,
+        "v": 12.92,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "bottom 7.92 x 1 = 7.92; top 7.92 x 1 = 7.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 47.52 (2/A-410)",
+        "operacion": "bottom 12.92 x 1 = 12.92; top 12.92 x 1 = 12.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 77.52 (2/A-410)",
         "unidad": null
       }
     },
@@ -84,10 +96,10 @@
       "unidad": "LF",
       "formula": null,
       "val": {
-        "v": 47.52,
+        "v": 77.52,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "bottom 7.92 x 1 = 7.92; top 7.92 x 1 = 7.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 47.52 (2/A-410)",
+        "operacion": "bottom 12.92 x 1 = 12.92; top 12.92 x 1 = 12.92; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 77.52 (2/A-410)",
         "unidad": null
       }
     },
@@ -95,10 +107,10 @@
       "unidad": "SF",
       "formula": null,
       "val": {
-        "v": 75.24,
+        "v": 51.4,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "7.92 x 9.5 x 1 - 0.0 = 75.24 (2/A-410)",
+        "operacion": "5.41 x 9.5 x 1 - 0.0 = 51.4 (2/A-410)",
         "unidad": null
       }
     },
@@ -106,10 +118,10 @@
       "unidad": "SF",
       "formula": null,
       "val": {
-        "v": 71.28,
+        "v": 67.59,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "7.92 x 9.0 x 1 - 0.0 = 71.28 (2/A-410)",
+        "operacion": "7.51 x 9.0 x 1 - 0.0 = 67.59 (2/A-410)",
         "unidad": null
       }
     }
@@ -125,5 +137,5 @@
     "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
   },
   "alcance": [],
-  "sello": "75aac7e53daa8ccb"
+  "sello": "135053349e16509e"
 }

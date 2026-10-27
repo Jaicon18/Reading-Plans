@@ -89,7 +89,7 @@
    "layers_source": "2/A-410",
    "img": "4_canon/img/det/A410_details_4_3_2.png",
    "title": "Non-Rated Full Height Partition",
-   "notes": "3-5/8\" studs @16\" to bottom of nested stud bracing (see schedule for gauge); 5/8\" gyp each side; extend gyp to deck where no ceiling; restroom/cafe walls W.R. gyp on wet side to B.O. gyp ceiling; calls 3/A-410 (top track, slotted deflection) and 5/A-410 (lateral bracing)",
+   "notes": "3-5/8\" studs @16\" to bottom of nested stud bracing (see schedule for gauge); 5/8\" gyp each side; extend gyp to deck where no ceiling; restroom/cafe walls W.R. gyp on wet side to B.O. gyp ceiling; calls 8/A-410 (top track, slotted deflection) and 5/A-410 (lateral bracing)",
    "sealant_none_reason": "CONT. ACOUSTICAL SEALANT drawn at the base (bottom runner) - EXCLUDED in all projects (estimator standing order R77.12); no exterior sealant at base of gypsum drawn",
    "sealant_source": "see detail"
   },
@@ -523,7 +523,7 @@
    "ref": "RESTROOM-BACKING-FRT",
    "wall": "W2-06.5",
    "lf": 13.33,
-   "width_ft": 1.333,
+   "width_ft": 1.3333333333333333,
    "material": "frt_3_4",
    "uso": "substrate",
    "label": "3/4\" FIRE RETARDANT PLYWOOD BACKING BOARD (TYP) AT ALL GRAB BARS",
@@ -531,6 +531,71 @@
    "room": "Men's / Women's Restroom",
    "img": "5_auditoria/img/F_grabbar_backing_21-A201.png",
    "op": "10 pcs x 16\" stud bay (1.333 ft, 21/A-201) x 16\" high (estimator decision rev2) = 13.33 x 16/12 = 17.78 SF"
+  },
+  {
+   "ref": "C-E1-P.1-A-FRT",
+   "wall": "C-E1-P.1",
+   "lf": 1.0,
+   "width_ft": 15.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FRT PLYWOOD behind WD-1 (I/A-221)",
+   "source": "I/A-221",
+   "room": "Cafe 103",
+   "img": "../../ri08_wd1/2_A-221_bubble_6-A226A_looks_at_C-I.png",
+   "op": "1.0 LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A, bubble verified on 1/A-221; rev3 RI 8)"
+  },
+  {
+   "ref": "C-I-A-FRT",
+   "wall": "C-I",
+   "lf": 2.31,
+   "width_ft": 15.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FRT PLYWOOD behind WD-1 (I/A-221)",
+   "source": "I/A-221",
+   "room": "Cafe 103",
+   "img": "../../ri08_wd1/2_A-221_bubble_6-A226A_looks_at_C-I.png",
+   "op": "2.31 LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A, bubble verified on 1/A-221; rev3 RI 8)"
+  },
+  {
+   "ref": "SS-N-WD1-FRT",
+   "wall": "SS-N",
+   "lf": 22.77,
+   "width_ft": 2.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" F.R.T. PLYWOOD behind WD-1 (2/A-221)",
+   "source": "1/A-226A",
+   "room": "Cafe 103",
+   "img": "../../ri09_soffit/4_A-221_bubble_1-A226A_looks_south_north_face.png",
+   "op": "22.77 LF x 2.0 ft (WD-1 9'-0\" to 11'-0\" printed on 1/A-226A; sign panel top not printed = GWB, RFI-14; soffit 9'-0\" vs 11'-0\" conflict RFI-14; rev3 RI 9)"
+  },
+  {
+   "ref": "SS-E-WD1-FRT",
+   "wall": "SS-E",
+   "lf": 10.12,
+   "width_ft": 4.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" F.R.T. PLYWOOD behind WD-1 (2/A-221)",
+   "source": "6/A-226A",
+   "room": "Cafe 103",
+   "img": "../../ri09_soffit/2_A-226A_6_soffit_east_face_WD-1_band.png",
+   "op": "10.12 LF x 4.0 ft (WD-1 11'-0\" to 15'-0\", printed 4'-0\" band, 6/A-226A; rev3 RI 9)"
+  },
+  {
+   "ref": "VEST-PLYWOOD",
+   "wall": "VESTIBULE",
+   "lf": 12.667,
+   "width_ft": 8.417,
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "label": "ONE LAYER OF 3/4\" PLYWOOD (FRT per A-410 \"ALL PLYWOOD NEEDS TO BE FRT\")",
+   "source": "4/A-210",
+   "room": "Vestibule 100",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png",
+   "op": "12.667 x 8.417 (8'-5\" E-W, 1/A-210) = 106.6 SF (rev3 RI 11)"
   }
  ],
  "nodes": [
@@ -582,12 +647,10 @@
   },
   {
    "id": "N29",
-   "kind": "L",
-   "walls": [
-    "W2-05",
-    "W2-06.1"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
+   "kind": "T",
+   "branch": "W2-05",
+   "through": "W2-04",
+   "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
    "id": "N30",
@@ -597,6 +660,13 @@
   },
   {
    "id": "N31",
+   "kind": "T",
+   "branch": "W2-06.1",
+   "through": "W2-05",
+   "source": "A-101 (vector: end on the body of W2-05)"
+  },
+  {
+   "id": "N32",
    "kind": "L",
    "walls": [
     "W2-06.1",
@@ -605,7 +675,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N32",
+   "id": "N33",
    "kind": "L",
    "walls": [
     "W2-06.2",
@@ -614,7 +684,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N33",
+   "id": "N34",
    "kind": "L",
    "walls": [
     "W2-06.3",
@@ -623,7 +693,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N34",
+   "id": "N35",
    "kind": "L",
    "walls": [
     "W2-06.4",
@@ -632,69 +702,63 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N35",
+   "id": "N36",
    "kind": "T",
    "branch": "W2-06.5",
    "through": "W2-08",
    "source": "A-101 (vector: end on the body of W2-08)"
   },
   {
-   "id": "N36",
+   "id": "N37",
    "kind": "T",
    "branch": "W2-07",
    "through": "W2-06.5",
    "source": "A-101 (vector: end on the body of W2-06.5)"
   },
   {
-   "id": "N37",
+   "id": "N38",
    "kind": "free",
    "wall": "W2-07",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N38",
+   "id": "N39",
    "kind": "T",
    "branch": "W2-08",
    "through": "W2-04",
    "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
-   "id": "N39",
+   "id": "N40",
    "kind": "free",
    "wall": "W2-08",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N40",
+   "id": "N41",
    "kind": "T",
    "branch": "W2-09",
    "through": "W2-04",
    "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
-   "id": "N41",
+   "id": "N42",
    "kind": "free",
    "wall": "W2-09",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N42",
+   "id": "N43",
    "kind": "T",
    "branch": "W5-01",
    "through": "W2-06.3",
    "source": "A-101 (vector: end on the body of W2-06.3)"
   },
   {
-   "id": "N43",
+   "id": "N44",
    "kind": "free",
    "wall": "W5-01",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
-  },
-  {
-   "id": "N44",
-   "kind": "free",
-   "wall": "W3-01",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N45",
@@ -704,23 +768,23 @@
   },
   {
    "id": "N46",
+   "kind": "free",
+   "wall": "W3-01",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N47",
    "kind": "T",
    "branch": "W3-02",
    "through": "W3-01",
    "source": "A-101 (vector: end on the body of W3-01)"
   },
   {
-   "id": "N47",
+   "id": "N48",
    "kind": "T",
    "branch": "W3-02",
    "through": "W3-05",
    "source": "A-101 (vector: end on the body of W3-05)"
-  },
-  {
-   "id": "N48",
-   "kind": "free",
-   "wall": "W3-05",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N49",
@@ -730,23 +794,23 @@
   },
   {
    "id": "N50",
+   "kind": "free",
+   "wall": "W3-05",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N51",
    "kind": "T",
    "branch": "W3-03",
    "through": "W3-06",
    "source": "A-101 (vector: end on the body of W3-06)"
   },
   {
-   "id": "N51",
+   "id": "N52",
    "kind": "T",
    "branch": "W3-03",
    "through": "W3-04",
    "source": "A-101 (vector: end on the body of W3-04)"
-  },
-  {
-   "id": "N52",
-   "kind": "free",
-   "wall": "W3-06",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N53",
@@ -757,7 +821,7 @@
   {
    "id": "N54",
    "kind": "free",
-   "wall": "W3-04",
+   "wall": "W3-06",
    "source": "A-101 (vector: free end)"
   },
   {
@@ -768,6 +832,12 @@
   },
   {
    "id": "N56",
+   "kind": "free",
+   "wall": "W3-04",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N57",
    "kind": "L",
    "walls": [
     "W4-28a",
@@ -776,7 +846,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N57",
+   "id": "N58",
    "kind": "L",
    "walls": [
     "W4-28a",
@@ -785,7 +855,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N58",
+   "id": "N59",
    "kind": "L",
    "walls": [
     "W4-28b",
@@ -794,7 +864,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N59",
+   "id": "N60",
    "kind": "L",
    "walls": [
     "W4-28c",
@@ -803,7 +873,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N60",
+   "id": "N61",
    "kind": "L",
    "walls": [
     "W4-28d",
@@ -812,7 +882,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N61",
+   "id": "N62",
    "kind": "L",
    "walls": [
     "W4-28e",
@@ -821,7 +891,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N62",
+   "id": "N63",
    "kind": "L",
    "walls": [
     "W4-29a",
@@ -830,7 +900,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N63",
+   "id": "N64",
    "kind": "L",
    "walls": [
     "W4-29b",
@@ -839,7 +909,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N64",
+   "id": "N65",
    "kind": "L",
    "walls": [
     "W4-29c",
@@ -848,7 +918,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N65",
+   "id": "N66",
    "kind": "L",
    "walls": [
     "W4-29d",
@@ -857,7 +927,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N66",
+   "id": "N67",
    "kind": "L",
    "walls": [
     "W4-29e",
@@ -866,7 +936,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N67",
+   "id": "N68",
    "kind": "L",
    "walls": [
     "W4-29f",
@@ -875,7 +945,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N68",
+   "id": "N69",
    "kind": "L",
    "walls": [
     "W4-30a",
@@ -884,7 +954,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N69",
+   "id": "N70",
    "kind": "L",
    "walls": [
     "W4-30b",
@@ -893,7 +963,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N70",
+   "id": "N71",
    "kind": "L",
    "walls": [
     "W4-30c",
@@ -902,7 +972,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N71",
+   "id": "N72",
    "kind": "L",
    "walls": [
     "W4-30d",
@@ -911,7 +981,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N72",
+   "id": "N73",
    "kind": "L",
    "walls": [
     "W4-30e",
@@ -920,7 +990,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N73",
+   "id": "N74",
    "kind": "L",
    "walls": [
     "W4-30f",
@@ -929,7 +999,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N74",
+   "id": "N75",
    "kind": "L",
    "walls": [
     "W4-31a",
@@ -938,7 +1008,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N75",
+   "id": "N76",
    "kind": "L",
    "walls": [
     "W4-31a",
@@ -947,7 +1017,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N76",
+   "id": "N77",
    "kind": "L",
    "walls": [
     "W4-31b",
@@ -956,7 +1026,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N77",
+   "id": "N78",
    "kind": "L",
    "walls": [
     "W4-31c",
@@ -965,7 +1035,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N78",
+   "id": "N79",
    "kind": "L",
    "walls": [
     "C-H1-N",
@@ -974,7 +1044,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N79",
+   "id": "N80",
    "kind": "L",
    "walls": [
     "C-H1-N",
@@ -983,7 +1053,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N80",
+   "id": "N81",
    "kind": "L",
    "walls": [
     "C-H1-W",
@@ -992,7 +1062,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N81",
+   "id": "N82",
    "kind": "L",
    "walls": [
     "C-H2a",
@@ -1001,20 +1071,20 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N82",
+   "id": "N83",
    "kind": "free",
    "wall": "C-H2b",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N83",
+   "id": "N84",
    "kind": "T",
    "branch": "C-H2b",
    "through": "C-E2",
    "source": "A-221 (vector: end on the body of C-E2)"
   },
   {
-   "id": "N84",
+   "id": "N85",
    "kind": "L",
    "walls": [
     "C-H3a",
@@ -1023,20 +1093,20 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N85",
+   "id": "N86",
    "kind": "free",
    "wall": "C-H3a",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N86",
+   "id": "N87",
    "kind": "T",
    "branch": "C-H3b",
    "through": "C-H1-N",
    "source": "A-221 (vector: end on the body of C-H1-N)"
   },
   {
-   "id": "N87",
+   "id": "N88",
    "kind": "L",
    "walls": [
     "C-E1-S",
@@ -1045,7 +1115,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N88",
+   "id": "N89",
    "kind": "L",
    "walls": [
     "C-E1-S",
@@ -1054,7 +1124,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N89",
+   "id": "N90",
    "kind": "L",
    "walls": [
     "C-E1-P.1",
@@ -1063,13 +1133,13 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N90",
+   "id": "N91",
    "kind": "free",
    "wall": "C-E1-P.1",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N91",
+   "id": "N92",
    "kind": "L",
    "walls": [
     "C-E1-B",
@@ -1078,14 +1148,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N92",
+   "id": "N93",
    "kind": "T",
    "branch": "C-E1-B",
    "through": "C-E1-S",
    "source": "A-221 (vector: end on the body of C-E1-S)"
   },
   {
-   "id": "N93",
+   "id": "N94",
    "kind": "L",
    "walls": [
     "C-F",
@@ -1094,7 +1164,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N94",
+   "id": "N95",
    "kind": "L",
    "walls": [
     "C-A-1",
@@ -1103,7 +1173,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N95",
+   "id": "N96",
    "kind": "L",
    "walls": [
     "C-A-1",
@@ -1112,7 +1182,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N96",
+   "id": "N97",
    "kind": "L",
    "walls": [
     "C-A-2",
@@ -1121,7 +1191,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N97",
+   "id": "N98",
    "kind": "L",
    "walls": [
     "C-A-3",
@@ -1130,14 +1200,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N98",
+   "id": "N99",
    "kind": "T",
    "branch": "C-B",
    "through": "SS-N",
    "source": "A-221 (vector: end on the body of SS-N)"
   },
   {
-   "id": "N99",
+   "id": "N100",
    "kind": "L",
    "walls": [
     "C-B",
@@ -1146,7 +1216,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N100",
+   "id": "N101",
    "kind": "L",
    "walls": [
     "C-D",
@@ -1155,13 +1225,13 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N101",
+   "id": "N102",
    "kind": "free",
    "wall": "SS-N",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N102",
+   "id": "N103",
    "kind": "L",
    "walls": [
     "SS-N",
@@ -1170,14 +1240,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N103",
+   "id": "N104",
    "kind": "T",
    "branch": "SS-IN-N",
    "through": "C-H2a",
    "source": "A-221 (vector: end on the body of C-H2a)"
   },
   {
-   "id": "N104",
+   "id": "N105",
    "kind": "L",
    "walls": [
     "SS-IN-N",
@@ -1186,7 +1256,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N105",
+   "id": "N106",
    "kind": "free",
    "wall": "SS-IN-E",
    "source": "A-221 (vector: free end)"
@@ -1288,6 +1358,80 @@
    "source": "6/A-412",
    "op": "cabinet run 2'-9\" + 2'-7\" = 5'-4\" x 2 rows = 10.67 LF (existing wall EXT-07: remove / replace gyp per A-413 general note)",
    "img": "5_auditoria/img/F_kitchenette_blocking_6-A412.png"
+  }
+ ],
+ "misc_items": [
+  {
+   "ref": "DIAG-BRACES-T2",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 468.0,
+   "unit": "LF",
+   "source": "8/A-410",
+   "label": "3-5/8\" 20 ga stud diagonal brace @ 32\" O.C. to structure (8/A-410 Top Track Detail \"PROVIDE DIAGONAL BRACING AT 32\" O.C. TO STRUCTURE (TYP.)\")",
+   "op": "117 braces (ROUNDUP(L x 12 / 32) + 1 per type 2 wall; 115 in rev2 + 2 from W2-05 +5.00 LF) x 4.0 ft at 45 deg (estimator choice; member / length not printed) = 468.0 LF (rev3 RI 6)"
+  },
+  {
+   "ref": "VEST-JOISTS",
+   "familia": "8\" joist",
+   "qty": 88.0,
+   "unit": "LF",
+   "source": "4/A-210",
+   "op": "8\" JOISTS @ 16\" O.C.: ROUNDUP(152/16)+1 = 11 x (7'-8\" + 2\" + 2\" = 8.0 ft) = 88.0 LF (1/A-210 12'-8\" N-S)",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-BOX-BEAM-STUD",
+   "familia": "8\" stud (todos los gauges)",
+   "qty": 25.33,
+   "unit": "LF",
+   "source": "6/A-210",
+   "op": "NESTED BEAM (2) 8\" x 18 GA studs x 12.667 = 25.33 LF (\"8\" BOX BEAM BEARING ON CORNER POST\", 4/A-210)",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-BOX-BEAM-TRACK",
+   "familia": "track de ceilings / soffits",
+   "qty": 25.33,
+   "unit": "LF",
+   "source": "6/A-210",
+   "op": "NESTED BEAM 6\" x 16 GA top & bottom track (2) x 12.667 = 25.33 LF",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-LEDGER",
+   "familia": "track de ceilings / soffits",
+   "qty": 12.67,
+   "unit": "LF",
+   "source": "4/A-210",
+   "op": "\"8\" LEDGER\" 1 x 12.667 = 12.67 LF (east, at existing storefront)",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-POSTS-STUD",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 126.0,
+   "unit": "LF",
+   "source": "6/A-210",
+   "op": "NESTED COLUMN (2) 3-5/8\" x 18 GA studs x 10.5 ft (B.O. CEILING 10'-6\") x 6 posts (1/A-210: 4 west + 2 east corners - confirm east 2) = 126.0 LF",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-POSTS-TRACK",
+   "familia": "track de ceilings / soffits",
+   "qty": 5.0,
+   "unit": "LF",
+   "source": "6/A-210",
+   "op": "NESTED COLUMN 3-5/8\" x 16 GA top & bottom track 6 x 2 x 5\" = 5.0 LF",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "VEST-GWB",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 105.5,
+   "unit": "SF",
+   "source": "4/A-210",
+   "op": "(1) LAYER OF 5/8\" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8\" = 8.4 SF = 105.5 SF (Type X per rev2)",
+   "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
   }
  ],
  "corners_ok": [
@@ -1436,7 +1580,7 @@
   },
   {
    "room": "Cafe Seating Area 102 - GWB cloud",
-   "system": "furring",
+   "system": "usg_grid",
    "area_sf": 573.69,
    "perimeter_ft": 107.21,
    "ns_ft": 14.773,
@@ -1444,15 +1588,28 @@
    "height_ft": 12.0,
    "source": "A-121",
    "area_op": "[DERIVED] 38.833 (printed 38'-10\" A-121, ticks on cloud edges; vector 38.853) x 14.773 (vector 132.96 pt/9 = 14'-9 1/4\")",
-   "img": "img_ceilings/A121_cafe_seating_cloud_GWB_12-0.png",
+   "img": "../../ri10_11/1_A-121_4_USG_drywall_suspension.png",
    "hanger_drop_ft": {
     "value": 13.0,
     "source": "B.O. deck 25'-0\" (1/A-400B) - ceiling 12.0 (A-121) - RFI-03"
    },
-   "detail": "5/A-121",
-   "system_note": "4/A-121 USG drywall suspension grid is drawn for this cloud (callout on cloud N edge); package carries the 5/A-121 hat channel + 1-1/2\" channel system - grid alternative RFI-15",
+   "detail": "4/A-121",
+   "system_note": "USG drywall suspension grid drawn on 4/A-121 (DGLW26 main tee, DGLW424 cross tee, DGCM27, DGWM24) - rev3 RI 10",
    "board": "5/8 type X",
-   "board_source": "5/8\" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2"
+   "board_source": "5/8\" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2",
+   "system_callout": {
+    "detail": "4/A-121",
+    "on_plan": true,
+    "source": "1/A-121: section bubble 4/A-121 on the N edge of the Cafe Seating cloud"
+   },
+   "main_oc_in": {
+    "value": 48,
+    "source": "USG drywall suspension standard 48\" O.C. (spacing not printed on 4/A-121) - note"
+   },
+   "cross_oc_in": {
+    "value": 16,
+    "source": "USG drywall suspension standard 16\" O.C. (not printed on 4/A-121; 24\" alternative = 84 pcs) - note"
+   }
   },
   {
    "room": "Cafe 103 - 11'-0\" GWB zone",
@@ -1483,8 +1640,8 @@
   }
  ],
  "deflection_clips": {
-  "none_reason": "Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called",
-  "source": "3/A-410"
+  "none_reason": "Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called",
+  "source": "8/A-410"
  },
  "accesorios_rfi": [
   {

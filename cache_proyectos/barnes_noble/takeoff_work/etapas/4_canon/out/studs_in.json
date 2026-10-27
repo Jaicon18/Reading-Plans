@@ -61,7 +61,7 @@
    "id": "W2-05",
    "tag": "2",
    "stud_size": "3-5/8\"",
-   "length_ft": 7.92,
+   "length_ft": 12.92,
    "oc_in": 16,
    "height_ft": 25.0,
    "openings": []
@@ -284,7 +284,7 @@
    "id": "W4-29a",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.27,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -293,7 +293,7 @@
    "id": "W4-29b",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.27,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -302,7 +302,7 @@
    "id": "W4-29c",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.19,
+   "length_ft": 4.29,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -311,7 +311,7 @@
    "id": "W4-29d",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.19,
+   "length_ft": 4.29,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -320,7 +320,7 @@
    "id": "W4-29e",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.27,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -329,7 +329,7 @@
    "id": "W4-29f",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.19,
+   "length_ft": 4.29,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -338,7 +338,7 @@
    "id": "W4-30a",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -347,7 +347,7 @@
    "id": "W4-30b",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -356,7 +356,7 @@
    "id": "W4-30c",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -365,7 +365,7 @@
    "id": "W4-30d",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -374,7 +374,7 @@
    "id": "W4-30e",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -383,7 +383,7 @@
    "id": "W4-30f",
    "tag": "4",
    "stud_size": "3-5/8\"",
-   "length_ft": 4.18,
+   "length_ft": 4.28,
    "oc_in": 16,
    "height_ft": 7.5,
    "openings": []
@@ -697,12 +697,10 @@
   },
   {
    "id": "N29",
-   "kind": "L",
-   "walls": [
-    "W2-05",
-    "W2-06.1"
-   ],
-   "source": "A-101 (vector: ends within 1.0 ft)"
+   "kind": "T",
+   "branch": "W2-05",
+   "through": "W2-04",
+   "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
    "id": "N30",
@@ -712,6 +710,13 @@
   },
   {
    "id": "N31",
+   "kind": "T",
+   "branch": "W2-06.1",
+   "through": "W2-05",
+   "source": "A-101 (vector: end on the body of W2-05)"
+  },
+  {
+   "id": "N32",
    "kind": "L",
    "walls": [
     "W2-06.1",
@@ -720,7 +725,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N32",
+   "id": "N33",
    "kind": "L",
    "walls": [
     "W2-06.2",
@@ -729,7 +734,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N33",
+   "id": "N34",
    "kind": "L",
    "walls": [
     "W2-06.3",
@@ -738,7 +743,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N34",
+   "id": "N35",
    "kind": "L",
    "walls": [
     "W2-06.4",
@@ -747,69 +752,63 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N35",
+   "id": "N36",
    "kind": "T",
    "branch": "W2-06.5",
    "through": "W2-08",
    "source": "A-101 (vector: end on the body of W2-08)"
   },
   {
-   "id": "N36",
+   "id": "N37",
    "kind": "T",
    "branch": "W2-07",
    "through": "W2-06.5",
    "source": "A-101 (vector: end on the body of W2-06.5)"
   },
   {
-   "id": "N37",
+   "id": "N38",
    "kind": "free",
    "wall": "W2-07",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N38",
+   "id": "N39",
    "kind": "T",
    "branch": "W2-08",
    "through": "W2-04",
    "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
-   "id": "N39",
+   "id": "N40",
    "kind": "free",
    "wall": "W2-08",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N40",
+   "id": "N41",
    "kind": "T",
    "branch": "W2-09",
    "through": "W2-04",
    "source": "A-101 (vector: end on the body of W2-04)"
   },
   {
-   "id": "N41",
+   "id": "N42",
    "kind": "free",
    "wall": "W2-09",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
   },
   {
-   "id": "N42",
+   "id": "N43",
    "kind": "T",
    "branch": "W5-01",
    "through": "W2-06.3",
    "source": "A-101 (vector: end on the body of W2-06.3)"
   },
   {
-   "id": "N43",
+   "id": "N44",
    "kind": "free",
    "wall": "W5-01",
    "source": "A-101: end of the new wall against the EXISTING perimeter wall (RFI-01) - end stud"
-  },
-  {
-   "id": "N44",
-   "kind": "free",
-   "wall": "W3-01",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N45",
@@ -819,23 +818,23 @@
   },
   {
    "id": "N46",
+   "kind": "free",
+   "wall": "W3-01",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N47",
    "kind": "T",
    "branch": "W3-02",
    "through": "W3-01",
    "source": "A-101 (vector: end on the body of W3-01)"
   },
   {
-   "id": "N47",
+   "id": "N48",
    "kind": "T",
    "branch": "W3-02",
    "through": "W3-05",
    "source": "A-101 (vector: end on the body of W3-05)"
-  },
-  {
-   "id": "N48",
-   "kind": "free",
-   "wall": "W3-05",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N49",
@@ -845,23 +844,23 @@
   },
   {
    "id": "N50",
+   "kind": "free",
+   "wall": "W3-05",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N51",
    "kind": "T",
    "branch": "W3-03",
    "through": "W3-06",
    "source": "A-101 (vector: end on the body of W3-06)"
   },
   {
-   "id": "N51",
+   "id": "N52",
    "kind": "T",
    "branch": "W3-03",
    "through": "W3-04",
    "source": "A-101 (vector: end on the body of W3-04)"
-  },
-  {
-   "id": "N52",
-   "kind": "free",
-   "wall": "W3-06",
-   "source": "A-101 (vector: free end)"
   },
   {
    "id": "N53",
@@ -872,7 +871,7 @@
   {
    "id": "N54",
    "kind": "free",
-   "wall": "W3-04",
+   "wall": "W3-06",
    "source": "A-101 (vector: free end)"
   },
   {
@@ -883,6 +882,12 @@
   },
   {
    "id": "N56",
+   "kind": "free",
+   "wall": "W3-04",
+   "source": "A-101 (vector: free end)"
+  },
+  {
+   "id": "N57",
    "kind": "L",
    "walls": [
     "W4-28a",
@@ -891,7 +896,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N57",
+   "id": "N58",
    "kind": "L",
    "walls": [
     "W4-28a",
@@ -900,7 +905,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N58",
+   "id": "N59",
    "kind": "L",
    "walls": [
     "W4-28b",
@@ -909,7 +914,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N59",
+   "id": "N60",
    "kind": "L",
    "walls": [
     "W4-28c",
@@ -918,7 +923,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N60",
+   "id": "N61",
    "kind": "L",
    "walls": [
     "W4-28d",
@@ -927,7 +932,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N61",
+   "id": "N62",
    "kind": "L",
    "walls": [
     "W4-28e",
@@ -936,7 +941,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N62",
+   "id": "N63",
    "kind": "L",
    "walls": [
     "W4-29a",
@@ -945,7 +950,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N63",
+   "id": "N64",
    "kind": "L",
    "walls": [
     "W4-29b",
@@ -954,7 +959,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N64",
+   "id": "N65",
    "kind": "L",
    "walls": [
     "W4-29c",
@@ -963,7 +968,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N65",
+   "id": "N66",
    "kind": "L",
    "walls": [
     "W4-29d",
@@ -972,7 +977,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N66",
+   "id": "N67",
    "kind": "L",
    "walls": [
     "W4-29e",
@@ -981,7 +986,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N67",
+   "id": "N68",
    "kind": "L",
    "walls": [
     "W4-29f",
@@ -990,7 +995,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N68",
+   "id": "N69",
    "kind": "L",
    "walls": [
     "W4-30a",
@@ -999,7 +1004,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N69",
+   "id": "N70",
    "kind": "L",
    "walls": [
     "W4-30b",
@@ -1008,7 +1013,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N70",
+   "id": "N71",
    "kind": "L",
    "walls": [
     "W4-30c",
@@ -1017,7 +1022,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N71",
+   "id": "N72",
    "kind": "L",
    "walls": [
     "W4-30d",
@@ -1026,7 +1031,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N72",
+   "id": "N73",
    "kind": "L",
    "walls": [
     "W4-30e",
@@ -1035,7 +1040,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N73",
+   "id": "N74",
    "kind": "L",
    "walls": [
     "W4-30f",
@@ -1044,7 +1049,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N74",
+   "id": "N75",
    "kind": "L",
    "walls": [
     "W4-31a",
@@ -1053,7 +1058,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N75",
+   "id": "N76",
    "kind": "L",
    "walls": [
     "W4-31a",
@@ -1062,7 +1067,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N76",
+   "id": "N77",
    "kind": "L",
    "walls": [
     "W4-31b",
@@ -1071,7 +1076,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N77",
+   "id": "N78",
    "kind": "L",
    "walls": [
     "W4-31c",
@@ -1080,7 +1085,7 @@
    "source": "A-101 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N78",
+   "id": "N79",
    "kind": "L",
    "walls": [
     "C-H1-N",
@@ -1089,7 +1094,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N79",
+   "id": "N80",
    "kind": "L",
    "walls": [
     "C-H1-N",
@@ -1098,7 +1103,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N80",
+   "id": "N81",
    "kind": "L",
    "walls": [
     "C-H1-W",
@@ -1107,7 +1112,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N81",
+   "id": "N82",
    "kind": "L",
    "walls": [
     "C-H2a",
@@ -1116,20 +1121,20 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N82",
+   "id": "N83",
    "kind": "free",
    "wall": "C-H2b",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N83",
+   "id": "N84",
    "kind": "T",
    "branch": "C-H2b",
    "through": "C-E2",
    "source": "A-221 (vector: end on the body of C-E2)"
   },
   {
-   "id": "N84",
+   "id": "N85",
    "kind": "L",
    "walls": [
     "C-H3a",
@@ -1138,20 +1143,20 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N85",
+   "id": "N86",
    "kind": "free",
    "wall": "C-H3a",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N86",
+   "id": "N87",
    "kind": "T",
    "branch": "C-H3b",
    "through": "C-H1-N",
    "source": "A-221 (vector: end on the body of C-H1-N)"
   },
   {
-   "id": "N87",
+   "id": "N88",
    "kind": "L",
    "walls": [
     "C-E1-S",
@@ -1160,7 +1165,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N88",
+   "id": "N89",
    "kind": "L",
    "walls": [
     "C-E1-S",
@@ -1169,7 +1174,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N89",
+   "id": "N90",
    "kind": "L",
    "walls": [
     "C-E1-P.1",
@@ -1178,13 +1183,13 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N90",
+   "id": "N91",
    "kind": "free",
    "wall": "C-E1-P.1",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N91",
+   "id": "N92",
    "kind": "L",
    "walls": [
     "C-E1-B",
@@ -1193,14 +1198,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N92",
+   "id": "N93",
    "kind": "T",
    "branch": "C-E1-B",
    "through": "C-E1-S",
    "source": "A-221 (vector: end on the body of C-E1-S)"
   },
   {
-   "id": "N93",
+   "id": "N94",
    "kind": "L",
    "walls": [
     "C-F",
@@ -1209,7 +1214,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N94",
+   "id": "N95",
    "kind": "L",
    "walls": [
     "C-A-1",
@@ -1218,7 +1223,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N95",
+   "id": "N96",
    "kind": "L",
    "walls": [
     "C-A-1",
@@ -1227,7 +1232,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N96",
+   "id": "N97",
    "kind": "L",
    "walls": [
     "C-A-2",
@@ -1236,7 +1241,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N97",
+   "id": "N98",
    "kind": "L",
    "walls": [
     "C-A-3",
@@ -1245,14 +1250,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N98",
+   "id": "N99",
    "kind": "T",
    "branch": "C-B",
    "through": "SS-N",
    "source": "A-221 (vector: end on the body of SS-N)"
   },
   {
-   "id": "N99",
+   "id": "N100",
    "kind": "L",
    "walls": [
     "C-B",
@@ -1261,7 +1266,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N100",
+   "id": "N101",
    "kind": "L",
    "walls": [
     "C-D",
@@ -1270,13 +1275,13 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N101",
+   "id": "N102",
    "kind": "free",
    "wall": "SS-N",
    "source": "A-221 (vector: free end)"
   },
   {
-   "id": "N102",
+   "id": "N103",
    "kind": "L",
    "walls": [
     "SS-N",
@@ -1285,14 +1290,14 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N103",
+   "id": "N104",
    "kind": "T",
    "branch": "SS-IN-N",
    "through": "C-H2a",
    "source": "A-221 (vector: end on the body of C-H2a)"
   },
   {
-   "id": "N104",
+   "id": "N105",
    "kind": "L",
    "walls": [
     "SS-IN-N",
@@ -1301,7 +1306,7 @@
    "source": "A-221 (vector: ends within 1.0 ft)"
   },
   {
-   "id": "N105",
+   "id": "N106",
    "kind": "free",
    "wall": "SS-IN-E",
    "source": "A-221 (vector: free end)"

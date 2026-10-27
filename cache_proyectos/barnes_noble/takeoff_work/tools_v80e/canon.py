@@ -152,6 +152,11 @@ F_PAR = "6\" parapet stud"
 F_36 = "3-5/8\" stud (todos los gauges)"
 F_TRIM = "metal trim (corner bead, casing, shadow molding)"
 F_GYP = "5/8\" gyp board regular (walls + ceilings)"
+# v80f (R80e.20): 8" joist (ceiling box) y USG drywall suspension grid (main tee / cross tee / moldings)
+F_J8 = "8\" joist"
+F_MT, F_CT = "USG drywall main tee (DGLW26)", "USG drywall cross tee (DGLW424)"
+F_CM, F_AM = "USG channel molding (DGCM27)", "USG angle molding (DGWM24)"
+USG_GRID = "usg_grid"
 SUSP = ("furring", "stud_joist")                 # sistemas suspendidos: carrying + hangers + perimeter track
 JOIST_ONLY = ("canopy_joist", "framed_soffit")   # joists 3-5/8" sin carrying ni hangers
 TRIM_KINDS = {"corner_bead", "casing_bead", "shadow_molding", "edge_trim", "j_bead"}
@@ -1443,8 +1448,41 @@ def _ceilings(data, fam, filas):
     for c in cs:
         src = _src(c, c["room"])
         sysm = c.get("system")
-        if sysm not in SUSP + JOIST_ONLY:
-            raise ValueError(f"{c['room']}: system {' | '.join(SUSP + JOIST_ONLY)}")
+        if sysm not in SUSP + JOIST_ONLY + (USG_GRID,):
+            raise ValueError(f"{c['room']}: system {' | '.join(SUSP + JOIST_ONLY + (USG_GRID,))}")
+        if sysm == USG_GRID:   # v80f (R80e.20): USG drywall suspension grid (detalle del RCP), sin furring/carrying
+            dr = c.get("hanger_drop_ft")
+            if not isinstance(dr, dict) or "value" not in dr or not str(dr.get("source") or "").strip():
+                raise ValueError(f"{c['room']}: usg_grid sin hanger_drop_ft {{value, source}}")
+            for k_ in ("main_oc_in", "cross_oc_in"):
+                v_ = c.get(k_)
+                if not isinstance(v_, dict) or "value" not in v_ or not str(v_.get("source") or "").strip():
+                    raise ValueError(f"{c['room']}: usg_grid sin {k_} {{value, source}} (impreso o estándar USG con nota)")
+            if c.get("perimeter_ft") is None:
+                raise ValueError(f"{c['room']}: usg_grid sin perimeter_ft (moldings)")
+            ns_, ew_ = float(c["ns_ft"]), float(c["ew_ft"])
+            lng, sht = max(ns_, ew_), min(ns_, ew_)
+            m_oc, x_oc = float(c["main_oc_in"]["value"]) / 12.0, float(c["cross_oc_in"]["value"]) / 12.0
+            n_m = int(math.ceil(sht / m_oc - EPS)) + 1
+            n_x = int(math.ceil(lng / x_oc - EPS)) + 1
+            n_hm = int(math.ceil(lng / h_oc - EPS)) + 1
+            per, area, drop = float(c["perimeter_ft"]), float(c["area_sf"]), float(dr["value"])
+            fam[F_MT] += n_m * lng
+            fam[F_CT] += n_x * sht
+            fam[F_CM] += per
+            fam[F_AM] += per
+            hang = n_m * n_hm
+            fam["hanger wire"] += hang * drop
+            HANGERS.append({"room": c["room"], "pcs": hang, "altura_ft": drop, "altura_source": dr["source"],
+                            "lf": round(hang * drop, 2)})
+            fam[BOARD_FAM.get(c.get("board") or "5/8 regular", F_GYP)] += area
+            filas.append({"familia": "ceilings", "room": c["room"], "source": src,
+                          "operacion": f"usg_grid: main tee ROUNDUP({round(sht, 3)}/{round(m_oc, 3)})+1 = {n_m} x "
+                                       f"{round(lng, 3)} = {round(n_m * lng, 2)}; cross tee ROUNDUP({round(lng, 3)}/"
+                                       f"{round(x_oc, 3)})+1 = {n_x} x {round(sht, 3)} = {round(n_x * sht, 2)}; "
+                                       f"channel + angle molding {per} each; hangers {n_m} x {n_hm} = {hang} x drop "
+                                       f"{drop} = {round(hang * drop, 2)} LF; board {area} SF"})
+            continue
         if "soffit" in str(c["room"]).lower() and sysm in SUSP:
             raise ValueError(f"{c['room']}: un soffit es framed (su detalle dibuja studs) -> framed_soffit o "
                              f"canopy_joist, sin furring/carrying/hangers (#12A furring, #12B carrying)")
@@ -1988,6 +2026,14 @@ def _parapets_blocking(data, fam, filas, avisos):
         if mat == "metal":
             BLK_ORIGEN["items"] = BLK_ORIGEN.get("items", 0.0) + float(it["lf"])
         filas.append({"familia": k, "ref": it["ref"], "source": src, "operacion": f"{it['lf']} LF"})
+    for it in data.get("misc_items") or []:   # v80f (R80e.20): miembros dibujados en un detalle (braces, box beam, joists)
+        src = _src(it, it["ref"])
+        if it.get("familia") not in FAMS:
+            raise ValueError(f"{it['ref']}: misc_items.familia debe ser una de FAMS (vino {it.get('familia')!r})")
+        if not str(it.get("op") or "").strip():
+            raise ValueError(f"{it['ref']}: misc_items sin op (operación DERIVADA)")
+        fam[it["familia"]] += float(it["qty"])
+        filas.append({"familia": it["familia"], "ref": it["ref"], "source": src, "operacion": it["op"]})
     for s in data.get("plywood_strips") or []:
         src = _src(s, s["ref"])
         mat = _strip_material(s)
@@ -2004,13 +2050,15 @@ FAMS = ["2-1/2\" stud", "8\" stud (todos los gauges)", "6\" stud (todos los gaug
         "5/8\" gyp MOISTURE RESISTANT", "ballistic panel", "3/8\" gyp board", "5/8\" glass mat sheathing",
         "5/8\" EXTERIOR gyp sheathing", "1/2\" EXTERIOR gyp sheathing", "FRT plywood (SF)", "FRT blocking",
         "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.",   # v80f R80e.18
+        F_J8, F_MT, F_CT, F_CM, F_AM,   # v80f R80e.20: 8" joist, USG drywall grid
         "metal stud blocking (362CR / STUD BLOCKING)", F_TRIM, "cement board", F_FRP, F_SEAL, F_L5]
 # familias que DEBEN salir de canon.py con número (PROTOCOLO_v62 §6); framed openings MEP sale de
 # framed_openings.py y se agrega con --fo
 # v80e: 8" stud y 1/2" exterior gyp sheathing son familias opcionales (solo si el set las dibuja)
 OBLIGATORIAS = [f for f in FAMS if f not in ("2-1/2\" stud", "8\" stud (todos los gauges)",
                                              "1/2\" EXTERIOR gyp sheathing", F_L5, F_SEAL,
-                                             "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.")]   # v77c U8: sealant exterior opcional
+                                             "5/8\" gyp board Type X", "5/8\" gyp Type X W.R.",
+                                             F_J8, F_MT, F_CT, F_CM, F_AM)]   # v77c U8: sealant exterior opcional
 STUD_FAM = (("parapet", F_PAR), ("2-1/2\"", "2-1/2\" stud"), ("6\"", "6\" stud (todos los gauges)"),
             ("3-5/8\"", F_36), ("1-5/8\"", "1-5/8\" stud"),
             ("8\"", "8\" stud (todos los gauges)"))  # v80e: 8" exterior stud, AL FINAL ('8"' está dentro de '3-5/8"')

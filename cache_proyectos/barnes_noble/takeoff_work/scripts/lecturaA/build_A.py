@@ -3,6 +3,7 @@ alturas, caras, aberturas. Salida: fragmentos en 2_lectura/A/."""
 import json, os, math, re
 BN = '/home/user/Reading-Plans/cache_proyectos/barnes_noble'
 FINAL = os.environ.get('MODO') == 'final'
+REV3 = os.environ.get('REV3') == '1'
 OUT = BN + '/takeoff_work/etapas/2_lectura/A'
 OUT_W = BN + '/takeoff_work/etapas/4_canon/fragmentos' if FINAL else OUT
 wc = {w['wall_id']: w for w in json.load(open(BN + '/walls_coords.json'))['walls']}
@@ -131,7 +132,7 @@ if FINAL:
         w['length_op'] = f"Stage 3 resolution: geometry of reading B {bid} ({b.get('length_op', 'vector')})"
         w['length_status'] = 'DERIVED'
     for w in walls['A-101']:
-        if w['id'] == 'W2-05':
+        if w['id'] == 'W2-05' and not REV3:   # rev3 (RI 1): W2-05 = reading A, printed 12'-11" on A-101
             from_b(w, 'B-A-101-18')
             w['location'] = "Corridor 110 east wall / Women's 109 (starts at the restroom front line)"
     m = {'W2-06.1': 'B-A-101-19a', 'W2-06.2': 'B-A-101-19b', 'W2-06.3': 'B-A-101-19c', 'W2-06.4': 'B-A-101-19d',
@@ -255,7 +256,8 @@ for k in ('W3-01', 'W3-02', 'W3-03', 'W3-04', 'W3-05', 'W3-06', 'W4-02', 'W4-03'
     FACES[k] = [('A', 'Cafe Seating 102' if k.startswith('W3') else S), ('B', S)]
 CEIL['Sales Area 101 (partial wall)'] = CEIL['Cafe Seating 102']
 if FINAL:
-    FACES['W2-05'] = [('A', 'Corridor 110'), ('B', "Women's Restroom 109")]
+    if not REV3:
+        FACES['W2-05'] = [('A', 'Corridor 110'), ('B', "Women's Restroom 109")]
     for w in walls['A-101']:
         if w['tag'] == '4':
             FACES[w['id']] = [('A', S), ('B', S)]
@@ -441,7 +443,7 @@ def _hit(pg, p, n, lim):
                 if best[sg] is None or abs(tt) > abs(best[sg]): best[sg] = tt
     return best
 STATUS_ES = {'CONFIRMED': 'CONFIRMADO', 'DERIVED': 'DERIVADO', 'PENDING': 'PENDIENTE'}
-TOPT = {'2': 'deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410',
+TOPT = {'2': 'deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410',
         '5': 'deep leg slip track at underside of deck - 3/A-410, 5/A-410',
         '3': 'fixed top track at T.O. wall 8\'-0" A.F.F. (open top, capped by board) - 3/A-410',
         '4': 'fixed top track at T.O. wall 7\'-6" A.F.F. - 4/A-410',
@@ -612,7 +614,7 @@ NOTES = {'1/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, R-21 batt 
          '1A/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, R-21 batt to deck, 10" split faced CMU',
          '1B/A-410': '8" metal stud, 5/8" gyp bd BY FUTURE TENANT, 1/2" exterior gyp sheathing, weather barrier, 1" air gap, 4" stone veneer',
          '1C/A-410': '3-5/8" metal stud, 5/8" gyp bd BY FUTURE TENANT, 10" CMU, 4" stone veneer',
-         '2/A-410': '3-5/8" studs @16" to bottom of nested stud bracing (see schedule for gauge); 5/8" gyp each side; extend gyp to deck where no ceiling; restroom/cafe walls W.R. gyp on wet side to B.O. gyp ceiling; calls 3/A-410 (top track, slotted deflection) and 5/A-410 (lateral bracing)',
+         '2/A-410': '3-5/8" studs @16" to bottom of nested stud bracing (see schedule for gauge); 5/8" gyp each side; extend gyp to deck where no ceiling; restroom/cafe walls W.R. gyp on wet side to B.O. gyp ceiling; calls 8/A-410 (top track, slotted deflection) and 5/A-410 (lateral bracing)',
          '3/A-410': '3-5/8" studs @16" to bottom of nested stud bracing; T.O. wall 8\'-0" A.F.F.; 5/8" gyp both sides; F.R.P. over 5/8" plywood where shelving occurs; 3-5/8" x 20 ga track w/ (2) 1/4" Hilti Kwik HUS-EZ + moment clip (A/A-410)',
          '4/A-410': 'as 3/A-410 with T.O. wall 7\'-6" A.F.F.', '5/A-410': '6" studs @16" to bottom of nested stud bracing; 5/8" gyp each side; restroom walls W.R. gyp to B.O. gyp ceiling',
          'E/A-221': '6" metal studs @16" to underside of deck; E1 1/2" cement board, E2 5/8" FRT plywood; void at existing wall',
@@ -814,6 +816,80 @@ if REV1:
                    'uso': 'substrate', 'label': '3/4" FIRE RETARDANT PLYWOOD BACKING BOARD (TYP) AT ALL GRAB BARS', 'source': '21/A-201',
                    'room': "Men's / Women's Restroom", 'img': '5_auditoria/img/F_grabbar_backing_21-A201.png', 'op': ('10 pcs x 16" stud bay (1.333 ft, 21/A-201) x 16" high (estimator decision rev2) = 13.33 x 16/12 = 17.78 SF' if REV2 else '10 pcs (6 grab bars, 2 lavatories, 2 baby changing stations; 21/A-201, 26/A-201) x 16" stud bay (1.333 ft, 21/A-201) x 1.0 ft height ASSUMED (not printed - Review Item) = 13.33 SF')})
 
+# ---------------------------------------------------------------- REV3 (11 Review Items cerrados, DECISIONES_ESTIMADOR.md)
+misc = []
+if REV3:
+    import math as _m
+    # RI 2: curved walls type 4 = face-average arc 25.68 LF each (RFI-18, estimator choice): 6 chords scaled
+    for pref in ('W4-29', 'W4-30'):
+        ch = sorted([w for w in walls['A-101'] if w['id'].startswith(pref)], key=lambda w: w['id'])
+        tot = sum(w['length_ft'] for w in ch)
+        for w in ch:
+            k_ = 25.68 / tot
+            b = w['band']; (x0, y0), (x1, y1) = b['p0'], b['p1']; cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+            b['p0'] = [round(cx + (x0 - cx) * k_, 2), round(cy + (y0 - cy) * k_, 2)]
+            b['p1'] = [round(cx + (x1 - cx) * k_, 2), round(cy + (y1 - cy) * k_, 2)]
+            for fk in ('faces_top', 'faces_bottom'):   # caras escaladas igual: largo = promedio de caras (R72.2)
+                if b.get(fk):
+                    b[fk] = [[round(cx + (px - cx) * k_, 2), round(cy + (py - cy) * k_, 2)] for px, py in b[fk]]
+            b['arc_note'] = f'chord and faces scaled x {round(k_, 4)} to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)'
+            w['length_ft'] = round(w['length_ft'] * k_, 2)
+            w['length_op'] += f' x {round(k_, 4)} (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)'
+        d_ = round(25.68 - sum(w['length_ft'] for w in ch), 2)
+        ch[-1]['length_ft'] = round(ch[-1]['length_ft'] + d_, 2)
+    # RI 8: type I WD-1 to 15'-0" (6/A-226A) -> 5/8" FRT plywood floor to 15'-0"; GWB 15'-0" to deck (2/A-221 rule)
+    for w in walls['A-221']:
+        if w['tag'] == 'I':
+            strips.append({'ref': f"{w['id']}-A-FRT", 'wall': w['id'], 'lf': w['length_ft'], 'width_ft': 15.0, 'material': 'frt_5_8',
+                           'uso': 'substrate', 'label': '5/8" FRT PLYWOOD behind WD-1 (I/A-221)', 'source': 'I/A-221', 'room': 'Cafe 103',
+                           'img': '../../ri08_wd1/2_A-221_bubble_6-A226A_looks_at_C-I.png',
+                           'op': f"{w['length_ft']} LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A, bubble verified on 1/A-221; rev3 RI 8)"})
+            for f in w.get('faces') or []:
+                f['height_ft'] = 10.0
+                f['height_source'] = "GWB from top of WD-1 15'-0\" (6/A-226A) to deck 25'-0\" = 10.0 ft (2/A-221 studs UP TO DECK; rev3 RI 8)"
+    # RI 9: soffit faces (2/A-221, 6/A-226A east, 1/A-226A north, bubbles verified)
+    for w in walls['A-221']:
+        if w['id'] == 'SS-E':
+            strips.append({'ref': 'SS-E-WD1-FRT', 'wall': 'SS-E', 'lf': w['length_ft'], 'width_ft': 4.0, 'material': 'frt_5_8', 'uso': 'substrate',
+                           'label': '5/8" F.R.T. PLYWOOD behind WD-1 (2/A-221)', 'source': '6/A-226A', 'room': 'Cafe 103',
+                           'img': '../../ri09_soffit/2_A-226A_6_soffit_east_face_WD-1_band.png',
+                           'op': f"{w['length_ft']} LF x 4.0 ft (WD-1 11'-0\" to 15'-0\", printed 4'-0\" band, 6/A-226A; rev3 RI 9)"})
+            for f in w.get('faces') or []:
+                f['height_ft'] = 10.0; f['height_source'] = "GWB above WD-1 15'-0\" to deck 25'-0\" (2/A-221; rev3 RI 9)"
+        if w['id'] == 'SS-N':
+            strips.append({'ref': 'SS-N-WD1-FRT', 'wall': 'SS-N', 'lf': w['length_ft'], 'width_ft': 2.0, 'material': 'frt_5_8', 'uso': 'substrate',
+                           'label': '5/8" F.R.T. PLYWOOD behind WD-1 (2/A-221)', 'source': '1/A-226A', 'room': 'Cafe 103',
+                           'img': '../../ri09_soffit/4_A-221_bubble_1-A226A_looks_south_north_face.png',
+                           'op': f"{w['length_ft']} LF x 2.0 ft (WD-1 9'-0\" to 11'-0\" printed on 1/A-226A; sign panel top not printed = GWB, RFI-14; soffit 9'-0\" vs 11'-0\" conflict RFI-14; rev3 RI 9)"})
+    # RI 10: Cafe Seating cloud = USG drywall suspension grid (4/A-121)
+    for c_ in ceilings:
+        if 'cloud' in c_['room']:
+            c_['system'] = 'usg_grid'
+            c_['detail'] = '4/A-121'
+            c_['system_callout'] = {'detail': '4/A-121', 'on_plan': True, 'source': '1/A-121: section bubble 4/A-121 on the N edge of the Cafe Seating cloud'}
+            c_['system_note'] = 'USG drywall suspension grid drawn on 4/A-121 (DGLW26 main tee, DGLW424 cross tee, DGCM27, DGWM24) - rev3 RI 10'
+            c_['main_oc_in'] = {'value': 48, 'source': 'USG drywall suspension standard 48" O.C. (spacing not printed on 4/A-121) - note'}
+            c_['cross_oc_in'] = {'value': 16, 'source': 'USG drywall suspension standard 16" O.C. (not printed on 4/A-121; 24" alternative = 84 pcs) - note'}
+            c_['img'] = '../../ri10_11/1_A-121_4_USG_drywall_suspension.png'
+    # RI 6: diagonal braces type 2 > 22 ft (RFI-04, estimator choice)
+    misc.append({'ref': 'DIAG-BRACES-T2', 'familia': '3-5/8" stud (todos los gauges)', 'qty': 468.0, 'unit': 'LF', 'source': '8/A-410',
+                 'label': '3-5/8" 20 ga stud diagonal brace @ 32" O.C. to structure (8/A-410 Top Track Detail "PROVIDE DIAGONAL BRACING AT 32\" O.C. TO STRUCTURE (TYP.)")',
+                 'op': '117 braces (ROUNDUP(L x 12 / 32) + 1 per type 2 wall; 115 in rev2 + 2 from W2-05 +5.00 LF) x 4.0 ft at 45 deg (estimator choice; member / length not printed) = 468.0 LF (rev3 RI 6)'})
+    # RI 11: vestibule GWB ceiling box (4/A-210, 6/A-210, 1/A-210)
+    VB = '../../ri10_11/5_A-210_4_vestibule_section.png'
+    for ref, fam_, q, src, op in (
+        ('VEST-JOISTS', '8" joist', 88.0, '4/A-210', '8" JOISTS @ 16" O.C.: ROUNDUP(152/16)+1 = 11 x (7\'-8" + 2" + 2" = 8.0 ft) = 88.0 LF (1/A-210 12\'-8" N-S)'),
+        ('VEST-BOX-BEAM-STUD', '8" stud (todos los gauges)', 25.33, '6/A-210', 'NESTED BEAM (2) 8" x 18 GA studs x 12.667 = 25.33 LF ("8" BOX BEAM BEARING ON CORNER POST", 4/A-210)'),
+        ('VEST-BOX-BEAM-TRACK', 'track de ceilings / soffits', 25.33, '6/A-210', 'NESTED BEAM 6" x 16 GA top & bottom track (2) x 12.667 = 25.33 LF'),
+        ('VEST-LEDGER', 'track de ceilings / soffits', 12.67, '4/A-210', '"8" LEDGER" 1 x 12.667 = 12.67 LF (east, at existing storefront)'),
+        ('VEST-POSTS-STUD', '3-5/8" stud (todos los gauges)', 126.0, '6/A-210', 'NESTED COLUMN (2) 3-5/8" x 18 GA studs x 10.5 ft (B.O. CEILING 10\'-6") x 6 posts (1/A-210: 4 west + 2 east corners - confirm east 2) = 126.0 LF'),
+        ('VEST-POSTS-TRACK', 'track de ceilings / soffits', 5.0, '6/A-210', 'NESTED COLUMN 3-5/8" x 16 GA top & bottom track 6 x 2 x 5" = 5.0 LF'),
+        ('VEST-GWB', '5/8" gyp board Type X', 105.5, '4/A-210', '(1) LAYER OF 5/8" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8" = 8.4 SF = 105.5 SF (Type X per rev2)')):
+        misc.append({'ref': ref, 'familia': fam_, 'qty': q, 'unit': 'SF' if 'gyp' in fam_ else 'LF', 'source': src, 'op': op, 'img': VB})
+    strips.append({'ref': 'VEST-PLYWOOD', 'wall': 'VESTIBULE', 'lf': 12.667, 'width_ft': 8.417, 'material': 'frt_3_4', 'uso': 'substrate',
+                   'label': 'ONE LAYER OF 3/4" PLYWOOD (FRT per A-410 "ALL PLYWOOD NEEDS TO BE FRT")', 'source': '4/A-210', 'room': 'Vestibule 100',
+                   'img': VB, 'op': '12.667 x 8.417 (8\'-5" E-W, 1/A-210) = 106.6 SF (rev3 RI 11)'})
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -832,12 +908,13 @@ general = {
  'nodes': nodes,
  'trim_items': trim,
  **({'blocking_items': blocking} if blocking else {}),
+ **({'misc_items': misc} if misc else {}),
  **({'corners_ok': [{'walls': list(p), 'reason': 'R75.7 (estimator rule): a short return (<= 2 ft) is measured from the OUTER face of the run it returns to, so return and run share the corner square by rule; esquinas.py R70.2 flags it as double - package inconsistency reported (PARA_REVISAR)'}
                     for p in (('W2-06.1', 'W2-06.2'), ('W2-06.3', 'W2-06.2'), ('W2-06.3', 'W2-06.4'), ('W2-06.5', 'W2-06.4'),
                               ('W4-28a', 'W4-28b'), ('W4-28a', 'W4-28c'), ('W4-31a', 'W4-31b'), ('W4-31a', 'W4-31c'))],
      'gaps_ok': [{'between': ['W2-06.1', 'W2-06.5'], 'reason': 'Drinking fountain recess (key note C26, A-101): the corridor wall steps back; the gap is closed by W2-06.2 / W2-06.3 / W2-06.4'}]} if FINAL else {}),
  'ceilings': ceilings,
- 'deflection_clips': {'none_reason': 'Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 "SLOTTED DEFLECTION", A-410 partition note 7 "PROVIDE DEFLECTION TRACK AS REQUIRED"); no deflection clips called', 'source': '3/A-410'},
+ 'deflection_clips': {'none_reason': 'Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 "SLOTTED DEFLECTION", A-410 partition note 7 "PROVIDE DEFLECTION TRACK AS REQUIRED"); no deflection clips called', 'source': '8/A-410'},
  'accesorios_rfi': [
    {'familia': 'stud reinforcement MEP', 'motivo': 'MEP sweep not registrable: mep.registro M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (mep.py rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.',
     'delta': 'per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each', 'source': 'M-102',

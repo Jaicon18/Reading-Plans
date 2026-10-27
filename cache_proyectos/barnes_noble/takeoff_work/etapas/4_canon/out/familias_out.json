@@ -1,20 +1,20 @@
 {
  "familias": {
   "2-1/2\" stud": 0.0,
-  "8\" stud (todos los gauges)": 0.0,
+  "8\" stud (todos los gauges)": 25.33,
   "6\" stud (todos los gauges)": 2900.0,
-  "3-5/8\" stud (todos los gauges)": 10120.39,
+  "3-5/8\" stud (todos los gauges)": 10839.39,
   "1-5/8\" stud": 0.0,
   "6\" parapet stud": 0.0,
-  "bottom track (todos)": 634.44,
-  "top / deflection track (todos)": 634.44,
-  "track de ceilings / soffits": 385.99,
-  "bracing C.R. channel": 2827.81,
+  "bottom track (todos)": 640.61,
+  "top / deflection track (todos)": 640.61,
+  "track de ceilings / soffits": 321.78,
+  "bracing C.R. channel": 2858.98,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
   "sill track": 0.0,
-  "furring channel": 493.02,
-  "carrying channel": 341.09,
+  "furring channel": 182.79,
+  "carrying channel": 146.92,
   "hanger wire": 1438.0,
   "5/8\" gyp board regular (walls + ceilings)": 0.0,
   "5/8\" gyp MOISTURE RESISTANT": 0.0,
@@ -23,10 +23,15 @@
   "5/8\" glass mat sheathing": 0.0,
   "5/8\" EXTERIOR gyp sheathing": 0.0,
   "1/2\" EXTERIOR gyp sheathing": 0.0,
-  "FRT plywood (SF)": 2670.26,
+  "FRT plywood (SF)": 2912.55,
   "FRT blocking": 552.27,
-  "5/8\" gyp board Type X": 15538.74,
-  "5/8\" gyp Type X W.R.": 1024.02,
+  "5/8\" gyp board Type X": 15670.56,
+  "5/8\" gyp Type X W.R.": 1020.33,
+  "8\" joist": 88.0,
+  "USG drywall main tee (DGLW26)": 194.16,
+  "USG drywall cross tee (DGLW424)": 457.96,
+  "USG channel molding (DGCM27)": 107.21,
+  "USG angle molding (DGWM24)": 107.21,
   "metal stud blocking (362CR / STUD BLOCKING)": 0.0,
   "metal trim (corner bead, casing, shadow molding)": 891.72,
   "cement board": 851.4,
@@ -41,12 +46,12 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19875.31,
-  "framing screws": 3080.0,
-  "slab pins": 634.44,
+  "drywall screws": 20029.07,
+  "framing screws": 3100.0,
+  "slab pins": 640.61,
   "expansion anchors": 0.0,
-  "joint compound": 1192.52,
-  "joint tape": 6128.22,
+  "joint compound": 1201.74,
+  "joint tape": 6175.63,
   "deflection clips": 0.0
  },
  "filas": [
@@ -141,7 +146,7 @@
    "familia": "ceilings",
    "room": "Cafe Seating Area 102 - GWB cloud",
    "source": "A-121",
-   "operacion": "furring ROUNDUP(38.833/2.0)+1 = 21 x 14.773 = 310.23; carrying ROUNDUP((14.773-1)/4.0)+1 = 5 x 38.833 = 194.16; hangers 5 x (ROUNDUP((38.833-1)/4.0)+1 = 11) = 55 x drop 13.0 (B.O. deck 25'-0\" (1/A-400B) - ceiling 12.0 (A-121) - RFI-03) = 715.0 LF; board 573.69 SF"
+   "operacion": "usg_grid: main tee ROUNDUP(14.773/4.0)+1 = 5 x 38.833 = 194.16; cross tee ROUNDUP(38.833/1.333)+1 = 31 x 14.773 = 457.96; channel + angle molding 107.21 each; hangers 5 x 11 = 55 x drop 13.0 = 715.0 LF; board 573.69 SF"
   },
   {
    "familia": "ceilings",
@@ -172,6 +177,54 @@
    "ref": "BLK-BREAK",
    "source": "6/A-412",
    "operacion": "10.67 LF"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "DIAG-BRACES-T2",
+   "source": "8/A-410",
+   "operacion": "117 braces (ROUNDUP(L x 12 / 32) + 1 per type 2 wall; 115 in rev2 + 2 from W2-05 +5.00 LF) x 4.0 ft at 45 deg (estimator choice; member / length not printed) = 468.0 LF (rev3 RI 6)"
+  },
+  {
+   "familia": "8\" joist",
+   "ref": "VEST-JOISTS",
+   "source": "4/A-210",
+   "operacion": "8\" JOISTS @ 16\" O.C.: ROUNDUP(152/16)+1 = 11 x (7'-8\" + 2\" + 2\" = 8.0 ft) = 88.0 LF (1/A-210 12'-8\" N-S)"
+  },
+  {
+   "familia": "8\" stud (todos los gauges)",
+   "ref": "VEST-BOX-BEAM-STUD",
+   "source": "6/A-210",
+   "operacion": "NESTED BEAM (2) 8\" x 18 GA studs x 12.667 = 25.33 LF (\"8\" BOX BEAM BEARING ON CORNER POST\", 4/A-210)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "VEST-BOX-BEAM-TRACK",
+   "source": "6/A-210",
+   "operacion": "NESTED BEAM 6\" x 16 GA top & bottom track (2) x 12.667 = 25.33 LF"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "VEST-LEDGER",
+   "source": "4/A-210",
+   "operacion": "\"8\" LEDGER\" 1 x 12.667 = 12.67 LF (east, at existing storefront)"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "VEST-POSTS-STUD",
+   "source": "6/A-210",
+   "operacion": "NESTED COLUMN (2) 3-5/8\" x 18 GA studs x 10.5 ft (B.O. CEILING 10'-6\") x 6 posts (1/A-210: 4 west + 2 east corners - confirm east 2) = 126.0 LF"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "VEST-POSTS-TRACK",
+   "source": "6/A-210",
+   "operacion": "NESTED COLUMN 3-5/8\" x 16 GA top & bottom track 6 x 2 x 5\" = 5.0 LF"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "VEST-GWB",
+   "source": "4/A-210",
+   "operacion": "(1) LAYER OF 5/8\" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8\" = 8.4 SF = 105.5 SF (Type X per rev2)"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -290,7 +343,42 @@
    "ref": "RESTROOM-BACKING-FRT",
    "source": "21/A-201",
    "material": "frt_3_4",
-   "operacion": "strip 13.33 x 1.333 = 17.77 SF (no es blocking ni sill)"
+   "operacion": "strip 13.33 x 1.3333333333333333 = 17.77 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "C-E1-P.1-A-FRT",
+   "source": "I/A-221",
+   "material": "frt_5_8",
+   "operacion": "strip 1.0 x 15.0 = 15.0 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "C-I-A-FRT",
+   "source": "I/A-221",
+   "material": "frt_5_8",
+   "operacion": "strip 2.31 x 15.0 = 34.65 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "SS-N-WD1-FRT",
+   "source": "1/A-226A",
+   "material": "frt_5_8",
+   "operacion": "strip 22.77 x 2.0 = 45.54 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "SS-E-WD1-FRT",
+   "source": "6/A-226A",
+   "material": "frt_5_8",
+   "operacion": "strip 10.12 x 4.0 = 40.48 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "VEST-PLYWOOD",
+   "source": "4/A-210",
+   "material": "frt_3_4",
+   "operacion": "strip 12.667 x 8.417 = 106.62 SF (no es blocking ni sill)"
   },
   {
    "familia": "metal trim (corner bead, casing, shadow molding)",
@@ -392,43 +480,43 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19875.31,
+   "valor": 20029.07,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15538.74 + 1024.02 = 16562.76 SF) = 19875.31"
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15670.56 + 1020.33 = 16690.89 SF) = 20029.07"
   },
   {
    "familia": "joint compound",
-   "valor": 1192.52,
+   "valor": 1201.74,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15538.74 + 1024.02 = 16562.76 SF) = 1192.52"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15670.56 + 1020.33 = 16690.89 SF) = 1201.74"
   },
   {
    "familia": "joint tape",
-   "valor": 6128.22,
+   "valor": 6175.63,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15538.74 + 1024.02 = 16562.76 SF) = 6128.22"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15670.56 + 1020.33 = 16690.89 SF) = 6175.63"
   },
   {
    "familia": "framing screws",
-   "valor": 3080,
+   "valor": 3100,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 770 stud pieces [studs_nodos 662; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3080"
+   "operacion": "4 x 775 stud pieces [studs_nodos 667; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3100"
   },
   {
    "familia": "slab pins",
-   "valor": 634.44,
+   "valor": 640.61,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)",
-   "operacion": "interior bottom track on slab 634.44 LF (70 walls, x rows) / 1.0 = 634.44"
+   "operacion": "interior bottom track on slab 640.61 LF (70 walls, x rows) / 1.0 = 640.61"
   },
   {
    "familia": "expansion anchors",
@@ -451,8 +539,8 @@
    "valor": 0.0,
    "unidad": "pcs",
    "estado": "DERIVADO",
-   "source": "3/A-410",
-   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
+   "source": "8/A-410",
+   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
   },
   {
    "familia": "extra framing ATM",
@@ -669,14 +757,14 @@
    "family": "FRT plywood (SF)",
    "key": "frt_5_8",
    "unit": "SF",
-   "net": 2528.42
+   "net": 2664.09
   },
   {
    "material": "3/4\" FRT plywood",
    "family": "FRT plywood (SF)",
    "key": "frt_3_4",
    "unit": "SF",
-   "net": 141.84
+   "net": 248.46
   },
   {
    "material": "Hanger wire 12 ga",
@@ -689,8 +777,8 @@
   }
  ],
  "frt_plywood_by_material": {
-  "FRT plywood substrate (5/8 in.)": 2528.42,
-  "FRT plywood substrate (3/4 in.)": 141.84
+  "FRT plywood substrate (5/8 in.)": 2664.09,
+  "FRT plywood substrate (3/4 in.)": 248.46
  },
  "metal_blocking_by_origin": {},
  "wood_blocking_lf": 0.0,
@@ -714,12 +802,12 @@
    "PVC trim at FRP": 0.0,
    "PAFs and duct sleeves": 0.0,
    "access panel": 0.0,
-   "drywall screws": 19875.31,
-   "framing screws": 3080.0,
-   "slab pins": 634.44,
+   "drywall screws": 20029.07,
+   "framing screws": 3100.0,
+   "slab pins": 640.61,
    "expansion anchors": 0.0,
-   "joint compound": 1192.52,
-   "joint tape": 6128.22,
+   "joint compound": 1201.74,
+   "joint tape": 6175.63,
    "Level 5 finish": 0.0,
    "deflection clips": 0.0
   },
@@ -790,8 +878,8 @@
   {
    "familia": "slab pins",
    "tema": "pin spacing: 12\" (interior anchorage) vs 16\" (fastener schedule) vs 24\" (type K box)",
-   "delta_16in": -158.61,
-   "delta_24in": -317.22,
+   "delta_16in": -160.15,
+   "delta_24in": -320.31,
    "unidad": "pcs"
   },
   {
@@ -827,7 +915,7 @@
   "types": {
    "2": {
     "walls": 8,
-    "lf": 273.57,
+    "lf": 278.57,
     "filas": [
      {
       "ids": [
@@ -886,14 +974,14 @@
        "W2-05"
       ],
       "wall": "W2-05",
-      "lf": 7.92,
+      "lf": 12.92,
       "height_ft": 25.0,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 146.52,
-      "location": "Corridor 110 east wall / Women's 109 (starts at the restroom front line)",
+      "board_sf": 241.73,
+      "location": "Corridor 110 / Women's 109 (door 4 inside wall)",
       "source": "2/A-410",
       "status": "DERIVADO",
       "pendiente": []
@@ -1111,7 +1199,7 @@
    },
    "4": {
     "walls": 18,
-    "lf": 82.47,
+    "lf": 83.64,
     "filas": [
      {
       "ids": [
@@ -1171,13 +1259,13 @@
        "W4-29a"
       ],
       "wall": "W4-29a",
-      "lf": 4.18,
+      "lf": 4.27,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.04,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 1/6 from north (tagged)",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1188,13 +1276,13 @@
        "W4-29b"
       ],
       "wall": "W4-29b",
-      "lf": 4.18,
+      "lf": 4.27,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.04,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 2/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1205,13 +1293,13 @@
        "W4-29c"
       ],
       "wall": "W4-29c",
-      "lf": 4.19,
+      "lf": 4.29,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.86,
+      "board_sf": 64.34,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 3/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1222,13 +1310,13 @@
        "W4-29d"
       ],
       "wall": "W4-29d",
-      "lf": 4.19,
+      "lf": 4.29,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.86,
+      "board_sf": 64.34,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 4/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1239,13 +1327,13 @@
        "W4-29e"
       ],
       "wall": "W4-29e",
-      "lf": 4.18,
+      "lf": 4.27,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.04,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 5/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1256,13 +1344,13 @@
        "W4-29f"
       ],
       "wall": "W4-29f",
-      "lf": 4.19,
+      "lf": 4.29,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.86,
+      "board_sf": 64.34,
       "location": "Hourglass display feature, west curved wall (R=32'-9\"), chord 6/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1273,13 +1361,13 @@
        "W4-30a"
       ],
       "wall": "W4-30a",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 1/6 from north (tagged)",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1290,13 +1378,13 @@
        "W4-30b"
       ],
       "wall": "W4-30b",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 2/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1307,13 +1395,13 @@
        "W4-30c"
       ],
       "wall": "W4-30c",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 3/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1324,13 +1412,13 @@
        "W4-30d"
       ],
       "wall": "W4-30d",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 4/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1341,13 +1429,13 @@
        "W4-30e"
       ],
       "wall": "W4-30e",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 5/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1358,13 +1446,13 @@
        "W4-30f"
       ],
       "wall": "W4-30f",
-      "lf": 4.18,
+      "lf": 4.28,
       "height_ft": 7.5,
       "stud_size": "3-5/8\"",
       "oc_in": 16,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 62.7,
+      "board_sf": 64.2,
       "location": "Hourglass display feature, east curved wall (R=32'-9\"), chord 6/6 from north",
       "source": "4/A-410",
       "status": "DERIVADO",
@@ -1668,7 +1756,7 @@
       "oc_in": 16,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 25.0,
+      "board_sf": 10.0,
       "location": "1'-0\" return at the top of the Workroom door pier (I tag)",
       "source": "I/A-221",
       "status": "DERIVADO",
@@ -1685,7 +1773,7 @@
       "oc_in": 16,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 57.75,
+      "board_sf": 23.1,
       "location": "Box at SE corner of Cafe Sales - east side",
       "source": "I/A-221",
       "status": "DERIVADO",
@@ -2067,7 +2155,7 @@
     "oc_in": 16,
     "rows": 1,
     "layers": 1.0,
-    "board_sf": 141.68,
+    "board_sf": 101.2,
     "location": "Cafe 11'-0\" zone E open edge to Sales",
     "source": "2/A-221",
     "status": "DERIVADO",
@@ -2146,12 +2234,12 @@
  },
  "track_by_element": {
   "bottom": {
-   "Bottom track 3-5/8\"": 443.85,
+   "Bottom track 3-5/8\"": 450.02,
    "Bottom track 6\"": 118.59,
    "Bottom track - other framing (not a partition type, see source)": 72.0
   },
   "top": {
-   "Top / deflection track 3-5/8\"": 443.85,
+   "Top / deflection track 3-5/8\"": 450.02,
    "Top / deflection track 6\"": 118.59,
    "Top / deflection track - other framing (not a partition type, see source)": 72.0
   }

@@ -96,6 +96,11 @@ FAMILIAS = [
     ("header / box beam", "lf", r'header', r''),
     ("sill track", "lf", r'\bsill\b', r''),
     ("bracing C.R. channel", "lf", r'bracing', r'channel'),
+    ("8\" joist", "lf", r'8" (metal )?joist', r''),   # v80f R80e.20
+    ("USG drywall main tee (DGLW26)", "lf", r'main tee', r''),
+    ("USG drywall cross tee (DGLW424)", "lf", r'cross tee', r''),
+    ("USG channel molding (DGCM27)", "lf", r'channel molding', r''),
+    ("USG angle molding (DGWM24)", "lf", r'angle molding', r''),
     ("framed openings MEP", "lf", r'mep|framed opening', r'opening|track'),
     ("furring channel", "lf", r'furring', r'channel'),
     ("carrying channel", "lf", r'carrying', r'channel'),

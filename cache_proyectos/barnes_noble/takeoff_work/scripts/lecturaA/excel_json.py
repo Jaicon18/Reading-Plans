@@ -28,7 +28,7 @@ RF = [
  ('RFI-01', 'Exterior types 1 / 1A / 1B / 1C: 5/8" gyp bd "BY FUTURE TENANT" (1, 1A, 1B, 1C/A-410). Framing included, gyp bd EXCLUDED (estimator decision). Confirm. ALSO A-002 Responsibility Schedule (Div 05): "PERIMETER STUDS, INSULATION, VAPOR BARRIER F/I BY LL" - the perimeter framing of types 1 / 1A / 1B / 1C may be by the landlord. Carried today: framing INCLUDED (estimator decision). Confirm who furnishes / installs the perimeter studs.', f'If gyp bd is in our scope: + {rfi01} SF 5/8" gyp bd (one face, {round(sum(w["length_ft"] for w in ext), 2)} LF x wall height) + finishing' + '; if perimeter studs are by LL: - 8,901 LF studs (1A 1,692 + 1 4,236 + 1B 2,333 + 1C 640, studs_out) with their bottom / top track, bracing and the 1B sheathing (2,469.22 SF)'),
  ('RFI-02', 'Type boundaries along a facade are not dimensioned: north 1A / 1 change and south 1B / 1 change (A-101).', 'North: 33.54 LF move from type 1 to 1A if the change is at the adjacent tenant edge (x=800.4 pt) instead of W2-03; south: 1.55 LF move 1 <-> 1B (door 10 jamb). Same 3-5/8" framing for 1 / 1A; 1B is 8" studs.'),
  ('RFI-03', 'B.O. deck is V.I.F. and sloped: 24\'-0" (2/A-400B) to 25\'-7" (2/A-400A); walls to deck loaded at 25\'-0" (1/A-400A, 1/A-400B), east facade 25\'-7", west 24\'-0".', f'Each 1 ft of deck height = {lf25} LF of studs-to-deck walls x 1 ft (studs, board where to deck, bracing rows)'),
- ('RFI-04', 'Type 2 height 25\'-0" exceeds the 22\'-0" limit of 3-5/8" 14 ga SJ @16" (A-410 metal stud schedule). Carried: 3-5/8" 14 ga SJ @16" + diagonal bracing @32" O.C. to structure above (3/A-410 Top Track Detail).', f'Diagonal braces: {braces} pcs (ROUNDUP(L x 12 / 32) + 1 per type 2 wall), brace member and length not printed - not priced. Alternative: 6" 20 ga SJ (26\'-8") on {lf(("2",))} LF'),
+ ('RFI-04', 'Type 2 height 25\'-0" exceeds the 22\'-0" limit of 3-5/8" 14 ga SJ @16" (A-410 metal stud schedule). Carried: 3-5/8" 14 ga SJ @16" + diagonal bracing @32" O.C. to structure above (8/A-410 Top Track Detail).', f'Diagonal braces: {braces} pcs (ROUNDUP(L x 12 / 32) + 1 per type 2 wall), brace member and length not printed - not priced. Alternative: 6" 20 ga SJ (26\'-8") on {lf(("2",))} LF'),
  ('RFI-05', 'Cafe south line: type 1 on A-101 and E1 / E2 (6" studs, void at existing wall) on 1/A-221. Counted ONCE as E1 / E2. E2 / E1 change point not drawn.', 'If both furring and 6" wall exist: + 50.24 LF type 1 furring (3-5/8") x 25\'-0". E2 / E1 split at the H2a faces: 0.20 LF moves.'),
  ('RFI-06', 'Cafe wall heights H1, H2a, H2b, H3a, H3b, F not printed (sections break at the top; A-225 finish plan and A-226A elevations give finish tops 11\'-0", 11\'-6", 15\'-0" only). Loaded to deck 25\'-0" (rule 53.3).', f'If studs stop at ~11\'-6": - {lf_cp} LF x 13.5 ft of studs / board on these walls'),
  ('RFI-07', 'Exterior furring 3-5/8" (types 1, 1A, 1C) at 24\'-0" to 25\'-7" exceeds 22\'-0" (14 ga SJ); 1B 8" studs are not in the A-410 schedule. Gauge / bracing to CMU not shown.', 'Alternative 6" studs on the 3-5/8" furring, or lateral bracing to the CMU at mid-height: price per LF of furring' + '; audit F-16: A-410 stud schedule caps 3-5/8" at 22\'-0" even at 14 ga - same applies to all 3-5/8" walls to 25 ft (types 1, 1A, 1C, 2): stop studs at nested bracing below deck or upsize'),
@@ -83,6 +83,34 @@ if REV1:
     for r in rfis:
         if r['id'] in OV:
             r['pregunta'], r['delta'] = OV[r['id']]
+    if os.environ.get('REV3') == '1':
+        R3 = 'CLOSED - Review Item rev3 (estimator decision 2026-10-26): '
+        OV3 = {
+         'RFI-04': (R3 + 'type 2 > 22 ft: 3-5/8" 14 ga SJ + diagonal braces @ 32" O.C. to structure (8/A-410 "PROVIDE DIAGONAL BRACING AT 32" O.C. TO STRUCTURE (TYP.)"); brace member / length not printed - estimator choice 3-5/8" 20 ga stud x 4 ft at 45 deg.',
+                    f'Applied: {braces} braces (115 in rev2 + 2 from W2-05 +5.00 LF) x 4.0 ft = {braces*4:.1f} LF 3-5/8" 20 ga stud (DERIVED, member and length = estimator choice; note kept). Citation corrected: diagonal bracing is on 8/A-410 Top Track Detail (rev0-rev2 said 3/A-410).'),
+         'RFI-06': (R3 + 'Cafe walls H1, H2a, H2b, H3a, H3b, F studs TO DECK 25\'-0" (1/A-400B draws the Cafe walls floor to B.O. DECK; A-226A elevations break at the top; no section prints a stud top). Board per face = ceiling + 6" (A-410 partition note 3): Workroom ACT-1 10\'-0" -> 10\'-6"; Grab & Go GWB 7\'-1" -> 7\'-7"; Cafe open-to-deck strip at H2a (1/A-121 PT-6 OPEN TO DECK) -> to deck.',
+                    'Applied (faces already at these heights in rev2; evidence ri07_rcp/).'),
+         'RFI-08': (R3 + 'type I WD-1 top = 15\'-0" A.F.F. (6/A-226A; elevation bubble on 1/A-221 looks west at the type I face, verified).',
+                    'Applied: 5/8" FRT plywood floor to 15\'-0" = 3.31 LF x 15.0 = 49.65 SF; GWB 15\'-0" to deck = 3.31 x 10.0 = 33.1 SF (2/A-221 studs UP TO DECK).'),
+         'RFI-14': ('PARTLY CLOSED rev3: 2/A-221 "3 5/8" @ 16" O.C. METAL STUD UP TO DECK", 5/8" FRT plywood behind WD-1, 5/8" GWB above WD-1 and at soffit bottom, "T.O. WD-1 SEE ELEVATION". East face (6/A-226A, bubble verified): WD-1 11\'-0" to 15\'-0" -> FRT 4.0 ft; GWB 15\'-0" to deck. North face (1/A-226A, bubble verified): WD-1 9\'-0" to 11\'-0" -> FRT 2.0 ft. OPEN: (1) top of the "BN CAFE" sign panel WD-1 on the north face is not printed - carried as GWB; (2) soffit underside 9\'-0" (1/A-226A) vs 11\'-0" (A-121) - framing carried at 11\'-0".',
+                    'Applied: FRT SS-E 10.12 x 4.0 = 40.48 SF, SS-N 22.77 x 2.0 = 45.54 SF; SS-E GWB 14 -> 10 ft. Open deltas: each 1 ft of sign-panel WD-1 = 22.77 SF GWB -> 5/8" FRT plywood; if soffit is at 9\'-0": + 2 ft of studs on SS-N (about 19 studs x 2 = 38 LF) and + 2 ft board.'),
+         'RFI-15': (R3 + 'Cafe Seating cloud = USG drywall suspension grid as drawn on 4/A-121 (DGLW26 main tee, DGLW424 cross tee, DGCM27 channel molding, DGWM24 angle molding); carrying channel direction E-W confirmed (joists N-S: 1/A-400A joists cut in section, 2/A-400A joists in profile).',
+                    'Applied: main tee 194.16 LF (5 x 38.833, @ 48" USG standard), cross tee 457.96 LF (31 x 14.773 = 124 pcs, @ 16" USG standard; 24" alt. = 22 rows / 88 pcs), DGCM27 107.21 LF, DGWM24 107.21 LF; removed from the cloud: furring -310.23 LF, carrying -194.17 LF, ceiling track -107.21 LF.'),
+         'RFI-16': ('CLOSED rev3 except post sheathing: vestibule GWB ceiling box per 4/A-210, 6/A-210, 1/A-210 quantified (8" joists, nested box beam, 8" ledger, nested posts, 3/4" FRT plywood, 5/8" GWB). OPEN: 5/A-210 "5/8 GYP. BOARD SHEATHING AS REQUIRED" at the posts - extent not printed; 2 east corner posts may be existing storefront.',
+                    'Applied: 8" joist 88.0 LF; 8" 18 ga stud 25.33 LF; ceiling / box track 43.0 LF (6" 25.33 + 8" ledger 12.67 + 3-5/8" 5.0); 3-5/8" stud 126.0 LF; 3/4" FRT plywood 106.6 SF; 5/8" Type X 105.5 SF. Open delta: post sheathing up to 6 posts x 3 faces x 5"/12 x 10.5 = 78.75 SF; if only 4 posts: - 42.0 LF 3-5/8" stud.'),
+         'RFI-17': ('PARTLY CLOSED rev3: column surrounds C25 = 9 (CW-01..CW-09, A-101). OPEN: stud spacing not printed (16" assumed).', 'If 24" O.C.: fewer studs per surround (about - 1 stud per face).'),
+         'RFI-18': (R3 + 'type 4 curved walls = face-average arc 25.68 LF each (estimator choice vs printed 25\'-1").', 'Applied: + 1.17 LF type 4 (83.64 LF).'),
+         'RFI-19': (R3 + 'board height where a ceiling exists = ceiling + 6" (2/A-410, A-410 partition note 3). Kept.', 'none'),
+        }
+        for r in rfis:
+            if r['id'] in OV3:
+                r['pregunta'], r['delta'] = OV3[r['id']]
+        _wr = fam.get(chr(53) + '/8" gyp Type X W.R.', 0); _tx = fam.get(chr(53) + '/8" gyp board Type X', 0)
+        for r in rfis:
+            if r['id'] == 'RFI-11':
+                r['delta'] = f"Applied (rev3): 5/8\" Type X W.R. = {_wr:,.2f} SF face by face (Women's 222.93 + Men's 223.02 + Janitor 485.75 + alcove corridor 88.63); W2-05 Women's face = 7.51 LF per A-101 (rev3 RI 1)."
+            if r['id'] == 'RFI-27':
+                r['delta'] = f"Applied (rev3): 5/8\" Type X {_tx:,.2f} SF = walls {_tx - 981.38 - 105.5:,.2f} + GWB ceilings 981.38 + vestibule box 105.5; Type X W.R. {_wr:,.2f} SF; 5/8\" regular 0."
     if os.environ.get('REV2') == '1':
         R2 = 'rev2 (estimator decision 2026-10-25): '
         for r in rfis:
@@ -113,6 +141,8 @@ if REV1:
     REV = [x for x in REV if x[1] not in ('1', '1A', '1B') and 'RFI-19' not in x[3] or (x[0] == 'detalle')]
     REV = [x for x in REV if not (x[0] == 'floor_plan' and x[1] in ('1', '1A', '1B'))]
     os.environ.get('REV2') == '1' or REV.append(('detalle', None, 8, 'Restroom FRT plywood backing: 10 pcs at 16" stud bay, height NOT printed - 12" assumed (13.33 SF); confirm grab bar / lavatory / baby changing backing size (RFI-23)', '21/A-201'))
+if os.environ.get('REV3') == '1':
+    REV = []   # rev3: all 11 Review Items closed (DECISIONES_ESTIMADOR.md)
 n = len(REV)
 revisar = []
 for i, (fa, t, o, p, h) in enumerate(REV, 1):
@@ -121,6 +151,11 @@ for i, (fa, t, o, p, h) in enumerate(REV, 1):
     else: x['orden_plano'] = o
     revisar.append(x)
 d = json.load(open(K + '/takeoff.json'))
+if os.environ.get('REV3') == '1':   # rev3: textos finales con las cifras vigentes (después de REV2)
+    _fam = fo['familias']; _wr = _fam.get(chr(53) + '/8" gyp Type X W.R.', 0); _tx = _fam.get(chr(53) + '/8" gyp board Type X', 0)
+    for r in rfis:
+        if r['id'] == 'RFI-27':
+            r['delta'] = f"Applied (rev3): 5/8\" Type X {_tx:,.2f} SF = walls {_tx - 981.38 - 105.5:,.2f} + GWB ceilings 981.38 + vestibule box 105.5; Type X W.R. {_wr:,.2f} SF; 5/8\" regular 0."
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:

@@ -58,7 +58,7 @@
    "thickness_check": "faces 605.28 / 609.12 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 14",
@@ -136,7 +136,7 @@
    "thickness_check": "faces 1486.68 / 1490.52 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)"
   },
   {
@@ -211,7 +211,7 @@
    "thickness_check": "faces 496.58 / 500.42 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 11",
@@ -317,7 +317,7 @@
    "thickness_check": "faces 1288.53 / 1292.37 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 4",
@@ -344,7 +344,7 @@
    "element": "wall",
    "sheet": "A-101",
    "page": 6,
-   "location": "Corridor 110 east wall / Women's 109 (starts at the restroom front line)",
+   "location": "Corridor 110 / Women's 109 (door 4 inside wall)",
    "source": "2/A-410",
    "detail": "2/A-410",
    "detail_source": "2/A-410",
@@ -362,17 +362,16 @@
    "tag_ids": [
     "PT0028"
    ],
-   "length_ft": 7.92,
-   "length_op": "Stage 3 resolution: geometry of reading B B-A-101-18 (Vector y 1337.28 (owns corner with restroom front wall) -> 1408.56 (south furring face) = 71.28 pt /9.)",
+   "length_ft": 12.92,
+   "length_op": "vector centerline 12.92 ft",
    "band": {
     "ori": "V",
-    "c0": 555.84,
-    "c1": 559.56,
-    "lo": 1337.28,
-    "hi": 1408.56,
+    "c0": 555.78,
+    "c1": 559.62,
+    "lo": 1292.3,
+    "hi": 1408.6,
     "sheet": "A-101"
    },
-   "length_status": "DERIVADO",
    "faces": [
     {
      "side": "A",
@@ -385,20 +384,34 @@
     },
     {
      "side": "B",
+     "room": "Corridor 110",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "ACT-3 9'-0\" (A-121) + 6\" above suspended ceiling (A-410 partition note 3, 2/A-410) = 9.5",
+     "length_ft": 5.41,
+     "length_source": "A-101 (vector, split at room boundary)",
+     "board_source": "5/8\" Type X on all new walls (estimator decision RFI-27): A-001A Div 09 A.2"
+    },
+    {
+     "side": "B",
      "room": "Women's Restroom 109",
      "board": "5/8 type X WR",
      "layers": 1,
      "height_ft": 9.0,
      "height_source": "GWB 9'-0\" (A-121); W.R. gyp bd on wet side to B.O. gyp ceiling (2/A-410, 5/A-410)",
      "wet_room_note": "A-410 partition note 7 / 2/A-410: W.R. board in wet rooms - not loaded (fixtures back onto exterior EXT-07) - RFI-11",
+     "length_ft": 7.51,
+     "length_source": "A-101 (vector, split at room boundary)",
      "board_source": "W.R. on all wet-room faces (estimator decision RFI-11): A-410 \"*\" note \"PROVIDE 5/8\" WATER RESISTANT GYP. BD AT JANITOR'S CLOSET, DRINKING FOUNTAIN, KITCHEN AND ALL TOILET LOCATIONS\", partition note 7, 2/A-410; Type X per A-001A (RFI-27)"
     }
    ],
-   "thickness_measured_in": 4.96,
-   "thickness_check": "faces 555.84 / 559.56 pt on A-101 = 4.96 in",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.12,
+   "thickness_check": "faces 555.78 / 559.62 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410"
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410"
   },
   {
    "tag": "2",
@@ -460,7 +473,7 @@
    "thickness_check": "faces 1337.28 / 1341.0 pt on A-101 = 4.96 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 9",
@@ -539,7 +552,7 @@
    "thickness_check": "faces 618.12 / 621.84 pt on A-101 = 4.96 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
@@ -613,7 +626,7 @@
    "thickness_check": "faces 1353.48 / 1357.32 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
@@ -673,7 +686,7 @@
    "thickness_check": "faces 658.2 / 661.92 pt on A-101 = 4.96 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)"
   },
   {
@@ -747,7 +760,7 @@
    "thickness_check": "faces 1337.28 / 1341.0 pt on A-101 = 4.96 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "segment of wall W2-06 (tag on its first segment); joins the tagged wall per particion.py eje (A-101)",
    "openings": [
     {
@@ -848,7 +861,7 @@
    "thickness_check": "faces 720.03 / 723.87 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410"
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410"
   },
   {
    "tag": "2",
@@ -920,7 +933,7 @@
    "thickness_check": "faces 759.78 / 763.62 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "untagged_reason": "untagged return / TYP. copy of a tagged element on A-101 - joins the tagged wall it touches (particion.py eje) (A-101)",
    "openings": [
     {
@@ -1001,7 +1014,7 @@
    "thickness_check": "faces 931.03 / 934.87 pt on A-101 = 5.12 in",
    "length_basis": "axis (centerline of the stud) between nodes; face to face where taken from reading B",
    "detail_img": "4_canon/img/det/A410_details_4_3_2.png",
-   "top_track": "deep leg slip track at underside of deck, slotted deflection - 3/A-410 Top Track Detail, 2/A-410",
+   "top_track": "deep leg slip track at underside of deck, slotted deflection - 8/A-410 Top Track Detail, 2/A-410",
    "openings": [
     {
      "ref": "Door 6",
@@ -1812,39 +1825,40 @@
    "tag_ids": [
     "PT0037"
    ],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29a (Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.27,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29a (Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1562.65,
-     845.09
+     1562.52,
+     844.68
     ],
     "p1": [
-     1574.5,
-     880.84
+     1574.63,
+     881.25
     ],
     "faces_top": [
      [
-      1565.79,
-      844.05
+      1565.73,
+      843.62
      ],
      [
-      1576.3,
-      880.24
+      1576.48,
+      880.63
      ]
     ],
     "faces_bottom": [
      [
-      1560.77,
-      845.71
+      1560.59,
+      845.32
      ],
      [
-      1573.23,
-      881.26
+      1573.34,
+      881.68
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -1895,39 +1909,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29b",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29b (Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.27,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29b (Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1574.5,
-     880.84
+     1574.42,
+     880.42
     ],
     "p1": [
-     1581.7,
-     917.81
+     1581.78,
+     918.23
     ],
     "faces_top": [
      [
-      1576.5,
-      880.45
+      1576.46,
+      880.02
      ],
      [
-      1583.67,
-      917.43
+      1583.8,
+      917.84
      ]
     ],
     "faces_bottom": [
      [
-      1573.19,
-      881.09
+      1573.08,
+      880.68
      ],
      [
-      1580.37,
-      918.07
+      1580.42,
+      918.5
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -1979,39 +1994,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29c",
    "tag_ids": [],
-   "length_ft": 4.19,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29c (Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.29,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29c (Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1581.7,
-     917.81
+     1581.67,
+     917.38
     ],
     "p1": [
-     1584.12,
-     955.4
+     1584.15,
+     955.83
     ],
     "faces_top": [
      [
-      1583.91,
-      917.67
+      1583.93,
+      917.24
      ],
      [
-      1587.24,
-      955.2
+      1587.34,
+      955.62
      ]
     ],
     "faces_bottom": [
      [
-      1580.35,
-      917.9
+      1580.29,
+      917.48
      ],
      [
-      1584.12,
-      955.4
+      1584.15,
+      955.83
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2063,39 +2079,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29d",
    "tag_ids": [],
-   "length_ft": 4.19,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29d (Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.29,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29d (Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1584.12,
-     955.4
+     1584.15,
+     954.97
     ],
     "p1": [
-     1581.73,
-     992.99
+     1581.7,
+     993.42
     ],
     "faces_top": [
      [
-      1586.87,
-      955.57
+      1586.96,
+      955.15
      ],
      [
       1582.99,
-      993.07
+      993.5
      ]
     ],
     "faces_bottom": [
      [
       1583.06,
-      955.33
+      954.9
      ],
      [
-      1580.37,
-      992.9
+      1580.31,
+      993.32
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2147,39 +2164,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29e",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29e (Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.27,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29e (Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1581.73,
-     992.99
+     1581.81,
+     992.57
     ],
     "p1": [
-     1574.56,
-     1029.96
+     1574.48,
+     1030.38
     ],
     "faces_top": [
      [
-      1583.19,
-      993.27
+      1583.3,
+      992.86
      ],
      [
-      1577.79,
-      1030.59
+      1577.78,
+      1031.02
      ]
     ],
     "faces_bottom": [
      [
-      1580.4,
-      992.73
+      1580.45,
+      992.3
      ],
      [
-      1573.12,
-      1029.68
+      1573.01,
+      1030.09
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2231,39 +2249,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-29f",
    "tag_ids": [],
-   "length_ft": 4.19,
-   "length_op": "Stage 3 resolution: reading B B-A-101-29f (Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.)",
+   "length_ft": 4.29,
+   "length_op": "Stage 3 resolution: reading B B-A-101-29f (Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 226.14 pt = 25.13 ft; printed arc 25'-1\"); chord = 37.66 pt.) x 1.0227 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1574.56,
-     1029.96
+     1574.69,
+     1029.55
     ],
     "p1": [
-     1562.73,
-     1065.72
+     1562.6,
+     1066.13
     ],
     "faces_top": [
      [
-      1577.77,
-      1031.02
+      1577.98,
+      1030.64
      ],
      [
-      1565.31,
-      1066.57
+      1565.23,
+      1067.0
      ]
     ],
     "faces_bottom": [
      [
-      1573.17,
-      1029.5
+      1573.27,
+      1029.08
      ],
      [
-      1560.32,
-      1064.92
+      1560.13,
+      1065.31
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0227 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2317,39 +2336,40 @@
    "tag_ids": [
     "PT0037"
    ],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30a (Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30a (Chord 1 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1610.04,
-     845.28
+     1610.18,
+     844.85
     ],
     "p1": [
-     1598.3,
-     880.98
+     1598.16,
+     881.41
     ],
     "faces_top": [
      [
-      1613.29,
-      846.35
+      1613.51,
+      845.95
      ],
      [
-      1599.62,
-      881.41
+      1599.51,
+      881.85
      ]
     ],
     "faces_bottom": [
      [
-      1608.23,
-      844.69
+      1608.33,
+      844.25
      ],
      [
-      1595.93,
-      880.2
+      1595.73,
+      880.61
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2400,39 +2420,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30b",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30b (Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30b (Chord 2 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1598.3,
-     880.98
+     1598.39,
+     880.54
     ],
     "p1": [
-     1591.08,
-     917.86
+     1590.99,
+     918.3
     ],
     "faces_top": [
      [
-      1599.67,
-      881.25
+      1599.79,
+      880.82
      ],
      [
-      1592.31,
-      918.1
+      1592.25,
+      918.55
      ]
     ],
     "faces_bottom": [
      [
-      1595.67,
-      880.46
+      1595.69,
+      880.01
      ],
      [
-      1588.59,
-      917.37
+      1588.44,
+      917.8
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2484,39 +2505,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30c",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30c (Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30c (Chord 3 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1591.08,
-     917.86
+     1591.11,
+     917.41
     ],
     "p1": [
-     1588.68,
-     955.37
+     1588.65,
+     955.82
     ],
     "faces_top": [
      [
-      1592.34,
-      917.94
+      1592.4,
+      917.49
      ],
      [
-      1588.68,
-      955.37
+      1588.65,
+      955.82
      ]
     ],
     "faces_bottom": [
      [
-      1588.28,
-      917.68
+      1588.24,
+      917.23
      ],
      [
-      1587.17,
-      955.27
+      1587.11,
+      955.72
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2568,39 +2590,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30d",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30d (Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30d (Chord 4 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1588.68,
-     955.37
+     1588.65,
+     954.92
     ],
     "p1": [
-     1591.07,
-     992.87
+     1591.1,
+     993.32
     ],
     "faces_top": [
      [
       1589.74,
-      955.3
+      954.85
      ],
      [
-      1592.3,
-      992.79
+      1592.36,
+      993.24
      ]
     ],
     "faces_bottom": [
      [
-      1585.34,
-      955.58
+      1585.23,
+      955.14
      ],
      [
-      1589.3,
-      992.98
+      1589.29,
+      993.43
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2652,39 +2675,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30e",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30e (Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30e (Chord 5 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.58 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1591.07,
-     992.87
+     1590.99,
+     992.43
     ],
     "p1": [
-     1598.15,
-     1029.78
+     1598.23,
+     1030.22
     ],
     "faces_top": [
      [
-      1592.27,
-      992.64
+      1592.21,
+      992.19
      ],
      [
-      1599.5,
-      1029.52
+      1599.62,
+      1029.96
      ]
     ],
     "faces_bottom": [
      [
-      1589.02,
-      993.26
+      1588.89,
+      992.83
      ],
      [
-      1594.95,
-      1030.39
+      1594.96,
+      1030.85
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
@@ -2736,39 +2760,40 @@
    "img": "img_cache/B&N_A-101_walls_by_type.png",
    "id": "W4-30f",
    "tag_ids": [],
-   "length_ft": 4.18,
-   "length_op": "Stage 3 resolution: reading B B-A-101-30f (Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.59 pt.)",
+   "length_ft": 4.28,
+   "length_op": "Stage 3 resolution: reading B B-A-101-30f (Chord 6 of 6 equal-arc divisions of the R32'-9\" face (arc 225.67 pt = 25.07 ft; printed arc 25'-1\"); chord = 37.59 pt.) x 1.0239 (rev3 RI 2 / RFI-18: face-average arc 25.68 LF per curved wall, estimator choice)",
    "band": {
     "ori": "D",
     "p0": [
-     1598.15,
-     1029.78
+     1598.01,
+     1029.35
     ],
     "p1": [
-     1609.92,
-     1065.48
+     1610.06,
+     1065.91
     ],
     "faces_top": [
      [
-      1599.46,
-      1029.35
+      1599.35,
+      1028.91
      ],
      [
-      1611.73,
-      1064.88
+      1611.91,
+      1065.29
      ]
     ],
     "faces_bottom": [
      [
-      1597.0,
-      1030.16
+      1596.83,
+      1029.74
      ],
      [
-      1606.76,
-      1066.52
+      1606.83,
+      1066.97
      ]
     ],
-    "sheet": "A-101"
+    "sheet": "A-101",
+    "arc_note": "chord and faces scaled x 1.0239 to the face-average arc 25.68 LF per curved wall (estimator choice, RFI-18 / rev3 RI 2)"
    },
    "length_status": "DERIVADO",
    "faces": [
