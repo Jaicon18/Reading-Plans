@@ -162,3 +162,40 @@ Los FAIL son de dos clases:
 - **Trazabilidad del Excel:** studs y 5/8" FRT plywood sin desglose, y filas del Material Summary sin N/HOJA.
 
 Ninguna diferencia se corrigió: el estimador decide en `COMPARATIVA_AUDITORIA.xlsx`.
+
+## Resolución autónoma de las diferencias (regla v80j, recibida durante la auditoría)
+
+**Regla aplicada.** Cada diferencia se resolvió desde el plano, con una revisión dirigida y su N/HOJA. En la columna **Recommendation** de `COMPARATIVA_AUDITORIA.xlsx` quedan el valor correcto y el porqué. Lo que el plano no resuelve queda como RFI, con delta y supuesto conservador.
+
+**Valor correcto: el del auditor**
+
+| Renglón | Partida | Cambio | Fuente | Condición |
+|---|---|---|---|---|
+| 1 | Type I, caras de remate | +1.21 LF | — | — |
+| 3 | Techos de restrooms | 120.2 SF de Type X → Type X W.R. | — | — |
+| 4 | Plywood del janitor | +17.0 SF | — | Conservador, con RFI de extensión |
+| 6 | Soffit Grab & Go | Cuantificable | 3/A-221 | T.O. WD-1 queda en RFI; se asume FRT plywood en toda la cara |
+| 7 | Fire-stop track | +230.14 LF | 8/A-410 "TYP." | — |
+| 9 | W.R. en Cafe Work Room | Hasta 570 SF de Type X → Type X W.R. | Nota "*" de A-410: KITCHEN | — |
+
+**Valor correcto: el del take-off**
+
+| Renglón | Partida | Motivo |
+|---|---|---|
+| 2 | Walls curvos | Dentro del 2 % y decisión RFI-18 registrada |
+| 12 | Insulation | Excluida por regla permanente |
+| 16 | Cifras del Scope Checklist | Vale el Material Summary rev4 |
+| 17 | Cross tee | 457.96 LF, consistente con la regla de filas |
+
+**RFI con supuesto conservador**
+
+| Renglón | Partida | Supuesto |
+|---|---|---|
+| 5 | Backing del water heater | +8.0 LF de stud y +2.67 LF de blocking |
+| 8 | Additional head track | +11.17 LF |
+| 10 | FRP y tile | Se mantienen RFI-13 y RFI-12 |
+| 11 | Blocking W-3 | Pendiente el conteo de A-111 |
+
+**Sin resolver con los entregables** (quedan ambas cifras): renglones 13–15 (studs y 5/8" FRT plywood). El take-off debe mostrar el desglose.
+
+**Formato** (renglones 18–24): las correcciones se indican renglón por renglón.
