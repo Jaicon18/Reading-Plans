@@ -58,3 +58,6 @@
 - RFI-16: vestibule posts sheathing = 3/4" FRT plywood, 4 faces, full height: 6 posts x 4 faces x 5" x 10.5 ft = 105.0 SF (DERIVED; 6 posts per 4/A-210, height 10.5 ft as in posts studs). CLOSED.
 - RFI-17: column surrounds C25 stud spacing = 16" O.C. (as carried). CLOSED.
 - ALL RFIs ANSWERED -> rev4.
+
+## Decisión 2026-10-27 — Tees del cloud Cafe Seating (rev10)
+Aprobado por el estimador: main tee DGLW26 = 19 pcs (194.16 LF × 1.15 / 12 ft) y cross tee DGLW424 = 132 pcs (457.96 LF × 1.15 / 4 ft). Fuente 4/A-121; spacing 4'-0" / 16" = estándar USG (no impreso). Sin cambios en rev10. Evidencia: decision_compra_rev10/DECISION_piezas_compra_rev10.png.
