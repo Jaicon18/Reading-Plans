@@ -51,3 +51,6 @@
 - RI 10/11 (RFI-15), from drawings: Cafe Seating cloud = USG drywall suspension per 4/A-121 (DGLW26 main tee @48" 194.17 LF/17 pcs, DGLW424 cross tee @16" 443.19 LF/120 pcs [USG standard spacing, not printed -> note + alt 24" = 84 pcs], DGCM27 107.21 LF, DGWM24 107.21 LF); remove furring -310.23 LF and carrying -194.16 LF from the cloud. Carrying direction E-W confirmed (joists N-S per 1/A-400A and 2/A-400A). CLOSED.
 - RI 11/11 (RFI-16), from drawings: vestibule box per 4/A-210, 6/A-210, 1/A-210: 8" joist 11 pcs x 8.0 = 88.0 LF (new family); box beam 8" 18 ga stud 25.33 LF + 6" 16 ga track 25.33 LF; 8" ledger 12.67 LF; posts 3-5/8" 18 ga stud 126.0 LF + track 5.0 LF; 3/4" FRT plywood 106.6 SF; 5/8" Type X GWB ceiling 97.1 SF + box beam faces 8.4 SF; post sheathing "AS REQUIRED" = RFI; trim not drawn. CLOSED.
 - ALL 11 REVIEW ITEMS CLOSED -> rev3.
+
+## Open RFIs answered by estimator (rev3 → rev4)
+- RFI-14 part 1: north face sign band WD-1 top = 15'-0" (same as east face, 6/A-226A). North face WD-1 from 9'-0" to 15'-0"; GWB above to deck.
