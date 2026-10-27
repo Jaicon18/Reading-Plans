@@ -227,8 +227,8 @@ def aplicar(d, out_dir, canon_p):
     def nota(row):
         ids = [i for i in str(row["wall"]).split("+") if i in walls]
         L_, H_, ly = float(row["length_lf"]), float(row["height_ft"]), float(row["layers"] or 0)
-        if abs(float(row["board_sf"] or 0) - L_ * H_ * ly) <= 0.5:
-            return None
+        if abs(float(row["board_sf"] or 0) - L_ * H_ * ly) <= 0.5 and not any(walls[i].get("faces_note") for i in ids):
+            return None                                  # faces_note del canon: la fila dice siempre qué cara lleva board
         cs = []
         for i in ids:
             for f in walls[i].get("faces") or []:

@@ -38,7 +38,7 @@ No change: 5/8" Type X 14,902.61 SF; 3/4" FRT plywood 370.46 SF; partitions 569.
 - EXCEL v67 OK
 - ETAPAS PASA
 - BITACORA OK
-- Independent back-check: PASS WITH COMMENTS. The comments are resolved; see `takeoff_work/etapas/5_auditoria/BACKCHECK_rev6.md`.
+- Independent back-checks: PASS WITH COMMENTS (W.R. change) and PASS WITH COMMENTS (RFI-37). All comments are resolved; see `takeoff_work/etapas/5_auditoria/BACKCHECK_rev6.md` and `BACKCHECK_rev6b.md`.
 
 Skill: new rule R80e.26 (count board layers per side in the section drawing before changing a face) in `take-off-metal-frame-drywall_FINAL_v80k.zip`. Merge it into v80l.
 
