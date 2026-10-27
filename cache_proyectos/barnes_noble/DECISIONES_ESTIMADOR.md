@@ -54,3 +54,4 @@
 
 ## Open RFIs answered by estimator (rev3 → rev4)
 - RFI-14 part 1: north face sign band WD-1 top = 15'-0" (same as east face, 6/A-226A). North face WD-1 from 9'-0" to 15'-0"; GWB above to deck.
+- RFI-14 part 2: Cafe soffit bottom = 11'-0" (A-121 RCP governs over 1/A-226A 9'-0"). Consequence: north face WD-1 runs from soffit bottom 11'-0" to 15'-0" (same as east face). RFI-14 CLOSED.
