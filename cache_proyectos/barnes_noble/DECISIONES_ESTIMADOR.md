@@ -64,3 +64,6 @@ Aprobado por el estimador: main tee DGLW26 = 19 pcs (194.16 LF × 1.15 / 12 ft) 
 
 ## Decisión 2026-10-27 — Blocking de madera (rev11)
 Waste de madera = waste NO metal (Inputs B6 = 6 %, "igual que el board"), no el 15 % del metal. Sticks 2x de 16 ft. FRT blocking 568.27 LF → 38 pcs; 2x normal 17 LF → 2 pcs. Aplica a TODOS los proyectos: la madera nunca toma el waste de metal.
+
+## Decisión 2026-10-27 — Molding del cloud (rev11)
+Aprobado: DGCM27 channel molding = 11 pcs y DGWM24 angle molding = 11 pcs (107.21 LF perímetro × 1.15 / 12 ft). Fuente 4/A-121. Sin cambios en rev11.
