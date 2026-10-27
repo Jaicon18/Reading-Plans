@@ -219,6 +219,7 @@ def calcular(data):
                 raise ValueError(f"{rid}: column_wrap lleva bottom + top track (decisión usuario #8)")
             if not (b and t):
                 _src(r.get("track_source"), f"{rid}: sin bottom o top track")
+                fila["track_source"] = r["track_source"]   # v80k (R80e.23): la compuerta E10 acepta el track declarado ausente
             dw = sum(_pos(o.get("ro_w_ft"), f"{rid}.door") for o in r.get("openings") or []
                      if o.get("kind") == "door")
             doors_tot += dw * rows if b else 0.0
@@ -254,6 +255,8 @@ def calcular(data):
             if descontar:
                 bl -= hu
             fila.update(height_ft=H, rows=rows, bracing_rows=nb, bracing_lf=round(bl, 2))
+            if "bracing_rows" in r:                   # v80k (R80e.23): rows declaradas con su fuente
+                fila["bracing_source"] = r.get("bracing_rows_source")
             ops.append(f"bracing {bop} -> {round(bl, 2)}")
         else:
             if "bracing_rows" in r or r.get("openings"):

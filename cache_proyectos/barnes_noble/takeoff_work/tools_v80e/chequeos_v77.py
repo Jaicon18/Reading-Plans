@@ -21,7 +21,7 @@ R77.10 (decisi√≥n del usuario, largo de wall): el largo de un wall corre A TRAV√
 import math
 import re
 
-NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}\d")
+NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}-?\d")   # v80k (R80e.22): hojas con guion (A-221)
 RX_CARA = re.compile(r"BONDED|POLYISO|\bAWB\b|GYPSUM|NAILBASE", re.I)
 
 

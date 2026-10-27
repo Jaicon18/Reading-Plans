@@ -2,8 +2,8 @@
  "totales_lf": {
   "bottom track (todos)": 640.61,
   "top / deflection track (todos)": 640.61,
-  "track de ceilings / soffits": 278.78,
-  "bracing C.R. channel": 2858.98,
+  "track de ceilings / soffits": 291.11,
+  "bracing C.R. channel": 2883.65,
   "purlin (track to deck)": 0.0
  },
  "renglones": [
@@ -893,7 +893,7 @@
    "operacion": "bottom 23.46 x 1 = 23.46; top 23.46 x 1 = 23.46; bracing ROUNDUP(25.0 x 12 / 48.0) - 1 = 6 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 140.76"
   },
   {
-   "id": "W:C-E1-P.1",
+   "id": "W:C-I-P.1",
    "element": "wall",
    "orientation": "vertical",
    "source": "I/A-221",
@@ -1116,6 +1116,55 @@
    "rows": 1,
    "bracing_rows": 3,
    "operacion": "ceiling/soffit track 6.25 x 2 lines = 12.5; bracing ROUNDUP(13.5 x 12 / 48.0) - 1 = 3 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 18.75"
+  },
+  {
+   "id": "W:SS-GG",
+   "element": "soffit_side",
+   "orientation": "vertical",
+   "source": "3/A-221",
+   "bottom_lf": 0.0,
+   "top_lf": 0.0,
+   "ceiling_track_lf": 12.33,
+   "bracing_lf": 24.67,
+   "purlin_lf": 0.0,
+   "height_ft": 17.917,
+   "rows": 1,
+   "bracing_rows": 4,
+   "operacion": "ceiling/soffit track 6.167 x 2 lines = 12.33; bracing ROUNDUP(17.917 x 12 / 48.0) - 1 = 4 rows (5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height) -> 24.67"
+  },
+  {
+   "id": "W:C-I-E1",
+   "element": "pier",
+   "orientation": "vertical",
+   "source": "I/A-221",
+   "bottom_lf": 0.0,
+   "top_lf": 0.0,
+   "ceiling_track_lf": 0.0,
+   "bracing_lf": 0.0,
+   "purlin_lf": 0.0,
+   "track_source": "I/A-221 (end face of C-H3a - its bottom / top track is the track of C-H3a on 1/A-221)",
+   "height_ft": 25.0,
+   "rows": 1,
+   "bracing_rows": 0,
+   "bracing_source": "I/A-221 (end face of C-H3a - bracing belongs to C-H3a per 5/A-410)",
+   "operacion": "bottom 0.603 x 1 = 0.0; top 0.603 x 1 = 0.0; bracing 0 rows declaradas (I/A-221 (end face of C-H3a - bracing belongs to C-H3a per 5/A-410)) -> 0.0"
+  },
+  {
+   "id": "W:C-I-E2",
+   "element": "pier",
+   "orientation": "vertical",
+   "source": "I/A-221",
+   "bottom_lf": 0.0,
+   "top_lf": 0.0,
+   "ceiling_track_lf": 0.0,
+   "bracing_lf": 0.0,
+   "purlin_lf": 0.0,
+   "track_source": "I/A-221 (end face of C-H1-N - its bottom / top track is the track of C-H1-N on 1/A-221)",
+   "height_ft": 25.0,
+   "rows": 1,
+   "bracing_rows": 0,
+   "bracing_source": "I/A-221 (end face of C-H1-N - bracing belongs to C-H1-N per 5/A-410)",
+   "operacion": "bottom 0.603 x 1 = 0.0; top 0.603 x 1 = 0.0; bracing 0 rows declaradas (I/A-221 (end face of C-H1-N - bracing belongs to C-H1-N per 5/A-410)) -> 0.0"
   },
   {
    "id": "CP:Women's Restroom 109",

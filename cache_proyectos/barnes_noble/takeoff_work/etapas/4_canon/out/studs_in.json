@@ -513,7 +513,7 @@
    "openings": []
   },
   {
-   "id": "C-E1-P.1",
+   "id": "C-I-P.1",
    "tag": "I",
    "stud_size": "6\"",
    "length_ft": 1.0,
@@ -645,6 +645,15 @@
    "length_ft": 6.25,
    "oc_in": 16,
    "height_ft": 13.5,
+   "openings": []
+  },
+  {
+   "id": "SS-GG",
+   "tag": "",
+   "stud_size": "6\"",
+   "length_ft": 6.167,
+   "oc_in": 16,
+   "height_ft": 17.917,
    "openings": []
   }
  ],
@@ -1177,7 +1186,7 @@
    "id": "N90",
    "kind": "L",
    "walls": [
-    "C-E1-P.1",
+    "C-I-P.1",
     "C-E1-P.2"
    ],
    "source": "A-221 (vector: ends within 1.0 ft)"
@@ -1185,7 +1194,7 @@
   {
    "id": "N91",
    "kind": "free",
-   "wall": "C-E1-P.1",
+   "wall": "C-I-P.1",
    "source": "A-221 (vector: free end)"
   },
   {
@@ -1310,6 +1319,18 @@
    "kind": "free",
    "wall": "SS-IN-E",
    "source": "A-221 (vector: free end)"
+  },
+  {
+   "id": "N-GG1",
+   "kind": "free",
+   "wall": "SS-GG",
+   "source": "1/A-221 (soffit ends at the C-H3a south face; header over the opening, no wall connection)"
+  },
+  {
+   "id": "N-GG2",
+   "kind": "free",
+   "wall": "SS-GG",
+   "source": "1/A-221 (soffit ends at the C-H1-N north face; header over the opening, no wall connection)"
   }
  ]
 }

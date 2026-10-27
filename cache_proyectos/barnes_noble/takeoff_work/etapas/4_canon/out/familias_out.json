@@ -2,14 +2,14 @@
  "familias": {
   "2-1/2\" stud": 0.0,
   "8\" stud (todos los gauges)": 25.33,
-  "6\" stud (todos los gauges)": 2900.0,
-  "3-5/8\" stud (todos los gauges)": 10839.39,
+  "6\" stud (todos los gauges)": 3007.5,
+  "3-5/8\" stud (todos los gauges)": 10850.06,
   "1-5/8\" stud": 0.0,
   "6\" parapet stud": 0.0,
   "bottom track (todos)": 640.61,
   "top / deflection track (todos)": 640.61,
-  "track de ceilings / soffits": 321.78,
-  "bracing C.R. channel": 2858.98,
+  "track de ceilings / soffits": 564.25,
+  "bracing C.R. channel": 2883.65,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
   "sill track": 0.0,
@@ -23,10 +23,10 @@
   "5/8\" glass mat sheathing": 0.0,
   "5/8\" EXTERIOR gyp sheathing": 0.0,
   "1/2\" EXTERIOR gyp sheathing": 0.0,
-  "FRT plywood (SF)": 3063.09,
+  "FRT plywood (SF)": 3208.68,
   "FRT blocking": 552.27,
-  "5/8\" gyp board Type X": 15579.48,
-  "5/8\" gyp Type X W.R.": 1020.33,
+  "5/8\" gyp board Type X": 14902.61,
+  "5/8\" gyp Type X W.R.": 1713.0,
   "8\" joist": 88.0,
   "USG drywall main tee (DGLW26)": 194.16,
   "USG drywall cross tee (DGLW424)": 457.96,
@@ -38,7 +38,7 @@
   "FRP": 0.0,
   "sealant at base of gypsum (exterior)": 0.0,
   "Level 5 finish": 0.0,
-  "additional head track": 0.0,
+  "additional head track": 10.67,
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
@@ -46,12 +46,12 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19919.77,
-  "framing screws": 3100.0,
+  "drywall screws": 19938.73,
+  "framing screws": 3124.0,
   "slab pins": 640.61,
   "expansion anchors": 0.0,
-  "joint compound": 1195.19,
-  "joint tape": 6141.93,
+  "joint compound": 1196.32,
+  "joint tape": 6147.78,
   "deflection clips": 0.0
  },
  "filas": [
@@ -117,6 +117,20 @@
    "source": "A-101",
    "pcs": 12,
    "operacion": "column_wrap Σ (ROUNDUP(face/1.333)+1) por face [2.0, 2.0, 2.0, 2.0] = 12 studs x 8.0 x 1 = 96.0 LF"
+  },
+  {
+   "familia": "6\" stud (todos los gauges)",
+   "ref": "C-I-E1.6\"",
+   "source": "framing of the end face is the end stud of C-H3a (already counted in C-H3a); I/A-221 adds finish only",
+   "pcs": 0,
+   "operacion": "pier parte 6\": 0 studs dibujados x 25.0 x 1 = 0.0 LF (v66 parts)"
+  },
+  {
+   "familia": "6\" stud (todos los gauges)",
+   "ref": "C-I-E2.6\"",
+   "source": "framing of the end face is the end stud of C-H1-N (already counted in C-H1-N); I/A-221 adds finish only",
+   "pcs": 0,
+   "operacion": "pier parte 6\": 0 studs dibujados x 25.0 x 1 = 0.0 LF (v66 parts)"
   },
   {
    "familia": "ceilings",
@@ -225,6 +239,36 @@
    "ref": "VEST-GWB",
    "source": "4/A-210",
    "operacion": "(1) LAYER OF 5/8\" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8\" = 8.4 SF = 105.5 SF (Type X per rev2)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SS-GG-BOTTOM-GWB",
+   "source": "3/A-221",
+   "operacion": "soffit bottom 5/8\" GWB 6.167 x 7 1/4\" (0.604 ft) = 3.73 SF (3/A-221)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-TRACK-3",
+   "source": "8/A-410",
+   "operacion": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 = 142.74 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-TRACK-6",
+   "source": "8/A-410",
+   "operacion": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 = 87.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "WH-BACKING-STUD",
+   "source": "P-201",
+   "operacion": "2 pcs 3-5/8\" stud backing x 4.0 ft = 8.0 LF (sizes not printed on P-201 - RFI-32, conservative)"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "WH-STEEL-BLOCKING",
+   "source": "P-201",
+   "operacion": "steel blocking between studs at the anchor points 2 rows x 1.333 ft (16\" bay) = 2.67 LF 3-5/8\" stud pieces (RFI-32, conservative)"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -347,7 +391,7 @@
   },
   {
    "familia": "FRT plywood (SF)",
-   "ref": "C-E1-P.1-A-FRT",
+   "ref": "C-I-P.1-A-FRT",
    "source": "I/A-221",
    "material": "frt_5_8",
    "operacion": "strip 1.0 x 15.0 = 15.0 SF (no es blocking ni sill)"
@@ -386,6 +430,34 @@
    "source": "4/A-210",
    "material": "frt_3_4",
    "operacion": "strip 12.667 x 8.417 = 106.62 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "JANITOR-FRT-11-A200",
+   "source": "11/A-200",
+   "material": "frt_3_4",
+   "operacion": "strip 2.125 x 8.0 = 17.0 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "SS-GG-FRT",
+   "source": "3/A-221",
+   "material": "frt_5_8",
+   "operacion": "strip 6.167 x 17.917 = 110.49 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "C-I-E1-A-FRT",
+   "source": "I/A-221",
+   "material": "frt_5_8",
+   "operacion": "strip 0.603 x 15.0 = 9.04 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "C-I-E2-A-FRT",
+   "source": "I/A-221",
+   "material": "frt_5_8",
+   "operacion": "strip 0.603 x 15.0 = 9.04 SF (no es blocking ni sill)"
   },
   {
    "familia": "metal trim (corner bead, casing, shadow molding)",
@@ -431,11 +503,19 @@
   },
   {
    "familia": "additional head track",
-   "valor": 0.0,
+   "valor": 5.33,
    "unidad": "lf",
-   "estado": "DERIVADO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"",
-   "operacion": "no openings > 4'-0\" in stud walls"
+   "estado": "CRITERIO",
+   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "operacion": "Door 11 (W2-03): (4.0 + 2 x 0.667) x 1 = 5.33"
+  },
+  {
+   "familia": "additional head track",
+   "valor": 5.33,
+   "unidad": "lf",
+   "estado": "CRITERIO",
+   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "operacion": "Door 3 (C-H2a): (4.0 + 2 x 0.667) x 1 = 5.33"
   },
   {
    "familia": "stud reinforcement MEP",
@@ -487,35 +567,35 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19919.77,
+   "valor": 19938.73,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 19919.77"
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 19938.73"
   },
   {
    "familia": "joint compound",
-   "valor": 1195.19,
+   "valor": 1196.32,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 1195.19"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 1196.32"
   },
   {
    "familia": "joint tape",
-   "valor": 6141.93,
+   "valor": 6147.78,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 6141.93"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 6147.78"
   },
   {
    "familia": "framing screws",
-   "valor": 3100,
+   "valor": 3124,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 775 stud pieces [studs_nodos 667; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3100"
+   "operacion": "4 x 781 stud pieces [studs_nodos 673; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12; C-I-E1.6\" 0; C-I-E2.6\" 0] = 3124"
   },
   {
    "familia": "slab pins",
@@ -592,48 +672,6 @@
   "Door 5: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
   "Door 6: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(3.0 + 1.333) x 2 = 8.67 LF - RFI-09",
   "Door 3: header NOT CALLED by any schedule / detail (A-500 door schedule + 1/A-500 typical hollow metal frame (no header drawn); no header schedule in the set (A-000 index, A-410, A-500)) -> 0 LF + RFI: Door header not called: if a 2-piece track header is required, +(4.0 + 1.333) x 2 = 10.67 LF - RFI-09",
-  "W2-01: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-02: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-03: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-04: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-05: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-06.1: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-06.2: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-06.3: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-06.4: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-06.5: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-07: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-08: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W2-09: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W5-01: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-01: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-02: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-05: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-03: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-06: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W3-04: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-28a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-28b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-28c: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-28d: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-28e: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29c: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29d: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29e: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-29f: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30c: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30d: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30e: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-30f: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-31a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-31b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-31c: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-31d: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "W4-31e: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "CW-01: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
   "CW-02: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
   "CW-03: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
@@ -643,25 +681,6 @@
   "CW-07: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
   "CW-08: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
   "CW-09: clave 'keynote' fuera del esquema (sin números): canon.py no la lee",
-  "C-H1-N: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-H1-W: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-H2a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-H2b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-H3a: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-H3b: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-E2: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-E1-S: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-E1-P.1: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-E1-P.2: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-E1-B: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-F: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-I: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-A-1: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-A-2: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-A-3: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-B: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-D: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
-  "C-C: clave 'top_track' fuera del esquema (sin números): canon.py no la lee",
   "RFI bracing: 29.66 LF de C.R. channel cruzan vanos sin studs (53.4 literal). Delta si no se cruzan: -29.66 LF",
   "RFI bottom track: 29.66 LF de R.O. de doors NO descontados. Delta si se descuentan: -29.66 LF",
   "batt insulation: EXCLUDED (criterio del usuario 'no insulation')",
@@ -764,14 +783,14 @@
    "family": "FRT plywood (SF)",
    "key": "frt_5_8",
    "unit": "SF",
-   "net": 2709.63
+   "net": 2838.21
   },
   {
    "material": "3/4\" FRT plywood",
    "family": "FRT plywood (SF)",
    "key": "frt_3_4",
    "unit": "SF",
-   "net": 353.46
+   "net": 370.46
   },
   {
    "material": "Hanger wire 12 ga",
@@ -784,8 +803,8 @@
   }
  ],
  "frt_plywood_by_material": {
-  "FRT plywood substrate (5/8 in.)": 2709.63,
-  "FRT plywood substrate (3/4 in.)": 353.46
+  "FRT plywood substrate (5/8 in.)": 2838.21,
+  "FRT plywood substrate (3/4 in.)": 370.46
  },
  "metal_blocking_by_origin": {},
  "wood_blocking_lf": 0.0,
@@ -801,7 +820,7 @@
  "sealant_exterior_lf": 0.0,
  "accesorios": {
   "familias": {
-   "additional head track": 0.0,
+   "additional head track": 10.67,
    "stud reinforcement MEP": 0.0,
    "extra framing ATM": 0.0,
    "2-1/2\" CFMF coiling grille head": 0.0,
@@ -809,17 +828,17 @@
    "PVC trim at FRP": 0.0,
    "PAFs and duct sleeves": 0.0,
    "access panel": 0.0,
-   "drywall screws": 19919.77,
-   "framing screws": 3100.0,
+   "drywall screws": 19938.73,
+   "framing screws": 3124.0,
    "slab pins": 640.61,
    "expansion anchors": 0.0,
-   "joint compound": 1195.19,
-   "joint tape": 6141.93,
+   "joint compound": 1196.32,
+   "joint tape": 6147.78,
    "Level 5 finish": 0.0,
    "deflection clips": 0.0
   },
   "estado": {
-   "additional head track": "DERIVADO",
+   "additional head track": "CRITERIO",
    "stud reinforcement MEP": "RFI",
    "extra framing ATM": "DERIVADO",
    "2-1/2\" CFMF coiling grille head": null,
@@ -897,7 +916,7 @@
   }
  ],
  "estado_accesorios": {
-  "additional head track": "DERIVADO",
+  "additional head track": "CRITERIO",
   "stud reinforcement MEP": "RFI",
   "extra framing ATM": "DERIVADO",
   "2-1/2\" CFMF coiling grille head": null,
@@ -1749,14 +1768,14 @@
     "jogs": []
    },
    "I": {
-    "walls": 2,
-    "lf": 3.31,
+    "walls": 4,
+    "lf": 4.52,
     "filas": [
      {
       "ids": [
-       "C-E1-P.1"
+       "C-I-P.1"
       ],
-      "wall": "C-E1-P.1",
+      "wall": "C-I-P.1",
       "lf": 1.0,
       "height_ft": 25.0,
       "stud_size": "6\"",
@@ -1782,6 +1801,40 @@
       "layers": 1.0,
       "board_sf": 23.1,
       "location": "Box at SE corner of Cafe Sales - east side",
+      "source": "I/A-221",
+      "status": "DERIVADO",
+      "pendiente": []
+     },
+     {
+      "ids": [
+       "C-I-E1"
+      ],
+      "wall": "C-I-E1",
+      "lf": 0.603,
+      "height_ft": 25.0,
+      "stud_size": "6\"",
+      "oc_in": 16,
+      "rows": 1,
+      "layers": 1.0,
+      "board_sf": 6.03,
+      "location": "Type I end face (I SIM.) at the east end of C-H3a, Sales side",
+      "source": "I/A-221",
+      "status": "DERIVADO",
+      "pendiente": []
+     },
+     {
+      "ids": [
+       "C-I-E2"
+      ],
+      "wall": "C-I-E2",
+      "lf": 0.603,
+      "height_ft": 25.0,
+      "stud_size": "6\"",
+      "oc_in": 16,
+      "rows": 1,
+      "layers": 1.0,
+      "board_sf": 6.03,
+      "location": "Type I end face (I SIM.) at the east end of C-H1-N, Sales side",
       "source": "I/A-221",
       "status": "DERIVADO",
       "pendiente": []
@@ -2210,6 +2263,26 @@
     "id": "SS-IN-E",
     "element": "soffit_side",
     "tag": ""
+   },
+   {
+    "ids": [
+     "SS-GG"
+    ],
+    "wall": "SS-GG",
+    "lf": 6.167,
+    "height_ft": 17.917,
+    "stud_size": "6\"",
+    "oc_in": 16,
+    "rows": 1,
+    "layers": 0.0,
+    "board_sf": 0.0,
+    "location": "Grab & Go header soffit over the open east side (6'-2\" HOLD)",
+    "source": "3/A-221",
+    "status": "DERIVADO",
+    "pendiente": [],
+    "id": "SS-GG",
+    "element": "soffit_side",
+    "tag": ""
    }
   ],
   "avisos": [
@@ -2229,7 +2302,11 @@
    "W4-30f (4) sin band: wall propio, no se puede unir con colineales",
    "W4-31d (4) sin band: wall propio, no se puede unir con colineales",
    "W4-31e (4) sin band: wall propio, no se puede unir con colineales",
-   "C-A-2 (A) sin band: wall propio, no se puede unir con colineales"
+   "C-A-2 (A) sin band: wall propio, no se puede unir con colineales",
+   "C-I-E1 (I) entra 0.603 ft en la banda de C-H3a (H3A): el wall termina en la CARA del que cruza (R11, corregir canon)",
+   "C-I-E1 (I) entra 0.603 ft en la banda de C-H3a (H3A): el wall termina en la CARA del que cruza (R11, corregir canon)",
+   "C-I-E2 (I) entra 0.603 ft en la banda de C-H1-N (H1): el wall termina en la CARA del que cruza (R11, corregir canon)",
+   "C-I-E2 (I) entra 0.603 ft en la banda de C-H1-N (H1): el wall termina en la CARA del que cruza (R11, corregir canon)"
   ],
   "modo": "eje",
   "regla": {

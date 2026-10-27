@@ -440,6 +440,8 @@ def armar(d, salida, trabajo):
         raise reglas.ReglasNoOK("NO SE ARMA: --familias no es el familias_out.json de la carpeta de trabajo "
                                 f"({fo_p})")
     out = reglas.exigir(trabajo)                    # lanza ReglasNoOK si una sola regla falla
+    import trazabilidad                             # v80k (R80e.24): N/HOJA + desglose en el libro, sin archivos internos
+    d = trazabilidad.aplicar(d, ctx.out_dir, reglas.buscar_canon(trabajo))
     return _escribir(d, salida, out)
 
 
@@ -478,7 +480,8 @@ def _escribir(d, salida, out_reglas):
 
     def fila_wall(t, w):
         return [f"{t}  #{w['wall']}  -  {en(w['location'])}", str(w["wall"]), w["length_lf"], w["height_ft"],
-                w["layers"], w["stud_size"], w["stud_oc_in"], w["board_sf"], en(w["location"]),
+                w["layers"], w["stud_size"], w["stud_oc_in"], w["board_sf"],
+                en(w["location"]) + (f" | {en(w['faces_note'])}" if w.get("faces_note") else ""),   # v80k R80e.24
                 en(w["source"]), f"[{ESTADO_EN.get(w['status'], w['status'])}]"]
     if d.get("type_order"):                           # v80e (§0.F): orden del Partition Schedule del proyecto
         rank = {str(t).upper(): i for i, t in enumerate(d["type_order"])}
@@ -522,7 +525,7 @@ def _escribir(d, salida, out_reglas):
         if unit == "SF" and not sheet_sf(m) and re.search(r"sheet|board", str(sel), re.I):
             sel = f"{_inp(d, 'sheet_w_ft'):g}x{_inp(d, 'sheet_l_ft'):g} ft sheet (Inputs)"
         ws.append([en(m["material"]), unit, m["net"], waste_celda(m, REF), f"=C{r}*D{r}", f"=C{r}+E{r}",
-                   sel, formula_piezas(m, r, d), en(m["source"]), m.get("yield_formula")])
+                   sel, formula_piezas(m, r, d), en(m.get("cita") or m["source"]), m.get("yield_formula")])   # v80k R80e.24
 
     # ---------- RFIs / Review Items / Scope Checklist ----------
     ws = wb.create_sheet("Pending Items")

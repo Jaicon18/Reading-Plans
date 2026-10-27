@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 1458, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 1439, in main
+    print("OK", a[2], "-", armar(d, a[2], trabajo))
+                           ~~~~~^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 444, in armar
+    d = trazabilidad.aplicar(d, ctx.out_dir, reglas.buscar_canon(trabajo))
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/trazabilidad.py", line 147, in aplicar
+    extra = _desglose(its, net, unit, name)
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/trazabilidad.py", line 42, in _desglose
+    raise ValueError(f"trazabilidad: desglose de '{ctx}' suma {tot} != NET {net}")
+ValueError: trazabilidad: desglose de 'Blocking FRT / 2X FRT wood' suma 0 != NET 552.27

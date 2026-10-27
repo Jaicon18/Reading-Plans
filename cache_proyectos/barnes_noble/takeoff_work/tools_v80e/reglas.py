@@ -591,7 +591,7 @@ def a_track_runs(ctx):
         if r.get("element") not in ("wall", "parapet", "chase", "pier", "column_wrap"):
             continue
         b, t = _f(r.get("bottom_lf"), 0), _f(r.get("top_lf"), 0)
-        if b <= 0 or t <= 0:
+        if (b <= 0 or t <= 0) and not NHOJA.search(_txt(r.get("track_source"))):   # v80k R80e.23: ausencia declarada
             out.append((r.get("id"), f"bottom {b} / top {t}", "bottom Y top track > 0 (2 runs mínimo)"))
     if co.get("doors_descontados") or co.get("bottom_deduct_doors"):
         out.append(("corridas", "bottom track con doors descontados", "E10: bottom track en doors NO se descuenta"))
@@ -657,6 +657,8 @@ def a_anchors(ctx):
             continue
         import criterios                         # v80 (R80.1 / R80.2): mismo criterio que accesorios.track_slab
         if criterios.fila_apilada(w):
+            continue
+        if w.get("bottom_track") is False:       # v80k (R80e.23): mismo criterio que accesorios.track_slab
             continue
         try:
             lf = float(w["length_ft"]) * int(w.get("rows", 1) or 1)

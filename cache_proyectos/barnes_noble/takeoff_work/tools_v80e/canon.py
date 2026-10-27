@@ -476,7 +476,8 @@ def generar(data):
                      "openings": [{"ro_w_ft": o["ro_w_ft"], "sill_ft": o.get("sill_ft", 0), "head_ft": o["head_ft"],
                                    "kind": o.get("kind", "door")} for o in w.get("openings") or []],
                      "purlin": bool(w.get("purlin")), "source": src,
-                     **({k: w[k] for k in ("track_lines", "track_lines_source", "wall_line_ft") if k in w})})
+                     **({k: w[k] for k in ("track_lines", "track_lines_source", "wall_line_ft", "bracing_rows", "bottom_track", "top_track", "track_source",
+                                           "bracing_rows_source") if k in w})})   # v80k (R80e.23): bracing_rows pasa a corridas
         for o in w.get("openings") or []:
             declaradas.append(str(o["ref"]))
             hdr = o.get("header", "metal")
@@ -863,7 +864,7 @@ bottom_track_lf head_build exterior in_cavity in_cavity_source source source_cha
 tags_descartados band_length_ok_reason img evidence_png type_source type_status default_type_source adjacent_to
 adjacent_source wet_fixtures k_customer studs_drawn hatch_extent dim_scan sheathing edge_of
 beam_override part_of same_box_ok opening_ref type_change_rfi anchorage orientation sheets_searched
-thickness_measured_in default_type_rfi sheathing_bottom_ft owner purlin_detail
+thickness_measured_in default_type_rfi sheathing_bottom_ft owner purlin_detail bracing_rows bracing_rows_source bottom_track top_track track_source
 """.split())
 TRAZA_SUFIJOS = ("_info", "_note", "_notes", "_check", "_source", "_status", "_img", "_reason", "_basis", "_desc",
                  "_op")

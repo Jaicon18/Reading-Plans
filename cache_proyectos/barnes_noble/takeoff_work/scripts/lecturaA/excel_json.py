@@ -166,11 +166,85 @@ if os.environ.get('REV3') == '1':   # rev3: textos finales con las cifras vigent
     for r in rfis:
         if r['id'] == 'RFI-27':
             r['delta'] = f"Applied (rev3): 5/8\" Type X {_tx:,.2f} SF = walls {_tx - 981.38 - 105.5:,.2f} + GWB ceilings 981.38 + vestibule box 105.5; Type X W.R. {_wr:,.2f} SF; 5/8\" regular 0."
+
+REV5 = os.environ.get('REV5') == '1'
+if REV5:   # rev5: auditoría final rev4 (AUDITORIA_rev4/CERTIFICADO_AUDITORIA.md, COMPARATIVA_AUDITORIA.xlsx; regla v80j)
+    _fam = fo['familias']; _wr = _fam.get(chr(53) + '/8" gyp Type X W.R.', 0); _tx = _fam.get(chr(53) + '/8" gyp board Type X', 0)
+    CL = c['ceilings']
+    _cx = round(sum(x['area_sf'] for x in CL if x.get('board') == '5/8 type X' and x.get('system') != 'canopy_joist'), 2)
+    _cwr = round(sum(x['area_sf'] for x in CL if x.get('board') == '5/8 type X WR'), 2)
+    _misc_tx = round(sum(m['qty'] for m in c.get('misc_items') or [] if m['familia'] == chr(53) + '/8" gyp board Type X'), 2)
+    def _flf(room):
+        return round(sum((f.get('length_ft') or w['length_ft']) for w in W for f in w.get('faces') or [] if f['room'] == room), 2)
+    _wk = round(sum((f.get('length_ft') or w['length_ft']) * f['height_ft'] for w in W for f in w.get('faces') or [] if f['room'] == 'Cafe Workroom 104'), 2)
+    _fs = {m['ref']: m['qty'] for m in c.get('misc_items') or [] if m['ref'].startswith('FIRESTOP')}
+    _fst = round(sum(_fs.values()), 2)
+    _aht = _fam.get('additional head track', 0)
+    A5 = 'audit rev4 (AUDITORIA_rev4/COMPARATIVA_AUDITORIA.xlsx row {}), rev5: '
+    OV5 = {
+     'RFI-11': None,
+     'RFI-12': (None, None),
+     'RFI-13': ('FRP-1 (A-510 Room Finish Schedule: Cafe Work Room 104 FRP-1 all walls, Janitor 107 FRP, Cafe 103 below countertop): installer (A-002) and height not printed for the partitions. Not quantified - ' + A5.format(10) + 'kept open.',
+                f'FRP-1 SF = Cafe Work Room 104 faces {_flf("Cafe Workroom 104")} LF x FRP height + Janitor 107 faces {_flf("Janitor Closet 107")} LF x FRP height (A-510); + PVC trim at FRP edges and inside corners'),
+     'RFI-20': ('CLOSED - ' + A5.format(6) + 'Grab & Go header soffit QUANTIFIED from the plan: 6\'-2" HOLD (1/A-221) x (B.O. deck 25\'-0" - Grab & Go GWB 7\'-1", 1/A-121) with 6" metal studs @ 16" O.C. (3/A-221); 5/8" FRT plywood substrate on the east face, GWB at the soffit bottom. T.O. WD-1 not printed -> RFI-34.',
+                'Applied: SS-GG 6" studs 6 x 17.917 = 107.5 LF; ceiling / soffit track 6.167 x 2 = 12.33 LF; bracing 4 rows x 6.167 = 24.67 LF (5/A-410); 5/8" FRT plywood 6.167 x 17.917 = 110.49 SF; bottom GWB 3.73 SF.'),
+     'RFI-23': None,
+    }
+    for r in rfis:
+        if r['id'] == 'RFI-11':
+            r['pregunta'] = r['pregunta'] + ' rev5 (' + A5.format('3 / 9').rstrip(': ') + '): + restroom GWB ceilings (A-410 Partition Notes 2 "W.R. ... FOR WALL AND CEILING CONSTRUCTION") and Cafe Work Room 104 GWB faces (A-410 "*" note KITCHEN, 2/A-410 RESTROOM/CAFE WALLS).'
+            r['delta'] = (f"Applied (rev5): 5/8\" Type X W.R. = {_wr:,.2f} SF = walls (Women's 222.93 + Men's 223.02 + Janitor 485.75 + alcove corridor 88.63 "
+                          f"+ Cafe Work Room 104 {_wk:,.2f}) + restroom ceilings {_cwr:,.2f} (Women's 61.19 + Men's 61.11, 1/A-121). "
+                          f"Auditor figures: ceilings 120.2 SF (chase notch deducted; take-off keeps the RCP area, +2.10 SF), Work Room up to 570 SF.")
+        if r['id'] == 'RFI-12':
+            r['pregunta'] += ' rev5 (' + A5.format(10).rstrip(': ') + '): A-510 also lists ceramic / porcelain WALL TILE at Corridor 110 - backer not detailed.'
+            r['delta'] += f'; Corridor 110 wall tile: {_flf("Corridor 110")} LF of corridor faces x tile height (not printed) of 1/2" cement board instead of 5/8" Type X (each 1 ft of tile height = {_flf("Corridor 110")} SF)'
+        if r['id'] in ('RFI-13', 'RFI-20'):
+            r['pregunta'], r['delta'] = OV5[r['id']]
+        if r['id'] == 'RFI-23':
+            r['delta'] = r['delta'].replace(' Water heater backing (P-201) and W-3 surface blocking (1/A-414, by GC / fixture installer) not carried.',
+                                            ' rev5: water heater backing (P-201) carried conservatively -> RFI-32; janitor 3/4" FRT plywood area (11/A-200) carried 17.0 SF -> RFI-33; W-3 surface blocking (1/A-414, 7/A-414) -> RFI-36.')
+        if r['id'] == 'RFI-27':
+            r['delta'] = (f"Applied (rev5): 5/8\" Type X {_tx:,.2f} SF = walls {_tx - _cx - _misc_tx:,.2f} + GWB ceilings {_cx:,.2f} (restroom ceilings moved to W.R., RFI-11) "
+                          f"+ vestibule box 105.5 + Grab & Go soffit bottom 3.73; Type X W.R. {_wr:,.2f} SF; 5/8\" regular 0.")
+    rfis += [
+     {'id': 'RFI-31', 'pregunta': 'Additional head track at openings: the note "ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4\'-0"" quoted in rev0-rev4 is NOT on A-410 / A-500 (skill default criterion; citation corrected, ' + A5.format(8).rstrip(': ') + '). Carried conservatively at the two 4\'-0" doors: door 3 (C-H2a, 4\'-0" x 8\'-0") and door 11 (W2-03, 4\'-0" x 7\'-0"), A-500 door schedule.',
+      'delta': f'Carried {_aht:.2f} LF = 2 x (R.O. 4.00 ft measured jamb gap + 2 x 8" bearing); if not required: - {_aht:.2f} LF. Auditor 11.17 LF assumed R.O. 4\'-3" (frame not printed): + 0.50 LF if the R.O. is 4\'-3".'},
+     {'id': 'RFI-32', 'pregunta': 'P-201 WATER HEATER DETAIL ("FOR RESTROOMS AND BREAKROOM"): 2x4 metal stud backing + steel blocking between studs at the anchor locations; member sizes and lengths not printed (Janitor 107, 11/A-200). ' + A5.format(5).rstrip(': ') + ': carried conservatively.',
+      'delta': 'Carried: 3-5/8" stud backing 2 x 4.0 ft = 8.0 LF + steel blocking 2 rows x 1.33 ft = 2.67 LF (3-5/8" stud pieces); if by the plumber: - 10.67 LF 3-5/8" stud.'},
+     {'id': 'RFI-33', 'pregunta': '11/A-200 Janitor 107: "AREA OF 3/4" FIRE RESISTANT PLYWOOD BLOCKING (TYP)" - extent not dimensioned. ' + A5.format(4).rstrip(': ') + ': carried at the conservative upper bound (width measured on 11/A-200 x 8\'-0" HOLD).',
+      'delta': 'Carried 2.125 x 8.0 = 17.0 SF 3/4" FRT plywood; confirm extent (delta down to 0 SF).'},
+     {'id': 'RFI-34', 'pregunta': 'Grab & Go header soffit (3/A-221): "T.O. WD-1 SEE ELEVATION" - top of WD-1 on the soffit east face not printed on A-226A / A-226B. Carried conservatively: 5/8" FRT plywood on the full east face (no GWB above WD-1).',
+      'delta': 'Each 1 ft of face above T.O. WD-1 = 6.17 SF from 5/8" FRT plywood to 5/8" Type X GWB (full face 110.49 SF carried as plywood).'},
+     {'id': 'RFI-35', 'pregunta': '8/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.": applied to every full-height wall with a ceiling on at least one face (1/A-121). ' + A5.format(7).rstrip(': ') + ': carried; confirm with the GC that it is required at all of them.',
+      'delta': f'Carried {_fst:.2f} LF track (3-5/8" {_fs.get("FIRESTOP-TRACK-3", 0):.2f} + 6" {_fs.get("FIRESTOP-TRACK-6", 0):.2f}); if not required: - {_fst:.2f} LF.'},
+     {'id': 'RFI-36', 'pregunta': 'Surface-mounted 3/4" FRT plywood blocking at the W-3 wall fixtures "BY GC/FIXTURE INSTALLER" (1/A-414, 7/A-414): who furnishes / installs is ambiguous and the W-3 count on A-111 is not taken. Not carried - ' + A5.format(11).rstrip(': ') + '.',
+      'delta': 'If by the drywall contractor: + one 3/4" FRT plywood strip per W-3 unit (size per 1/A-414, 7/A-414) x W-3 count from A-111 - PENDING count.'},
+    ]
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:
     d['alcances'] = json.load(open(alc_p))
 except FileNotFoundError:
     pass
+if REV5 and d.get('alcances'):
+    _fr = fo.get('frt_plywood_by_material') or {}
+    N5 = {
+     'ALC-06': f"Bracing C.R. channel @ 4'-0\" O.C. per A-410 partition note 4 and 5/A-410 = {_fam.get('bracing C.R. channel', 0):,.2f} LF; diagonal bracing type 2 > 22'-0\" per 8/A-410 Top Track Detail (RFI-04 CLOSED rev3: 117 braces = 468.0 LF)",
+     'ALC-07': f"Quantified (rev5): 5/8\" Type X {_tx:,.2f} SF + 5/8\" Type X W.R. {_wr:,.2f} SF (A-410, A-001A, RFI-27, RFI-11); no 5/8\" regular. Perimeter walls existing (RFI-01).",
+     'ALC-08': f"Quantified (rev5): 5/8\" Type X W.R. {_wr:,.2f} SF = all faces of Women's 109, Men's 108, Janitor 107, drinking fountain alcove corridor faces and Cafe Work Room 104 faces (A-410 '*' note, note 7, 2/A-410) + restroom GWB ceilings {_cwr:,.2f} SF (A-410 Partition Notes 2); existing EXT-07 faces = patch allowance.",
+     'ALC-10': f"FRT plywood 5/8\" {_fr.get('FRT plywood substrate (5/8 in.)', 0):,.2f} SF (Cafe types G, H, E2, F, I and Grab & Go soffit 3/A-221; soffit faces 2/A-221) + 3/4\" {_fr.get('FRT plywood substrate (3/4 in.)', 0):,.2f} SF (counters A/B, menu boards 4/A-226A, restroom backing 21/A-201, vestibule 4/A-210, 5/A-210, janitor 11/A-200) - breakdown in Material Summary",
+     'ALC-11': f"Quantified (rev5): suspended GWB ceilings and soffits per A-121 (5/A-121, 4/A-121) and 2/A-221 = 981.38 SF: 5/8\" Type X {_cx:,.2f} SF + restroom ceilings 5/8\" Type X W.R. {_cwr:,.2f} SF (A-410 Partition Notes 2).",
+     'ALC-12': "Furring channel @ 24\", carrying channel @ 48\", hanger wire 103 pcs, ceiling track per 5/A-121 on A-121; carrying direction E-W (RFI-15 CLOSED rev3: joists N-S on 1/A-400A, 2/A-400A); Cafe Seating cloud = USG drywall suspension grid 4/A-121; M-100 (p46), M-101 (p47), M-102 (p48) hangers are MEP",
+     'ALC-13': "Quantified: framed soffit 2/A-221 (SS-N, SS-E, SS-IN-N, SS-IN-E) and Grab & Go header soffit 3/A-221 (SS-GG, RFI-20 CLOSED rev5; T.O. WD-1 RFI-34); E-102 (p36) bulkhead is signage (by others)",
+     'ALC-15': "Column wraps C25 x 9 on A-101, studs @ 16\" O.C. (RFI-17 CLOSED rev4), carried under OTHER FRAMING",
+     'ALC-16': f"Quantified (rev1, RFI-23): FRT blocking {_fam.get('FRT blocking', 0):,.2f} LF (7/A-413 387.0, 8A/A-413 69.0, 3-4/A-412 85.6, 6/A-412 10.67) + 3/4\" FRT plywood menu boards 60.61 SF (4/A-226A) + restroom backing 17.78 SF (21/A-201) + janitor 17.0 SF (11/A-200, RFI-33); water heater backing P-201 10.67 LF 3-5/8\" stud (RFI-32); W-3 surface blocking 1/A-414 RFI-36.",
+     'ALC-04': f"Bottom track and top / deflection track = partition LF per type (A-101, A-221; 2/A-410, 3/A-410); + fire stop track at ceiling line {_fst:.2f} LF (8/A-410, RFI-35) and additional head track {_aht:.2f} LF (RFI-31); M-302 (p51) mention is plumbing expansion fittings",
+     'ALC-20': "Cement board at wet walls (A-510 tile finishes, RFI-12 incl. Corridor 110 wall tile); FRP-1 extent RFI-13 / RFI-22 not carried",
+    }
+    for x in d['alcances']:
+        if x['id'] in N5:
+            x['nota'] = N5[x['id']]
+
 json.dump(d, open(K + '/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print(len(rfis), 'rfis', braces, 'braces', rfi01, lf25, lf_cp, hdr, wet_sf, full_sf)

@@ -27,6 +27,10 @@
    "value": 48,
    "source": "5/A-121 \"HANGING WIRE TO STRUCTURE ABOVE AT 48\" O.C. MAX\""
   },
+  "addl_head_track_min_ro_ft": {
+   "value": 3.9,
+   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\""
+  },
   "bracing_spacing_in": {
    "value": 48,
    "source": "5/A-410 lateral bracing CR 1-1/2\" 16 ga @ 4'-0\" O.C. full wall height"
@@ -533,8 +537,8 @@
    "op": "10 pcs x 16\" stud bay (1.333 ft, 21/A-201) x 16\" high (estimator decision rev2) = 13.33 x 16/12 = 17.78 SF"
   },
   {
-   "ref": "C-E1-P.1-A-FRT",
-   "wall": "C-E1-P.1",
+   "ref": "C-I-P.1-A-FRT",
+   "wall": "C-I-P.1",
    "lf": 1.0,
    "width_ft": 15.0,
    "material": "frt_5_8",
@@ -609,6 +613,58 @@
    "room": "Vestibule 100",
    "img": "../../ri10_11/5_A-210_4_vestibule_section.png",
    "op": "12.667 x 8.417 (8'-5\" E-W, 1/A-210) = 106.6 SF (rev3 RI 11)"
+  },
+  {
+   "ref": "JANITOR-FRT-11-A200",
+   "wall": "JANITOR 107",
+   "lf": 2.125,
+   "width_ft": 8.0,
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "label": "3/4\" FRT plywood area (sheet, SF) behind the janitor shelving / water heater shelf (11/A-200)",
+   "source": "11/A-200",
+   "room": "Janitor Closet 107",
+   "img": "../../AUDITORIA_rev4/img/C4_A-200_11_janitor_FR_plywood.png",
+   "op": "11/A-200 prints \"AREA OF 3/4 FIRE RESISTANT PLYWOOD (TYP)\" as a hatched area (a sheet, not a 2x member): width 2'-1 1/2\" (measured on 11/A-200 at 1/2\"=1'-0\", not dimensioned) x 8'-0\" HOLD printed = 17.0 SF - conservative upper bound, extent RFI-33 (audit rev4 row 4)"
+  },
+  {
+   "ref": "SS-GG-FRT",
+   "wall": "SS-GG",
+   "lf": 6.167,
+   "width_ft": 17.917,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" PRESSURE TREATED FRT PLYWOOD SUBSTRATE (3/A-221)",
+   "source": "3/A-221",
+   "room": "Sales Area 101",
+   "img": "../../AUDITORIA_rev4/img/C3_A-221_soffits_2_3.png",
+   "op": "6.167 x 17.917 = full east face (conservative: T.O. WD-1 not printed - RFI-34; each 1 ft of GWB above WD-1 = 6.17 SF plywood -> GWB)"
+  },
+  {
+   "ref": "C-I-E1-A-FRT",
+   "wall": "C-I-E1",
+   "lf": 0.603,
+   "width_ft": 15.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FRT PLYWOOD behind WD-1 (I/A-221)",
+   "source": "I/A-221",
+   "room": "Sales Area 101",
+   "img": "../../AUDITORIA_rev4/img/C1_A-221_I_SIM_tags_no_row.png",
+   "op": "0.603 LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A; audit rev4 row 1)"
+  },
+  {
+   "ref": "C-I-E2-A-FRT",
+   "wall": "C-I-E2",
+   "lf": 0.603,
+   "width_ft": 15.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FRT PLYWOOD behind WD-1 (I/A-221)",
+   "source": "I/A-221",
+   "room": "Sales Area 101",
+   "img": "../../AUDITORIA_rev4/img/C1_A-221_I_SIM_tags_no_row.png",
+   "op": "0.603 LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A; audit rev4 row 1)"
   }
  ],
  "nodes": [
@@ -1140,7 +1196,7 @@
    "id": "N90",
    "kind": "L",
    "walls": [
-    "C-E1-P.1",
+    "C-I-P.1",
     "C-E1-P.2"
    ],
    "source": "A-221 (vector: ends within 1.0 ft)"
@@ -1148,7 +1204,7 @@
   {
    "id": "N91",
    "kind": "free",
-   "wall": "C-E1-P.1",
+   "wall": "C-I-P.1",
    "source": "A-221 (vector: free end)"
   },
   {
@@ -1273,6 +1329,18 @@
    "kind": "free",
    "wall": "SS-IN-E",
    "source": "A-221 (vector: free end)"
+  },
+  {
+   "id": "N-GG1",
+   "kind": "free",
+   "wall": "SS-GG",
+   "source": "1/A-221 (soffit ends at the C-H3a south face; header over the opening, no wall connection)"
+  },
+  {
+   "id": "N-GG2",
+   "kind": "free",
+   "wall": "SS-GG",
+   "source": "1/A-221 (soffit ends at the C-H1-N north face; header over the opening, no wall connection)"
   }
  ],
  "trim_items": [
@@ -1445,6 +1513,55 @@
    "source": "4/A-210",
    "op": "(1) LAYER OF 5/8\" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8\" = 8.4 SF = 105.5 SF (Type X per rev2)",
    "img": "../../ri10_11/5_A-210_4_vestibule_section.png"
+  },
+  {
+   "ref": "SS-GG-BOTTOM-GWB",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 3.73,
+   "unit": "SF",
+   "source": "3/A-221",
+   "op": "soffit bottom 5/8\" GWB 6.167 x 7 1/4\" (0.604 ft) = 3.73 SF (3/A-221)",
+   "img": "../../AUDITORIA_rev4/img/C3_A-221_soffits_2_3.png"
+  },
+  {
+   "ref": "FIRESTOP-TRACK-3",
+   "familia": "track de ceilings / soffits",
+   "qty": 142.74,
+   "unit": "LF",
+   "source": "8/A-410",
+   "label": "3-5/8\" track fire stop at ceiling line (8/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\")",
+   "op": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 = 142.74 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
+   "img": "../../AUDITORIA_rev4/img/C4_A-410_8_firestop_track_ceiling_line.png"
+  },
+  {
+   "ref": "FIRESTOP-TRACK-6",
+   "familia": "track de ceilings / soffits",
+   "qty": 87.4,
+   "unit": "LF",
+   "source": "8/A-410",
+   "label": "6\" track fire stop at ceiling line (8/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\")",
+   "op": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 = 87.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
+   "img": "../../AUDITORIA_rev4/img/C4_A-410_8_firestop_track_ceiling_line.png"
+  },
+  {
+   "ref": "WH-BACKING-STUD",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 8.0,
+   "unit": "LF",
+   "source": "P-201",
+   "label": "P-201 WATER HEATER DETAIL: 2x4 metal stud backing + steel blocking between studs (Janitor 107, 11/A-200)",
+   "op": "2 pcs 3-5/8\" stud backing x 4.0 ft = 8.0 LF (sizes not printed on P-201 - RFI-32, conservative)",
+   "img": "../../AUDITORIA_rev4/img/C4_P-201_water_heater_backing.png"
+  },
+  {
+   "ref": "WH-STEEL-BLOCKING",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 2.67,
+   "unit": "LF",
+   "source": "P-201",
+   "label": "P-201 WATER HEATER DETAIL: 2x4 metal stud backing + steel blocking between studs (Janitor 107, 11/A-200)",
+   "op": "steel blocking between studs at the anchor points 2 rows x 1.333 ft (16\" bay) = 2.67 LF 3-5/8\" stud pieces (RFI-32, conservative)",
+   "img": "../../AUDITORIA_rev4/img/C4_P-201_water_heater_backing.png"
   }
  ],
  "corners_ok": [
@@ -1531,8 +1648,9 @@
     "source": "B.O. deck 25'-0\" (1/A-400B) - ceiling 9.0 (A-121) - RFI-03"
    },
    "detail": "5/A-121",
-   "board": "5/8 type X",
-   "board_source": "5/8\" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2"
+   "board": "5/8 type X WR",
+   "board_source": "A-410 Partition Notes 2 \"W.R. GYPSUM BOARD IN ALL BATHROOMS AND JANITOR'S CLOSET FOR WALL AND CEILING CONSTRUCTION\" (audit rev4 row 3, rev5); Type X per A-001A Div 09 A.2; ceiling tag 1/A-121",
+   "img_wr": "../../AUDITORIA_rev4/img/C4_A-410_partition_note_2_WR_ceilings.png"
   },
   {
    "room": "Men's Restroom 108",
@@ -1550,8 +1668,9 @@
     "source": "B.O. deck 25'-0\" (1/A-400B) - ceiling 9.0 (A-121) - RFI-03"
    },
    "detail": "5/A-121",
-   "board": "5/8 type X",
-   "board_source": "5/8\" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2"
+   "board": "5/8 type X WR",
+   "board_source": "A-410 Partition Notes 2 \"W.R. GYPSUM BOARD IN ALL BATHROOMS AND JANITOR'S CLOSET FOR WALL AND CEILING CONSTRUCTION\" (audit rev4 row 3, rev5); Type X per A-001A Div 09 A.2; ceiling tag 1/A-121",
+   "img_wr": "../../AUDITORIA_rev4/img/C4_A-410_partition_note_2_WR_ceilings.png"
   },
   {
    "room": "Cafe 103 - 11'-6\" GWB band",

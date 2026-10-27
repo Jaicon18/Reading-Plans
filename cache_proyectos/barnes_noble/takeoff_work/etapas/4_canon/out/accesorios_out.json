@@ -1,6 +1,6 @@
 {
  "familias": {
-  "additional head track": 0.0,
+  "additional head track": 10.67,
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
@@ -8,12 +8,12 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19919.77,
-  "framing screws": 3100.0,
+  "drywall screws": 19938.73,
+  "framing screws": 3124.0,
   "slab pins": 640.61,
   "expansion anchors": 0.0,
-  "joint compound": 1195.19,
-  "joint tape": 6141.93,
+  "joint compound": 1196.32,
+  "joint tape": 6147.78,
   "Level 5 finish": 0.0,
   "deflection clips": 0.0
  },
@@ -44,7 +44,7 @@
   "Level 5 finish": "board"
  },
  "estado": {
-  "additional head track": "DERIVADO",
+  "additional head track": "CRITERIO",
   "stud reinforcement MEP": "RFI",
   "extra framing ATM": "DERIVADO",
   "2-1/2\" CFMF coiling grille head": null,
@@ -64,11 +64,19 @@
  "filas": [
   {
    "familia": "additional head track",
-   "valor": 0.0,
+   "valor": 5.33,
    "unidad": "lf",
-   "estado": "DERIVADO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"",
-   "operacion": "no openings > 4'-0\" in stud walls"
+   "estado": "CRITERIO",
+   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "operacion": "Door 11 (W2-03): (4.0 + 2 x 0.667) x 1 = 5.33"
+  },
+  {
+   "familia": "additional head track",
+   "valor": 5.33,
+   "unidad": "lf",
+   "estado": "CRITERIO",
+   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "operacion": "Door 3 (C-H2a): (4.0 + 2 x 0.667) x 1 = 5.33"
   },
   {
    "familia": "stud reinforcement MEP",
@@ -120,35 +128,35 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19919.77,
+   "valor": 19938.73,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 19919.77"
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 19938.73"
   },
   {
    "familia": "joint compound",
-   "valor": 1195.19,
+   "valor": 1196.32,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 1195.19"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 1196.32"
   },
   {
    "familia": "joint tape",
-   "valor": 6141.93,
+   "valor": 6147.78,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15579.48 + 1020.33 = 16599.81 SF) = 6141.93"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 14902.61 + 1713.0 = 16615.61 SF) = 6147.78"
   },
   {
    "familia": "framing screws",
-   "valor": 3100,
+   "valor": 3124,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 775 stud pieces [studs_nodos 667; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12] = 3100"
+   "operacion": "4 x 781 stud pieces [studs_nodos 673; CW-01 12; CW-02 12; CW-03 12; CW-04 12; CW-05 12; CW-06 12; CW-07 12; CW-08 12; CW-09 12; C-I-E1.6\" 0; C-I-E2.6\" 0] = 3124"
   },
   {
    "familia": "slab pins",

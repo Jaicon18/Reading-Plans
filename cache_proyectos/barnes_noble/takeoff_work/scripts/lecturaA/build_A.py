@@ -902,6 +902,97 @@ if REV3:
                    'label': 'ONE LAYER OF 3/4" PLYWOOD (FRT per A-410 "ALL PLYWOOD NEEDS TO BE FRT")', 'source': '4/A-210', 'room': 'Vestibule 100',
                    'img': VB, 'op': '12.667 x 8.417 (8\'-5" E-W, 1/A-210) = 106.6 SF (rev3 RI 11)'})
 
+# ---------------------------------------------------------------- REV5 (auditoría final rev4, AUDITORIA_rev4/, regla v80j)
+REV5 = os.environ.get('REV5') == '1'
+AUD = '../../AUDITORIA_rev4/img/'
+if REV5:
+    WRX = 'A-410 Partition Notes 2 "W.R. GYPSUM BOARD IN ALL BATHROOMS AND JANITOR\'S CLOSET FOR WALL AND CEILING CONSTRUCTION"'
+    # audit row 3: restroom GWB ceilings -> Type X W.R.
+    for c_ in ceilings:
+        if c_['room'] in ("Women's Restroom 109", "Men's Restroom 108"):
+            c_['board'] = '5/8 type X WR'
+            c_['board_source'] = WRX + ' (audit rev4 row 3, rev5); Type X per A-001A Div 09 A.2; ceiling tag 1/A-121'
+            c_['img_wr'] = AUD + 'C4_A-410_partition_note_2_WR_ceilings.png'
+    # audit row 9: Cafe Workroom 104 GWB faces -> Type X W.R. (A-410 "*" note KITCHEN, 2/A-410 RESTROOM/CAFE WALLS)
+    for w in walls['A-221']:
+        for f in w.get('faces') or []:
+            if f['room'] == 'Cafe Workroom 104' and f['board'] == '5/8 type X':
+                f['board'] = '5/8 type X WR'
+                f['board_source'] = ('W.R. on the Cafe Workroom 104 faces (audit rev4 row 9, rev5): A-410 "*" note "PROVIDE 5/8" WATER RESISTANT '
+                                     'GYP. BD AT JANITOR\'S CLOSET, DRINKING FOUNTAIN, KITCHEN AND ALL TOILET LOCATIONS", 2/A-410 "RESTROOM/CAFE '
+                                     'WALLS ONLY: PROVIDE W.R. GYPSUM BOARD ON WET SIDE(S)"; G/A-221; Type X per A-001A')
+    # audit row 4: janitor 11/A-200 "AREA OF 3/4" FIRE RESISTANT PLYWOOD BLOCKING (TYP)" - conservative upper bound
+    strips.append({'ref': 'JANITOR-FRT-11-A200', 'wall': 'JANITOR 107', 'lf': 2.125, 'width_ft': 8.0, 'material': 'frt_3_4', 'uso': 'substrate',
+                   'label': '3/4" FRT plywood area (sheet, SF) behind the janitor shelving / water heater shelf (11/A-200)', 'source': '11/A-200',
+                   'room': 'Janitor Closet 107', 'img': AUD + 'C4_A-200_11_janitor_FR_plywood.png',
+                   'op': '11/A-200 prints "AREA OF 3/4 FIRE RESISTANT PLYWOOD (TYP)" as a hatched area (a sheet, not a 2x member): width 2\'-1 1/2" (measured on 11/A-200 at 1/2"=1\'-0", not dimensioned) x 8\'-0" HOLD printed = 17.0 SF - conservative upper bound, extent RFI-33 (audit rev4 row 4)'})
+    # audit row 6: Grab & Go header soffit 3/A-221 (6'-2" HOLD 1/A-221; GWB 7'-1" A-121; deck 25'-0")
+    GGH = round(25.0 - (7 + 1 / 12), 3)
+    walls['A-221'].append({
+        'id': 'SS-GG', 'tag': '', 'element': 'soffit_side', 'sheet': 'A-221', 'page': 15,
+        'location': 'Grab & Go header soffit over the open east side (6\'-2" HOLD)', 'source': '3/A-221', 'detail': '3/A-221',
+        'detail_source': '3/A-221 "6" METAL STUDS @ 16" O.C."', 'stud_size': '6"', 'stud_source': '3/A-221', 'oc_in': 16, 'oc_source': '3/A-221',
+        'height_ft': GGH, 'height_source': 'B.O. deck 25\'-0" (1/A-400B) - Grab & Go GWB 7\'-1" (1/A-121); studs to deck per 3/A-221',
+        'height_status': 'DERIVADO', 'length_ft': 6.167, 'length_source': '1/A-221 printed 6\'-2" HOLD',
+        'length_op': '6\'-2" HOLD printed on 1/A-221 = 6.167 ft (vector check (331.89 - 109.81) / 36 = 6.169)', 'tag_ids': [], 'status': 'DERIVADO',
+        'img': AUD + 'C4_A-221_3_GrabGo_soffit_6-2_HOLD.png', 'length_status': 'DERIVADO',
+        'faces_none_reason': 'east (Sales) face = 5/8" FRT plywood full height, carried as plywood (conservative: T.O. WD-1 not printed, "SEE ELEVATION" on 3/A-221 - RFI-34); west face is above the Grab & Go GWB ceiling (no finish); soffit bottom GWB carried in misc_items',
+        'band': {'ori': 'V', 'c0': 1226.48, 'c1': 1248.2, 'lo': 109.81, 'hi': 331.89, 'sheet': 'A-221'},
+        'thickness_measured_in': 7.24, 'thickness_check': 'faces 1226.48 / 1248.2 pt on A-221 = 7.24 in (7 1/4" printed)',
+        'length_basis': 'printed HOLD dimension between the C-H3a and C-H1-N faces', 'detail_img': '4_canon/img/det/A221_soffit_sections_2_3.png'})
+    for k_, (nid, end) in enumerate((('N-GG1', 'C-H3a south face'), ('N-GG2', 'C-H1-N north face'))):
+        nodes.append({'id': nid, 'kind': 'free', 'wall': 'SS-GG', 'source': f'1/A-221 (soffit ends at the {end}; header over the opening, no wall connection)'})
+    strips.append({'ref': 'SS-GG-FRT', 'wall': 'SS-GG', 'lf': 6.167, 'width_ft': GGH, 'material': 'frt_5_8', 'uso': 'substrate',
+                   'label': '5/8" PRESSURE TREATED FRT PLYWOOD SUBSTRATE (3/A-221)', 'source': '3/A-221', 'room': 'Sales Area 101',
+                   'img': AUD + 'C3_A-221_soffits_2_3.png',
+                   'op': f'6.167 x {GGH} = full east face (conservative: T.O. WD-1 not printed - RFI-34; each 1 ft of GWB above WD-1 = 6.17 SF plywood -> GWB)'})
+    misc.append({'ref': 'SS-GG-BOTTOM-GWB', 'familia': '5/8" gyp board Type X', 'qty': 3.73, 'unit': 'SF', 'source': '3/A-221',
+                 'op': 'soffit bottom 5/8" GWB 6.167 x 7 1/4" (0.604 ft) = 3.73 SF (3/A-221)', 'img': AUD + 'C3_A-221_soffits_2_3.png'})
+    # audit row 7: 8/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP." - full-height walls with a ceiling on one face
+    FS = ('W2-04', 'W2-05', 'W2-06.1', 'W2-06.2', 'W2-06.3', 'W2-06.4', 'W2-06.5', 'W2-07', 'W2-08', 'W2-09', 'W5-01',
+          'C-H1-N', 'C-H1-W', 'C-H2a', 'C-E2', 'C-H3a', 'C-H3b')
+    wb_ = {w['id']: w for sh in walls for w in walls[sh]}
+    for sz in ('3-5/8"', '6"'):
+        xs = [(i, wb_[i]['length_ft']) for i in FS if wb_[i]['stud_size'] == sz]
+        q = round(sum(v for _, v in xs), 2)
+        misc.append({'ref': f'FIRESTOP-TRACK-{sz[0]}', 'familia': 'track de ceilings / soffits', 'qty': q, 'unit': 'LF', 'source': '8/A-410',
+                     'label': f'{sz} track fire stop at ceiling line (8/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.")',
+                     'op': ' + '.join(f'{i} {v}' for i, v in xs) + f' = {q} LF {sz} track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)',
+                     'img': AUD + 'C4_A-410_8_firestop_track_ceiling_line.png'})
+    # audit row 5: water heater backing P-201 (RFI-32, conservative)
+    for ref, q, op in (('WH-BACKING-STUD', 8.0, '2 pcs 3-5/8" stud backing x 4.0 ft = 8.0 LF (sizes not printed on P-201 - RFI-32, conservative)'),
+                       ('WH-STEEL-BLOCKING', 2.67, 'steel blocking between studs at the anchor points 2 rows x 1.333 ft (16" bay) = 2.67 LF 3-5/8" stud pieces (RFI-32, conservative)')):
+        misc.append({'ref': ref, 'familia': '3-5/8" stud (todos los gauges)', 'qty': q, 'unit': 'LF', 'source': 'P-201',
+                     'label': 'P-201 WATER HEATER DETAIL: 2x4 metal stud backing + steel blocking between studs (Janitor 107, 11/A-200)',
+                     'op': op, 'img': AUD + 'C4_P-201_water_heater_backing.png'})
+    # audit row 1: type I end faces "I SIM." (1/A-221) at C-H3a and C-H1-N - finish only, framing inside the host wall
+    descartes[:] = [d_ for d_ in descartes if d_['id'] not in ('PT0048', 'PT0049')]
+    for wid, host, tid, (lo, hi) in (('C-I-E1', 'C-H3a', 'PT0048', (88.09, 109.81)), ('C-I-E2', 'C-H1-N', 'PT0049', (331.89, 353.61))):
+        L = round((hi - lo) / 36.0, 3)
+        walls['A-221'].append({
+            'id': wid, 'tag': 'I', 'element': 'pier', 'sheet': 'A-221', 'page': 15,
+            'location': f'Type I end face (I SIM.) at the east end of {host}, Sales side', 'source': 'I/A-221', 'detail': 'I/A-221',
+            'detail_source': 'I/A-221', 'stud_size': '6"', 'stud_source': 'I/A-221', 'oc_in': 16, 'oc_source': 'I/A-221',
+            'height_ft': 25.0, 'height_source': 'B.O. DECK ABOVE EL. 25\'-0" V.I.F. - 1/A-400A, 1/A-400B', 'height_status': 'CONFIRMADO',
+            'length_ft': L, 'length_source': '1/A-221 printed 7 1/4" wall thickness',
+            'length_op': f'end face = wall thickness 7 1/4" printed on 1/A-221 (vector ({hi} - {lo}) / 36 = {L})', 'tag_ids': [tid],
+            'status': 'DERIVADO', 'length_status': 'DERIVADO', 'img': AUD + 'C1_A-221_I_SIM_tags_no_row.png',
+            'parts': [{'stud_size': '6"', 'studs_drawn': {'value': 0, 'source': f'framing of the end face is the end stud of {host} (already counted in {host}); I/A-221 adds finish only'}}],
+            'type_lf_basis': 'end face width (finish only)',
+            'bottom_track': False, 'top_track': False, 'track_source': f'I/A-221 (end face of {host} - its bottom / top track is the track of {host} on 1/A-221)',
+            'bracing_rows': 0, 'bracing_rows_source': f'I/A-221 (end face of {host} - bracing belongs to {host} per 5/A-410)',
+            'jamb_strips_none_reason': 'I/A-221 end face: no storefront jamb; the FRT plywood is the WD-1 substrate carried as plywood_strips (1/A-221, I/A-221)',
+            'faces': [{'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'length_ft': L, 'length_source': '1/A-221 7 1/4" wall thickness (end face)', 'height_ft': 10.0,
+                       'height_source': 'GWB from top of WD-1 15\'-0" (6/A-226A) to deck 25\'-0" = 10.0 ft (I/A-221, 2/A-221)',
+                       'board_source': '5/8" Type X on all new walls (estimator decision RFI-27): A-001A Div 09 A.2'}],
+            'band': {'ori': 'V', 'c0': 1246.2, 'c1': 1250.2, 'lo': lo, 'hi': hi, 'sheet': 'A-221'},
+            'thickness_measured_in': 1.33, 'thickness_check': 'finish-only element on the end face (band drawn 4 pt for the markup)',
+            'detail_img': '4_canon/img/det/A221_sections_H_I.png'})
+        strips.append({'ref': f'{wid}-A-FRT', 'wall': wid, 'lf': L, 'width_ft': 15.0, 'material': 'frt_5_8', 'uso': 'substrate',
+                       'label': '5/8" FRT PLYWOOD behind WD-1 (I/A-221)', 'source': 'I/A-221', 'room': 'Sales Area 101',
+                       'img': AUD + 'C1_A-221_I_SIM_tags_no_row.png',
+                       'op': f"{L} LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A; audit rev4 row 1)"})
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -913,6 +1004,7 @@ general = {
                'furring_oc_in': {'value': 24, 'source': '5/A-121 "7/8" HAT CHANNEL FRAMING @ 24" O.C. MAX"'},
                'carrying_oc_in': {'value': 48, 'source': '5/A-121 "1-1/2" CHANNEL @ 48" O.C. MAX"'},
                'hanger_oc_in': {'value': 48, 'source': '5/A-121 "HANGING WIRE TO STRUCTURE ABOVE AT 48" O.C. MAX"'},
+               **({'addl_head_track_min_ro_ft': {'value': 3.9, 'source': 'RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4\'-0" (A-500 door schedule) carried with head track R.O. + 1\'-4"'}} if REV5 else {}),
                'bracing_spacing_in': {'value': 48, 'source': '5/A-410 lateral bracing CR 1-1/2" 16 ga @ 4\'-0" O.C. full wall height'}},
  'details': DETAILS,
  'opening_schedule': opening_schedule,
@@ -944,10 +1036,12 @@ general = {
  'edge_blocking_none_reason': 'No stud blocking at gypsum board edges in the set: details 2/A-410, 3/A-410, 4/A-410, 5/A-410 (lateral bracing CR @ 4\'-0"), 1/A-500, 2/A-500 reviewed - none draws blocking at horizontal board joints (bridging per A-410 partition note 4 is carried as bracing C.R. channel)',
  'deck_breaks_none_reason': 'No stepped deck breaks: deck slopes continuously, B.O. DECK 24\'-0" (2/A-400B, west) to 25\'-7" (2/A-400A, east), 25\'-0" at 1/A-400A and 1/A-400B; interior walls to deck loaded at 25\'-0" - RFI-03',
 }
+def _ren(o):   # rev5 (audit rev4 row 21): the type I return carries its type in the ID
+    return json.loads(json.dumps(o, ensure_ascii=False).replace('C-E1-P.1', 'C-I-P.1')) if REV5 else o
 for sh, fr in frag_walls.items():
     os.makedirs(OUT_W, exist_ok=True)
-    json.dump(fr, open(OUT_W + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)
-json.dump(general, open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)
+    json.dump(_ren(fr), open(OUT_W + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)
+json.dump(_ren(general), open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)
 if FINAL:
     json.dump(RESOL, open(BN + '/takeoff_work/etapas/3_revision/resolucion_items.json', 'w'), indent=1, ensure_ascii=False)
 for f in ('_walls_tmp.json', '_strips_tmp.json', '_nodes_tmp.json'):

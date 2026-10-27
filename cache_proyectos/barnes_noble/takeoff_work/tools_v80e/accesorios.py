@@ -112,7 +112,7 @@ NOMBRES_EXCEL = {
     F_CLIPS: "Deflection clips at non-load-bearing walls to structure",
 }
 EXCLUIDAS = {"batt insulation": "EXCLUDED (estimator standing order: no insulation)"}
-NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}\d")
+NHOJA = re.compile(r"\b[0-9A-Z]{1,2}/[A-Z]{1,2}-?\d")   # v80k (R80e.22): hojas con guion (A-221)
 # v68: un barrido MEP "a ojo" no es reproducible (dos pruebas dieron listas distintas): se rechaza.
 VISUAL_RE = re.compile(r"(?i)\b(visual|a ojo|by eye|eyeball)")
 DUCT_RE = re.compile(r"(?i)\b(duct|FD|fire damper|R-\d|S-\d|grille|register|diffuser)")
@@ -1070,6 +1070,8 @@ def track_slab(data, sin_fuente=None):
         if el in NOT_ON_SLAB or el not in ON_SLAB:
             continue
         if criterios.fila_apilada(w):              # v80 (R80.2): fila apilada apoya en acero, no en losa
+            continue
+        if w.get("bottom_track") is False:         # v80k (R80e.23): sin bottom track propio (cara de remate) = sin pins
             continue
         lf = float(w["length_ft"]) * int(w.get("rows", 1))
         an = w.get("anchorage")
