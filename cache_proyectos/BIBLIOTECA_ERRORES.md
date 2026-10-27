@@ -24,6 +24,12 @@ Los términos del trade van en inglés.
 | BE-11 | B&N rev4 — R80e.25 e | Área rotulada "AREA OF 3/4" FIRE RESISTANT PLYWOOD" no cargada | Barrer plantas ampliadas por "AREA OF … PLYWOOD / BACKING / BLOCKING" | Cada área rotulada tiene SF en plywood + RFI de extensión si no está acotada |
 | BE-12 | B&N rev4 — R80e.25 f / RFI-31 | Criterio por defecto del skill citado como nota impresa ("ADD FULL LENGTH ADDL HEAD TRACK…") | Cada nota entre comillas del Excel debe existir impresa en la hoja citada | Toda cita textual existe en su hoja; los defaults dicen "not printed / skill default" + RFI |
 | BE-13 | B&N rev6 (Paso 12) | Backboard / plywood "BY GC" en hojas E (server room 2/E-103) sin destino | Barrer hojas E/M/P por PLYWOOD, BACKBOARD, BACKING, BLOCKING, ACCESS PANEL, "BY GC" | Cada uno tiene destino: renglón, EXCLUDED con motivo (p. ej. EC por spec) o RFI con delta |
+| BE-14 | B&N rev6 (Paso 12, C-01/C-02/C-05) | RFI o Scope que dice "not printed / not specified" cuando el set sí lo imprime (T.O. WD-1 15'-0", alturas de FRP, Level 4) | Por cada RFI / ALC con "not printed", "not specified", "not dimensioned": buscar en specs (A-001A), notas, elevaciones y detalles | Ninguna afirmación "no impreso" tiene la cota o nota impresa en el set |
+| BE-15 | B&N rev6 C-06..C-08 + rev7 C7-01 | Detalle leído con otra función: bubble 3 leído como 8; "1 5/8" x 16 GA. METAL JOIST FRAMING @ 48" O.C." (horizontal) cargado como poste vertical | Abrir cada N/HOJA citada a ≥ 200 dpi y confirmar que el miembro rotulado es el que el Excel describe (orientación, función, espaciamiento) | La descripción del renglón coincide con lo dibujado y rotulado |
+| BE-16 | B&N rev6 GAP (R80e.27) + rev7 C7-03 | Accesorio impreso por un detalle sin renglón (clip angles, P.A.F. de cross members, #8 screws del relief channel) | Barrer cada detalle del trade por fasteners / clips / runners / plates impresos | Cada accesorio impreso tiene renglón, EXCLUDED con motivo o RFI |
+| BE-17 | B&N rev6 (gauge) + rev7 C7-04 / C7-05 | Gauge por fila aplicado, pero los productos que dependen del gauge no se separan (8.A #8 vs #10, 2 vs 3 por conexión; 8.E Type S vs S-12) | Con el gauge de cada fila, recalcular framing screws y drywall screws por gauge | Un renglón por producto y gauge, con su conteo |
+| BE-18 | B&N rev6 GAP (ACT, Unistrut, seismic, caulk) | Ítem del set sin destino (ni cuantificado ni excluido ni RFI) | Matriz de cobertura Paso 12 | 0 GAP (cobertura 100 %) |
+| BE-19 | B&N rev7 C7-02 / C7-03 | Espaciamiento de fastener impreso reemplazado por un default no impreso (slab pins 12" vs 9/A-410 @ 24" y 8.F 2 rows @ 16"; X-EDNI 8.C vs 8/A-410 #8 @ 24") | Por cada fastener: buscar el espaciamiento en el detalle específico y en la nota típica; el detalle específico manda; conflicto = conservador impreso + RFI | Ningún fastener usa un espaciamiento no impreso sin RFI que cite los impresos |
 
 ## B. Reglas de método (BOA Broomfield, aplican a todo proyecto)
 
@@ -50,6 +56,11 @@ Los términos del trade van en inglés.
 | BE-43 | §0.F | Formato del Excel cambiado | 6 hojas visibles fijas (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist) | Exactamente esas 6 visibles |
 | BE-44 | §0.F / R78.20–R78.24 | Markups Bluebeam ausentes o que no cuadran | PDF con una annot por wall (Subject = type, Depth = alto); Σ Length y Σ Wall Area por type = Excel | Cuadre por type ≤ 0.5 % |
 | BE-45 | §0.F | Proporciones fuera de rango sin explicación | board vs Σ LF × alto × caras; screws/SF; studs/LF según O.C.; track vs partitions; compound/tape vs board | Todo dentro de rango o explicado en el Excel |
+| BE-46 | B&N rev7 C7-06 | Dos espesores / productos en un mismo renglón (cement board 1/2" de A-221 + 5/8" de 22/A-201) | Leer el espesor impreso de cada fuente del desglose | Un espesor y un producto por renglón |
+| BE-47 | B&N rev7 C7-07 / C7-08 | Cantidades o IDs en textos (RFI, Scope, README) que no coinciden con su renglón (585.27 vs 568.27; ALC-X26..X30 vs X40..X44) | Cruce automático de cada número y cada ID ALC- / RFI- citado contra Material Summary / Scope Checklist / Pending Items | Todo número e ID citado existe y coincide |
+| BE-48 | B&N rev7 C7-09 | Nombre de archivo interno en el PDF de markups ("Source: takeoff_canon.json" en la leyenda) | Buscar .json / .py / carpetas de trabajo en el texto de las páginas agregadas y en Contents de los markups | Ninguno |
+| BE-49 | B&N rev7 (verificación Paso 12) | Cota impresa atribuida al elemento equivocado (46'-0" del track LWT-01 cerca de la nube) | Antes de aplicar o corregir con una cota: seguir sus extension lines y cerrar la cadena con las cotas vecinas (1'-5" + 46'-0" + 1'-5" = 48'-10") | Cada cota usada pertenece al elemento cuantificado |
+| BE-50 | B&N rev7 N-03 | Traslape de alcance entre hojas A y E/M/P sin RFI (E-301 265119 soportes de luminarias por el EC vs wires en luminarias cargados por 5/A-121) | Por cada renglón del trade que una spec E/M/P asigne a otro contratista: RFI con delta | Todo traslape tiene RFI |
 
 ---
 
@@ -92,3 +103,27 @@ Los términos del trade van en inglés.
 | BE-43 | PASS | 6 visible + hidden "_reglas" gate signature |
 | BE-44 | PASS | Sum Length and sum Wall Area (Length x Depth) match on all 18 types (max delta 0.01 LF, type I rounding) |
 | BE-45 | PASS | See sheet Proportions; 3 traceability observations |
+
+### B&N Colorado Springs — rev7 (Paso 12, 2.ª pasada, 2026-10-27)
+
+**27 PASS · 10 FAIL · 3 N/A** (40 pruebas). Evidencia: `barnes_noble/PASO12_rev7/` (MATRIZ_COBERTURA.xlsx › Error Library, CERTIFICADO_PASO12.md, img/).
+
+| Prueba | Resultado | Nota |
+|---|---|---|
+| BE-01 … BE-11 | PASS | Fire-stop track, W.R., capas, soffits, SIM., cotas LF, existing, HOLD, áreas rotuladas |
+| BE-12 | FAIL | "24" (type K box)" en RFI-ACC-slab-pins; "compression post" atribuido a 5/A-121; N/SHEET "GA-216" |
+| BE-13 | PASS | 2/E-103 + RFI-50 |
+| BE-14 | PASS | Muestreo de "not printed" sin hallazgos |
+| BE-15 | FAIL | C7-01 (1-5/8" joist framing @ 48" leído como poste) |
+| BE-16 | FAIL | C7-03 (#8 screws @ 24" y P.A.F. de 8/A-410) |
+| BE-17 | FAIL | C7-04, C7-05 (screws por gauge) |
+| BE-18 | FAIL | 2 GAP (N-01, N-03) |
+| BE-19 | FAIL | C7-02, C7-03 (espaciamientos impresos) |
+| BE-20 … BE-25, BE-29 | PASS | |
+| BE-26 … BE-28 | N/A | |
+| BE-40 … BE-45 | PASS | |
+| BE-46 | FAIL | C7-06 |
+| BE-47 | FAIL | C7-07, C7-08 |
+| BE-48 | FAIL | C7-09 |
+| BE-49 | PASS | rev7 nube 38'-10" correcta |
+| BE-50 | FAIL | N-03 |
