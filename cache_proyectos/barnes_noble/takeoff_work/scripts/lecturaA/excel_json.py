@@ -223,6 +223,17 @@ if REV5:   # rev5: auditoría final rev4 (AUDITORIA_rev4/CERTIFICADO_AUDITORIA.m
      {'id': 'RFI-36', 'pregunta': 'Surface-mounted 3/4" FRT plywood blocking at the W-3 wall fixtures "BY GC/FIXTURE INSTALLER" (1/A-414, 7/A-414): who furnishes / installs is ambiguous and the W-3 count on A-111 is not taken. Not carried - ' + A5.format(11).rstrip(': ') + '.',
       'delta': 'If by the drywall contractor: + one 3/4" FRT plywood strip per W-3 unit (size per 1/A-414, 7/A-414) x W-3 count from A-111 - PENDING count.'},
     ]
+
+if os.environ.get('REV6') == '1':   # rev6: investigación W.R. / FRT (investigacion_WR_FRT/NOTA_WR_FRT.md)
+    _fam = fo['familias']; _wr = _fam.get(chr(53) + '/8" gyp Type X W.R.', 0)
+    for r in rfis:
+        if r['id'] == 'RFI-11':
+            r['pregunta'] = ('CLOSED - estimator decision RFI-11 (rev1) + plan check rev6: W.R. gypsum board on all faces of Women\'s 109, Men\'s 108, Janitor 107 and the drinking fountain alcove (A-410 Partition Notes 2 "PROVIDE WATER RESISTANT GYPSUM BOARD IN ALL BATHROOMS AND JANITOR\'S CLOSET FOR WALL AND CEILING CONSTRUCTION", note 7, "*" note, 2/A-410, 5/A-410; A-001A Div 09 A.4) and on the restroom GWB ceilings (same note 2; 1/A-121 GWB 9\'-0"). '
+                             'Cafe Work Room 104: NO W.R. - G/A-221 draws only 5/8" FRT plywood on the Work Room side (FRP-1 finish, A-510); there is no gypsum board on that face (rev6 removes the 570.36 SF GWB faces).')
+            r['delta'] = (f"Applied (rev6): 5/8\" Type X W.R. = {_wr:,.2f} SF = walls (Women's 222.93 + Men's 223.02 + Janitor 485.75 + alcove corridor 88.63) "
+                          f"+ restroom ceilings 122.30 (Women's 61.19 + Men's 61.11, 1/A-121).")
+    rfis.append({'id': 'RFI-37', 'pregunta': 'G/A-221 (types H1 / H2a) draws one board layer on the Sales Floor side (5/8" gypsum board) and one on the Cafe Work Room side (5/8" FRT plywood). The take-off carries 5/8" FRT plywood ALSO behind the gypsum board on the Sales / Cafe side of C-H1-N (25.90 x 25.0 = 647.50 SF) and C-H2a (12.17 x 25.0 = 304.25 SF) since rev0 (finish details "SEE SHEET A-225"). Confirm if plywood is required behind the GWB on those faces.',
+                 'delta': 'If not required: - 951.75 SF 5/8" FRT plywood (C-H1-N A 647.50 + C-H2a B 304.25); GWB unchanged.'})
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:
@@ -234,7 +245,7 @@ if REV5 and d.get('alcances'):
     N5 = {
      'ALC-06': f"Bracing C.R. channel @ 4'-0\" O.C. per A-410 partition note 4 and 5/A-410 = {_fam.get('bracing C.R. channel', 0):,.2f} LF; diagonal bracing type 2 > 22'-0\" per 8/A-410 Top Track Detail (RFI-04 CLOSED rev3: 117 braces = 468.0 LF)",
      'ALC-07': f"Quantified (rev5): 5/8\" Type X {_tx:,.2f} SF + 5/8\" Type X W.R. {_wr:,.2f} SF (A-410, A-001A, RFI-27, RFI-11); no 5/8\" regular. Perimeter walls existing (RFI-01).",
-     'ALC-08': f"Quantified (rev5): 5/8\" Type X W.R. {_wr:,.2f} SF = all faces of Women's 109, Men's 108, Janitor 107, drinking fountain alcove corridor faces and Cafe Work Room 104 faces (A-410 '*' note, note 7, 2/A-410) + restroom GWB ceilings {_cwr:,.2f} SF (A-410 Partition Notes 2); existing EXT-07 faces = patch allowance.",
+     'ALC-08': (f"Quantified (rev6): 5/8\" Type X W.R. {_wr:,.2f} SF = all faces of Women's 109, Men's 108, Janitor 107 and drinking fountain alcove corridor faces (A-410 Partition Notes 2 and 7, '*' note, 2/A-410, 5/A-410) + restroom GWB ceilings {_cwr:,.2f} SF (A-410 Partition Notes 2); Cafe Work Room 104 = FRT plywood + FRP-1, no gypsum (G/A-221, A-510); existing EXT-07 faces = patch allowance." if os.environ.get('REV6') == '1' else f"Quantified (rev5): 5/8\" Type X W.R. {_wr:,.2f} SF = all faces of Women's 109, Men's 108, Janitor 107, drinking fountain alcove corridor faces and Cafe Work Room 104 faces (A-410 '*' note, note 7, 2/A-410) + restroom GWB ceilings {_cwr:,.2f} SF (A-410 Partition Notes 2); existing EXT-07 faces = patch allowance."),
      'ALC-10': f"FRT plywood 5/8\" {_fr.get('FRT plywood substrate (5/8 in.)', 0):,.2f} SF (Cafe types G, H, E2, F, I and Grab & Go soffit 3/A-221; soffit faces 2/A-221) + 3/4\" {_fr.get('FRT plywood substrate (3/4 in.)', 0):,.2f} SF (counters A/B, menu boards 4/A-226A, restroom backing 21/A-201, vestibule 4/A-210, 5/A-210, janitor 11/A-200) - breakdown in Material Summary",
      'ALC-11': f"Quantified (rev5): suspended GWB ceilings and soffits per A-121 (5/A-121, 4/A-121) and 2/A-221 = 981.38 SF: 5/8\" Type X {_cx:,.2f} SF + restroom ceilings 5/8\" Type X W.R. {_cwr:,.2f} SF (A-410 Partition Notes 2).",
      'ALC-12': "Furring channel @ 24\", carrying channel @ 48\", hanger wire 103 pcs, ceiling track per 5/A-121 on A-121; carrying direction E-W (RFI-15 CLOSED rev3: joists N-S on 1/A-400A, 2/A-400A); Cafe Seating cloud = USG drywall suspension grid 4/A-121; M-100 (p46), M-101 (p47), M-102 (p48) hangers are MEP",

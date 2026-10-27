@@ -996,6 +996,17 @@ if REV5:
                        'img': AUD + 'C1_A-221_I_SIM_tags_no_row.png',
                        'op': f"{L} LF x 15.0 ft (WD-1 top 15'-0\" A.F.F., 6/A-226A; audit rev4 row 1)"})
 
+# ---------------------------------------------------------------- REV6 (investigación W.R. / FRT, investigacion_WR_FRT/)
+REV6 = os.environ.get('REV6') == '1'
+if REV6:
+    # G/A-221 draws ONE layer on the Cafe Work Room side of H1 / H2a: 5/8" FRT plywood (crosshatch; FRP-1 over it per A-510);
+    # the gypsum board layer is on the Sales / Office side only. The Work Room GWB faces (rev0-rev5) are removed; the FRT strips stay.
+    for w in walls['A-221']:
+        if w['id'] in ('C-H1-N', 'C-H1-W', 'C-H2a'):
+            w['faces'] = [f for f in w.get('faces') or [] if f['room'] != 'Cafe Workroom 104']
+            w['faces_note'] = ('Cafe Work Room 104 side = 5/8" FRT plywood only (G/A-221 graphics: single crosshatched layer; '
+                               'A-510 104 walls FRP-1) - carried in plywood_strips; no gypsum board on that face (rev6)')
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
