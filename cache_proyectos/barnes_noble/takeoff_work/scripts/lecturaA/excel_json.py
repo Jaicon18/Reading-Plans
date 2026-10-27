@@ -413,6 +413,8 @@ if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
     W9 = [w for w in c['walls'] if w.get('element') in ('wall', 'soffit_side') and float(w['height_ft']) >= 13.5]
     nx5 = sum(_m9.ceil(float(w['length_ft']) / 5.0 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'H')
     nx4 = sum(_m9.ceil(float(w['length_ft']) / 4.0 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'H')
+    nsv = sum(_m9.ceil(float(w['length_ft']) * 12 / 16 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'V')
+    ncm = sum(_m9.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'V')
     t34 = round(sum(float(w['length_ft']) for w in c['walls'] if w.get('tag') in ('3', '4') and w.get('sheet') == 'A-101'), 2)
     for r in d['rfis']:
         if r['id'] == 'RFI-28':
@@ -420,7 +422,9 @@ if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
             r['delta'] += f' + 324 #10-16 screws (A/A-410 "(1) #10-16 SCREW @ EACH FLANGE": 162 clips x 2). Slab pins already exclude the {t34} LF of type 3 / 4 track.'
         if r['id'] == 'RFI-41':
             r['delta'] += (f" #8 screws (8/A-410) carried in their own row ({MI9['SCREWS-8-A410']['qty']} pcs) with joists at 5'-0\": one screw per joist crossing on the walls "
-                           f"perpendicular to the joists = {nx5}; at 4'-0\" spacing: + {nx4 - nx5} pcs.")
+                           f"perpendicular to the joists = {nx5}; at 4'-0\" spacing: + {nx4 - nx5} pcs. "
+                           f"\"(2) #8 SCREW AT EACH STUD\" is read as 2 per cross member (drawn at the cross member / track connection) = {2 * ncm}; "
+                           f"if it means 2 per wall stud @ 16\" on the walls parallel to the joists: {2 * nsv} (+ {2 * nsv - 2 * ncm} pcs).")
         if r['id'] == 'RFI-51':
             r['delta'] = r['delta'].replace('Framing screws count the stud pieces of the walls and column wraps (781); the detail members (braces, cross members, bracing) add about + 724 screws. ',
                                             'Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; the other detail members (braces, bracing clips) are in the Tek screw row. ')
