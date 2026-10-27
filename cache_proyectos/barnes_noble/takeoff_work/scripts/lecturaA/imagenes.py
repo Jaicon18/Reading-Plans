@@ -1,3 +1,5 @@
+import sys as _s; _s.path.insert(0, '/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools')
+import etiquetas
 import json, math, pymupdf as fitz
 from PIL import Image, ImageDraw, ImageFont
 K = '/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work'
@@ -34,24 +36,31 @@ for sheet, pg, dpi, clip in (('A-101', 6, 110, fitz.Rect(150, 380, 2150, 1560)),
     dr = ImageDraw.Draw(im); z = dpi / 72
     def P(q): return ((q[0] - clip.x0) * z, (q[1] - clip.y0) * z)
     tot = {}
+    labs, segs = [], []
     for t, f in rows:
         ws = [byid[i] for i in f['ids'] if i in byid and (byid[i]['band'].get('sheet') or byid[i]['sheet']) == sheet]
         if not ws: continue
         col = COL.get(t.upper(), (170, 110, 255))
         tot[t] = tot.get(t, 0) + f['lf']
         best = None
+        own = []
         for w in ws:
             q = [P(x) for x in pts(w)]
             dr.line(q, fill=col, width=7 if sheet == 'A-101' else 9)
+            own += [(q[k], q[k + 1]) for k in range(len(q) - 1)]
             L = math.dist(q[0], q[-1]) if len(q) == 2 else 0
             if best is None or L > best[0]: best = (L, q)
         q = best[1]; mx, my = (q[0][0] + q[-1][0]) / 2, (q[0][1] + q[-1][1]) / 2
-        lab = f['wall'] if len(f['wall']) <= 26 else f['ids'][0] + '+' + str(len(f['ids']) - 1)
-        tw = dr.textlength(lab, font=font)
-        dr.rectangle([mx + 6, my - 26, mx + 10 + tw, my - 2], fill='white', outline=col)
-        dr.text((mx + 8, my - 26), lab, fill=col, font=font)
+        segs += own
+        labs.append({'text': f['wall'], 'anchor': (mx, my), 'color': col, 'own': own})   # Wall # = Excel
+    nleg = len([t for t in ORDER + ['OTHER FRAMING'] if t in tot])
+    for (x0, y0, x1, y1) in ((0, 0, im.size[0] * 0.75, 62), (0, 62, 560, 70 + 30 * nleg)):   # título y leyenda reservados
+        segs += [((x0, y0), (x1, y0)), ((x1, y0), (x1, y1)), ((x1, y1), (x0, y1)), ((x0, y1), (x0, y0)),
+                 ((x0, y0), (x1, y1)), ((x0, y1), (x1, y0)), ((x0, (y0 + y1) / 2), (x1, (y0 + y1) / 2))]
+    etiquetas.colocar(dr, labs, font, im.size, obstaculos=segs)   # v80f R80e.21: sin solapes
     # leyenda en orden del schedule
     ly = 70; lx = 20
+    dr.rectangle([0, 0, im.size[0] * 0.75, 62], fill='white'); dr.rectangle([0, 62, 560, 70 + 30 * nleg], fill='white')   # fondo legible
     dr.text((lx, 15), f'Barnes & Noble - Colorado Springs, CO | {sheet} | partitions by type | 2026-10-24', fill='black', font=fbig)
     for t in ORDER + ['OTHER FRAMING']:
         if t not in tot: continue

@@ -9,7 +9,8 @@ verify() falla todo item con tinta < 0.04 (>= 30 % = "factor de escala mal"); ov
 si verify falla. Coordenadas en pt de la página ROTADA (como se ve), las mismas del canon (`band`).
 Items: {id, band {ori H|V|D|BOX, ...}, lf, tagged}.
 """
-import hashlib, os, tempfile
+import hashlib, os, sys, tempfile
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pymupdf as fitz
 from PIL import Image, ImageDraw, ImageFont
 
@@ -106,17 +107,20 @@ class Hoja:
             fT = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', int(22 * self.F))
         except OSError:
             fnt = fT = ImageFont.load_default()
+        import etiquetas   # v80f (R80e.21): etiquetas sin solapes, con leader line y fondo blanco
+        labs, segs = [], []
         for it in items:
             col = (0, 70, 255) if it.get('tagged') else (230, 0, 0)
             x0, y0, x1, y1 = [v * self.F for v in self._rect(it)]
             pad = 3 * self.F
             dr.rectangle([x0 - pad, y0 - pad, x1 + pad, y1 + pad], outline=col, width=max(3, int(1.6 * self.F)))
-            lab = f"{it['id']}  {it['lf']:.2f} LF"
-            lx, ly = x1 + 8 * self.F, y0 - 14 * self.F
-            tw = dr.textlength(lab, font=fnt)
-            dr.line([x1 + pad, y0, lx, ly + 6 * self.F], fill=col, width=max(2, int(self.F)))
-            dr.rectangle([lx - 2, ly - 2, lx + tw + 4, ly + 11 * self.F], fill=(255, 255, 255), outline=col, width=2)
-            dr.text((lx, ly), lab, fill=col, font=fnt)
+            r = (x0 - pad, y0 - pad, x1 + pad, y1 + pad)
+            own = [((r[0], r[1]), (r[2], r[1])), ((r[2], r[1]), (r[2], r[3])), ((r[2], r[3]), (r[0], r[3])),
+                   ((r[0], r[3]), (r[0], r[1]))]
+            segs += own
+            labs.append({'text': f"{it['id']}  {it['lf']:.2f} LF", 'anchor': ((x0 + x1) / 2, (y0 + y1) / 2),
+                         'color': col, 'own': own})
+        etiquetas.colocar(dr, labs, fnt, im.size, obstaculos=segs, ancho_linea=max(2, int(self.F)))
         dr.rectangle([20, 20, 20 + 1700 * self.F / 2.083, 20 + 70 * self.F], fill=(255, 255, 255), outline=(0, 0, 0), width=3)
         dr.text((30, 26), titulo, fill=(0, 0, 0), font=fT)
         y = 26 + 30 * self.F
