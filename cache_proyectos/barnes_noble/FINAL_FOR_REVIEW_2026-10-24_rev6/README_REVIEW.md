@@ -15,16 +15,21 @@ rev6 = rev5 + the W.R. / FRT plywood plan check requested by the estimator. Evid
 | Material | rev5 | rev6 |
 |---|---|---|
 | 5/8" Type X W.R. | 1,713.00 SF | 1,142.63 SF |
+| 5/8" FRT plywood | 2,838.21 SF | 1,886.46 SF |
 | Drywall screws | 19,938.73 | 19,254.29 |
 | Joint compound | 1,196.32 lb | 1,155.26 lb |
 | Joint tape | 6,147.78 LF | 5,936.74 LF |
 
-No change: 5/8" Type X 14,902.61 SF; FRT plywood 2,838.21 / 370.46 SF; partitions 569.82 LF.
+No change: 5/8" Type X 14,902.61 SF; 3/4" FRT plywood 370.46 SF; partitions 569.82 LF.
 
 ## RFIs
 - **RFI-11:** rewritten. W.R. is confirmed in the wet rooms and on the restroom ceilings; there is none in the Cafe Work Room.
 - **RFI-13:** FRP length now taken from the Work Room plywood faces (87.52 LF).
-- **New RFI-37:** since rev0, the take-off also carries 5/8" FRT plywood behind the GWB on the Sales / Cafe side of C-H1-N and C-H2a. G/A-221 draws gypsum only on that side, and its finish details point to A-225. If plywood is not required there: −951.75 SF of 5/8" FRT plywood.
+- **RFI-37 (resolved from the plan, CLOSED):** since rev0, the take-off carried 5/8" FRT plywood behind the GWB on the Sales / Cafe side of C-H1-N and C-H2a. Removed: −951.75 SF (C-H1-N A 647.50 + C-H2a B 304.25).
+  - G/A-221: the Sales Floor side has one layer, "5/8" GYPSUM BOARD".
+  - A-510 101: painted gyp bd.
+  - 1/A-225 and 5/A-226A: the C-H2a Cafe face is PT-3 paint around door 3.
+  - Evidence: images 12–14 in `../investigacion_WR_FRT/`.
 
 ## Gates
 - REGLAS OK (810 rules, 0 failures)

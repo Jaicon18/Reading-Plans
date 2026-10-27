@@ -35,13 +35,22 @@ Fuente: bid set sin markups. Cada recorte de esta carpeta está circulado y se v
 | Grab & Go soffit, cara este, 110.49 SF de 5/8" FRT | 3/A-221 (recorte 10) | "5/8" PRESSURE TREATED FRT PLYWOOD SUBSTRATE" a todo lo alto de la cara; "5/8" GWB" encima del plywood sobre "T.O. WD-1 SEE ELEVATION"; "6" METAL STUDS @ 16" O.C." | **SÍ.** El GWB sobre WD-1 se suma aparte cuando se conozca T.O. WD-1 (RFI-34). |
 | Janitor, 17.0 SF de 3/4" FRT | 11/A-200 (recorte 11) | "AREA OF 3/4" FIRE RESISTANT PLYWOOD BLOCKING (TYP)" junto a los shelves; "8'-0" HOLD TO UNDERSIDE OF SHELF" | **SÍ.** El ancho no está acotado: RFI-33. |
 
-## 3. Hallazgo nuevo (de rev0, no de rev5): RFI-37
+## 3. RFI-37 resuelto con el plano (rev6): C-H1-N cara Sales y C-H2a cara Cafe
 
-G/A-221 dibuja del lado SALES FLOOR solo "5/8" GYPSUM BOARD". El take-off carga además 5/8" FRT plywood detrás del GWB en dos caras:
-- C-H1-N, cara Sales: 647.50 SF.
-- C-H2a, cara Cafe: 304.25 SF.
+Contando las capas de cada lado (R80e.26):
 
-El detalle remite a "SEE SHEET A-225 FOR FINISH DETAILS", así que no se cambia sin confirmar. Queda como RFI-37 con delta −951.75 SF de FRT si no se requiere.
+| N/HOJA | Lo que dice | Recorte |
+|---|---|---|
+| G/A-221 | Lado SALES FLOOR: una sola capa, "5/8" GYPSUM BOARD" (relleno punteado). El "5/8" FRT PLYWOOD" está del lado del Work Room. | 09 |
+| A-510, 101 SALES AREA | Walls "PAINTED GYP. BD.", "PAINT WALLS PT-2 FROM 7'-6" TO UNDERSIDE OF DECK". Es la cara Sales de C-H1-N. | 14 |
+| 1/A-225 | Cara Cafe de C-H2a marcada "PT-3" + "B-2 BASE". La cara norte (Sales) de C-H1-N no lleva tag de acabado en este plano. | 12 |
+| 5/A-226A Cafe Service Line Elevation | Alrededor de la door 3 en C-H2a: "PT-3" (pintura). El WD-1 angosto a la izquierda de la puerta es el return type I C-I-P.1, que ya está cargado. El WD-1 grande de la derecha es Grab & Go / soffit (burbuja 3/A-221). | 13 |
+
+**Conclusión:** las dos caras son 5/8" gypsum board pintado, sin FRT plywood detrás. Se quitan 951.75 SF de 5/8" FRT plywood:
+- C-H1-N A: 25.90 × 25.0 = 647.50 SF.
+- C-H2a B: 12.17 × 25.0 = 304.25 SF.
+
+El GWB de esas caras no cambia. RFI-37 queda CERRADO.
 
 ## 4. Antes → después (rev5 → rev6)
 
@@ -52,5 +61,6 @@ El detalle remite a "SEE SHEET A-225 FOR FINISH DETAILS", así que no se cambia 
 | Drywall screws | 19,938.73 | 19,254.29 |
 | Joint compound | 1,196.32 lb | 1,155.26 lb |
 | Joint tape | 6,147.78 LF | 5,936.74 LF |
-| FRT plywood 5/8" / 3/4" | 2,838.21 / 370.46 SF | sin cambio |
+| FRT plywood 5/8" | 2,838.21 SF | 1,886.46 SF |
+| FRT plywood 3/4" | 370.46 SF | sin cambio |
 | Partitions | 569.82 LF | sin cambio |

@@ -238,8 +238,8 @@ if os.environ.get('REV6') == '1':   # rev6: investigación W.R. / FRT (investiga
             r['delta'] = f'FRP-1 SF = Cafe Work Room 104 walls {_wkl} LF (FRT plywood faces C-H1-N, C-H1-W, C-H2a, C-H2b x 2, C-E2; G/A-221, E/A-221) x FRP height + Janitor 107 faces {_flf("Janitor Closet 107")} LF x FRP height (A-510); + PVC trim at FRP edges and inside corners'
         for k in ('pregunta', 'delta'):
             r[k] = r[k].replace('Applied (rev5)', 'Applied (rev6)')
-    rfis.append({'id': 'RFI-37', 'pregunta': 'G/A-221 (types H1 / H2a) draws one board layer on the Sales Floor side (5/8" gypsum board) and one on the Cafe Work Room side (5/8" FRT plywood). The take-off carries 5/8" FRT plywood ALSO behind the gypsum board on the Sales / Cafe side of C-H1-N (25.90 x 25.0 = 647.50 SF) and C-H2a (12.17 x 25.0 = 304.25 SF) since rev0 (finish details "SEE SHEET A-225"). Confirm if plywood is required behind the GWB on those faces.',
-                 'delta': 'If not required: - 951.75 SF 5/8" FRT plywood (C-H1-N A 647.50 + C-H2a B 304.25); GWB unchanged.'})
+    rfis.append({'id': 'RFI-37', 'pregunta': 'CLOSED - resolved from the plan (rev6): the Sales / Cafe faces of C-H1-N and C-H2a are 5/8" gypsum board only. G/A-221 draws one layer on the Sales Floor side ("5/8" GYPSUM BOARD"); C-H1-N Sales face = Sales Area 101 PAINTED GYP. BD. (A-510); C-H2a Cafe face = PT-3 painted wall around door 3 (1/A-225 finish plan, 5/A-226A Cafe Service Line Elevation); the narrow WD-1 left of the door is the type I return C-I-P.1 (already carried). Evidence: investigacion_WR_FRT/ images 12-14.',
+                 'delta': 'Applied: - 951.75 SF 5/8" FRT plywood (C-H1-N A 25.90 x 25.0 = 647.50 + C-H2a B 12.17 x 25.0 = 304.25), carried since rev0; GWB on those faces unchanged.'})
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:
