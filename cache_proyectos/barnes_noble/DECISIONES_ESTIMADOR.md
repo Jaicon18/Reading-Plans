@@ -56,3 +56,5 @@
 - RFI-14 part 1: north face sign band WD-1 top = 15'-0" (same as east face, 6/A-226A). North face WD-1 from 9'-0" to 15'-0"; GWB above to deck.
 - RFI-14 part 2: Cafe soffit bottom = 11'-0" (A-121 RCP governs over 1/A-226A 9'-0"). Consequence: north face WD-1 runs from soffit bottom 11'-0" to 15'-0" (same as east face). RFI-14 CLOSED.
 - RFI-16: vestibule posts sheathing = 3/4" FRT plywood, 4 faces, full height: 6 posts x 4 faces x 5" x 10.5 ft = 105.0 SF (DERIVED; 6 posts per 4/A-210, height 10.5 ft as in posts studs). CLOSED.
+- RFI-17: column surrounds C25 stud spacing = 16" O.C. (as carried). CLOSED.
+- ALL RFIs ANSWERED -> rev4.
