@@ -480,7 +480,7 @@ def _escribir(d, salida, out_reglas):
 
     def fila_wall(t, w):
         return [f"{t}  #{w['wall']}  -  {en(w['location'])}", str(w["wall"]), w["length_lf"], w["height_ft"],
-                w["layers"], w["stud_size"], w["stud_oc_in"], w["board_sf"],
+                w["layers"], w["stud_size"] + (f" {w['gauge']}" if w.get("gauge") else ""), w["stud_oc_in"], w["board_sf"],
                 en(w["location"]) + (f" | {en(w['faces_note'])}" if w.get("faces_note") else ""),   # v80k R80e.24
                 en(w["source"]), f"[{ESTADO_EN.get(w['status'], w['status'])}]"]
     if d.get("type_order"):                           # v80e (§0.F): orden del Partition Schedule del proyecto
@@ -757,6 +757,11 @@ NOMBRES_PLANTILLA = {
     "USG drywall cross tee (DGLW424)": "USG drywall suspension cross tee DGLW424",
     "USG channel molding (DGCM27)": "USG channel molding DGCM27",
     "USG angle molding (DGWM24)": "USG angle molding DGWM24",
+    "clip angle (bracing / nested connections)": "Clip angle 16 ga (5/A-410 bracing clips + 7/A-210 nested header clips)",   # v80n R80e.27
+    "X-EDNI fasteners, top track to structure": "X-EDNI fasteners 0.145\" (Hilti), top track to structure (A-410 note 8.C)",
+    "plywood screws (Teks/3)": "Plywood screws #10-24 x 1-1/4\" Teks/3 (A-410 note 8.D)",
+    "cement board screws": "Cement board screws 1-1/4\" (manufacturer spacing)",
+    "nested inner runner (deflection head)": "Nested inner runner at the deflection head (3/A-410)",
     "5/8\" gyp Type X W.R.": "5/8\" gypsum board, Type X W.R. (water resistant)",
     "5/8\" EXTERIOR gyp sheathing": "5/8\" EXTERIOR gypsum sheathing",
     "1/2\" EXTERIOR gyp sheathing": "1/2\" EXTERIOR gypsum sheathing",   # v80f R80e.16

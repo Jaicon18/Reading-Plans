@@ -78,6 +78,11 @@ def read_materials(wb):
 FAMILIAS = [
     # v78: grader completo = también las familias de accesorios (antes caían en "sin familia" y no se
     # calificaban). Van primero: sus renglones no son de stud / track.
+    ("clip angle (bracing / nested connections)", "pcs", r"clip angle", r""),   # v80n R80e.27
+    ("X-EDNI fasteners, top track to structure", "pcs", r"x-edni", r""),   # v80n R80e.27
+    ("plywood screws (Teks/3)", "pcs", r"plywood screw", r""),   # v80n R80e.27
+    ("cement board screws", "pcs", r"cement board screw", r""),   # v80n R80e.27
+    ("nested inner runner (deflection head)", "lf", r"nested inner runner", r""),   # v80n R80e.27
     ("extra framing ATM", "lf", r'extra framing', r'atm'),
     ("2-1/2\" CFMF coiling grille head", "lf", r'coiling|grille head', r''),
     ("additional head track", "lf", r'additional head track|add(itiona)?l\.? head track', r''),

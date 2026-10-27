@@ -8,12 +8,12 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19254.29,
+  "drywall screws": 19442.26,
   "framing screws": 3124.0,
   "slab pins": 640.61,
   "expansion anchors": 0.0,
-  "joint compound": 1155.26,
-  "joint tape": 5936.74,
+  "joint compound": 1166.54,
+  "joint tape": 5994.7,
   "Level 5 finish": 0.0,
   "deflection clips": 0.0
  },
@@ -128,27 +128,27 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19254.29,
+   "valor": 19442.26,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 19254.29"
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 19442.26"
   },
   {
    "familia": "joint compound",
-   "valor": 1155.26,
+   "valor": 1166.54,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 1155.26"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 1166.54"
   },
   {
    "familia": "joint tape",
-   "valor": 5936.74,
+   "valor": 5994.7,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 5936.74"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 5994.7"
   },
   {
    "familia": "framing screws",
@@ -187,8 +187,8 @@
    "valor": 0.0,
    "unidad": "pcs",
    "estado": "DERIVADO",
-   "source": "8/A-410",
-   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
+   "source": "3/A-410",
+   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
   },
   {
    "familia": "extra framing ATM",
@@ -242,7 +242,7 @@
   {
    "familia": "stud reinforcement MEP",
    "tema": "MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
-   "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each",
+   "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (skill default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only); plus 1 duct sleeve each",
    "source": "M-102"
   }
  ],

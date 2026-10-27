@@ -2,20 +2,20 @@
  "familias": {
   "2-1/2\" stud": 0.0,
   "8\" stud (todos los gauges)": 25.33,
-  "6\" stud (todos los gauges)": 3007.5,
-  "3-5/8\" stud (todos los gauges)": 10850.06,
-  "1-5/8\" stud": 0.0,
+  "6\" stud (todos los gauges)": 3162.5,
+  "3-5/8\" stud (todos los gauges)": 11540.58,
+  "1-5/8\" stud": 131.42,
   "6\" parapet stud": 0.0,
   "bottom track (todos)": 640.61,
   "top / deflection track (todos)": 640.61,
-  "track de ceilings / soffits": 598.32,
+  "track de ceilings / soffits": 618.81,
   "bracing C.R. channel": 2883.65,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
   "sill track": 0.0,
-  "furring channel": 182.79,
-  "carrying channel": 146.92,
-  "hanger wire": 1438.0,
+  "furring channel": 207.45,
+  "carrying channel": 159.16,
+  "hanger wire": 2689.79,
   "5/8\" gyp board regular (walls + ceilings)": 0.0,
   "5/8\" gyp MOISTURE RESISTANT": 0.0,
   "ballistic panel": 0.0,
@@ -23,18 +23,23 @@
   "5/8\" glass mat sheathing": 0.0,
   "5/8\" EXTERIOR gyp sheathing": 0.0,
   "1/2\" EXTERIOR gyp sheathing": 0.0,
-  "FRT plywood (SF)": 2256.93,
-  "FRT blocking": 552.27,
-  "5/8\" gyp board Type X": 14902.61,
-  "5/8\" gyp Type X W.R.": 1142.63,
+  "FRT plywood (SF)": 2192.98,
+  "FRT blocking": 585.27,
+  "5/8\" gyp board Type X": 15109.29,
+  "5/8\" gyp Type X W.R.": 1092.59,
   "8\" joist": 88.0,
   "USG drywall main tee (DGLW26)": 194.16,
   "USG drywall cross tee (DGLW424)": 457.96,
   "USG channel molding (DGCM27)": 107.21,
   "USG angle molding (DGWM24)": 107.21,
+  "clip angle (bracing / nested connections)": 2522.0,
+  "X-EDNI fasteners, top track to structure": 720.0,
+  "plywood screws (Teks/3)": 2331.0,
+  "cement board screws": 1686.0,
+  "nested inner runner (deflection head)": 479.85,
   "metal stud blocking (362CR / STUD BLOCKING)": 0.0,
-  "metal trim (corner bead, casing, shadow molding)": 891.72,
-  "cement board": 851.4,
+  "metal trim (corner bead, casing, shadow molding)": 957.03,
+  "cement board": 789.94,
   "FRP": 0.0,
   "sealant at base of gypsum (exterior)": 0.0,
   "Level 5 finish": 0.0,
@@ -46,12 +51,12 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 19254.29,
+  "drywall screws": 19442.26,
   "framing screws": 3124.0,
   "slab pins": 640.61,
   "expansion anchors": 0.0,
-  "joint compound": 1155.26,
-  "joint tape": 5936.74,
+  "joint compound": 1166.54,
+  "joint tape": 5994.7,
   "deflection clips": 0.0
  },
  "filas": [
@@ -169,6 +174,12 @@
    "operacion": "framed_soffit: ROUNDUP(23.25/2)+1 = 13 joists x 4.716 = 61.31 LF 3-5/8\" joists; sin carrying ni hangers; board 109.65 SF"
   },
   {
+   "familia": "ceilings",
+   "room": "Grab & Go",
+   "source": "A-121",
+   "operacion": "furring ROUNDUP(4.08/2.0)+1 = 4 x 6.167 = 24.67; carrying ROUNDUP((6.167-1)/4.0)+1 = 3 x 4.08 = 12.24; hangers 3 x (ROUNDUP((4.08-1)/4.0)+1 = 2) = 6 x drop 17.917 (B.O. deck 25'-0\" (1/A-400B) - ceiling 7'-1\" (A-121) - RFI-03) = 107.5 LF; board 25.16 SF"
+  },
+  {
    "familia": "FRT blocking",
    "ref": "BLK-STOCK",
    "source": "7/A-413",
@@ -193,9 +204,21 @@
    "operacion": "10.67 LF"
   },
   {
+   "familia": "FRT blocking",
+   "ref": "BLK-FE-CABINETS",
+   "source": "4/A-101",
+   "operacion": "16.0 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-CASED-OPENING",
+   "source": "2/A-500",
+   "operacion": "17.0 LF"
+  },
+  {
    "familia": "3-5/8\" stud (todos los gauges)",
    "ref": "DIAG-BRACES-T2",
-   "source": "8/A-410",
+   "source": "3/A-410",
    "operacion": "117 braces (ROUNDUP(L x 12 / 32) + 1 per type 2 wall; 115 in rev2 + 2 from W2-05 +5.00 LF) x 4.0 ft at 45 deg (estimator choice; member / length not printed) = 468.0 LF (rev3 RI 6)"
   },
   {
@@ -207,14 +230,14 @@
   {
    "familia": "8\" stud (todos los gauges)",
    "ref": "VEST-BOX-BEAM-STUD",
-   "source": "6/A-210",
-   "operacion": "NESTED BEAM (2) 8\" x 18 GA studs x 12.667 = 25.33 LF (\"8\" BOX BEAM BEARING ON CORNER POST\", 4/A-210)"
+   "source": "8/A-210",
+   "operacion": "NESTED BEAM (2) 8\" x 18 GA studs x 12.667 = 25.33 LF (\"8\" BOX BEAM BEARING ON CORNER POST\", 4/A-210) (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)"
   },
   {
    "familia": "track de ceilings / soffits",
    "ref": "VEST-BOX-BEAM-TRACK",
-   "source": "6/A-210",
-   "operacion": "NESTED BEAM 6\" x 16 GA top & bottom track (2) x 12.667 = 25.33 LF"
+   "source": "8/A-210",
+   "operacion": "NESTED BEAM 6\" x 16 GA top & bottom track (2) x 12.667 = 25.33 LF (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)"
   },
   {
    "familia": "track de ceilings / soffits",
@@ -225,14 +248,14 @@
   {
    "familia": "3-5/8\" stud (todos los gauges)",
    "ref": "VEST-POSTS-STUD",
-   "source": "6/A-210",
-   "operacion": "NESTED COLUMN (2) 3-5/8\" x 18 GA studs x 10.5 ft (B.O. CEILING 10'-6\") x 6 posts (1/A-210: 4 west + 2 east corners - confirm east 2) = 126.0 LF"
+   "source": "7/A-210",
+   "operacion": "NESTED COLUMN (2) 3-5/8\" x 18 GA studs x 10.5 ft (B.O. CEILING 10'-6\") x 6 posts (1/A-210: 4 west + 2 east corners - confirm east 2) = 126.0 LF (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)"
   },
   {
    "familia": "track de ceilings / soffits",
    "ref": "VEST-POSTS-TRACK",
-   "source": "6/A-210",
-   "operacion": "NESTED COLUMN 3-5/8\" x 16 GA top & bottom track 6 x 2 x 5\" = 5.0 LF"
+   "source": "7/A-210",
+   "operacion": "NESTED COLUMN 3-5/8\" x 16 GA top & bottom track 6 x 2 x 5\" = 5.0 LF (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)"
   },
   {
    "familia": "5/8\" gyp board Type X",
@@ -247,18 +270,6 @@
    "operacion": "soffit bottom 5/8\" GWB 6.167 x 7 1/4\" (0.604 ft) = 3.73 SF (3/A-221)"
   },
   {
-   "familia": "track de ceilings / soffits",
-   "ref": "FIRESTOP-TRACK-3",
-   "source": "8/A-410",
-   "operacion": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 + W2-03 (Corridor 110 face) 13.12 + C-H2b (Cafe Workroom 104 ACT) 1.95 = 157.81 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
-  },
-  {
-   "familia": "track de ceilings / soffits",
-   "ref": "FIRESTOP-TRACK-6",
-   "source": "8/A-410",
-   "operacion": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 + C-E1-S (Cafe 103 9'-0\" GWB band, 1/A-121) 19.0 = 106.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
-  },
-  {
    "familia": "3-5/8\" stud (todos los gauges)",
    "ref": "WH-BACKING-STUD",
    "source": "P-201",
@@ -269,6 +280,234 @@
    "ref": "WH-STEEL-BLOCKING",
    "source": "P-201",
    "operacion": "steel blocking between studs at the anchor points 2 rows x 1.333 ft (16\" bay) = 2.67 LF 3-5/8\" stud pieces (RFI-32, conservative)"
+  },
+  {
+   "familia": "cement board",
+   "ref": "RESTROOM-BASE-CEMENT",
+   "source": "22/A-201",
+   "operacion": "5/8\" CEMENT BOARD BASE 1'-2\" (22/A-201; A-001A Div 09 J.2): W2-05 7.51 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 2.41 + W2-06.3 2.46 + W2-06.4 2.23 + W2-06.5 6.88 + W2-07 7.51 + W5-01 5.7 + W5-01 5.7 = 49.55 LF - doors 8, 9 (6.66) = 42.89 LF x 1'-2\" = 50.04 SF - Paso 12 C-03"
+  },
+  {
+   "familia": "5/8\" gyp Type X W.R.",
+   "ref": "RESTROOM-BASE-WR-DEDUCT",
+   "source": "22/A-201",
+   "operacion": "W.R. board replaced by the 1'-2\" cement board base on the same faces (22/A-201): - 50.04 SF"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "DIAG-BRACES-CAFE",
+   "source": "3/A-410",
+   "operacion": "C-H2a (ROUNDUP(12.17 x 12 / 32) + 1 = 6) + C-H2b (ROUNDUP(1.95 x 12 / 32) + 1 = 2) + C-F (ROUNDUP(3.26 x 12 / 32) + 1 = 3) = 11 braces x 4.0 ft = 44.0 LF (estimator precedent RFI-04)"
+  },
+  {
+   "familia": "clip angle (bracing / nested connections)",
+   "ref": "CLIP-ANGLES-5-A410",
+   "source": "5/A-410",
+   "operacion": "2\" x 2\" 16 GA. CLIP ANGLE at each stud per bracing row, (4) TEK SCREWS (5/A-410): rows x studs = W2-01 6x38 + W2-02 6x5 + W2-03 6x72 + W2-04 6x44 + W2-05 6x11 + W2-06.1 6x7 + W2-06.2 6x3 + W2-06.3 6x5 + W2-06.4 6x3 + W2-06.5 6x10 + W2-07 6x7 + W2-08 6x11 + W2-09 6x11 + W5-01 6x6 + W3-01 1x4 + W3-02 1x10 + W3-05 1x4 + W3-03 1x10 + W3-06 1x4 + W3-04 1x4 + W4-28a 1x8 + W4-28b 1x3 + W4-28c 1x3 + W4-28d 1x3 + W4-28e 1x3 + W4-29a 1x5 + W4-29b 1x5 + W4-29c 1x5 + W4-29d 1x5 + W4-29e 1x5 + W4-29f 1x5 + W4-30a 1x5 + W4-30b 1x5 + W4-30c 1x5 + W4-30d 1x5 + W4-30e 1x5 + W4-30f 1x5 + W4-31a 1x8 + W4-31b 1x3 + W4-31c 1x3 + W4-31d 1x3 + W4-31e 1x3 + CW-01 1x12 + CW-02 1x12 + CW-03 1x12 + CW-04 1x12 + CW-05 1x12 + CW-06 1x12 + CW-07 1x12 + CW-08 1x12 + CW-09 1x12 + C-H1-N 6x24 + C-H1-W 6x11 + C-H2a 6x11 + C-H2b 6x3 + C-H3a 6x5 + C-H3b 6x6 + C-E2 6x23 + C-E1-S 6x19 + C-I-P.1 6x2 + C-E1-P.2 6x3 + C-E1-B 6x3 + C-F 6x4 + C-I 6x3 + SS-N 3x19 + SS-E 3x9 + SS-IN-N 3x16 + SS-IN-E 3x6 + SS-GG 4x6 = 2518 pcs"
+  },
+  {
+   "familia": "clip angle (bracing / nested connections)",
+   "ref": "CLIP-ANGLES-7-A210",
+   "source": "7/A-210",
+   "operacion": "3\"x3\"x16 GA. CLIP ANGLES at the nested header to jamb connection (7/A-210): 2 header ends x 2 (front / back) = 4 pcs (conservative; count not printed - RFI-51)"
+  },
+  {
+   "familia": "nested inner runner (deflection head)",
+   "ref": "NESTED-RUNNER-3-A410",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER\" + \"DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK\": inner runner = length of every wall / soffit side to deck = W2-01 48.77 + W2-02 4.99 + W2-03 94.24 + W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-H2a 12.17 + C-H2b 1.95 + C-H3a 4.08 + C-H3b 6.17 + C-E2 29.3 + C-E1-S 23.46 + C-I-P.1 1.0 + C-E1-P.2 2.11 + C-E1-B 2.31 + C-F 3.26 + C-I 2.31 + SS-N 22.77 + SS-E 10.12 + SS-IN-N 20.0 + SS-IN-E 6.25 + SS-GG 6.167 = 479.85 LF (RFI-40 confirms the reading)"
+  },
+  {
+   "familia": "X-EDNI fasteners, top track to structure",
+   "ref": "X-EDNI-8C",
+   "source": "A-410",
+   "operacion": "A-410 Partition Notes (typical fastener) 8.C \"0.145\\\" DIA. HILTI X-EDNI ... 2 ROWS AT 16\\\" O.C. FOR CONTINUOUS APPLICATIONS SUCH AS TRACKS\": 479.85 LF deep leg track to structure x 2 rows / 1.333 ft = 720 pcs"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "CROSS-MEMBERS-8-A410-3",
+   "source": "8/A-410",
+   "operacion": "8/A-410 Typ. Connection Detail - PARALLEL TO STRUCTURE: metal stud per schedule spanning joist to joist, (1) P.A.F. each end, track attached @ 24\" O.C.: W2-02 ROUNDUP(4.99/2)+1 = 4; W2-03 ROUNDUP(94.24/2)+1 = 49; W2-05 ROUNDUP(12.92/2)+1 = 8; W2-06.2 ROUNDUP(2.23/2)+1 = 3; W2-06.4 ROUNDUP(2.23/2)+1 = 3; W2-07 ROUNDUP(7.51/2)+1 = 5; W2-08 ROUNDUP(12.92/2)+1 = 8; W2-09 ROUNDUP(12.92/2)+1 = 8; C-H2a ROUNDUP(12.17/2)+1 = 8; C-H2b ROUNDUP(1.95/2)+1 = 2; SS-E ROUNDUP(10.12/2)+1 = 7; SS-IN-E ROUNDUP(6.25/2)+1 = 5 members x 5.0 ft (joist spacing not printed, assumed - RFI-41) = 550.0 LF 3-5/8\""
+  },
+  {
+   "familia": "6\" stud (todos los gauges)",
+   "ref": "CROSS-MEMBERS-8-A410-6",
+   "source": "8/A-410",
+   "operacion": "8/A-410 Typ. Connection Detail - PARALLEL TO STRUCTURE: metal stud per schedule spanning joist to joist, (1) P.A.F. each end, track attached @ 24\" O.C.: W5-01 ROUNDUP(5.7/2)+1 = 4; C-H1-W ROUNDUP(12.17/2)+1 = 8; C-H3b ROUNDUP(6.17/2)+1 = 5; C-E1-P.2 ROUNDUP(2.11/2)+1 = 3; C-E1-B ROUNDUP(2.31/2)+1 = 3; C-I ROUNDUP(2.31/2)+1 = 3; SS-GG ROUNDUP(6.167/2)+1 = 5 members x 5.0 ft (joist spacing not printed, assumed - RFI-41) = 155.0 LF 6\""
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "SOFFIT-CROSS-BRACING-2-A221",
+   "source": "2/A-221",
+   "operacion": "2/A-221 \"CROSS BRACING AS REQ'D\": (SS-N 22.77 + SS-E 10.12) / 4 ft = 9 pairs x 2 x 5.0 ft = 90.0 LF 3-5/8\" stud (conservative; member / spacing not printed - RFI-42)"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "F-NESTED-BRACING",
+   "source": "F/A-221",
+   "operacion": "F/A-221 \"TO BOTTOM OF NESTED STUD BRACING\": 2 nested members x 3.26 LF = 6.52 LF (conservative; member not drawn - RFI-46)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "VEST-GWB-BANDS",
+   "source": "2/A-210",
+   "operacion": "2/A-210: (11'-3 1/2\" - 10'-6\") 0.792 x 12.67 = 10.03 SF - 8.4 carried = + 1.63 SF; 3/A-210: 2 sides x 8.42 ft x 0.792 = 13.33 SF; total 14.96 SF (V.I.F.)"
+  },
+  {
+   "familia": "metal trim (corner bead, casing, shadow molding)",
+   "ref": "CORNER-BEAD-SOFFITS",
+   "source": "A-510",
+   "operacion": "A-510 Finish Notes 8 metal corner bead at the soffit bottom outside edges (2/A-221, 3/A-221): SS-N 22.77 + SS-E 10.12 + SS-IN-N 20.0 + SS-IN-E 6.25 + SS-GG 6.167 = 65.31 LF"
+  },
+  {
+   "familia": "hanger wire",
+   "ref": "HANGERS-FIXTURES-5-A121",
+   "source": "5/A-121",
+   "operacion": "5/A-121 additional wire at all light fixtures: Women's 4 + Men's 4 (D6, 1/A-121) x drop 16.0 = 128.0 + Cafe Seating cloud 21 (7 x 3, 1/A-121) x drop 13.0 = 273.0; 29 hangers = 401.0 LF"
+  },
+  {
+   "familia": "hanger wire",
+   "ref": "SPLAY-WIRES-5-A121",
+   "source": "5/A-121",
+   "operacion": "5/A-121 splay wires 4 per brace group @ 12'-0\" O.C. each way, at 45 deg: groups Women's 1 x drop 16.0; Men's 1 x drop 16.0; Cafe 11'-6\" band 1 x drop 13.5; Cafe 9'-0\" band 1 x drop 16.0; Cafe cloud 4 x drop 13.0; Grab & Go 1 x drop 17.917 -> sum(groups x 4 x drop x 1.414) = 743.29 LF (conservative; A-420 not in the set - RFI-38)"
+  },
+  {
+   "familia": "1-5/8\" stud",
+   "ref": "SEISMIC-STRUTS-5-A121",
+   "source": "5/A-121",
+   "operacion": "5/A-121 \"1 5/8\\\" x 16 GA. METAL JOIST\" compression post per brace group: groups Women's 1 x drop 16.0; Men's 1 x drop 16.0; Cafe 11'-6\" band 1 x drop 13.5; Cafe 9'-0\" band 1 x drop 16.0; Cafe cloud 4 x drop 13.0; Grab & Go 1 x drop 17.917 -> sum(groups x drop) = 131.42 LF (conservative - RFI-38)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-04",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-04 = 56.76 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-05",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-05 = 12.92 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-06.1",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-06.1 = 6.92 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-06.2",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-06.2 = 2.23 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-06.3",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-06.3 = 4.87 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-06.4",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-06.4 = 2.23 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-06.5",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-06.5 = 11.29 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-07",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-07 = 7.51 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-08",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-08 = 12.92 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-09",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-09 = 12.92 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H2a",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along C-H2a = 12.17 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W2-03",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along W2-03 (Corridor 110 face) = 13.12 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H2b",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 3-5/8\" track along C-H2b (Cafe Workroom 104 ACT) = 1.95 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-W5-01",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along W5-01 = 5.7 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H1-N",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-H1-N = 29.98 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H1-W",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-H1-W = 12.17 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-E2",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-E2 = 29.3 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H3a",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-H3a = 4.08 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-H3b",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-H3b = 6.17 LF (RFI-35)"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "FIRESTOP-C-E1-S",
+   "source": "3/A-410",
+   "operacion": "3/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\": 6\" track along C-E1-S (Cafe 103 9'-0\" GWB band, 1/A-121) = 19.0 LF (RFI-35)"
+  },
+  {
+   "familia": "plywood screws (Teks/3)",
+   "ref": "PLYWOOD-SCREWS-8D",
+   "source": "A-410",
+   "operacion": "A-410 Partition Notes 8.D \"#10-24 X 1-1/4\\\" TEKS/3 ... 24\\\" O.C. FIELD, 12\\\" O.C. PERIMETER\": 4x8 sheet on studs @ 16\" = 24 perimeter + 10 field = 34 screws / 32 SF; 2192.98 SF FRT plywood x 34/32 = 2331 pcs"
+  },
+  {
+   "familia": "cement board screws",
+   "ref": "CEMENT-BOARD-SCREWS",
+   "source": "22/A-201",
+   "operacion": "cement board screws @ 8\" O.C. on studs @ 16\" (manufacturer standard, spacing not printed - RFI-51): 3x5 board = 4 studs x 8 = 32 screws / 15 SF; 789.94 SF x 32/15 = 1686 pcs"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -324,7 +563,7 @@
    "ref": "C-E2-A-FRT",
    "source": "E/A-221",
    "material": "frt_5_8",
-   "operacion": "strip 29.3 x 25.0 = 732.5 SF (no es blocking ni sill)"
+   "operacion": "strip 29.3 x 10.5 = 307.65 SF (no es blocking ni sill)"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -394,14 +633,14 @@
    "ref": "SS-N-WD1-FRT",
    "source": "1/A-226A",
    "material": "frt_5_8",
-   "operacion": "strip 22.77 x 4.0 = 91.08 SF (no es blocking ni sill)"
+   "operacion": "strip 22.77 x 14.0 = 318.78 SF (no es blocking ni sill)"
   },
   {
    "familia": "FRT plywood (SF)",
    "ref": "SS-E-WD1-FRT",
    "source": "6/A-226A",
    "material": "frt_5_8",
-   "operacion": "strip 10.12 x 4.0 = 40.48 SF (no es blocking ni sill)"
+   "operacion": "strip 10.12 x 14.0 = 141.68 SF (no es blocking ni sill)"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -444,6 +683,13 @@
    "source": "I/A-221",
    "material": "frt_5_8",
    "operacion": "strip 0.603 x 15.0 = 9.04 SF (no es blocking ni sill)"
+  },
+  {
+   "familia": "FRT plywood (SF)",
+   "ref": "SERVER-ROOM-BACKBOARD",
+   "source": "2/E-103",
+   "material": "frt_3_4",
+   "operacion": "strip 4.0 x 8.0 = 32.0 SF (no es blocking ni sill)"
   },
   {
    "familia": "metal trim (corner bead, casing, shadow molding)",
@@ -553,27 +799,27 @@
   },
   {
    "familia": "drywall screws",
-   "valor": 19254.29,
+   "valor": 19442.26,
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 19254.29"
+   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 19442.26"
   },
   {
    "familia": "joint compound",
-   "valor": 1155.26,
+   "valor": 1166.54,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 1155.26"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 1166.54"
   },
   {
    "familia": "joint tape",
-   "valor": 5936.74,
+   "valor": 5994.7,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 14902.61 + 1142.63 = 16045.24 SF) = 5936.74"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 15109.29 + 1092.59 = 16201.88 SF) = 5994.7"
   },
   {
    "familia": "framing screws",
@@ -612,8 +858,8 @@
    "valor": 0.0,
    "unidad": "pcs",
    "estado": "DERIVADO",
-   "source": "8/A-410",
-   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
+   "source": "3/A-410",
+   "operacion": "not applicable: Deflection by deep leg track / slotted deflection at the top of full height walls (3/A-410 Top Track Detail, 2/A-410 \"SLOTTED DEFLECTION\", A-410 partition note 7 \"PROVIDE DEFLECTION TRACK AS REQUIRED\"); no deflection clips called"
   },
   {
    "familia": "extra framing ATM",
@@ -723,7 +969,7 @@
  ],
  "header_por_pieza": {},
  "hanger_pcs": {
-  "total_pcs": 103,
+  "total_pcs": 109,
   "por_room": [
    {
     "room": "Women's Restroom 109",
@@ -759,9 +1005,16 @@
     "altura_ft": 13.0,
     "altura_source": "B.O. deck 25'-0\" (1/A-400B) - ceiling 12.0 (A-121) - RFI-03",
     "lf": 715.0
+   },
+   {
+    "room": "Grab & Go",
+    "pcs": 6,
+    "altura_ft": 17.917,
+    "altura_source": "B.O. deck 25'-0\" (1/A-400B) - ceiling 7'-1\" (A-121) - RFI-03",
+    "lf": 107.5
    }
   ],
-  "lf_derivado": 1438.0
+  "lf_derivado": 1545.5
  },
  "materiales": [
   {
@@ -769,31 +1022,31 @@
    "family": "FRT plywood (SF)",
    "key": "frt_5_8",
    "unit": "SF",
-   "net": 1886.46
+   "net": 1790.51
   },
   {
    "material": "3/4\" FRT plywood",
    "family": "FRT plywood (SF)",
    "key": "frt_3_4",
    "unit": "SF",
-   "net": 370.46
+   "net": 402.46
   },
   {
    "material": "Hanger wire 12 ga",
    "family": "hanger wire",
    "key": "hanger_wire",
    "unit": "LF",
-   "net": 1438.0,
-   "pcs": 103,
+   "net": 1545.5,
+   "pcs": 109,
    "operation": "LF = Σ PCS x hanger height per room (user decision #4)"
   }
  ],
  "frt_plywood_by_material": {
-  "FRT plywood substrate (5/8 in.)": 1886.46,
-  "FRT plywood substrate (3/4 in.)": 370.46
+  "FRT plywood substrate (5/8 in.)": 1790.51,
+  "FRT plywood substrate (3/4 in.)": 402.46
  },
  "metal_blocking_by_origin": {},
- "wood_blocking_lf": 0.0,
+ "wood_blocking_lf": 17.0,
  "stud_by_element": {
   "3-5/8\" stud (todos los gauges)": {
    "3-5/8\" stud, framed soffit 2/A-221 (LF)": 61.31
@@ -814,12 +1067,12 @@
    "PVC trim at FRP": 0.0,
    "PAFs and duct sleeves": 0.0,
    "access panel": 0.0,
-   "drywall screws": 19254.29,
+   "drywall screws": 19442.26,
    "framing screws": 3124.0,
    "slab pins": 640.61,
    "expansion anchors": 0.0,
-   "joint compound": 1155.26,
-   "joint tape": 5936.74,
+   "joint compound": 1166.54,
+   "joint tape": 5994.7,
    "Level 5 finish": 0.0,
    "deflection clips": 0.0
   },
@@ -897,7 +1150,7 @@
   {
    "familia": "stud reinforcement MEP",
    "tema": "MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
-   "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each",
+   "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (skill default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only); plus 1 duct sleeve each",
    "source": "M-102"
   }
  ],
@@ -976,7 +1229,7 @@
       "rows": 1,
       "layers": 2.0,
       "board_sf": 1958.22,
-      "location": "BOH north wall: Corridor 110 to Manager's Office 105 (Sales side)",
+      "location": "BOH north wall: Corridor 110 to Manager's Office 105 (Sales side) (door 4 inside wall)",
       "source": "2/A-410",
       "status": "DERIVADO",
       "pendiente": []
@@ -993,7 +1246,7 @@
       "rows": 1,
       "layers": 2.0,
       "board_sf": 241.73,
-      "location": "Corridor 110 / Women's 109 (door 4 inside wall)",
+      "location": "Corridor 110 / Women's 109",
       "source": "2/A-410",
       "status": "DERIVADO",
       "pendiente": []
@@ -1658,8 +1911,8 @@
       "stud_size": "6\"",
       "oc_in": 16,
       "rows": 1,
-      "layers": 1.0,
-      "board_sf": 46.79,
+      "layers": 2.0,
+      "board_sf": 151.68,
       "location": "Grab & Go west wall",
       "source": "H/A-221",
       "status": "DERIVADO",
@@ -1708,8 +1961,8 @@
       "stud_size": "6\"",
       "oc_in": 16,
       "rows": 1,
-      "layers": 1.0,
-      "board_sf": 586.5,
+      "layers": 0.81,
+      "board_sf": 475.0,
       "location": "South wall, Cafe Sales 103 (in front of exterior wall)",
       "source": "E/A-221",
       "status": "DERIVADO",
@@ -2260,8 +2513,8 @@
     "stud_size": "6\"",
     "oc_in": 16,
     "rows": 1,
-    "layers": 0.0,
-    "board_sf": 0.0,
+    "layers": 1.0,
+    "board_sf": 61.67,
     "location": "Grab & Go header soffit over the open east side (6'-2\" HOLD)",
     "source": "3/A-221",
     "status": "DERIVADO",

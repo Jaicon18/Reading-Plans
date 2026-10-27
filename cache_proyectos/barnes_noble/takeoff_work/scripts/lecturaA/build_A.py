@@ -1011,6 +1011,188 @@ if REV6:
     # C-H2a Cafe face = "PT-3" painted wall around door 3 (1/A-225, 5/A-226A); the WD-1 strip left of the door is the type I return (C-I-P.1)
     strips[:] = [x for x in strips if x['ref'] not in ('C-H1-N-A-FRT', 'C-H2a-B-FRT')]
 
+# ---------------------------------------------------------------- REV7 (Paso 12 sobre rev6: PASO12_rev6/, regla v80j)
+REV7 = os.environ.get('REV7') == '1'
+if REV7:
+    import math as _m7
+    P12 = '../../PASO12_rev6/img/'
+    wb7 = {w['id']: w for sh in walls for w in walls[sh]}
+    TX = '5/8" Type X on all new walls (estimator decision RFI-27): A-001A Div 09 A.2'
+    # C-01: T.O. WD-1 at the Grab & Go header = 15'-0" (5/A-226A 11'-0" + 4'-0" WD-1; 6/A-226A 15'-0"): GWB over the plywood to deck
+    ss = wb7['SS-GG']; ss.pop('faces_none_reason', None)
+    DETAILS['3/A-221'] = {'layers_per_face': 1, 'source': '3/A-221', 'layers_source': '3/A-221', 'img': P12 + 'A-221_3-GrabGo-soffit.png',
+                          'title': 'Soffit Section - Grab & Go', 'notes': '6" metal studs @ 16" O.C.; 5/8" pressure treated FRT plywood substrate full face; 5/8" GWB above T.O. WD-1 (15\'-0", 5/A-226A, 6/A-226A); GWB at the soffit bottom', **SEAL}
+    ss['faces'] = [{'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 10.0,
+                    'height_source': "GWB from T.O. WD-1 15'-0\" (5/A-226A 11'-0\" + 4'-0\" WD-1; 6/A-226A 15'-0\") to deck 25'-0\" over the full-height FRT plywood (3/A-221) - Paso 12 C-01",
+                    'board_source': TX}]
+    # C-04: C-E1-S exposed Cafe face = 19'-0" HOLD (1/A-221)
+    for f in wb7['C-E1-S']['faces']:
+        f['length_ft'] = 19.0
+        f['length_source'] = '1/A-221 printed 19\'-0" HOLD (finished face to finished face: pier to SE box) - Paso 12 C-04'
+    wb7['C-E1-S']['faces'].append(dict(wb7['C-E1-S']['faces'][0], room='concealed: behind the Workroom door pier and inside the SE box (no cement board)',
+                                       length_ft=round(wb7['C-E1-S']['length_ft'] - 19.0, 2), height_ft=0.0,
+                                       length_source='1/A-221: wall length 23.46 - 19\'-0" HOLD exposed face',
+                                       height_source='0 ft: face concealed by the pier (C-E1-P) and the SE box (C-E1-B / C-F / C-I) - 1/A-221'))
+    # C-09: door 4 is in W2-04 (A-101 / A-500), not in W2-05 - labels only (the opening was already in W2-04)
+    wb7['W2-05']['location'] = "Corridor 110 / Women's 109"
+    if 'door 4' not in wb7['W2-04']['location']:
+        wb7['W2-04']['location'] += ' (door 4 inside wall)'
+    # C-06: vestibule box members are 7/A-210 (nested stud details) and 8/A-210 (nested stud column & beam); 6/A-210 = glazing base
+    for m in misc:
+        if m.get('source') == '6/A-210':
+            m['source'] = '8/A-210' if 'BEAM' in m['ref'] else '7/A-210'
+            m['op'] = m['op'] + ' (citation corrected: 7/A-210 nested stud details, 8/A-210 nested stud column & beam; 6/A-210 is the glazing base detail - Paso 12 C-06)'
+    # C-03: 22/A-201 "1'-2" CEMENT BOARD BASE" (5/8" cement board, W.R. above) on the restroom faces of new walls
+    RR = ("Women's Restroom 109", "Men's Restroom 108")
+    rr = [(w['id'], f.get('length_ft') or w['length_ft']) for w in walls['A-101'] for f in w.get('faces') or [] if f['room'] in RR]
+    lrr = round(sum(v for _, v in rr), 2); drr = 3.33 + 3.33   # doors 9 (Women's) and 8 (Men's) open in these faces
+    cbx = round((lrr - drr) * 14 / 12, 2)
+    opc = ' + '.join(f'{i} {v}' for i, v in rr) + f' = {lrr} LF - doors 8, 9 ({drr}) = {round(lrr - drr, 2)} LF x 1\'-2" = {cbx} SF'
+    misc.append({'ref': 'RESTROOM-BASE-CEMENT', 'familia': 'cement board', 'qty': cbx, 'unit': 'SF', 'source': '22/A-201',
+                 'op': '5/8" CEMENT BOARD BASE 1\'-2" (22/A-201; A-001A Div 09 J.2): ' + opc + ' - Paso 12 C-03', 'img': P12 + 'A-201_22-tile-base.png'})
+    misc.append({'ref': 'RESTROOM-BASE-WR-DEDUCT', 'familia': '5/8" gyp Type X W.R.', 'qty': -cbx, 'unit': 'SF', 'source': '22/A-201',
+                 'op': f'W.R. board replaced by the 1\'-2" cement board base on the same faces (22/A-201): - {cbx} SF', 'img': P12 + 'A-201_22-tile-base.png'})
+    # GAP: gauges per type (A-410 Metal Stud Schedule; Partition Notes 5 "ALL METAL STUDS TO BE MIN. 20 GAUGE"; schedule note 2 track = stud)
+    SCH = 'A-410 Metal Stud Schedule (16" O.C. max unsupported height)'
+    for w in wb7.values():
+        sz, H, t = w.get('stud_size'), float(w.get('height_ft') or 0), str(w.get('tag'))
+        if sz == '3-5/8"' and (t == '2' or H > 22.0):
+            w['gauge'] = '14 ga SJ'
+            w['gauge_source'] = SCH + ': 3-5/8" 14 SJ 22\'-0" is the heaviest; walls to 25\'-0" carried 14 ga SJ + diagonal bracing @ 32" (3/A-410) - estimator precedent RFI-04'
+        elif sz == '6"' and H > 17.9:
+            w['gauge'] = '20 ga SJ'; w['gauge_source'] = SCH + ': 6" 20 SJ 26\'-8" >= wall height'
+        else:
+            w['gauge'] = '20 ga'; w['gauge_source'] = SCH + ' + Partition Notes 5 "ALL METAL STUDS TO BE MIN. 20 GAUGE"'
+    # Cafe 3-5/8" walls to 25'-0" (> 22'-0"): precedent RFI-04 = diagonal braces @ 32" O.C. x 4 ft
+    cb = [(i, wb7[i]['length_ft']) for i in ('C-H2a', 'C-H2b', 'C-F')]
+    nb = sum(_m7.ceil(L * 12 / 32 - 1e-9) + 1 for _, L in cb)
+    misc.append({'ref': 'DIAG-BRACES-CAFE', 'familia': '3-5/8" stud (todos los gauges)', 'qty': nb * 4.0, 'unit': 'LF', 'source': '3/A-410',
+                 'label': 'Diagonal braces @ 32" O.C. to structure (3/A-410), Cafe 3-5/8" walls to deck (> 22\'-0")',
+                 'op': ' + '.join(f'{i} (ROUNDUP({L} x 12 / 32) + 1 = {_m7.ceil(L * 12 / 32 - 1e-9) + 1})' for i, L in cb) + f' = {nb} braces x 4.0 ft = {nb * 4.0} LF (estimator precedent RFI-04)',
+                 'img': P12 + 'A-410_metal-stud-schedule.png'})
+    # GAP: clip angles 5/A-410 at every C.R. channel / stud crossing ((4) Tek screws each)
+    cl, clop = 0, []
+    for w in wb7.values():
+        if w.get('element') not in ('wall', 'soffit_side', 'column_wrap') or w.get('bracing_rows') == 0:
+            continue
+        rows = max(0, _m7.ceil(round(float(w['height_ft']) * 12 / 48, 6)) - 1)
+        if not rows:
+            continue
+        st = 12 if w.get('element') == 'column_wrap' else _m7.ceil(float(w['length_ft']) * 12 / 16 - 1e-9) + 1
+        cl += rows * st; clop.append(f"{w['id']} {rows}x{st}")
+    misc.append({'ref': 'CLIP-ANGLES-5-A410', 'familia': 'clip angle (bracing / nested connections)', 'qty': cl, 'unit': 'PCS', 'source': '5/A-410',
+                 'op': '2" x 2" 16 GA. CLIP ANGLE at each stud per bracing row, (4) TEK SCREWS (5/A-410): rows x studs = ' + ' + '.join(clop) + f' = {cl} pcs',
+                 'img': P12 + 'A-410_5-lateral-bracing-clip-angle.png'})
+    misc.append({'ref': 'CLIP-ANGLES-7-A210', 'familia': 'clip angle (bracing / nested connections)', 'qty': 4, 'unit': 'PCS', 'source': '7/A-210',
+                 'op': '3"x3"x16 GA. CLIP ANGLES at the nested header to jamb connection (7/A-210): 2 header ends x 2 (front / back) = 4 pcs (conservative; count not printed - RFI-51)',
+                 'img': P12 + 'A-210_7-clip-angles.png'})
+    # GAP: full-height walls (deflection head to structure): nested inner runner (3/A-410) + X-EDNI 8.C + cross members 8/A-410
+    FH = [w for w in wb7.values() if w.get('element') in ('wall', 'soffit_side') and float(w['height_ft']) >= 13.5
+          and w.get('top_track') is not False]
+    lfh = round(sum(float(w['length_ft']) for w in FH), 2)
+    misc.append({'ref': 'NESTED-RUNNER-3-A410', 'familia': 'nested inner runner (deflection head)', 'qty': lfh, 'unit': 'LF', 'source': '3/A-410',
+                 'op': '3/A-410 "METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER" + "DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK": inner runner = length of every wall / soffit side to deck = ' + ' + '.join(f"{w['id']} {w['length_ft']}" for w in FH) + f' = {lfh} LF (RFI-40 confirms the reading)',
+                 'img': P12 + 'A-410_3-top-track-detail.png'})
+    nx = _m7.ceil(lfh * 2 / (16 / 12))
+    misc.append({'ref': 'X-EDNI-8C', 'familia': 'X-EDNI fasteners, top track to structure', 'qty': nx, 'unit': 'PCS', 'source': 'A-410',
+                 'op': f'A-410 Partition Notes (typical fastener) 8.C "0.145\\" DIA. HILTI X-EDNI ... 2 ROWS AT 16\\" O.C. FOR CONTINUOUS APPLICATIONS SUCH AS TRACKS": {lfh} LF deep leg track to structure x 2 rows / 1.333 ft = {nx} pcs',
+                 'img': P12 + 'A-410_partition-note-8C.png'})
+    PAR = [w for w in FH if w['band']['ori'] == 'V']   # joists N-S (RFI-15 closed): N-S walls run parallel to the joists
+    cmo, cm = [], {}
+    for w in PAR:
+        n = _m7.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1
+        cm[w['stud_size']] = cm.get(w['stud_size'], 0) + n * 5.0
+        cmo.append(f"{w['id']} ROUNDUP({w['length_ft']}/2)+1 = {n}")
+    for sz, q in cm.items():
+        misc.append({'ref': f'CROSS-MEMBERS-8-A410-{sz[0]}', 'familia': '6" stud (todos los gauges)' if sz == '6"' else '3-5/8" stud (todos los gauges)',
+                     'qty': round(q, 2), 'unit': 'LF', 'source': 'TYPCONN/A-410',
+                     'op': f'TYPCONN/A-410 Typ. Connection Detail - PARALLEL TO STRUCTURE: metal stud per schedule spanning joist to joist, (1) P.A.F. each end, track attached @ 24" O.C.: ' + '; '.join(c for c in cmo if wb7[c.split()[0]]['stud_size'] == sz) + f' members x 5.0 ft (joist spacing not printed, assumed - RFI-41) = {round(q, 2)} LF {sz}',
+                     'img': P12 + 'A-410_8-connection-detail.png'})
+    # GAP: 2/A-221 FRT plywood continues above T.O. WD-1 behind the GWB (SS-N, SS-E): 11'-0" to deck = 14 ft; cross bracing AS REQ'D
+    for st_ in strips:
+        if st_['ref'] in ('SS-N-WD1-FRT', 'SS-E-WD1-FRT'):
+            st_['width_ft'] = 14.0
+            st_['op'] = f"{st_['lf']} LF x 14.0 ft: 2/A-221 draws the 5/8\" F.R.T. plywood continuous from the soffit bottom 11'-0\" to deck 25'-0\" (WD-1 band 11'-0\" to 15'-0\", 5/8\" GWB over the plywood above) - Paso 12"
+    nbr = _m7.ceil((wb7['SS-N']['length_ft'] + wb7['SS-E']['length_ft']) / 4.0)
+    misc.append({'ref': 'SOFFIT-CROSS-BRACING-2-A221', 'familia': '3-5/8" stud (todos los gauges)', 'qty': nbr * 2 * 5.0, 'unit': 'LF', 'source': '2/A-221',
+                 'op': f'2/A-221 "CROSS BRACING AS REQ\'D": (SS-N {wb7["SS-N"]["length_ft"]} + SS-E {wb7["SS-E"]["length_ft"]}) / 4 ft = {nbr} pairs x 2 x 5.0 ft = {nbr * 10.0} LF 3-5/8" stud (conservative; member / spacing not printed - RFI-42)',
+                 'img': P12 + 'A-221_2-cross-bracing.png'})
+    # GAP: E2 Workroom face FRT to ACT-1 + 6" (same rule as the H1 / H2 Workroom faces, estimator precedent RI 7, A-410 Partition Notes 3)
+    for st_ in strips:
+        if st_['ref'] == 'C-E2-A-FRT':
+            st_['width_ft'] = 10.5
+            st_['op'] = f"{st_['lf']} LF x 10.5 ft (Cafe Workroom ACT-1 10'-0\" (1/A-121) + 6\" - A-410 Partition Notes 3; same rule as the H1 / H2 Workroom faces, estimator precedent RI 7) - Paso 12"
+    # GAP: H3b Sales face above the 8'-0" plywood (H/A-221 "H3b = PLYWOOD UP TO 8'-0""): GWB to deck (A-410 Partition Notes 2 full height)
+    wb7['C-H3b']['faces'].append({'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 17.0,
+                                  'height_source': 'GWB 8\'-0" (top of plywood, H/A-221) to deck 25\'-0" = 17.0 ft - A-410 Partition Notes 2 "GYP. BOARD ON BOTH SIDES FOR THE FULL HEIGHT OF THE STUDS" - Paso 12',
+                                  'board_source': TX})
+    # GAP: F/A-221 "TO BOTTOM OF NESTED STUD BRACING" - nested bracing member (conservative 2 runners)
+    misc.append({'ref': 'F-NESTED-BRACING', 'familia': '3-5/8" stud (todos los gauges)', 'qty': round(2 * wb7['C-F']['length_ft'], 2), 'unit': 'LF', 'source': 'F/A-221',
+                 'op': f'F/A-221 "TO BOTTOM OF NESTED STUD BRACING": 2 nested members x {wb7["C-F"]["length_ft"]} LF = {round(2 * wb7["C-F"]["length_ft"], 2)} LF (conservative; member not drawn - RFI-46)',
+                 'img': P12 + 'A-221_F-nested-stud-bracing.png'})
+    # GAP: vestibule GWB bands above B.O. ceiling 10'-6" to 11'-3 1/2" V.I.F. (2/A-210 front +1.63 SF, 3/A-210 sides +13.33 SF)
+    misc.append({'ref': 'VEST-GWB-BANDS', 'familia': '5/8" gyp board Type X', 'qty': 14.96, 'unit': 'SF', 'source': '2/A-210',
+                 'op': '2/A-210: (11\'-3 1/2" - 10\'-6") 0.792 x 12.67 = 10.03 SF - 8.4 carried = + 1.63 SF; 3/A-210: 2 sides x 8.42 ft x 0.792 = 13.33 SF; total 14.96 SF (V.I.F.)',
+                 'img': P12 + 'A-210_3-side-elev-fascia.png'})
+    # GAP: A-510 Finish Notes 8 "ALL OUTSIDE CORNERS SHALL BE FINISHED WITH METAL CORNER BEADS": soffit bottom edges
+    sfe = [(i, wb7[i]['length_ft']) for i in ('SS-N', 'SS-E', 'SS-IN-N', 'SS-IN-E', 'SS-GG')]
+    misc.append({'ref': 'CORNER-BEAD-SOFFITS', 'familia': 'metal trim (corner bead, casing, shadow molding)', 'qty': round(sum(v for _, v in sfe), 2), 'unit': 'LF', 'source': 'A-510',
+                 'op': 'A-510 Finish Notes 8 metal corner bead at the soffit bottom outside edges (2/A-221, 3/A-221): ' + ' + '.join(f'{i} {v}' for i, v in sfe) + f' = {round(sum(v for _, v in sfe), 2)} LF',
+                 'img': P12 + 'A-510_finish-note-8.png'})
+    # GAP: Grab & Go GWB ceiling 7'-1" (1/A-121)
+    ceilings.append({'room': 'Grab & Go', 'system': 'furring', 'area_sf': round(4.08 * 6.167, 2), 'perimeter_ft': round(2 * (4.08 + 6.167), 2),
+                     'ns_ft': 6.167, 'ew_ft': 4.08, 'height_ft': 7.083, 'source': 'A-121',
+                     'area_op': "[DERIVED] 4.08 (C-H3a) x 6.167 (6'-2\" HOLD, 1/A-221) = 25.16 SF; tag \"GRAB & GO GWB 7'-1\" PT-7\" (1/A-121) - Paso 12",
+                     'img': P12 + 'A-121_grab-and-go-gwb-7-1.png',
+                     'hanger_drop_ft': {'value': 17.917, 'source': "B.O. deck 25'-0\" (1/A-400B) - ceiling 7'-1\" (A-121) - RFI-03"},
+                     'detail': '5/A-121', 'board': '5/8 type X', 'board_source': '5/8" Type X (estimator decision rev2): 4/A-121, 5/A-121, A-001A Div 09 A.2'})
+    # GAP: recessed FE cabinets in new walls - 4/A-101 "F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET" (C11 x 4 in new walls)
+    blocking.append({'ref': 'BLK-FE-CABINETS', 'lf': 16.0, 'material': 'FRT', 'label': 'F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET (4/A-101)', 'source': '4/A-101',
+                     'op': '4 recessed cabinets in new walls (C11 on A-101: W2-01, W2-03 x 2, Cafe Workroom) x (header 2.0 + base 2.0 ft) = 16.0 LF FRT 2x (cabinet width not printed - RFI-39)',
+                     'img': P12 + 'A-101_4-fire-extinguisher-detail.png'})
+    # GAP: 2/A-500 cased opening wood blocking across the stud return
+    blocking.append({'ref': 'BLK-CASED-OPENING', 'lf': 17.0, 'material': 'wood', 'label': 'WOOD BLOCKING at cased opening (2/A-500)', 'source': '2/A-500',
+                     'op': '1 cased opening x (2 jambs x 7.0 + head 3.0) = 17.0 LF (conservative; count / location per plan not confirmed - RFI-49)',
+                     'img': P12 + 'A-500_2-cased-opening-wood-blocking.png'})
+    # GAP: 2/E-103 server room "4'x8' FRT PLYWOOD SHEET AND POWER BY GC" (E-301 terminal board)
+    strips.append({'ref': 'SERVER-ROOM-BACKBOARD', 'wall': 'SERVER ROOM', 'lf': 4.0, 'width_ft': 8.0, 'material': 'frt_3_4', 'uso': 'substrate',
+                   'label': '4\'x8\' FRT PLYWOOD SHEET BY GC (2/E-103)', 'source': '2/E-103', 'room': 'Server room',
+                   'img': P12 + 'E-103_2_server-room-FRT-plywood-by-GC.png', 'op': '1 sheet 4 x 8 = 32.0 SF 3/4" FRT plywood (2/E-103 "BY GC"; E-301 fire-rated plywood terminal board) - RFI-50 confirms trade'})
+    # GAP: 5/A-121 "PROVIDE ADDITIONAL WIRE SUPPORT AT ALL LIGHT FIXTURES" (GWB ceilings): D6 Women's 4 + Men's 4 + cloud 21
+    misc.append({'ref': 'HANGERS-FIXTURES-5-A121', 'familia': 'hanger wire', 'qty': 401.0, 'unit': 'LF', 'source': '5/A-121',
+                 'op': '5/A-121 additional wire at all light fixtures: Women\'s 4 + Men\'s 4 (D6, 1/A-121) x drop 16.0 = 128.0 + Cafe Seating cloud 21 (7 x 3, 1/A-121) x drop 13.0 = 273.0; 29 hangers = 401.0 LF',
+                 'img': P12 + 'A-121_detail-5-tie-wire-fixture-support.png'})
+    # GAP: 5/A-121 seismic splay wires (A-420 referenced by ceiling note 1 is not in the set) - conservative, RFI-38
+    G = [("Women's", 1, 16.0), ("Men's", 1, 16.0), ("Cafe 11'-6\" band", 1, 13.5), ("Cafe 9'-0\" band", 1, 16.0), ('Cafe cloud', 4, 13.0), ('Grab & Go', 1, 17.917)]
+    wl = round(sum(n * 4 * d * 1.414 for _, n, d in G), 2); sl = round(sum(n * d for _, n, d in G), 2)
+    gop = '; '.join(f'{r} {n} x drop {d}' for r, n, d in G)
+    misc.append({'ref': 'SPLAY-WIRES-5-A121', 'familia': 'hanger wire', 'qty': wl, 'unit': 'LF', 'source': '5/A-121',
+                 'op': f'5/A-121 splay wires 4 per brace group @ 12\'-0" O.C. each way, at 45 deg: groups {gop} -> sum(groups x 4 x drop x 1.414) = {wl} LF (conservative; A-420 not in the set - RFI-38)',
+                 'img': P12 + 'A-121_detail-5-seismic-splay-wires.png'})
+    misc.append({'ref': 'SEISMIC-STRUTS-5-A121', 'familia': '1-5/8" stud', 'qty': sl, 'unit': 'LF', 'source': '5/A-121',
+                 'op': f'5/A-121 "1 5/8\\" x 16 GA. METAL JOIST" compression post per brace group: groups {gop} -> sum(groups x drop) = {sl} LF (conservative - RFI-38)',
+                 'img': P12 + 'A-121_detail-5-seismic-splay-wires.png'})
+    # FIRESTOP track per wall (biblioteca BE-40): one misc per wall instead of one per size
+    fs = [m for m in misc if m['ref'].startswith('FIRESTOP-TRACK')]
+    misc[:] = [m for m in misc if not m['ref'].startswith('FIRESTOP-TRACK')]
+    for m in fs:
+        for part in m['op'].split(' = ')[0].split(' + '):
+            wid, val = part.rsplit(' ', 1)
+            misc.append({'ref': 'FIRESTOP-' + wid.split(' (')[0], 'familia': 'track de ceilings / soffits', 'qty': float(val), 'unit': 'LF', 'source': '3/A-410',
+                         'op': f'3/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.": {m["ref"][-1] == "3" and "3-5/8" or "6"}" track along {wid} = {val} LF (RFI-35)',
+                         'img': m.get('img')})
+
+if REV7:   # fasteners de plywood (8.D) y de cement board, sobre las cantidades finales
+    psf = round(sum(float(x['lf']) * float(x['width_ft']) for x in strips), 2)
+    npl = _m7.ceil(psf * 34 / 32)
+    misc.append({'ref': 'PLYWOOD-SCREWS-8D', 'familia': 'plywood screws (Teks/3)', 'qty': npl, 'unit': 'PCS', 'source': 'A-410',
+                 'op': f'A-410 Partition Notes 8.D "#10-24 X 1-1/4\\" TEKS/3 ... 24\\" O.C. FIELD, 12\\" O.C. PERIMETER": 4x8 sheet on studs @ 16" = 24 perimeter + 10 field = 34 screws / 32 SF; {psf} SF FRT plywood x 34/32 = {npl} pcs'})
+    csf = round(sum((f.get('length_ft') or w['length_ft']) * f['height_ft'] for sh in walls for w in walls[sh] for f in w.get('faces') or [] if 'cement' in f['board'])
+                + sum(m['qty'] for m in misc if m['familia'] == 'cement board'), 2)
+    ncb = _m7.ceil(csf * 32 / 15)
+    misc.append({'ref': 'CEMENT-BOARD-SCREWS', 'familia': 'cement board screws', 'qty': ncb, 'unit': 'PCS', 'source': '22/A-201',
+                 'op': f'cement board screws @ 8" O.C. on studs @ 16" (manufacturer standard, spacing not printed - RFI-51): 3x5 board = 4 studs x 8 = 32 screws / 15 SF; {csf} SF x 32/15 = {ncb} pcs'})
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -1055,7 +1237,14 @@ general = {
  'deck_breaks_none_reason': 'No stepped deck breaks: deck slopes continuously, B.O. DECK 24\'-0" (2/A-400B, west) to 25\'-7" (2/A-400A, east), 25\'-0" at 1/A-400A and 1/A-400B; interior walls to deck loaded at 25\'-0" - RFI-03',
 }
 def _ren(o):   # rev5 (audit rev4 row 21): the type I return carries its type in the ID
-    return json.loads(json.dumps(o, ensure_ascii=False).replace('C-E1-P.1', 'C-I-P.1')) if REV5 else o
+    t = json.dumps(o, ensure_ascii=False)
+    if REV5:
+        t = t.replace('C-E1-P.1', 'C-I-P.1')
+    if os.environ.get('REV7') == '1':   # Paso 12 C-07 / C-08: Top Track Detail = 3/A-410; 8/A-410 = Typ. Connection Detail
+        t = t.replace('8/A-410', '3/A-410').replace('TYPCONN/A-410', '8/A-410')
+        t = t.replace('(6/A-410 penetration details)', '(skill default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only)')
+        t = t.replace('6/A-410 and 7/A-410 penetration details', '6/A-410 and 7/A-410 (pipe firestopping only; no reinforcement plate printed)')
+    return json.loads(t)
 for sh, fr in frag_walls.items():
     os.makedirs(OUT_W, exist_ok=True)
     json.dump(_ren(fr), open(OUT_W + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)

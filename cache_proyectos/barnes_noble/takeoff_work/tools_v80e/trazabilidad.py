@@ -2,7 +2,7 @@
 
 Problema que corrige (auditoría final B&N rev4, chequeos 5 y 6): el Material Summary citaba `familias_out.json` /
 `accesorios.py` en "Where it comes from" (39 de 44 filas sin N/HOJA), los studs y el FRT plywood no tenían desglose
-(un auditor no podía reproducir 10,778 LF de 3-5/8" ni 2,709 SF de plywood) y el Partition Takeoff mostraba Board (SF)
+(un auditor no podía reproducir <n> LF de 3-5/8" ni <n> SF de plywood) y el Partition Takeoff mostraba Board (SF)
 distinto de L x H x Layers sin las alturas por cara.
 
 aplicar(d, out_dir, canon) — la llama plantilla_excel.armar después de la compuerta de reglas:
@@ -65,10 +65,12 @@ def aplicar(d, out_dir, canon_p):
     def filas_de(fam, material=None):
         return [r for r in filas if r.get("familia") == fam and (material is None or r.get("material") == material)]
 
+    mq = {m["ref"]: float(m["qty"]) for m in can.get("misc_items") or []}   # v80n: la cantidad del canon manda
+
     def items_filas(fam, material=None):
         out = []
         for r in filas_de(fam, material):
-            v = r.get("valor") if isinstance(r.get("valor"), (int, float)) else _val_op(r.get("operacion"))
+            v = r.get("valor") if isinstance(r.get("valor"), (int, float)) else mq.get(r.get("ref"), _val_op(r.get("operacion")))
             if v:
                 out.append((str(r.get("ref") or r.get("room") or r.get("source")), v))
         return out
@@ -90,14 +92,23 @@ def aplicar(d, out_dir, canon_p):
         cita, extra = [], ""
         try:
             if name in sbe:                                               # stud por elemento (framed soffit)
-                cita = ["2/A-221"]
-                extra = "framed soffit drop studs (2/A-221 \"3 5/8\" @ 16\" O.C. METAL STUD UP TO DECK\") carried in its own row"
+                cita = ["2/A-221", "1/A-121"]
+                ops_ = [f"{r.get('room')}: {str(r.get('operacion')).split(';')[0]}" for r in filas_de("ceilings")
+                        if "framed_soffit" in str(r.get("operacion"))]
+                extra = "Breakdown [DERIVED]: " + " + ".join(ops_) + f" = {_fmt(net)} LF (framed soffit joists, 2/A-221)" if ops_ else \
+                    "framed soffit joists (2/A-221) carried in its own row"
             elif fam and "stud (todos" in fam and unit == "LF":
                 sz = size_de(fam)
                 its = [(w["id"], w["lf"]) for w in so["walls"] if w["stud_size"] == sz and w["lf"]]
                 its += [(r.get("ref"), _val_op(r.get("operacion")) or 0) for r in filas_de(fam)]
                 cita = _nh(*[det.get(i, "") for i, _ in its], *[r.get("source") for r in filas_de(fam)])
                 extra = _desglose(its, net, "LF (per wall: field + jambs + nodes + cripples x height; plus listed elements)", name)
+                pg = {}
+                for i, v in its:
+                    g = walls.get(i, {}).get("gauge") or "elements (gauge in their operation)"
+                    pg[g] = pg.get(g, 0) + float(v)
+                if len(pg) > 1 or any(walls.get(i, {}).get("gauge") for i, _ in its):
+                    extra += " | By gauge (A-410 Metal Stud Schedule): " + "; ".join(f"{g} {_fmt(round(v, 2))} LF" for g, v in pg.items())
             elif fam in ("bottom track (todos)", "top / deflection track (todos)"):
                 k = "bottom_lf" if fam.startswith("bottom") else "top_lf"
                 sz = size_de(name)
@@ -111,6 +122,13 @@ def aplicar(d, out_dir, canon_p):
                 its = [(r["id"][2:], r[k]) for r in ren]
                 cita = _nh(*[det.get(i, "") for i, _ in its])
                 extra = _desglose(its, net, "LF (wall length x rows)", name)
+                pg = {}
+                for i, v in its:
+                    g = walls.get(i, {}).get("gauge")
+                    if g:
+                        pg[g] = pg.get(g, 0) + float(v)
+                if pg:
+                    extra += " | Track gauge = stud gauge (A-410 schedule note 2): " + "; ".join(f"{g} {_fmt(round(v, 2))} LF" for g, v in pg.items())
             elif fam == "bracing C.R. channel":
                 its = [(r["id"][2:], r["bracing_lf"]) for r in co["renglones"] if r.get("bracing_lf")]
                 cita = ["5/A-410"] + _nh(*[det.get(i, "") for i, _ in its])
@@ -136,8 +154,9 @@ def aplicar(d, out_dir, canon_p):
                     cita.append("A-001A")
                 extra = _desglose(its, net, "SF (faces: length x face height x layers - openings; ceilings: RCP area)", name)
             elif fam == "cement board":
-                its = [(c["wall"] + " " + c["room"], c["sf"]) for c in bo["caras"] if "cement" in c["board"]]
-                cita = _nh(*[det.get(c["wall"], "") for c in bo["caras"] if "cement" in c["board"]])
+                its = [(c["wall"] + " " + c["room"], c["sf"]) for c in bo["caras"] if "cement" in c["board"] and c["sf"]]
+                its += items_filas(fam)
+                cita = _nh(*[det.get(c["wall"], "") for c in bo["caras"] if "cement" in c["board"]], *[r.get("source") for r in filas_de(fam)])
                 extra = _desglose(its, net, "SF", name)
             elif fam == "FRT plywood (SF)":
                 mat = "frt_3_4" if "3/4" in name else "frt_5_8"
@@ -147,6 +166,9 @@ def aplicar(d, out_dir, canon_p):
             elif fam in ("FRT blocking", "8\" joist", "8\" stud (todos los gauges)") or fam and fam.startswith("USG") \
                     or fam == "metal trim (corner bead, casing, shadow molding)":
                 its = items_filas(fam)
+                if fam == "FRT blocking":                   # madera sin rótulo FRT va en su renglón propio (v76)
+                    madera = {b["ref"] for b in can.get("blocking_items") or [] if b.get("material") == "wood"}
+                    its = [x for x in its if (x[0] in madera) == name.lower().startswith("blocking 2x wood")]
                 cita = _nh(*[r.get("source") for r in filas_de(fam)])
                 if fam.startswith("USG") or fam in ("8\" joist",):
                     extra = "; ".join(str(r.get("operacion")) for r in filas_de(fam))[:600] or \
@@ -158,6 +180,8 @@ def aplicar(d, out_dir, canon_p):
             elif "hanger" in name.lower():
                 hp = fo.get("hanger_pcs") or {}
                 its = [(x["room"], x["lf"] if unit == "LF" else x["pcs"]) for x in hp.get("por_room") or []]
+                if unit == "LF":
+                    its += items_filas("hanger wire")       # v80n: hangers / wires dibujados en el detalle (misc_items)
                 cita = ["5/A-121", "1/A-121"]
                 extra = _desglose(its, net, unit + (" (hangers @ 48\" O.C. x drop to deck per room)" if unit == "LF" else " (one per hanger)"), name)
             elif fam in ("furring channel", "carrying channel"):
@@ -198,13 +222,15 @@ def aplicar(d, out_dir, canon_p):
                     extra = "; ".join(dict.fromkeys(str(r.get("operacion")) for r in rs if r.get("operacion")))[:500]
             else:
                 rs = filas_de(fam) if fam else []
-                cita = _nh(src0, *[r.get("source") for r in rs])
+                cita = _nh(src0, *[r.get("source") for r in rs]) or \
+                    list(dict.fromkeys(RX_HOJA.findall(" ".join(str(r.get("source")) for r in rs))))
                 its = items_filas(fam) if fam else []
+                ops = "; ".join(dict.fromkeys(str(r.get("operacion")) for r in rs if r.get("operacion")))
                 if its:
                     try:
-                        extra = _desglose(its, net, unit, name)
+                        extra = _desglose(its, net, unit, name) + (f" | {ops[:700]}" if len(its) <= 3 else "")
                     except ValueError:
-                        extra = "; ".join(dict.fromkeys(str(r.get("operacion")) for r in rs if r.get("operacion")))[:500]
+                        extra = ops[:500]
         except ValueError:
             raise
         src = str(m.get("source") or "")
@@ -227,7 +253,8 @@ def aplicar(d, out_dir, canon_p):
     def nota(row):
         ids = [i for i in str(row["wall"]).split("+") if i in walls]
         L_, H_, ly = float(row["length_lf"]), float(row["height_ft"]), float(row["layers"] or 0)
-        if abs(float(row["board_sf"] or 0) - L_ * H_ * ly) <= 0.5 and not any(walls[i].get("faces_note") for i in ids):
+        if abs(float(row["board_sf"] or 0) - L_ * H_ * ly) <= 0.5 and abs(ly - round(ly)) < 0.01 \
+                and not any(walls[i].get("faces_note") for i in ids):
             return None                                  # faces_note del canon: la fila dice siempre qué cara lleva board
         cs = []
         for i in ids:
@@ -243,6 +270,10 @@ def aplicar(d, out_dir, canon_p):
         if ded:
             txt += " (openings deducted per face)"
         return txt
+    def gauge(row):                                  # v80n (R80e.27): gauge del schedule en la columna Stud Size
+        gs = [walls[i].get("gauge") for i in str(row["wall"]).split("+") if i in walls and walls[i].get("gauge")]
+        return " / ".join(dict.fromkeys(gs)) or None
     for k in ("walls", "other_framing"):
-        d[k] = [dict(w, faces_note=nota(w)) if nota(w) else w for w in d.get(k) or []]
+        d[k] = [dict(w, **({"faces_note": nota(w)} if nota(w) else {}), **({"gauge": gauge(w)} if gauge(w) else {}))
+                for w in d.get(k) or []]
     return d

@@ -180,7 +180,7 @@ if REV5:   # rev5: auditoría final rev4 (AUDITORIA_rev4/CERTIFICADO_AUDITORIA.m
     _fs = {m['ref']: m['qty'] for m in c.get('misc_items') or [] if m['ref'].startswith('FIRESTOP')}
     _fst = round(sum(_fs.values()), 2)
     _aht = _fam.get('additional head track', 0)
-    A5 = 'audit rev4 (AUDITORIA_rev4/COMPARATIVA_AUDITORIA.xlsx row {}), rev5: '
+    A5 = 'audit rev4 row {} (rev5): '
     OV5 = {
      'RFI-11': None,
      'RFI-12': (None, None),
@@ -240,6 +240,74 @@ if os.environ.get('REV6') == '1':   # rev6: investigación W.R. / FRT (investiga
             r[k] = r[k].replace('Applied (rev5)', 'Applied (rev6)')
     rfis.append({'id': 'RFI-37', 'pregunta': 'CLOSED - resolved from the plan (rev6): the Sales / Cafe faces of C-H1-N and C-H2a are 5/8" gypsum board only. G/A-221 draws one layer on the Sales Floor side ("5/8" GYPSUM BOARD"); C-H1-N Sales face = Sales Area 101 PAINTED GYP. BD. (A-510); C-H2a Cafe face = PT-3 painted wall around door 3 (1/A-225 finish plan, 5/A-226A Cafe Service Line Elevation); the narrow WD-1 left of the door is the type I return C-I-P.1 (already carried). Evidence: investigacion_WR_FRT/ images 12-14.',
                  'delta': 'Applied: - 951.75 SF 5/8" FRT plywood (C-H1-N A 25.90 x 25.0 = 647.50 + C-H2a B 12.17 x 25.0 = 304.25), carried since rev0; GWB on those faces unchanged.'})
+
+REV7 = os.environ.get('REV7') == '1'
+if REV7:   # rev7: Paso 12 sobre rev6 (PASO12_rev6/CERTIFICADO_PASO12.md, MATRIZ_COBERTURA.xlsx; regla v80j)
+    _fam = fo['familias']
+    MI = {m['ref']: m for m in c.get('misc_items') or []}
+    _cmq = round(sum(m['qty'] for k, m in MI.items() if k.startswith('CROSS-MEMBERS')), 2)
+    P7 = 'Paso 12 (rev7): '
+    OV7 = {
+     'RFI-34': ('CLOSED - ' + P7 + 'T.O. WD-1 at the Grab & Go header = 15\'-0" (5/A-226A 11\'-0" + 4\'-0" WD-1; 6/A-226A 15\'-0"). 3/A-221: 5/8" FRT plywood full face, 5/8" GWB over it above T.O. WD-1.',
+                'Applied: + 6.167 x 10.0 = 61.67 SF 5/8" Type X (15\'-0" to deck); FRT plywood unchanged (110.49 SF).'),
+     'RFI-12': ('CLOSED (base) / OPEN (installer of tile) - ' + P7 + '22/A-201 Tile Base Detail prints "5/8" CEMENT BOARD" with "1\'-2" CEMENT BOARD BASE" and 5/8" W.R. GYP. BD. above (A-001A Div 09 J.2). Corridor 110 wall tile (A-510) backer: not detailed.',
+                f"Applied: + {MI['RESTROOM-BASE-CEMENT']['qty']} SF cement board base on the restroom faces of new walls and the same SF out of W.R. Open: Corridor 110 wall tile backer - each 1 ft of tile height = {_flf('Corridor 110')} SF cement board instead of Type X."),
+     'RFI-13': ('FRP-1 (A-510): Cafe Work Room 104 FRP-1 full height to the 10\'-0" ceiling (1-4/A-226B); Janitor 107 FRP-1 to 96" A.F.F. (A-131) / 8\'-0" (9-12/A-200). Who furnishes / installs the FRP is not defined (A-002). Substrate: E/A-221 and G/A-221 call 5/8" FRT plywood on the Work Room faces; 3/A-225 draws a dotted (board) fill - conflict. Not carried - ' + P7 + 'heights corrected.',
+                'If FRP is in our scope: Cafe Work Room 87.52 LF x 10.0 = 875.20 SF + Janitor 19.43 LF x 8.0 = 155.44 SF = 1,030.64 SF FRP-1 gross (doors not deducted) + PVC trim (J-mold, inside corners).'),
+     'RFI-35': ('3/A-410 Top Track Detail "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP." (citation corrected from 8/A-410 - ' + P7 + 'C-07): applied to every full-height wall with a ceiling on at least one face (1/A-121); carried; confirm with the GC.',
+                f"Carried per wall (Material Summary breakdown) = {round(sum(m['qty'] for k, m in MI.items() if k.startswith('FIRESTOP-')), 2)} LF; if not required: minus that LF."),
+    }
+    for r in rfis:
+        if r['id'] in OV7:
+            r['pregunta'], r['delta'] = OV7[r['id']]
+        if r['id'] == 'RFI-04':
+            r['pregunta'] = r['pregunta'].replace('8/A-410', '3/A-410') + ' ' + P7 + 'same precedent applied to the Cafe 3-5/8" walls to deck (C-H2a, C-H2b, C-F): 14 ga SJ + 11 diagonal braces = 44.0 LF.'
+            r['delta'] = r['delta'].replace('8/A-410', '3/A-410')
+        if r['id'] == 'RFI-03':
+            r['pregunta'] += ' ' + P7 + 'the elevations also print 21\'-9" V.I.F. at the right end of 2/A-400A and 23\'-8" V.I.F. on A-400B (joists sloping): the B.O. deck range is wider than 24\'-0" to 25\'-7".'
+        if r['id'] == 'RFI-01':
+            r['pregunta'] += ' ' + P7 + 'A-410 types 1, 1A, 1B, 1C label the interior board "5/8" GYP BD BY FUTURE TENANT": EXCLUDED with that citation, consistent with this decision. A-413 7/8A general note "IF SHELVING IS TO BE INSTALLED ON EXISTING WALL, G.C. IS TO REMOVE AND REPLACE GYP. BOARD AS REQUIRED FOR INSTALLATION OF WOOD BLOCKING": inside this patch & repair allowance.'
+        if r['id'] == 'RFI-ACC-stud-reinforcement-mep' or 'stud reinforcement' in r['pregunta'].lower():
+            r['pregunta'] = r['pregunta'].replace('6/A-410 and 7/A-410 penetration details', '6/A-410 and 7/A-410 (pipe firestopping only)')
+        for k in ('pregunta', 'delta'):
+            r[k] = r[k].replace('8/A-410 Top Track Detail', '3/A-410 Top Track Detail').replace('(8/A-410', '(3/A-410').replace(' 8/A-410', ' 3/A-410')
+    NEW7 = [
+     ('RFI-38', 'Ceiling seismic bracing: A-121 Ceiling Notes 1 "SEE A-420 DRAWINGS REGARDING CEILING BRACING" - A-420 is not in the set; 5/A-121 draws splay wires @ 12\'-0" O.C. each way and a 1-5/8" x 16 ga metal joist post; A-002 Div 10 "SEISMIC BRACING" F/I by the tenant contractor. Carried conservatively on the GWB suspended ceilings.',
+      f"Carried: splay wires {MI['SPLAY-WIRES-5-A121']['qty']} LF (hanger wire row) + 1-5/8\" posts {MI['SEISMIC-STRUTS-5-A121']['qty']} LF; if not required (seismic category / A-420): minus both."),
+     ('RFI-39', 'Recessed fire extinguisher cabinets (A-101 C11, A-111 KN 9, 4/A-101 "F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET"): 4 in new walls (W2-01, W2-03 x 2, Cafe Workroom); cabinet width / rough opening not printed (Cosmopolitan fully recessed, Ambassador 1017F10).',
+      'Carried 16.0 LF FRT 2x (4 x (2.0 + 2.0 ft)); each +1 ft of cabinet width = +8.0 LF FRT; jamb studs inside the field studs.'),
+     ('RFI-40', '3/A-410 Top Track Detail: "METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER" with "DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK" read as a nested inner runner at every deflection head. Carried; confirm.',
+      f"Carried {MI['NESTED-RUNNER-3-A410']['qty']} LF nested inner runner; if a single deep leg track is accepted: minus that LF."),
+     ('RFI-41', '8/A-410 Typ. Connection Detail (PARALLEL TO STRUCTURE): full-height walls parallel to the joists (N-S) hang from metal studs spanning joist to joist; joist spacing not printed (A-400A / A-400B).',
+      f"Carried {_cmq} LF (members @ 24\" O.C. along the wall x 5.0 ft assumed joist spacing); each 1 ft of joist spacing = {round(_cmq / 5.0, 2)} LF."),
+     ('RFI-42', '2/A-221 framed soffit drop "CROSS BRACING AS REQ\'D": member / spacing not printed.',
+      f"Carried {MI['SOFFIT-CROSS-BRACING-2-A221']['qty']} LF 3-5/8\" stud (pairs @ 4\'-0\" x 5.0 ft); if not required: minus that LF."),
+     ('RFI-43', 'E/A-221 type E1 (Cafe south wall C-E1-S, C-E1-P.2, C-E1-B): 1/2" cement board height not printed; carried to deck 25\'-0" (studs to deck). The Cafe 9\'-0" GWB band runs along C-E1-S (1/A-121).',
+      'If the cement board stops at 9\'-0" + 6" (A-410 Partition Notes 3): C-E1-S 19.0 x 15.5 = - 294.5 SF, C-E1-P.2 2.11 x 15.5 = - 32.7 SF, C-E1-B 2.31 x 15.5 = - 35.8 SF.'),
+     ('RFI-44', 'H/A-221 "H3a = PLYWOOD TO TOP OF WD-1": T.O. WD-1 on the H3a Sales face not printed (A-225, A-226A). Carried: FRT plywood to deck (25\'-0"), no GWB.',
+      'If T.O. WD-1 = 15\'-0" as on the Grab & Go header (6/A-226A): FRT plywood - 40.8 SF (4.08 x 10.0) and 5/8" Type X + 40.8 SF.'),
+     ('RFI-45', '1/A-221 Workroom door pier (1\'-0" x 2\'-8" HOLD) against H2a with an internal void: the C-H2a Cafe face may be concealed along the pier.',
+      'If concealed: - 2.67 x 25.0 = - 66.7 SF 5/8" Type X on C-H2a (pier faces carried as C-E1-P.2 / C-I-P.1).'),
+     ('RFI-46', 'F/A-221 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING": the nested stud bracing member is not drawn; studs carried to deck (estimator decision RI 7).',
+      f"Carried {MI['F-NESTED-BRACING']['qty']} LF 3-5/8\" (2 nested members); define member / elevation."),
+     ('RFI-47', 'Plywood material / thickness conflicts on A-225: 5/A-225 die wall "3/4" THICK MARINE GRADE PLYWOOD" vs A/A-221, B/A-221 "3/4" FRT PLYWOOD SUBSTRATE" and A-410 "ALL PLYWOOD NEEDS TO BE FRT"; 10/A-225 "1/2" F.R.T. PLYWOOD SUBSTRATE" vs I/A-221, G/A-221, H/A-221 5/8" FRT plywood. Carried as FRT, thickness per the A-221 sections.',
+      'Same SF; material / thickness change only: die wall 63.47 SF marine vs FRT; type I end faces 18.08 SF 1/2" instead of 5/8".'),
+     ('RFI-48', 'Stock room shelving blocking: 7/A-413 "FRT WOOD BLOCKING IN PARTITION" vs 7A/A-413 "SURFACE MOUNT WOOD BLOCKING" (no FRT). Carried in-partition FRT 2x, 3 rows (387 LF).',
+      'Quantity unchanged; if surface-mounted: material / installation method change only (not FRT, no board cut-outs).'),
+     ('RFI-49', '2/A-500 Cased Opening Detail: "WOOD BLOCKING" across the stud return; the number / location of cased openings is not marked on A-101.',
+      'Carried 1 opening x 17.0 LF wood blocking (not labeled FRT); each additional opening + 17.0 LF.'),
+     ('RFI-50', '2/E-103 Server Room: "4\'x8\' FRT PLYWOOD SHEET AND POWER BY GC - ALL OTHER WORK BY OTHERS" (E-301 "fire-rated plywood terminal board"). Carried in the drywall scope (FRT plywood substrate); confirm the trade.',
+      'Carried 32.0 SF 3/4" FRT plywood; if by the electrical contractor: - 32.0 SF.'),
+     ('RFI-51', 'Fastener counts not printed: 7/A-210 3"x3"x16 ga clip angles (count per header end); cement board screw spacing (manufacturer standard 8" O.C. used); plywood screws per A-410 note 8.D (24" field / 12" perimeter on 4x8 sheets).',
+      f"Carried: clip angles 7/A-210 4 pcs; cement board screws {MI['CEMENT-BOARD-SCREWS']['qty']} pcs; plywood screws {MI['PLYWOOD-SCREWS-8D']['qty']} pcs - adjust to the estimator yields."),
+    ]
+    rfis += [{'id': a, 'pregunta': b, 'delta': dd} for a, b, dd in NEW7]
+import re as _re
+_RX_INT = _re.compile(r'\s*\(?(?:evidence|Evidence)?:?\s*\b[\w-]*_[\w-]*/(?:[\w./-]*)?\)?')
+def _limpia(t):
+    return _re.sub(r'\s{2,}', ' ', _RX_INT.sub('', t)).replace(' ;', ';').replace(' .', '.') if isinstance(t, str) else t
+for r in rfis:
+    r['pregunta'], r['delta'] = _limpia(r['pregunta']), _limpia(r['delta'])
 d.update({'rfis': rfis, 'revisar': revisar})
 alc_p = K + '/etapas/alcances_estado.json'
 try:
@@ -261,6 +329,29 @@ if REV5 and d.get('alcances'):
      'ALC-04': f"Bottom track and top / deflection track = partition LF per type (A-101, A-221; 2/A-410, 3/A-410); + fire stop track at ceiling line {_fst:.2f} LF (8/A-410, RFI-35) and additional head track {_aht:.2f} LF (RFI-31); M-302 (p51) mention is plumbing expansion fittings",
      'ALC-20': "Cement board at wet walls (A-510 tile finishes, RFI-12 incl. Corridor 110 wall tile); FRP-1 extent RFI-13 / RFI-22 not carried",
     }
+    if os.environ.get('REV7') == '1':
+        N5['ALC-24'] = 'QUANTIFIED: Level 4 finish printed - A-001A Div 09 A.8 "PROVIDE AT A MINIMUM A LEVEL 4 FINISH" (joint compound / tape yields per Inputs); no Level 5 (A-510).'
+        N5['ALC-02'] = 'NOT APPLICABLE (rev1, estimator decision RFI-01): perimeter walls types 1 / 1A / 1B / 1C are existing; their interior board is labeled "5/8" GYP BD BY FUTURE TENANT" on 1, 1A, 1B, 1C/A-410 - EXCLUDED with that citation.'
+        N5['ALC-06'] = N5['ALC-06'].replace('8/A-410', '3/A-410') + ' + 2" x 2" 16 ga clip angles at every stud per bracing row (5/A-410) and 2/A-221 soffit cross bracing (RFI-42).'
+        N5['ALC-04'] = N5['ALC-04'].replace('8/A-410', '3/A-410') + '; nested inner runner at deflection heads (3/A-410, RFI-40); X-EDNI fasteners 8.C; cross members at walls parallel to joists (8/A-410 Typ. Connection, RFI-41).'
+        N5['ALC-17'] = 'RFI: access panels RFI-30; recessed FE cabinets framed per 4/A-101 (FRT header + base, RFI-39); no framed MEP opening drawn in GWB walls (A-121, M-102, P-101A).'
+        N5['ALC-12'] = N5['ALC-12'] + '; Grab & Go GWB ceiling 7\'-1" added; additional hangers at light fixtures and seismic splay wires per 5/A-121 (RFI-38); 16 ga tie wire (5/A-121) = consumable of the furring / carrying install, no separate row.'
+        N5['ALC-18'] = 'Metal trim (corner bead, J-bead) per A-410, A-121, A-510 Finish Notes 8 (incl. soffit bottom edges 65.31 LF); no control joint printed (RFI-24).'
+        for x in d['alcances']:
+            if x['id'] in ('ALC-24', 'ALC-17'):
+                x['estado'] = 'CUANTIFICADO' if x['id'] == 'ALC-24' else x['estado']
+        d['alcances'] += [
+         {'id': 'ALC-X26', 'nombre': 'Acoustical lay-in ceilings ACT-1 / ACT-3 (tile + Prelude XL grid + wires)', 'estado': 'NO APLICA',
+          'nota': 'EXCLUDED: Div 09 51 acoustical ceilings by the ACT contractor - A-002 lists "ACOUSTICAL CEILING SYSTEM" as its own line (F/I tenant contractor); ACT-1 Cafe Workroom 10\'-0", ACT-3 Corridor, Break Room, Manager\'s Office 9\'-0" (1/A-121, A-510 finish legend); ACT portion of 5/A-121. Wall board heights use these ceilings + 6".'},
+         {'id': 'ALC-X27', 'nombre': 'Unistrut space frame / strut channel', 'estado': 'NO APLICA',
+          'nota': 'EXCLUDED: A-001A Div 05 D "UNISTRUT SPACE FRAME GRID SYSTEM ... AS REQUIRED FOR LIGHTING, CEILING ACCESSORIES OR MECHANICAL SYSTEMS SUSPENSION" and A-002 cafe signage "STRUT CHANNEL" = lighting / sign / MEP supports by those trades; the sign blocking is carried (4/A-226A menu boards).'},
+         {'id': 'ALC-X28', 'nombre': 'Caulk at the base of wet-area walls', 'estado': 'NO APLICA',
+          'nota': 'EXCLUDED: A-101 general note 8 "BOTTOM OF THE WALL CAULKED AT FLOOR LEVEL" = joint sealant (Div 07), excluded like all sealants (estimator standing order).'},
+         {'id': 'ALC-X29', 'nombre': 'Partition seismic bracing (A-002 Div 10)', 'estado': 'NO APLICA',
+          'nota': 'EXCLUDED as a separate item: A-002 Div 10 "SEISMIC BRACING" is listed with the specialties; partition lateral bracing is carried per 5/A-410 and 3/A-410; ceiling bracing per 5/A-121 carried under RFI-38.'},
+         {'id': 'ALC-X30', 'nombre': 'Remove & replace existing GWB for shelving blocking (7/A-413)', 'estado': 'RFI',
+          'nota': 'Inside the RFI-01 patch & repair allowance (existing perimeter walls): A-413 general note "G.C. IS TO REMOVE AND REPLACE GYP. BOARD AS REQUIRED FOR INSTALLATION OF WOOD BLOCKING".'},
+        ]
     for x in d['alcances']:
         if x['id'] in N5:
             x['nota'] = N5[x['id']]

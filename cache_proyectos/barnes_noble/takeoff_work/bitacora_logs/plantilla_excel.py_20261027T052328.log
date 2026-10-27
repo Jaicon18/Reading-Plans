@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 1463, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 1444, in main
+    print("OK", a[2], "-", armar(d, a[2], trabajo))
+                           ~~~~~^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py", line 444, in armar
+    d = trazabilidad.aplicar(d, ctx.out_dir, reglas.buscar_canon(trabajo))
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/trazabilidad.py", line 153, in aplicar
+    extra = _desglose(its, net, "SF (faces: length x face height x layers - openings; ceilings: RCP area)", name)
+  File "/tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/trazabilidad.py", line 43, in _desglose
+    raise ValueError(f"trazabilidad: desglose de '{ctx}' suma {tot} != NET {net}")
+ValueError: trazabilidad: desglose de '5/8" gypsum board, Type X' suma 15107.6 != NET 15109.29
