@@ -428,6 +428,8 @@ if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
         if r['id'] == 'RFI-51':
             r['delta'] = r['delta'].replace('Framing screws count the stud pieces of the walls and column wraps (781); the detail members (braces, cross members, bracing) add about + 724 screws. ',
                                             'Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; the other detail members (braces, bracing clips) are in the Tek screw row. ')
+            r['delta'] = r['delta'].replace('= - 640.61 pcs', '= - 518.29 pcs (518.29 LF of interior bottom track on slab)')
+            r['delta'] = r['delta'].replace('the other detail members (braces, bracing clips) are in the Tek screw row. ', '5/A-410 bracing clips are in the Tek screw row; diagonal brace end screws (3/A-410) are not printed and not carried (if 2 per end: + 512 #8). ')
     d['rfis'].append({'id': 'RFI-54', 'pregunta': 'Ceiling perimeter track at the suspended GWB ceilings (Women\'s 109, Men\'s 108, Cafe 103 bands 11\'-6" and 9\'-0", Grab & Go 7\'-1"): 5/A-121 draws the perimeter attachment but prints no track size; the stud size of the wall it attaches to varies.',
                       'delta': f"Carried {_fam.get('track de ceilings / soffits', 0):,.2f} LF in its own row (size not printed). If the perimeter is the USG angle molding DGWM24 already carried: - {_fam.get('track de ceilings / soffits', 0):,.2f} LF of track; if 3-5/8\" track: no LF change (price only)."})
     for x in d.get('alcances') or []:
@@ -441,6 +443,7 @@ if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
         t = _re9.sub(r'\s*[-(]?\s*(?:rev\d )?plan check(?: rev\d)?(?: C7?-\d+(?:\s*/\s*C7?-\d+)*)?\s*[:)]?', '', t, flags=_re9.I)
         t = _re9.sub(r'Plan check \(rev\d\):\s*(?:C7?-\d+\.?\s*)?', '', t)
         t = _re9.sub(r'\(rev\d\):\s*C7?-\d+\.?', '.', t).replace(').. ', '). ')
+        t = _re9.sub(r'(?<=[.;])\s*\(rev\d\):\s*', ' ', t)
         t = _re9.sub(r'\(\s*\)', '', t).replace('skill default criterion', 'take-off criterion (not printed)').replace('skill default', 'take-off default (not printed)')
         return _re9.sub(r'\s{2,}', ' ', t)
     def _walk9(o):
