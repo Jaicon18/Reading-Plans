@@ -1220,9 +1220,20 @@ if REV8:
     ncl5 = [m for m in misc if m['ref'] == 'CLIP-ANGLES-5-A410'][0]['qty']
     # 7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16" O.C" (top + bottom runner) on the 12.667 ft nested header (6/A-210)
     import math as _m7
+    # 7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16" O.C" (top + bottom runner), header 12'-8" (1/A-210 front chain 152")
     nrt = 2 * 2 * (_m7.ceil(12.667 / (16 / 12)) + 1)
-    misc.append({'ref': 'TEK-SCREWS-CLIPS', 'familia': 'Tek screws at clip angles', 'qty': ncl5 * 4 + 16 + nrt, 'unit': 'PCS', 'source': '5/A-410; 7/A-210; A-410 note 8.A',
-                 'op': f'5/A-410 "2\" x 2\" 16 GA. CLIP ANGLE ... (4) TEK SCREWS": {ncl5} clips x 4 = {ncl5 * 4} + 7/A-210 "(4) #10-16 SCREWS": 4 clips x 4 = 16 + 7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16\" O.C" top and bottom runner: 2 runners x 2 x (ROUNDUP(12.667 / 1.333) + 1) = {nrt}; total {ncl5 * 4 + 16 + nrt} pcs. Size: 5/A-410 prints none; the clip is 16 ga, so A-410 note 8.A "18/16 GAUGE - #10 - 16 X 3/4\" TEKS" applies (7/A-210 prints #10-16)',
+    # 8/A-210 "(8) #10-16 TEKS 16"O.C., TYP." on the nested beam (12.667 ft) and the 6 nested columns (10.5 ft)
+    nnb = (_m7.ceil(12.667 / (16 / 12)) + 1) * 8
+    nnc = 6 * (_m7.ceil(10.5 / (16 / 12)) + 1) * 8
+    # 7/A-210 "HEAD ATTACHMENT SEE DETAIL" clip with "#10-16 TEK SCREWS (TYP.)": 8 drawn per clip, one clip per header end (count not printed - RFI-51)
+    nha = 2 * 8
+    tot = ncl5 * 4 + 16 + nrt + nnb + nnc + nha
+    misc.append({'ref': 'TEK-SCREWS-CLIPS', 'familia': 'Tek screws at clip angles', 'qty': tot, 'unit': 'PCS', 'source': '5/A-410; 7/A-210; 8/A-210; 1/A-210; A-410 note 8.A',
+                 'op': (f'5/A-410 "2\" x 2\" 16 GA. CLIP ANGLE ... (4) TEK SCREWS": {ncl5} clips x 4 = {ncl5 * 4} + 7/A-210 "(4) #10-16 SCREWS": 4 clips x 4 = 16 + '
+                        f'7/A-210 "RUNNER TRACK ATTACHED TO HEADER SUING (2) TEK SCREWS AT 16\" O.C" top and bottom runner: 2 runners x 2 x (ROUNDUP(12.667 / 1.333) + 1) = {nrt} + '
+                        f'8/A-210 "(8) #10-16 TEKS 16\"O.C., TYP.": nested beam (ROUNDUP(12.667 / 1.333) + 1) x 8 = {nnb} + nested columns 6 x (ROUNDUP(10.5 / 1.333) + 1) x 8 = {nnc} + '
+                        f'7/A-210 head attachment "#10-16 TEK SCREWS (TYP.)": 2 clips x 8 = {nha}; total {tot} pcs. Header 12\'-8\" = 1/A-210 front dimension chain (152\"). '
+                        'Size: 5/A-410 prints none; the clip is 16 ga, so A-410 note 8.A "18/16 GAUGE - #10 - 16 X 3/4\" TEKS" applies (7/A-210 and 8/A-210 print #10-16)'),
                  'img': '../../PASO12_rev6/img/A-410_5-lateral-bracing-clip-angle.png'})
     # N-01: types 3 / 4 "3 5/8" METAL STUDS @ 16" O.C. TO BOTTOM OF NESTED STUD BRACING" (same phrase as F/A-221) - RFI-46
     t34 = [(w['id'], w['length_ft']) for w in walls['A-101'] if w['tag'] in ('3', '4')]
