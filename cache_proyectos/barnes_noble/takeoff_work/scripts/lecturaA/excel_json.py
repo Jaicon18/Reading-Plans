@@ -151,6 +151,16 @@ for i, (fa, t, o, p, h) in enumerate(REV, 1):
     else: x['orden_plano'] = o
     revisar.append(x)
 d = json.load(open(K + '/takeoff.json'))
+if os.environ.get('REV4') == '1':   # rev4: RFIs abiertos respondidos por el estimador
+    R4 = 'CLOSED - estimator answer (rev4): '
+    OV4 = {'RFI-14': (R4 + 'Cafe soffit bottom = 11\'-0" (A-121 RCP governs over 1/A-226A 9\'-0"); north face sign band WD-1 top = 15\'-0" (same as east face, 6/A-226A). Both faces: WD-1 11\'-0" to 15\'-0" with 5/8" FRT plywood behind; GWB above to deck and at the soffit bottom (2/A-221).',
+                      'Applied: SS-N FRT 22.77 x 4.0 = 91.08 SF (rev3 45.54 at 9\'-0"/11\'-0"); SS-N GWB 14 -> 10 ft; SS-E unchanged (FRT 40.48 SF, GWB 10 ft).'),
+           'RFI-16': (R4 + 'vestibule post sheathing = 3/4" FRT plywood, 4 faces, full height (5/A-210 "5/8 GYP. BOARD SHEATHING AS REQUIRED" -> estimator: plywood).',
+                      'Applied: 6 posts x 4 faces x 5" x 10.5 ft = 105.0 SF 3/4" FRT plywood (6 posts per 1/A-210).'),
+           'RFI-17': (R4 + 'column surrounds C25 stud spacing = 16" O.C. (as carried); count 9.', 'none (as carried)')}
+    for r in rfis:
+        if r['id'] in OV4:
+            r['pregunta'], r['delta'] = OV4[r['id']]
 if os.environ.get('REV3') == '1':   # rev3: textos finales con las cifras vigentes (después de REV2)
     _fam = fo['familias']; _wr = _fam.get(chr(53) + '/8" gyp Type X W.R.', 0); _tx = _fam.get(chr(53) + '/8" gyp board Type X', 0)
     for r in rfis:

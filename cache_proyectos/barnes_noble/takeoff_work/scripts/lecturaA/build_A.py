@@ -4,6 +4,7 @@ import json, os, math, re
 BN = '/home/user/Reading-Plans/cache_proyectos/barnes_noble'
 FINAL = os.environ.get('MODO') == 'final'
 REV3 = os.environ.get('REV3') == '1'
+REV4 = os.environ.get('REV4') == '1'
 OUT = BN + '/takeoff_work/etapas/2_lectura/A'
 OUT_W = BN + '/takeoff_work/etapas/4_canon/fragmentos' if FINAL else OUT
 wc = {w['wall_id']: w for w in json.load(open(BN + '/walls_coords.json'))['walls']}
@@ -856,7 +857,14 @@ if REV3:
                            'op': f"{w['length_ft']} LF x 4.0 ft (WD-1 11'-0\" to 15'-0\", printed 4'-0\" band, 6/A-226A; rev3 RI 9)"})
             for f in w.get('faces') or []:
                 f['height_ft'] = 10.0; f['height_source'] = "GWB above WD-1 15'-0\" to deck 25'-0\" (2/A-221; rev3 RI 9)"
-        if w['id'] == 'SS-N':
+        if w['id'] == 'SS-N' and REV4:   # rev4 RFI-14 (estimator): soffit 11'-0" (A-121); WD-1 11'-0" -> 15'-0" as the east face
+            strips.append({'ref': 'SS-N-WD1-FRT', 'wall': 'SS-N', 'lf': w['length_ft'], 'width_ft': 4.0, 'material': 'frt_5_8', 'uso': 'substrate',
+                           'label': '5/8" F.R.T. PLYWOOD behind WD-1 (2/A-221)', 'source': '1/A-226A', 'room': 'Cafe 103',
+                           'img': '../../ri09_soffit/4_A-221_bubble_1-A226A_looks_south_north_face.png',
+                           'op': f"{w['length_ft']} LF x 4.0 ft (WD-1 11'-0\" to 15'-0\": soffit bottom 11'-0\" per A-121 governs, top 15'-0\" as east face 6/A-226A - estimator decision RFI-14, rev4)"})
+            for f in w.get('faces') or []:
+                f['height_ft'] = 10.0; f['height_source'] = "GWB above WD-1 15'-0\" to deck 25'-0\" (2/A-221; RFI-14 rev4)"
+        elif w['id'] == 'SS-N':
             strips.append({'ref': 'SS-N-WD1-FRT', 'wall': 'SS-N', 'lf': w['length_ft'], 'width_ft': 2.0, 'material': 'frt_5_8', 'uso': 'substrate',
                            'label': '5/8" F.R.T. PLYWOOD behind WD-1 (2/A-221)', 'source': '1/A-226A', 'room': 'Cafe 103',
                            'img': '../../ri09_soffit/4_A-221_bubble_1-A226A_looks_south_north_face.png',
@@ -886,6 +894,10 @@ if REV3:
         ('VEST-POSTS-TRACK', 'track de ceilings / soffits', 5.0, '6/A-210', 'NESTED COLUMN 3-5/8" x 16 GA top & bottom track 6 x 2 x 5" = 5.0 LF'),
         ('VEST-GWB', '5/8" gyp board Type X', 105.5, '4/A-210', '(1) LAYER OF 5/8" GYP. BD.: ceiling 7.667 x 12.667 = 97.1 SF + box beam faces 12.667 x 8" = 8.4 SF = 105.5 SF (Type X per rev2)')):
         misc.append({'ref': ref, 'familia': fam_, 'qty': q, 'unit': 'SF' if 'gyp' in fam_ else 'LF', 'source': src, 'op': op, 'img': VB})
+    if REV4:   # RFI-16 (estimator): posts 3/4" FRT plywood, 4 faces, full height
+        strips.append({'ref': 'VEST-POSTS-PLYWOOD', 'wall': 'VESTIBULE', 'lf': 10.0, 'width_ft': 10.5, 'material': 'frt_3_4', 'uso': 'substrate',
+                       'label': '3/4" FRT plywood post sheathing (5/A-210 "SHEATHING AS REQUIRED"; estimator: plywood, 4 faces)', 'source': '5/A-210', 'room': 'Vestibule 100',
+                       'img': VB, 'op': '6 posts x 4 faces x 5" (= 10.0 LF) x 10.5 ft = 105.0 SF (estimator decision RFI-16, rev4)'})
     strips.append({'ref': 'VEST-PLYWOOD', 'wall': 'VESTIBULE', 'lf': 12.667, 'width_ft': 8.417, 'material': 'frt_3_4', 'uso': 'substrate',
                    'label': 'ONE LAYER OF 3/4" PLYWOOD (FRT per A-410 "ALL PLYWOOD NEEDS TO BE FRT")', 'source': '4/A-210', 'room': 'Vestibule 100',
                    'img': VB, 'op': '12.667 x 8.417 (8\'-5" E-W, 1/A-210) = 106.6 SF (rev3 RI 11)'})
