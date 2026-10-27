@@ -2474,3 +2474,6 @@ la tool (no en el dato) y queda como regla genérica (sin números de proyecto).
 
 ### R80e.30 — Gasto de tokens (usuario 27-oct, todos los proyectos)
 Nunca repetir trabajo sin provecho. Pasos 11/12: una pasada completa por revisión; los hallazgos se corrigen y se verifican SOLO los ítems cambiados (revisión dirigida), no otra pasada completa. No releer ni recalcular lo que está en caché. Reportes cortos.
+
+### R80e.33 — Código del trade cuando el plano no responde (usuario 27-oct, REGLA INVIOLABLE, todos los proyectos)
+Si el plano no da la respuesta: aplicar SIEMPRE el código/norma del trade (drywall ASTM C840 / GA-216 / UL; metal frame AISI S220/S240, ASTM C754, fabricante; IBC/ASCE 7 sísmico; NFPA/UL firestop). Se carga con cita del código; RFI solo si el código no lo cubre o hay conflicto. Al cerrar la revisión de RFI de un proyecto, cada decisión del estimador pasa a regla general del skill.
