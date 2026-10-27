@@ -407,5 +407,47 @@ if REV5 and d.get('alcances'):
             if os.environ.get('REV6') == '1':
                 x['nota'] = x['nota'].replace('(rev5)', '(rev6)')
 
+if os.environ.get('REV9') == '1':   # rev9: plan check rev8 C8-01..C8-08
+    import math as _m9, re as _re9
+    MI9 = {m['ref']: m for m in c.get('misc_items') or []}
+    W9 = [w for w in c['walls'] if w.get('element') in ('wall', 'soffit_side') and float(w['height_ft']) >= 13.5]
+    nx5 = sum(_m9.ceil(float(w['length_ft']) / 5.0 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'H')
+    nx4 = sum(_m9.ceil(float(w['length_ft']) / 4.0 - 1e-9) + 1 for w in W9 if w['band']['ori'] == 'H')
+    t34 = round(sum(float(w['length_ft']) for w in c['walls'] if w.get('tag') in ('3', '4') and w.get('sheet') == 'A-101'), 2)
+    for r in d['rfis']:
+        if r['id'] == 'RFI-28':
+            r['pregunta'] = r['pregunta'].replace('Not carried (expansion anchors 0).', 'Not carried (expansion anchors 0); their bottom track is not on slab pins (3/A-410, 4/A-410 "3 5/8\" X 20GA TRACK W/ (2)-1/4\"ø X 1 5/8\" HILTI KWIK HUSEZ CONCRETE SCREW AND MOMENT CLIP - SEE DETAIL").')
+            r['delta'] += f' + 324 #10-16 screws (A/A-410 "(1) #10-16 SCREW @ EACH FLANGE": 162 clips x 2). Slab pins already exclude the {t34} LF of type 3 / 4 track.'
+        if r['id'] == 'RFI-41':
+            r['delta'] += (f" #8 screws (8/A-410) carried in their own row ({MI9['SCREWS-8-A410']['qty']} pcs) with joists at 5'-0\": one screw per joist crossing on the walls "
+                           f"perpendicular to the joists = {nx5}; at 4'-0\" spacing: + {nx4 - nx5} pcs.")
+        if r['id'] == 'RFI-51':
+            r['delta'] = r['delta'].replace('Framing screws count the stud pieces of the walls and column wraps (781); the detail members (braces, cross members, bracing) add about + 724 screws. ',
+                                            'Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; the other detail members (braces, bracing clips) are in the Tek screw row. ')
+    d['rfis'].append({'id': 'RFI-54', 'pregunta': 'Ceiling perimeter track at the suspended GWB ceilings (Women\'s 109, Men\'s 108, Cafe 103 bands 11\'-6" and 9\'-0", Grab & Go 7\'-1"): 5/A-121 draws the perimeter attachment but prints no track size; the stud size of the wall it attaches to varies.',
+                      'delta': f"Carried {_fam.get('track de ceilings / soffits', 0):,.2f} LF in its own row (size not printed). If the perimeter is the USG angle molding DGWM24 already carried: - {_fam.get('track de ceilings / soffits', 0):,.2f} LF of track; if 3-5/8\" track: no LF change (price only)."})
+    for x in d.get('alcances') or []:
+        if x['id'] == 'ALC-04':
+            x['nota'] = x['nota'].replace('X-EDNI fasteners 8.C', '8/A-410 #8 pan head screws + P.A.F. + #8 screws (own rows); X-EDNI 8.C = alternative in RFI-51')
+            x['nota'] = _re9.sub(r'fire stop track at ceiling line [0-9.,]+ LF', 'fire stop track at ceiling line (own rows by size, 3/A-410)', x['nota'])
+    # C8-07: no plan-check item codes in client texts (R80e.29 d)
+    def _cl9(t):
+        if not isinstance(t, str):
+            return t
+        t = _re9.sub(r'\s*[-(]?\s*(?:rev\d )?plan check(?: rev\d)?(?: C7?-\d+(?:\s*/\s*C7?-\d+)*)?\s*[:)]?', '', t, flags=_re9.I)
+        t = _re9.sub(r'Plan check \(rev\d\):\s*(?:C7?-\d+\.?\s*)?', '', t)
+        t = _re9.sub(r'\(rev\d\):\s*C7?-\d+\.?', '.', t).replace(').. ', '). ')
+        t = _re9.sub(r'\(\s*\)', '', t).replace('skill default criterion', 'take-off criterion (not printed)').replace('skill default', 'take-off default (not printed)')
+        return _re9.sub(r'\s{2,}', ' ', t)
+    def _walk9(o):
+        if isinstance(o, dict):
+            return {k: _walk9(v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [_walk9(v) for v in o]
+        return _cl9(o)
+    for k9 in ('rfis', 'revisar', 'alcances', 'materials', 'inputs_notas'):
+        if k9 in d:
+            d[k9] = _walk9(d[k9])
+
 json.dump(d, open(K + '/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print(len(rfis), 'rfis', braces, 'braces', rfi01, lf25, lf_cp, hdr, wet_sf, full_sf)

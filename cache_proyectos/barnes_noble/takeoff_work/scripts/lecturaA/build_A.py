@@ -1253,6 +1253,57 @@ if REV7:   # fasteners de plywood (8.D) y de cement board, sobre las cantidades 
     misc.append({'ref': 'CEMENT-BOARD-SCREWS', 'familia': 'cement board screws', 'qty': ncb, 'unit': 'PCS', 'source': 'E/A-221; A/A-221; B/A-221; C/A-221; D/A-221; 22/A-201',
                  'op': f'cement board screws @ 8" O.C. on studs @ 16" (manufacturer standard, spacing not printed - RFI-51): 3x5 board = 4 studs x 8 = 32 screws / 15 SF; {csf} SF x 32/15 = {ncb} pcs'})
 
+# ---------------------------------------------------------------- REV9 (plan check rev8: C8-01..C8-08, regla v80j + R80e.30)
+REV9 = os.environ.get('REV9') == '1'
+SPLITS9 = []
+if REV9:
+    import math as _m9, re as _re9
+    P6I = '../../PASO12_rev6/img/'
+    # C8-01: 3/A-410, 4/A-410 "3 5/8" X 20GA TRACK W/ (2)-1/4"ø X 1 5/8" HILTI KWIK HUSEZ CONCRETE SCREW AND MOMENT CLIP - SEE DETAIL"
+    # (A/A-410): that track is not on slab pins (note 8.F); the anchors stay in RFI-28
+    for w in walls['A-101']:
+        if w['tag'] in ('3', '4'):
+            w['anchorage'] = {'value': 'other', 'source': f"{w['tag']}/A-410; A/A-410 (Kwik HUS-EZ + moment clip, RFI-28)"}
+    # C8-03: 8/A-410 #8 screws: "ATTACH TO TOP CORD OF EXIST'G STRUCTURE W/ #8 SCREWS" (both conditions),
+    # PARALLEL "(2) #8 SCREW AT EACH STUD" and "ATTACH TO TRACK W/ #8 SCREWS AT 24" O.C."
+    wb9 = {w['id']: w for sh in walls for w in walls[sh]}
+    FH9 = [w for w in wb9.values() if w.get('element') in ('wall', 'soffit_side') and float(w['height_ft']) >= 13.5]
+    ncm9 = sum(_m9.ceil(float(w['length_ft']) / 2.0 - 1e-9) + 1 for w in FH9 if w['band']['ori'] == 'V')
+    lh9 = round(sum(float(w['length_ft']) for w in FH9 if w['band']['ori'] == 'H'), 2)
+    nx9 = sum(_m9.ceil(float(w['length_ft']) / 5.0 - 1e-9) + 1 for w in FH9 if w['band']['ori'] == 'H')
+    n8s = 2 * ncm9 + ncm9 + 2 * ncm9 + nx9
+    misc.append({'ref': 'SCREWS-8-A410', 'familia': '#8 screws, top chord / cross members (typ. connection)', 'qty': n8s, 'unit': 'PCS', 'source': 'TYPCONN/A-410',
+                 'op': (f'TYPCONN/A-410 PARALLEL TO STRUCTURE: "(2) #8 SCREW AT EACH STUD" {ncm9} cross members x 2 = {2 * ncm9} + "ATTACH TO TRACK W/ #8 SCREWS AT 24\" O.C." '
+                        f'sum(ROUNDUP(L / 2) + 1) over the walls parallel to the joists = {ncm9} + "ATTACH TO TOP CORD OF EXIST\'G STRUCTURE #8 SCREWS" {ncm9} cross members x 2 ends = {2 * ncm9}; '
+                        f'PERPENDICULAR TO STRUCTURE: "ATTACH TO TOP CORD OF EXIST\'G STRUCTURE W/ #8 SCREWS" one per joist crossing, sum(ROUNDUP(L / 5.0) + 1) over {lh9} LF '
+                        f'= {nx9} (joist spacing 5\'-0" not printed, same assumption as the cross members - RFI-41); total {n8s} pcs'),
+                 'img': '../../PASO12_rev7/img/A-410_8_typ-connection-8-screws-24OC-PAF.png'})
+    # C8-04: the ceiling / soffit track row is split by size (8/A-210, 4/A-210, 3/A-410, 2/A-221, 3/A-221)
+    t36 = ['SS-N', 'SS-E', 'SS-IN-N', 'SS-IN-E', 'VEST-POSTS-TRACK']
+    t6 = ['SS-GG', 'VEST-BOX-BEAM-TRACK']
+    for m in misc:
+        if m['ref'].startswith('FIRESTOP-') and m['familia'] == 'track de ceilings / soffits':
+            (t6 if ': 6" track' in m['op'] else t36).append(m['ref'])
+    SPLITS9 = [{'from': 'track de ceilings / soffits', 'to': 'ceiling / soffit track 3-5/8"', 'items': t36,
+                'source': '3/A-410 (fire stop at ceiling line, 3-5/8" walls); 2/A-221 (soffit sides); 8/A-210 (nested column 3-5/8" track)'},
+               {'from': 'track de ceilings / soffits', 'to': 'ceiling / soffit track 6"', 'items': t6,
+                'source': '3/A-410 (fire stop at ceiling line, 6" walls); 3/A-221 (6" metal studs); 8/A-210 (nested beam "6"x16 GA TOP & BOTTOM TRACK")'},
+               {'from': 'track de ceilings / soffits', 'to': 'ledger track 8"', 'items': ['VEST-LEDGER'], 'source': '4/A-210 "8" LEDGER"'}]
+    # C8-08: 22/A-201 cement board base replaces gypsum board on these faces: per wall, for the board / screw split by gauge
+    RR9 = ("Women's Restroom 109", "Men's Restroom 108")
+    pw9 = {}
+    for w in walls['A-101']:
+        for f_ in w.get('faces') or []:
+            if f_['room'] in RR9:
+                dw = sum(float(o['ro_w_ft']) for o in w.get('openings') or [] if o.get('kind') == 'door' and o['ref'] in ('Door 8', 'Door 9'))
+                pw9[w['id']] = round(pw9.get(w['id'], 0) + ((f_.get('length_ft') or w['length_ft']) - dw) * 14 / 12, 4)
+    for m in misc:
+        if m['ref'] == 'RESTROOM-BASE-CEMENT':
+            m['board_base_sf_by_wall'] = pw9
+    # C8-07: no plan-check item codes in client texts
+    for m in misc:
+        m['op'] = _re9.sub(r'\s*[-(]?\s*rev7 plan check C7?-\d+(?:\s*/\s*C7?-\d+)*\s*[:)]?', '', m['op']).replace(' (; ', ' (').replace('(rev7 plan check; ', '(')
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -1275,6 +1326,7 @@ general = {
  'trim_items': trim,
  **({'blocking_items': blocking} if blocking else {}),
  **({'misc_items': misc} if misc else {}),
+ **({'family_splits': SPLITS9} if SPLITS9 else {}),
  **({'corners_ok': [{'walls': list(p), 'reason': 'R75.7 (estimator rule): a short return (<= 2 ft) is measured from the OUTER face of the run it returns to, so return and run share the corner square by rule; esquinas.py R70.2 flags it as double - package inconsistency reported (PARA_REVISAR)'}
                     for p in (('W2-06.1', 'W2-06.2'), ('W2-06.3', 'W2-06.2'), ('W2-06.3', 'W2-06.4'), ('W2-06.5', 'W2-06.4'),
                               ('W4-28a', 'W4-28b'), ('W4-28a', 'W4-28c'), ('W4-31a', 'W4-31b'), ('W4-31a', 'W4-31c'))],
@@ -1304,7 +1356,7 @@ def _ren(o):   # rev5 (audit rev4 row 21): the type I return carries its type in
         t = t.replace('C-E1-P.1', 'C-I-P.1')
     if os.environ.get('REV7') == '1':   # rev7 plan check C-07 / C-08: Top Track Detail = 3/A-410; 8/A-410 = Typ. Connection Detail
         t = t.replace('8/A-410', '3/A-410').replace('TYPCONN/A-410', '8/A-410')
-        t = t.replace('(6/A-410 penetration details)', '(skill default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only)')
+        t = t.replace('(6/A-410 penetration details)', '(take-off default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only)')
         t = t.replace('6/A-410 and 7/A-410 penetration details', '6/A-410 and 7/A-410 (pipe firestopping only; no reinforcement plate printed)')
     return json.loads(t)
 for sh, fr in frag_walls.items():
