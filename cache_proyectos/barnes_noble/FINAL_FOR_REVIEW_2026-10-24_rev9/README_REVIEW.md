@@ -50,7 +50,19 @@ Partitions total: no change, **569.82 LF**. Board SF: no change.
 - Diagonal brace end screws (3/A-410) are not printed and not carried; + 512 #8 if 2 per end.
 
 ## Error library
-GATES_AND_LIBRARY
+Independent back-check of the final Excel: **PASS WITH COMMENTS — LIBRARY 43 PASS · 0 FAIL · 3 N/A** (46 tests incl. BE-51..BE-56). See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev9.md`. The first pass had 2 FAIL (BE-47, BE-52, both RFI-51 text); both are fixed.
+
+Open non-blocking comments (for estimator review):
+- Revision history tags "(revN):" remain in some Pending Items notes.
+- Possible + 121 LF of column track (inherited, row "Track 3-5/8"").
+
+## Gates
+- REGLAS OK (815 rules, 0 failures)
+- ALCANCES OK (24 reviewed, 2 RFI)
+- `registro.py entregable` OK
+- EXCEL v67 OK
+- ETAPAS PASA
+- BITACORA OK (17 mandatory tools current + back-check)
 
 Skill **v80p**: rule R80e.31 (other anchorage, full RFI deltas, inherited coverage, family splits by size, purchase units, per-face deductions, yield citations) in `take-off-metal-frame-drywall_FINAL_v80p.zip` at the repo root.
 

@@ -140,3 +140,5 @@ Back-check final: LIBRARY 37 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work
 
 ## Corrida B&N rev8 — Paso 12 independiente (2026-10-27)
 46 pruebas: 32 PASS · 11 FAIL · 3 N/A. FAIL: BE-16 (C8-02, C8-03), BE-19 (C8-01), BE-40 (C8-08), BE-46 (C8-04), BE-47 (C8-06), BE-51…BE-56 (C8-05, C8-03, C8-02, C8-08, C8-07, C8-01). N/A: BE-26, 27, 28. Veredicto: NO PASA (cobertura 100 %, 0 GAP, 8 CORREGIR). Nota: el back-check rev8 (37/0) dejó C8-01/02/03/08 como "no bloqueantes"; son piezas impresas o reglas del skill → CORREGIR.
+## Corrida B&N rev9 (2026-10-27)
+Back-check final: 43 PASS · 0 FAIL · 3 N/A (46 pruebas). El detalle está en `barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev9.md`. Las pruebas BE-16, 19, 40, 46, 47 y 51 a 56 quedan corregidas. Las lecciones nuevas están en la regla R80e.31 del skill v80p.

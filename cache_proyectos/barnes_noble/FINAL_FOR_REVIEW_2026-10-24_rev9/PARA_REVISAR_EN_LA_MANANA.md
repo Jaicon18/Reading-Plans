@@ -10,6 +10,6 @@
 5. **Piezas de compra:** los renglones en LF compran piezas reales. Por ejemplo, el cross tee da 132 pcs (antes 527).
 6. **Screws:** S-12 13,328.22 y Type S 6,114.04. El total no cambia.
 7. **Textos:** ALC-04 corregido, RFI-28 con +324 #10-16, sin códigos internos.
-8. **Biblioteca y compuertas:** en el README.
+8. **Biblioteca:** 43 PASS · 0 FAIL · 3 N/A. Back-check: PASS WITH COMMENTS. Compuertas: todas OK.
 9. **Skill:** sube a v80p (R80e.31).
 10. **Drive:** no se subió. No se envió nada al cliente.
