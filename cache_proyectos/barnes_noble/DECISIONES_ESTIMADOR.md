@@ -61,3 +61,6 @@
 
 ## Decisión 2026-10-27 — Tees del cloud Cafe Seating (rev10)
 Aprobado por el estimador: main tee DGLW26 = 19 pcs (194.16 LF × 1.15 / 12 ft) y cross tee DGLW424 = 132 pcs (457.96 LF × 1.15 / 4 ft). Fuente 4/A-121; spacing 4'-0" / 16" = estándar USG (no impreso). Sin cambios en rev10. Evidencia: decision_compra_rev10/DECISION_piezas_compra_rev10.png.
+
+## Decisión 2026-10-27 — Blocking de madera (rev11)
+Waste de madera = waste NO metal (Inputs B6 = 6 %, "igual que el board"), no el 15 % del metal. Sticks 2x de 16 ft. FRT blocking 568.27 LF → 38 pcs; 2x normal 17 LF → 2 pcs. Aplica a TODOS los proyectos: la madera nunca toma el waste de metal.
