@@ -22,10 +22,20 @@ rev10 = rev9 with the 3 form fixes from the targeted rev9 check (`../PASO12_rev9
 | Optional | — | I56 cites "A-410 note 8.F (9/A-410 = alternate)"; G45 selling unit "each"; Pending Items B49 "estimator decision 2026-10-26" |
 
 ## Error library (BE-46, BE-47, BE-51)
-LIBRARY_RESULT
+Targeted back-check of the rev10 Excel: **PASS WITH COMMENTS — 3 PASS · 0 FAIL · 0 N/A** (BE-46, BE-47, BE-51). Nets and pieces match rev9 exactly; the internal-name scan is clean. See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev10.md`. The full library run on rev9 stays valid (43 PASS · 0 FAIL · 3 N/A), because no quantity changed.
+
+Open non-blocking comments (for estimator review):
+- Rows A37 and A38 hold more than one gauge in one row; the buyer splits them by the figures in the name.
+- Revision history tags "(revN):" remain in some Pending Items notes.
+- The nested-column track is 5 LF; it may be up to 126 LF (inherited).
 
 ## Gates
-GATES_RESULT
+- REGLAS OK (815 rules, 0 failures)
+- ALCANCES OK (24 reviewed, 2 RFI)
+- `registro.py entregable` OK
+- EXCEL v67 OK
+- ETAPAS PASA
+- BITACORA OK (17 mandatory tools current + back-check)
 
 Skill **v80q**: rule R80e.32 (gauge per split row, stock lengths in Inputs, per-wall piece list, yield citation), in `take-off-metal-frame-drywall_FINAL_v80q.zip` at the repo root.
 

@@ -8,6 +8,6 @@
 3. **Stock length en Inputs (C8-05):** filas nuevas 26 a 29 (2x, main tee, cross tee, molding). Las fórmulas apuntan ahí.
 4. **Framing screws (C8-08):** la celda I55 lista las 485 piezas por wall.
 5. **Extras:** slab pins cita 8.F; hanger count dice "each"; se quitó "RI 7".
-6. **Biblioteca:** BE-46, 47 y 51; el resultado está en el README.
+6. **Biblioteca:** BE-46, 47 y 51 dan 3 PASS · 0 FAIL. Back-check: PASS WITH COMMENTS. Compuertas: todas OK.
 7. **Skill:** sube a v80q (R80e.32).
 8. **Drive:** no se subió. No se envió nada al cliente.
