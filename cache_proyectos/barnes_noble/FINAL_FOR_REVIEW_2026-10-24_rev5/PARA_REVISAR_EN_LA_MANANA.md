@@ -18,4 +18,5 @@
    - Restroom ceilings: 122.30 contra 120.2 SF.
    - Additional head track: 10.67 contra 11.17 LF.
 6. **Skill:** sube a v80k (R80e.22–25 y la tool nueva `trazabilidad.py`).
-7. **Drive:** no se subió.
+7. **Compuertas:** todas OK. El back-check dio PASS WITH COMMENTS y sus observaciones ya están resueltas: fire stop track +34.07 LF, que da 264.21 LF.
+8. **Drive:** no se subió.

@@ -204,6 +204,8 @@ if REV5:   # rev5: auditoría final rev4 (AUDITORIA_rev4/CERTIFICADO_AUDITORIA.m
         if r['id'] == 'RFI-23':
             r['delta'] = r['delta'].replace(' Water heater backing (P-201) and W-3 surface blocking (1/A-414, by GC / fixture installer) not carried.',
                                             ' rev5: water heater backing (P-201) carried conservatively -> RFI-32; janitor 3/4" FRT plywood area (11/A-200) carried 17.0 SF -> RFI-33; W-3 surface blocking (1/A-414, 7/A-414) -> RFI-36.')
+        if r['id'] == 'RFI-08':
+            r['delta'] = 'Applied (rev3 + rev5): type I 5/8" FRT plywood floor to 15\'-0" (6/A-226A) = (C-I 2.31 + C-I-P.1 1.00 + end faces C-I-E1 / C-I-E2 1.21) 4.52 LF x 15.0 = 67.74 SF; GWB 15\'-0" to deck 4.52 x 10.0 = 45.16 SF.'
         if r['id'] == 'RFI-27':
             r['delta'] = (f"Applied (rev5): 5/8\" Type X {_tx:,.2f} SF = walls {_tx - _cx - _misc_tx:,.2f} + GWB ceilings {_cx:,.2f} (restroom ceilings moved to W.R., RFI-11) "
                           f"+ vestibule box 105.5 + Grab & Go soffit bottom 3.73; Type X W.R. {_wr:,.2f} SF; 5/8\" regular 0.")
@@ -215,7 +217,7 @@ if REV5:   # rev5: auditoría final rev4 (AUDITORIA_rev4/CERTIFICADO_AUDITORIA.m
      {'id': 'RFI-33', 'pregunta': '11/A-200 Janitor 107: "AREA OF 3/4" FIRE RESISTANT PLYWOOD BLOCKING (TYP)" - extent not dimensioned. ' + A5.format(4).rstrip(': ') + ': carried at the conservative upper bound (width measured on 11/A-200 x 8\'-0" HOLD).',
       'delta': 'Carried 2.125 x 8.0 = 17.0 SF 3/4" FRT plywood; confirm extent (delta down to 0 SF).'},
      {'id': 'RFI-34', 'pregunta': 'Grab & Go header soffit (3/A-221): "T.O. WD-1 SEE ELEVATION" - top of WD-1 on the soffit east face not printed on A-226A / A-226B. Carried conservatively: 5/8" FRT plywood on the full east face (no GWB above WD-1).',
-      'delta': 'Each 1 ft of face above T.O. WD-1 = 6.17 SF from 5/8" FRT plywood to 5/8" Type X GWB (full face 110.49 SF carried as plywood).'},
+      'delta': '3/A-221 draws the 5/8" FRT plywood substrate full height and 5/8" GWB over it above T.O. WD-1: each 1 ft of face above T.O. WD-1 adds 6.17 SF of 5/8" Type X GWB (plywood 110.49 SF stays; GWB above WD-1 not carried until T.O. WD-1 is known).'},
      {'id': 'RFI-35', 'pregunta': '8/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.": applied to every full-height wall with a ceiling on at least one face (1/A-121). ' + A5.format(7).rstrip(': ') + ': carried; confirm with the GC that it is required at all of them.',
       'delta': f'Carried {_fst:.2f} LF track (3-5/8" {_fs.get("FIRESTOP-TRACK-3", 0):.2f} + 6" {_fs.get("FIRESTOP-TRACK-6", 0):.2f}); if not required: - {_fst:.2f} LF.'},
      {'id': 'RFI-36', 'pregunta': 'Surface-mounted 3/4" FRT plywood blocking at the W-3 wall fixtures "BY GC/FIXTURE INSTALLER" (1/A-414, 7/A-414): who furnishes / installs is ambiguous and the W-3 count on A-111 is not taken. Not carried - ' + A5.format(11).rstrip(': ') + '.',

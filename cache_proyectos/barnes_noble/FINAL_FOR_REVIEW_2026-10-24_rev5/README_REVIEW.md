@@ -19,7 +19,7 @@ Only A-221 changed geometry: the Grab & Go soffit and the type I end faces. A-10
 | Partition total | 568.61 LF | 569.82 LF | 1 | Type I end faces "I SIM." at C-H3a and C-H1-N: 2 × 7 1/4" = 1.21 LF, finish only (framing already in the host wall) – 1/A-221, I/A-221 |
 | 6" metal stud | 2,900.00 LF | 3,007.50 LF | 6 | Grab & Go soffit SS-GG: 6 studs × 17.917 ft (25'-0" − 7'-1") = 107.5 LF – 3/A-221, 6'-2" HOLD 1/A-221, 1/A-121 |
 | 3-5/8" metal stud | 10,778.08 LF | 10,788.75 LF | 5 | Water heater backing 8.0 + steel blocking 2.67 LF (conservative, RFI-32) – P-201 |
-| Track, ceilings / soffits | 321.78 LF | 564.25 LF | 6, 7 | Fire stop track at ceiling line 230.14 LF (3-5/8" 142.74 + 6" 87.40) – 8/A-410, RFI-35; SS-GG track 12.33 LF |
+| Track, ceilings / soffits | 321.78 LF | 598.32 LF | 6, 7 | Fire stop track at ceiling line 264.21 LF (3-5/8" 157.81 + 6" 106.40) – 8/A-410, RFI-35: the auditor's 230.14 LF list + 34.07 LF the back-check found with the same rule (W2-03 corridor face 13.12, C-H2b 1.95, C-E1-S 9'-0" GWB band 19.0); SS-GG track 12.33 LF |
 | Bracing C.R. channel | 2,858.98 LF | 2,883.65 LF | 6 | SS-GG 4 rows × 6.167 = 24.67 LF – 5/A-410 |
 | 5/8" Type X | 15,579.48 SF | 14,902.61 SF | 1, 3, 6, 9 | −692.66 to W.R.; +12.07 type I end faces GWB; +3.73 SS-GG bottom |
 | 5/8" Type X W.R. | 1,020.33 SF | 1,713.00 SF | 3, 9 | Restroom GWB ceilings 122.30 SF (A-410 Partition Notes 2); Cafe Work Room 104 faces 570.36 SF (A-410 "*" note KITCHEN, 2/A-410) |
@@ -70,7 +70,9 @@ Auditor figures that differ slightly, and why:
 - `etapas.py compuerta`: PASA.
 - closer: 61 walls sealed, 0 rejected.
 - planmark and markups: OK.
-- `reglas.py compuerta --excel` and `bitacora.py compuerta`: see the back-check line below.
+- `reglas.py compuerta --excel`: REGLAS OK (809 rules, 0 failures).
+- `bitacora.py compuerta`: BITACORA OK (17 mandatory tools current + back-check).
+- Independent back-check: **PASS WITH COMMENTS**. Every rev4 → rev5 delta recomputed; the soffit and end faces were measured on the A-221 vectors. Its comments are resolved in rev5: fire stop +34.07 LF, RFI-34 / RFI-08 text, internal names removed. See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev5.md`.
 
 Skill updated to **v80k** (rules R80e.22–R80e.25, new tool `trazabilidad.py`): `take-off-metal-frame-drywall_FINAL_v80k.zip` at the repo root.
 

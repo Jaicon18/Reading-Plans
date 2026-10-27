@@ -8,7 +8,7 @@
   "6\" parapet stud": 0.0,
   "bottom track (todos)": 640.61,
   "top / deflection track (todos)": 640.61,
-  "track de ceilings / soffits": 564.25,
+  "track de ceilings / soffits": 598.32,
   "bracing C.R. channel": 2883.65,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
@@ -250,13 +250,13 @@
    "familia": "track de ceilings / soffits",
    "ref": "FIRESTOP-TRACK-3",
    "source": "8/A-410",
-   "operacion": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 = 142.74 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
+   "operacion": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 + W2-03 (Corridor 110 face) 13.12 + C-H2b (Cafe Workroom 104 ACT) 1.95 = 157.81 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
   },
   {
    "familia": "track de ceilings / soffits",
    "ref": "FIRESTOP-TRACK-6",
    "source": "8/A-410",
-   "operacion": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 = 87.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
+   "operacion": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 + C-E1-S (Cafe 103 9'-0\" GWB band, 1/A-121) 19.0 = 106.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)"
   },
   {
    "familia": "3-5/8\" stud (todos los gauges)",
@@ -506,7 +506,7 @@
    "valor": 5.33,
    "unidad": "lf",
    "estado": "CRITERIO",
-   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "source": "RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" per the A-500 door schedule, carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
    "operacion": "Door 11 (W2-03): (4.0 + 2 x 0.667) x 1 = 5.33"
   },
   {
@@ -514,7 +514,7 @@
    "valor": 5.33,
    "unidad": "lf",
    "estado": "CRITERIO",
-   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "source": "RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" per the A-500 door schedule, carried with head track R.O. + 1'-4\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
    "operacion": "Door 3 (C-H2a): (4.0 + 2 x 0.667) x 1 = 5.33"
   },
   {
@@ -910,7 +910,7 @@
   },
   {
    "familia": "stud reinforcement MEP",
-   "tema": "MEP sweep not registrable: mep.registro M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (mep.py rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
+   "tema": "MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
    "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each",
    "source": "M-102"
   }

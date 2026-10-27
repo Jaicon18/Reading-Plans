@@ -29,7 +29,7 @@
   },
   "addl_head_track_min_ro_ft": {
    "value": 3.9,
-   "source": "RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" (A-500 door schedule) carried with head track R.O. + 1'-4\""
+   "source": "RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4'-0\" per the A-500 door schedule, carried with head track R.O. + 1'-4\""
   },
   "bracing_spacing_in": {
    "value": 48,
@@ -1526,21 +1526,21 @@
   {
    "ref": "FIRESTOP-TRACK-3",
    "familia": "track de ceilings / soffits",
-   "qty": 142.74,
+   "qty": 157.81,
    "unit": "LF",
    "source": "8/A-410",
    "label": "3-5/8\" track fire stop at ceiling line (8/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\")",
-   "op": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 = 142.74 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
+   "op": "W2-04 56.76 + W2-05 12.92 + W2-06.1 6.92 + W2-06.2 2.23 + W2-06.3 4.87 + W2-06.4 2.23 + W2-06.5 11.29 + W2-07 7.51 + W2-08 12.92 + W2-09 12.92 + C-H2a 12.17 + W2-03 (Corridor 110 face) 13.12 + C-H2b (Cafe Workroom 104 ACT) 1.95 = 157.81 LF 3-5/8\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
    "img": "../../AUDITORIA_rev4/img/C4_A-410_8_firestop_track_ceiling_line.png"
   },
   {
    "ref": "FIRESTOP-TRACK-6",
    "familia": "track de ceilings / soffits",
-   "qty": 87.4,
+   "qty": 106.4,
    "unit": "LF",
    "source": "8/A-410",
    "label": "6\" track fire stop at ceiling line (8/A-410 \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\")",
-   "op": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 = 87.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
+   "op": "W5-01 5.7 + C-H1-N 29.98 + C-H1-W 12.17 + C-E2 29.3 + C-H3a 4.08 + C-H3b 6.17 + C-E1-S (Cafe 103 9'-0\" GWB band, 1/A-121) 19.0 = 106.4 LF 6\" track (full-height walls with a ceiling on at least one face, 1/A-121; audit rev4 row 7)",
    "img": "../../AUDITORIA_rev4/img/C4_A-410_8_firestop_track_ceiling_line.png"
   },
   {
@@ -1778,7 +1778,7 @@
  "accesorios_rfi": [
   {
    "familia": "stud reinforcement MEP",
-   "motivo": "MEP sweep not registrable: mep.registro M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (mep.py rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
+   "motivo": "MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
    "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each",
    "source": "M-102",
    "img": "4_canon/img/M102_registro_check.png",
@@ -1800,7 +1800,7 @@
    "matches": 14,
    "source": "M-102 vs A-101 (mep.registro)",
    "no_usable": {
-    "motivo": "registration below 25 matching wall segments (20 V / 14 H) and the check feature (type 4 center fixture) lands ~70 pt off -> sheet not used for geometric crossings (mep.py rule); stud reinforcement MEP to RFI",
+    "motivo": "registration below 25 matching wall segments (20 V / 14 H) and the check feature (type 4 center fixture) lands ~70 pt off -> sheet not used for geometric crossings (registration rule); stud reinforcement MEP to RFI",
     "source": "M-102",
     "img": "4_canon/img/M102_registro_check.png"
    }

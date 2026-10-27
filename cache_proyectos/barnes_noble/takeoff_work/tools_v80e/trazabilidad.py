@@ -219,7 +219,7 @@ def aplicar(d, out_dir, canon_p):
         txt = " | ".join(partes)
         if estado and estado.group(1) not in ("None",):
             txt = f"[{estado.group(1)}] " + txt
-        txt = RX_INTERNO.sub("", txt).replace("  ", " ")
+        txt = RX_INTERNO.sub("", txt).replace("  ", " ").replace("usg_grid:", "USG drywall suspension grid:")
         mats.append(dict(m, cita=txt))
     d = dict(d, materials=mats)
 

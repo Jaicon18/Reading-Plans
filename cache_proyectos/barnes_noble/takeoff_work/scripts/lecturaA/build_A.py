@@ -952,8 +952,11 @@ if REV5:
     FS = ('W2-04', 'W2-05', 'W2-06.1', 'W2-06.2', 'W2-06.3', 'W2-06.4', 'W2-06.5', 'W2-07', 'W2-08', 'W2-09', 'W5-01',
           'C-H1-N', 'C-H1-W', 'C-H2a', 'C-E2', 'C-H3a', 'C-H3b')
     wb_ = {w['id']: w for sh in walls for w in walls[sh]}
+    # back-check rev5: same rule, ceiling extent only on walls whose ceiling covers part of the wall
+    FSP = {'W2-03': (13.12, 'Corridor 110 face'), 'C-H2b': (1.95, 'Cafe Workroom 104 ACT'), 'C-E1-S': (19.0, 'Cafe 103 9\'-0" GWB band, 1/A-121')}
+    FS = FS + tuple(FSP)
     for sz in ('3-5/8"', '6"'):
-        xs = [(i, wb_[i]['length_ft']) for i in FS if wb_[i]['stud_size'] == sz]
+        xs = [(i if i not in FSP else f'{i} ({FSP[i][1]})', FSP[i][0] if i in FSP else wb_[i]['length_ft']) for i in FS if wb_[i]['stud_size'] == sz]
         q = round(sum(v for _, v in xs), 2)
         misc.append({'ref': f'FIRESTOP-TRACK-{sz[0]}', 'familia': 'track de ceilings / soffits', 'qty': q, 'unit': 'LF', 'source': '8/A-410',
                      'label': f'{sz} track fire stop at ceiling line (8/A-410 "METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.")',
@@ -1004,7 +1007,7 @@ general = {
                'furring_oc_in': {'value': 24, 'source': '5/A-121 "7/8" HAT CHANNEL FRAMING @ 24" O.C. MAX"'},
                'carrying_oc_in': {'value': 48, 'source': '5/A-121 "1-1/2" CHANNEL @ 48" O.C. MAX"'},
                'hanger_oc_in': {'value': 48, 'source': '5/A-121 "HANGING WIRE TO STRUCTURE ABOVE AT 48" O.C. MAX"'},
-               **({'addl_head_track_min_ro_ft': {'value': 3.9, 'source': 'RFI-31 conservative (audit rev4 row 8): no additional head track note on A-410 / A-500 - doors 3 (C-H2a) and 11 (W2-03) 4\'-0" (A-500 door schedule) carried with head track R.O. + 1\'-4"'}} if REV5 else {}),
+               **({'addl_head_track_min_ro_ft': {'value': 3.9, 'source': 'RFI-31 conservative (audit rev4 row 8): additional head track note not printed in the set - doors 3 (C-H2a) and 11 (W2-03) 4\'-0" per the A-500 door schedule, carried with head track R.O. + 1\'-4"'}} if REV5 else {}),
                'bracing_spacing_in': {'value': 48, 'source': '5/A-410 lateral bracing CR 1-1/2" 16 ga @ 4\'-0" O.C. full wall height'}},
  'details': DETAILS,
  'opening_schedule': opening_schedule,
@@ -1020,11 +1023,11 @@ general = {
  'ceilings': ceilings,
  'deflection_clips': {'none_reason': 'Deflection by deep leg track / slotted deflection at the top of full height walls (8/A-410 Top Track Detail, 2/A-410 "SLOTTED DEFLECTION", A-410 partition note 7 "PROVIDE DEFLECTION TRACK AS REQUIRED"); no deflection clips called', 'source': '8/A-410'},
  'accesorios_rfi': [
-   {'familia': 'stud reinforcement MEP', 'motivo': 'MEP sweep not registrable: mep.registro M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (mep.py rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.',
+   {'familia': 'stud reinforcement MEP', 'motivo': 'MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.',
     'delta': 'per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16")) stud reinforcement plates x stud rows (6/A-410 penetration details); plus 1 duct sleeve each', 'source': 'M-102',
     'img': '4_canon/img/M102_registro_check.png', 'fuentes_revisadas': 'M-102 HVAC plan (page 48); mep.py registro (20 / 14 votes); P-101A..P-102D plumbing sheets (pipes <= 1" in cavity); 6/A-410 and 7/A-410 penetration details'}],
  'mep_sweep': {'sheets': ['M-102', 'P-101A', 'P-101B', 'P-102A', 'P-102B'], 'source': 'M-102, P-101A, P-101B, P-102A, P-102B', 'registro': {'dx_pt': -131.04, 'dy_pt': -477.0, 'matches': 14, 'source': 'M-102 vs A-101 (mep.registro)',
-               'no_usable': {'motivo': 'registration below 25 matching wall segments (20 V / 14 H) and the check feature (type 4 center fixture) lands ~70 pt off -> sheet not used for geometric crossings (mep.py rule); stud reinforcement MEP to RFI', 'source': 'M-102', 'img': '4_canon/img/M102_registro_check.png'}}},
+               'no_usable': {'motivo': 'registration below 25 matching wall segments (20 V / 14 H) and the check feature (type 4 center fixture) lands ~70 pt off -> sheet not used for geometric crossings (registration rule); stud reinforcement MEP to RFI', 'source': 'M-102', 'img': '4_canon/img/M102_registro_check.png'}}},
  'accesorios_none': [
    {'familia': 'extra framing ATM', 'why': 'No ATM / equipment recess in the set (A-101, A-500, A-221 reviewed)', 'source': 'A-101'},
    {'familia': 'gypsum board jamb return', 'why': 'No opening with a gypsum board return: doors in hollow metal frames (1/A-500); cased opening 2/A-500 is wood jamb + B-1 trim; storefronts are Div 08', 'source': '1/A-500'},
