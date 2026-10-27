@@ -10,3 +10,4 @@
 | 2026-10-26 21:12 | 4 % (reset 11:30 PM) | 13 % (reset vie 3:00 AM) | AUDITORÍA B&N rev4 + rev5 (correcciones) + subidas: +1 % semanal desde 18:26 | Auditoría completa ≈ menos de 1 % semanal |
 | 2026-10-26 22:21 | 14 % (reset 11:30 PM) | 15 % (reset vie 3:00 AM) | Desde 21:12: investigación W.R./FRT + rev6 + PASO 12 (69 hojas, 471 ítems) + rev7 en curso + subidas: +2 % semanal | Paso 12 ≈ 1 % semanal |
 **Calibración (24-oct):** un take-off completo de 10 pasos (B&N, ~2 h, $77 precio lista), más los ajustes al skill hechos en paralelo, consumió ≈ **2 % del límite semanal** y **7 % del límite de sesión**. Estimado: ~14 take-offs por bloque de sesión y ~45 por semana (en la práctica menos, porque también hay preguntas, revisiones y correcciones).
+| 2026-10-27 08:28 MDT | sesión 0 % · semana 18 % ("On track", reset vie 3:00 AM) | desde 15 % (10/26 22:21): paso 12 rev7→rev10 completo (rev8, 3.ª pasada, rev9, verificación dirigida, rev10, subidas, skill v80q) ≈ 3 % |
