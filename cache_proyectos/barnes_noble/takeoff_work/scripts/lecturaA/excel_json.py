@@ -232,6 +232,12 @@ if os.environ.get('REV6') == '1':   # rev6: investigación W.R. / FRT (investiga
                              'Cafe Work Room 104: NO W.R. - G/A-221 draws only 5/8" FRT plywood on the Work Room side (FRP-1 finish, A-510); there is no gypsum board on that face (rev6 removes the 570.36 SF GWB faces).')
             r['delta'] = (f"Applied (rev6): 5/8\" Type X W.R. = {_wr:,.2f} SF = walls (Women's 222.93 + Men's 223.02 + Janitor 485.75 + alcove corridor 88.63) "
                           f"+ restroom ceilings 122.30 (Women's 61.19 + Men's 61.11, 1/A-121).")
+    _wkl = round(sum(x['lf'] for x in c.get('plywood_strips') or [] if x.get('room') == 'Cafe Workroom 104'), 2)
+    for r in rfis:
+        if r['id'] == 'RFI-13':
+            r['delta'] = f'FRP-1 SF = Cafe Work Room 104 walls {_wkl} LF (FRT plywood faces C-H1-N, C-H1-W, C-H2a, C-H2b x 2, C-E2; G/A-221, E/A-221) x FRP height + Janitor 107 faces {_flf("Janitor Closet 107")} LF x FRP height (A-510); + PVC trim at FRP edges and inside corners'
+        for k in ('pregunta', 'delta'):
+            r[k] = r[k].replace('Applied (rev5)', 'Applied (rev6)')
     rfis.append({'id': 'RFI-37', 'pregunta': 'G/A-221 (types H1 / H2a) draws one board layer on the Sales Floor side (5/8" gypsum board) and one on the Cafe Work Room side (5/8" FRT plywood). The take-off carries 5/8" FRT plywood ALSO behind the gypsum board on the Sales / Cafe side of C-H1-N (25.90 x 25.0 = 647.50 SF) and C-H2a (12.17 x 25.0 = 304.25 SF) since rev0 (finish details "SEE SHEET A-225"). Confirm if plywood is required behind the GWB on those faces.',
                  'delta': 'If not required: - 951.75 SF 5/8" FRT plywood (C-H1-N A 647.50 + C-H2a B 304.25); GWB unchanged.'})
 d.update({'rfis': rfis, 'revisar': revisar})
@@ -258,6 +264,8 @@ if REV5 and d.get('alcances'):
     for x in d['alcances']:
         if x['id'] in N5:
             x['nota'] = N5[x['id']]
+            if os.environ.get('REV6') == '1':
+                x['nota'] = x['nota'].replace('(rev5)', '(rev6)')
 
 json.dump(d, open(K + '/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print(len(rfis), 'rfis', braces, 'braces', rfi01, lf25, lf_cp, hdr, wet_sf, full_sf)
