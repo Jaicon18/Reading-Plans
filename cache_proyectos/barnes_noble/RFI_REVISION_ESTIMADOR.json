@@ -1,0 +1,206 @@
+[
+ {
+  "rfi": "RFI-ACC-slab-pins",
+  "q": "slab pins: pin spacing: carried one pin every 8.0\" (A-410 note 8.F X-DNI 2 rows @ 16\" O.C. (printed, conservative); 9/A-410 0.177\" PAF @ 24\" = alternative); alternatives: one row @ 16\" / one row @ 24\"",
+  "delta": "16in: -388.72 pcs; 24in: -518.29 pcs",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-ACC-stud-reinforcement-mep",
+  "q": "stud reinforcement MEP: MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
+  "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (take-off default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only); plus 1 duct sleeve each",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-03",
+  "q": "B.O. deck is V.I.F. and sloped: 24'-0\" (2/A-400B) to 25'-7\" (2/A-400A); walls to deck loaded at 25'-0\" (1/A-400A, 1/A-400B), east facade 25'-7\", west 24'-0\". the elevations also print 21'-9\" V.I.F. at the right end of 2/A-400A and 23'-8\" V.I.F. on A-400B (joists sloping): the B.O. deck range is wider than 24'-0\" to 25'-7\".",
+  "delta": "Each 1 ft of deck height = 414.54 LF of studs-to-deck walls x 1 ft (studs, board where to deck, bracing rows)",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-05",
+  "q": "Cafe south line: type 1 on A-101 and E1 / E2 (6\" studs, void at existing wall) on 1/A-221. Counted ONCE as E1 / E2. E2 / E1 change point not drawn.",
+  "delta": "If both furring and 6\" wall exist: + 50.24 LF type 1 furring (3-5/8\") x 25'-0\". E2 / E1 split at the H2a faces: 0.20 LF moves.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-09",
+  "q": "Door headers: no header schedule in the set and 1/A-500 shows no header; headers carried 0 LF.",
+  "delta": "If a 2-piece track header is required at every door: + 83.32 LF ((R.O. + 1'-4\") x 2)",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-13",
+  "q": "FRP-1 (A-510): Cafe Work Room 104 FRP-1 full height to the 10'-0\" ceiling (1-4/A-226B); Janitor 107 FRP-1 to 96\" A.F.F. (A-131) / 8'-0\" (9-12/A-200). Who furnishes / installs the FRP is not defined (A-002). Substrate: E/A-221 and G/A-221 call 5/8\" FRT plywood on the Work Room faces; 3/A-225 draws a dotted (board) fill - conflict. Not carried(rev7): heights corrected.",
+  "delta": "If FRP is in our scope: Cafe Work Room 87.52 LF x 10.0 = 875.20 SF + Janitor 19.43 LF x 8.0 = 155.44 SF = 1,030.64 SF FRP-1 gross (doors not deducted) + PVC trim (J-mold, inside corners).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-21",
+  "q": "Cafe Seating GWB cloud edge: 6\" fascia (4/A-121, measured on the detail, not dimensioned) and edge molding DGCM27.",
+  "delta": "107.21 LF edge x 0.5 ft = 53.6 SF GWB + 107.21 LF edge trim",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-22",
+  "q": "Types 3 and 4: \"F.R.P. over 5/8\" plywood where shelving occurs\" (3/A-410, 4/A-410) - fixture plan A-111 does not define the extent on the partial walls.",
+  "delta": "5/8\" plywood + FRP on 122.32 LF x height per face where shelving occurs",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-24",
+  "q": "Gypsum board control joints: none labeled or detailed on A-410, A-121, A-221 or A-510 (\"CJ\" only in the M-100 legend). ASTM C840 limits uninterrupted wall runs to 30 ft; type 2 walls W2-01 (48.77 LF), W2-03 (94.24 LF), W2-04 (56.76 LF) exceed it. Not carried - confirm.",
+  "delta": "Type 2: floor(L / 30) = 1 + 3 + 1 = 5 joints x 25.0 ft x 2 faces = + 250.0 LF control joint; if RFI-01 brings exterior gyp bd into scope: EXT-02 5 x 25.0 + EXT-03 2 x 24.0 + EXT-07 1 x 25.0 = + 198.0 LF (one face)",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-28",
+  "q": "Types 3 and 4 base anchorage: 3/A-410, 4/A-410 and A/A-410 draw a moment clip at the stud base with Hilti Kwik HUS-EZ anchors; spacing not printed separately. Not carried (expansion anchors 0); their bottom track is not on slab pins (3/A-410, 4/A-410 \"3 5/8\" X 20GA TRACK W/ (2)-1/4\"ø X 1 5/8\" HILTI KWIK HUSEZ CONCRETE SCREW AND MOMENT CLIP - SEE DETAIL\").",
+  "delta": "If one clip per stud: + 162 moment clips (type 3 = 40 studs, type 4 = 122 studs, per-wall stud count) + 324 Kwik HUS-EZ 1/4\" x 1-5/8\" (2 per clip) + 324 #10-16 screws (A/A-410 \"(1) #10-16 SCREW @ EACH FLANGE\": 162 clips x 2). Slab pins already exclude the 122.32 LF of type 3 / 4 track.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-29",
+  "q": "Corner guards: A-101 key note C22 \"STAINLESS STEEL CORNER GUARDS AT 48\" A.F.F. FOR ALL OUTSIDE GYPSUM BOARD CORNERS AT STOCKROOM WALLS\" vs A-001A \"METAL CORNER GUARDS (2\"X2\"X72\") AT ALL OUTSIDE CORNERS\". Extent and installer (drywall vs Div 10) not defined. Not carried.",
+  "delta": "C22: stock room outside corners only, about 4 to 6 corners x 4 ft; spec: every outside corner x 6 ft including 36 column surround corners (9 x 4)",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-30",
+  "q": "Access panels: M-100 general note 30 and E general note 12 \"THE GENERAL CONTRACTOR SHALL INSTALL ACCESS PANELS\"; A-002 F/I tenant contractor; quantity not shown on any sheet. Not carried.",
+  "delta": "Install only: allowance of 4 to 6 panels in the GWB ceilings (restrooms, Cafe bands / soffit, vestibule)",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-31",
+  "q": "Additional head track at openings: the note \"ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"\" quoted in rev0-rev4 is NOT on A-410 / A-500 (take-off criterion (not printed); citation corrected, audit rev4 row 8 (rev5)). Carried conservatively at the two 4'-0\" doors: door 3 (C-H2a, 4'-0\" x 8'-0\") and door 11 (W2-03, 4'-0\" x 7'-0\"), A-500 door schedule.",
+  "delta": "Carried 10.67 LF = 2 x (R.O. 4.00 ft measured jamb gap + 2 x 8\" bearing); if not required: - 10.67 LF. Auditor 11.17 LF assumed R.O. 4'-3\" (frame not printed): + 0.50 LF if the R.O. is 4'-3\".",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-32",
+  "q": "P-201 WATER HEATER DETAIL (\"FOR RESTROOMS AND BREAKROOM\"): 2x4 metal stud backing + steel blocking between studs at the anchor locations; member sizes and lengths not printed (Janitor 107, 11/A-200). audit rev4 row 5 (rev5): carried conservatively.",
+  "delta": "Carried: 3-5/8\" stud backing 2 x 4.0 ft = 8.0 LF + steel blocking 2 rows x 1.33 ft = 2.67 LF (3-5/8\" stud pieces); if by the plumber: - 10.67 LF 3-5/8\" stud.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-33",
+  "q": "11/A-200 Janitor 107: \"AREA OF 3/4\" FIRE RESISTANT PLYWOOD BLOCKING (TYP)\" - extent not dimensioned. audit rev4 row 4 (rev5): carried at the conservative upper bound (width measured on 11/A-200 x 8'-0\" HOLD).",
+  "delta": "Carried 2.125 x 8.0 = 17.0 SF 3/4\" FRT plywood; confirm extent (delta down to 0 SF).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-35",
+  "q": "3/A-410 Top Track Detail \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\" (rev5-rev6 cited 8/A-410, which is the Typ. Connection Detail: applied to every full-height wall with a ceiling on at least one face (1/A-121); carried; confirm with the GC.",
+  "delta": "Carried per wall (Material Summary breakdown) = 264.21 LF; if not required: minus that LF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-36",
+  "q": "Surface-mounted 3/4\" FRT plywood blocking at the W-3 wall fixtures \"BY GC/FIXTURE INSTALLER\" (1/A-414, 7/A-414): who furnishes / installs is ambiguous and the W-3 count on A-111 is not taken. Not carried - audit rev4 row 11 (rev5).",
+  "delta": "If by the drywall contractor: + one 3/4\" FRT plywood strip per W-3 unit (size per 1/A-414, 7/A-414) x W-3 count from A-111 - PENDING count.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-38",
+  "q": "Ceiling seismic bracing: A-121 Ceiling Notes 1 \"SEE A-420 DRAWINGS REGARDING CEILING BRACING\" - A-420 is not in the set; 5/A-121 draws splay wires and a 16 ga wire @ 12'-0\" O.C. each way at each brace point (the 1-5/8\" x 16 ga metal joist framing @ 48\" is the horizontal carrying member); A-002 Div 10 \"SEISMIC BRACING\" F/I by the tenant contractor. Carried conservatively on the GWB suspended ceilings.",
+  "delta": "Carried: splay wires 743.29 LF (hanger wire row) + vertical 16 ga wire at each brace point 131.42 LF (16 ga wire row); the 1-5/8\" x 16 ga metal joist framing @ 48\" on 5/A-121 is the horizontal carrying member (no post). If not required: minus both.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-39",
+  "q": "Recessed fire extinguisher cabinets (A-101 C11, A-111 KN 9, 4/A-101 \"F.R.T. WOOD STUD HEADER ABOVE AND BASE BELOW CABINET\"): 4 in new walls (W2-01, W2-03 x 2, Cafe Workroom); cabinet width / rough opening not printed (Cosmopolitan fully recessed, Ambassador 1017F10).",
+  "delta": "Carried 16.0 LF FRT 2x (4 x (2.0 + 2.0 ft)); each +1 ft of cabinet width = +8.0 LF FRT; jamb studs inside the field studs.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-40",
+  "q": "3/A-410 Top Track Detail: \"METAL RUNNER AT STUDS - SECURE GWB TO METAL RUNNER\" with \"DO NOT SECURE METAL STUDS OR GWB TO DEEP LEG TRACK\" read as a nested inner runner at every deflection head. Carried; confirm.",
+  "delta": "Carried 479.85 LF nested inner runner; if a single deep leg track is accepted: minus that LF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-41",
+  "q": "8/A-410 Typ. Connection Detail (PARALLEL TO STRUCTURE): full-height walls parallel to the joists (N-S) hang from metal studs spanning joist to joist; joist spacing not printed (A-400A / A-400B).",
+  "delta": "Carried 705.0 LF (members @ 24\" O.C. along the wall x 5.0 ft assumed joist spacing); each 1 ft of joist spacing = 141.0 LF. #8 screws (8/A-410) carried in their own row (775 pcs) with joists at 5'-0\": one screw per joist crossing on the walls perpendicular to the joists = 70; at 4'-0\" spacing: + 15 pcs. \"(2) #8 SCREW AT EACH STUD\" is read as 2 per cross member (drawn at the cross member / track connection) = 282; if it means 2 per wall stud @ 16\" on the walls parallel to the joists: 380 (+ 98 pcs).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-42",
+  "q": "2/A-221 framed soffit drop \"CROSS BRACING AS REQ'D\": member / spacing not printed.",
+  "delta": "Carried 90.0 LF 3-5/8\" stud (pairs @ 4'-0\" x 5.0 ft); if not required: minus that LF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-43",
+  "q": "E/A-221 type E1 (Cafe south wall C-E1-S, C-E1-P.2, C-E1-B): 1/2\" cement board height not printed; carried to deck 25'-0\" (studs to deck). The Cafe 9'-0\" GWB band runs along C-E1-S (1/A-121).",
+  "delta": "If the cement board stops at 9'-0\" + 6\" (A-410 Partition Notes 3): C-E1-S 19.0 x 15.5 = - 294.5 SF, C-E1-P.2 2.11 x 15.5 = - 32.7 SF, C-E1-B 2.31 x 15.5 = - 35.8 SF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-44",
+  "q": "H/A-221 \"H3a = PLYWOOD TO TOP OF WD-1\": T.O. WD-1 on the H3a Sales face not printed (A-225, A-226A). Carried: FRT plywood to deck (25'-0\"), no GWB.",
+  "delta": "If T.O. WD-1 = 15'-0\" as on the Grab & Go header (6/A-226A): FRT plywood - 40.8 SF (4.08 x 10.0) and 5/8\" Type X + 40.8 SF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-45",
+  "q": "1/A-221 Workroom door pier (1'-0\" x 2'-8\" HOLD) against H2a with an internal void: the C-H2a Cafe face may be concealed along the pier.",
+  "delta": "If concealed: - 2.67 x 25.0 = - 66.7 SF 5/8\" Type X on C-H2a (pier faces carried as C-E1-P.2 / C-I-P.1).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-46",
+  "q": "F/A-221 \"3 5/8\" METAL STUDS @ 16\" O.C. TO BOTTOM OF NESTED STUD BRACING\": the nested stud bracing member is not drawn; studs carried to deck (estimator decision 2026-10-26). the same phrase is printed on the partition types 3 and 4 (3/A-410, 4/A-410): nested stud at the top of each wall.",
+  "delta": "Carried 6.52 LF (F) + 122.32 LF (types 3 / 4) 3-5/8\" stud; define member / elevation; if not required: minus both.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-47",
+  "q": "Plywood material / thickness conflicts on A-225: 5/A-225 die wall \"3/4\" THICK MARINE GRADE PLYWOOD\" vs A/A-221, B/A-221 \"3/4\" FRT PLYWOOD SUBSTRATE\" and A-410 \"ALL PLYWOOD NEEDS TO BE FRT\"; 10/A-225 \"1/2\" F.R.T. PLYWOOD SUBSTRATE\" vs I/A-221, G/A-221, H/A-221 5/8\" FRT plywood. Carried as FRT, thickness per the A-221 sections.",
+  "delta": "Same SF; material / thickness change only: die wall 63.47 SF marine vs FRT; type I end faces 18.08 SF 1/2\" instead of 5/8\".",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-48",
+  "q": "Stock room shelving blocking: 7/A-413 \"FRT WOOD BLOCKING IN PARTITION\" vs 7A/A-413 \"SURFACE MOUNT WOOD BLOCKING\" (no FRT). Carried in-partition FRT 2x, 3 rows (387 LF).",
+  "delta": "Quantity unchanged; if surface-mounted: material / installation method change only (not FRT, no board cut-outs).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-49",
+  "q": "2/A-500 Cased Opening Detail: \"WOOD BLOCKING\" across the stud return; the number / location of cased openings is not marked on A-101.",
+  "delta": "Carried 1 opening x 17.0 LF wood blocking (not labeled FRT); each additional opening + 17.0 LF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-50",
+  "q": "2/E-103 Server Room: \"4'x8' FRT PLYWOOD SHEET AND POWER BY GC - ALL OTHER WORK BY OTHERS\" (E-301 \"fire-rated plywood terminal board\"). Carried in the drywall scope (FRT plywood substrate); confirm the trade.",
+  "delta": "Carried 32.0 SF 3/4\" FRT plywood; if by the electrical contractor: - 32.0 SF.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-52",
+  "q": "Vestibule GWB bands above B.O. ceiling 10'-6\": top of the band 11'-3 1/2\" V.I.F. (2/A-210, 3/A-210, \"VESTIBULE ASSEMBLY TO MATCH EXISTING STOREFRONT SYSTEM V.I.F.\").",
+  "delta": "Carried 14.96 SF; each 1\" of band height = 1.89 SF (front 12.67 + sides 2 x 8.42 ft / 12).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-53",
+  "q": "Light fixtures in the Cafe GWB bands (11'-6\" and 9'-0\", 1/A-121): fixture count in the bands not taken; 5/A-121 \"PROVIDE ADDITIONAL WIRE SUPPORT AT ALL LIGHT FIXTURES\". E-301 Sec. 265119: \"THIS CONTRACTOR SHALL PROVIDE AND INSTALL ALL NECESSARY SUPPORT MEDIA FOR ALL LIGHTING FIXTURES ... FIXTURES SHALL NOT BE SUPPORTED FROM ROOF DECK\" - overlap with the 5/A-121 fixture wires carried.",
+  "delta": "Each fixture in a band = + 1 hanger x 13.5 / 16.0 ft wire. If the fixture supports are by the electrical contractor (E-301 265119): - 401.0 LF hanger wire (29 hangers).",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-51",
+  "q": "Fastener counts not printed: 7/A-210 3\"x3\"x16 ga clip angles (count per header end); cement board screw spacing (manufacturer standard 8\" O.C. used); plywood screws per A-410 note 8.D (24\" field / 12\" perimeter on 4x8 sheets).",
+  "delta": "Carried: clip angles 7/A-210 4 pcs; cement board screws 1686 pcs; plywood screws 2331 pcs - adjust to the estimator yields. Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; 5/A-410 bracing clips are in the Tek screw row; diagonal brace end screws (3/A-410) are not printed and not carried (if 2 per end: + 512 #8). 9/A-410 calls #8 screws stud to track while note 8.A calls #10-16 on 18/16 ga - carried per 8.A. relief channel to structure carried with 8/A-410 #8 pan head screws (291 pcs) + P.A.F. at cross members (282 pcs); note 8.C X-EDNI (2 rows @ 16\" = 720 pcs) is the alternative if the track bears directly on structural steel. Slab pins carried per note 8.F (2 rows @ 16\" X-DNI); 9/A-410 alternative 0.177\" PAF @ 24\" = - 518.29 pcs (518.29 LF of interior bottom track on slab). 8/A-210 \"(8) #10-16 TEKS 16\"O.C., TYP.\" read as 8 per station at 16\" O.C. (520 pcs carried); if 8 per member in total: - 464 pcs. 7/A-210 head attachment clips: 2 assumed (16 screws), count not printed.",
+  "estado": "ABIERTO"
+ },
+ {
+  "rfi": "RFI-54",
+  "q": "Ceiling perimeter track at the suspended GWB ceilings (Women's 109, Men's 108, Cafe 103 bands 11'-6\" and 9'-0\", Grab & Go 7'-1\"): 5/A-121 draws the perimeter attachment but prints no track size; the stud size of the wall it attaches to varies.",
+  "delta": "Carried 180.99 LF in its own row (size not printed). If the perimeter is the USG angle molding DGWM24 already carried: - 180.99 LF of track; if 3-5/8\" track: no LF change (price only). 8\" ledger (4/A-210 \"8\" LEDGER\"): gauge not printed; carried 12.67 LF of 8\" track - if 16 ga as the 8/A-210 nested members, no LF change (price only).",
+  "estado": "ABIERTO"
+ }
+]
