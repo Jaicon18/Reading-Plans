@@ -56,3 +56,39 @@ Los términos del trade van en inglés.
 ## Resultados por proyecto
 
 (Se agrega una tabla por entrega. Detalle y evidencia en la carpeta PASO12 del proyecto.)
+
+### B&N Colorado Springs — rev6 (Paso 12, 2026-10-27)
+
+21 PASS · 5 FAIL · 3 N/A. Evidencia: `barnes_noble/PASO12_rev6/` (MATRIZ_COBERTURA.xlsx › Error Library, CERTIFICADO_PASO12.md, img/).
+
+| Prueba | Resultado | Nota |
+|---|---|---|
+| BE-01 | PASS | 264.21 LF carried (3-5/8" 157.81 + 6" 106.40) + RFI-35; citation must read 3/A-410 (C-07) |
+| BE-02 | PASS | Women's 61.19 + Men's 61.11 SF W.R. (Material Summary!R20); Janitor 107 has no GWB ceiling |
+| BE-03 | PASS | R20 breakdown covers W2-05..W2-08, W5-01; A-510 does not contradict. Base 1'-2" must be cement board (C-03) |
+| BE-04 | PASS | No C-* face in the W.R. breakdown; Work Room = FRT plywood (G/A-221) |
+| BE-05 | PASS | G, H, E, F, I, A-D/A-221 checked side by side against "Board by face" - all match |
+| BE-06 | PASS | SS-N, SS-E, SS-IN-N, SS-IN-E, SS-GG + bottoms carried. Open: plywood above WD-1 (2/A-221) and soffit corner bead = GAP rows |
+| BE-07 | PASS | I SIM. x2 on 1/A-221 = C-I-E1, C-I-E2 |
+| BE-08 | FAIL | 19'-0" HOLD ignored for C-E1-S cement board (C-04); T.O. WD-1 printed but RFI-34 says not printed (C-01); FRP heights printed (C-02) |
+| BE-09 | PASS | RFI-01 (1/DM-101, A-101, A-002); 17 EXT markups "EXISTING - EXCLUDED". New RFI proposed: A-410 types 1/1A/1B/1C "5/8" GYP BD BY FUTURE TENANT" |
+| BE-10 | PASS | SS-GG 6'-2" HOLD quantified (RFI-20 closed); T.O. WD-1 now printed (C-01) |
+| BE-11 | PASS | Janitor 17.0 SF 3/4" FRT (11/A-200) + RFI-33 |
+| BE-12 | FAIL | 8/A-410 should be 3/A-410 (C-07); 6/A-410 plates not printed (C-08); 6/A-210 is the glazing base detail (C-06) |
+| BE-13 | FAIL | 2/E-103 server room 4'x8' FRT plywood "BY GC" - no row / exclusion / RFI |
+| BE-20 | PASS | SS-N/E/IN studs in R12 + R28; track = 2 x length (R13) |
+| BE-21 | PASS | None carried; ALC-09 NOT APPLICABLE |
+| BE-22 | PASS | R36 = 0 citing 1/A-500, 2/A-500 |
+| BE-23 | PASS | ALC-19 EXCLUDED; no row |
+| BE-24 | PASS | 450.02 + 118.59 = 568.61 LF each = 569.816 - end faces C-I-E1/E2 1.206 (R80e.23) |
+| BE-25 | PASS | 5/A-121 suspension; 4/A-121 USG grid for the cloud |
+| BE-26 | N/A | No ballistic type in A-410 |
+| BE-27 | N/A | R34 none (A-101, A-500, A-221) |
+| BE-28 | N/A | ALC-03, ALC-14 NOT APPLICABLE (A-300: no new canopy) |
+| BE-29 | PASS | RFI-09 (0 LF + delta 83.32 LF) |
+| BE-40 | FAIL | R28 "3-5/8" stud, framed soffit 2/A-221" 61.31 LF has no breakdown / operation; R13 FIRESTOP-TRACK lines have no per-wall breakdown. All other breakdowns sum the NET (+/- 0.1) |
+| BE-41 | FAIL | Pending Items RFI-06 "ri07_rcp/", RFI-12, -13, -20, -31, -32, -33, -35, -36 cite "AUDITORIA_rev4/COMPARATIVA_AUDITORIA.xlsx" |
+| BE-42 | PASS | Subtotals = rows; GRAND TOTAL 569.816 = sum of subtotals. Observation: A-410 prints no schedule table; order 2, 5, 3, 4 is the declared order (rev1); by type number it would be 2, 3, 4, 5 |
+| BE-43 | PASS | 6 visible + hidden "_reglas" gate signature |
+| BE-44 | PASS | Sum Length and sum Wall Area (Length x Depth) match on all 18 types (max delta 0.01 LF, type I rounding) |
+| BE-45 | PASS | See sheet Proportions; 3 traceability observations |
