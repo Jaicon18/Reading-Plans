@@ -459,6 +459,7 @@ def _escribir(d, salida, out_reglas):
         ws[f"{c}4"] = v; ws[f"{c}4"].font = S["h"]; ws[f"{c}4"].fill = S["hf"]
     for r, k, lab, dflt, nota in INPUTS_V68:
         v = _inp(d, k) if k else dflt
+        nota = (d.get("inputs_notas") or {}).get(k, nota)   # v80n: nota con la cita del proyecto (p. ej. nivel de acabado impreso)
         ws.cell(r, 1, lab); ws.cell(r, 2, "n/a" if v is None else v); ws.cell(r, 3, nota)
         if k and v is not None:
             ws.cell(r, 2).fill = S["yellow"]

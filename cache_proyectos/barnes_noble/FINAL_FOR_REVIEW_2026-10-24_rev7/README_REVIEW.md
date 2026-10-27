@@ -113,7 +113,7 @@ Partitions total: no change, **569.82 LF**. Gauges per row (A-410 Metal Stud Sch
 | 445 | 2/E-103 server room 4x8 FRT plywood BY GC | FRT plywood 3/4" + 32.0 SF + RFI-50 |
 | 454 | E-301 terminal board | = #445 |
 
-New RFIs: RFI-38 to RFI-51, each with a conservative assumption and its delta.
+New RFIs: RFI-38 to RFI-53, each with a conservative assumption and its delta. RFI-52 covers the vestibule bands V.I.F.; RFI-53 covers fixture hangers in the Cafe GWB bands.
 
 ## Error library (BE FAIL → fixed)
 | Test | Fix |
@@ -125,4 +125,16 @@ New RFIs: RFI-38 to RFI-51, each with a conservative assumption and its delta.
 | BE-41 | No internal file or folder names in the Excel (checked on all visible sheets) |
 
 ## Gates
-See the line below (updated after the back-check).
+- REGLAS OK (812 rules, 0 failures)
+- ALCANCES OK
+- `registro.py entregable` OK
+- EXCEL v67 OK
+- ETAPAS PASA
+- BITACORA OK
+- Independent back-check: **PASS WITH COMMENTS**.
+  - All 57 matrix rows have a destination, and every Net change reconciles.
+  - All its comments are resolved in this rev7 (text fixes, RFI-52 / RFI-53, deltas in RFI-01 / RFI-51). See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev7.md`.
+
+Skill: **v80n** (R80e.27, five new families, gauges in Partition Takeoff, project notes in Inputs) in `take-off-metal-frame-drywall_FINAL_v80n.zip` at the repo root.
+
+Drive: not uploaded.

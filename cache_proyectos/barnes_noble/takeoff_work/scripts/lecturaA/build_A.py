@@ -1106,7 +1106,7 @@ if REV7:
     for sz, q in cm.items():
         misc.append({'ref': f'CROSS-MEMBERS-8-A410-{sz[0]}', 'familia': '6" stud (todos los gauges)' if sz == '6"' else '3-5/8" stud (todos los gauges)',
                      'qty': round(q, 2), 'unit': 'LF', 'source': 'TYPCONN/A-410',
-                     'op': f'TYPCONN/A-410 Typ. Connection Detail - PARALLEL TO STRUCTURE: metal stud per schedule spanning joist to joist, (1) P.A.F. each end, track attached @ 24" O.C.: ' + '; '.join(c for c in cmo if wb7[c.split()[0]]['stud_size'] == sz) + f' members x 5.0 ft (joist spacing not printed, assumed - RFI-41) = {round(q, 2)} LF {sz}',
+                     'op': f'TYPCONN/A-410 Typ. Connection Detail - PARALLEL TO STRUCTURE: metal stud per schedule spanning joist to joist, (1) P.A.F. each end, track attached @ 24" O.C.: ' + '; '.join(c for c in cmo if wb7[c.split()[0]]['stud_size'] == sz) + f' members x 5.0 ft (joist spacing not printed, assumed - RFI-41) = {round(q, 2)} LF {sz} 20 ga (A-410 schedule, min. 20 ga)',
                      'img': P12 + 'A-410_8-connection-detail.png'})
     # GAP: 2/A-221 FRT plywood continues above T.O. WD-1 behind the GWB (SS-N, SS-E): 11'-0" to deck = 14 ft; cross bracing AS REQ'D
     for st_ in strips:
@@ -1172,6 +1172,8 @@ if REV7:
     misc.append({'ref': 'SEISMIC-STRUTS-5-A121', 'familia': '1-5/8" stud', 'qty': sl, 'unit': 'LF', 'source': '5/A-121',
                  'op': f'5/A-121 "1 5/8\\" x 16 GA. METAL JOIST" compression post per brace group: groups {gop} -> sum(groups x drop) = {sl} LF (conservative - RFI-38)',
                  'img': P12 + 'A-121_detail-5-seismic-splay-wires.png'})
+    FRP_R7 = ('FRP-1 (A-510): Cafe Work Room 104 FRP-1 full height to the 10\'-0" ceiling (1-4/A-226B); Janitor 107 FRP-1 to 96" A.F.F. (A-131) / 8\'-0" (9-12/A-200); '
+              'Cafe 103 below countertop. Installer not defined (A-002) - not carried, RFI-13 with delta (1,030.64 SF) - PVC trim with it.')
     # FIRESTOP track per wall (biblioteca BE-40): one misc per wall instead of one per size
     fs = [m for m in misc if m['ref'].startswith('FIRESTOP-TRACK')]
     misc[:] = [m for m in misc if not m['ref'].startswith('FIRESTOP-TRACK')]
@@ -1232,7 +1234,7 @@ general = {
    {'familia': 'Level 5 finish', 'why': 'No LEVEL 5 finish in A-510 room finish schedule / finish notes (paint finishes PT-1..PT-8 only)', 'source': 'A-510'}],
 
  'tile_base_none_reason': 'A-510 room finish schedule: ceramic cove tile base in Cafe 103, Men\'s 108, Women\'s 109; no cement board backer drawn behind the base on any partition detail (2/A-410, 5/A-410); cement board is loaded only where E/A-221 and A, B, C, D/A-221 draw it (wall faces) - backer for restroom base / wall tile (A-200, TL-2) = RFI-12 with delta',
- 'frp_none_reason': 'FRP-1 (A-510: Cafe Work Room 104 walls, Janitor 107 walls, Cafe 103 below countertop) - no FRP height / extent printed for partitions (A-225 finish plan dashed FRP-1 zones only) - not quantified, RFI-13 with delta',
+ 'frp_none_reason': FRP_R7 if os.environ.get('REV7') == '1' else 'FRP-1 (A-510: Cafe Work Room 104 walls, Janitor 107 walls, Cafe 103 below countertop) - no FRP height / extent printed for partitions (A-225 finish plan dashed FRP-1 zones only) - not quantified, RFI-13 with delta',
  'edge_blocking_none_reason': 'No stud blocking at gypsum board edges in the set: details 2/A-410, 3/A-410, 4/A-410, 5/A-410 (lateral bracing CR @ 4\'-0"), 1/A-500, 2/A-500 reviewed - none draws blocking at horizontal board joints (bridging per A-410 partition note 4 is carried as bracing C.R. channel)',
  'deck_breaks_none_reason': 'No stepped deck breaks: deck slopes continuously, B.O. DECK 24\'-0" (2/A-400B, west) to 25\'-7" (2/A-400A, east), 25\'-0" at 1/A-400A and 1/A-400B; interior walls to deck loaded at 25\'-0" - RFI-03',
 }

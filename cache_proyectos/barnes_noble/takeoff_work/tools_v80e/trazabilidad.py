@@ -228,7 +228,7 @@ def aplicar(d, out_dir, canon_p):
                 ops = "; ".join(dict.fromkeys(str(r.get("operacion")) for r in rs if r.get("operacion")))
                 if its:
                     try:
-                        extra = _desglose(its, net, unit, name) + (f" | {ops[:700]}" if len(its) <= 3 else "")
+                        extra = _desglose(its, net, unit, name) + (f" | {ops[:3000]}" if len(its) <= 3 else "")
                     except ValueError:
                         extra = ops[:500]
         except ValueError:
