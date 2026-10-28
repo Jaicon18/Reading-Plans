@@ -1315,6 +1315,72 @@ if REV9:
     for m in misc:
         m['op'] = _re9.sub(r'\s*[-(]?\s*rev7 plan check C7?-\d+(?:\s*/\s*C7?-\d+)*\s*[:)]?', '', m['op']).replace(' (; ', ' (').replace('(rev7 plan check; ', '(')
 
+# ---------------------------------------------------------------- REV12 (decisiones del estimador sobre los 34 RFI, RFI_REVISION_ESTIMADOR.json)
+REV12 = os.environ.get('REV12') == '1'
+if REV12:
+    D12 = 'estimator decision 2026-10-27'
+    wb12 = {w['id']: w for sh in walls for w in walls[sh]}
+    t34 = [w for w in walls['A-101'] if w['tag'] in ('3', '4')]
+    # RFI-22 (B): one face of types 3 / 4 = 5/8" FRT plywood + FRP over it (3/A-410, 4/A-410 "F.R.P. OVER 5/8" PLYWOOD WHERE SHELVING OCCURS"; A-410 building dept note all plywood FRT); that face loses its GWB
+    for w in t34:
+        w['faces'] = [x for x in w['faces'] if x['side'] != 'A']
+    for tg, h in (('3', 8.0), ('4', 7.5)):
+        ws_ = [w for w in t34 if w['tag'] == tg]; lft = round(sum(float(w['length_ft']) for w in ws_), 2)
+        strips.append({'ref': f'TYPE-{tg}-A-FRT', 'wall': f'type {tg} ({len(ws_)} walls)', 'lf': lft, 'width_ft': h, 'material': 'frt_5_8', 'uso': 'substrate',
+                       'label': '5/8" FRT PLYWOOD where shelving occurs', 'source': f'{tg}/A-410', 'room': 'Sales Area 101 / Cafe Seating 102',
+                       'op': f'{lft} LF x {h} ft = {round(lft * h, 2)} SF, face A of every type {tg} wall ({D12}, RFI-22 B: one face of types 3 / 4)'})
+    lf3 = round(sum(float(w['length_ft']) for w in t34 if w['tag'] == '3'), 2); lf4 = round(sum(float(w['length_ft']) for w in t34 if w['tag'] == '4'), 2)
+    s34 = round(lf3 * 8.0 + lf4 * 7.5, 2)
+    misc.append({'ref': 'FRP-TYPES-3-4', 'familia': 'FRP', 'qty': s34, 'unit': 'SF', 'source': '3/A-410; 4/A-410',
+                 'op': f'3/A-410, 4/A-410 "F.R.P. OVER 5/8" PLYWOOD WHERE SHELVING OCCURS": one face, type 3 {lf3} x 8.0 + type 4 {lf4} x 7.5 = {s34} SF ({D12}, RFI-22 B)'})
+    # RFI-13 (B): FRP-1 in scope (A-510; 1-4/A-226B; 9-12/A-200)
+    misc.append({'ref': 'FRP-1-CAFE-WORKROOM', 'familia': 'FRP', 'qty': 875.2, 'unit': 'SF', 'source': 'A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B',
+                 'op': f'Cafe Work Room 104 FRP-1 full height to the 10\'-0" ceiling: 87.52 LF x 10.0 = 875.20 SF gross, doors not deducted ({D12}, RFI-13 B)'})
+    misc.append({'ref': 'FRP-1-JANITOR', 'familia': 'FRP', 'qty': 155.44, 'unit': 'SF', 'source': 'A-510; A-131; 9/A-200; 10/A-200; 11/A-200; 12/A-200',
+                 'op': f'Janitor 107 FRP-1 to 8\'-0": 19.43 LF x 8.0 = 155.44 SF gross ({D12}, RFI-13 B)'})
+    PVC12 = [{'ref': 'PVC-CAFE-WORKROOM', 'lf': 215.04, 'source': '1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B', 'op': 'J-mold top + bottom 2 x 87.52 + inside corner molding 4 x 10.0 = 215.04 LF'},
+             {'ref': 'PVC-JANITOR', 'lf': 70.86, 'source': '9/A-200; 10/A-200; 11/A-200; 12/A-200', 'op': 'J-mold top + bottom 2 x 19.43 + inside corner molding 4 x 8.0 = 70.86 LF'},
+             {'ref': 'PVC-TYPES-3-4', 'lf': round(2 * (lf3 + lf4), 2), 'source': '3/A-410; 4/A-410', 'op': f'J-mold top + bottom 2 x {round(lf3 + lf4, 2)} = {round(2 * (lf3 + lf4), 2)} LF'}]
+    # RFI-21 (A): fascia GWB at the Cafe Seating cloud (4/A-121)
+    misc.append({'ref': 'CLOUD-FASCIA-GWB', 'familia': '5/8" gyp board Type X', 'qty': 53.6, 'unit': 'SF', 'source': '4/A-121',
+                 'op': f'4/A-121 6" fascia: 107.21 LF edge x 0.5 ft = 53.6 SF ({D12}, RFI-21 A)'})
+    # RFI-24 (A): control joints per ASTM C840 (30 ft max) on the type 2 runs over 30 ft
+    misc.append({'ref': 'CONTROL-JOINTS-T2', 'familia': 'control joint', 'qty': 250.0, 'unit': 'LF', 'source': 'A-101; A-410',
+                 'op': f'ASTM C840 30 ft max: W2-01 48.77 LF -> 1, W2-03 94.24 LF -> 3, W2-04 56.76 LF -> 1 = 5 joints x 25.0 ft x 2 faces = 250.0 LF ({D12}, RFI-24 A)'})
+    # RFI-28 (A): moment clip at every stud of types 3 / 4 (A/A-410)
+    misc.append({'ref': 'MOMENT-CLIPS-T3-T4', 'familia': 'moment clip (types 3/4 base)', 'qty': 162, 'unit': 'PCS', 'source': 'A/A-410; 3/A-410; 4/A-410',
+                 'op': f'one ClarkDietrich MC clip per stud: type 3 = 40 studs + type 4 = 122 studs = 162 ({D12}, RFI-28 A)'})
+    misc.append({'ref': 'HUS-EZ-T3-T4', 'familia': 'Kwik HUS-EZ anchors', 'qty': 324, 'unit': 'PCS', 'source': '3/A-410; 4/A-410',
+                 'op': f'3/A-410, 4/A-410 "(2)-1/4"ø X 1 5/8" HILTI KWIK HUSEZ CONCRETE SCREW AND MOMENT CLIP": 162 clips x 2 = 324 ({D12}, RFI-28 A)'})
+    misc.append({'ref': 'SCREWS-10-16-MOMENT-CLIPS', 'familia': '#10-16 screws at moment clips', 'qty': 324, 'unit': 'PCS', 'source': 'A/A-410',
+                 'op': f'A/A-410 "(1) #10-16 SCREW @ EACH FLANGE": 162 clips x 2 = 324 ({D12}, RFI-28 A)'})
+    # RFI-29 (both): corner guards (rfi29_corner_guards/CONTEO.md)
+    misc.append({'ref': 'CORNER-GUARDS-METAL-72', 'familia': 'metal corner guard 2x2x72', 'qty': 72, 'unit': 'PCS', 'source': 'A-001A; A-101; A-221',
+                 'op': f'A-001A "INSTALL METAL CORNER GUARDS (2"X2"X72") AT ALL OUTSIDE CORNERS": C25 column surrounds 9 x 4 = 36 + type 3 posts 16 + type 4 hourglass caps 8 + type 2 (Storage SW 1, C26 alcove 4) 5 + Cafe 7 = 72 ({D12}, RFI-29)'})
+    misc.append({'ref': 'CORNER-GUARD-STAINLESS-48', 'familia': 'stainless corner guard 48', 'qty': 1, 'unit': 'PCS', 'source': 'C22/A-101',
+                 'op': f'C22/A-101 "STAINLESS STEEL CORNER GUARDS AT 48" A.F.F. FOR ALL OUTSIDE GYPSUM BOARD CORNERS AT STOCKROOM WALLS": the corner the C22 leader points to (loading zone bend) = 1 ({D12}, RFI-29)'})
+    # RFI-51: diagonal brace end screws, 2 per end (manufacturer rule; 3/A-410 prints none)
+    misc.append({'ref': 'SCREWS-8-BRACE-ENDS', 'familia': '#8 screws at brace ends', 'qty': 512, 'unit': 'PCS', 'source': '3/A-410',
+                 'op': f'diagonal braces 117 (type 2, 468.0 LF / 4.0) + 11 (Cafe, 44.0 LF / 4.0) = 128 braces x 2 ends x 2 = 512 ({D12}, RFI-51)'})
+    # RFI-43 (A): E1 cement board to 12'-0" (TL-4 / WD-1 to 11'-6" on 4/A-226A + 6"); 11'-6" at C-E1-B
+    for wid, h in (('C-E1-S', 12.0), ('C-E1-P.2', 12.0), ('C-E1-B', 11.5)):
+        for fc in wb12[wid]['faces']:
+            if 'cement' in fc['board'] and float(fc['height_ft']) > 0:
+                fc['height_ft'] = h
+                fc['height_source'] = f'4/A-226A TL-4 / WD-1 to {"11\'-6\"" if h == 12.0 else "11\'-0\""} + 6" (A-410 Partition Notes 3) = {h} ft ({D12}, RFI-43 A)'
+    # RFI-44: T.O. WD-1 on the H3a Sales face = 15'-0" (6/A-226A precedent): FRT plywood to 15'-0", 5/8" Type X above to deck
+    for st in strips:
+        if st['ref'] == 'C-H3a-A-FRT':
+            st['width_ft'] = 15.0
+            st['op'] = f"4.08 LF x 15.0 ft (H/A-221 \"H3a = PLYWOOD TO TOP OF WD-1\"; T.O. WD-1 15'-0\" per 6/A-226A, {D12}, RFI-44)"
+    wb12['C-H3a']['faces'].append({'side': 'A', 'room': 'Sales Area 101', 'board': '5/8 type X', 'layers': 1, 'height_ft': 10.0,
+                                    'height_source': f"GWB band from T.O. WD-1 15'-0\" to deck 25'-0\" = 10.0 ft (H/A-221, 6/A-226A; {D12}, RFI-44)",
+                                    'board_source': '5/8" Type X on all new walls (estimator decision RFI-27): A-001A Div 09 A.2'})
+    # RFI-50: server room FRT plywood BY GC (2/E-103) - excluded
+    strips[:] = [x for x in strips if x['ref'] != 'SERVER-ROOM-BACKBOARD']
+    # RFI-49: 0 cased openings (2/A-500 not referenced on any plan)
+    blocking[:] = [x for x in blocking if x['ref'] != 'BLK-CASED-OPENING']
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -1373,6 +1439,20 @@ def _ren(o):   # rev5 (audit rev4 row 21): the type I return carries its type in
 for sh, fr in frag_walls.items():
     os.makedirs(OUT_W, exist_ok=True)
     json.dump(_ren(fr), open(OUT_W + f'/{sh}.json', 'w'), indent=1, ensure_ascii=False)
+if REV12:
+    general['constants']['slab_pin_spacing_ft'] = {'value': 1.333333, 'source': 'A-410 note 8.F spacing, one row @ 16" O.C. (estimator decision 2026-10-27, RFI-ACC-slab-pins B)'}
+    general['constants']['addl_head_track_min_ro_ft'] = {'value': 0.0, 'source': 'A-500 door schedule; 1/A-500: 2-piece track header at every door (estimator decision 2026-10-27, RFI-09 B; replaces RFI-31)'}
+    general['constants']['addl_head_track_pieces'] = {'value': 2, 'source': '2-piece track header (estimator decision 2026-10-27, RFI-09 B)'}
+    general['mep_estimator_count'] = {'source': 'M-102; A-101 (rfi_mep_cruces/CRUCES.md, estimator decision 2026-10-27)', 'items': [
+        {'ref': r, 'wall': w, 'width': wd, 'plates': 1, 'sleeves': sl} for r, w, wd, sl in (
+            ('X01', 'W2-03', '14" DIA', 1), ('X02', 'W2-06.1', '6" DIA', 1), ('X03', 'W2-06.5', '6" DIA', 1), ('X04', 'W5-01', '6" DIA', 1),
+            ('X05', 'W2-07', '6" DIA', 1), ('X06', 'W2-08', '10" DIA', 1), ('X07', 'W2-09', '8" DIA', 1), ('X08', 'W2-01', '10" DIA', 1),
+            ('T01', 'W2-03', 'TG-1 12"x10"', 0), ('T02', 'W2-02', 'TG-1 14"x6"', 0))]}
+    general['pvc_trim_items'] = PVC12
+    general['acc_nombres'] = {'additional head track': 'Additional head track at openings over 4\'-0" wide - extended to every door as a 2-piece track header (R.O. + 1\'-4") x 2 (RFI-09)',
+                              'PAFs and duct sleeves': 'Power-driven fasteners and duct sleeves - duct sleeves at the duct crossings (M-102)'}
+    general['frp_none_reason'] = 'FRP-1 carried by misc items: Cafe Work Room, Janitor (RFI-13 B) and one face of types 3 / 4 (RFI-22 B) - estimator decision 2026-10-27 (A-510; 1-4/A-226B; 9-12/A-200; 3/A-410; 4/A-410)'
+
 json.dump(_ren(general), open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)
 if FINAL:
     json.dump(RESOL, open(BN + '/takeoff_work/etapas/3_revision/resolucion_items.json', 'w'), indent=1, ensure_ascii=False)
