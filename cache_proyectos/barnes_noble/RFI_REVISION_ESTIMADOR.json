@@ -9,7 +9,7 @@
   "rfi": "RFI-ACC-stud-reinforcement-mep",
   "q": "stud reinforcement MEP: MEP sweep not registrable: the registration check of M-102 (page 48) vs A-101 (page 6) gave 20 / 14 matching wall segments (< 25 required); the HVAC sheet is not used for geometric crossings (registration rule). Ducts crossing the full-height type 2 / 5 / E walls must be counted from M-102 by the estimator.",
   "delta": "per duct crossing a stud wall: + MAX(1, ROUNDUP(duct width / 16\")) stud reinforcement plates x stud rows (take-off default, not printed: 6/A-410 and 7/A-410 are pipe firestopping only); plus 1 duct sleeve each",
-  "estado": "DECIDIDO A: 8 cruces = 8 plates + 8 duct sleeves (rfi_mep_cruces/CRUCES.md, commit 30b7258); TG-1 x2 pendiente de decidir (+2 plates)"
+  "estado": "DECIDIDO A: 8 cruces = 8 plates + 8 duct sleeves (rfi_mep_cruces/CRUCES.md, commit 30b7258); TG-1 x2 pendiente de decidir (+2 plates) | TG-1 x2 AUTO: +2 plates (aberturas dibujadas en W2-03 y W2-02, M-102)"
  },
  {
   "rfi": "RFI-03",
@@ -195,7 +195,7 @@
   "rfi": "RFI-51",
   "q": "Fastener counts not printed: 7/A-210 3\"x3\"x16 ga clip angles (count per header end); cement board screw spacing (manufacturer standard 8\" O.C. used); plywood screws per A-410 note 8.D (24\" field / 12\" perimeter on 4x8 sheets).",
   "delta": "Carried: clip angles 7/A-210 4 pcs; cement board screws 1686 pcs; plywood screws 2331 pcs - adjust to the estimator yields. Framing screws count the stud pieces of the walls and column wraps (781) by gauge (A-410 note 8.A); the 8/A-410 #8 screws (top chord, cross members, track) have their own row; 5/A-410 bracing clips are in the Tek screw row; diagonal brace end screws (3/A-410) are not printed and not carried (if 2 per end: + 512 #8). 9/A-410 calls #8 screws stud to track while note 8.A calls #10-16 on 18/16 ga - carried per 8.A. relief channel to structure carried with 8/A-410 #8 pan head screws (291 pcs) + P.A.F. at cross members (282 pcs); note 8.C X-EDNI (2 rows @ 16\" = 720 pcs) is the alternative if the track bears directly on structural steel. Slab pins carried per note 8.F (2 rows @ 16\" X-DNI); 9/A-410 alternative 0.177\" PAF @ 24\" = - 518.29 pcs (518.29 LF of interior bottom track on slab). 8/A-210 \"(8) #10-16 TEKS 16\"O.C., TYP.\" read as 8 per station at 16\" O.C. (520 pcs carried); if 8 per member in total: - 464 pcs. 7/A-210 head attachment clips: 2 assumed (16 screws), count not printed.",
-  "estado": "AUTO: dejar lo cargado + brace end screws 2 por extremo +512 #8 (regla código/fabricante cuando el plano no imprime); lectura 8/A-210 (520 vs -464) a revisión conjunta"
+  "estado": "AUTO: dejar lo cargado + brace end screws 2 por extremo +512 #8 (regla código/fabricante cuando el plano no imprime); 8/A-210 DECIDIDO A: 520 pcs (8 por punto @ 16\" O.C.)"
  },
  {
   "rfi": "RFI-54",
