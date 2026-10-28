@@ -2477,3 +2477,23 @@ Nunca repetir trabajo sin provecho. Pasos 11/12: una pasada completa por revisi�
 
 ### R80e.33 — Código del trade cuando el plano no responde (usuario 27-oct, REGLA INVIOLABLE, todos los proyectos)
 ORDEN DE FUENTES: 1) planos, 2) spec sheets — si plano y spec difieren pero pueden convivir, se aplican LAS DOS, cada una en su alcance (B&N: corner guards C22 stainless 48" en stock room + spec A-001A 2x2x72 en el resto); 3) solo si no encuentran nada, el código. Si el plano y la spec no dan la respuesta: aplicar SIEMPRE el código/norma del trade (drywall ASTM C840 / GA-216 / UL; metal frame AISI S220/S240, ASTM C754, fabricante; IBC/ASCE 7 sísmico; NFPA/UL firestop). Se carga con cita del código; RFI solo si el código no lo cubre o hay conflicto. Al cerrar la revisión de RFI de un proyecto, cada decisión del estimador pasa a regla general del skill.
+
+### R80e.34 — Decisiones del estimador B&N (revisión de 34 RFI, 2026-10-27) convertidas en REGLA GENERAL (todos los proyectos)
+1. Nota típica vs detalle con distinto espaciamiento de fastener → 1 hilera al espaciamiento menor impreso (B&N slab pins: 1 hilera @ 16").
+2. MEP: contar visualmente cada ducto que cruza un wall full height (sin registro geométrico): 1 plate por cada 16" de ancho (mín. 1) + 1 duct sleeve; transfer grilles dibujadas en wall = +1 plate c/u.
+3. Altura de deck V.I.F. con pendiente → altura media impresa (no la máxima).
+4. Sin header schedule → header de track 2 piezas en TODA puerta: (R.O. + 1'-4") × 2; no sumar head track extra encima (doble conteo).
+5. Acabados (FRP, PVC trim) dibujados sin "by others" → en alcance.
+6. Fascia / bordes de GWB que dibuja un detalle → se cargan aunque la cota sea medida.
+7. "X where shelving occurs" → la cara que señala la flecha, todo el largo (tope), reemplazando el GWB de esa cara; plywood siempre FRT si la hoja lo dice.
+8. Control joints no detalladas → ASTM C840 (≤30 ft corrido), ambas caras, altura del wall.
+9. Anclajes dibujados en la base de walls parciales (moment clip) → uno por stud con sus anclajes y tornillos impresos.
+10. Plano y spec distintos pero compatibles → LAS DOS, cada una en su alcance (corner guards C22 + A-001A).
+11. "BY GC", "by fixture installer", "GC shall install" → EXCLUIDO con nota (no se carga).
+12. Detalle con "TYP." (fire stop at ceiling line, nested runner) → se carga en todos los walls que aplica.
+13. Seismic bracing dibujado en detalle → se carga aunque falte la hoja referida; el plano manda sobre el código.
+14. Producto especificado sin R.O. → spec del fabricante; si lo cargado es conservador y cubre la versión rated, se deja.
+15. Cement board / backer → hasta el acabado más alto impreso + 6" (nunca a deck si no hay acabado arriba), IBC 2509.2.
+16. Detalle huérfano (sin burbuja en ninguna hoja) → 0, con nota.
+17. Lecturas dobles de cantidad de fastener → la que respeta el espaciamiento impreso (más conservadora).
+18. Madera / board / plywood → waste NO metal (Inputs B6), nunca el de metal.
