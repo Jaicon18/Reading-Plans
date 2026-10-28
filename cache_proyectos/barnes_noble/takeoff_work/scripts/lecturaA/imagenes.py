@@ -22,7 +22,10 @@ def pts(w):
     if b['ori'] == 'D':
         return [tuple(b['p0']), tuple(b['p1'])]
     return [(b['c0'], b['lo']), (b['c1'], b['lo']), (b['c1'], b['hi']), (b['c0'], b['hi']), (b['c0'], b['lo'])]
-rows = [(t, f) for t, v in pt['types'].items() for f in v['filas']] + [('OTHER FRAMING', dict(o, wall=o['id'], ids=[o['id']])) for o in pt['other_framing']]
+EL = {'column_wrap': 'COLUMN WRAP', 'soffit_side': 'SOFFIT SIDE'}   # rev13: own type in the legend (= markup Subject)
+COL.update({'COLUMN WRAP': (115, 64, 13), 'SOFFIT SIDE': (0, 77, 166)})
+rows = [(t, f) for t, v in pt['types'].items() for f in v['filas']] + [(EL.get(str(byid.get(o['id'], {}).get('element')), 'OTHER FRAMING'), dict(o, wall=o['id'], ids=[o['id']])) for o in pt['other_framing']]
+LABEL = 'rev13 2026-10-28'
 doc = fitz.open(PDF)
 try:
     font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 22)
@@ -53,7 +56,7 @@ for sheet, pg, dpi, clip in (('A-101', 6, 110, fitz.Rect(150, 380, 2150, 1560)),
         q = best[1]; mx, my = (q[0][0] + q[-1][0]) / 2, (q[0][1] + q[-1][1]) / 2
         segs += own
         labs.append({'text': f['wall'], 'anchor': (mx, my), 'color': col, 'own': own})   # Wall # = Excel
-    nleg = len([t for t in ORDER + ['OTHER FRAMING'] if t in tot])
+    nleg = len([t for t in ORDER + ['COLUMN WRAP', 'SOFFIT SIDE', 'OTHER FRAMING'] if t in tot])
     for (x0, y0, x1, y1) in ((0, 0, im.size[0] * 0.75, 62), (0, 62, 560, 70 + 30 * nleg)):   # título y leyenda reservados
         segs += [((x0, y0), (x1, y0)), ((x1, y0), (x1, y1)), ((x1, y1), (x0, y1)), ((x0, y1), (x0, y0)),
                  ((x0, y0), (x1, y1)), ((x0, y1), (x1, y0)), ((x0, (y0 + y1) / 2), (x1, (y0 + y1) / 2))]
@@ -61,12 +64,12 @@ for sheet, pg, dpi, clip in (('A-101', 6, 110, fitz.Rect(150, 380, 2150, 1560)),
     # leyenda en orden del schedule
     ly = 70; lx = 20
     dr.rectangle([0, 0, im.size[0] * 0.75, 62], fill='white'); dr.rectangle([0, 62, 560, 70 + 30 * nleg], fill='white')   # fondo legible
-    dr.text((lx, 15), f'Barnes & Noble - Colorado Springs, CO | {sheet} | partitions by type | 2026-10-24', fill='black', font=fbig)
-    for t in ORDER + ['OTHER FRAMING']:
+    dr.text((lx, 15), f'Barnes & Noble - Colorado Springs, CO | {sheet} | partitions by type | {LABEL}', fill='black', font=fbig)
+    for t in ORDER + ['COLUMN WRAP', 'SOFFIT SIDE', 'OTHER FRAMING']:
         if t not in tot: continue
         col = COL.get(t, (170, 110, 255))
         dr.rectangle([lx, ly, lx + 60, ly + 18], fill=col)
-        dr.text((lx + 70, ly - 4), f'TYPE {t}   {round(tot[t], 2)} LF', fill='black', font=font)
+        dr.text((lx + 70, ly - 4), (f'TYPE {t}' if t in ORDER else f'OTHER FRAMING - {t}' if t != 'OTHER FRAMING' else t) + f'   {round(tot[t], 2)} LF', fill='black', font=font)
         ly += 30
     out = E + f'/7_imagenes/{sheet}_partitions_by_type.png'
     im.save(out); print(out, im.size, {k: round(v, 2) for k, v in tot.items()})

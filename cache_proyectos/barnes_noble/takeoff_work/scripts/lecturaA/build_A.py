@@ -1475,6 +1475,7 @@ if REV12:
     general['frp_none_reason'] = 'FRP-1 carried by misc items: Cafe Work Room, Janitor (RFI-13 B) and one face of types 3 / 4 (RFI-22 B) - estimator decision 2026-10-27 (A-510; 1-4/A-226B; 9-12/A-200; 3/A-410; 4/A-410)'
 
 if os.environ.get('REV13') == '1':
+    general['markup_label'] = 'rev13 2026-10-28'
     general['acc_nombres']['PVC trim at FRP'] = 'PVC trim - edge trim molding and inside corner molding at the FRP, incl. outside corners, door edges and division bars every 4\' (see breakdown)'
 
 json.dump(_ren(general), open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)

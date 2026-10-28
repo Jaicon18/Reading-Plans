@@ -43,3 +43,6 @@ None. B1 (BE-47) is fixed in the rebuild.
 - R58's breakdown has no final "= 887.62 LF" line; adding one is optional.
 - Scope Checklist D21 still ends "FRP-1 extent RFI-13 / RFI-22 not carried" (inherited, contradicts QUANTIFIED) and does not mention the Cafe below-countertop FRP. Update the text.
 - Inherited from rev12: 0 % waste on yield and small-count rows (standing rule); snake_case kinds in Partition Takeoff A96-A109 and MS I49.
+
+## Addendum (markups rev13, 2026-10-28)
+The Excel was rebuilt after the markups update. The only cell that differs from the back-checked file (md5 0941eb1e) is the hidden `_reglas!A2` seal (canon hash), which changed because the canon gained `markup_label`. Every visible cell is identical: 0 differences in Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items and Scope Checklist. The verdict above stands for the rebuilt file.
