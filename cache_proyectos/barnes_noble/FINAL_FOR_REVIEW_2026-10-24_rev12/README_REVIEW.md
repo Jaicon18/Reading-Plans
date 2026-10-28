@@ -64,10 +64,22 @@ In the Pending Items sheet, every RFI in the decision file now reads "CLOSED - e
 | RFI-51 | Brace end screws | + 512 #8 screws |
 
 ## Error library
-LIBRARY_RESULT
+Independent back-check of the final Excel: **PASS WITH COMMENTS — LIBRARY 44 PASS · 0 FAIL · 3 N/A**, BE-57 included. It confirms all 34 RFI decisions and the 21 expected changes. See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev12.md`. The first pass found 2 FAIL, both fixed:
+- BE-41: internal folder names in Pending Items.
+- BE-40: the head track breakdown was cut off.
+
+Comments (not blocking):
+- **0 % waste on two kinds of rows, by the standing rule since v67.** Accessory yield rows (screws, pins, compound, tape) carry the yield instead of waste. Counted schedule pieces of 20 PCS or fewer also carry none: stainless corner guard 1, plates 10, sleeves 8, hanger count.
+- **Head track row:** the breakdown lists all 9 doors, and the total of 83.32 LF is in the Net column.
+- **PVC trim (530.54 LF):** derived as J-mold top and bottom plus inside corners. RFI-13 gave no figure, so the estimator should confirm it.
 
 ## Gates
-GATES_RESULT
+- REGLAS OK (820 rules, 0 failures)
+- ALCANCES OK (24 reviewed, 2 RFI)
+- `registro.py entregable` OK
+- EXCEL v67 OK
+- ETAPAS PASA
+- BITACORA OK (17 mandatory tools current + back-check)
 
 Skill **v80r**: rule R80e.35 (estimator decisions in the pipeline: estimator MEP count, N-piece door header, FRP + PVC by items, new families, RFI closure in Pending Items). It also syncs R80e.33 / R80e.34. Packed with `zip -qrD` (132 files). test_ciego_tools and test_smoke_ciego pass. File: `take-off-metal-frame-drywall_FINAL_v80r.zip`.
 

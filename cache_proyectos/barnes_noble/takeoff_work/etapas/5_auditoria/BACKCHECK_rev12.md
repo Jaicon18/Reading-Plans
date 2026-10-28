@@ -1,9 +1,9 @@
-VERDICT: FAIL
-LIBRARY: 42 PASS · 2 FAIL · 3 N/A
+VERDICT: PASS WITH COMMENTS
+LIBRARY: 44 PASS · 0 FAIL · 3 N/A
 
 # Back-check rev12 - Barnes & Noble Colorado Springs (2026-10-28)
 
-File: `Barnes_Noble_ColoradoSprings_Takeoff_FINAL_rev12.xlsx`, md5 3c64ba1a9525bc3fa4d4488204675d39 (verified). Scope per R80e.30: only the rows touched in rev12 plus the full error library (47 tests, BE-01..BE-57). Plans were not re-read.
+File: `Barnes_Noble_ColoradoSprings_Takeoff_FINAL_rev12.xlsx`, md5 7619b0cc728eb569f8f5fbdda318ffb8 (re-test of the rebuild; first pass was on 3c64ba1a9525bc3fa4d4488204675d39). All 67 Material Summary nets match the first file exactly. Scope per R80e.30: only the rows touched in rev12 plus the full error library (47 tests, BE-01..BE-57). Plans were not re-read.
 
 ## 1. RFI decisions (34/34 present in Pending Items, all start "CLOSED - estimator decision 2026-10-27:" with N/SHEET and delta)
 
@@ -13,7 +13,7 @@ File: `Barnes_Noble_ColoradoSprings_Takeoff_FINAL_rev12.xlsx`, md5 3c64ba1a9525b
 | RFI-ACC-stud-reinf-mep | A: 8 crossings + TG-1 x2 | YES | R54 0 -> 10 (X01-X08 + T01-T02); R59 duct sleeves 8; ALC-17 |
 | RFI-03 | A: deck 25'-0" | YES | no change |
 | RFI-05 | A: E1/E2 once | YES | no change |
-| RFI-09 | B: 2-piece header every door | YES (text FAIL) | R53 83.32 LF, 9 doors; breakdown text cut at 519 chars (see B2) |
+| RFI-09 | B: 2-piece header every door | YES | R53 83.32 LF, all 9 doors listed (door 3 = 10.67) |
 | RFI-13 | B: FRP-1 + PVC trim | YES | R37 875.20 + 155.44; R58 215.04 + 70.86 |
 | RFI-21 | A: fascia +53.6 SF Type X | YES | R19 CLOUD-FASCIA-GWB 53.6 |
 | RFI-22 | B: 1 face types 3/4 | YES | R50 +936.74 (309.44 + 627.30); R37 +936.74; R19 -936.74 (PT rows 19-44 layers 2 -> 1); R58 +244.64 |
@@ -36,7 +36,7 @@ Board chain: Type X 15,109.29 - 936.74 + 40.8 + 53.6 = 14,266.95 (breakdown 14,2
 ## 2. Format
 - Sheets 6 visible + hidden `_reglas`, same as rev11; columns unchanged (Inputs gains row 30 FRP panel = 40 SF; OK).
 - Wood blocking R18: B6 waste, B26 = 16 ft kept. FRP R37 / B30. All Pieces formulas use Inputs stock cells.
-- Waste: see B3.
+- Waste: see the first non-blocking comment.
 
 ## 3. Library
 
@@ -51,19 +51,18 @@ Board chain: Type X 15,109.29 - 936.74 + 40.8 + 53.6 = 14,266.95 (breakdown 14,2
 | BE-56 | PASS | slab pins on 640.61 - 122.32 = 518.29 LF |
 | BE-20..BE-25, BE-29 | PASS | tracks 450.02/118.59 unchanged; headers 83.32 with RFI-09 |
 | BE-26, BE-27, BE-28 | N/A | no ballistic / ATM recess / canopy |
-| BE-40 | **FAIL** | R53 "Where it comes from" truncated after "Door 3 (C-H2a): (4.0 + 2 x 0.667)": no door 3 result and no "= 83.32 LF" |
-| BE-41 | **FAIL** | Pending Items C3 "rfi_mep_cruces/CRUCES.md", C32 "rfi29_corner_guards/CONTEO.md", C46 "rfi43_cement_board/", C52 "rfi49_cased_openings/" |
+| BE-40 | PASS | Re-tested: R53 now lists all 9 doors, and they sum to 83.35 (rounded lines; net 83.32, within 0.1) |
+| BE-41 | PASS | Re-tested: no .json/.py/.md, work folders, commits or plan-check codes on the visible sheets (Pending Items C3, C32, C46, C52 cleaned) |
 | BE-42, BE-43, BE-44, BE-45 | PASS | PT changes only layers (types 3/4) and E1 heights; lengths/heights for markups unchanged |
 | BE-46..BE-51, BE-54, BE-55 | PASS | numbers/IDs in texts match; no plan-check codes |
 | BE-57 | PASS | no non-metal row uses B5 (FRP, PVC, cement board, plywood, blocking = B6) |
 
 ## Blocking issues
-- **B1 (BE-41)** Remove the internal folder/file names from Pending Items C3, C32, C46, C52 (replace with "count on M-102 / A-101", "count on A-001A / A-101", etc.).
-- **B2 (BE-40)** Material Summary I53: complete the text: "...Door 3 (C-H2a): (4.0 + 2 x 0.667) x 1 x 2 pieces = 10.67 = 83.32 LF (9 doors)".
-- **B3 (check 2, waste)** Rows touched in rev12 with Waste % = 0 instead of an Inputs cell: R46 stainless corner guard, R54 stud plates, R59 duct sleeves, R61 Type S screws, R63 slab pins -> `=Inputs!$B$5`; R65 joint compound, R66 tape -> `=Inputs!$B$6`. (R46 is inconsistent with its sibling R45, which uses B5.)
+None. B1 (BE-41) and B2 (BE-40) are fixed in the rebuild (md5 7619b0cc...).
 
 ## Non-blocking comments
-- Same 0 waste inherited from rev11 on untouched rows R52, R60, R62, R64, R68, R69, R70: fix together with B3 for consistency.
+- Waste 0 % (kept on purpose under the coordinator's standing rule since v67, which covers accessory yield rows and counted pieces of 20 PCS or fewer). The rows touched in rev12 that still carry 0 % are R46 stainless guard 1, R54 plates 10, R59 sleeves 8, R61 Type S, R63 slab pins, R65 compound and R66 tape. Untouched rows R52, R60, R62, R64 and R68-R70 also carry 0 %. No library test requires otherwise: BE-57 only bars B5 on non-metal rows, and that test passes. This differs from the brief's "metal = B5 / non-metal = B6" wording, so the estimator should confirm.
+- R53 lists every door but prints no "= 83.32 LF" total line; adding one is optional.
 - R53 is a track header but is bought as 20 ft stud sticks (B10); rev11 used B11 (track 10 ft). B10's note does list "header", so it is acceptable; confirm.
 - R59 name "Power-driven fasteners and duct sleeves - duct sleeves..." is a leftover; rename to "Duct sleeves at duct crossings (M-102)".
 - Partition Takeoff A96-A109 show snake_case kinds ("column_wrap", "soffit_side"), and MS I49 shows "framed_soffit"; inherited, cosmetic.

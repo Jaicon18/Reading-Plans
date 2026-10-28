@@ -12,6 +12,7 @@
 3. **Siguen igual:** partitions 569.82 LF.
 4. **Pending Items:** los 34 dicen "CLOSED - estimator decision 2026-10-27" con N/HOJA y delta.
 5. **Excluidos en el Scope Checklist:** access panels, W-3 blocking y server room plywood.
-6. **Biblioteca y compuertas:** en el README.
+6. **Biblioteca:** 44 PASS · 0 FAIL · 3 N/A (con BE-57). Back-check: PASS WITH COMMENTS. Compuertas: todas OK.
+   - El PVC trim (530.54 LF) lo derivé yo, porque el RFI-13 no traía cifra: revísalo.
 7. **Skill:** sube a v80r (R80e.35).
 8. **Drive:** no se subió. No se envió nada al cliente.
