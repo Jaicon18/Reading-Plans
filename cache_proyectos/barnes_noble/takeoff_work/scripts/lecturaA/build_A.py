@@ -1381,6 +1381,27 @@ if REV12:
     # RFI-49: 0 cased openings (2/A-500 not referenced on any plan)
     blocking[:] = [x for x in blocking if x['ref'] != 'BLK-CASED-OPENING']
 
+# ---------------------------------------------------------------- REV13 (decisiones del estimador sobre rev12_pvc_trim/RFI_PVC.md, 2026-10-28)
+if os.environ.get('REV13') == '1':
+    D13 = 'estimator decision 2026-10-28'
+    for m in misc:
+        if m['ref'] == 'FRP-1-CAFE-WORKROOM':   # finished dimensions printed on 1/A-221
+            m['qty'] = 852.2; m['source'] = '1/A-221; A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B'
+            m['op'] = f'Cafe Work Room 104 FRP-1 to the 10\'-0" ceiling: finished perimeter (28.49 + 12.17) x 2 + stub C-H2b 1.95 x 2 = 85.22 LF (1/A-221 "28\'-5 7/8"" x "12\'-2"") x 10.0 = 852.20 SF gross ({D13}; RFI-13)'
+    misc.append({'ref': 'FRP-1-CAFE-BELOW-COUNTER', 'familia': 'FRP', 'qty': 57.0, 'unit': 'SF', 'source': '1/A-225; 4/A-225; 6/A-225',
+                 'op': f'1/A-225 "FRP-1 BELOW COUNTERTOP" on the C-E1-S Cafe face: 19.0 LF x 3.0 ft (6/A-225 "3\'-0" AFF TO COUNTERTOP") = 57.0 SF ({D13})'})
+    PVC12[:] = [
+        {'ref': 'PVC-CAFE-WORKROOM', 'lf': 266.44, 'source': '3/A-225; 1/A-225; 1/A-221; A-500',
+         'op': f'J-mold at bottom (3/A-225 "FRP J-MOLD AT BOTTOM OF FRP PANEL") 85.22 - door 3 4.0 = 81.22 + top edge 85.22 + inside corners 6 x 10.0 = 60.0 + outside corners (stub C-H2b end) 2 x 10.0 = 20.0 + door 3 edge trim 2 x 8.0 + 4.0 = 20.0 = 266.44 LF ({D13})'},
+        {'ref': 'PVC-JANITOR', 'lf': 84.86, 'source': '9/A-200; 10/A-200; 11/A-200; 12/A-200; A-500',
+         'op': f'J-mold at bottom 19.43 - door 7 3.0 = 16.43 + top edge at 8\'-0" 19.43 + inside corners 4 x 8.0 = 32.0 + door 7 edge trim 2 x 7.0 + 3.0 = 17.0 = 84.86 LF ({D13})'},
+        {'ref': 'PVC-TYPES-3-4', 'lf': 154.32, 'source': '3/A-410; 4/A-410; 4/A-225',
+         'op': f'J-mold at bottom 122.32 + type 3 vertical edge trim 2 walls x 2 ends x 8.0 = 32.0 (top: corner bead already carried; hourglass cap outside corners: metal corner guard A-001A governs, no PVC) = 154.32 LF ({D13})'},
+        {'ref': 'PVC-CAFE-BELOW-COUNTER', 'lf': 19.0, 'source': '4/A-225; 1/A-225',
+         'op': f'4/A-225 "FRP J-MOLD AT BOTTOM OF FRP PANEL" above B-2 on the C-E1-S Cafe face: 19.0 LF ({D13})'},
+        {'ref': 'FRP-DIVISION-BARS', 'lf': 363.0, 'source': 'A-001A; 1/A-225; 9/A-200; 3/A-410; 4/A-410',
+         'op': f'division bars at every 4\' panel joint: Work Room 18 x 10.0 = 180 + Janitor 2 x 8.0 = 16 + type 3 4 x 8.0 = 32 + type 4 18 x 7.5 = 135 = 363 LF ({D13}; A-001A FRP per manufacturer)'}]
+
 frag_walls = {sh: {'walls': walls[sh]} for sh in walls}
 frag_walls['A-101']['tags_descartados'] = [d for d in descartes if d['id'] == 'PT0007' or 'RFI-01' in d['motivo']]
 frag_walls['A-221']['tags_descartados'] = [d for d in descartes if d['id'] != 'PT0007' and not (FINAL and d['id'] == 'PT0050')]
@@ -1452,6 +1473,9 @@ if REV12:
     general['acc_nombres'] = {'additional head track': 'Additional head track at openings over 4\'-0" wide - extended to every door as a 2-piece track header (R.O. + 1\'-4") x 2 (RFI-09)',
                               'PAFs and duct sleeves': 'Power-driven fasteners and duct sleeves - duct sleeves at the duct crossings (M-102)'}
     general['frp_none_reason'] = 'FRP-1 carried by misc items: Cafe Work Room, Janitor (RFI-13 B) and one face of types 3 / 4 (RFI-22 B) - estimator decision 2026-10-27 (A-510; 1-4/A-226B; 9-12/A-200; 3/A-410; 4/A-410)'
+
+if os.environ.get('REV13') == '1':
+    general['acc_nombres']['PVC trim at FRP'] = 'PVC trim - edge trim molding and inside corner molding at the FRP, incl. outside corners, door edges and division bars every 4\' (see breakdown)'
 
 json.dump(_ren(general), open(OUT_W + '/general.json', 'w'), indent=1, ensure_ascii=False)
 if FINAL:

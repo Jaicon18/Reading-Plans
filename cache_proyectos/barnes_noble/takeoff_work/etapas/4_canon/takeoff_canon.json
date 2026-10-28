@@ -7382,10 +7382,10 @@
   {
    "ref": "FRP-1-CAFE-WORKROOM",
    "familia": "FRP",
-   "qty": 875.2,
+   "qty": 852.2,
    "unit": "SF",
-   "source": "A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
-   "op": "Cafe Work Room 104 FRP-1 full height to the 10'-0\" ceiling: 87.52 LF x 10.0 = 875.20 SF gross, doors not deducted (estimator decision 2026-10-27, RFI-13 B)"
+   "source": "1/A-221; A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
+   "op": "Cafe Work Room 104 FRP-1 to the 10'-0\" ceiling: finished perimeter (28.49 + 12.17) x 2 + stub C-H2b 1.95 x 2 = 85.22 LF (1/A-221 \"28'-5 7/8\"\" x \"12'-2\"\") x 10.0 = 852.20 SF gross (estimator decision 2026-10-28; RFI-13)"
   },
   {
    "ref": "FRP-1-JANITOR",
@@ -7458,6 +7458,14 @@
    "unit": "PCS",
    "source": "3/A-410",
    "op": "diagonal braces 117 (type 2, 468.0 LF / 4.0) + 11 (Cafe, 44.0 LF / 4.0) = 128 braces x 2 ends x 2 = 512 (estimator decision 2026-10-27, RFI-51)"
+  },
+  {
+   "ref": "FRP-1-CAFE-BELOW-COUNTER",
+   "familia": "FRP",
+   "qty": 57.0,
+   "unit": "SF",
+   "source": "1/A-225; 4/A-225; 6/A-225",
+   "op": "1/A-225 \"FRP-1 BELOW COUNTERTOP\" on the C-E1-S Cafe face: 19.0 LF x 3.0 ft (6/A-225 \"3'-0\" AFF TO COUNTERTOP\") = 57.0 SF (estimator decision 2026-10-28)"
   }
  ],
  "family_splits": [
@@ -7910,26 +7918,39 @@
  "pvc_trim_items": [
   {
    "ref": "PVC-CAFE-WORKROOM",
-   "lf": 215.04,
-   "source": "1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
-   "op": "J-mold top + bottom 2 x 87.52 + inside corner molding 4 x 10.0 = 215.04 LF"
+   "lf": 266.44,
+   "source": "3/A-225; 1/A-225; 1/A-221; A-500",
+   "op": "J-mold at bottom (3/A-225 \"FRP J-MOLD AT BOTTOM OF FRP PANEL\") 85.22 - door 3 4.0 = 81.22 + top edge 85.22 + inside corners 6 x 10.0 = 60.0 + outside corners (stub C-H2b end) 2 x 10.0 = 20.0 + door 3 edge trim 2 x 8.0 + 4.0 = 20.0 = 266.44 LF (estimator decision 2026-10-28)"
   },
   {
    "ref": "PVC-JANITOR",
-   "lf": 70.86,
-   "source": "9/A-200; 10/A-200; 11/A-200; 12/A-200",
-   "op": "J-mold top + bottom 2 x 19.43 + inside corner molding 4 x 8.0 = 70.86 LF"
+   "lf": 84.86,
+   "source": "9/A-200; 10/A-200; 11/A-200; 12/A-200; A-500",
+   "op": "J-mold at bottom 19.43 - door 7 3.0 = 16.43 + top edge at 8'-0\" 19.43 + inside corners 4 x 8.0 = 32.0 + door 7 edge trim 2 x 7.0 + 3.0 = 17.0 = 84.86 LF (estimator decision 2026-10-28)"
   },
   {
    "ref": "PVC-TYPES-3-4",
-   "lf": 244.64,
-   "source": "3/A-410; 4/A-410",
-   "op": "J-mold top + bottom 2 x 122.32 = 244.64 LF"
+   "lf": 154.32,
+   "source": "3/A-410; 4/A-410; 4/A-225",
+   "op": "J-mold at bottom 122.32 + type 3 vertical edge trim 2 walls x 2 ends x 8.0 = 32.0 (top: corner bead already carried; hourglass cap outside corners: metal corner guard A-001A governs, no PVC) = 154.32 LF (estimator decision 2026-10-28)"
+  },
+  {
+   "ref": "PVC-CAFE-BELOW-COUNTER",
+   "lf": 19.0,
+   "source": "4/A-225; 1/A-225",
+   "op": "4/A-225 \"FRP J-MOLD AT BOTTOM OF FRP PANEL\" above B-2 on the C-E1-S Cafe face: 19.0 LF (estimator decision 2026-10-28)"
+  },
+  {
+   "ref": "FRP-DIVISION-BARS",
+   "lf": 363.0,
+   "source": "A-001A; 1/A-225; 9/A-200; 3/A-410; 4/A-410",
+   "op": "division bars at every 4' panel joint: Work Room 18 x 10.0 = 180 + Janitor 2 x 8.0 = 16 + type 3 4 x 8.0 = 32 + type 4 18 x 7.5 = 135 = 363 LF (estimator decision 2026-10-28; A-001A FRP per manufacturer)"
   }
  ],
  "acc_nombres": {
   "additional head track": "Additional head track at openings over 4'-0\" wide - extended to every door as a 2-piece track header (R.O. + 1'-4\") x 2 (RFI-09)",
-  "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves - duct sleeves at the duct crossings (M-102)"
+  "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves - duct sleeves at the duct crossings (M-102)",
+  "PVC trim at FRP": "PVC trim - edge trim molding and inside corner molding at the FRP, incl. outside corners, door edges and division bars every 4' (see breakdown)"
  },
  "fragmentos": [
   "A-101.json",

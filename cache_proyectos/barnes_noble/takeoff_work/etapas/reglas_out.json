@@ -1,9 +1,9 @@
 {
  "version": "v73",
  "work_dir": "/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work/etapas",
- "excel": "/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work/etapas/8_excel/Barnes_Noble_ColoradoSprings_Takeoff_FINAL_rev12.xlsx",
- "ok": true,
- "n_fallas": 0,
+ "excel": "/home/user/Reading-Plans/cache_proyectos/barnes_noble/takeoff_work/etapas/8_excel/Barnes_Noble_ColoradoSprings_Takeoff_FINAL_rev13.xlsx",
+ "ok": false,
+ "n_fallas": 1,
  "reglas": 820,
  "por_tipo": {
   "a": 417,
@@ -12,13 +12,42 @@
  },
  "huella": {
   "version": "v73",
-  "canon": "54a2985ce868bef5f4c86f781a371493b3c8a301911697047c99b99bfdd32ea4",
-  "familias_out": "7b57a39cc3c109040dd7d70891acabfb54c970e8bd928b5acae84020f0009372",
+  "canon": "f3623ea48012f20791133dc93e86ea7c66aaa059d25e649d281e1ec80dbfdf87",
+  "familias_out": "b185337f275b61687384e9e03306738f9c81a7254fdb31cb674cf3d3b32b5c00",
   "evidencias": "82f4ec13c901d7191f9772989e98854d158340ab19499f6cfbada96ca6cbd21e",
   "reglas": "26cd43ad2b0dabf9c000cc5efad076b676363c3a45b7af4570136de43fd09305"
  },
- "fallas": [],
- "fallas_por_regla": {},
+ "fallas": [
+  {
+   "regla": "S:§1:2fab33",
+   "elemento": "bitacora",
+   "valor": "el back-check se hizo sobre otra version del Excel",
+   "esperado": "bitacora.py compuerta sin fallas",
+   "reglas": [
+    "S:§1:2fab33",
+    "S:§8:fb77e5",
+    "S:§8:56794e",
+    "S:§8:2f0566",
+    "S:herramientas-el-código-es-la-regla-no-la",
+    "S:herramientas-el-código-e:308a4a",
+    "S:herramientas-el-código-e:34dde8",
+    "S:herramientas-el-código-e:ca0454",
+    "S:herramientas-el-código-e:84c234",
+    "REGLA 50.2",
+    "REGLA 50.5",
+    "REGLA 52.1",
+    "REGLA 56.1",
+    "REGLA 57.2",
+    "REGLA 57.3",
+    "herramientas:planmark-py-marcado-verificado-sobre-la",
+    "herramientas:closer-py-compuerta-de-cierre-de-wall"
+   ],
+   "chequeo": "A_BITACORA_FINAL"
+  }
+ ],
+ "fallas_por_regla": {
+  "S:§1:2fab33": 1
+ },
  "chequeos_corridos": {
   "A_ACCESORIOS": 0,
   "A_ANCHORS": 0,
@@ -27,7 +56,7 @@
   "A_BALLISTIC": 0,
   "A_BANDAS": 0,
   "A_BITACORA": 0,
-  "A_BITACORA_FINAL": 0,
+  "A_BITACORA_FINAL": 1,
   "A_BLOCKING": 0,
   "A_BOX4": 0,
   "A_BRACING": 0,

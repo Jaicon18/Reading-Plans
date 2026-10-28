@@ -44,7 +44,7 @@
   "metal stud blocking (362CR / STUD BLOCKING)": 0.0,
   "metal trim (corner bead, casing, shadow molding)": 957.03,
   "cement board": 434.28,
-  "FRP": 1967.38,
+  "FRP": 2001.38,
   "sealant at base of gypsum (exterior)": 0.0,
   "Level 5 finish": 0.0,
   "ceiling / soffit track 3-5/8\"": 281.09,
@@ -63,7 +63,7 @@
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
   "gypsum board jamb return": 0.0,
-  "PVC trim at FRP": 530.54,
+  "PVC trim at FRP": 887.62,
   "PAFs and duct sleeves": 8.0,
   "access panel": 0.0,
   "drywall screws": 5103.23,
@@ -553,8 +553,8 @@
   {
    "familia": "FRP",
    "ref": "FRP-1-CAFE-WORKROOM",
-   "source": "A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
-   "operacion": "Cafe Work Room 104 FRP-1 full height to the 10'-0\" ceiling: 87.52 LF x 10.0 = 875.20 SF gross, doors not deducted (estimator decision 2026-10-27, RFI-13 B)"
+   "source": "1/A-221; A-510; 1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
+   "operacion": "Cafe Work Room 104 FRP-1 to the 10'-0\" ceiling: finished perimeter (28.49 + 12.17) x 2 + stub C-H2b 1.95 x 2 = 85.22 LF (1/A-221 \"28'-5 7/8\"\" x \"12'-2\"\") x 10.0 = 852.20 SF gross (estimator decision 2026-10-28; RFI-13)"
   },
   {
    "familia": "FRP",
@@ -609,6 +609,12 @@
    "ref": "SCREWS-8-BRACE-ENDS",
    "source": "3/A-410",
    "operacion": "diagonal braces 117 (type 2, 468.0 LF / 4.0) + 11 (Cafe, 44.0 LF / 4.0) = 128 braces x 2 ends x 2 = 512 (estimator decision 2026-10-27, RFI-51)"
+  },
+  {
+   "familia": "FRP",
+   "ref": "FRP-1-CAFE-BELOW-COUNTER",
+   "source": "1/A-225; 4/A-225; 6/A-225",
+   "operacion": "1/A-225 \"FRP-1 BELOW COUNTERTOP\" on the C-E1-S Cafe face: 19.0 LF x 3.0 ft (6/A-225 \"3'-0\" AFF TO COUNTERTOP\") = 57.0 SF (estimator decision 2026-10-28)"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -939,27 +945,43 @@
   },
   {
    "familia": "PVC trim at FRP",
-   "valor": 215.04,
+   "valor": 266.44,
    "unidad": "lf",
    "estado": "DERIVADO",
-   "source": "1/A-226B; 2/A-226B; 3/A-226B; 4/A-226B",
-   "operacion": "PVC-CAFE-WORKROOM: J-mold top + bottom 2 x 87.52 + inside corner molding 4 x 10.0 = 215.04 LF"
+   "source": "3/A-225; 1/A-225; 1/A-221; A-500",
+   "operacion": "PVC-CAFE-WORKROOM: J-mold at bottom (3/A-225 \"FRP J-MOLD AT BOTTOM OF FRP PANEL\") 85.22 - door 3 4.0 = 81.22 + top edge 85.22 + inside corners 6 x 10.0 = 60.0 + outside corners (stub C-H2b end) 2 x 10.0 = 20.0 + door 3 edge trim 2 x 8.0 + 4.0 = 20.0 = 266.44 LF (estimator decision 2026-10-28)"
   },
   {
    "familia": "PVC trim at FRP",
-   "valor": 70.86,
+   "valor": 84.86,
    "unidad": "lf",
    "estado": "DERIVADO",
-   "source": "9/A-200; 10/A-200; 11/A-200; 12/A-200",
-   "operacion": "PVC-JANITOR: J-mold top + bottom 2 x 19.43 + inside corner molding 4 x 8.0 = 70.86 LF"
+   "source": "9/A-200; 10/A-200; 11/A-200; 12/A-200; A-500",
+   "operacion": "PVC-JANITOR: J-mold at bottom 19.43 - door 7 3.0 = 16.43 + top edge at 8'-0\" 19.43 + inside corners 4 x 8.0 = 32.0 + door 7 edge trim 2 x 7.0 + 3.0 = 17.0 = 84.86 LF (estimator decision 2026-10-28)"
   },
   {
    "familia": "PVC trim at FRP",
-   "valor": 244.64,
+   "valor": 154.32,
    "unidad": "lf",
    "estado": "DERIVADO",
-   "source": "3/A-410; 4/A-410",
-   "operacion": "PVC-TYPES-3-4: J-mold top + bottom 2 x 122.32 = 244.64 LF"
+   "source": "3/A-410; 4/A-410; 4/A-225",
+   "operacion": "PVC-TYPES-3-4: J-mold at bottom 122.32 + type 3 vertical edge trim 2 walls x 2 ends x 8.0 = 32.0 (top: corner bead already carried; hourglass cap outside corners: metal corner guard A-001A governs, no PVC) = 154.32 LF (estimator decision 2026-10-28)"
+  },
+  {
+   "familia": "PVC trim at FRP",
+   "valor": 19.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "4/A-225; 1/A-225",
+   "operacion": "PVC-CAFE-BELOW-COUNTER: 4/A-225 \"FRP J-MOLD AT BOTTOM OF FRP PANEL\" above B-2 on the C-E1-S Cafe face: 19.0 LF (estimator decision 2026-10-28)"
+  },
+  {
+   "familia": "PVC trim at FRP",
+   "valor": 363.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "A-001A; 1/A-225; 9/A-200; 3/A-410; 4/A-410",
+   "operacion": "FRP-DIVISION-BARS: division bars at every 4' panel joint: Work Room 18 x 10.0 = 180 + Janitor 2 x 8.0 = 16 + type 3 4 x 8.0 = 32 + type 4 18 x 7.5 = 135 = 363 LF (estimator decision 2026-10-28; A-001A FRP per manufacturer)"
   },
   {
    "familia": "PAFs and duct sleeves",
@@ -1323,7 +1345,7 @@
    "extra framing ATM": 0.0,
    "2-1/2\" CFMF coiling grille head": 0.0,
    "gypsum board jamb return": 0.0,
-   "PVC trim at FRP": 530.54,
+   "PVC trim at FRP": 887.62,
    "PAFs and duct sleeves": 8.0,
    "access panel": 0.0,
    "drywall screws": 5103.23,
@@ -1391,7 +1413,7 @@
    "extra framing ATM": "Extra framing - ATM recess (only what a detail prints at the recess; the wall stays in its type)",
    "2-1/2\" CFMF coiling grille head": "2-1/2\" CFMF @ 16\" O.C. at coiling grille head (detail per plans)",
    "gypsum board jamb return": "Gypsum board jamb return at openings",
-   "PVC trim at FRP": "PVC trim - edge trim molding and inside corner molding at the FRP",
+   "PVC trim at FRP": "PVC trim - edge trim molding and inside corner molding at the FRP, incl. outside corners, door edges and division bars every 4' (see breakdown)",
    "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves - duct sleeves at the duct crossings (M-102)",
    "access panel": "Access panel",
    "drywall screws": "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",

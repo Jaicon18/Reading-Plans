@@ -513,5 +513,9 @@ if os.environ.get('REV12') == '1':   # rev12: estimator decisions on the 34 RFIs
             x['nota'] += ' Control joints 250.0 LF (ASTM C840, RFI-24); corner guards metal 2"x2"x72" 72 + stainless 48" 1 (RFI-29).'
     d.setdefault('inputs_notas', {})['slab_pin_spacing_ft'] = 'YIELD: A-410 note 8.F spacing, one row @ 16" O.C. = 1.333 ft per pin (estimator decision 2026-10-27, RFI-ACC-slab-pins B).'
 
+if os.environ.get('REV13') == '1':   # rev13: estimator decisions on the PVC trim / FRP review (2026-10-28)
+    d['rfi_cierre']['RFI-55'] = {'pregunta': 'CLOSED - estimator decision 2026-10-28: PVC trim and FRP per the targeted review (real corners and edges; division bars every 4\'; hourglass cap corners take the metal corner guard, not PVC; Work Room FRP at finished dimensions; FRP-1 below the Cafe countertop). N/SHEET: 3/A-225; 4/A-225; 1/A-225; 6/A-225; 1/A-221; 9-12/A-200; A-001A.',
+                                 'delta': 'Applied: PVC trim + division bars 530.54 -> 887.62 LF (trim 524.62 + division bars 363.0); FRP 1,967.38 -> 2,001.38 SF (Work Room - 23.0, Cafe below countertop + 57.0).'}
+
 json.dump(d, open(K + '/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print(len(rfis), 'rfis', braces, 'braces', rfi01, lf25, lf_cp, hdr, wet_sf, full_sf)
