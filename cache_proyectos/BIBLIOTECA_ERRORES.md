@@ -146,3 +146,6 @@ Back-check final: 43 PASS · 0 FAIL · 3 N/A (46 pruebas). El detalle está en `
 
 ## Corrida B&N rev12 (2026-10-28)
 Back-check final: 44 PASS · 0 FAIL · 3 N/A (con BE-57), en `barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev12.md`. En la primera pasada fallaron BE-41 (nombres de carpetas internas en Pending Items) y BE-40 (desglose del head track cortado); los dos quedaron corregidos.
+
+## Corrida B&N rev13 (2026-10-28)
+Back-check final: 44 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev13.md`). En la primera pasada falló BE-47: RFI-13 y RFI-22 tenían las cifras viejas; se corrigió con la nota "Revised by RFI-55".

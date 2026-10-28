@@ -16,5 +16,5 @@
 4. **FRP:** Workroom con dimensiones terminadas −23.0 SF; FRP-1 bajo el countertop del Cafe +57.0 SF.
 5. **El resto:** sin cambio.
 6. **Pending Items:** RFI-55 queda CLOSED.
-7. **Biblioteca y compuertas:** en el README.
+7. **Biblioteca:** 44 PASS · 0 FAIL · 3 N/A. Back-check: PASS WITH COMMENTS. Compuertas: todas OK.
 8. **Drive:** no se subió. No se envió nada al cliente.

@@ -27,9 +27,17 @@ All other rows are unchanged.
 Pending Items: the new row **RFI-55** is CLOSED – estimator decision 2026-10-28, with its N/SHEET and the delta applied.
 
 ## Error library
-LIBRARY_RESULT
+Independent back-check of the final Excel: **PASS WITH COMMENTS — LIBRARY 44 PASS · 0 FAIL · 3 N/A** (full library). See `takeoff_work/etapas/5_auditoria/BACKCHECK_rev13.md`.
+- Only R37 (FRP) and R58 (PVC) differ from rev12.
+- The first pass had 1 FAIL, BE-47: RFI-13 and RFI-22 still showed the old figures. Both now end with "Revised by RFI-55".
+- The 6/A-225 citation ("3'-0" AFF TO COUNTERTOP") is backed by `../rev12_pvc_trim/05_6-A-225_countertop_3-0_AFF.png`.
 
 ## Gates
-GATES_RESULT
+- REGLAS OK (820 rules, 0 failures)
+- ALCANCES OK (24 reviewed, 2 RFI)
+- `registro.py entregable` OK
+- EXCEL v67 OK
+- ETAPAS PASA
+- BITACORA OK (17 mandatory tools current + back-check)
 
 Drive: not uploaded. Nothing sent to the client.
