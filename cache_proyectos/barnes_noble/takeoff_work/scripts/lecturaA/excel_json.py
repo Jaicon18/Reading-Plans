@@ -516,6 +516,8 @@ if os.environ.get('REV12') == '1':   # rev12: estimator decisions on the 34 RFIs
 if os.environ.get('REV13') == '1':   # rev13: estimator decisions on the PVC trim / FRP review (2026-10-28)
     d['rfi_cierre']['RFI-55'] = {'pregunta': 'CLOSED - estimator decision 2026-10-28: PVC trim and FRP per the targeted review (real corners and edges; division bars every 4\'; hourglass cap corners take the metal corner guard, not PVC; Work Room FRP at finished dimensions; FRP-1 below the Cafe countertop). N/SHEET: 3/A-225; 4/A-225; 1/A-225; 6/A-225; 1/A-221; 9-12/A-200; A-001A.',
                                  'delta': 'Applied: PVC trim + division bars 530.54 -> 887.62 LF (trim 524.62 + division bars 363.0); FRP 1,967.38 -> 2,001.38 SF (Work Room - 23.0, Cafe below countertop + 57.0).'}
+    d['rfi_cierre']['RFI-13']['delta'] += ' Revised by RFI-55 (estimator decision 2026-10-28): Work Room FRP 852.20 SF (finished dimensions, 1/A-221); PVC trim per real corners / edges + division bars.'
+    d['rfi_cierre']['RFI-22']['delta'] += ' Revised by RFI-55 (estimator decision 2026-10-28): types 3 / 4 PVC 154.32 LF (hourglass cap corners take the metal corner guard) + division bars 167 LF.'
 
 json.dump(d, open(K + '/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print(len(rfis), 'rfis', braces, 'braces', rfi01, lf25, lf_cp, hdr, wet_sf, full_sf)
