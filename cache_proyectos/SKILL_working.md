@@ -2497,3 +2497,4 @@ ORDEN DE FUENTES: 1) planos, 2) spec sheets — si plano y spec difieren pero pu
 16. Detalle huérfano (sin burbuja en ninguna hoja) → 0, con nota.
 17. Lecturas dobles de cantidad de fastener → la que respeta el espaciamiento impreso (más conservadora).
 18. Madera / board / plywood → waste NO metal (Inputs B6), nunca el de metal.
+19. (R80e.34 cont., 28-oct) FRP: J-mold arriba/abajo, inside/outside corners y edges reales contados en plano; division bars cada 4' aunque la spec diga "per manufacturer"; donde coincide un corner guard de spec, manda el corner guard (sin moldura FRP).
