@@ -13,3 +13,4 @@
 | 2026-10-27 08:28 MDT | sesión 0 % · semana 18 % ("On track", reset vie 3:00 AM) | desde 15 % (10/26 22:21): paso 12 rev7→rev10 completo (rev8, 3.ª pasada, rev9, verificación dirigida, rev10, subidas, skill v80q) ≈ 3 % |
 | 2026-10-28 01:03 MDT | sesión 4 % (reset 2:50 AM) · semana 20 % ("On track", reset vie 3:00 AM) | desde 18 % (10/27 08:28): revisión de 34 RFI + 5 revisiones dirigidas en plano + rev11 + rev12 + PVC ≈ 2 % |
 | 2026-10-28 14:15 MDT | sesión 0 % (reset 6:20 PM) · semana 21 % ("On track", reset vie 3:00 AM) | desde 20 % (01:03): PVC dirigido + idle ≈ 1 % |
+| 2026-10-29 13:22 MDT | sesión 0 % · semana 23 % ("On track", reset vie 3:00 AM) | desde 21 % (10/28 14:15): rev13 + planos rev13 + skills archivados + setup API + prueba costeo (la prueba en sí se pagó con créditos API: $14.12) ≈ 2 % |
