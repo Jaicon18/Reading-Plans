@@ -2498,3 +2498,6 @@ ORDEN DE FUENTES: 1) planos, 2) spec sheets — si plano y spec difieren pero pu
 17. Lecturas dobles de cantidad de fastener → la que respeta el espaciamiento impreso (más conservadora).
 18. Madera / board / plywood → waste NO metal (Inputs B6), nunca el de metal.
 19. (R80e.34 cont., 28-oct) FRP: J-mold arriba/abajo, inside/outside corners y edges reales contados en plano; division bars cada 4' aunque la spec diga "per manufacturer"; donde coincide un corner guard de spec, manda el corner guard (sin moldura FRP).
+
+### R80e.37 — Nunca saltar la cadena del skill (usuario 29-oct, REGLA INVIOLABLE, toda corrida)
+El modelo SOLO lee (canon A y B independientes); los programas calculan (inventario_tags → comparar → canon.py → reglas.py → plantilla_excel). Prohibido: materiales calculados por el modelo, pasos recortados para ahorrar, compuerta reglas.py apagada. Si una herramienta falla: arreglar o detener y reportar.

@@ -68,6 +68,7 @@ Los términos del trade van en inglés.
 | BE-54 | B&N rev8 C8-08 | Partición por producto (Type S / S-12) sobre board bruto por wall, con la deducción (base de cement board) aplicada solo al total | Recalcular cada partición por cara, aplicando cada deducción a las mismas caras | La suma por producto respeta las deducciones de cada cara |
 | BE-55 | B&N rev8 C8-07 | Códigos internos del plan check (C7-0x, C-0x, N-0x, "rev7 plan check") en textos al cliente | Buscar con regex en todas las hojas visibles y en el README | Ninguno |
 | BE-57 | B&N rev10 (estimador 27-oct) | Blocking de madera (2x / FRT) con el waste de METAL (Inputs B5 15 %) | Por cada renglón de Material Summary: material madera / board / plywood / cement board → waste NO metal (B6) | Ningún renglón no metálico usa B5 |
+| BE-58 | Prueba API B&N 28-oct | Materiales calculados por el modelo a mano y compuerta reglas.py apagada (studs −33 %, FRP −52 %, blocking −70 %) | Verificar en la bitácora de la corrida que canon.py + reglas.py + plantilla_excel.py generaron el Excel y que reglas.py terminó en PASS | Ningún número del Excel sale fuera de los programas; reglas.py nunca stub |
 
 ---
 
