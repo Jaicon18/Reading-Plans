@@ -2501,3 +2501,10 @@ ORDEN DE FUENTES: 1) planos, 2) spec sheets — si plano y spec difieren pero pu
 
 ### R80e.37 — Nunca saltar la cadena del skill (usuario 29-oct, REGLA INVIOLABLE, toda corrida)
 El modelo SOLO lee (canon A y B independientes); los programas calculan (inventario_tags → comparar → canon.py → reglas.py → plantilla_excel). Prohibido: materiales calculados por el modelo, pasos recortados para ahorrar, compuerta reglas.py apagada. Si una herramienta falla: arreglar o detener y reportar.
+
+### R80e.38 — Compuertas del runner (30-oct, REGLA INVIOLABLE, toda corrida)
+1) Tras CADA lectura: compuerta de completitud (todas las hojas y types del trade presentes vs inventario_tags); si falta algo, la lectura continúa — nunca se pasa a comparar con una lectura incompleta.
+2) Validador de esquema canon antes de canon.py: claves fuera del esquema = rechazo y re-pedido a la lectura (nunca corrección a mano).
+3) La resolución parte de la lectura MÁS completa.
+4) Reconciliación de ids por geometría con type/element normalizados y sin nodes; decisión sin objeto = se lista, nunca se aplica a ciegas.
+Origen: corrida real B&N v2 (lectura A 11 walls solo A-101; claves HG1/HG2.curved; 229 decisiones sin objeto).
