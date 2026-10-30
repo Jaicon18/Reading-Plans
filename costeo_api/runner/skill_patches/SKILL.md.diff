@@ -1,6 +1,6 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
-+++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-30 07:24:33.621067536 +0000
-@@ -2511,4 +2511,42 @@
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-30 19:36:44.741660543 +0000
+@@ -2511,4 +2511,58 @@
  - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
  - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
  
@@ -44,3 +44,19 @@
 +3) En planos ampliados (≥ 18 pt/ft), cada línea discontinua larga (≥ 3 ft) debe tener soffit_side encima, o dashed_none_reason con lo que es.
 +Si falta algo, la lectura CONTINÚA sobre esos tags concretos: el prompt de continuación lleva el id, el type, la hoja y las coordenadas. Si tras las continuaciones solo quedan faltantes de conteo (el esquema pasa), la lectura no se descarta: los faltantes se declaran en runner_resultado.faltantes_conteo.
 +Origen: corrida real B&N #3, con lecturas de 27 y 31 walls (−26 % de LF). Con las lecturas reales, el conteo detecta los 9 column wraps, los soffit sides de 2/A-221, los tags del type 2 y 3 en A-101 y los del type I y E1 en A-221.
++
++### R80e.41 — Return sin tag (part_of) va en el type de su wall (30-oct, corrida real B&N #4)
++Un wall sin tag con part_of, que no es parte de un box, va en el type del wall con tag del que es parte:
++- en partition_types.py (fila del Partition Takeoff);
++- en el sello y el planmark (sealer del proyecto).
++Antes caía en un type vacío: la fila salía sin type y el sealer se caía.
++
++### R80e.42 — Reconciliación de decisiones contra una lectura nueva (30-oct, corrida real B&N #4)
++1) Un node se identifica por SUS walls (wall / walls / branch / through), nunca por el id. Los ids de nodes de la lectura y de la referencia chocan (N24 ≠ N24). Si no coinciden, la decisión queda sin objeto.
++2) Una decisión que fija una lista completa (opening_schedule) no borra lo que la lectura sí trae: una abertura leída que la lista no tiene conserva su ítem de la lectura (se lista).
++3) Un supuesto del estimador con RFI en las constantes de la referencia (p. ej. carrying_direction "assumed E-W, RFI-15") viaja con la decisión de lista completa que lo necesita (ceilings), si la lectura no lo trae (se lista).
++4) Corrección dirigida:
++   - el modelo puede usar Edit en su sandbox;
++   - un id con punto (C-E1-P.2) se traduce completo al id de la lectura;
++   - todo "NO SE ARMA" de plantilla_excel (accesorios PENDIENTE, alcances) vuelve al modelo.
++5) Presupuesto: el tope de `claude -p --max-budget-usd` no es exacto (se pasa unos centavos). El runner deja 1 % del tope total sin asignar.

@@ -22,7 +22,7 @@ def ms(p):
 def main(a, b):
     x, y = ms(a), ms(b)
     for titulo, es in (("Principales", False), ("Fasteners y consumibles", True)):
-        print(f"### {titulo}\n| Material | Unit | rev13 | corrida #3 | Δ |\n|---|---|---|---|---|")
+        print(f"### {titulo}\n| Material | Unit | rev13 | runner | Δ |\n|---|---|---|---|---|")
         ty = tx = 0
         for k in sorted(set(x) | set(y), key=lambda k: -(y.get(k, (0,))[0] or 0)):
             if bool(FAST.search(k)) != es:

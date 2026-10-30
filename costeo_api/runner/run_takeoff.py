@@ -117,7 +117,7 @@ class Runner:
         tope = tope if tope is not None else STEP_BUDGET.get(paso.split(":")[0], 2.0)
         if tope < 0.25:
             raise Alto(f"{paso}: sin presupuesto restante en el tope del paso")
-        if self.gasto + tope > self.a.budget:
+        if self.gasto + tope > self.a.budget * 0.99:     # R80e.42: el tope de claude -p no es exacto (1 % de margen)
             raise Alto(f"tope total {self.a.budget} USD: gastado {self.gasto:.2f}, el paso {paso} pide hasta {tope}")
         key = os.environ.get("TAKEOFF_API_KEY")
         if not key:
@@ -125,7 +125,7 @@ class Runner:
         prompt = open(prompt_file, encoding="utf-8").read().format(**extra)
         env = dict(self.env, ANTHROPIC_API_KEY=key)
         t0 = time.time()
-        p = run(["claude", "-p", prompt, "--model", "sonnet", "--max-budget-usd", str(tope), "--output-format", "json",
+        p = run(["claude", "-p", prompt, "--model", "sonnet", "--max-budget-usd", str(round(tope * 0.97, 2)), "--output-format", "json",
                  "--allowedTools", ALLOWED, "--append-system-prompt-file", os.path.join(os.path.abspath(self.a.skill), "SKILL.md")],
                 cwd or self.k, env, check=False)
         try:
