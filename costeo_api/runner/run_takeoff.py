@@ -42,7 +42,7 @@ PROJECT_INPUTS = ["etapas/4_canon/fo_in.json", "etapas/4_canon/alcance_in.json",
 # registro). En dry-run se re-ejecutan desde la bitácora de la corrida de referencia, con las rutas reescritas.
 PROCESO = ("arranque.py", "indice_set.py", "contar_tags.py", "test_ciego.py")
 ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissions
-STEP_BUDGET = {"lectura_A": 6.0, "lectura_B": 6.0, "resolucion": 2.5}
+STEP_BUDGET = {"lectura_A": 6.0, "lectura_B": 6.0, "resolucion": 2.5, "cobertura": 1.5}
 
 
 class Alto(Exception):
@@ -136,7 +136,7 @@ class Runner:
             if os.path.exists(s):
                 os.makedirs(os.path.dirname(os.path.join(self.k, f)), exist_ok=True)
                 shutil.copy2(s, os.path.join(self.k, f))
-        log("1/10 workdir listo (evidencia enlazada con su ruta relativa)")
+        log("1/11 workdir listo (evidencia enlazada con su ruta relativa)")
 
     def proceso(self):
         """Arranque, alcances y registro: SIEMPRE por bitacora.py run en esta corrida (la compuerta lo exige)."""
@@ -160,13 +160,13 @@ class Runner:
             # el registro verificado (marcas con su evidencia) es producto de la lectura de referencia
             shutil.copy2(os.path.join(pin, "registro.json"), os.path.join(self.k, "registro.json"))
         self.costo("proceso")
-        log("2/10 proceso OK: arranque, alcances escanear, registro crear" + (" (+ herramientas de la lectura de referencia)" if self.a.dry_run else ""))
+        log("2/11 proceso OK: arranque, alcances escanear, registro crear" + (" (+ herramientas de la lectura de referencia)" if self.a.dry_run else ""))
 
     def inventario_tags(self):
         out = os.path.join(self.k, "etapas", "1_inventario", "runner")
         self.tool("inventario_tags.py", os.path.abspath(self.a.pdf), out, "--sin-recortes")
         self.costo("inventario_tags")
-        log("3/10 inventario_tags.py OK")
+        log("3/11 inventario_tags.py OK")
         return os.path.join(out, "inventario.json")
 
     def lecturas(self, inv):
@@ -184,7 +184,7 @@ class Runner:
                                                      "lado": lado})
                 if not os.path.exists(out):
                     raise Alto(f"la lectura {lado} no escribió {out}")
-        log("4/10 lecturas A y B " + ("(dry-run: canon de referencia)" if self.a.dry_run else "OK"))
+        log("4/11 lecturas A y B " + ("(dry-run: canon de referencia)" if self.a.dry_run else "OK"))
         return A, B
 
     def comparar(self, A, B, inv):
@@ -193,7 +193,7 @@ class Runner:
         rv = json.load(open(os.path.join(out, "revision.json")))
         n = sum(len(rv.get(k) or []) for k in ("difieren", "solo_A", "solo_B"))
         self.costo("comparar")
-        log(f"5/10 comparar.py: {n} diferencias")
+        log(f"5/11 comparar.py: {n} diferencias")
         return n, out
 
     def resolver(self, A, n, rev_dir):
@@ -207,7 +207,7 @@ class Runner:
                          "canon_A": A, "out": final})
             if not os.path.exists(final):
                 raise Alto("la resolución no escribió el canon")
-        log("6/10 resolución " + ("(sin diferencias)" if n == 0 else "OK"))
+        log("6/11 resolución " + ("(sin diferencias)" if n == 0 else "OK"))
         return final
 
     def decisiones(self, canon_ab):
@@ -217,7 +217,7 @@ class Runner:
         dst = os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json")
         json.dump(c, open(dst, "w"), indent=1, ensure_ascii=False)
         json.dump(t, open(os.path.join(self.k, "takeoff.json"), "w"), indent=1, ensure_ascii=False)
-        log("7/10 overlay de decisiones del estimador fusionado (idempotente)")
+        log("7/11 overlay de decisiones del estimador fusionado (idempotente)")
         return dst
 
     def calcular(self, canon):
@@ -236,7 +236,7 @@ class Runner:
                   os.path.join(c4, "vigas_out.json"))
         self.tool("markups_bluebeam.py", os.path.abspath(self.a.pdf), canon, os.path.join(k, "etapas", "6_markups", "markups.pdf"),
                   "--json", os.path.join(k, "etapas", "6_markups", "markups.json"))
-        log("8/10 canon.py + tools OK (los números salen de los programas)")
+        log("8/11 canon.py + tools OK (los números salen de los programas)")
 
     def excel(self):
         x = os.path.join(self.k, "etapas", "8_excel", "Takeoff_runner.xlsx")
@@ -255,7 +255,7 @@ class Runner:
         otras = [l for l in fallas if "back-check" not in l.lower() and "BACK-CHECK" not in l]
         if otras:
             raise Alto("reglas.py compuerta con fallas:\n" + "\n".join(otras[:20]))
-        log(f"9/10 Excel armado; reglas.py: {len(fallas)} falla(s) = back-check pendiente" if fallas else "9/10 Excel armado; reglas.py OK")
+        log(f"9/11 Excel armado; reglas.py: {len(fallas)} falla(s) = back-check pendiente" if fallas else "9/11 Excel armado; reglas.py OK")
         return x, len(fallas)
 
     def comparar_excel(self, x):
@@ -281,8 +281,29 @@ class Runner:
         res["material_summary_rows"] = (len(ma), len(mb))
         res["material_summary_net_diffs"] = [(k, ma.get(k), mb.get(k)) for k in sorted(set(ma) | set(mb), key=str)
                                             if ma.get(k) != mb.get(k)]
-        log(f"10/10 comparación contra la referencia: {res}")
+        log(f"10/11 comparación contra la referencia: {res}")
         return res
+
+    def cobertura(self, x):
+        """Paso 12 reducido: la lectura lista detalles / notas del trade con su destino; cobertura.py verifica."""
+        lista = os.path.join(self.k, "etapas", "5_auditoria", "cobertura_lista.json")
+        if self.a.dry_run:
+            if not self.a.cobertura_lista:
+                log("11/11 cobertura: sin --cobertura-lista en dry-run (omitida)")
+                return None
+            shutil.copy2(self.a.cobertura_lista, lista)
+            self.costo("cobertura")
+        else:
+            self.claude("cobertura", os.path.join(AQUI, "prompts", "cobertura.md"),
+                        {"pdf": os.path.abspath(self.a.pdf), "out": lista, "excel": x})
+            if not os.path.exists(lista):
+                raise Alto("la cobertura no escribió la lista")
+        out = os.path.join(self.k, "etapas", "5_auditoria", "cobertura")
+        p = run([sys.executable, os.path.join(AQUI, "cobertura.py"), lista,
+                 os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json"), os.path.join(self.k, "takeoff.json"), out], self.k)
+        s = json.loads(p.stdout.strip().splitlines()[-1])
+        log(f"11/11 cobertura: {s['covered']}/{s['items']} ({s['coverage_pct']} %), {s['gaps']} huecos -> etapas/5_auditoria/cobertura.md")
+        return s
 
     def correr(self):
         self.preparar()
@@ -295,7 +316,8 @@ class Runner:
         self.calcular(canon)
         x, nf = self.excel()
         cmp_ = self.comparar_excel(x)
-        out = {"excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
+        cob = self.cobertura(x)
+        out = {"cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
                "reglas_fallas_backcheck": nf, "comparacion": cmp_, "dry_run": self.a.dry_run}
         json.dump(out, open(os.path.join(self.root, "runner_resultado.json"), "w"), indent=1, ensure_ascii=False, default=str)
         return out
@@ -313,6 +335,7 @@ def main():
     ap.add_argument("--work", required=True)
     ap.add_argument("--budget", type=float, default=20.0)
     ap.add_argument("--plan-sheet", default="A-101", help="hoja de planta para vigas_sobre_walls.py")
+    ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()

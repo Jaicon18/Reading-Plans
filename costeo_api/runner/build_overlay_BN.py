@@ -1,36 +1,38 @@
 #!/usr/bin/env python3
-"""build_overlay_BN.py — arma decisiones_BN.json (34 RFI + PVC/FRP, decisiones del estimador 2026-10-27 / 28)
-desde el canon y el takeoff.json finales de B&N (rev13). Se corre una vez; el runner solo lee el JSON."""
+"""build_overlay_BN.py — arma decisiones_BN.json con TODAS las decisiones del estimador de B&N, en 4 grupos.
+
+Cómo: el script del proyecto (build_A.py) se corre con salida redirigida y con los bloques de plan check / auditoría
+encendidos (REV5–REV10: no son decisiones del estimador). Los bloques de decisiones se encienden por grupos:
+  base = sin decisiones;  S1 = + REV1, REV2;  S2 = + REV3, REV4;  S3 = + REV12;  S4 = + REV13 (= canon final rev13).
+Cada grupo del overlay es overlay.diff(S_i, S_i+1): ops genéricas por ref / id (alta, reemplazo, baja, orden),
+constants y claves de primer nivel. El takeoff.json (textos CLOSED / Scope / notas de Inputs) va en el último grupo.
+
+Uso: build_overlay_BN.py <dir con canon_base.json, canon_S1..S4.json> <takeoff.json final> <salida decisiones_BN.json>"""
 import json
+import os
 import sys
 
-K = sys.argv[1] if len(sys.argv) > 1 else "cache_proyectos/barnes_noble/takeoff_work"
-c = json.load(open(K + "/etapas/4_canon/takeoff_canon.json"))
-t = json.load(open(K + "/takeoff.json"))
-MISC = ["FRP-TYPES-3-4", "FRP-1-CAFE-WORKROOM", "FRP-1-JANITOR", "FRP-1-CAFE-BELOW-COUNTER", "CLOUD-FASCIA-GWB",
-        "CONTROL-JOINTS-T2", "MOMENT-CLIPS-T3-T4", "HUS-EZ-T3-T4", "SCREWS-10-16-MOMENT-CLIPS", "CORNER-GUARDS-METAL-72",
-        "CORNER-GUARD-STAINLESS-48", "SCREWS-8-BRACE-ENDS"]
-STRIPS = ["TYPE-3-A-FRT", "TYPE-4-A-FRT", "C-H3a-A-FRT"]
-mi = {m["ref"]: m for m in c["misc_items"]}
-st = {s["ref"]: s for s in c["plywood_strips"]}
-walls = [w for w in c["walls"] if w.get("tag") in ("3", "4") or w["id"] in ("C-E1-S", "C-E1-P.2", "C-E1-B", "C-H3a")]
-ov = {
-    "project": "Barnes & Noble - Colorado Springs (3173 Cinema Point)",
-    "decision_date": "2026-10-27 / 2026-10-28",
-    "source": "cache_proyectos/barnes_noble/RFI_REVISION_ESTIMADOR.json (34 RFI) + rev12_pvc_trim/RFI_PVC.md (PVC / FRP)",
-    "canon": {
-        "constants": {k: c["constants"][k] for k in ("slab_pin_spacing_ft", "addl_head_track_min_ro_ft", "addl_head_track_pieces")},
-        "top": {k: c[k] for k in ("mep_estimator_count", "pvc_trim_items", "acc_nombres", "frp_none_reason", "markup_label")},
-        "upsert": {"misc_items": [mi[r] for r in MISC], "plywood_strips": [st[r] for r in STRIPS]},
-        "remove": {"plywood_strips": ["SERVER-ROOM-BACKBOARD"], "blocking_items": ["BLK-CASED-OPENING"]},
-        "walls": [{"id": w["id"], "faces": w["faces"]} for w in walls],
-    },
-    "takeoff": {
-        "rfi_cierre": t["rfi_cierre"],
-        "inputs_notas": {"slab_pin_spacing_ft": t["inputs_notas"]["slab_pin_spacing_ft"]},
-        "alcances": {a["id"]: {"estado": a["estado"], "nota": a["nota"]} for a in t["alcances"]
-                     if a["id"] in ("ALC-10", "ALC-16", "ALC-17", "ALC-18", "ALC-20")},
-    },
-}
-json.dump(ov, open(sys.argv[2] if len(sys.argv) > 2 else "costeo_api/runner/decisiones_BN.json", "w"), indent=1, ensure_ascii=False)
-print("decisiones_BN.json:", len(MISC), "misc,", len(STRIPS), "strips,", len(walls), "walls,", len(t["rfi_cierre"]), "RFI cerrados")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import overlay  # noqa: E402
+
+d, tk, out = sys.argv[1:4]
+cs = [json.load(open(os.path.join(d, f"canon_{n}.json"))) for n in ("base", "S1", "S2", "S3", "S4")]
+t = json.load(open(tk))
+G = [("2026-10-24", "RFI-01 perimeter walls EXISTING / excluded; RFI-23 FRT blocking by rows; RFI-11 W.R. on all wet-room faces; "
+      "RFI-27 Type X; rev1 questions: GWB ceilings Type X, restroom backing 16\"", "DECISIONES_ESTIMADOR.md (rev1 / rev2)"),
+     ("2026-10-25 / 26", "Review Items RI 1-11 (W2-05 12.92, type 4 caps, curved walls 25.68, C25 x 9, door pier, board = ceiling + 6\", "
+      "diagonal braces, Cafe studs to deck, WD-1 15'-0\", USG cloud, vestibule box) + RFI-14 / 16 / 17", "DECISIONES_ESTIMADOR.md (rev3 / rev4)"),
+     ("2026-10-27", "34 RFI decisions (slab pins 1 row, MEP count, 2-piece door headers, FRP-1, fascia, types 3/4 one face, control joints, "
+      "moment clips, corner guards, E1 12'-0\", H3a, cased opening 0, server room excluded, brace screws)", "RFI_REVISION_ESTIMADOR.json"),
+     ("2026-10-28", "PVC trim per real corners / edges + division bars; Work Room FRP finished dimensions; FRP-1 below Cafe countertop",
+      "rev12_pvc_trim/RFI_PVC.md")]
+groups = []
+for i, (fecha, que, fuente) in enumerate(G):
+    groups.append({"label": f"G{i + 1}", "decision_date": fecha, "decisions": que, "source": fuente,
+                   "canon": overlay.diff(cs[i], cs[i + 1])})
+groups[-1]["takeoff"] = {"rfi_cierre": t.get("rfi_cierre") or {}, "inputs_notas": t.get("inputs_notas") or {},
+                         "alcances": {a["id"]: {"estado": a["estado"], "nota": a["nota"]} for a in t.get("alcances") or []}}
+ov = {"project": "Barnes & Noble - Colorado Springs (3173 Cinema Point)", "groups": groups}
+assert overlay.aplicar_canon(cs[0], ov) == cs[4], "el overlay no reproduce el canon final"
+json.dump(ov, open(out, "w"), indent=1, ensure_ascii=False)
+print("decisiones_BN.json:", len(groups), "grupos; base -> final exacto")
