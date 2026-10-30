@@ -132,6 +132,8 @@ class Runner:
             r = json.loads(p.stdout or "{}")
         except ValueError:
             r = {}
+        with open(os.path.join(cwd or self.k, f"respuesta_{paso.replace(':', '_')}.json"), "w") as fh:
+            fh.write(p.stdout or "")            # la respuesta del modelo queda para diagnosticar
         u = r.get("usage") or {}
         self.costo(paso, float(r.get("total_cost_usd") or 0), u.get("input_tokens", 0), u.get("output_tokens", 0),
                    u.get("cache_read_input_tokens", 0), u.get("cache_creation_input_tokens", 0), time.time() - t0, "sonnet")
@@ -333,10 +335,16 @@ class Runner:
             d, f = self.sandbox("resolucion", {"pdf": os.path.abspath(self.a.pdf), "rev": rev_dir, "A": A, "B": B,
                                                "tools": self.t, "val": os.path.join(AQUI, "validar_canon.py")})
             o = os.path.join(d, "takeoff_canon_AB.json")
+            shutil.copy2(f["A"], o)             # punto de partida = lectura base; la resolución corrige SOLO las diferencias
+            antes = open(o).read()
             self.claude("resolucion", os.path.join(AQUI, "prompts", "resolucion.md"),
                         {"pdf": f["pdf"], "revision": os.path.join(f["rev"], "revision.json"), "canon_A": f["A"], "out": o}, cwd=d)
-            if not os.path.exists(o):
-                raise Alto("la resolución no escribió el canon")
+            v = run([sys.executable, os.path.join(AQUI, "validar_canon.py"), o, f["tools"]], d, check=False)
+            if v.returncode != 0:
+                raise Alto(f"la resolución dejó el canon fuera de esquema: {v.stdout.strip()[-400:]}")
+            if open(o).read() == antes:
+                log("   resolución: el modelo no cambió la lectura base (se declara: diferencias sin resolver)")
+                self.resolucion_sin_cambios = True
             shutil.copy2(o, final)
         log("6/11 resolución " + ("(sin diferencias)" if n == 0 else "OK"))
         return final
