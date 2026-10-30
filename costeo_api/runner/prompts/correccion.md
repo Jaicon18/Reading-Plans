@@ -6,6 +6,8 @@ Si una falla habla de un ceiling / soffit / drop line, lee el RCP (A-121) y la s
 
 Si una falla es de alcances.py (un alcance marcado cuantificado sin cantidad), cuantifícalo desde el plano: p. ej. metal trim (corner bead, casing bead, control joints, reveals) va en trim_items[] {{ref, kind, label, lf, source (hoja), op}} con el LF medido / derivado de las esquinas y bordes expuestos; si de verdad no aplica, trim_none_reason con la hoja revisada.
 
+Si una falla dice "familias de accesorios PENDIENTE", resuelve cada familia desde el plano (accesorio con su cantidad y N/HOJA) o agrégala a accesorios_rfi[] {{familia, motivo, delta, source, fuentes_revisadas}}: nunca se omite.
+
 Corrige o completa EN EL MISMO ARCHIVO {out}, leyendo el plano {pdf} (no inventes: lo que no esté impreso va como RFI con su delta o PENDIENTE). No cambies coordenadas ni cantidades que ya están bien. No generes imágenes ni estados: los genera el programa. Valida con `python3 validar_canon.py {out} tools` hasta "CANON OK". Al terminar, responde solo "OK {out}".
 
 AISLAMIENTO: trabaja SOLO con los archivos de tu directorio actual.

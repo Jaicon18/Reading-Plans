@@ -603,11 +603,12 @@ class Runner:
                 x, nf = self.excel()
                 break
             except Alto as e:
-                alc = [l for l in str(e).splitlines() if l.startswith("FALLA") and "ALC-" in l]
+                alc = [l for l in str(e).splitlines() if (l.startswith("FALLA") and "ALC-" in l) or
+                       (l.startswith("NO SE ARMA") and "reglas.py compuerta" not in l)]
                 if self.a.dry_run or ronda == MAX_CORRECCION or ("reglas" not in str(e) and not alc):
                     raise
                 if alc:                         # alcance marcado cuantificado sin cantidad: falta en la LECTURA
-                    self.corregir(canon_ab, ronda + 1, texto="\n".join(alc), origen="alcances.py compuerta")
+                    self.corregir(canon_ab, ronda + 1, texto="\n".join(alc), origen="alcances.py / plantilla_excel.py")
                 else:
                     self.corregir(canon_ab, ronda + 1)
         cmp_ = self.comparar_excel(x)

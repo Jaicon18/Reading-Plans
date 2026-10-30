@@ -31,11 +31,19 @@ EXCL = {
     "PATCH": "EXCLUDED here: patch & repair applies to the EXISTING perimeter walls only (1/DM-101 key note 3, A-101 C5) = allowance, amount blank (RFI-01 / RFI-25)",
     "CLIPS": "EXCLUDED: no bracing clip called on 2/A-410, 3/A-410, 4/A-410, 5/A-410 (C.R. channel only); not carried",
 }
+BYID = {w["id"]: w for w in C["walls"]}
+
+
+def tag_de(w):
+    """Tag del wall; un return sin tag (part_of) toma el type del wall con tag del que es parte."""
+    return w.get("tag") or (BYID.get(w.get("part_of")) or {}).get("tag") or ""
+
+
 res, rech = [], []
 for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
     wid, det = w["id"], w["detail"]
     try:
-        x = Wall(n, w["tag"], f"{wid} - {w.get('location') or w.get('source', '')} ({w['sheet']})")
+        x = Wall(n, tag_de(w), f"{wid} - {w.get('location') or w.get('source', '')} ({w['sheet']})")
         L = Val(w["length_ft"], "DERIVADO", fuente=w["sheet"], operacion=(w.get("length_op") or w.get("length_source", "")) + f" ({det})")
         hst = w.get("height_status") or "DERIVADO"
         H = Val(w["height_ft"], "CONFIRMADO" if hst == "CONFIRMADO" else "DERIVADO", fuente=w["height_source"],
@@ -71,7 +79,7 @@ for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
         for k, v in EXCL.items():
             x.excluir(k, v)
         d = x.emit(os.path.join(OUT, wid.replace("/", "_") + ".json"))
-        res.append({"wall": wid, "tag": w["tag"], "sello": d["sello"]})
+        res.append({"wall": wid, "tag": tag_de(w), "sello": d["sello"]})
     except CierreRechazado as e:
         rech.append({"wall": wid, "error": str(e)})
 
@@ -95,11 +103,11 @@ os.makedirs(IMG, exist_ok=True)
 fallas = 0
 for sh, pg in PAG.items():
     hoja = planmark.Hoja(PDF, pg, dpi=100)
-    tipos = sorted({w["tag"] for w in C["walls"] if w["sheet"] == sh and w.get("band")})
+    tipos = sorted({tag_de(w) for w in C["walls"] if w["sheet"] == sh and w.get("band")})
     for t in tipos:
         items = [{"id": w["id"], "band": banda(w["band"]), "lf": w["length_ft"], "tagged": bool(w.get("tag_ids")),
                   "dashed": w.get("element") == "soffit_side"}
-                 for w in C["walls"] if w["sheet"] == sh and w["tag"] == t and w.get("band")]
+                 for w in C["walls"] if w["sheet"] == sh and tag_de(w) == t and w.get("band")]
         try:
             hoja.overview(items, f"{sh} type {t}", os.path.join(IMG, f"{sh}_type_{t}.png"))
         except Exception as e:

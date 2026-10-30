@@ -222,6 +222,12 @@ def aplicar(leido, ref_base, ov):
             en_ref = {str(x) for x in en_ref}
             en_c = {str(x) for x in en_c}
             f = {i for i in ids if str(i) in en_ref and str(i) not in en_c}
+            if lista == "nodes":                # un node se identifica por SUS walls, no por el id (ids de lectura y de
+                wn = lambda n: frozenset(str(x) for k in ("wall", "walls", "branch", "through")   # referencia chocan)
+                                         for x in ([n.get(k)] if isinstance(n.get(k), str) else (n.get(k) or [])))
+                nr = {str(x.get("id")): wn(x) for x in ref.get("nodes") or []}
+                nc = {str(x.get("id")): wn(x) for x in c.get("nodes") or []}
+                f |= {i for i in ids if str(i) in nr and str(i) in nc and nr[str(i)] != nc[str(i)]}
             if f:
                 faltan[lista] = f
                 # nodes: derivados de la geometría de la lectura; sus ops sin objeto no son decisiones del estimador
@@ -245,6 +251,16 @@ def aplicar(leido, ref_base, ov):
             sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
                         "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
         ref = overlay._aplicar_uno(ref, g)
+    # dependencias de una decisión de lista completa (p. ej. ceilings): una constante de la REFERENCIA que la lectura no
+    # trae y cuya fuente es un supuesto del estimador con RFI (p. ej. carrying_direction "assumed E-W, RFI-15") viaja
+    # con la decisión; se lista
+    if any((g.get("canon") or {}).get("top") for g in ov.get("groups") or []):
+        cr, cc = (ref_base.get("constants") or {}), c.setdefault("constants", {})
+        for k, v in cr.items():
+            if k not in cc and isinstance(v, dict) and re.search(r"\bRFI-?\d+", str(v.get("source") or "")):
+                cc[k] = copy.deepcopy(v)
+                sin.append({"group": "constants", "list": "constants", "id": k, "derivado": True,
+                            "motivo": f"supuesto del estimador con RFI que acompaña a una decisión: {str(v.get('source'))[:80]}"})
     # opening_schedule fijado por una decisión: una abertura que la lectura no trae en ningún wall = decisión sin objeto
     sch = c.get("opening_schedule")
     if isinstance(sch, dict) and sch.get("items"):
@@ -256,6 +272,19 @@ def aplicar(leido, ref_base, ov):
                 sin.append({"group": "opening_schedule", "list": "opening_schedule", "id": i.get("ref"), "derivado": False,
                             "motivo": "la lectura no trae esta abertura en ningún wall"})
         sch["items"] = quedan
+        # al revés: una abertura de la lectura que la lista de la decisión no trae conserva su ítem de la lectura
+        # (la decisión fijó la lista con los nombres de la referencia; no puede borrar una abertura leída)
+        tiene = {str(i.get("ref")) for i in sch["items"]} | {str(i.get("ref")) for i in sch.get("none") or []}
+        prop = {str(i.get("ref")): i for i in ((leido.get("opening_schedule") or {}).get("items") or [])}
+        for w in c.get("walls") or []:
+            for o in w.get("openings") or []:
+                r = str(o.get("ref"))
+                if r not in tiene:
+                    it = dict(prop.get(r) or {"ref": r, "wall": w["id"], "source": o.get("source") or w.get("source")})
+                    sch["items"].append(it)
+                    tiene.add(r)
+                    sin.append({"group": "opening_schedule", "list": "opening_schedule", "id": r, "derivado": True,
+                                "motivo": "abertura de la lectura que la lista de la decisión no trae: se conserva"})
     # wet_fixtures de la lectura cuyo face dejó de ser MR porque una decisión cambió el board (p. ej. RFI-27 type X WR):
     # inventario.py exige fixture <-> face MR; el fixture sin face MR se quita y se lista (derivado de la decisión)
     if c.get("wet_fixtures"):
