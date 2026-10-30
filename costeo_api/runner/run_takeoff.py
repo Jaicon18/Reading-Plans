@@ -289,7 +289,19 @@ class Runner:
                 c = json.load(open(o))
                 otro = json.load(open(otro_path)) if otro_path else None
                 r = completitud.revisar(c, self.plan_sheets, otro)
+                cn = completitud.conteos(c, *self._fuentes_conteo())       # R80e.40: conteos por type / hoja
+                duro = v.returncode != 0 or r["faltan_hojas"] or r["faltan_types"]
+                if intento == MAX_CONTINUAR and not duro and (cn["faltan_tags"] or cn["faltan_columnas"]
+                                                               or cn["faltan_discontinuas"] or r["faltan_vs_otra"]):
+                    # esquema OK y solo quedan faltantes de conteo: la lectura NO se descarta; se declaran
+                    self.faltantes_conteo = getattr(self, "faltantes_conteo", {})
+                    self.faltantes_conteo[lado] = {k: v2 for k, v2 in cn.items() if k != "resumen"}
+                    log(f"   lectura {lado}: quedan faltantes de conteo tras {MAX_CONTINUAR} continuaciones (se declaran): "
+                        f"{len(cn['faltan_tags'])} tags, {len(cn['faltan_columnas'])} columnas, "
+                        f"{len(cn['faltan_discontinuas'])} discontinuas")
+                    return
                 motivo = "\n".join(x for x in (
+                    completitud.motivo_conteos(cn),
                     "" if v.returncode == 0 else "ESQUEMA: " + v.stdout.strip()[-1200:],
                     "" if not r["faltan_hojas"] else "FALTAN HOJAS DE PLANTA SIN WALLS: " + ", ".join(r["faltan_hojas"]),
                     "" if not r["faltan_types"] else "TYPES DEL SCHEDULE SIN WALLS NI types_none_reason: " + ", ".join(r["faltan_types"]),
@@ -305,6 +317,16 @@ class Runner:
             log(f"   lectura {lado}: compuerta NO pasa -> continuación {intento + 1} (resto del tope {resto:.2f} USD)")
             self.claude(f"lectura_{lado}:continuar{intento + 1}", os.path.join(AQUI, "prompts", "continuar.md"),
                         {"lado": lado, "out": o, "pdf": f["pdf"], "motivo": motivo}, cwd=d, tope=round(resto, 2))
+
+    def _fuentes_conteo(self):
+        """(inventario de tags, pdf, {hoja: página}) para completitud.conteos; el inventario es el del proceso
+        (barrido de tags con coordenadas), reutilizado como el registro."""
+        if not hasattr(self, "_fc"):
+            pinv = os.path.join(self.k, "etapas", "1_inventario", "inventario.json")
+            mapa = os.path.join(self.k, "etapas", "0_mapa", "SHEET_MAP.md")
+            self._fc = (json.load(open(pinv)) if os.path.exists(pinv) else None, os.path.abspath(self.a.pdf),
+                        evidencia.mapa_hojas(mapa) if os.path.exists(mapa) else None)
+        return self._fc
 
     def comparar(self, A, B, inv):
         if not os.path.exists(B):
@@ -592,7 +614,8 @@ class Runner:
         cob = self.cobertura(x)
         out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},
                "cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
-               "reglas_fallas_backcheck": nf, "lecturas_no_usadas": getattr(self, "lecturas_no_usadas", []), "comparacion": cmp_, "dry_run": self.a.dry_run}
+               "reglas_fallas_backcheck": nf, "lecturas_no_usadas": getattr(self, "lecturas_no_usadas", []),
+               "faltantes_conteo": getattr(self, "faltantes_conteo", {}), "comparacion": cmp_, "dry_run": self.a.dry_run}
         json.dump(out, open(os.path.join(self.root, "runner_resultado.json"), "w"), indent=1, ensure_ascii=False, default=str)
         return out
 

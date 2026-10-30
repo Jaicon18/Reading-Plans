@@ -1,0 +1,14 @@
+--- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-29 23:12:21.772203755 +0000
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-30 07:26:31.868907713 +0000
+@@ -243,6 +243,11 @@
+ REGLAS_TEXTO = [
+     ("S:r80e-33-", r".", C("código del trade cuando el plano no responde: se aplica como supuesto conservador con RFI y delta (lo revisan el back-check y la biblioteca)")),   # v80r
+     ("S:r80e-34-", r".", C("decisiones del estimador convertidas en regla general: las aplican build / excel_json del proyecto con su N/HOJA (lo revisa el back-check)")),
++    ("S:r80e-36-", r".", C("markups: column_wrap / soffit_side con Subject y leyenda propios + cuadre por type (markups_bluebeam.py OTHER_EL; cuadre en la entrega)")),   # v80s
++    ("S:r80e-37-", r".", C("cadena completa del skill: el runner (costeo_api/runner/run_takeoff.py) corre todas las tools por bitacora.py y reglas.py nunca se apaga (lo revisa bitacora.py compuerta)")),   # v80t
++    ("S:r80e-38-", r".", C("compuertas del runner: completitud, validar_canon, resolución desde la lectura más completa, reconciliación (run_takeoff.py / completitud.py / reconcile.py)")),
++    ("S:r80e-39-", r".", C("evidencia por programa (evidencia.py), mep.py registro, planmark dashed, trazabilidad por board / uso, corrección dirigida (run_takeoff.py; trazabilidad.py y planmark.py)")),
++    ("S:r80e-40-", r".", C("completitud por conteos contra el inventario de tags, símbolos de columna y líneas discontinuas (completitud.conteos + simbolos.py del runner)")),
+     ("S:r80e-35-", r".", C("aplicar decisiones del estimador en el pipeline: mep_estimator_count, addl_head_track_pieces, pvc_trim_items, rfi_cierre (accesorios.py, plantilla_excel.py)")),
+     ("S:0-f-decisiones-finales", r".", C("decisión final del estimador (§0.F): la aplican canon.py, plantilla_excel.py y markups_bluebeam.py con sus reglas vigentes")),
+     # v72b

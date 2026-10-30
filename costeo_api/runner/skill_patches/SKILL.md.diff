@@ -1,0 +1,46 @@
+--- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-30 07:24:33.621067536 +0000
+@@ -2511,4 +2511,42 @@
+ - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
+ - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
+ 
+-- **R80e.36 (B&N rev13, 28-oct, todos los proyectos) — FRP y su trim:** J-mold arriba y abajo, inside/outside corners y edges libres CONTADOS en plano (no supuestos), descontar puertas y poner J-mold en jambs; division bars cada 4' aunque la spec diga "per manufacturer"; donde coincide un corner guard de spec, manda el corner guard (sin moldura FRP). FRP "below countertop" impreso en finish plan se carga. Biblioteca de errores vigente: referencias/BIBLIOTECA_ERRORES.md (se corre completa en el paso 12).
++### R80e.36 — Markups: todo renglón del Partition Takeoff con su type visible (B&N rev13)
++- Los elementos de OTHER FRAMING que el Partition Takeoff nombra (column_wrap, soffit_side) llevan Subject, color y entrada de leyenda propios en el PDF Bluebeam ("OTHER FRAMING - COLUMN WRAP / SOFFIT SIDE", `markups_bluebeam.OTHER_EL`). Sus colores son fijos y quedan fuera de la PALETA, para que no cambien los colores de los types.
++- El rótulo de la revisión (`markup_label` en el canon) va en el título de la leyenda, y las imágenes por hoja llevan el mismo rótulo.
++- Cuadre obligatorio antes de entregar: Σ LF por Subject del PDF = subtotales del Partition Takeoff, incluidos column_wrap y soffit_side; todos los Wall ID del Excel presentes (los IDs agrupados con "+" se separan); Page Labels con el nombre de la hoja.
++
++### R80e.37 — Nunca saltar la cadena del skill (usuario 29-oct, REGLA INVIOLABLE, toda corrida)
++El modelo SOLO lee (canon A y B independientes); los programas calculan (inventario_tags → comparar → canon.py → reglas.py → plantilla_excel). Prohibido: materiales calculados por el modelo, pasos recortados para ahorrar, compuerta reglas.py apagada. Si una herramienta falla: arreglar o detener y reportar.
++
++### R80e.38 — Compuertas del runner (30-oct, REGLA INVIOLABLE, toda corrida)
++1) Tras CADA lectura: compuerta de completitud (todas las hojas y types del trade presentes vs inventario_tags); si falta algo, la lectura continúa — nunca se pasa a comparar con una lectura incompleta.
++2) Validador de esquema canon antes de canon.py: claves fuera del esquema = rechazo y re-pedido a la lectura (nunca corrección a mano).
++3) La resolución parte de la lectura MÁS completa.
++4) Reconciliación de ids por geometría con type/element normalizados y sin nodes; decisión sin objeto = se lista, nunca se aplica a ciegas.
++Origen: corrida real B&N v2 (lectura A 11 walls solo A-101; claves HG1/HG2.curved; 229 decisiones sin objeto).
++
++### R80e.39 — Evidencia y desglose por programa (30-oct, corrida real B&N #3)
++1) La evidencia visual que pide reglas.py la genera un PROGRAMA desde las coordenadas del canon, nunca el modelo:
++   - recorte de la hoja con la band marcada en cada wall (img);
++   - página de la hoja citada para height, detalle, ceiling y RFI;
++   - tag_ids por cercanía a la band del mismo type;
++   - thickness desde la band;
++   - estados #0 desde la fuente: CONFIRMADO solo si la cota está impresa y se cita la hoja.
++   - Nunca pisa lo que la lectura ya trae.
++2) El registro MEP (R71.9) lo hace mep.py en cada corrida. Si queda por debajo de 25 coincidencias: no_usable, con motivo, hoja e imagen.
++3) planmark: un elemento dibujado en línea discontinua (soffit side "SOFFIT ABOVE") se sondea denso (item.dashed); los walls sólidos siguen con 7 sondas.
++4) trazabilidad.py: cada renglón de material se desglosa con SU board o material Y su uso:
++   - 5/8 regular, 5/8 MR, Type X y Type X WR, cada uno con el suyo;
++   - FRT substrate separado de column wrap, pier y canopy;
++   - un gauge numérico se acepta.
++5) Las fallas de canon.py, reglas.py y alcances.py que dependen de la lectura vuelven al modelo como corrección dirigida, con los ids de la lectura. La imagen nunca se le pide al modelo.
++Origen: corrida real B&N #3 (3881 fallas por evidencia faltante; desglose de board regular = suma de Type X; FRT substrate + 208 SF de column wrap).
++
++### R80e.40 — Completitud por CONTEOS antes de comparar (30-oct, REGLA INVIOLABLE, toda corrida)
++Tras cada lectura y antes de comparar o resolver, se cuentan los elementos por type y hoja contra fuentes que NO son la lectura:
++1) Cada partition tag del inventario (id, type, hoja, centro) debe tener un wall de su type a ≤ 6 ft de su band. types_none_reason solo excusa un type existente, by others o fuera de alcance; "no lo encontré" no excusa un tag que el inventario sí tiene.
++2) Cada símbolo de columna de la planta (cuadrado con hatch, el mismo tamaño repetido ≥ 3 veces) debe tener column_wrap encima, o columns_none_reason con la nota del set.
++3) En planos ampliados (≥ 18 pt/ft), cada línea discontinua larga (≥ 3 ft) debe tener soffit_side encima, o dashed_none_reason con lo que es.
++Si falta algo, la lectura CONTINÚA sobre esos tags concretos: el prompt de continuación lleva el id, el type, la hoja y las coordenadas. Si tras las continuaciones solo quedan faltantes de conteo (el esquema pasa), la lectura no se descarta: los faltantes se declaran en runner_resultado.faltantes_conteo.
++Origen: corrida real B&N #3, con lecturas de 27 y 31 walls (−26 % de LF). Con las lecturas reales, el conteo detecta los 9 column wraps, los soffit sides de 2/A-221, los tags del type 2 y 3 en A-101 y los del type I y E1 en A-221.

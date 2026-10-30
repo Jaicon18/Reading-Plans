@@ -2508,3 +2508,28 @@ El modelo SOLO lee (canon A y B independientes); los programas calculan (inventa
 3) La resolución parte de la lectura MÁS completa.
 4) Reconciliación de ids por geometría con type/element normalizados y sin nodes; decisión sin objeto = se lista, nunca se aplica a ciegas.
 Origen: corrida real B&N v2 (lectura A 11 walls solo A-101; claves HG1/HG2.curved; 229 decisiones sin objeto).
+
+### R80e.39 — Evidencia y desglose por programa (30-oct, corrida real B&N #3)
+1) La evidencia visual que pide reglas.py la genera un PROGRAMA desde las coordenadas del canon, nunca el modelo:
+   - recorte de la hoja con la band marcada en cada wall (img);
+   - página de la hoja citada para height, detalle, ceiling y RFI;
+   - tag_ids por cercanía a la band del mismo type;
+   - thickness desde la band;
+   - estados #0 desde la fuente: CONFIRMADO solo si la cota está impresa y se cita la hoja.
+   - Nunca pisa lo que la lectura ya trae.
+2) El registro MEP (R71.9) lo hace mep.py en cada corrida. Si queda por debajo de 25 coincidencias: no_usable, con motivo, hoja e imagen.
+3) planmark: un elemento dibujado en línea discontinua (soffit side "SOFFIT ABOVE") se sondea denso (item.dashed); los walls sólidos siguen con 7 sondas.
+4) trazabilidad.py: cada renglón de material se desglosa con SU board o material Y su uso:
+   - 5/8 regular, 5/8 MR, Type X y Type X WR, cada uno con el suyo;
+   - FRT substrate separado de column wrap, pier y canopy;
+   - un gauge numérico se acepta.
+5) Las fallas de canon.py, reglas.py y alcances.py que dependen de la lectura vuelven al modelo como corrección dirigida, con los ids de la lectura. La imagen nunca se le pide al modelo.
+Origen: corrida real B&N #3 (3881 fallas por evidencia faltante; desglose de board regular = suma de Type X; FRT substrate + 208 SF de column wrap).
+
+### R80e.40 — Completitud por CONTEOS antes de comparar (30-oct, REGLA INVIOLABLE, toda corrida)
+Tras cada lectura y antes de comparar o resolver, se cuentan los elementos por type y hoja contra fuentes que NO son la lectura:
+1) Cada partition tag del inventario (id, type, hoja, centro) debe tener un wall de su type a ≤ 6 ft de su band. types_none_reason solo excusa un type existente, by others o fuera de alcance; "no lo encontré" no excusa un tag que el inventario sí tiene.
+2) Cada símbolo de columna de la planta (cuadrado con hatch, el mismo tamaño repetido ≥ 3 veces) debe tener column_wrap encima, o columns_none_reason con la nota del set.
+3) En planos ampliados (≥ 18 pt/ft), cada línea discontinua larga (≥ 3 ft) debe tener soffit_side encima, o dashed_none_reason con lo que es.
+Si falta algo, la lectura CONTINÚA sobre esos tags concretos: el prompt de continuación lleva el id, el type, la hoja y las coordenadas. Si tras las continuaciones solo quedan faltantes de conteo (el esquema pasa), la lectura no se descarta: los faltantes se declaran en runner_resultado.faltantes_conteo.
+Origen: corrida real B&N #3, con lecturas de 27 y 31 walls (−26 % de LF). Con las lecturas reales, el conteo detecta los 9 column wraps, los soffit sides de 2/A-221, los tags del type 2 y 3 en A-101 y los del type I y E1 en A-221.
