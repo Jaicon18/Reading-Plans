@@ -24,6 +24,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -34,6 +35,7 @@ sys.path.insert(0, AQUI)
 import overlay  # noqa: E402
 import completitud  # noqa: E402
 import reconcile  # noqa: E402
+import evidencia  # noqa: E402
 
 # Archivos de entrada del proyecto que la lectura (o el estimador) produce además del canon. En dry-run se copian
 # del proyecto de referencia; en una corrida real los escribe el paso de lectura (prompts/lectura.md).
@@ -44,9 +46,10 @@ PROJECT_INPUTS = ["etapas/4_canon/fo_in.json", "etapas/4_canon/alcance_in.json",
 # registro). En dry-run se re-ejecutan desde la bitácora de la corrida de referencia, con las rutas reescritas.
 PROCESO = ("arranque.py", "indice_set.py", "contar_tags.py", "test_ciego.py")
 ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissions
-STEP_BUDGET = {"lectura_A": 5.5, "lectura_B": 5.5, "resolucion": 2.0, "cobertura": 1.0}   # topes por paso (USD)
+STEP_BUDGET = {"lectura_A": 5.0, "lectura_B": 5.0, "resolucion": 2.0, "cobertura": 1.0, "correccion": 2.0}  # USD/paso
 MAX_CONTINUAR = 2                                   # continuaciones por lectura si la compuerta falla
 CONT_TOPE = 2.0                                     # tope de cada continuación (USD)
+MAX_CORRECCION = 2                                  # rondas de corrección de la lectura si reglas.py no deja armar
 
 
 class Alto(Exception):
@@ -85,7 +88,7 @@ class Runner:
         self.pasos.append((paso, round(usd, 4)))
         if self.a.dry_run:                      # dry-run: no ensucia costos.csv (no hubo llamada)
             return
-        f = os.path.join(AQUI, "..", "costos.csv")
+        f = os.environ.get("RUNNER_COSTOS") or os.path.join(AQUI, "..", "costos.csv")    # pruebas: otro archivo
         nuevo = not os.path.exists(f)
         with open(f, "a", newline="") as fh:
             w = csv.writer(fh)
@@ -236,21 +239,40 @@ class Runner:
                 shutil.move(B, A)
         else:
             pr = os.path.join(AQUI, "prompts", "lectura.md")
-            sand = {}
+            sand, self.lecturas_no_usadas = {}, []
             for lado, out in (("A", A), ("B", B)):      # independientes: cada una en su propio sandbox, sin ver la otra
                 d, f = self.sandbox(f"lectura_{lado}", {"pdf": os.path.abspath(self.a.pdf), "inv": inv, "tools": self.t,
                                                          "val": os.path.join(AQUI, "validar_canon.py")})
                 o = os.path.join(d, os.path.basename(out))
                 gasto0 = self.gasto
-                self.claude(f"lectura_{lado}", pr, {"pdf": f["pdf"], "inventario": f["inv"], "out": o, "lado": lado,
-                                                     "plan_sheets": ", ".join(self.plan_sheets)}, cwd=d)
+                try:
+                    self.claude(f"lectura_{lado}", pr, {"pdf": f["pdf"], "inventario": f["inv"], "out": o, "lado": lado,
+                                                         "plan_sheets": ", ".join(self.plan_sheets)}, cwd=d)
+                except Alto as e:               # tope agotado: la lectura NO se descarta, se continúa (compuerta)
+                    if "max_budget" not in str(e) and "rc=" not in str(e):
+                        raise
+                    log(f"   lectura {lado}: {str(e)[:160]} -> se continúa")
                 sand[lado] = (d, f, o, gasto0)
-                self.compuerta_lectura(lado, sand[lado], None)
+                try:
+                    self.compuerta_lectura(lado, sand[lado], None)
+                except Alto as e:               # se continuó y no pasó: se declara y sigue la otra lectura
+                    self.lecturas_no_usadas.append({"lado": lado, "motivo": str(e)[-400:]})
+                    log(f"   lectura {lado}: NO pasa después de las continuaciones (se declara)")
+            ok = [x for x in ("A", "B") if x not in {n["lado"] for n in self.lecturas_no_usadas}]
+            if not ok:
+                raise Alto("ninguna lectura pasa la compuerta: " + " | ".join(n["motivo"][-200:] for n in self.lecturas_no_usadas))
             # cruce: cada lectura debe traer los types / elements que encontró la otra (o justificarlos)
-            for lado, otro in (("A", "B"), ("B", "A")):
-                self.compuerta_lectura(lado, sand[lado], sand[otro][2])
+            if len(ok) == 2:
+                for lado, otro in (("A", "B"), ("B", "A")):
+                    try:
+                        self.compuerta_lectura(lado, sand[lado], sand[otro][2])
+                    except Alto as e:           # el cruce lo resuelve la resolución dirigida (diferencias A/B)
+                        log(f"   lectura {lado}: cruce con la otra sin cerrar -> va a la resolución ({str(e)[-160:]})")
             for lado, out in (("A", A), ("B", B)):
-                shutil.copy2(sand[lado][2], out)
+                if lado in ok:
+                    shutil.copy2(sand[lado][2], out)
+            if "A" not in ok:
+                shutil.move(B, A)
         log("4/11 lecturas A y B " + ("(dry-run: canon de referencia)" if self.a.dry_run else "OK"))
         return A, B
 
@@ -276,8 +298,8 @@ class Runner:
                     return
             if intento == MAX_CONTINUAR:
                 raise Alto(f"la lectura {lado} no pasa la compuerta después de {MAX_CONTINUAR} continuaciones:\n{motivo}")
-            resto = min(STEP_BUDGET[f"lectura_{lado}"] - (self.gasto - gasto0),
-                        self.a.budget - self.gasto - STEP_BUDGET["cobertura"], CONT_TOPE)   # deja el paso 12 pagado
+            reserva = STEP_BUDGET["cobertura"] + (0 if self.a.reusar_lecturas else STEP_BUDGET["resolucion"])
+            resto = min(CONT_TOPE, self.a.budget - self.gasto - reserva)    # deja resolución y paso 12 pagados
             log(f"   lectura {lado}: compuerta NO pasa -> continuación {intento + 1} (resto del tope {resto:.2f} USD)")
             self.claude(f"lectura_{lado}:continuar{intento + 1}", os.path.join(AQUI, "prompts", "continuar.md"),
                         {"lado": lado, "out": o, "pdf": f["pdf"], "motivo": motivo}, cwd=d, tope=round(resto, 2))
@@ -339,6 +361,7 @@ class Runner:
         json.dump(leido, open(canon_ab, "w"), indent=1, ensure_ascii=False)
         if self.a.ref_base:                 # reconciliación de ids por geometría (solo para aplicar decisiones)
             c, mapa, self.sin_objeto = reconcile.aplicar(leido, json.load(open(self.a.ref_base)), ov)
+            self.mapa = mapa
             self.emparejados = len(mapa)
             dec = [x for x in self.sin_objeto if not x.get("derivado")]
             log(f"7/11 reconciliación: {len(mapa)} walls emparejados con la referencia; {len(dec)} decisión(es) sin objeto"
@@ -347,10 +370,92 @@ class Runner:
             c = overlay.aplicar_canon(leido, ov)
         t = overlay.aplicar_takeoff(json.load(open(os.path.join(self.k, "takeoff.json"))), ov)
         dst = os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json")
+        mapa = os.path.join(self.k, "etapas", "0_mapa", "SHEET_MAP.md")
+        if not self.a.dry_run and os.path.exists(mapa):
+            # R80e.38: la evidencia visual y los estados #0 los genera el PROGRAMA desde las coordenadas
+            # tags: inventario del proceso de referencia (barrido manual de tags, reutilizado como el registro)
+            pinv = os.path.join(self.k, "etapas", "1_inventario", "inventario.json")
+            inv = json.load(open(pinv)) if os.path.exists(pinv) else None
+            ev = evidencia.Evidencia(os.path.abspath(self.a.pdf), evidencia.mapa_hojas(mapa),
+                                     os.path.join(self.k, "etapas", "4_canon", "img_runner"))
+            self.mep_registro(c, ev)
+            n = evidencia.aplicar(c, ev, inv)
+            log(f"7/11 evidencia por programa: {n}")
         json.dump(c, open(dst, "w"), indent=1, ensure_ascii=False)
         json.dump(t, open(os.path.join(self.k, "takeoff.json"), "w"), indent=1, ensure_ascii=False)
         log("7/11 overlay de decisiones del estimador fusionado (idempotente)")
         return dst
+
+    def mep_registro(self, c, ev):
+        """R71.9 por PROGRAMA: mep.py registra cada hoja M / P de mep_sweep.sheets contra la planta (votos de segmentos de
+        muro). >= 25 por dirección = registro usable; si no, no_usable con motivo, hoja e imagen de la hoja MEP."""
+        import ast
+        sw = c.get("mep_sweep")
+        arq = ev.hojas.get(self.a.plan_sheet)
+        if not isinstance(sw, dict) or arq is None:
+            return
+        regs = {}
+        for h in sw.get("sheets") or []:
+            if h not in ev.hojas or not str(h).startswith(("M", "P")):
+                continue
+            p = self.tool("mep.py", str(ev.hojas[h]), str(arq), "--pdf", os.path.abspath(self.a.pdf), check=False)
+            try:
+                r = ast.literal_eval([l for l in (p.stdout or "").splitlines() if l.startswith("{'dx'")][-1])
+            except (ValueError, SyntaxError, IndexError):
+                r = None
+            img = ev.hoja(h)
+            if not r:
+                regs[h] = {"matches": 0, "source": f"{h} vs {self.a.plan_sheet} (mep.py registro)",
+                           "no_usable": {"motivo": "mep.py found no matching wall segments between the sheets",
+                                         "source": h, "img": img}}
+                continue
+            m = min(r["vx"], r["vy"])
+            regs[h] = {"dx_pt": r["dx"], "dy_pt": r["dy"], "matches": m,
+                       "source": f"{h} vs {self.a.plan_sheet} (mep.py registro: {r['vx']} V / {r['vy']} H)"}
+            if not r["ok"]:
+                regs[h]["no_usable"] = {"motivo": f"registration below 25 matching wall segments ({r['vx']} V / "
+                                                  f"{r['vy']} H): sheet not used for geometric crossings; ducts / "
+                                                  f"pipes crossing walls go to RFI", "source": h, "img": img}
+        if regs:
+            sw.pop("registro", None)
+            sw["registros"] = regs
+            log(f"   mep.py registro: " + ", ".join(f"{h} {v['matches']}" for h, v in regs.items()))
+
+    def corregir(self, canon_ab, ronda):
+        """reglas.py no deja armar: las fallas que dependen de la LECTURA (no las de imagen: esas las genera el programa)
+        vuelven al modelo con los ids de la lectura; corrige el canon AB en un sandbox y la cadena se repite."""
+        f = os.path.join(self.k, "etapas", "REGLAS_FALLAS.md")
+        inv = {v: k for k, v in (getattr(self, "mapa", None) or {}).items()}
+        grupos = {}
+        for l in open(f, encoding="utf-8"):
+            c = [x.strip() for x in l.strip().strip("|").split("|")]
+            if len(c) < 4 or c[0] in ("Regla", "---") or set(c[0]) <= set("-"):
+                continue
+            if re.sub(r"\([^)]*\)", "", c[2]).strip() == "falta imagen que exista":
+                continue                        # la imagen la genera el programa, no la lectura
+            caso = c[1]
+            base = caso.split(".")[0].split("[")[0]
+            caso = caso.replace(base, inv.get(base, base), 1)
+            val = c[2]
+            for ref, lec in inv.items():                # ids de la referencia citados dentro del texto -> ids de la lectura
+                val = re.sub(rf"(?<![\w.-]){re.escape(ref)}(?![\w.-])", lec, val)
+            grupos.setdefault(c[3][:200], set()).add(caso if val.startswith(("falta", "sin")) else f"{caso}: {val[:220]}")
+        if not grupos:
+            raise Alto("reglas.py: las fallas que quedan no dependen de la lectura (ver etapas/REGLAS_FALLAS.md)")
+        motivo = "\n".join(f"- {k}: {', '.join(sorted(v)[:60])}" for k, v in sorted(grupos.items(), key=lambda kv: -len(kv[1])))
+        d, fs = self.sandbox(f"correccion{ronda}", {"pdf": os.path.abspath(self.a.pdf), "AB": canon_ab, "tools": self.t,
+                                                     "val": os.path.join(AQUI, "validar_canon.py")})
+        log(f"   corrección {ronda}: {sum(len(v) for v in grupos.values())} falla(s) de lectura en {len(grupos)} grupo(s)")
+        try:
+            self.claude("correccion", os.path.join(AQUI, "prompts", "correccion.md"),
+                        {"out": fs["AB"], "pdf": fs["pdf"], "motivo": motivo[:12000]}, cwd=d,
+                        tope=min(STEP_BUDGET["correccion"], self.a.budget - self.gasto - STEP_BUDGET["cobertura"]))
+        except Alto as e:
+            log(f"   corrección {ronda}: {str(e)[:160]}")
+        v = run([sys.executable, os.path.join(AQUI, "validar_canon.py"), fs["AB"], fs["tools"]], d, check=False)
+        if v.returncode != 0:
+            raise Alto(f"la corrección {ronda} dejó el canon fuera de esquema: {v.stdout.strip()[-400:]}")
+        shutil.copy2(fs["AB"], canon_ab)
 
     def calcular(self, canon):
         k = self.k
@@ -446,9 +551,16 @@ class Runner:
         A, B = self.lecturas(inv)
         n, rev = self.comparar(A, B, inv)
         canon_ab = self.resolver(A, n, rev)
-        canon = self.decisiones(canon_ab)
-        self.calcular(canon)
-        x, nf = self.excel()
+        for ronda in range(MAX_CORRECCION + 1):
+            canon = self.decisiones(canon_ab)
+            self.calcular(canon)
+            try:
+                x, nf = self.excel()
+                break
+            except Alto as e:
+                if self.a.dry_run or ronda == MAX_CORRECCION or "reglas" not in str(e):
+                    raise
+                self.corregir(canon_ab, ronda + 1)
         cmp_ = self.comparar_excel(x)
         cob = self.cobertura(x)
         out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},

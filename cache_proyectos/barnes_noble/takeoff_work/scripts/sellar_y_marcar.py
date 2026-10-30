@@ -97,7 +97,8 @@ for sh, pg in PAG.items():
     hoja = planmark.Hoja(PDF, pg, dpi=100)
     tipos = sorted({w["tag"] for w in C["walls"] if w["sheet"] == sh and w.get("band")})
     for t in tipos:
-        items = [{"id": w["id"], "band": banda(w["band"]), "lf": w["length_ft"], "tagged": bool(w.get("tag_ids"))}
+        items = [{"id": w["id"], "band": banda(w["band"]), "lf": w["length_ft"], "tagged": bool(w.get("tag_ids")),
+                  "dashed": w.get("element") == "soffit_side"}
                  for w in C["walls"] if w["sheet"] == sh and w["tag"] == t and w.get("band")]
         try:
             hoja.overview(items, f"{sh} type {t}", os.path.join(IMG, f"{sh}_type_{t}.png"))

@@ -24,7 +24,19 @@ Escribe {out} con estos campos mínimos:
 - misc_items[] (ref, familia, qty, unit, source, op): miembros y fasteners que imprime un detalle.
 - constants: escala por hoja y spacing impresos.
 - Razones "none" con N/HOJA: tile_base, frp (o bloque frp), edge_blocking, deck_breaks, accesorios_none[], deflection_clips.
-- mep_sweep: barrido registrado.
+- mep_sweep: barrido registrado; mep_sweep.sheets INCLUYE las hojas M-* y P-* del set (pipes y ductos que cruzan walls). Si no cruzan walls, igual se listan con su conteo explícito (0 cruces + motivo).
+
+CAMPOS QUE EXIGE reglas.py (sin ellos no hay Excel):
+- cada wall: detail y detail_source (N/HOJA del detalle del type); top_track = condición del top track con su N/HOJA y el gap (o to_deck_source); length_basis = base del LF declarada ("face to face" o "centerline / axis"); length_source y height_source con la cadena (cota impresa con su hoja, o B.O.D. de la zona del RCP + sección).
+- wall sin tag de type: default_type_source (nota del set que fija el type por defecto) o part_of (wall con tag del que es return) o untagged_reason.
+- details{{}}: una entrada por N/HOJA abierto ("2/A-410": {{source: "2/A-410", layers_per_face, layers_source, title, notes, sealant o sealant_none_reason + sealant_source}}).
+- column wraps / cajas (element "column_wrap"): fos_chain {{value: [eslabones ft], source}} con TODOS los eslabones impresos (o fos_chain_faces por face si la caja es parcial) y thickness_measured_in.
+- ESQUINAS Y HUECOS (R70.2 / R70.3): cada esquina L / T con UN solo dueño que cubre el cuadrado (ni doble ni sin dueño); un hueco colineal entre dos tramos es una door (su R.O. dentro del run) o va en gaps_ok con su motivo.
+- diagonales (band D): band.faces_top y band.faces_bottom [[x, y], [x, y]] medidas en vector (el largo es el promedio de las dos caras).
+- segmento sin tag con type por nota general: thickness_measured_in; part_of solo con un id que exista en tu canon.
+- accesorios_rfi[] / rfis[]: fuentes_revisadas (designación, otra fila, regla estándar, detalle).
+- SOFFIT SIDES (element "soffit_side", 2/A-221 y la planta A-221): TODOS los bordes del soffit (los de la línea exterior y los del escalón interior), cada uno con soffit_of, drop_line, faces (lados con board, layers y height_ft por la sección) y su height con la cadena de la sección.
+- NO generes imágenes: la evidencia visual (recortes con la band marcada) y los estados los genera el programa desde tus coordenadas. Tus bands deben caer sobre la línea dibujada.
 
 Cada número lleva su fuente N/HOJA (CONFIRMADO / DERIVADO con su operación / PENDIENTE). Lo no impreso va como RFI con su delta, nunca como supuesto silencioso. Al terminar, responde solo "OK {out}".
 
