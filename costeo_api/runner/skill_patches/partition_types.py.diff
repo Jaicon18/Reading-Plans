@@ -1,0 +1,15 @@
+--- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/partition_types.py	2026-10-29 23:12:21.768680604 +0000
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/partition_types.py	2026-10-30 19:11:02.798834057 +0000
+@@ -413,6 +413,12 @@
+     import chequeos_v72                             # v72 (R72.3): un box = un wall (el registro con tag)
+     partes = chequeos_v72.partes_de_box(walls)
+     tipos = {w["id"]: tipo(w, tags_wall) for w in walls}
++    # R80e.41: un wall SIN tag con part_of (return del wall con tag, que no es parte de un box) va en el type del wall
++    # del que es parte; antes caía en un type vacío y la Partition Takeoff salía con una fila sin type
++    for w in walls:
++        if not tipos.get(w["id"]) and w.get("element", "wall") == "wall" and w.get("part_of") in tipos \
++                and w["id"] not in partes and tipos.get(w["part_of"]):
++            tipos[w["id"]] = tipos[w["part_of"]]
+     # v76 (R76.5): la parte sin tag de un box con tag de partition type que tiene caras interiores con board suma esas
+     # caras al LF del box (el box sigue siendo UNA fila de su type); la parte exterior (R72.3) no suma
+     por_id_w = {w["id"]: w for w in walls}
