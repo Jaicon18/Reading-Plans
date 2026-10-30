@@ -45,7 +45,7 @@ PROJECT_INPUTS = ["etapas/4_canon/fo_in.json", "etapas/4_canon/alcance_in.json",
 # Herramientas de PROCESO previas al canon (las corre la lectura: arranque, índice, conteo de tags, test ciego, alcances,
 # registro). En dry-run se re-ejecutan desde la bitácora de la corrida de referencia, con las rutas reescritas.
 PROCESO = ("arranque.py", "indice_set.py", "contar_tags.py", "test_ciego.py")
-ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissions
+ALLOWED = "Read,Write,Edit,Glob,Grep,Bash(python3:*)"     # nunca bypassPermissions (Edit: corregir un canon grande en su sandbox)
 STEP_BUDGET = {"lectura_A": 5.0, "lectura_B": 5.0, "resolucion": 2.0, "cobertura": 1.0, "correccion": 2.0}  # USD/paso
 MAX_CONTINUAR = 2                                   # continuaciones por lectura si la compuerta falla
 CONT_TOPE = 2.0                                     # tope de cada continuación (USD)
@@ -473,8 +473,11 @@ class Runner:
             if re.sub(r"\([^)]*\)", "", c[2]).strip() == "falta imagen que exista":
                 continue                        # la imagen la genera el programa, no la lectura
             caso = c[1]
-            base = caso.split(".")[0].split("[")[0]
-            caso = caso.replace(base, inv.get(base, base), 1)
+            # el id puede llevar puntos (C-E1-P.2): se toma el id de la referencia MÁS LARGO con el que empieza el caso
+            for ref in sorted(inv, key=len, reverse=True):
+                if caso == ref or caso.startswith(ref + ".") or caso.startswith(ref + "["):
+                    caso = inv[ref] + caso[len(ref):]
+                    break
             val = c[2]
             for ref, lec in inv.items():                # ids de la referencia citados dentro del texto -> ids de la lectura
                 val = re.sub(rf"(?<![\w.-]){re.escape(ref)}(?![\w.-])", lec, val)
