@@ -118,6 +118,8 @@ def renombrar_aberturas(leido, ref):
     rws = ref.get("walls") or []
     c = copy.deepcopy(leido)
     mapa = {}
+    todas = {str(o.get("ref")) for r in rws for o in r.get("openings") or []}
+    usadas = {str(o.get("ref")) for w in c.get("walls") or [] for o in w.get("openings") or []} & todas
     for w in c.get("walls") or []:
         # el mismo wall reconciliado o, si la lectura partió el tramo distinto, los walls de la referencia que lo
         # contienen (misma hoja, traslape >= 80 % sobre la misma línea)
@@ -128,8 +130,11 @@ def renombrar_aberturas(leido, ref):
         for o in w.get("openings") or []:
             r = str(o.get("ref"))
             cand = [x for x in refs if x != r and dig(x) and dig(x) == dig(r)]
+            if not cand and r not in todas:     # respaldo: el número de door es único en el door schedule del set
+                cand = [x for x in todas if dig(x) and dig(x) == dig(r) and x not in usadas]
             if len(cand) == 1 and r not in refs:
                 o["ref"] = mapa[r] = cand[0]
+                usadas.add(cand[0])
     return c, mapa
 
 
@@ -240,6 +245,17 @@ def aplicar(leido, ref_base, ov):
             sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
                         "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
         ref = overlay._aplicar_uno(ref, g)
+    # opening_schedule fijado por una decisión: una abertura que la lectura no trae en ningún wall = decisión sin objeto
+    sch = c.get("opening_schedule")
+    if isinstance(sch, dict) and sch.get("items"):
+        dadas = {str(o.get("ref")) for w in c.get("walls") or [] for o in w.get("openings") or []} | \
+            {str(i.get("ref")) for i in sch.get("none") or []}
+        quedan = [i for i in sch["items"] if str(i.get("ref")) in dadas]
+        for i in sch["items"]:
+            if i not in quedan:
+                sin.append({"group": "opening_schedule", "list": "opening_schedule", "id": i.get("ref"), "derivado": False,
+                            "motivo": "la lectura no trae esta abertura en ningún wall"})
+        sch["items"] = quedan
     # wet_fixtures de la lectura cuyo face dejó de ser MR porque una decisión cambió el board (p. ej. RFI-27 type X WR):
     # inventario.py exige fixture <-> face MR; el fixture sin face MR se quita y se lista (derivado de la decisión)
     if c.get("wet_fixtures"):

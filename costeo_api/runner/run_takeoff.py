@@ -49,7 +49,7 @@ ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissi
 STEP_BUDGET = {"lectura_A": 5.0, "lectura_B": 5.0, "resolucion": 2.0, "cobertura": 1.0, "correccion": 2.0}  # USD/paso
 MAX_CONTINUAR = 2                                   # continuaciones por lectura si la compuerta falla
 CONT_TOPE = 2.0                                     # tope de cada continuación (USD)
-MAX_CORRECCION = 2                                  # rondas de corrección de la lectura si reglas.py no deja armar
+MAX_CORRECCION = 3                                  # rondas de corrección de la lectura si reglas.py no deja armar
 
 
 class Alto(Exception):
