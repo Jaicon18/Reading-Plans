@@ -13,6 +13,7 @@ Una operación que CREA un elemento que la referencia no tenía (p. ej. un misc_
 import copy
 import json
 import math
+import re
 import sys
 
 import overlay
@@ -93,6 +94,70 @@ def emparejar(leido, ref):
     return mapa
 
 
+def emparejar_ceilings(leido, ref):
+    """-> {room_leido: room_ref}: mismo nombre, o mismo número de cuarto (3 dígitos) + mismo system con candidato
+    único. Así los walls de la lectura que citan su ceiling (soffit_of) siguen apuntando a él cuando la decisión
+    del estimador fija la lista de ceilings con los nombres de la referencia."""
+    num = lambda z: set(re.findall(r"\b\d{3}\b", str(z.get("room") or "")))
+    rr = ref.get("ceilings") or []
+    mapa = {}
+    for z in leido.get("ceilings") or []:
+        if any(z.get("room") == r.get("room") for r in rr):
+            continue
+        c = [r for r in rr if num(z) and num(z) == num(r) and z.get("system") == r.get("system")]
+        if len(c) == 1 and c[0]["room"] not in mapa.values():
+            mapa[z["room"]] = c[0]["room"]
+    return mapa
+
+
+def renombrar_aberturas(leido, ref):
+    """Refs de openings de la lectura (p. ej. "D14") -> ref de la referencia ("Door 14") cuando, en el mismo wall
+    (ya reconciliado) o en el que lo contiene, los dígitos coinciden y el candidato es único.
+    Solo toca walls[].openings[].ref."""
+    dig = lambda x: "".join(re.findall(r"\d+", str(x)))
+    rws = ref.get("walls") or []
+    c = copy.deepcopy(leido)
+    mapa = {}
+    for w in c.get("walls") or []:
+        # el mismo wall reconciliado o, si la lectura partió el tramo distinto, los walls de la referencia que lo
+        # contienen (misma hoja, traslape >= 80 % sobre la misma línea)
+        tol = TOL_FT * _escala(ref, w.get("sheet"))
+        cerca = [r for r in rws if r["id"] == w["id"] or (r.get("sheet") == w.get("sheet") and
+                 (lambda t: t[0] >= 0.8 and t[1] <= tol)(_traslape(w, r)))]
+        refs = [str(o.get("ref")) for r in cerca for o in r.get("openings") or []]
+        for o in w.get("openings") or []:
+            r = str(o.get("ref"))
+            cand = [x for x in refs if x != r and dig(x) and dig(x) == dig(r)]
+            if len(cand) == 1 and r not in refs:
+                o["ref"] = mapa[r] = cand[0]
+    return c, mapa
+
+
+def reescalar_tramos(c, ids):
+    """Tramos de faces (length_ft por side) que una decisión fijó con el largo de la REFERENCIA: se reescalan al largo
+    del wall de la LECTURA, proporcionales (la cantidad sigue saliendo de la lectura; la decisión fija el reparto).
+    [DERIVED] tramo_i x L_lectura / Σ tramos (el último absorbe el redondeo). -> [(wall, side, Σ, L)]"""
+    out = []
+    for w in c.get("walls") or []:
+        if w["id"] not in ids or w.get("length_ft") is None:
+            continue
+        L = float(w["length_ft"])
+        for lado in ("A", "B"):
+            fs = [f for f in w.get("faces") or [] if f.get("side") == lado and f.get("length_ft") is not None]
+            tot = sum(float(f["length_ft"]) for f in fs)
+            if not fs or tot <= 0 or abs(tot - L) <= 0.05:
+                continue
+            acc = 0.0
+            for i, f in enumerate(fs):
+                nv = round(L - acc, 3) if i == len(fs) - 1 else round(float(f["length_ft"]) * L / tot, 3)
+                f["length_source"] = (f"{f.get('length_source') or ''} | [DERIVED] decision split rescaled to the reading "
+                                      f"length: {f['length_ft']} x {L} / {round(tot, 3)} = {nv}").strip(" |")
+                f["length_ft"] = nv
+                acc += nv
+            out.append((w["id"], lado, round(tot, 3), L))
+    return out
+
+
 def renombrar(canon, mapa):
     """Cambia cada id de wall (string exacto) en todo el canon."""
     def f(o):
@@ -138,7 +203,8 @@ def _filtrar(g, faltan):
 def aplicar(leido, ref_base, ov):
     """-> (canon con decisiones, mapa de ids, [decisiones sin objeto])."""
     mapa = emparejar(leido, ref_base)
-    c = renombrar(leido, mapa)
+    c = renombrar(leido, dict(mapa, **emparejar_ceilings(leido, ref_base)))
+    c, _ = renombrar_aberturas(c, ref_base)
     ref = copy.deepcopy(ref_base)
     sin = []
     for g in ov.get("groups") or []:
@@ -155,7 +221,24 @@ def aplicar(leido, ref_base, ov):
                 faltan[lista] = f
                 # nodes: derivados de la geometría de la lectura; sus ops sin objeto no son decisiones del estimador
                 sin += [{"group": g.get("label"), "list": lista, "id": i, "derivado": lista == "nodes"} for i in sorted(f)]
+        # ítems NUEVOS de la decisión que cuelgan de un wall que la lectura no trae (p. ej. un node en SS-IN-E)
+        wc = {w["id"] for w in c.get("walls") or []} | \
+            {x.get("id") for x in ((g.get("canon") or {}).get("items_upsert") or {}).get("walls") or []}
+        wr = {w["id"] for w in ref.get("walls") or []}
+        for lista, items in ((g.get("canon") or {}).get("items_upsert") or {}).items():
+            kk = ((g.get("canon") or {}).get("items_key") or {}).get(lista) or "ref"
+            for it in items:
+                cuelga = [it.get("wall")] if isinstance(it.get("wall"), str) else list(it.get("walls") or [])
+                if any(isinstance(x, str) and x in wr and x not in wc for x in cuelga) and \
+                        it.get(kk) not in faltan.get(lista, set()):
+                    faltan.setdefault(lista, set()).add(it.get(kk))
+                    sin.append({"group": g.get("label"), "list": lista, "id": it.get(kk), "derivado": lista == "nodes",
+                                "motivo": "cuelga de un wall que la lectura no trae"})
         c = overlay._aplicar_uno(c, _filtrar(g, faltan))
+        tocados = set((((g.get("canon") or {}).get("items_patch") or {}).get("walls") or {}).keys())
+        for wid, lado, tot, L in reescalar_tramos(c, tocados):
+            sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
+                        "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
         ref = overlay._aplicar_uno(ref, g)
     return c, mapa, sin
 

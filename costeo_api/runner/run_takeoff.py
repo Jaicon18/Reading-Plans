@@ -46,6 +46,7 @@ PROCESO = ("arranque.py", "indice_set.py", "contar_tags.py", "test_ciego.py")
 ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissions
 STEP_BUDGET = {"lectura_A": 5.5, "lectura_B": 5.5, "resolucion": 2.0, "cobertura": 1.0}   # topes por paso (USD)
 MAX_CONTINUAR = 2                                   # continuaciones por lectura si la compuerta falla
+CONT_TOPE = 2.0                                     # tope de cada continuación (USD)
 
 
 class Alto(Exception):
@@ -123,11 +124,16 @@ class Runner:
         t0 = time.time()
         p = run(["claude", "-p", prompt, "--model", "sonnet", "--max-budget-usd", str(tope), "--output-format", "json",
                  "--allowedTools", ALLOWED, "--append-system-prompt-file", os.path.join(os.path.abspath(self.a.skill), "SKILL.md")],
-                cwd or self.k, env)
-        r = json.loads(p.stdout or "{}")
+                cwd or self.k, env, check=False)
+        try:
+            r = json.loads(p.stdout or "{}")
+        except ValueError:
+            r = {}
         u = r.get("usage") or {}
         self.costo(paso, float(r.get("total_cost_usd") or 0), u.get("input_tokens", 0), u.get("output_tokens", 0),
                    u.get("cache_read_input_tokens", 0), u.get("cache_creation_input_tokens", 0), time.time() - t0, "sonnet")
+        if p.returncode != 0:                   # el gasto ya quedó en costos.csv aunque la llamada falle (p. ej. tope agotado)
+            raise Alto(f"falló: claude -p {paso} rc={p.returncode} {r.get('subtype', '')} {r.get('errors', '')}")
         return r
 
     # ---------------------------------------------------------------- pasos
@@ -200,6 +206,34 @@ class Runner:
             shutil.copy2(self.a.canon_ref, B)
             self.costo("lectura_A")
             self.costo("lectura_B")
+        elif self.a.reusar_lecturas:
+            # reanudación: las lecturas YA pagadas de una corrida anterior (sandboxes <run>_lectura_X); no se vuelve a llamar.
+            # Una lectura que no pasa el esquema no se usa y se declara (la corrida queda con UNA sola lectura).
+            self.lecturas_no_usadas = []
+            seguir = [x.strip() for x in (self.a.continuar_lados or "").split(",") if x.strip()]
+            for lado, out in (("A", A), ("B", B)):
+                sd = self.a.reusar_lecturas + f"_lectura_{lado}"
+                src = os.path.join(sd, f"takeoff_canon_{lado}.json")
+                if os.path.exists(src) and lado in seguir:
+                    # continuación PAGADA de la misma lectura, en su sandbox, con el validador vigente
+                    shutil.copy2(os.path.join(AQUI, "validar_canon.py"), os.path.join(sd, "validar_canon.py"))
+                    try:
+                        self.compuerta_lectura(lado, (sd, {"pdf": os.path.join(sd, os.path.basename(self.a.pdf)),
+                                                           "tools": os.path.join(sd, "tools")}, src, self.gasto), None)
+                    except Alto as e:
+                        log(f"   lectura {lado}: la continuación no la cerró ({str(e)[-300:]})")
+                v = run([sys.executable, os.path.join(AQUI, "validar_canon.py"), src, self.t], self.root, check=False) \
+                    if os.path.exists(src) else None
+                if v is not None and v.returncode == 0:
+                    shutil.copy2(src, out)
+                    log(f"   lectura {lado}: reusada de {src}")
+                else:
+                    self.lecturas_no_usadas.append({"lado": lado, "motivo": (v.stdout.strip()[-300:] if v else "no existe")})
+                    log(f"   lectura {lado}: NO usable ({self.lecturas_no_usadas[-1]['motivo']})")
+            if len(self.lecturas_no_usadas) == 2:
+                raise Alto("ninguna lectura reusada pasa el esquema")
+            if not os.path.exists(A):
+                shutil.move(B, A)
         else:
             pr = os.path.join(AQUI, "prompts", "lectura.md")
             sand = {}
@@ -242,12 +276,17 @@ class Runner:
                     return
             if intento == MAX_CONTINUAR:
                 raise Alto(f"la lectura {lado} no pasa la compuerta después de {MAX_CONTINUAR} continuaciones:\n{motivo}")
-            resto = STEP_BUDGET[f"lectura_{lado}"] - (self.gasto - gasto0)
+            resto = min(STEP_BUDGET[f"lectura_{lado}"] - (self.gasto - gasto0),
+                        self.a.budget - self.gasto - STEP_BUDGET["cobertura"], CONT_TOPE)   # deja el paso 12 pagado
             log(f"   lectura {lado}: compuerta NO pasa -> continuación {intento + 1} (resto del tope {resto:.2f} USD)")
             self.claude(f"lectura_{lado}:continuar{intento + 1}", os.path.join(AQUI, "prompts", "continuar.md"),
                         {"lado": lado, "out": o, "pdf": f["pdf"], "motivo": motivo}, cwd=d, tope=round(resto, 2))
 
     def comparar(self, A, B, inv):
+        if not os.path.exists(B):
+            log("5/11 comparar.py: OMITIDO (una sola lectura usable; sin cruce A/B)")
+            self.costo("comparar")
+            return 0, None
         out = os.path.join(self.k, "etapas", "3_revision", "runner")
         self.tool("comparar.py", A, B, inv, out, check=False)      # rc 1 = hay diferencias / alertas (se reporta)
         rv = json.load(open(os.path.join(out, "revision.json")))
@@ -283,14 +322,29 @@ class Runner:
     def decisiones(self, canon_ab):
         ov = json.load(open(self.a.overlay)) if self.a.overlay else {}
         self.sin_objeto, self.emparejados = [], None
+        leido = json.load(open(canon_ab))
+        cs = leido.setdefault("constants", {})
+        hoja = (cs.get("plan_scale_by_sheet") or {}).get(self.a.plan_sheet) or {}
+        if not cs.get("plan_scale_pt_per_ft") and hoja.get("value"):
+            # inventario.py exige la escala de la planta; la lectura la dio por hoja: misma cifra, fuente citada
+            cs["plan_scale_pt_per_ft"] = {"value": hoja["value"], "source": f"[DERIVED] = plan_scale_by_sheet "
+                                          f"{self.a.plan_sheet} of the reading: {hoja.get('source', '')}"}
+            log(f"   plan_scale_pt_per_ft tomado de plan_scale_by_sheet {self.a.plan_sheet} = {hoja['value']}")
+            sb = [w for w in leido.get("walls") or [] if isinstance(w.get("band"), dict) and not w["band"].get("sheet")
+                  and w.get("sheet")]
+            for w in sb:                    # con escala de planta canon.py exige band.sheet: la hoja del mismo wall
+                w["band"]["sheet"] = w["sheet"]
+            if sb:
+                log(f"   band.sheet = sheet del wall en {len(sb)} wall(s)")
+        json.dump(leido, open(canon_ab, "w"), indent=1, ensure_ascii=False)
         if self.a.ref_base:                 # reconciliación de ids por geometría (solo para aplicar decisiones)
-            c, mapa, self.sin_objeto = reconcile.aplicar(json.load(open(canon_ab)), json.load(open(self.a.ref_base)), ov)
+            c, mapa, self.sin_objeto = reconcile.aplicar(leido, json.load(open(self.a.ref_base)), ov)
             self.emparejados = len(mapa)
             dec = [x for x in self.sin_objeto if not x.get("derivado")]
             log(f"7/11 reconciliación: {len(mapa)} walls emparejados con la referencia; {len(dec)} decisión(es) sin objeto"
                 f" (+ {len(self.sin_objeto) - len(dec)} nodes derivados)")
         else:
-            c = overlay.aplicar_canon(json.load(open(canon_ab)), ov)
+            c = overlay.aplicar_canon(leido, ov)
         t = overlay.aplicar_takeoff(json.load(open(os.path.join(self.k, "takeoff.json"))), ov)
         dst = os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json")
         json.dump(c, open(dst, "w"), indent=1, ensure_ascii=False)
@@ -399,7 +453,7 @@ class Runner:
         cob = self.cobertura(x)
         out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},
                "cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
-               "reglas_fallas_backcheck": nf, "comparacion": cmp_, "dry_run": self.a.dry_run}
+               "reglas_fallas_backcheck": nf, "lecturas_no_usadas": getattr(self, "lecturas_no_usadas", []), "comparacion": cmp_, "dry_run": self.a.dry_run}
         json.dump(out, open(os.path.join(self.root, "runner_resultado.json"), "w"), indent=1, ensure_ascii=False, default=str)
         return out
 
@@ -420,6 +474,8 @@ def main():
     ap.add_argument("--ref-base", help="canon de referencia SIN decisiones (ids del estimador) para reconciliar ids")
     ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
+    ap.add_argument("--reusar-lecturas", help="raíz --work de una corrida anterior: reusa sus lecturas ya pagadas")
+    ap.add_argument("--continuar-lados", help="con --reusar-lecturas: lados (A,B) a los que se paga una continuación")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     if a.dry_run and not a.canon_ref:
