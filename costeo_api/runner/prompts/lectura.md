@@ -2,12 +2,14 @@ LECTURA {lado} — take-off de metal frame y drywall (R80e.37). Lectura INDEPEND
 
 Tu único trabajo es LEER el plano y escribir el canon JSON. NO calcules materiales, studs, board ni accesorios: lo hacen canon.py, reglas.py y plantilla_excel.py después. Aplica TODAS las reglas del SKILL.md (cargado como system prompt), incluidas R80e.* y las reglas generales R80e.33 / R80e.34, como obligatorias.
 
+Herramientas: tienes Read / Write / Glob / Grep y python3 (pymupdf está instalado) para renderizar recortes de las hojas raster y medir vectores. Las tools del skill están en el directorio del skill (no calcules materiales con ellas).
+
 Entradas:
 - Plano (PDF): {pdf}
 - Inventario por script de hojas y tags (inventario_tags.py): {inventario}
 
 Escribe {out} con estos campos mínimos (el esquema exacto está en el SKILL.md):
-- walls[]: id, tag, element, sheet, page, band (H / V / D / BOX con coordenadas en pt de la hoja), length_ft + length_source, height_ft + height_source, stud_size + stud_source, oc_in, gauge + gauge_source, detail (N/HOJA), top_track / bottom_track si difieren del type, anchorage si otro detalle ancla el track;
+- walls[]: id, tag, element, sheet, page (1-based, página del PDF), band (H / V / D / BOX con coordenadas en pt de la página TAL COMO SE VE, es decir rotada, igual que pymupdf page.rect: H = {{ori, c0, c1 (y de las dos caras), lo, hi (x de los extremos)}}, V = {{ori, c0, c1 (x de las caras), lo, hi (y)}}, D = {{ori, p0, p1}}, BOX = {{ori, c0, c1 (x), lo, hi (y)}}), length_ft + length_source, height_ft + height_source, stud_size + stud_source, oc_in, gauge + gauge_source, detail (N/HOJA), top_track / bottom_track si difieren del type, anchorage si otro detalle ancla el track;
   - faces[]: side, room, board, layers, height_ft + height_source (length_ft si difiere);
   - openings[]: ref, kind, ro_w_ft, head_ft, source.
 - nodes[] (kind L / T / free, walls / wall, source).
@@ -19,3 +21,5 @@ Escribe {out} con estos campos mínimos (el esquema exacto está en el SKILL.md)
 - mep_sweep: barrido registrado.
 
 Cada número lleva su fuente N/HOJA (CONFIRMADO / DERIVADO con su operación / PENDIENTE). Lo no impreso va como RFI con su delta, nunca como supuesto silencioso. Al terminar, responde solo "OK {out}".
+
+AISLAMIENTO: trabaja SOLO con los archivos de tu directorio actual. No abras otros directorios, repositorios, take-offs anteriores ni resultados de otras corridas.

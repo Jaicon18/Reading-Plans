@@ -89,7 +89,21 @@ class Runner:
                 w.writerow(["pasada", "paso", "modelo", "usd", "input", "output", "cache_read", "cache_write", "segundos"])
             w.writerow(["runner-dry" if self.a.dry_run else "runner", paso, modelo, round(usd, 6), inp, out, cr, cw, round(seg)])
 
-    def claude(self, paso, prompt_file, extra):
+    def sandbox(self, nombre, archivos):
+        """Directorio aislado FUERA del workdir (sin la evidencia ni los entregables del proyecto) para una llamada."""
+        d = self.root + "_" + nombre
+        os.makedirs(d, exist_ok=True)
+        out = {}
+        for k, src in archivos.items():
+            dst = os.path.join(d, os.path.basename(src))
+            if os.path.isdir(src):
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+            else:
+                shutil.copy2(src, dst)
+            out[k] = dst
+        return d, out
+
+    def claude(self, paso, prompt_file, extra, cwd=None):
         """Una llamada `claude -p`. Nunca en dry-run. Corta si el tope total se pasaría."""
         if self.a.dry_run:
             raise Alto("BUG: claude() llamado en dry-run")
@@ -99,12 +113,12 @@ class Runner:
         key = os.environ.get("TAKEOFF_API_KEY")
         if not key:
             raise Alto("falta $TAKEOFF_API_KEY")
-        skill_md = open(os.path.join(self.a.skill, "SKILL.md"), encoding="utf-8").read()
         prompt = open(prompt_file, encoding="utf-8").read().format(**extra)
         env = dict(self.env, ANTHROPIC_API_KEY=key)
         t0 = time.time()
         p = run(["claude", "-p", prompt, "--model", "sonnet", "--max-budget-usd", str(tope), "--output-format", "json",
-                 "--allowedTools", ALLOWED, "--append-system-prompt", skill_md], self.k, env)
+                 "--allowedTools", ALLOWED, "--append-system-prompt-file", os.path.join(os.path.abspath(self.a.skill), "SKILL.md")],
+                cwd or self.k, env)
         r = json.loads(p.stdout or "{}")
         u = r.get("usage") or {}
         self.costo(paso, float(r.get("total_cost_usd") or 0), u.get("input_tokens", 0), u.get("output_tokens", 0),
@@ -143,7 +157,10 @@ class Runner:
         """Arranque, alcances y registro: SIEMPRE por bitacora.py run en esta corrida (la compuerta lo exige)."""
         pdf = os.path.abspath(self.a.pdf)
         pin = os.path.abspath(self.a.project_inputs)
-        if self.a.dry_run:
+        # Herramientas de proceso (scripts, $0) re-ejecutadas desde la bitácora de la referencia en ambos modos: la
+        # corrida real solo cambia la LECTURA del canon; el proceso (índice, conteo de tags, test ciego, registro
+        # verificado) se reutiliza de la referencia y así se declara en el resultado.
+        if os.path.exists(os.path.join(pin, "bitacora.jsonl")):
             for l in open(os.path.join(pin, "bitacora.jsonl")):
                 d = json.loads(l)
                 if d.get("tool") in PROCESO:
@@ -157,11 +174,11 @@ class Runner:
         self.tool("alcances.py", "escanear", pdf, "escaneo.json")
         self.tool("alcances.py", "renglones", "escaneo.json", "renglones_alcances.json")
         self.tool("registro.py", "crear", "registro.json", "renglones.json")
-        if self.a.dry_run:
-            # el registro verificado (marcas con su evidencia) es producto de la lectura de referencia
+        if os.path.exists(os.path.join(pin, "registro.json")):
+            # el registro verificado (marcas con su evidencia) es producto del proceso de referencia
             shutil.copy2(os.path.join(pin, "registro.json"), os.path.join(self.k, "registro.json"))
         self.costo("proceso")
-        log("2/11 proceso OK: arranque, alcances escanear, registro crear" + (" (+ herramientas de la lectura de referencia)" if self.a.dry_run else ""))
+        log("2/11 proceso OK: arranque, alcances escanear, registro crear (+ herramientas de proceso de la referencia)")
 
     def inventario_tags(self):
         out = os.path.join(self.k, "etapas", "1_inventario", "runner")
@@ -180,11 +197,13 @@ class Runner:
             self.costo("lectura_B")
         else:
             pr = os.path.join(AQUI, "prompts", "lectura.md")
-            for lado, out in (("A", A), ("B", B)):      # independientes: cada una en su propio proceso, sin ver la otra
-                self.claude(f"lectura_{lado}", pr, {"pdf": os.path.abspath(self.a.pdf), "inventario": inv, "out": out,
-                                                     "lado": lado})
-                if not os.path.exists(out):
-                    raise Alto(f"la lectura {lado} no escribió {out}")
+            for lado, out in (("A", A), ("B", B)):      # independientes: cada una en su propio sandbox, sin ver la otra
+                d, f = self.sandbox(f"lectura_{lado}", {"pdf": os.path.abspath(self.a.pdf), "inv": inv})
+                o = os.path.join(d, os.path.basename(out))
+                self.claude(f"lectura_{lado}", pr, {"pdf": f["pdf"], "inventario": f["inv"], "out": o, "lado": lado}, cwd=d)
+                if not os.path.exists(o):
+                    raise Alto(f"la lectura {lado} no escribió {o}")
+                shutil.copy2(o, out)
         log("4/11 lecturas A y B " + ("(dry-run: canon de referencia)" if self.a.dry_run else "OK"))
         return A, B
 
@@ -203,11 +222,14 @@ class Runner:
             shutil.copy2(A, final)
             self.costo("resolucion")
         else:                                                     # SOLO las diferencias, con su recorte
+            d, f = self.sandbox("resolucion", {"pdf": os.path.abspath(self.a.pdf), "rev": rev_dir, "A": A,
+                                               "B": os.path.join(os.path.dirname(A), "takeoff_canon_B.json")})
+            o = os.path.join(d, "takeoff_canon_AB.json")
             self.claude("resolucion", os.path.join(AQUI, "prompts", "resolucion.md"),
-                        {"pdf": os.path.abspath(self.a.pdf), "revision": os.path.join(rev_dir, "revision.json"),
-                         "canon_A": A, "out": final})
-            if not os.path.exists(final):
+                        {"pdf": f["pdf"], "revision": os.path.join(f["rev"], "revision.json"), "canon_A": f["A"], "out": o}, cwd=d)
+            if not os.path.exists(o):
                 raise Alto("la resolución no escribió el canon")
+            shutil.copy2(o, final)
         log("6/11 resolución " + ("(sin diferencias)" if n == 0 else "OK"))
         return final
 
@@ -301,10 +323,12 @@ class Runner:
             shutil.copy2(self.a.cobertura_lista, lista)
             self.costo("cobertura")
         else:
-            self.claude("cobertura", os.path.join(AQUI, "prompts", "cobertura.md"),
-                        {"pdf": os.path.abspath(self.a.pdf), "out": lista, "excel": x})
-            if not os.path.exists(lista):
+            d, f = self.sandbox("cobertura", {"pdf": os.path.abspath(self.a.pdf), "x": x})
+            o = os.path.join(d, "cobertura_lista.json")
+            self.claude("cobertura", os.path.join(AQUI, "prompts", "cobertura.md"), {"pdf": f["pdf"], "out": o, "excel": f["x"]}, cwd=d)
+            if not os.path.exists(o):
                 raise Alto("la cobertura no escribió la lista")
+            shutil.copy2(o, lista)
         out = os.path.join(self.k, "etapas", "5_auditoria", "cobertura")
         p = run([sys.executable, os.path.join(AQUI, "cobertura.py"), lista,
                  os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json"), os.path.join(self.k, "takeoff.json"), out], self.k)
