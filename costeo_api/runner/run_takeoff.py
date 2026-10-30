@@ -328,6 +328,10 @@ class Runner:
             if (rb["walls"], rb["lf"]) > (ra["walls"], ra["lf"]):
                 A, B = B, A
                 log(f"   resolución parte de la lectura B ({rb['walls']} walls) y no de la A ({ra['walls']})")
+        if self.a.reusar_resolucion and not self.a.dry_run:     # resolución ya pagada de una corrida anterior
+            shutil.copy2(self.a.reusar_resolucion, final)
+            log(f"6/11 resolución reusada de {self.a.reusar_resolucion}")
+            return final
         if n == 0 or self.a.dry_run:
             shutil.copy2(A, final)
             self.costo("resolucion")
@@ -429,13 +433,18 @@ class Runner:
             sw["registros"] = regs
             log(f"   mep.py registro: " + ", ".join(f"{h} {v['matches']}" for h, v in regs.items()))
 
-    def corregir(self, canon_ab, ronda):
+    def corregir(self, canon_ab, ronda, texto=None):
         """reglas.py no deja armar: las fallas que dependen de la LECTURA (no las de imagen: esas las genera el programa)
         vuelven al modelo con los ids de la lectura; corrige el canon AB en un sandbox y la cadena se repite."""
         f = os.path.join(self.k, "etapas", "REGLAS_FALLAS.md")
         inv = {v: k for k, v in (getattr(self, "mapa", None) or {}).items()}
         grupos = {}
-        for l in open(f, encoding="utf-8"):
+        if texto:                               # error de canon.py (con las decisiones del estimador aplicadas)
+            t = texto
+            for ref, lec in inv.items():
+                t = re.sub(rf"(?<![\w.-]){re.escape(ref)}(?![\w.-])", lec, t)
+            grupos["canon.py (con las decisiones del estimador aplicadas)"] = {t}
+        for l in (open(f, encoding="utf-8") if not texto and os.path.exists(f) else []):
             c = [x.strip() for x in l.strip().strip("|").split("|")]
             if len(c) < 4 or c[0] in ("Regla", "---") or set(c[0]) <= set("-"):
                 continue
@@ -561,7 +570,13 @@ class Runner:
         canon_ab = self.resolver(A, n, rev)
         for ronda in range(MAX_CORRECCION + 1):
             canon = self.decisiones(canon_ab)
-            self.calcular(canon)
+            try:
+                self.calcular(canon)
+            except Alto as e:                   # canon.py rechaza la lectura con las decisiones: también es lectura
+                if self.a.dry_run or ronda == MAX_CORRECCION or "ERROR canon.py" not in str(e):
+                    raise
+                self.corregir(canon_ab, ronda + 1, texto=[l for l in str(e).splitlines() if "ERROR canon.py" in l][0])
+                continue
             try:
                 x, nf = self.excel()
                 break
@@ -595,6 +610,7 @@ def main():
     ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
     ap.add_argument("--reusar-lecturas", help="raíz --work de una corrida anterior: reusa sus lecturas ya pagadas")
+    ap.add_argument("--reusar-resolucion", help="canon AB de una resolución ya pagada (con --reusar-lecturas)")
     ap.add_argument("--continuar-lados", help="con --reusar-lecturas: lados (A,B) a los que se paga una continuación")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
