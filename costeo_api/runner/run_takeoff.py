@@ -433,7 +433,7 @@ class Runner:
             sw["registros"] = regs
             log(f"   mep.py registro: " + ", ".join(f"{h} {v['matches']}" for h, v in regs.items()))
 
-    def corregir(self, canon_ab, ronda, texto=None):
+    def corregir(self, canon_ab, ronda, texto=None, origen="canon.py (con las decisiones del estimador aplicadas)"):
         """reglas.py no deja armar: las fallas que dependen de la LECTURA (no las de imagen: esas las genera el programa)
         vuelven al modelo con los ids de la lectura; corrige el canon AB en un sandbox y la cadena se repite."""
         f = os.path.join(self.k, "etapas", "REGLAS_FALLAS.md")
@@ -443,7 +443,7 @@ class Runner:
             t = texto
             for ref, lec in inv.items():
                 t = re.sub(rf"(?<![\w.-]){re.escape(ref)}(?![\w.-])", lec, t)
-            grupos["canon.py (con las decisiones del estimador aplicadas)"] = {t}
+            grupos[origen] = {t}
         for l in (open(f, encoding="utf-8") if not texto and os.path.exists(f) else []):
             c = [x.strip() for x in l.strip().strip("|").split("|")]
             if len(c) < 4 or c[0] in ("Regla", "---") or set(c[0]) <= set("-"):
@@ -581,9 +581,13 @@ class Runner:
                 x, nf = self.excel()
                 break
             except Alto as e:
-                if self.a.dry_run or ronda == MAX_CORRECCION or "reglas" not in str(e):
+                alc = [l for l in str(e).splitlines() if l.startswith("FALLA") and "ALC-" in l]
+                if self.a.dry_run or ronda == MAX_CORRECCION or ("reglas" not in str(e) and not alc):
                     raise
-                self.corregir(canon_ab, ronda + 1)
+                if alc:                         # alcance marcado cuantificado sin cantidad: falta en la LECTURA
+                    self.corregir(canon_ab, ronda + 1, texto="\n".join(alc), origen="alcances.py compuerta")
+                else:
+                    self.corregir(canon_ab, ronda + 1)
         cmp_ = self.comparar_excel(x)
         cob = self.cobertura(x)
         out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},

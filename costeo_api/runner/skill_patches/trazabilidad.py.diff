@@ -1,0 +1,45 @@
+--- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/trazabilidad.py	2026-10-29 23:12:21.776665823 +0000
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/trazabilidad.py	2026-10-30 06:56:48.493858501 +0000
+@@ -146,7 +146,9 @@
+                     cita = _nh(*[det.get(i, "") for i, _ in its], "1/A-121", "5/A-121")
+                 extra = _desglose(its, net, "LF", name)
+             elif fam and fam.startswith("5/8\" gyp"):
+-                bk = "5/8 type X WR" if "W.R." in fam else "5/8 type X"
++                # R80e.39: cada familia de board con SU board (antes regular / MR caían en "5/8 type X")
++                bk = ("5/8 type X WR" if "W.R." in fam else "5/8 MR" if "MOISTURE" in fam.upper()
++                      else "5/8 regular" if "regular" in fam else "5/8 type X")
+                 pw = {}
+                 for c in bo["caras"]:
+                     if c["board"] == bk:
+@@ -167,8 +169,20 @@
+                 extra = _desglose(its, net, "SF", name)
+             elif fam == "FRT plywood (SF)":
+                 mat = "frt_3_4" if "3/4" in name else "frt_5_8"
+-                its = items_filas(fam, mat)
+-                cita = _nh(*[r.get("source") for r in filas_de(fam, mat)]) + ["A-410 (ALL PLYWOOD NEEDS TO BE FRT)"]
++                # R80e.39: el renglón es por material Y uso (canon.py PLY_USO_NOMBRE); antes el substrate sumaba también
++                # el sheathing de column wraps / piers / canopy de su mismo espesor
++                n_l = name.lower()
++                uso_r = ("column_wrap" if "column wrap" in n_l else "pier" if "pier" in n_l else "canopy_soffit"
++                         if "canopy and soffit" in n_l else "nailbase" if "polyiso" in n_l else "substrate")
++
++                def uso_f(r):
++                    t = (str(r.get("uso") or "") + " " + str(r.get("operacion") or "")).lower()
++                    return ("column_wrap" if "column_wrap" in t else "pier" if "pier" in t else "canopy_soffit"
++                            if "canopy_soffit" in t else "nailbase" if "nailbase" in t else "substrate")
++                fil = [r for r in filas_de(fam, mat) if uso_f(r) == uso_r]
++                refs = {str(r.get("ref") or r.get("room") or r.get("source")) for r in fil}
++                its = [x for x in items_filas(fam, mat) if x[0] in refs]
++                cita = _nh(*[r.get("source") for r in fil]) + ["A-410 (ALL PLYWOOD NEEDS TO BE FRT)"]
+                 extra = _desglose(its, net, "SF (strip length x height)", name)
+             elif fam in ("FRT blocking", "8\" joist", "8\" stud (todos los gauges)") or fam and fam.startswith("USG") \
+                     or fam == "metal trim (corner bead, casing, shadow molding)":
+@@ -291,7 +305,7 @@
+         return txt
+     def gauge(row):                                  # v80n (R80e.27): gauge del schedule en la columna Stud Size
+         gs = [walls[i].get("gauge") for i in str(row["wall"]).split("+") if i in walls and walls[i].get("gauge")]
+-        return " / ".join(dict.fromkeys(gs)) or None
++        return " / ".join(dict.fromkeys(str(g) for g in gs)) or None     # un gauge numérico (20) también vale
+     for k in ("walls", "other_framing"):
+         d[k] = [dict(w, **({"faces_note": nota(w)} if nota(w) else {}), **({"gauge": gauge(w)} if gauge(w) else {}))
+                 for w in d.get(k) or []]

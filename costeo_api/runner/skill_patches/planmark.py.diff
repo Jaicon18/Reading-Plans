@@ -1,0 +1,21 @@
+--- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/planmark.py	2026-10-29 23:12:21.769218789 +0000
++++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/planmark.py	2026-10-30 05:09:16.987421387 +0000
+@@ -16,6 +16,9 @@
+ 
+ CACHE = os.environ.get('PLANMARK_CACHE', os.path.join(tempfile.gettempdir(), 'planmark_cache'))
+ TINTA_MIN, OSCURO, VENTANA_PT, SONDAS = 0.04, 160, 14.0, (0.08, 0.22, 0.36, 0.5, 0.64, 0.78, 0.92)
++# R80e.38: un elemento dibujado en línea DISCONTINUA (soffit side "SOFFIT ABOVE") tiene huecos: 7 sondas pueden caer
++# todas en huecos. Con item["dashed"] se sondea denso (41 puntos); los walls sólidos siguen con las 7 sondas.
++SONDAS_DENSAS = tuple(round(0.05 + i * 0.0225, 4) for i in range(41))
+ 
+ 
+ class ScaleError(Exception):
+@@ -66,7 +69,7 @@
+                 u = b['lo'] + t * (b['hi'] - b['lo'])
+                 return (u, c) if b['ori'] == 'H' else (c, u)
+             best = 0.0
+-            for t in SONDAS:
++            for t in (SONDAS_DENSAS if it.get('dashed') else SONDAS):
+                 best = max(best, self.ink(*p(t, eje)), min(self.ink(*p(t, b['c0'])), self.ink(*p(t, b['c1']))))
+             return best
+         elif b['ori'] == 'D':
