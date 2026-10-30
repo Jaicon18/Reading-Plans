@@ -42,17 +42,47 @@ def _dist(a, b):
     return max(abs(x - y) for x, y in zip(pa, pb))
 
 
+def _clase(w):
+    """(element normalizado, type normalizado): un BOX o un tag de columna = column_wrap; el type solo cuenta en walls."""
+    el = str(w.get("element") or "wall")
+    b = (w.get("band") or {}).get("ori")
+    tag = str(w.get("tag") or "").upper()
+    if el == "wall" and (b == "BOX" or tag.startswith("C25") or tag in ("CW", "COLUMN")):
+        el = "column_wrap"
+    return el, (tag.replace("A", "A") if el == "wall" else "")
+
+
+def _traslape(a, b):
+    """Traslape relativo a lo largo del eje (H / V) con la misma línea c: fracción del más corto."""
+    ba, bb = a.get("band") or {}, b.get("band") or {}
+    if ba.get("ori") not in ("H", "V") or ba.get("ori") != bb.get("ori"):
+        return 0.0, math.inf
+    try:
+        ca, cb = (ba["c0"] + ba["c1"]) / 2, (bb["c0"] + bb["c1"]) / 2
+        lo, hi = max(ba["lo"], bb["lo"]), min(ba["hi"], bb["hi"])
+        corto = min(ba["hi"] - ba["lo"], bb["hi"] - bb["lo"])
+    except (KeyError, TypeError):
+        return 0.0, math.inf
+    return (max(0.0, hi - lo) / corto if corto > 0 else 0.0), abs(ca - cb)
+
+
 def emparejar(leido, ref):
-    """-> {id_leido: id_ref} uno a uno, codicioso por distancia (misma hoja, type, ori, element)."""
+    """-> {id_leido: id_ref} uno a uno, codicioso: 1) por distancia de bands (misma hoja, clase, ori);
+    2) si no, por traslape >= 80 % sobre la misma línea (otra partición de los tramos)."""
     cand = []
     for w in leido.get("walls") or []:
         for r in ref.get("walls") or []:
-            if (w.get("sheet"), w.get("tag"), w.get("element", "wall"), (w.get("band") or {}).get("ori")) != \
-               (r.get("sheet"), r.get("tag"), r.get("element", "wall"), (r.get("band") or {}).get("ori")):
+            if w.get("sheet") != r.get("sheet") or _clase(w) != _clase(r):
                 continue
-            d = _dist(w, r)
-            if d <= TOL_FT * _escala(ref, r.get("sheet")):
-                cand.append((d, w["id"], r["id"]))
+            tol = TOL_FT * _escala(ref, r.get("sheet"))
+            if (w.get("band") or {}).get("ori") == (r.get("band") or {}).get("ori"):
+                d = _dist(w, r)
+                if d <= tol:
+                    cand.append((d, w["id"], r["id"]))
+                    continue
+            t, dc = _traslape(w, r)
+            if t >= 0.8 and dc <= tol:
+                cand.append((tol + (1 - t) * tol + dc, w["id"], r["id"]))
     usados_l, usados_r, mapa = set(), set(), {}
     for d, il, ir in sorted(cand):
         if il in usados_l or ir in usados_r:
@@ -85,6 +115,8 @@ def _ids_op(g):
         out.setdefault(lista, set()).update(x.get(kk) for x in items)
     for lista, ks in (o.get("items_remove") or {}).items():
         out.setdefault(lista, set()).update(ks)
+    for lista, pa in (o.get("items_patch") or {}).items():
+        out.setdefault(lista, set()).update(pa.keys())
     return out
 
 
@@ -98,6 +130,8 @@ def _filtrar(g, faltan):
             o["items_upsert"][lista] = [x for x in o["items_upsert"][lista] if x.get(kk) not in ks]
         if lista in (o.get("items_remove") or {}):
             o["items_remove"][lista] = [x for x in o["items_remove"][lista] if x not in ks]
+        if lista in (o.get("items_patch") or {}):
+            o["items_patch"][lista] = {k: v for k, v in o["items_patch"][lista].items() if k not in {str(x) for x in ks}}
     return g
 
 
@@ -114,10 +148,13 @@ def aplicar(leido, ref_base, ov):
             en_ref = {x.get(kk) for x in ref.get(lista) or []}
             en_c = {x.get(kk) for x in c.get(lista) or []}
             # existía en la referencia antes de este grupo y la lectura no lo trae = decisión sin objeto
-            f = {i for i in ids if i in en_ref and i not in en_c}
+            en_ref = {str(x) for x in en_ref}
+            en_c = {str(x) for x in en_c}
+            f = {i for i in ids if str(i) in en_ref and str(i) not in en_c}
             if f:
                 faltan[lista] = f
-                sin += [{"group": g.get("label"), "list": lista, "id": i} for i in sorted(f)]
+                # nodes: derivados de la geometría de la lectura; sus ops sin objeto no son decisiones del estimador
+                sin += [{"group": g.get("label"), "list": lista, "id": i, "derivado": lista == "nodes"} for i in sorted(f)]
         c = overlay._aplicar_uno(c, _filtrar(g, faltan))
         ref = overlay._aplicar_uno(ref, g)
     return c, mapa, sin

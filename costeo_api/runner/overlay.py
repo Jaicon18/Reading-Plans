@@ -72,6 +72,12 @@ def _aplicar_uno(c, ov):
     for lista, keys in (o.get("items_remove") or {}).items():
         kk = (o.get("items_key") or {}).get(lista) or _clave(c.get(lista) or []) or "ref"
         c[lista] = [x for x in c.get(lista) or [] if x.get(kk) not in set(keys)]
+    for lista, pa in (o.get("items_patch") or {}).items():
+        kk = (o.get("items_key") or {}).get(lista) or _clave(c.get(lista) or []) or "ref"
+        cur = c.get(lista) or []
+        for i, x in enumerate(cur):
+            if str(x.get(kk)) in pa:
+                cur[i] = aplicar_parche(x, pa[str(x.get(kk))])
     for lista, orden in (o.get("items_order") or {}).items():
         kk = (o.get("items_key") or {}).get(lista) or _clave(c.get(lista) or []) or "ref"
         idx = {k: i for i, k in enumerate(orden)}
@@ -108,6 +114,58 @@ def _aplicar_uno(c, ov):
     return c
 
 
+IDK = ("side", "ref", "id")
+
+
+def _idk(lista):
+    for k in IDK:
+        if lista and all(isinstance(x, dict) and x.get(k) is not None for x in lista) and \
+                len({x[k] for x in lista}) == len(lista):
+            return k
+    return None
+
+
+def parche(a, b):
+    """Parche mínimo a → b: dicts por clave; listas de dicts con identidad (side / ref / id) por ítem; resto = set."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        p = {"__dict__": {k: parche(a.get(k), b[k]) for k in b if a.get(k) != b[k]}}
+        rm = [k for k in a if k not in b]
+        if rm:
+            p["__del__"] = rm
+        return p
+    if isinstance(a, list) and isinstance(b, list) and _idk(b) and _idk(a) == _idk(b):
+        k = _idk(b)
+        ia, ib = {x[k]: x for x in a}, {x[k]: x for x in b}
+        return {"__by__": k, "items": {str(i): parche(ia.get(i), ib[i]) if i in ia else {"__set__": ib[i]}
+                                       for i in ib if ia.get(i) != ib[i]},
+                "del": [i for i in ia if i not in ib], "order": [x[k] for x in b]}
+    return {"__set__": b}
+
+
+def aplicar_parche(a, p):
+    if "__set__" in p:
+        return copy.deepcopy(p["__set__"])
+    if "__dict__" in p:
+        out = copy.deepcopy(a) if isinstance(a, dict) else {}
+        for k, sp in p["__dict__"].items():
+            out[k] = aplicar_parche(out.get(k), sp)
+        for k in p.get("__del__") or []:
+            out.pop(k, None)
+        return out
+    if "__by__" in p:
+        k = p["__by__"]
+        cur = [copy.deepcopy(x) for x in (a or []) if x.get(k) not in set(p.get("del") or [])]
+        pos = {str(x.get(k)): i for i, x in enumerate(cur)}
+        for i, sp in p["items"].items():
+            if i in pos:
+                cur[pos[i]] = aplicar_parche(cur[pos[i]], sp)
+            else:
+                cur.append(aplicar_parche(None, sp))
+        idx = {x: n for n, x in enumerate(p.get("order") or [])}
+        return sorted(cur, key=lambda x: idx.get(x.get(k), len(idx)))
+    return a
+
+
 def diff(a, b):
     """Overlay mínimo que lleva el canon a → b (genérico: listas por ref / id, constants y claves de primer nivel)."""
     o = {"constants": {}, "top": {}, "top_remove": [], "constants_remove": [], "items_upsert": {}, "items_remove": {},
@@ -129,7 +187,10 @@ def diff(a, b):
         if unico and isinstance(a.get(k), list) and (not a[k] or _clave(a[k]) == kk):
             ia = {x[kk]: x for x in a.get(k) or []}
             ib = {x[kk]: x for x in b[k]}
-            up = [ib[x] for x in ib if ia.get(x) != ib[x]]
+            up = [ib[x] for x in ib if x not in ia]                       # alta: el ítem lo crea la decisión
+            pa = {str(x): parche(ia[x], ib[x]) for x in ib if x in ia and ia[x] != ib[x]}   # cambio: solo campos
+            if pa:
+                o.setdefault("items_patch", {})[k] = pa
             rm = [x for x in ia if x not in ib]
             if up:
                 o["items_upsert"][k] = up

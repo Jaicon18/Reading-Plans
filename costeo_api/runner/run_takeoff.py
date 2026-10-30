@@ -32,6 +32,7 @@ import time
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 import overlay  # noqa: E402
+import completitud  # noqa: E402
 import reconcile  # noqa: E402
 
 # Archivos de entrada del proyecto que la lectura (o el estimador) produce además del canon. En dry-run se copian
@@ -43,7 +44,8 @@ PROJECT_INPUTS = ["etapas/4_canon/fo_in.json", "etapas/4_canon/alcance_in.json",
 # registro). En dry-run se re-ejecutan desde la bitácora de la corrida de referencia, con las rutas reescritas.
 PROCESO = ("arranque.py", "indice_set.py", "contar_tags.py", "test_ciego.py")
 ALLOWED = "Read,Write,Glob,Grep,Bash(python3:*)"          # nunca bypassPermissions
-STEP_BUDGET = {"lectura_A": 6.0, "lectura_B": 6.0, "resolucion": 2.5, "cobertura": 1.5}
+STEP_BUDGET = {"lectura_A": 5.5, "lectura_B": 5.5, "resolucion": 2.0, "cobertura": 1.0}   # topes por paso (USD)
+MAX_CONTINUAR = 2                                   # continuaciones por lectura si la compuerta falla
 
 
 class Alto(Exception):
@@ -70,6 +72,7 @@ class Runner:
         self.gasto = 0.0
         self.pasos = []
         self.env = dict(os.environ, BITACORA=os.path.join(self.k, "bitacora.jsonl"))
+        self.plan_sheets = [x.strip() for x in (a.trade_plan_sheets or a.plan_sheet).split(",") if x.strip()]
 
     # ---------------------------------------------------------------- utilidades
     def tool(self, *args, check=True):
@@ -103,11 +106,13 @@ class Runner:
             out[k] = dst
         return d, out
 
-    def claude(self, paso, prompt_file, extra, cwd=None):
+    def claude(self, paso, prompt_file, extra, cwd=None, tope=None):
         """Una llamada `claude -p`. Nunca en dry-run. Corta si el tope total se pasaría."""
         if self.a.dry_run:
             raise Alto("BUG: claude() llamado en dry-run")
-        tope = STEP_BUDGET.get(paso.split(":")[0], 2.0)
+        tope = tope if tope is not None else STEP_BUDGET.get(paso.split(":")[0], 2.0)
+        if tope < 0.25:
+            raise Alto(f"{paso}: sin presupuesto restante en el tope del paso")
         if self.gasto + tope > self.a.budget:
             raise Alto(f"tope total {self.a.budget} USD: gastado {self.gasto:.2f}, el paso {paso} pide hasta {tope}")
         key = os.environ.get("TAKEOFF_API_KEY")
@@ -197,15 +202,50 @@ class Runner:
             self.costo("lectura_B")
         else:
             pr = os.path.join(AQUI, "prompts", "lectura.md")
+            sand = {}
             for lado, out in (("A", A), ("B", B)):      # independientes: cada una en su propio sandbox, sin ver la otra
-                d, f = self.sandbox(f"lectura_{lado}", {"pdf": os.path.abspath(self.a.pdf), "inv": inv})
+                d, f = self.sandbox(f"lectura_{lado}", {"pdf": os.path.abspath(self.a.pdf), "inv": inv, "tools": self.t,
+                                                         "val": os.path.join(AQUI, "validar_canon.py")})
                 o = os.path.join(d, os.path.basename(out))
-                self.claude(f"lectura_{lado}", pr, {"pdf": f["pdf"], "inventario": f["inv"], "out": o, "lado": lado}, cwd=d)
-                if not os.path.exists(o):
-                    raise Alto(f"la lectura {lado} no escribió {o}")
-                shutil.copy2(o, out)
+                gasto0 = self.gasto
+                self.claude(f"lectura_{lado}", pr, {"pdf": f["pdf"], "inventario": f["inv"], "out": o, "lado": lado,
+                                                     "plan_sheets": ", ".join(self.plan_sheets)}, cwd=d)
+                sand[lado] = (d, f, o, gasto0)
+                self.compuerta_lectura(lado, sand[lado], None)
+            # cruce: cada lectura debe traer los types / elements que encontró la otra (o justificarlos)
+            for lado, otro in (("A", "B"), ("B", "A")):
+                self.compuerta_lectura(lado, sand[lado], sand[otro][2])
+            for lado, out in (("A", A), ("B", B)):
+                shutil.copy2(sand[lado][2], out)
         log("4/11 lecturas A y B " + ("(dry-run: canon de referencia)" if self.a.dry_run else "OK"))
         return A, B
+
+    def compuerta_lectura(self, lado, sb, otro_path):
+        """Esquema (validar_canon.py = canon.py) + completitud por hojas / types; si falla, continúa la MISMA lectura."""
+        d, f, o, gasto0 = sb
+        for intento in range(MAX_CONTINUAR + 1):
+            if not os.path.exists(o):
+                motivo = "el archivo del canon no existe"
+            else:
+                v = run([sys.executable, os.path.join(AQUI, "validar_canon.py"), o, f["tools"]], d, check=False)
+                c = json.load(open(o))
+                otro = json.load(open(otro_path)) if otro_path else None
+                r = completitud.revisar(c, self.plan_sheets, otro)
+                motivo = "\n".join(x for x in (
+                    "" if v.returncode == 0 else "ESQUEMA: " + v.stdout.strip()[-1200:],
+                    "" if not r["faltan_hojas"] else "FALTAN HOJAS DE PLANTA SIN WALLS: " + ", ".join(r["faltan_hojas"]),
+                    "" if not r["faltan_types"] else "TYPES DEL SCHEDULE SIN WALLS NI types_none_reason: " + ", ".join(r["faltan_types"]),
+                    "" if not r["faltan_vs_otra"] else "TYPES / ELEMENTS QUE OTRA LECTURA SÍ ENCONTRÓ Y AQUÍ FALTAN (léelos en el plano, "
+                    "no los copies): " + ", ".join(r["faltan_vs_otra"])) if x)
+                if not motivo:
+                    log(f"   lectura {lado}: compuerta OK ({r['walls']} walls, {r['lf']} LF)")
+                    return
+            if intento == MAX_CONTINUAR:
+                raise Alto(f"la lectura {lado} no pasa la compuerta después de {MAX_CONTINUAR} continuaciones:\n{motivo}")
+            resto = STEP_BUDGET[f"lectura_{lado}"] - (self.gasto - gasto0)
+            log(f"   lectura {lado}: compuerta NO pasa -> continuación {intento + 1} (resto del tope {resto:.2f} USD)")
+            self.claude(f"lectura_{lado}:continuar{intento + 1}", os.path.join(AQUI, "prompts", "continuar.md"),
+                        {"lado": lado, "out": o, "pdf": f["pdf"], "motivo": motivo}, cwd=d, tope=round(resto, 2))
 
     def comparar(self, A, B, inv):
         out = os.path.join(self.k, "etapas", "3_revision", "runner")
@@ -218,12 +258,19 @@ class Runner:
 
     def resolver(self, A, n, rev_dir):
         final = os.path.join(self.k, "etapas", "2_lectura", "takeoff_canon_AB.json")
+        B = os.path.join(os.path.dirname(A), "takeoff_canon_B.json")
+        if os.path.exists(B):                     # la resolución parte de la lectura MÁS COMPLETA (walls, luego LF)
+            ra = completitud.revisar(json.load(open(A)), [])
+            rb = completitud.revisar(json.load(open(B)), [])
+            if (rb["walls"], rb["lf"]) > (ra["walls"], ra["lf"]):
+                A, B = B, A
+                log(f"   resolución parte de la lectura B ({rb['walls']} walls) y no de la A ({ra['walls']})")
         if n == 0 or self.a.dry_run:
             shutil.copy2(A, final)
             self.costo("resolucion")
         else:                                                     # SOLO las diferencias, con su recorte
-            d, f = self.sandbox("resolucion", {"pdf": os.path.abspath(self.a.pdf), "rev": rev_dir, "A": A,
-                                               "B": os.path.join(os.path.dirname(A), "takeoff_canon_B.json")})
+            d, f = self.sandbox("resolucion", {"pdf": os.path.abspath(self.a.pdf), "rev": rev_dir, "A": A, "B": B,
+                                               "tools": self.t, "val": os.path.join(AQUI, "validar_canon.py")})
             o = os.path.join(d, "takeoff_canon_AB.json")
             self.claude("resolucion", os.path.join(AQUI, "prompts", "resolucion.md"),
                         {"pdf": f["pdf"], "revision": os.path.join(f["rev"], "revision.json"), "canon_A": f["A"], "out": o}, cwd=d)
@@ -239,7 +286,9 @@ class Runner:
         if self.a.ref_base:                 # reconciliación de ids por geometría (solo para aplicar decisiones)
             c, mapa, self.sin_objeto = reconcile.aplicar(json.load(open(canon_ab)), json.load(open(self.a.ref_base)), ov)
             self.emparejados = len(mapa)
-            log(f"7/11 reconciliación: {len(mapa)} walls emparejados con la referencia; {len(self.sin_objeto)} decisión(es) sin objeto")
+            dec = [x for x in self.sin_objeto if not x.get("derivado")]
+            log(f"7/11 reconciliación: {len(mapa)} walls emparejados con la referencia; {len(dec)} decisión(es) sin objeto"
+                f" (+ {len(self.sin_objeto) - len(dec)} nodes derivados)")
         else:
             c = overlay.aplicar_canon(json.load(open(canon_ab)), ov)
         t = overlay.aplicar_takeoff(json.load(open(os.path.join(self.k, "takeoff.json"))), ov)
@@ -367,6 +416,7 @@ def main():
     ap.add_argument("--work", required=True)
     ap.add_argument("--budget", type=float, default=20.0)
     ap.add_argument("--plan-sheet", default="A-101", help="hoja de planta para vigas_sobre_walls.py")
+    ap.add_argument("--trade-plan-sheets", help="hojas de planta del trade que deben tener walls (ej. A-101,A-221)")
     ap.add_argument("--ref-base", help="canon de referencia SIN decisiones (ids del estimador) para reconciliar ids")
     ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
