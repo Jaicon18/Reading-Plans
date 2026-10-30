@@ -8,7 +8,7 @@ Entradas:
 - Plano (PDF): {pdf}
 - Inventario por script de hojas y tags (inventario_tags.py): {inventario}
 
-COBERTURA OBLIGATORIA: lee TODAS las hojas del trade: plantas ({plan_sheets}), RCP (A-121), secciones y detalles de walls (A-410, A-221, A-210, A-200, A-412 / A-413 / A-414), elevaciones interiores (A-225, A-226A / B), especificaciones (A-001A) y A-500. Cada type del schedule de A-410 (y de A-221) tiene walls en el canon, o va en "types_none_reason" con su N/HOJA. Incluye column wraps (element "column_wrap") y soffit sides (element "soffit_side").
+COBERTURA OBLIGATORIA: lee TODAS las hojas del trade: plantas ({plan_sheets}), RCP (A-121), secciones y detalles de walls (A-410, A-221, A-210, A-200, A-412 / A-413 / A-414), elevaciones interiores (A-225, A-226A / B), ELEVACIONES Y SECCIONES DEL EDIFICIO (A-300, A-400A / A-400B: B.O. DECK impreso = altura de los walls a deck; nunca un placeholder si alguna hoja lo imprime), especificaciones (A-001A) y A-500. Cada type del schedule de A-410 (y de A-221) tiene walls en el canon, o va en "types_none_reason" con su N/HOJA. Incluye column wraps (element "column_wrap") y soffit sides (element "soffit_side").
 
 ESCALA: constants.plan_scale_pt_per_ft {{value, source}} de la planta y band.sheet en cada band son obligatorios (sin ellos canon.py no cruza la band contra length_ft). Cada band medida debe dar el length_ft del wall; si la cota impresa y la band no cuadran, es un RFI, no un número.
 

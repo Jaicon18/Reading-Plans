@@ -200,3 +200,55 @@ Cómo leer estas tablas:
 - `lectura_A.json`, `lectura_B.json`
 - `revision_AB.md`
 - `comparar_material.py`
+
+---
+
+# Análisis sin API sobre las lecturas de la #4 (pedido del parent, 30-oct)
+
+## 1) Decisiones GENERALES por atributo (R80e.43)
+Las decisiones de board se aplicaban por wall emparejado. Los walls que no se emparejaron conservaban "5/8 regular" y "5/8 MR". Ahora `decisiones_BN.json` trae `generales`, que se aplican a TODOS los walls de la lectura por atributo:
+- **RFI-11:** las faces en cuartos húmedos (restroom / toilet / janitor / kitchen) pasan a 5/8 Type X W.R. (A-410 "*" note, partition note 7, 2/A-410).
+- **RFI-27:** todo 5/8 regular o MR que queda pasa a 5/8 Type X (A-001A Div 09 A.2), en cualquier element (wall, column wrap, soffit side, pier), igual que rev13.
+
+Con las lecturas de la #4: RFI-27 cambió 45 faces y RFI-11 4. Las decisiones puntuales (un wall, un node, un misc item) siguen pidiendo emparejar.
+
+## 2) Studs −33 / −38 %: es LECTURA, no regla
+| Stud (canon.py studs_out) | rev13 | #4 | #4 con 25'-0" en los walls placeholder (diagnóstico) |
+|---|---|---|---|
+| 3-5/8" | 9320 LF | 6113 LF (−34 %) | 7438 LF (−20 %) |
+| 6" | 3008 LF | 1960 LF (−35 %) | 2450 LF (−19 %) |
+
+1. **Altura (la mitad del faltante).** La lectura A puso 20.0 ft "placeholder, B.O.D. NOT PRINTED" en 29 walls a deck. El set sí imprime "B.O. DECK ABOVE EL. 25'-0" V.I.F." en **1/A-400A y 1/A-400B**, y el prompt de lectura no listaba esas hojas. La lectura B usó 15'-0" (A-226A elev 6), que también está mal.
+2. **Soffit sides (≈ −690 LF).** La lectura toma el drop (1.92 ft) como altura del stud. 2/A-221 dibuja studs hasta deck: 14.0 / 13.5 ft.
+3. **Segmentos cortos que faltan (≈ −750 LF):** W2-02, W2-06.2/.3/.4, C-F, C-I, C-I-P.1 y C-E1-B, todos de 25 ft.
+4. **Type 4 (≈ −180 LF neto).** Leído en 2 tramos de 24.2 ft en vez de 12 segmentos con jambs (4/A-410), así que salen menos jambs y nodos.
+
+En los walls que coinciden, la regla da lo mismo: W2-04 47 / 46 piezas, W2-01 41 / 40.
+
+## 3) Cement board +126 %: origen con N/HOJA
+- **+569.8 SF de C-E2** (type E2, E/A-221). La lectura A le puso 1/2" cement board a la cara del Cafe Workroom 104, con 20 ft de alto y una fuente placeholder.
+  - E/A-221 dice "E2-5/8" FRT PLYWOOD" únicamente; la otra cara es un vacío contra el exterior existente. Así lo lee rev13, y la lectura B también dejó E2 sin faces.
+  - **Causa del runner:** comparar.py solo compara LF, así que la diferencia de board entre A y B no llegó a la resolución (BE-77).
+- **+22.8 SF de C-D** (D/A-221): la lectura pone 2.708 ft (2'-8.5") donde rev13 lee 1.0 ft.
+- **+18.7 SF de C-E1-P.2:** la lectura lo asigna al Workroom.
+- **−34 SF de C-E1-S:** 16.14 ft contra 19.0 ft.
+
+## 4) Excel re-armado sin API (`Takeoff_BN_runner_v4b_generales.xlsx`)
+| Material | rev13 | #4 | #4 + generales |
+|---|---|---|---|
+| 5/8" gypsum board, Type X (SF) | 14266.95 | 8266.72 (−42.1 %) | **13000.65 (−8.9 %)** |
+| 5/8" gypsum board, Type X W.R. (SF) | 1092.59 | 940.87 (−13.9 %) | **1179.64 (+8.0 %)** |
+| 5/8" gypsum board, regular (SF) | — | sí | **0** |
+| 3-5/8" metal stud (LF) | 11601.59 | 7811.19 (−32.7 %) | 7811.19 (lectura: alturas) |
+| 6" metal stud (LF) | 3162.5 | 1960 (−38.0 %) | 1960 (lectura: alturas) |
+| 1/2" cement board (SF) | 434.28 | 980.19 (+125.7 %) | 980.19 (lectura: C-E2) |
+
+Las tablas completas están en `mat_v4b.md`. Sigue **no entregable**: F-01 PENDING (0 layers, F/A-221) y la cobertura no corrió.
+
+## Reglas y compuertas nuevas
+- **R80e.43:** decisiones generales por atributo.
+- **R80e.44:**
+  - comparar A/B también por ALTURA y BOARD por face (`difieren_atributos` va a la resolución);
+  - compuerta de alturas placeholder: si la lectura declara PENDIENTE o "placeholder" y el set tiene secciones o elevaciones sin abrir, continúa sobre esas hojas. Con la lectura A detecta 29 walls → A-226A, A-400A, A-400B; rev13 da 0.
+  - el prompt de lectura ahora incluye A-300 y A-400A/B.
+- **BE-76..78.**

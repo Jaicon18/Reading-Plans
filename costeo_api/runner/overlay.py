@@ -47,7 +47,32 @@ def aplicar_canon(canon, ov):
         c = _aplicar_uno(c, g)
     if ov.get("canon"):
         c = _aplicar_uno(c, ov)
+    aplicar_generales(c, ov)
     return c
+
+
+def aplicar_generales(c, ov):
+    """R80e.43: decisiones GENERALES del estimador por atributo (board / cuarto), en TODOS los walls de la lectura,
+    emparejados o no. Cada una: {id, cuando: {board_in, room_rx?, element_in?}, board, board_source}. En orden: la
+    primera que aplica a una face gana. -> {id: faces cambiadas}"""
+    n = {}
+    for w in c.get("walls") or []:
+        for f in w.get("faces") or []:
+            if not isinstance(f, dict):
+                continue
+            for g in ov.get("generales") or []:
+                cu = g.get("cuando") or {}
+                if f.get("board") not in (cu.get("board_in") or []):
+                    continue
+                if cu.get("room_rx") and not re.search(cu["room_rx"], str(f.get("room") or ""), re.I):
+                    continue
+                if cu.get("element_in") and w.get("element", "wall") not in cu["element_in"]:
+                    continue
+                if f["board"] != g["board"]:
+                    f["board"], f["board_source"] = g["board"], g["board_source"]
+                    n[g["id"]] = n.get(g["id"], 0) + 1
+                break
+    return n
 
 
 def _aplicar_uno(c, ov):

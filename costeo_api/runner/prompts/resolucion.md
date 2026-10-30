@@ -1,4 +1,4 @@
-RESOLUCIÓN DIRIGIDA (R80e.37): resuelve SOLO las diferencias entre la lectura A y la lectura B listadas en {revision} (difieren / solo_A / solo_B / alertas). No releas el plano completo: abre el recorte de cada diferencia y la hoja que cita.
+RESOLUCIÓN DIRIGIDA (R80e.37): resuelve SOLO las diferencias entre la lectura A y la lectura B listadas en {revision} (difieren / solo_A / solo_B / alertas / difieren_atributos: ALTURA y BOARD por face de walls emparejados). No releas el plano completo: abre el recorte de cada diferencia y la hoja que cita.
 
 Valida el resultado con `python3 validar_canon.py {out} tools` hasta "CANON OK". No cambies ningún otro wall, ni Inputs del estimador (yields, waste, stock), ni reglas del skill. No calcules materiales.
 

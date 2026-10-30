@@ -52,6 +52,27 @@ CONT_TOPE = 2.0                                     # tope de cada continuación
 MAX_CORRECCION = 3                                  # rondas de corrección de la lectura si reglas.py no deja armar
 
 
+def atributos_ab(a, b):
+    """Walls emparejados por geometría (reconcile.emparejar) con altura o boards por face distintos -> lista."""
+    mapa = reconcile.emparejar(a, b)
+    wb = {w["id"]: w for w in b.get("walls") or []}
+    out = []
+    for w in a.get("walls") or []:
+        o = wb.get(mapa.get(w["id"]))
+        if not o:
+            continue
+        ha, hb = w.get("height_ft"), o.get("height_ft")
+        if ha is not None and hb is not None and abs(float(ha) - float(hb)) > 0.25:
+            out.append({"A": w["id"], "B": o["id"], "campo": "height_ft", "valor_A": ha, "valor_B": hb,
+                        "fuente_A": str(w.get("height_source"))[:160], "fuente_B": str(o.get("height_source"))[:160]})
+        ba = sorted(str(f.get("board")) for f in w.get("faces") or [] if isinstance(f, dict))
+        bb = sorted(str(f.get("board")) for f in o.get("faces") or [] if isinstance(f, dict))
+        if ba != bb:
+            out.append({"A": w["id"], "B": o["id"], "campo": "faces.board", "valor_A": ba, "valor_B": bb,
+                        "fuente_A": str(w.get("faces_none_reason") or "")[:160], "fuente_B": str(o.get("faces_none_reason") or "")[:160]})
+    return out
+
+
 class Alto(Exception):
     """El runner se detiene y reporta (R80e.37)."""
 
@@ -291,7 +312,8 @@ class Runner:
                 r = completitud.revisar(c, self.plan_sheets, otro)
                 cn = completitud.conteos(c, *self._fuentes_conteo())       # R80e.40: conteos por type / hoja
                 duro = v.returncode != 0 or r["faltan_hojas"] or r["faltan_types"]
-                if intento == MAX_CONTINUAR and not duro and (cn["faltan_tags"] or cn["faltan_columnas"]
+                ap = cn["alturas_placeholder"]["walls"] if cn["alturas_placeholder"]["hojas"] else []
+                if intento == MAX_CONTINUAR and not duro and (cn["faltan_tags"] or cn["faltan_columnas"] or ap
                                                                or cn["faltan_discontinuas"] or r["faltan_vs_otra"]):
                     # esquema OK y solo quedan faltantes de conteo: la lectura NO se descarta; se declaran
                     self.faltantes_conteo = getattr(self, "faltantes_conteo", {})
@@ -325,7 +347,8 @@ class Runner:
             pinv = os.path.join(self.k, "etapas", "1_inventario", "inventario.json")
             mapa = os.path.join(self.k, "etapas", "0_mapa", "SHEET_MAP.md")
             self._fc = (json.load(open(pinv)) if os.path.exists(pinv) else None, os.path.abspath(self.a.pdf),
-                        evidencia.mapa_hojas(mapa) if os.path.exists(mapa) else None)
+                        evidencia.mapa_hojas(mapa) if os.path.exists(mapa) else None, 6.0,
+                        completitud.titulos_hojas(mapa) if os.path.exists(mapa) else None)
         return self._fc
 
     def comparar(self, A, B, inv):
@@ -336,7 +359,10 @@ class Runner:
         out = os.path.join(self.k, "etapas", "3_revision", "runner")
         self.tool("comparar.py", A, B, inv, out, check=False)      # rc 1 = hay diferencias / alertas (se reporta)
         rv = json.load(open(os.path.join(out, "revision.json")))
-        n = sum(len(rv.get(k) or []) for k in ("difieren", "solo_A", "solo_B"))
+        # R80e.44: comparar.py compara LF; aquí también ALTURA y BOARD por face de los walls emparejados A <-> B
+        rv["difieren_atributos"] = atributos_ab(json.load(open(A)), json.load(open(B)))
+        json.dump(rv, open(os.path.join(out, "revision.json"), "w"), indent=1, ensure_ascii=False)
+        n = sum(len(rv.get(k) or []) for k in ("difieren", "solo_A", "solo_B", "difieren_atributos"))
         self.costo("comparar")
         log(f"5/11 comparar.py: {n} diferencias")
         return n, out

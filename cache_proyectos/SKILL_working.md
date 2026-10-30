@@ -2549,3 +2549,14 @@ Antes caía en un type vacío: la fila salía sin type y el sealer se caía.
    - un id con punto (C-E1-P.2) se traduce completo al id de la lectura;
    - todo "NO SE ARMA" de plantilla_excel (accesorios PENDIENTE, alcances) vuelve al modelo.
 5) Presupuesto: el tope de `claude -p --max-budget-usd` no es exacto (se pasa unos centavos). El runner deja 1 % del tope total sin asignar.
+
+### R80e.43 — Decisiones GENERALES del estimador por atributo (30-oct, análisis B&N #4)
+Una decisión general (RFI-27 Type X en todos los walls nuevos, RFI-11 W.R. en cuartos húmedos, etc.) se aplica por ATRIBUTO (board, cuarto, element) a TODOS los walls de la lectura, emparejados o no. Va en `generales` del overlay: [{id, cuando: {board_in, room_rx?, element_in?}, board, board_source}], y la primera que aplica gana.
+Solo las decisiones puntuales (un wall, un node, un misc item) requieren emparejar.
+Origen: walls de la #4 sin emparejar con "5/8 regular" (Type X −42 % → −8.9 % con la regla).
+
+### R80e.44 — Alturas y boards: comparar y exigir la fuente impresa (30-oct, análisis B&N #4)
+1) comparar A/B también por ALTURA y BOARD por face de los walls emparejados por geometría (`difieren_atributos`); las diferencias van a la resolución. comparar.py solo compara LF: el cement board falso de E2 (E/A-221 = FRT plywood only) pasó sin resolverse.
+2) Compuerta de alturas placeholder: si la lectura declara height_status PENDIENTE o "placeholder" y el set tiene hojas de secciones o elevaciones (SHEET_MAP) que no cita, la lectura CONTINÚA sobre esas hojas.
+3) La lectura incluye SIEMPRE las elevaciones y secciones del edificio (A-300, A-400 series): el B.O. DECK impreso es la altura de los walls a deck.
+Origen: la #4 usó 20 ft placeholder (A) y 15 ft (B) donde 1/A-400A y 1/A-400B imprimen 25'-0"; studs −33 / −38 %.

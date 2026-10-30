@@ -251,6 +251,10 @@ def aplicar(leido, ref_base, ov):
             sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
                         "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
         ref = overlay._aplicar_uno(ref, g)
+    # decisiones GENERALES (por atributo) en todos los walls, emparejados o no (R80e.43)
+    for k, v in overlay.aplicar_generales(c, ov).items():
+        sin.append({"group": "generales", "list": "faces", "id": k, "derivado": True,
+                    "motivo": f"decisión general aplicada por atributo a {v} face(s)"})
     # dependencias de una decisión de lista completa (p. ej. ceilings): una constante de la REFERENCIA que la lectura no
     # trae y cuya fuente es un supuesto del estimador con RFI (p. ej. carrying_direction "assumed E-W, RFI-15") viaja
     # con la decisión; se lista

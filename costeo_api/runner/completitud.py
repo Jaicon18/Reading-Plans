@@ -84,7 +84,7 @@ def _escala(c, h):
                  or (cs.get("plan_scale_pt_per_ft") or {}).get("value") or 9.0)
 
 
-def conteos(c, inventario=None, pdf=None, hojas_pag=None, tol_ft=6.0):
+def conteos(c, inventario=None, pdf=None, hojas_pag=None, tol_ft=6.0, titulos=None):
     """-> {"faltan_tags": [...], "faltan_columnas": [...], "faltan_discontinuas": [...], "resumen": {...}}"""
     # types_none_reason excusa un tag del inventario SOLO si el type es existente / by others / fuera de alcance;
     # "no lo encontré" no excusa un tag que el inventario sí tiene en el plano
@@ -92,7 +92,8 @@ def conteos(c, inventario=None, pdf=None, hojas_pag=None, tol_ft=6.0):
     tnr = {str(k).upper(): str(v) for k, v in (c.get("types_none_reason") or {}).items()}
     none = {k for k, v in tnr.items() if exc.search(v)}
     walls = [w for w in c.get("walls") or [] if _rect(w.get("band"))]
-    out = {"faltan_tags": [], "faltan_columnas": [], "faltan_discontinuas": [], "resumen": {}}
+    out = {"faltan_tags": [], "faltan_columnas": [], "faltan_discontinuas": [], "resumen": {},
+           "alturas_placeholder": alturas_placeholder(c, titulos)}
     # 1) partition tags del inventario
     for v in ((inventario or {}).get("ocurrencias") or {}).values():
         for t in v:
@@ -150,6 +151,35 @@ def conteos(c, inventario=None, pdf=None, hojas_pag=None, tol_ft=6.0):
     return out
 
 
+PLACEHOLDER = re.compile(r"not printed|placeholder|no impres|assumed height", re.I)
+
+
+def titulos_hojas(sheet_map):
+    """SHEET_MAP.md -> {sheet: título} (para saber qué hojas son secciones / elevaciones)."""
+    out = {}
+    for l in open(sheet_map, encoding="utf-8"):
+        c = [x.strip() for x in l.strip().strip("|").split("|")]
+        if len(c) >= 2 and c[0].isdigit():
+            m = re.match(r"([A-Z]{1,2}-?\d{3}[A-Z]?)\s*(.*)", c[1])
+            if m:
+                out.setdefault(m.group(1), m.group(2))
+    return out
+
+
+def alturas_placeholder(c, titulos):
+    """R80e.44: walls con altura placeholder ("NOT PRINTED", "placeholder") mientras el set tiene secciones /
+    elevaciones que la lectura no citó en ninguna altura -> {walls, hojas} para continuar sobre esas hojas."""
+    # placeholder = la propia lectura lo declara: height_status PENDIENTE o la palabra "placeholder" en la fuente
+    ws = [w["id"] for w in c.get("walls") or [] if w.get("height_ft") is not None
+          and (str(w.get("height_status") or "").upper() == "PENDIENTE"
+               or re.search(r"placeholder", str(w.get("height_source") or ""), re.I))]
+    if not ws:
+        return {"walls": [], "hojas": []}
+    citadas = " ".join(str(w.get("height_source") or "") for w in c.get("walls") or [])
+    hojas = [h for h, t in sorted((titulos or {}).items()) if re.search(r"section|elevation", t, re.I) and h not in citadas]
+    return {"walls": ws, "hojas": hojas}
+
+
 def motivo_conteos(r):
     """Texto para la continuación: los tags / símbolos concretos que faltan, con hoja y coordenadas."""
     l = []
@@ -166,6 +196,11 @@ def motivo_conteos(r):
         l.append("LÍNEAS DISCONTINUAS LARGAS (SOFFIT ABOVE / borde de ceiling) EN EL PLANO AMPLIADO SIN soffit_side (lee la "
                  "sección del soffit; si es un soffit side agrégalo con su band sobre la línea; si no, dashed_none_reason):")
         l += [f"  - {x['sheet']} {x['ori']} c={x['c_pt']} de {x['lo_pt']} a {x['hi_pt']} pt ({x['ft']} ft)" for x in r["faltan_discontinuas"]]
+    ap = r.get("alturas_placeholder") or {}
+    if ap.get("walls") and ap.get("hojas"):
+        l.append(f"ALTURAS PLACEHOLDER ('NOT PRINTED' / placeholder) en {len(ap['walls'])} wall(s) ({', '.join(ap['walls'][:15])}) "
+                 f"mientras el set tiene secciones / elevaciones que no abriste: {', '.join(ap['hojas'])}. Lee el B.O.D. / "
+                 "T.O. stud impreso en esas hojas y corrige height_ft + height_source (o deja la RFI con la hoja revisada).")
     return "\n".join(l)
 
 
