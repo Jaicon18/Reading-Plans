@@ -32,6 +32,7 @@ import time
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 import overlay  # noqa: E402
+import reconcile  # noqa: E402
 
 # Archivos de entrada del proyecto que la lectura (o el estimador) produce además del canon. En dry-run se copian
 # del proyecto de referencia; en una corrida real los escribe el paso de lectura (prompts/lectura.md).
@@ -212,7 +213,13 @@ class Runner:
 
     def decisiones(self, canon_ab):
         ov = json.load(open(self.a.overlay)) if self.a.overlay else {}
-        c = overlay.aplicar_canon(json.load(open(canon_ab)), ov)
+        self.sin_objeto, self.emparejados = [], None
+        if self.a.ref_base:                 # reconciliación de ids por geometría (solo para aplicar decisiones)
+            c, mapa, self.sin_objeto = reconcile.aplicar(json.load(open(canon_ab)), json.load(open(self.a.ref_base)), ov)
+            self.emparejados = len(mapa)
+            log(f"7/11 reconciliación: {len(mapa)} walls emparejados con la referencia; {len(self.sin_objeto)} decisión(es) sin objeto")
+        else:
+            c = overlay.aplicar_canon(json.load(open(canon_ab)), ov)
         t = overlay.aplicar_takeoff(json.load(open(os.path.join(self.k, "takeoff.json"))), ov)
         dst = os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json")
         json.dump(c, open(dst, "w"), indent=1, ensure_ascii=False)
@@ -317,7 +324,8 @@ class Runner:
         x, nf = self.excel()
         cmp_ = self.comparar_excel(x)
         cob = self.cobertura(x)
-        out = {"cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
+        out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},
+               "cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
                "reglas_fallas_backcheck": nf, "comparacion": cmp_, "dry_run": self.a.dry_run}
         json.dump(out, open(os.path.join(self.root, "runner_resultado.json"), "w"), indent=1, ensure_ascii=False, default=str)
         return out
@@ -335,6 +343,7 @@ def main():
     ap.add_argument("--work", required=True)
     ap.add_argument("--budget", type=float, default=20.0)
     ap.add_argument("--plan-sheet", default="A-101", help="hoja de planta para vigas_sobre_walls.py")
+    ap.add_argument("--ref-base", help="canon de referencia SIN decisiones (ids del estimador) para reconciliar ids")
     ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
     ap.add_argument("--dry-run", action="store_true")
