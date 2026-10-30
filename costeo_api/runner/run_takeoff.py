@@ -614,10 +614,13 @@ def main():
     ap.add_argument("--cobertura-lista", help="dry-run: lista de detalles / notas del trade con destino (paso 12)")
     ap.add_argument("--sealer", help="script del proyecto que sella con closer.py y marca con planmark.py")
     ap.add_argument("--reusar-lecturas", help="raíz --work de una corrida anterior: reusa sus lecturas ya pagadas")
+    ap.add_argument("--tope-cobertura", type=float, help="tope del paso 12 (USD); default STEP_BUDGET")
     ap.add_argument("--reusar-resolucion", help="canon AB de una resolución ya pagada (con --reusar-lecturas)")
     ap.add_argument("--continuar-lados", help="con --reusar-lecturas: lados (A,B) a los que se paga una continuación")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
+    if a.tope_cobertura:
+        STEP_BUDGET["cobertura"] = a.tope_cobertura
     if a.dry_run and not a.canon_ref:
         ap.error("--dry-run exige --canon-ref")
     try:
