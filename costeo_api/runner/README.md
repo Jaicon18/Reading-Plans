@@ -75,3 +75,10 @@ El input sin cache es de cientos de tokens por llamada y no pesa.
 | Resolución dirigida (solo diferencias) | cache read ~2.8 M + cache write ~0.13 M + output ~43 k | ~1.2 | 2.5 |
 | Cobertura (paso 12 reducido) | cache read ~2–3 M + cache write ~0.1 M + output ~30–60 k | ~1.0 | 1.5 |
 | **Total** | | **~10.2–11.0** | tope total 20.0 |
+
+## Reanudar sin volver a pagar (corrida #2)
+- `--reusar-lecturas <work de la corrida anterior>`: toma `<work>_lectura_A/B/takeoff_canon_X.json`, los valida con el validador vigente y no llama a la API.
+- `--continuar-lados A`: paga una continuación de esa lectura en su sandbox. Cada continuación tiene tope `CONT_TOPE` = $2 y siempre deja el tope de cobertura libre.
+- Una lectura que no pasa el esquema se declara en `lecturas_no_usadas`. Con una sola lectura se omiten comparar y resolución.
+- `validar_canon.py` exige `plan_scale_pt_per_ft` y `band.sheet`, y corre `inventario.py` (BE-65).
+- Reconciliación: ceilings, openings, nodes colgados, tramos reescalados y wet_fixtures (BE-67).

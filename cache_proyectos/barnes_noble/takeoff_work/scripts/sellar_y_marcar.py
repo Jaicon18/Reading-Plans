@@ -35,8 +35,8 @@ res, rech = [], []
 for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
     wid, det = w["id"], w["detail"]
     try:
-        x = Wall(n, w["tag"], f"{wid} - {w['location']} ({w['sheet']})")
-        L = Val(w["length_ft"], "DERIVADO", fuente=w["sheet"], operacion=w["length_op"] + f" ({det})")
+        x = Wall(n, w["tag"], f"{wid} - {w.get('location') or w.get('source', '')} ({w['sheet']})")
+        L = Val(w["length_ft"], "DERIVADO", fuente=w["sheet"], operacion=(w.get("length_op") or w.get("length_source", "")) + f" ({det})")
         hst = w.get("height_status") or "DERIVADO"
         H = Val(w["height_ft"], "CONFIRMADO" if hst == "CONFIRMADO" else "DERIVADO", fuente=w["height_source"],
                 operacion=w.get("height_op") or ("height per " + w["height_source"]))
@@ -49,7 +49,7 @@ for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
                    "none", 1)
         for o in w.get("openings") or []:
             x.abertura("puerta" if o["kind"] == "door" else "hueco", o["ref"], o["ro_w_ft"], o["head_ft"],
-                       head=o["head_source"])
+                       head=o.get("head_source") or o.get("source", ""))
         s, r = S[wid], R[wid]
         x.partida("STUD", Val(s["pcs_full"] + s["cripples"], "DERIVADO", operacion=s["operacion"] + f" ({det})"), "pcs")
         x.partida("TRACK_BOTTOM", Val(r["bottom_lf"], "DERIVADO", operacion=r["operacion"] + f" ({det})"), "LF")

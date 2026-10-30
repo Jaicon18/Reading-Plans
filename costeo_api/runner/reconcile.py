@@ -240,6 +240,20 @@ def aplicar(leido, ref_base, ov):
             sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
                         "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
         ref = overlay._aplicar_uno(ref, g)
+    # wet_fixtures de la lectura cuyo face dejó de ser MR porque una decisión cambió el board (p. ej. RFI-27 type X WR):
+    # inventario.py exige fixture <-> face MR; el fixture sin face MR se quita y se lista (derivado de la decisión)
+    if c.get("wet_fixtures"):
+        mr = {(w["id"], str(f.get("room"))) for w in c.get("walls") or [] for f in w.get("faces") or []
+              if "MR" in str(f.get("board", "")).upper()}
+        quedan = [x for x in c["wet_fixtures"] if (x.get("wall"), str(x.get("room"))) in mr]
+        for x in c["wet_fixtures"]:
+            if x not in quedan:
+                sin.append({"group": "board", "list": "wet_fixtures", "id": x.get("ref"), "derivado": True,
+                            "motivo": f"{x.get('wall')} / {x.get('room')}: la decisión cambió el board a no-MR"})
+        if quedan:
+            c["wet_fixtures"] = quedan
+        else:
+            c.pop("wet_fixtures")
     return c, mapa, sin
 
 
