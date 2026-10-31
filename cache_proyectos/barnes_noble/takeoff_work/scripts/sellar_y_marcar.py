@@ -49,8 +49,11 @@ for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
         H = Val(w["height_ft"], "CONFIRMADO" if hst == "CONFIRMADO" else "DERIVADO", fuente=w["height_source"],
                 operacion=w.get("height_op") or ("height per " + w["height_source"]))
         x.base(L, H, w["oc_in"], C["constants"].get("bracing_oc_in", 48))
-        for f in w.get("faces") or []:
-            x.cara(f["room"], Val(f["height_ft"], "DERIVADO", operacion=f["height_source"] + f" ({det})"),
+        fs = w.get("faces") or []
+        dup = {f["room"] for f in fs if sum(1 for g in fs if g["room"] == f["room"]) > 1}
+        nom = [f["room"] + (f" ({f.get('side') or i + 1})" if f["room"] in dup else "") for i, f in enumerate(fs)]
+        for f, nm in zip(fs, nom):    # dos faces al mismo cuarto: el nombre lleva el side (un renglón de board por face)
+            x.cara(nm, Val(f["height_ft"], "DERIVADO", operacion=f["height_source"] + f" ({det})"),
                    f["board"], f.get("layers", 1))
         if not w.get("faces"):
             x.cara("no board face", Val(0, "DERIVADO", operacion=w.get("faces_none_reason", "no faces") + f" ({det})"),
@@ -72,8 +75,8 @@ for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
         else:
             x.excluir("HEADER", "EXCLUDED: wall has no opening on " + w["sheet"])
         caras = B.get(wid, [])
-        for c in caras:
-            x.partida("BOARD:" + c["room"], Val(c["sf"], "DERIVADO", operacion=c["operacion"] + f" ({det})"), "SF")
+        for i, c in enumerate(caras):   # mismo nombre que su face (board_out sigue el orden de faces)
+            x.partida("BOARD:" + (nom[i] if len(nom) == len(caras) and nom[i].startswith(c["room"]) else c["room"]), Val(c["sf"], "DERIVADO", operacion=c["operacion"] + f" ({det})"), "SF")
         if not caras:
             x.excluir("BOARD", "EXCLUDED: " + (w.get("faces_none_reason") or "no board on this wall") + f" ({det})")
         for k, v in EXCL.items():

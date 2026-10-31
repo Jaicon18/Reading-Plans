@@ -516,6 +516,22 @@ class Runner:
                 f" (+ {len(self.sin_objeto) - len(dec)} nodes derivados)")
         else:
             c = overlay.aplicar_canon(leido, ov)
+        exc = [w for w in c.get("walls") or [] for g in ov.get("generales_excluir") or []
+               if str(w.get("tag") or "").upper() in {t.upper() for t in g.get("types") or []}]
+        if exc:                                 # R80e.61: exclusión general del estimador por type (emparejado o no)
+            pe = os.path.join(self.k, "etapas", "4_canon", "existing_excluded.json")
+            ee = json.load(open(pe)) if os.path.exists(pe) else {"walls": []}
+            vistos = {x.get("id") for x in ee.get("walls") or []}
+            for w in exc:
+                g = next(g for g in ov["generales_excluir"] if str(w.get("tag")).upper() in {t.upper() for t in g["types"]})
+                if w["id"] not in vistos:
+                    ee.setdefault("walls", []).append(dict(w, exclusion=g["motivo"]))
+            json.dump(ee, open(pe, "w"), indent=1, ensure_ascii=False)
+            c["walls"] = [w for w in c["walls"] if w not in exc]
+            log(f"   R80e.61: {len(exc)} wall(s) excluidos por type ({', '.join(w['id'] for w in exc[:8])}): decisión general")
+        npd = nodos.podar(c)                    # R80e.60: nodes que citan walls excluidos por decisión
+        if npd:
+            log(f"   R80e.60: {npd} node(s) ajustados (citaban walls excluidos por decisión)")
         tc = completitud.topar_caras(c)         # R80e.57: board de la face hasta el ceiling de su cuarto (con decisiones)
         if tc:
             log(f"   R80e.57: {len(tc)} face(s) bajadas al ceiling de su cuarto ({', '.join(f'{w} {h}->{hc}' for w, _, h, hc in tc[:8])})")

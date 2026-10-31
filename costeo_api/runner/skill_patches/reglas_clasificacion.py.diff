@@ -1,6 +1,6 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-29 23:12:21.772203755 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-31 06:28:17.443641765 +0000
-@@ -243,6 +243,30 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-31 07:27:28.756154278 +0000
+@@ -243,6 +243,32 @@
  REGLAS_TEXTO = [
      ("S:r80e-33-", r".", C("código del trade cuando el plano no responde: se aplica como supuesto conservador con RFI y delta (lo revisan el back-check y la biblioteca)")),   # v80r
      ("S:r80e-34-", r".", C("decisiones del estimador convertidas en regla general: las aplican build / excel_json del proyecto con su N/HOJA (lo revisa el back-check)")),
@@ -28,6 +28,8 @@
 +    ("S:r80e-57-", r".", C("face bajada al ceiling de su cuarto por programa (completitud.topar_caras del runner)")),
 +    ("S:r80e-58-", r".", C("banco de regresión sin API: ningún material empeora en ninguna lectura (correr_banco.py)")),
 +    ("S:r80e-59-", r".", C("prompt de lectura: walls curvos en cuerdas, cadenas de planta ampliada, puertas dentro del wall")),
++    ("S:r80e-60-", r".", C("nodes que citan walls excluidos se ajustan por programa (nodos.podar del runner)")),
++    ("S:r80e-61-", r".", C("faces al mismo cuarto: nombre con el side, un renglón de board por face (sellador del proyecto)")),
      ("S:r80e-35-", r".", C("aplicar decisiones del estimador en el pipeline: mep_estimator_count, addl_head_track_pieces, pvc_trim_items, rfi_cierre (accesorios.py, plantilla_excel.py)")),
      ("S:0-f-decisiones-finales", r".", C("decisión final del estimador (§0.F): la aplican canon.py, plantilla_excel.py y markups_bluebeam.py con sus reglas vigentes")),
      # v72b

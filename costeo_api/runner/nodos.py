@@ -60,3 +60,34 @@ def derivar(c, tol_ft=1.0):
             for _ in range(2):
                 nuevo(kind="free", wall=w["id"], source=f"{w.get('sheet')} (no H / V band: ends taken as free) [DERIVED nodos.py]")
     return nodos
+
+
+def podar(c):
+    """R80e.60: después de las decisiones, un node que cita un wall que ya no está en el canon (excluido por decisión,
+    p. ej. EXISTING) se ajusta sin romper "cada wall exactamente 2 extremos": L con un solo wall vivo -> free de ese wall;
+    T sin through -> free de la rama; sin branch o free sin wall -> fuera. -> número de nodes ajustados."""
+    ids = {w.get("id") for w in c.get("walls") or []}
+    out, n = [], 0
+    for x in c.get("nodes") or []:
+        k = x.get("kind")
+        if k == "L":
+            vivos = [w for w in x.get("walls") or [] if w in ids]
+            if len(vivos) == len(x.get("walls") or []):
+                out.append(x); continue
+            n += 1
+            for w in vivos:
+                out.append({"id": f"{x['id']}f", "kind": "free", "wall": w,
+                            "source": f"{x.get('source', '')}; L partner excluded by decision -> free end (R80e.60)"})
+        elif k == "T":
+            if x.get("branch") in ids and x.get("through") in ids:
+                out.append(x); continue
+            n += 1
+            if x.get("branch") in ids:
+                out.append({"id": f"{x['id']}f", "kind": "free", "wall": x["branch"],
+                            "source": f"{x.get('source', '')}; through wall excluded by decision -> free end (R80e.60)"})
+        elif k == "free" and x.get("wall") is not None and x.get("wall") not in ids:
+            n += 1
+        else:
+            out.append(x)
+    c["nodes"] = out
+    return n

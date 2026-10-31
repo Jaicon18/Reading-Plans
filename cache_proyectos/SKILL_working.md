@@ -2627,3 +2627,11 @@ Origen: los arreglos se validaban contra una sola lectura; R80e.43 mejoró una c
 ### R80e.59 — Walls curvos en cuerdas, cadenas de la planta ampliada cerradas, puertas dentro del wall (31-oct, prompt)
 Un wall curvo se lee como cuerdas iguales (una por cada ≤ 5 ft de arco), cada una un wall con su band, cerradas contra el arco impreso; los remates de la figura (también en la copia TYP. sin tag) son walls propios. El largo de un wall de la planta ampliada sale de su cadena de cotas cerrada contra la cota corrida. Cada puerta del door schedule es un opening dentro de su wall.
 Origen: errores sistemáticos en tres corridas: la figura curva de type 4 leída en 4 piezas (−20.5 % de LF); un wall de la planta ampliada siempre en 4.5 ft contra 12.2 ft acotados (−63 %); 3 puertas sin opening.
+
+### R80e.60 — Un node no cita un wall que una decisión sacó del canon (31-oct, corrida #8)
+Después de las decisiones, los nodes que citan un wall excluido se ajustan por programa (nodos.podar): L con un solo wall vivo pasa a free de ese wall; T sin through pasa a free de la rama; sin branch, o free sin wall, sale. Cada wall sigue con exactamente 2 extremos. Un error de canon.py sobre un node derivado por programa es del programa: no va a la corrección de lectura.
+Origen: en la #8 la lectura trajo walls exteriores existentes; la decisión los excluyó y 25 nodes quedaron citándolos. canon.py lo rechazó y las 3 correcciones pagadas no podían arreglarlo.
+
+### R80e.61 — Dos faces del mismo wall que miran al mismo cuarto: un renglón de board por face (31-oct, corrida #8)
+Si dos faces de un wall tienen el mismo cuarto, su nombre lleva el side ("<cuarto> (A)", "<cuarto> (B)"). Así cada face tiene su renglón de board y el closer no las junta en uno con alturas distintas.
+Origen: un wall de type E1 con las dos faces en el mismo cuarto (12.0 y 25.0 ft) fue rechazado por el closer.

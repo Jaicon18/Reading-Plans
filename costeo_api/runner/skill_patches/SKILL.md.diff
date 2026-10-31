@@ -1,15 +1,15 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 06:28:41.831120755 +0000
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 07:27:28.746300130 +0000
 @@ -5,6 +5,8 @@
  
  # Take-off de Metal Frame y Drywall
  
-+**v80t (31-oct-2026):** v80s + R80e.37–R80e.59 (runner por API con la cadena completa: compuertas de lectura, conteos, evidencia y trim por programa, reconciliación de decisiones, corrección dirigida, formato de RFI A/B/C). El runner genérico va en `runner/` (ver runner/README.md).
++**v80t (31-oct-2026):** v80s + R80e.37–R80e.61 (runner por API con la cadena completa: compuertas de lectura, conteos, evidencia y trim por programa, reconciliación de decisiones, corrección dirigida, formato de RFI A/B/C). El runner genérico va en `runner/` (ver runner/README.md).
 +
  Versión FINAL 24-oct-2026 (v80f: §29 corrida B&N; v80 + §0.F decisiones finales del estimador; v80: §28 (R80.1–R80.11) manda sobre §27 y §26 donde se tocan; v79: §27 (R79.1–R79.4); v78: §26 manda: decisiones del usuario W1–W4 y reglas R78.x; §25 (U1–U11) sigue vigente salvo R77.11, RETIRADA en v80 (manda R78.36 + R79.2 + R80.3); §24 sigue salvo R77.1, RETIRADA). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
  
  **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
-@@ -2511,4 +2513,141 @@
+@@ -2511,4 +2513,149 @@
  - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
  - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
  
@@ -152,3 +152,11 @@
 +### R80e.59 — Walls curvos en cuerdas, cadenas de la planta ampliada cerradas, puertas dentro del wall (31-oct, prompt)
 +Un wall curvo se lee como cuerdas iguales (una por cada ≤ 5 ft de arco), cada una un wall con su band, cerradas contra el arco impreso; los remates de la figura (también en la copia TYP. sin tag) son walls propios. El largo de un wall de la planta ampliada sale de su cadena de cotas cerrada contra la cota corrida. Cada puerta del door schedule es un opening dentro de su wall.
 +Origen: errores sistemáticos en tres corridas: la figura curva de type 4 leída en 4 piezas (−20.5 % de LF); un wall de la planta ampliada siempre en 4.5 ft contra 12.2 ft acotados (−63 %); 3 puertas sin opening.
++
++### R80e.60 — Un node no cita un wall que una decisión sacó del canon (31-oct, corrida #8)
++Después de las decisiones, los nodes que citan un wall excluido se ajustan por programa (nodos.podar): L con un solo wall vivo pasa a free de ese wall; T sin through pasa a free de la rama; sin branch, o free sin wall, sale. Cada wall sigue con exactamente 2 extremos. Un error de canon.py sobre un node derivado por programa es del programa: no va a la corrección de lectura.
++Origen: en la #8 la lectura trajo walls exteriores existentes; la decisión los excluyó y 25 nodes quedaron citándolos. canon.py lo rechazó y las 3 correcciones pagadas no podían arreglarlo.
++
++### R80e.61 — Dos faces del mismo wall que miran al mismo cuarto: un renglón de board por face (31-oct, corrida #8)
++Si dos faces de un wall tienen el mismo cuarto, su nombre lleva el side ("<cuarto> (A)", "<cuarto> (B)"). Así cada face tiene su renglón de board y el closer no las junta en uno con alturas distintas.
++Origen: un wall de type E1 con las dos faces en el mismo cuarto (12.0 y 25.0 ft) fue rechazado por el closer.

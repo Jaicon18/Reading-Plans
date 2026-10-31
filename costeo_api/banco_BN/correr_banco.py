@@ -18,7 +18,7 @@ def mats(fo):
     return (json.load(open(fo)).get("familias") or {}) if os.path.exists(fo) else None
 out = os.path.abspath(sys.argv[1]); base = sys.argv[sys.argv.index("--base") + 1] if "--base" in sys.argv else None
 os.makedirs(out, exist_ok=True); res = {}
-for r in ("r3", "r4", "r5", "r7"):
+for r in ("r3", "r4", "r5", "r7", "r8"):
     w = os.path.join(out, r); shutil.rmtree(w, ignore_errors=True)
     cmd = [sys.executable, "-W", "ignore", os.path.join(REPO, "costeo_api/runner/run_takeoff.py"), "--sin-api",
            "--pdf", f"{RT}/bidset/bidset_SIN_MARKUPS.pdf", "--skill", f"{RT}/skill/take-off-metal-frame-drywall",
