@@ -184,8 +184,10 @@ def aplicar_parche(a, p):
         for i, sp in p["items"].items():
             if i in pos:
                 cur[pos[i]] = aplicar_parche(cur[pos[i]], sp)
-            else:
+            elif "__set__" in sp:               # ítem completo nuevo (la decisión lo crea)
                 cur.append(aplicar_parche(None, sp))
+            # R80e.45: un parche PARCIAL (__dict__) sobre un ítem que la lectura no trae no crea un ítem a medias
+            # (p. ej. una face con solo board, sin side / room / layers): es una decisión sin objeto
         idx = {x: n for n, x in enumerate(p.get("order") or [])}
         return sorted(cur, key=lambda x: idx.get(x.get(k), len(idx)))
     return a
