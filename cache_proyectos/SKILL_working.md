@@ -2638,3 +2638,6 @@ Origen: un wall de type E1 con las dos faces en el mismo cuarto (12.0 y 25.0 ft)
 
 ### R80e.62 — Take-off humano de referencia = cuarentena (31-oct, inviolable)
 En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido buscarlo por contenido, abrirlo, leerlo o dárselo a una sesión. Elegir el proyecto solo por metadatos. La evaluación del método es interna: acuerdo A/B, compuertas, paso 12 e indicadores del mejor skill (B&N rev13). (BE-99)
+
+### R80e.90 — Lo impreso se carga; decisiones del estimador solo con fuente (31-oct, inviolable) (BE-100, BE-101)
+1) Bid set de prueba: un programa revisa /Annots; con markups se entrega copia limpia. 2) Elemento impreso (anclaje, tornillo, track, clip, blocking dibujado) = renglón cargado; RFI solo por la dimensión/cantidad no impresa. 3) "Decisión del estimador" solo con respuesta escrita del usuario o precedente citado (R80e.34); si no, es supuesto propio y así se rotula.

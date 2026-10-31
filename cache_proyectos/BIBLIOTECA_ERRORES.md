@@ -200,3 +200,9 @@ Back-check final: 44 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/
 ## BE-99 — Leí el take-off humano de la prueba ciega (31-oct)
 Error: para elegir un proyecto de prueba abrí con read_file_content "Oreally Takeoff.xlsx" y "OLIVE GARDEN TAKEOFF.xlsx"; el usuario quiere que la referencia humana sea solo suya.
 Prueba: en una prueba de exactitud, ¿algún paso abrió/leyó un take-off humano o se lo pasó a una sesión? Debe ser NO. Selección solo por metadatos. Regla R80e.62.
+
+## BE-100 — Bid set de prueba con markups del take-off previo (31-oct)
+Error: copié para O'Reilly un PDF con 79 markups Bluebeam de un take-off anterior. La sesión lo limpió antes de leer (vio solo títulos en 2 hojas). Prueba: antes de entregar un bid set, un programa cuenta /Annots por hoja; si > 0, se entrega copia limpia sin leer su contenido.
+
+## BE-101 — Lo impreso quedó como RFI y una decisión del estimador inventada (31-oct, O'Reilly #1)
+Error: Titen HD @ 48", #10 screws, deep-leg 14 ga track y sheathing screws impresos quedaron como RFI con el default de la tool; RFI-08 decía "MEP excluido por el estimador" sin que el usuario lo dijera. Prueba: (1) todo Pending Item cuya opción (A) cite un elemento impreso con hoja debe estar CARGADO (RFI solo por dimensión faltante); (2) toda frase "estimator"/"estimador" debe citar respuesta escrita del usuario o precedente R80e.34.
