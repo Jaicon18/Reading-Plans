@@ -23,6 +23,7 @@ Uso (B&N, dry-run):
 import argparse
 import csv
 import json
+import tempfile
 import os
 import re
 import shutil
@@ -103,6 +104,14 @@ def log(msg):
     print(time.strftime("%H:%M:%S"), msg, flush=True)
 
 
+def env_api(base, key):
+    """Entorno de claude -p: sin las variables de la sesión anfitriona (ANTHROPIC_BASE_URL, CLAUDE_CODE_*, CLAUDECODE...),
+    que harían pasar la llamada por la autenticación de la sesión en vez de la API key (R80e.55)."""
+    env = {k: v for k, v in base.items() if not k.startswith(("ANTHROPIC_", "CLAUDE", "CCR_"))}
+    env["ANTHROPIC_API_KEY"] = key
+    return env
+
+
 def run(cmd, cwd, env=None, check=True):
     p = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True)
     if check and p.returncode != 0:
@@ -166,7 +175,7 @@ class Runner:
         if not key:
             raise Alto("falta $TAKEOFF_API_KEY")
         prompt = open(prompt_file, encoding="utf-8").read().format(**extra)
-        env = dict(self.env, ANTHROPIC_API_KEY=key)
+        env = env_api(self.env, key)
         t0 = time.time()
         p = run(["claude", "-p", prompt, "--model", "sonnet", "--max-budget-usd", str(round(tope * 0.97, 2)), "--output-format", "json",
                  "--allowedTools", ALLOWED, "--append-system-prompt-file", os.path.join(os.path.abspath(self.a.skill), "SKILL.md")],
@@ -656,7 +665,29 @@ class Runner:
         log(f"11/11 cobertura: {s['covered']}/{s['items']} ({s['coverage_pct']} %), {s['gaps']} huecos -> etapas/5_auditoria/cobertura.md")
         return s
 
+    def verificar_key(self):
+        """R80e.55: antes de gastar, una llamada mínima con el entorno limpio prueba que claude -p usa la API key
+        ($TAKEOFF_API_KEY) y no la autenticación de la sesión anfitriona (ANTHROPIC_BASE_URL / CLAUDE_CODE_*)."""
+        key = os.environ.get("TAKEOFF_API_KEY")
+        if not key:
+            raise Alto("falta $TAKEOFF_API_KEY (fail-fast antes de cualquier paso)")
+        p = run(["claude", "-p", "Responde solo: OK", "--model", "haiku", "--max-budget-usd", "0.05", "--output-format", "json"],
+                tempfile.gettempdir(), env_api(self.env, key), check=False)
+        try:
+            r = json.loads(p.stdout or "{}")
+        except ValueError:
+            r = {}
+        if p.returncode != 0 or r.get("is_error"):
+            raise Alto(f"la API key de $TAKEOFF_API_KEY no autentica (status {r.get('api_error_status')}): "
+                       f"{str(r.get('result') or p.stderr)[:120]}")
+        if r.get("session_id") and r.get("session_id") == os.environ.get("CLAUDE_CODE_SESSION_ID"):
+            raise Alto("claude -p heredó la sesión anfitriona en vez de usar la API key")
+        self.costo("verificar_key", float(r.get("total_cost_usd") or 0), modelo="haiku")
+        log("   API key verificada (claude -p con entorno limpio, sin la autenticación de la sesión)")
+
     def correr(self):
+        if not self.a.dry_run:
+            self.verificar_key()
         self.preparar()
         self.proceso()
         inv = self.inventario_tags()

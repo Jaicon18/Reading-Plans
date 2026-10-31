@@ -101,6 +101,7 @@ Los términos del trade van en inglés.
 | BE-88 | 31-oct | El formato de RFI (R80e.50) se implementó con 3 columnas nuevas en Pending Items: viola el formato FIJO del Excel (nunca agregar / quitar / cambiar hojas ni columnas) | Las opciones van dentro de "Delta of each alternative"; A_RFI_FORMATO rechaza cualquier columna extra | test_rfi_formato.py cubre columna extra + delta sin (A)/(B)/(C) |
 | BE-89 | 31-oct | La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T) | nodos.py deriva L / T / free de las bands cuando > 60 % es free (R80e.53) | cada wall con exactamente 2 extremos (canon.py lo valida) |
 | BE-90 | 31-oct | La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples | completitud.aberturas_faltantes manda la lectura a corrección (R80e.54) | la referencia (12 openings) pasa; la #6b (0) queda marcada |
+| BE-91 | 31-oct | claude -p heredó ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión: las corridas no usaron $TAKEOFF_API_KEY (session_id = la de la sesión anfitriona; la consola sin costo) | env_api limpia el entorno; verificar_key hace una llamada mínima antes de gastar y corta si falta la key, 401 o hereda la sesión (R80e.55) | sin key -> fail-fast; key inválida -> 401 detenido antes del paso 1 |
 
 ---
 
