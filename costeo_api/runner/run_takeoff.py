@@ -508,6 +508,15 @@ class Runner:
             for ref, lec in inv.items():                # ids de la referencia citados dentro del texto -> ids de la lectura
                 val = re.sub(rf"(?<![\w.-]){re.escape(ref)}(?![\w.-])", lec, val)
             grupos.setdefault(c[3][:200], set()).add(caso if val.startswith(("falta", "sin")) else f"{caso}: {val[:220]}")
+        # una fila PENDING de la Partition Takeoff: el motivo exacto sale de partition_types (familias_out), no de reglas
+        fo = os.path.join(self.k, "etapas", "4_canon", "out", "familias_out.json")
+        if os.path.exists(fo) and any("PENDING" in str(k) or "PENDING" in " ".join(v) for k, v in grupos.items()):
+            for t, x in ((json.load(open(fo)).get("partition_types") or {}).get("types") or {}).items():
+                for fl in x.get("filas") or []:
+                    if fl.get("pendiente"):
+                        ids = [inv.get(i, i) for i in fl.get("ids") or [fl.get("wall")]]
+                        grupos.setdefault("fila PENDING de la Partition Takeoff (partition_types: dato obligatorio que falta)",
+                                          set()).add(f"type {t} {', '.join(ids)}: {'; '.join(fl['pendiente'])}")
         if not grupos:
             raise Alto("reglas.py: las fallas que quedan no dependen de la lectura (ver etapas/REGLAS_FALLAS.md)")
         motivo = "\n".join(f"- {k}: {', '.join(sorted(v)[:60])}" for k, v in sorted(grupos.items(), key=lambda kv: -len(kv[1])))
