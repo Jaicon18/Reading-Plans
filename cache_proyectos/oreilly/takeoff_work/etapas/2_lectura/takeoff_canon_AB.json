@@ -1610,6 +1610,11 @@
    "tag_manual": {
     "source": "S42/A1.1",
     "sheet_raster": "A1.1 p.37 is a 400 dpi raster (inventario_tags.py: NO INVENTARIABLE); tag swept by hand in readings A and B (NOTAS_LECTURA_A.md / _B.md)"
+   },
+   "anchorage": {
+    "value": "other",
+    "source": "6/A4.2",
+    "why_info": "suspended header wall, bottom track at B.O. framing 106'-10\" (not on slab)"
    }
   },
   {
@@ -1677,6 +1682,11 @@
    "tag_manual": {
     "source": "S42/A1.1",
     "sheet_raster": "A1.1 p.37 is a 400 dpi raster (inventario_tags.py: NO INVENTARIABLE); tag swept by hand in readings A and B (NOTAS_LECTURA_A.md / _B.md)"
+   },
+   "anchorage": {
+    "value": "other",
+    "source": "6/A4.2",
+    "why_info": "suspended header wall, bottom track at B.O. framing 106'-10\" (not on slab)"
    }
   },
   {
@@ -1871,7 +1881,7 @@
     "ori": "H",
     "c0": 1086.5,
     "c1": 1092.5,
-    "lo": 796.9,
+    "lo": 795.9,
     "hi": 850.0,
     "sheet": "A1.1"
    },
@@ -1923,7 +1933,7 @@
     "ori": "H",
     "c0": 1092.5,
     "c1": 1097.0,
-    "lo": 796.9,
+    "lo": 795.9,
     "hi": 850.0,
     "sheet": "A1.1"
    },
@@ -2002,7 +2012,12 @@
     }
    ],
    "head_of": "storefront A (A5.2)",
-   "length_printed_ft": 38.667
+   "length_printed_ft": 38.667,
+   "anchorage": {
+    "value": "other",
+    "source": "2/A3.1",
+    "why_info": "head wall over storefront A bears on the PEMB wind beam / storefront head at B.O. sheathing 111'-4\" (not on slab)"
+   }
   },
   {
    "id": "EXT-HEAD-6",
@@ -2047,7 +2062,12 @@
    "faces_none_reason": "exterior row: 5/8\" exterior fiberglass reinforced sheathing (key 19) + stucco (key 13, other trade) on the outside face, carried as misc_items glass mat SF; the interior face is on the 8\" row",
    "adjacent_to": "EXT-HEAD-8",
    "adjacent_source": "7/A3.2 plan section and 3/S5.3: 6\" row (600S162-54) and 8\" row (800S162-54) side by side, fastened together #10 @ 24\" (3/S5.3 key 20) with 362S162-43 stud ties @ 48\" (key 19) - two framing rows of one element, not a double count",
-   "length_printed_ft": 38.667
+   "length_printed_ft": 38.667,
+   "anchorage": {
+    "value": "other",
+    "source": "2/A3.1",
+    "why_info": "head wall over storefront A bears on the PEMB wind beam / storefront head at B.O. sheathing 111'-4\" (not on slab)"
+   }
   },
   {
    "id": "EXT-SOUTH-BAND",
@@ -2090,7 +2110,11 @@
    "top_track": "top track at T.O. metal stud EL 120'-8\" under the cap (8/A3.2 flashing detail; 3/S5.3)",
    "faces": [],
    "faces_none_reason": "outside of the CMU: 5/8\" fiberglass reinforced sheathing (1/A3.4 key 19) + stucco (key 13, other trade) - sheathing carried as misc_items; inside face is the CMU (no board)",
-   "anchorage": "1/S5.3 key 23 Simpson FCB43.5 framing clip @ 48\" O.C. to the CMU",
+   "anchorage": {
+    "value": "other",
+    "source": "1/A3.4",
+    "why_info": "stucco panel framed over the D1 / D2 window heads (not on slab)"
+   },
    "length_printed_ft": 36.0
   },
   {
@@ -2175,7 +2199,7 @@
     "c0": 612.0,
     "c1": 615.0,
     "lo": 1039.5,
-    "hi": 1087.2,
+    "hi": 1094.1,
     "sheet": "A1.1"
    },
    "tag_ids": [],
@@ -2227,7 +2251,7 @@
     "c0": 688.5,
     "c1": 691.5,
     "lo": 1039.5,
-    "hi": 1087.2,
+    "hi": 1094.1,
     "sheet": "A1.1"
    },
    "tag_ids": [],
@@ -2918,6 +2942,14 @@
    "label": "FIRE TREATED 2X NAILER(S) CONTINUOUS",
    "source": "8/A3.2",
    "op": "2 rows x 50.67 (front head wall, A3.1 key note 11 at T.O. METAL STUD 120'-8\") = 101.34 - RFI-09"
+  },
+  {
+   "ref": "BLK-CMU-OPENINGS",
+   "lf": 56.67,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY at the head and jambs of the CMU door openings",
+   "source": "1/A5.1",
+   "op": "door 2: 3.333 + 2 x 7.0 = 17.33; door 7: 3.333 + 2 x 7.0 = 17.33; door 3: 6.0 + 2 x 8.0 = 22.0 -> 17.33 + 17.33 + 22.0 = 56.67 LF (1/A5.1-6/A5.1; windows D1 / D2 per 11/A5.2 in RFI-17)"
   }
  ],
  "plywood_strips": [
@@ -3105,6 +3137,24 @@
    "source": "S24/A1.1",
    "label": "150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\" O.C. (S24/A1.1) on the CMU behind the S24 stud lining",
    "op": "pieces ROUNDUP(L / 2) + 1: S24-OFF 11.0 -> 7, S24-RR 16.17 -> 10 (grid A, T.O. low eave 14.625 ft, 2/A3.2); S24-RR104S 8.5 -> 6 (grid 4 near grid A, 14.71 ft by the 1/4:12 slope); top of furring not printed -> eave (53.3, RFI-02); 17 x 14.625 + 6 x 14.71 = 248.63 + 88.26 = 336.89 LF"
+  },
+  {
+   "ref": "CJ-DOUBLE-STUDS",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 62.96,
+   "unit": "LF",
+   "source": "2/A4.2",
+   "label": "362S162-33 COLD FORM METAL STUDS DOUBLED AT CONTROL JOINT (A4.2 key note 4)",
+   "op": "2 control joints on S42 (14/A4.1, 2/A4.2): studs doubled on both sides of each joint (A4.2 key note 4) = 2 extra studs per joint; heights not printed at the joint -> full stud height (53.3): 2 x 15.17 + 2 x 16.31 = 30.34 + 32.62 = 62.96 LF"
+  },
+  {
+   "ref": "GB-S42-HDR-UNDERSIDE",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 30.76,
+   "unit": "SF",
+   "source": "6/A4.2",
+   "label": "5/8\" TYPE X gypsum board wrapping the underside of the S42 suspended header walls (6/A4.2 key 6)",
+   "op": "header undersides S42-H2 25.44 + S42-V1 50.33 = 75.77 LF x wall width 4.875\" (3-5/8\" + 2 x 5/8\") = 75.77 x 0.406 = 30.76 SF"
   }
  ],
  "deflection_clips": {
@@ -3245,24 +3295,24 @@
   },
   {
    "id": "RFI-04",
-   "tema": "South facade 36'-0\" stucco band / windows D1-D2 drawn not to scale on A1.1",
+   "tema": "CLOSED (plan check): south facade 36'-0\" stucco panel - the band measures 36.0 ft on A1.1, as printed",
    "donde": "EXT-SOUTH-BAND, S21-S openings",
-   "supuesto": "36'-0\" printed taken",
+   "supuesto": "36'-0\" printed and measured",
    "opciones": {
     "A": {
-     "texto": "A1.1 prints 36'-0\" (drawn ~23.7 ft); 4/A2.1 elevation scales 36.0 ft; A5.2 D1/D2 11'-4 3/8\" R.O. each",
-     "source": "A1.1, 4/A2.1, A5.2",
-     "delta": "if the band were 23.7 ft: -12.3 LF of 6\" studs x 7.97 ft and -98 SF sheathing"
+     "texto": "printed and measured agree",
+     "source": "A1.1, A2.1",
+     "delta": "0"
     },
     "B": {
-     "texto": "No code item",
+     "texto": "no code provision",
      "cita": "n/a",
-     "delta": "n/a"
+     "delta": "0"
     },
     "C": ""
    },
    "source": "A1.1, 4/A2.1, A5.2",
-   "delta": "(A) if the band were 23.7 ft: -12.3 LF of 6\" studs x 7.97 ft and -98 SF sheathing | (B) n/a | (C) ____",
+   "delta": "(A) 0 | (B) 0 | (C) ____",
    "fuentes_revisadas": [
     "designation: A1.1, 4/A2.1, A5.2",
     "other row: reading A vs reading B (resolucion.md)",
@@ -3306,7 +3356,7 @@
     "A": {
      "texto": "1/A3.1, 7/A3.2, 1/A5.2: 5/8\" Type X over 1/4\" gypsum board on 087F125-33 resilient channel @ 24\" horiz.; pier side returns not dimensioned",
      "source": "1/A3.1, 7/A3.2, 1/A5.2",
-     "delta": "+ 1/4\" gypsum about 349 SF and + 087F125-33 RC about 243 LF (piers 2 x 10 rows x 6.0 + head 4 rows x 30.67); returns + ~2 x 2 x 1.2 ft x 20.7 ft studs/sheathing"
+     "delta": "+ 1/4\" gypsum about 349 SF and + 087F125-33 RC about 243 LF (piers 2 x 10 rows x 6.0 + head 4 rows x 30.67); returns + ~2 x 2 x 1.2 ft x 20.7 ft studs/sheathing; head underside (1/A5.2): +36 SF 5/8\" X, +36 SF 1/4\", +30.67 LF corner bead"
     },
     "B": {
      "texto": "Code: no requirement",
@@ -3316,7 +3366,7 @@
     "C": ""
    },
    "source": "1/A3.1, 7/A3.2, 1/A5.2",
-   "delta": "(A) + 1/4\" gypsum about 349 SF and + 087F125-33 RC about 243 LF (piers 2 x 10 rows x 6.0 + head 4 rows x 30.67); returns + ~2 x 2 x 1.2 ft x 20.7 ft studs/sheathing | (B) n/a | (C) ____",
+   "delta": "(A) + 1/4\" gypsum about 349 SF and + 087F125-33 RC about 243 LF (piers 2 x 10 rows x 6.0 + head 4 rows x 30.67); returns + ~2 x 2 x 1.2 ft x 20.7 ft studs/sheathing; head underside (1/A5.2): +36 SF 5/8\" X, +36 SF 1/4\", +30.67 LF corner bead | (B) n/a | (C) ____",
    "fuentes_revisadas": [
     "designation: 1/A3.1, 7/A3.2, 1/A5.2",
     "other row: reading A vs reading B (resolucion.md)",
@@ -3387,7 +3437,7 @@
     "A": {
      "texto": "1/S5.1, 2/S5.1, 4/S5.1, 5/S5.1 give spacing only (kickers @ 48\", angled strut @ 16'-0\", 600S200-54 @ 24\" / 48\", 5'-0\"+- reach)",
      "source": "S5.1",
-     "delta": "kicker length +-1 ft each = +-22 LF; 600S200-54 pieces (not loaded): about ROUNDUP(L/2)+1 per header wall x purlin spacing (not printed)"
+     "delta": "kicker length +-1 ft each = +-22 LF; 600S200-54 pieces (not loaded): about ROUNDUP(L/2)+1 per header wall x purlin spacing (not printed); 2/S5.1: +16 L4x4x3/16 clip angles, +32 A307 bolts, +22 2x2x14 ga clips, +44 #10 SDS; #10 screws at kicker / strut / splice +400"
     },
     "B": {
      "texto": "Code: AISI S240 bracing design by the specialty engineer",
@@ -3397,7 +3447,7 @@
     "C": ""
    },
    "source": "S5.1",
-   "delta": "(A) kicker length +-1 ft each = +-22 LF; 600S200-54 pieces (not loaded): about ROUNDUP(L/2)+1 per header wall x purlin spacing (not printed) | (B) per engineer | (C) ____",
+   "delta": "(A) kicker length +-1 ft each = +-22 LF; 600S200-54 pieces (not loaded): about ROUNDUP(L/2)+1 per header wall x purlin spacing (not printed); 2/S5.1: +16 L4x4x3/16 clip angles, +32 A307 bolts, +22 2x2x14 ga clips, +44 #10 SDS; #10 screws at kicker / strut / splice +400 | (B) per engineer | (C) ____",
    "fuentes_revisadas": [
     "designation: S5.1",
     "other row: reading A vs reading B (resolucion.md)",
@@ -3414,7 +3464,7 @@
     "A": {
      "texto": "A4.1 accessory note 1, A4.1 key 17, A4.2 key 21, A3.1 key 31, 14/A4.1 key 12 call FRT blocking / backing without lengths",
      "source": "A4.1, A4.2, A3.1",
-     "delta": "+-2 ft per accessory; 14/A4.1 key 12 continuous FRT 2x blocking along the Parts A walls would add up to ~140 LF (S42 Parts A faces) x rows"
+     "delta": "+-2 ft per accessory; 14/A4.1 key 12 continuous FRT 2x blocking along the Parts A walls would add up to ~140 LF (S42 Parts A faces) x rows; plumbing fixture backing (C/A4.1) +12 LF"
     },
     "B": {
      "texto": "Code: grab bars 250 lbf",
@@ -3424,7 +3474,7 @@
     "C": ""
    },
    "source": "A4.1, A4.2, A3.1",
-   "delta": "(A) +-2 ft per accessory; 14/A4.1 key 12 continuous FRT 2x blocking along the Parts A walls would add up to ~140 LF (S42 Parts A faces) x rows | (B) as option A | (C) ____",
+   "delta": "(A) +-2 ft per accessory; 14/A4.1 key 12 continuous FRT 2x blocking along the Parts A walls would add up to ~140 LF (S42 Parts A faces) x rows; plumbing fixture backing (C/A4.1) +12 LF | (B) as option A | (C) ____",
    "fuentes_revisadas": [
     "designation: A4.1, A4.2, A3.1",
     "other row: reading A vs reading B (resolucion.md)",
@@ -3517,12 +3567,12 @@
    "id": "RFI-14",
    "tema": "Vestibule head walls / ceiling framing member and height",
    "donde": "VEST-HD-*, JOISTS-VESTIBULE",
-   "supuesto": "600S162-43 heads to T.O. high eave 116'-4 1/4\"; joists 600S162-43 @ 24\"",
+   "supuesto": "vestibule heads carried 600S162-54 (16 ga, S4.1 key note 3 governs, A1.1 note 2.D) to the top of purlin; joists 600S162-43 @ 24\" (3/A3.1)",
    "opciones": {
     "A": {
      "texto": "3/A3.1 key 8 600S162-43 @ 24\" attached to PEMB; vestibule ceiling joists drawn under key 8; top at the purlin (not printed)",
      "source": "3/A3.1, 3/A5.2",
-     "delta": "-0.67 ft on 20.6 LF of head if the purlin is 8\" deep"
+     "delta": "if 600S162-43 (3/A3.1 key 8): same LF, gauge 18 instead of 16 on 20.57 LF of heads; -0.67 ft x 20.6 LF if the purlin is 8\" deep"
     },
     "B": {
      "texto": "AISI S240",
@@ -3532,7 +3582,7 @@
     "C": ""
    },
    "source": "3/A3.1, 3/A5.2",
-   "delta": "(A) -0.67 ft on 20.6 LF of head if the purlin is 8\" deep | (B) n/a | (C) ____",
+   "delta": "(A) if 600S162-43 (3/A3.1 key 8): same LF, gauge 18 instead of 16 on 20.57 LF of heads; -0.67 ft x 20.6 LF if the purlin is 8\" deep | (B) n/a | (C) ____",
    "fuentes_revisadas": [
     "designation: 3/A3.1, 3/A5.2",
     "other row: reading A vs reading B (resolucion.md)",
@@ -3566,6 +3616,303 @@
     "detail: 1/A3.2, 2/A3.2"
    ],
    "delta": "(A) 0 | (B) + 250.71 LF bottom + 250.71 LF top 1-1/2\" track | (C) ____"
+  },
+  {
+   "id": "RFI-17",
+   "tema": "FRT 2x4 blocking at the window D1 / D2 openings in the CMU",
+   "donde": "south facade D1, D2",
+   "supuesto": "not loaded (window rough opening of D1 / D2 not dimensioned on A5.2)",
+   "source": "11/A5.2",
+   "opciones": {
+    "A": {
+     "texto": "11/A5.2 draws FRT 2x4 blocking anchored to masonry at the window head / jambs",
+     "source": "11/A5.2",
+     "delta": "+ (W + 2 x H) per window, about +2 x 34 LF; FRT plywood at the D1 / D2 heads (11/A5.2) +15 SF"
+    },
+    "B": {
+     "texto": "no code provision",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: A5.2 window schedule",
+    "other row: doors 1/A5.1-6/A5.1 (loaded)",
+    "standard rule: n/a",
+    "detail: 11/A5.2"
+   ],
+   "delta": "(A) + (W + 2 x H) per window, about +2 x 34 LF; FRT plywood at the D1 / D2 heads (11/A5.2) +15 SF | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-18",
+   "tema": "Gypsum board control joints on the S21 furring (walls over 30 ft and at masonry control joints)",
+   "donde": "S21-N, S21-E1, S21-S",
+   "supuesto": "not loaded: joint locations follow the masonry control joints of the exterior elevations, not dimensioned",
+   "source": "3.A/A1.1, A2.1 key 23",
+   "opciones": {
+    "A": {
+     "texto": "A1.1 note 3.A: control joints in partition lengths over 30 ft and at masonry control joints",
+     "source": "3.A/A1.1, A2.1 key 23",
+     "delta": "about +77 LF of control joint (Step 12 estimate)"
+    },
+    "B": {
+     "texto": "control joints at 30 ft max",
+     "cita": "ASTM C840 / GA-216",
+     "delta": "+ 1 joint per 30 ft of S21 run x height"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 3.A/A1.1, A2.1 key 23",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: ASTM C840 / GA-216",
+    "detail: 3.A/A1.1, A2.1 key 23"
+   ],
+   "delta": "(A) about +77 LF of control joint (Step 12 estimate) | (B) + 1 joint per 30 ft of S21 run x height | (C) ____"
+  },
+  {
+   "id": "RFI-19",
+   "tema": "Moisture resistant Type X at the janitor sink area (A1.1 note 3.B)",
+   "donde": "mop sink area, 13/A4.1",
+   "supuesto": "regular Type X carried outside the restrooms",
+   "source": "3.B/A1.1, 13/A4.1",
+   "opciones": {
+    "A": {
+     "texto": "W.R. at janitor sink areas: extent not dimensioned",
+     "source": "3.B/A1.1, 13/A4.1",
+     "delta": "reclass +43 to +241 SF from Type X to Type X W.R. (no net SF change)"
+    },
+    "B": {
+     "texto": "MR board behind wet fixtures",
+     "cita": "GA-216",
+     "delta": "same reclass"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 3.B/A1.1, 13/A4.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: GA-216",
+    "detail: 3.B/A1.1, 13/A4.1"
+   ],
+   "delta": "(A) reclass +43 to +241 SF from Type X to Type X W.R. (no net SF change) | (B) same reclass | (C) ____"
+  },
+  {
+   "id": "RFI-20",
+   "tema": "Simpson FCB43.5 clips and their fasteners at the exterior stud connections (S5.2 key notes 16 / 23, 1/S5.3, 3/S5.3)",
+   "donde": "entry piers, head wall",
+   "supuesto": "not loaded: clip count per connection not dimensioned",
+   "source": "1/S5.3, 3/S5.3",
+   "opciones": {
+    "A": {
+     "texto": "clips per stud at the CMU / wind beam connection",
+     "source": "1/S5.3, 3/S5.3",
+     "delta": "+146 FCB43.5 clips, +584 #12-14 screws, +168 Tapcon, +124 #12-24 (Step 12 count)"
+    },
+    "B": {
+     "texto": "per manufacturer",
+     "cita": "Simpson catalog",
+     "delta": "same"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 1/S5.3, 3/S5.3",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: Simpson catalog",
+    "detail: 1/S5.3, 3/S5.3"
+   ],
+   "delta": "(A) +146 FCB43.5 clips, +584 #12-14 screws, +168 Tapcon, +124 #12-24 (Step 12 count) | (B) same | (C) ____"
+  },
+  {
+   "id": "RFI-21",
+   "tema": "Sheathing screws #6 x 1-1/4\" corrosion resistant (S5.2 key 8) vs #10 (S1.1 7.D)",
+   "donde": "glass mat / FRT plywood sheathing",
+   "supuesto": "not loaded",
+   "source": "S5.2, S1.1",
+   "opciones": {
+    "A": {
+     "texto": "sheathing screws at the printed spacing",
+     "source": "S5.2, S1.1",
+     "delta": "about +1,075 screws"
+    },
+    "B": {
+     "texto": "#10 screws per S1.1 7.D",
+     "cita": "S1.1 7.D",
+     "delta": "same count, #10"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: S5.2, S1.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: S1.1 7.D",
+    "detail: S5.2, S1.1"
+   ],
+   "delta": "(A) about +1,075 screws | (B) same count, #10 | (C) ____"
+  },
+  {
+   "id": "RFI-22",
+   "tema": "FRT 2x nailers on the CMU parapet (5-6/A3.2, 4-5/A3.4, 2/A6.1) and 1/2\" anchors",
+   "donde": "CMU parapets",
+   "supuesto": "EXCLUDED: wood nailers anchored to the masonry parapet are rough carpentry / roofing (Div 06), not framing",
+   "source": "5/A3.2, 2/A6.1",
+   "opciones": {
+    "A": {
+     "texto": "if carried by the framing sub",
+     "source": "5/A3.2, 2/A6.1",
+     "delta": "+544 to 816 LF FRT 2x + 1/2\" anchors"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 5/A3.2, 2/A6.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: n/a",
+    "detail: 5/A3.2, 2/A6.1"
+   ],
+   "delta": "(A) +544 to 816 LF FRT 2x + 1/2\" anchors | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-23",
+   "tema": "FRT 2x nailers inside the concealed PEMB column enclosures (1/A4.2 key 10)",
+   "donde": "key note 1 columns, A1.1",
+   "supuesto": "not loaded: enclosure by others (1/A4.2 key 16); column count not in our scope",
+   "source": "1/A4.2",
+   "opciones": {
+    "A": {
+     "texto": "nailers per concealed column",
+     "source": "1/A4.2",
+     "delta": "about +48 LF per column"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 1/A4.2",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: n/a",
+    "detail: 1/A4.2"
+   ],
+   "delta": "(A) about +48 LF per column | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-24",
+   "tema": "Security shutters 'may be required' (H/A5.2)",
+   "donde": "storefront A",
+   "supuesto": "not loaded",
+   "source": "H/A5.2",
+   "opciones": {
+    "A": {
+     "texto": "framing for shutter housing if required",
+     "source": "H/A5.2",
+     "delta": "0 now; header / box framing if the shutter is added"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: H/A5.2",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: n/a",
+    "detail: H/A5.2"
+   ],
+   "delta": "(A) 0 now; header / box framing if the shutter is added | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-25",
+   "tema": "Deflection track product: 3\" x 14 ga deep-leg slotted track (3/S5.1, 4/S5.1) vs track at stud gauge",
+   "donde": "S42 full-height walls, S21 / S24 tops",
+   "supuesto": "LF carried in the top / deflection track rows at stud gauge",
+   "source": "3/S5.1, 4/S5.1",
+   "opciones": {
+    "A": {
+     "texto": "deep-leg 14 ga slotted track at walls to the purlin",
+     "source": "3/S5.1, 4/S5.1",
+     "delta": "same LF, product upgrade on the full-height S42 walls (46.84 LF)"
+    },
+    "B": {
+     "texto": "deflection per A1.1 note 2.C",
+     "cita": "A1.1 2.C",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 3/S5.1, 4/S5.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: A1.1 2.C",
+    "detail: 3/S5.1, 4/S5.1"
+   ],
+   "delta": "(A) same LF, product upgrade on the full-height S42 walls (46.84 LF) | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-26",
+   "tema": "Interior bottom track anchors: Titen HD @ 48\" (3/S5.1, 4/S5.1, S1.1 7.F/G) vs slab pins",
+   "donde": "interior walls on slab",
+   "supuesto": "slab pins carried (151.04 pcs, Inputs spacing)",
+   "source": "3/S5.1, S1.1",
+   "opciones": {
+    "A": {
+     "texto": "Titen HD @ 48\" printed for the S42 floor walls",
+     "source": "3/S5.1, S1.1",
+     "delta": "-151.04 pins, + about 69 Titen HD (Step 12 count)"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: 3/S5.1, S1.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: n/a",
+    "detail: 3/S5.1, S1.1"
+   ],
+   "delta": "(A) -151.04 pins, + about 69 Titen HD (Step 12 count) | (B) 0 | (C) ____"
+  },
+  {
+   "id": "RFI-27",
+   "tema": "Stud-to-track screws #10 (S1.1 7.E) vs #8 carried; framing screws charged on the Z-furring",
+   "donde": "all framing",
+   "supuesto": "#8-18 x 1/2\" carried by the tool rule",
+   "source": "S1.1",
+   "opciones": {
+    "A": {
+     "texto": "#10 screws printed",
+     "source": "S1.1",
+     "delta": "same count, #10 instead of #8; -668 screws on the Z-furring (no track)"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "fuentes_revisadas": [
+    "designation: S1.1",
+    "other row: Step 12 coverage matrix (MATRIZ_COBERTURA.xlsx)",
+    "standard rule: n/a",
+    "detail: S1.1"
+   ],
+   "delta": "(A) same count, #10 instead of #8; -668 screws on the Z-furring (no track) | (B) 0 | (C) ____"
   }
  ],
  "mep_sweep_excluded_info": {

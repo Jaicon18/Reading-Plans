@@ -11,9 +11,14 @@ def fmt(o):
 rf = []
 for r in c["rfis"]:
     rf.append({"id": r["id"], "pregunta": f"{r['tema']} - where: {r.get('donde','')} - carried: {r.get('supuesto','')}",
-               "delta": fmt(r.get("opciones") or {})})
+               "delta": fmt(r.get("opciones") or {}), "opciones": r.get("opciones") or {}, "source": r.get("source", "")})
 rf.append({"id": "RFI-15", "pregunta": "Gypsum board finish level not printed (no project manual in the set; A1.1 notes silent) - where: all gypsum board - carried: Level 4 (joint compound + tape quantified), no Level 5",
            "delta": "(A) Plans / specs (A1.1 interior wall & ceiling notes 3.A-3.C; A1.2 finish W-2 semi-gloss paint): nothing printed - delta 0 | (B) Trade code (GA-214 / ASTM C840: semi-gloss paint finish is recommended at Level 5): Level 5 skim coat on painted walls - delta + Level 5 SF = painted board SF | (C) Other: ____"})
+for x in rf:
+    if x["id"] == "RFI-15":
+        x["opciones"] = {"A": {"texto": "nothing printed (A1.1 notes 3.A-3.C; A1.2 W-2 semi-gloss paint)", "source": "A1.1, A1.2", "delta": "0"},
+                         "B": {"texto": "Level 5 recommended under semi-gloss paint", "cita": "GA-214 / ASTM C840", "delta": "+ Level 5 SF = painted board SF"}, "C": ""}
+rf.sort(key=lambda x: int(x["id"].split("-")[1]))
 t["rfis"] = rf
 Q = lambda s: s
 al = [
@@ -29,7 +34,7 @@ al = [
  ("ALC-10", "FRT plywood sheathing / substrate", "CUANTIFICADO", "5/8\" exterior FRT plywood sheathing on the head wall face and storefront head soffit (2/A3.1, 3/A3.1 key 34) + 5/8\" FRT plywood backing 8'-0\" to 10'-0\" at the S41 box-outs (key note 5, 4/A4.2)."),
  ("ALC-11", "Gypsum board ceilings", "CUANTIFICADO", "C-3 gypsum hard-lid ceilings: office 102 + vestibule 100A (Type X) and restrooms 103 / 104 (Type X W.R.) (A1.2, 7/A4.2, 3/A3.1); top-side board in RFI-05."),
  ("ALC-12", "Ceiling suspension (furring / carrying channel / hangers)", "NO APLICA", "No suspended gypsum ceiling: hard lids are framed with 6\" joists @ 24\" (7/A4.2, 3/A3.1, counted in the 6\" stud row); C-1 ACT in Parts A is by the ACT trade (A1.2, 9/A4.2)."),
- XX
+ ("ALC-13", "Soffits and bulkheads (framing + board)", "NO APLICA", "NO APLICA: no soffit or bulkhead drawn on A1.1, A1.2 or A3.1-A4.2; the S42 suspended header walls (6/A4.2) are rows of type S42 (ALC-01) and the vestibule 100A hard lid with its joists (3/A3.1) is in ALC-11 / 6\" stud row."),
  ("ALC-14", "Canopy / marquee framing and sheathing", "NO APLICA", "No canopy or marquee framing on A2.1 / A3.x: the stucco cornice (A2.1 key 5) is plaster on the CMU parapet; sign backing in RFI-10."),
  ("ALC-15", "Column furring / wraps", "NO APLICA", "PEMB columns: key note 1 concealed in the walls with 24 ga sheet metal cover by others (1/A4.2 key 16), key note 2 exposed painted (A1.1): no gypsum column wraps."),
  ("ALC-16", "Blocking (FRT wood / metal) for millwork", "CUANTIFICADO", "FRT 2x nailers at the S42 header walls (6/A4.2 keys 10-11) and at T.O. metal stud (8/A3.2, 2/A3.1 key 11), toilet accessories (A4.1 note 1), water heater, fire extinguishers (10/A4.2); quantities in RFI-10."),
@@ -48,7 +53,7 @@ json.dump(t, open(P + "takeoff.json", "w"), indent=1, ensure_ascii=False)
 # registro marks (registro.py, never by hand)
 S = "/tmp/skill80t/take-off-metal-frame-drywall/tools/"
 env = dict(__import__("os").environ, BITACORA=P + "bitacora.jsonl")
-for i, n, e, x in al:
+for i, n, e, x in ([] if "--sin-registro" in sys.argv else al):
     if e == "RFI":
         rfi = [w for w in x.replace("(", " ").replace(")", " ").replace(".", " ").split() if w.startswith("RFI-")][0]
         args = ["marcar", P + "registro.json", i, "pendiente_rfi", f"{rfi} {x}"]
