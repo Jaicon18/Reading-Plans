@@ -2635,3 +2635,6 @@ Origen: en la #8 la lectura trajo walls exteriores existentes; la decisión los 
 ### R80e.61 — Dos faces del mismo wall que miran al mismo cuarto: un renglón de board por face (31-oct, corrida #8)
 Si dos faces de un wall tienen el mismo cuarto, su nombre lleva el side ("<cuarto> (A)", "<cuarto> (B)"). Así cada face tiene su renglón de board y el closer no las junta en uno con alturas distintas.
 Origen: un wall de type E1 con las dos faces en el mismo cuarto (12.0 y 25.0 ft) fue rechazado por el closer.
+
+### R80e.62 — Take-off humano de referencia = cuarentena (31-oct, inviolable)
+En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido buscarlo por contenido, abrirlo, leerlo o dárselo a una sesión. Elegir el proyecto solo por metadatos. La evaluación del método es interna: acuerdo A/B, compuertas, paso 12 e indicadores del mejor skill (B&N rev13). (BE-99)

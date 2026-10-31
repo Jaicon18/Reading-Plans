@@ -109,6 +109,7 @@ Los términos del trade van en inglés.
 | BE-96 | 31-oct | La #8 se detuvo en canon.py ("nodo NP3: wall EXT-07 no existe"): 25 nodes derivados citaban walls que la decisión RFI-01 excluyó. Se gastaron 3 correcciones (≈ $2.4) en un error del programa | nodos.podar ajusta los nodes después de las decisiones (R80e.60) | la #8 re-armada sin API pasa canon.py; el banco no empeora nada |
 | BE-97 | 31-oct | El closer rechazó un wall E1 con las dos faces en el mismo cuarto y alturas distintas (12.0 / 25.0): las dos se juntaban en un solo renglón de board | El sellador nombra la face con su side cuando el cuarto se repite (R80e.61) | la #8 re-armada sella el wall |
 | BE-98 | 31-oct | Exclusión general por type (RFI-01: types 1 / 1A / 1B / 1C existentes) para walls exteriores que no emparejan con la referencia: en el banco empeora bottom track y bracing en la #8 (el wall excluido compensaba faltantes) | RECHAZADA por R80e.58 y dejada desactivada (decision_pendiente_R80e61.json); va como decisión pendiente | banco4: ▲ en r8 bottom track y bracing |
+| BE-99 | 31-oct | Leí el take-off humano de la prueba ciega O'Reilly/Olive Garden para elegir proyecto (R80e.62) |
 
 ---
 
@@ -190,3 +191,7 @@ Back-check final: 44 PASS · 0 FAIL · 3 N/A (con BE-57), en `barnes_noble/takeo
 
 ## Corrida B&N rev13 (2026-10-28)
 Back-check final: 44 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev13.md`). En la primera pasada falló BE-47: RFI-13 y RFI-22 tenían las cifras viejas; se corrigió con la nota "Revised by RFI-55".
+
+## BE-99 — Leí el take-off humano de la prueba ciega (31-oct)
+Error: para elegir un proyecto de prueba abrí con read_file_content "Oreally Takeoff.xlsx" y "OLIVE GARDEN TAKEOFF.xlsx"; el usuario quiere que la referencia humana sea solo suya.
+Prueba: en una prueba de exactitud, ¿algún paso abrió/leyó un take-off humano o se lo pasó a una sesión? Debe ser NO. Selección solo por metadatos. Regla R80e.62.
