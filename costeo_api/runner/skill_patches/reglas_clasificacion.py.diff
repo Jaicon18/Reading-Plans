@@ -1,6 +1,6 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-29 23:12:21.772203755 +0000
-+++ /tmp/claude-0/-home-user-Reading-Plans/b9c208e2-64c4-5dc6-9d1d-2546bd4c85dc/scratchpad/skill/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-30 19:36:44.760818171 +0000
-@@ -243,6 +243,13 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/reglas_clasificacion.py	2026-10-31 01:24:15.635642243 +0000
+@@ -243,6 +243,17 @@
  REGLAS_TEXTO = [
      ("S:r80e-33-", r".", C("código del trade cuando el plano no responde: se aplica como supuesto conservador con RFI y delta (lo revisan el back-check y la biblioteca)")),   # v80r
      ("S:r80e-34-", r".", C("decisiones del estimador convertidas en regla general: las aplican build / excel_json del proyecto con su N/HOJA (lo revisa el back-check)")),
@@ -11,6 +11,10 @@
 +    ("S:r80e-40-", r".", C("completitud por conteos contra el inventario de tags, símbolos de columna y líneas discontinuas (completitud.conteos + simbolos.py del runner)")),
 +    ("S:r80e-41-", r".", C("return sin tag con part_of en el type de su wall (partition_types.py; sealer del proyecto)")),
 +    ("S:r80e-42-", r".", C("reconciliación de decisiones contra una lectura nueva: nodes por walls, aberturas leídas, supuestos RFI, corrección dirigida, margen de presupuesto (reconcile.py / run_takeoff.py del runner)")),
++    ("S:r80e-43-", r".", C("decisiones generales del estimador por atributo en todos los walls (overlay.aplicar_generales del runner)")),
++    ("S:r80e-44-", r".", C("comparar A/B por altura y board por face + compuerta de alturas placeholder contra secciones / elevaciones (run_takeoff.atributos_ab, completitud.alturas_placeholder)")),
++    ("S:r80e-45-", r".", C("parche parcial de una decisión sobre un ítem ausente = sin objeto, nunca un ítem a medias (overlay.aplicar_parche del runner)")),
++    ("S:r80e-46-", r".", C("comparación A/B de razones none y misc_items + motivo exacto de la fila PENDING en la corrección (run_takeoff.atributos_ab / corregir)")),
      ("S:r80e-35-", r".", C("aplicar decisiones del estimador en el pipeline: mep_estimator_count, addl_head_track_pieces, pvc_trim_items, rfi_cierre (accesorios.py, plantilla_excel.py)")),
      ("S:0-f-decisiones-finales", r".", C("decisión final del estimador (§0.F): la aplican canon.py, plantilla_excel.py y markups_bluebeam.py con sus reglas vigentes")),
      # v72b

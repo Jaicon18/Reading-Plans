@@ -2560,3 +2560,12 @@ Origen: walls de la #4 sin emparejar con "5/8 regular" (Type X −42 % → −8.
 2) Compuerta de alturas placeholder: si la lectura declara height_status PENDIENTE o "placeholder" y el set tiene hojas de secciones o elevaciones (SHEET_MAP) que no cita, la lectura CONTINÚA sobre esas hojas.
 3) La lectura incluye SIEMPRE las elevaciones y secciones del edificio (A-300, A-400 series): el B.O. DECK impreso es la altura de los walls a deck.
 Origen: la #4 usó 20 ft placeholder (A) y 15 ft (B) donde 1/A-400A y 1/A-400B imprimen 25'-0"; studs −33 / −38 %.
+
+### R80e.45 — Un parche parcial no crea ítems a medias (31-oct, corrida real B&N #5)
+Si una decisión del estimador parcha (__dict__) un ítem que la lectura no trae, por ejemplo una face con otro side, el parche no crea un ítem nuevo con solo esos campos: es una decisión sin objeto. Solo un ítem completo (__set__) se crea.
+Origen: faces con solo board, sin layers / room / side, en C-H1-W, C-H3a y C-H3b. canon.py se caía con `KeyError: 'layers'` y 3 correcciones pagadas no lo pudieron arreglar, porque el canon de la lectura estaba bien.
+
+### R80e.46 — La comparación A/B mira también las razones "none" y los misc_items (31-oct, corrida real B&N #5)
+1) Entre A y B se comparan también las razones "none" de nivel canon (columns, dashed, trim, frp, tile_base, ceilings…) y los misc_items que solo trae una lectura. Las diferencias van a la resolución (difieren_atributos).
+2) Una fila PENDING de la Partition Takeoff manda a la corrección el motivo exacto que da partition_types (p. ej. "fos_chain sin cota FOS impresa"), no solo "dato obligatorio".
+Origen: A excusó las 9 columnas como "existing exposed (C23)" y B las cuantificó como misc_items COL-* (C25, 10/A-101). La resolución partió de A y el Excel salió con 0 de 9 column wraps (6" stud −46 %).

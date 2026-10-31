@@ -70,6 +70,21 @@ def atributos_ab(a, b):
         if ba != bb:
             out.append({"A": w["id"], "B": o["id"], "campo": "faces.board", "valor_A": ba, "valor_B": bb,
                         "fuente_A": str(w.get("faces_none_reason") or "")[:160], "fuente_B": str(o.get("faces_none_reason") or "")[:160]})
+    # R80e.46: razones "none" de nivel canon y misc_items que solo trae una lectura (p. ej. A: "columnas existentes
+    # expuestas, C23" vs B: "C25 GWB column surround" cuantificado en misc_items COL-*)
+    for k in ("columns_none_reason", "dashed_none_reason", "trim_none_reason", "frp_none_reason", "tile_base_none_reason",
+              "ceilings_none_reason", "edge_blocking_none_reason"):
+        if bool(a.get(k)) != bool(b.get(k)):
+            out.append({"A": "canon", "B": "canon", "campo": k, "valor_A": str(a.get(k) or "")[:200],
+                        "valor_B": str(b.get(k) or "")[:200]})
+    ra = {str(m.get("ref")): m for m in a.get("misc_items") or [] if isinstance(m, dict)}
+    rb = {str(m.get("ref")): m for m in b.get("misc_items") or [] if isinstance(m, dict)}
+    for lado, x, y in (("A", ra, rb), ("B", rb, ra)):
+        for r, m in x.items():
+            if r not in y:
+                out.append({"A": "canon", "B": "canon", "campo": f"misc_items solo en {lado}", "valor_A": r if lado == "A" else "",
+                            "valor_B": r if lado == "B" else "", "fuente_A": str(m.get("source") or "")[:120] if lado == "A" else "",
+                            "fuente_B": str(m.get("source") or "")[:120] if lado == "B" else ""})
     return out
 
 
