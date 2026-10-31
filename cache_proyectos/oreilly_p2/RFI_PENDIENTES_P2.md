@@ -23,3 +23,25 @@ Notas:
 - RFI-11: cargada la opción B conservadora para las ties de los piers (+98.0 LF 362S162-43, TIES-PIERS-EXT-MS); A = 0.
 - RFI-08 y RFI-15: quedan con el supuesto cargado (orden de la madre) y van al final.
 - Respondidas por el usuario (cerradas): 16 A, 17 A, 18 B, jamb return con sill, 05 glass mat, 19 A, 03 A.
+
+## Ensamble rev2 (post-auditoría pasos 11 / 12) — RFIs nuevos (cargados con supuesto conservador)
+| RFI | Tema | Cargado | A (planos) | B (código / otra) | Delta / fuente |
+|---|---|---|---|---|---|
+| RFI-28 | empalmes del lateral strut (track brace 2'-0" 362T162-33) | A 6.0 LF | 1 empalme por stick de 20 ft (3) | 1 por wall (2) | B −2.0 LF · 5/S5.1 |
+| RFI-29 | continuación de S42-02 al este de la esquina, dibujada sin cota (#0) | A 6.715 LF | continuación dibujada | sin continuación | B −6.715 LF wall (≈ −103 SF board, −4 studs, −13.43 LF track y nailers, −2 kickers) · A1.1 |
+| RFI-30 | control joints donde el framing / furring cambia de dirección (A1.1 3.A) | A 69.71 LF | 4 esquinas del Z-furring S21 + esquina del header S42 | B: + toda esquina de partition 8'-6" (≈ +129 LF); C: ninguna (−69.71) | A1.1 3.A |
+| RFI-31 | trim / edge molding de W-4 (A4.1 key 8) | A 234.0 LF | perímetro completo (arriba, abajo, esquinas, door) | solo arriba y door | B −133.33 LF; C por el instalador del W-4 −234.0 · A4.1 |
+| RFI-32 | diagonal bracing del vestibule head (3/A5.2, 3/A3.1) | A 22.14 LF 600S162-43 | 3 braces × 7.38 ft (cotas impresas 5'-4 1/2" × 5'-0 3/4") | @ 24" (5) | B +14.76 LF · 3/A3.1 |
+| RFI-33 | 1x4 wood trim (A4.2 key 12, A4.1 key 11) | A EXCLUDED Div. 06 | carpintería de terminación | cargarlo | B +52.73 LF · 7/A4.2 |
+Cerrados mostrados como resueltos en Pending Items: RFI-05 (glass mat en la cornice, estimator decision 2026-11-01), RFI-16 (A, board del pier a 12'-0").
+
+## Exclusiones a confirmar por el estimador (rev2)
+| Exclusión | Fuente escrita | Impreso en el set |
+|---|---|---|
+| Insulation de todo tipo (batt R-19, sound batt, polyiso rígido R-9 foil-faced de S21 / S24, rigid board R-10) | estimator standing order (regla fija del skill: "Insulation EXCLUDED siempre") | A1.1 types S21 / S24, A3.1 keys 10 / 15 / 16 / 36, A4.2 keys 13 / 14 |
+| Acoustical sealant | estimator standing order (regla fija del skill U8) | A1.1 nota 4.B |
+| ACT C-1, su grid y el seismic bracing | por el instalador del ceiling acústico (Div. 09 51) | A1.2 C-1, A1.2 GN D, 9/A4.2 |
+| Stucco, lath y stone veneer exteriores | otros oficios (plaster / masonry) | A3.1 keys 13 / 14 / 18, 1/A5.2, A2.1 |
+| Support framing de security shutters | estimator decision 2026-11-01 (respuesta 24): no se carga; framing si se agregan | A5.2 GN H |
+| 1x4 wood trim | Div. 06 (RFI-33) | 7/A4.2 key 12, A4.1 key 11 |
+| Storm panels | no aplica: G1.1 Vult 108 mph < 120 mph | A5.2 GN I |
