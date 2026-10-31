@@ -14,6 +14,10 @@
     "W-2"
    ],
    "source": "A1.2 finish legend W-2 PAINT SEMI-GLOSS LATEX; estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 15 (B - code, GA-214 / ASTM C840)"
+  },
+  "jamb_return_width_ft": {
+   "value": 0.2,
+   "source": "estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 26 = A): return width 0.2 ft; 12/A5.2 / 13/A5.2"
   }
  },
  "walls": [
@@ -324,7 +328,11 @@
      "substrate_none_reason": "No plywood substrate at the opening: head / jamb details (1/A5.1, 2/A5.1, 5/A5.1, 6/A5.1, 11/A5.2, 12/A5.2) draw fire treated 2x4 wood blocking anchored to masonry (counted in blocking_items) and the Z-furring returns; no FRT plywood strip",
      "jamb_return": true,
      "jamb_return_source": "12/A5.2 jamb detail: 5/8\" TYPE \"X\" GYPSUM BOARD returned around the fire treated wood blocking to the window frame; 13/A5.2 sill the same [resolution A vs B, pass 2]",
-     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)"
+     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)",
+     "with_sill": true,
+     "sill_return": true,
+     "sill_return_source": "13/A5.2 sill detail: 5/8\" TYPE \"X\" GYPSUM BOARD returned at the sill (A5.2 D1 / D2 3'-4 3/8\" R.O.)",
+     "sill_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (13/A5.2)"
     },
     {
      "ref": "Window D2",
@@ -339,7 +347,11 @@
      "substrate_none_reason": "No plywood substrate at the opening: head / jamb details (1/A5.1, 2/A5.1, 5/A5.1, 6/A5.1, 11/A5.2, 12/A5.2) draw fire treated 2x4 wood blocking anchored to masonry (counted in blocking_items) and the Z-furring returns; no FRT plywood strip",
      "jamb_return": true,
      "jamb_return_source": "12/A5.2 jamb detail: 5/8\" TYPE \"X\" GYPSUM BOARD returned around the fire treated wood blocking to the window frame; 13/A5.2 sill the same [resolution A vs B, pass 2]",
-     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)"
+     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)",
+     "with_sill": true,
+     "sill_return": true,
+     "sill_return_source": "13/A5.2 sill detail: 5/8\" TYPE \"X\" GYPSUM BOARD returned at the sill (A5.2 D1 / D2 3'-4 3/8\" R.O.)",
+     "sill_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (13/A5.2)"
     }
    ],
    "source": "S21/A1.1",
@@ -1220,13 +1232,27 @@
    "faces": [
     {
      "side": "A",
-     "room": "Parts Area C 105 (break)",
-     "board": "5/8 type X WR",
+     "room": "Parts Area C 105 (break) - janitor sink W.R. zone (to 4'-0\"; X above in GWB-S43-RR-W-ABOVE-WR)",
      "layers": 1,
-     "height_ft": 9.0,
      "height_source": "7/A4.2: outside face board runs from FINISH FLOOR past the 6\" ceiling joist to its top (8'-6\" to B.O. FRAMING EL. 108'-6\" + 6\" printed) with corner bead (key note 7) [resolution A vs B, pass 2]",
+     "board": "5/8 type X WR",
+     "length_ft": 4.0,
+     "height_ft": 4.0,
+     "length_source": "RFI-18 (RFI-DERIVADO): janitor sink 12/A4.1 key 5 at the north end; 24\" basin [PENDIENTE, not printed] + 2'-0\" (IBC 1210.2.2) = 4.0",
+     "height_op": "4'-0\" A.F.F. (IBC 1210.2.2)",
+     "board_source": "estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 19 = B code): GA-216 W.R. type X, extent IBC 1210.2.2; A1.1 note 3.B"
+    },
+    {
+     "side": "A",
+     "room": "Parts Area C 105 (break) - rest of face",
+     "layers": 1,
+     "height_source": "7/A4.2: outside face board runs from FINISH FLOOR past the 6\" ceiling joist to its top (8'-6\" to B.O. FRAMING EL. 108'-6\" + 6\" printed) with corner bead (key note 7) [resolution A vs B, pass 2]",
+     "board": "5/8 type X",
+     "length_ft": 4.5,
+     "height_ft": 9.0,
+     "length_source": "8'-6\" (A1.1 break area) - 4.0 = 4.5",
      "height_op": "8.5 + 0.5 = 9.0",
-     "board_source": "12/A4.1: floor mounted janitor sink (key 5) and eye wash (6) against this face, W-4 panel to 5'-0\" (key 8); Type X W.R. behind wet fixtures (GA-216, estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 19) - reclassification, same SF"
+     "board_source": "S43/A1.1 5/8\" type X"
     },
     {
      "side": "B",
@@ -1922,8 +1948,10 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.667,
-     "height_source": "3/A5.2 head detail (B1 / B2 / C): 5/8\" TYPE \"X\" GYPSUM BOARD on the parts side of the 6\" framing from the storefront head to above the ACT (drawn ~8\", same as 1/A5.2) [resolution A vs B, pass 2]",
-     "board_base_ft": 11.333
+     "height_source": "3/A5.2 head detail (types B1 / B2 / C, A5.2 elevations call 3/A5.2) + 3/A3.1: 5/8\" TYPE \"X\" GYPSUM BOARD only on the Parts Area A 100 face of the 6\" head framing, from the storefront head 11'-4\" (R.O., A5.2 B1 / B2 / C) up to just above the ACT; the vestibule 100A side above the C-3 ceiling has insulation only (no board). Top of the vertical leg NOT printed on 3/A5.2 (only 6\" stud, 4 1/2\" frame, 1 1/2\", 6\" joist, 5/8\"): 0.667 carried = [PENDIENTE] RFI-17 option A (same 8\" as the printed 1/A5.2 head)",
+     "board_base_ft": 11.333,
+     "height_status": "PENDIENTE",
+     "pending_reason": "RFI-17: VH board top above the 11'-4\" head not printed on 3/A5.2 (rule #0, no scaled value)"
     }
    ],
    "top_track": "to the PEMB purlins (3/A3.1 key note 8), diagonal brace (3/A3.1)",
@@ -1981,8 +2009,10 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.667,
-     "height_source": "3/A5.2 head detail (B1 / B2 / C): 5/8\" TYPE \"X\" GYPSUM BOARD on the parts side of the 6\" framing from the storefront head to above the ACT (drawn ~8\", same as 1/A5.2) [resolution A vs B, pass 2]",
-     "board_base_ft": 11.333
+     "height_source": "3/A5.2 head detail (types B1 / B2 / C, A5.2 elevations call 3/A5.2) + 3/A3.1: 5/8\" TYPE \"X\" GYPSUM BOARD only on the Parts Area A 100 face of the 6\" head framing, from the storefront head 11'-4\" (R.O., A5.2 B1 / B2 / C) up to just above the ACT; the vestibule 100A side above the C-3 ceiling has insulation only (no board). Top of the vertical leg NOT printed on 3/A5.2 (only 6\" stud, 4 1/2\" frame, 1 1/2\", 6\" joist, 5/8\"): 0.667 carried = [PENDIENTE] RFI-17 option A (same 8\" as the printed 1/A5.2 head)",
+     "board_base_ft": 11.333,
+     "height_status": "PENDIENTE",
+     "pending_reason": "RFI-17: VH board top above the 11'-4\" head not printed on 3/A5.2 (rule #0, no scaled value)"
     }
    ],
    "top_track": "to the PEMB purlins (3/A3.1 key note 8), diagonal brace (3/A3.1)",
@@ -2040,8 +2070,10 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.667,
-     "height_source": "3/A5.2 head detail (B1 / B2 / C): 5/8\" TYPE \"X\" GYPSUM BOARD on the parts side of the 6\" framing from the storefront head to above the ACT (drawn ~8\", same as 1/A5.2) [resolution A vs B, pass 2]",
-     "board_base_ft": 11.333
+     "height_source": "3/A5.2 head detail (types B1 / B2 / C, A5.2 elevations call 3/A5.2) + 3/A3.1: 5/8\" TYPE \"X\" GYPSUM BOARD only on the Parts Area A 100 face of the 6\" head framing, from the storefront head 11'-4\" (R.O., A5.2 B1 / B2 / C) up to just above the ACT; the vestibule 100A side above the C-3 ceiling has insulation only (no board). Top of the vertical leg NOT printed on 3/A5.2 (only 6\" stud, 4 1/2\" frame, 1 1/2\", 6\" joist, 5/8\"): 0.667 carried = [PENDIENTE] RFI-17 option A (same 8\" as the printed 1/A5.2 head)",
+     "board_base_ft": 11.333,
+     "height_status": "PENDIENTE",
+     "pending_reason": "RFI-17: VH board top above the 11'-4\" head not printed on 3/A5.2 (rule #0, no scaled value)"
     }
    ],
    "top_track": "to the PEMB purlins (3/A3.1 key note 8), diagonal brace (3/A3.1)",
@@ -2717,7 +2749,7 @@
    "qty": 86.03,
    "unit": "SF",
    "source": "7/A4.2",
-   "op": "ceiling C-3 8'-6\" (A1.2): between board faces (11.0 - 2 x 0.052) x (8.0 - 2 x 0.052) = 10.896 x 7.896 = 86.03 SF (A1.1 printed 11'-0\" x 8'-0\" face of stud)",
+   "op": "ceiling C-3 8'-6\" (A1.2): A1.1 printed 11'-0\" x 8'-0\" are face of stud (A1.1 general note B 'rough face of rough framing'); 7/A4.2 draws the ceiling board butting the wall board: (11.0 - 2 x 0.052) x (8.0 - 2 x 0.052) = 10.896 x 7.896 = 86.03 SF",
    "label": "5/8\" type X gypsum board ceiling (7/A4.2 key note 6)"
   },
   {
@@ -2744,7 +2776,7 @@
    "qty": 45.33,
    "unit": "SF",
    "source": "3/A3.1",
-   "op": "ceiling C-3 11'-4\" (A1.2): 8.0 x 5.667 = 45.33 SF (A5.2 types C / B1 / B2 hold dims)",
+   "op": "ceiling C-3 11'-4\" (A1.2): 8'-0\" x 5'-8\" printed between the storefront frame inner faces (10/A5.2; 3/A3.1 2'-10\" + 2'-10\") = 8.0 x 5.667 = 45.33 SF (board under the heads = GWB-VH-UNDERSIDE)",
    "label": "5/8\" type X gypsum board ceiling (3/A3.1 key note 20)"
   },
   {
@@ -2856,6 +2888,24 @@
    "label": "087F125-33 double leg resilient channel @ 24\" O.C. horizontal (1/A3.1 key note 33)"
   },
   {
+   "ref": "GWB-VH-UNDERSIDE",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 11.28,
+   "unit": "SF",
+   "source": "3/A5.2",
+   "op": "vestibule head undersides B1 / B2 / C: board width printed 4 1/2\" frame + 1 1/2\" + 5/8\" (3/A5.2) = 6.625\" = 0.5521 ft; board envelope (8'-0\" + 2 x 6.625\") x (5'-8\" + 6.625\" C side; A side ends at the storefront A frame, 3/A3.1) = 9.1042 x 6.2188 = 56.62 - field ceiling 8'-0\" x 5'-8\" (10/A5.2, GWB-CLG-VEST-100A 45.33) = 11.28 SF",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD under the vestibule storefront heads B1 / B2 / C (3/A5.2)"
+  },
+  {
+   "ref": "GWB-S42-HDR-UNDERSIDE",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 30.79,
+   "unit": "SF",
+   "source": "6/A4.2",
+   "op": "6/A4.2 key 6 wraps the bottom of the suspended header wall at B.O. FRAMING EL. 106'-10\": width = type S42 printed 5/8\" + 3 5/8\" + 5/8\" = 4.875\" = 0.40625 ft (S42/A1.1) x suspended length S42-02 25.455 + S42-03 50.333 = 75.788 LF (same as CB-S42-HDR-BOTTOM / BLK-S42-HDR-NAILERS) = 30.79 SF",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD at the bottom of the S42 suspended header walls (6/A4.2 key note 6)"
+  },
+  {
    "ref": "QTR-GYP-HEAD-A-UNDERSIDE",
    "familia": "1/4\" gypsum board (printed)",
    "qty": 11.82,
@@ -2867,19 +2917,19 @@
   {
    "ref": "W4-PANELS-103",
    "familia": "sanitary wall panels (printed)",
-   "qty": 253.77,
+   "qty": 277.67,
    "unit": "SF",
    "source": "A1.2",
-   "op": "R.R. 103 4 walls W-4 (A1.2 finish schedule) to the C-3 ceiling 8'-6\": 2 x (7'-10\" + 8'-6\" printed 1A/A4.1) x 8.5 - Door 5 R.O. 3.333 x 7.167 = 253.77 SF",
+   "op": "R.R. 103 4 walls W-4 (A1.2 finish schedule) to the C-3 ceiling 8'-6\": 2 x (7'-10\" + 8'-6\" printed 1A/A4.1) x 8.5 = 277.67 SF (door not deducted: estimator rule, no opening deductions)",
    "label": "W-4 SANITARY WALL PANEL SYSTEM (A1.2 legend; A4.1 key note 8)"
   },
   {
    "ref": "W4-PANELS-104",
    "familia": "sanitary wall panels (printed)",
-   "qty": 253.77,
+   "qty": 277.67,
    "unit": "SF",
    "source": "A1.2",
-   "op": "R.R. 104 4 walls W-4 (A1.2 finish schedule) to the C-3 ceiling 8'-6\": 2 x (7'-10\" + 8'-6\" printed 1A/A4.1) x 8.5 - Door 6 R.O. 3.333 x 7.167 = 253.77 SF",
+   "op": "R.R. 104 4 walls W-4 (A1.2 finish schedule) to the C-3 ceiling 8'-6\": 2 x (7'-10\" + 8'-6\" printed 1A/A4.1) x 8.5 = 277.67 SF (door not deducted: estimator rule, no opening deductions)",
    "label": "W-4 SANITARY WALL PANEL SYSTEM (A1.2 legend; A4.1 key note 8)"
   },
   {
@@ -2935,6 +2985,15 @@
    "source": "A1.1",
    "op": "A1.1 note 3.A control joints in partition lengths over 30 ft: S21-N (ROUNDUP(85.000/30)-1 = 2) x 14.844 + S21-E (ROUNDUP(84.646/30)-1 = 2) x 13.958 + S21-S (ROUNDUP(85.000/30)-1 = 2) x 14.844 = 87.29 LF (heights under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)",
    "label": "gypsum board control joint (A1.1 note 3.A)"
+  },
+  {
+   "ref": "GWB-S43-RR-W-ABOVE-WR",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 20.0,
+   "unit": "SF",
+   "source": "12/A4.1",
+   "op": "S43-RR-W break face above the IBC 1210.2.2 W.R. zone: 4.0 LF (RFI-18 zone) x (9.0 face top, 7/A4.2 8'-6\" + 6\" - 4.0) = 4.0 x 5.0 = 20.0 SF (W.R. 16.0 + X 20.0 + X 40.5 = 76.5 = 8.5 x 9.0, total unchanged)",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD (S43/A1.1) above the janitor sink W.R. zone"
   }
  ],
  "plywood_strips": [
@@ -2996,6 +3055,18 @@
    "label": "5/8\" EXTERIOR FIRE TREATED PLYWOOD SHEATHING",
    "source": "2/A3.1",
    "op": "38.667 LF x 9.333 ft (B.O. SHEATHING 111'-4\" to T.O. METAL STUD 120'-8\"; 2/A3.1 key note 34, 1/A5.2)"
+  },
+  {
+   "ref": "HEAD-A-SOFFIT-FRT",
+   "wall": "HEAD-A-6",
+   "lf": 38.667,
+   "width_ft": 0.875,
+   "material": "frt_5_8_ext",
+   "uso": "substrate",
+   "label": "5/8\" EXTERIOR FIRE TREATED PLYWOOD SHEATHING (2/A3.1 key note 34; 1/A5.2)",
+   "source": "1/A5.2",
+   "room": "exterior soffit over storefront A",
+   "op": "horizontal soffit under the 6\" + 8\" head studs, from the inner face of the vertical FRT sheathing to the storefront frame interior edge: printed 6\" + 4 1/2\" (1/A5.2) = 10.5\" = 0.8750 ft x 38'-8\" (R.O., A5.2 type A) 38.667 = 33.83 SF"
   }
  ],
  "blocking_items": [
@@ -3469,6 +3540,65 @@
     },
     "C": ""
    }
+  },
+  {
+   "id": "RFI-17",
+   "familia": "vestibule head interior board height",
+   "motivo": "Vestibule heads VH-B1 / VH-B2 / VH-C (types B1 / B2 / C, head detail 3/A5.2; section 3/A3.1): the 5/8\" type X runs under the head and up the Parts Area A 100 face only, ending just above the ACT; the vestibule side above the C-3 ceiling has no board. No dimension is printed for the top of that vertical leg (3/A5.2 prints only 6\", 4 1/2\", 1 1/2\", 6\", 5/8\").",
+   "pregunta": "What is the top of the 5/8\" type X on the Parts Area A face of the vestibule heads (B1 / B2 / C)?",
+   "source": "3/A5.2",
+   "sources_checked": [
+    "3/A5.2",
+    "3/A3.1",
+    "10/A5.2",
+    "A5.2 types B1 / B2 / C",
+    "A1.2",
+    "1/A5.2"
+   ],
+   "img": "img_rev5/rev5_p1_A5.2_3_vestibule_head_detail.png",
+   "delta": "(A) 0 (carried: 0.667 ft = 8\" as printed on 1/A5.2 for the storefront A head, 13.4 SF) | (B) +72.68 SF 5/8\" X (Parts A face to the RFI-01 purlin stop 4.286 ft) | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Board 8\" above the 11'-4\" head (to 12'-0\" A.F.F.), same line as 1/A5.2 storefront A head",
+     "source": "1/A5.2",
+     "delta": "0 (carried)"
+    },
+    "B": {
+     "texto": "Board on the Parts Area A face up to the roof framing (under the PEMB purlin, RFI-01 stop 4.286 ft above the head)",
+     "cita": "No trade code sets the extent (ASTM C840 / GA-216); no rated assembly at the vestibule (A1.1)",
+     "delta": "+72.68 SF 5/8\" X (20.08 LF x 3.619 ft)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-18",
+   "familia": "janitor sink W.R. extent (RFI-DERIVADO)",
+   "motivo": "12/A4.1: floor mounted janitor sink (key 5) with eye wash (6) at the north end of the S43-RR-W break-area face (A1.1 break area); A1.1 note 3.B asks moisture resistant type X at 'janitor's sink areas' without an extent. Estimator decision RFI-19 = B (code): GA-216 material, extent per IBC 1210.2.2 ('walls ... within 2 feet of service sinks ... to a height of not less than 4 feet above the floor ... not adversely affected by moisture'). Sink width not printed (plumbing sheets excluded).",
+   "pregunta": "Confirm the W.R. zone behind the janitor sink: sink width + 2'-0\" x 4'-0\" high (carried with a 24\" basin), or the whole break face?",
+   "source": "12/A4.1",
+   "sources_checked": [
+    "12/A4.1",
+    "13/A4.1",
+    "A1.1 note 3.B",
+    "A1.1",
+    "A1.2"
+   ],
+   "img": "img_rev5/rev5_p6_A4.1_12_janitor_sink.png",
+   "delta": "(A) carried: 4.0 x 4.0 = 16.0 SF W.R. (24\" basin assumed + 2'-0\" IBC 1210.2.2), 60.5 SF back to 5/8\" X | (B) whole face W.R. (rev4): +60.5 SF W.R. / -60.5 SF X | (C) Other (actual basin width): ____",
+   "opciones": {
+    "A": {
+     "texto": "IBC 1210.2.2 minimum: within 2'-0\" of the sink, 4'-0\" A.F.F.",
+     "cita": "IBC 1210.2.2; GA-216 (W.R. type X)",
+     "delta": "0 (carried)"
+    },
+    "B": {
+     "texto": "Whole S43-RR-W break face 8'-6\" x 9'-0\" W.R.",
+     "source": "12/A4.1",
+     "delta": "+60.5 SF W.R., -60.5 SF 5/8\" X"
+    },
+    "C": ""
+   }
   }
  ],
  "types_none_reason": {},
@@ -3505,9 +3635,8 @@
    "source": "A5.2 window type A 38'-8\" (R.O.) x 11'-4\" (R.O.); A1.1 west facade; 2/A3.1",
    "header": "steel_by_others",
    "header_source": "3/S5.3: storefront head on the PEMB wind beam (key 10) with FCB43.5 clips (key 16) - steel by PEMB",
-   "jamb_return": true,
-   "jamb_return_source": "2/A5.2 jamb (5/8\" type X + 1/4\" on resilient channel returned to the frame); 1/A5.2 head",
-   "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (2/A5.2)",
+   "jamb_return": false,
+   "jamb_return_source": "1/A5.2 / 2/A5.2: storefront A edges = head underside (GWB-HEAD-A-UNDERSIDE) and pier faces; jamb return carried only at D1 / D2 (12/A5.2, 13/A5.2) per estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 26 = A)",
    "jambs": [
     {
      "abuts": "wall",
@@ -3534,9 +3663,9 @@
     "value": 0.0,
     "source": "A1.2 base N/A"
    },
-   "sf": 315.49,
+   "sf": 387.38,
    "source": "A1.2",
-   "op": "S21-N Parts Area C 105: 26.097 x (14.844 board top - 0.000) - openings 71.89 = 315.49 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-N Parts Area C 105: 26.097 x (14.844 board top - 0.000) = 387.38 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-N-B1",
@@ -3544,12 +3673,12 @@
    "l_ft": 58.903,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 633.88,
+   "sf": 677.38,
    "source": "A1.2",
-   "op": "S21-N Parts Area A 100: 58.903 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 23.89 = 633.88 SF"
+   "op": "S21-N Parts Area A 100: 58.903 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 677.38 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S21-E-A0",
@@ -3562,7 +3691,7 @@
    },
    "sf": 783.25,
    "source": "A1.2",
-   "op": "S21-E Parts Area C 105: 56.115 x (13.958 board top - 0.000) - openings 0.00 = 783.25 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-E Parts Area C 105: 56.115 x (13.958 board top - 0.000) = 783.25 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-E-A1",
@@ -3575,7 +3704,7 @@
    },
    "sf": 58.05,
    "source": "A1.2",
-   "op": "S21-E Office 102 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 11.708 x (13.958 board top - 9.000) - openings 0.00 = 58.05 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-E Office 102 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 11.708 x (13.958 board top - 9.000) = 58.05 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-E-A2",
@@ -3588,7 +3717,7 @@
    },
    "sf": 83.41,
    "source": "A1.2",
-   "op": "S21-E R.R. 103 / 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 16.823 x (13.958 board top - 9.000) - openings 0.00 = 83.41 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-E R.R. 103 / 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 16.823 x (13.958 board top - 9.000) = 83.41 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-S-A0",
@@ -3601,7 +3730,7 @@
    },
    "sf": 252.35,
    "source": "A1.2",
-   "op": "S21-S Parts Area C 105: 17.000 x (14.844 board top - 0.000) - openings 0.00 = 252.35 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-S Parts Area C 105: 17.000 x (14.844 board top - 0.000) = 252.35 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-S-A1",
@@ -3612,9 +3741,9 @@
     "value": 0.0,
     "source": "A1.2 base N/A"
    },
-   "sf": 794.01,
+   "sf": 870.5,
    "source": "A1.2",
-   "op": "S21-S Parts Area B 101: 58.643 x (14.844 board top - 0.000) - openings 76.49 = 794.01 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-S Parts Area B 101: 58.643 x (14.844 board top - 0.000) = 870.50 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-S-A2",
@@ -3627,7 +3756,7 @@
    },
    "sf": 47.3,
    "source": "A1.2",
-   "op": "S21-S R.R. 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 9.357 x (14.055 board top - 9.000) - openings 0.00 = 47.30 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-S R.R. 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed): 9.357 x (14.055 board top - 9.000) = 47.30 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S21-W1-B0",
@@ -3635,12 +3764,12 @@
    "l_ft": 9.156,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 102.25,
+   "sf": 105.29,
    "source": "A1.2",
-   "op": "S21-W1 Parts Area A 100: 9.156 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 102.25 SF"
+   "op": "S21-W1 Parts Area A 100: 9.156 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 105.29 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S21-W2-B0",
@@ -3653,7 +3782,7 @@
    },
    "sf": 390.44,
    "source": "A1.2",
-   "op": "S21-W2 Parts Area B 101: 24.823 x (15.729 board top - 0.000) - openings 0.00 = 390.44 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S21-W2 Parts Area B 101: 24.823 x (15.729 board top - 0.000) = 390.44 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-EXT-MS1-8-B0",
@@ -3661,12 +3790,12 @@
    "l_ft": 6.0,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 67.0,
+   "sf": 69.0,
    "source": "A1.2",
-   "op": "EXT-MS1-8 Parts Area A 100: 6.000 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 67.00 SF"
+   "op": "EXT-MS1-8 Parts Area A 100: 6.000 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 69.00 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-EXT-MS2-8-B0",
@@ -3674,12 +3803,12 @@
    "l_ft": 3.08,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 34.39,
+   "sf": 35.42,
    "source": "A1.2",
-   "op": "EXT-MS2-8 Parts Area A 100: 3.080 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 34.39 SF"
+   "op": "EXT-MS2-8 Parts Area A 100: 3.080 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 35.42 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-EXT-MS2-8-B1",
@@ -3692,7 +3821,7 @@
    },
    "sf": 45.93,
    "source": "A1.2",
-   "op": "EXT-MS2-8 Parts Area B 101: 2.920 x (15.729 board top - 0.000) - openings 0.00 = 45.93 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "EXT-MS2-8 Parts Area B 101: 2.920 x (15.729 board top - 0.000) = 45.93 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-HEAD-A-8-B0",
@@ -3705,7 +3834,7 @@
    },
    "sf": 5.12,
    "source": "A1.2",
-   "op": "HEAD-A-8 Parts Area A 100: 30.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) - openings 0.00 = 5.12 SF"
+   "op": "HEAD-A-8 Parts Area A 100: 30.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) = 5.12 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S24-OF-A0",
@@ -3713,25 +3842,12 @@
    "l_ft": 11.708,
    "h_ft": 8.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
-   },
-   "sf": 95.62,
-   "source": "A1.2",
-   "op": "S24-OF Office 102: 11.708 x (8.500 board top - 0.333) - openings 0.00 = 95.62 SF"
-  },
-  {
-   "ref": "L5-S43-OF-W-A0",
-   "wc_tag": "W-2",
-   "l_ft": 8.0,
-   "h_ft": 9.0,
-   "base_ft": {
     "value": 0.0,
-    "source": "A1.2 base N/A"
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 72.0,
+   "sf": 99.52,
    "source": "A1.2",
-   "op": "S43-OF-W Parts Area C 105 (break): 8.000 x (9.000 board top - 0.000) - openings 0.00 = 72.00 SF"
+   "op": "S24-OF Office 102: 11.708 x (8.500 board top - 0.000) = 99.52 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S43-OF-W-B1",
@@ -3739,12 +3855,12 @@
    "l_ft": 8.0,
    "h_ft": 8.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 65.34,
+   "sf": 68.0,
    "source": "A1.2",
-   "op": "S43-OF-W Office 102: 8.000 x (8.500 board top - 0.333) - openings 0.00 = 65.34 SF"
+   "op": "S43-OF-W Office 102: 8.000 x (8.500 board top - 0.000) = 68.00 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S43-OF-E-A0",
@@ -3752,38 +3868,12 @@
    "l_ft": 8.0,
    "h_ft": 8.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
-   },
-   "sf": 65.34,
-   "source": "A1.2",
-   "op": "S43-OF-E Office 102: 8.000 x (8.500 board top - 0.333) - openings 0.00 = 65.34 SF"
-  },
-  {
-   "ref": "L5-S43-OF-E-B1",
-   "wc_tag": "W-2",
-   "l_ft": 8.0,
-   "h_ft": 9.0,
-   "base_ft": {
     "value": 0.0,
-    "source": "A1.2 base N/A"
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 72.0,
+   "sf": 68.0,
    "source": "A1.2",
-   "op": "S43-OF-E Parts Area C 105 (break): 8.000 x (9.000 board top - 0.000) - openings 0.00 = 72.00 SF"
-  },
-  {
-   "ref": "L5-S43-OF-S-A0",
-   "wc_tag": "W-2",
-   "l_ft": 11.708,
-   "h_ft": 9.0,
-   "base_ft": {
-    "value": 0.0,
-    "source": "A1.2 base N/A"
-   },
-   "sf": 81.48,
-   "source": "A1.2",
-   "op": "S43-OF-S Parts Area C 105: 11.708 x (9.000 board top - 0.000) - openings 23.89 = 81.48 SF"
+   "op": "S43-OF-E Office 102: 8.000 x (8.500 board top - 0.000) = 68.00 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S43-OF-S-B1",
@@ -3791,38 +3881,12 @@
    "l_ft": 11.708,
    "h_ft": 8.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
-   },
-   "sf": 71.73,
-   "source": "A1.2",
-   "op": "S43-OF-S Office 102: 11.708 x (8.500 board top - 0.333) - openings 23.89 = 71.73 SF"
-  },
-  {
-   "ref": "L5-S43-RR-W-A0",
-   "wc_tag": "W-2",
-   "l_ft": 8.5,
-   "h_ft": 9.0,
-   "base_ft": {
     "value": 0.0,
-    "source": "A1.2 base N/A"
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 76.5,
+   "sf": 99.52,
    "source": "A1.2",
-   "op": "S43-RR-W Parts Area C 105 (break): 8.500 x (9.000 board top - 0.000) - openings 0.00 = 76.50 SF"
-  },
-  {
-   "ref": "L5-S43-RR-S-A0",
-   "wc_tag": "W-2",
-   "l_ft": 16.521,
-   "h_ft": 9.0,
-   "base_ft": {
-    "value": 0.0,
-    "source": "A1.2 base N/A"
-   },
-   "sf": 100.91,
-   "source": "A1.2",
-   "op": "S43-RR-S Parts Area C 105: 16.521 x (9.000 board top - 0.000) - openings 47.78 = 100.91 SF"
+   "op": "S43-OF-S Office 102: 11.708 x (8.500 board top - 0.000) = 99.52 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S41-B1V-B0",
@@ -3830,12 +3894,12 @@
    "l_ft": 2.167,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 24.2,
+   "sf": 24.92,
    "source": "A1.2",
-   "op": "S41-B1V Parts Area A 100: 2.167 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 24.20 SF"
+   "op": "S41-B1V Parts Area A 100: 2.167 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 24.92 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S41-B1H-A0",
@@ -3843,12 +3907,12 @@
    "l_ft": 1.313,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 14.66,
+   "sf": 15.1,
    "source": "A1.2",
-   "op": "S41-B1H Parts Area A 100: 1.313 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 14.66 SF"
+   "op": "S41-B1H Parts Area A 100: 1.313 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 15.10 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S41-B2H-B0",
@@ -3856,12 +3920,12 @@
    "l_ft": 1.667,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 18.62,
+   "sf": 19.17,
    "source": "A1.2",
-   "op": "S41-B2H Parts Area A 100: 1.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 18.62 SF"
+   "op": "S41-B2H Parts Area A 100: 1.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 19.17 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S41-B2V-B0",
@@ -3869,12 +3933,12 @@
    "l_ft": 1.313,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 14.66,
+   "sf": 15.1,
    "source": "A1.2",
-   "op": "S41-B2V Parts Area A 100: 1.313 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 14.66 SF"
+   "op": "S41-B2V Parts Area A 100: 1.313 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 15.10 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S42-01-A0",
@@ -3882,12 +3946,12 @@
    "l_ft": 38.667,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 431.79,
+   "sf": 444.67,
    "source": "A1.2",
-   "op": "S42-01 Parts Area A 100: 38.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 431.79 SF"
+   "op": "S42-01 Parts Area A 100: 38.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 444.67 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S42-01-B1",
@@ -3900,7 +3964,7 @@
    },
    "sf": 560.86,
    "source": "A1.2",
-   "op": "S42-01 Parts Area C 105: 38.667 x (14.505 board top - 0.000) - openings 0.00 = 560.86 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S42-01 Parts Area C 105: 38.667 x (14.505 board top - 0.000) = 560.86 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S42-02-A0",
@@ -3913,7 +3977,7 @@
    },
    "sf": 87.46,
    "source": "A1.2",
-   "op": "S42-02 Parts Area A 100: 18.740 x (11.500 exposed to the C-1 ACT 11'-6\" - 6.833) - openings 0.00 = 87.46 SF"
+   "op": "S42-02 Parts Area A 100: 18.740 x (11.500 exposed to the C-1 ACT 11'-6\" - 6.833) = 87.46 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S42-02-A1",
@@ -3926,7 +3990,7 @@
    },
    "sf": 51.52,
    "source": "A1.2",
-   "op": "S42-02 Parts Area B 101: 6.715 x (7.672 board top - 0.000) - openings 0.00 = 51.52 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S42-02 Parts Area B 101: 6.715 x (7.672 board top - 0.000) = 51.52 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S42-02-B2",
@@ -3939,7 +4003,7 @@
    },
    "sf": 195.29,
    "source": "A1.2",
-   "op": "S42-02 Parts Area C 105: 25.455 x (7.672 board top - 0.000) - openings 0.00 = 195.29 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S42-02 Parts Area C 105: 25.455 x (7.672 board top - 0.000) = 195.29 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S42-03-A0",
@@ -3952,7 +4016,7 @@
    },
    "sf": 234.9,
    "source": "A1.2",
-   "op": "S42-03 Parts Area A 100: 50.333 x (11.500 exposed to the C-1 ACT 11'-6\" - 6.833) - openings 0.00 = 234.90 SF"
+   "op": "S42-03 Parts Area A 100: 50.333 x (11.500 exposed to the C-1 ACT 11'-6\" - 6.833) = 234.90 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S42-03-B1",
@@ -3965,7 +4029,7 @@
    },
    "sf": 412.83,
    "source": "A1.2",
-   "op": "S42-03 Parts Area B 101: 50.333 x (8.202 board top - 0.000) - openings 0.00 = 412.83 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S42-03 Parts Area B 101: 50.333 x (8.202 board top - 0.000) = 412.83 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-S42-04-A0",
@@ -3973,12 +4037,12 @@
    "l_ft": 8.167,
    "h_ft": 11.5,
    "base_ft": {
-    "value": 0.333,
-    "source": "A1.2 base B-1 4\" resilient cove"
+    "value": 0.0,
+    "source": "A1.2 base B-1 4\" NOT deducted (estimator rule: Level 5 without deducting openings or base)"
    },
-   "sf": 91.2,
+   "sf": 93.92,
    "source": "A1.2",
-   "op": "S42-04 Parts Area A 100: 8.167 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.333) - openings 0.00 = 91.20 SF"
+   "op": "S42-04 Parts Area A 100: 8.167 x (11.500 exposed to the C-1 ACT 11'-6\" - 0.000) = 93.92 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-S42-04-B1",
@@ -3991,7 +4055,7 @@
    },
    "sf": 127.76,
    "source": "A1.2",
-   "op": "S42-04 Parts Area B 101: 8.167 x (15.644 board top - 0.000) - openings 0.00 = 127.76 SF (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
+   "op": "S42-04 Parts Area B 101: 8.167 x (15.644 board top - 0.000) = 127.76 SF (openings / base not deducted) (board top under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)"
   },
   {
    "ref": "L5-VH-C-B0",
@@ -4004,7 +4068,7 @@
    },
    "sf": 1.46,
    "source": "A1.2",
-   "op": "VH-C Parts Area A 100: 8.750 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) - openings 0.00 = 1.46 SF"
+   "op": "VH-C Parts Area A 100: 8.750 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) = 1.46 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-VH-B2-A0",
@@ -4017,7 +4081,7 @@
    },
    "sf": 0.95,
    "source": "A1.2",
-   "op": "VH-B2 Parts Area A 100: 5.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) - openings 0.00 = 0.95 SF"
+   "op": "VH-B2 Parts Area A 100: 5.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) = 0.95 SF (openings / base not deducted)"
   },
   {
    "ref": "L5-VH-B1-B0",
@@ -4030,7 +4094,7 @@
    },
    "sf": 0.95,
    "source": "A1.2",
-   "op": "VH-B1 Parts Area A 100: 5.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) - openings 0.00 = 0.95 SF"
+   "op": "VH-B1 Parts Area A 100: 5.667 x (11.500 exposed to the C-1 ACT 11'-6\" - 11.333) = 0.95 SF (openings / base not deducted)"
   }
  ]
 }
