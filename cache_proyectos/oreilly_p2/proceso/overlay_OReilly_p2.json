@@ -901,7 +901,7 @@
   {
    "label": "G09 est.09 -> RFI-10",
    "decision_date": "2026-11-01",
-   "decisions": "+ 600S200-54 by spacing, L4x4x3/16 clip angles, 2x2x14ga clips (already CLIP-2X2-S42-03, kept at this canon's count)",
+   "decisions": "+ 600S200-54 by spacing, L4x4x3/16 clip angles, 2x2x14ga clips (already CLIP-2X2-S42-03, kept at this canon's count). Decision = the members are carried; quantities (member length / purlin spacing, not printed) are [PENDIENTE] RFI-19 (rev6), option A carried",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -912,7 +912,7 @@
        "qty": 70.0,
        "unit": "LF",
        "source": "1/S5.1",
-       "op": "6\"x2\"x16ga (600S200-54) @ 24\" O.C. attached to each purlin along the S42-02 header: ROUNDUP(25.455/2)+1 = 14 x 5.0 ft (one purlin bay scaled on 1/S5.1 / 4/S5.1, 271 pt at 54 pt/ft = 5.0 ft) = 70.0 LF",
+       "op": "6\"x2\"x16ga (600S200-54) @ 24\" O.C. attached to each purlin along the S42-02 header (1/S5.1, printed spacing): ROUNDUP(25.455/2)+1 = 14 members x 5.0 ft = 70.0 LF; member length [PENDIENTE] RFI-19 option A carried (5'-0\"+- printed on 2/S5.1, kicker reach; length not printed on 1/S5.1, PEMB shop drawing); option B 140.0 LF (+70.0)",
        "label": "6\"x2\"x16ga STUDS (600S200-54) @ 24\" O.C. ATTACH TO EACH PURLIN (1/S5.1)"
       },
       {
@@ -921,7 +921,7 @@
        "qty": 55.0,
        "unit": "LF",
        "source": "4/S5.1",
-       "op": "6\"x2\"x16ga (600S200-54) @ 48\" O.C. fastened to each purlin along S42-01: ROUNDUP(38.667/4)+1 = 11 x 5.0 ft (purlin bay scaled) = 55.0 LF",
+       "op": "6\"x2\"x16ga (600S200-54) @ 48\" O.C. fastened to each purlin along S42-01 (4/S5.1, printed spacing): ROUNDUP(38.667/4)+1 = 11 members x 5.0 ft = 55.0 LF; member length [PENDIENTE] RFI-19 option A carried (5'-0\"+- printed on 2/S5.1; length not printed on 4/S5.1, PEMB shop drawing); option B 110.0 LF (+55.0)",
        "label": "6\"x2\"x16ga STUD (600S200-54) @ 48\" O.C. FASTEN TO EACH PURLIN (4/S5.1)"
       },
       {
@@ -930,7 +930,7 @@
        "qty": 12,
        "unit": "PCS",
        "source": "2/S5.1",
-       "op": "L 4x4x3/16 x 1'-0\" clip angle at each purlin crossing of S42-03 (purlins perpendicular, 2/S5.1 'purlin beyond'): ROUNDUP(50.333/5.0)+1 = 12 pcs (purlin spacing scaled 5.0 ft on 4/S5.1)",
+       "op": "L 4x4x3/16 x 1'-0\" clip angle at each purlin crossing of S42-03 (2/S5.1, purlins 'beyond'): ROUNDUP(50.333/5.0)+1 = 12 pcs; purlin spacing [PENDIENTE] RFI-19 option A carried (5.0 ft = 2/S5.1 printed 5'-0\"+- kicker reach used as proxy; purlin spacing not printed, PEMB shop drawing); option B 14 pcs (one per kicker @ 48\" O.C. MAX, +2)",
        "label": "L4x4x3/16x1'-0\" CLIP ANGLE (CONTRACTOR FURNISHED) FASTENED TO PURLIN (2/S5.1)"
       }
      ]
@@ -940,7 +940,7 @@
       "RFI-10": {
        "__dict__": {
         "motivo": {
-         "__set__": "CLOSED - estimator decision 2026-11-01: option B partially: 600S200-54 members and L4x4 clip angles carried by spacing; 2'-0\" track brace at strut splices (5/S5.1) not part of the decision. Original question: S42 header walls: 6\"x2\"x16ga studs @ 24\" to purlins (1/S5.1), 6\"x2\"x16ga @ 48\" (4/S5.1), L 4x4x3/16x1'-0\" clip angles (2/S5.1), 2'-0\" track brace at strut splices (5/S5.1): purlin spacing / member lengths not printed."
+         "__set__": "CLOSED - estimator decision 2026-11-01: option B partially: 600S200-54 members and L4x4 clip angles carried (decision); their member length / purlin spacing are not printed and stay [PENDIENTE] RFI-19 (rev6); 2'-0\" track brace at strut splices (5/S5.1) not part of the decision. Original question: S42 header walls: 6\"x2\"x16ga studs @ 24\" to purlins (1/S5.1), 6\"x2\"x16ga @ 48\" (4/S5.1), L 4x4x3/16x1'-0\" clip angles (2/S5.1), 2'-0\" track brace at strut splices (5/S5.1): purlin spacing / member lengths not printed."
         },
         "estado": {
          "__set__": "CLOSED"
@@ -957,7 +957,7 @@
     "rfi_cierre": {
      "RFI-10": {
       "pregunta": "CLOSED - estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 09",
-      "delta": "+125.0 LF 600S200-54, +12 L4x4 clip angles"
+      "delta": "+125.0 LF 600S200-54, +12 L4x4 clip angles (quantities = RFI-19 option A, pending)"
      }
     }
    }
