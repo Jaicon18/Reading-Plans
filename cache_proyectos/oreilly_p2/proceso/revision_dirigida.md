@@ -25,3 +25,62 @@ Crops: `img_revision/` (rendered with pymupdf from `bidset_SIN_MARKUPS.pdf`, eve
 
 Result: `partition_types.avisos = []`. No R11 notice is left.
 New RFI: **RFI-14** (S42 header continuation, A1.1 vs S4.1).
+
+---
+
+# Rev3 adjustments (pass 2)
+
+Backups before rev3: `takeoff_canon_AB_rev2.json`, `overlay_OReilly_p2_rev2.json`. Crops: `img_rev3/` (rendered with pymupdf from `bidset_SIN_MARKUPS.pdf`, circled, reopened and checked). Full change list: `rev3_cambios.md`.
+
+## Rev3 point 1 - RFI-01 purlin depth
+
+The B.O. of the PEMB purlin is not printed (1/A3.1, 2/A3.1, 3/A3.1, 1/A3.2, 2/A3.2, 3/A3.2, 1/A3.4, S4.1, S5.1). The 10" value scaled on 1/A3.1 was removed from every source / op (rule #0). Heights now use **-0.667 ft = [PENDIENTE] assumed 8" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01**. Wall `height_status` = PENDIENTE with `pending_reason` and `sheets_searched` (S21-N/E/S/W1/W2, S42-01..04, VH-B1/B2/C).
+
+## Rev3 point 2 - doors not deducted from board faces (R70.3), wall by wall
+
+| Wall | Openings in the wall | Board deduction before | After |
+|---|---|---|---|
+| S21-N | Doors 3, 2 (Parts C face), door 7 (Parts A face), CMU openings | 71.89 + 23.89 SF | **0** (doors inside the run) |
+| S21-E | none | none | no change |
+| S21-S | Windows D1 / D2 | 76.49 SF (windows) | **kept** (window) |
+| S21-W1 / W2 | none | none | no change |
+| S24-OF / S24-RR / S24-RRS | none (doors 4 / 5 / 6 are in S43) | none | no change |
+| S43-OF-S | Door 4 | 23.89 SF each face | **0** both faces |
+| S43-RR-S | Doors 5, 6 | 47.78 (Parts C) + 23.89 (R.R. 103) + 23.89 (R.R. 104) | **0** all faces |
+| S43-OF-W / OF-E / RR-W, S61-RR | none | none | no change |
+| S41-B1V / B1H / B2H / B2V | none | none | no change |
+| S42-01..04 | none (header walls: base 6.833 is the header bottom over open passages, not a door) | none | no change |
+| EXT-MS1/MS2 piers, HEAD-A-8 | Storefront A (openings_extra) | head face starts at the storefront head (base 11.333) | **kept** (storefront). The vestibule face height 0 is the vestibule soffit (RFI-15), not a door split |
+| VH-B1 / VH-B2 / VH-C | Vestibule storefronts B1 / B2 / C (C holds a door) | faces start at the head (base 11.333) | **kept** (storefront head band, not a deduction) |
+
+No face was split at height 0 by a door. Not board, left as they were: Level 5 items (L5-S21-N-B0/B1, L5-S43-OF-S-*, L5-S43-RR-S-A0) and W-4 panels keep the door deduction (finish area, not board).
+
+## Rev3 point 3 - storefront A head wall, interior face per segment
+
+| Segment (A5.2 type A, printed) | Section / detail at this segment | Board on the interior face: from -> to (printed) | Carried |
+|---|---|---|---|
+| 18'-8" (R.O.) | 1/A5.2 (head callout cut in this segment on the A5.2 type A elevation) | storefront head 11'-4" (A5.2 "11'-4\" (R.O.)"; B.O. SHEATHING EL. 111'-4" 2/A3.1) -> 8" above (1/A5.2 printed 8") = 12'-0" | 18.667 x 0.667 = 12.45 SF 5/8" X + 1/4" + 1 RC row; underside 18.667 x 0.4375 = 8.17 SF 5/8" X + 18.667 x 0.3854 = 7.19 SF 1/4"; 18.667 LF corner bead |
+| 8'-0" (HOLD) vestibule 100A | 3/A3.1 (A1.1 section mark in this segment) | 11'-4" -> 11'-4": 3/A3.1 draws the vestibule soffit framing on the head line and no board on the interior face (insulation only); A1.2 100A walls "-", C-3 11'-4". But 3/A3.1 tags this head "HEAD DETAIL 1/A5.2" (8") | **[PENDIENTE] RFI-15**: (A) 0 carried / (B) +5.33 SF 5/8" X face (8.0 x 0.667) + 5.33 SF 1/4" + 8.0 LF RC + 3.50 SF 5/8" X underside + 3.08 SF 1/4" underside + 8.0 LF corner bead / (C) other |
+| 12'-0" (R.O.) | 2/A3.1 (A1.1 section mark in this segment) -> HEAD DETAIL 1/A5.2 | 11'-4" -> 12'-0" (2/A3.1 key notes 20 / 33 / 35 short leg; 1/A5.2 8") | 12.0 x 0.667 = 8.00 SF 5/8" X + 1/4" + 1 RC row; underside 5.25 SF 5/8" X + 4.63 SF 1/4"; 12.0 LF corner bead |
+
+RFI-06 = A applied in the overlay (G06): HEAD-A-8 faces with per-segment sources, GWB-HEAD-A-UNDERSIDE 13.42 SF, new QTR-GYP-HEAD-A-UNDERSIDE 11.82 SF (1/4", width 3-1/2" + 7/8" + 1/4" = 4.625"; 1/A5.2 itself draws the 1/4" on the vertical face only), CB-HEAD-A-UNDERSIDE 30.667 LF; piers keep 1/4" + RC in QTR-GYP-EXT-MS / RC-EXT-MS. Images: img_rev3/rev3_A1.1_west_string_sections_per_segment.png, rev3_A5.2_typeA_elevation_segments_head_callout.png, rev3_A5.2_1_head_detail_8in_interior_board.png, rev3_A3.1_2_section_12-0_segment_head.png, rev3_A3.1_3_section_vestibule_8-0_segment_head.png, rev3_A3.1_3_vestibule_head_zoom_5x.png, rev3_A1.2_finish_schedule_100_100A.png.
+
+## Corner ownership
+
+Rules used (SKILL.md, quoted):
+
+- **R70.2**: "Cada esquina L / T tiene UN dueño: un wall llega a la cara exterior del otro y el otro arranca en su cara. Ni esquina sin dueño ni doble. Vale también para exteriores."
+- **R70.3**: "La door va DENTRO del run: un R.O. entre dos walls colineales es parte del wall (las doors no se descuentan). Un hueco colineal sin explicar = falla; un cambio de type justo en la door no saca la door de ambos walls."
+- The owner itself was read with **R78.35** (the wall whose stud core crosses the corner square in the plan vector runs through; the other dies against it).
+
+| Corner | Node | Owner | Why |
+|---|---|---|---|
+| S24-OF / S43-OF-W | N36 (T) | **S24-OF** | A1.1 40x vector: the S24 hatch fills the corner square; the S43 inner line stops at the S24 face (322.4 pt). S24-OF length = 11'-0" printed between the S43 inner stud faces + 2 x 4-1/4" (it runs to the S43 outer face). S43-OF-W 8'-0" printed starts at the S24 face (band lo 322.4). Image: img_revision/e_A1.1_S24-OF_x_S43-OF-W_corner_40x.png |
+| S24-OF / S43-OF-E | N37 (T) | **S24-OF** | Same pattern as N36; S43-OF-E band lo 322.4 = S24 face. Image: img_revision/e_A1.1_S24-OF_corners_zoom.png |
+| S24-RR / S43-RR-W | N40 (L) | **S24-RR** | A1.1 40x: S24 hatch through the corner; S24-RR length includes the S43-RR-W stud + outer board 4-1/4"; S43-RR-W band starts at the S24 face (322.4). Image: img_revision/e_A1.1_S24-RR_x_S43-RR-W_corner_40x.png |
+| S24-RRS / S43-RR-S | N42 (L) | **S24-RRS** | A1.1 16x: the S24-RRS hatch runs to the S43-RR-S outer face; length 8'-6" + 3-5/8" printed (1A/A4.1) + 5/8" outer board = 8.854; S43-RR-S band hi 1071.8 = S24-RRS face. Image: img_revision/e_A1.1_S24-RRS_x_S43-RR-S_corner_16x.png |
+| S21-S / S24-RR | - (S24-RR end) | **S21-S** | A1.1 40x: the S21-S furring line runs from the east CMU face (318.1 pt) past the S21-E / S24-RR ends (S21-S = 85'-0" CMU face to CMU face, owner of both its corners); S24-RR stops at the S21-S face (band hi 1074.9 = S21-S c0 1074.9). Image: img_revision/e_A1.1_S21-S_x_S24-RR_corner_40x.png |
+| S21-E / S24-OF, S24-RR | - | no corner | Parallel walls: the S24 studs stand in front of the S21-E Z-furring (adjacent_to S21-E, S24 band c0 319.2 = S21-E face). R70.2 does not apply; S21-E has board only above the hard lid there (RFI-02) |
+| S21-S / S24-RRS | - | no corner | Parallel: S24-RRS stands in front of S21-S (adjacent_to S21-S). R70.2 does not apply |
+
+Observation (not changed): S24-RRS band lo 321.7 reads 0.7 pt (0.08 ft) into the S24-RR band (face 322.4) at N41, where S24-RR is the owner; below the R11 tolerance, `partition_types.avisos = []`.

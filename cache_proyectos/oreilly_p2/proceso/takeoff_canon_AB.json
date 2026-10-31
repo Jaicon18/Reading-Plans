@@ -63,10 +63,9 @@
      "layers": 1,
      "height_ft": 15.511,
      "length_ft": 26.097,
-     "deduct_opening_sf": 71.89,
      "length_source": "A1.1 CMU face 310.7 pt to S42 face 553.5 pt: 25.92 (vector) + 2-1/8\" corner (S21-N owns the corner) = 26.097",
      "height_source": "3/A3.2 key notes 10 + 20 drawn to the roof framing (Parts Area C ceiling C-2 exposed, A1.2); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01",
-     "deduct_info": "door 3 6.0 x 8.0 + door 2 3.333 x 7.167 = 71.89"
+     "deduct_info": "rev3: door R.O. 71.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     },
     {
      "side": "B",
@@ -75,10 +74,9 @@
      "layers": 1,
      "height_ft": 15.511,
      "length_ft": 58.903,
-     "deduct_opening_sf": 23.89,
      "length_source": "A1.1 S42 face 558.0 pt to CMU face: 58.726 (vector) + 2-1/8\" corner = 58.903",
      "height_source": "3/A3.2 (section at the north wall, Parts Area A): GWB (20) on Z-furring (10) drawn above the suspended ceiling (21) up to the roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01",
-     "deduct_info": "door 7 3.333 x 7.167 = 23.89"
+     "deduct_info": "rev3: door R.O. 23.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     }
    ],
    "openings": [
@@ -661,18 +659,20 @@
      "length_ft": 30.667,
      "length_source": "A5.2 window type A printed segments 18'-8\" (R.O.) + 12'-0\" (R.O.) on the Parts Area A side; the 8'-0\" (HOLD) segment is the vestibule 100A [directed review, pass 2]",
      "length_op": "18.667 + 12.0 = 30.667",
-     "height_source": "1/A5.2 head detail: 5/8\" type X + 1/4\" on 7/8\" resilient channel drawn 8\" above the storefront head (printed 8\"); 1/A3.1 / 2/A3.1 key notes 20 / 33 / 35 to 6\" above the C-1 ACT 11'-6\" (A1.2)",
-     "board_base_ft": 11.333
+     "height_source": "per segment, interior face board from the storefront head 11'-4\" (A5.2 type A '11'-4\" (R.O.)') to 12'-0\": 18'-8\" segment = 1/A5.2 head detail (cut in the 18'-8\" segment on the A5.2 type A elevation) printed 8\" board on 7/8\" RC + 1/4\"; 12'-0\" segment = 2/A3.1 (A1.1 section mark in the 12'-0\" segment) HEAD DETAIL 1/A5.2, key notes 20 / 33 / 35 drawn as the same 8\" short leg; above the C-1 ACT 11'-6\" (A1.2) [rev3 directed review, img_rev3/rev3_A5.2_1_head_detail_8in_interior_board.png, img_rev3/rev3_A3.1_2_section_12-0_segment_head.png]",
+     "board_base_ft": 11.333,
+     "height_op": "11.333 + 8/12 = 12.0 -> 0.667 above the head (both segments)"
     },
     {
      "side": "B",
-     "room": "Vestibule 100A (C-3 ceiling at the head: no wall board)",
+     "room": "Vestibule 100A (C-3 ceiling at the head: no wall board carried, RFI-15 PENDIENTE)",
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.0,
      "length_ft": 8.0,
      "length_source": "A5.2 window type A 8'-0\" (HOLD) printed",
-     "height_source": "Vestibule 100A segment (8'-0\" HOLD, A5.2 type A): C-3 GWB ceiling at 11'-4\" (A1.2) = the storefront head 11'-4\" R.O.; 3/A3.1 draws no wall board above the head inside the vestibule (joists 600S162-43 on the head line) -> no face [directed review, pass 2]"
+     "height_source": "[PENDIENTE] RFI-15: vestibule 100A segment (A5.2 type A 8'-0\" (HOLD)): 3/A3.1 (A1.1 section mark in the 8'-0\" segment) draws the 6\" vestibule soffit framing on the head line with board under it and insulation only on the interior face above it (no board line); A1.2 vestibule 100A walls '-' and C-3 ceiling 11'-4\" = the head 11'-4\" R.O.; but 3/A3.1 tags that head 'HEAD DETAIL 1/A5.2', which prints 8\" of board. Carried 0 (as drawn in the section cut at this segment); option B = 8.0 x 0.667 = +5.33 SF. [img_rev3/rev3_A3.1_3_section_vestibule_8-0_segment_head.png, img_rev3/rev3_A3.1_3_vestibule_head_zoom_5x.png, img_rev3/rev3_A1.2_finish_schedule_100_100A.png]",
+     "pending_reason": "RFI-15: no printed board height for the vestibule segment interior face (3/A3.1 vs 1/A5.2)"
     }
    ],
    "source": "3/S5.3",
@@ -1078,8 +1078,8 @@
      "layers": 1,
      "height_ft": 9.0,
      "height_source": "7/A4.2: outside face board runs from FINISH FLOOR past the 6\" ceiling joist to its top (8'-6\" to B.O. FRAMING EL. 108'-6\" + 6\" printed) with corner bead (key note 7) [resolution A vs B, pass 2]",
-     "deduct_opening_sf": 23.89,
-     "height_op": "8.5 + 0.5 = 9.0"
+     "height_op": "8.5 + 0.5 = 9.0",
+     "deduct_info": "rev3: door R.O. 23.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     },
     {
      "side": "B",
@@ -1088,7 +1088,7 @@
      "layers": 1,
      "height_ft": 8.5,
      "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2)",
-     "deduct_opening_sf": 23.89
+     "deduct_info": "rev3: door R.O. 23.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     }
    ],
    "top_track": "top track at 8'-6\" (7/A4.2)",
@@ -1265,8 +1265,8 @@
      "layers": 1,
      "height_ft": 9.0,
      "height_source": "7/A4.2: outside face board runs from FINISH FLOOR past the 6\" ceiling joist to its top (8'-6\" to B.O. FRAMING EL. 108'-6\" + 6\" printed) with corner bead (key note 7) [resolution A vs B, pass 2]",
-     "deduct_opening_sf": 47.78,
-     "height_op": "8.5 + 0.5 = 9.0"
+     "height_op": "8.5 + 0.5 = 9.0",
+     "deduct_info": "rev3: door R.O. 47.78 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     },
     {
      "side": "B",
@@ -1277,7 +1277,7 @@
      "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2) ; W.R.: A1.1 Interior Wall & Ceiling Notes 3.B 'MOISTURE RESISTANT TYPE X GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS...)'",
      "length_ft": 8.438,
      "length_source": "4.25/12 + 7.833 + 0.25 (to S61 center) = 8.438",
-     "deduct_opening_sf": 23.89
+     "deduct_info": "rev3: door R.O. 23.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     },
     {
      "side": "B",
@@ -1288,7 +1288,7 @@
      "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2) ; W.R.: A1.1 Interior Wall & Ceiling Notes 3.B 'MOISTURE RESISTANT TYPE X GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS...)'",
      "length_ft": 8.083,
      "length_source": "0.25 + 7.833 = 8.083",
-     "deduct_opening_sf": 23.89
+     "deduct_info": "rev3: door R.O. 23.89 SF no longer deducted (SKILL R70.3: 'La door va DENTRO del run ... (las doors no se descuentan)')"
     }
    ],
    "top_track": "top track at 8'-6\" (7/A4.2)",
@@ -3139,6 +3139,37 @@
      "texto": "Stop at the corner per S4.1 key plan (key note 4)",
      "cita": "S4.1 framing key plan",
      "delta": "-6.715 LF of header wall (x 8.339 ft)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-15",
+   "familia": "head wall interior board",
+   "motivo": "Storefront A head, vestibule 100A segment 8'-0\" (HOLD, A5.2 type A): 3/A3.1 draws the vestibule soffit framing on the head line and no board on the interior face of the head framing, but tags the head 'HEAD DETAIL 1/A5.2', which prints 5/8\" type X + 1/4\" on RC 8\" above the head. No height is printed for this segment.",
+   "pregunta": "Does the interior face of the storefront A head framing inside vestibule 100A (8'-0\" segment) get board (1/A5.2: 8\" above the head) or none (3/A3.1: soffit framing at the head, A1.2 walls '-')?",
+   "source": "3/A3.1",
+   "sources_checked": [
+    "A5.2 type A elevation",
+    "1/A5.2",
+    "3/A5.2",
+    "2/A3.1",
+    "3/A3.1",
+    "A1.1",
+    "A1.2"
+   ],
+   "img": "img_rev3/rev3_A3.1_3_section_vestibule_8-0_segment_head.png",
+   "delta": "(A) 0 (carried) | (B) +5.33 SF 5/8\" type X face + 5.33 SF 1/4\" + 8.0 LF RC + underside 3.50 SF 5/8\" X + 3.08 SF 1/4\" + 8.0 LF corner bead | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "As drawn in 3/A3.1 (section cut at this segment): no interior-face board; the vestibule soffit (C-3, 11'-4\", A1.2) closes the head",
+     "source": "3/A3.1",
+     "delta": "0 (carried)"
+    },
+    "B": {
+     "texto": "As 1/A5.2 (referenced by 3/A3.1): 8\" board on RC + 1/4\" above the head and underside return, 8.0 ft",
+     "cita": "No trade code sets this height (plans only); 1/A5.2 printed 8\"",
+     "delta": "+5.33 SF 5/8\" X (8.0 x 0.667) + 5.33 SF 1/4\" + 8.0 LF RC + 3.50 SF 5/8\" X underside (8.0 x 0.4375) + 3.08 SF 1/4\" underside (8.0 x 0.3854) + 8.0 LF corner bead"
     },
     "C": ""
    }
