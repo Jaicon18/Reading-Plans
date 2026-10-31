@@ -14,6 +14,9 @@ Flujo (orden de la sesión madre 2026-10-31): lo que el plano no resuelve va CAR
 | RFI-22 | top track de header walls S42-02/03 no dibujado (1/S5.1, 2/S5.1) | A cargado 75.79 LF | A: S1.1 7.E "metal track of same size gauge" (conservador) | B: como dibujado, sin top track | B: −75.79 LF |
 | RFI-23 | producto del bridging 2.F (no impreso en A1.1; S1.1 7.D imprime 2"x20ga flat strap + blocking-in) | A cargado 807.52 LF 1-1/2" C.R. channel | A: A1.1 2.F espaciamiento @ 4'-0" vertical + producto criterio skill | B: S1.1 7.D (AISI/SSMA): strap 2"x20ga ambas alas | B: −807.52 LF C.R., +1,615.04 LF strap + blocking-in; C: sin bridging en ensambles 3/S5.3 y 1/S5.3 −310.67 LF |
 | RFI-24 | backing de accesorios / fixtures sin tamaño (A4.1 nota 1, nota C, keys 13/17) | A cargado 56.0 LF FRT 2x | A: 2 filas × 2'-0" por ítem | B: 1 fila por ítem | B: −22.0 LF |
+| RFI-25 | 14/A4.1 key 12 (decisión previa: blocking FRT continuo) | A cargado 0 | A: leyenda A4.1 "12 WALL CONSTRUCTION, REFER TO FLOOR PLAN FOR TYPES" (el blocking es key 13); 14/A4.1 mira S42-03 | B: blocking FRT continuo según decisión previa, 2 filas × 50.333 | B: +100.67 LF (1 fila +50.33) |
+| RFI-26 | conteo clips 2x2x14ga / L4x4 (no rotulado) | A cargado 14 clips / 12 L4x4 | A: 2/S5.1 dibuja clip por kicker de S42-03; 1/S5.1 (S42-02) sin clip ni L4x4; L4x4 por RFI-19 A | B: uno por kicker en S42-02 + S42-03; L4x4 por purlin en ambos | B: +8 clips (22), +7 L4x4 (19) |
+| RFI-27 | control joints S21 (decisión 18 = A) | A cargado 188.54 LF | A: A1.1 3.A "locate at masonry control joints" → key 23 de A2.1 (N 5, E 5, S 3) a altura completa | B: regla de 30 ft | B: −101.25 LF |
 
 Notas:
 - RFI-01: cerrado por decisión del estimador (studs bajo purlin) pero el peralte 8" es SUPUESTO (shop drawing PEMB no impreso) → confirmar.

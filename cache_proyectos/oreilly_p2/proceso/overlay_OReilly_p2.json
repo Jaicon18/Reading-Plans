@@ -575,9 +575,17 @@
        "ref": "JDM-S42-JOINTS",
        "kind": "j_bead",
        "lf": 41.3,
-       "label": "FRY REGLET DRMF-625-75 + JDM-625 at gypsum board joints, both sides and bottom (2/A4.2 key note 9)",
+       "label": "FRY REGLET 'JDM-625' J molding at the gypsum board joints, one board edge per joint face + bottom (2/A4.2 key note 9)",
        "source": "2/A4.2",
-       "op": "3 joints 2/A4.2 (ABOVE) only where both sides have board (above B.O. FRAMING 106'-10\"), Parts B / C side under the purlin ([PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01, -0.667): x 659 pt 5.167 + 7.672 + 0.40 bottom; S42-03 joint 5.167 + 8.202 + 0.40; y 1014 pt 5.167 + 8.723 + 0.40 = 41.30 LF"
+       "op": "3 joints 2/A4.2 (ABOVE) only where both sides have board (above B.O. FRAMING 106'-10\"), Parts B / C side under the purlin ([PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01, -0.667): x 659 pt 5.167 + 7.672 + 0.40 bottom; S42-03 joint 5.167 + 8.202 + 0.40; y 1014 pt 5.167 + 8.723 + 0.40 = 41.30 LF rev10: 2/A4.2 draws one DRMF-625-75 + one JDM-625 per joint face -> this row = JDM-625; DRMF-S42-JOINTS = DRMF-625-75 (same LF)"
+      },
+      {
+       "ref": "DRMF-S42-JOINTS",
+       "kind": "shadow_molding",
+       "lf": 41.3,
+       "source": "2/A4.2",
+       "label": "FRY REGLET 'DRMF-625-75' reveal molding at the gypsum board joints, one board edge per joint face + bottom (2/A4.2 key note 9)",
+       "op": "same joints / LF as JDM-S42-JOINTS under the purlin ([PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01): x 659 pt 5.167 + 7.672 + 0.40; S42-03 joint 5.167 + 8.202 + 0.40; y 1014 pt 5.167 + 8.723 + 0.40 = 41.30 LF"
       }
      ]
     },
@@ -901,7 +909,7 @@
   {
    "label": "G09 est.09 -> RFI-10",
    "decision_date": "2026-11-01",
-   "decisions": "+ 600S200-54 by spacing, L4x4x3/16 clip angles, 2x2x14ga clips (already CLIP-2X2-S42-03, kept at this canon's count). Decision = the members are carried; quantities (member length / purlin spacing, not printed) are [PENDIENTE] RFI-19 (rev6), option A carried",
+   "decisions": "+ 600S200-54 by spacing, L4x4x3/16 clip angles, 2x2x14ga clips (already CLIP-2X2-S42-03, kept at this canon's count). Decision = the members are carried; quantities (member length / purlin spacing, not printed) are [PENDIENTE] RFI-19 (rev6), option A carried rev10: counts not labelled on S5.1 / S4.1; 1/S5.1 draws no clip / L4x4 at S42-02 -> 14 / 12 kept, RFI-26 (B 22 / 19)",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -965,7 +973,7 @@
   {
    "label": "G10+G22 est.10 / est.22 -> RFI-12",
    "decision_date": "2026-11-01",
-   "decisions": "fixture backing carried: grab bars (10/A4.1) + toilet accessories / wall-hung fixtures / water heater platform (A4.1 notes, rev9, sizes RFI-24); FRT parapet / T.O. stud nailers EXCLUDED Div. 06; continuous 14/A4.1 blocking: no object (overlay_sin_objeto.md)",
+   "decisions": "fixture backing carried: grab bars (10/A4.1) + toilet accessories / wall-hung fixtures / water heater platform (A4.1 notes, rev9, sizes RFI-24); FRT parapet / T.O. stud nailers EXCLUDED Div. 06; continuous 14/A4.1 blocking: no object (overlay_sin_objeto.md) rev10: 14/A4.1 key 12 = 'WALL CONSTRUCTION' (unambiguous) -> 0 carried, RFI-25 (B +100.67 LF)",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -1653,7 +1661,7 @@
   {
    "label": "G18 est.18",
    "decision_date": "2026-11-01",
-   "decisions": "+ control joints in S21",
+   "decisions": "+ control joints (decision 18 = scope). rev10: count / location per A1.1 3.A as printed: S21 at the A2.1 key-23 masonry CJs, S42-01 (38'-8\" > 30 ft), 7/A3.2 vee joints at the piers; RFI-27 (B = 30 ft rule, -101.25 LF)",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -1661,11 +1669,29 @@
       {
        "ref": "CJ-S21",
        "familia": "control joint",
-       "qty": 87.29,
+       "qty": 188.54,
+       "unit": "LF",
+       "source": "A2.1",
+       "op": "A1.1 note 3.A (S21 lengths > 30 ft) 'locate joints at locations of masonry control joints shown on exterior elevations': A2.1 key 23 masonry control joints north 5 x S21-N 14.844 + east 5 x S21-E 13.958 + south 3 x S21-S 14.844 = 74.22 + 69.79 + 44.53 = 188.54 LF (full board height: joint positions not dimensioned, no scaling; joints behind S24 in the office / R.R. zone may only need the 9'-0\" -> top band); heights under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01. RFI-27 option B (30 ft rule, 2 per wall) = 87.29 LF. img img_rev10/rev10_p3_A2.1_key23_masonry_CJ_S21.png",
+       "label": "gypsum board control joint at the masonry control joints (A1.1 note 3.A, A2.1 key 23)"
+      },
+      {
+       "ref": "CJ-S42-01",
+       "familia": "control joint",
+       "qty": 26.51,
        "unit": "LF",
        "source": "A1.1",
-       "op": "A1.1 note 3.A control joints in partition lengths over 30 ft: S21-N (ROUNDUP(85.000/30)-1 = 2) x 14.844 + S21-E (ROUNDUP(84.646/30)-1 = 2) x 13.958 + S21-S (ROUNDUP(85.000/30)-1 = 2) x 14.844 = 87.29 LF (heights under the purlin: [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01)",
-       "label": "gypsum board control joint (A1.1 note 3.A)"
+       "op": "A1.1 note 3.A: S42-01 38'-8\" (A1.1) > 30 ft with no 2/A4.2 joint drawn: ROUNDUP(38.667/30)-1 = 1 joint x both faces (Parts Area A 12.0 + Parts Area C 14.505 under the purlin, [PENDIENTE] assumed 8\" purlin depth per PEMB shop drawing (not printed), estimator decision RFI-01) = 26.51 LF (RFI-27); no doubled studs carried (2/A4.2 not referenced here)",
+       "label": "gypsum board control joint in S42-01 (A1.1 note 3.A)"
+      },
+      {
+       "ref": "CJ-VEE-PIERS",
+       "familia": "control joint",
+       "qty": 27.73,
+       "unit": "LF",
+       "source": "7/A3.2",
+       "op": "7/A3.2 'VEE-SHAPED CONTROL JOINT' between the S21 board and the pier board: north pier EXT-MS1 / S21-W1 (7/A3.2 marked on A1.1), Parts Area A, pier board 12.0 (RFI-16 A) = 12.0 + south pier EXT-MS2 / S21-W2, Parts Area B, same assembly, not marked = 15.729 under the purlin (conservative, RFI-27) = 27.73 LF. img img_rev10/rev10_p3_A3.2_7_vee_joint_A1.1_piers.png",
+       "label": "vee-shaped control joint S21 / pier board (7/A3.2)"
       }
      ]
     }
@@ -2052,6 +2078,17 @@
     },
     "items_key": {
      "misc_items": "ref"
+    }
+   }
+  },
+  {
+   "label": "G-rev10 element 6 review (taping base note)",
+   "decision_date": "2026-10-31",
+   "decisions": "Joint compound / tape base kept complete (8,126.14 SF 5/8\" X + W.R.); Level 5 separate",
+   "source": "SKILL.md A9-A11 / Paso 2 / Alturas checklist",
+   "takeoff": {
+    "inputs_notas": {
+     "TAPING-BASE": "Joint compound and tape on the full 5/8\" type X + type X W.R. board (8,126.14 SF): SKILL.md A9-A11 yield x (5/8\" regular + MR + 3/8\"), without sheathing / glass mat / FRT / 1/4\" base layer; no exclusion for board behind W-4 panels (R.R. 103 / 104, 555.34 SF) or above the C-1 ACT. The set has no fire-tape-above-ceiling note and no finish level (A1.2 / A1.1): declared Level 4 everywhere (Level 5 = separate row 6,432.72 SF on W-2). Possible reduction if the estimator allows fire-tape only above the ACT / Level 2 behind the panels: not taken"
     }
    }
   }
