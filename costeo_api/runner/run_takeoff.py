@@ -104,6 +104,54 @@ def log(msg):
     print(time.strftime("%H:%M:%S"), msg, flush=True)
 
 
+ITEM_LISTS = ("misc_items", "blocking_items", "plywood_strips", "trim_items")
+
+
+def items_sin_lectura(sin_objeto, ov):
+    """R80e.56: decisiones del estimador sobre items (misc / blocking / plywood / trim) que la lectura no trae ->
+    [(lista, id, operación de la decisión)]: el item existe en el plano (la decisión cita su N/HOJA) y falta en la LECTURA."""
+    def op_de(o, k):
+        if isinstance(o, dict):
+            for kk, v in o.items():
+                if kk == k and isinstance(v, dict):
+                    d = v.get("__dict__", v)
+                    t = (d.get("op") or d.get("source") or {})
+                    return str(t.get("__set__", t) if isinstance(t, dict) else t)
+                r = op_de(v, k)
+                if r:
+                    return r
+        elif isinstance(o, list):
+            for v in o:
+                r = op_de(v, k)
+                if r:
+                    return r
+        return ""
+    vistos, out = set(), []
+    for x in sin_objeto or []:
+        if x.get("derivado") or x.get("list") not in ITEM_LISTS or (x["list"], x["id"]) in vistos:
+            continue
+        vistos.add((x["list"], x["id"]))
+        out.append((x["list"], x["id"], op_de(ov, x["id"])))
+    return out
+
+
+def walls_sin_lectura(sin_objeto, ref):
+    """R80e.56 (walls): decisiones del estimador sobre walls / soffit sides que la lectura no trae, salvo los que la
+    decisión excluye (EXISTING / EXCLUDED) -> [("walls", tag + element, ubicación)]. Solo tag, element y ubicación:
+    nunca la longitud ni la altura de la referencia (las mide la lectura)."""
+    por_id = {w.get("id"): w for w in (ref or {}).get("walls") or []}
+    out, vistos = [], set()
+    for x in sin_objeto or []:
+        w = por_id.get(x.get("id"))
+        if x.get("derivado") or x.get("list") != "walls" or not w or x["id"] in vistos:
+            continue
+        if re.search(r"EXT|EXCLUDED|EXISTING", f"{x['id']} {w.get('status', '')} {w.get('scope', '')}", re.I):
+            continue
+        vistos.add(x["id"])
+        out.append(("walls", f"type {w.get('tag') or '-'} {w.get('element', 'wall')}", str(w.get("location") or "")[:160]))
+    return out
+
+
 def env_api(base, key):
     """Entorno de claude -p: sin las variables de la sesión anfitriona (ANTHROPIC_BASE_URL, CLAUDE_CODE_*, CLAUDECODE...),
     que harían pasar la llamada por la autenticación de la sesión en vez de la API key (R80e.55)."""
@@ -128,6 +176,7 @@ class Runner:
         self.gasto = 0.0
         self.pasos = []
         self.env = dict(os.environ, BITACORA=os.path.join(self.k, "bitacora.jsonl"))
+        self.api = not a.dry_run and not a.sin_api       # banco de regresión: re-arma lecturas guardadas sin llamar a la API
         self.plan_sheets = [x.strip() for x in (a.trade_plan_sheets or a.plan_sheet).split(",") if x.strip()]
 
     # ---------------------------------------------------------------- utilidades
@@ -164,8 +213,8 @@ class Runner:
 
     def claude(self, paso, prompt_file, extra, cwd=None, tope=None):
         """Una llamada `claude -p`. Nunca en dry-run. Corta si el tope total se pasaría."""
-        if self.a.dry_run:
-            raise Alto("BUG: claude() llamado en dry-run")
+        if self.a.dry_run or self.a.sin_api:
+            raise Alto(f"BUG: claude() llamado en {'dry-run' if self.a.dry_run else 'banco sin API'}")
         tope = tope if tope is not None else STEP_BUDGET.get(paso.split(":")[0], 2.0)
         if tope < 0.25:
             raise Alto(f"{paso}: sin presupuesto restante en el tope del paso")
@@ -467,6 +516,9 @@ class Runner:
                 f" (+ {len(self.sin_objeto) - len(dec)} nodes derivados)")
         else:
             c = overlay.aplicar_canon(leido, ov)
+        tc = completitud.topar_caras(c)         # R80e.57: board de la face hasta el ceiling de su cuarto (con decisiones)
+        if tc:
+            log(f"   R80e.57: {len(tc)} face(s) bajadas al ceiling de su cuarto ({', '.join(f'{w} {h}->{hc}' for w, _, h, hc in tc[:8])})")
         t = overlay.aplicar_takeoff(json.load(open(os.path.join(self.k, "takeoff.json"))), ov)
         dst = os.path.join(self.k, "etapas", "4_canon", "takeoff_canon.json")
         mapa = os.path.join(self.k, "etapas", "0_mapa", "SHEET_MAP.md")
@@ -686,7 +738,7 @@ class Runner:
         log("   API key verificada (claude -p con entorno limpio, sin la autenticación de la sesión)")
 
     def correr(self):
-        if not self.a.dry_run:
+        if self.api:
             self.verificar_key()
         self.preparar()
         self.proceso()
@@ -697,13 +749,13 @@ class Runner:
         for ronda in range(MAX_CORRECCION + 1):
             canon = self.decisiones(canon_ab)
             altas = completitud.caras_sobre_ceiling(json.load(open(canon)))     # R80e.48
-            if altas and not self.a.dry_run and ronda < MAX_CORRECCION:
+            if altas and self.api and ronda < MAX_CORRECCION:
                 self.corregir(canon_ab, ronda + 1, origen="R80e.48 altura por cara contra el ceiling del cuarto", texto="\n".join(
                     f"{self.mapa_inv(w)} face {r}: height_ft {h} > ceiling del cuarto {hc} ft (A-121): el board va al ceiling "
                     f"(+6\" partition note) salvo que el detalle diga full height" for w, r, h, hc in altas))
                 continue
             ab = completitud.aberturas_faltantes(json.load(open(canon)), self._fuentes_conteo()[4])   # R80e.54
-            if ab and not self.a.dry_run and ronda < MAX_CORRECCION:
+            if ab and self.api and ronda < MAX_CORRECCION:
                 self.corregir(canon_ab, ronda + 1, origen="R80e.54 openings: el set tiene door schedule y ningún wall trae openings",
                               texto=f"door schedule en {', '.join(ab)} y 0 openings en los walls. Cada puerta / framed opening "
                               f"de las plantas que cae en un wall del canon va en openings[] de ESE wall: ref ('Door N'), kind, "
@@ -711,10 +763,20 @@ class Runner:
                               f"planta), source con N/HOJA. Si la leíste como hueco entre dos walls, el wall corre a través de la "
                               f"puerta (R70.3) y la puerta va dentro. Puertas en walls fuera de alcance no se agregan.")
                 continue
+            faltan = items_sin_lectura(self.sin_objeto, json.load(open(self.a.overlay)) if self.a.overlay else {})
+            faltan += walls_sin_lectura(self.sin_objeto, json.load(open(self.a.ref_base)) if self.a.ref_base else {})
+            if faltan and self.api and ronda < MAX_CORRECCION and not getattr(self, "_r56", False):
+                self._r56 = True                # R80e.56: una sola vuelta (lo que siga sin item queda sin objeto, declarado)
+                self.corregir(canon_ab, ronda + 1, origen="R80e.56 decisiones del estimador sobre items que la lectura no trae",
+                              texto="items del plano que el estimador cuantificó y la lectura no trae (agrégalos en su lista con "
+                              "ESE id exacto, leyendo su detalle N/HOJA: material, unidad, fuente; la cantidad la pone la decisión; los walls / "
+                              "soffit sides se leen y miden en el plano en esa ubicación, cada pieza como wall propio):\n"
+                              + "\n".join(f"  - {l} {i}: {op[:260]}" for l, i, op in faltan))
+                continue
             try:
                 self.calcular(canon)
             except Alto as e:                   # canon.py rechaza la lectura con las decisiones: también es lectura
-                if self.a.dry_run or ronda == MAX_CORRECCION or "ERROR canon.py" not in str(e):
+                if not self.api or ronda == MAX_CORRECCION or "ERROR canon.py" not in str(e):
                     raise
                 self.corregir(canon_ab, ronda + 1, texto=[l for l in str(e).splitlines() if "ERROR canon.py" in l][0])
                 continue
@@ -724,14 +786,14 @@ class Runner:
             except Alto as e:
                 alc = [l for l in str(e).splitlines() if (l.startswith("FALLA") and "ALC-" in l) or
                        (l.startswith("NO SE ARMA") and "reglas.py compuerta" not in l)]
-                if self.a.dry_run or ronda == MAX_CORRECCION or ("reglas" not in str(e) and not alc):
+                if not self.api or ronda == MAX_CORRECCION or ("reglas" not in str(e) and not alc):
                     raise
                 if alc:                         # alcance marcado cuantificado sin cantidad: falta en la LECTURA
                     self.corregir(canon_ab, ronda + 1, texto="\n".join(alc), origen="alcances.py / plantilla_excel.py")
                 else:
                     self.corregir(canon_ab, ronda + 1)
         cmp_ = self.comparar_excel(x)
-        cob = self.cobertura(x)
+        cob = self.cobertura(x) if not self.a.sin_api else None   # banco: sin API, sin cobertura
         out = {"reconciliacion": {"emparejados": self.emparejados, "sin_objeto": self.sin_objeto},
                "cobertura": cob, "excel": x, "gasto_usd": round(self.gasto, 4), "pasos": self.pasos, "diferencias_AB": n,
                "reglas_fallas_backcheck": nf, "lecturas_no_usadas": getattr(self, "lecturas_no_usadas", []),
@@ -761,6 +823,8 @@ def main():
     ap.add_argument("--reusar-resolucion", help="canon AB de una resolución ya pagada (con --reusar-lecturas)")
     ap.add_argument("--continuar-lados", help="con --reusar-lecturas: lados (A,B) a los que se paga una continuación")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--sin-api", action="store_true", help="banco de regresión: lecturas y resolución reusadas, sin ninguna "
+                    "llamada (sin correcciones ni cobertura)")
     a = ap.parse_args()
     if a.tope_cobertura:
         STEP_BUDGET["cobertura"] = a.tope_cobertura

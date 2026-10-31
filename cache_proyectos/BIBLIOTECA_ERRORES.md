@@ -102,6 +102,11 @@ Los términos del trade van en inglés.
 | BE-89 | 31-oct | La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T) | nodos.py deriva L / T / free de las bands cuando > 60 % es free (R80e.53) | cada wall con exactamente 2 extremos (canon.py lo valida) |
 | BE-90 | 31-oct | La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples | completitud.aberturas_faltantes manda la lectura a corrección (R80e.54) | la referencia (12 openings) pasa; la #6b (0) queda marcada |
 | BE-91 | 31-oct | claude -p heredó ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión: las corridas no usaron $TAKEOFF_API_KEY (session_id = la de la sesión anfitriona; la consola sin costo) | env_api limpia el entorno; verificar_key hace una llamada mínima antes de gastar y corta si falta la key, 401 o hereda la sesión (R80e.55) | sin key -> fail-fast; key inválida -> 401 detenido antes del paso 1 |
+| BE-92 | 31-oct | 22 decisiones del estimador sobre items (cross members, nested bracing, cement board base, FRT backboard) quedaron sin objeto porque la lectura no trae el item | items_sin_lectura manda la lista (id + operación con N/HOJA) a una corrección (R80e.56) | la #7 lista los 18 items; el dry-run no cambia |
+| BE-93 | 31-oct | R80e.43 (W.R. en wet rooms por atributo) cayó sobre faces a la altura del stud (25 ft contra ceiling 9'-0"): W.R. +44.7 % en la #5 | completitud.topar_caras baja la face al ceiling de su cuarto después de las decisiones (R80e.57) | banco: #5 W.R. −10.1 %, Type X +7.3 %; ningún material empeora |
+| BE-94 | 31-oct | Los arreglos se validaban contra una sola lectura: uno mejoraba una corrida y empeoraba otra | Banco de regresión sin API con las lecturas guardadas (#3, #4, #5, #7) y aceptación solo si nada empeora (R80e.58) | correr_banco.py --base marca ▲ / ▼ por material y corrida |
+| BE-95 | 31-oct | Errores sistemáticos de lectura que se repiten en todas las corridas: la figura curva leída en 4 piezas, un wall de la planta ampliada a 4.5 ft contra 12.2 ft acotados, puertas leídas como huecos | Prompt de lectura R80e.59 (cuerdas, cadenas cerradas, puertas dentro del wall); R80e.54 / R80e.56 por corrección | se mide en la corrida #8 (lecturas nuevas) |
+| BE-96 | 31-oct | Leí el take-off humano de la prueba ciega O'Reilly/Olive Garden para elegir proyecto (R80e.59) |
 
 ---
 
@@ -184,6 +189,6 @@ Back-check final: 44 PASS · 0 FAIL · 3 N/A (con BE-57), en `barnes_noble/takeo
 ## Corrida B&N rev13 (2026-10-28)
 Back-check final: 44 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev13.md`). En la primera pasada falló BE-47: RFI-13 y RFI-22 tenían las cifras viejas; se corrigió con la nota "Revised by RFI-55".
 
-## BE-92 — Leí el take-off humano de la prueba ciega (31-oct)
+## BE-96 — Leí el take-off humano de la prueba ciega (31-oct)
 Error: para elegir un proyecto de prueba abrí con read_file_content "Oreally Takeoff.xlsx" y "OLIVE GARDEN TAKEOFF.xlsx"; el usuario quiere que la referencia humana sea solo suya.
-Prueba: en una prueba de exactitud, ¿algún paso abrió/leyó un take-off humano o se lo pasó a una sesión? Debe ser NO. Selección solo por metadatos. Regla R80e.56.
+Prueba: en una prueba de exactitud, ¿algún paso abrió/leyó un take-off humano o se lo pasó a una sesión? Debe ser NO. Selección solo por metadatos. Regla R80e.59.

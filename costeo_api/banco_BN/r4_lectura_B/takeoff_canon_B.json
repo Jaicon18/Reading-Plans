@@ -1,0 +1,3907 @@
+{
+ "constants": {
+  "plan_scale_pt_per_ft": {
+   "value": 9.0,
+   "source": "A-101 1/8\"=1'-0\" (9 pt per ft; checked vs 12'-11\" corridor dimension)"
+  },
+  "plan_scale_by_sheet": {
+   "A-101": {
+    "value": 9.0,
+    "source": "A-101 1/8\"=1'-0\""
+   },
+   "A-221": {
+    "value": 36.0,
+    "source": "A-221 1/2\"=1'-0\""
+   }
+  },
+  "carrying_direction": {
+   "value": "E-W",
+   "source": "A-121 USG drywall suspension system details: main runners E-W assumed (not printed) - RFI-B10"
+  },
+  "dashed_none_reason": "A-221 V c=2374.0 and c=2463.0 (233.8..439.8 pt, 5.72 ft) are hidden-line dashes inside the chase / soffit section detail drawing on the right of A-221 (section cut: stud cavity, 5/8\" GWB, 5/8\" FRT plywood, WD-1), not plan soffit sides or ceiling edges"
+ },
+ "walls": [
+  {
+   "id": "W2-1",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 496.0,
+    "c1": 500.2,
+    "lo": 560.0,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 94.56,
+   "length_source": "[DERIVED] band 560..1411 pt = 851 pt / 9 pt per ft (1/8\"=1'-0\", A-101); no printed overall dimension",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Stock Room 111 / Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "room_source": "A-101 / A-121 (stock room OPEN TO DECK)",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101 / Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D11",
+     "kind": "door",
+     "ro_w_ft": 4.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 11 (sales area to stock room 4'-0\" x 7'-0\")",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-2",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1288.0,
+    "c1": 1292.5,
+    "lo": 500.2,
+    "hi": 1012.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 56.87,
+   "length_source": "[DERIVED] band 500..1012 pt = 512 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Corridor 110 / Break Room 106 / Manager's Office 105",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" above ceiling (Partition Notes 3, A-410) [DERIVED 9.0 + 0.5]",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D4",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 4 (3'-0\" x 7'-0\")",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-3a",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1336.7,
+    "c1": 1341.2,
+    "lo": 555.0,
+    "hi": 622.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 7.44,
+   "length_source": "[DERIVED] band 555..622 pt = 67 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (printed 6\" + 3'-4\" + 3'-1\" chain A-101 supports)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" women's restroom + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Women's Restroom 109",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D9",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 9 (3'-0\" x 7'-0\")",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-3b",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1336.7,
+    "c1": 1341.2,
+    "lo": 658.0,
+    "hi": 759.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 11.22,
+   "length_source": "[DERIVED] band 658..759 pt = 101 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" men's restroom + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Men's Restroom 108",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "length_ft": 7.9,
+     "length_source": "band 658..723 pt / 9",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Janitor Closet 107",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "A-121 janitor closet OPEN TO DECK + A-200 'WALL TO DECK'",
+     "length_ft": 3.32,
+     "length_source": "band 723..759 pt / 9 (A-200 enlarged plan: 4'-0\" closet clear)",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D8",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 8",
+     "header_type_source": "A-500"
+    },
+    {
+     "ref": "D7",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 7",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-4",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 555.0,
+    "c1": 559.2,
+    "lo": 1341.2,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 7.76,
+   "length_source": "[DERIVED] band 1341..1411 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Women's Restroom 109",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-5",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 719.5,
+    "c1": 723.7,
+    "lo": 1341.2,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 7.76,
+   "length_source": "[DERIVED] band 1341..1411 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Restroom 108",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Janitor Closet 107",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "A-121 janitor closet OPEN TO DECK",
+     "source": "2/A-410"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-6",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 759.0,
+    "c1": 763.2,
+    "lo": 1292.5,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 13.17,
+   "length_source": "[DERIVED] band 1292..1411 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Corridor 110",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "length_ft": 5.4,
+     "length_source": "band 1292..1341 pt / 9",
+     "source": "2/A-410"
+    },
+    {
+     "side": "A",
+     "room": "Janitor Closet 107",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "A-121 janitor closet OPEN TO DECK",
+     "length_ft": 7.77,
+     "length_source": "band 1341..1411 pt / 9",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Break Room 106",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D5",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 5",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-7",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 930.5,
+    "c1": 934.7,
+    "lo": 1292.5,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 13.17,
+   "length_source": "[DERIVED] band 1292..1411 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Break Room 106",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Manager's Office 105",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 ACT-3 9'-0\" + 6\" [DERIVED]",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D6",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 6",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-8",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 604.5,
+    "c1": 609.0,
+    "lo": 1486.0,
+    "hi": 1934.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 49.78,
+   "length_source": "[DERIVED] band 1486..1934 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (printed 42'-0\" + 2'-3\" + 3'-0\" R.O. door 14 chain, A-101)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Storage 112",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D14",
+     "kind": "door",
+     "ro_w_ft": 3.0,
+     "head_ft": 7.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 14 (3'-0\" x 7'-0\")",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W2-9",
+   "tag": "2",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 1486.0,
+    "c1": 1490.5,
+    "lo": 580.0,
+    "hi": 604.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 2.7,
+   "length_source": "[DERIVED] band 580..604 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (storage west return; depth 5'-0\" printed minus 1.5' wall zone)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A-410 (partition type 2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "2/A-410",
+   "detail_source": "2/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Storage 112",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (A-226A elev 6 printed overall 15'-0\"; DERIVED, RFI-B1)",
+     "source": "2/A-410"
+    }
+   ],
+   "source": "2/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W5-1",
+   "tag": "5",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 636.5,
+    "c1": 643.5,
+    "lo": 1357.0,
+    "hi": 1411.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 6.0,
+   "length_source": "[DERIVED] band 1357..1411 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (A-200 enlarged: 7\" chase stem)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "6\"",
+   "stud_source": "5/A-410 (partition type 5)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "5/A-410",
+   "detail_source": "5/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Restroom 109",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "5/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Men's Restroom 108",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "5/A-410"
+    }
+   ],
+   "source": "5/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W5-2",
+   "tag": "5",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1352.5,
+    "c1": 1357.0,
+    "lo": 617.5,
+    "hi": 662.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 5.0,
+   "length_source": "[DERIVED] band 617..662 pt / 9 pt per ft (1/8\"=1'-0\", A-101)",
+   "length_basis": "face to face",
+   "height_ft": 9.5,
+   "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+   "stud_size": "6\"",
+   "stud_source": "5/A-410 (partition type 5)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "5/A-410",
+   "detail_source": "5/A-410",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sink alcove (corridor side)",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "5/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Women's / Men's Restroom",
+     "board": "5/8 MR",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "A-121 GWB 9'-0\" + 6\" [DERIVED]",
+     "source": "5/A-410"
+    }
+   ],
+   "source": "5/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W3-1",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1184.5,
+    "c1": 1188.3,
+    "lo": 1502.5,
+    "hi": 1611.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 12.1,
+   "length_source": "[DERIVED] band 1502.5..1611.5 pt / 9 pt per ft (1/8\"=1'-0\", A-101); printed 12'-0\" between 5\" end stubs (A-101)",
+   "length_basis": "face to face",
+   "height_ft": 8.0,
+   "height_source": "3/A-410 printed 8'-0\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "3/A-410 (partition type 3)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "3/A-410",
+   "detail_source": "3/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "3/A-410 8'-0\" A.F.F. T.O. WALL",
+     "source": "3/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "3/A-410 8'-0\" A.F.F. T.O. WALL",
+     "source": "3/A-410"
+    }
+   ],
+   "source": "3/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W3-2",
+   "tag": "3",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1184.5,
+    "c1": 1188.3,
+    "lo": 1724.5,
+    "hi": 1833.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 12.1,
+   "length_source": "[DERIVED] band 1724.5..1833.5 pt / 9 pt per ft (1/8\"=1'-0\", A-101); printed 12'-0\" between 5\" end stubs (A-101)",
+   "length_basis": "face to face",
+   "height_ft": 8.0,
+   "height_source": "3/A-410 printed 8'-0\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "3/A-410 (partition type 3)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "3/A-410",
+   "detail_source": "3/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "3/A-410 8'-0\" A.F.F. T.O. WALL",
+     "source": "3/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "3/A-410 8'-0\" A.F.F. T.O. WALL",
+     "source": "3/A-410"
+    }
+   ],
+   "source": "3/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W4-1",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 837.0,
+    "c1": 840.8,
+    "lo": 1545.0,
+    "hi": 1626.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 9.0,
+   "length_source": "[CONFIRMED] printed 9'-0\" (A-101 top dimension of type 4)",
+   "length_basis": "face to face",
+   "height_ft": 7.5,
+   "height_source": "4/A-410 printed 7'-6\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "4/A-410 (partition type 4)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "4/A-410",
+   "detail_source": "4/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    }
+   ],
+   "source": "4/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W4-2",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "H",
+    "c0": 1069.7,
+    "c1": 1073.5,
+    "lo": 1545.0,
+    "hi": 1626.0,
+    "sheet": "A-101"
+   },
+   "length_ft": 9.0,
+   "length_source": "[CONFIRMED] printed 9'-0\" (A-101 bottom end of type 4)",
+   "length_basis": "face to face",
+   "height_ft": 7.5,
+   "height_source": "4/A-410 printed 7'-6\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "4/A-410 (partition type 4)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "4/A-410",
+   "detail_source": "4/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    }
+   ],
+   "source": "4/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W4-3",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 1545.0,
+    "c1": 1548.8,
+    "lo": 837.5,
+    "hi": 1073.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 26.2,
+   "length_source": "[DERIVED] chord 837.5..1073.5 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (curved wall R32'-9\" printed; arc length RFI-B2)",
+   "length_basis": "face to face",
+   "height_ft": 7.5,
+   "height_source": "4/A-410 printed 7'-6\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "4/A-410 (partition type 4)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "4/A-410",
+   "detail_source": "4/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    }
+   ],
+   "arc_note": "curved wall R32'-9\" (A-101); chord used, arc length ~ +3% (RFI-B2)",
+   "source": "4/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W4-4",
+   "tag": "4",
+   "element": "wall",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "V",
+    "c0": 1626.0,
+    "c1": 1629.8,
+    "lo": 837.5,
+    "hi": 1073.5,
+    "sheet": "A-101"
+   },
+   "length_ft": 26.2,
+   "length_source": "[DERIVED] chord 837.5..1073.5 pt / 9 pt per ft (1/8\"=1'-0\", A-101) (curved wall R32'-9\" printed; arc length RFI-B2)",
+   "length_basis": "face to face",
+   "height_ft": 7.5,
+   "height_source": "4/A-410 printed 7'-6\" A.F.F. T.O. WALL",
+   "stud_size": "3-5/8\"",
+   "stud_source": "4/A-410 (partition type 4)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "4/A-410",
+   "detail_source": "4/A-410",
+   "top_track": "cap track at T.O. wall (partial height) per 3/A-410 and 4/A-410",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    },
+    {
+     "side": "B",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 7.5,
+     "height_source": "4/A-410 7'-6\" A.F.F. T.O. WALL",
+     "source": "4/A-410"
+    }
+   ],
+   "arc_note": "curved wall R32'-9\" (A-101); chord used, arc length ~ +3% (RFI-B2)",
+   "source": "4/A-410",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH1-N",
+   "tag": "H1",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 333.0,
+    "c1": 353.0,
+    "lo": 169.0,
+    "hi": 1232.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 29.53,
+   "length_source": "[DERIVED] 28'-5 7/8\" printed interior (A-221) + 2 x 7-1/4\" wall; band 169..1232 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "G/A-221 (enlarged-plan type H1)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "G/A-221",
+   "detail_source": "G/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "G/A-221"
+    }
+   ],
+   "source": "G/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH1-W",
+   "tag": "H1",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 169.0,
+    "c1": 191.0,
+    "lo": 353.0,
+    "hi": 792.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 12.19,
+   "length_source": "[CONFIRMED-ish] printed 12'-2\" interior (A-221); band 353..792 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "G/A-221 (enlarged-plan type H1)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "G/A-221",
+   "detail_source": "G/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Exterior side",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "G/A-221"
+    }
+   ],
+   "source": "G/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WE2-1",
+   "tag": "E2",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 792.0,
+    "c1": 812.0,
+    "lo": 169.0,
+    "hi": 1232.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 29.53,
+   "length_source": "[DERIVED] band 169..1232 pt / 36 pt per ft (1/2\"=1'-0\", A-221) (same as H1-N interior 28'-5 7/8\" printed + 2 x wall)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "E/A-221 (enlarged-plan type E2)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "E/A-221",
+   "detail_source": "E/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [],
+   "source": "E/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WE1-1",
+   "tag": "E1",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 792.0,
+    "c1": 812.0,
+    "lo": 1232.0,
+    "hi": 2070.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 23.28,
+   "length_source": "[DERIVED] band 1232..2070 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "E/A-221 (enlarged-plan type E1)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "E/A-221",
+   "detail_source": "E/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Cafe Sales",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "E/A-221"
+    }
+   ],
+   "source": "E/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH2a-1",
+   "tag": "H2a",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1215.0,
+    "c1": 1232.4,
+    "lo": 353.0,
+    "hi": 792.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 12.19,
+   "length_source": "[DERIVED] band 353..792 pt / 36 pt per ft (1/2\"=1'-0\", A-221); door 3 R.O. 4'-0\" inside run (R70.3)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "G/A-221 (enlarged-plan type H2a)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "G/A-221",
+   "detail_source": "G/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe Sales",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "G/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Cafe Work Room 104",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "G/A-221"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "D3",
+     "kind": "door",
+     "ro_w_ft": 4.0,
+     "head_ft": 8.0,
+     "source": "A-500",
+     "status": "CONFIRMADO",
+     "header_type": "2-piece track header (no header schedule in set; estimator decision R80e.34 #4)",
+     "pieces": 2,
+     "pieces_source": "A-500",
+     "header_source": "A-500",
+     "source_info": "Door Schedule A-500 door 3 (4'-0\" x 8'-0\")",
+     "header_type_source": "A-500"
+    }
+   ],
+   "source": "G/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH2b-1",
+   "tag": "H2b",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 268.0,
+    "c1": 284.0,
+    "lo": 721.0,
+    "hi": 792.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 1.97,
+   "length_source": "[DERIVED] band 721..792 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 15.0,
+   "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "G/A-221 (enlarged-plan type H2b)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "G/A-221",
+   "detail_source": "G/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe Work Room 104",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "G/A-221 'WALL TO DECK' B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "source": "G/A-221"
+    }
+   ],
+   "part_of": "WE2-1",
+   "source": "G/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH3a-1",
+   "tag": "H3a",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 88.0,
+    "c1": 112.0,
+    "lo": 1100.6,
+    "hi": 1250.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 4.15,
+   "length_source": "[DERIVED] band 1100..1250 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 11.0,
+   "height_source": "A-121 Grab & Go GWB 7'-1\" soffit; wall to deck RFI",
+   "stud_size": "6\"",
+   "stud_source": "H/A-221 (enlarged-plan type H3a)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "H/A-221",
+   "detail_source": "H/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Grab & Go",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 11.0,
+     "height_source": "H/A-221 'plywood to top of WD-1'; GWB above (WD-1 height RFI)",
+     "source": "H/A-221"
+    }
+   ],
+   "source": "H/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WH3b-1",
+   "tag": "H3b",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1100.6,
+    "c1": 1124.0,
+    "lo": 112.0,
+    "hi": 333.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 6.14,
+   "length_source": "[CONFIRMED-ish] printed 6'-2\" HOLD (A-221); band 112..333 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 8.0,
+   "height_source": "H/A-221 H3b 'plywood up to 8'-0\"'",
+   "stud_size": "6\"",
+   "stud_source": "H/A-221 (enlarged-plan type H3b)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "H/A-221",
+   "detail_source": "H/A-221",
+   "top_track": "slip / deflection track to deck per 4/A-410 and 8/A-410 (gap to deck per detail)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Grab & Go",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "H/A-221 H3b plywood up to 8'-0\"",
+     "source": "H/A-221"
+    }
+   ],
+   "source": "H/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WA-1",
+   "tag": "A",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 356.5,
+    "c1": 367.0,
+    "lo": 1595.0,
+    "hi": 1956.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 10.0,
+   "length_source": "[DERIVED] band 1595..1956 pt / 36 pt per ft (1/2\"=1'-0\", A-221) (printed 10'-5 1/4\" chain)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A/A-221 (enlarged-plan type A)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "A/A-221",
+   "detail_source": "A/A-221",
+   "top_track": "cap track at counter top (A/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Customer side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Cafe side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    }
+   ],
+   "source": "A/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WA-2",
+   "tag": "A",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "D",
+    "p0": [
+     1956.0,
+     362.0
+    ],
+    "p1": [
+     2064.0,
+     474.0
+    ],
+    "sheet": "A-221",
+    "faces_top": [
+     [
+      1956.0,
+      356.5
+     ],
+     [
+      2064.0,
+      468.5
+     ]
+    ],
+    "faces_bottom": [
+     [
+      1956.0,
+      367.0
+     ],
+     [
+      2064.0,
+      479.0
+     ]
+    ]
+   },
+   "length_ft": 4.24,
+   "length_source": "[DERIVED] diagonal p0..p1 = 152.7 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A/A-221 (enlarged-plan type A)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "A/A-221",
+   "detail_source": "A/A-221",
+   "top_track": "cap track at counter top (A/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Customer side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Cafe side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    }
+   ],
+   "source": "A/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WA-3",
+   "tag": "A",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 2053.0,
+    "c1": 2068.0,
+    "lo": 474.0,
+    "hi": 696.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 6.17,
+   "length_source": "[DERIVED] band 474..696 pt / 36 pt per ft (1/2\"=1'-0\", A-221) (printed 6'-4 1/8\" chain)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A/A-221 (enlarged-plan type A)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "A/A-221",
+   "detail_source": "A/A-221",
+   "top_track": "cap track at counter top (A/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Customer side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Cafe side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "A/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+     "source": "A/A-221"
+    }
+   ],
+   "source": "A/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WB-1",
+   "tag": "B",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1373.0,
+    "c1": 1395.0,
+    "lo": 356.5,
+    "hi": 471.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 3.18,
+   "length_source": "[DERIVED] band 356..471 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "B/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "B/A-221 (enlarged-plan type B)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "B/A-221",
+   "detail_source": "B/A-221",
+   "top_track": "cap track at counter top (B/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Customer side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "B/A-221",
+     "source": "B/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Pastry case side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "B/A-221",
+     "source": "B/A-221"
+    }
+   ],
+   "source": "B/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC-1",
+   "tag": "C",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1579.0,
+    "c1": 1597.0,
+    "lo": 356.5,
+    "hi": 471.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 3.18,
+   "length_source": "[DERIVED] band 356..471 pt / 36 pt per ft (1/2\"=1'-0\", A-221)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "C/A-221 printed 2'-8 1/2\" B.O. SLAB TO T.O. STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C/A-221 (enlarged-plan type C)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "C/A-221",
+   "detail_source": "C/A-221",
+   "top_track": "cap track at counter top (C/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Pastry case side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "C/A-221",
+     "source": "C/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Equipment side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "C/A-221",
+     "source": "C/A-221"
+    }
+   ],
+   "source": "C/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WD-1",
+   "tag": "D",
+   "element": "wall",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 461.0,
+    "c1": 471.0,
+    "lo": 1373.0,
+    "hi": 1597.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 6.2,
+   "length_source": "[DERIVED] band 1373..1597 pt / 36 pt per ft (1/2\"=1'-0\", A-221) (printed 6'-1 3/4\" interior)",
+   "length_basis": "face to face",
+   "height_ft": 2.708,
+   "height_source": "D/A-221 printed 1'-0\" ... B.O.SLAB TO T.O.STUD",
+   "stud_size": "3-5/8\"",
+   "stud_source": "D/A-221 (enlarged-plan type D)",
+   "oc_in": 16,
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule: gauge with max unsupported height at 16\" O.C. >= wall height [DERIVED]",
+   "detail": "D/A-221",
+   "detail_source": "D/A-221",
+   "top_track": "cap track at counter top (D/A-221)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Pastry cafe side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "D/A-221",
+     "source": "D/A-221"
+    },
+    {
+     "side": "B",
+     "room": "Cafe side",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 2.708,
+     "height_source": "D/A-221",
+     "source": "D/A-221"
+    }
+   ],
+   "source": "D/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-1",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1388.4,
+    "c1": 1406.4,
+    "lo": 1154.0,
+    "hi": 1172.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-2",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1118.4,
+    "c1": 1136.4,
+    "lo": 1154.0,
+    "hi": 1172.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-3",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 578.4,
+    "c1": 596.4,
+    "lo": 1154.0,
+    "hi": 1172.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-4",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 578.4,
+    "c1": 596.4,
+    "lo": 796.9,
+    "hi": 814.9
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-5",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 848.4,
+    "c1": 866.4,
+    "lo": 797.0,
+    "hi": 815.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-6",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1118.4,
+    "c1": 1136.4,
+    "lo": 796.9,
+    "hi": 814.9
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-7",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1388.4,
+    "c1": 1406.4,
+    "lo": 797.0,
+    "hi": 815.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-8",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1658.4,
+    "c1": 1676.4,
+    "lo": 796.9,
+    "hi": 814.9
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WC25-9",
+   "tag": "C25",
+   "element": "column_wrap",
+   "sheet": "A-101",
+   "page": 6,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-101",
+    "c0": 1658.4,
+    "c1": 1676.4,
+    "lo": 1154.0,
+    "hi": 1172.0
+   },
+   "length_ft": 8.0,
+   "length_source": "[DERIVED] 4 faces x 2'-0\" (A-101 keynote C25: new 24\"x24\" GWB surround)",
+   "length_basis": "finished perimeter",
+   "height_ft": 8.0,
+   "height_source": "A-101 keynote C25: framing from slab to 8'-0\" AFF",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-101 keynote C25: 3 5/8\" metal framing",
+   "oc_in": 16,
+   "oc_source": "default 16\" O.C. (A-410 schedule) - not printed in C25 - RFI-B11",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "fos_chain_faces": [
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    },
+    {
+     "value": [
+      2.0
+     ],
+     "source": "A-101 keynote C25 printed 24\"x24\" surround"
+    }
+   ],
+   "sheathing_none_reason": "A-101 keynote C25 calls only 5/8\" GWB over 3 5/8\" metal framing; no plywood / sheathing printed",
+   "detail": "A-101",
+   "detail_source": "A-101 keynote C25",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Sales Area 101",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "A-101 keynote C25 (8'-0\" AFF)",
+     "length_ft": 8.0,
+     "length_source": "4 x 2'-0\" printed 24\"x24\"",
+     "room_source": "A-101",
+     "source": "A-101 keynote C25"
+    }
+   ],
+   "source": "A-101 keynote C25",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WF-1",
+   "tag": "F",
+   "element": "column_wrap",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-221",
+    "c0": 1971.0,
+    "c1": 2048.0,
+    "lo": 708.0,
+    "hi": 791.0
+   },
+   "length_ft": 8.56,
+   "length_source": "[DERIVED] inner faces 4 x 2.14 ft = 77 pt / 36 pt per ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+   "length_basis": "inside faces",
+   "height_ft": 15.0,
+   "height_source": "B.O.D. 15'-0\" (DERIVED - RFI-B1)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "F/A-221 Section Wall Typ. F",
+   "oc_in": 16,
+   "oc_source": "F/A-221 'METAL STUDS @ 16\" O.C.'",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "faces_ft": [
+    2.14,
+    2.14,
+    2.14,
+    2.14
+   ],
+   "fos_chain_faces": [
+    {
+     "measured_op": "77 pt / 36 pt per ft = 2.14 ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+     "source": "A-221 plan 1"
+    },
+    {
+     "measured_op": "77 pt / 36 pt per ft = 2.14 ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+     "source": "A-221 plan 1"
+    },
+    {
+     "measured_op": "77 pt / 36 pt per ft = 2.14 ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+     "source": "A-221 plan 1"
+    },
+    {
+     "measured_op": "77 pt / 36 pt per ft = 2.14 ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+     "source": "A-221 plan 1"
+    }
+   ],
+   "sheathing": {
+    "material": "frt_5_8",
+    "source": "F/A-221 '5/8\" FRT PLYWOOD'"
+   },
+   "detail": "F/A-221",
+   "detail_source": "F/A-221",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe Sales",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "length_ft": 8.56,
+     "length_source": "inside faces 4 x 2.14",
+     "room_source": "A-221 plan 1",
+     "source": "F/A-221"
+    }
+   ],
+   "source": "F/A-221",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "WI-1",
+   "tag": "I",
+   "element": "pier",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-221",
+    "c0": 1277.0,
+    "c1": 1317.0,
+    "lo": 85.1,
+    "hi": 125.1
+   },
+   "tag_ids": [
+    "PT0048"
+   ],
+   "length_ft": 0.604,
+   "length_source": "[CONFIRMED] 7 1/4\" printed at Grab & Go return (A-221 plan 1)",
+   "length_basis": "printed",
+   "height_ft": 15.0,
+   "height_source": "I/A-221 wall to deck - B.O.D. 15'-0\" (DERIVED - RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "I/A-221 '6\" METAL STUDS @ 16\" O.C.' (the stud is the host wall's end stud)",
+   "oc_in": 16,
+   "oc_source": "I/A-221",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "parts": [
+    {
+     "stud_size": "6\"",
+     "studs_drawn": {
+      "value": 0,
+      "source": "I/A-221: end cap finish only; framing is the host wall end stud"
+     }
+    }
+   ],
+   "bottom_track": false,
+   "top_track": false,
+   "track_source": "I/A-221 end cap of host wall - track counted on host wall",
+   "bracing_rows": 0,
+   "bracing_rows_source": "I/A-221 end cap - bracing counted on host wall",
+   "type_lf_basis": {
+    "value": 0.604,
+    "source": "7 1/4\" printed at Grab & Go return (A-221 plan 1)"
+   },
+   "jamb_strips_none_reason": "A-221 plan 1 / I/A-221: no storefront jamb strip at this end cap",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "I/A-221 5/8\" GWB from top of WD-1 to deck; B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "length_ft": 0.604,
+     "length_source": "7 1/4\" printed at Grab & Go return (A-221 plan 1)",
+     "room_source": "A-221",
+     "source": "I/A-221"
+    }
+   ],
+   "source": "I/A-221",
+   "status": "DERIVADO",
+   "detail": "I/A-221",
+   "detail_source": "I/A-221"
+  },
+  {
+   "id": "WI-2",
+   "tag": "I",
+   "element": "pier",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-221",
+    "c0": 1277.0,
+    "c1": 1317.0,
+    "lo": 329.0,
+    "hi": 369.0
+   },
+   "tag_ids": [
+    "PT0049"
+   ],
+   "length_ft": 0.604,
+   "length_source": "[CONFIRMED] 7 1/4\" printed at Grab & Go return (A-221 plan 1)",
+   "length_basis": "printed",
+   "height_ft": 15.0,
+   "height_source": "I/A-221 wall to deck - B.O.D. 15'-0\" (DERIVED - RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "I/A-221 '6\" METAL STUDS @ 16\" O.C.' (the stud is the host wall's end stud)",
+   "oc_in": 16,
+   "oc_source": "I/A-221",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "parts": [
+    {
+     "stud_size": "6\"",
+     "studs_drawn": {
+      "value": 0,
+      "source": "I/A-221: end cap finish only; framing is the host wall end stud"
+     }
+    }
+   ],
+   "bottom_track": false,
+   "top_track": false,
+   "track_source": "I/A-221 end cap of host wall - track counted on host wall",
+   "bracing_rows": 0,
+   "bracing_rows_source": "I/A-221 end cap - bracing counted on host wall",
+   "type_lf_basis": {
+    "value": 0.604,
+    "source": "7 1/4\" printed at Grab & Go return (A-221 plan 1)"
+   },
+   "jamb_strips_none_reason": "A-221 plan 1 / I/A-221: no storefront jamb strip at this end cap",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "I/A-221 5/8\" GWB from top of WD-1 to deck; B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "length_ft": 0.604,
+     "length_source": "7 1/4\" printed at Grab & Go return (A-221 plan 1)",
+     "room_source": "A-221",
+     "source": "I/A-221"
+    }
+   ],
+   "source": "I/A-221",
+   "status": "DERIVADO",
+   "detail": "I/A-221",
+   "detail_source": "I/A-221"
+  },
+  {
+   "id": "WI-3",
+   "tag": "I",
+   "element": "pier",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-221",
+    "c0": 1215.4,
+    "c1": 1255.4,
+    "lo": 615.9,
+    "hi": 655.9
+   },
+   "tag_ids": [
+    "PT0050"
+   ],
+   "length_ft": 1.0,
+   "length_source": "[CONFIRMED] 1'-0\" printed at H2a end cap (A-221 plan 1)",
+   "length_basis": "printed",
+   "height_ft": 15.0,
+   "height_source": "I/A-221 wall to deck - B.O.D. 15'-0\" (DERIVED - RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "I/A-221 '6\" METAL STUDS @ 16\" O.C.' (the stud is the host wall's end stud)",
+   "oc_in": 16,
+   "oc_source": "I/A-221",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "parts": [
+    {
+     "stud_size": "6\"",
+     "studs_drawn": {
+      "value": 0,
+      "source": "I/A-221: end cap finish only; framing is the host wall end stud"
+     }
+    }
+   ],
+   "bottom_track": false,
+   "top_track": false,
+   "track_source": "I/A-221 end cap of host wall - track counted on host wall",
+   "bracing_rows": 0,
+   "bracing_rows_source": "I/A-221 end cap - bracing counted on host wall",
+   "type_lf_basis": {
+    "value": 1.0,
+    "source": "1'-0\" printed at H2a end cap (A-221 plan 1)"
+   },
+   "jamb_strips_none_reason": "A-221 plan 1 / I/A-221: no storefront jamb strip at this end cap",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "I/A-221 5/8\" GWB from top of WD-1 to deck; B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "length_ft": 1.0,
+     "length_source": "1'-0\" printed at H2a end cap (A-221 plan 1)",
+     "room_source": "A-221",
+     "source": "I/A-221"
+    }
+   ],
+   "source": "I/A-221",
+   "status": "DERIVADO",
+   "detail": "I/A-221",
+   "detail_source": "I/A-221"
+  },
+  {
+   "id": "WI-4",
+   "tag": "I",
+   "element": "pier",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "BOX",
+    "sheet": "A-221",
+    "c0": 2071.4,
+    "c1": 2111.4,
+    "lo": 760.4,
+    "hi": 800.4
+   },
+   "tag_ids": [
+    "PT0051"
+   ],
+   "length_ft": 3.25,
+   "length_source": "[CONFIRMED] 3'-3\" printed east face of type F box (A-221 plan 1)",
+   "length_basis": "printed",
+   "height_ft": 15.0,
+   "height_source": "I/A-221 wall to deck - B.O.D. 15'-0\" (DERIVED - RFI-B1)",
+   "stud_size": "6\"",
+   "stud_source": "I/A-221 '6\" METAL STUDS @ 16\" O.C.' (the stud is the host wall's end stud)",
+   "oc_in": 16,
+   "oc_source": "I/A-221",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "parts": [
+    {
+     "stud_size": "6\"",
+     "studs_drawn": {
+      "value": 0,
+      "source": "I/A-221: end cap finish only; framing is the host wall end stud"
+     }
+    }
+   ],
+   "bottom_track": false,
+   "top_track": false,
+   "track_source": "I/A-221 end cap of host wall - track counted on host wall",
+   "bracing_rows": 0,
+   "bracing_rows_source": "I/A-221 end cap - bracing counted on host wall",
+   "type_lf_basis": {
+    "value": 3.25,
+    "source": "3'-3\" printed east face of type F box (A-221 plan 1)"
+   },
+   "jamb_strips_none_reason": "A-221 plan 1 / I/A-221: no storefront jamb strip at this end cap",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Cafe",
+     "board": "5/8 regular",
+     "layers": 1,
+     "height_ft": 15.0,
+     "height_source": "I/A-221 5/8\" GWB from top of WD-1 to deck; B.O.D. 15'-0\" (DERIVED, RFI-B1)",
+     "length_ft": 3.25,
+     "length_source": "3'-3\" printed east face of type F box (A-221 plan 1)",
+     "room_source": "A-221",
+     "source": "I/A-221"
+    }
+   ],
+   "source": "I/A-221",
+   "status": "DERIVADO",
+   "detail": "I/A-221",
+   "detail_source": "I/A-221"
+  },
+  {
+   "id": "SSA-1",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "H",
+    "c0": 332.0,
+    "c1": 332.0,
+    "lo": 1248.2,
+    "hi": 2068.0,
+    "sheet": "A-221"
+   },
+   "length_ft": 22.77,
+   "length_source": "[DERIVED] dashed SOFFIT ABOVE line 1248.2..2068.0 pt / 36 pt per ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+   "length_basis": "line length",
+   "height_ft": 4.0,
+   "height_source": "[DERIVED] B.O.D. 15'-0\" - soffit bottom 11.0 ft (A-121 GWB soffit - RFI-B10)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "soffit sections A-221 '3 5/8\" METAL STUD @ 16\" O.C. UP TO DECK'",
+   "oc_in": 16,
+   "oc_source": "A-221 soffit section",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "detail": "A-221 soffit section",
+   "detail_source": "A-221 soffit sections (Grab & Go / Cafe Sales Area)",
+   "faces_none_reason": "soffit GWB faces are in the soffit scope (RFI-B10, soffit extents not dimensioned); side framing only here",
+   "source": "A-221 Cafe Sales soffit north edge (E/A-221 soffit section)",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "SSA-2",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1248.0,
+    "c1": 1248.0,
+    "lo": 109.8,
+    "hi": 331.9,
+    "sheet": "A-221"
+   },
+   "length_ft": 6.17,
+   "length_source": "[DERIVED] dashed SOFFIT ABOVE line 109.8..331.9 pt / 36 pt per ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+   "length_basis": "line length",
+   "height_ft": 8.0,
+   "height_source": "[DERIVED] B.O.D. 15'-0\" - soffit bottom 7.0 ft (A-121 GWB soffit - RFI-B10)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "soffit sections A-221 '3 5/8\" METAL STUD @ 16\" O.C. UP TO DECK'",
+   "oc_in": 16,
+   "oc_source": "A-221 soffit section",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "detail": "A-221 soffit section",
+   "detail_source": "A-221 soffit sections (Grab & Go / Cafe Sales Area)",
+   "faces_none_reason": "soffit GWB faces are in the soffit scope (RFI-B10, soffit extents not dimensioned); side framing only here",
+   "source": "A-221 Grab & Go soffit east side (B/A-221 soffit section)",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "SSA-3",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 1232.0,
+    "c1": 1232.0,
+    "lo": 109.8,
+    "hi": 331.9,
+    "sheet": "A-221"
+   },
+   "length_ft": 6.17,
+   "length_source": "[DERIVED] dashed SOFFIT ABOVE line 109.8..331.9 pt / 36 pt per ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+   "length_basis": "line length",
+   "height_ft": 8.0,
+   "height_source": "[DERIVED] B.O.D. 15'-0\" - soffit bottom 7.0 ft (A-121 GWB soffit - RFI-B10)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "soffit sections A-221 '3 5/8\" METAL STUD @ 16\" O.C. UP TO DECK'",
+   "oc_in": 16,
+   "oc_source": "A-221 soffit section",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "detail": "A-221 soffit section",
+   "detail_source": "A-221 soffit sections (Grab & Go / Cafe Sales Area)",
+   "faces_none_reason": "soffit GWB faces are in the soffit scope (RFI-B10, soffit extents not dimensioned); side framing only here",
+   "source": "A-221 Grab & Go soffit west side (B/A-221 soffit section)",
+   "status": "DERIVADO"
+  },
+  {
+   "id": "SSA-4",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "band": {
+    "ori": "V",
+    "c0": 2068.0,
+    "c1": 2068.0,
+    "lo": 331.6,
+    "hi": 695.8,
+    "sheet": "A-221"
+   },
+   "length_ft": 10.12,
+   "length_source": "[DERIVED] dashed SOFFIT ABOVE line 331.6..695.8 pt / 36 pt per ft (A-221 1/2\"=1'-0\" (36 pt/ft))",
+   "length_basis": "line length",
+   "height_ft": 4.0,
+   "height_source": "[DERIVED] B.O.D. 15'-0\" - soffit bottom 11.0 ft (A-121 GWB soffit - RFI-B10)",
+   "stud_size": "3-5/8\"",
+   "stud_source": "soffit sections A-221 '3 5/8\" METAL STUD @ 16\" O.C. UP TO DECK'",
+   "oc_in": 16,
+   "oc_source": "A-221 soffit section",
+   "gauge": 20,
+   "gauge_source": "1/A-410 Metal Stud Schedule [DERIVED]",
+   "detail": "A-221 soffit section",
+   "detail_source": "A-221 soffit sections (Grab & Go / Cafe Sales Area)",
+   "faces_none_reason": "soffit GWB faces are in the soffit scope (RFI-B10, soffit extents not dimensioned); side framing only here",
+   "source": "A-221 Cafe Sales soffit east edge (E/A-221 soffit section)",
+   "status": "DERIVADO"
+  }
+ ],
+ "details": {
+  "2/A-410": {
+   "source": "2/A-410",
+   "layers_per_face": 1,
+   "layers_source": "2/A-410",
+   "title": "Non-Rated Full Height Partition",
+   "notes": "5/8\" gypsum board each side",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "2/A-410"
+  },
+  "3/A-410": {
+   "source": "3/A-410",
+   "layers_per_face": 1,
+   "layers_source": "3/A-410",
+   "title": "Non-Rated Partial Height Partition (8'-0\")",
+   "notes": "5/8\" gypsum board each side",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "3/A-410"
+  },
+  "4/A-410": {
+   "source": "4/A-410",
+   "layers_per_face": 1,
+   "layers_source": "4/A-410",
+   "title": "Non-Rated Partial Height Partition (7'-6\")",
+   "notes": "5/8\" gypsum board each side",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "4/A-410"
+  },
+  "5/A-410": {
+   "source": "5/A-410",
+   "layers_per_face": 1,
+   "layers_source": "5/A-410",
+   "title": "Non-Rated Full Height Partition 6\"",
+   "notes": "5/8\" gypsum board each side",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "5/A-410"
+  },
+  "G/A-221": {
+   "source": "G/A-221",
+   "layers_per_face": 1,
+   "layers_source": "G/A-221",
+   "title": "Section Wall Typ. H1/H2",
+   "notes": "H1/H2 sales side 5/8 FRT plywood + 5/8 gypsum; cafe work room side per H2a/H2b",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "G/A-221"
+  },
+  "E/A-221": {
+   "source": "E/A-221",
+   "layers_per_face": 1,
+   "layers_source": "E/A-221",
+   "title": "Section Wall Typ. E1/E2",
+   "notes": "E1 1/2 cement board; E2 5/8 FRT plywood (one face; other face existing / void)",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "E/A-221"
+  },
+  "H/A-221": {
+   "source": "H/A-221",
+   "layers_per_face": 1,
+   "layers_source": "H/A-221",
+   "title": "Section Wall Typ. H3",
+   "notes": "5/8 gypsum grab & go side; 5/8 FRT plywood sales side",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "H/A-221"
+  },
+  "A/A-221": {
+   "source": "A/A-221",
+   "layers_per_face": 1,
+   "layers_source": "A/A-221",
+   "title": "Section Through Front Counter",
+   "notes": "customer: 1/2 cement board + 3/4 FRT plywood; cafe: FRP over 1/2 cement board",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "A/A-221"
+  },
+  "B/A-221": {
+   "source": "B/A-221",
+   "layers_per_face": 1,
+   "layers_source": "B/A-221",
+   "title": "Section Wall Typ. B",
+   "notes": "customer: 3/4 FRT plywood + 1/2 cement board; pastry: 1/2 cement board",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "B/A-221"
+  },
+  "C/A-221": {
+   "source": "C/A-221",
+   "layers_per_face": 1,
+   "layers_source": "C/A-221",
+   "title": "Section Wall Typ. C",
+   "notes": "pastry: 1/2 cement board; equipment: FRP over 1/2 cement board",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "C/A-221"
+  },
+  "D/A-221": {
+   "source": "D/A-221",
+   "layers_per_face": 1,
+   "layers_source": "D/A-221",
+   "title": "Section Wall Typ. D",
+   "notes": "pastry cafe side / cafe side 1/2 cement board",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "D/A-221"
+  },
+  "F/A-221": {
+   "source": "F/A-221",
+   "layers_per_face": 1,
+   "layers_source": "F/A-221",
+   "title": "Section Wall Typ. F",
+   "notes": "3 5/8\" metal studs @ 16\" O.C.; 5/8\" FRT plywood; 5/8\" gypsum board",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "F/A-221"
+  },
+  "I/A-221": {
+   "source": "I/A-221",
+   "layers_per_face": 1,
+   "layers_source": "I/A-221",
+   "title": "Section Wall Typ. I",
+   "notes": "6\" metal studs @ 16\" O.C.; 5/8\" FRT plywood to top of WD-1, 5/8\" GWB above to deck",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "I/A-221"
+  },
+  "A-101": {
+   "source": "A-101",
+   "layers_per_face": 1,
+   "layers_source": "A-101",
+   "title": "Keynote C25",
+   "notes": "new 24x24 GWB surround, 5/8\" metal framing from slab to 8'-0\" AFF",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "A-101"
+  },
+  "A-221 soffit section": {
+   "source": "A-221 soffit section",
+   "layers_per_face": 1,
+   "layers_source": "A-221 soffit section",
+   "title": "Soffit Sections Grab & Go / Cafe Sales Area",
+   "notes": "3 5/8\" metal stud @ 16\" O.C. up to deck; 5/8\" GWB",
+   "sealant_none_reason": "acoustical sealant EXCLUDED in all projects (estimator standing order, R77.12)",
+   "sealant_source": "A-221 soffit section"
+  }
+ },
+ "nodes": [
+  {
+   "id": "N1",
+   "kind": "free",
+   "source": "A-101: both ends of the stock-room / corridor wall land on existing exterior walls (free end, stud counted)",
+   "wall": "W2-1"
+  },
+  {
+   "id": "N2",
+   "kind": "free",
+   "source": "A-101: both ends of the stock-room / corridor wall land on existing exterior walls (free end, stud counted)",
+   "wall": "W2-1"
+  },
+  {
+   "id": "N3",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W2-2",
+   "through": "W2-1"
+  },
+  {
+   "id": "N4",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-2"
+  },
+  {
+   "id": "N5",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W2-3a",
+    "W2-4"
+   ]
+  },
+  {
+   "id": "N6",
+   "kind": "free",
+   "source": "A-101 / A-200: end at 4'-0\" sink alcove opening (printed 4'-0\")",
+   "wall": "W2-3a"
+  },
+  {
+   "id": "N7",
+   "kind": "free",
+   "source": "A-101 / A-200: end at 4'-0\" sink alcove opening (printed 4'-0\")",
+   "wall": "W2-3b"
+  },
+  {
+   "id": "N8",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W2-3b",
+   "through": "W2-6"
+  },
+  {
+   "id": "N9",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-4"
+  },
+  {
+   "id": "N10",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W2-5",
+   "through": "W2-3b"
+  },
+  {
+   "id": "N11",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-5"
+  },
+  {
+   "id": "N12",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W2-6",
+   "through": "W2-2"
+  },
+  {
+   "id": "N13",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-6"
+  },
+  {
+   "id": "N14",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W2-7",
+   "through": "W2-2"
+  },
+  {
+   "id": "N15",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-7"
+  },
+  {
+   "id": "N16",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W2-8",
+    "W2-9"
+   ]
+  },
+  {
+   "id": "N17",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-8"
+  },
+  {
+   "id": "N18",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W2-9"
+  },
+  {
+   "id": "N19",
+   "kind": "T",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "branch": "W5-1",
+   "through": "W5-2"
+  },
+  {
+   "id": "N20",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W5-1"
+  },
+  {
+   "id": "N21",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W5-2"
+  },
+  {
+   "id": "N22",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W5-2"
+  },
+  {
+   "id": "N23",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W3-1"
+  },
+  {
+   "id": "N24",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W3-1"
+  },
+  {
+   "id": "N25",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W3-2"
+  },
+  {
+   "id": "N26",
+   "kind": "free",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "wall": "W3-2"
+  },
+  {
+   "id": "N27",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W4-1",
+    "W4-3"
+   ]
+  },
+  {
+   "id": "N28",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W4-1",
+    "W4-4"
+   ]
+  },
+  {
+   "id": "N29",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W4-2",
+    "W4-3"
+   ]
+  },
+  {
+   "id": "N30",
+   "kind": "L",
+   "source": "A-101 plan junction (corner / T / free end read at 300 dpi)",
+   "walls": [
+    "W4-2",
+    "W4-4"
+   ]
+  },
+  {
+   "id": "N31",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WH1-N",
+    "WH1-W"
+   ]
+  },
+  {
+   "id": "N32",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WE2-1",
+    "WH1-W"
+   ]
+  },
+  {
+   "id": "N33",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WH1-N",
+    "WH2a-1"
+   ]
+  },
+  {
+   "id": "N34",
+   "kind": "split",
+   "source": "A-221: one continuous south wall, type changes E2 -> E1 at workroom / cafe line",
+   "walls": [
+    "WE2-1",
+    "WE1-1"
+   ]
+  },
+  {
+   "id": "N35",
+   "kind": "T",
+   "source": "A-221 enlarged plan junction",
+   "branch": "WH2a-1",
+   "through": "WE1-1"
+  },
+  {
+   "id": "N36",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WE1-1"
+  },
+  {
+   "id": "N37",
+   "kind": "T",
+   "source": "A-221 enlarged plan junction",
+   "branch": "WH2b-1",
+   "through": "WE2-1"
+  },
+  {
+   "id": "N38",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WH2b-1"
+  },
+  {
+   "id": "N39",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WH3a-1",
+    "WH3b-1"
+   ]
+  },
+  {
+   "id": "N40",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WH3a-1"
+  },
+  {
+   "id": "N41",
+   "kind": "T",
+   "source": "A-221 enlarged plan junction",
+   "branch": "WH3b-1",
+   "through": "WH1-N"
+  },
+  {
+   "id": "N42",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WA-1"
+  },
+  {
+   "id": "N43",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WA-1",
+    "WA-2"
+   ]
+  },
+  {
+   "id": "N44",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WA-2",
+    "WA-3"
+   ]
+  },
+  {
+   "id": "N45",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WA-3"
+  },
+  {
+   "id": "N46",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WB-1"
+  },
+  {
+   "id": "N47",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WB-1",
+    "WD-1"
+   ]
+  },
+  {
+   "id": "N48",
+   "kind": "L",
+   "source": "A-221 enlarged plan junction",
+   "walls": [
+    "WD-1",
+    "WC-1"
+   ]
+  },
+  {
+   "id": "N49",
+   "kind": "free",
+   "source": "A-221 enlarged plan junction",
+   "wall": "WC-1"
+  },
+  {
+   "id": "N-SSA-1-1",
+   "kind": "free",
+   "wall": "SSA-1",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-1-2",
+   "kind": "free",
+   "wall": "SSA-1",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-2-1",
+   "kind": "free",
+   "wall": "SSA-2",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-2-2",
+   "kind": "free",
+   "wall": "SSA-2",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-3-1",
+   "kind": "free",
+   "wall": "SSA-3",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-3-2",
+   "kind": "free",
+   "wall": "SSA-3",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-4-1",
+   "kind": "free",
+   "wall": "SSA-4",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  },
+  {
+   "id": "N-SSA-4-2",
+   "kind": "free",
+   "wall": "SSA-4",
+   "source": "A-221 plan 1: dashed soffit side end (free end)"
+  }
+ ],
+ "ceilings": [
+  {
+   "room": "Women's Restroom 109",
+   "system": "furring",
+   "area_sf": 67.3,
+   "board": "5/8 regular",
+   "height_ft": 9.0,
+   "perimeter_ft": 32.9,
+   "ns_ft": 7.76,
+   "ew_ft": 8.67,
+   "source": "A-121",
+   "detail": "A-121",
+   "height_source": "A-121 GWB tag 9'-0\"",
+   "system_callout": {
+    "detail": "A-121",
+    "on_plan": true,
+    "source": "A-121 USG drywall suspension system details (legend: suspended gypsum board ceiling)"
+   },
+   "hanger_drop_ft": {
+    "value": 6.0,
+    "source": "B.O.D. 15'-0\" (A-226A elev 6) - GWB ceiling 9'-0\" (A-121); RFI-B1"
+   }
+  },
+  {
+   "room": "Men's Restroom 108",
+   "system": "furring",
+   "area_sf": 67.3,
+   "board": "5/8 regular",
+   "height_ft": 9.0,
+   "perimeter_ft": 32.9,
+   "ns_ft": 7.76,
+   "ew_ft": 8.67,
+   "source": "A-121",
+   "detail": "A-121",
+   "height_source": "A-121 GWB tag 9'-0\"",
+   "system_callout": {
+    "detail": "A-121",
+    "on_plan": true,
+    "source": "A-121 USG drywall suspension system details (legend: suspended gypsum board ceiling)"
+   },
+   "hanger_drop_ft": {
+    "value": 6.0,
+    "source": "B.O.D. 15'-0\" (A-226A elev 6) - GWB ceiling 9'-0\" (A-121); RFI-B1"
+   }
+  }
+ ],
+ "plywood_strips": [
+  {
+   "ref": "FRT-WH1-N",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 29.53,
+   "width_ft": 15.0,
+   "source": "G/A-221",
+   "label": "5/8\" FRT PLYWOOD (G/A-221)",
+   "op": "29.53 LF x 15.0 ft (cafe work room face)"
+  },
+  {
+   "ref": "FRT-WH1-W",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 12.19,
+   "width_ft": 15.0,
+   "source": "G/A-221",
+   "label": "5/8\" FRT PLYWOOD (G/A-221)",
+   "op": "12.19 LF x 15.0 ft (cafe work room face)"
+  },
+  {
+   "ref": "FRT-WE2-1",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 29.53,
+   "width_ft": 15.0,
+   "source": "E/A-221",
+   "label": "E2 5/8\" FRT PLYWOOD (E/A-221)",
+   "op": "29.53 LF x 15.0 ft (work room face)"
+  },
+  {
+   "ref": "FRT-WH2a-1",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 12.19,
+   "width_ft": 15.0,
+   "source": "G/A-221",
+   "label": "5/8\" FRT PLYWOOD (G/A-221 H2a)",
+   "op": "12.19 LF x 15.0 ft (cafe sales face)"
+  },
+  {
+   "ref": "FRT-WH3a-1",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 4.15,
+   "width_ft": 11.0,
+   "source": "H/A-221",
+   "label": "5/8\" FRT PLYWOOD to top of WD-1 (H/A-221 H3a; WD-1 top RFI-B8)",
+   "op": "4.15 LF x 11.0 ft (sales face)"
+  },
+  {
+   "ref": "FRT-WH3b-1",
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "lf": 6.14,
+   "width_ft": 8.0,
+   "source": "H/A-221",
+   "label": "5/8\" FRT PLYWOOD up to 8'-0\" (H/A-221 H3b)",
+   "op": "6.14 LF x 8.0 ft (sales face)"
+  },
+  {
+   "ref": "FRT34-WA-1",
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "lf": 10.0,
+   "width_ft": 2.708,
+   "source": "A/A-221",
+   "label": "3/4\" FRT PLYWOOD SUBSTRATE (A/A-221, B/A-221)",
+   "op": "10.0 LF x 2.708 ft (customer face)"
+  },
+  {
+   "ref": "FRT34-WA-2",
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "lf": 4.24,
+   "width_ft": 2.708,
+   "source": "A/A-221",
+   "label": "3/4\" FRT PLYWOOD SUBSTRATE (A/A-221, B/A-221)",
+   "op": "4.24 LF x 2.708 ft (customer face)"
+  },
+  {
+   "ref": "FRT34-WA-3",
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "lf": 6.17,
+   "width_ft": 2.708,
+   "source": "A/A-221",
+   "label": "3/4\" FRT PLYWOOD SUBSTRATE (A/A-221, B/A-221)",
+   "op": "6.17 LF x 2.708 ft (customer face)"
+  },
+  {
+   "ref": "FRT34-WB-1",
+   "material": "frt_3_4",
+   "uso": "substrate",
+   "lf": 3.18,
+   "width_ft": 2.708,
+   "source": "B/A-221",
+   "label": "3/4\" FRT PLYWOOD SUBSTRATE (A/A-221, B/A-221)",
+   "op": "3.18 LF x 2.708 ft (customer face)"
+  }
+ ],
+ "blocking_items": [],
+ "trim_items": [],
+ "misc_items": [],
+ "wet_fixtures": [
+  {
+   "ref": "WF-W2-3a-Women's Restroom 109",
+   "wall": "W2-3a",
+   "room": "Women's Restroom 109",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-3b-Men's Restroom 108",
+   "wall": "W2-3b",
+   "room": "Men's Restroom 108",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-3b-Janitor Closet 107",
+   "wall": "W2-3b",
+   "room": "Janitor Closet 107",
+   "kind": "mop_sink",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-4-Women's Restroom 109",
+   "wall": "W2-4",
+   "room": "Women's Restroom 109",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-5-Men's Restroom 108",
+   "wall": "W2-5",
+   "room": "Men's Restroom 108",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-5-Janitor Closet 107",
+   "wall": "W2-5",
+   "room": "Janitor Closet 107",
+   "kind": "mop_sink",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W2-6-Janitor Closet 107",
+   "wall": "W2-6",
+   "room": "Janitor Closet 107",
+   "kind": "mop_sink",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W5-1-Women's Restroom 109",
+   "wall": "W5-1",
+   "room": "Women's Restroom 109",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W5-1-Men's Restroom 108",
+   "wall": "W5-1",
+   "room": "Men's Restroom 108",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W5-2-Sink alcove (corridor side)",
+   "wall": "W5-2",
+   "room": "Sink alcove (corridor side)",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  },
+  {
+   "ref": "WF-W5-2-Women's / Men's Restroom",
+   "wall": "W5-2",
+   "room": "Women's / Men's Restroom",
+   "kind": "water_closet",
+   "source": "A-200",
+   "back_source": "2/A-410 note 'RESTROOM / CAFE WALLS ONLY: W.R. gypsum board on wet side(s) only to B.O. gyp ceiling' + Partition Note 7 (toilet / janitor locations); fixtures on A-200 enlarged restroom plan"
+  }
+ ],
+ "deck_breaks_none_reason": "single roof deck at B.O.D. 15'-0\" shown on A-226A elevation 6; no structural sheets (S-series) in set, no HI/LOW line (A-121 / A-101 searched)",
+ "trim_none_reason": "no trim callout (corner bead / casing bead / shadow molding) is printed on A-410, A-221 or A-200 details for new partitions; stainless corner guards C22 (48\" A.F.F.) are by finish scope (A-101 key note C22) - RFI-B9",
+ "opening_schedule": {
+  "sources": [
+   "A-500",
+   "A-101",
+   "A-221",
+   "A-210",
+   "M-100 (listed in index A-000; sheet not in PDF)"
+  ],
+  "sources_none": {
+   "S": "no S-series sheets in the PDF; index A-000 lists A-series, DM, E, P only (S-207 appears inside a vendor cutsheet page 51, not a structural framing plan)"
+  },
+  "items": [
+   {
+    "ref": "D11"
+   },
+   {
+    "ref": "D4"
+   },
+   {
+    "ref": "D9"
+   },
+   {
+    "ref": "D8"
+   },
+   {
+    "ref": "D7"
+   },
+   {
+    "ref": "D5"
+   },
+   {
+    "ref": "D6"
+   },
+   {
+    "ref": "D14"
+   },
+   {
+    "ref": "D3"
+   },
+   {
+    "ref": "D1"
+   },
+   {
+    "ref": "D2"
+   },
+   {
+    "ref": "D10"
+   },
+   {
+    "ref": "D12"
+   },
+   {
+    "ref": "D13"
+   }
+  ],
+  "none": [
+   {
+    "ref": "D1",
+    "why": "A-500 door 1 vestibule to exterior: EXISTING V.I.F. storefront door (Div 08, existing)"
+   },
+   {
+    "ref": "D2",
+    "why": "A-500 door 2 sales area to vestibule: (2)3'-0\" x 8'-0\" aluminum / glass storefront (Div 08); vestibule framing in misc / RFI-B3"
+   },
+   {
+    "ref": "D10",
+    "why": "A-500 door 10 corridor to exterior: EXISTING V.I.F. door, refurbish only"
+   },
+   {
+    "ref": "D12",
+    "why": "A-500 door 12 stock room to exterior: EXISTING V.I.F."
+   },
+   {
+    "ref": "D13",
+    "why": "A-500 door 13 stock room to exterior: EXISTING V.I.F."
+   }
+  ]
+ },
+ "mep_sweep": {
+  "sheets": [
+   "M-100",
+   "M-101",
+   "M-102",
+   "P-101A",
+   "P-102A"
+  ],
+  "registro": {
+   "no_usable": {
+    "motivo": "M-series sheets are listed in the index but are NOT in the PDF set (pages 62-69 are letter-size narratives / comment letters; pages 35-60 are electrical, plumbing and vendor sheets without a wall-level duct plan): 0 duct crossings can be registered, and the registry would be < 25 matches (R80e.7)",
+    "source": "A-000 index; pages 35-69",
+    "img": "p63.png"
+   }
+  },
+  "source": "M-100 / M-102 / P-101A listed in index only: 0 crossings counted (RFI-B4: duct and pipe penetrations of new partitions to be added when M-sheets are issued)"
+ },
+ "edge_blocking_none_reason": "2/A-410, 3/A-410, 4/A-410, 5/A-410, 6/A-410 and A-410 partition notes reviewed: no detail labels stud blocking at the horizontal gypboard edge; 'PROVIDE BLOCKING' notes (C13 / C15 on A-101) are equipment blocking, carried in blocking_items",
+ "tile_base_none_reason": "A-200 restroom elevations show tile wainscot (TL / FT) on the restroom side of the corridor and chase walls, A-221 counters TL-5: no printed LF per wall; RFI-B5 asks for cement board under tile (standing order R77 / 58.7), delta ~ LF x 4'-6\"",
+ "frp_none_reason": "FRP-1 over 1/2\" cement board on cafe side of counters A and C (A-221 sections A, C); finish by finish contractor per A-225; FRP panel SF carried as RFI-B6",
+ "deflection_clips": {
+  "none_reason": "4/A-410 slip track / firestop detail and 8/A-410 top track detail show slip track (no deflection clips); A-410 stud notes searched",
+  "source": "4/A-410"
+ },
+ "accesorios_none": [],
+ "rfis": [
+  {
+   "id": "RFI-B1",
+   "question": "B.O.D. not printed in a section: 15'-0\" taken from A-226A elevation 6 overall dimension",
+   "delta": "each +-1'-0\" of deck = +-1 ft x stud count of full-height walls",
+   "fuentes_revisadas": [
+    "A-121 RCP",
+    "A-226A elevations",
+    "A-410 details",
+    "A-300 front elevation"
+   ]
+  },
+  {
+   "id": "RFI-B2",
+   "question": "Type 4 curved walls measured by chord (26.2 ft each); arc length is ~3% longer",
+   "delta": "+0.8 ft x 2 walls",
+   "fuentes_revisadas": [
+    "A-101",
+    "A-410"
+   ]
+  },
+  {
+   "id": "RFI-B3",
+   "question": "Vestibule A-210 nested 5\" x 5\" columns, 8\" box beam and 8\" joists @16\" not quantified (storefront / vestibule assembly V.I.F.)",
+   "delta": "4 nested columns x 11'-3 1/2\" + box beam 7'-8\" x 2",
+   "fuentes_revisadas": [
+    "A-210",
+    "A-101",
+    "A-500"
+   ]
+  },
+  {
+   "id": "RFI-B4",
+   "question": "M-series sheets not in PDF: duct penetrations of new partitions not counted",
+   "delta": "1 plate per 16\" of duct width + 1 sleeve per duct",
+   "fuentes_revisadas": [
+    "A-000 index",
+    "pages 35-69"
+   ]
+  },
+  {
+   "id": "RFI-B5",
+   "question": "Cement board under restroom tile wainscot (4'-6\") not quantified: no printed LF",
+   "delta": "LF of restroom walls x 4.5 ft",
+   "fuentes_revisadas": [
+    "A-200",
+    "A-225"
+   ]
+  },
+  {
+   "id": "RFI-B6",
+   "question": "FRP-1 panels in cafe counters A, C and workroom (A-225 / A-226A) not quantified",
+   "delta": "counter LF x height",
+   "fuentes_revisadas": [
+    "A-221",
+    "A-226A"
+   ]
+  },
+  {
+   "id": "RFI-B7",
+   "question": "Exterior types 1 / 1A / 1B / 1C: treated as existing shell (landlord). Confirm tenant gypsum on exterior walls not in scope",
+   "delta": "Exterior wall LF x 3-5/8\" stud x height + 5/8 gyp",
+   "fuentes_revisadas": [
+    "A-410",
+    "A-101",
+    "A-300"
+   ]
+  },
+  {
+   "id": "RFI-B8",
+   "question": "Top of WD-1 (wood panel finish) not dimensioned: 11'-0\" assumed for H3a plywood",
+   "delta": "+-1'-0\" x 4.15 LF",
+   "fuentes_revisadas": [
+    "A-221",
+    "A-226A"
+   ]
+  },
+  {
+   "id": "RFI-B9",
+   "question": "Stainless corner guards C22 and equipment blocking key notes C12 / C15 / C20 / C27 not located with LF",
+   "delta": "per C-note LF",
+   "fuentes_revisadas": [
+    "A-101",
+    "A-225",
+    "A-226A"
+   ]
+  },
+  {
+   "id": "RFI-B10",
+   "question": "GWB ceilings of Cafe (9'-0\", 11'-0\", 11'-6\"), Grab & Go (7'-1\") and Cafe Seating (12'-0\") on A-121 not measured: soffit extents not dimensioned in plan",
+   "delta": "area x (furring + carrying + hanger)",
+   "fuentes_revisadas": [
+    "A-121",
+    "A-221",
+    "A-226A"
+   ]
+  },
+  {
+   "id": "RFI-B11",
+   "question": "Keynote C25 (A-101) does not print stud O.C., gauge or board layers for the 24\"x24\" column surrounds; 16\" O.C., 20 ga and 1 layer 5/8\" assumed. Type F box inner faces and I end caps / soffit side heights derived (RFI-B1 / RFI-B10).",
+   "delta": "O.C. 24\" would remove about 1 stud per face",
+   "fuentes_revisadas": [
+    "A-101",
+    "A-221",
+    "A-410"
+   ]
+  },
+  {
+   "id": "RFI-B11",
+   "question": "Keynote C25 (A-101) does not print stud O.C., gauge or board layers for the 24\"x24\" column surrounds; 16\" O.C., 20 ga and 1 layer 5/8\" assumed. Type F box inner faces and I end caps / soffit side heights derived (RFI-B1 / RFI-B10).",
+   "delta": "O.C. 24\" would remove about 1 stud per face",
+   "fuentes_revisadas": [
+    "A-101",
+    "A-221",
+    "A-410"
+   ]
+  }
+ ],
+ "types_none_reason": {
+  "1": "A-410 detail 1 'Exterior CMU': existing 10\" CMU shell wall (legend 'EXISTING EXTERIOR WALL'), landlord / shell scope; no new framing",
+  "1A": "A-410 detail 1A 'Exterior Split-Faced CMU': existing shell, 5/8\" gyp 'BY FUTURE TENANT' shown but A-101 note 2: 'all items by G.C. unless listed by landlord'; no tenant partition at tag 1A in the new-work area (RFI-B7)",
+  "1B": "A-410 detail 1B 'Exterior Wall - Stone at CMU': existing shell, landlord scope",
+  "1C": "A-410 detail 1C 'Exterior Wall - Stone at Stud': existing shell storefront-side wall, landlord scope"
+ },
+ "dashed_none_reason": "A-221 V c=2374.0 and c=2463.0 (233.8..439.8 pt, 5.72 ft) are hidden-line dashes inside the chase / soffit section detail drawing on the right of A-221 (section cut: stud cavity, 5/8\" GWB, 5/8\" FRT plywood, WD-1), not plan soffit sides or ceiling edges"
+}

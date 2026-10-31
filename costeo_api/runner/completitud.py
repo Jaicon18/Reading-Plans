@@ -214,6 +214,27 @@ def aberturas_faltantes(c, titulos):
     return hojas
 
 
+def topar_caras(c, margen_ft=1.0):
+    """R80e.57 (R80e.48 por programa): la face que pasa el ceiling de su cuarto (+ margen) sin fuente 'full height'
+    baja al ceiling del cuarto (el board llega al ceiling; la altura del stud no cambia). -> [(wall, room, de, a)]"""
+    num = lambda t: set(re.findall(r"\b\d{3}\b", str(t or "")))
+    ceil = [(num(z.get("room")), float(z["height_ft"]), z.get("source") or z.get("height_source") or "")
+            for z in c.get("ceilings") or [] if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+    hechos = []
+    for w, room, h, hc in caras_sobre_ceiling(c, margen_ft):
+        for x in c.get("walls") or []:
+            if x.get("id") != w:
+                continue
+            for f in x.get("faces") or []:
+                if isinstance(f, dict) and f.get("room") == room and f.get("height_ft") == h:
+                    src = next((s for n, v, s in ceil if v == hc and n & num(room)), "")
+                    f["height_source"] = (f"[DERIVED] board to the ceiling of {room}: {hc} ft ({src or 'ceiling of the reading'}); "
+                                          f"the reading had {h} ft (stud height, not board) - R80e.57")
+                    f["height_ft"] = hc
+                    hechos.append((w, room, h, hc))
+    return hechos
+
+
 def motivo_conteos(r):
     """Texto para la continuación: los tags / símbolos concretos que faltan, con hoja y coordenadas."""
     l = []

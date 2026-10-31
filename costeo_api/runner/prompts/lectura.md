@@ -39,6 +39,9 @@ CAMPOS QUE EXIGE reglas.py (sin ellos no hay Excel):
 - SOFFIT SIDES (element "soffit_side", 2/A-221 y la planta A-221): TODOS los bordes del soffit (los de la línea exterior y los del escalón interior), cada uno con soffit_of, drop_line, faces (lados con board, layers y height_ft por la sección) y su height con la cadena de la sección.
 - ALTURA POR CARA: la face sube hasta el ceiling del cuarto que mira (+6" si la partition note lo dice); a deck solo si el cuarto es open to structure o el detalle dice full height. El B.O. DECK es la altura del STUD, no de toda face.
 - UN WALL, UNA VEZ: un wall que aparece en la planta general y en una planta ampliada (enlarged plan) se cuenta UNA sola vez, en la ampliada con su tag; la planta general no repite tramos dentro del área de la ampliada.
+- WALLS CURVOS: un wall curvo se lee como cuerdas iguales del arco (una cuerda por cada ≤ 5 ft de arco), cada cuerda un wall propio con su band; el arco impreso (radio / longitud) es la fuente y la suma de cuerdas lo cierra. Los remates (end returns, legs angulados) de una figura son walls propios, también en la copia TYP. sin tag.
+- CADENAS DE COTAS EN LA PLANTA AMPLIADA: el largo de cada wall de la planta ampliada sale de su cadena de cotas cerrada contra la cota corrida (suma de tramos = total); un wall que la band mide más corto que su tramo acotado se corrige a la cota.
+- PUERTAS: cada puerta del door schedule que cae en un wall del canon es un opening DENTRO de ese wall (ref 'Door N', ro_w_ft, head_ft, xy_pt, source); nunca un hueco entre dos walls.
 - NO generes imágenes: la evidencia visual (recortes con la band marcada) y los estados los genera el programa desde tus coordenadas. Tus bands deben caer sobre la línea dibujada.
 
 Cada número lleva su fuente N/HOJA (CONFIRMADO / DERIVADO con su operación / PENDIENTE). Lo no impreso va como RFI con su delta, nunca como supuesto silencioso. Al terminar, responde solo "OK {out}".
