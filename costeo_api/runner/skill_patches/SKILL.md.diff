@@ -1,6 +1,15 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 04:51:28.343394012 +0000
-@@ -2511,4 +2511,113 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 04:53:39.760888944 +0000
+@@ -5,6 +5,8 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
++**v80t (31-oct-2026):** v80s + R80e.37–R80e.52 (runner por API con la cadena completa: compuertas de lectura, conteos, evidencia y trim por programa, reconciliación de decisiones, corrección dirigida, formato de RFI A/B/C). El runner genérico va en `runner/` (ver runner/README.md).
++
+ Versión FINAL 24-oct-2026 (v80f: §29 corrida B&N; v80 + §0.F decisiones finales del estimador; v80: §28 (R80.1–R80.11) manda sobre §27 y §26 donde se tocan; v79: §27 (R79.1–R79.4); v78: §26 manda: decisiones del usuario W1–W4 y reglas R78.x; §25 (U1–U11) sigue vigente salvo R77.11, RETIRADA en v80 (manda R78.36 + R79.2 + R80.3); §24 sigue salvo R77.1, RETIRADA). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
+ 
+ **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
+@@ -2511,4 +2513,113 @@
  - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
  - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
  
@@ -105,7 +114,7 @@
 +- (A) PLANOS / specs: N/HOJA + delta;
 +- (B) CÓDIGO del trade: cita + delta;
 +- (C) Otro: texto libre del estimador / cliente.
-+Si el plano no dice nada o no hay código aplicable, la opción lo declara. Va igual en Pending Items (columnas (A) / (B) / (C)), en la lista para revisar y en el chat.
++Si el plano no dice nada o no hay código aplicable, la opción lo declara. Va igual en Pending Items, en la lista para revisar y en el chat. En el Excel va DENTRO de las columnas existentes (formato fijo: nunca se agregan / quitan hojas ni columnas): "Delta of each alternative" = "(A) … | (B) … | (C) Other: ____".
 +Canon: rfis[] / accesorios_rfi[] con opciones {A: {texto, source, delta}, B: {texto, cita, delta}, C}. Compuerta: reglas.py A_RFI_FORMATO.
 +
 +### R80e.51 — Un "none" de la lectura no contradice una decisión del estimador (31-oct, corrida #6)

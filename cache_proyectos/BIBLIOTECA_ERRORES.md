@@ -98,6 +98,7 @@ Los términos del trade van en inglés.
 | BE-85 | Corrida #6 31-oct | canon.py rechazó "accesorios_none PAFs and duct sleeves" + la cantidad de la decisión (mep_estimator_count); 3 correcciones pagadas inútiles | R80e.51: el none que contradice una decisión se quita y se lista | canon.py pasa con el AB de la #6 |
 | BE-86 | Corrida #6 31-oct | 154 fallas "falta HOJA" en length_source de bands ("band 67.6 pt / 9") | R80e.52: la hoja de la band se antepone (hecho del dato) | reglas.py 248 → 38 |
 | BE-87 | 31-oct | Choque de numeración: dos reglas distintas como R80e.49 (trim / formato de RFI) | El formato de RFI pasa a R80e.50; antes de numerar, leer el último R80e del archivo | Una sola R80e.49 |
+| BE-88 | 31-oct | El formato de RFI (R80e.50) se implementó con 3 columnas nuevas en Pending Items: viola el formato FIJO del Excel (nunca agregar / quitar / cambiar hojas ni columnas) | Las opciones van dentro de "Delta of each alternative"; A_RFI_FORMATO rechaza cualquier columna extra | test_rfi_formato.py cubre columna extra + delta sin (A)/(B)/(C) |
 
 ---
 

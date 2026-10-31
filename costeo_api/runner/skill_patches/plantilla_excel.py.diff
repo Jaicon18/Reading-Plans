@@ -1,26 +1,23 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-10-29 23:12:21.769562345 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-10-31 04:49:25.576936849 +0000
-@@ -550,11 +550,16 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-10-31 04:53:26.895984292 +0000
+@@ -550,11 +550,15 @@
  
      # ---------- RFIs / Review Items / Scope Checklist ----------
      ws = wb.create_sheet("Pending Items")
--    ws.append(["RFI", "Question / condition", "Delta of each alternative"])
--    for c in range(1, 4):
-+    # R80e.50: cada RFI en opciones múltiples, orden fijo: (A) plans / specs (N/SHEET + delta), (B) trade code (citation +
-+    # delta), (C) Other (free text for the estimator / client)
-+    ws.append(["RFI", "Question / condition", "Delta of each alternative", "(A) Plans / specs (N/SHEET + delta)",
-+               "(B) Trade code (citation + delta)", "(C) Other (estimator / client)"])
-+    for c in range(1, 7):
++    # R80e.50: cada RFI en opciones múltiples, orden fijo, DENTRO de las columnas existentes (formato fijo del Excel:
++    # nunca se agregan / quitan hojas ni columnas): "(A) plans / specs | (B) trade code | (C) Other: ____"
+     ws.append(["RFI", "Question / condition", "Delta of each alternative"])
+     for c in range(1, 4):
          ws.cell(1, c).font = S["h"]; ws.cell(1, c).fill = S["hf"]
      for x in rfis_vigentes(d["rfis"]):
 -        ws.append([x.get("id"), en(x.get("pregunta")), en(fmt_delta(x.get("delta"), x.get("unidad")))])
 +        oa, ob = opciones_rfi(x)
-+        ws.append([x.get("id"), en(x.get("pregunta")), en(fmt_delta(x.get("delta"), x.get("unidad"))), en(oa), en(ob),
-+                   en((x.get("opciones") or {}).get("C") or "")])
++        oc = (x.get("opciones") or {}).get("C") or "____"
++        ws.append([x.get("id"), en(x.get("pregunta")), f"(A) {en(oa)} | (B) {en(ob)} | (C) Other: {en(oc)}"])
      ws = wb.create_sheet(HOJA_REVISAR)
      nrev = len(d["revisar"])
      ws.append([f"{nrev} questions in total, asked ONE at a time in this order: floor plan (partition types A-Z), "
-@@ -597,6 +602,24 @@
+@@ -597,6 +601,24 @@
      return re.sub(r"[^a-z0-9]+", " ", en(str(x.get("pregunta") or "")).lower()).strip()
  
  

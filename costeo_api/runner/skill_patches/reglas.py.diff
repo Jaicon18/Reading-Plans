@@ -1,6 +1,6 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/tools/reglas.py	2026-10-29 23:12:21.770934503 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/reglas.py	2026-10-31 04:49:25.577839014 +0000
-@@ -457,6 +457,26 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/tools/reglas.py	2026-10-31 04:53:26.897043032 +0000
+@@ -457,6 +457,28 @@
      return out
  
  
@@ -18,10 +18,12 @@
 +    if not filas:
 +        return []
 +    cab = [str(c or "") for c in filas[0]]
-+    if not (len(cab) >= 6 and cab[3].startswith("(A)") and cab[4].startswith("(B)") and cab[5].startswith("(C)")):
-+        return _lista("Pending Items", " | ".join(cab)[:120], "columnas (A) planos / specs, (B) código, (C) Otro (R80e.50)")
-+    return [(str(r[0]), "sin opción (A) / (B)", "(A) planos / specs con N/HOJA + delta y (B) código del trade (R80e.50)")
-+            for r in filas[1:] if r and r[0] and (not str(r[3] or "").strip() or not str(r[4] or "").strip())]
++    if cab[:3] != ["RFI", "Question / condition", "Delta of each alternative"] or any(c.strip() for c in cab[3:]):
++        return _lista("Pending Items", " | ".join(cab)[:120], "formato fijo: RFI | Question / condition | Delta of each "
++                                                              "alternative (nunca columnas nuevas, R80e.50)")
++    rx = re.compile(r"\(A\)\s*\S.*\|\s*\(B\)\s*\S.*\|\s*\(C\)", re.S)
++    return [(str(r[0]), str(r[2] or "")[:80], "Delta of each alternative = '(A) plans / specs | (B) trade code | (C) Other' "
++                                               "(R80e.50)") for r in filas[1:] if r and r[0] and not rx.search(str(r[2] or ""))]
 +
 +
  @chequeo("A_TAG_IDS", "E28 / R71.12: cada wall tipado lleva tag_ids del inventario (o default_type_source / part_of)")

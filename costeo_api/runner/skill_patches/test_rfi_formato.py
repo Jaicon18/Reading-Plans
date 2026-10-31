@@ -19,14 +19,13 @@ class Ctx:
         self.excel = x
 
 
-CAB = ["RFI", "Question / condition", "Delta of each alternative", "(A) Plans / specs (N/SHEET + delta)",
-       "(B) Trade code (citation + delta)", "(C) Other (estimator / client)"]
-ok = libro(CAB, [["RFI-01", "q", "+1 SF", "A-101 3'-0\" | delta +1 SF", "Trade code: none cited", ""]])
+CAB = ["RFI", "Question / condition", "Delta of each alternative"]
+ok = libro(CAB, [["RFI-01", "q", "(A) Plans / specs: A-101 3'-0\" | delta +1 SF | (B) Trade code: none cited | (C) Other: ____"]])
 assert reglas.a_rfi_formato(Ctx(ok)) == [], "formato bueno marcado como falla"
-viejo = libro(CAB[:3], [["RFI-01", "q", "+1 SF"]])
-assert reglas.a_rfi_formato(Ctx(viejo)), "Pending Items sin (A)/(B)/(C) no detectado"
-falta = libro(CAB, [["RFI-01", "q", "+1 SF", "", "Trade code: none", ""]])
-assert reglas.a_rfi_formato(Ctx(falta)), "RFI sin opción (A) no detectado"
+viejo = libro(CAB, [["RFI-01", "q", "+1 SF"]])
+assert reglas.a_rfi_formato(Ctx(viejo)), "delta sin (A)/(B)/(C) no detectado"
+cols = libro(CAB + ["(A) extra"], [["RFI-01", "q", "(A) x | (B) y | (C) Other: ____", "x"]])
+assert reglas.a_rfi_formato(Ctx(cols)), "columna nueva en Pending Items no detectada (formato fijo)"
 a, b = plantilla_excel.opciones_rfi({"id": "RFI-02", "pregunta": "q", "delta": "+2 LF", "source": "2/A-410"})
 assert "2/A-410" in a and "delta +2 LF" in a and b.startswith("Trade code"), (a, b)
 print("test_rfi_formato OK")
