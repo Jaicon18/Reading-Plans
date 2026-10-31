@@ -1,0 +1,106 @@
+{
+  "muro": 19,
+  "tag": "S41",
+  "ubicacion": "S41-C-H - Showroom corner box-out at the north/west corner (key note 5), leg parallel to the west wall (A1.1)",
+  "largo": {
+    "v": 1.313,
+    "estado": "DERIVADO",
+    "fuente": "A1.1",
+    "operacion": "1.667 - 4 1/4\" leg S41-C-V (owner of the corner) = 1.313 (4/A4.2)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 12.0,
+    "estado": "CONFIRMADO",
+    "fuente": "S41/A1.1 \"STUDS TO 12'-0\" A.F.F.\"",
+    "operacion": "height per S41/A1.1 \"STUDS TO 12'-0\" A.F.F.\"",
+    "unidad": null
+  },
+  "oc": 24,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Parts Area A 100",
+      "alto_board": {
+        "v": 12.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "S41/A1.1 \"5/8\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 12'-0\" A.F.F.\" (Parts A ACT C-1 at 11'-6\", A1.2) (4/A4.2)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 3,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(1.313, 24.0)] = 2 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 3 x 1 row(s) + 0 total = 3 full x 12.0 + cripples 0.0 LF = 36.0 LF [T N36 +1] (4/A4.2)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 1.31,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.313 x 1 = 1.31; top 1.313 x 1 = 1.31; bracing ROUNDUP(12.0 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 2.63 (4/A4.2)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 1.31,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.313 x 1 = 1.31; top 1.313 x 1 = 1.31; bracing ROUNDUP(12.0 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 2.63 (4/A4.2)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 2.63,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 1.313 x 1 = 1.31; top 1.313 x 1 = 1.31; bracing ROUNDUP(12.0 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 2.63 (4/A4.2)",
+        "unidad": null
+      }
+    },
+    "BOARD:Parts Area A 100": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 15.76,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "1.313 x 12.0 x 1 - 0.0 = 15.76 (4/A4.2)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A1.1",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items (6/A4.2, A4.1, 8/A3.2, 10/A4.2 - RFI-10), not per wall",
+    "PATCH": "NOT APPLICABLE: new building, no existing walls (A1.1)",
+    "CLIPS": "EXCLUDED: no bracing clip called on the A1.1 wall types or 5/A4.2-7/A4.2; deflection at the roof per A1.1 note 2.C (track)",
+    "CONTROL_JOINT": "Gypsum board control joints are printed only on the S42 walls (2/A4.2 reveal located on 14/A4.1): carried as trim items (DRMF-625-75 reveal); no other control joint is labeled on A1.1, A4.1 or A4.2.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "60310f3ac0e4b686"
+}

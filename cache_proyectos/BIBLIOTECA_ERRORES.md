@@ -110,6 +110,11 @@ Los términos del trade van en inglés.
 | BE-97 | 31-oct | El closer rechazó un wall E1 con las dos faces en el mismo cuarto y alturas distintas (12.0 / 25.0): las dos se juntaban en un solo renglón de board | El sellador nombra la face con su side cuando el cuarto se repite (R80e.61) | la #8 re-armada sella el wall |
 | BE-98 | 31-oct | Exclusión general por type (RFI-01: types 1 / 1A / 1B / 1C existentes) para walls exteriores que no emparejan: el banco la marcó como empeora (bottom track y bracing en la #8) porque el wall excluido tapaba faltantes de lectura | Se APLICA (decisión del estimador, rev13 también excluye; R80e.58: las decisiones quedan fuera de la prueba de regresión). Los faltantes destapados son gaps de lectura | banco6: r8 bottom track −25.8 %, bracing −17.1 % = gaps de lectura |
 | BE-99 | 31-oct | Leí el take-off humano de la prueba ciega O'Reilly/Olive Garden para elegir proyecto (R80e.62) |
+| BE-100 | 31-oct | O'Reilly: el bid set de Drive traía 79 markups de Bluebeam de otro estimador (take-off humano) | copia_limpia.py antes de todo; declarar lo visto; nunca leer los Subjects | 0 /Annots en la copia; original borrado del área de trabajo |
+| BE-101 | 31-oct | O'Reilly: el runner con TAKEOFF_API_KEY en el entorno hizo 31 llamadas a la API en corrección / cobertura en una corrida por suscripción | R80e.69 `--sin-api` + `env -u TAKEOFF_API_KEY` | costos.csv sin filas nuevas en la corrida |
+| BE-102 | 31-oct | O'Reilly: citas fijas de B&N (A-410, A-001A, DM-101) en el Material Summary de otro proyecto | R80e.72 textos genéricos | 0 citas de hojas que no existen en el set (grep de hojas del Excel contra SHEET_MAP) |
+| BE-103 | 31-oct | O'Reilly: hojas raster sin texto: markups sin geometría, contar_tags y tag_ids fallan | R80e.66 / R80e.70 / R80e.71 | markups.json annots = walls del canon; 0 sin_geometria |
+| BE-104 | 31-oct | O'Reilly: type S24 imprime Z-furring sobre CMU además del stud lining; la lectura no lo cargó por falta de familia | R80e.65 familia Z-furring; misc_item ZF-S24 | todo type con dos sistemas (furring + studs) carga los dos |
 
 ---
 

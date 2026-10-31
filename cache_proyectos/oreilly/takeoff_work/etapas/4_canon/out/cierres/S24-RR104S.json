@@ -1,0 +1,106 @@
+{
+  "muro": 9,
+  "tag": "S24",
+  "ubicacion": "S24-RR104S - R.R. 104 south-facade wall (furring + stud lining), horizontal S24 tag (A1.1)",
+  "largo": {
+    "v": 8.5,
+    "estado": "DERIVADO",
+    "fuente": "A1.1",
+    "operacion": "printed 8'-6\"; vector (398.2 - 321.2) / 9.06 = 8.5 ft (A1.1) (S24/A1.1)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 8.5,
+    "estado": "CONFIRMADO",
+    "fuente": "S24/A1.1 \"STUDS TO 8'-6\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL 108'-6\"",
+    "operacion": "height per S24/A1.1 \"STUDS TO 8'-6\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL 108'-6\"",
+    "unidad": null
+  },
+  "oc": 24,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "R.R. 104",
+      "alto_board": {
+        "v": 8.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "S24/A1.1 \"5/8\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 8'-6\" A.F.F.\" = hard-lid ceiling 8'-6\" (A1.2 schedule C-3 8'-6\") (S24/A1.1)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X WR",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 6,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(8.5, 24.0)] = 6 - 0 dentro de R.O. + 0 jambs + nodos 0/row = 6 x 1 row(s) + 0 total = 6 full x 8.5 + cripples 0.0 LF = 51.0 LF [sin extras de nodo] (S24/A1.1)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 8.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.5 x 1 = 8.5; top 8.5 x 1 = 8.5; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.0 (S24/A1.1)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 8.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.5 x 1 = 8.5; top 8.5 x 1 = 8.5; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.0 (S24/A1.1)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 17.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.5 x 1 = 8.5; top 8.5 x 1 = 8.5; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.0 (S24/A1.1)",
+        "unidad": null
+      }
+    },
+    "BOARD:R.R. 104": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 72.25,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "8.5 x 8.5 x 1 - 0.0 = 72.25 (S24/A1.1)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A1.1",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items (6/A4.2, A4.1, 8/A3.2, 10/A4.2 - RFI-10), not per wall",
+    "PATCH": "NOT APPLICABLE: new building, no existing walls (A1.1)",
+    "CLIPS": "EXCLUDED: no bracing clip called on the A1.1 wall types or 5/A4.2-7/A4.2; deflection at the roof per A1.1 note 2.C (track)",
+    "CONTROL_JOINT": "Gypsum board control joints are printed only on the S42 walls (2/A4.2 reveal located on 14/A4.1): carried as trim items (DRMF-625-75 reveal); no other control joint is labeled on A1.1, A4.1 or A4.2.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "9f871f8cc437f0cb"
+}

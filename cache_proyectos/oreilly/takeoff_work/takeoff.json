@@ -1,0 +1,255 @@
+{
+ "proyecto": "O'Reilly Auto Parts Store - 23rd Ave., Evans, CO #1",
+ "bid_set": "EV1 Current Conformed Set 11-20-2025 (clean copy, 81 annotations removed)",
+ "fecha": "2026-10-31",
+ "inputs": {
+  "waste_metal": 0.15,
+  "waste_no_metal": 0.06,
+  "sheet_w_ft": 4,
+  "sheet_l_ft": 12,
+  "stud_stock_ft": 20,
+  "track_stock_ft": 10
+ },
+ "type_order": [
+  "S21",
+  "S24",
+  "S41",
+  "S42",
+  "S43",
+  "S61",
+  "EXT-8CFMF",
+  "EXT-6CFMF"
+ ],
+ "walls": [],
+ "materials": [],
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "pregunta": "Top of studs / Z-furring at the PEMB roof: bottom of purlin elevation not printed - where: S21-*, S42-H1, S42-H2, S42-V1, S42-V2, VEST-HD-* - carried: loaded to the top of purlin / eave elevation (conservative, rule 53.3)",
+   "delta": "(A) Plans / specs (2/A3.2, 1/A3.1, 3/S5.1): Studs and furring stop under the PEMB purlins / eave strut; T.O. eave 114'-7 1/2\" (E) to 116'-4 3/4\" (W) printed, purlin depth by P.E.M.B. shop drawings (A1.1 general note D) - delta minus purlin depth (~8\" typical Z purlin) on every full-height stud, furring and board face: about -0.67 ft x LF of S21 (250.7 LF), S42 full (46.8 LF), heads | (B) Trade code (AISI S240-20 B1; ASTM C754 sec. 6): Code: no height rule; AISI S240 / ASTM C754 require the stud to bear on structure - height from shop drawings - delta same as A | (C) Other: ____"
+  },
+  {
+   "id": "RFI-02",
+   "pregunta": "S24 Z-furring height and board on the CMU above the 8'-6\" hard lid (office 102, R.R. 103/104) - where: S24-OFF, S24-RR, S24-RR104S - carried: S24 Z-furring loaded to the eave (14.625 / 14.71 ft) = 336.89 LF (misc item ZF-S24); board only to 8'-6\" on the studs",
+   "delta": "(A) Plans / specs (S24/A1.1): S24/A1.1 draws 150ZF125-18 Z-furring + polyiso on the CMU behind the 8'-6\" stud lining; height not stated (S21 goes to the roof per 3/A3.2) - delta + Z-furring 24\" O.C. x 14.6 ft on 11.0 + 16.17 + 8.5 = 35.7 LF of CMU (about 19 pcs) and, if boarded above the hard lid, + 35.7 x 6.1 = 218 SF 5/8\" Type X | (B) Trade code (IECC C402.1 (insulation continuity)): No code requirement for furring above a ceiling (energy code continuity of insulation only) - delta none | (C) Other: ____"
+  },
+  {
+   "id": "RFI-03",
+   "pregunta": "S42 header wall extension east of the S42 vertical wall - where: S42-H2 - carried: included (drawn on A1.1)",
+   "delta": "(A) Plans / specs (A1.1, S4.1): A1.1 draws the header double line ~7.2 ft past the S42 corner (to the dimension line); S4.1 framing key plan ends the dashed header at the corner - delta -7.2 LF of header wall (S42-H2 25.44 -> 18.27 ft) and its board / nailers | (B) Trade code (n/a): No code item - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-04",
+   "pregunta": "South facade 36'-0\" stucco band / windows D1-D2 drawn not to scale on A1.1 - where: EXT-SOUTH-BAND, S21-S openings - carried: 36'-0\" printed taken",
+   "delta": "(A) Plans / specs (A1.1, 4/A2.1, A5.2): A1.1 prints 36'-0\" (drawn ~23.7 ft); 4/A2.1 elevation scales 36.0 ft; A5.2 D1/D2 11'-4 3/8\" R.O. each - delta if the band were 23.7 ft: -12.3 LF of 6\" studs x 7.97 ft and -98 SF sheathing | (B) Trade code (n/a): No code item - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-05",
+   "pregunta": "Hard-lid ceilings office/restrooms: board on top of the 600S162-54 joists - where: office 102, R.R. 103, R.R. 104 - carried: bottom (ceiling) board only",
+   "delta": "(A) Plans / specs (7/A4.2, A1.2): 7/A4.2 key 6 leaders reach the top of the joist box; schedule C-3 is the ceiling below - delta + 88 + 133.2 = 221.2 SF 5/8\" Type X (WR in restrooms) if boarded on top | (B) Trade code (IBC 2021 703.2 (rated assemblies only)): Code: not required unless a rated assembly - delta none | (C) Other: ____"
+  },
+  {
+   "id": "RFI-06",
+   "pregunta": "Entry pier / head interior finish and returns - where: EXT-PIER-*, EXT-HEAD-8 - carried: 5/8\" Type X face loaded; RC and 1/4\" not loaded (no family)",
+   "delta": "(A) Plans / specs (1/A3.1, 7/A3.2, 1/A5.2): 1/A3.1, 7/A3.2, 1/A5.2: 5/8\" Type X over 1/4\" gypsum board on 087F125-33 resilient channel @ 24\" horiz.; pier side returns not dimensioned - delta + 1/4\" gypsum about 349 SF and + 087F125-33 RC about 243 LF (piers 2 x 10 rows x 6.0 + head 4 rows x 30.67); returns + ~2 x 2 x 1.2 ft x 20.7 ft studs/sheathing | (B) Trade code (n/a): Code: no requirement - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-07",
+   "pregunta": "Restroom wall finish W-4 sanitary wall and ceiling panel system - where: R.R. 103, R.R. 104 - carried: not loaded (finish trade); frp_none_reason",
+   "delta": "(A) Plans / specs (A1.2): A1.2 schedule W-4 at R.R. 103/104 walls (MFG refer project manual) - delta + FRP-type panel on 4 walls of each restroom: about 2 x (2 x 7.83 + 2 x 8.5) x 8.5 = 555 SF if in the drywall scope | (B) Trade code (IBC 2021 1210.2.2): Code: smooth nonabsorbent surface to 4'-0\" at urinals / water closets - delta finish to 4'-0\" only: about 260 SF | (C) Other: ____"
+  },
+  {
+   "id": "RFI-08",
+   "pregunta": "MEP sweep excluded by the estimator (2026-10-31) - where: all stud walls - carried: 0 counted",
+   "delta": "(A) Plans / specs (SHEET_MAP (estimator exclusion)): MEP sheets not read: duct / pipe penetrations, framed openings and stud reinforcement not counted - delta per duct crossing a stud wall: + MAX(1, ROUNDUP(width/24\")) plates and 1 sleeve | (B) Trade code (n/a): Code: n/a - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-09",
+   "pregunta": "S42 header wall bracing members not dimensioned (kicker length, angled strut length, 600S200-54 purlin members, track brace splices) - where: S42-H2, S42-V1 - carried: kickers 7.07 ft (45 deg), angled struts 8.0 ft; 600S200-54 not loaded",
+   "delta": "(A) Plans / specs (S5.1): 1/S5.1, 2/S5.1, 4/S5.1, 5/S5.1 give spacing only (kickers @ 48\", angled strut @ 16'-0\", 600S200-54 @ 24\" / 48\", 5'-0\"+- reach) - delta kicker length +-1 ft each = +-22 LF; 600S200-54 pieces (not loaded): about ROUNDUP(L/2)+1 per header wall x purlin spacing (not printed) | (B) Trade code (AISI S240-20 B3.2): Code: AISI S240 bracing design by the specialty engineer - delta per engineer | (C) Other: ____"
+  },
+  {
+   "id": "RFI-10",
+   "pregunta": "Blocking quantities for toilet accessories, fire extinguishers, water heater, wall sign, 14/A4.1 key 12 - where: R.R. 103/104, S42, EXT-HEAD - carried: 48 LF loaded (accessories 38, extinguishers 6, water heater 4); 14/A4.1 key 12 and wall-sign backing not loaded",
+   "delta": "(A) Plans / specs (A4.1, A4.2, A3.1): A4.1 accessory note 1, A4.1 key 17, A4.2 key 21, A3.1 key 31, 14/A4.1 key 12 call FRT blocking / backing without lengths - delta +-2 ft per accessory; 14/A4.1 key 12 continuous FRT 2x blocking along the Parts A walls would add up to ~140 LF (S42 Parts A faces) x rows | (B) Trade code (ICC A117.1-2017 609.8): Code: grab bars 250 lbf - delta as option A | (C) Other: ____"
+  },
+  {
+   "id": "RFI-11",
+   "pregunta": "J molding / corner bead at gypsum perimeter transitions (A1.1 note 3.C) and the S42 header bottom - where: S42-H2, S42-V1, S21-* - carried: only 7/A4.2 corner bead and 2/A4.2 reveals loaded",
+   "delta": "(A) Plans / specs (A1.1, 6/A4.2): A1.1 note 3.C J molding, reglets or corner bead at transitions to dissimilar materials; 6/A4.2 board wraps the header bottom - delta + corner bead 2 x 75.8 = 151.6 LF at the header bottoms; + J mold at board tops against the PEMB roof (S21/S42 tops ~ 330 LF) | (B) Trade code (ASTM C840-23 18.1): ASTM C840 sec. 18 trim at exposed edges - delta same | (C) Other: ____"
+  },
+  {
+   "id": "RFI-12",
+   "pregunta": "Diagonal wall bracing 3\" x 16 ga flat strap at corner faces of free standing partitions (A1.1 note 2.B) - where: S41-* - carried: not loaded",
+   "delta": "(A) Plans / specs (A1.1 note 2.B): Which partitions are 'free standing' is not shown (S41 boxes, office/restroom boxes tied by joists, S42 braced per S5.1) - delta 2 straps x diagonal of each S41 leg face (~12.2 ft) x 4 legs = ~98 LF of 3\" x 16 ga strap | (B) Trade code (AISI S240-20): AISI S240 bracing per design - delta per engineer | (C) Other: ____"
+  },
+  {
+   "id": "RFI-13",
+   "pregunta": "Metal headers at CMU openings (doors 2, 3, 7; windows D1, D2) in the Z-furring - where: S21-N, S21-S - carried: 0 (masonry lintels by mason)",
+   "delta": "(A) Plans / specs (S4.1, A5.1, A5.2): S4.1 masonry lintel schedule; 1/A5.1, 3/A5.1, 5/A5.1, 11/A5.2 show no metal header in the furring - delta if a 2-piece furring head were wanted: (R.O. + 1.333) x 2 per opening = 14.67 + 9.33 + 9.33 + 25.4 + 25.4 = 84.1 LF | (B) Trade code (n/a): Code: none - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-14",
+   "pregunta": "Vestibule head walls / ceiling framing member and height - where: VEST-HD-*, JOISTS-VESTIBULE - carried: 600S162-43 heads to T.O. high eave 116'-4 1/4\"; joists 600S162-43 @ 24\"",
+   "delta": "(A) Plans / specs (3/A3.1, 3/A5.2): 3/A3.1 key 8 600S162-43 @ 24\" attached to PEMB; vestibule ceiling joists drawn under key 8; top at the purlin (not printed) - delta -0.67 ft on 20.6 LF of head if the purlin is 8\" deep | (B) Trade code (n/a): AISI S240 - delta n/a | (C) Other: ____"
+  },
+  {
+   "id": "RFI-16",
+   "pregunta": "Track at the top / bottom of the S21 Z-furring - where: S21 furring on the exterior CMU (6 walls) - carried: no track (none drawn on S21/A1.1 or the wall sections)",
+   "delta": "(A) Plans / specs (S21/A1.1): S21 type and 1/A3.2, 2/A3.2 draw the Z-furring on the CMU without track - delta 0 | (B) Trade code (ASTM C754 (furring attachment)): Furring J-track / runner at top and bottom if required by the installer - delta + 250.71 LF bottom + 250.71 LF top 1-1/2\" track | (C) Other: ____"
+  },
+  {
+   "id": "RFI-15",
+   "pregunta": "Gypsum board finish level not printed (no project manual in the set; A1.1 notes silent) - where: all gypsum board - carried: Level 4 (joint compound + tape quantified), no Level 5",
+   "delta": "(A) Plans / specs (A1.1 interior wall & ceiling notes 3.A-3.C; A1.2 finish W-2 semi-gloss paint): nothing printed - delta 0 | (B) Trade code (GA-214 / ASTM C840: semi-gloss paint finish is recommended at Level 5): Level 5 skim coat on painted walls - delta + Level 5 SF = painted board SF | (C) Other: ____"
+  }
+ ],
+ "revisar": [],
+ "alcances": [
+  {
+   "id": "ALC-01",
+   "nombre": "Interior partition framing (studs + tracks)",
+   "estado": "CUANTIFICADO",
+   "nota": "Types S24, S41, S42, S43, S61 (A1.1 wall types; 5/A4.2, 6/A4.2, 7/A4.2): 3-5/8\" and 6\" 20 ga studs and tracks in Material Summary; S21 / S24 Z-furring in its own row."
+  },
+  {
+   "id": "ALC-02",
+   "nombre": "Exterior wall framing (CFMF)",
+   "estado": "CUANTIFICADO",
+   "nota": "Entry piers + head wall over storefront A (8\" 800S162-54 + 6\" 600S162-54 @ 16\", 1/A3.1, 2/A3.1, 3/S5.3), south stucco panel 600S162-43 (1/A3.4), vestibule heads 600S162-54 (3/A3.1, S4.1 key note 3, RFI-05)."
+  },
+  {
+   "id": "ALC-03",
+   "nombre": "Parapet framing",
+   "estado": "NO APLICA",
+   "nota": "Parapets are CMU to T.O. masonry with PEMB coping (A2.1, A3.1-A3.2); the CFMF above storefront A up to T.O. metal stud 120'-8\" (2/A3.1) is counted in the exterior head wall (ALC-02)."
+  },
+  {
+   "id": "ALC-04",
+   "nombre": "Top / deflection and bottom track",
+   "estado": "CUANTIFICADO",
+   "nota": "Bottom and top / deflection track by stud size (A1.1 note 2.C deflection channels at walls to roof structure; 3/S5.1, 4/S5.1); heads row for the vestibule heads."
+  },
+  {
+   "id": "ALC-05",
+   "nombre": "Headers, sills and jambs at openings",
+   "estado": "CUANTIFICADO",
+   "nota": "Header / box beam and additional head track by headers.py from the door / window schedules (A5.1, A5.2); CMU openings by mason (RFI-13)."
+  },
+  {
+   "id": "ALC-06",
+   "nombre": "Bracing / bridging",
+   "estado": "CUANTIFICADO",
+   "nota": "Horizontal stud bridging @ 4'-0\" O.C. vertical (A1.1 note 2.F) as C.R. channel rows; S42 header kickers / struts (1/S5.1, 2/S5.1, 5/S5.1, RFI-09); diagonal flat strap (note 2.B) in RFI-12."
+  },
+  {
+   "id": "ALC-07",
+   "nombre": "Gypsum board on walls (layers per type)",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" Type X on every type (A1.1 wall types S21-S61); faces to the hard-lid ceiling or to the purlin (RFI-01, RFI-02)."
+  },
+  {
+   "id": "ALC-08",
+   "nombre": "Moisture / abuse / special board at wet areas",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" Type X moisture resistant at restrooms 103 / 104 walls and ceilings (A1.1 note 3.B, A1.2, 1A/A4.1)."
+  },
+  {
+   "id": "ALC-09",
+   "nombre": "Exterior gypsum / glass mat sheathing",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" glass mat sheathing at the entry piers (1/A3.1 key 19) and the south stucco panel (1/A3.4); head wall over storefront A takes FRT plywood (2/A3.1 key 34)."
+  },
+  {
+   "id": "ALC-10",
+   "nombre": "FRT plywood sheathing / substrate",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" exterior FRT plywood sheathing on the head wall face and storefront head soffit (2/A3.1, 3/A3.1 key 34) + 5/8\" FRT plywood backing 8'-0\" to 10'-0\" at the S41 box-outs (key note 5, 4/A4.2)."
+  },
+  {
+   "id": "ALC-11",
+   "nombre": "Gypsum board ceilings",
+   "estado": "CUANTIFICADO",
+   "nota": "C-3 gypsum hard-lid ceilings: office 102 + vestibule 100A (Type X) and restrooms 103 / 104 (Type X W.R.) (A1.2, 7/A4.2, 3/A3.1); top-side board in RFI-05."
+  },
+  {
+   "id": "ALC-12",
+   "nombre": "Ceiling suspension (furring / carrying channel / hangers)",
+   "estado": "NO APLICA",
+   "nota": "No suspended gypsum ceiling: hard lids are framed with 6\" joists @ 24\" (7/A4.2, 3/A3.1, counted in the 6\" stud row); C-1 ACT in Parts A is by the ACT trade (A1.2, 9/A4.2)."
+  },
+  {
+   "id": "ALC-13",
+   "nombre": "Soffits and bulkheads (framing + board)",
+   "estado": "NO APLICA",
+   "nota": "NO APLICA: no soffit or bulkhead drawn on A1.1, A1.2 or A3.1-A4.2; the S42 suspended header walls (6/A4.2) are rows of type S42 (ALC-01) and the vestibule 100A hard lid with its joists (3/A3.1) is in ALC-11 / 6\" stud row."
+  },
+  {
+   "id": "ALC-14",
+   "nombre": "Canopy / marquee framing and sheathing",
+   "estado": "NO APLICA",
+   "nota": "No canopy or marquee framing on A2.1 / A3.x: the stucco cornice (A2.1 key 5) is plaster on the CMU parapet; sign backing in RFI-10."
+  },
+  {
+   "id": "ALC-15",
+   "nombre": "Column furring / wraps",
+   "estado": "NO APLICA",
+   "nota": "PEMB columns: key note 1 concealed in the walls with 24 ga sheet metal cover by others (1/A4.2 key 16), key note 2 exposed painted (A1.1): no gypsum column wraps."
+  },
+  {
+   "id": "ALC-16",
+   "nombre": "Blocking (FRT wood / metal) for millwork",
+   "estado": "CUANTIFICADO",
+   "nota": "FRT 2x nailers at the S42 header walls (6/A4.2 keys 10-11) and at T.O. metal stud (8/A3.2, 2/A3.1 key 11), toilet accessories (A4.1 note 1), water heater, fire extinguishers (10/A4.2); quantities in RFI-10."
+  },
+  {
+   "id": "ALC-17",
+   "nombre": "Framed openings (MEP, access panels, diffusers)",
+   "estado": "RFI",
+   "nota": "MEP and electrical sheets excluded by the estimator (2026-10-31): no framed openings or penetrations counted - RFI-08."
+  },
+  {
+   "id": "ALC-18",
+   "nombre": "Trim: corner bead, casing bead, control joints, reveals",
+   "estado": "CUANTIFICADO",
+   "nota": "Corner bead at the hard-lid tops (7/A4.2), DRMF reveals at the S42 control joints (2/A4.2, 14/A4.1); J-mold / header corner bead in RFI-11."
+  },
+  {
+   "id": "ALC-19",
+   "nombre": "Acoustical sealant / sound attenuation (EXCLUDED: estimator standing order)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order); sound attenuation insulation excluded (no insulation) - S43 / S61 sound batt on A1.1 wall types"
+  },
+  {
+   "id": "ALC-20",
+   "nombre": "FRP / cement board / tile backer",
+   "estado": "RFI",
+   "nota": "No FRP or cement board called; restrooms W-4 sanitary wall and ceiling panel system (A1.2) is a finish item - RFI-07."
+  },
+  {
+   "id": "ALC-21",
+   "nombre": "Shaft walls / area separation walls",
+   "estado": "NO APLICA",
+   "nota": "No shaft walls or area separation walls in the set (A1.1 wall types S21-S61 only)."
+  },
+  {
+   "id": "ALC-22",
+   "nombre": "Rated assemblies (UL designs) and their board type",
+   "estado": "NO APLICA",
+   "nota": "No UL design called on A1.1 wall types; Type X board is specified by type (A1.1)."
+  },
+  {
+   "id": "ALC-23",
+   "nombre": "Special panels (ballistic, lead-lined, abuse)",
+   "estado": "NO APLICA",
+   "nota": "No ballistic, lead-lined or abuse panels on A1.1 / A1.2."
+  },
+  {
+   "id": "ALC-24",
+   "nombre": "Finish level (Level 4 / Level 5)",
+   "estado": "RFI",
+   "nota": "Finish level not printed (no project manual in the set): Level 4 carried (compound + tape), Level 5 in RFI-15."
+  }
+ ],
+ "inputs_notas": {}
+}

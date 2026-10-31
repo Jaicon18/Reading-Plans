@@ -1,0 +1,129 @@
+{
+  "muro": 10,
+  "tag": "S43",
+  "ubicacion": "S43-OFF-W - Office 102 west wall (Parts C side) (A1.1)",
+  "largo": {
+    "v": 8.642,
+    "estado": "DERIVADO",
+    "fuente": "A1.1",
+    "operacion": "vector (397.7 - 319.4) / 9.06 = 8.642 ft (A1.1): furring face to outer face of the office south wall; printed office 8'-0\" interior (S43/A1.1)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 8.5,
+    "estado": "CONFIRMADO",
+    "fuente": "S43/A1.1 \"STUDS TO 8'-6\" A.F.F.\"; 7/A4.2 8'-6\" to B.O. FRAMING EL 108'-6\"",
+    "operacion": "height per S43/A1.1 \"STUDS TO 8'-6\" A.F.F.\"; 7/A4.2 8'-6\" to B.O. FRAMING EL 108'-6\"",
+    "unidad": null
+  },
+  "oc": 24,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Parts Area C 105",
+      "alto_board": {
+        "v": 9.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "outside: 7/A4.2 board (6) continues up the 6\" ceiling-joist edge to the top of the box = 8'-6\" + 6\" = 9'-0\" (corner bead 7 at the top) (S43/A1.1)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X",
+      "capas": 1
+    },
+    {
+      "cuarto": "Office 102",
+      "alto_board": {
+        "v": 8.5,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "room side: board to the hard-lid ceiling 8'-6\" (A1.2 C-3 8'-6\"; 7/A4.2 B.O. framing 108'-6\") (S43/A1.1)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 7,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(8.642, 24.0)] = 6 - 0 dentro de R.O. + 0 jambs + nodos 1/row = 7 x 1 row(s) + 0 total = 7 full x 8.5 + cripples 0.0 LF = 59.5 LF [L N12 +1] (S43/A1.1)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 8.64,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.642 x 1 = 8.64; top 8.642 x 1 = 8.64; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.28 (S43/A1.1)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 8.64,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.642 x 1 = 8.64; top 8.642 x 1 = 8.64; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.28 (S43/A1.1)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 17.28,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 8.642 x 1 = 8.64; top 8.642 x 1 = 8.64; bracing ROUNDUP(8.5 x 12 / 48.0) - 1 = 2 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 17.28 (S43/A1.1)",
+        "unidad": null
+      }
+    },
+    "BOARD:Parts Area C 105": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 77.78,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "8.642 x 9.0 x 1 - 0.0 = 77.78 (S43/A1.1)",
+        "unidad": null
+      }
+    },
+    "BOARD:Office 102": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 73.46,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "8.642 x 8.5 x 1 - 0.0 = 73.46 (S43/A1.1)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A1.1",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items (6/A4.2, A4.1, 8/A3.2, 10/A4.2 - RFI-10), not per wall",
+    "PATCH": "NOT APPLICABLE: new building, no existing walls (A1.1)",
+    "CLIPS": "EXCLUDED: no bracing clip called on the A1.1 wall types or 5/A4.2-7/A4.2; deflection at the roof per A1.1 note 2.C (track)",
+    "CONTROL_JOINT": "Gypsum board control joints are printed only on the S42 walls (2/A4.2 reveal located on 14/A4.1): carried as trim items (DRMF-625-75 reveal); no other control joint is labeled on A1.1, A4.1 or A4.2.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "3c0ce6e38a95c3b6"
+}

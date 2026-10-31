@@ -1,0 +1,96 @@
+{
+  "muro": 30,
+  "tag": "EXT-6CFMF",
+  "ubicacion": "EXT-SOUTH-BAND - South facade stucco band over windows D1/D2 (studs outside the CMU, window lintel to T.O. masonry) (A1.1)",
+  "largo": {
+    "v": 36.0,
+    "estado": "DERIVADO",
+    "fuente": "A1.1",
+    "operacion": "printed 36'-0\" (A1.1); NOTE the A1.1 drawing of that dimension is not to scale (drawn, measured on the raster, 23.7 ft) - RFI-04; band placed 4'-0\" + 5'-4\" from the west outer face | SIMPLE ticks (single slash; two ticks side by side where a string crosses a wall thickness), printed string total used (A1.1, crops 3_revision/res/R3, R4) (1/A3.4)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 7.969,
+    "estado": "CONFIRMADO",
+    "fuente": "1/A3.4 printed 7'-11 5/8\" (window head to T.O. MASONRY EL 119'-4\")",
+    "operacion": "height per 1/A3.4 printed 7'-11 5/8\" (window head to T.O. MASONRY EL 119'-4\")",
+    "unidad": null
+  },
+  "oc": 16,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "no board face",
+      "alto_board": {
+        "v": 0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "outside of the CMU: 5/8\" fiberglass reinforced sheathing (1/A3.4 key 19) + stucco (key 13, other trade) - sheathing carried as misc_items; inside face is the CMU (no board) (1/A3.4)",
+        "unidad": null
+      },
+      "tipo": "none",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 28,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(36.0, 16.0)] = 28 - 0 dentro de R.O. + 0 jambs + nodos 0/row = 28 x 1 row(s) + 0 total = 28 full x 7.969 + cripples 0.0 LF = 223.13 LF [sin extras de nodo] (1/A3.4)",
+        "unidad": null
+      }
+    },
+    "TRACK_BOTTOM": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 36.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 36.0 x 1 = 36.0; top 36.0 x 1 = 36.0; bracing ROUNDUP(7.969 x 12 / 48.0) - 1 = 1 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 36.0 (1/A3.4)",
+        "unidad": null
+      }
+    },
+    "TRACK_TOP": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 36.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 36.0 x 1 = 36.0; top 36.0 x 1 = 36.0; bracing ROUNDUP(7.969 x 12 / 48.0) - 1 = 1 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 36.0 (1/A3.4)",
+        "unidad": null
+      }
+    },
+    "BRACING": {
+      "unidad": "LF",
+      "formula": null,
+      "val": {
+        "v": 36.0,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "bottom 36.0 x 1 = 36.0; top 36.0 x 1 = 36.0; bracing ROUNDUP(7.969 x 12 / 48.0) - 1 = 1 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 36.0 (1/A3.4)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "HEADER": "EXCLUDED: wall has no opening on A1.1",
+    "BOARD": "EXCLUDED: outside of the CMU: 5/8\" fiberglass reinforced sheathing (1/A3.4 key 19) + stucco (key 13, other trade) - sheathing carried as misc_items; inside face is the CMU (no board) (1/A3.4)",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items (6/A4.2, A4.1, 8/A3.2, 10/A4.2 - RFI-10), not per wall",
+    "PATCH": "NOT APPLICABLE: new building, no existing walls (A1.1)",
+    "CLIPS": "EXCLUDED: no bracing clip called on the A1.1 wall types or 5/A4.2-7/A4.2; deflection at the roof per A1.1 note 2.C (track)",
+    "CONTROL_JOINT": "Gypsum board control joints are printed only on the S42 walls (2/A4.2 reveal located on 14/A4.1): carried as trim items (DRMF-625-75 reveal); no other control joint is labeled on A1.1, A4.1 or A4.2.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "902be5b41e539fbe"
+}

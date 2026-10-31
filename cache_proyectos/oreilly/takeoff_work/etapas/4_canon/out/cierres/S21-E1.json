@@ -1,0 +1,76 @@
+{
+  "muro": 2,
+  "tag": "S21",
+  "ubicacion": "S21-E1 - East facade (grid A) interior furring, Parts C 105, from the north furring face to office 102 west wall (A1.1)",
+  "largo": {
+    "v": 45.346,
+    "estado": "DERIVADO",
+    "fuente": "A1.1",
+    "operacion": "vector (719.5 - 310.3) / 9.024 = 45.346 ft (A1.1); printed chain 8\" + 4'-0\" + 37'-8\" + 4'-0\" = 46'-4\" from the outer face to the office wall CL - 7 5/8\" CMU - 2 1/8\" furring - 2 7/16\" half wall = 45.33 ft | SIMPLE ticks (single slash; two ticks side by side where a string crosses a wall thickness), printed string total used (A1.1, crops 3_revision/res/R3, R4) (S21/A1.1)",
+    "unidad": null
+  },
+  "alto_stud": {
+    "v": 14.625,
+    "estado": "DERIVADO",
+    "fuente": "T.O. low eave EL 114'-7 1/2\" (2/A3.2; A2.1 north elevation EAVE HEIGHT 114'-7 1/2\") - EL 100'-0\" = 14.625 ft; top of purlin taken (RFI-01)",
+    "operacion": "height per T.O. low eave EL 114'-7 1/2\" (2/A3.2; A2.1 north elevation EAVE HEIGHT 114'-7 1/2\") - EL 100'-0\" = 14.625 ft; top of purlin taken (RFI-01)",
+    "unidad": null
+  },
+  "oc": 24,
+  "brace_sp": 48,
+  "hileras": 1,
+  "caras": [
+    {
+      "cuarto": "Parts Area C 105",
+      "alto_board": {
+        "v": 14.625,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "S21/A1.1 \"5/8\" TYPE 'X' GYPSUM BOARD\" on the Z-furring, full height of the furring to the roof framing (3/A3.2 board 20 above ACT 21 to the eave strut); T.O. low eave EL 114'-7 1/2\" (2/A3.2; A2.1 north elevation EAVE HEIGHT 114'-7 1/2\") - EL 100'-0\" = 14.625 ft; top of purlin taken (RFI-01) (S21/A1.1)",
+        "unidad": null
+      },
+      "tipo": "5/8 type X",
+      "capas": 1
+    }
+  ],
+  "aberturas": [],
+  "partidas": {
+    "STUD": {
+      "unidad": "pcs",
+      "formula": null,
+      "val": {
+        "v": 24,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "campo 1+sum ROUNDUP(zona/oc) [(45.346, 24.0)] = 24 - 0 dentro de R.O. + 0 jambs + nodos 0/row = 24 x 1 row(s) + 0 total = 24 full x 14.625 + cripples 0.0 LF = 351.0 LF [sin extras de nodo] (S21/A1.1)",
+        "unidad": null
+      }
+    },
+    "BOARD:Parts Area C 105": {
+      "unidad": "SF",
+      "formula": null,
+      "val": {
+        "v": 663.19,
+        "estado": "DERIVADO",
+        "fuente": null,
+        "operacion": "45.346 x 14.625 x 1 - 0.0 = 663.19 (S21/A1.1)",
+        "unidad": null
+      }
+    }
+  },
+  "excluidas": {
+    "TRACK_BOTTOM": "EXCLUDED: 150ZF125-18 Z-furring channels fastened to the CMU, no track drawn on the S21 type or the wall sections - RFI-16 (S21/A1.1, 1/A3.2, 2/A3.2)",
+    "TRACK_TOP": "EXCLUDED: 150ZF125-18 Z-furring channels fastened to the CMU, no track drawn on the S21 type or the wall sections - RFI-16 (S21/A1.1, 1/A3.2, 2/A3.2)",
+    "BRACING": "EXCLUDED: 0 bracing rows for this height per bottom 45.346 x 1 = 0.0; top 45.346 x 1 = 0.0; bracing 0 rows declaradas (S21/A1.1) -> 0.0",
+    "HEADER": "EXCLUDED: wall has no opening on A1.1",
+    "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
+    "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
+    "BLOCKING": "EXCLUDED here: FRT blocking is carried as project blocking_items (6/A4.2, A4.1, 8/A3.2, 10/A4.2 - RFI-10), not per wall",
+    "PATCH": "NOT APPLICABLE: new building, no existing walls (A1.1)",
+    "CLIPS": "EXCLUDED: no bracing clip called on the A1.1 wall types or 5/A4.2-7/A4.2; deflection at the roof per A1.1 note 2.C (track)",
+    "CONTROL_JOINT": "Gypsum board control joints are printed only on the S42 walls (2/A4.2 reveal located on 14/A4.1): carried as trim items (DRMF-625-75 reveal); no other control joint is labeled on A1.1, A4.1 or A4.2.",
+    "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
+  },
+  "alcance": [],
+  "sello": "06fe81a871015e95"
+}
