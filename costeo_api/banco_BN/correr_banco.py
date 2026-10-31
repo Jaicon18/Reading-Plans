@@ -1,5 +1,6 @@
 """Banco de regresión B&N (sin API): re-arma cada lectura guardada (#3, #4, #5, #7) con el runner y el skill ACTUALES
 y da la tabla material x corrida vs rev13. Un arreglo entra solo si no empeora ningún material en ninguna lectura.
+Las decisiones del estimador quedan fuera de la prueba: si una empeora un material, destapa un gap de lectura.
 Uso: python3 correr_banco.py <salida_dir> [--base banco_base.json]  (con --base marca los materiales que empeoran)."""
 import sys, os, json, subprocess, shutil, re, warnings
 warnings.filterwarnings("ignore")

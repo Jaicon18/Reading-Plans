@@ -2621,7 +2621,7 @@ Después de aplicar las decisiones, una face cuyo cuarto tiene ceiling y que pas
 Origen: R80e.43 aplicó W.R. en los wet rooms sobre faces leídas a la altura del stud (25 ft contra un ceiling de 9'-0"): W.R. +44.7 % en una corrida. En el banco, esa corrida queda en W.R. −10.1 % y Type X de +13.1 % a +7.3 %, sin empeorar nada.
 
 ### R80e.58 — Banco de regresión: un arreglo entra solo si no empeora ningún material en ninguna lectura (31-oct)
-Las lecturas guardadas de cada corrida (A, B y AB resuelto) se re-arman sin API con el runner y el skill actuales (correr_banco.py, modo --sin-api; los números salen de familias_out.json contra el dry-run, que reproduce la referencia). Un arreglo se acepta solo si mejora o mantiene cada material en TODAS las lecturas. Los arreglos de lectura (prompts, correcciones) no se prueban en el banco: se declaran como tales.
+Las lecturas guardadas de cada corrida (A, B y AB resuelto) se re-arman sin API con el runner y el skill actuales (correr_banco.py, modo --sin-api; los números salen de familias_out.json contra el dry-run, que reproduce la referencia). Un arreglo se acepta solo si mejora o mantiene cada material en TODAS las lecturas. Los arreglos de lectura (prompts, correcciones) no se prueban en el banco: se declaran como tales. Las decisiones del estimador quedan FUERA de la prueba de regresión: si aplicar una decisión empeora un material, lo que mejoraba era un error que compensaba otro, y los faltantes que destapa se anotan como gaps de lectura.
 Origen: los arreglos se validaban contra una sola lectura; R80e.43 mejoró una corrida y empeoró otra (W.R. +44.7 % en otra).
 
 ### R80e.59 — Walls curvos en cuerdas, cadenas de la planta ampliada cerradas, puertas dentro del wall (31-oct, prompt)
