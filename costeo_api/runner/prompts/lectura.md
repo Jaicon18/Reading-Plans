@@ -36,6 +36,8 @@ CAMPOS QUE EXIGE reglas.py (sin ellos no hay Excel):
 - segmento sin tag con type por nota general: thickness_measured_in; part_of solo con un id que exista en tu canon.
 - accesorios_rfi[] / rfis[]: fuentes_revisadas (designación, otra fila, regla estándar, detalle).
 - SOFFIT SIDES (element "soffit_side", 2/A-221 y la planta A-221): TODOS los bordes del soffit (los de la línea exterior y los del escalón interior), cada uno con soffit_of, drop_line, faces (lados con board, layers y height_ft por la sección) y su height con la cadena de la sección.
+- ALTURA POR CARA: la face sube hasta el ceiling del cuarto que mira (+6" si la partition note lo dice); a deck solo si el cuarto es open to structure o el detalle dice full height. El B.O. DECK es la altura del STUD, no de toda face.
+- UN WALL, UNA VEZ: un wall que aparece en la planta general y en una planta ampliada (enlarged plan) se cuenta UNA sola vez, en la ampliada con su tag; la planta general no repite tramos dentro del área de la ampliada.
 - NO generes imágenes: la evidencia visual (recortes con la band marcada) y los estados los genera el programa desde tus coordenadas. Tus bands deben caer sobre la línea dibujada.
 
 Cada número lleva su fuente N/HOJA (CONFIRMADO / DERIVADO con su operación / PENDIENTE). Lo no impreso va como RFI con su delta, nunca como supuesto silencioso. Al terminar, responde solo "OK {out}".

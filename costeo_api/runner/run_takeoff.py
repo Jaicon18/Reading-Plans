@@ -496,6 +496,9 @@ class Runner:
             sw["registros"] = regs
             log(f"   mep.py registro: " + ", ".join(f"{h} {v['matches']}" for h, v in regs.items()))
 
+    def mapa_inv(self, wid):
+        return {v: k for k, v in (getattr(self, "mapa", None) or {}).items()}.get(wid, wid)
+
     def corregir(self, canon_ab, ronda, texto=None, origen="canon.py (con las decisiones del estimador aplicadas)"):
         """reglas.py no deja armar: las fallas que dependen de la LECTURA (no las de imagen: esas las genera el programa)
         vuelven al modelo con los ids de la lectura; corrige el canon AB en un sandbox y la cadena se repite."""
@@ -645,6 +648,12 @@ class Runner:
         canon_ab = self.resolver(A, n, rev)
         for ronda in range(MAX_CORRECCION + 1):
             canon = self.decisiones(canon_ab)
+            altas = completitud.caras_sobre_ceiling(json.load(open(canon)))     # R80e.48
+            if altas and not self.a.dry_run and ronda < MAX_CORRECCION:
+                self.corregir(canon_ab, ronda + 1, origen="R80e.48 altura por cara contra el ceiling del cuarto", texto="\n".join(
+                    f"{self.mapa_inv(w)} face {r}: height_ft {h} > ceiling del cuarto {hc} ft (A-121): el board va al ceiling "
+                    f"(+6\" partition note) salvo que el detalle diga full height" for w, r, h, hc in altas))
+                continue
             try:
                 self.calcular(canon)
             except Alto as e:                   # canon.py rechaza la lectura con las decisiones: también es lectura

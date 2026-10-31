@@ -180,6 +180,27 @@ def alturas_placeholder(c, titulos):
     return {"walls": ws, "hojas": hojas}
 
 
+def caras_sobre_ceiling(c, margen_ft=1.0):
+    """R80e.48: una face cuyo room tiene ceiling en el canon (mismo número de cuarto) no sube a deck: su altura no puede
+    pasar la del ceiling + margen (board a ceiling / 6" sobre ceiling, partition notes), salvo que su fuente diga
+    'full height' / 'to deck' / 'above ceiling'. -> [(wall, room, h_face, h_ceiling)]"""
+    num = lambda t: set(re.findall(r"\b\d{3}\b", str(t or "")))
+    ceil = [(num(z.get("room")), float(z["height_ft"])) for z in c.get("ceilings") or []
+            if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+    out = []
+    for w in c.get("walls") or []:
+        for f in w.get("faces") or []:
+            if not isinstance(f, dict) or f.get("height_ft") is None:
+                continue
+            if re.search(r"full height|to deck|above ceiling|hasta deck", str(f.get("height_source") or ""), re.I) and \
+                    not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                continue
+            hs = [h for n, h in ceil if n & num(f.get("room"))]
+            if hs and float(f["height_ft"]) > max(hs) + margen_ft:
+                out.append((w["id"], f.get("room"), f["height_ft"], max(hs)))
+    return out
+
+
 def motivo_conteos(r):
     """Texto para la continuación: los tags / símbolos concretos que faltan, con hoja y coordenadas."""
     l = []

@@ -6,7 +6,12 @@ Sonnet, PDF limpio, overlay `decisiones_BN.json` con decisiones generales por at
 - **El Excel pasa TODAS las compuertas** (`Takeoff_BN_runner_v5.xlsx`): canon.py, inventario, planmark, la compuerta reglas.py dentro del armado, alcances y registro. reglas.py después del armado deja **1 falla: el back-check pendiente**, que es paso humano o agente posterior (R80e.30). Es el primer Excel por API en condición de ir al back-check.
 - **Alturas correctas (R80e.44):** los walls a deck salen en 25.0 ft desde "B.O. DECK ABOVE EL. 25'-0" V.I.F." de 1/A-400B, con la RFI de 24'-0" / 25'-7". En la #4 eran 20 ft placeholder.
 - **LF: 619.84 contra 707.12 de rev13 (−12.3 %).**
-- **Cobertura (paso 12): no corrió**, sin presupuesto.
+- **Cobertura (paso 12):** corrió después, con autorización del usuario ($0.86): **51 / 58 (87.93 %)**. Los 7 huecos son notas generales de A-001; ver `cobertura.md`.
+- **Back-check (contaminado: misma sesión):** `back-check/BACKCHECK_v5.md`. Confirma en el plano:
+  - column wraps C25 omitidos (crítico);
+  - doble conteo de 30 ft de W2-04 con C-H1-N de A-221 (mayor);
+  - faces de restrooms a deck en vez del ceiling GWB 9'-0" (mayor).
+  - Reglas nuevas: R80e.47 y R80e.48.
 - **Costo: $14.79 de $15.**
 
 ## Costo por paso (corrida #5)
@@ -22,7 +27,7 @@ Sonnet, PDF limpio, overlay `decisiones_BN.json` con decisiones generales por at
 | Cobertura | 0 | — (sin presupuesto) | | | |
 | **Total corrida #5** | 14 | **14.79** | | | |
 
-Total histórico: #1 $4.99 + #2 $11.04 + #3 $13.56 + #4 $15.01 + #5 $14.79 = **$59.39**. El detalle está en `costos_run5.csv`.
+Total histórico: #1 $4.99 + #2 $11.04 + #3 $13.56 + #4 $15.01 + #5 $14.79 + cobertura v5 $0.86 = **$60.25**. El detalle está en `costos_run5.csv`.
 
 ## Walls leídos vs inventario
 - A: 43 walls; tags sin wall 0, columnas sin column_wrap 0, discontinuas sin soffit_side 0, alturas placeholder 0

@@ -92,6 +92,8 @@ Los términos del trade van en inglés.
 | BE-79 | Runner real #5 B&N 31-oct | Un parche parcial de una decisión sobre faces que la lectura no trae creaba faces a medias (solo board), y canon.py caía con KeyError 'layers'; 3 correcciones pagadas sin efecto | R80e.45: parche parcial sobre un ítem ausente = sin objeto | canon.py pasa sin corrección |
 | BE-80 | Runner real #5 B&N 31-oct | Column wraps 0 de 9: A los excusó como existentes (C23) y B los puso en misc_items COL-* (C25, 10/A-101); la resolución partió de A sin ver la contradicción | R80e.46 1: razones none y misc_items en la comparación A/B | La comparación de la #5 detecta las 7 COL-* que solo trae B |
 | BE-81 | Runner real #5 B&N 31-oct | Fila del type F PENDING: la corrección solo recibía "partition_types sin dato obligatorio" (R9: box con tag sin fos_chain) | R80e.46 2: el motivo exacto de partition_types va a la corrección | Cerrada en 1 ronda: Excel entregable (1 falla = back-check) |
+| BE-82 | Back-check v5 31-oct | Doble conteo entre hojas: W2-04 extendido 30.0 ft en A-101 sobre el muro norte del Cafe Workroom 104, ya contado en A-221 como C-H1-N (type 2 +9.3 %) | R80e.47 en el prompt de lectura (compuerta automática pendiente de registro entre hojas) | Pendiente de la próxima corrida |
+| BE-83 | Back-check v5 31-oct | Faces de restrooms a deck (25 ft) con ceiling GWB 9'-0" (A-121): W.R. +44.7 % | R80e.48: caras_sobre_ceiling después de las decisiones → corrección | Detecta 11 faces en el v5 y 0 en rev13 |
 
 ---
 

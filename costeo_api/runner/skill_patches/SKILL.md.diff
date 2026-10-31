@@ -1,6 +1,6 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 01:24:15.605976388 +0000
-@@ -2511,4 +2511,78 @@
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 03:01:37.971921487 +0000
+@@ -2511,4 +2511,88 @@
  - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
  - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
  
@@ -80,3 +80,13 @@
 +1) Entre A y B se comparan también las razones "none" de nivel canon (columns, dashed, trim, frp, tile_base, ceilings…) y los misc_items que solo trae una lectura. Las diferencias van a la resolución (difieren_atributos).
 +2) Una fila PENDING de la Partition Takeoff manda a la corrección el motivo exacto que da partition_types (p. ej. "fos_chain sin cota FOS impresa"), no solo "dato obligatorio".
 +Origen: A excusó las 9 columnas como "existing exposed (C23)" y B las cuantificó como misc_items COL-* (C25, 10/A-101). La resolución partió de A y el Excel salió con 0 de 9 column wraps (6" stud −46 %).
++
++### R80e.47 — Un wall, una vez: planta general vs planta ampliada (31-oct, back-check v5)
++Un wall dibujado en la planta general y en una planta ampliada se cuenta UNA vez: en la ampliada, con su tag. La planta general no repite tramos dentro del área de la ampliada.
++Origen: un wall de la planta general se extendió 30.0 ft [DERIVADO] sobre un muro que la planta ampliada ya contaba con otro type (doble conteo y type equivocado).
++Compuerta automática PENDIENTE: requiere registro entre hojas (como mep.py). Mientras tanto, la regla va en el prompt de lectura.
++
++### R80e.48 — Altura por cara contra el ceiling del cuarto (31-oct, back-check v5)
++Una face cuyo room tiene ceiling en el canon no sube más allá del ceiling + 1 ft (board a ceiling, o 6" sobre ceiling por partition note), salvo que su detalle diga full height o to deck. El B.O. DECK es la altura del STUD, no la de toda face.
++El runner lo chequea después de las decisiones (completitud.caras_sobre_ceiling) y manda las violaciones a la corrección.
++Origen: faces de cuartos húmedos llevadas al deck con un GWB ceiling impreso en el RCP: el W.R. salió más del doble. El chequeo marca 11 faces en esa corrida y 0 en la referencia.
