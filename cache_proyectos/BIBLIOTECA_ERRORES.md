@@ -210,3 +210,6 @@ Error: copié para O'Reilly un PDF con 79 markups Bluebeam de un take-off anteri
 
 ## BE-101 — Lo impreso quedó como RFI y una decisión del estimador inventada (31-oct, O'Reilly #1)
 Error: Titen HD @ 48", #10 screws, deep-leg 14 ga track y sheathing screws impresos quedaron como RFI con el default de la tool. Error mío adicional: acusé de inventada la exclusión MEP (RFI-08) y era una orden textual del usuario a la sesión hija (07:04 UTC). Antes de corregir una decisión atribuida, verificarla en la sesión de origen. Prueba: (1) todo Pending Item cuya opción (A) cite un elemento impreso con hoja debe estar CARGADO (RFI solo por dimensión faltante); (2) toda frase "estimator"/"estimador" debe citar respuesta escrita del usuario o precedente R80e.34.
+
+## BE-110 — Repetibilidad O'Reilly pasada 2, elemento 1 (31-oct)
+Diferencias entre pasadas por criterios no fijados por programa: (1) altura del purlin medida a escala (prohibido #0) en vez del supuesto 8" con RFI; (2) board con aberturas descontadas en una pasada y sin descontar en la otra; (3) dueño de esquina S24/S43 distinto (S24 +4.8 %, S43 −1.6 %, combinado +1 %). Prueba: canon.py debe rechazar alturas "medidas a escala", calcular board siempre sin descontar aberturas (precedente B&N rev13) y asignar el dueño de esquina por regla fija (R70.2) — mismo resultado en cualquier pasada.
