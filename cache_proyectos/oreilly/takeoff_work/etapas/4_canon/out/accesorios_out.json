@@ -8,16 +8,16 @@
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
-  "drywall screws": 9586.1,
-  "framing screws": 1352.0,
-  "slab pins": 151.04,
-  "expansion anchors": 36.0,
+  "drywall screws": 0.0,
+  "framing screws": 0.0,
+  "slab pins": 0.0,
+  "expansion anchors": 0.0,
   "joint compound": 607.95,
   "joint tape": 3124.18,
   "Level 5 finish": 0.0,
   "deflection clips": 0.0,
-  "framing screws heavy gauge": 792.0,
-  "drywall screws heavy gauge": 546.37
+  "framing screws heavy gauge": 0.0,
+  "drywall screws heavy gauge": 0.0
  },
  "unidades": {
   "additional head track": "lf",
@@ -73,7 +73,7 @@
    "valor": 7.33,
    "unidad": "lf",
    "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"]; default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)]",
    "operacion": "Door 3 (S21-N): (6.0 + 2 x 0.667) x 1 = 7.33"
   },
   {
@@ -81,7 +81,7 @@
    "valor": 12.7,
    "unidad": "lf",
    "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"]; default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)]",
    "operacion": "Window D1 (S21-S): (11.365 + 2 x 0.667) x 1 = 12.7"
   },
   {
@@ -89,7 +89,7 @@
    "valor": 12.7,
    "unidad": "lf",
    "estado": "CRITERIO",
-   "source": "HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"; Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"]; default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator decision #1: R.O. + 1'-4\" (8\" bearing each side)]",
    "operacion": "Window D2 (S21-S): (11.365 + 2 x 0.667) x 1 = 12.7"
   },
   {
@@ -105,7 +105,7 @@
    "valor": 18.09,
    "unidad": "sf",
    "estado": "CRITERIO",
-   "source": "Estimator criterion (return width = 6\" stud depth, not dimensioned; RFI with delta at 0.20 ft)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator criterion (return width = 6\" stud depth, not dimensioned; RFI with delta at 0.20 ft)]",
    "operacion": "edges 36.19 LF x 0.5 ft = 18.09 SF [Window D1 18.09 [12/A5.2]; Window D2 18.09 [12/A5.2]]"
   },
   {
@@ -117,14 +117,6 @@
    "operacion": "No FRP called; restrooms W-4 sanitary wall and ceiling panel system (A1.2) is a finish item - RFI-07"
   },
   {
-   "familia": "PAFs and duct sleeves",
-   "valor": 0.0,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "-",
-   "operacion": "no parapet and no ducts in walls"
-  },
-  {
    "familia": "access panel",
    "valor": 0.0,
    "unidad": "pcs",
@@ -133,27 +125,11 @@
    "operacion": "no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB"
   },
   {
-   "familia": "drywall screws",
-   "valor": 9586.1,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "Estimator yield, Inputs!B20 (GA-216: field 12\" O.C., perimeter 8\" O.C.)",
-   "operacion": "1.2 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 - 455.31 on 18/16/14 ga walls = 7988.42 SF) = 9586.1"
-  },
-  {
-   "familia": "drywall screws heavy gauge",
-   "valor": 546.37,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "default (no sheet): #6 x 1-1/4\" Type S-12 bugle head screws for board on 18 / 16 ga studs (industry rule; R80e.72)",
-   "operacion": "1.2 x (455.31 SF of board on the 18/16/14 ga walls (EXT-HEAD-6, EXT-HEAD-8, EXT-PIER-L-6, EXT-PIER-L-8, EXT-PIER-R-6, EXT-PIER-R-8, EXT-SOUTH-BAND, VEST-HD-B1, VEST-HD-B2, VEST-HD-C) = 455.31 SF) = 546.37"
-  },
-  {
    "familia": "joint compound",
    "valor": 607.95,
    "unidad": "lb",
    "estado": "DERIVADO",
-   "source": "Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)]",
    "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 607.95"
   },
   {
@@ -161,40 +137,8 @@
    "valor": 3124.18,
    "unidad": "lf",
    "estado": "DERIVADO",
-   "source": "Estimator yield, Inputs!B24 (370 LF per 1,000 SF)",
+   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
    "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 3124.18"
-  },
-  {
-   "familia": "framing screws",
-   "valor": 1352,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "Estimator yield, Inputs!B21 (2 per stud-to-track connection at each end)",
-   "operacion": "4 x 338 stud pieces of the 25/20 ga walls and other framing [S21-E1 24 + S21-E2 7 + S21-N 58 + S21-S 58 + S21-W1 6 + S21-W2 14 + S24-OFF 9 + S24-RR 12 + S24-RR104S 6 + S41-B-H 3 + S41-B-V 5 + S41-C-H 3 + S41-C-V 4 + S42-H1 22 + S42-H2 14 + S42-V1 28 + S42-V2 6 + S43-OFF-E 7 + S43-OFF-S 11 + S43-OFF-W 7 + S43-RR-S 19 + S43-RR103-W 7 + S61-RR 8 (walls 338); ] = 1352"
-  },
-  {
-   "familia": "framing screws heavy gauge",
-   "valor": 792,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "default (no sheet): #10-16 x 3/4\" Teks for 18 / 16 ga framing, min. 3 per connection (industry rule; R80e.72)",
-   "operacion": "6 (3 per connection x 2 ends) x 132 stud pieces of the 18/16/14 ga walls (EXT-HEAD-6 31 + EXT-HEAD-8 31 + EXT-PIER-L-6 6 + EXT-PIER-L-8 6 + EXT-PIER-R-6 6 + EXT-PIER-R-8 6 + EXT-SOUTH-BAND 28 + VEST-HD-B1 5 + VEST-HD-B2 5 + VEST-HD-C 8 = 132) = 792"
-  },
-  {
-   "familia": "slab pins",
-   "valor": 151.04,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)",
-   "operacion": "interior bottom track on slab 151.04 LF (15 walls, x rows) / 1.0 = 151.04"
-  },
-  {
-   "familia": "expansion anchors",
-   "valor": 36.0,
-   "unidad": "pcs",
-   "estado": "DERIVADO",
-   "source": "SILL TRACK ANCHORAGE exterior walls @ 8\" O.C. (stud schedule)",
-   "operacion": "exterior bottom track on slab 24.0 LF (4 walls) / 0.6667 = 36.0"
   },
   {
    "familia": "Level 5 finish",
@@ -211,6 +155,62 @@
    "estado": "DERIVADO",
    "source": "3/S5.1",
    "operacion": "not applicable: Deflection by continuous 3\" x 14 ga deep leg slotted deflection track at the purlin (3/S5.1, 4/S5.1) and A1.1 note 2.C deflection channels 1 1/2\" min; no deflection clips called"
+  },
+  {
+   "familia": "drywall screws",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 9586.1"
+  },
+  {
+   "familia": "drywall screws heavy gauge",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 546.37"
+  },
+  {
+   "familia": "framing screws",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 684.0"
+  },
+  {
+   "familia": "framing screws heavy gauge",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 792.0"
+  },
+  {
+   "familia": "slab pins",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 37.76"
+  },
+  {
+   "familia": "expansion anchors",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 6.0"
+  },
+  {
+   "familia": "PAFs and duct sleeves",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "estimator order 2026-10-31 (exclude all fasteners)",
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 0.0"
   },
   {
    "familia": "extra framing ATM",
@@ -253,13 +253,6 @@
    "alternativa": "0.20 ft (frame at mid-wall)"
   },
   {
-   "familia": "slab pins",
-   "tema": "pin spacing: carried one pin every 12.0\" (Estimator criterion (Handoff - Approved: tightest of the three in the set, SILL TRACK ANCHORAGE interior @ 12\" O.C.)); alternatives: one row @ 16\" / one row @ 24\"",
-   "delta_16in": -37.76,
-   "delta_24in": -75.52,
-   "unidad": "pcs"
-  },
-  {
    "familia": "stud reinforcement MEP",
    "tema": "MEP sheets excluded by the estimator 2026-10-31: no duct / pipe crossing read (RFI-08)",
    "delta": "per duct crossing: + MAX(1, ROUNDUP(width/24\")) plates + 1 sleeve",
@@ -276,9 +269,9 @@
   "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves",
   "access panel": "Access panel",
   "drywall screws": "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",
-  "framing screws": "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs)",
-  "slab pins": "Power-driven fasteners, slab pins for the bottom track",
-  "expansion anchors": "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C.",
+  "framing screws": "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs) -> printed product: #10 screws, each stud flange to track (S1.1 7.E)",
+  "slab pins": "Power-driven fasteners, slab pins for the bottom track -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G; 3/S5.1, 4/S5.1)",
+  "expansion anchors": "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C. -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G)",
   "joint compound": "Joint compound, all purpose",
   "joint tape": "Joint tape, paper",
   "Level 5 finish": "Level 5 finish",

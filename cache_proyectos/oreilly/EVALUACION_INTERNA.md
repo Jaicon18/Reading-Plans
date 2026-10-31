@@ -50,3 +50,17 @@ Lectura de los porcentajes (por qué difieren y si es razonable):
 
 ## 5. Uso de API (incidencia)
 El runner tomó `TAKEOFF_API_KEY` del entorno y lanzó **31 llamadas** a la API (corrección y cobertura) entre 07:40 y 08:28, contra la instrucción de correr por suscripción. Ninguna cambió cantidades: el Material Summary con y sin esas llamadas es idéntico, y la entrega final se rehízo con `--sin-api` y sin la variable (0 llamadas nuevas). Regla nueva R80e.69 (`--sin-api`); registro en `takeoff_work/costos_api_llamadas.csv`.
+
+## 6. rev2 (corrección pedida por la sesión principal, 09:05–09:22 UTC)
+- **Errores de orden de fuentes corregidos:** ítems impresos que habían quedado como RFI ahora se cargan con su producto impreso (programas, sin API):
+  - Titen HD 3/8" @ 48" (S1.1 7.F / 7.G; 3/S5.1, 4/S5.1) en lugar de slab pins @ 12" / Kwik Bolt @ 8" (defaults de otro proyecto): 151.04 + 36 → 37.76 + 6.
+  - #10 framing screws (S1.1 7.E); sin tornillos stud-to-track en el Z-furring sin track: 1,352 → 684.
+  - Deep-leg slotted 3" x 14 ga (3/S5.1, 4/S5.1): +46.83 LF (top track estándar −46.84).
+  - Sheathing screws #6 x 1-1/4" @ 8" (S5.2 KN8): +1,058.
+  - Simpson FCB43.5 por stud (1/S5.3, 3/S5.3): +144.
+  - FRT 2x4 en D1 / D2 (11/A5.2): +36.19 LF.
+- **Atribuciones al estimador:** los defaults del skill ahora salen como "default (no sheet): skill standing criterion / precedent of a previous project" (R80e.73). La exclusión de MEP NO se cambió: es orden directa del usuario en esta sesión (cita textual en RFI-08).
+- Compuertas rev2: reglas 0 fallas · bitácora OK · registro OK · 33 / 33 markups. Indicadores contra B&N rev13 sin cambio material (track por LF sin Z-furring −6.0 %).
+
+## 7. rev3 — toda la tornillería excluida (orden del estimador 2026-10-31 09:08 UTC, verificada en la transcripción de la sesión principal)
+Todas las familias de fasteners en 0 con nota EXCLUDED (R80e.77). Los indicadores de screws por SF de board ya no aplican (0 por decisión); el resto sin cambio. Compuertas OK.

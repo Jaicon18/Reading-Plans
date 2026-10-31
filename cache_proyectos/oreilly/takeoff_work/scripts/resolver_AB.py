@@ -230,3 +230,95 @@ for r in c["rfis"]:
     r["delta"] = f"(A) {o.get('A', {}).get('delta','')} | (B) {o.get('B', {}).get('delta','')} | (C) ____"
 json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
 print("paso12 gaps ok", len(c["rfis"]))
+# ---- rev2 (2026-10-31): printed products govern (LECTURA_S.md, crops lectura_S/img) ----
+cs = c.setdefault("constants", {})
+cs["slab_pin_spacing_ft"] = {"value": 4.0, "source": "S1.1 7.G (intermediate anchors @ 48\" O.C. max); 3/S5.1, 4/S5.1 TITEN HD 3/8\" @ 48\" O.C. (MAX.)"}
+cs["anchor_spacing_ft"] = {"value": 4.0, "source": "S1.1 7.F / 7.G (light gauge steel: Titen HD 3/8\" @ 48\" O.C. max; no separate exterior anchorage printed)"}
+c["acc_nombres"] = dict(c.get("acc_nombres") or {})
+c["acc_nombres"]["power-driven fasteners (slab pins)"] = "Simpson Titen HD 3/8\" anchors, interior bottom track @ 48\" O.C. (S1.1 7.F/7.G; 3/S5.1, 4/S5.1)"
+c["acc_nombres"]["expansion anchors (exterior)"] = "Simpson Titen HD 3/8\" anchors, exterior pier bottom track @ 48\" O.C. (S1.1 7.F/7.G)"
+c["acc_nombres"]["framing screws"] = "#10 framing screws, each stud flange to track (S1.1 7.E) (25/20 ga studs)"
+for w in c["walls"]:
+    if w["id"] in ("S42-H1", "S42-V2"):     # 3/S5.1, 4/S5.1: CONTINUOUS 3"x14ga DEEP LEG SLOTTED DEFLECTION TRACK
+        w["top_track"] = False
+        w["track_source"] = "3/S5.1, 4/S5.1"
+        w["track_note_info"] = "top = CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK (own row, misc DL-TRACK-S42)"
+def add_misc(m):
+    if not any(x["ref"] == m["ref"] for x in c["misc_items"]): c["misc_items"].append(m)
+add_misc({"ref": "DL-TRACK-S42", "familia": "deep-leg slotted deflection track (printed)", "qty": 46.83, "unit": "LF", "source": "3/S5.1",
+    "label": "CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK, (2) #10 SDS to each purlin (3/S5.1, 4/S5.1)",
+    "op": "floor-supported S42 walls to the purlins (S4.1 key plan cuts 3/S5.1, 4/S5.1): S42-H1 38.67 + S42-V2 8.17 = 46.83 LF"})
+add_misc({"ref": "SHEATHING-SCREWS-EXT", "familia": "sheathing screws (printed)", "qty": 1058, "unit": "PCS", "source": "S5.2",
+    "label": "#6 x 1-1/4\" LONG CORROSION RESISTANT SCREWS @ 8\" O.C. along framing members (S5.2 / S5.3 key note 8); S1.1 7.D (#10 @ 6\"/12\") = product RFI-21",
+    "op": "exterior sheathing on studs @ 16\" O.C.: (12/16 lines per ft) x (12/8 screws per ft) = 1.125 / SF x (glass mat 534.88 + FRT plywood 360.79 + 45.12 = 940.79 SF) = 1,058"})
+add_misc({"ref": "FCB43.5-CLIPS", "familia": "framing clips per stud (printed)", "qty": 144, "unit": "PCS", "source": "1/S5.3",
+    "label": "SIMPSON FCB43.5 FRAMING CLIP: KN23 @ 48\" O.C. to CMU w/ (4) #12-14 + (2) 3/16\" Tapcon; KN16 at each PEMB wind beam w/ (4) #12-14 + (2) #12-24 (S5.2 / S5.3)",
+    "op": "1/S5.3 south panel 600S162-43: studs ROUNDUP(36.0 / 1.333) + 1 = 28 x 3 clips drawn (top / middle / bottom, @ 48\") = 84; "
+          "3/S5.3 head wall: studs ROUNDUP(38.67 / 1.333) + 1 = 30 x 2 wind beams = 60; 84 + 60 = 144 clips (fasteners per clip as labelled)"})
+add_misc({"ref": "SDS-STUD-TIES", "familia": "#10 framing screws (printed)", "qty": 0, "unit": "PCS", "source": "S5.2",
+    "label": "KN 20 studs fastened together with #10 screws @ 24\" O.C. - counted with the stud ties (RFI-09)", "op": "0 here; see RFI-09 = 0"}) if False else None
+for b in c["blocking_items"]:
+    if b["ref"] == "BLK-CMU-OPENINGS" and "92.86" not in b["op"]:
+        b["lf"] = 92.86
+        b["op"] = ("door 2: 3.333 + 2 x 7.0 = 17.33; door 7: 17.33; door 3: 6.0 + 2 x 8.0 = 22.0 (1/A5.1-6/A5.1); windows D1 / D2 R.O. 11'-4 3/8\" x 3'-4 3/8\" "
+                   "(A5.2): 2 x (11.365 + 2 x 3.365) = 36.19 (11/A5.2 head 2X4; 12/A5.2 jamb size not printed -> 2X4 as the head, RFI-17) -> "
+                   "17.33 + 17.33 + 22.0 + 36.19 = 92.86 LF")
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("rev2 ok")
+an = c["acc_nombres"]
+an.pop("power-driven fasteners (slab pins)", None); an.pop("expansion anchors (exterior)", None)
+an["slab pins"] = "Simpson Titen HD 3/8\" anchors, interior bottom track @ 48\" O.C. (S1.1 7.F/7.G; 3/S5.1, 4/S5.1)"
+an["expansion anchors"] = "Simpson Titen HD 3/8\" anchors, exterior pier bottom track @ 48\" O.C. (S1.1 7.F/7.G)"
+an["framing screws"] = an.pop("framing screws", "#10 framing screws, each stud flange to track (S1.1 7.E) (25/20 ga studs)")
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("names ok")
+UPD = {
+ "RFI-17": ("FRT blocking at the D1 / D2 jambs: size not printed (12/A5.2)", "loaded 2X4 as the head (11/A5.2): 36.19 LF of the 92.86 LF row; FRT plywood strip at the D1 / D2 head width not printed", "+/- jamb blocking size; FRT plywood strip at the heads about +15 SF"),
+ "RFI-20": ("FCB43.5 clips: 'one clip per stud' drawn, not written (1/S5.3, 3/S5.3)", "loaded 144 clips (one per stud at each clip line drawn)", "if only every other stud: -72 clips"),
+ "RFI-21": ("Sheathing screw product: S5.2 KN8 #6 x 1-1/4\" @ 8\" vs S1.1 7.D #10 @ 6\" / 12\"", "loaded 1,058 #6 x 1-1/4\" per S5.2 KN8 (exterior sheathing detail governs the general note)", "if S1.1 7.D: #10 product, about +240 screws (6\" at sheet perimeter)"),
+ "RFI-25": ("Deep-leg track at the header walls 1/S5.1, 2/S5.1 (only 3/S5.1, 4/S5.1 print it)", "loaded 46.83 LF deep-leg 3\" x 14 ga on S42-H1 / S42-V2; header walls keep standard top track", "+ 75.77 LF deep-leg if the header walls take it"),
+ "RFI-26": ("Track anchor embedment 4\" (S1.1 7.F) vs 3-1/4\" (3/S5.1, 4/S5.1) and anchors at wall ends / openings (S1.1 7.F)", "loaded Titen HD 3/8\" @ 48\" (S1.1 7.G) on every bottom track on slab", "embedment only (product length); + 1 anchor at each wall end / opening per 7.F about +20"),
+ "RFI-27": ("#10 screws per flange not printed (S1.1 7.E)", "loaded #10 framing screws, 4 per stud (2 flanges x 2 ends); none on the Z-furring without track", "0 (count by the skill standing yield)"),
+}
+for r in c["rfis"]:
+    if r["id"] in UPD:
+        t_, s_, d_ = UPD[r["id"]]
+        r["tema"], r["supuesto"] = t_, s_
+        r["opciones"]["A"]["delta"] = d_
+        o = r["opciones"]; r["delta"] = f"(A) {o['A'].get('delta','')} | (B) {o['B'].get('delta','')} | (C) ____"
+    if r["id"] == "RFI-08":
+        r["opciones"]["A"]["source"] = "estimator order in this session, 2026-10-31 (\"excluye todo lo electrico, civil, cabinet, mep\")"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("rfi upd ok")
+an = c["acc_nombres"]
+an["slab pins"] = "Power-driven fasteners, slab pins for the bottom track -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G; 3/S5.1, 4/S5.1)"
+an["expansion anchors"] = "Expansion anchors, exterior bottom track -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G)"
+for r in c["rfis"]:
+    if r["id"] == "RFI-08":
+        r["opciones"]["A"]["source"] = "estimator order in this session, 2026-10-31 (exclude all electrical, civil, cabinet and MEP sheets)"
+        r["opciones"]["A"]["texto"] = "MEP sheets not read: duct / pipe penetrations, framed openings and stud reinforcement not counted"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+an = c["acc_nombres"]
+an["expansion anchors"] = "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C. -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G)"
+an["framing screws"] = "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs) -> printed product: #10 screws, each stud flange to track (S1.1 7.E)"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+# ---- rev3: estimator order 2026-10-31 09:08 UTC "Excluye toda la tornillería" (verified in the parent session transcript) ----
+FX = "estimator decision 2026-10-31: all fasteners excluded"
+c["fasteners_excluded"] = {"why": FX, "source": "estimator order 2026-10-31 (exclude all fasteners)"}
+for m in c["misc_items"]:
+    if m["ref"] == "SHEATHING-SCREWS-EXT" and m["qty"]:
+        m["op"] = f"EXCLUDED - {FX}; computed before the exclusion: {m['op']} = 0"
+        m["qty"] = 0
+    if m["ref"] == "FCB43.5-CLIPS" and "fasteners excluded" not in m["label"]:
+        m["label"] += " - clip fasteners (#12-14, #12-24, Tapcon) EXCLUDED (" + FX + ")"
+for r in c["rfis"]:
+    if r["id"] in ("RFI-21", "RFI-26", "RFI-27") and not r["tema"].startswith("CLOSED"):
+        r["tema"] = "CLOSED - EXCLUDED (" + FX + "): " + r["tema"]
+        r["supuesto"] = "0 (fasteners excluded)"
+        r["opciones"]["A"]["delta"] = "0 (excluded)"
+    if r["id"] in ("RFI-09", "RFI-20") and "fasteners excluded" not in r["supuesto"]:
+        r["supuesto"] += " - screws / bolts / anchors of this item EXCLUDED (" + FX + ")"
+    o = r.get("opciones") or {}
+    r["delta"] = f"(A) {o.get('A', {}).get('delta','')} | (B) {o.get('B', {}).get('delta','')} | (C) ____"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("rev3 ok")

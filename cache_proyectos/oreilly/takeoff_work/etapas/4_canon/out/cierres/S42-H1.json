@@ -65,18 +65,7 @@
         "v": 38.67,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "bottom 38.667 x 1 = 38.67; top 38.667 x 1 = 38.67; bracing ROUNDUP(15.173 x 12 / 48.0) - 1 = 3 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 116.0 (5/A4.2)",
-        "unidad": null
-      }
-    },
-    "TRACK_TOP": {
-      "unidad": "LF",
-      "formula": null,
-      "val": {
-        "v": 38.67,
-        "estado": "DERIVADO",
-        "fuente": null,
-        "operacion": "bottom 38.667 x 1 = 38.67; top 38.667 x 1 = 38.67; bracing ROUNDUP(15.173 x 12 / 48.0) - 1 = 3 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 116.0 (5/A4.2)",
+        "operacion": "bottom 38.667 x 1 = 38.67; top 38.667 x 1 = 0.0; bracing ROUNDUP(15.173 x 12 / 48.0) - 1 = 3 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 116.0 (5/A4.2)",
         "unidad": null
       }
     },
@@ -87,7 +76,7 @@
         "v": 116.0,
         "estado": "DERIVADO",
         "fuente": null,
-        "operacion": "bottom 38.667 x 1 = 38.67; top 38.667 x 1 = 38.67; bracing ROUNDUP(15.173 x 12 / 48.0) - 1 = 3 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 116.0 (5/A4.2)",
+        "operacion": "bottom 38.667 x 1 = 38.67; top 38.667 x 1 = 0.0; bracing ROUNDUP(15.173 x 12 / 48.0) - 1 = 3 rows (A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL\"; 1/S5.1 horizontal blocking @ 48\" O.C.) -> 116.0 (5/A4.2)",
         "unidad": null
       }
     },
@@ -115,6 +104,7 @@
     }
   },
   "excluidas": {
+    "TRACK_TOP": "EXCLUDED here: top = CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK (own row, misc DL-TRACK-S42) (3/S5.1, 4/S5.1)",
     "HEADER": "EXCLUDED: wall has no opening on A1.1",
     "INSULATION": "EXCLUDED: batt insulation not in scope (estimator criterion: no insulation); sound batt of S43 / S61 (A1.1) in Scope Checklist",
     "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order, U8)",
@@ -125,5 +115,5 @@
     "SILL_TRACK": "EXCLUDED. A sill track only exists under an opening that HAS a sill (window, pass-through, or a framed opening with supported equipment). This wall has no opening with a sill declared: it has no openings. Inviolable rule: doors carry a header and do NOT carry a sill."
   },
   "alcance": [],
-  "sello": "c7920f5ae2e55915"
+  "sello": "2d127c7fd8762c4c"
 }
