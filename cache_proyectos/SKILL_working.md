@@ -2579,3 +2579,12 @@ Compuerta automática PENDIENTE: requiere registro entre hojas (como mep.py). Mi
 Una face cuyo room tiene ceiling en el canon no sube más allá del ceiling + 1 ft (board a ceiling, o 6" sobre ceiling por partition note), salvo que su detalle diga full height o to deck. El B.O. DECK es la altura del STUD, no la de toda face.
 El runner lo chequea después de las decisiones (completitud.caras_sobre_ceiling) y manda las violaciones a la corrección.
 Origen: faces de cuartos húmedos llevadas al deck con un GWB ceiling impreso en el RCP: el W.R. salió más del doble. El chequeo marca 11 faces en esa corrida y 0 en la referencia.
+
+### R80e.49 — Metal trim por programa y especificación del type en la comparación A/B (31-oct, preparación de la #6)
+1) El metal trim de oficio (regla 53.1) se deriva por PROGRAMA de la geometría (trim.py), en cada categoría que la lectura no trae:
+   - walls parciales de 6 a 12 ft con el tope expuesto: corner bead en los 2 bordes superiores + 2 esquinas x altura en cada extremo libre;
+   - column wraps con board de gypsum: 4 esquinas x altura;
+   - GWB cloud: corner bead en el borde inferior + J-bead.
+   Los counter walls (< 6 ft) y los box solo de plywood no llevan corner bead.
+2) La comparación A/B mira también stud_size, oc_in y gauge de los walls emparejados. Las diferencias van a la resolución.
+Origen: el v5 traía 42 LF de metal trim contra 957 de rev13 (−95.6 %); con trim.py da −31.2 % (faltan los column wraps). E1 / E2 salieron 3-5/8" en A y 6" en B (E/A-221), y la resolución tomó A (6" stud −46 %).

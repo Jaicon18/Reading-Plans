@@ -94,6 +94,7 @@ Los términos del trade van en inglés.
 | BE-81 | Runner real #5 B&N 31-oct | Fila del type F PENDING: la corrección solo recibía "partition_types sin dato obligatorio" (R9: box con tag sin fos_chain) | R80e.46 2: el motivo exacto de partition_types va a la corrección | Cerrada en 1 ronda: Excel entregable (1 falla = back-check) |
 | BE-82 | Back-check v5 31-oct | Doble conteo entre hojas: W2-04 extendido 30.0 ft en A-101 sobre el muro norte del Cafe Workroom 104, ya contado en A-221 como C-H1-N (type 2 +9.3 %) | R80e.47 en el prompt de lectura (compuerta automática pendiente de registro entre hojas) | Pendiente de la próxima corrida |
 | BE-83 | Back-check v5 31-oct | Faces de restrooms a deck (25 ft) con ceiling GWB 9'-0" (A-121): W.R. +44.7 % | R80e.48: caras_sobre_ceiling después de las decisiones → corrección | Detecta 11 faces en el v5 y 0 en rev13 |
+| BE-84 | Preparación #6, 31-oct | Metal trim −95.6 % (42 LF de 957): la lectura no deriva el corner bead de oficio; E1 / E2 3-5/8" (A) vs 6" (B), y la comparación no miraba stud_size | R80e.49: trim.py + stud_size / oc / gauge en difieren_atributos | Trim con las lecturas de la #5: −31.2 % (faltan los column wraps) |
 
 ---
 

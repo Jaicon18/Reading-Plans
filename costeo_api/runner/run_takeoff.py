@@ -36,6 +36,7 @@ import overlay  # noqa: E402
 import completitud  # noqa: E402
 import reconcile  # noqa: E402
 import evidencia  # noqa: E402
+import trim  # noqa: E402
 
 # Archivos de entrada del proyecto que la lectura (o el estimador) produce además del canon. En dry-run se copian
 # del proyecto de referencia; en una corrida real los escribe el paso de lectura (prompts/lectura.md).
@@ -65,6 +66,11 @@ def atributos_ab(a, b):
         if ha is not None and hb is not None and abs(float(ha) - float(hb)) > 0.25:
             out.append({"A": w["id"], "B": o["id"], "campo": "height_ft", "valor_A": ha, "valor_B": hb,
                         "fuente_A": str(w.get("height_source"))[:160], "fuente_B": str(o.get("height_source"))[:160]})
+        for k in ("stud_size", "oc_in", "gauge"):     # R80e.49: especificación del type (E1/E2 3-5/8" vs 6")
+            if w.get(k) is not None and o.get(k) is not None and str(w.get(k)) != str(o.get(k)):
+                out.append({"A": w["id"], "B": o["id"], "campo": k, "valor_A": w.get(k), "valor_B": o.get(k),
+                            "fuente_A": str(w.get(k.split("_")[0] + "_source") or w.get("stud_source") or "")[:160],
+                            "fuente_B": str(o.get(k.split("_")[0] + "_source") or o.get("stud_source") or "")[:160]})
         ba = sorted(str(f.get("board")) for f in w.get("faces") or [] if isinstance(f, dict))
         bb = sorted(str(f.get("board")) for f in o.get("faces") or [] if isinstance(f, dict))
         if ba != bb:
@@ -454,7 +460,9 @@ class Runner:
             ev = evidencia.Evidencia(os.path.abspath(self.a.pdf), evidencia.mapa_hojas(mapa),
                                      os.path.join(self.k, "etapas", "4_canon", "img_runner"))
             self.mep_registro(c, ev)
+            tp = [(t["ref"], t["lf"]) for t in trim.derivar(c)]     # R80e.49 (antes de la evidencia: lleva su imagen)
             n = evidencia.aplicar(c, ev, inv)
+            n["trim_programa"] = tp
             log(f"7/11 evidencia por programa: {n}")
         json.dump(c, open(dst, "w"), indent=1, ensure_ascii=False)
         json.dump(t, open(os.path.join(self.k, "takeoff.json"), "w"), indent=1, ensure_ascii=False)
