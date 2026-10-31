@@ -265,6 +265,20 @@ def aplicar(leido, ref_base, ov):
                 cc[k] = copy.deepcopy(v)
                 sin.append({"group": "constants", "list": "constants", "id": k, "derivado": True,
                             "motivo": f"supuesto del estimador con RFI que acompaña a una decisión: {str(v.get('source'))[:80]}"})
+    # R80e.51: un accesorios_none de la lectura cuya familia la decisión del estimador SÍ cuantifica (misc_items,
+    # mep_estimator_count, ...) se quita: manda la decisión (accesorios.py rechaza "none" + cantidad); se lista
+    txt = json.dumps([g.get("canon") for g in ov.get("groups") or []], ensure_ascii=False).lower()
+    an = c.get("accesorios_none")
+    if isinstance(an, list):
+        quedan = []
+        for x in an:
+            fam = str((x or {}).get("familia") or "").lower()
+            if fam and fam in txt:
+                sin.append({"group": "accesorios_none", "list": "accesorios_none", "id": x.get("familia"), "derivado": True,
+                            "motivo": "la decisión del estimador cuantifica esta familia: el 'none' de la lectura se quita"})
+            else:
+                quedan.append(x)
+        c["accesorios_none"] = quedan
     # opening_schedule fijado por una decisión: una abertura que la lectura no trae en ningún wall = decisión sin objeto
     sch = c.get("opening_schedule")
     if isinstance(sch, dict) and sch.get("items"):

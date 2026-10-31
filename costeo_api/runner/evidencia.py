@@ -176,10 +176,26 @@ def grosor(c):
     return n
 
 
+def hoja_de_medida(c):
+    """R80e.52: una medida de band (length_source "band 67.6 pt / 9", "vector ...") sin hoja citada lleva la hoja donde se
+    midió: band.sheet (un hecho del dato, no texto para una compuerta). Y length_op = la misma operación si falta."""
+    n = 0
+    for w in c.get("walls") or []:
+        src = str(w.get("length_source") or "")
+        h = (w.get("band") or {}).get("sheet") or w.get("sheet")
+        if h and src and not HOJA.search(src) and re.search(r"band|vector|\bpt\b", src, re.I):
+            w["length_source"] = f"{h} {src}"
+            n += 1
+        if w.get("length_source") and not w.get("length_op") and re.search(r"[/x+=]", str(w.get("length_source"))):
+            w["length_op"] = w["length_source"]
+    return n
+
+
 def aplicar(c, ev, inventario=None):
     if inventario:
         ev.n["tag_ids"], ev.n["tags_sin_wall"] = tags_a_walls(c, inventario)
     ev.n["thickness"] = grosor(c)
+    ev.n["hoja_de_medida"] = hoja_de_medida(c)
     for w in c.get("walls") or []:
         rec = ev.recorte(w)
         pag = ev.hoja(_txt(w.get("source"), w.get("length_source"), w.get("sheet")))

@@ -2589,5 +2589,13 @@ Origen: faces de cuartos húmedos llevadas al deck con un GWB ceiling impreso en
 2) La comparación A/B mira también stud_size, oc_in y gauge de los walls emparejados. Las diferencias van a la resolución.
 Origen: el v5 traía 42 LF de metal trim contra 957 de rev13 (−95.6 %); con trim.py da −31.2 % (faltan los column wraps). E1 / E2 salieron 3-5/8" en A y 6" en B (E/A-221), y la resolución tomó A (6" stud −46 %).
 
-### R80e.49 — Formato de RFI (usuario 31-oct, REGLA INVIOLABLE, todos los proyectos)
-Cada RFI = opciones múltiples en este orden fijo: (A) PLANOS/specs (N/HOJA + delta), (B) CÓDIGO del trade (cita + delta), (C) Otro (texto libre del estimador/cliente). Si el plano no dice nada o no hay código aplicable, la opción lo declara. Va igual en Pending Items, PARA_REVISAR y en el chat.
+### R80e.50 — Formato de RFI (usuario 31-oct, REGLA INVIOLABLE, todos los proyectos; renumerada: R80e.49 ya era el trim)
+Cada RFI = opciones múltiples en este orden fijo: (A) PLANOS/specs (N/HOJA + delta), (B) CÓDIGO del trade (cita + delta), (C) Otro (texto libre del estimador/cliente). Si el plano no dice nada o no hay código aplicable, la opción lo declara. Va igual en Pending Items (columnas (A) / (B) / (C)), PARA_REVISAR y en el chat. Canon: rfis[] / accesorios_rfi[] con opciones {A: {texto, source, delta}, B: {texto, cita, delta}, C}. Compuerta: reglas.py A_RFI_FORMATO (test_rfi_formato.py).
+
+### R80e.51 — Un "none" de la lectura no contradice una decisión del estimador (31-oct, corrida #6)
+Si la decisión del estimador cuantifica una familia (misc_items, mep_estimator_count, addl_head_track…), el accesorios_none de la lectura para esa familia se quita y se lista: manda la decisión. accesorios.py rechaza "none" + cantidad.
+Origen: la #6 se detuvo en canon.py con "accesorios_none PAFs and duct sleeves: la familia tiene cantidad declarada". 3 correcciones pagadas no podían arreglarlo, porque la cantidad venía de la decisión.
+
+### R80e.52 — La medida de una band lleva la hoja donde se midió (31-oct, corrida #6)
+Una length_source de band / vector sin hoja citada ("band 67.6 pt / 9") lleva antepuesta la hoja de su band (band.sheet), y length_op = la operación. Es un hecho del dato, no texto para una compuerta.
+Origen: 154 fallas de R73.17 / G_IMG ("falta HOJA") en la #6; con la regla, reglas.py baja de 248 a 38.

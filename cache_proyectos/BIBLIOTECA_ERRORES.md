@@ -95,6 +95,9 @@ Los términos del trade van en inglés.
 | BE-82 | Back-check v5 31-oct | Doble conteo entre hojas: W2-04 extendido 30.0 ft en A-101 sobre el muro norte del Cafe Workroom 104, ya contado en A-221 como C-H1-N (type 2 +9.3 %) | R80e.47 en el prompt de lectura (compuerta automática pendiente de registro entre hojas) | Pendiente de la próxima corrida |
 | BE-83 | Back-check v5 31-oct | Faces de restrooms a deck (25 ft) con ceiling GWB 9'-0" (A-121): W.R. +44.7 % | R80e.48: caras_sobre_ceiling después de las decisiones → corrección | Detecta 11 faces en el v5 y 0 en rev13 |
 | BE-84 | Preparación #6, 31-oct | Metal trim −95.6 % (42 LF de 957): la lectura no deriva el corner bead de oficio; E1 / E2 3-5/8" (A) vs 6" (B), y la comparación no miraba stud_size | R80e.49: trim.py + stud_size / oc / gauge en difieren_atributos | Trim con las lecturas de la #5: −31.2 % (faltan los column wraps) |
+| BE-85 | Corrida #6 31-oct | canon.py rechazó "accesorios_none PAFs and duct sleeves" + la cantidad de la decisión (mep_estimator_count); 3 correcciones pagadas inútiles | R80e.51: el none que contradice una decisión se quita y se lista | canon.py pasa con el AB de la #6 |
+| BE-86 | Corrida #6 31-oct | 154 fallas "falta HOJA" en length_source de bands ("band 67.6 pt / 9") | R80e.52: la hoja de la band se antepone (hecho del dato) | reglas.py 248 → 38 |
+| BE-87 | 31-oct | Choque de numeración: dos reglas distintas como R80e.49 (trim / formato de RFI) | El formato de RFI pasa a R80e.50; antes de numerar, leer el último R80e del archivo | Una sola R80e.49 |
 
 ---
 
