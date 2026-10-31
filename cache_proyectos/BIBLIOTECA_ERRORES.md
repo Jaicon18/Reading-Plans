@@ -115,6 +115,8 @@ Los términos del trade van en inglés.
 | BE-102 | 31-oct | O'Reilly: citas fijas de B&N (A-410, A-001A, DM-101) en el Material Summary de otro proyecto | R80e.72 textos genéricos | 0 citas de hojas que no existen en el set (grep de hojas del Excel contra SHEET_MAP) |
 | BE-103 | 31-oct | O'Reilly: hojas raster sin texto: markups sin geometría, contar_tags y tag_ids fallan | R80e.66 / R80e.70 / R80e.71 | markups.json annots = walls del canon; 0 sin_geometria |
 | BE-104 | 31-oct | O'Reilly: type S24 imprime Z-furring sobre CMU además del stud lining; la lectura no lo cargó por falta de familia | R80e.65 familia Z-furring; misc_item ZF-S24 | todo type con dos sistemas (furring + studs) carga los dos |
+| BE-105 | 31-oct | O'Reilly rev1: productos impresos en S1.1 nota 7 y S5.x (Titen HD @ 48", #10 stud-to-track, deep-leg 3" x 14 ga, sheathing screws, FCB43.5) quedaron como RFI y se cargaron defaults (pins @ 12", Kwik Bolt @ 8", #8) | R80e.75 / R80e.76 | ningún producto impreso queda solo en RFI; ningún default donde el set imprime el producto |
+| BE-106 | 31-oct | O'Reilly rev1: defaults citados como "Estimator criterion / Handoff - Approved" y "estimator decision 2026-10-27" (otro proyecto) | R80e.73 | grep "estimator" en el Excel: solo reglas permanentes escritas o precedentes rotulados como tales |
 
 ---
 

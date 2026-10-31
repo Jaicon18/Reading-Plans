@@ -60,12 +60,11 @@ for n, w in enumerate([w for w in C["walls"] if w["element"] == "wall"], 1):
                        head=o.get("head_source") or o.get("source", ""))
         s, r = S[wid], R[wid]
         x.partida("STUD", Val(s["pcs_full"] + s["cripples"], "DERIVADO", operacion=s["operacion"] + f" ({det})"), "pcs")
-        if w.get("bottom_track") is False and w.get("top_track") is False:     # Z-furring on CMU: no track drawn (RFI-16)
-            x.excluir("TRACK_BOTTOM", "EXCLUDED: " + w["track_note_info"] + " (" + w["track_source"] + ")")
-            x.excluir("TRACK_TOP", "EXCLUDED: " + w["track_note_info"] + " (" + w["track_source"] + ")")
-        else:
-            x.partida("TRACK_BOTTOM", Val(r["bottom_lf"], "DERIVADO", operacion=r["operacion"] + f" ({det})"), "LF")
-            x.partida("TRACK_TOP", Val(r["top_lf"], "DERIVADO", operacion=r["operacion"] + f" ({det})"), "LF")
+        for lado, k in (("TRACK_BOTTOM", "bottom_track"), ("TRACK_TOP", "top_track")):
+            if w.get(k) is False:      # Z-furring (RFI-16) / deep-leg track in its own row (3/S5.1, 4/S5.1)
+                x.excluir(lado, "EXCLUDED here: " + w["track_note_info"] + " (" + w["track_source"] + ")")
+            else:
+                x.partida(lado, Val(r["bottom_lf" if k == "bottom_track" else "top_lf"], "DERIVADO", operacion=r["operacion"] + f" ({det})"), "LF")
         if r["bracing_lf"]:
             x.partida("BRACING", Val(r["bracing_lf"], "DERIVADO", operacion=r["operacion"] + f" ({det})"), "LF")
         else:
