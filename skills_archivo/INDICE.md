@@ -7,6 +7,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | Barnes & Noble Colorado Springs | v80s | 2026-10-28 | take-off-metal-frame-drywall_v80s_FINAL-BandN-ColoradoSprings_2026-10-28.zip |
 | Barnes & Noble Colorado Springs (runner API) | v80t | 2026-10-31 | take-off-metal-frame-drywall_v80t_runner_2026-10-31.zip |
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
+| O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
 **MEJOR SKILL VIGENTE: v80s** (B&N, resultado final verificado rev13; probado con la cadena completa).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
