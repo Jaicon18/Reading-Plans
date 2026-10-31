@@ -7,7 +7,7 @@
   },
   "bracing_spacing_in": {
    "value": 48,
-   "source": "A1.1 Interior Wall & Ceiling Notes 2.F 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL'; S5.1 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'"
+   "source": "A1.1 Interior Wall & Ceiling Notes 2.F 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL' (spacing printed; PRODUCT NOT printed in 2.F -> 1-1/2\" C.R. channel = skill criterion, RFI-23); S5.1 details 1-4 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'; S1.1 7.D discrete bracing 'CONTINUOUS 2\"x20ga FLAT METAL STRAPPING ALIGNED WITH FULL DEPTH BLOCKING-IN MEMBERS' (alternative product, RFI-23 B). Applied to every stud run (R53.4 / R60.7) incl. EXT-MS / HEAD-A (3/S5.3 ties key 19) and CORN-S (1/S5.3 clips key 23): RFI-23 C. img img_rev9/rev9_p1_A1.1_2F_S1.1_7D_bridging.png"
   }
  },
  "walls": [
@@ -2673,7 +2673,7 @@
    "qty": 14,
    "unit": "PCS",
    "source": "2/S5.1",
-   "op": "one 2\"x2\"x14ga clip per kicker at the purlin end: ROUNDUP(50.333/4)+1 = 14 pcs",
+   "op": "one 2\"x2\"x14ga clip per kicker at the PURLIN end only: ROUNDUP(50.333/4)+1 = 14 kickers x 1 = 14 pcs. rev9 verified: 2/S5.1 draws the clip only at the kicker top (fastened to the CONT. 6\" stud and kicker); the header end is (2) #10 screws (no clip). 1/S5.1 (S42-02, 8 kickers) draws NO clip: kicker flanges coped and screwed (2) #10 to the 600S200-54 (typ. U.N.O.) -> 0 at S42-02. img img_rev9/rev9_p2p4_S5.1_kicker_ends_clip_angle.png",
    "label": "2\"x2\"x14ga clip (or Steel Network AL362) (2/S5.1)"
   },
   {
@@ -2865,15 +2865,15 @@
    "material": "FRT",
    "label": "(2) FIRE TREATED 2X NAILERS (6/A4.2 key note 11)",
    "source": "6/A4.2",
-   "op": "2 plies x (S42-02 25.455 + S42-03 50.333) = 151.58 LF"
+   "op": "2 plies x (S42-02 25.455 + S42-03 50.333) = 151.58 LF (these are the header-wall BOTTOM nailers at B.O. FRAMING 106'-10\", not parapet nailers)"
   },
   {
    "ref": "BLK-EXT-DOORS",
    "lf": 57.33,
    "material": "FRT",
-   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (1/A5.1, 2/A5.1, 5/A5.1, 6/A5.1)",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (1/A5.1 + 2/A5.1 door 2, 3/A5.1 + 4/A5.1 door 7, 5/A5.1 + 6/A5.1 door 3)",
    "source": "1/A5.1",
-   "op": "R.O. = door + HM frame 2\" (A5.1 frame type 2): doors 2 + 7: 2 x (2 x 7.167 + 3.333) = 35.33; door 3: 2 x 8.0 + 6.0 = 22.0; total 57.33 LF"
+   "op": "head + 2 jambs (no sill at doors) per A5.1 schedule: doors 2 / 7 3'-0\" x 7'-0\" + HM frame type 2 (2\" face printed) -> R.O. 3.333 x 7.167: 2 x (2 x 7.167 + 3.333) = 35.33; door 3 type D ROUGH OPENING printed 6'-0\" x 8'-0\": 2 x 8.0 + 6.0 = 22.0; total 57.33 LF (rev9 verified, img img_rev9/rev9_p5a_A5.1_schedule_RO.png)"
   },
   {
    "ref": "BLK-WIN-D",
@@ -2881,7 +2881,7 @@
    "material": "FRT",
    "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (11/A5.2, 12/A5.2, 13/A5.2)",
    "source": "12/A5.2",
-   "op": "windows D1 + D2: 2 x (head 11.365 + sill 11.365 + 2 jambs x 3.365) = 58.92 LF (13/A5.2 sill draws FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY)"
+   "op": "windows D1 + D2: 2 x (head 11.365 + sill 11.365 + 2 jambs x 3.365) = 58.92 LF (13/A5.2 sill draws FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY); rev9 verified: head + sill + 2 jambs with R.O. 11'-4 3/8\" x 3'-4 3/8\" (A5.2 type D, img_rev5/rev5_p7_A5.2_D1_D2_RO.png)"
   }
  ],
  "trim_items": [
@@ -2938,7 +2938,7 @@
  },
  "tile_base_none_reason": "No tile / cement board base: base B-1 4\" resilient cove (A1.2 finish legend) - no cement board (A1.2 finish schedule, 7/A4.2)",
  "frp_none_reason": "No FRP in the set: restroom walls W-4 'SANITARY WALL AND CEILING PANEL SYSTEM' (A1.2 finish legend, refer project manual) by the finish installer; RFI not raised (finish material, not framing)",
- "edge_blocking_none_reason": "6/A4.2 (header wall bottom nailers counted), 1/A5.1 and 11/A5.2 (opening blocking counted); no edge blocking at board edges drawn in 5/A4.2, 7/A4.2 or the A1.1 wall types",
+ "edge_blocking_none_reason": "6/A4.2 (header wall bottom nailers counted), 1/A5.1 and 11/A5.2 (opening blocking counted); no edge blocking at board edges drawn in 5/A4.2, 7/A4.2 or the A1.1 wall types; FRT 2x TOP nailers of EXT-MS1/2 and HEAD-A (1/A3.1, 2/A3.1 key note 11) and of CORN-S (1/S5.3 key note 4) = parapet nailers: NOT carried, EXCLUDED Div. 06 (estimator decision 22, takeoff alcance ALC-FRT-NAILERS)",
  "deck_breaks_none_reason": "Single-slope PEMB roof (1/4:12, 1/A3.2): no deck break; heights interpolated between T.O. LOW EAVE (2/A3.2) and T.O. HIGH EAVE (1/A3.2)",
  "accesorios_none": [
   {
@@ -3502,6 +3502,71 @@
      "texto": "No top track (as drawn)",
      "cita": "1/S5.1, 2/S5.1",
      "delta": "-75.79 LF"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-23",
+   "familia": "horizontal stud bridging product (A1.1 note 2.F)",
+   "motivo": "A1.1 Interior Wall & Ceiling Notes 2.F prints 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL' with no product. Carried: 1-1/2\" C.R. channel (skill criterion) on every stud run, rows = ROUNDUP(H x 12 / 48) - 1 -> 807.52 LF. S1.1 7.D prints a different structural product for flanges not braced by sheathing: 'CONTINUOUS 2\"x20ga FLAT METAL STRAPPING ALIGNED WITH FULL DEPTH BLOCKING-IN MEMBERS AT EACH END OF WALL RUN, ADJACENT TO OPENINGS, AND @ 8' O.C. MAXIMUM' (discrete bracing @ 6'-0\" O.C. max); S5.1 1-4 print 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'. The EXT-MS piers / HEAD-A (3/S5.3: 362S162-43 ties key 19 @ 48\" across the 6\"+8\" pair, sheathed both faces) and CORN-S (1/S5.3: FCB43.5 to CMU key 23 @ 48\") draw their own lateral elements and no bridging channel; 2.F bridging is carried there too (conservative).",
+   "pregunta": "Which product is the A1.1 2.F horizontal stud bridging (1-1/2\" C.R. channel vs. S1.1 7.D 2\"x20ga flat strap + blocking), and is it required in the 3/S5.3 / 1/S5.3 assemblies that print ties / clips @ 48\"?",
+   "source": "A1.1",
+   "sources_checked": [
+    "A1.1",
+    "S1.1",
+    "1/S5.1",
+    "2/S5.1",
+    "3/S5.1",
+    "4/S5.1",
+    "3/S5.3",
+    "1/S5.3"
+   ],
+   "img": "img_rev9/rev9_p1_A1.1_2F_S1.1_7D_bridging.png",
+   "delta": "(A) 0 (carried: 807.52 LF 1-1/2\" C.R. channel) | (B) S1.1 7.D product: C.R. channel -807.52 LF, 2\"x20ga flat strap +1615.04 LF (both flanges) + full-depth blocking-in pieces at run ends / openings / @ 8' | (C) no 2.F bridging in the 3/S5.3 and 1/S5.3 assemblies: -310.67 LF (EXT-MS 4 x 30.0 = 120.0 + HEAD-A 2 x 77.33 = 154.67 + CORN-S 36.0)",
+   "opciones": {
+    "A": {
+     "texto": "1-1/2\" C.R. channel at 2.F rows on all stud runs (skill criterion)",
+     "source": "A1.1",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "S1.1 7.D 2\"x20ga flat strap each flange + full-depth blocking-in",
+     "cita": "S1.1 7.D",
+     "delta": "-807.52 LF C.R. channel / +1615.04 LF 2\"x20ga strap + blocking-in"
+    },
+    "C": {
+     "texto": "No 2.F bridging where 3/S5.3 ties (key 19) / 1/S5.3 clips (key 23) @ 48\" are printed",
+     "cita": "3/S5.3, 1/S5.3",
+     "delta": "-310.67 LF C.R. channel"
+    }
+   }
+  },
+  {
+   "id": "RFI-24",
+   "familia": "backing at toilet accessories and plumbing fixtures (sizes not printed)",
+   "motivo": "A4.1 accessory general note 1 'CONTRACTOR TO PROVIDE FIRE TREATED WOOD BLOCKING FOR INSTALLATION OF TOILET ACCESSORIES, INCLUDING OWNER FURNISHED AND CONTRACTOR INSTALLED ACCESSORIES'; A4.1 general note C (FRT blocking as required for plumbing fixtures); key note 13 'FIRE TREATED 2X WOOD BLOCKING'; key note 17 water heater platform 'PROVIDE FIRE TREATED BLOCKING ... AS REQUIRED'. Backing size is printed only for grab bars (10/A4.1, BLK-GRAB-BARS 18.0 LF). Conservative assumption carried: 2'-0\" FRT 2x (one stud bay @ 24\" O.C., A1.1 S43 / S61) per accessory, 2 rows for mirrors and wall-hung fixtures, 2 rows x 4'-0\" (printed alcove width, 13/A4.1) for the drinking fountain and the water heater platform: BLK-TOILET-ACC 28.0 + BLK-PLUMB-FIXT 28.0 = 56.0 LF.",
+   "pregunta": "Confirm backing size per toilet accessory / wall-hung fixture / water heater platform (A4.1 accessory note 1, general note C, key notes 13 / 17).",
+   "source": "A4.1",
+   "sources_checked": [
+    "1A/A4.1",
+    "13/A4.1",
+    "10/A4.1",
+    "A4.1 accessory schedule",
+    "A1.1"
+   ],
+   "img": "img_rev9/rev9_p5c_A4.1_accessories_backing.png",
+   "delta": "(A) 0 (carried 56.0 LF FRT 2x) | (B) one 2'-0\" row per item (no 2nd rows): -22.0 LF (34.0 LF: accessories 10 x 2.0 + mirrors 2 x 2.0 = 24.0; fixtures 5 x 2.0 = 10.0) | (C) Other (sizes per owner / plumbing): ____",
+   "opciones": {
+    "A": {
+     "texto": "Carry conservative 56.0 LF",
+     "source": "A4.1",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "One 2'-0\" block per accessory / fixture",
+     "cita": "A4.1 accessory note 1",
+     "delta": "-22.0 LF"
     },
     "C": ""
    }

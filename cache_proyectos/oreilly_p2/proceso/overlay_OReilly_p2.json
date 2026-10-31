@@ -965,7 +965,7 @@
   {
    "label": "G10+G22 est.10 / est.22 -> RFI-12",
    "decision_date": "2026-11-01",
-   "decisions": "fixture backing carried (grab bars); FRT parapet / T.O. stud nailers EXCLUDED Div. 06; continuous 14/A4.1 blocking: no object (overlay_sin_objeto.md)",
+   "decisions": "fixture backing carried: grab bars (10/A4.1) + toilet accessories / wall-hung fixtures / water heater platform (A4.1 notes, rev9, sizes RFI-24); FRT parapet / T.O. stud nailers EXCLUDED Div. 06; continuous 14/A4.1 blocking: no object (overlay_sin_objeto.md)",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -977,6 +977,22 @@
        "label": "FIRE TREATED 2X WOOD BLOCKING behind grab bars (10/A4.1 key note 13)",
        "source": "10/A4.1",
        "op": "per restroom grab bars B 48\" + C 18\" + D 42\" (A4.1 accessory schedule; 1A/A4.1 and elevations 2-9) = 9.0 ft x 2 restrooms = 18.0 LF"
+      },
+      {
+       "ref": "BLK-TOILET-ACC",
+       "lf": 28.0,
+       "material": "FRT",
+       "label": "FIRE TREATED 2X WOOD BLOCKING for toilet accessories (A4.1 accessory general note 1, key note 13)",
+       "source": "1A/A4.1",
+       "op": "[PENDIENTE] size RFI-24 (conservative): accessories tagged on 1A/A4.1 besides the grab bars: A tissue x 2, E napkin x 1, F soap x 2, G paper towel x 2, K mop hanger x 1, L / M door signs x 2 = 10 x 2'-0\" = 20.0; J mirror 18\"x36\" x 2 x 2 rows x 2'-0\" = 8.0; total 28.0 LF"
+      },
+      {
+       "ref": "BLK-PLUMB-FIXT",
+       "lf": 28.0,
+       "material": "FRT",
+       "label": "FIRE TREATED 2X WOOD BLOCKING for wall-hung fixtures and water heater platform (A4.1 general note C, key notes 13 / 17)",
+       "source": "13/A4.1",
+       "op": "[PENDIENTE] size RFI-24 (conservative): wall hung lavatory (key 2) x 2 + urinal (key 3) x 1 = 3 x 2 rows x 2'-0\" = 12.0; hi/lo drinking fountain (key 4, 15/A4.1) 2 rows x 4'-0\" (printed alcove 13/A4.1) = 8.0; water heater platform (key 17) 2 rows x 4'-0\" = 8.0; total 28.0 LF"
       }
      ]
     },
@@ -1719,7 +1735,7 @@
   {
    "label": "G20 est.20",
    "decision_date": "2026-11-01",
-   "decisions": "FCB43.5 one per stud",
+   "decisions": "FCB43.5 one per stud: cornice CORN-S (1/S5.3 key 23, 84) + storefront A head wind beams (3/S5.3 key 16, 60; rev9)",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "items_upsert": {
@@ -1732,6 +1748,15 @@
        "source": "1/S5.3",
        "op": "one FCB43.5 per stud at each clip row drawn (estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 20): 3 rows (1/S5.3 key note 23, @ 48\" vertical) x studs @ 16\" O.C. (key note 22) ROUNDUP(36.0 x 12 / 16)+1 = 28 = 84 pcs",
        "label": "Simpson FCB43.5 framing clip @ 48\" O.C. (1/S5.3 key note 23)"
+      },
+      {
+       "ref": "FCB-WB-HEAD-A",
+       "familia": "framing clips per stud (printed)",
+       "qty": 60,
+       "unit": "PCS",
+       "source": "3/S5.3",
+       "op": "3/S5.3 key note 16 'SIMPSON FCB43.5 FRAMING CLIP ... TO PEMB WIND BEAM' drawn at each of the 2 PEMB wind beams (key 10) on the 8\" stud row (key 18 @ 16\" O.C.); 3/S5.3 is cut on the storefront A head (S4.1 key plan); one per stud (estimator decision 20): 8\" studs over the printed 38'-8\" R.O. 464/16 = 29 + 1 = 30 x 2 wind beams = 60 pcs",
+       "label": "Simpson FCB43.5 framing clip at PEMB wind beams, storefront A head (3/S5.3 key note 16)"
       }
      ]
     }
@@ -1938,7 +1963,7 @@
   {
    "label": "G-flow conservative assumptions (parent order 2026-10-31: unresolved items carried with the conservative option + RFI list)",
    "decision_date": "2026-10-31",
-   "decisions": "RFI-11 pier ties: conservative option B carried pending RFI",
+   "decisions": "RFI-11 pier ties + pier wind beam FCB43.5 (B), RFI-12 sign backing + extinguisher blocking: conservative options carried pending RFI (rev9)",
    "source": "RFI_PENDIENTES_P2.md",
    "canon": {
     "upsert": {
@@ -1950,8 +1975,59 @@
        "unit": "LF",
        "source": "3/S5.3",
        "op": "[PENDIENTE] conservative assumption RFI-11 option B (3/S5.3 not cut at the piers on S4.1; 1/A3.1 keys no ties): 362S162-43 ties (3/S5.3 key 19) @ 48\" per 6\"+8\" pair, pairs @ 16\" over the printed 6'-0\" (ROUNDUP(72/16)+1 = 6) x rows over the printed 20.667 ft (1/A3.1 100'-0\" to 120'-8\": ROUNDUP(20.667/4)+1 = 7) x 2 piers = 84 ties x 1'-2\" (printed 3/S5.3) = 98.0 LF"
+      },
+      {
+       "ref": "FCB-WB-PIERS",
+       "familia": "framing clips per stud (printed)",
+       "qty": 24,
+       "unit": "PCS",
+       "source": "3/S5.3",
+       "op": "[PENDIENTE] conservative assumption RFI-11 option B: 3/S5.3 key 16 FCB43.5 one per 8\" stud (decision 20) at the 2 PEMB wind beams (1/A3.1 'C.L. WIND BEAM' x 2) on the piers EXT-MS1 / EXT-MS2: 8\" studs @ 16\" over the printed 6'-0\" ROUNDUP(72/16)+1 = 6 x 2 wind beams x 2 piers = 24 pcs",
+       "label": "Simpson FCB43.5 framing clip at PEMB wind beams, piers EXT-MS1 / EXT-MS2 (3/S5.3 key note 16) - RFI-11 B"
+      }
+     ],
+     "blocking_items": [
+      {
+       "ref": "BLK-SIGN",
+       "lf": 149.33,
+       "material": "FRT",
+       "label": "FIRE TREATED 2X WOOD BACKING for surface mounted wall sign (A3.1 key note 31, A2.1 key note 9)",
+       "source": "2/A3.1",
+       "op": "[PENDIENTE] conservative assumption RFI-12: 'PROVIDE BACKING' printed (2/A3.1 key 31 on the storefront A head; A2.1 key 9 west and south signs), backing size and sign length not printed (sign sheet SG2.1 not in trade set): 2 rows (top / bottom attachment) x full printed length of the framed element behind each sign: west HEAD-A 38.667 + south cornice CORN-S 36.0 = 2 x 74.667 = 149.33 LF"
+      },
+      {
+       "ref": "BLK-EXTINGUISHERS",
+       "lf": 8.0,
+       "material": "FRT",
+       "label": "FIRE TREATED 2X WOOD BLOCKING for surface mounted fire extinguisher (A1.1 key note 4, 10/A4.2 key note 21)",
+       "source": "10/A4.2",
+       "op": "[PENDIENTE] conservative assumption RFI-12: 'PROVIDE BLOCKING AS REQUIRED FOR MOUNTING' (10/A4.2 key 21), size not printed; A1.1 key note 4 tags counted = 4 (S21-W at door 2, S41 / S21 at door 7, restroom front wall (= A4.1 key 18), vestibule storefront corner) x 2'-0\" (one stud bay; 10/A4.2 prints a 1'-0\" extinguisher zone) = 8.0 LF"
       }
      ]
+    },
+    "items_patch": {
+     "rfis": {
+      "RFI-11": {
+       "__dict__": {
+        "delta": {
+         "__set__": "carried (B, conservative): TIES-HEAD-A 140.0 + TIES-PIERS-EXT-MS 98.0 LF 362S162-43; FCB43.5 at the wind beams 84 pcs (head 60 FCB-WB-HEAD-A = printed 3/S5.3 key 16 + decision 20; piers 24 FCB-WB-PIERS) | (A) ties / clips only where 3/S5.3 is cut: -98.0 LF 362S162-43, -24 pcs FCB43.5 | (C) Other: ____"
+        }
+       }
+      },
+      "RFI-12": {
+       "__dict__": {
+        "motivo": {
+         "__set__": "PARTLY CLOSED - estimator decision 2026-11-01: FRT 2x nailers at T.O. metal stud / top of masonry EXCLUDED (Div. 06, est. 22); grab bar blocking BLK-GRAB-BARS (est. 10). rev9 (conservative carried, open): wall sign backing (2/A3.1 key 31, A2.1 key 9) BLK-SIGN 149.33 LF and fire extinguisher blocking (A1.1 key 4 x 4, 10/A4.2 key 21) BLK-EXTINGUISHERS 8.0 LF - sizes / sign length not printed."
+        },
+        "delta": {
+         "__set__": "(A) carried 157.33 LF FRT 2x (sign 149.33 + extinguishers 8.0) | (B) sign on the 5/8\" FRT plywood sheathing (A3.1 key 34, no extra backing) and extinguisher at the storefront corner without blocking: -149.33 - 2.0 = -151.33 LF | (C) sign size per SG2.1: ____"
+        }
+       }
+      }
+     }
+    },
+    "items_key": {
+     "rfis": "id"
     }
    }
   },

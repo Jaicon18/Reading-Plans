@@ -7,7 +7,7 @@
   },
   "bracing_spacing_in": {
    "value": 48,
-   "source": "A1.1 Interior Wall & Ceiling Notes 2.F 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL'; S5.1 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'"
+   "source": "A1.1 Interior Wall & Ceiling Notes 2.F 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL' (spacing printed; PRODUCT NOT printed in 2.F -> 1-1/2\" C.R. channel = skill criterion, RFI-23); S5.1 details 1-4 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'; S1.1 7.D discrete bracing 'CONTINUOUS 2\"x20ga FLAT METAL STRAPPING ALIGNED WITH FULL DEPTH BLOCKING-IN MEMBERS' (alternative product, RFI-23 B). Applied to every stud run (R53.4 / R60.7) incl. EXT-MS / HEAD-A (3/S5.3 ties key 19) and CORN-S (1/S5.3 clips key 23): RFI-23 C. img img_rev9/rev9_p1_A1.1_2F_S1.1_7D_bridging.png"
   },
   "level5_tags": {
    "value": [
@@ -2854,7 +2854,7 @@
    "qty": 14,
    "unit": "PCS",
    "source": "2/S5.1",
-   "op": "one 2\"x2\"x14ga clip per kicker at the purlin end: ROUNDUP(50.333/4)+1 = 14 pcs",
+   "op": "one 2\"x2\"x14ga clip per kicker at the PURLIN end only: ROUNDUP(50.333/4)+1 = 14 kickers x 1 = 14 pcs. rev9 verified: 2/S5.1 draws the clip only at the kicker top (fastened to the CONT. 6\" stud and kicker); the header end is (2) #10 screws (no clip). 1/S5.1 (S42-02, 8 kickers) draws NO clip: kicker flanges coped and screwed (2) #10 to the 600S200-54 (typ. U.N.O.) -> 0 at S42-02. img img_rev9/rev9_p2p4_S5.1_kicker_ends_clip_angle.png",
    "label": "2\"x2\"x14ga clip (or Steel Network AL362) (2/S5.1)"
   },
   {
@@ -3056,6 +3056,15 @@
    "label": "5/8\" TYPE \"X\" GYPSUM BOARD (S43/A1.1) above the janitor sink W.R. zone"
   },
   {
+   "ref": "FCB-WB-HEAD-A",
+   "familia": "framing clips per stud (printed)",
+   "qty": 60,
+   "unit": "PCS",
+   "source": "3/S5.3",
+   "op": "3/S5.3 key note 16 'SIMPSON FCB43.5 FRAMING CLIP ... TO PEMB WIND BEAM' drawn at each of the 2 PEMB wind beams (key 10) on the 8\" stud row (key 18 @ 16\" O.C.); 3/S5.3 is cut on the storefront A head (S4.1 key plan); one per stud (estimator decision 20): 8\" studs over the printed 38'-8\" R.O. 464/16 = 29 + 1 = 30 x 2 wind beams = 60 pcs",
+   "label": "Simpson FCB43.5 framing clip at PEMB wind beams, storefront A head (3/S5.3 key note 16)"
+  },
+  {
    "ref": "CONT-6IN-S42-03-KICKER",
    "familia": "6\" stud (todos los gauges)",
    "qty": 50.33,
@@ -3071,6 +3080,15 @@
    "unit": "LF",
    "source": "3/S5.3",
    "op": "[PENDIENTE] conservative assumption RFI-11 option B (3/S5.3 not cut at the piers on S4.1; 1/A3.1 keys no ties): 362S162-43 ties (3/S5.3 key 19) @ 48\" per 6\"+8\" pair, pairs @ 16\" over the printed 6'-0\" (ROUNDUP(72/16)+1 = 6) x rows over the printed 20.667 ft (1/A3.1 100'-0\" to 120'-8\": ROUNDUP(20.667/4)+1 = 7) x 2 piers = 84 ties x 1'-2\" (printed 3/S5.3) = 98.0 LF"
+  },
+  {
+   "ref": "FCB-WB-PIERS",
+   "familia": "framing clips per stud (printed)",
+   "qty": 24,
+   "unit": "PCS",
+   "source": "3/S5.3",
+   "op": "[PENDIENTE] conservative assumption RFI-11 option B: 3/S5.3 key 16 FCB43.5 one per 8\" stud (decision 20) at the 2 PEMB wind beams (1/A3.1 'C.L. WIND BEAM' x 2) on the piers EXT-MS1 / EXT-MS2: 8\" studs @ 16\" over the printed 6'-0\" ROUNDUP(72/16)+1 = 6 x 2 wind beams x 2 piers = 24 pcs",
+   "label": "Simpson FCB43.5 framing clip at PEMB wind beams, piers EXT-MS1 / EXT-MS2 (3/S5.3 key note 16) - RFI-11 B"
   }
  ],
  "plywood_strips": [
@@ -3153,15 +3171,15 @@
    "material": "FRT",
    "label": "(2) FIRE TREATED 2X NAILERS (6/A4.2 key note 11)",
    "source": "6/A4.2",
-   "op": "2 plies x (S42-02 25.455 + S42-03 50.333) = 151.58 LF"
+   "op": "2 plies x (S42-02 25.455 + S42-03 50.333) = 151.58 LF (these are the header-wall BOTTOM nailers at B.O. FRAMING 106'-10\", not parapet nailers)"
   },
   {
    "ref": "BLK-EXT-DOORS",
    "lf": 57.33,
    "material": "FRT",
-   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (1/A5.1, 2/A5.1, 5/A5.1, 6/A5.1)",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (1/A5.1 + 2/A5.1 door 2, 3/A5.1 + 4/A5.1 door 7, 5/A5.1 + 6/A5.1 door 3)",
    "source": "1/A5.1",
-   "op": "R.O. = door + HM frame 2\" (A5.1 frame type 2): doors 2 + 7: 2 x (2 x 7.167 + 3.333) = 35.33; door 3: 2 x 8.0 + 6.0 = 22.0; total 57.33 LF"
+   "op": "head + 2 jambs (no sill at doors) per A5.1 schedule: doors 2 / 7 3'-0\" x 7'-0\" + HM frame type 2 (2\" face printed) -> R.O. 3.333 x 7.167: 2 x (2 x 7.167 + 3.333) = 35.33; door 3 type D ROUGH OPENING printed 6'-0\" x 8'-0\": 2 x 8.0 + 6.0 = 22.0; total 57.33 LF (rev9 verified, img img_rev9/rev9_p5a_A5.1_schedule_RO.png)"
   },
   {
    "ref": "BLK-WIN-D",
@@ -3169,7 +3187,7 @@
    "material": "FRT",
    "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (11/A5.2, 12/A5.2, 13/A5.2)",
    "source": "12/A5.2",
-   "op": "windows D1 + D2: 2 x (head 11.365 + sill 11.365 + 2 jambs x 3.365) = 58.92 LF (13/A5.2 sill draws FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY)"
+   "op": "windows D1 + D2: 2 x (head 11.365 + sill 11.365 + 2 jambs x 3.365) = 58.92 LF (13/A5.2 sill draws FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY); rev9 verified: head + sill + 2 jambs with R.O. 11'-4 3/8\" x 3'-4 3/8\" (A5.2 type D, img_rev5/rev5_p7_A5.2_D1_D2_RO.png)"
   },
   {
    "ref": "BLK-GRAB-BARS",
@@ -3178,6 +3196,38 @@
    "label": "FIRE TREATED 2X WOOD BLOCKING behind grab bars (10/A4.1 key note 13)",
    "source": "10/A4.1",
    "op": "per restroom grab bars B 48\" + C 18\" + D 42\" (A4.1 accessory schedule; 1A/A4.1 and elevations 2-9) = 9.0 ft x 2 restrooms = 18.0 LF"
+  },
+  {
+   "ref": "BLK-TOILET-ACC",
+   "lf": 28.0,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X WOOD BLOCKING for toilet accessories (A4.1 accessory general note 1, key note 13)",
+   "source": "1A/A4.1",
+   "op": "[PENDIENTE] size RFI-24 (conservative): accessories tagged on 1A/A4.1 besides the grab bars: A tissue x 2, E napkin x 1, F soap x 2, G paper towel x 2, K mop hanger x 1, L / M door signs x 2 = 10 x 2'-0\" = 20.0; J mirror 18\"x36\" x 2 x 2 rows x 2'-0\" = 8.0; total 28.0 LF"
+  },
+  {
+   "ref": "BLK-PLUMB-FIXT",
+   "lf": 28.0,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X WOOD BLOCKING for wall-hung fixtures and water heater platform (A4.1 general note C, key notes 13 / 17)",
+   "source": "13/A4.1",
+   "op": "[PENDIENTE] size RFI-24 (conservative): wall hung lavatory (key 2) x 2 + urinal (key 3) x 1 = 3 x 2 rows x 2'-0\" = 12.0; hi/lo drinking fountain (key 4, 15/A4.1) 2 rows x 4'-0\" (printed alcove 13/A4.1) = 8.0; water heater platform (key 17) 2 rows x 4'-0\" = 8.0; total 28.0 LF"
+  },
+  {
+   "ref": "BLK-SIGN",
+   "lf": 149.33,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X WOOD BACKING for surface mounted wall sign (A3.1 key note 31, A2.1 key note 9)",
+   "source": "2/A3.1",
+   "op": "[PENDIENTE] conservative assumption RFI-12: 'PROVIDE BACKING' printed (2/A3.1 key 31 on the storefront A head; A2.1 key 9 west and south signs), backing size and sign length not printed (sign sheet SG2.1 not in trade set): 2 rows (top / bottom attachment) x full printed length of the framed element behind each sign: west HEAD-A 38.667 + south cornice CORN-S 36.0 = 2 x 74.667 = 149.33 LF"
+  },
+  {
+   "ref": "BLK-EXTINGUISHERS",
+   "lf": 8.0,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X WOOD BLOCKING for surface mounted fire extinguisher (A1.1 key note 4, 10/A4.2 key note 21)",
+   "source": "10/A4.2",
+   "op": "[PENDIENTE] conservative assumption RFI-12: 'PROVIDE BLOCKING AS REQUIRED FOR MOUNTING' (10/A4.2 key 21), size not printed; A1.1 key note 4 tags counted = 4 (S21-W at door 2, S41 / S21 at door 7, restroom front wall (= A4.1 key 18), vestibule storefront corner) x 2'-0\" (one stud bay; 10/A4.2 prints a 1'-0\" extinguisher zone) = 8.0 LF"
   }
  ],
  "trim_items": [
@@ -3250,7 +3300,7 @@
  },
  "tile_base_none_reason": "No tile / cement board base: base B-1 4\" resilient cove (A1.2 finish legend) - no cement board (A1.2 finish schedule, 7/A4.2)",
  "frp_none_reason": "No FRP in the set; restroom walls W-4 'SANITARY WALL AND CEILING PANEL SYSTEM' (A1.2) carried as 'sanitary wall panels (printed)' per estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 07",
- "edge_blocking_none_reason": "6/A4.2 (header wall bottom nailers counted), 1/A5.1 and 11/A5.2 (opening blocking counted); no edge blocking at board edges drawn in 5/A4.2, 7/A4.2 or the A1.1 wall types",
+ "edge_blocking_none_reason": "6/A4.2 (header wall bottom nailers counted), 1/A5.1 and 11/A5.2 (opening blocking counted); no edge blocking at board edges drawn in 5/A4.2, 7/A4.2 or the A1.1 wall types; FRT 2x TOP nailers of EXT-MS1/2 and HEAD-A (1/A3.1, 2/A3.1 key note 11) and of CORN-S (1/S5.3 key note 4) = parapet nailers: NOT carried, EXCLUDED Div. 06 (estimator decision 22, takeoff alcance ALC-FRT-NAILERS)",
  "deck_breaks_none_reason": "Single-slope PEMB roof (1/4:12, 1/A3.2): no deck break; heights interpolated between T.O. LOW EAVE (2/A3.2) and T.O. HIGH EAVE (1/A3.2)",
  "accesorios_none": [
   {
@@ -3487,7 +3537,7 @@
    "motivo": "rev7: the 3/S5.3 ties (key 19, 362S162-43 @ 48\" O.C., 1'-2\" across the 6\" + 8\" pair) are carried on the storefront A head (TIES-HEAD-A 140.0 LF: S4.1 key plan cuts 3/S5.3 twice on the head). Still open: (1) ties on the piers EXT-MS1 / EXT-MS2: 3/S5.3 is not cut at the piers (S4.1) and the pier section 1/A3.1 draws / keys no ties (keys 6 / 7 'refer to structural'); (2) FCB43.5 clips (3/S5.3 key 16) at the PEMB wind beams: wind beam elevations / extent by PEMB ('EL. SEE PEMB DRAWINGS'), no count printed.",
    "pregunta": "Do the 362S162-43 stud ties @ 48\" (3/S5.3 key 19) also go on the 6'-0\" piers EXT-MS1 / EXT-MS2, and how many FCB43.5 clips (key 16) per stud at the PEMB wind beams?",
    "source": "3/S5.3",
-   "delta": "(A) 0 (carried: TIES-HEAD-A 140.0 LF; no pier ties, no wind beam clips) | (B) +98.0 LF 362S162-43 pier ties (2 piers x 6 pairs x 7 rows x 1'-2\") + 84 pcs FCB43.5 (one per 8\" stud at each of the 2 wind beams drawn: head 30 x 2 + piers 2 x 6 x 2) | (C) Other: ____",
+   "delta": "carried (B, conservative): TIES-HEAD-A 140.0 + TIES-PIERS-EXT-MS 98.0 LF 362S162-43; FCB43.5 at the wind beams 84 pcs (head 60 FCB-WB-HEAD-A = printed 3/S5.3 key 16 + decision 20; piers 24 FCB-WB-PIERS) | (A) ties / clips only where 3/S5.3 is cut: -98.0 LF 362S162-43, -24 pcs FCB43.5 | (C) Other: ____",
    "opciones": {
     "A": {
      "texto": "Ties only where 3/S5.3 is cut (storefront A head, carried); pier ties and wind beam clips not carried",
@@ -3514,10 +3564,10 @@
   {
    "id": "RFI-12",
    "familia": "top nailers and accessories blocking",
-   "motivo": "PARTLY CLOSED - estimator decision 2026-11-01: FRT 2x nailers at T.O. metal stud / top of masonry EXCLUDED (Div. 06, est. 22); restroom grab bar blocking carried BLK-GRAB-BARS (est. 10). Still open: wall sign backing (A3.1 key note 31) and fire extinguisher blocking (A4.2 key note 21) - not located / sized.",
+   "motivo": "PARTLY CLOSED - estimator decision 2026-11-01: FRT 2x nailers at T.O. metal stud / top of masonry EXCLUDED (Div. 06, est. 22); grab bar blocking BLK-GRAB-BARS (est. 10). rev9 (conservative carried, open): wall sign backing (2/A3.1 key 31, A2.1 key 9) BLK-SIGN 149.33 LF and fire extinguisher blocking (A1.1 key 4 x 4, 10/A4.2 key 21) BLK-EXTINGUISHERS 8.0 LF - sizes / sign length not printed.",
    "pregunta": "FRT 2x nailers at T.O. metal stud / top of masonry (1/A3.1 key note 11, 1/S5.3 key note 4), wall sign backing (A3.1 key note 31), restroom accessories / fire extinguisher blocking (A1.1 note 2.A, A4.2 key note 21): sizes / lengths not printed.",
    "source": "A1.1",
-   "delta": "(A) 0 | (B) + sign backing / extinguisher blocking (not sized)",
+   "delta": "(A) carried 157.33 LF FRT 2x (sign 149.33 + extinguishers 8.0) | (B) sign on the 5/8\" FRT plywood sheathing (A3.1 key 34, no extra backing) and extinguisher at the storefront corner without blocking: -149.33 - 2.0 = -151.33 LF | (C) sign size per SG2.1: ____",
    "opciones": {
     "A": {
      "texto": "Not carried (roofing / coping by PEMB; accessories not located)",
@@ -3818,6 +3868,71 @@
      "texto": "No top track (as drawn)",
      "cita": "1/S5.1, 2/S5.1",
      "delta": "-75.79 LF"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-23",
+   "familia": "horizontal stud bridging product (A1.1 note 2.F)",
+   "motivo": "A1.1 Interior Wall & Ceiling Notes 2.F prints 'PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\" O.C. VERTICAL' with no product. Carried: 1-1/2\" C.R. channel (skill criterion) on every stud run, rows = ROUNDUP(H x 12 / 48) - 1 -> 807.52 LF. S1.1 7.D prints a different structural product for flanges not braced by sheathing: 'CONTINUOUS 2\"x20ga FLAT METAL STRAPPING ALIGNED WITH FULL DEPTH BLOCKING-IN MEMBERS AT EACH END OF WALL RUN, ADJACENT TO OPENINGS, AND @ 8' O.C. MAXIMUM' (discrete bracing @ 6'-0\" O.C. max); S5.1 1-4 print 'HORIZONTAL BLOCKING @ 48\" O.C. (MAX) WHEN NOT SHEATHED BOTH SIDES'. The EXT-MS piers / HEAD-A (3/S5.3: 362S162-43 ties key 19 @ 48\" across the 6\"+8\" pair, sheathed both faces) and CORN-S (1/S5.3: FCB43.5 to CMU key 23 @ 48\") draw their own lateral elements and no bridging channel; 2.F bridging is carried there too (conservative).",
+   "pregunta": "Which product is the A1.1 2.F horizontal stud bridging (1-1/2\" C.R. channel vs. S1.1 7.D 2\"x20ga flat strap + blocking), and is it required in the 3/S5.3 / 1/S5.3 assemblies that print ties / clips @ 48\"?",
+   "source": "A1.1",
+   "sources_checked": [
+    "A1.1",
+    "S1.1",
+    "1/S5.1",
+    "2/S5.1",
+    "3/S5.1",
+    "4/S5.1",
+    "3/S5.3",
+    "1/S5.3"
+   ],
+   "img": "img_rev9/rev9_p1_A1.1_2F_S1.1_7D_bridging.png",
+   "delta": "(A) 0 (carried: 807.52 LF 1-1/2\" C.R. channel) | (B) S1.1 7.D product: C.R. channel -807.52 LF, 2\"x20ga flat strap +1615.04 LF (both flanges) + full-depth blocking-in pieces at run ends / openings / @ 8' | (C) no 2.F bridging in the 3/S5.3 and 1/S5.3 assemblies: -310.67 LF (EXT-MS 4 x 30.0 = 120.0 + HEAD-A 2 x 77.33 = 154.67 + CORN-S 36.0)",
+   "opciones": {
+    "A": {
+     "texto": "1-1/2\" C.R. channel at 2.F rows on all stud runs (skill criterion)",
+     "source": "A1.1",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "S1.1 7.D 2\"x20ga flat strap each flange + full-depth blocking-in",
+     "cita": "S1.1 7.D",
+     "delta": "-807.52 LF C.R. channel / +1615.04 LF 2\"x20ga strap + blocking-in"
+    },
+    "C": {
+     "texto": "No 2.F bridging where 3/S5.3 ties (key 19) / 1/S5.3 clips (key 23) @ 48\" are printed",
+     "cita": "3/S5.3, 1/S5.3",
+     "delta": "-310.67 LF C.R. channel"
+    }
+   }
+  },
+  {
+   "id": "RFI-24",
+   "familia": "backing at toilet accessories and plumbing fixtures (sizes not printed)",
+   "motivo": "A4.1 accessory general note 1 'CONTRACTOR TO PROVIDE FIRE TREATED WOOD BLOCKING FOR INSTALLATION OF TOILET ACCESSORIES, INCLUDING OWNER FURNISHED AND CONTRACTOR INSTALLED ACCESSORIES'; A4.1 general note C (FRT blocking as required for plumbing fixtures); key note 13 'FIRE TREATED 2X WOOD BLOCKING'; key note 17 water heater platform 'PROVIDE FIRE TREATED BLOCKING ... AS REQUIRED'. Backing size is printed only for grab bars (10/A4.1, BLK-GRAB-BARS 18.0 LF). Conservative assumption carried: 2'-0\" FRT 2x (one stud bay @ 24\" O.C., A1.1 S43 / S61) per accessory, 2 rows for mirrors and wall-hung fixtures, 2 rows x 4'-0\" (printed alcove width, 13/A4.1) for the drinking fountain and the water heater platform: BLK-TOILET-ACC 28.0 + BLK-PLUMB-FIXT 28.0 = 56.0 LF.",
+   "pregunta": "Confirm backing size per toilet accessory / wall-hung fixture / water heater platform (A4.1 accessory note 1, general note C, key notes 13 / 17).",
+   "source": "A4.1",
+   "sources_checked": [
+    "1A/A4.1",
+    "13/A4.1",
+    "10/A4.1",
+    "A4.1 accessory schedule",
+    "A1.1"
+   ],
+   "img": "img_rev9/rev9_p5c_A4.1_accessories_backing.png",
+   "delta": "(A) 0 (carried 56.0 LF FRT 2x) | (B) one 2'-0\" row per item (no 2nd rows): -22.0 LF (34.0 LF: accessories 10 x 2.0 + mirrors 2 x 2.0 = 24.0; fixtures 5 x 2.0 = 10.0) | (C) Other (sizes per owner / plumbing): ____",
+   "opciones": {
+    "A": {
+     "texto": "Carry conservative 56.0 LF",
+     "source": "A4.1",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "One 2'-0\" block per accessory / fixture",
+     "cita": "A4.1 accessory note 1",
+     "delta": "-22.0 LF"
     },
     "C": ""
    }
