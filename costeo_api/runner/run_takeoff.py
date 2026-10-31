@@ -135,6 +135,23 @@ def items_sin_lectura(sin_objeto, ov):
     return out
 
 
+def walls_sin_lectura(sin_objeto, ref):
+    """R80e.56 (walls): decisiones del estimador sobre walls / soffit sides que la lectura no trae, salvo los que la
+    decisión excluye (EXISTING / EXCLUDED) -> [("walls", tag + element, ubicación)]. Solo tag, element y ubicación:
+    nunca la longitud ni la altura de la referencia (las mide la lectura)."""
+    por_id = {w.get("id"): w for w in (ref or {}).get("walls") or []}
+    out, vistos = [], set()
+    for x in sin_objeto or []:
+        w = por_id.get(x.get("id"))
+        if x.get("derivado") or x.get("list") != "walls" or not w or x["id"] in vistos:
+            continue
+        if re.search(r"EXT|EXCLUDED|EXISTING", f"{x['id']} {w.get('status', '')} {w.get('scope', '')}", re.I):
+            continue
+        vistos.add(x["id"])
+        out.append(("walls", f"type {w.get('tag') or '-'} {w.get('element', 'wall')}", str(w.get("location") or "")[:160]))
+    return out
+
+
 def env_api(base, key):
     """Entorno de claude -p: sin las variables de la sesión anfitriona (ANTHROPIC_BASE_URL, CLAUDE_CODE_*, CLAUDECODE...),
     que harían pasar la llamada por la autenticación de la sesión en vez de la API key (R80e.55)."""
@@ -743,11 +760,13 @@ class Runner:
                               f"puerta (R70.3) y la puerta va dentro. Puertas en walls fuera de alcance no se agregan.")
                 continue
             faltan = items_sin_lectura(self.sin_objeto, json.load(open(self.a.overlay)) if self.a.overlay else {})
+            faltan += walls_sin_lectura(self.sin_objeto, json.load(open(self.a.ref_base)) if self.a.ref_base else {})
             if faltan and not self.a.dry_run and ronda < MAX_CORRECCION and not getattr(self, "_r56", False):
                 self._r56 = True                # R80e.56: una sola vuelta (lo que siga sin item queda sin objeto, declarado)
                 self.corregir(canon_ab, ronda + 1, origen="R80e.56 decisiones del estimador sobre items que la lectura no trae",
                               texto="items del plano que el estimador cuantificó y la lectura no trae (agrégalos en su lista con "
-                              "ESE id exacto, leyendo su detalle N/HOJA: material, unidad, fuente; la cantidad la pone la decisión):\n"
+                              "ESE id exacto, leyendo su detalle N/HOJA: material, unidad, fuente; la cantidad la pone la decisión; los walls / "
+                              "soffit sides se leen y miden en el plano en esa ubicación, cada pieza como wall propio):\n"
                               + "\n".join(f"  - {l} {i}: {op[:260]}" for l, i, op in faltan))
                 continue
             try:
