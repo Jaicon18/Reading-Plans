@@ -1,0 +1,2 @@
+ELEMENTO 4 (madre 17:30Z): track en 2 familias SIEMPRE separadas por wall y tamaño/gauge: (1) estándar (bottom; top solo en walls que NO llegan a estructura) (2) deflexión / slip deep-leg slotted (ej. 3"x14ga, 3/S5.1-4/S5.1) arriba de todo wall que llega a estructura (purlin/deck).
+FLUJO (madre 21:51Z): no parar por preguntas; supuesto conservador cargado + RFI en RFI_PENDIENTES_P2.md (A planos / B código / delta). Parar solo al final de cada elemento para SIGUE.

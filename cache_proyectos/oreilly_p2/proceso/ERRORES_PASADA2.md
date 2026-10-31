@@ -1,0 +1,5 @@
+- rev2 E1: peralte del purlin medido a escala (10") para RFI-01 → prohibido (#0). Solución: valor de la decisión del estimador (8" supuesto, −0.667) rotulado PENDIENTE. Regla a reforzar en prompts/lectura.md y overlay: nunca escalar para una decisión; usar el valor de la decisión o RFI.
+- rev2 E1: la lectura descontó puertas del board por cara → R70.3 / precedente: doors no se descuentan. Regla a reforzar en prompts/lectura.md: deduct_* solo ventanas / storefront, nunca doors.
+- rev3 E1: ventanas D1/D2 descontadas del board → BE-110: board SIEMPRE sin descontar aberturas (doors Y windows). Reforzar en prompts/lectura.md.
+- E2: W-4 y Level 5 descontaban aberturas/base → regla: ningún renglón de board/acabado descuenta aberturas. Jamb return con criterio propio 0.5 ft en vez de decisión del estimador (0.2 ft, solo ventanas).
+- E3: 3.ª línea 600S200-54 IMPRESA en 2/S5.1 se dejó como pregunta → regla: lo impreso se carga, nunca se pregunta (R80e.76).
