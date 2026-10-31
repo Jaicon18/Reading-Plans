@@ -2611,3 +2611,6 @@ Origen: la #6b leyó 0 openings (la referencia tiene 12): sin jambs, header ni c
 ### R80e.55 — claude -p usa la API key de verdad, verificado antes de gastar (31-oct)
 El subproceso claude -p corre con un entorno limpio: sin ANTHROPIC_BASE_URL, CLAUDE_CODE_* ni CLAUDECODE de la sesión anfitriona, y con ANTHROPIC_API_KEY = $TAKEOFF_API_KEY. Antes del primer paso pagado, una llamada mínima (haiku, tope $0.05) prueba la key: falta la key, 401 o la misma session_id de la sesión anfitriona = el runner se detiene.
 Origen: las corridas #4 a #6b heredaron el entorno de la sesión: la respuesta traía la session_id de la sesión anfitriona y la consola no registró costo en la key. El costo medido es precio de lista, no cargo real a la key.
+
+## R80e.56 — Take-off humano de referencia = cuarentena (31-oct, inviolable)
+En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido buscarlo por contenido, abrirlo, leerlo o dárselo a una sesión. Elegir el proyecto solo por metadatos. La evaluación del método es interna: acuerdo A/B, compuertas, paso 12 e indicadores del mejor skill (B&N rev13). (BE-92)

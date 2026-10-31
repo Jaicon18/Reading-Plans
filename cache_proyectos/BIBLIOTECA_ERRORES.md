@@ -183,3 +183,7 @@ Back-check final: 44 PASS · 0 FAIL · 3 N/A (con BE-57), en `barnes_noble/takeo
 
 ## Corrida B&N rev13 (2026-10-28)
 Back-check final: 44 PASS · 0 FAIL · 3 N/A (`barnes_noble/takeoff_work/etapas/5_auditoria/BACKCHECK_rev13.md`). En la primera pasada falló BE-47: RFI-13 y RFI-22 tenían las cifras viejas; se corrigió con la nota "Revised by RFI-55".
+
+## BE-92 — Leí el take-off humano de la prueba ciega (31-oct)
+Error: para elegir un proyecto de prueba abrí con read_file_content "Oreally Takeoff.xlsx" y "OLIVE GARDEN TAKEOFF.xlsx"; el usuario quiere que la referencia humana sea solo suya.
+Prueba: en una prueba de exactitud, ¿algún paso abrió/leyó un take-off humano o se lo pasó a una sesión? Debe ser NO. Selección solo por metadatos. Regla R80e.56.
