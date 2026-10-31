@@ -2611,3 +2611,7 @@ Origen: la #6b leyó 0 openings (la referencia tiene 12): sin jambs, header ni c
 ### R80e.55 — claude -p usa la API key de verdad, verificado antes de gastar (31-oct)
 El subproceso claude -p corre con un entorno limpio: sin ANTHROPIC_BASE_URL, CLAUDE_CODE_* ni CLAUDECODE de la sesión anfitriona, y con ANTHROPIC_API_KEY = $TAKEOFF_API_KEY. Antes del primer paso pagado, una llamada mínima (haiku, tope $0.05) prueba la key: falta la key, 401 o la misma session_id de la sesión anfitriona = el runner se detiene.
 Origen: las corridas #4 a #6b heredaron el entorno de la sesión: la respuesta traía la session_id de la sesión anfitriona y la consola no registró costo en la key. El costo medido es precio de lista, no cargo real a la key.
+
+### R80e.56 — Decisión del estimador sin item en la lectura = falta de lectura (31-oct, corrida #7)
+Si una decisión del estimador cuantifica un item (misc_items, blocking_items, plywood_strips, trim_items) que la lectura no trae, la lectura vuelve una vez a corrección con la lista: id exacto + la operación de la decisión (que cita su N/HOJA). El modelo agrega el item leyendo su detalle (material, unidad, fuente); la cantidad la pone la decisión. Lo que siga sin item queda "sin objeto", declarado.
+Origen: en la #7 quedaron 22 decisiones de items sin objeto (cross members 8/A-410, nested bracing, cement board base, FRT backboard): 3-5/8" stud −20 %, cement board y FRT plywood −14 a −20 %.

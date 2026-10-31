@@ -104,6 +104,37 @@ def log(msg):
     print(time.strftime("%H:%M:%S"), msg, flush=True)
 
 
+ITEM_LISTS = ("misc_items", "blocking_items", "plywood_strips", "trim_items")
+
+
+def items_sin_lectura(sin_objeto, ov):
+    """R80e.56: decisiones del estimador sobre items (misc / blocking / plywood / trim) que la lectura no trae ->
+    [(lista, id, operación de la decisión)]: el item existe en el plano (la decisión cita su N/HOJA) y falta en la LECTURA."""
+    def op_de(o, k):
+        if isinstance(o, dict):
+            for kk, v in o.items():
+                if kk == k and isinstance(v, dict):
+                    d = v.get("__dict__", v)
+                    t = (d.get("op") or d.get("source") or {})
+                    return str(t.get("__set__", t) if isinstance(t, dict) else t)
+                r = op_de(v, k)
+                if r:
+                    return r
+        elif isinstance(o, list):
+            for v in o:
+                r = op_de(v, k)
+                if r:
+                    return r
+        return ""
+    vistos, out = set(), []
+    for x in sin_objeto or []:
+        if x.get("derivado") or x.get("list") not in ITEM_LISTS or (x["list"], x["id"]) in vistos:
+            continue
+        vistos.add((x["list"], x["id"]))
+        out.append((x["list"], x["id"], op_de(ov, x["id"])))
+    return out
+
+
 def env_api(base, key):
     """Entorno de claude -p: sin las variables de la sesión anfitriona (ANTHROPIC_BASE_URL, CLAUDE_CODE_*, CLAUDECODE...),
     que harían pasar la llamada por la autenticación de la sesión en vez de la API key (R80e.55)."""
@@ -710,6 +741,14 @@ class Runner:
                               f"ro_w_ft (ancho del schedule o el hueco medido), head_ft (alto del schedule), xy_pt (centro en la "
                               f"planta), source con N/HOJA. Si la leíste como hueco entre dos walls, el wall corre a través de la "
                               f"puerta (R70.3) y la puerta va dentro. Puertas en walls fuera de alcance no se agregan.")
+                continue
+            faltan = items_sin_lectura(self.sin_objeto, json.load(open(self.a.overlay)) if self.a.overlay else {})
+            if faltan and not self.a.dry_run and ronda < MAX_CORRECCION and not getattr(self, "_r56", False):
+                self._r56 = True                # R80e.56: una sola vuelta (lo que siga sin item queda sin objeto, declarado)
+                self.corregir(canon_ab, ronda + 1, origen="R80e.56 decisiones del estimador sobre items que la lectura no trae",
+                              texto="items del plano que el estimador cuantificó y la lectura no trae (agrégalos en su lista con "
+                              "ESE id exacto, leyendo su detalle N/HOJA: material, unidad, fuente; la cantidad la pone la decisión):\n"
+                              + "\n".join(f"  - {l} {i}: {op[:260]}" for l, i, op in faltan))
                 continue
             try:
                 self.calcular(canon)

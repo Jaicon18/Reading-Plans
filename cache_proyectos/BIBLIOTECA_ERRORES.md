@@ -102,6 +102,7 @@ Los términos del trade van en inglés.
 | BE-89 | 31-oct | La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T) | nodos.py deriva L / T / free de las bands cuando > 60 % es free (R80e.53) | cada wall con exactamente 2 extremos (canon.py lo valida) |
 | BE-90 | 31-oct | La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples | completitud.aberturas_faltantes manda la lectura a corrección (R80e.54) | la referencia (12 openings) pasa; la #6b (0) queda marcada |
 | BE-91 | 31-oct | claude -p heredó ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión: las corridas no usaron $TAKEOFF_API_KEY (session_id = la de la sesión anfitriona; la consola sin costo) | env_api limpia el entorno; verificar_key hace una llamada mínima antes de gastar y corta si falta la key, 401 o hereda la sesión (R80e.55) | sin key -> fail-fast; key inválida -> 401 detenido antes del paso 1 |
+| BE-92 | 31-oct | 22 decisiones del estimador sobre items (cross members, nested bracing, cement board base, FRT backboard) quedaron sin objeto porque la lectura no trae el item | items_sin_lectura manda la lista (id + operación con N/HOJA) a una corrección (R80e.56) | la #7 lista los 18 items; el dry-run no cambia |
 
 ---
 
