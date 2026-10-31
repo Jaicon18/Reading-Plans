@@ -2615,3 +2615,15 @@ Origen: las corridas #4 a #6b heredaron el entorno de la sesión: la respuesta t
 ### R80e.56 — Decisión del estimador sin item en la lectura = falta de lectura (31-oct, corrida #7)
 Si una decisión del estimador cuantifica un item (misc_items, blocking_items, plywood_strips, trim_items) o un wall / soffit side no excluido que la lectura no trae (del wall solo se pasan type, element y ubicación, nunca medidas), la lectura vuelve una vez a corrección con la lista: id exacto + la operación de la decisión (que cita su N/HOJA). El modelo agrega el item leyendo su detalle (material, unidad, fuente); la cantidad la pone la decisión. Lo que siga sin item queda "sin objeto", declarado.
 Origen: en la #7 quedaron 22 decisiones de items sin objeto (cross members 8/A-410, nested bracing, cement board base, FRT backboard): 3-5/8" stud −20 %, cement board y FRT plywood −14 a −20 %.
+
+### R80e.57 — Altura de la face hasta el ceiling de su cuarto, por programa (31-oct, banco)
+Después de aplicar las decisiones, una face cuyo cuarto tiene ceiling y que pasa ese ceiling + 1 ft sin fuente "full height / to deck" baja al ceiling del cuarto (completitud.topar_caras). La altura del stud no cambia: solo el board de esa face. Queda [DERIVED] con la altura que traía la lectura.
+Origen: R80e.43 aplicó W.R. en los wet rooms sobre faces leídas a la altura del stud (25 ft contra un ceiling de 9'-0"): W.R. +44.7 % en una corrida. En el banco, esa corrida queda en W.R. −10.1 % y Type X de +13.1 % a +7.3 %, sin empeorar nada.
+
+### R80e.58 — Banco de regresión: un arreglo entra solo si no empeora ningún material en ninguna lectura (31-oct)
+Las lecturas guardadas de cada corrida (A, B y AB resuelto) se re-arman sin API con el runner y el skill actuales (correr_banco.py, modo --sin-api; los números salen de familias_out.json contra el dry-run, que reproduce la referencia). Un arreglo se acepta solo si mejora o mantiene cada material en TODAS las lecturas. Los arreglos de lectura (prompts, correcciones) no se prueban en el banco: se declaran como tales.
+Origen: los arreglos se validaban contra una sola lectura; R80e.43 mejoró una corrida y empeoró otra (W.R. +44.7 % en otra).
+
+### R80e.59 — Walls curvos en cuerdas, cadenas de la planta ampliada cerradas, puertas dentro del wall (31-oct, prompt)
+Un wall curvo se lee como cuerdas iguales (una por cada ≤ 5 ft de arco), cada una un wall con su band, cerradas contra el arco impreso; los remates de la figura (también en la copia TYP. sin tag) son walls propios. El largo de un wall de la planta ampliada sale de su cadena de cotas cerrada contra la cota corrida. Cada puerta del door schedule es un opening dentro de su wall.
+Origen: errores sistemáticos en tres corridas: la figura curva de type 4 leída en 4 piezas (−20.5 % de LF); un wall de la planta ampliada siempre en 4.5 ft contra 12.2 ft acotados (−63 %); 3 puertas sin opening.
