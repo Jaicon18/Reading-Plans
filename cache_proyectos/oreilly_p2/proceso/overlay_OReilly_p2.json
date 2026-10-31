@@ -1132,7 +1132,7 @@
   {
    "label": "G25 est.25",
    "decision_date": "2026-11-01",
-   "decisions": "deflection per A1.1 note 2.C; deep-leg track stays on the full-height S42 (DLT-S42-FULL) - confirmation",
+   "decisions": "deflection per A1.1 note 2.C; deep-leg track stays on the full-height S42 (DLT-S42-FULL, split in rev8 into DLT-S42-01 38.67 + DLT-S42-04 8.17 = 46.84 LF) - confirmation",
    "source": "RESPUESTAS_RFI_ESTIMADOR.md",
    "canon": {
     "top": {}
@@ -1952,6 +1952,30 @@
        "op": "[PENDIENTE] conservative assumption RFI-11 option B (3/S5.3 not cut at the piers on S4.1; 1/A3.1 keys no ties): 362S162-43 ties (3/S5.3 key 19) @ 48\" per 6\"+8\" pair, pairs @ 16\" over the printed 6'-0\" (ROUNDUP(72/16)+1 = 6) x rows over the printed 20.667 ft (1/A3.1 100'-0\" to 120'-8\": ROUNDUP(20.667/4)+1 = 7) x 2 piers = 84 ties x 1'-2\" (printed 3/S5.3) = 98.0 LF"
       }
      ]
+    }
+   }
+  },
+  {
+   "label": "G-rev8 user order: track in 2 families (standard / deflection) + E10 on the Z-furring runner",
+   "decision_date": "2026-10-31",
+   "decisions": "Track family per wall (standard = bottom of every wall + top of walls that do not reach structure; deflection = deep-leg slotted at the top of every wall that reaches structure). ZF-RUNNER-S21 (est. 16 = B): bottom runner NOT deducted at doors (E10).",
+   "source": "rev8_cambios.md",
+   "canon": {
+    "items_upsert": {
+     "misc_items": [
+      {
+       "ref": "ZF-RUNNER-S21",
+       "familia": "Z-furring runner track (printed)",
+       "qty": 577.25,
+       "unit": "LF",
+       "source": "S21/A1.1",
+       "op": "1-1/2\" runner top and bottom of the S21 Z-furring (ASTM C754, estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 16) = B): 2 x (S21-N 85.0 + S21-E 84.646 + S21-S 85.0 + S21-W1 9.156 + S21-W2 24.823 = 288.625) = 577.25 LF; rev8: bottom runner NOT deducted at doors 3 / 2 / 7 (E10, user decision #10; was -12.667); runner LF does not depend on the Z-furring height (top runner under the purlin, RFI-01)",
+       "label": "1-1/2\" runner track at top and bottom of Z-furring"
+      }
+     ]
+    },
+    "items_key": {
+     "misc_items": "ref"
     }
    }
   }

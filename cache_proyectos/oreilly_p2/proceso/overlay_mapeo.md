@@ -1,6 +1,6 @@
 # Overlay mapping - estimator decisions -> this canon (O'Reilly pass 2)
 
-Overlay: `overlay_OReilly_p2.json` (format `overlay.py`, 22 groups incl. G-rev7, idempotent).
+Overlay: `overlay_OReilly_p2.json` (format `overlay.py`, 24 groups incl. G-rev7, G-flow, G-rev8, idempotent).
 Test: `overlay.aplicar_canon(...)` -> `canon_ov.json` (copy in this folder) -> `validar_canon.py canon_ov.json tools` = **CANON OK**. `canon.py` -> `partition_types.avisos = []`.
 Rule followed: the answers were given to another pass's RFI numbers. They were mapped **by content**. Only the decision (A/B) was used. Every quantity below was derived from this set (source N/SHEET + op), not copied from RESPUESTAS_RFI_ESTIMADOR.md.
 
@@ -28,6 +28,7 @@ Rule followed: the answers were given to another pass's RFI numbers. They were m
 | 24 | A: shutters not carried, with note | A5.2 general note H (no item in the canon) | Note only (takeoff.inputs_notas SHUTTERS), delta 0 | A5.2 |
 | 25 | B: deflection per A1.1 note 2.C; deep-leg stays | deflection_clips.note_source + DLT-S42-FULL | Confirmed, delta 0 | A1.1 note 2.C, 3/S5.1 |
 | (user rev7) | RFI-19 = A; RFI-03 = A; 2/S5.1 third CONT 6" line is printed -> carry | RFI-19, RFI-03 (CLOSED); PEMB-6IN-S42-02 / -01, L4X4-S42-03, KICKERS-S42-HDR ops; new misc CONT-6IN-S42-03-KICKER | Group G-rev7: RFI-19 and RFI-03 CLOSED, delta 0 (70.0 + 55.0 LF 600S200-54, 12 L4x4, 155.54 LF kickers stay). + CONT-6IN-S42-03-KICKER 50.33 LF 6" stud = S42-03 50'-4" (A1.1) x 1 line | 2/S5.1, A1.1 |
+| (user rev8) | Track in 2 families (standard / deflection) per wall; E10 on the Z-furring runner | Walls top/bottom track fields; DLT-S42-FULL -> DLT-S42-01 / -04; ZF-RUNNER-S21; RFI-20/21/22 | Group G-rev8: ZF-RUNNER-S21 564.58 -> 577.25 LF (no door deduction, E10). Canon: S42-01/-04 top_track false + track_source (no double count: generic top 385.11 -> 338.28, deep-leg 46.84 in misc per wall) | A1.1 2.C, 3/S5.1, 4/S5.1, S1.1 7.E |
 | (user) | RFI-13 closed by est. 14 | RFI-13 | See 14. This canon's 20.08 LF used | 3/A3.1 |
 | (user) | Exclusions: fasteners, MEP / electrical / civil / cabinets | fasteners_excluded, mep_sweep, accesorios_none | Already in the canon, no change | - |
 
