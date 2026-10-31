@@ -80,5 +80,5 @@ Excel: `FINAL_FOR_REVIEW_2026-10-31/Take-off/OReilly_Evans_Takeoff_FINAL.xlsx` (
 | 11 Auditor independiente (en paralelo con 12) | 08:38–08:50 | 12 |
 | 12 Matriz de cobertura | 08:38–08:56 | 18 |
 | Resolución de hallazgos 11/12 + compuertas finales | 08:50–09:00 | 10 |
-| Entrega (archivos, Drive, push) | 09:00–09:12 | 12 |
-| **Total** | **06:55–09:12** | **≈ 2 h 17 min** (meta ≤ 2 h: excedida por 17 min) |
+| Entrega (archivos, Drive, push) | 09:00–09:03 | 3 |
+| **Total** | **06:55–09:03** | **≈ 2 h 08 min** (meta ≤ 2 h: excedida por 8 min) |
