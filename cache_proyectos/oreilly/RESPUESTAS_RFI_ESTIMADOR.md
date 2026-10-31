@@ -34,3 +34,5 @@ Ya cerrados antes: 04 (cuadra), 08 MEP excluido (orden del usuario), 21/26 ancla
 | 18 | B · Código | W.R. janitor 4.0×4.0 = 16 SF (IBC 1210.2.2 / GA-216, sink 24" supuesto) |
 | jamb return | Con sill | D1/D2 jambas + head + sill = 58.92 LF × 0.2 = 11.78 SF |
 | 05 | Glass mat (1/A3.4) | cornice CORN-S 286.88 SF glass mat |
+| 19 | A · Planos | purlin spacing 5'-0"± (2/S5.1): 600S200-54 S42-02 70 LF, S42-01 55 LF, 12 L4x4 |
+| 03 (kickers) | A · 45° | kickers 7.07 ft c/u = 155.54 LF |
