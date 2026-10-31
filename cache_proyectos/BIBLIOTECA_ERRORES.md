@@ -213,3 +213,6 @@ Error: Titen HD @ 48", #10 screws, deep-leg 14 ga track y sheathing screws impre
 
 ## BE-110 — Repetibilidad O'Reilly pasada 2, elemento 1 (31-oct)
 Diferencias entre pasadas por criterios no fijados por programa: (1) altura del purlin medida a escala (prohibido #0) en vez del supuesto 8" con RFI; (2) board con aberturas descontadas en una pasada y sin descontar en la otra; (3) dueño de esquina S24/S43 distinto (S24 +4.8 %, S43 −1.6 %, combinado +1 %). Prueba: canon.py debe rechazar alturas "medidas a escala", calcular board siempre sin descontar aberturas (precedente B&N rev13) y asignar el dueño de esquina por regla fija (R70.2) — mismo resultado en cualquier pasada.
+
+## BE-111 — Pasada 1 O'Reilly: altura del board interior del head del storefront tomada de una cota EXTERIOR (31-oct)
+Error (detectado por la pasada 2): rev4 cargó el head interior a 5.06 ft (cota exterior 5'-0 3/4" de 1/A3.1, 111'-4" → T.O. high eave) en vez de 0.667 ft impresos (11'-4" R.O. A5.2 → 12'-0" 1/A5.2). Sobrecarga ≈ +135 SF 5/8" X en el head (y RC / 1/4" de RFI-06 calculados con 4 filas en vez de 1). Prueba: toda altura de board debe citar una cota cuyos DOS extremos sean bordes del board en esa cara (interior/exterior); una cota de fachada exterior nunca define el board interior.
