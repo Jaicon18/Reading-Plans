@@ -1,0 +1,3208 @@
+{
+ "project": "O'Reilly Auto Parts - 23rd Ave., Evans, CO #1 (EV1 Current Conformed Set 11-20-2025) - Lectura A",
+ "constants": {
+  "plan_scale_pt_per_ft": {
+   "value": 9.04,
+   "source": "A1.1 1/8\" = 1'-0\" (raster): grid 1-4 85'-0\" (30'-0\"+30'-0\"+25'-0\") = 766.7 pt (9.02 pt/ft); grid A-C 85'-0\" (25'-0\"+60'-0\") = 770.4 pt (9.06 pt/ft); mean 9.04 pt/ft measured on the raster"
+  },
+  "north_arrow": {
+   "value": "left",
+   "source": "A1.1 north arrow (N points to the left of the sheet)",
+   "img": "tmp/north.png"
+  },
+  "sheet_len_ft": {
+   "value": 12,
+   "source": "R78.33 estimator criterion: stock 4' x 12' gypsum board (no longer sheet specified on A1.1 / A4.2); faces over 12 ft (S21 - S42 parts B/C) get edge blocking"
+  },
+  "bracing_spacing_in": {
+   "value": 48,
+   "source": "A1.1 Interior Wall & Ceiling Notes 2.F \"PROVIDE HORIZONTAL STUD BRIDGING AT 4'-0\\\" O.C. VERTICAL\"; 5/S5.1"
+  }
+ },
+ "walls": [
+  {
+   "id": "S21-N",
+   "tag": "S21",
+   "detail": "S21/A1.1",
+   "detail_source": "S21/A1.1",
+   "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
+   "stud_source": "S21/A1.1 \"150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S21/A1.1",
+   "gauge": "18 ga (150ZF125-18)",
+   "gauge_source": "S21/A1.1",
+   "exterior": true,
+   "top_track": false,
+   "bottom_track": false,
+   "track_source": "S21/A1.1 and 3/A3.2: 150ZF125-18 Z-furring channels fastened to the CMU with no top or bottom track",
+   "bracing_rows": 0,
+   "bracing_rows_source": "S21/A1.1 Z-furring channels fastened to CMU with no stud bridging",
+   "length_basis": "CMU face to CMU face along the facade (grids at CMU inside face per A1.1 8\" grid offsets)",
+   "band": {
+    "ori": "V",
+    "c0": 308.8,
+    "c1": 310.6,
+    "lo": 317.2,
+    "hi": 1089.6,
+    "sheet": "A1.1"
+   },
+   "length_ft": 85.0,
+   "length_source": "A1.1 grid A-B 25'-0\" + grid B-C 60'-0\" = 85'-0\" (grids at the CMU inside face)",
+   "length_op": "25.0 + 60.0 = 85.0",
+   "length_status": "DERIVADO",
+   "location": "North facade (plan left), Parts Area C 105 + Parts Area A 100; S21 tags at 4 places (A1.1)",
+   "tag_manual": {
+    "source": "S21/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 15.51,
+   "height_source": "T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"; average of the rake wall = 14.625 + 42.5/48 = 15.51 ft to the roof plane; B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "14.625 + (85/2)/48 = 15.51",
+   "openings": [
+    {
+     "ref": "Door 3",
+     "kind": "door",
+     "ro_w_ft": 6.0,
+     "head_ft": 8.0,
+     "source": "A5.1 door 3 6'-0\" x 8'-0\" sectional overhead type D (5/A5.1-6/A5.1); A1.1 north wall",
+     "location": "exterior",
+     "header": "not_called",
+     "header_source": "A5.1 door schedule + head details 1/A5.1, 3/A5.1, 5/A5.1 (masonry lintel S4.1 key note 2; Z-furring has no header)",
+     "header_rfi": "No metal header in Z-furring furring (masonry lintel by mason): if a track header is required +(6.0 + 1.333) x 2 LF - RFI-08",
+     "jamb_return": false,
+     "jamb_return_source": "6/A5.1 jamb: SHEET METAL (24 GA.) CLADDING at the jamb (no gypsum return)",
+     "substrate_none_reason": "head / jamb details (1/A5.1-6/A5.1) draw FIRE TREATED 2X4 WOOD BLOCKING anchored to masonry (in blocking_items), no plywood substrate"
+    },
+    {
+     "ref": "Door 2",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "source": "A5.1 door 2 3'-0\" x 7'-0\" type B - frame 2 (R.O. = door + 2\" frame each side - 1/A5.1-2/A5.1); A1.1 north wall",
+     "location": "exterior",
+     "header": "not_called",
+     "header_source": "A5.1 door schedule + head details 1/A5.1, 3/A5.1, 5/A5.1 (masonry lintel S4.1 key note 2; Z-furring has no header)",
+     "header_rfi": "No metal header in Z-furring furring (masonry lintel by mason): if a track header is required +(3.333 + 1.333) x 2 LF - RFI-08",
+     "jamb_return": false,
+     "jamb_return_source": "2/A5.1 jamb: Z-furring + 5/8\" type X stops at the HM frame (no gypsum return drawn)",
+     "substrate_none_reason": "head / jamb details (1/A5.1-6/A5.1) draw FIRE TREATED 2X4 WOOD BLOCKING anchored to masonry (in blocking_items), no plywood substrate"
+    },
+    {
+     "ref": "Door 7",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "source": "A5.1 door 7 3'-0\" x 7'-0\" type B - frame 2 (3/A5.1-4/A5.1); A1.1 north wall",
+     "location": "exterior",
+     "header": "not_called",
+     "header_source": "A5.1 door schedule + head details 1/A5.1, 3/A5.1, 5/A5.1 (masonry lintel S4.1 key note 2; Z-furring has no header)",
+     "header_rfi": "No metal header in Z-furring furring (masonry lintel by mason): if a track header is required +(3.333 + 1.333) x 2 LF - RFI-08",
+     "jamb_return": false,
+     "jamb_return_source": "4/A5.1 jamb: Z-furring + 5/8\" type X stops at the HM frame (no gypsum return drawn)",
+     "substrate_none_reason": "head / jamb details (1/A5.1-6/A5.1) draw FIRE TREATED 2X4 WOOD BLOCKING anchored to masonry (in blocking_items), no plywood substrate"
+    }
+   ],
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area C 105 / Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 15.51,
+     "height_source": "3/A3.2 and 1/A3.2: 5/8\" type X lining up to the roof purlins (through the C-1 ACT) = wall height 15.51",
+     "deduct_opening_sf": 95.78,
+     "deduct_info": "doors 3, 2, 7 R.O. x head"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 2.39,
+   "thickness_check": "faces 308.8 / 310.6 pt on A1.1 (raster) = 2.39 in",
+   "status": "DERIVADO",
+   "source": "S21/A1.1"
+  },
+  {
+   "id": "S21-S",
+   "tag": "S21",
+   "detail": "S21/A1.1",
+   "detail_source": "S21/A1.1",
+   "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
+   "stud_source": "S21/A1.1 \"150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S21/A1.1",
+   "gauge": "18 ga (150ZF125-18)",
+   "gauge_source": "S21/A1.1",
+   "exterior": true,
+   "top_track": false,
+   "bottom_track": false,
+   "track_source": "S21/A1.1 and 3/A3.2: 150ZF125-18 Z-furring channels fastened to the CMU with no top or bottom track",
+   "bracing_rows": 0,
+   "bracing_rows_source": "S21/A1.1 Z-furring channels fastened to CMU with no stud bridging",
+   "length_basis": "CMU face to CMU face along the facade (grids at CMU inside face per A1.1 8\" grid offsets)",
+   "band": {
+    "ori": "V",
+    "c0": 1074.8,
+    "c1": 1077.0,
+    "lo": 317.0,
+    "hi": 1089.0,
+    "sheet": "A1.1"
+   },
+   "length_ft": 85.0,
+   "length_source": "A1.1 grid A-B 25'-0\" + grid B-C 60'-0\" = 85'-0\" (grids at the CMU inside face)",
+   "length_op": "25.0 + 60.0 = 85.0",
+   "length_status": "DERIVADO",
+   "location": "South facade (plan right), RR 104 (behind S24) + Parts Area C/B; S21 tags (A1.1)",
+   "tag_manual": {
+    "source": "S21/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 15.51,
+   "height_source": "T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"; rake average 15.51 ft; B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "14.625 + (85/2)/48 = 15.51",
+   "openings": [
+    {
+     "ref": "Window D1",
+     "kind": "window",
+     "ro_w_ft": 11.365,
+     "head_ft": 11.365,
+     "sill_ft": 8.0,
+     "source": "A5.2 window type D1 11'-4 3/8\" R.O. x 3'-4 3/8\" R.O.; A1.1 south wall (1/A3.4)",
+     "location": "exterior",
+     "header": "not_called",
+     "header_source": "A5.2 window type D1/D2 + 11/A5.2 head (masonry lintel S4.1 key note 8; Z-furring has no header)",
+     "header_rfi": "No metal header in Z-furring (32\" masonry lintel S4.1 key 8): if a track header is required +(11.365 + 1.333) x 2 LF - RFI-08",
+     "jamb_return": true,
+     "jamb_return_source": "12/A5.2 jamb detail (Z-furring + gypsum returned to the frame); 11/A5.2 head",
+     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)",
+     "substrate_none_reason": "11/A5.2-13/A5.2 draw FIRE TREATED 2X4 WOOD BLOCKING (in blocking_items), no plywood substrate",
+     "head_source": "1/A3.4: window head 7'-11 5/8\" below T.O. MASONRY EL. 119'-4\" = 111'-4 3/8\"; R.O. 3'-4 3/8\" (A5.2 D1/D2) -> sill 108'-0\""
+    },
+    {
+     "ref": "Window D2",
+     "kind": "window",
+     "ro_w_ft": 11.365,
+     "head_ft": 11.365,
+     "sill_ft": 8.0,
+     "source": "A5.2 window type D2 11'-4 3/8\" R.O. x 3'-4 3/8\" R.O.; A1.1 south wall",
+     "location": "exterior",
+     "header": "not_called",
+     "header_source": "A5.2 window type D1/D2 + 11/A5.2 head (masonry lintel S4.1 key note 8; Z-furring has no header)",
+     "header_rfi": "No metal header in Z-furring (32\" masonry lintel S4.1 key 8): if a track header is required +(11.365 + 1.333) x 2 LF - RFI-08",
+     "jamb_return": true,
+     "jamb_return_source": "12/A5.2 jamb detail (Z-furring + gypsum returned to the frame); 11/A5.2 head",
+     "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (12/A5.2)",
+     "substrate_none_reason": "11/A5.2-13/A5.2 draw FIRE TREATED 2X4 WOOD BLOCKING (in blocking_items), no plywood substrate",
+     "head_source": "1/A3.4: window head 7'-11 5/8\" below T.O. MASONRY EL. 119'-4\" = 111'-4 3/8\"; R.O. 3'-4 3/8\" (A5.2 D1/D2) -> sill 108'-0\""
+    }
+   ],
+   "faces": [
+    {
+     "side": "A",
+     "room": "Rest Room 104 (behind S24-03: no board on the furring)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.0,
+     "height_source": "S24/A1.1: board on the S24 stud face, none on the Z-furring behind it",
+     "length_ft": 9.42,
+     "length_source": "A1.1 band 317.0-402.2 pt / 9.04"
+    },
+    {
+     "side": "A",
+     "room": "Parts Area C 105 / Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 15.51,
+     "height_source": "1/A3.4, 3/A3.2: lining up to the roof purlins = wall height 15.51",
+     "length_ft": 75.58,
+     "length_source": "85.0 - covered tramo (A1.1)",
+     "deduct_opening_sf": 76.49,
+     "deduct_info": "windows D1, D2 R.O. 11.365 x 3.365"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 2.92,
+   "thickness_check": "faces 1074.8 / 1077.0 pt on A1.1 (raster) = 2.92 in",
+   "status": "DERIVADO",
+   "source": "S21/A1.1"
+  },
+  {
+   "id": "S21-E",
+   "tag": "S21",
+   "detail": "S21/A1.1",
+   "detail_source": "S21/A1.1",
+   "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
+   "stud_source": "S21/A1.1 \"150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S21/A1.1",
+   "gauge": "18 ga (150ZF125-18)",
+   "gauge_source": "S21/A1.1",
+   "exterior": true,
+   "top_track": false,
+   "bottom_track": false,
+   "track_source": "S21/A1.1 and 3/A3.2: 150ZF125-18 Z-furring channels fastened to the CMU with no top or bottom track",
+   "bracing_rows": 0,
+   "bracing_rows_source": "S21/A1.1 Z-furring channels fastened to CMU with no stud bridging",
+   "length_basis": "CMU face to CMU face along the facade (grids at CMU inside face per A1.1 8\" grid offsets)",
+   "band": {
+    "ori": "H",
+    "c0": 317.2,
+    "c1": 319.6,
+    "lo": 310.6,
+    "hi": 1074.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 84.646,
+   "length_source": "A1.1 grid 1-4 30'-0\" + 30'-0\" + 25'-0\" = 85'-0\" minus the N and S furring (2 x 2 1/8\", S21/A1.1)",
+   "length_op": "85.0 - 2 x 2.125/12 = 84.646",
+   "length_status": "DERIVADO",
+   "location": "East facade (plan top), Parts C / Office / Break / Rest Rooms; S21 tags at x 465 and 880 pt (A1.1)",
+   "tag_manual": {
+    "source": "S21/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 14.63,
+   "height_source": "T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3, A2.1) - 100'-0\"; B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "114.625 - 100.0 = 14.63",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 14.62,
+     "height_source": "1/A3.3, 3/A3.2: lining to the roof purlins = T.O. LOW EAVE EL. 114'-7 1/2\" - 100'-0\" (RFI-01)",
+     "length_ft": 45.26,
+     "length_source": "A1.1 band 310.6-719.2 pt"
+    },
+    {
+     "side": "A",
+     "room": "Office 102 (behind S24-01)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.0,
+     "height_source": "S24/A1.1: no board on the Z-furring behind the S24 studs",
+     "length_ft": 11.74,
+     "length_source": "A1.1 band 719.2-825.2 pt"
+    },
+    {
+     "side": "A",
+     "room": "Break Area (Parts Area C 105)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 14.62,
+     "height_source": "1/A3.3, 3/A3.2: lining to the roof purlins = T.O. LOW EAVE EL. 114'-7 1/2\" - 100'-0\" (RFI-01)",
+     "length_ft": 10.85,
+     "length_source": "A1.1 band 825.2-923.2 pt"
+    },
+    {
+     "side": "A",
+     "room": "Rest Rooms 103/104 (behind S24-02)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.0,
+     "height_source": "S24/A1.1: no board on the Z-furring behind the S24 studs",
+     "length_ft": 16.8,
+     "length_source": "A1.1 band 923.2-1074.8 pt"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 3.19,
+   "thickness_check": "faces 317.2 / 319.6 pt on A1.1 (raster) = 3.19 in",
+   "status": "DERIVADO",
+   "source": "S21/A1.1"
+  },
+  {
+   "id": "S21-W1",
+   "tag": "S21",
+   "detail": "S21/A1.1",
+   "detail_source": "S21/A1.1",
+   "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
+   "stud_source": "S21/A1.1 \"150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S21/A1.1",
+   "gauge": "18 ga (150ZF125-18)",
+   "gauge_source": "S21/A1.1",
+   "exterior": true,
+   "top_track": false,
+   "bottom_track": false,
+   "track_source": "S21/A1.1 and 3/A3.2: 150ZF125-18 Z-furring channels fastened to the CMU with no top or bottom track",
+   "bracing_rows": 0,
+   "bracing_rows_source": "S21/A1.1 Z-furring channels fastened to CMU with no stud bridging",
+   "length_basis": "CMU face to CMU face along the facade (grids at CMU inside face per A1.1 8\" grid offsets)",
+   "band": {
+    "ori": "H",
+    "c0": 1086.4,
+    "c1": 1089.0,
+    "lo": 310.6,
+    "hi": 393.0,
+    "sheet": "A1.1"
+   },
+   "location": "West facade (plan bottom), CMU at grid 1 pier, Parts Area A 100; S21 tag at x 383 pt",
+   "tag_manual": {
+    "source": "S21/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 16.4,
+   "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2) - 100'-0\"; B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "116.396 - 100.0 = 16.4",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 16.4,
+     "height_source": "1/A3.2: lining to the roof purlins"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 9.12,
+   "length_source": "A1.1 band 82.4 pt / 9.04 pt/ft (raster)",
+   "length_op": "(393.0 - 310.6) / 9.04 = 9.12",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 3.45,
+   "thickness_check": "faces 1086.4 / 1089.0 pt on A1.1 (raster) = 3.45 in",
+   "status": "DERIVADO",
+   "source": "S21/A1.1"
+  },
+  {
+   "id": "S21-W2",
+   "tag": "S21",
+   "detail": "S21/A1.1",
+   "detail_source": "S21/A1.1",
+   "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
+   "stud_source": "S21/A1.1 \"150ZF125-18 COLD FORM METAL Z-FURRING CHANNELS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S21/A1.1",
+   "gauge": "18 ga (150ZF125-18)",
+   "gauge_source": "S21/A1.1",
+   "exterior": true,
+   "top_track": false,
+   "bottom_track": false,
+   "track_source": "S21/A1.1 and 3/A3.2: 150ZF125-18 Z-furring channels fastened to the CMU with no top or bottom track",
+   "bracing_rows": 0,
+   "bracing_rows_source": "S21/A1.1 Z-furring channels fastened to CMU with no stud bridging",
+   "length_basis": "CMU face to CMU face along the facade (grids at CMU inside face per A1.1 8\" grid offsets)",
+   "band": {
+    "ori": "H",
+    "c0": 1086.4,
+    "c1": 1089.0,
+    "lo": 850.0,
+    "hi": 1074.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 24.82,
+   "length_source": "A1.1 grid 3-4 25'-0\" minus S furring 2 1/8\"",
+   "length_op": "25.0 - 2.125/12 = 24.82",
+   "length_status": "DERIVADO",
+   "location": "West facade (plan bottom), CMU grid 3-4, Parts Area B 101; S21 tag at x 972 pt",
+   "tag_manual": {
+    "source": "S21/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 16.4,
+   "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2) - 100'-0\"; B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "116.396 - 100.0 = 16.4",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 16.4,
+     "height_source": "1/A3.2: lining to the roof purlins"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 3.45,
+   "thickness_check": "faces 1086.4 / 1089.0 pt on A1.1 (raster) = 3.45 in",
+   "status": "DERIVADO",
+   "source": "S21/A1.1"
+  },
+  {
+   "id": "S24-01",
+   "tag": "S24",
+   "detail": "S24/A1.1",
+   "detail_source": "S24/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S24/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S24/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S24/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S24/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F. under the 600S162-54 ceiling joists (7/A4.2 B.O. FRAMING EL. 108'-6\")",
+   "length_basis": "stud face to stud face (A1.1 band)",
+   "notes": "the S24 Z-furring layer (150ZF125-18 @24\") is the continuous S21 furring line of the facade (counted in S21-E / S21-S)",
+   "band": {
+    "ori": "H",
+    "c0": 319.6,
+    "c1": 326.0,
+    "lo": 719.2,
+    "hi": 825.2,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "S21-E",
+   "adjacent_source": "S24/A1.1: 3-5/8\" studs in front of the 150ZF125-18 Z-furring on CMU",
+   "length_ft": 11.81,
+   "length_source": "A1.1 office 11'-0\" clear + 2 x S43 (4 7/8\")",
+   "length_op": "11.0 + 2 x 4.875/12 = 11.81",
+   "length_status": "DERIVADO",
+   "location": "Office 102 east wall (plan top); S24 tag at x 790 pt",
+   "tag_manual": {
+    "source": "S24/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Office 102",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S24/A1.1 \"5/8\\\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 8'-6\\\" A.F.F.\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 8.5,
+   "thickness_check": "faces 319.6 / 326.0 pt on A1.1 (raster) = 8.5 in",
+   "status": "DERIVADO",
+   "source": "S24/A1.1"
+  },
+  {
+   "id": "S24-02",
+   "tag": "S24",
+   "detail": "S24/A1.1",
+   "detail_source": "S24/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S24/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S24/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S24/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S24/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F. under the 600S162-54 ceiling joists (7/A4.2 B.O. FRAMING EL. 108'-6\")",
+   "length_basis": "stud face to stud face (A1.1 band)",
+   "notes": "the S24 Z-furring layer (150ZF125-18 @24\") is the continuous S21 furring line of the facade (counted in S21-E / S21-S)",
+   "band": {
+    "ori": "H",
+    "c0": 319.4,
+    "c1": 324.8,
+    "lo": 923.2,
+    "hi": 1074.8,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "S21-E",
+   "adjacent_source": "S24/A1.1: 3-5/8\" studs in front of the Z-furring on CMU",
+   "location": "Rest Rooms 103 + 104 east wall (plan top); S24 tags at x 943 and 1035 pt (one line, two tags)",
+   "tag_manual": {
+    "source": "S24/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Rest Room 103 / Rest Room 104",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S24/A1.1 board interior side to 8'-6\" A.F.F.",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 16.77,
+   "length_source": "A1.1 band 151.6 pt / 9.04 pt/ft (raster)",
+   "length_op": "(1074.8 - 923.2) / 9.04 = 16.77",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 7.17,
+   "thickness_check": "faces 319.4 / 324.8 pt on A1.1 (raster) = 7.17 in",
+   "status": "DERIVADO",
+   "source": "S24/A1.1"
+  },
+  {
+   "id": "S24-03",
+   "tag": "S24",
+   "detail": "S24/A1.1",
+   "detail_source": "S24/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S24/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S24/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S24/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S24/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F. under the 600S162-54 ceiling joists (7/A4.2 B.O. FRAMING EL. 108'-6\")",
+   "length_basis": "stud face to stud face (A1.1 band)",
+   "notes": "the S24 Z-furring layer (150ZF125-18 @24\") is the continuous S21 furring line of the facade (counted in S21-E / S21-S)",
+   "band": {
+    "ori": "V",
+    "c0": 1069.2,
+    "c1": 1074.8,
+    "lo": 324.8,
+    "hi": 402.2,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "S21-S",
+   "adjacent_source": "S24/A1.1: 3-5/8\" studs in front of the Z-furring on CMU",
+   "location": "Rest Room 104 south wall (plan right); S24 tag at (1060, 345) pt",
+   "tag_manual": {
+    "source": "S24/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Rest Room 104",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S24/A1.1 board interior side to 8'-6\" A.F.F.",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 8.56,
+   "length_source": "A1.1 band 77.4 pt / 9.04 pt/ft (raster)",
+   "length_op": "(402.2 - 324.8) / 9.04 = 8.56",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 7.43,
+   "thickness_check": "faces 1069.2 / 1074.8 pt on A1.1 (raster) = 7.43 in",
+   "status": "DERIVADO",
+   "source": "S24/A1.1"
+  },
+  {
+   "id": "S43-OW",
+   "tag": "S43",
+   "detail": "S43/A1.1",
+   "detail_source": "S43/A1.1; 7/A4.2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S43/A1.1 \"362S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S43/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S43/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S43/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL. 108'-6\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F.; 600S162-54 ceiling joists @24\" bear on top (7/A4.2 key 5)",
+   "length_basis": "outside face to outside face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 719.2,
+    "c1": 723.4,
+    "lo": 326.0,
+    "hi": 393.2,
+    "sheet": "A1.1"
+   },
+   "location": "Office 102 west wall; S43 tag at (745, 360) pt",
+   "tag_manual": {
+    "source": "S43/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "7/A4.2: outside face board runs past the 6\" ceiling joist (B.O. FRAMING EL. 108'-6\" + 6\") with corner bead (key 7) = 9.0 ft"
+    },
+    {
+     "side": "B",
+     "room": "Office 102",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S43/A1.1 + 7/A4.2: inside face to the hard ceiling at B.O. FRAMING EL. 108'-6\" = 8.5 ft (C-3 8'-6\", A1.2)"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 7.43,
+   "length_source": "A1.1 band 67.2 pt / 9.04 pt/ft (raster)",
+   "length_op": "(393.2 - 326.0) / 9.04 = 7.43",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.58,
+   "thickness_check": "faces 719.2 / 723.4 pt on A1.1 (raster) = 5.58 in",
+   "status": "DERIVADO",
+   "source": "S43/A1.1"
+  },
+  {
+   "id": "S43-OE",
+   "tag": "S43",
+   "detail": "S43/A1.1",
+   "detail_source": "S43/A1.1; 7/A4.2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S43/A1.1 \"362S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S43/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S43/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S43/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL. 108'-6\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F.; 600S162-54 ceiling joists @24\" bear on top (7/A4.2 key 5)",
+   "length_basis": "outside face to outside face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 821.4,
+    "c1": 825.2,
+    "lo": 326.0,
+    "hi": 393.2,
+    "sheet": "A1.1"
+   },
+   "location": "Office 102 south wall (plan right); S43 tag at (815, 360) pt",
+   "tag_manual": {
+    "source": "S43/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Office 102",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S43/A1.1 + 7/A4.2: inside face to the hard ceiling at B.O. FRAMING EL. 108'-6\" = 8.5 ft (C-3 8'-6\", A1.2)"
+    },
+    {
+     "side": "B",
+     "room": "Break Area (Parts Area C 105)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "7/A4.2: outside face board runs past the 6\" ceiling joist (B.O. FRAMING EL. 108'-6\" + 6\") with corner bead (key 7) = 9.0 ft"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 7.43,
+   "length_source": "A1.1 band 67.2 pt / 9.04 pt/ft (raster)",
+   "length_op": "(393.2 - 326.0) / 9.04 = 7.43",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.04,
+   "thickness_check": "faces 821.4 / 825.2 pt on A1.1 (raster) = 5.04 in",
+   "status": "DERIVADO",
+   "source": "S43/A1.1"
+  },
+  {
+   "id": "S43-OS",
+   "tag": "S43",
+   "detail": "S43/A1.1",
+   "detail_source": "S43/A1.1; 7/A4.2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S43/A1.1 \"362S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S43/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S43/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S43/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL. 108'-6\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F.; 600S162-54 ceiling joists @24\" bear on top (7/A4.2 key 5)",
+   "length_basis": "outside face to outside face (A1.1 band)",
+   "band": {
+    "ori": "H",
+    "c0": 393.2,
+    "c1": 397.8,
+    "lo": 719.2,
+    "hi": 825.2,
+    "sheet": "A1.1"
+   },
+   "length_ft": 11.81,
+   "length_source": "A1.1 office 11'-0\" clear + 2 x S43 (4 7/8\")",
+   "length_op": "11.0 + 2 x 4.875/12 = 11.81",
+   "length_status": "DERIVADO",
+   "location": "Office 102 west wall (plan bottom) with door 4; S43 tag at (775, 380) pt",
+   "tag_manual": {
+    "source": "S43/A1.1",
+    "sheet_raster": true
+   },
+   "openings": [
+    {
+     "ref": "Door 4",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "source": "A5.1 door 4 3'-0\" x 7'-0\" type C - HM frame 2 (7/A5.1-8/A5.1: 2\" frame face each side)",
+     "header": "metal",
+     "header_type": "600S162-33 box header (7/A5.1)",
+     "header_type_source": "7/A5.1 \"600S162-33 COLD FORM METAL BOX HEADER\"",
+     "pieces": 4,
+     "pieces_source": "7/A5.1 box header (E20: box = 4 pieces)",
+     "xy_pt_info": "gap 772.6-800.6 pt"
+    }
+   ],
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "7/A4.2: outside face board runs past the 6\" ceiling joist (B.O. FRAMING EL. 108'-6\" + 6\") with corner bead (key 7) = 9.0 ft",
+     "deduct_opening_sf": 23.89
+    },
+    {
+     "side": "B",
+     "room": "Office 102",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S43/A1.1 + 7/A4.2: inside face to the hard ceiling at B.O. FRAMING EL. 108'-6\" = 8.5 ft (C-3 8'-6\", A1.2)",
+     "deduct_opening_sf": 23.89
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 6.11,
+   "thickness_check": "faces 393.2 / 397.8 pt on A1.1 (raster) = 6.11 in",
+   "status": "DERIVADO",
+   "source": "S43/A1.1"
+  },
+  {
+   "id": "S43-RW",
+   "tag": "S43",
+   "detail": "S43/A1.1",
+   "detail_source": "S43/A1.1; 7/A4.2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S43/A1.1 \"362S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S43/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S43/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S43/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL. 108'-6\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F.; 600S162-54 ceiling joists @24\" bear on top (7/A4.2 key 5)",
+   "length_basis": "outside face to outside face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 923.2,
+    "c1": 927.2,
+    "lo": 324.8,
+    "hi": 398.0,
+    "sheet": "A1.1"
+   },
+   "location": "Rest Room 103 north wall (plan left); S43 tag at (935, 365) pt",
+   "tag_manual": {
+    "source": "S43/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Break Area (Parts Area C 105)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "7/A4.2: outside face board runs past the 6\" ceiling joist (B.O. FRAMING EL. 108'-6\" + 6\") with corner bead (key 7) = 9.0 ft"
+    },
+    {
+     "side": "B",
+     "room": "Rest Room 103",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S43/A1.1 + 7/A4.2: inside face to the hard ceiling at B.O. FRAMING EL. 108'-6\" = 8.5 ft (C-3 8'-6\", A1.2)",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 8.1,
+   "length_source": "A1.1 band 73.2 pt / 9.04 pt/ft (raster)",
+   "length_op": "(398.0 - 324.8) / 9.04 = 8.1",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.31,
+   "thickness_check": "faces 923.2 / 927.2 pt on A1.1 (raster) = 5.31 in",
+   "status": "DERIVADO",
+   "source": "S43/A1.1"
+  },
+  {
+   "id": "S43-RS",
+   "tag": "S43",
+   "detail": "S43/A1.1",
+   "detail_source": "S43/A1.1; 7/A4.2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S43/A1.1 \"362S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S43/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S43/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S43/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"; 7/A4.2 B.O. FRAMING EL. 108'-6\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" A.F.F.; 600S162-54 ceiling joists @24\" bear on top (7/A4.2 key 5)",
+   "length_basis": "outside face to outside face (A1.1 band)",
+   "band": {
+    "ori": "H",
+    "c0": 398.0,
+    "c1": 402.2,
+    "lo": 923.2,
+    "hi": 1069.2,
+    "sheet": "A1.1"
+   },
+   "length_ft": 16.17,
+   "length_source": "A1.1 7'-10\" + 6\" + 7'-10\" (RR 103 / S61 / RR 104) + 2 x 4 7/8\" - (stud face dims)",
+   "length_op": "band 146.0 pt / 9.04 = 16.15; printed 7.833 + 0.5 + 7.833 = 16.17",
+   "length_status": "DERIVADO",
+   "location": "Rest Rooms 103/104 west wall (plan bottom), doors 5 and 6; S43 tags at (965, 380) and (1050, 380) pt (one line)",
+   "tag_manual": {
+    "source": "S43/A1.1",
+    "sheet_raster": true
+   },
+   "openings": [
+    {
+     "ref": "Door 5",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "source": "A5.1 door 5 3'-0\" x 7'-0\" type C - HM frame 2 (7/A5.1-8/A5.1)",
+     "header": "metal",
+     "header_type": "600S162-33 box header (7/A5.1)",
+     "header_type_source": "7/A5.1 \"600S162-33 COLD FORM METAL BOX HEADER\"",
+     "pieces": 4,
+     "pieces_source": "7/A5.1 box header (E20: box = 4 pieces)",
+     "xy_pt_info": "gap 929-957.8 pt"
+    },
+    {
+     "ref": "Door 6",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "source": "A5.1 door 6 3'-0\" x 7'-0\" type C - HM frame 2 (7/A5.1-8/A5.1)",
+     "header": "metal",
+     "header_type": "600S162-33 box header (7/A5.1)",
+     "header_type_source": "7/A5.1 \"600S162-33 COLD FORM METAL BOX HEADER\"",
+     "pieces": 4,
+     "pieces_source": "7/A5.1 box header (E20: box = 4 pieces)",
+     "xy_pt_info": "gap 1042.8-1069.2 pt"
+    }
+   ],
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "7/A4.2: outside face board runs past the 6\" ceiling joist (B.O. FRAMING EL. 108'-6\" + 6\") with corner bead (key 7) = 9.0 ft",
+     "deduct_opening_sf": 47.78
+    },
+    {
+     "side": "B",
+     "room": "Rest Room 103 / Rest Room 104",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S43/A1.1 + 7/A4.2: inside face to the hard ceiling at B.O. FRAMING EL. 108'-6\" = 8.5 ft (C-3 8'-6\", A1.2)",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)",
+     "deduct_opening_sf": 47.78
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 5.58,
+   "thickness_check": "faces 398.0 / 402.2 pt on A1.1 (raster) = 5.58 in",
+   "status": "DERIVADO",
+   "source": "S43/A1.1"
+  },
+  {
+   "id": "S61-01",
+   "tag": "S61",
+   "detail": "S61/A1.1",
+   "detail_source": "S61/A1.1",
+   "stud_size": "6\"",
+   "stud_source": "S61/A1.1 \"600S162-33 COLD FORM METAL STUD FRAMING AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S61/A1.1",
+   "gauge": "20 ga (33 mil, 600S162-33)",
+   "gauge_source": "S61/A1.1",
+   "height_ft": 8.5,
+   "height_source": "S61/A1.1 \"STUDS TO 8'-6\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 8'-6\" under the ceiling joists (7/A4.2)",
+   "length_basis": "S24 face to S43 face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 996.6,
+    "c1": 1002.4,
+    "lo": 324.8,
+    "hi": 398.0,
+    "sheet": "A1.1"
+   },
+   "location": "Wet wall between Rest Room 103 and 104; S61 tag at (1000, 355) pt",
+   "tag_manual": {
+    "source": "S61/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Rest Room 103",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S61/A1.1 each side; C-3 ceiling 8'-6\" (A1.2)",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)"
+    },
+    {
+     "side": "B",
+     "room": "Rest Room 104",
+     "board": "5/8 type X WR",
+     "layers": 1,
+     "height_ft": 8.5,
+     "height_source": "S61/A1.1 each side; C-3 ceiling 8'-6\" (A1.2)",
+     "board_source": "A1.1 Interior Wall & Ceiling Notes 3.B: MOISTURE RESISTANT TYPE \"X\" GYPSUM BOARD AT ALL WET LOCATIONS (RESTROOMS)"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 8.1,
+   "length_source": "A1.1 band 73.2 pt / 9.04 pt/ft (raster)",
+   "length_op": "(398.0 - 324.8) / 9.04 = 8.1",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 7.7,
+   "thickness_check": "faces 996.6 / 1002.4 pt on A1.1 (raster) = 7.7 in",
+   "status": "DERIVADO",
+   "source": "S61/A1.1"
+  },
+  {
+   "id": "S41-NW-H",
+   "tag": "S41",
+   "detail": "S41/A1.1",
+   "detail_source": "S41/A1.1; 4/A4.2; A1.1 key note 5",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S41/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S41/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S41/A1.1",
+   "height_ft": 12.0,
+   "height_source": "S41/A1.1 \"STUDS TO 12'-0\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 12'-0\" A.F.F. (free top above the C-1 ACT at 11'-6\")",
+   "length_basis": "outside face (A1.1 band)",
+   "band": {
+    "ori": "H",
+    "c0": 573.8,
+    "c1": 578.0,
+    "lo": 310.6,
+    "hi": 325.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 1.67,
+   "length_source": "A1.1 1'-8\" (box-out)",
+   "length_op": "1'-8\" = 1.67",
+   "length_status": "CONFIRMADO",
+   "location": "Showroom corner box-out at S42 / north wall (key note 5); S41 tag at (318, 600) pt",
+   "tag_manual": {
+    "source": "S41/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S41/A1.1 \"5/8\\\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 12'-0\\\" A.F.F.\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 5.58,
+   "thickness_check": "faces 573.8 / 578.0 pt on A1.1 (raster) = 5.58 in",
+   "status": "CONFIRMADO",
+   "source": "S41/A1.1"
+  },
+  {
+   "id": "S41-NW-V",
+   "tag": "S41",
+   "detail": "S41/A1.1",
+   "detail_source": "S41/A1.1; 4/A4.2; A1.1 key note 5",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S41/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S41/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S41/A1.1",
+   "height_ft": 12.0,
+   "height_source": "S41/A1.1 \"STUDS TO 12'-0\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 12'-0\" A.F.F. (free top above the C-1 ACT at 11'-6\")",
+   "length_basis": "outside face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 322.0,
+    "c1": 325.8,
+    "lo": 558.0,
+    "hi": 573.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 1.75,
+   "length_source": "A1.1 2'-2\" (box-out depth) minus the S41-NW-H leg (4 1/4\")",
+   "length_op": "2.167 - 0.417 = 1.75",
+   "length_status": "DERIVADO",
+   "location": "Showroom corner box-out at S42 / north wall; S41 tag at (335, 572) pt",
+   "tag_manual": {
+    "source": "S41/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S41/A1.1 \"5/8\\\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 12'-0\\\" A.F.F.\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 5.04,
+   "thickness_check": "faces 322.0 / 325.8 pt on A1.1 (raster) = 5.04 in",
+   "status": "DERIVADO",
+   "source": "S41/A1.1"
+  },
+  {
+   "id": "S41-SW-H",
+   "tag": "S41",
+   "detail": "S41/A1.1",
+   "detail_source": "S41/A1.1; 4/A4.2; A1.1 key note 5",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S41/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S41/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S41/A1.1",
+   "height_ft": 12.0,
+   "height_source": "S41/A1.1 \"STUDS TO 12'-0\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 12'-0\" A.F.F. (free top above the C-1 ACT at 11'-6\")",
+   "length_basis": "outside face (A1.1 band)",
+   "band": {
+    "ori": "H",
+    "c0": 1071.8,
+    "c1": 1075.8,
+    "lo": 310.6,
+    "hi": 325.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 1.67,
+   "length_source": "A1.1 1'-8\" (box-out)",
+   "length_op": "1'-8\" = 1.67",
+   "length_status": "CONFIRMADO",
+   "location": "Showroom corner box-out at north / west walls (key note 5); S41 tag at (318, 1060) pt",
+   "tag_manual": {
+    "source": "S41/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S41/A1.1 \"5/8\\\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 12'-0\\\" A.F.F.\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 5.31,
+   "thickness_check": "faces 1071.8 / 1075.8 pt on A1.1 (raster) = 5.31 in",
+   "status": "CONFIRMADO",
+   "source": "S41/A1.1"
+  },
+  {
+   "id": "S41-SW-V",
+   "tag": "S41",
+   "detail": "S41/A1.1",
+   "detail_source": "S41/A1.1; 4/A4.2; A1.1 key note 5",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S41/A1.1 \"362S162-33 COLD FORM METAL STUDS AT 24\\\" O.C.\"",
+   "oc_in": 24,
+   "oc_source": "S41/A1.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "S41/A1.1",
+   "height_ft": 12.0,
+   "height_source": "S41/A1.1 \"STUDS TO 12'-0\\\" A.F.F.\"",
+   "height_status": "CONFIRMADO",
+   "top_track": "top track at 12'-0\" A.F.F. (free top above the C-1 ACT at 11'-6\")",
+   "length_basis": "outside face (A1.1 band)",
+   "band": {
+    "ori": "V",
+    "c0": 322.0,
+    "c1": 325.8,
+    "lo": 1075.8,
+    "hi": 1086.4,
+    "sheet": "A1.1"
+   },
+   "location": "Showroom corner box-out at north / west walls; S41 tag at (335, 1083) pt",
+   "tag_manual": {
+    "source": "S41/A1.1",
+    "sheet_raster": true
+   },
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S41/A1.1 \"5/8\\\" TYPE 'X' GYPSUM BOARD INTERIOR SIDE TO 12'-0\\\" A.F.F.\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 1.17,
+   "length_source": "A1.1 band 10.6 pt / 9.04 pt/ft (raster)",
+   "length_op": "(1086.4 - 1075.8) / 9.04 = 1.17",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.04,
+   "thickness_check": "faces 322.0 / 325.8 pt on A1.1 (raster) = 5.04 in",
+   "status": "DERIVADO",
+   "source": "S41/A1.1"
+  },
+  {
+   "id": "S42-01",
+   "tag": "S42",
+   "detail": "S42/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S42/A1.1 \"3-5/8\\\" COLD FORM METAL STUDS (REFER STRUCTURAL)\"; S5.1 \"3 5/8\\\"x20ga STUD (362S162-33) @ 24\\\" O.C. MAX\"",
+   "oc_in": 24,
+   "oc_source": "1/S5.1, 3/S5.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "1/S5.1, 2/S5.1, 3/S5.1, 4/S5.1",
+   "length_basis": "outside face (A1.1 band)",
+   "detail_source": "S42/A1.1; 5/A4.2; 4/S5.1",
+   "band": {
+    "ori": "H",
+    "c0": 554.2,
+    "c1": 558.0,
+    "lo": 310.6,
+    "hi": 680.2,
+    "sheet": "A1.1"
+   },
+   "location": "Grid B line, full height wall Parts A / Parts C (north wall to the header-wall joint 2/A4.2); S42 tag at (455, 640) pt",
+   "tag_manual": {
+    "source": "S42/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 15.17,
+   "height_source": "S42/A1.1 STUDS TO ROOF FRAMING ABOVE; 4/S5.1; roof plane at grid B = 114'-7 1/2\" + 25'/48 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "14.625 + (556.1 - 318.2)/9.04/48 = 15.17",
+   "top_track": "CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK fastened to 6\"x2\"x16ga (600S200-54) @48\" across the purlins (4/S5.1); A1.1 note 2.C 1 1/2\" deflection",
+   "anchorage": "3-5/8\"x1 1/4\"x20 ga track (362T125-33) to slab with Titen HD 3/8\" @48\" (4/S5.1) - fasteners excluded by estimator order",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S42/A1.1 \"PARTS AREA 'A' TO 12'-0\\\" A.F.F.\"; 5/A4.2 ceiling EL. 111'-6\" + 6\""
+    },
+    {
+     "side": "B",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 15.17,
+     "height_source": "S42/A1.1 \"PARTS AREA 'B' AND 'C' TO BOTTOM OF ROOF FRAMING\" = stud height"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 40.88,
+   "length_source": "A1.1 band 369.6 pt / 9.04 pt/ft (raster)",
+   "length_op": "(680.2 - 310.6) / 9.04 = 40.88",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.04,
+   "thickness_check": "faces 554.2 / 558.0 pt on A1.1 (raster) = 5.04 in",
+   "status": "DERIVADO",
+   "source": "S42/A1.1"
+  },
+  {
+   "id": "S42-02",
+   "tag": "S42",
+   "detail": "S42/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S42/A1.1 \"3-5/8\\\" COLD FORM METAL STUDS (REFER STRUCTURAL)\"; S5.1 \"3 5/8\\\"x20ga STUD (362S162-33) @ 24\\\" O.C. MAX\"",
+   "oc_in": 24,
+   "oc_source": "1/S5.1, 3/S5.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "1/S5.1, 2/S5.1, 3/S5.1, 4/S5.1",
+   "length_basis": "outside face (A1.1 band)",
+   "detail_source": "S42/A1.1; 6/A4.2; 1/S5.1",
+   "band": {
+    "ori": "H",
+    "c0": 554.2,
+    "c1": 558.0,
+    "lo": 680.2,
+    "hi": 827.8,
+    "sheet": "A1.1"
+   },
+   "location": "Grid B line, suspended header wall (dashed) from the 2/A4.2 joint to the corner at x 826 pt; S42 tag at (780, 570) pt",
+   "tag_manual": {
+    "source": "S42/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 8.34,
+   "height_source": "6/A4.2 B.O. FRAMING EL. 106'-10\" (bottom of header wall, 1/S5.1) to the roof plane 15.17 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "15.17 - 6.833 = 8.34",
+   "top_track": "header wall hung from 6\"x2\"x16ga studs (600S200-54) @24\" across the purlins, kicker bracing @48\" (1/S5.1)",
+   "bottom_track": "bottom track at B.O. FRAMING EL. 106'-10\" with (2) fire treated 2x nailers (6/A4.2 key 11)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 5.17,
+     "height_source": "6/A4.2: B.O. framing 6'-10\" to ceiling 11'-6\" + 6\" = 4'-8\" + 6\"",
+     "board_base_ft": 6.833
+    },
+    {
+     "side": "B",
+     "room": "Parts Area C 105",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.34,
+     "height_source": "S42/A1.1 parts C to bottom of roof framing = stud length",
+     "board_base_ft": 6.833
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 16.33,
+   "length_source": "A1.1 band 147.6 pt / 9.04 pt/ft (raster)",
+   "length_op": "(827.8 - 680.2) / 9.04 = 16.33",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 5.04,
+   "thickness_check": "faces 554.2 / 558.0 pt on A1.1 (raster) = 5.04 in",
+   "status": "DERIVADO",
+   "source": "S42/A1.1"
+  },
+  {
+   "id": "S42-03",
+   "tag": "S42",
+   "detail": "S42/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S42/A1.1 \"3-5/8\\\" COLD FORM METAL STUDS (REFER STRUCTURAL)\"; S5.1 \"3 5/8\\\"x20ga STUD (362S162-33) @ 24\\\" O.C. MAX\"",
+   "oc_in": 24,
+   "oc_source": "1/S5.1, 3/S5.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "1/S5.1, 2/S5.1, 3/S5.1, 4/S5.1",
+   "length_basis": "outside face (A1.1 band)",
+   "detail_source": "S42/A1.1; 6/A4.2; 2/S5.1",
+   "band": {
+    "ori": "V",
+    "c0": 824.2,
+    "c1": 827.8,
+    "lo": 558.0,
+    "hi": 1013.0,
+    "sheet": "A1.1"
+   },
+   "length_ft": 50.33,
+   "length_source": "A1.1 printed 50'-4\"",
+   "length_op": "50'-4\" = 50.33",
+   "length_status": "CONFIRMADO",
+   "location": "Suspended header wall (dashed) Parts A / Parts B, grid B to the 2/A4.2 joint; S42 tag at (835, 700) pt",
+   "tag_manual": {
+    "source": "S42/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 8.87,
+   "height_source": "6/A4.2 B.O. FRAMING EL. 106'-10\" to the roof plane (rake average 15.7, T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "15.7 - 6.833 = 8.87",
+   "top_track": "CONT. 6\"x2\"x16ga studs (600S200-54) each side, L4x4x3/16\"x1'-0\" clip angles to purlin web, kicker bracing @48\" (2/S5.1)",
+   "bottom_track": "bottom track at B.O. FRAMING EL. 106'-10\" with (2) fire treated 2x nailers (6/A4.2 key 11)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 5.17,
+     "height_source": "6/A4.2: 4'-8\" + 6\" above the 6'-10\" bottom",
+     "board_base_ft": 6.833
+    },
+    {
+     "side": "B",
+     "room": "Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.87,
+     "height_source": "S42/A1.1 parts B to bottom of roof framing = stud length",
+     "board_base_ft": 6.833
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 4.78,
+   "thickness_check": "faces 824.2 / 827.8 pt on A1.1 (raster) = 4.78 in",
+   "status": "CONFIRMADO",
+   "source": "S42/A1.1"
+  },
+  {
+   "id": "S42-04",
+   "tag": "S42",
+   "detail": "S42/A1.1",
+   "stud_size": "3-5/8\"",
+   "stud_source": "S42/A1.1 \"3-5/8\\\" COLD FORM METAL STUDS (REFER STRUCTURAL)\"; S5.1 \"3 5/8\\\"x20ga STUD (362S162-33) @ 24\\\" O.C. MAX\"",
+   "oc_in": 24,
+   "oc_source": "1/S5.1, 3/S5.1",
+   "gauge": "20 ga (33 mil, 362S162-33)",
+   "gauge_source": "1/S5.1, 2/S5.1, 3/S5.1, 4/S5.1",
+   "length_basis": "outside face (A1.1 band)",
+   "detail_source": "S42/A1.1; 5/A4.2; 3/S5.1",
+   "band": {
+    "ori": "V",
+    "c0": 824.2,
+    "c1": 827.8,
+    "lo": 1013.0,
+    "hi": 1086.8,
+    "sheet": "A1.1"
+   },
+   "length_ft": 8.17,
+   "length_source": "A1.1 printed 8'-2\"",
+   "length_op": "8'-2\" = 8.17",
+   "length_status": "CONFIRMADO",
+   "location": "Full height wall Parts A / Parts B from the 2/A4.2 joint to the west CFS wall; S42 tag at (835, 1030) pt",
+   "tag_manual": {
+    "source": "S42/A1.1",
+    "sheet_raster": true
+   },
+   "height_ft": 16.31,
+   "height_source": "S42/A1.1 studs to roof framing; 3/S5.1; roof plane 16.31 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "14.625 + (1049.9 - 318.2)/9.04/48 = 16.31",
+   "top_track": "CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK fastened to the purlin (3/S5.1)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "S42/A1.1 \"PARTS AREA 'A' TO 12'-0\\\" A.F.F.\"; 5/A4.2 ceiling EL. 111'-6\" + 6\""
+    },
+    {
+     "side": "B",
+     "room": "Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 16.31,
+     "height_source": "S42/A1.1 parts B to bottom of roof framing = stud height"
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 4.78,
+   "thickness_check": "faces 824.2 / 827.8 pt on A1.1 (raster) = 4.78 in",
+   "status": "CONFIRMADO",
+   "source": "S42/A1.1"
+  },
+  {
+   "id": "EXT-W-01-8",
+   "tag": "EXT-CFS",
+   "detail": "1/A3.1",
+   "detail_source": "1/A3.1; 3/S5.3; 2/A5.2",
+   "stud_size": "8\"",
+   "stud_source": "3/S5.3 key 18 \"8\\\"x16ga METAL STUDS (800S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 6",
+   "oc_in": 16,
+   "oc_source": "3/S5.3 key notes 17, 18 @16\" O.C.",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "3/S5.3 key notes 17 (600S162-54), 18 (800S162-54)",
+   "exterior": true,
+   "default_type_source": "1/A3.1 + 3/S5.3 (exterior cold form wall, no partition tag on A1.1)",
+   "height_ft": 20.67,
+   "height_source": "1/A3.1 T.O. METAL STUD EL. 120'-8\" - FINISH FLOOR EL. 100'-0\"",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 100.0 = 20.67",
+   "top_track": "top track at T.O. METAL STUD EL. 120'-8\" (1/A3.1); studs clipped to PEMB wind beams (3/S5.3 key 16 FCB43.5)",
+   "length_basis": "A1.1 band (diagonal hatch, CFS)",
+   "band": {
+    "ori": "H",
+    "c0": 1088.5,
+    "c1": 1095.0,
+    "lo": 393.0,
+    "hi": 447.0,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "EXT-W-01-6",
+   "adjacent_source": "3/S5.3: 8\" and 6\" stud rows fastened together (key 20), stud ties (key 19)",
+   "location": "West facade CFS wall north of storefront A (grid 2 side) - inner 8\" row (1/A5.2 dims 6\" + 8\")",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "1/A3.1: 5/8\" type X (key 20) on 7/8\" resilient channel (key 33) stops just above the C-1 ACT (11'-6\", A1.2) = ceiling + 6\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 5.97,
+   "length_source": "A1.1 band 54.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(447.0 - 393.0) / 9.04 = 5.97",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 8.63,
+   "thickness_check": "faces 1088.5 / 1095.0 pt on A1.1 (raster) = 8.63 in",
+   "status": "DERIVADO",
+   "source": "1/A3.1"
+  },
+  {
+   "id": "EXT-W-01-6",
+   "tag": "EXT-CFS",
+   "detail": "1/A3.1",
+   "detail_source": "1/A3.1; 3/S5.3; 2/A5.2",
+   "stud_size": "6\"",
+   "stud_source": "3/S5.3 key 17 \"6\\\"x16ga METAL STUDS (600S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 7",
+   "oc_in": 16,
+   "oc_source": "3/S5.3 key notes 17, 18 @16\" O.C.",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "3/S5.3 key notes 17 (600S162-54), 18 (800S162-54)",
+   "exterior": true,
+   "default_type_source": "1/A3.1 + 3/S5.3 (exterior cold form wall, no partition tag on A1.1)",
+   "height_ft": 20.67,
+   "height_source": "1/A3.1 T.O. METAL STUD EL. 120'-8\" - FINISH FLOOR EL. 100'-0\"",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 100.0 = 20.67",
+   "top_track": "top track at T.O. METAL STUD EL. 120'-8\" (1/A3.1); studs clipped to PEMB wind beams (3/S5.3 key 16 FCB43.5)",
+   "length_basis": "A1.1 band (diagonal hatch, CFS)",
+   "band": {
+    "ori": "H",
+    "c0": 1095.0,
+    "c1": 1101.0,
+    "lo": 393.0,
+    "hi": 447.0,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "EXT-W-01-8",
+   "adjacent_source": "3/S5.3: 8\" and 6\" stud rows fastened together (key 20)",
+   "location": "West facade CFS wall north of storefront A (grid 2 side) - outer 6\" row; exterior 5/8\" fiberglass reinforced sheathing (2/A5.2, 1/A3.1 key 19) in misc_items",
+   "faces": [],
+   "faces_none_reason": "exterior row: 5/8\" exterior fiberglass reinforced sheathing + stucco outside (2/A5.2); interior board on the 8\" row",
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 5.97,
+   "length_source": "A1.1 band 54.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(447.0 - 393.0) / 9.04 = 5.97",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 7.96,
+   "thickness_check": "faces 1095.0 / 1101.0 pt on A1.1 (raster) = 7.96 in",
+   "status": "DERIVADO",
+   "source": "1/A3.1"
+  },
+  {
+   "id": "EXT-W-02-8",
+   "tag": "EXT-CFS",
+   "detail": "1/A3.1",
+   "detail_source": "1/A3.1; 3/S5.3; 2/A5.2",
+   "stud_size": "8\"",
+   "stud_source": "3/S5.3 key 18 \"8\\\"x16ga METAL STUDS (800S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 6",
+   "oc_in": 16,
+   "oc_source": "3/S5.3 key notes 17, 18 @16\" O.C.",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "3/S5.3 key notes 17 (600S162-54), 18 (800S162-54)",
+   "exterior": true,
+   "default_type_source": "1/A3.1 + 3/S5.3 (exterior cold form wall, no partition tag on A1.1)",
+   "height_ft": 20.67,
+   "height_source": "1/A3.1 T.O. METAL STUD EL. 120'-8\" - FINISH FLOOR EL. 100'-0\"",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 100.0 = 20.67",
+   "top_track": "top track at T.O. METAL STUD EL. 120'-8\" (1/A3.1); studs clipped to PEMB wind beams (3/S5.3 key 16 FCB43.5)",
+   "length_basis": "A1.1 band (diagonal hatch, CFS)",
+   "band": {
+    "ori": "H",
+    "c0": 1088.5,
+    "c1": 1095.0,
+    "lo": 796.0,
+    "hi": 850.0,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "EXT-W-02-6",
+   "adjacent_source": "3/S5.3: 8\" and 6\" stud rows fastened together (key 20), stud ties (key 19)",
+   "location": "West facade CFS wall south of storefront A (grid 3) - inner 8\" row (1/A5.2 dims 6\" + 8\")",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100 / Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "1/A3.1: 5/8\" type X (key 20) on 7/8\" resilient channel (key 33) stops just above the C-1 ACT (11'-6\", A1.2) = ceiling + 6\""
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 5.97,
+   "length_source": "A1.1 band 54.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(850.0 - 796.0) / 9.04 = 5.97",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 8.63,
+   "thickness_check": "faces 1088.5 / 1095.0 pt on A1.1 (raster) = 8.63 in",
+   "status": "DERIVADO",
+   "source": "1/A3.1"
+  },
+  {
+   "id": "EXT-W-02-6",
+   "tag": "EXT-CFS",
+   "detail": "1/A3.1",
+   "detail_source": "1/A3.1; 3/S5.3; 2/A5.2",
+   "stud_size": "6\"",
+   "stud_source": "3/S5.3 key 17 \"6\\\"x16ga METAL STUDS (600S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 7",
+   "oc_in": 16,
+   "oc_source": "3/S5.3 key notes 17, 18 @16\" O.C.",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "3/S5.3 key notes 17 (600S162-54), 18 (800S162-54)",
+   "exterior": true,
+   "default_type_source": "1/A3.1 + 3/S5.3 (exterior cold form wall, no partition tag on A1.1)",
+   "height_ft": 20.67,
+   "height_source": "1/A3.1 T.O. METAL STUD EL. 120'-8\" - FINISH FLOOR EL. 100'-0\"",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 100.0 = 20.67",
+   "top_track": "top track at T.O. METAL STUD EL. 120'-8\" (1/A3.1); studs clipped to PEMB wind beams (3/S5.3 key 16 FCB43.5)",
+   "length_basis": "A1.1 band (diagonal hatch, CFS)",
+   "band": {
+    "ori": "H",
+    "c0": 1095.0,
+    "c1": 1101.0,
+    "lo": 796.0,
+    "hi": 850.0,
+    "sheet": "A1.1"
+   },
+   "adjacent_to": "EXT-W-02-8",
+   "adjacent_source": "3/S5.3: 8\" and 6\" stud rows fastened together (key 20)",
+   "location": "West facade CFS wall south of storefront A (grid 3) - outer 6\" row; exterior 5/8\" fiberglass reinforced sheathing (2/A5.2, 1/A3.1 key 19) in misc_items",
+   "faces": [],
+   "faces_none_reason": "exterior row: 5/8\" exterior fiberglass reinforced sheathing + stucco outside (2/A5.2); interior board on the 8\" row",
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 5.97,
+   "length_source": "A1.1 band 54.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(850.0 - 796.0) / 9.04 = 5.97",
+   "length_status": "DERIVADO",
+   "element": "wall",
+   "thickness_measured_in": 7.96,
+   "thickness_check": "faces 1095.0 / 1101.0 pt on A1.1 (raster) = 7.96 in",
+   "status": "DERIVADO",
+   "source": "1/A3.1"
+  },
+  {
+   "id": "SF-A-8",
+   "tag": "EXT-CFS",
+   "element": "storefront_cripples",
+   "detail": "2/A3.1",
+   "detail_source": "2/A3.1; 3/A3.1; 1/A5.2; 3/S5.3; S4.1 key 3",
+   "stud_size": "8\"",
+   "stud_source": "3/S5.3 key 18 \"8\\\"x16ga METAL STUDS (800S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 6",
+   "oc_in": 16,
+   "oc_source": "3/S5.3; S4.1 key 3 (aligned with studs over storefront, <= 24\" O.C.)",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "S4.1 key 3 \"PROVIDE 16ga LIGHT GAUGE STEEL FRAMING AT ENTRY LOCATION\"; 3/S5.3",
+   "exterior": true,
+   "default_type_source": "2/A3.1 + 3/S5.3 (framing over storefront A, no partition tag)",
+   "band": {
+    "ori": "H",
+    "c0": 1088.5,
+    "c1": 1095.0,
+    "lo": 447.0,
+    "hi": 796.0,
+    "sheet": "A1.1"
+   },
+   "length_ft": 38.67,
+   "length_source": "A5.2 window type A 38'-8\" (R.O.)",
+   "length_op": "38'-8\" = 38.67",
+   "length_status": "CONFIRMADO",
+   "opening_ref": "Storefront A",
+   "adjacent_to": "SF-A-6",
+   "adjacent_source": "3/S5.3 two stud rows fastened together",
+   "height_ft": 9.33,
+   "height_source": "2/A3.1 T.O. METAL STUD EL. 120'-8\" - B.O. SHEATHING EL. 111'-4\" (storefront head)",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 111.333 = 9.33",
+   "top_track": "top track at EL. 120'-8\" (2/A3.1)",
+   "bottom_track": "track over the storefront head on the PEMB wind beam (3/S5.3 key 10, 16)",
+   "location": "Framing over storefront A (west facade, grids 2-3)",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.67,
+     "height_source": "1/A5.2: 5/8\" type X over the storefront head up to above the ACT (ceiling 11'-6\" + 6\")",
+     "board_base_ft": 11.333
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "thickness_measured_in": 8.63,
+   "thickness_check": "faces 1088.5 / 1095.0 pt on A1.1 (raster) = 8.63 in",
+   "status": "CONFIRMADO",
+   "source": "2/A3.1"
+  },
+  {
+   "id": "SF-A-6",
+   "tag": "EXT-CFS",
+   "element": "storefront_cripples",
+   "detail": "2/A3.1",
+   "detail_source": "2/A3.1; 3/A3.1; 1/A5.2; 3/S5.3; S4.1 key 3",
+   "stud_size": "6\"",
+   "stud_source": "3/S5.3 key 17 \"6\\\"x16ga METAL STUDS (600S162-54) @ 16\\\" O.C.\"; 1/A3.1 key 7",
+   "oc_in": 16,
+   "oc_source": "3/S5.3; S4.1 key 3 (aligned with studs over storefront, <= 24\" O.C.)",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "S4.1 key 3 \"PROVIDE 16ga LIGHT GAUGE STEEL FRAMING AT ENTRY LOCATION\"; 3/S5.3",
+   "exterior": true,
+   "default_type_source": "2/A3.1 + 3/S5.3 (framing over storefront A, no partition tag)",
+   "band": {
+    "ori": "H",
+    "c0": 1095.0,
+    "c1": 1101.0,
+    "lo": 447.0,
+    "hi": 796.0,
+    "sheet": "A1.1"
+   },
+   "length_ft": 38.67,
+   "length_source": "A5.2 window type A 38'-8\" (R.O.)",
+   "length_op": "38'-8\" = 38.67",
+   "length_status": "CONFIRMADO",
+   "opening_ref": "Storefront A",
+   "adjacent_to": "SF-A-8",
+   "adjacent_source": "3/S5.3 two stud rows fastened together",
+   "height_ft": 9.33,
+   "height_source": "2/A3.1 T.O. METAL STUD EL. 120'-8\" - B.O. SHEATHING EL. 111'-4\" (storefront head)",
+   "height_status": "CONFIRMADO",
+   "height_op": "120.667 - 111.333 = 9.33",
+   "top_track": "top track at EL. 120'-8\" (2/A3.1)",
+   "bottom_track": "track over the storefront head on the PEMB wind beam (3/S5.3 key 10, 16)",
+   "location": "Framing over storefront A (west facade, grids 2-3)",
+   "faces": [],
+   "faces_none_reason": "exterior row: 5/8\" exterior FRT plywood sheathing (1/A5.2) in plywood_strips",
+   "sheet": "A1.1",
+   "page": 37,
+   "thickness_measured_in": 7.96,
+   "thickness_check": "faces 1095.0 / 1101.0 pt on A1.1 (raster) = 7.96 in",
+   "status": "CONFIRMADO",
+   "source": "2/A3.1"
+  },
+  {
+   "id": "VH-B2",
+   "tag": "EXT-CFS",
+   "element": "vestibule_head",
+   "detail": "3/A5.2",
+   "detail_source": "3/A5.2; 3/A3.1; S4.1 key 3",
+   "stud_size": "6\"",
+   "stud_source": "3/A5.2 \"6\\\" COLD FORM METAL FRAMING WITH DIAGONAL BRACING, REFER TO STRUCTURAL DRAWINGS\"",
+   "oc_in": 24,
+   "oc_source": "S4.1 key 3 \"SPACING NOT TO EXCEED 24\\\" O.C.\"",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "S4.1 key 3 \"PROVIDE 16ga LIGHT GAUGE STEEL FRAMING AT ENTRY LOCATION\"",
+   "default_type_source": "3/A5.2 + 3/A3.1 (framing over the vestibule storefronts, no partition tag)",
+   "top_track": "to roof framing (3/A3.1)",
+   "bottom_track": "track on the storefront head EL. 111'-4\" (3/A5.2)",
+   "band": {
+    "ori": "V",
+    "c0": 611.5,
+    "c1": 615.5,
+    "lo": 1043.5,
+    "hi": 1088.5,
+    "sheet": "A1.1"
+   },
+   "opening_ref": "Window B2",
+   "location": "Vestibule 100A, framing over storefront Window B2 (head EL. 111'-4\")",
+   "height_ft": 5.02,
+   "height_source": "3/A3.1 head (B.O. SHEATHING EL. 111'-4\") to the roof plane 16.35 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "16.35 - 11.333 = 5.02",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.67,
+     "height_source": "3/A5.2: 5/8\" type X on the parts side from the head to above the ACT (11'-6\" + 6\")",
+     "board_base_ft": 11.333
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 4.98,
+   "length_source": "A1.1 band 45.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(1088.5 - 1043.5) / 9.04 = 4.98",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.31,
+   "thickness_check": "faces 611.5 / 615.5 pt on A1.1 (raster) = 5.31 in",
+   "status": "DERIVADO",
+   "source": "3/A5.2"
+  },
+  {
+   "id": "VH-C",
+   "tag": "EXT-CFS",
+   "element": "vestibule_head",
+   "detail": "3/A5.2",
+   "detail_source": "3/A5.2; 3/A3.1; S4.1 key 3",
+   "stud_size": "6\"",
+   "stud_source": "3/A5.2 \"6\\\" COLD FORM METAL FRAMING WITH DIAGONAL BRACING, REFER TO STRUCTURAL DRAWINGS\"",
+   "oc_in": 24,
+   "oc_source": "S4.1 key 3 \"SPACING NOT TO EXCEED 24\\\" O.C.\"",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "S4.1 key 3 \"PROVIDE 16ga LIGHT GAUGE STEEL FRAMING AT ENTRY LOCATION\"",
+   "default_type_source": "3/A5.2 + 3/A3.1 (framing over the vestibule storefronts, no partition tag)",
+   "top_track": "to roof framing (3/A3.1)",
+   "bottom_track": "track on the storefront head EL. 111'-4\" (3/A5.2)",
+   "band": {
+    "ori": "H",
+    "c0": 1039.5,
+    "c1": 1043.5,
+    "lo": 611.5,
+    "hi": 690.5,
+    "sheet": "A1.1"
+   },
+   "length_ft": 8.75,
+   "length_source": "10/A5.2 8'-0\" + 2 x 4 1/2\"",
+   "length_op": "8.0 + 2 x 0.375 = 8.75",
+   "length_status": "DERIVADO",
+   "opening_ref": "Window C",
+   "location": "Vestibule 100A, framing over storefront Window C (head EL. 111'-4\")",
+   "height_ft": 4.95,
+   "height_source": "3/A3.1 head (B.O. SHEATHING EL. 111'-4\") to the roof plane 16.29 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "16.29 - 11.333 = 4.95",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.67,
+     "height_source": "3/A5.2: 5/8\" type X on the parts side from the head to above the ACT (11'-6\" + 6\")",
+     "board_base_ft": 11.333
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "thickness_measured_in": 5.31,
+   "thickness_check": "faces 1039.5 / 1043.5 pt on A1.1 (raster) = 5.31 in",
+   "status": "DERIVADO",
+   "source": "3/A5.2"
+  },
+  {
+   "id": "VH-B1",
+   "tag": "EXT-CFS",
+   "element": "vestibule_head",
+   "detail": "3/A5.2",
+   "detail_source": "3/A5.2; 3/A3.1; S4.1 key 3",
+   "stud_size": "6\"",
+   "stud_source": "3/A5.2 \"6\\\" COLD FORM METAL FRAMING WITH DIAGONAL BRACING, REFER TO STRUCTURAL DRAWINGS\"",
+   "oc_in": 24,
+   "oc_source": "S4.1 key 3 \"SPACING NOT TO EXCEED 24\\\" O.C.\"",
+   "gauge": "16 ga (54 mil)",
+   "gauge_source": "S4.1 key 3 \"PROVIDE 16ga LIGHT GAUGE STEEL FRAMING AT ENTRY LOCATION\"",
+   "default_type_source": "3/A5.2 + 3/A3.1 (framing over the vestibule storefronts, no partition tag)",
+   "top_track": "to roof framing (3/A3.1)",
+   "bottom_track": "track on the storefront head EL. 111'-4\" (3/A5.2)",
+   "band": {
+    "ori": "V",
+    "c0": 688.0,
+    "c1": 692.0,
+    "lo": 1043.5,
+    "hi": 1088.5,
+    "sheet": "A1.1"
+   },
+   "opening_ref": "Window B1",
+   "location": "Vestibule 100A, framing over storefront Window B1 (head EL. 111'-4\")",
+   "height_ft": 5.02,
+   "height_source": "3/A3.1 head (B.O. SHEATHING EL. 111'-4\") to the roof plane 16.35 (T.O. LOW EAVE EL. 114'-7 1/2\" (1/A3.3; A2.1 EAVE HEIGHT EL. 114'-7 1/2\", east wall, grid A) and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.1, 1/A3.2, west wall, grid C); roof slope 1/4:12 (A3.1); finish floor EL. 100'-0\"); B.O. roof purlin depth by PEMB shop drawings (S2.1/S5.x key note 1, A3.x general note D) not printed - RFI-01",
+   "height_status": "DERIVADO",
+   "height_op": "16.35 - 11.333 = 5.02",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Parts Area A 100",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.67,
+     "height_source": "3/A5.2: 5/8\" type X on the parts side from the head to above the ACT (11'-6\" + 6\")",
+     "board_base_ft": 11.333
+    }
+   ],
+   "sheet": "A1.1",
+   "page": 37,
+   "length_ft": 4.98,
+   "length_source": "A1.1 band 45.0 pt / 9.04 pt/ft (raster)",
+   "length_op": "(1088.5 - 1043.5) / 9.04 = 4.98",
+   "length_status": "DERIVADO",
+   "thickness_measured_in": 5.31,
+   "thickness_check": "faces 688.0 / 692.0 pt on A1.1 (raster) = 5.31 in",
+   "status": "DERIVADO",
+   "source": "3/A5.2"
+  },
+  {
+   "id": "EXT-S-BAND",
+   "tag": "EXT-CFS",
+   "detail": "1/A3.4",
+   "detail_source": "1/A3.4 key 7; 1/S5.3 key 22, 23",
+   "stud_size": "6\"",
+   "stud_source": "1/S5.3 key 22 \"6\\\"x 18 ga (MINIMUM) METAL STUDS (600S162-43) @ 16\\\" O.C.\"; 1/A3.4 key 7",
+   "oc_in": 16,
+   "oc_source": "1/S5.3 key 22",
+   "gauge": "18 ga (43 mil)",
+   "gauge_source": "1/S5.3 key 22",
+   "exterior": true,
+   "default_type_source": "1/A3.4 + 1/S5.3 (exterior framing on the CMU over the south windows; dashed above-cut outline on A1.1)",
+   "band": {
+    "ori": "V",
+    "c0": 1082.6,
+    "c1": 1088.0,
+    "lo": 744.4,
+    "hi": 1068.0,
+    "sheet": "A1.1"
+   },
+   "length_ft": 36.0,
+   "length_source": "A1.1 printed 36'-0\" (stucco band, south)",
+   "length_op": "36'-0\" = 36.0",
+   "length_status": "CONFIRMADO",
+   "location": "South facade stucco band over windows D1/D2 (A2.1 elevation 4)",
+   "height_ft": 7.97,
+   "height_source": "1/A3.4 printed 7'-11 5/8\" (window head to T.O. MASONRY EL. 119'-4\")",
+   "height_status": "CONFIRMADO",
+   "height_op": "7'-11 5/8\" = 7.97",
+   "top_track": "top track at T.O. masonry (1/A3.4)",
+   "anchorage": "SIMPSON FCB43.5 framing clips @48\" to CMU (1/S5.3 key 23)",
+   "faces": [],
+   "faces_none_reason": "exterior band: 5/8\" exterior fiberglass reinforced sheathing (1/A3.4 key 19) + stucco; sheathing in misc_items",
+   "sheet": "A1.1",
+   "page": 37,
+   "element": "wall",
+   "thickness_measured_in": 7.17,
+   "thickness_check": "faces 1082.6 / 1088.0 pt on A1.1 (raster) = 7.17 in",
+   "status": "CONFIRMADO",
+   "source": "1/A3.4"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "N1",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S21-N",
+    "S21-E"
+   ]
+  },
+  {
+   "id": "N2",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S21-S",
+    "S21-E"
+   ]
+  },
+  {
+   "id": "N3",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S21-N",
+    "S21-W1"
+   ]
+  },
+  {
+   "id": "N4",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S21-S",
+    "S21-W2"
+   ]
+  },
+  {
+   "id": "N5",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S42-01",
+   "through": "S21-N"
+  },
+  {
+   "id": "N6",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S42-02",
+    "S42-03"
+   ]
+  },
+  {
+   "id": "N7",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S42-04",
+   "through": "EXT-W-02-8"
+  },
+  {
+   "id": "N8",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S43-OS",
+    "S43-OW"
+   ]
+  },
+  {
+   "id": "N9",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S43-OS",
+    "S43-OE"
+   ]
+  },
+  {
+   "id": "N10",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S24-01",
+    "S43-OW"
+   ]
+  },
+  {
+   "id": "N11",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S24-01",
+    "S43-OE"
+   ]
+  },
+  {
+   "id": "N12",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S43-RS",
+    "S43-RW"
+   ]
+  },
+  {
+   "id": "N13",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S24-02",
+    "S43-RW"
+   ]
+  },
+  {
+   "id": "N14",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S24-02",
+    "S24-03"
+   ]
+  },
+  {
+   "id": "N15",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S24-03",
+    "S43-RS"
+   ]
+  },
+  {
+   "id": "N16",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S61-01",
+   "through": "S24-02"
+  },
+  {
+   "id": "N17",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S61-01",
+   "through": "S43-RS"
+  },
+  {
+   "id": "N18",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S41-NW-H",
+    "S41-NW-V"
+   ]
+  },
+  {
+   "id": "N19",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S41-NW-H",
+   "through": "S21-N"
+  },
+  {
+   "id": "N20",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S41-NW-V",
+   "through": "S42-01"
+  },
+  {
+   "id": "N21",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S21-W1"
+  },
+  {
+   "id": "N22",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S21-W2"
+  },
+  {
+   "id": "N23",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S42-01"
+  },
+  {
+   "id": "N24",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S42-02"
+  },
+  {
+   "id": "N25",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S42-03"
+  },
+  {
+   "id": "N26",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "S42-04"
+  },
+  {
+   "id": "N27",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-01-8"
+  },
+  {
+   "id": "N28",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-01-8"
+  },
+  {
+   "id": "N29",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-01-6"
+  },
+  {
+   "id": "N30",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-01-6"
+  },
+  {
+   "id": "N31",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-02-8"
+  },
+  {
+   "id": "N32",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-02-8"
+  },
+  {
+   "id": "N33",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-02-6"
+  },
+  {
+   "id": "N34",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-W-02-6"
+  },
+  {
+   "id": "N35",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "SF-A-8"
+  },
+  {
+   "id": "N36",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "SF-A-8"
+  },
+  {
+   "id": "N37",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "SF-A-6"
+  },
+  {
+   "id": "N38",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "SF-A-6"
+  },
+  {
+   "id": "N39",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-B2"
+  },
+  {
+   "id": "N40",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-B2"
+  },
+  {
+   "id": "N41",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-C"
+  },
+  {
+   "id": "N42",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-C"
+  },
+  {
+   "id": "N43",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-B1"
+  },
+  {
+   "id": "N44",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "VH-B1"
+  },
+  {
+   "id": "N45",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-S-BAND"
+  },
+  {
+   "id": "N46",
+   "kind": "free",
+   "source": "A1.1 (raster bands)",
+   "wall": "EXT-S-BAND"
+  },
+  {
+   "id": "N47",
+   "kind": "L",
+   "source": "A1.1 (raster bands)",
+   "walls": [
+    "S41-SW-H",
+    "S41-SW-V"
+   ]
+  },
+  {
+   "id": "N48",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S41-SW-H",
+   "through": "S21-N"
+  },
+  {
+   "id": "N49",
+   "kind": "T",
+   "source": "A1.1 (raster bands)",
+   "branch": "S41-SW-V",
+   "through": "S21-W1"
+  }
+ ],
+ "details": {
+  "5/A4.2": {
+   "source": "5/A4.2",
+   "layers_per_face": 1,
+   "layers_source": "5/A4.2",
+   "title": "Interior wall section - S42 full height",
+   "notes": "362S162-33 to roof structure (key 2), 5/8\" type X (key 6) parts A side to finish ceiling EL. 111'-6\" + 6\", other side up; kicker above ceiling",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "6/A4.2": {
+   "source": "6/A4.2",
+   "layers_per_face": 1,
+   "layers_source": "6/A4.2",
+   "title": "Interior wall section - S42 header wall",
+   "notes": "B.O. FRAMING EL. 106'-10\", (2) fire treated 2x nailers (key 11) at the bottom, 5/8\" type X 4'-8\" + 6\" on parts A side, board to roof framing on the other side",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "7/A4.2": {
+   "source": "7/A4.2",
+   "layers_per_face": 1,
+   "layers_source": "7/A4.2",
+   "title": "Interior wall section - office / rest room hard lid",
+   "notes": "S43 studs to B.O. FRAMING EL. 108'-6\", 600S162-54 ceiling joists @24\" (key 5), 5/8\" type X (key 6), corner bead (key 7), 1x4 wood trim (key 12, by others), 6\" + 3 1/2\" sound batt (excluded)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "2/A4.2": {
+   "source": "2/A4.2",
+   "layers_per_face": 1,
+   "layers_source": "2/A4.2",
+   "title": "Gypsum board joint detail",
+   "notes": "framing independent across the joint; FRY REGLET DRMF-625-75 and JDM-625 both sides and bottom (key 9)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "4/A4.2": {
+   "source": "4/A4.2",
+   "layers_per_face": 1,
+   "layers_source": "4/A4.2",
+   "title": "Framing detail - showroom box-out",
+   "notes": "362S162-33 @24\" (key 3), 5/8\" type X (key 6), 5/8\" fire treated plywood backing 8'-0\" to 10'-0\" A.F.F. (key 20)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "1/S5.1": {
+   "source": "1/S5.1",
+   "layers_per_face": 1,
+   "layers_source": "1/S5.1",
+   "title": "Section - header wall at grid B",
+   "notes": "362S162-33 @24\" studs, 600S200-54 @24\" across the purlins, kicker bracing 362S162-33 @48\", lateral strut at mid span, horizontal blocking @48\" when not sheathed both sides",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "2/S5.1": {
+   "source": "2/S5.1",
+   "layers_per_face": 1,
+   "layers_source": "2/S5.1",
+   "title": "Section - header wall perpendicular to purlins",
+   "notes": "cont. 600S200-54 each side, L4x4x3/16\"x1'-0\" clip angle to purlin (contractor furnished), 2\"x2\"x14ga clip at kicker, kickers @48\"",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "3/S5.1": {
+   "source": "3/S5.1",
+   "layers_per_face": 1,
+   "layers_source": "3/S5.1",
+   "title": "Section - full height wall to purlin",
+   "notes": "continuous 3\"x14ga deep leg slotted deflection track fastened to purlin with (2) #10 SDS, 1 1/2\" clr; 362T125-33 bottom track with Titen HD 3/8\" @48\"",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "4/S5.1": {
+   "source": "4/S5.1",
+   "layers_per_face": 1,
+   "layers_source": "4/S5.1",
+   "title": "Section - full height wall between purlins",
+   "notes": "600S200-54 @48\" across purlins, continuous 3\"x14ga deep leg slotted deflection track",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "5/S5.1": {
+   "source": "5/S5.1",
+   "layers_per_face": 1,
+   "layers_source": "5/S5.1",
+   "title": "Section - kicker / strut bracing elevation",
+   "notes": "lateral strut @ mid span, angled strut brace at each end of wall and @16'-0\" O.C. max, 2'-0\" track brace at strut splice",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "3/S5.3": {
+   "source": "3/S5.3",
+   "layers_per_face": 1,
+   "layers_source": "3/S5.3",
+   "title": "Section - storefront / entry framing",
+   "notes": "8\"x16ga (800S162-54) + 6\"x16ga (600S162-54) @16\", stud ties 362S162-43 @48\", FCB43.5 clips to PEMB wind beams",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "1/S5.3": {
+   "source": "1/S5.3",
+   "layers_per_face": 1,
+   "layers_source": "1/S5.3",
+   "title": "Section - south windows",
+   "notes": "6\"x18ga (600S162-43) @16\" on the CMU above the windows, FCB43.5 clips @48\" with Tapcon screws",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "3/A3.1": {
+   "source": "3/A3.1",
+   "layers_per_face": 1,
+   "layers_source": "3/A3.1",
+   "title": "Wall section - vestibule",
+   "notes": "600S162-43 @24\" attached to PEMB (key 8) at the vestibule ceiling (B.O. sheathing 111'-4\"), 5/8\" type X (key 20)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "3/A3.2": {
+   "source": "3/A3.2",
+   "layers_per_face": 1,
+   "layers_source": "3/A3.2",
+   "title": "Wall section - north CMU wall",
+   "notes": "Z-furring (key 10) + 5/8\" type X (key 20) from floor to the roof purlins, through the C-1 ACT",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "7/A5.1": {
+   "source": "7/A5.1",
+   "layers_per_face": 1,
+   "layers_source": "7/A5.1",
+   "title": "Head detail - interior HM door",
+   "notes": "600S162-33 cold form metal box header; 362S162-33 @24\" double studs at jambs (8/A5.1)",
+   "sealant_none_reason": "frame perimeter sealant (SEALANT BOTH SIDES AROUND PERIMETER) belongs to the door / glazing trade; acoustical sealant EXCLUDED (U8 / R77.12)",
+   "sealant_source": "7/A5.1"
+  },
+  "2/A5.2": {
+   "source": "2/A5.2",
+   "layers_per_face": 1,
+   "layers_source": "2/A5.2",
+   "title": "Jamb detail - storefront in CFS wall",
+   "notes": "6\" and 8\" CFS, double studs at jambs, 5/8\" fiberglass sheathing, 5/8\" type X + 1/4\" type X on 7/8\" resilient channel returned to the frame",
+   "sealant_none_reason": "frame perimeter sealant (SEALANT BOTH SIDES AROUND PERIMETER) belongs to the door / glazing trade; acoustical sealant EXCLUDED (U8 / R77.12)",
+   "sealant_source": "7/A5.1"
+  },
+  "12/A5.2": {
+   "source": "12/A5.2",
+   "layers_per_face": 1,
+   "layers_source": "12/A5.2",
+   "title": "Jamb detail - window in CMU",
+   "notes": "1 1/2\" Z-furring + polyiso, fire treated wood blocking, 5/8\" type X returned to the frame",
+   "sealant_none_reason": "frame perimeter sealant (SEALANT BOTH SIDES AROUND PERIMETER) belongs to the door / glazing trade; acoustical sealant EXCLUDED (U8 / R77.12)",
+   "sealant_source": "7/A5.1"
+  },
+  "S21/A1.1": {
+   "source": "S21/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S21/A1.1",
+   "title": "S21 - Z-furring on exterior CMU",
+   "notes": "150ZF125-18 Z-furring @24\" O.C. with 1 1/2\" foil face polyiso (R-9) between, 5/8\" type X; CMU by others",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "S24/A1.1": {
+   "source": "S24/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S24/A1.1",
+   "title": "S24 - studs + Z-furring on exterior CMU",
+   "notes": "150ZF125-18 Z-furring @24\" + 362S162-33 studs @24\" to 8'-6\" A.F.F., 5/8\" type X interior side to 8'-6\"",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "S41/A1.1": {
+   "source": "S41/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S41/A1.1",
+   "title": "S41 - one-side stud wall to 12'-0\"",
+   "notes": "362S162-33 @24\" to 12'-0\" A.F.F., 5/8\" type X interior side to 12'-0\"; showroom box-out 4/A4.2 + key note 5 (5/8\" FRT plywood backing 8'-0\" to 10'-0\")",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "S42/A1.1": {
+   "source": "S42/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S42/A1.1",
+   "title": "S42 - studs to roof framing",
+   "notes": "3-5/8\" CFS (362S162-33 @24\", S5.1) to roof framing, 5/8\" type X each side: parts A to 12'-0\", parts B/C to bottom of roof framing; header walls 6/A4.2 (B.O. 106'-10\"), joints 2/A4.2",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "S43/A1.1": {
+   "source": "S43/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S43/A1.1",
+   "title": "S43 - 3-5/8\" partition to 8'-6\"",
+   "notes": "362S162-33 @24\" to 8'-6\" A.F.F., 5/8\" type X each side, 3 1/2\" sound batt (insulation excluded); ceiling joists 600S162-54 @24\" (7/A4.2)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "S61/A1.1": {
+   "source": "S61/A1.1",
+   "layers_per_face": 1,
+   "layers_source": "S61/A1.1",
+   "title": "S61 - 6\" wet wall to 8'-6\"",
+   "notes": "600S162-33 @24\" to 8'-6\" A.F.F., 5/8\" type X each side (W.R. per note 3.B), sound batt excluded",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "1/A3.1": {
+   "source": "1/A3.1",
+   "layers_per_face": 1,
+   "layers_source": "1/A3.1",
+   "title": "Exterior CFS wall (west facade)",
+   "notes": "6\" + 8\" cold form framing (3/S5.3: 600S162-54 + 800S162-54 @16\"), 5/8\" ext. fiberglass sheathing + stucco outside, 7/8\" RC + 1/4\" + 5/8\" type X inside to above the ACT",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "2/A3.1": {
+   "source": "2/A3.1",
+   "layers_per_face": 1,
+   "layers_source": "2/A3.1",
+   "title": "Framing over storefront A",
+   "notes": "6\" + 8\" CFS from B.O. sheathing 111'-4\" to T.O. metal stud 120'-8\"; 5/8\" ext. FRT plywood outside (1/A5.2)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "3/A5.2": {
+   "source": "3/A5.2",
+   "layers_per_face": 1,
+   "layers_source": "3/A5.2",
+   "title": "Vestibule head (inner storefronts)",
+   "notes": "6\" CFS with diagonal bracing (refer structural), 5/8\" type X; vestibule ceiling 600S162-43 @24\" (3/A3.1 key 8)",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  },
+  "1/A3.4": {
+   "source": "1/A3.4",
+   "layers_per_face": 1,
+   "layers_source": "1/A3.4",
+   "title": "South stucco band over windows",
+   "notes": "6\" CFS (600S162-43 @16\", 1/S5.3) outside the CMU, 5/8\" ext. fiberglass sheathing + stucco; FCB43.5 clips @48\"",
+   "sealant_none_reason": "A1.1 note 4.B sealant both sides of bottom tracks at acoustical walls = acoustical sealant, EXCLUDED in all projects (estimator standing order U8 / R77.12)",
+   "sealant_source": "A1.1 Interior Wall & Ceiling Notes 4.B"
+  }
+ },
+ "opening_schedule": {
+  "sources": [
+   "A5.1",
+   "A5.2",
+   "A1.1",
+   "S4.1",
+   "S5.3"
+  ],
+  "sources_none": {
+   "M": "estimator order: MEP / electrical / civil / cabinets excluded (estimator order 2026-10-31)"
+  },
+  "items": [
+   {
+    "ref": "Door 1",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 2",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 3",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 4",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 5",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 6",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 7",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Door 8",
+    "source": "A5.1"
+   },
+   {
+    "ref": "Storefront A",
+    "source": "A5.2"
+   },
+   {
+    "ref": "Window B1",
+    "source": "A5.2"
+   },
+   {
+    "ref": "Window B2",
+    "source": "A5.2"
+   },
+   {
+    "ref": "Window C",
+    "source": "A5.2"
+   },
+   {
+    "ref": "Window D1",
+    "source": "A5.2"
+   },
+   {
+    "ref": "Window D2",
+    "source": "A5.2"
+   }
+  ],
+  "none": [
+   {
+    "ref": "Door 1",
+    "why": "Aluminum entrance door (type A, frame 1) inside storefront A (A5.2 type A, 4/A5.2) - storefront system, no stud opening"
+   },
+   {
+    "ref": "Door 8",
+    "why": "Aluminum entrance door (type A, frame 1) inside vestibule storefront C (10/A5.2) - storefront system"
+   }
+  ]
+ },
+ "openings_extra": [
+  {
+   "ref": "Storefront A",
+   "kind": "storefront",
+   "ro_w_ft": 38.67,
+   "head_ft": 11.333,
+   "source": "A5.2 window type A 38'-8\" (R.O.) x 11'-4\" (R.O.); A1.1 west facade; 2/A3.1",
+   "header": "steel_by_others",
+   "header_source": "3/S5.3: storefront head on the PEMB wind beam (key 10) with FCB43.5 clips (key 16) - steel by PEMB",
+   "jamb_return": true,
+   "jamb_return_source": "2/A5.2 jamb (5/8\" type X + 1/4\" on resilient channel returned to the frame); 1/A5.2 head",
+   "jamb_return_label": "5/8\" TYPE \"X\" GYPSUM BOARD (2/A5.2)",
+   "jambs": [
+    {
+     "abuts": "wall",
+     "source": "2/A5.2; A1.1 EXT-W-01"
+    },
+    {
+     "abuts": "wall",
+     "source": "2/A5.2; A1.1 EXT-W-02"
+    }
+   ],
+   "wall_jambs": 2,
+   "substrate_none_reason": "1/A5.2 / 2/A5.2: the 5/8\" exterior FRT plywood is the facade sheathing of the framing over the storefront (plywood_strips SF-A-FRT-EXT), no separate opening substrate",
+   "sill_return": false,
+   "sill_return_source": "6/A5.2 sill on concrete slab (no gypsum)"
+  },
+  {
+   "ref": "Window B1",
+   "kind": "storefront",
+   "ro_w_ft": 5.667,
+   "head_ft": 11.333,
+   "source": "A5.2 window type B1 (5.667 ft hold) x 11'-4\" R.O.; 10/A5.2 vestibule",
+   "header": "steel_by_others",
+   "header_source": "3/A5.2 head: 6\" CFS framing over the storefront (vestibule_head walls carry the framing); no header member printed (S4.1 key 3 aligns studs over storefront)",
+   "jamb_return": false,
+   "jamb_return_source": "7/A5.2, 8/A5.2, 9/A5.2 jambs: aluminum frame to frame / storefront (no gypsum return)",
+   "substrate_none_reason": "3/A5.2 head: frame anchored to the 6\" CFS (no plywood / blocking substrate drawn)"
+  },
+  {
+   "ref": "Window B2",
+   "kind": "storefront",
+   "ro_w_ft": 5.667,
+   "head_ft": 11.333,
+   "source": "A5.2 window type B2 (5.667 ft hold) x 11'-4\" R.O.; 10/A5.2 vestibule",
+   "header": "steel_by_others",
+   "header_source": "3/A5.2 head: 6\" CFS framing over the storefront (vestibule_head walls carry the framing); no header member printed (S4.1 key 3 aligns studs over storefront)",
+   "jamb_return": false,
+   "jamb_return_source": "7/A5.2, 8/A5.2, 9/A5.2 jambs: aluminum frame to frame / storefront (no gypsum return)",
+   "substrate_none_reason": "3/A5.2 head: frame anchored to the 6\" CFS (no plywood / blocking substrate drawn)"
+  },
+  {
+   "ref": "Window C",
+   "kind": "storefront",
+   "ro_w_ft": 8.0,
+   "head_ft": 11.333,
+   "source": "A5.2 window type C (8.0 ft hold) x 11'-4\" R.O.; 10/A5.2 vestibule",
+   "header": "steel_by_others",
+   "header_source": "3/A5.2 head: 6\" CFS framing over the storefront (vestibule_head walls carry the framing); no header member printed (S4.1 key 3 aligns studs over storefront)",
+   "jamb_return": false,
+   "jamb_return_source": "7/A5.2, 8/A5.2, 9/A5.2 jambs: aluminum frame to frame / storefront (no gypsum return)",
+   "substrate_none_reason": "3/A5.2 head: frame anchored to the 6\" CFS (no plywood / blocking substrate drawn)"
+  }
+ ],
+ "ceilings": [],
+ "ceilings_info": "C-1 ACT (Parts A 100, A1.2) = acoustical ceiling trade, not framing / drywall; C-2 exposed (Parts B/C); C-3 painted gypsum hard lids of Office 102, Rest Rooms 103/104 (7/A4.2 600S162-54 joists) and Vestibule 100A (3/A3.1) carried in misc_items (joists + board) because their 6\" joists are not a canon ceiling system",
+ "plywood_strips": [
+  {
+   "ref": "S41-NW-H-FRT",
+   "wall": "S41-NW-H",
+   "lf": 1.67,
+   "width_ft": 2.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FIRE TREATED PLYWOOD BACKING (security mirrors)",
+   "source": "A1.1 key note 5; 4/A4.2 key 20",
+   "room": "Parts Area A 100",
+   "op": "exposed face 1'-8\" (A1.1) x (10'-0\" - 8'-0\") = 1.67 x 2.0"
+  },
+  {
+   "ref": "S41-NW-V-FRT",
+   "wall": "S41-NW-V",
+   "lf": 2.17,
+   "width_ft": 2.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FIRE TREATED PLYWOOD BACKING (security mirrors)",
+   "source": "A1.1 key note 5; 4/A4.2 key 20",
+   "room": "Parts Area A 100",
+   "op": "exposed face 2'-2\" (A1.1) x (10'-0\" - 8'-0\") = 2.17 x 2.0"
+  },
+  {
+   "ref": "S41-SW-H-FRT",
+   "wall": "S41-SW-H",
+   "lf": 1.67,
+   "width_ft": 2.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FIRE TREATED PLYWOOD BACKING (security mirrors)",
+   "source": "A1.1 key note 5; 4/A4.2 key 20",
+   "room": "Parts Area A 100",
+   "op": "exposed face 1'-8\" (A1.1) x (10'-0\" - 8'-0\") = 1.67 x 2.0"
+  },
+  {
+   "ref": "S41-SW-V-FRT",
+   "wall": "S41-SW-V",
+   "lf": 1.67,
+   "width_ft": 2.0,
+   "material": "frt_5_8",
+   "uso": "substrate",
+   "label": "5/8\" FIRE TREATED PLYWOOD BACKING (security mirrors)",
+   "source": "A1.1 key note 5; 4/A4.2 key 20",
+   "room": "Parts Area A 100",
+   "op": "exposed face 1'-8\" (A1.1) x (10'-0\" - 8'-0\") = 1.67 x 2.0"
+  },
+  {
+   "ref": "SF-A-FRT-EXT",
+   "wall": "SF-A-6",
+   "lf": 38.67,
+   "width_ft": 9.33,
+   "material": "frt_5_8_ext",
+   "uso": "substrate",
+   "label": "5/8\" EXTERIOR FIRE TREATED PLYWOOD SHEATHING",
+   "source": "1/A5.2; 2/A3.1 key 34",
+   "op": "38'-8\" x (120'-8\" - 111'-4\") = 38.67 x 9.33"
+  }
+ ],
+ "blocking_items": [
+  {
+   "ref": "BLK-HDR-NAILERS",
+   "lf": 133.32,
+   "material": "FRT",
+   "label": "(2) FIRE TREATED 2X NAILERS (6/A4.2 key 11)",
+   "source": "6/A4.2",
+   "op": "2 x (S42-02 16.33 + S42-03 50.33) at the bottom of the header walls"
+  },
+  {
+   "ref": "BLK-DOORS-2-7",
+   "lf": 35.33,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (1/A5.1, 2/A5.1, 3/A5.1, 4/A5.1)",
+   "source": "1/A5.1",
+   "op": "2 doors x (2 jambs x 7.167 + head 3.333)"
+  },
+  {
+   "ref": "BLK-DOOR-3",
+   "lf": 22.0,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING ANCHORED TO MASONRY (5/A5.1, 6/A5.1)",
+   "source": "5/A5.1",
+   "op": "2 jambs x 8.0 + head 6.0"
+  },
+  {
+   "ref": "BLK-WIN-D1-D2",
+   "lf": 58.92,
+   "material": "FRT",
+   "label": "FIRE TREATED 2X4 WOOD BLOCKING (11/A5.2, 12/A5.2, 13/A5.2)",
+   "source": "12/A5.2",
+   "op": "2 windows x (2 jambs x 3.365 + head 11.365 + sill 11.365)"
+  }
+ ],
+ "trim_items": [
+  {
+   "ref": "CB-HEADER-WALLS",
+   "kind": "corner_bead",
+   "lf": 160.65,
+   "label": "corner bead at the header wall bottom edges and free jambs below (A1.1 note 3.C)",
+   "source": "6/A4.2",
+   "op": "2 x (16.33 + 50.33) + 2 ends x 2 corners x 6.833"
+  },
+  {
+   "ref": "REGLET-HEADER-JOINTS",
+   "kind": "shadow_molding",
+   "lf": 43.31,
+   "label": "FRY REGLET DRMF-625-75 AND JDM-625 AT JOINT ON BOTH SIDES OF WALL AND BOTTOM (2/A4.2 key 9)",
+   "source": "2/A4.2",
+   "op": "3 joints 2/A4.2 (ABOVE) on A1.1: B-line x 657-680 pt (5.167 + 8.34 + 0.40) + V-line y 785 pt (5.167 + 8.87 + 0.40) + V-line y 1013 pt (5.167 + 9.39 + 0.40) = 43.31"
+  },
+  {
+   "ref": "CB-OFFICE-RR-TOPS",
+   "kind": "corner_bead",
+   "lf": 77.92,
+   "label": "GYPSUM BOARD CORNER BEAD CONTINUOUS (7/A4.2 key 7)",
+   "source": "7/A4.2",
+   "op": "top outer edges S43-OW 7.43 + S43-OS 11.81 + S43-OE 7.43 + S43-RW 8.10 + S43-RS 16.15 = 50.92 + 3 outside corners x 9.0 = 77.92"
+  },
+  {
+   "ref": "CB-S41-BOXOUTS",
+   "kind": "corner_bead",
+   "lf": 24.0,
+   "label": "corner bead at the box-out outside corner (4/A4.2; note 3.C)",
+   "source": "4/A4.2",
+   "op": "2 box-outs x 1 corner x 12.0"
+  }
+ ],
+ "misc_items": [
+  {
+   "ref": "CEIL-102-JOISTS",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 56.0,
+   "unit": "LF",
+   "source": "7/A4.2 key 5",
+   "label": "600S162-54 COLD FORM METAL CEILING JOIST FRAMING AT 24\" O.C. (Office 102, C-3 8'-6\")",
+   "op": "office 11'-0\" x 8'-0\" (A1.1): (ROUNDUP(11.0/2)+1) = 7 joists x 8.0 = 56.0 (span direction not printed - RFI-02)"
+  },
+  {
+   "ref": "CEIL-103-JOISTS",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 47.0,
+   "unit": "LF",
+   "source": "7/A4.2 key 5",
+   "label": "600S162-54 ceiling joists @24\" (Rest Room 103)",
+   "op": "RR 7'-10\" x 8'-6\" (A1.1): (ROUNDUP(8.5/2)+1) = 6 x 7.833 = 47.0 (RFI-02)"
+  },
+  {
+   "ref": "CEIL-104-JOISTS",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 47.0,
+   "unit": "LF",
+   "source": "7/A4.2 key 5",
+   "label": "600S162-54 ceiling joists @24\" (Rest Room 104)",
+   "op": "RR 7'-10\" x 8'-6\" (A1.1): (ROUNDUP(8.5/2)+1) = 6 x 7.833 = 47.0 (RFI-02)"
+  },
+  {
+   "ref": "CEIL-100A-JOISTS",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 28.33,
+   "unit": "LF",
+   "source": "3/A3.1 key 8",
+   "label": "600S162-43 COLD FORM METAL STUD FRAMING AT 24\" O.C. (vestibule ceiling, C-3 11'-4\")",
+   "op": "vestibule 8'-0\" x 5'-8\" (10/A5.2): (ROUNDUP(8.0/2)+1) = 5 x 5.667 = 28.33 (span per 3/A3.1 section)"
+  },
+  {
+   "ref": "CEIL-102-GWB",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 88.0,
+   "unit": "SF",
+   "source": "7/A4.2 key 6",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD ceiling (C-3 paint, A1.2)",
+   "op": "11.0 x 8.0 = 88.0 (A1.1 clear dims)"
+  },
+  {
+   "ref": "CEIL-103-104-GWB",
+   "familia": "5/8\" gyp Type X W.R.",
+   "qty": 133.17,
+   "unit": "SF",
+   "source": "7/A4.2 key 6",
+   "label": "5/8\" type X W.R. ceiling (note 3.B wet locations)",
+   "op": "2 x 7.833 x 8.5 = 133.17 (A1.1 7'-10\", 8'-6\")"
+  },
+  {
+   "ref": "CEIL-100A-GWB",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 45.33,
+   "unit": "SF",
+   "source": "3/A5.2",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD vestibule ceiling (3/A5.2)",
+   "op": "8.0 x 5.667 = 45.33 (10/A5.2)"
+  },
+  {
+   "ref": "EXT-GLASSMAT-W",
+   "familia": "5/8\" glass mat sheathing",
+   "qty": 246.76,
+   "unit": "SF",
+   "source": "2/A5.2",
+   "label": "5/8\" FIBERGLASS REINFORCED SHEATHING (2/A5.2; 1/A3.1 key 19)",
+   "op": "2 walls x 5.97 (A1.1 band) x 20.667 (1/A3.1)"
+  },
+  {
+   "ref": "EXT-GLASSMAT-S",
+   "familia": "5/8\" glass mat sheathing",
+   "qty": 286.88,
+   "unit": "SF",
+   "source": "1/A3.4 key 19",
+   "label": "5/8\" EXTERIOR FIBERGLASS REINFORCED SHEATHING (1/A3.4)",
+   "op": "36.0 (A1.1) x 7.969 (1/A3.4)"
+  },
+  {
+   "ref": "EXT-QUARTER-GYP",
+   "familia": "1/4\" gypsum board (printed)",
+   "qty": 169.07,
+   "unit": "SF",
+   "source": "1/A3.1 key 35; 1/A5.2",
+   "label": "1/4\" TYPE \"X\" GYPSUM BOARD under the 5/8\" type X (2/A5.2)",
+   "op": "2 x 5.97 x 12.0 + 38.67 x 0.667"
+  },
+  {
+   "ref": "EXT-RC",
+   "familia": "resilient channel (printed)",
+   "qty": 122.25,
+   "unit": "LF",
+   "source": "1/A3.1 key 33",
+   "label": "067F125-33 DOUBLE LEG RESILIENT CHANNEL @24\" O.C. HORIZONTAL",
+   "op": "EXT-W walls (ROUNDUP(12/2)+1) = 7 rows x 5.97 x 2 + 1 row x 38.67 over storefront A"
+  },
+  {
+   "ref": "S42-KICKERS",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 141.4,
+   "unit": "LF",
+   "source": "2/S5.1",
+   "label": "3 5/8\"x20ga KICKER BRACING (362S162-33) @ 48\" O.C. (MAX) (1/S5.1, 2/S5.1)",
+   "op": "S42-02 (ROUNDUP(16.33/4)+1 = 6) + S42-03 (ROUNDUP(50.33/4)+1 = 14) = 20 kickers x 7.07 (5'-0\"+- run at 45 deg, 2/S5.1) - RFI-04"
+  },
+  {
+   "ref": "S42-LAT-STRUT",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 66.66,
+   "unit": "LF",
+   "source": "1/S5.1",
+   "label": "3 5/8\"x20ga LATERAL STRUT (362S162-33) @ MID SPAN (1/S5.1, 2/S5.1, 5/S5.1)",
+   "op": "16.33 + 50.33 = 66.66"
+  },
+  {
+   "ref": "S42-03-CONT-6IN",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 100.66,
+   "unit": "LF",
+   "source": "2/S5.1",
+   "label": "CONT. 6\"x2\"x16ga STUDS (600S200-54) EACH SIDE (2/S5.1)",
+   "op": "2 x 50.33"
+  },
+  {
+   "ref": "S42-KICKER-CLIPS",
+   "familia": "clip angle (bracing / nested connections)",
+   "qty": 20.0,
+   "unit": "PCS",
+   "source": "2/S5.1",
+   "label": "2\"x2\"x14ga CLIP (OR STEEL NETWORK AL362 CLIP ANGLE) at each kicker top",
+   "op": "1 per kicker = 20"
+  },
+  {
+   "ref": "S42-DEFL-TRACK",
+   "familia": "deep-leg slotted deflection track (printed)",
+   "qty": 49.05,
+   "unit": "LF",
+   "source": "3/S5.1; 4/S5.1",
+   "label": "CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK",
+   "op": "S42-01 40.88 + S42-04 8.17"
+  }
+ ],
+ "deflection_clips": {
+  "none_reason": "Deflection by CONTINUOUS 3\"x14ga DEEP LEG SLOTTED DEFLECTION TRACK (3/S5.1, 4/S5.1) and A1.1 note 2.C deflection channels; no deflection clips called",
+  "source": "3/S5.1"
+ },
+ "mep_sweep": {
+  "excluded_by_estimator": {
+   "why": "estimator order: MEP / electrical / civil / cabinets excluded",
+   "source": "estimator order 2026-10-31"
+  },
+  "source": "estimator order 2026-10-31"
+ },
+ "fasteners_excluded": {
+  "why": "estimator order: all fasteners excluded",
+  "source": "estimator order 2026-10-31"
+ },
+ "accesorios_none": [
+  {
+   "familia": "extra framing ATM",
+   "why": "No ATM / equipment recess in the set (A1.1, A5.1, A5.2 reviewed)",
+   "source": "A1.1"
+  },
+  {
+   "familia": "access panel",
+   "why": "No access panel shown in walls or hard ceilings (A1.1, A1.2, A4.1, A4.2; MEP excluded by estimator order)",
+   "source": "A1.2"
+  },
+  {
+   "familia": "Level 5 finish",
+   "why": "No LEVEL 5 in the interior finish types (W-2/W-3 paint, W-4 sanitary panels, A1.2)",
+   "source": "A1.2"
+  },
+  {
+   "familia": "stud reinforcement MEP",
+   "why": "estimator order: MEP / electrical / civil / cabinets excluded",
+   "source": "estimator order 2026-10-31"
+  },
+  {
+   "familia": "PAFs and duct sleeves",
+   "why": "estimator order: MEP / electrical / civil / cabinets excluded",
+   "source": "estimator order 2026-10-31"
+  },
+  {
+   "familia": "2-1/2\" CFMF coiling grille head",
+   "why": "No coiling grille in the set (A5.1 door schedule: overhead door 3 only)",
+   "source": "A5.1"
+  }
+ ],
+ "accesorios_rfi": [],
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "pregunta": "Bottom of roof purlin elevation at the interior / exterior framing lines is not printed (PEMB shop drawings). Heights were carried to the roof plane from the printed eave elevations.",
+   "delta": "(A) 0 (as carried) | (B) -0.67 ft x LF of every wall to roof framing (S21, S42, vestibule heads) | (C) Other: ____",
+   "source": "1/A3.1 - 1/A3.3",
+   "opciones": {
+    "A": {
+     "texto": "Heights to T.O. eave plane: low 114'-7 1/2\", high 116'-4 3/4\", slope 1/4:12",
+     "source": "1/A3.1 - 1/A3.3",
+     "delta": "0 (as carried)"
+    },
+    "B": {
+     "texto": "Reduce to B.O. purlin = T.O. purlin - purlin depth (typ. 8\" Z purlin)",
+     "cita": "MBMA / PEMB shop drawings (S5.1 key 1)",
+     "delta": "-0.67 ft x LF of every wall to roof framing (S21, S42, vestibule heads)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-02",
+   "pregunta": "Ceiling joist span direction for Office 102, Rest Rooms 103/104 and Vestibule 100A not printed (7/A4.2, 3/A3.1).",
+   "delta": "(A) 0 | (B) office 6 x 11.0 = 66.0 LF (+10.0); RR 5 x 8.5 = 42.5 each (-4.5 each) | (C) Other: ____",
+   "source": "7/A4.2",
+   "opciones": {
+    "A": {
+     "texto": "Joists span the short dimension @24\" (as carried)",
+     "source": "7/A4.2",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Joists span the long dimension",
+     "cita": "AISI S240 joist span tables",
+     "delta": "office 6 x 11.0 = 66.0 LF (+10.0); RR 5 x 8.5 = 42.5 each (-4.5 each)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-04",
+   "pregunta": "Kicker length, angled strut braces (5/S5.1 at each end and @16'-0\") and L4x4x3/16 clip angles at each purlin (2/S5.1) depend on the PEMB purlin spacing (not printed).",
+   "delta": "(A) 0 (as carried) | (B) +8 braces x 9.0 = +72 LF 3-5/8\"; +clips per purlin | (C) Other: ____",
+   "source": "2/S5.1",
+   "opciones": {
+    "A": {
+     "texto": "Kickers @48\" x 7.07 ft (5'-0\"+- run at 45 deg), clips 1 per kicker",
+     "source": "2/S5.1",
+     "delta": "0 (as carried)"
+    },
+    "B": {
+     "texto": "Add angled strut braces 2 + ROUNDUP(L/16) per header wall x ~9 ft and L4x4 clips per purlin",
+     "cita": "AISI S240 / SSMA bracing",
+     "delta": "+8 braces x 9.0 = +72 LF 3-5/8\"; +clips per purlin"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-05",
+   "pregunta": "A1.1 note 2.B diagonal wall bracing (3\" x 16 ga flat strap) at corner faces of free standing partitions: quantity / length not dimensioned.",
+   "delta": "(A) +88 LF flat strap | (B) + (2 x LF of S41/S24 walls) | (C) Other: ____",
+   "source": "A1.1 note 2.B",
+   "opciones": {
+    "A": {
+     "texto": "Flat strap at the office and rest room corners (2 straps x 4 corner faces x 11 ft)",
+     "source": "A1.1 note 2.B",
+     "delta": "+88 LF flat strap"
+    },
+    "B": {
+     "texto": "S1.1 7.D discrete bracing 2\"x20ga strap at wall ends and @8' max",
+     "cita": "AISI S240 / S1.1 7.D",
+     "delta": "+ (2 x LF of S41/S24 walls)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-06",
+   "pregunta": "Blocking for fire extinguishers (A1.1 key note 4, 10/A4.2 key 21 'PROVIDE BLOCKING AS REQUIRED') and accessories (A1.1 note 2.A): size not printed.",
+   "delta": "(A) +8 LF FRT 2x | (B) +5.3 LF | (C) Other: ____",
+   "source": "10/A4.2",
+   "opciones": {
+    "A": {
+     "texto": "4 extinguisher locations x 2 ft FRT 2x",
+     "source": "10/A4.2",
+     "delta": "+8 LF FRT 2x"
+    },
+    "B": {
+     "texto": "Manufacturer bracket backing 2x6 x 16\"",
+     "cita": "ADA 308 / mfr. instructions",
+     "delta": "+5.3 LF"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-07",
+   "pregunta": "Fire treated 2x nailers at the top of the exterior walls / parapet (A3.1-A3.4 key note 11) - roofing / carpentry scope vs. framing.",
+   "delta": "(A) 0 | (B) +2 x (38.67 + 2 x 5.97) = +101 LF FRT 2x | (C) Other: ____",
+   "source": "1/A3.1 key 11",
+   "opciones": {
+    "A": {
+     "texto": "Excluded (roof edge nailers by roofer / carpenter)",
+     "source": "1/A3.1 key 11",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Include FRT 2x nailers on the CFS walls tops",
+     "cita": "IBC 2304.12 (FRT)",
+     "delta": "+2 x (38.67 + 2 x 5.97) = +101 LF FRT 2x"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-08",
+   "pregunta": "Door / window openings in the Z-furring (S21) have masonry lintels; no metal header or sill track printed for the furring.",
+   "delta": "(A) 0 | (B) +(R.O. + 1.333) x 2 per opening: doors 2, 3, 7 + windows D1, D2 = +79 LF | (C) Other: ____",
+   "source": "S4.1 key 2 - key 8",
+   "opciones": {
+    "A": {
+     "texto": "No header / sill in the furring (as carried)",
+     "source": "S4.1 key 2 - key 8",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Track header + sill at each opening",
+     "cita": "SSMA / AISI S240",
+     "delta": "+(R.O. + 1.333) x 2 per opening: doors 2, 3, 7 + windows D1, D2 = +79 LF"
+    },
+    "C": ""
+   }
+  }
+ ],
+ "atm_recess_none_reason": "No ATM / equipment recess in the set (A1.1, A5.1, A5.2)",
+ "tile_base_none_reason": "A1.2 finish schedule: base B-1 resilient 4\" cove only; no ceramic tile base / cement board drawn (A1.2, A4.1, A4.2)",
+ "frp_none_reason": "No FRP in A1.2 finish types; rest rooms W-4 sanitary wall and ceiling panel system (A1.2) by finish trade over the W.R. gypsum board",
+ "deck_breaks_none_reason": "PEMB roof with a single 1/4:12 slope (A3.1); heights derived per wall from the printed eave elevations (1/A3.1, 1/A3.3); no deck steps",
+ "ballistic_jogs_none_reason": "No ballistic panels in the set (A1.1 wall types S21-S61)",
+ "trim_none_reason": "",
+ "types_none_reason": {},
+ "tags_descartados": [],
+ "corners_ok": [
+  {
+   "walls": [
+    "S21-E",
+    "S21-N"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S21-E band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S21-W1",
+    "S21-N"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S21-W1 band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S41-NW-H",
+    "S21-N"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S41-NW-H band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S41-SW-H",
+    "S21-N"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S41-SW-H band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S42-01",
+    "S21-N"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S42-01 band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S21-E",
+    "S21-S"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S21-E band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S21-W2",
+    "S21-S"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S21-W2 band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  },
+  {
+   "walls": [
+    "S24-02",
+    "S21-S"
+   ],
+   "reason": "S21 Z-furring band is 2 1/8\" (1.8-2.2 pt), thinner than the 3\" corner tolerance of esquinas.py: the second wall starts at the furring face (S24-02 band lo/hi = furring face, A1.1 raster) - one owner = the S21 facade wall"
+  }
+ ],
+ "gaps_ok": []
+}
