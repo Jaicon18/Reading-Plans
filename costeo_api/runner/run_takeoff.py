@@ -37,6 +37,7 @@ import completitud  # noqa: E402
 import reconcile  # noqa: E402
 import evidencia  # noqa: E402
 import trim  # noqa: E402
+import nodos  # noqa: E402
 
 # Archivos de entrada del proyecto que la lectura (o el estimador) produce además del canon. En dry-run se copian
 # del proyecto de referencia; en una corrida real los escribe el paso de lectura (prompts/lectura.md).
@@ -439,6 +440,14 @@ class Runner:
                 w["band"]["sheet"] = w["sheet"]
             if sb:
                 log(f"   band.sheet = sheet del wall en {len(sb)} wall(s)")
+        ns = leido.get("nodes") or []
+        if ns and sum(1 for x in ns if x.get("kind") == "free") / len(ns) > 0.6 and not self.a.dry_run:
+            # R80e.53: la lectura no armó la topología (casi todo free): nodes L / T / free derivados de las bands
+            nv = nodos.derivar(leido)
+            if nv:
+                log(f"   nodes: {len(ns)} de la lectura ({sum(1 for x in ns if x.get('kind') == 'free')} free) -> "
+                    f"{len(nv)} derivados de las bands (nodos.py)")
+                leido["nodes"] = nv
         json.dump(leido, open(canon_ab, "w"), indent=1, ensure_ascii=False)
         if self.a.ref_base:                 # reconciliación de ids por geometría (solo para aplicar decisiones)
             c, mapa, self.sin_objeto = reconcile.aplicar(leido, json.load(open(self.a.ref_base)), ov)
@@ -661,6 +670,15 @@ class Runner:
                 self.corregir(canon_ab, ronda + 1, origen="R80e.48 altura por cara contra el ceiling del cuarto", texto="\n".join(
                     f"{self.mapa_inv(w)} face {r}: height_ft {h} > ceiling del cuarto {hc} ft (A-121): el board va al ceiling "
                     f"(+6\" partition note) salvo que el detalle diga full height" for w, r, h, hc in altas))
+                continue
+            ab = completitud.aberturas_faltantes(json.load(open(canon)), self._fuentes_conteo()[4])   # R80e.54
+            if ab and not self.a.dry_run and ronda < MAX_CORRECCION:
+                self.corregir(canon_ab, ronda + 1, origen="R80e.54 openings: el set tiene door schedule y ningún wall trae openings",
+                              texto=f"door schedule en {', '.join(ab)} y 0 openings en los walls. Cada puerta / framed opening "
+                              f"de las plantas que cae en un wall del canon va en openings[] de ESE wall: ref ('Door N'), kind, "
+                              f"ro_w_ft (ancho del schedule o el hueco medido), head_ft (alto del schedule), xy_pt (centro en la "
+                              f"planta), source con N/HOJA. Si la leíste como hueco entre dos walls, el wall corre a través de la "
+                              f"puerta (R70.3) y la puerta va dentro. Puertas en walls fuera de alcance no se agregan.")
                 continue
             try:
                 self.calcular(canon)

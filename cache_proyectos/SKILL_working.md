@@ -2599,3 +2599,11 @@ Origen: la #6 se detuvo en canon.py con "accesorios_none PAFs and duct sleeves: 
 ### R80e.52 — La medida de una band lleva la hoja donde se midió (31-oct, corrida #6)
 Una length_source de band / vector sin hoja citada ("band 67.6 pt / 9") lleva antepuesta la hoja de su band (band.sheet), y length_op = la operación. Es un hecho del dato, no texto para una compuerta.
 Origen: 154 fallas de R73.17 / G_IMG ("falta HOJA") en la #6; con la regla, reglas.py baja de 248 a 38.
+
+### R80e.53 — Topología de nodes por programa cuando la lectura no la arma (31-oct, prueba #6b)
+Si más del 60 % de los nodes de la lectura son "free", los nodes se derivan de las bands (nodos.py): cada extremo de wall se consume una vez; L consume un extremo de cada wall, T solo el de la rama; el resto queda free. Cada wall termina con exactamente 2 extremos.
+Origen: la #6b tenía 76 de 87 nodes free (la referencia arma L y T); sin L / T faltan los studs de esquina e intersección.
+
+### R80e.54 — Door schedule en el set = openings en los walls (31-oct, prueba #6b)
+Si el set tiene door schedule y ningún wall de la lectura trae openings (ni openings_none_reason), la lectura vuelve a corrección: cada puerta de la planta que cae en un wall del canon va en openings[] de ESE wall (ref, kind, ro_w_ft, head_ft, xy_pt, source N/HOJA). Una puerta leída como hueco entre dos walls no parte el wall: el wall corre a través (R70.3).
+Origen: la #6b leyó 0 openings (la referencia tiene 12): sin jambs, header ni cripples, el 3-5/8" stud quedaba −24 %.

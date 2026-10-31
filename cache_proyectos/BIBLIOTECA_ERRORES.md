@@ -99,6 +99,8 @@ Los términos del trade van en inglés.
 | BE-86 | Corrida #6 31-oct | 154 fallas "falta HOJA" en length_source de bands ("band 67.6 pt / 9") | R80e.52: la hoja de la band se antepone (hecho del dato) | reglas.py 248 → 38 |
 | BE-87 | 31-oct | Choque de numeración: dos reglas distintas como R80e.49 (trim / formato de RFI) | El formato de RFI pasa a R80e.50; antes de numerar, leer el último R80e del archivo | Una sola R80e.49 |
 | BE-88 | 31-oct | El formato de RFI (R80e.50) se implementó con 3 columnas nuevas en Pending Items: viola el formato FIJO del Excel (nunca agregar / quitar / cambiar hojas ni columnas) | Las opciones van dentro de "Delta of each alternative"; A_RFI_FORMATO rechaza cualquier columna extra | test_rfi_formato.py cubre columna extra + delta sin (A)/(B)/(C) |
+| BE-89 | 31-oct | La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T) | nodos.py deriva L / T / free de las bands cuando > 60 % es free (R80e.53) | cada wall con exactamente 2 extremos (canon.py lo valida) |
+| BE-90 | 31-oct | La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples | completitud.aberturas_faltantes manda la lectura a corrección (R80e.54) | la referencia (12 openings) pasa; la #6b (0) queda marcada |
 
 ---
 

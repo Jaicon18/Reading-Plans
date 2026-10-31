@@ -1,15 +1,15 @@
 --- /root/.claude/skills/synced/25d81f9d-7b95-46c5-9623-1e1f286a88cf_53c5e56d-1ab1-472e-b31c-b4b9ecf8c7ac/take-off-metal-frame-drywall/SKILL.md	2026-10-29 23:12:21.367117206 +0000
-+++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 04:53:39.760888944 +0000
++++ /home/user/takeoff_runtime/skill/take-off-metal-frame-drywall/SKILL.md	2026-10-31 05:06:06.814716671 +0000
 @@ -5,6 +5,8 @@
  
  # Take-off de Metal Frame y Drywall
  
-+**v80t (31-oct-2026):** v80s + R80e.37–R80e.52 (runner por API con la cadena completa: compuertas de lectura, conteos, evidencia y trim por programa, reconciliación de decisiones, corrección dirigida, formato de RFI A/B/C). El runner genérico va en `runner/` (ver runner/README.md).
++**v80t (31-oct-2026):** v80s + R80e.37–R80e.54 (runner por API con la cadena completa: compuertas de lectura, conteos, evidencia y trim por programa, reconciliación de decisiones, corrección dirigida, formato de RFI A/B/C). El runner genérico va en `runner/` (ver runner/README.md).
 +
  Versión FINAL 24-oct-2026 (v80f: §29 corrida B&N; v80 + §0.F decisiones finales del estimador; v80: §28 (R80.1–R80.11) manda sobre §27 y §26 donde se tocan; v79: §27 (R79.1–R79.4); v78: §26 manda: decisiones del usuario W1–W4 y reglas R78.x; §25 (U1–U11) sigue vigente salvo R77.11, RETIRADA en v80 (manda R78.36 + R79.2 + R80.3); §24 sigue salvo R77.1, RETIRADA). Reemplaza cualquier versión anterior. **Se empieza por las REGLAS INVIOLABLES (v72b) y el PROTOCOLO v69 (flujo por etapas) con los cambios v75 (§22), v74 (§21), v73 (§20), v72, v71 y v70, que van primero; la REFERENCIA DE MÉTODO de más abajo le está subordinada.**
  
  **Arranque del paquete (v73):** el zip es autocontenido (SKILL.md + referencias/ + tools/ completas). Antes de leer
-@@ -2511,4 +2513,113 @@
+@@ -2511,4 +2513,121 @@
  - Pending Items: `rfi_cierre {id: {pregunta, delta}}` deja cada RFI decidido como "CLOSED - estimator decision <fecha>: … N/SHEET …" con el delta aplicado (también los RFI-ACC que la tool ya no regenera). Los EXCLUIDOS van además al Scope Checklist.
  - Las tiras de plywood por type se agregan por type (Σ LF x altura), no por wall, para que el desglose cuadre al centavo.
  
@@ -124,3 +124,11 @@
 +### R80e.52 — La medida de una band lleva la hoja donde se midió (31-oct, corrida #6)
 +Una length_source de band / vector sin hoja citada ("band 67.6 pt / 9") lleva antepuesta la hoja de su band (band.sheet), y length_op = la operación. Es un hecho del dato, no texto para una compuerta.
 +Origen: 154 fallas de R73.17 / G_IMG ("falta HOJA") en la #6; con la regla, reglas.py baja de 248 a 38.
++
++### R80e.53 — Topología de nodes por programa cuando la lectura no la arma (31-oct, prueba #6b)
++Si más del 60 % de los nodes de la lectura son "free", los nodes se derivan de las bands (nodos.py): cada extremo de wall se consume una vez; L consume un extremo de cada wall, T solo el de la rama; el resto queda free. Cada wall termina con exactamente 2 extremos.
++Origen: la #6b tenía 76 de 87 nodes free (la referencia arma L y T); sin L / T faltan los studs de esquina e intersección.
++
++### R80e.54 — Door schedule en el set = openings en los walls (31-oct, prueba #6b)
++Si el set tiene door schedule y ningún wall de la lectura trae openings (ni openings_none_reason), la lectura vuelve a corrección: cada puerta de la planta que cae en un wall del canon va en openings[] de ESE wall (ref, kind, ro_w_ft, head_ft, xy_pt, source N/HOJA). Una puerta leída como hueco entre dos walls no parte el wall: el wall corre a través (R70.3).
++Origen: la #6b leyó 0 openings (la referencia tiene 12): sin jambs, header ni cripples, el 3-5/8" stud quedaba −24 %.

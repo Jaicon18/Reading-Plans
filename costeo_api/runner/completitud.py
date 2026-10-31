@@ -201,6 +201,19 @@ def caras_sobre_ceiling(c, margen_ft=1.0):
     return out
 
 
+def aberturas_faltantes(c, titulos):
+    """R80e.54: el set tiene door schedule (título de hoja con DOOR + SCHEDULE) y ningún wall de la lectura trae
+    openings ni hay openings_none_reason -> [hojas del schedule]. Sin openings no hay jambs, header ni cripples, y una
+    puerta leída como hueco entre dos walls parte el wall que la contiene (R70.3: la puerta va DENTRO del wall)."""
+    hojas = sorted(h for h, t in (titulos or {}).items() if re.search(r"door", t, re.I) and re.search(r"schedule", t, re.I))
+    if not hojas or c.get("openings_none_reason"):
+        return []
+    ws = [w for w in c.get("walls") or [] if w.get("element", "wall") == "wall"]
+    if not ws or any(w.get("openings") for w in ws):
+        return []
+    return hojas
+
+
 def motivo_conteos(r):
     """Texto para la continuación: los tags / símbolos concretos que faltan, con hoja y coordenadas."""
     l = []
