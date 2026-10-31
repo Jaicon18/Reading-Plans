@@ -1,16 +1,16 @@
 {
  "familias": {
-  "1-1/2\" Z-furring": 2690.71,
+  "1-1/2\" Z-furring": 2570.64,
   "2-1/2\" stud": 0.0,
   "8\" stud (todos los gauges)": 537.32,
-  "6\" stud (todos los gauges)": 1105.09,
-  "3-5/8\" stud (todos los gauges)": 2214.54,
+  "6\" stud (todos los gauges)": 1148.07,
+  "3-5/8\" stud (todos los gauges)": 2165.17,
   "1-5/8\" stud": 0.0,
   "6\" parapet stud": 0.0,
   "bottom track (todos)": 384.72,
   "top / deflection track (todos)": 337.89,
   "track de ceilings / soffits": 0.0,
-  "bracing C.R. channel": 839.87,
+  "bracing C.R. channel": 806.26,
   "purlin (track to deck)": 0.0,
   "header / box beam": 56.0,
   "sill track": 0.0,
@@ -25,15 +25,15 @@
   "5/8\" EXTERIOR gyp sheathing": 0.0,
   "1/2\" EXTERIOR gyp sheathing": 0.0,
   "FRT plywood (SF)": 420.25,
-  "FRT blocking": 387.75,
-  "5/8\" gyp board Type X": 7741.58,
-  "5/8\" gyp Type X W.R.": 702.15,
+  "FRT blocking": 539.75,
+  "5/8\" gyp board Type X": 7673.76,
+  "5/8\" gyp Type X W.R.": 734.15,
   "8\" joist": 0.0,
   "USG drywall main tee (DGLW26)": 0.0,
   "USG drywall cross tee (DGLW424)": 0.0,
   "USG channel molding (DGCM27)": 0.0,
   "USG angle molding (DGWM24)": 0.0,
-  "clip angle (bracing / nested connections)": 0.0,
+  "clip angle (bracing / nested connections)": 38.0,
   "#8 pan head screws, relief channel to structure": 0.0,
   "Tek screws at clip angles": 0.0,
   "16 ga wire (seismic brace points)": 0.0,
@@ -47,12 +47,17 @@
   "deep-leg slotted deflection track (printed)": 46.83,
   "sheathing screws (printed)": 0.0,
   "framing clips per stud (printed)": 144.0,
+  "resilient channel (printed)": 243.0,
+  "1/4\" gypsum board (printed)": 385.0,
+  "flat strap bracing (printed)": 98.0,
+  "Z-furring runner track (printed)": 501.41,
+  "sanitary wall panels (printed)": 555.33,
   "metal stud blocking (362CR / STUD BLOCKING)": 6.0,
-  "metal trim (corner bead, casing, shadow molding)": 183.05,
+  "metal trim (corner bead, casing, shadow molding)": 709.63,
   "cement board": 0.0,
   "FRP": 0.0,
   "sealant at base of gypsum (exterior)": 0.0,
-  "Level 5 finish": 0.0,
+  "Level 5 finish": 7673.76,
   "ceiling / soffit track 3-5/8\"": 0.0,
   "ceiling / soffit track 6\"": 0.0,
   "ledger track 8\"": 0.0,
@@ -62,13 +67,13 @@
   "#10-16 screws at moment clips": 0.0,
   "metal corner guard 2x2x72": 0.0,
   "stainless corner guard 48": 0.0,
-  "control joint": 0.0,
+  "control joint": 73.34,
   "#8 screws at brace ends": 0.0,
   "additional head track": 32.73,
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
-  "gypsum board jamb return": 18.09,
+  "gypsum board jamb return": 7.24,
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
@@ -76,8 +81,8 @@
   "framing screws": 0.0,
   "slab pins": 0.0,
   "expansion anchors": 0.0,
-  "joint compound": 607.95,
-  "joint tape": 3124.18,
+  "joint compound": 605.37,
+  "joint tape": 3110.93,
   "deflection clips": 0.0,
   "framing screws heavy gauge": 0.0,
   "drywall screws heavy gauge": 0.0
@@ -118,6 +123,18 @@
    "ref": "BLK-CMU-OPENINGS",
    "source": "1/A5.1",
    "operacion": "92.86 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-14A41-CONT",
+   "source": "14/A4.1",
+   "operacion": "140.0 LF"
+  },
+  {
+   "familia": "FRT blocking",
+   "ref": "BLK-FIXTURES",
+   "source": "C/A4.1",
+   "operacion": "12.0 LF"
   },
   {
    "familia": "3-5/8\" stud (todos los gauges)",
@@ -189,13 +206,13 @@
    "familia": "1-1/2\" Z-furring",
    "ref": "ZF-S24",
    "source": "S24/A1.1",
-   "operacion": "pieces ROUNDUP(L / 2) + 1: S24-OFF 11.0 -> 7, S24-RR 16.17 -> 10 (grid A, T.O. low eave 14.625 ft, 2/A3.2); S24-RR104S 8.5 -> 6 (grid 4 near grid A, 14.71 ft by the 1/4:12 slope); top of furring not printed -> eave (53.3, RFI-02); 17 x 14.625 + 6 x 14.71 = 248.63 + 88.26 = 336.89 LF"
+   "operacion": "pieces ROUNDUP(L / 2) + 1: S24-OFF 7 + S24-RR 10 = 17 x (14.625 - 0.667 = 13.958) + S24-RR104S 6 x (14.71 - 0.667 = 14.043); under the purlin (estimator decision 2026-11-01, RFI-01 / RFI-02 A): 237.29 + 84.26 = 321.55 LF"
   },
   {
    "familia": "3-5/8\" stud (todos los gauges)",
    "ref": "CJ-DOUBLE-STUDS",
    "source": "2/A4.2",
-   "operacion": "2 control joints on S42 (14/A4.1, 2/A4.2): studs doubled on both sides of each joint (A4.2 key note 4) = 2 extra studs per joint; heights not printed at the joint -> full stud height (53.3): 2 x 15.17 + 2 x 16.31 = 30.34 + 32.62 = 62.96 LF"
+   "operacion": "2 control joints x 2 extra studs x height under the purlin: 2 x (15.17 - 0.667) + 2 x (16.31 - 0.667) = 29.01 + 31.29 = 60.29 LF (RFI-01 A)"
   },
   {
    "familia": "5/8\" gyp board Type X",
@@ -220,6 +237,84 @@
    "ref": "FCB43.5-CLIPS",
    "source": "1/S5.3",
    "operacion": "1/S5.3 south panel 600S162-43: studs ROUNDUP(36.0 / 1.333) + 1 = 28 x 3 clips drawn (top / middle / bottom, @ 48\") = 84; 3/S5.3 head wall: studs ROUNDUP(38.67 / 1.333) + 1 = 30 x 2 wind beams = 60; 84 + 60 = 144 clips (fasteners per clip as labelled)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "GB-S24-ABOVE-LID",
+   "source": "S24/A1.1",
+   "operacion": "(11.0 + 16.167) x (13.958 - 8.5) + 8.5 x (14.043 - 8.5) = 27.167 x 5.458 + 8.5 x 5.543 = 148.28 + 47.12 = 195.40 SF"
+  },
+  {
+   "familia": "resilient channel (printed)",
+   "ref": "RC-ENTRY",
+   "source": "1/A3.1",
+   "operacion": "piers 2 x 10 rows x 6.0 = 120.0 + head 4 rows x 30.67 = 122.68 -> 120.0 + 122.68 = 242.68, carried 243.0 LF (RFI-06 figure approved)"
+  },
+  {
+   "familia": "1/4\" gypsum board (printed)",
+   "ref": "GB14-ENTRY",
+   "source": "1/A3.1",
+   "operacion": "entry piers + head 349.0 (RFI-06 figure) + head underside 36.0 (1/A5.2) = 385.0 SF"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "GB-HEAD-UNDERSIDE-ENTRY",
+   "source": "1/A5.2",
+   "operacion": "38.67 LF x 0.93 ft head depth = 36.0 SF (Step 12 GAP-08 figure)"
+  },
+  {
+   "familia": "sanitary wall panels (printed)",
+   "ref": "W4-PANELS",
+   "source": "A1.2",
+   "operacion": "2 restrooms x 2 x (7.833 + 8.5) x 8.5 = 2 x 32.667 x 8.5 = 555.33 SF"
+  },
+  {
+   "familia": "6\" stud (todos los gauges)",
+   "ref": "600S200-S42",
+   "source": "4/S5.1",
+   "operacion": "S42-H1 38.67 / 4 -> ROUNDUP + 1 = 11 pieces x purlin spacing not printed -> 5'-0\" typical (assumption) = 55.0 LF"
+  },
+  {
+   "familia": "clip angle (bracing / nested connections)",
+   "ref": "CLIP-ANGLES-S51",
+   "source": "2/S5.1",
+   "operacion": "16 angles (2/S5.1 count, RFI-09 figure) = 16"
+  },
+  {
+   "familia": "clip angle (bracing / nested connections)",
+   "ref": "CLIPS-2x2-S51",
+   "source": "2/S5.1",
+   "operacion": "22 clips (2/S5.1 count, RFI-09 figure) = 22"
+  },
+  {
+   "familia": "flat strap bracing (printed)",
+   "ref": "STRAP-S41",
+   "source": "A1.1",
+   "operacion": "2 straps x 12.2 ft diagonal x 4 legs = 97.6, carried 98.0 LF (RFI-12 figure)"
+  },
+  {
+   "familia": "Z-furring runner track (printed)",
+   "ref": "ZF-RUNNER-S21",
+   "source": "S21/A1.1",
+   "operacion": "2 x S21 250.707 LF = 501.41 LF"
+  },
+  {
+   "familia": "control joint",
+   "ref": "CJ-S21",
+   "source": "3.A/A1.1",
+   "operacion": "S21-N 84.71 -> 2 joints, S21-S 75.64 -> 2, S21-E1 45.35 -> 1; x height under the purlin: 2 x 14.844 + 2 x 14.844 + 1 x 13.958 = 29.69 + 29.69 + 13.96 = 73.34 LF"
+  },
+  {
+   "familia": "5/8\" gyp Type X W.R.",
+   "ref": "WR-JANITOR",
+   "source": "13/A4.1",
+   "operacion": "4'-0\" printed panel width (13/A4.1) x 8'-0\" = 32.0 SF reclassified from Type X"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "WR-JANITOR-RECLASS",
+   "source": "13/A4.1",
+   "operacion": "-32.0 SF moved to Type X W.R. = -32.0"
   },
   {
    "familia": "FRT plywood (SF)",
@@ -272,6 +367,27 @@
   },
   {
    "familia": "metal trim (corner bead, casing, shadow molding)",
+   "ref": "Corner bead - S42 header bottoms",
+   "kind": "corner_bead",
+   "source": "6/A4.2",
+   "operacion": "151.54 LF total = 151.54"
+  },
+  {
+   "familia": "metal trim (corner bead, casing, shadow molding)",
+   "ref": "Corner bead - head underside storefront A",
+   "kind": "corner_bead",
+   "source": "1/A5.2",
+   "operacion": "30.67 LF total = 30.67"
+  },
+  {
+   "familia": "metal trim (corner bead, casing, shadow molding)",
+   "ref": "J molding - board tops against the PEMB roof",
+   "kind": "j_bead",
+   "source": "A1.1",
+   "operacion": "344.37 LF total = 344.37"
+  },
+  {
+   "familia": "metal trim (corner bead, casing, shadow molding)",
    "ref": "jamb returns",
    "source": "53.1",
    "operacion": "bordes 36.19 LF x 2 (corner bead + casing bead) = 72.38 [Window D1 18.09; Window D2 18.09]"
@@ -310,11 +426,11 @@
   },
   {
    "familia": "gypsum board jamb return",
-   "valor": 18.09,
+   "valor": 7.24,
    "unidad": "sf",
    "estado": "CRITERIO",
-   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator criterion (return width = 6\" stud depth, not dimensioned; RFI with delta at 0.20 ft)]",
-   "operacion": "edges 36.19 LF x 0.5 ft = 18.09 SF [Window D1 18.09 [12/A5.2]; Window D2 18.09 [12/A5.2]]"
+   "source": "12/A5.2 - estimator decision 2026-11-01 (RFI jamb return A: frame at mid-wall, 0.20 ft)",
+   "operacion": "edges 36.19 LF x 0.2 ft = 7.24 SF [Window D1 18.09 [12/A5.2]; Window D2 18.09 [12/A5.2]]"
   },
   {
    "familia": "PVC trim at FRP",
@@ -334,27 +450,27 @@
   },
   {
    "familia": "joint compound",
-   "valor": 607.95,
+   "valor": 605.37,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)]",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 607.95"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 7673.76 + 734.15 = 8407.91 SF) = 605.37"
   },
   {
    "familia": "joint tape",
-   "valor": 3124.18,
+   "valor": 3110.93,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 3124.18"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 7673.76 + 734.15 = 8407.91 SF) = 3110.93"
   },
   {
    "familia": "Level 5 finish",
-   "valor": 0.0,
+   "valor": 7673.76,
    "unidad": "sf",
-   "estado": "PENDIENTE",
-   "source": "-",
-   "operacion": "no level5_items"
+   "estado": "DERIVADO",
+   "source": "A1.2",
+   "operacion": "L5-PAINTED-TYPE-X: 7673.76 SF"
   },
   {
    "familia": "deflection clips",
@@ -370,7 +486,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "estimator order 2026-10-31 (exclude all fasteners)",
-   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 9586.1"
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 9559.58"
   },
   {
    "familia": "drywall screws heavy gauge",
@@ -378,7 +494,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "estimator order 2026-10-31 (exclude all fasteners)",
-   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 546.37"
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 529.91"
   },
   {
    "familia": "framing screws",
@@ -435,14 +551,6 @@
    "estado": "DERIVADO",
    "source": "A1.2",
    "operacion": "no aplica: No access panel shown in the gypsum ceilings or walls (A1.1, A1.2, A4.1, A4.2)"
-  },
-  {
-   "familia": "Level 5 finish",
-   "valor": 0.0,
-   "unidad": "sf",
-   "estado": "DERIVADO",
-   "source": "A1.2",
-   "operacion": "no aplica: No Level 5 called in the finish schedule / types (A1.2 paints W-2, W-3, C-3 only)"
   }
  ],
  "avisos": [
@@ -480,9 +588,7 @@
   "batt insulation: EXCLUDED (criterio del usuario 'no insulation')",
   "stud reinforcement MEP: MEP sheets excluded by the estimator (A1.1 note 2.D; M1, P1 (not opened)): MEP / electrical sheets excluded from this take-off by the estimator (2026-10-31) -> accesorios_none / accesorios_rfi closes the row",
   "PENDIENTE extra framing ATM: no atm_recess at the ATM opening and no extra_framing[]: declare atm_recess {source, drawn} (R80.3: every piece printed in the recess is counted; nothing printed = 0) or accesorios_none",
-  "PENDIENTE access panel: no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB",
-  "Level 5 sin constants.level5_tags (tags del finish schedule con 'LEVEL 5'): cobertura no verificable",
-  "PENDIENTE Level 5 finish: no level5_items"
+  "PENDIENTE access panel: no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB"
  ],
  "obligatorias": [
   "6\" stud (todos los gauges)",
@@ -585,7 +691,7 @@
    "stud reinforcement MEP": 0.0,
    "extra framing ATM": 0.0,
    "2-1/2\" CFMF coiling grille head": 0.0,
-   "gypsum board jamb return": 18.09,
+   "gypsum board jamb return": 7.24,
    "PVC trim at FRP": 0.0,
    "PAFs and duct sleeves": 0.0,
    "access panel": 0.0,
@@ -593,9 +699,9 @@
    "framing screws": 0.0,
    "slab pins": 0.0,
    "expansion anchors": 0.0,
-   "joint compound": 607.95,
-   "joint tape": 3124.18,
-   "Level 5 finish": 0.0,
+   "joint compound": 605.37,
+   "joint tape": 3110.93,
+   "Level 5 finish": 7673.76,
    "deflection clips": 0.0,
    "framing screws heavy gauge": 0.0,
    "drywall screws heavy gauge": 0.0
@@ -673,7 +779,7 @@
   {
    "familia": "gypsum board jamb return",
    "tema": "jamb return width not dimensioned",
-   "delta": -10.86,
+   "delta": 0.0,
    "unidad": "sf",
    "alternativa": "0.20 ft (frame at mid-wall)"
   },
@@ -720,12 +826,12 @@
       ],
       "wall": "S21-N",
       "lf": 84.708,
-      "height_ft": 15.511,
+      "height_ft": 14.844,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 1313.91,
+      "board_sf": 1257.41,
       "location": "North facade (grid 1) interior furring, Parts C 105 + Parts A 100, full length between E and W furring faces",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -737,12 +843,12 @@
       ],
       "wall": "S21-E1",
       "lf": 45.346,
-      "height_ft": 14.625,
+      "height_ft": 13.958,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 663.19,
+      "board_sf": 632.94,
       "location": "East facade (grid A) interior furring, Parts C 105, from the north furring face to office 102 west wall",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -754,12 +860,12 @@
       ],
       "wall": "S21-E2",
       "lf": 10.882,
-      "height_ft": 14.625,
+      "height_ft": 13.958,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 159.15,
+      "board_sf": 151.89,
       "location": "East facade (grid A) interior furring, Break Area (between office 102 east wall and R.R. 103 west wall)",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -771,12 +877,12 @@
       ],
       "wall": "S21-S",
       "lf": 75.64,
-      "height_ft": 15.511,
+      "height_ft": 14.844,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 1173.25,
+      "board_sf": 1122.8,
       "location": "South facade (grid 4) interior furring, Parts B 101 / Parts C 105, from R.R. 104 south wall to the west furring face",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -788,12 +894,12 @@
       ],
       "wall": "S21-W1",
       "lf": 9.22,
-      "height_ft": 16.396,
+      "height_ft": 15.729,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 151.17,
+      "board_sf": 145.02,
       "location": "West facade (grid C) interior furring, Parts A 100, from the north furring face to the left entry pier",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -805,12 +911,12 @@
       ],
       "wall": "S21-W2",
       "lf": 24.911,
-      "height_ft": 16.396,
+      "height_ft": 15.729,
       "stud_size": "1-1/2\" Z-furring (150ZF125-18)",
       "oc_in": 24,
       "rows": 1,
       "layers": 1.0,
-      "board_sf": 408.44,
+      "board_sf": 391.83,
       "location": "West facade (grid C) interior furring, Parts B 101, from the right entry pier (concealed column, key note 1) to the south furring face",
       "source": "S21/A1.1",
       "status": "DERIVADO",
@@ -1084,12 +1190,12 @@
       ],
       "wall": "S42-H1+S42-H2",
       "lf": 64.11,
-      "height_ft": 12.461,
+      "height_ft": 11.794,
       "stud_size": "3-5/8\"",
       "oc_in": 24,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 1415.77,
+      "board_sf": 1368.5,
       "location": "Parts A 100 / Parts C 105 demising wall near grid B, floor-supported full-height part (hatched), north wall to the gypsum board joint 2/A4.2 + S42 suspended header wall near grid B (non-hatched double line), joint 2/A4.2 east to the free end past the S42 vertical wall; OFCI sales counters / fixtures below (14/A4.1)",
       "source": "5/A4.2; 6/A4.2",
       "status": "DERIVADO",
@@ -1102,12 +1208,12 @@
       ],
       "wall": "S42-V1+S42-V2",
       "lf": 58.5,
-      "height_ft": 9.905,
+      "height_ft": 9.238,
       "stud_size": "3-5/8\"",
       "oc_in": 24,
       "rows": 1,
       "layers": 2.0,
-      "board_sf": 937.52,
+      "board_sf": 898.5,
       "location": "S42 suspended header wall between Parts A 100 and Parts B 101 (non-hatched double line), from S42-H2 down to the joint 2/A4.2 + S42 floor-supported full-height part (hatched) between Parts A 100 and Parts B 101, joint 2/A4.2 to the right entry pier (west facade)",
       "source": "6/A4.2; 5/A4.2",
       "status": "CONFIRMADO",
@@ -1196,12 +1302,12 @@
     ],
     "wall": "VEST-HD-C",
     "lf": 8.488,
-    "height_ft": 5.021,
+    "height_ft": 4.354,
     "stud_size": "6\"",
     "oc_in": 24,
     "rows": 1,
     "layers": 1.0,
-    "board_sf": 42.62,
+    "board_sf": 36.96,
     "location": "Vestibule 100A head wall above storefront C (vestibule interior front), to the roof",
     "source": "3/A3.1",
     "status": "DERIVADO",
@@ -1216,12 +1322,12 @@
     ],
     "wall": "VEST-HD-B2",
     "lf": 6.042,
-    "height_ft": 5.021,
+    "height_ft": 4.354,
     "stud_size": "6\"",
     "oc_in": 24,
     "rows": 1,
     "layers": 1.0,
-    "board_sf": 30.34,
+    "board_sf": 26.31,
     "location": "Vestibule 100A head wall above storefront B2 (vestibule north side), to the roof",
     "source": "3/A3.1",
     "status": "CONFIRMADO",
@@ -1236,12 +1342,12 @@
     ],
     "wall": "VEST-HD-B1",
     "lf": 6.042,
-    "height_ft": 5.021,
+    "height_ft": 4.354,
     "stud_size": "6\"",
     "oc_in": 24,
     "rows": 1,
     "layers": 1.0,
-    "board_sf": 30.34,
+    "board_sf": 26.31,
     "location": "Vestibule 100A head wall above storefront B1 (vestibule south side), to the roof",
     "source": "3/A3.1",
     "status": "CONFIRMADO",

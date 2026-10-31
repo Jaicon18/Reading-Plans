@@ -2641,3 +2641,27 @@ En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido bu
 
 ### R80e.90 — Lo impreso se carga; decisiones del estimador solo con fuente (31-oct, inviolable) (BE-100, BE-101)
 1) Bid set de prueba: un programa revisa /Annots; con markups se entrega copia limpia. 2) Elemento impreso (anclaje, tornillo, track, clip, blocking dibujado) = renglón cargado; RFI solo por la dimensión/cantidad no impresa. 3) "Decisión del estimador" solo con respuesta escrita del usuario o precedente citado (R80e.34); si no, es supuesto propio y así se rotula.
+
+## R80e.78 — Precedente O'Reilly Evans #1: decisiones del estimador sobre los RFI (2026-11-01), reglas generales para todo proyecto
+(Como R80e.34 de B&N: se aplican como precedente cuando el plano no resuelve el mismo caso; el plano impreso manda siempre.)
+1. Studs / Z-furring que llegan a un PEMB **paran bajo el purlin**; si el peralte no está impreso: Z purlin típico 8" (0.667 ft) como supuesto con su delta.
+2. Furring de un type sobre CMU sube hasta la estructura (bajo el purlin) y **lleva board arriba del hard lid** si el muro queda expuesto sobre el cielo.
+3. Header wall dibujado más allá de una esquina en planta = se carga como está dibujado.
+4. **Sin board arriba de los joists** de un hard lid (IBC 703.2), salvo que el detalle lo dibuje.
+5. Lo dibujado en la entrada (resilient channel, 1/4" gypsum, underside del head con 5/8" X y corner bead) **se carga**.
+6. Paneles sanitarios / FRP de un finish schedule (W-4) **se cargan** en los 4 muros del cuarto.
+7. Miembros estructurales de soporte de header walls (600S200, clip angles, clips) **se cargan**; espaciamiento no impreso = supuesto con delta.
+8. Blocking continuo y backing de fixtures: se cargan con la cifra del RFI cuando el plano no dimensiona.
+9. **Corner bead en el fondo de header walls y J molding** en los topes de board contra el techo: se cargan.
+10. Diagonal strap de una nota general en walls free-standing: se carga.
+11. Sin headers metálicos en aberturas de CMU (los da el mason).
+12. Gauge de heads: el detalle arquitectónico (key note del wall section) manda sobre una nota estructural genérica de "16 ga at entry".
+13. **Level 5 bajo pintura semi-gloss** (GA-214 / ASTM C840) sobre todo el board pintado.
+14. **Runner 1-1/2" arriba y abajo del Z-furring** (ASTM C754).
+15. Control joints en furring de más de 30 ft (A1.1 3.A tipo): se cargan.
+16. W.R. detrás de fixtures mojados del janitor sink: extensión mínima del código (GA-216), reclasificación.
+17. Clips "uno por stud" cuando el detalle los dibuja en el stud: se cuentan por stud.
+18. FRT nailers en parapets de CMU = Div. 06, EXCLUDED; nailers de column enclosures por otros: sin cargar; shutters "may be required": sin cargar con nota.
+19. Deflection por la nota general; deep-leg solo donde el detalle lo imprime.
+20. Jamb return: frame a media pared (0.20 ft) cuando el detalle lo muestra así.
+21. (R80e.77) Tornillería: excluida solo si el estimador lo ordena en ese proyecto.

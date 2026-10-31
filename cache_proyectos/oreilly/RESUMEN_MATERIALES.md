@@ -109,3 +109,27 @@ Fuente: lectura dirigida de S1.1 nota 7, 3-4/S5.1, S5.2 / S5.3, 11-12/A5.2, A4.1
 | Expansion anchors Hilti 1/4" Kwik Bolt II, exterior bottom track @ 8" O.C. | PCS | 6.00 | 0.00 | -6.00 |
 | Heavy-gauge framing screws #10-16 x 3/4" pan head (18/16/14 ga studs) | PCS | 792.00 | 0.00 | -792.00 |
 | Type S-12 drywall screws #6 x 1-1/4" (board on 18/16/14 ga studs) | PCS | 546.37 | 0.00 | -546.37 |
+
+## rev4 (2026-11-01): respuestas del estimador a todos los RFI
+Partitions 614.86 LF · board de partitions 7,783.74 SF · Type X 7,673.76 SF · W.R. 734.15 SF · Level 5 7,673.76 SF.
+| Material | Unit | rev3 | rev4 | Δ |
+|---|---|---|---|---|
+| 1-1/2" Z-furring channel (LF of material) | LF | 2,690.71 | 2,570.64 | -120.07 |
+| 6" metal stud (LF of material) | LF | 1,105.09 | 1,148.07 | +42.98 |
+| 3-5/8" metal stud (LF of material) | LF | 2,214.54 | 2,165.17 | -49.37 |
+| Bracing 1-1/2" C.R. channel @ 48" O.C. | LF | 839.87 | 806.26 | -33.61 |
+| Blocking FRT / 2X FRT wood | LF | 387.75 | 539.75 | +152.00 |
+| 5/8" gypsum board, Type X | SF | 7,741.58 | 7,673.76 | -67.82 |
+| 5/8" gypsum board, Type X W.R. (water resistant) | SF | 702.15 | 734.15 | +32.00 |
+| METAL trim - corner bead, casing bead, shadow molding, gypsum edge trim | LF | 183.05 | 709.63 | +526.58 |
+| Gypsum board jamb return at openings | SF | 18.09 | 7.24 | -10.85 |
+| Joint compound, all purpose | LB | 607.95 | 605.37 | -2.58 |
+| Joint tape, paper | LF | 3,124.18 | 3,110.93 | -13.25 |
+| Level 5 finish | SF | 0.00 | 7,673.76 | +7,673.76 |
+| Clip angles and framing clips (see Where it comes from) | PCS | 0.00 | 38.00 | +38.00 |
+| Resilient channel - printed product (see Where it comes from) | LF | 0.00 | 243.00 | +243.00 |
+| 1/4" gypsum board - printed (see Where it comes from) | SF | 0.00 | 385.00 | +385.00 |
+| Diagonal flat strap bracing - printed (see Where it comes from) | LF | 0.00 | 98.00 | +98.00 |
+| Z-furring runner track 1-1/2" top and bottom (see Where it comes from) | LF | 0.00 | 501.41 | +501.41 |
+| Sanitary wall panel system W-4 (see Where it comes from) | SF | 0.00 | 555.33 | +555.33 |
+| Control joint, gypsum board walls (ASTM C840, 30 ft max) | LF | 0.00 | 73.34 | +73.34 |

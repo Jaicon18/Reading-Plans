@@ -4,7 +4,7 @@
   "stud reinforcement MEP": 0.0,
   "extra framing ATM": 0.0,
   "2-1/2\" CFMF coiling grille head": 0.0,
-  "gypsum board jamb return": 18.09,
+  "gypsum board jamb return": 7.24,
   "PVC trim at FRP": 0.0,
   "PAFs and duct sleeves": 0.0,
   "access panel": 0.0,
@@ -12,9 +12,9 @@
   "framing screws": 0.0,
   "slab pins": 0.0,
   "expansion anchors": 0.0,
-  "joint compound": 607.95,
-  "joint tape": 3124.18,
-  "Level 5 finish": 0.0,
+  "joint compound": 605.37,
+  "joint tape": 3110.93,
+  "Level 5 finish": 7673.76,
   "deflection clips": 0.0,
   "framing screws heavy gauge": 0.0,
   "drywall screws heavy gauge": 0.0
@@ -102,11 +102,11 @@
   },
   {
    "familia": "gypsum board jamb return",
-   "valor": 18.09,
+   "valor": 7.24,
    "unidad": "sf",
    "estado": "CRITERIO",
-   "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator criterion (return width = 6\" stud depth, not dimensioned; RFI with delta at 0.20 ft)]",
-   "operacion": "edges 36.19 LF x 0.5 ft = 18.09 SF [Window D1 18.09 [12/A5.2]; Window D2 18.09 [12/A5.2]]"
+   "source": "12/A5.2 - estimator decision 2026-11-01 (RFI jamb return A: frame at mid-wall, 0.20 ft)",
+   "operacion": "edges 36.19 LF x 0.2 ft = 7.24 SF [Window D1 18.09 [12/A5.2]; Window D2 18.09 [12/A5.2]]"
   },
   {
    "familia": "PVC trim at FRP",
@@ -126,27 +126,27 @@
   },
   {
    "familia": "joint compound",
-   "valor": 607.95,
+   "valor": 605.37,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)]",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 607.95"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 7673.76 + 734.15 = 8407.91 SF) = 605.37"
   },
   {
    "familia": "joint tape",
-   "valor": 3124.18,
+   "valor": 3110.93,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "default (no sheet): skill standing criterion / precedent of a previous project, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 7741.58 + 702.15 = 8443.73 SF) = 3124.18"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 7673.76 + 734.15 = 8407.91 SF) = 3110.93"
   },
   {
    "familia": "Level 5 finish",
-   "valor": 0.0,
+   "valor": 7673.76,
    "unidad": "sf",
-   "estado": "PENDIENTE",
-   "source": "-",
-   "operacion": "no level5_items"
+   "estado": "DERIVADO",
+   "source": "A1.2",
+   "operacion": "L5-PAINTED-TYPE-X: 7673.76 SF"
   },
   {
    "familia": "deflection clips",
@@ -162,7 +162,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "estimator order 2026-10-31 (exclude all fasteners)",
-   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 9586.1"
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 9559.58"
   },
   {
    "familia": "drywall screws heavy gauge",
@@ -170,7 +170,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "estimator order 2026-10-31 (exclude all fasteners)",
-   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 546.37"
+   "operacion": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (estimator order 2026-10-31 (exclude all fasteners)); computed before the exclusion = 529.91"
   },
   {
    "familia": "framing screws",
@@ -227,28 +227,18 @@
    "estado": "DERIVADO",
    "source": "A1.2",
    "operacion": "no aplica: No access panel shown in the gypsum ceilings or walls (A1.1, A1.2, A4.1, A4.2)"
-  },
-  {
-   "familia": "Level 5 finish",
-   "valor": 0.0,
-   "unidad": "sf",
-   "estado": "DERIVADO",
-   "source": "A1.2",
-   "operacion": "no aplica: No Level 5 called in the finish schedule / types (A1.2 paints W-2, W-3, C-3 only)"
   }
  ],
  "avisos": [
   "stud reinforcement MEP: MEP sheets excluded by the estimator (A1.1 note 2.D; M1, P1 (not opened)): MEP / electrical sheets excluded from this take-off by the estimator (2026-10-31) -> accesorios_none / accesorios_rfi closes the row",
   "PENDIENTE extra framing ATM: no atm_recess at the ATM opening and no extra_framing[]: declare atm_recess {source, drawn} (R80.3: every piece printed in the recess is counted; nothing printed = 0) or accesorios_none",
-  "PENDIENTE access panel: no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB",
-  "Level 5 sin constants.level5_tags (tags del finish schedule con 'LEVEL 5'): cobertura no verificable",
-  "PENDIENTE Level 5 finish: no level5_items"
+  "PENDIENTE access panel: no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB"
  ],
  "rfis": [
   {
    "familia": "gypsum board jamb return",
    "tema": "jamb return width not dimensioned",
-   "delta": -10.86,
+   "delta": 0.0,
    "unidad": "sf",
    "alternativa": "0.20 ft (frame at mid-wall)"
   },

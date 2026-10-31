@@ -322,3 +322,112 @@ for r in c["rfis"]:
     r["delta"] = f"(A) {o.get('A', {}).get('delta','')} | (B) {o.get('B', {}).get('delta','')} | (C) ____"
 json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
 print("rev3 ok")
+# ======== rev4: estimator answers to the RFIs (RESPUESTAS_RFI_ESTIMADOR.md, 2026-11-01, chat buttons) ========
+D4 = "estimator decision 2026-11-01"
+PD = 0.667   # RFI-01 A: stop under the purlin; purlin depth not printed -> typical PEMB Z purlin 8" (assumption, delta +/-)
+if not c.get("rev4_applied"):
+    for w in c["walls"]:
+        if w["id"].startswith(("S21-", "S42-", "VEST-HD-")):
+            h0 = float(w["height_ft"]); h1 = round(h0 - PD, 3)
+            w["height_ft"] = h1
+            w["height_source"] = f"{w.get('height_source')} - {D4} (RFI-01 A): stop under the PEMB purlin, depth not printed -> typical 8\" Z purlin 0.667 ft (assumption): {h0} - 0.667 = {h1}"
+            w["height_status"] = "DERIVADO"
+            for f in w.get("faces") or []:
+                if abs(float(f.get("height_ft") or 0) - h0) < 0.01:
+                    f["height_ft"] = h1
+                    f["height_source"] = f"{f.get('height_source')} - under the purlin (RFI-01 A, {D4}) = {h1}"
+        if w["id"].startswith("VEST-HD-"):
+            w["gauge"] = "43 mil (18 ga) - 600S162-43"
+            w["gauge_source"] = f"3/A3.1 key 8 600S162-43 - {D4} (RFI-14 A)"
+    for m in c["misc_items"]:
+        if m["ref"] == "ZF-S24":
+            m["qty"] = 321.55
+            m["op"] = (f"pieces ROUNDUP(L / 2) + 1: S24-OFF 7 + S24-RR 10 = 17 x (14.625 - 0.667 = 13.958) + S24-RR104S 6 x (14.71 - 0.667 = 14.043); "
+                       f"under the purlin ({D4}, RFI-01 / RFI-02 A): 237.29 + 84.26 = 321.55 LF")
+        if m["ref"] == "CJ-DOUBLE-STUDS":
+            m["qty"] = 60.29
+            m["op"] = "2 control joints x 2 extra studs x height under the purlin: 2 x (15.17 - 0.667) + 2 x (16.31 - 0.667) = 29.01 + 31.29 = 60.29 LF (RFI-01 A)"
+    def mi(ref, fam, qty, unit, src, label, op):
+        c["misc_items"].append({"ref": ref, "familia": fam, "qty": qty, "unit": unit, "source": src, "label": label, "op": op})
+    mi("GB-S24-ABOVE-LID", "5/8\" gyp board Type X", 195.40, "SF", "S24/A1.1", f"5/8\" Type X on the S24 Z-furring above the 8'-6\" hard lid ({D4}, RFI-02 A)",
+       "(11.0 + 16.167) x (13.958 - 8.5) + 8.5 x (14.043 - 8.5) = 27.167 x 5.458 + 8.5 x 5.543 = 148.28 + 47.12 = 195.40 SF")
+    mi("RC-ENTRY", "resilient channel (printed)", 243.0, "LF", "1/A3.1", f"087F125-33 DOUBLE LEG RESILIENT CHANNEL @ 24\" O.C. horizontal (1/A3.1, 2/A3.1 key 33) - {D4} (RFI-06 A)",
+       "piers 2 x 10 rows x 6.0 = 120.0 + head 4 rows x 30.67 = 122.68 -> 120.0 + 122.68 = 242.68, carried 243.0 LF (RFI-06 figure approved)")
+    mi("GB14-ENTRY", "1/4\" gypsum board (printed)", 385.0, "SF", "1/A3.1", f"1/4\" GYPSUM BOARD (1/A3.1, 2/A3.1 key 35; underside of the head 1/A5.2) - {D4} (RFI-06 A)",
+       "entry piers + head 349.0 (RFI-06 figure) + head underside 36.0 (1/A5.2) = 385.0 SF")
+    mi("GB-HEAD-UNDERSIDE-ENTRY", "5/8\" gyp board Type X", 36.0, "SF", "1/A5.2", f"5/8\" Type X at the underside of the head over storefront A (1/A5.2) - {D4} (RFI-06 A)",
+       "38.67 LF x 0.93 ft head depth = 36.0 SF (Step 12 GAP-08 figure)")
+    mi("W4-PANELS", "sanitary wall panels (printed)", 555.33, "SF", "A1.2", f"W-4 SANITARY WALL AND CEILING PANEL SYSTEM on the 4 walls of each restroom (A1.2 finish schedule) - {D4} (RFI-07 A)",
+       "2 restrooms x 2 x (7.833 + 8.5) x 8.5 = 2 x 32.667 x 8.5 = 555.33 SF")
+    mi("600S200-S42", "6\" stud (todos los gauges)", 55.0, "LF", "4/S5.1", f"6\"x2\"x16ga STUD (600S200-54) @ 48\" O.C. between purlins (4/S5.1) - {D4} (RFI-09 A)",
+       "S42-H1 38.67 / 4 -> ROUNDUP + 1 = 11 pieces x purlin spacing not printed -> 5'-0\" typical (assumption) = 55.0 LF")
+    mi("CLIP-ANGLES-S51", "clip angle (bracing / nested connections)", 16, "PCS", "2/S5.1", f"L4x4x3/16 clip angles (2/S5.1) - {D4} (RFI-09 A); bolts excluded (all fasteners excluded)",
+       "16 angles (2/S5.1 count, RFI-09 figure) = 16")
+    mi("CLIPS-2x2-S51", "clip angle (bracing / nested connections)", 22, "PCS", "2/S5.1", f"2x2x14 ga clips (2/S5.1) - {D4} (RFI-09 A); screws excluded",
+       "22 clips (2/S5.1 count, RFI-09 figure) = 22")
+    mi("STRAP-S41", "flat strap bracing (printed)", 98.0, "LF", "A1.1", f"DIAGONAL WALL BRACING 3\" x 16 GA FLAT STRAP at the corner faces of the S41 box-outs (A1.1 note 2.B) - {D4} (RFI-12 A)",
+       "2 straps x 12.2 ft diagonal x 4 legs = 97.6, carried 98.0 LF (RFI-12 figure)")
+    mi("ZF-RUNNER-S21", "Z-furring runner track (printed)", 501.41, "LF", "S21/A1.1", f"1-1/2\" runner top and bottom of the S21 Z-furring (ASTM C754) - {D4} (RFI-16 B)",
+       "2 x S21 250.707 LF = 501.41 LF")
+    mi("CJ-S21", "control joint", 73.34, "LF", "3.A/A1.1", f"Gypsum board control joints on the S21 furring, runs over 30 ft (A1.1 note 3.A) - {D4} (RFI-18 A)",
+       "S21-N 84.71 -> 2 joints, S21-S 75.64 -> 2, S21-E1 45.35 -> 1; x height under the purlin: 2 x 14.844 + 2 x 14.844 + 1 x 13.958 = 29.69 + 29.69 + 13.96 = 73.34 LF")
+    mi("WR-JANITOR", "5/8\" gyp Type X W.R.", 32.0, "SF", "13/A4.1", f"Type X W.R. behind the janitor sink wet fixtures, minimum extent (GA-216) - {D4} (RFI-19 B)",
+       "4'-0\" printed panel width (13/A4.1) x 8'-0\" = 32.0 SF reclassified from Type X")
+    mi("WR-JANITOR-RECLASS", "5/8\" gyp board Type X", -32.0, "SF", "13/A4.1", f"Reclass to W.R. (RFI-19 B, {D4})", "-32.0 SF moved to Type X W.R. = -32.0")
+    c["blocking_items"].append({"ref": "BLK-14A41-CONT", "lf": 140.0, "material": "FRT", "source": "14/A4.1",
+        "label": f"Continuous FRT 2x blocking along the Parts A walls (14/A4.1 key 12) - {D4} (RFI-10 A)", "op": "RFI-10 figure approved = 140.0 LF"})
+    c["blocking_items"].append({"ref": "BLK-FIXTURES", "lf": 12.0, "material": "FRT", "source": "C/A4.1",
+        "label": f"Backing for plumbing fixtures (A4.1 general note C) - {D4} (RFI-10 A)", "op": "Step 12 GAP-11 figure approved = 12.0 LF"})
+    c["trim_items"].append({"ref": "Corner bead - S42 header bottoms", "kind": "corner_bead", "label": f"Corner bead at both bottom edges of the S42 header walls - {D4} (RFI-11 A)",
+        "source": "6/A4.2", "lf": 151.54, "op": "2 x (S42-H2 25.44 + S42-V1 50.33) = 2 x 75.77 = 151.54"})
+    c["trim_items"].append({"ref": "Corner bead - head underside storefront A", "kind": "corner_bead", "label": f"Corner bead at the head underside (1/A5.2) - {D4} (RFI-06 A)",
+        "source": "1/A5.2", "lf": 30.67, "op": "30.67 LF (RFI-06 / GAP-08 figure) = 30.67"})
+    c["trim_items"].append({"ref": "J molding - board tops against the PEMB roof", "kind": "j_bead", "label": f"J molding at the board tops against the roof (A1.1 note 3.C) - {D4} (RFI-11 A)",
+        "source": "A1.1", "lf": 344.37, "op": "S21 250.71 (1 face) + S42-H1 2 x 38.67 + S42-V2 2 x 8.17 = 250.71 + 77.33 + 16.33 = 344.37"})
+    c.setdefault("constants", {})["jamb_return_width_ft"] = {"value": 0.2, "source": f"12/A5.2 - {D4} (RFI jamb return A: frame at mid-wall, 0.20 ft)"}
+    c["rev4_applied"] = True
+ANS = {"RFI-01": "A - studs / Z-furring stop under the purlin; purlin depth not printed -> 8\" typical Z purlin (0.667 ft) assumed",
+ "RFI-02": "A - S24 Z-furring to the purlin + board above the hard lid", "RFI-03": "A - S42 header extension included as drawn on A1.1",
+ "RFI-04": "closed before (plan check: 36'-0\" verified)", "RFI-05": "B - no board on top of the hard-lid joists (IBC 703.2)",
+ "RFI-06": "A - entry 1/4\" gypsum + RC 087F125-33 + head underside (5/8\" X, 1/4\", corner bead) loaded", "RFI-07": "A - W-4 panels on the 4 walls of each restroom loaded",
+ "RFI-08": "MEP excluded (estimator order 2026-10-31)", "RFI-09": "A - 600S200-54, L4x4x3/16 angles, 2x2x14 ga clips loaded (no screws / bolts)",
+ "RFI-10": "A - continuous blocking 14/A4.1 key 12 + fixture backing loaded", "RFI-11": "A - corner bead at the header bottoms + J molding against the roof loaded",
+ "RFI-12": "A - 3\" x 16 ga diagonal strap at the S41 box-outs loaded", "RFI-13": "A - no metal headers at the CMU openings (0)",
+ "RFI-14": "A - vestibule heads 600S162-43 (18 ga)", "RFI-15": "B - Level 5 under the semi-gloss paint (GA-214 / ASTM C840)",
+ "RFI-16": "B - 1-1/2\" runner top and bottom of the S21 Z-furring (ASTM C754)", "RFI-17": "A - D1 / D2 FRT blocking with the estimated size stays",
+ "RFI-18": "A - control joints on the S21 furring loaded", "RFI-19": "B - Type X W.R. behind the janitor sink wet fixtures (GA-216 minimum extent)",
+ "RFI-20": "A - FCB43.5 one per stud (144), no change", "RFI-21": "closed - fasteners excluded", "RFI-22": "keep EXCLUDED (Div 06)",
+ "RFI-23": "not carried (by others)", "RFI-24": "A - shutters not carried; framing if they are added", "RFI-25": "B - deflection per A1.1 note 2.C; deep-leg stays on the S42 full-height walls",
+ "RFI-26": "closed - fasteners excluded", "RFI-27": "closed - fasteners excluded"}
+for r in c["rfis"]:
+    if r["id"] in ANS and not r["tema"].startswith("CLOSED - " + D4):
+        r["tema"] = f"CLOSED - {D4}: {ANS[r['id']]} | was: {r['tema']}"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("rev4 applied")
+for b in c["blocking_items"]:
+    if b["ref"] == "BLK-FIXTURES":
+        b["label"] = f"FIRE TREATED BLOCKING for plumbing fixture backing (A4.1 general note C: 'COLD FORM METAL FRAMING OR FIRE TREATED BLOCKING') - {D4} (RFI-10 A)"
+    if b["ref"] == "BLK-14A41-CONT":
+        b["label"] = f"FIRE TREATED 2X WOOD BLOCKING continuous along the Parts A walls (14/A4.1 key 12) - {D4} (RFI-10 A)"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+for w in c["walls"]:
+    if w.get("height_op") and "0.667" not in str(w["height_op"]) and w["id"].startswith(("S21-", "S42-", "VEST-HD-")):
+        h1 = w["height_ft"]
+        w["height_op"] = f"{w['height_op']} -> under the purlin (RFI-01 A): {round(h1 + 0.667, 3)} - 0.667 = {h1}"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+# RFI-15 B: Level 5 under the semi-gloss paint = all painted 5/8" Type X board (walls W-2 / W-3 and ceilings C-3); restrooms W-4 panels excluded
+c["accesorios_none"] = [x for x in c.get("accesorios_none") or [] if x.get("familia") != "Level 5 finish"]
+c["level5_items"] = [{"ref": "L5-PAINTED-TYPE-X", "sf": 7673.76, "source": "A1.2",
+    "label": f"Level 5 under semi-gloss paint (A1.2 W-2 / W-3 / C-3) - {D4} (RFI-15 B, GA-214 / ASTM C840)",
+    "op": "= Material Summary 5/8\" Type X (all painted faces, walls + C-3 ceilings) 7,673.76 SF; restroom W.R. under W-4 panels excluded"}]
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+c["constants"]["level5_tags"] = {"value": ["W-2", "W-3", "C-3"], "source": f"A1.2 finish types W-2 / W-3 / C-3 semi-gloss paint - {D4} (RFI-15 B: Level 5 under semi-gloss, GA-214)"}
+for it in c["level5_items"]:
+    it.setdefault("tag", "W-2")
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+for it in c["level5_items"]:
+    it["wc_tag"] = "W-2/W-3/C-3"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+for it in c["level5_items"]:
+    it["base_ft"] = {"value": 0, "source": "A1.2 base B-1 4\" resilient base over the board: Level 5 carried on the full board SF (no deduction), 0 by the estimator decision RFI-15 B"}
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
