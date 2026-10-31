@@ -48,6 +48,8 @@ al = [
  ("ALC-24", "Finish level (Level 4 / Level 5)", "RFI", "Finish level not printed (no project manual in the set): Level 4 carried (compound + tape), Level 5 in RFI-15."),
 ]
 t["alcances"] = [{"id": i, "nombre": n, "estado": e, "nota": x} for i, n, e, x in al]
+t["alcances"].append({"id": "ALC-25", "nombre": "Fasteners (drywall / framing / sheathing screws, anchors, PAF, Tapcon, bolts)", "estado": "NO APLICA",
+                      "nota": "EXCLUDED - estimator decision 2026-10-31: all fasteners excluded (Material Summary rows at 0 with the computed quantity in the note; clips, angles, track and blocking stay)"})
 t["revisar"] = []
 json.dump(t, open(P + "takeoff.json", "w"), indent=1, ensure_ascii=False)
 # registro marks (registro.py, never by hand)

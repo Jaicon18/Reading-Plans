@@ -302,3 +302,23 @@ an = c["acc_nombres"]
 an["expansion anchors"] = "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C. -> printed product: Simpson Titen HD 3/8\" @ 48\" O.C. (S1.1 7.F/7.G)"
 an["framing screws"] = "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs) -> printed product: #10 screws, each stud flange to track (S1.1 7.E)"
 json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+# ---- rev3: estimator order 2026-10-31 09:08 UTC "Excluye toda la tornillería" (verified in the parent session transcript) ----
+FX = "estimator decision 2026-10-31: all fasteners excluded"
+c["fasteners_excluded"] = {"why": FX, "source": "estimator order 2026-10-31 (exclude all fasteners)"}
+for m in c["misc_items"]:
+    if m["ref"] == "SHEATHING-SCREWS-EXT" and m["qty"]:
+        m["op"] = f"EXCLUDED - {FX}; computed before the exclusion: {m['op']} = 0"
+        m["qty"] = 0
+    if m["ref"] == "FCB43.5-CLIPS" and "fasteners excluded" not in m["label"]:
+        m["label"] += " - clip fasteners (#12-14, #12-24, Tapcon) EXCLUDED (" + FX + ")"
+for r in c["rfis"]:
+    if r["id"] in ("RFI-21", "RFI-26", "RFI-27") and not r["tema"].startswith("CLOSED"):
+        r["tema"] = "CLOSED - EXCLUDED (" + FX + "): " + r["tema"]
+        r["supuesto"] = "0 (fasteners excluded)"
+        r["opciones"]["A"]["delta"] = "0 (excluded)"
+    if r["id"] in ("RFI-09", "RFI-20") and "fasteners excluded" not in r["supuesto"]:
+        r["supuesto"] += " - screws / bolts / anchors of this item EXCLUDED (" + FX + ")"
+    o = r.get("opciones") or {}
+    r["delta"] = f"(A) {o.get('A', {}).get('delta','')} | (B) {o.get('B', {}).get('delta','')} | (C) ____"
+json.dump(c, open(E + "takeoff_canon_AB.json", "w"), indent=1, ensure_ascii=False)
+print("rev3 ok")

@@ -61,3 +61,6 @@ El runner tomó `TAKEOFF_API_KEY` del entorno y lanzó **31 llamadas** a la API 
   - FRT 2x4 en D1 / D2 (11/A5.2): +36.19 LF.
 - **Atribuciones al estimador:** los defaults del skill ahora salen como "default (no sheet): skill standing criterion / precedent of a previous project" (R80e.73). La exclusión de MEP NO se cambió: es orden directa del usuario en esta sesión (cita textual en RFI-08).
 - Compuertas rev2: reglas 0 fallas · bitácora OK · registro OK · 33 / 33 markups. Indicadores contra B&N rev13 sin cambio material (track por LF sin Z-furring −6.0 %).
+
+## 7. rev3 — toda la tornillería excluida (orden del estimador 2026-10-31 09:08 UTC, verificada en la transcripción de la sesión principal)
+Todas las familias de fasteners en 0 con nota EXCLUDED (R80e.77). Los indicadores de screws por SF de board ya no aplican (0 por decisión); el resto sin cambio. Compuertas OK.

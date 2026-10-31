@@ -98,3 +98,14 @@ Fuente: lectura dirigida de S1.1 nota 7, 3-4/S5.1, S5.2 / S5.3, 11-12/A5.2, A4.1
 | Deep-leg slotted deflection track - printed product (see Where it comes from) | LF | 0.00 | 46.83 | +46.83 |
 | Sheathing screws - printed product and spacing (see Where it comes from) | PCS | 0.00 | 1,058.00 | +1,058.00 |
 | Framing clips per stud - printed product (see Where it comes from) | PCS | 0.00 | 144.00 | +144.00 |
+
+## rev3 (09:20–09:27 UTC): toda la tornillería excluida (decisión del estimador 2026-10-31)
+| Material | Unit | rev2 | rev3 | Δ |
+|---|---|---|---|---|
+| Sheathing screws - printed product and spacing (see Where it comes from) | PCS | 1,058.00 | 0.00 | -1,058.00 |
+| Drywall screws #7 x 1-1/4" Type S bugle head (board on 25/20 ga studs) | PCS | 9,586.10 | 0.00 | -9,586.10 |
+| Framing screws #8-18 x 1/2" pan head (25/20 ga studs) | PCS | 684.00 | 0.00 | -684.00 |
+| Power-driven fasteners, slab pins for the bottom track | PCS | 37.76 | 0.00 | -37.76 |
+| Expansion anchors Hilti 1/4" Kwik Bolt II, exterior bottom track @ 8" O.C. | PCS | 6.00 | 0.00 | -6.00 |
+| Heavy-gauge framing screws #10-16 x 3/4" pan head (18/16/14 ga studs) | PCS | 792.00 | 0.00 | -792.00 |
+| Type S-12 drywall screws #6 x 1-1/4" (board on 18/16/14 ga studs) | PCS | 546.37 | 0.00 | -546.37 |
