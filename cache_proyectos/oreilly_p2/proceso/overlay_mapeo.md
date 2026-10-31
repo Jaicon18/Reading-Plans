@@ -1,6 +1,6 @@
 # Overlay mapping - estimator decisions -> this canon (O'Reilly pass 2)
 
-Overlay: `overlay_OReilly_p2.json` (format `overlay.py`, 20 groups, idempotent).
+Overlay: `overlay_OReilly_p2.json` (format `overlay.py`, 22 groups incl. G-rev7, idempotent).
 Test: `overlay.aplicar_canon(...)` -> `canon_ov.json` (copy in this folder) -> `validar_canon.py canon_ov.json tools` = **CANON OK**. `canon.py` -> `partition_types.avisos = []`.
 Rule followed: the answers were given to another pass's RFI numbers. They were mapped **by content**. Only the decision (A/B) was used. Every quantity below was derived from this set (source N/SHEET + op), not copied from RESPUESTAS_RFI_ESTIMADOR.md.
 
@@ -12,7 +12,7 @@ Rule followed: the answers were given to another pass's RFI numbers. They were m
 | 05 | B: no board above the hard lid joists (IBC 703.2) | Hard lid 7/A4.2 (key 6 also points at the top of the joists). The canon carries only the undersides (GWB-CLG-*) | Confirmed, delta 0. Note added to takeoff.inputs_notas | 7/A4.2 |
 | 06 | A: 5/8" X over 1/4" over RC 087F125-33 on piers and head + underside (5/8" X, 1/4", corner bead) | RFI-06 (option A, 8" above the head). QTR-GYP-EXT-MS / RC-EXT-MS (piers + head face), HEAD-A-8 faces, GWB-HEAD-A-UNDERSIDE | rev3: HEAD-A-8 faces per segment (18'-8" 1/A5.2, 12'-0" 2/A3.1 -> 1/A5.2: 11'-4" to 12'-0"); + misc QTR-GYP-HEAD-A-UNDERSIDE 11.82 SF; + trim CB-HEAD-A-UNDERSIDE 30.667 LF. Vestibule 8'-0" segment: new RFI-15 [PENDIENTE] (A 0 / B +5.33 SF) | 1/A5.2, 2/A3.1, 3/A3.1, A5.2 |
 | 07 | A: W-4 panels on the 4 walls of each restroom | frp_none_reason (W-4 was excluded as finish) | + misc W4-PANELS-103 / -104, 253.77 SF each = 2 x (7'-10\" + 8'-6\") x 8.5 - door R.O. 3.333 x 7.167 (family "sanitary wall panels (printed)"). frp_none_reason reworded | A1.2, 1A/A4.1, A5.1 |
-| 09 | A: + 600S200-54 by spacing, L4x4x3/16, 2x2x14ga clips | RFI-10 (option B, partly) | + PEMB-6IN-S42-02 70.0 LF (1/S5.1 @ 24\", 14 x 5.0). + PEMB-6IN-S42-01 55.0 LF (4/S5.1 @ 48\", 11 x 5.0). + L4X4-S42-03 12 pcs (2/S5.1, one per purlin crossing, purlin bay scaled 5.0 ft). The 2x2x14ga clips stay CLIP-2X2-S42-03 = 14 (this canon's count, one per S42-03 kicker; the other pass's count was not copied). RFI-10 CLOSED | 1/S5.1, 2/S5.1, 4/S5.1 |
+| 09 | A: + 600S200-54 by spacing, L4x4x3/16, 2x2x14ga clips | RFI-10 (option B, partly) | + PEMB-6IN-S42-02 70.0 LF (1/S5.1 @ 24\", 14 x 5.0). + PEMB-6IN-S42-01 55.0 LF (4/S5.1 @ 48\", 11 x 5.0). + L4X4-S42-03 12 pcs (2/S5.1, one per purlin crossing). rev6: the scaled 5.0 ft purlin bay was removed; member length / purlin spacing are [PENDIENTE] RFI-19, option A carried (5'-0"+- printed on 2/S5.1). The 2x2x14ga clips stay CLIP-2X2-S42-03 = 14 (this canon's count, one per S42-03 kicker; the other pass's count was not copied). RFI-10 CLOSED | 1/S5.1, 2/S5.1, 4/S5.1 |
 | 10 | A: continuous blocking 14/A4.1 + fixture backing | RFI-12 (accessories part) | + blocking BLK-GRAB-BARS 18.0 LF FRT (grab bars B 48\" + C 18\" + D 42\" per restroom, 10/A4.1 key 13). The continuous 14/A4.1 blocking has no object: see overlay_sin_objeto.md | 10/A4.1, A4.1 accessory schedule |
 | 11 | A: corner bead at header bottoms + J molding against the roof | CB-S42-HDR-BOTTOM (already carried). Board faces ending at the roof in C-2 areas | + trim J-ROOF-EXPOSED 352.82 LF j_bead (sum of the S21 / S42 / EXT-MS2 Parts B/C and plenum faces, op lists each) | A1.1 note 3.C, A1.2 |
 | 12 | A: + 3\"x16ga diagonal strap at S41 | RFI-07 (option B) | + misc STRAP-S41 96.91 LF = 2 sides x SQRT(L^2 + 12^2) for the 4 S41 walls. RFI-07 CLOSED | A1.1 note 2.B |
@@ -27,9 +27,10 @@ Rule followed: the answers were given to another pass's RFI numbers. They were m
 | 22 | Keep excluded: FRT parapet nailers = Div. 06 | RFI-12 (nailers part) | EXCLUDED (takeoff.alcances ALC-FRT-NAILERS). RFI-12 partly closed. Still open: sign backing (A3.1 key 31) and extinguisher blocking (A4.2 key 21) | A3.1 key 11, 1/S5.3 key 4 |
 | 24 | A: shutters not carried, with note | A5.2 general note H (no item in the canon) | Note only (takeoff.inputs_notas SHUTTERS), delta 0 | A5.2 |
 | 25 | B: deflection per A1.1 note 2.C; deep-leg stays | deflection_clips.note_source + DLT-S42-FULL | Confirmed, delta 0 | A1.1 note 2.C, 3/S5.1 |
+| (user rev7) | RFI-19 = A; RFI-03 = A; 2/S5.1 third CONT 6" line is printed -> carry | RFI-19, RFI-03 (CLOSED); PEMB-6IN-S42-02 / -01, L4X4-S42-03, KICKERS-S42-HDR ops; new misc CONT-6IN-S42-03-KICKER | Group G-rev7: RFI-19 and RFI-03 CLOSED, delta 0 (70.0 + 55.0 LF 600S200-54, 12 L4x4, 155.54 LF kickers stay). + CONT-6IN-S42-03-KICKER 50.33 LF 6" stud = S42-03 50'-4" (A1.1) x 1 line | 2/S5.1, A1.1 |
 | (user) | RFI-13 closed by est. 14 | RFI-13 | See 14. This canon's 20.08 LF used | 3/A3.1 |
 | (user) | Exclusions: fasteners, MEP / electrical / civil / cabinets | fasteners_excluded, mep_sweep, accesorios_none | Already in the canon, no change | - |
 
-Not decided (stay open): RFI-03 kicker length, RFI-04 joist span, RFI-05 cornice, RFI-08 board behind box-outs, RFI-11 wall ties / wind beam clips, RFI-12 remainder (sign backing / extinguisher blocking). Already closed in the other pass, no object here: 04, 08, 21, 26-anchors, 27.
+Not decided (stay open): RFI-04 joist span, RFI-05 cornice, RFI-08 board behind box-outs, RFI-11 pier ties / wind beam clips (rev7: head ties TIES-HEAD-A carried as printed), RFI-12 remainder (sign backing / extinguisher blocking). Already closed in the other pass, no object here: 04, 08, 21, 26-anchors, 27.
 
 **Total: 21 decisions applied (20 groups; 10 and 22 share the RFI-12 group). 4 have no object (overlay_sin_objeto.md).**

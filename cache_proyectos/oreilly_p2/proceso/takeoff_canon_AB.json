@@ -2723,6 +2723,24 @@
    "source": "6/A4.2",
    "op": "6/A4.2 key 6 wraps the bottom of the suspended header wall at B.O. FRAMING EL. 106'-10\": width = type S42 printed 5/8\" + 3 5/8\" + 5/8\" = 4.875\" = 0.40625 ft (S42/A1.1) x suspended length S42-02 25.455 + S42-03 50.333 = 75.788 LF (same as CB-S42-HDR-BOTTOM / BLK-S42-HDR-NAILERS) = 30.79 SF",
    "label": "5/8\" TYPE \"X\" GYPSUM BOARD at the bottom of the S42 suspended header walls (6/A4.2 key note 6)"
+  },
+  {
+   "ref": "TIES-HEAD-A",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 140.0,
+   "unit": "LF",
+   "source": "3/S5.3",
+   "op": "3-5/8\"x18 ga stud ties 362S162-43 (43 mil) @ 48\" O.C. (3/S5.3 key note 19, min (2) #8 screws to each stud) across each 6\" + 8\" stud pair of the storefront A head wall HEAD-A-6 / HEAD-A-8 (3/S5.3 is cut twice on the storefront A head, S4.1 framing key plan): pairs @ 16\" O.C. (3/S5.3 keys 17 / 18) over the printed 38'-8\" R.O. (A5.2 type A) = 464\"/16\" = 29 + 1 = 30 pairs x rows @ 48\" over the printed 9.333 ft head (2/A3.1 111'-4\" to 120'-8\") ROUNDUP(9.333/4)+1 = 4 rows (3/S5.3 draws ties at the top track, intermediate and bottom track) = 120 ties x 1'-2\" (printed 6\" + 8\" = 1'-2\" on 3/S5.3; the tie is drawn across the full pair) = 140.0 LF. Piers EXT-MS1 / EXT-MS2: not cut by 3/S5.3, no ties on 1/A3.1 -> RFI-11 [PENDIENTE] (B +98.0 LF)",
+   "label": "3-5/8\"x18 ga METAL STUD TIES (362S162-43) @ 48\" O.C. (3/S5.3 key note 19) - storefront A head"
+  },
+  {
+   "ref": "STUD-DBL-CJ-S42",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 46.02,
+   "unit": "LF",
+   "source": "2/A4.2",
+   "op": "A4.2 key note 4 '362S162-33 cold form metal studs doubled at control joint' (2/A4.2 draws 2 studs each side; framing independent across the joint): +1 stud each side at the 2 S42 control joints 2/A4.2 'ABOVE' (A1.1; free nodes N22 / N23 and N25 / N26, which carry 1 end stud each in the stud count): S42-01 14.505 + S42-02 7.672 + S42-03 8.202 + S42-04 15.644 = 46.02 LF (each side at its own wall stud height: full height walls / suspended header walls under the purlin, RFI-01). S21 Z-furring control joints (CJ-S21) and the 7/A3.2 vee joint S21 / pier: no doubled framing printed, nothing added",
+   "label": "362S162-33 studs doubled at control joint (2/A4.2 key note 4)"
   }
  ],
  "plywood_strips": [
@@ -3111,23 +3129,32 @@
   {
    "id": "RFI-11",
    "familia": "exterior wall ties and wind beam clips",
-   "motivo": "3/S5.3 ties 362S162-43 @ 48\" (19) and FCB43.5 clips at PEMB wind beams (16) on EXT-MS / HEAD-A: wind beam elevations by PEMB.",
-   "pregunta": "3/S5.3 ties 362S162-43 @ 48\" (19) and FCB43.5 clips at PEMB wind beams (16) on EXT-MS / HEAD-A: wind beam elevations by PEMB.",
+   "motivo": "rev7: the 3/S5.3 ties (key 19, 362S162-43 @ 48\" O.C., 1'-2\" across the 6\" + 8\" pair) are carried on the storefront A head (TIES-HEAD-A 140.0 LF: S4.1 key plan cuts 3/S5.3 twice on the head). Still open: (1) ties on the piers EXT-MS1 / EXT-MS2: 3/S5.3 is not cut at the piers (S4.1) and the pier section 1/A3.1 draws / keys no ties (keys 6 / 7 'refer to structural'); (2) FCB43.5 clips (3/S5.3 key 16) at the PEMB wind beams: wind beam elevations / extent by PEMB ('EL. SEE PEMB DRAWINGS'), no count printed.",
+   "pregunta": "Do the 362S162-43 stud ties @ 48\" (3/S5.3 key 19) also go on the 6'-0\" piers EXT-MS1 / EXT-MS2, and how many FCB43.5 clips (key 16) per stud at the PEMB wind beams?",
    "source": "3/S5.3",
-   "delta": "(A) 0 | (B) +ties ~5 rows x 1.17 ft per stud pair",
+   "delta": "(A) 0 (carried: TIES-HEAD-A 140.0 LF; no pier ties, no wind beam clips) | (B) +98.0 LF 362S162-43 pier ties (2 piers x 6 pairs x 7 rows x 1'-2\") + 84 pcs FCB43.5 (one per 8\" stud at each of the 2 wind beams drawn: head 30 x 2 + piers 2 x 6 x 2) | (C) Other: ____",
    "opciones": {
     "A": {
-     "texto": "Not carried",
-     "source": "3/S5.3",
-     "delta": "0"
+     "texto": "Ties only where 3/S5.3 is cut (storefront A head, carried); pier ties and wind beam clips not carried",
+     "source": "S4.1",
+     "delta": "0 (carried)"
     },
     "B": {
-     "texto": "Carry ties @ 48\" vertical per stud pair and 2 clips per stud at each wind beam",
-     "cita": "AISI S240",
-     "delta": "+ties ~5 rows x 1.17 ft per stud pair"
+     "texto": "Same 1'-2\" 6\" + 8\" assembly on the piers (1/A3.1): ties @ 48\" per pair, pairs @ 16\" over the printed 6'-0\" (ROUNDUP(72/16)+1 = 6) x rows over the printed 20.667 ft (1/A3.1 100'-0\" to 120'-8\": ROUNDUP(20.667/4)+1 = 7) = 84 ties x 1'-2\" = 98.0 LF; FCB43.5 one per 8\" stud at each of the 2 wind beams drawn (3/S5.3, 1/A3.1) = 84 pcs",
+     "cita": "No trade code sets tie / clip layout (AISI S240: per engineer of record); 3/S5.3 keys 16 / 19, 1/A3.1",
+     "delta": "+98.0 LF 362S162-43; +84 pcs FCB43.5"
     },
     "C": ""
-   }
+   },
+   "sources_checked": [
+    "3/S5.3",
+    "1/S5.3",
+    "S4.1 framing key plan",
+    "1/A3.1",
+    "2/A3.1",
+    "7/A3.2"
+   ],
+   "img": "img_rev7/rev7_p1_A3.1_1_pier_no_ties.png"
   },
   {
    "id": "RFI-12",

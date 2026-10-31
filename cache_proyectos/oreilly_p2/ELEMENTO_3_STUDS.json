@@ -1,12 +1,12 @@
 {
  "element": 3,
  "name": "STUDS por tamaño/gauge y Z-furring",
- "elapsed_min": 7.6,
+ "elapsed_min": 7.3,
  "family_totals_lf_net": {
   "1-1/2\" Z-furring": 2517.5,
   "8\" stud (todos los gauges)": 537.32,
-  "6\" stud (todos los gauges)": 1299.57,
-  "3-5/8\" stud (todos los gauges)": 1865.52
+  "6\" stud (todos los gauges)": 1349.9,
+  "3-5/8\" stud (todos los gauges)": 2149.54
  },
  "walls": [
   {
@@ -536,7 +536,7 @@
    "familia": "3-5/8\" stud (todos los gauges)",
    "ref": "KICKERS-S42-HDR",
    "source": "1/S5.1",
-   "op": "count CONFIRMADO: kickers 362S162-33 @ 48\" O.C. (MAX) printed on 1/S5.1 and 2/S5.1: (ROUNDUP(25.455/4)+1 = 8) S42-02 + (ROUNDUP(50.333/4)+1 = 14) S42-03 = 22 kickers; length [PENDIENTE] RFI-03 option A carried: 2/S5.1 prints only the horizontal reach 5'-0\"+- (rise / angle not printed; the 45 deg is drawn, not dimensioned): 5.0/cos45 = 7.07 ft x 22 = 155.54 LF (option B 121.58 LF, delta -33.96 LF, see RFI-03)",
+   "op": "count CONFIRMADO: kickers 362S162-33 @ 48\" O.C. (MAX) printed on 1/S5.1 and 2/S5.1: (ROUNDUP(25.455/4)+1 = 8) S42-02 + (ROUNDUP(50.333/4)+1 = 14) S42-03 = 22 kickers; length RFI-03 = A (user decision rev7, CLOSED: 45 deg kickers): 2/S5.1 prints only the horizontal reach 5'-0\"+- (rise / angle not printed; the 45 deg is drawn, not dimensioned): 5.0/cos45 = 7.07 ft x 22 = 155.54 LF (option B 121.58 LF, delta -33.96 LF, see RFI-03)",
    "qty": 155.54,
    "unit": "LF"
   },
@@ -565,10 +565,26 @@
    "unit": "LF"
   },
   {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "TIES-HEAD-A",
+   "source": "3/S5.3",
+   "op": "3-5/8\"x18 ga stud ties 362S162-43 (43 mil) @ 48\" O.C. (3/S5.3 key note 19, min (2) #8 screws to each stud) across each 6\" + 8\" stud pair of the storefront A head wall HEAD-A-6 / HEAD-A-8 (3/S5.3 is cut twice on the storefront A head, S4.1 framing key plan): pairs @ 16\" O.C. (3/S5.3 keys 17 / 18) over the printed 38'-8\" R.O. (A5.2 type A) = 464\"/16\" = 29 + 1 = 30 pairs x rows @ 48\" over the printed 9.333 ft head (2/A3.1 111'-4\" to 120'-8\") ROUNDUP(9.333/4)+1 = 4 rows (3/S5.3 draws ties at the top track, intermediate and bottom track) = 120 ties x 1'-2\" (printed 6\" + 8\" = 1'-2\" on 3/S5.3; the tie is drawn across the full pair) = 140.0 LF. Piers EXT-MS1 / EXT-MS2: not cut by 3/S5.3, no ties on 1/A3.1 -> RFI-11 [PENDIENTE] (B +98.0 LF)",
+   "qty": 140.0,
+   "unit": "LF"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "STUD-DBL-CJ-S42",
+   "source": "2/A4.2",
+   "op": "A4.2 key note 4 '362S162-33 cold form metal studs doubled at control joint' (2/A4.2 draws 2 studs each side; framing independent across the joint): +1 stud each side at the 2 S42 control joints 2/A4.2 'ABOVE' (A1.1; free nodes N22 / N23 and N25 / N26, which carry 1 end stud each in the stud count): S42-01 14.505 + S42-02 7.672 + S42-03 8.202 + S42-04 15.644 = 46.02 LF (each side at its own wall stud height: full height walls / suspended header walls under the purlin, RFI-01). S21 Z-furring control joints (CJ-S21) and the 7/A3.2 vee joint S21 / pier: no doubled framing printed, nothing added",
+   "qty": 46.02,
+   "unit": "LF"
+  },
+  {
    "familia": "6\" stud (todos los gauges)",
    "ref": "PEMB-6IN-S42-02",
    "source": "1/S5.1",
-   "op": "6\"x2\"x16ga (600S200-54) @ 24\" O.C. attached to each purlin along the S42-02 header (1/S5.1, printed spacing): ROUNDUP(25.455/2)+1 = 14 members x 5.0 ft = 70.0 LF; member length [PENDIENTE] RFI-19 option A carried (5'-0\"+- printed on 2/S5.1, kicker reach; length not printed on 1/S5.1, PEMB shop drawing); option B 140.0 LF (+70.0)",
+   "op": "6\"x2\"x16ga (600S200-54) @ 24\" O.C. attached to each purlin along the S42-02 header (1/S5.1, printed spacing): ROUNDUP(25.455/2)+1 = 14 members x 5.0 ft = 70.0 LF; member length RFI-19 = A (user decision rev7, CLOSED) (5'-0\"+- printed on 2/S5.1, kicker reach; length not printed on 1/S5.1, PEMB shop drawing); option B 140.0 LF (+70.0)",
    "qty": 70.0,
    "unit": "LF"
   },
@@ -576,8 +592,24 @@
    "familia": "6\" stud (todos los gauges)",
    "ref": "PEMB-6IN-S42-01",
    "source": "4/S5.1",
-   "op": "6\"x2\"x16ga (600S200-54) @ 48\" O.C. fastened to each purlin along S42-01 (4/S5.1, printed spacing): ROUNDUP(38.667/4)+1 = 11 members x 5.0 ft = 55.0 LF; member length [PENDIENTE] RFI-19 option A carried (5'-0\"+- printed on 2/S5.1; length not printed on 4/S5.1, PEMB shop drawing); option B 110.0 LF (+55.0)",
+   "op": "6\"x2\"x16ga (600S200-54) @ 48\" O.C. fastened to each purlin along S42-01 (4/S5.1, printed spacing): ROUNDUP(38.667/4)+1 = 11 members x 5.0 ft = 55.0 LF; member length RFI-19 = A (user decision rev7, CLOSED) (5'-0\"+- printed on 2/S5.1; length not printed on 4/S5.1, PEMB shop drawing); option B 110.0 LF (+55.0)",
    "qty": 55.0,
+   "unit": "LF"
+  },
+  {
+   "familia": "6\" stud (todos los gauges)",
+   "ref": "CONT-6IN-S42-03-KICKER",
+   "source": "2/S5.1",
+   "op": "2/S5.1 prints a third continuous line at the kicker top of S42-03: 'CONT. 6\"x2\"x16ga STUD (600S200-54) FASTENED TO PURLIN W/ (4) #10 SDS' (besides the 2 CONT lines 'each side' at the wall top, CONT-6IN-S42-03); run = S42-03 printed 50'-4\" (A1.1) = 1 x 50.333 = 50.33 LF (user decision rev7: printed, carried)",
+   "qty": 50.33,
+   "unit": "LF"
+  },
+  {
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "ref": "TIES-PIERS-EXT-MS",
+   "source": "3/S5.3",
+   "op": "[PENDIENTE] conservative assumption RFI-11 option B (3/S5.3 not cut at the piers on S4.1; 1/A3.1 keys no ties): 362S162-43 ties (3/S5.3 key 19) @ 48\" per 6\"+8\" pair, pairs @ 16\" over the printed 6'-0\" (ROUNDUP(72/16)+1 = 6) x rows over the printed 20.667 ft (1/A3.1 100'-0\" to 120'-8\": ROUNDUP(20.667/4)+1 = 7) x 2 piers = 84 ties x 1'-2\" (printed 3/S5.3) = 98.0 LF",
+   "qty": 98.0,
    "unit": "LF"
   }
  ]

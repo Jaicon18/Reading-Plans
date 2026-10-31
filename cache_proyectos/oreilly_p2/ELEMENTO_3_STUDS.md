@@ -55,3 +55,11 @@ Fuentes de tamaño/gauge/O.C.: INTERIOR WALL TYPES A1.1 (S21 150ZF125-18 @ 24"; 
 - 2/S5.1 imprime una 3.ª línea continua 600S200-54 en el tope de kickers de S42-03 (+50.33 LF), NO cargada → para el estimador.
 - RFI-03: largo de kicker no impreso: A 155.54 LF cargado / B 121.58 LF (−33.96) por elevaciones impresas (1'-0"± sobre ceiling 111'-6" a purlin RFI-01).
 - RFI-04: dirección de joists de office / R.R. no impresa. RFI-01: alturas S21 / S42 con purlin 8" supuesto.
+
+## rev2 (rev7 del canon) — cambios
+- 3.ª línea CONT 600S200-54 en el tope de kickers de S42-03, IMPRESA en 2/S5.1: + 50.33 LF (6"). RFI-19 = A y RFI-03 = A cerrados (usuario).
+- Stud ties 3/S5.3 key 19 (362S162-43 @ 48", 1'-2" sobre el par 6"+8"): head storefront A (S4.1 corta 3/S5.3 dos veces) = 30 pares × 4 filas × 1'-2" = + 140.0 LF; piers EXT-MS1/MS2 no cortados ni dibujados (1/A3.1) → supuesto conservador cargado RFI-11 B = + 98.0 LF (84 ties × 1'-2"), A = 0.
+- Studs dobles en control joints: impresos en A4.2 key 4 ("362S162-33 studs doubled at control joint", 2/A4.2) → +1 stud por lado en las 2 juntas de S42 a la altura de cada wall = 14.505 + 7.672 + 8.202 + 15.644 = + 46.02 LF. S21 / piers: nada impreso (7/A3.2 solo vee joint; S21 = Z-furring).
+- Z-furring detrás de S24: confirmado sin cambio. Sube al eave bajo purlin (E 13.958 = low eave 114'-7 1/2" − 8"; S zona R.R. 104 14.055 local, promedio de rake 14.844 exacto para el wall). Sin doble conteo: el Z-furring está en S21-E/S; S24 solo 362S162-33 a 8'-6" (212.5 LF). Total Z-furring 2,517.50 (zonas S24 ≈ 265 LF dentro). La cifra 321.55 de la otra lectura reinicia el conteo 1+ROUNDUP por zona aunque el furring es continuo.
+- Totales nuevos: 3-5/8" 2,149.54 LF (+284.02: ties 140.0 + 98.0, dobles CJ 46.02) · 6" 1,349.90 LF (+50.33) · 8" 537.32 · Z-furring 2,517.50.
+- Nota: HEAD-A tiene 31 studs por programa (38.667 redondeado); la R.O. impresa 38'-8" da 30 pares (usado en ties).
