@@ -1,4 +1,4 @@
-# ELEMENTO 1 — PARTITIONS rev3 (O'Reilly Evans CO #1, pasada 2)
+# ELEMENTO 1 — PARTITIONS rev4 (rev3 + abajo) (O'Reilly Evans CO #1, pasada 2)
 rev3 = rev2 + (1) RFI-01 con −0.667 ft = purlin 8" SUPUESTO por shop drawing PEMB [PENDIENTE] (se quitó el 10" escalado, prohibido por #0) · (2) board por cara SIN descontar puertas (R70.3): quitadas deducciones en S21-N (doors 2, 3, 7), S43-OF-S (door 4), S43-RR-S (doors 5, 6); se quedan ventanas D1/D2 de S21-S (76.49 SF) y bandas de head de storefronts A/B1/B2/C · (3) head storefront A revisado por tramo (img_rev3/) · (4) dueño de esquina documentado. Números: overlay.py + canon.py / partition_types.py (modo eje), avisos = []. Tiempo: rev1 ~61 + rev2 ~38 + rev3 ~15 min.
 
 ## Regla de dueño de esquina (proceso/revision_dirigida.md § Corner ownership)
@@ -11,10 +11,10 @@ R70.2 (SKILL.md): "Cada esquina L / T tiene UN dueño: un wall llega a la cara e
 |---|---|---|---|---|---|---|
 | S21 | S21-N | 85.000 | 14.844 | 1,261.74 | 1,261.74 | 1 cara 5/8" X |
 | S21 | S21-E | 84.646 | 13.958 | 1,181.49 | 924.71 | 1 cara X; 28.531 LF detrás de S24 solo arriba del hard lid (4.958) |
-| S21 | S21-S | 85.000 | 14.844 | 1,261.74 | 1,093.66 | 1 cara X; 9.357 LF detrás de S24 (5.055); −D1/D2 76.49 |
+| S21 | S21-S | 85.000 | 14.844 | 1,261.74 | 1,170.15 | 1 cara X; 9.357 LF detrás de S24 (5.055); D1/D2 sin descontar (BE-110) |
 | S21 | S21-W1 | 9.156 | 15.729 | 144.01 | 144.01 | 1 cara X |
 | S21 | S21-W2 | 24.823 | 15.729 | 390.44 | 390.44 | 1 cara X |
-| **S21 subtotal** | 5 | **288.62** | | **4,239.42** | **3,814.56** | |
+| **S21 subtotal** | 5 | **288.62** | | **4,239.42** | **3,891.05** | |
 | S24 | OF / RR / RRS | 11.708 / 16.823 / 8.854 = 37.38 | 8.5 | 317.78 | 317.77 | 1 cara: X / X WR / X WR |
 | S41 | B1V / B1H / B2H / B2V | 6.46 | 12.0 | 77.52 | 77.52 | 1 cara X |
 | S42 | S42-01+S42-02 | 38.667 + 25.455 = 64.122 | 11.792 pond. (14.505 / 7.672) | 756.15 | 1,368.50 | 2 caras X |
@@ -28,6 +28,12 @@ R70.2 (SKILL.md): "Cada esquina L / T tiene UN dueño: un wall llega a la cara e
 | OTHER | VH-C / VH-B1 / VH-B2 | 8.75 / 5.667 / 5.667 | 4.286 | 86.08 | 13.40 | 600S162-43 18 ga (dec. 14) |
 Misc del head (RFI-06 = A): underside 13.42 SF 5/8 X + 11.82 SF 1/4" + 30.667 LF corner bead; 1/4" + RC en piers.
 
-Interior S21–S61: 516.31 LF · Wall SF 6,451.91 · Board SF 7,544.27.
+Interior S21–S61: 516.31 LF · Wall SF 6,451.91 · Board SF 7,620.76 (rev4).
 S21 detrás de S24: 37.888 LF (E 11.708 + 16.823; S 9.357) · board arriba del hard lid 188.76 SF → S21 CON 288.62 LF / SIN 250.73 LF.
 Pendiente #0 fuera de partitions: purlin bay 5.0 ft escalado en G09 (1/S5.1, 4/S5.1: 600S200 / L4x4) → se corrige en ELEMENTO 3/5.
+
+## rev4 (BE-110 + piers / head storefront, proceso/rev4_cambios.md, img_rev4/)
+- S21-S: quitado el descuento de ventanas D1/D2 (76.49 SF) en canon + overlay G01/G02 → board S21-S 1,170.15 SF. Ninguna otra deducción de ventana / storefront en faces de board. Level 5 / W-4 (acabados) sin cambio.
+- Piers EXT-MS1-8 / EXT-MS2-8 (cara int. Parts A): board a 12'-0" A.F.F. 1/A3.1 (corte en el pier de 6'-0") dibuja el board terminando justo arriba del ACT (21), en la línea del board del head; arriba solo insulation (16), sin board al roof. Borde superior SIN cota propia → [PENDIENTE] RFI-16: A = 12.0 ft (cargado, delta 0) · B = a 16.396 ft: +39.92 SF 5/8" X + 39.92 SF 1/4" + 27.24 LF RC (a 15.729 bajo purlin RFI-01: +33.86 / +33.86 SF / +18.16 LF) · C abierto.
+- Head HEAD-A-8 (cara int.): 11'-4" (A5.2 type A "11'-4\" (R.O.)"; 2/A3.1 B.O. SHEATHING EL. 111'-4") → 12'-0" (1/A5.2: 8" impreso) = 30.667 LF × 0.667 ft = 20.45 SF, CONFIRMADO. La cifra 5.06 / 16.4 de la otra lectura sale de la cota EXTERIOR 5'-0 3/4" de 1/A3.1 (111'-4" → T.O. HIGH EAVE 116'-4 3/4"), que no es borde de board: rechazada.
+- Tiempo rev4 ~10 min.
