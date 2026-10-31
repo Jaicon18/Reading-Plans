@@ -22,7 +22,7 @@
     "ori": "V",
     "c0": 309.1,
     "c1": 310.7,
-    "lo": 319.2,
+    "lo": 318.1,
     "hi": 1086.6,
     "sheet": "A1.1"
    },
@@ -31,7 +31,7 @@
     "sheet_raster": true
    },
    "length_ft": 85.0,
-   "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]",
+   "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]; band: A1.1 vector: the S21 furring line of this facade starts at the east CMU face (317.2-318.1 pt) and runs past the S21-E furring / S24 ends; band from the S21-E band c0 318.1 pt (owner of both corners, R70.2); 768.5 pt / 9.04 = 85.01 ft [directed review, pass 2]",
    "length_op": "25.0 + 60.0 = 85.0",
    "length_status": "DERIVADO",
    "length_basis": "CMU face to CMU face (corner owner); E / W furring walls net of 2 x 2-1/8\"",
@@ -213,7 +213,7 @@
     "ori": "V",
     "c0": 1074.9,
     "c1": 1076.0,
-    "lo": 319.2,
+    "lo": 318.1,
     "hi": 1086.6,
     "sheet": "A1.1"
    },
@@ -222,7 +222,7 @@
     "sheet_raster": true
    },
    "length_ft": 85.0,
-   "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]",
+   "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]; band: A1.1 vector: the S21 furring line of this facade starts at the east CMU face (317.2-318.1 pt) and runs past the S21-E furring / S24 ends; band from the S21-E band c0 318.1 pt (owner of both corners, R70.2); 768.5 pt / 9.04 = 85.01 ft [directed review, pass 2]",
    "length_op": "25.0 + 60.0 = 85.0",
    "length_status": "DERIVADO",
    "length_basis": "CMU face to CMU face (corner owner); E / W furring walls net of 2 x 2-1/8\"",
@@ -658,8 +658,21 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.667,
-     "height_source": "1/A5.2 head detail: 5/8\" type X + 1/4\" on 7/8\" resilient channel drawn 8\" above the storefront head (printed 8\") [resolution A vs B, pass 2]",
+     "length_ft": 30.667,
+     "length_source": "A5.2 window type A printed segments 18'-8\" (R.O.) + 12'-0\" (R.O.) on the Parts Area A side; the 8'-0\" (HOLD) segment is the vestibule 100A [directed review, pass 2]",
+     "length_op": "18.667 + 12.0 = 30.667",
+     "height_source": "1/A5.2 head detail: 5/8\" type X + 1/4\" on 7/8\" resilient channel drawn 8\" above the storefront head (printed 8\"); 1/A3.1 / 2/A3.1 key notes 20 / 33 / 35 to 6\" above the C-1 ACT 11'-6\" (A1.2)",
      "board_base_ft": 11.333
+    },
+    {
+     "side": "B",
+     "room": "Vestibule 100A (C-3 ceiling at the head: no wall board)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.0,
+     "length_ft": 8.0,
+     "length_source": "A5.2 window type A 8'-0\" (HOLD) printed",
+     "height_source": "Vestibule 100A segment (8'-0\" HOLD, A5.2 type A): C-3 GWB ceiling at 11'-4\" (A1.2) = the storefront head 11'-4\" R.O.; 3/A3.1 draws no wall board above the head inside the vestibule (joists 600S162-43 on the head line) -> no face [directed review, pass 2]"
     }
    ],
    "source": "3/S5.3",
@@ -766,7 +779,7 @@
     "sheet_raster": true
    },
    "length_ft": 11.708,
-   "length_source": "A1.1 office width 11'-0\" (face of stud, general note B) + 2 x (3-5/8\" + 5/8\") side walls",
+   "length_source": "A1.1 printed 11'-0\" between the S43-OF-W / S43-OF-E inner stud faces + S43 stud 3-5/8\" + outer board 5/8\" each end (S24 owns both corners: A1.1 vector, its hatch fills the corner squares); no enlarged plan of the office [directed review, pass 2]",
    "length_op": "11.0 + 2 x 4.25/12 = 11.708",
    "length_status": "DERIVADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -816,7 +829,7 @@
     "sheet_raster": true
    },
    "length_ft": 16.823,
-   "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (face of stud, general note B: S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S24-RR runs under its end) + S24-RRS stud 3-5/8\" (S24-RR owns that corner up to the S21-S furring) [resolution A vs B, pass 2]",
+   "length_source": "A1.1 and 1A/A4.1 printed 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner face) + S43-RR-W stud + outer board 4-1/4\" + S24-RRS stud 3-5/8\" (S24-RR owns both corners) [directed review, pass 2]",
    "length_op": "7.833 + 0.5 + 7.833 + 4.25/12 + 3.625/12 = 16.823",
    "length_status": "DERIVADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -878,8 +891,8 @@
     "sheet_raster": true
    },
    "length_ft": 8.854,
-   "length_source": "A1.1 printed 8'-6\" (break area string: S24 inner face to S43-RR-S inner face, same lines) + S43-RR-S stud + outer board 4-1/4\" (S24-RRS runs to its outer face) [resolution A vs B, pass 2]",
-   "length_op": "8.5 + 4.25/12 = 8.854",
+   "length_source": "1A/A4.1 printed 8'-6\" + 3 5/8\" (S24-RR face to the S43-RR-S inner stud face, + the S43-RR-S stud) and A1.1 8'-6\" (break area) + S43-RR-S outer board 5/8\" (S24-RRS owns the corner) [directed review, pass 2]",
+   "length_op": "8.5 + 3.625/12 + 0.625/12 = 8.854",
    "length_status": "DERIVADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
    "height_ft": 8.5,
@@ -919,7 +932,7 @@
     "ori": "V",
     "c0": 719.4,
     "c1": 723.6,
-    "lo": 321.7,
+    "lo": 322.4,
     "hi": 394.0,
     "sheet": "A1.1"
    },
@@ -928,7 +941,7 @@
     "sheet_raster": true
    },
    "length_ft": 8.0,
-   "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]",
+   "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
    "length_op": "8'-0\" printed",
    "length_status": "CONFIRMADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -976,7 +989,7 @@
     "ori": "V",
     "c0": 821.5,
     "c1": 825.5,
-    "lo": 321.7,
+    "lo": 322.4,
     "hi": 394.0,
     "sheet": "A1.1"
    },
@@ -985,7 +998,7 @@
     "sheet_raster": true
    },
    "length_ft": 8.0,
-   "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]",
+   "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
    "length_op": "8'-0\" printed",
    "length_status": "CONFIRMADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -1107,7 +1120,7 @@
     "ori": "V",
     "c0": 923.3,
     "c1": 927.3,
-    "lo": 321.7,
+    "lo": 322.4,
     "hi": 398.7,
     "sheet": "A1.1"
    },
@@ -1116,7 +1129,7 @@
     "sheet_raster": true
    },
    "length_ft": 8.5,
-   "length_source": "A1.1 printed 8'-6\" (break area string at x 873 pt: extension lines at y 321.7 / 398.7 pt = S24-RR inner face to S43-RR-S inner face, the span of S43-RR-W) [resolution A vs B, pass 2]",
+   "length_source": "A1.1 printed 8'-6\" (break area string at x 873 pt: extension lines at y 321.7 / 398.7 pt = S24-RR inner face to S43-RR-S inner face, the span of S43-RR-W) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
    "length_op": "8'-6\" printed",
    "length_status": "CONFIRMADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -1221,7 +1234,7 @@
     "c0": 398.3,
     "c1": 402.2,
     "lo": 923.3,
-    "hi": 1072.4,
+    "hi": 1071.8,
     "sheet": "A1.1"
    },
    "tag_manual": {
@@ -1229,7 +1242,7 @@
     "sheet_raster": true
    },
    "length_ft": 16.521,
-   "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S43-RR-S owns that corner) [resolution A vs B, pass 2]",
+   "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S43-RR-S owns that corner) [resolution A vs B, pass 2]; band: A1.1 vector: S24-RRS hatch runs down to the S43-RR-S outer face (door 6 jamb stub); S43-RR-S ends at the S24-RRS face 1071.8 pt (S24-RRS owns the corner, R70.2) [directed review, pass 2]",
    "length_op": "7.833 + 0.5 + 7.833 + 4.25/12 = 16.521",
    "length_status": "DERIVADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
@@ -1569,22 +1582,22 @@
    "page": 37,
    "id": "S42-02",
    "tag": "S42",
-   "location": "Grid B line, suspended header wall from the control joint to the S42-03 corner (B.O. FRAMING 106'-10\")",
+   "location": "Grid B line, suspended header wall from the control joint past the S42-03 corner to its free end 6.7 ft east (A1.1) (B.O. FRAMING 106'-10\")",
    "band": {
     "ori": "H",
     "c0": 554.0,
     "c1": 558.0,
     "lo": 659.4,
-    "hi": 827.6,
+    "hi": 888.3,
     "sheet": "A1.1"
    },
    "tag_manual": {
     "source": "S42/A1.1",
     "sheet_raster": true
    },
-   "length_ft": 18.74,
-   "length_source": "A1.1 printed 18'-4\" (control joint to the west face of S42-03) + S42-03 thickness 4.875\" (corner owned)",
-   "length_op": "18.333 + 4.875/12 = 18.74",
+   "length_ft": 25.455,
+   "length_source": "A1.1 printed 18'-4\" (control joint to the west face of S42-03) + S42-03 thickness 4.875\" + header wall continuation east of the corner drawn on A1.1 (dashed double line 554.0-558.0 pt from 827.6 to 888.3 pt, no dimension; S4.1 key plan stops the header at the corner - RFI-14) [directed review, pass 2]",
+   "length_op": "18.333 + 4.875/12 + (888.3 - 827.6) pt / 9.04 = 18.74 + 6.715 = 25.455",
    "length_status": "DERIVADO",
    "length_basis": "face of framing (general note B, A1.1) between the adjoining wall faces; corner owned by one wall",
    "height_ft": 8.339,
@@ -1605,7 +1618,19 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 5.167,
+     "length_ft": 18.74,
+     "length_source": "18'-4\" + S42-03 4.875\" (A1.1)",
      "height_source": "6/A4.2: B.O. FRAMING 106'-10\" + 4'-8\" to FINISH CEILING 111'-6\" + 6\" = 5.167 (S42/A1.1 Parts Area A to 12'-0\")"
+    },
+    {
+     "side": "A",
+     "room": "Parts Area B 101",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 8.339,
+     "length_ft": 6.715,
+     "length_source": "A1.1 vector 827.6-888.3 pt / 9.04 (continuation east of S42-03) [directed review, pass 2]",
+     "height_source": "6/A4.2 header wall + S42/A1.1 Parts Area B to bottom of roof framing (same line as S42-02 Parts C face): 15.172 - 6.833"
     },
     {
      "side": "B",
@@ -1613,6 +1638,8 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 8.339,
+     "length_ft": 25.455,
+     "length_source": "= wall length",
      "height_source": "6/A4.2 header wall + S42/A1.1 Parts Area C to bottom of roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
     }
    ],
@@ -2034,12 +2061,10 @@
   },
   {
    "id": "N24",
-   "kind": "L",
-   "source": "A1.1 (raster, wall ends read on the image)",
-   "walls": [
-    "S42-02",
-    "S42-03"
-   ]
+   "kind": "T",
+   "source": "A1.1 (raster): S42-02 header continues past the corner [directed review, pass 2]",
+   "branch": "S42-03",
+   "through": "S42-02"
   },
   {
    "id": "N25",
@@ -2235,6 +2260,13 @@
    "source": "A1.1 (raster, wall ends read on the image)",
    "wall": "VH-B1",
    "why": "bears on the exterior head wall line"
+  },
+  {
+   "id": "N50",
+   "kind": "free",
+   "source": "A1.1 (raster) 888.3 pt [directed review, pass 2]",
+   "wall": "S42-02",
+   "why": "header wall continuation ends free east of S42-03 (A1.1); not on S4.1 - RFI-14"
   }
  ],
  "details": {
@@ -2560,19 +2592,19 @@
   {
    "ref": "KICKERS-S42-HDR",
    "familia": "3-5/8\" stud (todos los gauges)",
-   "qty": 141.4,
+   "qty": 155.54,
    "unit": "LF",
    "source": "1/S5.1",
-   "op": "(ROUNDUP(18.74/4)+1 = 6) + (ROUNDUP(50.333/4)+1 = 14) = 20 kickers x 7.07 ft (5'-0\"+- horizontal 2/S5.1 at 45 deg drawn: 5.0/cos45) = 141.4 LF (kicker length not printed - RFI-03)",
+   "op": "(ROUNDUP(25.455/4)+1 = 8) + (ROUNDUP(50.333/4)+1 = 14) = 22 kickers x 7.07 ft (5'-0\"+- horizontal 2/S5.1 at 45 deg drawn: 5.0/cos45) = 155.54 LF (kicker length not printed - RFI-03)",
    "label": "3-5/8\"x20ga kicker bracing (362S162-33) @ 48\" O.C. MAX (1/S5.1, 2/S5.1)"
   },
   {
    "ref": "LAT-STRUT-S42-HDR",
    "familia": "3-5/8\" stud (todos los gauges)",
-   "qty": 69.07,
+   "qty": 75.79,
    "unit": "LF",
    "source": "5/S5.1",
-   "op": "continuous lateral strut at kicker mid span along the header walls: 18.74 + 50.333 = 69.07 LF",
+   "op": "continuous lateral strut at kicker mid span along the header walls: 25.455 + 50.333 = 75.79 LF",
    "label": "3-5/8\"x20ga lateral strut (362S162-33) @ mid span (1/S5.1, 5/S5.1)"
   },
   {
@@ -2581,7 +2613,7 @@
    "qty": 64.0,
    "unit": "LF",
    "source": "5/S5.1",
-   "op": "angled strut brace at each end of wall and @ 16'-0\" O.C.: (ROUNDUP(18.74/16)+1 = 3) + (ROUNDUP(50.333/16)+1 = 5) = 8 x 8.0 ft (8'-0\" MAX span 5/S5.1) = 64.0 LF",
+   "op": "angled strut brace at each end of wall and @ 16'-0\" O.C.: (ROUNDUP(25.455/16)+1 = 3) + (ROUNDUP(50.333/16)+1 = 5) = 8 x 8.0 ft (8'-0\" MAX span 5/S5.1) = 64.0 LF",
    "label": "3-5/8\"x20ga angled strut brace (5/S5.1)"
   },
   {
@@ -2639,21 +2671,30 @@
    "label": "5/8\" exterior fiberglass reinforced sheathing (1/A3.4 key note 19)"
   },
   {
+   "ref": "GWB-HEAD-A-UNDERSIDE",
+   "familia": "5/8\" gyp board Type X",
+   "qty": 13.42,
+   "unit": "SF",
+   "source": "1/A5.2",
+   "op": "head underside on the Parts Area A side: 5/8\" type X returned under the interior half of the head from the storefront frame to the finished face, 3-1/2\" (printed, frame to 8\" stud face) + 7/8\" RC + 1/4\" + 5/8\" = 5.25\" = 0.4375 ft x 30.667 (18'-8\" + 12'-0\", A5.2) = 13.42 SF",
+   "label": "5/8\" TYPE \"X\" GYPSUM BOARD at the storefront A head underside (1/A5.2)"
+  },
+  {
    "ref": "QTR-GYP-EXT-MS",
    "familia": "1/4\" gypsum board (printed)",
-   "qty": 182.63,
+   "qty": 177.29,
    "unit": "SF",
    "source": "1/A3.1",
-   "op": "EXT-MS1 6.0 x 12.0 + EXT-MS2 (3.08 x 12.0 + 2.92 x 16.396) + HEAD-A over the storefront head 38.667 x 0.667 (1/A5.2) = 72.0 + 36.96 + 47.88 + 25.79 = 182.63 SF",
+   "op": "EXT-MS1 6.0 x 12.0 + EXT-MS2 (3.08 x 12.0 + 2.92 x 16.396) + HEAD-A over the storefront head on the Parts Area A segments 30.667 x 0.667 (1/A5.2; vestibule 8'-0\" HOLD has no wall face) = 72.0 + 36.96 + 47.88 + 20.45 = 177.29 SF",
    "label": "1/4\" gypsum board (1/A3.1 key note 35)"
   },
   {
    "ref": "RC-EXT-MS",
    "familia": "resilient channel (printed)",
-   "qty": 131.43,
+   "qty": 123.43,
    "unit": "LF",
    "source": "1/A3.1",
-   "op": "rows @ 24\": EXT-MS1 (ROUNDUP(12.0/2)+1 = 7) x 6.0 + EXT-MS2 7 x 3.08 + (ROUNDUP(16.396/2)+1 = 10) x 2.92 + 1 row x 38.667 over storefront A (1/A5.2) = 42.0 + 21.56 + 29.2 + 38.67 = 131.43 LF",
+   "op": "rows @ 24\": EXT-MS1 (ROUNDUP(12.0/2)+1 = 7) x 6.0 + EXT-MS2 7 x 3.08 + (ROUNDUP(16.396/2)+1 = 10) x 2.92 + 1 row x 30.667 over storefront A Parts Area A segments (1/A5.2) = 42.0 + 21.56 + 29.2 + 30.67 = 123.43 LF",
    "label": "087F125-33 double leg resilient channel @ 24\" O.C. horizontal (1/A3.1 key note 33)"
   }
  ],
@@ -2721,11 +2762,11 @@
  "blocking_items": [
   {
    "ref": "BLK-S42-HDR-NAILERS",
-   "lf": 138.15,
+   "lf": 151.58,
    "material": "FRT",
    "label": "(2) FIRE TREATED 2X NAILERS (6/A4.2 key note 11)",
    "source": "6/A4.2",
-   "op": "2 plies x (S42-02 18.74 + S42-03 50.333) = 138.15 LF"
+   "op": "2 plies x (S42-02 25.455 + S42-03 50.333) = 151.58 LF"
   },
   {
    "ref": "BLK-EXT-DOORS",
@@ -2764,10 +2805,10 @@
   {
    "ref": "CB-S42-HDR-BOTTOM",
    "kind": "corner_bead",
-   "lf": 165.48,
+   "lf": 195.59,
    "label": "corner bead at the bottom edges of the suspended header walls (6/A4.2, A1.1 note 3.C)",
    "source": "6/A4.2",
-   "op": "2 edges x (18.74 + 50.333) = 138.15 + free ends of S42-01 / S42-04 below the header at the 2/A4.2 joints: 2 ends x 2 corners x 6.833 (B.O. FRAMING EL. 106'-10\", 6/A4.2) = 27.33; total 165.48 LF"
+   "op": "2 edges x (25.455 + 50.333) = 151.58 + free ends of S42-01 / S42-04 below the header at the 2/A4.2 joints: 2 ends x 2 corners x 6.833 = 27.33 + free end of the S42-02 continuation (A1.1 888.3 pt): 2 vertical corners x 8.339 = 16.68; total 195.59 LF"
   },
   {
    "ref": "JDM-S42-JOINTS",
@@ -3077,6 +3118,27 @@
      "texto": "16 ga 600S162-54 per S4.1 key note 3",
      "cita": "S4.1 key note 3",
      "delta": "same LF, 43 -> 54 mil"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-14",
+   "familia": "S42 header wall extent",
+   "motivo": "A1.1 draws the S42 suspended header wall (dashed double line) continuing 6.7 ft east of the S42-03 corner to a free end (554-558 pt, 827.6-888.3 pt, not dimensioned); the S4.1 framing key plan (key note 4) stops the header wall at the corner.",
+   "pregunta": "Does the S42 suspended header wall continue about 6'-8\" east of the S42-03 corner as drawn on A1.1, or stop at the corner as on S4.1?",
+   "source": "A1.1",
+   "delta": "(A) 0 (continuation carried, 6.715 ft x 8.339 ft) | (B) -6.715 LF header wall, -2 kickers, -13.43 LF nailers, -30.11 LF corner bead",
+   "opciones": {
+    "A": {
+     "texto": "Carried as drawn on A1.1: S42-02 continues 6.715 ft past the corner (free end)",
+     "source": "A1.1",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Stop at the corner per S4.1 key plan (key note 4)",
+     "cita": "S4.1 framing key plan",
+     "delta": "-6.715 LF of header wall (x 8.339 ft)"
     },
     "C": ""
    }

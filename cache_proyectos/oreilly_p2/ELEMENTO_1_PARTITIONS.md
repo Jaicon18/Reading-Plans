@@ -1,38 +1,26 @@
-# ELEMENTO 1 — PARTITIONS (O'Reilly Evans CO #1, pasada 2)
-Método: skill v80u (R80e.37). inventario_tags.py → hojas A/S raster (NO INVENTARIABLE, barrido manual con tag_manual) · lectura A y lectura B (subagentes independientes, sin verse) · comparar.py (12 coinciden, 11 difieren, 2 solo A, 0 solo B; 16 alertas "type no inventariado" = schedule raster, no son diferencias) · resolución dirigida desde B (36 resueltas, 1 RFI nuevo: RFI-13 gauge vestibule heads 600S162-43 en 3/A3.1 kn8 vs 16 ga en S4.1 kn3) · canon.py / partition_types.py (modo eje). Tiempo elemento 1: ~61 min.
-**Decisiones del estimador (RESPUESTAS_RFI_ESTIMADOR.md) todavía NO aplicadas** (van en el overlay, paso 7).
+# ELEMENTO 1 — PARTITIONS rev2 (O'Reilly Evans CO #1, pasada 2)
+rev2 = revisión dirigida a–e (proceso/revision_dirigida.md, img_revision/) + 5 avisos R11 cerrados (partition_types.avisos = []) + overlay de RESPUESTAS_RFI_ESTIMADOR aplicado por overlay.py (21 decisiones, 4 sin objeto: proceso/overlay_mapeo.md, overlay_sin_objeto.md). Números: canon.py / partition_types.py (modo eje). Tiempo: rev1 ~61 min + rev2 ~38 min.
 
-Fuentes: schedule INTERIOR WALL TYPES S21/S24/S41/S42/S43/S61 en A1.1 (p.37); planta 1/A1.1; alturas 1-3/A3.1–A3.4, 4/A4.2, 5-7/A4.2, A1.2; exteriores 1/S5.3, 3/S5.3, 2-3/A3.1; detalle por wall en ELEMENTO_1_PARTITIONS.json (length_source / height_source / faces).
-
-| Type | Wall ID | LF | H (ft) | Wall SF (LF×H) | Board SF (caras) | Caras / board |
+| Type | Wall ID | LF | H (ft) | Wall SF (LF×H) | Board SF | Caras / board |
 |---|---|---|---|---|---|---|
-| S21 | S21-N | 85.000 | 15.511 | 1,318.43 | 1,222.65 | 1 cara 5/8" X (int.) |
-| S21 | S21-E | 84.646 | 14.625 | 1,237.95 | 820.68 | 1 cara 5/8" X; 28.53 LF sin board (detrás de S24) |
-| S21 | S21-S | 85.000 | 15.511 | 1,318.43 | 1,096.81 | 1 cara 5/8" X; 9.36 LF sin board (detrás de S24) |
-| S21 | S21-W1 | 9.156 | 16.396 | 150.12 | 150.12 | 1 cara 5/8" X |
-| S21 | S21-W2 | 24.823 | 16.396 | 407.00 | 407.00 | 1 cara 5/8" X |
-| **S21 subtotal** | 5 | **288.62** | | **4,431.93** | **3,697.26** | |
-| S24 | S24-OF | 11.708 | 8.5 | 99.52 | 99.52 | 1 cara 5/8" X |
-| S24 | S24-RR | 16.823 | 8.5 | 143.00 | 142.99 | 1 cara 5/8" X W.R. |
-| S24 | S24-RRS | 8.854 | 8.5 | 75.26 | 75.26 | 1 cara 5/8" X W.R. |
-| **S24 subtotal** | 3 | **37.38** | | **317.78** | **317.77** | |
-| S41 | S41-B1V / B1H / B2H / B2V | 2.167 / 1.313 / 1.667 / 1.313 | 12.0 | 77.52 | 77.52 | 1 cara 5/8" X (box-outs kn5) |
-| **S41 subtotal** | 4 | **6.46** | | **77.52** | **77.52** | |
-| S42 | S42-01+S42-02 | 57.407 | 12.941 (pond.) | 742.93 | 1,303.76 | 2 caras 5/8" X (A 12.0/5.167, B 15.172/8.339) |
-| S42 | S42-03+S42-04 | 58.500 | 9.908 (pond.) | 579.61 | 937.68 | 2 caras 5/8" X (A 5.167/12.0, B 8.869/16.311) |
-| **S42 subtotal** | 2 | **115.91** | | **1,322.54** | **2,241.44** | |
-| S43 | S43-OF-W | 8.000 | 8.5 | 68.00 | 140.00 | 2 caras 5/8" X (9.0 / 8.5) |
-| S43 | S43-OF-E | 8.000 | 8.5 | 68.00 | 140.00 | 2 caras 5/8" X |
-| S43 | S43-OF-S | 11.708 | 8.5 | 99.52 | 157.11 | 2 caras 5/8" X |
-| S43 | S43-RR-W | 8.500 | 8.5 | 72.25 | 148.75 | X / X W.R. |
-| S43 | S43-RR-S | 16.521 | 8.5 | 140.43 | 193.56 | X / X W.R. |
-| **S43 subtotal** | 5 | **52.73** | | **448.20** | **779.42** | |
-| S61 | S61-RR | 8.500 | 8.5 | 72.25 | 144.50 | 2 caras 5/8" X W.R. |
-| **S61 subtotal** | 1 | **8.50** | | **72.25** | **144.50** | |
-| EXT-8CFMF | EXT-MS1-8 / EXT-MS2-8 | 6.0 / 6.0 | 20.667 | 248.00 | 156.84 | 1 cara int. 5/8" X (12.0; MS2 parcial 16.396) |
-| EXT-6CFMF | EXT-MS1-6 / EXT-MS2-6 / CORN-S | 6.0 / 6.0 / 36.0 | 20.667 / 20.667 / 7.969 | 534.88 | 0 | sin board |
-| OTHER FRAMING | HEAD-A-8 / HEAD-A-6 (storefront_cripples) | 38.667 c/u | 9.333 | 721.76 | 25.79 | |
-| OTHER FRAMING | VH-C / VH-B1 / VH-B2 (vestibule_head) | 8.75 / 5.667 / 5.667 | 4.953 | 99.48 | 13.40 | 6" 18 ga (RFI-13) |
+| S21 | S21-N | 85.000 | 14.678 | 1,247.63 | 1,151.85 | 1 cara 5/8" X |
+| S21 | S21-E | 84.646 | 13.792 | 1,167.44 | 910.66 | 1 cara 5/8" X; 28.531 LF detrás de S24 con board solo arriba del hard lid (4.792 ft) |
+| S21 | S21-S | 85.000 | 14.678 | 1,247.63 | 1,079.55 | 1 cara 5/8" X; 9.357 LF detrás de S24 (4.889 ft) |
+| S21 | S21-W1 | 9.156 | 15.563 | 142.49 | 142.49 | 1 cara 5/8" X |
+| S21 | S21-W2 | 24.823 | 15.563 | 386.32 | 386.32 | 1 cara 5/8" X |
+| **S21 subtotal** | 5 | **288.62** | | **4,191.51** | **3,670.87** | |
+| S24 | S24-OF / S24-RR / S24-RRS | 11.708 / 16.823 / 8.854 | 8.5 | 317.78 | 317.77 | 1 cara: X / X WR / X WR |
+| S41 | B1V / B1H / B2H / B2V | 2.167 / 1.313 / 1.667 / 1.313 = 6.46 | 12.0 | 77.52 | 77.52 | 1 cara X |
+| S42 | S42-01+S42-02 | 38.667 + 25.455 = 64.122 | 11.626 pond. (14.339 / 7.506) | 745.52 | 1,356.75 | 2 caras X |
+| S42 | S42-03+S42-04 | 50.333 + 8.167 = 58.500 | 9.075 pond. (8.036 / 15.478) | 530.89 | 888.96 | 2 caras X |
+| **S42 subtotal** | 2 | **122.62** | | **1,276.41** | **2,245.71** | |
+| S43 | OF-W / OF-E / OF-S / RR-W / RR-S | 8.0 / 8.0 / 11.708 / 8.5 / 16.521 = 52.73 | 8.5 (caras afuera 9.0) | 448.20 | 779.42 | 2 caras X; restroom X WR; RR-W cara break X WR (dec. 19) |
+| S61 | S61-RR | 8.5 | 8.5 | 72.25 | 144.50 | 2 caras X WR |
+| EXT-8CFMF | MS1-8 / MS2-8 | 6.0 / 6.0 | 20.667 | 248.00 | 154.40 | int. X a 12.0 (MS2 parcial 15.563) |
+| EXT-6CFMF | MS1-6 / MS2-6 / CORN-S | 6.0 / 6.0 / 36.0 | 20.667 / 20.667 / 7.969 | 534.88 | 0 | |
+| OTHER | HEAD-A-8 / HEAD-A-6 | 38.667 c/u | 9.333 | 721.76 | 20.45 (+ underside 13.42 SF misc) | |
+| OTHER | VH-C / VH-B1 / VH-B2 | 8.75 / 5.667 / 5.667 | 4.12 | 82.75 | 13.40 | 600S162-43 18 ga (dec. 14) |
 
-Interior partitions (S21–S61): 509.60 LF · Wall SF 6,670.22 · Board SF 7,257.91.
-Avisos de partition_types (R11, solape de esquina 0.35–0.47 ft): S21-S↔S24-RR, S24-OF↔S43-OF-W/E, S24-RR↔S43-RR-W, S24-RRS↔S43-RR-S — pendiente corrección dirigida antes del Excel.
+Interior S21–S61: 516.31 LF · Wall SF 6,383.67 · Board SF 7,235.79.
+S21 detrás de S24: 37.888 LF (S21-E 11.708 + 16.823; S21-S 9.357) · board arriba del hard lid 182.47 SF. S21 con esa parte 288.62 LF / sin ella 250.73 LF.
+Atención #0: RFI-01 (studs bajo purlin) aplicado con purlin 10" MEDIDO A ESCALA en 1/A3.1 (−0.833 ft); el peralte no está impreso (shop drawing PEMB).

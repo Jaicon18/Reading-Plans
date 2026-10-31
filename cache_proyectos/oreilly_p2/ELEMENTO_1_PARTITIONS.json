@@ -1,37 +1,33 @@
 {
  "element": 1,
  "name": "PARTITIONS",
- "project": "O'Reilly Auto Parts, 23rd Ave., Evans, CO #1 — pasada 2",
- "method": "skill v80u, R80e.37: inventario_tags.py (raster -> NO INVENTARIABLE, barrido manual) + lectura A + lectura B (subagentes independientes) + comparar.py + resolución dirigida + canon.py/partition_types.py (modo eje). Estimator RFI decisions NOT yet applied (overlay step).",
- "elapsed_min": 60.9,
+ "revision": "rev2: directed review a-e + R11 corners closed + estimator overlay (RESPUESTAS_RFI_ESTIMADOR) applied by overlay.py; numbers by canon.py/partition_types.py",
+ "elapsed_min_rev2": 19.4,
  "types": {
   "S21": {
    "walls": 5,
    "lf": 288.62,
-   "wall_area_sf": 4431.93,
-   "board_sf": 3697.26,
+   "wall_area_sf": 4191.51,
+   "board_sf": 3670.87,
    "rows": [
     {
      "wall_id": "S21-N",
      "lf": 85.0,
-     "height_ft": 15.511,
-     "wall_area_sf": 1318.43,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 1222.65,
-     "location": "North facade (grid 1) inside face of CMU, Parts Area C 105 + Parts Area A 100",
+     "height_ft": 14.678,
+     "wall_area_sf": 1247.63,
+     "board_sf": 1151.85,
      "source": "S21/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S21-N",
        "length_ft": 85.0,
-       "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]",
-       "height_ft": 15.511,
-       "height_source": "North facade is a rake wall: roof varies from T.O. LOW EAVE 114'-7 1/2\" (2/A3.2) to T.O. HIGH EAVE 116'-4 3/4\" (1/A3.2); average (14.625 + 16.396)/2 = 15.511 ft (3/A3.2 / 4/A3.2 'T.O. PURLIN EL. (VARIES)'); B.O. roof framing not printed - RFI-01",
-       "wall_area_sf": 1318.43,
+       "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]; band: A1.1 vector: the S21 furring line of this facade starts at the east CMU face (317.2-318.1 pt) and runs past the S21-E furring / S24 ends; band from the S21-E band c0 318.1 pt (owner of both corners, R70.2); 768.5 pt / 9.04 = 85.01 ft [directed review, pass 2]",
+       "height_ft": 14.678,
+       "height_source": "North facade is a rake wall: roof varies from T.O. LOW EAVE 114'-7 1/2\" (2/A3.2) to T.O. HIGH EAVE 116'-4 3/4\" (1/A3.2); average (14.625 + 16.396)/2 = 15.511 ft (3/A3.2 / 4/A3.2 'T.O. PURLIN EL. (VARIES)'); B.O. roof framing not printed; studs / Z-furring stop under the PEMB purlin: 15.511 - 0.833 = 14.678 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 1247.63,
        "stud": "1-1/2\" Z-furring (150ZF125-18)",
        "gauge": "18 ga (150ZF125-18)",
-       "oc_in": 24,
        "detail": "S21/A1.1",
        "faces": [
         {
@@ -39,18 +35,18 @@
          "room": "Parts Area C 105",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 15.511,
+         "height_ft": 14.678,
          "length_ft": 26.097,
-         "height_source": "3/A3.2 key notes 10 + 20 drawn to the roof framing (Parts Area C ceiling C-2 exposed, A1.2); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "3/A3.2 key notes 10 + 20 drawn to the roof framing (Parts Area C ceiling C-2 exposed, A1.2); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 15.511 - 0.833 = 14.678 (RFI-01 decision, 1/A3.1 scaled)"
         },
         {
          "side": "B",
          "room": "Parts Area A 100",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 15.511,
+         "height_ft": 14.678,
          "length_ft": 58.903,
-         "height_source": "3/A3.2 (section at the north wall, Parts Area A): GWB (20) on Z-furring (10) drawn above the suspended ceiling (21) up to the roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "3/A3.2 (section at the north wall, Parts Area A): GWB (20) on Z-furring (10) drawn above the suspended ceiling (21) up to the roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 15.511 - 0.833 = 14.678 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -59,11 +55,9 @@
     {
      "wall_id": "S21-E",
      "lf": 84.646,
-     "height_ft": 14.625,
-     "wall_area_sf": 1237.95,
-     "layers_avg": 0.66,
-     "board_sf_partition_types": 820.68,
-     "location": "East facade (grid A) inside face of CMU: Parts Area C 105 / break area (office 102 and R.R. 103-104 zones behind S24)",
+     "height_ft": 13.792,
+     "wall_area_sf": 1167.44,
+     "board_sf": 910.66,
      "source": "S21/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -71,12 +65,11 @@
        "id": "S21-E",
        "length_ft": 84.646,
        "length_source": "A1.1 grid 1-4 30'-0\" + 30'-0\" + 25'-0\" minus 2 x 2-1/8\" furring (S21/A1.1)",
-       "height_ft": 14.625,
-       "height_source": "T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2 cut at the east wall, 3/A3.4) = 14.625 ft; B.O. purlin not printed - RFI-01",
-       "wall_area_sf": 1237.95,
+       "height_ft": 13.792,
+       "height_source": "T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2 cut at the east wall, 3/A3.4) = 14.625 ft; B.O. purlin not printed; studs / Z-furring stop under the PEMB purlin: 14.625 - 0.833 = 13.792 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 1167.44,
        "stud": "1-1/2\" Z-furring (150ZF125-18)",
        "gauge": "18 ga (150ZF125-18)",
-       "oc_in": 24,
        "detail": "S21/A1.1",
        "faces": [
         {
@@ -84,27 +77,27 @@
          "room": "Parts Area C 105",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 14.625,
+         "height_ft": 13.792,
          "length_ft": 56.115,
-         "height_source": "2/A3.2 (east wall): GWB (20) on Z-furring (10) to the roof framing; C-2 exposed (A1.2); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "2/A3.2 (east wall): GWB (20) on Z-furring (10) to the roof framing; C-2 exposed (A1.2); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 14.625 - 0.833 = 13.792 (RFI-01 decision, 1/A3.1 scaled)"
         },
         {
          "side": "A",
-         "room": "Office 102 (behind S24-OF: no board on the furring)",
+         "room": "Office 102 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed)",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 0.0,
+         "height_ft": 4.792,
          "length_ft": 11.708,
-         "height_source": "S24/A1.1: board on the S24 studs only"
+         "height_source": "S24 Z-furring to the eave with board above the hard lid (estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 02): hard lid top 8'-6\" + 6\" joist = 9'-0\" (7/A4.2) to the furring top 13.792 under the purlin (T.O. LOW EAVE 114'-7 1/2\" 2/A3.2) = 4.792"
         },
         {
          "side": "A",
-         "room": "R.R. 103 / 104 (behind S24-RR: no board on the furring)",
+         "room": "R.R. 103 / 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed)",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 0.0,
+         "height_ft": 4.792,
          "length_ft": 16.823,
-         "height_source": "S24/A1.1: board on the S24 studs only"
+         "height_source": "S24 Z-furring to the eave with board above the hard lid (estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 02): hard lid top 8'-6\" + 6\" joist = 9'-0\" (7/A4.2) to the furring top 13.792 under the purlin (T.O. LOW EAVE 114'-7 1/2\" 2/A3.2) = 4.792"
         }
        ]
       }
@@ -113,24 +106,21 @@
     {
      "wall_id": "S21-S",
      "lf": 85.0,
-     "height_ft": 15.511,
-     "wall_area_sf": 1318.43,
-     "layers_avg": 0.89,
-     "board_sf_partition_types": 1096.81,
-     "location": "South facade (grid 4) inside face of CMU: Parts Area C 105 / R.R. 104 (behind S24) / Parts Area B 101",
+     "height_ft": 14.678,
+     "wall_area_sf": 1247.63,
+     "board_sf": 1079.55,
      "source": "S21/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S21-S",
        "length_ft": 85.0,
-       "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]",
-       "height_ft": 15.511,
-       "height_source": "South facade rake wall: average of T.O. LOW EAVE 114'-7 1/2\" and T.O. HIGH EAVE 116'-4 3/4\" = 15.511 ft (1/A3.4 'T.O. PURLIN EL. (VARIES)'); RFI-01",
-       "wall_area_sf": 1318.43,
+       "length_source": "A1.1 grid string 25'-0\" + 60'-0\" (grids at the CMU inside face: 86'-4\" overall = 8\" + 85'-0\" + 8\"); this facade owns both corners, the E / W furring stops at its board face [resolution A vs B, pass 2]; band: A1.1 vector: the S21 furring line of this facade starts at the east CMU face (317.2-318.1 pt) and runs past the S21-E furring / S24 ends; band from the S21-E band c0 318.1 pt (owner of both corners, R70.2); 768.5 pt / 9.04 = 85.01 ft [directed review, pass 2]",
+       "height_ft": 14.678,
+       "height_source": "South facade rake wall: average of T.O. LOW EAVE 114'-7 1/2\" and T.O. HIGH EAVE 116'-4 3/4\" = 15.511 ft (1/A3.4 'T.O. PURLIN EL. (VARIES)'); RFI-01; studs / Z-furring stop under the PEMB purlin: 15.511 - 0.833 = 14.678 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 1247.63,
        "stud": "1-1/2\" Z-furring (150ZF125-18)",
        "gauge": "18 ga (150ZF125-18)",
-       "oc_in": 24,
        "detail": "S21/A1.1",
        "faces": [
         {
@@ -138,27 +128,27 @@
          "room": "Parts Area C 105",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 15.511,
+         "height_ft": 14.678,
          "length_ft": 17.0,
-         "height_source": "1/A3.4, 2/A3.4 (south wall): GWB (20) on Z-furring (10) to the roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "1/A3.4, 2/A3.4 (south wall): GWB (20) on Z-furring (10) to the roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 15.511 - 0.833 = 14.678 (RFI-01 decision, 1/A3.1 scaled)"
         },
         {
          "side": "A",
          "room": "Parts Area B 101",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 15.511,
+         "height_ft": 14.678,
          "length_ft": 58.643,
-         "height_source": "1/A3.4 (south wall at windows D): GWB (20) on Z-furring (10) to the roof framing; deduct D1 + D2 2 x 11.365 x 3.365 = 76.49 SF; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "1/A3.4 (south wall at windows D): GWB (20) on Z-furring (10) to the roof framing; deduct D1 + D2 2 x 11.365 x 3.365 = 76.49 SF; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 15.511 - 0.833 = 14.678 (RFI-01 decision, 1/A3.1 scaled)"
         },
         {
          "side": "A",
-         "room": "R.R. 104 (behind S24-RR / S24-RRS: no board on the furring)",
+         "room": "R.R. 104 plenum above the 7/A4.2 hard lid (Parts Area C 105, C-2 exposed)",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 0.0,
+         "height_ft": 4.889,
          "length_ft": 9.357,
-         "height_source": "S24/A1.1: board on the S24 studs only"
+         "height_source": "S24 Z-furring to the eave with board above the hard lid (estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 02): hard lid top 8'-6\" + 6\" joist = 9'-0\" (7/A4.2) to the furring top 13.889 under the purlin (roof interpolated at the R.R. 104 segment, 1/A3.2 slope) = 4.889"
         }
        ]
       }
@@ -167,11 +157,9 @@
     {
      "wall_id": "S21-W1",
      "lf": 9.156,
-     "height_ft": 16.396,
-     "wall_area_sf": 150.12,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 150.12,
-     "location": "West facade (grid C) inside face of CMU, north stretch (Parts Area A 100)",
+     "height_ft": 15.563,
+     "wall_area_sf": 142.49,
+     "board_sf": 142.49,
      "source": "S21/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -179,12 +167,11 @@
        "id": "S21-W1",
        "length_ft": 9.156,
        "length_source": "A1.1 west dimension string 4'-0\" (from pilaster face) + 6'-8\": grid 1 to start of 6'-0\" metal stud wall = 4'-0\" - 8\" - 8\" + 6'-8\" = 9'-4\"; minus 2-1/8\" furring",
-       "height_ft": 16.396,
-       "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2 cut at the west wall) = 16.396 ft; B.O. purlin not printed - RFI-01",
-       "wall_area_sf": 150.12,
+       "height_ft": 15.563,
+       "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2 cut at the west wall) = 16.396 ft; B.O. purlin not printed; studs / Z-furring stop under the PEMB purlin: 16.396 - 0.833 = 15.563 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 142.49,
        "stud": "1-1/2\" Z-furring (150ZF125-18)",
        "gauge": "18 ga (150ZF125-18)",
-       "oc_in": 24,
        "detail": "S21/A1.1",
        "faces": [
         {
@@ -192,9 +179,9 @@
          "room": "Parts Area A 100",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 16.396,
+         "height_ft": 15.563,
          "length_ft": 9.156,
-         "height_source": "1/A3.2 (west wall): GWB (20) on Z-furring (10); 3/A3.2 GWB drawn above ceiling to roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "1/A3.2 (west wall): GWB (20) on Z-furring (10); 3/A3.2 GWB drawn above ceiling to roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 16.396 - 0.833 = 15.563 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -203,11 +190,9 @@
     {
      "wall_id": "S21-W2",
      "lf": 24.823,
-     "height_ft": 16.396,
-     "wall_area_sf": 407.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 407.0,
-     "location": "West facade (grid C) inside face of CMU, south stretch (Parts Area B 101)",
+     "height_ft": 15.563,
+     "wall_area_sf": 386.32,
+     "board_sf": 386.32,
      "source": "S21/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -215,12 +200,11 @@
        "id": "S21-W2",
        "length_ft": 24.823,
        "length_source": "A1.1 west dimension string grid 3 to grid 4 = 25'-0\" (6'-0\" metal stud wall ends at grid 3); minus 2-1/8\" furring at grid 4",
-       "height_ft": 16.396,
-       "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2) = 16.396 ft - RFI-01",
-       "wall_area_sf": 407.0,
+       "height_ft": 15.563,
+       "height_source": "T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2) = 16.396 ft; studs / Z-furring stop under the PEMB purlin: 16.396 - 0.833 = 15.563 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 386.32,
        "stud": "1-1/2\" Z-furring (150ZF125-18)",
        "gauge": "18 ga (150ZF125-18)",
-       "oc_in": 24,
        "detail": "S21/A1.1",
        "faces": [
         {
@@ -228,9 +212,9 @@
          "room": "Parts Area B 101",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 16.396,
+         "height_ft": 15.563,
          "length_ft": 24.823,
-         "height_source": "1/A3.2 (west wall, cut at A1.1 bubble 1/A3.2 x~932 pt): GWB (20) on Z-furring (10); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "1/A3.2 (west wall, cut at A1.1 bubble 1/A3.2 x~932 pt): GWB (20) on Z-furring (10); T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 16.396 - 0.833 = 15.563 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -242,16 +226,14 @@
    "walls": 2,
    "lf": 12.0,
    "wall_area_sf": 248.0,
-   "board_sf": 156.84,
+   "board_sf": 154.4,
    "rows": [
     {
      "wall_id": "EXT-MS1-8",
      "lf": 6.0,
      "height_ft": 20.667,
      "wall_area_sf": 124.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 72.0,
-     "location": "West facade (grid C) 6'-0\" full height metal stud wall north of storefront A (1/A3.1)",
+     "board_sf": 72.0,
      "source": "3/S5.3",
      "status": "DERIVADO",
      "segments": [
@@ -264,7 +246,6 @@
        "wall_area_sf": 124.0,
        "stud": "8\"",
        "gauge": "16 ga (54 mil, 800S162-54)",
-       "oc_in": 16,
        "detail": "3/S5.3",
        "faces": [
         {
@@ -285,9 +266,7 @@
      "lf": 6.0,
      "height_ft": 20.667,
      "wall_area_sf": 124.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 84.84,
-     "location": "West facade (grid C) 6'-0\" full height metal stud wall south of storefront A (S42 header wall ends against it)",
+     "board_sf": 82.4,
      "source": "3/S5.3",
      "status": "DERIVADO",
      "segments": [
@@ -300,7 +279,6 @@
        "wall_area_sf": 124.0,
        "stud": "8\"",
        "gauge": "16 ga (54 mil, 800S162-54)",
-       "oc_in": 16,
        "detail": "3/S5.3",
        "faces": [
         {
@@ -317,9 +295,9 @@
          "room": "Parts Area B 101",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 16.396,
+         "height_ft": 15.563,
          "length_ft": 2.92,
-         "height_source": "Parts Area B ceiling C-2 exposed (A1.2): board to the roof framing at the high eave; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "Parts Area B ceiling C-2 exposed (A1.2): board to the roof framing at the high eave; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 16.396 - 0.833 = 15.563 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -338,9 +316,7 @@
      "lf": 6.0,
      "height_ft": 20.667,
      "wall_area_sf": 124.0,
-     "layers_avg": 0.0,
-     "board_sf_partition_types": 0.0,
-     "location": "West facade (grid C) 6'-0\" full height metal stud wall north of storefront A (1/A3.1)",
+     "board_sf": 0.0,
      "source": "3/S5.3",
      "status": "DERIVADO",
      "segments": [
@@ -353,7 +329,6 @@
        "wall_area_sf": 124.0,
        "stud": "6\"",
        "gauge": "16 ga (54 mil, 600S162-54)",
-       "oc_in": 16,
        "detail": "3/S5.3",
        "faces": []
       }
@@ -364,9 +339,7 @@
      "lf": 6.0,
      "height_ft": 20.667,
      "wall_area_sf": 124.0,
-     "layers_avg": 0.0,
-     "board_sf_partition_types": 0.0,
-     "location": "West facade (grid C) 6'-0\" full height metal stud wall south of storefront A (S42 header wall ends against it)",
+     "board_sf": 0.0,
      "source": "3/S5.3",
      "status": "DERIVADO",
      "segments": [
@@ -379,7 +352,6 @@
        "wall_area_sf": 124.0,
        "stud": "6\"",
        "gauge": "16 ga (54 mil, 600S162-54)",
-       "oc_in": 16,
        "detail": "3/S5.3",
        "faces": []
       }
@@ -390,9 +362,7 @@
      "lf": 36.0,
      "height_ft": 7.969,
      "wall_area_sf": 286.88,
-     "layers_avg": 0.0,
-     "board_sf_partition_types": 0.0,
-     "location": "South facade cornice framing outside the CMU over windows D1 / D2 (stucco band, 4/A2.1), window head to T.O. MASONRY 119'-4\"",
+     "board_sf": 0.0,
      "source": "1/S5.3",
      "status": "DERIVADO",
      "segments": [
@@ -405,7 +375,6 @@
        "wall_area_sf": 286.88,
        "stud": "6\"",
        "gauge": "18 ga (43 mil, 600S162-43) minimum",
-       "oc_in": 16,
        "detail": "1/S5.3",
        "faces": []
       }
@@ -424,22 +393,19 @@
      "lf": 11.708,
      "height_ft": 8.5,
      "wall_area_sf": 99.52,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 99.52,
-     "location": "Office 102 east side, in front of the S21 furring of the east facade",
+     "board_sf": 99.52,
      "source": "S24/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S24-OF",
        "length_ft": 11.708,
-       "length_source": "A1.1 office width 11'-0\" (face of stud, general note B) + 2 x (3-5/8\" + 5/8\") side walls",
+       "length_source": "A1.1 printed 11'-0\" between the S43-OF-W / S43-OF-E inner stud faces + S43 stud 3-5/8\" + outer board 5/8\" each end (S24 owns both corners: A1.1 vector, its hatch fills the corner squares); no enlarged plan of the office [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S24/A1.1 'STUDS TO 8'-6\" A.F.F.' / '5/8\" TYPE X GYPSUM BOARD INTERIOR SIDE TO 8'-6\" A.F.F.'; ceiling C-3 8'-6\" (A1.2)",
        "wall_area_sf": 99.52,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S24/A1.1",
        "faces": [
         {
@@ -460,22 +426,19 @@
      "lf": 16.823,
      "height_ft": 8.5,
      "wall_area_sf": 143.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 142.99,
-     "location": "R.R. 103 + R.R. 104 east side (two S24 tags on the same line = one wall), in front of the S21 furring",
+     "board_sf": 142.99,
      "source": "S24/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S24-RR",
        "length_ft": 16.823,
-       "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (face of stud, general note B: S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S24-RR runs under its end) + S24-RRS stud 3-5/8\" (S24-RR owns that corner up to the S21-S furring) [resolution A vs B, pass 2]",
+       "length_source": "A1.1 and 1A/A4.1 printed 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner face) + S43-RR-W stud + outer board 4-1/4\" + S24-RRS stud 3-5/8\" (S24-RR owns both corners) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S24/A1.1 'STUDS TO 8'-6\" A.F.F.' / '5/8\" TYPE X GYPSUM BOARD INTERIOR SIDE TO 8'-6\" A.F.F.'; ceiling C-3 8'-6\" (A1.2)",
        "wall_area_sf": 143.0,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S24/A1.1",
        "faces": [
         {
@@ -505,22 +468,19 @@
      "lf": 8.854,
      "height_ft": 8.5,
      "wall_area_sf": 75.26,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 75.26,
-     "location": "R.R. 104 south side, in front of the S21 furring of the south facade",
+     "board_sf": 75.26,
      "source": "S24/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S24-RRS",
        "length_ft": 8.854,
-       "length_source": "A1.1 printed 8'-6\" (break area string: S24 inner face to S43-RR-S inner face, same lines) + S43-RR-S stud + outer board 4-1/4\" (S24-RRS runs to its outer face) [resolution A vs B, pass 2]",
+       "length_source": "1A/A4.1 printed 8'-6\" + 3 5/8\" (S24-RR face to the S43-RR-S inner stud face, + the S43-RR-S stud) and A1.1 8'-6\" (break area) + S43-RR-S outer board 5/8\" (S24-RRS owns the corner) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S24/A1.1 'STUDS TO 8'-6\" A.F.F.' / '5/8\" TYPE X GYPSUM BOARD INTERIOR SIDE TO 8'-6\" A.F.F.'; ceiling C-3 8'-6\" (A1.2)",
        "wall_area_sf": 75.26,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S24/A1.1",
        "faces": [
         {
@@ -549,22 +509,19 @@
      "lf": 8.0,
      "height_ft": 8.5,
      "wall_area_sf": 68.0,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 140.0,
-     "location": "Office 102 north side",
+     "board_sf": 140.0,
      "source": "S43/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S43-OF-W",
        "length_ft": 8.0,
-       "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]",
+       "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2)",
        "wall_area_sf": 68.0,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S43/A1.1",
        "faces": [
         {
@@ -594,22 +551,19 @@
      "lf": 8.0,
      "height_ft": 8.5,
      "wall_area_sf": 68.0,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 140.0,
-     "location": "Office 102 south side (break area side)",
+     "board_sf": 140.0,
      "source": "S43/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S43-OF-E",
        "length_ft": 8.0,
-       "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]",
+       "length_source": "A1.1 printed 8'-0\" (office 102 depth, extension lines at y 321.7 / 394.2 pt = S24-OF inner face to S43-OF-S inner face; face of stud per general note B) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2)",
        "wall_area_sf": 68.0,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S43/A1.1",
        "faces": [
         {
@@ -639,9 +593,7 @@
      "lf": 11.708,
      "height_ft": 8.5,
      "wall_area_sf": 99.52,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 157.11,
-     "location": "Office 102 west side with door 4",
+     "board_sf": 157.11,
      "source": "S43/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -654,7 +606,6 @@
        "wall_area_sf": 99.52,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S43/A1.1",
        "faces": [
         {
@@ -684,28 +635,25 @@
      "lf": 8.5,
      "height_ft": 8.5,
      "wall_area_sf": 72.25,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 148.75,
-     "location": "R.R. 103 north side (break area side)",
+     "board_sf": 148.75,
      "source": "S43/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S43-RR-W",
        "length_ft": 8.5,
-       "length_source": "A1.1 printed 8'-6\" (break area string at x 873 pt: extension lines at y 321.7 / 398.7 pt = S24-RR inner face to S43-RR-S inner face, the span of S43-RR-W) [resolution A vs B, pass 2]",
+       "length_source": "A1.1 printed 8'-6\" (break area string at x 873 pt: extension lines at y 321.7 / 398.7 pt = S24-RR inner face to S43-RR-S inner face, the span of S43-RR-W) [resolution A vs B, pass 2]; band: A1.1 vector (40x crop): S24 hatch fills the corner square, S24 inner line (321.1-322.4 pt) stops at the S43 inner line; S43 band starts at the S24 face 322.4 pt (S24 owns the corner, R70.2 / R78.35) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2)",
        "wall_area_sf": 72.25,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S43/A1.1",
        "faces": [
         {
          "side": "A",
          "room": "Parts Area C 105 (break)",
-         "board": "5/8 type X",
+         "board": "5/8 type X WR",
          "layers": 1,
          "height_ft": 9.0,
          "length_ft": 8.5,
@@ -729,22 +677,19 @@
      "lf": 16.521,
      "height_ft": 8.5,
      "wall_area_sf": 140.43,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 193.56,
-     "location": "R.R. 103 / R.R. 104 west side with doors 5 and 6 (two S43 tags on the same line = one wall)",
+     "board_sf": 193.56,
      "source": "S43/A1.1",
      "status": "DERIVADO",
      "segments": [
       {
        "id": "S43-RR-S",
        "length_ft": 16.521,
-       "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S43-RR-S owns that corner) [resolution A vs B, pass 2]",
+       "length_source": "A1.1 R.R. string 7'-10\" + 6\" + 7'-10\" (S43-RR-W inner stud face to S24-RRS inner stud face) + S43-RR-W stud + outer board 4-1/4\" (S43-RR-S owns that corner) [resolution A vs B, pass 2]; band: A1.1 vector: S24-RRS hatch runs down to the S43-RR-S outer face (door 6 jamb stub); S43-RR-S ends at the S24-RRS face 1071.8 pt (S24-RRS owns the corner, R70.2) [directed review, pass 2]",
        "height_ft": 8.5,
        "height_source": "S43/A1.1 'STUDS TO 8'-6\" A.F.F.' + '5/8\" TYPE X GYPSUM BOARD EACH SIDE'; 7/A4.2 B.O. FRAMING EL. 108'-6\" (ceiling C-3 8'-6\", A1.2)",
        "wall_area_sf": 140.43,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S43/A1.1",
        "faces": [
         {
@@ -791,9 +736,7 @@
      "lf": 8.5,
      "height_ft": 8.5,
      "wall_area_sf": 72.25,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 144.5,
-     "location": "Wet wall between R.R. 103 and R.R. 104",
+     "board_sf": 144.5,
      "source": "S61/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -806,7 +749,6 @@
        "wall_area_sf": 72.25,
        "stud": "6\"",
        "gauge": "20 ga (33 mil, 600S162-33)",
-       "oc_in": 24,
        "detail": "S61/A1.1",
        "faces": [
         {
@@ -844,9 +786,7 @@
      "lf": 2.167,
      "height_ft": 12.0,
      "wall_area_sf": 26.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 26.0,
-     "location": "Showroom corner wall box-out (A1.1 key note 5, 4/A4.2) at the north wall / S42 corner, Parts Area A",
+     "board_sf": 26.0,
      "source": "S41/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -859,7 +799,6 @@
        "wall_area_sf": 26.0,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S41/A1.1",
        "faces": [
         {
@@ -880,9 +819,7 @@
      "lf": 1.313,
      "height_ft": 12.0,
      "wall_area_sf": 15.76,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 15.76,
-     "location": "Showroom corner wall box-out (A1.1 key note 5, 4/A4.2) at the north wall / S42 corner, Parts Area A",
+     "board_sf": 15.76,
      "source": "S41/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -895,7 +832,6 @@
        "wall_area_sf": 15.76,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S41/A1.1",
        "faces": [
         {
@@ -916,9 +852,7 @@
      "lf": 1.667,
      "height_ft": 12.0,
      "wall_area_sf": 20.0,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 20.0,
-     "location": "Showroom corner wall box-out (A1.1 key note 5, 4/A4.2) at the north / west corner, Parts Area A",
+     "board_sf": 20.0,
      "source": "S41/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -931,7 +865,6 @@
        "wall_area_sf": 20.0,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S41/A1.1",
        "faces": [
         {
@@ -952,9 +885,7 @@
      "lf": 1.313,
      "height_ft": 12.0,
      "wall_area_sf": 15.76,
-     "layers_avg": 1.0,
-     "board_sf_partition_types": 15.76,
-     "location": "Showroom corner wall box-out (A1.1 key note 5, 4/A4.2) at the north / west corner, Parts Area A",
+     "board_sf": 15.76,
      "source": "S41/A1.1",
      "status": "DERIVADO",
      "segments": [
@@ -967,7 +898,6 @@
        "wall_area_sf": 15.76,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "S41/A1.1",
        "faces": [
         {
@@ -987,18 +917,16 @@
   },
   "S42": {
    "walls": 2,
-   "lf": 115.91,
-   "wall_area_sf": 1322.54,
-   "board_sf": 2241.44,
+   "lf": 122.62,
+   "wall_area_sf": 1276.41,
+   "board_sf": 2245.71,
    "rows": [
     {
      "wall_id": "S42-01+S42-02",
-     "lf": 57.407,
-     "height_ft": 12.941,
-     "wall_area_sf": 742.93,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 1303.76,
-     "location": "Grid B line, full height wall from the north furring to the control joint 2/A4.2 (Parts Area A / Parts Area C) + Grid B line, suspended header wall from the control joint to the S42-03 corner (B.O. FRAMING 106'-10\")",
+     "lf": 64.122,
+     "height_ft": 11.626,
+     "wall_area_sf": 745.52,
+     "board_sf": 1356.75,
      "source": "5/A4.2; 6/A4.2",
      "status": "DERIVADO",
      "segments": [
@@ -1006,12 +934,11 @@
        "id": "S42-01",
        "length_ft": 38.667,
        "length_source": "A1.1 printed 1'-8\" + 37'-0\" (S21 face to the control joint 2/A4.2 ABOVE)",
-       "height_ft": 15.172,
-       "height_source": "S42/A1.1 'STUDS TO ROOF FRAMING ABOVE'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01",
-       "wall_area_sf": 586.66,
+       "height_ft": 14.339,
+       "height_source": "S42/A1.1 'STUDS TO ROOF FRAMING ABOVE'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); studs / Z-furring stop under the PEMB purlin: 15.172 - 0.833 = 14.339 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 554.45,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "5/A4.2",
        "faces": [
         {
@@ -1028,22 +955,21 @@
          "room": "Parts Area C 105",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 15.172,
+         "height_ft": 14.339,
          "length_ft": 38.667,
-         "height_source": "S42/A1.1 'PARTS AREA \"B\" AND \"C\" TO BOTTOM OF ROOF FRAMING'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "S42/A1.1 'PARTS AREA \"B\" AND \"C\" TO BOTTOM OF ROOF FRAMING'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 15.172 - 0.833 = 14.339 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       },
       {
        "id": "S42-02",
-       "length_ft": 18.74,
-       "length_source": "A1.1 printed 18'-4\" (control joint to the west face of S42-03) + S42-03 thickness 4.875\" (corner owned)",
-       "height_ft": 8.339,
-       "height_source": "6/A4.2: B.O. FRAMING EL. 106'-10\" to roof framing (T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01): 15.172 - 6.833",
-       "wall_area_sf": 156.27,
+       "length_ft": 25.455,
+       "length_source": "A1.1 printed 18'-4\" (control joint to the west face of S42-03) + S42-03 thickness 4.875\" + header wall continuation east of the corner drawn on A1.1 (dashed double line 554.0-558.0 pt from 827.6 to 888.3 pt, no dimension; S4.1 key plan stops the header at the corner - RFI-14) [directed review, pass 2]",
+       "height_ft": 7.506,
+       "height_source": "6/A4.2: B.O. FRAMING EL. 106'-10\" to roof framing (T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings)): 15.172 - 6.833; studs / Z-furring stop under the PEMB purlin: 8.339 - 0.833 = 7.506 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 191.07,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "6/A4.2",
        "faces": [
         {
@@ -1056,13 +982,22 @@
          "height_source": "6/A4.2: B.O. FRAMING 106'-10\" + 4'-8\" to FINISH CEILING 111'-6\" + 6\" = 5.167 (S42/A1.1 Parts Area A to 12'-0\")"
         },
         {
+         "side": "A",
+         "room": "Parts Area B 101",
+         "board": "5/8 type X",
+         "layers": 1,
+         "height_ft": 7.506,
+         "length_ft": 6.715,
+         "height_source": "6/A4.2 header wall + S42/A1.1 Parts Area B to bottom of roof framing (same line as S42-02 Parts C face): 15.172 - 6.833; board stops under the purlin: 8.339 - 0.833 = 7.506 (RFI-01 decision, 1/A3.1 scaled)"
+        },
+        {
          "side": "B",
          "room": "Parts Area C 105",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 8.339,
-         "length_ft": 18.74,
-         "height_source": "6/A4.2 header wall + S42/A1.1 Parts Area C to bottom of roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_ft": 7.506,
+         "length_ft": 25.455,
+         "height_source": "6/A4.2 header wall + S42/A1.1 Parts Area C to bottom of roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 8.339 - 0.833 = 7.506 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -1071,11 +1006,9 @@
     {
      "wall_id": "S42-03+S42-04",
      "lf": 58.5,
-     "height_ft": 9.908,
-     "wall_area_sf": 579.61,
-     "layers_avg": 2.0,
-     "board_sf_partition_types": 937.68,
-     "location": "Vertical S42 header wall (Parts Area A / Parts Area B) from grid B line to the control joint 2/A4.2 + Vertical S42 full height wall from the control joint to the west metal stud wall EXT-MS2",
+     "height_ft": 9.075,
+     "wall_area_sf": 530.89,
+     "board_sf": 888.96,
      "source": "6/A4.2; 5/A4.2",
      "status": "DERIVADO",
      "segments": [
@@ -1083,12 +1016,11 @@
        "id": "S42-03",
        "length_ft": 50.333,
        "length_source": "A1.1 printed 50'-4\" (S42-02 face to the control joint)",
-       "height_ft": 8.869,
-       "height_source": "6/A4.2 B.O. FRAMING EL. 106'-10\" to roof framing (average along the wall, T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01)",
-       "wall_area_sf": 446.4,
+       "height_ft": 8.036,
+       "height_source": "6/A4.2 B.O. FRAMING EL. 106'-10\" to roof framing (average along the wall, T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings)); studs / Z-furring stop under the PEMB purlin: 8.869 - 0.833 = 8.036 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 404.48,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "6/A4.2",
        "faces": [
         {
@@ -1105,9 +1037,9 @@
          "room": "Parts Area B 101",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 8.869,
+         "height_ft": 8.036,
          "length_ft": 50.333,
-         "height_source": "6/A4.2 + S42/A1.1 Parts Area B to bottom of roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "6/A4.2 + S42/A1.1 Parts Area B to bottom of roof framing; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 8.869 - 0.833 = 8.036 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       },
@@ -1115,12 +1047,11 @@
        "id": "S42-04",
        "length_ft": 8.167,
        "length_source": "A1.1 printed 8'-2\" (control joint to the west wall)",
-       "height_ft": 16.311,
-       "height_source": "S42/A1.1 'STUDS TO ROOF FRAMING ABOVE'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01",
-       "wall_area_sf": 133.21,
+       "height_ft": 15.478,
+       "height_source": "S42/A1.1 'STUDS TO ROOF FRAMING ABOVE'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); studs / Z-furring stop under the PEMB purlin: 16.311 - 0.833 = 15.478 (1/A3.1 scaled: Z purlin (key 26) from the T.O. HIGH EAVE datum to its bottom flange 45.6 pt at 3/4\"=1'-0\" (54 pt/ft) = 0.845 ft -> 10\" nominal purlin = 0.833 ft (PEMB depth not dimensioned); RFI-01 closed by estimator decision 2026-11-01 (RESPUESTAS_RFI_ESTIMADOR.md 01)",
+       "wall_area_sf": 126.41,
        "stud": "3-5/8\"",
        "gauge": "20 ga (33 mil, 362S162-33)",
-       "oc_in": 24,
        "detail": "5/A4.2",
        "faces": [
         {
@@ -1137,9 +1068,9 @@
          "room": "Parts Area B 101",
          "board": "5/8 type X",
          "layers": 1,
-         "height_ft": 16.311,
+         "height_ft": 15.478,
          "length_ft": 8.167,
-         "height_source": "S42/A1.1 'PARTS AREA \"B\" AND \"C\" TO BOTTOM OF ROOF FRAMING'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings) - RFI-01"
+         "height_source": "S42/A1.1 'PARTS AREA \"B\" AND \"C\" TO BOTTOM OF ROOF FRAMING'; T.O. LOW EAVE EL. 114'-7 1/2\" (2/A3.2, 3/A3.4) at grid A and T.O. HIGH EAVE EL. 116'-4 3/4\" (1/A3.2, 2/A3.1, 3/A3.1) at grid C, roof slope 1/4:12 (1/A3.2): roof line interpolated at the wall position; B.O. purlin / roof framing elevation NOT printed (PEMB shop drawings); board stops under the purlin: 16.311 - 0.833 = 15.478 (RFI-01 decision, 1/A3.1 scaled)"
         }
        ]
       }
@@ -1155,7 +1086,7 @@
    "lf": 38.667,
    "height_ft": 9.333,
    "wall_area_sf": 360.88,
-   "board_sf": 25.79,
+   "board_sf": 20.45,
    "stud": "8\"",
    "gauge": "16 ga (54 mil, 800S162-54)",
    "source": "3/S5.3",
@@ -1166,8 +1097,17 @@
      "board": "5/8 type X",
      "layers": 1,
      "height_ft": 0.667,
-     "length_ft": 38.667,
-     "height_source": "1/A5.2 head detail: 5/8\" type X + 1/4\" on 7/8\" resilient channel drawn 8\" above the storefront head (printed 8\") [resolution A vs B, pass 2]"
+     "length_ft": 30.667,
+     "height_source": "1/A5.2 head detail: 5/8\" type X + 1/4\" on 7/8\" resilient channel drawn 8\" above the storefront head (printed 8\"); 1/A3.1 / 2/A3.1 key notes 20 / 33 / 35 to 6\" above the C-1 ACT 11'-6\" (A1.2)"
+    },
+    {
+     "side": "B",
+     "room": "Vestibule 100A (C-3 ceiling at the head: no wall board)",
+     "board": "5/8 type X",
+     "layers": 1,
+     "height_ft": 0.0,
+     "length_ft": 8.0,
+     "height_source": "Vestibule 100A segment (8'-0\" HOLD, A5.2 type A): C-3 GWB ceiling at 11'-4\" (A1.2) = the storefront head 11'-4\" R.O.; 3/A3.1 draws no wall board above the head inside the vestibule (joists 600S162-43 on the head line) -> no face [directed review, pass 2]"
     }
    ]
   },
@@ -1187,8 +1127,8 @@
    "wall_id": "VH-C",
    "element": "vestibule_head",
    "lf": 8.75,
-   "height_ft": 4.953,
-   "wall_area_sf": 43.34,
+   "height_ft": 4.12,
+   "wall_area_sf": 36.05,
    "board_sf": 5.84,
    "stud": "6\"",
    "gauge": "18 ga (43 mil, 600S162-43)",
@@ -1209,8 +1149,8 @@
    "wall_id": "VH-B2",
    "element": "vestibule_head",
    "lf": 5.667,
-   "height_ft": 4.953,
-   "wall_area_sf": 28.07,
+   "height_ft": 4.12,
+   "wall_area_sf": 23.35,
    "board_sf": 3.78,
    "stud": "6\"",
    "gauge": "18 ga (43 mil, 600S162-43)",
@@ -1231,8 +1171,8 @@
    "wall_id": "VH-B1",
    "element": "vestibule_head",
    "lf": 5.667,
-   "height_ft": 4.953,
-   "wall_area_sf": 28.07,
+   "height_ft": 4.12,
+   "wall_area_sf": 23.35,
    "board_sf": 3.78,
    "stud": "6\"",
    "gauge": "18 ga (43 mil, 600S162-43)",
@@ -1250,11 +1190,5 @@
    ]
   }
  ],
- "avisos_partition_types": [
-  "S21-S (S21) entra 0.354 ft en la banda de S24-RR (S24): el wall termina en la CARA del que cruza (R11, corregir canon)",
-  "S24-OF (S24) entra 0.465 ft en la banda de S43-OF-W (S43): el wall termina en la CARA del que cruza (R11, corregir canon)",
-  "S24-OF (S24) entra 0.442 ft en la banda de S43-OF-E (S43): el wall termina en la CARA del que cruza (R11, corregir canon)",
-  "S24-RR (S24) entra 0.442 ft en la banda de S43-RR-W (S43): el wall termina en la CARA del que cruza (R11, corregir canon)",
-  "S24-RRS (S24) entra 0.431 ft en la banda de S43-RR-S (S43): el wall termina en la CARA del que cruza (R11, corregir canon)"
- ]
+ "avisos_partition_types": []
 }
