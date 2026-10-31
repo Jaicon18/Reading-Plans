@@ -25,3 +25,12 @@
 | 25 | B · Código | deflection según A1.1 nota 2.C; deep-leg se queda en S42 full (delta 0) |
 | 26 (jamb return) | A · Planos | −10.86 SF |
 Ya cerrados antes: 04 (cuadra), 08 MEP excluido (orden del usuario), 21/26 anclajes/27 tornillería excluida.
+
+## Pasada 2 — respuestas del estimador (31-oct, botones)
+| RFI p2 | Respuesta | Aplicación |
+|---|---|---|
+| 16 | A · Planos | board interior piers EXT-8 hasta 12.0 ft (1/A3.1) |
+| 17 | A · Planos | VH: pierna de board 8" (como 1/A5.2) + underside 11.28 SF |
+| 18 | B · Código | W.R. janitor 4.0×4.0 = 16 SF (IBC 1210.2.2 / GA-216, sink 24" supuesto) |
+| jamb return | Con sill | D1/D2 jambas + head + sill = 58.92 LF × 0.2 = 11.78 SF |
+| 05 | Glass mat (1/A3.4) | cornice CORN-S 286.88 SF glass mat |
