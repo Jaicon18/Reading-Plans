@@ -2588,3 +2588,6 @@ Origen: faces de cuartos húmedos llevadas al deck con un GWB ceiling impreso en
    Los counter walls (< 6 ft) y los box solo de plywood no llevan corner bead.
 2) La comparación A/B mira también stud_size, oc_in y gauge de los walls emparejados. Las diferencias van a la resolución.
 Origen: el v5 traía 42 LF de metal trim contra 957 de rev13 (−95.6 %); con trim.py da −31.2 % (faltan los column wraps). E1 / E2 salieron 3-5/8" en A y 6" en B (E/A-221), y la resolución tomó A (6" stud −46 %).
+
+### R80e.49 — Formato de RFI (usuario 31-oct, REGLA INVIOLABLE, todos los proyectos)
+Cada RFI = opciones múltiples en este orden fijo: (A) PLANOS/specs (N/HOJA + delta), (B) CÓDIGO del trade (cita + delta), (C) Otro (texto libre del estimador/cliente). Si el plano no dice nada o no hay código aplicable, la opción lo declara. Va igual en Pending Items, PARA_REVISAR y en el chat.
