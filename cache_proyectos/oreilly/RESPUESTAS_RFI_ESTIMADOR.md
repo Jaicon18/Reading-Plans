@@ -36,3 +36,8 @@ Ya cerrados antes: 04 (cuadra), 08 MEP excluido (orden del usuario), 21/26 ancla
 | 05 | Glass mat (1/A3.4) | cornice CORN-S 286.88 SF glass mat |
 | 19 | A · Planos | purlin spacing 5'-0"± (2/S5.1): 600S200-54 S42-02 70 LF, S42-01 55 LF, 12 L4x4 |
 | 03 (kickers) | A · 45° | kickers 7.07 ft c/u = 155.54 LF |
+| p2 RFI-27 | B · Código 30 ft | control joints S21 cada 30 ft máx (−101.25 LF vs cargado) |
+| p2 RFI-28 | A · 1 por stick | track brace 362T162-33: 3 empalmes = 6.0 LF |
+| p2 alerta S42-02 | Usar ~7.2 ft | extensión del header S42-02 = 7.2 ft [PENDIENTE] + RFI al GC |
+| p2 A4.2 key 12 | "Exclude it" (texto del usuario) | 1x4 wood trim Div. 06 excluido; aclarar si el corner bead de S41 se queda |
+| p2 S41 corner bead | Sí, se queda | corner bead box-outs S41 = 24 LF |
