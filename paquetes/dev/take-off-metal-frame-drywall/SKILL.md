@@ -70,6 +70,23 @@ con un solo dueño y ninguna door fuera de todo wall (R70.2 / R70.3). (4) Reglas
 suspendido por leyenda, extensión por hatch, ballistic por contorno, piers por parte, vanos de storefront, yields de
 Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `page` 1-based y refs de aberturas.
 
+## Etapa 0 — PLANOS: de dónde se bajan (regla general, todo proyecto)
+
+1. **Fuente principal: BuildingConnected.** Todo proyecto se baja primero de BuildingConnected con
+   `node tools/bc_descarga.js` (credenciales en env `BC_EMAIL` / `BC_PASSWORD`, nunca se imprimen):
+   `buscar "<nombre>"` → `arbol <opp_id>` → `bajar <opp_id> <dir>`. Cada archivo se verifica por bytes.
+2. **Si en BuildingConnected no hay nada** (el proyecto no aparece o no tiene archivos), se busca en el correo
+   **estimating@jchunter.us**: algunos clientes mandan los planos por correo sin subirlos a BuildingConnected.
+3. **NUNCA se acepta, declina ni cambia el status** de una oportunidad (Bidding / Decline / Accept / Submit).
+   Solo se mira y se baja. El status tiene que quedar igual que antes (Undecided sigue Undecided).
+4. **Barrido de invitaciones:** el mismo proyecto puede venir de varios GC. Se revisa el árbol de CADA
+   invitación con el mismo nombre de proyecto; los archivos que solo trae un GC (ITB, as-built, addenda,
+   site walk) también se bajan, en una subcarpeta con el nombre de ese GC.
+5. Se suben a `JC HUNTER PROJECTS/Projects/<carpeta del proyecto>/` con `gdrive_fetch.py put`. "Photos" no se
+   baja salvo que se pida.
+6. Si el zip de "Download All / Download Selected" no arranca, no se espera: se baja archivo por archivo por la
+   API (`/api/opportunities/<id>/files[/<folder_id>]` → `downloadUrl`), que es lo que hace `bc_descarga.js`.
+
 ## Etapas y carpeta (reanudable)
 
 ```
