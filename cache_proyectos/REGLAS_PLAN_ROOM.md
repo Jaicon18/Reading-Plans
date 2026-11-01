@@ -8,3 +8,8 @@ Origen: VS #679 Downey, 2026-11-01 — instrucción directa del usuario.
 2. Nunca mandar nada a nadie: ni email, ni mensaje, ni RFI, ni bid, ni formulario — al GC ni a ningún tercero.
    Los RFI se redactan solo como borrador interno (RFI_PENDIENTES.md) para que el usuario decida.
 3. Los únicos destinos permitidos son los del propio usuario: repo jaicon18/reading-plans y su Google Drive.
+4. Login automático (Playwright) con credenciales del entorno: NUNCA volcar `innerText`/HTML/screenshot de la página
+   de login (muestra el email/usuario llenado). Solo reportar URL y si aparece un mensaje de error conocido
+   (p. ej. "password didn't match", MFA, captcha) mediante búsqueda de texto. Un solo intento de login; si falla,
+   PARAR y reportar (evita bloqueo de cuenta). Playwright está en Node (/opt/node-tools), no en Python.
+   Origen: Chuze Fitness Austin Bluffs, 2026-11-01.
