@@ -69,7 +69,8 @@ async function arbol(ctx, opp, folderId = null, pre = '') {
   return res;
 }
 
-(async () => {
+module.exports = { login, getJson, buscar, arbol, B };
+if (require.main === module) (async () => {
   const [cmd, a1, a2, ...rest] = process.argv.slice(2);
   const { browser, ctx } = await login();
   try {
