@@ -216,3 +216,6 @@ Diferencias entre pasadas por criterios no fijados por programa: (1) altura del 
 
 ## BE-111 — Pasada 1 O'Reilly: altura del board interior del head del storefront tomada de una cota EXTERIOR (31-oct)
 Error (detectado por la pasada 2): rev4 cargó el head interior a 5.06 ft (cota exterior 5'-0 3/4" de 1/A3.1, 111'-4" → T.O. high eave) en vez de 0.667 ft impresos (11'-4" R.O. A5.2 → 12'-0" 1/A5.2). Sobrecarga ≈ +135 SF 5/8" X en el head (y RC / 1/4" de RFI-06 calculados con 4 filas en vez de 1). Prueba: toda altura de board debe citar una cota cuyos DOS extremos sean bordes del board en esa cara (interior/exterior); una cota de fachada exterior nunca define el board interior.
+
+## BE-112 — O'Reilly pasada 2: lecturas que el estimador corrigió con sus respuestas (01-nov)
+(1) Control joints en juntas de masonería en vez de la regla de 30 ft y sin esquinas (RFI-27 B, 30 B); (2) framing colgado de la estructura con top track estándar en vez de deep-leg (RFI-20 B); (3) conteo de clips / L4x4 solo en el wall cuyo detalle los dibuja (RFI-26 B); (4) key note leído como "wall construction" donde el estimador quiere blocking continuo (RFI-25 B); (5) ties de piers cargados conservadores sin corte en planta (RFI-11 A: van 0). Prueba: cada caso del precedente SKILL_working 22–36 se revisa en todo proyecto con PEMB / header walls colgados / CMU con furring.

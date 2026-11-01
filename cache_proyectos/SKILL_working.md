@@ -2665,3 +2665,20 @@ En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido bu
 19. Deflection por la nota general; deep-leg solo donde el detalle lo imprime.
 20. Jamb return: frame a media pared (0.20 ft) cuando el detalle lo muestra así.
 21. (R80e.77) Tornillería: excluida solo si el estimador lo ordena en ese proyecto.
+
+### Precedente O'Reilly pasada 2 — respuestas del estimador 2026-11-01 (reglas generales, todo proyecto)
+22. Joists de hard lid: span en el lado corto @ 24" cuando el plano no lo imprime (RFI-04 A).
+23. Board de furring continuo detrás de box-outs: no se descuenta (RFI-08 A).
+24. Ties / clips de un detalle solo donde el detalle está cortado en planta (ties de piers sin corte = 0) (RFI-11 A).
+25. Sign backing y blocking de extintores: cargar conservador (2 filas en el head / 2'-0" por extintor) (RFI-12 B).
+26. Board de una cara de head no dibujada pero referenciada a otro detalle: como el detalle referenciado (RFI-15 B).
+27. Framing colgado de la estructura (header walls, vestibule heads): top track = deep-leg slotted por la nota general de deflexión (RFI-20 B).
+28. Additional head track (criterio skill) se carga; top track de header walls por "track of same size gauge" se carga (RFI-21 A, 22 A).
+29. Bridging horizontal sin producto impreso: 1-1/2" C.R. channel (RFI-23 A). Backing de accesorios / fixtures sin tamaño: 2 filas × 2'-0" por ítem (RFI-24 A).
+30. Key note ambiguo de elevación interior que la decisión previa leyó como blocking: blocking FRT continuo, 2 filas (RFI-25 B).
+31. Clips / clip angles sin conteo rotulado: uno por kicker y por purlin en TODOS los walls del mismo sistema (RFI-26 B).
+32. Control joints: regla de 30 ft máx (no juntas de masonería) + toda esquina de partitions (RFI-27 B, 30 B).
+33. Track brace en empalmes de strut: uno por stick de 20 ft (RFI-28 A).
+34. Extensión no acotada de un wall: valor del estimador [PENDIENTE] + RFI al GC (RFI-29).
+35. Trim de paneles sanitarios (W-4): solo arriba y en la puerta (RFI-31 B). Diagonal brace de vestibule heads: lo impreso (RFI-32 A).
+36. 1x4 wood trim = Div. 06 EXCLUDED; el corner bead de box-outs se queda (RFI-33). ACT + grid + seismic bracing, insulation y stucco: EXCLUDED con nota.
