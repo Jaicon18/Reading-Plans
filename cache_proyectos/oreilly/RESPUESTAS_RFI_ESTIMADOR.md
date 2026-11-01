@@ -41,3 +41,19 @@ Ya cerrados antes: 04 (cuadra), 08 MEP excluido (orden del usuario), 21/26 ancla
 | p2 alerta S42-02 | Usar ~7.2 ft | extensión del header S42-02 = 7.2 ft [PENDIENTE] + RFI al GC |
 | p2 A4.2 key 12 | "Exclude it" (texto del usuario) | 1x4 wood trim Div. 06 excluido; aclarar si el corner bead de S41 se queda |
 | p2 S41 corner bead | Sí, se queda | corner bead box-outs S41 = 24 LF |
+| p2 RFI-04 | A · Planos | joists lado corto @ 24" (sin cambio) |
+| p2 RFI-08 | A · Planos | board S21 continuo detrás de box-outs (sin cambio) |
+| p2 RFI-11 | A · Planos | piers sin ties ni FCB43.5: −98 LF 362S162-43, −24 FCB43.5 |
+| p2 RFI-12 | B · Conservador | sign backing + extintores 157.33 LF FRT 2x (sin cambio) |
+| p2 RFI-15 | B · Como 1/A5.2 | head vestíbulo 8'-0": +5.33 SF X, +5.33 SF 1/4", +8 LF RC, +3.50 SF X underside, +3.08 SF 1/4" underside, +8 LF corner bead |
+| p2 RFI-20 | B · Código | framing colgado: 95.87 LF de top track pasan a deep-leg slotted (75.79 3-5/8" + 20.08 6") |
+| p2 RFI-21 | A · Criterio | additional head track 32.73 LF (sin cambio) |
+| p2 RFI-22 | A · S1.1 7.E | top track header walls S42 75.79 LF (sin cambio) |
+| p2 RFI-23 | A · C.R. channel | bridging 1-1/2" C.R. channel 807.52 LF (sin cambio) |
+| p2 RFI-24 | A · 2 filas | backing accesorios/fixtures 56.0 LF FRT 2x (sin cambio) |
+| p2 RFI-25 | B · Blocking | blocking FRT continuo 14/A4.1: 2 filas × 50.33 = +100.67 LF |
+| p2 RFI-26 | B · Ambos walls | 22 clips 2x2x14ga (+8), 19 L4x4 (+7) |
+| p2 RFI-30 | B · Todas | control joints también en toda esquina de partitions 8'-6" (≈ +129 LF) |
+| p2 RFI-31 | B · Arriba y puerta | W-4 trim solo arriba y en la puerta (−133.33 LF) |
+| p2 RFI-32 | A · 3 braces | diagonal brace VH 22.14 LF 600S162-43 (sin cambio) |
+| p2 exclusiones | Excluir todo | ACT C-1 + grid + seismic bracing, insulation y stucco EXCLUDED con nota |
