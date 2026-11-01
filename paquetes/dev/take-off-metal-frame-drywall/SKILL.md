@@ -102,7 +102,12 @@ Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `pag
    generales, keynotes) y se cruza con el plan nuevo: walls existing que quedan (no se cargan) o se quitan, furring /
    board que se quita y hay que reponer, ceilings que se demuelen. Cada wall del take-off dice si es NEW o EXISTING
    con la hoja de demo que lo prueba. Un take-off sin el cruce con demo NO es entregable.
-3. Solo quedan fuera las hojas M / P / E / FP y civil, salvo como consulta cuando una burbuja o nota las llama
+3. **Las S se leen SIEMPRE, detalle por detalle**, y cada uno se clasifica en `proceso/S_CLASIFICACION.md`: NUESTRO
+   (cold-formed framing: studs, track, headers, kickers, bracing, clips, TEK / PAF, anchorage schedule de bottom track),
+   CONSULTA (criterio de diseño: lateral pressure, seismic category; estructura sobre walls para vigas_sobre_walls y
+   deflection track) o EXCLUDED con motivo (structural steel, misc. metals, joist reinforcement, concreto). Lo NUESTRO
+   entra al canon con su N/HOJA; lo EXCLUDED va como nota directa en Scope Checklist, sin RFI.
+4. Solo quedan fuera las hojas M / P / E / FP y civil, salvo como consulta cuando una burbuja o nota las llama
    (penetraciones, access panels, fire dampers, alturas de equipo).
 
 ## Etapas y carpeta (reanudable)
