@@ -1,0 +1,780 @@
+{
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "question": "B.O. deck / bottom of roof structure height is not printed anywhere (elevations show 'B.O. DECK - VARIOUS'). What height do head D/E walls (A2-3D, A6D, C3D, X6D, B2E) and soffit framing run to?",
+   "options": {
+    "A": {
+     "texto": "Plans: no printed B.O. deck; elevation datum displays 'VARIOUS'; A000.A asks the GC to survey 'clear height underside of roof deck'; RCP note 4 'heights to bottom of existing structure are assumed'. Loaded 22'-10\" (value hidden under 'VARIOUS' on A423.B/A425.C/A429.B/A434.A) | STAGE 3: the only PRINTED deck value is \"EL.+ 22'-10\"\" on 6/A429.B (Bodywork) -> CONFIRMED for the A429 walls only; every other 22'-10\" / 22'-5\" / 21'-10\" / 21'-4\" sits under the printed \"B.O. DECK VARIOUS\" (A423.B, A425.C, A434.A) and is NOT a printed dimension -> PENDING everywhere else",
+     "source": "A423.B, A425.C, A000.A, A121 note 4, 6/A429.B (printed EL.+22'-10\")",
+     "delta": "each 1 ft of deck height = +1 ft of stud per stud of all head D/E walls and soffit sides, + board on faces that go to deck"
+    },
+    "B": {
+     "texto": "Code: ASTM C754 / spec 09 22 16 3.2.D: extend framing full height to structural supports; no code value for the height",
+     "cita": "ASTM C754; 09 22 16 3.2.D",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "22'-10\" (22.83 ft) everywhere, one zone",
+   "fuentes_revisadas": [
+    "S300",
+    "A131",
+    "A201",
+    "A000.A",
+    "A421.B-A437.A elevations",
+    "A121",
+    "AD102"
+   ]
+  },
+  {
+   "id": "RFI-02",
+   "question": "Type B2E head 'E': A301 has two details titled HEAD DETAIL (E): bubble E (stud to structural deck with 2\" slip track, board ceiling + 6\") and bubble H (furring against existing wall stopping a short distance above the ceiling). Which applies to B2E?",
+   "options": {
+    "A": {
+     "texto": "E/A301 (to deck, slip track) vs H/A301 (furring stops above ceiling). Loaded E/A301 (to deck, more material)",
+     "source": "E/A301, H/A301",
+     "delta": "stud height (B.O. deck 22.83 - (ceiling + ~1.0)) per stud of B2E walls; slip track vs standard track on B2E LF"
+    },
+    "B": {
+     "texto": "No code requirement for furring height",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "B2E studs to deck with 2\" slip track; board to ceiling + 6\" (E/A301)",
+   "fuentes_revisadas": [
+    "A301 E, H, I",
+    "A101",
+    "A429"
+   ]
+  },
+  {
+   "id": "RFI-03",
+   "question": "Types D6F and D6G: the WALL TAG KEY (I/A301) says middle digit 6 = 6\" studs, but the TYPE 'D' schedule prints 3 5/8\" for D6F and D6G. Which stud size?",
+   "options": {
+    "A": {
+     "texto": "Tag key 6 = 6\" (I/A301) vs schedule 3 5/8\" (TYPE D/A301). Loaded 6\" (conservative)",
+     "source": "I/A301, TYPE D table A301 (img/GEN_A301_type_D_table.png)",
+     "delta": "D6F (4 tags) + D6G (2 tags): studs and tracks 6\" instead of 3-5/8\" on their LF"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "6\" studs and track",
+   "fuentes_revisadas": [
+    "A301",
+    "A101",
+    "A429"
+   ]
+  },
+  {
+   "id": "RFI-04",
+   "question": "Stud gauge and O.C. are not printed for the partition types (only A2: 'MIN. 25 GAUGE ... 16\" O.C.'; A502 soffits '20 GA'); A301 notes refer to S501 / S001 which are not in the set; S100 has no cold-formed framing notes; spec 09 22 16 is performance-based (min 0.0147\").",
+   "options": {
+    "A": {
+     "texto": "Plans: A2 25 ga @ 16\"; A502 20 ga @ 24\" (soffits); S200 'MTL STUDS @ 16\"oc MAX PER ARCH'. Loaded 16\" O.C. all partitions; 20 ga (33 mil) for walls to deck (heads D/E, ~22 ft) and 25 ga (min.) for walls stopping at ceiling (heads C/F/G)",
+     "source": "A301 A2 note, A502, S200, spec 09 22 16 2.2.B.2",
+     "delta": "20 ga vs 25 ga changes stud weight/cost on head D/E LF; O.C. 16\" vs 24\" = +50 % studs"
+    },
+    "B": {
+     "texto": "Code: interior lateral 5 psf (S100) with L/240 per ASTM C754 / manufacturer limiting heights determine gauge",
+     "cita": "S100 design loads; ASTM C754",
+     "delta": "per manufacturer height table"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "16\" O.C.; 20 ga head D/E walls, 25 ga head C/F/G walls",
+   "fuentes_revisadas": [
+    "A301",
+    "S100",
+    "S200",
+    "A502",
+    "spec 09 22 16"
+   ]
+  },
+  {
+   "id": "RFI-05",
+   "question": "Gypsum board type: plans and A301 say '5/8\" GYP BD'; spec 09 29 00 2.3 lists only 5/8\" Type X as interior gypsum board (and MR board with Type X core). Is Type X required throughout?",
+   "options": {
+    "A": {
+     "texto": "Plans '5/8\" GYP BD' (regular) vs spec 09 29 00 2.3.A Type X. Loaded 5/8\" Type X (spec, conservative); MR Type X at wet rooms",
+     "source": "A301; spec 09 29 00 2.3.A / 2.3.F",
+     "delta": "price difference Type X vs regular on all board SF"
+    },
+    "B": {
+     "texto": "IBC: only the X6D 1 HR wall (UL U465) requires Type X",
+     "cita": "IBC 2021 703 / UL U465",
+     "delta": "Type X only on X6D"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "5/8\" Type X everywhere; 5/8\" Type X MR in locker rooms, restrooms, showers",
+   "fuentes_revisadas": [
+    "A301",
+    "A111",
+    "spec 09 29 00"
+   ]
+  },
+  {
+   "id": "RFI-06",
+   "question": "Tile backer conflict: A301 type notes '5/8\" CEMENT BACKER BOARD BEHIND ALL TILE'; elevation general note 14 'PROVIDE DENSSHIELD TILE BACKER AT ALL WALL TILE LOCATIONS'; note 15 'PROVIDE DENSARMOR PLUS SHEATHING AT ALL RESTROOM, TOILET, SHOWER & LOCKER ROOM WALL TILE LOCATIONS'; spec 09 29 00 cementitious backer units 5/8\". Which backer?",
+   "options": {
+    "A": {
+     "texto": "A301 + spec: 5/8\" cement backer; A421.B-A437.A elevation notes 14/15: DensShield / DensArmor Plus. Loaded 5/8\" cement backer behind tile",
+     "source": "A301, A424.B note 14/15, spec 09 29 00 2.x",
+     "delta": "cement board vs DensShield/DensArmor price on tile-face SF"
+    },
+    "B": {
+     "texto": "Code: ANSI A108/A118 / TCNA: cementitious backer at wet areas; glass-mat water resistant backer allowed",
+     "cita": "TCNA Handbook B415/W244",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "5/8\" cement backer board behind all tile",
+   "fuentes_revisadas": [
+    "A301",
+    "A421.B-A437.A elevation general notes",
+    "spec 09 29 00"
+   ]
+  },
+  {
+   "id": "RFI-07",
+   "question": "X6D (1 HR, UL U465): 'SEE SCHED. BELOW FOR NUMBER OF LAYERS REQ'D' but the schedule gives no layer count; the detail draws 2 layers each side; UL U465 1 HR = 1 layer 5/8\" Type X each side.",
+   "options": {
+    "A": {
+     "texto": "X/A301 drawing: 2 layers each side. Loaded 2 layers each side (as drawn)",
+     "source": "X/A301 (img/GEN_A301_A2_X.png)",
+     "delta": "+1 layer each side on X6D LF x height"
+    },
+    "B": {
+     "texto": "UL U465 1 HR: one layer 5/8\" Type X each side",
+     "cita": "UL U465",
+     "delta": "-1 layer each side"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "2 layers 5/8\" Type X each side",
+   "fuentes_revisadas": [
+    "A301",
+    "G003",
+    "A101",
+    "A424"
+   ]
+  },
+  {
+   "id": "RFI-08",
+   "question": "C-5 'SUSPENDED GYPSUM CEILING - ARMSTRONG FLAT DRYWALL SUSPENSION SYSTEM' is specified under 09 51 23 (acoustical ceilings: HD8906 main runner, XL8945P 48\" cross tee, KAM molding, DW90CAG clip, SB12P hanger). Is the drywall grid by the drywall contractor or by the ACT contractor?",
+   "options": {
+    "A": {
+     "texto": "A121 C-5 + spec 09 51 23 list the drywall grid. Loaded grid + board in our scope (mains 48\" O.C., cross tees 16\" O.C. Armstrong standard)",
+     "source": "A121 finish schedule, spec 09 51 23 p.4",
+     "delta": "drywall grid main/cross tees, molding and hangers for ~524 SF of new C-5 ceiling"
+    },
+    "B": {
+     "texto": "Code: ASTM C635/C636 (grid), ASTM E580 seismic n/a (SDC B)",
+     "cita": "ASTM C635/C636",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "drywall grid by us",
+   "fuentes_revisadas": [
+    "A121",
+    "A421.A-A426",
+    "spec 09 51 23",
+    "spec 09 29 00"
+   ]
+  },
+  {
+   "id": "RFI-09",
+   "question": "Soffit framing size/gauge where A502 says 'METAL STUD SOFFIT FRAMING SEE STRUCTURAL' (16/A502, 12/A502) - the structural sheets have no soffit detail; and the A421.A storefront soffits (8'-6\" x2, 10'-0\") have no section callout.",
+   "options": {
+    "A": {
+     "texto": "16/A502 'see structural' (none). Loaded 6\" 20 ga @ 24\" O.C. as in 6, 7, 8, 13, 15/A502",
+     "source": "A502, S100-S300",
+     "delta": "6\" vs 3-5/8\" studs on ~92 LF of 16/A502 soffit sides; drop-edge framing of 3 storefront soffits (~37 LF)"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "6\" x 20 ga @ 24\" O.C. for 16/A502; storefront soffit drop edges framed like 8/A502",
+   "fuentes_revisadas": [
+    "A502",
+    "S100",
+    "S101",
+    "S200",
+    "S300",
+    "A421.A"
+   ]
+  },
+  {
+   "id": "RFI-10",
+   "question": "8/A502 headwall between 101 LOBBY (P-16) and 103 RETAIL (P-4) on A421.A: both sides are exposed structure (C-7) and no soffit height is printed. What is the bottom of the headwall?",
+   "options": {
+    "A": {
+     "texto": "A421.A: no SOFFIT HGT tag at the 8/A502 line. Loaded bottom at 10'-0\" (adjacent C-5 strip) -> framing 12.83 ft x 14.39 ft",
+     "source": "A421.A, 8/A502",
+     "delta": "each 1 ft lower = +14.4 SF board per face and +1 ft per stud"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "soffit bottom 10'-0\"",
+   "fuentes_revisadas": [
+    "A421.A",
+    "A421.B",
+    "A421.C",
+    "A121"
+   ]
+  },
+  {
+   "id": "RFI-11",
+   "question": "9/A502 (called at the strip west of 106 SMOOTHIE STORAGE on A421.A) is titled 'CEILING DETAIL AND SOFFIT' with '2 LAYERS OF GYP BD TO WRAP FITNESS CINEMA SOFFIT' - there is no fitness cinema at that location. Does 9/A502 apply as drawn?",
+   "options": {
+    "A": {
+     "texto": "Loaded as drawn: 1'-0\" drop, 6\" and 3-5/8\" studs @ 16\", 2 layers wrap, 7.5 ft",
+     "source": "9/A502, A421.A",
+     "delta": "1 layer vs 2 layers on the 7.5 ft soffit wrap"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "as drawn",
+   "fuentes_revisadas": [
+    "A421.A",
+    "A502"
+   ]
+  },
+  {
+   "id": "RFI-12",
+   "question": "Door / storefront heads: 6/A602, 8/A602, 1/A602 say 'STEEL HEADER @ HEAD LOCATIONS - REF: STRUCT.' but no structural sheet shows door or storefront headers. Steel by others or metal stud box header?",
+   "options": {
+    "A": {
+     "texto": "Structural silent. Loaded metal stud box header (4 pieces, R.O. + 1'-4\") per SKILL E19/E20",
+     "source": "A602 1, 6, 8; S100-S300",
+     "delta": "box header LF = (R.O. + 1.33) x 4 per opening if ours; 0 if steel by others"
+    },
+    "B": {
+     "texto": "Code: AISI S212 headers (design by others)",
+     "cita": "AISI S212",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "metal stud box header at every framed opening",
+   "fuentes_revisadas": [
+    "A602",
+    "A601",
+    "S100",
+    "S101",
+    "S200",
+    "S300"
+   ]
+  },
+  {
+   "id": "RFI-13",
+   "question": "A103 metal backing items (CONT MTL TRACK 6 x 16 GA; WOOD OR MTL STRAP -> metal) give heights but no lengths; the AV niche (10/A505.B) horizontal studs have no width.",
+   "options": {
+    "A": {
+     "texto": "Lengths = millwork / locker runs on the elevations (wall tasks). Loaded: run length of the millwork drawn on the elevation of each tagged wall; AV niche 2 studs x one stud bay",
+     "source": "A103, 10/A505.B",
+     "delta": "per tag: rows x millwork length LF of 6\" 16 ga track"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "millwork run length per elevation",
+   "fuentes_revisadas": [
+    "A103",
+    "A421.B-A437.A",
+    "A503-A503.C",
+    "A505.B"
+   ]
+  },
+  {
+   "id": "RFI-14",
+   "question": "RTU curb cap 2/A131 (600S162-33 stud frame 12\" OC + #10 TEK @ 6\") is not called on the roof plan: which curbs get capped and what size? (AD103 D0.18 removes existing mechanical equipment at 9 locations.)",
+   "options": {
+    "A": {
+     "texto": "Detail exists, no callout. Loaded 9 curb caps (AD103 D0.18 count), frame size PENDING",
+     "source": "A131 2, AD103 D0.18",
+     "delta": "per curb: perimeter + cross members @ 12\" of 600S162-33 + screws @ 6\""
+    },
+    "B": {
+     "texto": "Roofing by landlord's roofer (A131 note 9)",
+     "cita": "A131 note 9",
+     "delta": "0 if by roofer"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "9 curb caps, size PENDING",
+   "fuentes_revisadas": [
+    "A131",
+    "AD103",
+    "M120",
+    "S300"
+   ]
+  },
+  {
+   "id": "RFI-15",
+   "question": "Access panels: P602 'PROVIDE 12X12 ACCESS PANEL IN PLUMBING WALLS FOR SERVICING OF TRAP PRIMER VALVES' - valve locations/quantity not shown; G002 item 76 swimsuit spinner access panel - no spinner on plan (pool infilled).",
+   "options": {
+    "A": {
+     "texto": "Loaded: 1 signage panel (A131 A4.10); trap primer panels PENDING (1 per primer valve when located); spinner 0",
+     "source": "P602, G002 76, A131 A4.10",
+     "delta": "+1 12x12 panel per trap primer valve"
+    },
+    "B": {
+     "texto": "IPC 2021 / UPC: valves shall be accessible",
+     "cita": "IPC 2021 604 / 1002",
+     "delta": "per plumbing layout"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "trap primer panels PENDING count",
+   "fuentes_revisadas": [
+    "P601",
+    "P602",
+    "P110",
+    "P111",
+    "P401",
+    "P402",
+    "G002",
+    "A424",
+    "A425"
+   ]
+  },
+  {
+   "id": "RFI-16",
+   "question": "AD102 D0.63 'REPAIR AND INFILL EXISTING HARDLID CEILING' (10 occurrences: restrooms / showers) and D0.59 'REMOVE 24\" OF GYP. BOARD FROM BOTTOM OF THIS WALL' (2 occurrences): extents not dimensioned. What quantity of GWB patch / infill and new board at the 24\" removal?",
+   "options": {
+    "A": {
+     "texto": "Loaded as allowance (no quantity); D0.59 walls: new board 24\" high on the face (FRT plywood A1.11/A1.13 replaces gyp to 24\" AFF - wood EXCLUDED)",
+     "source": "AD102 D0.63, D0.59; A101 A1.11/A1.13",
+     "delta": "allowance SF to be priced"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "allowance - not quantified",
+   "fuentes_revisadas": [
+    "AD102",
+    "A121",
+    "A424.A",
+    "A425.A"
+   ]
+  },
+  {
+   "id": "RFI-17",
+   "question": "Head G (C3G, D3G, D6G) says 'WALL CAP, REF 7/A501' but 7/A501 is 'TYP. LIGHTED MIRROR SECTION'. Which cap detail applies (9/A501 SS-2 solid surface cap or 5/A501 1 1/2\" wood trim)?",
+   "options": {
+    "A": {
+     "texto": "Loaded: cap by millwork (not ours); top of wall = track, no board on top",
+     "source": "G/A301, 5/A501, 9/A501",
+     "delta": "0 for framing; +board on top if a gyp-wrapped cap is intended"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "no gyp board on the top of head G walls",
+   "fuentes_revisadas": [
+    "A301",
+    "A501",
+    "G002 item 87 HALF WALL CAP"
+   ]
+  },
+  {
+   "id": "RFI-18",
+   "question": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' (and S001) - sheets S001/S501 are not in the bid set (S100, S101, S200, S300 only).",
+   "options": {
+    "A": {
+     "texto": "Loaded: stud size from the schedule/tag key, spacing per RFI-04, anchorage per S200 schedule (Hilti X-U @ 16\")",
+     "source": "A301, sheet index G001",
+     "delta": "see RFI-04"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "as RFI-04",
+   "fuentes_revisadas": [
+    "G001",
+    "S100",
+    "S101",
+    "S200",
+    "S300"
+   ]
+  },
+  {
+   "id": "RFI-19",
+   "question": "Smoothie bar sections 10/11/12/A503.C: 'CASEWORK FRAMING' on a 'TREATED BASE PLATE' with 3/4\" CDX plywood, 5/8\" gyp board one face and cement board with tile the other. Is the bar framing metal studs (ours) or casework framing by the millwork vendor (wood)?",
+   "options": {
+    "A": {
+     "texto": "Loaded: framing by millwork (wood, EXCLUDED); if the A421 task finds a tagged partition at the bar, its board stays",
+     "source": "A503.C 10-12; G002 item 90",
+     "delta": "bar length x height of metal studs + board if ours"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "casework framing EXCLUDED",
+   "fuentes_revisadas": [
+    "A421",
+    "A421.B",
+    "A503.C",
+    "G002"
+   ]
+  },
+  {
+   "id": "RFI-20",
+   "question": "New wall with door 141 across Exit Corridor 141 (rev 8 cloud, A101) has no partition tag on any sheet. Which type?",
+   "options": {
+    "A": {
+     "texto": "Plan: no tag; poche 3.36 pt = 6\" like tagged A6D walls on A101; loaded A6D head D to deck (5.23 LF)",
+     "source": "A101, A601 door 141, A428/A425 (not shown)",
+     "delta": "A6C: same LF, head C (stud to ceiling 9'-0\" + 6\" instead of deck); A3C: 3-5/8\" studs on 5.23 LF"
+    },
+    "B": {
+     "texto": "No code requirement; corridor wall not rated on G003",
+     "cita": "G003",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "A6D, 5.23 LF, to deck",
+   "fuentes_revisadas": [
+    "A101",
+    "A428",
+    "A425",
+    "G003",
+    "A601"
+   ]
+  },
+  {
+   "id": "RFI-21",
+   "question": "Head C (C/A301, types A3C, A6C, C3C): stud extension above the ceiling is drawn (~6\") but not dimensioned, and several head-C walls face rooms open to structure. Confirm: stud = highest adjacent ceiling + 6\"; to B.O. deck where a face is open to structure / finished to deck in elevation?",
+   "options": {
+    "A": {
+     "texto": "Plan: C/A301 drawn ~6\" (not dimensioned); elevations A422.C, A424.C, A425.C, A435.A finish some faces to \"B.O. DECK\". Loaded: ceiling + 6\"; deck where a face is open/finished to deck (one criterion for all head-C walls)",
+     "source": "C/A301; A422.C; A424.C; A425.C; A435.A; A121",
+     "delta": "to-deck everywhere: +(22.83 - ceiling - 0.5) ft of stud on the head-C walls now at ceiling + 6\"; ceiling-only everywhere: -(22.83 - ceiling - 0.5) ft of stud and board on the faces now to deck"
+    },
+    "B": {
+     "texto": "ASTM C754 / spec 09 22 16 3.2: braced partitions stopping above ceiling are acceptable when bracing to structure is provided (C/A301 \"WALL BRACING - RE: STRUCT.\")",
+     "cita": "ASTM C754; 09 22 16",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "ceiling + 6\"; deck where the face is open/finished to deck",
+   "fuentes_revisadas": [
+    "A301",
+    "A121",
+    "A422.C",
+    "A424.C",
+    "A425.C",
+    "A435.A"
+   ]
+  },
+  {
+   "id": "RFI-22",
+   "question": "Untagged 3-5/8\" new walls (Men's Locker trough-sink wing walls A-A424-13/-14, Women's Janitor 138 west wall A-A425-5, Women's locker vanity niche) carry no tag. Which type?",
+   "options": {
+    "A": {
+     "texto": "Plan: no tag on A424/A425/A101; gray poche 3-5/8\" stud, board both faces -> A3C (the 3-5/8\" interior type); loaded A3C",
+     "source": "A424, A425, A101, A301",
+     "delta": "C3C/C3D furring (board one side): same LF, about half the board on these ~10.4 LF"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "A3C",
+   "fuentes_revisadas": [
+    "A424",
+    "A425",
+    "A101",
+    "A301"
+   ]
+  },
+  {
+   "id": "RFI-23",
+   "question": "Group X 119 north wall: A101 tags new B2E furring (PT0105, gray fill) and AD101 note 5 removes the exterior furring to CMU, but A427 labels the wall \"EXISITING\". Is new B2E furring required (34.29 LF)?",
+   "options": {
+    "A": {
+     "texto": "Plan: A101 tag B2E + gray new-wall fill; AD101 note 5; loaded NEW B2E 34.29 LF",
+     "source": "A101, A427, AD101 note 5",
+     "delta": "existing to remain: -34.29 LF B2E and its board"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "new B2E (34.29 LF)",
+   "fuentes_revisadas": [
+    "A101",
+    "A427",
+    "AD101"
+   ]
+  },
+  {
+   "id": "RFI-24",
+   "question": "Keynote A2.25 \"existing door opening to be infilled with metal and drywall\" (A434, Light Weights 149 / Electrical 118): type and height of the infill not printed.",
+   "options": {
+    "A": {
+     "texto": "Plan: no type; existing wall thickness ~6\"; loaded A6D 3.16 LF, 7'-0\" opening height (PENDING)",
+     "source": "A434, A101 keynote A2.25",
+     "delta": "A3C: 3-5/8\" studs on 3.16 LF; full height infill to deck: +15.8 ft of stud height"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "A6D, 3.16 LF, 7'-0\"",
+   "fuentes_revisadas": [
+    "A434",
+    "A101",
+    "AD101 D0.10"
+   ]
+  },
+  {
+   "id": "RFI-25",
+   "question": "Lift Lab curved wall: A101 keynote A1.15 \"impact gypsum board to 24\" AFF\" on the curved wall, but AD101 D0.15 keeps the existing curved storefront. Is new curved framing / board required (~42.5 LF)?",
+   "options": {
+    "A": {
+     "texto": "Plan: AD101 D0.15 existing to remain; not loaded",
+     "source": "A101 A1.15, AD101 D0.15, A428, A428.A",
+     "delta": "+~42.5 LF curved framing (type not printed) and ~85 SF impact board (24\" high)"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "not loaded",
+   "fuentes_revisadas": [
+    "A101",
+    "AD101",
+    "A428",
+    "A428.A",
+    "A432"
+   ]
+  },
+  {
+   "id": "RFI-26",
+   "question": "Existing walls to remain with keynotes A1.11 / A1.13 (FRT plywood / mirror backing, Lift Lab & Weights) and AD101 D0.07 / note 5 (\"remove existing finish materials and substrate where required\", exterior furring removed to CMU): is new furring / board required on those existing walls?",
+   "options": {
+    "A": {
+     "texto": "Plan: walls shown EXISTING (white); only tagged B2E furring loaded; no re-furring of untagged existing walls loaded",
+     "source": "AD101 note 5, D0.07; A101 A1.11/A1.13; A428; A432; A435",
+     "delta": "re-furring Lift Lab / Weights / GM walls: + ~186 LF furring (B2E-like) + board; new board only on D0.07 walls: + board SF of those faces"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "not loaded",
+   "fuentes_revisadas": [
+    "AD101",
+    "A101",
+    "A428",
+    "A432",
+    "A435"
+   ]
+  },
+  {
+   "id": "RFI-27",
+   "question": "Family Restroom 105 ceiling: A421.A RCP prints 12'-1\" while the A421.C elevations show 9'-0\". Which governs board height?",
+   "options": {
+    "A": {
+     "texto": "Plan conflict; loaded RCP 12'-1\" (RCP governs ceiling height)",
+     "source": "A421.A, A421.C",
+     "delta": "9'-0\": -3.08 ft of board on the restroom faces (~50 SF)"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "12'-1\"",
+   "fuentes_revisadas": [
+    "A421.A",
+    "A421.C",
+    "A121"
+   ]
+  },
+  {
+   "id": "RFI-28",
+   "question": "A103 backing key 8: continuous track at 5'-5\" AFF on a 5'-0\" high (T.O. 60\") D3G low wall. Where does the backing go?",
+   "options": {
+    "A": {
+     "texto": "Plan contradiction; backing loaded at the wall top (5'-0\"), 9.99 LF",
+     "source": "A103 key 8, A101 T.O. WALL 60\"",
+     "delta": "omit: -9.99 LF of backing track"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "track at top of the low wall",
+   "fuentes_revisadas": [
+    "A103",
+    "A101",
+    "A421"
+   ]
+  },
+  {
+   "id": "RFI-29",
+   "question": "Opening heads not dimensioned: D6F 8'-0\" cased opening (5/A429.A \"ALIGN\" with door 115 = 7'-0\"), Studio Entry 6'-6\" opening (head at 9'-0\" C-5 soffit, A426), storefront H (door 113) frame height (10'-0\" like the other A601 frame types), door R.O. 3'-4\" x 7'-2\" (door + 2\" frame).",
+   "options": {
+    "A": {
+     "texto": "Plan: heads by ALIGN / ceiling / frame type; loaded as listed",
+     "source": "5/A429.A, A426 RCP, A601, 6/A602",
+     "delta": "each +1 ft of head height = -1 ft of cripple per opening; R.O. 3'-0\" x 7'-0\": -4\" of header per door"
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "7'-0\" / 9'-0\" / 10'-0\" / 3'-4\" x 7'-2\"",
+   "fuentes_revisadas": [
+    "A429.A",
+    "A426",
+    "A601",
+    "A602"
+   ]
+  },
+  {
+   "id": "RFI-30",
+   "question": "Wet / service rooms outside A111 note 3 (janitors, laundry): MR board or type X? Sauna 115: DensArmor Plus full height or MR / type X to 7'-6\"? X6D (A424-7): type X both faces to deck or rated face only?",
+   "options": {
+    "A": {
+     "texto": "Plan: A111 note 3 + A301 notes; loaded MR at janitors/laundry, DensArmor Plus full height at sauna, X6D both faces to deck",
+     "source": "A111 note 3, A301, A504, A424",
+     "delta": "type X instead of MR: same SF, other product; X6D rated face only: ~-123 SF"
+    },
+    "B": {
+     "texto": "IBC 2509 / GA-216: water-resistant board at wet areas; UL U465 for X6D",
+     "cita": "IBC 2509; GA-216; UL U465",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "as loaded",
+   "fuentes_revisadas": [
+    "A111",
+    "A301",
+    "A504",
+    "A424"
+   ]
+  },
+  {
+   "id": "RFI-31",
+   "question": "Women's locker vanity end caps (A423 tag PT0130) are tagged C3D (furring, head D to deck) although they read as free-standing caps of the locker recess. Confirm type C3D.",
+   "options": {
+    "A": {
+     "texto": "Plan: printed tag C3D on A423 (owner) -> loaded C3D 2 x 2.68 LF",
+     "source": "A423 PT0130, A425",
+     "delta": "A3C (both faces boarded, head C): same LF, board on the second face, stud to ceiling + 6\""
+    },
+    "B": {
+     "texto": "No code requirement",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "C3D",
+   "fuentes_revisadas": [
+    "A423",
+    "A425"
+   ]
+  },
+  {
+   "id": "RFI-32",
+   "question": "B2E furring (A301 TYPE B) prints stud size 2\". A 2\" stud is not a standard SSMA depth (1-5/8\", 2-1/2\", 3-5/8\"). Which member?",
+   "options": {
+    "A": {
+     "texto": "Plan: 2\" on A301 TYPE B; loaded 2-1/2\" studs / track on all B2E (103.96 LF), next standard depth up",
+     "source": "A301 TYPE B table",
+     "delta": "1-5/8\" (162): lighter member on the same 103.96 LF, no LF change"
+    },
+    "B": {
+     "texto": "SSMA standard depths 162 / 250 / 362 / 600; a 2\" furring is usually 1-5/8\" or 2-1/2\" (or hat / Z furring)",
+     "cita": "SSMA product technical guide",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "assumption_loaded": "2-1/2\" studs and track (250S / 250T)",
+   "fuentes_revisadas": [
+    "A301",
+    "A111",
+    "spec 09 22 16",
+    "spec 09 29 00"
+   ],
+   "nota_mr": "MR on all wet-room faces is loaded per A111 note 3 + A301 type notes (printed in the set) — no RFI needed (STAGE 3 type X substitution reverted, R80w.11)"
+  }
+ ],
+ "notes": "Merged: A-GEN rfis RFI-01..19 (RFI-01 updated in Stage 3) + Stage 3 RFI-20..31. Format R80e.50."
+}
