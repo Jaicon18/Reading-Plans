@@ -91,6 +91,20 @@ Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `pag
    NUEVO / CAMBIADO / QUITADO (rc 3): se baja lo nuevo, se sube a Drive, se dice al usuario qué cambió y se rehace
    lo que afecte; nunca se entrega sobre un set viejo sin decirlo.
 
+## Etapa 0b — HOJAS QUE SE LEEN (regla general, todo proyecto; usuario 2026-11-01, Chuze)
+
+1. **Las G (General Information) se leen SIEMPRE, completas:** cover (alcance, código, tipo de alteración, keynote
+   legends), responsibility schedule (GC / Owner / Landlord: define qué es nuestro), code / egress (walls rated),
+   accessibility (backing, wing walls). También site, slab, equipment, floor finish y roof plan: traen notas que
+   cambian cantidades (tipo de board por cuarto, blocking, stud frames en techo, access panels, walls rated existing).
+   Nunca se marcan "fuera" sin abrirlas; se citan con N/HOJA en Scope Checklist.
+2. **DEMOLITION PLAN = OBLIGATORIO** siempre que exista (floor, RCP, roof): se lee completo (leyenda, notas
+   generales, keynotes) y se cruza con el plan nuevo: walls existing que quedan (no se cargan) o se quitan, furring /
+   board que se quita y hay que reponer, ceilings que se demuelen. Cada wall del take-off dice si es NEW o EXISTING
+   con la hoja de demo que lo prueba. Un take-off sin el cruce con demo NO es entregable.
+3. Solo quedan fuera las hojas M / P / E / FP y civil, salvo como consulta cuando una burbuja o nota las llama
+   (penetraciones, access panels, fire dampers, alturas de equipo).
+
 ## Etapas y carpeta (reanudable)
 
 ```

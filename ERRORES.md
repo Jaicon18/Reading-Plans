@@ -65,6 +65,7 @@ El texto completo de los cambios v58 en adelante está en `historial/`.
 | v77b | — | BOA | ver historial | CAMBIOS v77b — corrección corta de v77 (D1 sobre la wall correcta, largo de wall a través de doors) | `historial/v77b.md` |
 | v77c | — | BOA | ver historial | CAMBIOS v77c — decisiones del usuario U1–U11 (Bluebeam, 2026-10-20) | `historial/v77c.md` |
 | v80h+R0 | 2026-11-01 | Chuze | Zip de BuildingConnected no arrancó; fuente de planos sin regla | Etapa 0: BuildingConnected primero, luego correo estimating@jchunter.us; nunca aceptar/declinar; `tools/bc_descarga.js` | `historial/v80h-regla0.md` |
+| v80h+R0b | 2026-11-01 | Chuze | Hojas G, site, slab, finish y roof marcadas "fuera" sin abrirlas; demo como solo consulta | Etapa 0b: G y hojas generales se leen siempre; demolition plan obligatorio y cruzado wall por wall | `paquetes/dev/take-off-metal-frame-drywall/SKILL.md` |
 | v62, v64, v65b, v66, v68, v69b, v70b, v70c | — | — | — | Paquete sin nota de cambios en Drive; ver el diff del commit | `paquetes/dev/` |
 
 **Huecos:** v43, v63 y v65 no están en Drive. [PENDIENTE] confirmar si existieron.
