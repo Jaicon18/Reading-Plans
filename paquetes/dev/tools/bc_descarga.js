@@ -9,6 +9,10 @@
 //   node bc_descarga.js buscar "<texto del nombre>"          → lista oportunidades que coinciden (id, GC, trade, due)
 //   node bc_descarga.js arbol  <opportunity_id>              → árbol de archivos (carpeta/archivo, tamaño)
 //   node bc_descarga.js bajar  <opportunity_id> <dest_dir> [carpeta ...]
+//   node bc_descarga.js foto    <opportunity_id> <foto.json>   → guarda el árbol (nombre, tamaño, fecha) al bajar
+//   node bc_descarga.js cambios <opportunity_id> <foto.json>   → compara contra la foto: NUEVO / CAMBIADO / QUITADO
+//        rc 0 sin cambios, rc 3 con cambios (addendum, plano revisado). Se corre al arrancar cada etapa y
+//        SIEMPRE antes de entregar; con cambios se baja lo nuevo y se rehace lo que toque.
 //        sin carpetas: baja todo menos "Photos"; con carpetas: solo esas (nombre exacto de primer nivel)
 //
 // Cada archivo se verifica: bytes bajados == size de la API; si no cuadra, sale con error.
@@ -60,7 +64,7 @@ async function arbol(ctx, opp, folderId = null, pre = '') {
   for (const it of j.items || []) {
     const p = pre ? `${pre}/${it.name}` : it.name;
     if (it.type === 'FOLDER') res.push(...await arbol(ctx, opp, it._id, p));
-    else res.push({ path: p, size: it.size, downloadUrl: it.downloadUrl });
+    else res.push({ path: p, size: it.size, modified: it.dateModified, downloadUrl: it.downloadUrl });
   }
   return res;
 }
@@ -85,6 +89,21 @@ async function arbol(ctx, opp, folderId = null, pre = '') {
         fs.writeFileSync(dest, b);
         console.log('OK', b.length, dest);
       }
+    } else if (cmd === 'foto') {
+      const t = (await arbol(ctx, a1)).map(({ path, size, modified }) => ({ path, size, modified }));
+      fs.writeFileSync(a2, JSON.stringify({ opp: a1, fecha: new Date().toISOString(), archivos: t }, null, 1));
+      console.log('foto', t.length, 'archivos ->', a2);
+    } else if (cmd === 'cambios') {
+      const viejo = new Map(JSON.parse(fs.readFileSync(a2)).archivos.map(f => [f.path, f]));
+      const nuevo = await arbol(ctx, a1); let n = 0;
+      for (const f of nuevo) {
+        const v = viejo.get(f.path);
+        if (!v) { console.log('NUEVO', f.size, f.path); n++; }
+        else if (v.size !== f.size || v.modified !== f.modified) { console.log('CAMBIADO', f.size, f.path); n++; }
+        viejo.delete(f.path);
+      }
+      for (const p of viejo.keys()) { console.log('QUITADO', p); n++; }
+      console.log(n ? `CAMBIOS: ${n}` : 'SIN CAMBIOS'); if (n) process.exitCode = 3;
     } else console.log('uso: buscar <texto> | arbol <opp_id> | bajar <opp_id> <dest> [carpeta ...]');
   } finally { await browser.close(); }
 })().catch(e => { console.error('ERR', e.message); process.exit(1); });

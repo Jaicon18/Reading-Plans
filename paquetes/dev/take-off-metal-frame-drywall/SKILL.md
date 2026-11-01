@@ -86,6 +86,10 @@ Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `pag
    baja salvo que se pida.
 6. Si el zip de "Download All / Download Selected" no arranca, no se espera: se baja archivo por archivo por la
    API (`/api/opportunities/<id>/files[/<folder_id>]` → `downloadUrl`), que es lo que hace `bc_descarga.js`.
+7. **Addenda nuevos:** al bajar se guarda la foto de cada invitación (`bc_descarga.js foto <opp> foto_<gc>.json`).
+   `bc_descarga.js cambios <opp> foto_<gc>.json` se corre al empezar cada etapa y SIEMPRE antes de entregar. Si da
+   NUEVO / CAMBIADO / QUITADO (rc 3): se baja lo nuevo, se sube a Drive, se dice al usuario qué cambió y se rehace
+   lo que afecte; nunca se entrega sobre un set viejo sin decirlo.
 
 ## Etapas y carpeta (reanudable)
 
