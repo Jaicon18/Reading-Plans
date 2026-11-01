@@ -219,3 +219,11 @@ Error (detectado por la pasada 2): rev4 cargó el head interior a 5.06 ft (cota 
 
 ## BE-112 — O'Reilly pasada 2: lecturas que el estimador corrigió con sus respuestas (01-nov)
 (1) Control joints en juntas de masonería en vez de la regla de 30 ft y sin esquinas (RFI-27 B, 30 B); (2) framing colgado de la estructura con top track estándar en vez de deep-leg (RFI-20 B); (3) conteo de clips / L4x4 solo en el wall cuyo detalle los dibuja (RFI-26 B); (4) key note leído como "wall construction" donde el estimador quiere blocking continuo (RFI-25 B); (5) ties de piers cargados conservadores sin corte en planta (RFI-11 A: van 0). Prueba: cada caso del precedente SKILL_working 22–36 se revisa en todo proyecto con PEMB / header walls colgados / CMU con furring.
+
+## VS #679 Downey (2026-11-01)
+| ID | Origen | Qué falló | Cómo se prueba | PASS si… |
+|---|---|---|---|---|
+| BE-VS-01 | VS Downey, orquestador | Las dos lecturas no leyeron el demolition plan A01.01 (LOWEST POINT OF DECK 17'-0" / STRUCTURE 12'-1") y declararon la altura "no impresa" | Barrer demolition plan / RCP / secciones / S por "LOWEST POINT", "B.O. DECK", "HEIGHTS NOTED" antes de un RFI de altura | Toda altura de estructura cita la hoja impresa o el RFI lista las hojas barridas incluida la de demolición |
+| BE-VS-02 | VS Downey, orquestador | Cielos de gyp cargados regular cuando A15.04 dice "UL listed fire resistant board throughout" | Leer specs en hojas A15.xx / project manual: board type de walls Y cielos | Board de cielos = el de las specs |
+| BE-VS-03 | VS Downey, cobertura | 18 alcances impresos sin destino (blocking de signage / lockers / paging, platform framing, reveal, metal FRP trim, bridging clips) | Paso 12 cobertura con destino por ítem ANTES de entregar | 0 GAP reales en la cobertura |
+| BE-VS-04 | VS Downey, orquestador | Pasada de gaps sumó C.R. channel de bridging ya contado en "bracing C.R. channel" | Toda cantidad nueva se cruza contra la familia existente del mismo producto | Sin doble conteo |

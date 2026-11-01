@@ -18,3 +18,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 - Para un proyecto nuevo: arrancar con una COPIA de v80t; el runner necesita el bid set limpio, el SHEET_MAP y el inventario de tags del proceso.
 
 **31-oct: v80u** = v80t + R80e.63–R80e.78 (corrida O'Reilly, ver tools/CAMBIOS_tools_v80u.md). Suite 5/5 OK. **El mejor skill para comparar sigue siendo v80s / B&N rev13** (orden del estimador); v80u se valida contra el take-off humano de O'Reilly.
+
+**01-nov: v80w** = v80v + R80e.98–R80e.108 (corrida Victoria's Secret #679 Downey, ver tools/CAMBIOS_tools_v80w.md). Suite 5/5 OK. Incluye: madera excluida directo (orden del usuario), demolition plan obligatorio en la lectura, familias impresas nuevas, fixes de trazabilidad / alcances / markups con texto en curvas.
+
+| Victoria's Secret #679 Downey (rev1, pendiente de revisión del estimador) | v80w | 2026-11-01 | take-off-metal-frame-drywall_v80w_VS-Downey_2026-11-01.zip |
