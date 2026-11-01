@@ -66,3 +66,68 @@ Otros cruces declarados por B-Z4 (para la Z5/Z1): PT0100/0101/0102 (A434) = wall
 6. A423-4 box C3C 0.76 por línea (cargado) o perímetro expuesto 2.36.
 7. A422-3 type A6C (tag A101) vs A3C de los walls que toca.
 8. A423-9 B2E dueño A423 (cargado) o A424.
+
+## A-Z3 (A424 + A425) — 21 walls, 151.88 LF: A3C 101.95 · A6D 39.21 · C3D 5.35 · X6D 5.37; 0 descartados (B-Z3: 22 walls, 149.95 LF — muy cercano)
+D1 B.O. deck "VARIOUS" en men's: 22'-10" (cargado) vs 21'-4" (84.56 LF, 1'-6" de altura). [mismo RFI que A-Z4 #1]
+D2 Head C extensión sobre ceiling no acotada: ceiling + 6" (cargado aquí) vs a deck (A-Z4 cargó a deck → criterio distinto entre zonas A; unificar).
+D3 X6D (A424-7): ambas caras type X a deck (cargado) vs solo cara norte (~123 SF).
+D4 Janitors / laundry fuera de nota 3 A111: MR (cargado) vs type X.
+D5 A425-3 deck impreso 22'-10" (3/A425.C) y 21'-10" (14/A425.C): 22'-10" cargado; 6.98 LF.
+D6 A425-2 cara sur este: ceiling no impreso → 8'-0" (cargado) vs 10'-1" / 12'-0".
+D7 Sin tag tipados A3C por espesor (18.28 LF): alternativas niche framing / furring (−5.36 / −5.13). [= duda B-Z3 #1]
+D8/D9 partes y esquinas (Δ ≤ 0.29 LF).
+D10 A103 backing tag 19 no está en el schedule → PENDING.
+D11 **Gauge y O.C. remiten a S501, que NO está en el set** → 16" O.C. cargado, gauge PENDING → RFI.
+D12 R.O. de puertas no acotado: 3'-4" x 7'-2" (cargado) vs 3'-0" x 7'-0".
+D13 A425-5 cara oeste: 10'-1" (3/A425.B) cargado vs 22'-5" deck (63 SF).
+
+## A-Z5 (A429 + A434 + A428 + A432) — 12 walls, 175.71 LF: B2E 65.03 · A6D 58.64 · D6G 26.47 · D6F 22.41 · infill A2.25 3.16; 10 descartados (B-Z5: 14 walls; D6F A 22.41 vs B 14.47 → B partió el D6F en 2 a los lados del vano 8'-0"; A lo corrió como un wall con cased opening)
+1. Deck "VARIOUS" en Bodywork: 22'-10" (único impreso, 6/A429.B) cargado.
+2. **D6F / D6G stud: 6" (dígito del tag + track 600T250-54 de S200) vs 3-5/8" como lista la tabla A301** → conflicto plano vs tabla → RFI (48.9 LF).
+3. Sauna: DensArmor Plus full height (cargado) vs MR / type X a 7'-6".
+4. Head del cased opening 8'-0" en D6F: 7'-0" (ALIGN con door 115) cargado.
+5. Infill A2.25: 7'-0" con 6" (cargado) vs 6'-8" con 3-5/8".
+6. A1.15 impact GWB a 24" en curved wall vs AD101 existing: no cargado; +42.6 LF / 85 SF → RFI (= B-Z5 #1).
+7. **Walls existentes de Lift Lab / Weights con notas A1.11 / A1.13 (FRT plywood, mirror backing) y AD101 nota 5 (furring removido a CMU):** existing sin framing nuevo (cargado) vs re-furring (+ ~69' + 37' + 80' + muro oeste Lift Lab) → RFI importante (alcance de furring en exteriores existentes).
+- Opening ref "A429-RZ-OPENING" sin número en A601 (validar al unir).
+
+## A-Z6 (A101 + G003) — 1 wall: A-A101-1 A6D (sin tag, supuesto) 5.23 LF, wall nuevo rev. 8 con door 141 en Exit Corridor 141 (en ninguna ampliada); 55 descartados
+(Nota orquestador: B-Z6 tuvo 0 walls → la duda B-Z5 #7 "jamb de wall rev. 8 en door 141" es este wall: A lo contó, B no → diferencia "solo A".)
+1. Type de A-A101-1: A6D por espesor (cargado) vs A6C (para sobre ceiling) vs A3C.
+2. Altura: deck no impreso (A121 nota 4 "assumed", A437 "VARIOUS") → RFI deck / o head C a 9'-0".
+3. Gauge PENDING (S501 falta) / 16" O.C. de trabajo.
+4. Walls SIN tag en su ampliada cuyo tag está solo en A101 — el lector de la ampliada tiene que tomar el type del tag de A101: PT0105 B2E Group X norte (A427, 34.31), PT0109 B2E VIP sur (A423, ~4.62), PT0137/0138 D3G (A432, T.O. 60"), PT0045 A6C (A422). Verificar que estén contados una vez (B2E 34.29 ✔ en A-Z4 y B-Z4; B2E 4.64 ✔ B-Z2; D3G A432 ✗ en B; A6C ✔ B-Z2 A422-3).
+
+## A-Z2 (A422 + A423) — 15 elementos, 165.46 LF: A6D 77.66 · A2-3D 32.42 · A3C 25.30 · A6C 16.15 · C3D 8.27 · C3C 5.66; 4 descartados (B-Z2: 163.09)
+(Diferencias de partición A vs B ya visibles: A422-1 A 56.44 incluye el tramo del storefront de Pilates 122 / door 122; B 50.08. A423 C3D end caps A 0.67+0.67 vs B L 2.73. A423-9 box pier C3C A 2.34 vs B 0.76.)
+1. Deck: 22'-10" (etiqueta oculta en A423.B + geometría 10/A422.B) cargado vs 14'-5" (A422.C storage); ~236 SF. ⚠ "etiqueta oculta" = texto que no imprime → ¿vale como cota? (R #0: solo lo impreso) → RFI deck.
+2. A422-1 por el storefront de Pilates 122: 56.44 (cargado) vs 50.04; Δ 6.40 A6D (= A-Z4 #3, B-Z4 #2, B-Z2 #2: el mismo tramo, asignar una vez).
+3. C3D A422-6 dueño A422 (6.93); A431 lo descarta (A-Z4 ✔).
+4. PT0080 línea este: si A421 mide solo lo visible se pierden 6.96 LF A6D (B-Z1 midió 15.90 completo ✔; verificar A-Z1).
+5. Head C a deck en A422-2/-3/-4, A423-3/-6/-9 (cuartos abiertos a estructura, elevaciones con acabado a deck) vs ceiling + bracing. [unificar criterio head C]
+6. C3C A423-3 cara norte sin board (detalle C solo lado del cuarto) vs boardear corredor (+46 SF).
+7. **Cinema headwall 15/A502 (12.86 LF, 6" 20 ga @ 24", de 8'-6" a deck): dejado a A-GEN** → verificar que A-GEN lo cuente.
+8. Header door 134 en abertura existente: no cargado.
+9. A423-8 end cap sin tag C3D vs existing (−0.67).
+10. Pier A423-9 board a 11'-6" (AP-1, PENDING) vs a deck.
+
+## A-Z1 (A421 + A435) — 20 walls: A6D 120.26 · A3C 72.20 · D3G 31.76 · C3C 17.76 · A6C 7.68; 0 descartados (B-Z1: A6D 120.47 · A3C 72.93 · D3G 31.76 · C3C 7.88 · A6C 7.78)
+(C3C: A perímetro cerrado de cajas de columna 8.88 c/u vs B U en eje 3.94 c/u → criterio de box; A3C muro norte A435: A-Z1 33.21 + A-Z4 21.00 (solo vista A426) sin doble; en B hubo doble conteo.)
+1. A421-14 extensión 15.85 (dueño A421) ✔ = B.
+2. Family Restroom 105 ceiling: 12'-1" (A421.A RCP) vs 9'-0" (A421.C elevaciones) → conflicto RCP vs elevación → RFI / el RCP manda para altura de ceiling.
+3. Cuartos abiertos a deck con head C (Retail Storage 126, Kid's Storage 110, Recovery 113): stud y board a deck (cargado) vs head C ceiling + 6". [unificar head C]
+4. Deck reception / Team Lounge "VARIOUS": 22'-10" PENDING vs 14'-5" (impreso en Kids Storage) → RFI deck.
+5. Extensión head C no acotada: ceiling + 6" (cargado aquí).
+6. A421-10 sin poche pero tag A6D: A6D a deck (cargado).
+7. **D3G sin tag al sur del banco (y1769 hacia abajo, 5.68 visibles en A421): "lo cuenta A101" — A101 (A-Z6) NO lo contó** → hueco también en A (mismo D3G de lockers que en B). Asignar una vez.
+8. A103 key 8: track a 5'-5" en wall de 5'-0" → contradicción → RFI (9.99 LF).
+9. Tile backer: cement backer (A301) vs DensShield (A421.C nota 14) / DensArmor Plus (nota 15) → RFI producto.
+10. Gauge PENDING / 16" O.C. (S501 falta).
+Hand-offs a A101 que A-Z6 no tomó: D6F al norte del box 2, muro oeste Massage 114, banda de storefront al oeste, A3C al este de A435-4 hacia Studio Entry 121 → verificar en el cierre.
+A-GEN: soffit 10'-0" en línea storefront, ceilings 8'-6" y soffit en cubbies retail, ceiling circular GWB 12'-0" + fascia a deck sobre Smoothie / Check-in, bulkhead 9'-0" a deck sobre alcove de fountain 7.68.
+Existing a quedar (D0.07: GM, muro sur de lockers) — "remove finish where required" → posible board nuevo → RFI.
+
+## A-GEN — general.json: 11 soffit_side (220.2 LF), 66 details, 15 GWB ceilings (1,024 SF, C-5 drywall grid), 29 blocking, 10 trim, 1 access panel, 83 scope_notes, 19 RFIs
+**B.O. DECK NO IMPRESO** ("B.O. DECK – VARIOUS"; A000.A "B.O. DECK X'-X"" a levantar por el GC; A121 nota 4 alturas a estructura existente asumidas). 22'-10" existe solo como texto oculto → PENDING / RFI-01. Es la duda más grande del proyecto (altura de stud y board de todo head D/E).
+RFIs de A-GEN: 01 deck · 02 dos "Head detail (E)" · 03 D6F/D6G 6" vs 3-5/8" · 04 gauge/O.C. no impresos (16" O.C.; 20 ga a deck, 25 ga a ceiling) · 05 board solo Type X en spec 09 29 00 · 06 tile backer cement vs DensShield/DensArmor · 07 X6D capas (2 por lado) · 08 drywall grid en 09 51 23 (ACT) → cargado en nuestro alcance · 09 16/A502 "see structural" y soffits de storefront sin sección (6" 20 ga @ 24") · 10 8/A502 altura headwall (10'-0") · 11 9/A502 cinema soffit · 12 A602 "steel header – ref struct" sin header en S → box header metal stud · 13 backing A103 metal sin largos · 14 RTU curb cap 2/A131 600S162-33 (9 caps, AD103 D0.18) · 15 access panels de trap primer (P602) · 16 AD102 D0.63 hardlid repair ×10 / D0.59 24" board removal ×2 (allowance) · 17 head G → 7/A501 mirror · 18 S501 / S001 no están en el set · 19 casework framing smoothie bar (madera, excluido).
+Cruce con zonas: Cinema headwall 15/A502 (A-Z2 #7) ✔ cubierto por A-GEN (13.3 ft). Storefront soffit / circular ceiling / bulkhead alcove de A-Z1 → ✔ 16/A502 arco 62.2, 8/A502 14.4, 9/A502 7.5.

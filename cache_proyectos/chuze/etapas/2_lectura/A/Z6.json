@@ -1,0 +1,362 @@
+{
+ "walls": [
+  {
+   "id": "A-A101-1",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A101",
+   "page": 14,
+   "tag_ids": [],
+   "untagged_reason": "No tag on A101 or any other sheet. Type assumed A6D: poche thickness 3.36 pt = 5.97 in at 6.75 pt/ft equals the 6 in-stud poche of the tagged A6D walls on A101 (e.g. Group X east wall PT0050, Turf/Light Weights south wall PT0055, both 3.36 pt); A3C/C3x poche on A101 is 1.92-2.16 pt. Head letter not printed: D (to deck) taken as conservative vs C (see doubt).",
+   "location": "Exit Corridor 141 - wall across the corridor carrying door 141 (between Lift Lab 143 south wall and Laundry 152 / Maintenance Fitness 133 north walls), revision delta 8",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: no existing partition drawn on this line (crop img/Z6_W1_door141_wall.png context; AD101 shows only D0.07/D0.10 notes nearby); A101 gray poche = 'NEW INTERIOR MTL STUD FRAMING' per Wall Type Legend; inside revision cloud delta 8 (10/12/2026 OWNER CHANGES)",
+   "length_ft": 5.23,
+   "length_status": "DERIVED",
+   "length_source": "A101",
+   "length_op": "Scale check A101: 3/32\"=1'-0\" -> 6.75 pt/ft; grid bubbles 1 (x 324.00) to 2.5 (x 694.68) = 370.68 pt / 6.75 = 54.92 ft, consistent with constants.json verification (47 grid pairs vs S300 grid dims, 6.750 pt/ft). Wall: gray poche rect y 1499.52 -> 1534.80 pt = 35.28 pt / 6.75 = 5.227 ft, face of Lift Lab south wall to face of corridor south wall, runs THROUGH door 141. No printed dimension found for this wall on A101/A428/A425.",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 649.68,
+    "c1": 653.04,
+    "lo": 1499.52,
+    "hi": 1534.8,
+    "sheet": "A101"
+   },
+   "thickness_measured_in": 5.97,
+   "img": "img/Z6_W1_door141_wall.png",
+   "not_on_enlarged_proof": "A428 floor plan view crop ends at the Lift Lab south wall and A425 floor plan view starts at the Laundry / Maintenance Fitness north walls; Exit Corridor 141 and door 141 are on neither (and on no other enlarged plan) - see img/Z6_W1_door141_wall.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' - row A6D",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type 'A' table (A6D: 6\") + WALL TAG KEY I/A301 (6 = 6\")",
+   "oc_in": 16,
+   "oc_source": "PENDING printed value: A301 type A note refers to S501 (not in set); spec 09 22 16 Part 3 'spacings indicated'; 16 in O.C. taken from A301 type A2 note (only printed O.C. in the set) as working value",
+   "gauge": "PENDING",
+   "gauge_source": "A301 type A note 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 not in bid set; spec 09 22 16 2.2.B.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge printed)",
+   "insulation": "6\" sound batt (A301 type A table, A6D) - EXCLUDED trade (insulation), recorded only",
+   "height_ft": null,
+   "height_status": "PENDING",
+   "height_source": "Head letter D (assumed, untagged) -> HEAD DETAIL (D)/A301: stud to structural/roof deck with 2\" slip track. B.O. deck at Exit Corridor 141 not printed: A121 RCP note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED', A437/A437.A 'B.O. DECK VARIOUS', S300 gives no elevations (existing 22J6/22H6 joists), A201 only T.O. PARAPET 30'-0\". Not scaled (R80e.91). Ceiling both sides: C-1 acoustic T-bar 9'-0\" AFF (A121).",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; at roof deck top track secured to 2x blocking between joist top chords (wood blocking EXCLUDED, Div. 06)",
+   "top_track_source": "A301",
+   "rows": 1,
+   "faces": [
+    {
+     "side": "A",
+     "room": "Exit Corridor 141 (west of door 141)",
+     "board": "5/8\" gyp bd",
+     "layers": 1,
+     "height_ft": null,
+     "height_source": "Full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck height PENDING. Ceiling C-1 ACT 9'-0\" AFF (A121). Not a wet room (A111 note), no A1.11/A1.13/A1.14/A1.15 keynote on this wall (A1.13 applies to Lift Lab walls only, this wall faces the corridor)"
+    },
+    {
+     "side": "B",
+     "room": "Exit Corridor 141 (east of door 141)",
+     "board": "5/8\" gyp bd",
+     "layers": 1,
+     "height_ft": null,
+     "height_source": "Full height to deck per HEAD DETAIL (D)/A301; deck height PENDING. Ceiling C-1 ACT 9'-0\" AFF (A121)"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "141",
+     "kind": "door",
+     "ro_w_ft": 3.33,
+     "head_ft": 7.17,
+     "source": "A601: door 141 EXIT CORRIDOR, HM1, 3'-0\" x 7'-0\" x 1 3/4\", frame HMF, head/jamb 6/A602. R.O. DERIVED = door + 2\" HM frame each jamb / at head (frame face not dimensioned on 6/A602 - verify). 6/A602 note 'STEEL HEADER @ HEAD LOCATIONS - REF: STRUCT.' (structural steel EXCLUDED; header framing computed by tools)"
+    }
+   ],
+   "notes": "Sill/base detail X (A301 table A6D: X*, curb only at wet areas - not wet here). Board never deducts the door opening (R80e.92). Wall runs through door 141 (R77.10). Corner ownership: wall ends at the faces of the Lift Lab south wall (A428) and the corridor south wall (A425); those walls own the corners."
+  }
+ ],
+ "tags_descartados": [
+  {
+   "id": "PT0001",
+   "motivo": "shown on enlarged plan A422 (counted there). Also tagged A2-3D on A426 (PT0006); lower sheet A422 owns.",
+   "imagen": "img/Z6_disc_PT0001.png"
+  },
+  {
+   "id": "PT0002",
+   "motivo": "shown on enlarged plan A426 (counted there).",
+   "imagen": "img/Z6_disc_PT0002.png"
+  },
+  {
+   "id": "PT0003",
+   "motivo": "shown on enlarged plan A426 (counted there). Shared Studio IR / Pilates A2-3D wall, tagged on A426 (PT0008) and A431 (PT0011); lower sheet A426 owns.",
+   "imagen": "img/Z6_disc_PT0003.png"
+  },
+  {
+   "id": "PT0012",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0012.png"
+  },
+  {
+   "id": "PT0013",
+   "motivo": "shown on enlarged plan A422 (counted there).",
+   "imagen": "img/Z6_disc_PT0013.png"
+  },
+  {
+   "id": "PT0014",
+   "motivo": "shown on enlarged plan A435 (counted there).",
+   "imagen": "img/Z6_disc_PT0014.png"
+  },
+  {
+   "id": "PT0015",
+   "motivo": "shown on enlarged plan A435 (counted there).",
+   "imagen": "img/Z6_disc_PT0015.png"
+  },
+  {
+   "id": "PT0016",
+   "motivo": "shown on enlarged plan A426 (counted there).",
+   "imagen": "img/Z6_disc_PT0016.png"
+  },
+  {
+   "id": "PT0017",
+   "motivo": "shown on enlarged plan A435 (counted there).",
+   "imagen": "img/Z6_disc_PT0017.png"
+  },
+  {
+   "id": "PT0018",
+   "motivo": "shown on enlarged plan A425 (counted there).",
+   "imagen": "img/Z6_disc_PT0018.png"
+  },
+  {
+   "id": "PT0019",
+   "motivo": "shown on enlarged plan A435 (counted there).",
+   "imagen": "img/Z6_disc_PT0019.png"
+  },
+  {
+   "id": "PT0020",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0020.png"
+  },
+  {
+   "id": "PT0021",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0021.png"
+  },
+  {
+   "id": "PT0022",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0022.png"
+  },
+  {
+   "id": "PT0023",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0023.png"
+  },
+  {
+   "id": "PT0044",
+   "motivo": "shown on enlarged plan A421 (counted there). Inventory text A6C is overprinted under the visible A3C text at the same symbol (same bbox as PT0012); visually the tag reads A3C. Same wall as PT0012.",
+   "imagen": "img/Z6_disc_PT0044.png"
+  },
+  {
+   "id": "PT0045",
+   "motivo": "shown on enlarged plan A422 (counted there). Wall is drawn on A422 (Kid's Club Restroom 109 area); A422 reader should take type A6C from this A101 tag if A422 leaves it untagged.",
+   "imagen": "img/Z6_disc_PT0045.png"
+  },
+  {
+   "id": "PT0046",
+   "motivo": "shown on enlarged plan A422 (counted there).",
+   "imagen": "img/Z6_disc_PT0046.png"
+  },
+  {
+   "id": "PT0049",
+   "motivo": "shown on enlarged plan A429 (counted there).",
+   "imagen": "img/Z6_disc_PT0049.png"
+  },
+  {
+   "id": "PT0050",
+   "motivo": "shown on enlarged plan A427 (counted there). Group X east wall (also drawn/tagged on A429); lower sheet A427 owns.",
+   "imagen": "img/Z6_disc_PT0050.png"
+  },
+  {
+   "id": "PT0051",
+   "motivo": "shown on enlarged plan A427 (counted there). Same Group X east wall as PT0050 (tag on east side); lower sheet A427 owns.",
+   "imagen": "img/Z6_disc_PT0051.png"
+  },
+  {
+   "id": "PT0052",
+   "motivo": "shown on enlarged plan A429 (counted there).",
+   "imagen": "img/Z6_disc_PT0052.png"
+  },
+  {
+   "id": "PT0053",
+   "motivo": "shown on enlarged plan A434 (counted there).",
+   "imagen": "img/Z6_disc_PT0053.png"
+  },
+  {
+   "id": "PT0054",
+   "motivo": "shown on enlarged plan A421 (counted there). Tagged A6D on A421 (PT0066) and A429 (PT0097); lower sheet A421 owns.",
+   "imagen": "img/Z6_disc_PT0054.png"
+  },
+  {
+   "id": "PT0055",
+   "motivo": "shown on enlarged plan A427 (counted there). Tagged A6D on A427 (PT0092), also drawn on A434; lower sheet A427 owns.",
+   "imagen": "img/Z6_disc_PT0055.png"
+  },
+  {
+   "id": "PT0056",
+   "motivo": "shown on enlarged plan A421 (counted there). Tagged on A421 and A429; lower sheet A421 owns.",
+   "imagen": "img/Z6_disc_PT0056.png"
+  },
+  {
+   "id": "PT0057",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0057.png"
+  },
+  {
+   "id": "PT0058",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0058.png"
+  },
+  {
+   "id": "PT0059",
+   "motivo": "shown on enlarged plan A421 (counted there). Tagged A6D on A421 (PT0076) and A422; lower sheet A421 owns.",
+   "imagen": "img/Z6_disc_PT0059.png"
+  },
+  {
+   "id": "PT0060",
+   "motivo": "shown on enlarged plan A423 (counted there).",
+   "imagen": "img/Z6_disc_PT0060.png"
+  },
+  {
+   "id": "PT0061",
+   "motivo": "shown on enlarged plan A426 (counted there). Tagged A6D on A426 (PT0089) and A435 (PT0104); lower sheet A426 owns.",
+   "imagen": "img/Z6_disc_PT0061.png"
+  },
+  {
+   "id": "PT0062",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0062.png"
+  },
+  {
+   "id": "PT0063",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0063.png"
+  },
+  {
+   "id": "PT0064",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0064.png"
+  },
+  {
+   "id": "PT0065",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0065.png"
+  },
+  {
+   "id": "PT0105",
+   "motivo": "shown on enlarged plan A427 (counted there). A427 draws this new furring (gray band at north exterior wall, note EXISITING points to the existing wall behind it) WITHOUT a B2E tag; A427 reader must type it B2E from this A101 tag (A101 vector 34.31 LF = 231.6 pt / 6.75, matches A427 printed 34'-3 1/2\").",
+   "imagen": "img/Z6_disc_PT0105.png"
+  },
+  {
+   "id": "PT0106",
+   "motivo": "shown on enlarged plan A429 (counted there).",
+   "imagen": "img/Z6_disc_PT0106.png"
+  },
+  {
+   "id": "PT0107",
+   "motivo": "shown on enlarged plan A429 (counted there).",
+   "imagen": "img/Z6_disc_PT0107.png"
+  },
+  {
+   "id": "PT0108",
+   "motivo": "shown on enlarged plan A429 (counted there).",
+   "imagen": "img/Z6_disc_PT0108.png"
+  },
+  {
+   "id": "PT0109",
+   "motivo": "shown on enlarged plan A423 (counted there). A423 draws the new furring band at the VIP Room south exterior wall WITHOUT a B2E tag; A423 reader must type it B2E from this A101 tag (A101 vector approx. 4.62 LF = 31.2 pt / 6.75).",
+   "imagen": "img/Z6_disc_PT0109.png"
+  },
+  {
+   "id": "PT0113",
+   "motivo": "shown on enlarged plan A423 (counted there).",
+   "imagen": "img/Z6_disc_PT0113.png"
+  },
+  {
+   "id": "PT0126",
+   "motivo": "shown on enlarged plan A431 (counted there).",
+   "imagen": "img/Z6_disc_PT0126.png"
+  },
+  {
+   "id": "PT0127",
+   "motivo": "shown on enlarged plan A424 (counted there).",
+   "imagen": "img/Z6_disc_PT0127.png"
+  },
+  {
+   "id": "PT0128",
+   "motivo": "shown on enlarged plan A431 (counted there).",
+   "imagen": "img/Z6_disc_PT0128.png"
+  },
+  {
+   "id": "PT0134",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0134.png"
+  },
+  {
+   "id": "PT0135",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0135.png"
+  },
+  {
+   "id": "PT0136",
+   "motivo": "shown on enlarged plan A421 (counted there).",
+   "imagen": "img/Z6_disc_PT0136.png"
+  },
+  {
+   "id": "PT0137",
+   "motivo": "shown on enlarged plan A432 (counted there). A432 (Machine/Circuit/Cardio plan, 3/16\"=1'-0\") draws this partial height hatched wall WITHOUT a tag (keynote A2.54 only); A432 reader must type it D3G (T.O. WALL 60\" ABOVE FFE per this A101 tag).",
+   "imagen": "img/Z6_disc_PT0137.png"
+  },
+  {
+   "id": "PT0138",
+   "motivo": "shown on enlarged plan A432 (counted there). Same as PT0137: drawn untagged on A432; type D3G, T.O. WALL 60\" ABOVE FFE per this A101 tag.",
+   "imagen": "img/Z6_disc_PT0138.png"
+  },
+  {
+   "id": "PT0142",
+   "motivo": "shown on enlarged plan A429 (counted there). Tagged D6F on A429 (PT0144).",
+   "imagen": "img/Z6_disc_PT0142.png"
+  },
+  {
+   "id": "PT0143",
+   "motivo": "shown on enlarged plan A429 (counted there). Tagged D6F on A429 (PT0145).",
+   "imagen": "img/Z6_disc_PT0143.png"
+  },
+  {
+   "id": "PT0146",
+   "motivo": "shown on enlarged plan A429 (counted there). Tagged D6G on A429 (PT0147).",
+   "imagen": "img/Z6_disc_PT0146.png"
+  },
+  {
+   "id": "PT0148",
+   "motivo": "G003 COMPREHENSIVE FIRE EGRESS PLAN is a reference sheet (egress / rating diagram, not a construction plan); its X6D tag repeats the 1 HR wall at Men's Restroom 130 south, counted on enlarged plan A424 (PT0150) - tag discarded, not a wall",
+   "imagen": "img/Z6_disc_PT0148.png"
+  },
+  {
+   "id": "PT0149",
+   "motivo": "shown on enlarged plan A424 (counted there). Tagged X6D on A424 (PT0150).",
+   "imagen": "img/Z6_disc_PT0149.png"
+  },
+  {
+   "id": "PA0001",
+   "motivo": "shown on enlarged plan A421 (counted there). Ambiguous symbol (radius 2.91) resolved with image: it is a normal A3C wall tag box (identical box and text to the other A3C tags; the small radius is the leader end symbol). It tags the Smoothie Storage 106 / Kid's Club Storage 110 wall, tagged A3C on A421 (PT0025) and A422 (PT0026); lower sheet A421 owns.",
+   "imagen": "img/Z6_disc_PA0001.png"
+  }
+ ],
+ "blocking_items": [],
+ "notes_info": {
+  "A-Z6 scope result": "All 54 A101 inventory tags label walls that are drawn on an enlarged plan (checked tag by tag by registering every enlarged floor-plan view onto A101 with grid bubbles; A435 registered by wall-line matching, oy 892.4) -> all discarded with 'shown on enlarged plan <sheet>'. The enlarged views together cover the whole floor, including weights / strength / machines / circuit / cardio (A432), turf / light weights (A434), lift lab (A428), electrical 118 / fire riser 117 (A427/A434 edges). The ONLY A101 wall on no enlarged plan is the new door-141 wall across Exit Corridor 141 (A-A101-1), found by matching every A101 gray wall poche against the enlarged plans.",
+  "A101 blocking": "A103 WALL BACKING PLAN shows no backing tag on the door-141 wall (nearest tag 26 is on the Lift Lab curved wall, counted with A428/A432). blocking_items empty. EXCLUDED - wood blocking (Div. 06): 2x blocking between roof joist top chords at head D, A-A101-1, HEAD DETAIL (D)/A301.",
+  "warning constants": "A432 and A434 floor plans are at 3/16\"=1'-0\" (13.5 pt/ft) per their view titles, NOT 1/4\" (18 pt/ft) as constants.json says - readers of A432/A434 must re-check scale.",
+  "untagged on enlarged, typed only on A101": "PT0105 B2E (Group X north furring, drawn untagged on A427), PT0109 B2E (VIP south furring, drawn untagged on A423), PT0137/PT0138 D3G T.O. WALL 60\" (drawn untagged on A432), PT0045 A6C (Kid's Club Restroom 109 wall, check A422). The enlarged-sheet readers must take the type from these A101 tags or the walls are lost/mistyped.",
+  "A2.25 keynote": "A2.25 'EXISTING DOOR OPENING TO BE INFILLED WITH METAL AND DRYWALL' at door 152(E) west of Electrical 118 (A101 x~1068 y~722, delta 8) is drawn and keynoted on A434 - counted there, not here.",
+  "A301 D-type table conflict (for A429 reader)": "A301 type 'D' table lists D6F and D6G with stud size 3 5/8\" while WALL TAG KEY I/A301 says middle digit 6 = 6\".",
+  "PT0012/PT0044": "Two tag texts overprinted at the same A101 symbol (A6C under A3C); visible text A3C. Both discarded to A421."
+ }
+}

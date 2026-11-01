@@ -1,0 +1,2084 @@
+{
+ "walls": [
+  {
+   "id": "A-A424-1",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0029"
+   ],
+   "location": "Men's Janitor 131 north wall / Men's Locker Room 128",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 12.25,
+   "length_status": "CONFIRMED",
+   "length_source": "A424",
+   "length_op": "SCALE CHECK A424: left dim string 20'-7\" ticks y 1178.65->1548.95 = 370.3 pt / 18 = 20.57 ft (printed 20.583) and 10'-5\" 1548.95->1736.4 = 187.45 pt = 10.41 ft -> 18.0 pt/ft verified. LENGTH: bottom dim string 9 1/2\" + 10'-5 1/2\" + 1'-0\" = 12.25 ft (ticks x 1479.1 existing west wall face -> 1700.1 = east face of janitor E wall line); vector stud band x 1477.7->1700.2 = 222.5 pt = 12.36 ft (owns both janitor corners)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1548.04,
+    "c1": 1555.16,
+    "lo": 1477.7,
+    "hi": 1700.2,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.75,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "tag A3C head C (I/A301) but janitor face goes to deck (C-7 exposed, 1/A424.C) -> stud to B.O. deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the janitor face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the janitor elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Men's Janitor 131",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A424.A); janitor elevations 1 (JANITOR NORTH)/A424.C draw board to 'B.O. DECK VARIOUS'; deck = 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1477.7,
+     1549.0,
+     1700.2,
+     1554.2
+    ]
+   ],
+   "notes": "sill per A301 table A3C '<varies>' (no curb drawn)",
+   "img": "img/Z3_A-A424-1.png"
+  },
+  {
+   "id": "A-A424-2",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0030"
+   ],
+   "location": "Men's Janitor 131 east wall (door 131)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 10.128,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "printed 10'-5\" (A424 left string, N face of janitor N wall -> N face of janitor S wall) - janitor N wall stud 5.2 pt (0.289 ft) = 10.128 ft; vector y 1554.2->1736.4 = 182.2 pt = 10.12 ft (between the two H walls, corners owned by A-A424-1/-3)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1693.64,
+    "c1": 1701.16,
+    "lo": 1554.2,
+    "hi": 1736.4,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 5.01,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "tag A3C head C but janitor face to deck (4/A424.C) -> stud to B.O. deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the janitor face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the janitor elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Janitor 131",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A424.A); janitor elevations 4 (JANITOR- EAST)/A424.C draw board to 'B.O. DECK VARIOUS'; deck = 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "Men's Locker Room 128 (passage to shower / restroom, ceiling C-3)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    }
+   ],
+   "openings": [
+    {
+     "ref": "131",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "xy_pt": [
+      1697.4,
+      1589.5
+     ],
+     "source": "A601: door 131 MEN'S JANITOR 3'-0\" x 7'-0\" HMF, head/jamb 6/A602; R.O. = door + 2\" HM frame each jamb and head (frame face not dimensioned on 6/A602 - assumed)"
+    }
+   ],
+   "segments_pt": [
+    [
+     1694.6,
+     1554.2,
+     1700.2,
+     1736.4
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A424-2.png"
+  },
+  {
+   "id": "A-A424-3",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0031"
+   ],
+   "location": "Men's Janitor 131 south wall / locker room sink area",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 12.25,
+   "length_status": "CONFIRMED",
+   "length_source": "A424",
+   "length_op": "same extent as A-A424-1: bottom string 9 1/2\" + 10'-5 1/2\" + 1'-0\" = 12.25 ft (existing W wall face x 1479.1 -> x 1700.1); vector 1477.7->1700.2 = 222.5 pt = 12.36 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1735.44,
+    "c1": 1742.86,
+    "lo": 1477.7,
+    "hi": 1700.2,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "tag A3C head C but janitor face to deck (2/A424.C) -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the janitor face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the janitor elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Janitor 131",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A424.A); janitor elevations 2 (JANITOR SOUTH)/A424.C draw board to 'B.O. DECK VARIOUS'; deck = 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "Men's Locker Room 128 sink area",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING C-3 (A424.A 'C-3 A3.10' over sink area; D0.47 existing GWB soffit over trough sink stays)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1477.7,
+     1736.4,
+     1700.2,
+     1741.9
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A424-3.png"
+  },
+  {
+   "id": "A-A424-4",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0087"
+   ],
+   "location": "Men's Janitor 131 west wall (6\" wet wall in front of existing wall, mop sink side)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.122,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "vector stud band y 1644.2->1736.4 = 92.2 pt / 18 = 5.122 ft (no printed dimension; north of 1644.2 the line is the EXISTING wall tagged 'EXISTING' on A424)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1467.64,
+    "c1": 1478.66,
+    "lo": 1644.2,
+    "hi": 1736.4,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.35,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head D (A6D, I/A301) -> stud to B.O. deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "against existing west wall (EXISTING tag A424; AD101 D0.07 existing wall to remain)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "board_none_reason": "west face is against the existing wall (A424 'EXISTING' tag at y 1618; AD101 D0.07)"
+    },
+    {
+     "side": "B",
+     "room": "Men's Janitor 131",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A424.A); janitor elevations 3 (JANITOR WEST)/A424.C draw board to 'B.O. DECK VARIOUS'; deck = 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1468.6,
+     1644.2,
+     1477.7,
+     1736.4
+    ]
+   ],
+   "notes": "sill X* per A301 A6D (curb W/A301 only at shower/pool wet areas - not a shower here); EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-4.png"
+  },
+  {
+   "id": "A-A424-5",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0032"
+   ],
+   "location": "Men's Restroom 130 urinal area north wall + west return + trough-sink niche east side",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 13.161,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "H: printed 4'-6\" (bottom string ticks x 1700.1->1780.8) = 4.500; untagged V return (joins tagged wall it touches, E28): y 1813.2->1921.4 = 108.2 pt = 6.011 (printed 3'-5 1/2\" + 2'-1\" = 5.54 ft to y 1912.75 + 8.65 pt to S face of urinal S wall); untagged niche L touching the V: H 10.3 pt = 0.572 + V 37.4 pt = 2.078 (printed 2'-1\"). Total 4.500 + 6.011 + 0.572 + 2.078 = 13.161 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1812.24,
+    "c1": 1819.66,
+    "lo": 1700.2,
+    "hi": 1781.8,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 12.583,
+   "height_status": "PENDING",
+   "height_source": "head C (A3C, I/A301): stud stops above the highest adjacent ceiling 12'-1\" (A424.A) + ~6\" drawn on C/A301 (not dimensioned) = 12.583 [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301: partition stops above ceiling, 'WALL BRACING - RE: STRUCT.' (no slip track; stud extension above ceiling drawn ~6\" but not dimensioned)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 passage (N face of H)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 4.5,
+     "length_source": "H segment, printed 4'-6\"",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 sink area (W face of V, y 1813-1875)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 3.456,
+     "length_source": "vector y 1813.2->1875.4 = 62.2 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "plumbing chase behind trough sink (W face of V, y 1875-1921)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 2.556,
+     "length_source": "vector y 1875.4->1921.4 = 46.0 pt",
+     "board_none_reason": "enclosed chase between niche side wall and V return (A424)"
+    },
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 sink niche (N face of niche L stub)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 0.572,
+     "length_source": "vector 10.3 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 trough sink niche (W face of niche L side)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10); existing GWB soffit D0.47 over the sink (height not printed)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 2.078,
+     "length_source": "printed 2'-1\"",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Men's Restroom 130 urinal area (S face of H)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "9'-0\" ceiling C-5 suspended GWB (A424.A 'MEN'S RESTROOM 130 9'-0\" EXISTING C-5 P-11')",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 4.5,
+     "length_source": "H segment, printed 4'-6\"",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Men's Restroom 130 urinal area (E face of V)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "9'-0\" ceiling C-5 suspended GWB (A424.A 'MEN'S RESTROOM 130 9'-0\" EXISTING C-5 P-11')",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 6.011,
+     "length_source": "vector 108.2 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "plumbing chase (S face of niche L stub)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 0.572,
+     "length_source": "vector 10.3 pt",
+     "board_none_reason": "enclosed chase (A424)"
+    },
+    {
+     "side": "B",
+     "room": "plumbing chase (E face of niche L side)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 2.078,
+     "length_source": "printed 2'-1\"",
+     "board_none_reason": "enclosed chase with sink drain (A424)"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1700.2,
+     1813.2,
+     1781.8,
+     1818.7
+    ],
+    [
+     1692.5,
+     1813.2,
+     1700.2,
+     1921.4
+    ],
+    [
+     1682.2,
+     1875.4,
+     1692.5,
+     1880.9
+    ],
+    [
+     1676.6,
+     1875.4,
+     1682.2,
+     1912.8
+    ]
+   ],
+   "band_length_ok_reason": "band = tagged H segment only; length includes untagged V return (6.011) and niche L (2.650) per E28 rule 3",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A424-5.png"
+  },
+  {
+   "id": "A-A424-6",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0033"
+   ],
+   "location": "Men's Restroom 130 urinal area south wall",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.372,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "vector stud band x 1700.2->1796.9 = 96.7 pt / 18 = 5.372 ft; east of x 1796.9 the restroom south face continues as existing wall (no poche, AD101 D0.07)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1915.24,
+    "c1": 1922.36,
+    "lo": 1700.2,
+    "hi": 1796.9,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.75,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 9.5,
+   "height_status": "PENDING",
+   "height_source": "head C (A3C): ceiling 9'-0\" (A424.A) + ~6\" drawn on C/A301 (not dimensioned) [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301: partition stops above ceiling, 'WALL BRACING - RE: STRUCT.' (no slip track; stud extension above ceiling drawn ~6\" but not dimensioned)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Restroom 130 urinal area",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 9.0,
+     "height_source": "9'-0\" ceiling C-5 suspended GWB (A424.A 'MEN'S RESTROOM 130 9'-0\" EXISTING C-5 P-11')",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "8\" void between this wall and X6D wall A-A424-7",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "board_none_reason": "enclosed 12.5 pt (~8\") void between A3C wall and X6D wall (A424)"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1700.2,
+     1916.2,
+     1796.9,
+     1921.4
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A424-6.png"
+  },
+  {
+   "id": "A-A424-7",
+   "tag": "X6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0150"
+   ],
+   "location": "South of Men's Restroom 130 urinal area (1-hour rated wall)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.372,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "vector: rated-hatch band lines y 1933.9 / 1942.8 from x 1700.2 to 1796.9 = 96.7 pt / 18 = 5.372 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1932.94,
+    "c1": 1943.76,
+    "lo": 1700.2,
+    "hi": 1796.9,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.21,
+   "detail": "1HR FIRE RATED PARTITION TYPE 'X' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "X6D head D (I/A301) -> stud to B.O. deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides; X/A301: anchor track to structure, cont. 'C' shaped track, fire sealant both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "void north (between A-A424-6 and this wall)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "1HR assembly X/A301 (5/8\" type X UL U465) + HEAD (D) board to deck; deck 22'-10\" loaded [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "south side (beyond restroom; not labeled on A424)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "1HR assembly X/A301 board both sides + HEAD (D) to deck; deck 22'-10\" loaded [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1700.2,
+     1933.9,
+     1796.9,
+     1942.8
+    ]
+   ],
+   "notes": "X/A301: shot pin anchor track to slab, fire sealant below track; EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours; X/A301 '5/8\" THICK GYPSUM BOARD (UL TYPE U465) - SEE SCHED. BELOW FOR NUMBER OF LAYERS REQ'D': schedule gives no layer count -> 1 layer per face loaded (U465 1-hr = 1 layer type X each side) [PENDING]; glass fiber batt insulation EXCLUDED (insulation trade)",
+   "fire_rating": "1 HR (X/A301)",
+   "img": "img/Z3_A-A424-7.png"
+  },
+  {
+   "id": "A-A424-8",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0086"
+   ],
+   "location": "Men's Shower 129 north wall / dry vanity alcove back / chase",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 15.339,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "printed 12'-1 1/2\" + 3'-8 1/2\" = 15.833 ft (dim string y 1484, ticks x 1813.9 -> 2032.1 -> 2098.8 existing E wall face) - 6\" V wall A-A424-9 (8.9 pt = 0.494 ft) = 15.339 ft; vector 1822.8->2099.8 = 277.0 pt = 15.39",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1552.84,
+    "c1": 1563.86,
+    "lo": 1822.8,
+    "hi": 2099.8,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.35,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head D -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "dry vanity alcove (Men's Locker Room 128, A2.162)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 11.631,
+     "length_source": "12'-1 1/2\" - 0.494",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "chase east of vanity (inside C3D furring)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 3.708,
+     "length_source": "printed 3'-8 1/2\"",
+     "board_none_reason": "enclosed chase between C3D furring and this wall (A424)"
+    },
+    {
+     "side": "B",
+     "room": "Men's Shower 129",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); A424.C elev. note 15 DensArmor Plus at shower tile",
+      "height_ft": null,
+      "source": "A424.C elevations 5-8/14-20 (full height tile in shower stalls, elev. note 17) - tile height per elevation, PENDING exact zone"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1822.8,
+     1553.8,
+     2099.8,
+     1562.9
+    ]
+   ],
+   "notes": "sill X* with '*AT WET AREAS (SHOWER AND POOL) PROVIDE CONCRETE CURB SILL DETAIL W/A301' (shower side) - curb not our scope; EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-8.png"
+  },
+  {
+   "id": "A-A424-9",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [],
+   "location": "Men's Shower 129 west wall / dry vanity alcove west end",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 10.706,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "vector y 1519.0 (free end at vanity front, = C3D north face line) -> 1711.7 (north face of existing shower south wall) = 192.7 pt / 18 = 10.706 ft (check: printed 2'-7 1/2\" + 4'-2\" + 4'-7 1/2\" = 11.375 ft to S face of existing wall, 9.3 pt thick -> 10.86)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1812.94,
+    "c1": 1823.76,
+    "lo": 1519.0,
+    "hi": 1711.7,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.21,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head D -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 passage",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "dry vanity alcove + Men's Shower 129",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); A424.C elev. note 15 DensArmor Plus at shower tile",
+      "height_ft": null,
+      "source": "A424.C elevations 5-8/14-20 (full height tile in shower stalls, elev. note 17) - tile height per elevation, PENDING exact zone"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1813.9,
+     1519.0,
+     1822.8,
+     1711.7
+    ]
+   ],
+   "untagged_reason": "no tag on A424; same line tagged A6D twice on A101 (overall plan, at the vanity west end and the shower west wall) - type taken from A101; thickness 8.9 pt = 6\" stud matches",
+   "type_source": "A101 tags A6D on this line (A101 tags are discarded there as 'shown on enlarged plan A424')",
+   "notes": "sill X*; curb W/A301 at shower side; EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-9.png"
+  },
+  {
+   "id": "A-A424-10",
+   "tag": "C3D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [
+    "PT0131"
+   ],
+   "location": "Chase furring east of the dry vanity / end of east lockers",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.352,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "H printed 3'-8 1/2\" (ticks x 2032.1 -> 2098.8, includes V corner) = 3.708 + untagged V return y 1524.2 -> 1553.8 = 29.6 pt = 1.644 -> 5.352 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1518.04,
+    "c1": 1525.16,
+    "lo": 2037.6,
+    "hi": 2099.8,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.75,
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "C3D head D -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck; furring type C board on room side only",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 (behind end of A2.54 lockers, N face of H)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "furring C/A301 board 'full height' + head D to deck; deck 22'-10\" loaded [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 3.708,
+     "length_source": "printed 3'-8 1/2\""
+    },
+    {
+     "side": "A",
+     "room": "dry vanity alcove (W face of V)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "furring C/A301 + head D to deck [PENDING deck]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 1.644,
+     "length_source": "vector 29.6 pt"
+    },
+    {
+     "side": "B",
+     "room": "chase (S face of H)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 3.708,
+     "length_source": "printed 3'-8 1/2\"",
+     "board_none_reason": "furring type C/A301: board on room side only; chase side unboarded"
+    },
+    {
+     "side": "B",
+     "room": "chase (E face of V)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 1.644,
+     "length_source": "vector 29.6 pt",
+     "board_none_reason": "furring type C/A301: chase side unboarded"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     2037.6,
+     1519.0,
+     2099.8,
+     1524.2
+    ],
+    [
+     2032.1,
+     1519.0,
+     2037.6,
+     1553.8
+    ]
+   ],
+   "band_length_ok_reason": "band = tagged H segment; length adds the untagged V return 1.644 ft (E28 rule 3)",
+   "notes": "sill X per A301 type C table (C3D); EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-10.png"
+  },
+  {
+   "id": "A-A424-11",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [],
+   "location": "Men's Shower 129 - wall between standard stalls and ADA stall",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 3.4,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "vector y 1650.5 (free end) -> 1711.7 (existing shower S wall face) = 61.2 pt / 18 = 3.400 ft; west face x 1998.5 = printed 5'-6 1/2\" origin (shower string)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1997.54,
+    "c1": 2008.56,
+    "lo": 1650.5,
+    "hi": 1711.7,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.35,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head D -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Shower 129 standard stall",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); A424.C elev. note 15 DensArmor Plus at shower tile",
+      "height_ft": null,
+      "source": "A424.C elevations 5-8/14-20 (full height tile in shower stalls, elev. note 17) - tile height per elevation, PENDING exact zone"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Men's Shower 129 ADA stall",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); A424.C elev. note 15 DensArmor Plus at shower tile",
+      "height_ft": null,
+      "source": "A424.C elevations 5-8/14-20 (full height tile in shower stalls, elev. note 17) - tile height per elevation, PENDING exact zone"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1998.5,
+     1650.5,
+     2007.6,
+     1711.7
+    ]
+   ],
+   "untagged_reason": "no tag on A424; A101 tags A6D at the accessible shower stall walls; thickness 9.1 pt = 6\" stud",
+   "type_source": "A101 A6D tag at the shower ADA stall (discarded on A101 as shown on enlarged plan)",
+   "notes": "sill X* -> curb W/A301 at shower (curb not our scope); EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-11.png"
+  },
+  {
+   "id": "A-A424-12",
+   "tag": "A6D",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [],
+   "location": "Men's Shower 129 ADA stall east wall + return to existing east wall (chase)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 4.639,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "V y 1650.5->1711.7 = 61.2 pt = 3.400 + H return x 2076.5 -> 2098.8 (existing E wall face, printed 5'-6 1/2\" end tick 2098.3) = 22.3 pt = 1.239 -> 4.639 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 2066.64,
+    "c1": 2077.46,
+    "lo": 1650.5,
+    "hi": 1711.7,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 7.21,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "6\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head D -> stud to deck; B.O. DECK not dimensioned on A424.C (janitor elevations 1-4/A424.C read 'B.O. DECK VARIOUS'); A424.A RCP general note 4 'HEIGHTS TO BOTTOM OF EXISTING STRUCTURE ARE ASSUMED'; 22'-10\" loaded = highest B.O. DECK printed on the locker-room elevations (A425.C 3/4/5/6/7/12/13/15, A425.B) - conservative [PENDING]",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck, continuous sealant; board drawn to deck both sides",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Shower 129 ADA stall (W face of V)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 3.4,
+     "length_source": "vector 61.2 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); A424.C elev. note 15 DensArmor Plus at shower tile",
+      "height_ft": null,
+      "source": "A424.C elevations 5-8/14-20 (full height tile in shower stalls, elev. note 17) - tile height per elevation, PENDING exact zone"
+     }
+    },
+    {
+     "side": "A",
+     "room": "Men's Shower 129 (N face of return)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (board drawn to deck); deck 22'-10\" loaded [PENDING, see DECK note]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 1.239,
+     "length_source": "vector 22.3 pt"
+    },
+    {
+     "side": "B",
+     "room": "chase (E face of V)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 3.4,
+     "length_source": "vector 61.2 pt",
+     "board_none_reason": "enclosed chase east of ADA stall (A424)"
+    },
+    {
+     "side": "B",
+     "room": "chase (S face of return)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 1.239,
+     "length_source": "vector 22.3 pt",
+     "board_none_reason": "enclosed chase (A424)"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     2067.6,
+     1650.5,
+     2076.5,
+     1711.7
+    ],
+    [
+     2076.5,
+     1650.5,
+     2098.8,
+     1659.6
+    ]
+   ],
+   "untagged_reason": "no tag on A424; A101 tags A6D (second tag) at the ADA stall east wall / chase return; thickness 8.9-9.1 pt = 6\" stud",
+   "type_source": "A101 A6D tag at ADA stall east wall (discarded on A101 as shown on enlarged plan)",
+   "band_length_ok_reason": "band = V segment; length adds the H return 1.239 ft (one untagged group)",
+   "notes": "sill X* -> curb W/A301 at shower; EXCLUDED - wood blocking (Div. 06): HEAD DETAIL (D)/A301 'AT ROOF DECK, SECURE TOP TRACK TO 2X BLOCKING SECURED BETWEEN TOP CHORD OF ROOF JOISTS' - 2X blocking excluded; slip track stays ours",
+   "img": "img/Z3_A-A424-12.png"
+  },
+  {
+   "id": "A-A424-13",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A424",
+   "page": 33,
+   "tag_ids": [],
+   "location": "Men's Locker Room 128 - trough sink niche west side",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A424 and is not tagged EXISTING (wall legend A424: 'EXISTING' tag = existing wall)",
+   "length_ft": 2.661,
+   "length_status": "DERIVED",
+   "length_source": "A424",
+   "length_op": "H x 1477.7->1488.2 = 10.5 pt = 0.583 + V y 1875.4->1912.8 = 37.4 pt = 2.078 (printed 2'-1\") = 2.661 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1874.44,
+    "c1": 1881.86,
+    "lo": 1477.7,
+    "hi": 1488.2,
+    "sheet": "A424"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 12.583,
+   "height_status": "PENDING",
+   "height_source": "typed A3C head C: ceiling 12'-1\" + ~6\" (C/A301, not dimensioned) [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301: partition stops above ceiling, 'WALL BRACING - RE: STRUCT.' (no slip track; stud extension above ceiling drawn ~6\" but not dimensioned)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 sink area (N face of stub)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 0.583,
+     "length_source": "vector 10.5 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "Men's Locker Room 128 trough sink niche (E face of side)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.083,
+     "height_source": "12'-1\" EXISTING ceiling C-3 (A424.A 'MEN'S LOCKER ROOM 128 12'-1\" EXISTING C-3', A3.10); existing GWB soffit D0.47 over sink (height not printed)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 2.078,
+     "length_source": "printed 2'-1\"",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "chase (S face of stub)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 0.583,
+     "length_source": "vector",
+     "board_none_reason": "enclosed chase between niche side and existing wall"
+    },
+    {
+     "side": "B",
+     "room": "chase (W face of side)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 2.078,
+     "length_source": "printed 2'-1\"",
+     "board_none_reason": "enclosed chase"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1477.7,
+     1875.4,
+     1488.2,
+     1880.9
+    ],
+    [
+     1488.2,
+     1875.4,
+     1493.5,
+     1912.8
+    ]
+   ],
+   "untagged_reason": "untagged new wall group (gray poche) at west side of trough sink niche; touches only the existing west wall; thickness 5.3 pt = 3-5/8\" stud -> A3C (the 3-5/8\" interior type of the sheet)",
+   "type_source": "thickness match to A3C walls of A424 (no general note gives a default type)",
+   "band_length_ok_reason": "band = V side; length adds the H stub 0.583 ft",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A424-13.png"
+  },
+  {
+   "id": "A-A425-1",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [
+    "PT0035"
+   ],
+   "location": "Laundry 152 west wall",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 7.283,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "SCALE CHECK A425: right dim string 10'-5 1/2\" ticks y 1625.05->1813.45 = 188.4 pt / 18 = 10.47 ft (printed 10.458) and bottom string 7'-0\" x 1814.9->1941.1 = 126.2 pt = 7.01 ft -> 18.0 pt/ft verified. LENGTH: vector y 966.2 (S face of existing N wall) -> 1097.3 (owns SW corner) = 131.1 pt = 7.283 ft (no printed dim)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1895.04,
+    "c1": 1902.46,
+    "lo": 966.2,
+    "hi": 1097.3,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "CONFIRMED",
+   "height_source": "tag A3C head C, but both rooms C-7 exposed (A425.A) and 6/A425.C draws board to B.O. DECK 22'-10\" -> stud to deck 22'-10\"",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the laundry face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the laundry elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Locker Room 135 (C-7 exposed, A425.A)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A425.A) -> board to deck; A111 note 4; B.O. DECK 22'-10\" (6/A425.C)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Laundry 152",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "6/A425.C LAUNDRY - WEST: board to 'B.O. DECK VARIOUS 22'-10\"'; laundry ceiling C-7 exposed (A425.A)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1896.0,
+     966.2,
+     1901.5,
+     1097.3
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-1.png"
+  },
+  {
+   "id": "A-A425-2",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [
+    "PT0036"
+   ],
+   "location": "Laundry 152 / Maintenance Fitness 133 south wall",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 14.761,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "vector x 1901.5 -> 2167.2 = 265.7 pt / 18 = 14.761 ft (collinear contiguous A3C segments: laundry S wall + piece under Maintenance 133, also leadered by PT0037; east of 2167.2 the line is existing, no poche)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1090.84,
+    "c1": 1098.26,
+    "lo": 1901.5,
+    "hi": 2167.2,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "CONFIRMED",
+   "height_source": "head C tag; laundry/maintenance faces to deck 22'-10\" (5/15 A425.C) -> stud to deck",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the laundry/maintenance face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the laundry/maintenance elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Laundry 152",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "5/A425.C LAUNDRY - SOUTH: board to B.O. DECK 22'-10\"",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 12.867,
+     "length_source": "vector x 1901.5->2133.1 = 231.6 pt"
+    },
+    {
+     "side": "A",
+     "room": "T with A-A425-3",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 0.294,
+     "length_source": "vector 5.3 pt",
+     "board_none_reason": "abutting wall A-A425-3 occupies the face"
+    },
+    {
+     "side": "A",
+     "room": "Maintenance Fitness 133",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "15/A425.C MAINTENANCE SOUTH: board to B.O. DECK 22'-10\"",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 1.6,
+     "length_source": "vector x 2138.4->2167.2 = 28.8 pt"
+    },
+    {
+     "side": "B",
+     "room": "Women's Locker Room 135 entry strip south of laundry",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "8'-0\" AFF C-5 GWB ceiling (A425.A) / 2/A425.B 'EL.+ 8'-0\"'; east part under 'EXISTING P-4' ceiling (height not printed) loaded 8'-0\" [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1901.5,
+     1091.8,
+     2167.2,
+     1097.3
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-2.png"
+  },
+  {
+   "id": "A-A425-3",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [
+    "PT0037"
+   ],
+   "location": "Wall between Laundry 152 and Maintenance Fitness 133",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 6.978,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "vector y 966.2 -> 1091.8 (N face of laundry S wall) = 125.6 pt / 18 = 6.978 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 2132.14,
+    "c1": 2139.36,
+    "lo": 966.2,
+    "hi": 1091.8,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 4.81,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "PENDING",
+   "height_source": "head C tag; both rooms C-7 exposed; deck printed 22'-10\" (3/A425.C) vs 21'-10\" (14/A425.C) for the same wall -> 22'-10\" loaded (conservative)",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the laundry/maintenance face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the laundry/maintenance elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Laundry 152",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "3/A425.C LAUNDRY - EAST: board to B.O. DECK 22'-10\"",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "Maintenance Fitness 133",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 21.833,
+     "height_source": "14/A425.C MAINTENANCE WEST: board to B.O. DECK 21'-10\" (differs from 22'-10\" on 3/A425.C)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     2133.1,
+     966.2,
+     2138.4,
+     1091.8
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-3.png"
+  },
+  {
+   "id": "A-A425-4",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [
+    "PT0034"
+   ],
+   "location": "Maintenance Fitness 133 north wall infill (in existing wall line, east of door 133)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 1.489,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "vector x 2203.0 -> 2229.8 = 26.8 pt / 18 = 1.489 ft (new A3C infill between existing segments; band 10.3 pt thick = existing wall thickness)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 954.94,
+    "c1": 967.16,
+    "lo": 2203.0,
+    "hi": 2229.8,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 8.15,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "CONFIRMED",
+   "height_source": "12/A425.C B.O. DECK 22'-10\" (maintenance C-7 exposed) -> stud to deck",
+   "top_track": "HEAD DETAIL (C)/A301 per tag, but the maintenance face is C-7 EXPOSED TO STRUCTURE (A424.A/A425.A) and the maintenance elevations draw the board to 'B.O. DECK' -> stud runs to deck; head connection at deck not detailed by C/A301",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "north side (corridor beyond existing north wall)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "not shown on A425.A; loaded to deck 22'-10\" like the maintenance face [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "Maintenance Fitness 133",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "12/A425.C MAINTENANCE NORTH: board to B.O. DECK 22'-10\"",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     2203.0,
+     955.9,
+     2229.8,
+     966.2
+    ]
+   ],
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-4.png"
+  },
+  {
+   "id": "A-A425-5",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [],
+   "location": "Women's Janitor 138 west wall (door 138)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.133,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "vector y 1843.9 (S face of existing janitor N wall) -> 1936.3 = 92.4 pt / 18 = 5.133 ft; west face x 1814.9 = printed bottom-string tick (7'-0\" origin)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1813.94,
+    "c1": 1821.36,
+    "lo": 1843.9,
+    "hi": 1936.3,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.417,
+   "height_status": "CONFIRMED",
+   "height_source": "janitor face to B.O. DECK 22'-5\" (8/A425.C) -> stud to deck",
+   "top_track": "untagged (A3C by thickness): head C/A301 but janitor face to deck per 8/A425.C",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Locker Room 135 (vanity/locker area)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 10.083,
+     "height_source": "3/A425.B WOMEN'S LOCKERS EAST-1 draws this face to 'EXISTING EL.+ 10'-1\"' (existing bulkhead above); RCP C-7 exposed above [PENDING]",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "Women's Janitor 138",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.417,
+     "height_source": "8/A425.C WOMEN'S JANITOR WEST: board to B.O. DECK 22'-5\"; janitor C-7 exposed (A425.A)",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    }
+   ],
+   "openings": [
+    {
+     "ref": "138",
+     "kind": "door",
+     "ro_w_ft": 3.333,
+     "head_ft": 7.167,
+     "xy_pt": [
+      1817.6,
+      1901.0
+     ],
+     "source": "A601: door 138 WOMEN'S JANITOR 3'-0\" x 7'-0\" ALF frame, 6/A602; R.O. = door + 2\" frame each jamb and head (frame face not dimensioned - assumed)"
+    }
+   ],
+   "segments_pt": [
+    [
+     1814.9,
+     1843.9,
+     1820.4,
+     1936.3
+    ]
+   ],
+   "untagged_reason": "no tag on A425 or A101; new wall (gray poche) 5.5 pt = 3-5/8\" stud -> A3C by thickness",
+   "type_source": "thickness match to the A3C walls of A425 (no default-type note)",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-5.png"
+  },
+  {
+   "id": "A-A425-6",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [],
+   "location": "Women's Janitor 138 east wall (in front of existing wall)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 5.133,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "vector y 1843.9 -> 1936.3 = 92.4 pt / 18 = 5.133 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1977.84,
+    "c1": 1985.26,
+    "lo": 1843.9,
+    "hi": 1936.3,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 4.95,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 22.833,
+   "height_status": "CONFIRMED",
+   "height_source": "7/A425.C B.O. DECK 22'-10\" -> stud to deck",
+   "top_track": "untagged (A3C by thickness): janitor face to deck per 7/A425.C",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Janitor 138",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.833,
+     "height_source": "7/A425.C WOMEN'S JANITOR EAST: board to B.O. DECK 22'-10\"",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side"
+    },
+    {
+     "side": "B",
+     "room": "against existing east wall",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "board_none_reason": "east face against the existing (hatched) wall on A425"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1978.8,
+     1843.9,
+     1984.3,
+     1936.3
+    ]
+   ],
+   "untagged_reason": "no tag on A425 or A101; new stud wall (gray poche 5.5 pt = 3-5/8\") inside the existing east wall -> A3C by thickness",
+   "type_source": "thickness match (no default-type note)",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-6.png"
+  },
+  {
+   "id": "A-A425-7",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [],
+   "location": "Women's Locker Room 135 - vanity alcove north return",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 2.678,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "H x 1941.1 -> 1978.3 = 37.2 pt = 2.067 (printed 2'-0\" string x 1941.1->1976.9) + V stub y 1614.0 -> 1625.0 = 11.0 pt = 0.611 (printed 6 1/2\") = 2.678 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1624.04,
+    "c1": 1631.56,
+    "lo": 1941.1,
+    "hi": 1978.3,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 5.01,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 12.5,
+   "height_status": "PENDING",
+   "height_source": "typed A3C head C: highest adjacent ceiling 12'-0\" (3/A425.B) + ~6\" (C/A301, not dimensioned) [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301: partition stops above ceiling, 'WALL BRACING - RE: STRUCT.' (no slip track; stud extension above ceiling drawn ~6\" but not dimensioned)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Locker Room 135 (W face of stub)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 12.0,
+     "height_source": "3/A425.B 'EXISTING EL.+ 12'-0\"' at the locker zone",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 0.611,
+     "length_source": "vector 11.0 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "void north of return (N face of H)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 2.067,
+     "length_source": "vector 37.2 pt",
+     "board_none_reason": "enclosed void between return and existing wall (A425)"
+    },
+    {
+     "side": "B",
+     "room": "void (E face of stub)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 0.611,
+     "length_source": "vector",
+     "board_none_reason": "enclosed void"
+    },
+    {
+     "side": "B",
+     "room": "vanity alcove (S face of H)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 8.083,
+     "height_source": "3/A425.B 'EXISTING EL.+ 8'-1\"' at the vanity alcove",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 2.067,
+     "length_source": "vector 37.2 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1941.1,
+     1625.0,
+     1978.3,
+     1630.6
+    ],
+    [
+     1941.1,
+     1614.0,
+     1946.4,
+     1625.0
+    ]
+   ],
+   "untagged_reason": "untagged new return (gray poche 5.3-5.6 pt = 3-5/8\") closing the north end of the vanity alcove against existing walls -> A3C by thickness",
+   "type_source": "thickness match (no default-type note)",
+   "band_length_ok_reason": "band = H segment; length adds the V stub 0.611 ft",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-7.png"
+  },
+  {
+   "id": "A-A425-8",
+   "tag": "A3C",
+   "element": "wall",
+   "sheet": "A425",
+   "page": 37,
+   "tag_ids": [],
+   "location": "Women's Locker Room 135 - vanity alcove south return (above janitor 138)",
+   "new_or_existing": "NEW",
+   "demo_source": "AD101: area is demolition-cleared (D0.35 existing partitions demolished, D0.38 fixtures removed); this wall is drawn with new-wall poche (gray) on A425 and is not tagged EXISTING (wall legend A425: 'EXISTING' tag = existing wall)",
+   "length_ft": 2.678,
+   "length_status": "DERIVED",
+   "length_source": "A425",
+   "length_op": "H x 1941.1 -> 1978.3 = 37.2 pt = 2.067 + V stub y 1819.0 -> 1830.0 = 11.0 pt = 0.611 (printed 10\" string 1813.45->1828.55) = 2.678 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1812.44,
+    "c1": 1819.96,
+    "lo": 1941.1,
+    "hi": 1978.3,
+    "sheet": "A425"
+   },
+   "thickness_measured_in": 5.01,
+   "detail": "INTERIOR PARTITION TYPE 'A' A301",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301 (middle digit)",
+   "oc_in": 16,
+   "oc_source": "A301 type notes 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' - S501 is not in the set; 16\" O.C. loaded per A301 type A2 note ('3-5/8\" STEEL STUDS 16\" O.C.') and S200 A ('MTL STUDS @ 16\" OC MAX PER ARCH') [PENDING confirmation]",
+   "gauge": "PENDING",
+   "gauge_source": "No gauge printed: A301 type notes refer to S501 (not in set); spec 09 22 16 2.2 'Minimum Base-Steel Thickness: as required by performance requirements' (no gauge). PENDING",
+   "height_ft": 10.583,
+   "height_status": "PENDING",
+   "height_source": "typed A3C head C: ceiling 10'-1\" (3/A425.B) + ~6\" (C/A301, not dimensioned) [PENDING]",
+   "top_track": "HEAD DETAIL (C)/A301: partition stops above ceiling, 'WALL BRACING - RE: STRUCT.' (no slip track; stud extension above ceiling drawn ~6\" but not dimensioned)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "A",
+     "room": "vanity alcove (N face of H)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 8.083,
+     "height_source": "3/A425.B 'EXISTING EL.+ 8'-1\"'",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 2.067,
+     "length_source": "vector 37.2 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "A",
+     "room": "Women's Locker Room 135 (W face of stub)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 10.083,
+     "height_source": "3/A425.B 'EXISTING EL.+ 10'-1\"'",
+     "layers_source": "A301 type detail draws one layer 5/8\" each boarded side",
+     "length_ft": 0.611,
+     "length_source": "vector 11.0 pt",
+     "tile_backer": {
+      "board": "5/8\" cement backer board behind tile (A301 type note); elev. general notes 14/15 A424.C call DensShield / DensArmor Plus at tile",
+      "height_ft": 5.0,
+      "source": "A111 finish plan general note 6 '5'-0\" TILE WAINSCOT IN LOCKER ROOMS ON ALL EXPOSED WALLS' + A424.C/A425.B elevations"
+     }
+    },
+    {
+     "side": "B",
+     "room": "void above janitor N wall (S face of H)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 2.067,
+     "length_source": "vector",
+     "board_none_reason": "enclosed void between return and existing janitor north wall (A425)"
+    },
+    {
+     "side": "B",
+     "room": "void (E face of stub)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0.0,
+     "height_source": "n/a",
+     "length_ft": 0.611,
+     "length_source": "vector",
+     "board_none_reason": "enclosed void"
+    }
+   ],
+   "openings": [],
+   "segments_pt": [
+    [
+     1941.1,
+     1813.4,
+     1978.3,
+     1819.0
+    ],
+    [
+     1941.1,
+     1819.0,
+     1946.4,
+     1830.0
+    ]
+   ],
+   "untagged_reason": "untagged new return (gray poche) closing the south end of the vanity alcove against existing walls -> A3C by thickness",
+   "type_source": "thickness match (no default-type note)",
+   "band_length_ok_reason": "band = H segment; length adds the V stub 0.611 ft",
+   "notes": "sill per A301 A3C '<varies>'",
+   "img": "img/Z3_A-A425-8.png"
+  }
+ ],
+ "tags_descartados": [],
+ "blocking_items": [
+  {
+   "wall": "A-A424-1",
+   "label": "11 TV MONITOR - F.R.T. PLYWOOD 4'-6\"-7'-0\" IN WALL F.R.T. WOOD BACKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tag 11 on janitor N wall, locker face / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 11 TV MONITOR A103 tag 11 on janitor N wall, locker face / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A424-1",
+   "label": "15 LOCKER ROOM MIRRORS - WOOD BLOCKING 3'-4\" & 8'-4\" IN WALL F.R.T. WOOD BACKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tag 15 on janitor N wall / A103 WALL BACKING SCHEDULE (ref 8/A501)",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 15 LOCKER ROOM MIRRORS A103 tag 15 on janitor N wall / A103 WALL BACKING SCHEDULE (ref 8/A501)"
+  },
+  {
+   "wall": "A-A424-2",
+   "label": "15 LOCKER ROOM MIRRORS - WOOD BLOCKING 3'-4\" & 8'-4\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tag 15 at janitor E wall / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 15 LOCKER ROOM MIRRORS A103 tag 15 at janitor E wall / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A424-3",
+   "label": "59 CLEANING CHEMICAL - F.R.T. PLYWOOD 3'-0\" TO 5'-0\" IN WALL F.R.T. WOOD BACKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tag 59 in Men's Janitor 131 (janitor face) / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 59 CLEANING CHEMICAL A103 tag 59 in Men's Janitor 131 (janitor face) / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A424-8",
+   "label": "15 LOCKER ROOM MIRRORS - WOOD BLOCKING 3'-4\" & 8'-4\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tags '15 16' at dry vanity back (A6D N face) / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 15 LOCKER ROOM MIRRORS A103 tags '15 16' at dry vanity back (A6D N face) / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A424-8",
+   "label": "16 MISC ACCESSORIES - WOOD OR MTL STRAP, VARIES",
+   "material": "metal",
+   "source": "A103 tags '15 16' at dry vanity back / A103 WALL BACKING SCHEDULE (wood or metal offered -> metal per standing order)",
+   "qty": "PENDING (A103 height 'VARIES'; number/length of straps not printed)"
+  },
+  {
+   "wall": "A-A424-9",
+   "label": "19 (backing tag at west end of dry vanity, A6D V wall)",
+   "material": "PENDING",
+   "source": "A103 tag '19' leadered to the vanity west wall; item 19 is NOT listed in the A103 WALL BACKING SCHEDULE (items jump 18 -> 24)",
+   "qty": "PENDING - item not scheduled (doubt D10)"
+  },
+  {
+   "wall": "A-A424-8",
+   "label": "16 MISC ACCESSORIES - WOOD OR MTL STRAP, VARIES (room tag '16 17' in Men's Shower 129)",
+   "material": "metal",
+   "source": "A103 room tag '16 17' in Men's Shower 129 (no leader; applies to new shower walls A-A424-8/9/11/12) / A103 WALL BACKING SCHEDULE",
+   "qty": "PENDING (A103 height 'VARIES'; number/length of straps not printed)"
+  },
+  {
+   "wall": "A-A424-11",
+   "label": "17 PARTITIONS - WOOD BLOCKING CONTINUOUS BACKING/STUD AT PARTITION TO WALL CONNECTIONS (shower partitions A2.50)",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 room tag '16 17' in Men's Shower 129 / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 17 PARTITIONS A103 room tag '16 17' in Men's Shower 129 / A103 WALL BACKING SCHEDULE; the 'STUD AT PARTITION TO WALL CONNECTIONS' alternative is not quantified here (studs come from the tools)"
+  },
+  {
+   "wall": "A-A424-5",
+   "label": "16 MISC ACCESSORIES - WOOD OR MTL STRAP, VARIES (room tag '16 17' in Men's Restroom 130)",
+   "material": "metal",
+   "source": "A103 room tag '16 17' in Men's Restroom 130 (applies to new restroom walls A-A424-5/6) / A103 WALL BACKING SCHEDULE",
+   "qty": "PENDING (A103 height 'VARIES'; number/length of straps not printed)"
+  },
+  {
+   "wall": "A-A424-5",
+   "label": "17 PARTITIONS - WOOD BLOCKING CONTINUOUS BACKING (toilet / urinal partitions A2.58 / A2.131)",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 room tag '16 17' in Men's Restroom 130 / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 17 PARTITIONS A103 room tag '16 17' in Men's Restroom 130 / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A425-1",
+   "label": "58 MOP/BROOM HOLDER - WOOD BLOCKING 5'-10\" IN WALL F.R.T. WOOD BACKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tags '58' / '59' at the mop sink, NW corner of Laundry 152 (laundry W wall or existing N wall) / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 58 MOP/BROOM HOLDER A103 tags '58' / '59' at the mop sink, NW corner of Laundry 152 (laundry W wall or existing N wall) / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A425-1",
+   "label": "59 CLEANING CHEMICAL - F.R.T. PLYWOOD 3'-0\" TO 5'-0\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tag '59' in Laundry 152 / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 59 CLEANING CHEMICAL A103 tag '59' in Laundry 152 / A103 WALL BACKING SCHEDULE"
+  },
+  {
+   "wall": "A-A425-6",
+   "label": "58 MOP/BROOM HOLDER - WOOD BLOCKING 5'-10\" + 59 CLEANING CHEMICAL - F.R.T. PLYWOOD 3'-0\" TO 5'-0\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 tags '59 58' in Women's Janitor 138 (mop sink at NE corner, new E wall or existing N wall) / A103 WALL BACKING SCHEDULE",
+   "qty": "EXCLUDED - not quantified",
+   "note": "EXCLUDED - wood blocking/backing (Div. 06): 58 MOP/BROOM HOLDER A103 tags '59 58' in Women's Janitor 138 (mop sink at NE corner, new E wall or existing N wall) / A103 WALL BACKING SCHEDULE"
+  }
+ ],
+ "notes_info": [
+  "TASK A-Z3 (reader A): sheets A424 (p33) and A425 (p37). 13 inventory tags, all assigned to walls; tags_descartados empty. 21 walls: 13 on A424, 8 on A425.",
+  "NEW vs EXISTING: on A424/A425 new walls are drawn with gray (0.75) stud poche and carry type tags; existing walls are white and tagged 'EXISTING' (wall legend on each sheet). Men's locker west wall, north walls, east exterior wall, shower south wall (y 1711.7-1721) and restroom south wall are existing to remain (AD101 D0.07 / solid lines on AD101) - not quantified. Women's area: north wall (with doors 152 / 133 openings), east wall, laundry-maintenance north line, janitor 138 north wall are existing (A425 'EXISTING' tags; AD101) - not quantified.",
+  "A101 tags C3C and B2E near the men's west wall point to walls WEST of the A424 dashed enlarged-plan boundary (A101 p14 crop): not on A424, not loaded here. A101 A6D tags on the men's shower west wall and ADA stall walls (untagged on A424) were used only as type source for A-A424-9/-11/-12.",
+  "Board: A111 finish-plan note 3 'LOCKER ROOMS, RESTROOMS, AND POOL AREAS TO BE MOISTURE RESISTANT GYP BOARD' + A301 '5/8\" MR AT ALL WET ROOMS' -> 5/8\" MR on locker/restroom/shower faces; janitors and laundry (mop sinks, A2.18 / A2.182) loaded MR as wet rooms (doubt D4); Maintenance Fitness 133 = 5/8\" type X (spec 09 29 00 2.3.A interior board type X). Tile substrate recorded per face in 'tile_backer' (A301: 5/8\" cement backer behind all tile; A424.C/A425.B elevation notes 14 DensShield and 15 DensArmor Plus at tile - product conflict for general task). Board never deducts openings (R80e.92).",
+  "FRP at mop sinks (A2.18 4'x4' FRP) EXCLUDED (FRP trade). Tile, toilet / shower / urinal partitions (A2.50 / A2.58 / A2.131, Chuze vendor), lockers, trough sinks EXCLUDED. Insulation (A6D 6\" sound batt, X6D glass fiber) EXCLUDED. Concrete curb W/V at shower walls (A6D sill X*) EXCLUDED (concrete) - noted per wall.",
+  "Openings: door 131 (A-A424-2) and door 138 (A-A425-5) from A601 (3'-0\" x 7'-0\"); doors 152 / 133 sit in the existing north wall (not our walls).",
+  "D1 [DECK MEN'S] B.O. deck at the men's area is not dimensioned (A424.C 'B.O. DECK VARIOUS'). Alt 1 (LOADED, conservative) 22'-10\" = highest value printed on the locker-room elevations A425.B/A425.C; Alt 2 21'-4\" (lowest B.O. DECK printed nearby, A423 sheet p32). Affects stud/board height (not LF) of A-A424-1/2/3/4/7/8/9/10/11/12 = 84.56 LF of wall; LF delta 0, stud and to-deck board height delta 1'-6\" on those walls.",
+  "D2 [HEAD C EXTENSION] Head C/A301 draws the stud ~6\" above the ceiling with bracing to structure but gives no dimension. Alt 1 (LOADED) ceiling + 0'-6\"; Alt 2 stud to B.O. deck. Walls A-A424-5/6/13, A-A425-7/8 (26.55 LF); LF delta 0; stud height delta about +10 to +13 ft each under Alt 2.",
+  "D3 [X6D] A-A424-7 X6D runs parallel to A3C A-A424-6 with an ~8\" void; what lies south of X6D is not labeled on A424. Alt 1 (LOADED) both X6D faces 5/8\" type X to deck (1HR X/A301 needs both faces); Alt 2 north face only. LF delta 0; board delta 5.37 x 22.83 = 123 SF. Layers per face not scheduled (X/A301 'see sched below') - 1 layer loaded.",
+  "D4 [JANITOR / LAUNDRY BOARD] Janitors 131 / 138 and Laundry 152 are not listed in A111 note 3. Alt 1 (LOADED) 5/8\" MR (mop sink = wet room per A301); Alt 2 5/8\" type X. LF delta 0.",
+  "D5 [A-A425-3 DECK] Same wall printed 22'-10\" B.O. deck on 3/A425.C (laundry east) and 21'-10\" on 14/A425.C (maintenance west). Alt 1 (LOADED) stud 22'-10\" (each face keeps its printed height); Alt 2 21'-10\". 6.98 LF, height delta 1'-0\".",
+  "D6 [A-A425-2 SOUTH FACE] East part of the laundry south wall faces an 'EXISTING P-4' ceiling with no printed height (A425.A); loaded 8'-0\" like the C-5 GWB part (A425.A, 2/A425.B). Alt: to existing ceiling 10'-1\"/12'-0\" (3/A425.B values). ~4.3 ft of face, LF delta 0.",
+  "D7 [UNTAGGED NEW WALLS TYPED A3C] A-A424-13 (2.66 LF), A-A425-5 (5.13), A-A425-6 (5.13), A-A425-7 (2.68), A-A425-8 (2.68) carry no tag on the enlarged plan nor on A101; typed A3C by 3-5/8\" poche thickness. Alt 1 (LOADED) walls of type A3C = 18.28 LF; Alt 2 alcove returns A-A425-7/8 treated as niche framing (R74.3-like) or the janitor E wall as furring (C-type) -> A3C LF -5.36 (returns) / -5.13 (furring re-typed).",
+  "D8 [A-A424-5 GROUPING] The untagged trough-sink niche east side (L, 2.65 LF) touches the untagged V return of PT0032 and was joined to A-A424-5 (E28 rule 3); the niche west side A-A424-13 touches only the existing wall and stays its own wall. Alt: niche sides as one separate untagged wall pair. LF delta 0 (count +1).",
+  "D9 [A-A424-5 / -6 CORNER] V return of A-A424-5 taken to the south face of A-A424-6 (y 1921.4, owns the corner). Alt: stop at y 1916.2 -> -0.29 LF.",
+  "D10 [BACKING 19] A103 tag '19' at the west end of the dry vanity (A-A424-9) is not in the A103 WALL BACKING SCHEDULE. Alt 1 (LOADED) recorded as PENDING item, no quantity; Alt 2 same as item 15/16 at the vanity. No LF effect.",
+  "D11 [GAUGE / O.C.] A301 type notes say 'REF S501 FOR STUD SIZE, SPACING, ANCHORING AND MAX HEIGHT' but S501 is not in the set; spec 09 22 16 gives no gauge. Loaded 16\" O.C. (A2 note / S200) and gauge PENDING for all 21 walls.",
+  "D12 [DOOR R.O.] 6/A602 does not dimension the frame; R.O. 3'-4\" x 7'-2\" loaded for doors 131 and 138 (door + 2\" frame). Alt: R.O. = door size 3'-0\" x 7'-0\". No LF effect (headers by tools).",
+  "D13 [A-A425-5 WEST FACE] 3/A425.B draws the janitor W wall west face to 'EXISTING EL.+ 10'-1\"' (existing bulkhead) while the RCP shows C-7 exposed. Alt 1 (LOADED) board 10'-1\"; Alt 2 to deck 22'-5\". 5.13 LF, height delta 12'-4\" on one face (63 SF)."
+ ]
+}
