@@ -1,0 +1,12 @@
+# CAMBIOS tools v80w (Chuze Fitness Austin Bluffs, 2026-11-01) — sobre v80v
+
+| # | Tool | Error encontrado | Solución | Prueba |
+|---|---|---|---|---|
+| R80w.1 | arranque.py `_words_de` | pdfplumber abre el set una vez y acumula memoria: 10 GB y > 1 h en 106 hojas vectoriales grandes; la corrida se arrastra | El caché `<pdf>_titleblocks.pkl` se arma antes: `titleblocks_por_hoja.py` (un proceso por hoja, en serie) y `palabras_fitz.py` (PyMuPDF) en hojas lentas; el método por hoja queda en `proceso/titleblocks_metodo.json`; el mapa se verifica contra el índice de hojas | mapa 106/106 = índice |
+| R80w.2 | arranque.py `RE_HOJA` | Solo aceptaba `A2.10`; hojas `A101`, `AD101`, `A421.B`, `G001` → mapa vacío | Regex acepta los dos formatos | asserts sintéticos (ok / bad) |
+| R80w.3 | arranque.py `_titulo_de_hoja` | Banda del título 7–20 % arriba del número; este title block lo pone a ~3 % → títulos de revisiones | Banda 1.5–20 % + BASURA con AUTHOR / CHECKER / ISSUE / COMMENTS / OWNER CHANGES / STAMP | 75/75 hojas A/G/S con título correcto o legible |
+| R80w.4 | arranque.py `clasificar` | DEMOLITION FLOOR PLAN tomado como floor plan principal; "WALL TYPES" no reconocido; door schedule "DOOR AND WINDOW SCHEDULES" no | Demo nunca es FLOOR_PLAN / RCP; WALL TYPE → PARTITION_TYPES; DOOR AND WINDOW SCHEDULE; EGRESS PLAN → CODE; ELEVATIONS → INT_ELEV salvo EXTERIOR | corrida Chuze: A101 / A301 / A601 / G003 |
+| R80w.5 | inventario_tags.py `TAG_DIGIT_RE`, `TYPE_RE` | Tag con guion de variante (`A2-3D`) no reconocido | `[A-Z]{1,2}\d{1,2}(?:-\d{1,2})?[A-Z]{0,2}` | asserts sintéticos |
+| R80w.6 | inventario_tags.py `types_schedule` | Tabla de partition type de UNA fila (furring 'B': B2E; rated 'X': X6D) no entraba al schedule (exigía ≥ 2 tokens alineados) → tags en planta sin type | Token con dígito bajo el encabezado TYPE de su columna cuenta como "fila única bajo encabezado TYPE" | corrida Chuze: B2E y X6D en el schedule |
+| R80w.7 | alcances.py `_sheet_of` | Hoja = ID más repetido del texto → keynotes (A1.11) citados como hojas en el Scope Checklist | Número de hoja del índice del title block (`etapas/1_inventario/inventario.json`); el método viejo solo como respaldo; CITA_RE acepta A101 / A421.B | corrida Chuze |
+| R80w.8 | inventario_tags.py `SHEET_RE`, `DETAIL_TXT_RE` | Hojas con sufijo de letra (A421.B, A000.A) leídas como "P-2", "L11"; burbujas a esas hojas perdidas | Sufijo `.X` / `.XX` aceptado | asserts sintéticos |
