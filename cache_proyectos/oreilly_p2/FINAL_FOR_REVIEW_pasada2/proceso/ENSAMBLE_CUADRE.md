@@ -112,3 +112,34 @@ Excel: `run7/takeoff_work/etapas/8_excel/Takeoff_runner.xlsx` (= `ENTREGA/OReill
 | 5 | Producto dentro de la familia 6" | 600S162-54 = 687.32 / 600S162-43 = 340.72 | E3 pone los 176.88 LF de joists en 600S162-54 | No es diferencia de total: E3 había clasificado mal los joists. Los del vestíbulo (CJ-VEST-100A, 26.88 LF) son 600S162-43 (3/A3.1 key 8, canon); los de office y R.R. (150.0) sí son 600S162-54 (7/A4.2 key 5). |
 
 Sin cambio de cantidad, solo documentado: S24-OF / RR / RRS (dueño de esquina, R70.2 / R78.35); S42-02 (6.715 sigue cargado como supuesto conservador con RFI-29); S42 en dos renglones (convención de partition_types); Layers 0.79 de HEAD-A-8; markups S41 / S43 ahora a 0.00 % (bands ajustados al LF contado). Exclusiones nuevas con fuente (ALC-INSUL, ALC-STUCCO, ALC-ACT, ALC-SHUTTERS, ALC-WOODTRIM con RFI-33, ALC-STORM) sin cantidad.
+
+---
+
+# final — run10 (respuestas del estimador 2026-11-01) vs ELEMENTO_1..6
+
+Delta por renglón contra run7 y su explicación: `TOTALES_FINALES.md` (23 renglones cambian). Resumen de lo que difiere de los ELEMENTO aprobados:
+| Elemento | Renglón | ELEMENTO | Final | Diferencia / respuesta |
+|---|---|---|---|---|
+| E1 | S42 (S42-01+02) LF | 64.122 | 64.606 | RFI-29: extensión de S42-02 7.2 ft (antes 6.715 sin cota) [PENDIENTE] + RFI al GC |
+| E2 | 5/8" Type X | 7,404.93 | 7,421.40 | RFI-15 B +8.84 (cara 5.34 + underside 3.50); RFI-29 +7.63 |
+| E2 | 1/4" | 187.16 | 195.58 | RFI-15 B +8.42 |
+| E2 | Level 5 | 6,432.72 | 6,440.16 | RFI-29 +7.44 |
+| E3 | 362S162-43 (ties) | 238.0 | 140.0 | RFI-11 A: sin ties en los piers |
+| E3 | 362S162-33 | 1,911.54 | 1,912.02 | RFI-29: lateral strut +0.48 |
+| E3 | 6" (600S162-43) | 340.72 (rev2) | 340.72 | sin cambio (RFI-32 A) |
+| E4 | track estándar top 3-5/8" | 172.35 | 96.57 | RFI-20 B: el top de S42-02 / S42-03 pasa a deep-leg |
+| E4 | top heads (VH) 20.09 | 20.09 | 0 | RFI-20 B: pasa a deep-leg 6" web |
+| E4 | deep-leg | 46.84 | 123.11 (3-5/8") + 20.09 (6") | RFI-20 B; renglón separado por web |
+| E4 | bottom 3-5/8" | 219.19 | 219.68 | RFI-29 +0.49 |
+| E4 | RC | 120.51 | 128.51 | RFI-15 B +8.0 |
+| E5 | bracing | 807.52 | 808.01 | RFI-29 +0.49 |
+| E5 | blocking FRT | 499.16 | 600.79 | RFI-25 B +100.67; RFI-29 nailers +0.96 |
+| E5 | clips 2x2 / L4x4 | 14 / 12 | 22 / 19 | RFI-26 B |
+| E5 | FCB43.5 | 168 | 144 | RFI-11 A −24 |
+| E6 | corner bead | 465.65 | 474.62 | RFI-15 B +8.0; RFI-29 +0.97 |
+| E6 | J molding | 374.82 | 375.79 | RFI-29 +0.97 |
+| E6 | control joint | 242.78 | 340.24 | RFI-27 B −101.25 (S21 a 30 ft); rev2 +69.71 reemplazado por RFI-30 B +129.0 en las esquinas de partition. Las 4 esquinas de S21 y la del header S42 (69.71) siguen cargadas porque la respuesta B agrega las de partition sobre la opción A |
+| E6 | compound / tape | 585.08 / 3,006.67 | 586.27 / 3,012.77 | siguen el board |
+| — | W-4 trim | — | 100.67 | RFI-31 B |
+| — | track brace | — | 6.0 | RFI-28 A |
+Compuertas run10: reglas.py solo back-check; registro entregable OK; alcances compuerta OK; cobertura 254/254; markups por type dentro de 0.33 %; compuerta de texto de cliente sin hallazgos.

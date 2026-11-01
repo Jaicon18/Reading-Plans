@@ -35,7 +35,7 @@ Notas:
 | RFI-33 | 1x4 wood trim (A4.2 key 12, A4.1 key 11) | A EXCLUDED Div. 06 | carpintería de terminación | cargarlo | B +52.73 LF · 7/A4.2 |
 Cerrados mostrados como resueltos en Pending Items: RFI-05 (glass mat en la cornice, estimator decision 2026-11-01), RFI-16 (A, board del pier a 12'-0").
 
-## Exclusiones a confirmar por el estimador (rev2)
+## Exclusiones (EXCLUDED directo en Scope Checklist; regla del usuario 01-nov: no son RFI)
 | Exclusión | Fuente escrita | Impreso en el set |
 |---|---|---|
 | Insulation de todo tipo (batt R-19, sound batt, polyiso rígido R-9 foil-faced de S21 / S24, rigid board R-10) | estimator standing order (regla fija del skill: "Insulation EXCLUDED siempre") | A1.1 types S21 / S24, A3.1 keys 10 / 15 / 16 / 36, A4.2 keys 13 / 14 |
@@ -45,3 +45,10 @@ Cerrados mostrados como resueltos en Pending Items: RFI-05 (glass mat en la corn
 | Support framing de security shutters | estimator decision 2026-11-01 (respuesta 24): no se carga; framing si se agregan | A5.2 GN H |
 | 1x4 wood trim | Div. 06 (RFI-33) | 7/A4.2 key 12, A4.1 key 11 |
 | Storm panels | no aplica: G1.1 Vult 108 mph < 120 mph | A5.2 GN I |
+
+## Final (respuestas del estimador 2026-11-01 aplicadas, run10)
+Cerradas: 04 A, 08 A, 11 A, 12 B, 15 B, 20 B, 21 A, 22 A, 23 A, 24 A, 25 B, 26 B, 27 B, 28 A, 30 B, 31 B, 32 A, 33 excluida (el corner bead de S41 se queda), 05 / 16 / 17 / 18 (antes). Exclusiones confirmadas: ACT C-1 + grid + seismic bracing, insulation, stucco.
+Siguen abiertas en Pending Items: **RFI-01** (peralte del purlin según shop drawing PEMB; 8" supuesto) y **RFI-29** (RFI al GC: extensión del header S42-02; cargada 7.2 ft [PENDIENTE]).
+
+## Cierre (run12, 01-nov)
+Abiertos en Pending Items: RFI-01 (peralte del purlin por shop drawing PEMB, 8" supuesto) y RFI-29 (RFI al GC: extensión del header S42-02, 7.2 ft [PENDIENTE]). RFI-33 retirado como RFI (wood trim Div. 06 = EXCLUDED directo, R80e.97). Exclusiones directas: ACT C-1 + grid + seismic, insulation, stucco, wood trim, shutters, storm panels, acoustical sealant (orden fija), MEP / eléctrico / civil / cabinets, tornillería.

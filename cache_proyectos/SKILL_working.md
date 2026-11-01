@@ -2682,3 +2682,4 @@ En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido bu
 34. Extensión no acotada de un wall: valor del estimador [PENDIENTE] + RFI al GC (RFI-29).
 35. Trim de paneles sanitarios (W-4): solo arriba y en la puerta (RFI-31 B). Diagonal brace de vestibule heads: lo impreso (RFI-32 A).
 36. 1x4 wood trim = Div. 06 EXCLUDED; el corner bead de box-outs se queda (RFI-33). ACT + grid + seismic bracing, insulation y stucco: EXCLUDED con nota.
+37. **Trades que no hacemos (REGLA DEL USUARIO 01-nov, todos los proyectos):** NUNCA crear RFI ni preguntar por ACT y su grid / seismic bracing, insulation, stucco / lath / veneer, roofing, wood trim Div. 06, MEP, eléctrico, civil, cabinets: se excluyen directo con nota EXCLUDED (y la cita del set) en el Scope Checklist; nunca "to be confirmed by the estimator" (R80e.97).
