@@ -22,3 +22,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **01-nov: v80w** = v80v + R80e.98–R80e.108 (corrida Victoria's Secret #679 Downey, ver tools/CAMBIOS_tools_v80w.md). Suite 5/5 OK. Incluye: madera excluida directo (orden del usuario), demolition plan obligatorio en la lectura, familias impresas nuevas, fixes de trazabilidad / alcances / markups con texto en curvas.
 
 | Victoria's Secret #679 Downey (rev1, pendiente de revisión del estimador) | v80w | 2026-11-01 | take-off-metal-frame-drywall_v80w_VS-Downey_2026-11-01.zip |
+
+**01-nov: v80x** = v80w + R80e.109–R80e.113 (VS Downey rev2: paso 11 auditor a ciegas + paso 12 biblioteca 17 FAIL resueltos; ver tools/CAMBIOS_tools_v80x.md). Suite 5/5 OK.
+
+| Victoria's Secret #679 Downey rev2 (REGLAS OK, back-check registrado; pendiente del estimador) | v80x | 2026-11-01 | take-off-metal-frame-drywall_v80x_VS-Downey-rev2_2026-11-01.zip |

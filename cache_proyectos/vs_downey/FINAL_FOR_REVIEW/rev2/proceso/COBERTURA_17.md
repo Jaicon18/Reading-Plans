@@ -1,0 +1,21 @@
+# COBERTURA_17 - Victoria's Secret #679 Downey: what was done with each of the 17 items
+
+| # | Sheet / item | Opened, found | Action |
+|---|---|---|---|
+| 1 | A05.01 key note 8, FRP wainscot at exposed walls, ref E/A13.02 | WC-1 at 4'-0" T.O. wainscot trim (E/A13.02) in the restrooms, break room, hallway and electrical rooms. It was already carried. | CITED: "A05.01 key note 8 ... refer to E/A13.02" added to the source of the 5 FRP lines. RFI-21 closed. |
+| 2 | S/A07.01 VS column elevation | VS column wraps, B.O. ceiling 11'-0". Carried as CW1-CW4. | CITED: "S/A07.01" added to the CW1-CW4 sources. |
+| 3 | C/A07.01, A/A07.01 VSL elevations (Garcy panels) | Garcy runs at Rooms 1/2, display windows and the TRANS #2 spine. Garcy blocking was already carried. | CITED: "C/A07.01, A/A07.01" added to the matching Garcy blocking lines. |
+| 4 | P/A07.01 display window #1 | Display soffit P-204, 11'-2" B.O. ceiling, 10'-6" T.O. mullion. The ceiling and the head truss were already carried. | CITED: "P/A07.01" added to the VS DISPLAY WINDOW 1 ceiling and the platform lines (GAP10). |
+| 5 | N/A07.01 storefront transition elevations | SF-91 / SF-89 at the portal piers. Already carried (W114/W115, SP1/SP2). | CITED: "N/A07.01" added to the sources of W114, W115, SP1 and SP2. |
+| 6 | C/A07.02, A/A07.02 VSL / Beauty elevations | Garcy runs and the beauty cabinets in Rooms 3, 4 and 5. Already carried. | CITED: "C/A07.02, A/A07.02" added to the Room 3 / TRANS 3-5 Garcy blocking lines and to the beauty cabinet blocking. |
+| 7 | S/A07.02, N/A07.02 cashwrap elevations | Cashwrap with backwrap and soffit (F/A10.05). Already carried (SS1). | CITED: "S/A07.02, N/A07.02" added to the SS1 source. Its suspended stud was added under RFI-06 (S/S03.01). |
+| 8 | P/A07.02 display window #2 | Same as item 4, for window #2. | CITED: "P/A07.02" added to the VS DISPLAY WINDOW 2 ceiling and to GAP10. |
+| 9 | B, J, K, L, N/A07.04 fitting room elevations (blocking shown) | The 4'-4" and 7'-6" blocking, hooks, bench, paging buttons, go-back shelving and signage. Already carried. | CITED: "B/A07.04, J/A07.04, K/A07.04, L/A07.04, N/A07.04" added to the FR mirror / hooks / bench / wardrober / GAP2 / GAP3 / GAP4 blocking lines. |
+| 10 | A07.04 note "framed graphics, D/A12.01" | D/A12.01 hangs the graphic on vendor Z-clips with Hilti Kwik Tog 3 inserts in the gyp bd. No blocking or framing is drawn. | EXCLUDED: these are fasteners or anchors only. Exclusion note added. |
+| 11 | A, D, K, L, S/A08.10 storefront finish over 1/2" MR gyp bd | 1/2" MR gyp bd under SF-91. A00.01 assigns the storefront finish system to G/G. | CITED on W114/W115/SP1/SP2. The portal soffit was ADDED: 78.17 SF (D/A08.10 4'-3 7/8" x J/A08.10 18'-1"). RFI-04 and RFI-23 closed. |
+| 12 | K, S/A08.10 bottom track attachment to slab | "Refer to struct. dwgs for bottom track attachment to slab". This is fastening only. | EXCLUDED: fasteners are not carried (estimator standing order). Exclusion note added. |
+| 13 | P/A12.01 transition beam schedule | The chart covers transition framing only. TRANS #4 (3'-8" R.O.) uses the specific DBL 3 5/8" lintel of P/A10.03. No other built-up transition beam is drawn. | CITED: "P/A12.01 reviewed" added to the TRANS4 header source. No quantity change. |
+| 14 | M/A12.02 metal flush mounted access panel | Not called on A03.01: the flush-mounted panel keynote is struck through, and keynotes 5 and 8 call drop-in trimless panels (S/A12.02). | EXCLUDED with that reason (exclusion note). The 3 tagged panels stay carried. |
+| 15 | M/S01.01 top track splice (structural studs) | Splice method at the top track. It adds no LF. | CITED: "top track splices per M/S01.01" appended to the top-track text of every wall with a standard top track. |
+| 16 | S/S03.01 suspended framing: hanger wire, continuous 3 5/8" 20 ga stud | This answers "SUSPENDED METAL STUD / CONT. HANGER STUD - REFER TO STRUCTURAL" (F/A10.05, B/A10.03, E/A12.02, A/A12.02). | ADDED: continuous 3 5/8" 20 ga stud 85.62 LF + hanger wire @24" 275.08 LF (soffit and valances) + 44.66 LF (E/A A12.02 transitions). RFI-06 and RFI-27 closed. |
+| 17 | H/S03.01 column connections (18 ga base track, 1 1/2" x 1 1/2" x 16 ga clip) | The box posts were carried. The clips (top and bottom of beam) were not. | CITED on the box posts. ADDED: 24 EA framing clips (12 posts x 2). |
