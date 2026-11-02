@@ -30,3 +30,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v80y** = v80x + R80e.114 (blocking de accesorio 3' x 2 filas) + R80e.115 (ductos siempre EXCLUDED), reglas del usuario (cache_proyectos/REGLAS_ALCANCE.md R-ALC-02/03).
 
 | Victoria's Secret #679 Downey rev4 FINAL (0 RFI abiertos) | v80y | 2026-11-02 | take-off-metal-frame-drywall_v80y_VS-Downey-rev4_2026-11-02.zip |
+
+**02-nov: v80z** = v80y + R80e.116 (demolición de gyp bd / metal framing = nuestro alcance, familia de demolición SF sin waste; regla R-ALC-04).
+
+| Victoria's Secret #679 Downey rev5 (demo incluida) | v80z | 2026-11-02 | take-off-metal-frame-drywall_v80z_VS-Downey-rev5_2026-11-02.zip |
