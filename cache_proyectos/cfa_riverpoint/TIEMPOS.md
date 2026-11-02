@@ -21,4 +21,6 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 6-9 | Cálculo + Excel + markups + compuertas (subagente, v81cf4) | 13:36 | 14:07 | 31 min |
 | 11-12 | Auditor ciego + matriz de cobertura (2 subagentes en paralelo) | 14:07 | 14:26 | 19 min (auditor 5 FAIL, cobertura 92.3 %) |
 | 10b | Pasada de corrección rev2 (subagente; 31 cambios) | 14:26 | 14:50 | 24 min |
-| 10c | Ajuste R-ALC-10 restroom board (1/2" MR) | 14:50 | | |
+| 10c | Ajuste R-ALC-10 restroom board (1/2" MR) + BE-CF14 driver | 14:50 | 15:00 | 10 min |
+| 1g | Skill v81cf7 (= vigente v81cf6 + BE-CF14), cadena CFA re-corrida con v81cf7 | 14:58 | 15:02 | 4 min |
+| 10d | README / PARA_REVISAR / SEGUIMIENTO + back-check (subagente) | 15:02 | | |
