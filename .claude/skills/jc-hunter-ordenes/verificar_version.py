@@ -10,6 +10,9 @@ import re
 import sys
 import zipfile
 
+# Ids citados solo como "no existe" (no son reglas).
+IGNORAR = {"BE-109"}
+
 PAT = re.compile(r"\b(R80[a-z]\.\d+|R7\d\.\d+|R-ALC-\d+|BE-[A-Z]{2,3}-?\d+|BE-\d+)\b")
 
 
@@ -50,7 +53,7 @@ def main():
             todas |= ids_en_ruta(p)
     for e in extra:
         todas |= ids_en_ruta(e)
-    faltan = sorted(todas - tiene)
+    faltan = sorted(todas - tiene - IGNORAR)
     print(f"Reglas acumuladas: {len(todas)} · en el candidato: {len(tiene & todas)} · faltan: {len(faltan)}")
     if faltan:
         print("FALTAN:", " ".join(faltan))
