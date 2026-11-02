@@ -12,3 +12,4 @@ RFI-10 ahora solo pregunta el largo de corridas de cabinetry del break room y sh
 - RFI-11 cerrado 2026-11-02: máximos de N/S03.01 (sin cambio de cantidad).
 - RFI-13 cerrado 2026-11-02 (decisión del estimador): REPLACE 5/8" Type X en demising (E) norte + sur = 2 x 124'-7 1/8" (A02.01, sur DERIVADO) x 12'-0" = 2,990.25 SF (U465). Retiro del board existente = demolición, excluido.
 - RFI-15 eliminado 2026-11-02: ductos siempre EXCLUDED (regla fija R-ALC-03).
+- RFI-17 cerrado 2026-11-02: diagonales de head trusses 16 x 4'-0" = 64 LF 3-5/8" 20 ga (storefront estructural).
