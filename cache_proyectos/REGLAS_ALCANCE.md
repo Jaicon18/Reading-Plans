@@ -16,3 +16,7 @@
 - Si el plano imprime el largo, manda el impreso.
 - Aplica a accesorios sueltos (lavatory, TP, seat cover, towel, mirror, hooks, signage, coat rack…). Las corridas (cabinetry, shelving) van por su largo de corrida.
 - Se carga directo, sin RFI.
+
+## R-ALC-03 — Ductos siempre excluidos (usuario, 2026-11-02, VS #679 Downey)
+- Framed openings / framing para ductos que cruzan walls o cielos: **EXCLUDED siempre**, en todos los proyectos.
+- Nunca RFI: nota directa en Scope Checklist "EXCLUDED - framed openings for ducts (by others)".
