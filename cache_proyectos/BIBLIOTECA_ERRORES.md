@@ -233,3 +233,10 @@ Error (detectado por la pasada 2): rev4 cargó el head interior a 5.06 ft (cota 
 
 ## BE-113 — Jamb studs (king + jack) contados en walls de Z-furring sobre CMU (O'Reilly pasada 2, back-check 02-nov)
 studs_nodos.py sumaba 4 jambs por abertura también en S21 (Z-furring 150ZF125-18 sobre CMU): +20 piezas ≈ +297 LF (+13.4 %). El jamb del furring es FRT wood blocking (2/A5.1, 12/A5.2), ya contado en blocking. Prueba: en walls de furring (Z / hat channel) jambs = 0 (R80e.98, studs_nodos.py + closer.py Wall.furring).
+
+## BE-CH01 (Chuze, 2026-11-02) — sesión sin las reglas fijas del usuario
+Una sesión arrancada en otra rama (v77c) no leyó REGLAS_USUARIO_CLAUDE.md / REGLAS_ALCANCE.md y cargó tornillería y refuerzos de ductos que el estimador excluye siempre; además usó un skill (v80v) que no era el último archivado. Prueba: antes del primer número, la sesión cita las reglas fijas vigentes (tornillería EXCLUDED, R-ALC-01/02/03) y el skill de skills_archivo/INDICE.md con el que arranca.
+## BE-CH02 (Chuze) — walls entre plantas ampliadas
+Lecturas por zona con regla "hoja menor" dieron dobles conteos (~50 LF A6D) y un hueco (28 LF D3G) dentro de UNA misma lectura. Prueba: cierre global independiente en la planta general por type y hoja ampliada; Σ zonas vs cierre por type antes de conciliar.
+## BE-CH03 (Chuze) — escala supuesta
+Escala de plantas ampliadas copiada de otra hoja (1/4") cuando dos eran 3/16". Prueba: cada hoja lleva su escala del rótulo "SCALE:" de esa hoja, verificada con cota o grid.
