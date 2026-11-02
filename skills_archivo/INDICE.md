@@ -64,3 +64,6 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v81cf3 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf2 + R80e.124/125/126: comparar_extra.py (doble lectura de board-only / cielos / misc / demo), compuerta A_BARRIDO_NO_DIBUJADO en reglas.py (R-ALC-11 / BE-116: renglón en 0 / EXCLUDED por "no dibujado" sin barrido registrado en specs + schedule + hojas S = FALLA) con test_barrido_no_dibujado.py. verificar_version.py: 0 faltantes (425 acumuladas). Suite 31/31. Banco B&N rev13 / VS rev8 / Chuze FINAL: 0 familias distintas; la compuerta nueva no marca nada en B&N rev13.
 
 | Chick-fil-A #2284 River Point (vigente) | v81cf3 | 2026-11-02 | take-off-metal-frame-drywall_v81cf3_CFA-RiverPoint_2026-11-02.zip |
+**02-nov: v80z5** = v80z4 + R80e.124 (conflicto plano vs spec = manda el plano con nota de verificación, R-ALC-10; usg_grid channel_molding false; ALC-08 acepta 1/2" MR). Suite 5/5.
+
+| Victoria's Secret #679 Downey rev9 (0 RFI abiertos) | v80z5 | 2026-11-02 | take-off-metal-frame-drywall_v80z5_VS-Downey-rev9_2026-11-02.zip |
