@@ -52,3 +52,6 @@ Siguen abiertas en Pending Items: **RFI-01** (peralte del purlin según shop dra
 
 ## Cierre (run12, 01-nov)
 Abiertos en Pending Items: RFI-01 (peralte del purlin por shop drawing PEMB, 8" supuesto) y RFI-29 (RFI al GC: extensión del header S42-02, 7.2 ft [PENDIENTE]). RFI-33 retirado como RFI (wood trim Div. 06 = EXCLUDED directo, R80e.97). Exclusiones directas: ACT C-1 + grid + seismic, insulation, stucco, wood trim, shutters, storm panels, acoustical sealant (orden fija), MEP / eléctrico / civil / cabinets, tornillería.
+
+## Cierre definitivo (02-nov, run15)
+RFI-01 y RFI-29: CLOSED — estimator decision 2026-11-02 (recommended option), con nota "confirm with GC" (purlin 8" supuesto / extensión S42-02 7.2 ft). Pending Items vacío. Back-check ciego: único FAIL (Z-furring +13.4 %, jambs de furring contados como studs) corregido (R80e.98) → Z-furring 2,220.63 LF = back-check; veredicto PASS. reglas.py 838 reglas, 0 fallas; bitácora OK con back-check.
