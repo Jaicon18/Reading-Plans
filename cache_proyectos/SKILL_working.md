@@ -2706,3 +2706,8 @@ PASO 1 produce `proyecto_datos.json` (nombre+ciudad, dirección, tipo de proyect
 4. Walls de madera: framing EXCLUDED (Div. 06) pero su gyp / cement board es nuestro → `existing_walls[]` (board only), bloque "BOARD ONLY - EXISTING OR WOOD-FRAMED WALLS (FRAMING NOT IN SCOPE)", markup "BOARD ONLY - NO FRAMING" (BE-CF04).
 5. Sets de dos GC del mismo proyecto: comparar por programa (hash de texto por hoja + fecha de plot del title block) y bajar solo lo que difiera; el GC de la fecha de bid que manda define el set.
 - R80e.123 (VS #679 Downey rev8, v80z4): trazabilidad, renglón de studs: la cantidad del ítem del canon (qty) manda sobre el último '=' de su operación.
+
+## R80e.125 — CFA #2284 (2026-11-02): doble lectura completa en sets con board-only
+1. `comparar_extra.py` corre SIEMPRE después de comparar.py: compara A vs B en existing_walls (por tag y por board), ceilings, misc_items por familia y demo; un tag dentro de existing_walls.tag_ids no es "tag sin wall" (BE-CF06).
+2. Material del wall: el WALL TYPE SCHEDULE (descripción del type) + notas estructurales mandan sobre la leyenda de relleno de otra hoja; el conflicto de grafía va a RFI con el delta de framing calculado por programa (CFA: A-201 relleno "METAL STUD WALL" vs A-202 "WD STUD" + S-101 nota 4).
+3. Límites de tool conocidos (BE-CF07): joists de 6" y cielos board-only por misc_items con traza; spacing por soffit; etiqueta de Z-furring según lo impreso; demo de cielos por área.

@@ -1,0 +1,4202 @@
+{
+ "project": "Chick-fil-A #2284 River Point (Sheridan, CO) - reinvestment remodel",
+ "reader": "A",
+ "constants": {
+  "plan_scale_pt_per_ft": {
+   "value": 18.0,
+   "source": "A-202 1/4\" = 1'-0\" (title B4) checked: M2.1 255.0 pt = printed 14'-2\""
+  },
+  "plan_scale_by_sheet": {
+   "A-202": {
+    "value": 18.0,
+    "source": "A-202 1/4\" = 1'-0\"; 255.0 pt = 14'-2\" printed (M2.1)"
+   },
+   "A-221": {
+    "value": 18.0,
+    "source": "A-221 1/4\" = 1'-0\"; gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\""
+   },
+   "A-050": {
+    "value": 18.0,
+    "source": "A-050 1/4\" = 1'-0\"; registered to A-202 (dx -49, dy -98 pt, 51 matching lines)"
+   },
+   "A-052": {
+    "value": 18.0,
+    "source": "A-052 1/4\" = 1'-0\"; registered to A-202 (dx -20, dy -105 pt)"
+   }
+  },
+  "level5_tags": {
+   "value": [
+    "WC-1"
+   ],
+   "source": "A-211 finish legend 'LEVEL 5 DRYWALL FINISH IS REQUIRED FOR WALL COVERING INSTALLATION' (WC-1 play area) + A-050 KN12 + A-201 KN14"
+  },
+  "board_spec": {
+   "value": "1/2 in standard / 5/8 ceiling type / 1/2 in DUROCK",
+   "source": "C09250 \u00a72.1.B, \u00a72.1.E, \u00a72.2.B / A-909"
+  },
+  "finish_levels": {
+   "value": "Level 4 dining (A.4/A-211); Level 3 tile/FRP substrate and others (C09250 \u00a73.5.D); Level 1 cooler (G.11); Level 5 play area (KN12/A-050)",
+   "source": "A-211 A.4 + C09250 \u00a73.5.D / A-909 + G.11/A-202"
+  }
+ },
+ "walls": [
+  {
+   "id": "M2.1-01",
+   "tag": "M2.1",
+   "element": "wall",
+   "sheet": "A-202",
+   "page": 13,
+   "tag_ids": [
+    "PT0001"
+   ],
+   "location": "Kitchen south (exterior) wall behind Hood #1 - fire furring at hood",
+   "band": {
+    "ori": "H",
+    "c0": 1062.2,
+    "c1": 1065.2,
+    "lo": 1816.8,
+    "hi": 2071.8,
+    "sheet": "A-202"
+   },
+   "length_ft": 14.167,
+   "length_status": "CONFIRMADO",
+   "length_source": "A-202 printed dimension 14'-2\" (kitchen south wall, M2.1 extent) [CONFIRMED]; band A-202 vector 255.0 pt / 18 = 14.167 ft",
+   "length_op": "scale check A-202: M2.1 band 1816.8 -> 2071.8 = 255.0 pt / 18 pt/ft = 14.167 ft = printed 14'-2\" (A-202) -> 1/4\" = 1'-0\" = 18 pt/ft confirmed",
+   "length_basis": "face to face",
+   "height_ft": 10.667,
+   "height_status": "DERIVADO",
+   "height_source": "C.1/A-202 framing 6\" above adjacent ceiling: kitchen C.H.10'-2\" (A-221) + 0.5 = 10.667 ft [DERIVED]",
+   "stud_size": "2\" Z-furring channel",
+   "stud_source": "A-202 WALL TYPE SCHEDULE - INTERIOR M2.1 '2\" MTL. Z CHANNEL 2'-0\" O.C.' + A1/A-605 '2\" metal Z channel'; C09111 \u00a71.1.A.1 furring / A-909",
+   "oc_in": 24,
+   "oc_source": "A-202 schedule M2.1 '2'-0\" O.C.'",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (Z channel gauge not printed on A-202 / A-605 -> spec minimum)",
+   "detail": "A1/A-605",
+   "detail_source": "A1/A-605 FIRE FURRING @ HOOD (2\" metal Z channel, 1\" mineral wool, 1/2\" cement board, 22 ga metal)",
+   "bottom_track": false,
+   "top_track": false,
+   "track_source": "A1/A-605",
+   "track_source_info": "Z-channel furring fastened to existing wood studs; no runner track drawn (A1/A-605) or printed (A-202 M2.1)",
+   "faces": [
+    {
+     "side": "N",
+     "room": "Kitchen",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 10.5,
+     "height_source": "G.4/A-202 FRP/stainless on metal studs: 1/2\" cementitious board to 4\" above ceiling: 10'-2\" (A-221) + 4\" = 10.5 ft; A1/A-605 1/2\" cement board; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-202 plan (band) + A1/A-605 (A1/A-605 FIRE FURRING @ HOOD (2\" metal Z channel, 1\" mineral wool, 1/2\" cement b)"
+  },
+  {
+   "id": "M3.5-01",
+   "tag": "M3.5",
+   "element": "wall",
+   "sheet": "A-202",
+   "page": 13,
+   "tag_ids": [
+    "PT0003"
+   ],
+   "location": "Kitchen west wall (behind Hood #3), sistered to existing framing, on smoke partition line",
+   "band": {
+    "ori": "V",
+    "c0": 1551.5,
+    "c1": 1557.7,
+    "lo": 687.7,
+    "hi": 816.2,
+    "sheet": "A-202"
+   },
+   "length_ft": 7.146,
+   "length_status": "CONFIRMADO",
+   "length_source": "A-202 printed dimension 7'-1 3/4\" [CONFIRMED]; band 128.5 pt / 18 = 7.139 ft",
+   "length_op": "7'-1 3/4\" = 7 + 1.75/12 = 7.146 ft (A-202)",
+   "length_basis": "face to face",
+   "height_ft": 10.667,
+   "height_status": "DERIVADO",
+   "height_source": "C.1/A-202 6\" above kitchen C.H.10'-2\" (A-221) = 10.667 ft [DERIVED]; wall lies on smoke partition (A.11/A-221: framing to roof deck) - roof deck height not printed -> RFI-04",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-202 schedule M3.5 '3 5/8\" MTL STUDS SISTERED TO EXISTING FRAMING'; A2/A-605 '8\" metal stud wall' (existing + sister); C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "spacing not printed for M3.5 (sistered to existing framing) -> 16\" assumed per C2/S-801 '362S162-33 @ 16\" O.C.' -> RFI-01",
+   "gauge": "33 mil (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909; S-801 typical '362S162-33'",
+   "detail": "A2/A-605",
+   "detail_source": "A2/A-605 PIN & SLEEVE SECTION (called at this wall on A-201) + A-202 schedule M3.5",
+   "top_track_kind": "standard",
+   "top_track_kind_source": "C.1/A-202 framing stops 6\" above ceiling (no deflection head printed); RFI-04 if extended to deck",
+   "faces": [
+    {
+     "side": "E",
+     "room": "Kitchen",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 10.5,
+     "height_source": "G.4/A-202 1/2\" cementitious board to 4\" above ceiling 10'-2\" = 10.5 ft (draftstop extension to deck = RFI-04); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-202 plan (band) + A2/A-605 (A2/A-605 PIN & SLEEVE SECTION (called at this wall on A-201) + A-202 schedule M3)"
+  },
+  {
+   "id": "M3.5-02",
+   "tag": "M3.5",
+   "element": "wall",
+   "sheet": "A-202",
+   "page": 13,
+   "tag_ids": [
+    "PT0004"
+   ],
+   "location": "Kitchen west wall (behind Hood #2), sistered to existing framing",
+   "band": {
+    "ori": "V",
+    "c0": 1551.5,
+    "c1": 1557.7,
+    "lo": 997.7,
+    "hi": 1065.2,
+    "sheet": "A-202"
+   },
+   "length_ft": 3.75,
+   "length_status": "CONFIRMADO",
+   "length_source": "A-202 printed dimension 3'-9\" [CONFIRMED]; band 67.5 pt / 18 = 3.75 ft",
+   "length_op": "3'-9\" = 3.75 ft (A-202)",
+   "length_basis": "face to face",
+   "height_ft": 10.667,
+   "height_status": "DERIVADO",
+   "height_source": "C.1/A-202 6\" above kitchen C.H.10'-2\" (A-221) = 10.667 ft [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A-202 schedule M3.5; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "spacing not printed (sistered) -> 16\" assumed -> RFI-01",
+   "gauge": "33 mil (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "detail": "A2/A-605",
+   "detail_source": "A2/A-605 PIN & SLEEVE SECTION (called at this wall on A-201)",
+   "top_track_kind": "standard",
+   "top_track_kind_source": "C.1/A-202 framing 6\" above ceiling",
+   "faces": [
+    {
+     "side": "E",
+     "room": "Kitchen",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 10.5,
+     "height_source": "G.4/A-202 1/2\" cementitious board to 4\" above ceiling 10'-2\" = 10.5 ft; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-202 plan (band) + A2/A-605 (A2/A-605 PIN & SLEEVE SECTION (called at this wall on A-201))"
+  },
+  {
+   "id": "MB-01",
+   "tag": "M3.5",
+   "element": "wall",
+   "sheet": "A-202",
+   "page": 13,
+   "tag_ids": [],
+   "location": "Infill of removed Eliason door (A-050 KN1) in existing kitchen/serving wall - menu board wall (C2/S-801)",
+   "band": {
+    "ori": "V",
+    "c0": 1541.0,
+    "c1": 1551.5,
+    "lo": 617.0,
+    "hi": 677.0,
+    "sheet": "A-202"
+   },
+   "length_ft": 3.333,
+   "length_status": "DERIVADO",
+   "length_source": "A-202 vector band 60.0 pt / 18 = 3.333 ft (new-construction outline between existing wall pieces) [DERIVED]",
+   "length_op": "677.0 - 617.0 = 60.0 pt / 18 = 3.333 ft",
+   "length_basis": "face to face",
+   "untagged_reason": "no partition tag; new infill drawn with new-wall outline on A-202 at the Eliason door removed by A-050 KN1; section C2/S-801 (bubbled on S-241 across this wall) = nonbearing metal studs '362S162-33' @ 16\" O.C.",
+   "default_type_source": "C2/S-801 CEILING SECTION 2 (bubble on S-241): nonbearing metal studs per specs, '362S162-33' @ 16\" O.C., brace '362S162-33' @ 48\" O.C.",
+   "thickness_measured_in": 7.0,
+   "height_ft": 10.5,
+   "height_status": "DERIVADO",
+   "height_source": "C.1/A-202 6\" above serving ceiling 10'-0\" (A-221) = 10.5 ft (B.O. ceiling joist per C2/S-801 'see arch' not printed) [DERIVED]",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C2/S-801 '362S162-33' (3-5/8\" 33 mil) @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C2/S-801 '362S162-33' @ 16\" O.C.",
+   "gauge": "33 mil (20 ga)",
+   "gauge_source": "C2/S-801 '362S162-33'",
+   "detail": "C2/S-801",
+   "detail_source": "C2/S-801 CEILING SECTION 2 (menu board wall bracing) + D3/A-624 menu board",
+   "top_track_kind": "standard",
+   "top_track_kind_source": "C2/S-801: 33 mil continuous track / bracing to ceiling joists (no deflection track printed)",
+   "faces": [
+    {
+     "side": "W",
+     "room": "Serving",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 3.5,
+     "height_source": "D3/A-624 1/2\" gypsum board from B.O. 7'-0\" A.F.F. to 6\" min above ACT 10'-0\" = 3.5 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    },
+    {
+     "side": "E",
+     "room": "Kitchen",
+     "board": "1/2 cement board",
+     "layers": 1,
+     "height_ft": 10.5,
+     "height_source": "G.4/A-202 (metal studs): 1/2\" cementitious board to 4\" above kitchen ceiling 10'-2\" = 10.5 ft; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-202 plan (band) + C2/S-801 (C2/S-801 CEILING SECTION 2 (menu board wall bracing) + D3/A-624 menu board)"
+  },
+  {
+   "id": "SS-SRV-W",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Serving soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Serving soffit (PT-31A)",
+   "drop_line": "SS-SRV-W",
+   "band": {
+    "ori": "V",
+    "c0": 1225.6,
+    "c1": 1226.6,
+    "lo": 440.2,
+    "hi": 766.4,
+    "sheet": "A-221"
+   },
+   "length_ft": 18.122,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 326.2 pt / 18 = 18.122 ft",
+   "length_op": "766.4 - 440.2 = 326.2 pt / 18 pt/ft = 18.122 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-SRV-N",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Serving soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Serving soffit (PT-31A)",
+   "drop_line": "SS-SRV-N",
+   "band": {
+    "ori": "H",
+    "c0": 440.2,
+    "c1": 441.2,
+    "lo": 1225.6,
+    "hi": 1376.6,
+    "sheet": "A-221"
+   },
+   "length_ft": 8.389,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 151.0 pt / 18 = 8.389 ft",
+   "length_op": "1376.6 - 1225.6 = 151.0 pt / 18 pt/ft = 8.389 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-SRV-IV",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Serving soffit (PT-31A) - edge facing Serving",
+   "soffit_of": "Serving soffit (PT-31A)",
+   "drop_line": "SS-SRV-IV",
+   "band": {
+    "ori": "V",
+    "c0": 1276.6,
+    "c1": 1277.6,
+    "lo": 482.2,
+    "hi": 766.1,
+    "sheet": "A-221"
+   },
+   "length_ft": 15.772,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 283.9 pt / 18 = 15.772 ft",
+   "length_op": "766.1 - 482.2 = 283.9 pt / 18 pt/ft = 15.772 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 0.833,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. serving 10'-0\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 0.833 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Serving",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 0.833,
+     "height_source": "A-221 C.H. serving 10'-0\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 0.833 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-SRV-IH",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Serving soffit (PT-31A) - edge facing Serving",
+   "soffit_of": "Serving soffit (PT-31A)",
+   "drop_line": "SS-SRV-IH",
+   "band": {
+    "ori": "H",
+    "c0": 482.2,
+    "c1": 483.2,
+    "lo": 1276.6,
+    "hi": 1405.4,
+    "sheet": "A-221"
+   },
+   "length_ft": 7.156,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 128.8 pt / 18 = 7.156 ft",
+   "length_op": "1405.4 - 1276.6 = 128.8 pt / 18 pt/ft = 7.156 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 0.833,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. serving 10'-0\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 0.833 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Serving",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 0.833,
+     "height_source": "A-221 C.H. serving 10'-0\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 0.833 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-GT-N",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Dining gathering-table soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Dining gathering-table soffit (PT-31A)",
+   "drop_line": "SS-GT-N",
+   "band": {
+    "ori": "H",
+    "c0": 584.8,
+    "c1": 585.8,
+    "lo": 814.6,
+    "hi": 886.6,
+    "sheet": "A-221"
+   },
+   "length_ft": 4.0,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 72.0 pt / 18 = 4.0 ft",
+   "length_op": "886.6 - 814.6 = 72.0 pt / 18 pt/ft = 4.0 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-GT-S",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Dining gathering-table soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Dining gathering-table soffit (PT-31A)",
+   "drop_line": "SS-GT-S",
+   "band": {
+    "ori": "H",
+    "c0": 727.8,
+    "c1": 728.8,
+    "lo": 814.6,
+    "hi": 886.6,
+    "sheet": "A-221"
+   },
+   "length_ft": 4.0,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 72.0 pt / 18 = 4.0 ft",
+   "length_op": "886.6 - 814.6 = 72.0 pt / 18 pt/ft = 4.0 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-GT-W",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Dining gathering-table soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Dining gathering-table soffit (PT-31A)",
+   "drop_line": "SS-GT-W",
+   "band": {
+    "ori": "V",
+    "c0": 814.6,
+    "c1": 815.6,
+    "lo": 584.8,
+    "hi": 728.8,
+    "sheet": "A-221"
+   },
+   "length_ft": 8.0,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 144.0 pt / 18 = 8.0 ft",
+   "length_op": "728.8 - 584.8 = 144.0 pt / 18 pt/ft = 8.0 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  },
+  {
+   "id": "SS-GT-E",
+   "tag": "SOFFIT",
+   "element": "soffit_side",
+   "sheet": "A-221",
+   "page": 15,
+   "tag_ids": [],
+   "location": "Dining gathering-table soffit (PT-31A) - edge facing Dining",
+   "soffit_of": "Dining gathering-table soffit (PT-31A)",
+   "drop_line": "SS-GT-E",
+   "band": {
+    "ori": "V",
+    "c0": 885.6,
+    "c1": 886.6,
+    "lo": 584.8,
+    "hi": 728.8,
+    "sheet": "A-221"
+   },
+   "length_ft": 8.0,
+   "length_status": "DERIVADO",
+   "length_source": "A-221 vector 144.0 pt / 18 = 8.0 ft",
+   "length_op": "728.8 - 584.8 = 144.0 pt / 18 pt/ft = 8.0 ft (A-221; scale check: gathering soffit 72.0 pt = printed 2'-0\" + 2'-0\")",
+   "length_basis": "face to face",
+   "untagged_reason": "soffit edge on RCP A-221 (PT-31A gyp soffit, C.H. 9'-8\")",
+   "height_ft": 1.167,
+   "height_status": "DERIVADO",
+   "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft",
+   "stud_size": "3-5/8\"",
+   "stud_source": "C4/A-624 3-5/8\" metal stud framing @ 16\" O.C.; C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909",
+   "oc_in": 16,
+   "oc_source": "C4/A-624",
+   "gauge": "0.0312 in min (20 ga)",
+   "gauge_source": "C09111 Non-load-bearing steel framing \u00a72.3.B.1 (ASTM C645, min base-metal 0.0312 in) / A-909 (gauge not printed on C4/A-624)",
+   "detail": "C4/A-624",
+   "detail_source": "C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gathering soffit): 3-5/8\" metal stud framing @ 16\" O.C., cross brace @ 32\" O.C., 1/2\" gypsum board soffit, 6\" min above ACT, corner beads",
+   "faces": [
+    {
+     "side": "out",
+     "room": "Dining",
+     "board": "1/2 regular",
+     "layers": 1,
+     "height_ft": 1.167,
+     "height_source": "A-221 C.H. dining 10'-4\" - soffit C.H. 9'-8\" + 6\" min above ACT (C4/A-624) = 1.167 ft; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+    }
+   ],
+   "openings": [],
+   "source": "A-221 plan (band) + C4/A-624 (C4/A-624 TYP DINING SOFFIT (bubbled on A-221 at serving soffit and dining gather)"
+  }
+ ],
+ "nodes": [
+  {
+   "kind": "free",
+   "wall": "M2.1-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N01"
+  },
+  {
+   "kind": "free",
+   "wall": "M2.1-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N02"
+  },
+  {
+   "kind": "free",
+   "wall": "M3.5-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N03"
+  },
+  {
+   "kind": "free",
+   "wall": "M3.5-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N04"
+  },
+  {
+   "kind": "free",
+   "wall": "M3.5-02",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N05"
+  },
+  {
+   "kind": "free",
+   "wall": "M3.5-02",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N06"
+  },
+  {
+   "kind": "free",
+   "wall": "MB-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N07"
+  },
+  {
+   "kind": "free",
+   "wall": "MB-01",
+   "source": "A-202: end dies into existing construction (furring / sister / infill)",
+   "id": "N08"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-SRV-W",
+    "SS-SRV-N"
+   ],
+   "source": "A-221 serving soffit NW corner",
+   "id": "N09"
+  },
+  {
+   "kind": "free",
+   "wall": "SS-SRV-W",
+   "source": "A-221 south end dies on W6 wall",
+   "id": "N10"
+  },
+  {
+   "kind": "free",
+   "wall": "SS-SRV-N",
+   "source": "A-221 east end dies on W6 north wall",
+   "id": "N11"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-SRV-IV",
+    "SS-SRV-IH"
+   ],
+   "source": "A-221 serving soffit inner corner",
+   "id": "N12"
+  },
+  {
+   "kind": "free",
+   "wall": "SS-SRV-IV",
+   "source": "A-221 south end dies on wall",
+   "id": "N13"
+  },
+  {
+   "kind": "free",
+   "wall": "SS-SRV-IH",
+   "source": "A-221 east end dies on wall",
+   "id": "N14"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-GT-N",
+    "SS-GT-W"
+   ],
+   "source": "A-221 gathering soffit corner",
+   "id": "N15"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-GT-E",
+    "SS-GT-N"
+   ],
+   "source": "A-221 gathering soffit corner",
+   "id": "N16"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-GT-S",
+    "SS-GT-E"
+   ],
+   "source": "A-221 gathering soffit corner",
+   "id": "N17"
+  },
+  {
+   "kind": "L",
+   "walls": [
+    "SS-GT-W",
+    "SS-GT-S"
+   ],
+   "source": "A-221 gathering soffit corner",
+   "id": "N18"
+  }
+ ],
+ "existing_walls": [
+  {
+   "id": "W6-01N-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-621 + H.2",
+   "path": [
+    [
+     1505.9,
+     427.7
+    ],
+    [
+     1853.4,
+     427.7
+    ]
+   ],
+   "length_ft": 19.306,
+   "length_op": "scale check A-202: M2.1 band 1816.8 -> 2071.8 = 255.0 pt / 18 pt/ft = 14.167 ft = printed 14'-2\" (A-202) -> 1/4\" = 1'-0\" = 18 pt/ft confirmed; path 347.5 = 347.5 pt / 18 pt/ft = 19.306 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining north strip - north face of W6 (PT0014)",
+   "source": "W6 type A-202 schedule (2x4 WD, 1/2\" sheathing ea. side) + finish WD-3/CT-73B A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0014"
+   ]
+  },
+  {
+   "id": "W6-01N-GB1",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.11/A-221 + G.1",
+   "path": [
+    [
+     1505.9,
+     427.7
+    ],
+    [
+     1653.2,
+     427.7
+    ]
+   ],
+   "length_ft": 8.183,
+   "length_op": "path 147.3 = 147.3 pt / 18 pt/ft = 8.183 ft (A-202 vector, DERIVED)",
+   "height_ft": 10.417,
+   "height_source": "A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" + 0.5 ft (A.11/A-221) - 5\" cement base = 10.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Dining north strip - north face of W6 on smoke partition (heavy dash-dot A-202/A-221)",
+   "source": "W6 A-202; public side of smoke partition: sheathing to 6\" above finish ceiling (A.11/A-221); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" + 0.5 ft (A.11/A-221) - 5\" cement base = 10.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-01N-GB2",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-621 + G.1",
+   "path": [
+    [
+     1653.2,
+     427.7
+    ],
+    [
+     1853.4,
+     427.7
+    ]
+   ],
+   "length_ft": 11.122,
+   "length_op": "path 200.2 = 200.2 pt / 18 pt/ft = 11.122 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.917,
+   "height_source": "A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" - 5\" cement base = 9.917 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Dining north strip - north face of W6 (not on smoke line)",
+   "source": "W6 A-202; G.1 exposed painted 1/2\" gyp; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" - 5\" cement base = 9.917 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-01S-SRV",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1505.9,
+     436.0
+    ],
+    [
+     1648.1,
+     436.0
+    ]
+   ],
+   "length_ft": 7.9,
+   "length_op": "path 142.2 = 142.2 pt / 18 pt/ft = 7.9 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Serving - south face of W6 (PT0014)",
+   "source": "W6 A-202 + FRP-2 BOH A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-01S-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1653.2,
+     436.7
+    ],
+    [
+     1852.7,
+     436.7
+    ]
+   ],
+   "length_ft": 11.083,
+   "length_op": "path 199.5 = 199.5 pt / 18 pt/ft = 11.083 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen alcove - south face of W6 (PT0014)",
+   "source": "W6 A-202 + FRP-2 kitchen A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W4-01W-SRV",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1648.1,
+     436.0
+    ],
+    [
+     1648.1,
+     497.0
+    ]
+   ],
+   "length_ft": 3.389,
+   "length_op": "path 61.0 = 61.0 pt / 18 pt/ft = 3.389 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Serving - west face of W4 (PT0010)",
+   "source": "W4 type A-202 (2x4 WD, 1/2\" sheathing ea. side); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0010"
+   ]
+  },
+  {
+   "id": "W4-01E-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1653.2,
+     436.0
+    ],
+    [
+     1653.2,
+     497.0
+    ]
+   ],
+   "length_ft": 3.389,
+   "length_op": "path 61.0 = 61.0 pt / 18 pt/ft = 3.389 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen alcove - east face of W4 (PT0010)",
+   "source": "W4 type A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-02N-SRV",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1551.5,
+     560.0
+    ],
+    [
+     1654.1,
+     560.0
+    ]
+   ],
+   "length_ft": 5.7,
+   "length_op": "path 102.6 = 102.6 pt / 18 pt/ft = 5.7 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Serving - north face of W6 (PT0015)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0015"
+   ]
+  },
+  {
+   "id": "W6-02S-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1557.7,
+     569.9
+    ],
+    [
+     1654.1,
+     569.9
+    ]
+   ],
+   "length_ft": 5.356,
+   "length_op": "path 96.4 = 96.4 pt / 18 pt/ft = 5.356 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - south face of W6 (PT0015)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-03-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1716.2,
+     550.0
+    ],
+    [
+     1716.2,
+     592.7
+    ]
+   ],
+   "length_ft": 2.372,
+   "length_op": "path 42.7 = 42.7 pt / 18 pt/ft = 2.372 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 2,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen alcove stub W6 (PT0017), both faces",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0017"
+   ]
+  },
+  {
+   "id": "W6-04-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1873.6,
+     748.1
+    ],
+    [
+     1915.3,
+     748.1
+    ]
+   ],
+   "length_ft": 2.317,
+   "length_op": "path 41.7 = 41.7 pt / 18 pt/ft = 2.317 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 2,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen free-standing W6 stub (PT0021), both faces",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0021"
+   ]
+  },
+  {
+   "id": "W6-05W-MOP",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN25/A-201 + G.7",
+   "path": [
+    [
+     2174.9,
+     592.8
+    ],
+    [
+     2174.9,
+     635.5
+    ]
+   ],
+   "length_ft": 2.372,
+   "length_op": "path 42.7 = 42.7 pt / 18 pt/ft = 2.372 ft (A-202 vector, DERIVED)",
+   "height_ft": 10.167,
+   "height_source": "A-221 KITCHEN C.H.10'-2\" + A-601 elevations CEILING 10'-2\" (E3/A-604 stainless steel wall panels to ceiling on all sides)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Mop sink chase - west face of W6 (PT0019)",
+   "source": "W6 A-202; E3/A-604 '1/2\" cement board - inside walls only', stainless panels to ceiling all sides; G.7/A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-221 KITCHEN C.H.10'-2\" + A-601 elevations CEILING 10'-2\" (E3/A-604 stainless steel wall panels to ceiling on all sides)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0019"
+   ]
+  },
+  {
+   "id": "W6-05E-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2184.6,
+     592.8
+    ],
+    [
+     2184.6,
+     635.5
+    ]
+   ],
+   "length_ft": 2.372,
+   "length_op": "path 42.7 = 42.7 pt / 18 pt/ft = 2.372 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - east face of mop stub W6 (PT0019)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-06W-MP",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-201 + G.3",
+   "path": [
+    [
+     2322.5,
+     324.5
+    ],
+    [
+     2322.5,
+     384.5
+    ]
+   ],
+   "length_ft": 3.333,
+   "length_op": "path 60.0 = 60.0 pt / 18 pt/ft = 3.333 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Multi-purpose - west face of W6 infill (PT0013)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0013"
+   ]
+  },
+  {
+   "id": "W6-07W-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2322.5,
+     620.0
+    ],
+    [
+     2322.5,
+     655.9
+    ]
+   ],
+   "length_ft": 1.994,
+   "length_op": "path 35.9 = 35.9 pt / 18 pt/ft = 1.994 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - west face of W6 infill (PT0020)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0020"
+   ]
+  },
+  {
+   "id": "W6-08E-TM-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + H.2",
+   "path": [
+    [
+     2340.5,
+     301.2
+    ],
+    [
+     2340.5,
+     422.6
+    ]
+   ],
+   "length_ft": 6.744,
+   "length_op": "path 121.4 = 121.4 pt / 18 pt/ft = 6.744 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Team Member - west wall (W6 PT0016) base",
+   "source": "W6 A-202 + WD-3/CT-73B A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0016"
+   ]
+  },
+  {
+   "id": "W6-08E-TM-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + G.1",
+   "path": [
+    [
+     2340.5,
+     301.2
+    ],
+    [
+     2340.5,
+     422.6
+    ]
+   ],
+   "length_ft": 6.744,
+   "length_op": "path 121.4 = 121.4 pt / 18 pt/ft = 6.744 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.75,
+   "height_source": "A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Team Member - west wall (W6 PT0016) above base",
+   "source": "W6 A-202 + PT-31B A-211; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-SVC",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-201 + G.3",
+   "path": [
+    [
+     2340.5,
+     435.0
+    ],
+    [
+     2340.5,
+     745.2
+    ]
+   ],
+   "length_ft": 17.233,
+   "length_op": "path 310.2 = 310.2 pt / 18 pt/ft = 17.233 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Corridor + Service - west wall (W6 PT0016)",
+   "source": "W6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-WI1-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     755.6
+    ],
+    [
+     2340.5,
+     789.6
+    ]
+   ],
+   "length_ft": 1.889,
+   "length_op": "path 34.0 = 34.0 pt / 18 pt/ft = 1.889 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 1 (PT0024)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-WI1-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     755.6
+    ],
+    [
+     2340.5,
+     789.6
+    ]
+   ],
+   "length_ft": 1.889,
+   "length_op": "path 34.0 = 34.0 pt / 18 pt/ft = 1.889 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 1 above base (Level 1)",
+   "source": "W6 A-202; Level 1 finish (G.11 / C09250 \u00a73.5.D.1); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08W-KIT1",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2321.8,
+     727.9
+    ],
+    [
+     2321.8,
+     789.6
+    ]
+   ],
+   "length_ft": 3.428,
+   "length_op": "path 61.7 = 61.7 pt / 18 pt/ft = 3.428 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - east wall pier 1 kitchen face (W6 PT0024 line)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-WI2-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     870.6
+    ],
+    [
+     2340.5,
+     936.6
+    ]
+   ],
+   "length_ft": 3.667,
+   "length_op": "path 66.0 = 66.0 pt / 18 pt/ft = 3.667 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 2 (PT0024)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0024"
+   ]
+  },
+  {
+   "id": "W6-08E-WI2-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     870.6
+    ],
+    [
+     2340.5,
+     936.6
+    ]
+   ],
+   "length_ft": 3.667,
+   "length_op": "path 66.0 = 66.0 pt / 18 pt/ft = 3.667 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 2 above base (Level 1)",
+   "source": "W6 A-202; Level 1 finish (G.11 / C09250 \u00a73.5.D.1); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08W-KIT2",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2321.8,
+     870.6
+    ],
+    [
+     2321.8,
+     936.6
+    ]
+   ],
+   "length_ft": 3.667,
+   "length_op": "path 66.0 = 66.0 pt / 18 pt/ft = 3.667 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - east wall pier 2 kitchen face (W6 PT0024 line)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-WI3-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     1017.6
+    ],
+    [
+     2340.5,
+     1048.1
+    ]
+   ],
+   "length_ft": 1.694,
+   "length_op": "path 30.5 = 30.5 pt / 18 pt/ft = 1.694 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 3 (PT0024)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08E-WI3-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     1017.6
+    ],
+    [
+     2340.5,
+     1048.1
+    ]
+   ],
+   "length_ft": 1.694,
+   "length_op": "path 30.5 = 30.5 pt / 18 pt/ft = 1.694 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in cooler/freezer - west wall W6 pier 3 above base (Level 1)",
+   "source": "W6 A-202; Level 1 finish (G.11 / C09250 \u00a73.5.D.1); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" (A-221) - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-08W-KIT3",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2321.8,
+     1017.6
+    ],
+    [
+     2321.8,
+     1038.6
+    ]
+   ],
+   "length_ft": 1.167,
+   "length_op": "path 21.0 = 21.0 pt / 18 pt/ft = 1.167 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - east wall pier 3 kitchen face (W6 PT0024 line)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W8-01N-TM-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + H.2",
+   "path": [
+    [
+     2408.0,
+     422.6
+    ],
+    [
+     2563.8,
+     422.6
+    ]
+   ],
+   "length_ft": 8.656,
+   "length_op": "path 155.8 = 155.8 pt / 18 pt/ft = 8.656 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Team Member - south wall W8 (PT0025) base",
+   "source": "W8 type A-202 (2x8 WD, 1/2\" sheathing ea. side); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0025"
+   ]
+  },
+  {
+   "id": "W8-01N-TM-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + G.1",
+   "path": [
+    [
+     2408.0,
+     422.6
+    ],
+    [
+     2563.8,
+     422.6
+    ]
+   ],
+   "length_ft": 8.656,
+   "length_op": "path 155.8 = 155.8 pt / 18 pt/ft = 8.656 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.75,
+   "height_source": "A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Team Member - south wall W8 above base",
+   "source": "W8 A-202 + PT-31B A-211; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W8-01S-OFF",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     2436.4,
+     435.0
+    ],
+    [
+     2563.8,
+     435.0
+    ]
+   ],
+   "length_ft": 7.078,
+   "length_op": "path 127.4 = 127.4 pt / 18 pt/ft = 7.078 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Office - north wall W8 (PT0025)",
+   "source": "W8 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-09-OFF",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     2436.4,
+     435.0
+    ],
+    [
+     2436.4,
+     571.9
+    ],
+    [
+     2563.8,
+     571.9
+    ]
+   ],
+   "length_ft": 14.683,
+   "length_op": "path 136.9 + 127.4 = 264.3 pt / 18 pt/ft = 14.683 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Office - west + south walls W6 (PT0018), office faces",
+   "source": "W6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0018"
+   ]
+  },
+  {
+   "id": "W6-09-OUT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-201 + G.3",
+   "path": [
+    [
+     2426.5,
+     435.0
+    ],
+    [
+     2426.5,
+     582.4
+    ],
+    [
+     2563.8,
+     582.4
+    ]
+   ],
+   "length_ft": 15.817,
+   "length_op": "path 147.4 + 137.3 = 284.7 pt / 18 pt/ft = 15.817 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Corridor + Service faces of office W6 (PT0018)",
+   "source": "W6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-10N-SVC",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-201 + G.3",
+   "path": [
+    [
+     2340.5,
+     745.9
+    ],
+    [
+     2563.8,
+     745.9
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Service - south wall W6 (PT0022)",
+   "source": "W6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0022"
+   ]
+  },
+  {
+   "id": "W6-10S-WI-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     755.6
+    ],
+    [
+     2563.8,
+     755.6
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in cooler - north wall W6 (PT0022)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W6-10S-WI-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     755.6
+    ],
+    [
+     2563.8,
+     755.6
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in cooler - north wall W6 above base (Level 1)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-01-TM-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + H.2",
+   "path": [
+    [
+     2340.5,
+     301.2
+    ],
+    [
+     2563.8,
+     301.2
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Team Member - north exterior wall SW6 (PT0006 + PT0007) interior face base",
+   "source": "SW6 type A-202 (2x6 WD exterior, 1/2\" sheathing ea. side; interior sheathing per G notes); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0006"
+   ]
+  },
+  {
+   "id": "SW6-01-TM-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + G.1",
+   "path": [
+    [
+     2340.5,
+     301.2
+    ],
+    [
+     2563.8,
+     301.2
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.75,
+   "height_source": "A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Team Member - north exterior wall SW6 interior face above base",
+   "source": "SW6 A-202 + PT-31B A-211; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-02-TM-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + H.2",
+   "path": [
+    [
+     2563.8,
+     301.2
+    ],
+    [
+     2563.8,
+     422.6
+    ]
+   ],
+   "length_ft": 6.744,
+   "length_op": "path 121.4 = 121.4 pt / 18 pt/ft = 6.744 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Team Member - east exterior wall SW6 (PT0008) interior face base",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0007"
+   ]
+  },
+  {
+   "id": "SW6-02-TM-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-602 + G.1",
+   "path": [
+    [
+     2563.8,
+     301.2
+    ],
+    [
+     2563.8,
+     422.6
+    ]
+   ],
+   "length_ft": 6.744,
+   "length_op": "path 121.4 = 121.4 pt / 18 pt/ft = 6.744 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.75,
+   "height_source": "A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Team Member - east exterior wall SW6 interior face above base",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 TEAM MEMBER C.H.10'-2\" - 5\" base = 9.75 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-02-OFF",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     2563.8,
+     435.0
+    ],
+    [
+     2563.8,
+     571.9
+    ]
+   ],
+   "length_ft": 7.606,
+   "length_op": "path 136.9 = 136.9 pt / 18 pt/ft = 7.606 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Office - east exterior wall SW6 interior face",
+   "source": "SW6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-02-SVC",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-201 + G.3",
+   "path": [
+    [
+     2563.8,
+     582.4
+    ],
+    [
+     2563.8,
+     745.2
+    ]
+   ],
+   "length_ft": 9.044,
+   "length_op": "path 162.8 = 162.8 pt / 18 pt/ft = 9.044 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Service - east exterior wall SW6 interior face",
+   "source": "SW6 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-02-WI-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2563.8,
+     755.6
+    ],
+    [
+     2563.8,
+     1048.1
+    ]
+   ],
+   "length_ft": 16.25,
+   "length_op": "path 292.5 = 292.5 pt / 18 pt/ft = 16.25 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in cooler/freezer - east exterior wall SW6 interior face",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0008"
+   ]
+  },
+  {
+   "id": "SW6-02-WI-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2563.8,
+     755.6
+    ],
+    [
+     2563.8,
+     1048.1
+    ]
+   ],
+   "length_ft": 16.25,
+   "length_op": "path 292.5 = 292.5 pt / 18 pt/ft = 16.25 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in cooler/freezer - east exterior wall SW6 above base (Level 1)",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "SW6-03-WI-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     1048.1
+    ],
+    [
+     2563.8,
+     1048.1
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Walk-in freezer - south exterior wall SW6 (PT0009) interior face",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.11/A-202 (freezer/cooler walls: 1 ft cement board base + 1/2\" gyp Level 1 to 6\" above finish ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0009"
+   ]
+  },
+  {
+   "id": "SW6-03-WI-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.11/A-202",
+   "path": [
+    [
+     2340.5,
+     1048.1
+    ],
+    [
+     2563.8,
+     1048.1
+    ]
+   ],
+   "length_ft": 12.406,
+   "length_op": "path 223.3 = 223.3 pt / 18 pt/ft = 12.406 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.667,
+   "height_source": "G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Walk-in freezer - south exterior wall SW6 above base (Level 1)",
+   "source": "SW6 A-202; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: G.11/A-202 6\" above finish ceiling 10'-2\" - 1 ft base = 9.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W4.1-01-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     1720.8,
+     1065.6
+    ],
+    [
+     1720.8,
+     1038.6
+    ],
+    [
+     1763.5,
+     1038.6
+    ],
+    [
+     1763.5,
+     1065.6
+    ]
+   ],
+   "length_ft": 5.372,
+   "length_op": "path 27.0 + 42.7 + 27.0 = 96.7 pt / 18 pt/ft = 5.372 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - W4.1 box (PT0011) exposed faces",
+   "source": "W4.1 type A-202 (2x4 WD, 1/2\" sheathing on exposed side); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0011"
+   ]
+  },
+  {
+   "id": "W4.1-02-KIT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + G.3",
+   "path": [
+    [
+     2282.8,
+     1065.6
+    ],
+    [
+     2282.8,
+     1038.6
+    ],
+    [
+     2322.5,
+     1038.6
+    ]
+   ],
+   "length_ft": 3.706,
+   "length_op": "path 27.0 + 39.7 = 66.7 pt / 18 pt/ft = 3.706 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Kitchen - W4.1 box (PT0012) exposed faces",
+   "source": "W4.1 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0012"
+   ]
+  },
+  {
+   "id": "W6-11N-SRV",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1342.8,
+     754.0
+    ],
+    [
+     1541.8,
+     754.0
+    ]
+   ],
+   "length_ft": 11.056,
+   "length_op": "path 199.0 = 199.0 pt / 18 pt/ft = 11.056 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Serving / order (BOH side of smoke line) - north face of W6 (PT0023)",
+   "source": "W6 A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0023"
+   ]
+  },
+  {
+   "id": "W6-11S-DT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1342.8,
+     762.2
+    ],
+    [
+     1541.0,
+     762.2
+    ]
+   ],
+   "length_ft": 11.011,
+   "length_op": "path 198.2 = 198.2 pt / 18 pt/ft = 11.011 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Drive thru - north wall W6 (PT0023)",
+   "source": "W6 A-202 + FRP-2/KT-6B A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W8-02W-DIN-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621 + A.6",
+   "path": [
+    [
+     1331.2,
+     753.2
+    ],
+    [
+     1331.2,
+     899.9
+    ]
+   ],
+   "length_ft": 8.15,
+   "length_op": "path 146.7 = 146.7 pt / 18 pt/ft = 8.15 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining - east wall W8 (PT0026) base",
+   "source": "W8 A-202 + WD-3/CT-73B A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.6/A-601..A-623 interior elevation notes (wainscot: 5\" cementitious board behind tile base, then gypsum board to ceiling) + H.2/A-202",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W8-02W-DIN-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.6/A-621 + G.1",
+   "path": [
+    [
+     1331.2,
+     753.2
+    ],
+    [
+     1331.2,
+     899.9
+    ]
+   ],
+   "length_ft": 8.15,
+   "length_op": "path 146.7 = 146.7 pt / 18 pt/ft = 8.15 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.917,
+   "height_source": "A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" - 5\" base = 9.917 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Dining - east wall W8 (PT0026) above base",
+   "source": "W8 A-202 + PT-31B; Level 4 dining (A.4/A-211); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-221 DINING C.H.10'-4\" + A-623 elevations CEILING 10'-4\" - 5\" base = 9.917 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "W8-02E-DT",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "G.3/A-202",
+   "path": [
+    [
+     1342.8,
+     762.2
+    ],
+    [
+     1342.8,
+     899.9
+    ]
+   ],
+   "length_ft": 7.65,
+   "length_op": "path 137.7 = 137.7 pt / 18 pt/ft = 7.65 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.0,
+   "height_source": "G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Drive thru - west wall W8 (PT0026)",
+   "source": "W8 A-202 + FRP-2 A-211; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: G.3/A-202 (FRP on wood studs BOH: 1/2\" cementitious board to 1'-0\" above slab; CDX plywood above = Div. 06 EXCLUDED)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": [
+    "PT0026"
+   ]
+  },
+  {
+   "id": "EX-KIT-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1551.5,
+     569.9
+    ],
+    [
+     1551.5,
+     687.7
+    ]
+   ],
+   "length_ft": 6.544,
+   "length_op": "path 117.8 = 117.8 pt / 18 pt/ft = 6.544 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-02",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1551.5,
+     816.2
+    ],
+    [
+     1551.5,
+     997.7
+    ]
+   ],
+   "length_ft": 10.083,
+   "length_op": "path 181.5 = 181.5 pt / 18 pt/ft = 10.083 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-03",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1557.7,
+     1065.6
+    ],
+    [
+     1720.8,
+     1065.6
+    ]
+   ],
+   "length_ft": 9.061,
+   "length_op": "path 163.1 = 163.1 pt / 18 pt/ft = 9.061 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-04",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1763.5,
+     1065.6
+    ],
+    [
+     1816.8,
+     1065.6
+    ]
+   ],
+   "length_ft": 2.961,
+   "length_op": "path 53.3 = 53.3 pt / 18 pt/ft = 2.961 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-05",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     2071.8,
+     1065.6
+    ],
+    [
+     2282.8,
+     1065.6
+    ]
+   ],
+   "length_ft": 11.722,
+   "length_op": "path 211.0 = 211.0 pt / 18 pt/ft = 11.722 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-06",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1751.5,
+     583.0
+    ],
+    [
+     1852.7,
+     583.0
+    ],
+    [
+     1852.7,
+     436.7
+    ]
+   ],
+   "length_ft": 13.75,
+   "length_op": "path 101.2 + 146.3 = 247.5 pt / 18 pt/ft = 13.75 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-07",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     1751.5,
+     592.8
+    ],
+    [
+     2109.6,
+     592.8
+    ],
+    [
+     2109.6,
+     635.5
+    ]
+   ],
+   "length_ft": 22.267,
+   "length_op": "path 358.1 + 42.7 = 400.8 pt / 18 pt/ft = 22.267 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-KIT-08",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     2252.2,
+     592.8
+    ],
+    [
+     2321.8,
+     592.8
+    ],
+    [
+     2321.8,
+     616.9
+    ]
+   ],
+   "length_ft": 5.206,
+   "length_op": "path 69.6 + 24.1 = 93.7 pt / 18 pt/ft = 5.206 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601)",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-MP-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     2184.6,
+     583.0
+    ],
+    [
+     2119.1,
+     583.0
+    ],
+    [
+     2119.1,
+     439.0
+    ],
+    [
+     2176.9,
+     439.0
+    ],
+    [
+     2176.9,
+     282.6
+    ],
+    [
+     2321.8,
+     282.6
+    ],
+    [
+     2321.8,
+     324.5
+    ]
+   ],
+   "length_ft": 33.917,
+   "length_op": "path 65.5 + 144.0 + 57.8 + 156.4 + 144.9 + 41.9 = 610.5 pt / 18 pt/ft = 33.917 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601) - multi-purpose",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-MP-02",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN16/A-050 + KN16/A-201",
+   "path": [
+    [
+     2321.8,
+     384.5
+    ],
+    [
+     2321.8,
+     583.0
+    ],
+    [
+     2252.2,
+     583.0
+    ]
+   ],
+   "length_ft": 14.894,
+   "length_op": "path 198.5 + 69.6 = 268.1 pt / 18 pt/ft = 14.894 ft (A-202 vector, DERIVED)",
+   "height_ft": 1.5,
+   "height_source": "A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing kitchen wall - cement board base (A-050 KN16 / A-201 KN16 / A.4 A-601) - multi-purpose",
+   "source": "Existing wall (A-050 / A-202 existing wall graphics) receiving new FRP-2 (A-211); new cement board base; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-050 demo KN16 '1/2\" DUROCK from floor to 18\" A.F.F. typical in kitchen' (loaded, conservative) vs H.1/A-202 + G.3/A-202 + A.4/A-601 + KN16/A-201 = 1'-0\" and C3/A-604 1'-3\" -> RFI-02",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-MOP-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN25/A-201",
+   "path": [
+    [
+     2119.4,
+     635.5
+    ],
+    [
+     2119.4,
+     592.8
+    ],
+    [
+     2174.9,
+     592.8
+    ]
+   ],
+   "length_ft": 5.456,
+   "length_op": "path 42.7 + 55.5 = 98.2 pt / 18 pt/ft = 5.456 ft (A-202 vector, DERIVED)",
+   "height_ft": 10.167,
+   "height_source": "A-221 KITCHEN C.H.10'-2\" + A-601 elevations CEILING 10'-2\" (E3/A-604 panels to ceiling)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Existing mop sink chase - inside faces (west + north)",
+   "source": "KN25/A-201 existing mop sink: new stainless panels; E3/A-604 '1/2\" cement board - inside walls only'; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-221 KITCHEN C.H.10'-2\" + A-601 elevations CEILING 10'-2\" (E3/A-604 panels to ceiling)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-MENU-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN3/A-221 new menu board + D3/A-624",
+   "path": [
+    [
+     1541.0,
+     569.9
+    ],
+    [
+     1541.0,
+     617.0
+    ]
+   ],
+   "length_ft": 2.617,
+   "length_op": "path 47.1 = 47.1 pt / 18 pt/ft = 2.617 ft (A-202 vector, DERIVED)",
+   "height_ft": 3.5,
+   "height_source": "D3/A-624 B.O. gypsum bd 7'-0\" A.F.F. to serving ACT 10'-0\" (A-221) + 6\" min (D3/A-624) = 3.5 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Serving - menu board wall (existing part, north of infill MB-01)",
+   "source": "D3/A-624 menu board light box: 1/2\" gypsum board from 7'-0\" A.F.F. (B.O. gyp bd) to 6\" min above ACT; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: D3/A-624 B.O. gypsum bd 7'-0\" A.F.F. to serving ACT 10'-0\" (A-221) + 6\" min (D3/A-624) = 3.5 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-MENU-02",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN3/A-221 new menu board + D3/A-624",
+   "path": [
+    [
+     1541.0,
+     677.0
+    ],
+    [
+     1541.0,
+     816.2
+    ]
+   ],
+   "length_ft": 7.733,
+   "length_op": "path 139.2 = 139.2 pt / 18 pt/ft = 7.733 ft (A-202 vector, DERIVED)",
+   "height_ft": 3.5,
+   "height_source": "D3/A-624 B.O. gypsum bd 7'-0\" A.F.F. to serving ACT 10'-0\" (A-221) + 6\" min = 3.5 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Serving - menu board wall (existing part, south of infill MB-01)",
+   "source": "D3/A-624; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: D3/A-624 B.O. gypsum bd 7'-0\" A.F.F. to serving ACT 10'-0\" (A-221) + 6\" min = 3.5 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-DT-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.5/A-603 + C1/A-603",
+   "path": [
+    [
+     1342.8,
+     1082.0
+    ],
+    [
+     1541.0,
+     1082.0
+    ]
+   ],
+   "length_ft": 11.011,
+   "length_op": "path 198.2 = 198.2 pt / 18 pt/ft = 11.011 ft (A-202 vector, DERIVED)",
+   "height_ft": 7.667,
+   "height_source": "C1/A-603 B.O. FURR DOWN 7'-8\" (tile top) = 7.667 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Drive thru - south exterior wall (new sliding door) - CT-57A wall tile",
+   "source": "C1/A-603 CT-57A wall tile to B.O. furr down 7'-8\"; A.5 cementitious board full height of tile; G.2/A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: C1/A-603 B.O. FURR DOWN 7'-8\" (tile top) = 7.667 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRM-01-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN10/A-050 + A.5/A-611",
+   "path": [
+    [
+     1962.2,
+     415.8
+    ],
+    [
+     1962.2,
+     282.6
+    ],
+    [
+     2164.7,
+     282.6
+    ],
+    [
+     2164.7,
+     426.6
+    ]
+   ],
+   "length_ft": 26.65,
+   "length_op": "path 133.2 + 202.5 + 144.0 = 479.7 pt / 18 pt/ft = 26.65 ft (A-202 vector, DERIVED)",
+   "height_ft": 6.708,
+   "height_source": "A-611 T/TILE 6'-8 1/2\" = 6.708 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Men's restroom - walls with CT-57A subway tile",
+   "source": "A-611 B1/B2/C2 elevations CT-57A, T/TILE 6'-8 1/2\"; A.5 + G.2/A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-611 T/TILE 6'-8 1/2\" = 6.708 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRM-01-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A2/A-604 + note 3/A-611",
+   "path": [
+    [
+     1962.2,
+     415.8
+    ],
+    [
+     1962.2,
+     282.6
+    ],
+    [
+     2164.7,
+     282.6
+    ],
+    [
+     2164.7,
+     426.6
+    ]
+   ],
+   "length_ft": 26.65,
+   "length_op": "path 133.2 + 202.5 + 144.0 = 479.7 pt / 18 pt/ft = 26.65 ft (A-202 vector, DERIVED)",
+   "height_ft": 2.625,
+   "height_source": "A-611 CEILING 9'-4\" - T/TILE 6'-8 1/2\" = 2.625 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Men's restroom - gypsum above tile",
+   "source": "A2/A-604 tile to gyp transition (gypsum board above cement board); C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-611 CEILING 9'-4\" - T/TILE 6'-8 1/2\" = 2.625 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRM-02-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.5/A-611",
+   "path": [
+    [
+     2164.7,
+     426.6
+    ],
+    [
+     2015.0,
+     426.6
+    ],
+    [
+     2015.0,
+     415.8
+    ],
+    [
+     1962.2,
+     415.8
+    ]
+   ],
+   "length_ft": 11.85,
+   "length_op": "path 149.7 + 10.8 + 52.8 = 213.3 pt / 18 pt/ft = 11.85 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.333,
+   "height_source": "C1/A-611 CEILING 9'-4\" (tile full height)",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Men's restroom - CT-77 full-height tile wall (C1/A-611)",
+   "source": "C1/A-611 CT-77 to ceiling; A.5 + G.2/A-202; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: C1/A-611 CEILING 9'-4\" (tile full height)",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRW-01-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "KN10/A-050 + A.5/A-611",
+   "path": [
+    [
+     1859.4,
+     583.0
+    ],
+    [
+     1859.4,
+     478.0
+    ],
+    [
+     1962.2,
+     478.0
+    ],
+    [
+     1962.2,
+     439.0
+    ],
+    [
+     2106.7,
+     439.0
+    ],
+    [
+     2106.7,
+     583.0
+    ]
+   ],
+   "length_ft": 29.739,
+   "length_op": "path 105.0 + 102.8 + 39.0 + 144.5 + 144.0 = 535.3 pt / 18 pt/ft = 29.739 ft (A-202 vector, DERIVED)",
+   "height_ft": 6.708,
+   "height_source": "A-611 T/TILE 6'-8 1/2\" = 6.708 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Women's restroom - walls with CT-57A subway tile",
+   "source": "A-611 A2/A3/A4 elevations T/TILE 6'-8 1/2\"; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A-611 T/TILE 6'-8 1/2\" = 6.708 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRW-01-GB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A2/A-604 + note 3/A-611",
+   "path": [
+    [
+     1859.4,
+     583.0
+    ],
+    [
+     1859.4,
+     478.0
+    ],
+    [
+     1962.2,
+     478.0
+    ],
+    [
+     1962.2,
+     439.0
+    ],
+    [
+     2106.7,
+     439.0
+    ],
+    [
+     2106.7,
+     583.0
+    ]
+   ],
+   "length_ft": 29.739,
+   "length_op": "path 105.0 + 102.8 + 39.0 + 144.5 + 144.0 = 535.3 pt / 18 pt/ft = 29.739 ft (A-202 vector, DERIVED)",
+   "height_ft": 2.625,
+   "height_source": "A-611 CEILING 9'-4\" - T/TILE 6'-8 1/2\" = 2.625 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 regular",
+   "location": "Women's restroom - gypsum above tile",
+   "source": "A2/A-604; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909 | height: A-611 CEILING 9'-4\" - T/TILE 6'-8 1/2\" = 2.625 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRW-02-CB",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.5/A-611",
+   "path": [
+    [
+     1859.4,
+     583.0
+    ],
+    [
+     2106.7,
+     583.0
+    ]
+   ],
+   "length_ft": 13.739,
+   "length_op": "path 247.3 = 247.3 pt / 18 pt/ft = 13.739 ft (A-202 vector, DERIVED)",
+   "height_ft": 9.333,
+   "height_source": "B4/A-611 CEILING 9'-4\"",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Women's restroom - CT-77 full-height tile wall (B4/A-611)",
+   "source": "B4/A-611 CT-77 to ceiling; C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: B4/A-611 CEILING 9'-4\"",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-DIN-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     604.1,
+     509.6
+    ],
+    [
+     604.1,
+     359.3
+    ],
+    [
+     1150.3,
+     359.3
+    ]
+   ],
+   "length_ft": 38.694,
+   "length_op": "path 150.3 + 546.2 = 696.5 pt / 18 pt/ft = 38.694 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining - west + north storefront walls - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-DIN-02",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     1342.0,
+     392.3
+    ],
+    [
+     1342.0,
+     282.6
+    ],
+    [
+     1858.7,
+     282.6
+    ],
+    [
+     1858.7,
+     427.7
+    ]
+   ],
+   "length_ft": 42.861,
+   "length_op": "path 109.7 + 516.7 + 145.1 = 771.5 pt / 18 pt/ft = 42.861 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining north strip - north + east walls - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-DIN-03",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     604.1,
+     509.6
+    ],
+    [
+     787.0,
+     509.6
+    ],
+    [
+     787.0,
+     881.0
+    ]
+   ],
+   "length_ft": 30.794,
+   "length_op": "path 182.9 + 371.4 = 554.3 pt / 18 pt/ft = 30.794 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining - play area enclosure (dining faces) - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-DIN-04",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     735.2,
+     911.5
+    ],
+    [
+     735.2,
+     1028.6
+    ],
+    [
+     1330.4,
+     1028.6
+    ],
+    [
+     1330.4,
+     899.9
+    ]
+   ],
+   "length_ft": 46.722,
+   "length_op": "path 117.1 + 595.2 + 128.7 = 841.0 pt / 18 pt/ft = 46.722 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Dining - south storefront + east existing wall - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-ENA-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     1205.0,
+     392.3
+    ],
+    [
+     1205.0,
+     257.7
+    ]
+   ],
+   "length_ft": 7.478,
+   "length_op": "path 134.6 = 134.6 pt / 18 pt/ft = 7.478 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Entry A vestibule - west wall - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-ENA-02",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     1331.9,
+     257.7
+    ],
+    [
+     1331.9,
+     392.3
+    ]
+   ],
+   "length_ft": 7.478,
+   "length_op": "path 134.6 = 134.6 pt / 18 pt/ft = 7.478 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Entry A vestibule - east wall - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-ENB-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     593.0,
+     911.5
+    ],
+    [
+     733.7,
+     911.5
+    ],
+    [
+     733.7,
+     1028.6
+    ],
+    [
+     593.0,
+     1028.6
+    ],
+    [
+     593.0,
+     911.5
+    ]
+   ],
+   "length_ft": 28.644,
+   "length_op": "path 140.7 + 117.1 + 140.7 + 117.1 = 515.6 pt / 18 pt/ft = 28.644 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Entry B vestibule - perimeter - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  },
+  {
+   "id": "EX-RRV-01",
+   "sheet": "A-202",
+   "page": 13,
+   "keynote": "A.3/A-621..A-623",
+   "path": [
+    [
+     1859.4,
+     282.6
+    ],
+    [
+     1955.5,
+     282.6
+    ],
+    [
+     1955.5,
+     470.0
+    ],
+    [
+     1859.4,
+     470.0
+    ],
+    [
+     1859.4,
+     282.6
+    ]
+   ],
+   "length_ft": 31.5,
+   "length_op": "path 96.1 + 187.4 + 96.1 + 187.4 = 567.0 pt / 18 pt/ft = 31.5 ft (A-202 vector, DERIVED)",
+   "height_ft": 0.417,
+   "height_source": "A.3/A-621 5\" = 0.417 ft",
+   "faces": 1,
+   "layers": 1,
+   "board": "1/2 cement board",
+   "location": "Restroom vestibule - perimeter - 5\" cement board base",
+   "source": "A.3 interior elevation general notes (5\" cementitious board substrate at base of all walls in dining room and vestibule); C09250 Gypsum Board \u00a72.2.B (cementitious backer units, DUROCK, 1/2 in) / A-909 | height: A.3/A-621 5\" = 0.417 ft",
+   "decision": "Scope rule R-ALC-01 (user 2026-11-01): gypsum / cement board is our scope on any substrate; wood framing Div. 06 excluded",
+   "tag_ids": []
+  }
+ ],
+ "ceilings": [
+  {
+   "room": "Serving soffit (PT-31A)",
+   "system": "framed_soffit",
+   "area_sf": 68.04,
+   "drop_lines": {
+    "value": 4,
+    "source": "A-221: 4 free edges of the serving soffit face dining / serving ACT (SS-SRV-W/N/IV/IH); east + south edges die on walls"
+   },
+   "board": "1/2 regular",
+   "height_ft": 9.667,
+   "perimeter_ft": 49.44,
+   "span_ft": 18.122,
+   "run_ft": 9.989,
+   "detail": "C4/A-624",
+   "system_callout": {
+    "detail": "C4/A-624",
+    "on_plan": true,
+    "source": "A-221 C4/A-624 bubble on the serving soffit (A-221 pt 1163,530) + C3/S-801 on S-241"
+   },
+   "source": "A-221 RCP serving soffit PT-31A C.H. 9'-8\"; area (179.8 x 42.0 + 51.0 x 284.2) pt2 / 324 = 68.04 SF [DERIVED]; C4/A-624 3-5/8\" studs @16\" + 1/2\" gyp; C3/S-801 typical interior soffit attachment; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+  },
+  {
+   "room": "Dining gathering-table soffit (PT-31A)",
+   "system": "framed_soffit",
+   "area_sf": 32.0,
+   "drop_lines": {
+    "value": 4,
+    "source": "A-221: 4 edges of the free-standing gathering soffit face dining ACT (SS-GT-N/S/W/E)"
+   },
+   "board": "1/2 regular",
+   "height_ft": 9.667,
+   "perimeter_ft": 24.0,
+   "span_ft": 8.0,
+   "run_ft": 4.0,
+   "detail": "C4/A-624",
+   "system_callout": {
+    "detail": "C4/A-624",
+    "on_plan": true,
+    "source": "A-221 C4/A-624 bubble next to the gathering soffit (A-221 pt 783,610)"
+   },
+   "source": "A-221 RCP gathering-table soffit PT-31A C.H. 9'-8\": 4'-0\" (printed 2'-0\" + 2'-0\") x 8'-0\" (printed 4'-0\" + 4'-0\") = 32.0 SF [CONFIRMED]; C09250 Gypsum Board \u00a72.1.B (1/2 in standard interior) / A-909"
+  }
+ ],
+ "ceilings_info": [
+  "Entry A: gyp bd ceiling 46.358 SF at C.H. 10.167 ft on 600S162-33 joists (S-241) - loaded as misc_items CLG-ENTA-J/-R/-B (no 6\" joist system in canon.py, TOOL_ISSUES.md)",
+  "Entry B: gyp bd ceiling 67.923 SF at C.H. 10.0 ft on 600S162-33 joists (S-241) - loaded as misc_items CLG-ENTB-J/-R/-B (no 6\" joist system in canon.py, TOOL_ISSUES.md)",
+  "Men's restroom: gyp bd ceiling 85.48 SF at C.H. 9.333 ft on 600S162-33 joists (S-241) - loaded as misc_items CLG-MEN-J/-R/-B (no 6\" joist system in canon.py, TOOL_ISSUES.md)",
+  "Women's restroom: gyp bd ceiling 96.89 SF at C.H. 9.333 ft on 600S162-33 joists (S-241) - loaded as misc_items CLG-WOM-J/-R/-B (no 6\" joist system in canon.py, TOOL_ISSUES.md)",
+  "Play area west bay: gyp bd ceiling 35.04 SF at C.H. 14'-6\" (A-221 PT-41); framing assumed (RFI-06)"
+ ],
+ "details": {
+  "A1/A-605": {
+   "source": "A1/A-605",
+   "title": "FIRE FURRING @ HOOD",
+   "layers_per_face": 1,
+   "layers_source": "A1/A-605 one 1/2\" cement board",
+   "notes": "2\" metal Z channel, 1\" mineral wool (insulation EXCLUDED), 1/2\" cement board, 22 ga metal (by others)",
+   "sealant_none_reason": "acoustical sealant EXCLUDED (estimator standing order)",
+   "sealant_source": "A1/A-605"
+  },
+  "A2/A-605": {
+   "source": "A2/A-605",
+   "title": "PIN & SLEEVE SECTION",
+   "layers_per_face": 1,
+   "layers_source": "A2/A-605 1/2\" cement board",
+   "notes": "8\" metal stud wall (existing + M3.5 sister), recessed pin & sleeve box 0'-8\" to 5'-8 1/2\" AFF (width not printed, RFI-03)",
+   "sealant_none_reason": "none printed",
+   "sealant_source": "A2/A-605"
+  },
+  "C2/S-801": {
+   "source": "C2/S-801",
+   "title": "CEILING SECTION 2 (menu board)",
+   "layers_per_face": 1,
+   "layers_source": "D3/A-624",
+   "notes": "nonbearing metal studs per specs, '362S162-33' @16\", brace '362S162-33' @48\" (length not printed), 33 mil blkg T&B",
+   "sealant_none_reason": "none printed",
+   "sealant_source": "C2/S-801"
+  },
+  "C4/A-624": {
+   "source": "C4/A-624",
+   "title": "TYP DINING SOFFIT",
+   "layers_per_face": 1,
+   "layers_source": "C4/A-624 1/2\" gypsum board",
+   "notes": "3-5/8\" metal stud framing @16\", cross brace @32\", runner to structure, corner beads at all gyp intersections",
+   "sealant_none_reason": "none printed",
+   "sealant_source": "C4/A-624"
+  },
+  "C3/S-801": {
+   "source": "C3/S-801",
+   "title": "TYP. INTERIOR SOFFIT",
+   "layers_per_face": 1,
+   "layers_source": "C4/A-624",
+   "notes": "362S162-33 @32\" to soffit framing, 362T125-54 strongback @48\" to trusses",
+   "sealant_none_reason": "none printed",
+   "sealant_source": "C3/S-801"
+  }
+ },
+ "misc_items": [
+  {
+   "ref": "CLG-ENTA-J",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 46.084,
+   "unit": "LF",
+   "pcs": 7,
+   "source": "S-241 C3 DROPPED CEILING PLAN 'Entry A' ceiling joists - A2/S-241 LGS CEILING JOIST SCHEDULE span < 15 ft = 600S162-33 @ 16\" O.C. (metal-or-wood -> metal, estimator standing order); S-241 printed 7'-0 1/2\" x 6'-7\"; A-221 PT-31B C.H.10'-2\"",
+   "op": "(ROUNDUP(7.042 / 1.333) + 1 = 7 joists) x (area 46.358 / 7.042 = 6.583 ft) = 46.084 LF"
+  },
+  {
+   "ref": "CLG-ENTA-R",
+   "familia": "ceiling / soffit track 6\"",
+   "qty": 27.25,
+   "unit": "LF",
+   "source": "S-241 legend 'dropped ceiling and rim joists' + A3/S-241 rim joist to match C.J. (600T track, LGS alternate); S-241 printed 7'-0 1/2\" x 6'-7\"; A-221 PT-31B C.H.10'-2\"",
+   "op": "rim track = ceiling perimeter 27.25 LF"
+  },
+  {
+   "ref": "CLG-ENTA-B",
+   "familia": "5/8\" gyp board regular (walls + ceilings)",
+   "qty": 46.358,
+   "unit": "SF",
+   "source": "A-221 gyp bd ceiling (new, existing removed by A-052 KN10) Entry A; C09250 Gypsum Board \u00a72.1.E + \u00a73.2.A.3 (ceiling type 5/8 in at ceiling surfaces) / A-909; S-241 printed 7'-0 1/2\" x 6'-7\"; A-221 PT-31B C.H.10'-2\"",
+   "op": "ceiling board = area 46.358 SF x 1 layer"
+  },
+  {
+   "ref": "CLG-ENTB-J",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 67.521,
+   "unit": "LF",
+   "pcs": 7,
+   "source": "S-241 C3 DROPPED CEILING PLAN 'Entry B' ceiling joists - A2/S-241 LGS CEILING JOIST SCHEDULE span < 15 ft = 600S162-33 @ 16\" O.C. (metal-or-wood -> metal, estimator standing order); S-241 printed 7'-0 1/2\" x 9'-7 3/4\"; A-221 PT-31B C.H.10'-0\"",
+   "op": "(ROUNDUP(7.042 / 1.333) + 1 = 7 joists) x (area 67.923 / 7.042 = 9.646 ft) = 67.521 LF"
+  },
+  {
+   "ref": "CLG-ENTB-R",
+   "familia": "ceiling / soffit track 6\"",
+   "qty": 33.375,
+   "unit": "LF",
+   "source": "S-241 legend 'dropped ceiling and rim joists' + A3/S-241 rim joist to match C.J. (600T track, LGS alternate); S-241 printed 7'-0 1/2\" x 9'-7 3/4\"; A-221 PT-31B C.H.10'-0\"",
+   "op": "rim track = ceiling perimeter 33.375 LF"
+  },
+  {
+   "ref": "CLG-ENTB-B",
+   "familia": "5/8\" gyp board regular (walls + ceilings)",
+   "qty": 67.923,
+   "unit": "SF",
+   "source": "A-221 gyp bd ceiling (new, existing removed by A-052 KN10) Entry B; C09250 Gypsum Board \u00a72.1.E + \u00a73.2.A.3 (ceiling type 5/8 in at ceiling surfaces) / A-909; S-241 printed 7'-0 1/2\" x 9'-7 3/4\"; A-221 PT-31B C.H.10'-0\"",
+   "op": "ceiling board = area 67.923 SF x 1 layer"
+  },
+  {
+   "ref": "CLG-MEN-J",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 75.982,
+   "unit": "LF",
+   "pcs": 10,
+   "source": "S-241 C3 DROPPED CEILING PLAN 'Men's restroom' ceiling joists - A2/S-241 LGS CEILING JOIST SCHEDULE span < 15 ft = 600S162-33 @ 16\" O.C. (metal-or-wood -> metal, estimator standing order); S-241 printed 11'-3\" x 7'-11 1/4\" with step; area from S-241 vector polygon (202.4 x 132.4 + 86.3 x 10.4) pt2 / 324 = 85.48 SF; A-221 C.H. 9'-4\"",
+   "op": "(ROUNDUP(11.25 / 1.333) + 1 = 10 joists) x (area 85.48 / 11.25 = 7.598 ft) = 75.982 LF"
+  },
+  {
+   "ref": "CLG-MEN-R",
+   "familia": "ceiling / soffit track 6\"",
+   "qty": 38.36,
+   "unit": "LF",
+   "source": "S-241 legend 'dropped ceiling and rim joists' + A3/S-241 rim joist to match C.J. (600T track, LGS alternate); S-241 printed 11'-3\" x 7'-11 1/4\" with step; area from S-241 vector polygon (202.4 x 132.4 + 86.3 x 10.4) pt2 / 324 = 85.48 SF; A-221 C.H. 9'-4\"",
+   "op": "rim track = ceiling perimeter 38.36 LF"
+  },
+  {
+   "ref": "CLG-MEN-B",
+   "familia": "5/8\" gyp board regular (walls + ceilings)",
+   "qty": 85.48,
+   "unit": "SF",
+   "source": "A-221 gyp bd ceiling (new, existing removed by A-052 KN10) Men's restroom; C09250 Gypsum Board \u00a72.1.E + \u00a73.2.A.3 (ceiling type 5/8 in at ceiling surfaces) / A-909; S-241 printed 11'-3\" x 7'-11 1/4\" with step; area from S-241 vector polygon (202.4 x 132.4 + 86.3 x 10.4) pt2 / 324 = 85.48 SF; A-221 C.H. 9'-4\"",
+   "op": "ceiling board = area 85.48 SF x 1 layer"
+  },
+  {
+   "ref": "CLG-WOM-J",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 85.63,
+   "unit": "LF",
+   "pcs": 12,
+   "source": "S-241 C3 DROPPED CEILING PLAN 'Women's restroom' ceiling joists - A2/S-241 LGS CEILING JOIST SCHEDULE span < 15 ft = 600S162-33 @ 16\" O.C. (metal-or-wood -> metal, estimator standing order); S-241 vector polygon (244.4 x 103.6 + 142.4 x 38.6 + 51.0 x 11.3) pt2 / 324 = 96.89 SF (printed 5'-9\" + 2'-9 1/4\"); A-221 C.H. 9'-4\"",
+   "op": "(ROUNDUP(13.578 / 1.333) + 1 = 12 joists) x (area 96.89 / 13.578 = 7.136 ft) = 85.63 LF"
+  },
+  {
+   "ref": "CLG-WOM-R",
+   "familia": "ceiling / soffit track 6\"",
+   "qty": 44.21,
+   "unit": "LF",
+   "source": "S-241 legend 'dropped ceiling and rim joists' + A3/S-241 rim joist to match C.J. (600T track, LGS alternate); S-241 vector polygon (244.4 x 103.6 + 142.4 x 38.6 + 51.0 x 11.3) pt2 / 324 = 96.89 SF (printed 5'-9\" + 2'-9 1/4\"); A-221 C.H. 9'-4\"",
+   "op": "rim track = ceiling perimeter 44.21 LF"
+  },
+  {
+   "ref": "CLG-WOM-B",
+   "familia": "5/8\" gyp board regular (walls + ceilings)",
+   "qty": 96.89,
+   "unit": "SF",
+   "source": "A-221 gyp bd ceiling (new, existing removed by A-052 KN10) Women's restroom; C09250 Gypsum Board \u00a72.1.E + \u00a73.2.A.3 (ceiling type 5/8 in at ceiling surfaces) / A-909; S-241 vector polygon (244.4 x 103.6 + 142.4 x 38.6 + 51.0 x 11.3) pt2 / 324 = 96.89 SF (printed 5'-9\" + 2'-9 1/4\"); A-221 C.H. 9'-4\"",
+   "op": "ceiling board = area 96.89 SF x 1 layer"
+  },
+  {
+   "ref": "CLG-PLAY-B",
+   "familia": "5/8\" gyp board regular (walls + ceilings)",
+   "qty": 35.04,
+   "unit": "SF",
+   "source": "A-221 play area west bay gyp bd ceiling PT-41 C.H.14'-6\" (existing removed by A-052 KN10); 2.93 ft (A-221 vector 52.7 pt) x 11'-11 1/2\" (printed 1'-11 3/4\" + 4'-0\" + 4'-0\" + 1'-11 3/4\"); C09250 Gypsum Board \u00a72.1.E + \u00a73.2.A.3 (ceiling type 5/8 in at ceiling surfaces) / A-909",
+   "op": "52.7 pt / 18 = 2.928 ft x 11.958 ft = 35.04 SF"
+  },
+  {
+   "ref": "CLG-PLAY-J",
+   "familia": "6\" stud (todos los gauges)",
+   "qty": 29.28,
+   "unit": "LF",
+   "pcs": 10,
+   "source": "framing of play-bay gyp ceiling not shown on S-241 -> assumed like the other dropped ceilings (600S162-33 @ 16\") -> RFI-06",
+   "op": "(ROUNDUP(11.958 / 1.333) + 1 = 10 joists) x 2.928 ft = 29.28 LF"
+  },
+  {
+   "ref": "SOF-STRONGBACK",
+   "familia": "track de ceilings / soffits",
+   "qty": 26.51,
+   "unit": "LF",
+   "source": "C3/S-801 TYP. INTERIOR SOFFIT (bubbled on S-241 at serving soffit): '362T125-54 strongback' to each truss @ 48\" O.C. max; run = serving soffit outer edges (A-221 vector)",
+   "op": "west edge 18.122 + north edge 8.389 = 26.51 LF"
+  },
+  {
+   "ref": "DEMO-01",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 340.238,
+   "unit": "SF",
+   "source": "KN3 A-050; existing serving/kitchen wall demolished to extents shown (two red segments 1600.6-1701.6 and 1703.2-1901.8 at y 658-671); A-050 scale 1/4\"=1'-0\" verified by registration to A-202 (dx -49, dy -98 pt, 51 identical wall lines); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "16.733 LF x 10.167 ft x 2 layer(s) = 340.238 SF"
+  },
+  {
+   "ref": "DEMO-02",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 262.869,
+   "unit": "SF",
+   "source": "KN3 A-050; existing multi-purpose / mech partitions (L); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "12.928 LF x 10.167 ft x 2 layer(s) = 262.869 SF"
+  },
+  {
+   "ref": "DEMO-03",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 48.231,
+   "unit": "SF",
+   "source": "KN3 A-050; existing partition stub by mech room; height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "2.372 LF x 10.167 ft x 2 layer(s) = 48.231 SF"
+  },
+  {
+   "ref": "DEMO-04",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 196.888,
+   "unit": "SF",
+   "source": "KN3 A-050; existing office partition (vertical); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "9.683 LF x 10.167 ft x 2 layer(s) = 196.888 SF"
+  },
+  {
+   "ref": "DEMO-05",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 208.539,
+   "unit": "SF",
+   "source": "KN3 + KN4 A-050; existing office partition (horizontal) at removed column; height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "10.256 LF x 10.167 ft x 2 layer(s) = 208.539 SF"
+  },
+  {
+   "ref": "DEMO-06",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 75.355,
+   "unit": "SF",
+   "source": "KN3 A-050; existing drive-thru partition (vertical); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "3.706 LF x 10.167 ft x 2 layer(s) = 75.355 SF"
+  },
+  {
+   "ref": "DEMO-07",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 237.107,
+   "unit": "SF",
+   "source": "KN3 A-050; existing dining / drive-thru partition; height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "11.661 LF x 10.167 ft x 2 layer(s) = 237.107 SF"
+  },
+  {
+   "ref": "DEMO-08",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 37.271,
+   "unit": "SF",
+   "source": "KN24 A-050; existing east wall removed for new cased opening (1 of 3); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "1.833 LF x 10.167 ft x 2 layer(s) = 37.271 SF"
+  },
+  {
+   "ref": "DEMO-09",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 91.5,
+   "unit": "SF",
+   "source": "KN24 A-050; existing east wall removed for walk-in cooler door (2 of 3); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "4.5 LF x 10.167 ft x 2 layer(s) = 91.5 SF"
+  },
+  {
+   "ref": "DEMO-10",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 91.5,
+   "unit": "SF",
+   "source": "KN24 A-050; existing east wall removed for walk-in freezer door (3 of 3); height: existing wall height not printed in any sheet (A-050/A-052/A-401/A-402/A-60x swept) -> board to new kitchen ceiling 10'-2\" (A-221) assumed [PENDING] -> RFI-07",
+   "op": "4.5 LF x 10.167 ft x 2 layer(s) = 91.5 SF"
+  },
+  {
+   "ref": "DEMO-11",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 154.0,
+   "unit": "SF",
+   "source": "KN8 A-050; dining half walls (5.5 pt = 3.7\" thick); height: half-wall height not printed in any sheet -> 3'-6\" assumed [PENDING] -> RFI-08",
+   "op": "22.0 LF x 3.5 ft x 2 layer(s) = 154.0 SF"
+  },
+  {
+   "ref": "DEMO-12",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 55.559,
+   "unit": "SF",
+   "source": "KN3 (A-052) A-052; existing menuboard furr down (A-052 KN3 + KN7 bulkhead): face + bottom per LF; height: furr-down drop not printed -> 2'-0\" face assumed [PENDING] + 0.944 ft bottom width (A-052 vector 17.0 pt) -> RFI-09",
+   "op": "18.872 LF x 2.944 ft x 1 layer(s) = 55.559 SF"
+  },
+  {
+   "ref": "DEMO-C1",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 85.48,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - Men's room; S-241 / A-052 KN10",
+   "op": "ceiling area 85.48 SF x 1 layer = 85.48 SF"
+  },
+  {
+   "ref": "DEMO-C2",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 96.89,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - Women's room; S-241 / A-052 KN10",
+   "op": "ceiling area 96.89 SF x 1 layer = 96.89 SF"
+  },
+  {
+   "ref": "DEMO-C3",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 46.358,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - Entry A; A-052 KN10 (S-241 printed 7'-0 1/2\" x 6'-7\")",
+   "op": "ceiling area 46.358 SF x 1 layer = 46.358 SF"
+  },
+  {
+   "ref": "DEMO-C4",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 67.923,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - Entry B; A-052 KN10 (S-241 printed 7'-0 1/2\" x 9'-7 3/4\")",
+   "op": "ceiling area 67.923 SF x 1 layer = 67.923 SF"
+  },
+  {
+   "ref": "DEMO-C5",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 35.04,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - Play area west bay; A-052 KN10",
+   "op": "ceiling area 35.04 SF x 1 layer = 35.04 SF"
+  },
+  {
+   "ref": "DEMO-C6",
+   "familia": "demolition - gypsum board and metal framing",
+   "qty": 38.35,
+   "unit": "SF",
+   "source": "A-052 KN10 'remove existing gyp. bd. ceiling & support' - East room (old layout, now multi-purpose); A-052 KN10; A-052 vector 75.8 x 163.9 pt / 324",
+   "op": "ceiling area 38.35 SF x 1 layer = 38.35 SF"
+  },
+  {
+   "ref": "RH-SHAFT-S",
+   "familia": "3-5/8\" stud (todos los gauges)",
+   "qty": 48.0,
+   "unit": "LF",
+   "pcs": 12,
+   "source": "A1/A-604 LADDER DETAILS: roof hatch 3'-0\" 'framed wall ... all sides of opening', down to 24\" below finish ceiling; '2x4 wood OR 3-5/8\" metal' -> metal (estimator standing order); A-221 KN8; other hatch side + shaft height not printed -> RFI-10",
+   "op": "assumed 3'-0\" x 3'-0\" shaft: 4 sides x 3 studs (ROUNDUP(3/1.333)+1 = 4, corners shared) = 12 studs x 4.0 ft [PENDING: 24\" below ceiling to roof framing] = 48.0 LF"
+  },
+  {
+   "ref": "RH-SHAFT-T",
+   "familia": "track de ceilings / soffits",
+   "qty": 24.0,
+   "unit": "LF",
+   "source": "A1/A-604 roof hatch framed shaft - top + bottom runner (RFI-10)",
+   "op": "perimeter 12.0 LF x 2 (top + bottom) = 24.0 LF"
+  }
+ ],
+ "demo_geom": [
+  {
+   "id": "DEMO-01",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     1600.6,
+     663.0
+    ],
+    [
+     1901.8,
+     663.0
+    ]
+   ],
+   "lf": 16.733,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 340.238,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-02",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     2370.8,
+     532.0
+    ],
+    [
+     2289.5,
+     532.0
+    ],
+    [
+     2289.5,
+     380.6
+    ]
+   ],
+   "lf": 12.928,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 262.869,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-03",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     2228.8,
+     690.7
+    ],
+    [
+     2228.8,
+     733.4
+    ]
+   ],
+   "lf": 2.372,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 48.231,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-04",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     1988.8,
+     998.3
+    ],
+    [
+     1988.8,
+     1172.6
+    ]
+   ],
+   "lf": 9.683,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 196.888,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-05",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     1857.0,
+     993.5
+    ],
+    [
+     2041.6,
+     993.5
+    ]
+   ],
+   "lf": 10.256,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 208.539,
+   "keynote": "KN3 + KN4",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-06",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     1595.3,
+     914.3
+    ],
+    [
+     1595.3,
+     981.0
+    ]
+   ],
+   "lf": 3.706,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 75.355,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-07",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     1380.2,
+     1004.3
+    ],
+    [
+     1590.1,
+     1004.3
+    ]
+   ],
+   "lf": 11.661,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 237.107,
+   "keynote": "KN3",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-08",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     2375.8,
+     792.8
+    ],
+    [
+     2375.8,
+     825.8
+    ]
+   ],
+   "lf": 1.833,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 37.271,
+   "keynote": "KN24",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-09",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     2375.8,
+     887.6
+    ],
+    [
+     2375.8,
+     968.6
+    ]
+   ],
+   "lf": 4.5,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 91.5,
+   "keynote": "KN24",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-10",
+   "group": "walls",
+   "page": 6,
+   "polyline": [
+    [
+     2375.8,
+     1034.6
+    ],
+    [
+     2375.8,
+     1115.6
+    ]
+   ],
+   "lf": 4.5,
+   "h_ft": 10.167,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 91.5,
+   "keynote": "KN24",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-11",
+   "group": "half walls",
+   "page": 6,
+   "polyline": [
+    [
+     1194.8,
+     647.5
+    ],
+    [
+     1194.8,
+     1043.5
+    ]
+   ],
+   "lf": 22.0,
+   "h_ft": 3.5,
+   "h_status": "PENDIENTE",
+   "layers": 2,
+   "sf": 154.0,
+   "keynote": "KN8",
+   "sheet": "A-050"
+  },
+  {
+   "id": "DEMO-12",
+   "group": "menuboard furr down",
+   "page": 7,
+   "polyline": [
+    [
+     1539.5,
+     664.7
+    ],
+    [
+     1539.5,
+     1004.4
+    ]
+   ],
+   "lf": 18.872,
+   "h_ft": 2.944,
+   "h_status": "PENDIENTE",
+   "layers": 1,
+   "sf": 55.559,
+   "keynote": "KN3 (A-052)",
+   "sheet": "A-052"
+  }
+ ],
+ "blocking_items": [
+  {
+   "ref": "BLK-HOOD3",
+   "lf": 3.52,
+   "rows": 1,
+   "material": "metal",
+   "label": "cont. blocking @ hood wall bracket",
+   "wall": "M3.5-01",
+   "width_source": "A-221 Hood #3 length along M3.5-01: 63.3 pt / 18 = 3.52 ft (vector)",
+   "source": "A2/S-801 TYP. MECH'L HOOD SUPPORT 'cont. blkg. @ wall bracket typ.' at metal stud walls; Hood #3 against M3.5-01"
+  },
+  {
+   "ref": "BLK-HOOD2",
+   "lf": 3.75,
+   "rows": 1,
+   "material": "metal",
+   "label": "cont. blocking @ hood wall bracket",
+   "wall": "M3.5-02",
+   "width_source": "Hood #2 (A-221) spans full M3.5-02 3'-9\"",
+   "source": "A2/S-801 'cont. blkg. @ wall bracket typ.'; Hood #2 against M3.5-02"
+  },
+  {
+   "ref": "BLK-MENU",
+   "lf": 3.333,
+   "rows": 2,
+   "material": "metal",
+   "label": "33 mil blocking T&B (menu board)",
+   "wall": "MB-01",
+   "width_source": "C2/S-801 '33 mil blkg. T&B as req'd' across infill MB-01 (3.333 ft)",
+   "source": "C2/S-801 '33 MIL BLKG. T&B AS REQ'D' + '33 MIL CONT. BLKG. AS REQ'D'"
+  }
+ ],
+ "trim_items": [
+  {
+   "ref": "CB-SOFFIT-SRV",
+   "kind": "corner_bead",
+   "lf": 49.44,
+   "source": "C4/A-624 'provide corner beads at all gypsum board intersections' - serving soffit bottom edges (A-221 vector perimeter of free edges 18.122 + 8.389 + 15.772 + 7.156 = 49.44 LF)"
+  },
+  {
+   "ref": "CB-SOFFIT-GT",
+   "kind": "corner_bead",
+   "lf": 24.0,
+   "source": "C4/A-624 corner beads - gathering soffit bottom edges 2 x (4.0 + 8.0) = 24.0 LF"
+  }
+ ],
+ "plywood_strips": [],
+ "plywood_strips_none_reason": "all plywood (G.3, G.9, G.10, G.12, G.13 /A-202, A-625) is wood Div. 06 - EXCLUDED",
+ "tile_base_none_reason": "tile base is by the tile trade; its cement board substrate is loaded as board-only entries (H.1/H.2/A.3/A.4)",
+ "frp_none_reason": "FRP-2 is by others (EXCLUDED) - A-211",
+ "edge_blocking_none_reason": "no metal edge blocking printed; wood blocking (F.1/A-202, A-501, S-241 2x4) EXCLUDED Div. 06",
+ "deflection_clips": {
+  "none_reason": "no deflection head / clip printed for M2.1 / M3.5 / soffits (A-202, A-605, A-624, S-801 swept)",
+  "source": "A-202 + S-801"
+ },
+ "accesorios_none": [
+  {
+   "familia": "stud reinforcement MEP",
+   "why": "MEP sweep: 0 duct / pipe crossings through the 4 metal walls; duct openings EXCLUDED by standing order",
+   "source": "M-200..M-902, P-100..P-901 (pages 76-102)"
+  },
+  {
+   "familia": "extra framing ATM",
+   "why": "no ATM in this restaurant",
+   "source": "A-201 / A-202"
+  },
+  {
+   "familia": "gypsum board jamb return",
+   "why": "no unframed opening with gyp jamb return in metal walls; storefront returns A1/A-624 are on existing dining walls (existing to remain, KN7/A-201)",
+   "source": "A1/A-624 + A-202"
+  },
+  {
+   "familia": "access panel",
+   "why": "no access panel in gyp ceilings / metal walls on A-221 keynotes or M/P notes",
+   "source": "A-221 RCP keynotes + C08306 / A-907"
+  }
+ ],
+ "mep_sweep": {
+  "sheets": [
+   "M-200",
+   "M-201",
+   "M-250",
+   "M-251",
+   "M-252",
+   "M-301",
+   "M-401",
+   "M-501",
+   "M-901",
+   "M-902",
+   "MH-101",
+   "MH-102",
+   "MH-103",
+   "P-100",
+   "P-101",
+   "P-200",
+   "P-201",
+   "P-211",
+   "P-221",
+   "P-250",
+   "P-301",
+   "P-303",
+   "P-901"
+  ],
+  "source": "plano_con_texto_MEP.pdf pages 76-102 swept; ducts / pipes crossing our metal walls: 0 framed openings (hood ducts rise through roof; duct openings EXCLUDED by standing order)",
+  "count": 0
+ },
+ "mep_penetrations": [],
+ "tags_descartados": [
+  {
+   "id": "PT0002",
+   "motivo": "M2.1 text in the WALL TYPE SCHEDULE - INTERIOR legend on A-202 (not a plan tag)",
+   "imagen": "inventario/recortes/PT0002_M2_1_A-202_p13.png"
+  },
+  {
+   "id": "PT0005",
+   "motivo": "M3.5 text in the WALL TYPE SCHEDULE - INTERIOR legend on A-202 (not a plan tag)",
+   "imagen": "inventario/recortes/PT0005_M3_5_A-202_p13.png"
+  },
+  {
+   "id": "PA0001",
+   "motivo": "SW6 mark in the WALL TYPE SCHEDULE - EXTERIOR table (A-202)",
+   "imagen": "inventario/recortes/PA0001_SW6_A-202_p13.png"
+  },
+  {
+   "id": "PA0002",
+   "motivo": "W6 mark in the WALL TYPE SCHEDULE - INTERIOR table (A-202)",
+   "imagen": "inventario/recortes/PA0002_W6_A-202_p13.png"
+  },
+  {
+   "id": "PA0003",
+   "motivo": "W8 mark in the WALL TYPE SCHEDULE - INTERIOR table (A-202)",
+   "imagen": "inventario/recortes/PA0003_W8_A-202_p13.png"
+  }
+ ],
+ "deck_breaks_none_reason": "no metal wall reaches the deck: M2.1 / M3.5 / MB-01 framing stops 6\" above ceiling (C.1/A-202); deck height not printed (RFI-04)",
+ "level5_items": [
+  {
+   "ref": "L5-PLAY",
+   "wc_tag": "WC-1",
+   "l_ft": 59.69,
+   "h_ft": 12.75,
+   "base_ft": {
+    "value": 0.5,
+    "source": "A-211 VB-1 vinyl wall base 6\" H at playground"
+   },
+   "source": "A-050 KN12 'prepare wall with Level 5 finish to receive new wall covering' + A-211 Level 5 note + A-623 play elevation CEILING 12'-9\"; C09250 \u00a73.5.D / A-909",
+   "length_op": "play area solid wall perimeter A-202 vector 182.9 + 337.2 + 256.2 + 31.8 + 64.8 + 64.8 + 42.2 + 73.3 + 21.2 = 1074.4 pt / 18 = 59.69 ft (bay glazing 242 pt excluded) [DERIVED, approximate polygon]"
+  }
+ ],
+ "fasteners_excluded": {
+  "why": "fasteners / screws / anchors / PAF excluded by estimator standing order (brief)",
+  "source": "BRIEF scope rules; C09250 \u00a72.5.B / A-909"
+ },
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "question": "M3.5 (3-5/8\" metal studs sistered to existing framing): stud spacing is not printed. Confirm 16\" O.C. (loaded) or match existing stud spacing.",
+   "fuentes_revisadas": [
+    "A-202 wall type schedule M3.5",
+    "A2/A-605",
+    "C09111 \u00a73.3.B.1 'space studs as indicated' / A-909",
+    "S-801 C2 '362S162-33 @ 16\"'"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: A-202 M3.5 gives no spacing; C2/S-801 shows 362S162-33 @ 16\" for the adjacent menu-board wall -> 16\" O.C. loaded",
+     "source": "A-202 / C2/S-801",
+     "delta": "0 (loaded)"
+    },
+    "B": {
+     "texto": "Code: ASTM C754 permits 3-5/8\" 20 ga (33 mil) studs @ 24\" O.C. with 1/2\" board (single layer)",
+     "cita": "ASTM C754 Table 1 / GA-216",
+     "delta": "@24\": -3 studs = -32.0 LF 3-5/8\" stud (M3.5-01 7->5, M3.5-02 4->3, x 10.667 ft)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-02",
+   "question": "Kitchen cement board base height: A-050 KN16 says 1/2\" Durock floor to 18\" A.F.F.; H.1/A-202, G.3/A-202, A.4/A-601 and A-201 KN16 say 1'-0\" (min 12\"); C3/A-604 dimensions 1'-3\". Which governs?",
+   "fuentes_revisadas": [
+    "KN16/A-050",
+    "KN16/A-201",
+    "H.1 + G.3/A-202",
+    "A.4/A-601",
+    "C3/A-604",
+    "C09250 \u00a72.2.B / A-909"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: 18\" (A-050 KN16) loaded on kitchen, multi-purpose and service faces",
+     "source": "KN16/A-050",
+     "delta": "0 (loaded: 239.15 LF x 1.5 ft)"
+    },
+    "B": {
+     "texto": "Code/standard: tile base backer needs only to exceed the 6\" tile base; 1'-0\" per H.1 satisfies TCNA/ANSI A108 wet-area base",
+     "cita": "ANSI A118.9 / TCNA EJ171 (via C09250)",
+     "delta": "1'-0\": -119.575 SF cement board; 1'-3\": -59.788 SF"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-03",
+   "question": "A2/A-605 recessed pin & sleeve box in the 8\" metal stud wall (M3.5 at hoods #2/#3): box width and quantity not printed - framing of the recess (jambs/head/sill) not quantified.",
+   "fuentes_revisadas": [
+    "A2/A-605",
+    "A-201 A2/A-605 callouts",
+    "E sheets (not opened for size)"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: recess 0'-8\" to 5'-8 1/2\" A.F.F. printed; width not printed",
+     "source": "A2/A-605",
+     "delta": "per recess (assumed 2'-0\" wide): +2 jamb studs 10.667 ft + 2 x 2.0 ft track = +21.3 LF stud + 4.0 LF track"
+    },
+    "B": {
+     "texto": "Code: framed openings per ASTM C754 \u00a7(openings): jamb studs + runner at head/sill",
+     "cita": "ASTM C754 / C09111 \u00a73.3.C.3",
+     "delta": "same as A"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-04",
+   "question": "M3.5-01 and infill MB-01 lie on the smoke partition (A.11/A-221: extend framing and BOH sheathing to roof deck). Roof deck / truss bottom height at the kitchen is not printed (A-401 'existing roof structure'). Confirm height.",
+   "fuentes_revisadas": [
+    "A.11/A-221",
+    "C.2/A-202",
+    "G.4/A-202",
+    "A-401 D4",
+    "A-402",
+    "S-201",
+    "S-241"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: framing loaded to 10'-8\" (C.1 6\" above ceiling) and cement board to 10'-6\" (G.4) because deck height is not printed",
+     "source": "A.11/A-221 + C.1/A-202",
+     "delta": "per extra ft of height: +11 studs x 1 ft = +11.0 LF 3-5/8\" stud, +10.48 SF 1/2\" cement board (M3.5-01 + MB-01 kitchen faces)"
+    },
+    "B": {
+     "texto": "Code: smoke partitions continuous to underside of deck (IBC 710.4)",
+     "cita": "IBC 710.4 / C09111 \u00a73.3.C",
+     "delta": "same as A (height x per-ft delta)"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-05",
+   "question": "A.6 (A-601..A-623): 'at wainscot locations provide 5\" cementitious board behind the tile base, then gypsum board to ceiling'. On EXISTING dining/vestibule walls (A-050 KN10 only removes finishes) is new gypsum required above the 5\" base?",
+   "fuentes_revisadas": [
+    "A.3 + A.6 interior elevation notes",
+    "KN10/A-050",
+    "A-625 wainscot details",
+    "A-211"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: only the 5\" cement board base loaded on existing dining / vestibule walls; existing gypsum assumed to remain",
+     "source": "A.3/A-621 + KN10/A-050",
+     "delta": "new gyp to ceiling: +2322.196 SF 1/2\" gyp (234.171 LF x 9.917 ft)"
+    },
+    "B": {
+     "texto": "Code: no code requirement to replace sound existing gypsum",
+     "cita": "ASTM C840 (repair of existing surfaces)",
+     "delta": "0"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-06",
+   "question": "Play area west bay gyp ceiling (A-221 PT-41 C.H.14'-6\", existing removed by A-052 KN10): new ceiling framing not shown on S-241.",
+   "fuentes_revisadas": [
+    "A-221",
+    "A-052 KN10",
+    "S-241",
+    "S-201"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: framing assumed 600S162-33 @ 16\" like the other dropped ceilings (S-241 A2 LGS schedule)",
+     "source": "S-241 A2",
+     "delta": "0 (loaded 29.28 LF); if existing framing re-used: -29.28 LF 6\" joist"
+    },
+    "B": {
+     "texto": "Code: ceiling framing per ASTM C754 (furring channel @ 16\" with 5/8\" board)",
+     "cita": "ASTM C754",
+     "delta": "furring alternative: 10 x 2.93 = 29.3 LF furring channel instead of joists"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-07",
+   "question": "Heights and board layers of the existing walls to be demolished (A-050 KN3 / KN24) are not printed. Loaded to 10'-2\" with gypsum both faces.",
+   "fuentes_revisadas": [
+    "A-050",
+    "A-052",
+    "A-401",
+    "A-402",
+    "A-601..A-603"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: no height printed; 10'-2\" (new kitchen C.H. A-221) x 2 faces assumed",
+     "source": "A-221 C.H.",
+     "delta": "per ft of height: +2 x demo LF SF; if kitchen face is plywood/FRP (KN16/A-050): -50% of DEMO-01..10 SF"
+    },
+    "B": {
+     "texto": "Code: not applicable (field verify)",
+     "cita": "n/a - existing conditions",
+     "delta": "field verify"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-08",
+   "question": "Dining half walls to be demolished (A-050 KN8): height not printed (3'-6\" assumed).",
+   "fuentes_revisadas": [
+    "A-050 KN8",
+    "A-62x elevations",
+    "furniture sheets (not in set)"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: not printed; 3'-6\" assumed",
+     "source": "A-050 KN8",
+     "delta": "per 6\": +/-22.0 SF"
+    },
+    "B": {
+     "texto": "Code: guard height 42\" typical for half walls",
+     "cita": "IBC 1015.3 (guard height 42\")",
+     "delta": "0"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-09",
+   "question": "Existing menuboard furr down to remove (A-052 KN3): plan width 0'-11 1/4\" (vector) x 18.87 ft; vertical drop not printed (2'-0\" assumed).",
+   "fuentes_revisadas": [
+    "A-052 KN3 + KN7",
+    "A-050",
+    "A-401"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: drop not printed; 2'-0\" face assumed",
+     "source": "A-052",
+     "delta": "per ft of drop: +18.87 SF demo"
+    },
+    "B": {
+     "texto": "Code: n/a (existing conditions)",
+     "cita": "n/a",
+     "delta": "field verify"
+    },
+    "C": ""
+   }
+  },
+  {
+   "id": "RFI-10",
+   "question": "Roof hatch shaft framing (A1/A-604 '2x4 wood or 3-5/8\" metal framed wall ... all sides of opening' to 24\" below finish ceiling): second hatch dimension and shaft height to roof framing not printed.",
+   "fuentes_revisadas": [
+    "A1/A-604",
+    "A-221 KN8",
+    "A-230 roof plan",
+    "C07740 roof hatches / A-906"
+   ],
+   "opciones": {
+    "A": {
+     "texto": "Plans: 3'-0\" printed; 3'-0\" x 3'-0\" x 4.0 ft assumed in metal (standing order metal-or-wood -> metal)",
+     "source": "A1/A-604",
+     "delta": "per extra ft of shaft height: +12 LF 3-5/8\" stud; 2'-6\" x 3'-0\" hatch: -1 stud, -2 LF track"
+    },
+    "B": {
+     "texto": "Code: roof hatch curb/shaft per manufacturer; framing per ASTM C754",
+     "cita": "ASTM C754 / IBC 1011.12.2",
+     "delta": "same as A"
+    },
+    "C": ""
+   }
+  }
+ ],
+ "scope_notes_info": [
+  "EXCLUDED - wood framing / blocking (Div. 06), not in scope: W4, W4.1, W6, W8 interior wood stud walls and SW6 2x6 exterior wood walls (A-202 wall type schedules; S-600) - only their interior gyp / cement board is loaded (existing_walls)",
+  "EXCLUDED - wood framing / blocking (Div. 06), not in scope: 1/2\" and 3/4\" CDX / wood plywood sheathing G.3, G.9, G.10, G.12, G.13 (A-202), A-625 wainscot plywood, A1/A-604 hatch plywood",
+  "EXCLUDED - wood framing / blocking (Div. 06), not in scope: SW6 exterior structural sheathing (E.1/A-202, S-600 notes)",
+  "EXCLUDED - wood framing / blocking (Div. 06), not in scope: wall blocking F.1/A-202, D-Blaze FRT blocking within 18\" of hood (A-501 notes), 2x4 blocking S-241, doubled 2x8 icemaker blocking A4/A-624, shelving blocking A-602, ladder wood blocking A1/A-604",
+  "EXCLUDED - wood framing / blocking (Div. 06), not in scope: wood ceiling joist schedule A2/S-241 (LGS alternate loaded per metal-or-wood standing order), 2x rim joists A3/S-241",
+  "EXCLUDED - insulation: batt B.1-B.5/A-202, mineral wool A1/A-605",
+  "EXCLUDED - other trades: FRP-2, stainless S-1 / CT-72, tile CT-57A/CT-73/CT-77/KT-6, wallcovering WC-1, paint PT-31A/31B/41/42, WD-3 wainscot, corner guards CG-1..CG-5 (A-211); Composeal / Kerdi waterproofing (G.3/G.4/A-202, A-211)",
+  "EXCLUDED - ACT-1 / ACT-2 ceilings and grid (A-221) and ACT grid demolition (A-052 KN1)",
+  "EXCLUDED - canopies (A-104, A-105, OMD vendor sheets p48-63), awnings (A-221 KN10/KN11), signage",
+  "EXCLUDED - walk-in cooler/freezer panels and metal closure panels (A-221 KN2, A-050 KN22), toilet partitions (A-050 KN14, A-201 KN11), millwork (A-701)",
+  "EXCLUDED - demolition not gyp/metal: A-050 KN10 / KN12 wall finish removal (finishes only), KN29 exterior finishes, KN1 Eliason door, KN5 drive-thru window, KN19/KN21 doors; KN20 window demo has no tag on the A-050 plan",
+  "EXCLUDED - existing gyp ceilings to remain (A-221 legend 'gyp bd ceiling - existing except where noted'): only ceilings removed by A-052 KN10 are re-built",
+  "EXCLUDED - framed openings for ducts (standing order); fasteners / screws / anchors / PAF; acoustical sealant; hood unistrut supports A2/S-801 (MEP/vendor)",
+  "INFO - drawing conflict: A-201 legend shades W4/W6/W8/SW6 walls with the 'METAL STUD WALL' fill while A-202 schedule types them '2x4/2x8/2x6 WD STUD'; brief + A-202 schedule + S-600 govern (wood, framing EXCLUDED) - flagged to estimator",
+  "INFO - dining existing walls: A.3 5\" cement base loaded; gypsum above per A.6 not loaded on existing walls (RFI-05); Level 4 finish dining (A.4/A-211) applies to new dining board",
+  "INFO - M3.5 sistered studs: A2/A-605 shows 8\" overall metal stud wall (existing framing + 3-5/8\" sister)",
+  "INFO - Level 5 play area loaded as misc L5-PLAY (A-050 KN12); approximate polygon, DERIVED",
+  "INFO - MEP sweep: M-/P- sheets (pages 76-102, SHX annotations) swept for duct/pipe crossings of the 4 metal walls: 0 crossings requiring framed openings (hood exhaust rises through roof)"
+ ],
+ "types_none_reason": {
+  "W4": "wood (A-202) - board-only",
+  "W4.1": "wood (A-202) - board-only",
+  "W6": "wood (A-202) - board-only",
+  "W8": "wood (A-202) - board-only",
+  "SW6": "wood exterior (A-202) - board-only"
+ }
+}
