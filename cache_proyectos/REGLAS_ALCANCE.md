@@ -37,3 +37,8 @@ Para TODOS los proyectos:
 
 ## R-ALC-07 — Altura de partitions existentes a demoler sin altura impresa (usuario, 2026-11-02, VS #679 Downey)
 - Se cargan **hasta el B.O. de estructura impreso** de su bahía (o el más cercano impreso: joists / beams / deck del demo plan o S), **nunca a un cielo supuesto**. Estado DERIVADO con la cota usada; se documenta el delta contra ±12'-0".
+
+## R-ALC-08 — Specs siempre revisadas (usuario, 2026-11-02, VS #679 Downey; TODOS los proyectos)
+- En cada proyecto se barre el project manual o las spec sheets del trade (05 40 00 / 05 41 00, 09 21 16, 09 22 16, 09 29 00, 07 84 00, 07 92 00, 06 10 00, Div. 01 alcance / alternates / unit prices, notas de spec en hojas G / A-001 / A15.xx).
+- Cada material cargado (gauge, depth / spacing, deflection track, board type / espesor, level of finish, trims / control joints, sealant, backing, demo) se cruza contra la spec y cita sección / párrafo en su fuente.
+- Lo que plano y spec permiten aplicar juntos se aplica; conflicto = RFI A/B/C con delta. Si el bid set no trae specs, se declara en el Scope Checklist.
