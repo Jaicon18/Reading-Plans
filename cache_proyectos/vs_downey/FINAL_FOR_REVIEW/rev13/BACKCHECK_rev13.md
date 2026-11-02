@@ -1,6 +1,6 @@
 # BACK-CHECK rev13 — VS #679 Downey
 
-## rev13 change: tool fix R80e.130 / BE-CF14 (skill v81cf7)
+## rev13 change: tool fix R80f.4 / BE-CF14 (skill v81cf7)
 The 1/2" moisture resistant gyp bd at the storefront (502.17 SF, A/A08.05, D/A08.10) was not in the finishing driver (accesorios.BOARD_DRIVER). Now joint compound and joint tape include it. Drywall screws stay EXCLUDED (fasteners).
 
 | Material | Unit | rev12 | rev13 | Δ |
