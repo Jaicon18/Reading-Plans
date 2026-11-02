@@ -12,3 +12,4 @@ Skill base: v80z3 (último probado en la línea principal; incluye R-ALC-01..06)
 | 1d | Unión con v80z4 → v81cf2 (vigente), banco 0 diferencias, suite 30/30 (en paralelo a las lecturas) | 13:03 | 13:04 | — |
 | 2-3 | Lecturas A y B (subagentes en paralelo) | 12:47 | | |
 Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del contenedor), nunca estimadas.
+| 3 | Lectura B terminada (CANON OK; 12 RFI, 3 tool issues) | 12:47 | 13:13 | — |
