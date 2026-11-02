@@ -28,3 +28,9 @@
 
 ## R-ALC-05 — Demolición de cielos existentes sin tipo indicado (usuario, 2026-11-02, VS #679 Downey)
 - Si el demo plan pide retirar cielos existentes ("gyp bd OR acoustical tile") y no indica cuál es cuál (sin RCP existente ni tags): **EXCLUDED por falta de información**, con clarification "Existing ceiling demolition excluded – existing ceiling type not indicated; excluded for lack of information". Sin RFI; documentar el delta (área bruta).
+
+## R-ALC-06 — Demolición: markup de línea, alturas buscadas y cruce demo vs floor plan (usuario, 2026-11-02, VS #679 Downey)
+Para TODOS los proyectos:
+1. **Markup de línea a escala:** cada elemento de demo (partition, column enclosure, furring, board de demising, cielo) se marca en el demo plan con una LÍNEA (PolyLine Bluebeam con /Measure calibrado y Depth = altura), Subject "DEMO", color propio en la leyenda, etiqueta DEMO ID · LF · H · SF · keynote/hoja. PNG por hoja + markups PDF (tool markups_demo.py).
+2. **Alturas buscadas antes de suponer:** la altura de cada elemento demolido se busca en TODAS las hojas (notas generales y de demo, callouts de estructura / joists / beams, secciones y elevaciones existentes, RCP existente y nuevo, wall schedule (E), deck / bottom of structure, hojas S). Cada altura con #0: [CONFIRMADO N/HOJA] / [DERIVADO operación] / [PENDIENTE]. Solo si ninguna hoja la imprime: supuesto conservador + SEGUIMIENTO.
+3. **Cruce demo plan vs floor plan nuevo** wall por wall: existe y queda / se demuele / nuevo / diferencias (walls demolidas sin marcar, existentes que no aparecen en el nuevo, nuevas sobre demolidas, demising que se conservan). Con eso se confirma o corrige la lista de demo; cada diferencia con N/HOJA + recorte circulado.
