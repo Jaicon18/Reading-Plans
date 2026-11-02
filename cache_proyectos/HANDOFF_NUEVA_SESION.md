@@ -29,3 +29,15 @@ Al arrancar la sesión nueva: recrearlas apuntando a la sesión nueva (create_tr
 
 ## Entorno
 env_01KvJ1Y5fQ1msxzgKu7dToYG ("pruebas unicamente"): TAKEOFF_API_KEY, gdrive_sa_json (NUNCA leer), BC_EMAIL/BC_PASSWORD (solo para login de BuildingConnected, nunca imprimir). Allowed domains: elite-constructionplans.com, buildingconnected.com, app.buildingconnected.com, accounts.autodesk.com, autodesk.com, panteratools, myfbm. Sesiones nuevas: source_url del repo + source_revision claude/gifted-pasteur-x2sfzs.
+
+## CHECKLIST AHORRO DE TOKENS (usuario 2-nov: "no olvides aplicar las reglas para ahorrar tokens") — obligatorio en todo proyecto
+1. Una sesión por proyecto; lecturas A y B, auditor, cobertura, subidas = SUBAGENTES en paralelo (su salida no infla el contexto principal) (R80e.120/121).
+2. Permisos de red y bid set limpio ANTES de lanzar (nada de arranques fallidos).
+3. Caché primero: cache_proyectos/<proyecto>/ y scratchpad; nunca volver a bajar, leer ni recalcular lo ya verificado.
+4. Lectura A y B una vez cada una; cada diferencia A/B = UNA revisión dirigida con recorte; si sigue la duda = Review Item, no otra lectura completa.
+5. Correcciones: verificar SOLO los ítems cambiados; nunca relanzar revisiones completas.
+6. Los PROGRAMAS calculan (inventario_tags, comparar, canon, reglas, plantilla); el modelo solo lee.
+7. Sin RFI para tornillería, trades que no hacemos, ductos, cielos existentes sin tipo: EXCLUDED directo.
+8. RFI en bloque (4 por ventana) y se procesan todos juntos una sola vez.
+9. Mensajes y reportes cortos; check-ins espaciados (25–60 min), sin sondeos repetidos; leer otras sesiones con filtros (kinds) y nunca volcar transcripciones completas.
+10. Medir tiempo y % semanal por proyecto vs O'Reilly ~3 h/≈4 %, VS ~5.5 h/≈6–7 %, Chuze ~8–9 h/≈13–14 %.
