@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf3: v81cf2 + compuerta A_BARRIDO_NO_DIBUJADO, verificada 0 reglas faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf4: v81cf3 + delta VS v80z5 + VS rev10 R80e.127/128, verificada 0 reglas faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -63,7 +63,10 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 **02-nov: v81cf3 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf2 + R80e.124/125/126: comparar_extra.py (doble lectura de board-only / cielos / misc / demo), compuerta A_BARRIDO_NO_DIBUJADO en reglas.py (R-ALC-11 / BE-116: renglón en 0 / EXCLUDED por "no dibujado" sin barrido registrado en specs + schedule + hojas S = FALLA) con test_barrido_no_dibujado.py. verificar_version.py: 0 faltantes (425 acumuladas). Suite 31/31. Banco B&N rev13 / VS rev8 / Chuze FINAL: 0 familias distintas; la compuerta nueva no marca nada en B&N rev13.
 
-| Chick-fil-A #2284 River Point (vigente) | v81cf3 | 2026-11-02 | take-off-metal-frame-drywall_v81cf3_CFA-RiverPoint_2026-11-02.zip |
+| Chick-fil-A #2284 River Point | v81cf3 | 2026-11-02 | take-off-metal-frame-drywall_v81cf3_CFA-RiverPoint_2026-11-02.zip |
+| Victoria's Secret #679 Downey rev10 (vigente, línea unida) | v81cf4 | 2026-11-02 | take-off-metal-frame-drywall_v81cf4_VS-Downey-rev10-unida_2026-11-02.zip |
 **02-nov: v80z5** = v80z4 + R80e.124 (conflicto plano vs spec = manda el plano con nota de verificación, R-ALC-10; usg_grid channel_molding false; ALC-08 acepta 1/2" MR). Suite 5/5.
 
 | Victoria's Secret #679 Downey rev9 (0 RFI abiertos) | v80z5 | 2026-11-02 | take-off-metal-frame-drywall_v80z5_VS-Downey-rev9_2026-11-02.zip |
+
+**02-nov: v81cf4 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf3 + delta VS v80z5 (R80e.124 de VS renumerada R80e.128: usg_grid channel_molding false, ALC-08 acepta 1/2" MR) + VS rev10 R80e.127 (R-ALC-11 / BE-VS-10: compuerta A_NO_DIBUJADO sobre cierres de RFI; familias EMT compression strut 1.5" / 1.25" dia x 20 GA (K/A12.02), stick 10 ft) + arreglo: referencias/INDICE_REGLAS_ACUMULADAS.md sin encabezado (en v81cf3 hacía fallar reglas.py compuerta por 'regla sin clasificar'). Suite 31/31. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas contra v81cf3; VS rev10 con v81cf4 = 0 distintas contra la corrida VS. verificar_version.py: 0 faltantes (428).
