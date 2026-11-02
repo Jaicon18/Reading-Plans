@@ -46,3 +46,7 @@ Para TODOS los proyectos:
 ## R-ALC-09 — Hoja de datos del proyecto + hojas obligatorias revisadas (usuario, 2026-11-02; TODOS los proyectos)
 - Arriba de todo en README_REVIEW.md y PARA_REVISAR, y en Inputs del Excel como renglones informativos (debajo de las filas fijas; sin hojas ni columnas nuevas): nombre y ciudad, dirección, tipo de proyecto, owner / tenant, arquitecto, GC, fecha de bid y bid set, SF total, pisos, Construction Classification, Occupancy Group, códigos (año), occupancy load, sprinklered, demo sí / no, specs en el set sí / no — cada dato con su HOJA o [PENDIENTE].
 - Confirmar las hojas obligatorias revisadas (portada / índice, code analysis / G, notas generales, demo + notas, specs, partition types + detalles, floor plans, RCP, elevaciones / secciones, enlarged / elevaciones interiores, schedules, estructurales, MEP) y listar cualquiera no revisada.
+
+## R-ALC-10 — Conflicto plano vs spec / código: manda el PLANO (usuario, 2026-11-02; TODOS los proyectos)
+- Se carga lo del PLANO (opción A) y el renglón lleva una nota: "Estimator decision (option A, drawings govern). Spec / code says <…> (sección / párrafo); delta <…>. Verify at <N/HOJA> and spec <sección>" — con la hoja y la sección exactas donde ir a investigar.
+- El RFI se cierra como "estimator decision (option A)" y la nota aparece en Pending / Scope Checklist, SEGUIMIENTO y PARA_REVISAR.
