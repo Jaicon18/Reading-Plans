@@ -26,4 +26,4 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 10e | rev3: arreglos de tool (v81cf8, 4 tests) + J-trim + textos | 15:13 | 15:26 | 13 min |
 | 11b | Back-check rev3 PASS + compuertas finales (REGLAS OK 845/0, BITACORA OK, ETAPAS PASA) + skill v81cf8 archivada | 15:26 | 15:29 | 3 min |
 | 10 | Subida a Drive (Claude outputs, 21 archivos, tamaños verificados = chequeo 8 PASS) | 15:29 | 15:32 | — |
-| **TOTAL** | **Arranque → entrega en Drive** | **12:12** | **15:32** | **≈ 3 h 25 min** |
+| **TOTAL** | **Arranque → entrega en Drive** | **12:12** | **15:32** | **3 h 20 min** |
