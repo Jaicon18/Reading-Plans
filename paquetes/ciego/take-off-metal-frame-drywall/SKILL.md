@@ -91,6 +91,14 @@ Inputs, cadena de head. (5) `etapas.py unir` valida bandas, tipos de clave, `pag
    NUEVO / CAMBIADO / QUITADO (rc 3): se baja lo nuevo, se sube a Drive, se dice al usuario qué cambió y se rehace
    lo que afecte; nunca se entrega sobre un set viejo sin decirlo.
 
+## Etapa 0a — REGLAS FIJAS DEL USUARIO PRIMERO (todo proyecto; error Chuze 2026-11-02)
+
+Antes de bajar planos o leer nada: `git fetch origin claude/gifted-pasteur-x2sfzs` y leer completos
+`cache_proyectos/REGLAS_USUARIO_CLAUDE.md`, `REGLAS_ALCANCE.md`, `REGLAS_PLAN_ROOM.md` y `BIBLIOTECA_ERRORES.md` de esa rama
+(fuente de verdad de las decisiones del estimador: tornillería EXCLUDED, ductos EXCLUDED, blocking 3' x 2 filas, madera
+EXCLUDED, plan room solo lectura, etc.). El skill arranca del MEJOR archivado en `skills_archivo/INDICE.md` de esa rama.
+Una sesión que arrancó en otra rama sin leerlas cargó tornillería y ductos que el estimador excluye siempre.
+
 ## Etapa 0b — HOJAS QUE SE LEEN (regla general, todo proyecto; usuario 2026-11-01, Chuze)
 
 1. **Las G (General Information) se leen SIEMPRE, completas:** cover (alcance, código, tipo de alteración, keynote
