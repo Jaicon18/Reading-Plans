@@ -1,0 +1,577 @@
+{
+ "project": "Chuze Fitness Austin Bluffs",
+ "date": "2026-11-02",
+ "deliverable": "/tmp/chuze/work/etapas/5_entrega/Chuze_AustinBluffs_Takeoff_FINAL.xlsx (read-only)",
+ "sections_read": {
+  "01 10 00 Summary": "p37-40",
+  "01 25 00 Substitution Procedures": "p42-45",
+  "01 35 16 Alteration Project Procedures": "p77-82",
+  "01 60 00 Product Requirements": "p101-105",
+  "05 40 00 Cold-Formed Metal Framing": "p324-333",
+  "05 50 00 Metal Fabrications": "p335-345",
+  "06 10 53 Misc. Rough Carpentry": "p364-367",
+  "06 16 00 Sheathing": "p369-373",
+  "07 21 00 Thermal Insulation": "p378-380",
+  "07 92 00 Joint Sealants": "p424-429",
+  "09 22 16 Non-Structural Metal Framing": "p492-498",
+  "09 29 00 Gypsum Board": "p500-504",
+  "09 30 13 Tiling": "p506-512",
+  "09 51 23 Acoustical Tile Ceilings": "p514-518"
+ },
+ "sections_not_in_manual": [
+  "05 41 00",
+  "09 21 16",
+  "07 84 00 (referenced by 01 10 00 1.8.D.9 but absent)",
+  "06 10 00"
+ ],
+ "plan_sheets_crosschecked": [
+  "G001 p1",
+  "G002 p2",
+  "G003 p3",
+  "G004 p4",
+  "G005 p5",
+  "A010 p13 (note 27)",
+  "A103 p16",
+  "A121 p18",
+  "A301 p21",
+  "A421.A p23",
+  "A502 p60",
+  "A504 p65",
+  "A610 p71",
+  "S100-S300 p73-76"
+ ],
+ "material_rows": [
+  {
+   "row": "Bottom track 3-5/8\"",
+   "spec": "09 22 16 2.2.A.1-2, 2.2.B, 3.2.D; 05 40 00 2.6.B",
+   "finding": "ASTM C645 track, G40 hot-dip galvanized, depth per drawings, gauge = stud (Excel: track gauge = stud gauge). Min. base steel 0.0147\" (25 ga EQ) satisfied. Track gauge on the 16+1 type-A walls follows RFI-S01.",
+   "cls": "CONSISTENT",
+   "delta": "0 (gauge of 233.48 + 20.13 LF follows RFI-S01)"
+  },
+  {
+   "row": "Bottom track 6\" - per source",
+   "spec": "09 22 16 2.2.A-B",
+   "finding": "C645, G40, gauge = stud. A6C 16.15 LF gauge follows RFI-S01.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Bottom track 6\" - 600T250-54",
+   "spec": "05 40 00 2.3.B, 2.6.B; S200 C",
+   "finding": "Structural designation (54 mil, S200 C) = 05 40 00 framing: ASTM A1003 Structural Grade, Type H, coating G60 (not G40). Track unpunched, matching stud thickness.",
+   "cls": "APPLY",
+   "delta": "product only: specify G60 / A1003 structural on 22.41 LF; qty 0"
+  },
+  {
+   "row": "Bottom track 2-1/2\"",
+   "spec": "09 22 16 2.2.A-B",
+   "finding": "B2E furring track, C645 G40, gauge = stud. Furring studs are restrained by the Z-girt / existing CMU (B/A301), so free-span limiting height does not govern.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Top track 3-5/8\" - standard (walls not reaching structure)",
+   "spec": "09 22 16 2.2.B, 3.2.D",
+   "finding": "Standard runner where partitions terminate at/above suspended ceiling (3.2.D \"except where partitions are indicated to terminate at suspended ceilings\"). Head C kickers carry the lateral load (05 40 00 3.5.G stud kickers; RFI-36).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Top slip / deflection track 6\" (2\" deflection leg, walls to structure)",
+   "spec": "09 22 16 2.2.C.1, 3.2.D.1; D/A301, E/A301",
+   "finding": "Slip-type head joint where framing extends to structure: single long-leg track, 2\" flanges, thickness not less than studs -> matches D/A301 \"2\" SLIP TRACK\". The bridging row the spec ties to this track is charged to the C.R. bracing row (APPLY there).",
+   "cls": "CONSISTENT",
+   "delta": "0 (see C.R. bracing row)"
+  },
+  {
+   "row": "Top track 6\" - standard (walls not reaching structure) - per source",
+   "spec": "09 22 16 2.2.B, 3.2.D",
+   "finding": "Standard runner, C645 G40.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Top track 6\" - standard (walls not reaching structure) - 600T250-54",
+   "spec": "05 40 00 2.3.B, 2.6.B; S200 C",
+   "finding": "Structural track (S200) = 05 40 00: A1003 structural, G60.",
+   "cls": "APPLY",
+   "delta": "product only: G60 / A1003 on 22.41 LF; qty 0"
+  },
+  {
+   "row": "Top slip / deflection track 3-5/8\" (2\" deflection leg, walls to structure)",
+   "spec": "09 22 16 2.2.C.1, 3.2.D.1",
+   "finding": "As 6\" slip track. Gauge on type-A walls follows RFI-S01.",
+   "cls": "CONSISTENT",
+   "delta": "0 (see C.R. bracing row; gauge per RFI-S01)"
+  },
+  {
+   "row": "Top slip / deflection track 2-1/2\" (2\" deflection leg, walls to structure)",
+   "spec": "09 22 16 2.2.C.1, 3.2.D.1; E/A301",
+   "finding": "B2E to deck with 2\" slip track (RFI-02).",
+   "cls": "CONSISTENT",
+   "delta": "0 (see C.R. bracing row)"
+  },
+  {
+   "row": "2-1/2\" stud",
+   "spec": "09 22 16 2.2.A-B, 2.2.B.2",
+   "finding": "C645 G40, 16\" o.c. (RFI-04/32), furring restrained by Z-girt to existing CMU (B/A301) - deflection not free-span.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "6\" metal stud (LF of material) - per source",
+   "spec": "09 22 16 2.2.B.2; 05 40 00 1.1.A.3; S100 (5 psf interior lateral)",
+   "finding": "Spec: thickness \"as required by performance requirements for horizontal deflection\"; framing taller than non-structural limiting heights belongs to 05 40 00. A6C A-A422-3 / A-A422-4 at 22.83 ft in 25 ga (600S125-18) exceed L/240 at 5 psf (~19.9 ft gross-section upper bound). The A6D / X6D 6\" 20 ga walls at 22.83 ft are marginal (~24.3 ft gross section), so check them against the manufacturer tables. This contradicts the RFI-04 gauge assumption -> RFI-S01.",
+   "cls": "CONFLICT",
+   "delta": "RFI-S01: 388.11 LF 25 ga -> 20 ga (A) or no change (B, L/120)"
+  },
+  {
+   "row": "6\" metal stud (LF of material) - 600S162-33",
+   "spec": "05 40 00 2.3.B, 2.4-2.6; 2/A131",
+   "finding": "RTU curb-cap frame printed as structural member 600S162-33 -> 05 40 00: A1003 Structural Grade (33 ksi for 33 mil), coating G60.",
+   "cls": "APPLY",
+   "delta": "product only: G60 / A1003 on 432 LF; qty 0"
+  },
+  {
+   "row": "3-5/8\" metal stud (LF of material)",
+   "spec": "09 22 16 2.2.B.2; 05 40 00 1.1.A.3, 2.3.B, 3.5.E-F; A301 type notes (S501 not in set); A2/A301 \"MIN. 25 GA\"; S100 5 psf",
+   "finding": "16 free-standing type-A walls (A2-3D x3, A3C x13) run 22.83 ft to deck in 25 ga 362S125-18. That cannot meet L/240 (~13.4 ft) or L/120 (~16.9 ft) at 5 psf. A-A421-15 (14.42 ft) fails L/240 only. The spec makes the member a performance item (05 40 00 for heights beyond non-structural limits). This contradicts the RFI-04 assumption (25 ga) -> RFI-S01. Furring types C3C/C3D (22.83 ft) also exceed free-span limits: their brace to the existing construction is not detailed (note in RFI-S01).",
+   "cls": "CONFLICT",
+   "delta": "RFI-S01 A: 7,115.29 LF -> 362S162-54 @ 12\" o.c. (+2,371.6 LF net) + 259.56 LF -> 20 ga; B: 7,115.29 LF -> 362S162-43 @ 16\", 0 LF"
+  },
+  {
+   "row": "Ceiling perimeter track at GWB ceilings (size not printed, RFI)",
+   "spec": "09 22 16 3.2.D; A502 \"METAL CHANNEL\"/\"TOP TRACK\"",
+   "finding": "Plan-printed member at soffit / ceiling junctions (A502). The 09 51 23 KAM molding is a different location (wall perimeter of the grid). No overlap found.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Bracing 1-1/2\" C.R. channel",
+   "spec": "09 22 16 2.2.F (0.053\", 1/2\" flanges), 2.2.C.1 (\"continuous bridging located within 12 inches of the top of studs\"); 05 40 00 3.5.E-F",
+   "finding": "The member matches 2.2.F (16 ga C.R.C.). Rows = ROUNDUP(H x 12/48) - 1 leaves the top row 2.8-3.8 ft below the head of every 22.83 ft slip-track wall. 2.2.C.1 adds a continuous row within 12\" of the top of studs at the single long-leg (2\") slip track: +1 row on every slip-track wall.",
+   "cls": "APPLY",
+   "delta": "+910.70 LF net (409.44 + 397.30 + 103.96 slip-track LF); +1,047.31 LF purchase = +66 sticks 16 ft (388 -> 453). Alt.: proprietary deflection track (2.2.C.2) on 910.70 LF instead, 0 LF bracing"
+  },
+  {
+   "row": "Hanger wire",
+   "spec": "09 51 23 3.2.A (ASTM C636), 2.6 schedule; 09 22 16 1.1.A.2, 2.3.C (0.16\" dia.); RCP note 9 A121/A421.A; 13/A502",
+   "finding": "Plan: #12 ga @ 4'-0\" (C-5 is tagged 09 51 23, which only invokes ASTM C636 = 12 ga). 09 22 16 covers \"suspension systems for interior ceilings\" with 0.16\" (~8 ga) wire hangers. Which section governs the C-5 GWB ceiling cannot be settled -> RFI-S02.",
+   "cls": "CONFLICT",
+   "delta": "RFI-S02: 0 LF; product 12 ga vs 0.16\" on 2,428.49 LF"
+  },
+  {
+   "row": "5/8\" gypsum board, MOISTURE RESISTANT",
+   "spec": "09 29 00 2.3.E",
+   "finding": "Spec MR board = 5/8\" Type X core, mold resistance ASTM D3273 score 10, consistent with RFI-05 decision (\"Type X MR\"). Buy as Type X MR (row label omits \"Type X\").",
+   "cls": "CONSISTENT",
+   "delta": "0 (label: Type X MR)"
+  },
+  {
+   "row": "5/8\" gypsum board, Type X",
+   "spec": "09 29 00 2.3.A, 2.3.B (flexible board \"to bend to fit radii\"), 3.1.B (ASTM C840); 16/A502 reception arc",
+   "finding": "Type X 5/8\" tapered = spec. The reception soffit side A-A421.A-1 (16/A502, 62.2 LF arc, 673.63 SF) is curved. No radius is printed (grid bounding box 22.5 x 27.83 ft suggests R ~11-14 ft), which is below the dry-bend limit of 5/8\" board (~25 ft lengthwise, USG/GA). Spec provides 1/4\" flexible board for radii -> 2 layers 1/4\" flexible on that face. Also noted: 2.3.C 1/2\" ceiling board exists in spec, but RFI-05 (5/8\" Type X everywhere) stands.",
+   "cls": "APPLY",
+   "delta": "-673.63 SF Type X (-714 SF purch., ~-15 sh 4x12); +1,347.26 SF 1/4\" flexible (2 layers; +1,428 SF purch., ~45 sh 4x8). Conditional on actual radius"
+  },
+  {
+   "row": "5/8\" gypsum board, Type X W.R. (water resistant)",
+   "spec": "A301 type notes (DensArmor Plus 5/8\"); 09 29 00 (no interior glass-mat article); 09 30 13 2.5.B (glass-mat C1178 as tile backer)",
+   "finding": "Plan names DensArmor Plus 5/8\" at pool/spa rooms. The spec is silent on interior glass-mat panels, so the plan governs. Buy DensArmor Plus Fireguard (Type X) per RFI-30.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Armstrong HD8906 drywall grid main tee (heavy-duty main runner, spec 09 51 23)",
+   "spec": "09 51 23 2.3, 2.6 schedule (HD8906); 01 60 00 2.x sole manufacturer",
+   "finding": "Exact schedule product. Armstrong is the national-account (sole) manufacturer. Inputs/RFI-33 text says \"USG DGLW26\" - label only (12 ft length identical).",
+   "cls": "CONSISTENT",
+   "delta": "0 (fix Inputs label USG -> Armstrong)"
+  },
+  {
+   "row": "Armstrong XL8945P drywall grid cross tee (spec 09 51 23)",
+   "spec": "09 51 23 2.6 schedule (XL8945P 48\")",
+   "finding": "Exact schedule product, 4 ft. Spacing 16\" o.c. is not set by the spec (Armstrong installation).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Armstrong KAM151220E knurled angle molding at the C-5 perimeter (spec 09 51 23)",
+   "spec": "09 51 23 2.5, 2.6 schedule",
+   "finding": "Exact schedule product (22 ga x 12 ft x 1-1/2\").",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Armstrong SC151220EQ curved perimeter molding at the reception circle (spec 09 51 23)",
+   "spec": "09 51 23 2.6 schedule",
+   "finding": "Exact schedule product (SimpleCurve).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Cement board screws 1-1/4\" (manufacturer spacing)",
+   "spec": "09 29 00 2.8.B.2",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "#10 framing screws - printed stud-to-track fastener (see Where it comes from)",
+   "spec": "05 40 00 2.8.E",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Deep-leg slotted deflection track - printed product (see Where it comes from)",
+   "spec": "05 40 00 2.6.D; 09 22 16 2.2.C.2; 1/A506",
+   "finding": "16 ga x 4\" legs at the roof hatch (1/A506) = deep-leg deflection track. As 05 40 00 member (16 ga, 54 mil): A1003 structural, G60.",
+   "cls": "APPLY",
+   "delta": "product only: G60 on 11 LF; qty 0"
+  },
+  {
+   "row": "Metal stud blocking at wall-mounted items (notes)",
+   "spec": "09 22 16 3.1.C; 05 40 00 3.3.H; G004 \"solid backing for grab bars\"; A103",
+   "finding": "Supplementary framing / blocking for fixtures, grab bars, toilet accessories required. A103 governs backing type (metal track / strap loaded, FRT wood excluded by rule). R-ALC-02 applied.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "METAL trim - corner bead, casing bead, shadow molding, gypsum edge trim - corner bead",
+   "spec": "09 29 00 2.6.A.1-2 (ASTM C1047, galv. steel; 2.6.A.2.g \"Curved-Edge Cornerbead: with notched or flexible flanges\")",
+   "finding": "Galvanized C1047 cornerbead = spec. The 62.2 LF at the bottom of the curved reception soffit (A-A421.A-1, 16/A502) must be curved-edge (flexible-flange) cornerbead.",
+   "cls": "APPLY",
+   "delta": "product split: 62.2 LF of 441.22 LF -> curved-edge cornerbead; qty 0"
+  },
+  {
+   "row": "METAL trim - corner bead, casing bead, shadow molding, gypsum edge trim - gypsum edge trim",
+   "spec": "09 29 00 2.6.A.2.d (L-Bead), 3.1.C (edge trim at structural abutments)",
+   "finding": "L-bead where board stops short of deck / at slip heads, and head F metal edge, match the spec shapes. Plan \"J-METAL EDGE TRIM\" (head A/A301) belongs to an unused head detail (no type calls head A).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "5/8\" cement backer units behind tile (A301 type notes; spec 09 29 00 2.5)",
+   "spec": "09 29 00 2.5 (ANSI A118.9, C1288/C1325, 5/8\", D3273 score 10); 09 30 13 2.5.A (C1325 Type A, 5/8\"); 06 16 00 2.4.C",
+   "finding": "Product and thickness match (RFI-06 decision). Mold-resistance score 10 limits brands (Custom / GP / USG listed in 09 30 13 2.5.A). Joint treatment of the backer has no row (see NO-ROW N1).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Control joint, gypsum board walls (ASTM C840, 30 ft max)",
+   "spec": "09 29 00 2.6.A.2.f (interior expansion/control joint, C1047); A010 note 27; RCP note 6",
+   "finding": "Spec gives the product but no spacing. Plan note 27 (30 ft) governs walls. Ceiling joints \"as indicated in specifications\": spec silent -> ASTM C840 (applied in row).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Hanger wire 12 ga - hanger count (one per hanger, height per room)",
+   "spec": "see Hanger wire row",
+   "finding": "Same issue as hanger wire LF -> RFI-S02.",
+   "cls": "CONFLICT",
+   "delta": "RFI-S02: 187 hangers, gauge only"
+  },
+  {
+   "row": "Additional head track at openings over 4'-0\" wide",
+   "spec": "09 22 16 3.2.D.2-3 (track section at head for cripples; 2 studs per jamb, jamb studs to structure)",
+   "finding": "Canon counts 4 jamb studs per opening (2 each side) at full height, matching 3.2.D.2.a-b. The head track for cripples is covered by the bottom track not deducted at the 18 openings (~84.7 LF of R.O.). Headers are steel by others (RFI-12).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Stud reinforcement at MEP penetrations",
+   "spec": "05 40 00 3.2.H; 09 22 16 3.2.D",
+   "finding": "Hole-reinforcing plates only for oversize web cuts. Duct openings EXCLUDED (R-ALC-03).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Extra framing - ATM recess (only what a detail prints at the recess; the wall stays in its type)",
+   "spec": "-",
+   "finding": "Not applicable (no ATM).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "2-1/2\" CFMF @ 16\" O.C. at coiling grille head (detail per plans)",
+   "spec": "- (08 33 30 present, no grille on plans)",
+   "finding": "Not applicable.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Gypsum board jamb return at openings",
+   "spec": "09 29 00 3.1",
+   "finding": "Estimator decision (0 SF); spec adds nothing.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "PVC trim - edge trim molding and inside corner molding at the FRP",
+   "spec": "-",
+   "finding": "FRP = other trade (excluded).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Power-driven fasteners and duct sleeves",
+   "spec": "09 22 16 3.2.E.2; 05 40 00 2.8.D",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Access panel 24\"x24\"",
+   "spec": "01 10 00 1.8.D.9 (refers to 08 31 00, not in this sweep)",
+   "finding": "Plan-printed (A131 A4.10); no 09 2x requirement.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",
+   "spec": "09 29 00 2.8.B (C1002 / C954)",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs)",
+   "spec": "09 22 16 2.4.A.1",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Power-driven fasteners, slab pins for the bottom track",
+   "spec": "09 22 16 2.4.A.1; 05 40 00 2.8.D",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C.",
+   "spec": "05 40 00 2.8.C; 09 22 16 2.3.B",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Joint compound, all purpose",
+   "spec": "09 29 00 2.7.C.1-4 (setting-type taping compound for prefill / embedding / first coat; setting-type sandable topping for fill and finish coats), 3.1.G.1-3 (Level 1 at plenum / concealed areas, Level 2 tile substrate, Level 4 exposed)",
+   "finding": "Spec requires SETTING-TYPE compounds for every coat, so an all-purpose ready-mix product does not comply. Finish levels by area also cut the quantity: board above ceilings / concealed = Level 1 (tape embedded, no fill/finish coats). The Excel applies one Level-4 yield (0.072 lb/SF) to all 65,388.8 SF.",
+   "cls": "APPLY",
+   "delta": "Product: all-purpose -> setting-type (taping + sandable topping), 4,708 lb max (weight basis to re-check with supplier yield). Qty: Level 1 share est. 40-55% of board -> -1,256 to -1,726 lb (0.072 x 2/3 x share x 65,388.8)"
+  },
+  {
+   "row": "Joint tape, paper",
+   "spec": "09 29 00 2.7.B.1-2",
+   "finding": "Paper tape for interior board = spec. Tile-backer joints need different tape (NO-ROW N1).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Level 5 finish",
+   "spec": "09 29 00 3.1.G.4 (\"where indicated\"); A610 P-17",
+   "finding": "P-17 (Level 5) is applied to no surface -> 0 = spec.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Deflection clips at non-load-bearing walls to structure",
+   "spec": "05 40 00 2.6.C-F, 3.5.D (track OR clips options); 09 22 16 2.2.C",
+   "finding": "Plan draws 2\" slip track. Clips are only an alternative.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Heavy-gauge framing screws #10-16 x 3/4\" pan head (18/16/14 ga studs)",
+   "spec": "05 40 00 2.8.E",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "row": "Type S-12 drywall screws #6 x 1-1/4\" (board on 18/16/14 ga studs)",
+   "spec": "09 29 00 2.8.B.1 (C954)",
+   "finding": "Row EXCLUDED by estimator standing rule 2026-10-31 (all fasteners = 0, no RFI); spec lists it, no change.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  }
+ ],
+ "no_row_items": [
+  {
+   "id": "N1",
+   "item": "Alkali-resistant glass-fiber mesh tape (2\") at cement backer joints",
+   "spec": "09 29 00 2.7.B.4, 2.7.E.2, 3.1.I; 09 30 13 3.3.K (ANSI A108.11)",
+   "finding": "Backer units are ours (RFI-06) and their joints must be treated per the manufacturer (AR mesh + thinset). There is no row: tape row covers 65,388.8 SF of gypsum only.",
+   "delta": "+447.6 LF net (1,209.77 SF x 0.37 LF/SF) / +474.5 LF purchase (6%) = 4 rolls 150 ft"
+  },
+  {
+   "id": "N2",
+   "item": "1/4\" flexible gypsum board, 2 layers, curved reception soffit side",
+   "spec": "09 29 00 2.3.B; 16/A502",
+   "finding": "See Type X row (APPLY). New product row needed if the radius is under the 5/8\" bend limit.",
+   "delta": "+1,347.26 SF net (+1,428 SF purch.) with -673.63 SF 5/8\" Type X"
+  },
+  {
+   "id": "N3",
+   "item": "Armstrong DW90CAG 90-degree drywall clip and SB12P drywall support hanger",
+   "spec": "09 51 23 2.6 schedule",
+   "finding": "Listed in the product schedule with the four loaded grid items. Plans show no grid-formed vertical transitions (soffits are stud-framed per A502), so no count is printed.",
+   "delta": "TBD - allowance; 0 if field confirms no grid-formed 90-degree transitions"
+  },
+  {
+   "id": "N4",
+   "item": "Foam-gasket / felt isolation strip where studs bear on exterior masonry or dissimilar metals",
+   "spec": "09 22 16 2.4.B, 3.2.B",
+   "finding": "B2E: Z-girt + rigid insulation separate studs from CMU (n/a). C3D furring \"at existing storefront\" (A-A422-6, A-A431-1/-2, 34.20 LF) is against aluminum storefront at the exterior wall if in contact (verify).",
+   "delta": "0 to +68.40 LF (top + bottom track contact line of 34.20 LF); up to 684.9 LF if every stud bears"
+  },
+  {
+   "id": "N5",
+   "item": "Sealer gasket (1/4\" closed-cell) under 05 40 00 bottom track on slab",
+   "spec": "05 40 00 2.9.E, 3.1.D",
+   "finding": "Applies to 05 40 00 framing: the D6F 600T250-54 bottom track (S200 C). More if RFI-S01 option A moves type-A walls to 05 40 00.",
+   "delta": "+22.41 LF (+269.76 LF more under RFI-S01 A)"
+  },
+  {
+   "id": "N6",
+   "item": "Galvanizing repair paint",
+   "spec": "05 40 00 2.9.A, 3.8.A",
+   "finding": "Touch-up of cut / welded G60 members.",
+   "delta": "allowance (1 can)"
+  },
+  {
+   "id": "N7",
+   "item": "Tie wire 0.062\" (CRC bracing / furring ties)",
+   "spec": "09 22 16 2.2.F.3, 2.3.A, 3.3.D",
+   "finding": "Consumable for wire-tied C.R. channel. Not a fastener, so it is not covered by the exclusion.",
+   "delta": "allowance (~1 coil per 2,000 LF CRC)"
+  },
+  {
+   "id": "N8",
+   "item": "Temporary dust / noise-control partitions",
+   "spec": "01 35 16 1.5.A.1, 3.1.A.5/8; 01 10 00 1.5 (full Owner occupancy)",
+   "finding": "Required by Div. 01 for alteration work. Normally GC general conditions, and none are drawn.",
+   "delta": "TBD (not loaded; confirm GC carries it)"
+  },
+  {
+   "id": "N9",
+   "item": "Texture finishes (polystyrene / orange peel)",
+   "spec": "09 29 00 1.1.A.4, 2.9, 3.2",
+   "finding": "Section includes texture, but no texture is indicated on any sheet (A610/A611, RCP).",
+   "delta": "0 (N/A)"
+  },
+  {
+   "id": "N10",
+   "item": "Firestop track",
+   "spec": "09 22 16 2.2.D, 3.2.D.4.a (\"where indicated\")",
+   "finding": "Not indicated. X6D head uses a continuous C track (X/A301); head-of-wall firestop = 07 84 00 (not in manual, other trade).",
+   "delta": "0"
+  },
+  {
+   "id": "N11",
+   "item": "Steam-room integrated mockups (~50 SF each) built under 09 29 00",
+   "spec": "09 30 13 1.5.A.1",
+   "finding": "No steam room on A101/A121 room names (A504 3 not called; A610 P-18 refers to CMU walls).",
+   "delta": "0 (N/A)"
+  },
+  {
+   "id": "N12",
+   "item": "Sound-attenuation blankets; acoustical sealant; Z-furring; thermal insulation",
+   "spec": "09 29 00 2.8.C-D, 3.1.C; 09 51 23 3.2.B.1; 09 22 16 2.2.G, 3.2.F; 07 21 00",
+   "finding": "Excluded trades / items per standing rules (insulation, acoustical sealant) and RFI-34 (Z-girt). Noted only.",
+   "delta": "0 (EXCLUDED)"
+  },
+  {
+   "id": "N13",
+   "item": "Fasteners (drywall / framing screws, PAF, anchors, hanger attachments)",
+   "spec": "09 22 16 2.3.B, 2.4.A.1; 09 29 00 2.8.B; 05 40 00 2.8.B-E; 06 16 00 2.7",
+   "finding": "Spec lists them; estimator standing rule 2026-10-31 keeps ALL fasteners EXCLUDED.",
+   "delta": "0 (EXCLUDED)"
+  }
+ ],
+ "div01": [
+  {
+   "spec": "01 10 00 1.3 / 1.5 / 1.6",
+   "item": "Single prime contract; full Owner occupancy; work hours 6:00a-8:00p M-F; no phasing text beyond the 1.1 heading.",
+   "finding": "No material quantity effect (labor/schedule only).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "spec": "01 10 00 1.8",
+   "item": "Delegated design limited to fire sprinklers, pool, 03 10 00 formwork. CFMF is not delegated (05 40 00 requires shop drawings 1.2.B only). 09 51 23 1.3.B/2.1.A delegated seismic for ceilings: SDC B (S100) and A502 note -> no seismic bracing.",
+   "finding": "Supports RFI-S01: the member choice is not covered by a delegated engineer, so the estimator must price it.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "spec": "01 25 00 / 01 60 00 2.x",
+   "item": "09 22 16 ClarkDietrich = non-limited list (any C645 product certified per 1.4.A). 09 51 23 Armstrong = National Account / sole manufacturer. No substitution for convenience.",
+   "finding": "Excel rows already Armstrong; Inputs/RFI-33 text says USG (label only).",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "spec": "01 35 16 1.2.G-H, 3.1.B.1",
+   "item": "Definitions Repair vs Replace; \"do not remove existing materials unless otherwise indicated\".",
+   "finding": "Existing-wall faces: estimator standing decision 2026-11-02 (full face replacement where AD101 D0.07 / D0.52) stands; spec does not contradict it (removal is indicated by keynote). Demolition = our scope per R-ALC-04.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "spec": "Alternates / owner-furnished / work by others",
+   "item": "No 01 23 00 Alternates section in the manual; G001 lists \"ALT\" only as an abbreviation. G002 responsibility schedule: owner/vendor items with \"CONTRACTOR TO PROVIDE BLOCKING AS REQUIRED\" (covered by A103 blocking row). Sauna C-6 cedar by vendor.",
+   "finding": "No alternate to price.",
+   "cls": "CONSISTENT",
+   "delta": "0"
+  },
+  {
+   "spec": "01 35 16 1.5.A.1",
+   "item": "Temporary dust/noise partitions (see N8).",
+   "finding": "Not loaded; GC general conditions.",
+   "cls": "CONSISTENT",
+   "delta": "TBD"
+  }
+ ],
+ "rfis": [
+  {
+   "id": "RFI-S01",
+   "title": "Stud gauge / limiting height of free-standing partitions to deck (22'-10\")",
+   "rows": [
+    "3-5/8\" metal stud (LF of material)",
+    "6\" metal stud (LF of material) - per source",
+    "(track gauge of the same walls)"
+   ],
+   "question": "A301 refers stud size/gauge/max height to S501 (not in the set); A2/A301 prints \"MIN. 25 GAUGE @ 16\" O.C.\"; RFI-04 assumed 25 ga for head C walls and 20 ga for head D/E. Spec 09 22 16 2.2.B.2 makes thickness a horizontal-deflection performance item and 05 40 00 1.1.A.3 moves framing taller than non-structural limits into 05 40 00 (A1003 structural, G60, bridging <=48\" with top row and clip angles). At 5 psf (S100), a 3-5/8\" 25 ga stud spans ~13.4 ft (L/240) / ~16.9 ft (L/120). The 16 type-A walls run 22.83 ft, so the spec and the RFI-04 assumption cannot both hold. Which member governs?",
+   "walls": "A2-3D: A-A422-5, A-A426-5, A-A426-6; A3C: A-A422-2, A-A423-6, A-A424-1/-2/-3, A-A425-1/-2/-3/-4/-5, A-A426-1, A-A435-2, A-A435-3 (233.48 LF of wall, 7,115.29 LF of 3-5/8\" stud); A-A421-15 (14.42 ft, 259.56 LF stud); A6C A-A422-3/-4 (6\" 25 ga, 388.11 LF stud). A6D/X6D 6\" 20 ga at 22.83 ft are marginal (~24.3 ft gross) - verify.",
+   "A": "PLANS/SPECS (A301 type notes + A2/A301 \"MIN 25 GA\" as a minimum; spec 09 22 16 2.2.B.2 + 2.2.C.2 \"prevent cracking of finishes\" -> L/240 brittle-finish criterion; 05 40 00 1.1.A.3, 2.3.B, 3.5.E-F): upgrade to a member meeting L/240 at 5 psf. 7,115.29 LF 362S125-18 -> 362S162-54 (16 ga) @ 12\" o.c. (+2,371.6 LF net, +2,727.3 LF purchase = +137 sticks 20 ft). 259.56 LF (A-A421-15) -> 362S125-30 (20 ga) @ 16\". 388.11 LF A6C -> 600S125-30 (20 ga) @ 16\". Tracks of those walls to matching gauge (bottom 269.76 LF + top/slip 269.76 LF). 05 40 00 extras: G60/A1003, clip angle at each stud per bridging row (~2,500 clips est.), solid blocking @ 96\" in the top row, sealer gasket 269.76 LF.",
+   "B": "CODE (IBC 2021 1607.15 = 5 psf; IBC Table 1604.3 interior partitions L/120 flexible finish minimum; AISI S220 / ASTM C754 limiting-height tables): 7,115.29 LF -> 362S162-43 (18 ga) @ 16\" o.c. (gauge only, 0 LF). A-A421-15 and A6C pass at 25 ga (0). Tracks of the 16 walls to 18 ga (233.48 LF bottom + 233.48 LF top). Delta: gauge upgrade only, 0 LF.",
+   "C": "Other: estimator writes.",
+   "note": "Limiting heights computed from gross Ix (centerline C-section, E = 29,500 ksi, 5 psf, 16\" o.c.). These are UPPER bounds: manufacturer tables with effective Ix are lower, so every \"fails\" result stands and every \"passes\" result needs a check against ClarkDietrich / SSMA tables. Furring types C3C (A-A423-3, -9, A-A426-2, -3) and C3D (6 walls, 1,187.18 LF stud) also reach 22.83 ft. They are not free-standing if braced back to the existing construction, but that brace is not detailed - include in the same RFI."
+  },
+  {
+   "id": "RFI-S02",
+   "title": "Hanger wire gauge at C-5 suspended GWB ceilings",
+   "rows": [
+    "Hanger wire",
+    "Hanger wire 12 ga - hanger count"
+   ],
+   "question": "RCP general note 9 (A121, A421.A ... A435) and 13/A502 print #12 ga galvanized wire @ 4'-0\" o.c. The C-5 legend tags 09 51 23 (Armstrong drywall grid), which only invokes ASTM C636 (12 ga). But 09 22 16 1.1.A.2 covers \"suspension systems for interior ceilings and soffits\" with 2.3.C wire hangers 0.16\" dia. (~8 ga). Which governs the C-5 GWB ceilings?",
+   "A": "PLANS/SPECS: A-1 RCP note 9 / 13/A502 + 09 51 23 3.2.A -> #12 ga as loaded (2,428.49 LF, 187 hangers), delta 0. A-2 spec 09 22 16 2.3.C -> 0.16\" (8 ga) wire on the same 2,428.49 LF / 187 hangers: product upgrade, 0 LF.",
+   "B": "CODE: ASTM C636 / C635 and Armstrong drywall-grid installation: 12 ga (0.106\") @ 4'-0\" o.c. max -> as loaded, delta 0.",
+   "C": "Other: estimator writes.",
+   "note": "Low impact (wire gauge only). Recommended: A-1 (plan + section the RCP tags)."
+  }
+ ],
+ "counts": {
+  "CONSISTENT": 39,
+  "APPLY": 8,
+  "CONFLICT": 4
+ },
+ "counts_div01": {
+  "CONSISTENT": 6
+ }
+}
