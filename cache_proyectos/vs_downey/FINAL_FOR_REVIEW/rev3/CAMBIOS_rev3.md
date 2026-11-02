@@ -14,3 +14,4 @@ RFI-10 ahora solo pregunta el largo de corridas de cabinetry del break room y sh
 - RFI-15 eliminado 2026-11-02: ductos siempre EXCLUDED (regla fija R-ALC-03).
 - RFI-17 cerrado 2026-11-02: diagonales de head trusses 16 x 4'-0" = 64 LF 3-5/8" 20 ga (storefront estructural).
 - RFI-22 cerrado 2026-11-02: solo los 3 access panels del RCP; adicionales del landlord EXCLUDED (clarification).
+- RFI-25 cerrado por regla R-ALC-02: lockers 15 -> 36 LF, communication boards 24 -> 18 LF, signage 6 LF.
