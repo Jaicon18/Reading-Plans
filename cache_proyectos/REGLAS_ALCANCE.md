@@ -34,3 +34,15 @@ Para TODOS los proyectos:
 1. **Markup de línea a escala:** cada elemento de demo (partition, column enclosure, furring, board de demising, cielo) se marca en el demo plan con una LÍNEA (PolyLine Bluebeam con /Measure calibrado y Depth = altura), Subject "DEMO", color propio en la leyenda, etiqueta DEMO ID · LF · H · SF · keynote/hoja. PNG por hoja + markups PDF (tool markups_demo.py).
 2. **Alturas buscadas antes de suponer:** la altura de cada elemento demolido se busca en TODAS las hojas (notas generales y de demo, callouts de estructura / joists / beams, secciones y elevaciones existentes, RCP existente y nuevo, wall schedule (E), deck / bottom of structure, hojas S). Cada altura con #0: [CONFIRMADO N/HOJA] / [DERIVADO operación] / [PENDIENTE]. Solo si ninguna hoja la imprime: supuesto conservador + SEGUIMIENTO.
 3. **Cruce demo plan vs floor plan nuevo** wall por wall: existe y queda / se demuele / nuevo / diferencias (walls demolidas sin marcar, existentes que no aparecen en el nuevo, nuevas sobre demolidas, demising que se conservan). Con eso se confirma o corrige la lista de demo; cada diferencia con N/HOJA + recorte circulado.
+
+## R-ALC-07 — Altura de partitions existentes a demoler sin altura impresa (usuario, 2026-11-02, VS #679 Downey)
+- Se cargan **hasta el B.O. de estructura impreso** de su bahía (o el más cercano impreso: joists / beams / deck del demo plan o S), **nunca a un cielo supuesto**. Estado DERIVADO con la cota usada; se documenta el delta contra ±12'-0".
+
+## R-ALC-08 — Specs siempre revisadas (usuario, 2026-11-02, VS #679 Downey; TODOS los proyectos)
+- En cada proyecto se barre el project manual o las spec sheets del trade (05 40 00 / 05 41 00, 09 21 16, 09 22 16, 09 29 00, 07 84 00, 07 92 00, 06 10 00, Div. 01 alcance / alternates / unit prices, notas de spec en hojas G / A-001 / A15.xx).
+- Cada material cargado (gauge, depth / spacing, deflection track, board type / espesor, level of finish, trims / control joints, sealant, backing, demo) se cruza contra la spec y cita sección / párrafo en su fuente.
+- Lo que plano y spec permiten aplicar juntos se aplica; conflicto = RFI A/B/C con delta. Si el bid set no trae specs, se declara en el Scope Checklist.
+
+## R-ALC-09 — Hoja de datos del proyecto + hojas obligatorias revisadas (usuario, 2026-11-02; TODOS los proyectos)
+- Arriba de todo en README_REVIEW.md y PARA_REVISAR, y en Inputs del Excel como renglones informativos (debajo de las filas fijas; sin hojas ni columnas nuevas): nombre y ciudad, dirección, tipo de proyecto, owner / tenant, arquitecto, GC, fecha de bid y bid set, SF total, pisos, Construction Classification, Occupancy Group, códigos (año), occupancy load, sprinklered, demo sí / no, specs en el set sí / no — cada dato con su HOJA o [PENDIENTE].
+- Confirmar las hojas obligatorias revisadas (portada / índice, code analysis / G, notas generales, demo + notas, specs, partition types + detalles, floor plans, RCP, elevaciones / secciones, enlarged / elevaciones interiores, schedules, estructurales, MEP) y listar cualquiera no revisada.

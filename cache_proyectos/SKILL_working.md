@@ -2692,8 +2692,14 @@ Lecturas A y B en paralelo = subagentes dentro de la sesión del proyecto (herra
 
 ## R80e.118 — Demolición (usuario, 2026-11-02, todos los proyectos) — ver REGLAS_ALCANCE.md R-ALC-04/05/06
 Demo de gyp bd y metal framing = nuestro alcance; markup de línea a escala por elemento (markups_demo.py); alturas buscadas en todas las hojas antes de suponer; cruce demo plan vs floor plan nuevo; cielos existentes sin tipo indicado = EXCLUDED por falta de información.
+- R80e.119: R-ALC-07 (altura de demo = B.O. de estructura impreso).
+- R80e.120 (usuario, 02-nov, TODOS los proyectos): barrido de specs (project manual o spec sheets) y cruce de cada material cargado contra su sección / párrafo; conflicto = RFI A/B/C; sin specs = declararlo (R-ALC-08).
 
-## R80e.122 — Chick-fil-A #2284 (2026-11-02, todos los proyectos) — skill v80wCF (= v80wCH + R80e.116 demo + estas)
+### R80e.122 — HOJA DE DATOS DEL PROYECTO + hojas obligatorias (usuario 2-nov, INVIOLABLE, todos los proyectos; R-ALC-09; BE-114)
+PASO 1 produce `proyecto_datos.json` (nombre+ciudad, dirección, tipo de proyecto, owner/tenant, arquitecto, GC, fecha de bid, bid set, SF total, pisos, Construction Classification, Occupancy Group, códigos con año, occupancy load, sprinklered, demo sí/no, specs sí/no; cada dato con N/HOJA o [PENDIENTE]) y `hojas_revisadas.json` (lista obligatoria: portada/Drawing Index, Code Analysis/G, notas generales, Demolition Plan+notas, specs Div 05/09/07/06/01, Partition Types+detalles, floor plans, RCP+detalles, elevaciones/secciones, enlarged/elev. interiores, schedules finish/door/millwork/fixture, estructurales B.O.D., MEP; cada una "revisada N/HOJA" o "no existe en el set"). plantilla_excel los escribe como renglones informativos al inicio de Inputs (sin hojas ni columnas nuevas); README_REVIEW.md y PARA_REVISAR los ponen arriba de todo. reglas.py: compuerta que FALLA si falta cualquier campo o cualquier hoja obligatoria. No se entrega sin esta compuerta en verde.
+- R80e.121 (usuario, 02-nov, TODOS los proyectos): hoja de datos del proyecto (takeoff.json proyecto_datos [{campo, valor, fuente}] + hojas_revisadas) en README / PARA_REVISAR y en Inputs (plantilla_excel, debajo de las filas fijas) (R-ALC-09).
+
+## R80e.123 — Chick-fil-A #2284 (2026-11-02, todos los proyectos) — skill v80wCF (= v80wCH + R80e.116 demo + estas)
 1. Copia limpia: las anotaciones "AutoCAD SHX Text" son texto del dibujo (en hojas MEP vectorizadas es el único texto). Se quitan SOLO markups de personas; se guarda una 2.ª copia con SHX para el barrido MEP (BE-CF01).
 2. inventario_tags.py: types con decimal (W4.1, M3.5, M2.1), schedule dentro de una hoja de planta ("WALL TYPE SCHEDULE" en la página) y encabezado MARK además de TYPE (BE-CF02).
 3. Familia nueva "1/2\" gyp board" (board key "1/2 regular") en canon / familias / plantilla / accesorios BOARD_DRIVER (BE-CF03).
