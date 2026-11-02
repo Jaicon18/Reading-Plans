@@ -2686,3 +2686,6 @@ En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido bu
 
 ### R80e.120 — Flujo eficiente sin perder exactitud (usuario 2-nov, inviolable, todos los proyectos)
 1) Una sesión nueva por proyecto, titulada con el nombre del proyecto, sin historial previo; toda pregunta posterior del proyecto va a esa sesión. 2) Permisos de red (dominio del plan room) verificados ANTES de lanzar; si faltan, se piden al usuario antes de empezar. 3) Lecturas A y B en paralelo, cada una en su propia sesión corta e independiente; la sesión del proyecto solo compara, resuelve y corre los programas. 4) Se mide tiempo y % semanal por proyecto contra la referencia (O'Reilly ~3 h/≈4 %, VS Downey ~5.5 h/≈6–7 %, Chuze ~8 h/≈13–14 %).
+
+### R80e.121 — Sin sesiones auxiliares (usuario 2-nov, inviolable; reemplaza el punto 3 de R80e.120)
+Lecturas A y B en paralelo = subagentes dentro de la sesión del proyecto (herramienta Agent), nunca sesiones aparte. Igual para subidas a Drive, auditor (paso 11), cobertura (paso 12) y pruebas: todo dentro de la sesión del proyecto. La barra lateral del usuario solo tiene una sesión por proyecto + la de coordinación.
