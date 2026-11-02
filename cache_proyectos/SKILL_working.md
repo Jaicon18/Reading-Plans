@@ -2694,3 +2694,4 @@ Lecturas A y B en paralelo = subagentes dentro de la sesión del proyecto (herra
 Demo de gyp bd y metal framing = nuestro alcance; markup de línea a escala por elemento (markups_demo.py); alturas buscadas en todas las hojas antes de suponer; cruce demo plan vs floor plan nuevo; cielos existentes sin tipo indicado = EXCLUDED por falta de información.
 - R80e.119: R-ALC-07 (altura de demo = B.O. de estructura impreso).
 - R80e.120 (usuario, 02-nov, TODOS los proyectos): barrido de specs (project manual o spec sheets) y cruce de cada material cargado contra su sección / párrafo; conflicto = RFI A/B/C; sin specs = declararlo (R-ALC-08).
+- R80e.121 (usuario, 02-nov, TODOS los proyectos): hoja de datos del proyecto (takeoff.json proyecto_datos [{campo, valor, fuente}] + hojas_revisadas) en README / PARA_REVISAR y en Inputs (plantilla_excel, debajo de las filas fijas) (R-ALC-09).

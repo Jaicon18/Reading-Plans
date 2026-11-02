@@ -42,3 +42,7 @@ Para TODOS los proyectos:
 - En cada proyecto se barre el project manual o las spec sheets del trade (05 40 00 / 05 41 00, 09 21 16, 09 22 16, 09 29 00, 07 84 00, 07 92 00, 06 10 00, Div. 01 alcance / alternates / unit prices, notas de spec en hojas G / A-001 / A15.xx).
 - Cada material cargado (gauge, depth / spacing, deflection track, board type / espesor, level of finish, trims / control joints, sealant, backing, demo) se cruza contra la spec y cita sección / párrafo en su fuente.
 - Lo que plano y spec permiten aplicar juntos se aplica; conflicto = RFI A/B/C con delta. Si el bid set no trae specs, se declara en el Scope Checklist.
+
+## R-ALC-09 — Hoja de datos del proyecto + hojas obligatorias revisadas (usuario, 2026-11-02; TODOS los proyectos)
+- Arriba de todo en README_REVIEW.md y PARA_REVISAR, y en Inputs del Excel como renglones informativos (debajo de las filas fijas; sin hojas ni columnas nuevas): nombre y ciudad, dirección, tipo de proyecto, owner / tenant, arquitecto, GC, fecha de bid y bid set, SF total, pisos, Construction Classification, Occupancy Group, códigos (año), occupancy load, sprinklered, demo sí / no, specs en el set sí / no — cada dato con su HOJA o [PENDIENTE].
+- Confirmar las hojas obligatorias revisadas (portada / índice, code analysis / G, notas generales, demo + notas, specs, partition types + detalles, floor plans, RCP, elevaciones / secciones, enlarged / elevaciones interiores, schedules, estructurales, MEP) y listar cualquiera no revisada.
