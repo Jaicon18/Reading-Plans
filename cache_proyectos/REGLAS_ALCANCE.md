@@ -20,3 +20,8 @@
 ## R-ALC-03 — Ductos siempre excluidos (usuario, 2026-11-02, VS #679 Downey)
 - Framed openings / framing para ductos que cruzan walls o cielos: **EXCLUDED siempre**, en todos los proyectos.
 - Nunca RFI: nota directa en Scope Checklist "EXCLUDED - framed openings for ducts (by others)".
+
+## R-ALC-04 — Demolición de drywall y metal frame = NUESTRO alcance (usuario, 2026-11-02, VS #679 Downey)
+- Corrige el error de excluir "demolición" completa: **la demolición de gypsum board y metal framing la hacemos nosotros** (por eso se leen los demo plans).
+- Se cuantifica desde el Demolition Plan (keynotes + general notes): partitions a demoler (dashed), gyp bd ceilings / soffits, enclosures de columnas, furring a retirar, board existente a retirar para replace. Demolition SF = Length × Height × Layers (o área directa en cielos).
+- Lo que no es nuestro trade (ACT, storefront, MEP, flooring, fixtures) sigue fuera; si una keynote mezcla ("gyp bd OR acoustical tile ceilings"), se carga lo de gyp / metal y se pregunta el resto.
