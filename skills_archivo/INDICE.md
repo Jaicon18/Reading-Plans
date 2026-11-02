@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf4: v81cf3 + v80wCH2 Chuze FINAL3 R80w.41–49 + v80z5 VS rev9; verificada 0 reglas faltantes de 438).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf6: v81cf5 + VS rev11 R80e.129; verificada 0 reglas faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -74,4 +74,12 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 **02-nov: v81cf4 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf3 + v80wCH2 (Chuze FINAL3: R80w.41–49, merge de 3 vías con ancestro v80wCH; 5 conflictos) + v80z5 (VS rev9: R80e.124 de VS, R-ALC-10, usg_grid channel_molding; ancestro v80z4; 2 conflictos). Las reglas de CFA pasan a su espacio propio R80f.1–3 (antes R80e.124/125/126; alias en referencias/INDICE_REGLAS_ACUMULADAS.md). verificar_version.py: 0 faltantes (438). Suite 37/37. Banco: B&N rev13, VS rev9, Chuze FINAL3, O'Reilly p1 = 0 familias distintas.
 
-| Chick-fil-A #2284 River Point (vigente) | v81cf4 | 2026-11-02 | take-off-metal-frame-drywall_v81cf4_CFA-RiverPoint_2026-11-02.zip |
+| Chick-fil-A #2284 River Point | v81cf4 | 2026-11-02 | take-off-metal-frame-drywall_v81cf4_CFA-RiverPoint_2026-11-02.zip |
+
+**02-nov: v81cf5 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf4 + VS rev10 R80e.127 (R-ALC-11 / BE-VS-10: lateral bracing de ceilings cargado; compuerta A_NO_DIBUJADO sobre cierres de RFI; familias EMT compression strut 1.5" / 1.25" dia x 20 GA (K/A12.02), compra stick 10 ft; trazabilidad: track 'other', cement board y renglón en 0 con RFI de la tool citan su hoja — pasa R80w.48) + arreglo: referencias/INDICE_REGLAS_ACUMULADAS.md sin encabezado (con encabezado hacía fallar reglas.py compuerta: 'regla sin clasificar'). Suite 37/37. Banco B&N rev13 / Chuze / O'Reilly / CFA / VS rev9: 0 familias distintas contra v81cf4. VS rev10 corrido con v81cf5: REGLAS OK, cobertura 334/334.
+
+| Victoria's Secret #679 Downey rev10 | v81cf5 | 2026-11-02 | take-off-metal-frame-drywall_v81cf5_VS-Downey-rev10_2026-11-02.zip |
+
+**02-nov: v81cf6 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf5 + R80e.129 (constants.addl_head_track_openings_extra: head track de openings_extra sin fuente = supuesto conservador CARGADO, R-ALC-11). Suite 37/37. Banco B&N / Chuze / O'Reilly / CFA / VS rev9: 0 familias distintas. verificar_version.py: 0 faltantes (447).
+
+| Victoria's Secret #679 Downey rev11 (vigente; 0 RFI abiertos) | v81cf6 | 2026-11-02 | take-off-metal-frame-drywall_v81cf6_VS-Downey-rev11_2026-11-02.zip |

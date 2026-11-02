@@ -50,3 +50,13 @@ Para TODOS los proyectos:
 ## R-ALC-10 — Conflicto plano vs spec / código: manda el PLANO (usuario, 2026-11-02; TODOS los proyectos)
 - Se carga lo del PLANO (opción A) y el renglón lleva una nota: "Estimator decision (option A, drawings govern). Spec / code says <…> (sección / párrafo); delta <…>. Verify at <N/HOJA> and spec <sección>" — con la hoja y la sección exactas donde ir a investigar.
 - El RFI se cierra como "estimator decision (option A)" y la nota aparece en Pending / Scope Checklist, SEGUIMIENTO y PARA_REVISAR.
+
+## R-ALC-11 — Lo que el plano no dibuja NO se omite (usuario, 2026-11-02; TODOS los proyectos)
+- Textual: "si no lo dibuja, es porque está en otro lado, busca siempre en los spec sheets, metal schedule, o en el structural, pero no se puede ir sin esa información".
+- Un elemento que el RCP / floor plan no dibuja se busca en: specs (sección / ¶), metal stud / framing schedule, hojas estructurales (S), detalles típicos (A12.xx). Se carga con su fuente y la nota: "Not drawn on <hoja>; required by <spec ¶ / N/HOJA>. Verify at <hojas>".
+- Si el detalle impreso y la spec difieren, se aplica el MÁS ESTRICTO impreso y se anota el delta.
+- Solo si no existe en ningún lado = RFI con supuesto conservador CARGADO (nunca "not carried").
+- Compuertas: reglas.py A_BARRIDO_NO_DIBUJADO (BE-116, renglón en 0 sin barrido) + A_NO_DIBUJADO (cierre de RFI "not carried … not drawn"), ambas en v81cf4.
+- Caso origen: VS Downey RFI-31, lateral bracing de los drywall grid ceilings (092900 ¶ N.1 + J/A12.02 + K/A12.02).
+- Aplicación VS rev11 (orden 02-nov): el additional head track de la puerta 5UG (54", G/A10.08) no tiene fuente impresa → supuesto conservador CARGADO 5.83 LF con nota; no se pregunta al usuario (R80e.129).
+- Aplicación VS rev12 (orden 02-nov): la spec dice 'entire suspension system' y J/K A12.02 no exime por área → el lateral bracing se carga también en los ceilings grid ≤144 SF (supuesto conservador con delta). No hay exención por área sin fuente impresa.
