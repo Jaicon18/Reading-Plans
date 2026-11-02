@@ -67,3 +67,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v80z5** = v80z4 + R80e.124 (conflicto plano vs spec = manda el plano con nota de verificación, R-ALC-10; usg_grid channel_molding false; ALC-08 acepta 1/2" MR). Suite 5/5.
 
 | Victoria's Secret #679 Downey rev9 (0 RFI abiertos) | v80z5 | 2026-11-02 | take-off-metal-frame-drywall_v80z5_VS-Downey-rev9_2026-11-02.zip |
+
+**02-nov (tarde): v80wCH2** = v80wCH + R80w.41–R80w.49 (barrido de specs R-ALC-08, hoja de datos R-ALC-09, no-dibujado R-ALC-11, notas de decisión por renglón, renglón sin hoja = falla). Suite 36/36 OK. Misma nota: rama paralela de v80v, PENDIENTE unir con v80y.
+
+| Chuze Fitness Austin Bluffs FINAL3 (RFI-S01..S03 opción A; specs aplicadas; auditor 8/8; REGLAS OK; back-check registrado) | v80wCH2 | 2026-11-02 | take-off-metal-frame-drywall_v80wCH2_FINAL3-ChuzeAustinBluffs_2026-11-02.zip |
