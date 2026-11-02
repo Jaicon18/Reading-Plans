@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf6: v81cf5 + VS rev11 R80e.129; verificada 0 reglas faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf7: v81cf6 + R80e.130 / BE-CF14; verificada 0 reglas faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -82,4 +82,8 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 **02-nov: v81cf6 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf5 + R80e.129 (constants.addl_head_track_openings_extra: head track de openings_extra sin fuente = supuesto conservador CARGADO, R-ALC-11). Suite 37/37. Banco B&N / Chuze / O'Reilly / CFA / VS rev9: 0 familias distintas. verificar_version.py: 0 faltantes (447).
 
-| Victoria's Secret #679 Downey rev11 (vigente; 0 RFI abiertos) | v81cf6 | 2026-11-02 | take-off-metal-frame-drywall_v81cf6_VS-Downey-rev11_2026-11-02.zip |
+| Victoria's Secret #679 Downey rev11 | v81cf6 | 2026-11-02 | take-off-metal-frame-drywall_v81cf6_VS-Downey-rev11_2026-11-02.zip |
+
+**02-nov: v81cf7 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf6 + R80e.130 (BE-CF14: BOARD_DRIVER + 1/2" MR y 5/8" foil-backed; test_board_driver_mr.py). Suite 38/38. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas; VS rev12: solo joint compound y joint tape (corrección buscada). verificar_version.py: 0 faltantes (449).
+
+| Victoria's Secret #679 Downey rev13 (vigente; 0 RFI abiertos) | v81cf7 | 2026-11-02 | take-off-metal-frame-drywall_v81cf7_VS-Downey-rev13_2026-11-02.zip |
