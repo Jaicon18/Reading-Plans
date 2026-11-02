@@ -34,3 +34,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v80z** = v80y + R80e.116 (demolición de gyp bd / metal framing = nuestro alcance, familia de demolición SF sin waste; regla R-ALC-04).
 
 | Victoria's Secret #679 Downey rev5 (demo incluida) | v80z | 2026-11-02 | take-off-metal-frame-drywall_v80z_VS-Downey-rev5_2026-11-02.zip |
+
+**02-nov: v80z2** = v80z + R80e.117 (demo de cielos existentes sin tipo indicado = EXCLUDED por falta de información, R-ALC-05).
+
+| Victoria's Secret #679 Downey rev6 | v80z2 | 2026-11-02 | take-off-metal-frame-drywall_v80z2_VS-Downey-rev6_2026-11-02.zip |

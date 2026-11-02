@@ -25,3 +25,6 @@
 - Corrige el error de excluir "demolición" completa: **la demolición de gypsum board y metal framing la hacemos nosotros** (por eso se leen los demo plans).
 - Se cuantifica desde el Demolition Plan (keynotes + general notes): partitions a demoler (dashed), gyp bd ceilings / soffits, enclosures de columnas, furring a retirar, board existente a retirar para replace. Demolition SF = Length × Height × Layers (o área directa en cielos).
 - Lo que no es nuestro trade (ACT, storefront, MEP, flooring, fixtures) sigue fuera; si una keynote mezcla ("gyp bd OR acoustical tile ceilings"), se carga lo de gyp / metal y se pregunta el resto.
+
+## R-ALC-05 — Demolición de cielos existentes sin tipo indicado (usuario, 2026-11-02, VS #679 Downey)
+- Si el demo plan pide retirar cielos existentes ("gyp bd OR acoustical tile") y no indica cuál es cuál (sin RCP existente ni tags): **EXCLUDED por falta de información**, con clarification "Existing ceiling demolition excluded – existing ceiling type not indicated; excluded for lack of information". Sin RFI; documentar el delta (área bruta).
