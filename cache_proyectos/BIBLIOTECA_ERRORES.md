@@ -241,3 +241,12 @@ Lecturas por zona con regla "hoja menor" dieron dobles conteos (~50 LF A6D) y un
 ## BE-CH03 (Chuze) — escala supuesta
 Escala de plantas ampliadas copiada de otra hoja (1/4") cuando dos eran 3/16". Prueba: cada hoja lleva su escala del rótulo "SCALE:" de esa hoja, verificada con cota o grid.
 | BE-VS-08 | VS Downey rev5 (usuario) | Demo cuantificada sin cruce contra el floor plan nuevo, con alturas supuestas (±12'-0") sin buscar en todas las hojas, y sin markup de línea | Para cada elemento de demo: (a) altura con fuente N/HOJA o la lista de hojas revisadas si PENDIENTE; (b) tabla de cruce demo vs floor plan nuevo con las diferencias; (c) una PolyLine DEMO con /Measure por elemento en el markups PDF | Las tres cosas existen para el 100 % de los elementos de demo |
+
+## Chick-fil-A #2284 River Point (2026-11-02) — errores de herramienta encontrados al arrancar
+| ID | Origen | Error | Prueba | PASS si |
+|---|---|---|---|---|
+| BE-CF01 | CFA #2284 | La "copia limpia" borró 519 anotaciones "AutoCAD SHX Text": en las hojas M/P/E ese es el ÚNICO texto del dibujo (no son markups) | Antes de limpiar: contar anotaciones por autor/título; las "AutoCAD SHX Text" se conservan en una 2.ª copia para el barrido MEP; solo se quitan markups de personas (GC, estimadores) | El barrido MEP lee texto en todas las hojas M/P/E |
+| BE-CF02 | CFA #2284 | inventario_tags.py no encontró types: TYPE_RE no aceptaba decimales (W4.1, M3.5) y el schedule estaba dentro de una hoja de PLANTA (A-202) bajo "MARK" | test: schedule "WALL TYPE SCHEDULE - INTERIOR" en hoja de planta con types X.n y una fila suelta bajo MARK | inventario lista todos los types del schedule con sus tags |
+| BE-CF03 | CFA #2284 | No existía la familia 1/2" gyp board regular (solo 5/8, 3/8, 1/2 exterior) | canon con faces / existing_walls board "1/2 regular" | sale renglón "1/2\" gypsum board regular" con tape/compound por driver |
+| BE-CF04 | CFA #2284 | Walls de MADERA (Div. 06) con nuestro gyp / cement board no tenían bloque: el bloque board-only decía "EXISTING WALLS TO REMAIN" | Bloque "BOARD ONLY - EXISTING OR WOOD-FRAMED WALLS (FRAMING NOT IN SCOPE)" | wood walls salen con board y 0 framing, con su markup |
+| BE-CF05 | CFA #2284 | arranque.py no leyó NINGÚN sheet number (172 hojas) aunque inventario_tags sí | Mapa de hojas por title block con inventario_tags / contacto visual de title blocks vectorizados | toda hoja con número o marcada "vectorizada" con imagen |

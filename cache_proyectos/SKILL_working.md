@@ -2692,3 +2692,10 @@ Lecturas A y B en paralelo = subagentes dentro de la sesión del proyecto (herra
 
 ## R80e.118 — Demolición (usuario, 2026-11-02, todos los proyectos) — ver REGLAS_ALCANCE.md R-ALC-04/05/06
 Demo de gyp bd y metal framing = nuestro alcance; markup de línea a escala por elemento (markups_demo.py); alturas buscadas en todas las hojas antes de suponer; cruce demo plan vs floor plan nuevo; cielos existentes sin tipo indicado = EXCLUDED por falta de información.
+
+## R80e.122 — Chick-fil-A #2284 (2026-11-02, todos los proyectos) — skill v80wCF (= v80wCH + R80e.116 demo + estas)
+1. Copia limpia: las anotaciones "AutoCAD SHX Text" son texto del dibujo (en hojas MEP vectorizadas es el único texto). Se quitan SOLO markups de personas; se guarda una 2.ª copia con SHX para el barrido MEP (BE-CF01).
+2. inventario_tags.py: types con decimal (W4.1, M3.5, M2.1), schedule dentro de una hoja de planta ("WALL TYPE SCHEDULE" en la página) y encabezado MARK además de TYPE (BE-CF02).
+3. Familia nueva "1/2\" gyp board" (board key "1/2 regular") en canon / familias / plantilla / accesorios BOARD_DRIVER (BE-CF03).
+4. Walls de madera: framing EXCLUDED (Div. 06) pero su gyp / cement board es nuestro → `existing_walls[]` (board only), bloque "BOARD ONLY - EXISTING OR WOOD-FRAMED WALLS (FRAMING NOT IN SCOPE)", markup "BOARD ONLY - NO FRAMING" (BE-CF04).
+5. Sets de dos GC del mismo proyecto: comparar por programa (hash de texto por hoja + fecha de plot del title block) y bajar solo lo que difiera; el GC de la fecha de bid que manda define el set.
