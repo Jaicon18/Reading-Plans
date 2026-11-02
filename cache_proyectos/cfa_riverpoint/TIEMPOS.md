@@ -14,4 +14,6 @@ Skill base: v80z3 (último probado en la línea principal; incluye R-ALC-01..06)
 Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del contenedor), nunca estimadas.
 | 3 | Lectura B terminada (CANON OK; 12 RFI, 3 tool issues) | 12:47 | 13:13 | — |
 | 2 | Lectura A terminada (CANON OK; 10 RFI) | 12:47 | ~13:14 | ~27 min |
-| 4 | Comparación A/B (comparar.py + comparar_extra.py nueva) | 13:14 | 13:17 | — |
+| 4 | Comparación A/B (comparar.py + comparar_extra.py nueva) | 13:14 | 13:17 | 3 min |
+| 5 | Resolución dirigida (subagente; 17 RFI, 8 Review Items) | 13:18 | 13:34 | — |
+| 1e | Skill v81cf3 (compuerta R-ALC-11, verificador 0 faltantes) en paralelo | 13:30 | 13:36 | 6 min |
