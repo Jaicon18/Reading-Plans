@@ -60,3 +60,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v81cf2 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf + delta de v80z4 (VS rev8: compuerta A_PROYECTO_DATOS en reglas.py, barrido de specs, R80e.121/122/123 de VS; 1 conflicto en trazabilidad.py resuelto uniendo las dos líneas) + tools/correr_banco_familias.py (prueba de regresión del banco). La regla CFA pasó a R80e.124 (VS ya usaba R80e.123). Suite 30/30. Banco: B&N rev13, VS rev8, Chuze FINAL y O'Reilly p1 = 0 familias distintas contra la versión con la que se entregaron. verificar_version.py: 418/419; la única "faltante" es BE-109, que NO existe (falso positivo: el texto "BE-109 does not exist" en vs_downey rev2 PASO12_BIBLIOTECA.md).
 
 | Chick-fil-A #2284 River Point (unión total) | v81cf2 | 2026-11-02 | take-off-metal-frame-drywall_v81cf2_CFA-RiverPoint-unida-z4_2026-11-02.zip |
+
+**02-nov: v81cf3 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf2 + R80e.124/125/126: comparar_extra.py (doble lectura de board-only / cielos / misc / demo), compuerta A_BARRIDO_NO_DIBUJADO en reglas.py (R-ALC-11 / BE-116: renglón en 0 / EXCLUDED por "no dibujado" sin barrido registrado en specs + schedule + hojas S = FALLA) con test_barrido_no_dibujado.py. verificar_version.py: 0 faltantes (425 acumuladas). Suite 31/31. Banco B&N rev13 / VS rev8 / Chuze FINAL: 0 familias distintas; la compuerta nueva no marca nada en B&N rev13.
+
+| Chick-fil-A #2284 River Point (vigente) | v81cf3 | 2026-11-02 | take-off-metal-frame-drywall_v81cf3_CFA-RiverPoint_2026-11-02.zip |
