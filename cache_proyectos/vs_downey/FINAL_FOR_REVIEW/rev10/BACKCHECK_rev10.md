@@ -15,7 +15,7 @@ Sources searched (R-ALC-11): S01.01 structural notes (SDC E), S03.01 (A, R, S, N
 
 Not carried, with delta: 18 grid ceilings of 144 SF or less (closets, fitting rooms, office, restrooms, hallway, display windows): +25 clusters = +938.87 LF splay wire + 166.00 LF EMT strut if the spec "entire suspension system" is applied to them. Verify at J/A12.02, K/A12.02 (note 3: ceilings > 1000 SF), A03.01 and spec A15.04 092900 ¶ N.1.
 
-Gates: canon OK, coverage 334/334, project data OK.
+Gates: canon OK, coverage 334/334, project data OK, REGLAS OK (skill v81cf5, suite 37/37). Every Material Summary row cites its sheet (fastener exclusion -> S01.01 B.10-B.14 / R/S01.01; track "other" -> A02.01; cement board -> A05.01; grille head -> S02.01, J/A08.10).
 
 ---
 # BACK-CHECK rev2 — VS #679 Downey (step 11 blind auditor + step 12 error library)
