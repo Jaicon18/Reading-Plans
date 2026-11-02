@@ -19,4 +19,5 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 1e | Skill v81cf3 (compuerta R-ALC-11, verificador 0 faltantes) en paralelo | ~13:26 | ~13:33 | ~7 min |
 | 1f | Skill v81cf4 (+ Chuze R80w.41–49 + VS rev9), verificador 0 faltantes, banco 0 dif. (en paralelo) | ~13:52 | ~14:00 | ~8 min |
 | 6-9 | Cálculo + Excel + markups + compuertas (subagente, v81cf4) | 13:36 | 14:07 | 31 min |
-| 11-12 | Auditor ciego + matriz de cobertura (2 subagentes en paralelo) | 14:07 | | |
+| 11-12 | Auditor ciego + matriz de cobertura (2 subagentes en paralelo) | 14:07 | 14:26 | 19 min (auditor 5 FAIL, cobertura 92.3 %) |
+| 10b | Pasada de corrección rev2 (subagente) | 14:26 | | |
