@@ -10,7 +10,6 @@ Skill base: v80z3 (último probado en la línea principal; incluye R-ALC-01..06)
 | 1b | Skill base v80wCF = v80wCH + demo R80e.116 + 1/2" gyp; suite 30/30 | 12:33 | 12:44 | 11 min |
 | 1c | Unión de ramas del skill → v81cf (merge 3 vías, 9 conflictos), suite 30/30, verificar_version 417/418 (en paralelo a las lecturas) | 12:47 | 12:51 | 4 min |
 | 1d | Unión con v80z4 → v81cf2 (vigente), banco 0 diferencias, suite 30/30 (en paralelo a las lecturas) | 13:03 | 13:04 | — |
-| 2-3 | Lecturas A y B (subagentes en paralelo) | 12:47 | | |
 Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del contenedor), nunca estimadas.
 | 3 | Lectura B terminada (CANON OK; 12 RFI, 3 tool issues) | 12:47 | 13:13 | — |
 | 2 | Lectura A terminada (CANON OK; 10 RFI) | 12:47 | ~13:14 | ~27 min |
@@ -24,4 +23,6 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 10c | Ajuste R-ALC-10 restroom board (1/2" MR) + BE-CF14 driver | 14:50 | 15:00 | 10 min |
 | 1g | Skill v81cf7 (= vigente v81cf6 + BE-CF14), cadena CFA re-corrida con v81cf7 | 14:58 | 15:02 | 4 min |
 | 10d | README / PARA_REVISAR / SEGUIMIENTO + back-check rev2 (FAIL 15/71) | 15:02 | 15:12 | 10 min |
-| 10e | rev3: arreglos de tool (v81cf8) + J-trim + textos (subagente) | 15:13 | | |
+| 10e | rev3: arreglos de tool (v81cf8, 4 tests) + J-trim + textos | 15:13 | 15:26 | 13 min |
+| 11b | Back-check rev3 PASS + compuertas finales (REGLAS OK 845/0, BITACORA OK, ETAPAS PASA) + skill v81cf8 archivada | 15:26 | 15:29 | 3 min |
+| 10 | Subida a Drive (Claude outputs) | 15:29 | | |

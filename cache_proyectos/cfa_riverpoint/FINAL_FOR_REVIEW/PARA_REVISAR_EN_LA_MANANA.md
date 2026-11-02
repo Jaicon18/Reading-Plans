@@ -23,7 +23,7 @@
 ## Lo más importante (5 puntos)
 1. **Casi todo es madera.** Los walls W4, W4.1, W6, W8 y SW6 son de wood stud (A-202 + S-101 nota 4): el framing queda EXCLUDED (Div. 06). Su gypsum board y cement board SÍ están cargados (bloque "BOARD ONLY" del Partition Takeoff).
 2. **Metal framing chico:** 8" stud en los walls de las hoods (A2/A-605), Z channel de 2" (M2.1), infill de 6" (MB-01), soffits, ceiling joists LGS de 6" (S-241), hatch shaft.
-3. **Board:** 1/2" gyp 1,451.64 SF · 1/2" MR 148.02 SF · 5/8" ceiling sag-resistant 332.06 SF · 1/2" cement board 1,800.27 SF · Level 5 731.2 SF.
+3. **Board:** 1/2" gyp 1,451.64 SF · 1/2" MR 148.02 SF · 5/8" ceiling sag-resistant 332.06 SF · setting compound del cement board 129.62 lb · 1/2" cement board 1,800.27 SF · Level 5 731.2 SF.
 4. **Demolición de gyp / metal:** 3,263.65 SF (incluye 617.08 SF de board existente en restrooms bajo el cement board nuevo: RFI-19).
 5. **Tornillería, ductos y trades que no hacemos:** EXCLUDED, sin RFI.
 
@@ -36,10 +36,10 @@ RFI-01, 03, 05, 08, 16, 17, 18, 21 — en "Scope Checklist" del Excel con su del
 
 ## Dónde están los archivos (Drive)
 JC HUNTER PROJECTS › Claude outputs › Chick-fil-A #2284 River Point - Sheridan, CO (CDM Builds) 11-12-26
-- Take-off › CFA2284_RiverPoint_Takeoff_FINAL_rev2.xlsx
-- Planos marcados › CFA2284_RiverPoint_Markups_Bluebeam_rev2.pdf y las 4 imágenes por hoja
-- proceso › certificados del auditor, cobertura, cambios rev2, back-check
+- Take-off › CFA2284_RiverPoint_Takeoff_FINAL_rev3.xlsx
+- Planos marcados › CFA2284_RiverPoint_Markups_Bluebeam_rev3.pdf y las 4 imágenes por hoja
+- proceso › certificados del auditor, cobertura, cambios rev2 y rev3, back-checks
 
 ## Qué tienes que hacer tú (uno a la vez)
-1. Abre el Excel rev2 y revisa la hoja "Pending Items" (13 RFI).
+1. Abre el Excel rev3 y revisa la hoja "Pending Items" (13 RFI).
 2. Contéstame los RFI aquí en el chat (te los mando con botones, 4 por ventana).

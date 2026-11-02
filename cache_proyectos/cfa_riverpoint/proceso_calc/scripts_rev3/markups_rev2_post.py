@@ -1,0 +1,90 @@
+"""Decision 19 (rev2): finishes the Bluebeam PDF written by markups_bluebeam.py + markups_demo.py.
+ - Page Label = sheet number on every marked page (A-050, A-052, A-202, A-221) + LEGEND;
+ - wall markups: the SF in Contents = the board SF of the Excel (board_out.json, canon.py) instead of LF x H;
+ - area markups (Polygon, /Measure 1/4" = 1'-0", area in Contents) for the new gyp ceilings and the soffit bottoms
+   (A-221 hatch / soffit extents), the Level 5 play-area walls, the roof hatch shaft (A-221 drawn rectangle) and the
+   two pin & sleeve recesses (A-202, position on the M3.5 walls assumed: width / location not printed, RFI-13).
+Quantities in Contents come from the canon / canon.py outputs; geometry from the clean PDF vectors.
+Use: python3 bitacora.py run scripts/markups_rev2_post.py <tools_dir> <in.pdf> <out.pdf>"""
+import json, os, re, sys
+sys.path.insert(0, sys.argv[1])
+import pymupdf as fitz
+import markups_bluebeam as mb
+K = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+C4 = os.path.join(K, "etapas", "4_canon")
+c = json.load(open(os.path.join(C4, "takeoff_canon.json")))
+bo = json.load(open(os.path.join(C4, "out", "board_out.json")))
+M = {m["ref"]: m for m in c["misc_items"]}
+W = {w["id"]: w for w in c["walls"]}
+doc = fitz.open(sys.argv[2])
+PG = {"A-050": 5, "A-052": 6, "A-202": 12, "A-221": 14}
+# 1. wall SF = board SF of the Excel
+bsf = {}
+for f in bo["caras"]:
+    bsf[f["wall"]] = round(bsf.get(f["wall"], 0) + f["sf"], 2)
+n1 = 0
+# markups_bluebeam.verificar requires its own Contents (SF = LF x H, v80e): the Excel board SF of every metal wall /
+# soffit side is written on the legend page instead (free text, not an annotation)
+lp = doc[doc.page_count - 1]
+y = 560.0
+lp.insert_text((40, y), "BOARD SF PER WALL = Excel Partition Takeoff (the SF in each wall markup is LF x H, framing area):", fontsize=9, fontname="hebo")
+for wid in sorted(bsf):
+    if wid in W:
+        y += 11
+        lp.insert_text((40 if y < 760 else 380, y if y < 760 else y - 200), f"{wid}: {bsf[wid]:,.2f} SF board ({W[wid].get('tag') or ''})", fontsize=8, fontname="helv")
+        n1 += 1
+for pno in PG.values():
+    for a in doc[pno].annots() or []:        # English states in DEMO contents (markups_demo copies the canon text)
+        ct = a.info.get("content", "")
+        en = ct.replace("DERIVADO", "DERIVED").replace("PENDIENTE", "PENDING").replace("CONFIRMADO", "CONFIRMED")
+        if en != ct:
+            a.set_info(content=en); a.update()
+# 2. area markups
+AREA = []
+CL = {"CLG-ENTA-B": (1075.7, 277.8, 1202.9, 398.3), "CLG-ENTB-B": (473.4, 869.5, 600.2, 1043.2), "CLG-MEN-B": (1832.9, 295.8, 2035.3, 439.2),
+      "CLG-WOM-B": (1730.0, 441.4, 1977.4, 596.2), "CLG-PLAY-B": (338.6, 599.5, 391.7, 814.8)}
+for ref, (x0, y0, x1, y1) in CL.items():
+    AREA.append(("A-221", "GYP CEILING", [(x0, y0), (x1, y0), (x1, y1), (x0, y1)],
+                 f"GYP CEILING · {ref[4:-2]} · {M[ref]['qty']:.2f} SF · 5/8\" sag-resistant (C09250 2.1.E) · outline = A-221 gyp ceiling hatch extent, SF = take-off (S-241 dims) · {ref}"))
+srv = [(1225.6, 440.2), (1405.4, 440.2), (1405.4, 482.2), (1276.6, 482.2), (1276.6, 766.4), (1225.6, 766.4)]
+gt = [(814.6, 584.8), (886.6, 584.8), (886.6, 728.8), (814.6, 728.8)]
+for pts, cl in ((srv, c["ceilings"][0]), (gt, c["ceilings"][1])):
+    AREA.append(("A-221", "SOFFIT BOTTOM", pts, f"SOFFIT BOTTOM · {cl['room']} · {cl['area_sf']:.2f} SF 1/2\" gyp · {cl['detail']}"))
+l5 = c["level5_items"][0]
+AREA.append(("A-221", "LEVEL 5", [(401.0, 529.8), (652.7, 529.8), (652.7, 857.2), (401.0, 857.2)],
+             f"LEVEL 5 · play area walls WC-1 · {l5['l_ft']} LF x ({l5['h_ft']} - {l5['base_ft']['value']}) = 731.20 SF · outline = play area room (A-221), glazing bay not deducted in the outline · A-211 / A-050 KN12"))
+AREA.append(("A-221", "ROOF HATCH SHAFT", [(2047.7, 393.2), (2101.7, 393.2), (2101.7, 452.2), (2047.7, 452.2)],
+             f"ROOF HATCH SHAFT · {M['RH-SHAFT-S']['qty']} LF 3-5/8\" studs · {M['RH-SHAFT-T']['qty']} LF runner + {M['RH-SHAFT-TT']['qty']} LF slotted track (C1/S-801) · A1/A-604 (RFI-14)"))
+for wid in ("M3.5-01", "M3.5-02"):
+    b = W[wid]["band"]
+    ym = (b["lo"] + b["hi"]) / 2
+    AREA.append(("A-202", "PIN & SLEEVE RECESS", [(b["c0"], ym - 18), (b["c1"], ym - 18), (b["c1"], ym + 18), (b["c0"], ym + 18)],
+                 f"PIN & SLEEVE RECESS · 2'-0\" wide assumed · 2 jamb studs 8\" + 2.0 LF head/sill runner · A2/A-605 · position on {wid} assumed (RFI-13)"))
+json.dump([{"sheet": a, "subject": b, "pts": p_, "contents": t_} for a, b, p_, t_ in AREA],
+          open(os.path.join(K, "etapas", "6_markups", "areas.json"), "w"), indent=1)
+n2 = 0
+for sh, subj, pts, ct in AREA:
+    page = doc[PG[sh]]
+    q = [fitz.Point(x, y) * page.derotation_matrix for x, y in pts]
+    a = page.add_polygon_annot(q)
+    a.set_info(title=mb.AUTOR, subject=subj, content=ct)
+    a.set_colors(stroke=(0.1, 0.5, 0.1), fill=(0.6, 0.9, 0.6))
+    a.set_border(width=2.0)
+    a.set_opacity(0.45)
+    a.update()
+    mb._nm(doc, a, f"TOX-{subj}-{n2}")
+    mb._measure(doc, a, 18.0)
+    doc.xref_set_key(a.xref, "IT", "/PolygonDimension")
+    n2 += 1
+# 3. page labels = sheet numbers
+labels = {v: k for k, v in PG.items()}
+labels[doc.page_count - 1] = "LEGEND"
+rules = []
+for i in range(doc.page_count):
+    if i in labels:
+        rules.append({"startpage": i, "prefix": labels[i], "style": "", "firstpagenum": 1})
+    elif i == 0 or (i - 1) in labels:
+        rules.append({"startpage": i, "prefix": "", "style": "D", "firstpagenum": i + 1})
+doc.set_page_labels(rules)
+doc.save(sys.argv[3], garbage=1, deflate=True)
+print(json.dumps({"wall_sf_updated": n1, "area_markups": n2, "page_labels": {labels[k]: k + 1 for k in sorted(labels)}}))

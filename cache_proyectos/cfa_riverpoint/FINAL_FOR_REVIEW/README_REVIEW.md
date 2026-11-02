@@ -1,5 +1,5 @@
-# README_REVIEW — Chick-fil-A #2284 River Point, Sheridan, CO (CDM Builds) — Metal Framing & Drywall take-off, FINAL FOR REVIEW rev2
-Date: 2026-11-02 · Bid due 2026-11-12 11:00 AM MST (CDM BUILDS) · Skill v81cf7 · Nothing was sent to the GC.
+# README_REVIEW — Chick-fil-A #2284 River Point, Sheridan, CO (CDM Builds) — Metal Framing & Drywall take-off, FINAL FOR REVIEW rev3
+Date: 2026-11-02 · Bid due 2026-11-12 11:00 AM MST (CDM BUILDS) · Skill v81cf8 · Nothing was sent to the GC.
 
 ## PROJECT DATA
 | Field | Value | Sheet |
@@ -34,7 +34,7 @@ Date: 2026-11-02 · Bid due 2026-11-12 11:00 AM MST (CDM BUILDS) · Skill v81cf7
 | 8" metal stud | 160.01 LF |
 | 6" metal stud (MB-01) / 6" joists 600S162-33 | 42.00 / 304.50 LF |
 | 3-5/8" metal stud / 362S162-33 braces / framed soffit | 123.84 / 84.52 / 84.32 LF |
-| 2" Z channel (row label fixed by template "1-1/2\" Z-furring") | 96.00 LF |
+| 2" Z-furring channel (A1/A-605) | 96.00 LF |
 | Bottom / top track 8" and 6" | 10.90 + 3.33 LF each |
 | Ceiling / soffit track · strongback 362T125-54 · continuous angle | 158.87 · 26.51 · 3.33 LF |
 | 6" rim track · slotted deflection track · sill track | 172.97 · 12.00 · 8.00 LF |
@@ -42,10 +42,11 @@ Date: 2026-11-02 · Bid due 2026-11-12 11:00 AM MST (CDM BUILDS) · Skill v81cf7
 | Clip / bent plates · metal blocking | 7 PCS · 13.94 LF |
 | 1/2" gyp board regular | 1,451.64 SF |
 | 1/2" gyp board moisture resistant (restrooms, C09250 2.2.A) | 148.02 SF |
-| 5/8" sag-resistant ceiling board (C09250 2.1.E) | 332.06 SF |
+| 5/8" gypsum ceiling board, SAG-RESISTANT (C09250 2.1.E) | 332.06 SF |
 | 1/2" cement board | 1,800.27 SF |
-| Alkali-resistant mesh tape (cement board joints) | 666.10 LF |
-| Corner bead / J-bead / J-trim | 73.44 / 13.68 / 59.69 LF |
+| Alkali-resistant mesh tape (cement board joints, no waste) | 666.10 LF |
+| Setting-type joint compound at cement board joints (C09250 2.4.B.2, no waste) | 129.62 LB |
+| Corner bead / J-bead (D3/A-624) / J-trim (A2/A-624, dining face) | 73.44 / 13.68 / 30.79 LF |
 | Level 5 finish (play area) | 731.20 SF |
 | Joint compound / joint tape | 139.08 LB / 714.74 LF |
 | Demolition - gypsum board and metal framing | 3,263.65 SF |
@@ -150,10 +151,10 @@ RFI-01 M3.5 = 8" metal stud (A2/A-605) vs 3-5/8" schedule · RFI-03 kitchen ceme
 See Excel "Review Items" (demo heights in the office / walk-in bay, DEMO-C6 area, DEMO-13 partition, MB-01 infill, mop-chase cement board height, M3.5 8" stud size, roof hatch shaft, play-bay ceiling framing).
 
 ## Quality gates
-Double independent reading A/B + directed resolution; programs calculated everything (canon.py → plantilla_excel.py with reglas.py gate, no override); step 11 independent blind audit + step 12 coverage matrix → 31 corrections in rev2 (proceso/CAMBIOS_rev2.md) → back-check of every change (proceso/BACKCHECK_rev2.md). Bluebeam markups: one PolyLine per wall / board-only face / demo element with Subject, Page Label, /Measure scale, Depth = height; polygons for ceilings, soffit bottoms and Level 5.
+Double independent reading A/B + directed resolution; programs calculated everything (canon.py → plantilla_excel.py with reglas.py gate, no override); step 11 independent blind audit + step 12 coverage matrix → 31 corrections in rev2 (proceso/CAMBIOS_rev2.md) → back-check rev2 (6 issues) → rev3 with tool fixes (proceso/CAMBIOS_rev3.md) → back-check rev3 (proceso/BACKCHECK_rev3.md). Bluebeam markups: one PolyLine per wall / board-only face / demo element with Subject, Page Label, /Measure scale, Depth = height; polygons for ceilings, soffit bottoms and Level 5.
 
 ## Files
-- Take-off/CFA2284_RiverPoint_Takeoff_FINAL_rev2.xlsx (fixed 6 sheets + hidden seal `_reglas`)
-- Planos marcados/CFA2284_RiverPoint_Markups_Bluebeam_rev2.pdf + PNG per sheet (A-050, A-052, A-202, A-221)
-- proceso/ (audit certificate, coverage matrix, changes rev2, demo cross table, back-check)
-- rev1 kept for traceability.
+- Take-off/CFA2284_RiverPoint_Takeoff_FINAL_rev3.xlsx (exactly the 6 fixed sheets)
+- Planos marcados/CFA2284_RiverPoint_Markups_Bluebeam_rev3.pdf + PNG per sheet (A-050, A-052, A-202, A-221)
+- proceso/ (audit certificate, coverage matrix, changes rev2 / rev3, demo cross table, back-checks)
+- rev1 and rev2 kept for traceability.
