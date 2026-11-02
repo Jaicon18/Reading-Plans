@@ -42,3 +42,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v80wCH** = rama paralela de v80v (no de v80w–v80y de VS) + R80w.1–R80w.40 (corrida Chuze Fitness Austin Bluffs; ver tools/CAMBIOS_tools_v80w.md dentro del zip): arranque / inventario con title blocks de 3 dígitos y sufijo, escala por rótulo de cada hoja, cierre global obligatorio contra la planta general (walls entre plantas ampliadas), MR por nota de wet rooms del set, top track por alcance a estructura, existing walls board-only con markup, tornillería / ductos excluidos en canon. Suite 30/30 OK. **PENDIENTE: unir con v80y (R80e.98–115) en la próxima versión** — los nombres de archivo CAMBIOS_tools_v80w.md coinciden en ambas ramas pero el contenido es distinto.
 
 | Chuze Fitness Austin Bluffs (Hilbers / NNI) FINAL (41 RFI cerrados por decisión del estimador 2-nov, auditor 8/8, cobertura 100 %, REGLAS OK, back-check registrado) | v80wCH | 2026-11-02 | take-off-metal-frame-drywall_v80wCH_FINAL-ChuzeAustinBluffs_2026-11-02.zip |
+
+**02-nov: v80z3** = v80z2 + R80e.118 (demo: markup de línea markups_demo.py, alturas buscadas en todas las hojas, cruce demo vs floor plan; R-ALC-06).
+
+| Victoria's Secret #679 Downey rev7 | v80z3 | 2026-11-02 | take-off-metal-frame-drywall_v80z3_VS-Downey-rev7_2026-11-02.zip |
