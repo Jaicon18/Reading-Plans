@@ -46,3 +46,6 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v80z3** = v80z2 + R80e.118 (demo: markup de línea markups_demo.py, alturas buscadas en todas las hojas, cruce demo vs floor plan; R-ALC-06).
 
 | Victoria's Secret #679 Downey rev7 | v80z3 | 2026-11-02 | take-off-metal-frame-drywall_v80z3_VS-Downey-rev7_2026-11-02.zip |
+
+## Skill de órdenes del usuario (se instala aparte, siempre activo)
+| jc-hunter-ordenes | v1 | 2026-11-02 | jc-hunter-ordenes_v1_2026-11-02.zip | Todas las órdenes del usuario desde el día 1 + proceso de mejora continua + verificar_version.py (compuerta: el skill de arranque debe contener todas las reglas acumuladas; v80z3 falla con 168 faltantes). Se actualiza cada vez que se agrega una orden. |
