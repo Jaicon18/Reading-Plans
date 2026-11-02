@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf8: v81cf7 + R80f.5 BE-CF15; verificada 0 faltantes de 451).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf9: v81cf8 + VS rev14 R80e.131 / R-ALC-12 + compuertas A_NO_DIBUJADO / A_STRUT_STUD ligadas; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -93,3 +93,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v81cf8 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf7 + R80f.5 (BE-CF15: rótulo del Z-furring por tamaño impreso; board key "5/8 ceiling sag-resistant"; setting-type joint compound en LB; yields sin waste; SUBTOTAL OTHER FRAMING; sello en <excel>.sello.json → el libro tiene exactamente las 6 hojas; Excel viejo con hoja _reglas sigue pasando). 4 tests nuevos. verificar_version.py 0 faltantes (451). Suite 42/42. Banco vs v81cf7: B&N rev13, VS rev13, Chuze FINAL3, O'Reilly p1 = 0 diferencias. CFA #2284 FINAL rev3 con REGLAS OK (845, 0 fallas), BITACORA OK (17 tools + back-check), ETAPAS PASA.
 
 | Chick-fil-A #2284 River Point FINAL rev3 (vigente) | v81cf8 | 2026-11-02 | take-off-metal-frame-drywall_v81cf8_FINAL-CFA-RiverPoint-rev3_2026-11-02.zip |
+
+**02-nov: v81cf9 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf8 + R80e.131 (R-ALC-12: compression struts = metal stud 3-5/8"; compuerta A_STRUT_STUD; test_strut_stud.py) + R80e.127 / R80e.129 con encabezado y clasificación (A_NO_DIBUJADO ahora sí corre; BE-VS-11). Suite 43/43. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev13 con EMT falla A_STRUT_STUD (prueba); VS rev14 REGLAS OK. verificar_version.py: 0 faltantes (456).
+
+| Victoria's Secret #679 Downey rev14 (vigente; 0 RFI abiertos) | v81cf9 | 2026-11-02 | take-off-metal-frame-drywall_v81cf9_VS-Downey-rev14_2026-11-02.zip |
