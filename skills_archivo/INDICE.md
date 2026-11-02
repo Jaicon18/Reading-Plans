@@ -50,9 +50,13 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 ## Skill de órdenes del usuario (se instala aparte, siempre activo)
 | jc-hunter-ordenes | v1 | 2026-11-02 | jc-hunter-ordenes_v1_2026-11-02.zip | Todas las órdenes del usuario desde el día 1 + proceso de mejora continua + verificar_version.py (compuerta: el skill de arranque debe contener todas las reglas acumuladas; v80z3 falla con 168 faltantes). Se actualiza cada vez que se agrega una orden. |
 
-**02-nov: v81cf** = UNIÓN v80wCH (Chuze) + v80z3 (VS) por merge de 3 vías (ancestro v80v; 9 conflictos resueltos a mano) + R80e.123 (CFA #2284: SHX text, types decimales en inventario_tags, 1/2" gyp board, walls de madera board-only). Suite 30/30; verificar_version.py 417/418 (la única "faltante", BE-109, no existe: falso positivo por la frase "BE-109 does not exist" en VS rev2 PASO12). Arranque de Chick-fil-A #2284 River Point. Si la v81 de la sesión de coordinación sale después, se unen las dos el mismo día.
+**02-nov: v81cf** = UNIÓN v80wCH (Chuze) + v80z3 (VS) por merge de 3 vías (ancestro v80v; 9 conflictos resueltos a mano) + R80e.124 (CFA #2284: SHX text, types decimales en inventario_tags, 1/2" gyp board, walls de madera board-only). Suite 30/30; verificar_version.py 417/418 (la única "faltante", BE-109, no existe: falso positivo por la frase "BE-109 does not exist" en VS rev2 PASO12). Arranque de Chick-fil-A #2284 River Point. Si la v81 de la sesión de coordinación sale después, se unen las dos el mismo día.
 
 | Chick-fil-A #2284 River Point (arranque) | v81cf | 2026-11-02 | take-off-metal-frame-drywall_v81cf_CFA-RiverPoint-arranque_2026-11-02.zip |
 **02-nov: v80z4** = v80z3 + R80e.119-123 (R-ALC-07 altura de demo a estructura, R-ALC-08 specs siempre, R-ALC-09 / R80e.122 hoja de datos del proyecto + compuerta A_PROYECTO_DATOS y `reglas.py datos`, trazabilidad qty del canon manda). Suite 5/5.
 
 | Victoria's Secret #679 Downey rev8 (specs + hoja de datos) | v80z4 | 2026-11-02 | take-off-metal-frame-drywall_v80z4_VS-Downey-rev8_2026-11-02.zip |
+
+**02-nov: v81cf2 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf + delta de v80z4 (VS rev8: compuerta A_PROYECTO_DATOS en reglas.py, barrido de specs, R80e.121/122/123 de VS; 1 conflicto en trazabilidad.py resuelto uniendo las dos líneas) + tools/correr_banco_familias.py (prueba de regresión del banco). La regla CFA pasó a R80e.124 (VS ya usaba R80e.123). Suite 30/30. Banco: B&N rev13, VS rev8, Chuze FINAL y O'Reilly p1 = 0 familias distintas contra la versión con la que se entregaron. verificar_version.py: 418/419; la única "faltante" es BE-109, que NO existe (falso positivo: el texto "BE-109 does not exist" en vs_downey rev2 PASO12_BIBLIOTECA.md).
+
+| Chick-fil-A #2284 River Point (unión total) | v81cf2 | 2026-11-02 | take-off-metal-frame-drywall_v81cf2_CFA-RiverPoint-unida-z4_2026-11-02.zip |
