@@ -87,3 +87,5 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v81cf7 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf6 (VS rev11) + R80f.4 (BE-CF14: accesorios.BOARD_DRIVER con 1/2" gyp MR y 5/8" foil-backed; test_board_driver.py). verificar_version.py 0 faltantes (449). Suite 38/38. Banco vs v81cf6: B&N rev13 / Chuze FINAL3 / O'Reilly p1 = 0 diferencias; VS rev12 y CFA rev2 cambian SOLO joint compound / joint tape (corrección BE-CF14: VS +76.10 lb / +391.09 LF). CFA #2284 rev2 armado con v81cf7.
 
 | Chick-fil-A #2284 River Point rev2 (vigente) | v81cf7 | 2026-11-02 | take-off-metal-frame-drywall_v81cf7_CFA-RiverPoint-rev2_2026-11-02.zip |
+
+| Victoria's Secret #679 Downey rev13 (0 RFI abiertos; corrido con v81cf7 de CFA: 0 familias distintas, REGLAS OK) | v81cf7 | 2026-11-02 | take-off-metal-frame-drywall_v81cf7_CFA-RiverPoint-rev2_2026-11-02.zip |
