@@ -53,3 +53,6 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **02-nov: v81cf** = UNIÓN v80wCH (Chuze) + v80z3 (VS) por merge de 3 vías (ancestro v80v; 9 conflictos resueltos a mano) + R80e.123 (CFA #2284: SHX text, types decimales en inventario_tags, 1/2" gyp board, walls de madera board-only). Suite 30/30; verificar_version.py 417/418 (la única "faltante", BE-109, no existe: falso positivo por la frase "BE-109 does not exist" en VS rev2 PASO12). Arranque de Chick-fil-A #2284 River Point. Si la v81 de la sesión de coordinación sale después, se unen las dos el mismo día.
 
 | Chick-fil-A #2284 River Point (arranque) | v81cf | 2026-11-02 | take-off-metal-frame-drywall_v81cf_CFA-RiverPoint-arranque_2026-11-02.zip |
+**02-nov: v80z4** = v80z3 + R80e.119-123 (R-ALC-07 altura de demo a estructura, R-ALC-08 specs siempre, R-ALC-09 / R80e.122 hoja de datos del proyecto + compuerta A_PROYECTO_DATOS y `reglas.py datos`, trazabilidad qty del canon manda). Suite 5/5.
+
+| Victoria's Secret #679 Downey rev8 (specs + hoja de datos) | v80z4 | 2026-11-02 | take-off-metal-frame-drywall_v80z4_VS-Downey-rev8_2026-11-02.zip |
