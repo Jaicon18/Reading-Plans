@@ -5,3 +5,4 @@
 - Drive: JC HUNTER PROJECTS › Projects › Chick-fil-A #2284 River Point - Sheridan, CO (CDM Builds) 11-12-26 (id 1F8dp9jjfecKUjqezjwaEPaZ6oKFOdGGF).
 - proceso/SHEET_MAP.json (página → hoja), BRIEF_LECTURA.md (brief de lecturas A/B). etapas/1_inventario: 26 tags en A-202.
 - Alcance: walls W4/W4.1/W6/W8/SW6 = madera (Div. 06, framing EXCLUDED, board nuestro); metal solo M2.1 (Z channel) y M3.5 (3-5/8" sistered).
+Drive: JC HUNTER PROJECTS › Claude outputs › Chick-fil-A #2284 River Point - Sheridan, CO (CDM Builds) 11-12-26 (id 1Uj5BV7ORkAubFkr4fL4DUapzF7bSy3xo): README_REVIEW, PARA_REVISAR, SEGUIMIENTO, RFI_PENDIENTES · Take-off/ rev3 · Planos marcados/ rev3 (PDF + 4 PNG) · proceso/ (10) · SKILL FINAL v81cf8/.
