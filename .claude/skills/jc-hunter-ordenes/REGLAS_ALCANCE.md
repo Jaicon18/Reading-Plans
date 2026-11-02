@@ -58,3 +58,4 @@ Para TODOS los proyectos:
 - Solo si no existe en ningún lado = RFI con supuesto conservador CARGADO (nunca "not carried").
 - Compuertas: reglas.py A_BARRIDO_NO_DIBUJADO (BE-116, renglón en 0 sin barrido) + A_NO_DIBUJADO (cierre de RFI "not carried … not drawn"), ambas en v81cf4.
 - Caso origen: VS Downey RFI-31, lateral bracing de los drywall grid ceilings (092900 ¶ N.1 + J/A12.02 + K/A12.02).
+- Aplicación VS rev11 (orden 02-nov): el additional head track de la puerta 5UG (54", G/A10.08) no tiene fuente impresa → supuesto conservador CARGADO 5.83 LF con nota; no se pregunta al usuario (R80e.129).
