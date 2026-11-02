@@ -2689,3 +2689,6 @@ En una prueba de exactitud, el take-off humano es solo del usuario. Prohibido bu
 
 ### R80e.121 — Sin sesiones auxiliares (usuario 2-nov, inviolable; reemplaza el punto 3 de R80e.120)
 Lecturas A y B en paralelo = subagentes dentro de la sesión del proyecto (herramienta Agent), nunca sesiones aparte. Igual para subidas a Drive, auditor (paso 11), cobertura (paso 12) y pruebas: todo dentro de la sesión del proyecto. La barra lateral del usuario solo tiene una sesión por proyecto + la de coordinación.
+
+## R80e.118 — Demolición (usuario, 2026-11-02, todos los proyectos) — ver REGLAS_ALCANCE.md R-ALC-04/05/06
+Demo de gyp bd y metal framing = nuestro alcance; markup de línea a escala por elemento (markups_demo.py); alturas buscadas en todas las hojas antes de suponer; cruce demo plan vs floor plan nuevo; cielos existentes sin tipo indicado = EXCLUDED por falta de información.

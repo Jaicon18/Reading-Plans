@@ -1,0 +1,17 @@
+# Decisiones sobre los gaps del paso 12 (orquestador, reglas fijas del skill)
+- GAP-01 control joints >30'-0" (A010 n.27, A121 n.6): CARGAR (precedente BE-112).
+- GAP-02 backing metálico A103 (CONT MTL TRACK 6 x 16 GA, keys 1, 8, 18, 33, 36, 40, 41, 45, 46; strap; 12/13 A505.B): CARGAR con largos de elevaciones; lo no acotado → RFI con supuesto.
+- GAP-03 tile backer: CARGAR (impreso en A301 / spec 09 29 00 2.5); producto cement vs DensShield/DensArmor → RFI-06 (cargado cement board).
+- GAP-04 RTU curb cap 2/A131 600S162-33 @ 12" + #10 TEK: CARGAR (9 caps per AD103 D0.18; tamaño → RFI-14).
+- GAP-05 MTL STUD BOX HEADER en A502 6/7/13/15: CARGAR.
+- GAP-06 diagonal bracing @ 48" O.C. 6/A502: CARGAR.
+- GAP-07 Z-girt B2E: EXCLUDED + RFI (SKILL §7: cladding hat channel / Z-girt / lath EXCLUDED + RFI). No cargar.
+- GAP-08 metal edge head F (D6F): CARGAR trim + board en tope.
+- GAP-09 head C "WALL BRACING - RE: STRUCT.": CARGAR kickers @ 48" (criterio §7 transiciones) + RFI (estructural no detalla).
+- GAP-10 edge trim spec 09 29 00 3.1.C: CARGAR L-bead donde el board termina contra estructura expuesta (caras abiertas a deck sin ceiling).
+- GAP-11 A-A435-1 segmento Retail Storage 126: board 22.83 vs studs 10.5 → corregir canon (studs a deck en ese segmento, o board al alto del stud según elevación).
+- GAP-12 A2.163 → "13/A506" inexistente; 1/A506 ladder wall: CARGAR lo de 1/A506 + RFI de la cita.
+- Molding del drywall grid: solo KAM angle (spec 09 51 23), quitar la duplicada; productos Armstrong según spec.
+- Markups: calibrar RCP A421.A–A425.A a 1/4"; arco A-A421.A-1 con su curva; C3C dibujado como cargado.
+- Pending Items: quitar tokens internos (Stage 3 R-29, mep.cruces, E45, Rule 0.F, SKILL R55.6); RFI-05 cita spec inexistente "2.3.F" → corregir.
+- BE-13 plywood backboards en hojas E: EXCLUDED (madera, Div. 06) en Scope Checklist.

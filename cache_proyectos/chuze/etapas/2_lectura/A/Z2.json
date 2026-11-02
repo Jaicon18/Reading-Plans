@@ -1,0 +1,1118 @@
+{
+ "walls": [
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [
+    {
+     "ref": "122",
+     "kind": "storefront",
+     "ro_w_ft": 5.87,
+     "head_ft": 7.17,
+     "source": "A601: door 122 PILATES AD1 3'-0\" x 7'-0\" frame ALF (aluminum storefront frame, 2\" TYP); opening = sidelight + door in this wall line, A431 vector y1094.4-1200.0 = 105.6 pt / 18 = 5.87 ft; head = door 7'-0\" + 2\" frame (storefront head not dimensioned)",
+     "xy_pt": [
+      1110.95,
+      1983.6
+     ]
+    }
+   ],
+   "id": "A-A422-1",
+   "tag": "A6D",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [
+    "PT0079",
+    "PT0081"
+   ],
+   "location": "Kids Club west wall: Storage 110 / Kids Club 108 / Activity 111 / continues S through Pilates 122 entry (door 122 storefront) to the A2-3D wall (shown on A431)",
+   "demo_source": "AD101: kids club area is open shell (no existing partition on this line, only grid/column D0.32); A422 draws it as NEW wall",
+   "length_ft": 56.44,
+   "length_status": "DERIVED",
+   "length_source": "A422 (+A431 for the part past the A422 plan crop)",
+   "length_op": "SCALE CHECK A422: printed 48'-6 1/2\" (left string) ticks y1035.4-1909.4 = 874.0 pt / 48.542 ft = 18.005 pt/ft (constant 18). Length: 5.3 pt (A3C thickness, y1030.1-1035.4) + 874.0 pt printed 48'-6 1/2\" + 136.6 pt (y1909.4-2046.0: A2-3D 15.4 pt + A431 segment y1073.0-1209.6 mapped dy=+836.4, door 122 + sidelight + jamb stub, ends at N face of A431 A2-3D) = 1015.9 pt / 18 = 56.44 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1106.4,
+    "c1": 1115.5,
+    "lo": 1030.1,
+    "hi": 2046.0,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 6.07,
+   "img": "img/Z2_A-A422-1.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6D: 6\" stud, 6\" sound batt, head D, sill X*)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "A6D head letter D -> HEAD DETAIL (D)/A301 stud to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Circulation 120 / Studio Entry 121 (A101)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301; A301 type notes '5/8\" GYP BD' + spec 09 29 00 2.x Type X 5/8\""
+    },
+    {
+     "side": "B",
+     "room": "Kids Club Storage 110 / Kids Club 108 / Kids Club Activity 111 / Pilates 122",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "full height to deck per HEAD DETAIL (D)/A301 (rooms C-7 / open to structure, elevations 10,11/A422.B and 7,8/A422.C finish to B.O. DECK)"
+    }
+   ],
+   "notes": "Base detail X (A301 table A6D sill X*; not a wet area). Insulation 6\" sound batt EXCLUDED. The line is drawn on A422 down to y1930.8 (start of the Pilates storefront) and continues on A431 (untagged there) with sidelight + door 122 + 0.53 ft jamb stub to the A2-3D Pilates south wall; run through the opening per R77.10 / eje rule. The top 1.2 ft (y1030.1-1051) also appears on A421 as an untagged stub."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [
+    {
+     "ref": "110",
+     "kind": "door",
+     "ro_w_ft": 3.33,
+     "head_ft": 7.17,
+     "source": "A601 door schedule: door 110 KID'S CLUB STORAGE LV1 3'-0\" x 7'-0\", frame HMF; A601 DOOR & FRAME TYPES 1/A601 HMF 2\" TYP face -> R.O. = 3'-0\" + 2 x 2\" = 3'-4\", head = 7'-0\" + 2\" = 7'-2\"",
+     "xy_pt": [
+      1150.5,
+      1173.5
+     ]
+    },
+    {
+     "ref": "109",
+     "kind": "door",
+     "ro_w_ft": 3.33,
+     "head_ft": 7.17,
+     "source": "A601 door schedule: door 109 KID'S CLUB RESTROOM WD1 3'-0\" x 7'-0\", frame HMF; A601 DOOR & FRAME TYPES 1/A601 HMF 2\" TYP face -> R.O. = 3'-0\" + 2 x 2\" = 3'-4\", head = 7'-0\" + 2\" = 7'-2\"",
+     "xy_pt": [
+      1443.5,
+      1173.5
+     ]
+    }
+   ],
+   "id": "A-A422-2",
+   "tag": "A3C",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [
+    "PT0027"
+   ],
+   "location": "South wall of Kids Club Storage 110 and Kids Club Restroom 109 (faces Kids Club 108)",
+   "demo_source": "AD101: open shell at this location (no existing wall) -> NEW",
+   "length_ft": 20.17,
+   "length_status": "DERIVED",
+   "length_source": "A422",
+   "length_op": "vector x1115.5 (E face A6D west wall) to x1478.6 (W face A6D restroom east wall) = 363.1 pt / 18 = 20.17 ft; cross-check printed 10'-11\" + 9'-9\" = 20'-8\" (ticks x1116.7-1488.7 to finish faces) - 10.1 pt = 20.11 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1170.7,
+    "c1": 1176.2,
+    "lo": 1115.5,
+    "hi": 1478.6,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 3.67,
+   "img": "img/Z2_A-A422-2.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A3C: 3-5/8\" stud, head C, sill/insulation <varies>)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head letter C -> HEAD DETAIL (C)/A301 (stud stops above ceiling, braced); but Kids Club 108 has no ceiling and elevation 10/A422.B (KIDS CLUB NORTH) shows this wall finished to B.O. DECK, storage 110 is C-7 exposed (A422.A) -> stud loaded to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.) - stud carried to deck because the Kids Club face is finished to B.O. DECK (10/A422.B)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Kids Club Storage 110",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 EXPOSED TO STRUCTURE (A422.A); elevation 7/A422.C painted to B.O. DECK",
+     "length_ft": 10.42,
+     "length_source": "A422 vector x1115.5-1303.0"
+    },
+    {
+     "side": "A",
+     "room": "Kids Club Restroom 109",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "C-5 suspended gypsum ceiling 8'-0\" AFF (A422.A); head C board to ceiling; wet room MR per A301 type note / A111",
+     "length_ft": 9.27,
+     "length_source": "A422 vector x1311.8-1478.6"
+    },
+    {
+     "side": "B",
+     "room": "Kids Club 108",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "open to structure; elevation 10/A422.B finish to B.O. DECK"
+    }
+   ],
+   "notes": "Base detail X. Restroom face: wall protection WP-6 (A422.C) is not tile -> no cement board. Hinge guards at kids club doors (A601) - hardware, not our scope."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A422-3",
+   "tag": "A6C",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [],
+   "untagged_reason": "No tag on A422 for this 6\" wall between Storage 110 and Restroom 109; A101 tags it A6C (tag inside restroom 109 on A101, counted here per ONE WALL, ONCE - the A101 tag belongs to the A101 task and is discarded there as 'shown on enlarged plan A422')",
+   "location": "Wall between Kids Club Storage 110 and Kids Club Restroom 109",
+   "demo_source": "AD101: open shell -> NEW",
+   "length_ft": 7.52,
+   "length_status": "DERIVED",
+   "length_source": "A422",
+   "length_op": "vector y1035.4 (S face A3C north wall, A421) to y1170.7 (N face A3C south wall) = 135.3 pt / 18 = 7.52 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1303.0,
+    "c1": 1311.8,
+    "lo": 1035.4,
+    "hi": 1170.7,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 5.87,
+   "img": "img/Z2_A-A422-3.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6C: 6\" stud, no insulation, head C, sill X)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head C/A301, but storage face finished to B.O. DECK (elevation 5 KIDS STORAGE EAST/A422.C, C-7 exposed) -> stud to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.) - stud carried to deck (storage side open to structure, 5/A422.C)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Kids Club Storage 110",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 exposed (A422.A); 5/A422.C painted to B.O. DECK"
+    },
+    {
+     "side": "B",
+     "room": "Kids Club Restroom 109",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 8.0,
+     "height_source": "C-5 GYP ceiling 8'-0\" AFF (A422.A), head C board to ceiling; wet room MR (A301 / A111)"
+    }
+   ],
+   "notes": "Type by A101 tag (A6C) and measured thickness 6\" (no A422 tag). Base detail X. Toilet / grab bars (A2.78/A2.79) on restroom face - blocking per A103 items 15/16/62."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A422-4",
+   "tag": "A6C",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [
+    "PT0048"
+   ],
+   "location": "West wall of Kids Club Cinema 112 (Activity 111 on the west)",
+   "demo_source": "AD101: open shell -> NEW",
+   "length_ft": 8.63,
+   "length_status": "CONFIRMED",
+   "length_source": "A422",
+   "length_op": "printed 8'-7 1/2\" (right dim string, ticks y1753.7-1909.4 = 155.7 pt / 18 = 8.65 ft vector) = 8.63 ft; free N end at cinema opening, S end at N face of A2-3D",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1458.0,
+    "c1": 1466.9,
+    "lo": 1753.7,
+    "hi": 1909.4,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 5.93,
+   "img": "img/Z2_A-A422-4.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6C: 6\" stud, head C, sill X)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head C/A301, Activity 111 side open to structure and finished to deck (9/A422.B, 11/A422.B) -> stud to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.) - stud carried to deck (activity side open to structure)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Kids Club Activity 111",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "open to structure; elevation 9/A422.B (KIDS CLUB EAST) cinema wall finished to top"
+    },
+    {
+     "side": "B",
+     "room": "Kids Club Cinema 112",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 9.5,
+     "height_source": "C-1 ACT 9'-6\" AFF (A422.A); head C board to ceiling"
+    }
+   ],
+   "notes": "Base detail X. Headwall over the cinema north opening (15/A502, EL +8'-6\" to deck, A2.01 dashed line) starts at this wall's N end - see notes_info (bulkhead, not loaded here)."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note: 'MIN. 25 GAUGE 3-5/8\" STEEL STUDS 16\" O.C. WITH LATERAL BRACING IN TWO ROWS 3\" APART'",
+   "gauge": "25 ga (min.)",
+   "gauge_source": "A301 INTERIOR PARTITION TYPE 'A2' note 'MIN. 25 GAUGE'",
+   "detail_source": "A301",
+   "stud_source": "A301 INTERIOR PARTITION TYPE 'A2' table + note",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A422-5",
+   "tag": "A2-3D",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [
+    "PT0004",
+    "PT0005"
+   ],
+   "location": "South wall of Kids Club Activity 111 / Cinema 112 = north wall of Pilates 122 (also drawn and tagged A2-3D PT0009 on A431)",
+   "demo_source": "AD101: open shell -> NEW",
+   "length_ft": 32.42,
+   "length_status": "DERIVED",
+   "length_source": "A422",
+   "length_op": "vector x1115.5 (E face A6D west wall) to x1699.0 (W face C3D furring) = 583.5 pt / 18 = 32.42 ft; cross-check printed 10'-11\"+9'-9\"+12'-2\" = 32'-10\" (x1116.7-1707.6) - 8.6 pt (C3D + storefront line) = 32.36 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1909.4,
+    "c1": 1924.8,
+    "lo": 1115.5,
+    "hi": 1699.0,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 10.27,
+   "img": "img/Z2_A-A422-5.png",
+   "detail": "INTERIOR PARTITION TYPE 'A2' (A2-3D: two rows 3-5/8\" studs 3\" apart, 3\" sound batt, head D, sill X)",
+   "stud_size": "3-5/8\"",
+   "rows": 2,
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301 stud to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06) (two stud rows -> two tracks)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Kids Club Activity 111",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height to deck",
+     "length_ft": 19.03,
+     "length_source": "A422 vector x1115.5-1458.0"
+    },
+    {
+     "side": "A",
+     "room": "Kids Club Cinema 112",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height to deck (cinema C-1 ACT 9'-6\" below)",
+     "length_ft": 12.89,
+     "length_source": "A422 vector x1466.9-1699.0"
+    },
+    {
+     "side": "A",
+     "room": "A6C cinema west wall bearing (no board)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0,
+     "height_source": "-",
+     "length_ft": 0.49,
+     "length_source": "A422 vector x1458.0-1466.9",
+     "board_none_reason": "T with A-A422-4 (A6C) - wall thickness, no exposed face"
+    },
+    {
+     "side": "B",
+     "room": "Pilates 122",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height to deck (A431 room)"
+    }
+   ],
+   "notes": "rows = 2 (A2 note, two rows 3\" apart). Base detail X. 3\" sound batt EXCLUDED. Tagged on A422 and A431 -> lower sheet A422 owns (A431 PT0009 is for the A431 task to discard)."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A422-6",
+   "tag": "C3D",
+   "sheet": "A422",
+   "page": 26,
+   "tag_ids": [
+    "PT0129"
+   ],
+   "location": "Furring at existing east storefront: SE corner of Kids Club Cinema 112 continuing S along Pilates 122 to the mullion at grid E.5 (A431)",
+   "demo_source": "AD101 D0.15: existing storefront glazing system to remain - new C3D furring on its room side (A422 / A431 draw it NEW, gray)",
+   "length_ft": 6.93,
+   "length_status": "DERIVED",
+   "length_source": "A422 + A431",
+   "length_op": "vector y1878.0 (storefront mullion, A422) to y2002.8 (A431 y1166.4 + dy 836.4, gap at grid E.5 mullion, next segment is a separate C3D wall tagged A431 PT0133) = 124.8 pt / 18 = 6.93 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 1699.0,
+    "c1": 1704.5,
+    "lo": 1878.0,
+    "hi": 2002.8,
+    "sheet": "A422"
+   },
+   "thickness_measured_in": 3.67,
+   "img": "img/Z2_A-A422-6.png",
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' (C3D: 3-5/8\" stud, head D, sill X)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301 stud to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Kids Club Cinema 112",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height",
+     "length_ft": 1.74,
+     "length_source": "A422 vector y1878.0-1909.4"
+    },
+    {
+     "side": "A",
+     "room": "Pilates 122",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height",
+     "length_ft": 4.33,
+     "length_source": "A422/A431 vector y1924.8-2002.8"
+    },
+    {
+     "side": "B",
+     "room": "existing storefront (D0.15)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0,
+     "height_source": "-",
+     "board_none_reason": "INTERIOR FURRING PARTITION TYPE 'C'/A301: board on room side only, existing construction on the other side"
+    }
+   ],
+   "notes": "Same segment tagged C3D on A431 (PT0132) -> lower sheet A422 owns the whole straight segment (A431 PT0132 for the A431 task to discard). Base detail X. A2-3D butts its W face (y1909.4-1924.8)."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [
+    {
+     "ref": "132",
+     "kind": "door",
+     "ro_w_ft": 3.33,
+     "head_ft": 7.17,
+     "source": "A601 door schedule: door 132 IT/AV LV1 3'-0\" x 7'-0\", frame HMF; A601 DOOR & FRAME TYPES 1/A601 HMF 2\" TYP face -> R.O. = 3'-0\" + 2 x 2\" = 3'-4\", head = 7'-0\" + 2\" = 7'-2\"",
+     "xy_pt": [
+      2042.0,
+      889.4
+     ]
+    }
+   ],
+   "id": "A-A423-1",
+   "tag": "A6D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0082"
+   ],
+   "location": "North wall of IT/AV 132 (service corridor 'STAFF-ONLY LOADING/SERVICE ACCESS' on the north)",
+   "demo_source": "AD101: no existing wall on this line (old room N wall was at the D0.35 demolished partition further S); IT/AV W and E walls EXISTING to remain (A423 'EXISTING', AD101 D0.07)",
+   "length_ft": 9.98,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "SCALE CHECK A423: printed 5'-0\" top string ticks x1401.35-1491.35 = 90.0 pt (18.00 pt/ft) and 5'-1 1/2\" = 92.4 pt (18.02). Length: x1898.6 (inner face existing W wall) to x2078.2 (inner face existing E wall) = 179.6 pt / 18 = 9.98 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 884.9,
+    "c1": 893.8,
+    "lo": 1898.6,
+    "hi": 2078.2,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 5.93,
+   "img": "img/Z2_A-A423-1.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6D)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Service corridor (staff-only loading/service access)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height"
+    },
+    {
+     "side": "B",
+     "room": "IT/AV 132",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 exposed (A423.A); head D full height"
+    }
+   ],
+   "notes": "Base detail X*. 6\" sound batt EXCLUDED."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-2",
+   "tag": "A6D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0083"
+   ],
+   "location": "Infill in existing south wall of IT/AV 132 (VIP Room 124 on the south)",
+   "demo_source": "AD101 D0.36: existing door and frame removed in this existing wall -> new A6D infill; rest of the wall EXISTING to remain (D0.07)",
+   "length_ft": 3.16,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector x2013.8-2070.7 (gray new segment between existing wall ends) = 56.9 pt / 18 = 3.16 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1153.9,
+    "c1": 1162.8,
+    "lo": 2013.8,
+    "hi": 2070.7,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 5.93,
+   "img": "img/Z2_A-A423-2.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6D)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "IT/AV 132",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 exposed; head D full height"
+    },
+    {
+     "side": "B",
+     "room": "VIP Room 124",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height (C-12 ACT 14'-0\" AFF below, A423.A)"
+    }
+   ],
+   "notes": "Infill of removed existing door (AD101 D0.36). Base detail X*."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-3",
+   "tag": "C3C",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0117"
+   ],
+   "location": "Furring E of IT/AV 132 closing the south end of the corridor between IT/AV and Men's lockers (VIP Room 124 on the south)",
+   "demo_source": "A423: gray (NEW) segment between existing IT/AV E wall and existing VIP E wall",
+   "length_ft": 3.32,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector x2087.5 (outer face existing IT/AV E wall) to x2147.3 (existing VIP E wall) = 59.8 pt / 18 = 3.32 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1158.2,
+    "c1": 1163.8,
+    "lo": 2087.5,
+    "hi": 2147.3,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 3.73,
+   "img": "img/Z2_A-A423-3.png",
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' (C3C: 3-5/8\" stud, head C, sill X*)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head C/A301 (stops above ceiling, braced); north side open to structure -> stud loaded to deck (conservative); B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.) - stud loaded to deck (north side has no ceiling)",
+   "faces": [
+    {
+     "side": "B",
+     "room": "VIP Room 124",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 14.0,
+     "height_source": "C-12 ACT 14'-0\" AFF (A423.A); head C board to ceiling"
+    },
+    {
+     "side": "A",
+     "room": "corridor alcove N of the furring",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0,
+     "height_source": "-",
+     "board_none_reason": "INTERIOR FURRING PARTITION TYPE 'C'/A301 shows board on the room side only (RFI: corridor face exposed)"
+    }
+   ],
+   "notes": "Base detail X*."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-4",
+   "tag": "A6D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0084"
+   ],
+   "location": "Infill in existing east wall of Electrical Room 134, N of new door 134 (VIP Room 124 on the east)",
+   "demo_source": "AD101 D0.36: existing door and frame removed in this existing wall; A423 gray segment = NEW infill, rest EXISTING (D0.07)",
+   "length_ft": 2.91,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector y1360.3-1412.6 = 52.3 pt / 18 = 2.91 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 477.6,
+    "c1": 486.7,
+    "lo": 1360.3,
+    "hi": 1412.6,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 6.07,
+   "img": "img/Z2_A-A423-4.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6D)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Electrical Room 134",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 exposed (A423.A); head D full height"
+    },
+    {
+     "side": "B",
+     "room": "VIP Room 124",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height"
+    }
+   ],
+   "notes": "Door 134 (LV1 3'-0\" x 7'-0\" HMF, A601) sits S of this infill in the existing opening - not inside this segment; header over door 134 see doubts. Base detail X*."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-5",
+   "tag": "A6D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0085"
+   ],
+   "location": "Infill in existing VIP Room 124 east wall (Men's Janitor 131 / men's locker side on the east)",
+   "demo_source": "AD101 D0.35: demolish existing partition (5'-2\" piece at this line) -> new A6D infill; rest of the VIP east wall EXISTING (A423 'EXISTING')",
+   "length_ft": 5.17,
+   "length_status": "CONFIRMED",
+   "length_source": "AD101 (demolition dim) / A423 vector",
+   "length_op": "printed 5'-2\" (AD101 dim at the demolished piece) = 5.17 ft; A423 vector y1594.8-1687.2 = 92.4 pt / 18 = 5.13 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 2147.3,
+    "c1": 2156.2,
+    "lo": 1594.8,
+    "hi": 1687.2,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 5.93,
+   "img": "img/Z2_A-A423-5.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A6D)",
+   "stud_size": "6\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "VIP Room 124",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height"
+    },
+    {
+     "side": "B",
+     "room": "Men's Janitor 131 / Men's locker area (A424)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height; wet room MR (A301 / A111)"
+    }
+   ],
+   "notes": "Also visible on A424 (men's lockers); A423 owns (tag here, lower sheet). Base detail X*."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-6",
+   "tag": "A3C",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0028"
+   ],
+   "location": "East wall of Women's Janitor 138 (VIP Room 124 on the east); also drawn untagged on A425",
+   "demo_source": "A423 gray (NEW) segment collinear with the existing VIP west wall (A423 'EXISTING' above it)",
+   "length_ft": 5.13,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector y1773.8 (janitor N wall) to y1866.2 (existing S wall) = 92.4 pt / 18 = 5.13 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "V",
+    "c0": 375.1,
+    "c1": 380.4,
+    "lo": 1773.8,
+    "hi": 1866.2,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 3.53,
+   "img": "img/Z2_A-A423-6.png",
+   "detail": "INTERIOR PARTITION TYPE 'A' (A3C)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head C/A301; janitor 138 is C-7 exposed (A425.A) -> stud loaded to deck; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.) - stud loaded to deck (janitor side open to structure)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Janitor 138",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "C-7 EXPOSED (A425.A); mop sink wet room MR (A301 / A111)"
+    },
+    {
+     "side": "B",
+     "room": "VIP Room 124",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 14.0,
+     "height_source": "C-12 ACT 14'-0\" AFF (A423.A); head C board to ceiling"
+    }
+   ],
+   "notes": "Base detail X. Mop sink FRP panel (A425 keynote A2.18) = FRP, other trade EXCLUDED."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-7",
+   "tag": "C3D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0130"
+   ],
+   "location": "South end cap of the locker recess on the VIP west wall line (women's locker side)",
+   "demo_source": "A423 gray (NEW) piece against existing VIP west wall",
+   "length_ft": 0.67,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector x362.4-374.4 (to face of existing wall) = 12.0 pt / 18 = 0.67 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1743.4,
+    "c1": 1748.9,
+    "lo": 362.4,
+    "hi": 374.4,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 3.67,
+   "img": "img/Z2_A-A423-7.png",
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' (C3D)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "B",
+     "room": "Women's Locker Room 135 (A425)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height; locker room MR (A111 general note)"
+    },
+    {
+     "side": "A",
+     "room": "locker recess (behind lockers)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0,
+     "height_source": "-",
+     "board_none_reason": "INTERIOR FURRING PARTITION TYPE 'C'/A301: board on room side only"
+    }
+   ],
+   "notes": "Base detail X."
+  },
+  {
+   "element": "wall",
+   "new_or_existing": "NEW",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "detail_source": "A301",
+   "stud_source": "A301 type table + WALL TAG KEY I/A301",
+   "top_track_source": "A301",
+   "openings": [],
+   "id": "A-A423-8",
+   "tag": "C3D",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [],
+   "untagged_reason": "Untagged gray (NEW) piece symmetric to A-A423-7 (same 3.67\" thickness) at the north end of the same locker recess; typed C3D like its tagged twin",
+   "location": "North end cap of the locker recess on the VIP west wall line (women's locker side)",
+   "demo_source": "A423 gray (NEW) piece against existing VIP west wall",
+   "length_ft": 0.67,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "vector x362.4-374.4 = 12.0 pt / 18 = 0.67 ft",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "H",
+    "c0": 1555.0,
+    "c1": 1560.5,
+    "lo": 362.4,
+    "hi": 374.4,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 3.67,
+   "img": "img/Z2_A-A423-8.png",
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' (C3D)",
+   "stud_size": "3-5/8\"",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head D/A301 (by twin); B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (D)/A301: 2\" slip track to structural metal deck (top track secured to 2x blocking between joist top chords = wood, EXCLUDED Div. 06)",
+   "faces": [
+    {
+     "side": "A",
+     "room": "Women's Locker Room 135 (A425)",
+     "board": "5/8\" MR",
+     "layers": 1,
+     "height_ft": 22.83,
+     "height_source": "head D full height; locker room MR (A111 general note)"
+    },
+    {
+     "side": "B",
+     "room": "locker recess (behind lockers)",
+     "board": "none",
+     "layers": 0,
+     "height_ft": 0,
+     "height_source": "-",
+     "board_none_reason": "INTERIOR FURRING PARTITION TYPE 'C'/A301: board on room side only"
+    }
+   ],
+   "notes": "Base detail X. Recess between caps printed 10'-5 1/2\" on A425 (188.3 pt matches y1560.5-1748.9)."
+  },
+  {
+   "id": "A-A423-9",
+   "tag": "C3C",
+   "element": "pier",
+   "sheet": "A423",
+   "page": 30,
+   "tag_ids": [
+    "PT0116"
+   ],
+   "location": "Small C3C box (U-shaped, notched) at the NW corner of the existing drinking-fountain alcove, east end of the VIP north railing",
+   "new_or_existing": "NEW",
+   "demo_source": "A423 gray (NEW); alcove walls EXISTING (A423 'EXISTING' leader)",
+   "length_ft": 2.34,
+   "length_status": "DERIVED",
+   "length_source": "A423",
+   "length_op": "faces with board W 13.7 pt + N 14.8 pt + E 13.7 pt = 42.2 pt / 18 = 2.34 ft (box x1701.8-1716.6, y884.9-898.6)",
+   "length_basis": "face to face",
+   "band": {
+    "ori": "BOX",
+    "c0": 1701.8,
+    "c1": 1716.6,
+    "lo": 884.9,
+    "hi": 898.6,
+    "sheet": "A423"
+   },
+   "thickness_measured_in": 3.73,
+   "img": "img/Z2_A-A423-9.png",
+   "detail": "INTERIOR FURRING PARTITION TYPE 'C' (C3C)",
+   "detail_source": "A301",
+   "stud_size": "3-5/8\"",
+   "stud_source": "A301 type table",
+   "oc_in": 16,
+   "oc_source": "A301 INTERIOR PARTITION TYPE 'A2' note '16\" O.C.' (only spacing printed on A301; other types REF S501, not in set)",
+   "gauge": "PENDING",
+   "gauge_source": "spec 09 22 16 2.2.B.2: min base-steel thickness 'as required by performance requirements for horizontal deflection' (0.0147 in min); A301 type notes 'REF S501 for stud size, spacing, anchoring and max height' - S501 not in set",
+   "height_ft": 22.83,
+   "height_status": "PENDING",
+   "height_source": "head C/A301; north side is the service corridor (no ceiling shown) -> stud to deck conservative; B.O. DECK printed 'VARIOUS' on A422.B / A423.B; hidden Revit level text 22'-10\" under 'VARIOUS' on A423.B (p32) and elevation 10/A422.B geometry (scale checked with printed 4'-0\") both give ~22'-10\"; S300 gives no elevation -> conservative 22'-10\" loaded, RFI",
+   "top_track": "HEAD DETAIL (C)/A301: partition as scheduled, ceiling as scheduled, wall bracing to structure (RE: STRUCT.)",
+   "top_track_source": "A301",
+   "faces": [
+    {
+     "side": "W",
+     "room": "VIP north area (AP-1 slat ceiling)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 11.5,
+     "height_source": "AP-1 at 11'-6\" AFF (A423.A) - PENDING",
+     "length_ft": 0.76,
+     "length_source": "A423 vector"
+    },
+    {
+     "side": "N",
+     "room": "Service corridor",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 11.5,
+     "height_source": "head C board to adjacent ceiling line 11'-6\" (PENDING)",
+     "length_ft": 0.82,
+     "length_source": "A423 vector"
+    },
+    {
+     "side": "E",
+     "room": "Drinking fountain alcove (16/A502 GYP soffit)",
+     "board": "5/8\" type X",
+     "layers": 1,
+     "height_ft": 11.5,
+     "height_source": "PENDING (alcove soffit height not printed)",
+     "length_ft": 0.76,
+     "length_source": "A423 vector"
+    }
+   ],
+   "openings": [],
+   "notes": "South face notched (railing / gate post) and against the alcove: no board loaded. Base detail X*."
+  }
+ ],
+ "tags_descartados": [
+  {
+   "id": "PT0026",
+   "motivo": "same wall as A421 (counted there): A3C wall between Kids Storage 110 / Restroom 109 and Smoothie Storage 106 / Family Restroom 105 is drawn full length and tagged A3C (PT0025) on A421 (band x1412.2-1775.5 = A422 x1115.5-1478.6); tagged on both -> lower sheet A421 owns",
+   "imagen": "img/Z2_desc_PT0026.png"
+  },
+  {
+   "id": "PT0078",
+   "motivo": "same wall as A421 (counted there): the A6D stub above the kids storage (A422 x1139-1148, y1018-1030) is the end of the Smoothie Storage 106 west wall, tagged A6D (PT0076) on A421; lower sheet A421 owns",
+   "imagen": "img/Z2_desc_PT0078.png"
+  },
+  {
+   "id": "PT0077",
+   "motivo": "same wall as A421 (counted there): Kid's Check-In 107 north wall (A6D with window C and door 107) is drawn full length and tagged A6D (PT0075) on A421 (x1784.4-2004.5 = A422 x1487.8-1707.6); lower sheet A421 owns",
+   "imagen": "img/Z2_desc_PT0077.png"
+  },
+  {
+   "id": "PT0080",
+   "motivo": "same wall as A421 (counted there): the A6D line Family Restroom 105 east wall -> Kids Restroom 109 east wall is one straight 6\" line (A422 x1478.6-1487.8, y977.5-1176.2) tagged A6D (PT0074) on A421; lower sheet A421 owns - A421 must run it to A422 y1176.2 (see doubt)",
+   "imagen": "img/Z2_desc_PT0080.png"
+  }
+ ],
+ "blocking_items": [
+  {
+   "wall": "A-A422-1",
+   "label": "33 BASE CABINETS - CONT MTL TRACK - 5\" & 2'-6\" - IN WALL 6 X 16 GA CONT MTL TRACK - A422.B",
+   "material": "metal",
+   "length_ft": 11.33,
+   "length_op": "2 rows (5\" & 2'-6\") x cabinet run 102.0 pt / 18 = 5.67 ft (A422 casework y1273.7-1375.7 on the kids club face) = 11.33 LF",
+   "source": "A103 BACKING SCHEDULE item 33 + A103 plan tag 33 at kids club west wall"
+  },
+  {
+   "wall": "A-A422-1",
+   "label": "34 UPPER CABINETS - WOOD BLOCKING - 4'-7\" & 6'-7\" - IN WALL F.R.T. WOOD BLOCKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 item 34",
+   "note": "EXCLUDED - wood blocking (Div. 06): upper cabinets 34/A103"
+  },
+  {
+   "wall": "A-A422-1",
+   "label": "47 STORAGE CUBBIE BENCH - WOOD BLOCKING - 1'-4\" - IN WALL F.R.T. WOOD BLOCKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 item 47 (tag at west face near Studio Entry 121)",
+   "note": "EXCLUDED - wood blocking (Div. 06): 47/A103"
+  },
+  {
+   "wall": "A-A422-3",
+   "label": "16 MISC ACCESSORIES - WOOD OR MTL STRAP - VARIES",
+   "material": "metal",
+   "qty": null,
+   "qty_status": "PENDING (A103 height 'VARIES', no count printed; metal taken per standing order)",
+   "source": "A103 item 16 tag in Kids Club Restroom 109"
+  },
+  {
+   "wall": "A-A422-3",
+   "label": "62 EQUIPMENT BACK - WOOD BLOCKING 4'-0\" / 15 LOCKER ROOM MIRRORS - WOOD BLOCKING 3'-4\" & 8'-4\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 items 62 and 15 tags in Kids Club Restroom 109",
+   "note": "EXCLUDED - wood blocking (Div. 06): 62/A103, 15/A103"
+  },
+  {
+   "wall": "A-A422-5",
+   "label": "31 CINEMA TV MONITOR - F.R.T. PLYWOOD 4'-6\"-7'-6\" - IN WALL F.R.T. WOOD BACKING",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 item 31 (cinema face)",
+   "note": "EXCLUDED - FRT plywood (Div. 06): 31/A103"
+  },
+  {
+   "wall": "A-A423-6",
+   "label": "58 MOP/BROOM HOLDER - WOOD BLOCKING 5'-10\" / 59 CLEANING CHEMICAL DISPENSER - F.R.T. PLYWOOD 3'-0\" TO 5'-0\"",
+   "material": "wood (EXCLUDED)",
+   "source": "A103 items 58/59 in Women's Janitor 138",
+   "note": "EXCLUDED - wood (Div. 06): 58/A103, 59/A103"
+  }
+ ],
+ "notes_info": [
+  "A-Z2 scope: A422 + A423 walls. Exclusions: insulation (sound batt), wood blocking / 2x blocking at head D top track, FRT plywood, FRP (mop sink A2.18, WP-6 wall protection), railings A2.209 / gate 124, millwork, ACT - not quantified.",
+  "Cinema headwall (NOT loaded here, ceilings/bulkheads task A-GEN from A422.A): 15/A502 HEADWALL SECTION - ACT over the open north side of Kids Club Cinema 112 (A2.01 dashed line, EL +8'-6\" soffit on A422.A and 11/A422.B), 6\" metal stud 20 GA @ 24\" O.C. extended to deck + MTL STUD BOX HEADER, A422 x1466.9-1698.4 at y1752.4-1759.6 = 231.5 pt / 18 = 12.86 ft, height 8'-6\" to deck; kids side finished to deck (11/A422.B), cinema side to 6\" above ACT 9'-6\".",
+  "VIP north soffit / headwall above the railing (A2.01 dashed line on A423) and drinking-fountain alcove soffit 16/A502 -> ceilings task (A423.A); not loaded here.",
+  "Existing walls not quantified: Kids Club east storefront (AD101 D0.15) and east wall (D0.06, A422 'EXISTING'); IT/AV 132 west / east / south walls (A423 'EXISTING', AD101 D0.07); Electrical Room 134 walls; VIP Room 124 perimeter walls (A423 'EXISTING'); drinking fountain alcove walls; small gray stub labelled 'EXISITING' at A423 x337.2-342.7, y1543.9-1550.6 (label says existing, < 6\").",
+  "A422 3.5\" stub at x1085-1106.4, y1772.2-1777.7 (W of the kids west wall) = end of an A101 A3C wall (Studio Entry) - counted by A101, not here.",
+  "A-A422-1 west wall: its top 1.2 ft (A422 y1030.1-1051) is also drawn as an untagged stub on A421; its Pilates portion (door 122 storefront) is drawn untagged on A431 - both included in A-A422-1 (do not count again).",
+  "A-A422-5 (A2-3D) is also tagged on A431 (PT0009) and A-A422-6 (C3D) on A431 (PT0132): A422 is the lower sheet and owns both.",
+  "Discarded A422 tags PT0026 / PT0077 / PT0078 / PT0080 belong to walls tagged on A421 (lower sheet). Check at merge that A421 counts the A6D east line down to A422 y1176.2 (kids restroom SE corner) - the A421 plan crop stops at A422-equivalent y1051.",
+  "Heights: all head-D walls and every face open to structure loaded to B.O. deck 22'-10\" (PENDING, label 'VARIOUS'); head-C walls with one side open to structure carried to deck (conservative)."
+ ]
+}
