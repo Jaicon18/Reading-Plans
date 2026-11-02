@@ -10,3 +10,4 @@ Decisión del estimador (RFI-10, regla fija R-ALC-02): blocking de accesorio sin
 | **Material Summary** | backing track 1,368.55 / plate 198.00 | **backing track 1,378.88 / plate 246.00 (+58.33 LF)** |
 RFI-10 ahora solo pregunta el largo de corridas de cabinetry del break room y shelving. Todo lo demás igual a rev2. reglas.py 0 fallas, cobertura 334/334.
 - RFI-11 cerrado 2026-11-02: máximos de N/S03.01 (sin cambio de cantidad).
+- RFI-13 cerrado 2026-11-02 (decisión del estimador): REPLACE 5/8" Type X en demising (E) norte + sur = 2 x 124'-7 1/8" (A02.01, sur DERIVADO) x 12'-0" = 2,990.25 SF (U465). Retiro del board existente = demolición, excluido.
