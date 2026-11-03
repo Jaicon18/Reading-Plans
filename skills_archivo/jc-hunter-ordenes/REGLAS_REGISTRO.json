@@ -1,9 +1,9 @@
 {
- "version": "registro v2 (v81cf24, 2026-11-03: 0 programa-pendiente; chequeos_biblioteca.py + CE_CALLOUTS)",
+ "version": "registro v3 (v81cf25, 2026-11-03: + BE-125..BE-130, O'Reilly rev5)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 230,
-  "conducta": 40,
+  "programa": 234,
+  "conducta": 42,
   "historico": 23
  },
  "reglas": [
@@ -3957,6 +3957,79 @@
    },
    "cuando": "entrega",
    "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
+  },
+  {
+   "id": "BE-125",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Set raster sin OCR: barrido de RFI ciego (O'Reilly rev5)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_texto_set_ocr"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-126",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Head track adicional en walls de furring sin hoja impresa (O'Reilly rev5)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/accesorios.py::additional_head_track",
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_head_track_furring"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-127",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Cita no literal del plano (FLAT STRAP por FLAT STRIP)",
+   "categoria": "conducta",
+   "nota": "chequeo BE-12 de chequeos_biblioteca busca cada cita en el texto del set"
+  },
+  {
+   "id": "BE-128",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Insumos copiados sin conservar fechas (cp -r): revisión vencida falsa",
+   "categoria": "conducta",
+   "nota": "copiar con cp -a / copy2; la compuerta de etapas de reglas.py lo detecta"
+  },
+  {
+   "id": "BE-129",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Compuertas contradictorias (SF markup) y falsos positivos de chequeos en sets OCR",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/revision_markups.py::revisar",
+    "take-off:tools/chequeos_biblioteca.py::be_15",
+    "take-off:tools/auditoria_entrega.py::calibracion_raster"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_chequeos_ocr_oreilly"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-130",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Runner de v81cf24 no arrancaba (import sin tools/); comparar_extra nunca corría",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:runner/run_takeoff.py::comparar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_runner_comparar_extra"
+   },
+   "cuando": "entrega"
   }
  ]
 }

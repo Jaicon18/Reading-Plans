@@ -342,3 +342,40 @@ verif_callouts.py / cadena_detalles.py / verif_detalles.py estaban en el skill p
 
 ## Programas de la biblioteca (v81cf24, 3-nov, orden "haz los programas")
 Desde v81cf24 TODA prueba de esta biblioteca tiene chequeo de programa en tools/chequeos_biblioteca.py (o verificar_version.py / reglas.py, ver REGLAS_REGISTRO.json) que corre dentro de compuerta_entrega.py, con su caso en tools/test_chequeos_biblioteca.py que reproduce el error original. La lectura del Paso 12 b sigue, pero ya no es la única prueba.
+
+
+## BE-125 — Set RASTER sin OCR: el barrido de RFI (BE-120) quedaba ciego (O'Reilly rev5, 3-nov)
+O'Reilly A1.1–A6.1 / S1.1 son escaneos sin capa de texto: `compuerta_entrega.py texto` sacaba 1 carácter por hoja y el barrido de
+términos de cada RFI "pasaba" sin haber leído nada. Prueba (R80e.151): texto_set pasa por OCR (tesseract) toda hoja con
+< 200 caracteres, lee el número de hoja del title block y separa las páginas en blanco; CE_RFI_BARRIDO_IMPRESO falla si queda
+una hoja sin texto. Test: test_compuerta_entrega.py::test_oreilly_rev5 (bloque test_texto_set_ocr).
+
+## BE-126 — Head track adicional cargado sin hoja impresa en walls de furring (O'Reilly rev5, 3-nov)
+32.73 LF de "additional head track at openings over 4'-0\"" salían del criterio del skill (N/SHEET: default) sobre Door 3 y
+Windows D1 / D2, que están en S21 = Z-furring 150ZF125-18 sobre CMU (sin studs, lintel de mampostería S4.1); ninguna hoja
+imprime head track (7/A5.1 = solo box header). Prueba (R80e.144): accesorios.additional_head_track no cuenta aberturas de
+walls de furring y el 0 cita su fuente; CE_MATERIALES_SCHEDULE marca RED toda fila con cantidad y N/SHEET: default.
+Test: bloque test_head_track_furring.
+
+## BE-127 — Cita no literal del plano ("FLAT STRAP" por "FLAT STRIP") (O'Reilly rev5, 3-nov)
+El rótulo del strap citaba 'DIAGONAL WALL BRACING (3" x 16 GA FLAT STRAP)'; A1.1 Interior Wall Notes 2.B imprime
+"( 3" X 16 GA. FLAT STRIP )". Toda cita entre comillas va copiada de la imagen, letra por letra; BE-12 (chequeos_biblioteca)
+la busca en el texto del set (con OCR desde R80e.151). Conducta + chequeo BE-12.
+
+## BE-128 — Insumos del proyecto copiados sin conservar fechas (O'Reilly rev5, 3-nov)
+`cp -r` dejó revision.json "más viejo" que canon_A / canon_B (mismo segundo) y reglas.py marcó la revisión como vencida:
+2 fallas falsas. Regla: copiar insumos y carpetas de trabajo SIEMPRE con fechas (`cp -a`, shutil.copy2 / copytree).
+Conducta (la compuerta de etapas de reglas.py es la que lo detecta).
+
+## BE-129 — Dos compuertas que se contradicen y chequeos con falsos positivos en sets OCR (O'Reilly rev5, 3-nov)
+verificar_markups_excel exige SF del markup = board SF (BE-117) y revision_markups exigía LF x H: todo wall con 2 caras
+fallaba en una de las dos; revision_markups no aceptaba la causa escrita (length_cause) que la otra sí. Además 8 chequeos de la
+biblioteca daban FAIL por texto OCR, negaciones ("not deducted") o listas de types ("S21/S24"). Prueba (R80e.143 / R80e.145 /
+R80e.150): cada arreglo con test que reproduce el falso positivo de O'Reilly Y el error real que sigue fallando.
+Test: bloques test_revision_markups_be117, test_chequeos_ocr_oreilly, test_auditoria_raster.
+
+## BE-130 — El runner de la versión vigente no arrancaba (O'Reilly rev5, 3-nov)
+v81cf24 importaba chequeos_biblioteca (tools/) desde runner/run_takeoff.py sin tools/ en el path: ModuleNotFoundError antes
+del paso 1; la suite no lo vio porque los tests importan con tools/ en el path. Prueba (R80e.148): el test importa el runner
+SOLO con runner/ en el path; además comparar_extra.py corre después de comparar.py (R80e.147, U-081).
+Test: bloque test_runner_comparar_extra.
