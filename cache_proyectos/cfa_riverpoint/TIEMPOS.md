@@ -35,4 +35,5 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | R4-2 | Aplicar respuestas + cadena completa rev4 (subagente; reinicio de contenedor a las 16:26, retomado) | 16:20 | ~16:59 | ~39 min |
 | R4-1 | Compuerta A_RFI_BARRIDO (R80f.6) en v81cf10 = v81cf9 + R80f.6; suite 44/44, verificador 0 faltantes (en paralelo) | 16:06 | 16:08 | 2 min |
 | R4-3 | Compuerta BE-117 markups vs Excel en v81cf11 (subagente, en paralelo a rev4); CAMBIOS v70–v77 unidos para bajar de 200 archivos | 16:29 | 16:38 | 9 min |
-| R4-4 | Skill v81cf12 (arreglos BE-117b–f de la rev4) + back-check rev4 (subagente) | 16:59 | | |
+| R4-4 | Skill v81cf12 + back-check rev4 (FAIL 2/53) → arreglos → re-check PASS; v81cf13 (parche Chuze) vigente; 2.º reinicio de contenedor a las 17:10 | 16:59 | 17:15 | 16 min |
+| R4-5 | Cadena final con v81cf13 (Excel y markups idénticos), compuertas (REGLAS 855/0, BITACORA OK, ETAPAS PASA, markups 121/121) + subida a Drive | 17:15 | | |

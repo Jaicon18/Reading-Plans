@@ -1,7 +1,9 @@
-# PARA REVISAR EN LA MAÑANA — Chick-fil-A #2284 River Point (CDM Builds), bid 12-nov-2026 11:00 AM MST (10:00 AM hora de California)
+ESTA ES LA VERSIÓN FINAL PARA REVISAR
+
+# PARA REVISAR EN LA MAÑANA — Chick-fil-A #2284 River Point (CDM Builds), bid 12-nov-2026 11:00 AM MST (10:00 AM hora de California) — rev4
 
 ## Datos del proyecto
-| Dato | Valor | Hoja |
+| Field | Value | Sheet |
 |---|---|---|
 | Project name / city | Chick-fil-A #2284 River Point FSU Remodel - Sheridan, CO | G-000 title block |
 | Address | 4090 River Point Pkwy, Sheridan, CO 80110 | G-000 |
@@ -20,26 +22,37 @@
 | Sprinklered | Yes (max travel 250'-0" sprinklered; sprinkler system = deferred submittal) | G-003 EGRESS; G-000 DEFER SUBMITTALS 1 |
 | Demolition | Yes | A-050 / A-052 |
 | Specs in set | Yes, on sheets A-901..A-911 (no separate project manual) | G-000 sheet index |
+**Mandatory sheets reviewed:** G-000, G-003, A-050, A-052, A-201, A-202 (wall type schedules + wall notes), A-211, A-221, A-401, A-402, A-501..A-503, A-601..A-605, A-611, A-621..A-625, A-701, A-801, A-901..A-911 (specs C05400 / C09111 / C09250), S-001, S-101, S-201, S-241, S-600, S-801, S-901/S-902, M/P sweep, K-001. Not our trade (swept, excluded): OMD canopy vendor sheets, VC vapor control, civil, landscape.
+
 ## Lo más importante (5 puntos)
-1. **Casi todo es madera.** Los walls W4, W4.1, W6, W8 y SW6 son de wood stud (A-202 + S-101 nota 4): el framing queda EXCLUDED (Div. 06). Su gypsum board y cement board SÍ están cargados (bloque "BOARD ONLY" del Partition Takeoff).
-2. **Metal framing chico:** 8" stud en los walls de las hoods (A2/A-605), Z channel de 2" (M2.1), infill de 6" (MB-01), soffits, ceiling joists LGS de 6" (S-241), hatch shaft.
-3. **Board:** 1/2" gyp 1,451.64 SF · 1/2" MR 148.02 SF · 5/8" ceiling sag-resistant 332.06 SF · setting compound del cement board 129.62 lb · 1/2" cement board 1,800.27 SF · Level 5 731.2 SF.
-4. **Demolición de gyp / metal:** 3,263.65 SF (incluye 617.08 SF de board existente en restrooms bajo el cement board nuevo: RFI-19).
+1. **Casi todo es madera.** W4, W4.1, W6, W8 y SW6 son wood stud (A-202 + S-101 nota 4): framing EXCLUDED (Div. 06); su gypsum board y cement board SÍ están cargados (bloque "BOARD ONLY").
+2. **Smoke partition al deck (+14'-8", S-201, RFI-04 resuelto):** M3.5-01 y MB-01 suben al deck con track 3" long-leg slotted (C1/S-801); 8" stud 188.01 LF, 3-5/8" por fuente 266.33 LF.
+3. **Board:** 1/2" gyp 1,481.53 SF · 1/2" MR 148.02 SF · 5/8" ceiling sag-resistant 332.06 SF · 1/2" cement board 1,880.80 SF · Level 5 731.20 SF.
+4. **Demolición de gyp / metal:** 3,317.23 SF (alturas por bahía de A4/S-601; DEMO-08/-09/-10 al B.O. de estructura mientras RFI-10 sigue abierto).
 5. **Tornillería, ductos y trades que no hacemos:** EXCLUDED, sin RFI.
 
-## RFI abiertos: 13 (en todos ya está cargado el valor conservador)
-RFI-02 spacing M3.5 · RFI-04 smoke partition a deck · RFI-06 altura cielo walk-ins · RFI-07 framing del cielo del play bay · RFI-09 miembro del bridging · RFI-10 altura de demo zona office/walk-in · RFI-11 altura half walls · RFI-12 furr-down del menuboard · RFI-13 ancho del recess pin & sleeve · RFI-14 tamaño del hatch shaft · RFI-15 altura de los studs colgantes del soffit · RFI-19 board existente en restrooms · RFI-20 chases de bebidas.
+## RFI resueltos con los planos en rev4: 7
+RFI-02, RFI-04, RFI-06, RFI-13, RFI-14, RFI-15, RFI-19 — fuera de Pending Items; en el Scope Checklist como "RESOLVED from drawings".
+
+## RFI abiertos: 6 (en todos ya está cargado el valor conservador y el barrido completo del set)
+- RFI-07: Play area west bay gyp ceiling (A-221 PT-41 C.H. 14'-6"; existing removed by A-052 KN10): new ceiling framing is printed nowhere (S-241 C3 omits this bay).
+- RFI-09: A2/S-241 LGS schedule prints 'BRIDGING LOCATION: MID SPAN' but no bridging member (S-902 C05400 3.4.E.2 lists cold-rolled channel bridging for wall studs only).
+- RFI-10: Demolition at the KN24 cased openings (DEMO-08, -09, -10, existing east wall): the height of the wall portion removed = the opening / (3)2x12 header height, printed nowhere (A-602 shows 'OPEN TO ...
+- RFI-11: Dining half walls to demolish (A-050 KN8): height printed nowhere.
+- RFI-12: Existing menuboard furr-down / bulkhead to remove (A-052 KN3 + KN7 'as required'): drop and extent printed nowhere (plan width 0.944 ft by vector).
+- RFI-20: A-052 general note 9: patch the existing draftstop wall between kitchen and service at the 4 new 6" beverage chases (P-211, K-611): the patch size around each chase is printed nowhere.
 Detalle con opciones A (planos) · B (código) · C (otro) y delta: SEGUIMIENTO.md y hoja "Pending Items" del Excel.
 
-## RFI cerrados (decisión del estimador = opción A, regla R-ALC-10): 8
-RFI-01, 03, 05, 08, 16, 17, 18, 21 — en "Scope Checklist" del Excel con su delta. El más grande: **RFI-16** (si los walls de madera fueran metal: +1,344 LF de 3-5/8", +171 LF de 8", +282 LF de track y +283 LF de bracing).
+## RFI cerrados (decisión del estimador = opción A, R-ALC-10): 8
+RFI-01, RFI-03, RFI-05, RFI-08, RFI-16, RFI-17, RFI-18, RFI-21 — en el Scope Checklist del Excel con su delta.
 
-## Dónde están los archivos (Drive)
-JC HUNTER PROJECTS › Claude outputs › Chick-fil-A #2284 River Point - Sheridan, CO (CDM Builds) 11-12-26
-- Take-off › CFA2284_RiverPoint_Takeoff_FINAL_rev3.xlsx
-- Planos marcados › CFA2284_RiverPoint_Markups_Bluebeam_rev3.pdf y las 4 imágenes por hoja
-- proceso › certificados del auditor, cobertura, cambios rev2 y rev3, back-checks
+## Markups verificados contra el Excel (BE-117): anotaciones: 121 · OK 121 · FAIL 0 · fallas totales 0
+
+## Dónde están los archivos (carpeta FINAL_FOR_REVIEW; no se subió nada)
+- Take-off › CFA2284_RiverPoint_Takeoff_FINAL_rev4.xlsx
+- Planos marcados › CFA2284_RiverPoint_Markups_Bluebeam_rev4.pdf y las 4 imágenes por hoja _rev4
+- proceso › CAMBIOS_rev4.md, VERIFICACION_MARKUPS_rev4.md (una línea por anotación)
 
 ## Qué tienes que hacer tú (uno a la vez)
-1. Abre el Excel rev3 y revisa la hoja "Pending Items" (13 RFI).
+1. Abre el Excel rev4 y revisa la hoja "Pending Items" (6 RFI).
 2. Contéstame los RFI aquí en el chat (te los mando con botones, 4 por ventana).
