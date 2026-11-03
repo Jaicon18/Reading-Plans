@@ -129,3 +129,5 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **03-nov: v81cf17 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf16 (VS rev16) + R80f.12 (BE-CF19: verificar_markups_excel toma la hoja de un renglón de demolición de su demo_geom, no de la hoja que cita su altura — en v81cf16 CFA rev4 daba 2 FALLAS falsas "L65" / "S-601"). Tests de CFA unidos en tools/test_cf_pruebas.py (sin quitar ninguna prueba) → 199 archivos. Suite 50/50. verificar_version.py 0 faltantes (474). Banco B&N / VS / Chuze / O'Reilly / CFA rev4 = 0 diferencias. CFA rev4: 121/121 markups OK, 0 fallas.
 
 | Chick-fil-A #2284 River Point rev4 (vigente) | v81cf17 | 2026-11-03 | take-off-metal-frame-drywall_v81cf17_CFA-RiverPoint-rev4_2026-11-03.zip |
+
+| Victoria's Secret #679 Downey rev17 FINAL (ceilings corregidos al RCP; markups 208/208) | v81cf16 | 2026-11-03 | take-off-metal-frame-drywall_v81cf16_VS-Downey-rev16-RCP_2026-11-03.zip |
