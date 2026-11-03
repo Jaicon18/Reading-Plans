@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf12: v81cf11 + VS rev15 R80e.132 / R80e.133 (A_SOFFIT_DOBLE; markups = Excel); verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf13: v81cf12 + VS rev15 R80e.132 / R80e.133; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -106,6 +106,10 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 | Chick-fil-A #2284 River Point rev4 (vigente) | v81cf11 | 2026-11-03 | take-off-metal-frame-drywall_v81cf11_CFA-RiverPoint-rev4_2026-11-03.zip |
 
-**03-nov: v81cf12 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf11 (CFA) + R80e.132 (BE-VS-12: framed soffit una sola vez; compuerta A_SOFFIT_DOBLE; test_soffit_doble.py) + R80e.133 (BE-VS-13: markups SF = board del Excel, renglones agrupados en verificar_markups_excel; VS markups 118/118 OK). Suite 46/46. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev14 falla A_SOFFIT_DOBLE (prueba); VS rev15 REGLAS OK.
+**03-nov: v81cf12 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf11 + BE-117b–f (la v81cf11 archivada no tenía los arreglos de tool que la corrida rev4 de CFA hizo para que la compuerta A_MARKUPS_EXCEL quede en verde: SF del markup = board SF del Excel; slip / deflection track con la pata impresa; cada renglón del Material Summary cita todas sus hojas; breakdown de Level 5 y 1/2" gyp por ID). 195 archivos. Suite 48/48. verificar_version.py 0 faltantes. Banco B&N / VS / Chuze / O'Reilly = 0 diferencias. CFA #2284 rev4: verificar_markups_excel 121/121 OK.
 
-| Victoria's Secret #679 Downey rev15 (vigente; back-check ciego del 3-5/8" stud) | v81cf12 | 2026-11-03 | take-off-metal-frame-drywall_v81cf12_VS-Downey-rev15_2026-11-03.zip |
+| Chick-fil-A #2284 River Point rev4 FINAL | v81cf12 | 2026-11-03 | take-off-metal-frame-drywall_v81cf12_CFA-RiverPoint-rev4_2026-11-03.zip |
+
+**03-nov: v81cf13 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf12 (CFA) + R80e.132 (BE-VS-12: framed soffit una sola vez; compuerta A_SOFFIT_DOBLE; test_soffit_doble.py) + R80e.133 (BE-VS-13: markups SF desde board_out = Excel exacto, sin recalcular; verificar_markups_excel suma los walls de un renglón agrupado "W026+W118"). Suite 49/49. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev15: REGLAS OK, markups 118/118 OK (antes 130 fallas).
+
+| Victoria's Secret #679 Downey rev15 (vigente; back-check ciego del 3-5/8" stud; markups = Excel) | v81cf13 | 2026-11-03 | take-off-metal-frame-drywall_v81cf13_VS-Downey-rev15_2026-11-03.zip |

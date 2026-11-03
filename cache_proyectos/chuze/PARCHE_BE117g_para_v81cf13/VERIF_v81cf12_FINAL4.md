@@ -1,0 +1,158 @@
+# Markups vs Excel (R80f.7 / BE-117) — FALLA
+
+- PDF: `/tmp/chuze/work/etapas/5_entrega/Chuze_AustinBluffs_Markups_FINAL4.pdf`
+- Excel: `/tmp/chuze/work/etapas/5_entrega/Chuze_AustinBluffs_Takeoff_FINAL4.xlsx`
+- canon: `/tmp/chuze/work/etapas/4_canon/takeoff_canon.json`
+- anotaciones: 121 · OK 105 · FAIL 16 · fallas totales 24
+- markups por hoja: {'A101': 1, 'A421': 16, 'A421.A': 3, 'A422': 6, 'A422.A': 1, 'A423': 8, 'A423.A': 2, 'A424': 18, 'A424.A': 3, 'A425': 9, 'A425.A': 2, 'A426': 6, 'A427': 4, 'A429': 9, 'A431': 2, 'A432': 3, 'A434': 1, 'A435': 3, 'AD101': 24} · hojas con elementos en el canon: ['A101', 'A421', 'A421.A', 'A422', 'A422.A', 'A423', 'A423.A', 'A424', 'A424.A', 'A425', 'A425.A', 'A426', 'A427', 'A429', 'A431', 'A432', 'A434', 'A435', 'AD101']
+
+## Una línea por anotación
+
+- OK   | p.6 AD101 EX-01 | BOARD ONLY - NO FRAMING | LF 77.33 H H 22'-10" SF 3530.9 | PT fila 122 | /Measure 3/32 in = 1 ft | Length 77.33 vs LF 77.33 (+0.00 %)
+- OK   | p.6 AD101 EX-02 | BOARD ONLY - NO FRAMING | LF 22.16 H H 22'-10" SF 1011.8 | PT fila 123 | /Measure 3/32 in = 1 ft | Length 22.16 vs LF 22.16 (-0.00 %)
+- OK   | p.6 AD101 EX-03 | BOARD ONLY - NO FRAMING | LF 26.67 H H 22'-10" SF 1217.8 | PT fila 124 | /Measure 3/32 in = 1 ft | Length 26.67 vs LF 26.67 (-0.01 %)
+- OK   | p.6 AD101 EX-04A | BOARD ONLY - NO FRAMING | LF 9.64 H H 22'-10" SF 440.2 | PT fila 125 | /Measure 3/32 in = 1 ft | Length 9.64 vs LF 9.64 (-0.00 %)
+- OK   | p.6 AD101 EX-04B | BOARD ONLY - NO FRAMING | LF 4.27 H H 22'-10" SF 195.0 | PT fila 126 | /Measure 3/32 in = 1 ft | Length 4.27 vs LF 4.27 (+0.00 %)
+- OK   | p.6 AD101 EX-05 | BOARD ONLY - NO FRAMING | LF 49.82 H H 22'-10" SF 2274.8 | PT fila 127 | /Measure 3/32 in = 1 ft | Length 49.82 vs LF 49.82 (+0.00 %)
+- OK   | p.6 AD101 EX-06 | BOARD ONLY - NO FRAMING | LF 35.99 H H 22'-10" SF 1643.3 | PT fila 128 | /Measure 3/32 in = 1 ft | Length 35.99 vs LF 35.99 (+0.00 %)
+- OK   | p.6 AD101 EX-07A | BOARD ONLY - NO FRAMING | LF 32.89 H H 22'-10" SF 1501.8 | PT fila 129 | /Measure 3/32 in = 1 ft | Length 32.89 vs LF 32.89 (-0.00 %)
+- OK   | p.6 AD101 EX-07B | BOARD ONLY - NO FRAMING | LF 6.25 H H 22'-10" SF 285.4 | PT fila 130 | /Measure 3/32 in = 1 ft | Length 6.25 vs LF 6.25 (+0.00 %)
+- OK   | p.6 AD101 EX-08 | BOARD ONLY - NO FRAMING | LF 22.65 H H 22'-10" SF 1034.2 | PT fila 131 | /Measure 3/32 in = 1 ft | Length 22.65 vs LF 22.65 (-0.00 %)
+- OK   | p.6 AD101 EX-09A | BOARD ONLY - NO FRAMING | LF 41.07 H H 22'-10" SF 1875.3 | PT fila 132 | /Measure 3/32 in = 1 ft | Length 41.07 vs LF 41.07 (+0.00 %)
+- OK   | p.6 AD101 EX-09B | BOARD ONLY - NO FRAMING | LF 9.42 H H 22'-10" SF 430.1 | PT fila 133 | /Measure 3/32 in = 1 ft | Length 9.42 vs LF 9.42 (-0.00 %)
+- OK   | p.6 AD101 EX-10A | BOARD ONLY - NO FRAMING | LF 17.64 H H 22'-10" SF 805.4 | PT fila 134 | /Measure 3/32 in = 1 ft | Length 17.64 vs LF 17.64 (+0.00 %)
+- OK   | p.6 AD101 EX-10B | BOARD ONLY - NO FRAMING | LF 4.98 H H 22'-10" SF 227.4 | PT fila 135 | /Measure 3/32 in = 1 ft | Length 4.98 vs LF 4.98 (-0.00 %)
+- OK   | p.6 AD101 EX-11 | BOARD ONLY - NO FRAMING | LF 10.74 H H 22'-10" SF 490.4 | PT fila 136 | /Measure 3/32 in = 1 ft | Length 10.74 vs LF 10.74 (-0.00 %)
+- OK   | p.6 AD101 EX-12 | BOARD ONLY - NO FRAMING | LF 17.81 H H 22'-10" SF 813.2 | PT fila 137 | /Measure 3/32 in = 1 ft | Length 17.81 vs LF 17.81 (-0.00 %)
+- OK   | p.6 AD101 EX-13 | BOARD ONLY - NO FRAMING | LF 10.79 H H 22'-10" SF 492.7 | PT fila 138 | /Measure 3/32 in = 1 ft | Length 10.79 vs LF 10.79 (+0.00 %)
+- OK   | p.6 AD101 EX-14 | BOARD ONLY - NO FRAMING | LF 14.86 H H 22'-10" SF 678.5 | PT fila 139 | /Measure 3/32 in = 1 ft | Length 14.86 vs LF 14.86 (-0.00 %)
+- OK   | p.6 AD101 EX-15 | BOARD ONLY - NO FRAMING | LF 38.98 H H 22'-10" SF 1779.8 | PT fila 140 | /Measure 3/32 in = 1 ft | Length 38.98 vs LF 38.98 (-0.01 %)
+- OK   | p.6 AD101 EX-16 | BOARD ONLY - NO FRAMING | LF 41.04 H H 22'-10" SF 1873.9 | PT fila 141 | /Measure 3/32 in = 1 ft | Length 41.04 vs LF 41.04 (+0.00 %)
+- OK   | p.6 AD101 EX-17 | BOARD ONLY - NO FRAMING | LF 16.53 H H 22'-10" SF 754.8 | PT fila 142 | /Measure 3/32 in = 1 ft | Length 16.53 vs LF 16.53 (+0.00 %)
+- OK   | p.6 AD101 EX-18 | BOARD ONLY - NO FRAMING | LF 16.53 H H 22'-10" SF 754.8 | PT fila 143 | /Measure 3/32 in = 1 ft | Length 16.53 vs LF 16.53 (+0.00 %)
+- OK   | p.6 AD101 EX-19 | BOARD ONLY - NO FRAMING | LF 27.60 H H 22'-10" SF 1260.2 | PT fila 144 | /Measure 3/32 in = 1 ft | Length 27.60 vs LF 27.60 (+0.00 %)
+- OK   | p.6 AD101 EX-20 | BOARD ONLY - NO FRAMING | LF 113.96 H H 22'-10" SF 2601.7 | PT fila 145 | /Measure 3/32 in = 1 ft | Length 113.96 vs LF 113.96 (-0.00 %)
+- OK   | p.14 A101 A-A101-1 | A6D | LF 5.23 H H 22'-10" SF 238.8 | PT fila 37 | /Measure 3/32 in = 1 ft | Length 5.23 vs LF 5.23 (-0.00 %)
+- OK   | p.22 A421 A-A421-1 | C3C | LF 4.77 H H 10'-6" SF 47.7 | PT fila 72 | /Measure 1/4 in = 1 ft | Length 4.77 vs LF 4.77 (-0.07 %)
+- OK   | p.22 A421 A-A421-2 | C3C | LF 4.77 H H 10'-6" SF 47.7 | PT fila 73 | /Measure 1/4 in = 1 ft | Length 4.77 vs LF 4.77 (-0.07 %)
+- OK   | p.22 A421 A-A421-3 | D3G | LF 28.34 H H 5'-0" SF 283.4 | PT fila 88 | /Measure 1/4 in = 1 ft | Length 28.34 vs LF 28.34 (-0.00 %)
+- OK   | p.22 A421 A-A421-4 | D3G | LF 1.71 H H 5'-0" SF 19.6 | PT fila 89 | /Measure 1/4 in = 1 ft | Length 1.71 vs LF 1.71 (+0.00 %)
+- OK   | p.22 A421 A-A421-5 | D3G | LF 1.71 H H 5'-0" SF 19.6 | PT fila 90 | /Measure 1/4 in = 1 ft | Length 1.71 vs LF 1.71 (+0.00 %)
+- OK   | p.22 A421 A-A421-6 | A6D | LF 26.41 H H 22'-10" SF 1205.9 | PT fila 38 | /Measure 1/4 in = 1 ft | Length 26.41 vs LF 26.41 (-0.00 %)
+- OK   | p.22 A421 A-A421-7 | A6D | LF 2.96 H H 22'-10" SF 147.5 | PT fila 39 | /Measure 1/4 in = 1 ft | Length 2.96 vs LF 2.96 (+0.00 %)
+- OK   | p.22 A421 A-A421-8 | A6D | LF 2.96 H H 22'-10" SF 148.9 | PT fila 40 | /Measure 1/4 in = 1 ft | Length 2.96 vs LF 2.96 (+0.00 %)
+- OK   | p.22 A421 A-A421-9 | A6D | LF 5.08 H H 22'-10" SF 259.4 | PT fila 41 | /Measure 1/4 in = 1 ft | Length 5.08 vs LF 5.08 (+0.00 %)
+- OK   | p.22 A421 A-A421-10 | A6D | LF 13.46 H H 22'-10" SF 630.6 | PT fila 42 | /Measure 1/4 in = 1 ft | Length 13.46 vs LF 13.46 (+0.00 %)
+- OK   | p.22 A421 A-A421-11 | A6D | LF 21.23 H H 22'-10" SF 983.1 | PT fila 43 | /Measure 1/4 in = 1 ft | Length 21.23 vs LF 21.23 (+0.00 %)
+- OK   | p.22 A421 A-A421-12 | A6D | LF 7.68 H H 22'-10" SF 350.7 | PT fila 44 | /Measure 1/4 in = 1 ft | Length 7.68 vs LF 7.68 (-0.00 %)
+- OK   | p.22 A421 A-A421-13 | A6C | LF 7.68 H H 12'-7" SF 161.9 | PT fila 32 | /Measure 1/4 in = 1 ft | Length 7.68 vs LF 7.68 (-0.00 %)
+- OK   | p.22 A421 A-A421-14 | A6D | LF 15.85 H H 22'-10" SF 723.7 | PT fila 45 | /Measure 1/4 in = 1 ft | Length 15.85 vs LF 15.85 (-0.00 %)
+- OK   | p.22 A421 A-A421-15 | A3C | LF 20.13 H H 14'-5" SF 435.9 | PT fila 11 | /Measure 1/4 in = 1 ft | Length 20.13 vs LF 20.13 (-0.00 %)
+- OK   | p.22 A421 A-A421-16 | A6D | LF 12.17 H H 22'-10" SF 555.7 | PT fila 46 | /Measure 1/4 in = 1 ft | Length 12.17 vs LF 12.17 (-0.00 %)
+- OK   | p.23 A421.A A-A421.A-1 | OTHER FRAMING - SOFFIT SIDE | LF 62.20 H H 10'-10" SF 673.6 | PT fila 108 | /Measure 1/4 in = 1 ft | Length 62.17 vs LF 62.20 (-0.04 %)
+- OK   | p.23 A421.A A-A421.A-2 | OTHER FRAMING - SOFFIT SIDE | LF 14.39 H H 12'-10" SF 369.2 | PT fila 109 | /Measure 1/4 in = 1 ft | Length 14.39 vs LF 14.39 (+0.00 %)
+- OK   | p.23 A421.A A-A421.A-3 | OTHER FRAMING - SOFFIT SIDE | LF 7.50 H H 1'-0" SF 15.0 | PT fila 110 | /Measure 1/4 in = 1 ft | Length 7.50 vs LF 7.50 (+0.00 %)
+- OK   | p.26 A422 A-A422-1 | A6D | LF 56.44 H H 22'-10" SF 2577.1 | PT fila 47 | /Measure 1/4 in = 1 ft | Length 56.44 vs LF 56.44 (+0.00 %)
+- OK   | p.26 A422 A-A422-2 | A3C | LF 20.17 H H 22'-10" SF 783.5 | PT fila 12 | /Measure 1/4 in = 1 ft | Length 20.17 vs LF 20.17 (-0.00 %)
+- OK   | p.26 A422 A-A422-3 | A6C | LF 7.52 H H 22'-10" SF 231.8 | PT fila 33 | /Measure 1/4 in = 1 ft | Length 7.52 vs LF 7.52 (-0.00 %)
+- OK   | p.26 A422 A-A422-4 | A6C | LF 8.63 H H 22'-10" SF 279.0 | PT fila 34 | /Measure 1/4 in = 1 ft | Length 8.63 vs LF 8.63 (-0.00 %)
+- OK   | p.26 A422 A-A422-5 | A2-3D | LF 32.42 H H 22'-10" SF 1480.3 | PT fila 6 | /Measure 1/4 in = 1 ft | Length 32.42 vs LF 32.42 (+0.00 %)
+- OK   | p.26 A422 A-A422-6 | C3D | LF 6.93 H H 22'-10" SF 158.2 | PT fila 80 | /Measure 1/4 in = 1 ft | Length 6.93 vs LF 6.93 (-0.00 %)
+- OK   | p.27 A422.A A-A422.A-1 | OTHER FRAMING - SOFFIT SIDE | LF 13.33 H H 14'-4" SF 73.3 | PT fila 111 | /Measure 1/4 in = 1 ft | Length 13.33 vs LF 13.33 (-0.00 %)
+- OK   | p.30 A423 A-A423-1 | A6D | LF 9.98 H H 22'-10" SF 455.7 | PT fila 48 | /Measure 1/4 in = 1 ft | Length 9.98 vs LF 9.98 (+0.00 %)
+- OK   | p.30 A423 A-A423-2 | A6D | LF 3.16 H H 22'-10" SF 144.3 | PT fila 49 | /Measure 1/4 in = 1 ft | Length 3.16 vs LF 3.16 (-0.00 %)
+- OK   | p.30 A423 A-A423-3 | C3C | LF 3.32 H H 22'-10" SF 46.5 | PT fila 74 | /Measure 1/4 in = 1 ft | Length 3.32 vs LF 3.32 (+0.00 %)
+- OK   | p.30 A423 A-A423-4 | A6D | LF 2.91 H H 22'-10" SF 132.9 | PT fila 50 | /Measure 1/4 in = 1 ft | Length 2.91 vs LF 2.91 (+0.00 %)
+- OK   | p.30 A423 A-A423-5 | A6D | LF 5.17 H H 22'-10" SF 236.1 | PT fila 51 | /Measure 1/4 in = 1 ft | Length 5.17 vs LF 5.17 (+0.00 %)
+- OK   | p.30 A423 A-A423-6 | A3C | LF 5.13 H H 22'-10" SF 188.9 | PT fila 13 | /Measure 1/4 in = 1 ft | Length 5.13 vs LF 5.13 (+0.00 %)
+- OK   | p.30 A423 A-A423-9 | C3C | LF 2.34 H H 22'-10" SF 26.9 | PT fila 75 | /Measure 1/4 in = 1 ft | Length 2.34 vs LF 2.34 (+0.19 %)
+- OK   | p.30 A423 A-A423-10 | B2E | LF 4.64 H H 22'-10" SF 67.3 | PT fila 65 | /Measure 1/4 in = 1 ft | Length 4.64 vs LF 4.64 (+0.00 %)
+- OK   | p.31 A423.A A-A423.A-1 | OTHER FRAMING - SOFFIT SIDE | LF 77.50 H H 11'-4" SF 232.5 | PT fila 112 | /Measure 1/4 in = 1 ft | Length 77.50 vs LF 77.50 (+0.00 %)
+- OK   | p.31 A423.A A-A423.A-2 | OTHER FRAMING - SOFFIT SIDE | LF 9.00 H H 13'-10" SF 22.5 | PT fila 113 | /Measure 1/4 in = 1 ft | Length 9.00 vs LF 9.00 (+0.00 %)
+- OK   | p.33 A424 A-A424-1 | A3C | LF 12.25 H H 22'-10" SF 427.7 | PT fila 14 | /Measure 1/4 in = 1 ft | Length 12.25 vs LF 12.25 (+0.00 %)
+- OK   | p.33 A424 A-A424-2 | A3C | LF 10.13 H H 22'-10" SF 353.6 | PT fila 15 | /Measure 1/4 in = 1 ft | Length 10.13 vs LF 10.13 (-0.02 %)
+- OK   | p.33 A424 A-A424-3 | A3C | LF 12.25 H H 22'-10" SF 427.7 | PT fila 16 | /Measure 1/4 in = 1 ft | Length 12.25 vs LF 12.25 (+0.00 %)
+- FAIL | p.33 A424 A-A424-5 | A3C | LF 4.96 H H 12'-7" SF 104.6 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 4.96 vs LF 4.96 (+0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.33 A424 A-A424-5r | A3C | LF 1.76 H H 12'-7" SF 37.1 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 1.76 vs LF 1.76 (+0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- OK   | p.33 A424 A-A424-6 | A3C | LF 5.37 H H 9'-6" SF 48.4 | PT fila 18 | /Measure 1/4 in = 1 ft | Length 5.37 vs LF 5.37 (+0.04 %)
+- OK   | p.33 A424 A-A424-7 | X6D | LF 5.37 H H 22'-10" SF 490.6 | PT fila 103 | /Measure 1/4 in = 1 ft | Length 5.37 vs LF 5.37 (+0.04 %)
+- OK   | p.33 A424 A-A424-8 | A6D | LF 15.34 H H 22'-10" SF 700.5 | PT fila 52 | /Measure 1/4 in = 1 ft | Length 15.34 vs LF 15.34 (-0.01 %)
+- OK   | p.33 A424 A-A424-9 | A6D | LF 10.71 H H 22'-10" SF 488.9 | PT fila 53 | /Measure 1/4 in = 1 ft | Length 10.71 vs LF 10.71 (-0.04 %)
+- FAIL | p.33 A424 A-A424-10 | C3D | LF 3.71 H H 22'-10" SF 84.7 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 3.71 vs LF 3.71 (+0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.33 A424 A-A424-10r | C3D | LF 1.59 H H 22'-10" SF 36.3 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 1.59 vs LF 1.59 (+0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- OK   | p.33 A424 A-A424-11 | A6D | LF 3.40 H H 22'-10" SF 155.3 | PT fila 54 | /Measure 1/4 in = 1 ft | Length 3.40 vs LF 3.40 (-0.00 %)
+- FAIL | p.33 A424 A-A424-12 | A6D | LF 3.40 H H 22'-10" SF 77.6 | MS fila 7 | /Measure 1/4 in = 1 ft | Length 3.40 vs LF 3.40 (-0.00 %) | TYPE 'A6D' != renglón 'Bottom track 6" - per source'
+- FAIL | p.33 A424 A-A424-12r | A6D | LF 1.24 H H 22'-10" SF 28.3 | MS fila 7 | /Measure 1/4 in = 1 ft | Length 1.24 vs LF 1.24 (+0.00 %) | TYPE 'A6D' != renglón 'Bottom track 6" - per source'
+- FAIL | p.33 A424 A-A424-13 | A3C | LF 2.08 H H 12'-7" SF 25.1 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 2.08 vs LF 2.08 (-0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.33 A424 A-A424-13r | A3C | LF 0.58 H H 12'-7" SF 7.0 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 0.58 vs LF 0.58 (+0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.33 A424 A-A424-14 | A3C | LF 2.08 H H 12'-7" SF 25.1 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 2.08 vs LF 2.08 (-0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.33 A424 A-A424-14r | A3C | LF 0.57 H H 12'-7" SF 6.9 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 0.57 vs LF 0.57 (+0.00 %) | TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- OK   | p.34 A424.A A-A424.A-1 | OTHER FRAMING - SOFFIT SIDE | LF 5.33 H H 14'-10" SF 79.0 | PT fila 114 | /Measure 1/4 in = 1 ft | Length 5.33 vs LF 5.33 (-0.00 %)
+- OK   | p.34 A424.A A-A424.A-2 | OTHER FRAMING - SOFFIT SIDE | LF 5.22 H H 14'-10" SF 24.0 | PT fila 115 | /Measure 1/4 in = 1 ft | Length 5.22 vs LF 5.22 (-0.00 %)
+- OK   | p.34 A424.A A-A424.A-3 | OTHER FRAMING - SOFFIT SIDE | LF 15.94 H H 13'-10" SF 57.4 | PT fila 116 | /Measure 1/4 in = 1 ft | Length 15.94 vs LF 15.94 (-0.00 %)
+- FAIL | p.37 A425 A-A423-7 | C3D | LF 2.07 H H 22'-10" SF 47.3 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 2.07 vs LF 2.07 (+0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.37 A425 A-A423-7r | C3D | LF 0.61 H H 22'-10" SF 13.9 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 0.61 vs LF 0.61 (-0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.37 A425 A-A423-8 | C3D | LF 2.07 H H 22'-10" SF 47.3 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 2.07 vs LF 2.07 (+0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.37 A425 A-A423-8r | C3D | LF 0.61 H H 22'-10" SF 13.9 | MS fila 4 | /Measure 1/4 in = 1 ft | Length 0.61 vs LF 0.61 (-0.00 %) | TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- OK   | p.37 A425 A-A425-1 | A3C | LF 7.28 H H 22'-10" SF 332.5 | PT fila 21 | /Measure 1/4 in = 1 ft | Length 7.28 vs LF 7.28 (+0.04 %)
+- OK   | p.37 A425 A-A425-2 | A3C | LF 14.76 H H 22'-10" SF 455.1 | PT fila 22 | /Measure 1/4 in = 1 ft | Length 14.76 vs LF 14.76 (+0.01 %)
+- OK   | p.37 A425 A-A425-3 | A3C | LF 6.98 H H 22'-10" SF 318.6 | PT fila 23 | /Measure 1/4 in = 1 ft | Length 6.98 vs LF 6.98 (-0.03 %)
+- OK   | p.37 A425 A-A425-4 | A3C | LF 1.49 H H 22'-10" SF 68.0 | PT fila 24 | /Measure 1/4 in = 1 ft | Length 1.49 vs LF 1.49 (-0.07 %)
+- OK   | p.37 A425 A-A425-5 | A3C | LF 5.13 H H 22'-10" SF 168.9 | PT fila 25 | /Measure 1/4 in = 1 ft | Length 5.13 vs LF 5.13 (+0.06 %)
+- OK   | p.38 A425.A A-A425.A-1 | OTHER FRAMING - SOFFIT SIDE | LF 4.83 H H 14'-10" SF 71.6 | PT fila 117 | /Measure 1/4 in = 1 ft | Length 4.83 vs LF 4.83 (-0.00 %)
+- OK   | p.38 A425.A A-A425.A-2 | OTHER FRAMING - SOFFIT SIDE | LF 5.00 H H 14'-10" SF 74.2 | PT fila 118 | /Measure 1/4 in = 1 ft | Length 5.00 vs LF 5.00 (+0.00 %)
+- OK   | p.41 A426 A-A426-1 | A3C | LF 21.00 H H 22'-10" SF 773.4 | PT fila 26 | /Measure 1/4 in = 1 ft | Length 21.00 vs LF 21.00 (+0.00 %)
+- OK   | p.41 A426 A-A426-2 | C3C | LF 4.67 H H 22'-10" SF 106.6 | PT fila 76 | /Measure 1/4 in = 1 ft | Length 4.67 vs LF 4.67 (-0.07 %)
+- OK   | p.41 A426 A-A426-3 | C3C | LF 4.67 H H 22'-10" SF 106.6 | PT fila 77 | /Measure 1/4 in = 1 ft | Length 4.67 vs LF 4.67 (-0.07 %)
+- OK   | p.41 A426 A-A426-4 | A6D | LF 12.46 H H 22'-10" SF 568.9 | PT fila 56 | /Measure 1/4 in = 1 ft | Length 12.46 vs LF 12.46 (+0.00 %)
+- OK   | p.41 A426 A-A426-5 | A2-3D | LF 27.32 H H 22'-10" SF 1247.4 | PT fila 7 | /Measure 1/4 in = 1 ft | Length 27.32 vs LF 27.32 (+0.00 %)
+- OK   | p.41 A426 A-A426-6 | A2-3D | LF 38.31 H H 22'-10" SF 1749.2 | PT fila 8 | /Measure 1/4 in = 1 ft | Length 38.31 vs LF 38.31 (+0.00 %)
+- OK   | p.43 A427 A-A427-1 | A6D | LF 26.92 H H 22'-10" SF 1229.2 | PT fila 57 | /Measure 1/4 in = 1 ft | Length 26.92 vs LF 26.92 (+0.00 %)
+- OK   | p.43 A427 A-A427-2 | A6D | LF 36.57 H H 22'-10" SF 1669.8 | PT fila 58 | /Measure 1/4 in = 1 ft | Length 36.57 vs LF 36.57 (-0.00 %)
+- OK   | p.43 A427 A-A427-3 | A6D | LF 60.88 H H 22'-10" SF 2779.8 | PT fila 59 | /Measure 1/4 in = 1 ft | Length 60.88 vs LF 60.88 (+0.00 %)
+- OK   | p.43 A427 A-A427-6 | B2E | LF 34.29 H H 22'-10" SF 497.2 | PT fila 66 | /Measure 1/4 in = 1 ft | Length 34.29 vs LF 34.29 (-0.00 %)
+- OK   | p.47 A429 A-A429-1 | B2E | LF 16.92 H H 22'-10" SF 386.3 | PT fila 67 | /Measure 1/4 in = 1 ft | Length 16.92 vs LF 16.92 (+0.00 %)
+- OK   | p.47 A429 A-A429-2 | B2E | LF 15.05 H H 22'-10" SF 343.6 | PT fila 68 | /Measure 1/4 in = 1 ft | Length 15.05 vs LF 15.05 (+0.00 %)
+- OK   | p.47 A429 A-A429-3 | B2E | LF 33.06 H H 22'-10" SF 755.0 | PT fila 69 | /Measure 1/4 in = 1 ft | Length 33.06 vs LF 33.06 (+0.00 %)
+- OK   | p.47 A429 A-A429-4 | A6D | LF 10.77 H H 22'-10" SF 491.8 | PT fila 60 | /Measure 1/4 in = 1 ft | Length 10.77 vs LF 10.77 (-0.00 %)
+- OK   | p.47 A429 A-A429-5 | A6D | LF 15.54 H H 22'-10" SF 709.6 | PT fila 61 | /Measure 1/4 in = 1 ft | Length 15.54 vs LF 15.54 (-0.00 %)
+- OK   | p.47 A429 A-A429-6 | D6F | LF 16.92 H H 12'-0" SF 406.1 | PT fila 95 | /Measure 1/4 in = 1 ft | Length 16.92 vs LF 16.92 (+0.00 %)
+- OK   | p.47 A429 A-A429-7 | D6F | LF 5.49 H H 12'-0" SF 137.9 | PT fila 96 | /Measure 1/4 in = 1 ft | Length 5.49 vs LF 5.49 (-0.00 %)
+- OK   | p.47 A429 A-A429-11 | D6G | LF 19.87 H H 5'-0" SF 198.7 | PT fila 99 | /Measure 1/4 in = 1 ft | Length 19.87 vs LF 19.87 (+0.00 %)
+- OK   | p.47 A429 A-A429-11r | D6G | LF 6.57 H H 5'-0" SF 68.8 | PT fila 100 | /Measure 1/4 in = 1 ft | Length 6.57 vs LF 6.57 (-0.00 %)
+- OK   | p.50 A431 A-A431-1 | C3D | LF 10.06 H H 22'-10" SF 229.7 | PT fila 84 | /Measure 1/4 in = 1 ft | Length 10.06 vs LF 10.06 (-0.00 %)
+- OK   | p.50 A431 A-A431-2 | C3D | LF 17.21 H H 22'-10" SF 392.9 | PT fila 85 | /Measure 1/4 in = 1 ft | Length 17.21 vs LF 17.21 (+0.00 %)
+- FAIL | p.52 A432 A-A432-1 | D3G | LF 24.82 H H 5'-0" SF 248.2 | MS fila 4 | /Measure 3/16 in = 1 ft | Length 24.82 vs LF 24.82 (+0.00 %) | TYPE 'D3G' != renglón 'Bottom track 3-5/8" - per source'
+- FAIL | p.52 A432 A-A432-2 | D3G | LF 1.69 H H 5'-0" SF 19.4 | MS fila 4 | /Measure 3/16 in = 1 ft | Length 1.69 vs LF 1.69 (-0.00 %) | TYPE 'D3G' != renglón 'Bottom track 3-5/8" - per source'
+- OK   | p.52 A432 A-A432-3 | D3G | LF 1.74 H H 5'-0" SF 19.9 | PT fila 92 | /Measure 3/16 in = 1 ft | Length 1.74 vs LF 1.74 (-0.00 %)
+- OK   | p.53 A434 A-A434-1 | A6D | LF 3.16 H H 7'-0" SF 44.2 | PT fila 62 | /Measure 3/16 in = 1 ft | Length 3.16 vs LF 3.16 (+0.00 %)
+- OK   | p.55 A435 A-A435-1 | A3C | LF 33.21 H H 10'-6" SF 829.7 | PT fila 27 | /Measure 1/4 in = 1 ft | Length 33.21 vs LF 33.21 (-0.00 %)
+- OK   | p.55 A435 A-A435-2 | A3C | LF 6.73 H H 22'-10" SF 220.9 | PT fila 28 | /Measure 1/4 in = 1 ft | Length 6.73 vs LF 6.73 (+0.00 %)
+- OK   | p.55 A435 A-A435-3 | A3C | LF 12.13 H H 22'-10" SF 398.2 | PT fila 29 | /Measure 1/4 in = 1 ft | Length 12.13 vs LF 12.13 (-0.00 %)
+
+## Fallas
+
+- TO-A-A424-5 (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-5r (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-10 (p.33 A424): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-10r (p.33 A424): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-12 (p.33 A424): TYPE 'A6D' != renglón 'Bottom track 6" - per source'
+- TO-A-A424-12r (p.33 A424): TYPE 'A6D' != renglón 'Bottom track 6" - per source'
+- TO-A-A424-13 (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-13r (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-14 (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A424-14r (p.33 A424): TYPE 'A3C' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A423-7 (p.37 A425): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A423-7r (p.37 A425): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A423-8 (p.37 A425): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A423-8r (p.37 A425): TYPE 'C3D' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A432-1 (p.52 A432): TYPE 'D3G' != renglón 'Bottom track 3-5/8" - per source'
+- TO-A-A432-2 (p.52 A432): TYPE 'D3G' != renglón 'Bottom track 3-5/8" - per source'
+- A-A424-5+A-A424-5r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A424-13+A-A424-13r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A424-14+A-A424-14r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A424-12+A-A424-12r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A423-7+A-A423-7r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A423-8+A-A423-8r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A424-10+A-A424-10r: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
+- A-A432-1+A-A432-2: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups
