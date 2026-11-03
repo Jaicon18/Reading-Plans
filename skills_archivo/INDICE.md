@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf17: v81cf16 + R80f.12 BE-CF19 hoja de la demo por demo_geom; verificada 0 faltantes de 474).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf18: v81cf17 + parche RCP de Chuze R80f.13–R80f.16; verificada 0 faltantes de 478).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -131,3 +131,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 | Chick-fil-A #2284 River Point rev4 (vigente) | v81cf17 | 2026-11-03 | take-off-metal-frame-drywall_v81cf17_CFA-RiverPoint-rev4_2026-11-03.zip |
 
 | Victoria's Secret #679 Downey rev17 FINAL (ceilings corregidos al RCP; markups 208/208) | v81cf16 | 2026-11-03 | take-off-metal-frame-drywall_v81cf16_VS-Downey-rev16-RCP_2026-11-03.zip |
+
+**03-nov: v81cf18 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf17 + parche RCP de Chuze FINAL5 (R80f.13 markups_rcp multi-hoja con id del ceiling, leyenda y PNG por hoja; R80f.14 buscar_pdf sin distinguir mayúsculas; R80f.15 auditoria_entrega valida polígonos de ceiling vs Material Summary; R80f.16 polígono del ceiling = solo el área con hatch, parte sin hatch ≥ 1 SF = rc 1). Merge 3 vías sin conflictos (base v81cf17); BE-CF19 conservado. Tests nuevos dentro de tools/test_chuze_r80f8_11.py (199 archivos). Suite 50/50. verificar_version.py 0 faltantes (478). Banco B&N rev13 / VS rev17 / Chuze / O'Reilly p1 / CFA rev4 = 0 diferencias. CFA rev4: verificar_markups_excel 121/121, 0 fallas.
+
+| Parche RCP Chuze (vigente) | v81cf18 | 2026-11-03 | take-off-metal-frame-drywall_v81cf18_RCP-Chuze_2026-11-03.zip |
