@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf14: v81cf13 + VS rev15 R80e.132 / R80e.133; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf15: v81cf14 + VS rev16 R80e.134; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -116,4 +116,8 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 **03-nov: v81cf14 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf13 (CFA) + R80e.132 (BE-VS-12: framed soffit una sola vez; compuerta A_SOFFIT_DOBLE; test_soffit_doble.py) + R80e.133 (BE-VS-13: markups SF desde board_out = Excel exacto; renglón unido "A+B" cuadra H ponderado por LF). Suite 51/51. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev15: REGLAS OK, markups 118/118 OK.
 
-| Victoria's Secret #679 Downey rev15 (vigente; back-check ciego del 3-5/8" stud; markups = Excel) | v81cf14 | 2026-11-03 | take-off-metal-frame-drywall_v81cf14_VS-Downey-rev15_2026-11-03.zip |
+| Victoria's Secret #679 Downey rev15 | v81cf14 | 2026-11-03 | take-off-metal-frame-drywall_v81cf14_VS-Downey-rev15_2026-11-03.zip |
+
+**03-nov: v81cf15 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf14 + R80e.134 (BE-VS-14: markups_demo con el formato del verificador, DEMO-<id del Excel>, DETAIL N/HOJA, page label; nota impresa de EQ studs cargada por programa). Suite 51/51. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev16 FINAL: REGLAS OK, markups 178/178 (A02.01 + A01.01).
+
+| Victoria's Secret #679 Downey rev16 FINAL (vigente) | v81cf15 | 2026-11-03 | take-off-metal-frame-drywall_v81cf15_VS-Downey-rev16_2026-11-03.zip |
