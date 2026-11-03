@@ -1,0 +1,70 @@
+--- /tmp/chuze/v12/verificar_markups_excel.v81cf12.py	2026-11-03 01:04:52.011497814 +0000
++++ /tmp/chuze/v12/sk/take-off-metal-frame-drywall/tools/verificar_markups_excel.py	2026-11-03 01:05:43.428241688 +0000
+@@ -253,6 +253,13 @@
+                 out["ms"].append({"fila": i, "material": mat, "unit": str(r[col.get("Unit", 1)] or "").strip().upper(),
+                                   "where": str(r[col["Where it comes from"]] or "")})
+     wb.close()
++    # BE-117g (Chuze FINAL4): renglón unido "A+B" (PT2: wall + return / partes con '+') -> cada pieza apunta a su renglón
++    out["union"] = {}
++    for w in list(out["pt"]):
++        if "+" in w:
++            for m in (x.strip() for x in w.split("+")):
++                if m and m not in out["pt"]:
++                    out["union"][m] = w
+     return out
+ 
+ 
+@@ -341,6 +348,7 @@
+     ans, imp = leer_annots(pdf)
+     # agrupación por id base (p.ej. 'DEMO-14 EX-RRM-01-CB' -> 'DEMO-14' cuando el Excel trae el total del grupo)
+     vistos_id, grupos = {}, {}
++    uniones = {}   # BE-117g: renglones unidos "A+B" del Partition Takeoff
+     hojas_mk = {}
+     for a in ans:
+         a["p"] = parse_contents(a["subject"], a["contents"], a["nm"])
+@@ -370,7 +378,21 @@
+         if wid:
+             vistos_id.setdefault(wid, []).append(a)
+             pt = ex["pt"].get(wid)
+-            if pt:
++            union = ex.get("union", {}).get(wid)
++            if not pt and union:
++                # pieza de un renglón unido: TYPE y H por pieza; LF / SF se suman y se cuadran al final contra el renglón
++                fila = ex["pt"][union][0]
++                if not tipo_ok(P["type"], fila["grupo"] + " " + fila["a"]):
++                    prob.append(f"TYPE '{P['type']}' != grupo '{fila['grupo']}' / '{fila['a'][:40]}'")
++                if P["h"] is not None and (fila["h"] is None or abs(P["h"] - fila["h"]) > TOL_H):
++                    prob.append(f"H {P['h_s']} != Excel {fila['h']}")
++                suma = uniones.setdefault(union, {"lf": 0.0, "sf": 0.0, "n": 0, "fila": fila})
++                suma["lf"] += P["lf"] or 0.0
++                suma["sf"] += P["sf"] or 0.0
++                suma["n"] += 1
++                vistos_id.setdefault(union, []).append(a)
++                fila_txt = f"PT fila {fila['fila']} (parte de {union})"
++            elif pt:
+                 if len(pt) > 1:
+                     prob.append(f"Wall # {wid} en {len(pt)} renglones del Partition Takeoff")
+                 fila = pt[0]
+@@ -470,7 +492,7 @@
+         lineas.append(a["linea"])
+     # duplicados
+     for wid, lst in vistos_id.items():
+-        if len(lst) > 1:
++        if len(lst) > 1 and wid not in uniones:   # BE-117g: las piezas de un renglón "A+B" son varias a propósito
+             fallas.append(f"{wid}: {len(lst)} anotaciones con el mismo Wall ID")
+     # ---- (d) hojas y elementos sin markups
+     for hoja, ids in sorted(hojas_canon.items()):
+@@ -480,6 +502,13 @@
+     for eid in ids_geo:
+         if eid not in vistos_id:
+             fallas.append(f"{eid}: elemento del canon sin anotación en el PDF de markups")
++    for k, g in uniones.items():
++        if True:
++            fl = g["fila"]
++            if fl["lf"] is not None and abs(g["lf"] - fl["lf"]) > max(0.02, 0.005 * fl["lf"]):
++                fallas.append(f"{k}: suma LF de las piezas {g['lf']:.2f} != Excel {fl['lf']} (fila {fl['fila']})")
++            if fl["sf"] is not None and g["sf"] and abs(g["sf"] - fl["sf"]) > max(0.2, 0.005 * fl["sf"]):
++                fallas.append(f"{k}: suma SF de las piezas {g['sf']:.1f} != Excel {fl['sf']} (fila {fl['fila']})")
+     for wid in ex["pt"]:
+         if wid not in vistos_id:
+             fallas.append(f"{wid}: renglón 'Wall #' del Partition Takeoff sin anotación en el PDF de markups")
