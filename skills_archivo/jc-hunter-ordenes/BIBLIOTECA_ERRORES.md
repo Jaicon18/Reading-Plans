@@ -379,3 +379,7 @@ v81cf24 importaba chequeos_biblioteca (tools/) desde runner/run_takeoff.py sin t
 del paso 1; la suite no lo vio porque los tests importan con tools/ en el path. Prueba (R80e.148): el test importa el runner
 SOLO con runner/ en el path; además comparar_extra.py corre después de comparar.py (R80e.147, U-081).
 Test: bloque test_runner_comparar_extra.
+
+## BE-131 — Preferencias del día 1 sin compuerta de fondo (usuario 3-nov, U-114..U-125)
+Queja del usuario: la regla de las burbujas (DETALLES) se dio en los primeros días y nunca se hizo cumplir; lo mismo pasaba con el resto de sus preferencias de cuenta del día 1. Casos reales encontrados al calibrar: HFT D-01 cara vecina "[DERIVED]" sin operación y D-03/D-04 "same as" sin estado; O'Reilly rev4 Material Summary "N/SHEET: not applicable (see note)" (CE_FUENTES_MS lo dejaba pasar), renglones 'S42-H1+S42-H2' (dos walls en un número) y height_img = página entera sin marca (0 px rojos); Chuze tag_ids con 1 de 3 ubicaciones del inventario y "ASSUMED ... RFI." sin número; HFT sin inventario de tags y sin imagen por wall; CE_SIN_DOLARES solo miraba los .md; chequeos_biblioteca no leía 1_inventario/inventario.json (nombre distinto). Prueba (tools/chequeos_biblioteca.py u_114 / u_115 / u_116 / u_117 / u_118 / u_119 / u_120 / u_121 / u_125 + compuerta_entrega.py CE_SIN_DOLARES, todos dentro de compuerta_entrega.py): ver R80e.152. Test: test_chequeos_biblioteca.py (caso MALO por preferencia + test_u118_evidencia_circula) y test_compuerta_entrega.py (monto en el Excel).
+

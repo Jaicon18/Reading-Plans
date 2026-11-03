@@ -21,6 +21,10 @@ Este skill NO calcula nada. Es la memoria permanente del usuario. El cálculo lo
    `tools/chequeos_biblioteca.py` (un chequeo CB_<regla> por cada BE de la biblioteca y las U / R-ALC que eran
    programa-pendiente) y CE_CALLOUTS (U-113: toda burbuja N/HOJA seguida hasta el final; las que no aplican van en
    `<carpeta>/callouts_no_aplican.json` {"<hoja>": {"<etiqueta>": "motivo"}}).
+   Desde v81cf26 corre también las PREFERENCIAS DEL DÍA 1 (U-114..U-125, BE-131): CB_U_114 honestidad #0, CB_U_115
+   N/HOJA por partida, CB_U_116 sin supuestos en silencio, CB_U_117 barrido por tag (necesita 1_inventario/inventario.json
+   con PNG circulados), CB_U_118 evidencia circulada (img / height_img por wall, RFI abiertos y Review Items con archivo),
+   CB_U_119 inglés, CB_U_120 ejes, CB_U_121 Subject / Page Label / Length / Depth en markups, CB_U_125 términos del trade.
 7. **La subida SOLO con** `python3 -I tools/subir_entrega.py <carpeta_del_proyecto>`: se niega sin ENTREGA_OK.json verde,
    si un archivo cambió después de la compuerta o si la carpeta no es hija (en vivo) de Claude outputs de la raíz.
    Nunca `gdrive_fetch.py put` a mano para una entrega. COORDINACIÓN no reporta un resultado sin ENTREGA_OK.json verde.

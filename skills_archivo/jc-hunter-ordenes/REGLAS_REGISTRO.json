@@ -1,9 +1,9 @@
 {
- "version": "registro v3 (v81cf25, 2026-11-03: + BE-125..BE-130, O'Reilly rev5)",
+ "version": "registro v3 (v81cf26, 2026-11-03: + preferencias del día 1 U-114..U-125 / BE-131)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 234,
-  "conducta": 42,
+  "programa": 246,
+  "conducta": 43,
   "historico": 23
  },
  "reglas": [
@@ -234,7 +234,8 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "ce_sin_dolares"
    },
-   "cuando": "entrega"
+   "cuando": "entrega",
+   "nota": "CE_SIN_DOLARES ahora también revisa Excel y markups (U-123)"
   },
   {
    "id": "U-019",
@@ -4030,6 +4031,227 @@
     "token": "test_runner_comparar_extra"
    },
    "cuando": "entrega"
+  },
+  {
+   "id": "U-114",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, #0 HONESTIDAD DIMENSIONAL): cada número [CONFIRMADO] cota impresa citando hoja · [DERIVADO] con su operación · [PENDIENTE] no acotado; nunca escalar ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_114",
+    "take-off:tools/reglas.py::A_ESTADO_DIM"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_114"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-115",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, DETALLES): la burbuja sobre un elemento es su fuente; seguir la cadena de detalles hasta el final; toda partida cita N/HOJA (6/A-410).",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_115",
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/compuerta_entrega.py::ce_fuentes_ms"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_115"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "ce_callouts"
+    }
+   ]
+  },
+  {
+   "id": "U-116",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, NO PREGUNTAR LO QUE EL PLANO RESUELVE): lo no impreso = RFI con el delta de cada alternativa; nunca elegir en silencio.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_116",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_formato",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_116"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-117",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, BARRIDO): recorrer TODO el plano por cada tag antes de cerrarlo; lista numerada + imagen circulada de cada ubicación.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_117"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_117"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_u118_evidencia_circula"
+    }
+   ]
+  },
+  {
+   "id": "U-118",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, EVIDENCIA VISUAL): imagen de todo lo que se afirme, reabierta y verificada antes de entregar.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_118",
+    "take-off:tools/chequeos_biblioteca.py::_img_ok"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_118"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_u118_evidencia_circula"
+    }
+   ]
+  },
+  {
+   "id": "U-119",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, IDIOMA): el entregable va íntegro en inglés.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_119",
+    "take-off:tools/chequeos_biblioteca.py::be_hf05",
+    "take-off:tools/chequeos_biblioteca.py::be_cf13"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_119"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-120",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, EJES): nunca juntar dos ejes o fachadas en un número.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_120",
+    "take-off:tools/chequeos_biblioteca.py::be_hf05"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_120"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-121",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, FORMATO): Excel fijo de 6 hojas, partitions en orden del schedule con subtotales; markups Bluebeam con Subject, Page Label, Length, Depth (altura) y ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_121",
+    "take-off:tools/compuerta_entrega.py::ce_formato_excel",
+    "take-off:tools/compuerta_entrega.py::ce_auditoria",
+    "take-off:tools/compuerta_entrega.py::ce_markups_excel"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_121"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-122",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, ARCHIVOS): un folder por proyecto en Drive › JC HUNTER PROJECTS › Claude outputs.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_drive_parent",
+    "take-off:tools/subir_entrega.py::candados"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_drive_parent"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-123",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, COSTOS): no mencionar costos en dólares.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_sin_dolares"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_sin_dolares"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-124",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1, ERRORES): cada error: crear la solución, dejarla como regla para todos los proyectos y actualizar el skill el mismo turno.",
+   "categoria": "conducta",
+   "nota": "su parte verificable: verificar_version.py (registro completo, toda regla programa con chequeo + test; U-096 / BE-121)"
+  },
+  {
+   "id": "U-125",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "REGLA INVIOLABLE (usuario, preferencias del día 1): términos del trade siempre en inglés, nunca traducidos ('tablaroca', 'poste metálico', 'canal' prohibidos).",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_125"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_125"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-131",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md (usuario, preferencias del día 1)",
+   "texto_corto": "Las preferencias del día 1 (honestidad #0, N/HOJA por partida, no elegir en silencio, barrido por tag, evidencia circulada, idioma, ejes, campos Bluebeam, costos, términos del trade) no tenían compuer",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_114",
+    "take-off:tools/chequeos_biblioteca.py::u_115",
+    "take-off:tools/chequeos_biblioteca.py::u_116",
+    "take-off:tools/chequeos_biblioteca.py::u_117",
+    "take-off:tools/chequeos_biblioteca.py::u_118",
+    "take-off:tools/chequeos_biblioteca.py::u_119",
+    "take-off:tools/chequeos_biblioteca.py::u_120",
+    "take-off:tools/chequeos_biblioteca.py::u_121",
+    "take-off:tools/chequeos_biblioteca.py::u_125",
+    "take-off:tools/compuerta_entrega.py::ce_sin_dolares"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_117"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_sin_dolares"
+    }
+   ]
   }
  ]
 }

@@ -2751,3 +2751,34 @@ Material Summary tenga origen impreso y que su desglose sume el Net, agrupado po
 FAIL; AMBER = el schedule no lo dice. `entrega.json` puede traer "mapa_materiales" {"<clave del schedule>": ["TYPE1", ...]}.
 Reporte completo: `python3 tools/revision_materiales.py fichas.json takeoff.xlsx takeoff_canon.json <calc_out> <out>`.
 
+
+## R80e.152 — Preferencias del día 1 con programa (usuario 3-nov, INVIOLABLE, U-114..U-125 / BE-131)
+Queja del usuario: la regla de las burbujas se dio "en los primeros días" y nunca se hizo cumplir. Sus preferencias de cuenta
+del día 1 son reglas INVIOLABLES con chequeo de FONDO en `tools/chequeos_biblioteca.py`, corridos por `compuerta_entrega.py`:
+- U-114 #0 HONESTIDAD DIMENSIONAL (`u_114`, + reglas.py A_ESTADO_DIM): cada número del canon (largo / alto del wall, alto de
+  cada cara, cielos) con [CONFIRMED] + HOJA, [DERIVED] + operación visible (a - b = c, x escala, FLOOR(...)) o [PENDING];
+  "scaled / estimated / approx / a ojo" sin PENDING + RFI = FAIL; Status del Partition Takeoff con estado. "same as <wall>" hereda.
+- U-115 DETALLES (`u_115` + CE_CALLOUTS + CE_FUENTES_MS): cada renglón de wall del Partition Takeoff cita N/HOJA; cada renglón
+  con cantidad del Material Summary cita N/HOJA, hoja, sección de spec / código o el renglón del que se deriva
+  ("N/SHEET: not applicable (see note)" ya no pasa).
+- U-116 NO ELEGIR EN SILENCIO (`u_116` + CE_RFI_FORMATO + CE_RFI_BARRIDO_IMPRESO): todo "assumed / default / not printed /
+  not shown" remite a su RFI (que existe), a un precedente escrito (R80e.34 / R-ALC / U-NNN) o al código / fabricante citado.
+- U-117 BARRIDO (`u_117`): 1_inventario/inventario.json (inventario_tags.py) existe; cada ubicación de tag con su PNG circulado,
+  reabierto (png_verificado) y contada en un wall (tag_ids PT####) o descartada con motivo; conteo por type canon = inventario.
+  runner/evidencia.tags_a_walls ahora AGREGA a los tag_ids de la lectura las ubicaciones cercanas del mismo type (nunca quita).
+- U-118 EVIDENCIA VISUAL (`u_118`): img y height_img de cada wall, evidencia de cada RFI abierto (canon rfis[].img) y la columna
+  Image de cada Review Item (nombre de archivo) existen, no están vacías y tienen marca roja circulada (>= 15 px rojo).
+  runner/evidencia.Evidencia.hoja ahora CIRCULA lo citado entre comillas y las cotas ft-in que encuentra impresas en la hoja.
+- U-119 IDIOMA (`u_119` + BE-HF05 + BE-CF13): Excel, README_REVIEW.md y markups en inglés (idioma_es); PARA_REVISAR y
+  SEGUIMIENTO son las notas en español del usuario; el rótulo "ESTA ES LA VERSIÓN FINAL PARA REVISAR" (U-089) se permite.
+- U-120 EJES (`u_120` + BE-HF05): ningún Wall # / id unido (+, &, and), ningún wall con dos fachadas / ejes, ninguna polilínea
+  de markup que dobla > 60° (dos ejes en un número).
+- U-121 FORMATO (`u_121` + CE_FORMATO_EXCEL + CE_AUDITORIA + CE_MARKUPS_EXCEL): todo markup PolyLine con Subject, Page Label
+  = hoja, /Measure (Length) y /Depth > 0 (Wall Area).
+- U-122 ARCHIVOS = CE_DRIVE_PARENT + subir_entrega.py. U-123 COSTOS = CE_SIN_DOLARES, ahora también en las celdas visibles del
+  Excel (no fórmulas), formato de moneda y texto de markups. U-124 ERRORES = conducta (verificar_version exige el registro).
+- U-125 términos del trade en inglés (`u_125`): "tablaroca", "panel / placa de yeso", "poste(s) metálico(s)", "montante",
+  "canal", "riel", "esquinero", "triplay"… prohibidos en Excel, README, PARA_REVISAR, SEGUIMIENTO y markups.
+Tests: `tools/test_chequeos_biblioteca.py` (caso MALO que reproduce el error real de HFT / O'Reilly / Chuze / CFA -> FAIL y
+BUENO -> PASS + test_u118_evidencia_circula) y `tools/test_compuerta_entrega.py` (monto en el Excel). Los chequeos solo leen:
+sin cambio de cantidades.
