@@ -27,3 +27,15 @@ r = R.comparar_type("W1", ficha, fila2, bien)
 assert {c["field"] for c in r["checks"] if c["status"] == "RED"} >= {"stud designation", "gauge", "height"}, r
 assert R.tipo_board('5/8" TYPE "X" GYPSUM BOARD') == "X" and R.tipo_board("5/8 type X WR") == "X-WR"
 print("OK test_revision_materiales")
+
+# sumas: breakdown que no cierra -> ROJO; Net > 0 sin hoja impresa -> ROJO; breakdown correcto con origen -> VERDE
+ms = [{"row": 4, "name": "Bottom track 3-5/8\"", "unit": "LF", "net": 30.0,
+       "where": "N/SHEET: W1/A1.1 | Breakdown [DERIVED]: W-1 10 + W-2 20 = 30 LF"},
+      {"row": 5, "name": "Top track 3-5/8\"", "unit": "LF", "net": 31.0,
+       "where": "N/SHEET: W1/A1.1 | Breakdown [DERIVED]: W-1 10 + W-2 20 = 30 LF"},
+      {"row": 6, "name": "Additional head track", "unit": "LF", "net": 7.33, "where": "N/SHEET: default (no sheet) | Door 3"}]
+fil = [{"type": "W1", "wall": "W-1"}, {"type": "W1", "wall": "W-2"}]
+sm = {x["row"]: x for x in R.sumas(ms, fil, "/nonexistent")}
+assert sm[4]["status"] == "GREEN" and sm[4]["by_type"] == {"W1": 30.0}, sm[4]
+assert sm[5]["status"] == "RED" and sm[6]["status"] == "RED", (sm[5], sm[6])
+print("OK test sumas")
