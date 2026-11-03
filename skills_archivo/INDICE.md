@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf19 = v81cf18 + R80e.136 revision_markups.py; antes v81cf18: v81cf17 + parche RCP de Chuze R80f.13–R80f.16; verificada 0 faltantes de 478).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf20 = v81cf19 + R80e.137 jambs de furring; antes v81cf19 = v81cf18 + R80e.136 revision_markups.py; antes v81cf18: v81cf17 + parche RCP de Chuze R80f.13–R80f.16; verificada 0 faltantes de 478).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -139,3 +139,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **03-nov: v81cf19 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf18 + R80e.136 (tools/revision_markups.py: revisión rápida de markups vs Excel — LF con escala IMPRESA ±0.5 %, Depth = H exacta, Wall Area, Wall ID / TYPE; tabla VERDE/ROJA en orden del schedule, recorte circulado por fila roja, mapa de alturas por hoja; selftest llamado desde test_markups_excel.py, 200 archivos). Numerada R80e.136 porque R80e.100 ya es de VS (storefront structural framing). + referencias/INDICE_REGLAS_ACUMULADAS.md con BE-118, BE-HF01 y el alias R80e.130 = R80f.4. Suite 50/50. verificar_version.py 0 faltantes (481). Banco B&N / VS / O'Reilly p2 = 0 familias distintas (la tool no toca canon.py). La rama v81cf9a (misma tool sobre v81cf9) se retira del archivo: queda unida aquí.
 
 | O'Reilly Evans #1 revisión rápida de markups (vigente) | v81cf19 | 2026-11-03 | take-off-metal-frame-drywall_v81cf19_OReilly-revision-rapida_2026-11-03.zip |
+
+**03-nov: v81cf20 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf19 + R80e.137 (BE-113, back-check O'Reilly p2: studs_nodos.py jambs = 0 en walls de furring — Z-furring / hat / furring channel —, el jamb del furring es el blocking FRT del detalle; closer.Wall.furring / operación 'R80e.137'; test en test_project_data.py). Suite 50/50. verificar_version.py 0 faltantes. Banco: B&N rev13, VS rev17, Chuze rev3, CFA rev4 = 0 familias distintas vs v81cf19; O'Reilly: referencia actualizada al FINAL p2 entregado (run15) = 0 distintas (Z-furring 2,220.63 LF = back-check).
+
+| O'Reilly Evans #1 FINAL p2 (jambs de furring) (vigente) | v81cf20 | 2026-11-03 | take-off-metal-frame-drywall_v81cf20_OReilly-furring-jambs_2026-11-03.zip |
