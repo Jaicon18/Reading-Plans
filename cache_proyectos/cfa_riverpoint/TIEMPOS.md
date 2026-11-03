@@ -49,4 +49,4 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 10 | Subida a Drive SOLO con subir_entrega.py (37 archivos, carpeta 1TiGDNsJTGnEMQkPHcJ99LWgQTSGqNeIC) | 15:09 | 15:14 | 5 min |
 | **TOTAL rev5** | **Inicio → entrega en Drive** | **14:05** | **15:14** | **1 h 9 min** |
 | R5-5 | Cierre: push chocó con v81cf25 de O'Reilly y luego con v81cf26 de COORDINACIÓN (BE-CF20) -> uniones 3 vías = v81cf27, suite 51/51, banco 0 distintas, verificar_version 0 faltantes (675), compuerta rev5 re-corrida = igual; commit + push | 15:14 | 15:25 | 11 min |
-| **TOTAL rev5 con cierre** | | **14:05** | **15:25** | **hasta 15:25** |
+| **TOTAL rev5 con cierre** | | **14:05** | **15:25** | **1 h 20 min** |
