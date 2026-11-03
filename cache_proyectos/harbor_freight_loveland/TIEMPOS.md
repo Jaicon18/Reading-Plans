@@ -10,3 +10,7 @@ START 2026-11-02 20:26 PST
 | 11 | Back-check ciego lanzado | 21:31 | |
 | 11 | Back-check ciego terminado (28 PASS / 8 FAIL; 6 MUST-FIX) | 21:31 | 21:41 |
 | 10b | Ronda única de corrección rev2 lanzada | 21:41 | |
+| 10b | Corrección rev2 terminada (gates verdes salvo registro back-check) | | 21:57 |
+| 11b | Re-corrida cadena rev2 + back-check anotado: REGLAS OK 864/0, ETAPAS PASA, markups 47/47 | | 21:59 |
+| 10 | Docs (README, PARA_REVISAR, SEGUIMIENTO) + subida a Drive (19 archivos, tamaños verificados) | 22:00 | 22:03 |
+| **TOTAL** | **Arranque → entrega verificada en Drive** | **20:26** | **22:03** |

@@ -1,0 +1,24 @@
+# PROCESO CORRIDA - stages 4-9 (calculation, Excel, markups, gates) - Harbor Freight Tools - Loveland, CO
+
+Clock = America/Los_Angeles. Skill frozen v81cf18 (tools in scratchpad/skill/take-off-metal-frame-drywall/tools); every
+tool run through `bitacora.py run` (bitacora.jsonl of the work dir). Programs calculate; nothing computed by hand (BE-58).
+
+| Time | Step |
+|---|---|
+| 20:54 | Brief BRIEF_CALCULO.md read; CFA River Point template chain (cadena_rev4.sh, scripts_rev4/, PROCESO_CORRIDA, TOOL_LIMITS_CALC) and Chuze RCP patch read (patch already inside v81cf18). |
+| 20:58 | PHASE 1 dry run set up in hf/dryrun/ on a COPY of 2_lectura/takeoff_canon_A.json (4_canon / 3_revision untouched). canon.py runs rc 0 on it. |
+| 21:00 | Tool fix BE-HF1 (hat channel family + printed label): canon.py STUD_FAM / nombres_contexto.z_kind, plantilla_excel.nombre_plantilla + track-row skip, trazabilidad.py Z/hat breakdown; test_hat_channel_label.py (fails on the original v81cf18 files kept in scratchpad/skill_originales_hft/). |
+| 21:01 | scripts/disponer_tags.py: 637 inventory candidates (490 PA + 147 PC) -> 24 counted in walls[].tag_ids (same type, same sheet, <= 12 pt from the reader's tag), 613 in tags_descartados with motivo (English, from the inventory) + crop. scripts/preparar.py (SHEET_MAP.md, canon backup). runner/evidencia.py rc 0. |
+| 21:05 | PHASE 2: resolved canon present (4_canon/takeoff_canon.json, demo_geom.json, demo_cruce.md; 3_revision/resolucion.md, review_items.json). Etapas layout completed (1_inventario/inventario.json + recortes, 2_lectura/canon_A/B.json, 3_revision/revision.*); scripts/cadena.sh on K = hf. |
+| 21:06-21:08 | Steps 1-19 green: test_ciego, arranque, alcances escanear / renglones, registro crear, inventario_tags, contar_tags A1.1, preparar, disponer_tags, runner/evidencia, evidencia_rfis (barrido = program text search of the 50 pages + SHX text), insumos fo, canon.py, inventario.py, framed_openings, insumos alcance, alcance_filtro. vigas_sobre_walls S2.0 not registrable (BE-HF4 --min-size added; grid bubbles are vector) -> NONE (TOOL_LIMITS #1). |
+| 21:08-21:09 | closer seals 33 walls (RE walls declared with board EXCLUDED face), planmark per sheet / type; markups_bluebeam, demo_geom_markups (14 = canon DEMO-01..14), markups_demo (11,412.0 SF), markups verificar, imagenes_hoja (A1.1, A4.0, D1.0, S2.1). |
+| 21:11-21:21 | reglas.py first pass 172 failures (canon format + 2 rule defects): scripts/formato_canon.py (face sides A/B by printed room tags, height_source 'same as', R73.8 printed-governs ops, R70.2 corners by esquinas.py, RFI delta, MEP no_usable, top_track_kind, fasteners_excluded, window sill source, length causes); tool fixes BE-HF5 (53.4 printed spacing), BE-HF6 (E1 + misc box beams), BE-HF7 (track by stud size with designation), BE-HF8 (bare-sheet citation), each with its test. evidencias_reglas.py written. |
+| 21:22 | plantilla_excel validar / armar (REGLAS OK) / verificar green. registro marcar + entregable, alcances compuerta green. |
+| 21:24 | BE-HF9 (markup SF = 0 board for a wall declared without board) + length causes; verificar_markups_excel 47/47 OK. |
+| 21:25 | reglas.py R80.4 (hat-channel row read back as its family): BE-HF1b familias.py. reglas.py compuerta: only the separate back-check pending. etapas.py compuerta PASA. |
+| 21:26 | auditoria_entrega.py: BE-HF10 (open RFIs with A/B/C + delta; written length causes honoured); deflection clips none_reason by program (the reading had put "no clips printed" in note_source -> spurious tool RFI). |
+| 21:28 | Top track kind fixed (type A text "no slip track printed" is standard): slip 10/A4.1 row = type D only. Full chain green from the resolved canon (restored from takeoff_canon_RESUELTO.json, then steps 9-38): CHAIN-OK. |
+| 21:29 | Tool suite correr_suite.py 60/60 after renaming a test id (test_ciego_tools P7). Visual check of the A1.1 / A4.0 PNGs. Deliverables in hf/FINAL (Take-off, Planos marcados, proceso). |
+| 21:41 | rev2 (single correction round): back-check rev1 read (F1-F6, OBS-1..7). rev1 deliverables moved to hf/superseded_rev1/. |
+| 21:42-21:46 | Tool fixes BE-HF11..BE-HF17 (canon braces to structure + bracing minimum height + heads by kind, partition rows per wall id and BULKHEAD-VH typed row, demo faces label, sill breakdown + rounding note, legend order) with test_braces_rows_rev2.py; scripts/rev2_canon.py writes the printed data (A1.1 note 1, 2/A4.1, A1.2, A4.1 note 7) and RFI-05 (deltas by the same tool function). |
+| 21:47-21:56 | takeoff_json.py: Review Items rewritten in estimator English (RI-08 removed; C-02 and A0.2 existing board repair added), Scope line "patch and repair of existing gypsum board" (allowance), Inputs B.O. deck from the A1.2 chart. Full chain from the resolved canon: CHAIN-OK; verificar_markups_excel 47/47; auditoria 121/0; reglas only back-check pending; etapas PASA; suite 61/61. |
