@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf15: v81cf14 + VS rev16 R80e.134; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf16: v81cf15 + R80e.135 RCP / toda hoja marcada; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -120,4 +120,8 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 **03-nov: v81cf15 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf14 + R80e.134 (BE-VS-14: markups_demo con el formato del verificador, DEMO-<id del Excel>, DETAIL N/HOJA, page label; nota impresa de EQ studs cargada por programa). Suite 51/51. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev16 FINAL: REGLAS OK, markups 178/178 (A02.01 + A01.01).
 
-| Victoria's Secret #679 Downey rev16 FINAL (vigente) | v81cf15 | 2026-11-03 | take-off-metal-frame-drywall_v81cf15_VS-Downey-rev16_2026-11-03.zip |
+| Victoria's Secret #679 Downey rev16 FINAL | v81cf15 | 2026-11-03 | take-off-metal-frame-drywall_v81cf15_VS-Downey-rev16_2026-11-03.zip |
+
+**03-nov: v81cf16 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf15 + R80e.135 (BE-VS-15: verificar_markups_excel FALLA si una hoja con renglones del take-off no tiene markups — ceilings / soffits por rcp_sheet y demolición; tool nueva markups_rcp.py; el runner agrega demo_geom.json y rcp_polys.json del proyecto al PDF de entrega; el verificador elige el renglón del Material Summary cuyo material corresponde al TYPE). Suite 51/51. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev16 con v81cf16: REGLAS OK, markups 208/208 (A01.01 + A02.01 + A03.01), mismas cantidades. OJO proyectos con ceilings y sin rcp_polys.json: la compuerta ahora falla hasta marcar el RCP.
+
+| Victoria's Secret #679 Downey rev16 FINAL + RCP (vigente) | v81cf16 | 2026-11-03 | take-off-metal-frame-drywall_v81cf16_VS-Downey-rev16-RCP_2026-11-03.zip |
