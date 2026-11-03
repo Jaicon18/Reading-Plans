@@ -27,3 +27,9 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 11b | Back-check rev3 PASS + compuertas finales (REGLAS OK 845/0, BITACORA OK, ETAPAS PASA) + skill v81cf8 archivada | 15:26 | 15:29 | 3 min |
 | 10 | Subida a Drive (Claude outputs, 21 archivos, tamaños verificados = chequeo 8 PASS) | 15:29 | 15:32 | — |
 | **TOTAL** | **Arranque → entrega en Drive** | **12:12** | **15:32** | **3 h 20 min** |
+
+## rev4 — orden del usuario 3-nov: los 13 RFI se buscan en el plano (BE-CF16)
+| # | Paso | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R4-0 | Texto completo del set (incl. SHX) + 3 barridos en paralelo (subagentes por grupo de RFI) | 16:06 | | |
+| R4-1 | Compuerta A_RFI_BARRIDO (R80f.6) en v81cf10 = v81cf9 + R80f.6; suite 44/44, verificador 0 faltantes (en paralelo) | 16:10 | 16:17 | 7 min |
