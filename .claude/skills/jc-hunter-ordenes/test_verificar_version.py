@@ -87,6 +87,9 @@ def revisar_indice():
     assert V.revisar_indice(d)
     open(os.path.join(d, "take-off-metal-frame-drywall_v9x_P_2026-11-03.zip"), "w").write("x")
     assert V.revisar_indice(d) == []
+    # BE-CF20: dos zips con el mismo número de versión = línea partida
+    open(os.path.join(d, "take-off-metal-frame-drywall_v9x_Q_2026-11-03.zip"), "w").write("y")
+    assert any("BE-CF20" in x for x in V.revisar_indice(d))
 
 
 def revisar_skill():

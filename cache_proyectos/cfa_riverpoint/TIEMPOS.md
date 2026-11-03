@@ -37,3 +37,16 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | R4-3 | Compuerta BE-117 markups vs Excel en v81cf11 (subagente, en paralelo a rev4); CAMBIOS v70–v77 unidos para bajar de 200 archivos | 16:29 | 16:38 | 9 min |
 | R4-4 | Skill v81cf12 + back-check rev4 (FAIL 2/53) → arreglos → re-check PASS; v81cf13 (parche Chuze) vigente; 2.º reinicio de contenedor a las 17:10 | 16:59 | 17:15 | 16 min |
 | R4-5 | Cadena final con v81cf13 (Excel y markups idénticos), compuertas (REGLAS 855/0, BITACORA OK, ETAPAS PASA, markups 121/121) + subida a Drive | 17:15 | | |
+
+## rev5 — orden del usuario 3-nov: compuerta de entrega nueva (compuerta_entrega.py v81cf23) en VERDE + subida solo con subir_entrega.py (hora de California, PST; reloj del contenedor)
+| # | Paso | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R5-0 | Reglas + compuerta_entrega.py / subir_entrega.py; cfa_calc_rev5; set_texto.json; skill v81cf24 (texto_set hojas rotadas, sill track misc, furring sin id interno); cadena rev5 OK | 14:05 | 14:25 | 20 min |
+| R5-1 | Primera corrida de la compuerta (5 FAIL); orden de COORDINACIÓN: skill archivado v81cf24 -> v81cf25 (merge 3 vías de mis arreglos), cadena con v81cf25, compuerta 230 chequeos (16 FAIL) | 14:25 | 14:33 | 8 min |
+| R5-2 | Arreglos de tool v81cf25 (revision_markups, revision_materiales, chequeos_biblioteca, canon abut) + correcciones_rev5.py (barrido BE-120, RFI-09/10 cerrados, nodos, demo, door schedule) + cadena completa | 14:33 | 14:58 | 25 min |
+| R5-3 | Matriz de cobertura rev5 (0 GAP), back-check rev5 (8/8 PASS), documentos; compuerta 0 FAIL salvo 1; suite 51/51, verificar_version 0 faltantes, banco 0 distintas | 14:58 | 15:05 | 7 min |
+| R5-4 | Cadena final + compuerta_entrega.py final (ENTREGA_OK verde: 137 PASS / 3 AMBER / 0 FAIL) | 15:05 | 15:09 | 4 min |
+| 10 | Subida a Drive SOLO con subir_entrega.py (37 archivos, carpeta 1TiGDNsJTGnEMQkPHcJ99LWgQTSGqNeIC) | 15:09 | 15:14 | 5 min |
+| **TOTAL rev5** | **Inicio → entrega en Drive** | **14:05** | **15:14** | **1 h 9 min** |
+| R5-5 | Cierre: push chocó con v81cf25 de O'Reilly y luego con v81cf26 de COORDINACIÓN (BE-CF20) -> uniones 3 vías = v81cf27, suite 51/51, banco 0 distintas, verificar_version 0 faltantes (675), compuerta rev5 re-corrida = igual; commit + push | 15:14 | 15:25 | 11 min |
+| **TOTAL rev5 con cierre** | | **14:05** | **15:25** | **hasta 15:25** |

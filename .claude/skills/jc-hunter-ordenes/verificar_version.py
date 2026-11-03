@@ -198,8 +198,11 @@ def revisar_indice(archivo):
     if not m:
         return ["INDICE.md no marca la VERSIÓN VIGENTE"]
     v = m.group(1)
-    if not [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]:
+    zs = [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]
+    if not zs:
         return [f"la versión vigente {v} no tiene zip en skills_archivo"]
+    if len(zs) > 1:   # BE-CF20: dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
+        return [f"BE-CF20: la versión vigente {v} tiene {len(zs)} zips distintos ({', '.join(sorted(zs))}): unir en v+1"]
     return []
 
 
