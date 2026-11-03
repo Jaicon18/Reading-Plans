@@ -98,6 +98,6 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 
 | Victoria's Secret #679 Downey rev14 (vigente; 0 RFI abiertos) | v81cf9 | 2026-11-02 | take-off-metal-frame-drywall_v81cf9_VS-Downey-rev14_2026-11-02.zip |
 
-**03-nov: v81cf10 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf9 (VS rev14) + R80f.6 (BE-CF16, usuario 3-nov: ningún RFI abierto sin barrido completo del set; compuerta A_RFI_BARRIDO en reglas.py + test_rfi_barrido.py). verificar_version.py 0 faltantes. Suite 44/44. Solo agrega una compuerta (sin cambio de cantidades).
+**03-nov: v81cf10 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf9 (VS rev14) + R80f.6 (BE-CF16, usuario 3-nov: ningún RFI abierto sin barrido completo del set; compuerta A_RFI_BARRIDO en reglas.py + test_rfi_barrido.py). verificar_version.py 0 faltantes (459, incluye BE-117 de la maestra). Suite 44/44. Solo agrega una compuerta (sin cambio de cantidades).
 
 | Chick-fil-A #2284 River Point rev4 (vigente) | v81cf10 | 2026-11-03 | take-off-metal-frame-drywall_v81cf10_CFA-RiverPoint-rev4_2026-11-03.zip |
