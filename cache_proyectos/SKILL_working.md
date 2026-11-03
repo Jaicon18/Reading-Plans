@@ -2729,3 +2729,25 @@ NOTA DE NUMERACIÓN (BE-115): las reglas de CFA usan su propio espacio R80f.N (a
 - R80e.135 (03-nov, TODOS): verificar_markups_excel (compuerta A_MARKUPS_EXCEL) FALLA si una hoja con renglones del take-off no tiene markups: además de walls, los ceilings / soffits del canon (hoja = ceilings[].sheet o constants.rcp_sheet; cada room es un elemento que necesita su anotación) y los misc_items de demolición (hoja de su fuente). El runner agrega al MISMO markups.pdf la demolición (project inputs demo_geom.json, markups_demo.py) y los ceilings (project inputs rcp_polys.json, markups_rcp.py: un polígono por room con /Measure a la escala impresa, Contents "<board> · CEILING <room> · SF · CLG <altura> · <detalle> · <room>", área dibujada = SF del Excel <= 0.5 %, clusters de lateral bracing dibujados, leyenda). Cuando el mismo ID sale en varios desgloses del Material Summary, el verificador usa el renglón cuyo material corresponde al TYPE.
 - R80f.12 (CFA #2284, 03-nov): BE-CF19 — verificar_markups_excel toma la hoja de un renglón de demolición de su demo_geom, no de la hoja que cita su altura; test_demo_hoja_geom.py.
 - R80f.17–R80f.28 (HFT Loveland, 03-nov, v81cf21; texto completo en el SKILL.md de v81cf21, tests en tools/test_hft_loveland.py): R80f.17 hat channel vertical con rótulo impreso (BE-HF06); R80f.18 canon.MISC_ALIAS "FRP panels" (BE-HF07); R80f.19 C.R. bracing según condición impresa — furring 0 rows, constants.bracing_min_height_ft, compuerta A_BRACING con constants.bracing_spacing_in (BE-HF08 / BE-HF10 / BE-HF04); R80f.20 vigas_sobre_walls --min-size (BE-HF09); R80f.21 A_HEADER_LF + desglose con box beams de misc_items (BE-HF11); R80f.22 desgloses: tamano_stud con designación, hoja suelta citada, sill por abertura + nota de redondeo (BE-HF12 / BE-HF13 / BE-HF17); R80f.23 markups: 0 SF en walls sin board, demo "faces x layer", leyenda en orden del schedule (BE-HF14 / BE-HF16); R80f.24 auditoria_entrega --rfis-abiertos + causas escritas (BE-HF15); R80f.25 braces to structure + spacing bar cargados (BE-HF02); R80f.26 track de head / bulkhead por tamaño y tipo (BE-HF03); R80f.27 una fila de Partition Takeoff por Wall ID + bloque BULKHEAD-<tag> (BE-HF05); R80f.28 el brief no resume wall types desde texto extraído (BE-HF01).
+## R80e.139 — Compuerta de entrega y candado de subida (usuario 3-nov, INVIOLABLE, BE-121 / BE-119 / BE-120)
+Paso 9 (compuertas) termina con `python3 -I tools/compuerta_entrega.py <carpeta_del_proyecto>`: corre TODOS los chequeos
+"programa" del registro `REGLAS_REGISTRO.json` (cuando = entrega) por el FONDO — formato fijo del Excel, tornillería EXCLUDED,
+dos familias de track, fuentes del Material Summary, hoja de datos del proyecto, TIEMPOS.md (pasos 1–9, hora de California),
+sin dólares / sin UTC, Drive = Claude outputs de la raíz, RFI (A)/(B)/(C) + delta + valor cargado, RFI prohibidos por orden
+fija, BE-120 (términos de cada RFI abierto buscados en el texto completo del set `set_texto.json`, incl. SHX: FALLA si
+aparecen en una hoja fuera del barrido o junto a un valor impreso sin descarte escrito en `barrido.descartes`), BE-119
+(Depth del markup vs altura IMPRESA de la fuente: RED = FAIL, sin altura impresa = AMBER), markups = Excel, auditoría,
+reglas.py en modo final — y escribe `ENTREGA_OK.json` (rc 1 con cualquier FAIL; sin override). Paso 10 (subir) SOLO con
+`python3 -I tools/subir_entrega.py <carpeta_del_proyecto>`. Texto del set: `compuerta_entrega.py texto <bidset.pdf> --out
+<carpeta>/set_texto.json`. Config: `<carpeta>/entrega.json` {"drive": {"parent_id", "carpeta_proyecto",
+"carpeta_proyecto_id"}, "escalas": {"<hoja>": "1/8"}}. Test: tools/test_compuerta_entrega.py.
+
+## R80e.140 — Materiales contra el Partition Type Schedule, sin circularidad (usuario 3-nov, INVIOLABLE, BE-122)
+Antes de la compuerta de entrega, un subagente que NO ve el Excel ni el canon lee el Partition Type Schedule y escribe
+`<carpeta_del_proyecto>/fichas.json` {"types": {"<type>": {stud_designation, gauge_ga, oc_in, height, faces[{side, layers,
+board}], track, slip_track, extras, sources{stud, board, height, track}, img}}}. `compuerta_entrega.py` (CE_MATERIALES_SCHEDULE)
+lo compara por programa con lo cargado por wall / type (tools/revision_materiales.py comparar_type) y revisa que cada renglón del
+Material Summary tenga origen impreso y que su desglose sume el Net, agrupado por type (sumas). RED = FAIL; sin fichas.json =
+FAIL; AMBER = el schedule no lo dice. `entrega.json` puede traer "mapa_materiales" {"<clave del schedule>": ["TYPE1", ...]}.
+Reporte completo: `python3 tools/revision_materiales.py fichas.json takeoff.xlsx takeoff_canon.json <calc_out> <out>`.
+

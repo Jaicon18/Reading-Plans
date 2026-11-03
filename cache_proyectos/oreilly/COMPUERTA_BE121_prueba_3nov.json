@@ -1,0 +1,457 @@
+{
+ "version": "compuerta_entrega v1 (BE-121, 3-nov-2026)",
+ "fecha_california": "2026-11-03 11:00 PST",
+ "fecha_iso": "2026-11-03T19:00:32.677338+00:00",
+ "workdir": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/runs/oreilly",
+ "entrega_dir": "FINAL_FOR_REVIEW_2026-11-01_rev4",
+ "ok": false,
+ "resumen": {
+  "PASS": 10,
+  "AMBER": 1,
+  "FAIL": 11
+ },
+ "chequeos": [
+  {
+   "id": "CE_ENTREGABLES",
+   "reglas": [
+    "U-011",
+    "U-048"
+   ],
+   "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
+   "estado": "PASS",
+   "evidencia": [
+    "45 archivos en FINAL_FOR_REVIEW_2026-11-01_rev4"
+   ]
+  },
+  {
+   "id": "CE_SIN_PROPOSAL",
+   "reglas": [
+    "U-015"
+   ],
+   "descripcion": "sin proposal en la entrega",
+   "estado": "PASS",
+   "evidencia": [
+    "sin archivos de proposal"
+   ]
+  },
+  {
+   "id": "CE_FORMATO_EXCEL",
+   "reglas": [
+    "BE-43",
+    "U-003",
+    "U-016"
+   ],
+   "descripcion": "Excel de formato fijo: exactamente las 6 hojas visibles en orden y los encabezados fijos de plantilla_excel.py (sin hojas ni columnas agregadas)",
+   "estado": "AMBER",
+   "evidencia": [
+    "hoja oculta _reglas (sello viejo; desde R80f.5 va en <excel>.sello.json)"
+   ]
+  },
+  {
+   "id": "CE_TORNILLERIA",
+   "reglas": [
+    "U-053"
+   ],
+   "descripcion": "toda la tornillería (screws, anchors, Titen, pins/PAF, Tapcon, bolts) = 0 con EXCLUDED en Material Summary y una línea EXCLUDED en Scope Checklist",
+   "estado": "PASS",
+   "evidencia": [
+    "7 renglones de tornillería en 0 con EXCLUDED"
+   ]
+  },
+  {
+   "id": "CE_TRACK_FAMILIAS",
+   "reglas": [
+    "BE-24",
+    "U-056"
+   ],
+   "descripcion": "dos familias de track en renglones separados: estándar (bottom / top) y slip / deflection; ningún renglón las mezcla; si no hay slip track, Scope Checklist lo declara NOT APPLICABLE",
+   "estado": "PASS",
+   "evidencia": [
+    "8 renglones estándar / 4 slip-deflection, separados"
+   ]
+  },
+  {
+   "id": "CE_FUENTES_MS",
+   "reglas": [
+    "BE-40",
+    "U-025"
+   ],
+   "descripcion": "todo renglón del Material Summary con cantidad cita su fuente (N/SHEET, sección de spec o código del trade)",
+   "estado": "PASS",
+   "evidencia": [
+    "todos los renglones con fuente"
+   ]
+  },
+  {
+   "id": "CE_DATOS_PROYECTO",
+   "reglas": [
+    "BE-114",
+    "R-ALC-08",
+    "R-ALC-09",
+    "U-076",
+    "U-077"
+   ],
+   "descripcion": "hoja de datos del proyecto + hojas obligatorias en takeoff.json, Inputs del Excel, README_REVIEW y PARA_REVISAR (reglas.datos_proyecto_fallas)",
+   "estado": "FAIL",
+   "evidencia": [
+    "proyecto_datos · falta el campo 'name / city' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'address' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'project type' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'owner / tenant' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'architect' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'GC' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'bid date' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'bid set' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'total SF' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'stories' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'construction classification' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'occupancy group' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'codes' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'occupancy load' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'sprinklered' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'demolition' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "proyecto_datos · falta el campo 'specs' · cada dato con su HOJA o [PENDIENTE] (R-ALC-09)",
+    "hojas_revisadas · falta la categoría 'cover / index' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'code analysis / G' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'general notes' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'demolition + notes' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'specs' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'partition types + details' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'floor plans' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'RCP' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'elevations / sections' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'enlarged / interior elevations' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'schedules' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'structural' · revisada N/HOJA o 'no existe en el set'",
+    "hojas_revisadas · falta la categoría 'MEP' · revisada N/HOJA o 'no existe en el set'",
+    "Excel Inputs · falta el bloque 'PROJECT DATA' · renglones informativos en Inputs (R-ALC-09)",
+    "Excel Inputs · falta el bloque 'MANDATORY SHEETS REVIEWED' · renglones informativos en Inputs (R-ALC-09)",
+    "README_REVIEW.md · sin hoja de datos del proyecto arriba de todo · bloque PROJECT DATA al inicio (R-ALC-09)",
+    "PARA_REVISAR_EN_LA_MANANA.md · sin hoja de datos del proyecto arriba de todo · bloque PROJECT DATA al inicio (R-ALC-09)"
+   ]
+  },
+  {
+   "id": "CE_TIEMPOS",
+   "reglas": [
+    "U-094"
+   ],
+   "descripcion": "TIEMPOS.md con hora de inicio / fin (hora de California) de cada paso 1–9 y TOTAL",
+   "estado": "FAIL",
+   "evidencia": [
+    "no existe TIEMPOS.md en la carpeta del proyecto (cache_proyectos/<proyecto>/TIEMPOS.md)"
+   ]
+  },
+  {
+   "id": "CE_HORAS_CALIFORNIA",
+   "reglas": [
+    "U-045"
+   ],
+   "descripcion": "horas al usuario en hora de California: sin UTC en TIEMPOS / README / PARA_REVISAR",
+   "estado": "PASS",
+   "evidencia": [
+    "sin horas en UTC"
+   ]
+  },
+  {
+   "id": "CE_SIN_DOLARES",
+   "reglas": [
+    "U-018"
+   ],
+   "descripcion": "sin costos en dólares en los documentos para el usuario",
+   "estado": "PASS",
+   "evidencia": [
+    "sin montos en dólares"
+   ]
+  },
+  {
+   "id": "CE_DRIVE_PARENT",
+   "reglas": [
+    "U-001",
+    "U-004",
+    "U-090"
+   ],
+   "descripcion": "la carpeta del proyecto en Drive cuelga de Claude outputs de la RAÍZ (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc); nunca de Projects › Claude outputs",
+   "estado": "FAIL",
+   "evidencia": [
+    "entrega.json sin drive.parent_id (no se puede verificar el folder de entrega)"
+   ]
+  },
+  {
+   "id": "CE_RFI_FORMATO",
+   "reglas": [
+    "U-042",
+    "U-048",
+    "U-052"
+   ],
+   "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
+   "estado": "FAIL",
+   "evidencia": [
+    "RFI-ACC-gypsum-board-jamb-return: delta en (A) y (B)",
+    "RFI-ACC-gypsum-board-jamb-return: sin valor conservador cargado declarado (loaded / carried)",
+    "RFI-ACC-stud-reinforcement-mep: delta en (A) y (B)",
+    "RFI-ACC-stud-reinforcement-mep: sin valor conservador cargado declarado (loaded / carried)"
+   ]
+  },
+  {
+   "id": "CE_RFI_PROHIBIDOS",
+   "reglas": [
+    "R-ALC-01",
+    "R-ALC-03",
+    "R-ALC-05",
+    "R-ALC-07",
+    "U-053",
+    "U-061",
+    "U-064",
+    "U-071",
+    "U-075"
+   ],
+   "descripcion": "ningún RFI abierto sobre lo que el usuario ordenó resolver sin RFI (tornillería, trades ajenos, ductos, cielo existente sin tipo, altura de partition a demoler)",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI sobre temas con orden fija"
+   ]
+  },
+  {
+   "id": "CE_RFI_BARRIDO_IMPRESO",
+   "reglas": [
+    "BE-101",
+    "BE-120",
+    "BE-CF16",
+    "BE-HF18",
+    "U-019",
+    "U-052",
+    "U-086",
+    "U-100"
+   ],
+   "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
+   "estado": "FAIL",
+   "evidencia": [
+    "no hay set_texto.json (texto completo del set): correr `compuerta_entrega.py texto <bidset.pdf> --out <workdir>/set_texto.json`; sin él no se puede probar que la respuesta no está impresa"
+   ]
+  },
+  {
+   "id": "CE_ATRIBUCION_ESTIMADOR",
+   "reglas": [
+    "BE-101",
+    "U-052"
+   ],
+   "descripcion": "toda 'estimator decision' del Excel cita su respuesta escrita o precedente (R-ALC-NN, R80e.34, U-NNN, respuesta del usuario, standing rule)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda decisión del estimador con cita"
+   ]
+  },
+  {
+   "id": "CE_DECISIONES_EN_EXCEL",
+   "reglas": [
+    "U-016",
+    "U-050"
+   ],
+   "descripcion": "todo RFI cerrado (por plano o por el estimador) queda escrito en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "0 cierres citados"
+   ]
+  },
+  {
+   "id": "CE_SEGUIMIENTO",
+   "reglas": [
+    "U-048"
+   ],
+   "descripcion": "SEGUIMIENTO.md lista cada RFI abierto",
+   "estado": "FAIL",
+   "evidencia": [
+    "RFI-ACC-gypsum-board-jamb-return no está en SEGUIMIENTO.md",
+    "RFI-ACC-stud-reinforcement-mep no está en SEGUIMIENTO.md",
+    "RFI-15 no está en SEGUIMIENTO.md"
+   ]
+  },
+  {
+   "id": "CE_ALTURA_IMPRESA",
+   "reglas": [
+    "BE-119",
+    "U-010",
+    "U-088",
+    "U-099"
+   ],
+   "descripcion": "BE-119: cada markup re-medido a la escala IMPRESA y su Depth comparado contra la altura IMPRESA de su fuente (N/HOJA), no contra el Excel. RED = FAIL; sin altura impresa = AMBER",
+   "estado": "FAIL",
+   "evidencia": [
+    "5 RED / 12 AMBER de 27",
+    "EXT-PIER-L-8+EXT-HEAD-8+EXT-PIER-R-8: EXT-HEAD-8: Depth 9.333 vs printed source H 4.271 (printed dimension, 3/A3.1)",
+    "S24-OFF: LF measured 10.86 vs Excel 11.000 (-1.25 %)",
+    "S24-RR: LF measured 16.04 vs Excel 16.167 (-0.79 %)",
+    "S43-OFF-S: LF measured 10.86 vs Excel 11.000 (-1.25 %)",
+    "S43-RR-S: LF measured 16.04 vs Excel 16.167 (-0.79 %)",
+    "A1.1: la hoja del PDF de markups no tiene capa de texto; escala tomada del canon (9.040 pt/ft)",
+    "LEGEND: la hoja del PDF de markups no tiene capa de texto; escala tomada del canon (9.040 pt/ft)"
+   ]
+  },
+  {
+   "id": "CE_MATERIALES_SCHEDULE",
+   "reglas": [
+    "BE-122",
+    "U-111"
+   ],
+   "descripcion": "BE-122 (j): lectura INDEPENDIENTE del Partition Type Schedule (fichas.json, subagente que no vio el Excel) vs lo cargado por wall / type (revision_materiales.comparar_type) + cada renglón del Material Summary = suma de walls por type con origen impreso (revision_materiales.sumas). RED = FAIL",
+   "estado": "FAIL",
+   "evidencia": [
+    "no hay fichas.json (lectura independiente del Partition Type Schedule por un subagente que no vio el Excel): sin ella no hay revisión de materiales no circular (BE-122)"
+   ]
+  },
+  {
+   "id": "CE_MARKUPS_EXCEL",
+   "reglas": [
+    "BE-117",
+    "BE-44",
+    "U-010"
+   ],
+   "descripcion": "verificar_markups_excel.py: TYPE·LF·H·SF·DETAIL·Wall ID = Excel, /Measure = escala impresa, Length vs LF <= 0.5 %",
+   "estado": "FAIL",
+   "evidencia": [
+    "13 fallas",
+    "TO-S24-OFF (p.1 A1.1): Length 10.86 ft vs LF 11.00 = -1.25 % (> 0.5 %, sin causa escrita)",
+    "TO-S24-RR (p.1 A1.1): Length 16.04 ft vs LF 16.17 = -0.81 % (> 0.5 %, sin causa escrita)",
+    "TO-S43-OFF-W (p.1 A1.1): SF 73.5 != Excel Board (SF) 151.24",
+    "TO-S43-OFF-E (p.1 A1.1): SF 73.6 != Excel Board (SF) 151.62",
+    "TO-S43-OFF-S (p.1 A1.1): SF 93.5 != Excel Board (SF) 192.5; Length 10.86 ft vs LF 11.00 = -1.25 % (> 0.5 %, sin causa escrita)",
+    "TO-S43-RR103-W (p.1 A1.1): SF 77.4 != Excel Board (SF) 159.35",
+    "TO-S43-RR-S (p.1 A1.1): SF 137.4 != Excel Board (SF) 282.92; Length 16.04 ft vs LF 16.17 = -0.81 % (> 0.5 %, sin causa escrita)",
+    "TO-S61-RR (p.1 A1.1): SF 72.2 != Excel Board (SF) 144.5",
+    "TO-EXT-SOUTH-BAND (p.1 A1.1): SF 286.9 != Excel Board (SF) 0.0",
+    "S42-H1+S42-H2: suma SF de las piezas 756.1 != Excel 1368.5 (fila 25)",
+    "S42-V1+S42-V2: suma SF de las piezas 540.4 != Excel 898.5 (fila 26)",
+    "EXT-PIER-L-8+EXT-HEAD-8+EXT-PIER-R-8: suma SF de las piezas 608.9 != Excel 352.03 (fila 39)",
+    "EXT-PIER-L-6+EXT-HEAD-6+EXT-PIER-R-6: suma SF de las piezas 608.9 != Excel 0.0 (fila 42)"
+   ]
+  },
+  {
+   "id": "CE_AUDITORIA",
+   "reglas": [
+    "BE-42",
+    "U-005",
+    "U-007",
+    "U-011"
+   ],
+   "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
+   "estado": "FAIL",
+   "evidencia": [
+    "53 de 138",
+    "1 annot = Excel row · S42-H1+S42-H2 · TYPE S42 / S42; LF 64.11 / 64.11; H 14.51 / 11.794; SF 756.1 / 1368.5; DETAIL 5/A4.2 in source: True",
+    "1 annot = Excel row · S42-V1+S42-V2 · TYPE S42 / S42; LF 58.5 / 58.5; H 8.198 / 9.238; SF 540.4 / 898.5; DETAIL 6/A4.2 in source: True",
+    "1 annot = Excel row · S43-OFF-E · TYPE S43 / S43; LF 8.66 / 8.664; H 8.5 / 8.5; SF 73.6 / 151.62; DETAIL S43/A1.1 in source: True",
+    "1 annot = Excel row · S43-OFF-S · TYPE S43 / S43; LF 11.0 / 11.0; H 8.5 / 8.5; SF 93.5 / 192.5; DETAIL S43/A1.1 in source: True",
+    "1 annot = Excel row · S43-OFF-W · TYPE S43 / S43; LF 8.64 / 8.642; H 8.5 / 8.5; SF 73.5 / 151.24; DETAIL S43/A1.1 in source: True",
+    "1 annot = Excel row · S43-RR103-W · TYPE S43 / S43; LF 9.11 / 9.106; H 8.5 / 8.5; SF 77.4 / 159.35; DETAIL S43/A1.1 in source: True",
+    "1 annot = Excel row · S43-RR-S · TYPE S43 / S43; LF 16.17 / 16.167; H 8.5 / 8.5; SF 137.4 / 282.92; DETAIL S43/A1.1 in source: True",
+    "1 annot = Excel row · S61-RR · TYPE S61 / S61; LF 8.5 / 8.5; H 8.5 / 8.5; SF 72.2 / 144.5; DETAIL S61/A1.1 in source: True",
+    "1 annot = Excel row · EXT-PIER-L-8+EXT-HEAD-8+EXT-PIER-R-8 · TYPE EXT-8CFMF / EXT-8CFMF; LF 50.67 / 50.667; H 20.667 / 12.017; SF 608.9 / 352.03; DETAIL 1/A3.1 in source: True",
+    "1 annot = Excel row · EXT-PIER-L-6+EXT-HEAD-6+EXT-PIER-R-6 · TYPE EXT-6CFMF / EXT-6CFMF; LF 50.67 / 50.667; H 20.667 / 12.017; SF 608.9 / 0.0; DETAIL 1/A3.1 in source: True",
+    "1 annot = Excel row · EXT-SOUTH-BAND · TYPE EXT-6CFMF / EXT-6CFMF; LF 36.0 / 36.0; H 7.969 / 7.969; SF 286.9 / 0.0; DETAIL 1/A3.4 in source: True",
+    "2 /Measure = printed SCALE · S21-N (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S21-E1 (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S21-E2 (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S21-S (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S21-W1 (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S21-W2 (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S24-OFF (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "3 Length vs LF <= 0.5 % · S24-OFF · Length 10.86 / LF 11.00 (1.25 %)",
+    "2 /Measure = printed SCALE · S24-RR (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "3 Length vs LF <= 0.5 % · S24-RR · Length 16.04 / LF 16.17 (0.81 %)",
+    "2 /Measure = printed SCALE · S24-RR104S (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S43-OFF-W (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S43-OFF-E (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none",
+    "2 /Measure = printed SCALE · S43-OFF-S (A1.1) · annot 113/900 in = 1 ft; printed on the sheet: none"
+   ]
+  },
+  {
+   "id": "CE_REGLAS",
+   "reglas": [
+    "BE-116",
+    "BE-117",
+    "BE-CF16",
+    "R-ALC-11",
+    "R-ALC-12",
+    "U-009",
+    "U-031",
+    "U-083",
+    "U-085",
+    "U-086"
+   ],
+   "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
+   "estado": "FAIL",
+   "evidencia": [
+    "reglas.py rc 1, 130 fallas",
+    "S:§1:2fab33 · bitacora · plantilla_excel.py validar: se corrio sobre otra version de takeoff.json (cambio despues)",
+    "S:§1:2fab33 · bitacora · plantilla_excel.py armar: se corrio sobre otra version de takeoff.json (cambio despues)",
+    "S:§1:2fab33 · bitacora · plantilla_excel.py armar: se corrio sobre otra version de OReilly_Evans_Takeoff_FINAL_rev4.xlsx (cambio despues)",
+    "S:§1:2fab33 · bitacora · registro.py entregable: se corrio sobre otra version de registro.json (cambio despues)",
+    "S:§1:2fab33 · bitacora · alcances.py compuerta: se corrio sobre otra version de registro.json (cambio despues)",
+    "S:§1:2fab33 · bitacora · alcances.py compuerta: se corrio sobre otra version de OReilly_Evans_Takeoff_FINAL_rev4.xlsx (cambio despues)",
+    "S:§1:2fab33 · bitacora · EXCEL: Inputs!C23: texto interno en hoja visible 'estimator criterion' (R80e.84)",
+    "S:§1:2fab33 · bitacora · EXCEL: Material Summary!I37: texto interno en hoja visible 'canon' (R80e.84)",
+    "S:§1:2fab33 · bitacora · EXCEL: Scope Checklist!D6: texto interno en hoja visible 'headers.py' (R80e.84)",
+    "S:§1:2fab33 · bitacora · EXCEL: Scope Checklist!D27: texto interno en hoja visible 'estimator criterion' (R80e.84)",
+    "S:§1:2fab33 · bitacora · el back-check se hizo sobre otra version del Excel",
+    "S:etapa-5-entrega · Excel · Inputs!C23: texto interno en hoja visible 'estimator criterion' (R80e.84)",
+    "S:etapa-5-entrega · Excel · Material Summary!I37: texto interno en hoja visible 'canon' (R80e.84)",
+    "S:etapa-5-entrega · Excel · Scope Checklist!D6: texto interno en hoja visible 'headers.py' (R80e.84)",
+    "S:etapa-5-entrega · Excel · Scope Checklist!D27: texto interno en hoja visible 'estimator criterion' (R80e.84)",
+    "S:r80e-135-toda-hoja-con-renglones-del-tak · 6_markups/*.pdf · no hay PDF de markups de entrega",
+    "S:r80e-122-hoja-de-datos-del-proyecto-+-ho · proyecto_datos · falta el campo 'name / city'",
+    "S:r80e-122-hoja-de-datos-del-proyecto-+-ho · proyecto_datos · falta el campo 'address'",
+    "S:r80e-122-hoja-de-datos-del-proyecto-+-ho · proyecto_datos · falta el campo 'project type'",
+    "S:r80e-122-hoja-de-datos-del-proyecto-+-ho · proyecto_datos · falta el campo 'owner / tenant'"
+   ]
+  }
+ ],
+ "archivos": {
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/CERTIFICADO_AUDITORIA.md": "b872779d46de2d8eae0817d22426f40406f3da467bec1a1e564e67a29f834c7d",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/CERTIFICADO_PASO12.md": "bc71e996f01a901300115c915b730c98e03ffeb949ebd58ecc0767b102c463ca",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/COMPARATIVA_AUDITORIA.md": "ff0d6bafbf07b0585e207111f0af8b681166a98ac1c5c7fa51a01abcd37dda30",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/LECTURA_DIRIGIDA_S_rev2.md": "a16145d4ec74fa6fc57ce4d22a45a6d2e9f6656548b60f245304cf83eafddf3e",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/MATRIZ_COBERTURA.xlsx": "022c34312bf6bffaa119812127e68431f6b6ae10ee3f912e54907b35e18f0119",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/RESOLUCION_PASO11.md": "0b9acbae1a8e9cd1705f875aeb250630cbca9cb186ba4daf37527b6cc6cf726f",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/RESOLUCION_PASO12.md": "7b18ce6ce58d0a678538d21f10fa2065c976fd11926951c7e0057aa2a66ec07d",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/RESPUESTAS_RFI_ESTIMADOR.md": "1bbd62666fbc2fcf6effd394186ed3de45b3a763ba3194e95b6c2f34bfd62f3d",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A4.1_accessory_gen_notes.png": "999aa1587ddc44f2b2c87facd540e4316212db824a86f38878ccb75fc7a793e4",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A4.1_elev10_kn13.png": "05eb9d2ee64f297dfc9757eb893009d478b7481b64a76dfb347e1764a620dc24",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A4.1_elev13.png": "d87f5e6e272be4bfa863f9c4a1c8c77528dccf5b875543dd0b851fb2a821d41e",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A4.1_keynotes_13-18.png": "9d52afbbbfaba83176b573f81b978f86193b63bfb67f911cae5f6d70b6c9ad46",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A4.1_notes.png": "ba6fbef4c585d1cc737de9a92e7add39268db5c6e697c65d95dabb20927a6f38",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A5.2_det11_head.png": "ad4475d4235d28ceefecaad7a92e80e9e7bab3339e74648121eea0caab12cca6",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A5.2_det12_jamb.png": "365d2d133216e59f33e2523615cc5e4c7976aa707a9f75717840d5d0d3d3c20f",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/A5.2_type_D1_D2.png": "908aa4e309c2aef1b495f950f33d09e602b3f2b9ae2bc4fb62138b4a4f91cb8f",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S1.1_note7_LGS_full.png": "308ab5efb854e02ac0858df45d5548a2621d90aa5a57e49c4ab560daca8aea56",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S1.1_note7_left_A-G.png": "22d98d97157c0d203d969fc06e56b465600ea306cfdb463be56a690bb5df1340",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S1.1_note7_left_F-H.png": "794babd9dbef0048446bf2f6a4f0b3ff4f438ca5d692a19a313a8da94e29e7b7",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S1.1_note7_right_A-G.png": "eaede6344f56df61e602ea8470b4e00f7bde3bdeb4c5b3244bafa10a0a5d886a",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S1.1_note7_right_F-H.png": "03047e4448d5764033bda6fa56f00ffaf15a21a1c0e3923721024a1b4747342b",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S4.1_keynotes.png": "f80a24712bc395de199a2b3d7cb8c8223abd6117b8f4d989bbb0b89b9d0c80b8",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S4.1_keyplan_S5.1_refs.png": "75bec9b66d42354149f94ef9566244bf6ae9b52a35ffde86891d2dccc3c1b6ee",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S4.1_keyplan_hi.png": "078c31390b0b9a39d6ffe342aab8227949f703769d07c9c7864574ca87471f27",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.1_det3.png": "d48d264776b4314facd5d338241acf5e9d9ee9383b02fabda71d89845a538b25",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.1_det4.png": "a1c4cc422e07f90c6c8885eaf604df0e713ecfd3c3d1ed9fdbef2d152023e308",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.2_keynotes_1-12.png": "e18aed3fba254999712c9fd41ea654d9baf0925e76c9a315842d1013beb7c83c",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.2_keynotes_13-23.png": "3295886fcb559f6e4577499dd822834db2f34fdc79940177960f8a47870299e0",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.3_det1.png": "6dff8c8f6df00a9141ba866d74c7ca0deb7c76747a80971e9397eadf1637cdba",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.3_det3.png": "df0ce5a9defd65f870314d17a354afacb6941aed6f190bcf76cecef0ecf08479",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Auditoria/img_lectura_S/S5.3_keynotes_16-23.png": "51e593267a8b8938f9245b75b3ed05436cbf504cf91fadb227c15b4d517535c0",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/PARA_REVISAR_EN_LA_MANANA.md": "b6d23b3c975262dd726b791383b73a266b1cb0a611dba68e89dec62b9364e972",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_OTHER_FRAMING_vestibule_heads.png": "7db9ef060f31e044d0f37a05ed6b9472876244074657285f872b438e54061dc0",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_EXT-6CFMF.png": "70db4e014c038d08a0b80e10792238502ca3448f39a44376eadff618a9d6b2f5",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_EXT-8CFMF.png": "817fc8ddd416fd0acab0007e91a9b82dd5b5895b607dfbf2409c40aecea30946",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S21.png": "4cefbf6844aa7576d9501e83e9ec7f7a8b3abd43debe515fbbacec8a3c43a2c9",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S24.png": "d21aec0cd87c1e90b7e737eb534dce6af158e80543d4571e29f0fe00ffa69609",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S41.png": "85bea45916aca3911e59a73529b8d59cbaea848ab2f7f3e55e8fe734a40b1e3e",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S42.png": "de4feeddcb1b071a2c3f42c378f75b4f37c043439b7f1cb1acce3ed93de1f3ba",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S43.png": "bf5bbcd741369d47dc348aa98e9d2755f685661e139d7368c60fa38b5bf21b19",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/A1.1_type_S61.png": "5e095a5ca0fa2878d1a24817db6e548dda5a82fde09c0c8625c62b9f9add2cd1",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Planos marcados/OReilly_Evans_FINAL_markups_rev4.pdf": "786fff17ebb34c3c8dd37c54a30c11d59a7e314770bf4b89c891e2e200efb5fc",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/README_REVIEW.md": "c92d31ccbddac089a56ca8236369d1b4e316fbd4f4f422a343bcf333505a1324",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/SEGUIMIENTO.md": "0dc1e2cf630e5c0643eb7825fef64461b110a7c4f91d940d66656bfbad11a916",
+  "FINAL_FOR_REVIEW_2026-11-01_rev4/Take-off/OReilly_Evans_Takeoff_FINAL_rev4.xlsx": "4a3d3af23827746d1f06f1300cf6810c72a23a203043ba4b49f58b3e4f76415c"
+ },
+ "drive": {},
+ "registro": "registro v1 (BE-121, 2026-11-03)"
+}

@@ -1,0 +1,2748 @@
+{
+ "version": "registro v1 (BE-121, 2026-11-03)",
+ "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
+ "conteo": {
+  "programa": 86,
+  "conducta": 38,
+  "programa-pendiente": 142,
+  "historico": 23
+ },
+ "reglas": [
+  {
+   "id": "U-001",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario jaicon18, 23-oct-2026): todo entregable lo subo yo a su lugar en Google Drive (Shared drives › JC HUNTER PROJECTS › Claude outputs o la carpeta del proyecto). Archivos grande",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_drive_parent",
+    "take-off:tools/subir_entrega.py::candados"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_drive_parent"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "candados"
+    }
+   ]
+  },
+  {
+   "id": "U-002",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct): SIEMPRE que el usuario tenga que hacer algo (subir, descargar, abrir), darle instrucciones paso a paso con la ruta exacta.",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-003",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): el Excel del take-off tiene UN SOLO formato fijo, el de plantilla_excel.py (hojas Inputs, Partition Takeoff, Material Summary, Pending Items, Re",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_formato_excel"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_formato_excel"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-004",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): Claude outputs contiene SOLO un folder por proyecto. Todo archivo producido para un proyecto se guarda en SU folder, nunca suelto en Claude outp",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_drive_parent"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_drive_parent"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-005",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos, mismo formato en todos): todo entregable perfectamente organizado para que el usuario lo lea sin problema. Partitions SIEMPRE en el orden del Par",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_auditoria"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_entregables"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-006",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA GENERAL INVIOLABLE (usuario 24-oct, TODOS los proyectos presentes y futuros): ahorrar tokens usando caché. Cada proyecto tiene su caché permanente en el repo Reading-Plans › cache_proyectos/<pro",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-007",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): toda regla o mejora que se cree es para TODOS los proyectos, no solo el actual: guardarla aquí y en el skill (§0.F). Imágenes de walls: una por ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_auditoria",
+    "ordenes:verificar_version.py::revisar_registro"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_entregables"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "revisar_registro"
+    }
+   ]
+  },
+  {
+   "id": "U-008",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): CONSISTENCIA TOTAL. Misma forma de trabajar y mismos formatos en cada proyecto: mismos pasos (1 medir partitions → 2 materiales + Excel fijo → 3",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-009",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): seguir el skill PASO A PASO completo (10 pasos: 1 inventario, 2 lectura A, 3 lectura B, 4 comparación, 5 resolución, 6 cálculo, 7 Excel, 8 marku",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_reglas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "reglas"
+   },
+   "cuando": "entrega",
+   "tests_extra": []
+  },
+  {
+   "id": "U-010",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): markups Bluebeam con toda la información por wall: TYPE · LF · H · SF (LF×H) · DETAIL · Wall ID, y con escala (/Measure) para que Bluebeam mida ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_markups_excel",
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_altura_impresa"
+   },
+   "cuando": "entrega",
+   "tests_extra": []
+  },
+  {
+   "id": "U-011",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 24-oct, TODOS los proyectos): cada proyecto se hace EXACTAMENTE con el mismo procedimiento y los mismos entregables que BOA Broomfield: 10 pasos del skill + FINAL FOR REVIEW ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_entregables"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_entregables"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-012",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct, TODOS los proyectos, control de costo): lectura A y B una vez cada una, comparación una vez; cada diferencia A/B se resuelve con UNA revisión dirigida (recorte); si sigue la dud",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-013",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct): avisar al usuario del consumo del límite semanal. En cada check-in revisar rate_limit_info de las sesiones (status allowed / allowed_warning / rejected, resetsAt) y avisar en c",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-014",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct): todo lo que yo necesite del usuario se lo PIDO explícitamente (con pasos), nunca lo doy por hecho. Recordatorio diario 7:51 AM Denver (trigger \"Pedir captura de usage diaria\") ",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-015",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct, TODOS los proyectos, hasta que el usuario diga lo contrario): NO hacer proposal. Quitar todo lo relacionado con la proposal (archivo, carpeta Proposal/, preguntas de proposal). ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_sin_proposal"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_sin_proposal"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-016",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 24-oct, TODOS los proyectos): las decisiones del estimador y mis comentarios (fuente N/HOJA, razón, operación, alternativas con delta) van DENTRO del Excel, en las columnas existentes (",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_formato_excel",
+    "take-off:tools/compuerta_entrega.py::ce_decisiones"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_formato_excel"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_decisiones"
+    }
+   ]
+  },
+  {
+   "id": "U-017",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 26-oct, TODOS los proyectos): en la resolución A/B, una cota IMPRESA que coincide con una lectura manda sobre la otra lectura (CONFIRMADO > DERIVADO); nunca elegir la lectura que contra",
+   "categoria": "programa-pendiente",
+   "motivo": "la resolución A/B (cota impresa > lectura derivada) se decide en resolver/canon; no hay test que reproduzca un caso CONFIRMADO vs DERIVADO elegido al revés"
+  },
+  {
+   "id": "U-018",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 26-oct): NO mencionar costos en dólares de los trabajos (paga suscripción Max). Solo hablar de % de uso de la suscripción cuando haga falta avisar del límite. Los topes internos de las ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_sin_dolares"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_sin_dolares"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-019",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 26-oct, TODOS los proyectos): NUNCA preguntar al usuario lo que se puede resolver en el plano o lo que ya sé que tengo que hacer. Si la respuesta se puede BUSCAR (elevaciones",
+   "categoria": "conducta",
+   "nota": "su parte verificable la cubre CE_RFI_BARRIDO_IMPRESO (U-100)"
+  },
+  {
+   "id": "U-020",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 27-oct): antes de entregar un zip del skill, verificar < 200 archivos (límite de Upload skill), SKILL.md con YAML name/description, sin carpetas de respaldo (tools.orig_*), sin __pycach",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_zip"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_zip"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "U-021",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "ESTADO (28-oct): skill v80s instalado por el usuario en Customize › Skills (verificado por frase \"division bars cada 4'\"). Próximo proyecto arranca con v80s.",
+   "categoria": "historico",
+   "reemplazada_por": "U-078",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-022",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 26-oct, TODOS los proyectos): AUTONOMÍA TOTAL. Trabajar todo basado en los planos SIN preguntar ni pedir autorización al usuario (deja sin efecto el \"cada paso con autorizaci",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-023",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 27-oct, TODOS los proyectos): cuidar el gasto de tokens. Nunca repetir trabajo sin provecho: no relanzar revisiones completas para cerrar pocos hallazgos (se corrigen y se ve",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-024",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (27-oct): toda sesión nueva de verificación/trabajo se crea con source_url del repo Reading-Plans (https://github.com/jaicon18/reading-plans) para que pueda hacer push; sin eso se pierden los en",
+   "categoria": "historico",
+   "reemplazada_por": "U-063",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-025",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 27-oct, TODOS los proyectos): ORDEN DE FUENTES = 1) planos y 2) spec sheets (si plano y spec dicen cosas distintas que pueden convivir, se aplican LAS DOS, cada una en su alc",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_fuentes_ms"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_fuentes_ms"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-026",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 27-oct, TODOS los proyectos): las 18 decisiones del estimador de la revisión de RFI de B&N son regla general: ver cache_proyectos/SKILL_working.md §R80e.34 (aplicarlas como precedente a",
+   "categoria": "programa-pendiente",
+   "motivo": "aplicar las 18 decisiones R80e.34 antes de abrir un RFI exige comparar el tema del RFI con cada precedente (juicio); sin chequeo de programa todavía"
+  },
+  {
+   "id": "U-027",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 28-oct, TODOS los proyectos): al cerrar cada proyecto, guardar la versión final del skill en el repo skills_archivo/ (nombre: take-off-metal-frame-drywall_<versión>_FINAL-<Proyecto>_<fe",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_indice"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_indice"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "U-028",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "FLUJO DE PROYECTO NUEVO (usuario 28-oct, \"vía API\"): 1) el usuario sube el bid set (PDF) a Drive › JC HUNTER PROJECTS › projects › <Nombre del proyecto>/ y me dice el nombre; 2) yo creo una sesión rem",
+   "categoria": "historico",
+   "reemplazada_por": "U-073",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-029",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 28-oct): el próximo proyecto se corre VÍA API DE ANTHROPIC (no con la suscripción) para medir el GASTO EXACTO por take-off (tokens de entrada/salida/caché y USD por paso), porque el usu",
+   "categoria": "historico",
+   "reemplazada_por": "U-095",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-030",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 28-oct): la exactitud manda sobre el ahorro. No limitar a una sola pasada: en la prueba vía API (sobre B&N, referencia rev13) medir por CADA pasada (1, 2, 3…) el costo USD y los errores",
+   "categoria": "historico",
+   "reemplazada_por": "U-043",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-031",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 29-oct, TODOS los proyectos y TODA corrida, suscripción o API): usar SIEMPRE la cadena completa del skill: el modelo SOLO lee (canon A y B independientes) y los PROGRAMAS del",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_reglas",
+    "take-off:tools/reglas.py::A_BITACORA_FINAL"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_ciego.py",
+    "token": "bitacora"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-032",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 29-oct, recordatorio): TODO error que cometa → en el MISMO turno: (1) regla inviolable aquí, (2) regla en el skill (SKILL_working + próxima versión), (3) prueba en la BIBLIOT",
+   "categoria": "conducta",
+   "nota": "la parte verificable (BE en la biblioteca y en el registro) la hace verificar_version.py"
+  },
+  {
+   "id": "U-033",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 30-oct): corrida real de confirmación del runner nuevo sobre B&N (tope $20) autorizada; no volver a preguntar por ella.",
+   "categoria": "historico",
+   "reemplazada_por": "U-040",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-034",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (29-30 oct, runner API): después de CADA lectura, compuerta de completitud (todas las hojas y types del trade presentes; si falta, continuar la lectura) y validador de esquema canon a",
+   "categoria": "programa-pendiente",
+   "motivo": "runner/completitud.py y validar_canon.py existen pero no hay test en la suite que los ejercite"
+  },
+  {
+   "id": "U-035",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (30-oct, runner API): la evidencia que exige reglas.py (imagen por face/altura, estados #0) la generan los PROGRAMAS a partir de coordenadas (planmark/recortes), nunca se le pide al m",
+   "categoria": "programa-pendiente",
+   "motivo": "runner/evidencia.py y validar_canon.py existen pero no hay test en la suite que los ejercite"
+  },
+  {
+   "id": "U-036",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 30-oct, \"Autorizado\"): corrida real #3 del runner B&N con tope $15 (lo propuesto $12–15), después de arreglar evidencia por programa y continuación de lectura B, probado sin API.",
+   "categoria": "historico",
+   "reemplazada_por": "U-040",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-037",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (30-oct, runner API): la compuerta de completitud compara CONTEOS por type (walls leídos vs tags de inventario_tags.py por type y hoja, incl. column wraps, soffit sides y walls parcia",
+   "categoria": "programa-pendiente",
+   "motivo": "runner/completitud.py (conteos por type) existe pero sin test en la suite"
+  },
+  {
+   "id": "U-038",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 30-oct, \"Adelante\"): corrida real #4 del runner B&N, tope $15, con la compuerta de completitud por conteos.",
+   "categoria": "historico",
+   "reemplazada_por": "U-040",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-039",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 30-oct, \"Ok\"): corrida real #5 del runner B&N, tope $15, con alturas de A-300/A-400, compuerta de alturas placeholder y comparación A/B de altura y board por cara.",
+   "categoria": "historico",
+   "reemplazada_por": "U-040",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-040",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN PERMANENTE (usuario 31-oct, \"ya no me avises solo córrelo\"): seguir corriendo el runner B&N (arreglo gratis → corrida pagada) sin pedir permiso ni avisar cada paso, hasta materiales princ",
+   "categoria": "historico",
+   "reemplazada_por": "U-095",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-041",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "META DE NEGOCIO (usuario 31-oct): entrega al cliente en NO MÁS DE 2 HORAS por take-off Y SIN ERRORES (un error = se pierde el cliente). Nunca sacrificar las compuertas, la doble lectura ni la revisión",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-042",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 31-oct, TODOS los proyectos): cada RFI se presenta como lista de opciones múltiples, SIEMPRE en este orden: (A) lo que dicen los PLANOS/specs (con N/HOJA y delta), (B) lo que",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_formato"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_formato"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-043",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 31-oct, runner/skill): todo arreglo se valida GRATIS contra el BANCO de TODAS las lecturas guardadas (#3, #4, #5, #7…) antes de aceptarse: solo entra si mejora o mantiene cad",
+   "categoria": "programa-pendiente",
+   "motivo": "correr_banco_familias.py se corre a mano al armar cada versión; no hay test automático del banco en la suite"
+  },
+  {
+   "id": "U-044",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 31-oct, TODOS los proyectos): los take-offs HUMANOS de referencia (O'Reilly y cualquier proyecto usado como prueba de exactitud) son SOLO del usuario: NUNCA buscarlos por con",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-045",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): las horas que le doy al usuario van en hora de CALIFORNIA (America/Los_Angeles, PDT/PST), nunca en UTC.",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_horas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_horas"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-046",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 31-oct, noche): terminar O'Reilly solo, sin preguntar nada; reporte final al despertar (horas en California).",
+   "categoria": "historico",
+   "reemplazada_por": "U-022",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-047",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): ante un bloqueo, NO parar: arreglar el problema y seguir sin detenerse hasta terminar (siempre dentro de las reglas inviolables: cadena completa, sin credenciales, sin borrar e",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-048",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct, TODOS los proyectos): lo desconocido no detiene el trabajo: se aplica el supuesto conservador o el código, se hace su RFI (A/B/C) y además se anota en una lista aparte SEGUIMIEN",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_seguimiento",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_formato"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_seguimiento"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_rfi_formato"
+    }
+   ]
+  },
+  {
+   "id": "U-049",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): los RFI/preguntas se le presentan AQUÍ en el chat primero, como preguntas de opción múltiple (A planos · B código · C otro), antes de mandarlo a Drive.",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-050",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): flujo de RFI = el usuario contesta las preguntas A/B/C en el chat → yo actualizo TODO con sus respuestas (Excel, markups, SEGUIMIENTO, PARA_REVISAR, Drive como versión nueva si",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_decisiones"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_decisiones"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-051",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (31-oct, TODOS los proyectos): el bid set de una prueba se revisa por PROGRAMA antes de dárselo a una sesión: si trae annotations/markups (Bluebeam, de un take-off previo) se entrega ",
+   "categoria": "programa-pendiente",
+   "motivo": "copia_limpia.py existe pero ningún test reproduce BE-100 (bid set con annotations)"
+  },
+  {
+   "id": "U-052",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (31-oct, TODOS los proyectos): lo IMPRESO en el plano (anclaje, tornillo, track, clip, blocking dibujado) se CARGA; nunca se deja como RFI con el default de la tool. RFI solo para lo ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido",
+    "take-off:tools/compuerta_entrega.py::ce_atribucion"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_atribucion"
+    }
+   ]
+  },
+  {
+   "id": "U-053",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 31-oct, TODOS los proyectos): EXCLUIR TODA LA TORNILLERÍA (drywall/framing/sheathing screws, anchors, Titen HD, slab pins/PAF, Tapcon, bolts) → 0 con nota EXCLU",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_tornilleria",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_tornilleria"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_rfi_prohibidos"
+    }
+   ]
+  },
+  {
+   "id": "U-054",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 1-nov): los RFI en el chat SIEMPRE con botones para palomear (herramienta AskUserQuestion, 4 por ventana; el usuario aceptó 4 el 1-nov): opción A planos, B código; 'Other' = C. Nunca so",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-055",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): prueba de repetibilidad = pasada 2 independiente, elemento por elemento (partitions → board → studs → track → bracing/blocking → trim); tras cada elemento reporte de % vs pasad",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-056",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct, TODOS los proyectos): hay 2 TIPOS DE TRACK y van siempre en renglones separados por wall y tamaño/gauge: (1) track estándar (bottom, y top solo si el wall no llega a la estructu",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_track_familias"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_track_familias"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-057",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (31-oct, TODOS los proyectos): para que dos pasadas den lo mismo, los CRITERIOS los fija el programa, no la lectura: nunca altura medida a escala (supuesto rotulado + RFI), board SIEMPRE sin des",
+   "categoria": "programa-pendiente",
+   "motivo": "criterios fijos (sin altura a escala, board sin descontar aberturas, dueño de esquina R70.2) viven en canon/esquinas.py y reglas A_ESQUINAS sin test que reproduzca BE-110"
+  },
+  {
+   "id": "U-058",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (31-oct, TODOS los proyectos): la altura del board de una cara se toma de una cota cuyos dos extremos son bordes del board EN ESA CARA; nunca de una cota de fachada exterior para el b",
+   "categoria": "programa-pendiente",
+   "motivo": "BE-111 (cota de la MISMA cara) exige saber qué cara toca cada extremo de la cota; CE_ALTURA_IMPRESA compara contra la cota citada pero no puede probar la cara"
+  },
+  {
+   "id": "U-059",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): al presentar RFI, SIEMPRE decir el total y cuántos van/quedan (ej. 'RFI 5–8 de 12, quedan 4'), en el texto y en el encabezado de cada pregunta.",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-060",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 31-oct): RFI en bloque: juntar todas las preguntas pendientes y mandarlas seguidas (ventanas de 4 una tras otra, sin procesar nada entre ventanas); solo cuando estén TODAS contestadas, ",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-061",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 1-nov, TODOS los proyectos): NUNCA preguntar por trades que no hacemos (ACT/acoustical ceiling y su grid/seismic, insulation, stucco, roofing, wood trim/carpintería Div. 06, MEP, eléctr",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-062",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "ESTADO (1-nov): desde las sesiones de la nube NO se puede entrar a BuildingConnected (login Autodesk + red bloqueada + sin navegador) ; elite-constructionplans.com YA está permitido en el entorno (1-n",
+   "categoria": "historico",
+   "reemplazada_por": "U-065",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-063",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (1-nov): toda sesión nueva se crea con source_url del repo Y source_revision=claude/gifted-pasteur-x2sfzs (ahí viven skills_archivo/ y cache_proyectos/); sin eso arranca en main y no encuentra e",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-064",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIONES DEL ESTIMADOR = REGLA (usuario 2-nov, VS Downey, TODOS los proyectos): penetraciones de ductos SIEMPRE excluidas (R-ALC-03); blocking de accesorio sin medida impresa = 3 ft × 2 filas (R-ALC",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-065",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, TODOS los proyectos): (1) UNA SESIÓN NUEVA POR PROYECTO, con el nombre del proyecto como título, sin arrastrar historial; ahí queda todo (take-off, RFI, revisiones) pa",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-066",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov): la sesión session_01VMB6bPApabFaSdfrBk1gKK (\"⭐ REFERENCIA MAESTRA — Take-offs metal frame y drywall\") es la referencia de todo lo construido desde cero: NUNCA archiva",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-067",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 2-nov, cierre de la sesión maestra): contestar yo los RFI pendientes con la opción recomendada/conservadora ya cargada (Chuze, O'Reilly p2), marcándolos 'estimator decision (reco",
+   "categoria": "historico",
+   "reemplazada_por": "U-082",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-068",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov): en la barra lateral de Claude cada proyecto = UNA sesión, titulada EXACTAMENTE como su carpeta en Drive (ej. 'Chuze Fitness Austin Bluffs - Colorado Springs, CO (Hilbers) 11-04-",
+   "categoria": "historico",
+   "reemplazada_por": "U-073",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-069",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, aclara R80e.120): la barra lateral solo muestra UNA sesión por proyecto (nombre del proyecto) + la sesión de coordinación. PROHIBIDO crear sesiones auxiliares (subidas",
+   "categoria": "historico",
+   "reemplazada_por": "U-073",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-070",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov): la sesión \"CONTROL DE CALENDARIO\" (session_01BLzQaF2DUhs2iqaGQvo3xE) se queda SIEMPRE en la barra lateral: nunca archivarla ni borrarla.",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-071",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 2-nov, VS Downey, TODOS los proyectos): demolición de cielos existentes (gyp bd/ACT) cuando el plano no indica el tipo existente = EXCLUDED \"for lack of informa",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-072",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov, TODOS los proyectos, R-ALC-06): DEMOLICIÓN = (1) markup en el demo plan con LÍNEA a escala (/Measure) por elemento, color DEMO en la leyenda, etiqueta DEMO ID·LF·H·SF·keynote/hoj",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/markups_demo.py::main"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "markups_demo"
+   },
+   "cuando": "entrega",
+   "nota": "solo la parte (1) markup DEMO por programa; (2) alturas en todas las hojas y (3) cruce demo vs planta = juicio"
+  },
+  {
+   "id": "U-073",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, \"así quiero que quede siempre\"): la barra lateral izquierda muestra SOLO: una sesión por proyecto (título = carpeta del proyecto en Drive) + COORDINACIÓN + CONTROL DE ",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-074",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov): aplicar SIEMPRE el CHECKLIST AHORRO DE TOKENS de cache_proyectos/HANDOFF_NUEVA_SESION.md (10 puntos: subagentes en paralelo, caché, A/B una vez + revisión dirigida, verificar so",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-075",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 2-nov, VS Downey, TODOS los proyectos, R-ALC-07): partitions existentes a demoler sin altura impresa = hasta el B.O. de estructura impreso (por bahía); nunca a ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-076",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, TODOS los proyectos, R-ALC-08): SIEMPRE revisar el PROJECT MANUAL / SPEC SHEETS completo del trade (Div. 05 40 00/05 41 00 cold-formed framing, 09 21 16 gypsum board a",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_datos_proyecto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_datos_proyecto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-077",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, TODOS los proyectos, R-ALC-09): todo take-off arranca con la HOJA DE DATOS DEL PROYECTO (pasos 0/0B/1/2 del skill) y la entrega la incluye arriba de todo: nombre del p",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_datos_proyecto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_datos_proyecto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-078",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, TODOS los proyectos, BE-115): UNA SOLA LÍNEA DE SKILL ACUMULATIVA. Cada proyecto arranca con la ÚLTIMA versión que ya contiene TODAS las órdenes y arreglos de todos lo",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "U-079",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (2-nov, CFA #2284, TODOS los proyectos): R80f.1 — copia limpia conserva AutoCAD SHX Text (texto MEP), types con decimal y schedule dentro de planta en inventario_tags, familia 1/2\" gyp board, wa",
+   "categoria": "programa-pendiente",
+   "motivo": "copia_limpia.py (SHX) / inventario_tags (types con decimal) sin test propio que reproduzca BE-CF01..05"
+  },
+  {
+   "id": "U-080",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov): el skill jc-hunter-ordenes vive instalado en el repo en .claude/skills/jc-hunter-ordenes/ (carga automática en toda sesión creada con el repo y la rama claude/gifted-pasteur-x2s",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "U-081",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (2-nov, CFA #2284, TODOS los proyectos): R80f.2 — comparar_extra.py siempre después de comparar.py (board-only, cielos, misc, demo A vs B); el material del wall lo fija el WALL TYPE SCHEDULE + e",
+   "categoria": "programa-pendiente",
+   "motivo": "comparar_extra.py existe pero no hay test en la suite que lo ejercite"
+  },
+  {
+   "id": "U-082",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 2-nov, TODOS los proyectos, R-ALC-10): conflicto plano vs spec o código = se carga la opción A (lo del PLANO) con una NOTA que explica la diferencia, el delta d",
+   "categoria": "programa-pendiente",
+   "motivo": "detectar un conflicto plano vs spec/código exige juicio; sin chequeo de programa"
+  },
+  {
+   "id": "U-083",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, TODOS los proyectos, R-ALC-11): lo que el plano NO dibuja NO se omite: \"si no lo dibuja es porque está en otro lado\". Se busca SIEMPRE en spec sheets, metal/framing sc",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_BARRIDO_NO_DIBUJADO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_barrido_no_dibujado.py",
+    "token": "barrido_no_dibujado"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-084",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (2-nov, CFA #2284, TODOS los proyectos, BE-CF15): un límite de la plantilla o de una tool que deja un rótulo, una cantidad o un formato distinto a lo impreso NO se resuelve con una nota: se arre",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-085",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 2-nov, VS Downey, TODOS los proyectos, R-ALC-12): compression struts del lateral bracing de gyp ceiling = METAL STUD 3-5/8\" (gauge del metal stud schedule), aun",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_STRUT_STUD"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_strut_stud.py",
+    "token": "strut"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-086",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, TODOS los proyectos, BE-CF16): ANTES de presentar CUALQUIER RFI se hace el barrido completo del set (todas las hojas + specs + búsqueda de texto) y el RFI lleva anotad",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido",
+    "take-off:tools/reglas.py::A_RFI_BARRIDO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_cf_pruebas.py",
+     "token": "rfi_barrido_fallas"
+    }
+   ]
+  },
+  {
+   "id": "U-087",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 3-nov): cuando el usuario pida dónde está la información de un proyecto, dar SOLO la versión MÁS RECIENTE (ruta carpeta por carpeta + archivos clave). No listar revisiones anteriores ni",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-088",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, TODOS los proyectos): lo ENTREGADO = 100 % TERMINADO. Toda verificación (markups con TYPE·LF·H·SF·DETAIL·Wall ID y /Measure contra la escala impresa de CADA hoja, Exce",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::candados",
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "candados"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_altura_impresa"
+    }
+   ]
+  },
+  {
+   "id": "U-089",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 3-nov): el usuario revisa los proyectos uno por uno en orden de entrega HACIA ADELANTE (O'Reilly → Victoria's Secret → Chuze → CFA → siguientes). El que está revisando NO se toca; los s",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-090",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, TODOS los proyectos): UN SOLO folder de entregas: Shared drives › JC HUNTER PROJECTS › Claude outputs (id 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc, en la RAÍZ del shared driv",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_drive_parent",
+    "take-off:tools/subir_entrega.py::candados"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_drive_parent"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "candados"
+    }
+   ]
+  },
+  {
+   "id": "U-091",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 3-nov, TODOS los proyectos): al arrancar CADA proyecto, buscar SIEMPRE en Gmail (estimating@jchunter.us) si hay OTROS GC invitando al mismo proyecto (nombre, dirección, número de tienda",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-092",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE MÁXIMA (usuario 3-nov, \"100000000 % inviolable\", TODOS los proyectos): TODO proyecto que hagamos queda MONITOREADO desde que arranca hasta su bid date: (1) vigilancia de addenda / rev",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-093",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (3-nov, HFT Loveland, BE-HF01, TODOS los proyectos): el BRIEF de lectura NUNCA resume wall types desde el texto extraído (el texto de una sección cae junto al título vecino); o se resume desde e",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-094",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov, TODOS los proyectos): dar SIEMPRE el TIEMPO de todo lo que se hace (bajar planos, subir, cada paso del take-off): hora de inicio/fin en hora de California y duración por paso, en",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_tiempos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_tiempos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-095",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 3-nov, lunes 8:40 PM PST): TODO se dirige desde la sesión 🧭 COORDINACIÓN. Ya NO mandar información ni reportes a la sesión REFERENCIA MAESTRA (session_01VMB6bPApabFaSdfrBk1gKK); queda s",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-096",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov): cada orden del usuario, una vez RESUELTA, si tuvo problemas en el camino (error, bloqueo, rehacer, pregunta innecesaria), se convierte en REGLA INVIOLABLE el mismo tu",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-097",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN (usuario 3-nov): permiso PERMANENTE para que COORDINACIÓN haga push a claude/gifted-pasteur-x2sfzs con las reglas/órdenes nuevas el mismo turno.",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-098",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "AUTORIZACIÓN PERMANENTE (usuario 3-nov): COORDINACIÓN tiene TODOS los permisos que tenía la REFERENCIA MAESTRA (push a claude/gifted-pasteur-x2sfzs, crear y dirigir sesiones de proyecto, tareas progra",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-099",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-119): la revisión de markups (alturas y largos) NUNCA se valida solo contra el Excel, porque el markup sale del Excel y la comparación es circular. Largo = re-medid",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_altura_impresa"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-100",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-120): el barrido BE-CF16 de cada RFI (todas las hojas + specs + grep de texto, lista de hojas/términos anotada) es una COMPUERTA ANTES de la entrega, dentro de regl",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-101",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-121, \"cómo se arregla\"): (1) toda regla inviolable lleva compuerta de programa que revisa el FONDO + test que repite el error original; regla sin compuerta = regla ",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro",
+    "take-off:tools/subir_entrega.py::candados"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "candados"
+    }
+   ]
+  },
+  {
+   "id": "U-102",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov, TODOS los proyectos, R-ALC-08): en el paso 1 y el paso 12 revisar SIEMPRE los spec sheets / project manual del trade, cruzando cada material con su sección/párrafo citado; inclui",
+   "categoria": "historico",
+   "reemplazada_por": "U-076",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-103",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov, TODOS los proyectos, R-ALC-09): todo proyecto arranca con la HOJA DE DATOS DEL PROYECTO (nombre, dirección, tipo, owner, arquitecto, GC, bid, SF, pisos, construction type, occupa",
+   "categoria": "historico",
+   "reemplazada_por": "U-077",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-104",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 2-nov, BE-115): una sola línea de skill acumulativa. Cada versión nueva contiene TODAS las reglas R80e.*, R80w.* y R-ALC-* archivadas (diff de índices de reglas por programa ",
+   "categoria": "historico",
+   "reemplazada_por": "U-078",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-105",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 2-nov): cada orden nueva del usuario se agrega también al skill skills_archivo/jc-hunter-ordenes (v2, v3…) y se avisa a la sesión maestra. Una versión del skill solo se marca vigente si",
+   "categoria": "historico",
+   "reemplazada_por": "U-080",
+   "tipo_historico": "obsoleta / contradicha"
+  },
+  {
+   "id": "U-106",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (2-nov, maestra): no lanzar otro proyecto hasta que la versión vigente del skill dé 0 faltantes en verificar_version.py. El repo tiene hook SessionStart (.claude/settings.json en gifted-pasteur)",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "U-107",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, TODOS los proyectos, BE-CF16): antes de presentar CUALQUIER RFI al usuario, verificar que se hizo el barrido completo de TODO el set (todas las hojas A/S/M/P/E/FS, spe",
+   "categoria": "historico",
+   "reemplazada_por": "U-086",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-108",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov): UN SOLO folder de entregas = \"Claude outputs\" en la RAÍZ del shared drive JC HUNTER PROJECTS (id 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc), un folder por proyecto. PROHIBIDO",
+   "categoria": "historico",
+   "reemplazada_por": "U-090",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-109",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA (usuario 3-nov, TODOS los proyectos): en la vigilancia de bids, avisar también si aparece OTRO GC invitando al mismo proyecto.",
+   "categoria": "historico",
+   "reemplazada_por": "U-092",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-110",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE MÁXIMA (usuario 3-nov, BE-118): TODO proyecto queda monitoreado (addenda, cambios de fecha, otro GC) desde que arranca hasta su bid date; cada proyecto nuevo se agrega a \"Vigilar adde",
+   "categoria": "historico",
+   "reemplazada_por": "U-092",
+   "tipo_historico": "duplicado unido"
+  },
+  {
+   "id": "U-111",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-122): en todo proyecto se revisan los MATERIALES contra el PARTITION TYPE SCHEDULE con lectura independiente (subagente que no ve el Excel) + comparación por progra",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_materiales_schedule"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-01",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Solo metal frame y gypsum board (usuario, 2026-11-01, VS #679 Downey)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-02",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Blocking de accesorios sin medida impresa (usuario, 2026-11-01, VS #679 Downey)",
+   "categoria": "programa-pendiente",
+   "motivo": "blocking 3 ft x 2 filas por accesorio sin medida impresa: canon no marca 'sin medida impresa'; sin test"
+  },
+  {
+   "id": "R-ALC-03",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Ductos siempre excluidos (usuario, 2026-11-02, VS #679 Downey)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-04",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Demolición de drywall y metal frame = NUESTRO alcance (usuario, 2026-11-02, VS #679 Downey)",
+   "categoria": "programa-pendiente",
+   "motivo": "que la demolición de gyp / metal esté cuantificada si hay demo plan exige saber qué hay en el demo plan; sin chequeo"
+  },
+  {
+   "id": "R-ALC-05",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Demolición de cielos existentes sin tipo indicado (usuario, 2026-11-02, VS #679 Downey)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-06",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Demolición: markup de línea, alturas buscadas y cruce demo vs floor plan (usuario, 2026-11-02, VS #679 Downey)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/markups_demo.py::main"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "markups_demo"
+   },
+   "cuando": "entrega",
+   "nota": "parte (1) markups DEMO por programa; (2) y (3) juicio de plano"
+  },
+  {
+   "id": "R-ALC-07",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Altura de partitions existentes a demoler sin altura impresa (usuario, 2026-11-02, VS #679 Downey)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_prohibidos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_prohibidos"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-08",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Specs siempre revisadas (usuario, 2026-11-02, VS #679 Downey; TODOS los proyectos)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_datos_proyecto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_datos_proyecto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-09",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Hoja de datos del proyecto + hojas obligatorias revisadas (usuario, 2026-11-02; TODOS los proyectos)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_datos_proyecto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_datos_proyecto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-10",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Conflicto plano vs spec / código: manda el PLANO (usuario, 2026-11-02; TODOS los proyectos)",
+   "categoria": "programa-pendiente",
+   "motivo": "detectar conflicto plano vs spec / código exige juicio"
+  },
+  {
+   "id": "R-ALC-11",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Lo que el plano no dibuja NO se omite (usuario, 2026-11-02; TODOS los proyectos)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_BARRIDO_NO_DIBUJADO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_barrido_no_dibujado.py",
+    "token": "barrido_no_dibujado"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "R-ALC-12",
+   "origen": "REGLAS_ALCANCE.md",
+   "texto_corto": "Compression struts del lateral bracing de gyp ceiling = metal stud 3-5/8\" (estimador, 2026-11-02; TODOS los proyectos)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_STRUT_STUD"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_strut_stud.py",
+    "token": "strut"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Fire-stop track \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\" (8/A-410) no se había cuantificado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Nota \"W.R. … FOR WALL AND CEILING CONSTRUCTION\" aplicada solo a walls",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "W.R. en walls de wet rooms (todas las caras de restrooms, janitor, alcove)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-04",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Se cargó W.R. (y plywood) en caras que NO llevan gypsum (Cafe Work Room = FRT plywood + FRP)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-05",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Capas por cara mal contadas: \"X = A, B\" con dos flechas leído como dos capas por lado; plywood cargado detrás del GWB del lado Sales",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-06",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Soffit cargado en una sola cara / un solo lado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-07",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Remate de type por tag \"SIM.\" (cara de extremo de un wall con tag de otro type) no cuantificado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-08",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Lectura A/B que contradecía una cota impresa",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-09",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Perímetro existing cuantificado como nuevo",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-10",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Soffit con cota \"HOLD\" dejado como \"not priced\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-100",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly: el bid set de Drive traía 79 markups de Bluebeam de otro estimador (take-off humano)",
+   "categoria": "programa-pendiente",
+   "motivo": "copia_limpia.py sin test que reproduzca un bid set con annotations"
+  },
+  {
+   "id": "BE-101",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly: el runner con TAKEOFF_API_KEY en el entorno hizo 31 llamadas a la API en corrección / cobertura en una corrida por suscripción",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido",
+    "take-off:tools/compuerta_entrega.py::ce_atribucion"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "ce_atribucion"
+    }
+   ]
+  },
+  {
+   "id": "BE-102",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly: citas fijas de B&N (A-410, A-001A, DM-101) en el Material Summary de otro proyecto",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-103",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly: hojas raster sin texto: markups sin geometría, contar_tags y tag_ids fallan",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-104",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly: type S24 imprime Z-furring sobre CMU además del stud lining; la lectura no lo cargó por falta de familia",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-105",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly rev1: productos impresos en S1.1 nota 7 y S5.x (Titen HD @ 48\", #10 stud-to-track, deep-leg 3\" x 14 ga, sheathing screws, FCB43.5) quedaron como RFI y se cargaron defaults (pins @ 12\", Kwik Bolt @ 8\", #8)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-106",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly rev1: defaults citados como \"Estimator criterion / Handoff - Approved\" y \"estimator decision 2026-10-27\" (otro proyecto)",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-107",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly rev3: orden del estimador \"excluye toda la tornillería\": la tool no tenía forma de excluir todas las familias de fasteners a la vez",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-108",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly rev4: 24 RFI respondidos por el estimador; varios eran casos que el plano dibuja (RC, 1/4\", corner bead de header, J molding, strap, runner, W-4, Level 5)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-11",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Área rotulada \"AREA OF 3/4\" FIRE RESISTANT PLYWOOD\" no cargada",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-110",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Repetibilidad O'Reilly pasada 2, elemento 1 (31-oct)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-111",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Pasada 1 O'Reilly: altura del board interior del head del storefront tomada de una cota EXTERIOR (31-oct)",
+   "categoria": "programa-pendiente",
+   "motivo": "ver U-058"
+  },
+  {
+   "id": "BE-112",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "O'Reilly pasada 2: lecturas que el estimador corrigió con sus respuestas (01-nov)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-113",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Jamb studs (king + jack) contados en walls de Z-furring sobre CMU (O'Reilly pasada 2, back-check 02-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/studs_nodos.py::use"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_project_data.py",
+    "token": "BE-113"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-114",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Hoja de datos del proyecto y hojas obligatorias olvidadas en las entregas (usuario 2-nov, todos los proyectos)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_datos_proyecto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_datos_proyecto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-115",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Skill partido en ramas y \"mejor\" mal marcado (usuario 2-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version"
+  },
+  {
+   "id": "BE-116",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "\"El plano no lo dibuja\" usado para no cargar (usuario 2-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_BARRIDO_NO_DIBUJADO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_barrido_no_dibujado.py",
+    "token": "barrido_no_dibujado"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-117",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Verificación abierta DESPUÉS de entregar (usuario 3-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::candados",
+    "take-off:tools/reglas.py::A_MARKUPS_EXCEL"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "candados"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_markups_excel.py",
+     "token": "A_MARKUPS_EXCEL"
+    }
+   ]
+  },
+  {
+   "id": "BE-118",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Proyecto sin monitoreo completo (usuario 3-nov, inviolable)",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-119",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Revisión de markups validada contra el Excel (circular) (coordinación, 3-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_altura_impresa"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-12",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Criterio por defecto del skill citado como nota impresa (\"ADD FULL LENGTH ADDL HEAD TRACK…\")",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-120",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI con respuesta impresa llegó a la entrega (Harbor Freight rev2, 3-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-121",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Reglas en texto que nadie hacía cumplir (usuario 3-nov, INVIOLABLE, \"cómo se arregla\")",
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_registro",
+    "take-off:tools/subir_entrega.py::candados"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_registro"
+   },
+   "cuando": "version",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "candados"
+    }
+   ]
+  },
+  {
+   "id": "BE-122",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Materiales vs Partition Type Schedule sin revisión independiente (usuario 3-nov)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule",
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_materiales_schedule"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "revision_materiales"
+    }
+   ]
+  },
+  {
+   "id": "BE-13",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Backboard / plywood \"BY GC\" en hojas E (server room 2/E-103) sin destino",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-14",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI o Scope que dice \"not printed / not specified\" cuando el set sí lo imprime (T.O. WD-1 15'-0\", alturas de FRP, Level 4)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-15",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Detalle leído con otra función: bubble 3 leído como 8; \"1 5/8\" x 16 GA. METAL JOIST FRAMING @ 48\" O.C.\" (horizontal) cargado como poste vertical",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-16",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Accesorio impreso por un detalle sin renglón (clip angles, P.A.F. de cross members, #8 screws del relief channel)",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (familias.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-17",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Gauge por fila aplicado, pero los productos que dependen del gauge no se separan (8.A #8 vs #10, 2 vs 3 por conexión; 8.E Type S vs S-12)",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (accesorios.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-18",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Ítem del set sin destino (ni cuantificado ni excluido ni RFI)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-19",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Espaciamiento de fastener impreso reemplazado por un default no impreso (slab pins 12\" vs 9/A-410 @ 24\" y 8.F 2 rows @ 16\"; X-EDNI 8.C vs 8/A-410 #8 @ 24\")",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-20",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Framed soffit cargado solo por perímetro",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-21",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Glass mat cargado sin rótulo",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-22",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Jamb return de gypsum sin detalle que lo dibuje",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-23",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Acoustical sealant cargado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-24",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Top track duplicado / track combinado",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_track_familias"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_track_familias"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-25",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Sistema de ceiling inventado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-26",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Type K (ballistic) medido a nodo y no al hatch/cota",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-27",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "ATM / recess sin las piezas impresas",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-28",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Canopy incompleta / parapet que no sigue la wall exterior",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-29",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Header \"assumed\" sin schedule",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-40",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Material Summary sin N/HOJA o sin desglose que reproduzca el NET",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_fuentes_ms"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_fuentes_ms"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-41",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Nombres de archivos internos en el Excel",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-42",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Partitions fuera del orden del schedule / sin subtotales",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_auditoria"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_entregables"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-43",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Formato del Excel cambiado",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_formato_excel"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_formato_excel"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-44",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Markups Bluebeam ausentes o que no cuadran",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_markups_excel"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_altura_impresa"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-45",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Proporciones fuera de rango sin explicación",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-46",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Dos espesores / productos en un mismo renglón (cement board 1/2\" de A-221 + 5/8\" de 22/A-201); track 3-5/8\" + 6\" + ledger 8\" + ceiling track en un renglón",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (canon.py, familias.py, plantilla_excel.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-47",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Cantidades o IDs en textos (RFI, Scope, README) que no coinciden con su renglón (585.27 vs 568.27; ALC-X26..X30 vs X40..X44)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-48",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Nombre de archivo interno en el PDF de markups (\"Source: takeoff_canon.json\" en la leyenda)",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (markups_bluebeam.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-49",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Cota impresa atribuida al elemento equivocado (46'-0\" del track LWT-01 cerca de la nube)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-50",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Traslape de alcance entre hojas A y E/M/P sin RFI (E-301 265119 soportes de luminarias por el EC vs wires en luminarias cargados por 5/A-121)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-51",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Renglones en LF con selling unit \"piece\" y Pieces to buy = ROUNDUP(LF) (2x blocking, main / cross tee, molding, 16 ga wire)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-52",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Una pasada anterior dio un ítem por \"cubierto por el renglón X\" (#8 screws de 8/A-410 → framing screws) y el renglón X no lo contenía",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-53",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "El delta de un RFI omitía un accesorio impreso en el mismo detalle que cita (A/A-410 \"(1) #10-16 SCREW @ EACH FLANGE\" fuera de RFI-28)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-54",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Partición por producto (Type S / S-12) sobre board bruto por wall, con la deducción (base de cement board) aplicada solo al total",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-55",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Códigos internos del plan check (C7-0x, C-0x, N-0x, \"rev7 plan check\") en textos al cliente",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+  },
+  {
+   "id": "BE-56",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Fastener de nota típica (8.F X-DNI) cargado sobre un largo cuya sección de type imprime otro anclaje (types 3/4: HUS-EZ + moment clip, A/A-410)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-57",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Blocking de madera (2x / FRT) con el waste de METAL (Inputs B5 15 %)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-58",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Materiales calculados por el modelo a mano y compuerta reglas.py apagada (studs −33 %, FRP −52 %, blocking −70 %)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-59",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Lectura A incompleta: 11 walls, solo A-101, de 77 (terminó antes, con presupuesto de sobra)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-60",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Canon con claves fuera de esquema (HG1 / HG2.curved) y ceilings sin system_callout: canon.py lo rechazó al final de la cadena",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-61",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La resolución partió siempre de A (la incompleta) y bajó el total de 617 a 535 LF",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-62",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Reconciliación con 19 / 42 walls: column wraps como tag \"C25\" (no element) y otra partición de tramos",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-63",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "El overlay reemplazaba walls completos con los de la referencia: metía largos, bands y alturas de la rev13 en la lectura",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-64",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Riesgo de contaminación: la llamada de lectura corría en un directorio que enlaza las respuestas del proyecto (rev13, RFIs)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-65",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "validar_canon pasó la lectura A sin `plan_scale_pt_per_ft`; sin escala canon.py no cruza band vs length_ft (W2-01 band 50.0 vs 48'-4\" A-101)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-66",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La lectura B agotó su tope (error_max_budget_usd) y el gasto no quedó en costos.csv",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-67",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Decisiones con lista completa (ceilings, opening_schedule, faces sin identidad) usan nombres / largos de la referencia y rompen las referencias de la lectura (soffit_of, D14 vs Door 14, Σ tramos ≠ L, node en wall ausente",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-68",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La lectura por API no trae evidencia visual por face / height ni estados #0: reglas.py da 3881 fallas (diagnóstico)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-69",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "trazabilidad.py desglosaba todo board 5/8\" como \"5/8 type X\" (regular / MR sumaban Type X) y el FRT substrate con el sheathing de column wraps del mismo espesor; un gauge numérico rompía el join",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-70",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Lecturas sin ceilings ni soffit sides (B declaró ceilings_none_reason) y planmark rechazó un soffit side en línea discontinua",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-71",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Resolución y cobertura terminaron sin escribir: la resolución no editó el archivo y la cobertura usó Bash heredoc (permiso negado) hasta agotar el tope",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-72",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La compuerta de completitud solo miraba hojas y types: dejó pasar lecturas de 27 / 31 walls (sin 9 column wraps, sin soffit sides, con tags de type 2 / 3 / I sin wall) y aceptaba \"no lo encontré\" como types_none_reason",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-73",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Return sin tag con part_of: la fila del Partition Takeoff salía sin type y el sealer se caía al ordenar tags None",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-74",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La decisión parchaba un node por id (N24 de la lectura ≠ N24 de rev13), borraba una door leída (DR-104) de opening_schedule y los ceilings decididos quedaban sin su supuesto RFI (carrying_direction)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-75",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La corrección no podía escribir el canon (Edit no permitido), traducía mal un id con punto (C-E1-P.2) y la corrida terminó en $15.0078 contra un tope de $15 (claude -p se pasa unos centavos)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-76",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Las decisiones generales (RFI-27 Type X, RFI-11 W.R.) solo llegaban a los walls emparejados: 46 faces \"5/8 regular\" + 2 \"5/8 MR\" en walls sin emparejar (Type X −42 %)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-77",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Cement board +126 %: la lectura A puso 1/2\" cement board 20 ft en la cara Workroom de C-E2 (E/A-221 = \"E2-5/8\" FRT PLYWOOD\" only); B lo tenía bien, pero comparar.py solo compara LF",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-78",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Studs −33 / −38 %: alturas placeholder 20 ft (A) / 15 ft (B) donde 1/A-400A y 1/A-400B imprimen B.O. DECK 25'-0\"; el prompt no listaba A-300 / A-400",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-79",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Un parche parcial de una decisión sobre faces que la lectura no trae creaba faces a medias (solo board), y canon.py caía con KeyError 'layers'; 3 correcciones pagadas sin efecto",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-80",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Column wraps 0 de 9: A los excusó como existentes (C23) y B los puso en misc_items COL-* (C25, 10/A-101); la resolución partió de A sin ver la contradicción",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-81",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Fila del type F PENDING: la corrección solo recibía \"partition_types sin dato obligatorio\" (R9: box con tag sin fos_chain)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-82",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Doble conteo entre hojas: W2-04 extendido 30.0 ft en A-101 sobre el muro norte del Cafe Workroom 104, ya contado en A-221 como C-H1-N (type 2 +9.3 %)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-83",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Faces de restrooms a deck (25 ft) con ceiling GWB 9'-0\" (A-121): W.R. +44.7 %",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-84",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Metal trim −95.6 % (42 LF de 957): la lectura no deriva el corner bead de oficio; E1 / E2 3-5/8\" (A) vs 6\" (B), y la comparación no miraba stud_size",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-85",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "canon.py rechazó \"accesorios_none PAFs and duct sleeves\" + la cantidad de la decisión (mep_estimator_count); 3 correcciones pagadas inútiles",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-86",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "154 fallas \"falta HOJA\" en length_source de bands (\"band 67.6 pt / 9\")",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-87",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Choque de numeración: dos reglas distintas como R80e.49 (trim / formato de RFI)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-88",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "El formato de RFI (R80e.50) se implementó con 3 columnas nuevas en Pending Items: viola el formato FIJO del Excel (nunca agregar / quitar / cambiar hojas ni columnas)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-89",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-90",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-91",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "claude -p heredó ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión: las corridas no usaron $TAKEOFF_API_KEY (session_id = la de la sesión anfitriona; la consola sin costo)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-92",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "22 decisiones del estimador sobre items (cross members, nested bracing, cement board base, FRT backboard) quedaron sin objeto porque la lectura no trae el item",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-93",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "R80e.43 (W.R. en wet rooms por atributo) cayó sobre faces a la altura del stud (25 ft contra ceiling 9'-0\"): W.R. +44.7 % en la #5",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-94",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Los arreglos se validaban contra una sola lectura: uno mejoraba una corrida y empeoraba otra",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-95",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Errores sistemáticos de lectura que se repiten en todas las corridas: la figura curva leída en 4 piezas, un wall de la planta ampliada a 4.5 ft contra 12.2 ft acotados, puertas leídas como huecos",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-96",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La #8 se detuvo en canon.py (\"nodo NP3: wall EXT-07 no existe\"): 25 nodes derivados citaban walls que la decisión RFI-01 excluyó. Se gastaron 3 correcciones (≈ $2.4) en un error del programa",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-97",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "El closer rechazó un wall E1 con las dos faces en el mismo cuarto y alturas distintas (12.0 / 25.0): las dos se juntaban en un solo renglón de board",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-98",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Exclusión general por type (RFI-01: types 1 / 1A / 1B / 1C existentes) para walls exteriores que no emparejan: el banco la marcó como empeora (bottom track y bracing en la #8) porque el wall excluido tapaba faltantes de ",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-99",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Leí el take-off humano de la prueba ciega O'Reilly/Olive Garden para elegir proyecto (R80e.62)",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CF01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La \"copia limpia\" borró 519 anotaciones \"AutoCAD SHX Text\": en las hojas M/P/E ese es el ÚNICO texto del dibujo (no son markups)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "inventario_tags.py no encontró types: TYPE_RE no aceptaba decimales (W4.1, M3.5) y el schedule estaba dentro de una hoja de PLANTA (A-202) bajo \"MARK\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "No existía la familia 1/2\" gyp board regular (solo 5/8, 3/8, 1/2 exterior)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF04",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Walls de MADERA (Div. 06) con nuestro gyp / cement board no tenían bloque: el bloque board-only decía \"EXISTING WALLS TO REMAIN\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF05",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "arranque.py no leyó NINGÚN sheet number (172 hojas) aunque inventario_tags sí",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF06",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "comparar.py solo compara walls[]: con board-only (existing_walls), cielos, misc y demo dio 113 \"alertas\" falsas y NO comparó A vs B en board / demo",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF07",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "ceilings[] no soporta joists de 6\" (S-241 LGS CEILING JOIST SCHEDULE) ni cielo board-only; framed_soffit toma un solo furring_oc_in global (furr-down a 32\" contado a 16\"); familia \"1-1/2\\\" Z-furring\" con etiqueta fija (M",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF08",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Agregué referencias/INDICE_REGLAS_ACUMULADAS.md al skill y el catálogo de reglas lo leyó como regla SIN clasificar: reglas.py compuerta fallaba en todo proyecto real; la suite (30/30) no lo detectó",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF09",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Límites de tool en el cálculo: vigas_sobre_walls.py no registra un roof plan de madera sin grid; markups de board-only con Subject genérico (no el type); cielos nuevos sin geometría no se dibujan; canon.py cuenta bracing",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF10",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Productos de la spec no aplicados cuando el plano calla: ceiling board sag-resistant (C09250 2.1.E), board water-resistant detrás de sinks / toilets / mop (2.2.A), mesh tape + setting compound en joints de cement board (",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF11",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Detalle que imprime \"2x6 wood OR 6\\\" metal\" (D3/A-624) leído como \"no impreso\" (RFI) en vez de cargar la opción metálica (R-ALC-01)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF12",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "canon.py pone C.R. channel bracing por defecto en todo tramo vertical (incluso Z-furring y walls con su propio brace impreso: kicker 362S162-33 @ 48\" de C2/S-801, schedule de braces de S-801)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF13",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Markups: Page Label numérico (\"6\"/\"7\") en vez de la hoja, estados en español (DERIVADO / PENDIENTE), infill de otro type rotulado con el type vecino, cielos / soffit bottoms / Level 5 sin markup",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CF14",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "accesorios.BOARD_DRIVER no incluía \"1/2\\\" gyp MOISTURE RESISTANT\" ni \"5/8\\\" gyp FOIL-BACKED\": joint compound / tape omitían ese board (CFA −10.66 lb / −54.77 LF; VS rev9 −76.1 lb / −391.1 LF)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/accesorios.py::modulo"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "BE-CF14"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-CF15",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Límites de plantilla aceptados como \"nota\" (rótulo fijo 1-1/2\" Z-furring y \"5/8\\\" regular\" para un producto distinto, setting compound sin renglón, waste en un yield, Other Framing sin subtotal, hoja oculta de sello = 7 ",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/canon.py::calcular"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-CF15"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-CF16",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "13 RFI abiertos en rev3 cuya respuesta probablemente está impresa en el set (hojas K / E / vendor vectorizadas, specs, S) sin barrido completo registrado",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido",
+    "take-off:tools/reglas.py::A_RFI_BARRIDO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_cf_pruebas.py",
+     "token": "rfi_barrido_fallas"
+    }
+   ]
+  },
+  {
+   "id": "BE-CF17",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Al resolver \"smoke partition to deck\" se subió a deck también la cara PÚBLICA del wall; A-221 A.11 lleva a deck solo la cara de kitchen / BOH (pública a 6\" sobre el cielo)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/plantilla_excel.py::rfis_vigentes"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_setting_compound_yield.py",
+    "token": "BE-CF17"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-CF18",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Horas de TIEMPOS.md escritas a ojo (16:10, 17:05, 18:15) en vez de leer el reloj; corregidas después",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::sello_path"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_other_framing_subtotal_seal.py",
+    "token": "BE-CF18"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-CF19",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "verificar_markups_excel v81cf16 tomaba la hoja de un renglón de demo del texto de su fuente y agarraba la hoja de la ALTURA (\"TJI/L65\", \"A4/S-601\"): 2 FALLAS falsas \"hoja sin markups\" con la demo ya marcada en A-050",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/verificar_markups_excel.py::indice_canon"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "BE-CF19"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-CH01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "sesión sin las reglas fijas del usuario",
+   "categoria": "conducta",
+   "nota": "hook SessionStart de .claude/settings.json carga las órdenes"
+  },
+  {
+   "id": "BE-CH02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "walls entre plantas ampliadas",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-CH03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "escala supuesta",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-HF01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Brief de lectura con el resumen de wall types mal asignado (HFT Loveland, 3-nov, mío)",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-HF02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Bracing a estructura impreso (A1.1 nota 1 \"@ 4'-0\" O.C. MAX\" + 2/A4.1 Spazzer 9200 + brace studs) quedó como Review Item con cantidad 0: R-ALC-11 / BE-116 repetido (la tool no tiene familia → se dejó en 0)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-HF03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Top track del bulkhead (llama 3/A5.3 = slip track) cargado en el renglón de \"heads\", fuera de las dos familias de track",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-HF04",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "C.R. channel bracing cargado en walls de 8'-6\" cuando A4.1 nota 7 lo pide solo en walls > 12'-0\"; texto del desglose con un spacing distinto al usado",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-HF05",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Partition Takeoff agrupó walls (A-14+A-12+A-13, C-01+C-02) que los markups llevan separados; Review Items con español y nombres internos (\"DISCREPANCIA\", \"TOOL_LIMITS_CALC #4\", \"misc_info\")",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-HF06",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Vertical metal hat channel furring (type E) sin familia: rotulado \"1-1/2\" Z-furring channel\" en el Material Summary",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/canon.py::calcular"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF1"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF1 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF07",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "misc_items.familia \"FRP panels\" (nombre del Excel) paró canon.py",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/canon.py::_parapets_blocking"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF2"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF2 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF08",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "C.R. channel bracing generado en furring vertical fijado a CMU / masonry",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/canon.py::generar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF3"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF3 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF09",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "vigas_sobre_walls con rótulos de grid de 9–10 pt: 0 grids comunes",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas_clasificacion.py::C"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF4"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF4 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF10",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Compuerta A_BRACING con 48\" fijo cuando el set imprime CRC @ 8'-0\"",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::bracing_spacing"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF5"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF5 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF11",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Box beams / box headers de detalle (misc_items) fuera de la suma E1 y del desglose del header",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::header_misc_lf"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF6"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF6 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF12",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Desglose de track por tamaño comparaba stud_size exacto: '6\" (600S162-54)' quedaba fuera (\"desglose suma != NET\")",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas_clasificacion.py::C"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF7"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF7 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF13",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Renglón con citas de hoja suelta (sin N/SHEET) -> \"default (no sheet)\" y verificar rechazó el Excel",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py::uso_f"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF8"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF8 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF14",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Wall sin gypsum board (faces_none_reason) con LF x H SF en el markup vs 0 SF en el Excel (BE-117 FALLA)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/markups_bluebeam.py::board_sf"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF9"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF9 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF15",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "auditoria_entrega fallaba toda entrega con RFIs abiertos pedidos por el brief e ignoraba la causa escrita del largo",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/auditoria_entrega.py::filas_excel"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF10"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF10 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF16",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Demo con \"2 layer(s)\" para 2 faces x 1 layer; página LEGEND alfabética",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/markups_demo.py::escribir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF15"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF15 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF17",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Sill track sin desglose; desgloses distintos del NET por redondeo sin nota",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py::_desglose"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hft_loveland.py",
+    "token": "BE-HF16"
+   },
+   "cuando": "corrida",
+   "nota": "en el código se llama BE-HF16 (id del arreglo)"
+  },
+  {
+   "id": "BE-HF18",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI-01 (altura del demising bajo deck inclinado) se dejó abierto con el punto alto cargado aunque A1.2 / A2.0 imprimen B.O. DECK por zona (±16'-11\", ±17'-3½\", ±17'-6\", ±18'-0½\", ±18'-3\"); la resolución lo listó como \"opc",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "ce_rfi_barrido"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-VS-01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Las dos lecturas no leyeron el demolition plan A01.01 (LOWEST POINT OF DECK 17'-0\" / STRUCTURE 12'-1\") y declararon la altura \"no impresa\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Cielos de gyp cargados regular cuando A15.04 dice \"UL listed fire resistant board throughout\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "18 alcances impresos sin destino (blocking de signage / lockers / paging, platform framing, reveal, metal FRP trim, bridging clips)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-04",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Pasada de gaps sumó C.R. channel de bridging ya contado en \"bracing C.R. channel\"",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-05",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Dos renglones de una misma familia recibieron cada uno la familia entera al partir por producto (blocking duplicado)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-06",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Producto impreso reemplazado por default: blocking 6\" x 18 GA backing track / plate (E/F A12.01) comprado como stud 3-5/8\"; foil-backed como regular; 1/2\" MR como exterior sheathing",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-07",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Bridging R/S03.01 cargado en todo wall aunque la nota lo excluye donde hay board en las dos caras",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-08",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Demo cuantificada sin cruce contra el floor plan nuevo, con alturas supuestas (±12'-0\") sin buscar en todas las hojas, y sin markup de línea",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-09",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Specs (A15.xx) leídas solo por secciones sueltas; materiales sin cruce contra la spec",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-10",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI-31: lateral bracing del ceiling NO cargado porque el RCP no lo dibuja (se aplicó \"manda el plano\" a una omisión)",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-11",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Las compuertas nuevas A_NO_DIBUJADO (rev10) no corrían: reglas.py solo ejecuta un chequeo si una regla con ENCABEZADO del SKILL.md lo referencia en reglas_clasificacion.py; mis reglas eran viñetas",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-12",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "3-5/8\" stud: los 7 framed_soffit ya generaban sus miembros (renglones propios 148.61 LF) y además estaban como misc_items dentro del renglón del stud; también: altura del display window tomada del tag vecino (10'-2\" vs 1",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_SOFFIT_DOBLE"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_soffit_doble.py",
+    "token": "BE-VS-12"
+   },
+   "cuando": "corrida"
+  },
+  {
+   "id": "BE-VS-13",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Los markups de VS nunca cuadraron con el Excel: Contents SF = LF x H en vez del board del Excel, renglones agrupados \"W026+W118\" no reconocidos, valances sin geometría, 2 largos de banda sin causa; además rev10-rev14 se ",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-14",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Nota impresa en la sección típica (\"ADDITIONAL STUD REQ'D AT EQ. STUDS\", A/A12.01) dejada como pregunta en vez de cargarla; demo marcada fuera del formato del verificador (sin page label, sin ID del Excel) y fuera del PD",
+   "categoria": "programa-pendiente",
+   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+  },
+  {
+   "id": "BE-VS-15",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "rev16 se entregó sin markups del RCP (A03.01): el verificador solo exigía hojas con walls / demo; ceilings, soffits y bracing no contaban",
+   "categoria": "programa-pendiente",
+   "motivo": "hay código que lo atiende (markups_rcp.py, verificar_markups_excel.py) pero ningún test lo reproduce"
+  }
+ ]
+}

@@ -1,0 +1,346 @@
+{
+ "version": "compuerta_entrega v1 (BE-121, 3-nov-2026)",
+ "fecha_california": "2026-11-03 11:00 PST",
+ "fecha_iso": "2026-11-03T19:00:31.134774+00:00",
+ "workdir": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/runs/hft",
+ "entrega_dir": "FINAL_FOR_REVIEW",
+ "ok": false,
+ "resumen": {
+  "PASS": 14,
+  "AMBER": 0,
+  "FAIL": 8
+ },
+ "chequeos": [
+  {
+   "id": "CE_ENTREGABLES",
+   "reglas": [
+    "U-011",
+    "U-048"
+   ],
+   "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
+   "estado": "FAIL",
+   "evidencia": [
+    "falta Planos marcados/*.pdf (markups Bluebeam)"
+   ]
+  },
+  {
+   "id": "CE_SIN_PROPOSAL",
+   "reglas": [
+    "U-015"
+   ],
+   "descripcion": "sin proposal en la entrega",
+   "estado": "PASS",
+   "evidencia": [
+    "sin archivos de proposal"
+   ]
+  },
+  {
+   "id": "CE_FORMATO_EXCEL",
+   "reglas": [
+    "BE-43",
+    "U-003",
+    "U-016"
+   ],
+   "descripcion": "Excel de formato fijo: exactamente las 6 hojas visibles en orden y los encabezados fijos de plantilla_excel.py (sin hojas ni columnas agregadas)",
+   "estado": "PASS",
+   "evidencia": [
+    "6 hojas + encabezados fijos OK"
+   ]
+  },
+  {
+   "id": "CE_TORNILLERIA",
+   "reglas": [
+    "U-053"
+   ],
+   "descripcion": "toda la tornillería (screws, anchors, Titen, pins/PAF, Tapcon, bolts) = 0 con EXCLUDED en Material Summary y una línea EXCLUDED en Scope Checklist",
+   "estado": "PASS",
+   "evidencia": [
+    "7 renglones de tornillería en 0 con EXCLUDED"
+   ]
+  },
+  {
+   "id": "CE_TRACK_FAMILIAS",
+   "reglas": [
+    "BE-24",
+    "U-056"
+   ],
+   "descripcion": "dos familias de track en renglones separados: estándar (bottom / top) y slip / deflection; ningún renglón las mezcla; si no hay slip track, Scope Checklist lo declara NOT APPLICABLE",
+   "estado": "PASS",
+   "evidencia": [
+    "8 renglones estándar / 2 slip-deflection, separados"
+   ]
+  },
+  {
+   "id": "CE_FUENTES_MS",
+   "reglas": [
+    "BE-40",
+    "U-025"
+   ],
+   "descripcion": "todo renglón del Material Summary con cantidad cita su fuente (N/SHEET, sección de spec o código del trade)",
+   "estado": "PASS",
+   "evidencia": [
+    "todos los renglones con fuente"
+   ]
+  },
+  {
+   "id": "CE_DATOS_PROYECTO",
+   "reglas": [
+    "BE-114",
+    "R-ALC-08",
+    "R-ALC-09",
+    "U-076",
+    "U-077"
+   ],
+   "descripcion": "hoja de datos del proyecto + hojas obligatorias en takeoff.json, Inputs del Excel, README_REVIEW y PARA_REVISAR (reglas.datos_proyecto_fallas)",
+   "estado": "PASS",
+   "evidencia": [
+    "datos del proyecto en las 4 fuentes"
+   ]
+  },
+  {
+   "id": "CE_TIEMPOS",
+   "reglas": [
+    "U-094"
+   ],
+   "descripcion": "TIEMPOS.md con hora de inicio / fin (hora de California) de cada paso 1–9 y TOTAL",
+   "estado": "PASS",
+   "evidencia": [
+    "pasos 1–9 con hora; TIEMPOS.md"
+   ]
+  },
+  {
+   "id": "CE_HORAS_CALIFORNIA",
+   "reglas": [
+    "U-045"
+   ],
+   "descripcion": "horas al usuario en hora de California: sin UTC en TIEMPOS / README / PARA_REVISAR",
+   "estado": "PASS",
+   "evidencia": [
+    "sin horas en UTC"
+   ]
+  },
+  {
+   "id": "CE_SIN_DOLARES",
+   "reglas": [
+    "U-018"
+   ],
+   "descripcion": "sin costos en dólares en los documentos para el usuario",
+   "estado": "PASS",
+   "evidencia": [
+    "sin montos en dólares"
+   ]
+  },
+  {
+   "id": "CE_DRIVE_PARENT",
+   "reglas": [
+    "U-001",
+    "U-004",
+    "U-090"
+   ],
+   "descripcion": "la carpeta del proyecto en Drive cuelga de Claude outputs de la RAÍZ (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc); nunca de Projects › Claude outputs",
+   "estado": "FAIL",
+   "evidencia": [
+    "entrega.json sin drive.parent_id (no se puede verificar el folder de entrega)"
+   ]
+  },
+  {
+   "id": "CE_RFI_FORMATO",
+   "reglas": [
+    "U-042",
+    "U-048",
+    "U-052"
+   ],
+   "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
+   "estado": "PASS",
+   "evidencia": [
+    "4 RFI abiertos con A/B/C + delta + valor cargado"
+   ]
+  },
+  {
+   "id": "CE_RFI_PROHIBIDOS",
+   "reglas": [
+    "R-ALC-01",
+    "R-ALC-03",
+    "R-ALC-05",
+    "R-ALC-07",
+    "U-053",
+    "U-061",
+    "U-064",
+    "U-071",
+    "U-075"
+   ],
+   "descripcion": "ningún RFI abierto sobre lo que el usuario ordenó resolver sin RFI (tornillería, trades ajenos, ductos, cielo existente sin tipo, altura de partition a demoler)",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI sobre temas con orden fija"
+   ]
+  },
+  {
+   "id": "CE_RFI_BARRIDO_IMPRESO",
+   "reglas": [
+    "BE-101",
+    "BE-120",
+    "BE-CF16",
+    "BE-HF18",
+    "U-019",
+    "U-052",
+    "U-086",
+    "U-100"
+   ],
+   "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
+   "estado": "FAIL",
+   "evidencia": [
+    "no hay set_texto.json (texto completo del set): correr `compuerta_entrega.py texto <bidset.pdf> --out <workdir>/set_texto.json`; sin él no se puede probar que la respuesta no está impresa"
+   ]
+  },
+  {
+   "id": "CE_ATRIBUCION_ESTIMADOR",
+   "reglas": [
+    "BE-101",
+    "U-052"
+   ],
+   "descripcion": "toda 'estimator decision' del Excel cita su respuesta escrita o precedente (R-ALC-NN, R80e.34, U-NNN, respuesta del usuario, standing rule)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda decisión del estimador con cita"
+   ]
+  },
+  {
+   "id": "CE_DECISIONES_EN_EXCEL",
+   "reglas": [
+    "U-016",
+    "U-050"
+   ],
+   "descripcion": "todo RFI cerrado (por plano o por el estimador) queda escrito en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "5 cierres citados"
+   ]
+  },
+  {
+   "id": "CE_SEGUIMIENTO",
+   "reglas": [
+    "U-048"
+   ],
+   "descripcion": "SEGUIMIENTO.md lista cada RFI abierto",
+   "estado": "PASS",
+   "evidencia": [
+    "RFI abiertos en SEGUIMIENTO"
+   ]
+  },
+  {
+   "id": "CE_ALTURA_IMPRESA",
+   "reglas": [
+    "BE-119",
+    "U-010",
+    "U-088",
+    "U-099"
+   ],
+   "descripcion": "BE-119: cada markup re-medido a la escala IMPRESA y su Depth comparado contra la altura IMPRESA de su fuente (N/HOJA), no contra el Excel. RED = FAIL; sin altura impresa = AMBER",
+   "estado": "FAIL",
+   "evidencia": [
+    "falta el PDF de markups o el Excel"
+   ]
+  },
+  {
+   "id": "CE_MATERIALES_SCHEDULE",
+   "reglas": [
+    "BE-122",
+    "U-111"
+   ],
+   "descripcion": "BE-122 (j): lectura INDEPENDIENTE del Partition Type Schedule (fichas.json, subagente que no vio el Excel) vs lo cargado por wall / type (revision_materiales.comparar_type) + cada renglón del Material Summary = suma de walls por type con origen impreso (revision_materiales.sumas). RED = FAIL",
+   "estado": "FAIL",
+   "evidencia": [
+    "no hay fichas.json (lectura independiente del Partition Type Schedule por un subagente que no vio el Excel): sin ella no hay revisión de materiales no circular (BE-122)"
+   ]
+  },
+  {
+   "id": "CE_MARKUPS_EXCEL",
+   "reglas": [
+    "BE-117",
+    "BE-44",
+    "U-010"
+   ],
+   "descripcion": "verificar_markups_excel.py: TYPE·LF·H·SF·DETAIL·Wall ID = Excel, /Measure = escala impresa, Length vs LF <= 0.5 %",
+   "estado": "FAIL",
+   "evidencia": [
+    "falta PDF de markups, Excel o canon"
+   ]
+  },
+  {
+   "id": "CE_AUDITORIA",
+   "reglas": [
+    "BE-42",
+    "U-005",
+    "U-007",
+    "U-011"
+   ],
+   "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
+   "estado": "FAIL",
+   "evidencia": [
+    "falta PDF de markups, Excel o canon"
+   ]
+  },
+  {
+   "id": "CE_REGLAS",
+   "reglas": [
+    "BE-116",
+    "BE-117",
+    "BE-CF16",
+    "R-ALC-11",
+    "R-ALC-12",
+    "U-009",
+    "U-031",
+    "U-083",
+    "U-085",
+    "U-086"
+   ],
+   "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
+   "estado": "FAIL",
+   "evidencia": [
+    "reglas.py rc 1, 2907 fallas",
+    "S:etapas-y-carpeta-reanudable · 1_inventario/inventario.md · no está",
+    "S:etapas-y-carpeta-reanudable · 3_revision/revision.md · no está",
+    "S:etapas-y-carpeta-reanudable · registro.json · no está",
+    "S:etapa-5-entrega · bitacora.jsonl · no está",
+    "S:§1:2fab33 · takeoff.json / registro.json · no están junto al trabajo",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño D-03 / A-04 (A1.1): ninguno cubre el cuadrado (falta ~0.607 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · doble · esquina doble A-02 / A-01 (A1.1): los dos cubren el cuadrado de la esquina (R70.2: un solo dueño)",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño B-01 / A-03 (A1.1): ninguno cubre el cuadrado (falta ~0.607 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño C-01 / A-03 (A1.1): ninguno cubre el cuadrado (falta ~0.607 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño C-01 / C-02 (A1.1): ninguno cubre el cuadrado (falta ~0.356 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · doble · esquina doble E-01 / E-03 (A1.1): los dos cubren el cuadrado de la esquina (R70.2: un solo dueño)",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño B-02 / A-07 (A4.0): ninguno cubre el cuadrado (falta ~0.604 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · sin · esquina sin dueño B-03 / A-07 (A4.0): ninguno cubre el cuadrado (falta ~0.604 ft en uno de los dos; R70.2)",
+    "S:etapa-2-lectura-tareas-c:211546 · colineal · hueco colineal 5.211 ft entre A-10 y A-14 (A4.0): si es una door / abertura, su R.O. va dentro del run (R70.3); si no, declararlo en gaps_ok con su motivo",
+    "S:etapa-2-lectura-tareas-c:211546 · doble · esquina doble RE-2 / RE-1 (S2.1): los dos cubren el cuadrado de la esquina (R70.2: un solo dueño)",
+    "S:etapa-2-lectura-tareas-c:211546 · doble · esquina doble RE-2 / RE-3 (S2.1): los dos cubren el cuadrado de la esquina (R70.2: un solo dueño)",
+    "E27 · D-01.length · sin estado",
+    "E27 · D-01.height · sin estado",
+    "E27 · D-02.length · sin estado",
+    "E27 · D-02.height · sin estado"
+   ]
+  }
+ ],
+ "archivos": {
+  "FINAL_FOR_REVIEW/PARA_REVISAR_EN_LA_MANANA.md": "ac2fcea67c60848f5a01f840ba2b1b9f037bf382780e75cac10222edb4f2bd02",
+  "FINAL_FOR_REVIEW/Planos marcados/A1.1_HFT_Loveland_marked_rev3.png": "a62bca9e76709cad572ed9de705716737a6615bf37adc938e78f907606003309",
+  "FINAL_FOR_REVIEW/Planos marcados/A4.0_HFT_Loveland_marked_rev3.png": "84c250d548e0767dcd7619c3dee4659626eabfed140c66c08f4e857fd1361a3d",
+  "FINAL_FOR_REVIEW/Planos marcados/D1.0_HFT_Loveland_marked_rev3.png": "8797a913ca45e932a23e47ac6873cc77e905e75cd0a99fa97aa25417bb9b06e3",
+  "FINAL_FOR_REVIEW/Planos marcados/S2.1_HFT_Loveland_marked_rev3.png": "4e8f40816f8940f8a99183da35789b47351a34f695302a7962e9e1ea15422578",
+  "FINAL_FOR_REVIEW/README_REVIEW.md": "91efffdc8c925f5fd18919cb3d5f6eb3a1f680ddc41304f7ed1b8ae576478fc4",
+  "FINAL_FOR_REVIEW/SEGUIMIENTO.md": "ff309accb7bdd95c6daa604b2548d008c963a1c63dab1650608d0c456183fd56",
+  "FINAL_FOR_REVIEW/Take-off/HFT_Loveland_Takeoff_FINAL_rev3.xlsx": "d30fe4bff3e73479203b1ce24dbce897c7a5bd913498018914ea7e4afc095c25",
+  "FINAL_FOR_REVIEW/proceso/AUDITORIA_ENTREGA.md": "068cd86a84bb074512d35de7ccfe41fabd42da854b83f608f6ecf5aee27d3662",
+  "FINAL_FOR_REVIEW/proceso/BACKCHECK_rev1.md": "f1d555604808e34f31fc3920d5daa497d565d53e62a66e4cbab2cdb8464cd8f5",
+  "FINAL_FOR_REVIEW/proceso/BACKCHECK_rev2.md": "10fab79ffc4376f1b00e8d1194dc6cfb2e959e21636193c907f3baeea6a018eb",
+  "FINAL_FOR_REVIEW/proceso/BACKCHECK_rev2_cierre.md": "db159f5a88a0c24c9b7fa18f885d622c8690d31d3835bd2a730465f6e405c4a4",
+  "FINAL_FOR_REVIEW/proceso/BACKCHECK_rev3.md": "e7d1d46b2e698195364a9d2c55270d893c88e185db52f0176a319ddfa583dd00",
+  "FINAL_FOR_REVIEW/proceso/DEMO_CRUCE.md": "7ca2fff435a296f59b9504b6295db75f8f4018ca70abd30bd9977d3fb763e090",
+  "FINAL_FOR_REVIEW/proceso/PROCESO_CORRIDA.md": "aa84490032421669669d31edf6c63ef85d8b0584fc985c70973bb69bb50b1d8a",
+  "FINAL_FOR_REVIEW/proceso/TOOL_LIMITS_CALC.md": "60be6a75d1b32a27daac6b867ee347e7f07ff3ca73dfa04b41b9332be926b342",
+  "FINAL_FOR_REVIEW/proceso/VERIFICACION_MARKUPS.md": "4da30ca8a780dc4b8b8719efa11921a5bc70d89d55452249f94af3c2ff078881"
+ },
+ "drive": {},
+ "registro": "registro v1 (BE-121, 2026-11-03)"
+}
