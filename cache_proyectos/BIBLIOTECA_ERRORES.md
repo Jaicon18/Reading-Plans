@@ -291,3 +291,7 @@ Prueba (compuerta de entrega, reglas.py): antes de subir FINAL, verificar por pr
 ## BE-118 — Proyecto sin monitoreo completo (usuario 3-nov, inviolable)
 Riesgo: un proyecto lanzado sin estar en la vigilancia de addenda/otro GC o sin check-ins de avance puede entregarse con planos viejos o no terminarse a tiempo.
 Prueba: al lanzar un proyecto, en el mismo turno: (a) el proyecto aparece en el prompt de la tarea "Vigilar addenda de bids activos" (o se pidió a COORDINACIÓN agregarlo y se confirmó), (b) existe un check-in programado (send_later/trigger) sobre su sesión, (c) búsqueda de otros GC hecha en Gmail. Sin las tres, no se reporta el proyecto como "en marcha".
+
+## BE-HF01 — Brief de lectura con el resumen de wall types mal asignado (HFT Loveland, 3-nov, mío)
+Error: escribí el resumen de types del BRIEF_LECTURA leyendo el texto extraído de A4.1 en orden de flujo; el texto de cada sección cae junto al TÍTULO de la sección vecina (A/B/C corridos: puse B = 6" a deck y C = 2-1/2" cuando A4.1 dibuja A = 6" x 20 GA a deck, B = 2-1/2" furring 8'-6", C = 3-5/8" furring 8'-6"). La lectura B lo detectó al abrir las secciones. Riesgo: lecturas sesgadas por el brief.
+Prueba: todo resumen de types en un brief sale de recortes de CADA sección (imagen abierta y verificada), nunca del orden del texto; o el brief no resume types y solo manda a abrir la hoja. PASS si cada type del brief coincide con su sección dibujada.

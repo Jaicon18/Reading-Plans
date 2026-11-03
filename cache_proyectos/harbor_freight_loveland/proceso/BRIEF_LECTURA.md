@@ -37,6 +37,9 @@ calculator decides scope); if FRP is by others / tenant vendor, say so with N/SH
 - `skill/` (SKILL.md + tools/ + runner/prompts/lectura.md), `tools` link, `validar_canon.py`.
 
 ## WALL TYPES (A4.1, p17) — read each section yourself; summary to orient only
+CORRECTION (BE-HF01, found by reader B): the A/B/C lines below were mis-assigned from text order. Per the drawn sections:
+A = 6" x 20 GA studs @ 16" to deck, board both sides; B = 2-1/2" furring, 8'-6", board one face; C = 3-5/8" furring,
+8'-6", board one face. D and E as written.
 - A: read the section (may be existing / masonry / other). B: 6" x 20 GA metal studs @ 16" O.C., 5/8" gyp bd, "gyp bd
   continues to deck if suspended ceiling does not occur". C: low wall (2-1/2" x 20 GA track, 8'-6", "end gyp bd 6" above
   suspended ceiling"). D: 1-HOUR demising, 6" x 20 GA studs @ 16", 1 layer 5/8" Type X each side, to existing deck,
