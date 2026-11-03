@@ -9,7 +9,7 @@ Cada proyecto cerrado guarda aquí la versión exacta del skill con la que termi
 | O'Reilly Evans #1 (prueba ciega, suscripción) | v80u | 2026-10-31 | take-off-metal-frame-drywall_v80u_OReilly_2026-10-31.zip |
 | O'Reilly Evans #1 FINAL (rev4, pendiente de calificación del estimador) | v80u | 2026-11-01 | take-off-metal-frame-drywall_v80u_FINAL-OReilly_2026-11-01.zip |
 
-**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf16: v81cf15 + R80e.135 RCP / toda hoja marcada; verificada 0 faltantes).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
+**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf17: v81cf16 + R80f.12 BE-CF19 hoja de la demo por demo_geom; verificada 0 faltantes de 474).** v80s queda como referencia de exactitud (B&N rev13), no como versión de arranque (BE-115).
 Próximo proyecto: arranca con una COPIA del mejor skill; nunca con una versión no probada.
 Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no usar la cadena completa del skill (R80e.37).
 
@@ -125,3 +125,7 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 **03-nov: v81cf16 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf15 + R80e.135 (BE-VS-15: verificar_markups_excel FALLA si una hoja con renglones del take-off no tiene markups — ceilings / soffits por rcp_sheet y demolición; tool nueva markups_rcp.py; el runner agrega demo_geom.json y rcp_polys.json del proyecto al PDF de entrega; el verificador elige el renglón del Material Summary cuyo material corresponde al TYPE). Suite 51/51. Banco B&N / Chuze / O'Reilly / CFA: 0 familias distintas. VS rev16 con v81cf16: REGLAS OK, markups 208/208 (A01.01 + A02.01 + A03.01), mismas cantidades. OJO proyectos con ceilings y sin rcp_polys.json: la compuerta ahora falla hasta marcar el RCP.
 
 | Victoria's Secret #679 Downey rev16 FINAL + RCP (vigente) | v81cf16 | 2026-11-03 | take-off-metal-frame-drywall_v81cf16_VS-Downey-rev16-RCP_2026-11-03.zip |
+
+**03-nov: v81cf17 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v81cf16 (VS rev16) + R80f.12 (BE-CF19: verificar_markups_excel toma la hoja de un renglón de demolición de su demo_geom, no de la hoja que cita su altura — en v81cf16 CFA rev4 daba 2 FALLAS falsas "L65" / "S-601"). Tests de CFA unidos en tools/test_cf_pruebas.py (sin quitar ninguna prueba) → 199 archivos. Suite 50/50. verificar_version.py 0 faltantes (474). Banco B&N / VS / Chuze / O'Reilly / CFA rev4 = 0 diferencias. CFA rev4: 121/121 markups OK, 0 fallas.
+
+| Chick-fil-A #2284 River Point rev4 (vigente) | v81cf17 | 2026-11-03 | take-off-metal-frame-drywall_v81cf17_CFA-RiverPoint-rev4_2026-11-03.zip |
