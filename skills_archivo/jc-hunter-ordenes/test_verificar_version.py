@@ -89,8 +89,33 @@ def revisar_indice():
     assert V.revisar_indice(d) == []
 
 
+def revisar_skill():
+    """BE-87 (choque de numeración R80e.49 trim / formato de RFI) y BE-VS-11 (A_NO_DIBUJADO sin clasificar nunca corría)."""
+    d = skill([OK, ALC], dict(TOOLS, **{"reglas.py": '@chequeo("A_NO_DIBUJADO", "x")\ndef f(c):\n    return []\n',
+                                        "reglas_clasificacion.py": 'X = {"R1": A("A_OTRA")}\n'}))
+    s = os.path.join(d, "take-off-metal-frame-drywall", "SKILL.md")
+    open(s, "a").write("### R80e.49 — Trim por programa\nx\n### R80e.49 — Formato de RFI A/B/C\ny\n")
+    f = " ".join(V.revisar_skill(V.Fuente(d)))
+    assert "BE-87" in f and "R80e.49" in f and "BE-VS-11" in f and "A_NO_DIBUJADO" in f, f
+    open(s, "w").write("---\nname: t\ndescription: x\n---\n### R80e.49 — Trim por programa\n### R80e.50 — Formato de RFI\n")
+    open(os.path.join(d, "take-off-metal-frame-drywall", "tools", "reglas_clasificacion.py"), "w").write('X = {"R1": A("A_NO_DIBUJADO")}\n')
+    assert V.revisar_skill(V.Fuente(d)) == []
+
+
+def revisar_banco():
+    """U-043 / BE-94 (R80e.43 validado con una sola corrida): la versión vigente debe registrar el banco con 0 distintas."""
+    d = tempfile.mkdtemp()
+    p = os.path.join(d, "INDICE.md")
+    open(p, "w").write("**03-nov: v9x = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v9w + arreglo. Probado con la corrida #4.\n")
+    assert V.revisar_banco(d)
+    open(p, "w").write("**03-nov: v9x = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v9w + arreglo. Banco #3 / #4 / #5 = 3 familias distintas.\n")
+    assert V.revisar_banco(d)
+    open(p, "w").write("**03-nov: v9x = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = v9w. Banco B&N / VS / Chuze = 0 familias distintas.\n")
+    assert V.revisar_banco(d) == []
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

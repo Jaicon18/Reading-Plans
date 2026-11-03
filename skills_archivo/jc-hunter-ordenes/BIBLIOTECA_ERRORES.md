@@ -333,3 +333,12 @@ Toda regla inviolable lleva compuerta de programa de fondo + test que reproduce 
 
 ## BE-122 — Materiales vs Partition Type Schedule sin revisión independiente (usuario 3-nov)
 Chequeo (j) de la compuerta de entrega: lectura independiente por type del Partition Type Schedule (stud size / gauge / spacing, board por cara: capas / tipo / espesor, track / slip, cobertura de altura, extras) comparada por programa contra lo cargado en el Excel por wall / type (GREEN / RED / AMBER) + totales del Material Summary = suma de walls por type (RED si un material no tiene type de origen). Herramienta: tools/revision_materiales.py (sesión O'Reilly, R80e.140) dentro de compuerta_entrega.py como CE_MATERIALES_SCHEDULE: sin fichas.json (lectura independiente del schedule) = FAIL; type RED o renglón del Material Summary sin origen / que no suma = FAIL. Test: tools/test_compuerta_entrega.py (test_materiales_schedule, test_revision_materiales).
+
+## BE-123 — Pregunté si arreglar el trabajo propio (usuario 3-nov, U-112)
+Le pregunté al usuario si arreglaba las 11 fallas de la compuerta de O'Reilly: era trabajo de Claude. Prueba: ningún reporte al usuario presenta como pendiente una falla de compuerta / archivo faltante / error de tool; se arregla y se reporta terminado (conducta; la compuerta de entrega es la parte verificable).
+
+## BE-124 — Burbujas de detalle sin seguir: las tools existían y la compuerta no las corría (usuario 3-nov, U-113)
+verif_callouts.py / cadena_detalles.py / verif_detalles.py estaban en el skill pero compuerta_entrega.py nunca las llamaba. Prueba (CE_CALLOUTS, tools/chequeos_biblioteca.py::ce_callouts): toda burbuja N/HOJA de las hojas del trade y de cada detalle que la cadena alcanza (cierre transitivo) está citada como fuente N/HOJA en el Excel / canon o declarada fuera de alcance con motivo en callouts_no_aplican.json; un detalle / hoja referido que no existe se reporta. Test: test_chequeos_biblioteca.py (D/A9.22 citado, 7/A9.26 de la marquesina sin seguir -> FAIL).
+
+## Programas de la biblioteca (v81cf24, 3-nov, orden "haz los programas")
+Desde v81cf24 TODA prueba de esta biblioteca tiene chequeo de programa en tools/chequeos_biblioteca.py (o verificar_version.py / reglas.py, ver REGLAS_REGISTRO.json) que corre dentro de compuerta_entrega.py, con su caso en tools/test_chequeos_biblioteca.py que reproduce el error original. La lectura del Paso 12 b sigue, pero ya no es la única prueba.

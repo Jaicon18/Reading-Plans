@@ -203,6 +203,43 @@ def revisar_indice(archivo):
     return []
 
 
+def revisar_skill(fuente):
+    """BE-87 / BE-VS-11 -> faltas del skill candidato:
+    BE-87: dos encabezados R80e.N / R80f.N con el MISMO número y distinto título en SKILL.md (choque de numeración);
+    BE-VS-11: un chequeo @chequeo("A_X") de reglas.py que ninguna regla de reglas_clasificacion.py referencia (no corre)."""
+    f = []
+    sk = fuente.leer("SKILL.md") or ""
+    vistos = {}
+    for m in re.finditer(r"^#{2,4}\s+(R80[a-z]\.\d+)\s*[—:-]+\s*(.+)$", sk, re.M):
+        n, t = m.group(1), re.sub(r"\W+", " ", m.group(2)).strip().lower()[:40]
+        if n in vistos and vistos[n] != t:
+            f.append(f"BE-87: {n} usado por dos reglas distintas ('{vistos[n][:30]}' / '{t[:30]}')")
+        vistos.setdefault(n, t)
+    rg, cl = fuente.leer("tools/reglas.py") or "", fuente.leer("tools/reglas_clasificacion.py")
+    if rg and cl is not None:
+        for a in sorted(set(re.findall(r'@chequeo\("(A_[A-Z0-9_]+)"', rg))):
+            if f'"{a}"' not in cl:
+                f.append(f"BE-VS-11: el chequeo {a} de reglas.py no está en reglas_clasificacion.py (nunca corre)")
+    return f
+
+
+def revisar_banco(archivo):
+    """U-043 / BE-94 -> faltas: la VERSIÓN VIGENTE del INDICE registra la prueba del banco con 0 familias distintas."""
+    p = os.path.join(archivo, "INDICE.md")
+    if not os.path.isfile(p):
+        return ["skills_archivo sin INDICE.md"]
+    bloques = re.split(r"\n(?=\*\*\d{2}-[a-z]{3}: )", open(p, encoding="utf-8").read())
+    vig = [x for x in bloques if "VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO**" in x]
+    if not vig:
+        return ["INDICE.md sin bloque VERSIÓN VIGENTE"]
+    v = vig[-1]
+    if not re.search(r"(?i)banco", v):
+        return ["U-043: la versión vigente no registra la prueba del banco (todas las lecturas guardadas)"]
+    if not re.search(r"(?i)= ?0 (familias )?(distintas|diferencias)|0 familias distintas|0 diferencias", v):
+        return ["U-043: el banco de la versión vigente no dice 0 familias distintas / 0 diferencias"]
+    return []
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -228,7 +265,10 @@ def main(argv):
     reg = revisar_registro(Fuente(candidato), AQUI, extra[0] if extra else None)
     zp = revisar_zip(candidato)
     ix = revisar_indice(archivo)
-    for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix)):
+    sk = revisar_skill(Fuente(candidato))
+    bc = revisar_banco(archivo)
+    for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
+                       ("BANCO (U-043)", bc)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

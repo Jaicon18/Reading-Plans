@@ -1,10 +1,9 @@
 {
- "version": "registro v1 (BE-121, 2026-11-03)",
+ "version": "registro v2 (v81cf24, 2026-11-03: 0 programa-pendiente; chequeos_biblioteca.py + CE_CALLOUTS)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 86,
-  "conducta": 38,
-  "programa-pendiente": 142,
+  "programa": 230,
+  "conducta": 40,
   "historico": 23
  },
  "reglas": [
@@ -212,8 +211,16 @@
    "id": "U-017",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA (usuario 26-oct, TODOS los proyectos): en la resolución A/B, una cota IMPRESA que coincide con una lectura manda sobre la otra lectura (CONFIRMADO > DERIVADO); nunca elegir la lectura que contra",
-   "categoria": "programa-pendiente",
-   "motivo": "la resolución A/B (cota impresa > lectura derivada) se decide en resolver/canon; no hay test que reproduzca un caso CONFIRMADO vs DERIVADO elegido al revés"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_017"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_017"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-018",
@@ -296,8 +303,16 @@
    "id": "U-026",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA (usuario 27-oct, TODOS los proyectos): las 18 decisiones del estimador de la revisión de RFI de B&N son regla general: ver cache_proyectos/SKILL_working.md §R80e.34 (aplicarlas como precedente a",
-   "categoria": "programa-pendiente",
-   "motivo": "aplicar las 18 decisiones R80e.34 antes de abrir un RFI exige comparar el tema del RFI con cada precedente (juicio); sin chequeo de programa todavía"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_026"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_026"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-027",
@@ -371,15 +386,31 @@
    "id": "U-034",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (29-30 oct, runner API): después de CADA lectura, compuerta de completitud (todas las hojas y types del trade presentes; si falta, continuar la lectura) y validador de esquema canon a",
-   "categoria": "programa-pendiente",
-   "motivo": "runner/completitud.py y validar_canon.py existen pero no hay test en la suite que los ejercite"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_034"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_034"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-035",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (30-oct, runner API): la evidencia que exige reglas.py (imagen por face/altura, estados #0) la generan los PROGRAMAS a partir de coordenadas (planmark/recortes), nunca se le pide al m",
-   "categoria": "programa-pendiente",
-   "motivo": "runner/evidencia.py y validar_canon.py existen pero no hay test en la suite que los ejercite"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_035"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_035"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-036",
@@ -393,8 +424,16 @@
    "id": "U-037",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (30-oct, runner API): la compuerta de completitud compara CONTEOS por type (walls leídos vs tags de inventario_tags.py por type y hoja, incl. column wraps, soffit sides y walls parcia",
-   "categoria": "programa-pendiente",
-   "motivo": "runner/completitud.py (conteos por type) existe pero sin test en la suite"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_037"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_037"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-038",
@@ -444,8 +483,23 @@
    "id": "U-043",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (usuario 31-oct, runner/skill): todo arreglo se valida GRATIS contra el BANCO de TODAS las lecturas guardadas (#3, #4, #5, #7…) antes de aceptarse: solo entra si mejora o mantiene cad",
-   "categoria": "programa-pendiente",
-   "motivo": "correr_banco_familias.py se corre a mano al armar cada versión; no hay test automático del banco en la suite"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_043",
+    "ordenes:verificar_version.py::revisar_banco"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_043"
+   },
+   "cuando": "version",
+   "tests_extra": [
+    {
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "revisar_banco"
+    }
+   ],
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-044",
@@ -526,8 +580,16 @@
    "id": "U-051",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (31-oct, TODOS los proyectos): el bid set de una prueba se revisa por PROGRAMA antes de dárselo a una sesión: si trae annotations/markups (Bluebeam, de un take-off previo) se entrega ",
-   "categoria": "programa-pendiente",
-   "motivo": "copia_limpia.py existe pero ningún test reproduce BE-100 (bid set con annotations)"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_051"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_051"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-052",
@@ -601,15 +663,31 @@
    "id": "U-057",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA (31-oct, TODOS los proyectos): para que dos pasadas den lo mismo, los CRITERIOS los fija el programa, no la lectura: nunca altura medida a escala (supuesto rotulado + RFI), board SIEMPRE sin des",
-   "categoria": "programa-pendiente",
-   "motivo": "criterios fijos (sin altura a escala, board sin descontar aberturas, dueño de esquina R70.2) viven en canon/esquinas.py y reglas A_ESQUINAS sin test que reproduzca BE-110"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_057"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_057"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-058",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (31-oct, TODOS los proyectos): la altura del board de una cara se toma de una cota cuyos dos extremos son bordes del board EN ESA CARA; nunca de una cota de fachada exterior para el b",
-   "categoria": "programa-pendiente",
-   "motivo": "BE-111 (cota de la MISMA cara) exige saber qué cara toca cada extremo de la cota; CE_ALTURA_IMPRESA compara contra la cota citada pero no puede probar la cara"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_058"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_058"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-059",
@@ -808,8 +886,38 @@
    "id": "U-079",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA (2-nov, CFA #2284, TODOS los proyectos): R80f.1 — copia limpia conserva AutoCAD SHX Text (texto MEP), types con decimal y schedule dentro de planta en inventario_tags, familia 1/2\" gyp board, wa",
-   "categoria": "programa-pendiente",
-   "motivo": "copia_limpia.py (SHX) / inventario_tags (types con decimal) sin test propio que reproduzca BE-CF01..05"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf01",
+    "take-off:tools/chequeos_biblioteca.py::be_cf02",
+    "take-off:tools/chequeos_biblioteca.py::be_cf03",
+    "take-off:tools/chequeos_biblioteca.py::be_cf04",
+    "take-off:tools/chequeos_biblioteca.py::be_cf05"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf01"
+   },
+   "cuando": "entrega",
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "be_cf02"
+    },
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "be_cf03"
+    },
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "be_cf04"
+    },
+    {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "be_cf05"
+    }
+   ],
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-080",
@@ -829,15 +937,31 @@
    "id": "U-081",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "REGLA (2-nov, CFA #2284, TODOS los proyectos): R80f.2 — comparar_extra.py siempre después de comparar.py (board-only, cielos, misc, demo A vs B); el material del wall lo fija el WALL TYPE SCHEDULE + e",
-   "categoria": "programa-pendiente",
-   "motivo": "comparar_extra.py existe pero no hay test en la suite que lo ejercite"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_081"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_081"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-082",
    "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
    "texto_corto": "DECISIÓN DEL ESTIMADOR = REGLA (usuario 2-nov, TODOS los proyectos, R-ALC-10): conflicto plano vs spec o código = se carga la opción A (lo del PLANO) con una NOTA que explica la diferencia, el delta d",
-   "categoria": "programa-pendiente",
-   "motivo": "detectar un conflicto plano vs spec/código exige juicio; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_082"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_082"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "U-083",
@@ -1146,6 +1270,27 @@
    "cuando": "entrega"
   },
   {
+   "id": "U-112",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-123): lo que es trabajo de Claude (fallas de la compuerta, archivos faltantes como TIEMPOS.md / hoja de datos, RFI sin delta o fuera de SEGUIMIEN",
+   "categoria": "conducta",
+   "nota": "BE-123: conducta de COORDINACIÓN y sesiones (arreglar sin preguntar); la parte verificable la hace compuerta_entrega.py"
+  },
+  {
+   "id": "U-113",
+   "origen": "REGLAS_USUARIO_CLAUDE.md / CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 3-nov, BE-124): TODA burbuja de detalle / sección (N/HOJA, ej. 1/A3.2) en TODAS las hojas del set se sigue hasta el final de su cadena (detalle → sub-detal",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "ce_callouts"
+   },
+   "cuando": "entrega"
+  },
+  {
    "id": "R-ALC-01",
    "origen": "REGLAS_ALCANCE.md",
    "texto_corto": "Solo metal frame y gypsum board (usuario, 2026-11-01, VS #679 Downey)",
@@ -1163,8 +1308,16 @@
    "id": "R-ALC-02",
    "origen": "REGLAS_ALCANCE.md",
    "texto_corto": "Blocking de accesorios sin medida impresa (usuario, 2026-11-01, VS #679 Downey)",
-   "categoria": "programa-pendiente",
-   "motivo": "blocking 3 ft x 2 filas por accesorio sin medida impresa: canon no marca 'sin medida impresa'; sin test"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::r_alc_02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "r_alc_02"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "R-ALC-03",
@@ -1184,8 +1337,16 @@
    "id": "R-ALC-04",
    "origen": "REGLAS_ALCANCE.md",
    "texto_corto": "Demolición de drywall y metal frame = NUESTRO alcance (usuario, 2026-11-02, VS #679 Downey)",
-   "categoria": "programa-pendiente",
-   "motivo": "que la demolición de gyp / metal esté cuantificada si hay demo plan exige saber qué hay en el demo plan; sin chequeo"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::r_alc_04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "r_alc_04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "R-ALC-05",
@@ -1262,8 +1423,16 @@
    "id": "R-ALC-10",
    "origen": "REGLAS_ALCANCE.md",
    "texto_corto": "Conflicto plano vs spec / código: manda el PLANO (usuario, 2026-11-02; TODOS los proyectos)",
-   "categoria": "programa-pendiente",
-   "motivo": "detectar conflicto plano vs spec / código exige juicio"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_082"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_082"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "R-ALC-11",
@@ -1297,78 +1466,166 @@
    "id": "BE-01",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Fire-stop track \"METAL STUD/TRACK FIRE STOP AT CEILING LINE, TYP.\" (8/A-410) no se había cuantificado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_01"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_01"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-02",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Nota \"W.R. … FOR WALL AND CEILING CONSTRUCTION\" aplicada solo a walls",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_02"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-03",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "W.R. en walls de wet rooms (todas las caras de restrooms, janitor, alcove)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_03"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_03"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-04",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Se cargó W.R. (y plywood) en caras que NO llevan gypsum (Cafe Work Room = FRT plywood + FRP)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-05",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Capas por cara mal contadas: \"X = A, B\" con dos flechas leído como dos capas por lado; plywood cargado detrás del GWB del lado Sales",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_05"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_05"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-06",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Soffit cargado en una sola cara / un solo lado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_06"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_06"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-07",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Remate de type por tag \"SIM.\" (cara de extremo de un wall con tag de otro type) no cuantificado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_07"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_07"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-08",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Lectura A/B que contradecía una cota impresa",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_08"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_08"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-09",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Perímetro existing cuantificado como nuevo",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_09"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_09"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-10",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Soffit con cota \"HOLD\" dejado como \"not priced\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_10"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_10"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-100",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly: el bid set de Drive traía 79 markups de Bluebeam de otro estimador (take-off humano)",
-   "categoria": "programa-pendiente",
-   "motivo": "copia_limpia.py sin test que reproduzca un bid set con annotations"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_051"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_051"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-101",
@@ -1395,78 +1652,166 @@
    "id": "BE-102",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly: citas fijas de B&N (A-410, A-001A, DM-101) en el Material Summary de otro proyecto",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_102"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_102"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-103",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly: hojas raster sin texto: markups sin geometría, contar_tags y tag_ids fallan",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_103"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_103"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-104",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly: type S24 imprime Z-furring sobre CMU además del stud lining; la lectura no lo cargó por falta de familia",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_104"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_104"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-105",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly rev1: productos impresos en S1.1 nota 7 y S5.x (Titen HD @ 48\", #10 stud-to-track, deep-leg 3\" x 14 ga, sheathing screws, FCB43.5) quedaron como RFI y se cargaron defaults (pins @ 12\", Kwik Bolt @ 8\", #8)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_105"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_105"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-106",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly rev1: defaults citados como \"Estimator criterion / Handoff - Approved\" y \"estimator decision 2026-10-27\" (otro proyecto)",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_106"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_106"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-107",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly rev3: orden del estimador \"excluye toda la tornillería\": la tool no tenía forma de excluir todas las familias de fasteners a la vez",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_107"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_107"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-108",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly rev4: 24 RFI respondidos por el estimador; varios eran casos que el plano dibuja (RC, 1/4\", corner bead de header, J molding, strap, runner, W-4, Level 5)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_026"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_026"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-11",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Área rotulada \"AREA OF 3/4\" FIRE RESISTANT PLYWOOD\" no cargada",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_11"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_11"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-110",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Repetibilidad O'Reilly pasada 2, elemento 1 (31-oct)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_057"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_057"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-111",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Pasada 1 O'Reilly: altura del board interior del head del storefront tomada de una cota EXTERIOR (31-oct)",
-   "categoria": "programa-pendiente",
-   "motivo": "ver U-058"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_058"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_058"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-112",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "O'Reilly pasada 2: lecturas que el estimador corrigió con sus respuestas (01-nov)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_112"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_112"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-113",
@@ -1569,8 +1914,16 @@
    "id": "BE-12",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Criterio por defecto del skill citado como nota impresa (\"ADD FULL LENGTH ADDL HEAD TRACK…\")",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_12"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_12"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-120",
@@ -1629,81 +1982,190 @@
    ]
   },
   {
+   "id": "BE-123",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Pregunté al usuario si arreglar las fallas de la compuerta de O'Reilly (trabajo propio)",
+   "categoria": "conducta",
+   "nota": "ver U-112"
+  },
+  {
+   "id": "BE-124",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Las tools de detalles (verif_callouts, cadena_detalles, verif_detalles) existían pero compuerta_entrega.py no las corría: burbujas sin seguir",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "ce_callouts"
+   },
+   "cuando": "entrega"
+  },
+  {
    "id": "BE-13",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Backboard / plywood \"BY GC\" en hojas E (server room 2/E-103) sin destino",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_13"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_13"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-14",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "RFI o Scope que dice \"not printed / not specified\" cuando el set sí lo imprime (T.O. WD-1 15'-0\", alturas de FRP, Level 4)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_14"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_14"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-15",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Detalle leído con otra función: bubble 3 leído como 8; \"1 5/8\" x 16 GA. METAL JOIST FRAMING @ 48\" O.C.\" (horizontal) cargado como poste vertical",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_15"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_15"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-16",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Accesorio impreso por un detalle sin renglón (clip angles, P.A.F. de cross members, #8 screws del relief channel)",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (familias.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_16"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_16"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-17",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Gauge por fila aplicado, pero los productos que dependen del gauge no se separan (8.A #8 vs #10, 2 vs 3 por conexión; 8.E Type S vs S-12)",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (accesorios.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_17"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_17"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-18",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Ítem del set sin destino (ni cuantificado ni excluido ni RFI)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_18"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_18"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-19",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Espaciamiento de fastener impreso reemplazado por un default no impreso (slab pins 12\" vs 9/A-410 @ 24\" y 8.F 2 rows @ 16\"; X-EDNI 8.C vs 8/A-410 #8 @ 24\")",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_19"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_19"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-20",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Framed soffit cargado solo por perímetro",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_20"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_20"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-21",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Glass mat cargado sin rótulo",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_21"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_21"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-22",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Jamb return de gypsum sin detalle que lo dibuje",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_22"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_22"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-23",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Acoustical sealant cargado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_23"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_23"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-24",
@@ -1723,36 +2185,76 @@
    "id": "BE-25",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Sistema de ceiling inventado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_25"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_25"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-26",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Type K (ballistic) medido a nodo y no al hatch/cota",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_26"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_26"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-27",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "ATM / recess sin las piezas impresas",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_27"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_27"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-28",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Canopy incompleta / parapet que no sigue la wall exterior",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_28"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_28"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-29",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Header \"assumed\" sin schedule",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_29"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_29"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-40",
@@ -1772,8 +2274,16 @@
    "id": "BE-41",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Nombres de archivos internos en el Excel",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_41"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_41"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-42",
@@ -1821,379 +2331,818 @@
    "id": "BE-45",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Proporciones fuera de rango sin explicación",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_45"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_45"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-46",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Dos espesores / productos en un mismo renglón (cement board 1/2\" de A-221 + 5/8\" de 22/A-201); track 3-5/8\" + 6\" + ledger 8\" + ceiling track en un renglón",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (canon.py, familias.py, plantilla_excel.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_46"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_46"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-47",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Cantidades o IDs en textos (RFI, Scope, README) que no coinciden con su renglón (585.27 vs 568.27; ALC-X26..X30 vs X40..X44)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_47"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_47"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-48",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Nombre de archivo interno en el PDF de markups (\"Source: takeoff_canon.json\" en la leyenda)",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (markups_bluebeam.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_48"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_48"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-49",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Cota impresa atribuida al elemento equivocado (46'-0\" del track LWT-01 cerca de la nube)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_49"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_49"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-50",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Traslape de alcance entre hojas A y E/M/P sin RFI (E-301 265119 soportes de luminarias por el EC vs wires en luminarias cargados por 5/A-121)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_50"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_50"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-51",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Renglones en LF con selling unit \"piece\" y Pieces to buy = ROUNDUP(LF) (2x blocking, main / cross tee, molding, 16 ga wire)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_51"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_51"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-52",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Una pasada anterior dio un ítem por \"cubierto por el renglón X\" (#8 screws de 8/A-410 → framing screws) y el renglón X no lo contenía",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_52"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_52"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-53",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "El delta de un RFI omitía un accesorio impreso en el mismo detalle que cita (A/A-410 \"(1) #10-16 SCREW @ EACH FLANGE\" fuera de RFI-28)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_53"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_53"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-54",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Partición por producto (Type S / S-12) sobre board bruto por wall, con la deducción (base de cement board) aplicada solo al total",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_54"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_54"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-55",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Códigos internos del plan check (C7-0x, C-0x, N-0x, \"rev7 plan check\") en textos al cliente",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (plantilla_excel.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_55"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_55"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-56",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Fastener de nota típica (8.F X-DNI) cargado sobre un largo cuya sección de type imprime otro anclaje (types 3/4: HUS-EZ + moment clip, A/A-410)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_19"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_19"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-57",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Blocking de madera (2x / FRT) con el waste de METAL (Inputs B5 15 %)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_57"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_57"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-58",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Materiales calculados por el modelo a mano y compuerta reglas.py apagada (studs −33 %, FRP −52 %, blocking −70 %)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_58"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_58"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-59",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Lectura A incompleta: 11 walls, solo A-101, de 77 (terminó antes, con presupuesto de sobra)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_034"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_034"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-60",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Canon con claves fuera de esquema (HG1 / HG2.curved) y ceilings sin system_callout: canon.py lo rechazó al final de la cadena",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_60"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_60"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-61",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La resolución partió siempre de A (la incompleta) y bajó el total de 617 a 535 LF",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_61"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_61"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-62",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Reconciliación con 19 / 42 walls: column wraps como tag \"C25\" (no element) y otra partición de tramos",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_62"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_62"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-63",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "El overlay reemplazaba walls completos con los de la referencia: metía largos, bands y alturas de la rev13 en la lectura",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_63"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_63"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-64",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Riesgo de contaminación: la llamada de lectura corría en un directorio que enlaza las respuestas del proyecto (rev13, RFIs)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_64"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_64"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-65",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "validar_canon pasó la lectura A sin `plan_scale_pt_per_ft`; sin escala canon.py no cruza band vs length_ft (W2-01 band 50.0 vs 48'-4\" A-101)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_035"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_035"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-66",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La lectura B agotó su tope (error_max_budget_usd) y el gasto no quedó en costos.csv",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_66"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_66"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-67",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Decisiones con lista completa (ceilings, opening_schedule, faces sin identidad) usan nombres / largos de la referencia y rompen las referencias de la lectura (soffit_of, D14 vs Door 14, Σ tramos ≠ L, node en wall ausente",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_67"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_67"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-68",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La lectura por API no trae evidencia visual por face / height ni estados #0: reglas.py da 3881 fallas (diagnóstico)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_68"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_68"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-69",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "trazabilidad.py desglosaba todo board 5/8\" como \"5/8 type X\" (regular / MR sumaban Type X) y el FRT substrate con el sheathing de column wraps del mismo espesor; un gauge numérico rompía el join",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_69"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_69"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-70",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Lecturas sin ceilings ni soffit sides (B declaró ceilings_none_reason) y planmark rechazó un soffit side en línea discontinua",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_70"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_70"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-71",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Resolución y cobertura terminaron sin escribir: la resolución no editó el archivo y la cobertura usó Bash heredoc (permiso negado) hasta agotar el tope",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_71"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_71"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-72",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La compuerta de completitud solo miraba hojas y types: dejó pasar lecturas de 27 / 31 walls (sin 9 column wraps, sin soffit sides, con tags de type 2 / 3 / I sin wall) y aceptaba \"no lo encontré\" como types_none_reason",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_037"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_037"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-73",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Return sin tag con part_of: la fila del Partition Takeoff salía sin type y el sealer se caía al ordenar tags None",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_73"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_73"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-74",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La decisión parchaba un node por id (N24 de la lectura ≠ N24 de rev13), borraba una door leída (DR-104) de opening_schedule y los ceilings decididos quedaban sin su supuesto RFI (carrying_direction)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_67"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_67"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-75",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La corrección no podía escribir el canon (Edit no permitido), traducía mal un id con punto (C-E1-P.2) y la corrida terminó en $15.0078 contra un tope de $15 (claude -p se pasa unos centavos)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_66"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_66"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-76",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Las decisiones generales (RFI-27 Type X, RFI-11 W.R.) solo llegaban a los walls emparejados: 46 faces \"5/8 regular\" + 2 \"5/8 MR\" en walls sin emparejar (Type X −42 %)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_76"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_76"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-77",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Cement board +126 %: la lectura A puso 1/2\" cement board 20 ft en la cara Workroom de C-E2 (E/A-221 = \"E2-5/8\" FRT PLYWOOD\" only); B lo tenía bien, pero comparar.py solo compara LF",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_77"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_77"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-78",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Studs −33 / −38 %: alturas placeholder 20 ft (A) / 15 ft (B) donde 1/A-400A y 1/A-400B imprimen B.O. DECK 25'-0\"; el prompt no listaba A-300 / A-400",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_78"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_78"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-79",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Un parche parcial de una decisión sobre faces que la lectura no trae creaba faces a medias (solo board), y canon.py caía con KeyError 'layers'; 3 correcciones pagadas sin efecto",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_79"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_79"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-80",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Column wraps 0 de 9: A los excusó como existentes (C23) y B los puso en misc_items COL-* (C25, 10/A-101); la resolución partió de A sin ver la contradicción",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_80"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_80"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-81",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Fila del type F PENDING: la corrección solo recibía \"partition_types sin dato obligatorio\" (R9: box con tag sin fos_chain)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_81"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_81"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-82",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Doble conteo entre hojas: W2-04 extendido 30.0 ft en A-101 sobre el muro norte del Cafe Workroom 104, ya contado en A-221 como C-H1-N (type 2 +9.3 %)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_82"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_82"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-83",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Faces de restrooms a deck (25 ft) con ceiling GWB 9'-0\" (A-121): W.R. +44.7 %",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_83"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_83"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-84",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Metal trim −95.6 % (42 LF de 957): la lectura no deriva el corner bead de oficio; E1 / E2 3-5/8\" (A) vs 6\" (B), y la comparación no miraba stud_size",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_84"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_84"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-85",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "canon.py rechazó \"accesorios_none PAFs and duct sleeves\" + la cantidad de la decisión (mep_estimator_count); 3 correcciones pagadas inútiles",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_85"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_85"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-86",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "154 fallas \"falta HOJA\" en length_source de bands (\"band 67.6 pt / 9\")",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_68"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_68"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-87",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Choque de numeración: dos reglas distintas como R80e.49 (trim / formato de RFI)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_skill"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_skill"
+   },
+   "cuando": "version",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-88",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "El formato de RFI (R80e.50) se implementó con 3 columnas nuevas en Pending Items: viola el formato FIJO del Excel (nunca agregar / quitar / cambiar hojas ni columnas)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_88"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_88"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-89",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La lectura dejó 76 de 87 nodes free: faltan los studs de esquina (L) e intersección (T)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_89"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_89"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-90",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La lectura no declaró ningún opening con door schedule en A-500 (puertas leídas como huecos entre walls): faltan jambs, header y cripples",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_90"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_90"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-91",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "claude -p heredó ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión: las corridas no usaron $TAKEOFF_API_KEY (session_id = la de la sesión anfitriona; la consola sin costo)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_91"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_91"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-92",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "22 decisiones del estimador sobre items (cross members, nested bracing, cement board base, FRT backboard) quedaron sin objeto porque la lectura no trae el item",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_92"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_92"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-93",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "R80e.43 (W.R. en wet rooms por atributo) cayó sobre faces a la altura del stud (25 ft contra ceiling 9'-0\"): W.R. +44.7 % en la #5",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_83"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_83"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-94",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Los arreglos se validaban contra una sola lectura: uno mejoraba una corrida y empeoraba otra",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_043",
+    "ordenes:verificar_version.py::revisar_banco"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_043"
+   },
+   "cuando": "version",
+   "tests_extra": [
+    {
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "revisar_banco"
+    }
+   ],
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-95",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Errores sistemáticos de lectura que se repiten en todas las corridas: la figura curva leída en 4 piezas, un wall de la planta ampliada a 4.5 ft contra 12.2 ft acotados, puertas leídas como huecos",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_95"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_95"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-96",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La #8 se detuvo en canon.py (\"nodo NP3: wall EXT-07 no existe\"): 25 nodes derivados citaban walls que la decisión RFI-01 excluyó. Se gastaron 3 correcciones (≈ $2.4) en un error del programa",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_67"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_67"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-97",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "El closer rechazó un wall E1 con las dos faces en el mismo cuarto y alturas distintas (12.0 / 25.0): las dos se juntaban en un solo renglón de board",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_97"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_97"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-98",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Exclusión general por type (RFI-01: types 1 / 1A / 1B / 1C existentes) para walls exteriores que no emparejan: el banco la marcó como empeora (bottom track y bracing en la #8) porque el wall excluido tapaba faltantes de ",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_98"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_98"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-99",
@@ -2205,92 +3154,197 @@
    "id": "BE-CF01",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "La \"copia limpia\" borró 519 anotaciones \"AutoCAD SHX Text\": en las hojas M/P/E ese es el ÚNICO texto del dibujo (no son markups)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf01"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf01"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF02",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "inventario_tags.py no encontró types: TYPE_RE no aceptaba decimales (W4.1, M3.5) y el schedule estaba dentro de una hoja de PLANTA (A-202) bajo \"MARK\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf02"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF03",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "No existía la familia 1/2\" gyp board regular (solo 5/8, 3/8, 1/2 exterior)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf03"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf03"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF04",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Walls de MADERA (Div. 06) con nuestro gyp / cement board no tenían bloque: el bloque board-only decía \"EXISTING WALLS TO REMAIN\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF05",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "arranque.py no leyó NINGÚN sheet number (172 hojas) aunque inventario_tags sí",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf05"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf05"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF06",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "comparar.py solo compara walls[]: con board-only (existing_walls), cielos, misc y demo dio 113 \"alertas\" falsas y NO comparó A vs B en board / demo",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_081"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_081"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF07",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "ceilings[] no soporta joists de 6\" (S-241 LGS CEILING JOIST SCHEDULE) ni cielo board-only; framed_soffit toma un solo furring_oc_in global (furr-down a 32\" contado a 16\"); familia \"1-1/2\\\" Z-furring\" con etiqueta fija (M",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf07"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf07"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF08",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Agregué referencias/INDICE_REGLAS_ACUMULADAS.md al skill y el catálogo de reglas lo leyó como regla SIN clasificar: reglas.py compuerta fallaba en todo proyecto real; la suite (30/30) no lo detectó",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/reglas.py::A_CATALOGO"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cf08_catalogo"
+   },
+   "cuando": "entrega",
+   "nota": "corre dentro de CE_REGLAS (reglas.py compuerta)",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF09",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Límites de tool en el cálculo: vigas_sobre_walls.py no registra un roof plan de madera sin grid; markups de board-only con Subject genérico (no el type); cielos nuevos sin geometría no se dibujan; canon.py cuenta bracing",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf09"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf09"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF10",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Productos de la spec no aplicados cuando el plano calla: ceiling board sag-resistant (C09250 2.1.E), board water-resistant detrás de sinks / toilets / mop (2.2.A), mesh tape + setting compound en joints de cement board (",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf10"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf10"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF11",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Detalle que imprime \"2x6 wood OR 6\\\" metal\" (D3/A-624) leído como \"no impreso\" (RFI) en vez de cargar la opción metálica (R-ALC-01)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf11"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf11"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF12",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "canon.py pone C.R. channel bracing por defecto en todo tramo vertical (incluso Z-furring y walls con su propio brace impreso: kicker 362S162-33 @ 48\" de C2/S-801, schedule de braces de S-801)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf09"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf09"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF13",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Markups: Page Label numérico (\"6\"/\"7\") en vez de la hoja, estados en español (DERIVADO / PENDIENTE), infill de otro type rotulado con el type vecino, cielos / soffit bottoms / Level 5 sin markup",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf13"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf13"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CF14",
@@ -2394,15 +3448,31 @@
    "id": "BE-CH02",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "walls entre plantas ampliadas",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_82"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_82"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-CH03",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "escala supuesta",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_ch03"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_ch03"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-HF01",
@@ -2414,29 +3484,61 @@
    "id": "BE-HF02",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Bracing a estructura impreso (A1.1 nota 1 \"@ 4'-0\" O.C. MAX\" + 2/A4.1 Spazzer 9200 + brace studs) quedó como Review Item con cantidad 0: R-ALC-11 / BE-116 repetido (la tool no tiene familia → se dejó en 0)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_hf02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_hf02"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-HF03",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Top track del bulkhead (llama 3/A5.3 = slip track) cargado en el renglón de \"heads\", fuera de las dos familias de track",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_hf03"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_hf03"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-HF04",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "C.R. channel bracing cargado en walls de 8'-6\" cuando A4.1 nota 7 lo pide solo en walls > 12'-0\"; texto del desglose con un spacing distinto al usado",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_hf04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_hf04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-HF05",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Partition Takeoff agrupó walls (A-14+A-12+A-13, C-01+C-02) que los markups llevan separados; Review Items con español y nombres internos (\"DISCREPANCIA\", \"TOOL_LIMITS_CALC #4\", \"misc_info\")",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_hf05"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_hf05"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-HF06",
@@ -2636,78 +3738,166 @@
    "id": "BE-VS-01",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Las dos lecturas no leyeron el demolition plan A01.01 (LOWEST POINT OF DECK 17'-0\" / STRUCTURE 12'-1\") y declararon la altura \"no impresa\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_01"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_01"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-02",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Cielos de gyp cargados regular cuando A15.04 dice \"UL listed fire resistant board throughout\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_02"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-03",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "18 alcances impresos sin destino (blocking de signage / lockers / paging, platform framing, reveal, metal FRP trim, bridging clips)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_18"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_18"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-04",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Pasada de gaps sumó C.R. channel de bridging ya contado en \"bracing C.R. channel\"",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-05",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Dos renglones de una misma familia recibieron cada uno la familia entera al partir por producto (blocking duplicado)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_04"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-06",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Producto impreso reemplazado por default: blocking 6\" x 18 GA backing track / plate (E/F A12.01) comprado como stud 3-5/8\"; foil-backed como regular; 1/2\" MR como exterior sheathing",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_06"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_06"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-07",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Bridging R/S03.01 cargado en todo wall aunque la nota lo excluye donde hay board en las dos caras",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_07"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_07"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-08",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Demo cuantificada sin cruce contra el floor plan nuevo, con alturas supuestas (±12'-0\") sin buscar en todas las hojas, y sin markup de línea",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_08"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_08"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-09",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Specs (A15.xx) leídas solo por secciones sueltas; materiales sin cruce contra la spec",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf10"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cf10"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-10",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "RFI-31: lateral bracing del ceiling NO cargado porque el RCP no lo dibuja (se aplicó \"manda el plano\" a una omisión)",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_10"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_10"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-11",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Las compuertas nuevas A_NO_DIBUJADO (rev10) no corrían: reglas.py solo ejecuta un chequeo si una regla con ENCABEZADO del SKILL.md lo referencia en reglas_clasificacion.py; mis reglas eran viñetas",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_skill"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_skill"
+   },
+   "cuando": "version",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-12",
@@ -2727,22 +3917,46 @@
    "id": "BE-VS-13",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Los markups de VS nunca cuadraron con el Excel: Contents SF = LF x H en vez del board del Excel, renglones agrupados \"W026+W118\" no reconocidos, valances sin geometría, 2 largos de banda sin causa; además rev10-rev14 se ",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_13"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_13"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-14",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "Nota impresa en la sección típica (\"ADDITIONAL STUD REQ'D AT EQ. STUDS\", A/A12.01) dejada como pregunta en vez de cargarla; demo marcada fuera del formato del verificador (sin page label, sin ID del Excel) y fuera del PD",
-   "categoria": "programa-pendiente",
-   "motivo": "prueba de la biblioteca (Paso 12 b) hecha por lectura del plano; sin chequeo de programa"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_14"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_14"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   },
   {
    "id": "BE-VS-15",
    "origen": "BIBLIOTECA_ERRORES.md",
    "texto_corto": "rev16 se entregó sin markups del RCP (A03.01): el verificador solo exigía hojas con walls / demo; ceilings, soffits y bracing no contaban",
-   "categoria": "programa-pendiente",
-   "motivo": "hay código que lo atiende (markups_rcp.py, verificar_markups_excel.py) pero ningún test lo reproduce"
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_vs_15"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_vs_15"
+   },
+   "cuando": "entrega",
+   "nota_pendiente_cerrada": "v81cf24 (3-nov, orden 'haz los programas'): chequeo de fondo + caso que reproduce el error original"
   }
  ]
 }

@@ -17,11 +17,14 @@ Este skill NO calcula nada. Es la memoria permanente del usuario. El cálculo lo
    `python3 -I tools/compuerta_entrega.py texto <bidset.pdf> --out <carpeta>/set_texto.json` y `entrega.json` con
    `drive.parent_id = 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc`, `carpeta_proyecto`, `carpeta_proyecto_id`; y `fichas.json` = lectura
    independiente del Partition Type Schedule por un subagente que no ve el Excel, BE-122). Sin
-   `ENTREGA_OK.json` VERDE (0 FAIL) no se entrega. AMBER se reporta.
+   `ENTREGA_OK.json` VERDE (0 FAIL) no se entrega. AMBER se reporta. Desde v81cf24 la compuerta corre además
+   `tools/chequeos_biblioteca.py` (un chequeo CB_<regla> por cada BE de la biblioteca y las U / R-ALC que eran
+   programa-pendiente) y CE_CALLOUTS (U-113: toda burbuja N/HOJA seguida hasta el final; las que no aplican van en
+   `<carpeta>/callouts_no_aplican.json` {"<hoja>": {"<etiqueta>": "motivo"}}).
 7. **La subida SOLO con** `python3 -I tools/subir_entrega.py <carpeta_del_proyecto>`: se niega sin ENTREGA_OK.json verde,
    si un archivo cambió después de la compuerta o si la carpeta no es hija (en vivo) de Claude outputs de la raíz.
    Nunca `gdrive_fetch.py put` a mano para una entrega. COORDINACIÓN no reporta un resultado sin ENTREGA_OK.json verde.
-8. `REGLAS_REGISTRO.json` dice qué hace cumplir cada regla (programa / conducta / histórica / programa-pendiente).
+8. `REGLAS_REGISTRO.json` dice qué hace cumplir cada regla (programa / conducta / histórica; desde v81cf24 0 programa-pendiente).
    Regla nueva = entrada nueva en el registro con su chequeo + test (si no, `verificar_version.py` falla).
 
 ## 2. Mejora continua (cómo un proyecto mejora al siguiente)
