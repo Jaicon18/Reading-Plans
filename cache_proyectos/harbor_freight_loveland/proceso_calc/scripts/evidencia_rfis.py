@@ -87,7 +87,7 @@ for r in c.get("rfis") or []:
             break
         if v not in terms:
             terms.append(v)
-    r["barrido"] = {"hojas": hojas if hojas == "ALL" else list(hojas), "terminos": terms, "grep": grep(terms)}
+    r["barrido"] = dict(b, hojas=hojas if hojas == "ALL" else list(hojas), terminos=terms, grep=grep(terms))
     n += 1
 json.dump(c, open(P, "w"), indent=1, ensure_ascii=False)
 print("RFI evidence fields written:", n, "for", len(c.get("rfis") or []), "RFIs")

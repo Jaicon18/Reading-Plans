@@ -14,3 +14,6 @@ START 2026-11-02 20:26 PST
 | 11b | Re-corrida cadena rev2 + back-check anotado: REGLAS OK 864/0, ETAPAS PASA, markups 47/47 | | 21:59 |
 | 10 | Docs (README, PARA_REVISAR, SEGUIMIENTO) + subida a Drive (19 archivos, tamaños verificados) | 22:00 | 22:03 |
 | **TOTAL** | **Arranque → entrega verificada en Drive** | **20:26** | **22:03** |
+| 12 | Skill v81cf21 (sobre v81cf20 + arreglos HFT): suite 51/51, 0 faltantes (520), banco 0 dif., commit 5654fd0 | 22:05 | 22:12 |
+| R3 | Pedido COORDINACIÓN (BE-CF16): RFI-01 resuelto por A1.2/A2.0 (D-01 en 7 zonas) → rev3, gates verdes, Drive rev3 FINAL (rev1 renombrada SUPERSEDED) | 22:08 | 22:17 |
+| **TOTAL final** | **Arranque → rev3 en Drive** | **20:26** | **22:17** |

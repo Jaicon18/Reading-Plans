@@ -29,7 +29,7 @@ E = [
  ("S:los-markups-ajenos-no-son-fuente", PC, "The set carried 2800 AutoCAD SHX text annotations; never read as construction: every render / measure from the clean copy without /Annots."),
  ("S:los-markups-ajenos-no-so:db7106", PC, "First step arranque.py: clean copy bidset_ORIG_SIN_MARKUPS.pdf (2800 /Annots removed); all crops from that copy."),
  ("S:granularidad-y-marcado:33d529", RS, "Work unit = the complete type (A, B, C, D, E) plus vestibule bulkhead, receiving enclosure and demolition by element."),
- ("S:granularidad-y-marcado:e221c4", "7_imagenes/A1.1_marked_by_type_rev2.png", "Marked plans produced by programs from the canon coordinates: markups_bluebeam.py / markups_demo.py PDF + planmark.py evidence per type + one PNG per sheet with colour per type and legend in schedule order."),
+ ("S:granularidad-y-marcado:e221c4", "7_imagenes/A1.1_marked_by_type_rev3.png", "Marked plans produced by programs from the canon coordinates: markups_bluebeam.py / markups_demo.py PDF + planmark.py evidence per type + one PNG per sheet with colour per type and legend in schedule order."),
  ("S:granularidad-y-marcado:7f3ce3", "4_canon/out/cierres_resumen.json", "Bands come from the sealed canon (closer.py seals of every wall), never from memory."),
  ("S:granularidad-y-marcado:f79808", PC, "Markups and images regenerated from the final canon after the resolution in the same chain run (same canon sha)."),
  ("S:granularidad-y-marcado:1f35f7", "7_imagenes/imagenes_hoja.json", "Final visual check on the delivered PNGs (reopened one by one, Wall IDs and LF against the Excel)."),

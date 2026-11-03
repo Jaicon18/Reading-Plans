@@ -1,16 +1,16 @@
 # BE-117 delivery audit (auditoria_entrega.py)
 
-Excel: HFT_Loveland_Takeoff_FINAL_rev2.xlsx · Markups: HFT_Loveland_markups_rev2.pdf
+Excel: HFT_Loveland_Takeoff_FINAL_rev3.xlsx · Markups: HFT_Loveland_markups_rev3.pdf
 
-**121 checks, 0 failures -> OK**
+**138 checks, 0 failures -> OK**
 
 ## Summary per check
 
 | Check | Items | Failures |
 |---|---|---|
-| 1 annot = Excel row | 33 | 0 |
-| 2 /Measure = printed SCALE | 33 | 0 |
-| 3 Length vs LF <= 0.5 % | 33 | 0 |
+| 1 annot = Excel row | 39 | 0 |
+| 2 /Measure = printed SCALE | 39 | 0 |
+| 3 Length vs LF <= 0.5 % | 39 | 0 |
 | 4 sheet with elements has markups | 3 | 0 |
 | 4 PNG per marked sheet | 3 | 0 |
 | 5 Excel 6 sheets | 1 | 0 |
@@ -18,7 +18,7 @@ Excel: HFT_Loveland_Takeoff_FINAL_rev2.xlsx · Markups: HFT_Loveland_markups_rev
 | 5 SUBTOTAL per block | 7 | 0 |
 | 5 GRAND TOTAL | 1 | 0 |
 | 5 PROJECT DATA in Inputs | 1 | 0 |
-| 5 open RFI with options (A)/(B)/(C) + delta | 5 | 0 |
+| 5 open RFI with options (A)/(B)/(C) + delta | 4 | 0 |
 
 ## Failures
 
@@ -48,7 +48,13 @@ none
 | 1 annot = Excel row | B-03 | OK | TYPE B / B; LF 9.44 / 9.44; H 8.5 / 8.5; SF 80.2 / 80.24; DETAIL B/A4.1 in source: True |
 | 1 annot = Excel row | C-01 | OK | TYPE C / C; LF 12.28 / 12.28; H 8.5 / 8.5; SF 104.4 / 104.38; DETAIL C/A4.1 in source: True |
 | 1 annot = Excel row | C-02 | OK | TYPE C / C; LF 10.94 / 10.936; H 8.5 / 8.5; SF 93.0 / 92.96; DETAIL C/A4.1 in source: True |
-| 1 annot = Excel row | D-01 | OK | TYPE D / D; LF 209.1 / 209.1; H 18.167 / 18.17; SF 7598.7 / 7598.7; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01a | OK | TYPE D / D; LF 29.55 / 29.547; H 16.833 / 16.83; SF 994.6 / 994.56; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01b | OK | TYPE D / D; LF 30.0 / 30.005; H 17.208 / 17.21; SF 1032.8 / 1032.78; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01c | OK | TYPE D / D; LF 30.0 / 29.996; H 17.208 / 17.21; SF 1032.5 / 1032.46; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01d | OK | TYPE D / D; LF 30.0 / 30.0; H 17.417 / 17.42; SF 1045.2 / 1045.2; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01e | OK | TYPE D / D; LF 30.0 / 30.004; H 17.958 / 17.96; SF 1077.7 / 1077.74; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01f | OK | TYPE D / D; LF 30.02 / 30.018; H 17.958 / 17.96; SF 1078.2 / 1078.24; DETAIL D/A4.1 in source: True |
+| 1 annot = Excel row | D-01g | OK | TYPE D / D; LF 29.53 / 29.526; H 18.167 / 18.17; SF 1073.0 / 1072.98; DETAIL D/A4.1 in source: True |
 | 1 annot = Excel row | D-02 | OK | TYPE D / D; LF 18.62 / 18.62; H 18.167 / 18.17; SF 676.7 / 676.66; DETAIL D/A4.1 in source: True |
 | 1 annot = Excel row | D-03 | OK | TYPE D / D; LF 5.7 / 5.7; H 18.167 / 18.17; SF 207.1 / 207.14; DETAIL D/A4.1 in source: True |
 | 1 annot = Excel row | D-04 | OK | TYPE D / D; LF 5.7 / 5.7; H 18.167 / 18.17; SF 207.1 / 207.14; DETAIL D/A4.1 in source: True |
@@ -61,8 +67,20 @@ none
 | 1 annot = Excel row | RE-1 | OK | TYPE RE / RE; LF 19.83 / 19.833; H 16.0 / 16.0; SF 0.0 / 0.0; DETAIL 2/A4.3 in source: True |
 | 1 annot = Excel row | RE-2 | OK | TYPE RE / RE; LF 19.67 / 19.667; H 16.417 / 16.42; SF 0.0 / 0.0; DETAIL 2/A4.3 in source: True |
 | 1 annot = Excel row | RE-3 | OK | TYPE RE / RE; LF 19.83 / 19.833; H 16.417 / 16.42; SF 0.0 / 0.0; DETAIL 2/A4.3 in source: True |
-| 2 /Measure = printed SCALE | D-01 (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
-| 3 Length vs LF <= 0.5 % | D-01 | OK | Length 209.10 / LF 209.10 (0.00 %) |
+| 2 /Measure = printed SCALE | D-01a (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01a | OK | Length 29.55 / LF 29.55 (0.01 %) |
+| 2 /Measure = printed SCALE | D-01b (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01b | OK | Length 30.01 / LF 30.00 (0.02 %) |
+| 2 /Measure = printed SCALE | D-01c (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01c | OK | Length 30.00 / LF 30.00 (0.01 %) |
+| 2 /Measure = printed SCALE | D-01d (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01d | OK | Length 30.00 / LF 30.00 (0.00 %) |
+| 2 /Measure = printed SCALE | D-01e (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01e | OK | Length 30.00 / LF 30.00 (0.01 %) |
+| 2 /Measure = printed SCALE | D-01f (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01f | OK | Length 30.02 / LF 30.02 (0.01 %) |
+| 2 /Measure = printed SCALE | D-01g (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
+| 3 Length vs LF <= 0.5 % | D-01g | OK | Length 29.53 / LF 29.53 (0.01 %) |
 | 2 /Measure = printed SCALE | D-02 (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
 | 3 Length vs LF <= 0.5 % | D-02 | OK | Length 18.62 / LF 18.62 (0.00 %) |
 | 2 /Measure = printed SCALE | D-03 (A1.1) | OK | annot 3/32 in = 1 ft; printed on the sheet: ['3/32'] |
@@ -138,13 +156,12 @@ none
 | 5 SUBTOTAL per block | A | OK | 15 rows |
 | 5 SUBTOTAL per block | B | OK | 3 rows |
 | 5 SUBTOTAL per block | C | OK | 2 rows |
-| 5 SUBTOTAL per block | D | OK | 4 rows |
+| 5 SUBTOTAL per block | D | OK | 10 rows |
 | 5 SUBTOTAL per block | E | OK | 3 rows |
 | 5 SUBTOTAL per block | BULKHEAD-VH | OK | 3 rows |
 | 5 SUBTOTAL per block | RE | OK | 3 rows |
 | 5 GRAND TOTAL | Partition Takeoff | OK |  |
 | 5 PROJECT DATA in Inputs | Inputs | OK |  |
-| 5 open RFI with options (A)/(B)/(C) + delta | RFI-01 | OK | RFI-01 |
 | 5 open RFI with options (A)/(B)/(C) + delta | RFI-02 | OK | RFI-02 |
 | 5 open RFI with options (A)/(B)/(C) + delta | RFI-03 | OK | RFI-03 |
 | 5 open RFI with options (A)/(B)/(C) + delta | RFI-04 | OK | RFI-04 |

@@ -3,11 +3,11 @@
 # stops at the first rc != 0. K = work dir: default W (final run on etapas/4_canon/takeoff_canon.json);
 # K=$W/dryrun for the dry run on a copy of reading A.  Usage: bash scripts/cadena.sh [from_step]
 source "$(dirname "$0")/env.sh"
-REV=${REV:-rev2}
+REV=${REV:-rev3}
 cd $K; C4=$K/etapas/4_canon; M=$K/etapas/6_markups; X=$K/etapas/8_excel/HFT_Loveland_Takeoff_FINAL_${REV}.xlsx
 F=$K/FINAL; FP="$F/Planos marcados"; mkdir -p $C4/out $M $K/etapas/7_imagenes $K/etapas/8_excel "$F/Take-off" "$FP" $F/proceso
 ORIGPDF=${ORIGPDF:-$W/plano/bidset_ORIG.pdf}
-REV=${REV:-rev2}
+REV=${REV:-rev3}
 N=0; DESDE=${1:-0}
 R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@" > $K/last.log 2>&1; rc=$?
       echo "$(TZ=America/Los_Angeles date +%H:%M) step $N rc=$rc $(basename $1) $2"
@@ -22,6 +22,7 @@ R $T/contar_tags.py $PDF A1.1@p8 A B C D E --json $K/etapas/1_inventario/contar_
 R $W/scripts/preparar.py
 R $W/scripts/disponer_tags.py
 R $W/scripts/rev2_canon.py $T
+R $W/scripts/rev3_d01_zonas.py $PDF
 R $T/../runner/evidencia.py $C4/takeoff_canon.json $PDF $K/etapas/0_mapa/SHEET_MAP.md $C4/img_runner --canon-out $C4/takeoff_canon.json --inventario $K/etapas/1_inventario/inventario.json
 R $W/scripts/evidencia_rfis.py $PDF $ORIGPDF
 R $W/scripts/formato_canon.py $T $PDF

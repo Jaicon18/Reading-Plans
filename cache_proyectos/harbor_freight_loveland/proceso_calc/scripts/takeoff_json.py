@@ -29,11 +29,18 @@ for r in c["rfis"]:
     if not o.get("C"):
         o["C"] = "____"
     rfis.append({"id": r["id"], "pregunta": f"{r['question']} - carried: {r.get('loaded') or o.get('A', {}).get('texto', '')} "
-                 "(conservative value loaded)", "delta": fmt(o), "opciones": o, "source": r.get("source") or "",
+                 "(conservative value loaded). " + str((r.get("barrido") or {}).get("swept_txt") or ""), "delta": fmt(o), "opciones": o, "source": r.get("source") or "",
                  "barrido": r.get("barrido") or {}, "img": r.get("img")})
 
 # RFIs of the two readings closed by the resolution with a printed source (resolucion.md, "Closed")
-cierre = {
+z1 = c.get("rfi01_resuelto") or {}
+cierre = {}
+if z1:
+    cierre["RFI-01"] = {"pregunta": "D-01 demising wall height under the sloped deck - RESOLVED from A1.2 / A2.0 printed B.O. deck callouts: "
+                        "D-01 split by grid bay into " + ", ".join(f"{z['id']} {z['lf']} LF @ {z['h']} ft" for z in z1["zones"])
+                        + " (stud = B.O. deck of the zone - 1\" slip gap, 10/A4.1; Type X both faces to the stud top, D/A4.1)",
+                        "delta": "0 (values per the printed callouts, applied)"}
+cierre.update({
  "A-RFI-02 / B-RFI-08": {"pregunta": "Interior door / window headers 'not called' - CLOSED by the drawings: 2/A5.1 TYP. INTERIOR DOOR HEAD DETAIL and 5/A5.1 INTERIOR WINDOW HEAD DETAIL draw the head track ('steel stud to match wall construction'): metal header 1 piece (R.O. + 1'-4\") by the header program, window 306 with sill track; D08 existing H.M. door in masonry = existing lintel",
                          "delta": "0 (value per the drawings, applied: header / box beam and sill track rows)"},
  "A-RFI-04": {"pregunta": "Receiving enclosure cold-formed framing scope - CLOSED: Div. 05 40 cold-formed metal framing is ours (estimator standing order) and S2.1 / S4.1 print the members (600S162-54 @ 16\", headers H-1 / H-2, box beams BB-1)",
@@ -44,7 +51,7 @@ cierre = {
               "delta": "0 (value per the drawings, applied)"},
  "B-RFI-07": {"pregunta": "Slip vs standard top track at type A walls - CLOSED by the drawings: A/A4.1 prints '6\" x 20 GA steel track' at the existing deck = standard top track",
               "delta": "0 (value per the drawings, applied)"},
-}
+})
 
 # Review items (rev2, back-check F2): estimator-facing sentences with N/SHEET only; floor plan by type A-Z, then details
 # in the order the floor plan calls them. Source of each: 3_revision/review_items.json + back-check rev1 (O3, O7).
@@ -54,9 +61,6 @@ RI = [
   "with the inner line drawn on both the north and east walls; loaded as type C on both walls. A: keep C-02 as type C (loaded) / "
   "B: no inner wall on the east side; delta -10.94 LF of 3-5/8\" wall, about -93 SF of board.",
   "plan crop of A1.1 Support Office 103 (C tag and the inner line on the north and east walls)"),
- ("floor_plan", "D", None, "A1.2 / A2.0",
-  "D-01 demising wall loaded at the high point 18'-2\" for its full 209'-1\" (RFI-01). A: one height for the whole wall (loaded) / "
-  "B: height zones from the A1.2 B.O. deck spot values; delta see RFI-01.", "no crop (A1.2 clearance chart, A2.0 deck spots)"),
  ("floor_plan", "DEMO", None, "D1.0 / A1.2",
   "West wall furring demolition (D1.0 keynote 209, DEMO-14) loaded all at the Sales B.O. structure 16'-9\". A: all at 16'-9\" "
   "(loaded) / B: the part in Sales Replenishment at 15'-9 1/2\"; delta = 1'-0\" less height on that part, 1 face.",

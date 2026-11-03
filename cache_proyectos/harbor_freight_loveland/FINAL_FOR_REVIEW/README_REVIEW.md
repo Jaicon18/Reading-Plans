@@ -1,4 +1,4 @@
-# ESTA ES LA VERSIÓN FINAL PARA REVISAR — Harbor Freight Tools - Loveland, CO (Marco Contractors) — rev2
+# ESTA ES LA VERSIÓN FINAL PARA REVISAR — Harbor Freight Tools - Loveland, CO (Marco Contractors) — rev3
 
 Metal framing (Div. 05 40 / 09 22) + gypsum board (Div. 09 29) take-off, incl. FRP (G.C. finish per A1.3) and demolition of gypsum board and metal framing. Bid due 11-03-2026 11:00 AM MST (10:00 AM PST) to Marco Contractors (cbarrett@marcocontractors.com) — nothing was sent to the GC.
 
@@ -27,15 +27,15 @@ Metal framing (Div. 05 40 / 09 22) + gypsum board (Div. 09 29) take-off, incl. F
 Cover / index / code data (A0.0), site (AS1.0-AS1.1), demolition plan + notes (D1.0), general notes and spec notes (A0.2, A0.3, A0.4 — no project manual in the set), floor plan (A1.1), life safety (A1.1A), fixture plan + bottom-of-structure chart (A1.2), finish plan / room finish schedule (A1.3, A1.3A), reflected ceiling plan (A2.0), exterior elevations / sections (A3.0, A3.1), enlarged RR/BR plans + interior elevations (A4.0), wall types and details (A4.1), A4.2, A4.3 (receiving enclosure sections), door schedule and details (A5.0, A5.1), vestibule / storefront (A5.2, A5.3), structural (S1.0-S4.1), MEP sweep (M1.0-M1.3, P1.0-P1.1, FP1.0, E0.1-E2.2, EMS-1..4).
 
 ## Deliverables
-- Take-off/HFT_Loveland_Takeoff_FINAL_rev2.xlsx — fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist).
-- Planos marcados/HFT_Loveland_markups_rev2.pdf — Bluebeam markups (Subject = type, Page Label = sheet, Length with /Measure at the printed scale, Depth = height, Wall Area) on A1.1, A4.0, D1.0 (demo lines) and S2.1; one PNG per marked sheet.
-- proceso/ — markups vs Excel verification (47/47 OK), demo plan vs new floor plan cross-check, blind back-check rev1 + closure rev2, delivery audit, process log.
+- Take-off/HFT_Loveland_Takeoff_FINAL_rev3.xlsx — fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist).
+- Planos marcados/HFT_Loveland_markups_rev3.pdf — Bluebeam markups (Subject = type, Page Label = sheet, Length with /Measure at the printed scale, Depth = height, Wall Area) on A1.1, A4.0, D1.0 (demo lines) and S2.1; one PNG per marked sheet.
+- proceso/ — markups vs Excel verification (53/53 OK), demo plan vs new floor plan cross-check, blind back-check rev1 + closure rev2 + rev3 directed revision (BACKCHECK_rev3.md), delivery audit, process log.
 
 ## Main quantities (NET, before waste)
 | Item | Qty |
 |---|---|
 | Walls (types A, B, C, D, E, vestibule bulkhead, receiving enclosure) | 687.69 LF |
-| 6" metal stud (20 GA + 600S162-54 enclosure) | 7,282.84 LF |
+| 6" metal stud (20 GA + 600S162-54 enclosure) | 7,252.29 LF |
 | 3-5/8" metal stud | 501.20 LF |
 | 2-1/2" metal stud | 238.00 LF |
 | Bottom track 6" / 3-5/8" / 2-1/2" | 444.17 / 54.85 / 32.04 LF |
@@ -44,9 +44,9 @@ Cover / index / code data (A0.0), site (AS1.0-AS1.1), demolition plan + notes (D
 | 1-1/2" metal hat channel, vertical furring (type E) | 1,393.75 LF |
 | Metal stud brace to structure 6" x 20 GA @ 4'-0" O.C. | 412.50 LF |
 | Trade Ready Spazzer 9200 spacing bar | 125.97 LF |
-| 1-1/2" C.R. channel bracing (walls over 12'-0") | 854.86 LF |
+| 1-1/2" C.R. channel bracing (walls over 12'-0") | 854.85 LF |
 | Header / metal stud box beam | 618.56 LF |
-| 5/8" gypsum board Type X | 8,689.62 SF |
+| 5/8" gypsum board Type X | 8,424.88 SF |
 | 5/8" gypsum board regular | 6,164.02 SF |
 | 5/8" gypsum board moisture resistant | 830.33 SF |
 | FRP panels (A1.3 WC-1, G.C. finish) | 583 SF |
@@ -55,13 +55,16 @@ Cover / index / code data (A0.0), site (AS1.0-AS1.1), demolition plan + notes (D
 | Metal trim | 106 LF |
 | Fasteners / screws / anchors / PAF | EXCLUDED (0) |
 
-## Open RFIs (5) — conservative value LOADED in every case
-- RFI-01 Demising wall D-01 height under the sloped deck: loaded high point 18.17 ft full length. (A) per-bay deck heights ≈ −380 SF Type X, −140 LF 6" stud · (B) as loaded, 0 · (C) other.
-- RFI-02 Layers of existing partitions to demolish: loaded 1 layer per face. (A) as loaded, 0 · (B) 2 layers per face, +8,693 SF demo · (C) other.
-- RFI-03 Receiving enclosure stud height / opening heads: loaded 16.0 / 16.42 ft, heads 10'-0". (A) 16'-0" all walls, ≈ −13 LF 600S162-54 · (B) as loaded, 0 · (C) other.
-- RFI-04 Vestibule bulkhead kicker length: loaded 6'-0" each. (A) 5.4 ft, −7.8 LF · (B) as loaded, 0 · (C) other.
-- RFI-05 Brace-to-structure length / spacing: loaded 50 braces x 8.25 ft @ 4'-0" O.C. (A) 45° from mid-point, −120.79 LF · (B) 5'-0" O.C., −33.0 LF · (C) other.
-8 Review Items (no quantity change unless the estimator decides): see the Review Items sheet.
+## rev3 directed revision
+RFI-01 RESOLVED from the A1.2 / A2.0 printed B.O. deck callouts. D-01 is split by grid bay into 7 height zones: D-01a 16.83 ft (±16'-11"), D-01b / D-01c 17.21 ft (±17'-3 1/2"), D-01d 17.42 ft (±17'-6"), D-01e / D-01f 17.96 ft (±18'-0 1/2"), D-01g 18.17 ft (±18'-3"). Stud = deck of the zone − 1" slip gap (10/A4.1); Type X to the stud top on both faces. The riser room walls D-02..04 are unchanged at 18.17 ft (±18'-3"). RFI-01 is in the Scope Checklist closed list.
+
+## Open RFIs (4) — conservative value LOADED in every case
+- RFI-02 Layers of existing partitions to demolish: loaded 1 layer per face. (A) as loaded, 0 · (B) 2 layers per face, +8,693 SF demo · (C) other. Specific sheets: D1.0 keynotes 207 / 209 / 211 + demo legend, A1.2.
+- RFI-03 Receiving enclosure stud height / opening heads: loaded 16.0 / 16.42 ft, heads 10'-0". (A) 16'-0" all walls, ≈ −13 LF 600S162-54 · (B) as loaded, 0 · (C) other. Specific sheets: S2.1, S4.1, 1/A4.3, 4/A4.3.
+- RFI-04 Vestibule bulkhead kicker length: loaded 6'-0" each. (A) 5.4 ft, −7.8 LF · (B) as loaded, 0 · (C) other. Specific sheets: 1/A5.3, 3/A5.3, A5.2.
+- RFI-05 Brace-to-structure length / spacing: loaded 50 braces x 8.25 ft @ 4'-0" O.C. (A) 45° from mid-point, −120.79 LF · (B) 5'-0" O.C., −33.0 LF · (C) other. Specific sheets: A1.1 wall legend note 1, 2/A4.1, A1.2.
+Swept: all 50 sheets (A0.0-A5.3, AS1.0-AS1.1, D1.0, S1.0-S4.1, M1.0-M1.3, P1.0-P1.1, FP1.0, E0.1-E2.2, EMS-1..4, incl. SHX text); terms: B.O. DECK, B.O. JOIST, T.O. STEEL, UNDERSIDE, KICKER, BRACE / BRACING, LAYER, EXISTING GYP / PARTITION / STUD / WALL, HEAD, A.F.F. (the same list is in each RFI of the Pending Items sheet).
+7 Review Items (no quantity change unless the estimator decides): see the Review Items sheet.
 
 ## Gates (all green before delivery)
-REGLAS OK (864 rules / 0 failures) · ETAPAS PASA · plantilla_excel verificar OK · alcances compuerta OK · markups vs Excel 47/47 OK (BE-117, /Measure = printed scale of each sheet) · delivery audit 121 checks / 0 failures · tool suite 61/61 · blind back-check rev1 (6 must-fix) all closed in rev2.
+REGLAS OK (864 rules / 0 failures) · ETAPAS PASA · plantilla_excel verificar OK · alcances compuerta OK · markups vs Excel 53/53 OK (BE-117, /Measure = printed scale of each sheet) · delivery audit 138 checks / 0 failures · tool suite 61/61 · blind back-check rev1 (6 must-fix) all closed in rev2; rev3 back-check annotated on the rev3 Excel (BACKCHECK_rev3.md).

@@ -23,7 +23,13 @@ D1.0 demolition elements registered to A1.1 (3/32" = 1'-0", dx +27.9 / dy -61.3 
 
 | A1.1 element | Kind | Demolished element on the same line | Status |
 |---|---|---|---|
-| D-01 | new metal wall D | - | new where nothing was demolished |
+| D-01a | new metal wall D | - | new where nothing was demolished |
+| D-01b | new metal wall D | - | new where nothing was demolished |
+| D-01c | new metal wall D | - | new where nothing was demolished |
+| D-01d | new metal wall D | - | new where nothing was demolished |
+| D-01e | new metal wall D | - | new where nothing was demolished |
+| D-01f | new metal wall D | - | new where nothing was demolished |
+| D-01g | new metal wall D | - | new where nothing was demolished |
 | D-02 | new metal wall D | DEMO-09 | replaces demolished construction |
 | D-03 | new metal wall D | - | new where nothing was demolished |
 | D-04 | new metal wall D | - | new where nothing was demolished |
