@@ -41,3 +41,12 @@ env_01KvJ1Y5fQ1msxzgKu7dToYG ("pruebas unicamente"): TAKEOFF_API_KEY, gdrive_sa_
 8. RFI en bloque (4 por ventana) y se procesan todos juntos una sola vez.
 9. Mensajes y reportes cortos; check-ins espaciados (25–60 min), sin sondeos repetidos; leer otras sesiones con filtros (kinds) y nunca volcar transcripciones completas.
 10. Medir tiempo y % semanal por proyecto vs O'Reilly ~3 h/≈4 %, VS ~5.5 h/≈6–7 %, Chuze ~8–9 h/≈13–14 %.
+
+## ESTADO AL TRASPASO (3-nov ~8:30 PM PST) — COORDINACIÓN toma TODO desde aquí
+- Skill de órdenes: .claude/skills/jc-hunter-ordenes (carga sola; hook SessionStart corre verificar_version). Skill de take-off VIGENTE: el que marca skills_archivo/INDICE.md (hoy v81cf18). Una sola línea (BE-115).
+- Entregas: SOLO Shared drives › JC HUNTER PROJECTS › Claude outputs (id 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc). La carpeta Projects › Claude outputs (1rUgu9…) es vieja: el usuario la va a renombrar "_ARCHIVO VIEJO - NO USAR"; no usarla.
+- El usuario revisa en orden hacia adelante: O'Reilly (pasada2 FINAL, revisándolo) → Victoria's Secret (rev17 FINAL) → Chuze (rev FINAL5) → Chick-fil-A #2284 (rev4; 6 RFI para presentar con botones A/B/C cuando llegue). Lo que está revisando no se toca; lo entregado = 100 % terminado (BE-117).
+- EN CURSO: Harbor Freight Tools - Loveland, CO (Marco Contractors) 11-03-26, session_01BLzQaEFLFLD6jyuTm7dNV1; bid 3-nov 10:00 AM PST (11 AM MST); meta entrega verificada antes de 2:00 AM PST. Check-in de avance cada hora (BE-118) — COORDINACIÓN debe armarlo (send_later 60 min) hasta la entrega y reportar al usuario con ruta.
+- Siguiente candidato (due más cercano): Chagee - Santa Anita Mall, Arcadia, CA (Americo Builders), bid 3-nov EOD — el usuario no lo ha aprobado aún.
+- Pendientes del usuario: renombrar carpeta vieja; autorizar push en sesión CFA (commit local BE-CF18) y respaldo en sesión O'Reilly (o dejarlos).
+- Reglas nuevas de hoy: R-ALC-05..12, BE-114..118, BE-CF16, una sola carpeta, solo versión más reciente, otros GC en Gmail, monitoreo inviolable (todas en CLAUDE.md / REGLAS_USUARIO_CLAUDE.md / ORDENES_DEL_USUARIO.md).
