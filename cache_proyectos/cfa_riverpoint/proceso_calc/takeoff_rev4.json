@@ -1,0 +1,1146 @@
+{
+ "proyecto": "Chick-fil-A #2284 River Point FSU Remodel, Sheridan, CO",
+ "bid_set": "Bid Set.pdf (172 sheets, plotted 7/22-7/27/2026, rev. 3 PDC Reduction 2/4/2026; clean copy without markups)",
+ "fecha": "2026-11-02",
+ "inputs": {
+  "waste_metal": 0.15,
+  "waste_no_metal": 0.06,
+  "sheet_w_ft": 4,
+  "sheet_l_ft": 12,
+  "stud_stock_ft": 20,
+  "track_stock_ft": 10,
+  "plan_scale_pt_per_ft": 18.0
+ },
+ "inputs_notas": {
+  "drywall_screws_per_sf": "YIELD (Gypsum Association field / perimeter screw spacing); fasteners EXCLUDED in this project.",
+  "lumber_stock_ft": "2x wood / FRT blocking: 16 ft sticks (estimator standing input; not used: wood is Div. 06 excluded).",
+  "plan_scale_pt_per_ft": "A-202 / A-221 / A-050 / A-052 1/4\" = 1'-0\" (18 pt/ft), checked on A-202 M2.1 printed 14'-2\"."
+ },
+ "type_order": [
+  "M2.1",
+  "M3.5",
+  "INFILL",
+  "W4",
+  "W4.1",
+  "W6",
+  "W8",
+  "SW6"
+ ],
+ "walls": [],
+ "materials": [],
+ "rfis": [
+  {
+   "id": "RFI-07",
+   "pregunta": "Play area west bay gyp ceiling (A-221 PT-41 C.H. 14'-6\"; existing removed by A-052 KN10): new ceiling framing is printed nowhere (S-241 C3 omits this bay). - carried: Plans: 600S162-33 @ 16\" per A2/S-241 LGS schedule loaded (29.28 LF + 1 bridging row) (conservative value loaded) - not printed: No sheet labels the new ceiling framing for the play west bay: S-241 omits the bay, A-401 draws an unlabeled 6\" member (size is scaled only), and S-201 labels only the header and PSL that border the bay. The play-structure vendor drawings are not in the set (pages 48-63 are the OMD drive-thru canopy).",
+   "delta": "(A) Plans / specs (A-221 + S-241 A2): Plans: 600S162-33 @ 16\" per A2/S-241 LGS schedule loaded (29.28 LF + 1 bridging row) - delta 0 (loaded); if existing framing re-used: -29.28 LF 6\" joist, -11.96 LF bridging | (B) Trade code (ASTM C754 / AISI S220): Ceiling framing per ASTM C754 Table 2 spans - delta n/a | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: 600S162-33 @ 16\" per A2/S-241 LGS schedule loaded (29.28 LF + 1 bridging row)",
+     "source": "A-221 + S-241 A2",
+     "delta": "0 (loaded); if existing framing re-used: -29.28 LF 6\" joist, -11.96 LF bridging"
+    },
+    "B": {
+     "texto": "Ceiling framing per ASTM C754 Table 2 spans",
+     "cita": "ASTM C754 / AISI S220",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "source": "A-221 + S-241 A2",
+   "barrido": {
+    "hojas": [
+     "A-052",
+     "A-201",
+     "A-221",
+     "A-401",
+     "A-402",
+     "A-623",
+     "A-624",
+     "A-910",
+     "S-201",
+     "S-241",
+     "S-610",
+     "S-801",
+     "OMD p48-63 (raster, canopy only)",
+     "F-201",
+     "F-701",
+     "F-702",
+     "M-201",
+     "E-201",
+     "FP2.1"
+    ],
+    "terminos": [
+     "PLAY",
+     "PT-41",
+     "14'-6",
+     "CEILING JOIST",
+     "600S",
+     "GYP",
+     "SAG",
+     "DROPPED CEILING",
+     "KN10"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'PLAY' 98, 'PT-41' 3, '14'-6' 4, 'CEILING JOIST' 16, '600S' 8, 'GYP' 117, 'SAG' 25, 'DROPPED CEILING' 7, 'KN10' 0"
+   }
+  },
+  {
+   "id": "RFI-09",
+   "pregunta": "A2/S-241 LGS schedule prints 'BRIDGING LOCATION: MID SPAN' but no bridging member (S-902 C05400 3.4.E.2 lists cold-rolled channel bridging for wall studs only). - carried: Plans: 1 row mid-span 1-1/2\" C.R. channel loaded per ceiling (50.87 LF) (conservative value loaded) - not printed: A2/S-241 LGS schedule has a 'BRIDGING LOCATION' column only. The S-241 C3 plan draws no bridging line and no member (the '*' marks are 2x4 blocking at fixtures). S-902 C05400 only covers load-bearing and exterior non-load-bearing WALL framing (1.1.A); its bridging types (3.3.I / 3.4.E: CR channel, strap + solid blocking, proprietary bars) are for wall studs. C09111 (A-909) has no joist bridging. C",
+   "delta": "(A) Plans / specs (A2/S-241 + S-902 C05400 3.4.E.2 (by analogy)): Plans: 1 row mid-span 1-1/2\" C.R. channel loaded per ceiling (50.87 LF) - delta 0 (loaded); if 600T track bridging: same LF in 6\" track | (B) Trade code (AISI S240 / S-902 C05400 3.4.E.2): Bridging / bracing of CFS joists - delta same LF | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: 1 row mid-span 1-1/2\" C.R. channel loaded per ceiling (50.87 LF)",
+     "source": "A2/S-241 + S-902 C05400 3.4.E.2 (by analogy)",
+     "delta": "0 (loaded); if 600T track bridging: same LF in 6\" track"
+    },
+    "B": {
+     "texto": "Bridging / bracing of CFS joists",
+     "cita": "AISI S240 / S-902 C05400 3.4.E.2",
+     "delta": "same LF"
+    },
+    "C": ""
+   },
+   "source": "A2/S-241 + S-902 C05400 3.4.E.2 (by analogy)",
+   "barrido": {
+    "hojas": [
+     "S-001",
+     "S-101",
+     "S-201",
+     "S-241 (A1,A2,A3,C3 plan)",
+     "S-300",
+     "S-301",
+     "S-600",
+     "S-601",
+     "S-610",
+     "S-801 (A1,A2,B1,C1,C2,C3,D1)",
+     "S-901",
+     "S-902",
+     "A-221",
+     "A-909 (C09111)",
+     "A-202"
+    ],
+    "terminos": [
+     "BRIDGING",
+     "BLOCKING",
+     "BLKG",
+     "STRAP",
+     "COLD-ROLLED",
+     "CHANNEL",
+     "CRC",
+     "CEILING JOIST",
+     "JOIST",
+     "LGS",
+     "CFS",
+     "COLD-FORMED"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'BRIDGING' 17, 'BLOCKING' 152, 'BLKG' 32, 'STRAP' 37, 'COLD-ROLLED' 6, 'CHANNEL' 34, 'CRC' 0, 'CEILING JOIST' 16, 'JOIST' 91, 'LGS' 2, 'CFS' 3, 'COLD-FORMED' 21"
+   }
+  },
+  {
+   "id": "RFI-10",
+   "pregunta": "Demolition at the KN24 cased openings (DEMO-08, -09, -10, existing east wall): the height of the wall portion removed = the opening / (3)2x12 header height, printed nowhere (A-602 shows 'OPEN TO BEYOND' without a dimension). The other demolition heights are resolved from A4/S-601, A3/S-601 and S-201. - carried: Plans: removed to the B.O. structure printed: DEMO-08 12'-2\" (16\" TJI bay), DEMO-09 / -10 16'-10 3/4\" (2x10 bay) loaded (conservative value loaded)",
+   "delta": "(A) Plans / specs (S-201 + A-050): Plans: removed to the B.O. structure printed: DEMO-08 12'-2\" (16\" TJI bay), DEMO-09 / -10 16'-10 3/4\" (2x10 bay) loaded - delta 0 (loaded); per ft of header height below the B.O. structure: -1.83 SF (DEMO-08), -4.5 SF each (DEMO-09 / -10) | (B) Trade code (n/a): Code does not decide existing heights - delta n/a | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: removed to the B.O. structure printed: DEMO-08 12'-2\" (16\" TJI bay), DEMO-09 / -10 16'-10 3/4\" (2x10 bay) loaded",
+     "source": "S-201 + A-050",
+     "delta": "0 (loaded); per ft of header height below the B.O. structure: -1.83 SF (DEMO-08), -4.5 SF each (DEMO-09 / -10)"
+    },
+    "B": {
+     "texto": "Code does not decide existing heights",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "source": "S-201 + A-050",
+   "barrido": {
+    "hojas": [
+     "A-050",
+     "A-052",
+     "A-202",
+     "A-221",
+     "A-301",
+     "A-302",
+     "A-401",
+     "A-402",
+     "A-501",
+     "A-502",
+     "A-601",
+     "A-602",
+     "A-603",
+     "A-604",
+     "S-201",
+     "S-241",
+     "S-600",
+     "S-601",
+     "S-610",
+     "S-801",
+     "M-200",
+     "M-201",
+     "M-250",
+     "P-200",
+     "P-201",
+     "E-200",
+     "E-201",
+     "E-203",
+     "K-201"
+    ],
+    "terminos": [
+     "B.O.",
+     "T.O.",
+     "T/",
+     "B/",
+     "F.V.",
+     "FIELD VERIFY",
+     "A.F.F.",
+     "MEZZANINE",
+     "TOP OF JOIST",
+     "JOIST",
+     "PSL",
+     "13'-",
+     "16'-",
+     "17'-",
+     "CASED",
+     "KNEE"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'B.O.' 395, 'T.O.' 7019, 'T/' 87, 'B/' 11, 'F.V.' 37, 'FIELD VERIFY' 14, 'A.F.F.' 23, 'MEZZANINE' 6, 'TOP OF JOIST' 2, 'JOIST' 91, 'PSL' 21, '13'-' 26, '16'-' 10, '17'-' 13, 'CASED' 11, 'KNEE' 3"
+   }
+  },
+  {
+   "id": "RFI-11",
+   "pregunta": "Dining half walls to demolish (A-050 KN8): height printed nowhere. - carried: Plans: 3'-6\" assumed (loaded) (conservative value loaded) - not printed: The set has no existing interior elevations. A-62x and A-401 show only new conditions and do not cut the half walls. F-201..F-702 show new furniture. E-200, M-200 and VC-02 show the walls in plan only. There is no specification section 02 41 19 (A-902 refers only to C02200 Demolition, see Civil). Keep the RFI. The loaded 3'-6\" is an assumption.",
+   "delta": "(A) Plans / specs (A-050 KN8): Plans: 3'-6\" assumed (loaded) - delta per 6\": +/-22.0 SF | (B) Trade code (n/a): n/a - delta n/a | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: 3'-6\" assumed (loaded)",
+     "source": "A-050 KN8",
+     "delta": "per 6\": +/-22.0 SF"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "source": "A-050 KN8",
+   "barrido": {
+    "hojas": [
+     "G-000",
+     "G-002",
+     "G-003",
+     "G-004",
+     "G-005",
+     "A-050",
+     "A-052",
+     "A-201",
+     "A-202",
+     "A-211",
+     "A-221",
+     "A-401",
+     "A-402",
+     "A-601",
+     "A-602",
+     "A-603",
+     "A-604",
+     "A-605",
+     "A-611",
+     "A-621",
+     "A-622",
+     "A-623",
+     "A-624",
+     "A-625",
+     "A-701",
+     "A-801",
+     "A-901..A-911 (specs C02000/C02200, C09250, C09310)",
+     "S-201",
+     "S-241",
+     "M-200",
+     "M-201",
+     "P-100",
+     "P-200",
+     "P-201",
+     "P-211",
+     "P-221",
+     "E-200",
+     "E-201",
+     "K-001",
+     "K-201",
+     "K-211",
+     "K-212",
+     "K-601",
+     "K-602",
+     "K-611",
+     "K-801",
+     "F-201",
+     "F-202",
+     "F-211",
+     "F-701",
+     "F-702",
+     "VC-02"
+    ],
+    "terminos": [
+     "HALF WALL",
+     "PONY",
+     "KNEE",
+     "42\"",
+     "3'-6\"",
+     "MENU",
+     "FURR",
+     "BULKHEAD",
+     "BULK HEAD",
+     "DROP",
+     "BEVERAGE",
+     "CHASE",
+     "CONDUIT",
+     "SLEEVE",
+     "PENETRAT",
+     "DRAFTSTOP",
+     "DRAFT STOP",
+     "SMOKE PARTITION",
+     "REMOVE EXISTING",
+     "WALL FINISH",
+     "CEMENT BOARD",
+     "CEMENTITIOUS",
+     "BACKER",
+     "DUROCK",
+     "TILE",
+     "SUBSTRATE",
+     "GYP",
+     "PARTIAL",
+     "LOW WALL",
+     "SELECTIVE",
+     "02 41",
+     "DEMOLITION"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'HALF WALL' 1, 'PONY' 0, 'KNEE' 3, '42\"' 24, '3'-6\"' 13, 'MENU' 33, 'FURR' 20, 'BULKHEAD' 3, 'BULK HEAD' 1, 'DROP' 42, 'BEVERAGE' 24, 'CHASE' 39, 'CONDUIT' 187, 'SLEEVE' 53, 'PENETRAT' 95, 'DRAFTSTOP' 6, 'DRAFT STOP' 2, 'SMOKE PARTITION' 2, 'REMOVE EXISTING' 23, 'WALL FINISH' 15, 'CEMENT BOARD' 16, 'CEMENTITIOUS' 61, 'BACKER' 19, 'DUROCK' 1, 'TILE' 259, 'SUBSTRATE' 65, 'GYP' 117, 'PARTIAL' 12, 'LOW WALL' 3, 'SELECTIVE' 0, '02 41' 0, 'DEMOLITION' 31"
+   }
+  },
+  {
+   "id": "RFI-12",
+   "pregunta": "Existing menuboard furr-down / bulkhead to remove (A-052 KN3 + KN7 'as required'): drop and extent printed nowhere (plan width 0.944 ft by vector). - carried: Plans: 18.87 LF x (0.944 bottom + 2.0 ft sides) = 55.56 SF loaded (conservative value loaded) - not printed: A-052 shows no existing ceiling heights. A-221 shows only the NEW condition at that wall: NEW MENU BOARD D3/A-624, C.H. 10'-0\" ACT-1 and 9'-8\" PT-31A. A-621 A1 (BULKHEAD 9'-8\"/7'-2\"), A-622 C4 (B.O. FURR DOWN 9'-8\") and A-624 D3 (bott. of gyp bd 7'-0\" AFF, bott. of menu bd 7'-2\" AFF) are all NEW work. S-241 dropped ceiling plan shows nothing at the serving area. M-200 and E-200 give no height. Do ",
+   "delta": "(A) Plans / specs (A-052 KN3/KN7): Plans: 18.87 LF x (0.944 bottom + 2.0 ft sides) = 55.56 SF loaded - delta per ft of drop: +18.87 SF per side | (B) Trade code (n/a): n/a - delta n/a | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: 18.87 LF x (0.944 bottom + 2.0 ft sides) = 55.56 SF loaded",
+     "source": "A-052 KN3/KN7",
+     "delta": "per ft of drop: +18.87 SF per side"
+    },
+    "B": {
+     "texto": "n/a",
+     "cita": "n/a",
+     "delta": "n/a"
+    },
+    "C": ""
+   },
+   "source": "A-052 KN3/KN7",
+   "barrido": {
+    "hojas": [
+     "G-000",
+     "G-002",
+     "G-003",
+     "G-004",
+     "G-005",
+     "A-050",
+     "A-052",
+     "A-201",
+     "A-202",
+     "A-211",
+     "A-221",
+     "A-401",
+     "A-402",
+     "A-601",
+     "A-602",
+     "A-603",
+     "A-604",
+     "A-605",
+     "A-611",
+     "A-621",
+     "A-622",
+     "A-623",
+     "A-624",
+     "A-625",
+     "A-701",
+     "A-801",
+     "A-901..A-911 (specs C02000/C02200, C09250, C09310)",
+     "S-201",
+     "S-241",
+     "M-200",
+     "M-201",
+     "P-100",
+     "P-200",
+     "P-201",
+     "P-211",
+     "P-221",
+     "E-200",
+     "E-201",
+     "K-001",
+     "K-201",
+     "K-211",
+     "K-212",
+     "K-601",
+     "K-602",
+     "K-611",
+     "K-801",
+     "F-201",
+     "F-202",
+     "F-211",
+     "F-701",
+     "F-702",
+     "VC-02"
+    ],
+    "terminos": [
+     "HALF WALL",
+     "PONY",
+     "KNEE",
+     "42\"",
+     "3'-6\"",
+     "MENU",
+     "FURR",
+     "BULKHEAD",
+     "BULK HEAD",
+     "DROP",
+     "BEVERAGE",
+     "CHASE",
+     "CONDUIT",
+     "SLEEVE",
+     "PENETRAT",
+     "DRAFTSTOP",
+     "DRAFT STOP",
+     "SMOKE PARTITION",
+     "REMOVE EXISTING",
+     "WALL FINISH",
+     "CEMENT BOARD",
+     "CEMENTITIOUS",
+     "BACKER",
+     "DUROCK",
+     "TILE",
+     "SUBSTRATE",
+     "GYP",
+     "PARTIAL",
+     "LOW WALL",
+     "SELECTIVE",
+     "02 41",
+     "DEMOLITION"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'HALF WALL' 1, 'PONY' 0, 'KNEE' 3, '42\"' 24, '3'-6\"' 13, 'MENU' 33, 'FURR' 20, 'BULKHEAD' 3, 'BULK HEAD' 1, 'DROP' 42, 'BEVERAGE' 24, 'CHASE' 39, 'CONDUIT' 187, 'SLEEVE' 53, 'PENETRAT' 95, 'DRAFTSTOP' 6, 'DRAFT STOP' 2, 'SMOKE PARTITION' 2, 'REMOVE EXISTING' 23, 'WALL FINISH' 15, 'CEMENT BOARD' 16, 'CEMENTITIOUS' 61, 'BACKER' 19, 'DUROCK' 1, 'TILE' 259, 'SUBSTRATE' 65, 'GYP' 117, 'PARTIAL' 12, 'LOW WALL' 3, 'SELECTIVE' 0, '02 41' 0, 'DEMOLITION' 31"
+   }
+  },
+  {
+   "id": "RFI-20",
+   "pregunta": "A-052 general note 9: patch the existing draftstop wall between kitchen and service at the 4 new 6\" beverage chases (P-211, K-611): the patch size around each chase is printed nowhere. - carried: Plans: 4 chases x 2'-0\" x 2'-0\" patch x 2 faces = 32 SF of 1/2\" gypsum board loaded (conservative value loaded) - not printed: Only the patch dimension is not printed. A-221 does not graphically locate the draftstop line at this wall (the heavy dashed line in the legend was not found in the plan vectors), and no sheet gives a patch size. Loaded: 4 chases (P-211, 4 x 6\" dia beverage conduits) x 2'-0\" x 2'-0\" x 2 faces = 32 SF. The patch area per chase is still an RFI.",
+   "delta": "(A) Plans / specs (A-052 note 9 + P-211): Plans: 4 chases x 2'-0\" x 2'-0\" patch x 2 faces = 32 SF of 1/2\" gypsum board loaded - delta 0 (loaded); per 6\" of patch side: about +/- 7 SF over the 4 chases; if the draftstop board is 5/8\" Type X: same SF in 5/8\" Type X | (B) Trade code (IBC 718.3 / ASTM C840): Draftstop penetrations restored with the same construction - delta same | (C) Other: ____",
+   "opciones": {
+    "A": {
+     "texto": "Plans: 4 chases x 2'-0\" x 2'-0\" patch x 2 faces = 32 SF of 1/2\" gypsum board loaded",
+     "source": "A-052 note 9 + P-211",
+     "delta": "0 (loaded); per 6\" of patch side: about +/- 7 SF over the 4 chases; if the draftstop board is 5/8\" Type X: same SF in 5/8\" Type X"
+    },
+    "B": {
+     "texto": "Draftstop penetrations restored with the same construction",
+     "cita": "IBC 718.3 / ASTM C840",
+     "delta": "same"
+    },
+    "C": ""
+   },
+   "source": "A-052, P-211",
+   "barrido": {
+    "hojas": [
+     "G-000",
+     "G-002",
+     "G-003",
+     "G-004",
+     "G-005",
+     "A-050",
+     "A-052",
+     "A-201",
+     "A-202",
+     "A-211",
+     "A-221",
+     "A-401",
+     "A-402",
+     "A-601",
+     "A-602",
+     "A-603",
+     "A-604",
+     "A-605",
+     "A-611",
+     "A-621",
+     "A-622",
+     "A-623",
+     "A-624",
+     "A-625",
+     "A-701",
+     "A-801",
+     "A-901..A-911 (specs C02000/C02200, C09250, C09310)",
+     "S-201",
+     "S-241",
+     "M-200",
+     "M-201",
+     "P-100",
+     "P-200",
+     "P-201",
+     "P-211",
+     "P-221",
+     "E-200",
+     "E-201",
+     "K-001",
+     "K-201",
+     "K-211",
+     "K-212",
+     "K-601",
+     "K-602",
+     "K-611",
+     "K-801",
+     "F-201",
+     "F-202",
+     "F-211",
+     "F-701",
+     "F-702",
+     "VC-02"
+    ],
+    "terminos": [
+     "HALF WALL",
+     "PONY",
+     "KNEE",
+     "42\"",
+     "3'-6\"",
+     "MENU",
+     "FURR",
+     "BULKHEAD",
+     "BULK HEAD",
+     "DROP",
+     "BEVERAGE",
+     "CHASE",
+     "CONDUIT",
+     "SLEEVE",
+     "PENETRAT",
+     "DRAFTSTOP",
+     "DRAFT STOP",
+     "SMOKE PARTITION",
+     "REMOVE EXISTING",
+     "WALL FINISH",
+     "CEMENT BOARD",
+     "CEMENTITIOUS",
+     "BACKER",
+     "DUROCK",
+     "TILE",
+     "SUBSTRATE",
+     "GYP",
+     "PARTIAL",
+     "LOW WALL",
+     "SELECTIVE",
+     "02 41",
+     "DEMOLITION"
+    ],
+    "grep": "full text of the 172-page set (text layer + SHX annotations): 'HALF WALL' 1, 'PONY' 0, 'KNEE' 3, '42\"' 24, '3'-6\"' 13, 'MENU' 33, 'FURR' 20, 'BULKHEAD' 3, 'BULK HEAD' 1, 'DROP' 42, 'BEVERAGE' 24, 'CHASE' 39, 'CONDUIT' 187, 'SLEEVE' 53, 'PENETRAT' 95, 'DRAFTSTOP' 6, 'DRAFT STOP' 2, 'SMOKE PARTITION' 2, 'REMOVE EXISTING' 23, 'WALL FINISH' 15, 'CEMENT BOARD' 16, 'CEMENTITIOUS' 61, 'BACKER' 19, 'DUROCK' 1, 'TILE' 259, 'SUBSTRATE' 65, 'GYP' 117, 'PARTIAL' 12, 'LOW WALL' 3, 'SELECTIVE' 0, '02 41' 0, 'DEMOLITION' 31"
+   }
+  }
+ ],
+ "rfi_cierre": {
+  "RFI-01": {
+   "pregunta": "M3.5 at hoods #2/#3: A-202 WALL TYPE SCHEDULE prints 3-5/8\" metal studs sistered to existing framing; A2/A-605 (cut at the same walls on A-201) prints '8\" METAL STUD WALL'. NOTE: loaded 8\" per the detail at the location; investigate A-202 schedule M3.5 vs A2/A-605. - CLOSED: estimator decision (option A): Plans: 8\" metal studs per A2/A-605 at M3.5-01/-02 (loaded)",
+   "delta": "0 (loaded); alternative 3-5/8\": same 10.9 LF wall moves from 8\" to 3-5/8\" family (computed by program)"
+  },
+  "RFI-02": {
+   "pregunta": "RESOLVED from drawings (DERIVED): 16\" O.C. (M3.5 studs sistered 1:1 to the existing studs, which are 2x6 @ 16\" O.C.) - M3.5/A-202 (wall type schedule) + D.1/A-202 + note 4/S-101 (A1 Foundation Notes) + D1/S-601",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-03": {
+   "pregunta": "Kitchen cement board base: A-050 KN16 '1/2\" DURA ROCK floor to 18\" A.F.F. typical in kitchen' vs A-201 KN16 / A-622 note / H.1 / G.3 'min 12\"'. NOTE: loaded 18\" on kitchen and drive-thru faces, 12\" (G.3) on non-kitchen BOH faces; investigate A-050 KN16 vs A-201 KN16. - CLOSED: estimator decision (option A): Plans: 18\" per A-050 KN16 on kitchen faces (loaded)",
+   "delta": "0 (loaded); 12\" alternative: -0.5 ft x 149.0 LF kitchen / drive-thru faces = -74.5 SF cement board"
+  },
+  "RFI-04": {
+   "pregunta": "RESOLVED from drawings (CONFIRMED): Underside of roof deck at the smoke partition line = T.O. joist/truss +14'-8\" (S-201 prints (+14'-8\") at both ends of the line: drive-thru 'TOP OF JOIST' and north end; S-201 note 1: (+XX'-X\") = top of joist or truss = bearing of the roof sheathing). The west leg of the line runs under the existing 7\"x24\" PSL beam, T.O.B. 14'-4 1/2\" (S-201), so B.O. beam = 14'-4 1/2\" - 2'-0\" = 12'-4 1/2\" (DERIVED). Smoke partition framing: from finish ceiling (Serving / Drive-thru C.H. 10'-2\") to the deck at 14'-8\". Check: A-401 D4 scaled at the serving/kitchen wall shows the deck at about 14'-6\" and the bottom chord at about 13'-0\". - S-201 C4 (+14'-8\") x2 + note 1; 7\"x24\" PSL (14'-4 1/2\") TOP OF BM. EL.; A-221 note A.11; A-202 note C.2; A-401 D4 (scale check)",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-05": {
+   "pregunta": "Wainscot locations: A-202 note G.13 + C2/A-625 print 1/2\" plywood behind WD-3 wainscot to 6'-5\"; A-622 note A.6 prints 5\" cementitious board then gypsum board to ceiling. NOTE: loaded A.6 (gyp from 5\" to ceiling) on new walls; existing dining walls keep their board (A-050 KN10 'remove existing wall finishes and prepare for new'). - CLOSED: estimator decision (option A): Plans: A-622 note A.6 gyp to ceiling on new W-wall dining faces (loaded); none on existing walls per KN10",
+   "delta": "0 (loaded); new gyp on existing dining walls would add +2322 SF 1/2\" gyp"
+  },
+  "RFI-06": {
+   "pregunta": "RESOLVED from drawings (DERIVED): Finish ceiling at the walk-ins = C.H. 10'-2\" (adjacent ACT grid that the KN2 closure panels meet). Gyp top per G.11 = 10'-2\" + 6\" = 10'-8\" AFF. The walk-in box height itself is not printed. - G.11/A-202 + KN2/A-221 + C.H. 10'-2\"/A-221 (Service, Kitchen)",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-08": {
+   "pregunta": "Dropped gyp ceilings (S-241 C3): A2/S-241 prints a WOOD and an LGS ceiling joist schedule; A3/S-241 prints '2X RIM JOIST (TO MATCH C.J.)'. NOTE: loaded LGS 600S162-33 @ 16\" (standing order metal-or-wood -> metal) and 6\" rim track matching the joist; investigate A2/A3 S-241. - CLOSED: estimator decision (option A): Plans: LGS joists 304.5 LF + 6\" rim track 143.2 LF loaded",
+   "delta": "0 (loaded); wood alternative = Div. 06, all ceiling framing -304.5 LF joist -143.2 LF track"
+  },
+  "RFI-13": {
+   "pregunta": "RESOLVED from drawings (CONFIRMED): Box width L = 24\" (double pin & sleeve at hoods H-2 and H-3); face plate 25-1/2\"; box depth 7-1/2\" (8-5/8\" with flange); box 46\" tall + 14\" J-box above (60\" total) - PIN & SLEEVE BOX DETAIL / MH-102 (Halton U24-805-02): table H-2 = 24\" DOUBLE, H-3 = 24\" DOUBLE; 'L = 24\" FOR DOUBLE PIN AND SLEEVE'. Also MH-101 H-2/H-3 notes 'DOUBLE RECEPTACLE PIN & SLEEVE'. A2/A-605 points to it ('RE: ELECTRICAL').",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-14": {
+   "pregunta": "RESOLVED from drawings (CONFIRMED): New roof hatch = 2'-6\" x 3'-0\" (A-230 roof plan legend: '2'-6\" X 3'-0\" ROOF HATCH. BILCO OR EQUAL'; A-230 KN3 'NEW ROOF HATCH RE A1/A604'; spec C07740 Bilco Type S-50-TB; A1/A-604 prints the 3'-0\" side). Shaft: A1/A-604 framed wall 24\" below finish ceiling, all sides, height 'VARIES - COORDINATE WITH ROOF DECK HEIGHT'. Hatch is in the existing 16\" TJI/L65 @32\" bay with T.O. joist (+13'-6\") (S-201, B4/S-610 LVL headers); room = MULTI-PURPOSE, C.H. 10'-2\" (A-221 KN8). Shaft from 10'-2\" - 2'-0\" = 8'-2\" up to the deck at 13'-6\" = 5'-4\" (DERIVED). Shaft = 2'-6\" x 3'-0\" opening x 5'-4\". - A-230 legend + KN3 (2'-6\" x 3'-0\"); A-906 C07740 (S-50-TB); A1/A-604; S-201 (+13'-6\") + B4/S-610; A-221 KN8 + C.H. 10'-2\". Shaft height DERIVED: 13'-6\" - (10'-2\" - 2'-0\") = 5'-4\"",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-15": {
+   "pregunta": "RESOLVED from drawings (DERIVED): Soffits PT-31A bottom = C.H. 9'-8\" (A-221, x2). C4/A-624: 3-5/8\" metal stud framing @16\" O.C. hung from 'ROOF JOISTS - RE: STRUCTURAL'; C3/S-801: 362T125-54 stud runner / strongback screwed to the underside of each joist/truss. The structure over the dining soffits = existing 24\" TJS open-web trusses @32\" O.C. next to the 7\"x24\" PSL beam with T.O.B. 14'-4 1/2\" (S-201); T.O. joist +14'-8\" (S-201). B.O. structure = 14'-8\" - 2'-0\" = 12'-8\" (at the PSL: 14'-4 1/2\" - 2'-0\" = 12'-4 1/2\"). Hanger stud height = 12'-8\" - 9'-8\" = 3'-0\" (2'-8 1/2\" at the PSL). The stud height as a single dimension is not printed; it is derived from printed elevations. - S-201 C4 (24\" TJS trusses, 7\"x24\" PSL (14'-4 1/2\"), (+14'-8\")); A-221 PT-31A C.H. 9'-8\"; C4/A-624; C3/S-801. Operation: 14'-8\" - 24\" - 9'-8\" = 3'-0\"",
+   "delta": "0 (value per the drawings, applied)"
+  },
+  "RFI-16": {
+   "pregunta": "Wall material W4, W4.1, W6, W8, SW6: A-201 legend fill 'METAL STUD WALL' (grey) on these walls vs A-202 WALL TYPE SCHEDULE '2x4/2x6/2x8 WD STUD' and S-101 note 4 'ALL PERIMETER AND SHEAR WALLS ARE 2x6 SYP @ 16\" O.C.'. NOTE: loaded as wood (framing excluded, board ours); investigate A-201 legend vs A-202 schedule / S-101 note 4. - CLOSED: estimator decision (option A): Plans: wood per A-202 schedule + S-101 note 4 (as loaded; board-only entries)",
+   "delta": "0 (loaded as wood, board-only); metal alternative: computed by program (the take-off calculation program re-run on a copy of the reconciled take-off data with the new interior W4 / W4.1 / W6 / W8 walls as metal studs @ 16\" O.C., A-202 schedule W4 / W4.1 / W6 '2x4 WD STUD' -> 3-5/8\", W8 '2x8 WD STUD' -> 8\"; SW6 exterior and existing walls not included; height 10'-8\" = C.1/A-202 + C.H. 10'-2\"): wall LF 141.25 (W4 3.39, W4.1 9.08, W6 111.97, W8 16.81) -> +1344.04 LF 3-5/8\" studs, +170.68 LF 8\" studs, +124.44 LF bottom + 124.44 LF top 3-5/8\" track, +16.81 LF bottom + 16.81 LF top 8\" track, +0.00 LF bracing C.R. channel (C09111 3.2.C @ 48\"); board unchanged"
+  },
+  "RFI-17": {
+   "pregunta": "Untagged new infill MB-01 at the removed Eliason door (A-050 KN1): D3/A-624 prints '2X6 WOOD FRAMING OR 6\" METAL FRAMING AT 16\" O.C.'; NOTE: loaded 6\" metal (metal-or-wood standing order); investigate D3/A-624 vs C2/S-801 '362S162-33'. - CLOSED: estimator decision (option A): Plans: 6\" metal studs @ 16\" per D3/A-624 (loaded)",
+   "delta": "0 (loaded); 3-5/8\" alternative (C2/S-801 362S162-33): the same MB-01 studs and 2 x 3.33 LF track move from the 6\" to the 3-5/8\" family; 2x6 wood alternative: framing Div. 06 (excluded), board unchanged"
+  },
+  "RFI-18": {
+   "pregunta": "Stud / joist / track gauge: S-801 and S-241 print 362S162-33 / 600S162-33 / 33 mil track (0.0346 in) while S-902 C05000-C 2.5.A.1 requires min. base-metal thickness 0.0538 in. NOTE: loaded the plans (33 mil); investigate S-902 C05000-C 2.5.A.1 vs S-801 / S-241. - CLOSED: estimator decision (option A): Plans: 33 mil members as printed on S-801 / S-241 (loaded)",
+   "delta": "0 (loaded); 54 mil alternative: same LF of every 33 mil stud / joist / track of the Material Summary in 0.0538 in (heavier gauge, price change only)"
+  },
+  "RFI-21": {
+   "pregunta": "Restroom gypsum faces above the tile: A-202 notes G.1 / H.3 print 1/2\" gypsum board; C09250 2.2.A.2 (A-909) calls the water-resistant backing board with a 5/8\" Type X core. NOTE: loaded 1/2\" water-resistant (plan thickness, spec product); investigate A-202 G.1 / H.3 vs C09250 2.2.A.2. - CLOSED: estimator decision (option A): Plans: 1/2\" moisture-resistant gypsum board 148.02 SF (loaded)",
+   "delta": "0 (loaded); spec alternative: same 148.02 SF as 5/8\" Type X W.R. (C09250 2.2.A.2)"
+  },
+  "RFI-19": {
+   "pregunta": "RESOLVED from drawings (CONFIRMED): The existing gypsum board is removed and the new 1/2\" cement board is fastened directly to the studs. The cement board does NOT go over the existing board. Detail A2/A-604 'TILE TO GYP TRANSITION AT RESTROOM' shows one layer in one plane: CEMENT BOARD below the 'CEMENT/GYP. TRANSITION' line and GYPSUM BOARD above it, with the transition 2 1/4\" (+/-) below T/TILE AT RR. A-202 note G.2 says 'BETWEEN WALL TILE AND STUDS: 1/2\" CEMENTITIOUS BACKER BOARD'. A-050 KN10 at the Men's and Women's restrooms says 'REMOVE EXISTING WALL FINISHES AND PREPARE FOR NEW'. A-611 note 3 says 'CEMENTITIOUS BOARD TO STOP - RE: DETAIL'. A-601..A-603 and A-621/A-622 note A.5 say 'PROVIDE CEMENTITIOUS BOARD SUBSTRATE FOR THE FULL HEIGHT OF TILE AT ALL WALLS WITH WALL TILE'. - A2/A-604 + G.2/A-202 + KN10/A-050 (+ note 3/A-611)",
+   "delta": "0 (value per the drawings, applied)"
+  }
+ },
+ "revisar": [
+  {
+   "fase": "floor_plan",
+   "punto": "Demolition heights: RESOLVED from drawings for DEMO-04 12'-3\" and DEMO-13 12'-11 3/4\" (A4/S-601); DEMO-08 / -09 / -10 KN24 cased openings: opening / header height still open (RFI-10), loaded to the B.O. structure 12'-2\" / 16'-10 3/4\": A 12'-4\" (kitchen bay) on all / B ceiling height; delta per element in CAMBIOS_rev4; source S-201 (RFI-10)",
+   "hoja_detalle": "S-201 / A-050",
+   "imagen": "resolution crop 4 (review folder)",
+   "type": "DEMO",
+   "n": 1,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "Existing east-room gyp ceiling demo DEMO-C6 [PENDING]: A 38.35 SF / B 35.39 SF; delta 2.96 SF; source A-052 KN10 vectors differ",
+   "hoja_detalle": "A-052 KN10",
+   "imagen": "resolution crop 5 (review folder)",
+   "type": "DEMO",
+   "n": 2,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "DEMO-13 office / walk-in partition (red dashed): demolished from the floor to T/new LVL 12'-11 3/4\" (A4/S-601), wall above stays: A 0 / B 11.106 LF; delta 288.29 SF loaded; source A-050 red dashed wall x 2110.8 (KN22/KN23 area)",
+   "hoja_detalle": "A-050",
+   "imagen": "resolution crop 8 (review folder)",
+   "type": "DEMO",
+   "n": 3,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "MB-01 metal infill at removed Eliason door: loaded 6\" metal @ 16\" per D3/A-624 (RFI-17 closed): A 6\" metal (D3/A-624) / B 0 (not loaded); delta 3-5/8\" alternative (C2/S-801): MB-01 studs + track move from 6\" to 3-5/8\"; wood: framing Div. 06; source A-202 heavy new outline 617-677 pt; A-050 KN1; C2/S-801 (RFI-17)",
+   "hoja_detalle": "A-202 / A-050 KN1 / C2/S-801",
+   "imagen": "resolution crop 1 (review folder)",
+   "type": "INFILL",
+   "n": 4,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "tag mop chase cement board height behind stainless S-1 [PENDING]: A 2.37 x 10.167 ft (24.1 SF) / B 2.42 x 1.5 x 2 (7.3 SF); delta 16.8 SF; source A-201 KN25 + G.7/A-202; E3/A-604 height not checked",
+   "hoja_detalle": "A-201 KN25 / G.7/A-202",
+   "imagen": "resolution crop 6 (review folder)",
+   "type": "W6",
+   "n": 5,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "M3.5 stud size: loaded 8\" per A2/A-605 (A-202 schedule prints 3-5/8\" sistered): A 8\" (as loaded) / B 3-5/8\" + RFI; delta 145.34 LF of M3.5 studs (M3.5-01 102.67 + M3.5-02 42.67, Material Summary 8\" stud row) move 8\" -> 3-5/8\" family (recess studs PS-RECESS-S1/S2 42.67 LF are listed separately); source A2/A-605 bubbled at M3.5 on A-201 (RFI-01 closed option A)",
+   "hoja_detalle": "A2/A-605",
+   "imagen": "resolution crop 7 (review folder)",
+   "orden_plano": 1,
+   "n": 6,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "Roof hatch shaft: RESOLVED from drawings - hatch 2'-6\" x 3'-0\" (A-230 legend + KN3, C07740 / A-906), shaft 5'-4\" (S-201 +13'-6\" - 8'-2\"): A 48 LF stud (assumed 3'-0\" x 3'-0\" x 4'-0\") / B 0; delta now: 10 studs x 5'-4\" = 53.33 LF + 11 LF runner + 11 LF slotted track; source A1/A-604 + A-221 KN8 (RFI-14)",
+   "hoja_detalle": "A1/A-604",
+   "imagen": "resolution crop 3 (review folder)",
+   "orden_plano": 2,
+   "n": 7,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "Play-bay gyp ceiling framing (6\" joists + bridging) [PENDING]: A 29.28 LF 6\" joist / B 0; delta -29.28 LF 6\" joist, -11.96 LF bridging if existing framing re-used; source A-221 PT-41 C.H.14'-6\"; A-052 KN10; S-241 omits bay (RFI-07)",
+   "hoja_detalle": "A2/S-241",
+   "imagen": "resolution crop 2 (review folder)",
+   "orden_plano": 3,
+   "n": 8,
+   "total": 8
+  }
+ ],
+ "alcances": [
+  {
+   "id": "ALC-01",
+   "nombre": "Interior partition framing (studs + tracks)",
+   "estado": "CUANTIFICADO",
+   "nota": "Metal types M2.1 (2\" Z channel @ 24\", A-202 / A1/A-605) and M3.5 (8\" studs at hoods #2 / #3 per A2/A-605, RFI-01 closed) + menu board infill MB-01 6\" @ 16\" (D3/A-624, RFI-17 closed); C09111 2.3 / A-909; gauge per plans 33 mil (RFI-18 closed). Studs, bottom and top track by size in the Material Summary."
+  },
+  {
+   "id": "ALC-02",
+   "nombre": "Exterior wall framing (CFMF)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - wood framing (Div. 06): SW6 exterior walls are 2x6 SYP @ 16\" (A-202 exterior wall type schedule, S-101 note 4); their interior gypsum / cement board is in the BOARD ONLY block."
+  },
+  {
+   "id": "ALC-03",
+   "nombre": "Parapet framing",
+   "estado": "NO APLICA",
+   "nota": "Parapets are wood-framed / existing (A-301, A-302, A-402, S-201): no metal parapet framing in the set."
+  },
+  {
+   "id": "ALC-04",
+   "nombre": "Top / deflection and bottom track",
+   "estado": "CUANTIFICADO",
+   "nota": "Bottom and top track by stud size: 8\" at M3.5 (A2/A-605) and 6\" at the menu board infill MB-01 (D3/A-624), fixed 33 mil top track with braces per D1/S-801 at M3.5-02; 3\" long-leg slotted continuous track per C1/S-801 where the studs reach the roof framing (M3.5-01 / MB-01 on the smoke partition to the deck +14'-8\", RFI-04 resolved; roof hatch shaft) in their own rows; M2.1 Z channel has no runner (A1/A-605); ceiling / soffit track 3-5/8\", 6\" rim track (A3/S-241), strongback 362T125-54 (C3/S-801) in their own rows."
+  },
+  {
+   "id": "ALC-05",
+   "nombre": "Headers, sills and jambs at openings",
+   "estado": "CUANTIFICADO",
+   "nota": "No door / window opening in our metal walls (A-202, A-801); 8\" runner (sill / head) at the A2/A-605 pin & sleeve recess loaded as sill track (24\" box per MH-102, RFI-13 resolved from drawings)."
+  },
+  {
+   "id": "ALC-06",
+   "nombre": "Bracing / bridging",
+   "estado": "CUANTIFICADO",
+   "nota": "Wall braces 362S162-33 @ 48\" per the D1/S-801 METAL STUD BRACE SCHEDULE + 54 mil bent plates at the M3.5-02 braces (M3.5-01 / MB-01 reach the deck, C1/S-801) (A-202 note C.4, C2/S-801); soffit cross braces 362S162-33 @ 32\" (C4/A-624, C3/S-801); ceiling bridging: 1 row mid-span C.R. channel per dropped ceiling (A2/S-241, RFI-09). No C.R. channel on the furring / sistered walls (none drawn)."
+  },
+  {
+   "id": "ALC-07",
+   "nombre": "Gypsum board on walls (layers per type)",
+   "estado": "CUANTIFICADO",
+   "nota": "1/2\" gypsum board and 1/2\" cement board per face (A-202 notes G.1-G.13 / H.1-H.3, A-211, A-60x / A-611 / A-62x; C09250 2.1.B / 2.2.B, A-909) on metal walls and board-only W / existing walls."
+  },
+  {
+   "id": "ALC-08",
+   "nombre": "Moisture / abuse / special board at wet zones",
+   "estado": "CUANTIFICADO",
+   "nota": "C09250 2.2.A (A-909) water-resistant gypsum backing board at toilets / sinks: restroom gypsum faces above the tile (A-611) loaded as 1/2\" moisture-resistant board (plan thickness, A-202 notes G.1 / H.3); spec 2.2.A.2 5/8\" Type X core = RFI-21 closed, option A (same SF); tile / FRP / stainless substrates are 1/2\" cement board (A-202 notes G.2-G.7)."
+  },
+  {
+   "id": "ALC-09",
+   "nombre": "Exterior gypsum / glass mat sheathing",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - SW6 exterior structural sheathing is wood (E.1/A-202, S-600): Div. 06; no glass mat / exterior gypsum sheathing on A-202, A-30x, A-40x, A-50x."
+  },
+  {
+   "id": "ALC-10",
+   "nombre": "FRT plywood sheathing / substrate",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - wood framing / blocking (Div. 06): 1/2\" and 3/4\" CDX / plywood G.3, G.9, G.10, G.12, G.13 (A-202), A-625 wainscot plywood, A1/A-604 hatch plywood, D-Blaze FRT blocking at the hood (A-501)."
+  },
+  {
+   "id": "ALC-11",
+   "nombre": "Gypsum board ceilings",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" gyp ceilings Entry A / Entry B / Men's / Women's / play bay (A-221 + S-241, C09250 2.1.E / A-909) and 1/2\" gyp soffit bottoms (C4/A-624)."
+  },
+  {
+   "id": "ALC-12",
+   "nombre": "Ceiling suspension (furring / carrying channel / hanger wire / ceiling track)",
+   "estado": "NO APLICA",
+   "nota": "No suspended gypsum ceiling: the new gyp ceilings are framed wall to wall with 600S162-33 joists @ 16\" (A2/S-241, RFI-08 closed) - 6\" joist + 6\" rim track rows; hung systems of C09111 3.2.B do not apply; ACT grid EXCLUDED (A-221)."
+  },
+  {
+   "id": "ALC-13",
+   "nombre": "Soffits and bulkheads (framing + board)",
+   "estado": "CUANTIFICADO",
+   "nota": "Serving and gathering-table soffits PT-31A C.H. 9'-8\" (A-221, C4/A-624 3-5/8\" @ 16\", C3/S-801 strongback 362T125-54 @ 48\"); hanger studs 3'-0\" (RFI-15 resolved from drawings, S-201 / C4/A-624)."
+  },
+  {
+   "id": "ALC-14",
+   "nombre": "Canopy / marquee framing and sheathing",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - not in scope (estimator standing order, no RFI): prefabricated metal order-point / meal-delivery canopies and awnings (A-104, A-105, OMD vendor sheets p48-63, A-221 KN10 / KN11)."
+  },
+  {
+   "id": "ALC-15",
+   "nombre": "Column furring / wraps",
+   "estado": "NO APLICA",
+   "nota": "No column wrap in our scope on A-201 / A-202 / A-221 (wood-framed existing building, S-201)."
+  },
+  {
+   "id": "ALC-16",
+   "nombre": "Blocking (FRT wood / metal) for millwork and accessories",
+   "estado": "CUANTIFICADO",
+   "nota": "Metal blocking at hood wall brackets (A2/S-801) and menu board 33 mil blocking T&B = 2 rows (C2/S-801); wood blocking F.1/A-202, S-241 2x4, A4/A-624, A-602 shelving, A1/A-604 ladder = Div. 06 EXCLUDED."
+  },
+  {
+   "id": "ALC-17",
+   "nombre": "Framed openings (MEP, access panels, diffusers)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - not in scope (estimator standing order, no RFI): framed openings for ducts / air devices; 6\" D1 downlights fit the 16\" joist module (A-221 legend); no access panel on A-221 / C08306 (A-907) for our ceilings; MEP sweep 0 crossings of the metal walls."
+  },
+  {
+   "id": "ALC-18",
+   "nombre": "Trim: corner bead, casing bead, control joints, reveals",
+   "estado": "CUANTIFICADO",
+   "nota": "Corner bead at all soffit gypsum intersections (C4/A-624); LC / J-bead at the exposed gypsum edge of the menu board wall (D3/A-624) and J trim on top of the play area cement board base (A2/A-624); no control joint / reveal printed for our board."
+  },
+  {
+   "id": "ALC-19",
+   "nombre": "Acoustical sealant / sound attenuation",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED in all projects (estimator standing order); insulation / batts B.1-B.5/A-202 and mineral wool A1/A-605 EXCLUDED."
+  },
+  {
+   "id": "ALC-20",
+   "nombre": "FRP / cement board / tile backer",
+   "estado": "CUANTIFICADO",
+   "nota": "1/2\" cement board (DUROCK, C09250 2.2.B / A-909) behind tile, FRP, stainless and at bases, with alkali-resistant mesh tape + setting-type compound at its joints (C09250 2.4.B.2 / 2.4.D.2 / 3.5.E); FRP panels, Composeal / Kerdi membrane and tile themselves EXCLUDED (other trades)."
+  },
+  {
+   "id": "ALC-21",
+   "nombre": "Shaft walls / area separation walls",
+   "estado": "NO APLICA",
+   "nota": "No shaft wall / area separation wall in the set (A-202 schedules); roof hatch shaft framing A1/A-604 counted as 3-5/8\" stud + runner + slotted track: hatch 2'-6\" x 3'-0\", shaft 5'-4\" (RFI-14 resolved from drawings)."
+  },
+  {
+   "id": "ALC-22",
+   "nombre": "Rated assemblies (UL designs) and their board type",
+   "estado": "NO APLICA",
+   "nota": "Type VB, sprinklered (G-003): no UL rated partition or Type X board printed on A-202 / A-221 / A-907 / A-908 for our scope."
+  },
+  {
+   "id": "ALC-23",
+   "nombre": "Special panels (ballistic, lead-lined, abuse)",
+   "estado": "NO APLICA",
+   "nota": "None in the set (A-202, A-211, A-90x)."
+  },
+  {
+   "id": "ALC-24",
+   "nombre": "Finish level (Level 4 / Level 5)",
+   "estado": "CUANTIFICADO",
+   "nota": "Level 4 dining (A.4/A-211), Level 3 at tile / FRP substrate (C09250 3.5.D / A-909), Level 1 cooler (G.11/A-202), Level 5 play area WC-1 (A-050 KN12, A-211) as its own row; compound and tape by yield."
+  },
+  {
+   "id": "ALC-E01",
+   "nombre": "Wood framing / blocking / plywood / CDX / sheathing (Div. 06)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - wood framing / blocking (Div. 06), not in scope: W4, W4.1, W6, W8 interior wood stud walls (A-202 interior wall type schedule '2x4 / 2x8 WD STUD') and SW6 2x6 exterior walls (A-202 exterior schedule + S-101 note 4 'all perimeter and shear walls are 2x6 SYP @ 16\" O.C.'); wood blocking, 1/2\" / 3/4\" CDX plywood, SW6 structural sheathing; only their interior gypsum / cement board is ours (BOARD ONLY block). Metal alternative of the interior W walls: RFI-16 (closed, delta by program)."
+  },
+  {
+   "id": "ALC-E02",
+   "nombre": "Fasteners: screws, anchors, PAF",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - estimator standing order: drywall / framing / cement board screws, anchors, PAF, Tapcon, bolts at 0 (C09250 2.5.B / A-909 noted)."
+  },
+  {
+   "id": "ALC-E03",
+   "nombre": "Framed openings for ducts",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - estimator standing order: duct / air device openings in walls and ceilings never quantified (MEP sweep M-/P- sheets: 0 crossings of our metal walls)."
+  },
+  {
+   "id": "ALC-E04",
+   "nombre": "ACT ceilings and grid",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - ACT-1 / ACT-2 and grid (A-221) and ACT grid demolition (A-052 KN1)."
+  },
+  {
+   "id": "ALC-E05",
+   "nombre": "Insulation",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - batts B.1-B.5/A-202, mineral wool A1/A-605."
+  },
+  {
+   "id": "ALC-E06",
+   "nombre": "FRP panels",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - FRP-2 (A-211, G.3 / G.4 / G.5/A-202): finish trade; its cement board substrate is ours."
+  },
+  {
+   "id": "ALC-E07",
+   "nombre": "Composeal waterproofing membrane",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - Composeal / Kerdi membrane (G.3 / G.4/A-202, A-211)."
+  },
+  {
+   "id": "ALC-E08",
+   "nombre": "Tile",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - CT-45, CT-57A, CT-72, CT-73B, CT-77, KT-6B tile (A-211, A-611, A-622): tile trade; its cement board substrate is ours."
+  },
+  {
+   "id": "ALC-E09",
+   "nombre": "Stainless steel panels",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - S-1 stainless panels (A-201 KN25, A-211): other trade; cement board behind (G.6 / G.7) is ours."
+  },
+  {
+   "id": "ALC-E10",
+   "nombre": "Wallcovering",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - WC-1 wallcovering (A-211); Level 5 under it is ours."
+  },
+  {
+   "id": "ALC-E11",
+   "nombre": "Paint",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - PT-31A / 31B / 41 / 42 paint (A-211, A-221)."
+  },
+  {
+   "id": "ALC-E12",
+   "nombre": "Millwork",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - millwork / casework / WD-3 wainscot (A-701, A-625)."
+  },
+  {
+   "id": "ALC-E13",
+   "nombre": "Prefabricated metal canopies",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - order-point / meal-delivery canopies (A-104, A-105, OMD vendor sheets p48-63)."
+  },
+  {
+   "id": "ALC-E14",
+   "nombre": "Walk-in cooler / freezer panels",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - walk-in panels and metal closure panels (A-221 KN2, A-050 KN22); the G.11 board on the walls around them is ours."
+  },
+  {
+   "id": "ALC-E15",
+   "nombre": "Signage",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - signage (Signage.pdf, A-30x)."
+  },
+  {
+   "id": "ALC-E16",
+   "nombre": "Roof hatch clip angles",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - 3\"x3\"x1/4\" clip angles @ 48\" at the roof hatch shaft (A1/A-604): structural / miscellaneous steel, not cold-formed framing."
+  },
+  {
+   "id": "ALC-E17",
+   "nombre": "Unistrut shelving supports",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - Unistrut for suspended shelving and shrouds (K-001 equipment note 6): kitchen equipment / MEP trade."
+  },
+  {
+   "id": "ALC-E18",
+   "nombre": "MEP",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - mechanical, plumbing, electrical work (M-, P-, E- sheets); hood unistrut supports A2/S-801 by MEP / vendor."
+  },
+  {
+   "id": "ALC-E19",
+   "nombre": "Roofing",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - roofing and roof hatch unit (A-230, A1/A-604); only the hatch shaft metal framing is ours (A1/A-604)."
+  },
+  {
+   "id": "ALC-E20",
+   "nombre": "Existing ceilings without type",
+   "estado": "NO APLICA",
+   "nota": "NO APLICA - every existing ceiling demolished by A-052 KN10 has its type printed ('gyp bd ceiling'); existing gyp ceilings to remain (A-221 legend) are not touched; no ceiling demo excluded for lack of information."
+  },
+  {
+   "id": "ALC-E21",
+   "nombre": "Demolition of gypsum board and metal framing",
+   "estado": "CUANTIFICADO",
+   "nota": "QUANTIFIED - A-050 KN3 / KN4 / KN8 / KN24 walls, A-052 KN3 menu furr-down and KN10 gyp ceilings (DEMO-01..13, DEMO-C1..C6): demolition row in SF; heights RFI-10 / RFI-11 / RFI-12; A-050 KN10 / KN12 / KN29 finish removal and doors / windows not ours."
+  }
+ ],
+ "proyecto_datos": [
+  {
+   "campo": "Project name / city",
+   "valor": "Chick-fil-A #2284 River Point FSU Remodel - Sheridan, CO",
+   "fuente": "G-000 title block"
+  },
+  {
+   "campo": "Address",
+   "valor": "4090 River Point Pkwy, Sheridan, CO 80110",
+   "fuente": "G-000"
+  },
+  {
+   "campo": "Project type",
+   "valor": "Reinvestment remodel of existing restaurant: 573 SF building addition, kitchen and drive-thru upgrade/expansion, new free-standing metal order-point and meal-delivery canopies, new millwork/furniture, interior finishes update, exterior repaint",
+   "fuente": "G-000 SCOPE OF WORK 1-6"
+  },
+  {
+   "campo": "Owner / tenant",
+   "valor": "Chick-fil-A, Inc. (5200 Buffington Road, Atlanta GA)",
+   "fuente": "G-000"
+  },
+  {
+   "campo": "Architect",
+   "valor": "Mayse & Associates, Inc. (Dallas, TX)",
+   "fuente": "G-000"
+  },
+  {
+   "campo": "GC",
+   "valor": "CDM BUILDS (Jonathan Garcia) - governing; also invited by Empower Construction Texas (bid 11-16-2026)",
+   "fuente": "BuildingConnected"
+  },
+  {
+   "campo": "Bid date",
+   "valor": "11-12-2026 11:00 AM MST (10:00 AM PT)",
+   "fuente": "BuildingConnected (CDM BUILDS)"
+  },
+  {
+   "campo": "Bid set",
+   "valor": "Bid Set.pdf, 172 sheets, plotted 7/22-7/27/2026 'FOR PERMIT', revision 3 PDC Reduction 2/4/2026; no addenda",
+   "fuente": "G-000 / G-005"
+  },
+  {
+   "campo": "Total SF",
+   "valor": "4,800 SF footprint (actual area); addition 573 SF",
+   "fuente": "G-003 CODE SUMMARY 4; G-000 SCOPE 2"
+  },
+  {
+   "campo": "Stories",
+   "valor": "1 (actual height 23'-9\")",
+   "fuente": "G-003 CODE SUMMARY 5"
+  },
+  {
+   "campo": "Construction classification",
+   "valor": "Type VB",
+   "fuente": "G-003 CODE SUMMARY 2"
+  },
+  {
+   "campo": "Occupancy group",
+   "valor": "A-2",
+   "fuente": "G-003 CODE SUMMARY 1"
+  },
+  {
+   "campo": "Codes",
+   "valor": "2021 IBC with amendments; 2021 IPC / IMC / IECC; 2020 NEC; 2018 Denver Building & Fire Code",
+   "fuente": "G-000"
+  },
+  {
+   "campo": "Occupant load",
+   "valor": "138",
+   "fuente": "G-003 PLUMBING FIXTURE COUNTS / OCCUPANT LOAD"
+  },
+  {
+   "campo": "Sprinklered",
+   "valor": "Yes (max travel 250'-0\" sprinklered; sprinkler system = deferred submittal)",
+   "fuente": "G-003 EGRESS; G-000 DEFER SUBMITTALS 1"
+  },
+  {
+   "campo": "Demolition",
+   "valor": "Yes",
+   "fuente": "A-050 / A-052"
+  },
+  {
+   "campo": "Specs in set",
+   "valor": "Yes, on sheets A-901..A-911 (no separate project manual)",
+   "fuente": "G-000 sheet index"
+  }
+ ],
+ "hojas_revisadas": [
+  {
+   "categoria": "cover / index",
+   "estado": "reviewed",
+   "hojas": "G-000 (sheet index, scope of work, codes), G-002, G-004, G-005"
+  },
+  {
+   "categoria": "code analysis / G sheets",
+   "estado": "reviewed",
+   "hojas": "G-003 code summary, egress, occupant load, plumbing count"
+  },
+  {
+   "categoria": "general notes",
+   "estado": "reviewed",
+   "hojas": "G-000 general notes; A-202 wall notes B-H; S-001 general structural notes"
+  },
+  {
+   "categoria": "demolition + notes",
+   "estado": "reviewed",
+   "hojas": "A-050 demolition plan + keynotes, A-052 RCP demolition + keynotes"
+  },
+  {
+   "categoria": "specs",
+   "estado": "reviewed",
+   "hojas": "A-901..A-911 specifications (C09111 non-load-bearing steel framing, C09250 gypsum board, C08306 access doors); S-901 / S-902 structural specs"
+  },
+  {
+   "categoria": "partition types + details",
+   "estado": "reviewed",
+   "hojas": "A-202 wall type schedules (interior + exterior) + wall notes; A-401 / A-402 sections; A-50x exterior details; A-604 / A-605 BOH details; A-624 / A-625 FOH details; S-801 typical nonstructural details"
+  },
+  {
+   "categoria": "floor plans",
+   "estado": "reviewed",
+   "hojas": "A-201 floor plan + keynotes, A-202 dimensional control plan, A-211 wall & floor finish plan"
+  },
+  {
+   "categoria": "RCP",
+   "estado": "reviewed",
+   "hojas": "A-221 reflected ceiling plan + keynotes + legend; S-241 dropped ceiling plan"
+  },
+  {
+   "categoria": "elevations / sections",
+   "estado": "reviewed",
+   "hojas": "A-301 / A-302 exterior elevations, A-401 building section, A-402 wall sections"
+  },
+  {
+   "categoria": "enlarged / interior elevations",
+   "estado": "reviewed",
+   "hojas": "A-601..A-605 kitchen / BOH elevations, A-611 restroom, A-621..A-625 dining elevations and details, A-701 millwork"
+  },
+  {
+   "categoria": "schedules",
+   "estado": "reviewed",
+   "hojas": "A-801 door schedule; A-211 finish legend; A-202 wall type schedules; A2/S-241 ceiling joist schedules"
+  },
+  {
+   "categoria": "structural",
+   "estado": "reviewed",
+   "hojas": "S-001, S-101 (note 4 wood shear walls), S-201 roof framing, S-241 dropped ceiling plan, S-600 / S-601 / S-610 typical wood framing, S-801 typical nonstructural details, S-901 / S-902"
+  },
+  {
+   "categoria": "MEP",
+   "estado": "reviewed",
+   "hojas": "M-200..M-902, MH-101..MH-103, P-100..P-901 swept for duct / pipe crossings of our metal walls (0 framed openings; ducts EXCLUDED by standing order); E sheets for fixtures in GWB ceilings (6\" D1 fits the joist module)"
+  },
+  {
+   "categoria": "vendor / not our trade",
+   "estado": "reviewed - not our trade",
+   "hojas": "A-100 / A-102 site, A-104 / A-105 canopies + OMD vendor sheets p48-63 (prefabricated metal canopies EXCLUDED), K-sheets kitchen equipment, civil / landscape / vapor control p139-172"
+  }
+ ],
+ "barrido_no_dibujado": [
+  {
+   "item": "header",
+   "specs": "found C09111 3.3.C.3 / A-909 (framed openings per drawings) - no opening in our metal walls",
+   "schedule": "none: A-801 door schedule has no door in M2.1 / M3.5 / MB-01; A-202 schedules print no header",
+   "estructural": "none: S-801 / S-201 show no header for our metal walls (wood headers Div. 06)"
+  },
+  {
+   "item": "deflection clips",
+   "specs": "none: C09111 / A-909 has no deflection clip requirement for these non-load-bearing walls",
+   "schedule": "none: A-202 wall type schedule prints no deflection head",
+   "estructural": "none: S-801 C2 / C3 show standard track / strongback, no clip"
+  },
+  {
+   "item": "bracing",
+   "specs": "found S-902 C05400 3.4.E.2 bridging = cold-rolled channel (wall studs, used by analogy) -> 1-1/2\" C.R. channel loaded",
+   "schedule": "found A2/S-241 'BRIDGING LOCATION: MID SPAN' -> 1 row per dropped ceiling (RFI-09)",
+   "estructural": "found C2/S-801 brace 362S162-33 @ 48\" (length not printed)"
+  },
+  {
+   "item": "bridging",
+   "specs": "found S-902 C05400 3.4.E.2 (wall-stud bridging, by analogy); C09111 3.2.C is suspended-ceiling sway bracing (not applied)",
+   "schedule": "found A2/S-241 mid-span bridging",
+   "estructural": "found S-241 (member not printed, RFI-09)"
+  },
+  {
+   "item": "blocking",
+   "specs": "none: C09111 / C09250 / A-909 print no metal backing plate requirement",
+   "schedule": "none: no accessory / blocking schedule in the A sheets (F.1/A-202 wood blocking = Div. 06)",
+   "estructural": "found A2/S-801 'cont. blkg. @ wall bracket typ.' and C2/S-801 '33 mil blkg. T&B' -> metal blocking loaded"
+  },
+  {
+   "item": "backing",
+   "specs": "none: no metal backing plate in A-90x",
+   "schedule": "none",
+   "estructural": "none: wood backing / blocking S-241, A4/A-624, A-602, A1/A-604 = Div. 06 EXCLUDED"
+  }
+ ]
+}
