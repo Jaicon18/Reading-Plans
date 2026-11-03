@@ -324,3 +324,6 @@ Nota de numeración: los ids de los arreglos de tools en TOOL_LIMITS_CALC del pr
 
 ## BE-119 — Revisión de markups validada contra el Excel (circular) (coordinación, 3-nov)
 revision_markups.py comparó Depth contra la H del Excel, de donde sale el markup: siempre da verde. Prueba: el reporte trae por fila "Printed source H" con N/HOJA (RCP C.H., sección, detalle, B.O.) y marca ROJO si Depth ≠ altura impresa; sin fuente impresa = ÁMBAR con la hoja barrida.
+
+## BE-120 — RFI con respuesta impresa llegó a la entrega (Harbor Freight rev2, 3-nov)
+El barrido BE-CF16 se hizo después de entregar; RFI-01 estaba en A1.2 (B.O. DECK por zona) → rev3. Prueba: compuerta previa a la entrega que exige, por cada RFI abierto, la lista de hojas y términos barridos + grep del texto del set sin coincidencias; si falta = FALLA y no se entrega.
