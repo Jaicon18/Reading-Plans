@@ -32,4 +32,4 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | # | Paso | Inicio | Fin | Duración |
 |---|---|---|---|---|
 | R4-0 | Texto completo del set (incl. SHX) + 3 barridos en paralelo (subagentes por grupo de RFI) | 16:06 | | |
-| R4-1 | Compuerta A_RFI_BARRIDO (R80f.6) en v81cf10 = v81cf9 + R80f.6; suite 44/44, verificador 0 faltantes (en paralelo) | 16:10 | 16:17 | 7 min |
+| R4-1 | Compuerta A_RFI_BARRIDO (R80f.6) en v81cf10 = v81cf9 + R80f.6; suite 44/44, verificador 0 faltantes (en paralelo) | 16:06 | 16:08 | 2 min |
