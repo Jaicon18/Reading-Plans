@@ -31,5 +31,6 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 ## rev4 — orden del usuario 3-nov: los 13 RFI se buscan en el plano (BE-CF16)
 | # | Paso | Inicio | Fin | Duración |
 |---|---|---|---|---|
-| R4-0 | Texto completo del set (incl. SHX) + 3 barridos en paralelo (subagentes por grupo de RFI) | 16:06 | | |
+| R4-0 | Texto completo del set (incl. SHX) + 3 barridos en paralelo (9 de 13 resueltos del plano) | 16:06 | 16:20 | — |
+| R4-2 | Aplicar respuestas + cadena completa rev4 (subagente, v81cf10) | 16:20 | | |
 | R4-1 | Compuerta A_RFI_BARRIDO (R80f.6) en v81cf10 = v81cf9 + R80f.6; suite 44/44, verificador 0 faltantes (en paralelo) | 16:06 | 16:08 | 2 min |
