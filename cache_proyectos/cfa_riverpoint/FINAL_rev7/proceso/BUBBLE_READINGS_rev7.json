@@ -1,0 +1,3694 @@
+[
+ {
+  "view": "A3/A-601",
+  "sheet_page": 24,
+  "looks_at": "Kitchen looking WEST (label left of A-601 diamond at A-202 1931,845): west kitchen wall with Hood #2 (south) and Hood #3 (north), drive-thru opening between them, menu board wall at north end",
+  "disposition": "governs",
+  "canon_ids": [
+   "M3.5-01",
+   "M3.5-02",
+   "MB-01",
+   "EX-KIT-01",
+   "EX-KIT-02"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"S-1\" stainless panels to ceiling at both hood zones, \"1'-6\"\" each side of hood (not our scope)",
+   "\"LINE OF EXHAUST HOOD\" x2",
+   "\"OPEN TO BEYOND\" (opening to drive-thru between the hoods, no KT-6B base and no wall drawn in it)",
+   "\"CG-3\" corner guards at opening",
+   "ceiling line steps down at the north (right) end - height not printed"
+  ],
+  "check": [
+   {
+    "id": "EX-KIT-02",
+    "canon": "existing kitchen west wall cement board base 1.5 ft x 10.083 ft (x=1551.5, y 816.2-997.7 on A-202)",
+    "view_prints": "\"OPEN TO BEYOND\" across the bay between the two hood zones; KT-6B base stops at both jambs",
+    "result": "DELTA",
+    "note": "A3/A-601 shows this stretch as an opening (no wall, no tile base); A-202 draws it dashed and prints \"10'-0 1/2\" CRITICAL CLEAR DIMENSION\" / \"10'-1\" FRAMING TO FRAMING\" for it. The whole 10.083 ft entry sits in the drive-thru opening -> candidate removal (-10.083 LF x 1.5 ft cement board)."
+   },
+   {
+    "id": "EX-KIT-01",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "M3.5-02",
+    "canon": "framing 10.667 ft = kitchen C.H. 10'-2\" + 6\" [DERIVED]; side B cement board 10.5 ft",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED A3/A-601]; S-1 stainless to ceiling at hood zone (board height behind it not printed)",
+    "result": "OK",
+    "note": "Ceiling datum matches the 10'-2\" used in the derivation."
+   },
+   {
+    "id": "M3.5-01",
+    "canon": "framing + side B cement board 14.667 ft (smoke partition to deck)",
+    "view_prints": "CEILING 10'-2\"; S-1 stainless to ceiling at hood zone",
+    "result": "OK",
+    "note": "View only shows finish to ceiling; the above-ceiling extent (deck 14'-8\") is not printed here and is not contradicted."
+   },
+   {
+    "id": "MB-01",
+    "canon": "side B (kitchen) 1/2 cement board 14.667 ft",
+    "view_prints": "FRP-2 to CEILING 10'-2\" at the north end of the wall",
+    "result": "OK",
+    "note": "Not contradicted; above-ceiling extent not printed here."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A3_A-601.png"
+ },
+ {
+  "view": "A4/A-601",
+  "sheet_page": 24,
+  "looks_at": "Kitchen looking EAST (label right of A-601 diamond): east kitchen wall with the two walk-in cooler / freezer doors and the opening to the service corridor at the north end",
+  "disposition": "governs",
+  "canon_ids": [
+   "R-W6-12-W-CB",
+   "W6-07W-KIT",
+   "EX-KIT-08-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"STAINLESS STEEL CASED OPENING\" x2 (walk-in doors)",
+   "\"OPEN TO BEYOND\" (opening to corridor, north end)",
+   "\"CG-3\""
+  ],
+  "check": [
+   {
+    "id": "R-W6-12-W-CB",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W6-07W-KIT",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-08-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A4_A-601.png"
+ },
+ {
+  "view": "B4/A-601",
+  "sheet_page": 24,
+  "looks_at": "Kitchen looking SOUTH (label below A-601 diamond): south (exterior) kitchen wall with Hood #1 and the W4.1 boxes",
+  "disposition": "governs",
+  "canon_ids": [
+   "M2.1-01",
+   "EX-KIT-03",
+   "EX-KIT-04",
+   "EX-KIT-05",
+   "W4.1-01-KIT-1",
+   "W4.1-01-KIT-2",
+   "W4.1-01-KIT-3",
+   "W4.1-02-KIT-1",
+   "W4.1-02-KIT-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"S-1\" stainless around Hood #1 and at the east end, to ceiling (not our scope)",
+   "\"LINE OF EXHAUST HOOD\" x2",
+   "\"1'-6\"\", \"1'-6 3/4\"\", \"1'-6\"\" (stainless widths)"
+  ],
+  "check": [
+   {
+    "id": "M2.1-01",
+    "canon": "framing 10.667 ft = C.H. 10'-2\" + 6\" [DERIVED]; side A cement board 10.5 ft",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED B4/A-601]; S-1 stainless to ceiling at Hood #1",
+    "result": "OK",
+    "note": "Ceiling datum matches; furring board height not printed in this view (A1/A-605 governs)."
+   },
+   {
+    "id": "EX-KIT-03",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-04",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-05",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W4.1-01-KIT-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W4.1-01-KIT-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W4.1-01-KIT-3",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W4.1-02-KIT-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W4.1-02-KIT-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B4_A-601.png"
+ },
+ {
+  "view": "C4/A-601",
+  "sheet_page": 24,
+  "looks_at": "Kitchen looking NORTH (label above A-601 diamond): north kitchen wall - alcove opening, prep sink, dish wash, existing mop sink chase, opening to multi-purpose",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-02S-KIT",
+   "R-W6-05-CB-1",
+   "R-W6-05-CB-2",
+   "EX-KIT-07-1",
+   "EX-KIT-07-2",
+   "W6-05E-KIT",
+   "EX-MOP-01-1",
+   "EX-MOP-01-2",
+   "W6-05W-MOP",
+   "EX-KIT-08-1"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"S-1 @ PREP SINK\", \"S-1 @ DISH WASH\" (stainless, not our scope)",
+   "\"S-1 AT MOP SINK\" stainless to ceiling + \"EXISTING MOP SINK\"",
+   "\"OPEN TO BEYOND\" x2",
+   "\"4'-7 1/2\"\", \"3'-9 1/2\"\", \"10'-10\"\" (stainless panel widths)",
+   "\"CG-3\" x2"
+  ],
+  "check": [
+   {
+    "id": "EX-MOP-01-1",
+    "canon": "mop chase inside cement board 10.167 ft",
+    "view_prints": "\"S-1 AT MOP SINK\" panels run to CEILING 10'-2\" = 10.167 ft [CONFIRMED C4/A-601]",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "EX-MOP-01-2",
+    "canon": "mop chase inside cement board 10.167 ft",
+    "view_prints": "same as above",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "W6-05W-MOP",
+    "canon": "mop chase W6 west face cement board 10.167 ft",
+    "view_prints": "same as above",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "W6-02S-KIT",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "R-W6-05-CB-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "R-W6-05-CB-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-07-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-07-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "W6-05E-KIT",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "EX-KIT-08-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-601 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/C4_A-601.png"
+ },
+ {
+  "view": "D1/A-602",
+  "sheet_page": 25,
+  "looks_at": "Multi-purpose room (room north of kitchen, east of restrooms) looking NORTH (label above A-602 diamond at A-202 2222,509)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-MP-01-5"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\"",
+   "\"KT-6B\"",
+   "\"CEMENTITIOUS BOARD RE: B3/A-623\" (cement board base callout pointing to a view that does not exist on A-623)"
+  ],
+  "check": [
+   {
+    "id": "EX-MP-01-5",
+    "canon": "cement board base 1.0 ft (G.3/A-202)",
+    "view_prints": "cement board base drawn as dashed line, height not printed; callout \"RE: B3/A-623\" is a dead reference (A-623 has no view B3)",
+    "result": "DELTA",
+    "note": "Height not printed; reference error - the three sibling views D2/D3/D4 send the same base to C3/A-604 (1'-3\"). If C3/A-604 applies: 1.25 ft vs canon 1.0 ft (+0.25 ft). View titled \"KITCHEN ELEVATION\" although the room is the multi-purpose room (canon applies the BOH non-kitchen 1.0 ft)."
+   }
+  ],
+  "inner_bubbles": [
+   "B3/A-623"
+  ],
+  "img": "out/img/D1_A-602.png"
+ },
+ {
+  "view": "D2/A-602",
+  "sheet_page": 25,
+  "looks_at": "Multi-purpose room looking EAST (label right of diamond): east wall incl. new W6 infill",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-06W-MP",
+   "EX-MP-01-6",
+   "EX-MP-02-1"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)"
+  ],
+  "check": [
+   {
+    "id": "W6-06W-MP",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D2/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). View titled \"KITCHEN ELEVATION\" although the room is the multi-purpose room (canon applies the BOH non-kitchen 1.0 ft)."
+   },
+   {
+    "id": "EX-MP-01-6",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D2/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). View titled \"KITCHEN ELEVATION\" although the room is the multi-purpose room (canon applies the BOH non-kitchen 1.0 ft)."
+   },
+   {
+    "id": "EX-MP-02-1",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D2/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). View titled \"KITCHEN ELEVATION\" although the room is the multi-purpose room (canon applies the BOH non-kitchen 1.0 ft)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/D2_A-602.png"
+ },
+ {
+  "view": "D3/A-602",
+  "sheet_page": 25,
+  "looks_at": "Multi-purpose room looking SOUTH (label below diamond): south wall with stainless cased opening to the kitchen",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-MP-01-1",
+   "EX-MP-02-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"STAINLESS STEAL CASED OPENING\" + \"OPEN TO BEYOND\""
+  ],
+  "check": [
+   {
+    "id": "EX-MP-01-1",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D3/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   },
+   {
+    "id": "EX-MP-02-2",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D3/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/D3_A-602.png"
+ },
+ {
+  "view": "D4/A-602",
+  "sheet_page": 25,
+  "looks_at": "Multi-purpose room looking WEST (label left of diamond): west wall (east side of women's restroom / chase)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-MP-01-2",
+   "EX-MP-01-3",
+   "EX-MP-01-4"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)"
+  ],
+  "check": [
+   {
+    "id": "EX-MP-01-2",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D4/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   },
+   {
+    "id": "EX-MP-01-3",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D4/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   },
+   {
+    "id": "EX-MP-01-4",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "multi-purpose wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "D4/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/D4_A-602.png"
+ },
+ {
+  "view": "C4/A-602",
+  "sheet_page": 25,
+  "looks_at": "Team Member room looking NORTH (label above diamond at A-202 2469,360): north exterior wall SW6",
+  "disposition": "governs",
+  "canon_ids": [
+   "SW6-01-TM-CB",
+   "SW6-01-TM-GB"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"4' - 2\" T.O. WAINSCOT\" (WD-3 wood wainscot with battens \"2'-0\"\", not our scope)",
+   "\"PT-31B\" (paint above wainscot - gypsum board substrate)",
+   "\"MT-1\", \"CT-73B\" (trim / tile base, not our scope)",
+   "no cement board callout and no detail bubble in the view",
+   "brand icon diamond \"A\" on board (keyed graphic, not a detail bubble)"
+  ],
+  "check": [
+   {
+    "id": "SW6-01-TM-CB",
+    "canon": "cement board base 0.417 ft (5\")",
+    "view_prints": "CT-73B tile base; no height printed; sheet note A.6 \"AT WAINSCOT LOCATIONS, PROVIDE 5\" HIGH CEMENTITIOUS BOARD BEHIND THE TILE BASE, THEN GYPSUM BOARD TO CEILING.\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED note A.6 / A-602]"
+   },
+   {
+    "id": "SW6-01-TM-GB",
+    "canon": "1/2 regular gyp 9.75 ft (C.H. 10'-2\" - 5\")",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED C4/A-602] + note A.6 \"gypsum board to ceiling\"; PT-31B above wainscot",
+    "result": "OK",
+    "note": "10.167 - 0.417 = 9.75 ft [DERIVED] matches."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-602.png"
+ },
+ {
+  "view": "C1/A-602",
+  "sheet_page": 25,
+  "looks_at": "Team Member room looking EAST (label right of diamond): east exterior wall SW6",
+  "disposition": "governs",
+  "canon_ids": [
+   "SW6-02-TM-CB",
+   "SW6-02-TM-GB"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"4' - 2\" T.O. WAINSCOT\" (WD-3 wood wainscot with battens \"2'-0\"\", not our scope)",
+   "\"PT-31B\" (paint above wainscot - gypsum board substrate)",
+   "\"MT-1\", \"CT-73B\" (trim / tile base, not our scope)",
+   "no cement board callout and no detail bubble in the view"
+  ],
+  "check": [
+   {
+    "id": "SW6-02-TM-CB",
+    "canon": "cement board base 0.417 ft (5\")",
+    "view_prints": "CT-73B tile base; no height printed; sheet note A.6 \"AT WAINSCOT LOCATIONS, PROVIDE 5\" HIGH CEMENTITIOUS BOARD BEHIND THE TILE BASE, THEN GYPSUM BOARD TO CEILING.\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED note A.6 / A-602]"
+   },
+   {
+    "id": "SW6-02-TM-GB",
+    "canon": "1/2 regular gyp 9.75 ft (C.H. 10'-2\" - 5\")",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED C1/A-602] + note A.6 \"gypsum board to ceiling\"; PT-31B above wainscot",
+    "result": "OK",
+    "note": "10.167 - 0.417 = 9.75 ft [DERIVED] matches."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C1_A-602.png"
+ },
+ {
+  "view": "C2/A-602",
+  "sheet_page": 25,
+  "looks_at": "Team Member room looking SOUTH (label below diamond): W8 wall with door",
+  "disposition": "governs",
+  "canon_ids": [
+   "W8-01N-TM-CB",
+   "W8-01N-TM-GB"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"4' - 2\" T.O. WAINSCOT\" (WD-3 wood wainscot with battens \"2'-0\"\", not our scope)",
+   "\"PT-31B\" (paint above wainscot - gypsum board substrate)",
+   "\"MT-1\", \"CT-73B\" (trim / tile base, not our scope)",
+   "no cement board callout and no detail bubble in the view",
+   "door (opening; board not deducted per canon rule)"
+  ],
+  "check": [
+   {
+    "id": "W8-01N-TM-CB",
+    "canon": "cement board base 0.417 ft (5\")",
+    "view_prints": "CT-73B tile base; no height printed; sheet note A.6 \"AT WAINSCOT LOCATIONS, PROVIDE 5\" HIGH CEMENTITIOUS BOARD BEHIND THE TILE BASE, THEN GYPSUM BOARD TO CEILING.\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED note A.6 / A-602]"
+   },
+   {
+    "id": "W8-01N-TM-GB",
+    "canon": "1/2 regular gyp 9.75 ft (C.H. 10'-2\" - 5\")",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED C2/A-602] + note A.6 \"gypsum board to ceiling\"; PT-31B above wainscot",
+    "result": "OK",
+    "note": "10.167 - 0.417 = 9.75 ft [DERIVED] matches."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C2_A-602.png"
+ },
+ {
+  "view": "C3/A-602",
+  "sheet_page": 25,
+  "looks_at": "Team Member room looking WEST (label left of diamond): W6 west wall",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-08E-TM-CB",
+   "W6-08E-TM-GB"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"4' - 2\" T.O. WAINSCOT\" (WD-3 wood wainscot with battens \"2'-0\"\", not our scope)",
+   "\"PT-31B\" (paint above wainscot - gypsum board substrate)",
+   "\"MT-1\", \"CT-73B\" (trim / tile base, not our scope)",
+   "no cement board callout and no detail bubble in the view"
+  ],
+  "check": [
+   {
+    "id": "W6-08E-TM-CB",
+    "canon": "cement board base 0.417 ft (5\")",
+    "view_prints": "CT-73B tile base; no height printed; sheet note A.6 \"AT WAINSCOT LOCATIONS, PROVIDE 5\" HIGH CEMENTITIOUS BOARD BEHIND THE TILE BASE, THEN GYPSUM BOARD TO CEILING.\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED note A.6 / A-602]"
+   },
+   {
+    "id": "W6-08E-TM-GB",
+    "canon": "1/2 regular gyp 9.75 ft (C.H. 10'-2\" - 5\")",
+    "view_prints": "CEILING 10'-2\" [CONFIRMED C3/A-602] + note A.6 \"gypsum board to ceiling\"; PT-31B above wainscot",
+    "result": "OK",
+    "note": "10.167 - 0.417 = 9.75 ft [DERIVED] matches."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C3_A-602.png"
+ },
+ {
+  "view": "A1/A-602",
+  "sheet_page": 25,
+  "looks_at": "Service room looking NORTH (label above A-602 diamond at A-202 2458,689): south face of office W6 with door",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-09-OUT-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "door to office"
+  ],
+  "check": [
+   {
+    "id": "W6-09-OUT-2",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "service wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "A1/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A1_A-602.png"
+ },
+ {
+  "view": "B3/A-602",
+  "sheet_page": 25,
+  "looks_at": "Service room looking EAST (label right of diamond): east exterior wall SW6 with exit door + wall mounted air curtain",
+  "disposition": "governs",
+  "canon_ids": [
+   "SW6-02-SVC"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"WALL MOUNTED AIR CURTAIN RE: MECHANICAL\"",
+   "exit door + EXIT sign"
+  ],
+  "check": [
+   {
+    "id": "SW6-02-SVC",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "service wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "B3/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B3_A-602.png"
+ },
+ {
+  "view": "B2/A-602",
+  "sheet_page": 25,
+  "looks_at": "Service room looking SOUTH (label below diamond): W6 wall to walk-in cooler with electrical panels",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-10N-SVC"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"NEW ELECTRICAL PANELS RE; ELECTRICAL\" (6 panels)"
+  ],
+  "check": [
+   {
+    "id": "W6-10N-SVC",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "service wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "B2/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B2_A-602.png"
+ },
+ {
+  "view": "B4/A-602",
+  "sheet_page": 25,
+  "looks_at": "Service room looking WEST (label left of diamond): W6 wall to kitchen with opening and electrical panel",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-08E-SVC"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"OPEN TO BEYOND\"",
+   "\"NEW ELECTRICAL PANEL\""
+  ],
+  "check": [
+   {
+    "id": "W6-08E-SVC",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "service wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "B4/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B4_A-602.png"
+ },
+ {
+  "view": "A2/A-602",
+  "sheet_page": 25,
+  "looks_at": "Office looking NORTH (label above A-602 diamond at A-202 2505,501): W8 north wall",
+  "disposition": "governs",
+  "canon_ids": [
+   "W8-01S-OFF"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"VERIFY SHELVING AND PROVIDE IN WALL BLOCKING AS REQUIRED\" (blocking, wood / not loaded)",
+   "\"NEW ELECTRICAL PANEL\""
+  ],
+  "check": [
+   {
+    "id": "W8-01S-OFF",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "office wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "A2/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). Office walls are wood (W6/W8/SW6, Div. 06); only the cement board base is ours (FRP over CDX above)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A2_A-602.png"
+ },
+ {
+  "view": "A4/A-602",
+  "sheet_page": 25,
+  "looks_at": "Office looking EAST (label right of diamond): east exterior wall SW6",
+  "disposition": "governs",
+  "canon_ids": [
+   "SW6-02-OFF"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"VERIFY SHELVING AND PROVIDE IN WALL BLOCKING AS REQUIRED\"",
+   "brand icon diamond \"A\" (keyed graphic)"
+  ],
+  "check": [
+   {
+    "id": "SW6-02-OFF",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "office wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "A4/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). Office walls are wood (W6/W8/SW6, Div. 06); only the cement board base is ours (FRP over CDX above)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A4_A-602.png"
+ },
+ {
+  "view": "B1/A-602",
+  "sheet_page": 25,
+  "looks_at": "Office looking SOUTH (label below diamond): W6 south wall",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-09-OFF-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"VERIFY SHELVING AND PROVIDE IN WALL BLOCKING AS REQUIRED\""
+  ],
+  "check": [
+   {
+    "id": "W6-09-OFF-2",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "office wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "B1/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). Office walls are wood (W6/W8/SW6, Div. 06); only the cement board base is ours (FRP over CDX above)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B1_A-602.png"
+ },
+ {
+  "view": "A3/A-602",
+  "sheet_page": 25,
+  "looks_at": "Office looking WEST (label left of diamond): W6 west wall with door",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-09-OFF-1"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"VERIFY SHELVING AND PROVIDE IN WALL BLOCKING AS REQUIRED\"",
+   "office door"
+  ],
+  "check": [
+   {
+    "id": "W6-09-OFF-1",
+    "canon": "1/2 cement board base 1.0 ft (G.3/A-202 1'-0\" BOH non-kitchen)",
+    "view_prints": "office wall: KT-6B kitchen tile base + FRP-2 + \"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 '1' - 3\"' (1.25 ft)",
+    "result": "DELTA",
+    "note": "A3/A-602 sends this wall's cement board to C3/A-604 WALL BASE DETAIL @ BACK OF HOUSE, which dimensions the interior sheathing at 1'-3\" = 1.25 ft [CONFIRMED C3/A-604]; canon carries 1.0 ft from G.3/A-202 (+0.25 ft if C3/A-604 governs). Office walls are wood (W6/W8/SW6, Div. 06); only the cement board base is ours (FRP over CDX above)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/A3_A-602.png"
+ },
+ {
+  "view": "B2/A-603",
+  "sheet_page": 26,
+  "looks_at": "Kitchen alcove (between W4 and the restrooms) looking NORTH (label above A-603 diamond at A-202 1747,481): south face of W6",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01S-KIT"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)"
+  ],
+  "check": [
+   {
+    "id": "W6-01S-KIT",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B2_A-603.png"
+ },
+ {
+  "view": "B1/A-603",
+  "sheet_page": 26,
+  "looks_at": "Kitchen alcove looking EAST (label right of diamond): west wall of women's restroom (alcove face)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-KIT-06-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)"
+  ],
+  "check": [
+   {
+    "id": "EX-KIT-06-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B1_A-603.png"
+ },
+ {
+  "view": "B3/A-603",
+  "sheet_page": 26,
+  "looks_at": "Kitchen alcove looking WEST (label left of diamond): W4 east face with stainless cased opening to serving at the south end",
+  "disposition": "governs",
+  "canon_ids": [
+   "W4-01E-KIT"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"STAINLESS STEAL CASED OPENING\" + \"OPEN TO BEYOND\""
+  ],
+  "check": [
+   {
+    "id": "W4-01E-KIT",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B3_A-603.png"
+ },
+ {
+  "view": "B4/A-603",
+  "sheet_page": 26,
+  "looks_at": "Kitchen alcove looking SOUTH (label below diamond): wall between alcove and kitchen, W6 L-stub with S-1, opening to kitchen with lowered head",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-KIT-06-1",
+   "R-W6-05-CB-1",
+   "R-W6-05-CB-2"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\" (wall finish, not our scope)",
+   "\"KT-6B\" (kitchen tile base, not our scope)",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation)",
+   "\"S-1\" stainless strip at W6 stub (not our scope)",
+   "\"OPEN TO BEYOND\"",
+   "FRP-2 above opening, ceiling line steps down over opening - height not printed"
+  ],
+  "check": [
+   {
+    "id": "EX-KIT-06-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "R-W6-05-CB-1",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   },
+   {
+    "id": "R-W6-05-CB-2",
+    "canon": "1/2 cement board base 1.5 ft (A-050 KN16 18\", RFI-03 closed option A)",
+    "view_prints": "\"CEMENTITIOUS BOARD RE: C3/A-604\" (cement board base callout; dashed line, height not dimensioned in the elevation) -> C3/A-604 prints 1'-3\" (1.25 ft); sheet general note A.4 prints 12\"",
+    "result": "DELTA",
+    "note": "Canon 1.5 ft vs C3/A-604 1'-3\" = 1.25 ft [CONFIRMED C3/A-604] (-0.25 ft) and A.4/A-603 12\" (-0.5 ft). Known conflict already closed by estimator under RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/B4_A-603.png"
+ },
+ {
+  "view": "D3/A-603",
+  "sheet_page": 26,
+  "looks_at": "Drive-thru looking WEST (label left of A-603 diamond at A-202 1448,944): W8 west wall",
+  "disposition": "governs",
+  "canon_ids": [
+   "W8-02E-DT"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\"",
+   "\"KT-6B\"",
+   "dashed cement board line, no callout"
+  ],
+  "check": [
+   {
+    "id": "W8-02E-DT",
+    "canon": "1/2 cement board base 1.5 ft (KN16 18\" kitchen finishes, RFI-03 option A)",
+    "view_prints": "KT-6B + FRP-2 + dashed board line, NO cement board callout and no height in the view; sheet general note A.4 \"PROVIDE 12\" HIGH CEMENTITIOUS BOARD SUBSTRATE AT BASE OF ALL WALLS IN KITCHEN.\"",
+    "result": "DELTA",
+    "note": "Height not printed in D3/A-603; sheet note A.4 prints 12\" (1.0 ft) for kitchen and C3/A-604 (the BOH base detail used everywhere else) prints 1'-3\". Canon 1.5 ft kept by RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D3_A-603.png"
+ },
+ {
+  "view": "D2/A-603",
+  "sheet_page": 26,
+  "looks_at": "Drive-thru looking NORTH (label above diamond): W6 north wall with stainless cased opening to kitchen",
+  "disposition": "governs",
+  "canon_ids": [
+   "R-W6-11-S-CB"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"FRP-2\"",
+   "\"KT-6B\"",
+   "\"STAINLESS STEEL CASED OPENING\" + \"OPEN TO BEYOND\" \"7'-0\"\"",
+   "dashed cement board line, no callout"
+  ],
+  "check": [
+   {
+    "id": "R-W6-11-S-CB",
+    "canon": "1/2 cement board base 1.5 ft (KN16 18\" kitchen finishes, RFI-03 option A)",
+    "view_prints": "KT-6B + FRP-2 + dashed board line, NO cement board callout and no height in the view; sheet general note A.4 \"PROVIDE 12\" HIGH CEMENTITIOUS BOARD SUBSTRATE AT BASE OF ALL WALLS IN KITCHEN.\"",
+    "result": "DELTA",
+    "note": "Height not printed in D2/A-603; sheet note A.4 prints 12\" (1.0 ft) for kitchen and C3/A-604 (the BOH base detail used everywhere else) prints 1'-3\". Canon 1.5 ft kept by RFI-03 option A; reported, not changed."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D2_A-603.png"
+ },
+ {
+  "view": "C1/A-603",
+  "sheet_page": 26,
+  "looks_at": "Drive-thru looking SOUTH (label below diamond): south exterior wall with new sliding drive-thru door",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DT-01"
+  ],
+  "printed": [
+   "\"10' - 2\" CEILING\" (finish ceiling height, elevation datum)",
+   "\"7'-8\" B.O. FURR DOWN\" (top of CT-57A tile)",
+   "\"CT-57A\" wall tile + \"CT-73B\" tile base",
+   "\"FRP-2\" above 7'-8\"",
+   "\"CEMENTITIOUS BOARD RE: C3/A-604\"",
+   "\"DIVERTER BOX RE: MECHANICAL\""
+  ],
+  "check": [
+   {
+    "id": "EX-DT-01",
+    "canon": "1/2 cement board 7.667 ft",
+    "view_prints": "CT-57A tile to \"7'-8\" B.O. FURR DOWN\" = 7.667 ft [CONFIRMED C1/A-603] + note A.5 board full height of tile",
+    "result": "OK",
+    "note": "Matches."
+   },
+   {
+    "id": "(no canon entry)",
+    "canon": "nothing loaded for a furr down at the drive-thru south wall",
+    "view_prints": "\"7'-8\" B.O. FURR DOWN\" datum; zone above 7'-8\" is drawn flush and tagged FRP-2; A-221 RCP shows no soffit here (only KN13 air curtain / KN14 diverter box)",
+    "result": "DELTA",
+    "note": "Possible unloaded furr down (framing + board) or just a door-head / tile-stop datum - not resolvable from this view; flag for review, no quantity derivable (depth not printed)."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-604"
+  ],
+  "img": "out/img/C1_A-603.png"
+ },
+ {
+  "view": "C3/A-604",
+  "sheet_page": 27,
+  "looks_at": "Detail C3 \"WALL BASE DETAIL @ BACK OF HOUSE\" (3\"=1'-0\"), called by the cement board base callouts on A-601, A-602 and A-603",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-KIT-01",
+   "R-W6-12-W-CB",
+   "W6-07W-KIT",
+   "EX-KIT-08-2",
+   "EX-KIT-03",
+   "EX-KIT-04",
+   "EX-KIT-05",
+   "W4.1-01-KIT-1",
+   "W4.1-01-KIT-2",
+   "W4.1-01-KIT-3",
+   "W4.1-02-KIT-1",
+   "W4.1-02-KIT-2",
+   "W6-02S-KIT",
+   "R-W6-05-CB-1",
+   "R-W6-05-CB-2",
+   "EX-KIT-07-1",
+   "EX-KIT-07-2",
+   "W6-05E-KIT",
+   "EX-KIT-08-1",
+   "W6-01S-KIT",
+   "EX-KIT-06-1",
+   "EX-KIT-06-2",
+   "W4-01E-KIT",
+   "W6-06W-MP",
+   "EX-MP-01-1",
+   "EX-MP-01-2",
+   "EX-MP-01-3",
+   "EX-MP-01-4",
+   "EX-MP-01-6",
+   "EX-MP-02-1",
+   "EX-MP-02-2",
+   "W6-09-OUT-2",
+   "SW6-02-SVC",
+   "W6-10N-SVC",
+   "W6-08E-SVC",
+   "W8-01S-OFF",
+   "SW6-02-OFF",
+   "W6-09-OFF-1",
+   "W6-09-OFF-2"
+  ],
+  "printed": [
+   "\"1' - 3\"\" (height of interior sheathing / tile base zone above finish floor)",
+   "\"INTERIOR SHEATHING - RE: WALL & PARTITION TYPE NOTES\" (the cementitious board)",
+   "\"TREATED SILL PLATE AT WOOD STUD WALLS OR METAL STUD TRACK AT METAL STUD WALLS\"",
+   "\"WHERE INTERIOR FINISH IS FRP, TILE BASE SHALL OVERLAP FRP BY 1/4\"\"",
+   "no further detail bubbles inside"
+  ],
+  "check": [
+   {
+    "id": "(kitchen group)",
+    "canon": "23 kitchen cement board base entries at 1.5 ft: EX-KIT-01, R-W6-12-W-CB, W6-07W-KIT, EX-KIT-08-2, EX-KIT-03, EX-KIT-04, EX-KIT-05, W4.1-01-KIT-1, W4.1-01-KIT-2, W4.1-01-KIT-3, W4.1-02-KIT-1, W4.1-02-KIT-2, W6-02S-KIT, R-W6-05-CB-1, R-W6-05-CB-2, EX-KIT-07-1, EX-KIT-07-2, W6-05E-KIT, EX-KIT-08-1, W6-01S-KIT, EX-KIT-06-1, EX-KIT-06-2, W4-01E-KIT",
+    "view_prints": "\"1' - 3\"\" = 1.25 ft [CONFIRMED C3/A-604]",
+    "result": "DELTA",
+    "note": "-0.25 ft each vs canon; known RFI-03 conflict (A-050 KN16 18\" vs A.4 12\" vs this 1'-3\"), closed option A by estimator."
+   },
+   {
+    "id": "(BOH non-kitchen group)",
+    "canon": "16 multi-purpose / service / office cement board base entries at 1.0 ft: W6-06W-MP, EX-MP-01-1, EX-MP-01-2, EX-MP-01-3, EX-MP-01-4, EX-MP-01-6, EX-MP-02-1, EX-MP-02-2, W6-09-OUT-2, SW6-02-SVC, W6-10N-SVC, W6-08E-SVC, W8-01S-OFF, SW6-02-OFF, W6-09-OFF-1, W6-09-OFF-2",
+    "view_prints": "\"1' - 3\"\" = 1.25 ft [CONFIRMED C3/A-604], and the A-602 elevations of these rooms call C3/A-604 explicitly",
+    "result": "DELTA",
+    "note": "+0.25 ft each vs canon (G.3/A-202 1'-0\"). Not covered by RFI-03 as written (which addresses kitchen)."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C3_A-604.png"
+ },
+ {
+  "view": "C4/A-604",
+  "sheet_page": 27,
+  "looks_at": "Detail C4 \"DETAIL AT TILE BASE\" (3\"=1'-0\"), reached from the restroom elevations on A-611",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-01-CB-1",
+   "EX-RRM-01-CB-2",
+   "EX-RRM-01-CB-3",
+   "EX-RRW-01-CB-1",
+   "EX-RRW-01-CB-2",
+   "EX-RRW-01-CB-3",
+   "EX-RRW-01-CB-4",
+   "EX-RRW-01-CB-5",
+   "EX-RRM-02-CB-1",
+   "EX-RRM-02-CB-2",
+   "EX-RRM-02-CB-3",
+   "EX-RRW-02-CB"
+  ],
+  "printed": [
+   "\"CEMENT BOARD SHEATHING\" behind \"WALL TILE - RE: ELEVATIONS\" and \"TILE BASE\"",
+   "\"1'-3\"\" (tile base zone height)",
+   "\"1/2\"\" (gap at floor)",
+   "no further detail bubbles inside"
+  ],
+  "check": [
+   {
+    "id": "(restroom tile walls)",
+    "canon": "cement board full height of tile: EX-RRM-01-CB-1, EX-RRM-01-CB-2, EX-RRM-01-CB-3, EX-RRW-01-CB-1, EX-RRW-01-CB-2, EX-RRW-01-CB-3, EX-RRW-01-CB-4, EX-RRW-01-CB-5, EX-RRM-02-CB-1, EX-RRM-02-CB-2, EX-RRM-02-CB-3, EX-RRW-02-CB",
+    "view_prints": "cement board sheathing continuous behind tile base and wall tile",
+    "result": "OK",
+    "note": "Confirms cement board (not gyp) behind the restroom tile; heights come from A-611 T/TILE and A2/A-604."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-604.png"
+ },
+ {
+  "view": "A2/A-604",
+  "sheet_page": 27,
+  "looks_at": "Detail A2 \"TILE TO GYP TRANSITION AT RESTROOM\" (N.T.S.), reached from the restroom elevations on A-611",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-01-CB-1",
+   "EX-RRM-01-CB-2",
+   "EX-RRM-01-CB-3",
+   "EX-RRW-01-CB-1",
+   "EX-RRW-01-CB-2",
+   "EX-RRW-01-CB-3",
+   "EX-RRW-01-CB-4",
+   "EX-RRW-01-CB-5",
+   "EX-RRM-01-GB-1",
+   "EX-RRM-01-GB-2",
+   "EX-RRM-01-GB-3",
+   "EX-RRW-01-GB-1",
+   "EX-RRW-01-GB-2",
+   "EX-RRW-01-GB-3",
+   "EX-RRW-01-GB-4",
+   "EX-RRW-01-GB-5"
+  ],
+  "printed": [
+   "\"T/ TILE AT RR RE: ELEVATION\" (A-611 prints T / TILE 6'-8 1/2\")",
+   "\"CEMENT/ GYP. TRANSITION\"",
+   "\"2 1/4\" (+/-)\" (transition below top of tile)",
+   "\"GYPSUM BOARD - RE: ELEVATION\" above, \"CEMENT BOARD\" below",
+   "\"TOP ROW TO BE FULL HEIGHT TILE - NO CUTS (TYPICAL)\"",
+   "no further detail bubbles inside"
+  ],
+  "check": [
+   {
+    "id": "(EX-RRM-01-CB-1..3, EX-RRW-01-CB-1..5)",
+    "canon": "1/2 cement board to T/TILE 6.708 ft",
+    "view_prints": "cement / gyp transition \"2 1/4\" (+/-)\" below T/TILE",
+    "result": "DELTA",
+    "note": "6'-8 1/2\" - 2 1/4\" = 6'-6 1/4\" = 6.521 ft [DERIVED] vs canon 6.708 ft (-0.1875 ft on 8 entries)."
+   },
+   {
+    "id": "(EX-RRM-01-GB-1..3, EX-RRW-01-GB-1..5)",
+    "canon": "1/2 MR gyp 2.625 ft (9'-4\" - 6'-8 1/2\")",
+    "view_prints": "gypsum board starts at the transition, 2 1/4\" below T/TILE",
+    "result": "DELTA",
+    "note": "9'-4\" - 6'-6 1/4\" = 2'-9 3/4\" = 2.8125 ft [DERIVED] vs canon 2.625 ft (+0.1875 ft on 8 entries). Total wall height unchanged; only the split moves."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A2_A-604.png"
+ },
+ {
+  "view": "B3/A-623",
+  "sheet_page": 32,
+  "looks_at": "Called by \"CEMENTITIOUS BOARD RE: B3/A-623\" in D1/A-602 (multi-purpose room north wall)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "A-623 \"DINING ELEVATIONS\" prints only C1, C2, C3 (PLAY AREA), B1 (SIDE DINING), B2 (PLAY AREA), A1, A2, A3 (SIDE DINING) - there is no view B3"
+  ],
+  "check": [],
+  "inner_bubbles": [],
+  "img": "out/img/B3_A-623.png",
+  "motivo": "Dead reference: sheet A-623 (dining / play area elevations) has no view B3, so nothing can govern from it; the callout in D1/A-602 is a drafting error and the multi-purpose base it labels is handled under C3/A-604 like the sibling views D2/D3/D4 (see the D1/A-602 delta)."
+ },
+ {
+  "view": "D2/A-611",
+  "sheet_page": 29,
+  "looks_at": "Restroom vestibule - north wall of restroom vestibule (A-202 y 282.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRV-01-1"
+  ],
+  "printed": [
+   "CEILING 10'-2\" (vestibule ceiling)",
+   "T / WAINSCOT 6'-5\" (WD-3 wainscot)",
+   "CT-73B (tile base)",
+   "PT-31B (paint above wainscot)"
+  ],
+  "check": [
+   {
+    "id": "EX-RRV-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D2/A-611) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]; A-611 restroom notes do not repeat A.3; \"vestibule\" in A.3 (A-621/A-622) applied. View also shows WD-3 wainscot to 6'-5\" (A-625 wainscot: plywood by GC behind it, wood, not ours); canon carries base only, no gyp entry on these existing walls"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D2_A-611.png"
+ },
+ {
+  "view": "D1/A-611",
+  "sheet_page": 29,
+  "looks_at": "Restroom vestibule - east wall of restroom vestibule (A-202 x 1955.5, men's door side)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRV-01-2"
+  ],
+  "printed": [
+   "CEILING 10'-2\" (vestibule ceiling)",
+   "T / WAINSCOT 6'-5\" (WD-3 wainscot)",
+   "CT-73B (tile base)",
+   "PT-31B (paint above wainscot)"
+  ],
+  "check": [
+   {
+    "id": "EX-RRV-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D1/A-611) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]; A-611 restroom notes do not repeat A.3; \"vestibule\" in A.3 (A-621/A-622) applied. View also shows WD-3 wainscot to 6'-5\" (A-625 wainscot: plywood by GC behind it, wood, not ours); canon carries base only, no gyp entry on these existing walls"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D1_A-611.png"
+ },
+ {
+  "view": "D3/A-611",
+  "sheet_page": 29,
+  "looks_at": "Restroom vestibule - south wall of restroom vestibule (A-202 y 470, door to women's)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRV-01-3"
+  ],
+  "printed": [
+   "CEILING 10'-2\" (vestibule ceiling)",
+   "T / WAINSCOT 6'-5\" (WD-3 wainscot)",
+   "CT-73B (tile base)",
+   "PT-31B (paint above wainscot)"
+  ],
+  "check": [
+   {
+    "id": "EX-RRV-01-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D3/A-611) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]; A-611 restroom notes do not repeat A.3; \"vestibule\" in A.3 (A-621/A-622) applied. View also shows WD-3 wainscot to 6'-5\" (A-625 wainscot: plywood by GC behind it, wood, not ours); canon carries base only, no gyp entry on these existing walls"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D3_A-611.png"
+ },
+ {
+  "view": "C3/A-611",
+  "sheet_page": 29,
+  "looks_at": "Restroom vestibule - west wall of restroom vestibule (A-202 x 1859.4, opening to dining 7'-0\")",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRV-01-4"
+  ],
+  "printed": [
+   "CEILING 10'-2\" (vestibule ceiling)",
+   "T / WAINSCOT 6'-5\" (WD-3 wainscot)",
+   "CT-73B (tile base)",
+   "PT-31B (paint above wainscot)"
+  ],
+  "check": [
+   {
+    "id": "EX-RRV-01-4",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C3/A-611) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]; A-611 restroom notes do not repeat A.3; \"vestibule\" in A.3 (A-621/A-622) applied. View also shows WD-3 wainscot to 6'-5\" (A-625 wainscot: plywood by GC behind it, wood, not ours); canon carries base only, no gyp entry on these existing walls"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C3_A-611.png"
+ },
+ {
+  "view": "C2/A-611",
+  "sheet_page": 29,
+  "looks_at": "Men's restroom - north wall (A-202 y 282.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-01-CB-2",
+   "EX-RRM-01-GB-2",
+   "CLG-MEN-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\" (top of CT-57A subway tile)",
+   "CT-57A (wall tile) / CT-57F (tile cap)",
+   "PT-31B (paint above tile)",
+   "CT-73B (base)",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRM-01-CB-2",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (C2/A-611)",
+    "result": "OK",
+    "note": "6.708 ft cement board = full tile height (A.5 / A-202 G.2) [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRM-01-GB-2",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (C2/A-611)",
+    "result": "OK",
+    "note": "9.333 - 6.708 = 2.625 ft [DERIVED]; board type (MR) not printed in this view (PT-31B paint only)"
+   },
+   {
+    "id": "CLG-MEN-B",
+    "canon": "gyp bd ceiling Men's restroom",
+    "view_prints": "CEILING 9'-4\" (C2/A-611)",
+    "result": "OK",
+    "note": "ceiling height consistent with canon heights; area not printed here"
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/C2_A-611.png"
+ },
+ {
+  "view": "B1/A-611",
+  "sheet_page": 29,
+  "looks_at": "Men's restroom - east wall (A-202 x 2164.7)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-01-CB-3",
+   "EX-RRM-01-GB-3",
+   "CLG-MEN-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\" (top of CT-57A subway tile)",
+   "CT-57A (wall tile) / CT-57F (tile cap)",
+   "PT-31B (paint above tile)",
+   "CT-73B (base)",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRM-01-CB-3",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (B1/A-611)",
+    "result": "OK",
+    "note": "6.708 ft cement board = full tile height (A.5 / A-202 G.2) [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRM-01-GB-3",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (B1/A-611)",
+    "result": "OK",
+    "note": "9.333 - 6.708 = 2.625 ft [DERIVED]; board type (MR) not printed in this view (PT-31B paint only)"
+   },
+   {
+    "id": "CLG-MEN-B",
+    "canon": "gyp bd ceiling Men's restroom",
+    "view_prints": "CEILING 9'-4\" (B1/A-611)",
+    "result": "OK",
+    "note": "ceiling height consistent with canon heights; area not printed here"
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/B1_A-611.png"
+ },
+ {
+  "view": "B2/A-611",
+  "sheet_page": 29,
+  "looks_at": "Men's restroom - west wall (A-202 x 1962.2, door side)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-01-CB-1",
+   "EX-RRM-01-GB-1",
+   "CLG-MEN-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\" (top of CT-57A subway tile)",
+   "CT-57A (wall tile) / CT-57F (tile cap)",
+   "PT-31B (paint above tile)",
+   "CT-73B (base)",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRM-01-CB-1",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (B2/A-611)",
+    "result": "OK",
+    "note": "6.708 ft cement board = full tile height (A.5 / A-202 G.2) [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRM-01-GB-1",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (B2/A-611)",
+    "result": "OK",
+    "note": "9.333 - 6.708 = 2.625 ft [DERIVED]; board type (MR) not printed in this view (PT-31B paint only)"
+   },
+   {
+    "id": "CLG-MEN-B",
+    "canon": "gyp bd ceiling Men's restroom",
+    "view_prints": "CEILING 9'-4\" (B2/A-611)",
+    "result": "OK",
+    "note": "ceiling height consistent with canon heights; area not printed here"
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/B2_A-611.png"
+ },
+ {
+  "view": "C1/A-611",
+  "sheet_page": 29,
+  "looks_at": "Men's restroom - south wall (A-202 y 426.6, CT-77 full-height tile wall)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRM-02-CB-1",
+   "EX-RRM-02-CB-2",
+   "EX-RRM-02-CB-3",
+   "CLG-MEN-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "CT-77 (full-height wall tile, to ceiling)",
+   "CT-73B (base)",
+   "bubble C4/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRM-02-CB-1",
+    "canon": "1/2 cement board H 9.333 ft",
+    "view_prints": "CT-77 to CEILING 9'-4\" (C1/A-611)",
+    "result": "OK",
+    "note": "9.333 ft cement board full height of tile (A.5) [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRM-02-CB-2",
+    "canon": "1/2 cement board H 9.333 ft",
+    "view_prints": "CT-77 to CEILING 9'-4\" (C1/A-611)",
+    "result": "OK",
+    "note": "9.333 ft cement board full height of tile (A.5) [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRM-02-CB-3",
+    "canon": "1/2 cement board H 9.333 ft",
+    "view_prints": "CT-77 to CEILING 9'-4\" (C1/A-611)",
+    "result": "OK",
+    "note": "9.333 ft cement board full height of tile (A.5) [CONFIRMED]"
+   },
+   {
+    "id": "CLG-MEN-B",
+    "canon": "gyp bd ceiling Men's restroom",
+    "view_prints": "CEILING 9'-4\" (C1/A-611)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "C4/A-604"
+  ],
+  "img": "out/img/C1_A-611.png"
+ },
+ {
+  "view": "A4/A-611",
+  "sheet_page": 29,
+  "looks_at": "Women's restroom - north walls (A-202 y 478 / y 439 with jog at x 1962.2)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRW-01-CB-2",
+   "EX-RRW-01-CB-3",
+   "EX-RRW-01-CB-4",
+   "EX-RRW-01-GB-2",
+   "EX-RRW-01-GB-3",
+   "EX-RRW-01-GB-4",
+   "CLG-WOM-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\"",
+   "CT-57A / CT-57F (wall tile + cap)",
+   "PT-31B above tile",
+   "CT-73B base",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRW-01-CB-2",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "6.708 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRW-01-CB-3",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "6.708 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRW-01-CB-4",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "6.708 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRW-01-GB-2",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "2.625 ft [DERIVED]; MR type not printed here"
+   },
+   {
+    "id": "EX-RRW-01-GB-3",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "2.625 ft [DERIVED]; MR type not printed here"
+   },
+   {
+    "id": "EX-RRW-01-GB-4",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (A4/A-611)",
+    "result": "OK",
+    "note": "2.625 ft [DERIVED]; MR type not printed here"
+   },
+   {
+    "id": "CLG-WOM-B",
+    "canon": "gyp bd ceiling Women's restroom",
+    "view_prints": "CEILING 9'-4\" (A4/A-611)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/A4_A-611.png"
+ },
+ {
+  "view": "A2/A-611",
+  "sheet_page": 29,
+  "looks_at": "Women's restroom - east wall (A-202 x 2106.7)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRW-01-CB-5",
+   "EX-RRW-01-GB-5",
+   "CLG-WOM-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\"",
+   "CT-57A / CT-57F (wall tile + cap)",
+   "PT-31B above tile",
+   "CT-73B base",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRW-01-CB-5",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (A2/A-611)",
+    "result": "OK",
+    "note": "6.708 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRW-01-GB-5",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (A2/A-611)",
+    "result": "OK",
+    "note": "2.625 ft [DERIVED]; MR type not printed here"
+   },
+   {
+    "id": "CLG-WOM-B",
+    "canon": "gyp bd ceiling Women's restroom",
+    "view_prints": "CEILING 9'-4\" (A2/A-611)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/A2_A-611.png"
+ },
+ {
+  "view": "A3/A-611",
+  "sheet_page": 29,
+  "looks_at": "Women's restroom - west wall (A-202 x 1859.4, lavatory)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRW-01-CB-1",
+   "EX-RRW-01-GB-1",
+   "CLG-WOM-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "T / TILE 6'-8 1/2\"",
+   "CT-57A / CT-57F (wall tile + cap)",
+   "PT-31B above tile",
+   "CT-73B base",
+   "bubble A2/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRW-01-CB-1",
+    "canon": "1/2 cement board H 6.708 ft",
+    "view_prints": "T / TILE 6'-8 1/2\" (A3/A-611)",
+    "result": "OK",
+    "note": "6.708 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRW-01-GB-1",
+    "canon": "1/2 MR H 2.625 ft",
+    "view_prints": "CEILING 9'-4\" - T/TILE 6'-8 1/2\" (A3/A-611)",
+    "result": "OK",
+    "note": "2.625 ft [DERIVED]; MR type not printed here"
+   },
+   {
+    "id": "CLG-WOM-B",
+    "canon": "gyp bd ceiling Women's restroom",
+    "view_prints": "CEILING 9'-4\" (A3/A-611)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-604"
+  ],
+  "img": "out/img/A3_A-611.png"
+ },
+ {
+  "view": "B4/A-611",
+  "sheet_page": 29,
+  "looks_at": "Women's restroom - south wall (A-202 y 583, CT-77 full-height tile wall)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-RRW-02-CB",
+   "CLG-WOM-B"
+  ],
+  "printed": [
+   "CEILING 9'-4\"",
+   "CT-77 (full-height wall tile)",
+   "CT-73B base",
+   "bubble C4/A-604"
+  ],
+  "check": [
+   {
+    "id": "EX-RRW-02-CB",
+    "canon": "1/2 cement board H 9.333 ft",
+    "view_prints": "CT-77 to CEILING 9'-4\" (B4/A-611)",
+    "result": "OK",
+    "note": "9.333 ft [CONFIRMED]"
+   },
+   {
+    "id": "CLG-WOM-B",
+    "canon": "gyp bd ceiling Women's restroom",
+    "view_prints": "CEILING 9'-4\" (B4/A-611)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "C4/A-604"
+  ],
+  "img": "out/img/B4_A-611.png"
+ },
+ {
+  "view": "D2/A-621",
+  "sheet_page": 30,
+  "looks_at": "Entry A vestibule - north (exterior existing storefront doors) with short returns of the side walls",
+  "disposition": "governs",
+  "canon_ids": [
+   "CLG-ENTA-B",
+   "EX-ENA-01",
+   "EX-ENA-02"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "EXISTING STOREFRONT",
+   "T / WAINSCOT 6'-5\" / WD-3 / CT-73B on the side returns"
+  ],
+  "check": [
+   {
+    "id": "CLG-ENTA-B",
+    "canon": "gyp bd ceiling Entry A (A-221 PT-31B C.H. 10'-2\")",
+    "view_prints": "CEILING 10'-2\" (D2/A-621)",
+    "result": "OK",
+    "note": "matches A-221 C.H. 10'-2\" used in canon"
+   },
+   {
+    "id": "EX-ENA-01",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D2/A-621 returns) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "EX-ENA-02",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D2/A-621 returns) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D2_A-621.png"
+ },
+ {
+  "view": "D1/A-621",
+  "sheet_page": 30,
+  "looks_at": "Entry A vestibule - east wall (A-202 x 1331.9)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENA-02",
+   "CLG-ENTA-B"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "WD-1 (full-height wood panel finish, by others)",
+   "CT-73B base"
+  ],
+  "check": [
+   {
+    "id": "EX-ENA-02",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (D1/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"] ; WD-1 wood paneling full height (not ours) - no wainscot cap here"
+   },
+   {
+    "id": "CLG-ENTA-B",
+    "canon": "gyp bd ceiling Entry A (A-221 PT-31B C.H. 10'-2\")",
+    "view_prints": "CEILING 10'-2\" (D1/A-621)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D1_A-621.png"
+ },
+ {
+  "view": "C3/A-621",
+  "sheet_page": 30,
+  "looks_at": "Entry A vestibule - west wall (A-202 x 1205.0)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENA-01",
+   "CLG-ENTA-B"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "T / WAINSCOT 6'-5\" (WD-3 batten wainscot)",
+   "CT-73B base",
+   "bubble C3/A-625"
+  ],
+  "check": [
+   {
+    "id": "EX-ENA-01",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C3/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "CLG-ENTA-B",
+    "canon": "gyp bd ceiling Entry A (A-221 PT-31B C.H. 10'-2\")",
+    "view_prints": "CEILING 10'-2\" (C3/A-621)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-625"
+  ],
+  "img": "out/img/C3_A-621.png"
+ },
+ {
+  "view": "C4/A-621",
+  "sheet_page": 30,
+  "looks_at": "Entry A vestibule - south (existing storefront doors into dining) with side returns",
+  "disposition": "governs",
+  "canon_ids": [
+   "CLG-ENTA-B",
+   "EX-ENA-01",
+   "EX-ENA-02"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "EXISTING STOREFRONT",
+   "T / WAINSCOT 6'-5\" / WD-3 / CT-73B on returns"
+  ],
+  "check": [
+   {
+    "id": "CLG-ENTA-B",
+    "canon": "gyp bd ceiling Entry A (A-221 PT-31B C.H. 10'-2\")",
+    "view_prints": "CEILING 10'-2\" (C4/A-621)",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "EX-ENA-01",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C4/A-621 returns) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "EX-ENA-02",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C4/A-621 returns) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-621.png"
+ },
+ {
+  "view": "B4/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining (west part) - north exterior wall with storefront (A-202 y 359.3, x 604-1150)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-01-2"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (WD-3 battens)",
+   "CT-73B base",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B4/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B4_A-621.png"
+ },
+ {
+  "view": "C2/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining (west part) - west exterior wall (A-202 x 604.1); view title printed \"KITCHEN\" although it is the dining west wall",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-01-1"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\"",
+   "CT-73B base",
+   "bubble C3/A-625",
+   "title \"KITCHEN\""
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C2/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"] ; view title \"KITCHEN\" is a drawing title error (marker on A-202 is in dining)"
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-625"
+  ],
+  "img": "out/img/C2_A-621.png"
+ },
+ {
+  "view": "C1/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining (west part) - south: play-area enclosure storefront with door 09 (A-202 y 509.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-03-1"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "EXISTING STOREFRONT",
+   "T / WAINSCOT 6'-5\" / WD-3 / CT-73B on wall strip"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-03-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (C1/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"] ; most of the face is storefront glazing (no board)"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C1_A-621.png"
+ },
+ {
+  "view": "B1/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining - west: east face of play-area enclosure (A-202 x 787.0) with existing storefront",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-03-2"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (battens)",
+   "CT-73B base",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-03-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B1/A-621) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B1_A-621.png"
+ },
+ {
+  "view": "A1/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining - east: serving soffit edge (A-221 x 1225.6) and the serving wall behind the counter (menu board wall line A-202 x 1541)",
+  "disposition": "governs",
+  "canon_ids": [
+   "SS-SRV-W",
+   "SOF-SRV-B",
+   "EX-MENU-01",
+   "EX-MENU-02",
+   "MB-01"
+  ],
+  "printed": [
+   "CEILING 10'-4\" (dining)",
+   "BULKHEAD 9'-8\" (PT-31A soffit bottom)",
+   "BULKHEAD 7'-2\" (lower bulkhead over the serving opening)",
+   "CT-72 (wall tile behind counter, up to 7'-2\")",
+   "OPEN TO BEYOND",
+   "WD-3 / CT-73B at the dining wall end"
+  ],
+  "check": [
+   {
+    "id": "SS-SRV-W",
+    "canon": "faces [('A', '1/2 regular', 1.167)]",
+    "view_prints": "CEILING 10'-4\" - BULKHEAD 9'-8\" (A1/A-621)",
+    "result": "OK",
+    "note": "exposed 0.667 ft + 0.5 ft above ceiling = 1.167 ft [DERIVED] = canon face A"
+   },
+   {
+    "id": "SOF-SRV-B",
+    "canon": "1/2 regular soffit bottom at 9.667 ft",
+    "view_prints": "BULKHEAD 9'-8\" (A1/A-621)",
+    "result": "OK",
+    "note": "9.667 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-MENU-01",
+    "canon": "1/2 regular H 3.5 ft",
+    "view_prints": "CT-72 wall tile from floor/counter up to BULKHEAD 7'-2\"; PT-31A above (A1/A-621)",
+    "result": "DELTA",
+    "note": "A.5 requires cementitious board for full height of tile: no cement board is loaded on the serving face of the menu board wall (EX-MENU starts at B.O. gyp 7'-0\" per D3/A-624). Printed tile/bulkhead line 7'-2\" vs canon B.O. gyp 7'-0\". Wall identification by A-202 position (CT-72 wall behind the counter) - confirm."
+   },
+   {
+    "id": "EX-MENU-02",
+    "canon": "1/2 regular H 3.5 ft",
+    "view_prints": "same as EX-MENU-01 (A1/A-621)",
+    "result": "DELTA",
+    "note": "same as EX-MENU-01"
+   },
+   {
+    "id": "MB-01",
+    "canon": "faces [('A', '1/2 regular', 7.667), ('B', '1/2 cement board', 14.667)]",
+    "view_prints": "CT-72 wall tile on serving face (A1/A-621)",
+    "result": "DELTA",
+    "note": "face A loaded 1/2 regular 7.667 ft; tile zone (to 7'-2\") would need cement board per A.5"
+   },
+   {
+    "id": "(none)",
+    "canon": "no canon entry",
+    "view_prints": "BULKHEAD 7'-2\" spanning the OPEN TO BEYOND part, face from 7'-2\" up to the ceiling (A1/A-621; also C2/A-622)",
+    "result": "DELTA",
+    "note": "a lower bulkhead/header face (PT-31A) between 7'-2\" and 9'-8\"/10'-0\" is printed; no canon entry found for it (only the 9'-8\" soffit SS-SRV-*). Height of face [DERIVED] 10'-0\" - 7'-2\" = 2'-10\" if it reaches the serving ceiling; length not printed."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A1_A-621.png"
+ },
+ {
+  "view": "A4/A-621",
+  "sheet_page": 30,
+  "looks_at": "Dining/serving - south: W6 drive-thru north wall 4'-2 1/2\" (A-202 y 758, x 1331-1407) with the opening beside it",
+  "disposition": "governs",
+  "canon_ids": [
+   "R-W6-11-N-CB",
+   "R-W6-11-N-GYP"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "CT-58A (brick-pattern wall tile, full height to ceiling, also above the opening)",
+   "CG-3 (corner guard)",
+   "7'-0\" OPEN TO BEYOND",
+   "CT-73B base"
+  ],
+  "check": [
+   {
+    "id": "R-W6-11-N-CB",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-58A wall tile floor to CEILING 10'-4\" (A4/A-621)",
+    "result": "DELTA",
+    "note": "A.5 \"cementitious board substrate for the full height of tile\": tile face would need cement board to 10'-4\" (+ above-ceiling per G notes), canon loads only 5\" cement board"
+   },
+   {
+    "id": "R-W6-11-N-GYP",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "CT-58A full height (A4/A-621)",
+    "result": "DELTA",
+    "note": "canon loads 9.917 ft 1/2 regular above a 5\" base; view prints tile, not paint/wainscot, on this face. Tile also continues over the 7'-0\" opening (header face 7'-0\" to 10'-4\" = 3'-4\" [DERIVED]) which has no canon entry. Wall identification by A-202 marker A4 + 4'-2 1/2\" W6 segment - confirm."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A4_A-621.png"
+ },
+ {
+  "view": "D4/A-622",
+  "sheet_page": 31,
+  "looks_at": "Serving alcove - north: south face of W6 smoke partition (A-202 y 436)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01S-SRV"
+  ],
+  "printed": [
+   "CEILING 10'-0\"",
+   "CT-45 (wall tile full height to ceiling)",
+   "CT-71B base"
+  ],
+  "check": [
+   {
+    "id": "W6-01S-SRV",
+    "canon": "1/2 cement board H 14.667 ft",
+    "view_prints": "CT-45 to CEILING 10'-0\" (D4/A-622)",
+    "result": "DELTA",
+    "note": "view confirms cement board 10.0 ft (tile full height, A.5); canon loads cement board to 14.667 ft (deck) for the smoke partition. The 4.667 ft above the ceiling is not tile substrate and is not printed as cement board in this view (board type above ceiling governed by smoke partition notes, not by D4)."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D4_A-622.png"
+ },
+ {
+  "view": "D2/A-622",
+  "sheet_page": 31,
+  "looks_at": "Serving alcove - east: west face of W4 (A-202 x 1648.1) and opening to kitchen",
+  "disposition": "governs",
+  "canon_ids": [
+   "W4-01W-SRV"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "CT-45 (wall tile full height)",
+   "CG-3 corner guard",
+   "OPEN TO BEYOND",
+   "CT-71B base",
+   "N.T.S."
+  ],
+  "check": [
+   {
+    "id": "W4-01W-SRV",
+    "canon": "1/2 cement board H 10.0 ft",
+    "view_prints": "CT-45 to CEILING 10'-2\" (D2/A-622)",
+    "result": "DELTA",
+    "note": "canon 10.0 ft cites \"A-622 D3/D4 CEILING 10'-0\"\", but D2 prints CEILING 10'-2\" for this wall: 10.167 ft [CONFIRMED in D2] vs 10.0 ft loaded (+0.167 ft). D4 is the only serving view printing 10'-0\"."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D2_A-622.png"
+ },
+ {
+  "view": "D3/A-622",
+  "sheet_page": 31,
+  "looks_at": "Serving alcove - south: north face of W6 (A-202 y 560) and opening",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-02N-SRV"
+  ],
+  "printed": [
+   "CEILING 10'-2\"",
+   "CT-45 (wall tile full height)",
+   "OPEN TO BEYOND",
+   "CT-73B base"
+  ],
+  "check": [
+   {
+    "id": "W6-02N-SRV",
+    "canon": "1/2 cement board H 10.0 ft",
+    "view_prints": "CT-45 to CEILING 10'-2\" (D3/A-622)",
+    "result": "DELTA",
+    "note": "canon 10.0 ft cites D3/D4 at 10'-0\", but D3 prints CEILING 10'-2\": 10.167 ft vs 10.0 ft loaded (+0.167 ft)."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D3_A-622.png"
+ },
+ {
+  "view": "C4/A-622",
+  "sheet_page": 31,
+  "looks_at": "Serving - west: serving soffit inner edge (A-221 x 1276.6) over the front counter, open to dining",
+  "disposition": "governs",
+  "canon_ids": [
+   "SS-SRV-IV",
+   "SOF-SRV-B"
+  ],
+  "printed": [
+   "CEILING 10'-0\" (serving)",
+   "B.O. FURR DOWN 9'-8\"",
+   "PT-31A",
+   "OPEN TO BEYOND"
+  ],
+  "check": [
+   {
+    "id": "SS-SRV-IV",
+    "canon": "faces [('B', '1/2 regular', 0.833)]",
+    "view_prints": "CEILING 10'-0\" - B.O. FURR DOWN 9'-8\" (C4/A-622)",
+    "result": "OK",
+    "note": "exposed 0.333 ft + 0.5 ft above ceiling = 0.833 ft [DERIVED] = canon face B"
+   },
+   {
+    "id": "SOF-SRV-B",
+    "canon": "1/2 regular soffit bottom at 9.667 ft",
+    "view_prints": "B.O. FURR DOWN 9'-8\" (C4/A-622)",
+    "result": "OK",
+    "note": "9.667 ft [CONFIRMED]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-622.png"
+ },
+ {
+  "view": "C2/A-622",
+  "sheet_page": 31,
+  "looks_at": "Serving - east: wall behind the serving line (menu board wall line A-202 x 1541) with openings",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-MENU-01",
+   "EX-MENU-02",
+   "MB-01"
+  ],
+  "printed": [
+   "CEILING 10'-4\" / CEILING 10'-0\"",
+   "PT-31A (bulkhead face above openings, down to ~7'-2\" line; level not dimensioned here)",
+   "CT-72 (wall tile)",
+   "CT-58A (brick-pattern wall tile, full height to ceiling, around a cased opening)",
+   "OPEN TO BEYOND (x2)",
+   "T / WAINSCOT 6'-5\" / WD-3 / CT-73B at the dining end",
+   "N.T.S."
+  ],
+  "check": [
+   {
+    "id": "EX-MENU-01",
+    "canon": "1/2 regular H 3.5 ft",
+    "view_prints": "CT-72 wall tile below the PT-31A band (C2/A-622)",
+    "result": "DELTA",
+    "note": "tile requires cement board per A.5; canon carries only 1/2 regular from 7'-0\" (3.5 ft). Height of tile not dimensioned in C2 (N.T.S.); A1/A-621 gives 7'-2\"."
+   },
+   {
+    "id": "EX-MENU-02",
+    "canon": "1/2 regular H 3.5 ft",
+    "view_prints": "CT-72 / CT-58A wall tile (C2/A-622)",
+    "result": "DELTA",
+    "note": "CT-58A printed full height to CEILING 10'-0\" at the south part of this elevation around an opening; no cement board loaded. Exact wall segment of the CT-58A zone not identifiable (N.T.S.) - confirm."
+   },
+   {
+    "id": "MB-01",
+    "canon": "faces [('A', '1/2 regular', 7.667), ('B', '1/2 cement board', 14.667)]",
+    "view_prints": "CT-72 on serving face (C2/A-622)",
+    "result": "DELTA",
+    "note": "face A 1/2 regular 7.667 ft vs tile substrate (cement board) per A.5"
+   },
+   {
+    "id": "(none)",
+    "canon": "no canon entry",
+    "view_prints": "PT-31A bulkhead face over the left OPEN TO BEYOND, from ~7'-2\" to ceiling (C2/A-622, A1/A-621)",
+    "result": "DELTA",
+    "note": "bulkhead/header not in canon; see A1/A-621"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C2_A-622.png"
+ },
+ {
+  "view": "B4/A-622",
+  "sheet_page": 31,
+  "looks_at": "Dining (south part) - north: short wall segment with wainscot (likely the closet dining faces at A-202 x 1150-1205, y 359-392)",
+  "disposition": "governs",
+  "canon_ids": [
+   "(none)"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\"",
+   "WD-3",
+   "CT-73B base",
+   "N.T.S."
+  ],
+  "check": [
+   {
+    "id": "(none)",
+    "canon": "no canon entry",
+    "view_prints": "CT-73B base + note A.3 5\" cement board (B4/A-622)",
+    "result": "DELTA",
+    "note": "no canon entry found for this narrow wall: EX-DIN-01-2 ends at x 1150.3 and EX-ENA-01 is inside Entry A; the closet faces toward dining (~2 ft + ~3 ft on A-202, not printed) carry no 5\" cement board base. Identification of the wall is by marker direction only - confirm."
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B4_A-622.png"
+ },
+ {
+  "view": "B3/A-622",
+  "sheet_page": 31,
+  "looks_at": "Dining (south part) - east wall: W8 (A-202 x 1331.2, y 753-900) and existing wall south of it (x 1330.4)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W8-02W-DIN-CB",
+   "W8-02W-DIN-GB",
+   "EX-DIN-04-3"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (WD-3 battens)",
+   "CT-73B base",
+   "bubble C3/A-625"
+  ],
+  "check": [
+   {
+    "id": "W8-02W-DIN-CB",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B3/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "EX-DIN-04-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B3/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "wainscot WD-3 to 6'-5\" on this wall (B3/A-622) + C2/C1/D1-A A-625: \"1/2\\\" PLYWOOD SHEATHING ABOVE CEMENT BOARD BY G.C.\" to \"T/PLYWOOD SHEATHING 6'-4\\\" A.F.S.\", \"1/2\\\" GYPSUM BOARD\" above",
+    "result": "DELTA",
+    "note": "gyp only from 6'-4\" to ceiling 10'-4\" = 4.0 ft [DERIVED] vs 9.917 ft loaded (canon follows note A.6 \"then gypsum board to ceiling\"; A-625 details conflict with A.6 -> RFI). Plywood is wood, not ours."
+   }
+  ],
+  "inner_bubbles": [
+   "C3/A-625"
+  ],
+  "img": "out/img/B3_A-622.png"
+ },
+ {
+  "view": "B2/A-622",
+  "sheet_page": 31,
+  "looks_at": "Dining (south part) - south exterior wall (A-202 y 1028.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-04-2"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (battens)",
+   "CT-73B base",
+   "PT-31B / WD-3"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-04-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B2/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B2_A-622.png"
+ },
+ {
+  "view": "B1/A-622",
+  "sheet_page": 31,
+  "looks_at": "Dining (south part) - west: dining face of Entry B east wall with existing storefront door 04 (A-202 x 735.2)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-04-1"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "EXISTING STOREFRONT",
+   "T / WAINSCOT 6'-5\"",
+   "CT-73B base"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-04-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B1/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B1_A-622.png"
+ },
+ {
+  "view": "A1/A-622",
+  "sheet_page": 31,
+  "looks_at": "Entry B vestibule - west (exterior storefront door 03, A-202 x 593)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENB-01-4",
+   "CLG-ENTB-B"
+  ],
+  "printed": [
+   "CEILING 10'-0\"",
+   "T / WAINSCOT 6'-5\"",
+   "WD-3 / MT-1",
+   "CT-73B base",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "EX-ENB-01-4",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A1/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "CLG-ENTB-B",
+    "canon": "gyp bd ceiling Entry B (A-221 PT-31B C.H. 10'-0\")",
+    "view_prints": "CEILING 10'-0\" (A1/A-622)",
+    "result": "OK",
+    "note": "matches A-221 C.H. 10'-0\" used in canon"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A1_A-622.png"
+ },
+ {
+  "view": "A2/A-622",
+  "sheet_page": 31,
+  "looks_at": "Entry B vestibule - north (existing storefront, A-202 y 911.5)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENB-01-1",
+   "CLG-ENTB-B"
+  ],
+  "printed": [
+   "CEILING 10'-0\"",
+   "T / WAINSCOT 6'-5\"",
+   "WD-3 / MT-1",
+   "CT-73B base",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "EX-ENB-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A2/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "CLG-ENTB-B",
+    "canon": "gyp bd ceiling Entry B (A-221 PT-31B C.H. 10'-0\")",
+    "view_prints": "CEILING 10'-0\" (A2/A-622)",
+    "result": "OK",
+    "note": "matches A-221 C.H. 10'-0\" used in canon"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A2_A-622.png"
+ },
+ {
+  "view": "A3/A-622",
+  "sheet_page": 31,
+  "looks_at": "Entry B vestibule - east (storefront door 04 to dining, A-202 x 733.7)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENB-01-2",
+   "CLG-ENTB-B"
+  ],
+  "printed": [
+   "CEILING 10'-0\"",
+   "T / WAINSCOT 6'-5\"",
+   "WD-3 / MT-1",
+   "CT-73B base",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "EX-ENB-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A3/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "CLG-ENTB-B",
+    "canon": "gyp bd ceiling Entry B (A-221 PT-31B C.H. 10'-0\")",
+    "view_prints": "CEILING 10'-0\" (A3/A-622)",
+    "result": "OK",
+    "note": "matches A-221 C.H. 10'-0\" used in canon"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A3_A-622.png"
+ },
+ {
+  "view": "A4/A-622",
+  "sheet_page": 31,
+  "looks_at": "Entry B vestibule - south wall (A-202 y 1028.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-ENB-01-3",
+   "CLG-ENTB-B"
+  ],
+  "printed": [
+   "CEILING 10'-0\"",
+   "T / WAINSCOT 6'-5\"",
+   "WD-3 / MT-1",
+   "CT-73B base"
+  ],
+  "check": [
+   {
+    "id": "EX-ENB-01-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A4/A-622) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "CLG-ENTB-B",
+    "canon": "gyp bd ceiling Entry B (A-221 PT-31B C.H. 10'-0\")",
+    "view_prints": "CEILING 10'-0\" (A4/A-622)",
+    "result": "OK",
+    "note": "matches A-221 C.H. 10'-0\" used in canon"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A4_A-622.png"
+ },
+ {
+  "view": "C3/A-623",
+  "sheet_page": 32,
+  "looks_at": "Play area - north (existing storefront; west bay tall ceiling)",
+  "disposition": "governs",
+  "canon_ids": [
+   "CLG-PLAY-B"
+  ],
+  "printed": [
+   "CEILING 14'-6\" (west bay)",
+   "CEILING 12'-9\"",
+   "WC-1 (wallcovering)",
+   "VB-1 (vinyl base)",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "CLG-PLAY-B",
+    "canon": "gyp bd ceiling play west bay PT-41 C.H. 14'-6\"",
+    "view_prints": "CEILING 14'-6\" (C3/A-623)",
+    "result": "OK",
+    "note": "west-bay gyp ceiling height confirmed; walls carry WC-1 + VB-1 (no cement board base, no new board printed)"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C3_A-623.png"
+ },
+ {
+  "view": "C1/A-623",
+  "sheet_page": 32,
+  "looks_at": "Play area - south (existing storefront; west bay tall ceiling)",
+  "disposition": "governs",
+  "canon_ids": [
+   "CLG-PLAY-B"
+  ],
+  "printed": [
+   "CEILING 14'-6\"",
+   "CEILING 12'-9\"",
+   "WC-1",
+   "PT-42",
+   "VB-1",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [
+   {
+    "id": "CLG-PLAY-B",
+    "canon": "gyp bd ceiling play west bay PT-41 C.H. 14'-6\"",
+    "view_prints": "CEILING 14'-6\" (C1/A-623)",
+    "result": "OK",
+    "note": ""
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C1_A-623.png"
+ },
+ {
+  "view": "C2/A-623",
+  "sheet_page": 32,
+  "looks_at": "Play area - west exterior storefront wall",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "CEILING 12'-0\"",
+   "WC-1",
+   "VB-1",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [],
+  "motivo": "Play-area west elevation: existing storefront glazing with WC-1 wallcovering on existing wall strips and VB-1 vinyl base; it prints no new gypsum or cement board, no framing, and no gyp ceiling level (12'-0\" is not the 14'-6\" gyp bay). Wallcovering and vinyl base are not our scope.",
+  "inner_bubbles": [],
+  "img": "out/img/C2_A-623.png"
+ },
+ {
+  "view": "B2/A-623",
+  "sheet_page": 32,
+  "looks_at": "Play area - east: play side of the enclosure storefront (A-202 x 787)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "CEILING 12'-9\"",
+   "WC-1",
+   "PT-42",
+   "VB-1",
+   "EXISTING STOREFRONT"
+  ],
+  "check": [],
+  "motivo": "Play-area east elevation: existing storefront enclosure seen from inside the play area, WC-1 wallcovering, PT-42 paint and VB-1 vinyl base; no cement board base (VB-1, not tile) and no board or framing printed. The dining face of this enclosure is covered by B1/A-621.",
+  "inner_bubbles": [],
+  "img": "out/img/B2_A-623.png"
+ },
+ {
+  "view": "B1/A-623",
+  "sheet_page": 32,
+  "looks_at": "Dining north strip - north exterior wall (A-202 y 282.6)",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-02-2"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (battens)",
+   "CT-73B base",
+   "PT-31B"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-02-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (B1/A-623) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/B1_A-623.png"
+ },
+ {
+  "view": "A1/A-623",
+  "sheet_page": 32,
+  "looks_at": "Dining north strip - east wall (A-202 x 1858.7) with opening to restroom vestibule",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-02-3"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\"",
+   "CT-73B base",
+   "OPEN TO BEYOND"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-02-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A1/A-623) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A1_A-623.png"
+ },
+ {
+  "view": "A3/A-623",
+  "sheet_page": 32,
+  "looks_at": "Dining north strip - west wall (A-202 x 1342.0) with 7'-0\" opening",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-02-1"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (battens)",
+   "CT-73B base",
+   "7'-0\" OPEN TO BEYOND",
+   "FLY LIGHT"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-02-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A3/A-623) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A3_A-623.png"
+ },
+ {
+  "view": "A2/A-623",
+  "sheet_page": 32,
+  "looks_at": "Dining north strip - south: north face of W6 smoke partition (A-202 y 427.7)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01N-CB",
+   "W6-01N-GB1",
+   "W6-01N-GB2"
+  ],
+  "printed": [
+   "CEILING 10'-4\"",
+   "T / WAINSCOT 6'-5\" (WD-3 battens, full length)",
+   "CT-73B base",
+   "PT-31B above wainscot"
+  ],
+  "check": [
+   {
+    "id": "W6-01N-CB",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "CT-73B tile base (A2/A-623) + note A.3/A-621 \"5\\\" high cementitious board substrate at base of all walls in dining room and vestibule\"",
+    "result": "OK",
+    "note": "5\" = 0.417 ft [CONFIRMED by note A.3, C1/A-625 prints 5\"]"
+   },
+   {
+    "id": "W6-01N-GB1",
+    "canon": "1/2 regular H 10.417 ft",
+    "view_prints": "CEILING 10'-4\" (A2/A-623) + wainscot full length; A-625 C1/D1-A: 1/2\" plywood by G.C. to 6'-4\" A.F.S., gypsum above",
+    "result": "DELTA",
+    "note": "ceiling 10'-4\" OK; but gyp from 6'-4\" to 6\" above ceiling = 10.833 - 6.333 = 4.5 ft [DERIVED] vs 10.417 ft loaded (A.6 vs A-625 conflict -> RFI)"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "CEILING 10'-4\" (A2/A-623) + A-625 wainscot details",
+    "result": "DELTA",
+    "note": "gyp from 6'-4\" to ceiling = 4.0 ft [DERIVED] vs 9.917 ft loaded (A.6 vs A-625 conflict -> RFI)"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/A2_A-623.png"
+ },
+ {
+  "view": "C3/A-625",
+  "sheet_page": 34,
+  "looks_at": "Typical wainscoting elevation (inner bubble of C3/C2 A-621 and B3/A-622)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01N-GB1",
+   "W6-01N-GB2",
+   "W8-02W-DIN-GB"
+  ],
+  "printed": [
+   "GYPSUM BOARD (above wainscoting cap)",
+   "WAINSCOTING CAP BY MFR",
+   "2'-0\" BATTEN",
+   "COVE BASE",
+   "bubble C2/A-625"
+  ],
+  "check": [
+   {
+    "id": "W6-01N-GB1",
+    "canon": "1/2 regular H 10.417 ft",
+    "view_prints": "GYPSUM BOARD only above the wainscot cap (C3/A-625)",
+    "result": "DELTA",
+    "note": "see C2/A-625 + D1-A/A-625: board below the cap is plywood (wood) by GC; canon gyp runs from 5\" to ceiling"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "GYPSUM BOARD only above the wainscot cap (C3/A-625)",
+    "result": "DELTA",
+    "note": "see C2/A-625 + D1-A/A-625: board below the cap is plywood (wood) by GC; canon gyp runs from 5\" to ceiling"
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "GYPSUM BOARD only above the wainscot cap (C3/A-625)",
+    "result": "DELTA",
+    "note": "see C2/A-625 + D1-A/A-625: board below the cap is plywood (wood) by GC; canon gyp runs from 5\" to ceiling"
+   }
+  ],
+  "inner_bubbles": [
+   "C2/A-625"
+  ],
+  "img": "out/img/C3_A-625.png"
+ },
+ {
+  "view": "C2/A-625",
+  "sheet_page": 34,
+  "looks_at": "Wall section at wainscoting (dining)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01N-GB1",
+   "W6-01N-GB2",
+   "W8-02W-DIN-GB",
+   "W6-01N-CB",
+   "W8-02W-DIN-CB"
+  ],
+  "printed": [
+   "T/WAINSCOT 6'-5\" A.F.S.",
+   "\"1/2\\\" PLYWOOD SHEATHING BY G.C.\" behind wainscot",
+   "1/4\" BACK PANEL BY OWNER",
+   "CONFIGURATION VARIES WHERE INTERIOR WOOD SHEATHING IS REQUIRED FOR SHEAR",
+   "bubbles D1-A, D1-B, C1 /A-625"
+  ],
+  "check": [
+   {
+    "id": "W6-01N-GB1",
+    "canon": "1/2 regular H 10.417 ft",
+    "view_prints": "\"1/2\\\" PLYWOOD SHEATHING BY G.C.\" behind wainscot from the 5\" base to T/PLYWOOD 6'-4\" (C2 + D1-A A-625)",
+    "result": "DELTA",
+    "note": "gyp zone is 6'-4\" to ceiling, not 5\" to ceiling; contradicts note A.6 \"then gypsum board to ceiling\" -> RFI"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "\"1/2\\\" PLYWOOD SHEATHING BY G.C.\" behind wainscot from the 5\" base to T/PLYWOOD 6'-4\" (C2 + D1-A A-625)",
+    "result": "DELTA",
+    "note": "gyp zone is 6'-4\" to ceiling, not 5\" to ceiling; contradicts note A.6 \"then gypsum board to ceiling\" -> RFI"
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "\"1/2\\\" PLYWOOD SHEATHING BY G.C.\" behind wainscot from the 5\" base to T/PLYWOOD 6'-4\" (C2 + D1-A A-625)",
+    "result": "DELTA",
+    "note": "gyp zone is 6'-4\" to ceiling, not 5\" to ceiling; contradicts note A.6 \"then gypsum board to ceiling\" -> RFI"
+   }
+  ],
+  "inner_bubbles": [
+   "D1-A/A-625",
+   "D1-B/A-625",
+   "C1/A-625"
+  ],
+  "img": "out/img/C2_A-625.png"
+ },
+ {
+  "view": "C1/A-625",
+  "sheet_page": 34,
+  "looks_at": "Wainscoting base detail",
+  "disposition": "governs",
+  "canon_ids": [
+   "EX-DIN-01-1",
+   "EX-DIN-01-2",
+   "EX-DIN-02-1",
+   "EX-DIN-02-2",
+   "EX-DIN-02-3",
+   "EX-DIN-03-1",
+   "EX-DIN-03-2",
+   "EX-DIN-04-1",
+   "EX-DIN-04-2",
+   "EX-DIN-04-3",
+   "EX-ENA-01",
+   "EX-ENA-02",
+   "EX-ENB-01-1",
+   "EX-ENB-01-2",
+   "EX-ENB-01-3",
+   "EX-ENB-01-4",
+   "EX-RRV-01-1",
+   "EX-RRV-01-2",
+   "EX-RRV-01-3",
+   "EX-RRV-01-4",
+   "W6-01N-CB",
+   "W8-02W-DIN-CB"
+  ],
+  "printed": [
+   "1/2\" CEMENT BOARD (at base)",
+   "5\" (height of cement board above T/SLAB)",
+   "1/2\" PLYWOOD SHEATHING ABOVE CEMENT BOARD BY G.C.",
+   "COVE BASE / FLOOR TILE"
+  ],
+  "check": [
+   {
+    "id": "EX-DIN-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-02-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-02-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-02-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-03-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-03-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-04-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-04-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-DIN-04-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENA-01",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENA-02",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENB-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENB-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENB-01-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-ENB-01-4",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRV-01-1",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRV-01-2",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRV-01-3",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "EX-RRV-01-4",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "W6-01N-CB",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   },
+   {
+    "id": "W8-02W-DIN-CB",
+    "canon": "1/2 cement board H 0.417 ft",
+    "view_prints": "1/2\" CEMENT BOARD 5\" high (C1/A-625)",
+    "result": "OK",
+    "note": "0.417 ft [CONFIRMED]"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C1_A-625.png"
+ },
+ {
+  "view": "D1-A/A-625",
+  "sheet_page": 34,
+  "looks_at": "Wainscoting cap detail - wood sheathing NOT required for shear",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01N-GB1",
+   "W6-01N-GB2",
+   "W8-02W-DIN-GB"
+  ],
+  "printed": [
+   "1/2\" GYPSUM BOARD (above cap)",
+   "T/WAINSCOT CAP 6'-5\" A.F.S.",
+   "T/PLYWOOD SHEATHING 6'-4\" A.F.S.",
+   "1/2\" PLYWOOD SHEATHING BY G.C."
+  ],
+  "check": [
+   {
+    "id": "W6-01N-GB1",
+    "canon": "1/2 regular H 10.417 ft",
+    "view_prints": "gyp above T/PLYWOOD 6'-4\" (D1-A/A-625)",
+    "result": "DELTA",
+    "note": "4.5 ft [DERIVED: 10'-4\" + 6\" - 6'-4\"] vs 10.417"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "gyp above 6'-4\" (D1-A/A-625)",
+    "result": "DELTA",
+    "note": "4.0 ft [DERIVED: 10'-4\" - 6'-4\"] vs 9.917"
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "gyp above 6'-4\" (D1-A/A-625)",
+    "result": "DELTA",
+    "note": "4.0 ft [DERIVED] vs 9.917"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D1-A_A-625.png"
+ },
+ {
+  "view": "D1-B/A-625",
+  "sheet_page": 34,
+  "looks_at": "Wainscoting cap detail - wood sheathing required for shear (RE: structural)",
+  "disposition": "governs",
+  "canon_ids": [
+   "W6-01N-GB1",
+   "W6-01N-GB2",
+   "W8-02W-DIN-GB"
+  ],
+  "printed": [
+   "1/2\" GYPSUM BOARD (above cap)",
+   "T/WAINSCOT CAP 6'-5\" A.F.S.",
+   "WOOD SHEATHING - RE: STRUCTURAL"
+  ],
+  "check": [
+   {
+    "id": "W6-01N-GB1",
+    "canon": "1/2 regular H 10.417 ft",
+    "view_prints": "gyp above the wainscot cap over structural wood sheathing (D1-B/A-625)",
+    "result": "DELTA",
+    "note": "same conclusion as D1-A: no gyp in the wainscot zone; T/sheathing level not printed in D1-B (6'-5\" cap printed)"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "gyp above the wainscot cap over structural wood sheathing (D1-B/A-625)",
+    "result": "DELTA",
+    "note": "same conclusion as D1-A: no gyp in the wainscot zone; T/sheathing level not printed in D1-B (6'-5\" cap printed)"
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "1/2 regular H 9.917 ft",
+    "view_prints": "gyp above the wainscot cap over structural wood sheathing (D1-B/A-625)",
+    "result": "DELTA",
+    "note": "same conclusion as D1-A: no gyp in the wainscot zone; T/sheathing level not printed in D1-B (6'-5\" cap printed)"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D1-B_A-625.png"
+ },
+ {
+  "view": "B4/A-301",
+  "sheet_page": 17,
+  "looks_at": "West exterior elevation (marker on A-202 at the west side of the play area, arrow looking east)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "T.O. SLAB 0\" / TOP OF STONE SILL 3'-0\" / BOTTOM OF BAND 13'-1\" / TOP PLATE 19'-6\" / TOP OF DECK 23'-9\" (exterior level marks)",
+   "finish tags ST-1 / STN-1 stone, SC-1 / SC-3 stucco, PT-xxx exterior paint, EC-1 coping (FINISH SCHEDULE - EXTERIOR)",
+   "keynotes 5 freestanding canopy by owner, 6, 12, 13, 15"
+  ],
+  "check": [],
+  "motivo": "Exterior elevation of the west face: stone veneer ST-1 / STN-1, stucco band and cornice, storefront at the play-area tower, owner canopy and awnings only. No gypsum board, cement board or metal framing is printed; the exterior wall SW6 / existing wall framing and sheathing are wood Div. 06 and the cornice is stucco over framed (wood) cornice, so nothing applies to any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/B4_A-301.png"
+ },
+ {
+  "view": "D4/A-301",
+  "sheet_page": 17,
+  "looks_at": "South exterior elevation (marker on A-202 below the dining / drive-thru south wall)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "T.O. SLAB 0\" / TOP OF STONE SILL 3'-0\" / BOTTOM OF BAND 13'-1\" / TOP PLATE 19'-6\" / TOP OF DECK 23'-9\" (exterior level marks)",
+   "finish tags ST-1 / STN-1 stone, SC-1 / SC-3 stucco, PT-xxx exterior paint, EC-1 coping (FINISH SCHEDULE - EXTERIOR)",
+   "\"EXISTING STONE TO REMAIN. ANY REPAIRS TO MATCH EXISTING\"",
+   "\"EXISTING | NEW ADDITION\" split",
+   "revision cloud 3 around dining storefront (exterior glazing)",
+   "keynotes 1, 3, 5, 6, 8 (Tormax drive-thru door), 12, 13, 15, 17"
+  ],
+  "check": [],
+  "motivo": "Exterior elevation of the south face: existing stone to remain, stucco band / cornice, storefront, drive-thru Tormax door, owner canopy and awnings. Nothing of gypsum / cement board or metal framing is printed; the clouded storefront change is exterior glazing, so no canon entry is affected.",
+  "inner_bubbles": [],
+  "img": "out/img/D4_A-301.png"
+ },
+ {
+  "view": "B4/A-302",
+  "sheet_page": 18,
+  "looks_at": "North exterior elevation (marker on A-202 above the entry A / north storefront)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "T.O. SLAB 0\" / TOP OF STONE SILL 3'-0\" / BOTTOM OF BAND 13'-1\" / TOP PLATE 19'-6\" / TOP OF DECK 23'-9\" (exterior level marks)",
+   "finish tags ST-1 / STN-1 stone, SC-1 / SC-3 stucco, PT-xxx exterior paint, EC-1 coping (FINISH SCHEDULE - EXTERIOR)",
+   "\"NEW ADDITION | EXISTING\" split",
+   "dims 13'-4 1/2\" and 104'-6 1/2\" (building length, exterior)",
+   "keynotes 1, 3, 5, 12, 13, 15, 17"
+  ],
+  "check": [],
+  "motivo": "Exterior elevation of the north face: stone veneer, stucco band and cornice, storefront windows and entry doors, awnings and light fixtures only. No board or metal framing is printed for any canon entry; the SW6 exterior wall sheathing is wood Div. 06.",
+  "inner_bubbles": [],
+  "img": "out/img/B4_A-302.png"
+ },
+ {
+  "view": "D4/A-302",
+  "sheet_page": 18,
+  "looks_at": "East exterior elevation (marker on A-202 east of the new addition / walk-in cooler)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "T.O. SLAB 0\" / TOP OF STONE SILL 3'-0\" / BOTTOM OF BAND 13'-1\" / TOP PLATE 19'-6\" / TOP OF DECK 23'-9\" (exterior level marks)",
+   "finish tags ST-1 / STN-1 stone, SC-1 / SC-3 stucco, PT-xxx exterior paint, EC-1 coping (FINISH SCHEDULE - EXTERIOR)",
+   "keynote tag 20 printed twice at grade: '20 NEW LAMB'S TOUNGE RE; DETAIL D4/A-501'",
+   "keynote 19 NEW SERVICE DOOR, 17 electrical cabinets, 18 gas meter",
+   "dims 1'-11 1/4\", 43'-2 1/2\", 1'-11 1/2\" (exterior)"
+  ],
+  "check": [],
+  "motivo": "Exterior elevation of the east face (new addition): stone veneer, stucco parapet, service door, electrical cabinets, gas meter and lamb's tongue downspout outlets (keynote 20 -> D4/A-501). Nothing of gypsum / cement board or metal framing is printed for any canon entry.",
+  "inner_bubbles": [
+   "D4/A-501"
+  ],
+  "img": "out/img/D4_A-302.png"
+ },
+ {
+  "view": "D4/A-401",
+  "sheet_page": 19,
+  "looks_at": "E-W building section through play area, dining, order, serving, kitchen and service, looking north (A-202 marker at y 685.7 pt)",
+  "disposition": "governs",
+  "canon_ids": [
+   "CLG-PLAY-B",
+   "W6-01N-GB1",
+   "W6-01N-GB2",
+   "W8-02W-DIN-GB",
+   "R-W6-11-N-GYP",
+   "W6-05W-MOP",
+   "M2.1-01",
+   "M3.5-02"
+  ],
+  "printed": [
+   "14'-6\" (play-area west bay ceiling height)",
+   "12'-9\" (play-area main ceiling height)",
+   "10'-4\" (dining ceiling height)",
+   "10'-2\" (kitchen ceiling height)",
+   "10'-2\" (service ceiling height)",
+   "\"EXISTING WALL DEMO TO TOP OF NEW ROOF\" (existing east exterior wall above the new addition roof)",
+   "\"NEW WALL STOPS AT NEW ROOF\"",
+   "TOP PLATE 19'-6\", BOTTOM OF BAND 13'-1\", B.O. CANOPY 9'-6\"",
+   "bubble A2/A-402 (enlarged section of the service / new-addition bay)",
+   "Note: service C.H. 10'-2\" is printed; canon carries only the 1'-0\" cement board base on service walls (W6-08E-SVC, W6-10N-SVC, SW6-02-SVC) and no board above it - finish above the base is not printed in this view (no DELTA declared, finish comes from A-211 / elevations)."
+  ],
+  "check": [
+   {
+    "id": "CLG-PLAY-B",
+    "canon": "PT-41 C.H. 14'-6\" (A-221)",
+    "view_prints": "14'-6\" at play-area west bay [CONFIRMED D4/A-401]",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "W6-01N-GB1",
+    "canon": "10.417 ft = C.H. 10'-4\" + 0.5 - 5\" base",
+    "view_prints": "dining 10'-4\" [CONFIRMED D4/A-401]",
+    "result": "OK",
+    "note": "ceiling height matches; the +6\" and the base come from other sheets"
+   },
+   {
+    "id": "W6-01N-GB2",
+    "canon": "9.917 ft = C.H. 10'-4\" - 5\" base",
+    "view_prints": "dining 10'-4\"",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "W8-02W-DIN-GB",
+    "canon": "9.917 ft = C.H. 10'-4\" - 5\" base",
+    "view_prints": "dining 10'-4\"",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "R-W6-11-N-GYP",
+    "canon": "9.917 ft (cites A-401 D4 10'-4\")",
+    "view_prints": "dining 10'-4\"",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "W6-05W-MOP",
+    "canon": "10.167 ft = kitchen C.H. 10'-2\"",
+    "view_prints": "kitchen 10'-2\" [CONFIRMED D4/A-401]",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "M2.1-01",
+    "canon": "10.667 ft = kitchen C.H. 10'-2\" + 6\"",
+    "view_prints": "kitchen 10'-2\"",
+    "result": "OK",
+    "note": "[DERIVED] 10'-2\" + 6\" (A-202 C.1)"
+   },
+   {
+    "id": "M3.5-02",
+    "canon": "10.667 ft = kitchen C.H. 10'-2\" + 6\"",
+    "view_prints": "kitchen 10'-2\"",
+    "result": "OK",
+    "note": "[DERIVED] 10'-2\" + 6\""
+   }
+  ],
+  "inner_bubbles": [
+   "A2/A-402"
+  ],
+  "img": "out/img/D4_A-401.png"
+ },
+ {
+  "view": "A3/A-402",
+  "sheet_page": 20,
+  "looks_at": "Wall section through the drive-thru south exterior wall at window / sliding door 06, looking west (marker on A-202 at 1429.9,1147.3; same wall as EX-DT-01)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"AIR CURTAIN. RE: MECHANICAL\"",
+   "\"AIR CURTAIN DIVERTER RE: MECHANICAL\"",
+   "1'-1 3/4\" (vertical dim at the canopy / A4 detail, exterior)",
+   "bubbles A4/A-501, C2/A-501, B2/A-501, A2/A-501",
+   "title SECTION @ DRIVE THRU 3/4\" = 1'-0\""
+  ],
+  "check": [],
+  "motivo": "Section of the existing drive-thru exterior wall: stone veneer, existing wood stud wall with batt, sliding door, air curtain and foundation. The interior face is drawn only as a line with no label, board type or height, so it prints nothing that sets or checks EX-DT-01 (whose 7'-8\" height comes from C1/A-603) or any other canon entry.",
+  "inner_bubbles": [
+   "A4/A-501",
+   "C2/A-501",
+   "B2/A-501",
+   "A2/A-501"
+  ],
+  "img": "out/img/A3_A-402.png"
+ },
+ {
+  "view": "A2/A-402",
+  "sheet_page": 20,
+  "looks_at": "Enlarged building section of the service room / new east addition (bubbled inside D4/A-401), looking north",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"SECTION OF THE PARAPET TO BE REMOVED\" (existing east exterior wall parapet)",
+   "\"SINGLE PLY ROOFING MEMBRANE OVER RIDGID INSULATION\"",
+   "\"1/2\" PLYWOOD ROOF SHEATHING OVER 2X10 ROOF JOIST. RE: STRUCTURE\"",
+   "\"METAL AWNING BY SIGN VENDOR\"",
+   "\"EXISTING CONCRETE FOUNDATION\" / \"NEW CONCRETE FOUNDATION\"",
+   "TOP PLATE 19'-6\", BOTTOM OF BAND 13'-1\", B.O. CANOPY 9'-6\", TOP OF STONE SILL 3'-0\"",
+   "bubbles D1/A-501, B1/A-502, C1/A-501, C4/A-501, B4/A-501, B1/A-501, A3/A-501 (SIM), A2/A-502"
+  ],
+  "check": [],
+  "motivo": "Section of the new wood-framed east addition: roof (plywood over 2x10 joists), parapet of the existing wall removed, stone / stucco exterior, service door and foundations. No gypsum / cement board, metal framing or gyp / metal demo is labeled or dimensioned; the parapet removal is exterior wood / stucco construction, so no canon entry (SW6-02-SVC, W6-08E-SVC, DEMO-08..10) is set or checked here.",
+  "inner_bubbles": [
+   "D1/A-501",
+   "B1/A-502",
+   "C1/A-501",
+   "C4/A-501",
+   "B4/A-501",
+   "B1/A-501",
+   "A3/A-501",
+   "A2/A-502"
+  ],
+  "img": "out/img/A2_A-402.png"
+ },
+ {
+  "view": "C4/A-624",
+  "sheet_page": 33,
+  "looks_at": "TYP DINING SOFFIT detail (bubbled on A-221 RCP at the serving soffit and at the dining gathering-table soffit)",
+  "disposition": "governs",
+  "canon_ids": [
+   "SS-SRV-W",
+   "SS-SRV-N",
+   "SS-SRV-IV",
+   "SS-SRV-IH",
+   "SS-GT-N",
+   "SS-GT-S",
+   "SS-GT-W",
+   "SS-GT-E",
+   "SOF-SRV-B",
+   "SOF-GT-B",
+   "XBR-SRV-W",
+   "XBR-SRV-N",
+   "XBR-GT"
+  ],
+  "printed": [
+   "\"3-5/8\" METAL STUD FRAMING AT 16\" O.C.\"",
+   "\"3-5/8\" METAL STUD CROSS BRACE AT 32\" O.C.\" (drawn at 1:1 slope)",
+   "\"METAL STUD RUNNER - RE: STRUCTURAL\" / \"ATTACH SOFFIT ASSEMBLY TO RUNNER - RE: STRUCTURAL\" / \"ROOF JOISTS - RE: STRUCTURAL\"",
+   "\"1/2\" GYPSUM BOARD - MATCH PAINT COLOR AT SOFFIT BOTTOM UNLESS NOTED OTHERWISE\"",
+   "\"6\" MIN.\" gypsum board above the ACT on both sides",
+   "\"SEE RCP CEILING HT.\" (both sides and soffit bottom)",
+   "\"GYPSUM BOARD SOFFIT RE: RCP FOR DIMENSION\" / \"RE: REFLECTED CEILING PLAN\"",
+   "\"PROVIDE CORNER BEADS AT ALL GYPSUM BOARD INTERSECTIONS, TYP.\"",
+   "\"NOTE: COORDINATE BLOCKING REQUIREMENTS WITH CHARTER HOUSE WHEN FULL HEIGHT STEEL WALL CONDITION EXISTS.\""
+  ],
+  "check": [
+   {
+    "id": "SS-SRV-W / SS-SRV-N / SS-GT-N / SS-GT-S / SS-GT-W / SS-GT-E",
+    "canon": "face 1/2 regular 1.167 ft",
+    "view_prints": "1/2\" gypsum board; 6\" MIN. above ACT; heights SEE RCP",
+    "result": "OK",
+    "note": "[DERIVED] dining ACT 10'-4\" - soffit 9'-8\" (A-221) = 0'-8\" + 6\" min (C4/A-624) = 1'-2\" = 1.167 ft"
+   },
+   {
+    "id": "SS-SRV-IV / SS-SRV-IH",
+    "canon": "face 1/2 regular 0.833 ft",
+    "view_prints": "1/2\" gypsum board; 6\" MIN. above ACT",
+    "result": "OK",
+    "note": "[DERIVED] serving ACT 10'-0\" - 9'-8\" = 0'-4\" + 6\" = 0'-10\" = 0.833 ft"
+   },
+   {
+    "id": "SS-* (framing)",
+    "canon": "hanger studs 3.0 ft to B.O. structure",
+    "view_prints": "3-5/8\" metal studs @ 16\" O.C. from runner at roof joists; stud length not printed (break lines)",
+    "result": "OK",
+    "note": "stud size / spacing [CONFIRMED]; 3'-0\" is [DERIVED] from S-201 / A-221, not printed here"
+   },
+   {
+    "id": "SOF-SRV-B / SOF-GT-B",
+    "canon": "1/2 regular soffit bottom, C.H. 9'-8\"",
+    "view_prints": "1/2\" gypsum board at soffit bottom; dimension RE: RCP",
+    "result": "OK",
+    "note": "area comes from A-221, not printed here"
+   },
+   {
+    "id": "XBR-SRV-W / XBR-SRV-N / XBR-GT",
+    "canon": "3-5/8\" cross brace @ 32\" O.C., 1:1 slope",
+    "view_prints": "3-5/8\" metal stud cross brace at 32\" O.C., 1:1 slope triangle",
+    "result": "OK",
+    "note": ""
+   },
+   {
+    "id": "corner bead (soffit edges)",
+    "canon": "no corner-bead entry in canon_walls / canon_otros",
+    "view_prints": "\"PROVIDE CORNER BEADS AT ALL GYPSUM BOARD INTERSECTIONS, TYP.\"",
+    "result": "DELTA",
+    "note": "corner bead at every soffit bottom edge (outer edges of SS-SRV-*, SS-GT-*) is printed but not carried in the canon files given; check the accessories / trim list"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-624.png"
+ },
+ {
+  "view": "D3/A-624",
+  "sheet_page": 33,
+  "looks_at": "MENU BOARD LIGHT BOX DETAIL - NON LC STORE, section through the serving / kitchen menu board wall (bubbled on A-221 at the MB-01 infill)",
+  "disposition": "governs",
+  "canon_ids": [
+   "MB-01",
+   "EX-MENU-01",
+   "EX-MENU-02"
+  ],
+  "printed": [
+   "\"2X6 WOOD FRAMING OR 6\" METAL FRAMING AT 16\" O.C.\"",
+   "\"1/2\" GYPSUM BOARD\" (serving face of the light box)",
+   "\"7'-0\" A.F.F. BOTT. OF GYPSUM BD.\"",
+   "\"7'-2\" A.F.F. BOTT. OF MENU BD.\"",
+   "\"6\" MIN.\" gypsum board above the ACT, \"SEE RCP CEILING HT.\"",
+   "\"9'-1\" BLOCKING CL\" / \"2X BLOCKING\"",
+   "\"1/2\" PLYWOOD\" (serving side of the studs)",
+   "\"1/2\" CEMENTITIOUS BOARD\" + \"STAINLESS STEEL WALLCOVER\" (kitchen face)",
+   "\"WALL TILE - RE: FINISH SCHEDULE\" (serving face below 7'-0\")",
+   "\"BATT INSULATION AT HOOD LOCATIONS\"",
+   "\"WALL FRAMING - RE: WALL TYPES\""
+  ],
+  "check": [
+   {
+    "id": "MB-01",
+    "canon": "framing INFILL, height 14.667 ft",
+    "view_prints": "2x6 wood OR 6\" metal framing @ 16\" O.C.; height not printed (break lines)",
+    "result": "OK",
+    "note": "metal per estimator standing order (metal-or-wood -> metal); 6\" @ 16\" O.C. [CONFIRMED]; 14'-8\" comes from S-201 / smoke partition, not from this view"
+   },
+   {
+    "id": "MB-01 face B",
+    "canon": "1/2 cement board 14.667 ft (kitchen)",
+    "view_prints": "1/2\" cementitious board + stainless steel wallcover on the kitchen face; extent not printed",
+    "result": "OK",
+    "note": "board type [CONFIRMED]; height not printed"
+   },
+   {
+    "id": "MB-01 face A",
+    "canon": "1/2 regular 7.667 ft (7'-0\" A.F.F. to deck 14'-8\")",
+    "view_prints": "1/2\" gypsum board from 7'-0\" A.F.F. (B.O. gyp bd) to 6\" MIN. above the ACT",
+    "result": "DELTA",
+    "note": "bottom 7'-0\" [CONFIRMED] OK; top: D3 prints only 6\" min above ACT -> [DERIVED] 10'-0\" serving ACT (A-221) + 6\" - 7'-0\" = 3.5 ft, as used for EX-MENU-01/02 on the same face; canon MB-01 carries 7.667 ft to the deck (smoke partition basis). The two entries on the same serving face disagree (7.667 vs 3.5 ft); resolve which governs"
+   },
+   {
+    "id": "EX-MENU-01 / EX-MENU-02",
+    "canon": "1/2 regular 3.5 ft (7'-0\" to ACT 10'-0\" + 6\")",
+    "view_prints": "7'-0\" A.F.F. B.O. gyp bd; 6\" MIN. above ACT",
+    "result": "OK",
+    "note": "[DERIVED] with serving ACT 10'-0\" from A-221"
+   },
+   {
+    "id": "MB-01 face A / EX-MENU-01 / EX-MENU-02 below 7'-0\"",
+    "canon": "no board below 7'-0\" on the serving face",
+    "view_prints": "WALL TILE - RE: FINISH SCHEDULE below 7'-0\"; substrate printed is 1/2\" plywood (not ours), no cement board printed",
+    "result": "DELTA",
+    "note": "tile 0'-0\" to 7'-0\" on the serving face has no backer in canon; D3 shows plywood only, but A-622 general note requires cementitious board for the full height of tile - check (possible missing 1/2\" cement board 7'-0\" high)"
+   }
+  ],
+  "inner_bubbles": [],
+  "img": "out/img/D3_A-624.png"
+ },
+ {
+  "view": "D4/A-501",
+  "sheet_page": 21,
+  "looks_at": "LAMB'S TOUNGE detail (N.T.S.) at the east exterior wall downspout outlet (keynote 20 on D4/A-302)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"2X6 STUDS AT 16\" O.C.\"",
+   "\"1\" RIGID INSULATION\", \"2 LAYERS OF 15 # FELT\"",
+   "\"DOWNSPOUT NOZZLE BY JAY R. SMITH MFG. CO.\"",
+   "\"STONE TO MATCH EXISTING\"",
+   "dims 6 1/2\" / 5 31/32\" (veneer build-up)"
+  ],
+  "check": [],
+  "motivo": "Exterior detail of a downspout nozzle through the stone veneer on a 2x6 wood stud wall: felt, rigid insulation, stone and plumbing only. No gypsum / cement board or metal framing is printed for any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/D4_A-501.png"
+ },
+ {
+  "view": "A4/A-501",
+  "sheet_page": 21,
+  "looks_at": "DETACHED CANOPY FLASHING DETAIL at the drive-thru wall (bubbled in A3/A-402)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"STEEL FLASHING, FINISH TO MATCH ADJACENT CANOPY\"",
+   "\"1/4\" DIA. DRIVE PIN AND ANCHOR @ 2'-0\" O.C.\"",
+   "\"CANOPY BY MFR\"",
+   "\"NOTE: FLASHING INSTALLED BY CANOPY VENDOR\"",
+   "\"REF WALL TYPES AND EXTERIOR ELEVATIONS\""
+  ],
+  "check": [],
+  "motivo": "Exterior flashing between the prefabricated owner canopy and the wall, installed by the canopy vendor. Prefabricated canopies and flashing are not our scope and no board or metal framing is printed.",
+  "inner_bubbles": [],
+  "img": "out/img/A4_A-501.png"
+ },
+ {
+  "view": "C2/A-501",
+  "sheet_page": 21,
+  "looks_at": "DRIVE THRU SLIDING DOOR HEAD (bubbled in A3/A-402) - head of the new sliding door in the existing drive-thru south wall (EX-DT-01 wall)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"INTERIOR SHEATHING & FINISH - RE: FINISH SCHEDULE, WALL & PARTITION TYPE NOTES\"",
+   "\"2X FURR OUT\"",
+   "\"HEADER FRAMING - RE: STRUCTURAL\"",
+   "\"EXISTING WALL FRAMING & INSULATION\"",
+   "\"FINISH CEILING - RE: RCP\"",
+   "note \"IN METAL STUD WALL WITHIN 18\" OF HOOD: FIRE RETARDANT AND PRESSURE TREATED EQUAL TO D-BLAZE BY VIANCE. OTHER LOCATIONS: UNTREATED LUMBER.\"",
+   "existing stone veneer over metal lath, aluminum sliding door frame, door access panel"
+  ],
+  "check": [],
+  "motivo": "Head detail of the drive-thru sliding door: wood header, 2x furr-out, existing wood framing and the door frame. The interior face is only labeled 'INTERIOR SHEATHING & FINISH - RE: FINISH SCHEDULE' with no board type, height or extent, so it neither sets nor checks EX-DT-01 (height from C1/A-603) or any other canon entry; the lumber note covers wood blocking, not ours.",
+  "inner_bubbles": [],
+  "img": "out/img/C2_A-501.png"
+ },
+ {
+  "view": "B2/A-501",
+  "sheet_page": 21,
+  "looks_at": "DRIVE THRU SLIDING DOOE JAMB (plan detail, bubbled in A3/A-402) - jamb of the sliding door in the existing drive-thru south wall",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"INTERIOR SHEATHING & FINISH - RE: STRUCTURAL (FOR DOUBLE SIDED SHEAR WALLS), INTERIOR ELEVATIONS, FINISH SCHEDULE, WALL & PARTITION TYPE NOTES\"",
+   "\"WALL FRAMING AT JAMB - RE: STRUCTURAL\"",
+   "\"EXISTING WALL FRAMING & INSULATION\"",
+   "\"EXISTING EXTERIOR SHEATHING\", \"EXISTING STONE VENEER OVER METAL LATH\"",
+   "8\" (frame dim), aluminum sliding door frame & glazing"
+  ],
+  "check": [],
+  "motivo": "Plan detail of the sliding-door jamb in the existing wood wall: jamb framing, sheathing, stone and the door frame. The interior board is only referenced to other sheets (no type, height or return width printed; it stops at the frame), so nothing sets or checks EX-DT-01 or any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/B2_A-501.png"
+ },
+ {
+  "view": "A2/A-501",
+  "sheet_page": 21,
+  "looks_at": "DRIVE THRU SLIDING DOOR THRESHOLD (bubbled in A3/A-402)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"AUTOMATIC SLIDING DOOR\", \"MANUAL SLIDING HALF DOOR\"",
+   "\"DOOR THRESHOLD BY MANUFACTURER\", \"FINISH FLOOR\"",
+   "\"DRIVE-AISLE - RE: CIVIL\", \"CONCRETE SLAB & FOOTING - RE: STRUCTURAL\"",
+   "8\", 1\", 1/2\" (threshold dims)"
+  ],
+  "check": [],
+  "motivo": "Threshold detail of the drive-thru sliding door: door sill, slab, civil drive aisle and expansion joint only. No wall board or framing of our scope is shown.",
+  "inner_bubbles": [],
+  "img": "out/img/A2_A-501.png"
+ },
+ {
+  "view": "D1/A-501",
+  "sheet_page": 21,
+  "looks_at": "Detail titled BRICK WALL BASE at the cornice / high light fixture of the exterior wall (bubbled in A2/A-402, O.H.)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"16'-2\"\" (high light fixture level)",
+   "\"STUCCO OVER LATH OVER 2 LAYERS 15# FLET\"",
+   "\"2x6 BLOCKING BETWEEN STUDS AT LIGHT FIXTURES\"",
+   "\"1/2\" CDX PLYWOOD RE: STRUCTURAL\", \"MEMBRANE ROOFING\"",
+   "\"WALL MOUNTED LIGHT FIXTURE\", \"CONDUIT - DOWN TO CEILING CAVITY\""
+  ],
+  "check": [],
+  "motivo": "Exterior parapet / cornice detail at the wall-mounted light fixture: wood studs and blocking, CDX plywood, stucco and roofing. Everything shown is wood Div. 06, roofing or exterior finish; no board or metal framing of our scope.",
+  "inner_bubbles": [],
+  "img": "out/img/D1_A-501.png"
+ },
+ {
+  "view": "C1/A-501",
+  "sheet_page": 21,
+  "looks_at": "Detail titled BRICK WALL BASE at the bottom of the stucco band 13'-1\" (bubbled in A2/A-402)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"13'-1\"\" (bottom of band)",
+   "\"TREATED 2X 6 'S @ 16\" o.c.\" / \"2X6 STUDS @ 16\" O.C.\"",
+   "\"PLYWOOD SHEATHING\", \"AIR BARRIER AS SPECIFIED\"",
+   "\"CEMENT PLASTER STUCCO SYSTEM\", \"METAL CORNER BEAD\", \"METAL LATH\", \"STONE VENEER\"",
+   "dims 2 1/8\", 8 1/2\""
+  ],
+  "check": [],
+  "motivo": "Exterior band detail where stucco meets the stone veneer: treated 2x6 wood band framing, plywood, air barrier, stucco and stone. The metal corner bead is a stucco accessory (not drywall); nothing of our scope is printed for any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/C1_A-501.png"
+ },
+ {
+  "view": "C4/A-501",
+  "sheet_page": 21,
+  "looks_at": "CANOPY TIE-ROD & STUCCO JUNCTION (bubbled in A2/A-402, O.H.)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"BLOCKING AS REQUIRED BY CANOPY FABRICATOR OR STRUCTURAL ENGINEER...\"",
+   "\"ANCHORAGE BY CANOPY FABRICATOR. CANOPY ANCHORS SHALL NOT PENETRATE INTERIOR WALL FINISH WHERE BELOW FINISH CEILING, TYP.\"",
+   "\"INTERIOR SHEATHING & FINISH - RE: STRUCTURAL (FOR DOUBLE SIDED SHEAR WALL LOCATIONS), INTERIOR ELEVATIONS, FINISH SCHEDULE, WALL & PARTITION TYPE NOTES\"",
+   "\"TIE ROD & YOKE BY CANOPY FABRICATOR\", \"STUCCO SYSTEM - RE: WALL TYPES\""
+  ],
+  "check": [],
+  "motivo": "Canopy tie-rod anchorage through the exterior wood stud wall: wood blocking, stucco system and canopy hardware by the fabricator. Interior sheathing is only referenced to other sheets with no type, height or extent, so no canon entry (e.g. SW6-02-*) is set or checked.",
+  "inner_bubbles": [],
+  "img": "out/img/C4_A-501.png"
+ },
+ {
+  "view": "B4/A-501",
+  "sheet_page": 21,
+  "looks_at": "CANOPY & STUCCO JUNCTION (bubbled in A2/A-402, O.H.)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"BLOCKING AS REQUIRED BY CANOPY FABRICATOR OR STRUCTURAL ENGINEER...\"",
+   "\"ANCHORAGE BY CANOPY FABRICATOR. CANOPY ANCHORS SHALL NOT PENETRATE INTERIOR WALL FINISH WHERE BELOW FINISH CEILING, TYP.\"",
+   "\"INTERIOR SHEATHING & FINISH - RE: STRUCTURAL..., INTERIOR ELEVATIONS, FINISH SCHEDULE, WALL & PARTITION TYPE NOTES\"",
+   "\"STONE VENEER\", \"2 LAYERS OF 15# FELT\", \"1\" RIGID INSULATION\", \"EXTERIOR SHEATHING - RE: STRUCTURAL\""
+  ],
+  "check": [],
+  "motivo": "Canopy anchorage at the stone-veneer exterior wood wall: wood blocking, sheathing, stone and canopy anchors by the fabricator. Interior board is only referenced to other sheets, with nothing printed for any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/B4_A-501.png"
+ },
+ {
+  "view": "B1/A-501",
+  "sheet_page": 21,
+  "looks_at": "BRICK WALL ROWLOCK SILL at the top of the stone wainscot 3'-0\" (bubbled in A2/A-402)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"2x6 STUDS @ 16\" O.C.\"",
+   "\"3'-0\" TOP OF STONE\", \"STONE WAINSCOT SILL\"",
+   "\"1/2\" PLYWOOD SHEATHING RE: STRUCTURAL\"",
+   "\"AIR BARRIER AS SECIFIED\", \"1\" RIGID INSULATION\", \"BATT INSULATION\", \"CONTINUOUS METAL LATH\""
+  ],
+  "check": [],
+  "motivo": "Exterior stone wainscot sill on a 2x6 wood stud wall with plywood sheathing, air barrier and insulation. No interior board or metal framing is shown; nothing applies to any canon entry.",
+  "inner_bubbles": [],
+  "img": "out/img/B1_A-501.png"
+ },
+ {
+  "view": "A3/A-501",
+  "sheet_page": 21,
+  "looks_at": "STOREFRONT DOOR THRESHOLD DETAIL (bubbled SIM in A2/A-402)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"ALUMINUM STOREFRONT DOOR\", \"STOREFRONT THRESHOLD REF HARDWARE SCHEDULE\"",
+   "\"CORNER FINISH BEYOND - RE: INTERIOR ELEVATIONS\"",
+   "\"FINISH FLOOR\", \"CONCRETE WALK - RE: CIVIL\", \"SLOPE @ 1:50 MAX\""
+  ],
+  "check": [],
+  "motivo": "Storefront door threshold at the slab and concrete walk; the interior corner finish beyond is only referenced. No board or framing of our scope is printed.",
+  "inner_bubbles": [],
+  "img": "out/img/A3_A-501.png"
+ },
+ {
+  "view": "B1/A-502",
+  "sheet_page": 22,
+  "looks_at": "TYP ROOF TO WALL SECTION at the parapet (bubbled in A2/A-402, O.H.)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"RE: WALL TYPES\"",
+   "\"BATT INSULATION 12\" MIN ABOVE ROOF RIGID INSULATION, TYP\"",
+   "\"TAN PARAPET WALL FLASHING\", \"WHITE ROOFING MEMBRANE\"",
+   "\"ROOF FRAMING AND DECKING, SEE STRUCTURAL DWGS\"",
+   "\"2X FIRE BLOCKING AT ROOF LINE, TYP.\""
+  ],
+  "check": [],
+  "motivo": "Roofing-to-parapet detail: membrane, flashing, roof insulation, roof framing and 2x wood fire blocking. Roofing, insulation and wood blocking are not our scope; no board or metal framing is printed.",
+  "inner_bubbles": [],
+  "img": "out/img/B1_A-502.png"
+ },
+ {
+  "view": "A2/A-502",
+  "sheet_page": 22,
+  "looks_at": "Detail titled LIGHT FIXTURE DETAIL (N.T.S.) - actually a Duro-Last 4\" drip edge (bubbled in A2/A-402 at the existing-wall roof edge)",
+  "disposition": "no_aplica",
+  "canon_ids": [],
+  "printed": [
+   "\"DURO-LAST PREFABRICATED DRIP EDGE WITH FACTORY WELDED SKIRT\"",
+   "\"FASTEN DRIP EDGE 8-INCHES ON CENTER MAX.\"",
+   "\"Note 2: A wood nailer is required if 1-inch of insulation or greater is used...\"",
+   "\"4\" DRIP EDGE 3070 NTS New Construction or Reroof\""
+  ],
+  "check": [],
+  "motivo": "Roofing manufacturer drip-edge detail (membrane, drip edge, wood nailer). Roofing and wood nailers are not our scope; nothing printed for any canon entry. Note the title 'LIGHT FIXTURE DETAIL' does not match the content.",
+  "inner_bubbles": [],
+  "img": "out/img/A2_A-502.png"
+ }
+]
