@@ -61,3 +61,12 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | 10 | Subida SOLO con subir_entrega.py (54 archivos) | 16:17 | 16:20 | 3 min |
 | **TOTAL rev6** | **Compuerta roja → entrega en Drive** | **15:25** | **16:20** | **55 min** |
 | R6-4 | Push chocó con v81cf28 de O'Reilly (BE-CF20) -> unión 3 vías = v81cf29 vigente: suite 51/51, banco 0, verificar_version 0 faltantes (679), compuerta rev6 re-corrida = igual; push | 16:20 | 16:22 | 2 min |
+## rev7 — cadena de burbujas de detalle completa (compuerta v81cf33+, orden de COORDINACIÓN 4-nov) (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R7-0 | git pull, compuerta v81cf33 sobre rev6: ROJA (CE_CALLOUTS 78 sin disposición, materiales, BE-VS-13, banco); barrido de burbujas de dos líneas | 02:10 | 02:20 | 10 min |
+| R7-1 | 3 subagentes leen 101 vistas (A-60x, A-611, A-62x, A-30x, A-40x, A-50x, A-624, A-625) con recorte circulado; arreglos de tool (CALLOUT, sheathing, DEMO) | 02:20 | 02:30 | 10 min |
+| R7-2 | Verificación propia de cada delta en las imágenes (EX-KIT-02, A2/A-604, D3/A-624, C3/A-604, A-625, A4/A-621); correcciones_rev7.py + RFI-22..27 + precedentes #15 / #11; cadena | 02:30 | 02:56 | 26 min |
+| R7-3 | Docs rev7, back-check 19/19, tests BE-CF22, choque con v81cf35 de Chuze -> v81cf36, suite 51/51, banco 0, verificar_version 0 faltantes (715); compuerta VERDE 147 / 4 / 0 | 02:56 | 03:05 | 9 min |
+| 10 | Subida SOLO con subir_entrega.py (165 archivos, carpeta "rev7 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR") + aviso en rev6 | 03:03 | 03:20 | 17 min |
+| **TOTAL rev7** | **Orden → entrega en Drive** | **02:10** | **03:20** | **1 h 10 min** |
