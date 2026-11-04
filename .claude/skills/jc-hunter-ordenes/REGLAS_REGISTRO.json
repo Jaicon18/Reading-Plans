@@ -4287,6 +4287,23 @@
    "texto_corto": "Hoja raster: barrido de tags por programa con 0 ocurrencias; barrido visual numerado con recortes",
    "categoria": "conducta",
    "nota": "chequeo U-117 (chequeos_biblioteca.u_117) exige la lista numerada con imagen reabierta"
+  },
+  {
+   "id": "BE-CF21",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Compuerta U-114..U-125 sobre CFA rev5: falsos positivos U-117 / U-120 / R80e.84 y un eje por número",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_117",
+    "take-off:tools/chequeos_biblioteca.py::u_120",
+    "take-off:tools/markups_demo.py::piezas_por_eje",
+    "take-off:tools/plantilla_excel.py::verificar_texto_cliente"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev6_dia1"
+   },
+   "cuando": "entrega"
   }
  ]
 }

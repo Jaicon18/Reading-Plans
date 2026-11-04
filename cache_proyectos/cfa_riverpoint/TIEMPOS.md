@@ -50,3 +50,14 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | **TOTAL rev5** | **Inicio → entrega en Drive** | **14:05** | **15:14** | **1 h 9 min** |
 | R5-5 | Cierre: push chocó con v81cf25 de O'Reilly y luego con v81cf26 de COORDINACIÓN (BE-CF20) -> uniones 3 vías = v81cf27, suite 51/51, banco 0 distintas, verificar_version 0 faltantes (675), compuerta rev5 re-corrida = igual; commit + push | 15:14 | 15:25 | 11 min |
 | **TOTAL rev5 con cierre** | | **14:05** | **15:25** | **1 h 20 min** |
+
+## rev6 — compuerta de las preferencias del día 1 (U-114..U-125), orden de COORDINACIÓN 3-nov (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R6-0 | Compuerta v81cf27 sobre rev5: ROJA (7 FAIL U-114..U-121); diagnóstico real vs falso positivo | 15:25 | 15:30 | 5 min |
+| R6-1 | Tools v81cf28 + correcciones_rev6.py + imágenes circuladas Review Items 2 / 5 / 6 / 8 + cadena | 15:30 | 15:47 | 17 min |
+| R6-2 | Un eje por número (22 board-only + DEMO-02), verificador por piezas, U-120 solo Wall ID; docs, back-check 13/13; compuerta VERDE | 15:47 | 16:09 | 22 min |
+| R6-3 | Tests BE-CF21, suite 51/51, banco 0, verificar_version 0 faltantes, v81cf28 (chocó con O'Reilly: BE-CF20 -> unión = v81cf29); compuerta final 146 / 3 / 0 | 16:09 | 16:17 | 8 min |
+| 10 | Subida SOLO con subir_entrega.py (54 archivos) | 16:17 | 16:20 | 3 min |
+| **TOTAL rev6** | **Compuerta roja → entrega en Drive** | **15:25** | **16:20** | **55 min** |
+| R6-4 | Push chocó con v81cf28 de O'Reilly (BE-CF20) -> unión 3 vías = v81cf29 vigente: suite 51/51, banco 0, verificar_version 0 faltantes (679), compuerta rev6 re-corrida = igual; push | 16:20 | 16:22 | 2 min |
