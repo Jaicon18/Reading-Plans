@@ -4812,6 +4812,22 @@
     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
     "token": "test_subida_retoma"
    }
+  },
+  {
+   "id": "BE-CF22",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "CE_CALLOUTS no veía etiquetas letra+número; sheathing sin material; DEMO sumado al board",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/chequeos_biblioteca.py::be_vs_13",
+    "take-off:tools/revision_materiales.py::tipo_board"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev7_burbujas"
+   },
+   "cuando": "entrega"
   }
  ]
 }
