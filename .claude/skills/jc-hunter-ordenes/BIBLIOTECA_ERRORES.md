@@ -385,3 +385,16 @@ Queja del usuario: la regla de las burbujas (DETALLES) se dio en los primeros d�
 
 ## BE-CF20 — Dos sesiones archivaron el mismo número de versión (CFA #2284 rev5, 3-nov)
 | CFA #2284 rev5 (3-nov) | La sesión CFA y la de O'Reilly archivaron las DOS un v81cf25 con contenido distinto, y después CFA y COORDINACIÓN las dos un v81cf26 (línea partida, BE-115); el push de CFA chocó en INDICE.md | Antes de archivar: git pull y tomar el siguiente número libre; si ya existe el número, unir 3-way sobre la versión del otro (base = la anterior) y archivar v+1. verificar_version.revisar_indice falla si la versión vigente tiene más de un zip (test_verificar_version.py) | CFA rev5: v81cf27 = v81cf26 (COORDINACIÓN) + arreglos CFA; suite 51/51 |
+
+
+## BE-132 — Dos compuertas contradictorias: la imagen del Review Item (U-118) vs texto interno (R80e.84) (O'Reilly rev6, 4-nov)
+U-118 exige la imagen circulada de cada Review Item en la columna Image; plantilla_excel.verificar_texto_cliente rechazaba todo
+".png" en una hoja visible: el runner no armaba el Excel y la cobertura (BE-71) no se escribía. Prueba (R80e.153): la columna
+Image acepta el nombre de la imagen sin ruta; una ruta o un nombre de archivo en otra columna sigue fallando.
+Test: test_compuerta_entrega.py::test_oreilly_rev5 (bloque test_review_image_name).
+
+## BE-133 — Barrido de tags en hoja RASTER: 0 ocurrencias por programa (O'Reilly rev6, 4-nov)
+inventario_tags.py lee la capa de texto; en un escaneo da 0 tags y U-117 falla (el barrido "a mano" no dejaba lista numerada).
+Regla: en hoja raster el barrido se hace visual por cuadrantes (todos los tiles vistos), cada tag con su recorte circulado
+reabierto (png_verificado), escrito en 1_inventario/inventario.json con center_pt / bbox_pt, asignado a su wall (tag_ids) y
+comparar.py re-corrido con ese inventario. Conducta + chequeo U-117 (chequeos_biblioteca.u_117).

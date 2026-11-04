@@ -383,3 +383,15 @@ Test: bloque test_runner_comparar_extra.
 ## BE-131 — Preferencias del día 1 sin compuerta de fondo (usuario 3-nov, U-114..U-125)
 Queja del usuario: la regla de las burbujas (DETALLES) se dio en los primeros días y nunca se hizo cumplir; lo mismo pasaba con el resto de sus preferencias de cuenta del día 1. Casos reales encontrados al calibrar: HFT D-01 cara vecina "[DERIVED]" sin operación y D-03/D-04 "same as" sin estado; O'Reilly rev4 Material Summary "N/SHEET: not applicable (see note)" (CE_FUENTES_MS lo dejaba pasar), renglones 'S42-H1+S42-H2' (dos walls en un número) y height_img = página entera sin marca (0 px rojos); Chuze tag_ids con 1 de 3 ubicaciones del inventario y "ASSUMED ... RFI." sin número; HFT sin inventario de tags y sin imagen por wall; CE_SIN_DOLARES solo miraba los .md; chequeos_biblioteca no leía 1_inventario/inventario.json (nombre distinto). Prueba (tools/chequeos_biblioteca.py u_114 / u_115 / u_116 / u_117 / u_118 / u_119 / u_120 / u_121 / u_125 + compuerta_entrega.py CE_SIN_DOLARES, todos dentro de compuerta_entrega.py): ver R80e.152. Test: test_chequeos_biblioteca.py (caso MALO por preferencia + test_u118_evidencia_circula) y test_compuerta_entrega.py (monto en el Excel).
 
+
+## BE-132 — Dos compuertas contradictorias: la imagen del Review Item (U-118) vs texto interno (R80e.84) (O'Reilly rev6, 4-nov)
+U-118 exige la imagen circulada de cada Review Item en la columna Image; plantilla_excel.verificar_texto_cliente rechazaba todo
+".png" en una hoja visible: el runner no armaba el Excel y la cobertura (BE-71) no se escribía. Prueba (R80e.153): la columna
+Image acepta el nombre de la imagen sin ruta; una ruta o un nombre de archivo en otra columna sigue fallando.
+Test: test_compuerta_entrega.py::test_oreilly_rev5 (bloque test_review_image_name).
+
+## BE-133 — Barrido de tags en hoja RASTER: 0 ocurrencias por programa (O'Reilly rev6, 4-nov)
+inventario_tags.py lee la capa de texto; en un escaneo da 0 tags y U-117 falla (el barrido "a mano" no dejaba lista numerada).
+Regla: en hoja raster el barrido se hace visual por cuadrantes (todos los tiles vistos), cada tag con su recorte circulado
+reabierto (png_verificado), escrito en 1_inventario/inventario.json con center_pt / bbox_pt, asignado a su wall (tag_ids) y
+comparar.py re-corrido con ese inventario. Conducta + chequeo U-117 (chequeos_biblioteca.u_117).
