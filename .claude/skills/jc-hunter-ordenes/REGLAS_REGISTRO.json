@@ -4842,6 +4842,22 @@
     "token": "test_cf_rev8_no_cargado"
    },
    "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF24",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Altura vieja en la Source, furr down sin RCP, demo fuera del demo plan, copia limpia sin comparar",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_copia_limpia",
+    "take-off:tools/chequeos_biblioteca.py::be_cf24",
+    "take-off:tools/chequeos_biblioteca.py::r_alc_06"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev9_auditoria"
+   },
+   "cuando": "entrega"
   }
  ]
 }

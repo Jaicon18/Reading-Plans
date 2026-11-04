@@ -210,3 +210,6 @@ Nota 29-oct: la prueba API de costeo (28-oct) NO invalida v80s: falló por no us
 | COORDINACIÓN — auditoría adversarial U-138 (vigente) | v81cf38 | 2026-11-04 | take-off-metal-frame-drywall_v81cf38_auditoria-U138_2026-11-04.zip |
 
 Nota (4-nov): el número v81cf35 lo usó primero Chuze FINAL7 (subida-retoma, BE-140); esta auditoría se armó primero como 'v81cf35_auditoria-U138' por choque de número (BE-CF20), se retiró ese zip y se publicó como v81cf38 sobre v81cf37 (CFA rev8).
+
+**04-nov: v81cf39 = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** (CFA #2284 rev9, auditoría de COORDINACIÓN U-138) = v81cf38 de COORDINACIÓN + BE-CF24 (mi v81cf38 local chocó con el de COORDINACIÓN, BE-CF20): compuerta_entrega CE_COPIA_LIMPIA (copia limpia = original hoja por hoja), chequeos_biblioteca be_cf24 (altura de la Source = altura cargada) y r_alc_06 (markups DEMO solo en demolition plans). Test tools/test_cf_pruebas.py::test_cf_rev9_auditoria. Suite 51/51, 199 archivos. Banco vs v81cf38: B&N rev13 / VS rev17 / Chuze rev3 / Chuze / O'Reilly p1 / O'Reilly p2 / HFT rev3 / CFA rev4 = 0 familias distintas. CFA rev9 compuerta (v81cf39): 150 PASS / 4 AMBER / 0 FAIL.
+| CFA #2284 River Point rev9 — auditoría de rev8, compuerta en verde (vigente) | v81cf39 | 2026-11-04 | take-off-metal-frame-drywall_v81cf39_CFA-rev9-auditoria_2026-11-04.zip |
