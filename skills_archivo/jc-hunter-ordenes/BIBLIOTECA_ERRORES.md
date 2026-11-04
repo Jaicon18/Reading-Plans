@@ -413,3 +413,10 @@ La cara al chase de plomería / hueco contra el muro existente se omitió en sil
 
 ## BE-140 — Chuze FINAL7: un error 500 de Google Drive cortó la subida a mitad y subir_entrega.py no podía retomarla
 gdrive_fetch put rechaza un archivo que ya existe en la carpeta (no sobrescribe), así que la segunda corrida chocaba con lo ya subido y la única salida era subir a mano, lo que está prohibido. Arreglo (R80f.42): subir_entrega.py lista cada carpeta destino y da por subido el archivo con el mismo nombre y tamaño; con otro tamaño se bloquea. Test: tools/test_chuze_r80f8_11.py (test_subida_retoma). Skill v81cf35.
+
+## BE-141 — Chuze FINAL7 (auditoría U-138): Scope Checklist ALC-07 / ALC-08 con cifras tecleadas viejas (Type X 58,393.09 vs 57,241.60; existing walls 27,973.17 vs 26,818.18)
+Chequeo(s): take-off:tools/chequeos_biblioteca.py::cifras_texto, take-off:tools/plantilla_excel.py::verificar_cifras. Test: take-off:tools/test_chuze_r80f8_11.py (test_cifras_texto). Skill v81cf40 (Chuze FINAL8, auditoría U-138 4-nov).
+
+
+## BE-142 — Chuze FINAL8 (compuerta v40): CB_U_037 contaba como walls faltantes los tags de A101 descartados en el canon (wall contado en el plano ampliado, ONE WALL ONCE)
+Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/test_chuze_r80f8_11.py (test_u037_duenos). Skill v81cf40 (Chuze FINAL8, auditoría U-138 4-nov).

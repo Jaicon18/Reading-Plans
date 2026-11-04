@@ -2,7 +2,7 @@
  "version": "registro (v81cf33, 2026-11-04: + U-137, BE-139 detector de burbujas, U-138 auditar_compuerta)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 273,
+  "programa": 275,
   "conducta": 52,
   "historico": 23
  },
@@ -4811,6 +4811,81 @@
    "test": {
     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
     "token": "test_subida_retoma"
+   }
+  },
+  {
+   "id": "BE-CF22",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "CE_CALLOUTS no veía etiquetas letra+número; sheathing sin material; DEMO sumado al board",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/chequeos_biblioteca.py::be_vs_13",
+    "take-off:tools/revision_materiales.py::tipo_board"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev7_burbujas"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF23",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI abierto 'nothing loaded': U-048 exige el supuesto conservador cargado",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_116"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev8_no_cargado"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF24",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Altura vieja en la Source, furr down sin RCP, demo fuera del demo plan, copia limpia sin comparar",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_copia_limpia",
+    "take-off:tools/chequeos_biblioteca.py::be_cf24",
+    "take-off:tools/chequeos_biblioteca.py::r_alc_06"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev9_auditoria"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-141",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Chuze FINAL7 (auditoría U-138): Scope Checklist ALC-07 / ALC-08 con cifras tecleadas viejas (Type X 58,393.09 vs 57,241.60; existing walls 27,973.17 vs 26,818.18)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cifras_texto",
+    "take-off:tools/plantilla_excel.py::verificar_cifras"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_cifras_texto"
+   }
+  },
+  {
+   "id": "BE-142",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Chuze FINAL8 (compuerta v40): CB_U_037 contaba como walls faltantes los tags de A101 descartados en el canon (wall contado en el plano ampliado, ONE WALL ONCE)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_037"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_u037_duenos"
    }
   }
  ]
