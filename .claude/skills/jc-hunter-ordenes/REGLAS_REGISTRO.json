@@ -2,10 +2,9 @@
  "version": "registro (v81cf27, 2026-11-04: + BE-132, BE-133, O'Reilly rev6)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 266,
+  "programa": 268,
   "conducta": 52,
-  "historico": 23,
-  "programa-pendiente": 1
+  "historico": 23
  },
  "reglas": [
   {
@@ -4687,8 +4686,15 @@
    "id": "U-130",
    "origen": "REGLAS_USUARIO_CLAUDE.md",
    "texto_corto": "REGLA INVIOLABLE (usuario 1-nov, sesión Chuze, registrada 4-nov): \"haz la comparativa con el mejor que tenemos\": cada take-off se compara contra la mejor referencia del banco (B&N rev13 y los proyectos FINAL ya verificados) por familia de material normalizada (por SF de piso / LF de partition) y las",
-   "categoria": "programa-pendiente",
-   "motivo": "sin herramienta todavía: correr_banco_familias.py compara versiones del skill sobre un mismo canon, no un proyecto contra la mejor referencia del banco por familia; se cumple hoy como paso de conducta (comparativa en el informe)"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_comparativa_banco"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_banco"
+   }
   },
   {
    "id": "U-131",
@@ -4719,6 +4725,20 @@
    "origen": "REGLAS_USUARIO_CLAUDE.md",
    "texto_corto": "ORDEN DEL USUARIO (31-oct, citada por la sesión O'Reilly, registrada 4-nov): \"ya NO pares por preguntas al usuario. Todo lo que el plano no resuelva: supuesto conservador cargado + RFI anotado en una lista (A planos / B código / delta), y sigues. Las preguntas se le hacen al usuario todas juntas al ",
    "categoria": "conducta"
+  },
+  {
+   "id": "U-136",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov, \"sí, instálalo\"): todo mensaje del usuario en cualquier sesión del repo se guarda solo (hook UserPromptSubmit .claude/hooks/registrar_orden.py) en cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl (nada que parezca contraseña); la sesión que lo recibe lo registra como ",
+   "categoria": "programa",
+   "cuando": "version",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_ordenes"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "revisar_ordenes"
+   }
   }
  ]
 }
