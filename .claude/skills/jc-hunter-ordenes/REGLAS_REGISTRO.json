@@ -1,8 +1,8 @@
 {
- "version": "registro (v81cf27, 2026-11-04: + BE-132, BE-133, O'Reilly rev6)",
+ "version": "registro (v81cf33, 2026-11-04: + U-137, BE-139 detector de burbujas de dos líneas)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 268,
+  "programa": 270,
   "conducta": 52,
   "historico": 23
  },
@@ -4738,6 +4738,37 @@
    "test": {
     "archivo": "ordenes:test_verificar_version.py",
     "token": "revisar_ordenes"
+   }
+  },
+  {
+   "id": "U-137",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov, BE-139): una compuerta NUNCA pasa en vacío; las burbujas de detalle se leen como las dibuja el plano (número arriba / hoja abajo, SHX o vector, + N/HOJA en una línea) y se validan contra un conteo independiente de círculos con divisoria; 0 (o casi 0) burbujas con hojas de detalles en el set = FALLA",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/burbujas.py::detectar",
+    "take-off:tools/compuerta_entrega.py::_burbujas_set"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_burbujas_oreilly"
+   }
+  },
+  {
+   "id": "BE-139",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "CE_CALLOUTS dio PASS con 0 burbujas en CFA (172 hojas) y Chuze y 1 en O'Reilly: el regex solo veía N/HOJA en una línea; las burbujas de dos líneas (1 sobre A3.2) no entraban a la cadena",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/burbujas.py::detectar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_burbujas_oreilly"
    }
   }
  ]
