@@ -117,8 +117,19 @@ def revisar_banco():
     assert V.revisar_banco(d) == []
 
 
+def revisar_ordenes():
+    import json, tempfile, datetime
+    d = tempfile.mkdtemp(); c = os.path.join(d, "ORDENES_CRUDAS"); os.makedirs(c)
+    viejo = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=30)).isoformat(timespec="seconds")
+    open(os.path.join(c, "_entrantes.jsonl"), "w").write(json.dumps({"id": "abc", "ts_utc": viejo, "texto": "siempre 2 layers"}) + "\n")
+    open(os.path.join(c, "MAPA_ORDENES.json"), "w").write("{}")
+    assert V.revisar_ordenes(d), "orden sin clasificar debe fallar (U-136)"
+    open(os.path.join(c, "MAPA_ORDENES.json"), "w").write(json.dumps({"abc": "U-127"}))
+    assert not V.revisar_ordenes(d), "orden clasificada debe pasar"
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
