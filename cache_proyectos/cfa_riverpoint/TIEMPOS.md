@@ -86,3 +86,8 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | R9-4 | CE_RFI_FORMATO (v81cf38 de COORDINACIÓN): Review Item 5 -> RFI-28, Review Item 6 resuelto (E3/A-604); docs; compuerta final | 06:58 | 07:03 | 5 min |
 | 10 | Subida SOLO con subir_entrega.py (168 archivos; un error 500 de Drive a mitad, retomada con R80f.42) + aviso en rev8 | 07:08 | 07:26 | 18 min |
 | **TOTAL rev9** | **Orden → entrega en Drive** | **06:33** | **07:26** | **53 min** |
+
+## Empower — Subcontractor Bid Requirements (4-nov, orden de COORDINACIÓN) (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| E-1 | Listado de archivos de Empower en BC con la sesión guardada (solo GET, sin login), descarga del PDF (2 p, sin markups), subida a Projects › CFA #2284 sin sobrescribir, lectura completa, nota "reviewed, no quantity impact" en rev9 | 12:21 | 12:22 | 1 min |

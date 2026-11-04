@@ -24,3 +24,6 @@ ESTA ES LA VERSIÓN FINAL PARA REVISAR
 - RFI-19: RESOLVED from drawings (CONFIRMED): The existing gypsum board is removed and the new 1/2" cement board is fastened directly to the studs. The cement board does NOT go over the existing board. Detail A2/A-604 'TILE TO GYP TRANSITION AT RESTROOM' shows one layer in one plane: CEMENT BOARD below the 'CEMENT/GYP. TRANSITION' line ...
 
 Block of open RFIs with options A / B / C: RFI_PENDIENTES.md and Excel 'Pending Items'.
+
+## Empower Subcontractor Bid Requirements (BC, 2026-11-04) — reviewed, no quantity impact
+Commercial / insurance requirements only (itemized pricing with OH&P, taxes included, W-9 + COI, CGL / auto / WC insurance). No scope, material, exclusion, schedule, bonding or prevailing-wage change. See "REVIEWED - Empower Subcontractor Bid Requirements (no quantity impact).md".

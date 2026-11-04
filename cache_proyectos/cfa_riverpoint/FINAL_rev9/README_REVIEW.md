@@ -169,3 +169,6 @@ RFI-01 · RFI-03 · RFI-05 · RFI-08 · RFI-16 · RFI-17 · RFI-18 · RFI-21 · 
 - Planos marcados/CFA2284_RiverPoint_Markups_Bluebeam_rev9.pdf + PNG per sheet (A-050, A-052, A-202, A-221)
 - proceso/CAMBIOS_rev9.md, VERIFICACION_MARKUPS_rev9.md, BREAKDOWN_half_inch_gyp_rev9.md, BACKCHECK_rev9.md, COBERTURA_rev9.md, DEMO_CRUCE.md; proceso/review_img (circled image of each Review Item), proceso/rfi_img (circled image of each open RFI), proceso/bubbles_img (circled crop of each of the 101 bubble views)
 - rev1 - rev8 kept untouched in FINAL_FOR_REVIEW for traceability.
+
+## Empower Subcontractor Bid Requirements (BC, 2026-11-04) — reviewed, no quantity impact
+Commercial / insurance requirements only (itemized pricing with OH&P, taxes included, W-9 + COI, CGL / auto / WC insurance). No scope, material, exclusion, schedule, bonding or prevailing-wage change. See "REVIEWED - Empower Subcontractor Bid Requirements (no quantity impact).md".
