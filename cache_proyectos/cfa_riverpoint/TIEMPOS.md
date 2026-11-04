@@ -70,3 +70,10 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | R7-3 | Docs rev7, back-check 19/19, tests BE-CF22, choque con v81cf35 de Chuze -> v81cf36, suite 51/51, banco 0, verificar_version 0 faltantes (715); compuerta VERDE 147 / 4 / 0 | 02:56 | 03:05 | 9 min |
 | 10 | Subida SOLO con subir_entrega.py (165 archivos, carpeta "rev7 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR") + aviso en rev6 | 03:03 | 03:20 | 17 min |
 | **TOTAL rev7** | **Orden → entrega en Drive** | **02:10** | **03:20** | **1 h 10 min** |
+## rev8 — RFI-27 furr down cargado (U-048), orden de COORDINACIÓN 4-nov (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R8-1 | correcciones_rev8.py (furr down C1/A-603 cargado conservador + RFI-27 con delta), CB_U_116 'nothing loaded' + test (BE-CF23), cadena, compuerta VERDE 147 / 4 / 0 | 03:22 | 03:36 | 14 min |
+| R8-2 | v81cf37 (suite 51/51, banco 0, verificar_version 0 faltantes 716), compuerta final | 03:36 | 03:37 | 1 min |
+| 10 | Subida SOLO con subir_entrega.py (166 archivos, carpeta "rev8 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR") + aviso en rev7 | 03:38 | 03:52 | 14 min |
+| **TOTAL rev8** | **Orden → entrega en Drive** | **03:22** | **03:52** | **30 min** |
