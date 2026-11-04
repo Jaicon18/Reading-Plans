@@ -4748,7 +4748,7 @@
    "texto_corto": "REGLA INVIOLABLE (usuario 4-nov, BE-139): una compuerta NUNCA pasa en vacío; las burbujas de detalle se leen como las dibuja el plano (número arriba / hoja abajo, SHX o vector, + N/HOJA en una línea) y se validan contra un conteo independiente de círculos con divisoria; 0 (o casi 0) burbujas con hojas de detalles en el set = FALLA",
    "chequeos": [
     "take-off:tools/chequeos_biblioteca.py::ce_callouts",
-    "take-off:tools/burbujas.py::detectar",
+    "take-off:tools/palabras_fitz.py::detectar",
     "take-off:tools/compuerta_entrega.py::_burbujas_set"
    ],
    "test": {
@@ -4764,7 +4764,7 @@
    "texto_corto": "CE_CALLOUTS dio PASS con 0 burbujas en CFA (172 hojas) y Chuze y 1 en O'Reilly: el regex solo veía N/HOJA en una línea; las burbujas de dos líneas (1 sobre A3.2) no entraban a la cadena",
    "chequeos": [
     "take-off:tools/chequeos_biblioteca.py::ce_callouts",
-    "take-off:tools/burbujas.py::detectar"
+    "take-off:tools/palabras_fitz.py::detectar"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
