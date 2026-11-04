@@ -395,3 +395,15 @@ inventario_tags.py lee la capa de texto; en un escaneo da 0 tags y U-117 falla (
 Regla: en hoja raster el barrido se hace visual por cuadrantes (todos los tiles vistos), cada tag con su recorte circulado
 reabierto (png_verificado), escrito en 1_inventario/inventario.json con center_pt / bbox_pt, asignado a su wall (tag_ids) y
 comparar.py re-corrido con ese inventario. Conducta + chequeo U-117 (chequeos_biblioteca.u_117).
+
+## BE-134 — La compuerta de entrega v1 falló por herramientas del skill que se contradecían (SF board vs LF x H, MR vs X MR, PDF intermedio) y por alturas redondeadas del canon (Chuze FINAL6, 3-nov)
+Chequeo(s): take-off:tools/compuerta_entrega.py::ce_altura_impresa, take-off:tools/compuerta_entrega.py::ce_materiales_schedule, take-off:tools/compuerta_entrega.py::ce_reglas, take-off:tools/alturas_exactas.py::corregir. Test: take-off:tools/test_chuze_r80f8_11.py (test_sf_parte). Skill v81cf30 (Chuze FINAL6, rondas de compuerta 3/4-nov).
+
+## BE-135 — La compuerta de entrega v25 sobre Chuze FINAL6 dio 15 FAIL: set_texto con hojas mal rotuladas, chequeos con falsos positivos y errores reales del take-off (demolición sin cuantificar, MR en locker rooms, alturas sin fuente visible) (3-nov)
+Chequeo(s): take-off:tools/compuerta_entrega.py::hoja_de_etiqueta, take-off:tools/chequeos_biblioteca.py::ce_callouts, take-off:tools/chequeos_biblioteca.py::r_alc_04. Test: take-off:tools/test_chuze_r80f8_11.py (test_hoja_etiqueta). Skill v81cf30 (Chuze FINAL6, rondas de compuerta 3/4-nov).
+
+## BE-136 — La compuerta v27 (preferencias del día 1 U-114..U-121) sobre Chuze FINAL6 dio 8 FAIL: caras sin estado #0, alturas sin imagen circulada, supuestos sin su decisión escrita (take-off) y chequeos que no leían keynotes, Review Items, column wraps, descartes del canon ni hojas A421.A (herramientas) (4-nov)
+Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_114, take-off:tools/chequeos_biblioteca.py::u_118, take-off:tools/markups_bluebeam.py::tramos_rectos. Test: take-off:tools/test_chuze_r80f8_11.py (test_u120_tramos). Skill v81cf30 (Chuze FINAL6, rondas de compuerta 3/4-nov).
+
+## BE-137 — Compuerta v30 sobre Chuze FINAL6: lectura B sin los soffits del RCP ni A101 (segunda lectura independiente agregada), lecturas sin constants, comparar_extra y cobertura sin correr, largos del canon sin su decisión citada, y la altura impresa leída de la alternativa (4-nov)
+Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_034, take-off:tools/chequeos_biblioteca.py::be_60, take-off:tools/chequeos_biblioteca.py::be_63. Test: take-off:tools/test_chuze_r80f8_11.py (test_u034_misma_cosa). Skill v81cf30 (Chuze FINAL6, rondas de compuerta 3/4-nov).

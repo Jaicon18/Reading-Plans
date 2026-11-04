@@ -2,7 +2,7 @@
  "version": "registro (v81cf27, 2026-11-04: + BE-132, BE-133, O'Reilly rev6)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 248,
+  "programa": 264,
   "conducta": 44,
   "historico": 23
  },
@@ -4304,6 +4304,337 @@
     "token": "test_cf_rev6_dia1"
    },
    "cuando": "entrega"
+  },
+  {
+   "id": "R80f.29",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "revision_markups: etiqueta 'SF board' vs Board (SF) del Excel; altura impresa + incremento impreso de la cadena (Chuze FINAL6)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_sf_parte"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_altura_regla_impresa"
+    }
+   ]
+  },
+  {
+   "id": "R80f.30",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "revision_materiales: board principal + condicionales; más pesado = AMBER; gauge MIN.; O.C. más cerrado con fuente; capas no impresas; cara END; MR = Type X MR (Chuze FINAL6)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_gauge_min_y_oc"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_board_y_capas"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_tipos_schedule"
+    }
+   ]
+  },
+  {
+   "id": "R80f.31",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "compuerta_entrega: reglas.py revisa el PDF de markups ENTREGADO, no el intermedio de 6_markups (Chuze FINAL6)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_reglas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_compuerta_pdf_entregado"
+   }
+  },
+  {
+   "id": "R80f.32",
+   "categoria": "programa",
+   "cuando": "corrida",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "alturas del canon en ft-in exactas (22'-10\" = 22.8333, no 22.83) antes de canon.py (Chuze FINAL6)",
+   "chequeos": [
+    "take-off:tools/alturas_exactas.py::corregir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "exacta"
+   }
+  },
+  {
+   "id": "BE-134",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La compuerta de entrega v1 falló por herramientas del skill que se contradecían (SF board vs LF x H, MR vs X MR, PDF intermedio) y por alturas redondeadas del canon (Chuze FINAL6, 3-nov)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_altura_impresa",
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule",
+    "take-off:tools/compuerta_entrega.py::ce_reglas",
+    "take-off:tools/alturas_exactas.py::corregir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_sf_parte"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_alturas_exactas"
+    }
+   ]
+  },
+  {
+   "id": "R80f.33",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "bitácora acepta la copia idéntica del Excel en la carpeta de entrega; bloques OTHER FRAMING / BOARD ONLY = su markup; driver impreso redondeado (Chuze FINAL6)",
+   "chequeos": [
+    "take-off:tools/bitacora.py::_vigente",
+    "take-off:tools/revision_markups.py::_mismo_bloque"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_r80f21"
+   }
+  },
+  {
+   "id": "R80f.34",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-134",
+   "texto_corto": "type 'BOTH SIDES' = dos caras de board o board_none_reason impreso; la cara al chase se carga (Chuze FINAL6: 7 walls con una cara)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_materiales_schedule"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_materiales_schedule"
+   }
+  },
+  {
+   "id": "R80f.35",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-135",
+   "texto_corto": "set_texto.json con el número de hoja de la etiqueta de página (A421.B, A503.C), no ruido del rótulo ('p24', 'P9'); A503.C = A503C en CE_CALLOUTS / BE-15 / BE-102 (Chuze FINAL6 gate v25)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::hoja_de_etiqueta",
+    "take-off:tools/chequeos_biblioteca.py::norm_hoja"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_hoja_etiqueta"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_norm_hoja_punto"
+    }
+   ]
+  },
+  {
+   "id": "R80f.36",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-135",
+   "texto_corto": "falsos positivos de la compuerta: N/HOJA de '-15 / A6C', RFI-06 / RFI-30, keynotes A1.11/A1.13, types A6D / X6D; MEN'S no abre cita; soffit con studs por Wall ID; free nodes con esquinas.py; cara al cielo impreso (Chuze FINAL6 gate v25)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_102",
+    "take-off:tools/chequeos_biblioteca.py::be_12",
+    "take-off:tools/chequeos_biblioteca.py::be_20",
+    "take-off:tools/chequeos_biblioteca.py::be_89",
+    "take-off:tools/chequeos_biblioteca.py::be_83"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_be102_falsos"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_cita_posesivo"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_be20_ids"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_be89_esquinas"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_cielo_impreso"
+    }
+   ]
+  },
+  {
+   "id": "BE-135",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La compuerta de entrega v25 sobre Chuze FINAL6 dio 15 FAIL: set_texto con hojas mal rotuladas, chequeos con falsos positivos y errores reales del take-off (demolición sin cuantificar, MR en locker rooms, alturas sin fuente visible) (3-nov)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::hoja_de_etiqueta",
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/chequeos_biblioteca.py::r_alc_04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_hoja_etiqueta"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_be89_esquinas"
+    }
+   ]
+  },
+  {
+   "id": "R80f.37",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-136",
+   "texto_corto": "un markup por tramo recto (U-120): la polilínea que dobla > 60° (wrap C3C, run EX) se dibuja en tramos TO-<id>~k con LF / SF repartidos; verificar_markups_excel / auditoria / revision_markups / BE-VS-13 los suman contra la fila del Wall ID (Chuze FINAL6 gate v27)",
+   "chequeos": [
+    "take-off:tools/markups_bluebeam.py::tramos_rectos",
+    "take-off:tools/verificar_markups_excel.py::parse_contents",
+    "take-off:tools/chequeos_biblioteca.py::u_120"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_tramos_rectos"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u120_tramos"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_vs13_tramos"
+    }
+   ]
+  },
+  {
+   "id": "R80f.38",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-136",
+   "texto_corto": "falsos positivos de los chequeos del día 1: N/HOJA de keynote D0.07/AD101 (U-115), remisión a Review Item (U-116), tags de column_wrap / pier y tags_descartados del canon (U-117), archivo / coordenadas / nombre propio / EL.+ no son español (U-119), Page Label A421.A (U-121), columna Image de Review Items (R80e.84)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_115",
+    "take-off:tools/chequeos_biblioteca.py::u_116",
+    "take-off:tools/chequeos_biblioteca.py::u_117",
+    "take-off:tools/chequeos_biblioteca.py::u_119",
+    "take-off:tools/chequeos_biblioteca.py::u_121",
+    "take-off:tools/idioma_es.py::quitar_ids",
+    "take-off:tools/plantilla_excel.py::verificar_texto_cliente"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_u115_keynote"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u116_review_item"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u117_wrap_desc"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u119_falsos"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u121_label"
+    },
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_imagen_revision"
+    }
+   ]
+  },
+  {
+   "id": "BE-136",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "La compuerta v27 (preferencias del día 1 U-114..U-121) sobre Chuze FINAL6 dio 8 FAIL: caras sin estado #0, alturas sin imagen circulada, supuestos sin su decisión escrita (take-off) y chequeos que no leían keynotes, Review Items, column wraps, descartes del canon ni hojas A421.A (herramientas) (4-nov)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_114",
+    "take-off:tools/chequeos_biblioteca.py::u_118",
+    "take-off:tools/markups_bluebeam.py::tramos_rectos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_u120_tramos"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u117_wrap_desc"
+    }
+   ]
+  },
+  {
+   "id": "R80f.39",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-137",
+   "texto_corto": "U-034 compara las lecturas por elemento: column_wrap / pier de una = wall del mismo tag en la misma hoja de la otra; pseudo-tag de keynote (A2.25-INFILL) = wall de la otra que nombra el keynote; un soffit_side que falta sigue faltando (Chuze FINAL6 gate v30); una hoja declarada leída con todos sus tags del inventario dispuestos no es 'hoja sin walls'",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::_misma_cosa",
+    "take-off:tools/chequeos_biblioteca.py::u_034",
+    "take-off:tools/chequeos_biblioteca.py::_hoja_leida_vacia"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_u034_misma_cosa"
+   },
+   "tests_extra": [
+    {
+     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+     "token": "test_u034_hoja_leida"
+    }
+   ]
+  },
+  {
+   "id": "BE-137",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Compuerta v30 sobre Chuze FINAL6: lectura B sin los soffits del RCP ni A101 (segunda lectura independiente agregada), lecturas sin constants, comparar_extra y cobertura sin correr, largos del canon sin su decisión citada, y la altura impresa leída de la alternativa (4-nov)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_034",
+    "take-off:tools/chequeos_biblioteca.py::be_60",
+    "take-off:tools/chequeos_biblioteca.py::be_63"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_u034_misma_cosa"
+   }
   }
  ]
 }
