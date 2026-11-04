@@ -1,8 +1,8 @@
 {
- "version": "registro (v81cf27, 2026-11-04: + BE-132, BE-133, O'Reilly rev6)",
+ "version": "registro (v81cf33, 2026-11-04: + U-137, BE-139 detector de burbujas, U-138 auditar_compuerta)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 268,
+  "programa": 273,
   "conducta": 52,
   "historico": 23
  },
@@ -4738,6 +4738,79 @@
    "test": {
     "archivo": "ordenes:test_verificar_version.py",
     "token": "revisar_ordenes"
+   }
+  },
+  {
+   "id": "U-137",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov, BE-139): una compuerta NUNCA pasa en vacío; las burbujas de detalle se leen como las dibuja el plano (número arriba / hoja abajo, SHX o vector, + N/HOJA en una línea) y se validan contra un conteo independiente de círculos con divisoria; 0 (o casi 0) burbujas con hojas de detalles en el set = FALLA",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/palabras_fitz.py::detectar",
+    "take-off:tools/compuerta_entrega.py::_burbujas_set"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_burbujas_oreilly"
+   }
+  },
+  {
+   "id": "BE-139",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "CE_CALLOUTS dio PASS con 0 burbujas en CFA (172 hojas) y Chuze y 1 en O'Reilly: el regex solo veía N/HOJA en una línea; las burbujas de dos líneas (1 sobre A3.2) no entraban a la cadena",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts",
+    "take-off:tools/palabras_fitz.py::detectar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_burbujas_oreilly"
+   }
+  },
+  {
+   "id": "U-138",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov): un VERDE no basta: auditar_compuerta extrae el conteo de la evidencia de cada chequeo y lo compara con lo esperado del proyecto (hojas, walls, tags, hojas de detalles); conteo 0 / implausible = FAIL de PLAUSIBILIDAD aunque diga PASS; + auditoría adversarial diaria por un revisor que no hizo el trabajo",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::auditar_compuerta"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_auditar_compuerta"
+   }
+  },
+  {
+   "id": "R80f.42",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-140",
+   "texto_corto": "subir_entrega.py retoma una subida cortada: archivo ya en Drive con mismo nombre y tamaño = subido; otro tamaño = bloqueo (Chuze FINAL7)",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::subir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_subida_retoma"
+   }
+  },
+  {
+   "id": "BE-140",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Chuze FINAL7: un error 500 de Google Drive cortó la subida y subir_entrega.py no podía retomarla (put rechaza el archivo ya subido)",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::subir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_subida_retoma"
    }
   }
  ]

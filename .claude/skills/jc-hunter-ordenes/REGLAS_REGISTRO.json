@@ -2,7 +2,7 @@
  "version": "registro (v81cf33, 2026-11-04: + U-137, BE-139 detector de burbujas, U-138 auditar_compuerta)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 271,
+  "programa": 273,
   "conducta": 52,
   "historico": 23
  },
@@ -4783,6 +4783,34 @@
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_auditar_compuerta"
+   }
+  },
+  {
+   "id": "R80f.42",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md BE-140",
+   "texto_corto": "subir_entrega.py retoma una subida cortada: archivo ya en Drive con mismo nombre y tamaño = subido; otro tamaño = bloqueo (Chuze FINAL7)",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::subir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_subida_retoma"
+   }
+  },
+  {
+   "id": "BE-140",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Chuze FINAL7: un error 500 de Google Drive cortó la subida y subir_entrega.py no podía retomarla (put rechaza el archivo ya subido)",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::subir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_subida_retoma"
    }
   }
  ]
