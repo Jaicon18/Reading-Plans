@@ -2,9 +2,10 @@
  "version": "registro (v81cf27, 2026-11-04: + BE-132, BE-133, O'Reilly rev6)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 264,
-  "conducta": 44,
-  "historico": 23
+  "programa": 266,
+  "conducta": 52,
+  "historico": 23,
+  "programa-pendiente": 1
  },
  "reglas": [
   {
@@ -4635,6 +4636,89 @@
     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
     "token": "test_u034_misma_cosa"
    }
+  },
+  {
+   "id": "U-127",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "BOTH SIDES = board en las dos caras de cada wall del type, con las capas por cara del type (usuario 4-nov)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::both_sides"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_both_sides"
+   }
+  },
+  {
+   "id": "BE-138",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Chuze FINAL5: 7 walls tipo A con una sola cara de board aunque A/A301 imprime BOTH SIDES (el usuario ya lo había ordenado)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::both_sides"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chuze_r80f8_11.py",
+    "token": "test_both_sides"
+   }
+  },
+  {
+   "id": "U-126",
+   "categoria": "conducta",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "todas las preguntas al usuario al final, en un solo bloque (usuario 4-nov)"
+  },
+  {
+   "id": "U-128",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 1-nov, sesión Chuze, registrada 4-nov): \"como regla general, siempre vamos a bajar proyectos desde BuildingConnected y cuando no encuentres nada ahí, buscamos en el correo de estimating@jchunter.us, porque hay algunos clientes que lo envían ahí sin subirlos a BuildingConnec",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-129",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 1-nov, sesión Chuze, registrada 4-nov): \"no vamos a aceptar nada\": en BuildingConnected y en todo plan room SOLO se lee y se baja; nunca ACCEPT / DECLINE / Bidding / Not Bidding / Submit Bid / Follow / mensajes / RFI al GC (= REGLAS_PLAN_ROOM.md regla 1).",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-130",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "REGLA INVIOLABLE (usuario 1-nov, sesión Chuze, registrada 4-nov): \"haz la comparativa con el mejor que tenemos\": cada take-off se compara contra la mejor referencia del banco (B&N rev13 y los proyectos FINAL ya verificados) por familia de material normalizada (por SF de piso / LF de partition) y las",
+   "categoria": "programa-pendiente",
+   "motivo": "sin herramienta todavía: correr_banco_familias.py compara versiones del skill sobre un mismo canon, no un proyecto contra la mejor referencia del banco por familia; se cumple hoy como paso de conducta (comparativa en el informe)"
+  },
+  {
+   "id": "U-131",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "PREFERENCIA DEL DÍA 1 (texto literal, registrada 4-nov): \"Con planos y pedido de take-off: usar el skill 'take-off-metal-frame-drywall' completo desde el inicio, paso a paso (10 pasos). Sin planos, responder normal.\" y \"Si hace falta aclarar: término en inglés + (breve explicación en español).\"",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-132",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "PREFERENCIA DEL DÍA 1 (texto literal, registrada 4-nov): \"NO PREGUNTAR LO QUE EL PLANO RESUELVE. Si se puede buscar (elevaciones, secciones, RCP, detalles, burbujas, notas), búscalo y aplícalo con evidencia N/HOJA + imagen circulada. Solo pregúntame lo que el plano no resuelve, una pregunta a la vez",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-133",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "PREFERENCIA DEL DÍA 1 (texto literal, registrada 4-nov): \"PASADAS. Las que hagan falta, sin pedir permiso. Equivocarse cuesta; el tiempo no.\"",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-134",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "PREFERENCIA DEL DÍA 1 (texto literal, registrada 4-nov): \"ARCHIVOS. Un folder por proyecto en Drive › JC HUNTER PROJECTS › Claude outputs. Dame siempre la ruta carpeta por carpeta y, si yo tengo que hacer algo, instrucciones paso a paso, una a la vez.\" y \"COSTOS. No me menciones costos en dólares; s",
+   "categoria": "conducta"
+  },
+  {
+   "id": "U-135",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "texto_corto": "ORDEN DEL USUARIO (31-oct, citada por la sesión O'Reilly, registrada 4-nov): \"ya NO pares por preguntas al usuario. Todo lo que el plano no resuelva: supuesto conservador cargado + RFI anotado en una lista (A planos / B código / delta), y sigues. Las preguntas se le hacen al usuario todas juntas al ",
+   "categoria": "conducta"
   }
  ]
 }

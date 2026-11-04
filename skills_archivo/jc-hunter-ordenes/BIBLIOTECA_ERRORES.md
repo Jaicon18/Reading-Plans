@@ -407,3 +407,6 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_114, take-off:tools/chequeo
 
 ## BE-137 — Compuerta v30 sobre Chuze FINAL6: lectura B sin los soffits del RCP ni A101 (segunda lectura independiente agregada), lecturas sin constants, comparar_extra y cobertura sin correr, largos del canon sin su decisión citada, y la altura impresa leída de la alternativa (4-nov)
 Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_034, take-off:tools/chequeos_biblioteca.py::be_60, take-off:tools/chequeos_biblioteca.py::be_63. Test: take-off:tools/test_chuze_r80f8_11.py (test_u034_misma_cosa). Skill v81cf30 (Chuze FINAL6, rondas de compuerta 3/4-nov).
+
+## BE-138 — Chuze FINAL5: 7 walls tipo A con una sola cara de board aunque A/A301 imprime "- BOTH SIDES" (usuario 4-nov: ya lo había ordenado)
+La cara al chase de plomería / hueco contra el muro existente se omitió en silencio (+218.46 SF MR en FINAL6). Programa: chequeos_biblioteca.both_sides = CB_BOTH_SIDES en compuerta_entrega.py (U-127): por wall, caras con board y capas por cara = schedule (fichas.json, lectura independiente BE-122); falta de cara / capa = FAIL. Test: tools/test_chuze_r80f8_11.py (test_both_sides) + caso both_sides en tools/test_chequeos_biblioteca.py. Skill v81cf31.
