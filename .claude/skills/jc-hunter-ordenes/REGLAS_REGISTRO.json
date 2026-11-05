@@ -1,11 +1,7 @@
 {
- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": {
-  "programa": 289,
-  "conducta": 52,
-  "historico": 23
- },
+ "conteo": 372,
  "reglas": [
   {
    "id": "U-001",
@@ -5061,6 +5057,379 @@
     "archivo": "ordenes:test_verificar_version.py",
     "token": "versiones_unicas"
    }
+  },
+  {
+   "id": "U-145",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "Todos los proyectos exactamente con las reglas y la estructura de entrega de O'Reilly rev10 FINAL (aprobado 5-nov)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_estandar_oreilly"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u145_estandar_oreilly"
+   }
+  },
+  {
+   "id": "BE-CC01",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: ceiling perimeter track row sin cita de hoja (solo miraba walls): cita la hoja de sus ceilings",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC01"
+   }
+  },
+  {
+   "id": "BE-CC02",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: nombre de renglón con detalle de otro proyecto (nested inner runner '3/A-410')",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/plantilla_excel.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC02"
+   }
+  },
+  {
+   "id": "BE-CC03",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: CE_CALLOUTS ciego: burbujas leídas a ojo sin anillo del detector no contaban; conteo bajo en hojas barridas a ojo = AMBER",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC03"
+   }
+  },
+  {
+   "id": "BE-CC04",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: área del RCP cuadrada contra la primera fila que nombra el cuarto (track LF) y no contra el board",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/auditoria_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC04"
+   }
+  },
+  {
+   "id": "BE-CC05",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: lista_schedules no reconocía hojas de 3 dígitos (A500): types sin hoja ni marca",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC05"
+   }
+  },
+  {
+   "id": "BE-CC06",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular 5-nov: marcas de schedule con ID de varias palabras (BACK OF HOUSE) no se reconocían",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC06"
+   }
+  },
+  {
+   "id": "BE-CC07",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular rev1 5-nov: CE_DETALLES_CIRCULADOS solo contaba la cadena desde las hojas de entrada; A101/A102/A402/A501/A700 con burbujas y sin círculo pasaban. Ahora cuenta contra la UNIÓN detector + burbujas_verificadas + CADENA.md; hoja con burbujas sin círculo = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::faltan_circulos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC07"
+   }
+  },
+  {
+   "id": "BE-CC08",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular rev2 5-nov (U-140): el único detalle de sistema de ceiling impreso para ese ceiling manda aunque no tenga burbuja (system_callout printed_only + why)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/criterios.py::system_callout_ok"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC08"
+   }
+  },
+  {
+   "id": "BE-CC09",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular rev2 5-nov: el detector de burbujas guardaba coordenadas sin rotar; en hojas con rotation 270 los círculos caían fuera de la burbuja y la misma burbuja contaba dos veces. Ahora se guardan en el marco visible",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::_burbujas_set"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC09"
+   }
+  },
+  {
+   "id": "BE-CC10",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Consumer Cellular rev2 5-nov: Page Label de DETALLES_REVISADOS / SCHEDULES_REVISADOS = número de hoja impreso (G002), no la clave normalizada (G2)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::marcar_detalles"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "BE-CC10"
+   }
+  },
+  {
+   "id": "U-146",
+   "origen": "decisión del usuario 2026-11-05 (botones, vía COORDINACIÓN)",
+   "texto_corto": "REGLA (usuario 5-nov, Consumer Cellular RFI-01 -> A, TODOS los proyectos): deck con dos alturas impresas y el corte no dibujado = se carga la altura MAYOR impresa, sin RFI",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_146",
+    "take-off:tools/criterios.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_146"
+   }
+  },
+  {
+   "id": "U-147",
+   "origen": "decisión del usuario 2026-11-05 (botones, vía COORDINACIÓN)",
+   "texto_corto": "REGLA (usuario 5-nov, Consumer Cellular RFI-04 -> A, TODOS los proyectos): level of finish no especificado = Level 4, sin RFI",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_147",
+    "take-off:tools/criterios.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_147"
+   }
+  },
+  {
+   "id": "CC-R1",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: renglón del Material Summary con valores sin ID de ítem que son ítems de otros renglones = duplicado = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cc_r1"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cc_r1"
+   }
+  },
+  {
+   "id": "CC-R3",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: PVC trim del FRP: outside corner y division bars del schedule (A700 B-3) en el renglón y su nombre",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/accesorios.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R3"
+   }
+  },
+  {
+   "id": "CC-R4",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: el gauge de track impreso (walls[].track_gauge) manda sobre el gauge del stud",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R4 "
+   }
+  },
+  {
+   "id": "CC-R4b",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: BE-25: un cielo de drywall grid (usg_grid) con gypsum ES cielo de gypsum (antes N/A en vacío)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_25"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R4b"
+   }
+  },
+  {
+   "id": "CC-R4c",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: BE-02: la nota W.R. 'AT ALL WET LOCATIONS' cubre el cielo del wet room (antes N/A en vacío)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_02"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R4c"
+   }
+  },
+  {
+   "id": "CC-R4d",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: BE-08: 'dim 7'-3\"' es cota impresa (antes N/A en vacío)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_08"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R4d"
+   }
+  },
+  {
+   "id": "CC-R4e",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: BE-16: METAL STRAPPING / BACKING PLATE / SHEET METAL ANGLE son accesorios impresos (antes N/A en vacío)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_16"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R4e"
+   }
+  },
+  {
+   "id": "CC-R5",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: resto de track < 0.05 LF = redondeo, sin renglón; renglón con 0 < net < 0.5 sin ítem = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cc_r5"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cc_r5"
+   }
+  },
+  {
+   "id": "CC-R6",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: el producto impreso del blocking (METAL STRAPPING, BACKING PLATE, TRACK) nombra el renglón, nunca 'stud blocking'",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R6"
+   }
+  },
+  {
+   "id": "CC-R7",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: Scope EXCLUDED sobre un material cargado con cantidad > 0 = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cc_r7"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cc_r7"
+   }
+  },
+  {
+   "id": "CC-R10",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: CE_CALLOUTS cuenta contra la misma unión que CE_DETALLES_CIRCULADOS (detector + verificadas + CADENA.md)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ce_callouts"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "CC-R10"
+   }
+  },
+  {
+   "id": "CC-R12",
+   "origen": "auditoría adversarial U-138 de Consumer Cellular rev3 (5-nov), vía COORDINACIÓN",
+   "texto_corto": "Consumer Cellular rev3: U-114: wall con cota impresa (CONFIRMADO) en [CONFIRMED] en la Partition Takeoff",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cc_r12"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cc_r12"
+   }
+  },
+  {
+   "id": "U-148",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "Toda entrega FINAL lleva GUIA_DE_REVISION_DEL_ESTIMADOR.md (orden de revisión y qué contiene cada archivo)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_estandar_oreilly"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "GUIA_DE_REVISION_DEL_ESTIMADOR"
+   }
+  },
+  {
+   "id": "U-149",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "texto_corto": "Todas las reglas son mandatorias, absolutamente todas, para todos los proyectos (usuario 5-nov); referencia más reciente = Consumer Cellular rev4 FINAL"
   }
  ]
 }
