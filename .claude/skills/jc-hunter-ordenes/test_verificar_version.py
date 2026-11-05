@@ -128,8 +128,22 @@ def revisar_ordenes():
     assert not V.revisar_ordenes(d), "orden clasificada debe pasar"
 
 
+def hook_solo_usuario():
+    """BE-143: el hook U-136 guardó 32 avisos automáticos (task-notification, agent-message) como órdenes."""
+    import importlib.util
+    raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    spec = importlib.util.spec_from_file_location("ro", os.path.join(raiz, "hooks", "registrar_orden.py"))
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    for auto in ("<task-notification> <task-id>x</task-id>", "<agent-message from=\"a\"> [Subagent hand-back]",
+                 "<cross-session-message from-session=\"s\">", "[SYSTEM NOTIFICATION - NOT USER INPUT] x",
+                 "<system-reminder>x</system-reminder>"):
+        assert not m.es_del_usuario(auto), auto
+    assert not m.es_del_usuario("mi password es x")
+    assert m.es_del_usuario("si el type dice BOTH SIDES van las dos caras")
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

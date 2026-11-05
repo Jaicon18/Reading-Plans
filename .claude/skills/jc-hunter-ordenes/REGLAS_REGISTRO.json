@@ -4887,6 +4887,20 @@
     "archivo": "take-off:tools/test_chuze_r80f8_11.py",
     "token": "test_u037_duenos"
    }
+  },
+  {
+   "id": "BE-143",
+   "categoria": "programa",
+   "cuando": "siempre",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "Hook U-136 guardaba avisos automáticos (task-notification, agent-message, cross-session) como órdenes del usuario",
+   "chequeos": [
+    "ordenes:../../hooks/registrar_orden.py::es_del_usuario"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "hook_solo_usuario"
+   }
   }
  ]
 }

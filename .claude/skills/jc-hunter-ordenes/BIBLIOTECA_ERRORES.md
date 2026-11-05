@@ -435,3 +435,7 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::cifras_texto, take-off:tools/
 
 ## BE-142 — Chuze FINAL8 (compuerta v40): CB_U_037 contaba como walls faltantes los tags de A101 descartados en el canon (wall contado en el plano ampliado, ONE WALL ONCE)
 Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/test_chuze_r80f8_11.py (test_u037_duenos). Skill v81cf40 (Chuze FINAL8, auditoría U-138 4-nov).
+
+## BE-143 — Hook U-136 guardaba avisos automáticos como órdenes del usuario (5-nov)
+La bandeja _entrantes.jsonl tenía 32 entradas y ninguna era del usuario: task-notification, informes de subagentes y avisos de otras sesiones entran por UserPromptSubmit. Arreglo: registrar_orden.py descarta todo prompt que empieza con un envoltorio automático (es_del_usuario). Las 32 quedaron clasificadas "no es regla" en MAPA_ORDENES.json.
+Chequeo(s): .claude/hooks/registrar_orden.py::es_del_usuario. Test: jc-hunter-ordenes/test_verificar_version.py (hook_solo_usuario).

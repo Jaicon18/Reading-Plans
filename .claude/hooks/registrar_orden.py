@@ -3,13 +3,18 @@
 cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl para convertirlo en regla. Nunca bloquea."""
 import hashlib, json, os, re, sys, datetime
 SECRETO = re.compile(r"(password|passwd|contraseñ|api[_-]?key|secret|token\s*[:=]|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,})", re.I)
+# BE-143: los avisos automáticos (tareas en segundo plano, subagentes, mensajes de otras sesiones,
+# tareas programadas) llegan como prompt pero NO son mensajes del usuario: no se guardan.
+AUTOMATICO = re.compile(r"^\s*(<task-notification|<agent-message|<cross-session-message|<system-reminder|<wake\b|<webhook-payload|<child-session-event|<event source=|\[SYSTEM NOTIFICATION)", re.I)
+def es_del_usuario(texto):
+    return bool(texto) and not AUTOMATICO.search(texto) and not SECRETO.search(texto)
 def main():
     try:
         d = json.load(sys.stdin)
     except Exception:
         return 0
     texto = (d.get("prompt") or "").strip()
-    if not texto or SECRETO.search(texto):
+    if not es_del_usuario(texto):
         return 0
     raiz = os.environ.get("CLAUDE_PROJECT_DIR") or d.get("cwd") or "."
     carpeta = os.path.join(raiz, "cache_proyectos", "ORDENES_CRUDAS")
