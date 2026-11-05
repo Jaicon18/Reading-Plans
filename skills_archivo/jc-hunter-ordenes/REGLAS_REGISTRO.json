@@ -1,8 +1,8 @@
 {
- "version": "registro (v81cf42, 2026-11-05: + U-139 wood excluido)",
+ "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 280,
+  "programa": 282,
   "conducta": 52,
   "historico": 23
  },
@@ -4914,6 +4914,36 @@
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "u_139"
+   }
+  },
+  {
+   "id": "U-140",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA INVIOLABLE (usuario 5-nov, CFA rev9): un RFI 'not printed' solo tras buscarlo HASTA ENCONTRARLO en todas las disciplinas, specs / addenda, sets de todos los GC, SHX y geometría vectorial a escala impresa, con sinónimos; barrido de pocos términos = FALLA",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_busqueda"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u140_u141"
+   }
+  },
+  {
+   "id": "U-141",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA GENERAL E INVIOLABLE (usuario 5-nov): toda burbuja revisada se circula y numera en su hoja de origen y en su vista destino, y cada burbuja dentro de esa vista hasta el final de la cadena; Planos marcados/DETALLES_REVISADOS.pdf + índice; falta una o 0 = FAIL",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_detalles_circulados",
+    "take-off:tools/compuerta_entrega.py::marcar_detalles",
+    "take-off:tools/chequeos_biblioteca.py::cadena_detalles"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u140_u141"
    }
   }
  ]

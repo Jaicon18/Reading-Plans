@@ -243,6 +243,25 @@ def revisar_banco(archivo):
     return []
 
 
+VERSIONES_DUPLICADAS_HISTORICAS = {"v80u"}
+
+
+def revisar_versiones_unicas(archivo):
+    """BE-144: dos sesiones armaron el mismo número de versión (v81cf43 O'Reilly y CFA; antes BE-CF20).
+    Cada número de versión = un solo zip en skills_archivo/. El número se aparta antes de armar
+    en skills_archivo/VERSION_EN_CURSO.md (commit + push primero)."""
+    import collections
+    if not archivo or not os.path.isdir(archivo):
+        return []
+    c = collections.Counter()
+    for n in os.listdir(archivo):
+        m = re.match(r"take-off-metal-frame-drywall_([^_]+)_.*\.zip$", n)
+        if m:
+            c[m.group(1)] += 1
+    return [f"versión {v} archivada {k} veces (BE-144: apartar el número en VERSION_EN_CURSO.md antes de armar)"
+            for v, k in sorted(c.items()) if k > 1 and v not in VERSIONES_DUPLICADAS_HISTORICAS]
+
+
 def revisar_ordenes(cache, horas=24):
     """U-136: toda orden de la bandeja (_entrantes.jsonl) con más de `horas` sin clasificar en MAPA_ORDENES.json = falta."""
     import json, datetime
@@ -302,8 +321,9 @@ def main(argv):
     sk = revisar_skill(Fuente(candidato))
     bc = revisar_banco(archivo)
     od = revisar_ordenes(extra[0] if extra else None)
+    vu = revisar_versiones_unicas(archivo)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
-                       ("BANCO (U-043)", bc), ("ORDENES (U-136)", od)):
+                       ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")
