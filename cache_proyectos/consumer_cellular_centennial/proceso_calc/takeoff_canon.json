@@ -2920,7 +2920,7 @@
  "rfis": [
   {
    "id": "RFI-01",
-   "status": "open",
+   "status": "closed",
    "source": "A100",
    "question": "The deck break between 'PLY DECK @ 16'-4\"' (Back of House) and 'PLY DECK @ 17'-1 9/16\"' (Sales Area) is not drawn (deck height not printed at the C3 line). C3-01 studs carried to the higher deck.",
    "why_not_printed": "no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches",
@@ -3153,7 +3153,13 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - user decision 2026-11-05 (option A): studs of C3-01 to the higher printed deck 17'-1 9/16\" (A100 PLY DECK tag), as carried; becomes rule U-146 (two printed deck heights and no drawn break = the higher printed height, no RFI). Delta if the BOH deck 16'-4\": -22.3 LF of 3-5/8\" 18 ga stud. Verify at A100.",
+    "source": "A100; U-146"
+   },
+   "decision": "CLOSED - user decision 2026-11-05 (option A): studs of C3-01 to the higher printed deck 17'-1 9/16\" (A100 PLY DECK tag), as carried; becomes rule U-146 (two printed deck heights and no drawn break = the higher printed height, no RFI). Delta if the BOH deck 16'-4\": -22.3 LF of 3-5/8\" 18 ga stud. Verify at A100.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-02",
@@ -3499,7 +3505,7 @@
   },
   {
    "id": "RFI-04",
-   "status": "open",
+   "status": "closed",
    "source": "A700",
    "question": "Gypsum board finish level and trims are not specified (no project manual; A700 'ARCHITECTURAL SPECIFICATIONS' holds only the finish / FF&E schedules; walls painted PT-1..PT-4 eggshell). Carried Level 4 on all board, metal corner bead at outside corners and the cased opening.",
    "why_not_printed": "no finish level / trim specification anywhere in the set",
@@ -3709,7 +3715,13 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - user decision 2026-11-05 (option A): Level 4 finish on all gypsum board, as carried; becomes rule U-147 (level of finish not specified = Level 4, no RFI). Delta if Level 5: skim coat on 4744.0 SF. Verify at A700.",
+    "source": "A700; U-147"
+   },
+   "decision": "CLOSED - user decision 2026-11-05 (option A): Level 4 finish on all gypsum board, as carried; becomes rule U-147 (level of finish not specified = Level 4, no RFI). Delta if Level 5: skim coat on 4744.0 SF. Verify at A700.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-05",

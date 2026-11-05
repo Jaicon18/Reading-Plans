@@ -55,3 +55,5 @@ Within tolerance (no change needed): the restroom ceiling area is 60.49 SF in th
 | R2-6 | Removed rows | PASS | furring channel 54.25 LF, carrying channel 23.0 LF, ceiling perimeter track 31.75 LF are no longer carried (the grid replaces them); board 60.49 SF unchanged |
 
 Result rev2: 6/6 PASS on the changed rows; rev1 8/8 PASS stands for the unchanged rows.
+
+## Addendum rev3 (5-nov): RFI-01 and RFI-04 closed by user decision (option A, as carried). Material Summary compared by program against rev2: 0 rows changed. Back-check results of rev1 (8/8) and rev2 (6/6) stand.

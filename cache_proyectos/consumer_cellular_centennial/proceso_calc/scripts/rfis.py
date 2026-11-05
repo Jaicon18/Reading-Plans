@@ -160,6 +160,11 @@ for r in rf:
                               "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog", "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"]
 # rev2 (COORDINACION 5-nov, U-140 re-check: keep open only what no sheet prints)
 CERRAR = {
+ "RFI-01": ("CLOSED - user decision 2026-11-05 (option A): studs of C3-01 to the higher printed deck 17'-1 9/16\" (A100 PLY DECK "
+            "tag), as carried; becomes rule U-146 (two printed deck heights and no drawn break = the higher printed height, no RFI). "
+            "Delta if the BOH deck 16'-4\": -{d1} LF of 3-5/8\" 18 ga stud. Verify at A100.", "A100; U-146"),
+ "RFI-04": ("CLOSED - user decision 2026-11-05 (option A): Level 4 finish on all gypsum board, as carried; becomes rule U-147 "
+            "(level of finish not specified = Level 4, no RFI). Delta if Level 5: skim coat on {d4} SF. Verify at A700.", "A700; U-147"),
  "RFI-02": ("CLOSED - resolved by rule U-127 (BOTH SIDES): the 1/A500 type A# note prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE "
             "TO 6\" ABOVE CEILING' - board on both faces carried. Note: the 1/A500 section draws one face only (1/2\" gap to the existing "
             "demising wall); delta if one face: -{d} SF 5/8\" Type X. Verify at 1/A500.", "1/A500; U-127"),
@@ -186,7 +191,7 @@ for r in rf:
     if r['id'] in CERRAR:
         a, src = CERRAR[r['id']]
         r['status'] = 'closed'
-        r['resolved'] = {"answer": a.replace('{d}', str(other)), "source": src}
+        r['resolved'] = {"answer": a.replace('{d}', str(other)).replace('{d1}', str(round(0.797 * studs_c3, 1))).replace('{d4}', str(board_sf)), "source": src}
         r['decision'] = r['resolved']['answer']
         r['delta_applied'] = {"RFI-06": "grid 2/A501 loaded: main tee 23.25 LF, cross tee 53.67 LF, angle 31.75 LF (replace furring 54.25 LF, carrying 23.0 LF, perimeter track 31.75 LF)"}.get(r['id'], "0 (carried as printed)")
 # RFI-08: the A700 note points the mop sink shelving to 6/A500 (ATTACHMENT TO STRUCTURE, not a shelf): reported in the RFI
