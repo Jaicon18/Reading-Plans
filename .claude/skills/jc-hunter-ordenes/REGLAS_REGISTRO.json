@@ -1,8 +1,8 @@
 {
- "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 287,
+  "programa": 289,
   "conducta": 52,
   "historico": 23
  },
@@ -4983,7 +4983,9 @@
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::ce_schedules_marcados",
     "take-off:tools/compuerta_entrega.py::marcar_schedules",
-    "take-off:tools/compuerta_entrega.py::lista_schedules"
+    "take-off:tools/compuerta_entrega.py::lista_schedules",
+    "take-off:tools/compuerta_entrega.py::ce_schedules_revisados",
+    "take-off:tools/compuerta_entrega.py::marcar_schedules_json"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -5017,6 +5019,34 @@
     "token": "test_be_cf27"
    },
    "cuando": "entrega"
+  },
+  {
+   "id": "BE-144",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "categoria": "programa",
+   "cuando": "version",
+   "texto_corto": "El mismo número de versión armado por dos sesiones: un número = un solo zip, apartado antes en VERSION_EN_CURSO.md",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_versiones_unicas"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "versiones_unicas"
+   }
+  },
+  {
+   "id": "U-144",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "version",
+   "texto_corto": "REGLA INVIOLABLE (5-nov, BE-144): antes de armar una versión del skill, apartar el número en skills_archivo/VERSION_EN_CURSO.md (commit + push primero); un número = un solo zip",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_versiones_unicas"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "versiones_unicas"
+   }
   }
  ]
 }

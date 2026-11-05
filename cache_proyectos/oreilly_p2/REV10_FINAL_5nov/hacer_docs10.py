@@ -53,7 +53,7 @@ R = [f"# {titulo}", ""] + bloque_datos() + [
     "and 6/A3.4, as carried); (2) wood EXCLUDED (R-ALC-01): FRT 2x blocking, FRT plywood and nailers = 0 with the note "
     "'EXCLUDED - wood blocking / plywood by others (Div. 06), user decision 2026-11-05, R-ALC-01' in the Material Summary and "
     "the Scope Checklist; this supersedes the estimator decisions of 2026-11-01 RFI-12 / RFI-24 / RFI-25. Every other "
-    "quantity is identical to rev7. 0 open RFIs. Re-run end to end with skill v81cf44 (quantities from the rev8 run, unchanged); quantities are produced by the programs "
+    "quantity is identical to rev7. 0 open RFIs. Re-run end to end with skill v81cf45 (quantities from the rev8 run, unchanged); quantities are produced by the programs "
     "from the canon; nothing is typed in the Excel.", "",
     "## Material Summary (net, before waste)", "", "| Material | Unit | Net | Where it comes from |", "|---|---|---|---|"]
 for r in ms:

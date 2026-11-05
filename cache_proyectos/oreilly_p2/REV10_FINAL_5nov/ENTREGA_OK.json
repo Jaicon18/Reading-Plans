@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-04 23:00 PST",
- "fecha_iso": "2026-11-05T07:00:07.173737+00:00",
- "workdir": "/tmp/claude-scratch/oreilly_p2/rev10c",
+ "fecha_california": "2026-11-04 23:27 PST",
+ "fecha_iso": "2026-11-05T07:27:19.297043+00:00",
+ "workdir": "/tmp/claude-scratch/oreilly_p2/rev10d",
  "entrega_dir": "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 158,
+  "PASS": 161,
   "AMBER": 2,
   "FAIL": 0
  },
@@ -389,7 +389,7 @@
    "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
    "estado": "PASS",
    "evidencia": [
-    "reglas.py OK (899 reglas)"
+    "reglas.py OK (900 reglas)"
    ],
    "plausibilidad": "OK"
   },
@@ -1558,7 +1558,7 @@
    "reglas": [
     "U-143"
    ],
-   "descripcion": "U-143 (usuario 5-nov, HFT RFI-02): en demolición solo se marcan los SF de lo que se demuele; los materiales no importan (van a la basura): renglón de demo en otra unidad que SF, con desglose por capa / cara / material, o un RFI sobre capas o composición de la demo = FAIL",
+   "descripcion": "U-143 (usuario 5-nov, HFT RFI-02): en demolición solo se marcan los SF de lo que se demuele; los materiales no importan (van a la basura): renglón de demo en otra unidad que SF, con desglose por capa / cara / material, o un RFI sobre capas o composición de la demo = FAIL; canon: demo_geom con layers > 1 (LF x H x 2 layers) = FAIL",
    "estado": "PASS",
    "evidencia": [
     "demolición solo en SF del elemento, sin capas ni RFI de composición"
@@ -1903,6 +1903,30 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CB_BE_CF25",
+   "reglas": [
+    "BE-CF25"
+   ],
+   "descripcion": "BE-CF25 (CFA rev10, usuario 5-nov 'no están impresos, tienes que buscarlo hasta encontrarlo'): un RFI ABIERTO 'not printed' solo vale con la búsqueda completa: barrido.hojas = ALL, >= 12 términos (con sinónimos), los sets de los dos GC comparados (barrido.sets >= 2 o barrido.un_solo_gc con motivo), la medida vectorial a la escala impresa intentada (barrido.medida_vectorial) y >= 3 lugares revisados con imagen (barrido.lugares [{sheet, what, img}])",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI 'not printed' con búsqueda completa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF26",
+   "reglas": [
+    "BE-CF26"
+   ],
+   "descripcion": "BE-CF26 (CFA rev10): un RFI RESUELTO / CERRADO cuyo valor final está en resolved.answer ('= N SF|LF') debe hablar desde ese valor: la opción A no puede decir 'M SF loaded' con M != N ni presentar N como alternativa con delta ('N SF ...: -x')",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI resuelto habla desde el valor cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CB_BE_VS_15",
    "reglas": [
     "BE-VS-15"
@@ -2100,6 +2124,18 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CE_SCHEDULES_REVISADOS",
+   "reglas": [
+    "U-142"
+   ],
+   "descripcion": "U-142: todos los schedules del trade revisados: schedules_materiales.json con cada fila -> materiales y estado (en el take-off / fuera de alcance con motivo / no usada con motivo), y cada fila marcada (círculo + palomita + número) en Planos marcados/SCHEDULES_REVISADOS.pdf; falta una o 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "8 schedules del trade, 41 filas revisadas, materiales listados y marcadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CE_DETALLES_CIRCULADOS",
    "reglas": [
     "U-141"
@@ -2149,10 +2185,10 @@
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A1.1_type_S42.png": "81275e924727a36c6d66530a8cf6a98b4b3911cd8a1510033a98ff51cf6750d5",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A1.1_type_S43.png": "5f3682e5452a1fed0d0b3eacb05a32ed76baf4fb0feac13be13fb8e336d3e73a",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A1.1_type_S61.png": "46fd652f59941f7e2287d01fffc6c821ec74d1fb1e69deb26d9b8318eb3dba7a",
-  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "36cc1546ebf113f6e1e7c6e86aa20fe25e8f944fb65997895c7501f59ec8ba9c",
+  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "d65213cd82a1f98f2f87e5a5b4f33b1b23320031f44738ca8a0f1a57aa8c30fd",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/OReilly_Evans_FINAL_markups_rev10.pdf": "974ad31a05472c56e9984c496c4aea3646d8cf7635f8344511bc9b89199fff35",
-  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "4d9cb704d8d75cbde847765d040109c86dbc615c4baeeab7af09400dcee5cbb4",
-  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "0fbaae39c641e086f87122260b2effc422189578b43b1b16cc7b8f2494cc5bfd",
+  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "59017f20a49f908588b8232319f77a9824b1b04a7ef0c3e1bd479352067acc47",
+  "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "902a9ce9fd11ad3a13b46a2de4c6ff43a737ff1cd485ca0d4a68f79ffa6312e8",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "3b42793944d4f47b4a6f88c50ccb28f3486c15a8361797d71bd16031ceeebdde",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SEGUIMIENTO.md": "504af6c37fa49a9a9ba56eae0885b6a05c1c2ab1a802695035828663190feede",
   "rev10 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/OReilly_Evans_Takeoff_FINAL_rev10.xlsx": "1bfea99a02b061fb0c015735318aee775284b3cb89d284d03ffd85ce98396016",
@@ -2163,5 +2199,5 @@
   "carpeta_proyecto": "O'Reilly Evans #1",
   "carpeta_proyecto_id": "1_mALpSv4Pph0SPsUXgxyYgfFFENXMvM6"
  },
- "registro": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)"
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144)"
 }
