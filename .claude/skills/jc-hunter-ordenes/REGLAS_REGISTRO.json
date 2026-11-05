@@ -2,7 +2,7 @@
  "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 284,
+  "programa": 287,
   "conducta": 52,
   "historico": 23
  },
@@ -4971,6 +4971,49 @@
    "test": {
     "archivo": "take-off:tools/test_cf_pruebas.py",
     "token": "test_cf_rev10_rfi_resuelto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-142",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA GENERAL E INVIOLABLE (usuario 5-nov): revisar TODOS los schedules del trade, lista de cada material por fila y marcar cada partition type (Planos marcados/SCHEDULES_REVISADOS.pdf + SCHEDULES_MATERIALES.md)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_schedules_revisados",
+    "take-off:tools/compuerta_entrega.py::marcar_schedules"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u142"
+   }
+  },
+  {
+   "id": "U-143",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA GENERAL (usuario 5-nov, HFT RFI-02): demolición = solo SF del elemento (wall LF x H, cielo área), sin capas / caras / materiales; nunca RFI de capas de demo",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_143"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev11_demo_sf"
+   }
+  },
+  {
+   "id": "BE-CF27",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "antes de subir: las órdenes del usuario del remoto (git fetch) están en el registro del skill de la compuerta; si falta una, se bloquea la subida",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::candado_ordenes"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cf27"
    },
    "cuando": "entrega"
   }

@@ -445,6 +445,10 @@ Chequeo(s): .claude/hooks/registrar_orden.py::es_del_usuario. Test: jc-hunter-or
 
 ## BE-CF26 — RFI resuelto que habla desde el valor viejo (CFA #2284 rev10, 5-nov)
 | CFA #2284 rev10 (revisión antes de subir) | RFI-28 se resolvió midiendo A-052 a escala (DEMO-C6 34.57 SF cargado) pero la opción A seguía diciendo '38.35 SF loaded' y daba 34.57 como alternativa con delta: el RFI resuelto hablaba desde el valor viejo | chequeos_biblioteca.be_cf26: RFI resuelto / cerrado con resolved.answer '= N SF|LF' = FAIL si la opción A dice 'M loaded' con M != N o presenta N como alternativa con delta (test_cf_pruebas.py::test_cf_rev10_rfi_resuelto; caso en test_chequeos_biblioteca); correcciones_rev10 reescribe la opción A y el delta de RFI-28 desde 34.57 | CFA rev10 |
+
+## BE-CF27 — entrega subida sin las órdenes del usuario del remoto (CFA #2284 rev10, 5-nov)
+| CFA #2284 rev10 (5-nov) | rev10 se subió con el skill v81cf43 local; en el remoto ya estaban las órdenes del usuario U-141 (circular detalles), U-142 (schedules y lista de materiales) y U-143 (demolición solo SF). Con el skill unido, rev10 daba ROJA (U-140 / U-141) y su demo estaba al doble (LF x H x 2 layers) | subir_entrega.candado_ordenes: git fetch del repo, toda orden U-NNN de ORDENES_DEL_USUARIO.md del remoto debe estar en el REGLAS_REGISTRO.json del skill que corrió la compuerta; si falta una se BLOQUEA la subida (test_compuerta_entrega.py::test_be_cf27). rev11 aplica U-140..U-143 | CFA rev11 |
+
 ## BE-144 — El mismo número de versión armado por dos sesiones (v81cf43 O'Reilly y CFA, 5-nov; antes BE-CF20)
 Arreglo: el número se aparta en skills_archivo/VERSION_EN_CURSO.md con commit + push ANTES de armar; verificar_version.py::revisar_versiones_unicas FALLA si una versión tiene más de un zip archivado (v80u histórica exenta).
 Chequeo(s): jc-hunter-ordenes/verificar_version.py::revisar_versiones_unicas. Test: test_verificar_version.py (versiones_unicas).
