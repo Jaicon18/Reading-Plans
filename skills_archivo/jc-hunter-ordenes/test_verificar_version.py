@@ -142,8 +142,18 @@ def hook_solo_usuario():
     assert m.es_del_usuario("si el type dice BOTH SIDES van las dos caras")
 
 
+def versiones_unicas():
+    """BE-144: v81cf43 armada por dos sesiones."""
+    d = tempfile.mkdtemp()
+    for n in ("take-off-metal-frame-drywall_v81cf43_A_2026-11-05.zip", "take-off-metal-frame-drywall_v81cf43_B_2026-11-05.zip"):
+        open(os.path.join(d, n), "w").write("x")
+    assert V.revisar_versiones_unicas(d), "número repetido debe fallar"
+    os.remove(os.path.join(d, "take-off-metal-frame-drywall_v81cf43_B_2026-11-05.zip"))
+    assert V.revisar_versiones_unicas(d) == []
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

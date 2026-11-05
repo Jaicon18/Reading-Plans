@@ -1,7 +1,11 @@
 {
  "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 359,
+ "conteo": {
+  "programa": 287,
+  "conducta": 52,
+  "historico": 23
+ },
  "reglas": [
   {
    "id": "U-001",
@@ -4943,6 +4947,34 @@
    }
   },
   {
+   "id": "BE-CF25",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI 'not printed' solo con búsqueda completa (todas las disciplinas, los dos GC, vectores a escala)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf25"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_busqueda"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF26",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI resuelto / cerrado habla desde el valor cargado (opción A y delta sin el valor viejo)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf26"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_rfi_resuelto"
+   },
+   "cuando": "entrega"
+  },
+  {
    "id": "U-142",
    "origen": "REGLAS_USUARIO_CLAUDE.md",
    "categoria": "programa",
@@ -4971,6 +5003,20 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "u_143"
    }
+  },
+  {
+   "id": "BE-CF27",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "antes de subir: las órdenes del usuario del remoto (git fetch) están en el registro del skill de la compuerta; si falta una, se bloquea la subida",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::candado_ordenes"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cf27"
+   },
+   "cuando": "entrega"
   }
  ]
 }
