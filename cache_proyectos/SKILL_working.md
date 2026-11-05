@@ -2788,4 +2788,4 @@ sin cambio de cantidades.
 ### R80f.47 — U-140: RFI "not printed" solo tras buscarlo hasta encontrarlo (todas las disciplinas G/A/S/M/P/E/FP/F/K/vendor, existing, specs, addenda, sets de todos los GC, SHX, geometría vectorial a escala impresa, sinónimos); barrido corto = FAIL — compuerta en v81cf43.
 ### R80f.48 — U-141: cada burbuja revisada (detail, building / wall section, enlarged plan, elevación) circulada y numerada en origen Y destino, cadena completa; Planos marcados/DETALLES_REVISADOS.pdf + índice; CE_DETALLES_CIRCULADOS — en v81cf43.
 ### R80f.49 — U-142: todos los schedules del trade revisados; lista SCHEDULES_MATERIALES por type (stud, track, board por cara, altura, rating, accesorios, N/HOJA) y cada partition type marcado en la hoja del schedule (SCHEDULES_REVISADOS.pdf); CE_SCHEDULES_MARCADOS — en v81cf43.
-### Pendiente de decisión del usuario: HFT "2 layers" ¿aplica a la demolición de existing partitions? (+8,693 SF no cargados en rev3).
+### R80f.50 — U-143: demolición = solo SF del elemento (sin capas ni materiales), sin RFI de composición; HFT RFI-02 cerrado por esta regla (5-nov) — compuerta en v81cf43.
