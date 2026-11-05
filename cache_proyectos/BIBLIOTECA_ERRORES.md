@@ -430,3 +430,10 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::cifras_texto, take-off:tools/
 
 ## BE-142 — Chuze FINAL8 (compuerta v40): CB_U_037 contaba como walls faltantes los tags de A101 descartados en el canon (wall contado en el plano ampliado, ONE WALL ONCE)
 Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/test_chuze_r80f8_11.py (test_u037_duenos). Skill v81cf40 (Chuze FINAL8, auditoría U-138 4-nov).
+
+
+## Addendum 5-nov (O'Reilly rev10 FINAL, skill v81cf44) — errores encontrados al armar la entrega final y su regla
+1. U-142, primer cruce de materiales por palabra suelta: el stud caía en "Bottom track" (su fuente cita 362S162-33) y una regex genérica declaraba "not our trade" sin motivo del proyecto. Regla: la primera clave va en el NOMBRE del renglón del Material Summary; fuera de alcance solo con el ALC-xx del proyecto, un RFI cerrado o la división CSI del otro trade (compuerta_entrega.resolver_material, R80f.49).
+2. U-142, posiciones del lector independiente con escala en y equivocada (~0.55) en A5.1 / A5.2 / A1.2: los círculos caían entre renglones. Regla: la posición se ajusta al rótulo impreso (OCR 300 dpi en la misma columna) o va en entrega.json schedules_pos "HOJA:ID" medida en recorte y verificada a ojo (R80f.49).
+3. U-141 en rev9: 3 destinos marcados sobre una nota (1/A2.1 = keynote "1 PORTLAND CEMENT ... REFER TO EXTERIOR"; 1/A3.4 = nota "FLASHING"; 4/A3.1). Regla: la palabra del título también es de letra grande; hoja de contacto de CADA destino distinto antes de entregar; el que no cae en su título va a burbujas_verificadas.json (R80f.48, test test_u142).
+4. U-119: CB_U_119 leía "EL 108'-6\"" como el artículo "el"; y no veía el español del índice ("citada", "fuera de alcance") ni de las anotaciones ("DETALLE REVISADO", "verificada a ojo"). Regla: excepción EL / EL. + cifra en todo el entregable; índice y anotaciones en inglés; CE_DETALLES_CIRCULADOS / CE_SCHEDULES_MARCADOS con FAIL por anotación en español (idioma_es + _es_annots_pdf).

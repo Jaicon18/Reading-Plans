@@ -1,11 +1,7 @@
 {
  "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": {
-  "programa": 282,
-  "conducta": 52,
-  "historico": 23
- },
+ "conteo": 359,
  "reglas": [
   {
    "id": "U-001",
@@ -4944,6 +4940,36 @@
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u140_u141"
+   }
+  },
+  {
+   "id": "U-142",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA (usuario 5-nov): revisar TODOS los schedules del trade (partition/wall types, stud/LGS/joist/header, finish, RCP/ceiling, door/frame/window donde tocan el framing, notas de material); lista SCHEDULES_MATERIALES por type con cada material en el Material Summary o fuera de alcance con motivo; cada type/renglón marcado (círculo rojo + check + número) en Planos marcados/SCHEDULES_REVISADOS.pdf; lectura independiente (U-111); falta una marca, un material sin MS ni motivo, o 0 = FAIL",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_schedules_marcados",
+    "take-off:tools/compuerta_entrega.py::marcar_schedules",
+    "take-off:tools/compuerta_entrega.py::lista_schedules"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u142"
+   }
+  },
+  {
+   "id": "U-143",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA GENERAL (usuario 5-nov): en demolición solo se marcan los SF de lo que se demuele; los materiales de la demo no importan (todo va a la basura): renglón de demo en otra unidad, desglosado por capa/cara/material, o RFI de composición de la demo = FAIL",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_143"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_143"
    }
   }
  ]
