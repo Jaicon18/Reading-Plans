@@ -34,11 +34,6 @@
    "RESTROOM_C1": 8.0,
    "SOFFIT_EXIST": 11.75
   },
-  "carrying_direction": {
-   "value": "N-S",
-   "source": "A200, A501",
-   "source_info": "not printed (A200 / A501); restroom 7'-8\" x 7'-9\" nearly square: delta of the other direction < 1 LF of carrying channel - RFI-07"
-  },
   "type_order": {
    "value": [
     "A3",
@@ -2236,18 +2231,40 @@
    "height_source": "1/A200 restroom tag H 8'-0\" [CONFIRMED]; A402 CEILING 8'-0\"",
    "board": "5/8 type X WR",
    "layers": 1,
-   "system": "furring",
+   "system": "usg_grid",
    "perimeter_lf": 31.75,
    "penetrations": "M101 key 5 NEW CEILING MOUNTED EXHAUST FAN (restroom); E111 occupancy sensor/lights",
    "status": "DERIVADO",
-   "system_info": "2/A501 grid-type suspension system (ICC ESR 1289), 12 ga hangers @4'-0\" o.c., 2\"x2\" sheet metal angle perimeter; finish PT-1 - not bubbled on A200 / A402 (bubble sweep: A501 referenced from no sheet)",
-   "system_source": "A200 C-1 GYP BOARD CEILING at UNISEX RESTROOM H 8'-0\"; no ceiling detail bubbled on this ceiling (R70.1) -> furring channel system per ASTM C754 (conservative), RFI-07 option A = 2/A501 grid",
+   "system_info": "2/A501 grid-type suspension system (ICC ESR 1289), 12 GA. hanger wires max. 4'-0\" o.c., 2\" x 2\" sheet metal angle perimeter support; 5/8\" gyp bd",
+   "system_source": "2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION SYSTEM (5/8\" GYP. BD.); A200 C-1 GYP BOARD CEILING at UNISEX RESTROOM H 8'-0\"",
+   "system_callout": {
+    "detail": "2/A501",
+    "printed_only": true,
+    "source": "A501",
+    "why": "2/A501 is the only gypsum board ceiling detail printed in the set (A501 CEILING DETAILS) and C-1 restroom is the only gypsum board ceiling (A200); not bubbled on A200 / A402"
+   },
+   "main_oc_in": {
+    "value": 48,
+    "source": "2/A501",
+    "source_info": "2/A501 '12 GA. MIN. HANGER WIRES ... MAX. 4'-0\" O.C.' (main tee at the hanger line); USG drywall suspension system standard 4'-0\" o.c."
+   },
+   "cross_oc_in": {
+    "value": 16,
+    "source": "2/A501",
+    "source_info": "not printed on 2/A501: USG drywall suspension system standard cross tee 16\" o.c. for 5/8\" gyp bd (estimator note)"
+   },
+   "moldings": {
+    "value": [
+     "angle"
+    ],
+    "source": "2/A501 '2\" X 2\" SHEET METAL ANGLE' perimeter support"
+   },
    "ns_ft": 7.667,
    "ew_ft": 7.75,
    "dims_source": "A402 enlarged unisex restroom 7'-8\" x 7'-9\" (area per A100 vector polygon less the vanity notch)",
    "perimeter_ft": 31.75,
-   "detail_none_reason": "no ceiling detail bubbled on A200 / A402; 2/A501 not referenced (RFI-07)",
-   "source": "1/A200, A402",
+   "detail": "2/A501",
+   "source": "2/A501; 1/A200, A402",
    "source_info": "1/A200 REFLECTED CEILING PLAN, restroom ceiling tag C-1 H 8'-0\"; A402 enlarged restroom",
    "board_info": "5/8\" gyp bd (2/A501), water resistant per A100 note 11",
    "hanger_drop_ft": {
@@ -2255,10 +2272,9 @@
     "source": "A100, A200",
     "op": "16'-4\" (A100 BACK OF HOUSE PLY DECK) - 8'-0\" (A200 restroom H) = 8'-4\""
    },
-   "detail": "1/A200",
    "hatch_check_cause": "1/A200 SHEET SYMBOLS: 'C-1 GYP BOARD CEILING' is a plain square (no hatch, only the ACT C-2 / C-3 are gridded); polygon = inside faces of the restroom walls (rcp_check.png)",
    "height_status": "CONFIRMADO",
-   "img": "img_runner/sheet_A200_34159181.png"
+   "img": "img_runner/sheet_A501.png"
   }
  ],
  "ceilings_info": "C-2 = 2'x2' ACT lay-in (A700: 15/16\" grid, Armstrong Canyon 1492) in BOH 11'-11\", Sales 11'-11\", Hallway 11'-11\", Office 9'-0\", Utility 9'-0\" (A200) - ACT trade, NOT ours (note only). Existing storefront SOFFIT T:EXIST F:PT-1 H 11'-9\" (A200) to remain, patch & paint (D100 key 22) - no new soffit/bulkhead framing. Wood trellis 18\" below ceiling by millwork (A103 key 3). Only gypsum ceiling = C-1 restroom.",
@@ -2269,7 +2285,7 @@
    "lf": 77.0,
    "material": "metal",
    "label": "20 GA. METAL STRAPPING ATTACHED TO NEW STUD, (3) #8 SCREWS EACH STUD; 3\" above top slat and 3\" below bottom slat; extend 3\" past fixture both sides (2/A104)",
-   "source": "2/A104; A103 slat wall 38'-0\" (3'-2\" each end); A400 1",
+   "source": "2/A104; A103 slat wall 38'-0\" (3'-2\" each end); A400 1; 1/A400 (slat wall elevation)",
    "op": "2 rows x (38'-0\" + 2 x 3\")",
    "wall": "A3-01",
    "status": "DERIVADO",
@@ -2281,7 +2297,7 @@
    "lf": 37.5,
    "material": "metal",
    "label": "logo wall blocking band (cleat 10 1/2\" + 3\" above/below = 1'-4 1/2\" band) (1/A104)",
-   "source": "1/A104; A103 / A400 3 logo wall 37'-0\"",
+   "source": "1/A104; A103 / A400 3 logo wall 37'-0\"; 3/A400 (logo wall elevation)",
    "op": "1 band x (37'-0\" + 6\")",
    "band_height_ft": 1.375,
    "wall": "A3-03",
@@ -3141,7 +3157,7 @@
   },
   {
    "id": "RFI-02",
-   "status": "open",
+   "status": "closed",
    "source": "1/A500",
    "question": "Type A# 'FURRED WALL TO DECK' (1/A500) prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING' but the section draws the board only on the tenant side, with a 1/2\" gap to the existing demising wall. Board loaded on BOTH faces as printed in the type note.",
    "why_not_printed": "conflict inside 1/A500 (type note vs section drawing)",
@@ -3304,11 +3320,17 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - resolved by rule U-127 (BOTH SIDES): the 1/A500 type A# note prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING' - board on both faces carried. Note: the 1/A500 section draws one face only (1/2\" gap to the existing demising wall); delta if one face: -1205.6 SF 5/8\" Type X. Verify at 1/A500.",
+    "source": "1/A500; U-127"
+   },
+   "decision": "CLOSED - resolved by rule U-127 (BOTH SIDES): the 1/A500 type A# note prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING' - board on both faces carried. Note: the 1/A500 section draws one face only (1/2\" gap to the existing demising wall); delta if one face: -1205.6 SF 5/8\" Type X. Verify at 1/A500.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-03",
-   "status": "open",
+   "status": "closed",
    "source": "4/A500",
    "question": "4/A500 long-leg slotted runner track: gauge and leg length not printed (2\" min. vertical slots printed); the floating C channel is printed 3 5/8\" x 20 GA only - no 6\" version for type D (6\" studs). Carried: deep-leg slotted track 20 ga (2\" deflection leg) by stud size and a nested 20 ga C channel of the wall's stud size. The estimator precedent on runners (O'Reilly: 1-1/2\" runner top and bottom of Z-furring, ASTM C754) does not decide this deflection head.",
    "why_not_printed": "gauge / leg length of the runner and the 6\" channel are not printed",
@@ -3467,7 +3489,13 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 4/A500 prints '20 GA. MIN. TRACK' (long-leg runner) and '3 5/8\" X 20 GA. C CHANNEL'; the channel is applied at the 6\" stud size for type D. Delta vs manufacturer 2-1/2\" leg deflection track: 0 LF. Verify at 4/A500.",
+    "source": "4/A500"
+   },
+   "decision": "CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 4/A500 prints '20 GA. MIN. TRACK' (long-leg runner) and '3 5/8\" X 20 GA. C CHANNEL'; the channel is applied at the 6\" stud size for type D. Delta vs manufacturer 2-1/2\" leg deflection track: 0 LF. Verify at 4/A500.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-04",
@@ -3685,7 +3713,7 @@
   },
   {
    "id": "RFI-05",
-   "status": "open",
+   "status": "closed",
    "source": "A100",
    "question": "The 4'-0\" x 8'-0\" cased opening 'OPEN TO HALLWAY' (2/A400) in the C3 line between Hallway and Sales is untagged; the infill above the opening is carried as C3 (studs to deck, board both sides) as the C3 line it continues.",
    "why_not_printed": "no partition tag at the infill above the opening",
@@ -3929,25 +3957,31 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - resolved by the drawings: the C3 line continues over the 4'-0\" x 8'-0\" cased opening (A100 C3 tag at its north end; 2/A400 'OPEN TO HALLWAY', T.O. OPENING 8'-0\") - C3 to deck over the opening carried. Delta if E3: -4.0 LF x 4.71 ft of stud. Verify at A100 / 2/A400.",
+    "source": "A100; 2/A400"
+   },
+   "decision": "CLOSED - resolved by the drawings: the C3 line continues over the 4'-0\" x 8'-0\" cased opening (A100 C3 tag at its north end; 2/A400 'OPEN TO HALLWAY', T.O. OPENING 8'-0\") - C3 to deck over the opening carried. Delta if E3: -4.0 LF x 4.71 ft of stud. Verify at A100 / 2/A400.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-06",
-   "status": "open",
+   "status": "closed",
    "source": "A200",
    "question": "Unisex Restroom C-1 gypsum board ceiling at 8'-0\" (A200): no ceiling framing detail is bubbled on A200 / A402; A501 'CEILING DETAILS' is referenced from no sheet. Carried as a suspended furring channel system (hangers + carrying + furring, ASTM C754).",
    "why_not_printed": "no ceiling detail called on this ceiling",
-   "loaded": "furring system over 60.49 SF (carrying channel, furring channel, hangers, perimeter track)",
+   "loaded": "2/A501 drywall grid suspension system over 60.49 SF (main tee, cross tee, 2\" x 2\" angle, hangers) - option A",
    "opciones": {
     "A": {
-     "texto": "Drawings: 2/A501 drywall grid suspension system (ICC ESR 1289) if it applies to this ceiling",
+     "texto": "Drawings: 2/A501 drywall grid suspension system (ICC ESR 1289), the only gypsum board ceiling detail printed in the set - LOADED",
      "source": "2/A501",
-     "delta": "furring / carrying / hangers replaced by grid main + cross tees and 2x2 angle (same board SF)"
+     "delta": "0"
     },
     "B": {
-     "texto": "Code: ASTM C754 furring channel system - LOADED",
+     "texto": "Code: ASTM C754 furring channel system (previously carried)",
      "cita": "ASTM C754 / GA-216",
-     "delta": "0"
+     "delta": "+54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF ceiling perimeter track 20 GA; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 angle; hangers 9 pcs / 75.0 LF and board 60.49 SF unchanged"
     },
     "C": "____"
    },
@@ -4124,18 +4158,24 @@
     },
     "swept_txt": "Swept: all 37 sheets (G / D / A / M / E / P / FA, no S sheets and no project manual in the set), both GC sets, the survey documents; terms: C-1, GYP BOARD CEILING, A501, SUSPENSION, GRID, HANGER, FURRING, CARRYING, CEILING DETAIL, 8'-0\", RESTROOM, ESR 1289."
    },
-   "delta": "(A) furring / carrying / hangers replaced by grid main + cross tees and 2x2 angle (same board SF) | (B) 0",
+   "delta": "(A) 0 | (B) +54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF ceiling perimeter track 20 GA; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 angle; hangers 9 pcs / 75.0 LF and board 60.49 SF unchanged",
    "img": "/root/cc/work/etapas/4_canon/img/rfi/RFI-06_A200.png",
    "fuentes_revisadas": [
     "designation: no SSMA designation / gauge printed beyond 1/A500 - 6/A500",
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION SYSTEM (5/8\" GYP. BD., ICC ESR 1289) is the only gypsum board ceiling detail printed in the set and C-1 restroom is the only gypsum board ceiling (no bubble is not 'not printed', U-140). Delta vs the ASTM C754 furring system: +54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF perimeter track; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 angle. Verify at 2/A501, A200.",
+    "source": "2/A501; A200"
+   },
+   "decision": "CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION SYSTEM (5/8\" GYP. BD., ICC ESR 1289) is the only gypsum board ceiling detail printed in the set and C-1 restroom is the only gypsum board ceiling (no bubble is not 'not printed', U-140). Delta vs the ASTM C754 furring system: +54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF perimeter track; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 angle. Verify at 2/A501, A200.",
+   "delta_applied": "grid 2/A501 loaded: main tee 23.25 LF, cross tee 53.67 LF, angle 31.75 LF (replace furring 54.25 LF, carrying 23.0 LF, perimeter track 31.75 LF)"
   },
   {
    "id": "RFI-07",
-   "status": "open",
+   "status": "closed",
    "source": "D100",
    "question": "Door 3C is a new door in the EXISTING Hallway / Utility wall to remain (D100 keynote 17, A100): the new opening framing (header + jamb studs) in the existing wall is not detailed. Carried: track header (2/A600, R.O. + 1'-4\") and 2 jamb studs each side (3/A600) to 6\" above the BOH ceiling.",
    "why_not_printed": "no framing for the opening in the existing wall",
@@ -4400,13 +4440,19 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - resolved by the drawings: A600 DOOR SCHEDULE door 3C (Utility) prints HEAD 2/A600 and JAMB 3/A600 - track header 4.67 LF and double jamb studs carried. Delta if the existing opening were reused: -4.67 LF header, -49.67 LF 3-5/8\" stud. Verify at A600 door schedule row 3C.",
+    "source": "A600 door schedule 3C; 2/A600; 3/A600"
+   },
+   "decision": "CLOSED - resolved by the drawings: A600 DOOR SCHEDULE door 3C (Utility) prints HEAD 2/A600 and JAMB 3/A600 - track header 4.67 LF and double jamb studs carried. Delta if the existing opening were reused: -4.67 LF header, -49.67 LF 3-5/8\" stud. Verify at A600 door schedule row 3C.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-08",
-   "status": "open",
+   "status": "closed",
    "source": "1/A504",
-   "question": "Mop sink / water heater shelf (1/A504 sections A, B): '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS' and '5/8\" WR GYP BD' under the 3/4\" FRT plywood are printed, but the number of members is not. Carried: perimeter ledger + joists @ 16\" o.c. over the 4'-0\" x 2'-4\" alcove (between E3-12 / E3-13) and 5/8\" WR board top and underside.",
+   "question": "Mop sink / water heater shelf (1/A504 sections A, B): '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS' and '5/8\" WR GYP BD' under the 3/4\" FRT plywood are printed, but the number of members is not. Carried: perimeter ledger + joists @ 16\" o.c. over the 4'-0\" x 2'-4\" alcove (between E3-12 / E3-13) and 5/8\" WR board top and underside. A700 SHELVES note 'SHELVING ABOVE MOP SINK IS ON DETAIL 6/A500' points to 6/A500 ATTACHMENT TO STRUCTURE (a brace detail, no shelf): the shelf is taken from 1/A504.",
    "why_not_printed": "member count / layout of the shelf framing not printed",
    "loaded": "19.67 LF 6\" 16 ga stud + 18.67 SF 5/8\" WR board",
    "opciones": {
@@ -4597,7 +4643,13 @@
     "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
     "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog",
     "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"
-   ]
+   ],
+   "resolved": {
+    "answer": "CLOSED - resolved by the drawings (U-140): 1/A504 prints the shelf members '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS' and '5/8\" WR GYP BD'; the member layout follows the printed stud spacing of the set, 16\" o.c. (1/A500 types): perimeter + joists @ 16\" o.c. = 19.67 LF, board top + underside 18.67 SF. Delta if perimeter only: -7.0 LF of 6\" 16 GA stud. Note: the A700 SHELVES note points to 6/A500, which is ATTACHMENT TO STRUCTURE (no shelf). Verify at 1/A504.",
+    "source": "1/A504; 1/A500"
+   },
+   "decision": "CLOSED - resolved by the drawings (U-140): 1/A504 prints the shelf members '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS' and '5/8\" WR GYP BD'; the member layout follows the printed stud spacing of the set, 16\" o.c. (1/A500 types): perimeter + joists @ 16\" o.c. = 19.67 LF, board top + underside 18.67 SF. Delta if perimeter only: -7.0 LF of 6\" 16 GA stud. Note: the A700 SHELVES note points to 6/A500, which is ATTACHMENT TO STRUCTURE (no shelf). Verify at 1/A504.",
+   "delta_applied": "0 (carried as printed)"
   },
   {
    "id": "RFI-C1",
@@ -4809,7 +4861,7 @@
   {
    "ref": "PVC-RR",
    "lf": 84.83,
-   "source": "A402",
+   "source": "A402; 6/A502 (FRP bottom edge J-mold over the cove base)",
    "op": "restroom: edge top + bottom 2 x 28.417 + inside corners 5 x 4.0 (A100 polygon: 6 vertices, 5 inside / 1 outside) + door 4C jambs 2 x 4.0 = 84.83 LF"
   },
   {

@@ -2,7 +2,7 @@
 # Consumer Cellular Centennial - stages 4-9 chain (adapted from HFT Loveland cadena.sh). Every tool through bitacora.py run;
 # stops at the first rc != 0.  Usage: bash scripts/cadena.sh [from_step]
 source /root/cc/work/scripts/env.sh
-REV=${REV:-rev1}; export REV
+REV=${REV:-rev2}; export REV
 cd $K; C4=$K/etapas/4_canon; M=$K/etapas/6_markups; X=$K/etapas/8_excel/Consumer_Cellular_Centennial_Takeoff_FINAL_${REV}.xlsx
 mkdir -p $C4/out $M $K/etapas/7_imagenes $K/etapas/8_excel
 N=0; DESDE=${1:-0}

@@ -121,9 +121,10 @@ cp = c['ceilings'][0]
 rf.append({"id": "RFI-06", "status": "open", "source": "A200",
  "question": "Unisex Restroom C-1 gypsum board ceiling at 8'-0\" (A200): no ceiling framing detail is bubbled on A200 / A402; A501 'CEILING DETAILS' is referenced from no sheet. Carried as a suspended furring channel system (hangers + carrying + furring, ASTM C754).",
  "why_not_printed": "no ceiling detail called on this ceiling",
- "loaded": f"furring system over {cp['area_sf']} SF (carrying channel, furring channel, hangers, perimeter track)",
- "opciones": {"A": {"texto": "Drawings: 2/A501 drywall grid suspension system (ICC ESR 1289) if it applies to this ceiling", "source": "2/A501", "delta": "furring / carrying / hangers replaced by grid main + cross tees and 2x2 angle (same board SF)"},
-              "B": {"texto": "Code: ASTM C754 furring channel system - LOADED", "cita": "ASTM C754 / GA-216", "delta": "0"}, "C": "____"},
+ "loaded": f"2/A501 drywall grid suspension system over {cp['area_sf']} SF (main tee, cross tee, 2\" x 2\" angle, hangers) - option A",
+ "opciones": {"A": {"texto": "Drawings: 2/A501 drywall grid suspension system (ICC ESR 1289), the only gypsum board ceiling detail printed in the set - LOADED", "source": "2/A501", "delta": "0"},
+              "B": {"texto": "Code: ASTM C754 furring channel system (previously carried)", "cita": "ASTM C754 / GA-216",
+                    "delta": "+54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF ceiling perimeter track 20 GA; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 angle; hangers 9 pcs / 75.0 LF and board 60.49 SF unchanged"}, "C": "____"},
  "barrido": barrido(["C-1", "GYP BOARD CEILING", "A501", "SUSPENSION", "GRID", "HANGER", "FURRING", "CARRYING", "CEILING DETAIL", "8'-0\"", "RESTROOM", "ESR 1289"],
                     [("A200", "UNISEX", "RFI-06_A200"), ("A402", "CEILING", "RFI-06_A402"), ("A501", "ESR", "RFI-06_A501")],
                     "A100 vector polygon of the restroom at 18 pt/ft = 60.49 SF (G003 prints 60 SF)")})
@@ -157,6 +158,42 @@ for r in rf:
     r['img'] = r['barrido']['lugares'][0]['img']
     r['fuentes_revisadas'] = ["designation: no SSMA designation / gauge printed beyond 1/A500 - 6/A500", "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
                               "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog", "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"]
+# rev2 (COORDINACION 5-nov, U-140 re-check: keep open only what no sheet prints)
+CERRAR = {
+ "RFI-02": ("CLOSED - resolved by rule U-127 (BOTH SIDES): the 1/A500 type A# note prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE "
+            "TO 6\" ABOVE CEILING' - board on both faces carried. Note: the 1/A500 section draws one face only (1/2\" gap to the existing "
+            "demising wall); delta if one face: -{d} SF 5/8\" Type X. Verify at 1/A500.", "1/A500; U-127"),
+ "RFI-03": ("CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 4/A500 prints '20 GA. MIN. TRACK' (long-leg runner) and "
+            "'3 5/8\" X 20 GA. C CHANNEL'; the channel is applied at the 6\" stud size for type D. Delta vs manufacturer 2-1/2\" leg "
+            "deflection track: 0 LF. Verify at 4/A500.", "4/A500"),
+ "RFI-05": ("CLOSED - resolved by the drawings: the C3 line continues over the 4'-0\" x 8'-0\" cased opening (A100 C3 tag at its "
+            "north end; 2/A400 'OPEN TO HALLWAY', T.O. OPENING 8'-0\") - C3 to deck over the opening carried. Delta if E3: "
+            "-4.0 LF x 4.71 ft of stud. Verify at A100 / 2/A400.", "A100; 2/A400"),
+ "RFI-06": ("CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION "
+            "SYSTEM (5/8\" GYP. BD., ICC ESR 1289) is the only gypsum board ceiling detail printed in the set and C-1 restroom is the "
+            "only gypsum board ceiling (no bubble is not 'not printed', U-140). Delta vs the ASTM C754 furring system: +54.25 LF furring "
+            "channel, +23.0 LF carrying channel, +31.75 LF perimeter track; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 "
+            "angle. Verify at 2/A501, A200.", "2/A501; A200"),
+ "RFI-08": ("CLOSED - resolved by the drawings (U-140): 1/A504 prints the shelf members '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK "
+            "SCREWS' and '5/8\" WR GYP BD'; the member layout follows the printed stud spacing of the set, 16\" o.c. (1/A500 types): "
+            "perimeter + joists @ 16\" o.c. = 19.67 LF, board top + underside 18.67 SF. Delta if perimeter only: -7.0 LF of 6\" 16 GA "
+            "stud. Note: the A700 SHELVES note points to 6/A500, which is ATTACHMENT TO STRUCTURE (no shelf). Verify at 1/A504.", "1/A504; 1/A500"),
+ "RFI-07": ("CLOSED - resolved by the drawings: A600 DOOR SCHEDULE door 3C (Utility) prints HEAD 2/A600 and JAMB 3/A600 - track "
+            "header 4.67 LF and double jamb studs carried. Delta if the existing opening were reused: -4.67 LF header, -49.67 LF "
+            "3-5/8\" stud. Verify at A600 door schedule row 3C.", "A600 door schedule 3C; 2/A600; 3/A600"),
+}
+for r in rf:
+    if r['id'] in CERRAR:
+        a, src = CERRAR[r['id']]
+        r['status'] = 'closed'
+        r['resolved'] = {"answer": a.replace('{d}', str(other)), "source": src}
+        r['decision'] = r['resolved']['answer']
+        r['delta_applied'] = {"RFI-06": "grid 2/A501 loaded: main tee 23.25 LF, cross tee 53.67 LF, angle 31.75 LF (replace furring 54.25 LF, carrying 23.0 LF, perimeter track 31.75 LF)"}.get(r['id'], "0 (carried as printed)")
+# RFI-08: the A700 note points the mop sink shelving to 6/A500 (ATTACHMENT TO STRUCTURE, not a shelf): reported in the RFI
+for r in rf:
+    if r['id'] == 'RFI-08':
+        r['question'] += (" A700 SHELVES note 'SHELVING ABOVE MOP SINK IS ON DETAIL 6/A500' points to 6/A500 ATTACHMENT TO "
+                          "STRUCTURE (a brace detail, no shelf): the shelf is taken from 1/A504.")
 c['rfis'] = rf + closed
 # misc rows that carry RFI-03 (nested runner) and RFI-07 (door 3C in the existing wall)
 c['misc_items'] = [m for m in c['misc_items'] if m['ref'] not in ('NESTED-RUNNER-362', 'NESTED-RUNNER-600', 'HDR-3C', 'JAMB-3C')]

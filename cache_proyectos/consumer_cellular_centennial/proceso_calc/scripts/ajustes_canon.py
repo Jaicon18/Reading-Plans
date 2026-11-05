@@ -8,17 +8,32 @@ import json
 P = '/root/cc/work/etapas/4_canon/takeoff_canon.json'
 c = json.load(open(P))
 for ce in c['ceilings']:
-    if ce['ref'] == 'C-1-RR' and ce['system'] != 'furring':
-        ce['system_info'] = ce['system'] + ' - not bubbled on A200 / A402 (bubble sweep: A501 referenced from no sheet)'
-        ce['system'] = 'furring'
-        ce['system_source'] = ("A200 C-1 GYP BOARD CEILING at UNISEX RESTROOM H 8'-0\"; no ceiling detail bubbled on this ceiling "
-                               "(R70.1) -> furring channel system per ASTM C754 (conservative), RFI-07 option A = 2/A501 grid")
+    if ce['ref'] == 'C-1-RR':
+        # rev2 (COORDINACION 5-nov, U-140 'sin burbuja no es no impreso'): 2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID
+        # SUSPENSION SYSTEM with 5/8" GYP. BD. is the only gypsum ceiling detail printed in the set and C-1 is the only gypsum
+        # ceiling -> the plan governs (option A, estimator decision); delta vs the ASTM C754 furring of rev1 in RFI-06
+        ce['system'] = 'usg_grid'
+        ce['system_info'] = ("2/A501 grid-type suspension system (ICC ESR 1289), 12 GA. hanger wires max. 4'-0\" o.c., "
+                             "2\" x 2\" sheet metal angle perimeter support; 5/8\" gyp bd")
+        ce['system_source'] = ("2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION SYSTEM (5/8\" GYP. BD.); "
+                               "A200 C-1 GYP BOARD CEILING at UNISEX RESTROOM H 8'-0\"")
+        ce['system_callout'] = {"detail": "2/A501", "printed_only": True, "source": "A501",
+                                "why": "2/A501 is the only gypsum board ceiling detail printed in the set (A501 CEILING DETAILS) "
+                                       "and C-1 restroom is the only gypsum board ceiling (A200); not bubbled on A200 / A402"}
+        ce['main_oc_in'] = {"value": 48, "source": "2/A501 '12 GA. MIN. HANGER WIRES ... MAX. 4'-0\" O.C.' (main tee at "
+                                                   "the hanger line); USG drywall suspension system standard 4'-0\" o.c."}
+        ce['cross_oc_in'] = {"value": 16, "source": "not printed on 2/A501: USG drywall suspension system standard cross "
+                                                    "tee 16\" o.c. for 5/8\" gyp bd (estimator note)"}
+        ce['moldings'] = {"value": ["angle"], "source": "2/A501 '2\" X 2\" SHEET METAL ANGLE' perimeter support"}
         ce['ns_ft'] = 7.667; ce['ew_ft'] = 7.75
         ce['dims_source'] = "A402 enlarged unisex restroom 7'-8\" x 7'-9\" (area per A100 vector polygon less the vanity notch)"
         ce['perimeter_ft'] = ce.get('perimeter_lf', 31.75)
-        ce['detail_none_reason'] = "no ceiling detail bubbled on A200 / A402; 2/A501 not referenced (RFI-07)"
+        ce['detail'] = '2/A501'
+        if '2/A501' not in ce.get('source', ''):
+            ce['source'] = '2/A501; ' + ce.get('source', '1/A200, A402')
+        ce.pop('detail_none_reason', None)
 k = c.setdefault('constants', {})
-k['carrying_direction'] = {"value": "N-S", "source": "not printed (A200 / A501); restroom 7'-8\" x 7'-9\" nearly square: delta of the other direction < 1 LF of carrying channel - RFI-07"}
+
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 print('ok')
 # 3. end caps of the two mop-sink stub walls (E3-12 / E3-13, free end in the Utility Room): the reading wrote
@@ -263,7 +278,7 @@ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 #   - 3x3x3 20 ga angle: one per brace member (3/A500 "3" X 3" X 3" ANGLE ... FASTENED TO TRACK AND BRACE")
 #   - headers / jamb studs: computed by headers.py / studs_nodos.py from the wall openings (no misc row: no double count)
 #   - insulation (1/A500 batt) and acoustical sealant (2/A500): EXCLUDED, not our trade / standing order (Scope Checklist)
-#   - restroom ceiling 2x2 angle: not used (furring system, RFI-07 option A keeps 2/A501 grid with its angle)
+#   - restroom ceiling 2x2 angle: carried by canon.py usg_grid moldings (2/A501, step 1)
 #   - demolition: SF only (L x H); H = printed B.O. structure (A100 'PLY DECK @ 17'-1 9/16"', higher bay: the deck break is not
 #     drawn) per the estimator standing rule (existing partitions to demolish without printed height = B.O. structure);
 #     existing ceilings 'GYP. BD. & ACT ... THROUGHOUT' (D100 key 7) without the extent of each type = EXCLUDED for lack of information
@@ -480,7 +495,7 @@ pn = c['constants'].setdefault('product_names', {})
 pn.pop('nested inner runner (deflection head)', None)
 pn['track de ceilings / soffits'] = {"value": "Ceiling perimeter track 20 GA (restroom C-1 ceiling)", "source": "1/A200"}
 for ce in c['ceilings']:
-    ce['detail'] = '1/A200'
+    ce['detail'] = '2/A501' if ce.get('system') == 'usg_grid' else '1/A200'
 an = c['accesorios_none']
 for f, why, src in (("additional head track", "no opening wider than 4'-0\": doors 4C / 5C / 6C R.O. 3'-4\" (A600), cased opening 4'-0\" (2/A400)", "A600, 2/A400"),
                     ("2-1/2\" CFMF coiling grille head", "no coiling grille / overhead door in the set (A600 door schedule, A100)", "A600")):
@@ -584,3 +599,24 @@ for w in c['walls']:
 for ce in c['ceilings']:
     ce['height_status'] = 'CONFIRMADO'; ce['height_source'] = "1/A200 restroom tag H 8'-0\" [CONFIRMED]; A402 CEILING 8'-0\""
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 39. rev2 (BE-CC07): bubbles that govern carried rows are cited in their rows (U-141): 6/A502 RESTROOM COVE BASE = the FRP bottom
+#     edge J-mold over the cove base (PVC-RR 'edge top + bottom'); 1/A400 = slat wall elevation (BLK-SLAT-N 'A400 1');
+#     3/A400 = logo wall S elevation (BLK-LOGO-S 'A400 3')
+c = json.load(open(P))
+for x in c.get('pvc_trim_items') or []:
+    if x['ref'] == 'PVC-RR' and '6/A502' not in x['source']:
+        x['source'] += '; 6/A502 (FRP bottom edge J-mold over the cove base)'
+for x in c.get('blocking_items') or []:
+    if x['ref'] == 'BLK-SLAT-N' and '1/A400' not in x['source']:
+        x['source'] += '; 1/A400 (slat wall elevation)'
+    if x['ref'] == 'BLK-LOGO-S' and '3/A400' not in x['source']:
+        x['source'] += '; 3/A400 (logo wall elevation)'
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+print('39 ok')
+# 40. rev2: the restroom grid ceiling cites its system detail 2/A501 in its source (Excel row N/SHEET)
+c = json.load(open(P))
+for ce in c['ceilings']:
+    if ce.get('system') == 'usg_grid' and '2/A501' not in ce.get('source', ''):
+        ce['source'] = '2/A501; ' + ce.get('source', '1/A200, A402')
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+print('40 ok')

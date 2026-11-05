@@ -451,3 +451,12 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/t
 - BE-CC05: compuerta_entrega.py lista_schedules — no reconocía hojas de 3 dígitos (A500): types sin hoja ni marca. Prueba: idem.
 - BE-CC06: compuerta_entrega.py — marcas de schedule con ID de varias palabras (BACK OF HOUSE) no se reconocían. Prueba: idem.
 - Regla de datos (proyecto): stud_size '3 5/8"' (con espacio) caía en la familia 8": escribir siempre '3-5/8"' (ajustes_canon paso 25). Regla: inventario_tags no lee leyendas de types como títulos de sección (A#, C#…): completar el inventario con la lectura independiente del schedule (fichas.json) antes de comparar.
+
+## Consumer Cellular Centennial rev2 (5-nov-2026, v81cf49)
+| ID | Error | Regla | Compuerta / test |
+|---|---|---|---|
+| BE-CC07 | rev1: DETALLES_REVISADOS solo circuló A100 / A500 / A600; A101, A102, A402, A501, A700 (y sus destinos) sin círculo y CE_DETALLES_CIRCULADOS en PASS (ciego: contaba solo la cadena desde las hojas de entrada) | Toda hoja con burbujas (detector + burbujas_verificadas + CADENA.md) entra a la cadena; cada burbuja circulada en origen y destino | CE_DETALLES_CIRCULADOS + CB.faltan_circulos: hoja con burbujas y 0 círculos = FAIL; test rev1 (5 hojas) |
+| BE-CC08 | RFI-06 rev1: 2/A501 (único detalle de cielo de gyp impreso) no se cargó porque no tenía burbuja | Sin burbuja no es "no impreso" (U-140): el único detalle impreso para ese ceiling manda | criterios.system_callout_ok printed_only + why; test |
+| BE-CC09 | Detector de burbujas en coordenadas sin rotar: en hojas rotation 270 los círculos del detector caían fuera y duplicaban la lectura a ojo | Coordenadas del detector en marco visible | _burbujas_set frame visible; test |
+| BE-CC10 | Page Label "G2" en DETALLES_REVISADOS | Page Label = número de hoja impreso | test |
+| BE-CC11 | PARA_REVISAR rev1 decía "FRP EXCLUDED" con el FRP cargado en el Excel | Los textos de los docs salen de lo cargado; revisar cada afirmación contra el Material Summary | corregido en hacer_docs del proyecto |

@@ -1,22 +1,22 @@
 #!/bin/bash
-# Builds the rev1 FINAL delivery folder (structure = O'Reilly rev10 FINAL, U-145) from the chain run, then the gate subcommands.
+# Builds the rev2 FINAL delivery folder (structure = O'Reilly rev20 FINAL, U-145) from the chain run, then the gate subcommands.
 set -e
 source /root/cc/work/scripts/env.sh
-D=$W/entrega; E="$D/rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
+D=$W/entrega; E="$D/rev2 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
 rm -rf "$D" && mkdir -p "$E/Take-off" "$E/Planos marcados" "$E/Auditoria/burbujas" "$E/Auditoria/schedules" "$E/Auditoria/review_items" "$E/Auditoria/rfi_img" "$E/Auditoria/backcheck"
 ln -s $W/etapas $D/takeoff_work_etapas
 ln -s $W $D/takeoff_work
 python3 -I $W/scripts/burbujas_destinos.py > /dev/null
 cp $W/set_texto.json $W/indep/fichas.json $W/indep/schedules_indep.json $W/proceso/proyecto_datos.json $D/
 cp $W/burbujas/burbujas_verificadas.json $D/; cp -a $W/burbujas/img_verif $D/burbujas_img
-cp $W/burbujas/img_verif/*.png "$E/Auditoria/burbujas/"; cp $W/burbujas/burbujas_verificadas.json $W/burbujas/CADENA.md "$E/Auditoria/burbujas/"
+cp $W/burbujas/img_verif/*.png "$E/Auditoria/burbujas/"; cp $W/burbujas/burbujas_verificadas.json $W/burbujas/CADENA.md $W/burbujas/callouts_no_aplican.json "$E/Auditoria/burbujas/"
 cp $W/indep/schedules_indep.json $W/indep/fichas.json $W/indep/fichas_lector_original.json $W/indep/NOTAS.md "$E/Auditoria/schedules/"; cp $W/indep/img/*.png "$E/Auditoria/schedules/" 2>/dev/null || true
-X=$W/etapas/8_excel/Consumer_Cellular_Centennial_Takeoff_FINAL_rev1.xlsx
-ln -s $X "$E/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev1.xlsx"
-[ -f $X.sello.json ] && ln -s $X.sello.json "$E/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev1.xlsx.sello.json"
-cp $W/etapas/8_excel/Consumer_Cellular_Centennial_markups_rev1.pdf "$E/Planos marcados/Consumer_Cellular_Centennial_markups_rev1.pdf"
+X=$W/etapas/8_excel/Consumer_Cellular_Centennial_Takeoff_FINAL_rev2.xlsx
+ln -s $X "$E/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev2.xlsx"
+[ -f $X.sello.json ] && ln -s $X.sello.json "$E/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev2.xlsx.sello.json"
+cp $W/etapas/8_excel/Consumer_Cellular_Centennial_markups_rev2.pdf "$E/Planos marcados/Consumer_Cellular_Centennial_markups_rev2.pdf"
 for p in $W/etapas/7_imagenes/planmark/A100_type_*.png; do cp $p "$E/Planos marcados/"; done
-for p in $W/etapas/7_imagenes/*_marked_by_type_rev1.png; do cp $p "$E/Planos marcados/"; done
+for p in $W/etapas/7_imagenes/*_marked_by_type_rev2.png; do cp $p "$E/Planos marcados/"; done
 cp $W/etapas/6_markups/demo_png/*.png "$E/Planos marcados/" 2>/dev/null || true
 cp $W/etapas/6_markups/rcp_png/*.png "$E/Planos marcados/" 2>/dev/null || true
 cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/rfi_img/"; cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/review_items/"

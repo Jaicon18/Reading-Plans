@@ -47,3 +47,32 @@ if not any(str(x.get('detalle_existe')) == '1' for x in l5):
     l5.append({"detalle_existe": "1", "x": round(t.x0 - 30, 1), "y": round((t.y0 + t.y1) / 2, 1), "x1": round(t.x1, 1), "y1": round(t.y1, 1), "img": "img_verif/A500_destino_1.png", "title": "1 PARTITION TYPES"})
 json.dump(b, open(f'{K}/burbujas_verificadas.json', 'w'), indent=1, ensure_ascii=False)
 print('A500 destination 1 added')
+# rev2 (BE-CC07): C1/G002 (A102 / A103 general note 2) - G002 prints details 1-8 and NO C1: the destination is marked at the
+# nearest view, 6/G002 ADA SERVICE COUNTER ELEVATIONS, flagged 'no_impreso' (the delivered PDF says NOT PRINTED)
+p2 = d[2]; R2 = p2.rotation_matrix; t = p2.search_for('ADA SERVICE COUNTER')[0] * R2; t.normalize()
+clip = fitz.Rect(t.x0 - 80, t.y0 - 40, t.x1 + 80, t.y1 + 40) & p2.rect
+pix = p2.get_pixmap(dpi=150, clip=clip); im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples); s = pix.width / clip.width
+ImageDraw.Draw(im).ellipse([(t.x0 - clip.x0 - 50) * s, (t.y0 - clip.y0 - 18) * s, (t.x1 - clip.x0 + 12) * s, (t.y1 - clip.y0 + 18) * s], outline=(255, 0, 0), width=4)
+im.save(f'{K}/img_verif/G002_destino_C1_no_impreso.png')
+b = json.load(open(f'{K}/burbujas_verificadas.json'))
+lg = b.setdefault('G002', [])
+if not any(str(x.get('detalle_existe')) == 'C1' for x in lg):
+    lg.append({"detalle_existe": "C1", "no_impreso": "C1 is NOT printed on G002 (details 1-8 only); marked at the nearest view 6 ADA SERVICE COUNTER ELEVATIONS",
+               "x": round(t.x0 - 30, 1), "y": round((t.y0 + t.y1) / 2, 1), "x1": round(t.x1, 1), "y1": round(t.y1, 1),
+               "img": "img_verif/G002_destino_C1_no_impreso.png", "title": "6 ADA SERVICE COUNTER ELEVATIONS (nearest view; C1 not printed)"})
+json.dump(b, open(f'{K}/burbujas_verificadas.json', 'w'), indent=1, ensure_ascii=False)
+print('G002 destination C1 (not printed) added')
+# rev2: destination of the A402 elevation marker 1 (points A-D) = the '1 RESTROOM ELEVATIONS' drawing title on A402
+p4 = d[sheet_a402 - 1] if (sheet_a402 := json.load(open('/root/cc/work/sheetmap.json'))['A402']) else None
+R4 = p4.rotation_matrix; t = p4.search_for('RESTROOM ELEVATIONS')[0] * R4; t.normalize()
+clip = fitz.Rect(t.x0 - 80, t.y0 - 40, t.x1 + 80, t.y1 + 40) & p4.rect
+pix = p4.get_pixmap(dpi=150, clip=clip); im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples); s = pix.width / clip.width
+ImageDraw.Draw(im).ellipse([(t.x0 - clip.x0 - 50) * s, (t.y0 - clip.y0 - 18) * s, (t.x1 - clip.x0 + 12) * s, (t.y1 - clip.y0 + 18) * s], outline=(255, 0, 0), width=4)
+im.save(f'{K}/img_verif/A402_destino_1.png')
+b = json.load(open(f'{K}/burbujas_verificadas.json'))
+l4 = b.setdefault('A402', [])
+if not any(str(x.get('detalle_existe')) == '1' for x in l4):
+    l4.append({"detalle_existe": "1", "x": round(t.x0 - 30, 1), "y": round((t.y0 + t.y1) / 2, 1), "x1": round(t.x1, 1), "y1": round(t.y1, 1),
+               "img": "img_verif/A402_destino_1.png", "title": "1 RESTROOM ELEVATIONS"})
+json.dump(b, open(f'{K}/burbujas_verificadas.json', 'w'), indent=1, ensure_ascii=False)
+print('A402 destination 1 added')

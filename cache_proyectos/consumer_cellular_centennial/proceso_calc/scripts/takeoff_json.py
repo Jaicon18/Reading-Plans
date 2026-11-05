@@ -39,7 +39,7 @@ def fmt(o):
 rfis, cierre = [], {}
 for r in c["rfis"]:
     if r["status"] != "open":
-        cierre[r["id"]] = {"pregunta": r["question"] + " - CLOSED: " + r["resolved"]["answer"], "delta": "0 (estimator standing rule applied)"}
+        cierre[r["id"]] = {"pregunta": r["question"] + " - CLOSED: " + r["resolved"]["answer"], "delta": r.get("delta_applied") or "0 (estimator standing rule applied)"}
         continue
     o = json.loads(json.dumps(r["opciones"]))
     rfis.append({"id": r["id"], "pregunta": f"{r['question']} - carried: {r['loaded']} (conservative value loaded). " + r["barrido"]["swept_txt"],
