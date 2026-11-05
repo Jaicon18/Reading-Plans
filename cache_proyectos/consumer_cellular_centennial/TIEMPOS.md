@@ -10,5 +10,15 @@ Horas reales escritas al empezar / terminar cada paso (work/tiempos.log, `TZ=Ame
 | 4-5 | Comparación A/B (comparar.py) + resolución con imagen | 05-nov 01:21 PST | 05-nov 01:22 PST | 1 min | 3_revision/revision.md, resolucion.md |
 | 6 | Cálculo (canon.py y tools, ajustes por programa, RFI) | 05-nov 01:22 PST | 05-nov 01:32 PST | 10 min | 4_canon/out |
 | 7-8 | Excel fijo + markups Bluebeam (walls, demo, RCP) + imágenes | 05-nov 01:32 PST | 05-nov 01:49 PST | 17 min | 8_excel, 6_markups, 7_imagenes |
-| 9-10 | Compuertas (reglas, etapas, back-check, compuerta de entrega) + subida | 05-nov 01:49 PST | 05-nov 02:25 PST | 36 min | ENTREGA_OK.json, SUBIDA_OK.json |
-| **TOTAL** | **Arranque → entrega** | **05-nov 00:53 PST** | **05-nov 02:25 PST** | **92 min** | meta U-041: 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h |
+| 9-10 | Compuertas (reglas, etapas, back-check, compuerta de entrega) + subida | 05-nov 01:49 PST | 05-nov 03:04 PST | 75 min | ENTREGA_OK.json, SUBIDA_OK.json |
+| **TOTAL** | **Arranque → entrega** | **05-nov 00:53 PST** | **05-nov 03:04 PST** | **131 min** | meta U-041: 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h |
+
+## rev2 (orden de COORDINACIÓN: rev1 no se pasó al usuario)
+
+| Paso rev2 | Inicio | Fin | Duración |
+|---|---|---|---|
+| BE-CC07..10 (tool + tests), dispositions, RFI re-check, RFI-06 grid | 05-nov 02:27 PST | 05-nov 02:35 PST | 8 min |
+| Cadena completa rev2 (cálculo, Excel, markups) | 05-nov 02:35 PST | 05-nov 02:37 PST | 2 min |
+| Entrega + compuertas + back-check addendum + skill v81cf49 | 05-nov 02:37 PST | 05-nov 02:52 PST | 15 min |
+| Subida a Drive (183 archivos) + aviso REPLACED BY rev2 en rev1 | 05-nov 02:52 PST | 05-nov 03:04 PST | 12 min |
+| **Total rev2** | **05-nov 02:27 PST** | **05-nov 03:04 PST** | **37 min** |
