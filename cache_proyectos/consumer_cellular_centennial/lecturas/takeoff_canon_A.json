@@ -1,0 +1,2404 @@
+{
+ "project": "Consumer Cellular - 8283 S. Akron St, Suite 110, Centennial CO (Sargenti 15066-26, 90% bid set 10/14/2026) - Lectura A",
+ "constants": {
+  "plan_scale_pt_per_ft": {
+   "value": 18.0,
+   "source": "A100 1/4\"=1'-0\" vector: 44'-3 1/2\" = 797.9 pt (18.01); 31'-6 1/2\" = 568.0 pt (18.00); 66'-10\" lease = 1203.1 pt (18.00)"
+  },
+  "north_arrow": {
+   "value": "see A100 north symbol at (1822,1492) pt",
+   "source": "A100"
+  },
+  "sheet_len_ft": {
+   "value": 12,
+   "source": "estimator criterion: stock 4'x12' (no sheet length specified); faces 12.417 ft exceed 12 by 5\""
+  },
+  "bracing_spacing_in": {
+   "value": 48,
+   "source": "3/A500 kickers @48\" o.c."
+  },
+  "deck_heights": {
+   "BOH": 16.333,
+   "SALES": 17.13,
+   "source": "A100 'PLY DECK @ 16'-4\"', 'PLY DECK @ 17'-1 9/16\"'"
+  },
+  "ceiling_heights": {
+   "source": "A200",
+   "BOH": 11.917,
+   "SALES": 11.917,
+   "HALLWAY": 11.917,
+   "OFFICE": 9.0,
+   "UTILITY": 9.0,
+   "RESTROOM_C1": 8.0,
+   "SOFFIT_EXIST": 11.75
+  }
+ },
+ "walls": [
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "A3-01",
+   "tag": "A3",
+   "tag_ids": [
+    "PC0007"
+   ],
+   "location": "Sales Area - north demising wall, west of existing column",
+   "band": {
+    "ori": "H",
+    "c0": 513.1,
+    "c1": 519.1,
+    "lo": 987.1,
+    "hi": 1246.5,
+    "sheet": "A100"
+   },
+   "length_ft": 14.411,
+   "length_source": "A100 dim 44'-3 1/2\" (ticks 986.6-1784.5 pt = 797.9 pt) C3 face to storefront furring, split by existing column box 1246.5-1265.4 pt (D100 key 14 existing column to remain)",
+   "length_op": "(1246.5-987.1)/18 = 14.411 (44.292 - 1.050 column - 28.833 east seg)",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (SALES AREA); 1/A500 type A studs to B.O. (E) DECK (4/A500)",
+   "height_status": "CONFIRMADO",
+   "faces": [
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key: '3' = 3 5/8\" MTL STUDS (tag suffix 3)",
+   "gauge": "20 ga",
+   "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "A3/A500 (1/A500 type A 'FURRED WALL TO DECK') + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck",
+   "thickness_measured_in": 4.0,
+   "thickness_check": "band 513.1-519.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "exterior": false,
+   "board_one_side_note": "furred wall: board on tenant side only as drawn in 1/A500 type A (1/2\" gap to demising wall; band 6.0 pt = 4.0\" = 3 5/8\" stud + 5/8\" bd). Note text says 'EACH SIDE' - RFI-02",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "A3-02",
+   "tag": "A3",
+   "tag_ids": [
+    "PC0004"
+   ],
+   "location": "Sales Area - north demising wall (slat wall), east of existing column to storefront furring",
+   "band": {
+    "ori": "H",
+    "c0": 513.1,
+    "c1": 519.1,
+    "lo": 1265.4,
+    "hi": 1784.4,
+    "sheet": "A100"
+   },
+   "length_ft": 28.833,
+   "length_source": "A100 dim 44'-3 1/2\" minus west segment and existing column box (vector at printed 1/4\"=1'-0\", 18.0 pt/ft verified)",
+   "length_op": "(1784.4-1265.4)/18 = 28.833",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (SALES AREA); 1/A500 type A studs to B.O. (E) DECK (4/A500)",
+   "height_status": "CONFIRMADO",
+   "faces": [
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key: '3' = 3 5/8\" MTL STUDS (tag suffix 3)",
+   "gauge": "20 ga",
+   "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "A3/A500 (1/A500 type A 'FURRED WALL TO DECK') + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck",
+   "thickness_measured_in": 4.0,
+   "thickness_check": "band 513.1-519.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "exterior": false,
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "A3-03",
+   "tag": "A3",
+   "tag_ids": [
+    "PC0008"
+   ],
+   "location": "Sales Area - south demising wall (logo wall), E3-11 face to storefront furring",
+   "band": {
+    "ori": "H",
+    "c0": 1313.3,
+    "c1": 1319.6,
+    "lo": 987.1,
+    "hi": 1794.0,
+    "sheet": "A100"
+   },
+   "length_ft": 44.828,
+   "length_source": "no single chain dim; vector length at printed scale 18.0 pt/ft (verified on 44'-3 1/2\", 31'-6 1/2\", 66'-10\"); cross-check D100 key 27 furring removal 838.2-1865.0 pt (D100 frame) = 57.04 ft = A3-04 + E3 thk + A3-03",
+   "length_op": "(1794.0-987.1)/18 = 44.828",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (SALES AREA); 1/A500 type A studs to B.O. (E) DECK (4/A500)",
+   "height_status": "CONFIRMADO",
+   "faces": [
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key: '3' = 3 5/8\" MTL STUDS (tag suffix 3)",
+   "gauge": "20 ga",
+   "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "A3/A500 (1/A500 type A 'FURRED WALL TO DECK') + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck",
+   "thickness_measured_in": 4.2,
+   "thickness_check": "band 1313.3-1319.6 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "exterior": false,
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "A3-04",
+   "tag": "A3",
+   "tag_ids": [
+    "PC0009"
+   ],
+   "location": "Utility Room - south demising wall ('ALIGN' with existing furring to remain, D100 key 20)",
+   "band": {
+    "ori": "H",
+    "c0": 1314.8,
+    "c1": 1321.0,
+    "lo": 767.1,
+    "hi": 979.6,
+    "sheet": "A100"
+   },
+   "length_ft": 11.792,
+   "length_source": "A100 bottom chain 11'-9 1/2\" (ticks 767.1-979.6 pt)",
+   "length_op": "11'-9 1/2\" = 11.792",
+   "length_status": "CONFIRMADO",
+   "height_ft": 16.333,
+   "height_source": "A100 'PLY DECK @ 16'-4\"' (BACK OF HOUSE zone; deck break line not drawn - RFI-01)",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key: '3' = 3 5/8\" MTL STUDS (tag suffix 3)",
+   "gauge": "20 ga",
+   "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "A3/A500 (1/A500 type A 'FURRED WALL TO DECK') + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck",
+   "thickness_measured_in": 4.13,
+   "thickness_check": "band 1314.8-1321.0 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "exterior": false,
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "C3-01",
+   "tag": "C3",
+   "tag_ids": [
+    "PC0005",
+    "PC0010"
+   ],
+   "location": "Sales Area / Back of House + Hallway (west face); from north demising face to cased opening jamb",
+   "band": {
+    "ori": "V",
+    "c0": 979.6,
+    "c1": 987.1,
+    "lo": 501.1,
+    "hi": 1069.1,
+    "sheet": "A100"
+   },
+   "length_ft": 31.542,
+   "length_source": "A100 vertical dim 31'-6 1/2\" (ticks 501.1-1069.1 pt; = 28'-4\" + 7.5pt E3 + 1'-9\")",
+   "length_op": "31'-6 1/2\" = 31.542",
+   "length_status": "CONFIRMADO",
+   "height_ft": 16.333,
+   "height_source": "A100 'PLY DECK @ 16'-4\"' (BOH) vs 'PLY DECK @ 17'-1 9/16\"' (SALES): C3 is the BOH/Sales boundary, deck break not drawn; carried 16'-4\" (RFI-01, +0.797 ft if sales deck)",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area (logo wall 19'-0\", iPad 4'-0\")"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 / A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House (501.1-1029.5) + Hallway (1037-1069.1); kitchenette 5'-2\" WR zone (A103)"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type C: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "C3/A500 (1/A500 type C 'WALL TO DECK WITH GYPSUM BOARD ON BOTH SIDES') + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 979.6-987.1 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "D-01",
+   "tag": "D",
+   "tag_ids": [],
+   "location": "Office (north) / Unisex Restroom (south)",
+   "band": {
+    "ori": "H",
+    "c0": 879.5,
+    "c1": 890.0,
+    "lo": 659.0,
+    "hi": 797.0,
+    "sheet": "A100"
+   },
+   "length_ft": 7.667,
+   "length_source": "A100 dim 7'-8\" (ticks 659.0-797.0 pt) exterior face to E3-03",
+   "length_op": "7'-8\" = 7.667",
+   "length_status": "CONFIRMADO",
+   "height_ft": 16.333,
+   "height_source": "A100 'PLY DECK @ 16'-4\"' (BOH zone); type D to B.O. (E) DECK (4/A500)",
+   "height_status": "CONFIRMADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Office"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    }
+   ],
+   "stud_size": "6\"",
+   "stud_source": "1/A500 type D: '6\" 20 GA. METAL STUDS @ 16\" O.C.'",
+   "gauge": "20 ga",
+   "gauge_source": "1/A500 type D",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "D/A500 (1/A500 type D 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to deck, batt) + 2/A500 + 4/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 4/A500",
+   "top_track_info": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck (detail draws 3 5/8\" C channel; 6\" wall - see RFI-03)",
+   "thickness_measured_in": 7.0,
+   "thickness_check": "band 879.5-890.0 pt = 7.0\" ~ 6\" stud + 2 x 5/8\"",
+   "status": "CONFIRMADO",
+   "tag_manual": {
+    "source": "A100 diamond 'D' at (706,850) pt with leader to wall - not detected by inventory script (no digit suffix)",
+    "sheet_raster": false
+   },
+   "insulation": "BATT INSULATION (1/A500 type D; thickness not printed)",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-01",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0013",
+    "PC0014"
+   ],
+   "location": "Office (south) / Back of House (north)",
+   "band": {
+    "ori": "H",
+    "c0": 746.1,
+    "c1": 753.2,
+    "lo": 673.9,
+    "hi": 804.5,
+    "sheet": "A100"
+   },
+   "length_ft": 7.25,
+   "length_source": "A100 dim 7'-3\" (ticks 673.9-804.6 pt)",
+   "length_op": "7'-3\" = 7.25",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Office"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 4.73,
+   "thickness_check": "band 746.1-753.2 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "tag_note": "PC0014 is a duplicate text of PC0013 at the same diamond; one diamond with leaders to office N and E walls",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-02",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0013"
+   ],
+   "location": "Office (west) / Back of House (east), north of door 6",
+   "band": {
+    "ori": "V",
+    "c0": 797.0,
+    "c1": 804.5,
+    "lo": 753.2,
+    "hi": 813.7,
+    "sheet": "A100"
+   },
+   "length_ft": 3.356,
+   "length_source": "A100 dim 3'-9\" (ticks 746.1-813.7) less E3-01 thickness 7.1 pt (corner owned by E3-01)",
+   "length_op": "3.75 - 7.1/18 = 3.356",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Office"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 797.0-804.5 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-03",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0015"
+   ],
+   "location": "Unisex Restroom (west) / Back of House (east), south of door 6",
+   "band": {
+    "ori": "V",
+    "c0": 797.0,
+    "c1": 804.5,
+    "lo": 873.7,
+    "hi": 1002.5,
+    "sheet": "A100"
+   },
+   "length_ft": 7.167,
+   "length_source": "A100 dim 7'-2\" (ticks 873.7-1002.5 pt)",
+   "length_op": "7'-2\" = 7.167",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 797.0-804.5 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-04",
+   "tag": "E3",
+   "tag_ids": [],
+   "location": "Hallway north line, exterior wall to door 4 (7\" stub)",
+   "band": {
+    "ori": "H",
+    "c0": 1029.5,
+    "c1": 1037.0,
+    "lo": 643.4,
+    "hi": 653.8,
+    "sheet": "A100"
+   },
+   "length_ft": 0.583,
+   "length_source": "A100 chain 7\" (ticks 643.4-653.8 pt)",
+   "length_op": "7\" = 0.583",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 1029.5-1037.0 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "tag_manual": {
+    "source": "untagged stub on the same line as E3-05 (PC0018); type E3 assumed",
+    "sheet_raster": false
+   },
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-05",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0018"
+   ],
+   "location": "Unisex Restroom (north) / Hallway (south), door 4 to niche",
+   "band": {
+    "ori": "H",
+    "c0": 1029.5,
+    "c1": 1037.0,
+    "lo": 713.8,
+    "hi": 777.1,
+    "sheet": "A100"
+   },
+   "length_ft": 3.542,
+   "length_source": "A100 chain 3'-6 1/2\" (ticks 713.8-777.1)",
+   "length_op": "3'-6 1/2\" = 3.542",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 1029.5-1037.0 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-06",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0017"
+   ],
+   "location": "EWC niche west side (restroom W / niche E)",
+   "band": {
+    "ori": "V",
+    "c0": 769.6,
+    "c1": 777.1,
+    "lo": 1010.0,
+    "hi": 1029.5,
+    "sheet": "A100"
+   },
+   "length_ft": 1.083,
+   "length_source": "A100 dim 1'-6\" (ticks 1002.5-1029.5) less back wall 7.5 pt",
+   "length_op": "1.5 - 0.417 = 1.083",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 12.417,
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "room": "EWC niche (hallway)"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 769.6-777.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-07a",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0017"
+   ],
+   "location": "EWC niche back wall - restroom portion",
+   "band": {
+    "ori": "H",
+    "c0": 1002.5,
+    "c1": 1010.0,
+    "lo": 769.6,
+    "hi": 797.0,
+    "sheet": "A100"
+   },
+   "length_ft": 1.522,
+   "length_source": "A100 niche 4'-3\" (ticks 777.1-853.6) + 2 x 7.5 pt stubs = 5.083 total back wall, split at E3-03 face 797.0",
+   "length_op": "(797.0-769.6)/18 = 1.522",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 8.5,
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "room": "Unisex Restroom"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 12.417,
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "room": "EWC niche (hallway)"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 1002.5-1010.0 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-07b",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0017"
+   ],
+   "location": "EWC niche back wall - Back of House portion",
+   "band": {
+    "ori": "H",
+    "c0": 1002.5,
+    "c1": 1010.0,
+    "lo": 797.0,
+    "hi": 861.1,
+    "sheet": "A100"
+   },
+   "length_ft": 3.561,
+   "length_source": "same as E3-07a",
+   "length_op": "(861.1-797.0)/18 = 3.561",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 12.417,
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "room": "EWC niche (hallway)"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 1002.5-1010.0 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-08",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0016"
+   ],
+   "location": "EWC niche east side (niche W / BOH E)",
+   "band": {
+    "ori": "V",
+    "c0": 853.6,
+    "c1": 861.1,
+    "lo": 1010.0,
+    "hi": 1029.5,
+    "sheet": "A100"
+   },
+   "length_ft": 1.083,
+   "length_source": "as E3-06",
+   "length_op": "1.083",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 12.417,
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "room": "EWC niche (hallway)"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 853.6-861.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-09",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0016"
+   ],
+   "location": "BOH (north) / Hallway (south), niche to door 5",
+   "band": {
+    "ori": "H",
+    "c0": 1029.5,
+    "c1": 1037.0,
+    "lo": 853.6,
+    "hi": 867.1,
+    "sheet": "A100"
+   },
+   "length_ft": 0.75,
+   "length_source": "A100 chain 9\" (ticks 853.6-867.1)",
+   "length_op": "9\" = 0.75",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 1029.5-1037.0 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-10",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0006"
+   ],
+   "location": "BOH (north) / Hallway (south), door 5 to C3",
+   "band": {
+    "ori": "H",
+    "c0": 1029.6,
+    "c1": 1037.0,
+    "lo": 927.1,
+    "hi": 979.6,
+    "sheet": "A100"
+   },
+   "length_ft": 2.917,
+   "length_source": "A100 chain 2'-11\" (ticks 927.1-979.6)",
+   "length_op": "2'-11\" = 2.917",
+   "length_status": "CONFIRMADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Back of House"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 4.93,
+   "thickness_check": "band 1029.6-1037.0 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-11a",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0011"
+   ],
+   "location": "Sales (east) / Hallway (west), cased-opening jamb to existing hallway wall centerline",
+   "band": {
+    "ori": "V",
+    "c0": 979.6,
+    "c1": 987.1,
+    "lo": 1141.1,
+    "hi": 1176.3,
+    "sheet": "A100"
+   },
+   "length_ft": 1.956,
+   "length_source": "A100 dim 9'-7\" (ticks 1141.1-1313.3) split at existing wall to remain (D100 key 17, A100 y 1172.6-1179.9)",
+   "length_op": "(1176.3-1141.1)/18 = 1.956",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 979.6-987.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-11b",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0011",
+    "PC0012"
+   ],
+   "location": "Sales (east) / Utility Room (west), to south demising face",
+   "band": {
+    "ori": "V",
+    "c0": 979.6,
+    "c1": 987.1,
+    "lo": 1176.3,
+    "hi": 1321.0,
+    "sheet": "A100"
+   },
+   "length_ft": 8.039,
+   "length_source": "A100 9'-7\" to A3-03 face (1313.3) + A3 thickness to demising face 1321.0 (vector)",
+   "length_op": "(1321.0-1176.3)/18 = 8.039 (E3-11 total 9.583 + 0.428 = 10.0)",
+   "length_status": "DERIVADO",
+   "height_ft": 12.417,
+   "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 12.417,
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "room": "Sales Area"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 979.6-987.1 pt at 18 pt/ft",
+   "status": "DERIVADO",
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-12",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0020"
+   ],
+   "location": "Utility Room - mop sink alcove west stub (free end)",
+   "band": {
+    "ori": "V",
+    "c0": 740.0,
+    "c1": 747.4,
+    "lo": 1179.9,
+    "hi": 1221.7,
+    "sheet": "A100"
+   },
+   "length_ft": 2.333,
+   "length_source": "A100 dim 2'-4\" (vector 41.8 pt)",
+   "length_op": "2'-4\" = 2.333",
+   "length_status": "CONFIRMADO",
+   "height_ft": 9.5,
+   "height_source": "type E: 6\" above Utility C-2 9'-0\" (A200) = 9.5 (both sides utility)",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room - mop sink alcove"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 4.93,
+   "thickness_check": "band 740.0-747.4 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "end_cap_sf": 3.91,
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-13",
+   "tag": "E3",
+   "tag_ids": [
+    "PC0019"
+   ],
+   "location": "Utility Room - mop sink alcove east stub (free end)",
+   "band": {
+    "ori": "V",
+    "c0": 819.4,
+    "c1": 826.9,
+    "lo": 1179.9,
+    "hi": 1221.7,
+    "sheet": "A100"
+   },
+   "length_ft": 2.333,
+   "length_source": "A100 dim 2'-4\"",
+   "length_op": "2'-4\" = 2.333",
+   "length_status": "CONFIRMADO",
+   "height_ft": 9.5,
+   "height_source": "as E3-12",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room - mop sink alcove"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 9.5,
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "room": "Utility Room"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 819.4-826.9 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "end_cap_sf": 3.96,
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  },
+  {
+   "element": "wall",
+   "sheet": "A100",
+   "page": 7,
+   "id": "E3-14",
+   "tag": "E3",
+   "tag_ids": [],
+   "location": "Infill over 4'-0\" cased opening 'OPEN TO HALLWAY' between C3-01 and E3-11a (head 8'-0\")",
+   "band": {
+    "ori": "V",
+    "c0": 979.6,
+    "c1": 987.1,
+    "lo": 1069.1,
+    "hi": 1141.1,
+    "sheet": "A100"
+   },
+   "length_ft": 4.0,
+   "length_source": "A100 dim 4'-0\" (ticks 1069.1-1141.1); A400 2 '4'-0\"'",
+   "length_op": "4'-0\" = 4.0",
+   "length_status": "CONFIRMADO",
+   "height_ft": 4.417,
+   "height_source": "A400 elev 2 'T.O. OPENING 8'-0\"' to 6\" above ceiling 11'-11\": 12.417 - 8.0 = 4.417 (infill height)",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 4.417,
+     "height_source": "12.417 - 8.0",
+     "room": "Sales Area"
+    },
+    {
+     "side": "B",
+     "layers": 1,
+     "board": "5/8 Type X",
+     "height_ft": 4.417,
+     "height_source": "12.417 - 8.0",
+     "room": "Hallway"
+    }
+   ],
+   "stud_size": "3 5/8\"",
+   "stud_source": "1/A500 plan-view key '3' = 3 5/8\" MTL STUDS",
+   "gauge": "18 ga",
+   "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
+   "oc_in": 16,
+   "oc_source": "1/A500 '@ 16\" O.C.'",
+   "detail": "E3/A500 (1/A500 type E 'WALL WITH GYPSUM BOARD ON BOTH SIDES', to 6\" above ceiling) + 2/A500 + 3/A500",
+   "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
+   "bottom_track": false,
+   "top_track": true,
+   "track_source": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud | top: 3/A500",
+   "top_track_info": "[STANDARD] 3/A500: 20 GA. MIN. TRACK (ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION; top braced to structure at 45 deg (362S137-33 @48\" o.c.; doubled for walls to 15'-0\")",
+   "thickness_measured_in": 5.0,
+   "thickness_check": "band 979.6-987.1 pt at 18 pt/ft",
+   "status": "CONFIRMADO",
+   "infill_above_opening": true,
+   "bottom_track_note": "header track at 8'-0\" instead of floor track; soffit (underside) 4.0 x 0.406 = 1.63 SF + jamb returns 2 x 8.0 x 0.406 = 6.5 SF",
+   "tag_manual": {
+    "source": "untagged; type E assumed (adjacent E3-11 / C3-01) - RFI-06",
+    "sheet_raster": false
+   },
+   "bracing_rows": 0,
+   "bracing_rows_source": "no stud bridging called in 1/A500-6/A500"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "N1",
+   "kind": "T",
+   "walls": [
+    "A3-01",
+    "C3-01"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N2",
+   "kind": "T",
+   "walls": [
+    "A3-03",
+    "E3-11b"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N3",
+   "kind": "L",
+   "walls": [
+    "E3-01",
+    "E3-02"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N4",
+   "kind": "T",
+   "walls": [
+    "D-01",
+    "E3-03"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N5",
+   "kind": "T",
+   "walls": [
+    "E3-10",
+    "C3-01"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N6",
+   "kind": "L",
+   "walls": [
+    "E3-07b",
+    "E3-08"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N7",
+   "kind": "L",
+   "walls": [
+    "E3-06",
+    "E3-07a"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N8",
+   "kind": "T",
+   "walls": [
+    "E3-03",
+    "E3-07a",
+    "E3-07b"
+   ],
+   "source": "A100"
+  },
+  {
+   "id": "N9",
+   "kind": "T",
+   "walls": [
+    "A3-04",
+    "E3-11b"
+   ],
+   "source": "A100"
+  }
+ ],
+ "details": {
+  "1/A500": {
+   "source": "1/A500",
+   "title": "Partition types A, C, D, E, H",
+   "notes": "see LECTURA_A_notas.md"
+  },
+  "2/A500": {
+   "source": "2/A500",
+   "title": "Partition floor connection",
+   "notes": "2/A500: CONT 20 GA BOTTOM TRACK, HILTI X-U SHOT PIN 1 1/4\" EMBED @24\" O.C. (ICC ESR 2269), #10 screw each stud; acoustical sealant at acoustical partitions (excluded)"
+  },
+  "3/A500": {
+   "source": "3/A500",
+   "title": "Top of wall bracing (type E)",
+   "notes": "362S137-33 @48\" o.c. walls to 10'; doubled to 15'; 45 deg; 3x3x3 20 ga angles; studs cut 1/2\" short; 20'-0\" max total span"
+  },
+  "4/A500": {
+   "source": "4/A500",
+   "title": "Attachment to structure (types A,C,D,H)",
+   "notes": "[DEFLECTION/SLIP] 4/A500: LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE + 3 5/8\" X 20 GA. 'C' CHANNEL TRACK ATTACHED TO STUDS FLOATING 1\" BELOW TOP CORD (#12-24 TEK @ each stud / @16\" o.c.); fasten to wood joist only, not to wood roof deck"
+  },
+  "5/A500": {
+   "source": "5/A500",
+   "title": "Attachment to structure at existing wall",
+   "notes": "long leg runner + floating C channel, 3x3x3 angle per 6; not keyed from any type section"
+  },
+  "6/A500": {
+   "source": "6/A500",
+   "title": "Attachment to structure (bracing for floor supported framing)",
+   "notes": "2X4 blocking @48\" between wood joists with A34 anchors (wood - excluded)"
+  },
+  "2/A600": {
+   "source": "2/A600",
+   "title": "Typical jamb",
+   "notes": "HM knockdown frame, double studs at jambs, 3 jamb anchors"
+  },
+  "3/A600": {
+   "source": "3/A600",
+   "title": "Typical head",
+   "notes": "HM KD frame, 2\" min to finish ceiling"
+  },
+  "2/A501": {
+   "source": "2/A501",
+   "title": "Suspended gyp ceiling",
+   "notes": "grid suspension ESR 1289, 5/8\" gyp, 2x2 angle, 12 ga wires @4'"
+  },
+  "1-4/A104": {
+   "source": "A104",
+   "title": "Millwork blocking",
+   "notes": "20 ga metal strapping / backing plate, 16\" o.c. studs"
+  },
+  "5/A402": {
+   "source": "5/A402",
+   "title": "Grab bar",
+   "notes": "20 GA. TRACK SECURED TO STUDS"
+  }
+ },
+ "opening_schedule": {
+  "sources": [
+   "A600",
+   "A100",
+   "D100"
+  ],
+  "items": [
+   {
+    "ref": "Door 1A",
+    "source": "A600",
+    "note": "(E) exterior main entry, existing storefront - not in new walls"
+   },
+   {
+    "ref": "Door 2B",
+    "source": "A600",
+    "note": "(E) exterior hallway door - existing"
+   },
+   {
+    "ref": "Door 3C",
+    "kind": "door",
+    "ro_w_ft": 3.333,
+    "head_ft": 7.167,
+    "source": "A600 3'-0\"x7'-0\" type C wood, HM frame P-2",
+    "location": "existing hallway/utility wall to remain (D100 key 17; 3'-4\" opening D100)",
+    "in_new_wall": false,
+    "frame": "hollow metal knockdown (2/A600, 3/A600)"
+   },
+   {
+    "ref": "Door 4C",
+    "kind": "door",
+    "ro_w_ft": 3.333,
+    "head_ft": 7.167,
+    "wall": "E3-04|E3-05 gap 653.8-713.8 pt",
+    "source": "A600 3'-0\"x7'-0\" type C wood (white birch) in HOLLOW METAL KD frame; A100 note 8 doors dimensioned to RO (60 pt = 3'-4\")",
+    "in_new_wall": true,
+    "frame": "HM knockdown, double studs at jambs (2/A600)",
+    "header": "not detailed - cripples 7.167 to 12.417"
+   },
+   {
+    "ref": "Door 5C",
+    "kind": "door",
+    "ro_w_ft": 3.333,
+    "head_ft": 7.167,
+    "wall": "E3-09|E3-10 gap 867.1-927.1 pt",
+    "source": "A600 (BOH)",
+    "in_new_wall": true,
+    "frame": "HM knockdown, double studs at jambs (2/A600)"
+   },
+   {
+    "ref": "Door 6C",
+    "kind": "door",
+    "ro_w_ft": 3.333,
+    "head_ft": 7.167,
+    "wall": "E3-02|E3-03 gap 813.7-873.7 pt",
+    "source": "A600 (Office)",
+    "in_new_wall": true,
+    "frame": "HM knockdown, double studs at jambs (2/A600)"
+   }
+  ],
+  "note": "RO head = 7'-0\" door + 2\" HM frame (3/A600 '2\"'); wall lengths EXCLUDE door gaps (bands between jambs)"
+ },
+ "openings_extra": [
+  {
+   "ref": "CASED-OPEN-HALL",
+   "kind": "cased_opening",
+   "ro_w_ft": 4.0,
+   "head_ft": 8.0,
+   "source": "A400 2 'OPEN TO HALLWAY', 'T.O. OPENING 8'-0\"'; A100 4'-0\"",
+   "wall_jambs": 2,
+   "jamb_return": true,
+   "jamb_return_source": "no frame - gypsum returns, see E3-14 and CB-OPEN-HALL",
+   "header": "E3-14 infill"
+  }
+ ],
+ "ceilings": [
+  {
+   "ref": "C-1-RR",
+   "element": "ceiling",
+   "type": "C-1 GYP BOARD CEILING (A200 legend; A700 C-1)",
+   "room": "Unisex Restroom",
+   "sheet": "A200",
+   "area_sf": 60.49,
+   "area_source": "A100 vector polygon (659.0,890)-(797,890)-(797,1002.5)-(769.6,1002.5)-(769.6,1029.5)-(643.4,1029.5) at 18 pt/ft; cross-check A402 7'-8\" x 7'-9\" less niche notch; G003 UNISEX RESTROOM 60 SF",
+   "area_op": "shoelace = 19,599 pt2 / 324 = 60.49",
+   "area_status": "DERIVADO",
+   "height_ft": 8.0,
+   "height_source": "A200 restroom tag H 8'-0\"; A402 CEILING 8'-0\"",
+   "board": "5/8\" gyp bd (2/A501), water resistant per A100 note 11",
+   "layers": 1,
+   "system": "2/A501 grid-type suspension system (ICC ESR 1289), 12 ga hangers @4'-0\" o.c., 2\"x2\" sheet metal angle perimeter; finish PT-1",
+   "perimeter_lf": 31.75,
+   "penetrations": "M101 key 5 NEW CEILING MOUNTED EXHAUST FAN (restroom); E111 occupancy sensor/lights",
+   "status": "DERIVADO"
+  }
+ ],
+ "ceilings_info": "C-2 = 2'x2' ACT lay-in (A700: 15/16\" grid, Armstrong Canyon 1492) in BOH 11'-11\", Sales 11'-11\", Hallway 11'-11\", Office 9'-0\", Utility 9'-0\" (A200) - ACT trade, NOT ours (note only). Existing storefront SOFFIT T:EXIST F:PT-1 H 11'-9\" (A200) to remain, patch & paint (D100 key 22) - no new soffit/bulkhead framing. Wood trellis 18\" below ceiling by millwork (A103 key 3). Only gypsum ceiling = C-1 restroom.",
+ "plywood_strips": [],
+ "blocking_items": [
+  {
+   "ref": "BLK-SLAT-N",
+   "lf": 77.0,
+   "material": "20 GA metal strapping (metal - included)",
+   "label": "20 GA. METAL STRAPPING ATTACHED TO NEW STUD, (3) #8 SCREWS EACH STUD; 3\" above top slat and 3\" below bottom slat; extend 3\" past fixture both sides (2/A104)",
+   "source": "2/A104; A103 slat wall 38'-0\" (3'-2\" each end); A400 1",
+   "op": "2 rows x (38'-0\" + 2 x 3\")",
+   "wall": "A3-01/A3-02",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "BLK-LOGO-S",
+   "lf": 37.5,
+   "material": "20 GA metal strapping",
+   "label": "logo wall blocking band (cleat 10 1/2\" + 3\" above/below = 1'-4 1/2\" band) (1/A104)",
+   "source": "1/A104; A103 / A400 3 logo wall 37'-0\"",
+   "op": "1 band x (37'-0\" + 6\")",
+   "band_height_ft": 1.375,
+   "wall": "A3-03",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "BLK-LOGO-W",
+   "lf": 19.5,
+   "material": "20 GA metal strapping",
+   "label": "logo wall blocking band 1'-4 1/2\" (1/A104)",
+   "source": "1/A104; A103 / A400 2 logo wall 19'-0\"",
+   "op": "1 band x (19'-0\" + 6\")",
+   "band_height_ft": 1.375,
+   "wall": "C3-01 (sales face)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "BLK-IPAD",
+   "lf": 4.5,
+   "material": "20 GA backing plate",
+   "label": "iPad display (A103 key 5) - 20 GA. BACKING PLATE BY G.C., LENGTH AS REQUIRED (4/A104); rows not printed (1 assumed)",
+   "source": "4/A104; A400 2 '4'-0\"'",
+   "op": "4'-0\" + 6\"",
+   "wall": "C3-01 (sales face)",
+   "status": "PENDIENTE"
+  },
+  {
+   "ref": "BLK-KITCH",
+   "lf": 5.67,
+   "material": "20 GA metal strapping",
+   "label": "kitchenette upper cabinet band, 3\" above top (7'-0\") and 3\" below bottom of cabinet (3/A104); cabinet height not printed",
+   "source": "3/A104; A103 key 8 5'-2\"",
+   "op": "5'-2\" + 6\"",
+   "wall": "C3-01 (BOH face)",
+   "status": "PENDIENTE"
+  },
+  {
+   "ref": "BLK-GRAB",
+   "lf": null,
+   "material": "20 GA track",
+   "label": "grab bar backing: 20 GA. TRACK SECURED TO STUDS (5/A402); side + rear bars in restroom, bar lengths not dimensioned (A402 1A/1B)",
+   "source": "5/A402; A402 general note 4 'PROVIDE BLOCKING AT ALL WALL MOUNTED FIXTURES AND ACCESSORIES'",
+   "op": "PENDIENTE (typ. 42\" side on E3-03, 36\" rear on D-01/exterior)",
+   "status": "PENDIENTE"
+  },
+  {
+   "ref": "BLK-RR-ACC",
+   "lf": null,
+   "material": "not printed",
+   "label": "blocking at lav, mirror, dispensers, hand dryer (A402 note 4; accessory keys 1-7)",
+   "source": "A402",
+   "status": "PENDIENTE"
+  },
+  {
+   "ref": "BLK-PENDANT",
+   "qty": 8,
+   "unit": "EA",
+   "material": "5/8\" FRT PLYWOOD (wood - EXCLUDED by rules, listed only)",
+   "label": "BLOCKING AT PENDANT LIGHT, 5/8\" FRT plywood on unistrut/top chord (1/A501) - A200 pendants L-2B x2, L-3A, L-3B, L-3C, L-4 x3",
+   "source": "1/A501; A200",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "BLK-WOOD-6A500",
+   "qty": null,
+   "material": "2X4 wood (EXCLUDED)",
+   "label": "2X4 MIN. BLOCKING AT 48\" O.C. between joists for brace attachment where structure parallel (6/A500)",
+   "source": "6/A500",
+   "status": "PENDIENTE"
+  }
+ ],
+ "trim_items": [
+  {
+   "ref": "CB-OPEN-HALL",
+   "kind": "corner_bead",
+   "lf": 40.0,
+   "label": "cased opening 'OPEN TO HALLWAY' 4'-0\" x 8'-0\" (A400 2): 2 faces x (2 jambs x 8.0 + head 4.0)",
+   "source": "A400 2; A100",
+   "op": "2 x (16 + 4)",
+   "status": "DERIVADO",
+   "note": "no trim/bead spec printed (A700 has no gypsum spec) - estimator criterion"
+  },
+  {
+   "ref": "CB-NICHE",
+   "kind": "corner_bead",
+   "lf": 23.83,
+   "label": "EWC niche mouth outside corners at 777.1 / 853.6 pt to hallway ceiling 11'-11\"",
+   "source": "A100; A200",
+   "op": "2 x 11.917",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "CB-UTIL-STUBS",
+   "kind": "corner_bead",
+   "lf": 36.0,
+   "label": "free ends of E3-12/E3-13 (2 outside corners each) to utility ceiling 9'-0\"",
+   "source": "A100; A200",
+   "op": "2 stubs x 2 x 9.0",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "CB-OFFICE-NE",
+   "kind": "corner_bead",
+   "lf": 11.917,
+   "label": "outside corner E3-01/E3-02 on BOH side to BOH ceiling 11'-11\"",
+   "source": "A100; A200",
+   "op": "1 x 11.917",
+   "status": "DERIVADO"
+  }
+ ],
+ "misc_items": [
+  {
+   "ref": "BRACE-E3-01",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 33.23,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = ceil(7.250/4)+1 = 3 x 2 x (16.333 deck - 12.417 top) x 1.414 = 33.23",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-02",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-03",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 33.23,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = ceil(7.167/4)+1 = 3 x 2 x (16.333 deck - 12.417 top) x 1.414 = 33.23",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-05",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-07a",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-07b",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-10",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-11a",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-11b",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 44.3,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = ceil(8.039/4)+1 = 4 x 2 x (16.333 deck - 12.417 top) x 1.414 = 44.3",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-12",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 9.66,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (single - wall to 10ft)",
+   "op": "n = 1 = 1 x 1 x (16.333 deck - 9.5 top) x 1.414 = 9.66",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-13",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 9.66,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (single - wall to 10ft)",
+   "op": "n = 1 = 1 x 1 x (16.333 deck - 9.5 top) x 1.414 = 9.66",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-E3-14",
+   "familia": "3 5/8\" stud 33 mil (362S137-33)",
+   "qty": 11.08,
+   "unit": "LF",
+   "source": "3/A500",
+   "label": "362S137-33 kicker braces @48\" o.c., 45 deg to structure (DOUBLED - wall to 15ft)",
+   "op": "n = 1 = 1 x 2 x (16.333 deck - 12.417 top) x 1.414 = 11.08",
+   "status": "DERIVADO",
+   "note": "deck taken as BOH 16'-4\" (A100); brace end at wood joist / 2x4 blocking 6/A500 (wood excluded)"
+  },
+  {
+   "ref": "BRACE-ANGLES",
+   "familia": "angle 3x3x3 20 ga",
+   "qty": 36,
+   "unit": "EA",
+   "source": "3/A500",
+   "label": "3\" X 3\" X 3\" ANGLE (20 GA. MIN.) fastened to track and brace, one per brace member",
+   "op": "sum of brace members above",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "BRACE-NOTE-SHORT",
+   "familia": "info",
+   "qty": 0,
+   "unit": "-",
+   "source": "3/A500",
+   "label": "E3-04 (7\"), E3-06/E3-08 (1'-1\"), E3-09 (9\") not braced separately - returns tied to braced walls",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "JAMB-4C",
+   "familia": "3 5/8\" stud 18 ga",
+   "qty": 4,
+   "unit": "EA",
+   "source": "2/A600 'DOUBLE STUDS AT JAMBS AS SCHEDULED TYP.'",
+   "label": "door 4C double jamb studs (2 per jamb x 2 jambs), wall E3-04/E3-05",
+   "op": "2 x 2 = 4 studs (full wall height 12.417)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "HDR-4C",
+   "familia": "3 5/8\" track 18 ga",
+   "qty": 6.666,
+   "unit": "LF",
+   "source": "3/A600 head; A100 note 8 (RO)",
+   "label": "door 4C head track (top/bottom of header cripple) - header not detailed",
+   "op": "2 x RO 3.333",
+   "status": "DERIVADO",
+   "note": "header type not printed (3/A600 shows HM KD frame only); cripples from 7.167 to 12.417"
+  },
+  {
+   "ref": "JAMB-5C",
+   "familia": "3 5/8\" stud 18 ga",
+   "qty": 4,
+   "unit": "EA",
+   "source": "2/A600 'DOUBLE STUDS AT JAMBS AS SCHEDULED TYP.'",
+   "label": "door 5C double jamb studs (2 per jamb x 2 jambs), wall E3-09/E3-10",
+   "op": "2 x 2 = 4 studs (full wall height 12.417)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "HDR-5C",
+   "familia": "3 5/8\" track 18 ga",
+   "qty": 6.666,
+   "unit": "LF",
+   "source": "3/A600 head; A100 note 8 (RO)",
+   "label": "door 5C head track (top/bottom of header cripple) - header not detailed",
+   "op": "2 x RO 3.333",
+   "status": "DERIVADO",
+   "note": "header type not printed (3/A600 shows HM KD frame only); cripples from 7.167 to 12.417"
+  },
+  {
+   "ref": "JAMB-6C",
+   "familia": "3 5/8\" stud 18 ga",
+   "qty": 4,
+   "unit": "EA",
+   "source": "2/A600 'DOUBLE STUDS AT JAMBS AS SCHEDULED TYP.'",
+   "label": "door 6C double jamb studs (2 per jamb x 2 jambs), wall E3-02/E3-03",
+   "op": "2 x 2 = 4 studs (full wall height 12.417)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "HDR-6C",
+   "familia": "3 5/8\" track 18 ga",
+   "qty": 6.666,
+   "unit": "LF",
+   "source": "3/A600 head; A100 note 8 (RO)",
+   "label": "door 6C head track (top/bottom of header cripple) - header not detailed",
+   "op": "2 x RO 3.333",
+   "status": "DERIVADO",
+   "note": "header type not printed (3/A600 shows HM KD frame only); cripples from 7.167 to 12.417"
+  },
+  {
+   "ref": "INSUL-D-01",
+   "familia": "batt insulation",
+   "qty": 125.23,
+   "unit": "SF",
+   "source": "1/A500 type D 'BATT INSULATION'",
+   "label": "batt in D-01 full height to deck (thickness/R not printed)",
+   "op": "7.667 x 16.333",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "SEAL-D-01",
+   "familia": "acoustical sealant",
+   "qty": 15.33,
+   "unit": "LF",
+   "source": "2/A500 note (acoustical partitions)",
+   "label": "acoustical sealant both sides bottom track at D-01 (EXCLUDED per estimator standing order - acoustical sealant)",
+   "op": "2 x 7.667",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "CEIL-C1-ANGLE",
+   "familia": "2x2 sheet metal angle",
+   "qty": 31.75,
+   "unit": "LF",
+   "source": "2/A501 '2\" X 2\" SHEET METAL ANGLE' perimeter support",
+   "label": "perimeter angle of C-1 suspended gyp ceiling (restroom)",
+   "op": "polygon perimeter 7.667+6.25+1.522+1.5+7.011+7.80 = 31.75",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "DEMO-01",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 44.71,
+   "length_source": "D100 dashed double line (y 1372.3/1379.6 pt) from end of 15'-10\" wall to remain (tick 1050.6) to east end 1855.4 (D100 frame; 18 pt/ft verified 66'-10\"=1203.1 pt)",
+   "length_op": "(1855.4-1050.6)/18 = 44.71",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 765.9,
+   "unit": "SF",
+   "op": "44.71 x 17.13 (provisional)",
+   "label": "existing E-W corridor wall removed in its entirety (key 9)",
+   "source": "D100 key 9"
+  },
+  {
+   "ref": "DEMO-02",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 7.41,
+   "length_source": "D100 dashed cross wall x=1224.1 pt from corridor wall face 1379.6 to furring face 1513.0",
+   "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 127.0,
+   "unit": "SF",
+   "op": "7.41 x 17.13 (provisional)",
+   "label": "existing N-S cross wall removed (key 9 / doors key 10)",
+   "source": "D100 key 9"
+  },
+  {
+   "ref": "DEMO-03",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 7.41,
+   "length_source": "D100 dashed cross wall x=1410.6 pt from corridor wall face 1379.6 to furring face 1513.0",
+   "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 127.0,
+   "unit": "SF",
+   "op": "7.41 x 17.13 (provisional)",
+   "label": "existing N-S cross wall removed (key 9 / doors key 10)",
+   "source": "D100 key 9"
+  },
+  {
+   "ref": "DEMO-04",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 7.41,
+   "length_source": "D100 dashed cross wall x=1580.6 pt from corridor wall face 1379.6 to furring face 1513.0",
+   "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 127.0,
+   "unit": "SF",
+   "op": "7.41 x 17.13 (provisional)",
+   "label": "existing N-S cross wall removed (key 9 / doors key 10)",
+   "source": "D100 key 9"
+  },
+  {
+   "ref": "DEMO-05",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 7.41,
+   "length_source": "D100 dashed cross wall x=1677.5 pt from corridor wall face 1379.6 to furring face 1513.0",
+   "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 127.0,
+   "unit": "SF",
+   "op": "7.41 x 17.13 (provisional)",
+   "label": "existing N-S cross wall removed (key 9 / doors key 10)",
+   "source": "D100 key 9"
+  },
+  {
+   "ref": "DEMO-06",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "lf": 57.04,
+   "length_source": "D100 dashed furring y 1513.0/1519.3 pt from end of 8'-5 1/2\" furring to remain (tick 838.2) to 1865.0",
+   "length_op": "(1865.0-838.2)/18 = 57.04",
+   "length_status": "DERIVADO",
+   "height_ft": 17.13,
+   "height_source": "NOT PRINTED on D100 (no existing wall/ceiling heights); provisional = A100 'PLY DECK @ 17'-1 9/16\"' - RFI-04",
+   "height_status": "PENDIENTE",
+   "qty": 977.2,
+   "unit": "SF",
+   "op": "57.04 x 17.13 (provisional)",
+   "label": "PORTION OF EXISTING FURRING TO BE REMOVED (key 27) along south demising wall (replaced by A3-03/A3-04)",
+   "source": "D100 key 27"
+  },
+  {
+   "ref": "DEMO-07",
+   "element": "demo",
+   "familia": "demolition",
+   "sheet": "D100",
+   "page": 5,
+   "qty": 3103,
+   "unit": "SF",
+   "status": "PENDIENTE",
+   "label": "REMOVE EXISTING GYP. BD. & ACT CEILINGS, SOFFIT, FRAMING ... THROUGHOUT (key 7); gyp vs ACT split not printed",
+   "op": "G003 GROSS LEASED PREMISES 3,103 SQ. FT (upper bound; includes ACT = not our trade)",
+   "source": "D100 key 7; G003"
+  }
+ ],
+ "deflection_clips": {
+  "none_reason": "deflection by long-leg slotted runner track (4/A500) and studs cut 1/2\" short in 20 ga track (3/A500); no clips called",
+  "source": "3/A500, 4/A500"
+ },
+ "mep_sweep": {
+  "sheets": [
+   "M101",
+   "M102",
+   "M501",
+   "E101",
+   "E111",
+   "P101",
+   "P501",
+   "FA101"
+  ],
+  "findings": [
+   "M101 key 5 NEW CEILING MOUNTED EXHAUST FAN in restroom (cut in C-1 gyp ceiling) - no access panel called",
+   "M101/M501: diffusers / RTU smoke detector test station in ACT grid (not ours)",
+   "P101: LAV + WC in restroom (D-01/E3 wet walls, WR board), EWC in hallway niche (E3-06..08), MS mop sink + shelf water heater in utility alcove (E3-12/13), S1 kitchenette sink on C3 BOH face",
+   "P501: access door only if trap primer in chase/wall - none shown",
+   "E101/E111/FA101: wall devices/boxes, thermostat, timeclock - no framing items"
+  ],
+  "access_panels": "none called on any sheet (G001 lists access panels as GC scope generally)"
+ },
+ "fasteners_excluded": {
+  "why": "estimator order: all fasteners excluded",
+  "source": "estimator order"
+ },
+ "accesorios_none": [
+  {
+   "familia": "access panels",
+   "why": "none drawn or scheduled (A200, M101, P101, P501)",
+   "source": "A200"
+  },
+  {
+   "familia": "control joints",
+   "why": "none drawn (longest run 44.8 ft A3-03 furring; no CJ on A100/A400)",
+   "source": "A100, A400"
+  }
+ ],
+ "accesorios_rfi": [],
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "pregunta": "Deck break between 'PLY DECK @ 16'-4\"' (BOH) and 'PLY DECK @ 17'-1 9/16\"' (SALES) is not drawn; stud height of C3-01 (boundary wall), D-01 and A3-04 taken at 16'-4\".",
+   "source": "A100 deck tags",
+   "opciones": {
+    "A": {
+     "texto": "As carried: BOH zone (west of / on C3-E3 line) 16'-4\", sales 17'-1 9/16\"",
+     "source": "A100",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Studs to underside of structure per 4/A500 (field verify each wall)",
+     "cita": "1/A500 'B.O. (E) DECK'; A100 note 1 field verify",
+     "delta": "+0.797 ft x 31.54 LF C3 studs if sales deck governs"
+    },
+    "C": ""
+   },
+   "delta": "(A) 0 | (B) +0.797 ft x 31.54 LF (C3)"
+  },
+  {
+   "id": "RFI-02",
+   "pregunta": "Type A (furred wall to deck) text reads '5/8\" TYPE X GYP. BD. ON EACH SIDE' but the section draws board on the tenant side only with a 1/2\" gap to the existing demising wall. Carried one side.",
+   "source": "1/A500 type A",
+   "opciones": {
+    "A": {
+     "texto": "One side (as drawn, furred)",
+     "source": "1/A500 section; A100 band 4\"",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Both sides per note text",
+     "cita": "1/A500 note text",
+     "delta": "+ (88.07 x 12.417 + 11.79 x 9.5) = +1,205.6 SF board"
+    },
+    "C": ""
+   },
+   "delta": "(A) 0 | (B) +1,205.6 SF"
+  },
+  {
+   "id": "RFI-03",
+   "pregunta": "Long-leg slotted runner track (4/A500, 5/A500) gauge and leg length not printed; detail draws 3 5/8\" x 20 ga floating C channel, no 6\" version for type D.",
+   "source": "4/A500",
+   "opciones": {
+    "A": {
+     "texto": "20 ga long-leg slotted track matching stud width (3 5/8\" A/C, 6\" D)",
+     "source": "4/A500 20 GA C channel",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "Manufacturer minimum (ICC-ES deflection track, 2\" slots)",
+     "cita": "ESR-1042 (cited 3/A500)",
+     "delta": "material only"
+    },
+    "C": ""
+   },
+   "delta": "material spec only"
+  },
+  {
+   "id": "RFI-04",
+   "pregunta": "Heights of existing walls / furring to be demolished (D100 keys 9, 27) not printed; carried to deck 17'-1 9/16\" provisionally.",
+   "source": "D100",
+   "opciones": {
+    "A": {
+     "texto": "To deck (provisional)",
+     "source": "A100 deck tag",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "To existing ceiling (unknown)",
+     "cita": "D100 key 7",
+     "delta": "-(17.13 - Hc) x 131.39 LF"
+    },
+    "C": ""
+   },
+   "delta": "(A) 0 | (B) -(17.13-Hc) x 131.39 LF"
+  },
+  {
+   "id": "RFI-05",
+   "pregunta": "Gypsum board finish level, trims (corner bead / J-bead) and fastening not specified (A700 is finish schedule only).",
+   "source": "A700",
+   "opciones": {
+    "A": {
+     "texto": "Level 4 under eggshell paint PT-1/PT-2; metal corner bead at outside corners",
+     "source": "A700 paints eggshell",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "GA-214 Level 4 / ASTM C840",
+     "cita": "GA-214",
+     "delta": "0"
+    },
+    "C": ""
+   },
+   "delta": "0"
+  },
+  {
+   "id": "RFI-06",
+   "pregunta": "Infill above the 4'-0\" 'OPEN TO HALLWAY' cased opening (head 8'-0\") is untagged; carried as type E3 to 6\" above ceiling, braced.",
+   "source": "A400 2; A100",
+   "opciones": {
+    "A": {
+     "texto": "E3 infill to 12'-5\"",
+     "source": "A100 adjacent E3",
+     "delta": "0"
+    },
+    "B": {
+     "texto": "C3 to deck (continuation of C3-01)",
+     "cita": "A100 C3 tag at 1055",
+     "delta": "+3.92 ft studs x 4 ft; no brace"
+    },
+    "C": ""
+   },
+   "delta": "minor"
+  }
+ ],
+ "atm_recess_none_reason": "No ATM / equipment recess (A100, A103, A400)",
+ "tile_base_none_reason": "A700/A101 bases B-1 vinyl 6\", B-2 rubber 4\", B-3 FRP (restroom); no ceramic tile base / cement board",
+ "frp_none_reason": "FRP EXISTS but by finish trade: A700 B-3 Marlite P100 pebbled FRP in restroom & mop sink area, A402 T.O. FRP 4'-0\"; WR gyp behind it is in walls faces",
+ "deck_breaks_none_reason": "Two deck tags on A100 (BOH 16'-4\", Sales 17'-1 9/16\"); break line not drawn -> RFI-01",
+ "ballistic_jogs_none_reason": "No ballistic panels (1/A500 types A,C,D,E,H only)",
+ "trim_none_reason": "No trim/bead specified anywhere (A700 is finish schedule; A500/A600 no bead callouts); trim_items carried by geometry as estimator criterion - RFI-05",
+ "types_none_reason": {
+  "H": "1/A500 type H (6\" 20ga furred to deck with batt, one side) not tagged on A100",
+  "C#/A# other sizes": "only suffix 3 used"
+ },
+ "tags_descartados": [
+  {
+   "id": "PC0001",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0002",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0003",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0021",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0022",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0023",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0024",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0025",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0026",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0029",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0032",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0033",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0036",
+   "motivo": "CO2 = store number in title block, not a partition tag"
+  },
+  {
+   "id": "PC0027",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  },
+  {
+   "id": "PC0028",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  },
+  {
+   "id": "PC0030",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  },
+  {
+   "id": "PC0031",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  },
+  {
+   "id": "PC0034",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  },
+  {
+   "id": "PC0035",
+   "motivo": "TC1/TC2 = electrical timeclock/circuit tag on E/FA sheets, not a partition"
+  }
+ ],
+ "corners_ok": [
+  {
+   "walls": [
+    "E3-01",
+    "E3-02"
+   ],
+   "reason": "E3-02 starts at E3-01 south face (753.2); corner owned by E3-01 (7'-3\" to outside face)"
+  },
+  {
+   "walls": [
+    "A3-01",
+    "A3-02"
+   ],
+   "reason": "gap 1246.5-1265.4 = existing column box (D100 key 14), not a missing wall"
+  }
+ ],
+ "gaps_ok": [
+  {
+   "between": [
+    "C3-01",
+    "E3-11a"
+   ],
+   "reason": "4'-0\" cased opening, infill E3-14 above 8'-0\""
+  },
+  {
+   "between": [
+    "E3-04",
+    "E3-05"
+   ],
+   "reason": "door 4C"
+  },
+  {
+   "between": [
+    "E3-09",
+    "E3-10"
+   ],
+   "reason": "door 5C"
+  },
+  {
+   "between": [
+    "E3-02",
+    "E3-03"
+   ],
+   "reason": "door 6C"
+  },
+  {
+   "between": [
+    "E3-06",
+    "E3-08"
+   ],
+   "reason": "EWC niche mouth 4'-3\""
+  }
+ ]
+}
