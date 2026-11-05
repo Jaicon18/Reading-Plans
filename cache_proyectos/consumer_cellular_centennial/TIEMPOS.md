@@ -13,12 +13,13 @@ Horas reales escritas al empezar / terminar cada paso (work/tiempos.log, `TZ=Ame
 | 9-10 | Compuertas (reglas, etapas, back-check, compuerta de entrega) + subida | 05-nov 01:49 PST | 05-nov 03:04 PST | 75 min | ENTREGA_OK.json, SUBIDA_OK.json |
 | **TOTAL** | **Arranque → entrega** | **05-nov 00:53 PST** | **05-nov 03:04 PST** | **131 min** | meta U-041: 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h |
 
-## rev2 (orden de COORDINACIÓN: rev1 no se pasó al usuario)
+## rev2 (orden de COORDINACIÓN: rev1 no se pasó al usuario; horas de work/tiempos.log)
 
 | Paso rev2 | Inicio | Fin | Duración |
 |---|---|---|---|
-| BE-CC07..10 (tool + tests), dispositions, RFI re-check, RFI-06 grid | 05-nov 02:27 PST | 05-nov 02:35 PST | 8 min |
-| Cadena completa rev2 (cálculo, Excel, markups) | 05-nov 02:35 PST | 05-nov 02:37 PST | 2 min |
-| Entrega + compuertas + back-check addendum + skill v81cf49 | 05-nov 02:37 PST | 05-nov 02:52 PST | 15 min |
-| Subida a Drive (183 archivos) + aviso REPLACED BY rev2 en rev1 | 05-nov 02:52 PST | 05-nov 03:04 PST | 12 min |
+| BE-CC07 (tool + test), dispositions, re-chequeo de RFI (U-140), RFI-06 grid | 05-nov 02:27 PST | 05-nov 02:34 PST | 7 min |
+| Cadena completa rev2 (cálculo, Excel, markups) | 05-nov 02:34 PST | 05-nov 02:37 PST | 3 min |
+| Entrega, compuertas, BE-CC09/10, addendum del back-check | 05-nov 02:37 PST | 05-nov 02:46 PST | 9 min |
+| Skill v81cf49 (verificar_version, suite) + re-paso de la compuerta | 05-nov 02:46 PST | 05-nov 02:48 PST | 2 min |
+| Subida a Drive (183 archivos) + aviso REPLACED BY rev2 en rev1 | 05-nov 02:48 PST | 05-nov 03:04 PST | 16 min |
 | **Total rev2** | **05-nov 02:27 PST** | **05-nov 03:04 PST** | **37 min** |
