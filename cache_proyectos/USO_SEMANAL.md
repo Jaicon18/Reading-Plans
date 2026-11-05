@@ -19,3 +19,4 @@
 | 2026-11-02 20:34 PT | — | semana 55 % (Ultra, reset vie 2:00 AM; 'run out Thursday night') | Lunes completo: +18 % desde 09:15 (VS rev5-17, Chuze FINAL3-5, CFA #2284 completo + rev4, HFT arrancado, sesión maestra + coordinación en paralelo) | Plan: lun ≤60, mar ≤72, mié ≤84, jue ≤96 |
 | 2026-11-03 10:16 PT | — | semana 59 % ('On track… with room to spare') | +4 % desde 20:34: HFT Loveland completo (1 h 51 min a rev3) + revisión rápida markups O'Reilly + skill v81cf19-21 | HFT ≈ 3–4 % de la semana; martes tope 72 % |
 - 2026-11-04 (mié) 6:39 PM PT: 81 % semanal (captura del usuario; reset vie 2:00 AM; tope del día 84 %).
+- 2026-11-05 (jue) 12:56 AM PT: 85 % semanal (captura del usuario al ARRANQUE de Consumer Cellular; reset vie 2:00 AM; tope del jueves 96 %).
