@@ -2782,3 +2782,10 @@ del día 1 son reglas INVIOLABLES con chequeo de FONDO en `tools/chequeos_biblio
 Tests: `tools/test_chequeos_biblioteca.py` (caso MALO que reproduce el error real de HFT / O'Reilly / Chuze / CFA -> FAIL y
 BUENO -> PASS + test_u118_evidencia_circula) y `tools/test_compuerta_entrega.py` (monto en el Excel). Los chequeos solo leen:
 sin cambio de cantidades.
+
+### R80f.45 — Bandeja de órdenes solo con mensajes del usuario (BE-143, 5-nov) — en v81cf41.
+### R80f.46 — U-139: wood SIEMPRE EXCLUDED (FRT blocking, plywood, nailers), aunque una decisión vieja lo haya cargado; CB_U_139 (wood > 0 = FAIL) — en v81cf42.
+### R80f.47 — U-140: RFI "not printed" solo tras buscarlo hasta encontrarlo (todas las disciplinas G/A/S/M/P/E/FP/F/K/vendor, existing, specs, addenda, sets de todos los GC, SHX, geometría vectorial a escala impresa, sinónimos); barrido corto = FAIL — compuerta en v81cf43.
+### R80f.48 — U-141: cada burbuja revisada (detail, building / wall section, enlarged plan, elevación) circulada y numerada en origen Y destino, cadena completa; Planos marcados/DETALLES_REVISADOS.pdf + índice; CE_DETALLES_CIRCULADOS — en v81cf43.
+### R80f.49 — U-142: todos los schedules del trade revisados; lista SCHEDULES_MATERIALES por type (stud, track, board por cara, altura, rating, accesorios, N/HOJA) y cada partition type marcado en la hoja del schedule (SCHEDULES_REVISADOS.pdf); CE_SCHEDULES_MARCADOS — en v81cf43.
+### Pendiente de decisión del usuario: HFT "2 layers" ¿aplica a la demolición de existing partitions? (+8,693 SF no cargados en rev3).
