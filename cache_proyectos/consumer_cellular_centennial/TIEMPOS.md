@@ -22,3 +22,11 @@ Horas reales escritas al empezar / terminar cada paso (work/tiempos.log, `TZ=Ame
 | Skill v81cf51 (registro, tests, verificar_version, suite) + re-paso de la compuerta | 05-nov 06:48 PST | 05-nov 06:51 PST | 3 min |
 | Subida a Drive (183 archivos) + aviso REPLACED BY rev4 en rev3 | 05-nov 06:51 PST | 05-nov 07:07 PST | 16 min |
 | **Total rev4** | **05-nov 06:34 PST** | **05-nov 07:07 PST** | **33 min** |
+
+## Proposal (orden del usuario 5-nov ~1:00 PM PT, U-150; cantidades de rev4 FINAL sin otra pasada)
+
+| Paso | Inicio | Fin | Duración |
+|---|---|---|---|
+| Plantilla + tasas, precios FBM (1,536 productos, 8 categorías), armado PROPOSAL / PRICING / FBM_PRICES, PDF, skill v81cf54 (U-150), compuerta | 05-nov 2:49 PM PST | 05-nov 3:06 PM PST | 17 min |
+| Subida a rev4 FINAL › Proposal/ (2 archivos nuevos) | 05-nov 3:07 PM PST | 05-nov 3:07 PM PST | 1 min |
+| **Total proposal** | **05-nov 2:49 PM PST** | **05-nov 3:07 PM PST** | **18 min** |
