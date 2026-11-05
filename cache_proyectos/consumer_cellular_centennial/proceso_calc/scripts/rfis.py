@@ -168,17 +168,18 @@ CERRAR = {
  "RFI-02": ("CLOSED - resolved by rule U-127 (BOTH SIDES): the 1/A500 type A# note prints '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE "
             "TO 6\" ABOVE CEILING' - board on both faces carried. Note: the 1/A500 section draws one face only (1/2\" gap to the existing "
             "demising wall); delta if one face: -{d} SF 5/8\" Type X. Verify at 1/A500.", "1/A500; U-127"),
- "RFI-03": ("CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 4/A500 prints '20 GA. MIN. TRACK' (long-leg runner) and "
-            "'3 5/8\" X 20 GA. C CHANNEL'; the channel is applied at the 6\" stud size for type D. Delta vs manufacturer 2-1/2\" leg "
-            "deflection track: 0 LF. Verify at 4/A500.", "4/A500"),
+ "RFI-03": ("CLOSED - resolved by rule U-052 (printed governs) / R-ALC-10 (drawings govern): 2/A500 'CONT 20 GA BOTTOM TRACK' "
+            "and 3/A500 / 4/A500 '20 GA. MIN. TRACK' print the track gauge (all tracks carried 20 ga); 4/A500 prints the "
+            "'3 5/8\" X 20 GA. C CHANNEL', applied at the 6\" stud size for type D. Delta vs a manufacturer 2-1/2\" leg "
+            "deflection track: 0 LF. Verify at 2/A500, 3/A500, 4/A500.", "2/A500; 3/A500; 4/A500; U-052; R-ALC-10"),
  "RFI-05": ("CLOSED - resolved by the drawings: the C3 line continues over the 4'-0\" x 8'-0\" cased opening (A100 C3 tag at its "
             "north end; 2/A400 'OPEN TO HALLWAY', T.O. OPENING 8'-0\") - C3 to deck over the opening carried. Delta if E3: "
             "-4.0 LF x 4.71 ft of stud. Verify at A100 / 2/A400.", "A100; 2/A400"),
- "RFI-06": ("CLOSED - estimator decision 2026-11-05 (option A, drawings govern): 2/A501 INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION "
-            "SYSTEM (5/8\" GYP. BD., ICC ESR 1289) is the only gypsum board ceiling detail printed in the set and C-1 restroom is the "
-            "only gypsum board ceiling (no bubble is not 'not printed', U-140). Delta vs the ASTM C754 furring system: +54.25 LF furring "
-            "channel, +23.0 LF carrying channel, +31.75 LF perimeter track; -23.25 LF main tee, -53.67 LF cross tee, -31.75 LF 2x2 "
-            "angle. Verify at 2/A501, A200.", "2/A501; A200"),
+ "RFI-06": ("CLOSED - resolved by rule U-140 (no bubble is not 'not printed') / R-ALC-10 (drawings govern): 2/A501 "
+            "INSTALLATION OF SUSPENDED CEILING USING GRID SUSPENSION SYSTEM (5/8\" GYP. BD., ICC ESR 1289) is the only gypsum "
+            "board ceiling detail printed in the set and C-1 restroom is the only gypsum board ceiling. Delta vs the ASTM C754 "
+            "furring system: +54.25 LF furring channel, +23.0 LF carrying channel, +31.75 LF perimeter track; -23.25 LF main "
+            "tee, -53.67 LF cross tee, -31.75 LF 2x2 angle. Verify at 2/A501, A200.", "2/A501; A200; U-140; R-ALC-10"),
  "RFI-08": ("CLOSED - resolved by the drawings (U-140): 1/A504 prints the shelf members '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK "
             "SCREWS' and '5/8\" WR GYP BD'; the member layout follows the printed stud spacing of the set, 16\" o.c. (1/A500 types): "
             "perimeter + joists @ 16\" o.c. = 19.67 LF, board top + underside 18.67 SF. Delta if perimeter only: -7.0 LF of 6\" 16 GA "

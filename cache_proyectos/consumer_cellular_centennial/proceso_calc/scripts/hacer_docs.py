@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """README_REVIEW.md (English), PARA_REVISAR_EN_LA_MANANA.md and SEGUIMIENTO.md (Spanish notes, trade terms in English) of
-the Consumer Cellular Centennial rev3 FINAL delivery. Every number is read from the delivered Excel / canon; nothing typed.
+the Consumer Cellular Centennial rev4 FINAL delivery. Every number is read from the delivered Excel / canon; nothing typed.
 Usage: hacer_docs.py <entrega_dir> <proyecto_datos.json> <takeoff.json> <canon.json>"""
 import json, os, sys
 import openpyxl
@@ -10,8 +10,15 @@ wb = openpyxl.load_workbook(x, data_only=True)
 pdj = json.load(open(PD)); td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 pt = [r for r in wb["Partition Takeoff"].iter_rows(min_row=1, values_only=True)]
+import re as _re
+# rev4 (U-138 #11): Level 5 delta of RFI-04 = total gypsum board of the delivered Material Summary
+_bt = round(sum(r[2] for r in ms if r[0] and "gypsum board" in str(r[0]).lower() and str(r[1]).upper() == "SF"
+                and "demolition" not in str(r[0]).lower() and "exterior" not in str(r[0]).lower()), 2)
+for _r in c["rfis"]:
+    if _r["id"] == "RFI-04" and "answer" in (_r.get("resolved") or {}):
+        _r["resolved"]["answer"] = _re.sub(r"skim coat on [\d,.]+ SF", f"skim coat on {_bt:,.2f} SF (total gypsum board, Material Summary)", _r["resolved"]["answer"])
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-titulo = "Consumer Cellular - Yosemite Park Shopping Center, Centennial, CO (store CO2) — Metal framing & drywall take-off, rev3 FINAL"
+titulo = "Consumer Cellular - Yosemite Park Shopping Center, Centennial, CO (store CO2) — Metal framing & drywall take-off, rev4 FINAL"
 def datos():
     L = ["## PROJECT DATA", "", "| Field | Value | Source |", "|---|---|---|"]
     for d in td["proyecto_datos"]:
@@ -29,8 +36,8 @@ R = [f"# {titulo}", ""] + datos() + [
  "- Elder-Jones, Inc. (Mason Bender): BuildingConnected 'Consumer Cellular - Centennial CO: Drywall & Framing', bid 11/06/2026: one PDF '15066-26-CC-Centennial, CO - Permit Set_10.15.2026.pdf' (37 pages).",
  "- Compared by program sheet by sheet: the text of all 37 sheets is identical (Elite's G000 cover is a letter-size copy of the same sheet). Elite adds the Starlink fire-alarm monitoring document (LL requirement, not our trade) and the survey documents. The Elder-Jones PDF is the bid set of this take-off; the delta between the two GCs is 0 for our scope.",
  "", "## What is in this folder", "",
- "- `Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev3.xlsx` — fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Waste applied once, in the Material Summary.",
- "- `Planos marcados/Consumer_Cellular_Centennial_markups_rev3.pdf` — Bluebeam markups: walls on A100 (Subject = type, Page Label, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · board SF · DETAIL · Wall ID), demolition lines on D100 (SF only), restroom gypsum ceiling polygon on A200 + one PNG per type (`A100_type_<T>.png`) and one per marked sheet.",
+ "- `Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev4.xlsx` — fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Waste applied once, in the Material Summary.",
+ "- `Planos marcados/Consumer_Cellular_Centennial_markups_rev4.pdf` — Bluebeam markups: walls on A100 (Subject = type, Page Label, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · board SF · DETAIL · Wall ID), demolition lines on D100 (SF only), restroom gypsum ceiling polygon on A200 + one PNG per type (`A100_type_<T>.png`) and one per marked sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` — every detail / section / elevation bubble reviewed, circled and numbered on the calling sheet and on its destination (index below).",
  "- `Planos marcados/SCHEDULES_REVISADOS.pdf` — every trade schedule row marked (red circle + check + number); material list SCHEDULES_MATERIALES below.",
  "- `SEGUIMIENTO.md` — RFI follow-up (Spanish). `PARA_REVISAR_EN_LA_MANANA.md` — review-first notes (Spanish).",
@@ -54,7 +61,7 @@ _ver = {k: sum(1 for x in xs if isinstance(x, dict) and x.get("n") and x.get("ho
 _ver = {k: v for k, v in _ver.items() if v}
 _cm = _CB.cadena_md(_b)
 R += ["", "## Basis of this revision", "",
-      "rev3 FINAL = rev2 + RFI-01 and RFI-04 closed by user decision 2026-11-05 (option A, rules U-146 / U-147), quantities identical to rev2. rev2 = rev1 + (1) every bubble of the reference chain (detector + eye-verified + CADENA.md, including the eye-found and "
+      "rev4 FINAL = rev3 + the fixes of the adversarial audit U-138 of rev3 (the delta of each material is item 0 of the review-first notes and the table below). rev3 = rev2 + RFI-01 and RFI-04 closed by user decision 2026-11-05 (option A, rules U-146 / U-147), quantities identical to rev2. rev2 = rev1 + (1) every bubble of the reference chain (detector + eye-verified + CADENA.md, including the eye-found and "
       "the written references) circled and numbered in red on its calling sheet and on its destination view (DETALLES_REVISADOS.pdf; "
       "rev1 only reached A100 / A500 / A600); (2) restroom C-1 ceiling = 2/A501 drywall grid suspension system (option A, drawings "
       "govern; RFI-06 closed); (3) RFI-02 closed by rule BOTH SIDES; (4) RFI-03 / RFI-05 / RFI-07 closed with what the sheets print. "
@@ -65,8 +72,9 @@ R += ["", "## Basis of this revision", "",
       f"- References read by eye with N/SHEET (burbujas_verificadas.json, includes the detector ones re-read and the written references): {sum(_ver.values())} (" + ", ".join(f"{k} {v}" for k, v in _ver.items()) + ").",
       f"- CADENA.md numbered items by calling sheet: " + ", ".join(f"{k} {v}" for k, v in _cm.items()) + " (one item can hold several bubbles, e.g. 2/A500 x5).",
       "- rev1 circled 32 marks only on the sheets the chain reached from the plans (A100 2, A500 14, A600 16 - A600 counted the detector and the eye reading of the same 8 door schedule cells twice, and the 8 detector circles were drawn in the unrotated frame of the 270-degree page, away from the cells: fixed in rev2, BE-CC09).",
-      f"- rev3 circled {len(_regs)} bubbles (union, the same bubble seen by the detector and by eye counted once): " + ", ".join(f"{k} {v}" for k, v in _po.items()) + "; each one also on its destination view.",
+      f"- rev4 circled {len(_regs)} bubbles (union, the same bubble seen by the detector and by eye counted once): " + ", ".join(f"{k} {v}" for k, v in _po.items()) + "; each one also on its destination view.",
       ]
+R += ["", "## Delta of each material vs rev3", ""] + open("/root/cc/work/delta_rev3_rev4.md", encoding="utf-8").read().strip().splitlines()
 R += ["", "## Material Summary (net, before waste)", "", "| Material | Unit | Net | Where it comes from |", "|---|---|---|---|"]
 for r in ms:
     R.append(f"| {r[0]} | {r[1]} | {r[2]:,.2f} | {str(r[8] or '')[:110]} |")
@@ -79,6 +87,7 @@ P = [f"# Revisar primero — {titulo}", "", "Notas en español; los términos de
  "## Proyecto", "", f"- {td['proyecto']}", "- GC: Elite Retail Services (bid 11/05/2026 4:00 PM CT) y Elder-Jones, Inc. (bid 11/06/2026). Los dos sets son idénticos hoja por hoja (comparados por programa): delta entre GC = 0 para nuestro alcance.",
  "- Tenant improvement, 3,103 SF (G003), IBC 2021, Type II-B, M, not sprinklered. Sin project manual: A700 son schedules de acabados.", "",
  "## Revisar esto primero", "",
+ "0. NUEVO en rev4 (auditoría U-138 de rev3). Delta vs rev3: (1) 'Stud blocking at edge of gypboard' -176.4 LF: no era un duplicado de los ítems (era blocking de junta horizontal R78.33 para caras de 12'-5\" con hoja de 12'), pero la junta cae en los 5\" sobre el cielo terminado (1/A500 'TO 6\" ABOVE CEILING') y ninguna hoja imprime edge blocking: 0 con la razón; su texto citaba por error los ítems de accesorios. (2) Kitchenette (A100 nota 5, A103 key 8 5'-2\"): C3-01 cara B 5.167 x 12.417 = 64.16 SF pasan de Type X a Type X W.R. (Type X -64.16, W.R. +64.16). (3) PVC trim del FRP +20.0 LF: outside corner M360 4.0 LF + division bars @ 4'-0\" 16.0 LF (A700 B-3). (4) Todo el track en 20 ga como lo imprimen 2/A500 / 3/A500 / 4/A500 (antes 18 ga en C3 / E3; mismos LF). (5) Renglón 'Top / deflection track - other' 0.01 LF eliminado (redondeo). (6) Blocking con su producto impreso: 20 GA metal strapping 145.33 LF (2/A104, 1/A104, 3/A104), 20 GA track 8.0 LF (5/A402), stud blocking 42.0 LF (A402 nota 4, 5/P501); el iPad backing plate 4/A104 dice 'BY G.C.' -> EXCLUDED (-9.0 LF). Textos del Scope corregidos (FRP cargado, cielo grid 2/A501, control joints 49.66 LF), RFI-03 / RFI-06 cerrados citando la regla (U-052 / U-140 / R-ALC-10), delta de Level 5 sobre el board total real, walls con cota impresa en [CONFIRMED].",
  (f"1. RFI abiertos: {len(rf)} (Pending Items), todos con el supuesto conservador CARGADO y su delta (detalle en SEGUIMIENTO.md)." if rf else "1. RFI abiertos: 0 (Pending Items vacío). Todos los RFI están cerrados con su decisión y fecha en SEGUIMIENTO.md y en el Scope Checklist."),
  "2. RFI-02 (CERRADO por regla U-127 BOTH SIDES): type A# imprime '5/8\" TYPE X ON EACH SIDE'; se cargaron las DOS caras. Nota: la sección de 1/A500 dibuja una sola cara; una cara restaría el delta indicado en SEGUIMIENTO.",
  "3. RFI-01 y RFI-04 CERRADOS por decisión del usuario 2026-11-05 (opción A, como estaba cargado): C3-01 a 17'-1 9/16\" (deck mayor impreso, regla U-146) y Level 4 (regla U-147). 0 RFI abiertos. Las cantidades no cambian respecto a rev2.",

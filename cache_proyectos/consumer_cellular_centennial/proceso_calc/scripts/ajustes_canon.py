@@ -620,3 +620,60 @@ for ce in c['ceilings']:
         ce['source'] = '2/A501; ' + ce.get('source', '1/A200, A402')
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 print('40 ok')
+# ---- rev4 (auditoría U-138 de rev3, 5-nov) ----
+# 41. edge blocking (R78.33): the 5" horizontal joint of the 12'-5" faces (4'x12' stock) falls ABOVE the finished ceiling
+#     (faces stop 6" above the ceiling, 1/A500 'TO 6" ABOVE CEILING'): no finished joint to back, no sheet prints edge
+#     blocking -> 0 with the reason (R80.11). The row of rev3 (176.4 LF) cited the accessory items in its text by error.
+c = json.load(open(P))
+c['constants'].pop('sheet_len_ft', None)
+c['edge_blocking_none_reason'] = ("1/A500: board 'TO 6\" ABOVE CEILING' - the only joint of a 12'-5\" face hung with 4'x12' stock "
+                                  "falls in the top 5\" above the finished ceiling (A200 11'-11\"): no finished joint, no edge "
+                                  "blocking printed on 1/A500 - 6/A500 or A104")
+# 42. A100 general note 5 'WATER RESISTANT GYPSUM BOARD AT ALL WET LOCATIONS (... KITCHENETTE ...)': C3-01 face B at the
+#     kitchenette (A103 key 8, 5'-2" [CONFIRMED A103]) = 5/8" Type X W.R. over the kitchenette width, full face height
+for w in c['walls']:
+    if w['id'] == 'C3-01' and not any(f.get('ref') == 'B-KITCH' for f in w['faces']):
+        fb = next(f for f in w['faces'] if f['side'] == 'B')
+        kw = 5.167
+        fb['length_ft'] = round(w['length_ft'] - kw, 3)
+        fb['length_source'] = "C3-01 35.542 - kitchenette 5'-2\" (A103 key 8) = 30.375 [DERIVED]"
+        fk = dict(fb); fk.update({"ref": "B-KITCH", "length_ft": kw, "board": "5/8 type X WR", "board_info": "5/8 Type X W.R.",
+                                  "length_source": "A103 key 8 kitchenette 5'-2\" [CONFIRMED]",
+                                  "board_source": "A100 general note 5 'WATER RESISTANT GYPSUM BOARD AT ALL WET LOCATIONS (... KITCHENETTE ...)'",
+                                  "room": "Back of House - kitchenette (A103 key 8, 5/A401)"})
+        w['faces'].append(fk)
+# 43. FRP B-3 trim (A700 'EDGE M370, OUTSIDE CORNER M360 AND INSIDE CORNER M350'): + outside corner (1 outside corner of the
+#     restroom polygon, A100) x T.O. FRP 4'-0" (A402) + division bars at the 4'-0" panel joints: per side ROUNDUP(L/4)-1
+#     on the restroom sides 7.667 / 6.25 / 1.522 / 1.5 / 7.011 / 7.8 ft (A100 polygon at 18 pt/ft) = 1+1+0+0+1+1 = 4 x 4'-0"
+c['pvc_trim_items'] = [x for x in c['pvc_trim_items'] if x['ref'] not in ('PVC-RR-OC', 'PVC-RR-DIV')]
+c['pvc_trim_items'] += [
+ {"ref": "PVC-RR-OC", "lf": 4.0, "source": "A700 B-3; A402", "op": "A700 B-3 OUTSIDE CORNER M360: restroom outside corner molding: 1 outside corner (A100 polygon, vanity notch) x T.O. FRP 4'-0\" (A402) = 4.0 LF"},
+ {"ref": "PVC-RR-DIV", "lf": 16.0, "source": "A700 B-3; A402", "op": "A700 B-3 FRP panels 4'-0\" wide: division bar at the 4'-0\" FRP panel joints: restroom sides 7.667 / 6.25 / 1.522 / 1.5 / 7.011 / 7.8 ft (A100 polygon) -> ROUNDUP(L/4)-1 = 1+1+0+0+1+1 = 4 bars x 4'-0\" = 16.0 LF (mop sink alcove runs <= 4'-0\": 0)"}]
+pn = c['constants'].setdefault('product_names', {})
+# 44. tracks: 2/A500 'CONT 20 GA BOTTOM TRACK', 3/A500 and 4/A500 '20 GA. MIN. TRACK' -> every track 20 ga as printed (U-052)
+for w in c['walls']:
+    w['track_gauge'] = "20 ga"
+    w['track_gauge_source'] = "2/A500 'CONT 20 GA BOTTOM TRACK'; 3/A500 / 4/A500 '20 GA. MIN. TRACK'"
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+print('41-44 ok')
+# 45. printed blocking products (CC-R6): 1/A104 / 2/A104 / 3/A104 '20 GA. METAL STRAPPING', 4/A104 '20 GA BACKING PLATE'
+c = json.load(open(P))
+for x in c['blocking_items']:
+    if x['ref'] in ('BLK-SLAT-N', 'BLK-LOGO-S', 'BLK-LOGO-W', 'BLK-KITCH'):
+        x['product'] = "20 GA. METAL STRAPPING (%s)" % {'BLK-SLAT-N': '2/A104', 'BLK-LOGO-S': '1/A104', 'BLK-LOGO-W': '1/A104', 'BLK-KITCH': '3/A104'}[x['ref']]
+# 4/A104 prints '20" GA. BACKING PLATE BY G.C.': 'BY G.C.' = EXCLUDED with note (R80e.34 #11) - BLK-IPAD removed (9.0 LF)
+c['blocking_items'] = [x for x in c['blocking_items'] if x['ref'] != 'BLK-IPAD']
+c['blocking_by_gc'] = {"ref": "BLK-IPAD", "lf_before": 9.0, "source": "4/A104", "why": "4/A104 '20\" GA. BACKING PLATE BY G.C.' - by G.C., EXCLUDED with note (R80e.34 #11)"}
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+print('45 ok')
+# 46. U-114 (rev3 audit #12): a wall whose length IS the printed dimension (length_status CONFIRMADO: A3-04 11'-9 1/2", D-01 7'-8",
+#     E3-01 7'-3", E3-03 7'-2", E3-12 / E3-13 2'-4") carries length_printed_ft -> [CONFIRMED] row with its N/SHEET (A100).
+#     A3-01 / A3-02 are parts of the printed 44'-3 1/2" string (column between them): [DERIVED] with the operation.
+c = json.load(open(P))
+for w in c['walls']:
+    if str(w.get('length_status')).upper() == 'CONFIRMADO':
+        w['length_printed_ft'] = w['length_ft']
+    elif w['id'] in ('A3-01', 'A3-02') and 'part of' not in w['length_source']:
+        w['length_source'] += " (part of the printed 44'-3 1/2\" string: A3-01 + existing column + A3-02)"
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+print('46 ok')

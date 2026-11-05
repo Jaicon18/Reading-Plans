@@ -460,3 +460,17 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/t
 | BE-CC09 | Detector de burbujas en coordenadas sin rotar: en hojas rotation 270 los círculos del detector caían fuera y duplicaban la lectura a ojo | Coordenadas del detector en marco visible | _burbujas_set frame visible; test |
 | BE-CC10 | Page Label "G2" en DETALLES_REVISADOS | Page Label = número de hoja impreso | test |
 | BE-CC11 | PARA_REVISAR rev1 decía "FRP EXCLUDED" con el FRP cargado en el Excel | Los textos de los docs salen de lo cargado; revisar cada afirmación contra el Material Summary | corregido en hacer_docs del proyecto |
+
+## Consumer Cellular Centennial rev4 (5-nov-2026, auditoría adversarial U-138 de rev3, v81cf51)
+| ID | Error | Regla | Compuerta / test |
+|---|---|---|---|
+| CC-R1 | 'Stud blocking at edge of gypboard' 176.4 LF con el texto de los ítems de accesorios (se veía duplicado; era edge blocking R78.33 de una junta que cae sobre el cielo terminado) | junta sobre el cielo terminado = sin edge blocking (edge_blocking_none_reason); renglón con valores sin ID que son ítems de otros = FAIL | CB_CC_R1 + caso |
+| CC-R2 | C3-01 cara B en la kitchenette en Type X (A100 nota 5 W.R. AT ALL WET LOCATIONS incl. KITCHENETTE) | cada wet location de la nota W.R. por su ancho impreso | dato del canon (paso 42) |
+| CC-R3 | PVC trim del FRP sin outside corner ni division bars (A700 B-3) | todos los trims del schedule | test token CC-R3 |
+| CC-R4 | track en 18 ga donde 2/A500 / 3/A500 imprimen 20 GA | gauge de track impreso manda (walls[].track_gauge) | test token CC-R4 |
+| CC-R4b..e | BE-25 / BE-02 / BE-08 / BE-16 en N/A con el dato en el set | sin pasar en vacío | casos en test |
+| CC-R5 | renglón de 0.01 LF compraba 1 pieza | resto < 0.05 LF = redondeo | CB_CC_R5 + caso |
+| CC-R6 | strap / plate impresos como 'stud blocking'; 4/A104 'BY G.C.' cargado | producto impreso nombra el renglón; BY G.C. = EXCLUDED (R80e.34 #11) | test token CC-R6 |
+| CC-R7 | Scope 'FRP EXCLUDED' con FRP cargado | Scope EXCLUDED sobre material cargado = FAIL | CB_CC_R7 + caso |
+| CC-R10 | CE_CALLOUTS '2 citadas / 10' con 49 burbujas | misma unión que CE_DETALLES_CIRCULADOS | test token CC-R10 |
+| CC-R12 | walls con cota impresa en [DERIVED] (U-114) | length_printed_ft -> [CONFIRMED] | CB_CC_R12 + caso |

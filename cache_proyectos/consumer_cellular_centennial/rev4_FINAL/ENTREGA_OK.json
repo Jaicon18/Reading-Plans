@@ -1,0 +1,2418 @@
+{
+ "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
+ "fecha_california": "2026-11-05 06:51 PST",
+ "fecha_iso": "2026-11-05T14:51:36.080235+00:00",
+ "workdir": "/root/cc/work/entrega",
+ "entrega_dir": "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR",
+ "ok": true,
+ "resumen": {
+  "PASS": 168,
+  "AMBER": 2,
+  "FAIL": 0
+ },
+ "chequeos": [
+  {
+   "id": "CE_ENTREGABLES",
+   "reglas": [
+    "U-011",
+    "U-048"
+   ],
+   "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
+   "estado": "PASS",
+   "evidencia": [
+    "183 archivos en rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ESTANDAR_OREILLY",
+   "reglas": [
+    "U-145"
+   ],
+   "descripcion": "entrega con la misma estructura que O'Reilly rev10 FINAL (estándar aprobado por el usuario)",
+   "estado": "PASS",
+   "evidencia": [
+    "12 piezas del estándar O'Reilly rev10 presentes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SIN_PROPOSAL",
+   "reglas": [
+    "U-015"
+   ],
+   "descripcion": "sin proposal en la entrega",
+   "estado": "PASS",
+   "evidencia": [
+    "sin archivos de proposal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_FORMATO_EXCEL",
+   "reglas": [
+    "BE-43",
+    "U-003",
+    "U-016",
+    "U-121"
+   ],
+   "descripcion": "Excel de formato fijo: exactamente las 6 hojas visibles en orden y los encabezados fijos de plantilla_excel.py (sin hojas ni columnas agregadas)",
+   "estado": "PASS",
+   "evidencia": [
+    "6 hojas + encabezados fijos OK"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TORNILLERIA",
+   "reglas": [
+    "U-053"
+   ],
+   "descripcion": "toda la tornillería (screws, anchors, Titen, pins/PAF, Tapcon, bolts) = 0 con EXCLUDED en Material Summary y una línea EXCLUDED en Scope Checklist",
+   "estado": "PASS",
+   "evidencia": [
+    "7 renglones de tornillería en 0 con EXCLUDED"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TRACK_FAMILIAS",
+   "reglas": [
+    "BE-24",
+    "U-056"
+   ],
+   "descripcion": "dos familias de track en renglones separados: estándar (bottom / top) y slip / deflection; ningún renglón las mezcla; si no hay slip track, Scope Checklist lo declara NOT APPLICABLE",
+   "estado": "PASS",
+   "evidencia": [
+    "5 renglones estándar / 2 slip-deflection, separados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_FUENTES_MS",
+   "reglas": [
+    "BE-40",
+    "U-025",
+    "U-115"
+   ],
+   "descripcion": "todo renglón del Material Summary con cantidad cita su fuente (N/SHEET, sección de spec o código del trade)",
+   "estado": "PASS",
+   "evidencia": [
+    "todos los renglones con fuente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DATOS_PROYECTO",
+   "reglas": [
+    "BE-114",
+    "R-ALC-08",
+    "R-ALC-09",
+    "U-076",
+    "U-077"
+   ],
+   "descripcion": "hoja de datos del proyecto + hojas obligatorias en takeoff.json, Inputs del Excel, README_REVIEW y PARA_REVISAR (reglas.datos_proyecto_fallas)",
+   "estado": "PASS",
+   "evidencia": [
+    "datos del proyecto en las 4 fuentes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TIEMPOS",
+   "reglas": [
+    "U-094"
+   ],
+   "descripcion": "TIEMPOS.md con hora de inicio / fin (hora de California) de cada paso 1–9 y TOTAL",
+   "estado": "PASS",
+   "evidencia": [
+    "pasos 1–9 con hora; TIEMPOS.md"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_HORAS_CALIFORNIA",
+   "reglas": [
+    "U-045"
+   ],
+   "descripcion": "horas al usuario en hora de California: sin UTC en TIEMPOS / README / PARA_REVISAR",
+   "estado": "PASS",
+   "evidencia": [
+    "sin horas en UTC"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SIN_DOLARES",
+   "reglas": [
+    "BE-131",
+    "U-018",
+    "U-123"
+   ],
+   "descripcion": "sin costos en dólares en lo entregado: README / PARA_REVISAR / SEGUIMIENTO, celdas visibles del Excel (no fórmulas) y texto de los markups (U-123, preferencias del día 1)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin montos en dólares"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DRIVE_PARENT",
+   "reglas": [
+    "U-001",
+    "U-004",
+    "U-090",
+    "U-122"
+   ],
+   "descripcion": "la carpeta del proyecto en Drive cuelga de Claude outputs de la RAÍZ (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc); nunca de Projects › Claude outputs",
+   "estado": "PASS",
+   "evidencia": [
+    "parent 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc › 'Consumer Cellular - Centennial, CO (Elite Retail / Elder-Jones) 11-05-26' (subir_entrega.py lo verifica en vivo con gdrive_fetch list)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_FORMATO",
+   "reglas": [
+    "U-042",
+    "U-048",
+    "U-052",
+    "U-116"
+   ],
+   "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
+   "estado": "PASS",
+   "evidencia": [
+    "0 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_PROHIBIDOS",
+   "reglas": [
+    "R-ALC-01",
+    "R-ALC-03",
+    "R-ALC-05",
+    "R-ALC-07",
+    "U-053",
+    "U-061",
+    "U-064",
+    "U-071",
+    "U-075"
+   ],
+   "descripcion": "ningún RFI abierto sobre lo que el usuario ordenó resolver sin RFI (tornillería, trades ajenos, ductos, cielo existente sin tipo, altura de partition a demoler)",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI sobre temas con orden fija"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_BARRIDO_IMPRESO",
+   "reglas": [
+    "BE-101",
+    "BE-120",
+    "BE-125",
+    "BE-CF16",
+    "BE-HF18",
+    "U-019",
+    "U-052",
+    "U-086",
+    "U-100",
+    "U-116"
+   ],
+   "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
+   "estado": "PASS",
+   "evidencia": [
+    "0 RFI abiertos y ningún 'not printed / assumed' sin RFI o decisión"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_BUSQUEDA_EXHAUSTIVA",
+   "reglas": [
+    "U-140"
+   ],
+   "descripcion": "U-140: un RFI 'not printed' abierto lleva la búsqueda completa: >= 12 términos con sinónimos, todas las disciplinas, SHX, medida vectorial a escala impresa, specs / addenda y sets de todos los GC",
+   "estado": "PASS",
+   "evidencia": [
+    "0 RFI 'not printed' con búsqueda exhaustiva (0 abiertos)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ATRIBUCION_ESTIMADOR",
+   "reglas": [
+    "BE-101",
+    "U-052"
+   ],
+   "descripcion": "toda 'estimator decision' del Excel cita su respuesta escrita o precedente (R-ALC-NN, R80e.34, U-NNN, respuesta del usuario, standing rule)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda decisión del estimador con cita"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DECISIONES_EN_EXCEL",
+   "reglas": [
+    "U-016",
+    "U-050"
+   ],
+   "descripcion": "todo RFI cerrado (por plano o por el estimador) queda escrito en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "20 cierres citados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SEGUIMIENTO",
+   "reglas": [
+    "U-048"
+   ],
+   "descripcion": "SEGUIMIENTO.md lista cada RFI abierto",
+   "estado": "PASS",
+   "evidencia": [
+    "RFI abiertos en SEGUIMIENTO"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ALTURA_IMPRESA",
+   "reglas": [
+    "BE-119",
+    "BE-134",
+    "R80f.29",
+    "U-010",
+    "U-088",
+    "U-099"
+   ],
+   "descripcion": "BE-119: cada markup re-medido a la escala IMPRESA y su Depth comparado contra la altura IMPRESA de su fuente (N/HOJA), no contra el Excel. RED = FAIL; sin altura impresa = AMBER",
+   "estado": "AMBER",
+   "evidencia": [
+    "0 RED / 0 AMBER de 19",
+    "LEGEND: la hoja del PDF de markups no tiene capa de texto; escala tomada del canon (18.000 pt/ft)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MATERIALES_SCHEDULE",
+   "reglas": [
+    "BE-122",
+    "BE-126",
+    "BE-134",
+    "R80f.30",
+    "R80f.34",
+    "U-111"
+   ],
+   "descripcion": "BE-122 (j): lectura INDEPENDIENTE del Partition Type Schedule (fichas.json, subagente que no vio el Excel) vs lo cargado por wall / type (revision_materiales.comparar_type) + cada renglón del Material Summary = suma de walls por type con origen impreso (revision_materiales.sumas). RED = FAIL",
+   "estado": "AMBER",
+   "evidencia": [
+    "type A3: AMBER (el schedule no lo dice)",
+    "type C3: AMBER (el schedule no lo dice)",
+    "type D: AMBER (el schedule no lo dice)",
+    "type E3: AMBER (el schedule no lo dice)",
+    "type H: AMBER (el schedule no lo dice)",
+    "Material Summary fila 14 AMBER: 0 - EXCLUDED - wood blocking / FRT plywood is Div. 06, never carried (estimator standing order",
+    "Material Summary fila 17 AMBER: no itemized breakdown: total computed in the cell text (drywall suspension grid: main tee ROUNDUP(7.",
+    "Material Summary fila 18 AMBER: no itemized breakdown: total computed in the cell text (drywall suspension grid: main tee ROUNDUP(7.",
+    "Material Summary fila 19 AMBER: no itemized breakdown: total computed in the cell text (drywall suspension grid: main tee ROUNDUP(7.",
+    "Material Summary fila 31 AMBER: 0 - none: no opening wider than 4'-0\": doors 4C / 5C / 6C R.O. 3'-4\" (A600), cased opening 4'-",
+    "Material Summary fila 32 AMBER: 0 - none: no pipe / conduit crossing a stud wall larger than the stud web punch-out drawn on P",
+    "Material Summary fila 33 AMBER: 0 - none: no ATM / recessed equipment in the set (A100, A103, A400, A401) (A100)",
+    "Material Summary fila 34 AMBER: 0 - none: no coiling grille / overhead door in the set (A600 door schedule, A100) (A600)",
+    "Material Summary fila 35 AMBER: 0 - none: no jamb-return label printed: 2/A400 cased opening prints only 'OPEN TO HALLWAY' / '",
+    "Material Summary fila 36 AMBER: no itemized breakdown: total computed in the cell text (PVC-RR: restroom: edge top + bottom 2 x 28.4",
+    "Material Summary fila 37 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 38 AMBER: 0 - none: none drawn or scheduled (A200, M101, P101, P501) (A200)",
+    "Material Summary fila 39 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 40 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 41 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 42 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 45 AMBER: 0 - none: no Level 5 printed: A700 finish schedule PT-1..PT-4 eggshell paint, no wallcovering ",
+    "Material Summary fila 46 AMBER: 0 - none: deflection by long-leg slotted runner track (4/A500) and studs cut 1/2\" short in 20 ",
+    "Material Summary fila 47 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3",
+    "Material Summary fila 48 AMBER: 0 - EXCLUDED - all screws / anchors / shot pins excluded (estimator standing order) (2/A500, 3"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MARKUPS_EXCEL",
+   "reglas": [
+    "BE-117",
+    "BE-44",
+    "U-010",
+    "U-121"
+   ],
+   "descripcion": "verificar_markups_excel.py: TYPE·LF·H·SF·DETAIL·Wall ID = Excel, /Measure = escala impresa, Length vs LF <= 0.5 %",
+   "estado": "PASS",
+   "evidencia": [
+    "markups = Excel = escala impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_AUDITORIA",
+   "reglas": [
+    "BE-42",
+    "U-005",
+    "U-007",
+    "U-011",
+    "U-121"
+   ],
+   "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
+   "estado": "PASS",
+   "evidencia": [
+    "74 revisiones OK"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_REGLAS",
+   "reglas": [
+    "BE-116",
+    "BE-117",
+    "BE-134",
+    "BE-CF08",
+    "BE-CF16",
+    "R-ALC-11",
+    "R-ALC-12",
+    "R80f.31",
+    "U-009",
+    "U-031",
+    "U-083",
+    "U-085",
+    "U-086",
+    "U-114"
+   ],
+   "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
+   "estado": "PASS",
+   "evidencia": [
+    "reglas.py OK (900 reglas)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_COPIA_LIMPIA",
+   "reglas": [
+    "BE-CF24",
+    "U-051"
+   ],
+   "descripcion": "U-051: la copia limpia del bid set (sin markups previos) tiene el mismo contenido que el original, hoja por hoja (páginas, XObjects, render sin anotaciones); entrega.json declara bidset_original y bidset_limpio",
+   "estado": "PASS",
+   "evidencia": [
+    "37 páginas = original (XObjects faltantes: original 0, copia 0, todos también en el original)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_COMPARATIVA_BANCO",
+   "reglas": [
+    "U-130"
+   ],
+   "descripcion": "U-130: COMPARATIVA_BANCO.md (compuerta_entrega.py banco) del Excel entregado contra las referencias verificadas del banco, familias normalizadas por LF de partition y por SF de piso; toda familia OUT OF RANGE explicada en README_REVIEW.md (sección 'Bank comparison')",
+   "estado": "PASS",
+   "evidencia": [
+    "todas las familias dentro del rango del banco"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_017",
+   "reglas": [
+    "U-017"
+   ],
+   "descripcion": "U-017: una cota IMPRESA que coincide con una lectura manda: la resolución AB nunca toma la otra lectura",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna resolución contra una cota impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_08",
+   "reglas": [
+    "BE-08",
+    "CC-R4d"
+   ],
+   "descripcion": "BE-08: todo LF con cota impresa coincide (± 1\") o la diferencia está explicada / es decisión citada",
+   "estado": "PASS",
+   "evidencia": [
+    "10 walls con cota impresa = LF"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_026",
+   "reglas": [
+    "BE-108",
+    "U-026"
+   ],
+   "descripcion": "U-026 / BE-108: ningún RFI abierto sobre un tema que un precedente del estimador (R80e.34 / R80e.78) ya decidió, salvo que lo cite",
+   "estado": "PASS",
+   "evidencia": [
+    "0 RFI abiertos sin precedente decidido"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R1",
+   "reglas": [
+    "CC-R1"
+   ],
+   "descripcion": "CC-R1 (Consumer Cellular rev3 audit): un renglón del Material Summary cuyo desglose lista valores SIN el ID de su ítem y esos valores son los ítems de otros renglones = renglón duplicado = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "45 renglones sin desglose duplicado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R5",
+   "reglas": [
+    "CC-R5"
+   ],
+   "descripcion": "CC-R5 (Consumer Cellular rev3 audit): un renglón con 0 < net < 0.5 sin ítem que lo justifique compra piezas por redondeo = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún renglón de residuo de redondeo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R7",
+   "reglas": [
+    "CC-R7"
+   ],
+   "descripcion": "CC-R7 (Consumer Cellular rev3 audit): el Scope Checklist dice EXCLUDED de un material (sigla FRP / PVC / ACT ...) que el Material Summary carga con cantidad > 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún EXCLUDED sobre un material cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R12",
+   "reglas": [
+    "CC-R12"
+   ],
+   "descripcion": "CC-R12 / U-114 (Consumer Cellular rev3 audit): un wall cuyo largo es la cota impresa (length_status CONFIRMADO) va [CONFIRMED] en la Partition Takeoff, no [DERIVED]",
+   "estado": "PASS",
+   "evidencia": [
+    "6 walls con cota impresa en [CONFIRMED]"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_146",
+   "reglas": [
+    "U-146"
+   ],
+   "descripcion": "U-146 (usuario 5-nov): deck con dos alturas impresas y el corte no dibujado = se carga la altura MAYOR impresa, sin RFI (criterios.deck_sin_corte); un RFI abierto sobre ese tema = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI abierto sobre el corte de deck (U-146)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_147",
+   "reglas": [
+    "U-147"
+   ],
+   "descripcion": "U-147 (usuario 5-nov): level of finish no especificado = Level 4, sin RFI (criterios.level_of_finish); un RFI abierto sobre ese tema = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI abierto sobre el level of finish (U-147)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_034",
+   "reglas": [
+    "BE-137",
+    "BE-59",
+    "R80f.39",
+    "U-034"
+   ],
+   "descripcion": "U-034 / BE-59: compuerta de completitud (runner/completitud.revisar) en A y en B: todas las hojas de planta y types del schedule presentes, y nada que la otra lectura trae falta",
+   "estado": "PASS",
+   "evidencia": [
+    "A y B completas sobre ['A100']"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_035",
+   "reglas": [
+    "BE-65",
+    "U-035"
+   ],
+   "descripcion": "U-035: escala (plan_scale_pt_per_ft), band.sheet y barrido MEP con hojas M / P en el canon: la evidencia la generan los programas desde coordenadas",
+   "estado": "PASS",
+   "evidencia": [
+    "escala + band.sheet + barrido MEP presentes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_037",
+   "reglas": [
+    "BE-142",
+    "BE-72",
+    "U-037"
+   ],
+   "descripcion": "U-037 / BE-72: conteos por type y hoja contra el inventario de tags (y columnas): ningún tag del inventario sin wall de su type en su hoja",
+   "estado": "PASS",
+   "evidencia": [
+    "18 tags del inventario con wall de su type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_043",
+   "reglas": [
+    "BE-94",
+    "U-043"
+   ],
+   "descripcion": "U-043 / BE-94: la versión vigente del INDICE registra la prueba del BANCO (todas las lecturas guardadas) con 0 familias que empeoran",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: se revisa al armar la versión (verificar_version.py revisar_banco)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_051",
+   "reglas": [
+    "BE-100",
+    "U-051"
+   ],
+   "descripcion": "U-051 / BE-100: el bid set que recibe la sesión no trae markups de otro take-off (solo se conservan las anotaciones 'AutoCAD SHX Text')",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin copia del bid set en la carpeta (entrega.json bidset / copia_limpia*.pdf)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_057",
+   "reglas": [
+    "BE-110",
+    "U-057"
+   ],
+   "descripcion": "U-057 / BE-110: criterios fijos por programa: ninguna altura medida a escala sin RFI y board sin descontar aberturas",
+   "estado": "PASS",
+   "evidencia": [
+    "sin alturas a escala ni aberturas descontadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_058",
+   "reglas": [
+    "BE-111",
+    "U-058"
+   ],
+   "descripcion": "U-058 / BE-111: la altura de una cara INTERIOR no sale de una cota de fachada exterior",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna cara interior con altura de cota exterior"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF01",
+   "reglas": [
+    "BE-CF01",
+    "U-079"
+   ],
+   "descripcion": "U-079 / BE-CF01: el texto SHX de las hojas M / P / E sigue en el set (la copia limpia no lo borró)",
+   "estado": "PASS",
+   "evidencia": [
+    "12 / 12 hojas M/P/E con texto"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_081",
+   "reglas": [
+    "BE-CF06",
+    "U-081"
+   ],
+   "descripcion": "U-081 / BE-CF06: comparar_extra.py corrió: revision_extra con A vs B de board-only, cielos, misc y demo",
+   "estado": "PASS",
+   "evidencia": [
+    "A vs B de ['ceilings', 'misc_items']"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_082",
+   "reglas": [
+    "R-ALC-10",
+    "U-082"
+   ],
+   "descripcion": "U-082 / R-ALC-10: todo conflicto plano vs spec / código cargado con la opción A (plano) lleva NOTA con N/HOJA, la sección de spec / código y el delta",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún conflicto plano vs spec / código en el Excel"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_02",
+   "reglas": [
+    "R-ALC-02"
+   ],
+   "descripcion": "R-ALC-02: blocking de accesorio sin medida impresa = 3 ft x 2 filas por accesorio, sin RFI",
+   "estado": "PASS",
+   "evidencia": [
+    "1 blocking sin medida = 2 x 3 ft"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_04",
+   "reglas": [
+    "BE-135",
+    "R-ALC-04"
+   ],
+   "descripcion": "R-ALC-04: si el set tiene demolición de gyp / metal frame, la demolición está cuantificada (nuestro alcance)",
+   "estado": "PASS",
+   "evidencia": [
+    "demolición cuantificada (1 renglones) para ['D100']"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_01",
+   "reglas": [
+    "BE-01"
+   ],
+   "descripcion": "BE-01: detalle 'FIRE STOP AT CEILING LINE' impreso -> renglón de fire-stop track (o destino)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: el set no imprime fire stop en la línea de cielo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_02",
+   "reglas": [
+    "BE-02",
+    "CC-R4c"
+   ],
+   "descripcion": "BE-02: nota W.R. 'for wall AND ceiling' -> los cielos GWB de los wet rooms van en W.R.",
+   "estado": "PASS",
+   "evidencia": [
+    "cielos GWB de wet rooms en W.R."
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_03",
+   "reglas": [
+    "BE-03"
+   ],
+   "descripcion": "BE-03: toda cara con gypsum de un wet room va en W.R. (ninguna en Type X / regular)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras de wet rooms en W.R."
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_04",
+   "reglas": [
+    "BE-04"
+   ],
+   "descripcion": "BE-04: ninguna cara cuya sección dice SOLO plywood / FRT (sin gypsum) lleva board",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna cara sin gypsum con board"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_05",
+   "reglas": [
+    "BE-05"
+   ],
+   "descripcion": "BE-05: capas por cara = las del dibujo: una fuente que dice 1 LAYER no carga 2 capas",
+   "estado": "PASS",
+   "evidencia": [
+    "capas por cara = fuente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_06",
+   "reglas": [
+    "BE-06"
+   ],
+   "descripcion": "BE-06: todo soffit con cada lado expuesto + su fondo (no una sola cara)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin soffits en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_07",
+   "reglas": [
+    "BE-07"
+   ],
+   "descripcion": "BE-07: cada tag '<type> SIM.' de la planta tiene su fila de remate",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún tag '<type> SIM.' en las plantas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_09",
+   "reglas": [
+    "BE-09"
+   ],
+   "descripcion": "BE-09: ningún wall EXISTING / to remain cuantificado como nuevo",
+   "estado": "PASS",
+   "evidencia": [
+    "sin walls existing como nuevos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_10",
+   "reglas": [
+    "BE-10"
+   ],
+   "descripcion": "BE-10: soffit con cota 'HOLD' cuantificado + RFI, nunca 'not priced'",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna cota HOLD sin cuantificar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_11",
+   "reglas": [
+    "BE-11"
+   ],
+   "descripcion": "BE-11: área rotulada 'AREA OF … PLYWOOD / BACKING / BLOCKING' con SF cargados",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún área rotulada de plywood / backing"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_12",
+   "reglas": [
+    "BE-12",
+    "R80f.36"
+   ],
+   "descripcion": "BE-12: toda cita textual (entre comillas) del Excel existe impresa en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "16 citas textuales impresas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_13",
+   "reglas": [
+    "BE-13"
+   ],
+   "descripcion": "BE-13: backboard / plywood / backing de hojas E / M / P con destino",
+   "estado": "PASS",
+   "evidencia": [
+    "backboard de ['E701'] con destino"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_14",
+   "reglas": [
+    "BE-14"
+   ],
+   "descripcion": "BE-14: ninguna afirmación 'not printed / not specified' cuyo término aparece impreso con su valor en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "9 afirmaciones 'not printed' sin valor impreso en el set"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_15",
+   "reglas": [
+    "BE-129",
+    "BE-15"
+   ],
+   "descripcion": "BE-15: el miembro del renglón = el rotulado en su detalle (un JOIST / horizontal no se carga como poste)",
+   "estado": "PASS",
+   "evidencia": [
+    "miembros y burbujas citadas coinciden"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_16",
+   "reglas": [
+    "BE-16",
+    "CC-R4e"
+   ],
+   "descripcion": "BE-16: cada accesorio impreso en los detalles del trade (clips, angles, kickers, straps) tiene destino",
+   "estado": "PASS",
+   "evidencia": [
+    "2 accesorios impresos con destino"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_17",
+   "reglas": [
+    "BE-17"
+   ],
+   "descripcion": "BE-17: fasteners por gauge: con varios gauges cada producto dependiente sale por gauge (o todo EXCLUDED, U-053)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_18",
+   "reglas": [
+    "BE-18",
+    "BE-VS-03"
+   ],
+   "descripcion": "BE-18 / BE-VS-03: matriz de cobertura (Paso 12) con 0 GAP",
+   "estado": "PASS",
+   "evidencia": [
+    "cobertura sin GAP"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_19",
+   "reglas": [
+    "BE-19",
+    "BE-56"
+   ],
+   "descripcion": "BE-19 / BE-56: fastener cargado con un espaciamiento impreso (no default) — o tornillería EXCLUDED",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_20",
+   "reglas": [
+    "BE-20",
+    "R80f.36"
+   ],
+   "descripcion": "BE-20: framed soffit con studs Y 2 tracks (no solo perímetro)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin soffits"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_21",
+   "reglas": [
+    "BE-21"
+   ],
+   "descripcion": "BE-21: glass mat solo donde un detalle / tag lo rotula",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin renglón de glass mat"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_22",
+   "reglas": [
+    "BE-22"
+   ],
+   "descripcion": "BE-22: jamb return solo con detalle que lo dibuja",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin renglón de jamb return"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_23",
+   "reglas": [
+    "BE-23"
+   ],
+   "descripcion": "BE-23: acoustical sealant EXCLUDED (sin renglón con cantidad)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin acoustical sealant cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_25",
+   "reglas": [
+    "BE-25",
+    "CC-R4b"
+   ],
+   "descripcion": "BE-25: cada ceiling de gypsum cita el detalle de su sistema de suspensión",
+   "estado": "PASS",
+   "evidencia": [
+    "1 cielos con su detalle de sistema"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_26",
+   "reglas": [
+    "BE-26"
+   ],
+   "descripcion": "BE-26: type K / ballistic medido al hatch / cota, no a nodos",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin ballistic"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_27",
+   "reglas": [
+    "BE-27"
+   ],
+   "descripcion": "BE-27: recess de ATM / equipo con sus piezas o razón none",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin ATM / recess"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_28",
+   "reglas": [
+    "BE-28"
+   ],
+   "descripcion": "BE-28: canopy / parapet nuevo con su framing o destino",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin canopy / parapet de framing"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_29",
+   "reglas": [
+    "BE-29"
+   ],
+   "descripcion": "BE-29: header 'assumed' sin schedule = 0 LF + RFI con delta (o precedente R80e.34 #4)",
+   "estado": "PASS",
+   "evidencia": [
+    "headers con schedule, RFI o precedente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_41",
+   "reglas": [
+    "BE-41"
+   ],
+   "descripcion": "BE-41: ningún nombre de archivo interno (.json / .py / carpetas de trabajo) en las hojas visibles del Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "sin nombres internos en el Excel"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_45",
+   "reglas": [
+    "BE-45"
+   ],
+   "descripcion": "BE-45: proporciones en rango (board del Material Summary vs Σ Board SF del Partition Takeoff) o explicadas",
+   "estado": "PASS",
+   "evidencia": [
+    "board MS / PT = 1.02"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_46",
+   "reglas": [
+    "BE-46"
+   ],
+   "descripcion": "BE-46: un espesor y un producto por renglón (no 1/2\" + 5/8\" ni 3-5/8\" + 6\" en el mismo)",
+   "estado": "PASS",
+   "evidencia": [
+    "un espesor / tamaño por renglón"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_47",
+   "reglas": [
+    "BE-47"
+   ],
+   "descripcion": "BE-47: todo ID ALC- / RFI- citado en textos existe como renglón",
+   "estado": "PASS",
+   "evidencia": [
+    "IDs citados existen"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_48",
+   "reglas": [
+    "BE-48"
+   ],
+   "descripcion": "BE-48: ningún nombre de archivo interno en el PDF de markups (Contents / Subject / texto agregado)",
+   "estado": "PASS",
+   "evidencia": [
+    "markups sin nombres internos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_49",
+   "reglas": [
+    "BE-49"
+   ],
+   "descripcion": "BE-49: la cota impresa usada pertenece al elemento: LF = cota y el dibujo (band / escala) confirma (± 10 %)",
+   "estado": "PASS",
+   "evidencia": [
+    "10 cotas confirmadas por el dibujo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_50",
+   "reglas": [
+    "BE-50"
+   ],
+   "descripcion": "BE-50: lo que una hoja / spec E / M / P asigna a otro contratista dentro de nuestro alcance tiene RFI o nota",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin asignaciones a otro contratista en E/M/P"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_51",
+   "reglas": [
+    "BE-51"
+   ],
+   "descripcion": "BE-51: renglón en LF con venta por pieza = piezas por stock length (no ROUNDUP del LF)",
+   "estado": "PASS",
+   "evidencia": [
+    "piezas por stock length"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_52",
+   "reglas": [
+    "BE-52"
+   ],
+   "descripcion": "BE-52: todo 'covered by / included in row N' apunta a un renglón que existe y tiene cantidad",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin coberturas heredadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_53",
+   "reglas": [
+    "BE-53"
+   ],
+   "descripcion": "BE-53: el delta de un RFI incluye cada pieza impresa que su propia pregunta cita del detalle",
+   "estado": "PASS",
+   "evidencia": [
+    "deltas con las piezas citadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_54",
+   "reglas": [
+    "BE-54"
+   ],
+   "descripcion": "BE-54: la partición por producto aplica cada deducción a sus caras, no al total",
+   "estado": "PASS",
+   "evidencia": [
+    "deducciones por cara"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_55",
+   "reglas": [
+    "BE-55"
+   ],
+   "descripcion": "BE-55: ningún código interno del plan check (C7-0x, C-0x, N-0x, 'rev7 plan check') en textos al cliente",
+   "estado": "PASS",
+   "evidencia": [
+    "sin códigos internos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_57",
+   "reglas": [
+    "BE-57"
+   ],
+   "descripcion": "BE-57: madera / board / plywood / cement board / FRP con el waste NO metal de Inputs",
+   "estado": "PASS",
+   "evidencia": [
+    "waste no metal en no metálicos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_58",
+   "reglas": [
+    "BE-58"
+   ],
+   "descripcion": "BE-58: el Excel lo generó la cadena (canon.py + reglas.py + plantilla_excel.py) — bitácora o sello del Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "Excel con sello de la cadena (<excel>.sello.json)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_60",
+   "reglas": [
+    "BE-137",
+    "BE-60"
+   ],
+   "descripcion": "BE-60: canon A / B / AB dentro del esquema (validar_canon: escala, band.sheet; sin claves inventadas)",
+   "estado": "PASS",
+   "evidencia": [
+    "A y B dentro del esquema"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_61",
+   "reglas": [
+    "BE-61"
+   ],
+   "descripcion": "BE-61: la resolución parte de la lectura más completa (AB no tiene menos walls que la más completa sin motivo)",
+   "estado": "PASS",
+   "evidencia": [
+    "AB 19 walls vs A 22 / B 16"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_62",
+   "reglas": [
+    "BE-62"
+   ],
+   "descripcion": "BE-62: element / type normalizados (un BOX o tag de columna es column_wrap, no wall) y >= 80 % emparejado",
+   "estado": "PASS",
+   "evidencia": [
+    "elements normalizados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_63",
+   "reglas": [
+    "BE-137",
+    "BE-63"
+   ],
+   "descripcion": "BE-63: el overlay no mete largos / bands de otra referencia: todo wall del AB conserva el largo de A o de B (o lo cambia una decisión citada)",
+   "estado": "PASS",
+   "evidencia": [
+    "walls del AB con largos de la lectura"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_64",
+   "reglas": [
+    "BE-64"
+   ],
+   "descripcion": "BE-64: las lecturas no ven respuestas del proyecto (rev anteriores, RFI respondidos, Excel final)",
+   "estado": "PASS",
+   "evidencia": [
+    "lecturas sin rutas de respuestas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_66",
+   "reglas": [
+    "BE-66",
+    "BE-75"
+   ],
+   "descripcion": "BE-66 / BE-75: costos.csv registra toda llamada (también las fallidas) y ninguna pasa su tope",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: corrida por suscripción (sin costos.csv)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_67",
+   "reglas": [
+    "BE-67",
+    "BE-74",
+    "BE-96"
+   ],
+   "descripcion": "BE-67 / BE-74 / BE-96: referencias del canon íntegras (nodes y openings apuntan a walls que existen)",
+   "estado": "PASS",
+   "evidencia": [
+    "referencias íntegras"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_68",
+   "reglas": [
+    "BE-68",
+    "BE-86"
+   ],
+   "descripcion": "BE-68 / BE-86: cada wall con evidencia por programa: estado #0 en altura / largo y HOJA en length_source",
+   "estado": "PASS",
+   "evidencia": [
+    "evidencia con estado y hoja"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_69",
+   "reglas": [
+    "BE-69"
+   ],
+   "descripcion": "BE-69: el renglón de Type X no suma caras regular / MR (renglón = board + uso)",
+   "estado": "PASS",
+   "evidencia": [
+    "Type X sin regular / MR"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_70",
+   "reglas": [
+    "BE-70"
+   ],
+   "descripcion": "BE-70: el RCP imprime cielos / soffits de gypsum -> el canon los trae",
+   "estado": "PASS",
+   "evidencia": [
+    "cielos en el canon (['A200', 'A700', 'D100'])"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_71",
+   "reglas": [
+    "BE-71"
+   ],
+   "descripcion": "BE-71: la resolución y la cobertura quedaron escritas (resolucion.md + matriz de cobertura)",
+   "estado": "PASS",
+   "evidencia": [
+    "resolución y cobertura escritas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_73",
+   "reglas": [
+    "BE-73"
+   ],
+   "descripcion": "BE-73: toda fila del Partition Takeoff con Wall # tiene su type (un return va en el type de su wall)",
+   "estado": "PASS",
+   "evidencia": [
+    "filas con type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_76",
+   "reglas": [
+    "BE-76"
+   ],
+   "descripcion": "BE-76: decisión general por atributo aplicada a TODAS las caras (ninguna cara queda con el board viejo)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin decisión general de board en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_77",
+   "reglas": [
+    "BE-77"
+   ],
+   "descripcion": "BE-77: la comparación A/B detecta diferencias de atributos (board por cara, altura) y las manda a la resolución",
+   "estado": "PASS",
+   "evidencia": [
+    "diferencias de atributos listadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_78",
+   "reglas": [
+    "BE-78"
+   ],
+   "descripcion": "BE-78: ninguna altura placeholder sin hoja de sección / elevación citada (completitud.alturas_placeholder)",
+   "estado": "PASS",
+   "evidencia": [
+    "alturas con hoja impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_79",
+   "reglas": [
+    "BE-79"
+   ],
+   "descripcion": "BE-79: ninguna cara a medias (board sin layers / side / room)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras completas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_80",
+   "reglas": [
+    "BE-80"
+   ],
+   "descripcion": "BE-80: un 'none' de una lectura contradicho por la otra (column wraps, misc) queda en la comparación",
+   "estado": "PASS",
+   "evidencia": [
+    "nones contradichos listados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_81",
+   "reglas": [
+    "BE-81"
+   ],
+   "descripcion": "BE-81: partition_types / schedule con dato obligatorio (fuente) y todo type usado en walls está en el schedule",
+   "estado": "PASS",
+   "evidencia": [
+    "schedule completo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_82",
+   "reglas": [
+    "BE-82",
+    "BE-CH02"
+   ],
+   "descripcion": "BE-82 / BE-CH02: sin doble conteo entre hojas / plantas ampliadas (mismo type, mismo cuarto, mismo tramo)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin dobles conteos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_83",
+   "reglas": [
+    "BE-83",
+    "BE-93",
+    "R80f.36"
+   ],
+   "descripcion": "BE-83 / BE-93: ninguna cara (W.R. incluida) sube a deck en un cuarto con cielo sin fuente 'full height / to deck' (completitud.caras_sobre_ceiling)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras topadas al cielo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_84",
+   "reglas": [
+    "BE-84"
+   ],
+   "descripcion": "BE-84: con column wraps / soffits / esquinas exteriores hay corner bead (trim) cargado",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin column wraps ni soffits"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_85",
+   "reglas": [
+    "BE-85"
+   ],
+   "descripcion": "BE-85: ningún accesorios_none / *_none_reason contradice un ítem cargado",
+   "estado": "PASS",
+   "evidencia": [
+    "nones sin contradicción"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_88",
+   "reglas": [
+    "BE-88"
+   ],
+   "descripcion": "BE-88: Pending Items sin datos fuera de las 3 columnas fijas (las opciones van en 'Delta of each alternative')",
+   "estado": "PASS",
+   "evidencia": [
+    "Pending Items en 3 columnas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_89",
+   "reglas": [
+    "BE-89",
+    "R80f.36"
+   ],
+   "descripcion": "BE-89: nodes derivados: no más de 60 % 'free' (faltan L / T)",
+   "estado": "PASS",
+   "evidencia": [
+    "45% free"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_90",
+   "reglas": [
+    "BE-90"
+   ],
+   "descripcion": "BE-90: con DOOR SCHEDULE en el set, el canon declara openings (jambs, header, cripples)",
+   "estado": "PASS",
+   "evidencia": [
+    "openings declarados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_91",
+   "reglas": [
+    "BE-91"
+   ],
+   "descripcion": "BE-91: el claude -p del runner no hereda ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: corrida por suscripción (sin claude -p)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_92",
+   "reglas": [
+    "BE-92"
+   ],
+   "descripcion": "BE-92: ninguna decisión del estimador queda sin objeto (apunta a un ítem que la lectura no trae)",
+   "estado": "PASS",
+   "evidencia": [
+    "decisiones con objeto"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_95",
+   "reglas": [
+    "BE-95"
+   ],
+   "descripcion": "BE-95: figura curva medida por arco (no cuerdas / piezas sueltas)",
+   "estado": "PASS",
+   "evidencia": [
+    "curvos por arco"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_97",
+   "reglas": [
+    "BE-97"
+   ],
+   "descripcion": "BE-97: dos caras del mismo cuarto con alturas distintas van con su side (no se juntan en un renglón)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras con side"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_98",
+   "reglas": [
+    "BE-98"
+   ],
+   "descripcion": "BE-98: una exclusión general por type (existentes) se aplica: ningún wall de ese type queda con board / framing",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin exclusión general por type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_102",
+   "reglas": [
+    "BE-102",
+    "R80f.36"
+   ],
+   "descripcion": "BE-102: el Excel solo cita hojas que existen en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "hojas citadas existen"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_103",
+   "reglas": [
+    "BE-103"
+   ],
+   "descripcion": "BE-103: todo wall con LF tiene geometría (band) para su markup; markups = walls",
+   "estado": "PASS",
+   "evidencia": [
+    "walls con geometría"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_104",
+   "reglas": [
+    "BE-104"
+   ],
+   "descripcion": "BE-104: type que imprime dos sistemas (furring + studs) carga los dos",
+   "estado": "PASS",
+   "evidencia": [
+    "sistemas dobles cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_105",
+   "reglas": [
+    "BE-105"
+   ],
+   "descripcion": "BE-105: ningún producto impreso queda solo en RFI con el default de la tool",
+   "estado": "PASS",
+   "evidencia": [
+    "lo impreso cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_106",
+   "reglas": [
+    "BE-106"
+   ],
+   "descripcion": "BE-106: sin 'Estimator criterion / Handoff - Approved' de otro proyecto sin cita",
+   "estado": "PASS",
+   "evidencia": [
+    "sin criterios heredados sin cita"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_107",
+   "reglas": [
+    "BE-107"
+   ],
+   "descripcion": "BE-107: con la orden U-053 el canon declara fasteners_excluded y todo fastener queda en 0",
+   "estado": "PASS",
+   "evidencia": [
+    "tornillería EXCLUDED"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_143",
+   "reglas": [
+    "U-143"
+   ],
+   "descripcion": "U-143 (usuario 5-nov, HFT RFI-02): en demolición solo se marcan los SF de lo que se demuele; los materiales no importan (van a la basura): renglón de demo en otra unidad que SF, con desglose por capa / cara / material, o un RFI sobre capas o composición de la demo = FAIL; canon: demo_geom con layers > 1 (LF x H x 2 layers) = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "demolición solo en SF del elemento, sin capas ni RFI de composición"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_139",
+   "reglas": [
+    "R-ALC-01",
+    "U-139"
+   ],
+   "descripcion": "U-139 (usuario 5-nov, O'Reilly 'B Excluir wood'): wood (FRT 2X blocking, plywood, nailers) NUNCA se carga aunque una decisión vieja lo haya cargado: toda fila de wood del Material Summary con NET > 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún wood con cantidad en el Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_112",
+   "reglas": [
+    "BE-112"
+   ],
+   "descripcion": "BE-112: framing colgado de la estructura con deep-leg / slip y control joints a ≤ 30 ft (respuestas O'Reilly)",
+   "estado": "PASS",
+   "evidencia": [
+    "deep-leg en colgados y control joints"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF02",
+   "reglas": [
+    "BE-CF02",
+    "U-079"
+   ],
+   "descripcion": "BE-CF02: types con decimal del schedule (W4.1) tienen walls o razón none; inventario_tags acepta decimales",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin types con decimal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF03",
+   "reglas": [
+    "BE-CF03",
+    "U-079"
+   ],
+   "descripcion": "BE-CF03: caras con 1/2\" gyp regular salen en su propio renglón 1/2\"",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin board 1/2\" regular"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF04",
+   "reglas": [
+    "BE-CF04",
+    "U-079"
+   ],
+   "descripcion": "BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin walls de madera en walls[]"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF05",
+   "reglas": [
+    "BE-CF05",
+    "U-079"
+   ],
+   "descripcion": "BE-CF05: toda hoja del set con número de hoja leído (no 'pN') o marcada vectorizada",
+   "estado": "PASS",
+   "evidencia": [
+    "37 / 37 hojas con número"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF07",
+   "reglas": [
+    "BE-CF07"
+   ],
+   "descripcion": "BE-CF07: el rótulo del renglón = el tamaño impreso de su fuente (misc_items)",
+   "estado": "PASS",
+   "evidencia": [
+    "rótulos = tamaño impreso"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF09",
+   "reglas": [
+    "BE-CF09",
+    "BE-CF12"
+   ],
+   "descripcion": "BE-CF09 / BE-CF12: bracing solo donde un detalle lo dibuja (nunca C.R. por defecto en furring); markups con Subject = type",
+   "estado": "PASS",
+   "evidencia": [
+    "bracing con detalle; Subjects por type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF10",
+   "reglas": [
+    "BE-CF10",
+    "BE-VS-09"
+   ],
+   "descripcion": "BE-CF10 / BE-VS-09: si el set trae specs, cada renglón con cantidad cita su sección / párrafo de spec o 'no spec section'",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: el set no trae specs del trade"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF11",
+   "reglas": [
+    "BE-CF11"
+   ],
+   "descripcion": "BE-CF11: un detalle 'wood OR metal' se carga con la opción metálica (no RFI)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin RFI de opción wood / metal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF13",
+   "reglas": [
+    "BE-CF13",
+    "U-119"
+   ],
+   "descripcion": "BE-CF13: markups con Page Label = número de hoja e idioma inglés",
+   "estado": "PASS",
+   "evidencia": [
+    "markups en inglés con número de hoja"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CH03",
+   "reglas": [
+    "BE-CH03"
+   ],
+   "descripcion": "BE-CH03: la escala de cada hoja = la del rótulo SCALE impreso en ESA hoja",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin escalas por hoja en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF02",
+   "reglas": [
+    "BE-HF02"
+   ],
+   "descripcion": "BE-HF02: ningún Review Item con un elemento IMPRESO en cantidad 0",
+   "estado": "PASS",
+   "evidencia": [
+    "nada impreso en 0"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF03",
+   "reglas": [
+    "BE-HF03"
+   ],
+   "descripcion": "BE-HF03: el top track de bulkhead / soffit va en estándar o slip, nunca en el renglón de heads",
+   "estado": "PASS",
+   "evidencia": [
+    "top track en sus familias"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF04",
+   "reglas": [
+    "BE-HF04"
+   ],
+   "descripcion": "BE-HF04: bracing solo en walls más altos que la altura mínima impresa",
+   "estado": "PASS",
+   "evidencia": [
+    "bracing según la condición impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF05",
+   "reglas": [
+    "BE-HF05",
+    "U-119",
+    "U-120"
+   ],
+   "descripcion": "BE-HF05: una fila por Wall ID (sin 'A-14+A-12') y 0 textos en español en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "una fila por Wall ID; inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_01",
+   "reglas": [
+    "BE-VS-01"
+   ],
+   "descripcion": "BE-VS-01: todo RFI de altura de estructura barrió las hojas que imprimen B.O. DECK / LOWEST POINT (incl. demo)",
+   "estado": "PASS",
+   "evidencia": [
+    "RFI de altura con barrido completo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_02",
+   "reglas": [
+    "BE-VS-02"
+   ],
+   "descripcion": "BE-VS-02: spec 'fire resistant board THROUGHOUT' -> cielos de gypsum en Type X",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: la spec no pide Type X en todo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_04",
+   "reglas": [
+    "BE-VS-04",
+    "BE-VS-05"
+   ],
+   "descripcion": "BE-VS-04 / BE-VS-05: ningún producto en dos renglones (sin doble conteo; Σ renglones = familia)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin productos duplicados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_06",
+   "reglas": [
+    "BE-VS-06"
+   ],
+   "descripcion": "BE-VS-06: el producto del renglón = el impreso en su detalle (backing track / plate no se compra como stud)",
+   "estado": "PASS",
+   "evidencia": [
+    "productos impresos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_07",
+   "reglas": [
+    "BE-VS-07"
+   ],
+   "descripcion": "BE-VS-07: bridging solo donde no hay board en las dos caras (si la nota lo excluye)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin nota de bridging que excluya walls con board en las dos caras"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_08",
+   "reglas": [
+    "BE-VS-08"
+   ],
+   "descripcion": "BE-VS-08: demo con altura N/HOJA, cruce demo vs floor plan nuevo y markup DEMO por elemento",
+   "estado": "PASS",
+   "evidencia": [
+    "6 elementos de demo completos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_10",
+   "reglas": [
+    "BE-VS-10"
+   ],
+   "descripcion": "BE-VS-10: ningún cierre 'not carried … not drawn' (lo no dibujado se busca y se carga, R-ALC-11)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin cierres por 'no dibujado'"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_13",
+   "reglas": [
+    "BE-CF22",
+    "BE-VS-13"
+   ],
+   "descripcion": "BE-VS-13: SF de cada markup = Board (SF) de su fila del Excel (no LF x H)",
+   "estado": "PASS",
+   "evidencia": [
+    "SF de markups = Excel"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_14",
+   "reglas": [
+    "BE-VS-14"
+   ],
+   "descripcion": "BE-VS-14: un RFI abierto no pregunta por una nota que el set imprime textual (se carga)",
+   "estado": "PASS",
+   "evidencia": [
+    "notas impresas cargadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF24",
+   "reglas": [
+    "BE-CF24"
+   ],
+   "descripcion": "BE-CF24 (CFA rev9, #0): la altura escrita en la Source de un renglón board-only ('| height: ... = N ft') es la altura CARGADA; un texto de altura viejo (otra fuente / otro número) en la Source = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "altura de la Source = altura cargada"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_06",
+   "reglas": [
+    "BE-CF24",
+    "R-ALC-06"
+   ],
+   "descripcion": "R-ALC-06: todo markup de DEMOLICIÓN (Subject DEMO) va en una hoja de demolition plan (título con DEMOLITION)",
+   "estado": "PASS",
+   "evidencia": [
+    "6 markups DEMO en demolition plans"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF25",
+   "reglas": [
+    "BE-CF25"
+   ],
+   "descripcion": "BE-CF25 (CFA rev10, usuario 5-nov 'no están impresos, tienes que buscarlo hasta encontrarlo'): un RFI ABIERTO 'not printed' solo vale con la búsqueda completa: barrido.hojas = ALL, >= 12 términos (con sinónimos), los sets de los dos GC comparados (barrido.sets >= 2 o barrido.un_solo_gc con motivo), la medida vectorial a la escala impresa intentada (barrido.medida_vectorial) y >= 3 lugares revisados con imagen (barrido.lugares [{sheet, what, img}])",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI 'not printed' con búsqueda completa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF26",
+   "reglas": [
+    "BE-CF26"
+   ],
+   "descripcion": "BE-CF26 (CFA rev10): un RFI RESUELTO / CERRADO cuyo valor final está en resolved.answer ('= N SF|LF') debe hablar desde ese valor: la opción A no puede decir 'M SF loaded' con M != N ni presentar N como alternativa con delta ('N SF ...: -x')",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI resuelto habla desde el valor cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_15",
+   "reglas": [
+    "BE-VS-15"
+   ],
+   "descripcion": "BE-VS-15: toda hoja con renglones (walls, cielos por rcp_sheet, demo) tiene página de markups",
+   "estado": "PASS",
+   "evidencia": [
+    "1 hojas con markups; 6 elementos de demo con su markup DEMO"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_CALLOUTS",
+   "reglas": [
+    "BE-124",
+    "BE-135",
+    "BE-139",
+    "BE-CF22",
+    "CC-R10",
+    "U-113",
+    "U-115",
+    "U-137"
+   ],
+   "descripcion": "U-113 / BE-124 CE_CALLOUTS: toda burbuja N/HOJA de las hojas de nuestro trade (y de cada detalle que la cadena alcanza) está citada como fuente en el Excel / canon o declarada fuera de alcance con motivo; la cadena se sigue hasta el último detalle; un detalle / hoja citado que no existe en el set se reporta; U-137 / BE-139: las burbujas de DOS líneas (número arriba / hoja abajo) del detector palabras_fitz.py (burbujas) entran a la cadena, 0 burbujas con hojas de detalles en el set = FAIL (PASS en vacío prohibido) y todo círculo con divisoria sin leer se verifica a ojo",
+   "estado": "PASS",
+   "evidencia": [
+    "10 burbujas citadas + declaradas (32 burbujas de dos líneas), cadenas seguidas por 15 hojas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_114",
+   "reglas": [
+    "BE-131",
+    "BE-136",
+    "U-114"
+   ],
+   "descripcion": "U-114 (día 1, #0 HONESTIDAD DIMENSIONAL): cada número del canon lleva estado: [CONFIRMED] = cota impresa citando HOJA · [DERIVED] = con su operación visible · [PENDING] = no acotado + RFI; nada escalado / estimado a ojo sin PENDING + RFI; los renglones del Partition Takeoff llevan su estado",
+   "estado": "PASS",
+   "evidencia": [
+    "81 números con estado, hoja u operación"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_115",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-115"
+   ],
+   "descripcion": "U-115 (día 1, DETALLES): toda partida cita N/HOJA: cada renglón de wall del Partition Takeoff con su detalle N/HOJA (6/A-410) y cada renglón con cantidad del Material Summary con N/HOJA o sección de spec / código (la cadena de burbujas la sigue CE_CALLOUTS)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda partida cita N/HOJA"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_116",
+   "reglas": [
+    "BE-131",
+    "BE-CF23",
+    "R80f.38",
+    "U-116"
+   ],
+   "descripcion": "U-116 (día 1, NO PREGUNTAR / NO ELEGIR EN SILENCIO): todo supuesto / default / 'not printed' del Excel o del canon remite a su RFI (con delta de cada alternativa), a un precedente escrito (R80e.34 / R-ALC / U-NNN) o al código citado; ningún supuesto queda sin RFI",
+   "estado": "PASS",
+   "evidencia": [
+    "todo supuesto con su RFI / precedente / código"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_117",
+   "reglas": [
+    "BE-131",
+    "BE-CF21",
+    "R80f.38",
+    "U-117"
+   ],
+   "descripcion": "U-117 (día 1, BARRIDO): cada tag recorrido en TODO el plano antes de cerrarlo: lista numerada por programa (inventario_tags) con imagen circulada y reabierta (png_verificado) de cada ubicación, y el conteo por type del canon (tag_ids) = conteo del inventario",
+   "estado": "PASS",
+   "evidencia": [
+    "18 ubicaciones numeradas, circuladas, verificadas y contadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_118",
+   "reglas": [
+    "BE-131",
+    "BE-136",
+    "U-118"
+   ],
+   "descripcion": "U-118 (día 1, EVIDENCIA VISUAL): imagen de todo lo que se afirma, reabierta antes de entregar: cada wall con imagen de largo y de altura que existe, no está vacía y trae la marca circulada; cada RFI abierto y cada Review Item con su imagen circulada",
+   "estado": "PASS",
+   "evidencia": [
+    "toda afirmación con imagen circulada"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_119",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-119"
+   ],
+   "descripcion": "U-119 (día 1, IDIOMA): el entregable va íntegro en inglés: Excel (todas las celdas visibles), README_REVIEW.md y markups sin español (PARA_REVISAR_EN_LA_MANANA.md y SEGUIMIENTO.md son las notas en español para el usuario)",
+   "estado": "PASS",
+   "evidencia": [
+    "entregable en inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_120",
+   "reglas": [
+    "BE-131",
+    "BE-CF21",
+    "R80f.37",
+    "U-120"
+   ],
+   "descripcion": "U-120 (día 1, EJES): nunca dos ejes / fachadas / walls en un número: ningún Wall # ni id del canon unido ('A-14+A-12', 'W1 & W2'), ningún wall con dos fachadas, ninguna polilínea de markup que dobla de eje (giro > 60°)",
+   "estado": "PASS",
+   "evidencia": [
+    "un eje / fachada por número"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_121",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-121"
+   ],
+   "descripcion": "U-121 (día 1, FORMATO de markups): todo markup de wall / demo (PolyLine) con Subject, Page Label = número de hoja, /Measure (Length), /Depth = altura (> 0) y por lo tanto Wall Area = Length x Depth en Bluebeam",
+   "estado": "PASS",
+   "evidencia": [
+    "25 markups con Subject, Page Label, Length, Depth y Wall Area"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_125",
+   "reglas": [
+    "BE-131",
+    "U-125"
+   ],
+   "descripcion": "U-125 (día 1): términos del trade siempre en inglés, nunca traducidos ('tablaroca', 'panel de yeso', 'poste metálico', 'canal', 'riel', 'montante'…) en Excel, README, PARA_REVISAR, SEGUIMIENTO y markups",
+   "estado": "PASS",
+   "evidencia": [
+    "términos del trade en inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BOTH_SIDES",
+   "reglas": [
+    "BE-138",
+    "U-127"
+   ],
+   "descripcion": "U-127 / BE-138 (BOTH SIDES): cada wall de un type cuyo schedule / sección imprime board en las dos caras lleva board en sus DOS caras, con las capas por cara que imprime el type (lectura independiente fichas.json, BE-122); cara o capa faltante = FAIL; una cara sin board solo con board_none_reason que cite N/HOJA = AMBER",
+   "estado": "PASS",
+   "evidencia": [
+    "19 walls: caras y capas = schedule"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CIFRAS_TEXTO",
+   "reglas": [
+    "BE-141",
+    "U-138"
+   ],
+   "descripcion": "BE-141 (Chuze FINAL7 auditoría U-138): toda cifra de material escrita en el Scope Checklist / Inputs / README = su renglón del Material Summary (o la suma de los renglones EX-) del Excel entregado",
+   "estado": "PASS",
+   "evidencia": [
+    "cifras del Scope Checklist / Inputs / README = Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SCHEDULES_MARCADOS",
+   "reglas": [
+    "U-111",
+    "U-142"
+   ],
+   "descripcion": "U-142: todos los schedules del trade revisados desde una lectura independiente; cada type / renglón marcado en Planos marcados/SCHEDULES_REVISADOS.pdf y en la lista SCHEDULES_MATERIALES; cada material en el Material Summary o fuera de alcance con motivo; 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "11 schedules, 73 types / renglones marcados, 145 materiales cruzados con el Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SCHEDULES_REVISADOS",
+   "reglas": [
+    "U-142"
+   ],
+   "descripcion": "U-142: todos los schedules del trade revisados: schedules_materiales.json con cada fila -> materiales y estado (en el take-off / fuera de alcance con motivo / no usada con motivo), y cada fila marcada (círculo + palomita + número) en Planos marcados/SCHEDULES_REVISADOS.pdf; falta una o 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "11 schedules del trade, 73 filas revisadas, materiales listados y marcadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DETALLES_CIRCULADOS",
+   "reglas": [
+    "U-141"
+   ],
+   "descripcion": "U-141: cada burbuja de la cadena (detector + verificadas a ojo) circulada y numerada en su hoja de origen y en su vista destino en Planos marcados/DETALLES_REVISADOS.pdf; falta una o 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "49 burbujas circuladas en origen y destino en 16 hojas; por hoja de origen: A100 2, A500 14, A600 8, A101 4, A102 13, A103 1, A402 3, A501 3, A700 1"
+   ],
+   "plausibilidad": "OK"
+  }
+ ],
+ "archivos": {
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/DEMO_CRUCE.md": "7d6e8049a6a5f3922c1a3c84f0b47358aeddf6cdb9c43ba116e9b355a26ec759",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/PROCESO_CORRIDA.md": "a5d20e2e65c40502a900ed8899486bcb061904995d8317e51fc1eb858f301556",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/TOOL_LIMITS_CALC.md": "13c89a53c6cfde2c0b867c498c193e7417aa6dff37216dd51afe349acd5490c8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/VERIFICACION_MARKUPS.md": "79a7a4daeda8f89eebeaefbff0815467b47405d362f4bb687d6e091a919bc9ec",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/BACKCHECK_INFORME.md": "23f923d218cedeb19635f637e82dfd126a941c7c27971e3616cbdab3e27dc1f5",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_01_tag_sweep_A100.png": "96bf0eb7bffa9588dbd3b7830a1db5ddbfcf91c02a35c8b088bfc8c6644a92cd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_02_remeasure_A100.png": "d251a527e134266391144281178e347d0f1d131e51b6812d822c4560600e1642",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_03_heights_A200.png": "4bb9aa4af4658203a9c1cb2f008d993e3e2887676408dde6453480da35267532",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_03b_deck_A100.png": "7b232e78ca5bddca7c56474d2844401e27fa1b575e905e32cdc20d03bb062a1b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_04_types_A500.png": "24009e0e590ab50a9ab87e2ecb100698199751d82f8793b5f615991a7cd2fa25",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_04b_A600.png": "5e758070897d3073354cb3ef2d714ed2edb76472e43c229c3942846b628bad16",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_05_scope_A501.png": "925aac24c89e95e954f61736dc64369198d88216d959fcfd5344fabecda0dde7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_05b_controljoint_A100.png": "5a798552db90de0be17eaf5eb1bbf98348d3b03839a9c0a59baa3153fb838321",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_06_arith_A100.png": "47b94a3560035d216eea3a2e1974a39887afd4e433e35e030fedc7ee3d9f32cf",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_06b_openings_A100.png": "aace18f35c2654e7d1390c93dfcdf38e9fffa687d9b59b6f80b9864beee905d1",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_08_markups_A100.png": "5f5c0e470127a4ce15e093604b3e58d45ef5e0c7505df7994ece00f6990b04f2",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/backcheck/bc_09_e311_brace.png": "4493abfaa6afa5bbcc512ee8a9ce269d3740f2ea08323443f93c8bfb5e1e68b4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0001_CO2_G003_p4.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0002_CO2_D100_p5.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0003_CO2_D101_p6.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0004_A3_A100_p7.png": "2f977568668ac72e678896a08d0ed0c69fb9b5a74a11ed9b8914a9cf96aca456",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0005_C3_A100_p7.png": "8b9e07fba3823ee11364b918115698c244349aa27b72e32aa60bfaaf263e811d",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0006_E3_A100_p7.png": "4e7c59a90949a057bf87b01466f38911e695ee4f38a36c8b4e57262684fbaccd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0007_A3_A100_p7.png": "ee5b9039f20f0ab3f0c34f7cb1d09364ca3b5ac6e676e0ee3743dfc54c347afb",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0008_A3_A100_p7.png": "15a3666d6ed7b755e07d0b2e4341b9803c4db08d40bbf3f10cea718fc664626c",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0009_A3_A100_p7.png": "ed3fb462b0325ab4e960a417953481b2b6e8fa6bdc830f97963fc83e680dc1bb",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0010_C3_A100_p7.png": "8e875bb814f5133ae018058b413e8e38cfbc950f1d2f0e62ac37e9fcb8a41da1",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0011_E3_A100_p7.png": "5b3b2a58a55cdd214d703077b1533ff404438f4ffd62df20e8aa932e4cb20cf4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0012_E3_A100_p7.png": "44942f4a39a74bb4322e64fda4172ae906acc921a01003f5b547f9ebeafff09e",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0013_E3_A100_p7.png": "0f43c41ca9229a9a794c0ed0de9956e0466b8a360b88980a65911c9386b427d0",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0014_E3_A100_p7.png": "12b0bb3242d137d919bcfb29ad59085cb2e12256169c37bee85cee81eee59a24",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0015_E3_A100_p7.png": "1c05139f37c5787394acd67912d0f8fffe561fe24584f0a8cff562944971b634",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0016_E3_A100_p7.png": "f1d3cd3bff6959e63b9cab7cfd59df2cdadbddb1cc54b34d2dde36d4a8b76f4b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0017_E3_A100_p7.png": "a2b05dd7bc04ebafef4df757c0197b07e4b854fe94a04646121a87f1dbb67c86",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0018_E3_A100_p7.png": "b0e9c0ef2cb73b1aef724a15a9733d2eace3b5b9644cfa9ecbd7cba7d5b6f28b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0019_E3_A100_p7.png": "d1cac8cbf06a2ebb09c6e9ffe76ad27b30ccad4fab8394b4bb9bd2b6901f830a",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0020_E3_A100_p7.png": "fba66760e1e014422a2d404422132c2f6763407b77f8268e93d88e2367809d6b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0021_CO2_A100_p7.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0022_CO2_A101_p8.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0023_CO2_A102_p9.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0024_CO2_A103_p10.png": "75201fabeb6b33cc8587d57c29db2244c461b8bb801165b6ed4e9c20cdf0c451",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0025_CO2_A200_p12.png": "bd7a581e60c31d00459a16b9865b7a806c8e80ececa8e569a41da2f0d7bb8845",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0026_CO2_M101_p25.png": "3979ad7e6418e8cb18cc6797341bd1bbd6757b4dedb1205b66ad1280e2c00de4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0027_TC2_E101_p29.png": "c390027017aa6eb14524532a70f00b2527a6732611403b920753294573492fe6",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0028_TC1_E101_p29.png": "07853f6e1c659e8966d8e92531f25dc67c293f9a34c9e8d5327d466ac4071503",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0029_CO2_E101_p29.png": "92814f9791af4ab0418643ef57b18169b64ec153ba189b6c479ddfe033fe9853",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0030_TC2_E111_p30.png": "c61469e2b414f4b03d262d8de7b5af34ead33cf65a93d1b4305a960ad60af3b4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0031_TC1_E111_p30.png": "3681f27aa4aefb244c00635e66e6efb28869ee35696c83c401382e65fd2cc706",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0032_CO2_E111_p30.png": "a3e85fde62eea2a3f6508d35edd0bb11ad7b7b77e384ee777434d9128d4df66a",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0033_CO2_P101_p35.png": "3dcfb6b3386079a7ca4c354efc19dbd786b70519229698793f596afb085ef0c4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0034_TC2_FA101_p37.png": "80d54070e76b6f22746b2974ac6f311e2a618f4c65213c67cd020d420ba6dea3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0035_TC1_FA101_p37.png": "99dceced6a4c7de18125d780b0d4533e87e5377f26c493a1283015832df44e4e",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PC0036_CO2_FA101_p37.png": "9fb88fd134bbc55dc8f29a1fa4a0276b37a6205627ead97eba3f745d86042fdb",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/PT0001_D_A100_p7.png": "20cd18b66823ad2e35fd68b0aed3a97e0eb1794f8c2195c3ae7669063887db08",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/inventario.md": "99ae2d688d52f9fcbeb6298a396315595983179ce2d4e699273a50fd83419266",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/mapa_PC_a_PT.json": "388bc337260d08afd96fb38cfc3be3a65d1390af4b580758c150a691471e683b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/A100_leyenda_A500.png": "63f14b5c7d1adfa94f5b7f94cb178f3a85c548d42c94b848ae465e5f1edc15c3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/A402_destino_1.png": "0b31b164016ad51e1b8a9be0daeb14e765992189f67c6d76c89a37642747284b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/A500_destino_1.png": "a07beb46a801baa6a7ad51013867d57f1e8fbcac927c65b8409bfd71a12f4c64",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/CADENA.md": "a74286d3db061f6f3aeda1f24650ea63dcc02d527acea11888d07de01e94b285",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G002_destino_C1_no_impreso.png": "e6facef42799c345ba48ee360f536973d9b069284bfef6ee66d0d87f56570a42",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/burbujas_A.png": "dceedf7c1cb479abb2b9f8aa89d44015ddafd468c57032e683550264476f1899",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/burbujas_B.png": "e787cabb544e73600d9241a4a7e870f0aa4f27cbc45a416c499fb60b527c7fd3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/burbujas_verificadas.json": "64ad77eb86356a7b092f2e6ad2cc3316809c10c0bc7884b9e64d0f29475442f7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/callouts_no_aplican.json": "44c056b3a78ef358a5a719cdc57d05e742c45e221a5359cfb9f392d5b6829dc4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/destinos.png": "a1e359e3333e002b006d9bbcb77f991b4cd9b5251fbebeeda34aef8b568e3cfe",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/indep_anillos.png": "1f814f9c225cc7b4e8bd3492938836ce4f1f9027da06a39053663dc6cbe07169",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/no_burbujas.png": "72741584bc5fcb4b280ea01e159f9601d5c6c6cf4f79702d208056212dc609e0",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/comparacion_sets_Elite_vs_ElderJones.json": "224b63c0c4f57e4cf77d5507383bce3967e1c0d3d3e2ab24db8b302267c32d20",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/demo_check.png": "85c4ed3137e38a8a1c8326257f54e5e77c56d54211b90aa4ae9c303141af52b6",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rcp_check.png": "dd40bd59e41d43c5086e841f24549a9cf884e45685d95a2d2147529267cd64b4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion.md": "e6d285628c81514eec7c1812f2e8bdbe5b3231fb256908299660ccc3c3f7e377",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A100.png": "50026e6d97dd7259799fedaf5dbbacc112513a9ec21455fdc6dc3be91ef0a95d",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A200.png": "39cc2ace8703b4872dbc6d464c6b02d1f6070a77e1c27dbdae1b493694c131a8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A500.png": "0b268785c5e858b70b96f0e9b2116a95170176e00e73926af780085b258f4f4d",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_D100.png": "85cd686289dfda8095733d39d458fcb572b00f04bc7cac5fbb78192529214714",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_A100.png": "4372b2b35d4615466b9a012feefb6e71ce5f85892a60ef609a48cb93b5b35ea8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_A500.png": "978d3fface5f7d49f90da9ebc3acefeadef78709b3b4d106ae0ffff3d6e6b3d8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_D100.png": "3f9fd9ebe38ab046fae5bb7b40a401a67a46c362552addd5fecb510a0f375ccd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_A500a.png": "22502691e12e85933c5915f43849c614b52b7f19979abc68c71b9572664175b7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_A500b.png": "c0eb3a2e4a7e3b4e4671ba0f527477949762b6ba26eb759323ed894bce7caeb7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_A700.png": "b8e53135369200e9b582f107c0a1c48d4087913e11bc144eb62809755e711659",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_A101.png": "efa5c1bbb9e2bef25b04d66ad295a7ea54844f31caef28e98d5bea6572663885",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_A700.png": "b8e53135369200e9b582f107c0a1c48d4087913e11bc144eb62809755e711659",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_G001.png": "9402f1c89d4cf249dbacf5f104260cb233df77aadb096ae426f81048b683f5cd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_A100.png": "726fd160b32b1f98baa96f00e792a66a222f534318d48db3203c32d6f6e2bd34",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_A200.png": "f40c6c6032f507339a7811fa1131dbe1871cb106ebce938962d4e082fe3c1776",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_A400.png": "28c091229f5980588a70e4476f866b7805a33996c7a72f0967ae44c06faa8cf3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_A200.png": "8cbaff3d63ca928965a0971139c9731b34ce8196685f409018bf9068a83cb305",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_A402.png": "9e995ae4bd9a7b356b2b8cf215577a47fb4802ac52fad1d5820e4b7ffc5aa048",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_A501.png": "eedd80db12cbd527d161e07a07ec249b80642a8c246217a88305be7af49bcf11",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_A100.png": "a77ee216fde8b018cab9b07906641d179e63b3870d2a79f20abe670a1ad1b639",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_A600.png": "30bdc3c5ccf59630d1d1b64ced61ecd3b175b876e0a1e45dff39cdaa881b9956",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_D100.png": "9e071fd856beb1329cee10d1bfb7835502baa72cad1fe57aae8d63ef5b4bea48",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_A100.png": "a77ee216fde8b018cab9b07906641d179e63b3870d2a79f20abe670a1ad1b639",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_A504.png": "2e604ff3d4cffc5d33f0d72202673d9942adf5115a4be82c9137f30588a41f3f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_P501.png": "b8aab8d9dbe3695d6f77e7c1f960dd8d58001e9d55da0a527e33660b81649748",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-C1_D100.png": "9e071fd856beb1329cee10d1bfb7835502baa72cad1fe57aae8d63ef5b4bea48",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/revision.md": "0ad4a97e3b44a096209640f9b12461659276d44cf4fef0d8f75983d031528ff0",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A100.png": "50026e6d97dd7259799fedaf5dbbacc112513a9ec21455fdc6dc3be91ef0a95d",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A200.png": "39cc2ace8703b4872dbc6d464c6b02d1f6070a77e1c27dbdae1b493694c131a8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A500.png": "0b268785c5e858b70b96f0e9b2116a95170176e00e73926af780085b258f4f4d",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_D100.png": "85cd686289dfda8095733d39d458fcb572b00f04bc7cac5fbb78192529214714",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_A100.png": "4372b2b35d4615466b9a012feefb6e71ce5f85892a60ef609a48cb93b5b35ea8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_A500.png": "978d3fface5f7d49f90da9ebc3acefeadef78709b3b4d106ae0ffff3d6e6b3d8",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_D100.png": "3f9fd9ebe38ab046fae5bb7b40a401a67a46c362552addd5fecb510a0f375ccd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_A500a.png": "22502691e12e85933c5915f43849c614b52b7f19979abc68c71b9572664175b7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_A500b.png": "c0eb3a2e4a7e3b4e4671ba0f527477949762b6ba26eb759323ed894bce7caeb7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_A700.png": "b8e53135369200e9b582f107c0a1c48d4087913e11bc144eb62809755e711659",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_A101.png": "efa5c1bbb9e2bef25b04d66ad295a7ea54844f31caef28e98d5bea6572663885",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_A700.png": "b8e53135369200e9b582f107c0a1c48d4087913e11bc144eb62809755e711659",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_G001.png": "9402f1c89d4cf249dbacf5f104260cb233df77aadb096ae426f81048b683f5cd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_A100.png": "726fd160b32b1f98baa96f00e792a66a222f534318d48db3203c32d6f6e2bd34",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_A200.png": "f40c6c6032f507339a7811fa1131dbe1871cb106ebce938962d4e082fe3c1776",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_A400.png": "28c091229f5980588a70e4476f866b7805a33996c7a72f0967ae44c06faa8cf3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_A200.png": "8cbaff3d63ca928965a0971139c9731b34ce8196685f409018bf9068a83cb305",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_A402.png": "9e995ae4bd9a7b356b2b8cf215577a47fb4802ac52fad1d5820e4b7ffc5aa048",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_A501.png": "eedd80db12cbd527d161e07a07ec249b80642a8c246217a88305be7af49bcf11",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_A100.png": "a77ee216fde8b018cab9b07906641d179e63b3870d2a79f20abe670a1ad1b639",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_A600.png": "30bdc3c5ccf59630d1d1b64ced61ecd3b175b876e0a1e45dff39cdaa881b9956",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_D100.png": "9e071fd856beb1329cee10d1bfb7835502baa72cad1fe57aae8d63ef5b4bea48",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_A100.png": "a77ee216fde8b018cab9b07906641d179e63b3870d2a79f20abe670a1ad1b639",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_A504.png": "2e604ff3d4cffc5d33f0d72202673d9942adf5115a4be82c9137f30588a41f3f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_P501.png": "b8aab8d9dbe3695d6f77e7c1f960dd8d58001e9d55da0a527e33660b81649748",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-C1_D100.png": "9e071fd856beb1329cee10d1bfb7835502baa72cad1fe57aae8d63ef5b4bea48",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A3.png": "8af5c96ee870202fc2623d1a913af7b8cd505d2e69d7ddc57e6df9297af8cdb6",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/C3.png": "7d5f3356345f1a16ce3e0c06125f0f117ebeaa56a2d549bc0f67f8a13a005693",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/D.png": "dfd8d40b3f8478d6541a5164f1cf380f37c8d0461be02e7b8e6849d814829dec",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/E3.png": "fdef9d2f3baaf5a44ef3bebb390c0d3f665bb6332503e88cca3654668675a1e2",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/H.png": "95257cd936bade9ac5c2203239678ce87e4075b1bb00d065b5b807f5f7928c44",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/NOTAS.md": "4035447617ac51bc5aab86d7d8ca58a47f795fbdba12e98b5fcb38421a84dbd7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a101_full.png": "8ec7237697caf48d4a8ce07475bb1f2234372a8b4476663f8bd4013332e518a9",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a104_full.png": "11b2a094a79003855d03ae621d0c24595f65bbbdf0bd750a0d5a66408c5b7cb7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a200_full.png": "6951569cfb6d39a054e24b029da303cacef628c274af49d1e1615531dcb7d12b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a200_left.png": "5c62df2094f64517c2e7dd6cf72a329f0bc9dcc8a9caf1eaa01fa4d2036094b9",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a200_rr.png": "4b53780b9bbe56e527f168245744606284b55c9814948c9a273452c39ce32860",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a200_seal.png": "1b274cb4f1eae63ad4310e90df7df64f8b35b9f5a16dc98b2fb9ce328c4f0e52",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a200_soffit.png": "7f198bd940445a1f8ed0a17bfeedf138da00253dcb60fba18bc38c61af636076",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a400_full.png": "758379dc7ae63b77b51faef00e04d47397053b972c2492aa31ad2a14f6e136ea",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a402_full.png": "ee8cbaa666194f1f202670c819eb32dd97f1520b47b52c28c476ef3c51cd8c4c",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a500_labels.png": "4eebcd81aca9a430b6bb9475378b36ba88c98e7b5c318d3a382eefb703a6657f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a500_types.png": "4d5a3f3b9b1fd759b2f910b7053264ee5462e3fd261192657bf676547838e22c",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a501_full.png": "f1794c5db5ae23afb1738baca5b618dff000c30b51afc6c90c28d3df99cb14ab",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a504_full.png": "5861fdfac2b27c3fadf09ee0768c74c3ab03a11e5300e2f50e166ffedeaecec1",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a600_det.png": "a6d74076018b05e23a86f4e8b3a34eddad192e14f974c8a20457cbb0b0407ab9",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a600_notes.png": "fc19b09c860028e17783c1dd7d906aabbaa8f544fdc924361904cdd412c7d91c",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a600_sched.png": "1c3282f23358e4a6beadecbae9b0c66ab3f91b3d9983f30184c51fb5c38d7af0",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a600_schedL.png": "09432108f5f600c9b8a769ad55f35c82458428a50ffd4b0ab1d8d36e7ec09fcc",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a600_schedR.png": "9b7d4e321ae7330e218fda13d67a6d4e810d23f216e98a5ae43d3ae100763dc1",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a700_finL.png": "ec5d2232f5de383ed589b7187989582d4f983845c5180cd2a2dd4dac57c3275f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/a700_finR.png": "f4452d5caaacb434d8c9f1577bf3fb8d7404f76b2084192d32cf58125d38d8ee",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/d100_legend.png": "cbafa6be1e8d395e996e082c13ae574d05283cbf4a3526186dccf0fcf1503741",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/det2.png": "ba7959a5b7dd0dc41582cb0e4ee71eec30445d03ae582cbb73c299242b2ae393",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/det3.png": "f65d927a4d789ed047a91e5d3b628b5cdbb577423caec4a0e6721a0970631a47",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/det4.png": "5cfe7ebca3c8902a9a34f567e9c80b08e76bf774ada20a00132b7200a699d5fb",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/det56.png": "c54d647115ea3752391d9eec9dbb3c0d63e74af07c0b7da9cadf4531fdf4dfb9",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/fichas.json": "6792fc26197fd6381e2d073e600dcfa504cbf5cd5295ed0b907b68f36b08ec1e",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/fichas_lector_original.json": "7f0e77c9e812dede24a5c33a005a14b1a1a624de3e53a04e08ff3158c881e05a",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g000_full.png": "54f1a80c42474940b01a05a2116a64652115d4f59a949512bd92a7ba2b3dae22",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g000_index.png": "26fcf3f57387da8f41405529bebefde334dbdd093f1a952b22090f76ed2aecb0",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g000_info.png": "64053e29a5e93ab4b05d02a8302dc5d1809047584619393c55d5de04b497b3d7",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g001_a.png": "73cfc70327c6adbca6921706ad45214ced7da8f304f8bccd8d8d51cad5c19810",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g001_b.png": "5598f6f01b3430a0e5d9ed9246868574e3b1f5fb9f2d4ac3f23bfcd3b7269f4e",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/g003_code.png": "9a3f756014e39ffc7f549a12f2aa2d53b8138121566e74ff47234376857eba53",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "bc4fb62ab2edfe5f89aee156c642d4373a68e3c0f3ea741d3048ff281e930182",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "3a2d5e2e94dfa5f349adfe81d86ddf1e6a4a31f5fab5ed0da228b895cc56cd6f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "591a7f57a80ce7d37b0f9f723917b367cd3ec13b7945b46f8afc5a48752b193f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A100_marked_by_type_rev4.png": "8905c45149f5b6a0e2903135df9bd637099034bb8c18877084238afc89e9af21",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A100_type_A3.png": "3d0410d54aadc7452c904b9bc39ed10c54672a1b971b22f544b5fefac66a6985",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A100_type_C3.png": "5569ca67c5e3fbffe9ecfadb4666a79924a54538d6fb9985c3cf175f401487d9",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A100_type_D.png": "09e15811897dcd64b84b4e07e8b267e3ace00b9c26aadfbc697e59e26b2091c4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A100_type_E3.png": "78d81f4166b85bc8a88dcedc3d522bd0b490c52417e483534ec853c1267347e3",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A200_rcp_markups.png": "3002a7f6e9ea97d0d767bdb6c761b884774c07888d93b526fc9fc5a6be2767ff",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/Consumer_Cellular_Centennial_markups_rev4.pdf": "d0b041be9cec95494eac203817052fcf07335d2327ab3d9e7a190a803a07d497",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/D100_DEMO.png": "f23c2ca578fb19b7eae9c596c98dd674c30495e9c9aedd4cb8c2380ff6383ea1",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/D100_marked_by_type_rev4.png": "627f8af6cf5c1acef54cf4fd4646651e33c04791cf28a55c6ed4112bbd22bcc4",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "a6209711ef76c1b4a5f06a1a88676ddea9d3ffeed1c4b9a11c8eb8788e8d81b6",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "e9b7bfd6099795f93910ca05a596fde6cc91596ad69a9cd74bac0d4fe74d4a1b",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "13104d57a666330770646e3c98340b7f68c3bd597149989081564db56be6a4fd",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "d7c5179f8d1c9d24dd2c4fa3e3bbfd50512c319d06dfdad89ac89a466ae9046f",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SEGUIMIENTO.md": "596292f019f5b7ee2baaf20ea31b242e5b52aaacfe7b2cc20885ababe84d5403",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev4.xlsx": "1f5dbbccab09dfc5fbfb8e31736efc460e51ef2d31e2d3002dcbb7888cd2fefa",
+  "rev4 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/Consumer_Cellular_Centennial_Takeoff_FINAL_rev4.xlsx.sello.json": "ebd4be2a60f97820b59e22853056264ad5f7462ae16ab4162f9206d832b06721"
+ },
+ "drive": {
+  "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
+  "carpeta_proyecto": "Consumer Cellular - Centennial, CO (Elite Retail / Elder-Jones) 11-05-26",
+  "carpeta_proyecto_id": "104cW99h8ofb3NXPoC38jfc05Lj_RXZyJ"
+ },
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3)"
+}

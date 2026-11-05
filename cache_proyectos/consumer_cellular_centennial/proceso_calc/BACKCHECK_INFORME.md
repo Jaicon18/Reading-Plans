@@ -57,3 +57,16 @@ Within tolerance (no change needed): the restroom ceiling area is 60.49 SF in th
 Result rev2: 6/6 PASS on the changed rows; rev1 8/8 PASS stands for the unchanged rows.
 
 ## Addendum rev3 (5-nov): RFI-01 and RFI-04 closed by user decision (option A, as carried). Material Summary compared by program against rev2: 0 rows changed. Back-check results of rev1 (8/8) and rev2 (6/6) stand.
+
+## Addendum rev4 (5-nov): back-check of the rows that changed vs rev3 (Material Summary compared by program)
+
+| # | Item | Result | Independent recomputation |
+|---|---|---|---|
+| R4-1 | Edge blocking removed | PASS | faces 12'-5" (A200 11'-11" + 6", 1/A500); one 4'x12' piece + 5" strip whose joint is above the finished ceiling; no edge blocking printed (1/A500 - 6/A500, A104): 0 LF |
+| R4-2 | Kitchenette W.R. | PASS | A100 note 5 'WATER RESISTANT GYPSUM BOARD AT ALL WET LOCATIONS (... KITCHENETTE ...)'; A103 key 8 5'-2" x 12.417 ft = 64.16 SF moved X -> W.R. (X 4,358.06 - 64.16 = 4,293.90; W.R. 410.16 + 64.16 = 474.32) |
+| R4-3 | PVC trim | PASS | A700 B-3 OUTSIDE CORNER M360: 1 outside corner x 4'-0" = 4.0; division bars ROUNDUP(L/4)-1 on 7.667 / 6.25 / 1.522 / 1.5 / 7.011 / 7.8 = 4 x 4'-0" = 16.0; 118.16 + 20.0 = 138.16 LF |
+| R4-4 | Track gauge | PASS | 2/A500 'CONT 20 GA BOTTOM TRACK', 3/A500 / 4/A500 '20 GA. MIN. TRACK': all tracks 20 ga, LF unchanged |
+| R4-5 | Blocking products | PASS | strapping 77 + 37.5 + 19.5 + 11.33 = 145.33 (2/A104, 1/A104, 3/A104); track 8.0 (5/A402); stud blocking 36 + 6 = 42.0; 4/A104 'BACKING PLATE BY G.C.' EXCLUDED (-9.0) |
+| R4-6 | Residue row | PASS | 'Top / deflection track - other' 0.01 LF = rounding, removed |
+
+Result rev4: 6/6 PASS on the changed rows.

@@ -36,6 +36,21 @@ def fmt(o):
             f"(B) Code ({B.get('cita', 'n/a')}): {B.get('texto', '')} - delta {B.get('delta', '')} | (C) Other: {C or '____'}")
 
 
+# rev4 (U-138 audit #11): the Level 5 delta of RFI-04 uses the REAL board total of the Material Summary (all gypsum board
+# families of familias_out.json), not the gross wall faces; written back into the canon RFI text (docs read it)
+import re as _re
+_bt = round(sum(v for k, v in fo["familias"].items() if "gyp" in k.lower() and "EXTERIOR" not in k and "demolition" not in k.lower()), 2)
+for r in c["rfis"]:
+    if r["id"] == "RFI-04":
+        for o_ in (r.get("resolved") or {},):
+            if "answer" in o_:
+                o_["answer"] = _re.sub(r"skim coat on [\d,.]+ SF", f"skim coat on {_bt:,.2f} SF (total gypsum board, Material Summary)", o_["answer"])
+        ob = (r.get("opciones") or {}).get("B") or {}
+        if "delta" in ob:
+            ob["delta"] = _re.sub(r"skim coat on [\d,.]+ SF[^|]*", f"skim coat on {_bt:,.2f} SF of gypsum board if required", ob["delta"])
+        r["delta"] = " | ".join(f"({k}) {v.get('delta')}" for k, v in (r.get("opciones") or {}).items() if isinstance(v, dict))
+        if r.get("decision"):
+            r["decision"] = r["resolved"]["answer"]
 rfis, cierre = [], {}
 for r in c["rfis"]:
     if r["status"] != "open":
@@ -102,15 +117,15 @@ alc = [
  ("ALC-09", "NO APLICA", "No exterior gypsum / glass mat sheathing in the set: existing shell and storefront (A300, A301, D100 keynote 4); A100 general note 11 'or an equivalent waterproof sheathing material' refers to the water resistant board at wet areas (carried in the W.R. row)."),
  ("ALC-10", "NO APLICA", "EXCLUDED - wood (Div. 06): FRT plywood blocking at pendant lights (1/A501), 2X4 blocking between joists (6/A500), 3/4\" FRT plywood on the mop sink shelf (1/A504)."),
  ("ALC-11", "CUANTIFICADO", "C-1 gypsum board ceiling at the Unisex Restroom 8'-0\" (A200, A402), 5/8\" water resistant (A100 note 11)."),
- ("ALC-12", "CUANTIFICADO", "Restroom ceiling suspension: carrying channel, furring channel, hanger wire and perimeter track (ASTM C754; no detail bubbled, RFI-06)."),
+ ("ALC-12", "CUANTIFICADO", "Restroom C-1 ceiling: 2/A501 drywall grid suspension system (ICC ESR 1289) - main tee, cross tee @ 16\" o.c., 2\" x 2\" sheet metal angle perimeter, 12 ga hanger wire @ 4'-0\" o.c. (2/A501, A200; RFI-06 closed, U-140)."),
  ("ALC-13", "NO APLICA", "No new soffit / bulkhead: storefront soffit is existing to remain (A200 'SOFFIT EXIST' 11'-9\")."),
  ("ALC-14", "NO APLICA", "No canopy / marquee framing (A300 / A301)."),
  ("ALC-15", "NO APLICA", "No column furring / wrap printed (A100, D100 keynote 14 existing column); see Review Items."),
- ("ALC-16", "CUANTIFICADO", "Metal blocking: slat wall 2/A104, logo walls 1/A104, iPad backing plate 4/A104, kitchenette 3/A104, grab bars 5/A402, restroom accessories (A402 note 4), water heater (P501); wood blocking EXCLUDED."),
+ ("ALC-16", "CUANTIFICADO", "Metal blocking: 20 GA. metal strapping at the slat wall 2/A104, logo walls 1/A104 and kitchenette 3/A104; 20 GA track at the grab bars 5/A402; stud blocking at the restroom accessories (A402 note 4) and water heater (5/P501). iPad backing plate 4/A104 'BACKING PLATE BY G.C.' EXCLUDED (by G.C., estimator standing precedent); wood blocking EXCLUDED."),
  ("ALC-17", "NO APLICA", EXC + "framed openings for ducts / air devices; no access panel in gypsum surfaces (E701: no junction box access panels in drywall ceilings; M101 / P501 none)."),
- ("ALC-18", "CUANTIFICADO", "Metal corner bead at outside corners, the cased opening and the stub ends (no trim spec printed, RFI-04); no control joint printed (longest run 44.83 LF)."),
+ ("ALC-18", "CUANTIFICADO", "Metal corner bead at outside corners, the cased opening and the stub ends (no trim spec printed, RFI-04); control joints not printed: carried per ASTM C840 at runs over 30'-0\" (A3-03 44.83 LF, C3-01 35.54 LF), 49.66 LF (estimator standing precedent)."),
  ("ALC-19", "NO APLICA", "EXCLUDED in all projects (estimator standing order): acoustical sealant (2/A500) and sound attenuation; batt insulation of type D (1/A500) EXCLUDED."),
- ("ALC-20", "NO APLICA", "EXCLUDED - FRP B-3 (A700, A402 / A504 T.O. FRP 4'-0\") is a finish product, not metal framing / gypsum board; no cement board / tile backer in the set."),
+ ("ALC-20", "CUANTIFICADO", "FRP B-3 (A700) carried: restroom to T.O. FRP 4'-0\" (A402) and mop sink alcove (1/A504), 148.33 SF, with its PVC trim (A700 B-3 edge M370, inside corner M350, outside corner M360, division bars); G001 'FRP IN RESTROOMS AND MOP SINK AREA - GC'. No cement board / tile backer in the set."),
  ("ALC-21", "NO APLICA", "No shaft wall / area separation wall in the set (1/A500 types A#, C#, D, E#, H only; A100)."),
  ("ALC-22", "NO APLICA", "No new rated partition assembly: G003 (II-B, M, not sprinklered), A100 note 4 maintain the rating of the existing demising walls; G001 labeling of fire rated walls by G.C.; A503 UL D700 / D800 / D900 is a floor-ceiling penetration note for slab work; E112 'plenum rated' is lighting; G000 F.R. abbreviation only. Type X board as printed in every type (1/A500)."),
  ("ALC-23", "NO APLICA", "No ballistic, lead-lined or abuse-resistant panel in the set (1/A500, A700 finish schedule)."),
@@ -126,7 +141,7 @@ extra = [
  ("ACT ceilings and grid", "EXCLUDED - C-2 ACT lay-in ceilings and grid (A200, A700)."),
  ("Existing ceiling demolition", "EXCLUDED - D100 keynote 7 gypsum / ACT ceilings 'throughout': extent of each type not shown, excluded for lack of information (0 SF, estimator decision: standing rule for existing ceilings without type)."),
  ("Insulation", "EXCLUDED - batt insulation of type D (1/A500) and A100 note 7 insulation patching."),
- ("Paint and FRP", "EXCLUDED - paint PT-1..PT-4 and FRP B-3 (A700)."),
+ ("Paint", "EXCLUDED - paint PT-1..PT-4 (A700)."),
  ("Storefront, doors, frames, hardware", "EXCLUDED - existing storefront (A300), doors / HM knockdown frames / hardware (A600): other trades."),
  ("Millwork, slat wall, fixtures", "EXCLUDED - millwork and fixtures by the millworker / owner (G001, A103); only the metal blocking behind them is ours."),
  ("MEP and fire alarm", "EXCLUDED - mechanical, plumbing, electrical, fire alarm / Starlink (M / P / E / FA sheets)."),
