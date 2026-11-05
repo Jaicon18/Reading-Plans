@@ -91,3 +91,11 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | Paso | Qué | Inicio | Fin | Duración |
 |---|---|---|---|---|
 | E-1 | Listado de archivos de Empower en BC con la sesión guardada (solo GET, sin login), descarga del PDF (2 p, sin markups), subida a Projects › CFA #2284 sin sobrescribir, lectura completa, nota "reviewed, no quantity impact" en rev9 | 12:21 | 12:22 | 1 min |
+
+## rev10 — búsqueda completa de RFI-11/12/20/26/27/28 + RFI-07 cerrado (orden de COORDINACIÓN con respuestas del usuario), 4-nov (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R10-1 | 3 lectores en paralelo: CDM 172 p + Empower 198 p + civil / landscape / signage, todas las disciplinas, SHX, vectores a escala impresa (RFI-11 / 12 / 20 / 27 / 28) | 21:13 | 21:31 | 18 min |
+| R10-2 | correcciones_rev10.py (RFI-07 A, RFI-26 R-ALC-10, RFI-27 furr-out de madera, RFI-28 34.57 SF, DEMO-12 re-medido, barrido completo), docs, back-check 25/25 | 21:31 | 21:44 | 13 min |
+| R10-3 | Skill v81cf43 (v81cf42 de O'Reilly + BE-CF25 / U-140 + BE-CF26), suite 51/51, banco 0 familias distintas, verificar_version 0 faltantes | 21:44 | 22:00 | 16 min |
+| R10-4 | Revisión antes de subir: RFI-28 hablaba desde 38.35 SF -> corregido + BE-CF26; subida parcial detenida y renombrada "PARCIAL — NO USAR"; compuerta VERDE 155 / 3 / 0 | 22:00 | 22:04 | 4 min |

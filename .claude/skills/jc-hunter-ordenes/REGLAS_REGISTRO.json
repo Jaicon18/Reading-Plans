@@ -2,7 +2,7 @@
  "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 282,
+  "programa": 284,
   "conducta": 52,
   "historico": 23
  },
@@ -4945,6 +4945,34 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u140_u141"
    }
+  },
+  {
+   "id": "BE-CF25",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI 'not printed' solo con búsqueda completa (todas las disciplinas, los dos GC, vectores a escala)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf25"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_busqueda"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF26",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI resuelto / cerrado habla desde el valor cargado (opción A y delta sin el valor viejo)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf26"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_rfi_resuelto"
+   },
+   "cuando": "entrega"
   }
  ]
 }
