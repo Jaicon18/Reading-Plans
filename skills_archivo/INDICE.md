@@ -234,3 +234,5 @@ Nota (4-nov): el número v81cf35 lo usó primero Chuze FINAL7 (subida-retoma, BE
 | O'Reilly rev10 FINAL — v81cf44 + código de CFA unido (BE-CF25..27) + BE-144 / U-144 (vigente) | v81cf45 | 2026-11-05 | take-off-metal-frame-drywall_v81cf45_U142-U143-unidos-CFA-BE144_2026-11-05.zip |
 | O'Reilly rev10 FINAL — schedules marcados (U-142) + demo solo SF (U-143) | v81cf44 | 2026-11-05 | take-off-metal-frame-drywall_v81cf44_schedules-U142-demo-U143_2026-11-05.zip |
 | O'Reilly rev9 — detalles circulados (U-141) + búsqueda exhaustiva (U-140) | v81cf43 | 2026-11-05 | take-off-metal-frame-drywall_v81cf43_detalles-circulados-U141_2026-11-05.zip |
+
+**05-nov: O'Reilly Evans #1 CERRADO — "esta perfecto" (usuario 5-nov).** SKILL FINAL = v81cf45, copia idéntica archivada como take-off-metal-frame-drywall_v81cf45_FINAL-OReilly-Evans-1_2026-11-05.zip (U-027; mismo md5 que el zip vigente) y en Drive › Claude outputs › O'Reilly Evans #1 › SKILL FINAL v81cf45. Entrega aprobada: rev10 FINAL (compuerta 161 / 2 / 0). **MEJOR REFERENCIA DEL BANCO** (U-130 / U-032): O'Reilly rev10 FINAL aprobada por el usuario; el próximo proyecto arranca con v81cf45.

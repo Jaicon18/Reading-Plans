@@ -201,7 +201,9 @@ def revisar_indice(archivo):
     zs = [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]
     if not zs:
         return [f"la versión vigente {v} no tiene zip en skills_archivo"]
-    if len(zs) > 1:   # BE-CF20: dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
+    import hashlib
+    distintos = {hashlib.md5(open(os.path.join(archivo, n), "rb").read()).hexdigest() for n in zs}
+    if len(distintos) > 1:   # BE-CF20 (copia idéntica FINAL-<Proyecto> de U-027 no cuenta): dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
         return [f"BE-CF20: la versión vigente {v} tiene {len(zs)} zips distintos ({', '.join(sorted(zs))}): unir en v+1"]
     return []
 
@@ -250,14 +252,16 @@ def revisar_versiones_unicas(archivo):
     """BE-144: dos sesiones armaron el mismo número de versión (v81cf43 O'Reilly y CFA; antes BE-CF20).
     Cada número de versión = un solo zip en skills_archivo/. El número se aparta antes de armar
     en skills_archivo/VERSION_EN_CURSO.md (commit + push primero)."""
-    import collections
+    import collections, hashlib
     if not archivo or not os.path.isdir(archivo):
         return []
-    c = collections.Counter()
+    hashes = collections.defaultdict(set)
     for n in os.listdir(archivo):
         m = re.match(r"take-off-metal-frame-drywall_([^_]+)_.*\.zip$", n)
         if m:
-            c[m.group(1)] += 1
+            # copia idéntica (mismo contenido, p. ej. el FINAL-<Proyecto> de U-027) no es otra versión
+            hashes[m.group(1)].add(hashlib.md5(open(os.path.join(archivo, n), "rb").read()).hexdigest())
+    c = {v: len(h) for v, h in hashes.items()}
     return [f"versión {v} archivada {k} veces (BE-144: apartar el número en VERSION_EN_CURSO.md antes de armar)"
             for v, k in sorted(c.items()) if k > 1 and v not in VERSIONES_DUPLICADAS_HISTORICAS]
 

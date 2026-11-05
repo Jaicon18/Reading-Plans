@@ -145,8 +145,10 @@ def hook_solo_usuario():
 def versiones_unicas():
     """BE-144: v81cf43 armada por dos sesiones."""
     d = tempfile.mkdtemp()
-    for n in ("take-off-metal-frame-drywall_v81cf43_A_2026-11-05.zip", "take-off-metal-frame-drywall_v81cf43_B_2026-11-05.zip"):
-        open(os.path.join(d, n), "w").write("x")
+    for n, x in (("take-off-metal-frame-drywall_v81cf43_A_2026-11-05.zip", "a"), ("take-off-metal-frame-drywall_v81cf43_B_2026-11-05.zip", "b")):
+        open(os.path.join(d, n), "w").write(x)
+    open(os.path.join(d, "take-off-metal-frame-drywall_v81cf42_X_2026-11-05.zip"), "w").write("same")
+    open(os.path.join(d, "take-off-metal-frame-drywall_v81cf42_FINAL-P_2026-11-05.zip"), "w").write("same")
     assert V.revisar_versiones_unicas(d), "número repetido debe fallar"
     os.remove(os.path.join(d, "take-off-metal-frame-drywall_v81cf43_B_2026-11-05.zip"))
     assert V.revisar_versiones_unicas(d) == []

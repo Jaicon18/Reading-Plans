@@ -1,8 +1,8 @@
 {
- "version": "registro (v81cf43, 2026-11-05: + U-140 búsqueda exhaustiva, U-141 detalles circulados)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
  "conteo": {
-  "programa": 282,
+  "programa": 289,
   "conducta": 52,
   "historico": 23
  },
@@ -4944,6 +4944,108 @@
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u140_u141"
+   }
+  },
+  {
+   "id": "BE-CF25",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI 'not printed' solo con búsqueda completa (todas las disciplinas, los dos GC, vectores a escala)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf25"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_busqueda"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-CF26",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "RFI resuelto / cerrado habla desde el valor cargado (opción A y delta sin el valor viejo)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf26"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cf_rev10_rfi_resuelto"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "U-142",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA (usuario 5-nov): revisar TODOS los schedules del trade (partition/wall types, stud/LGS/joist/header, finish, RCP/ceiling, door/frame/window donde tocan el framing, notas de material); lista SCHEDULES_MATERIALES por type con cada material en el Material Summary o fuera de alcance con motivo; cada type/renglón marcado (círculo rojo + check + número) en Planos marcados/SCHEDULES_REVISADOS.pdf; lectura independiente (U-111); falta una marca, un material sin MS ni motivo, o 0 = FAIL",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_schedules_marcados",
+    "take-off:tools/compuerta_entrega.py::marcar_schedules",
+    "take-off:tools/compuerta_entrega.py::lista_schedules",
+    "take-off:tools/compuerta_entrega.py::ce_schedules_revisados",
+    "take-off:tools/compuerta_entrega.py::marcar_schedules_json"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u142"
+   }
+  },
+  {
+   "id": "U-143",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA GENERAL (usuario 5-nov): en demolición solo se marcan los SF de lo que se demuele; los materiales de la demo no importan (todo va a la basura): renglón de demo en otra unidad, desglosado por capa/cara/material, o RFI de composición de la demo = FAIL",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_143"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_143"
+   }
+  },
+  {
+   "id": "BE-CF27",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "texto_corto": "antes de subir: las órdenes del usuario del remoto (git fetch) están en el registro del skill de la compuerta; si falta una, se bloquea la subida",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py::candado_ordenes"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cf27"
+   },
+   "cuando": "entrega"
+  },
+  {
+   "id": "BE-144",
+   "origen": "BIBLIOTECA_ERRORES.md",
+   "categoria": "programa",
+   "cuando": "version",
+   "texto_corto": "El mismo número de versión armado por dos sesiones: un número = un solo zip, apartado antes en VERSION_EN_CURSO.md",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_versiones_unicas"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "versiones_unicas"
+   }
+  },
+  {
+   "id": "U-144",
+   "origen": "REGLAS_USUARIO_CLAUDE.md",
+   "categoria": "programa",
+   "cuando": "version",
+   "texto_corto": "REGLA INVIOLABLE (5-nov, BE-144): antes de armar una versión del skill, apartar el número en skills_archivo/VERSION_EN_CURSO.md (commit + push primero); un número = un solo zip",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_versiones_unicas"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "versiones_unicas"
    }
   }
  ]

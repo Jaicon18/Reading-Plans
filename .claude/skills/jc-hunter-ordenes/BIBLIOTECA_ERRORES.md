@@ -452,3 +452,7 @@ Chequeo(s): .claude/hooks/registrar_orden.py::es_del_usuario. Test: jc-hunter-or
 ## BE-144 — El mismo número de versión armado por dos sesiones (v81cf43 O'Reilly y CFA, 5-nov; antes BE-CF20)
 Arreglo: el número se aparta en skills_archivo/VERSION_EN_CURSO.md con commit + push ANTES de armar; verificar_version.py::revisar_versiones_unicas FALLA si una versión tiene más de un zip archivado (v80u histórica exenta).
 Chequeo(s): jc-hunter-ordenes/verificar_version.py::revisar_versiones_unicas. Test: test_verificar_version.py (versiones_unicas).
+
+## BE-145 — El archivado FINAL de U-027 (copia del zip vigente) hacía fallar BE-CF20 / BE-144 (5-nov, cierre O'Reilly)
+Arreglo: revisar_indice y revisar_versiones_unicas comparan md5; una copia idéntica (FINAL-<Proyecto>) no cuenta como otra versión; contenido distinto con el mismo número sigue en FAIL.
+Chequeo(s): jc-hunter-ordenes/verificar_version.py::revisar_versiones_unicas. Test: test_verificar_version.py (versiones_unicas, caso "same").
