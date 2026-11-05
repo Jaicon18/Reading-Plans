@@ -198,8 +198,11 @@ def revisar_indice(archivo):
     if not m:
         return ["INDICE.md no marca la VERSIÓN VIGENTE"]
     v = m.group(1)
-    if not [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]:
+    zs = [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]
+    if not zs:
         return [f"la versión vigente {v} no tiene zip en skills_archivo"]
+    if len(zs) > 1:   # BE-CF20: dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
+        return [f"BE-CF20: la versión vigente {v} tiene {len(zs)} zips distintos ({', '.join(sorted(zs))}): unir en v+1"]
     return []
 
 
@@ -240,6 +243,37 @@ def revisar_banco(archivo):
     return []
 
 
+def revisar_ordenes(cache, horas=24):
+    """U-136: toda orden de la bandeja (_entrantes.jsonl) con más de `horas` sin clasificar en MAPA_ORDENES.json = falta."""
+    import json, datetime
+    if not cache:
+        return []
+    car = os.path.join(cache, "ORDENES_CRUDAS")
+    ent = os.path.join(car, "_entrantes.jsonl")
+    if not os.path.exists(ent):
+        return []
+    try:
+        mapa = json.load(open(os.path.join(car, "MAPA_ORDENES.json"), encoding="utf-8"))
+    except Exception:
+        mapa = {}
+    ahora = datetime.datetime.now(datetime.timezone.utc)
+    faltas = []
+    for linea in open(ent, encoding="utf-8"):
+        try:
+            r = json.loads(linea)
+        except Exception:
+            continue
+        if r.get("id") in mapa:
+            continue
+        try:
+            t = datetime.datetime.fromisoformat(r["ts_utc"])
+        except Exception:
+            t = ahora
+        if (ahora - t).total_seconds() > horas * 3600:
+            faltas.append(f"{r.get('id')} ({r.get('ts_utc')}) sin clasificar: {r.get('texto','')[:80]}")
+    return faltas
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -267,8 +301,9 @@ def main(argv):
     ix = revisar_indice(archivo)
     sk = revisar_skill(Fuente(candidato))
     bc = revisar_banco(archivo)
+    od = revisar_ordenes(extra[0] if extra else None)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
-                       ("BANCO (U-043)", bc)):
+                       ("BANCO (U-043)", bc), ("ORDENES (U-136)", od)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

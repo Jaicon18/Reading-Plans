@@ -87,6 +87,9 @@ def revisar_indice():
     assert V.revisar_indice(d)
     open(os.path.join(d, "take-off-metal-frame-drywall_v9x_P_2026-11-03.zip"), "w").write("x")
     assert V.revisar_indice(d) == []
+    # BE-CF20: dos zips con el mismo número de versión = línea partida
+    open(os.path.join(d, "take-off-metal-frame-drywall_v9x_Q_2026-11-03.zip"), "w").write("y")
+    assert any("BE-CF20" in x for x in V.revisar_indice(d))
 
 
 def revisar_skill():
@@ -114,8 +117,33 @@ def revisar_banco():
     assert V.revisar_banco(d) == []
 
 
+def revisar_ordenes():
+    import json, tempfile, datetime
+    d = tempfile.mkdtemp(); c = os.path.join(d, "ORDENES_CRUDAS"); os.makedirs(c)
+    viejo = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=30)).isoformat(timespec="seconds")
+    open(os.path.join(c, "_entrantes.jsonl"), "w").write(json.dumps({"id": "abc", "ts_utc": viejo, "texto": "siempre 2 layers"}) + "\n")
+    open(os.path.join(c, "MAPA_ORDENES.json"), "w").write("{}")
+    assert V.revisar_ordenes(d), "orden sin clasificar debe fallar (U-136)"
+    open(os.path.join(c, "MAPA_ORDENES.json"), "w").write(json.dumps({"abc": "U-127"}))
+    assert not V.revisar_ordenes(d), "orden clasificada debe pasar"
+
+
+def hook_solo_usuario():
+    """BE-143: el hook U-136 guardó 32 avisos automáticos (task-notification, agent-message) como órdenes."""
+    import importlib.util
+    raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    spec = importlib.util.spec_from_file_location("ro", os.path.join(raiz, "hooks", "registrar_orden.py"))
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    for auto in ("<task-notification> <task-id>x</task-id>", "<agent-message from=\"a\"> [Subagent hand-back]",
+                 "<cross-session-message from-session=\"s\">", "[SYSTEM NOTIFICATION - NOT USER INPUT] x",
+                 "<system-reminder>x</system-reminder>"):
+        assert not m.es_del_usuario(auto), auto
+    assert not m.es_del_usuario("mi password es x")
+    assert m.es_del_usuario("si el type dice BOTH SIDES van las dos caras")
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
