@@ -6,4 +6,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf45 · O'Reilly Evans #1 (dueña) · 4-nov 11:12 PM PT · v81cf44 publicada (O'Reilly) + código de CFA v81cf44_EN_CURSO_src (BE-CF25/26/27, U-142 json, U-143 canon) unido 3-way + BE-144 / U-144 · en curso (orden de COORDINACIÓN 06:48 UTC: unir el código de CFA y publicar)
 - ACTUALIZACIÓN 4-nov 11:32 PM PT: **v81cf45 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf45_U142-U143-unidos-CFA-BE144_2026-11-05.zip (VIGENTE en INDICE; suite 51/51, banco 0 distintas, verificar_version 0 faltantes, 199 archivos). El código de CFA (v81cf44_EN_CURSO_src) quedó unido aquí; v81cf44 = el zip de O'Reilly. O'Reilly rev10 FINAL re-pasada y subida con v81cf45 (161/2/0).
 - v81cf46 · COORDINACIÓN · 5-nov ~12:35 AM PT · v81cf45 + BE-145 en el registro · PUBLICADA
-- v81cf47 · COORDINACIÓN · 5-nov ~12:50 AM PT · v81cf46 + U-145 (CE_ESTANDAR_OREILLY) · en curso
+- v81cf47 · COORDINACIÓN · 5-nov ~12:50 AM PT · v81cf46 + U-145 (CE_ESTANDAR_OREILLY) · PUBLICADA
