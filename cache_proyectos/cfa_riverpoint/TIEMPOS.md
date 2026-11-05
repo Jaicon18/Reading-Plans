@@ -77,3 +77,17 @@ Nota: todas las horas se toman de `TZ=America/Los_Angeles date` (reloj del conte
 | R8-2 | v81cf37 (suite 51/51, banco 0, verificar_version 0 faltantes 716), compuerta final | 03:36 | 03:37 | 1 min |
 | 10 | Subida SOLO con subir_entrega.py (166 archivos, carpeta "rev8 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR") + aviso en rev7 | 03:38 | 03:52 | 14 min |
 | **TOTAL rev8** | **Orden → entrega en Drive** | **03:22** | **03:52** | **30 min** |
+## rev9 — auditoría adversarial de COORDINACIÓN sobre rev8 (U-138), 4-nov (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| R9-1 | Revisión de los 6 puntos con evidencia (canon, RCP A-221, A-050 registro, copia limpia vs original hoja por hoja) | 06:33 | 06:42 | 9 min |
+| R9-2 | correcciones_rev9.py (Source = altura actual, W6-09-OUT-1, sin furr down + RFI-27 alternativa), DEMO-14 en A-050, CE_COPIA_LIMPIA / BE-CF24 / R-ALC-06 + tests, cadena, compuerta VERDE 150 / 4 / 0 | 06:42 | 06:51 | 9 min |
+| R9-3 | Skill: choque con v81cf38 de COORDINACIÓN -> v81cf39 (suite 51/51, banco 8/8, verificar_version 0 faltantes 717); compuerta final | 06:51 | 06:54 | 3 min |
+| R9-4 | CE_RFI_FORMATO (v81cf38 de COORDINACIÓN): Review Item 5 -> RFI-28, Review Item 6 resuelto (E3/A-604); docs; compuerta final | 06:58 | 07:03 | 5 min |
+| 10 | Subida SOLO con subir_entrega.py (168 archivos; un error 500 de Drive a mitad, retomada con R80f.42) + aviso en rev8 | 07:08 | 07:26 | 18 min |
+| **TOTAL rev9** | **Orden → entrega en Drive** | **06:33** | **07:26** | **53 min** |
+
+## Empower — Subcontractor Bid Requirements (4-nov, orden de COORDINACIÓN) (hora de California)
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| E-1 | Listado de archivos de Empower en BC con la sesión guardada (solo GET, sin login), descarga del PDF (2 p, sin markups), subida a Projects › CFA #2284 sin sobrescribir, lectura completa, nota "reviewed, no quantity impact" en rev9 | 12:21 | 12:22 | 1 min |
