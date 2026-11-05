@@ -474,3 +474,18 @@ Chequeo(s): take-off:tools/chequeos_biblioteca.py::u_037. Test: take-off:tools/t
 | CC-R7 | Scope 'FRP EXCLUDED' con FRP cargado | Scope EXCLUDED sobre material cargado = FAIL | CB_CC_R7 + caso |
 | CC-R10 | CE_CALLOUTS '2 citadas / 10' con 49 burbujas | misma unión que CE_DETALLES_CIRCULADOS | test token CC-R10 |
 | CC-R12 | walls con cota impresa en [DERIVED] (U-114) | length_printed_ft -> [CONFIRMED] | CB_CC_R12 + caso |
+
+## BE-CR01 — inventario_tags.py no veía los tags de un set Revit con types "con punto" (5-nov, CR City Hotel)
+Error: 0 partition tags en las plantas (rc 1): (1) types W.62 / DW.4 / XW.6.3 no casaban TYPE_RE (exigía dígito pegado a la letra); (2) el Drawing Index de T0.01 (leyenda "RE: PARTITION TYPE SCHEDULE") metía sheet numbers (A0.04, A7.01, M0.00...) como types; (3) el título de la hoja ("LVL 2") va bajo el rótulo "SHEET TITLE:" a la izquierda del sheet number y la tool no lo leía → ninguna planta era "planta"; (4) el sheet number propio de S / M / E era "partition_candidato" con recorte que no verificaba.
+Arreglo (v81cf53): TAG_DOT_RE + TYPE_RE con punto; SCHED_TITLE_RE acepta "WALL ASSEMBLIES"; un sheet number del índice (o listado en una hoja INDEX) nunca es type; título por el rótulo "SHEET TITLE:"; "LVL n" / "LEVEL n" = planta; el sheet number propio no es candidato. Resultado: 354 tags, rc 0.
+Chequeo(s): inventario_tags.py (rc 1 si un recorte no verifica). Test: tools/test_cr_city_hotel.py::test_cr01_regex.
+
+## BE-CR02 — Faltaban familias para un hotel wood-framed (5-nov, CR City Hotel)
+Error: el set pide 5/8" Type C (FS-1 A0.08), 1" shaftliner y C-H studs / J-runner (CH A0.06), 5/8" exterior gyp sheathing Type X (XW.6.3-2 A0.07); canon.py no tenía familia → el board se habría cargado como Type X o regular (otro material).
+Arreglo (v81cf53): BOARD_FAM "5/8 type C" / "1 shaftliner" / "5/8 exterior gyp sheathing type X", F_CH (C-H stud y J-runner por tamaño) en FAMS (opcionales), familias.py y plantilla_excel; Type C en BOARD_DRIVER (taping); existing_walls acepta hojas "A2.02".
+Chequeo(s): canon.py (board sin familia = ValueError). Test: tools/test_cr_city_hotel.py::test_cr02_familias.
+
+## BE-CR03 — Ceiling de board sobre resilient channel bajo wood joists sin sistema (5-nov, CR City Hotel)
+Error: los sistemas de ceiling eran furring / stud_joist / framed_soffit / canopy_joist / usg_grid; FS-1 (resilient channel + 5/8" Type C bajo wood trusses, UL L546) no cabía y se habría cargado carrying + hangers inexistentes.
+Arreglo (v81cf53): system "resilient_channel" (canon._ceiling_rc): assembly {id, source}, rc_oc_in {value, source}, layers {value, source}; RC = ROUNDUP(run/oc)+1 x span o área / oc; board x capas; wood joists EXCLUDED.
+Chequeo(s): canon._ceiling_rc (sin assembly / oc / layers = ValueError). Test: tools/test_cr_city_hotel.py::test_cr03_rc.
