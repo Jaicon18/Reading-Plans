@@ -10,12 +10,22 @@ c = json.load(open(os.path.join(C4, "takeoff_canon.json")))
 pd = json.load(open(os.path.join(K, "proceso", "proyecto_datos.json")))["proyecto_datos"]
 for x in pd:
     x["fuente"] = str(x.get("fuente", "")).replace(" (img/a200_seal.png)", "")
+    if x["campo"] == "type of project":
+        x["valor"] = "Interior tenant improvement of an existing shell: new cell phone store with retail merchandise, new lighting and fixtures, minimal plumbing and mechanical (G003 project description); scope list per G000: FF&E, interior partitions and doors, ceilings, finishes, lighting, restroom, kitchenette and mop sink"
+    if x["campo"] == "bid set":
+        x["valor"] = "15066-26 Consumer Cellular Centennial CO, 37 sheets G000-FA101, dated 10/14/2026, sealed 10/15/2026; title blocks carry '90% SET / DESIGN INTENT ONLY / NOT FOR CONSTRUCTION'; file name of the Elder-Jones download: 'Permit Set_10.15.2026'"
+        x["fuente"] = "G000 title block + drawing index; A200 seal; BuildingConnected file name"
+    if x["campo"] == "stories":
+        x["valor"] = "1 (single tenant suite, one floor plan A100)"; x["fuente"] = "G003, A100"
+    if x["campo"] == "specs":
+        x["valor"] = "No project manual in the set: A700 'ARCHITECTURAL SPECIFICATIONS' holds the finish, FF&E, plumbing fixture and lighting schedules; E701 electrical specifications"
+        x["fuente"] = "A700, E701, G000 drawing index"
     if x["campo"].startswith("general contractor"):
         x["valor"] = "Elite Retail Services (Vivian Tran) - bid 11/05/2026 4:00 PM CT; Elder-Jones, Inc. (Mason Bender) - bid 11/06/2026"
-        x["fuente"] = "BuildingConnected invitations 10/19 and 10/20/2026 + Elite invitation e-mail 10/16/2026 (not printed in the set)"
+        x["fuente"] = "GC data: BuildingConnected invitations 10/19 and 10/20/2026 + Elite invitation e-mail 10/16/2026 (G000 names the G.C. role only)"
     if x["campo"].startswith("bid date"):
         x["valor"] = "11/05/2026 4:00 PM CT (Elite Retail Services); 11/06/2026 (Elder-Jones, Inc.)"
-        x["fuente"] = "BuildingConnected invitations (not printed in the set)"
+        x["fuente"] = "GC data: BuildingConnected invitations; title block DATE 10/14/2026, DATE SIGNED 10/15/2026"
 fo = json.load(open(os.path.join(C4, "out", "familias_out.json")))
 
 
@@ -47,10 +57,10 @@ RI = [
   "Type E3 walls between rooms with different ceilings (Office 9'-0\" / BOH 11'-11\", Restroom 8'-0\" / Hallway 11'-11\"): studs to the higher ceiling + 6\" and each face's board to its own ceiling + 6\" (1/A500 'TO 6\" ABOVE CEILING'). A: as loaded / B: board on both faces to the higher ceiling; delta = the lower faces x (higher - lower) ceiling.",
   "RFI-05_A200.png"),
  ("floor_plan", "DEMO", None, "D100 key 7",
-  "Existing ceiling demolition 'REMOVE EXISTING GYP. BD. & ACT CEILINGS, SOFFIT, FRAMING ... THROUGHOUT' (D100 key 7): the extent of gypsum board vs ACT is not shown - EXCLUDED for lack of information (0 SF). The lease area is 3,103 SF (G003) if the estimator wants an allowance.",
+  "Existing ceiling demolition of D100 keynote 7 (existing gyp. bd. and ACT ceilings, soffit and framing throughout): the extent of gypsum board vs ACT is not shown - EXCLUDED for lack of information (0 SF, estimator decision: standing rule for existing ceilings without type). Review Item: the lease area is 3,103 SF (G003) if the estimator wants an allowance.",
   "RFI-07_D100.png"),
  ("floor_plan", "EXTERIOR", None, "A300 / A301 note 2",
-  "Exterior signage blocking: 'G.C. TO VERIFY AND INSTALL BLOCKING FOR EXTERIOR SIGNAGE AS REQUIRED. COORDINATE WITH LANDLORD AND SIGNAGE VENDOR' - on the existing shell, size not shown: not loaded (allowance by the estimator).",
+  "Exterior signage blocking: 'G.C. TO VERIFY AND INSTALL BLOCKING FOR EXTERIOR SIGNAGE AS REQUIRED. COORDINATE WITH LANDLORD AND SIGNAGE VENDOR' - on the existing shell, size not shown on the drawings: Review Item - allowance by the estimator (no quantity drawn).",
   "RFI-04_A101.png"),
  ("detalle", None, 1, "1/A104",
   "Logo wall blocking 1/A104: one 1'-4 1/2\" band of 20 GA metal strapping per logo wall (cleat 10 1/2\" + 3\" above and below), loaded as one LF band per wall. A: one band (loaded) / B: 3 rows of 6\" strap; delta x3 on BLK-LOGO-S / BLK-LOGO-W.",
@@ -114,7 +124,7 @@ extra = [
  ("Fasteners: screws, anchors, PAF", "EXCLUDED - estimator standing order: drywall / framing screws, Hilti X-U shot pins (2/A500), #10 / #12-24 Tek screws (4/A500), anchors at 0 (rows kept with their source)."),
  ("Framed openings for ducts", "EXCLUDED - estimator standing order: duct / air device openings never quantified (M101 / M501 swept)."),
  ("ACT ceilings and grid", "EXCLUDED - C-2 ACT lay-in ceilings and grid (A200, A700)."),
- ("Existing ceiling demolition", "EXCLUDED - D100 keynote 7 gypsum / ACT ceilings 'throughout': extent of each type not shown, excluded for lack of information (0 SF)."),
+ ("Existing ceiling demolition", "EXCLUDED - D100 keynote 7 gypsum / ACT ceilings 'throughout': extent of each type not shown, excluded for lack of information (0 SF, estimator decision: standing rule for existing ceilings without type)."),
  ("Insulation", "EXCLUDED - batt insulation of type D (1/A500) and A100 note 7 insulation patching."),
  ("Paint and FRP", "EXCLUDED - paint PT-1..PT-4 and FRP B-3 (A700)."),
  ("Storefront, doors, frames, hardware", "EXCLUDED - existing storefront (A300), doors / HM knockdown frames / hardware (A600): other trades."),

@@ -51,6 +51,7 @@ dec.append(("C3 / E3 infill over cased opening", "A E3-14 4.00 LF @ 4.417 ft (E3
 # 3. C3 stud height: deck break between BOH 16'-4" and Sales 17'-1 9/16" not drawn on the C3 line -> higher deck (B), RFI-01
 for wid in ('C3-01',):
     pass
+dec.append(("C3-01 length", "A C3-01 31.542 LF + E3-14 4.0 LF vs B C3-01 31.542 + C3-02 4.0 LF", "C3-01 35.542 LF (31'-6 1/2\" printed + 4'-0\" cased opening inside the C3 line)", "A100", '002_DIF_C3_A100_p7.png'))
 dec.append(("C3-01 stud height", "A 16.333 ft (BOH deck) vs B 17.13 ft (Sales deck)",
             "B: 17.13 ft (higher printed deck, conservative); RFI-01 keeps the 16'-4\" alternative with its delta", "A100 deck tags", '002_DIF_C3_A100_p7.png'))
 # 4. A3 north wall: two A3 tags split by the existing column -> two walls (E28 eje: each tag marks its wall)
@@ -76,6 +77,7 @@ for w in c['walls']:
         w['openings'] = copy.deepcopy(C3EXT.get('openings') or [])
     walls.append(w)
 c['walls'] = walls
+c['excluded_walls'] = [{"id": 'E3-05', "why": 'reading A piece merged into E3-04 (door 4C inside the wall line)'}, {"id": 'E3-10', "why": 'reading A piece merged into E3-09 (door 5C inside the wall line)'}, {"id": 'E3-14', "why": 'reading A infill over the cased opening merged into C3-01 (same C3 line, RFI-05)'}]
 # openings: point to the resolved walls
 for it in c['opening_schedule']['items']:
     m = {'Door 4C': 'E3-04', 'Door 5C': 'E3-09', 'Door 6C': 'E3-02'}

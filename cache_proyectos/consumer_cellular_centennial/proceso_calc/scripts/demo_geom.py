@@ -13,7 +13,7 @@ for m in c['misc_items']:
     if not m['ref'].startswith('DEMO'):
         continue
     out.append({"id": m['ref'], "group": "partition" if m['ref'] != 'DEMO-06' else "furring", "page": 5, "sheet": "D100",
-                "polyline": G[m['ref']], "lf": m['lf'], "h_ft": m['height_ft'], "h_status": "DERIVED - " + m['height_source'],
+                "polyline": G[m['ref']], "lf": m['lf'], "h_ft": m['height_ft'], "height_source": m.get('height_source'), "h_status": "DERIVED - " + m['height_source'],
                 "layers": 1, "sf": m['qty'], "detail": "1/D100", "keynote": "D100 keynote " + str(m.get('source_info') or m.get('source') or '').split('key')[-1].strip()})
 json.dump(out, open(f'{K}/etapas/4_canon/demo_geom.json', 'w'), indent=1)
 d = fitz.open(f'{K}/plans/bidset_SIN_MARKUPS.pdf'); p = d[4]

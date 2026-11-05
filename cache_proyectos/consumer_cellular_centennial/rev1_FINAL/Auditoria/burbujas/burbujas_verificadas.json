@@ -1,0 +1,1556 @@
+{
+ "_nota": "U-137/U-141: verificación a ojo (5-nov) de los 45 anillos 'indep_no_detectados' de set_texto.json, de las 27 candidatas texto-par de burbujas_candidatas.json y barrido visual de G003, D100, A100-A104, A200, A300, A301, A400-A402, A500-A504, A600 (más G002 y A700 como destinos/origen). Imágenes en img_verif/: indep_anillos.png (#0-44 = anillos independientes, mismo orden que set_texto), burbujas_A.png (burbujas de planta/detalle + nuevas a ojo), burbujas_B.png (candidatas A500/A600/A700), no_burbujas.png (muestras de símbolos que NO son burbuja), destinos.png (título de cada destino). Los 45 anillos independientes son TODOS marcas de nivel (datum, círculo en cuartos) -> ninguno es burbuja. Entradas con 'fuente':'ojo' no estaban en ninguna lista. Entradas con 'tipo':'texto' son referencias escritas (celda de tabla o nota), no un círculo dibujado. Convención en A402/A501: burbuja 'A4' / 'B2' / 'A1' con '-' abajo = subdetalle letra+número de la MISMA hoja (A4 -> 4A, B2 -> 2B, A1 -> 1A). Hojas sin burbujas: G003 (solo título 1 + flecha norte), D100 (solo hexágonos de keynote), A103 (keynotes hex), A104, A200, A300, A301, A400, A401, A502, A503 (keynotes UL), A504.",
+ "_frame": "Anillos de set_texto['burbujas'][*]['indep_no_detectados'] (y también set_texto['burbujas'][*]['burbujas']) están en coordenadas SIN ROTAR (mediabox 1728x2592, PyMuPDF get_text/get_drawings crudo). Verificado: renderizar (x,y) en marco visible cae en blanco; transformado con page.rotation_matrix (x_vis=y, y_vis=1728-x) cae exactamente en la marca de nivel. En este archivo esas entradas conservan x,y EXACTOS como vienen (frame 'u') y añaden x_vis,y_vis. Todo lo demás (candidatas, nuevas, _destinos) está en marco VISIBLE rotado (2592x1728), igual que burbujas_candidatas.json.",
+ "G003": [
+  {
+   "x": 1827,
+   "y": 1604,
+   "img": "img_verif/no_burbujas.png #0",
+   "no_es_burbuja": "flecha norte"
+  }
+ ],
+ "D100": [
+  {
+   "x": 1449,
+   "y": 662,
+   "img": "img_verif/no_burbujas.png #1",
+   "no_es_burbuja": "hexágono de keynote demolición (todas las marcas numeradas de D100 son keynotes)"
+  }
+ ],
+ "A100": [
+  {
+   "x": 840.7,
+   "y": 840.1,
+   "img": "img_verif/burbujas_A.png #0",
+   "n": "3",
+   "hoja": "A600",
+   "dibujo": "junto a puerta 6C (office)"
+  },
+  {
+   "x": 1116.8,
+   "y": 553,
+   "img": "img_verif/no_burbujas.png #2",
+   "no_es_burbuja": "rombo tipo de partición A3 (gobierna A500/1, no es burbuja)"
+  },
+  {
+   "x": 795,
+   "y": 838.8,
+   "img": "img_verif/no_burbujas.png #3",
+   "no_es_burbuja": "tag de puerta 6C"
+  },
+  {
+   "x": 1241.0,
+   "y": 100.3,
+   "img": "img_verif/A100_leyenda_A500.png",
+   "n": "1",
+   "hoja": "A500",
+   "dibujo": "A100 SHEET SYMBOLS: partition diamond = 'SEE SHEET A500 FOR WALL CONFIGURATION, CONSTRUCTION AND INSULATION DETAILS' (1/A500 PARTITION TYPES); A100 general note 2"
+  }
+ ],
+ "A101": [
+  {
+   "x": 630.9,
+   "y": 1158.0,
+   "img": "img_verif/burbujas_A.png #1",
+   "n": "3",
+   "hoja": "A502",
+   "dibujo": "puerta salida oeste (hallway)"
+  },
+  {
+   "x": 779.1,
+   "y": 1150.8,
+   "img": "img_verif/burbujas_A.png #2",
+   "n": "5",
+   "hoja": "A502",
+   "dibujo": "transición hallway"
+  },
+  {
+   "x": 944.7,
+   "y": 1146.3,
+   "img": "img_verif/burbujas_A.png #3",
+   "n": "5",
+   "hoja": "A502",
+   "dibujo": "transición hallway/ventas"
+  },
+  {
+   "x": 1955.2,
+   "y": 979.0,
+   "img": "img_verif/burbujas_A.png #4",
+   "n": "3",
+   "hoja": "A502",
+   "fuente": "ojo",
+   "dibujo": "entrada principal este (storefront)"
+  }
+ ],
+ "A102": [
+  {
+   "x": 597.4,
+   "y": 904.7,
+   "img": "img_verif/burbujas_A.png #5",
+   "n": "1",
+   "hoja": "A301",
+   "dibujo": "etiqueta de elevación exterior, oeste"
+  },
+  {
+   "x": 1931.7,
+   "y": 904.8,
+   "img": "img_verif/burbujas_A.png #6",
+   "n": "1",
+   "hoja": "A300",
+   "fuente": "ojo",
+   "dibujo": "etiqueta de elevación exterior, este (storefront)"
+  },
+  {
+   "x": 597.3,
+   "y": 1014.3,
+   "img": "img_verif/burbujas_A.png #7",
+   "n": "2",
+   "hoja": "A402",
+   "dibujo": "callout de planta ampliada baño"
+  },
+  {
+   "x": 830.2,
+   "y": 1334.4,
+   "img": "img_verif/burbujas_A.png #8",
+   "n": "1",
+   "hoja": "A504",
+   "dibujo": "utility room / mop sink"
+  },
+  {
+   "x": 890.1,
+   "y": 821.6,
+   "img": "img_verif/burbujas_A.png #9",
+   "n": "2",
+   "hoja": "A401",
+   "tipo": "marca de elevación interior (BOH), id en las puntas"
+  },
+  {
+   "x": 890.1,
+   "y": 821.6,
+   "img": "img_verif/burbujas_A.png #9",
+   "n": "3",
+   "hoja": "A401",
+   "tipo": "marca de elevación interior (BOH), id en las puntas"
+  },
+  {
+   "x": 890.1,
+   "y": 821.6,
+   "img": "img_verif/burbujas_A.png #9",
+   "n": "4",
+   "hoja": "A401",
+   "tipo": "marca de elevación interior (BOH), id en las puntas"
+  },
+  {
+   "x": 890.1,
+   "y": 821.6,
+   "img": "img_verif/burbujas_A.png #9",
+   "n": "5",
+   "hoja": "A401",
+   "tipo": "marca de elevación interior (BOH), id en las puntas"
+  },
+  {
+   "x": 1311.4,
+   "y": 1021.1,
+   "img": "img_verif/burbujas_A.png #10",
+   "n": "1",
+   "hoja": "A400",
+   "tipo": "marca de elevación interior (ventas), id en las puntas"
+  },
+  {
+   "x": 1311.4,
+   "y": 1021.1,
+   "img": "img_verif/burbujas_A.png #10",
+   "n": "2",
+   "hoja": "A400",
+   "tipo": "marca de elevación interior (ventas), id en las puntas"
+  },
+  {
+   "x": 1311.4,
+   "y": 1021.1,
+   "img": "img_verif/burbujas_A.png #10",
+   "n": "3",
+   "hoja": "A400",
+   "tipo": "marca de elevación interior (ventas), id en las puntas"
+  },
+  {
+   "x": 1346.5,
+   "y": 1021.1,
+   "img": "img_verif/burbujas_A.png #10",
+   "n": "1",
+   "hoja": "A401",
+   "fuente": "ojo",
+   "tipo": "marca de elevación interior con una sola punta (este, storefront) pegada a la de A400; set_texto no la tiene"
+  },
+  {
+   "x": 2182.1,
+   "y": 86.4,
+   "img": "img_verif/burbujas_A.png #11",
+   "n": "C1",
+   "hoja": "G002",
+   "tipo": "texto",
+   "dibujo": "General note 2: ADA countertops comply with C1/G002"
+  },
+  {
+   "x": 2205,
+   "y": 369,
+   "img": "img_verif/no_burbujas.png #4",
+   "no_es_burbuja": "símbolo de leyenda DETAIL TAG X#/X### (no referencia real)"
+  }
+ ],
+ "A103": [
+  {
+   "x": 2144.5,
+   "y": 87.1,
+   "img": "img_verif/burbujas_A.png #12",
+   "n": "C1",
+   "hoja": "G002",
+   "tipo": "texto",
+   "dibujo": "General note 2: ADA countertops comply with C1/G002"
+  },
+  {
+   "x": 1582,
+   "y": 619,
+   "img": "img_verif/no_burbujas.png #5",
+   "no_es_burbuja": "hexágono keynote millwork"
+  }
+ ],
+ "A104": [
+  {
+   "x": 1263.9,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 464.1,
+   "img": "img_verif/indep_anillos.png #0",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'FINISHED FLOOR 0'-0\"'"
+  },
+  {
+   "x": 1534.0,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 194.0,
+   "img": "img_verif/indep_anillos.png #1",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O MILWORK PER PLAN'"
+  },
+  {
+   "x": 1560.8,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 167.2,
+   "img": "img_verif/indep_anillos.png #2",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING PER PLAN'"
+  },
+  {
+   "x": 790.0,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 938.0,
+   "img": "img_verif/indep_anillos.png #3",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'FINISHED FLOOR 0'-0\"'"
+  },
+  {
+   "x": 1060.0,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 668.0,
+   "img": "img_verif/indep_anillos.png #4",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O MILWORK PER PLAN'"
+  },
+  {
+   "x": 1086.9,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 641.1,
+   "img": "img_verif/indep_anillos.png #5",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING PER PLAN'"
+  },
+  {
+   "x": 245.8,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 1482.2,
+   "img": "img_verif/indep_anillos.png #6",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'FINISHED FLOOR 0'-0\"'"
+  },
+  {
+   "x": 322.4,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 1405.6,
+   "img": "img_verif/indep_anillos.png #7",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O CABINET 2'-10\"'"
+  },
+  {
+   "x": 542.7,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 1185.3,
+   "img": "img_verif/indep_anillos.png #8",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING PER PLAN'"
+  },
+  {
+   "x": 434.8,
+   "y": 117.5,
+   "frame": "u",
+   "x_vis": 117.5,
+   "y_vis": 1293.2,
+   "img": "img_verif/indep_anillos.png #9",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O CABINET 7'-0\"'"
+  }
+ ],
+ "A200": [
+  {
+   "x": 1968,
+   "y": 158,
+   "img": "img_verif/no_burbujas.png #6",
+   "no_es_burbuja": "sub-título \"1 2X2 CEILING GRID\" dentro de 2 (título, sin hoja)"
+  }
+ ],
+ "A300": [
+  {
+   "x": 526.5,
+   "y": 245.6,
+   "frame": "u",
+   "x_vis": 245.6,
+   "y_vis": 1201.5,
+   "img": "img_verif/indep_anillos.png #10",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'FINISHED FLOOR 0'-0\"'"
+  },
+  {
+   "x": 849.3,
+   "y": 245.6,
+   "frame": "u",
+   "x_vis": 245.6,
+   "y_vis": 878.7,
+   "img": "img_verif/indep_anillos.png #11",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. STOREFRONT 11'-11 7/16\"'"
+  },
+  {
+   "x": 1182.3,
+   "y": 245.6,
+   "frame": "u",
+   "x_vis": 245.6,
+   "y_vis": 545.7,
+   "img": "img_verif/indep_anillos.png #12",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. LOWER 24'-3 7/16\"'"
+  },
+  {
+   "x": 1285.8,
+   "y": 245.6,
+   "frame": "u",
+   "x_vis": 245.6,
+   "y_vis": 442.2,
+   "img": "img_verif/indep_anillos.png #13",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. PARAPET 28'-1 7/16\"'"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 441.7,
+   "y": 1474.8,
+   "x1": 883.2,
+   "y1": 1472.6,
+   "img": "img_verif/destinos.png #6",
+   "title": "EXISTING EXTERIOR ELEVATION"
+  }
+ ],
+ "A301": [
+  {
+   "x": 549.0,
+   "y": 289.5,
+   "frame": "u",
+   "x_vis": 289.5,
+   "y_vis": 1179.0,
+   "img": "img_verif/indep_anillos.png #14",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'FINISHED FLOOR 0'-0\"'"
+  },
+  {
+   "x": 1204.7,
+   "y": 289.5,
+   "frame": "u",
+   "x_vis": 289.5,
+   "y_vis": 523.3,
+   "img": "img_verif/indep_anillos.png #15",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. LOWER 24'-3 7/16\"'"
+  },
+  {
+   "x": 1310.4,
+   "y": 289.5,
+   "frame": "u",
+   "x_vis": 289.5,
+   "y_vis": 417.6,
+   "img": "img_verif/indep_anillos.png #16",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. PARAPET 28'-2 3/8\"'"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 492.9,
+   "y": 1456.3,
+   "x1": 934.5,
+   "y1": 1454.2,
+   "img": "img_verif/destinos.png #5",
+   "title": "EXISTING EXTERIOR ELEVATION"
+  }
+ ],
+ "A400": [
+  {
+   "x": 1267.2,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 460.8,
+   "img": "img_verif/indep_anillos.png #17",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 1589.0,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 139.0,
+   "img": "img_verif/indep_anillos.png #18",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 1537.2,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 190.8,
+   "img": "img_verif/indep_anillos.png #19",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. MILLWORK 10'-0\"'"
+  },
+  {
+   "x": 192.8,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 1535.2,
+   "img": "img_verif/indep_anillos.png #20",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 514.3,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 1213.7,
+   "img": "img_verif/indep_anillos.png #21",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 462.8,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 1265.2,
+   "img": "img_verif/indep_anillos.png #22",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. MILLWORK 10'-0\"'"
+  },
+  {
+   "x": 756.4,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 971.6,
+   "img": "img_verif/indep_anillos.png #23",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 972.4,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 755.6,
+   "img": "img_verif/indep_anillos.png #24",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. OPENING 8'-0\"'"
+  },
+  {
+   "x": 1078.3,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 649.7,
+   "img": "img_verif/indep_anillos.png #25",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 1026.5,
+   "y": 120.9,
+   "frame": "u",
+   "x_vis": 120.9,
+   "y_vis": 701.5,
+   "img": "img_verif/indep_anillos.png #26",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. MILLWORK 10'-0\"'"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 276.9,
+   "y": 550.7,
+   "x1": 458.1,
+   "y1": 548.1,
+   "img": "img_verif/destinos.png #19",
+   "title": "INTERIOR ELEVATION"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 276.9,
+   "y": 1087.1,
+   "x1": 545.4,
+   "y1": 1084.5,
+   "img": "img_verif/destinos.png #20",
+   "title": "INTERIOR ELEVATION LOGO WALL"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 278.0,
+   "y": 1638.6,
+   "x1": 459.3,
+   "y1": 1636.1,
+   "img": "img_verif/destinos.png #21",
+   "title": "INTERIOR ELEVATION"
+  }
+ ],
+ "A401": [
+  {
+   "x": 192.6,
+   "y": 1168.3,
+   "frame": "u",
+   "x_vis": 1168.3,
+   "y_vis": 1535.4,
+   "img": "img_verif/indep_anillos.png #27",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 413.1,
+   "y": 1175.2,
+   "frame": "u",
+   "x_vis": 1175.2,
+   "y_vis": 1314.9,
+   "img": "img_verif/indep_anillos.png #28",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CAGE 8-2\"'"
+  },
+  {
+   "x": 756.5,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 971.5,
+   "img": "img_verif/indep_anillos.png #29",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 976.9,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 751.1,
+   "img": "img_verif/indep_anillos.png #30",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CAGE 8-2\"'"
+  },
+  {
+   "x": 192.6,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 1535.4,
+   "img": "img_verif/indep_anillos.png #31",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 381.6,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 1346.4,
+   "img": "img_verif/indep_anillos.png #32",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. DOOR 7'-0\"'"
+  },
+  {
+   "x": 756.5,
+   "y": 1168.3,
+   "frame": "u",
+   "x_vis": 1168.3,
+   "y_vis": 971.5,
+   "img": "img_verif/indep_anillos.png #33",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 945.4,
+   "y": 1168.3,
+   "frame": "u",
+   "x_vis": 1168.3,
+   "y_vis": 782.6,
+   "img": "img_verif/indep_anillos.png #34",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. DOOR 7'-0\"'"
+  },
+  {
+   "x": 1267.2,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 460.8,
+   "img": "img_verif/indep_anillos.png #35",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 1588.8,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 139.2,
+   "img": "img_verif/indep_anillos.png #36",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 1456.2,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 271.8,
+   "img": "img_verif/indep_anillos.png #37",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. DOOR 7'-0\"'"
+  },
+  {
+   "x": 1078.0,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 650.0,
+   "img": "img_verif/indep_anillos.png #38",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 1078.0,
+   "y": 1168.3,
+   "frame": "u",
+   "x_vis": 1168.3,
+   "y_vis": 650.0,
+   "img": "img_verif/indep_anillos.png #39",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 514.3,
+   "y": 1168.3,
+   "frame": "u",
+   "x_vis": 1168.3,
+   "y_vis": 1213.7,
+   "img": "img_verif/indep_anillos.png #40",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "x": 514.3,
+   "y": 115.2,
+   "frame": "u",
+   "x_vis": 115.2,
+   "y_vis": 1213.7,
+   "img": "img_verif/indep_anillos.png #41",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 11'-11\"'"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 272.3,
+   "y": 564.3,
+   "x1": 453.6,
+   "y1": 561.6,
+   "img": "img_verif/destinos.png #14",
+   "title": "INTERIOR ELEVATION"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 249.1,
+   "y": 1089.7,
+   "x1": 430.4,
+   "y1": 1087.1,
+   "img": "img_verif/destinos.png #15",
+   "title": "INTERIOR ELEVATION"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 1293.8,
+   "y": 1089.6,
+   "x1": 1475.0,
+   "y1": 1087.1,
+   "img": "img_verif/destinos.png #16",
+   "title": "INTERIOR ELEVATION"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 271.2,
+   "y": 1640.4,
+   "x1": 452.5,
+   "y1": 1637.7,
+   "img": "img_verif/destinos.png #17",
+   "title": "INTERIOR ELEVATION"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 1324.2,
+   "y": 1653.3,
+   "x1": 1505.5,
+   "y1": 1650.9,
+   "img": "img_verif/destinos.png #18",
+   "title": "INTERIOR ELEVATION"
+  }
+ ],
+ "A402": [
+  {
+   "x": 1198.9,
+   "y": 130.4,
+   "frame": "u",
+   "x_vis": 130.4,
+   "y_vis": 529.1,
+   "img": "img_verif/indep_anillos.png #42",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'GROUND 0'-0\"'"
+  },
+  {
+   "x": 1486.9,
+   "y": 130.4,
+   "frame": "u",
+   "x_vis": 130.4,
+   "y_vis": 241.1,
+   "img": "img_verif/indep_anillos.png #43",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'CEILING 8'-0\"'"
+  },
+  {
+   "x": 1342.9,
+   "y": 129.9,
+   "frame": "u",
+   "x_vis": 129.9,
+   "y_vis": 385.1,
+   "img": "img_verif/indep_anillos.png #44",
+   "no_es_burbuja": "marca de nivel/datum (círculo en cuartos) 'T.O. FRP 4'-0\"'"
+  },
+  {
+   "x": 1073.6,
+   "y": 569.9,
+   "img": "img_verif/burbujas_A.png #13",
+   "n": "6",
+   "hoja": "A502",
+   "dibujo": "en elevación 1C (pie de muro, trash can)"
+  },
+  {
+   "x": 2063.8,
+   "y": 430.9,
+   "img": "img_verif/burbujas_A.png #15",
+   "n": "1",
+   "hoja": "A402",
+   "fuente": "ojo",
+   "tipo": "marca de elevación interior en 2 (planta ampliada), puntas A/B/C/D -> 1A-1D, hoja implícita (sin texto de hoja)"
+  },
+  {
+   "x": 1075.4,
+   "y": 931.0,
+   "img": "img_verif/burbujas_A.png #14",
+   "n": "4A",
+   "hoja": "A402",
+   "fuente": "ojo",
+   "leido": "A4 / -",
+   "dibujo": "en 3 TYPICAL MOUNTING HEIGHTS, apunta a grab bars"
+  },
+  {
+   "x": 384,
+   "y": 620.2,
+   "img": "img_verif/no_burbujas.png #7",
+   "no_es_burbuja": "letra de elevación A (título de sub-elevación 1A; es destino, no burbuja)"
+  },
+  {
+   "x": 323,
+   "y": 538,
+   "img": "img_verif/no_burbujas.png #8",
+   "no_es_burbuja": "hexágono ACCESSORY KEY NOTE 7"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 1738.1,
+   "y": 740.7,
+   "x1": 2126.5,
+   "y1": 737.2,
+   "img": "img_verif/destinos.png #7",
+   "title": "ENLARGED UNISEX RESTROOM PLAN"
+  },
+  {
+   "detalle_existe": "1A",
+   "x": 384.0,
+   "y": 620.2,
+   "x1": 392.0,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #8",
+   "title": "1 RESTROOM ELEVATIONS - elevación A (letra bajo la elevación)"
+  },
+  {
+   "detalle_existe": "1B",
+   "x": 725.8,
+   "y": 620.2,
+   "x1": 733.8,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #9",
+   "title": "1 RESTROOM ELEVATIONS - elevación B (letra bajo la elevación)"
+  },
+  {
+   "detalle_existe": "1C",
+   "x": 1116.8,
+   "y": 620.2,
+   "x1": 1124.8,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #10",
+   "title": "1 RESTROOM ELEVATIONS - elevación C (letra bajo la elevación)"
+  },
+  {
+   "detalle_existe": "1D",
+   "x": 1443.6,
+   "y": 620.2,
+   "x1": 1451.6,
+   "y1": 626.5,
+   "img": "img_verif/burbujas_A.png #15 (letra D)",
+   "title": "1 RESTROOM ELEVATIONS - elevación D (letra bajo la elevación)"
+  },
+  {
+   "detalle_existe": "4A",
+   "x": 1769.2,
+   "y": 1077.8,
+   "x1": 1924.4,
+   "y1": 1076.9,
+   "img": "img_verif/destinos.png #12",
+   "title": "4 LAVATORY DETAIL - sub A CLEAR FLOOR SPACE"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 135.0,
+   "y": 1658.4,
+   "x1": 344.3,
+   "y1": 1654.9,
+   "img": "img_verif/destinos.png #30",
+   "title": "GRAB BAR DETAIL"
+  }
+ ],
+ "A500": [
+  {
+   "x": 1344.9,
+   "y": 381.4,
+   "img": "img_verif/burbujas_B.png #0",
+   "n": "2",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 1051.8,
+   "y": 381.4,
+   "img": "img_verif/burbujas_B.png #1",
+   "n": "2",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 802.3,
+   "y": 381.4,
+   "img": "img_verif/burbujas_B.png #2",
+   "n": "2",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 503.8,
+   "y": 381.4,
+   "img": "img_verif/burbujas_B.png #3",
+   "n": "2",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 150.6,
+   "y": 381.4,
+   "img": "img_verif/burbujas_B.png #4",
+   "n": "2",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 138.2,
+   "y": 56.3,
+   "img": "img_verif/burbujas_B.png #5",
+   "n": "4",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 472.1,
+   "y": 56.3,
+   "img": "img_verif/burbujas_B.png #6",
+   "n": "4",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 770.9,
+   "y": 56.3,
+   "img": "img_verif/burbujas_B.png #7",
+   "n": "4",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 1006.9,
+   "y": 82.6,
+   "img": "img_verif/burbujas_B.png #8",
+   "n": "3",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 1325.5,
+   "y": 76.1,
+   "img": "img_verif/burbujas_B.png #9",
+   "n": "4",
+   "hoja": "A500",
+   "dibujo": "en 1 PARTITION TYPES"
+  },
+  {
+   "x": 1029.2,
+   "y": 705.0,
+   "img": "img_verif/burbujas_A.png #18",
+   "n": "6",
+   "hoja": "A500",
+   "fuente": "ojo",
+   "leido": "6 / -",
+   "dibujo": "en 3 TOP OF WALL BRACING (brace a estructura)"
+  },
+  {
+   "x": 519.4,
+   "y": 1220.3,
+   "img": "img_verif/burbujas_A.png #19",
+   "n": "6",
+   "hoja": "A500",
+   "fuente": "ojo",
+   "leido": "6 / (vacío)",
+   "dibujo": "en 5 ATTACHMENT TO STRUCTURE (brace)"
+  },
+  {
+   "x": 856.7,
+   "y": 716.3,
+   "img": "img_verif/burbujas_A.png #20",
+   "n": "3B",
+   "hoja": "A500",
+   "fuente": "ojo",
+   "leido": "B",
+   "tipo": "marca de subdetalle dentro de 3A",
+   "dibujo": "apunta al brace"
+  },
+  {
+   "x": 1181.3,
+   "y": 628.0,
+   "img": "img_verif/burbujas_A.png #21",
+   "n": "3A",
+   "hoja": "A500",
+   "fuente": "ojo",
+   "leido": "A",
+   "tipo": "marca de subdetalle dentro de 3B"
+  },
+  {
+   "x": 122,
+   "y": 461,
+   "img": "img_verif/no_burbujas.png #9",
+   "no_es_burbuja": "rombo tipo partición en título de tipos (A#...)"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 125.9,
+   "y": 1063.9,
+   "x1": 469.4,
+   "y1": 1060.5,
+   "img": "img_verif/destinos.png #22",
+   "title": "PARTITION FLOOR CONNECTION"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 649.8,
+   "y": 1063.9,
+   "x1": 977.9,
+   "y1": 1060.5,
+   "img": "img_verif/destinos.png #23",
+   "title": "TOP OF WALL BRACING DETAIL"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 1520.3,
+   "y": 1063.4,
+   "x1": 1841.6,
+   "y1": 1059.9,
+   "img": "img_verif/destinos.png #24",
+   "title": "ATTACHMENT TO STRUCTURE"
+  },
+  {
+   "detalle_existe": "6",
+   "x": 650.0,
+   "y": 1654.7,
+   "x1": 970.4,
+   "y1": 1651.3,
+   "img": "img_verif/destinos.png #25",
+   "title": "ATTACHMENT TO STRUCTURE"
+  },
+  {
+   "detalle_existe": "3A",
+   "x": 738.3,
+   "y": 1001.8,
+   "x1": 941.6,
+   "y1": 1000.7,
+   "img": "img_verif/destinos.png #26",
+   "title": "3 TOP OF WALL BRACING - sub A SECTION ACROSS PARTITION"
+  },
+  {
+   "detalle_existe": "3B",
+   "x": 1165.6,
+   "y": 1001.8,
+   "x1": 1359.1,
+   "y1": 1000.7,
+   "img": "img_verif/destinos.png #27",
+   "title": "3 TOP OF WALL BRACING - sub B SECTION ACROSS BRACING"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 136.5,
+   "y": 511.9,
+   "x1": 334.2,
+   "y1": 521.3,
+   "img": "img_verif/A500_destino_1.png",
+   "title": "1 PARTITION TYPES"
+  }
+ ],
+ "A501": [
+  {
+   "x": 238.6,
+   "y": 647.0,
+   "img": "img_verif/burbujas_A.png #22",
+   "n": "1A",
+   "hoja": "A501",
+   "fuente": "ojo",
+   "leido": "A1 / -",
+   "dibujo": "en 3 SUSPENDED CEILING BRACING, esquina superior (cuerda de cercha)"
+  },
+  {
+   "x": 262.9,
+   "y": 751.0,
+   "img": "img_verif/burbujas_A.png #23",
+   "n": "2B",
+   "hoja": "A501",
+   "fuente": "ojo",
+   "leido": "B2 / -",
+   "dibujo": "en 3, alambre a 45°"
+  },
+  {
+   "x": 693.8,
+   "y": 947.0,
+   "img": "img_verif/burbujas_A.png #24",
+   "n": "2B",
+   "hoja": "A501",
+   "fuente": "ojo",
+   "leido": "B2 / -",
+   "dibujo": "en 4 SUSPENDED CEILING BRACING"
+  },
+  {
+   "detalle_existe": "1A",
+   "x": 265.2,
+   "y": 339.8,
+   "x1": 327.3,
+   "y1": 338.1,
+   "img": "img_verif/destinos.png #28",
+   "title": "1 BLOCKING AT PENDANT LIGHT - sub A SECTION (unistrut/cuerda superior de cercha)"
+  },
+  {
+   "detalle_existe": "2B",
+   "x": 1169.2,
+   "y": 407.8,
+   "x1": 1546.1,
+   "y1": 407.8,
+   "img": "img_verif/destinos.png #29",
+   "title": "2 INSTALLATION OF SUSPENDED CEILING - sub B (arriostre sísmico: alambres a 45°, nota de categorías C-F)"
+  }
+ ],
+ "A503": [
+  {
+   "x": 296,
+   "y": 119,
+   "img": "img_verif/no_burbujas.png #10",
+   "no_es_burbuja": "hexágono keynote UL system"
+  }
+ ],
+ "A600": [
+  {
+   "x": 1442.0,
+   "y": 220.9,
+   "img": "img_verif/burbujas_B.png #10",
+   "n": "3",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1548.6,
+   "y": 220.9,
+   "img": "img_verif/burbujas_B.png #11",
+   "n": "2",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1442.0,
+   "y": 256.9,
+   "img": "img_verif/burbujas_B.png #12",
+   "n": "3",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1548.6,
+   "y": 256.9,
+   "img": "img_verif/burbujas_B.png #13",
+   "n": "2",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1442.0,
+   "y": 292.8,
+   "img": "img_verif/burbujas_B.png #14",
+   "n": "3",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1548.6,
+   "y": 292.8,
+   "img": "img_verif/burbujas_B.png #15",
+   "n": "2",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1442.0,
+   "y": 328.7,
+   "img": "img_verif/burbujas_B.png #16",
+   "n": "3",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 1548.6,
+   "y": 328.7,
+   "img": "img_verif/burbujas_B.png #17",
+   "n": "2",
+   "hoja": "A600",
+   "tipo": "texto",
+   "dibujo": "celda DOOR SCHEDULE (jamb=3/A600, head=2/A600), puertas 3C-6C; la celda SILL dice solo \"A502\" (sin número)"
+  },
+  {
+   "x": 315.3,
+   "y": 1031.7,
+   "img": "img_verif/no_burbujas.png #11",
+   "no_es_burbuja": "letra de tipo de puerta A (DOOR TYPES)"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 736.9,
+   "y": 1552.3,
+   "x1": 969.3,
+   "y1": 1549.1,
+   "img": "img_verif/destinos.png #0",
+   "title": "TYPICAL JAMB DETAIL"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 241.9,
+   "y": 1552.3,
+   "x1": 476.3,
+   "y1": 1549.1,
+   "img": "img_verif/destinos.png #1",
+   "title": "TYPICAL HEAD DETAIL"
+  }
+ ],
+ "A700": [
+  {
+   "x": 2321.8,
+   "y": 662.6,
+   "img": "img_verif/burbujas_B.png #18",
+   "n": "6",
+   "hoja": "A500",
+   "tipo": "texto",
+   "dibujo": "nota SHELVES: \"SHELVING ABOVE MOP SINK IS ON DETAIL 6/A500\""
+  }
+ ],
+ "_destinos": {
+  "3/A600": {
+   "detalle_existe": true,
+   "x": 736.9,
+   "y": 1552.3,
+   "x1": 969.3,
+   "y1": 1549.1,
+   "img": "img_verif/destinos.png #0",
+   "title": "TYPICAL JAMB DETAIL"
+  },
+  "2/A600": {
+   "detalle_existe": true,
+   "x": 241.9,
+   "y": 1552.3,
+   "x1": 476.3,
+   "y1": 1549.1,
+   "img": "img_verif/destinos.png #1",
+   "title": "TYPICAL HEAD DETAIL"
+  },
+  "3/A502": {
+   "detalle_existe": true,
+   "x": 1292.9,
+   "y": 506.1,
+   "x1": 1568.1,
+   "y1": 502.6,
+   "img": "img_verif/destinos.png #2",
+   "title": "FLOOR DETAIL AT ENTRY"
+  },
+  "5/A502": {
+   "detalle_existe": true,
+   "x": 248.9,
+   "y": 1028.1,
+   "x1": 514.6,
+   "y1": 1024.6,
+   "img": "img_verif/destinos.png #3",
+   "title": "LVT TO LVT TRANSITION"
+  },
+  "6/A502": {
+   "detalle_existe": true,
+   "x": 770.9,
+   "y": 1028.1,
+   "x1": 1034.6,
+   "y1": 1024.6,
+   "img": "img_verif/destinos.png #4",
+   "title": "RESTROOM COVE BASE"
+  },
+  "1/A301": {
+   "detalle_existe": true,
+   "x": 492.9,
+   "y": 1456.3,
+   "x1": 934.5,
+   "y1": 1454.2,
+   "img": "img_verif/destinos.png #5",
+   "title": "EXISTING EXTERIOR ELEVATION"
+  },
+  "1/A300": {
+   "detalle_existe": true,
+   "x": 441.7,
+   "y": 1474.8,
+   "x1": 883.2,
+   "y1": 1472.6,
+   "img": "img_verif/destinos.png #6",
+   "title": "EXISTING EXTERIOR ELEVATION"
+  },
+  "2/A402": {
+   "detalle_existe": true,
+   "x": 1738.1,
+   "y": 740.7,
+   "x1": 2126.5,
+   "y1": 737.2,
+   "img": "img_verif/destinos.png #7",
+   "title": "ENLARGED UNISEX RESTROOM PLAN"
+  },
+  "1A/A402": {
+   "detalle_existe": true,
+   "x": 384.0,
+   "y": 620.2,
+   "x1": 392.0,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #8",
+   "title": "1 RESTROOM ELEVATIONS - elevación A (letra bajo la elevación)"
+  },
+  "1B/A402": {
+   "detalle_existe": true,
+   "x": 725.8,
+   "y": 620.2,
+   "x1": 733.8,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #9",
+   "title": "1 RESTROOM ELEVATIONS - elevación B (letra bajo la elevación)"
+  },
+  "1C/A402": {
+   "detalle_existe": true,
+   "x": 1116.8,
+   "y": 620.2,
+   "x1": 1124.8,
+   "y1": 626.5,
+   "img": "img_verif/destinos.png #10",
+   "title": "1 RESTROOM ELEVATIONS - elevación C (letra bajo la elevación)"
+  },
+  "1D/A402": {
+   "detalle_existe": true,
+   "x": 1443.6,
+   "y": 620.2,
+   "x1": 1451.6,
+   "y1": 626.5,
+   "img": "img_verif/burbujas_A.png #15 (letra D)",
+   "title": "1 RESTROOM ELEVATIONS - elevación D (letra bajo la elevación)"
+  },
+  "4A/A402": {
+   "detalle_existe": true,
+   "x": 1769.2,
+   "y": 1077.8,
+   "x1": 1924.4,
+   "y1": 1076.9,
+   "img": "img_verif/destinos.png #12",
+   "title": "4 LAVATORY DETAIL - sub A CLEAR FLOOR SPACE",
+   "nota": "EXISTE pero el contenido (espacio libre en lavabo) no coincide con lo señalado (grab bars en 3); lo probable es 5/A402 GRAB BAR DETAIL"
+  },
+  "1/A504": {
+   "detalle_existe": true,
+   "x": 128.1,
+   "y": 641.5,
+   "x1": 580.5,
+   "y1": 638.1,
+   "img": "img_verif/destinos.png #13",
+   "title": "MOP SINK DETAILS (FOR REFERENCE ONLY)"
+  },
+  "1/A401": {
+   "detalle_existe": true,
+   "x": 272.3,
+   "y": 564.3,
+   "x1": 453.6,
+   "y1": 561.6,
+   "img": "img_verif/destinos.png #14",
+   "title": "INTERIOR ELEVATION"
+  },
+  "2/A401": {
+   "detalle_existe": true,
+   "x": 249.1,
+   "y": 1089.7,
+   "x1": 430.4,
+   "y1": 1087.1,
+   "img": "img_verif/destinos.png #15",
+   "title": "INTERIOR ELEVATION"
+  },
+  "3/A401": {
+   "detalle_existe": true,
+   "x": 1293.8,
+   "y": 1089.6,
+   "x1": 1475.0,
+   "y1": 1087.1,
+   "img": "img_verif/destinos.png #16",
+   "title": "INTERIOR ELEVATION"
+  },
+  "4/A401": {
+   "detalle_existe": true,
+   "x": 271.2,
+   "y": 1640.4,
+   "x1": 452.5,
+   "y1": 1637.7,
+   "img": "img_verif/destinos.png #17",
+   "title": "INTERIOR ELEVATION"
+  },
+  "5/A401": {
+   "detalle_existe": true,
+   "x": 1324.2,
+   "y": 1653.3,
+   "x1": 1505.5,
+   "y1": 1650.9,
+   "img": "img_verif/destinos.png #18",
+   "title": "INTERIOR ELEVATION"
+  },
+  "1/A400": {
+   "detalle_existe": true,
+   "x": 276.9,
+   "y": 550.7,
+   "x1": 458.1,
+   "y1": 548.1,
+   "img": "img_verif/destinos.png #19",
+   "title": "INTERIOR ELEVATION"
+  },
+  "2/A400": {
+   "detalle_existe": true,
+   "x": 276.9,
+   "y": 1087.1,
+   "x1": 545.4,
+   "y1": 1084.5,
+   "img": "img_verif/destinos.png #20",
+   "title": "INTERIOR ELEVATION LOGO WALL"
+  },
+  "3/A400": {
+   "detalle_existe": true,
+   "x": 278.0,
+   "y": 1638.6,
+   "x1": 459.3,
+   "y1": 1636.1,
+   "img": "img_verif/destinos.png #21",
+   "title": "INTERIOR ELEVATION"
+  },
+  "2/A500": {
+   "detalle_existe": true,
+   "x": 125.9,
+   "y": 1063.9,
+   "x1": 469.4,
+   "y1": 1060.5,
+   "img": "img_verif/destinos.png #22",
+   "title": "PARTITION FLOOR CONNECTION"
+  },
+  "3/A500": {
+   "detalle_existe": true,
+   "x": 649.8,
+   "y": 1063.9,
+   "x1": 977.9,
+   "y1": 1060.5,
+   "img": "img_verif/destinos.png #23",
+   "title": "TOP OF WALL BRACING DETAIL"
+  },
+  "4/A500": {
+   "detalle_existe": true,
+   "x": 1520.3,
+   "y": 1063.4,
+   "x1": 1841.6,
+   "y1": 1059.9,
+   "img": "img_verif/destinos.png #24",
+   "title": "ATTACHMENT TO STRUCTURE"
+  },
+  "6/A500": {
+   "detalle_existe": true,
+   "x": 650.0,
+   "y": 1654.7,
+   "x1": 970.4,
+   "y1": 1651.3,
+   "img": "img_verif/destinos.png #25",
+   "title": "ATTACHMENT TO STRUCTURE",
+   "nota": "Como destino de A500 det3/det5 coincide (brace a viguetas). Como destino de la nota de A700 (repisas sobre mop sink) NO coincide: las repisas están en 1/A504"
+  },
+  "3A/A500": {
+   "detalle_existe": true,
+   "x": 738.3,
+   "y": 1001.8,
+   "x1": 941.6,
+   "y1": 1000.7,
+   "img": "img_verif/destinos.png #26",
+   "title": "3 TOP OF WALL BRACING - sub A SECTION ACROSS PARTITION"
+  },
+  "3B/A500": {
+   "detalle_existe": true,
+   "x": 1165.6,
+   "y": 1001.8,
+   "x1": 1359.1,
+   "y1": 1000.7,
+   "img": "img_verif/destinos.png #27",
+   "title": "3 TOP OF WALL BRACING - sub B SECTION ACROSS BRACING"
+  },
+  "1A/A501": {
+   "detalle_existe": true,
+   "x": 265.2,
+   "y": 339.8,
+   "x1": 327.3,
+   "y1": 338.1,
+   "img": "img_verif/destinos.png #28",
+   "title": "1 BLOCKING AT PENDANT LIGHT - sub A SECTION (unistrut/cuerda superior de cercha)"
+  },
+  "2B/A501": {
+   "detalle_existe": true,
+   "x": 1169.2,
+   "y": 407.8,
+   "x1": 1546.1,
+   "y1": 407.8,
+   "img": "img_verif/destinos.png #29",
+   "title": "2 INSTALLATION OF SUSPENDED CEILING - sub B (arriostre sísmico: alambres a 45°, nota de categorías C-F)"
+  },
+  "5/A402": {
+   "detalle_existe": true,
+   "x": 135.0,
+   "y": 1658.4,
+   "x1": 344.3,
+   "y1": 1654.9,
+   "img": "img_verif/destinos.png #30",
+   "title": "GRAB BAR DETAIL",
+   "nota": "no referenciado por ninguna burbuja; incluido como alternativa probable"
+  },
+  "1/A502": {
+   "detalle_existe": true,
+   "x": 248.9,
+   "y": 506.1,
+   "x1": 675.0,
+   "y1": 502.6,
+   "img": "img_verif/destinos.png #31",
+   "title": "VINYL BASE (SALES AREA AND HALLWAY)",
+   "nota": "no referenciado por ninguna burbuja; incluido como alternativa probable"
+  },
+  "C1/G002": {
+   "detalle_existe": false,
+   "x": null,
+   "y": null,
+   "x1": null,
+   "y1": null,
+   "img": "img_verif/no_burbujas.png #12",
+   "title": null,
+   "nota": "G002 tiene detalles 1-8; no hay C1. Subdetalles de 6 ADA SERVICE COUNTER ELEVATIONS son A, A1, A2, A3, B, B1, B2 (C solo existe como 2C BUILT-IN FOUNTAIN). Lo más probable es 6/G002 (o 6A1/6B1)."
+  },
+  "A502 (sill, sin número)": {
+   "detalle_existe": true,
+   "x": 1292.9,
+   "y": 506.1,
+   "x1": 1568.1,
+   "y1": 502.6,
+   "img": "img_verif/destinos.png #2",
+   "title": "FLOOR DETAIL AT ENTRY (supuesto; la celda SILL no da número)",
+   "nota": "solo hoja; para puertas interiores 3C-6C el umbral aplicable sería 5/A502 LVT TO LVT TRANSITION"
+  }
+ },
+ "A502": [
+  {
+   "detalle_existe": "3",
+   "x": 1292.9,
+   "y": 506.1,
+   "x1": 1568.1,
+   "y1": 502.6,
+   "img": "img_verif/destinos.png #2",
+   "title": "FLOOR DETAIL AT ENTRY"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 248.9,
+   "y": 1028.1,
+   "x1": 514.6,
+   "y1": 1024.6,
+   "img": "img_verif/destinos.png #3",
+   "title": "LVT TO LVT TRANSITION"
+  },
+  {
+   "detalle_existe": "6",
+   "x": 770.9,
+   "y": 1028.1,
+   "x1": 1034.6,
+   "y1": 1024.6,
+   "img": "img_verif/destinos.png #4",
+   "title": "RESTROOM COVE BASE"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 248.9,
+   "y": 506.1,
+   "x1": 675.0,
+   "y1": 502.6,
+   "img": "img_verif/destinos.png #31",
+   "title": "VINYL BASE (SALES AREA AND HALLWAY)"
+  }
+ ],
+ "A504": [
+  {
+   "detalle_existe": "1",
+   "x": 128.1,
+   "y": 641.5,
+   "x1": 580.5,
+   "y1": 638.1,
+   "img": "img_verif/destinos.png #13",
+   "title": "MOP SINK DETAILS (FOR REFERENCE ONLY)"
+  }
+ ]
+}

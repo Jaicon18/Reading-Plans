@@ -49,10 +49,6 @@
    "source": "1/A500 (A#, C#, D, E#, H left to right; H not tagged on A100)"
   },
   "product_names": {
-   "nested inner runner (deflection head)": {
-    "value": "Nested 'C' channel 20 GA floating 1\" below the top cord, inside the long-leg runner (4/A500)",
-    "source": "4/A500"
-   },
    "track de ceilings / soffits": {
     "value": "Ceiling perimeter track 20 GA (restroom C-1 ceiling)",
     "source": "1/A200"
@@ -61,6 +57,10 @@
   "rcp_sheet": {
    "value": "A200",
    "source": "1/A200"
+  },
+  "partition_row_rule": {
+   "value": "wall_id",
+   "source": "A100 wall ids: one Partition Takeoff row per wall, the same ids as the markups"
   }
  },
  "walls": [
@@ -71,7 +71,7 @@
    "id": "A3-01",
    "tag": "A3",
    "tag_ids": [
-    "PC0007"
+    "PT0005"
    ],
    "location": "Sales Area - north demising wall, west of existing column",
    "band": {
@@ -83,7 +83,7 @@
     "sheet": "A100"
    },
    "length_ft": 14.411,
-   "length_source": "A100 dim 44'-3 1/2\" (ticks 986.6-1784.5 pt = 797.9 pt) C3 face to storefront furring, split by existing column box 1246.5-1265.4 pt (D100 key 14 existing column to remain)",
+   "length_source": "A100 dim 44'-3 1/2\" (ticks 986.6-1784.5 pt = 797.9 pt) C3 face to storefront furring, split by existing column box 1246.5-1265.4 pt (D100 key 14 existing column that stays) [NEW wall of this take-off]",
    "length_op": "(1246.5-987.1)/18 = 14.411 (44.292 - 1.050 column - 28.833 east seg) [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
@@ -95,9 +95,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-01.png"
     },
     {
@@ -105,8 +106,9 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02)",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02) [DERIVED]",
      "room": "back face toward the existing demising / exterior wall (1/2\" gap, 1/A500)",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-01.png"
     }
    ],
@@ -116,7 +118,7 @@
    "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "A3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -137,10 +139,12 @@
    "top_track_kind": "slip",
    "top_track_kind_source": "4/A500 - LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE (+ 3 5/8\" X 20 GA. 'C' CHANNEL TRACK FLOATING 1\" BELOW TOP CORD)",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "A3 key of 1/A500",
    "img": "img_runner/wall_A3-01.png",
-   "height_img": "img_runner/sheet_A100_35116510.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_A3_1A500.png"
   },
   {
    "element": "wall",
@@ -149,7 +153,7 @@
    "id": "A3-02",
    "tag": "A3",
    "tag_ids": [
-    "PC0004"
+    "PT0002"
    ],
    "location": "Sales Area - north demising wall (slat wall), east of existing column to storefront furring",
    "band": {
@@ -173,9 +177,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-02.png"
     },
     {
@@ -183,8 +188,9 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02)",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02) [DERIVED]",
      "room": "back face toward the existing demising / exterior wall (1/2\" gap, 1/A500)",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-02.png"
     }
    ],
@@ -194,7 +200,7 @@
    "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "A3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -214,10 +220,12 @@
    "top_track_kind": "slip",
    "top_track_kind_source": "4/A500 - LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE (+ 3 5/8\" X 20 GA. 'C' CHANNEL TRACK FLOATING 1\" BELOW TOP CORD)",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "A3 key of 1/A500",
    "img": "img_runner/wall_A3-02.png",
-   "height_img": "img_runner/sheet_A100_35116510.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_A3_1A500.png"
   },
   {
    "element": "wall",
@@ -226,7 +234,7 @@
    "id": "A3-03",
    "tag": "A3",
    "tag_ids": [
-    "PC0008"
+    "PT0006"
    ],
    "location": "Sales Area - south demising wall (logo wall), E3-11 face to storefront furring",
    "band": {
@@ -250,9 +258,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-03.png"
     },
     {
@@ -260,8 +269,9 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02)",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02) [DERIVED]",
      "room": "back face toward the existing demising / exterior wall (1/2\" gap, 1/A500)",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-03.png"
     }
    ],
@@ -271,7 +281,7 @@
    "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "A3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -291,10 +301,12 @@
    "top_track_kind": "slip",
    "top_track_kind_source": "4/A500 - LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE (+ 3 5/8\" X 20 GA. 'C' CHANNEL TRACK FLOATING 1\" BELOW TOP CORD)",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "A3 key of 1/A500",
    "img": "img_runner/wall_A3-03.png",
-   "height_img": "img_runner/sheet_A100_35116510.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_A3_1A500.png"
   },
   {
    "element": "wall",
@@ -303,9 +315,9 @@
    "id": "A3-04",
    "tag": "A3",
    "tag_ids": [
-    "PC0009"
+    "PT0007"
    ],
-   "location": "Utility Room - south demising wall ('ALIGN' with existing furring to remain, D100 key 20)",
+   "location": "Utility Room - south demising wall ('ALIGN' with existing furring that stays, D100 key 20) [NEW wall of this take-off]",
    "band": {
     "ori": "H",
     "c0": 1314.8,
@@ -320,16 +332,17 @@
    "length_status": "CONFIRMADO",
    "height_ft": 16.333,
    "height_source": "A100 'PLY DECK @ 16'-4\"' (BACK OF HOUSE zone; deck break line not drawn - RFI-01)",
-   "height_status": "DERIVADO",
+   "height_status": "CONFIRMADO",
    "faces": [
     {
      "side": "B",
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-04.png"
     },
     {
@@ -337,8 +350,9 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02)",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02) [DERIVED]",
      "room": "back face toward the existing demising / exterior wall (1/2\" gap, 1/A500)",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_A3-04.png"
     }
    ],
@@ -348,7 +362,7 @@
    "gauge_source": "1/A500 type A: '20 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "A3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -368,10 +382,12 @@
    "top_track_kind": "slip",
    "top_track_kind_source": "4/A500 - LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE (+ 3 5/8\" X 20 GA. 'C' CHANNEL TRACK FLOATING 1\" BELOW TOP CORD)",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "A3 key of 1/A500",
    "img": "img_runner/wall_A3-04.png",
-   "height_img": "img_runner/sheet_A100_61248206.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_A3_1A500.png"
   },
   {
    "element": "wall",
@@ -380,8 +396,8 @@
    "id": "C3-01",
    "tag": "C3",
    "tag_ids": [
-    "PC0005",
-    "PC0010"
+    "PT0003",
+    "PT0008"
    ],
    "location": "Sales Area / Back of House + Hallway (west face); from north demising face to cased opening jamb",
    "band": {
@@ -398,16 +414,17 @@
    "length_status": "DERIVADO",
    "height_ft": 17.13,
    "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (Sales Area deck tag) - the deck break between BOH (16'-4\") and Sales is not drawn on the C3 line: higher printed deck carried (conservative), RFI-01",
-   "height_status": "DERIVADO",
+   "height_status": "CONFIRMADO",
    "faces": [
     {
      "side": "A",
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area (logo wall 19'-0\", iPad 4'-0\")",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_C3-01.png"
     },
     {
@@ -415,9 +432,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 / A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 / A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House (501.1-1029.5) + Hallway (1037-1069.1); kitchenette 5'-2\" WR zone (A103)",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_C3-01.png"
     }
    ],
@@ -427,7 +445,7 @@
    "gauge_source": "1/A500 type C: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "C3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -479,10 +497,12 @@
    "top_track_kind": "slip",
    "top_track_kind_source": "4/A500 - LONG LEG RUNNER TRACK W/ 2\" MIN. VERT. SLOTTED HOLES ATTACHED TO STRUCTURE (+ 3 5/8\" X 20 GA. 'C' CHANNEL TRACK FLOATING 1\" BELOW TOP CORD)",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "C3 key of 1/A500",
    "img": "img_runner/wall_C3-01.png",
-   "height_img": "img_runner/sheet_A100_74622089.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_C3_1A500.png"
   },
   {
    "element": "wall",
@@ -490,7 +510,9 @@
    "page": 7,
    "id": "D-01",
    "tag": "D",
-   "tag_ids": [],
+   "tag_ids": [
+    "PT0001"
+   ],
    "location": "Office (north) / Unisex Restroom (south)",
    "band": {
     "ori": "H",
@@ -513,9 +535,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Office",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_D-01.png"
     },
     {
@@ -523,9 +546,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 8.5,
-     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\") [DERIVED]",
      "room": "Unisex Restroom",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_D-01.png"
     }
    ],
@@ -535,7 +559,7 @@
    "gauge_source": "1/A500 type D",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "D/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -561,10 +585,12 @@
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
    "tag_read_info": "the D diamond is printed on A100 at the restroom / office wall; single-letter tag not counted by inventario_tags.py; located by readings A and B (crop img_runner/wall_D-01.png)",
    "default_type_source": "D/A100",
+   "detail_type_info": "D key of 1/A500",
    "img": "img_runner/wall_D-01.png",
-   "height_img": "img_runner/sheet_A100_61248206.png",
+   "height_img": "img_runner/height_deck_A100.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500_32502851.png"
+   "stud_img": "img_runner/sheet_A500_32502851.png",
+   "height_img_type": "img_runner/height_D_1A500.png"
   },
   {
    "element": "wall",
@@ -573,8 +599,8 @@
    "id": "E3-01",
    "tag": "E3",
    "tag_ids": [
-    "PC0013",
-    "PC0014"
+    "PT0011",
+    "PT0012"
    ],
    "location": "Office (south) / Back of House (north)",
    "band": {
@@ -598,9 +624,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Office",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-01.png"
     },
     {
@@ -608,9 +635,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-01.png"
     }
    ],
@@ -620,7 +648,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -640,10 +668,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-01.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -652,8 +682,8 @@
    "id": "E3-02",
    "tag": "E3",
    "tag_ids": [
-    "PC0013",
-    "PC0014"
+    "PT0011",
+    "PT0012"
    ],
    "location": "Office east wall (Office / BOH) incl. door 6C, from E3-01 south face to restroom wall line",
    "band": {
@@ -677,9 +707,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 OFFICE C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Office",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-02.png"
     },
     {
@@ -687,9 +718,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-02.png"
     }
    ],
@@ -699,7 +731,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -739,10 +771,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-02.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -751,7 +785,7 @@
    "id": "E3-03",
    "tag": "E3",
    "tag_ids": [
-    "PC0015"
+    "PT0013"
    ],
    "location": "Unisex Restroom (west) / Back of House (east), south of door 6",
    "band": {
@@ -775,9 +809,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 8.5,
-     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\") [DERIVED]",
      "room": "Unisex Restroom",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-03.png"
     },
     {
@@ -785,9 +820,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-03.png"
     }
    ],
@@ -797,7 +833,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -816,10 +852,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-03.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -828,7 +866,8 @@
    "id": "E3-04",
    "tag": "E3",
    "tag_ids": [
-    "PC0018"
+    "PT0016",
+    "PT0015"
    ],
    "location": "Hallway north wall west (Restroom / Hallway) incl. 7\" pier and door 4C, from exterior wall to vanity alcove west return",
    "band": {
@@ -852,9 +891,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 8.5,
-     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\") [DERIVED]",
      "room": "Unisex Restroom",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-04.png"
     },
     {
@@ -862,9 +902,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Hallway",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-04.png"
     }
    ],
@@ -874,7 +915,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -918,10 +959,13 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
+   "tag_ids_source": "reading + [DERIVED] nearest band of the same type on the same sheet (evidencia.py, inventario, U-117)",
    "img": "img_runner/wall_E3-04.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -930,7 +974,7 @@
    "id": "E3-06",
    "tag": "E3",
    "tag_ids": [
-    "PC0017"
+    "PT0015"
    ],
    "location": "EWC niche west side (restroom W / niche E)",
    "band": {
@@ -943,7 +987,7 @@
    },
    "length_ft": 1.083,
    "length_source": "A100 dim 1'-6\" (ticks 1002.5-1029.5) less back wall 7.5 pt",
-   "length_op": "1.5 - 0.417 = 1.083 [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
+   "length_op": "1'-6\" printed (A100) - back wall 7.5 pt / 18 = 1.5 - 7.5/18 = 1.083 1.5 - 0.417 = 1.083 [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
    "length_status": "DERIVADO",
    "height_ft": 12.417,
    "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
@@ -954,9 +998,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 8.5,
-     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\") [DERIVED]",
      "room": "Unisex Restroom",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-06.png"
     },
     {
@@ -964,9 +1009,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 12.417,
-     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "EWC niche (hallway)",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-06.png"
     }
    ],
@@ -976,7 +1022,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -995,10 +1041,13 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
+   "untagged_join": "EWC niche return without its own tag: carried as the adjoining tagged E3 walls (E3-04 / E3-09 line), same type (E28 eje rule)",
    "img": "img_runner/wall_E3-06.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1007,7 +1056,7 @@
    "id": "E3-07a",
    "tag": "E3",
    "tag_ids": [
-    "PC0017"
+    "PT0015"
    ],
    "location": "EWC niche back wall - restroom portion",
    "band": {
@@ -1031,9 +1080,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 8.5,
-     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\")",
+     "height_source": "A200 UNISEX RESTROOM C-1 (gyp board) H 8'-0\" + 6\" = 8.5 (A402 ceiling 8'-0\") [DERIVED]",
      "room": "Unisex Restroom",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-07a.png"
     },
     {
@@ -1041,9 +1091,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 12.417,
-     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "EWC niche (hallway)",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-07a.png"
     }
    ],
@@ -1053,7 +1104,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1072,10 +1123,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-07a.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1084,7 +1137,7 @@
    "id": "E3-07b",
    "tag": "E3",
    "tag_ids": [
-    "PC0017"
+    "PT0015"
    ],
    "location": "EWC niche back wall - Back of House portion",
    "band": {
@@ -1108,9 +1161,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-07b.png"
     },
     {
@@ -1118,9 +1172,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 12.417,
-     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "EWC niche (hallway)",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-07b.png"
     }
    ],
@@ -1130,7 +1185,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1150,10 +1205,12 @@
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_source_info": "same as E3-07a",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-07b.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1162,7 +1219,7 @@
    "id": "E3-08",
    "tag": "E3",
    "tag_ids": [
-    "PC0016"
+    "PT0014"
    ],
    "location": "EWC niche east side (niche W / BOH E)",
    "band": {
@@ -1175,7 +1232,7 @@
    },
    "length_ft": 1.083,
    "length_source": "A100 dim 1'-6\" (ticks 1002.5-1029.5) less back wall 7.5 pt",
-   "length_op": "1.083 [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
+   "length_op": "1'-6\" printed (A100) - back wall 7.5 pt / 18 = 1.5 - 7.5/18 = 1.083 1.083 [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
    "length_status": "DERIVADO",
    "height_ft": 12.417,
    "height_source": "1/A500 type E: studs to 6\" above ceiling (top braced 3/A500); highest adjacent ceiling 11'-11\" (A200) + 6\" = 12.417",
@@ -1186,9 +1243,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 12.417,
-     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417",
+     "height_source": "niche open to HALLWAY: A200 HALLWAY C-2 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "EWC niche (hallway)",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-08.png"
     },
     {
@@ -1196,9 +1254,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-08.png"
     }
    ],
@@ -1208,7 +1267,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1228,10 +1287,13 @@
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_source_info": "as E3-06",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
+   "untagged_join": "EWC niche return without its own tag: carried as the adjoining tagged E3 walls (E3-04 / E3-09 line), same type (E28 eje rule)",
    "img": "img_runner/wall_E3-08.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1240,8 +1302,8 @@
    "id": "E3-09",
    "tag": "E3",
    "tag_ids": [
-    "PC0006",
-    "PC0016"
+    "PT0004",
+    "PT0014"
    ],
    "location": "Hallway north wall east (BOH / Hallway) incl. 9\" pier, door 5C and 2'-11\" piece, to C3-01",
    "band": {
@@ -1265,9 +1327,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 BACK OF HOUSE C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Back of House",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-09.png"
     },
     {
@@ -1275,9 +1338,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Hallway",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-09.png"
     }
    ],
@@ -1287,7 +1351,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1327,10 +1391,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-09.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1339,7 +1405,7 @@
    "id": "E3-11a",
    "tag": "E3",
    "tag_ids": [
-    "PC0011"
+    "PT0009"
    ],
    "location": "Sales (east) / Hallway (west), cased-opening jamb to existing hallway wall centerline",
    "band": {
@@ -1351,7 +1417,7 @@
     "sheet": "A100"
    },
    "length_ft": 1.956,
-   "length_source": "A100 dim 9'-7\" (ticks 1141.1-1313.3) split at existing wall to remain (D100 key 17, A100 y 1172.6-1179.9)",
+   "length_source": "A100 dim 9'-7\" (ticks 1141.1-1313.3) split at existing wall that stays (D100 key 17, A100 y 1172.6-1179.9) [NEW wall of this take-off]",
    "length_op": "(1176.3-1141.1)/18 = 1.956 [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]",
    "length_status": "DERIVADO",
    "height_ft": 12.417,
@@ -1363,9 +1429,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-11a.png"
     },
     {
@@ -1373,9 +1440,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417",
+     "height_source": "A200 HALLWAY C-2 H 11'-11\" + 6\" = 12.417 [DERIVED]",
      "room": "Hallway",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-11a.png"
     }
    ],
@@ -1385,7 +1453,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1404,10 +1472,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-11a.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1416,8 +1486,8 @@
    "id": "E3-11b",
    "tag": "E3",
    "tag_ids": [
-    "PC0011",
-    "PC0012"
+    "PT0009",
+    "PT0010"
    ],
    "location": "Sales (east) / Utility Room (west), to south demising face",
    "band": {
@@ -1441,9 +1511,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 12.417,
-     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417",
+     "height_source": "A200 SALES AREA C-2 H 11'-11\" + 6\" (1/A500 'TO 6\" ABOVE CEILING') = 12.417 [DERIVED]",
      "room": "Sales Area",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-11b.png"
     },
     {
@@ -1451,9 +1522,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-11b.png"
     }
    ],
@@ -1463,7 +1535,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1482,10 +1554,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-11b.png",
-   "height_img": "img_runner/sheet_A500.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1494,7 +1568,7 @@
    "id": "E3-12",
    "tag": "E3",
    "tag_ids": [
-    "PC0020"
+    "PT0018"
    ],
    "location": "Utility Room - mop sink alcove west stub (free end)",
    "band": {
@@ -1518,9 +1592,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-12.png"
     },
     {
@@ -1528,9 +1603,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room - mop sink alcove",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-12.png"
     },
     {
@@ -1538,11 +1614,12 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room",
      "length_ft": 0.412,
      "length_source": "free end of the stub wall (A100 / 1/A504): 3.91 SF / 9.5 ft",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-12.png"
     }
    ],
@@ -1552,7 +1629,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1572,10 +1649,12 @@
    "top_track_kind": "standard",
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-12.png",
-   "height_img": "img_runner/sheet_A200_39848334.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   },
   {
    "element": "wall",
@@ -1584,7 +1663,7 @@
    "id": "E3-13",
    "tag": "E3",
    "tag_ids": [
-    "PC0019"
+    "PT0017"
    ],
    "location": "Utility Room - mop sink alcove east stub (free end)",
    "band": {
@@ -1608,9 +1687,10 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room - mop sink alcove",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-13.png"
     },
     {
@@ -1618,9 +1698,10 @@
      "layers": 1,
      "board": "5/8 type X",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room",
      "board_info": "5/8 Type X",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-13.png"
     },
     {
@@ -1628,11 +1709,12 @@
      "layers": 1,
      "board": "5/8 type X WR",
      "height_ft": 9.5,
-     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5",
+     "height_source": "A200 UTILITY ROOM C-2 H 9'-0\" + 6\" = 9.5 [DERIVED]",
      "room": "Utility Room - mop sink alcove",
      "length_ft": 0.417,
      "length_source": "free end of the stub wall (A100 / 1/A504): 3.96 SF / 9.5 ft",
      "board_info": "5/8 Type X water resistant (A100 notes 5/11, 1/A500 'PROVIDE WATER RESISTANT GYP. BD. AT WET LOCATIONS')",
+     "height_status": "DERIVADO",
      "img": "img_runner/wall_E3-13.png"
     }
    ],
@@ -1642,7 +1724,7 @@
    "gauge_source": "1/A500 type E: '18 GA. METAL STUDS @ 16\" O.C.'",
    "oc_in": 16,
    "oc_source": "1/A500 '@ 16\" O.C.'",
-   "detail": "E3/A500",
+   "detail": "1/A500",
    "detail_source": "1/A500; A100 general note 2 'FOR ALL PARTITION CONNECTION DETAILS (TOP AND BOTTOM) SEE SHEET A500'",
    "bottom_track": true,
    "top_track": true,
@@ -1663,10 +1745,12 @@
    "top_track_kind_source": "3/A500 - 20 GA. MIN. TRACK (PER ES REPORT ESR-1042), METAL STUDS CUT 1/2\" SHORT FOR 1/2\" DEFLECTION",
    "height_source_info": "as E3-12",
    "length_basis": "face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)",
+   "detail_type_info": "E3 key of 1/A500",
    "img": "img_runner/wall_E3-13.png",
-   "height_img": "img_runner/sheet_A200_39848334.png",
+   "height_img": "img_runner/height_E3_1A500.png",
    "detail_img": "img_runner/sheet_A500.png",
-   "stud_img": "img_runner/sheet_A500.png"
+   "stud_img": "img_runner/sheet_A500.png",
+   "height_img_type": "img_runner/height_E3_1A500.png"
   }
  ],
  "nodes": [
@@ -1895,10 +1979,12 @@
  "details": {
   "1/A500": {
    "source": "1/A500",
-   "title": "Partition types A, C, D, E, H",
+   "title": "PARTITION TYPES (A#, C#, D, E#, H)",
    "notes": "see LECTURA_A_notas.md",
-   "sealant_none_reason": "no sealant bead in our scope: acoustical sealant (2/A500) EXCLUDED in all projects (estimator standing order)",
+   "sealant_none_reason": "acoustical sealant (2/A500) EXCLUDED in all projects (estimator standing order)",
    "sealant_source": "2/A500",
+   "layers_per_face": 1,
+   "layers_source": "1/A500 (one layer 5/8\" TYPE X per face on every type)",
    "img": "img_runner/sheet_A500.png"
   },
   "2/A500": {
@@ -2147,7 +2233,7 @@
    "area_op": "shoelace = 19,599 pt2 / 324 = 60.49",
    "area_status": "DERIVADO",
    "height_ft": 8.0,
-   "height_source": "A200 restroom tag H 8'-0\"; A402 CEILING 8'-0\"",
+   "height_source": "1/A200 restroom tag H 8'-0\" [CONFIRMED]; A402 CEILING 8'-0\"",
    "board": "5/8 type X WR",
    "layers": 1,
    "system": "furring",
@@ -2171,6 +2257,7 @@
    },
    "detail": "1/A200",
    "hatch_check_cause": "1/A200 SHEET SYMBOLS: 'C-1 GYP BOARD CEILING' is a plain square (no hatch, only the ACT C-2 / C-3 are gridded); polygon = inside faces of the restroom walls (rcp_check.png)",
+   "height_status": "CONFIRMADO",
    "img": "img_runner/sheet_A200_34159181.png"
   }
  ],
@@ -2355,7 +2442,7 @@
    "length_op": "(1855.4-1050.6)/18 = 44.71",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 765.88,
    "unit": "SF",
@@ -2376,7 +2463,7 @@
    "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 126.93,
    "unit": "SF",
@@ -2397,7 +2484,7 @@
    "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 126.93,
    "unit": "SF",
@@ -2418,7 +2505,7 @@
    "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 126.93,
    "unit": "SF",
@@ -2439,7 +2526,7 @@
    "length_op": "(1513.0-1379.6)/18 = 7.41 (gross, door openings key 10 not deducted - width not printed)",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 126.93,
    "unit": "SF",
@@ -2460,7 +2547,7 @@
    "length_op": "(1865.0-838.2)/18 = 57.04",
    "length_status": "DERIVADO",
    "height_ft": 17.13,
-   "height_source": "A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
+   "height_source": "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure",
    "height_status": "DERIVADO",
    "qty": 977.1,
    "unit": "SF",
@@ -2581,24 +2668,24 @@
   {
    "ref": "BRACE-E3-11a",
    "familia": "metal stud brace to structure (printed)",
-   "qty": 22.15,
+   "qty": 26.66,
    "unit": "LF",
    "pcs": 4,
    "source": "3/A500",
    "label": "362S137-33 brace @ 48\" o.c. max., 45 deg to structure (3/A500) DOUBLED (walls to 15'-0\")",
-   "op": "n = ceil(1.956 / 4) + 1 = 2 x 2 member(s) x (16.333 B.O. deck A100 - 12.417 top) x 1.414 = 22.15",
+   "op": "n = ceil(1.956 / 4) + 1 = 2 x 2 member(s) x (17.13 B.O. deck on the C3 line A100 - 12.417 top) x 1.414 = 26.66 (back-check D5)",
    "status": "DERIVADO",
    "wall": "E3-11a"
   },
   {
    "ref": "BRACE-E3-11b",
    "familia": "metal stud brace to structure (printed)",
-   "qty": 44.3,
+   "qty": 53.31,
    "unit": "LF",
    "pcs": 8,
    "source": "3/A500",
    "label": "362S137-33 brace @ 48\" o.c. max., 45 deg to structure (3/A500) DOUBLED (walls to 15'-0\")",
-   "op": "n = ceil(8.039 / 4) + 1 = 4 x 2 member(s) x (16.333 B.O. deck A100 - 12.417 top) x 1.414 = 44.3",
+   "op": "n = ceil(8.039 / 4) + 1 = 4 x 2 member(s) x (17.13 B.O. deck on the C3 line A100 - 12.417 top) x 1.414 = 53.31 (back-check D5)",
    "status": "DERIVADO",
    "wall": "E3-11b"
   },
@@ -2635,6 +2722,48 @@
    "label": "3\" X 3\" X 3\" ANGLE (20 GA. MIN.), FASTENED TO TRACK AND BRACE (3/A500)",
    "op": "one per brace member = 62",
    "status": "DERIVADO"
+  },
+  {
+   "ref": "CJ-A3-03",
+   "familia": "control joint",
+   "qty": 24.83,
+   "unit": "LF",
+   "source": "1/A500",
+   "op": "A3-03 44.828 LF > 30'-0\": 1 control joint per face x full board height = 12.417 + 12.417 = 24.83 LF (ASTM C840 / GA-216; estimator standing precedent: control joints on runs over 30 ft)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "CJ-C3-01",
+   "familia": "control joint",
+   "qty": 24.83,
+   "unit": "LF",
+   "source": "1/A500",
+   "op": "C3-01 35.542 LF > 30'-0\": 1 control joint per face x full board height = 12.417 + 12.417 = 24.83 LF (ASTM C840 / GA-216; estimator standing precedent: control joints on runs over 30 ft)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "FRP-RR",
+   "familia": "FRP",
+   "qty": 113.67,
+   "unit": "SF",
+   "source": "A402",
+   "op": "restroom perimeter 31.75 LF (A100 polygon) - door 4C 3.333 = 28.42 LF x T.O. FRP 4'-0\" (A402) = 113.67 SF (A700 B-3; estimator standing precedent: FRP of the finish schedule is carried)",
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "FRP-MOP",
+   "familia": "FRP",
+   "qty": 34.66,
+   "unit": "SF",
+   "source": "1/A504",
+   "op": "mop sink alcove back 4.0 + 2 sides x 2.333 = 8.67 LF x 4'-0\" FRP (1/A504) = 34.66 SF",
+   "status": "DERIVADO",
+   "inside_corners": {
+    "value": 2,
+    "vertices": 4,
+    "outside_corners": 0,
+    "source": "1/A504"
+   }
   },
   {
    "ref": "NESTED-RUNNER-362",
@@ -2751,11 +2880,6 @@
    "source": "A700"
   },
   {
-   "familia": "PVC trim at FRP",
-   "why": "FRP B-3 (A700, A402 T.O. FRP 4'-0\") is a finish product, not metal framing / gypsum board: EXCLUDED with the FRP",
-   "source": "A700, A402"
-  },
-  {
    "familia": "stud reinforcement MEP",
    "why": "no pipe / conduit crossing a stud wall larger than the stud web punch-out drawn on P101 / P501 / E101 (plumbing in the restroom wet walls runs inside the stud cavity); ducts EXCLUDED by standing order",
    "source": "P101, P501, E101"
@@ -2799,6 +2923,26 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "A100 at the printed 1/4\" = 1'-0\" (18 pt/ft, checked on 44'-3 1/2\" and 31'-6 1/2\"): no deck break line drawn on A100 / A200 / D100",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "G002": "read on G002: 'AN E DRINKING FOUNTAIN OUTLET HT. 4'-0\" HEIGHT WAINSCOT PER FINISH PLAN BEHIND AND SURROUN' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "D101": "read on D101: 'G LOCATION PLAN 1/4\" = 1'-0\" 19'-0 1/2\" 16'-4 1/2\" 1 3 1 2 N 7'-1\" 6'-3 1/2\" 9'-11\" 1'-0\" ' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A100": "read on A100: 'K OF HOUSE SALES AREA OFFICE PLY DECK @ 16'-4\" PLY DECK @ 17'-1 9/16\" EXISTING DOUBLE ENTR' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A104": "read on A104: 'NISHED FLOOR 0'-0\" T.O MILWORK PER PLAN CEILING PER PLAN FINISHED FLOOR 0'-0\" NOTES: 1. TH' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A200": "read on A200: '-6 EM L-6 L-6 L-6 EM L-6 EM 1 REFLECTED CEILING PLAN 1/4\" = 1'-0\" T F H PT-1 C-1 8'-0\" EQ.' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A400": "read on A400: 'IOR ELEVATION 3/8\" = 1'-0\" GROUND 0'-0\" CEILING 11'-11\" 2 INTERIOR ELEVATION LOGO WALL 3/8' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A401": "read on A401: 'IOR ELEVATION 3/8\" = 1'-0\" GROUND 0'-0\" CEILING 11'-11\" T.O. DOOR 7'-0\" 1 INTERIOR ELEVATI' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A402": "read on A402: 'GROUND 0'-0\" CEILING 8'-0\" T.O. FRP 4'-0\" 1) GC TO INSTALL WITH MOUNTING KIT # 2' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A500": "read on A500: 'EACH ANGLE A SECTION ACROSS PARTITION B SECTION ACROSS BRACING 1\" ATTACHMENT TO STRUCTURE ' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A501": "read on A501: 'B PLAN 1 NOTE: TIE TWO ADJACENT WALL TO CEILING MAIN AND CROSS RUNNERS. NOT TO EXCEED 4'-0' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A503": "read on A503: 'FLOOR DETAIL 3\" = 1'-0\" NOTES: 1. FLOOR-CEILING ASSEMBLY. A. WOOD FLOORING SYSTEM 1B. WOOD' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "A504": "read on A504: 'TOP OF 5/8\" WR GYP BD 5/8\" WR GYP BD B SECTION FLOORING AS SCHEDULED 1'-0\" SHELVES (2) BRA' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)",
+     "M101": "read on M101: 'AUST FAN. ROUTE EXHAUST DUCT UP THROUGH ROOF. MAINTAIN 10'-0\" FROM ANY FRESH AIR INTAKE. P' - printed value of another element / condition; it does not answer this RFI (no deck break line, section or elevation shows which deck the C3 line (BOH / Sales boundary) reaches)"
+    },
     "hojas": "ALL",
     "terminos": [
      "DECK",
@@ -3016,6 +3160,16 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "1/A500 section at 3/4\" = 1'-0\": board drawn on one face, 1/2\" gap to the existing wall",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "A100": "read on A100: 'ALIGN DOOR NUMBER DOOR TYPE 1 CONSTRUCTION FLOOR PLAN 1/4\" = 1'-0\" 1. G.C. TO FIELD VER' - printed value of another element / condition; it does not answer this RFI (conflict inside 1/A500 (type note vs section drawing))",
+     "A402": "read on A402: 'X 5'-0\" CLR. SPACE 3 6 (3) 14 X 2-1/2\" TYPE 304 STAINLESS STEEL PHILLIPS ROUND-HEAD, SHEET' - printed value of another element / condition; it does not answer this RFI (conflict inside 1/A500 (type note vs section drawing))",
+     "A500": "read on A500: 'MAX. STAGGERED FOR (2) LAYERS GYP. BD. EACH SIDE. PARTITION FLOOR CONNECTION 3\" = 1'-0\" CO' - printed value of another element / condition; it does not answer this RFI (conflict inside 1/A500 (type note vs section drawing))"
+    },
     "hojas": "ALL",
     "terminos": [
      "EACH SIDE",
@@ -3156,7 +3310,7 @@
    "id": "RFI-03",
    "status": "open",
    "source": "4/A500",
-   "question": "4/A500 long-leg slotted runner track: gauge and leg length not printed (2\" min. vertical slots printed); the floating C channel is printed 3 5/8\" x 20 GA only - no 6\" version for type D (6\" studs). Carried: deep-leg slotted track 20 ga (2\" deflection leg) by stud size and a nested 20 ga C channel of the wall's stud size.",
+   "question": "4/A500 long-leg slotted runner track: gauge and leg length not printed (2\" min. vertical slots printed); the floating C channel is printed 3 5/8\" x 20 GA only - no 6\" version for type D (6\" studs). Carried: deep-leg slotted track 20 ga (2\" deflection leg) by stud size and a nested 20 ga C channel of the wall's stud size. The estimator precedent on runners (O'Reilly: 1-1/2\" runner top and bottom of Z-furring, ASTM C754) does not decide this deflection head.",
    "why_not_printed": "gauge / leg length of the runner and the 6\" channel are not printed",
    "loaded": "143.07 LF of slip top track 20 ga + 143.07 LF nested inner runner (3-5/8\" and 6\")",
    "opciones": {
@@ -3168,11 +3322,23 @@
     "B": {
      "texto": "Manufacturer (ClarkDietrich / SSMA slotted deflection track, 20 ga, 2-1/2\" leg)",
      "cita": "SSMA / ClarkDietrich deflection track catalog; ASTM C754",
-     "delta": "0 LF (same LF, different product leg)"
+     "delta": "0 LF (same LF, different product leg; studs and track LF unchanged, fasteners EXCLUDED)"
     },
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "4/A500 at 3\" = 1'-0\": channel drawn 3 5/8\"; no 6\" variant drawn",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "A104": "read on A104: 'LAT WALL BLOCKING 3/8\" = 1'-0\" PER PLAN 20 GA. METAL STRAPPING ATTACHED TO NEW STUD.(3) #8' - printed value of another element / condition; it does not answer this RFI (gauge / leg length of the runner and the 6\" channel are not printed)",
+     "A402": "read on A402: 'PHILLIPS ROUND-HEAD, SHEET METAL SCREWS 20 GA. TRACK SECURED TO STUDS 5 GRAB BAR DETAIL 3\"' - printed value of another element / condition; it does not answer this RFI (gauge / leg length of the runner and the 6\" channel are not printed)",
+     "A500": "read on A500: 'TITION FLOOR CONNECTION 3\" = 1'-0\" CONT 20 GA BOTTOM TRACK WITH HILTI' X-U SHOT PIN WITH 1' - printed value of another element / condition; it does not answer this RFI (gauge / leg length of the runner and the 6\" channel are not printed)",
+     "A501": "read on A501: 'R CISCA 3-4 (FIGURES 2, 3, 4, AND 5) 12 GA. MIN. HANGER WIRES, RODS, OR FLATS - MAX. 4'-0\"' - printed value of another element / condition; it does not answer this RFI (gauge / leg length of the runner and the 6\" channel are not printed)",
+     "A504": "read on A504: 'ED 1'-0\" SHELVES (2) BRACKETS (6) 6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS. 2 MI' - printed value of another element / condition; it does not answer this RFI (gauge / leg length of the runner and the 6\" channel are not printed)"
+    },
     "hojas": "ALL",
     "terminos": [
      "LONG LEG",
@@ -3294,7 +3460,7 @@
     },
     "swept_txt": "Swept: all 37 sheets (G / D / A / M / E / P / FA, no S sheets and no project manual in the set), both GC sets, the survey documents; terms: LONG LEG, RUNNER, SLOTTED, DEFLECTION, SLIP, C' CHANNEL, 20 GA, TRACK, TOP CORD, ATTACHMENT TO STRUCTURE, 6\" 20 GA, GA.."
    },
-   "delta": "(A) 0 | (B) 0 LF (same LF, different product leg)",
+   "delta": "(A) 0 | (B) 0 LF (same LF, different product leg; studs and track LF unchanged, fasteners EXCLUDED)",
    "img": "/root/cc/work/etapas/4_canon/img/rfi/RFI-03_A500a.png",
    "fuentes_revisadas": [
     "designation: no SSMA designation / gauge printed beyond 1/A500 - 6/A500",
@@ -3324,6 +3490,19 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "n/a (specification item, no geometry)",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "G002": "read on G002: 'IN OUTLET HT. 4'-0\" HEIGHT WAINSCOT PER FINISH PLAN BEHIND AND SURROUNDING WALLS, TYP. 48\"' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)",
+     "A101": "read on A101: 'E NOTED. GENERAL NOTES SHEET SYMBOLS 1 FINISH PLAN 1/4\" = 1'-0\" 5 A502 3 A502 FLOOR FINISH' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)",
+     "A200": "read on A200: 'NT LIGHT MFG.: WAC PRODUCT: PD-22754-AL FINISH: BRUSHED ALUMINUM HEIGHT: 6'-6\" A.F.F L-2B ' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)",
+     "A500": "read on A500: '16\" O.C. MAX. STAGGERED FOR (2) LAYERS GYP. BD. EACH SIDE. PARTITION FLOOR CONNECTION 3\" =' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)",
+     "A504": "read on A504: 'WINGS 3/4 FRT PLYWOOD ON TOP OF 5/8\" WR GYP BD 5/8\" WR GYP BD B SECTION FLOORING AS SCHEDU' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)",
+     "A600": "read on A600: 'OTES SIZE TYPE MATERIAL FINISH MATERIAL FINISH SILL JAMB HEAD 1A (E) EXTERIOR MAIN ENTRY/E' - printed value of another element / condition; it does not answer this RFI (no finish level / trim specification anywhere in the set)"
+    },
     "hojas": "ALL",
     "terminos": [
      "LEVEL",
@@ -3525,6 +3704,26 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "A100 vector: opening 4'-0\" (72 pt at 18 pt/ft) between the C3 band end and the E3 band",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "G003": "read on G003: 'EX TOILET ROOM BACK OF HOUSE SALES AREA 8'-0\" X 8'-0\" CAGE CABINET 48\"X24\"X78\" 48\"X24\"X72\"' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A100": "read on A100: 'ADJACENT TENANT EXTERIOR C3 2 B 4 C 5 C E3 BACK OF HOUSE SALES AREA OFFICE PLY DECK @ 16'-' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A102": "read on A102: 'UTILITY ROOM SALES AREA HALLWAY 1 A504 8'-0\" X 8'-0\" CAGE IT RACK 35.6\"X23.63X 33.5\" CABIN' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A103": "read on A103: 'IOR 10'-0\" TYP. 8'-3 1/2\" 3'-2\" 5 5'-2\" 8'-0\" 8'-0\" 8'-0\" 8'-0\" 37'-0\" 3'-8\" 3'-8\" 19'-0\" ' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A200": "read on A200: 'EILING PLAN 1/4\" = 1'-0\" T F H PT-1 C-1 8'-0\" EQ. EQ. EQ. EQ. 3 LIGHT LAYOUT GUIDE 1/4\" = ' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A400": "read on A400: 'EN TO HALLWAY GROUND 0'-0\" T.O. OPENING 8'-0\" CEILING 11'-11\" PT-2 LAM-6 LAM-3 PT-3 B-1 TY' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A402": "read on A402: 'GROUND 0'-0\" CEILING 8'-0\" T.O. FRP 4'-0\" 1) GC TO INSTALL WITH MOUNTING KIT # 252-30.' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A500": "read on A500: 'GYP. BD. EXISTING WALL. 45° 15'-0\" MAX. 8'-0\" MAX. 3 FOR WALLS TO 10'-0\" - BRACE WITH 362S' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A502": "read on A502: '6\" = 1'-0\" 1 VINYL BASE (SALES AREA AND HALLWAY) 6\" = 1'-0\" PARTITION AS SPECIFIED TOP OF ' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A504": "read on A504: 'H STUD. TYP. 5/8\" WR GYP BD MOP HOLDER PARTITION AS SPECIFIED FLOORING AS SCHEDULED 6'-6\" ' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "A600": "read on A600: 'ADDITIONAL INTERMEDIATE PIVOT FOR DOORS 8'-0\" AND TALLER. 30. DO NOT PROVIDE HOLD OPEN DEV' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "E101": "read on E101: 'SLAT WALL IPAD HALLWAY UNISEX RESTROOM 8'-0\" X 8'-0\" CAGE IT RACK 35.6\"X23.63X 33.5\" CABIN' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)",
+     "P501": "read on P501: 'IN. HEAT TRAP (TYPICAL) NOTE: 1. FIRST 8'-0\" OF OUTLET PIPING TO BE INSULATED. 2. ALL HEAT' - printed value of another element / condition; it does not answer this RFI (no partition tag at the infill above the opening)"
+    },
     "hojas": "ALL",
     "terminos": [
      "OPEN TO HALLWAY",
@@ -3753,6 +3952,27 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "A100 vector polygon of the restroom at 18 pt/ft = 60.49 SF (G003 prints 60 SF)",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "G002": "read on G002: 'X TO TOP 48\" MIN TO BOTTOM 3 ACCESSIBLE RESTROOM SIGNAGE 1/4\" = 1'-0\" A ELEVATION VIEW B R' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "G003": "read on G003: 'EX TOILET ROOM BACK OF HOUSE SALES AREA 8'-0\" X 8'-0\" CAGE CABINET 48\"X24\"X78\" 48\"X24\"X72\"' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A100": "read on A100: '2\" LEASE LINE 66'-10\" LEASE LINE UNISEX RESTROOM HALLWAY A3 A3 A3 C3 E3 E3 E3 E3 D E3 E3 E' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A102": "read on A102: 'UTILITY ROOM SALES AREA HALLWAY 1 A504 8'-0\" X 8'-0\" CAGE IT RACK 35.6\"X23.63X 33.5\" CABIN' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A103": "read on A103: 'IOR 10'-0\" TYP. 8'-3 1/2\" 3'-2\" 5 5'-2\" 8'-0\" 8'-0\" 8'-0\" 8'-0\" 37'-0\" 3'-8\" 3'-8\" 19'-0\" ' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A200": "read on A200: 'EILING PLAN 1/4\" = 1'-0\" T F H PT-1 C-1 8'-0\" EQ. EQ. EQ. EQ. 3 LIGHT LAYOUT GUIDE 1/4\" = ' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A400": "read on A400: 'EN TO HALLWAY GROUND 0'-0\" T.O. OPENING 8'-0\" CEILING 11'-11\" PT-2 LAM-6 LAM-3 PT-3 B-1 TY' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A402": "read on A402: 'GROUND 0'-0\" CEILING 8'-0\" T.O. FRP 4'-0\" 1) GC TO INSTALL WITH MOUNTING KIT # 252-30.' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A500": "read on A500: 'GYP. BD. EXISTING WALL. 45° 15'-0\" MAX. 8'-0\" MAX. 3 FOR WALLS TO 10'-0\" - BRACE WITH 362S' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A501": "read on A501: 'SUSPENDED CEILING BRACING 3/4\" = 1'-0\" HANGER WIRE PER DETAILS SUSPENDED CEILING. FINISH F' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A502": "read on A502: 'ING AT TOP OF PANEL COVED BASE LVT 6\" 6 RESTROOM COVE BASE 6\" = 1'-0\" NOTES: · GC TO ENSUR' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "A600": "read on A600: 'ADDITIONAL INTERMEDIATE PIVOT FOR DOORS 8'-0\" AND TALLER. 30. DO NOT PROVIDE HOLD OPEN DEV' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "E101": "read on E101: 'SLAT WALL IPAD HALLWAY UNISEX RESTROOM 8'-0\" X 8'-0\" CAGE IT RACK 35.6\"X23.63X 33.5\" CABIN' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)",
+     "P501": "read on P501: 'IN. HEAT TRAP (TYPICAL) NOTE: 1. FIRST 8'-0\" OF OUTLET PIPING TO BE INSULATED. 2. ALL HEAT' - printed value of another element / condition; it does not answer this RFI (no ceiling detail called on this ceiling)"
+    },
     "hojas": "ALL",
     "terminos": [
      "C-1",
@@ -3934,6 +4154,28 @@
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "A100 vector: door 3C 60 pt = 3'-4\" R.O. in the existing wall",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "D100": "read on D100: 'PM. SCOPE SUMMARY SHEET SYMBOLS W.H. 1 EXISTING CONDITIONS AND DEMOLITION PLAN 1/4\" = 1'-0' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A100": "read on A100: 'ALIGN DOOR NUMBER DOOR TYPE 1 CONSTRUCTION FLOOR PLAN 1/4\" = 1'-0\" 1.' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A101": "read on A101: '= 1'-0\" 5 A502 3 A502 FLOOR FINISH TAG EXISTING AREA N.I.C. NOTE: ALL EQUIPMENT, FINISHES,' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A102": "read on A102: 'OFFICE CONSULTATION AREA BACK OF HOUSE UTILITY ROOM SALES AREA HALLWAY 1 A504 8'-0\" X 8'-0' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A103": "read on A103: ''-9 1/2\" 9 9 4 EXTERIOR ADJACENT TENANT UTILITY ROOM 5'-9 1/2\" A103 MILLWORK FLOOR PLAN DA' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A200": "read on A200: '-0\" 1'-4\" 3'-11\" 4'-2\" 3'-11\" 8'-8\" N L-3C ITEM: SMALL PENDANT LIGHT MFG.: YLIGHTING FINIS' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A300": "read on A300: '1 EXISTING EXTERIOR ELEVATION 3/8\" = 1'-0\" EQ. EQ. EQ. EQ. SIGNAGE BY' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A301": "read on A301: 'INE LEASE LINE LEASE LINE EXISTING REAR DOOR EXISTING PEEP HOLE FINISHED FLOOR 0'-0\" T.O. ' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A400": "read on A400: ''-11\" OPEN TO HALLWAY GROUND 0'-0\" T.O. OPENING 8'-0\" CEILING 11'-11\" PT-2 LAM-6 LAM-3 PT-' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A401": "read on A401: '4 INTERIOR ELEVATION 3/8\" = 1'-0\" T.O. DOOR 7'-0\" PT-2 B-2 TYP. LOCKERS CAGE GROUND 0'-0\" ' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A500": "read on A500: 'AND BRACE PER DETAIL 6. 6 5/8\" GYP. BD. EXISTING WALL. 45° 15'-0\" MAX. 8'-0\" MAX. 3 FOR WA' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A502": "read on A502: 'ETAIL AT ENTRY 6\" = 1'-0\" CENTERLINE OF DOOR OPENING DOOR EXISTING EXTERIOR FINISH EXISTIN' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A503": "read on A503: 'IPE SUPPORT/SLEEVE 3\" = 1'-0\" 1 3B 3A 2 3C SYSTEM NO. F-A-1105 ANSI/UL1479 (ASTM E814) ANS' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "A600": "read on A600: 'XISTING 3, 5, 6, 7, 8, 9, 10, 26, 34 3C UTILITY 3'-0\"X7'-0\"X1 3 4\" C WOOD (WHITE BIRCH) CL' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)",
+     "M101": "read on M101: 'CEED 5 FT. E. VERIFY THE EXACT MOUNTING FRAME REQUIRED FOR EACH DIFFUSER. F. PROVIDE ALL M' - printed value of another element / condition; it does not answer this RFI (no framing for the opening in the existing wall)"
+    },
     "hojas": "ALL",
     "terminos": [
      "3C",
@@ -4176,11 +4418,24 @@
     "B": {
      "texto": "Perimeter members only (no intermediate joist)",
      "cita": "AISI S240 (span 2'-4\")",
-     "delta": "-7.0 LF of 6\" 16 ga stud"
+     "delta": "-7.0 LF of 6\" 16 ga stud (#10 Tek screws EXCLUDED, standing order)"
     },
     "C": "____"
    },
    "barrido": {
+    "disciplinas": "ALL",
+    "shx": "no AutoCAD SHX annotations in either GC set (0 annotations, checked by program); full text layer of the 37 sheets searched",
+    "vectorial": "A100 vector: alcove between the E3-12 / E3-13 inner faces 72 pt = 4'-0\"; stub length 2'-4\" printed",
+    "specs": "no project manual and no addenda in either GC set (Elite plan room folders (02) Specs / (03) Addenda empty); A700 schedules and E701 specifications searched",
+    "otros_sets": "Elder-Jones (BuildingConnected) 15066-26 Permit Set 10.15.2026 (37 sheets); Elite Retail (elite-constructionplans.com + BuildingConnected) 37 single sheets, text identical sheet by sheet (comparar_sets) + Starlink.pdf + survey report / survey documents + bid forms; BuildingConnected survey report + survey documents (existing conditions)",
+    "descartes": {
+     "A102": "read on A102: 'HOUSE UTILITY ROOM SALES AREA HALLWAY 1 A504 8'-0\" X 8'-0\" CAGE IT RACK 35.6\"X23.63X 33.5\"' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)",
+     "A103": "read on A103: ''-9 1/2\" 9 9 4 EXTERIOR ADJACENT TENANT UTILITY ROOM 5'-9 1/2\" A103 MILLWORK FLOOR PLAN DA' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)",
+     "A104": "read on A104: 'OADS. GENERAL NOTES 1 TYPICAL LOGO WALL BLOCKING 3/8\" = 1'-0\" 4'-10 1/2\" 10 1/2\" 3\" 3\" 2 T' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)",
+     "A200": "read on A200: 'OW CEILING SALES AREA T F H - C-2 9'-0\" UTILITY ROOM 7'-7\" 3'-6\" 4'-8\" 3'-2\" 4'-4\" 3'-0\" 3' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)",
+     "A504": "read on A504: 'DULED 1'-0\" SHELVES (2) BRACKETS (6) 6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS. 2' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)",
+     "A600": "read on A600: 'TING 3, 5, 6, 7, 8, 9, 10, 26, 34 3C UTILITY 3'-0\"X7'-0\"X1 3 4\" C WOOD (WHITE BIRCH) CLEAR' - printed value of another element / condition; it does not answer this RFI (member count / layout of the shelf framing not printed)"
+    },
     "hojas": "ALL",
     "terminos": [
      "MOP SINK",
@@ -4335,7 +4590,7 @@
     },
     "swept_txt": "Swept: all 37 sheets (G / D / A / M / E / P / FA, no S sheets and no project manual in the set), both GC sets, the survey documents; terms: MOP SINK, WATER HEATER, SHELF, 16 GA, 6\" 16 GA, FRT PLYWOOD, WR GYP, BRACKETS, STANDARDS, BLOCKING, A504, UTILITY."
    },
-   "delta": "(A) 0 | (B) -7.0 LF of 6\" 16 ga stud",
+   "delta": "(A) 0 | (B) -7.0 LF of 6\" 16 ga stud (#10 Tek screws EXCLUDED, standing order)",
    "img": "/root/cc/work/etapas/4_canon/img/rfi/RFI-08_A504.png",
    "fuentes_revisadas": [
     "designation: no SSMA designation / gauge printed beyond 1/A500 - 6/A500",
@@ -4350,7 +4605,7 @@
    "source": "D100",
    "question": "Heights of the existing walls / furring to be demolished (D100 keys 9, 27) are not printed.",
    "resolved": {
-    "answer": "estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure; A100 'PLY DECK @ 17'-1 9/16\"' (higher bay) carried",
+    "answer": "estimator decision (standing rule): existing partitions to demolish without printed height go to the printed B.O. structure; A100 'PLY DECK @ 17'-1 9/16\"' (higher bay) carried",
     "source": "D100, A100"
    },
    "delta": "0 (closed by the estimator standing rule)",
@@ -4365,7 +4620,6 @@
  ],
  "atm_recess_none_reason": "No ATM / equipment recess (A100, A103, A400)",
  "tile_base_none_reason": "A700/A101 bases B-1 vinyl 6\", B-2 rubber 4\", B-3 FRP (restroom); no ceramic tile base / cement board",
- "frp_none_reason": "FRP B-3 (A700, Marlite pebbled FRP) in the restroom and mop sink area to 4'-0\" (A402, 1/A504): finish product, EXCLUDED (not metal framing / gypsum board); WR gypsum board behind it is in the wall faces",
  "deck_breaks_none_reason": "Two deck tags on A100 (BOH 16'-4\", Sales 17'-1 9/16\"); break line not drawn -> RFI-01",
  "ballistic_jogs_none_reason": "No ballistic panels (1/A500 types A,C,D,E,H only)",
  "trim_none_reason": "No trim/bead specified anywhere (A700 is finish schedule; A500/A600 no bead callouts); trim_items carried by geometry as estimator criterion - RFI-05",
@@ -4509,6 +4763,20 @@
    "reason": "open mouth of the EWC niche to the hallway (A100, P101 EWC): returns E3-06 / E3-08 frame the niche; no wall in the gap"
   }
  ],
+ "excluded_walls": [
+  {
+   "id": "E3-05",
+   "why": "reading A piece merged into E3-04 (door 4C inside the wall line)"
+  },
+  {
+   "id": "E3-10",
+   "why": "reading A piece merged into E3-09 (door 5C inside the wall line)"
+  },
+  {
+   "id": "E3-14",
+   "why": "reading A infill over the cased opening merged into C3-01 (same C3 line, RFI-05)"
+  }
+ ],
  "wood_excluded": {
   "why": "wood blocking / FRT plywood is Div. 06, never carried (estimator standing order, user decision 5-nov)",
   "source": "1/A501 (FRT plywood at pendants), 6/A500 (2X4 blocking)"
@@ -4517,11 +4785,6 @@
  "demo_ceiling_excluded": {
   "why": "D100 key 7 'REMOVE EXISTING GYP. BD. & ACT CEILINGS ... THROUGHOUT': the extent of the gypsum board vs ACT existing ceiling is not shown - EXCLUDED for lack of information (estimator standing rule)",
   "source": "D100"
- },
- "control_joints_none": {
-  "familia": "control joints",
-  "why": "none drawn (longest run 44.8 ft A3-03 furring; no CJ on A100/A400)",
-  "source": "A100, A400"
  },
  "partition_schedule": [
   {
@@ -4539,6 +4802,21 @@
   {
    "type": "E3",
    "source": "1/A500"
+  }
+ ],
+ "frp_none_reason": "FRP B-3 (A700) carried as misc items FRP-RR (restroom to T.O. FRP 4'-0\", A402) and FRP-MOP (mop sink alcove, 1/A504); no tile_base in the set",
+ "pvc_trim_items": [
+  {
+   "ref": "PVC-RR",
+   "lf": 84.83,
+   "source": "A402",
+   "op": "restroom: edge top + bottom 2 x 28.417 + inside corners 5 x 4.0 (A100 polygon: 6 vertices, 5 inside / 1 outside) + door 4C jambs 2 x 4.0 = 84.83 LF"
+  },
+  {
+   "ref": "PVC-MOP",
+   "lf": 33.33,
+   "source": "1/A504",
+   "op": "mop sink alcove: edge top + bottom 2 x 8.667 + 2 inside corners x 4.0 + 2 vertical ends x 4.0 = 33.33 LF"
   }
  ]
 }

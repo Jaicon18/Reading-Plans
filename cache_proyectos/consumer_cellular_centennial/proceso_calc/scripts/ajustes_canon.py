@@ -477,7 +477,7 @@ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 #     without opening wider than 4'-0" / coiling grille, internal file names out of visible texts, FRP product code
 c = json.load(open(P))
 pn = c['constants'].setdefault('product_names', {})
-pn['nested inner runner (deflection head)'] = {"value": "Nested 'C' channel 20 GA floating 1\" below the top cord, inside the long-leg runner (4/A500)", "source": "4/A500"}
+pn.pop('nested inner runner (deflection head)', None)
 pn['track de ceilings / soffits'] = {"value": "Ceiling perimeter track 20 GA (restroom C-1 ceiling)", "source": "1/A200"}
 for ce in c['ceilings']:
     ce['detail'] = '1/A200'
@@ -501,4 +501,86 @@ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 c = json.load(open(P))
 for ce in c['ceilings']:
     ce['hatch_check_cause'] = "1/A200 SHEET SYMBOLS: 'C-1 GYP BOARD CEILING' is a plain square (no hatch, only the ACT C-2 / C-3 are gridded); polygon = inside faces of the restroom walls (rcp_check.png)"
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 35. gate fixes (compuerta de entrega, first pass):
+#   - D-01 tag = PT0001 (inventory completed by scripts/inventario_1A500.py)
+#   - one Partition Takeoff row per wall id (= the markups), U-120
+#   - wall detail = 1/A500 (the partition types drawing; the diamond keys A# / C# / D / E# are not detail numbers)
+#   - face heights with their state; demo heights cite 1/A100 (A100 drawing 1 CONSTRUCTION FLOOR PLAN deck tags)
+#   - control joints on walls over 30'-0" (ASTM C840; precedent R80e.34 #8): one full-height joint per face
+#   - FRP B-3 of the finish schedule carried (precedents R80e.34 #5 / R80e.78 #6, standard O'Reilly U-145): restroom to 4'-0"
+#     (A402) and mop sink alcove to 4'-0" (1/A504)
+c = json.load(open(P))
+c['constants']['partition_row_rule'] = {"value": "wall_id", "source": "A100 wall ids: one Partition Takeoff row per wall, the same ids as the markups"}
+for w in c['walls']:
+    if w['id'] == 'D-01': w['tag_ids'] = ['PT0001']
+    w['detail_type_info'] = f"{w['tag']} key of 1/A500"
+    w['detail'] = '1/A500'
+    for f in w['faces']:
+        f.setdefault('height_status', 'DERIVADO')
+        if '[DERIVED]' not in f['height_source'] and '[CONFIRMED]' not in f['height_source']:
+            f['height_source'] = f['height_source'] + ' [DERIVED]'
+    for k in ('location', 'length_source'):
+        if _re.search(r'(?i)\bto remain\b', str(w.get(k, ''))):
+            w[k] = _re.sub(r'(?i)\bto remain\b', 'that stays', w[k]) + ' [NEW wall of this take-off]'
+c['details'].setdefault('1/A500', {})
+c['details']['1/A500'].update({"source": "1/A500", "title": "PARTITION TYPES (A#, C#, D, E#, H)", "layers_per_face": 1,
+    "layers_source": "1/A500 (one layer 5/8\" TYPE X per face on every type)",
+    "sealant_none_reason": "acoustical sealant (2/A500) EXCLUDED in all projects (estimator standing order)", "sealant_source": "2/A500"})
+for m in c['misc_items']:
+    if m['ref'].startswith('DEMO'):
+        m['height_source'] = "1/A100 'PLY DECK @ 17'-1 9/16\"' (printed B.O. structure; the deck break is not drawn: higher bay) - estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure"
+W = {w['id']: w for w in c['walls']}
+c['misc_items'] = [m for m in c['misc_items'] if not m['ref'].startswith(('CJ-', 'FRP-'))]
+for wid in ('A3-03', 'C3-01'):
+    w = W[wid]; fs = [f for f in w['faces'] if f['side'] in ('A', 'B')]
+    q = round(sum(f['height_ft'] for f in fs), 2)
+    c['misc_items'].append({"ref": f"CJ-{wid}", "familia": "control joint", "qty": q, "unit": "LF", "source": "1/A500",
+        "op": f"{wid} {w['length_ft']} LF > 30'-0\": 1 control joint per face x full board height = " + " + ".join(str(f['height_ft']) for f in fs) + f" = {q} LF (ASTM C840 / GA-216; estimator standing precedent: control joints on runs over 30 ft)", "status": "DERIVADO"})
+c.pop('control_joints_none', None)
+rr = 31.75 - 3.333; ms = 4.0 + 2 * 2.333
+c['misc_items'] += [
+ {"ref": "FRP-RR", "familia": "FRP", "qty": round(rr * 4.0, 2), "unit": "SF", "source": "A402", "op": f"restroom perimeter 31.75 LF (A100 polygon) - door 4C 3.333 = {round(rr, 2)} LF x T.O. FRP 4'-0\" (A402) = {round(rr * 4.0, 2)} SF (A700 B-3; estimator standing precedent: FRP of the finish schedule is carried)", "status": "DERIVADO"},
+ {"ref": "FRP-MOP", "familia": "FRP", "qty": round(ms * 4.0, 2), "unit": "SF", "source": "1/A504", "op": f"mop sink alcove back 4.0 + 2 sides x 2.333 = {round(ms, 2)} LF x 4'-0\" FRP (1/A504) = {round(ms * 4.0, 2)} SF", "status": "DERIVADO",
+  "inside_corners": {"value": 2, "vertices": 4, "outside_corners": 0, "source": "1/A504"}}]
+c.pop('frp_none_reason', None)
+c['accesorios_none'] = [r for r in c['accesorios_none'] if r['familia'] != 'PVC trim at FRP']
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 36. frp block (canon schema): top 4'-0" (A402 'T.O. FRP 4'-0"'); areas carried as misc FRP-RR / FRP-MOP (the restroom
+#     perimeter is the A100 polygon of the C-1 ceiling, the mop alcove from 1/A504), no tile_base in the set (base per A502)
+c = json.load(open(P))
+c['frp'] = {"top_ft": {"value": 4.0, "source": "A402"}, "rooms": [],
+            "rooms_info": "restroom and mop sink alcove FRP carried as misc items FRP-RR (A402) and FRP-MOP (1/A504)"}
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 37. FRP as misc items -> canon frp block replaced by its reason text + pvc_trim_items (accesorios R80e.35 path), back-check
+#     BC-D5: braces of E3-11a / E3-11b (on the C3 line) to the 17'-1 9/16" deck; BC-D6: untagged niche returns joined
+c = json.load(open(P))
+c.pop('frp', None)
+c['frp_none_reason'] = "FRP B-3 (A700) carried as misc items FRP-RR (restroom to T.O. FRP 4'-0\", A402) and FRP-MOP (mop sink alcove, 1/A504); no tile_base in the set"
+per = round(31.75 - 3.333, 3)
+c['pvc_trim_items'] = [
+ {"ref": "PVC-RR", "lf": round(2 * per + 5 * 4.0 + 2 * 1 * 4.0, 2), "source": "A402",
+  "op": f"restroom: edge top + bottom 2 x {per} + inside corners 5 x 4.0 (A100 polygon: 6 vertices, 5 inside / 1 outside) + door 4C jambs 2 x 4.0 = {round(2 * per + 28.0, 2)} LF"},
+ {"ref": "PVC-MOP", "lf": round(2 * 8.667 + 2 * 4.0 + 2 * 4.0, 2), "source": "1/A504",
+  "op": "mop sink alcove: edge top + bottom 2 x 8.667 + 2 inside corners x 4.0 + 2 vertical ends x 4.0 = 33.33 LF"}]
+for m in c['misc_items']:
+    if m['ref'] in ('BRACE-E3-11a', 'BRACE-E3-11b') and '17.13 B.O.' not in m['op']:
+        w = next(x for x in c['walls'] if x['id'] == m['wall'])
+        n = m['pcs'] // 2 if m['pcs'] % 2 == 0 else m['pcs']
+        mem = 2 if w['height_ft'] > 10 else 1
+        ln = round((17.13 - w['height_ft']) * 1.414, 3); q = round(n * mem * ln, 2)
+        m['qty'] = q; m['op'] = f"n = ceil({w['length_ft']} / 4) + 1 = {n} x {mem} member(s) x (17.13 B.O. deck on the C3 line A100 - {w['height_ft']} top) x 1.414 = {q} (back-check D5)"
+for w in c['walls']:
+    if w['id'] in ('E3-06', 'E3-08'):
+        w['untagged_join'] = "EWC niche return without its own tag: carried as the adjoining tagged E3 walls (E3-04 / E3-09 line), same type (E28 eje rule)"
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 38. U-114 states: printed deck tag heights = CONFIRMED (the choice between the two printed decks is RFI-01); E3-08 op
+c = json.load(open(P))
+for w in c['walls']:
+    if _re.match(r"\s*A100 'PLY DECK @", str(w.get('height_source'))) and w['height_ft'] in (16.333, 17.13):
+        w['height_status'] = 'CONFIRMADO'
+    if w['id'] in ('E3-06', 'E3-08') and '1.5 - 7.5/18' not in str(w.get('length_op')):
+        w['length_op'] = "1'-6\" printed (A100) - back wall 7.5 pt / 18 = 1.5 - 7.5/18 = 1.083 " + str(w.get('length_op'))
+for ce in c['ceilings']:
+    ce['height_status'] = 'CONFIRMADO'; ce['height_source'] = "1/A200 restroom tag H 8'-0\" [CONFIRMED]; A402 CEILING 8'-0\""
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
