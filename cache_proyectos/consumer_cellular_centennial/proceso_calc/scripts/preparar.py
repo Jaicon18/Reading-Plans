@@ -9,7 +9,7 @@ sm = json.load(open(os.path.join(E, "SHEET_MAP.json")))
 inv = json.load(open(os.path.join(E, "1_inventario", "inventario.json")))
 tit = {int(s["page"]): s.get("title", "") for s in inv["sheets"]}
 os.makedirs(os.path.join(E, "0_mapa"), exist_ok=True)
-L = ["# SHEET MAP - Harbor Freight Tools - Loveland, CO (title block of each page, clean PDF)", "",
+L = ["# SHEET MAP - Consumer Cellular - Centennial, CO (title block of each page, clean PDF)", "",
      "| Page | Sheet | Title |", "|---|---|---|"]
 for p in sorted(sm, key=int):
     L.append(f"| {p} | {sm[p]} | {tit.get(int(p), '')} |")

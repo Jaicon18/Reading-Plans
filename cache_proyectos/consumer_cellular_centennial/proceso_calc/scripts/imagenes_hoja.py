@@ -19,13 +19,13 @@ PAG = {v: int(k) for k, v in sm.items()}
 doc = fitz.open(sys.argv[2])
 DPI, F = 100, 100 / 72.0
 OUT = os.path.join(K, "etapas", "7_imagenes")
-REV = os.environ.get("REV", "rev3")
-FECHA = f"2026-11-03 ({REV})"
+REV = os.environ.get("REV", "rev1")
+FECHA = f"2026-11-05 ({REV})"
 SCHED = [p["type"] for p in c.get("partition_schedule") or []]
-DISP = {"A": "Type A - 6\" stud, 5/8\" gyp each side (A/A4.1)", "B": "Type B - 2-1/2\" stud, 5/8\" gyp one side (B/A4.1)",
-        "C": "Type C - 3-5/8\" stud, 5/8\" gyp one side (C/A4.1)", "D": "Type D - 6\" stud, 5/8\" Type X each side, 1-hr (D/A4.1)",
-        "E": "Type E - 1-1/2\" metal hat channel @ 24\" O.C. vertical, 5/8\" gyp (E/A4.1)",
-        "VH": "Vestibule bulkhead over storefront (1/A5.3)", "RE": "Receiving enclosure CFS 600S162-54 (S2.1)",
+DISP = {"A3": "Type A3 - furred wall to deck, 3-5/8\" 20 ga @ 16\", 5/8\" Type X (A3/A500)",
+        "C3": "Type C3 - wall to deck, 3-5/8\" 18 ga @ 16\", 5/8\" Type X both sides (C3/A500)",
+        "D": "Type D - 6\" 20 ga @ 16\" to deck, 5/8\" Type X both sides (D/A500)",
+        "E3": "Type E3 - 3-5/8\" 18 ga @ 16\" to 6\" above ceiling, both sides, braced (E3/A500)",
         "DEMO": "DEMO - gypsum board + metal framing demolition (SF in label)"}
 otros = sorted({w.get("tag") for w in c["walls"]} - set(SCHED))
 ORDEN = SCHED + otros + ["DEMO"]
@@ -77,7 +77,7 @@ for sh in sorted(items):
     tipos = [t for t in ORDEN if t in tot]
     h = 70 + 26 * len(tipos)
     dr.rectangle([20, 20, 1280, 20 + h], fill=(255, 255, 255), outline=(0, 0, 0), width=3)
-    dr.text((34, 28), f"Harbor Freight Tools - Loveland, CO - {sh} - marked take-off - {FECHA}", fill=(0, 0, 0), font=fT)
+    dr.text((34, 28), f"Consumer Cellular - Centennial, CO - {sh} - marked take-off - {FECHA}", fill=(0, 0, 0), font=fT)
     y = 74
     for t in tipos:
         dr.line([(40, y + 9), (110, y + 9)], fill=COL[t], width=7)

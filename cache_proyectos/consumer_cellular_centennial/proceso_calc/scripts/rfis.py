@@ -116,9 +116,25 @@ rf.append({"id": "RFI-07", "status": "open", "source": "D100",
  "barrido": barrido(["3C", "EXISTING", "TO REMAIN", "REMAIN", "PATCH", "OPENING", "DOOR", "FRAME", "KNOCKDOWN", "JAMB", "HEAD", "UTILITY"],
                     [("D100", "REMAIN", "RFI-07_D100"), ("A600", "KNOCKDOWN", "RFI-07_A600"), ("A100", "UTILITY", "RFI-07_A100")],
                     "A100 vector: door 3C 60 pt = 3'-4\" R.O. in the existing wall")})
+rf.append({"id": "RFI-08", "status": "open", "source": "1/A504",
+ "question": "Mop sink / water heater shelf (1/A504 sections A, B): '6\" 16 GA. METAL STUDS ATTACHED WITH #10 TEK SCREWS' and '5/8\" WR GYP BD' under the 3/4\" FRT plywood are printed, but the number of members is not. Carried: perimeter ledger + joists @ 16\" o.c. over the 4'-0\" x 2'-4\" alcove (between E3-12 / E3-13) and 5/8\" WR board top and underside.",
+ "why_not_printed": "member count / layout of the shelf framing not printed",
+ "loaded": "19.67 LF 6\" 16 ga stud + 18.67 SF 5/8\" WR board",
+ "opciones": {"A": {"texto": "Drawings: 6\" 16 GA studs + 5/8\" WR board (1/A504) with the member layout carried - LOADED", "source": "1/A504", "delta": "0"},
+              "B": {"texto": "Perimeter members only (no intermediate joist)", "cita": "AISI S240 (span 2'-4\")", "delta": "-7.0 LF of 6\" 16 ga stud"}, "C": "____"},
+ "barrido": barrido(["MOP SINK", "WATER HEATER", "SHELF", "16 GA", "6\" 16 GA", "FRT PLYWOOD", "WR GYP", "BRACKETS", "STANDARDS", "BLOCKING", "A504", "UTILITY"],
+                    [("A504", "MOP SINK", "RFI-08_A504"), ("P501", "WATER HEATER", "RFI-08_P501"), ("A100", "UTILITY", "RFI-08_A100")],
+                    "A100 vector: alcove between the E3-12 / E3-13 inner faces 72 pt = 4'-0\"; stub length 2'-4\" printed")})
 closed = [{"id": "RFI-C1", "status": "closed", "source": "D100",
            "question": "Heights of the existing walls / furring to be demolished (D100 keys 9, 27) are not printed.",
            "resolved": {"answer": "estimator standing rule: existing partitions to demolish without printed height go to the printed B.O. structure; A100 'PLY DECK @ 17'-1 9/16\"' (higher bay) carried", "source": "D100, A100"}}]
+for r in closed:
+    r['delta'] = '0 (closed by the estimator standing rule)'; r['img'] = crop('D100', 'REMAIN', 'RFI-C1_D100'); r['fuentes_revisadas'] = ['D100 keynotes / demolition notes', 'A100 deck tags', 'standing rule (existing partitions to demolish = to printed B.O. structure)', 'no section / elevation of the existing walls']
+for r in rf:
+    r['delta'] = ' | '.join(f"({k}) {v.get('delta')}" for k, v in r['opciones'].items() if isinstance(v, dict))
+    r['img'] = r['barrido']['lugares'][0]['img']
+    r['fuentes_revisadas'] = ["designation: no SSMA designation / gauge printed beyond 1/A500 - 6/A500", "other row: 1/A500 types A#, C#, D, E#, H and A600 / A700 schedules",
+                              "standard rule: ASTM C754 / C840, GA-216, AISI S220 / S240, SSMA catalog", "detail: every bubble followed to its end (burbujas_verificadas.json, CADENA.md)"]
 c['rfis'] = rf + closed
 # misc rows that carry RFI-03 (nested runner) and RFI-07 (door 3C in the existing wall)
 c['misc_items'] = [m for m in c['misc_items'] if m['ref'] not in ('NESTED-RUNNER-362', 'NESTED-RUNNER-600', 'HDR-3C', 'JAMB-3C')]
@@ -130,5 +146,15 @@ c['misc_items'] += [
  {"ref": "HDR-3C", "familia": "header / box beam", "qty": 4.67, "unit": "LF", "source": "2/A600", "op": "3.333 R.O. + 1.333 = 4.67 (one track head, RFI-07)", "status": "DERIVADO"},
  {"ref": "JAMB-3C", "familia": "3-5/8\" stud (todos los gauges)", "qty": 49.67, "unit": "LF", "pcs": 4, "source": "3/A600",
   "op": "2 jambs x 2 studs (3/A600 double studs) x 12.417 ft (BOH ceiling 11'-11\" + 6\") = 49.67 (RFI-07)", "status": "DERIVADO"}]
+c['misc_items'] = [m for m in c['misc_items'] if m['ref'] not in ('MOP-SHELF-STUD', 'MOP-SHELF-BOARD')]
+c['misc_items'] += [
+ {"ref": "MOP-SHELF-STUD", "familia": "6\" stud (todos los gauges)", "qty": 19.67, "unit": "LF", "pcs": 7, "source": "1/A504",
+  "op": "perimeter 2 x 4.0 + 2 x 2.333 = 12.67 + 3 joists @ 16\" x 2.333 = 7.0 -> 19.67 LF of 6\" 16 GA stud (1/A504; layout RFI-08)", "status": "DERIVADO"},
+ {"ref": "MOP-SHELF-BOARD", "familia": "5/8\" gyp MOISTURE RESISTANT", "qty": 18.67, "unit": "SF", "source": "1/A504",
+  "op": "4.0 x 2.333 = 9.33 SF top (under the 3/4\" FRT plywood, wood EXCLUDED) + 9.33 SF underside = 18.67 SF 5/8\" WR (1/A504; RFI-08)", "status": "DERIVADO"}]
+if not any(b['ref'] == 'BLK-WH' for b in c['blocking_items']):
+    c['blocking_items'].append({"ref": "BLK-WH", "lf": 6.0, "material": "metal", "wall": "E3-13", "source": "5/P501",
+        "label": "water heater seismic strap: 'PROVIDE BLOCKING IN WALL' (5/P501 ELECTRIC DOMESTIC WATER HEATER)",
+        "op": "3 ft x 2 rows (estimator standing rule: accessory blocking without printed size = 3 ft x 2 rows)", "status": "DERIVADO"})
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 print(len(rf), 'open RFIs,', len(closed), 'closed')

@@ -26,10 +26,10 @@ OUT = os.path.join(C4, "out", "cierres")
 os.makedirs(OUT, exist_ok=True)
 dc = C.get("deflection_clips") or {}
 EXCL = {
-    "INSULATION": "EXCLUDED: insulation not in scope (estimator standing order); batts of A4.1 wall types by others",
+    "INSULATION": "EXCLUDED: insulation not in scope (estimator standing order); batts of 1/A500 wall types by others",
     "SEALANT": "EXCLUDED: acoustical sealant excluded in all projects (estimator standing order)",
     "CLIPS": "EXCLUDED: " + (dc.get("none_reason") or dc.get("note_source") or "no deflection clip printed")
-             + " (" + (dc.get("source") or dc.get("slip_track_source") or "A4.1") + ")",
+             + " (" + (dc.get("source") or dc.get("slip_track_source") or "4/A500") + ")",
 }
 BLK = {}
 for b in C.get("blocking_items") or []:
@@ -101,7 +101,7 @@ for sh in sorted({w["band"]["sheet"] for w in C["walls"] if w.get("band")}):
                   "dashed": w.get("element") != "wall"}
                  for w in C["walls"] if w["band"].get("sheet") == sh and w.get("tag") == t]
         try:
-            r = hoja.overview(items, f"Harbor Freight Tools - Loveland, CO - {sh} - type {t} (evidence)",
+            r = hoja.overview(items, f"Consumer Cellular - Centennial, CO - {sh} - type {t} (evidence)",
                               os.path.join(IMG, f"{sh}_type_{t.replace('.', '_')}.png"))
             print("planmark", sh, t, r["tinta"])
         except Exception as e:

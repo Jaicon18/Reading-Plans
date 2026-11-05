@@ -1,5 +1,4 @@
-"""Builds etapas/6_markups/demo_geom.json for markups_demo.py = the resolution's etapas/4_canon/demo_geom.json (one polyline
-per demolition element on D1.0), checked one to one against the canon misc_items DEMO-* (same ids, same SF) and with
+"""Builds etapas/6_markups/demo_geom.json for markups_demo.py = the resolution's etapas/4_canon/demo_geom.json (one polyline per demolition element on D100), checked one to one against the canon misc_items DEMO-* (same ids, same SF) and with
 the states written in English. No geometry or quantity is created here.  Use: python3 bitacora.py run scripts/demo_geom_markups.py"""
 import json, os, re, sys
 K = os.environ.get("K") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

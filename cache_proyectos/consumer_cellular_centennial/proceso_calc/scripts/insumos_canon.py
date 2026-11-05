@@ -50,5 +50,5 @@ else:
             rows.append({"id": m["ref"], "family": m["familia"], "description": str(m.get("op"))[:300], "qty": m["qty"],
                          "unit": m.get("unit", "LF"), "source": str(m["source"]).split(" ")[0],
                          "substrate_of": "drywall", "substrate_source": str(m["source"]).split(" ")[0]})
-    json.dump({"rows": rows}, open(os.path.join(C4, "alcance_in.json"), "w"), indent=1, ensure_ascii=False)
+    json.dump({"rows": rows, **({} if rows else {"rows_none_reason": "no furring-like member in the set: type A# furred wall is 3 5/8\" 20 GA studs (1/A500), no hat / Z-furring / furring channel on walls; restroom ceiling furring is a ceiling system (canon ceilings)"})}, open(os.path.join(C4, "alcance_in.json"), "w"), indent=1, ensure_ascii=False)
     print("alcance_in rows", len(rows))

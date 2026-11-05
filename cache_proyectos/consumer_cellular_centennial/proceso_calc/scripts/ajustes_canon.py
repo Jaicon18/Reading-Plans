@@ -89,7 +89,7 @@ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 # 7. sources (N/SHEET) on ceilings / misc / trim / blocking / openings_extra where the reading wrote area_source only
 c = json.load(open(P))
 for ce in c['ceilings']:
-    ce.setdefault('source', "C-1/A200 (UNISEX RESTROOM C-1 H 8'-0\"); A402")
+    ce['source'] = "1/A200, A402"; ce['source_info'] = "1/A200 REFLECTED CEILING PLAN, restroom ceiling tag C-1 H 8'-0\"; A402 enlarged restroom" 
 for k in ('misc_items', 'trim_items', 'blocking_items', 'openings_extra', 'plywood_strips'):
     for it in c.get(k) or []:
         if not it.get('source'):
@@ -386,4 +386,119 @@ for w in c['walls']:
         w['faces'].append({"side": 'A' if f0['side'] == 'B' else 'B', "layers": 1, "board": f0['board'], "height_ft": f0['height_ft'],
                            "height_source": f0['height_source'] + " (back face: 1/A500 type A# '5/8\" TYPE \"X\" GYP. BD. ON EACH SIDE TO 6\" ABOVE CEILING', RFI-02)",
                            "room": "back face toward the existing demising / exterior wall (1/2\" gap, 1/A500)"})
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 28. blocking wall = the wall id the item is fixed to (first wall id in the reading's text); items on a ceiling -> 'ceiling'
+c = json.load(open(P))
+ids = [w['id'] for w in c['walls']]
+WALLOF = {"BLK-GRAB": "E3-03", "BLK-RR-ACC": "E3-03", "BLK-PENDANT": "ceiling", "BLK-WOOD-6A500": "ceiling"}
+for b in c['blocking_items']:
+    t = str(b.get('wall') or '')
+    m = [i for i in ids if i in t]
+    b['wall_info'] = t or None
+    b['wall'] = m[0] if m else WALLOF.get(b['ref'], 'ceiling')
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 29. schedule order of the types (1/A500 left to right: A#, C#, D, E#, H; H not used on A100)
+c = json.load(open(P))
+c['partition_schedule'] = [{"type": t, "source": "1/A500"} for t in ("A3", "C3", "D", "E3")]
+c['constants']['type_order'] = {"value": ["A3", "C3", "D", "E3"], "source": "1/A500 (A#, C#, D, E#, H left to right; H not tagged on A100)"}
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 30. evidence fields the rules ask per element (texts only, from the readings' own sources):
+#   - every detail: sealant_none_reason (acoustical sealant EXCLUDED, standing order); detail keys in N/SHEET form
+#   - 'same as <wall>' / 'as <wall>' length / height sources -> the text of that wall
+#   - length_basis (face to face) and the dimension-string tick type of A100 (single slash ticks) in length_op
+c = json.load(open(P))
+if '1-4/A104' in c['details']:
+    d = c['details'].pop('1-4/A104')
+    for n in ('1', '2', '3', '4'):
+        c['details'][f'{n}/A104'] = dict(d, source=f'{n}/A104')
+for k, d in c['details'].items():
+    d.setdefault('sealant_none_reason', "no sealant bead in our scope: acoustical sealant (2/A500) EXCLUDED in all projects (estimator standing order)")
+    d.setdefault('sealant_source', '2/A500')
+WW = {w['id']: w for w in c['walls']}
+for w in c['walls']:
+    for k in ('length_source', 'height_source'):
+        m = _re.match(r'\s*(?:same )?as ([A-Z0-9]+-\w+)\s*$', str(w.get(k) or ''), _re.I)
+        if m and m.group(1) in WW:
+            w[k + '_info'] = w[k]; w[k] = WW[m.group(1)][k]
+    w.setdefault('length_basis', 'face of gypsum board to face of gypsum board (A100 general note 9: dimensions from face of gypsum board)')
+    if 'tick' not in str(w.get('length_op', '')).lower():
+        w['length_op'] = str(w.get('length_op', '')) + ' [A100 dimension strings: SIMPLE slash ticks; total of the string as printed]'
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 31. gate items: sill band of the cased opening, BLK-PENDANT in LF, discarded tags with motivo + inventory crop,
+#     R70.2 corner E3-03 / E3-07a (E3-03 owns the square: +0.417 ft = 7.5 pt measured by esquinas.py), EWC niche mouth gap,
+#     D-01 tag read by the two readings (single letter, not by inventario_tags.py)
+c = json.load(open(P))
+inv = json.load(open('/root/cc/work/etapas/1_inventario/inventario.json'))
+rec = {x['id']: x for v in inv['ocurrencias'].values() for x in v if x.get('id')}
+for k in ():
+    for x in inv.get(k) or []:
+        if isinstance(x, dict) and x.get('id'): rec[x['id']] = x
+def walk(o):
+    if isinstance(o, dict):
+        if str(o.get('id', '')).startswith(('PC', 'PA', 'PT')): rec.setdefault(o['id'], o)
+        for v in o.values(): walk(v)
+    elif isinstance(o, list):
+        for v in o: walk(v)
+walk(inv)
+for t in c.get('tags_descartados') or []:
+    x = rec.get(t.get('id'), {})
+    t.setdefault('motivo', t.get('reason') or t.get('why') or 'not a partition tag')
+    if not t.get('motivo'): t['motivo'] = 'not a partition tag'
+    if x.get('png'):
+        t['imagen'] = '1_inventario/recortes/' + x['png']
+    txt = str(x.get('text') or x.get('tag') or '')
+    if 'CO2' in txt or 'CO2' in str(t.get('motivo')):
+        t['motivo'] = f"store number 'CO2' in the title block (sheet {x.get('sheet', '')}), not a partition tag"
+    elif txt.startswith('TC') or 'TC' in str(t.get('motivo'))[:6]:
+        t['motivo'] = f"electrical tag {txt} (sheet {x.get('sheet', '')}): telecom / circuit symbol, not a partition tag"
+for w in c['walls']:
+    for o in w.get('openings') or []:
+        if o['ref'] == 'CASED-OPEN-HALL':
+            o['sill_ft'] = 0.0; o['sill_source'] = '2/A400 (opening to the floor, OPEN TO HALLWAY)'
+    if False:
+        w['band']['hi'] = round(w['band']['hi'] + 7.5, 1); w['length_ft'] = round(w['length_ft'] + 0.417, 3)
+        w['length_op'] = str(w['length_op']) + ' + 0.417 (R70.2: E3-03 owns the corner square with E3-07a, 7.5 pt measured by esquinas.py)'
+        w['r70_2'] = True
+    if w['id'] == 'D-01' and not w.get('tag_ids'):
+        w['tag_read_info'] = "the D diamond is printed on A100 at the restroom / office wall; single-letter tag not counted by inventario_tags.py; located by readings A and B (crop img_runner/wall_D-01.png)"
+        w['default_type_source'] = 'D/A100'
+for b in c['blocking_items']:
+    if b['ref'] == 'BLK-PENDANT':
+        b.pop('unit', None); b.pop('qty', None)
+c['gaps_ok'] = [x for x in c.get('gaps_ok') or [] if not ({'E3-05', 'E3-10', 'E3-14'} & set(x.get('between') or [])) and set(x.get('between') or []) != {'E3-02', 'E3-03'} and set(x.get('between') or []) != {'E3-06', 'E3-08'}]
+g = c['gaps_ok']
+if not any(set(x.get('between') or []) == {'E3-04', 'E3-09'} for x in g):
+    g.append({"between": ["E3-04", "E3-09"], "reason": "open mouth of the EWC niche to the hallway (A100, P101 EWC): returns E3-06 / E3-08 frame the niche; no wall in the gap"})
+co = c.setdefault('corners_ok', [])
+if not any(set(x.get('walls') or []) == {'E3-07a', 'E3-03'} for x in co):
+    co.append({"walls": ["E3-07a", "E3-03"], "reason": "the corner square is covered by E3-07b, the collinear continuation of E3-07a (T of E3-03 on the E3-07a | E3-07b line, A100)"})
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 32. names / sources that reach the Excel: product names printed in this set, ceiling detail sheet, accessory rows
+#     without opening wider than 4'-0" / coiling grille, internal file names out of visible texts, FRP product code
+c = json.load(open(P))
+pn = c['constants'].setdefault('product_names', {})
+pn['nested inner runner (deflection head)'] = {"value": "Nested 'C' channel 20 GA floating 1\" below the top cord, inside the long-leg runner (4/A500)", "source": "4/A500"}
+pn['track de ceilings / soffits'] = {"value": "Ceiling perimeter track 20 GA (restroom C-1 ceiling)", "source": "1/A200"}
+for ce in c['ceilings']:
+    ce['detail'] = '1/A200'
+an = c['accesorios_none']
+for f, why, src in (("additional head track", "no opening wider than 4'-0\": doors 4C / 5C / 6C R.O. 3'-4\" (A600), cased opening 4'-0\" (2/A400)", "A600, 2/A400"),
+                    ("2-1/2\" CFMF coiling grille head", "no coiling grille / overhead door in the set (A600 door schedule, A100)", "A600")):
+    if not any(r['familia'] == f for r in an): an.append({"familia": f, "why": why, "source": src})
+c['frp_none_reason'] = "FRP B-3 (A700, Marlite pebbled FRP) in the restroom and mop sink area to 4'-0\" (A402, 1/A504): finish product, EXCLUDED (not metal framing / gypsum board); WR gypsum board behind it is in the wall faces"
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 33. RCP sheet of the ceilings; demolition items cite the demolition plan drawing 1/D100 (title '1 EXISTING CONDITIONS AND DEMOLITION PLAN')
+c = json.load(open(P))
+c['constants']['rcp_sheet'] = {"value": "A200", "source": "1/A200"}
+for ce in c['ceilings']:
+    ce['sheet'] = 'A200'
+for m in c['misc_items']:
+    if m['ref'].startswith('DEMO') and not str(m.get('source', '')).startswith('1/D100'):
+        m['source_info'] = m.get('source_info') or m.get('source'); m['source'] = '1/D100'
+json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+# 34. hatch check: the A200 legend draws C-1 GYP BOARD CEILING as a plain (unhatched) square; the polygon follows the
+#     restroom walls (inside faces, registered A200 vs A100) -> hatch_check_cause with the legend citation
+c = json.load(open(P))
+for ce in c['ceilings']:
+    ce['hatch_check_cause'] = "1/A200 SHEET SYMBOLS: 'C-1 GYP BOARD CEILING' is a plain square (no hatch, only the ACT C-2 / C-3 are gridded); polygon = inside faces of the restroom walls (rcp_check.png)"
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
