@@ -5,7 +5,7 @@ source /root/cr/work/scripts/env.sh
 D=$W/entrega; E="$D/rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
 rm -rf "$D" && mkdir -p "$E/Take-off" "$E/Planos marcados" "$E/Auditoria/burbujas" "$E/Auditoria/schedules" "$E/Auditoria/review_items" "$E/Auditoria/rfi_img" "$E/Auditoria/resolucion_AB" "$E/Auditoria/barrido_tags"
 ln -s $W/etapas $D/takeoff_work_etapas; ln -s $W $D/takeoff_work
-python3 -I $W/scripts/burbujas_unir.py > /dev/null
+# burbujas_unir.py ya corrido; burbujas_verificadas.json final (con destinos agregados a mano) es la fuente -- no re-unir
 cp $W/set_texto.json $W/indep/fichas.json $W/indep/schedules_indep.json $W/proceso/proyecto_datos.json $D/
 cp $W/burbujas/burbujas_verificadas.json $D/; cp -a $W/burbujas/img_verif $D/burbujas_img
 cp $W/burbujas/img_verif/*.png "$E/Auditoria/burbujas/"; cp $W/burbujas/burbujas_verificadas.json $W/burbujas/CADENA.md $W/burbujas/callouts_no_aplican.json "$E/Auditoria/burbujas/"
