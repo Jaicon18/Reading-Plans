@@ -225,6 +225,17 @@ if _mz:
     _src = "L2 Mech & water heater mezzanine 219 under the sloped roof (A3.02 shows no ceiling, roof type not tagged): RS-1 board on resilient channel following the roof slope = 2 x 10.85 ft x 24.73 ft = 536.7 SF [DERIVED, 1/A4.04 vector at the printed scale] (RFI-15; flat plan area 462 SF printed on A2.02)"
     d['misc_items'] += [{"ref": "CLG-L2-64 board", "familia": '5/8" gyp board Type X', "qty": 536.7, "op": "2 x 10.85 x 24.73 = 536.7 SF x 1 layer", "source": _src, "detail": "1/A4.04"},
                         {"ref": "CLG-L2-64 RC", "familia": "resilient channel (printed)", "qty": round(536.7 / (16 / 12.0), 2), "op": "536.7 SF / 1.333 ft o.c. = 402.53", "source": _src, "detail": "1/A4.04"}]
+# Decisión del estimador (usuario 6-nov: "yes"): el soffit del ENTRY CANOPY (08/A9.05 'GYP/METAL SOFFIT PANEL', aplicado bajo la
+# placa de acero, sin framing dibujado) es nuestro: 5/8" exterior gypsum soffit board Type X + trim en los 3 bordes libres.
+# Profundidad 4.85 ft [DERIVED] en 08/A9.05 a 1 1/2" = 1'-0" (108 pt/ft); largo a lo largo del muro NO acotado: 12'-0" (RFI-21)
+_cd, _cl = 4.85, 12.0
+d['misc_items'] += [
+    {"ref": "CAN-L1-ENTRY board", "familia": '5/8" EXTERIOR gyp sheathing Type X', "qty": round(_cd * _cl, 2), "op": f"{_cd} ft x {_cl} ft = {round(_cd * _cl, 2)} SF x 1 layer",
+     "source": "08/A9.05 (= 8/A9.05) ROOF DETAIL - ENTRY CANOPY 'GYP/METAL SOFFIT PANEL' under the 1/4\" steel plate canopy (no soffit framing drawn: board applied to the canopy steel); depth 4.85 ft [DERIVED, measured on 08/A9.05 at the printed 1 1/2\" = 1'-0\"]; length 12'-0\" assumed (not dimensioned, RFI-21); estimator decision 6-nov: gypsum soffit = our scope",
+     "detail": "08/A9.05"}]
+d['trim_items'].append({"ref": "CAN-L1-ENTRY trim", "kind": "corner_bead", "lf": round(2 * _cd + _cl, 2), "label": "entry canopy soffit free edges",
+    "source": "08/A9.05: exterior soffit board edges (2 ends + front) - edge trim; length per RFI-21", "op": f"2 x {_cd} + {_cl} = {round(2 * _cd + _cl, 2)} LF",
+    "status": "DERIVADO", "img": "/root/cr/work/burbujas/img_verif/DET_08_A9.05.png"})
 # U-137 / U-141: detalles que gobiernan renglones nuestros (verificados a ojo, burbujas/img_verif)
 _xw = "XW exterior wall rows (interior Type X layers continuous at the rated floor line, exterior gyp sheathing; FRT wood EXCLUDED)"
 d['details'] = dict(d.get('details') or {}, **{f"{n}/A0.09": f"FIRE RATED INTERSECTIONS: 2 layers 5/8\" Type X continuous at the 2 HR exterior wall / floor intersection -> {_xw}" for n in (3, 5, 6, 7, 8, 9, 10, 11, 12, 13)})
@@ -235,6 +246,7 @@ d['details'].update({
     "2/A7.23": "L3 corridor ceiling / soffit rows (enlarged RCP N-S, same corridor cove as 7/A7.23)",
     "7/A7.23": "corridor soffit / cove rows (framed soffit, ceiling track)",
     "12/A9.03": "smoke-curtain gypsum soffit at the elevator lobby (soffit rows)",
+    "08/A9.05": "ENTRY CANOPY (8/A9.05): 'GYP/METAL SOFFIT PANEL' under the steel plate canopy -> CAN-L1-ENTRY exterior soffit board + edge trim (RFI-21 length)",
     "4/A4.03": "BUILDING SECTION: LEVEL 1 6197.75' / LEVEL 2 6211.75' / LEVEL 3 6222.75' / LEVEL 4 6233.75' / ROOF 6247.75' -> floor-to-floor 14'-0\" / 11'-0\" / 11'-0\" / 14'-0\" used in every wall height (Partition Takeoff, Height)",
 })
 # formato G_DETALLE: {N/HOJA: {source (con N/HOJA), img (existe), title, notes}} desde los destinos verificados a ojo

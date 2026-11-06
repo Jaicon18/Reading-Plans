@@ -2604,7 +2604,7 @@ def cadena_detalles(b):
         txt_h[norm_hoja(h)] = txt_h.get(norm_hoja(h), "") + "\n" + t
     entrada = _hojas_entrada(b) & set(txt_h)
     citado = " ".join(t for _, _, t in b.celdas) + " " + json.dumps(b.canon, ensure_ascii=False)
-    citas = {(n, norm_hoja(h)) for n, h in CALLOUT.findall(citado)}
+    citas = {(n.lstrip('0') or n, norm_hoja(h)) for n, h in CALLOUT.findall(citado)}   # BE-CR24: '08' = '8'
     out, visitadas, cola = [], set(), sorted(entrada)
     while cola:
         h = cola.pop(0)
@@ -2622,7 +2622,7 @@ def cadena_detalles(b):
                 disp, mot = "fuera de alcance", m
                 if t not in visitadas:
                     cola.append(t)
-            elif (n, t) in citas:
+            elif (n.lstrip('0') or n, t) in citas:
                 disp, mot = "citada", "cited in its governing row (Excel / canon)"
                 if t not in visitadas:
                     cola.append(t)
@@ -2701,7 +2701,7 @@ def ce_callouts(b):
     if not entrada:
         return R("FAIL", "ninguna hoja del canon (walls / cielos / demo) está en set_texto.json: no hay de dónde seguir las cadenas")
     citado = " ".join(t for _, _, t in b.celdas) + " " + json.dumps(b.canon, ensure_ascii=False)
-    citas = {(n, norm_hoja(h)) for n, h in CALLOUT.findall(citado)}
+    citas = {(n.lstrip('0') or n, norm_hoja(h)) for n, h in CALLOUT.findall(citado)}   # BE-CR24: '08' = '8'
     ev_sin, ev_corta, ev_no_existe, ev_motivo, ev_pend, amb = [], [], [], [], [], []
     # CC-R10 (Consumer Cellular rev3 audit): CE_CALLOUTS counts against the same UNION as CE_DETALLES_CIRCULADOS (BE-CC07):
     # every sheet with bubbles (detector + burbujas_verificadas + CADENA.md) enters the chain (before: '2 cited / 10' with 49)
@@ -2740,7 +2740,7 @@ def ce_callouts(b):
                 else:
                     ev_no_existe.append(f"{n}/{t} (en {h}): la hoja {t} no tiene el detalle {n}")
                     continue
-            if (n, t) in citas:
+            if (n.lstrip('0') or n, t) in citas:
                 usados += 1
                 if t not in visitadas:
                     cola.append((t, d + 1, f"{n}/{t}"))

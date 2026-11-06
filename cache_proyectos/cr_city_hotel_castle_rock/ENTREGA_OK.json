@@ -1,7 +1,7 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-05 22:51 PST",
- "fecha_iso": "2026-11-06T06:51:26.180147+00:00",
+ "fecha_california": "2026-11-05 23:40 PST",
+ "fecha_iso": "2026-11-06T07:40:28.634604+00:00",
  "workdir": "/root/cr/work/entrega",
  "entrega_dir": "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR",
  "ok": true,
@@ -20,7 +20,7 @@
    "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
    "estado": "PASS",
    "evidencia": [
-    "549 archivos en rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
+    "558 archivos en rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
    ],
    "plausibilidad": "OK"
   },
@@ -196,7 +196,7 @@
    "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
    "estado": "PASS",
    "evidencia": [
-    "6 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
+    "7 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
    ],
    "plausibilidad": "OK"
   },
@@ -237,7 +237,7 @@
    "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
    "estado": "PASS",
    "evidencia": [
-    "6 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
+    "7 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
    ],
    "plausibilidad": "OK"
   },
@@ -249,7 +249,7 @@
    "descripcion": "U-140: un RFI 'not printed' abierto lleva la búsqueda completa: >= 12 términos con sinónimos, todas las disciplinas, SHX, medida vectorial a escala impresa, specs / addenda y sets de todos los GC",
    "estado": "PASS",
    "evidencia": [
-    "2 RFI 'not printed' con búsqueda exhaustiva (6 abiertos)"
+    "3 RFI 'not printed' con búsqueda exhaustiva (7 abiertos)"
    ],
    "plausibilidad": "OK"
   },
@@ -392,7 +392,7 @@
    "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
    "estado": "PASS",
    "evidencia": [
-    "2485 revisiones OK"
+    "2486 revisiones OK"
    ],
    "plausibilidad": "OK"
   },
@@ -480,7 +480,7 @@
    "descripcion": "U-026 / BE-108: ningún RFI abierto sobre un tema que un precedente del estimador (R80e.34 / R80e.78) ya decidió, salvo que lo cite",
    "estado": "PASS",
    "evidencia": [
-    "6 RFI abiertos sin precedente decidido"
+    "7 RFI abiertos sin precedente decidido"
    ],
    "plausibilidad": "OK"
   },
@@ -844,7 +844,7 @@
    "descripcion": "BE-12: toda cita textual (entre comillas) del Excel existe impresa en el set",
    "estado": "PASS",
    "evidencia": [
-    "51 citas textuales impresas"
+    "52 citas textuales impresas"
    ],
    "plausibilidad": "OK"
   },
@@ -868,7 +868,7 @@
    "descripcion": "BE-14: ninguna afirmación 'not printed / not specified' cuyo término aparece impreso con su valor en el set",
    "estado": "PASS",
    "evidencia": [
-    "4 afirmaciones 'not printed' sin valor impreso en el set"
+    "5 afirmaciones 'not printed' sin valor impreso en el set"
    ],
    "plausibilidad": "OK"
   },
@@ -2057,7 +2057,7 @@
    "descripcion": "U-113 / BE-124 CE_CALLOUTS: toda burbuja N/HOJA de las hojas de nuestro trade (y de cada detalle que la cadena alcanza) está citada como fuente en el Excel / canon o declarada fuera de alcance con motivo; la cadena se sigue hasta el último detalle; un detalle / hoja citado que no existe en el set se reporta; U-137 / BE-139: las burbujas de DOS líneas (número arriba / hoja abajo) del detector palabras_fitz.py (burbujas) entran a la cadena, 0 burbujas con hojas de detalles en el set = FAIL (PASS en vacío prohibido) y todo círculo con divisoria sin leer se verifica a ojo",
    "estado": "PASS",
    "evidencia": [
-    "160 burbujas citadas + declaradas (530 burbujas de dos líneas), cadenas seguidas por 85 hojas"
+    "161 burbujas citadas + declaradas (530 burbujas de dos líneas), cadenas seguidas por 86 hojas"
    ],
    "plausibilidad": "OK"
   },
@@ -2254,8 +2254,8 @@
   }
  ],
  "archivos": {
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.json": "b11b2e3e09aa918010683413f81fa9062efa2a429f5de471383b7928367bda3a",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.md": "2850181fb05dbcd1d867e208b230a014219a1e58342ba162737e0b6408a80896",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.json": "4a8d2aee0b0f5ec5199821a1e725fdb7331f462944d59c12ac7b12649433a934",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.md": "a9d4a3e33a77c249da48edec88967c3bd8d75d8a367756ad5fe49badc7aaf931",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/PROCESO_CORRIDA.md": "04064ef41a8bba47724305ae193bee1397ff382f9047ec4cf3d39954615a6079",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/TOOL_LIMITS_CALC.md": "a7cb487839d86ff428c8a83f6c610bb349a68d71b254b9116eb7538be0278362",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/VERIFICACION_MARKUPS.md": "11ad5cfb2a3a3b7ff1d0d8f247003c2132b9b9cdcee866c5960d67889ee9bdd5",
@@ -2323,6 +2323,7 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/remeasure.py": "654db68217dac82b715003f8e06327e41b6c9616aeb354215b9bda0fc5871dc9",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/inventario.md": "8de65b0ac871204007a2a4e98915fc548f2884fd63f75dd4bd11f650dcf1558a",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/CADENA.md": "d7d8dce8271824ec5ee652249f32b14384dfd8204a7c58df12ad1f942cf43d27",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_08_A9.05.png": "a2065bef2c8648d8e614686b552acafd98c4369acae2e60b2beddcd56ada6415",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_10_A0.09.png": "764b98eec85fc382ba8a473b5a330e428e4b49bb5e889a79ab859a399e3b8b83",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_11_A0.09.png": "d7fd051f33a21a016b34f9b8ec7e34f86bda77b144eb4be09a70bb9c310b6535",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_12_A0.09.png": "c3c804b7493bedd76b559d7f057a91cc5f5b88789a15ab7bbf7b7a38d4b4afa2",
@@ -2511,7 +2512,7 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_E1.03_panel_circuit_labels.png": "f585b2afae9d3dccf91fc2150b27ead0f2fb5cc965c4f18da75a9a42d8e604a5",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_S3.07_blank_section_marker.png": "b06e2b770229b1a0ea65137a26ff1377bed82ceaa04eaa264bc171515a02d7c8",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/burbujas_verificadas.json": "5996789c3cdd4c9f4cdd700d43d75460250870787f485527d0ef995d80f1da9f",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/callouts_no_aplican.json": "a47fe4ea0edf83fcbe33deb5a16f5dffeaa899ead8863427949010eba14e211d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/callouts_no_aplican.json": "cfdb38af0b6bdeb9f75448fe4732ba09818c9852651a0a8b44e3d2eed2235ed7",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/comparacion_sets_2025_vs_2026.json": "a24e884228588accc3f46b40f864d5db7c19be6359eb8f94869d6d6d794901a8",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rcp_polys_check.json": "8a31448a5ca37618f6256915384a6c77a3597d3ca97d30a9a9fe7bd48a2988dc",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/comparacion_AB.json": "13609bd3f059800a08e6568d22590c2573c4fc010134568b9dc6cf5728438404",
@@ -2598,6 +2599,10 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_1.png": "5d746ff42a1b5f8a6f46f7e70e6523797af20df9b5dcb416b0314bd03770fcc2",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_3.png": "b942a043ad0e910801c7f8fadb1bad453d4b37c83689404bde83ea201d6930c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-21.png": "c00968c84a0c0aaa699bc4e53fe3e7f9a06dbb472c817c9dab6438146d2b34fa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-21_1.png": "fb1ab0af96fde855f79e5cefe922f1a7f53d6fad59c59717c114572519626809",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-21_2.png": "503b1a483102174df0e24f9c378e8dd1c187d5af78aedda892a5742632633e72",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-21_3.png": "1f2d17bd6a4c112563a29ca5ac847780bbb8ac8f7eeb26d3675bbe54c2f70eb5",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01.png": "6c12de15498f446b218f069ffe367b7ced4e2810525141e71397d12034d5f85f",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_1.png": "00a6600325a31fe99403ded0b3e601e5d91f81e6bfd1bcf124938d8773d92afa",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_2.png": "426592f1dbcd76995e0971075737f602aa82278030bc028c37762c44bd2de329",
@@ -2675,6 +2680,10 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_1.png": "5d746ff42a1b5f8a6f46f7e70e6523797af20df9b5dcb416b0314bd03770fcc2",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_3.png": "b942a043ad0e910801c7f8fadb1bad453d4b37c83689404bde83ea201d6930c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-21.png": "c00968c84a0c0aaa699bc4e53fe3e7f9a06dbb472c817c9dab6438146d2b34fa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-21_1.png": "fb1ab0af96fde855f79e5cefe922f1a7f53d6fad59c59717c114572519626809",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-21_2.png": "503b1a483102174df0e24f9c378e8dd1c187d5af78aedda892a5742632633e72",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-21_3.png": "1f2d17bd6a4c112563a29ca5ac847780bbb8ac8f7eeb26d3675bbe54c2f70eb5",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_ch_det.png": "38099800236ea5b3f50971628a99f19f0d4e0a37dc19ca2171577d719cee8b86",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_ch_tbl.png": "7a22d301a9a4312e417e359c05a06f899ddd008aad06d7d48bacae42ec8002af",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_cip_det.png": "c49adf42a9f6ca9e874dcb8cca2ef8f7448ad39e9077ca9b3ed04a13b97775a6",
@@ -2766,9 +2775,9 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p62.png": "c23e3805345f338fbd76878c801f279cad12b30e46e29e601b72e803e0644e58",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p63.png": "e88f925c0c4bdff18c57d0098434458d3ff2382d1b8012f898804f6f9767467a",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p78.png": "d11c074a554dcacca153f2a6b77bb251e530206ac2a41d271c129e97629776ab",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "1c0efd9fcc0411d77e103815bbf3fb63fa221a58ee4f8f79690ad6345f00f777",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "a85923baca94850b2b75243ac6453dab43bda3eecb78ade4b9c015590f6d67de",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "f30941361100959c7429492db50c8acdcd2713a82c8e763dc3c5cdc6750c43c3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "2b3e364080d510ea53aa1e1a81787000fe59b645f1df4fb244c97c8aa7658bb1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "272869761f780ec4c6415581850d8562c6d5eddd17149f8a90da54d0971f8cc3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "53619ab80c5756c7f444ab8bf872c129c410fc28c7109fcdbf1764504b03bf84",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.01_marked_by_type_rev1.png": "006782bcdc1a93470aa39771c5188678aa47ec8449d95f938214b9ea513f2e1f",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.02_marked_by_type_rev1.png": "4e097c48482d028c89230732c7160ac1d9db7ee5b2a96e43f97fcbdf0f9e0273",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.02_rcp_markups.png": "4e097c48482d028c89230732c7160ac1d9db7ee5b2a96e43f97fcbdf0f9e0273",
@@ -2788,26 +2797,26 @@
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.45_marked_by_type_rev1.png": "f4b5d86b11441d41a0c24ef9ff6626754b4e4dbe2a258c18da680687286554c3",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.50_marked_by_type_rev1.png": "ebe4ea2059c0e243f9d80b6b8dfcf467c3275ead5ea8a4347e7b02e54ecab3a5",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.55_marked_by_type_rev1.png": "2d9732c202ac8fc299d02f459558945ee967129c844c9136dcdc21d8645d1e3e",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/CR_City_Hotel_markups_rev1.pdf": "85727b6dc06e2fe881167f69342ea4852b28c16cee392587beef02df0f265fda",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "ffc8787e6c573c6b347796bd958f5fa36b48f2a8c729b264d032dbf4d879c62e",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "f548ec5d14ab9cdf01e19d27d19af5d5e1e1cf0928660805916f47c089bc6c8d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/CR_City_Hotel_markups_rev1.pdf": "c5bb73d212c718763f5558facfbdf1fb644eda4cf41b867cea95adf716e274cb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "5946b0c5f2e2054411788dfc31d72af7a973da2f27df21543b13eb983bee7b95",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "bf199a993c3022e069a9073c240badd9550b474f7b9ceb2ace3faee6e2ede773",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p149_marked_by_type_rev1.png": "ec59afe8b400b6d8608fd1bed67803f77c30a110834b9c8d991418c7f1279624",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p22_marked_by_type_rev1.png": "e442f7a7a24d75b282657285ef353998490887abb9deb7834fd7caaea1979e7c",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p23_marked_by_type_rev1.png": "eeb290ca3c48d002ebf158acfa6db1e49ad9e3eaaff177c8787e0f46ee51033c",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p24_marked_by_type_rev1.png": "0150feef30f7d44b00c35e309096202b149a781b1cdad23766ff506a0e29f4a5",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p25_marked_by_type_rev1.png": "0b1edddaf5125f59f84d0d954084fe3289a1d1c0dd9ca76ff14fc6d007e340f0",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1.xlsx": "5780e59ddd3ea64b82cae82fcab9f05b844f5bd0972f59e924ca9fa9348b7768",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1_PROPOSAL.pdf": "9f9e8eac37047e411d379479d13d437d8d7f04f5d2cac5c9a293c5c8cee0cba8",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "203915a7b33aca127551f50ce541f051b6a6b714f509e2a85ae90e68861fce5b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1.xlsx": "48211a49991034e945a189273126afb908d43f39fc29328103e17d1fcea6264d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1_PROPOSAL.pdf": "0a7e4ae7946e283f4fdaf008cf3809f0c198eda1eada8a65dad5c7c5cb1f59d6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "27bfb011f413df34e6ba679526f90e99ce591bb42b9af88e17b06c0adfa73b1b",
   "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "9c34c9dac991ca9be97e9365f2247a719b216dce34c7c8e29488f9b9e778d4bc",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SEGUIMIENTO.md": "2de4c6674fa87f6438d4e58ee1e6b3d35b08e4b404a15ddee92e716d6b621c53",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx": "531dd0f23327f3dc4ea2b22d1dc8f227ca763e06b76675ad7253a6d0d914fd77",
-  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx.sello.json": "d4f5ff944cdfb7fe2853358b5031797cfc63d9e8707ca4b04e692ee7867558d3"
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SEGUIMIENTO.md": "4d26115c583197c07f6759814aaf602ed5c00929da0d9d220e474aaa0a09f368",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx": "f7787914aba11cb826f819c4e4020da3994894e4f899f62ac8a0e67f600baccf",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx.sello.json": "f39e8e22ad28d4382baadede912502fe1ab3c52d0ac43144c97e4705804b33ab"
  },
  "drive": {
   "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
   "carpeta_proyecto": "CR City Hotel - Castle Rock, CO (Owen-Ames-Kimball) 11-12-26",
   "carpeta_proyecto_id": "1UVry3iaGhJrahxk8DE-Q150WvRAE38h3"
  },
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal)"
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel)"
 }

@@ -546,3 +546,7 @@ Arreglo (proceso): scripts/vanos_puertas.py (cobertura de líneas de muro + door
 ## BE-CR23 — CE_DETALLES_CIRCULADOS pedía marcar destinos en hojas que no están en el set (6-nov, CR City Hotel)
 Error: 31 burbujas apuntan a P3.00 / P3.01 (hojas que no vienen en el bid set): sin página donde marcar → FAIL imposible de cerrar.
 Arreglo: si el set es conocido y la hoja destino no está en él, no se pide marca de destino (la burbuja sigue necesitando su disposición).
+
+## BE-CR24 — Burbuja con cero a la izquierda ('08/A9.05') nunca coincidía con su cita (6-nov, CR City Hotel)
+Error: CALLOUT no reconoce '08/A9.05' y lee '8/A9.05'; la burbuja guarda n='08' → la cita nunca coincidía (CE_CALLOUTS / CE_DETALLES_CIRCULADOS "sin disposición").
+Arreglo (v81cf56): comparar n.lstrip('0'); en el canon citar también '8/A9.05'.
