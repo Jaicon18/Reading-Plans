@@ -24,3 +24,4 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - En curso: subagente burbujas (CE_DETALLES_CIRCULADOS / CE_CALLOUTS), subagente auditoría U-138 (-> /root/cr/work/auditoria_U138/INFORME_AUDITORIA_U138.md -> bitacora.py backcheck <informe> <excel>).
 - Bitácora rehecha en orden (bitacora.jsonl nueva; la vieja = bitacora_corrida1_archivada.jsonl); registro.json recreado (viejo archivado).
 - Siguiente: integrar burbujas + citas en canon -> cadena.sh 2 -> armar_entrega.sh -> FAIL restantes -> backcheck -> proposal build -> subir_entrega -> skill v81cf55 (+ sección multinivel R80f) -> reporte.
+- 6-nov ~10:15 PM PT: Drive del proyecto llenado (estaba vacío, BE-CR17): '2026 Permit Drawings (bid set)' 11 PDF + copia limpia 148p; '2025 Drawings (superseded)' 5 PDF. Auditoría U-138 recibida: 4 ALTA (FS-1 en cielo L1, Retail 124 GYP-1, corridor 412 L4, corner bead) + 5 MEDIA -> en verificación.
