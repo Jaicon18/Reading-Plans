@@ -80,6 +80,20 @@ def test_be_cr09b_auditoria_rx_scale_no_cruza_saltos():
     t = 'A2.01\n1/8" = 1\'-0"\n1 1/2" = 1\'-0"'
     assert [a.frac(m.group(1)) for m in a.RX_SCALE.finditer(t)] == [Fraction(1, 8), Fraction(3, 2)]
 
+def test_r80f55_multinivel():
+    """R80f.55: alturas multinivel con la operación impresa; existing_walls cuentan en las compuertas; Wall ID con lado."""
+    import sys, os
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import revision_markups as RM
+    import chequeos_biblioteca as CB
+    h = RM.altura_impresa("11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)", "DERIVADO")[0]
+    assert abs(h - 9.2396) < 0.001, h
+    h = RM.altura_impresa("11'-0\" - 1'-1 3/8\" = 9'-10 5/8\" (4/A5.05 floor-to-floor minus 7/A7.23)", "DERIVADO")[0]
+    assert abs(h - 9.8854) < 0.001, h
+    b = CB.B.__new__(CB.B)
+    b.canon = {"walls": [], "existing_walls": [{"id": "W.4-L2-01 A", "floor": "L2", "sheet": "A2.02"}, {"id": "W.4-L3-01", "floor": "L3", "sheet": "A2.03"}]}
+    assert len(b.walls_todos()) == 2 and b.walls() == []
+
 
 if __name__ == "__main__":
-    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); test_cr09_escala_rotulo(); test_be_cr09b_auditoria_rx_scale_no_cruza_saltos(); print("test_cr_city_hotel OK")
+    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); test_cr09_escala_rotulo(); test_be_cr09b_auditoria_rx_scale_no_cruza_saltos(); test_r80f55_multinivel(); print("test_cr_city_hotel OK")
