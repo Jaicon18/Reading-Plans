@@ -10,7 +10,8 @@ Uso: python3 -I verificar_version.py <skill_dir_o_zip> <skills_archivo_dir> [<ca
    todo [U-NNN] de REGLAS_USUARIO_CLAUDE.md / REGLAS_HISTORICO.md está en el registro; toda regla vigente lleva su [U-NNN].
 3. (U-020) revisar_zip: < 200 archivos, SKILL.md con YAML name / description, sin __pycache__, sin tools.orig_*, sin
    entradas de directorio (zip -D).
-4. (U-027) revisar_indice: la VERSIÓN VIGENTE de skills_archivo/INDICE.md existe como zip archivado.
+4. (U-027) revisar_indice: la VERSIÓN VIGENTE de skills_archivo/INDICE.md existe como zip archivado; (BE-146)
+   revisar_indice_encabezado: el "(hoy vN" del encabezado = la última línea "vN = VERSIÓN VIGENTE".
 Sale con código 1 si falta algo (no arrancar el proyecto ni marcar la versión vigente).
 """
 import json
@@ -198,6 +199,9 @@ def revisar_indice(archivo):
     if not m:
         return ["INDICE.md no marca la VERSIÓN VIGENTE"]
     v = m.group(1)
+    enc = revisar_indice_encabezado(archivo)
+    if enc:
+        return enc
     zs = [n for n in os.listdir(archivo) if n.startswith(f"take-off-metal-frame-drywall_{v}_") and n.endswith(".zip")]
     if not zs:
         return [f"la versión vigente {v} no tiene zip en skills_archivo"]
@@ -205,6 +209,24 @@ def revisar_indice(archivo):
     distintos = {hashlib.md5(open(os.path.join(archivo, n), "rb").read()).hexdigest() for n in zs}
     if len(distintos) > 1:   # BE-CF20 (copia idéntica FINAL-<Proyecto> de U-027 no cuenta): dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
         return [f"BE-CF20: la versión vigente {v} tiene {len(zs)} zips distintos ({', '.join(sorted(zs))}): unir en v+1"]
+    return []
+
+
+def revisar_indice_encabezado(archivo):
+    """BE-146 -> faltas: el encabezado "VERSIÓN VIGENTE ... (hoy vN" de INDICE.md = la ÚLTIMA línea "vM = VERSIÓN VIGENTE" del
+    archivo. Caso original (6-nov): v81cf55..v81cf57 publicadas y el encabezado seguía en "hoy v81cf54" (el hook SessionStart
+    arrancaba con una versión vieja)."""
+    p = os.path.join(archivo, "INDICE.md")
+    if not os.path.isfile(p):
+        return ["skills_archivo sin INDICE.md"]
+    txt = open(p, encoding="utf-8").read()
+    m = re.search(r"VERSIÓN VIGENTE[^:]*: [^(]*\(hoy (v[0-9a-z]+)", txt)
+    if not m:
+        return ["INDICE.md no marca la VERSIÓN VIGENTE"]
+    ult = re.findall(r"\b(v[0-9a-z]+) = VERSIÓN VIGENTE", txt)
+    if ult and ult[-1] != m.group(1):
+        return [f"BE-146: el encabezado de INDICE.md dice 'hoy {m.group(1)}' y la última línea '= VERSIÓN VIGENTE' es {ult[-1]}: "
+                f"actualizar el encabezado (o la línea) para que digan la misma versión"]
     return []
 
 

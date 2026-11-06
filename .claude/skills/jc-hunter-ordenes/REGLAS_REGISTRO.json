@@ -1,7 +1,7 @@
 {
- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 372,
+ "conteo": 425,
  "reglas": [
   {
    "id": "U-001",
@@ -180,7 +180,8 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "ce_sin_proposal"
    },
-   "cuando": "entrega"
+   "cuando": "entrega",
+   "nota_u150": "Desde 2026-11-05 (U-150): sin efecto para la carpeta Proposal/ cuando el usuario ordena la proposal; fuera de Proposal/ sigue prohibida."
   },
   {
    "id": "U-016",
@@ -5430,6 +5431,341 @@
    "categoria": "conducta",
    "cuando": "siempre",
    "texto_corto": "Todas las reglas son mandatorias, absolutamente todas, para todos los proyectos (usuario 5-nov); referencia más reciente = Consumer Cellular rev4 FINAL"
+  },
+  {
+   "id": "U-150",
+   "origen": "usuario 2026-11-05 ~1:00 PM PT (vía COORDINACIÓN): proposal con INCLUDED / NOT INCLUDED; deja sin efecto U-015 para la carpeta Proposal/",
+   "texto_corto": "REGLA (usuario 5-nov, TODOS los proyectos con orden de proposal): proposal desde 'Proposal Template.xlsx' (hoja PROPOSAL DW) en Proposal/ de la entrega; INCLUDED con cada renglón cargado del Material Summary (cantidad, unidad, N/HOJA), NOT INCLUDED con cada EXCLUDED del Scope Checklist, clarifications con las decisiones; material a precio FBM con fuente y fecha (hoja FBM_PRICES), labor / OH con las tasas de la plantilla, sin tasa = [RATE TO CONFIRM]; los dólares solo dentro de Proposal/",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_proposal",
+    "take-off:tools/compuerta_entrega.py::ce_sin_proposal"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "U-150"
+   }
+  },
+  {
+   "id": "BE-CR01",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "inventario_tags: types con punto (W.62, XW.6.3), WALL ASSEMBLIES, sheet numbers del índice",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/inventario_tags.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr01_regex"
+   }
+  },
+  {
+   "id": "BE-CR02",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "familias Type C / shaftliner / ext Type X / cement board / C-H / J-runner",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/canon.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr02_familias"
+   }
+  },
+  {
+   "id": "BE-CR03",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "ceiling resilient_channel bajo wood joists",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/canon.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr03_rc"
+   }
+  },
+  {
+   "id": "BE-CR04",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "canon.py proyecto 100 % board-only",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/canon.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr04_board_only"
+   }
+  },
+  {
+   "id": "BE-CR05",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "esquinas.py sin subcanons",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/esquinas.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr05_esquinas_board_only"
+   }
+  },
+  {
+   "id": "BE-CR06",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "markups Subject por type_id board-only",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR07",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "trazabilidad Type C / exterior / capas de ceiling",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR08",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "ALC-20 cement board; existing walls por type con subtotal",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR09",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "escala impresa sin cruzar saltos de línea (verificar_markups_excel / auditoria_entrega)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/verificar_markups_excel.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_cr09_escala_rotulo"
+   }
+  },
+  {
+   "id": "BE-CR10",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "compuertas cuentan existing_walls (walls_todos)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "BE-CR10"
+   }
+  },
+  {
+   "id": "BE-CR11",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "revision_markups: Wall ID con lado ('CH-L2-01 A')",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR12",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "height_source con la operación impresa explícita y altura = cota impresa exacta (proceso)",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR13",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "comparar_extra con valores {value, source}",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_extra.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_be_cr13_comparar_extra_num"
+   }
+  },
+  {
+   "id": "BE-CR14",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "lista_schedules lee hoja / pos / stud / wood de fichas; types no usados; C-H track = J-runner",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR15",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "corner bead por programa, nunca RFI de 'no contado'; page del canon base 1",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR16",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "cruzar leyenda RCP / tags con LEVEL / LOCATION / RATING de los schedules de assemblies antes de un RFI",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR17",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "dos carpetas de Drive: Projects = bid set, Claude outputs = entrega; listar ambas antes de concluir",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR18",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "cadena_detalles re-siembra la cola aunque la última hoja ya esté visitada",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR19",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "Partition Takeoff board-only: LF físico una vez por wall y GRAND TOTAL al final",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR20",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "assembly de piso LEVEL N = membrana en el cielo del nivel N-1 en toda la placa",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR21",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "antes de excluir por tenant / separate permit, ver si es parte de un assembly rated",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR22",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "paths sobre vanos de puerta (vanos_puertas), corner bead de window returns y soffits",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR23",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "CE_DETALLES_CIRCULADOS: destino en una hoja que no está en el set no pide marca",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+  },
+  {
+   "id": "BE-CR24",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
+   "texto_corto": "burbuja con cero a la izquierda ('08/A9.05') = '8/A9.05' en las citas",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglo de código en v81cf56 (n.lstrip('0') en CE_CALLOUTS / CE_DETALLES_CIRCULADOS); lo valida la corrida real de CR City Hotel (08/A9.05 citado)"
+  },
+  {
+   "id": "BE-CR25",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev1 -> rev2, COORDINACIÓN 6-nov)",
+   "texto_corto": "la compuerta no pasa en vacío: canon 0 walls + Partition Takeoff > 0 filas = FAIL; 'sin walls / sin canon' con PT lleno = FAIL; los board-only de un set wood-framed corren como walls con sus caras (BOTH SIDES por wall)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py",
+    "take-off:tools/compuerta_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_be_cr25"
+   }
+  },
+  {
+   "id": "BE-CR26",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, auditoría U-138 #2)",
+   "texto_corto": "cada paso de la cadena lee la salida del anterior; candado de que el efecto de cada paso llega al canon final (vanos_puertas escribía un archivo que nadie leía)",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR27",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, auditoría U-138 #2)",
+   "texto_corto": "cement board solo en las paredes sólidas de cada shower (caja medida en vectores, misma regla en todos los pisos); non-rated: cement board en lugar del board; shafts del mismo stack en todos los pisos",
+   "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR28",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, COORDINACIÓN 6-nov)",
+   "texto_corto": "subida: Take-off / Proposal / Planos marcados / raíz primero, Auditoria al final; > 1,000 archivos = Auditoria.zip desde los archivos verificados, README lo dice (CE_SUBIDA_PAQUETE)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py",
+    "take-off:tools/compuerta_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_be_cr28"
+   }
+  },
+  {
+   "id": "BE-CR29",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2 recheck, COORDINACIÓN 6-nov)",
+   "texto_corto": "ningún chequeo en vacío: BE-CF04 cuenta los board-only de madera; schedule desde fichas.json; soffits estructurados; BOTH SIDES con la fila de la familia cuando el rating no está impreso; en_vacio atrapa toda ausencia de una estructura del canon",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_be_cr29"
+   }
+  },
+  {
+   "id": "BE-146",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 6-nov)",
+   "texto_corto": "INDICE.md con el encabezado 'hoy vN' viejo (v81cf54) con v81cf55..57 publicadas: el '(hoy vN' del encabezado = la última línea 'vN = VERSIÓN VIGENTE'",
+   "categoria": "programa",
+   "cuando": "version",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_indice_encabezado",
+    "ordenes:verificar_version.py::revisar_indice"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "indice_encabezado"
+   }
+  },
+  {
+   "id": "BE-147",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev3, 6-nov)",
+   "texto_corto": "PDF de markups entregado con 3 firmas digitales /Sig del set (/SigFlags 3) y Page Labels numéricos: Bluebeam bloquea Page Labels; CE_PDF_EDITABLE + tools/quitar_firmas_labels.py",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_pdf_editable",
+    "take-off:tools/compuerta_entrega.py::pdf_editable",
+    "take-off:tools/quitar_firmas_labels.py::quitar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u151_pdf_editable"
+   }
+  },
+  {
+   "id": "U-151",
+   "origen": "REGLAS_USUARIO_CLAUDE.md (6-nov, CR City Hotel, BE-147)",
+   "texto_corto": "REGLA INVIOLABLE: todo PDF para Bluebeam (Planos marcados/*.pdf) sin firmas digitales (/Sig quitados, sello aplanado, sin /SigFlags ni /Perms) y con Page Label = hoja impresa en TODAS las páginas (únicos, no numéricos salvo hoja impresa así); sin PDF = FAIL (U-137)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_pdf_editable",
+    "take-off:tools/compuerta_entrega.py::pdf_editable",
+    "take-off:tools/quitar_firmas_labels.py::quitar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u151_pdf_editable"
+   }
   }
  ]
 }

@@ -92,6 +92,21 @@ def revisar_indice():
     assert any("BE-CF20" in x for x in V.revisar_indice(d))
 
 
+def indice_encabezado():
+    """BE-146 (6-nov): v81cf55..v81cf57 publicadas y el encabezado de INDICE.md seguía en 'hoy v81cf54'."""
+    d = tempfile.mkdtemp()
+    cab = "**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v81cf54 = v81cf52 + proposal)**\n\n"
+    lin = "".join(f"**06-nov: {v} = VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO** = x\n\n" for v in ("v81cf54", "v81cf55", "v81cf56", "v81cf57"))
+    open(os.path.join(d, "INDICE.md"), "w").write(cab + lin)
+    for v in ("v81cf54", "v81cf57"):
+        open(os.path.join(d, f"take-off-metal-frame-drywall_{v}_P_2026-11-06.zip"), "w").write(v)
+    r = V.revisar_indice_encabezado(d)
+    assert r and "BE-146" in r[0] and "v81cf54" in r[0] and "v81cf57" in r[0], r
+    assert any("BE-146" in x for x in V.revisar_indice(d)), "revisar_indice (main) debe correr el chequeo del encabezado"
+    open(os.path.join(d, "INDICE.md"), "w").write(cab.replace("hoy v81cf54", "hoy v81cf57") + lin)
+    assert V.revisar_indice_encabezado(d) == [] and V.revisar_indice(d) == []
+
+
 def revisar_skill():
     """BE-87 (choque de numeración R80e.49 trim / formato de RFI) y BE-VS-11 (A_NO_DIBUJADO sin clasificar nunca corría)."""
     d = skill([OK, ALC], dict(TOOLS, **{"reglas.py": '@chequeo("A_NO_DIBUJADO", "x")\ndef f(c):\n    return []\n',
@@ -155,7 +170,7 @@ def versiones_unicas():
 
 
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
