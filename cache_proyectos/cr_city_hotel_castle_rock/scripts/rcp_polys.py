@@ -29,6 +29,11 @@ for x in c.get('ceilings') or []:
     fl = x.get('floor'); sh = RCP.get(fl)
     if not sh: continue
     p, dark = raster(sh)
+    if x.get('poly_hint'):   # área de toda la planta (membrana FS-1 bajo el piso de arriba): caja de los walls del canon del piso
+        a0, b0, a1, b1 = x['poly_hint']
+        out.append({"room": x['room'], "polygon": [[a0, b0], [a1, b0], [a1, b1], [a0, b1]]}); x['sheet'] = sh
+        chk.append({"room": x['room'], "sheet": sh, "status": "floor-plate box of the canon walls of this floor (whole-floor membrane)"})
+        continue
     m = re.search(r'\b([1-4]\d\d)\b', x['room'])
     hits = p.search_for(m.group(1)) if m else []
     best = None

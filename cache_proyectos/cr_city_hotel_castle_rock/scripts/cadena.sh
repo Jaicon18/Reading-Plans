@@ -11,6 +11,7 @@ R scripts/canon_AB.py
 R $T/comparar.py $W/etapas/2_lectura/canon_A.json $W/etapas/2_lectura/canon_B.json $W/etapas/1_inventario/inventario.json $W/etapas/3_revision --pdf $PDF
 R $T/comparar_extra.py $W/etapas/2_lectura/canon_A.json $W/etapas/2_lectura/canon_B.json $W/etapas/1_inventario/inventario.json $W/etapas/3_revision
 R scripts/build_canon.py
+R scripts/vanos_puertas.py
 R scripts/esquinas_cb.py
 R scripts/finalizar_canon.py
 R scripts/rfis.py

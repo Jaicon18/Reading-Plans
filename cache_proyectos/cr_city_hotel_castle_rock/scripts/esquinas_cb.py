@@ -80,7 +80,8 @@ for (sh, fl0), d in sorted(segs.items()):
                 if key in vistos:
                     continue
                 vistos.add(key)
-                if s['two'] and t['two']:
+                ext = any(str(x).startswith('XW') for x in s['types'] | t['types'])   # U-138: esquina contra muro exterior = inside corner
+                if s['two'] and t['two'] and not ext:
                     corners.append({"kind": "L", "at": [round(e[0], 1), round(e[1], 1)], "n": 1, "h": min(s['h'], t['h']) or s['h'],
                                     "walls": [s['ids'][0], t['ids'][0]]})
     # extremos libres: jamb de door opening = esquina del bbox de un door swing (arco vectorial de 2-4.5 ft) a <= 0.9 ft,
@@ -112,7 +113,7 @@ for (sh, fl0), d in sorted(segs.items()):
         return False
     for i, e, o in libres:
         s = L[i]
-        if not s['two']:
+        if not s['two'] or any(str(x).startswith('XW') for x in s['types']):
             continue
         door = jamb(e) or any(k != i and 2.0 * sc <= math.dist(e, e2) <= 4.5 * sc for k, e2, _ in libres)
         if door:

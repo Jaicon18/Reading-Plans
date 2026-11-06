@@ -2609,6 +2609,8 @@ def cadena_detalles(b):
     while cola:
         h = cola.pop(0)
         if h in visitadas:
+            if not cola:                     # BE-CR18: la última hoja ya visitada no salta el re-sembrado de BE-CC07
+                cola = [x for x in hojas_con_burbujas(b) if x not in visitadas]
             continue
         visitadas.add(h)
         for p in sorted(_burbujas_pos(b, h), key=lambda p: (p["y"], p["x"])):

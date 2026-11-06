@@ -64,7 +64,7 @@ A = [
  ("ALC-12", "CUANTIFICADO", "Ceiling suspension: resilient channel at FS-1 / RS-1 (A0.08) and USG drywall suspension for GYP-1 / GYP-2 (RCP legend 'ON METAL SUSPENSION SYSTEM', RFI-12) with hanger wire (A7.23; P0.01 / S1.02 / S1.05 / S3.02 / S3.04 are other trades)."),
  ("ALC-13", "CUANTIFICADO", "Soffits / coves: corridor perimeter bands 1/A7.23, 1/A7.24, 7/A7.23 (L2-L4), lobby coffers 2/A7.31, L4 stair soffit 11/A6.01 (A0.10, A5.00-A5.02 are wood framing)."),
  ("ALC-14", "NO APLICA", "No canopy / marquee in our trade: A5.03 / A9.05 canopy is steel / wood by others (S1.02, S3.10)."),
- ("ALC-15", "NO APLICA", "No column furring / wraps printed for our trade (A2.01-A2.04); L1 retail steel beam wraps by future tenant (RFI-05 / RFI-18)."),
+ ("ALC-15", "NO APLICA", "No column furring printed for our trade (A2.01-A2.04). L1 retail steel BEAM wraps = part of the rated FS-1 membrane (A0.08 FS-1 note): carried as BW-L1-RETAIL (Type C + resilient channel, side height RFI-20)."),
  ("ALC-16", "NO APLICA", "Blocking is WOOD (A0.05 accessibility, A0.09, A2.05, A7.32, A9.02, A9.04): EXCLUDED (Div. 06, U-139); no metal blocking printed."),
  ("ALC-17", "NO APLICA", "EXCLUDED - framed openings for ducts / diffusers (standing order); no access panels in gypsum scheduled (A8.00, M1.01, M1.05, P4.00, P4.01, T0.01 legend)."),
  ("ALC-18", "CUANTIFICADO", "Corner bead / L-bead / U-bead per 09 29 00 2.5 and control joints per A0.06 GN 15 (A3.01-A3.04, A7.00): quantities from window returns and outside corners (window schedule A8.01 + elevations A4.00-A4.03, measured by program)."),
