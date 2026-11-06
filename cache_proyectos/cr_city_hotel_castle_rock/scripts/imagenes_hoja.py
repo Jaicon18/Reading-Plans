@@ -3,7 +3,7 @@
 import json, os, fitz
 W = '/root/cr/work/etapas'
 m = json.load(open(f'{W}/6_markups/markups.json'))
-d = fitz.open(f'{W}/6_markups/markups.pdf')
+d = fitz.open(f'{W}/6_markups/markups_con_rcp.pdf')
 os.makedirs(f'{W}/7_imagenes', exist_ok=True)
 out = []
 for i, p in enumerate(d):

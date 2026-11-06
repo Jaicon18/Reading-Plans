@@ -64,5 +64,13 @@ def test_cr05_esquinas_board_only():
     assert r is not None and not r.get("fallas")
 
 
+
+def test_cr09_escala_rotulo():
+    import verificar_markups_excel as v
+    assert v.escalas_impresas("PERMIT\nLVL 2\nA2.02\n1/8\" = 1'-0\"\n1") == [9.0]
+    assert v.escalas_impresas("1 1/2\" = 1'-0\"") == [108.0]
+    assert v.escalas_impresas("3/4\" = 1'-0\"") == [54.0]
+
+
 if __name__ == "__main__":
-    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); print("test_cr_city_hotel OK")
+    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); test_cr09_escala_rotulo(); print("test_cr_city_hotel OK")

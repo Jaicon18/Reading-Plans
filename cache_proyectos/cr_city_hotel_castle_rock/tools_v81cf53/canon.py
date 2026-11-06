@@ -2483,7 +2483,7 @@ def _existing_walls(data, fam, filas):
         fam[BOARD_FAM[b]] += sf
         filas.append({"familia": BOARD_FAM[b], "ref": eid, "source": src,
                       "operacion": f"{eid} existing wall {L} LF x {H} ft x {nf} face(s) x {ly} layer(s) = {sf} SF ({e['decision']})"})
-        rows.append({"id": eid, "location": str(e.get("location") or ""), "lf": round(L, 2), "height_ft": H,
+        rows.append({"id": eid, "type_id": e.get("type_id"), "location": str(e.get("location") or ""), "lf": round(L, 2), "height_ft": H,
                      "layers": ly, "faces": nf, "board_sf": sf, "board": b, "keynote": e.get("keynote"),
                      "source": src, "decision": e["decision"], "status": "DERIVADO"})
     return rows

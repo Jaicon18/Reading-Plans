@@ -88,6 +88,8 @@ def main():
                            "board": k, "location": f"{fl} {'[TYPE ASSUMED - RFI-04] ' if asum else ''}{w.get('location', '')} | faces: {'; '.join(r for r in g['rooms'] if r)}"[:300],
                            "source": f"{sh} ({w.get('length_source', '')}; {w.get('length_op', '')}) | H: {g['src'][0][:220]} | type: {w.get('type_source', '')} | detail: {w.get('detail', '')}"[:900],
                            "decision": DEC if w.get('framing') != 'metal' else "C-H shaft wall (A0.06 CH, UL U415): board / liner here, C-H studs + J-runner in misc_items",
+                           "keynote": (re.search(r"\b[0-9A-Z]{1,3}/A\d\.\d{2}\b", str(w.get('detail') or '')) or re.search(r"\b[0-9A-Z]{1,3}/A\d\.\d{2}\b", g['src'][0] or '') or
+                                       type('m', (), {'group': lambda self, i=0: {'L1': '5/A5.04', 'L2': '4/A5.05', 'L3': '4/A5.05', 'L4': '1/A5.06'}[fl]})()).group(0),
                            "tag_ids": w.get('tag_ids') or [], "length_status": w.get('length_status'),
                            "img": w.get('img'), "height_img": w.get('height_img')})
             if w.get('framing') == 'metal' and str(typ or '').startswith('CH'):
@@ -145,7 +147,7 @@ def main():
                                           else "A0.08 RS-1 (ceiling 'RE: REFLECTED CEILING PLANS', board on channel under wood framing drawn) - board type not printed: 5/8\" Type X loaded (RFI-CR-RS1)"},
                              "rc_oc_in": {"value": 16, "source": "UL L546 / RS-1 (spacing 'per assembly', not printed): 16 in. o.c. loaded (RFI-CR-RC, alt 12 in. o.c.)"},
                              "layers": {"value": 1, "source": "A0.08 " + ('FS-1 1 layer' if k == 'FS-1' else 'RS-1 1 layer drawn')},
-                             "detail": ('4/A5.05' if k == 'FS-1' else '1/A5.06') + f' (section cutting the {"FS-1" if k == "FS-1" else "RS-1"} assembly, A0.08; RCP {RCP.get(fl, "")})',
+                             "detail": ('4/A5.05' if k == 'FS-1' else '1/A5.06'),
                              "source": f"A0.08 / RCP {RCP.get(fl, '')}: {src}", "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})
             continue
         # GYP-1 / GYP-2 / other: metal suspension (USG drywall suspension) - legend 'ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING'

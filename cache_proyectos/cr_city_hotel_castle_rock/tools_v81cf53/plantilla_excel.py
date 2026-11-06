@@ -561,18 +561,27 @@ def _escribir(d, salida, out_reglas):
         f1 = ws.max_row                                 # v81cf8 (T5): OTHER FRAMING with its own subtotal (LF + board SF)
         ws.append([None, "SUBTOTAL OTHER FRAMING", f"=SUM(C{f0}:C{f1})", None, None, None, None, f"=SUM(H{f0}:H{f1})"])
         ws.cell(ws.max_row, 2).font = S["tipo"]
-    if d.get("existing_walls"):                         # R80w.39: bloque propio, después de OTHER FRAMING
-        ws.append([]); ws.append([f"TYPE {EXIST_TYPE}"])
+    # v81cf53 (CR City Hotel, BE-CR08b): set wood-framed -> bloques board-only POR TYPE (type_id) en el orden del
+    # schedule (type_order), cada uno con su SUBTOTAL; el título = Subject del markup (markups_bluebeam BE-CR06)
+    _ex = d.get("existing_walls") or []
+    _grupos = [(None, _ex)]
+    if _ex and all(e.get("type_id") for e in _ex):
+        _ord = [str(t) for t in d.get("type_order") or []]
+        _tids = sorted({e["type_id"] for e in _ex}, key=lambda t: (_ord.index(t) if t in _ord else len(_ord), t))
+        _grupos = [(t, [e for e in _ex if e["type_id"] == t]) for t in _tids]
+    for _tid, _lst in _grupos:
+      if _lst:                                          # R80w.39: bloque propio, después de OTHER FRAMING
+        ws.append([]); ws.append([f"TYPE {_tid + ' - BOARD ONLY (WOOD FRAMING EXCLUDED)' if _tid else EXIST_TYPE}"])
         ws.cell(ws.max_row, 1).font = S["tipo"]; ws.cell(ws.max_row, 1).fill = S["tf"]
         f0 = ws.max_row + 1
-        for e in sorted(d["existing_walls"], key=lambda x: _nat(x["id"])):
-            ws.append([f"Existing wall {e.get('keynote') or ''}  #{e['id']}  -  {en(e['location'])}",
+        for e in sorted(_lst, key=lambda x: _nat(x["id"])):
+            ws.append([f"{'Wood-framed wall' if _tid else 'Existing wall'} {e.get('keynote') or ''}  #{e['id']}  -  {en(e['location'])}",
                        str(e["id"]), e["lf"], e["height_ft"], e["layers"], "none (board only; framing not in scope)", None,
                        e["board_sf"], en(e["location"]) + f" | {e['faces']} face(s) x {e['layers']} layer(s), "
                        f"{BOARD_EN.get(e.get('board'), e.get('board'))} | {en(e['decision'])}",
                        en(e["source"]), f"[{ESTADO_EN.get(e['status'], e['status'])}]"])
         f1 = ws.max_row
-        ws.append([None, "SUBTOTAL BOARD-ONLY WALLS", f"=SUM(C{f0}:C{f1})", None, None, None, None,
+        ws.append([None, f"SUBTOTAL {_tid} BOARD ONLY" if _tid else "SUBTOTAL BOARD-ONLY WALLS", f"=SUM(C{f0}:C{f1})", None, None, None, None,
                    f"=SUM(H{f0}:H{f1})"])
         ws.cell(ws.max_row, 2).font = S["tipo"]
 
