@@ -15,11 +15,19 @@ for L in 'AB':
             if fl == 'L1' and any(t in ('PA0006', 'PA0007') for t in tids):   # resolution L1: RFI-06 separate-permit boundary
                 tids = [t for t in tids if t not in ('PA0006', 'PA0007')]
                 tags += [{"id": t, "motivo": "tag of another type pointing to the short wall on the separate-permit boundary east of door 107.1 - not loaded (resolucion_L1, RFI-06)", "imagen": REC[t], "floor": fl} for t in ('PA0006', 'PA0007')]
-            walls.append(dict(w, element='wall', band=b, floor=fl, tag=w.get('type'), tag_ids=tids))
+            tg = w.get('type')
+            # etiqueta normalizada con la MISMA regla para A y B (solo formato): 'W.6.1' = W.6 con su rating (RFI-01 cerrado,
+            # R-ALC-10); el 2-HOUR SHAFTWALL de 7/8/A9.03 sin tag = 'CH (2-HR shaftwall)' (A lo nombró así, B lo dejó null)
+            if str(tg or '').upper().startswith('W.6.1'):
+                tg = 'W.6'
+            if not tg and str(w.get('id') or '').startswith('CH-'):
+                tg = 'CH (2-HR shaftwall)'
+            walls.append(dict(w, element='wall', band=b, floor=fl, tag=tg, tag_ids=tids))
         ceil += [dict(c, floor=fl) for c in d.get('ceilings') or []]
         tags += [dict(t, floor=fl) for t in d.get('tags_descartados') or []]
     for t in ('PA0002', 'PA0003'):
         tags.append({"id": t, "motivo": "W.6 legend example on T0.01 (INDEX AND STANDARDS graphic standards), not a wall", "imagen": REC[t], "floor": "T0.01"})
-    json.dump({"project": "CR City Hotel", "reader": L, "constants": {"plan_scale_pt_per_ft": {"value": 9.0, "source": "A2.01-A2.04 printed 1/8\" = 1'-0\" (9 pt/ft); enlarged plans A7.xx / A6.xx printed 1/4\" = 1'-0\" (18 pt/ft)"}, "plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "A2.01 printed 1/8\" = 1'-0\""}, "A2.02": {"value": 9.0, "source": "A2.02 printed 1/8\" = 1'-0\""}, "A2.03": {"value": 9.0, "source": "A2.03 printed 1/8\" = 1'-0\""}, "A2.04": {"value": 9.0, "source": "A2.04 printed 1/8\" = 1'-0\""}, "A3.01": {"value": 9.0, "source": "A3.01 printed 1/8\" = 1'-0\""}, "A3.02": {"value": 9.0, "source": "A3.02 printed 1/8\" = 1'-0\""}, "A3.03": {"value": 9.0, "source": "A3.03 printed 1/8\" = 1'-0\""}, "A3.04": {"value": 9.0, "source": "A3.04 printed 1/8\" = 1'-0\""}}}, "walls": walls, "ceilings": ceil, "tags_descartados": tags},
+    json.dump({"project": "CR City Hotel", "reader": L, "constants": {"plan_scale_pt_per_ft": {"value": 9.0, "source": "A2.01-A2.04 printed 1/8\" = 1'-0\" (9 pt/ft); enlarged plans A7.xx / A6.xx printed 1/4\" = 1'-0\" (18 pt/ft)"}, "plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "A2.01 printed 1/8\" = 1'-0\""}, "A2.02": {"value": 9.0, "source": "A2.02 printed 1/8\" = 1'-0\""}, "A2.03": {"value": 9.0, "source": "A2.03 printed 1/8\" = 1'-0\""}, "A2.04": {"value": 9.0, "source": "A2.04 printed 1/8\" = 1'-0\""}, "A3.01": {"value": 9.0, "source": "A3.01 printed 1/8\" = 1'-0\""}, "A3.02": {"value": 9.0, "source": "A3.02 printed 1/8\" = 1'-0\""}, "A3.03": {"value": 9.0, "source": "A3.03 printed 1/8\" = 1'-0\""}, "A3.04": {"value": 9.0, "source": "A3.04 printed 1/8\" = 1'-0\""}}}, "walls": walls, "ceilings": ceil, "tags_descartados": tags,
+               "types_none_reason": {"C.8": "cast-in-place concrete wall (A0.06 C.x): not our trade (U-061)", "CM.4": "CMU wall (A0.06 CM.x): not our trade (U-061); furring drawn on it is read as FW / FI", "CM.8": "CMU wall (A0.06 CM.x): not our trade (U-061); furring drawn on it is read as FW / FI", "XM.0.1": "exterior masonry type, not in A0.07: not our trade (U-061, RFI-02 closed)"}},
               open(f'{W}/2_lectura/canon_{L}.json', 'w'), indent=1)
     print(L, len(walls), len(ceil), len(tags))

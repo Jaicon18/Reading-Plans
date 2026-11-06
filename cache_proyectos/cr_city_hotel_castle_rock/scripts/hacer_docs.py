@@ -38,7 +38,7 @@ def datos():
 R = [f"# {TIT}", ""] + datos() + [
  "", "## Bid set and GC", "",
  "- Owen-Ames-Kimball Co. (Colorado), Jess Matias: BuildingConnected 'CR City Hotel: Drywall & Framing', bid Nov 12, 2026 12:00 PM MST (only GC found in estimating@jchunter.us).",
- "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared by program: comparacion_sets.json).",
+ "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
  "- `Planos marcados/CR_City_Hotel_markups_rev1.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
@@ -58,19 +58,28 @@ for r in ms:
 R += ["", f"## Open RFIs (conservative value LOADED; only what no sheet prints, U-140) - {len(rf)}", ""]
 for r in rf:
     R.append(f"- **{r['id']}** ({r['source']}): {r['question']} Loaded: {r['loaded']}. Delta: {r['delta']}")
+cr = [r for r in c["rfis"] if r["status"] == "closed"]
+R += ["", f"## Decisions closed by printed data or standing rule (no RFI) - {len(cr)}", ""]
+for r in cr:
+    R.append(f"- **{r['id']}** ({r['source']}): {r['question']} -> {r['resolved']['answer']} [{r['resolved']['source']}]")
+R += ["", "## Bank comparison", "",
+ "Program COMPARATIVA_BANCO (U-130) against the verified FINAL jobs of the bank. OUT OF RANGE families explained:", "",
+ "- **Studs - OUT OF RANGE (low): expected.** Every bank job is METAL framed; this building is WOOD framed (A0.06 W / FW / DW / FI, A0.07 XW, A0.08 trusses), so wood studs are Div. 06 = EXCLUDED (U-139). The only studs in our scope are the 6\" 20 GA C-H studs of the CH.6-2 shaft walls (A0.06 CH, UL U415): 546 LF.",
+ "- **Bracing / blocking - OUT OF RANGE (0): expected.** Blocking in this set is WOOD (A0.05, A0.09, A2.05, A7.32, A9.02, A9.04) = Div. 06 EXCLUDED; no metal bracing / blocking is printed (Scope Checklist ALC-16).",
+ "- Track is in range only because of the soffit / ceiling track of the framed soffits (7/A7.23) and the C-H J-runner; board, finishing and trim are in range per partition LF."]
 open(os.path.join(E, "README_REVIEW.md"), "w").write("\n".join(R) + "\n")
 
 fam = {str(r[0]): r for r in ms}
 def net(sub):
     v = [r for k, r in fam.items() if sub.lower() in k.lower()]
     return f"{v[0][2]:,.2f} {v[0][1]}" if v else "0"
-P = [f"# Revisar primero — {TIT}", "",
+P = [f"# Revisar primero — {TIT}", ""] + datos() + ["",
  "## Proyecto", "", "- Hotel nuevo de 4 pisos, 35,676 SF, Type IIIB, estructura de wood (A0.00). GC: Owen-Ames-Kimball, bid 12-nov 12:00 PM MST.",
  "- Todo el framing es wood: framing EXCLUDED (Div. 06). Lo nuestro es el gypsum board (board-only por wall y por piso), exterior gyp sheathing, cement board, C-H shaft walls, resilient channel, drywall suspension, soffits, trim y acabado.", "",
  "## Revisar esto primero", "",
  f"1. Markups de A2.01-A2.04 (`Planos marcados/`): {sum(v[0] for v in fl_tot.values())} walls en 4 pisos, un color por type.",
  f"2. 5/8\" Type X: {net('gypsum board, Type X')} · Type X W.R.: {net('Type X W.R.')} · Type C (ceilings FS-1): {net('Type C')} · exterior sheathing Type X: {net('exterior gypsum sheathing')} · cement board: {net('cement board')}.",
- f"3. {len(rf)} RFI abiertos, cada uno con el supuesto conservador ya CARGADO (SEGUIMIENTO.md). Los que más mueven: RFI-12 (GYP-1 metal suspension vs wood), RFI-10 (Type X vs regular en walls sin rating), RFI-04 (walls sin tag), RFI-05 (retail por futuro tenant).",
+ f"3. {len(rf)} RFI abiertos (solo lo que ninguna hoja imprime, U-140), cada uno con el supuesto conservador ya CARGADO (SEGUIMIENTO.md): " + ", ".join(r['id'] for r in rf) + f". Otros {sum(1 for r in c['rfis'] if r['status'] == 'closed')} se cerraron con lo impreso o con regla / precedente (lista en README_REVIEW, 'Decisions closed'); los que más mueven: RFI-05 (retail: caras no rated EXCLUDED por la nota de tenant, rated cargadas, delta -1,033 SF), RFI-12 (GYP-1 metal suspension), RFI-19 (corner bead contado por programa en los 4 pisos).",
  "4. Alturas: salen de las secciones impresas por zona (4/A5.05, 7/A7.23, 1/A5.06, 2/A5.01); las lecturas A y B diferían y se resolvieron con la cota impresa (Auditoria/resolucion.md).", ""]
 open(os.path.join(E, "PARA_REVISAR_EN_LA_MANANA.md"), "w").write("\n".join(P) + "\n")
 S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGADO, U-048)", "",

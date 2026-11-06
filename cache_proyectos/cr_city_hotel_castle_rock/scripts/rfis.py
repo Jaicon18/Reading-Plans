@@ -63,7 +63,7 @@ R = [
   "eave walls 5.91 ft, gable walls 7.28 ft average (2/A5.04 vector at printed scale)",
   ("2/A5.04 vector measure (as loaded)", "0"), ("n/a", "1/A4.04 reading 7.21 ft: +/- 1.3 ft x 89.8 LF"), "XW.6.4-L2-01..03, XW.6.3-L2-12"),
  ("RFI-09", "A2.03, A0.06", ["SHAFT", "317"],
-  "Small shaft box south of lobby 317 (L3): no type; drawn as a shaft enclosure.",
+  "Small shaft box south of lobby 317 (L3): no type; drawn as a shaft enclosure (the question is the ENCLOSURE board / type; precedent R80e.34 #2 is about duct crossings of walls and does not answer it).",
   "board on the outside face only, 1 layer 5/8\" Type X", ("A2.03 as drawn (as loaded)", "0"), ("IBC 713 shaft enclosure", "CH.2-1 shaft wall: + 1\" liner + C-H studs / J runner on 14.44 LF"), "NULL-L3-11..14"),
  ("RFI-10", "A0.06 GN 10, WOOD detail", ["TYPE \"X\" GYP BD. TYP", "5/8\" GYPSUM BOARD AT ALL OTHER"],
   "A0.06 general note 10 calls 5/8\" (regular) gypsum board at non-rated partitions, but the WOOD / FURRED WOOD / DBL. WOOD sections print '5/8\" TYPE X GYP BD. TYP.'.",
@@ -79,10 +79,10 @@ R = [
   "metal suspension (USG drywall suspension: main tees 48\" o.c., cross tees 16\" o.c., wall angle, hangers 4'x4') - conservative, our scope",
   ("RCP legend: metal suspension (as loaded)", "0"), ("n/a", "wood framing: grid, wall angle and hanger wire rows to 0 (wood excluded), board unchanged"), "GYP-1 ceilings L1-L4"),
  ("RFI-13", "A3.01, A5.08", ["GYP-2", "AER-09038"],
-  "Ceiling GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS, AER-09038' (L1): layers / board not printed.",
+  "Ceiling GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS, AER-09038' (L1): the layer count and the board type are absent from the legend, from A5.08 and from 09 29 00 (AER-09038 is a listed design not reproduced in the set).",
   "2 layers 5/8\" Type X on metal suspension", ("GYP-2 legend + 2 HR (as loaded)", "0"), ("listed design AER-09038 (not reproduced in the set)", "if 3 layers: +401 SF"), "GYP-2 L1"),
  ("RFI-14", "A0.08 FS-1 / RS-1", ["SPACING PER", "RESILIENT CHANNEL"],
-  "FS-1 / RS-1 resilient channel spacing 'per assembly' (UL L546) is not printed.",
+  "FS-1 / RS-1 resilient channel spacing: A0.08 says 'SPACING PER ASSEMBLY' (UL L546) and gives no inches.",
   "16\" o.c.", ("A0.08 'spacing per assembly'", "0"), ("UL L546 (typical wood-truss assemblies list 16\" o.c.; some 12\" o.c.)", "12\" o.c.: resilient channel x 1.33"), "FS-1 / RS-1 ceilings"),
  ("RFI-15", "A0.08 RS-1, A3.04", ["RS-1", "REFLECTED CEILING"],
   "L4 ceilings under roof RS-1: board type not printed (ceiling 'RE: REFLECTED CEILING PLANS').",
@@ -147,7 +147,7 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
 CERR = {
- "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row / tags 'CH.6 2' on A7.50 vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): option A of the type tag loaded - 6\" C-H studs - estimator standing rule R-ALC-10 (U-082) with note: verify 7/A9.03, 8/A9.03; delta to 2 1/2\" C-H = lighter studs / runner, board unchanged", "R-ALC-10 / U-082"),
+ "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row / tags 'CH.6 2' on A7.50 vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): option A of the type tag loaded - 6\" C-H studs - estimator standing rule R-ALC-10 (U-082) with note: verify 7/A9.03, 8/A9.03 and spec 09 21 16.23 (shaft wall assemblies, C-H studs) / UL U415; delta to 2 1/2\" C-H = 546 LF of lighter studs + 101 LF runner, board unchanged", "R-ALC-10 / U-082 + 09 21 16.23"),
  "RFI-11": ("Precedent R80e.34 #15 (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "R80e.34 #15 + UL design"),
  "RFI-12": ("Estimator standing rule R-ALC-01 / BE-CF11: 'metal suspension OR wood framing' = the metal option goes (our scope) - loaded as USG drywall suspension", "R-ALC-01"),
  "RFI-16": ("Code / listed design (U-025): UL U415 C-H shaft wall studs at 24\" o.c. - loaded", "UL U415"),
@@ -156,7 +156,7 @@ CERR = {
  "RFI-03": ("Printed: the A0.06 W.6 row prints rating '--' (non-rated); an empty rating box on a W.6 tag = that printed row (W.6-0, 1 layer 5/8\" Type X each side)", "A0.06 W.6 row"),
  "RFI-06": ("Printed (option A): the grey area is labeled 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' on A2.01; the short wall on its boundary east of door 107.1 belongs to that area - not loaded", "A2.01 grey-area note"),
  "RFI-08": ("Resolved by measurement (U-140): the mezzanine 219 wall board heights are measured on the vector geometry of 2/A5.04 at its PRINTED scale 3/8\" = 1'-0\" (27 pt/ft) [DERIVED] - eave 5.91 ft, gable 7.28 ft average; op in the wall source", "2/A5.04 at printed scale"),
- "RFI-10": ("Plan vs plan (R-ALC-10 / U-082, option A = the specific drawing): the WOOD / FURRED WOOD / DBL. WOOD type sections print '5/8\" TYPE X GYP BD. TYP.' - loaded on every interior face; A0.06 GN 10 (5/8\" regular at non-rated) is the general note. Delta to regular board: 0 SF (price only)", "R-ALC-10 / U-082"),
+ "RFI-10": ("Plan vs plan (R-ALC-10 / U-082, option A = the specific drawing): the WOOD / FURRED WOOD / DBL. WOOD type sections print '5/8\" TYPE X GYP BD. TYP.' - loaded on every interior face; A0.06 GN 10 (5/8\" regular at non-rated) is the general note; spec 09 29 00 2.3 A Gypsum Board Type X 5/8 inch. Delta to regular board: 0 SF (price only)", "R-ALC-10 / U-082 + 09 29 00 2.3 A"),
  "RFI-05": ("Printed (option A): A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' - NON-rated retail faces EXCLUDED (532.5 SF: W.6-L1-23 A, FI.2-L1-09, FI.2-L1-10, XW.6.4-L1-03); retail faces of RATED assemblies (tag rating > 0: XW.6.2-2, XW.6.3-2, XW.6.4-2, 1,033 SF) stay loaded because the printed rating requires the layer. Delta if the tenant also builds the rated layers: -1,033 SF", "A2.01 note + tag ratings"),
  "RFI-18": ("Resolved with the printed set: (1) L4 corridor 412 perimeter cove = typical 7/A7.23 'WALL DETAIL - CORRIDOR CEILING' applied along the corridor 412 walls [DERIVED LF = corridor wall LF]; (2) L1 lobby ceiling step 11'-0\" / 9'-0\" (2/A7.50) with the cut between them not drawn = U-146: the HIGHER printed height 11'-0\" is loaded, no step face (delta: + step face LF x 2'-0\" if the boundary is drawn later); (3) retail steel beam wraps (A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS. TYP.') are inside Retail 124 = A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' -> EXCLUDED (tenant; Type IIIB structural frame 0 HR, no rated wrap)", "7/A7.23 + U-146 + A2.01 note"),
  "RFI-19": ("The plan resolves it (U-140): outside corners of ALL floors counted by program from the wall geometry at the printed scale (L junctions x 1 + free wall ends x 2, door jambs at printed door tags excluded) x wall height - trim_items CB-<floor>-<sheet>, images 4_canon/img/cb", "09 29 00 3.x + ASTM C840"),
@@ -190,7 +190,14 @@ for rid, src, terms, q, loaded, A, B, items in R:
     bar["otros_sets"] = "single GC (Owen-Ames-Kimball); 2025 Full Drawing Set (181 p, superseded) compared by program (sheet-by-sheet text comparison); no addenda"
     bar["hojas"] = "ALL"
     bar["grep"] = f"full text of the 148 sheets (text layer of every sheet, vector-only pages by image) + 8 spec sections - {len(bar['encontrado_en'])} sheet hits, {len(bar['specs_hits'])} spec hits for {', '.join(terms)}"
-    bar["disciplinas"] = "ALL (A, S, M, P, E) + Project Manual Vol 1 / Vol 2 + 2025 Full Drawing Set (superseded) compared"
+    bar["disciplinas"] = "ALL"
+    bar["disciplinas_detalle"] = "A, S, M, P, E (every discipline of the set; no FP / F / K / vendor sheets issued) + Project Manual Vol 1 / Vol 2 + 2025 Full Drawing Set (superseded) compared"
+    bar["un_solo_gc"] = bar["otros_sets"]
+    bar["medida_vectorial"] = bar["vectorial"]
+    if rid == 'RFI-04':   # descartes de las hojas de enlarged plans (sus tags son de otros walls)
+        for h2 in sorted(st["hojas"]):
+            if re.match(r"A[67]\.\d\d", h2):
+                bar["descartes"].setdefault(h2, f"read on {h2} (enlarged plans / RCP / details): the walls of this RFI are drawn without a partition tag here too; the tags printed on {h2} (W.6.1, FW.4, ...) belong to other, tagged walls, already loaded; the dimensions printed are lengths / heights, not a type")
     if rid in CERR:
         ans, base = CERR[rid]
         rfis.append({"id": rid, "status": "closed", "source": src, "question": q, "loaded": loaded, "items": items,

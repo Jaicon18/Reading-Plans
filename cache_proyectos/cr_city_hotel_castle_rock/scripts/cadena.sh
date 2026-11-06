@@ -9,6 +9,7 @@ R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@"
 R scripts/comparar_AB.py
 R scripts/canon_AB.py
 R $T/comparar.py $W/etapas/2_lectura/canon_A.json $W/etapas/2_lectura/canon_B.json $W/etapas/1_inventario/inventario.json $W/etapas/3_revision --pdf $PDF
+R $T/comparar_extra.py $W/etapas/2_lectura/canon_A.json $W/etapas/2_lectura/canon_B.json $W/etapas/1_inventario/inventario.json $W/etapas/3_revision
 R scripts/build_canon.py
 R scripts/esquinas_cb.py
 R scripts/finalizar_canon.py
@@ -25,6 +26,7 @@ R scripts/imagenes_hoja.py
 R $T/vigas_sobre_walls.py $PDF NONE A2.02@p18 $C4/takeoff_canon.json --json $C4/out/vigas_out.json
 R scripts/evidencias_reglas.py
 R scripts/takeoff_json.py $T
+R scripts/cobertura.py
 R $T/plantilla_excel.py validar takeoff.json
 R $T/plantilla_excel.py armar takeoff.json $X --familias $C4/out/familias_out.json --trabajo etapas
 R scripts/registro_marcar.py $T

@@ -188,7 +188,7 @@ def leer_markups(pdf):
             # campo sin espacios (Wall ID / DEMO ID)
             i_sf = next((k for k in range(3, len(parts)) if re.search(r"\bSF\b", parts[k])), 3)
             # BE-CR11: un Wall ID con lado ('CH-L2-01 A', shaft wall por cara) también es id
-            ids_ = [x for x in parts[i_sf + 1:] if x and (" " not in x or re.fullmatch(r"\S+-\d+ [A-Z]", x))]
+            ids_ = [x for x in parts[i_sf + 1:] if x and (" " not in x or re.fullmatch(r"\S+-\w+ [A-Z]", x))]
             out.append({"page": pi, "label": p.get_label() or f"p{pi + 1}", "subject": a.info.get("subject"),
                         "type_txt": parts[0], "lf_txt": float(parts[1].split()[0].replace(",", "")),
                         "h_txt": ftin(parts[2].replace("H", "").strip()),

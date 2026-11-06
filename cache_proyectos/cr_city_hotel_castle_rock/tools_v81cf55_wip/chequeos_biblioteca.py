@@ -622,7 +622,7 @@ def u_035(b):
 
 def _tipo_de(w):
     el = str(w.get("element") or "wall")
-    return str(w.get("tag") or "").upper() if el == "wall" else el
+    return str(w.get("tag") or w.get("type") or "").upper() if el == "wall" else el   # BE-CR10: board-only usa 'type'
 
 
 @chk("U-037", "BE-72", desc="U-037 / BE-72: conteos por type y hoja contra el inventario de tags (y columnas): ningún tag del "
@@ -641,14 +641,14 @@ def u_037(b):
         else:
             return NA("sin walls ni inventario")
     have = {}
-    for w in b.walls():
+    for w in b.walls_todos():                     # BE-CR10: + existing_walls (board-only)
         have.setdefault((_tipo_de(w), w.get("sheet") or (w.get("band") or {}).get("sheet")), 0)
         have[(_tipo_de(w), w.get("sheet") or (w.get("band") or {}).get("sheet"))] += 1
     none = b.canon.get("types_none_reason") or {}
     none = {str(x.get("type") if isinstance(x, dict) else x).upper() for x in (none if isinstance(none, list) else none.keys())}
     # R80f.44 (Chuze FINAL8, BE-142): ONE WALL ONCE - un tag del inventario que el canon descarta con motivo (tags_descartados:
     # 'shown on the enlarged plan, counted there') o que un wall de otra hoja reclama en tag_ids ya tiene su wall: no falta
-    duenos = {str(x) for w in b.walls() for x in (w.get("tag_ids") or [])}
+    duenos = {str(x) for w in b.walls_todos() for x in (w.get("tag_ids") or [])}
     duenos |= {str(x.get("id")) for x in (b.canon.get("tags_descartados") or [])
                if isinstance(x, dict) and len(str(x.get("motivo") or "").strip()) >= 8}
     falta = {}

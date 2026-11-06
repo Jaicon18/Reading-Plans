@@ -15,7 +15,7 @@ def fmt(o):
             f"(B) Code ({B.get('cita', 'n/a')}): {B.get('texto', '')} - delta {B.get('delta', '')} | (C) Other: ____")
 
 
-cierre0 = {r["id"]: {"pregunta": r["question"] + " - CLOSED: " + r["resolved"]["answer"], "delta": r.get("delta_applied") or "0"} for r in c["rfis"] if r["status"] != "open"}
+cierre0 = {r["id"]: {"pregunta": r["question"] + f" - CLOSED ({r['id']}, decision: {r['resolved']['source']}): " + r["resolved"]["answer"], "delta": r.get("delta_applied") or "0"} for r in c["rfis"] if r["status"] != "open"}
 rfis = [{"id": r["id"], "pregunta": f"{r['question']} - carried: {r['loaded']} (conservative value loaded). " + r["barrido"]["swept_txt"],
          "delta": fmt(r["opciones"]), "opciones": r["opciones"], "source": r["source"], "barrido": r["barrido"],
          "img": r["barrido"]["lugares"][0]["img"]} for r in c["rfis"] if r["status"] == "open"]

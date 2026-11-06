@@ -17,7 +17,7 @@ d.update({
  "ballistic_jogs_none_reason": "No ballistic panels (A0.06 types W / FW / DW / FI / CH / C / CM only)",
  "trim_none_reason": "Corner bead / L-bead / U-bead per 09 29 00 3.x; quantities by program (window returns + outside corners) in trim_items",
  "frp_none_reason": "No FRP wall finish in A7.19 finish schedules (TF-1 plaster / vinyl wallcovering / P-1 paint); XI.2.7 FRP exterior finish on CMU (A0.07) is not our trade",
- "types_none_reason": {"C.8-x / CM.8-x": "CIP concrete and CMU (A0.06): not our trade, no furring unless FI / FW drawn", "SFRM": "spray-applied fireproofing (A0.06 / A0.08): not our trade"},
+ "types_none_reason": {"C.8": "CIP concrete wall (A0.06 C.x): not our trade (U-061), no furring unless FI / FW drawn", "CM.4": "CMU wall (A0.06 CM.x): not our trade (U-061); furring on it read as FW / FI", "CM.8": "CMU wall (A0.06 CM.x): not our trade (U-061); furring on it read as FW / FI", "XM.0.1": "exterior masonry, not in A0.07: not our trade (U-061, RFI-02 closed)", "SFRM": "spray-applied fireproofing (A0.06 / A0.08): not our trade"},
  "deflection_clips": {"none_reason": "Wood-framed structure: no deflection clips; C-H shaft walls use J runner top and bottom (A0.06 CH)", "source": "A0.06"},
  "fasteners_excluded": {"why": "all screws / anchors / pins excluded (estimator standing order U-053)", "source": "A0.06, A0.08"},
  "wood_excluded": {"why": "wood studs, plates, trusses, blocking, FRT plywood, LP Flameblock sheathing = Div. 06, never carried (R-ALC-01 / U-139)", "source": "A0.06 WOOD / FURRED WOOD / DBL. WOOD, A0.07 XW, A0.08 FS-1 / RS-x"},
@@ -96,6 +96,24 @@ for w in list(d['existing_walls']):
         d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
             "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
 print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
+# BE-119 / U-099: la fuente IMPRESA de la altura de cada wall en sus campos (la lee revision_markups / CE_ALTURA_IMPRESA)
+for w in d['existing_walls']:
+    m = re.search(r"\| height: ([^|]*)", str(w.get('source') or ''))
+    if m and not w.get('height_source'):
+        hs = m.group(1).strip()
+        w['height_note'] = hs
+        h = float(w.get('height_ft') or 0)
+        if 'cement' in str(w.get('board') or '') and abs(h - 9.0) < 0.01 and not hs.lower().startswith('bath ceiling'):
+            hs = ("Bath ceiling GYP-1 8'-6\" (A7.xx unit RCP) + 6\" above line of ceiling (A0.06 furred wood head detail) = 9'-0\" "
+                  "(cement board to the tile ceiling + 6\", precedent R80e.34 #15, RFI-11 closed)")
+        elif 'deep floor/ceiling zone' in hs and abs(h - 9.24) < 0.01:
+            hs = "11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)"
+        elif "1'-1 3/8" in hs and abs(h - 9.885) < 0.01:
+            hs = "11'-0\" - 1'-1 3/8\" = 9'-10 5/8\" (4/A5.05 printed floor-to-floor minus the rated corridor assembly printed on 7/A7.23)"
+        if 'vector' in hs:   # medida vectorial: la escala impresa no es una altura (BE-121)
+            hs = re.sub(r"\(?(\d+/\d+)\"\s*=\s*1'-0\"(,\s*)?", r"(scale \1 in/ft) ", hs).replace("in/ft  pt/ft", "in/ft, pt/ft")
+        w['height_source'] = hs
+        w['height_status'] = 'DERIVADO' if re.search(r"=|\+| - |minus", hs) else 'CONFIRMADO'
 # corner bead por programa (scripts/esquinas_cb.py): outside corners de L junctions + extremos libres que no son door jambs
 cbj = json.load(open('/root/cr/work/etapas/4_canon/out/corner_bead.json'))
 for k, v in sorted(cbj['por_hoja'].items()):
