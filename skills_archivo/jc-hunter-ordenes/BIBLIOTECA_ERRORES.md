@@ -522,3 +522,23 @@ Regla (todos los proyectos): antes de un RFI de cielo / wall rated, cruzar cada 
 ## BE-CR17 — La carpeta del proyecto en Drive quedó vacía (6-nov, CR City Hotel; el usuario la encontró vacía)
 Error: el brief pedía subir el bid set y las specs a Drive › JC HUNTER PROJECTS › Projects › "<proyecto>" al descargarlos; se creó la carpeta pero nunca se subieron los archivos (solo se usaron en local).
 Regla (todos los proyectos): inmediatamente después de descargar el set: gdrive_fetch.py mkdir + put de cada archivo original (subcarpetas "<año> ... (bid set)" / "(superseded)") + la copia limpia (U-051), y `gdrive_fetch.py list` de verificación con conteo = archivos locales, ANTES de empezar el take-off; anotarlo en ESTADO_PARA_RETOMAR.md.
+
+## BE-CR18 — cadena_detalles no re-sembraba la cola (6-nov, CR City Hotel)
+Error: si la última hoja sacada de la cola ya estaba visitada, el `continue` saltaba el re-sembrado BE-CC07 → 395 burbujas nunca entraban a la cadena (252 de 647) y 20 hojas daban "0 círculos de origen".
+Arreglo: en `if h in visitadas:` re-sembrar la cola antes del continue. Chequeo: CE_DETALLES_CIRCULADOS.
+
+## BE-CR19 — Partition Takeoff board-only: GRAND TOTAL en 0 y LF por cara (6-nov, CR City Hotel, auditoría U-138)
+Error: el GRAND TOTAL se escribía antes de los bloques board-only (0 LF / 0 SF) y el subtotal LF sumaba cada cara (W.62-1 1,462 LF vs 772 físico).
+Arreglo: subtotal LF = solo la primera cara de cada wall; GRAND TOTAL al final con los bloques board-only.
+
+## BE-CR20 — Membrana del piso de arriba olvidada en el cielo del piso de abajo (6-nov, CR City Hotel, auditoría U-138, ALTA)
+Error: A0.08 FS-1 "LEVEL 2, 3, 4 THROUGHOUT" se cargó en los cielos de L2 y L3 pero no en L1 (la cara inferior del piso de Level 2) → faltaban ~7,900 SF Type C + RC. También el retail (sin hatch = la membrana expuesta) se cargó como GYP-1 completo.
+Regla (todos los proyectos multinivel): un floor/ceiling assembly listado por LEVEL N = membrana en el cielo del nivel N-1 en toda la placa (área bruta impresa − franja de muros exteriores − huecos verticales); los dropped ceilings van ADEMÁS, abajo. Un campo sin hatch en el RCP bajo un piso rated = la membrana expuesta.
+
+## BE-CR21 — Cerrar un RFI excluyendo algo que es parte de un assembly rated (6-nov, CR City Hotel)
+Error: cerré RFI-18 diciendo que el wrap de vigas del retail era del tenant; la nota de A0.08 FS-1 ("GYP AND RESILIENT CHANNELS WRAP STEEL BEAMS WHERE THEY ARE DEEPER THAN TRUSSES") lo hace parte del assembly rated → nuestro.
+Regla: antes de excluir por "tenant / separate permit", buscar si el elemento es parte de un assembly rated del edificio base (notas de A0.0x); rated = se carga (mismo criterio que RFI-05).
+
+## BE-CR22 — Paths de walls sobre vanos de puerta y walls fantasma (6-nov, CR City Hotel, auditoría U-138)
+Error: lectores trazaron walls que son solo el vano de una puerta (W.4-L3-44 = puerta 308.2) y walls con la puerta dentro del LF; corner bead contaba esquinas exteriores del edificio y no contaba window returns ni bordes de soffits.
+Arreglo (proceso): scripts/vanos_puertas.py (cobertura de líneas de muro + door tag a ≤ 5 ft: vano en extremo = recorte, todo vano = fuera, en medio = anotado); esquinas_cb excluye L corners contra XW; corner bead de window returns (si el detalle no imprime casing interior) y del canto de cada soffit.
