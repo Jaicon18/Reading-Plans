@@ -14,6 +14,9 @@ R scripts/build_canon.py
 R scripts/esquinas_cb.py
 R scripts/finalizar_canon.py
 R scripts/rfis.py
+R $T/inventario.py $C4/takeoff_canon.json $C4/out/inventario_walls.json
+R scripts/sellos_evidencia.py
+R $T/test_ciego_tools.py
 R scripts/rcp_polys.py
 R $T/canon.py $C4/takeoff_canon.json $C4/out
 R scripts/insumos_canon.py fo

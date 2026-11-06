@@ -98,6 +98,7 @@ for w in list(d['existing_walls']):
         d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
             "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
 print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
+d.setdefault('constants', {})['plan_scale_pt_per_ft'] = {"value": 9.0, "source": "A2.01-A2.04 floor plans printed 1/8\" = 1'-0\" (9 pt/ft); per-sheet scales in plan_scale_by_sheet (enlarged plans 1/4\" = 18 pt/ft)"}
 # U-114: toda área [DERIVED] con su operación y su resultado ('... /81 = 6.0')
 for z in d['ceilings']:
     z['source'] = re.sub(r"(\[DERIVED\] area ([\d.]+) SF \(polygon [^|]*?/\d+(?:\.\d+)?)\)", r"\1 = \2 SF)", str(z.get('source') or ''))

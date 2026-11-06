@@ -489,3 +489,46 @@ Chequeo(s): canon.py (board sin familia = ValueError). Test: tools/test_cr_city_
 Error: los sistemas de ceiling eran furring / stud_joist / framed_soffit / canopy_joist / usg_grid; FS-1 (resilient channel + 5/8" Type C bajo wood trusses, UL L546) no cabía y se habría cargado carrying + hangers inexistentes.
 Arreglo (v81cf53): system "resilient_channel" (canon._ceiling_rc): assembly {id, source}, rc_oc_in {value, source}, layers {value, source}; RC = ROUNDUP(run/oc)+1 x span o área / oc; board x capas; wood joists EXCLUDED.
 Chequeo(s): canon._ceiling_rc (sin assembly / oc / layers = ValueError). Test: tools/test_cr_city_hotel.py::test_cr03_rc.
+
+## BE-CR04 — canon.py se caía con un proyecto 100 % board-only (6-nov, CR City Hotel)
+Error: sin walls metálicos (todo wood-framed en existing_walls) canon.py rechazaba "'runs' vacío" y trazabilidad daba KeyError 'renglones' / 'caras'.
+Arreglo (v81cf55): rama board-only con co / bo / st vacíos válidos; fila de resilient channel y type_id en los renglones de existing walls.
+Chequeo(s): canon.py; trazabilidad.py. Test: test_cr_city_hotel.py::test_cr04_board_only.
+
+## BE-CR05 — esquinas.py sin subcanons (6-nov, CR City Hotel)
+Error: TypeError en A_ESQUINAS cuando no hay walls metálicos.  Arreglo: devuelve {"fallas":[],"avisos":[]}. Test: test_cr05_esquinas_board_only.
+
+## BE-CR06 — markups_bluebeam: todos los walls board-only con un solo Subject (6-nov, CR City Hotel)
+Error: Subject genérico para todo existing wall → la leyenda y el filtro por type no servían.  Arreglo: Subject = "<type_id> - BOARD ONLY (WOOD FRAMING EXCLUDED)", leyenda en type_order.
+
+## BE-CR07 — trazabilidad: desglose de board Type C / EXTERIOR y capas de ceiling (6-nov, CR City Hotel)
+Error: la suma del desglose de Type C no cuadraba con el renglón.  Arreglo: claves de board Type C / exterior sheathing y capas de ceilings en el desglose.
+
+## BE-CR08 — alcances ALC-20 sin cement board 5/8" y Partition Takeoff de existing walls sin subtotal por type (6-nov, CR City Hotel)
+Arreglo: ALC-20 acepta '5/8" cement board'; plantilla_excel agrupa existing walls por type_id en type_order con "SUBTOTAL <tid> BOARD ONLY".
+
+## BE-CR09 — Escala impresa leída cruzando un salto de línea ("A2.02\n1/8"" = 2 1/8") (6-nov, CR City Hotel)
+Error: ESCALA_RX (verificar_markups_excel) y RX_SCALE (auditoria_entrega, BE-CR09b) aceptaban \s+ entre entero y fracción → '01\n1/8' → Fraction inválida / escala 2 1/8".
+Arreglo: (?<![\w./]) antes del número y [ \t] (no \s) entre entero y fracción. Test: test_cr09_escala_rotulo, test_be_cr09b_auditoria_rx_scale_no_cruza_saltos.
+
+## BE-CR10 — Chequeos de la biblioteca ciegos a existing_walls (6-nov, CR City Hotel)
+Error: b.walls() solo lee canon.walls; en un proyecto wood-framed BE-61 ("AB 0 walls"), BE-VS-15 ("0 hojas con markups"), BE-90 (door schedule sin openings), U-037 (tags sin wall) fallaban en vacío.
+Arreglo: B.walls_todos() = walls + existing_walls en BE-61 / BE-VS-15 / U-037; _tipo_de usa 'type' si no hay 'tag'; BE-90 acepta 0 metal walls + opening_schedule.items_none_reason con 'wood'.
+
+## BE-CR11 — revision_markups no leía Wall IDs con lado ('CH-L2-01 A') (6-nov, CR City Hotel)
+Error: el id del markup se tomaba solo de campos sin espacio → "no markup for CH-L2-01 A" (765 RED). Arreglo: id = campo sin espacio o r"\S+-\w+ [A-Z]".
+
+## BE-CR12 — Altura de un wall board-only sin su fuente impresa en height_source (6-nov, CR City Hotel)
+Error: CE_ALTURA_IMPRESA 761 AMBER "sheets cited none": la cota estaba dentro de 'source'; y la altura cargada redondeada (8.94) no igualaba la impresa (8'-11 1/4" = 8.9375) → 165 RED.
+Arreglo (proceso, regla para todos los proyectos): cada wall lleva height_source con la operación impresa explícita ("11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 ...)") y height_status; la altura cargada = la cota impresa exacta; medida vectorial sin rótulo de escala dentro (la escala no es una altura).
+
+## BE-CR13 — comparar_extra.py con valores {value, source} (6-nov, CR City Hotel)
+Error: TypeError float(dict) con area_sf {value, source}.  Arreglo: _num() acepta dict.
+
+## BE-CR14 — lista_schedules no leía la hoja / posición / stud de fichas.json (6-nov, CR City Hotel)
+Error: 49 types "(None Partition / wall types): sin bbox" y "stud '': no está en el Material Summary": la tool leía t['sources'] y t['stud_size']; la ficha trae hoja, pos, stud, stud_material.
+Arreglo: hoja = t['hoja'] o regex de source; pos = t['pos']; stud = stud_size o stud; stud de madera = "wood framing EXCLUDED (Div. 06, U-139)".
+
+## BE-CR15 — Corner bead: RFI de "no contado" cuando el plano lo resuelve (6-nov, CR City Hotel)
+Error: RFI-19 "outside corners of L1 / L4 / units not counted" = trabajo pendiente presentado como RFI (U-140).
+Arreglo (regla para todos los proyectos): esquinas exteriores por programa desde la geometría (scripts/esquinas_cb.py del proyecto): L junction entre walls de 2 caras = 1 esquina; extremo libre de wall de 2 caras que no es jamb (door tag impreso a <= 4.5 ft) = 2 esquinas; x altura del wall; imagen circulada por hoja. Ojo: el campo 'page' del canon es base 1 (índice PDF = page - 1).
