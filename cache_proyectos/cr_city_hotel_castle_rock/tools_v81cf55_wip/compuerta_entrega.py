@@ -1245,6 +1245,8 @@ def lista_schedules(c):
     ms = _ms_textos(c)
     alc, rfis_cerr = _alcances(c)
     out = []
+    _cn = c.canon or {}
+    usados = {str(w.get("type_id")) for w in (_cn.get("walls") or []) + (_cn.get("existing_walls") or []) if w.get("type_id")}   # BE-CR14
 
     def mats(campo, valor, room=None, ms_directo=None):
         v = str(valor or "").strip()
@@ -1272,7 +1274,7 @@ def lista_schedules(c):
             ms_.append({"campo": "stud", "valor": f"{sz} wood stud", "ms": None, "fuera": "wood framing EXCLUDED (Div. 06, U-139)"})
         elif re.search(r"(?i)furring", sz):
             ms_ += mats("stud", txt)
-        elif not sz.strip():
+        elif not sz.strip() or re.fullmatch(r"\s*(--?|n/?a|none)\s*", sz, re.I):   # BE-CR14: '--' = sin stud impreso
             pass
         else:
             dz = re.search(r"\d{3}S\d{3}-\d{2}", des)
@@ -1295,6 +1297,10 @@ def lista_schedules(c):
             ms_.append({"campo": "height", "valor": str(t["height"])[:160], "ms": "Partition Takeoff (Height)", "fuera": None})
         for x in t.get("extras") or []:
             ms_ += mats("extra", x)
+        if usados and tid not in usados:             # BE-CR14: type del schedule que ningún wall del canon usa
+            for m_ in ms_:
+                if not m_["ms"] and not m_["fuera"]:
+                    m_["fuera"] = "type not used on the plans of this set (A0.06 GN 2 'NOT ALL PARTITION TYPES DELINEATED MAY BE USED')"
         out.append({"hoja": hoja, "schedule": "Partition / wall types", "id": tid, "materiales": ms_, "fuente": src[:160],
                     "pos": tuple(t["pos"]) if t.get("pos") else None})
     for s in sj.get("schedules") or []:
@@ -1303,6 +1309,10 @@ def lista_schedules(c):
             rid = str(r.get("id"))
             for ti in r.get("trade_items") or []:
                 ms_ += mats("trade", ti, room=rid)
+            if usados and re.match(r"^[A-Z]{1,3}\.\d", rid) and rid not in usados and re.search(r"(?i)assembl|partition|wall", str(s.get("name"))):
+                for m_ in ms_:                           # BE-CR14: fila de un type que ningún wall usa
+                    if not m_["ms"] and not m_["fuera"]:
+                        m_["fuera"] = "type not used on the plans of this set (A0.06 GN 2 'NOT ALL PARTITION TYPES DELINEATED MAY BE USED')"
             out.append({"hoja": s.get("sheet"), "schedule": s.get("name"), "id": rid,
                         "pos": (r.get("x"), r.get("y")) if r.get("x") is not None else None,
                         "materiales": ms_, "fuente": r.get("source") or f"{s.get('name')} {s.get('sheet')}"})

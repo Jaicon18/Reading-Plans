@@ -532,3 +532,7 @@ Arreglo: hoja = t['hoja'] o regex de source; pos = t['pos']; stud = stud_size o 
 ## BE-CR15 — Corner bead: RFI de "no contado" cuando el plano lo resuelve (6-nov, CR City Hotel)
 Error: RFI-19 "outside corners of L1 / L4 / units not counted" = trabajo pendiente presentado como RFI (U-140).
 Arreglo (regla para todos los proyectos): esquinas exteriores por programa desde la geometría (scripts/esquinas_cb.py del proyecto): L junction entre walls de 2 caras = 1 esquina; extremo libre de wall de 2 caras que no es jamb (door tag impreso a <= 4.5 ft) = 2 esquinas; x altura del wall; imagen circulada por hoja. Ojo: el campo 'page' del canon es base 1 (índice PDF = page - 1).
+
+## BE-CR16 — Cielo rated de la leyenda del RCP cargado con un supuesto cuando el schedule de assemblies lo imprime por LOCATION (6-nov, CR City Hotel)
+Error: GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS' (L1 Generator 103 / Elec 104 / Elevator Controls 116) se cargó como 2 layers en drywall suspension (RFI-13 "layers not printed"), pero A0.08 MB-1 imprime LEVEL 1 / GENERATOR ROOM / 2 HR: 3 LAYERS - 5/8" GYP. BD. + 1" liner + steel studs + J-track. Delta +401 SF board, +401 SF liner, +253 LF C-H, +83 LF J-runner.
+Regla (todos los proyectos): antes de un RFI de cielo / wall rated, cruzar cada tipo de la leyenda del RCP con las columnas LEVEL / LOCATION / RATING de los schedules de assemblies (horizontal, membrane, floor/ceiling); un assembly que nombra el cuarto o el rating manda (U-140, U-083).

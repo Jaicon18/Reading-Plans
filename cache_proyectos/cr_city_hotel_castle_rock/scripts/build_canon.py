@@ -172,7 +172,31 @@ def main():
                              "source": f"A0.08 / RCP {RCP.get(fl, '')}: {src}", "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})
             continue
         # GYP-1 / GYP-2 / other: metal suspension (USG drywall suspension) - legend 'ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING'
-        ly = 2 if k == 'GYP-2' else 1
+        if k == 'GYP-2':
+            # A0.08 MB-1 (LEVEL 1, GENERATOR ROOM, 2 HR, BXUV.1516): 3 LAYERS - 5/8" GYP. BD. + 1" GYP. BD. LINER (top) + STEEL
+            # STUDS w/ C-CHANNEL + J-TRACK, hanger wire to structure = el único ceiling de gypsum 2 HR impreso; GYP-2 (legend
+            # 'GYPSUM BOARD CEILING, RATED 2-HOURS') en 103 / 104 / 116 = ese ensamble (RFI-13 cerrado en capas; abierto solo
+            # tamaño / espaciamiento del stud y la C-channel, no impresos).
+            src_ = str(c.get('area_source') or '') + ' ' + src
+            mm = re.search(r"\(([\d.]+)-([\d.]+)\)\*\(([\d.]+)-([\d.]+)\)", src_)
+            sc_ = 18.0 if re.search(r"/324", src_) else 9.0
+            if mm:
+                a_, b_ = abs(float(mm.group(1)) - float(mm.group(2))) / sc_, abs(float(mm.group(3)) - float(mm.group(4))) / sc_
+            else:
+                a_ = b_ = math.sqrt(A)
+            lng, sht = round(max(a_, b_), 2), round(min(a_, b_), 2)
+            nst = math.ceil(lng / 2.0) + 1
+            ref = f"CLG-{fl}-{i:02d}"
+            det = "A0.08 MB-1 (LEVEL 1 GENERATOR ROOM, 2 HR, BXUV.1516: 3 LAYERS - 5/8\" GYP. BD., 1\" GYP. BD. LINER, STEEL STUDS w/ C-CHANNEL, J-TRACK)"
+            dims = f"room {lng} x {sht} ft from the area operation ({src_[:60].strip()}...)"
+            misc += [
+                {"detail": det, "ref": f"{ref} board", "familia": '5/8" gyp board Type X', "qty": round(A * 3, 2), "op": f"{A} SF x 3 layers = {round(A * 3, 2)}", "source": f"{room}: {src}; {det}: 3 layers 5/8\" (type not printed in MB-1; Type X = 2 HR rated)"},
+                {"detail": det, "ref": f"{ref} liner", "familia": '1" gypsum shaftliner panel', "qty": round(A, 2), "op": f"{A} SF x 1 layer = {round(A, 2)}", "source": f"{room}: {det}: 1\" GYP. BD. LINER on top of the studs"},
+                {"detail": det, "ref": f"{ref} C-H studs", "familia": 'C-H stud 6" (printed)', "qty": round(nst * sht, 2), "op": f"ROUNDUP({lng}/2.0)+1 = {nst} studs x span {sht} ft = {round(nst * sht, 2)} ({dims})", "source": f"{room}: {det}; stud size / spacing NOT printed: 6\" 20 GA C-H @ 24\" o.c. loaded as the printed A0.06 CH rows (RFI-13)"},
+                {"detail": det, "ref": f"{ref} J-track", "familia": 'J-runner 6" (printed)', "qty": round(2 * lng, 2), "op": f"2 x {lng} (J-TRACK both bearing walls) = {round(2 * lng, 2)}", "source": f"{room}: {det}: J-TRACK"},
+                {"detail": det, "ref": f"{ref} hanger wire", "familia": "hanger wire", "qty": round(math.ceil(A / 16.0) * drop_ if (drop_ := (round(max(0.5, STRUCT.get(fl, (float(c.get('height_ft') or 0) + 1, ''))[0] - float(c.get('height_ft') or 0)), 3) if c.get('height_ft') else 1.0)) else 0, 2), "op": f"ROUNDUP({A}/16) = {math.ceil(A / 16.0)} hangers x drop {drop_} ft", "source": f"{room}: {det}: 'hangar wire to supporting structure'"}]
+            continue
+        ly = 1
         bdf = '5/8" gyp Type X W.R.' if wet else '5/8" gyp board Type X'
         h = float(c.get('height_ft') or 0); st, sts = STRUCT.get(fl, (h + 1, 'n/a'))
         drop = round(max(0.5, st - h), 3) if h else 1.0
