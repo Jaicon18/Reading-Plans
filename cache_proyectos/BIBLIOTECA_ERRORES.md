@@ -537,9 +537,9 @@ Arreglo (regla para todos los proyectos): esquinas exteriores por programa desde
 Error: GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS' (L1 Generator 103 / Elec 104 / Elevator Controls 116) se cargó como 2 layers en drywall suspension (RFI-13 "layers not printed"), pero A0.08 MB-1 imprime LEVEL 1 / GENERATOR ROOM / 2 HR: 3 LAYERS - 5/8" GYP. BD. + 1" liner + steel studs + J-track. Delta +401 SF board, +401 SF liner, +253 LF C-H, +83 LF J-runner.
 Regla (todos los proyectos): antes de un RFI de cielo / wall rated, cruzar cada tipo de la leyenda del RCP con las columnas LEVEL / LOCATION / RATING de los schedules de assemblies (horizontal, membrane, floor/ceiling); un assembly que nombra el cuarto o el rating manda (U-140, U-083).
 
-## BE-CR17 — La carpeta del proyecto en Drive quedó vacía (6-nov, CR City Hotel; el usuario la encontró vacía)
-Error: el brief pedía subir el bid set y las specs a Drive › JC HUNTER PROJECTS › Projects › "<proyecto>" al descargarlos; se creó la carpeta pero nunca se subieron los archivos (solo se usaron en local).
-Regla (todos los proyectos): inmediatamente después de descargar el set: gdrive_fetch.py mkdir + put de cada archivo original (subcarpetas "<año> ... (bid set)" / "(superseded)") + la copia limpia (U-051), y `gdrive_fetch.py list` de verificación con conteo = archivos locales, ANTES de empezar el take-off; anotarlo en ESTADO_PARA_RETOMAR.md.
+## BE-CR17 — "La carpeta del proyecto está vacía": eran dos carpetas distintas (6-nov, CR City Hotel)
+Hecho: el bid set SÍ estaba en Projects › "<proyecto>" (subido al inicio); la carpeta que el usuario vio vacía era Claude outputs › "<proyecto>", que solo se llena con subir_entrega.py al final. Diagnostiqué mal ("nunca se subió") y dupliqué los planos en Claude outputs (la service account no puede borrar).
+Regla (todos los proyectos): (1) al crear las carpetas, decirle al usuario LAS DOS rutas: Projects › <proyecto> = bid set y specs; Claude outputs › <proyecto> = entrega (vacía hasta la compuerta VERDE); (2) ante "está vacía", listar AMBAS con gdrive_fetch list antes de concluir nada; (3) nunca subir el bid set a Claude outputs.
 
 ## BE-CR18 — cadena_detalles no re-sembraba la cola (6-nov, CR City Hotel)
 Error: si la última hoja sacada de la cola ya estaba visitada, el `continue` saltaba el re-sembrado BE-CC07 → 395 burbujas nunca entraban a la cadena (252 de 647) y 20 hojas daban "0 círculos de origen".
@@ -560,3 +560,7 @@ Regla: antes de excluir por "tenant / separate permit", buscar si el elemento es
 ## BE-CR22 — Paths de walls sobre vanos de puerta y walls fantasma (6-nov, CR City Hotel, auditoría U-138)
 Error: lectores trazaron walls que son solo el vano de una puerta (W.4-L3-44 = puerta 308.2) y walls con la puerta dentro del LF; corner bead contaba esquinas exteriores del edificio y no contaba window returns ni bordes de soffits.
 Arreglo (proceso): scripts/vanos_puertas.py (cobertura de líneas de muro + door tag a ≤ 5 ft: vano en extremo = recorte, todo vano = fuera, en medio = anotado); esquinas_cb excluye L corners contra XW; corner bead de window returns (si el detalle no imprime casing interior) y del canto de cada soffit.
+
+## BE-CR23 — CE_DETALLES_CIRCULADOS pedía marcar destinos en hojas que no están en el set (6-nov, CR City Hotel)
+Error: 31 burbujas apuntan a P3.00 / P3.01 (hojas que no vienen en el bid set): sin página donde marcar → FAIL imposible de cerrar.
+Arreglo: si el set es conocido y la hoja destino no está en él, no se pide marca de destino (la burbuja sigue necesitando su disposición).

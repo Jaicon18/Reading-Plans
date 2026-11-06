@@ -81,7 +81,7 @@ def test_be_cr09b_auditoria_rx_scale_no_cruza_saltos():
     assert [a.frac(m.group(1)) for m in a.RX_SCALE.finditer(t)] == [Fraction(1, 8), Fraction(3, 2)]
 
 def test_r80f55_multinivel():
-    """R80f.55: alturas multinivel con la operación impresa; existing_walls cuentan en las compuertas; Wall ID con lado."""
+    """R80f.55 / BE-CR10 / BE-CR12: alturas multinivel con la operación impresa; existing_walls cuentan en las compuertas (walls_todos)."""
     import sys, os
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import revision_markups as RM
@@ -94,6 +94,13 @@ def test_r80f55_multinivel():
     b.canon = {"walls": [], "existing_walls": [{"id": "W.4-L2-01 A", "floor": "L2", "sheet": "A2.02"}, {"id": "W.4-L3-01", "floor": "L3", "sheet": "A2.03"}]}
     assert len(b.walls_todos()) == 2 and b.walls() == []
 
+def test_be_cr13_comparar_extra_num():
+    """BE-CR13: comparar_extra acepta valores {value, source}."""
+    import sys, os
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import comparar_extra as CX
+    assert CX._num({"value": 6.5, "source": "x"}) == 6.5 and CX._num("2") == 2.0 and CX._num(None) == 0.0
+
 
 if __name__ == "__main__":
-    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); test_cr09_escala_rotulo(); test_be_cr09b_auditoria_rx_scale_no_cruza_saltos(); test_r80f55_multinivel(); print("test_cr_city_hotel OK")
+    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); test_cr09_escala_rotulo(); test_be_cr09b_auditoria_rx_scale_no_cruza_saltos(); test_r80f55_multinivel(); test_be_cr13_comparar_extra_num(); print("test_cr_city_hotel OK")
