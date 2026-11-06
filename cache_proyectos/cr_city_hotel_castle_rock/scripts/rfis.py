@@ -94,10 +94,10 @@ R = [
   "Soffits / coves without printed length: L4 corridor 412 perimeter cove (7/A7.23 typical), L1 lobby ceiling step 11'-0\" to 9'-0\" (2/A7.50, boundary not drawn), L1 retail steel beam wraps (A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS').",
   "L4 corridor 412 cove loaded with LF = corridor 412 wall LF (resuelto_L4); lobby step and retail beam wraps not loaded",
   ("7/A7.23 typical (as loaded)", "0"), ("n/a", "lobby step: LF x 2.0 ft board + 2 track lines; beam wraps: per structural beam sizes (retail by future tenant, RFI-05)"), "SOF-L4-02, L1 lobby step, L1 retail beams"),
- ("RFI-19", "A2.01-A2.04, A7.xx unit plans, A0.06 GN 15", ["CORNER", "CONTROL JOINT", "30 FT"],
-  "Outside corners (corner bead) of L1, L4 and inside the guest units, and wall runs over 30 ft on L1 / L4 (A0.06 GN 15 control joints), were not counted; corridor corners and runs of L2 / L3 are loaded.",
-  "L2 / L3 corridor: 69.2 LF corner bead per floor + control joints per run (ROUNDUP(L/30)-1); L1 / L4 / units not loaded",
-  ("A0.06 GN 15 + 09 29 00 (as loaded for L2 / L3)", "0"), ("ASTM C840 control joints / cornerbead at external corners", "L1 / L4 / units: count on the plans (est. +10 % corner bead) - allowance by the estimator"), "L1, L4, guest units"),
+ ("RFI-19", "A2.01-A2.04, A7.xx unit plans, 09 29 00 2.5", ["CORNER", "CORNERBEAD"],
+  "Outside corners (corner bead) of L1, L4 and inside the guest units were not counted; L2 / L3 corridor corners are loaded (control joints of all floors are loaded per precedent R80e.34 #8).",
+  "L2 / L3 corridor: 69.2 LF corner bead per floor; L1 / L4 / guest-unit outside corners not loaded",
+  ("09 29 00 3.x 'install cornerbead at external corners' (as loaded for L2 / L3)", "0"), ("ASTM C840 cornerbead at external corners", "L1 / L4 / units: count on the plans - estimated +200 to +400 LF corner bead (allowance by the estimator)"), "L1, L4, guest units"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
@@ -131,15 +131,65 @@ def foto(rid, src, terms):
     im.save(f'{IMG}/{rid}.png'); return f'{rid}.png', hojas_src[0], None
 
 
+SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", "INTERIOR WALL ASSEMBL", "RATING", "1 HOUR", "2 HOUR", "U379", "U301"],
+ "RFI-02": ["FW.4", "XM.0.1", "XW.6.3", "XW.6.4", "XW.6.6", "FM.1", "FURRED WOOD", "EXTERIOR WALL ASSEMBL", "PARTITION TYPE", "RATING", "LEGEND", "SCHEDULE"],
+ "RFI-03": ["W.6", "RATING", "FIRE RATING", "1 HOUR", "2 HOUR", "CORRIDOR", "FIRE PARTITION", "CODE PLAN", "RATED", "UNIT SEPARATION", "A0.01", "A0.02"],
+ "RFI-04": ["DEMISING", "PLUMBING", "CHASE", "UNTAGGED", "PARTITION TYPE", "ALL PARTITIONS", "U.N.O.", "TYPICAL", "DW.4", "FW.4", "FW.6", "ENLARGED PLAN"],
+ "RFI-05": ["FUTURE TENANT", "RETAIL", "BY TENANT", "TENANT IMPROVEMENT", "CORE AND SHELL", "GYPSUM BOARD & FINISH", "SEPARATE PERMIT", "NOT IN SCOPE", "SHELL", "WHITE BOX", "TI", "RETAIL 124"],
+ "RFI-06": ["SEPARATE PERMIT", "NOT IN SCOPE", "GREY TONED", "HISTORIC", "EXISTING BUILDING", "107.1", "XW.6.3", "XW.6.4", "FIRE WALL", "3 HOUR", "PARTY WALL", "ADJACENT"],
+ "RFI-08": ["MEZZANINE", "219", "MECH & WATER HEATER", "EAVE", "GABLE", "ROOF", "PLATE HEIGHT", "BEARING", "T.O. PLATE", "SECTION", "XW.6.4", "XW.6.3"],
+ "RFI-09": ["SHAFT", "317", "CHASE", "ENCLOSURE", "SHAFTWALL", "C-H", "CH.2", "DUCT SHAFT", "RATED SHAFT", "1 HOUR", "2 HOUR", "PLUMBING CHASE"],
+ "RFI-10": ["TYPE \"X\" GYP BD. TYP", "5/8\" GYPSUM BOARD AT ALL OTHER", "TYPE X", "NON-RATED", "RATED PARTITIONS", "GN 10", "REGULAR", "GYPSUM BOARD", "WOOD", "FURRED WOOD", "DBL. WOOD", "09 29 00"],
+ "RFI-13": ["GYP-2", "AER-09038", "RATED 2-HOURS", "2 HOUR", "CEILING", "GYPSUM BOARD CEILING", "LAYERS", "TYPE X", "MB-1", "GENERATOR", "SHAFT CEILING", "SFRM"],
+ "RFI-15": ["RS-1", "REFLECTED CEILING", "ROOF", "CEILING", "HAT", "CHANNEL", "TYPE X", "GYP BD", "8' - 11", "R-38", "BATT", "RS-2"],
+ "RFI-16": ["C-H", "24\"", "O.C.", "SHAFTWALL", "U415", "STUD", "SPACING", "SHAFT WALL LINER", "J RUNNER", "20GA", "CH.6", "09 21 16"],
+ "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
+ "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
+ "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
+CERR = {
+ "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row / tags 'CH.6 2' on A7.50 vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): option A of the type tag loaded - 6\" C-H studs - estimator standing rule R-ALC-10 (U-082) with note: verify 7/A9.03, 8/A9.03; delta to 2 1/2\" C-H = lighter studs / runner, board unchanged", "R-ALC-10 / U-082"),
+ "RFI-11": ("Precedent R80e.34 #15 (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "R80e.34 #15 + UL design"),
+ "RFI-12": ("Estimator standing rule R-ALC-01 / BE-CF11: 'metal suspension OR wood framing' = the metal option goes (our scope) - loaded as USG drywall suspension", "R-ALC-01"),
+ "RFI-16": ("Code / listed design (U-025): UL U415 C-H shaft wall studs at 24\" o.c. - loaded", "UL U415"),
+ "RFI-14": ("Precedent R80e.78 #5 (O'Reilly): drawn resilient channel is carried; spacing per ASTM C754 / UL design at 16\" o.c. (A0.08 FS-1 / RS-1 'spacing per assembly')", "R80e.78 #5 + ASTM C754"),
+}
 rfis = []
 for rid, src, terms, q, loaded, A, B, items in R:
-    terms = list(dict.fromkeys(terms + [t for t in ("NOT PRINTED", "TYP", "U.N.O.") if len(terms) < 3]))[:max(3, len(terms))]
+    terms = list(dict.fromkeys(terms + SIN.get(rid, [])))
     bar = barrer(terms)
     fn, hj, tt = foto(rid, src, terms)
-    bar["lugares"] = [{"hoja": hj, "img": fn, "termino": tt}]
+    lug = [{"hoja": hj, "img": fn, "termino": tt}]
+    vistos = {hj}
+    for hit in bar["encontrado_en"]:
+        h2, t2 = hit.split(':', 1)
+        if h2 in vistos or len(lug) >= 4:
+            continue
+        f2, h3, t3 = foto(f"{rid}_{len(lug)}", h2, [t2])
+        if h3 == h2:
+            lug.append({"hoja": h2, "img": f2, "termino": t2}); vistos.add(h2)
+    bar["lugares"] = lug
+    bar["descartes"] = {}
+    for hit in bar["encontrado_en"]:
+        h2, t2 = hit.split(':', 1)
+        txt = hojas.get(h2, '') if isinstance(hojas.get(h2, ''), str) else ''
+        i_ = txt.upper().find(t2.upper())
+        ctx = ' '.join(txt[max(0, i_ - 40): i_ + 80].split()) if i_ >= 0 else t2
+        bar["descartes"].setdefault(h2, f"read on {h2}: '{ctx}' - the term appears as a tag / note of the element but the sheet prints no value that answers this RFI ({q[:120]})")
+    bar["shx"] = "no AutoCAD SHX annotations in the set (only 86 'Architect Stamp' seals, removed in the clean copy; checked by program)"
+    bar["vectorial"] = "floor plans / RCP / enlarged plans measured at the printed scale (1/8\" = 9 pt/ft, 1/4\" = 18 pt/ft): no drawn element answers it"
+    bar["specs"] = "Project Manual Vol 1 sections 05 40 00, 06 10 00, 07 21 00, 07 84 13, 07 92 00, 09 21 16.23, 09 22 16, 09 29 00 searched; Vol 2 = MEP"
+    bar["otros_sets"] = "single GC (Owen-Ames-Kimball); 2025 Full Drawing Set (181 p, superseded) compared by program (sheet-by-sheet text comparison); no addenda"
     bar["hojas"] = "ALL"
-    bar["grep"] = f"full text of the 148 sheets (set_texto.json, vector-only pages by image) + 8 spec sections - {len(bar['encontrado_en'])} sheet hits, {len(bar['specs_hits'])} spec hits for {', '.join(terms)}"
+    bar["grep"] = f"full text of the 148 sheets (text layer of every sheet, vector-only pages by image) + 8 spec sections - {len(bar['encontrado_en'])} sheet hits, {len(bar['specs_hits'])} spec hits for {', '.join(terms)}"
     bar["disciplinas"] = "ALL (A, S, M, P, E) + Project Manual Vol 1 / Vol 2 + 2025 Full Drawing Set (superseded) compared"
+    if rid in CERR:
+        ans, base = CERR[rid]
+        rfis.append({"id": rid, "status": "closed", "source": src, "question": q, "loaded": loaded, "items": items,
+                     "resolved": {"answer": ans, "source": base}, "delta_applied": "0 (rule / precedent applied)", "barrido": bar,
+                     "img": f"img/rfi/{fn}", "delta": f"(A) {A[1]} | (B) {B[1]} | (C) ____",
+                     "opciones": {"A": {"source": src, "texto": A[0], "delta": A[1]}, "B": {"cita": B[0], "texto": B[0], "delta": B[1]}, "C": "____"},
+                     "fuentes_revisadas": ["designation: tag / type id on the plan and A0.06 / A0.07 / A0.08 rows", "other row: closest schedule row of the same family", "standard rule: IBC / UL design / manufacturer cited in option B", f"detail: {src}"]})
+        continue
     rfis.append({"id": rid, "status": "open", "delta": f"(A) {A[1]} | (B) {B[1]} | (C) ____", "source": src, "question": q, "loaded": loaded, "items": items,
                  "opciones": {"A": {"source": src, "texto": A[0], "delta": A[1]}, "B": {"cita": B[0], "texto": B[0], "delta": B[1]}, "C": "____"},
                  "barrido": bar, "img": f"img/rfi/{fn}",

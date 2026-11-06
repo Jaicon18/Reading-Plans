@@ -15,14 +15,15 @@ def fmt(o):
             f"(B) Code ({B.get('cita', 'n/a')}): {B.get('texto', '')} - delta {B.get('delta', '')} | (C) Other: ____")
 
 
+cierre0 = {r["id"]: {"pregunta": r["question"] + " - CLOSED: " + r["resolved"]["answer"], "delta": r.get("delta_applied") or "0"} for r in c["rfis"] if r["status"] != "open"}
 rfis = [{"id": r["id"], "pregunta": f"{r['question']} - carried: {r['loaded']} (conservative value loaded). " + r["barrido"]["swept_txt"],
          "delta": fmt(r["opciones"]), "opciones": r["opciones"], "source": r["source"], "barrido": r["barrido"],
-         "img": r["barrido"]["lugares"][0]["img"]} for r in c["rfis"]]
-cierre = {
+         "img": r["barrido"]["lugares"][0]["img"]} for r in c["rfis"] if r["status"] == "open"]
+cierre = dict(cierre0, **{
  "A/B-heights": {"pregunta": "Readings A and B used different wall heights - CLOSED by the printed sections of each zone: L2-L3 room zone 9'-2 7/8\" (4/A5.05), corridor 11'-0\" - 1'-1 3/8\" (7/A7.23), L4 8'-11 1/4\" (1/A5.06), grid 8 11'-4 3/4\" (2/A5.01), L1 12'-0\" / 14'-0\" stairs (resolucion_L1..L4)", "delta": "0 (applied)"},
  "A/B-W.6.1": {"pregunta": "Tag 'W.6.1' typed differently by A and B - CLOSED by rule R2 (W.6 with the printed rating) + RFI-01", "delta": "see RFI-01"},
  "A/B-FW rating": {"pregunta": "FW tags printed without rating digit - CLOSED: every FW row of A0.06 has rating '--' (FW.x-0)", "delta": "0"},
-}
+})
 RI = [
  ("floor_plan", "XW.6.3", None, "A2.01-A2.04 / A0.07", "Exterior walls: interior face(s) and exterior gypsum sheathing layers per A0.07 rating rows; wood studs, LP Flameblock and siding EXCLUDED. Review the exterior gypsum sheathing height per floor (full floor-to-floor 11'-0\" loaded on the exterior face).", "RFI-02.png"),
  ("floor_plan", "W.62", None, "A2.02-A2.04 / A0.06", "Guest-room corridor walls W.62-1 (2 layers each side, 1 HR): board to the underside of the floor framing per zone; verify corridor-side height 9'-10 5/8\" (7/A7.23).", "RFI-01.png"),
@@ -66,9 +67,9 @@ A = [
  ("ALC-15", "NO APLICA", "No column furring / wraps printed for our trade (A2.01-A2.04); L1 retail steel beam wraps by future tenant (RFI-05 / RFI-18)."),
  ("ALC-16", "NO APLICA", "Blocking is WOOD (A0.05 accessibility, A0.09, A2.05, A7.32, A9.02, A9.04): EXCLUDED (Div. 06, U-139); no metal blocking printed."),
  ("ALC-17", "NO APLICA", "EXCLUDED - framed openings for ducts / diffusers (standing order); no access panels in gypsum scheduled (A8.00, M1.01, M1.05, P4.00, P4.01, T0.01 legend)."),
- ("ALC-18", "CUANTIFICADO", "Corner bead / L-bead / U-bead per 09 29 00 2.5 and control joints per A0.06 GN 15 (A3.01-A3.04, A7.00): quantities from window returns and outside corners (ventanas_trim.json)."),
+ ("ALC-18", "CUANTIFICADO", "Corner bead / L-bead / U-bead per 09 29 00 2.5 and control joints per A0.06 GN 15 (A3.01-A3.04, A7.00): quantities from window returns and outside corners (window schedule A8.01 + elevations A4.00-A4.03, measured by program)."),
  ("ALC-20", "CUANTIFICADO", "5/8\" cement board (CBU) at tile walls of guest baths (A0.06 GN 13; 09 29 00 2.4.A.2 'match adjacent panel thicknesses'; A2.01-A2.04); FRP is exterior XI.2.7 on CMU (A0.07) - not ours; no FRP interior finish (A7.19)."),
- ("ALC-21", "CUANTIFICADO", "C-H shaft walls CH.6-2 (A0.06, A9.03, A5.08): 6\" 20 GA C-H studs @ 24\" o.c., J runner, 1\" shaftliner + 2 layers 5/8\" Type X (UL U415); S2.02 elevator pit is concrete."),
+ ("ALC-21", "CUANTIFICADO", "C-H shaft walls CH.6-2 (A0.06, A9.03, A5.08): 6\" 20 GA C-H studs @ 24\" o.c., J runner (A0.06 'SHAFT SIDE \"J\" RUNNER CHANNEL'), 1\" shaftliner + 2 layers 5/8\" Type X (UL U415); S2.02 elevator pit is concrete."),
  ("ALC-22", "CUANTIFICADO", "Rated assemblies per A0.00-A0.03 code plans and A0.06 / A0.07 / A0.08 UL designs (U379, U301, U341, U415, V337, L546): Type X layers per rating loaded."),
  ("ALC-23", "NO APLICA", "No ballistic / lead-lined / abuse-resistant panels in the set (A0.06, A7.19)."),
  ("ALC-24", "CUANTIFICADO", "Level 4 finish on all board (09 29 00 3.6.E.4: under plaster / wallcovering and back of house); no Level 5 area (A7.19 TF-1 plaster / vinyl wallcovering everywhere); compound and tape by yield (A0.00-A0.04, A0.09 are code text)."),
@@ -87,6 +88,7 @@ extra = [
  ("CMU / concrete walls", "EXCLUDED - CM.x CMU and C.x cast-in-place concrete walls (A0.06, A6.00-A6.02): masonry / concrete trades."),
  ("Separate-permit areas", "EXCLUDED - grey toned area 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' (A2.01-A2.04); existing historic building (A0.00)."),
  ("Doors, frames, windows, hardware", "EXCLUDED - A8.00 / A8.01 by others."),
+ ("Structural steel: kickers, clip angles, L3x3 angles", "EXCLUDED - L3x3x1/4 KICKER at 4'-0\" o.c. (S1.02, 5/S3.08) and CLIP ANGLE with threaded rods into masonry (S3.04, S3.08) are structural steel (Div. 05 12 00), by the steel fabricator."),
 ]
 for k, (n, x) in enumerate(extra, 1):
     alcances.append({"id": f"ALC-E{k:02d}", "nombre": n, "estado": "NO APLICA", "nota": x})

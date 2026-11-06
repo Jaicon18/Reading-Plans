@@ -20,6 +20,6 @@ for L in 'AB':
         tags += [dict(t, floor=fl) for t in d.get('tags_descartados') or []]
     for t in ('PA0002', 'PA0003'):
         tags.append({"id": t, "motivo": "W.6 legend example on T0.01 (INDEX AND STANDARDS graphic standards), not a wall", "imagen": REC[t], "floor": "T0.01"})
-    json.dump({"project": "CR City Hotel", "reader": L, "walls": walls, "ceilings": ceil, "tags_descartados": tags},
+    json.dump({"project": "CR City Hotel", "reader": L, "constants": {"plan_scale_pt_per_ft": {"value": 9.0, "source": "A2.01-A2.04 printed 1/8\" = 1'-0\" (9 pt/ft); enlarged plans A7.xx / A6.xx printed 1/4\" = 1'-0\" (18 pt/ft)"}, "plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "A2.01 printed 1/8\" = 1'-0\""}, "A2.02": {"value": 9.0, "source": "A2.02 printed 1/8\" = 1'-0\""}, "A2.03": {"value": 9.0, "source": "A2.03 printed 1/8\" = 1'-0\""}, "A2.04": {"value": 9.0, "source": "A2.04 printed 1/8\" = 1'-0\""}, "A3.01": {"value": 9.0, "source": "A3.01 printed 1/8\" = 1'-0\""}, "A3.02": {"value": 9.0, "source": "A3.02 printed 1/8\" = 1'-0\""}, "A3.03": {"value": 9.0, "source": "A3.03 printed 1/8\" = 1'-0\""}, "A3.04": {"value": 9.0, "source": "A3.04 printed 1/8\" = 1'-0\""}}}, "walls": walls, "ceilings": ceil, "tags_descartados": tags},
               open(f'{W}/2_lectura/canon_{L}.json', 'w'), indent=1)
     print(L, len(walls), len(ceil), len(tags))

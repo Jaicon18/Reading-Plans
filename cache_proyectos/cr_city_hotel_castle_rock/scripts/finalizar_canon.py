@@ -27,7 +27,7 @@ d.update({
    {"familia": "gypsum board jamb return", "why": "window / door jamb returns carried as their own rows from ventanas_trim.json (A8.02 fenestration details) - not by the metal-opening tool (wood openings)", "source": "A8.02"},
    {"familia": "Level 5 finish", "why": "no Level 5 area: 09 29 00 3.6.E.4 Level 4 under plaster / wallcovering and back of house; A7.19 TF-1 plaster or vinyl wallcovering everywhere (U-147 Level 4)", "source": "A7.19"}],
  "accesorios_rfi": [],
- "corners_ok": [], "gaps_ok": [], "nodes": [], "details": {}, "opening_schedule": {"sources": ["A8.00", "A8.01", "S2.01", "S2.02", "S2.03", "S2.04", "M1.01", "M1.05", "P1.01", "E1.02"], "items": [], "items_none_reason": "openings in WOOD-framed walls: headers / jambs / king studs are wood (Div. 06, EXCLUDED); door frames by others (A8.00); window returns carried in trim / misc (ventanas_trim.json)"}, "openings_extra": [],
+ "corners_ok": [], "gaps_ok": [], "nodes": [], "details": {}, "opening_schedule": {"sources": ["A8.00", "A8.01", "S2.01", "S2.02", "S2.03", "S2.04", "M1.01", "M1.05", "P1.01", "E1.02"], "items": [], "items_none_reason": "openings in WOOD-framed walls: headers / jambs / king studs are wood (Div. 06, EXCLUDED); door frames by others (A8.00); window returns carried in trim / misc (window schedule A8.01 + elevations A4.00-A4.03, measured by program)"}, "openings_extra": [],
  "plywood_strips": [], "plywood_strips_none_reason": "plywood / LP Flameblock sheathing = wood Div. 06 EXCLUDED (A0.07)",
  "blocking_items": [], "trim_items": [],
 })
@@ -43,7 +43,7 @@ for fl, x in sorted(vt['floors'].items()):
         trims.append({"ref": f"CB-CORR-{fl}", "kind": "corner_bead", "lf": float(x['corner_bead_corners_lf']),
                       "label": f"{fl} corridor outside corners", "source": f"A2.0{fl[1]} corridor corners; 09 29 00 2.5 / 3.x 'install cornerbead at external corners'",
                       "op": x.get('corner_bead_corners_op'), "status": "DERIVADO", "img": "2_lectura/img_ventanas"})
-    for r in x.get('runs_over_30ft') or []:
+    for r in []:   # reemplazado por runs del canon (abajo)
         if r.get('status') == 'PENDIENTE' or not r.get('length_ft'):
             continue
         n = math.ceil(float(r['length_ft']) / 30.0 - 1e-9) - 1
@@ -53,6 +53,35 @@ for fl, x in sorted(vt['floors'].items()):
                                     "op": f"ROUNDUP({r['length_ft']}/30)-1 = {n} joint(s) x {h} ft = {round(n * h, 2)}",
                                     "source": f"A0.06 GN 15 'CONTROL JOINTS IN ... PARTITIONS ... EXCEEDING 30 FT' + 09 29 00 3.x / ASTM C840; {fl} {r.get('what')} (A2.0{fl[1]} {r.get('line')})"})
 d['trim_items'] = trims
+# CONTROL JOINTS (precedente R80e.34 #8: ASTM C840 <= 30 ft corridos, AMBAS caras, altura del wall): runs colineales de
+# board-only walls por piso en la planta A2.0x (mismo eje +-3 pt, tramos que se tocan o con hueco <= 4 ft de puerta)
+import collections
+runs = collections.defaultdict(list)
+for e in d['existing_walls']:
+    if not e['sheet'].startswith('A2.0') or not e['id'].split(' ')[0] or e['id'].endswith((' B', ' C', ' D')):
+        continue
+    (x0, y0), (x1, y1) = e['path'][0], e['path'][-1]
+    ori = 'H' if abs(y0 - y1) < 0.5 else 'V'
+    c_ = round((y0 if ori == 'H' else x0) / 3.0)
+    lo, hi = sorted((x0, x1) if ori == 'H' else (y0, y1))
+    runs[(e['floor'], e['sheet'], ori, c_)].append((lo, hi, e['height_ft'], e['id']))
+for (fl, sh, ori, c_), segs in sorted(runs.items()):
+    segs.sort(); cur = [segs[0]]
+    grupos = []
+    for sg in segs[1:]:
+        if sg[0] - cur[-1][1] <= 4 * 9.0:
+            cur.append(sg)
+        else:
+            grupos.append(cur); cur = [sg]
+    grupos.append(cur)
+    for g in grupos:
+        L = (max(s_[1] for s_ in g) - min(s_[0] for s_ in g)) / 9.0
+        n = math.ceil(L / 30.0 - 1e-9) - 1
+        if n > 0:
+            h = max(s_[2] for s_ in g)
+            d['misc_items'].append({"ref": f"CJ-{fl}-{ori}{c_ * 3}", "familia": "control joint", "qty": round(n * h * 2, 2),
+                "op": f"run {round(L, 2)} ft ({len(g)} walls {g[0][3]}..{g[-1][3]}): ROUNDUP({round(L, 2)}/30)-1 = {n} joint(s) x {h} ft x 2 faces = {round(n * h * 2, 2)}",
+                "source": f"{sh} run on {'y' if ori == 'H' else 'x'} = {c_ * 3} pt; A0.06 GN 15 + ASTM C840 (precedent R80e.34 #8: <= 30 ft, both faces, wall height)"})
 d['trim_none_reason'] = "Window returns: wood casing / stool covers the board edge (1-3/A8.02) - no corner bead at windows; corridor outside corners L2 / L3 counted; L1 / L4 / guest-unit outside corners not counted (RFI-19)"
 json.dump(d, open(f'{W}/takeoff_canon.json', 'w'), indent=1)
 print('ok', len(d['existing_walls']), len(d['ceilings']), len(d['misc_items']))
