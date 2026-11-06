@@ -1,3 +1,4 @@
+import re
 """CR City Hotel: takeoff_canon.json = base (build_canon) + campos de proyecto (exclusiones con N/HOJA, wood, tornillería,
 MEP, none reasons). Los textos citan la hoja revisada."""
 import json
@@ -82,6 +83,19 @@ for (fl, sh, ori, c_), segs in sorted(runs.items()):
             d['misc_items'].append({"ref": f"CJ-{fl}-{ori}{c_ * 3}", "familia": "control joint", "qty": round(n * h * 2, 2),
                 "op": f"run {round(L, 2)} ft ({len(g)} walls {g[0][3]}..{g[-1][3]}): ROUNDUP({round(L, 2)}/30)-1 = {n} joint(s) x {h} ft x 2 faces = {round(n * h * 2, 2)}",
                 "source": f"{sh} run on {'y' if ori == 'H' else 'x'} = {c_ * 3} pt; A0.06 GN 15 + ASTM C840 (precedent R80e.34 #8: <= 30 ft, both faces, wall height)"})
+# RFI-05 cerrado (R-ALC-10 / U-082, opción A = lo impreso): A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE
+# TENANT' -> caras retail NO rated fuera; caras retail de assemblies RATED (rating del tag > 0) se quedan: el rating impreso
+# del tag exige la capa (listed design), conservador, delta anotado en el RFI.
+_ret = []
+for w in list(d['existing_walls']):
+    f = str(w.get('location') or '').split('faces:')[-1].strip()
+    if re.fullmatch(r"RETAIL 124 \(tenant\)", f) and str(w.get('type_id', '')).endswith('-0'):
+        d['existing_walls'].remove(w)
+        sf = round(w['length_ft'] * w['height_ft'] * w['faces'] * (w.get('layers') or 1), 1)
+        _ret.append(sf)
+        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
+            "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
+print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
 # corner bead por programa (scripts/esquinas_cb.py): outside corners de L junctions + extremos libres que no son door jambs
 cbj = json.load(open('/root/cr/work/etapas/4_canon/out/corner_bead.json'))
 for k, v in sorted(cbj['por_hoja'].items()):
