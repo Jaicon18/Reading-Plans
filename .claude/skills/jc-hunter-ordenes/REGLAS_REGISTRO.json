@@ -1,7 +1,7 @@
 {
- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 425,
+ "conteo": 427,
  "reglas": [
   {
    "id": "U-001",
@@ -5765,6 +5765,42 @@
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u151_pdf_editable"
+   }
+  },
+  {
+   "id": "BE-148",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev3b, 6-nov)",
+   "texto_corto": "PDF de markups con /Measure correcto en cada markup pero sin escala de PÁGINA /VP: Bluebeam mostraba 0.125 en las hojas a 1/4\"; CE_PDF_EDITABLE ampliada + tools/escala_pagina.py (markups_bluebeam.escribir lo llama solo)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_pdf_editable",
+    "take-off:tools/compuerta_entrega.py::pdf_editable",
+    "take-off:tools/escala_pagina.py::revisar",
+    "take-off:tools/escala_pagina.py::poner",
+    "take-off:tools/markups_bluebeam.py::editable"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u152_escala_pagina"
+   }
+  },
+  {
+   "id": "U-152",
+   "origen": "REGLAS_USUARIO_CLAUDE.md (6-nov, CR City Hotel, BE-148; usuario 6-nov: \"siempre tienes hacerlo en todos los proyectos, regla inviolable\")",
+   "texto_corto": "REGLA INVIOLABLE: todo PDF de markups lleva en cada página con markups /Measure la escala de PÁGINA /VP con el mismo /Measure /R que sus markups (= escala impresa de la vista); falta o distinto = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_pdf_editable",
+    "take-off:tools/compuerta_entrega.py::pdf_editable",
+    "take-off:tools/escala_pagina.py::revisar",
+    "take-off:tools/escala_pagina.py::poner",
+    "take-off:tools/markups_bluebeam.py::editable"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u152_escala_pagina"
    }
   }
  ]
