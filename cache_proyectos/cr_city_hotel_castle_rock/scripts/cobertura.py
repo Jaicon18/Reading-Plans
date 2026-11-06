@@ -79,7 +79,7 @@ for r in c['rfis']:
         add('open RFI', r['id'], f"conservative value LOADED: {str(r['loaded'])[:120]}", 'COVERED (RFI)', r['source'])
 
 n = len(rows); gaps = [r for r in rows if r['status'] == 'GAP']
-L = ["# COBERTURA - Paso 12 (coverage matrix) - CR City Hotel rev1", "",
+L = ["# COBERTURA - Paso 12 (coverage matrix) - CR City Hotel rev2", "",
      f"{n} items · {n - len(gaps)} covered · {len(gaps)} GAP · {100 * (n - len(gaps)) / n:.1f} %", "",
      "| # | Category | Item | Destination | Status | Source |", "|---|---|---|---|---|---|"]
 for i, r in enumerate(rows, 1):

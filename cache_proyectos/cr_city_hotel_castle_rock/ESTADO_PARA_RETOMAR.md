@@ -26,3 +26,11 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - Siguiente: integrar burbujas + citas en canon -> cadena.sh 2 -> armar_entrega.sh -> FAIL restantes -> backcheck -> proposal build -> subir_entrega -> skill v81cf55 (+ sección multinivel R80f) -> reporte.
 - 6-nov ~10:15 PM PT: Drive del proyecto llenado (estaba vacío, BE-CR17): '2026 Permit Drawings (bid set)' 11 PDF + copia limpia 148p; '2025 Drawings (superseded)' 5 PDF. Auditoría U-138 recibida: 4 ALTA (FS-1 en cielo L1, Retail 124 GYP-1, corridor 412 L4, corner bead) + 5 MEDIA -> en verificación.
 - 6-nov 12:25 AM PT: ENTREGADA. Drive › JC HUNTER PROJECTS › Claude outputs › CR City Hotel - Castle Rock, CO (Owen-Ames-Kimball) 11-12-26 › rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR (id 1ohr8whOoMPthHRechOtkUYTW-7-qBqVH): 558 archivos verificados por listado (raíz 6, Take-off 2, Proposal 2, Planos marcados 27, Auditoria 521). Para borrar a mano: 24 'DUPLICADO - borrar - *' en Planos marcados; carpeta 'NO USAR - subida cortada...'; '2026 Permit Drawings (bid set)' y '2025 Drawings (superseded)' duplicados en Claude outputs (el bid set real está en Projects).
+
+## rev2 (6-nov, orden COORDINACIÓN 10:12Z: rev1 pasó la compuerta EN VACÍO)
+- BE-CR25 en curso (v81cf56): walls() sintetiza board-only de existing_walls (caras por cuarto, capas sumadas en la misma cara; liner/exterior por clase);
+  canon_no_vacio (0 walls + PT>0 = FAIL); en_vacio() convierte N/A 'sin walls/sin canon' en FAIL (correr + wrapper de compuerta_entrega); test_be_cr25 en test_cf_pruebas.
+- BOTH SIDES: 48 -> 10 -> faces_none_reason con N/HOJA verificada (1/A7.45 nota F&B en Kitchen 100; 1/A2.01 retail; 1/A2.04, 3/A7.50; 1/A2.03 shaft box RFI-09, DW.4 cavity).
+- U-140: alturas L4 stair 5/A6.02 y 11/A6.01: la cota L4 -> underside roof sheathing NO está impresa (imágenes imagenes/alturas) -> AMBER legítimo.
+- Salidas renombradas a rev2 (cadena.sh, armar_entrega.sh, hacer_docs, cobertura, imagenes_hoja, proposal). rev1 archivado en /root/cr/work/archivo_rev1.
+- Pendiente: cadena rev2 -> armar_entrega -> compuerta -> auditoría U-138 #2 (subagente) -> subir rev2 -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> informe COORDINACIÓN.

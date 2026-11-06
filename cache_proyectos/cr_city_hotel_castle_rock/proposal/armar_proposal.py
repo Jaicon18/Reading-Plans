@@ -1,4 +1,4 @@
-"""CR City Hotel proposal (take-off rev1 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
+"""CR City Hotel proposal (take-off rev2 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
 (rule U-150): sheet PROPOSAL DW (JC Hunter letterhead) + PRICING (material FBM / labor and OH with the template's own rates,
 live formulas) + FBM_PRICES (every FBM product used: SKU, name, price, unit, stock, link, date, branch).
 Model: consumer_cellular_centennial/proposal_calc/armar_proposal.py (approved rev4 FINAL).
@@ -139,7 +139,7 @@ B = wb.create_sheet("PRICING"); F = wb.create_sheet("FBM_PRICES")
 F.append(["FBM code", "Product (as listed on myfbm.com)", "Category", "Price (USD)", "Price unit", "Min. order", "Stock", "Lead",
           "Link", "Read on", "Branch"])
 used = []
-B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev1 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
+B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev2 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
 B.append(["Material: FBM myfbm.com visitor price (guest branch CO-086 Englewood / Denver area), read " + str(fecha) +
           "; contractor account price may differ. Labor / OH / markups: the user's Proposal Template rates (source per row)."])
 B.append([])
@@ -260,7 +260,7 @@ put("C16", "We propose to supply the material, labor, and equipment necessary to
            "and the scope listed below.")
 put("C17", "(Please take special note of the scope description; we are not required to perform any items or tasks not specifically listed)")
 put("C19", "1.-"); put("D19", "Division of work: DRYWALL & FINISH LEVEL 4, C-H SHAFT WALLS, CEILING SUSPENSION.", bold=True)
-inc = ["INCLUDED (quantities from the take-off rev1 FINAL: net and purchase = net + waste, with their sheets):"]
+inc = ["INCLUDED (quantities from the take-off rev2 FINAL: net and purchase = net + waste, with their sheets):"]
 for r in ms:
     if (r[2] or 0) > 0:
         pu = r[5] if isinstance(r[5], (int, float)) else r[2]

@@ -292,5 +292,33 @@ for m in [m for m in d['misc_items'] if str(m.get('ref', '')).startswith('SOF-')
             "op": f"{m_.group(1)} LF soffit length x 1 edge = {m_.group(1)}", "status": "DERIVADO",
             "img": "/root/cr/work/burbujas/img_verif/" + ("G2_A7.31_det.png" if 'L1' in m['ref'] else "G2_A9.03_det.png" if 'smoke' in str(m.get('source')).lower() else "G2_A7.23_det.png")})
 d['trim_none_reason'] = "Corner bead: outside corners of all floors by program (L junctions between interior 2-face walls + free wall ends, door jambs and exterior-wall corners excluded), window return perimeters and soffit / cove bottom edges"
+# U-140 (rev2, COORDINACIÓN 6-nov): alturas vectoriales L4 de stair (5/A6.02, 11/A6.01): fuente impresa buscada por piso.
+# Impreso: datums LEVEL 4 6233.75 y ROOF 6247.75 (5/A6.02) y la nota 'RATED WALL CONTINUOUS TO UNDERSIDE OF ROOF SHEATHING. TYP.'
+# (11/A6.01); la cota LEVEL 4 -> underside of roof sheathing NO está impresa en ninguna de las dos vistas -> queda vectorial (AMBER real)
+for w in d['existing_walls']:
+    hs = str(w.get('height_source') or '')
+    if w['floor'] == 'L4' and 'vector' in hs and ('5/A6.02' in hs or '11/A6.01' in hs) and 'U-140 printed search' not in hs:
+        v = '5/A6.02' if '5/A6.02' in hs else '11/A6.01'
+        w['height_source'] = hs + (f" | U-140 printed search on {v}: datums LEVEL 4 6233.75 / ROOF 6247.75 and the note 'RATED WALL CONTINUOUS TO UNDERSIDE OF ROOF SHEATHING. TYP.' are printed; "
+                                   f"the LEVEL 4 to underside-of-roof-sheathing height is NOT dimensioned in the stair view -> vector measurement kept (img etapas/4_canon/img/alturas/H_{v.replace('/', '_')}_L4_stair.png)")
+# BE-CR25 (rev2, BOTH SIDES por wall): el wall con UNA cara cargada lleva el motivo de la otra con N/HOJA verificada
+# (vistas 1/A2.01, 1/A2.03, 1/A2.04, 1/A7.45, 3/A7.50 leídas en el título impreso de cada vista; nota F&B dentro de Kitchen 100
+# en 1/A7.45 y dentro de 419 / 410 en 1/A2.04 y 3/A7.50; nota retail dentro de Retail 124 en 1/A2.01)
+_UNA = {
+    "W.6-L1-03": "other face (Kitchen 100 / bar passage) inside the Food & Beverage space: 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' printed in Kitchen 100 on 1/A7.45 - future tenant improvement permit",
+    "W.6-L1-04": "other face (Kitchen 100, F&B) inside the Food & Beverage space: 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' printed in Kitchen 100 on 1/A7.45 - future tenant improvement permit",
+    "W.6-L1-23": "other face (Retail 124) by tenant: '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' printed in Retail 124 on 1/A2.01 (RFI-05 closed, option A)",
+    "W.6-L4-05": "other face (419 Warming Kitchen) inside the Food & Beverage space: 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' printed on 1/A2.04 and 3/A7.50",
+    "W.6-L4-07": "other face (419 Warming Kitchen) inside the Food & Beverage space: 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' printed on 1/A2.04 and 3/A7.50",
+    "NULL-L3-11": "inside face is the interior of the small shaft box (no access, no board printed) on 1/A2.03; RFI-09 open, outside face only loaded",
+    "NULL-L3-12": "inside face is the interior of the small shaft box (no access, no board printed) on 1/A2.03; RFI-09 open, outside face only loaded",
+    "NULL-L3-13": "inside face is the interior of the small shaft box (no access, no board printed) on 1/A2.03; RFI-09 open, outside face only loaded",
+    "NULL-L3-14": "inside face is the interior of the small shaft box (no access, no board printed) on 1/A2.03; RFI-09 open, outside face only loaded",
+    "DW.4-L3-04b": "DW.4 double wall: this entry is the north (304) leaf; its south side faces the cavity against XW.6.3-L3-06 (no board in a cavity) on 1/A2.03",
+}
+for w in d['existing_walls']:
+    k = re.sub(r" [A-Z]$", "", w['id'])
+    if k in _UNA:
+        w['faces_none_reason'] = _UNA[k]
 json.dump(d, open(f'{W}/takeoff_canon.json', 'w'), indent=1)
 print('ok', len(d['existing_walls']), len(d['ceilings']), len(d['misc_items']))
