@@ -105,6 +105,7 @@ def main():
         rfis += [dict(r, floor=fl) for r in d.get('rfis') or []]
         desc += [dict(x, floor=fl) for x in d.get('discarded') or []]
     ceilings = []
+    RCP = {'L1': 'A3.01', 'L2': 'A3.02', 'L3': 'A3.03', 'L4': 'A3.04'}
     STRUCT = {'L1': (12.0, "L1 ceilings: 12'-0\" B.O. structure (5/A5.04, resolucion_L1)"),
               'L2': (9.24, "4/A5.05 room zone 9'-2 7/8\" (11'-0\" - 1'-9 1/8\" floor zone)"),
               'L3': (9.24, "4/A5.05 room zone 9'-2 7/8\" (11'-0\" - 1'-9 1/8\" floor zone)"),
@@ -144,7 +145,8 @@ def main():
                                           else "A0.08 RS-1 (ceiling 'RE: REFLECTED CEILING PLANS', board on channel under wood framing drawn) - board type not printed: 5/8\" Type X loaded (RFI-CR-RS1)"},
                              "rc_oc_in": {"value": 16, "source": "UL L546 / RS-1 (spacing 'per assembly', not printed): 16 in. o.c. loaded (RFI-CR-RC, alt 12 in. o.c.)"},
                              "layers": {"value": 1, "source": "A0.08 " + ('FS-1 1 layer' if k == 'FS-1' else 'RS-1 1 layer drawn')},
-                             "source": src, "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})
+                             "detail": ('4/A5.05' if k == 'FS-1' else '1/A5.06') + f' (section cutting the {"FS-1" if k == "FS-1" else "RS-1"} assembly, A0.08; RCP {RCP.get(fl, "")})',
+                             "source": f"A0.08 / RCP {RCP.get(fl, '')}: {src}", "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})
             continue
         # GYP-1 / GYP-2 / other: metal suspension (USG drywall suspension) - legend 'ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING'
         ly = 2 if k == 'GYP-2' else 1

@@ -29,7 +29,7 @@ E = [
  ("S:los-markups-ajenos-no-so:db7106", PC, "First step arranque.py / copia_limpia: clean copy bidset_SIN_MARKUPS.pdf; all crops from that copy."),
  ("S:granularidad-y-marcado:33d529", RS, 'Work unit = the complete type per floor (A0.06 / A0.07 order), floors never joined (U-120).'),
  ("S:granularidad-y-marcado:e221c4", "7_imagenes/imagenes_hoja.json", 'Marked plans produced by programs from the canon coordinates: markups_bluebeam / board-only markups PDF + PNG per sheet and type.'),
- ("S:granularidad-y-marcado:7f3ce3", "4_canon/out/cierres_resumen.json", "Bands come from the sealed canon (closer.py seals of every wall), never from memory."),
+ ("S:granularidad-y-marcado:7f3ce3", PC, "NO APLICA: no metal stud wall to seal with closer.py (wood-framed set); bands of the board-only walls come from the resolved canon (resuelto_L1..L4) on disk."),
  ("S:granularidad-y-marcado:f79808", PC, "Markups and images regenerated from the final canon in the same chain run (same canon sha)."),
  ("S:granularidad-y-marcado:1f35f7", "7_imagenes/imagenes_hoja.json", "Final visual check on the delivered PNGs (reopened, Wall IDs and LF against the Excel)."),
  ("S:granularidad-y-marcado:f3c532", "6_markups/markups.json", "Each marked sheet shows all instances of its types; markups totals per type = canon LF."),

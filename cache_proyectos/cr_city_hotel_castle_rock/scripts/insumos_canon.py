@@ -25,17 +25,17 @@ if modo == "fo":
                                    f"(M / P sheets {', '.join((c.get('mep_sweep') or {}).get('sheets') or [])})")
     if c.get("ceilings"):
         ms = list((c.get("mep_sweep") or {}).get("sheets") or [])
-        es = [v for v in sm.values() if v.startswith("E")]
+        es = [v for v in sm.values() if v and v.startswith("E")]
         fo["sweep"] = {"sheets": sorted(set(ms) | set(es)),
                        "no_air_devices_why": "air devices / duct openings in GWB are EXCLUDED by estimator standing order (no framed opening)"}
-        fo["modules"]["ceiling_furring_oc_in"] = {"value": 16, "source": (c["ceilings"][0].get("source") or "A8.00")}
+        fo["modules"]["ceiling_furring_oc_in"] = {"value": 16, "source": "A0.08"}
     json.dump(fo, open(os.path.join(C4, "fo_in.json"), "w"), indent=1, ensure_ascii=False)
     print("fo_in items", len(items), "sweep" if "sweep" in fo else "no GWB ceiling: no sweep needed")
 else:
     so = json.load(open(os.path.join(C4, "out", "studs_out.json")))
     W = {w["id"]: w for w in c.get("walls") or []}
     rows = []
-    for s in so["walls"]:
+    for s in so.get("walls") or []:
         sz = str(s.get("stud_size") or "")
         if re.search(r"hat channel|furring|\bzf\b", sz, re.I):
             w = W.get(s["id"], {})

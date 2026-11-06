@@ -1588,6 +1588,8 @@ def _ceiling_rc(c, src, fam, filas):
         rc, op = area / ocf, f"RC {area} SF / {round(ocf, 3)} ft o.c. = {round(area / ocf, 2)} LF"
     fam["resilient channel (printed)"] += rc
     fam[BOARD_FAM[b]] += area * n_l
+    filas.append({"familia": "resilient channel (printed)", "ref": room, "source": f"{asm['source']} | {src}",
+                  "operacion": f"{op} ({oc['source']})"})
     filas.append({"familia": "ceilings", "room": room, "source": src,
                   "operacion": f"resilient_channel ({asm['id']} {asm['source']}): {op} ({oc['source']}); board {area} SF x "
                                f"{n_l} layer(s) = {round(area * n_l, 2)} SF ({ly['source']}); wood joists EXCLUDED (Div. 06)"})
@@ -2541,7 +2543,7 @@ def calcular(data, outdir=None, fo=None):
         avisos.append("SIN INVENTARIO: falta constants.plan_scale_pt_per_ft + walls[].band (v63, inventario.py)")
     fam = {k: 0.0 for k in FAMS}
     filas = []
-    st = studs_nodos.contar(studs_in) if studs_in["walls"] else {"total_lf_por_stud": {}}
+    st = studs_nodos.contar(studs_in) if studs_in["walls"] else {"total_lf_por_stud": {}, "walls": []}   # BE-CR04
     for size, lf in st["total_lf_por_stud"].items():
         k = next((f for key, f in STUD_FAM if key in size.lower()), None)
         if k is None:
@@ -2550,7 +2552,7 @@ def calcular(data, outdir=None, fo=None):
             raise ValueError(f"stud_size '{size}' parapet fuera de element parapet (se cuenta por bay, 59.4)")
         fam[k] += lf
     _parapet_studs(data, fam, filas)
-    bo = board_caras.calcular(board_in) if board_in["walls"] else {"totales_sf": {}, "avisos": []}
+    bo = board_caras.calcular(board_in) if board_in["walls"] else {"totales_sf": {}, "avisos": [], "caras": []}   # BE-CR04
     for b, sf in bo["totales_sf"].items():
         if b not in BOARD_FAM:
             raise ValueError(f"board '{b}' sin familia (usar {sorted(BOARD_FAM)})")
@@ -2560,7 +2562,7 @@ def calcular(data, outdir=None, fo=None):
     # v81cf53 (CR City Hotel, BE-CR04): proyecto wood-framed SIN walls metálicos (todo el board en existing_walls,
     # framing EXCLUDED Div. 06): sin runs no hay track ni bracing; antes corridas.calcular paraba con "'runs' vacío".
     if not corr_in.get("runs") and (data.get("existing_walls") or []) and not (data.get("walls") or []):
-        co = {"totales_lf": {}, "rfi": None, "rfi_doors": None, "sin_runs": "board-only project (existing_walls)"}
+        co = {"totales_lf": {}, "renglones": [], "rfi": None, "rfi_doors": None, "sin_runs": "board-only project (existing_walls)"}
     else:
         co = corridas.calcular(corr_in)
     for k, v in co["totales_lf"].items():
