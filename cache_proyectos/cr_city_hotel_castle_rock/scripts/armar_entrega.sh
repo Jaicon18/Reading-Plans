@@ -22,6 +22,7 @@ cp $W/etapas/COBERTURA_PASO12.md $W/etapas/COBERTURA_PASO12.json "$E/Auditoria/"
 cp $W/etapas/1_inventario/inventario.md $W/etapas/1_inventario/inventario.json "$E/Auditoria/barrido_tags/"; cp -a $W/etapas/1_inventario/recortes "$E/Auditoria/barrido_tags/"; mkdir -p "$E/Auditoria/evidencia_walls"; cp -a $W/etapas/7_imagenes/walls $W/etapas/7_imagenes/alturas "$E/Auditoria/evidencia_walls/"
 cp $W/comparacion_sets.json "$E/Auditoria/comparacion_sets_2025_vs_2026.json"
 [ -d $W/auditoria_U138 ] && mkdir -p "$E/Auditoria/auditoria_U138" && cp -a $W/auditoria_U138/. "$E/Auditoria/auditoria_U138/"
+[ -d $W/auditoria_U138_2 ] && mkdir -p "$E/Auditoria/auditoria_U138_2" && cp -a $W/auditoria_U138_2/INFORME_AUDITORIA_U138_2.md $W/auditoria_U138_2/RESOLUCION_HALLAZGOS_U138_2.md $W/auditoria_U138_2/BRIEF.md $W/auditoria_U138_2/img "$E/Auditoria/auditoria_U138_2/"
 [ -d $W/Proposal ] && mkdir -p "$E/Proposal" && cp -a $W/Proposal/. "$E/Proposal/"
 python3 -I $W/scripts/tiempos.py > /dev/null; cp $W/entrega.json $W/TIEMPOS.md $D/
 python3 -I $W/scripts/delta_rev.py > /dev/null; cp $W/etapas/DELTA_rev1_rev2.md "$E/Auditoria/"

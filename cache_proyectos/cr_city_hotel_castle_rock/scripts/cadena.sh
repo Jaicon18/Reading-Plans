@@ -14,6 +14,8 @@ R scripts/build_canon.py
 R scripts/vanos_puertas.py
 R scripts/esquinas_cb.py
 R scripts/finalizar_canon.py
+R scripts/shafts_l3l4.py
+R scripts/banos_cbu.py
 R scripts/imagenes_walls.py
 R scripts/rfis.py
 R $T/inventario.py $C4/takeoff_canon.json $C4/out/inventario_walls.json

@@ -42,3 +42,5 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - (rev2) COMPUERTA VERDE 169 PASS / 3 AMBER / 0 FAIL (los chequeos por wall corren sobre los board-only). Suite 51/51, verificar_version 0 faltantes (786 reglas), banco 0 distintas en 5 proyectos (BofA error igual en ref y nuevo).
 - Delta rev1->rev2: Type X -385.52 SF, W.R. +370.62 SF, cement board +344.25 SF, compound -1.07 lb, tape -5.52 LF.
 - Auditoría U-138 #2 lanzada (subagente, BRIEF en /root/cr/work/auditoria_U138_2/BRIEF.md). Después: aplicar hallazgos -> cadena -> armar -> VERDE -> subir rev2 -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> zip v81cf56 -> informe COORDINACIÓN.
+- (rev2) Auditoría U-138 #2: 13 hallazgos (3 ALTA) aplicados y verificados (RESOLUCION_HALLAZGOS_U138_2.md): banos_cbu.py (cement board por shower, F6), shafts_l3l4.py (CH.6-2 L3 + L4 norte, RFI-09 cerrado), F4/F5/F7/F8/F9/F12 en finalizar, RFI-20/21 acotados. BE-CR26 (cadena: vanos_puertas/esquinas_cb sobre .base.json + candado) y BE-CR27.
+- COMPUERTA VERDE 169/3/0 final. Siguiente: subir_entrega -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> zip v81cf56 -> informe COORDINACIÓN.

@@ -6,9 +6,15 @@ MEP, none reasons). Los textos citan la hoja revisada."""
 import json
 W = '/root/cr/work/etapas/4_canon'
 d = json.load(open(f'{W}/takeoff_canon.json.base.json'))
+# BE-CR26 (rev2, auditoría U-138 #2): vanos_puertas escribía el canon FINAL de la corrida anterior y finalizar leía la base: los
+# arreglos de vanos (W.4-L3-44, W.4-L4-22, W.4-L4-21 -> A7.50, recortes) nunca llegaban al canon. Candado: el efecto de cada paso llega.
+_vp = json.load(open(f'{W}/out/vanos_puertas.json'))
+_ids = {e['id'].split(' ')[0] for e in d['existing_walls']}
+_malos = [x['id'].split(' ')[0] for x in _vp.get('eliminados') or [] if x['id'].split(' ')[0] in _ids]
+assert not _malos, f"BE-CR26: vanos_puertas no llegó a la base que lee finalizar: {_malos[:5]}"
 d.pop('ceilings_raw', None)
 d['rfis_lectura'] = d.pop('rfis_raw', [])
-d['excluded_walls'] = d.pop('discarded_raw', [])
+d['excluded_walls'] = d.pop('discarded_raw', []) + (d.get('excluded_walls') or [])   # BE-CR26: + exclusiones de vanos_puertas sobre la base
 d['constants']['type_order'] = {"value": ["W.4-0", "W.6-0", "W.6-1", "W.6-2", "W.62-1", "FW.1-0", "FW.2-0", "FW.4-0", "FW.6-0", "DW.4-1", "FI.2-0", "FI.6-0", "CH.6-2",
     "XW.6.2-0", "XW.6.2-2", "XW.6.3-0", "XW.6.3-2", "XW.6.4-0", "XW.6.4-2", "XW.6.6-1", "XW.6.6-2"], "source": "A0.06 interior wall assemblies + A0.07 exterior wall assemblies row order"}
 d.update({
@@ -316,6 +322,84 @@ for wid, cuarto in (("XW.6.3-L2-08 B", "209"), ("XW.6.3-L3-09 B", "309")):
                         "" + (" | height:" + str(nw['source']).split('| height:', 1)[1] if '| height:' in str(nw['source']) else ''))
         nw['img'] = 'etapas/4_canon/img/wet_209_309_east_wall.png'
         d['existing_walls'].insert(d['existing_walls'].index(w) + 1, nw)
+# ===================== AUDITORÍA U-138 #2 (rev2): F4 / F5 / F7 / F8 / F9 / F12, verificados en el plano =====================
+# F4: L3 cara interior de muros exteriores XW: 4/A5.05 imprime junto al muro exterior la zona de piso SHALLOW 1'-1 1/4" en L2-L3 y en
+# L3-L4 (8'-11" + 11 3/4" = 9'-10 3/4") -> 11'-0" - 1'-1 1/4" = 9'-10 3/4" (igual que L2), no 9'-2 7/8" (zona profunda de los cuartos)
+_F4 = "11'-0\" - 1'-1 1/4\" = 9'-10 3/4\" (4/A5.05 printed at the exterior wall: shallow floor zone 1'-1 1/4\" at L2-L3 and L3-L4; L3-L4 printed 8'-11\" + 11 3/4\" = 9'-10 3/4\")"
+for w in d['existing_walls']:
+    if w['floor'] == 'L3' and str(w.get('type_id', '')).startswith('XW') and not re.search(r"(?i)exterior|sheathing|cement", str(w.get('board'))) \
+            and abs(float(w['height_ft']) - 9.2396) < 0.001:
+        w['height_ft'] = 9.8958; w['height_status'] = 'DERIVADO'; w['height_source'] = _F4
+        w['source'] = re.sub(r"\| height:[^|]*", "| height: " + _F4 + " ", str(w['source']), count=1)
+# F5: exterior gyp sheathing de L2 = floor to floor como L1 (14'-0") y L3 (11'-0"): 4/A5.06 imprime 11'-0" LEVEL 2 a LEVEL 3 y el
+# sheathing pasa por delante del rim (4/A5.05 9'-10 3/4" + 1'-1 1/4" = 11'-0"). L4 queda en 8'-11 1/4" impreso en 1/A5.06.
+_F5 = "11'-0\" LEVEL 2 6211.75' -> LEVEL 3 6222.75' printed (4/A5.06; 4/A5.05 9'-10 3/4\" + 1'-1 1/4\" = 11'-0\"): exterior gyp sheathing continuous past the floor zone (per-floor slice = floor to floor, same as L3)"
+for w in d['existing_walls']:
+    if w['floor'] == 'L2' and re.search(r"(?i)exterior gyp sheathing", str(w.get('board'))) and abs(float(w['height_ft']) - 9.8958) < 0.001:
+        w['height_ft'] = 11.0; w['height_status'] = 'DERIVADO'; w['height_source'] = _F5
+        w['source'] = re.sub(r"\| height:[^|]*", "| height: " + _F5 + " ", str(w['source']), count=1)
+# F7 / F8: demising DW.4 de las unidades sur (L2 205-209, L3 305-308) y 213 / 313: caras por tramo con las particiones del baño
+# medidas en vectores (1/A2.02 = 1/A2.03, misma geometría): caras del demising de 1001.2 a 1206.0 = 22.76 ft (no a ejes 997.4-1209.0);
+# baños: 205 / 206 / 207 = 1128.0-1206.0, 208 = 1101.7-1206.0 (partición 1098.2 / 1101.7); 213 / 313 = cara sur completa.
+_DWF = "1/{sh} [DERIVED] length: {lbl} ({hi}-{lo})/9 = {L} ft (vector faces of the demising and of the bath partition; A2.0x GN 4 water resistant at toilet / lavatory)"
+
+
+def _rehacer(base, fl, caras):
+    es = [x for x in d['existing_walls'] if re.sub(r" [A-Z]$", "", x['id']) == base and x['floor'] == fl]
+    if not es:
+        print('F7: no existe', base); return
+    w = next((x for x in es if 'cement' not in str(x['board'])), es[0])
+    i0 = d['existing_walls'].index(es[0])
+    for x in es:
+        d['existing_walls'].remove(x)
+    (x0, y0), (x1, y1) = w['path']
+    vert = abs(x1 - x0) < 1.0
+    hpart = (" | height:" + str(w['source']).split('| height:', 1)[1]) if '| height:' in str(w['source']) else ''
+    k = 0
+    for lbl, segs in caras:
+        for lo, hi, board in segs:
+            nw = json.loads(json.dumps(w))
+            nw['id'] = base + ' ' + "ABCDEFGHIJKL"[k]; k += 1
+            nw['path'] = [[x0, lo], [x1, hi]] if vert else [[lo, y0], [hi, y1]]
+            nw['length_ft'] = round((hi - lo) / 9.0, 2)
+            nw['faces'] = 1
+            nw['board'] = '5/8 type X WR' if board == 'WR' else '5/8 type X'
+            nw['location'] = re.sub(r"faces:.*$", "faces: " + lbl + (' bath (toilet / lavatory)' if board == 'WR' else ' room (dry)'), str(w['location']))
+            nw['source'] = _DWF.format(sh=w['sheet'], lbl=lbl, hi=hi, lo=lo, L=nw['length_ft']) + " (auditoria U-138 #2 F7 / F8)" + hpart
+            nw['length_status'] = 'DERIVADO'
+            d['existing_walls'].insert(i0, nw); i0 += 1
+
+
+for fl, n in (("L2", "2"), ("L3", "3")):
+    _rehacer(f"DW.4-{fl}-0{'7' if fl == 'L2' else '9'}" if False else (f"DW.4-L2-07" if fl == "L2" else "DW.4-L3-09"), fl,
+             [(f"{n}05", [(1001.2, 1124.4, 'X'), (1128.0, 1206.0, 'WR')]), (f"{n}06", [(1001.2, 1124.4, 'X'), (1128.0, 1206.0, 'WR')])])
+    _rehacer("DW.4-L2-08" if fl == "L2" else "DW.4-L3-10", fl,
+             [(f"{n}06", [(1001.2, 1206.0, 'X')]), (f"{n}07", [(1001.2, 1124.4, 'X'), (1128.0, 1206.0, 'WR')])])
+    _rehacer("DW.4-L2-09" if fl == "L2" else "DW.4-L3-11", fl,
+             [(f"{n}07", [(1001.2, 1206.0, 'X')]), (f"{n}08", [(1001.2, 1098.2, 'X'), (1101.7, 1206.0, 'WR')])])
+    _rehacer("DW.4-L2-01" if fl == "L2" else "DW.4-L3-05", fl,
+             [(f"{n}14", [(536.9, 703.9, 'X')]), (f"{n}13", [(536.9, 703.9, 'WR')])])
+_rehacer("DW.4-L2-10", "L2", [("208", [(1001.2, 1141.6, 'X')]), ("209", [(1001.2, 1141.6, 'X')])])
+# F9: XW.6.2-L1-03 (XW.6.2-0 NO rated): cara Retail 124 fuera por RFI-05 (1/A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY
+# FUTURE TENANT'); la cara exterior del type (A0.07 XW.6.2-0: 5/8" outboard of stud, type not labeled) = exterior gyp sheathing Type X
+for w in [x for x in d['existing_walls'] if x['id'] == 'XW.6.2-L1-03']:
+    sf = round(w['length_ft'] * w['height_ft'], 1)
+    d['excluded_walls'].append({"id": "XW.6.2-L1-03 B", "reader": "AB", "floor": "L1", "sheet": w['sheet'], "img": w.get('img'), "tag_ids": w.get('tag_ids') or [],
+                                "reason": f"1/A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face (XW.6.2-0, {sf} SF board) by tenant - RFI-05 closed (auditoria U-138 #2 F9)"})
+    w['id'] = 'XW.6.2-L1-03 A'; w['faces'] = 1
+    w['board'] = '5/8 exterior gyp sheathing type X'
+    w['location'] = re.sub(r"faces:.*$", "faces: exterior/grey-area side (5/8\" outboard board of A0.07 XW.6.2-0, type not labeled -> exterior gyp sheathing Type X like the other XW types)", str(w['location']))
+    w['faces_none_reason'] = "other face (Retail 124) by tenant: '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' printed in Retail 124 on 1/A2.01 (RFI-05 closed)"
+# F12: FW.2-L4-11 termina en la cara del CMU (vector 751.08 en 1/A2.04), no en 765.2
+for w in d['existing_walls']:
+    if w['id'].split(' ')[0] == 'FW.2-L4-11':
+        (x0, y0), (x1, y1) = w['path']
+        if max(x0, x1) > 760:
+            old = w['length_ft']
+            w['path'] = [[min(x0, x1), y0], [751.08, y1]]
+            w['length_ft'] = round((751.08 - min(x0, x1)) / 9.0, 2)
+            w['length_status'] = 'DERIVADO'
+            w['source'] = re.sub(r"^[^|]*", f"1/A2.04 [DERIVED] length: (751.08-{min(x0, x1)})/9 = {w['length_ft']} ft to the CMU face (was {old}, auditoria U-138 #2 F12) ", str(w['source']), count=1)
 # U-114 (rev2): una altura [DERIVED] lleva su operación con resultado: 'A + B' / 'A - B' sin '=' -> se agrega '= <resultado>'
 # solo si la suma / resta de las cotas impresas del texto da la altura cargada (si no, se informa y no se toca)
 _RXV = re.compile(r"(?:(\d{1,2})'\s*-?\s*)?(\d{1,2})(?:\s+(\d{1,2})/(\d{1,2}))?\"")
@@ -358,7 +442,7 @@ for w in d['existing_walls']:
 _conf = []
 for w in d['existing_walls']:
     sx = str(w.get('source') or '').split('| height:')[0]
-    if str(w.get('length_status') or 'DERIVADO').upper().startswith('DERIV') and not re.search(r"\+|minus| - |vector|=|\bnet\b|less|(?<!not )deduct|portion|part of|split", sx.split('printed', 1)[-1]):
+    if str(w.get('length_status') or 'DERIVADO').upper().startswith('DERIV') and not re.search(r"\+|minus| - |vector|=|\bnet\b|less|(?<!not )(?<!NOT )deduct|portion|part of|split", sx.split('printed', 1)[-1]):
         m = re.search(r"printed (\d{1,2})'-(\d{1,2})(?: (\d)/(\d{1,2}))?\"", sx)
         if m:
             v = int(m.group(1)) + (int(m.group(2)) + (int(m.group(3)) / int(m.group(4)) if m.group(3) else 0)) / 12

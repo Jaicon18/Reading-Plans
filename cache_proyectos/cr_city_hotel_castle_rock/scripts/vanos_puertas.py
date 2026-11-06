@@ -10,8 +10,9 @@ Escribe el canon en su lugar y etapas/4_canon/out/vanos_puertas.json."""
 import json, math, re
 import pymupdf as fitz
 W = '/root/cr/work'
-CP = f'{W}/etapas/4_canon/takeoff_canon.json'
+CP = f'{W}/etapas/4_canon/takeoff_canon.json.base.json'   # BE-CR26: trabaja sobre la salida de build_canon (la que lee finalizar)
 c = json.load(open(CP))
+c.setdefault('excluded_walls', [])
 D = fitz.open(f'{W}/plans/bidset_SIN_MARKUPS.pdf')
 SC = 9.0
 _seg, _tags = {}, {}
@@ -60,6 +61,12 @@ def cubierto(pg, path, band=4.5):
         else:
             m.append([lo, hi])
     return h, a0, a1, cc, m
+
+
+def nota_largo(src, nota):
+    """BE-CF24: la nota del largo va en el segmento de largo, antes de '| height:' (si no, el chequeo la lee como altura)."""
+    src = str(src or '')
+    return src.replace('| height:', nota + ' | height:', 1) if '| height:' in src else src + nota
 
 
 res = {"recortados": [], "eliminados": [], "en_medio": []}
@@ -118,12 +125,12 @@ for wid, ws in grupos.items():
                 e['path'] = [[ex0, lo_new], [ex1, hi_new]]
             old = e['length_ft']
             e['length_ft'] = round((hi_new - lo_new) / SC, 2)
-            e['source'] = str(e.get('source') or '') + f" | door opening at the end of the path removed: {old} - {cut} = {e['length_ft']} ft (drawn wall lines vs printed door tag, auditoria U-138)"
+            e['source'] = nota_largo(e.get('source'), f"; door opening at the end of the path removed: {old} - {cut} = {e['length_ft']} ft (drawn wall lines vs printed door tag, auditoria U-138)")
         res['recortados'].append({"id": wid, "sheet": w['sheet'], "cut_ft": cut})
     if medio:
         for e in ws:
             e['door_openings'] = medio
-            e['source'] = str(e.get('source') or '') + f" | door opening(s) inside the run {medio} ft NOT deducted (conservative)"
+            e['source'] = nota_largo(e.get('source'), f"; door opening(s) inside the run {medio} ft NOT deducted (conservative)")
         res['en_medio'].append({"id": wid, "sheet": w['sheet'], "gaps_ft": medio})
 # correcciones verificadas a ojo (auditoría U-138 hallazgos 7 y 10; imágenes en auditoria_U138/img y scratchpad del 6-nov)
 _hs = list(json.load(open(f'{W}/set_texto.json'))['hojas'])
@@ -139,7 +146,8 @@ for e in c['existing_walls']:
         old = e['length_ft']
         e['sheet'], e['page'] = 'A7.50', _hs.index('A7.50') + 1
         e['length_ft'] = round(math.dist((ex0, ey0), (ex1, ey1)) / 18.0, 2)
-        e['source'] = str(e.get('source') or '').replace('A2.04 [DERIVED]', '3/A7.50 [DERIVED]') + f" | path coordinates are on 3/A7.50 (1/4\" = 18 pt/ft): {round(math.dist((ex0, ey0), (ex1, ey1)), 2)}/18 = {e['length_ft']} ft (was {old} at 9 pt/ft on A2.04, auditoria U-138 finding 10)"
+        e['source'] = str(e.get('source') or '').replace('A2.04 [DERIVED]', '3/A7.50 [DERIVED]')
+        e['source'] = nota_largo(e['source'], f"; path coordinates are on 3/A7.50 (1/4\" = 18 pt/ft): {round(math.dist((ex0, ey0), (ex1, ey1)), 2)}/18 = {e['length_ft']} ft (was {old} at 9 pt/ft on A2.04, auditoria U-138 finding 10)")
 json.dump(c, open(CP, 'w'), indent=1)
 json.dump(res, open(f'{W}/etapas/4_canon/out/vanos_puertas.json', 'w'), indent=1)
 print('eliminados', len(res['eliminados']), round(sum(x['lf'] for x in res['eliminados']), 2), 'LF;',

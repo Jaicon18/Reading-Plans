@@ -12,7 +12,7 @@ import json, math, os, collections
 import pymupdf as fitz
 
 W = '/root/cr/work'
-C = json.load(open(f'{W}/etapas/4_canon/takeoff_canon.json'))
+C = json.load(open(f'{W}/etapas/4_canon/takeoff_canon.json.base.json'))   # BE-CR26: base + vanos_puertas, no el canon final anterior
 PDF = f'{W}/plans/bidset_SIN_MARKUPS.pdf'
 SC = {k: (v['value'] if isinstance(v, dict) else v) for k, v in (C['constants'].get('plan_scale_by_sheet') or {}).items()}
 OUT = f'{W}/etapas/4_canon/img/cb'

@@ -315,7 +315,7 @@ class B:
         for (base, sh), es in grupos.items():
             e0 = es[0]
             caras, k, por_cuarto = [], 0, {}
-            for e in es:
+            for e in sorted(es, key=lambda x: "cement" in str(x.get("board") or "").lower()):   # overlays de cement board al final
                 loc = str(e.get("location") or "")
                 partes = [x.strip() for x in loc.split("faces:")[-1].split(";")] if "faces:" in loc else []
                 for i in range(int(e.get("faces") or 1)):
@@ -323,6 +323,13 @@ class B:
                     ck = re.sub(r"\W+", " ", cuarto.lower()).strip()
                     # BE-CR25: dos entradas sobre la MISMA cara (p. ej. cement board + Type X W.R. detrás del tile) = una cara
                     # con las capas sumadas, no dos caras de una capa
+                    # BE-CR25 / RFI-11: el cement board del shower es un overlay sobre una cara (tile backer), nunca una cara propia
+                    if "cement" in str(e.get("board") or "").lower():
+                        f = por_cuarto.get(ck)
+                        if f:
+                            f["layers"] += int(e.get("layers") or 1); f["boards"].append(e.get("board")); f["entry"] += " + " + str(e.get("id"))
+                            continue
+                        # sin cara del mismo cuarto: el cement board ES la cara (non-rated, RFI-11 'cement board in place of board')
                     if ck and ck in por_cuarto and por_cuarto[ck]["entry"].split(" + ")[-1] != str(e.get("id")):
                         f = por_cuarto[ck]
                         f["layers"] += int(e.get("layers") or 1)

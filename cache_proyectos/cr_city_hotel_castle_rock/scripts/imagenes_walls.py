@@ -78,9 +78,10 @@ for e in c['existing_walls']:
         n, sh = m.group(1).lstrip('0') or m.group(1), m.group(2)
     else:
         m2 = RX_SH.search(hs)
-        if not m2:
-            continue
-        n, sh = '', m2.group(1)
+        if m2:
+            n, sh = '', m2.group(1)
+        else:   # sin hoja en el texto: la sección típica de altura del piso (4/A5.05 L2-L3, 1/A5.06 L4, 5/A5.04 L1)
+            n, sh = {'L1': ('5', 'A5.04'), 'L2': ('4', 'A5.05'), 'L3': ('4', 'A5.05'), 'L4': ('1', 'A5.06')}.get(e['floor'], ('4', 'A5.05'))
     if sh not in HS:
         continue
     dims = tuple(sorted({v for mm in RX_FT.finditer(hs) for v in variantes(mm)}))
