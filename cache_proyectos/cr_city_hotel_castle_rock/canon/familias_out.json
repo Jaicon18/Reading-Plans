@@ -9,7 +9,7 @@
   "6\" parapet stud": 0.0,
   "bottom track (todos)": 0.0,
   "top / deflection track (todos)": 0.0,
-  "track de ceilings / soffits": 0.0,
+  "track de ceilings / soffits": 2414.06,
   "bracing C.R. channel": 0.0,
   "purlin (track to deck)": 0.0,
   "header / box beam": 0.0,
@@ -30,7 +30,7 @@
   "1/2\" EXTERIOR gyp sheathing": 0.0,
   "FRT plywood (SF)": 0.0,
   "FRT blocking": 0.0,
-  "5/8\" gyp board Type X": 84172.59,
+  "5/8\" gyp board Type X": 85589.47,
   "5/8\" gyp Type X W.R.": 28804.59,
   "8\" joist": 0.0,
   "USG drywall main tee (DGLW26)": 2515.59,
@@ -109,8 +109,8 @@
   "framing screws": 0.0,
   "slab pins": 0.0,
   "expansion anchors": 0.0,
-  "joint compound": 8985.02,
-  "joint tape": 46173.03,
+  "joint compound": 9087.04,
+  "joint tape": 46697.28,
   "deflection clips": 0.0,
   "framing screws heavy gauge": 0.0,
   "drywall screws heavy gauge": 0.0
@@ -2365,6 +2365,90 @@
    "ref": "CLG-L4-119 hanger wire",
    "source": "L4 421 Elec: structure 1/A5.06 8'-11 1/4\" roof ceiling line; ceiling not printed",
    "operacion": "ROUNDUP(11.0/16) = 1 hangers (4 ft x 4 ft) x drop 1.0 ft (8.94 structure - 0.0 ceiling) = 1.0"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L1-01 board",
+   "source": "L1 LOBBY coffer perimeters (10 coffers): perimeters on 1/A7.31: 2*(134.9+119.9)+2*(260.9+119.9)+6*2*(113.9+119.9)+2*(134.9+113.9)+2*(260.9+113.9) = 5324.0 pt /18 | 2/A7.31 & 4/A7.31 'DROPPED SOFFIT 1'-0 3/4\"' (= 12'-0 3/4\" - 11'-0\") | 2/A7.31, 4/A7.31, 5/A7.31, 7/A7.31",
+   "operacion": "295.78 LF x 1.063 ft vertical face = 314.41"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L1-01 track",
+   "source": "L1 LOBBY coffer perimeters (10 coffers): perimeters on 1/A7.31: 2*(134.9+119.9)+2*(260.9+119.9)+6*2*(113.9+119.9)+2*(134.9+113.9)+2*(260.9+113.9) = 5324.0 pt /18 | 2/A7.31 & 4/A7.31 'DROPPED SOFFIT 1'-0 3/4\"' (= 12'-0 3/4\" - 11'-0\") | 2/A7.31, 4/A7.31, 5/A7.31, 7/A7.31",
+   "operacion": "2 lines x 295.78 LF = 591.56 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L2-01 board",
+   "source": "L2 Corridor 216 perimeter band (both sides), 1/A7.23: (1206.0-446.8)/9 [E side] + (1004.5-523.2)/9 [W side to lobby] + (1271.0-1141.2)/9 [W side 221/210] = 84.36+53.48+14.42 | CONFIRMADO: 8'-4 1/2\" tags in bands on 1/A7.23 | 7/A7.23",
+   "operacion": "152.26 LF x (1.0 bottom + 0.542 vertical) = 234.78"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L2-01 track",
+   "source": "L2 Corridor 216 perimeter band (both sides), 1/A7.23: (1206.0-446.8)/9 [E side] + (1004.5-523.2)/9 [W side to lobby] + (1271.0-1141.2)/9 [W side 221/210] = 84.36+53.48+14.42 | CONFIRMADO: 8'-4 1/2\" tags in bands on 1/A7.23 | 7/A7.23",
+   "operacion": "2 lines x 152.26 LF = 304.52 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L2-02 board",
+   "source": "L2 Corridor 218 perimeter band (both sides), 1/A7.24: N: (1421.5-855.7)/9 + (1209.0-1141.6)/9 + (1617.35-1421.5)/9 = 62.87+7.49+21.76; S: (1478.0-799.2)/9 = 75.42 (S band includes MECHANICAL LOUVER IN COVE) | CONFIRMADO: 8'-4 1/2\" on 1/A7.24 | 7/A7.23 (typ.), 1/A7.24",
+   "operacion": "167.54 LF x (1.0 bottom + 0.542 vertical) = 258.35"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L2-02 track",
+   "source": "L2 Corridor 218 perimeter band (both sides), 1/A7.24: N: (1421.5-855.7)/9 + (1209.0-1141.6)/9 + (1617.35-1421.5)/9 = 62.87+7.49+21.76; S: (1478.0-799.2)/9 = 75.42 (S band includes MECHANICAL LOUVER IN COVE) | CONFIRMADO: 8'-4 1/2\" on 1/A7.24 | 7/A7.23 (typ.), 1/A7.24",
+   "operacion": "2 lines x 167.54 LF = 335.08 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L3-316 board",
+   "source": "L3 Corridor 316: 2 sides x (1206-441)/9 = 2 x 85.0 (A2.03), openings not deducted | A7.23 7 (typical corridor ceiling, drawn at L2 'Sim'): 8'-9\" A.F.F. box, 8'-11\" ceiling; vertical face 2\" + box bottom ~4 1/2\" wide |",
+   "operacion": "170.0 LF x (0.375 bottom + 0.542 vertical) = 155.89"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L3-316 track",
+   "source": "L3 Corridor 316: 2 sides x (1206-441)/9 = 2 x 85.0 (A2.03), openings not deducted | A7.23 7 (typical corridor ceiling, drawn at L2 'Sim'): 8'-9\" A.F.F. box, 8'-11\" ceiling; vertical face 2\" + box bottom ~4 1/2\" wide |",
+   "operacion": "2 lines x 170.0 LF = 340.0 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L3-318 board",
+   "source": "L3 Corridor 318: N side 62.8+21.8 (jog) ; S side (1484.6-799.5)/9=76.1 ; jog returns ~9.4 -> ~170 LF | A7.23 7 typical + A7.24 1 L2 dims 'Sim' |",
+   "operacion": "170.0 LF x (0.375 bottom + 0.542 vertical) = 155.89"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L3-318 track",
+   "source": "L3 Corridor 318: N side 62.8+21.8 (jog) ; S side (1484.6-799.5)/9=76.1 ; jog returns ~9.4 -> ~170 LF | A7.23 7 typical + A7.24 1 L2 dims 'Sim' |",
+   "operacion": "2 lines x 170.0 LF = 340.0 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L4-01 board",
+   "source": "L4 Lobby stair top (L4), gyp bd soffit enclosing FCU: full stair width = 7/A6.01 printed 8'-8 3/4\" |  | 11/A6.01: \"GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.\"",
+   "operacion": "8.73 x (6.59 bottom + 2.0 face) = 74.99"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L4-01 track",
+   "source": "L4 Lobby stair top (L4), gyp bd soffit enclosing FCU: full stair width = 7/A6.01 printed 8'-8 3/4\" |  | 11/A6.01: \"GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.\"",
+   "operacion": "2 lines x 8.73 LF = 17.46 (framed soffit 7/A7.23 / 2/A7.31)"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "SOF-L4-02 board",
+   "source": "L4 Corridor 412 perimeter cove/soffit (diffuser box) both sides: not dimensioned on L4 RCPs; would be measured along corridor walls | 7/A7.23 \"8'- 9\\\" A.F.F.\" (typical detail; L4 applicability assumed by identical RCP graphics) | 7/A7.23 WALL DETAIL - CORRIDOR CEILING (drawn at L3 datum): framed soffit 7 3/4\"+4 1/2\" wide, bottom 8'-9\" A.F.F., GYP-1 ceiling 8'-11\" A.F.F.; L4 RCPs 3/A7.23 & 3/A7.24 show the same double border line | LF NOT dimensioned on L4 RCP: loaded = corridor 412 wall LF 242.72 (resuelto_L4 walls facing 412), RFI-18",
+   "operacion": "242.72 LF x (0.375 bottom + 0.542 vertical) = 222.57"
+  },
+  {
+   "familia": "track de ceilings / soffits",
+   "ref": "SOF-L4-02 track",
+   "source": "L4 Corridor 412 perimeter cove/soffit (diffuser box) both sides: not dimensioned on L4 RCPs; would be measured along corridor walls | 7/A7.23 \"8'- 9\\\" A.F.F.\" (typical detail; L4 applicability assumed by identical RCP graphics) | 7/A7.23 WALL DETAIL - CORRIDOR CEILING (drawn at L3 datum): framed soffit 7 3/4\"+4 1/2\" wide, bottom 8'-9\" A.F.F., GYP-1 ceiling 8'-11\" A.F.F.; L4 RCPs 3/A7.23 & 3/A7.24 show the same double border line | LF NOT dimensioned on L4 RCP: loaded = corridor 412 wall LF 242.72 (resuelto_L4 walls facing 412), RFI-18",
+   "operacion": "2 lines x 242.72 LF = 485.44 (framed soffit 7/A7.23 / 2/A7.31)"
   },
   {
    "familia": "5/8\" gyp board Type X",
@@ -7030,19 +7114,19 @@
   },
   {
    "familia": "joint compound",
-   "valor": 8985.02,
+   "valor": 9087.04,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)]",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 84172.59 + 28804.59 + 11814.8 = 124791.98 SF) = 8985.02"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 85589.47 + 28804.59 + 11814.8 = 126208.86 SF) = 9087.04"
   },
   {
    "familia": "joint tape",
-   "valor": 46173.03,
+   "valor": 46697.28,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 84172.59 + 28804.59 + 11814.8 = 124791.98 SF) = 46173.03"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 85589.47 + 28804.59 + 11814.8 = 126208.86 SF) = 46697.28"
   },
   {
    "familia": "Level 5 finish",
@@ -7066,7 +7150,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "GA-216; A0.06, A0.08",
-   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 149750.38"
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 151450.63"
   },
   {
    "familia": "drywall screws heavy gauge",
@@ -7123,6 +7207,38 @@
    "estado": "DERIVADO",
    "source": "A8.00",
    "operacion": "no aplica: none scheduled for our trade (A7.19, A8.00)"
+  },
+  {
+   "familia": "stud reinforcement MEP",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06",
+   "operacion": "no aplica: no metal stud walls with MEP penetrations: wood framing (Div. 06); duct penetrations EXCLUDED (R-ALC-03)"
+  },
+  {
+   "familia": "extra framing ATM",
+   "valor": 0.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "A2.01",
+   "operacion": "no aplica: no ATM / equipment recess in the set"
+  },
+  {
+   "familia": "gypsum board jamb return",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "DERIVADO",
+   "source": "A8.02",
+   "operacion": "no aplica: window / door jamb returns carried as their own rows from ventanas_trim.json (A8.02 fenestration details) - not by the metal-opening tool (wood openings)"
+  },
+  {
+   "familia": "Level 5 finish",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "DERIVADO",
+   "source": "A7.19",
+   "operacion": "no aplica: no Level 5 area: 09 29 00 3.6.E.4 Level 4 under plaster / wallcovering and back of house; A7.19 TF-1 plaster or vinyl wallcovering everywhere (U-147 Level 4)"
   }
  ],
  "avisos": [
@@ -17999,8 +18115,8 @@
    "framing screws": 0.0,
    "slab pins": 0.0,
    "expansion anchors": 0.0,
-   "joint compound": 8985.02,
-   "joint tape": 46173.03,
+   "joint compound": 9087.04,
+   "joint tape": 46697.28,
    "Level 5 finish": 0.0,
    "deflection clips": 0.0,
    "framing screws heavy gauge": 0.0,
@@ -18008,10 +18124,10 @@
   },
   "estado": {
    "additional head track": "DERIVADO",
-   "stud reinforcement MEP": "PENDIENTE",
-   "extra framing ATM": "PENDIENTE",
+   "stud reinforcement MEP": "DERIVADO",
+   "extra framing ATM": "DERIVADO",
    "2-1/2\" CFMF coiling grille head": null,
-   "gypsum board jamb return": "PENDIENTE",
+   "gypsum board jamb return": "DERIVADO",
    "PVC trim at FRP": "DERIVADO",
    "PAFs and duct sleeves": "DERIVADO",
    "access panel": "DERIVADO",
@@ -18021,7 +18137,7 @@
    "expansion anchors": "DERIVADO",
    "joint compound": "DERIVADO",
    "joint tape": "DERIVADO",
-   "Level 5 finish": "PENDIENTE",
+   "Level 5 finish": "DERIVADO",
    "deflection clips": "DERIVADO",
    "framing screws heavy gauge": "DERIVADO",
    "drywall screws heavy gauge": "DERIVADO"
@@ -18078,10 +18194,10 @@
  "rfis_accesorios": [],
  "estado_accesorios": {
   "additional head track": "DERIVADO",
-  "stud reinforcement MEP": "PENDIENTE",
-  "extra framing ATM": "PENDIENTE",
+  "stud reinforcement MEP": "DERIVADO",
+  "extra framing ATM": "DERIVADO",
   "2-1/2\" CFMF coiling grille head": null,
-  "gypsum board jamb return": "PENDIENTE",
+  "gypsum board jamb return": "DERIVADO",
   "PVC trim at FRP": "DERIVADO",
   "PAFs and duct sleeves": "DERIVADO",
   "access panel": "DERIVADO",
@@ -18091,7 +18207,7 @@
   "expansion anchors": "DERIVADO",
   "joint compound": "DERIVADO",
   "joint tape": "DERIVADO",
-  "Level 5 finish": "PENDIENTE",
+  "Level 5 finish": "DERIVADO",
   "deflection clips": "DERIVADO",
   "framing screws heavy gauge": "DERIVADO",
   "drywall screws heavy gauge": "DERIVADO"

@@ -160,6 +160,29 @@ def main():
             {"ref": f"{ref} cross tee", "familia": "USG drywall cross tee (DGLW424)", "qty": round(A / (16 / 12.0), 2), "op": f"{A} SF / 1.333 ft o.c. = {round(A / (16 / 12.0), 2)}", "source": f"{room}: cross tees 16 in. o.c. for 5/8 in. board (manufacturer, not printed)"},
             {"ref": f"{ref} angle molding", "familia": "USG angle molding (DGWM24)", "qty": per, "op": f"4 x sqrt({A}) = {per} (square-equivalent perimeter, DERIVED: room polygon perimeter not read)", "source": f"{room}: wall angle at perimeter"},
             {"ref": f"{ref} hanger wire", "familia": "hanger wire", "qty": round(math.ceil(A / 16.0) * drop, 2), "op": f"ROUNDUP({A}/16) = {math.ceil(A / 16.0)} hangers (4 ft x 4 ft) x drop {drop} ft ({st} structure - {h} ceiling) = {round(math.ceil(A / 16.0) * drop, 2)}", "source": f"{room}: structure {sts}; ceiling {c.get('height_source') or ''}"[:500]}]
+    # SOFFITS / corridor cove bands (readers' soffits[]): board = LF x (bottom width + vertical face) per layer; framing
+    # = 2 lines of ceiling / soffit track per LF (7/A7.23 framed soffit). LF not printed = RFI-18 (load per rule below).
+    for fl, d in sorted(floors.items()):
+        corr_lf = sum(float(w.get('length_ft') or 0) for w in d['walls'] if re.search(r'\b412\b|CORRIDOR 412', str(w.get('location') or ''), re.I))
+        for si, s in enumerate(d.get('soffits') or []):
+            sid = s.get('id') or f"SOF-{fl}-{si + 1:02d}"
+            lf = s.get('lf') if s.get('lf') is not None else s.get('length_ft')
+            loc = str(s.get('location') or s.get('where') or s.get('room') or '')
+            src0 = f"{fl} {loc}: {s.get('lf_op') or s.get('length_source') or ''} | {s.get('height_source') or s.get('bottom_source') or ''} | {s.get('detail') or s.get('note_printed') or ''}"[:600]
+            if lf is None and fl == 'L4' and 'Corridor 412' in loc and corr_lf:
+                lf = round(corr_lf, 2); src0 += f" | LF NOT dimensioned on L4 RCP: loaded = corridor 412 wall LF {lf} (resuelto_L4 walls facing 412), RFI-18"
+            if lf is None:
+                rfis.append({"id": "RFI-18", "item": sid, "floor": fl, "assumption_loaded": "not loaded (LF not dimensioned)", "delta": "LF x height"}); continue
+            lf = float(lf)
+            if 'coffer' in loc.lower():
+                bsf = lf * float(s.get('height_ft') or 0); op = f"{lf} LF x {s.get('height_ft')} ft vertical face = {round(bsf, 2)}"
+            elif s.get('depth_ft'):
+                bsf = lf * (float(s['depth_ft']) + float(s.get('drop_ft') or 0)); op = f"{lf} x ({s['depth_ft']} bottom + {s.get('drop_ft') or 0} face) = {round(bsf, 2)}"
+            else:
+                wdt = float(s.get('width_ft') or 0.375); vf = float(s.get('vertical_face_ft') or 0.542)
+                bsf = lf * (wdt + vf); op = f"{lf} LF x ({wdt} bottom + {vf} vertical) = {round(bsf, 2)}"
+            misc.append({"ref": f"{sid} board", "familia": '5/8" gyp board Type X', "qty": round(bsf, 2), "op": op, "source": src0})
+            misc.append({"ref": f"{sid} track", "familia": "track de ceilings / soffits", "qty": round(2 * lf, 2), "op": f"2 lines x {lf} LF = {round(2 * lf, 2)} (framed soffit 7/A7.23 / 2/A7.31)", "source": src0})
     ex.sort(key=lambda e: (ORDER.index(e['type']) if e['type'] in ORDER else len(ORDER), e['floor'], e['id']))
     canon = {"project": "CR City Hotel - 415 Perry Street, Castle Rock CO 80104 (Meridian 105, Permit 4.22.2026)",
              "constants": {"plan_scale_by_sheet": escala},

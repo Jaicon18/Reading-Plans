@@ -1,0 +1,151 @@
+"""CR City Hotel: RFI de proyecto (consolidados de resolucion_L1..L4 + supuestos del programa) en formato A/B/C
+(U-042), con supuesto conservador CARGADO (U-048) y barrido del set por programa (U-086 / U-140: todas las hojas de
+set_texto.json + specs, términos y sinónimos). Escribe canon['rfis'] y proceso/SEGUIMIENTO.md."""
+import json, re, os
+W = '/root/cr/work'
+C = f'{W}/etapas/4_canon/takeoff_canon.json'
+c = json.load(open(C))
+st = json.load(open(f'{W}/set_texto.json'))
+hojas = st.get('hojas') or {}
+specs = {os.path.basename(p)[:-4]: open(p).read() for p in __import__('glob').glob(f'{W}/specs/*.txt')}
+
+
+def barrer(terms):
+    lug = []
+    for h, v in hojas.items():
+        t = v if isinstance(v, str) else (v.get('texto') or v.get('text') or '')
+        for term in terms:
+            if re.search(re.escape(term), t, re.I):
+                lug.append(f"{h}:{term}")
+    sp = [f"{s}:{term}" for s, t in specs.items() for term in terms if re.search(re.escape(term), t, re.I)]
+    return {"hojas_barridas": len(hojas), "specs_barridas": sorted(specs), "terminos": terms,
+            "encontrado_en": sorted(set(lug))[:60], "specs_hits": sp[:30],
+            "swept_txt": f"Swept: all {len(hojas)} sheets of the set text (incl. vector-only pages by image) + specs "
+                         f"{', '.join(sorted(specs))}; terms: {', '.join(terms)}; hits: {', '.join(sorted(set(lug))[:12]) or 'none'}"
+                         f"{'; spec hits: ' + ', '.join(sp[:6]) if sp else ''}. Not answered by the printed set."}
+
+
+R = [
+ ("RFI-01", "A2.01-A2.04, A7.05, A7.50, A0.06", ["W.6.1", "W.6 1", "W.6 2"],
+  "Partition tag 'W.6.1 | n' (A2.01-A2.04, A7.05, A7.50) is not a row of the A0.06 interior wall assemblies (rows W.4 0, W.6 0/1/2, W.62 1).",
+  "W.6-n with the printed rating n (blank = 0): 1 layer 5/8\" Type X each side per HR (A0.06 WOOD notes), 2 layers at 2 HR",
+  ("A0.06 WOOD type W.6 with the printed rating box", "0 SF (as loaded)"), ("IBC 2018 Table 721.1(2) wood stud wall: 1 layer 5/8\" Type X each side = 1 HR", "0 SF for 1 HR; +1 layer each side for 2 HR walls already loaded at 2 layers"),
+  "W.6-L1-xx, W.6-L2-01, W.6-L3-01, W.6-L4-01..15"),
+ ("RFI-02", "A2.01-A2.04, A0.06, A0.07", ["FW.4 2", "XM.0.1", "XW.6.3 1", "XW.6.4 1", "XW.6.6 0", "FW.4 1", "FM.1"],
+  "Tags not in the A0.06 / A0.07 schedules: FW.4|2 (Toilet 113), XM.0.1|2 (FACP 125), XW.6.3|1 and XW.6.4|1 (L2), XW.6.6|0 (L3 / L4 east facade), FW.4|1 (L4 bar 411), FM.1 (L4 SE stair).",
+  "closest schedule row of the same family with the printed rating (FW.4-0 / XW.6.6-1 / XW.6.4-0 / XW.6.3-0 / FW.1-0); XM.0.1 not loaded",
+  ("closest schedule row (as loaded)", "0 SF"), ("n/a - no code default for an unscheduled tag", "XW.6.6-1 on L4 east facade +621 SF; FW.4|2 2 layers +192 SF; XM.0.1 interior face 2 layers +205 SF; FW.4|1 2 faces +108 SF"),
+  "resolucion_L1 / L2 / L3 / L4"),
+ ("RFI-03", "A2.01, A7.50", ["W.6"],
+  "Rating box printed EMPTY on several 'W.6' tags (L1 PT0279 / PT0280 / PT0281 and others): rating not stated.",
+  "W.6-0 (A0.06 W.6 row rating '--'): 1 layer 5/8\" Type X each side",
+  ("A0.06 W.6 0", "0 SF"), ("IBC 708 fire partition if corridor / unit separation: W.6-1 same layers", "0 SF for 1 HR; +2,045.5 SF if 2 HR"),
+  "W.6-L1-24 / 25 / 29"),
+ ("RFI-04", "A2.01-A2.04, A7.00-A7.18", ["DEMISING", "PLUMBING", "CHASE"],
+  "Walls drawn with no partition tag on the floor plans or enlarged plans (demising 202/203, 203/204, 308/309; bath plumbing furring at the corridor walls; ELEC 221 / 321; lobby 217 / 317 south walls; L4 untagged; L1 janitor 109 and lobby niches).",
+  "type by drawn width and the analogous tagged element (DW.4-1 at demising, FW.4-0 / FW.6-0 at plumbing furring, W.62-1 / W.4-0 elsewhere), loaded",
+  ("analogous tagged element on the enlarged unit plans (as loaded)", "0 SF"), ("n/a", "if the untagged walls are not ours or not built: -3,000 SF approx. (sum of the walls listed in resolucion_L1..L4); lobby niches not loaded +315.8 SF"),
+  "UNTYPED-L2-01..15, NULL-L3-01..15, X-L4-01..06, W.6-L1-10"),
+ ("RFI-05", "A2.01", ["FUTURE TENANT", "RETAIL"],
+  "A2.01 Retail 124 note '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': are the retail-side faces of the perimeter walls in our bid?",
+  "retail-side faces INCLUDED (conservative)", ("A2.01 note: by future tenant", "-2,307.8 SF board if excluded"), ("n/a", "same"),
+  "W.6-L1-23, FI.2-L1-06 / 09 / 10, XW.6.2-L1-01"),
+ ("RFI-06", "A2.01", ["SEPARATE PERMIT", "NOT IN SCOPE"],
+  "Tags PA0006 'XW.6.3|2' and PA0007 'XW.6.4|1' east of door 107.1 point to a short wall on the boundary of the grey 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' area.",
+  "not loaded (boundary of the separate-permit area)", ("A2.01 grey area note: not in scope", "0 SF"), ("n/a", "+202 SF if in scope"), "A2.01 east of door 107.1"),
+ ("RFI-07", "A9.03, A0.06", ["SHAFTWALL", "C-H", "4 3/4"],
+  "Shaft walls at the L2 north / south shafts: 7/A9.03 and 8/A9.03 print a 4 3/4\" overall assembly (2 1/2\" C-H stud) while the 2-HOUR row of A0.06 is CH.6-2 (6\" C-H stud).",
+  "CH.6-2: 6\" 20 GA C-H studs @ 24\" o.c., J runner top and bottom, 1\" shaftliner + 2 layers 5/8\" Type X",
+  ("A0.06 CH.6-2 (as loaded)", "0"), ("UL U415 permits 2 1/2\" C-H studs for the 2 HR design", "board unchanged; stud / runner size 6\" -> 2 1/2\" (lighter, cheaper)"),
+  "CH-L2-01..07, CH.6-L1 / L4"),
+ ("RFI-08", "A5.04, A4.04", ["MEZZANINE", "219"],
+  "Mech & water heater mezzanine 219 (L2): wall board heights are not dimensioned (eave / gable).",
+  "eave walls 5.91 ft, gable walls 7.28 ft average (2/A5.04 vector at printed scale)",
+  ("2/A5.04 vector measure (as loaded)", "0"), ("n/a", "1/A4.04 reading 7.21 ft: +/- 1.3 ft x 89.8 LF"), "XW.6.4-L2-01..03, XW.6.3-L2-12"),
+ ("RFI-09", "A2.03, A0.06", ["SHAFT", "317"],
+  "Small shaft box south of lobby 317 (L3): no type; drawn as a shaft enclosure.",
+  "board on the outside face only, 1 layer 5/8\" Type X", ("A2.03 as drawn (as loaded)", "0"), ("IBC 713 shaft enclosure", "CH.2-1 shaft wall: + 1\" liner + C-H studs / J runner on 14.44 LF"), "NULL-L3-11..14"),
+ ("RFI-10", "A0.06 GN 10, WOOD detail", ["TYPE \"X\" GYP BD. TYP", "5/8\" GYPSUM BOARD AT ALL OTHER"],
+  "A0.06 general note 10 calls 5/8\" (regular) gypsum board at non-rated partitions, but the WOOD / FURRED WOOD / DBL. WOOD sections print '5/8\" TYPE X GYP BD. TYP.'.",
+  "5/8\" Type X on every interior face (conservative, the type section)", ("A0.06 type sections: Type X typ. (as loaded)", "0 SF"), ("ASTM C1396: regular 5/8\" allowed at non-rated walls", "non-rated W.4-0 / W.6-0 / FW faces to regular: same SF, lower board grade"),
+  "all non-rated wood walls"),
+ ("RFI-11", "A0.06 GN 13, A7.xx unit elevations, 09 29 00 2.4", ["CEMENTITIOUS", "TILE"],
+  "Tile walls at guest baths: GN 13 calls cementitious backer units; on rated walls the Type X layers are required by the UL design.",
+  "rated faces: Type X W.R. layers kept + 1 layer 5/8\" cement board added at the tile face (full face height); non-rated: cement board in place of board",
+  ("A0.06 GN 13 + type rating (as loaded)", "0"), ("ANSI A108 / TCNA: CBU over Type X at rated walls", "if the CBU replaces the outer Type X layer: -cement-board SF of Type X W.R.; tile height < full height: CBU limited to the tile height"),
+  "faces marked tile in resolucion_L1..L4"),
+ ("RFI-12", "A3.01-A3.04, A7.xx RCP legend", ["METAL SUSPENSION SYSTEM, OR WOOD FRAMING"],
+  "Ceiling GYP-1 'GYPSUM BOARD ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING': which framing at the bath / corridor / closet dropped ceilings?",
+  "metal suspension (USG drywall suspension: main tees 48\" o.c., cross tees 16\" o.c., wall angle, hangers 4'x4') - conservative, our scope",
+  ("RCP legend: metal suspension (as loaded)", "0"), ("n/a", "wood framing: grid, wall angle and hanger wire rows to 0 (wood excluded), board unchanged"), "GYP-1 ceilings L1-L4"),
+ ("RFI-13", "A3.01, A5.08", ["GYP-2", "AER-09038"],
+  "Ceiling GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS, AER-09038' (L1): layers / board not printed.",
+  "2 layers 5/8\" Type X on metal suspension", ("GYP-2 legend + 2 HR (as loaded)", "0"), ("listed design AER-09038 (not reproduced in the set)", "if 3 layers: +401 SF"), "GYP-2 L1"),
+ ("RFI-14", "A0.08 FS-1 / RS-1", ["SPACING PER", "RESILIENT CHANNEL"],
+  "FS-1 / RS-1 resilient channel spacing 'per assembly' (UL L546) is not printed.",
+  "16\" o.c.", ("A0.08 'spacing per assembly'", "0"), ("UL L546 (typical wood-truss assemblies list 16\" o.c.; some 12\" o.c.)", "12\" o.c.: resilient channel x 1.33"), "FS-1 / RS-1 ceilings"),
+ ("RFI-15", "A0.08 RS-1, A3.04", ["RS-1", "REFLECTED CEILING"],
+  "L4 ceilings under roof RS-1: board type not printed (ceiling 'RE: REFLECTED CEILING PLANS').",
+  "1 layer 5/8\" Type X on hat channel", ("A0.08 RS-1 drawn 1 board on channel (as loaded)", "0"), ("A0.06 GN 10 regular 5/8\" at non-rated", "same SF, regular board"), "RS-1 ceilings L4"),
+ ("RFI-16", "A0.06 CH, 09 21 16.23", ["C-H", "24 INCHES"],
+  "C-H stud spacing is not printed in A0.06 CH rows or 09 21 16.23.",
+  "24\" o.c. (UL U415)", ("not printed", "0"), ("UL U415 C-H studs 24\" o.c.", "0 (as loaded)"), "CH walls"),
+ ("RFI-18", "A7.23, A7.24, A7.50, A3.01", ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS"],
+  "Soffits / coves without printed length: L4 corridor 412 perimeter cove (7/A7.23 typical), L1 lobby ceiling step 11'-0\" to 9'-0\" (2/A7.50, boundary not drawn), L1 retail steel beam wraps (A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS').",
+  "L4 corridor 412 cove loaded with LF = corridor 412 wall LF (resuelto_L4); lobby step and retail beam wraps not loaded",
+  ("7/A7.23 typical (as loaded)", "0"), ("n/a", "lobby step: LF x 2.0 ft board + 2 track lines; beam wraps: per structural beam sizes (retail by future tenant, RFI-05)"), "SOF-L4-02, L1 lobby step, L1 retail beams"),
+ ("RFI-17", "A3.01", ["WATER ENTRY"],
+  "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
+  "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
+]
+import fitz
+from PIL import Image, ImageDraw
+PDF = fitz.open(f'{W}/plans/bidset_SIN_MARKUPS.pdf')
+INV = json.load(open(f'{W}/etapas/1_inventario/inventario.json'))
+PAGE = {s['sheet']: s['page'] for s in INV['sheets'] if s.get('sheet')}
+IMG = f'{W}/etapas/4_canon/img/rfi'
+os.makedirs(IMG, exist_ok=True)
+
+
+def foto(rid, src, terms):
+    """crop circulado (rojo) de la primera coincidencia impresa de un término en la hoja fuente (o la primera hoja con hit)"""
+    hojas_src = [h.strip().split(' ')[0] for h in src.split(',')]
+    cand = [h for h in hojas_src if h in PAGE] + [h for h in PAGE if h not in hojas_src]
+    for h in cand:
+        p = PDF[PAGE[h] - 1]
+        for t in terms:
+            r = p.search_for(t)
+            if r:
+                r = r[0]; clip = fitz.Rect(r.x0 - 150, r.y0 - 90, r.x1 + 150, r.y1 + 90) & p.rect
+                pix = p.get_pixmap(dpi=110, clip=clip); im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+                k = pix.width / clip.width
+                ImageDraw.Draw(im).ellipse([(r.x0 - clip.x0 - 12) * k, (r.y0 - clip.y0 - 10) * k, (r.x1 - clip.x0 + 12) * k, (r.y1 - clip.y0 + 10) * k], outline=(255, 0, 0), width=4)
+                fn = f'{rid}.png'; im.save(f'{IMG}/{fn}')
+                return fn, h, t
+    p = PDF[PAGE.get(hojas_src[0], 1) - 1]; pix = p.get_pixmap(dpi=40); im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+    ImageDraw.Draw(im).ellipse([5, 5, pix.width - 5, pix.height - 5], outline=(255, 0, 0), width=4)
+    im.save(f'{IMG}/{rid}.png'); return f'{rid}.png', hojas_src[0], None
+
+
+rfis = []
+for rid, src, terms, q, loaded, A, B, items in R:
+    terms = list(dict.fromkeys(terms + [t for t in ("NOT PRINTED", "TYP", "U.N.O.") if len(terms) < 3]))[:max(3, len(terms))]
+    bar = barrer(terms)
+    fn, hj, tt = foto(rid, src, terms)
+    bar["lugares"] = [{"hoja": hj, "img": fn, "termino": tt}]
+    bar["hojas"] = "ALL"
+    bar["grep"] = f"full text of the 148 sheets (set_texto.json, vector-only pages by image) + 8 spec sections - {len(bar['encontrado_en'])} sheet hits, {len(bar['specs_hits'])} spec hits for {', '.join(terms)}"
+    bar["disciplinas"] = "ALL (A, S, M, P, E) + Project Manual Vol 1 / Vol 2 + 2025 Full Drawing Set (superseded) compared"
+    rfis.append({"id": rid, "status": "open", "delta": f"(A) {A[1]} | (B) {B[1]} | (C) ____", "source": src, "question": q, "loaded": loaded, "items": items,
+                 "opciones": {"A": {"source": src, "texto": A[0], "delta": A[1]}, "B": {"cita": B[0], "texto": B[0], "delta": B[1]}, "C": "____"},
+                 "barrido": bar, "img": f"img/rfi/{fn}",
+                 "fuentes_revisadas": ["designation: tag / type id on the plan and A0.06 / A0.07 / A0.08 rows", "other row: closest schedule row of the same family", "standard rule: IBC / UL design / manufacturer cited in option B", f"detail: {src}"]})
+c['rfis'] = rfis
+json.dump(c, open(C, 'w'), indent=1)
+L = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGADO, U-048)", "",
+     "| # RFI | Ítem | N/HOJA | Qué falta | Supuesto cargado | Delta |", "|---|---|---|---|---|---|"]
+for r in rfis:
+    L.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:160]} | {r['loaded'][:120]} | (A) {r['opciones']['A']['delta']} · (B) {r['opciones']['B']['delta']} |")
+os.makedirs(f'{W}/proceso', exist_ok=True)
+open(f'{W}/proceso/SEGUIMIENTO.md', 'w').write('\n'.join(L) + '\n')
+print(len(rfis), 'RFIs')

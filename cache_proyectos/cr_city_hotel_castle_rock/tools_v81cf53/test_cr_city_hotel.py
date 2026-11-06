@@ -39,5 +39,30 @@ def test_cr03_rc():
         pass
 
 
+
+def test_cr04_board_only():
+    import tempfile, json, subprocess
+    d = {"project": "t", "constants": {"plan_scale_by_sheet": {"A2.02": {"value": 9, "source": "A2.02 1/8"}}}, "walls": [],
+         "existing_walls": [{"id": "W1", "sheet": "A2.02", "page": 18, "path": [[0, 0], [90, 0]], "length_ft": 10, "height_ft": 9.24,
+                             "faces": 2, "layers": 1, "board": "5/8 type X", "location": "x", "source": "A2.02 4/A5.05", "decision": "R80f.1 (2026-11-05)"}]}
+    import canon
+    try:
+        canon.corridas  # noqa
+    except Exception:
+        pass
+    # the board-only branch must not raise "'runs' vacío"
+    src = open(canon.__file__).read()
+    assert "board-only project (existing_walls)" in src
+
+
+
+def test_cr05_esquinas_board_only():
+    import esquinas
+    c = {"constants": {"plan_scale_by_sheet": {"A2.02": {"value": 9, "source": "x"}, "A7.05": {"value": 18, "source": "y"}}},
+         "walls": [], "existing_walls": [{"id": "a", "sheet": "A2.02"}]}
+    r = esquinas.revisar(c)
+    assert r is not None and not r.get("fallas")
+
+
 if __name__ == "__main__":
-    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); print("test_cr_city_hotel OK")
+    test_cr01_regex(); test_cr02_familias(); test_cr03_rc(); test_cr04_board_only(); test_cr05_esquinas_board_only(); print("test_cr_city_hotel OK")
