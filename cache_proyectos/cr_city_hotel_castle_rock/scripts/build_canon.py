@@ -22,7 +22,8 @@ def limpia(t, rfi=None):
     t = re.sub(r"(?i)'?rated wall continuous to underside of roof sheathing'?", GN21, t)
     t = re.sub(r"\b0\d/(A\d\.\d\d)", r"\1", t)
     t = re.sub(r"[\w./-]*\.json\b", "the reading file", t)
-    t = re.sub(r"\by\b", "Y", t)
+    t = re.sub(r"\b[yY]\s*=?\s*(?=-?\d)", "vertical coord ", t)   # U-119: la coordenada 'y' no es la conjunción
+    t = re.sub(r"\b[yY]\b", "vertical", t)
     if rfi and re.search(r"(?i)not printed|assum|blank|empty", t) and 'RFI-' not in t:
         t += f" ({rfi})"
     return t

@@ -85,7 +85,7 @@ for (sh, fl0), d in sorted(segs.items()):
                                     "walls": [s['ids'][0], t['ids'][0]]})
     # extremos libres: jamb de door opening = esquina del bbox de un door swing (arco vectorial de 2-4.5 ft) a <= 0.9 ft,
     # u otro extremo libre a 2.0-4.5 ft (vano)
-    pg0 = doc[L[0]['page']]
+    pg0 = doc[L[0]['page'] - 1]
     if pg0.number not in ARCOS:
         bx = []
         for dr in pg0.get_drawings():
@@ -121,7 +121,7 @@ for (sh, fl0), d in sorted(segs.items()):
     lf = round(sum(c['n'] * c['h'] for c in corners), 2)
     fl = fl0
     # imagen circulada
-    pg = doc[L[0]['page']]
+    pg = doc[L[0]['page'] - 1]
     img = None
     if corners:
         sh_ = pg.new_shape()

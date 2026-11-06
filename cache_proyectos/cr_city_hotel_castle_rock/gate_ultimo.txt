@@ -1,0 +1,255 @@
+PASS  CE_ENTREGABLES           U-011, U-048
+PASS  CE_ESTANDAR_OREILLY      U-145, U-148
+PASS  CE_SIN_PROPOSAL          U-015, U-150
+PASS  CE_PROPOSAL              U-150
+PASS  CE_FORMATO_EXCEL         BE-43, U-003, U-016, U-121
+PASS  CE_TORNILLERIA           U-053
+PASS  CE_TRACK_FAMILIAS        BE-24, U-056
+PASS  CE_FUENTES_MS            BE-40, U-025, U-115
+PASS  CE_DATOS_PROYECTO        BE-114, R-ALC-08, R-ALC-09, U-076, U-077
+PASS  CE_TIEMPOS               U-094
+PASS  CE_HORAS_CALIFORNIA      U-045
+PASS  CE_SIN_DOLARES           BE-131, U-018, U-123
+PASS  CE_DRIVE_PARENT          U-001, U-004, U-090, U-122
+PASS  CE_RFI_FORMATO           U-042, U-048, U-052, U-116
+PASS  CE_RFI_PROHIBIDOS        R-ALC-01, R-ALC-03, R-ALC-05, R-ALC-07, U-053, U-061, U-064,
+FAIL  CE_RFI_BARRIDO_IMPRESO   BE-101, BE-120, BE-125, BE-CF16, BE-HF18, U-019, U-052, U-08
+        - RFI-04: posible respuesta IMPRESA en A8.02: 'A8.02 1 1/2" = 1'-0" 1 SECTION DETAIL - TYPICAL WIDOW SILL - WOOD SIDING 1 1/2" = 1'-0" 2 TYPICAL WINDOW HE' — se aplica con N/HOJA o se registra en barrido.descartes['A8.02']
+        - RFI-04: posible respuesta IMPRESA en A9.01: ', COLOR: GREY VPOR BARRIER BELOW SLAB, TYPICAL LEVEL 1 6197.75' 5 8" 1' - 2 1/4" F.O.F. 8 3/4" 2 3/4" 2 3/' — se aplica con N/HOJA o se registra en barrido.descartes['A9.01'] 
+        - RFI-04: posible respuesta IMPRESA en A9.02: 'LEVEL 2 6211.75' TYPICAL 2' - 0 3/4" 5' - 11" 2' - 1 1/2" 1/4" PERCISION CUT ALUMINU' — se aplica con N/HOJA o se registra en barrido.descartes['A9.02'] por qué no contesta
+        - RFI-04: posible respuesta IMPRESA en A9.04: 'SHING PROVIDED BY GUTTER MANUFACTURER, TYPICAL P Q 1' - 0" 1' - 0" LVL BEAM PACK ZINC BREAK METAL WRAP INT' — se aplica con N/HOJA o se registra en barrido.descartes['A9.04'] 
+        - RFI-04: posible respuesta IMPRESA en A9.05: 'AR DECK 1 1/2" = 1'-0" 13 ROOF DETAIL - TYPICAL PARAPET CAP 1 1/2" = 1'-0" 10 ROOF DETAIL - PARAPET CAP AT' — se aplica con N/HOJA o se registra en barrido.descartes['A9.05'] 
+        - RFI-04: posible respuesta IMPRESA en AZ7.03: 'TO EXTEND UNDER WOOD , | DILEX CASEWORK TYPICAL 3 Elevation Elevation Elevation 3/8" = 1'-0" 3/8" = 1'-0" 3' — se aplica con N/HOJA o se registra en barrido.descartes['AZ7.03
+PASS  CE_RFI_BUSQUEDA_EXHAUSTIVA U-140
+PASS  CE_ATRIBUCION_ESTIMADOR  BE-101, U-052
+PASS  CE_DECISIONES_EN_EXCEL   U-016, U-050
+PASS  CE_SEGUIMIENTO           U-048
+FAIL  CE_ALTURA_IMPRESA        BE-119, BE-134, R80f.29, U-010, U-088, U-099
+        - 165 RED / 16 AMBER de 765
+        - CH.6-L4-01 A: CH.6-L4-01 A: Depth 8.940 vs printed source H 8.938 (printed dimension, 1/A5.06, 3/A5.07)
+        - CH.6-L4-01 B: CH.6-L4-01 B: Depth 8.940 vs printed source H 8.938 (printed dimension, 1/A5.06, 3/A5.07)
+        - CH.6-L4-02 A: CH.6-L4-02 A: Depth 8.940 vs printed source H 8.938 (printed dimension, 1/A5.06, 3/A5.07)
+        - CH.6-L4-02 B: CH.6-L4-02 B: Depth 8.940 vs printed source H 8.938 (printed dimension, 1/A5.06, 3/A5.07)
+        - CH.6-L4-03 A: CH.6-L4-03 A: Depth 8.940 vs printed source H 8.938 (printed dimension, 1/A5.06, 3/A5.07)
+AMBER CE_MATERIALES_SCHEDULE   BE-122, BE-126, BE-134, R80f.30, R80f.34, U-111
+        - type W.4-0: AMBER (el schedule no lo dice)
+        - type W.6-0: AMBER (el schedule no lo dice)
+        - type W.6-1: AMBER (el schedule no lo dice)
+        - type W.6-2: AMBER (el schedule no lo dice)
+        - type W.62-1: AMBER (el schedule no lo dice)
+        - type FW.1-0: AMBER (el schedule no lo dice)
+PASS  CE_MARKUPS_EXCEL         BE-117, BE-44, U-010, U-121
+FAIL  CE_AUDITORIA             BE-42, U-005, U-007, U-011, U-121
+        - 50 de 2506
+        - 3 Area vs SF <= 0.5 % · L2 Linen 222 · Area 226.94 / SF 19.40 (1069.81 %)
+        - 3 Area vs SF <= 0.5 % · L2 Cleaning 223 · Area 201.39 / SF 8.70 (2214.80 %)
+        - 3 Area vs SF <= 0.5 % · L2 Elec 221 · Area 212.13 / SF 6.00 (3435.55 %)
+        - 3 Area vs SF <= 0.5 % · L3 ELEC 321 · Area 12.69 / SF 9.70 (30.87 %)
+        - 3 Area vs SF <= 0.5 % · L3 322 Linen · Area 198.96 / SF 19.40 (925.58 %)
+FAIL  CE_REGLAS                BE-116, BE-117, BE-134, BE-CF08, BE-CF16, R-ALC-11, R-ALC-12
+        - reglas.py rc 1, 20 fallas
+        - S:§1:2fab33 · bitacora · NUNCA SE CORRIO un script que importa closer.py  -- cantidades selladas por closer.py (un numero sin sello no se entrega)
+        - S:§1:2fab33 · bitacora · NUNCA SE CORRIO un script que importa planmark.py  -- evidencia visual circulada con planmark.py
+        - S:§1:2fab33 · bitacora · NUNCA SE CORRIO inventario.py  -- inventario cerrado de walls contra la planta: bandas, solapes, apilados, MR, purlin, zonas (v63)
+        - S:§1:2fab33 · bitacora · NUNCA SE CORRIO test_ciego.py|test_ciego_tools.py  -- protocolo ciego E24: skill y tools sin valores de examen (v67)
+        - S:§1:2fab33 · bitacora · EXCEL: Material Summary 'Additional head track at openings over 4'-0" wide': N/SHEET: default (no sheet) - la fila debe citar la hoja / spec de donde sale (la hoja va en la fuente del ítem, no so
+PASS  CE_COPIA_LIMPIA          BE-CF24, U-051
+PASS  CE_COMPARATIVA_BANCO     U-130
+PASS  CB_U_017                 U-017
+AMBER CB_BE_08                 BE-08, CC-R4d
+        - sin canon: no se puede probar
+PASS  CB_U_026                 BE-108, U-026
+PASS  CB_CC_R1                 CC-R1
+PASS  CB_CC_R5                 CC-R5
+PASS  CB_CC_R7                 CC-R7
+PASS  CB_CC_R12                CC-R12
+PASS  CB_U_146                 U-146
+PASS  CB_U_147                 U-147
+FAIL  CB_U_034                 BE-137, BE-59, R80f.39, U-034
+        - lectura B incompleta: hojas sin walls ['A7.55'], types sin walls [], falta vs la otra [] (477 walls / 5218.65 LF)
+AMBER CB_U_035                 BE-65, U-035
+        - sin canon: no se puede probar
+FAIL  CB_U_037                 BE-142, BE-72, U-037
+        - type W.6 en A2.01: 2 tag(s) del inventario y 0 walls
+        - type W.6 en T0.01: 2 tag(s) del inventario y 0 walls
+PASS  CB_U_043                 BE-94, U-043
+PASS  CB_U_051                 BE-100, U-051
+AMBER CB_U_057                 BE-110, U-057
+        - sin canon: no se puede probar
+AMBER CB_U_058                 BE-111, U-058
+        - sin canon: no se puede probar
+PASS  CB_BE_CF01               BE-CF01, U-079
+PASS  CB_U_081                 BE-CF06, U-081
+PASS  CB_U_082                 R-ALC-10, U-082
+PASS  CB_R_ALC_02              R-ALC-02
+PASS  CB_R_ALC_04              BE-135, R-ALC-04
+PASS  CB_BE_01                 BE-01
+PASS  CB_BE_02                 BE-02, CC-R4c
+PASS  CB_BE_03                 BE-03
+AMBER CB_BE_04                 BE-04
+        - sin canon: no se puede probar
+AMBER CB_BE_05                 BE-05
+        - sin canon: no se puede probar
+AMBER CB_BE_06                 BE-06
+        - sin canon: no se puede probar
+PASS  CB_BE_07                 BE-07
+AMBER CB_BE_09                 BE-09
+        - sin canon: no se puede probar
+PASS  CB_BE_10                 BE-10
+PASS  CB_BE_11                 BE-11
+PASS  CB_BE_12                 BE-12, R80f.36
+PASS  CB_BE_13                 BE-13
+PASS  CB_BE_14                 BE-14
+PASS  CB_BE_15                 BE-129, BE-15
+PASS  CB_BE_16                 BE-16, CC-R4e
+PASS  CB_BE_17                 BE-17
+PASS  CB_BE_18                 BE-18, BE-VS-03
+PASS  CB_BE_19                 BE-19, BE-56
+PASS  CB_BE_20                 BE-20, R80f.36
+PASS  CB_BE_21                 BE-21
+PASS  CB_BE_22                 BE-22
+PASS  CB_BE_23                 BE-23
+PASS  CB_BE_25                 BE-25, CC-R4b
+PASS  CB_BE_26                 BE-26
+PASS  CB_BE_27                 BE-27
+PASS  CB_BE_28                 BE-28
+PASS  CB_BE_29                 BE-29
+PASS  CB_BE_41                 BE-41
+PASS  CB_BE_45                 BE-45
+PASS  CB_BE_46                 BE-46
+PASS  CB_BE_47                 BE-47
+PASS  CB_BE_48                 BE-48
+PASS  CB_BE_49                 BE-49
+PASS  CB_BE_50                 BE-50
+PASS  CB_BE_51                 BE-51
+PASS  CB_BE_52                 BE-52
+PASS  CB_BE_53                 BE-53
+PASS  CB_BE_54                 BE-54
+PASS  CB_BE_55                 BE-55
+PASS  CB_BE_57                 BE-57
+PASS  CB_BE_58                 BE-58
+PASS  CB_BE_60                 BE-137, BE-60
+PASS  CB_BE_61                 BE-61
+PASS  CB_BE_62                 BE-62
+PASS  CB_BE_63                 BE-137, BE-63
+PASS  CB_BE_64                 BE-64
+PASS  CB_BE_66                 BE-66, BE-75
+AMBER CB_BE_67                 BE-67, BE-74, BE-96
+        - sin canon: no se puede probar
+AMBER CB_BE_68                 BE-68, BE-86
+        - sin canon: no se puede probar
+PASS  CB_BE_69                 BE-69
+PASS  CB_BE_70                 BE-70
+PASS  CB_BE_71                 BE-71
+PASS  CB_BE_73                 BE-73
+PASS  CB_BE_76                 BE-76
+PASS  CB_BE_77                 BE-77
+AMBER CB_BE_78                 BE-78
+        - sin canon: no se puede probar
+PASS  CB_BE_79                 BE-79
+PASS  CB_BE_80                 BE-80
+PASS  CB_BE_81                 BE-81
+PASS  CB_BE_82                 BE-82, BE-CH02
+AMBER CB_BE_83                 BE-83, BE-93, R80f.36
+        - sin canon: no se puede probar
+PASS  CB_BE_84                 BE-84
+PASS  CB_BE_85                 BE-85
+PASS  CB_BE_88                 BE-88
+PASS  CB_BE_89                 BE-89, R80f.36
+PASS  CB_BE_90                 BE-90
+PASS  CB_BE_91                 BE-91
+PASS  CB_BE_92                 BE-92
+PASS  CB_BE_95                 BE-95
+PASS  CB_BE_97                 BE-97
+PASS  CB_BE_98                 BE-98
+PASS  CB_BE_102                BE-102, R80f.36
+AMBER CB_BE_103                BE-103
+        - sin canon: no se puede probar
+PASS  CB_BE_104                BE-104
+PASS  CB_BE_105                BE-105
+PASS  CB_BE_106                BE-106
+AMBER CB_BE_107                BE-107
+        - sin canon: no se puede probar
+PASS  CB_U_143                 U-143
+PASS  CB_U_139                 R-ALC-01, U-139
+PASS  CB_BE_112                BE-112
+PASS  CB_BE_CF02               BE-CF02, U-079
+PASS  CB_BE_CF03               BE-CF03, U-079
+PASS  CB_BE_CF04               BE-CF04, U-079
+PASS  CB_BE_CF05               BE-CF05, U-079
+PASS  CB_BE_CF07               BE-CF07
+PASS  CB_BE_CF09               BE-CF09, BE-CF12
+PASS  CB_BE_CF10               BE-CF10, BE-VS-09
+PASS  CB_BE_CF11               BE-CF11
+PASS  CB_BE_CF13               BE-CF13, U-119
+PASS  CB_BE_CH03               BE-CH03
+PASS  CB_BE_HF02               BE-HF02
+PASS  CB_BE_HF03               BE-HF03
+PASS  CB_BE_HF04               BE-HF04
+PASS  CB_BE_HF05               BE-HF05, U-119, U-120
+PASS  CB_BE_VS_01              BE-VS-01
+PASS  CB_BE_VS_02              BE-VS-02
+PASS  CB_BE_VS_04              BE-VS-04, BE-VS-05
+PASS  CB_BE_VS_06              BE-VS-06
+PASS  CB_BE_VS_07              BE-VS-07
+PASS  CB_BE_VS_08              BE-VS-08
+PASS  CB_BE_VS_10              BE-VS-10
+PASS  CB_BE_VS_13              BE-CF22, BE-VS-13
+PASS  CB_BE_VS_14              BE-VS-14
+PASS  CB_BE_CF24               BE-CF24
+PASS  CB_R_ALC_06              BE-CF24, R-ALC-06
+PASS  CB_BE_CF25               BE-CF25
+PASS  CB_BE_CF26               BE-CF26
+PASS  CB_BE_VS_15              BE-VS-15
+FAIL  CE_CALLOUTS              BE-124, BE-135, BE-139, BE-CF22, CC-R10, U-113, U-115, U-137
+        - 2 burbuja(s) sin disposición en las hojas del trade
+        - 2/A7.23 (burbuja en A3.03): sin cita N/HOJA en el Excel / canon ni declaración fuera de alcance
+        - 12/A9.03 (burbuja en A6.00): sin cita N/HOJA en el Excel / canon ni declaración fuera de alcance
+        - 36 eslabón(es) de cadena sin seguir
+        - 1/A0.03 (burbuja en A0.01, alcanzada por union BE-CC07): sin cita N/HOJA en el Excel / canon ni declaración fuera de alcance — cadena cortada antes del final
+        - 2/A0.03 (burbuja en A0.01, alcanzada por union BE-CC07): sin cita N/HOJA en el Excel / canon ni declaración fuera de alcance — cadena cortada antes del final
+FAIL  CB_U_114                 BE-131, BE-136, U-114
+        - 1 número(s) sin honestidad dimensional
+        - None area = 6.0: [DERIVED] sin su operación ('   A0.08 / RCP A3.02: A3.02 [DERIVED] area 6.0 SF (polygon 1/A2.02 (793.2-784.9)*(1202.6-1')
+PASS  CB_U_115                 BE-131, R80f.38, U-115
+FAIL  CB_U_116                 BE-131, BE-CF23, R80f.38, U-116
+        - 2 supuesto(s) en silencio
+        - Material Summary!I20: supuesto sin RFI / precedente / código ('[DERIVED] N/SHEET: default (no sheet) | none in the set')
+        - Material Summary!I23: supuesto sin RFI / precedente / código ('N/SHEET: default (no sheet) | none: no parapet infill, coiling grille or duct sleeve detai')
+PASS  CB_U_117                 BE-131, BE-CF21, R80f.38, U-117
+PASS  CB_U_118                 BE-131, BE-136, U-118
+FAIL  CB_U_119                 BE-131, R80f.38, U-119
+        - 186 texto(s) en español en el entregable
+        - Partition Takeoff!J26: español (y) '4/A5.05; A2.02 [DERIVED] length (R4 re-measure on 1/A2.02 at'
+        - Partition Takeoff!J27: español (y) '4/A5.05; A2.02 [DERIVED] length (R4 re-measure on 1/A2.02 at'
+        - Partition Takeoff!J200: español (y) '1/A7.16; A2.04 [DERIVED] length (A2.04 vector wall lines at '
+        - Partition Takeoff!J201: español (y) '1/A7.16; A2.04 [DERIVED] length (A2.04 vector wall lines at '
+        - Partition Takeoff!J202: español (y) '6/A7.13; A2.04 [DERIVED] length (A2.04 vector wall lines at '
+PASS  CB_U_120                 BE-131, BE-CF21, R80f.37, U-120
+PASS  CB_U_121                 BE-131, R80f.38, U-121
+PASS  CB_U_125                 BE-131, U-125
+PASS  CB_BOTH_SIDES            BE-138, U-127
+PASS  CB_CIFRAS_TEXTO          BE-141, U-138
+FAIL  CE_SCHEDULES_MARCADOS    U-111, U-142
+        - 425 faltante(s): 11 schedules, 289 types / renglones, 619 materiales
+        - #1 W.4-0 (Partition / wall types, None): sin marca en SCHEDULES_REVISADOS.pdf
+        - #1 W.4-0 stud '': no está en el Material Summary ni fuera de alcance con motivo
+        - #2 W.6-0 (Partition / wall types, None): sin marca en SCHEDULES_REVISADOS.pdf
+        - #2 W.6-0 stud '': no está en el Material Summary ni fuera de alcance con motivo
+        - #3 W.6-1 (Partition / wall types, None): sin marca en SCHEDULES_REVISADOS.pdf
+FAIL  CE_SCHEDULES_REVISADOS   U-142
+        - W.4-0 (None Partition / wall types): sin bbox (no se puede marcar)
+        - W.6-0 (None Partition / wall types): sin bbox (no se puede marcar)
+        - W.6-1 (None Partition / wall types): sin bbox (no se puede marcar)
+        - W.6-2 (None Partition / wall types): sin bbox (no se puede marcar)
+        - W.62-1 (None Partition / wall types): sin bbox (no se puede marcar)
+        - FW.1-0 (None Partition / wall types): sin bbox (no se puede marcar)
+FAIL  CE_DETALLES_CIRCULADOS   U-141
+        - 54 faltante(s) de 252 burbujas
+        - 2/A7.23 (en A3.03): sin disposición
+        - 12/A9.03 (en A6.00): sin disposición
+        - 2/A5.02 (en A9.03): sin disposición
+        - 3/A5.02 (en A9.03): sin disposición
+        - 1/A5.07 (en A4.04): sin disposición
+COMPUERTA DE ENTREGA: PASS 143 / AMBER 15 / FAIL 13 -> ROJA: NO SE ENTREGA
+/root/cr/work/entrega/ENTREGA_OK.json
