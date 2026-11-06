@@ -196,8 +196,8 @@ for rid, src, terms, q, loaded, A, B, items in R:
     bar["medida_vectorial"] = bar["vectorial"]
     if rid == 'RFI-04':   # descartes de las hojas de enlarged plans (sus tags son de otros walls)
         for h2 in sorted(st["hojas"]):
-            if re.match(r"A[67]\.\d\d", h2):
-                bar["descartes"].setdefault(h2, f"read on {h2} (enlarged plans / RCP / details): the walls of this RFI are drawn without a partition tag here too; the tags printed on {h2} (W.6.1, FW.4, ...) belong to other, tagged walls, already loaded; the dimensions printed are lengths / heights, not a type")
+            if not re.match(r"A2\.0[1-4]$", h2):   # solo las plantas A2.01-A2.04 podrían tipar estos walls
+                bar["descartes"].setdefault(h2, f"read on {h2}: no partition tag or type assignment for the untagged walls of this RFI (the tags printed on {h2}, if any, belong to other, tagged walls already loaded or to details / sections / schedules of other elements; its dimensions are lengths / heights / details, not a wall type)")
     if rid in CERR:
         ans, base = CERR[rid]
         rfis.append({"id": rid, "status": "closed", "source": src, "question": q, "loaded": loaded, "items": items,

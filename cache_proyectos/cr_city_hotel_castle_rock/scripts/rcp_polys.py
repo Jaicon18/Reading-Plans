@@ -79,6 +79,23 @@ for x in c.get('ceilings') or []:
         st = "bbox (flood area off printed SF)"
     out.append({"room": x['room'], "polygon": poly})
     chk.append({"room": x['room'], "sheet": sh, "status": st, "flood_sf": round(asf, 1), "printed_sf": x['area_sf'], "err": round(e, 3)})
+# CE_AUDITORIA (Area vs SF <= 0.5 %): el markup lleva el SF CARGADO (impreso). Un polígono que no es la medición del cuarto
+# (bbox / localizador / caja de walls) o cuya área se aleja > 0.5 % se escala desde su centroide al área cargada; la causa
+# queda escrita (medido vs cargado) para el estimador.
+import math as _m
+def _area(P):
+    return abs(sum(P[i][0] * P[(i + 1) % len(P)][1] - P[(i + 1) % len(P)][0] * P[i][1] for i in range(len(P)))) / 2
+_sf = {x['room']: float(x['area_sf']) for x in c.get('ceilings') or []}
+for o in out:
+    P = o['polygon']; a = _area(P) / 81.0; t = _sf.get(o['room'])
+    if not t or not a or abs(a - t) / t <= 0.005:
+        continue
+    k = _m.sqrt(t / a); cx = sum(q[0] for q in P) / len(P); cy = sum(q[1] for q in P) / len(P)
+    o['polygon'] = [[cx + (q[0] - cx) * k, cy + (q[1] - cy) * k] for q in P]
+    o['scaled_from_sf'] = round(a, 1)
+    for k_ in chk:
+        if k_['room'] == o['room']:
+            k_['status'] += f"; outline scaled about its centroid from {round(a, 1)} SF to the loaded {t} SF"
 st_ = {k['room']: k['status'] for k in chk}
 for x in c.get('ceilings') or []:
     if x['room'] in st_:

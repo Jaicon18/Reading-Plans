@@ -1,4 +1,6 @@
-import re
+import re, sys as _sys
+_sys.path.insert(0, '/root/skill/take-off-metal-frame-drywall/tools')
+import revision_markups as _RM
 """CR City Hotel: takeoff_canon.json = base (build_canon) + campos de proyecto (exclusiones con N/HOJA, wood, tornillería,
 MEP, none reasons). Los textos citan la hoja revisada."""
 import json
@@ -96,6 +98,33 @@ for w in list(d['existing_walls']):
         d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
             "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
 print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
+# U-114: toda área [DERIVED] con su operación y su resultado ('... /81 = 6.0')
+for z in d['ceilings']:
+    z['source'] = re.sub(r"(\[DERIVED\] area ([\d.]+) SF \(polygon [^|]*?/\d+(?:\.\d+)?)\)", r"\1 = \2 SF)", str(z.get('source') or ''))
+# accesorios en 0 con su porqué y su hoja (U-116: ningún 'default (no sheet)')
+d['accesorios_none'] = [x for x in d.get('accesorios_none') or [] if x.get('familia') not in ('additional head track', '2-1/2" CFMF coiling grille head')] + [
+    {"familia": "additional head track", "why": "openings are in WOOD-framed walls (A0.06 W / FW / DW, A8.00 door schedule): headers / jambs are wood, Div. 06 EXCLUDED (U-139); no metal-stud opening over 4'-0\"", "source": "A0.06, A8.00"},
+    {"familia": "2-1/2\" CFMF coiling grille head", "why": "no coiling grille / overhead door head in a metal-framed wall in the set (A8.00 door schedule: hollow metal / wood doors only)", "source": "A8.00"}]
+# tags del inventario descartados con motivo e imagen (U-037 / ONE WALL ONCE): leyendas y límite de permiso aparte
+import glob as _g
+_td = []
+_png = {o['id']: o.get('png') for _k, _v in json.load(open('/root/cr/work/etapas/1_inventario/inventario.json'))['ocurrencias'].items() for o in _v if o.get('id')}
+_byid = {}
+for _f in ('2_lectura/canon_A.json', '2_lectura/canon_B.json'):
+    for _t in json.load(open(f'/root/cr/work/etapas/{_f}')).get('tags_descartados') or []:
+        if isinstance(_t, dict) and _t.get('id'):
+            x = _byid.setdefault(_t['id'], {"id": _t['id'], "motivo": None, "imagen": None, "floor": _t.get('floor')})
+            x['motivo'] = x['motivo'] or _t.get('motivo') or _t.get('reason')
+            x['imagen'] = x['imagen'] or _t.get('imagen') or _t.get('img') or None
+for x in _byid.values():
+    if not re.match(r'^P[A-Z]\d{4}$', str(x['id'])):
+        continue   # nota de grupo de la lectura, no un tag del inventario
+    if not x['imagen'] and _png.get(x['id']):
+        x['imagen'] = f"/root/cr/work/etapas/1_inventario/recortes/{_png[x['id']]}"
+    _td.append(x)
+for _id in ('PT0264', 'PT0265'):
+    _td.append({"id": _id, "motivo": "W.6 | 1 example tag of the A2.01 '1. REFERENCE LEGEND, RE: FLOOR PLANS' (partition type symbol legend), not a wall", "imagen": "1_inventario/recortes/PT0264_PT0265_A2.01_reference_legend.png", "floor": "L1"})
+d['tags_descartados'] = _td
 # BE-119 / U-099: la fuente IMPRESA de la altura de cada wall en sus campos (la lee revision_markups / CE_ALTURA_IMPRESA)
 for w in d['existing_walls']:
     m = re.search(r"\| height: ([^|]*)", str(w.get('source') or ''))
@@ -114,6 +143,10 @@ for w in d['existing_walls']:
             hs = re.sub(r"\(?(\d+/\d+)\"\s*=\s*1'-0\"(,\s*)?", r"(scale \1 in/ft) ", hs).replace("in/ft  pt/ft", "in/ft, pt/ft")
         w['height_source'] = hs
         w['height_status'] = 'DERIVADO' if re.search(r"=|\+| - |minus", hs) else 'CONFIRMADO'
+        # U-099: la altura cargada = la cota IMPRESA exacta (8'-11 1/4" = 8.9375, no 8.94 redondeado)
+        _hp = _RM.altura_impresa(hs, w['height_status'])[0]
+        if _hp is not None and abs(_hp - h) < 0.01:
+            w['height_ft'] = round(_hp, 4)
 # corner bead por programa (scripts/esquinas_cb.py): outside corners de L junctions + extremos libres que no son door jambs
 cbj = json.load(open('/root/cr/work/etapas/4_canon/out/corner_bead.json'))
 for k, v in sorted(cbj['por_hoja'].items()):
