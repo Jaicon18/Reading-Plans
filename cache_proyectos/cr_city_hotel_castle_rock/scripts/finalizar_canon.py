@@ -418,7 +418,7 @@ for w in [x for x in d['existing_walls'] if x.get('type_id') == 'XW.6.6-0']:
     h, hs = _SH[w['floor']]
     nw.update({"board": "5/8 exterior gyp sheathing type X", "layers": 1, "faces": 1, "height_ft": h, "height_status": "DERIVADO" if w['floor'] == 'L3' else "CONFIRMADO",
                "height_source": hs, "location": re.sub(r"faces:.*$", "faces: exterior (sheathing of the XW.6.6 family, A0.07 rows -1 / -2: 'TYPE X 5/8\" EXTERIOR GYP BD')", str(w['location']))})
-    nw['source'] = str(w['source']).split('| height:')[0] + f"| height: {hs} | type: XW.6.6 family construction (A0.07), rating row 0 not printed (BE-CR29 recheck v81cf57)"
+    nw['source'] = str(w['source']).split('| height:')[0] + f"| height: {hs} | type: tag XW.6.6 with rating digit 0 = family XW.6.6, third position = fire rating (A2.0x legend); exterior face per the printed XW.6.6 construction on A0.07 (rows -1 and -2 both 'TYPE X 5/8\" EXTERIOR GYP BD'), U-140 / U-127"
     nw.pop('faces_none_reason', None)
     d['existing_walls'].insert(d['existing_walls'].index(w) + 1, nw)
 # U-114 (rev2): una altura [DERIVED] lleva su operación con resultado: 'A + B' / 'A - B' sin '=' -> se agrega '= <resultado>'

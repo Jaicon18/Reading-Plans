@@ -10,9 +10,11 @@ Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pau
 | 2-3b | Lecturas A / B por piso (relanzadas) + burbujas + ventanas / trim | 11-05 18:50 PST | 11-05 19:23 PST | 33 min | etapas/2_lectura, burbujas/ |
 | 4-6 | Comparación A / B + resolución por piso + canon + canon.py + RFI | 11-05 19:23 PST | 11-05 19:42 PST | 19 min | 3_revision, 4_canon |
 | 7-8 | Excel fijo + markups Bluebeam walls / RCP + imágenes + verificar_markups_excel | 11-05 19:42 PST | 11-05 20:28 PST | 46 min | 8_excel, 6_markups, 7_imagenes |
-| 9-10 rev1 | Documentos, auditoría U-138 #1, proposal U-150, compuerta, subida rev1 (558 archivos) | 11-05 20:28 PST | 11-06 00:21 PST | 233 min | SUBIDA_OK.json rev1 |
+| 9-10 | rev1: documentos, auditoría U-138 #1, proposal U-150, compuerta, subida rev1 (558 archivos) | 11-05 20:28 PST | 11-06 00:21 PST | 233 min | SUBIDA_OK.json rev1 |
 | rev2-a | Orden COORDINACIÓN 02:12 (rev1 pasó en vacío): BE-CR25 + compuerta con walls board-only + BOTH SIDES / U-114 / U-117 / U-118 vivos + caras con baño | 11-06 02:12 PST | 11-06 03:07 PST | 55 min | commit 'compuerta VERDE 169/3/0 con chequeos por wall vivos' |
 | rev2-b | Auditoría adversarial U-138 #2 (subagente independiente) | 11-06 03:08 PST | 11-06 03:28 PST | 20 min | auditoria_U138_2/INFORME_AUDITORIA_U138_2.md |
 | rev2-c | Hallazgos aplicados y verificados (banos_cbu, shafts L3/L4, F4-F12, BE-CR26 cadena) + compuerta VERDE + skill v81cf56 | 11-06 03:28 PST | 11-06 04:25 PST | 57 min | RESOLUCION_HALLAZGOS_U138_2.md, gate.txt |
 | rev2-d | Subida rev2 (2,093 archivos) + aviso REPLACED BY rev2 en rev1 + listado de Drive | 11-06 04:25 PST | 11-06 07:17 PST | 172 min | SUBIDA_OK.json rev2 |
-| **TOTAL** | **rev1 387 min (6 h 27) + rev2 304 min (5 h 04)** | **11-05 11:16 PST** | **11-06 07:17 PST** | **691 min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |
+| rev2-e | BE-CR28 (orden de subida, Auditoria.zip) + recheck v81cf57 / BE-CR29 (chequeos en vacío) -> hallazgo XW.6.6-0 | 11-06 07:17 PST | 11-06 07:38 PST | 21 min | ENTREGA_OK_recheck_v81cf57.json |
+| rev3 | rev3: sheathing XW.6.6-0 + barrido de ratings + citas coves + compuerta VERDE + skill v81cf57 + subida (Auditoria.zip) + aviso en rev2 + listado | 11-06 07:38 PST | 11-06 07:47 PST | 9 min | ENTREGA_OK.json / SUBIDA_OK.json rev3 |
+| **TOTAL** | **rev1 387 min (6 h 27) + rev2/rev3 334 min (5 h 34)** | **11-05 11:16 PST** | **11-06 07:47 PST** | **721 min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |

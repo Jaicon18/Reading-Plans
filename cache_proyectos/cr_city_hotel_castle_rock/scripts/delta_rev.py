@@ -2,8 +2,9 @@
 """Delta por material (Material Summary, NET) rev1 -> rev2. Salida: etapas/DELTA_rev1_rev2.md"""
 import openpyxl, sys
 W = '/root/cr/work'
-A = f'{W}/archivo_rev1/8_excel/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx'
-B = f'{W}/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev2.xlsx'
+RA, RB = (sys.argv[1], sys.argv[2]) if len(sys.argv) > 2 else ('rev1', 'rev2')
+A = f'{W}/archivo_{RA}/8_excel/CR_City_Hotel_Takeoff_FINAL_{RA}.xlsx'
+B = f'{W}/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_{RB}.xlsx'
 def ms(p):
     ws = openpyxl.load_workbook(p, data_only=True)['Material Summary']
     hdr, out = None, {}
@@ -21,10 +22,11 @@ def ms(p):
             pass
     return out
 a, b = ms(A), ms(B)
-L = ["# DELTA Material Summary (NET) rev1 -> rev2 - CR City Hotel", "", "| Material | Unit | rev1 | rev2 | Delta |", "|---|---|---|---|---|"]
+L = [f"# DELTA Material Summary (NET) {RA} -> {RB} - CR City Hotel", "", f"| Material | Unit | {RA} | {RB} | Delta |", "|---|---|---|---|---|"]
 for m in list(a) + [m for m in b if m not in a]:
     x, y = a.get(m, (0, ''))[0], b.get(m, (0, ''))[0]
     u = (a.get(m) or b.get(m))[1]
-    L.append(f"| {m} | {u} | {x:,.2f} | {y:,.2f} | {y - x:+,.2f} |")
-open(f'{W}/etapas/DELTA_rev1_rev2.md', 'w').write("\n".join(L) + "\n")
+    if abs(y - x) > 0.005 or RA == 'rev1':
+        L.append(f"| {m} | {u} | {x:,.2f} | {y:,.2f} | {y - x:+,.2f} |")
+open(f'{W}/etapas/DELTA_{RA}_{RB}.md', 'w').write("\n".join(L) + "\n")
 print("\n".join(L))

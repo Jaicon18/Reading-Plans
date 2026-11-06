@@ -19,7 +19,7 @@ PASS  CE_ATRIBUCION_ESTIMADOR  BE-101, U-052
 PASS  CE_DECISIONES_EN_EXCEL   U-016, U-050
 PASS  CE_SEGUIMIENTO           U-048
 AMBER CE_ALTURA_IMPRESA        BE-119, BE-134, R80f.29, U-010, U-088, U-099
-        - 0 RED / 15 AMBER de 886
+        - 0 RED / 15 AMBER de 891
         - FI.2-L4-01: FI.2-L4-01: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4, U-140)
         - FI.2-L4-02: FI.2-L4-02: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4, U-140)
         - X-L4-02: X-L4-02: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4, U-140)
@@ -37,6 +37,7 @@ PASS  CE_AUDITORIA             BE-42, U-005, U-007, U-011, U-121
 PASS  CE_REGLAS                BE-116, BE-117, BE-134, BE-CF08, BE-CF16, R-ALC-11, R-ALC-12
 PASS  CE_COPIA_LIMPIA          BE-CF24, U-051
 PASS  CE_COMPARATIVA_BANCO     U-130
+PASS  CE_SUBIDA_PAQUETE        BE-140, BE-CR28
 PASS  CB_U_017                 U-017
 PASS  CB_BE_08                 BE-08, CC-R4d
 PASS  CB_U_026                 BE-108, U-026
@@ -116,7 +117,8 @@ PASS  CB_BE_77                 BE-77
 PASS  CB_BE_78                 BE-78
 PASS  CB_BE_79                 BE-79
 PASS  CB_BE_80                 BE-80
-PASS  CB_BE_81                 BE-81
+AMBER CB_BE_81                 BE-81
+        - type XW.6.6-0: la fila de rating no está impresa; la familia XW.6.6 sí (construcción de la familia)
 PASS  CB_BE_82                 BE-82, BE-CH02
 PASS  CB_BE_83                 BE-83, BE-93, R80f.36
 PASS  CB_BE_84                 BE-84
@@ -188,5 +190,5 @@ PASS  CB_CANON_NO_VACIO        BE-CR25, U-124
 PASS  CE_SCHEDULES_MARCADOS    U-111, U-142
 PASS  CE_SCHEDULES_REVISADOS   U-142
 PASS  CE_DETALLES_CIRCULADOS   U-141
-COMPUERTA DE ENTREGA: PASS 169 / AMBER 3 / FAIL 0 -> VERDE (se puede subir con subir_entrega.py)
+COMPUERTA DE ENTREGA: PASS 169 / AMBER 4 / FAIL 0 -> VERDE (se puede subir con subir_entrega.py)
 /root/cr/work/entrega/ENTREGA_OK.json

@@ -4,8 +4,8 @@ set -e
 W=/root/cr/work
 P=$W/proposal
 OUT=$W/Proposal
-TK=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev2.xlsx
-N=CR_City_Hotel_Proposal_rev2
+TK=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev3.xlsx
+N=CR_City_Hotel_Proposal_rev3
 mkdir -p $P/out $OUT
 cd $P
 python3 armar_proposal.py tpl/Proposal_Template.xlsx $TK $W/etapas/4_canon/takeoff_canon.json fbm out/$N.xlsx
