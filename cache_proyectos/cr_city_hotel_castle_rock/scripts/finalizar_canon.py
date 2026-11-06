@@ -84,7 +84,7 @@ for (fl, sh, ori, c_), segs in sorted(runs.items()):
             h = max(s_[2] for s_ in g)
             d['misc_items'].append({"ref": f"CJ-{fl}-{ori}{c_ * 3}", "familia": "control joint", "qty": round(n * h * 2, 2),
                 "op": f"run {round(L, 2)} ft ({len(g)} walls {g[0][3]}..{g[-1][3]}): ROUNDUP({round(L, 2)}/30)-1 = {n} joint(s) x {h} ft x 2 faces = {round(n * h * 2, 2)}",
-                "source": f"{sh} run on {'y' if ori == 'H' else 'x'} = {c_ * 3} pt; A0.06 GN 15 + ASTM C840 (precedent R80e.34 #8: <= 30 ft, both faces, wall height)"})
+                "source": f"{sh} run on {'vertical coord' if ori == 'H' else 'horizontal coord'} = {c_ * 3} pt; A0.06 GN 15 + ASTM C840 (estimator precedent #8 (B&N): <= 30 ft, both faces, wall height)"})
 # RFI-05 cerrado (R-ALC-10 / U-082, opción A = lo impreso): A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE
 # TENANT' -> caras retail NO rated fuera; caras retail de assemblies RATED (rating del tag > 0) se quedan: el rating impreso
 # del tag exige la capa (listed design), conservador, delta anotado en el RFI.
@@ -135,7 +135,7 @@ for w in d['existing_walls']:
         h = float(w.get('height_ft') or 0)
         if 'cement' in str(w.get('board') or '') and abs(h - 9.0) < 0.01 and not hs.lower().startswith('bath ceiling'):
             hs = ("Bath ceiling GYP-1 8'-6\" (A7.xx unit RCP) + 6\" above line of ceiling (A0.06 furred wood head detail) = 9'-0\" "
-                  "(cement board to the tile ceiling + 6\", precedent R80e.34 #15, RFI-11 closed)")
+                  "(cement board to the tile ceiling + 6\", estimator precedent #15 (B&N), RFI-11 closed)")
         elif 'deep floor/ceiling zone' in hs and abs(h - 9.24) < 0.01:
             hs = "11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)"
         elif "1'-1 3/8" in hs and abs(h - 9.885) < 0.01:

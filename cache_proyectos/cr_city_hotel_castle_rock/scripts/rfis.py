@@ -63,7 +63,7 @@ R = [
   "eave walls 5.91 ft, gable walls 7.28 ft average (2/A5.04 vector at printed scale)",
   ("2/A5.04 vector measure (as loaded)", "0"), ("n/a", "1/A4.04 reading 7.21 ft: +/- 1.3 ft x 89.8 LF"), "XW.6.4-L2-01..03, XW.6.3-L2-12"),
  ("RFI-09", "A2.03, A0.06", ["SHAFT", "317"],
-  "Small shaft box south of lobby 317 (L3): no type; drawn as a shaft enclosure (the question is the ENCLOSURE board / type; precedent R80e.34 #2 is about duct crossings of walls and does not answer it).",
+  "Small shaft box south of lobby 317 (L3): no type; drawn as a shaft enclosure (the question is the ENCLOSURE board / type; estimator precedent #2 (B&N) is about duct crossings of walls and does not answer it).",
   "board on the outside face only, 1 layer 5/8\" Type X", ("A2.03 as drawn (as loaded)", "0"), ("IBC 713 shaft enclosure", "CH.2-1 shaft wall: + 1\" liner + C-H studs / J runner on 14.44 LF"), "NULL-L3-11..14"),
  ("RFI-10", "A0.06 GN 10, WOOD detail", ["TYPE \"X\" GYP BD. TYP", "5/8\" GYPSUM BOARD AT ALL OTHER"],
   "A0.06 general note 10 calls 5/8\" (regular) gypsum board at non-rated partitions, but the WOOD / FURRED WOOD / DBL. WOOD sections print '5/8\" TYPE X GYP BD. TYP.'.",
@@ -95,7 +95,7 @@ R = [
   "L4 corridor 412 cove loaded with LF = corridor 412 wall LF (resuelto_L4); lobby step and retail beam wraps not loaded",
   ("7/A7.23 typical (as loaded)", "0"), ("n/a", "lobby step: LF x 2.0 ft board + 2 track lines; beam wraps: per structural beam sizes (retail by future tenant, RFI-05)"), "SOF-L4-02, L1 lobby step, L1 retail beams"),
  ("RFI-19", "A2.01-A2.04, A7.xx unit plans, 09 29 00 2.5", ["CORNER", "CORNERBEAD"],
-  "Outside corners (corner bead) of L1, L4 and inside the guest units were not counted; L2 / L3 corridor corners are loaded (control joints of all floors are loaded per precedent R80e.34 #8).",
+  "Outside corners (corner bead) of L1, L4 and inside the guest units were not counted; L2 / L3 corridor corners are loaded (control joints of all floors are loaded per estimator precedent #8 (B&N)).",
   "L2 / L3 corridor: 69.2 LF corner bead per floor; L1 / L4 / guest-unit outside corners not loaded",
   ("09 29 00 3.x 'install cornerbead at external corners' (as loaded for L2 / L3)", "0"), ("ASTM C840 cornerbead at external corners", "L1 / L4 / units: count on the plans - estimated +200 to +400 LF corner bead (allowance by the estimator)"), "L1, L4, guest units"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
@@ -148,7 +148,7 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
 CERR = {
  "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row / tags 'CH.6 2' on A7.50 vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): option A of the type tag loaded - 6\" C-H studs - estimator standing rule R-ALC-10 (U-082) with note: verify 7/A9.03, 8/A9.03 and spec 09 21 16.23 (shaft wall assemblies, C-H studs) / UL U415; delta to 2 1/2\" C-H = 546 LF of lighter studs + 101 LF runner, board unchanged", "R-ALC-10 / U-082 + 09 21 16.23"),
- "RFI-11": ("Precedent R80e.34 #15 (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "R80e.34 #15 + UL design"),
+ "RFI-11": ("estimator precedent #15 (B&N) (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "estimator precedent #15 (B&N) + UL design"),
  "RFI-12": ("Estimator standing rule R-ALC-01 / BE-CF11: 'metal suspension OR wood framing' = the metal option goes (our scope) - loaded as USG drywall suspension", "R-ALC-01"),
  "RFI-16": ("Code / listed design (U-025): UL U415 C-H shaft wall studs at 24\" o.c. - loaded", "UL U415"),
  "RFI-01": ("Plan tag vs schedule (R-ALC-10 / U-082, estimator decision option A): the tag 'W.6.1 | n' is read as the A0.06 W.6 row with the PRINTED rating n (W.6 0/1/2 rows), loaded per the A0.06 WOOD notes; note: verify A0.06 W.6 rows. Delta to any other W.6 variant: 0 SF (same board per face and layer per rating)", "R-ALC-10 / U-082"),
@@ -160,7 +160,7 @@ CERR = {
  "RFI-05": ("Printed (option A): A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' - NON-rated retail faces EXCLUDED (532.5 SF: W.6-L1-23 A, FI.2-L1-09, FI.2-L1-10, XW.6.4-L1-03); retail faces of RATED assemblies (tag rating > 0: XW.6.2-2, XW.6.3-2, XW.6.4-2, 1,033 SF) stay loaded because the printed rating requires the layer. Delta if the tenant also builds the rated layers: -1,033 SF", "A2.01 note + tag ratings"),
  "RFI-18": ("Resolved with the printed set: (1) L4 corridor 412 perimeter cove = typical 7/A7.23 'WALL DETAIL - CORRIDOR CEILING' applied along the corridor 412 walls [DERIVED LF = corridor wall LF]; (2) L1 lobby ceiling step 11'-0\" / 9'-0\" (2/A7.50) with the cut between them not drawn = U-146: the HIGHER printed height 11'-0\" is loaded, no step face (delta: + step face LF x 2'-0\" if the boundary is drawn later); (3) retail steel beam wraps (A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS. TYP.') are inside Retail 124 = A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' -> EXCLUDED (tenant; Type IIIB structural frame 0 HR, no rated wrap)", "7/A7.23 + U-146 + A2.01 note"),
  "RFI-19": ("The plan resolves it (U-140): outside corners of ALL floors counted by program from the wall geometry at the printed scale (L junctions x 1 + free wall ends x 2, door jambs at printed door tags excluded) x wall height - trim_items CB-<floor>-<sheet>, images 4_canon/img/cb", "09 29 00 3.x + ASTM C840"),
- "RFI-14": ("Precedent R80e.78 #5 (O'Reilly): drawn resilient channel is carried; spacing per ASTM C754 / UL design at 16\" o.c. (A0.08 FS-1 / RS-1 'spacing per assembly')", "R80e.78 #5 + ASTM C754"),
+ "RFI-14": ("estimator precedent (O'Reilly #5): drawn resilient channel is carried; spacing per ASTM C754 / UL design at 16\" o.c. (A0.08 FS-1 / RS-1 'spacing per assembly')", "estimator precedent (O'Reilly #5) + ASTM C754"),
 }
 rfis = []
 for rid, src, terms, q, loaded, A, B, items in R:
