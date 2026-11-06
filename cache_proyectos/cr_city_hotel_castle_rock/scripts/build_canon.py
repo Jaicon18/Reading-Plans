@@ -51,7 +51,10 @@ def main():
     ex, misc, ceil, rfis, desc, tags_desc = [], [], [], [], [], []
     for fl, d in sorted(floors.items()):
         for w in d['walls']:
-            tid = w.get('type_id'); typ = w.get('type')
+            tid = w.get('type_id'); typ = w.get('type'); asum = None
+            if not tid:   # untagged wall loaded with the analogous type (RFI-04): the loaded type names its row / markup
+                asum = str(w.get('type_assumed') or w.get('assumed_type') or w.get('type_id_loaded') or '').split(' ')[0] or None
+                tid = asum; typ = tid.rsplit('-', 1)[0] if tid else None
             L = float(w.get('length_ft') or 0)
             if L <= 0:
                 continue
@@ -82,7 +85,7 @@ def main():
                 eid = f"{w['id']}{'' if len(grupos) == 1 else ' ' + 'ABCDEFG'[n]}"
                 ex.append({"id": eid, "type_id": tid, "type": typ, "floor": fl, "sheet": sh, "page": w.get('page'),
                            "path": path, "length_ft": round(L, 3), "height_ft": h, "faces": g['faces'], "layers": ly,
-                           "board": k, "location": f"{fl} {w.get('location', '')} | faces: {'; '.join(r for r in g['rooms'] if r)}"[:300],
+                           "board": k, "location": f"{fl} {'[TYPE ASSUMED - RFI-04] ' if asum else ''}{w.get('location', '')} | faces: {'; '.join(r for r in g['rooms'] if r)}"[:300],
                            "source": f"{sh} ({w.get('length_source', '')}; {w.get('length_op', '')}) | H: {g['src'][0][:220]} | type: {w.get('type_source', '')} | detail: {w.get('detail', '')}"[:900],
                            "decision": DEC if w.get('framing') != 'metal' else "C-H shaft wall (A0.06 CH, UL U415): board / liner here, C-H studs + J-runner in misc_items",
                            "tag_ids": w.get('tag_ids') or [], "length_status": w.get('length_status'),

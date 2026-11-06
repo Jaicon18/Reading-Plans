@@ -6,6 +6,8 @@ d = json.load(open(f'{W}/takeoff_canon.json.base.json'))
 d.pop('ceilings_raw', None)
 d['rfis_lectura'] = d.pop('rfis_raw', [])
 d['excluded_walls'] = d.pop('discarded_raw', [])
+d['constants']['type_order'] = {"value": ["W.4-0", "W.6-0", "W.6-1", "W.6-2", "W.62-1", "FW.1-0", "FW.2-0", "FW.4-0", "FW.6-0", "DW.4-1", "FI.2-0", "FI.6-0", "CH.6-2",
+    "XW.6.2-0", "XW.6.2-2", "XW.6.3-0", "XW.6.3-2", "XW.6.4-0", "XW.6.4-2", "XW.6.6-1", "XW.6.6-2"], "source": "A0.06 interior wall assemblies + A0.07 exterior wall assemblies row order"}
 d.update({
  "deck_breaks_none_reason": "Wood-framed floors: board height per zone from printed sections 4/A5.05, 7/A7.23, 1/A5.06, 2/A5.01 (resolucion_L1..L4); no steel deck breaks",
  "edge_blocking_none_reason": "WOOD type sections A0.06 (1/A0.09 rated intersections): board edges land on wood framing; wood blocking EXCLUDED (Div. 06)",
@@ -29,5 +31,28 @@ d.update({
  "plywood_strips": [], "plywood_strips_none_reason": "plywood / LP Flameblock sheathing = wood Div. 06 EXCLUDED (A0.07)",
  "blocking_items": [], "trim_items": [],
 })
+import math
+vt = json.load(open('/root/cr/work/etapas/2_lectura/ventanas_trim.json'))
+trims = []
+for fl, x in sorted(vt['floors'].items()):
+    if float(x.get('returns_sf') or 0) > 0:
+        d['misc_items'].append({"ref": f"WIN-RET-{fl}", "familia": '5/8" gyp board Type X', "qty": round(float(x['returns_sf']), 2),
+                                "op": f"{x.get('returns_sf_op')} = {x['returns_sf']} SF (window jamb 8.0 in / head + sill 7.37 in returns, scheduled Type 1 / 2)",
+                                "source": f"{fl} window returns 1/A8.02, 2/A8.02, 3/A8.02 (one board layer wraps the opening behind wood trim); A8.01 types; ventanas_trim.json"})
+    if x.get('corner_bead_corners_lf'):
+        trims.append({"ref": f"CB-CORR-{fl}", "kind": "corner_bead", "lf": float(x['corner_bead_corners_lf']),
+                      "label": f"{fl} corridor outside corners", "source": f"A2.0{fl[1]} corridor corners; 09 29 00 2.5 / 3.x 'install cornerbead at external corners'",
+                      "op": x.get('corner_bead_corners_op'), "status": "DERIVADO", "img": "2_lectura/img_ventanas"})
+    for r in x.get('runs_over_30ft') or []:
+        if r.get('status') == 'PENDIENTE' or not r.get('length_ft'):
+            continue
+        n = math.ceil(float(r['length_ft']) / 30.0 - 1e-9) - 1
+        if n > 0:
+            h = 9.885
+            d['misc_items'].append({"ref": f"CJ-{fl}-{r['id']}", "familia": "control joint", "qty": round(n * h, 2),
+                                    "op": f"ROUNDUP({r['length_ft']}/30)-1 = {n} joint(s) x {h} ft = {round(n * h, 2)}",
+                                    "source": f"A0.06 GN 15 'CONTROL JOINTS IN ... PARTITIONS ... EXCEEDING 30 FT' + 09 29 00 3.x / ASTM C840; {fl} {r.get('what')} (A2.0{fl[1]} {r.get('line')})"})
+d['trim_items'] = trims
+d['trim_none_reason'] = "Window returns: wood casing / stool covers the board edge (1-3/A8.02) - no corner bead at windows; corridor outside corners L2 / L3 counted; L1 / L4 / guest-unit outside corners not counted (RFI-19)"
 json.dump(d, open(f'{W}/takeoff_canon.json', 'w'), indent=1)
 print('ok', len(d['existing_walls']), len(d['ceilings']), len(d['misc_items']))
