@@ -10,6 +10,7 @@ R scripts/comparar_AB.py
 R scripts/canon_AB.py
 R $T/comparar.py $W/etapas/2_lectura/canon_A.json $W/etapas/2_lectura/canon_B.json $W/etapas/1_inventario/inventario.json $W/etapas/3_revision --pdf $PDF
 R scripts/build_canon.py
+R scripts/esquinas_cb.py
 R scripts/finalizar_canon.py
 R scripts/rfis.py
 R scripts/rcp_polys.py

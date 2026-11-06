@@ -151,6 +151,7 @@ CERR = {
  "RFI-11": ("Precedent R80e.34 #15 (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "R80e.34 #15 + UL design"),
  "RFI-12": ("Estimator standing rule R-ALC-01 / BE-CF11: 'metal suspension OR wood framing' = the metal option goes (our scope) - loaded as USG drywall suspension", "R-ALC-01"),
  "RFI-16": ("Code / listed design (U-025): UL U415 C-H shaft wall studs at 24\" o.c. - loaded", "UL U415"),
+ "RFI-19": ("The plan resolves it (U-140): outside corners of ALL floors counted by program from the wall geometry at the printed scale (L junctions x 1 + free wall ends x 2, door jambs at printed door tags excluded) x wall height - trim_items CB-<floor>-<sheet>, images 4_canon/img/cb", "09 29 00 3.x + ASTM C840"),
  "RFI-14": ("Precedent R80e.78 #5 (O'Reilly): drawn resilient channel is carried; spacing per ASTM C754 / UL design at 16\" o.c. (A0.08 FS-1 / RS-1 'spacing per assembly')", "R80e.78 #5 + ASTM C754"),
 }
 rfis = []

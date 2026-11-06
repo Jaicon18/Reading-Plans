@@ -14,7 +14,7 @@ d.update({
  "atm_recess_none_reason": "No ATM / equipment recess in the set (A2.01-A2.04, A7.30-A7.55)",
  "tile_base_none_reason": "Tile at guest baths carried as 5/8\" cement board faces (A0.06 GN 13; 09 29 00 2.4.A.2); no separate tile base item (A7.19)",
  "ballistic_jogs_none_reason": "No ballistic panels (A0.06 types W / FW / DW / FI / CH / C / CM only)",
- "trim_none_reason": "Corner bead / L-bead / U-bead per 09 29 00 3.x; quantities from ventanas_trim.json (window returns + outside corners) in trim_items",
+ "trim_none_reason": "Corner bead / L-bead / U-bead per 09 29 00 3.x; quantities by program (window returns + outside corners) in trim_items",
  "frp_none_reason": "No FRP wall finish in A7.19 finish schedules (TF-1 plaster / vinyl wallcovering / P-1 paint); XI.2.7 FRP exterior finish on CMU (A0.07) is not our trade",
  "types_none_reason": {"C.8-x / CM.8-x": "CIP concrete and CMU (A0.06): not our trade, no furring unless FI / FW drawn", "SFRM": "spray-applied fireproofing (A0.06 / A0.08): not our trade"},
  "deflection_clips": {"none_reason": "Wood-framed structure: no deflection clips; C-H shaft walls use J runner top and bottom (A0.06 CH)", "source": "A0.06"},
@@ -39,7 +39,7 @@ for fl, x in sorted(vt['floors'].items()):
         d['misc_items'].append({"ref": f"WIN-RET-{fl}", "familia": '5/8" gyp board Type X', "qty": round(float(x['returns_sf']), 2),
                                 "op": f"{x.get('returns_sf_op')} = {x['returns_sf']} SF (window jamb 8.0 in / head + sill 7.37 in returns, scheduled Type 1 / 2)",
                                 "source": f"{fl} window returns 1/A8.02, 2/A8.02, 3/A8.02 (one board layer wraps the opening behind wood trim); A8.01 types; ventanas_trim.json"})
-    if x.get('corner_bead_corners_lf'):
+    if False and x.get('corner_bead_corners_lf'):   # reemplazado por esquinas_cb.py (todos los pisos, RFI-19 cerrado)
         trims.append({"ref": f"CB-CORR-{fl}", "kind": "corner_bead", "lf": float(x['corner_bead_corners_lf']),
                       "label": f"{fl} corridor outside corners", "source": f"A2.0{fl[1]} corridor corners; 09 29 00 2.5 / 3.x 'install cornerbead at external corners'",
                       "op": x.get('corner_bead_corners_op'), "status": "DERIVADO", "img": "2_lectura/img_ventanas"})
@@ -82,6 +82,18 @@ for (fl, sh, ori, c_), segs in sorted(runs.items()):
             d['misc_items'].append({"ref": f"CJ-{fl}-{ori}{c_ * 3}", "familia": "control joint", "qty": round(n * h * 2, 2),
                 "op": f"run {round(L, 2)} ft ({len(g)} walls {g[0][3]}..{g[-1][3]}): ROUNDUP({round(L, 2)}/30)-1 = {n} joint(s) x {h} ft x 2 faces = {round(n * h * 2, 2)}",
                 "source": f"{sh} run on {'y' if ori == 'H' else 'x'} = {c_ * 3} pt; A0.06 GN 15 + ASTM C840 (precedent R80e.34 #8: <= 30 ft, both faces, wall height)"})
-d['trim_none_reason'] = "Window returns: wood casing / stool covers the board edge (1-3/A8.02) - no corner bead at windows; corridor outside corners L2 / L3 counted; L1 / L4 / guest-unit outside corners not counted (RFI-19)"
+# corner bead por programa (scripts/esquinas_cb.py): outside corners de L junctions + extremos libres que no son door jambs
+cbj = json.load(open('/root/cr/work/etapas/4_canon/out/corner_bead.json'))
+for k, v in sorted(cbj['por_hoja'].items()):
+    if not v['lf']:
+        continue
+    sh, fl = k.split()
+    nL, nE = v['L_corners'], v['free_ends']
+    hs = sorted({c['h'] for c in v['corners']})
+    d['trim_items'].append({"ref": f"CB-{fl}-{sh}", "kind": "corner_bead", "lf": v['lf'], "label": f"{fl} outside corners on {sh}",
+        "source": f"{sh} [DERIVED] wall geometry at printed scale {v['scale_pt_per_ft']} pt/ft; 09 29 00 3.x 'install cornerbead at external corners' (ASTM C840)",
+        "op": f"{nL} L corner(s) x 1 + {nE} free wall end(s) x 2 (door jambs at printed door tags excluded) = {nL + 2 * nE} corners x wall height ({', '.join(str(h) for h in hs)} ft) = {v['lf']} LF",
+        "status": "DERIVADO", "img": f"4_canon/img/cb/CB_{sh}_{fl}.png"})
+d['trim_none_reason'] = "Window returns: wood casing / stool covers the board edge (1-3/A8.02) - no corner bead at windows; outside corners of all floors counted by program from the wall geometry (L junctions + free wall ends; door jambs excluded)"
 json.dump(d, open(f'{W}/takeoff_canon.json', 'w'), indent=1)
 print('ok', len(d['existing_walls']), len(d['ceilings']), len(d['misc_items']))
