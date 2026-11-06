@@ -2335,7 +2335,8 @@ BOARD_FAM = {"5/8 regular": F_GYP, "5/8 ceiling sag-resistant": F_SAG,   # v81cf
              "5/8 type X": "5/8\" gyp board Type X", "5/8 type X WR": "5/8\" gyp Type X W.R.",
              # v81cf53 (CR City Hotel, BE-CR02): Type C ceiling board (FS-1 A0.08), 1" shaftliner (C-H shaft wall A0.06),
              # 5/8" exterior gyp sheathing Type X (XW.6.3-2 / XW.6.4-2 A0.07)
-             "5/8 type C": F_TYPEC, "1 shaftliner": F_LINER, "5/8 exterior gyp sheathing type X": F_EXTX}
+             "5/8 type C": F_TYPEC, "1 shaftliner": F_LINER, "5/8 exterior gyp sheathing type X": F_EXTX,
+             "5/8 cement board": "5/8\" cement board"}   # v81cf53: CBU 09 29 00 2.4.A.2 "match adjacent panel thicknesses"
 
 
 def furring_sin_bracing(w, src):
@@ -2556,7 +2557,12 @@ def calcular(data, outdir=None, fo=None):
         fam[BOARD_FAM[b]] += sf
     avisos += bo.get("avisos", [])
     _ballistic_jogs(data, fam, filas)
-    co = corridas.calcular(corr_in)
+    # v81cf53 (CR City Hotel, BE-CR04): proyecto wood-framed SIN walls metálicos (todo el board en existing_walls,
+    # framing EXCLUDED Div. 06): sin runs no hay track ni bracing; antes corridas.calcular paraba con "'runs' vacío".
+    if not corr_in.get("runs") and (data.get("existing_walls") or []) and not (data.get("walls") or []):
+        co = {"totales_lf": {}, "rfi": None, "rfi_doors": None, "sin_runs": "board-only project (existing_walls)"}
+    else:
+        co = corridas.calcular(corr_in)
     for k, v in co["totales_lf"].items():
         fam[k] += v
     _bracing_top_row(data, co, fam, filas)                # R80w.43
