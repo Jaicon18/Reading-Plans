@@ -575,3 +575,9 @@ Regla: antes de entregar, listar TODOS los N/A de la compuerta con el canon llen
 
 ## BE-146 — INDICE.md con el encabezado "hoy vN" viejo: tres versiones publicadas (v81cf55..57) y el encabezado seguía en v81cf54; el hook SessionStart cargaría una versión vieja (6-nov, COORDINACIÓN)
 Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima versión: verificar_version revisar_indice debe FALLAR si el "hoy vN" del encabezado no es la última línea "= VERSIÓN VIGENTE" del archivo.
+
+## BE-147 — PDF de markups entregado con 3 firmas digitales del set original y Page Labels incompletos (6-nov, CR City Hotel rev3)
+- Síntoma: en Bluebeam el usuario no puede editar Page Labels (ícono desactivado, sin candado, en markup mode).
+- Causa: la copia limpia quitó los sellos "Architect Stamp" (anotaciones) pero conservó los campos de firma digital /Sig (Chad Mitchell p1, Darin Ramirez p113 y p128) con /SigFlags 3; Bluebeam protege las firmas bloqueando las operaciones de página. Además, 131 de 149 páginas tenían Page Label numérico (no la hoja), 17 hojas escaneadas sin nombre en el inventario y la p7 leída como A0.03 en vez de A0.03 B.
+- Arreglo: quitar_firmas_labels.py (sello aplanado visible, 0 /Sig, labels = hoja en las 149 páginas, verificado a ojo). Entregado como CR_City_Hotel_markups_rev3b_EDITABLE en rev3 FINAL › Planos marcados.
+- Regla: U-151. Compuerta pendiente CE_PDF_EDITABLE (próxima versión).
