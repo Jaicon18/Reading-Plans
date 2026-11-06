@@ -581,3 +581,7 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Causa: la copia limpia quitó los sellos "Architect Stamp" (anotaciones) pero conservó los campos de firma digital /Sig (Chad Mitchell p1, Darin Ramirez p113 y p128) con /SigFlags 3; Bluebeam protege las firmas bloqueando las operaciones de página. Además, 131 de 149 páginas tenían Page Label numérico (no la hoja), 17 hojas escaneadas sin nombre en el inventario y la p7 leída como A0.03 en vez de A0.03 B.
 - Arreglo: quitar_firmas_labels.py (sello aplanado visible, 0 /Sig, labels = hoja en las 149 páginas, verificado a ojo). Entregado como CR_City_Hotel_markups_rev3b_EDITABLE en rev3 FINAL › Planos marcados.
 - Regla: U-151. Compuerta pendiente CE_PDF_EDITABLE (próxima versión).
+
+## BE-148 — PDF de markups sin escala de PÁGINA: Bluebeam mostraba 0.125 (1/8") en las hojas a 1/4" (6-nov, CR City Hotel rev3b)
+- Los 943 markups traían su /Measure correcto (1/8 en A2/A3, 1/4 en A6/A7), pero ninguna página tenía /VP; la escala de página de Bluebeam quedaba en 0.125 también en A6.00–A6.02, A7.30, A7.45, A7.50, A7.55.
+- Arreglo: escala_pagina.py pone /VP (BBox = página, /Measure = el de sus markups) en las 15 hojas con markups → rev3c. Regla U-152; chequeo pendiente en CE_PDF_EDITABLE (próxima versión).
