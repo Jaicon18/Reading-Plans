@@ -13,3 +13,4 @@ Paso exacto: Paso 10 / compuerta de entrega, corrigiendo FAIL. Hecho desde 20312
 - armar_entrega.sh ya NO re-une burbujas (backup burbujas/FINAL_backup).
 - NUEVO scripts/esquinas_cb.py (corner bead por programa, cierra RFI-19): L1 356 / L2 589 / L3 574 / L4 573 LF; falta integrarlo en finalizar_canon (reemplaza CB-CORR-L2/L3) y verificar imágenes img/cb.
 Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.sh → iterar FAIL (lista en gate_old) → OCR set_texto_ocr.json (corría en background) → auditoría U-138 → Proposal U-150 → subir_entrega → skill v81cf55.
+- Al retomar también (msg COORDINACIÓN 04:07Z, anterior a la pausa): pasar los 19 RFI uno por uno por el filtro U-140 / R-ALC-10 / U-083 / R80e.34 / U-146 / U-147 / U-143 / U-061; solo quedan abiertos los no impresos en ningún lado, con barrido completo (referencia: Consumer Cellular 8→2). Ya cerrados: RFI-07/11/12/14/16; RFI-19 se cierra con esquinas_cb.py.
