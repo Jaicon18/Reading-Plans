@@ -235,6 +235,7 @@ d['details'].update({
     "2/A7.23": "L3 corridor ceiling / soffit rows (enlarged RCP N-S, same corridor cove as 7/A7.23)",
     "7/A7.23": "corridor soffit / cove rows (framed soffit, ceiling track)",
     "12/A9.03": "smoke-curtain gypsum soffit at the elevator lobby (soffit rows)",
+    "4/A4.03": "BUILDING SECTION: LEVEL 1 6197.75' / LEVEL 2 6211.75' / LEVEL 3 6222.75' / LEVEL 4 6233.75' / ROOF 6247.75' -> floor-to-floor 14'-0\" / 11'-0\" / 11'-0\" / 14'-0\" used in every wall height (Partition Takeoff, Height)",
 })
 # formato G_DETALLE: {N/HOJA: {source (con N/HOJA), img (existe), title, notes}} desde los destinos verificados a ojo
 _bv = json.load(open('/root/cr/work/burbujas/burbujas_verificadas.json')).get('_destinos') or {}
@@ -248,7 +249,7 @@ for _k, _txt in list(d['details'].items()):
     if not (_im and _os.path.exists(_im)) and _os.path.exists(f"/root/cr/work/burbujas/img_verif/DET_{_k.split('/')[0]}_{_k.split('/')[1]}.png"):
         _im = f"/root/cr/work/burbujas/img_verif/DET_{_k.split('/')[0]}_{_k.split('/')[1]}.png"
     if not (_im and _os.path.exists(_im)):
-        _cand = sorted(__import__('glob').glob(f"/root/cr/work/burbujas/img_verif/*{_k.split('/')[1]}*{_k.split('/')[0]}*.png")) or sorted(__import__('glob').glob(f"/root/cr/work/burbujas/img_verif/*{_k.split('/')[1]}*.png"))
+        _cand = sorted(__import__('glob').glob(f"/root/cr/work/burbujas/img_verif/*{_k.split('/')[1]}_overview.png")) or sorted(__import__('glob').glob(f"/root/cr/work/burbujas/img_verif/*{_k.split('/')[1]}*{_k.split('/')[0]}*.png")) or sorted(__import__('glob').glob(f"/root/cr/work/burbujas/img_verif/*{_k.split('/')[1]}*.png"))
         _im = _cand[0] if _cand else ''
     d["details"][_k] = {"source": f"{_k} (detail read: body, notes and the bubbles it calls; CADENA.md)", "img": _im, "title": _x.get("title") or _k, "notes": _txt, "sealant_none_reason": "acoustical / joint sealant EXCLUDED in all projects by estimator standing order (ALC-19)"}
 # corner bead por programa (scripts/esquinas_cb.py): outside corners de L junctions + extremos libres que no son door jambs

@@ -80,13 +80,13 @@ R = [
   ("RCP legend: metal suspension (as loaded)", "0"), ("n/a", "wood framing: grid, wall angle and hanger wire rows to 0 (wood excluded), board unchanged"), "GYP-1 ceilings L1-L4"),
  ("RFI-13", "A0.08 MB-1, A3.01, A5.08", ["MB-1", "STEEL STUDS"],
   "2-HR gypsum ceilings GYP-2 at L1 Generator 103, Elec 104 and Elevator Controls 116 are loaded as the printed A0.08 MB-1 membrane (3 layers 5/8\" + 1\" liner + steel studs + J-track; MB-1 names the GENERATOR ROOM). MB-1 does not give the steel stud size / gauge / spacing nor the C-CHANNEL size.",
-  "MB-1 with 6\" 20 GA C-H studs @ 24\" o.c. spanning the short room dimension + 6\" J-track both sides; C-CHANNEL not loaded", ("A0.08 MB-1 + A0.06 CH 6\" 20 GA C-H (as loaded)", "0"), ("UL BXUV.1516 listed membrane (not reproduced in the set): manufacturer stud (e.g. 2-1/2\" C-H or CT stud) and C-channel; OR MB-1 only at Generator 103 (MB-1 names only the GENERATOR ROOM; GYP-2 cites AER-09038) with Elec 104 / Elevator Controls 116 as 2 layers on drywall suspension", "2-1/2\" C-H: same LF, lighter stud; MB-1 only at 103: -219.65 SF Type X, -219.65 SF liner, -143 LF C-H, -50 LF J-runner (+ drywall suspension for 219.65 SF)"), "CLG-L1 GYP-2 rooms (MB-1)"),
+  "MB-1 with 6\" 20 GA C-H studs @ 24\" o.c. spanning the short room dimension + 6\" J-track both sides; C-CHANNEL 1-1/2\" cold-rolled @ 48\" o.c. across the studs", ("A0.08 MB-1 + A0.06 CH 6\" 20 GA C-H (as loaded)", "0"), ("UL BXUV.1516 listed membrane (not reproduced in the set): manufacturer stud (e.g. 2-1/2\" C-H or CT stud) and C-channel; OR MB-1 only at Generator 103 (MB-1 names only the GENERATOR ROOM; GYP-2 cites AER-09038) with Elec 104 / Elevator Controls 116 as 2 layers on drywall suspension", "2-1/2\" C-H: same LF, lighter stud; MB-1 only at 103: -219.65 SF Type X, -219.65 SF liner, -143 LF C-H, -50 LF J-runner (+ drywall suspension for 219.65 SF)"), "CLG-L1 GYP-2 rooms (MB-1)"),
  ("RFI-14", "A0.08 FS-1 / RS-1", ["SPACING PER", "RESILIENT CHANNEL"],
   "FS-1 / RS-1 resilient channel spacing: A0.08 says 'SPACING PER ASSEMBLY' (UL L546) and gives no inches.",
   "16\" o.c.", ("A0.08 'spacing per assembly'", "0"), ("UL L546 (typical wood-truss assemblies list 16\" o.c.; some 12\" o.c.)", "12\" o.c.: resilient channel x 1.33"), "FS-1 / RS-1 ceilings"),
  ("RFI-15", "A0.08 RS-1, A3.04", ["RS-1", "REFLECTED CEILING"],
   "Ceilings under the roof RS-1 (L4 rooms, L4 corridor 412 field, L2 mezzanine 219 sloped ceiling not tagged): board type not printed (ceiling 'RE: REFLECTED CEILING PLANS').",
-  "1 layer 5/8\" Type X on resilient channel 16\" o.c. (as drawn: board on channel under the wood framing); mezzanine 219 following the roof slope 536.7 SF", ("A0.08 RS-1 drawn 1 board on channel (as loaded)", "0"), ("09 29 00 2.3 B 'Gypsum Ceiling Board ... more sag resistance', 1/2 inch (spec lists it, does not say where; roof assembly unrated per A0.10)", "same SF, 1/2\" sag-resistant ceiling board instead of 5/8\" Type X; mezzanine 219 flat at 462 SF on drywall suspension: -74.7 SF"), "RS-1 ceilings L4 + CLG-L2-64"),
+  "1 layer 5/8\" Type X on resilient channel 16\" o.c. (as drawn: board on channel under the wood framing; the RC itself per estimator precedent (O'Reilly #5)); mezzanine 219 following the roof slope 536.7 SF", ("A0.08 RS-1 drawn 1 board on channel (as loaded)", "0"), ("09 29 00 2.3 B 'Gypsum Ceiling Board ... more sag resistance', 1/2 inch (spec lists it, does not say where; roof assembly unrated per A0.10)", "same SF, 1/2\" sag-resistant ceiling board instead of 5/8\" Type X; mezzanine 219 flat at 462 SF on drywall suspension: -74.7 SF"), "RS-1 ceilings L4 + CLG-L2-64"),
  ("RFI-16", "A0.06 CH, 09 21 16.23", ["C-H", "24 INCHES"],
   "C-H stud spacing is not printed in A0.06 CH rows or 09 21 16.23.",
   "24\" o.c. (UL U415)", ("not printed", "0"), ("UL U415 C-H studs 24\" o.c.", "0 (as loaded)"), "CH walls"),
@@ -100,7 +100,7 @@ R = [
   ("09 29 00 3.x 'install cornerbead at external corners' (as loaded for L2 / L3)", "0"), ("ASTM C840 cornerbead at external corners", "L1 / L4 / units: count on the plans - estimated +200 to +400 LF corner bead (allowance by the estimator)"), "L1, L4, guest units"),
  ("RFI-20", "A0.08 FS-1, A3.01, S1.02", ["WRAP STEEL BEAMS", "DEEPER THAN TRUSSES"],
   "Retail 124 steel beams wrapped by the FS-1 membrane (A0.08 note 'GYP AND RESILIENT CHANNELS WRAP STEEL BEAMS WHERE THEY ARE DEEPER THAN TRUSSES'; A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS. TYP.'): beam LF measured on A3.01 (154.2 LF), but the depth of each beam below the floor trusses (the wrapped side height) is not dimensioned.",
-  "wrap developed 2.59 ft = bottom flange 0.59 ft + 2 sides x 1'-0\" (5/8\" Type C on 3 RC lines)", ("2 sides x 1'-0\" (as loaded)", "0"), ("2 sides x 6\" / 1'-6\"", "-154 SF / +154 SF Type C per 6\" of side height"), "BW-L1-RETAIL"),
+  "wrap developed 2.59 ft = bottom flange 0.59 ft + 2 sides x 1'-0\" (5/8\" Type C on 3 RC lines; RC per estimator precedent (O'Reilly #5))", ("2 sides x 1'-0\" (as loaded)", "0"), ("2 sides x 6\" / 1'-6\"", "-154 SF / +154 SF Type C per 6\" of side height"), "BW-L1-RETAIL"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
@@ -198,6 +198,18 @@ for rid, src, terms, q, loaded, A, B, items in R:
     bar["disciplinas_detalle"] = "A, S, M, P, E (every discipline of the set; no FP / F / K / vendor sheets issued) + Project Manual Vol 1 / Vol 2 + 2025 Full Drawing Set (superseded) compared"
     bar["un_solo_gc"] = bar["otros_sets"]
     bar["medida_vectorial"] = bar["vectorial"]
+    # U-140: descarte por hoja (todas las hojas del set) con el motivo de su disciplina, para todo RFI abierto
+    if rid not in CERR:
+        for h2 in sorted(st["hojas"]):
+            if h2 in bar["descartes"]:
+                continue
+            if h2.startswith('S'):
+                why = "structural sheet: foundations / framing / connections / schedules of structural members; no gypsum assembly layer, board type, stud size or ceiling data"
+            elif re.match(r'^(M|P|E|MP)', h2):
+                why = "MEP sheet: equipment / piping / power / lighting data; no gypsum board, ceiling assembly or wall type data"
+            else:
+                why = "architectural sheet: the dimensions and notes printed are heights / lengths / details of other elements; nothing printed answers this question"
+            bar["descartes"][h2] = f"read on {h2}: {why} ({q[:90]})"
     if rid == 'RFI-04':   # descartes de las hojas de enlarged plans (sus tags son de otros walls)
         for h2 in sorted(st["hojas"]):
             if not re.match(r"A2\.0[1-4]$", h2):   # solo las plantas A2.01-A2.04 podrían tipar estos walls

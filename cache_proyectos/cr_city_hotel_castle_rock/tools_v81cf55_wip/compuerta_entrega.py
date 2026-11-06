@@ -1283,8 +1283,9 @@ def lista_schedules(c):
             hit = hit or (_en_ms(ms, "stud", szk.group(1), tid) if szk else None) or (_en_ms(ms, "stud", szk.group(1)) if szk else None)
             ms_.append({"campo": "stud", "valor": txt, "ms": hit, "fuera": None})
             if szk:
+                _jr = _en_ms(ms, "J-runner") if re.match(r"(?i)CH\b|CH\.", tid) else None   # BE-CR14: C-H shaft wall = J-runner
                 ms_.append({"campo": "track (bottom / top)", "valor": f"{szk.group(1)} track (type {tid})",
-                            "ms": _en_ms(ms, "track", szk.group(1), tid + "-") or _en_ms(ms, "track", szk.group(1)), "fuera": None})
+                            "ms": _jr or _en_ms(ms, "track", szk.group(1), tid + "-") or _en_ms(ms, "track", szk.group(1)), "fuera": None})
         if t.get("track"):
             ms_ += mats("track", t["track"])
         if t.get("slip_track"):
@@ -1812,11 +1813,12 @@ def ce_detalles_circulados(c):
             if m:
                 (ori if m.group(2) == "origin" else des).add((m.group(3), p.get_label() or ""))
     ev = []
+    _en_set = {CB.norm_hoja(h) for h in (b.hojas or {})}
     for i, r in enumerate(regs, 1):
         nt = f"{r['n']}/{r['t']}"
         if not any(k == nt for k, _ in ori):
             ev.append(f"#{i} {nt} (en {r['origen']}): sin círculo en la hoja de origen")
-        if not any(k == nt for k, _ in des):
+        if not any(k == nt for k, _ in des) and CB.norm_hoja(r["t"]) in _en_set:   # BE-CR23: hoja que no está en el set = sin destino que marcar
             ev.append(f"#{i} {nt}: sin marca en su vista destino {r['t']} (verificarla a ojo: burbujas_verificadas.json "
                       f"{{hoja: [{{detalle_existe, x, y, img}}]}})")
     sin = [r for r in regs if r["disp"] == "sin disposición"]

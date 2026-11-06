@@ -91,8 +91,11 @@ import math as _m
 def _area(P):
     return abs(sum(P[i][0] * P[(i + 1) % len(P)][1] - P[(i + 1) % len(P)][0] * P[i][1] for i in range(len(P)))) / 2
 _sf = {x['room']: float(x['area_sf']) for x in c.get('ceilings') or []}
+_shx = {x['room']: x.get('sheet') for x in c.get('ceilings') or []}
+_scs = {k: (v['value'] if isinstance(v, dict) else v) for k, v in ((c.get('constants') or {}).get('plan_scale_by_sheet') or {}).items()}
 for o in out:
-    P = o['polygon']; a = _area(P) / 81.0; t = _sf.get(o['room'])
+    _k = (_scs.get(_shx.get(o['room'])) or 9.0) ** 2           # escala impresa de la hoja del polígono (A6.02 = 18 pt/ft)
+    P = o['polygon']; a = _area(P) / _k; t = _sf.get(o['room'])
     if not t or not a or abs(a - t) / t <= 0.005:
         continue
     k = _m.sqrt(t / a); cx = sum(q[0] for q in P) / len(P); cy = sum(q[1] for q in P) / len(P)

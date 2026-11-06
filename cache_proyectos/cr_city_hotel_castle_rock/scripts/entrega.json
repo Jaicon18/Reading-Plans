@@ -1,0 +1,59 @@
+{
+ "drive": {
+  "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
+  "carpeta_proyecto": "CR City Hotel - Castle Rock, CO (Owen-Ames-Kimball) 11-12-26",
+  "carpeta_proyecto_id": "1UVry3iaGhJrahxk8DE-Q150WvRAE38h3"
+ },
+ "fichas": "fichas.json",
+ "schedules_indep": "schedules_indep.json",
+ "entrega_dir": "rev1 FINAL \u2014 ESTA ES LA VERSI\u00d3N FINAL PARA REVISAR",
+ "burbujas_verificadas": "burbujas_verificadas.json",
+ "bidset_original": "/root/cr/work/plans/bidset.pdf",
+ "bidset_limpio": "/root/cr/work/plans/bidset_SIN_MARKUPS.pdf",
+ "escalas": {
+  "A2.01": "1/8",
+  "A2.02": "1/8",
+  "A2.03": "1/8",
+  "A2.04": "1/8",
+  "A3.01": "1/8",
+  "A3.02": "1/8",
+  "A3.03": "1/8",
+  "A3.04": "1/8"
+ },
+ "nota_escala": "A2.0x / A3.0x 1/8\" = 1'-0\" (9 pt/ft); enlarged plans A6.0x / A7.xx 1/4\" = 1'-0\" (18 pt/ft) per their view titles",
+ "canon": "/root/cr/work/etapas/4_canon/takeoff_canon.json",
+ "takeoff": "/root/cr/work/takeoff.json",
+ "schedules_ms": {
+  "\"C-H\"\\s*STUD|C-H STUD|STEEL STUDS \\(size not printed\\)": "C-H stud 6\"",
+  "J\"?\\s*RUNNER|J-TRACK": "J-runner 6\"",
+  "C ?-?H STUD|metal stud 6\", min 20 ga": "C-H stud 6\"",
+  "same as TILE-1|TILE": "cement board (tile base)",
+  "plaster -> Level 4|Level 4": "Joint compound",
+  "5/8\"?\\s*Type C": "Type C (ceiling)",
+  "shaft ?wall liner|1\" gyp bd liner|shaftliner|liner panel": "shaftliner panel",
+  "exterior gyp": "exterior gypsum sheathing",
+  "6\" track \\(type CH": "J-runner 6\"",
+  "cementitious backer|\\bCBU\\b": "cement board (tile base)",
+  "water-resistant board|W\\.R\\.|moisture": "Type X W.R.",
+  "resilient chan": "Resilient channel",
+  "per RCP \\(not printed\\)": "5/8\" gypsum board, Type X"
+ },
+ "schedules_fuera": {
+  "ACT\\b|GRID CLG|lay-in": "ACT / lay-in ceiling: other trade (Scope Checklist, ACT EXCLUDED)",
+  "wood framing|\\(Div\\.? ?06\\)|wood sill plate|wood stud|wood truss|2 x \\d": "wood framing EXCLUDED (Div. 06, U-139)",
+  "^\\s*--\\s*$|SFRM|spray": "SFRM / spray-applied fireproofing: not our trade (U-061)",
+  "concrete width|NOM\\.\\)|\\bCMU\\b|cont\\. steel angle|masonry": "CIP concrete / CMU wall and its head angle: not our trade (U-061)",
+  "frame type|double stud at each jamb|\\bHM\\b|door frame": "door openings are in WOOD walls: jamb studs / headers are wood (Div. 06, U-139); frames by others (A8.00)",
+  "No J-track, shaftliner|board per wall type": "no additional material at the intersection: board per wall type, already in the wall rows (Partition Takeoff)",
+  "metal stud 1 5/8\"|min 25 ga|matching 1 5/8\" runner": "A0.06 STUD SCHEDULE not used: no metal-stud partition in the set (W / FW / DW / FI are wood, A0.06); C-H shaft studs per the CH rows",
+  "gypsum board: none in this type": "no gypsum board in this type (exterior insulation / cladding)",
+  "firestop": "firestopping Div. 07 84 13: not our trade (U-061)",
+  "EXTEND TO UNDERSIDE OF ROOF SHEATHING|CONTINUOUS TO BACK SIDE OF EXTERIOR SHEATHING|full height|to underside": "height / continuity rule: applied in the wall heights (Partition Takeoff, Height column, height_source per wall)",
+  "rated opening|host wall rated|board joint at frame corner": "no own material: the rated host wall is loaded per its type (Partition Takeoff); door frames by others (A8.00)",
+  "metal deck|RE: structural": "structure (metal deck / framing RE: structural): not our trade (U-061)",
+  "LP Flameblock": "LP Flameblock / structural sheathing = wood, Div. 06 EXCLUDED (U-139)",
+  "fire partition stops|stops at rated floor": "height / continuity rule: applied in the wall heights (Partition Takeoff, Height column)",
+  "matching [\\d /]+\" runner|deflection track at head": "A0.06 STUD SCHEDULE not used: no metal-stud partition in the set (W / FW / DW / FI are wood, A0.06)",
+  "C-CHANNEL": "MB-1 C-channel: loaded in the misc rows (carrying channel, RFI-13)"
+ }
+}
