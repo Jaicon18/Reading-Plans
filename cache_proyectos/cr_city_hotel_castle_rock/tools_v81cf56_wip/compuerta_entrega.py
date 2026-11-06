@@ -1043,6 +1043,20 @@ def ce_comparativa_banco(c):
 
 
 # ----------------------------------------------------------------------------------------------- biblioteca de errores
+
+@chequeo("CE_SUBIDA_PAQUETE", ["BE-CR28", "BE-140"], "BE-CR28: entrega con más de 1,000 archivos = subir_entrega sube Auditoria/ como "
+         "Auditoria.zip (desde los archivos verificados) y README_REVIEW.md lo dice; sin esa línea = FAIL")
+def ce_subida_paquete(c):
+    if not c.entrega:
+        return R("FAIL", "no hay carpeta de entrega")
+    n = sum(len(fs) for _, _, fs in os.walk(c.entrega, followlinks=True))
+    if n <= 1000:
+        return R("PASS", f"{n} archivos: subida archivo por archivo")
+    txt = open(c.readme, encoding="utf-8").read() if os.path.isfile(c.readme) else ""
+    if "Auditoria.zip" not in txt:
+        return R("FAIL", f"{n} archivos (> 1,000): subir_entrega sube Auditoria/ como Auditoria.zip; README_REVIEW.md debe explicarlo (BE-CR28)")
+    return R("PASS", f"{n} archivos: Auditoria/ va como Auditoria.zip y README_REVIEW.md lo dice")
+
 # Orden del usuario 3-nov ("haz los programas"): las reglas que eran "programa-pendiente" (127 BE-* + U-017 / U-026 /
 # U-034 / U-035 / U-037 / U-043 / U-051 / U-057 / U-058 / U-079 / U-081 / U-082 / R-ALC-02 / R-ALC-04 / R-ALC-10) y
 # CE_CALLOUTS (U-113 / BE-124, cadena de burbujas N/HOJA hasta el final) corren aquí, una línea por regla en ENTREGA_OK.json.

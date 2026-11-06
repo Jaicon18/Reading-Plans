@@ -563,3 +563,7 @@ Arreglo: los dos pasos trabajan sobre la base; finalizar lleva un candado (asser
 ## BE-CR27 — Cement board en caras enteras / faltante en showers; shafts solo en un piso (6-nov, CR City Hotel rev2, auditoría U-138 #2)
 Error: el cement board de L2 / L4 cubría caras completas de muro (tile solo en el shower según 6/A7.02 y 8-9/A7.03) y en L3 faltaban paredes de shower; non-rated con W.R. completo detrás del cement board (RFI-11 dice 'in place of board'); los shafts 2-HR de 7/A9.03 y 8/A9.03 solo en L2.
 Arreglo: banos_cbu.py (cement board por caja de shower medida en vectores, lados sólidos, mismo programa en L2-L4; F6 franja sobre el cement board en non-rated) y shafts_l3l4.py (mismo shaft en cada piso). Regla: mismo stack = misma carga; comparar SF por familia entre pisos típicos antes de entregar.
+
+## BE-CR28 — Subida de 2,093 archivos cortada por tiempo; el Excel iba al final (6-nov, CR City Hotel rev2, COORDINACIÓN)
+Error: subir_entrega subía en orden alfabético (Auditoria/ primero, 2,056 archivos) y la corrida se cortó por el timeout; el Excel quedaba al final.
+Arreglo (v81cf56): orden Take-off / Proposal / Planos marcados / raíz / Auditoria; > 1,000 archivos = Auditoria.zip armado desde los archivos verificados (sha256 de la compuerta) y línea en README_REVIEW.md (CE_SUBIDA_PAQUETE). Test test_be_cr28. Regla: subida en segundo plano con timeout máximo, se retoma sin duplicar.

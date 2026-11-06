@@ -68,6 +68,8 @@ R += ["", "## Bank comparison", "",
  "- **Bracing / blocking - OUT OF RANGE (0): expected.** Blocking in this set is WOOD (A0.05, A0.09, A2.05, A7.32, A9.02, A9.04) = Div. 06 EXCLUDED; no metal bracing / blocking is printed (Scope Checklist ALC-16).",
  "- Joint compound and tape carry 0 % waste on purpose: they are YIELD products (Inputs lb / LF per SF of board), the yield already includes the waste (skill rule BE-CF17); the 6 % non-metal waste applies to board.",
  "- Track is in range only because of the soffit / ceiling track of the framed soffits (7/A7.23) and the C-H J-runner; board, finishing and trim are in range per partition LF."]
+if sum(len(fs) for _, _, fs in os.walk(E, followlinks=True)) > 1000:     # BE-CR28 / CE_SUBIDA_PAQUETE
+    R += ["", "## Upload note", "", "- More than 1,000 files: `Auditoria/` is uploaded to Drive as **Auditoria.zip** (same files the delivery gate verified; unzip it to browse)."]
 open(os.path.join(E, "README_REVIEW.md"), "w").write("\n".join(R) + "\n")
 
 fam = {str(r[0]): r for r in ms}

@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 420,
+ "conteo": 421,
  "reglas": [
   {
    "id": "U-001",
@@ -5690,6 +5690,21 @@
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, auditoría U-138 #2)",
    "texto_corto": "cement board solo en las paredes sólidas de cada shower (caja medida en vectores, misma regla en todos los pisos); non-rated: cement board en lugar del board; shafts del mismo stack en todos los pisos",
    "categoria": "conducta"
+  },
+  {
+   "id": "BE-CR28",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, COORDINACIÓN 6-nov)",
+   "texto_corto": "subida: Take-off / Proposal / Planos marcados / raíz primero, Auditoria al final; > 1,000 archivos = Auditoria.zip desde los archivos verificados, README lo dice (CE_SUBIDA_PAQUETE)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/subir_entrega.py",
+    "take-off:tools/compuerta_entrega.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_cf_pruebas.py",
+    "token": "test_be_cr28"
+   }
   }
  ]
 }
