@@ -1,0 +1,282 @@
+{
+ "familias": {
+  "additional head track": 0.0,
+  "stud reinforcement MEP": 0.0,
+  "extra framing ATM": 0.0,
+  "2-1/2\" CFMF coiling grille head": 0.0,
+  "gypsum board jamb return": 0.0,
+  "PVC trim at FRP": 0.0,
+  "PAFs and duct sleeves": 0.0,
+  "access panel": 0.0,
+  "drywall screws": 0.0,
+  "framing screws": 0.0,
+  "slab pins": 0.0,
+  "expansion anchors": 0.0,
+  "joint compound": 9129.91,
+  "joint tape": 46917.58,
+  "Level 5 finish": 0.0,
+  "deflection clips": 0.0,
+  "framing screws heavy gauge": 0.0,
+  "drywall screws heavy gauge": 0.0
+ },
+ "unidades": {
+  "additional head track": "lf",
+  "stud reinforcement MEP": "pcs",
+  "extra framing ATM": "lf",
+  "2-1/2\" CFMF coiling grille head": "lf",
+  "gypsum board jamb return": "sf",
+  "PVC trim at FRP": "lf",
+  "PAFs and duct sleeves": "pcs",
+  "access panel": "pcs",
+  "drywall screws": "pcs",
+  "framing screws": "pcs",
+  "slab pins": "pcs",
+  "expansion anchors": "pcs",
+  "joint compound": "lb",
+  "joint tape": "lf",
+  "Level 5 finish": "sf",
+  "deflection clips": "pcs",
+  "framing screws heavy gauge": "pcs",
+  "drywall screws heavy gauge": "pcs"
+ },
+ "waste": {
+  "additional head track": "metal",
+  "extra framing ATM": "metal",
+  "2-1/2\" CFMF coiling grille head": "metal",
+  "gypsum board jamb return": "board",
+  "PVC trim at FRP": "board",
+  "Level 5 finish": "board"
+ },
+ "estado": {
+  "additional head track": "DERIVADO",
+  "stud reinforcement MEP": "DERIVADO",
+  "extra framing ATM": "DERIVADO",
+  "2-1/2\" CFMF coiling grille head": null,
+  "gypsum board jamb return": "DERIVADO",
+  "PVC trim at FRP": "DERIVADO",
+  "PAFs and duct sleeves": "DERIVADO",
+  "access panel": "DERIVADO",
+  "drywall screws": "DERIVADO",
+  "framing screws": "DERIVADO",
+  "slab pins": "DERIVADO",
+  "expansion anchors": "DERIVADO",
+  "joint compound": "DERIVADO",
+  "joint tape": "DERIVADO",
+  "Level 5 finish": "DERIVADO",
+  "deflection clips": "DERIVADO",
+  "framing screws heavy gauge": "DERIVADO",
+  "drywall screws heavy gauge": "DERIVADO"
+ },
+ "filas": [
+  {
+   "familia": "additional head track",
+   "valor": 0.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "default (no sheet): estimator standing criterion, not printed in this set [HEAD TRACK @ NON LOAD BRG: ADD FULL LENGTH ADDL HEAD TRACK @ OPNG > 4'-0\"]",
+   "operacion": "no openings > 4'-0\" in stud walls"
+  },
+  {
+   "familia": "stud reinforcement MEP",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "PENDIENTE",
+   "source": "-",
+   "operacion": "mep_sweep sin registro {dx_pt, dy_pt, matches, source} (registro2.py / mep.py contra el plano de walls)"
+  },
+  {
+   "familia": "extra framing ATM",
+   "valor": 0.0,
+   "unidad": "lf",
+   "estado": "PENDIENTE",
+   "source": "-",
+   "operacion": "no atm_recess at the ATM opening and no extra_framing[]: declare atm_recess {source, drawn} (R80.3: every piece printed in the recess is counted; nothing printed = 0) or accesorios_none"
+  },
+  {
+   "familia": "gypsum board jamb return",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "PENDIENTE",
+   "source": "-",
+   "operacion": "no opening with jamb_return: sweep the head / sill / jamb sections (GYPSUM BOARD JAMB RETURN BEYOND) and mark jamb_return + jamb_return_source"
+  },
+  {
+   "familia": "PVC trim at FRP",
+   "valor": 0.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "frp_none_reason",
+   "operacion": "No FRP wall finish in A7.19 finish schedules (TF-1 plaster / vinyl wallcovering / P-1 paint); XI.2.7 FRP exterior finish on CMU (A0.07) is not our trade"
+  },
+  {
+   "familia": "access panel",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "PENDIENTE",
+   "source": "-",
+   "operacion": "no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB"
+  },
+  {
+   "familia": "joint compound",
+   "valor": 9129.91,
+   "unidad": "lb",
+   "estado": "DERIVADO",
+   "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)]",
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 86187.0 + 28802.47 + 11814.8 = 126804.27 SF) = 9129.91"
+  },
+  {
+   "familia": "joint tape",
+   "valor": 46917.58,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 86187.0 + 28802.47 + 11814.8 = 126804.27 SF) = 46917.58"
+  },
+  {
+   "familia": "Level 5 finish",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "PENDIENTE",
+   "source": "-",
+   "operacion": "no level5_items"
+  },
+  {
+   "familia": "deflection clips",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06",
+   "operacion": "not applicable: Wood-framed structure: no deflection clips; C-H shaft walls use J runner top and bottom (A0.06 CH)"
+  },
+  {
+   "familia": "drywall screws",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "GA-216; A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 152165.12"
+  },
+  {
+   "familia": "drywall screws heavy gauge",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "framing screws",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "framing screws heavy gauge",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "slab pins",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "expansion anchors",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "PAFs and duct sleeves",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06, A0.08",
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 0.0"
+  },
+  {
+   "familia": "access panel",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A8.00",
+   "operacion": "no aplica: none scheduled for our trade (A7.19, A8.00)"
+  },
+  {
+   "familia": "stud reinforcement MEP",
+   "valor": 0.0,
+   "unidad": "pcs",
+   "estado": "DERIVADO",
+   "source": "A0.06",
+   "operacion": "no aplica: no metal stud walls with MEP penetrations: wood framing (Div. 06); duct penetrations EXCLUDED (R-ALC-03)"
+  },
+  {
+   "familia": "extra framing ATM",
+   "valor": 0.0,
+   "unidad": "lf",
+   "estado": "DERIVADO",
+   "source": "A2.01",
+   "operacion": "no aplica: no ATM / equipment recess in the set"
+  },
+  {
+   "familia": "gypsum board jamb return",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "DERIVADO",
+   "source": "A8.02",
+   "operacion": "no aplica: window / door jamb returns carried as their own rows from ventanas_trim.json (A8.02 fenestration details) - not by the metal-opening tool (wood openings)"
+  },
+  {
+   "familia": "Level 5 finish",
+   "valor": 0.0,
+   "unidad": "sf",
+   "estado": "DERIVADO",
+   "source": "A7.19",
+   "operacion": "no aplica: no Level 5 area: 09 29 00 3.6.E.4 Level 4 under plaster / wallcovering and back of house; A7.19 TF-1 plaster or vinyl wallcovering everywhere (U-147 Level 4)"
+  }
+ ],
+ "avisos": [
+  "PENDIENTE stud reinforcement MEP: mep_sweep sin registro {dx_pt, dy_pt, matches, source} (registro2.py / mep.py contra el plano de walls)",
+  "PENDIENTE extra framing ATM: no atm_recess at the ATM opening and no extra_framing[]: declare atm_recess {source, drawn} (R80.3: every piece printed in the recess is counted; nothing printed = 0) or accesorios_none",
+  "PENDIENTE gypsum board jamb return: no opening with jamb_return: sweep the head / sill / jamb sections (GYPSUM BOARD JAMB RETURN BEYOND) and mark jamb_return + jamb_return_source",
+  "PENDIENTE access panel: no access panels declared (access_panels[] or fo_in category access_panel): sweep the RCP key notes and the M / P notes for access panels in GWB",
+  "PENDIENTE framing screws: no stud pieces (pass --studs studs_out.json)",
+  "PENDIENTE slab pins: no interior bottom track on slab",
+  "Level 5 sin constants.level5_tags (tags del finish schedule con 'LEVEL 5'): cobertura no verificable",
+  "PENDIENTE Level 5 finish: no level5_items"
+ ],
+ "rfis": [],
+ "nombres_excel": {
+  "additional head track": "Additional head track at openings over 4'-0\" wide",
+  "stud reinforcement MEP": "Stud reinforcement at MEP penetrations",
+  "extra framing ATM": "Extra framing - ATM recess (only what a detail prints at the recess; the wall stays in its type)",
+  "2-1/2\" CFMF coiling grille head": "2-1/2\" CFMF @ 16\" O.C. at coiling grille head (detail per plans)",
+  "gypsum board jamb return": "Gypsum board jamb return at openings",
+  "PVC trim at FRP": "PVC trim at the FRP - edge, inside corner, outside corner and division bar moldings (see Where it comes from)",
+  "PAFs and duct sleeves": "Power-driven fasteners and duct sleeves",
+  "access panel": "Access panel",
+  "drywall screws": "Drywall screws #7 x 1-1/4\" Type S bugle head (board on 25/20 ga studs)",
+  "framing screws": "Framing screws #8-18 x 1/2\" pan head (25/20 ga studs)",
+  "slab pins": "Power-driven fasteners, slab pins for the bottom track",
+  "expansion anchors": "Expansion anchors Hilti 1/4\" Kwik Bolt II, exterior bottom track @ 8\" O.C.",
+  "joint compound": "Joint compound, all purpose",
+  "joint tape": "Joint tape, paper",
+  "Level 5 finish": "Level 5 finish",
+  "deflection clips": "Deflection clips at non-load-bearing walls to structure",
+  "framing screws heavy gauge": "Heavy-gauge framing screws #10-16 x 3/4\" pan head (18/16/14 ga studs)",
+  "drywall screws heavy gauge": "Type S-12 drywall screws #6 x 1-1/4\" (board on 18/16/14 ga studs)"
+ },
+ "excluidas": {
+  "insulation (batt, sound batt, rigid polyiso, rigid board)": "EXCLUDED - estimator standing order: insulation always EXCLUDED"
+ }
+}
