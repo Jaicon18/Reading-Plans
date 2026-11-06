@@ -46,3 +46,4 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - COMPUERTA VERDE 169/3/0 final. Siguiente: subir_entrega -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> zip v81cf56 -> informe COORDINACIÓN.
 - (rev2) SUBIDA rev2 OK: 2,093 archivos verificados en Drive (0 faltan, 0 duplicados). rev1 renombrada 'rev1 — REPLACED BY rev2 (NO USAR)' + nota. Informe enviado a COORDINACIÓN.
 - (rev3) COMPUERTA VERDE 169/4/0 con v81cf57 (PUBLICADA, VIGENTE). Delta vs rev2: exterior sheathing +640.05 SF. Subida rev3 con Auditoria.zip en curso.
+- (rev3) SUBIDA rev3 OK: 38 archivos + Auditoria.zip (2,057 entradas verificadas). rev2 renombrada 'rev2 — REPLACED BY rev3 (NO USAR)' + nota. Informe enviado.
