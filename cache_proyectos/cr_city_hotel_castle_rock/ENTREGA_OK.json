@@ -1,0 +1,2813 @@
+{
+ "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
+ "fecha_california": "2026-11-05 22:51 PST",
+ "fecha_iso": "2026-11-06T06:51:26.180147+00:00",
+ "workdir": "/root/cr/work/entrega",
+ "entrega_dir": "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR",
+ "ok": true,
+ "resumen": {
+  "PASS": 155,
+  "AMBER": 16,
+  "FAIL": 0
+ },
+ "chequeos": [
+  {
+   "id": "CE_ENTREGABLES",
+   "reglas": [
+    "U-011",
+    "U-048"
+   ],
+   "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
+   "estado": "PASS",
+   "evidencia": [
+    "549 archivos en rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ESTANDAR_OREILLY",
+   "reglas": [
+    "U-145",
+    "U-148"
+   ],
+   "descripcion": "entrega con la misma estructura que O'Reilly rev10 FINAL (estándar aprobado por el usuario)",
+   "estado": "PASS",
+   "evidencia": [
+    "13 piezas del estándar O'Reilly rev10 presentes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SIN_PROPOSAL",
+   "reglas": [
+    "U-015",
+    "U-150"
+   ],
+   "descripcion": "sin proposal en la entrega",
+   "estado": "PASS",
+   "evidencia": [
+    "sin archivos de proposal fuera de Proposal/ (U-150)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_PROPOSAL",
+   "reglas": [
+    "U-150"
+   ],
+   "descripcion": "U-150: la proposal (Proposal/) tiene INCLUDED y NOT INCLUDED, cada renglón cargado del Material Summary en INCLUDED, cada EXCLUDED del Scope en NOT INCLUDED y cada precio de material con su fuente y fecha FBM",
+   "estado": "PASS",
+   "evidencia": [
+    "1 proposal(s): INCLUDED / NOT INCLUDED completos y precios FBM con fuente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_FORMATO_EXCEL",
+   "reglas": [
+    "BE-43",
+    "U-003",
+    "U-016",
+    "U-121"
+   ],
+   "descripcion": "Excel de formato fijo: exactamente las 6 hojas visibles en orden y los encabezados fijos de plantilla_excel.py (sin hojas ni columnas agregadas)",
+   "estado": "PASS",
+   "evidencia": [
+    "6 hojas + encabezados fijos OK"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TORNILLERIA",
+   "reglas": [
+    "U-053"
+   ],
+   "descripcion": "toda la tornillería (screws, anchors, Titen, pins/PAF, Tapcon, bolts) = 0 con EXCLUDED en Material Summary y una línea EXCLUDED en Scope Checklist",
+   "estado": "PASS",
+   "evidencia": [
+    "7 renglones de tornillería en 0 con EXCLUDED"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TRACK_FAMILIAS",
+   "reglas": [
+    "BE-24",
+    "U-056"
+   ],
+   "descripcion": "dos familias de track en renglones separados: estándar (bottom / top) y slip / deflection; ningún renglón las mezcla; si no hay slip track, Scope Checklist lo declara NOT APPLICABLE",
+   "estado": "PASS",
+   "evidencia": [
+    "2 renglones estándar / 0 slip-deflection, separados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_FUENTES_MS",
+   "reglas": [
+    "BE-40",
+    "U-025",
+    "U-115"
+   ],
+   "descripcion": "todo renglón del Material Summary con cantidad cita su fuente (N/SHEET, sección de spec o código del trade)",
+   "estado": "PASS",
+   "evidencia": [
+    "todos los renglones con fuente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DATOS_PROYECTO",
+   "reglas": [
+    "BE-114",
+    "R-ALC-08",
+    "R-ALC-09",
+    "U-076",
+    "U-077"
+   ],
+   "descripcion": "hoja de datos del proyecto + hojas obligatorias en takeoff.json, Inputs del Excel, README_REVIEW y PARA_REVISAR (reglas.datos_proyecto_fallas)",
+   "estado": "PASS",
+   "evidencia": [
+    "datos del proyecto en las 4 fuentes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_TIEMPOS",
+   "reglas": [
+    "U-094"
+   ],
+   "descripcion": "TIEMPOS.md con hora de inicio / fin (hora de California) de cada paso 1–9 y TOTAL",
+   "estado": "PASS",
+   "evidencia": [
+    "pasos 1–9 con hora; TIEMPOS.md"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_HORAS_CALIFORNIA",
+   "reglas": [
+    "U-045"
+   ],
+   "descripcion": "horas al usuario en hora de California: sin UTC en TIEMPOS / README / PARA_REVISAR",
+   "estado": "PASS",
+   "evidencia": [
+    "sin horas en UTC"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SIN_DOLARES",
+   "reglas": [
+    "BE-131",
+    "U-018",
+    "U-123"
+   ],
+   "descripcion": "sin costos en dólares en lo entregado: README / PARA_REVISAR / SEGUIMIENTO, celdas visibles del Excel (no fórmulas) y texto de los markups (U-123, preferencias del día 1)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin montos en dólares"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DRIVE_PARENT",
+   "reglas": [
+    "U-001",
+    "U-004",
+    "U-090",
+    "U-122"
+   ],
+   "descripcion": "la carpeta del proyecto en Drive cuelga de Claude outputs de la RAÍZ (1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc); nunca de Projects › Claude outputs",
+   "estado": "PASS",
+   "evidencia": [
+    "parent 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc › 'CR City Hotel - Castle Rock, CO (Owen-Ames-Kimball) 11-12-26' (subir_entrega.py lo verifica en vivo con gdrive_fetch list)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_FORMATO",
+   "reglas": [
+    "U-042",
+    "U-048",
+    "U-052",
+    "U-116"
+   ],
+   "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
+   "estado": "PASS",
+   "evidencia": [
+    "6 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_PROHIBIDOS",
+   "reglas": [
+    "R-ALC-01",
+    "R-ALC-03",
+    "R-ALC-05",
+    "R-ALC-07",
+    "U-053",
+    "U-061",
+    "U-064",
+    "U-071",
+    "U-075"
+   ],
+   "descripcion": "ningún RFI abierto sobre lo que el usuario ordenó resolver sin RFI (tornillería, trades ajenos, ductos, cielo existente sin tipo, altura de partition a demoler)",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI sobre temas con orden fija"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_BARRIDO_IMPRESO",
+   "reglas": [
+    "BE-101",
+    "BE-120",
+    "BE-125",
+    "BE-CF16",
+    "BE-HF18",
+    "U-019",
+    "U-052",
+    "U-086",
+    "U-100",
+    "U-116"
+   ],
+   "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
+   "estado": "PASS",
+   "evidencia": [
+    "6 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_BUSQUEDA_EXHAUSTIVA",
+   "reglas": [
+    "U-140"
+   ],
+   "descripcion": "U-140: un RFI 'not printed' abierto lleva la búsqueda completa: >= 12 términos con sinónimos, todas las disciplinas, SHX, medida vectorial a escala impresa, specs / addenda y sets de todos los GC",
+   "estado": "PASS",
+   "evidencia": [
+    "2 RFI 'not printed' con búsqueda exhaustiva (6 abiertos)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ATRIBUCION_ESTIMADOR",
+   "reglas": [
+    "BE-101",
+    "U-052"
+   ],
+   "descripcion": "toda 'estimator decision' del Excel cita su respuesta escrita o precedente (R-ALC-NN, R80e.34, U-NNN, respuesta del usuario, standing rule)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda decisión del estimador con cita"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DECISIONES_EN_EXCEL",
+   "reglas": [
+    "U-016",
+    "U-050"
+   ],
+   "descripcion": "todo RFI cerrado (por plano o por el estimador) queda escrito en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "31 cierres citados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SEGUIMIENTO",
+   "reglas": [
+    "U-048"
+   ],
+   "descripcion": "SEGUIMIENTO.md lista cada RFI abierto",
+   "estado": "PASS",
+   "evidencia": [
+    "RFI abiertos en SEGUIMIENTO"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ALTURA_IMPRESA",
+   "reglas": [
+    "BE-119",
+    "BE-134",
+    "R80f.29",
+    "U-010",
+    "U-088",
+    "U-099"
+   ],
+   "descripcion": "BE-119: cada markup re-medido a la escala IMPRESA y su Depth comparado contra la altura IMPRESA de su fuente (N/HOJA), no contra el Excel. RED = FAIL; sin altura impresa = AMBER",
+   "estado": "AMBER",
+   "evidencia": [
+    "0 RED / 15 AMBER de 755",
+    "FI.2-L4-01: FI.2-L4-01: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4)",
+    "FI.2-L4-02: FI.2-L4-02: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4)",
+    "X-L4-02: X-L4-02: no printed height to compare (no printed height in the citation; sheets cited 5/A6.02, L4)",
+    "FW.2-L4-04: FW.2-L4-04: no printed height to compare (no printed height in the citation; sheets cited 11/A6.01, A0.06, L4)",
+    "FW.2-L4-05: FW.2-L4-05: no printed height to compare (no printed height in the citation; sheets cited 11/A6.01, A0.06, L4)",
+    "FW.2-L4-06: FW.2-L4-06: no printed height to compare (no printed height in the citation; sheets cited 11/A6.01, A0.06, L4)",
+    "FW.2-L4-07: FW.2-L4-07: no printed height to compare (no printed height in the citation; sheets cited 11/A6.01, A0.06, L4)",
+    "FW.4-L4-15: FW.4-L4-15: no printed height to compare (no printed height in the citation; sheets cited 11/A6.01, A0.06, L4)",
+    "XW.6.3-L2-12 A: XW.6.3-L2-12 A: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.3-L2-12 B: XW.6.3-L2-12 B: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.4-L2-03: XW.6.4-L2-03: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.4-L2-01 A: XW.6.4-L2-01 A: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.4-L2-01 B: XW.6.4-L2-01 B: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.4-L2-02 A: XW.6.4-L2-02 A: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "XW.6.4-L2-02 B: XW.6.4-L2-02 B: no printed height to compare (no printed height in the citation; sheets cited 2/A5.04)",
+    "LEGEND: la hoja del PDF de markups no tiene capa de texto; escala tomada del canon (9.000 pt/ft)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MATERIALES_SCHEDULE",
+   "reglas": [
+    "BE-122",
+    "BE-126",
+    "BE-134",
+    "R80f.30",
+    "R80f.34",
+    "U-111"
+   ],
+   "descripcion": "BE-122 (j): lectura INDEPENDIENTE del Partition Type Schedule (fichas.json, subagente que no vio el Excel) vs lo cargado por wall / type (revision_materiales.comparar_type) + cada renglón del Material Summary = suma de walls por type con origen impreso (revision_materiales.sumas). RED = FAIL",
+   "estado": "AMBER",
+   "evidencia": [
+    "type W.4-0: AMBER (el schedule no lo dice)",
+    "type W.6-0: AMBER (el schedule no lo dice)",
+    "type W.6-1: AMBER (el schedule no lo dice)",
+    "type W.6-2: AMBER (el schedule no lo dice)",
+    "type W.62-1: AMBER (el schedule no lo dice)",
+    "type FW.1-0: AMBER (el schedule no lo dice)",
+    "type FW.2-0: AMBER (el schedule no lo dice)",
+    "type FW.4-0: AMBER (el schedule no lo dice)",
+    "type FW.6-0: AMBER (el schedule no lo dice)",
+    "type DW.4-0: AMBER (el schedule no lo dice)",
+    "type DW.4-1: AMBER (el schedule no lo dice)",
+    "type FI.2-0: AMBER (el schedule no lo dice)",
+    "type FI.6-0: AMBER (el schedule no lo dice)",
+    "type SFRM-A0.06: AMBER (el schedule no lo dice)",
+    "type C.8-0: AMBER (el schedule no lo dice)",
+    "type C.8-1: AMBER (el schedule no lo dice)",
+    "type C.8-2: AMBER (el schedule no lo dice)",
+    "type C.8-3: AMBER (el schedule no lo dice)",
+    "type CM.4-0: AMBER (el schedule no lo dice)",
+    "type CM.8-0: AMBER (el schedule no lo dice)",
+    "type CM.8-1: AMBER (el schedule no lo dice)",
+    "type CM.8-2: AMBER (el schedule no lo dice)",
+    "type CM.8-3: AMBER (el schedule no lo dice)",
+    "type CH.2-1: AMBER (el schedule no lo dice)",
+    "type CH.4-1: AMBER (el schedule no lo dice)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MARKUPS_EXCEL",
+   "reglas": [
+    "BE-117",
+    "BE-44",
+    "U-010",
+    "U-121"
+   ],
+   "descripcion": "verificar_markups_excel.py: TYPE·LF·H·SF·DETAIL·Wall ID = Excel, /Measure = escala impresa, Length vs LF <= 0.5 %",
+   "estado": "PASS",
+   "evidencia": [
+    "markups = Excel = escala impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_AUDITORIA",
+   "reglas": [
+    "BE-42",
+    "U-005",
+    "U-007",
+    "U-011",
+    "U-121"
+   ],
+   "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
+   "estado": "PASS",
+   "evidencia": [
+    "2485 revisiones OK"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_REGLAS",
+   "reglas": [
+    "BE-116",
+    "BE-117",
+    "BE-134",
+    "BE-CF08",
+    "BE-CF16",
+    "R-ALC-11",
+    "R-ALC-12",
+    "R80f.31",
+    "U-009",
+    "U-031",
+    "U-083",
+    "U-085",
+    "U-086",
+    "U-114"
+   ],
+   "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
+   "estado": "PASS",
+   "evidencia": [
+    "reglas.py OK (901 reglas)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_COPIA_LIMPIA",
+   "reglas": [
+    "BE-CF24",
+    "U-051"
+   ],
+   "descripcion": "U-051: la copia limpia del bid set (sin markups previos) tiene el mismo contenido que el original, hoja por hoja (páginas, XObjects, render sin anotaciones); entrega.json declara bidset_original y bidset_limpio",
+   "estado": "PASS",
+   "evidencia": [
+    "148 páginas = original (XObjects faltantes: original 0, copia 0, todos también en el original)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_COMPARATIVA_BANCO",
+   "reglas": [
+    "U-130"
+   ],
+   "descripcion": "U-130: COMPARATIVA_BANCO.md (compuerta_entrega.py banco) del Excel entregado contra las referencias verificadas del banco, familias normalizadas por LF de partition y por SF de piso; toda familia OUT OF RANGE explicada en README_REVIEW.md (sección 'Bank comparison')",
+   "estado": "PASS",
+   "evidencia": [
+    "2 familia(s) fuera de rango explicadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_017",
+   "reglas": [
+    "U-017"
+   ],
+   "descripcion": "U-017: una cota IMPRESA que coincide con una lectura manda: la resolución AB nunca toma la otra lectura",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna resolución contra una cota impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_08",
+   "reglas": [
+    "BE-08",
+    "CC-R4d"
+   ],
+   "descripcion": "BE-08: todo LF con cota impresa coincide (± 1\") o la diferencia está explicada / es decisión citada",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_026",
+   "reglas": [
+    "BE-108",
+    "U-026"
+   ],
+   "descripcion": "U-026 / BE-108: ningún RFI abierto sobre un tema que un precedente del estimador (R80e.34 / R80e.78) ya decidió, salvo que lo cite",
+   "estado": "PASS",
+   "evidencia": [
+    "6 RFI abiertos sin precedente decidido"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R1",
+   "reglas": [
+    "CC-R1"
+   ],
+   "descripcion": "CC-R1 (Consumer Cellular rev3 audit): un renglón del Material Summary cuyo desglose lista valores SIN el ID de su ítem y esos valores son los ítems de otros renglones = renglón duplicado = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "35 renglones sin desglose duplicado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R5",
+   "reglas": [
+    "CC-R5"
+   ],
+   "descripcion": "CC-R5 (Consumer Cellular rev3 audit): un renglón con 0 < net < 0.5 sin ítem que lo justifique compra piezas por redondeo = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún renglón de residuo de redondeo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R7",
+   "reglas": [
+    "CC-R7"
+   ],
+   "descripcion": "CC-R7 (Consumer Cellular rev3 audit): el Scope Checklist dice EXCLUDED de un material (sigla FRP / PVC / ACT ...) que el Material Summary carga con cantidad > 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún EXCLUDED sobre un material cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CC_R12",
+   "reglas": [
+    "CC-R12"
+   ],
+   "descripcion": "CC-R12 / U-114 (Consumer Cellular rev3 audit): un wall cuyo largo es la cota impresa (length_status CONFIRMADO) va [CONFIRMED] en la Partition Takeoff, no [DERIVED]",
+   "estado": "PASS",
+   "evidencia": [
+    "0 walls con cota impresa en [CONFIRMED]"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_146",
+   "reglas": [
+    "U-146"
+   ],
+   "descripcion": "U-146 (usuario 5-nov): deck con dos alturas impresas y el corte no dibujado = se carga la altura MAYOR impresa, sin RFI (criterios.deck_sin_corte); un RFI abierto sobre ese tema = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI abierto sobre el corte de deck (U-146)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_147",
+   "reglas": [
+    "U-147"
+   ],
+   "descripcion": "U-147 (usuario 5-nov): level of finish no especificado = Level 4, sin RFI (criterios.level_of_finish); un RFI abierto sobre ese tema = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún RFI abierto sobre el level of finish (U-147)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_034",
+   "reglas": [
+    "BE-137",
+    "BE-59",
+    "R80f.39",
+    "U-034"
+   ],
+   "descripcion": "U-034 / BE-59: compuerta de completitud (runner/completitud.revisar) en A y en B: todas las hojas de planta y types del schedule presentes, y nada que la otra lectura trae falta",
+   "estado": "PASS",
+   "evidencia": [
+    "A y B completas sobre ['A2.01', 'A2.02', 'A2.03', 'A2.04', 'A6.00', 'A6.01', 'A6.02', 'A7.30', 'A7.45', 'A7.50', 'A7.55']"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_035",
+   "reglas": [
+    "BE-65",
+    "U-035"
+   ],
+   "descripcion": "U-035: escala (plan_scale_pt_per_ft), band.sheet y barrido MEP con hojas M / P en el canon: la evidencia la generan los programas desde coordenadas",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_037",
+   "reglas": [
+    "BE-142",
+    "BE-72",
+    "U-037"
+   ],
+   "descripcion": "U-037 / BE-72: conteos por type y hoja contra el inventario de tags (y columnas): ningún tag del inventario sin wall de su type en su hoja",
+   "estado": "PASS",
+   "evidencia": [
+    "361 tags del inventario con wall de su type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_043",
+   "reglas": [
+    "BE-94",
+    "U-043"
+   ],
+   "descripcion": "U-043 / BE-94: la versión vigente del INDICE registra la prueba del BANCO (todas las lecturas guardadas) con 0 familias que empeoran",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: se revisa al armar la versión (verificar_version.py revisar_banco)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_051",
+   "reglas": [
+    "BE-100",
+    "U-051"
+   ],
+   "descripcion": "U-051 / BE-100: el bid set que recibe la sesión no trae markups de otro take-off (solo se conservan las anotaciones 'AutoCAD SHX Text')",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin copia del bid set en la carpeta (entrega.json bidset / copia_limpia*.pdf)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_057",
+   "reglas": [
+    "BE-110",
+    "U-057"
+   ],
+   "descripcion": "U-057 / BE-110: criterios fijos por programa: ninguna altura medida a escala sin RFI y board sin descontar aberturas",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_058",
+   "reglas": [
+    "BE-111",
+    "U-058"
+   ],
+   "descripcion": "U-058 / BE-111: la altura de una cara INTERIOR no sale de una cota de fachada exterior",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF01",
+   "reglas": [
+    "BE-CF01",
+    "U-079"
+   ],
+   "descripcion": "U-079 / BE-CF01: el texto SHX de las hojas M / P / E sigue en el set (la copia limpia no lo borró)",
+   "estado": "PASS",
+   "evidencia": [
+    "36 / 36 hojas M/P/E con texto"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_081",
+   "reglas": [
+    "BE-CF06",
+    "U-081"
+   ],
+   "descripcion": "U-081 / BE-CF06: comparar_extra.py corrió: revision_extra con A vs B de board-only, cielos, misc y demo",
+   "estado": "PASS",
+   "evidencia": [
+    "A vs B de ['ceilings']"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_082",
+   "reglas": [
+    "R-ALC-10",
+    "U-082"
+   ],
+   "descripcion": "U-082 / R-ALC-10: todo conflicto plano vs spec / código cargado con la opción A (plano) lleva NOTA con N/HOJA, la sección de spec / código y el delta",
+   "estado": "PASS",
+   "evidencia": [
+    "1 conflictos con N/HOJA + sección + delta"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_02",
+   "reglas": [
+    "R-ALC-02"
+   ],
+   "descripcion": "R-ALC-02: blocking de accesorio sin medida impresa = 3 ft x 2 filas por accesorio, sin RFI",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún blocking de accesorio sin medida impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_04",
+   "reglas": [
+    "BE-135",
+    "R-ALC-04"
+   ],
+   "descripcion": "R-ALC-04: si el set tiene demolición de gyp / metal frame, la demolición está cuantificada (nuestro alcance)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: el set no tiene demolición de gyp / metal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_01",
+   "reglas": [
+    "BE-01"
+   ],
+   "descripcion": "BE-01: detalle 'FIRE STOP AT CEILING LINE' impreso -> renglón de fire-stop track (o destino)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: el set no imprime fire stop en la línea de cielo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_02",
+   "reglas": [
+    "BE-02",
+    "CC-R4c"
+   ],
+   "descripcion": "BE-02: nota W.R. 'for wall AND ceiling' -> los cielos GWB de los wet rooms van en W.R.",
+   "estado": "PASS",
+   "evidencia": [
+    "cielos GWB de wet rooms en W.R."
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_03",
+   "reglas": [
+    "BE-03"
+   ],
+   "descripcion": "BE-03: toda cara con gypsum de un wet room va en W.R. (ninguna en Type X / regular)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras de wet rooms en W.R."
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_04",
+   "reglas": [
+    "BE-04"
+   ],
+   "descripcion": "BE-04: ninguna cara cuya sección dice SOLO plywood / FRT (sin gypsum) lleva board",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_05",
+   "reglas": [
+    "BE-05"
+   ],
+   "descripcion": "BE-05: capas por cara = las del dibujo: una fuente que dice 1 LAYER no carga 2 capas",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_06",
+   "reglas": [
+    "BE-06"
+   ],
+   "descripcion": "BE-06: todo soffit con cada lado expuesto + su fondo (no una sola cara)",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_07",
+   "reglas": [
+    "BE-07"
+   ],
+   "descripcion": "BE-07: cada tag '<type> SIM.' de la planta tiene su fila de remate",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin partition_schedule en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_09",
+   "reglas": [
+    "BE-09"
+   ],
+   "descripcion": "BE-09: ningún wall EXISTING / to remain cuantificado como nuevo",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_10",
+   "reglas": [
+    "BE-10"
+   ],
+   "descripcion": "BE-10: soffit con cota 'HOLD' cuantificado + RFI, nunca 'not priced'",
+   "estado": "PASS",
+   "evidencia": [
+    "ninguna cota HOLD sin cuantificar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_11",
+   "reglas": [
+    "BE-11"
+   ],
+   "descripcion": "BE-11: área rotulada 'AREA OF … PLYWOOD / BACKING / BLOCKING' con SF cargados",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún área rotulada de plywood / backing"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_12",
+   "reglas": [
+    "BE-12",
+    "R80f.36"
+   ],
+   "descripcion": "BE-12: toda cita textual (entre comillas) del Excel existe impresa en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "51 citas textuales impresas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_13",
+   "reglas": [
+    "BE-13"
+   ],
+   "descripcion": "BE-13: backboard / plywood / backing de hojas E / M / P con destino",
+   "estado": "PASS",
+   "evidencia": [
+    "backboard de ['E0.07', 'T0.01'] con destino"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_14",
+   "reglas": [
+    "BE-14"
+   ],
+   "descripcion": "BE-14: ninguna afirmación 'not printed / not specified' cuyo término aparece impreso con su valor en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "4 afirmaciones 'not printed' sin valor impreso en el set"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_15",
+   "reglas": [
+    "BE-129",
+    "BE-15"
+   ],
+   "descripcion": "BE-15: el miembro del renglón = el rotulado en su detalle (un JOIST / horizontal no se carga como poste)",
+   "estado": "PASS",
+   "evidencia": [
+    "miembros y burbujas citadas coinciden"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_16",
+   "reglas": [
+    "BE-16",
+    "CC-R4e"
+   ],
+   "descripcion": "BE-16: cada accesorio impreso en los detalles del trade (clips, angles, kickers, straps) tiene destino",
+   "estado": "PASS",
+   "evidencia": [
+    "4 accesorios impresos con destino"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_17",
+   "reglas": [
+    "BE-17"
+   ],
+   "descripcion": "BE-17: fasteners por gauge: con varios gauges cada producto dependiente sale por gauge (o todo EXCLUDED, U-053)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_18",
+   "reglas": [
+    "BE-18",
+    "BE-VS-03"
+   ],
+   "descripcion": "BE-18 / BE-VS-03: matriz de cobertura (Paso 12) con 0 GAP",
+   "estado": "PASS",
+   "evidencia": [
+    "cobertura sin GAP"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_19",
+   "reglas": [
+    "BE-19",
+    "BE-56"
+   ],
+   "descripcion": "BE-19 / BE-56: fastener cargado con un espaciamiento impreso (no default) — o tornillería EXCLUDED",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_20",
+   "reglas": [
+    "BE-20",
+    "R80f.36"
+   ],
+   "descripcion": "BE-20: framed soffit con studs Y 2 tracks (no solo perímetro)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin soffits"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_21",
+   "reglas": [
+    "BE-21"
+   ],
+   "descripcion": "BE-21: glass mat solo donde un detalle / tag lo rotula",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin renglón de glass mat"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_22",
+   "reglas": [
+    "BE-22"
+   ],
+   "descripcion": "BE-22: jamb return solo con detalle que lo dibuja",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin renglón de jamb return"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_23",
+   "reglas": [
+    "BE-23"
+   ],
+   "descripcion": "BE-23: acoustical sealant EXCLUDED (sin renglón con cantidad)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin acoustical sealant cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_25",
+   "reglas": [
+    "BE-25",
+    "CC-R4b"
+   ],
+   "descripcion": "BE-25: cada ceiling de gypsum cita el detalle de su sistema de suspensión",
+   "estado": "PASS",
+   "evidencia": [
+    "80 cielos con su detalle de sistema"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_26",
+   "reglas": [
+    "BE-26"
+   ],
+   "descripcion": "BE-26: type K / ballistic medido al hatch / cota, no a nodos",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin ballistic"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_27",
+   "reglas": [
+    "BE-27"
+   ],
+   "descripcion": "BE-27: recess de ATM / equipo con sus piezas o razón none",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin ATM / recess"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_28",
+   "reglas": [
+    "BE-28"
+   ],
+   "descripcion": "BE-28: canopy / parapet nuevo con su framing o destino",
+   "estado": "PASS",
+   "evidencia": [
+    "canopy / parapet con destino (['A2.05'])"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_29",
+   "reglas": [
+    "BE-29"
+   ],
+   "descripcion": "BE-29: header 'assumed' sin schedule = 0 LF + RFI con delta (o precedente R80e.34 #4)",
+   "estado": "PASS",
+   "evidencia": [
+    "headers con schedule, RFI o precedente"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_41",
+   "reglas": [
+    "BE-41"
+   ],
+   "descripcion": "BE-41: ningún nombre de archivo interno (.json / .py / carpetas de trabajo) en las hojas visibles del Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "sin nombres internos en el Excel"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_45",
+   "reglas": [
+    "BE-45"
+   ],
+   "descripcion": "BE-45: proporciones en rango (board del Material Summary vs Σ Board SF del Partition Takeoff) o explicadas",
+   "estado": "PASS",
+   "evidencia": [
+    "board MS / PT = 1.09"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_46",
+   "reglas": [
+    "BE-46"
+   ],
+   "descripcion": "BE-46: un espesor y un producto por renglón (no 1/2\" + 5/8\" ni 3-5/8\" + 6\" en el mismo)",
+   "estado": "PASS",
+   "evidencia": [
+    "un espesor / tamaño por renglón"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_47",
+   "reglas": [
+    "BE-47"
+   ],
+   "descripcion": "BE-47: todo ID ALC- / RFI- citado en textos existe como renglón",
+   "estado": "PASS",
+   "evidencia": [
+    "IDs citados existen"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_48",
+   "reglas": [
+    "BE-48"
+   ],
+   "descripcion": "BE-48: ningún nombre de archivo interno en el PDF de markups (Contents / Subject / texto agregado)",
+   "estado": "PASS",
+   "evidencia": [
+    "markups sin nombres internos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_49",
+   "reglas": [
+    "BE-49"
+   ],
+   "descripcion": "BE-49: la cota impresa usada pertenece al elemento: LF = cota y el dibujo (band / escala) confirma (± 10 %)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin walls con cota impresa y band"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_50",
+   "reglas": [
+    "BE-50"
+   ],
+   "descripcion": "BE-50: lo que una hoja / spec E / M / P asigna a otro contratista dentro de nuestro alcance tiene RFI o nota",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin asignaciones a otro contratista en E/M/P"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_51",
+   "reglas": [
+    "BE-51"
+   ],
+   "descripcion": "BE-51: renglón en LF con venta por pieza = piezas por stock length (no ROUNDUP del LF)",
+   "estado": "PASS",
+   "evidencia": [
+    "piezas por stock length"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_52",
+   "reglas": [
+    "BE-52"
+   ],
+   "descripcion": "BE-52: todo 'covered by / included in row N' apunta a un renglón que existe y tiene cantidad",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin coberturas heredadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_53",
+   "reglas": [
+    "BE-53"
+   ],
+   "descripcion": "BE-53: el delta de un RFI incluye cada pieza impresa que su propia pregunta cita del detalle",
+   "estado": "PASS",
+   "evidencia": [
+    "deltas con las piezas citadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_54",
+   "reglas": [
+    "BE-54"
+   ],
+   "descripcion": "BE-54: la partición por producto aplica cada deducción a sus caras, no al total",
+   "estado": "PASS",
+   "evidencia": [
+    "deducciones por cara"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_55",
+   "reglas": [
+    "BE-55"
+   ],
+   "descripcion": "BE-55: ningún código interno del plan check (C7-0x, C-0x, N-0x, 'rev7 plan check') en textos al cliente",
+   "estado": "PASS",
+   "evidencia": [
+    "sin códigos internos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_57",
+   "reglas": [
+    "BE-57"
+   ],
+   "descripcion": "BE-57: madera / board / plywood / cement board / FRP con el waste NO metal de Inputs",
+   "estado": "PASS",
+   "evidencia": [
+    "waste no metal en no metálicos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_58",
+   "reglas": [
+    "BE-58"
+   ],
+   "descripcion": "BE-58: el Excel lo generó la cadena (canon.py + reglas.py + plantilla_excel.py) — bitácora o sello del Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "Excel con sello de la cadena (<excel>.sello.json)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_60",
+   "reglas": [
+    "BE-137",
+    "BE-60"
+   ],
+   "descripcion": "BE-60: canon A / B / AB dentro del esquema (validar_canon: escala, band.sheet; sin claves inventadas)",
+   "estado": "PASS",
+   "evidencia": [
+    "A y B dentro del esquema"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_61",
+   "reglas": [
+    "BE-61"
+   ],
+   "descripcion": "BE-61: la resolución parte de la lectura más completa (AB no tiene menos walls que la más completa sin motivo)",
+   "estado": "PASS",
+   "evidencia": [
+    "AB 755 walls vs A 500 / B 477"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_62",
+   "reglas": [
+    "BE-62"
+   ],
+   "descripcion": "BE-62: element / type normalizados (un BOX o tag de columna es column_wrap, no wall) y >= 80 % emparejado",
+   "estado": "PASS",
+   "evidencia": [
+    "elements normalizados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_63",
+   "reglas": [
+    "BE-137",
+    "BE-63"
+   ],
+   "descripcion": "BE-63: el overlay no mete largos / bands de otra referencia: todo wall del AB conserva el largo de A o de B (o lo cambia una decisión citada)",
+   "estado": "PASS",
+   "evidencia": [
+    "walls del AB con largos de la lectura"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_64",
+   "reglas": [
+    "BE-64"
+   ],
+   "descripcion": "BE-64: las lecturas no ven respuestas del proyecto (rev anteriores, RFI respondidos, Excel final)",
+   "estado": "PASS",
+   "evidencia": [
+    "lecturas sin rutas de respuestas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_66",
+   "reglas": [
+    "BE-66",
+    "BE-75"
+   ],
+   "descripcion": "BE-66 / BE-75: costos.csv registra toda llamada (también las fallidas) y ninguna pasa su tope",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: corrida por suscripción (sin costos.csv)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_67",
+   "reglas": [
+    "BE-67",
+    "BE-74",
+    "BE-96"
+   ],
+   "descripcion": "BE-67 / BE-74 / BE-96: referencias del canon íntegras (nodes y openings apuntan a walls que existen)",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_68",
+   "reglas": [
+    "BE-68",
+    "BE-86"
+   ],
+   "descripcion": "BE-68 / BE-86: cada wall con evidencia por programa: estado #0 en altura / largo y HOJA en length_source",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_69",
+   "reglas": [
+    "BE-69"
+   ],
+   "descripcion": "BE-69: el renglón de Type X no suma caras regular / MR (renglón = board + uso)",
+   "estado": "PASS",
+   "evidencia": [
+    "Type X sin regular / MR"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_70",
+   "reglas": [
+    "BE-70"
+   ],
+   "descripcion": "BE-70: el RCP imprime cielos / soffits de gypsum -> el canon los trae",
+   "estado": "PASS",
+   "evidencia": [
+    "cielos en el canon (['A0.06', 'A0.08', 'A3.01'])"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_71",
+   "reglas": [
+    "BE-71"
+   ],
+   "descripcion": "BE-71: la resolución y la cobertura quedaron escritas (resolucion.md + matriz de cobertura)",
+   "estado": "PASS",
+   "evidencia": [
+    "resolución y cobertura escritas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_73",
+   "reglas": [
+    "BE-73"
+   ],
+   "descripcion": "BE-73: toda fila del Partition Takeoff con Wall # tiene su type (un return va en el type de su wall)",
+   "estado": "PASS",
+   "evidencia": [
+    "filas con type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_76",
+   "reglas": [
+    "BE-76"
+   ],
+   "descripcion": "BE-76: decisión general por atributo aplicada a TODAS las caras (ninguna cara queda con el board viejo)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin decisión general de board en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_77",
+   "reglas": [
+    "BE-77"
+   ],
+   "descripcion": "BE-77: la comparación A/B detecta diferencias de atributos (board por cara, altura) y las manda a la resolución",
+   "estado": "PASS",
+   "evidencia": [
+    "diferencias de atributos listadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_78",
+   "reglas": [
+    "BE-78"
+   ],
+   "descripcion": "BE-78: ninguna altura placeholder sin hoja de sección / elevación citada (completitud.alturas_placeholder)",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_79",
+   "reglas": [
+    "BE-79"
+   ],
+   "descripcion": "BE-79: ninguna cara a medias (board sin layers / side / room)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras completas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_80",
+   "reglas": [
+    "BE-80"
+   ],
+   "descripcion": "BE-80: un 'none' de una lectura contradicho por la otra (column wraps, misc) queda en la comparación",
+   "estado": "PASS",
+   "evidencia": [
+    "nones contradichos listados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_81",
+   "reglas": [
+    "BE-81"
+   ],
+   "descripcion": "BE-81: partition_types / schedule con dato obligatorio (fuente) y todo type usado en walls está en el schedule",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin partition_schedule en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_82",
+   "reglas": [
+    "BE-82",
+    "BE-CH02"
+   ],
+   "descripcion": "BE-82 / BE-CH02: sin doble conteo entre hojas / plantas ampliadas (mismo type, mismo cuarto, mismo tramo)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin dobles conteos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_83",
+   "reglas": [
+    "BE-83",
+    "BE-93",
+    "R80f.36"
+   ],
+   "descripcion": "BE-83 / BE-93: ninguna cara (W.R. incluida) sube a deck en un cuarto con cielo sin fuente 'full height / to deck' (completitud.caras_sobre_ceiling)",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_84",
+   "reglas": [
+    "BE-84"
+   ],
+   "descripcion": "BE-84: con column wraps / soffits / esquinas exteriores hay corner bead (trim) cargado",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin column wraps ni soffits"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_85",
+   "reglas": [
+    "BE-85"
+   ],
+   "descripcion": "BE-85: ningún accesorios_none / *_none_reason contradice un ítem cargado",
+   "estado": "PASS",
+   "evidencia": [
+    "nones sin contradicción"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_88",
+   "reglas": [
+    "BE-88"
+   ],
+   "descripcion": "BE-88: Pending Items sin datos fuera de las 3 columnas fijas (las opciones van en 'Delta of each alternative')",
+   "estado": "PASS",
+   "evidencia": [
+    "Pending Items en 3 columnas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_89",
+   "reglas": [
+    "BE-89",
+    "R80f.36"
+   ],
+   "descripcion": "BE-89: nodes derivados: no más de 60 % 'free' (faltan L / T)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin nodes suficientes"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_90",
+   "reglas": [
+    "BE-90"
+   ],
+   "descripcion": "BE-90: con DOOR SCHEDULE en el set, el canon declara openings (jambs, header, cripples)",
+   "estado": "PASS",
+   "evidencia": [
+    "0 metal walls; openings en wood framing EXCLUDED: openings in WOOD-framed walls: headers / jambs / king studs are wood (Div. 06, EXCLUDED); door frames by others (A8.00);"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_91",
+   "reglas": [
+    "BE-91"
+   ],
+   "descripcion": "BE-91: el claude -p del runner no hereda ANTHROPIC_BASE_URL / CLAUDE_CODE_* de la sesión",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: corrida por suscripción (sin claude -p)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_92",
+   "reglas": [
+    "BE-92"
+   ],
+   "descripcion": "BE-92: ninguna decisión del estimador queda sin objeto (apunta a un ítem que la lectura no trae)",
+   "estado": "PASS",
+   "evidencia": [
+    "decisiones con objeto"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_95",
+   "reglas": [
+    "BE-95"
+   ],
+   "descripcion": "BE-95: figura curva medida por arco (no cuerdas / piezas sueltas)",
+   "estado": "PASS",
+   "evidencia": [
+    "curvos por arco"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_97",
+   "reglas": [
+    "BE-97"
+   ],
+   "descripcion": "BE-97: dos caras del mismo cuarto con alturas distintas van con su side (no se juntan en un renglón)",
+   "estado": "PASS",
+   "evidencia": [
+    "caras con side"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_98",
+   "reglas": [
+    "BE-98"
+   ],
+   "descripcion": "BE-98: una exclusión general por type (existentes) se aplica: ningún wall de ese type queda con board / framing",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin exclusión general por type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_102",
+   "reglas": [
+    "BE-102",
+    "R80f.36"
+   ],
+   "descripcion": "BE-102: el Excel solo cita hojas que existen en el set",
+   "estado": "PASS",
+   "evidencia": [
+    "hojas citadas existen"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_103",
+   "reglas": [
+    "BE-103"
+   ],
+   "descripcion": "BE-103: todo wall con LF tiene geometría (band) para su markup; markups = walls",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_104",
+   "reglas": [
+    "BE-104"
+   ],
+   "descripcion": "BE-104: type que imprime dos sistemas (furring + studs) carga los dos",
+   "estado": "PASS",
+   "evidencia": [
+    "sistemas dobles cargados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_105",
+   "reglas": [
+    "BE-105"
+   ],
+   "descripcion": "BE-105: ningún producto impreso queda solo en RFI con el default de la tool",
+   "estado": "PASS",
+   "evidencia": [
+    "lo impreso cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_106",
+   "reglas": [
+    "BE-106"
+   ],
+   "descripcion": "BE-106: sin 'Estimator criterion / Handoff - Approved' de otro proyecto sin cita",
+   "estado": "PASS",
+   "evidencia": [
+    "sin criterios heredados sin cita"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_107",
+   "reglas": [
+    "BE-107"
+   ],
+   "descripcion": "BE-107: con la orden U-053 el canon declara fasteners_excluded y todo fastener queda en 0",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin canon: no se puede probar"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_143",
+   "reglas": [
+    "U-143"
+   ],
+   "descripcion": "U-143 (usuario 5-nov, HFT RFI-02): en demolición solo se marcan los SF de lo que se demuele; los materiales no importan (van a la basura): renglón de demo en otra unidad que SF, con desglose por capa / cara / material, o un RFI sobre capas o composición de la demo = FAIL; canon: demo_geom con layers > 1 (LF x H x 2 layers) = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "demolición solo en SF del elemento, sin capas ni RFI de composición"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_139",
+   "reglas": [
+    "R-ALC-01",
+    "U-139"
+   ],
+   "descripcion": "U-139 (usuario 5-nov, O'Reilly 'B Excluir wood'): wood (FRT 2X blocking, plywood, nailers) NUNCA se carga aunque una decisión vieja lo haya cargado: toda fila de wood del Material Summary con NET > 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "ningún wood con cantidad en el Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_112",
+   "reglas": [
+    "BE-112"
+   ],
+   "descripcion": "BE-112: framing colgado de la estructura con deep-leg / slip y control joints a ≤ 30 ft (respuestas O'Reilly)",
+   "estado": "PASS",
+   "evidencia": [
+    "deep-leg en colgados y control joints"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF02",
+   "reglas": [
+    "BE-CF02",
+    "U-079"
+   ],
+   "descripcion": "BE-CF02: types con decimal del schedule (W4.1) tienen walls o razón none; inventario_tags acepta decimales",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin types con decimal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF03",
+   "reglas": [
+    "BE-CF03",
+    "U-079"
+   ],
+   "descripcion": "BE-CF03: caras con 1/2\" gyp regular salen en su propio renglón 1/2\"",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin board 1/2\" regular"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF04",
+   "reglas": [
+    "BE-CF04",
+    "U-079"
+   ],
+   "descripcion": "BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin walls de madera en walls[]"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF05",
+   "reglas": [
+    "BE-CF05",
+    "U-079"
+   ],
+   "descripcion": "BE-CF05: toda hoja del set con número de hoja leído (no 'pN') o marcada vectorizada",
+   "estado": "PASS",
+   "evidencia": [
+    "148 / 148 hojas con número"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF07",
+   "reglas": [
+    "BE-CF07"
+   ],
+   "descripcion": "BE-CF07: el rótulo del renglón = el tamaño impreso de su fuente (misc_items)",
+   "estado": "PASS",
+   "evidencia": [
+    "rótulos = tamaño impreso"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF09",
+   "reglas": [
+    "BE-CF09",
+    "BE-CF12"
+   ],
+   "descripcion": "BE-CF09 / BE-CF12: bracing solo donde un detalle lo dibuja (nunca C.R. por defecto en furring); markups con Subject = type",
+   "estado": "PASS",
+   "evidencia": [
+    "bracing con detalle; Subjects por type"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF10",
+   "reglas": [
+    "BE-CF10",
+    "BE-VS-09"
+   ],
+   "descripcion": "BE-CF10 / BE-VS-09: si el set trae specs, cada renglón con cantidad cita su sección / párrafo de spec o 'no spec section'",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: el set no trae specs del trade"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF11",
+   "reglas": [
+    "BE-CF11"
+   ],
+   "descripcion": "BE-CF11: un detalle 'wood OR metal' se carga con la opción metálica (no RFI)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin RFI de opción wood / metal"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF13",
+   "reglas": [
+    "BE-CF13",
+    "U-119"
+   ],
+   "descripcion": "BE-CF13: markups con Page Label = número de hoja e idioma inglés",
+   "estado": "PASS",
+   "evidencia": [
+    "markups en inglés con número de hoja"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CH03",
+   "reglas": [
+    "BE-CH03"
+   ],
+   "descripcion": "BE-CH03: la escala de cada hoja = la del rótulo SCALE impreso en ESA hoja",
+   "estado": "PASS",
+   "evidencia": [
+    "31 escalas = rótulo impreso"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF02",
+   "reglas": [
+    "BE-HF02"
+   ],
+   "descripcion": "BE-HF02: ningún Review Item con un elemento IMPRESO en cantidad 0",
+   "estado": "PASS",
+   "evidencia": [
+    "nada impreso en 0"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF03",
+   "reglas": [
+    "BE-HF03"
+   ],
+   "descripcion": "BE-HF03: el top track de bulkhead / soffit va en estándar o slip, nunca en el renglón de heads",
+   "estado": "PASS",
+   "evidencia": [
+    "top track en sus familias"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF04",
+   "reglas": [
+    "BE-HF04"
+   ],
+   "descripcion": "BE-HF04: bracing solo en walls más altos que la altura mínima impresa",
+   "estado": "PASS",
+   "evidencia": [
+    "bracing según la condición impresa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_HF05",
+   "reglas": [
+    "BE-HF05",
+    "U-119",
+    "U-120"
+   ],
+   "descripcion": "BE-HF05: una fila por Wall ID (sin 'A-14+A-12') y 0 textos en español en el Excel",
+   "estado": "PASS",
+   "evidencia": [
+    "una fila por Wall ID; inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_01",
+   "reglas": [
+    "BE-VS-01"
+   ],
+   "descripcion": "BE-VS-01: todo RFI de altura de estructura barrió las hojas que imprimen B.O. DECK / LOWEST POINT (incl. demo)",
+   "estado": "PASS",
+   "evidencia": [
+    "RFI de altura con barrido completo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_02",
+   "reglas": [
+    "BE-VS-02"
+   ],
+   "descripcion": "BE-VS-02: spec 'fire resistant board THROUGHOUT' -> cielos de gypsum en Type X",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: la spec no pide Type X en todo"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_04",
+   "reglas": [
+    "BE-VS-04",
+    "BE-VS-05"
+   ],
+   "descripcion": "BE-VS-04 / BE-VS-05: ningún producto en dos renglones (sin doble conteo; Σ renglones = familia)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin productos duplicados"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_06",
+   "reglas": [
+    "BE-VS-06"
+   ],
+   "descripcion": "BE-VS-06: el producto del renglón = el impreso en su detalle (backing track / plate no se compra como stud)",
+   "estado": "PASS",
+   "evidencia": [
+    "productos impresos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_07",
+   "reglas": [
+    "BE-VS-07"
+   ],
+   "descripcion": "BE-VS-07: bridging solo donde no hay board en las dos caras (si la nota lo excluye)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin nota de bridging que excluya walls con board en las dos caras"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_08",
+   "reglas": [
+    "BE-VS-08"
+   ],
+   "descripcion": "BE-VS-08: demo con altura N/HOJA, cruce demo vs floor plan nuevo y markup DEMO por elemento",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin demolición"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_10",
+   "reglas": [
+    "BE-VS-10"
+   ],
+   "descripcion": "BE-VS-10: ningún cierre 'not carried … not drawn' (lo no dibujado se busca y se carga, R-ALC-11)",
+   "estado": "PASS",
+   "evidencia": [
+    "sin cierres por 'no dibujado'"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_13",
+   "reglas": [
+    "BE-CF22",
+    "BE-VS-13"
+   ],
+   "descripcion": "BE-VS-13: SF de cada markup = Board (SF) de su fila del Excel (no LF x H)",
+   "estado": "PASS",
+   "evidencia": [
+    "SF de markups = Excel"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_14",
+   "reglas": [
+    "BE-VS-14"
+   ],
+   "descripcion": "BE-VS-14: un RFI abierto no pregunta por una nota que el set imprime textual (se carga)",
+   "estado": "PASS",
+   "evidencia": [
+    "notas impresas cargadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF24",
+   "reglas": [
+    "BE-CF24"
+   ],
+   "descripcion": "BE-CF24 (CFA rev9, #0): la altura escrita en la Source de un renglón board-only ('| height: ... = N ft') es la altura CARGADA; un texto de altura viejo (otra fuente / otro número) en la Source = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "altura de la Source = altura cargada"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_R_ALC_06",
+   "reglas": [
+    "BE-CF24",
+    "R-ALC-06"
+   ],
+   "descripcion": "R-ALC-06: todo markup de DEMOLICIÓN (Subject DEMO) va en una hoja de demolition plan (título con DEMOLITION)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin markups de demolición"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF25",
+   "reglas": [
+    "BE-CF25"
+   ],
+   "descripcion": "BE-CF25 (CFA rev10, usuario 5-nov 'no están impresos, tienes que buscarlo hasta encontrarlo'): un RFI ABIERTO 'not printed' solo vale con la búsqueda completa: barrido.hojas = ALL, >= 12 términos (con sinónimos), los sets de los dos GC comparados (barrido.sets >= 2 o barrido.un_solo_gc con motivo), la medida vectorial a la escala impresa intentada (barrido.medida_vectorial) y >= 3 lugares revisados con imagen (barrido.lugares [{sheet, what, img}])",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI 'not printed' con búsqueda completa"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CF26",
+   "reglas": [
+    "BE-CF26"
+   ],
+   "descripcion": "BE-CF26 (CFA rev10): un RFI RESUELTO / CERRADO cuyo valor final está en resolved.answer ('= N SF|LF') debe hablar desde ese valor: la opción A no puede decir 'M SF loaded' con M != N ni presentar N como alternativa con delta ('N SF ...: -x')",
+   "estado": "PASS",
+   "evidencia": [
+    "todo RFI resuelto habla desde el valor cargado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_VS_15",
+   "reglas": [
+    "BE-VS-15"
+   ],
+   "descripcion": "BE-VS-15: toda hoja con renglones (walls, cielos por rcp_sheet, demo) tiene página de markups",
+   "estado": "PASS",
+   "evidencia": [
+    "11 hojas con markups"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_CALLOUTS",
+   "reglas": [
+    "BE-124",
+    "BE-135",
+    "BE-139",
+    "BE-CF22",
+    "CC-R10",
+    "U-113",
+    "U-115",
+    "U-137"
+   ],
+   "descripcion": "U-113 / BE-124 CE_CALLOUTS: toda burbuja N/HOJA de las hojas de nuestro trade (y de cada detalle que la cadena alcanza) está citada como fuente en el Excel / canon o declarada fuera de alcance con motivo; la cadena se sigue hasta el último detalle; un detalle / hoja citado que no existe en el set se reporta; U-137 / BE-139: las burbujas de DOS líneas (número arriba / hoja abajo) del detector palabras_fitz.py (burbujas) entran a la cadena, 0 burbujas con hojas de detalles en el set = FAIL (PASS en vacío prohibido) y todo círculo con divisoria sin leer se verifica a ojo",
+   "estado": "PASS",
+   "evidencia": [
+    "160 burbujas citadas + declaradas (530 burbujas de dos líneas), cadenas seguidas por 85 hojas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_114",
+   "reglas": [
+    "BE-131",
+    "BE-136",
+    "U-114"
+   ],
+   "descripcion": "U-114 (día 1, #0 HONESTIDAD DIMENSIONAL): cada número del canon lleva estado: [CONFIRMED] = cota impresa citando HOJA · [DERIVED] = con su operación visible · [PENDING] = no acotado + RFI; nada escalado / estimado a ojo sin PENDING + RFI; los renglones del Partition Takeoff llevan su estado",
+   "estado": "PASS",
+   "evidencia": [
+    "102 números con estado, hoja u operación"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_115",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-115"
+   ],
+   "descripcion": "U-115 (día 1, DETALLES): toda partida cita N/HOJA: cada renglón de wall del Partition Takeoff con su detalle N/HOJA (6/A-410) y cada renglón con cantidad del Material Summary con N/HOJA o sección de spec / código (la cadena de burbujas la sigue CE_CALLOUTS)",
+   "estado": "PASS",
+   "evidencia": [
+    "toda partida cita N/HOJA"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_116",
+   "reglas": [
+    "BE-131",
+    "BE-CF23",
+    "R80f.38",
+    "U-116"
+   ],
+   "descripcion": "U-116 (día 1, NO PREGUNTAR / NO ELEGIR EN SILENCIO): todo supuesto / default / 'not printed' del Excel o del canon remite a su RFI (con delta de cada alternativa), a un precedente escrito (R80e.34 / R-ALC / U-NNN) o al código citado; ningún supuesto queda sin RFI",
+   "estado": "PASS",
+   "evidencia": [
+    "todo supuesto con su RFI / precedente / código"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_117",
+   "reglas": [
+    "BE-131",
+    "BE-CF21",
+    "R80f.38",
+    "U-117"
+   ],
+   "descripcion": "U-117 (día 1, BARRIDO): cada tag recorrido en TODO el plano antes de cerrarlo: lista numerada por programa (inventario_tags) con imagen circulada y reabierta (png_verificado) de cada ubicación, y el conteo por type del canon (tag_ids) = conteo del inventario",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin walls en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_118",
+   "reglas": [
+    "BE-131",
+    "BE-136",
+    "U-118"
+   ],
+   "descripcion": "U-118 (día 1, EVIDENCIA VISUAL): imagen de todo lo que se afirma, reabierta antes de entregar: cada wall con imagen de largo y de altura que existe, no está vacía y trae la marca circulada; cada RFI abierto y cada Review Item con su imagen circulada",
+   "estado": "PASS",
+   "evidencia": [
+    "toda afirmación con imagen circulada"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_119",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-119"
+   ],
+   "descripcion": "U-119 (día 1, IDIOMA): el entregable va íntegro en inglés: Excel (todas las celdas visibles), README_REVIEW.md y markups sin español (PARA_REVISAR_EN_LA_MANANA.md y SEGUIMIENTO.md son las notas en español para el usuario)",
+   "estado": "PASS",
+   "evidencia": [
+    "entregable en inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_120",
+   "reglas": [
+    "BE-131",
+    "BE-CF21",
+    "R80f.37",
+    "U-120"
+   ],
+   "descripcion": "U-120 (día 1, EJES): nunca dos ejes / fachadas / walls en un número: ningún Wall # ni id del canon unido ('A-14+A-12', 'W1 & W2'), ningún wall con dos fachadas, ninguna polilínea de markup que dobla de eje (giro > 60°)",
+   "estado": "PASS",
+   "evidencia": [
+    "un eje / fachada por número"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_121",
+   "reglas": [
+    "BE-131",
+    "R80f.38",
+    "U-121"
+   ],
+   "descripcion": "U-121 (día 1, FORMATO de markups): todo markup de wall / demo (PolyLine) con Subject, Page Label = número de hoja, /Measure (Length), /Depth = altura (> 0) y por lo tanto Wall Area = Length x Depth en Bluebeam",
+   "estado": "PASS",
+   "evidencia": [
+    "755 markups con Subject, Page Label, Length, Depth y Wall Area"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_125",
+   "reglas": [
+    "BE-131",
+    "U-125"
+   ],
+   "descripcion": "U-125 (día 1): términos del trade siempre en inglés, nunca traducidos ('tablaroca', 'panel de yeso', 'poste metálico', 'canal', 'riel', 'montante'…) en Excel, README, PARA_REVISAR, SEGUIMIENTO y markups",
+   "estado": "PASS",
+   "evidencia": [
+    "términos del trade en inglés"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BOTH_SIDES",
+   "reglas": [
+    "BE-138",
+    "U-127"
+   ],
+   "descripcion": "U-127 / BE-138 (BOTH SIDES): cada wall de un type cuyo schedule / sección imprime board en las dos caras lleva board en sus DOS caras, con las capas por cara que imprime el type (lectura independiente fichas.json, BE-122); cara o capa faltante = FAIL; una cara sin board solo con board_none_reason que cite N/HOJA = AMBER",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin walls en el canon"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_CIFRAS_TEXTO",
+   "reglas": [
+    "BE-141",
+    "U-138"
+   ],
+   "descripcion": "BE-141 (Chuze FINAL7 auditoría U-138): toda cifra de material escrita en el Scope Checklist / Inputs / README = su renglón del Material Summary (o la suma de los renglones EX-) del Excel entregado",
+   "estado": "PASS",
+   "evidencia": [
+    "cifras del Scope Checklist / Inputs / README = Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SCHEDULES_MARCADOS",
+   "reglas": [
+    "U-111",
+    "U-142"
+   ],
+   "descripcion": "U-142: todos los schedules del trade revisados desde una lectura independiente; cada type / renglón marcado en Planos marcados/SCHEDULES_REVISADOS.pdf y en la lista SCHEDULES_MATERIALES; cada material en el Material Summary o fuera de alcance con motivo; 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "13 schedules, 289 types / renglones marcados, 597 materiales cruzados con el Material Summary"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_SCHEDULES_REVISADOS",
+   "reglas": [
+    "U-142"
+   ],
+   "descripcion": "U-142: todos los schedules del trade revisados: schedules_materiales.json con cada fila -> materiales y estado (en el take-off / fuera de alcance con motivo / no usada con motivo), y cada fila marcada (círculo + palomita + número) en Planos marcados/SCHEDULES_REVISADOS.pdf; falta una o 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "13 schedules del trade, 289 filas revisadas, materiales listados y marcadas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_DETALLES_CIRCULADOS",
+   "reglas": [
+    "U-141"
+   ],
+   "descripcion": "U-141: cada burbuja de la cadena (detector + verificadas a ojo) circulada y numerada en su hoja de origen y en su vista destino en Planos marcados/DETALLES_REVISADOS.pdf; falta una o 0 = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "647 burbujas circuladas en origen y destino en 104 hojas; por hoja de origen: A2.01 25, A2.02 20, A2.03 7, A2.04 14, A3.01 3, A3.02 11, A3.03 2, A3.04 7, A6.00 11, A6.01 4, A6.02 4, A7.30 6, A7.45 1, A7.50 1, A7.55 4, A4.05 2, A9.03 3, A4.04 11, A4.03 10, A0.03 5, A5.07 10, A7.31 9, A7.23 10, A7.24 10, A7.32 5, A7.33 7, A5.08 14, A5.02 15, A5.04 19, A5.05 12, A9.06 1, A5.00 17, A5.06 14, A5.03 16, A9.02 1, A9.04 1, A0.01 10, A0.02 8, A2.05 24, A4.00 11, A4.01 8, A4.02 10, A5.01 22, A7.01 1, A7.02 1, A7.03 2, A7.04 3, A7.06 3, A7.07 4, A7.08 3, A7.10 2, A7.11 4, A7.12 2, A7.14 2, A7.15 3, A7.17 3, A7.18 3, A7.34 3, A8.01 18, S1.01 20, S1.02 28, S1.03 10, S1.04 15, S1.05 12, M1.01 1, P1.02 14, P1.03 14, P1.04 5, E1.02 14, E1.03 14, E1.04 5, E2.02 14, E2.03 14, E2.04 5"
+   ],
+   "plausibilidad": "OK"
+  }
+ ],
+ "archivos": {
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.json": "b11b2e3e09aa918010683413f81fa9062efa2a429f5de471383b7928367bda3a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.md": "2850181fb05dbcd1d867e208b230a014219a1e58342ba162737e0b6408a80896",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/PROCESO_CORRIDA.md": "04064ef41a8bba47724305ae193bee1397ff382f9047ec4cf3d39954615a6079",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/TOOL_LIMITS_CALC.md": "a7cb487839d86ff428c8a83f6c610bb349a68d71b254b9116eb7538be0278362",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/VERIFICACION_MARKUPS.md": "11ad5cfb2a3a3b7ff1d0d8f247003c2132b9b9cdcee866c5960d67889ee9bdd5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/INFORME_AUDITORIA_U138.md": "abfedfbc594aeec043f98d44b7673468c01cd786c1a9b1b56aa39120ca6c397f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/RESOLUCION_HALLAZGOS_U138.md": "102593c3cd7d733b48503aa365412101611f5b2a705b26b68f58218c1b7ff4e1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A006_CH.png": "be3890657e3e6918b73d1f28e4842758bc7f7ce0a7dafbdd2398e8b8097ee145",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A006_Wtable.png": "891434faebfb15167d0c3bca1502e461a74828e2e9099b863830df0caebd24a6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A006_full.png": "e0b2fee1d9688a649a7dd32637632c5b960c69dc932c7d2e39670ec166febe94",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_XW62_2.png": "388a7496a8bd7435d28709826ec0fcf20ea2ddad5407de4b3f2046c76224c8a2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_XW63_0.png": "7060229f63f517a910e29ed99154aea703af5fa2389766dec53e5c08147035af",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_XW63_2.png": "9b7ba976e39a45567c602253c829c7354b3db0744a031154efd6f348ea733a50",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_XW66_1.png": "80eddd8050be143affe86f60c7cb5f3b46d736cb5a6e9643d8618470454839d1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_XW66_2.png": "0f1676c0958a7e0f685fe560f8e67e5c87be98d891b1ce2a16f7445eee8253c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A007_full.png": "a5947f61bd7f593280725ec5082578e733b4d8e77acb21e74133394c9470be57",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A008_FS1.png": "8f0e3963a51febda581df9132cd1361e41ab81792f7cd72479829d1fe98ad13c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A008_MB1.png": "99747902283a26e11b6d12214c273fa855a0cc198142b08375bc42907fbde4a1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A008_RS6.png": "1a8c888816c7d8036edad27c36aab38b5513b211621fa1732f41b4535837b0b6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A008_full.png": "ea08b7107a74374aa96bfc8e5de8c5b298c8b63f9e3a302ff454aecf960734ad",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A204_terraza_vs_L3.png": "82c7d650dc24b42bae15d51343d8b507f6ba388242367bbbda77b4df7d2cd03c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A205_RS6.png": "01857874a341a2b4f87b8495bb269038ae55af9a1950283d6fec4fc95c5ddd4c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A205_terraces.png": "1a24eef6cb1847dc23a4d2fa87318d87322771ebc3d915d7adc265d1ef8a7591",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A301_GYP2_gen.png": "71261a67df1606cae1ba8bda6ca67b03774f737d8d88202727f9b402a09ccdee",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A301_full.png": "afb3fd51844b93039b44c71ae39728fed887c3ff08a3161ba82ebeaf3693626a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A301_plan.png": "46f5c655246707833e6b48ccf4bf2a90d756ab4ad9a89b4069cd1ed06cb9bf38",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A301_retail124.png": "c345c0688053789d2cad750494de1f0785d9fe292f239645a01481da95e01848",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A302_plan.png": "b7a0ad52218083a07580603b294f9e38f15b7063dff44785720e875289b676cb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A303_plan.png": "41eae7b8d17fc8c719bb1cd02a8f2734a094ccb3521fb034150488123a87395b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A304_corr412_419.png": "bcf1d75438fcc365a6eadf619c8d9fa349b0fba5e3e02af696b43bcb2221b499",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A304_corr412_N.png": "c3cee633498e81179698890512f1d70a7130fb1a60fcc0e8c42c360b9d12e933",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A304_legend.png": "1c7db0b5846a6b0ba1294164f7be26e9bfd2cd328674ebb2dcdf5b2b5788ee97",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A304_plan.png": "4f2513f8ee979062ffe4f39a3849fcfcf24e6c8811d68307e0531b8a098e8ed4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A505_4_alturas.png": "b9fa8fd7263b59d6832fffd8e088b862c4763ebdf9e7152c9bce076c0fa5450e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/A745_nota_FB_NIC.png": "c657d82b20f201049e8c51b8d915a4f7c147b17b21ff0d10899df035cea0e6a9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/CB_A202_zoom_N.png": "1aba513a42cc31720e2699351a85992848054d39f303e0cc4cf9372afa544760",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/CB_A202_zoom_SE.png": "5f71144ab1d44e0d30d46864a7f146d42c6f4bb6118b93da33e205a492af9d68",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/hallazgo_paths_por_puertas.png": "8fa658188cb64ee698e3c3861d9a84111399c1e6cfe867b2c46fe8a9daada5ba",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/muestra_walls_1.png": "a6526edc985a45e1152c3c39632346fd38f3cec75dae151f4a910c6e0f5cc64d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/muestra_walls_2.png": "1da9195d220ab735f4366f192a283a9d3366cfa499fedcfe9743036aeb83bdb7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/muestra_walls_3.png": "9ad2bab3637b25c57b7603a5fc654d1246db97d51eb453547fa2aa5414d8ba65",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/muestra_walls_4.png": "f7a46009920788986d0e0a399a5b224f802d14fc021bdf869b566fb359564753",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.01.png": "e077c88a87603f5da72f05c8048696a9c682dd3ca1507fad2ae094556f49aa32",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.02.png": "770d3d1281d828d46f51eedb1329ab6dfdb89665240915ba256c3e3c918f8eab",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.02_NE.png": "14ed0e05902fb238778cb5e13f98ccc6539ea05b7e87ffc101c2c6985e143a70",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.02_NW.png": "9311f220b223bf4d0b7a67773faa8780bb647379bac3c72612aecf6231087868",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.02_SE.png": "63501907a002d302b265a597ed3a0aec72fd4327be867eb0a017539a26a57a7e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.02_SW.png": "0f19dea02b72fd0d1ed07a2b345dfdc9478cb098caf16cc0c3a8094c16615a1f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.03.png": "3ec3eb904a90c9e7d5ea0ec6ed8bbb9ef58801df8101b85a4aed16855d86bd5d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A2.04.png": "b334c325f16777ae759af55cd5b093302da5fd36f70a5778c8b0e02212c04995",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A7.30.png": "12462de4add6c080dbc366c1cbf7053b30f7ece05044ee61b8fef13c073d5fd4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A7.45.png": "431bce7f9813f29600dbf4e151403ff3562b9aa7c999807add7767d169f11ad7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A7.50.png": "31b27ee3f66222579f7c4de215eb13c8467a3a3c260aa529c777afe1af7507cc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/img/ov_A7.55.png": "59704047d4e62fffa3d2df607f88a1f366265d862d7cf04ebfb6cb67ceb89743",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/snap/coverage.json": "a5dec2d37cd27c06eb2ddb5e2d80553c8ef8d6983fb2d4af1056bdb07933a68d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/snap/pt_rows.json": "53e551bac82e977bc6fcc7e4a7893f22fcffafd6574e525f473ceb0dbae1fc93",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/snap/sample.json": "612812b4abf10c40c7dedf549757e843be71b5cddd43547caf2b606bea7c60a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/snap/takeoff_canon.json.base.json": "428cfc9b13e62f3f8e4807a67779bdd0689a5b43d8c2d2fc83c2cca0a22b173b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/snap/takeoff_canon_0555.json": "f75bcfa426c11dfe6be8856b86c34911f419ab3f4f6d2e0d85e5d4aa1afdbdaa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/__pycache__/cover.cpython-313.pyc": "b98aee781157a5666b3bc24a318e278924a6624533b2cd9496a0c5a8b5bc59c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/__pycache__/crop.cpython-313.pyc": "1798df99b02b0459ec8aebe4588672e50cabf86b5355c68ebb9bb1e2d822ee05",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/__pycache__/overlay.cpython-313.pyc": "b9bb858445c650f5ac5e3a1ec85766558c4d787c14d01536adc1b9184a5b7135",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/__pycache__/remeasure.cpython-313.pyc": "a138a2c7084cafc7a4da97057aaf6bb237c18ac53ab53658e8d9764a38ed2860",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/cover.py": "1fb366efe7a0072c83ee516cc0cef97b71fb4bc182dd84719f79a610d284b33d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/crop.py": "ec38c4daf03426afb548c470f1bb5c0d171e7b40d683a73973184af4374895b2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/overlay.py": "a1d52113670450e1dc24ed1ba220e7a4bfd06de78a10acff1502fc5c841a4cd5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/auditoria_U138/tools/remeasure.py": "654db68217dac82b715003f8e06327e41b6c9616aeb354215b9bda0fc5871dc9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/barrido_tags/inventario.md": "8de65b0ac871204007a2a4e98915fc548f2884fd63f75dd4bd11f650dcf1558a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/CADENA.md": "d7d8dce8271824ec5ee652249f32b14384dfd8204a7c58df12ad1f942cf43d27",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_10_A0.09.png": "764b98eec85fc382ba8a473b5a330e428e4b49bb5e889a79ab859a399e3b8b83",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_11_A0.09.png": "d7fd051f33a21a016b34f9b8ec7e34f86bda77b144eb4be09a70bb9c310b6535",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_12_A0.09.png": "c3c804b7493bedd76b559d7f057a91cc5f5b88789a15ab7bbf7b7a38d4b4afa2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_13_A0.09.png": "d30cc45028a31b0f22958637cc345312f7e10bcc88684fb450840d7e8c0e615a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_3_A0.09.png": "72a927618a16aa948fcab327ca791b82a25098bc74bb9b344802422f24bc5f46",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_5_A0.09.png": "17185109b16213a54bdc99f8cec41890496f38d259cf398c9340e451602a611b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_6_A0.09.png": "bd9f50f41c0a5aba0ffd3915f245acc81d2cc7b2eeedf33b8b8c5b9e0e5330e4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_7_A0.09.png": "1bb0fd7f357050cbb3bc8892e8eb035d02a198b87a8984819f00aa06fd226da3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_8_A0.09.png": "292a08eaec816801e4ae26d31c394897ed204704a5f51b6120fad3eb2fdf7322",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/DET_9_A0.09.png": "405aec3941a83bbd47fa3d1e9070f7f775a97961f1a36896edda7e2207e2ae2a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p003.png": "c2a6b7655e47ce48e202813a89106e5dcd32c8676e94ff6774a072f256a7fa34",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p012.png": "c61aa1a387d4ffda699a6046931e3e0e29fa1ab0e768bb16fc3722f931262c4f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p013.png": "d98da3d0d4c111f221f0f35e7febe91d7a34312175568ad02ba0d004fb576b23",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p090.png": "f483fd2723194846c9d84a29eaf84559a63e96b705a28cabb0446a24f4eeff05",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p091.png": "2b37f1fc01768b5963a89a2ddc5f9a7250b70bef18d658489b7f252a67ee35de",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p092.png": "8a2e5454bb7081941d51789d69b2f4e9dcac9c670e34ad9c8692802d3cc896f4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p096.png": "94b5b73d8e2fd5741c3e94d4ad7508a3b63587f69cc2db52da6923ea43ac410f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p098.png": "820675889c9c4374a90ee99e109323cbd366db310d628c9a3fcf114ced29ea29",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p099.png": "78985a2415baf1fc2dcfe457548b61ddf7911195ac55897dd58876131125694b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p100.png": "c4feb66c1e369e079e0d287c53aa26583b6be35a6cfc4fe78fc09d0606de21e8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p103.png": "a03cf9efcbe2ae30f666ea3db09bda895e539ccfcefbed8db42bbf2e64da8b3d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p105.png": "e798790bfd90a67b4c1b61c1096325a817bbb6a0c148e3c5beab15979f2dff57",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p106.png": "83428683a974c940c7ea254614a1738f7bdbfae1b20144022c49e36c9ccb2158",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_cand_p112.png": "14a7b9abcd3deff05e5ba8d558ee89fb399a6d87682ccc70dcb95c1a3d07563c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p002_T0.01_ojo.png": "0f718b563c63dfbc3f66a3af3e816b15f9e88cb42b7492620ecdba4e2840eb96",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p002_T0.01_overview.png": "d12bd23d12c7c5d4aaa69afc105d9377002f2de0bd8249683530bbcd7401223b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p002_T0.01_tiles.png": "882d4cbd6b1756731ef2270cbaa86193ada56e249ce1729396e8867a7ff084ed",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p004_A0.01_ojo.png": "bcfccc23c94b9cb3c5d36184c0bbcfac525b2ce96946beb0059977b85884e723",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p004_A0.01_overview.png": "e712539ceb6236e2e3ae73e3d253ed3cdd77f8040de0dbc1bbd4a5b17a9f235c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p004_A0.01_tiles.png": "edf30365882fa71fcb24b9c74f0da5a5b4c3aeb650a91bbf420752e0edbd18e3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p005_A0.02_ojo.png": "18ca7f4702ed698c49be331bb0dcff86f1cf6956c748e0fb034d0d61fd69839c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p005_A0.02_overview.png": "0927dc88fb8266c426fbb0964d03cf4a3303a21f23561a8dd2b3b6ec7ed3309c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p005_A0.02_tiles.png": "e6dc0dfe2a57d2fee12e4a03a6c6fbdce63cc854472d59a74c65a873fd93bb12",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p006_A0.03_overview.png": "383652fbc9e6b1f65715e2c1647175fd6c5b5fbe529e6f4c25ab4c37b21c1bb9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p006_A0.03_tiles.png": "8f624274f1c654fe6f6cc9949927c2627116805620b08e6523c2c8fd48640f9f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p007_A0.03_overview.png": "8e54feccba0102c85f901960995309fc33fd8a89cad047019c1932a82ae4bf66",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p007_A0.03_tiles.png": "bd3876d375b82eeb98ca4aca99561c4de23d97e527fb913b78f0cea5ca6d72ee",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p017_A2.01_overview.png": "97cd6fd271744e3b328568821009ec3ab5f5cf0890999d77dea08cd6e7cd8dda",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p017_A2.01_tiles.png": "228cf38273d0719c909162a694543dedb50f27cbae063e5a6cf9203c38de2a8e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p018_A2.02_overview.png": "5d4eac4cc0d01613fd6c4eb19eb9c8e41a62c084791cc20ceddd69c5f3c5717c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p018_A2.02_tiles.png": "177ca0f5948ca1fc683e8510ca9ac4a09e9a40eecbc90fbe4370ced9a6a282f3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p019_A2.03_overview.png": "95168eeaad9f4c55714ea239ea617ab60f85a1946d93de8dd31d5a0616cc2a60",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p019_A2.03_tiles.png": "17382762fb29cdd84d110667ae1eac76557da88782e6635fba6b9ed5758b805a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p020_A2.04_overview.png": "c62f6c747f230fed515a7c8515555886a8e209aa0262b250def1fa870cc67e53",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p020_A2.04_tiles.png": "e43dc0d63d1a15347b2d5ed71497941b086db7972671ef9b6a216cf7cc6ccd23",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p021_A2.05_overview.png": "2b6e318c54d2a823aa8be7d74ce338d05b8728b0a696722f1010293a22e4a5af",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p021_A2.05_tiles.png": "7010272a6ba3ddd6d26db1e8282acaadb91e5372dc8fd045d8b1880722045b1a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p022_A3.01_overview.png": "02e0a536dbab97d92b3509971e25dfa32250e0a41f382c072b0b68fb92d672a9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p022_A3.01_tiles.png": "fd05ff74deaeac94018fce8a90589d7eb5bbf6a6cdda7bc993cc521b1ab38570",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p023_A3.02_overview.png": "7d900ce011801be293109df418b7d2caf4b16715aed09fb395d7c3d7ff03ad4b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p023_A3.02_tiles.png": "4acb00d07cc580228394332659c1728e080b1045c755b0bc9fb3c2503fd49275",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p024_A3.03_overview.png": "b4d766bc9cf0cb0882330c340d4522305631d4c1fee2f22cf36f5d0c957bb418",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p024_A3.03_tiles.png": "d91bba762efe7b6b3005bc5c17c46b105dc5d409fa68722bb7e3298348738939",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p025_A3.04_overview.png": "5f181cebefd421b9cb6e3d3e5f5bff22f4ce9f7782f1f49db96ce8bcc523399b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p025_A3.04_tiles.png": "928a9b9b7833899fd9728ea4e2f8ce30bce407fb4fd7b23a752bea9f87ec0346",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p026_A4.00_overview.png": "def473e97c6561a6bea6f39ab4a5f4e33213fa369df8da58a35b11a3679ab758",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p026_A4.00_tiles.png": "9ea9b0b837b8b0d3d7d9a72333abbe27097be695a571a43bb8a9c5dcd8e07f1b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p027_A4.01_overview.png": "31851b2b4a0346200a3de5656ad29518dc4bc5afaa534b7b86fef1f216ade0b9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p027_A4.01_tiles.png": "717126d798d9a0069f84ccedb2865dd31bb0160801cd0181e6e567285d9aa4be",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p028_A4.02_overview.png": "9b923559b22d8a5920a26718c4c79c61068e918dc62330c5ada46aa0e04359dd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p028_A4.02_tiles.png": "46457ed0d607e161b7f3e88598e8e09e30f8f0147cb6d8c40dc953f54b91356d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p029_A4.03_overview.png": "3fb9e2305d959faf908e06a7bee2c943cf3deaeee91c4d2d2b13ea7bf26c02df",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p029_A4.03_tiles.png": "53ad5d889275a4156e409e2879baa23607540479e1bdceb2b0b823a3a65f97b8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p030_A4.04_overview.png": "01c5a8595e0241e0b944d0a9644bf574615134ffc72259fd7dae7f5a7a512cf7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p030_A4.04_tiles.png": "bd7c17b6d7647711e8cfc814705f097f0c09d80cc7cbdbfb483824ac7fa6704c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p031_A4.05_overview.png": "26bc434d9c71455429665442590d39fe37c83e5c79daa458b0bd385e8ef7a53b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p031_A4.05_tiles.png": "dfcc8cee8a47a3bc7a616fdfa078a58c17e5130d35c41a1ce0e2cdaa483c60ac",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p089_S1.01_overview.png": "1a4947f18c998d13947adfc9dbfd30388ae4ba61574596ea855abe2b88f73b74",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p089_S1.01_tiles.png": "df78addf6d7261388bab83abb18081e01aeb749a4ea89a09daa8c071132291b9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p090_S1.02_overview.png": "cd11d540411f7aca6015ab94559a3046c0850c6c0d25c326ac34325d13c87257",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p090_S1.02_tiles.png": "ffcbb2ac8813afad95b0bbd52838087a39f6e3d1d62e7b1140208b517476bf66",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p091_S1.03_overview.png": "b7af1ee6282b5cf091c638366464a0c5638299d827cb6e1e0d23a95048bc749e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p091_S1.03_tiles.png": "726566da687bc330462c20853fa844730fe19a962abe12be0f5c4d2ce164bcdd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p092_S1.04_overview.png": "c5b91842e84160e175f400db91ee0c5a1d321f853611addbe58960fe038d0811",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p092_S1.04_tiles.png": "3e00e0c72114da896734517197ebd86a28accb8736a07c01717f256f4e960c6e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p093_S1.05_overview.png": "e7d6e5ac5706ba6132ca9000053b82537e48a1796c8facd8dd3739d1556abdd3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p093_S1.05_tiles.png": "34ee79a9cc8d83e3303becec4c497dab24bad2aa24dfd08dd19326b0338aec18",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p104_S3.07_ojo.png": "e73cefd1f858289566ed43df402d2c895d64ea925ea895979446760241f7ddfa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p113_M1.01_overview.png": "6e3a81cee209c741d02c8057f4d3b4e20a875fecb6acaf5cd11fccc9b57ec65d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p113_M1.01_tiles.png": "44830390f133271c4f3c7bf76d1cd21e07bec97058e98ce523c3a222f4c28a73",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p120_P1.02_overview.png": "63ce624e5f2836a3fb2a0b594659b0513d91299f21079c46f311296848ab0c03",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p120_P1.02_tiles.png": "6b1063cf5e418d01690b4575f8578c503ec5dd3365ab37c9d466be8b2636a22f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p120_P1.02_zoom.png": "bcae605ddf20a3aec012afe160eec50f2cae251d1de43efd89d5e136f77a9f13",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p121_P1.03_overview.png": "f0269d63dd4e1005fa419713cc69f404f50a06dad1ecec3c96e111e54719646e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p121_P1.03_tiles.png": "f5c5c63c620a25a514eba4373d7e0361ac44018f1fb3faac521945ece18b5aa3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p122_P1.04_overview.png": "23bf1b0876307ee20f955dbc533ebd8ff714335f3feb7c25107b6afd9a336892",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p122_P1.04_tiles.png": "b142d82c9b35d4639a471298d657c261cb1e0aa1d5dd5d7631c3dcab1b99efe3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p134_E0.06_overview.png": "1ba9ef82dab6aff8dda03eea8976c539d913769c6aa50ca1484c2fa23c059ae4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p134_E0.06_tiles.png": "373783e4bf416593eb9f4f185f7e1fe328f40ea9389546e212512aa39b327514",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p138_E1.01_overview.png": "8dc4d4586109b7e8bee69149797d9e387e90e920dce859f0fdbf8901352742af",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p138_E1.01_tiles.png": "adb5fe35885af1e05981309e7eaaaf412dc05793cc29ee54ab57966eecaf59d3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p139_E1.02_overview.png": "688d5e5538f29981cb5a204387b6934405fe466bb586d1f07037ec21177b19c9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p139_E1.02_tiles.png": "fe4b0a2f58ab45fb99aece71bea1732d9fb5aa50aa7ed3da11dfd9c10b7558c0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p140_E1.03_overview.png": "20bd8d8e10f0ac7feb873ce30d9f1438ded9576ae4edc09aecf1e6c9b77bdc56",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p140_E1.03_tiles.png": "a05652c0f111a2e8f7c91a84e2fe4884e4a27a75edb2e6cb27f9c136f1cc2b98",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p141_E1.04_overview.png": "fdbade7b0b91022aae4b9001ca1a75b8725aafefae6bb5836dbbf96e2a97835d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p141_E1.04_tiles.png": "eb54d3e225b6b917bcce447a25992011a5e62fed296179fb5a8b310991a7f695",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p144_E2.02_overview.png": "cb6b50c8074b513eeba19c272e91d240acd4515e378fcbaa86036fce8eb27247",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p144_E2.02_tiles.png": "c859fe52e1c479dcbd49db69c1781d54cfb8f39844b22c71c99c014501e3e5fe",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p145_E2.03_overview.png": "489f331033ae1989f88b18b1ec6de189f06843e0f9d090aecb27750396099b39",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p145_E2.03_tiles.png": "b9f3d0523d1371a7adc5ad329715185ef95c63744715cb9cb574f0bcfe69c178",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p146_E2.04_overview.png": "978a92d4d0787c35e91336d16a2dd9232481dfbee2f0e9ec646a2adde077b784",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G1_p146_E2.04_tiles.png": "1d165ccb3150e97166870ecc543a3beb378c321074ffc66723cb10e1f31cee57",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.00_det.png": "77c1e51588ab4baeef1254305177f1dca9026adb3e0e92457c88a718e357e38c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.01_det.png": "839e5117da54c35fb998d1b29f9219a5886fc6f87f8fc1fa54e7b3dd96fdca63",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.02_det.png": "b2942cb4bacf96af62550cab3c47f98ede0563483eacacda4176c01e5400695e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.03_det.png": "ed2b92fdc9b2281f38ff35421ac4fbc330df5c62266be3ca976f8608615202d9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.04_det.png": "a8d5753354f0c720044e5383d4cbdb4b73d9f4e9dcd6f6b623bf3083f49dc27c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.05_det.png": "a535f66046f901c5625c07238e9bad5abffc2ad7c66d5f9756172728a7fb7c3b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.06_det.png": "fabc48eb3ed5a579fc46f17da6f84409046e9a5b36f9d4c504cd9565e7a12230",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.07_det.png": "65833e738c2a940f03197a61cae58437dd51350cd7b88178a79c2e32278a3fe4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A5.08_det.png": "8ceb2c3e3f67b81480a3a9c40451f8c61d5c260f6340683f2ee02a2df78ad3c5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A6.00_det.png": "82a8efafffd5cc8e9642d40768dc557c9c723487d0555844715aa0038fb184c4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A6.01_det.png": "d92ed322ceec21ab88bbcfa0d5576134f9e33eb4b53001ff610d9bd418e0509e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A6.02_det.png": "e5b6439bebc508f5fdcd2bf0b8dc255f162fe934a6c21762981098d965b9ea13",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.23_det.png": "9461c860e11b9148c286608fd600bc36ef967e4d4c85f572b837de7fe4f0edc3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.24_det.png": "9733e2f66acac68ccc7278e7f6037b6975621c0126cd5589b39bd15feb2d52cb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.30_det.png": "2a446ea687b4da79310ac93fee8e1e16997894e47c527d42f85ff696993278c4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.31_det.png": "c30fca2a6d92480e80eec16c7cc19a9cdbb50643ebea4092e5622a62734ed2c9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.32_det.png": "b6ba3c72a94390a5085bbf00e51f4a4c88c45240045d067e71217cad5f4f75fb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.33_det.png": "9f876dc5d193070cf220a5e105720e8540d4d538d3b17d6cec4ea90144e003b8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.45_det.png": "f40025e9e43cb5efe3f8585ac754bf145b48ee6ad8a1dfa24d8405f5ca60ebd1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.50_det.png": "cf056a22607ffbffa25efa2abd0e7a81ada7c34b9408fefe58b73ba169a720e9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7.55_det.png": "bef95f4217ed802b18a53c4a77ef9c51f93d0e7a5e444e167341b5069750ae80",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7_notext_markers.png": "f033c150031a459d151dff7af8180bb133e6e337e05861607da32e06b8d7296c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A7_sin_texto_marcas.png": "703f1007bf2ca4d3ec0ea49f8d7ddb42f57bb3d195c9f039a0962762ab4df498",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A8.01_det.png": "dafeea8b628591baebbdf26f9c00896d67fa786c97b92973c0475351dbf4e506",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A9.02_det.png": "aa83b62bd75077f8b7a2d707d366e6f0104d5b4d031324169680eabc20e83e11",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A9.03_det.png": "2c40211e0c88e1b84660081f25b3bfb7930d0788442de9979d3783324e5c2606",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A9.04_det.png": "a376a39ce505afd967e24c477fb28e80dca6aa8aaf02ff29fb7ff170b0700e8e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_A9.06_det.png": "aaeab24c5192d0ef65a7c0d3609a362e1872e08eafe7dfcafc4165be3313091f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_01.png": "10b83bf80fb6c1796ebb67006bd8443553ce8952e6a60a0e24ad1d8d90915365",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_02.png": "7617455b17e52ae535c5f08e3da2efe4c72e33116c9fae185df086e5103db64c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_03.png": "61d5d5045a91d65a349a66591f36734ef0d78f079872c1aa4ea55203f2bc8f7f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_04.png": "27d342f1ceb73c9a3705ef142b01a7e9843504ab5909cb81c85ae758da331c7d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_05.png": "5b66ff94f3d3d25b96f07bdb41b01a87bfdf40555be6dccaa4542dcaac3808d7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_06.png": "8f90b30bb934fc63ee39b1f2f5f3fd62a536619369baab1b6658b14bc238214c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_07.png": "4a6690aab6dd12baf86e7b910c4aee5900850fc616b3937925df0a04ac2d9cf8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_destinos_A7.33_3.png": "0cefad6119aac37edac8f238211e0fdd26752401df0aa8374fee12d9db8e39ff",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ojo_texto.png": "c5ab6869c4ba38cc2bf411a64e206e339ddfaa85f1fcba92d31849c48b076b36",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p045.png": "b4f5f23f11e964dcd8b5f517328c8ec9af428de022c82744a19376b43c464ea0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p046.png": "fb1b294d483bdd72f7daa67fe81d2e43c709e91bd8852d7ffdb4993e983c60d3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p047.png": "1b09f2e43e18f351fa29b21b52d0baf1e619cb6fb402fac57725f57b6f6347bd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p048.png": "6a9372d30b7f6ddc7af09f9f2c48144a5b68a93be9f5239c27cc0052f647ca88",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p050.png": "6917f6d63d9fb8ff3df113329cbc4a0d97f07d2b1f0c94066aa1caf48c8cd6ca",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p051.png": "eede77082c2e05e4c3d44507a60f42ce87df660bacf8f2e11f2eb257059c7e62",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p052.png": "849cec35f1b020e57c69790584131362eae6b6a76e5bb5cfb7d83a9263774e50",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p054.png": "cd2ec7f1916459ccaa1986a3cb2f3f84d0a0667949616441eff850821ef14aa9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p055.png": "731c3abbca446b523bda8b16a21655d69ad0e4124ee340f29838acc476e38981",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p056.png": "98dba1fffda7b3f97c3d6918e9d34e3ffc5d4481dbea116df9caa47fb4337c55",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p058.png": "e62ca6c2bc2f9f4f3f3cfacb2a6b01dfae6811f3157ad3f401f75e9327b8e02f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p059.png": "cf0e872661a54e571d7290a8bfe58635dbdac7aaef56c91fbb6a9bf355555998",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p061.png": "b6bb23485c122214eb73bd0f9d55dd124055d8546a84160162d28e5628357249",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p062.png": "fb4c0ee9d7a8021346b0b86440341e86b4eadaf91b3758442140c64f5b379d53",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p063.png": "c4a5150483dd242c1f8d5d1715dfde8f4ac30fae44265bebeefcf1d73d41fa52",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p072.png": "410af5a364a7989cce43b5e5e92b1f5c6707631a02f3337d9e817c3f8244e09c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p073.png": "a7fd71599e602a2a456f4bf526e951ac4b3662592837aefe5dd2230a8da0e9a8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/G2_ov_p074.png": "89287625637d2371537b622f52eb8e7246fbff8ad12559b94f63e68ff6ed6940",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A0.01_A0.02_markers_A0.03B_4.png": "9b518c338abdbb690064fbb0e0b74d3841a573462f541d998cb400426b98fba1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A0.03B_p7_title_4.png": "eec3284cd563a3caf99279a700ff58d893cc05e8b2ee53c8fa052f99b04f56e0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A0.03_code_sections_1-2-3-4.png": "701630a6740ac4097f12b70e8bb3675cd82d5a92405292e4843d73e60cf23a59",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A0.04_6_energy_section.png": "12f5af3914ebdc718c0683c384cff5fd4c6929abfccfe20c756f5c848dadb848",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.01_elevation_titles.png": "e9e01897ce3614c201cba4699614d914c0e758b009c599e1e25b6f8a510b0830",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.02_elevation_titles.png": "fe3541516fd1fde93955b309d27fc7fdcdc776fc1a64ae699c435e0aba6073fc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.03_marker_prints_A7.23.png": "7f8905054c48846e84dc27abbb6168d2fd0b20b40704ff2b4f015d3c3cd67830",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.03_overview.png": "e8950c77c6be2bf3db978c8ecb720c9d2a4e68b32a073eaeb838e3b6de92a484",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.04_elevation_titles.png": "477e8c6667ba9b11085a625194b1d03a5550dc25d87a93da1f877e60b7fb92de",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.06_elevation_titles.png": "97ec47090d25fbfb87e04ffe3762ad1771ae42ad9c6878cad593143193230b65",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.07_elevation_titles.png": "27df2b9806ab7db443829d1d9de2c8b820d493426294cfb4eec308e5b293ebb5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.08_elevation_titles.png": "24ff59cfe988c9ce9c74fef21d11da3c1832fee3608d7b1a8463593325fb2234",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.10_elevation_titles.png": "56964a12e9958347e846c215758444d95035644125cbc3e846d700f7dd601d0b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.11_elevation_titles.png": "b48d41e09015636c3cd2cf36acd637a2b3988f0736d601f56d988009747ebcbe",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.12_elevation_titles.png": "0d6a623750e5343164edea4e5e09cdfa4add44a2b55155f654b2d75e05cae35a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.14_elevation_titles.png": "dbd783f2fd58b5fa24c403d3c39477b1bb363e5fcfd2c60b111f03d7e1a4f748",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.15_elevation_titles.png": "6ac07fdf7fb7b1d731ec2eecefd69f075d111821ede23ac8bc9217c96c43d0a1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.17_elevation_titles.png": "1243aa53334c23d2bc2c6340e999a2bc474a7dda6b030600db70df143d36b0db",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.18_elevation_titles.png": "c7b63638b01caf6ddb4abb3be6780d863d1035ef6643de0eeffa84d1bae657aa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.23_overview.png": "c441914f0f1791ef7f1cae1e26f5b4400af99d8f9577cdd36b5688a476661a7e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.35_elevation_titles.png": "7269a00b7966dea0175f97b16b33cb3ad95859c52626958ddc09df6af3fc88e7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A7.45_4_RCP_ACT.png": "151a592d95d4b4d665509b0ba72ffd08e3a4ecddb09df0a56765927ccf24114e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A8.01_bubble_4_A0.03.png": "4cd86953d33d6e74203347f5f84fe005a2464a3c0f9fb2a926dfcb5eac848a27",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A8.01_overview_no_views_13-15.png": "6b2234b4c909cea4276ff8dd2ffbe0396166717ac70825b8801515078e569fbe",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A9.05_08_canopy.png": "cffd5f56360b460bc65a12016bccc8c6f59f1f1a8588e8ca7bb346c3d580b9ec",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_A9.05_08_canopy_notes.png": "37a924c1a470444a2de46b98fe563098ff35de682c66583f4e43addb63ce49ca",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_E1.02_panel_circuit_labels.png": "514dbcfe3370fd9ccacd44ddf5b59f59a2e05ea3673d02e283c6f6a13120928e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_E1.03_panel_circuit_labels.png": "f585b2afae9d3dccf91fc2150b27ead0f2fb5cc965c4f18da75a9a42d8e604a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/S3_S3.07_blank_section_marker.png": "b06e2b770229b1a0ea65137a26ff1377bed82ceaa04eaa264bc171515a02d7c8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/burbujas_verificadas.json": "5996789c3cdd4c9f4cdd700d43d75460250870787f485527d0ef995d80f1da9f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/burbujas/callouts_no_aplican.json": "a47fe4ea0edf83fcbe33deb5a16f5dffeaa899ead8863427949010eba14e211d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/comparacion_sets_2025_vs_2026.json": "a24e884228588accc3f46b40f864d5db7c19be6359eb8f94869d6d6d794901a8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rcp_polys_check.json": "8a31448a5ca37618f6256915384a6c77a3597d3ca97d30a9a9fe7bd48a2988dc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/comparacion_AB.json": "13609bd3f059800a08e6568d22590c2573c4fc010134568b9dc6cf5728438404",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion.md": "e221152d05ca41b1073b7df27921962b50019ad628457aa83a2fc68c650214d0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion_L1.md": "fed0162d8bcaeb6e936c9cdcaa16f401ca13f01776be6667c575b7b11dbc96e6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion_L2.md": "7d5af59d0e970c6770bdaa7010a9762e0e7f52bcbbc9833021e5d73bb3b6c2f1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion_L3.md": "6ec5092045dcccbd8c44e3674b4750cdb80a717bba733c2fc5fb3648e025c7eb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion_L4.md": "a4b1e800e624037cef06df32adc3f7bb3f7ef1d5f057a6cec4e123f01bc77394",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/resolucion_AB/revision.md": "3d7ac9b9374940f6ac1c22c7a9a02564855c1c482e97eb73b11e33b88b1327a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01.png": "6c12de15498f446b218f069ffe367b7ced4e2810525141e71397d12034d5f85f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_1.png": "00a6600325a31fe99403ded0b3e601e5d91f81e6bfd1bcf124938d8773d92afa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_2.png": "426592f1dbcd76995e0971075737f602aa82278030bc028c37762c44bd2de329",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-01_3.png": "c9d1ab417f0f51eb4f48acb757470dda58f92b013f05f062052fe25c396379da",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02.png": "b2de08b03197b8cacd1ce634e7677025a3dfbc48a3c285b9486f293290bd5504",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_1.png": "00a6600325a31fe99403ded0b3e601e5d91f81e6bfd1bcf124938d8773d92afa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_2.png": "fb9f6f31ec2ed99f364908f69a3aeced176e8b11af97a2355405369716d48fe3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-02_3.png": "3007a8e6e518e195b77837a58ff702843d36e6d8474055e302f5631e3ce14f10",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03.png": "621a9dc81a7fe3c14dc31f0861c22abb3df30b2a27dc637e3ff87492fcd9331a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_1.png": "a9b5243bd59537091d49aae8582f2b907a7c990ff0532a359efb28484336a955",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_2.png": "9e225b1be795038106f52533ba1d279dad816f185bcb3bb0e91b6401a07389c6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-03_3.png": "6375e5a4a0b62b1f17cab0eaa2e2cfef09b3e9eb1f3ddcd17a10c5d3d5409c58",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04.png": "5d6cd299bfc35486381ced1c05630067d458d6d8c784111ce1ca435480f68197",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_1.png": "3e23bcd23816a2407a34283844d9e1808717347ede0db2470429817fc20314a8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_2.png": "0655520e048b965ce9191d6e9b72c7c7817a400948443e776054fe88f2698e7b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-04_3.png": "44847831f1855850509f71e958f076f90d2c7a9070a7bb54062a219368f017d2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05.png": "c1d268c6c6f003f105dc99a589337dff4ad869f31f82ba0e13fac1d800c3063e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_1.png": "a4c6e878c5aacf3f1d205a576920c726af8f013cfc8d3ad0e095c701ea5856d1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-05_3.png": "83ea9d9f7ae6fb209666012a9123d011e38e7c525120111485b94884d2b56183",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06.png": "93c9455e155282f1bb23b0c4e0ad475a326db8e5f8e2ccc2d4bc3bd28f7a74b2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_1.png": "fbf58e826305266f0077205b0167481463f3b7704eda1fc790af58f692e4b224",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_2.png": "9d0243e569f90dedcf79c12bbbcd7c4bca06e0ff800d72e0bab82acbf0660363",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-06_3.png": "fea2206df9d932de443507f7dd501dd7e7e87c495d911f5729052daa2b3e50b0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07.png": "315c47785d14f83ef9ef072112b4370afc70140c1ca2066b9235a6870e93e88b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_1.png": "6be795fd618c9f66c737c27f2245b00b504e43027efa668a3b039c715c600b11",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_2.png": "56cbafd1a0d7046b0269ec5efe15675c7e879490c9c5910d447ded7daeb6b9aa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-07_3.png": "577bc03c6da620954af4d195f6ee486df9fd90c8212d2a3a08c21b91e79af7c2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08.png": "d75f3788150785947639deff1db26633f1c07d746646d55faf4f7d976f1f3899",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_1.png": "1ce8f672040b2ff75bb51ab8fe81114eecfeffc5681edb2846b422163b3a7472",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_2.png": "32288a90778c0dae87e880c9029936aba1efd24761b9117e082bd599342317aa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-08_3.png": "32a60bf54082d078e6b5584a5eabd19c09dff274fb50fa64d69e6dfbf6397885",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-09.png": "15ef21cdfd684ba6ca7b498d450fbc5980d39f0e74c682015b737d9865b287a3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-09_1.png": "2bf1c68d1154cc9778668a89e57d56026b4c585cf97fe784ddf9b4faa9ed02cd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-09_2.png": "186091d55a630b3335f80cc843a15da780054e9473bd09593823fb7e11399285",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-09_3.png": "7b8a631e550b650458ac5ddf22ba9011f9fb9e062f90fee2a7a3d308f102904d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-10.png": "b32f961c14e88583346f69ea9841aceba4f3def8b2568e9aacda618d673e2f81",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-10_1.png": "96f4f40743202bf6bf6f1215b36896077fd4cd4ceae173d0e21909a35d7ef1e7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-10_2.png": "cfdb75f7ab6d518b6fa54dc93480b5b84b5440198e38ec6342103d6e25c6dc7a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-10_3.png": "3d7eb5b19143a5a078a3bf62aa45ca771c35c8a333123413b1962301c7ffc49d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-11.png": "67cea4a327c947cfb0676965e9c22fbf36e2b9db64c12f63810776760a4fcb14",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-11_1.png": "8beec203e3bd68e4558dd4982cbe028b3aab377b7b2b5431059269ffe24c3f82",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-11_2.png": "ff9a777498daf071319d7cadfdd93c1678d7711d5dc47286051aeb98286a3799",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-11_3.png": "d24710153113e30254e2e8d8f4942dc5e3e7b07569d2e9036cc4ab70b9c7e473",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-12.png": "1b2c4b6356dc3e6e3c58c311bef38132668d4e29ee27597d86b0547e2a8301da",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-12_1.png": "670e83f0cf758310783ab69748b0b87bba6877db97b9f0881fa1f160719da80e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-12_2.png": "670e83f0cf758310783ab69748b0b87bba6877db97b9f0881fa1f160719da80e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-12_3.png": "4952c8b1129176f765be750136dfdac00d4c512c58a623bfbcdc03d0c8cde2b3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-13.png": "9c337eb092b4c3f5b2e3eca3dbc98505758f2017a6febc0bb1113590683e2fcc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-13_1.png": "a0c104f291f73c7060f3a6ae6d1f5d9f396fd451bbee35a274afd4d5b5e69472",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-13_2.png": "514b96ecbb2117f7d664ff766765d68dd0c120d804b41d1885ad4c52cae3860e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-13_3.png": "62f0fc8206aac3212e38251a217beecd464cb700ce26b62965ceb3a2323dba6d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-14.png": "809da5f9a56eb3b34c7527be607cf4a6e1caf15a06250db8bb161a268c454d3d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-15.png": "a254ba908ca814f248ec5711ab05bb3683608c5188ae1b63effadaddc7d279b9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-15_1.png": "43f4cd9c8b4a3f124d8112a3a37f93e415da2f52904694c4296428059a115196",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-15_2.png": "7cf4433f90d2840f73930e5aed4faf16b64da9ed29852e3d04403cb2d8ff41a4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-15_3.png": "a2d01bbce3751116754e0e0f3eab1e9b2e28ad669d69a16a492677ab36aac435",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-16.png": "577bc03c6da620954af4d195f6ee486df9fd90c8212d2a3a08c21b91e79af7c2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-16_1.png": "6cf2f3426ef32f014255b13a9fc48a5c58789b431d74c49c0c2d46604afab0b8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-16_2.png": "536d9ca252105460521f66fe0f0617a507ca6a613246540e13a929fb96f969ab",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-16_3.png": "62f0fc8206aac3212e38251a217beecd464cb700ce26b62965ceb3a2323dba6d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-17.png": "24fa9e210a95959515e8abfcc44cc0621c00227b53587662d7e4f6ce1e274242",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-17_1.png": "99751d5ecef50b5e741a7f4149b4c5b782ca5d1990a129f46cb1d8820576bbc3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-17_2.png": "e181939b3ded007ca5ee80585702d44ee943dbe60958e99d035f235299ab3c31",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-17_3.png": "e9788bfaf7365690dacdf2c186d4894e574d21667288430feb47c45d44773721",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-18.png": "39f65a1d59d8a0b8d03ad7e847be715170914e58bf7590068a8c72a5c06faadc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-18_1.png": "ec797092354791158169467694f8dd8689de107b20521524ff3f828773b51569",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-18_2.png": "d6064c56e57a230ec241c0201444815a0c07102294406763169629dd80e72c9f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-18_3.png": "91f7d1b7dc56d600ba1babc72ecb5fcb778cadf5caeee9fc7c905945c5439880",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-19.png": "0331431533bd2a53afa3d805ec21934583edb77a73e9e2e8930b4b010cc2ea3a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-19_1.png": "6254dc9f1b21ba25c6e1cda84e6960646b4b5300fd6f9796b8e5643bf2ae1480",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-19_2.png": "c748e0e2a25c8e357387feda38ac02439e332bc474f59fa009da1323122e8944",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-19_3.png": "2c83d7295f00384c56ca0ecb76d40d294689877ac1f0ca23703afd769e0c18bd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20.png": "4a9ec79f1ee2490798cb8a8962700e8958333edc656d1ec0b04e7105b6b550ae",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_1.png": "5d746ff42a1b5f8a6f46f7e70e6523797af20df9b5dcb416b0314bd03770fcc2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/review_items/RFI-20_3.png": "b942a043ad0e910801c7f8fadb1bad453d4b37c83689404bde83ea201d6930c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01.png": "6c12de15498f446b218f069ffe367b7ced4e2810525141e71397d12034d5f85f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_1.png": "00a6600325a31fe99403ded0b3e601e5d91f81e6bfd1bcf124938d8773d92afa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_2.png": "426592f1dbcd76995e0971075737f602aa82278030bc028c37762c44bd2de329",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_3.png": "c9d1ab417f0f51eb4f48acb757470dda58f92b013f05f062052fe25c396379da",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02.png": "b2de08b03197b8cacd1ce634e7677025a3dfbc48a3c285b9486f293290bd5504",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_1.png": "00a6600325a31fe99403ded0b3e601e5d91f81e6bfd1bcf124938d8773d92afa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_2.png": "fb9f6f31ec2ed99f364908f69a3aeced176e8b11af97a2355405369716d48fe3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-02_3.png": "3007a8e6e518e195b77837a58ff702843d36e6d8474055e302f5631e3ce14f10",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03.png": "621a9dc81a7fe3c14dc31f0861c22abb3df30b2a27dc637e3ff87492fcd9331a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_1.png": "a9b5243bd59537091d49aae8582f2b907a7c990ff0532a359efb28484336a955",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_2.png": "9e225b1be795038106f52533ba1d279dad816f185bcb3bb0e91b6401a07389c6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-03_3.png": "6375e5a4a0b62b1f17cab0eaa2e2cfef09b3e9eb1f3ddcd17a10c5d3d5409c58",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04.png": "5d6cd299bfc35486381ced1c05630067d458d6d8c784111ce1ca435480f68197",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_1.png": "3e23bcd23816a2407a34283844d9e1808717347ede0db2470429817fc20314a8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_2.png": "0655520e048b965ce9191d6e9b72c7c7817a400948443e776054fe88f2698e7b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-04_3.png": "44847831f1855850509f71e958f076f90d2c7a9070a7bb54062a219368f017d2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05.png": "c1d268c6c6f003f105dc99a589337dff4ad869f31f82ba0e13fac1d800c3063e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_1.png": "a4c6e878c5aacf3f1d205a576920c726af8f013cfc8d3ad0e095c701ea5856d1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-05_3.png": "83ea9d9f7ae6fb209666012a9123d011e38e7c525120111485b94884d2b56183",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06.png": "93c9455e155282f1bb23b0c4e0ad475a326db8e5f8e2ccc2d4bc3bd28f7a74b2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_1.png": "fbf58e826305266f0077205b0167481463f3b7704eda1fc790af58f692e4b224",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_2.png": "9d0243e569f90dedcf79c12bbbcd7c4bca06e0ff800d72e0bab82acbf0660363",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-06_3.png": "fea2206df9d932de443507f7dd501dd7e7e87c495d911f5729052daa2b3e50b0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07.png": "315c47785d14f83ef9ef072112b4370afc70140c1ca2066b9235a6870e93e88b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_1.png": "6be795fd618c9f66c737c27f2245b00b504e43027efa668a3b039c715c600b11",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_2.png": "56cbafd1a0d7046b0269ec5efe15675c7e879490c9c5910d447ded7daeb6b9aa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-07_3.png": "577bc03c6da620954af4d195f6ee486df9fd90c8212d2a3a08c21b91e79af7c2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08.png": "d75f3788150785947639deff1db26633f1c07d746646d55faf4f7d976f1f3899",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_1.png": "1ce8f672040b2ff75bb51ab8fe81114eecfeffc5681edb2846b422163b3a7472",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_2.png": "32288a90778c0dae87e880c9029936aba1efd24761b9117e082bd599342317aa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-08_3.png": "32a60bf54082d078e6b5584a5eabd19c09dff274fb50fa64d69e6dfbf6397885",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-09.png": "15ef21cdfd684ba6ca7b498d450fbc5980d39f0e74c682015b737d9865b287a3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-09_1.png": "2bf1c68d1154cc9778668a89e57d56026b4c585cf97fe784ddf9b4faa9ed02cd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-09_2.png": "186091d55a630b3335f80cc843a15da780054e9473bd09593823fb7e11399285",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-09_3.png": "7b8a631e550b650458ac5ddf22ba9011f9fb9e062f90fee2a7a3d308f102904d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-10.png": "b32f961c14e88583346f69ea9841aceba4f3def8b2568e9aacda618d673e2f81",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-10_1.png": "96f4f40743202bf6bf6f1215b36896077fd4cd4ceae173d0e21909a35d7ef1e7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-10_2.png": "cfdb75f7ab6d518b6fa54dc93480b5b84b5440198e38ec6342103d6e25c6dc7a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-10_3.png": "3d7eb5b19143a5a078a3bf62aa45ca771c35c8a333123413b1962301c7ffc49d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-11.png": "67cea4a327c947cfb0676965e9c22fbf36e2b9db64c12f63810776760a4fcb14",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-11_1.png": "8beec203e3bd68e4558dd4982cbe028b3aab377b7b2b5431059269ffe24c3f82",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-11_2.png": "ff9a777498daf071319d7cadfdd93c1678d7711d5dc47286051aeb98286a3799",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-11_3.png": "d24710153113e30254e2e8d8f4942dc5e3e7b07569d2e9036cc4ab70b9c7e473",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-12.png": "1b2c4b6356dc3e6e3c58c311bef38132668d4e29ee27597d86b0547e2a8301da",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-12_1.png": "670e83f0cf758310783ab69748b0b87bba6877db97b9f0881fa1f160719da80e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-12_2.png": "670e83f0cf758310783ab69748b0b87bba6877db97b9f0881fa1f160719da80e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-12_3.png": "4952c8b1129176f765be750136dfdac00d4c512c58a623bfbcdc03d0c8cde2b3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-13.png": "9c337eb092b4c3f5b2e3eca3dbc98505758f2017a6febc0bb1113590683e2fcc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-13_1.png": "a0c104f291f73c7060f3a6ae6d1f5d9f396fd451bbee35a274afd4d5b5e69472",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-13_2.png": "514b96ecbb2117f7d664ff766765d68dd0c120d804b41d1885ad4c52cae3860e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-13_3.png": "62f0fc8206aac3212e38251a217beecd464cb700ce26b62965ceb3a2323dba6d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-14.png": "809da5f9a56eb3b34c7527be607cf4a6e1caf15a06250db8bb161a268c454d3d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-15.png": "a254ba908ca814f248ec5711ab05bb3683608c5188ae1b63effadaddc7d279b9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-15_1.png": "43f4cd9c8b4a3f124d8112a3a37f93e415da2f52904694c4296428059a115196",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-15_2.png": "7cf4433f90d2840f73930e5aed4faf16b64da9ed29852e3d04403cb2d8ff41a4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-15_3.png": "a2d01bbce3751116754e0e0f3eab1e9b2e28ad669d69a16a492677ab36aac435",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-16.png": "577bc03c6da620954af4d195f6ee486df9fd90c8212d2a3a08c21b91e79af7c2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-16_1.png": "6cf2f3426ef32f014255b13a9fc48a5c58789b431d74c49c0c2d46604afab0b8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-16_2.png": "536d9ca252105460521f66fe0f0617a507ca6a613246540e13a929fb96f969ab",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-16_3.png": "62f0fc8206aac3212e38251a217beecd464cb700ce26b62965ceb3a2323dba6d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-17.png": "24fa9e210a95959515e8abfcc44cc0621c00227b53587662d7e4f6ce1e274242",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-17_1.png": "99751d5ecef50b5e741a7f4149b4c5b782ca5d1990a129f46cb1d8820576bbc3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-17_2.png": "e181939b3ded007ca5ee80585702d44ee943dbe60958e99d035f235299ab3c31",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-17_3.png": "e9788bfaf7365690dacdf2c186d4894e574d21667288430feb47c45d44773721",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-18.png": "39f65a1d59d8a0b8d03ad7e847be715170914e58bf7590068a8c72a5c06faadc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-18_1.png": "ec797092354791158169467694f8dd8689de107b20521524ff3f828773b51569",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-18_2.png": "d6064c56e57a230ec241c0201444815a0c07102294406763169629dd80e72c9f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-18_3.png": "91f7d1b7dc56d600ba1babc72ecb5fcb778cadf5caeee9fc7c905945c5439880",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-19.png": "0331431533bd2a53afa3d805ec21934583edb77a73e9e2e8930b4b010cc2ea3a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-19_1.png": "6254dc9f1b21ba25c6e1cda84e6960646b4b5300fd6f9796b8e5643bf2ae1480",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-19_2.png": "c748e0e2a25c8e357387feda38ac02439e332bc474f59fa009da1323122e8944",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-19_3.png": "2c83d7295f00384c56ca0ecb76d40d294689877ac1f0ca23703afd769e0c18bd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20.png": "4a9ec79f1ee2490798cb8a8962700e8958333edc656d1ec0b04e7105b6b550ae",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_1.png": "5d746ff42a1b5f8a6f46f7e70e6523797af20df9b5dcb416b0314bd03770fcc2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_2.png": "c4a3b984655f36730e85321f01dbd94802333b599f73e96084f5b57e31a95198",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/rfi_img/RFI-20_3.png": "b942a043ad0e910801c7f8fadb1bad453d4b37c83689404bde83ea201d6930c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_ch_det.png": "38099800236ea5b3f50971628a99f19f0d4e0a37dc19ca2171577d719cee8b86",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_ch_tbl.png": "7a22d301a9a4312e417e359c05a06f899ddd008aad06d7d48bacae42ec8002af",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_cip_det.png": "c49adf42a9f6ca9e874dcb8cca2ef8f7448ad39e9077ca9b3ed04a13b97775a6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_cip_tbl.png": "1472fca6706bb18962b0d5e002f2a9c9fbddd64f892872fe405c05fcbfe84a05",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_cmu_det.png": "f797d93fe61bb69f9bc606b11a40efb8e494616c95568f8e22af8a24594a8cfa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_cmu_tbl.png": "b2694ddbb5332b23c14d64830d9070c3cf7b7e04fd3f2fc66657eaa8bec1898c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_dw_det.png": "fa08ecf03e683fe51febfe240725f21527feff180a48f2d4c782befadad51cd2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_dw_tbl.png": "b57bd9f8c05316ce23748599ac356c2d7e4f6437e320fdba072fc90a371ab13b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fi1_det.png": "e7dba13fbead2ddd5e523bc13988eb087c443a55c978d9001788ef907e84f059",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fi1_tbl.png": "a9d860c29f37ddaf784e6b79bef6023f6f850798b4d37ac11a9b8a3c2cb986d7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fi2_det.png": "5ff99beeab7ec680ecf34fdbddad3676c2ab0e7be592111ae505dc4b659b735a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fi2_tbl.png": "e5f52cca88428ed8abbc9844c9296da8e9a41b6ba98cdab59a7adf2ae47385dc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fw_det.png": "88d990b49ce866591f89337514f8443ffc756e5fe0ec40358aed6a0ae0b63c92",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_fw_tbl.png": "129ce7ebaa4eb7515d02b03f2ed802ab9f168466e62b0e04678951f69960c46d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_notes.png": "7e053ae22f41ddf33f4107da9549c6228d011e66c942a7def4eacd2d3a0dddd3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_sfrm_det.png": "f16fdffe4c32ac803361d3b44469bed49d4837808867778b32923658f58966b1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_sfrm_tbl.png": "5532b5aa5ff06082f10d64f4631a1f91cd699959305e71eb02c7bc54d1bfdc8e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_stud.png": "dd0b80d5d971a368004a889bae5b2ccad7547bdf8bb969aecf2ebf255fc7df08",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_wood_det.png": "0ca0491dde50bb39cb00b99cfe8b8f457c5dd19103a50115a1f06a4b01c063f1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A006_wood_tbl.png": "57eb0d1e32efce710b20f693bc2ce3c1c21359ae5f607b729669492f71fc229f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk1.png": "8abcd0da6fa4e7a9a5974b1e7c401118df33263a2f67dc39e329d96474a508f4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk2.png": "bb1333c3c43082623a3f8351d785b96a63daf96c1f38d6b4970f12ff8b42c9c7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk3.png": "942592ee9dbbc658a686a41c845ffc3a55e3fbb8d5e863ffe23ae064203bba38",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk4.png": "840bf5d70a54a226ef41475597fc4a0a9ed816148b66d0118ea1ca8e5716059d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk5.png": "456291acd0e1def55d36141b31bd37f122b99fc835a404b6480e27e8cbb3e5fc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk6.png": "98d57b31c29787fe8d1c336be20486b869f4f3dc1aca9265ec900246a5f521f9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk7.png": "eb644dc31925142dd090b3e1c4336624f2fb6f9f84edd842bc18e374c322babd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk8.png": "af36bc9a09876c06a2784ea55672d3bbbb793651d53f584d5776c9ee7cf4e73d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_blk9.png": "05c9dc0bd3187f027a285fd1a26d1fcbfe1197956e3d8364d4bcf2d89d31c5c4",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A007_legend.png": "bb0d0ae65b5e00147df6d9dffa93249aeae07cc0d1a3a3722ee6ac5e2582efbd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk1.png": "bc88d985d544bfd3762e8f837f035e2ed65727acebc5065e63612d6a7a8a1623",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk10.png": "87d37044468ea215091256238acfe54639b032ce86e003ceaf96496c7055c742",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk11.png": "5a412ee4cb9f14037d86063587b1d6913dc1ed38e6881aeacc91e8613b3f23f1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk12.png": "83ae7b21c03c82f1ed16a58cda7820ff3c04e9a7c79836f447779a78f15a1a27",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk2.png": "23fee579d5d423066869af7b789b6087fe17c06a78181c1e754eb22e9fbff71f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk3.png": "a48d3c5c062d5e252cb3f7cd32f42daf3647cc4415df6c2bc8703ea89aebbab5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk4.png": "e1b3fc40f6f2d597d8903aca8d92f9eab40b5269af3b2514bb63332a33ac330e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk5.png": "5449c40ccbb47dc45bf9ba40b7f0e28af89e16615061b7499f6f9753ac7bba63",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk6.png": "31e3f8d455a50bc28f6a37da80c92f4345f8ca9764dc9976aebc62dd39ee9f29",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk7.png": "3eb50689ab769bd09bea6e4c9f90d3829b00941dceb21895b901c5791a162c00",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk8.png": "771630e5c669a677a9439061ac8b7432bf7ec06b6e52e5c1a0092e93b1fbb862",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A008_blk9.png": "0e74ff8fb476d31ff9a84207edd70f76294154b150209a6e02e6f6d9650df033",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d1.png": "f7e58f92e57b002afaa11e8c23e6d220b7356232a9516e1e80b82287b41cf7b3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d10.png": "95eee7d0bee395bb400f29b97f329b15355ec10338a4e9c9a4d9f3856c183a7e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d11.png": "43bf67bbb1cfdd30d8fce4a6efc37fb34d3b4211cf6d95d3d484f5eef6eefe33",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d12.png": "b58492c5d0aff1b9383e31d295a28de396a0c61edd908d8eacf2356de0d128a0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d13.png": "c01aa47bcde43a69008fac2777e991e26cbf5be9ddf265ff59d2d9c98a4142be",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d2.png": "1be72f40f3adbdbac083dcb67f005d8713940c482c0771e2e3ebbe2595565f4c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d3.png": "b140540d7682ea8a88a316dde78ee541184fde7070a90102dea757d5d0180169",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d4.png": "2c04c4b3f47387fabac1c140dc2d7994728a6d864de4a11ce6f70cf6769fb102",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d5.png": "09535a32afe4f7d961b9aeb7a170799bef3954bff3076e396b5b56fa120265fa",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d6.png": "2750238041acb84707061fe5fa716f33cabf9c0c3cf17fc6ea81e7599ca6c452",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d7.png": "4d9d65d267a55e2639661fe26b26f65c87b8f67d4408f78c07a08f6de82fefbb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d8.png": "9949ef76f7147a2e199e67cb3238dc8f77890433898694e723012420307aeb91",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A009_d9.png": "ce611e36981861916f856fc08146da3b276d3daf1793ba8d43f75a9580aba5bb",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A010_d1.png": "1811a0e98d060b8589a6a961dec66de97f2f16c40af382ce9bc9f950c57133af",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A010_d2.png": "6ef4f6d64c87202ccf1e75d19c732c3f6eed7067090f416407dba28b7889e5a2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A010_d3.png": "080edb61188f9e9b1f61c2f804725ddaf8ba09a76598e554e703d2369a2867dc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A010_d4.png": "9ee3640636ed37d4cc93a56ea53adaeb2e9dafe3b634e9f20cfe3add5536d78f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A011_d1_annular.png": "d76d9effd48b007c3c6b143fb32cc6b6e92fa3383f3c0fc264f17373211f20e2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A011_penetration_sched.png": "df86f97d1a209a165b4772e8b6a1a1d52fb9053ec864931b68602c12eff9f297",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A719_public.png": "581923813e6121bcac6ed1485d4c794ed01ec0856f6734ef62cb2463dfe390f7",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A719_rooms.png": "46311d8a66848325b072de86dbb732f66d4c16598a58d55bca92384352b99d3d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A800_frame_types.png": "93ce12d8b6f187fe70977d60b2a6a6165dd1b97fded38cc9207b1d103e572a1b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A800_notes.png": "c817a5281419f110df014c11b498759ffa8179847d385ecb8f5176b79e400452",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A800_sched_left.png": "5314411a83f50ea57ca8c2ee073e7bf33a5f368e791dbf475ded82d0ea8294a0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/A800_sched_right.png": "d5e12c8318ecb414d35186b6eedfb320debcc8caf52fcd8b33e431703e1e6f30",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/NOTAS.md": "27416d3e7a534a44c3c5592afcbad639b67749b766472a168be5e5ac1e9351df",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/fichas.json": "20554807056586998b3f1310302d5beb52357c87d56be7903a6e0abbf9bbd4c8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.06.png": "e8b18ab9e8633c46f736424b93fa24812fa5778bded980bfc818730d8c748e9f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.07.png": "1ef210fe6ce3bb27521f73c4104f69d62549991dcabbc5d9521255d839f99e92",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.08.png": "3f76879721028b654882650cade435a9ce3b77d8f014c009b9ccc6938cdc1466",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.09.png": "d2d0aeba98d8fc01ec0b00ef8d602e6cf27d5f5faf8e1fcd8bc57b81a798e92d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.10.png": "5fd7dbbfeadb2d783586cad85a4f10cfbef40ba75440b96daa80933e0b7182c9",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A0.11.png": "7c48ae24ac946a0b9a1ee0dba7f1b17a7807b129f47ff416bef344ef981dc019",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A7.19.png": "875cd66ea80df7ab01b1947bd97be2ccb6256912f3b3fea14ebd27053d379d22",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/pos_A8.00.png": "421b93e521f970df594404f8bc066eb86e822c7ba5d0d83bcd929c0f77deb6fc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "12d74865b18ea58f5c3b4c763aa9ac24f3be4cbcdd6999afb46c930da28284e2",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/tb_p61.png": "2aa6d55ad6bed2f68cd3a16ce903f015dd0588639e234660bce12f65dcce1467",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/tb_p62.png": "d6dcb6bc37372b3711ceec6d3d8a391fa09b77bdc63b4b46d5a01a65fe01b395",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/tb_p63.png": "2a58751389ce73245249ecd3211d3a26caebc3a90acfd21a34cf83bc3a742dcd",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p10.png": "e0b2fee1d9688a649a7dd32637632c5b960c69dc932c7d2e39670ec166febe94",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p11.png": "a01f8c2190351e742d8b6df7d39f8f18b7b1f6ff41fe62e478f3bc72cbaca484",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p12.png": "1ef33b72bbeb6a5a4a01a13f6bfc93d3eb0a21e147614e679fc4696f6135ea5d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p13.png": "7fb96166cef5e900fd15bc82f82ab9d77e3bf58a8ffd7532dbdf84621a8d0d78",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p14.png": "00961ec91330c1e330e846632b8e49db4bb621165dabb8f21d42c4a8a9d14aa1",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p15.png": "b208f7e3b63c9a326ff561cf5fb4b3c29e5995ef04f3b635ca14ad3f92733e13",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p61.png": "d8dcb0d8ae5734afa6718da42dfd3187a0596493a313cfe02d60158dcdb8d4ec",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p62.png": "c23e3805345f338fbd76878c801f279cad12b30e46e29e601b72e803e0644e58",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p63.png": "e88f925c0c4bdff18c57d0098434458d3ff2382d1b8012f898804f6f9767467a",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Auditoria/schedules/thumb_p78.png": "d11c074a554dcacca153f2a6b77bb251e530206ac2a41d271c129e97629776ab",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "1c0efd9fcc0411d77e103815bbf3fb63fa221a58ee4f8f79690ad6345f00f777",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "a85923baca94850b2b75243ac6453dab43bda3eecb78ade4b9c015590f6d67de",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "f30941361100959c7429492db50c8acdcd2713a82c8e763dc3c5cdc6750c43c3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.01_marked_by_type_rev1.png": "006782bcdc1a93470aa39771c5188678aa47ec8449d95f938214b9ea513f2e1f",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.02_marked_by_type_rev1.png": "4e097c48482d028c89230732c7160ac1d9db7ee5b2a96e43f97fcbdf0f9e0273",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.02_rcp_markups.png": "4e097c48482d028c89230732c7160ac1d9db7ee5b2a96e43f97fcbdf0f9e0273",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.03_marked_by_type_rev1.png": "074bc3322e44328614fd56ee24cea35339bf35fdfb54f095b6f90fe51a70a8ce",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.03_rcp_markups.png": "074bc3322e44328614fd56ee24cea35339bf35fdfb54f095b6f90fe51a70a8ce",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.04_marked_by_type_rev1.png": "0c8cde6ba85380b926d5ce715723bb2a18720b6a5e1bf32cf6aba1a006c5d325",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A2.04_rcp_markups.png": "0c8cde6ba85380b926d5ce715723bb2a18720b6a5e1bf32cf6aba1a006c5d325",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A3.01_rcp_markups.png": "e442f7a7a24d75b282657285ef353998490887abb9deb7834fd7caaea1979e7c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A3.02_rcp_markups.png": "eeb290ca3c48d002ebf158acfa6db1e49ad9e3eaaff177c8787e0f46ee51033c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A3.03_rcp_markups.png": "0150feef30f7d44b00c35e309096202b149a781b1cdad23766ff506a0e29f4a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A3.04_rcp_markups.png": "0b1edddaf5125f59f84d0d954084fe3289a1d1c0dd9ca76ff14fc6d007e340f0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A6.00_marked_by_type_rev1.png": "a6eeaa0ae0301dbb8a153ba8765fb49e0eb6e5cd95f38a07e946cc8d960af1a6",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A6.01_marked_by_type_rev1.png": "51caf1679398726c954e87f545bbcb76ac9f8f0bce65f7f7cba6b5f57dd8b5ef",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A6.02_marked_by_type_rev1.png": "4f8f3e5bb5ed740ff03850390cfb6b380e71db00e8facac759890feb0b848e69",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A6.02_rcp_markups.png": "4f8f3e5bb5ed740ff03850390cfb6b380e71db00e8facac759890feb0b848e69",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.30_marked_by_type_rev1.png": "15e4945fa07a0cc4f5c105222bcb88c24588356b425e2285ec8c137c796938e3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.45_marked_by_type_rev1.png": "f4b5d86b11441d41a0c24ef9ff6626754b4e4dbe2a258c18da680687286554c3",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.50_marked_by_type_rev1.png": "ebe4ea2059c0e243f9d80b6b8dfcf467c3275ead5ea8a4347e7b02e54ecab3a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/A7.55_marked_by_type_rev1.png": "2d9732c202ac8fc299d02f459558945ee967129c844c9136dcdc21d8645d1e3e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/CR_City_Hotel_markups_rev1.pdf": "85727b6dc06e2fe881167f69342ea4852b28c16cee392587beef02df0f265fda",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "ffc8787e6c573c6b347796bd958f5fa36b48f2a8c729b264d032dbf4d879c62e",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "f548ec5d14ab9cdf01e19d27d19af5d5e1e1cf0928660805916f47c089bc6c8d",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p149_marked_by_type_rev1.png": "ec59afe8b400b6d8608fd1bed67803f77c30a110834b9c8d991418c7f1279624",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p22_marked_by_type_rev1.png": "e442f7a7a24d75b282657285ef353998490887abb9deb7834fd7caaea1979e7c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p23_marked_by_type_rev1.png": "eeb290ca3c48d002ebf158acfa6db1e49ad9e3eaaff177c8787e0f46ee51033c",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p24_marked_by_type_rev1.png": "0150feef30f7d44b00c35e309096202b149a781b1cdad23766ff506a0e29f4a5",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Planos marcados/p25_marked_by_type_rev1.png": "0b1edddaf5125f59f84d0d954084fe3289a1d1c0dd9ca76ff14fc6d007e340f0",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1.xlsx": "5780e59ddd3ea64b82cae82fcab9f05b844f5bd0972f59e924ca9fa9348b7768",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev1_PROPOSAL.pdf": "9f9e8eac37047e411d379479d13d437d8d7f04f5d2cac5c9a293c5c8cee0cba8",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/README_REVIEW.md": "203915a7b33aca127551f50ce541f051b6a6b714f509e2a85ae90e68861fce5b",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "9c34c9dac991ca9be97e9365f2247a719b216dce34c7c8e29488f9b9e778d4bc",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/SEGUIMIENTO.md": "2de4c6674fa87f6438d4e58ee1e6b3d35b08e4b404a15ddee92e716d6b621c53",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx": "531dd0f23327f3dc4ea2b22d1dc8f227ca763e06b76675ad7253a6d0d914fd77",
+  "rev1 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev1.xlsx.sello.json": "d4f5ff944cdfb7fe2853358b5031797cfc63d9e8707ca4b04e692ee7867558d3"
+ },
+ "drive": {
+  "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
+  "carpeta_proyecto": "CR City Hotel - Castle Rock, CO (Owen-Ames-Kimball) 11-12-26",
+  "carpeta_proyecto_id": "1UVry3iaGhJrahxk8DE-Q150WvRAE38h3"
+ },
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal)"
+}
