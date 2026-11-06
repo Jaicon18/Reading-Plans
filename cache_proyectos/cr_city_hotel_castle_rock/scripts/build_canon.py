@@ -69,7 +69,9 @@ def main():
                 if ly <= 0 or h <= 0:
                     continue
                 k = board_key(fc, w)
-                if k == '5/8 cement board' and not str(tid or '').endswith('-0'):
+                if fc.get('tile') and k != '1 shaftliner' and k != '5/8 exterior gyp sheathing type X':
+                    k = '5/8 cement board'
+                if k == '5/8 cement board':
                     # rated face with tile: keep the rated Type X layers + add 1 layer CBU (RFI-CR-TILE)
                     g = grupos.setdefault(('5/8 type X WR', ly, round(h, 3)), {'faces': 0, 'src': [], 'rooms': []})
                     g['faces'] += 1; g['src'].append(fc.get('height_source') or ''); g['rooms'].append(fc.get('room') or '')
@@ -89,20 +91,79 @@ def main():
                 size = {'CH.2': '2-1/2"', 'CH.4': '4"', 'CH.6': '6"'}.get(typ, '6"')
                 H = max([float(fc.get('height_ft') or 0) for fc in w.get('faces') or []] + [0])
                 n_st = math.ceil(L / 2.0 - 1e-6) + 1
-                misc.append({"ref": f"CH-STUD {w['id']}", "familia": f"C-H stud {size} (printed)", "lf": round(n_st * H, 2),
+                misc.append({"ref": f"CH-STUD {w['id']}", "familia": f"C-H stud {size} (printed)", "qty": round(n_st * H, 2),
                              "op": f"ROUNDUP({L}/2.0)+1 = {n_st} studs x {H} ft = {round(n_st * H, 2)}",
                              "source": f"{sh} {w['id']}; A0.06 CH '{size} 20GA METAL C-H STUD' (UL U415); spacing 24 in. o.c. per UL U415 (not printed on A0.06)"})
-                misc.append({"ref": f"J-RUNNER {w['id']}", "familia": f"J-runner {size} (printed)", "lf": round(2 * L, 2),
+                misc.append({"ref": f"J-RUNNER {w['id']}", "familia": f"J-runner {size} (printed)", "qty": round(2 * L, 2),
                              "op": f"2 x {L} (top + bottom 'J' RUNNER CHANNEL) = {round(2 * L, 2)}",
                              "source": f"{sh} {w['id']}; A0.06 CH '\"J\" RUNNER CHANNEL'"})
         for c in d.get('ceilings') or []:
             ceil.append(dict(c, floor=fl))
         rfis += [dict(r, floor=fl) for r in d.get('rfis') or []]
         desc += [dict(x, floor=fl) for x in d.get('discarded') or []]
+    ceilings = []
+    STRUCT = {'L1': (12.0, "L1 ceilings: 12'-0\" B.O. structure (5/A5.04, resolucion_L1)"),
+              'L2': (9.24, "4/A5.05 room zone 9'-2 7/8\" (11'-0\" - 1'-9 1/8\" floor zone)"),
+              'L3': (9.24, "4/A5.05 room zone 9'-2 7/8\" (11'-0\" - 1'-9 1/8\" floor zone)"),
+              'L4': (8.94, "1/A5.06 8'-11 1/4\" roof ceiling line")}
+    def area_of(c):
+        a = c.get('area_sf')
+        if isinstance(a, dict):
+            a = sum(float(v) for v in a.values())
+        try:
+            return float(a or 0)
+        except Exception:
+            return 0.0
+    def cls(c):
+        a = str(c.get('assembly') or '')
+        if a.startswith('RS-') or 'roof RS-1' in a or 'underside of roof' in a:
+            return 'RS'
+        if 'FS-1' in a:
+            return 'FS-1'
+        if 'GYP-2' in a:
+            return 'GYP-2'
+        if 'ACT' in a or 'WS-1' in a:
+            return 'notours'
+        if 'GYP' in a.upper() or 'gyp' in str(c.get('board') or ''):
+            return 'GYP-1'
+        return 'other'
+    for i, c in enumerate(ceil):
+        A = area_of(c); k = cls(c); fl = c['floor']; room = f"{fl} {c.get('room')}"[:120]
+        src = f"{c.get('area_source') or ''} {c.get('area_op') or ''} | {c.get('assembly')} | H {c.get('height_ft')} {c.get('height_source') or ''}"[:700]
+        if A <= 0 or k == 'notours':
+            continue
+        wet = bool(c.get('wet'))
+        if k in ('FS-1', 'RS'):
+            bd = '5/8 type C' if k == 'FS-1' else '5/8 type X'
+            ceilings.append({"room": room, "system": "resilient_channel", "area_sf": round(A, 2), "board": bd,
+                             "assembly": {"id": 'FS-1' if k == 'FS-1' else 'RS-1',
+                                          "source": "A0.08 FS-1 (5/8\" TYPE C GYP BD CEILING, RESILIENT CHANNELS 'SPACING PER ASSEMBLY', UL L546)" if k == 'FS-1'
+                                          else "A0.08 RS-1 (ceiling 'RE: REFLECTED CEILING PLANS', board on channel under wood framing drawn) - board type not printed: 5/8\" Type X loaded (RFI-CR-RS1)"},
+                             "rc_oc_in": {"value": 16, "source": "UL L546 / RS-1 (spacing 'per assembly', not printed): 16 in. o.c. loaded (RFI-CR-RC, alt 12 in. o.c.)"},
+                             "layers": {"value": 1, "source": "A0.08 " + ('FS-1 1 layer' if k == 'FS-1' else 'RS-1 1 layer drawn')},
+                             "source": src, "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})
+            continue
+        # GYP-1 / GYP-2 / other: metal suspension (USG drywall suspension) - legend 'ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING'
+        ly = 2 if k == 'GYP-2' else 1
+        bdf = '5/8" gyp Type X W.R.' if wet else '5/8" gyp board Type X'
+        h = float(c.get('height_ft') or 0); st, sts = STRUCT.get(fl, (h + 1, 'n/a'))
+        drop = round(max(0.5, st - h), 3) if h else 1.0
+        per = round(4 * math.sqrt(A), 2)
+        ref = f"CLG-{fl}-{i:02d}"
+        nota = ("GYP-2 'GYPSUM BOARD CEILING, RATED 2-HOURS, AER-09038' (layers not printed): 2 layers 5/8\" Type X loaded (RFI-CR-GYP2)" if k == 'GYP-2'
+                else "GYP-1 'GYPSUM BOARD ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING': metal suspension loaded (conservative, RFI-CR-GYP1)")
+        if k == 'other':
+            nota = "ceiling type not labeled (A3.0x): GYP-1 metal suspension loaded as the adjacent typical (RFI-CR-CLG)"
+        misc += [
+            {"ref": f"{ref} board", "familia": bdf, "qty": round(A * ly, 2), "op": f"{A} SF x {ly} layer(s) = {round(A * ly, 2)}", "source": f"{room}: {src}; {nota}"},
+            {"ref": f"{ref} main tee", "familia": "USG drywall main tee (DGLW26)", "qty": round(A / 4.0, 2), "op": f"{A} SF / 4.0 ft o.c. = {round(A / 4.0, 2)}", "source": f"{room}: USG drywall suspension, main tees 48 in. o.c. (manufacturer, not printed); {nota}"},
+            {"ref": f"{ref} cross tee", "familia": "USG drywall cross tee (DGLW424)", "qty": round(A / (16 / 12.0), 2), "op": f"{A} SF / 1.333 ft o.c. = {round(A / (16 / 12.0), 2)}", "source": f"{room}: cross tees 16 in. o.c. for 5/8 in. board (manufacturer, not printed)"},
+            {"ref": f"{ref} angle molding", "familia": "USG angle molding (DGWM24)", "qty": per, "op": f"4 x sqrt({A}) = {per} (square-equivalent perimeter, DERIVED: room polygon perimeter not read)", "source": f"{room}: wall angle at perimeter"},
+            {"ref": f"{ref} hanger wire", "familia": "hanger wire", "qty": round(math.ceil(A / 16.0) * drop, 2), "op": f"ROUNDUP({A}/16) = {math.ceil(A / 16.0)} hangers (4 ft x 4 ft) x drop {drop} ft ({st} structure - {h} ceiling) = {round(math.ceil(A / 16.0) * drop, 2)}", "source": f"{room}: structure {sts}; ceiling {c.get('height_source') or ''}"[:500]}]
     ex.sort(key=lambda e: (ORDER.index(e['type']) if e['type'] in ORDER else len(ORDER), e['floor'], e['id']))
     canon = {"project": "CR City Hotel - 415 Perry Street, Castle Rock CO 80104 (Meridian 105, Permit 4.22.2026)",
              "constants": {"plan_scale_by_sheet": escala},
-             "walls": [], "existing_walls": ex, "misc_items": misc, "ceilings_raw": ceil, "rfis_raw": rfis,
+             "walls": [], "existing_walls": ex, "ceilings": ceilings, "misc_items": misc, "ceilings_raw": ceil, "rfis_raw": rfis,
              "discarded_raw": desc}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(canon, open(OUT + '.base.json', 'w'), indent=1)
