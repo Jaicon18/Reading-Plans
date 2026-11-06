@@ -24,6 +24,7 @@ cp $W/comparacion_sets.json "$E/Auditoria/comparacion_sets_2025_vs_2026.json"
 [ -d $W/auditoria_U138 ] && mkdir -p "$E/Auditoria/auditoria_U138" && cp -a $W/auditoria_U138/. "$E/Auditoria/auditoria_U138/"
 [ -d $W/Proposal ] && mkdir -p "$E/Proposal" && cp -a $W/Proposal/. "$E/Proposal/"
 python3 -I $W/scripts/tiempos.py > /dev/null; cp $W/entrega.json $W/TIEMPOS.md $D/
+python3 -I $W/scripts/delta_rev.py > /dev/null; cp $W/etapas/DELTA_rev1_rev2.md "$E/Auditoria/"
 python3 -I $W/scripts/hacer_docs.py "$E" $W/proceso/proyecto_datos.json $W/takeoff.json $W/etapas/4_canon/takeoff_canon.json
 (cd $D && python3 $T/compuerta_entrega.py detalles . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py schedules . | tail -1)

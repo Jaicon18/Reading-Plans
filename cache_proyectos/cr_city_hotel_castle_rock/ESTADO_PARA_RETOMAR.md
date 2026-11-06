@@ -39,3 +39,6 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
   W.62-L2-01 B, W.62-L3-03 A, W.62-L3-02 A (CBU solo shower), XW.6.3-L2/L3-01 B, -04 B, -08/-09 B (209/309). Evidencia 6/A7.02 (tile solo en shower), imágenes imagenes/wet.
 - U-118 vivo: imagenes_walls.py (paso nuevo en cadena) genera imagen circulada por wall y por fuente de altura; armar_entrega las copia a Auditoria/evidencia_walls.
 - CC-R12: Status de la fila board-only = el más débil de largo/altura (canon.py); U-114: alturas DERIVED con '= resultado'.
+- (rev2) COMPUERTA VERDE 169 PASS / 3 AMBER / 0 FAIL (los chequeos por wall corren sobre los board-only). Suite 51/51, verificar_version 0 faltantes (786 reglas), banco 0 distintas en 5 proyectos (BofA error igual en ref y nuevo).
+- Delta rev1->rev2: Type X -385.52 SF, W.R. +370.62 SF, cement board +344.25 SF, compound -1.07 lb, tape -5.52 LF.
+- Auditoría U-138 #2 lanzada (subagente, BRIEF en /root/cr/work/auditoria_U138_2/BRIEF.md). Después: aplicar hallazgos -> cadena -> armar -> VERDE -> subir rev2 -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> zip v81cf56 -> informe COORDINACIÓN.

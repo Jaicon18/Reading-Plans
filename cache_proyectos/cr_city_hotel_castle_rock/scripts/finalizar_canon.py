@@ -342,11 +342,31 @@ for w in d['existing_walls']:
         continue
     vals = [_ftin_val(m) for m in _RXV.finditer(hs)]
     h = float(w.get('height_ft') or 0)
-    if len(vals) >= 2 and ('+' in hs and abs(vals[0] + vals[1] - h) < 0.01 or ' - ' in hs and abs(vals[0] - vals[1] - h) < 0.01):
-        op = ' + ' if '+' in hs else ' - '
-        w['height_source'] = hs + f" -> {_fmt(vals[0])}{op}{_fmt(vals[1])} = {_fmt(h)}"
+    par = None
+    for i in range(len(vals)):
+        for j in range(len(vals)):
+            if i != j and par is None:
+                if '+' in hs and i < j and abs(vals[i] + vals[j] - h) < 0.01:
+                    par = (vals[i], ' + ', vals[j])
+                elif re.search(r" - |minus", hs) and abs(vals[i] - vals[j] - h) < 0.01:
+                    par = (vals[i], ' - ', vals[j])
+    if par:
+        w['height_source'] = hs + f" -> {_fmt(par[0])}{par[1]}{_fmt(par[2])} = {_fmt(h)}"
     else:
         _sin_op.append(w['id'])
+# U-114 (rev2): un largo [DERIVED] que es la cota impresa tal cual ('printed 10'-0"; 10.000', sin operación) = [CONFIRMED]
+_conf = []
+for w in d['existing_walls']:
+    sx = str(w.get('source') or '').split('| height:')[0]
+    if str(w.get('length_status') or 'DERIVADO').upper().startswith('DERIV') and not re.search(r"\+|minus| - |vector|=|\bnet\b|less|(?<!not )deduct|portion|part of|split", sx.split('printed', 1)[-1]):
+        m = re.search(r"printed (\d{1,2})'-(\d{1,2})(?: (\d)/(\d{1,2}))?\"", sx)
+        if m:
+            v = int(m.group(1)) + (int(m.group(2)) + (int(m.group(3)) / int(m.group(4)) if m.group(3) else 0)) / 12
+            if abs(v - float(w['length_ft'])) < 0.01:
+                w['length_status'] = 'CONFIRMADO'
+                w['source'] = str(w['source']).replace('[DERIVED] length', '[CONFIRMED] length', 1)
+                _conf.append(w['id'])
+print('U-114 largos = cota impresa -> CONFIRMADO:', len(_conf), _conf[:6])
 print('U-114 alturas DERIVED sin operación cerrada:', len(_sin_op), _sin_op[:8])
 # BE-03 / RFI-11 (rev2, barrido de caras con baño cargadas Type X o todo W.R.): tramos por particiones medidas en vectores
 # (1/8" = 9 pt/ft). A2.0x GN 4 'PROVIDE WATER RESISTANT GYP BD AT TOILET AND LAVATORY AREAS'; 6/A7.02 (Type 1 bath, pared del
@@ -410,7 +430,7 @@ for w in d['existing_walls']:
     if w['id'] == 'W.62-L3-02 A' and 'cement' in str(w['board']):
         w['path'] = [[w['path'][0][0], 353.6], [w['path'][-1][0], 388.7]]
         w['length_ft'] = round((388.7 - 353.6) / 9.0, 2)
-        w['location'] = re.sub(r"faces:.*$", "faces: 301 shower", str(w['location']))
+        w['location'] = re.sub(r"faces:.*$", "faces: 301 bath", str(w['location']))   # misma cara que W.62-L3-02 C (W.R.)
         w['source'] = f"1/A2.03 [DERIVED] length: 301 shower tile face (388.7-353.6)/9 = {w['length_ft']} ft (vector shower curb); {_N1} | height: " + str(w['source']).split('| height:', 1)[-1]
         w['img'] = _IMGW + "type1_bath_201_202_zoom.png"
 for fl in ("L2", "L3"):

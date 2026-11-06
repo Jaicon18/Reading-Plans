@@ -5,14 +5,14 @@
 | Ceiling / soffit track (size per source, see Where it comes from) | LF | 2,414.06 | 2,414.06 | +0.00 |
 | Carrying channel (ceilings) | LF | 158.76 | 158.76 | +0.00 |
 | Hanger wire | LF | 465.72 | 465.72 | +0.00 |
-| 5/8" gypsum board, Type X | SF | 84,274.87 | 84,274.87 | +0.00 |
-| 5/8" gypsum board, Type X W.R. (water resistant) | SF | 28,802.47 | 28,802.47 | +0.00 |
+| 5/8" gypsum board, Type X | SF | 84,274.87 | 83,889.35 | -385.52 |
+| 5/8" gypsum board, Type X W.R. (water resistant) | SF | 28,802.47 | 29,173.09 | +370.62 |
 | USG drywall suspension main tee DGLW26 | LF | 1,706.50 | 1,706.50 | +0.00 |
 | USG drywall suspension cross tee DGLW424 | LF | 5,119.67 | 5,119.67 | +0.00 |
 | USG angle molding DGWM24 | LF | 2,170.44 | 2,170.44 | +0.00 |
-| 5/8" cement board (tile base) | SF | 5,308.33 | 5,308.33 | +0.00 |
+| 5/8" cement board (tile base) | SF | 5,308.33 | 5,652.58 | +344.25 |
 | Resilient channel - printed product (see Where it comes from) | LF | 18,020.10 | 18,020.10 | +0.00 |
-| METAL trim - corner bead, casing bead, shadow molding, gypsum edge trim | LF | 3,794.00 | 3,794.00 | +0.00 |
+| METAL trim - corner bead, casing bead, shadow molding, gypsum edge trim | LF | 3,794.00 | 3,774.22 | -19.78 |
 | Control joint, gypsum board walls (ASTM C840, 30 ft max) | LF | 849.36 | 849.36 | +0.00 |
 | 5/8" gypsum board, Type C (ceiling) | SF | 19,715.57 | 19,715.57 | +0.00 |
 | 1" gypsum shaftliner panel, Type X (C-H shaft wall) | SF | 943.15 | 943.15 | +0.00 |
@@ -31,8 +31,8 @@
 | Framing screws #8-18 x 1/2" pan head (25/20 ga studs) | PCS | 0.00 | 0.00 | +0.00 |
 | Power-driven fasteners, slab pins for the bottom track | PCS | 0.00 | 0.00 | +0.00 |
 | Expansion anchors Hilti 1/4" Kwik Bolt II, exterior bottom track @ 8" O.C. | PCS | 0.00 | 0.00 | +0.00 |
-| Joint compound, all purpose | LB | 9,561.09 | 9,561.09 | +0.00 |
-| Joint tape, paper | LF | 49,133.38 | 49,133.38 | +0.00 |
+| Joint compound, all purpose | LB | 9,561.09 | 9,560.02 | -1.07 |
+| Joint tape, paper | LF | 49,133.38 | 49,127.86 | -5.52 |
 | Level 5 finish | SF | 0.00 | 0.00 | +0.00 |
 | Deflection clips at non-load-bearing walls to structure | PCS | 0.00 | 0.00 | +0.00 |
 | Heavy-gauge framing screws #10-16 x 3/4" pan head (18/16/14 ga studs) | PCS | 0.00 | 0.00 | +0.00 |
