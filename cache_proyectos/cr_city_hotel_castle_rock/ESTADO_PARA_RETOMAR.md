@@ -34,3 +34,8 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - U-140: alturas L4 stair 5/A6.02 y 11/A6.01: la cota L4 -> underside roof sheathing NO está impresa (imágenes imagenes/alturas) -> AMBER legítimo.
 - Salidas renombradas a rev2 (cadena.sh, armar_entrega.sh, hacer_docs, cobertura, imagenes_hoja, proposal). rev1 archivado en /root/cr/work/archivo_rev1.
 - Pendiente: cadena rev2 -> armar_entrega -> compuerta -> auditoría U-138 #2 (subagente) -> subir rev2 -> aviso REPLACED BY rev2 en rev1 -> listar Drive -> informe COORDINACIÓN.
+- (rev2, cont.) Compuerta 2.ª pasada: 28 FAIL -> 6 (entrega_dir rev1 en entrega.json; length_source con la altura; U-117 tags de excluidos; RX_VACIO acotado).
+- Hallazgos reales con BOTH SIDES / BE-03 vivos: caras con baño en Type X o todo W.R. -> divididas por particiones vectoriales (finalizar_canon _dividir):
+  W.62-L2-01 B, W.62-L3-03 A, W.62-L3-02 A (CBU solo shower), XW.6.3-L2/L3-01 B, -04 B, -08/-09 B (209/309). Evidencia 6/A7.02 (tile solo en shower), imágenes imagenes/wet.
+- U-118 vivo: imagenes_walls.py (paso nuevo en cadena) genera imagen circulada por wall y por fuente de altura; armar_entrega las copia a Auditoria/evidencia_walls.
+- CC-R12: Status de la fila board-only = el más débil de largo/altura (canon.py); U-114: alturas DERIVED con '= resultado'.

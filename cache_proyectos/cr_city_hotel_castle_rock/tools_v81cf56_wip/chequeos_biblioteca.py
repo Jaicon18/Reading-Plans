@@ -332,18 +332,20 @@ class B:
                     lado = "AB"[k] if k < 2 else chr(65 + k)
                     k += 1
                     f = {"side": lado, "board": e.get("board"), "boards": [e.get("board")], "layers": int(e.get("layers") or 1),
-                         "height_ft": e.get("height_ft"), "room": cuarto,
+                         "height_ft": e.get("height_ft"), "height_status": e.get("height_status"), "room": cuarto, "img": e.get("img"),
+                         "height_img": e.get("height_img") or e.get("img"),
                          "source": e.get("source"), "height_source": e.get("height_source"), "entry": e.get("id")}
                     caras.append(f)
                     if ck:
                         por_cuarto[ck] = f
             w = {"id": base, "element": "wall", "tag": e0.get("type_id"), "type": e0.get("type"), "type_id": e0.get("type_id"),
                  "floor": e0.get("floor"), "sheet": sh, "page": e0.get("page"), "path": e0.get("path"),
-                 "length_ft": e0.get("length_ft"), "length_status": e0.get("length_status"), "length_source": e0.get("source"),
+                 "length_ft": e0.get("length_ft"), "length_status": e0.get("length_status"),
+                 "length_source": re.split(r"\s*\|\s*height\s*:", str(e0.get("source") or ""))[0],   # BE-CR25: la cota de altura no es largo
                  "height_ft": max(float(x.get("height_ft") or 0) for x in es), "height_status": e0.get("height_status"),
                  "height_source": e0.get("height_source"), "source": e0.get("source"), "faces": caras,
                  "framing": "wood (Div. 06, EXCLUDED)", "board_only": True, "tag_ids": sorted({t for x in es for t in (x.get("tag_ids") or [])}),
-                 "location": e0.get("location"), "keynote": e0.get("keynote"), "img": e0.get("img"),
+                 "location": e0.get("location"), "keynote": e0.get("keynote"), "img": e0.get("img"), "height_img": e0.get("height_img"),
                  "faces_none_reason": " ".join(str(x.get("faces_none_reason") or "") for x in es).strip()}
             (x0, y0), (x1, y1) = (e0.get("path") or [[0, 0], [0, 0]])[0], (e0.get("path") or [[0, 0], [0, 0]])[-1]
             if abs(y1 - y0) <= 1.5:
@@ -437,7 +439,8 @@ def _cota_impresa(src):
 
 
 RX_JUSTIFICA = re.compile(r"(?i)estimator|R-ALC-\d|R80e\.\d|RFI-\d|net of|minus|less |deduct|- \d|\bto face\b|face to|"
-                          r"overall|centerline|c\.?l\.?|portion|segment|part of|tramo|split")
+                          r"overall|centerline|c\.?l\.?|portion|segment|part of|tramo|split|"
+                          r"\d\"\s*\+\s*\d")      # BE-CR25: suma de cotas impresas (5'-9" + 7 5/8" + 7 5/8" = 7.02) = operación derivada
 
 
 @chk("U-017", desc="U-017: una cota IMPRESA que coincide con una lectura manda: la resolución AB nunca toma la otra lectura")
@@ -574,7 +577,10 @@ def cc_r7(b):
 @chk("CC-R12", desc="CC-R12 / U-114 (Consumer Cellular rev3 audit): un wall cuyo largo es la cota impresa (length_status CONFIRMADO) "
      "va [CONFIRMED] en la Partition Takeoff, no [DERIVED]")
 def cc_r12(b):
-    conf = {w.get("id") for w in b.walls() if str(w.get("length_status") or "").upper() == "CONFIRMADO"}
+    # BE-CR25: la fila lleva el estado más débil de sus números: largo Y altura impresos -> [CONFIRMED]; una entrada board-only
+    # cuenta por su id de cara (W.6-L1-03 A)
+    conf = {w.get("id") for w in b.walls_todos() if str(w.get("length_status") or "").upper() == "CONFIRMADO"
+            and str(w.get("height_status") or "CONFIRMADO").upper() == "CONFIRMADO"}
     ev = [f"{r['wall']}: largo = cota impresa (CONFIRMADO en el canon) y la Partition Takeoff dice {r['status']}" for r in b.pt
           if r.get("wall") in conf and "DERIVED" in str(r.get("status") or "")]
     return R("FAIL", *ev) if ev else R("PASS", f"{len(conf)} walls con cota impresa en [CONFIRMED]")
@@ -804,8 +810,8 @@ def u_058(b):
     ev = []
     for w, f in b.faces():
         lado = f"{f.get('side') or ''} {f.get('room') or ''}"
-        if re.search(r"(?i)exterior|outside|\bext\b", lado):
-            continue
+        if re.search(r"(?i)exterior|outside|\bext\b", lado) or re.search(r"(?i)exterior|sheathing", str(f.get("board") or "")):
+            continue                     # BE-CR25: la cara de exterior gyp sheathing toma su altura de la fachada (floor to floor)
         src = str(f.get("height_source") or "")
         if RX_EXT.search(src) and not re.search(r"(?i)interior face|same face|inside face|misma cara|estimator decision|R-ALC-\d", src):
             ev.append(f"{w.get('id')} cara '{lado.strip()[:40]}': altura de board desde una cota exterior ('{RX_EXT.search(src).group(0)}')")
@@ -3073,6 +3079,12 @@ def u_117(b):
     for x in b.canon.get("tags_descartados") or []:
         if isinstance(x, dict) and len(str(x.get("motivo") or "")) >= 8 and re.match(r"P[TA]\d{3,}$", str(x.get("id") or "")):
             usados[str(x["id"])] = "DESCARTADO"
+    # BE-CR25: un wall EXCLUDED con motivo (tenant / F&B / door opening) también dispone de su tag (destino = EXCLUDED)
+    for x in b.canon.get("excluded_walls") or []:
+        if isinstance(x, dict) and len(str(x.get("reason") or "")) >= 8:
+            for t in x.get("tag_ids") or []:
+                for pid in re.findall(r"\bP[TA]\d{3,}\b", str(t)):
+                    usados.setdefault(pid, "EXCLUDED")
     por_type = {}
     for o in occ:
         tp = str(o.get("type") or "").upper()
@@ -3417,7 +3429,7 @@ def cifras_texto(b):
 # ============================================================================================== correr
 # BE-CR25 (CR City Hotel rev1, COORDINACIÓN 6-nov): la compuerta pasó EN VACÍO: canon con walls = 0, Partition Takeoff con 778
 # filas, BOTH SIDES dio N/A y 14 chequeos 'sin canon'. Un canon sin walls frente a un Partition Takeoff con filas = FAIL.
-RX_VACIO = re.compile(r"(?i)\bsin (?:walls?|canon)\b|no hay walls|ningún wall|0 walls")
+RX_VACIO = re.compile(r"(?i)sin walls en el canon|(?:^|N/A: )sin canon\b|no hay walls en el canon")
 
 
 @chk("BE-CR25", "U-124", desc="BE-CR25 / U-124: canon con 0 walls (ni walls[] ni board-only de existing_walls) y Partition "

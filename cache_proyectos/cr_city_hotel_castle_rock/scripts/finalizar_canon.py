@@ -95,7 +95,7 @@ for w in list(d['existing_walls']):
         d['existing_walls'].remove(w)
         sf = round(w['length_ft'] * w['height_ft'] * w['faces'] * (w.get('layers') or 1), 1)
         _ret.append(sf)
-        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
+        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'), "tag_ids": w.get('tag_ids') or [], "sheet": w.get('sheet'),
             "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
 print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
 # U-138 hallazgo 8: mismo criterio en la zona Food & Beverage: A2.04 / A5.07 / A7.45 / A7.50 / A7.55 'INTERIOR OF FOOD AND
@@ -113,7 +113,7 @@ for w in list(d['existing_walls']):
     sf1 = round(w['length_ft'] * w['height_ft'] * (w.get('layers') or 1), 1)
     if len(fb) >= int(w.get('faces') or 1) or len(parts) <= 1:
         d['existing_walls'].remove(w)
-        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'),
+        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'), "tag_ids": w.get('tag_ids') or [], "sheet": w.get('sheet'),
             "reason": f"non-rated face(s) inside the Food & Beverage space ({'; '.join(fb)}): 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' (A2.04, A5.07, A7.45, A7.50, A7.55) - future tenant improvement permit"})
         _fbx.append(sf1 * int(w.get('faces') or 1))
     else:
@@ -292,6 +292,139 @@ for m in [m for m in d['misc_items'] if str(m.get('ref', '')).startswith('SOF-')
             "op": f"{m_.group(1)} LF soffit length x 1 edge = {m_.group(1)}", "status": "DERIVADO",
             "img": "/root/cr/work/burbujas/img_verif/" + ("G2_A7.31_det.png" if 'L1' in m['ref'] else "G2_A9.03_det.png" if 'smoke' in str(m.get('source')).lower() else "G2_A7.23_det.png")})
 d['trim_none_reason'] = "Corner bead: outside corners of all floors by program (L junctions between interior 2-face walls + free wall ends, door jambs and exterior-wall corners excluded), window return perimeters and soffit / cove bottom edges"
+# BE-03 (rev2, BOTH SIDES por cara): la cara interior de XW.6.3 en 209 (L2) / 309 (L3) cubre dormitorio + baño. Partición del
+# baño medida en vectores (A2.02 / A2.03, 1/8" = 9 pt/ft): caras de la partición y = 1133.4 / 1137.0; el baño va de 1137.0 al extremo
+# 1230.27 del path. A2.0x GN 4 'PROVIDE WATER RESISTANT GYP BD AT TOILET AND LAVATORY AREAS' -> tramo del baño = Type X W.R.
+for wid, cuarto in (("XW.6.3-L2-08 B", "209"), ("XW.6.3-L3-09 B", "309")):
+    for w in [x for x in d['existing_walls'] if x['id'] == wid]:
+        (x0, y0), (x1, y1) = w['path']
+        lo, hi = min(y0, y1), max(y0, y1)
+        if hi - 1137.0 < 50:
+            continue
+        nw = json.loads(json.dumps(w))
+        w['path'] = [[x0, lo], [x1, 1133.4]]
+        w['length_ft'] = round((1133.4 - lo) / 9.0, 2)
+        w['location'] = re.sub(r"faces:.*$", f"faces: guest room {cuarto} (sleeping area, dry)", str(w['location']))
+        w['source'] = str(w['source']).replace(f"= {nw['length_ft']}", f"= {nw['length_ft']}; dry part to the bath partition face: (1133.4-{lo})/9 = {w['length_ft']} ft [DERIVED]", 1)
+        nw['id'] = wid[:-1] + 'D'
+        nw['board'] = '5/8 type X WR'
+        nw['path'] = [[x0, 1137.0], [x1, hi]]
+        nw['length_ft'] = round((hi - 1137.0) / 9.0, 2)
+        nw['location'] = re.sub(r"faces:.*$", f"faces: {cuarto} bath (toilet / lavatory, wet)", str(nw['location']))
+        nw['source'] = (f"1/{nw['sheet']} [DERIVED] length: bath part of the grid-Q interior face, from the bath partition face (vector y 1137.0) to the end of the path "
+                        f"({hi}-1137.0)/9 = {nw['length_ft']} ft (1/8\" = 9 pt/ft); board W.R. per {nw['sheet']} GN 4 'PROVIDE WATER RESISTANT GYP BD AT TOILET AND LAVATORY AREAS' "
+                        "" + (" | height:" + str(nw['source']).split('| height:', 1)[1] if '| height:' in str(nw['source']) else ''))
+        nw['img'] = 'etapas/4_canon/img/wet_209_309_east_wall.png'
+        d['existing_walls'].insert(d['existing_walls'].index(w) + 1, nw)
+# U-114 (rev2): una altura [DERIVED] lleva su operación con resultado: 'A + B' / 'A - B' sin '=' -> se agrega '= <resultado>'
+# solo si la suma / resta de las cotas impresas del texto da la altura cargada (si no, se informa y no se toca)
+_RXV = re.compile(r"(?:(\d{1,2})'\s*-?\s*)?(\d{1,2})(?:\s+(\d{1,2})/(\d{1,2}))?\"")
+
+
+def _ftin_val(m):
+    return float(m.group(1) or 0) + (float(m.group(2)) + (float(m.group(3)) / float(m.group(4)) if m.group(3) else 0)) / 12.0
+
+
+def _fmt(h):
+    ft = int(h + 1e-9); r = round((h - ft) * 12 * 8) / 8
+    if r >= 12:
+        ft, r = ft + 1, r - 12
+    ent = int(r); fr = r - ent
+    from fractions import Fraction
+    f = Fraction(fr).limit_denominator(8)
+    return f"{ft}'-{ent}" + (f" {f.numerator}/{f.denominator}" if f else "") + '"'
+
+
+_sin_op = []
+for w in d['existing_walls']:
+    hs = str(w.get('height_source') or '')
+    if w.get('height_status') != 'DERIVADO' or '=' in hs or 'vector' in hs:
+        continue
+    vals = [_ftin_val(m) for m in _RXV.finditer(hs)]
+    h = float(w.get('height_ft') or 0)
+    if len(vals) >= 2 and ('+' in hs and abs(vals[0] + vals[1] - h) < 0.01 or ' - ' in hs and abs(vals[0] - vals[1] - h) < 0.01):
+        op = ' + ' if '+' in hs else ' - '
+        w['height_source'] = hs + f" -> {_fmt(vals[0])}{op}{_fmt(vals[1])} = {_fmt(h)}"
+    else:
+        _sin_op.append(w['id'])
+print('U-114 alturas DERIVED sin operación cerrada:', len(_sin_op), _sin_op[:8])
+# BE-03 / RFI-11 (rev2, barrido de caras con baño cargadas Type X o todo W.R.): tramos por particiones medidas en vectores
+# (1/8" = 9 pt/ft). A2.0x GN 4 'PROVIDE WATER RESISTANT GYP BD AT TOILET AND LAVATORY AREAS'; 6/A7.02 (Type 1 bath, pared del
+# corridor): TILE-1 solo en el tramo del shower, resto TF-1 -> shower = W.R. + 1 layer cement board a 9'-0" (RFI-11), resto del baño
+# = W.R., cuartos secos = Type X. Imágenes etapas/4_canon/img/wet/.
+_CBU_H = next((x.get('height_source') for x in d['existing_walls'] if x['id'] == 'W.4-L2-03 A'), "Bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\" (RFI-11)")
+_IMGW = 'etapas/4_canon/img/wet/'
+_T1 = [(None, 'X', 'entry')]   # placeholder
+
+
+def _dividir(eid, segs, img, nota):
+    ws = [x for x in d['existing_walls'] if x['id'] == eid]
+    if not ws:
+        return
+    w = ws[0]
+    (x0, y0), (x1, y1) = w['path']
+    vert = abs(x1 - x0) < 1.0
+    a0, a1 = (min(y0, y1), max(y0, y1)) if vert else (min(x0, x1), max(x0, x1))
+    base = re.sub(r" [A-Z]$", "", eid)
+    usadas = {x['id'][-1] for x in d['existing_walls'] if re.sub(r" [A-Z]$", "", x['id']) == base and re.search(r" [A-Z]$", x['id'])}
+    libres = [ch for ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" if ch not in usadas]
+    i0 = d['existing_walls'].index(w)
+    d['existing_walls'].remove(w)
+    hpart = (" | height:" + str(w['source']).split('| height:', 1)[1]) if '| height:' in str(w['source']) else ''
+    nuevos, primero = [], True
+    for lo, hi, board, label in segs:
+        lo, hi = max(lo, a0), min(hi, a1)
+        if hi - lo < 1.0:
+            continue
+        for cbu in ((False, True) if board == 'WR+CBU' else (False,)):
+            nw = json.loads(json.dumps(w))
+            nw['id'] = eid if primero else base + ' ' + libres.pop(0)
+            primero = False
+            nw['path'] = [[x0, lo], [x1, hi]] if vert else [[lo, y0], [hi, y1]]
+            nw['length_ft'] = round((hi - lo) / 9.0, 2)
+            nw['location'] = re.sub(r"faces:.*$", "faces: " + label, str(w['location']))
+            nw['img'] = _IMGW + img
+            op = f"({hi}-{lo})/9 = {nw['length_ft']} ft"
+            if cbu:
+                nw.update({"board": "5/8 cement board", "layers": 1, "faces": 1, "height_ft": 9.0, "height_status": "DERIVADO", "height_source": _CBU_H})
+                nw['source'] = f"1/{w['sheet']} [DERIVED] length: {label}, shower tile face {op} (vector shower curb / partition lines); {nota} | height: {_CBU_H}"
+            else:
+                nw['board'] = '5/8 type X WR' if board.startswith('WR') else '5/8 type X'
+                nw['source'] = f"1/{w['sheet']} [DERIVED] length: {label} {op} (vector partition faces); {nota}{hpart}"
+            nuevos.append(nw)
+    for k, nw in enumerate(nuevos):
+        d['existing_walls'].insert(i0 + k, nw)
+
+
+_N1 = "GN 4 water resistant at toilet / lavatory; 6/A7.02 Type 1 bath: TILE-1 at the shower only (RFI-11 cement board rule)"
+for fl, eid, a0 in (("L2", "W.62-L2-01 B", 349.8), ("L3", "W.62-L3-03 A", 441.0)):
+    n = 2 if fl == "L2" else 3
+    segs = ([(a0, 388.7, 'WR+CBU', f"{n}01 shower"), (388.7, 442.6, 'WR', f"{n}01 bath (toilet / lavatory)")] if fl == "L2" else []) + [
+        (442.6 if fl == "L2" else a0, 563.4, 'X', f"{n}01 / {n}02 entries"), (563.4, 617.3, 'WR', f"{n}02 bath (toilet / lavatory)"), (617.3, 647.9, 'WR+CBU', f"{n}02 shower"),
+        (647.9, 707.3, 'X', f"{n}02 / {n}03 entries"), (707.3, 761.2, 'WR', f"{n}03 bath (toilet / lavatory)"), (761.2, 791.8, 'WR+CBU', f"{n}03 shower"),
+        (791.8, 851.2, 'X', f"{n}03 / {n}04 entries"), (851.2, 905.0, 'WR', f"{n}04 bath (toilet / lavatory)"), (905.0, 935.8, 'WR+CBU', f"{n}04 shower"),
+        (935.8, 1209.0, 'X', f"{n}04 entry / {n}05")]
+    _dividir(eid, segs, "type1_bath_201_202_zoom.png", _N1)
+# L3-02 (301 bath, 353.6-441): cement board solo en el shower (353.6-388.7), no en todo el baño
+for w in d['existing_walls']:
+    if w['id'] == 'W.62-L3-02 A' and 'cement' in str(w['board']):
+        w['path'] = [[w['path'][0][0], 353.6], [w['path'][-1][0], 388.7]]
+        w['length_ft'] = round((388.7 - 353.6) / 9.0, 2)
+        w['location'] = re.sub(r"faces:.*$", "faces: 301 shower", str(w['location']))
+        w['source'] = f"1/A2.03 [DERIVED] length: 301 shower tile face (388.7-353.6)/9 = {w['length_ft']} ft (vector shower curb); {_N1} | height: " + str(w['source']).split('| height:', 1)[-1]
+        w['img'] = _IMGW + "type1_bath_201_202_zoom.png"
+for fl in ("L2", "L3"):
+    n = 2 if fl == "L2" else 3
+    _dividir(f"XW.6.3-{fl}-01 B", [(624.5, 711.4, 'WR', f"{n}14 bath (toilet / lavatory)"), (711.4, 739.9, 'WR+CBU', f"{n}14 shower"),
+                                   (739.9, 858.7, 'X', f"{n}15 cleaning"), (858.7, 917.0, 'WR+CBU', f"{n}01 shower (back wall)"), (917.0, 1065.5, 'X', f"{n}01 room")],
+             "north_wall_L3.png", _N1 + "; same stack as XW.6.6-L4-03 (405 bath incl. shower 709-740)")
+    _dividir(f"XW.6.3-{fl}-04 B", [(394.8, 566.3, 'X', f"{n}14 room"), (566.3, 649.6, 'WR', f"{n}13 bath (toilet / lavatory, shower not on this wall)"),
+                                   (649.6, 1046.6, 'X', f"{n}13 / {n}12 / {n}11 rooms"), (1046.6, 1136.6, 'WR', f"{n}11 bath (toilet / lavatory, shower not on this wall)"),
+                                   (1136.6, 1275.5, 'X', f"{n}10 room")], f"west_wall_{fl}.png", _N1)
+# BE-82 (rev2): FW.1-L1-02 (elevator shaft east face, 8/A6.00) y FW.1-L1-03 (Stair 1 north face, 10/A6.01) son recintos distintos en 1/A2.01
+for w in d['existing_walls']:
+    if w['id'] == 'FW.1-L1-03' and 'not the same wall' not in str(w.get('source')):
+        w['source'] = str(w['source']) + " | not the same wall as FW.1-L1-02: Stair 1 (127) enclosure vs the elevator shaft, two separate boxes on 1/A2.01"
 # U-140 (rev2, COORDINACIÓN 6-nov): alturas vectoriales L4 de stair (5/A6.02, 11/A6.01): fuente impresa buscada por piso.
 # Impreso: datums LEVEL 4 6233.75 y ROOF 6247.75 (5/A6.02) y la nota 'RATED WALL CONTINUOUS TO UNDERSIDE OF ROOF SHEATHING. TYP.'
 # (11/A6.01); la cota LEVEL 4 -> underside of roof sheathing NO está impresa en ninguna de las dos vistas -> queda vectorial (AMBER real)
@@ -300,7 +433,7 @@ for w in d['existing_walls']:
     if w['floor'] == 'L4' and 'vector' in hs and ('5/A6.02' in hs or '11/A6.01' in hs) and 'U-140 printed search' not in hs:
         v = '5/A6.02' if '5/A6.02' in hs else '11/A6.01'
         w['height_source'] = hs + (f" | U-140 printed search on {v}: datums LEVEL 4 6233.75 / ROOF 6247.75 and the note 'RATED WALL CONTINUOUS TO UNDERSIDE OF ROOF SHEATHING. TYP.' are printed; "
-                                   f"the LEVEL 4 to underside-of-roof-sheathing height is NOT dimensioned in the stair view -> vector measurement kept (img etapas/4_canon/img/alturas/H_{v.replace('/', '_')}_L4_stair.png)")
+                                   f"the LEVEL 4 to underside-of-roof-sheathing height is NOT dimensioned in the stair view -> vector measurement kept")
 # BE-CR25 (rev2, BOTH SIDES por wall): el wall con UNA cara cargada lleva el motivo de la otra con N/HOJA verificada
 # (vistas 1/A2.01, 1/A2.03, 1/A2.04, 1/A7.45, 3/A7.50 leídas en el título impreso de cada vista; nota F&B dentro de Kitchen 100
 # en 1/A7.45 y dentro de 419 / 410 en 1/A2.04 y 3/A7.50; nota retail dentro de Retail 124 en 1/A2.01)

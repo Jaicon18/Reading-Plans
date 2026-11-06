@@ -550,3 +550,8 @@ Arreglo: si el set es conocido y la hoja destino no está en él, no se pide mar
 ## BE-CR24 — Burbuja con cero a la izquierda ('08/A9.05') nunca coincidía con su cita (6-nov, CR City Hotel)
 Error: CALLOUT no reconoce '08/A9.05' y lee '8/A9.05'; la burbuja guarda n='08' → la cita nunca coincidía (CE_CALLOUTS / CE_DETALLES_CIRCULADOS "sin disposición").
 Arreglo (v81cf56): comparar n.lstrip('0'); en el canon citar también '8/A9.05'.
+
+## BE-CR25 — La compuerta pasó EN VACÍO: canon con walls = 0 (6-nov, CR City Hotel rev1 → rev2)
+Error: proyecto wood-framed: todo el board vive en existing_walls (755 entradas board-only) y walls[] = 0. CB_BOTH_SIDES dio N/A "sin walls en el canon" y 14 chequeos "sin canon"; la compuerta quedó VERDE con 778 filas en el Partition Takeoff. rev1 no se pasa al usuario.
+Arreglo (v81cf56): (1) B.walls() presenta los board-only de existing_walls como walls con sus caras (cara = cuarto de 'faces:'; dos entradas sobre la misma cara suman capas; liner / exterior se comparan con la cara de su misma clase del schedule); (2) chequeo canon_no_vacio: 0 walls + PT > 0 filas = FAIL; (3) en_vacio(): un N/A o 'sin walls / sin canon' con PT lleno = FAIL (correr y el wrapper de compuerta_entrega). Test test_be_cr25 repite rev1 (778 filas, 0 walls[]).
+Regla para todos los proyectos: un VERDE con chequeos N/A en un set que sí tiene walls es un FAIL; una cara sin board lleva faces_none_reason con N/HOJA verificada (imagen).

@@ -95,7 +95,7 @@ for wid, ws in grupos.items():
     if cov < 0.15:
         for e in ws:
             c['existing_walls'].remove(e)
-            c['excluded_walls'].append({"id": e['id'], "reader": "AB", "floor": e['floor'], "img": e.get('img'),
+            c['excluded_walls'].append({"id": e['id'], "reader": "AB", "floor": e['floor'], "img": e.get('img'), "tag_ids": e.get('tag_ids') or [], "sheet": e.get('sheet'),
                 "reason": f"door opening, not a wall: the path ({round(L / SC, 2)} ft on {e['sheet']}) has {round(cov * 100)} % drawn wall lines and a printed door tag at the gap (auditoria U-138 finding 7)"})
         res['eliminados'].append({"id": wid, "lf": round(L / SC, 2), "sheet": w['sheet']})
         continue
@@ -131,7 +131,7 @@ for wid, why in (("W.4-L3-44", "the path is entirely the opening of door 308.2 o
                  ("W.4-L4-22", "the path is entirely the opening of door 418.2 on 3/A7.50 between two drawn stubs (verified by eye); its coordinates were 3/A7.50, not A2.04")):
     for e in [e for e in c['existing_walls'] if e['id'].split(' ')[0] == wid]:
         c['existing_walls'].remove(e)
-        c['excluded_walls'].append({"id": e['id'], "reader": "AB", "floor": e['floor'], "img": e.get('img'), "reason": "door opening, not a wall: " + why})
+        c['excluded_walls'].append({"id": e['id'], "reader": "AB", "floor": e['floor'], "img": e.get('img'), "tag_ids": e.get('tag_ids') or [], "sheet": e.get('sheet'), "reason": "door opening, not a wall: " + why})
         res['eliminados'].append({"id": e['id'], "lf": e['length_ft'], "sheet": e['sheet']})
 for e in c['existing_walls']:
     if e['id'].split(' ')[0] == 'W.4-L4-21' and e['sheet'] == 'A2.04':

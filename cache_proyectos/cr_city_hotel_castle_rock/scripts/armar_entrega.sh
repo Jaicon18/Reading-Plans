@@ -19,7 +19,7 @@ cp $W/etapas/6_markups/rcp_png/*.png "$E/Planos marcados/" 2>/dev/null || true
 cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/rfi_img/"; cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/review_items/"
 cp $W/etapas/3_revision/resolucion*.md $W/etapas/3_revision/revision.md $W/etapas/3_revision/comparacion_AB.json "$E/Auditoria/resolucion_AB/"
 cp $W/etapas/COBERTURA_PASO12.md $W/etapas/COBERTURA_PASO12.json "$E/Auditoria/"; cp $W/etapas/VERIFICACION_MARKUPS.md $W/etapas/TOOL_LIMITS_CALC.md $W/etapas/PROCESO_CORRIDA.md $W/etapas/6_markups/rcp_polys_check.json "$E/Auditoria/"
-cp $W/etapas/1_inventario/inventario.md "$E/Auditoria/barrido_tags/"
+cp $W/etapas/1_inventario/inventario.md $W/etapas/1_inventario/inventario.json "$E/Auditoria/barrido_tags/"; cp -a $W/etapas/1_inventario/recortes "$E/Auditoria/barrido_tags/"; mkdir -p "$E/Auditoria/evidencia_walls"; cp -a $W/etapas/7_imagenes/walls $W/etapas/7_imagenes/alturas "$E/Auditoria/evidencia_walls/"
 cp $W/comparacion_sets.json "$E/Auditoria/comparacion_sets_2025_vs_2026.json"
 [ -d $W/auditoria_U138 ] && mkdir -p "$E/Auditoria/auditoria_U138" && cp -a $W/auditoria_U138/. "$E/Auditoria/auditoria_U138/"
 [ -d $W/Proposal ] && mkdir -p "$E/Proposal" && cp -a $W/Proposal/. "$E/Proposal/"
