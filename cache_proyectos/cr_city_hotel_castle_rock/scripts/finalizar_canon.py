@@ -400,6 +400,27 @@ for w in d['existing_walls']:
             w['length_ft'] = round((751.08 - min(x0, x1)) / 9.0, 2)
             w['length_status'] = 'DERIVADO'
             w['source'] = re.sub(r"^[^|]*", f"1/A2.04 [DERIVED] length: (751.08-{min(x0, x1)})/9 = {w['length_ft']} ft to the CMU face (was {old}, auditoria U-138 #2 F12) ", str(w['source']), count=1)
+# BE-CR29 (recheck v81cf57): XW.6.6-0 (tag 'XW.6.6 | 0' en A2.03 / A2.04): A0.07 imprime la familia XW.6.6 solo con las filas -1 / -2 y
+# las dos llevan 'TYPE X 5/8" EXTERIOR GYP BD' en la cara exterior -> la construcción de la familia lleva el exterior gyp sheathing
+# (el tercer dígito es el rating). Faltaba en los 5 walls XW.6.6-0: se agrega la cara exterior, altura del sheathing del piso
+# (L3 floor to floor 11'-0", L4 8'-11 1/4" de 1/A5.06, igual que el resto de XW).
+_SH = {"L3": (11.0, "6233.75' - 6222.75' = 11'-0\" (LEVEL 3 / LEVEL 4 datums, 4/A5.05): exterior gyp sheathing continuous past the floor zone"),
+       "L4": (8.9375, "1/A5.06 printed 8'-11 1/4\" LEVEL 4 to underside of roof framing at the exterior wall")}
+for w in [x for x in d['existing_walls'] if x.get('type_id') == 'XW.6.6-0']:
+    base = re.sub(r" [A-Z]$", "", w['id'])
+    if any(re.sub(r" [A-Z]$", "", x['id']) == base and 'sheathing' in str(x.get('board')) for x in d['existing_walls']):
+        continue
+    if not re.search(r" [A-Z]$", w['id']):
+        w['id'] = base + ' A'
+    usadas = {x['id'][-1] for x in d['existing_walls'] if re.sub(r" [A-Z]$", "", x['id']) == base}
+    nw = json.loads(json.dumps(w))
+    nw['id'] = base + ' ' + next(ch for ch in "BCDEFGHIJ" if ch not in usadas)
+    h, hs = _SH[w['floor']]
+    nw.update({"board": "5/8 exterior gyp sheathing type X", "layers": 1, "faces": 1, "height_ft": h, "height_status": "DERIVADO" if w['floor'] == 'L3' else "CONFIRMADO",
+               "height_source": hs, "location": re.sub(r"faces:.*$", "faces: exterior (sheathing of the XW.6.6 family, A0.07 rows -1 / -2: 'TYPE X 5/8\" EXTERIOR GYP BD')", str(w['location']))})
+    nw['source'] = str(w['source']).split('| height:')[0] + f"| height: {hs} | type: XW.6.6 family construction (A0.07), rating row 0 not printed (BE-CR29 recheck v81cf57)"
+    nw.pop('faces_none_reason', None)
+    d['existing_walls'].insert(d['existing_walls'].index(w) + 1, nw)
 # U-114 (rev2): una altura [DERIVED] lleva su operación con resultado: 'A + B' / 'A - B' sin '=' -> se agrega '= <resultado>'
 # solo si la suma / resta de las cotas impresas del texto da la altura cargada (si no, se informa y no se toca)
 _RXV = re.compile(r"(?:(\d{1,2})'\s*-?\s*)?(\d{1,2})(?:\s+(\d{1,2})/(\d{1,2}))?\"")

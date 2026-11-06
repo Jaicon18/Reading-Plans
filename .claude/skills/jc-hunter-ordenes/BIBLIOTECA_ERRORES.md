@@ -567,3 +567,8 @@ Arreglo: banos_cbu.py (cement board por caja de shower medida en vectores, lados
 ## BE-CR28 — Subida de 2,093 archivos cortada por tiempo; el Excel iba al final (6-nov, CR City Hotel rev2, COORDINACIÓN)
 Error: subir_entrega subía en orden alfabético (Auditoria/ primero, 2,056 archivos) y la corrida se cortó por el timeout; el Excel quedaba al final.
 Arreglo (v81cf56): orden Take-off / Proposal / Planos marcados / raíz / Auditoria; > 1,000 archivos = Auditoria.zip armado desde los archivos verificados (sha256 de la compuerta) y línea en README_REVIEW.md (CE_SUBIDA_PAQUETE). Test test_be_cr28. Regla: subida en segundo plano con timeout máximo, se retoma sin duplicar.
+
+## BE-CR29 — Quedaban chequeos en vacío después de BE-CR25 (6-nov, CR City Hotel rev2 recheck, COORDINACIÓN)
+Error: CB_BE_CF04 decía 'N/A: sin walls de madera en walls[]' con 493 walls de madera board-only. El barrido de todos los N/A encontró más adaptadores incompletos: be_06 / be_20 / be_84 sin soffits (vivían solo como misc_items), be_07 / be_81 / be_cf02 sin partition_schedule (vivía en fichas.json), be_98 sin types_none_reason, y BOTH SIDES SALTABA los walls cuyo tag tiene una fila de rating que el schedule no imprime -> 5 walls XW.6.6-0 sin su exterior gyp sheathing (640 SF) pasaron rev1 y rev2.
+Arreglo (v81cf57): B.schedule(), framed_soffits en el canon (canon_extras), BE-CF04 cuenta board-only, BOTH SIDES con la fila de la familia, be_81 AMBER si la familia existe, be_cf02 con la razón de la familia, en_vacio amplio (N/A 'en el canon' / 'en walls[]'). Test test_be_cr29.
+Regla: antes de entregar, listar TODOS los N/A de la compuerta con el canon lleno y justificar cada uno; un N/A que habla de algo vacío del canon es un adaptador que falta.
