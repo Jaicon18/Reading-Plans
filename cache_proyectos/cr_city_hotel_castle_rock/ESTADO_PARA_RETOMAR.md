@@ -47,3 +47,9 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - (rev2) SUBIDA rev2 OK: 2,093 archivos verificados en Drive (0 faltan, 0 duplicados). rev1 renombrada 'rev1 — REPLACED BY rev2 (NO USAR)' + nota. Informe enviado a COORDINACIÓN.
 - (rev3) COMPUERTA VERDE 169/4/0 con v81cf57 (PUBLICADA, VIGENTE). Delta vs rev2: exterior sheathing +640.05 SF. Subida rev3 con Auditoria.zip en curso.
 - (rev3) SUBIDA rev3 OK: 38 archivos + Auditoria.zip (2,057 entradas verificadas). rev2 renombrada 'rev2 — REPLACED BY rev3 (NO USAR)' + nota. Informe enviado.
+
+## rev4 (orden COORDINACIÓN 7-nov 00:56Z = 6-nov 16:56 PST: revisión de RCP + walls -0 hacia Retail 124)
+- Hecho: F1 BAR 107 121.6 SF, F2 franja lobby 119.0, D6 nicho 40.2, F4/F5 GYP-1 de 215/222/223 (L2), D4 Generator 200.4 (L), D2 WS-1 descontado (L2/L3/L4); F3 / D1 / D3 / Vestibule 114 documentados sin cambio; D5 Scope EXCLUDED F&B; walls RFI-05: XW.6.4-L1-04 fuera, XW.6.3-L1-01 y FI.2-L1-06 partidos. RFI-22 nuevo (BAR core & shell).
+- Datos: canon/rcp_rev4.json (modify/add), canon_extras rcp_tags (35 tags), scripts/rcp_rev4_img.py (evidencia).
+- Skill v81cf61 PUBLICADA (BE-CR30 CB_RCP_TAGS + BE-CR31). Compuerta rev4 VERDE 172/4/0.
+- Subida: subir_entrega.py en background (log /root/cr/work/subida_rev4.log). Falta: verificar Drive (verif3.py), renombrar rev3 (id 1u6aAT3-npxRQfw_yULiHt0Vo2FGK6USZ) a 'rev3 — REPLACED BY rev4 (NO USAR)' + aviso, informe a COORDINACIÓN.

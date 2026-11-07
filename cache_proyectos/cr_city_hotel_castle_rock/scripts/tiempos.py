@@ -15,7 +15,8 @@ rows = [("0", "Arranque (órdenes U-001..U-150, skill v81cf52) + descarga Buildi
         ("rev2-c", "Hallazgos aplicados y verificados (banos_cbu, shafts L3/L4, F4-F12, BE-CR26 cadena) + compuerta VERDE + skill v81cf56", "2026-11-06 03:28", "2026-11-06 04:25", "RESOLUCION_HALLAZGOS_U138_2.md, gate.txt"),
         ("rev2-d", "Subida rev2 (2,093 archivos) + aviso REPLACED BY rev2 en rev1 + listado de Drive", "2026-11-06 04:25", "2026-11-06 07:17", "SUBIDA_OK.json rev2"),
         ("rev2-e", "BE-CR28 (orden de subida, Auditoria.zip) + recheck v81cf57 / BE-CR29 (chequeos en vacío) -> hallazgo XW.6.6-0", "2026-11-06 07:17", "2026-11-06 07:38", "ENTREGA_OK_recheck_v81cf57.json"),
-        ("rev3", "rev3: sheathing XW.6.6-0 + barrido de ratings + citas coves + compuerta VERDE + skill v81cf57 + subida (Auditoria.zip) + aviso en rev2 + listado", "2026-11-06 07:38", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev3")]
+        ("rev3", "rev3: sheathing XW.6.6-0 + barrido de ratings + citas coves + compuerta VERDE + skill v81cf57 + subida (Auditoria.zip) + aviso en rev2 + listado", "2026-11-06 07:38", "2026-11-06 07:57", "ENTREGA_OK.json / SUBIDA_OK.json rev3"),
+        ("rev4", "rev4 (orden COORDINACIÓN 16:56 PST: revisión de RCP + walls -0 hacia Retail 124): medición de F1-F5 / D1-D6 en vectores, barrido de los 35 tags GYP de RCP (BE-CR30, skill v81cf61), cadena + compuerta VERDE + subida + aviso en rev3", "2026-11-06 16:56", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev4")]
 L = ["# CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)", "",
      "Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.", "",
      "| # | Paso | Inicio | Fin | Duración | Evidencia |", "|---|---|---|---|---|---|"]
@@ -24,5 +25,5 @@ for r in rows:
     d = int((F(r[3]) - F(r[2])).total_seconds() // 60); tot += d
     L.append(f"| {r[0]} | {r[1]} | {r[2][5:]} PST | {r[3][5:]} PST | {d} min | {r[4]} |")
 r1 = sum(int((F(r[3]) - F(r[2])).total_seconds() // 60) for r in rows if not r[0].startswith('rev'))
-L.append(f"| **TOTAL** | **rev1 {r1} min ({r1 // 60} h {r1 % 60:02d}) + rev2/rev3 {tot - r1} min ({(tot - r1) // 60} h {(tot - r1) % 60:02d})** | **11-05 11:16 PST** | **{fin[5:]} PST** | **{tot} min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |")
+L.append(f"| **TOTAL** | **rev1 {r1} min ({r1 // 60} h {r1 % 60:02d}) + rev2/rev3/rev4 {tot - r1} min ({(tot - r1) // 60} h {(tot - r1) % 60:02d})** | **11-05 11:16 PST** | **{fin[5:]} PST** | **{tot} min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |")
 open('/root/cr/work/TIEMPOS.md', 'w').write('\n'.join(L) + '\n'); print(L[-1])

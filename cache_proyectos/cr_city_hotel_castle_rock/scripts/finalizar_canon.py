@@ -104,6 +104,47 @@ for w in list(d['existing_walls']):
         d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "img": w.get('img'), "tag_ids": w.get('tag_ids') or [], "sheet": w.get('sheet'),
             "reason": f"A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail face ({w['type_id']}, {sf} SF board) by tenant - RFI-05 closed (option A, the printed note)"})
 print('RFI-05 retail non-rated faces excluded:', len(_ret), round(sum(_ret), 1), 'SF')
+# rev4 RFI-05 barrido (BE-CR30): el filtro de arriba solo tomaba caras 'RETAIL 124 (tenant)' exactas; cualquier wall -0 con cara
+# a RETAIL 124 entra al barrido. Cara solo retail -> fuera; cara mixta -> se parte en el punto medido en vectores de 1/A2.01.
+_NOTA = "'*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' printed in Retail 124 on 1/A2.01"
+_CORTES = {  # id: (eje, coord de corte en pt, lado que se queda ('lo' = coord menor), motivo del corte, cara que queda)
+    "XW.6.3-L1-01": ("y", 926.6, "lo", "the lobby vestibule 108 face ends at the pier return at y 926.6 pt on 1/A2.01 (vector); south of it the pier faces Retail 124", "LOBBY vestibule 108"),
+    "FI.2-L1-06": ("x", 1017.2, "lo", "west of x 1017.2 pt (face of the stud wall of vestibule 120.1, vector on 1/A2.01) the furring faces the area E of door 121.1; east of it ELEC/TELE 120 and Retail 124 are tenant space (dash-dot boundaries, tag FI.2-0 placed in the retail part)", "area E of door 121.1"),
+}
+_n4 = []
+for w in list(d['existing_walls']):
+    b = w['id'].split(' ')[0]
+    f = str(w.get('location') or '').split('faces:')[-1]
+    if not (str(w.get('type_id', '')).endswith('-0') and re.search(r"(?i)RETAIL 124", f)):
+        continue
+    if b == 'XW.6.2-L1-03':   # cara retail + cara exterior: la resuelve el bloque F9 de abajo (cara retail fuera, exterior = sheathing)
+        continue
+    if b in _CORTES:
+        ax, cut, keep, why, cara = _CORTES[b]
+        (x0, y0), (x1, y1) = w['path']
+        i = 0 if ax == 'x' else 1
+        lo, hi = sorted([w['path'][0][i], w['path'][1][i]])
+        L_keep = round((cut - lo) / 9.0, 2); L_out = round((hi - cut) / 9.0, 2)
+        old = w['length_ft']
+        sf = round(L_out * w['height_ft'] * w['faces'] * (w.get('layers') or 1), 1)
+        nwp = [list(w['path'][0]), list(w['path'][1])]
+        nwp[0][i], nwp[1][i] = lo, cut
+        w['path'] = nwp; w['length_ft'] = L_keep
+        w['location'] = re.sub(r"faces:.*$", f"faces: {cara}", str(w['location']))
+        w['source'] = str(w['source']).replace(f"= {old}", f"= {old}; split at {cut} pt: ({cut}-{lo})/9 = {L_keep} ft kept ({why})", 1)
+        w['length_status'] = 'DERIVADO'
+        d['excluded_walls'].append({"id": f"{b} (retail part)", "reader": "AB", "floor": w['floor'], "sheet": w.get('sheet'), "img": w.get('img'), "tag_ids": w.get('tag_ids') or [],
+            "reason": f"{_NOTA}: non-rated ({w['type_id']}) retail part ({hi}-{cut})/9 = {L_out} ft x {w['height_ft']} ft = {sf} SF board by tenant - RFI-05 closed (sweep of every -0 wall facing Retail 124)"})
+        _n4.append((b, 'split', L_keep, L_out, sf))
+    elif re.fullmatch(r"\s*RETAIL 124(\s*\(tenant\))?\s*", f):
+        d['existing_walls'].remove(w)
+        sf = round(w['length_ft'] * w['height_ft'] * w['faces'] * (w.get('layers') or 1), 1)
+        d['excluded_walls'].append({"id": w['id'], "reader": "AB", "floor": w['floor'], "sheet": w.get('sheet'), "img": w.get('img'), "tag_ids": w.get('tag_ids') or [],
+            "reason": f"{_NOTA}: non-rated retail face ({w['type_id']}, {w['length_ft']} ft x {w['height_ft']} ft = {sf} SF board) by tenant - RFI-05 closed (sweep of every -0 wall facing Retail 124)"})
+        _n4.append((w['id'], 'excluded', 0, w['length_ft'], sf))
+    else:
+        raise SystemExit(f"BE-CR30: wall -0 con cara mixta a RETAIL 124 sin corte medido: {w['id']} | {f}")
+print('rev4 RFI-05 sweep:', _n4)
 # U-138 hallazgo 8: mismo criterio en la zona Food & Beverage: A2.04 / A5.07 / A7.45 / A7.50 / A7.55 'INTERIOR OF FOOD AND
 # BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT. WILL BE SUBMITTED IN FUTURE TENANT IMPROVEMENT PERMIT.' + A0.00 'THE BAR,
 # DINING, AND KITCHEN AREAS ARE BEING PERMITTED AS CORE AND SHELL SPACES' -> caras NO rated hacia F&B fuera; rated se quedan
@@ -206,10 +247,10 @@ d['misc_items'] += [
     {"ref": "BW-L1-RETAIL board", "familia": '5/8" gyp board Type C', "qty": round(_blf * _dev, 2), "op": f"{_blf} LF x {_dev} ft = {round(_blf * _dev, 2)} SF", "source": _bsrc, "detail": "A0.08 FS-1"},
     {"ref": "BW-L1-RETAIL RC", "familia": "resilient channel (printed)", "qty": round(_blf * 3, 2), "op": f"{_blf} LF x 3 lines (bottom + 2 sides) = {round(_blf * 3, 2)}", "source": _bsrc, "detail": "A0.08 FS-1"}]
 # L4 corridor 412: cielo de campo (A2.04 '1350 SF', A3.04 stipple gyp) = RS-1 bajo el techo, como los cuartos de L4
-d['ceilings'].append({"room": "L4 412 Corridor (field ceiling)", "system": "resilient_channel", "area_sf": 1350.0, "board": "5/8 type X",
+d['ceilings'].append({"room": "L4 412 Corridor (field ceiling)", "system": "resilient_channel", "area_sf": 1215.4, "board": "5/8 type X",
     "assembly": {"id": "RS-1", "source": "A0.08 RS-1 (ceiling under the roof framing) - board type not printed: 5/8\" Type X loaded (RFI-15)"},
     "rc_oc_in": _RC, "layers": {"value": 1, "source": "A0.08 RS-1 1 layer drawn"}, "detail": "1/A5.06",
-    "source": "A0.08 / RCP A3.04: A3.04 [CONFIRMED] area 1350 SF (A2.04 '1350 SF CORRIDOR 412') | A3.04 gyp stipple + perimeter cove (cove carried in SOF-L4-02) | [CONFIRMED] height 8.94 (1/A5.06 8'-11 1/4\")",
+    "source": "A0.08 / RCP A3.04: A3.04 [DERIVED] area 1215.4 SF (A2.04 '1350 SF CORRIDOR 412' printed - WS-1 wood slat panels measured on 3/A7.23 (3.94 x 8.74 = 34.4 + 13.49 x 4.47 = 60.3 -> 94.7 SF) and 3/A7.24 (8.74 x 4.56 = 39.9 SF): 1350 - 94.7 - 39.9 = 1215.4 SF) | A3.04 gyp stipple + perimeter cove (cove carried in SOF-L4-02) | [CONFIRMED] height 8.94 (1/A5.06 8'-11 1/4\")",
     "floor": "L4", "img": "/root/cr/work/auditoria_U138/img/A304_corr412_419.png", "height_ft": 8.9375, "sheet": "A3.04"})
 # U-138 hallazgo 5: franja de L3 (301-304) bajo las terrazas 420 / 421 de L4 = techo RS-6 (A0.08 RS-6 '2 LAYERS, 5/8" TYPE 'X' GYP
 # BOARD', WOOD FRAMING, roof RE: A2.05), no FS-1: ancho (1065.5 - 1007.35)/9 = 6.46 ft (fachada E de L3 vs de L4, A2.03 / A2.04) x 66.17 ft

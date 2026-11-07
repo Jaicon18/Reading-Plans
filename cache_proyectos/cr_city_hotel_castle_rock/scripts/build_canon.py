@@ -125,6 +125,21 @@ def main():
             ceil.append(dict(c, floor=fl))
         rfis += [dict(r, floor=fl) for r in d.get('rfis') or []]
         desc += [dict(x, floor=fl) for x in d.get('discarded') or []]
+    # rev4 (BE-CR30): RCP review - ceilings measured on the printed enlarged RCPs (etapas/4_canon/rcp_rev4.json: modify + add)
+    # and every 'GYP-x (dropped) under FS-1' row also priced as its own GYP-x dropped ceiling (board + suspension), not only as FS-1.
+    _r4 = json.load(open('/root/cr/work/etapas/4_canon/rcp_rev4.json'))
+    for mo in _r4['modify']:
+        hit = [c for c in ceil if all(str(c.get(k)) == str(v) for k, v in mo['match'].items())]
+        assert len(hit) == 1, f"rcp_rev4 modify sin match unico: {mo['match']} -> {len(hit)}"
+        hit[0].update(mo['set']); hit[0].pop('area_op', None)
+    _extra = []
+    for c in ceil:
+        if re.match(r"GYP-\d.*\bunder FS-1", str(c.get('assembly') or '')):
+            g = dict(c); g['assembly'] = str(c['assembly']).replace(' under FS-1', '') + ' (dropped ceiling below the rated floor membrane)'
+            g['room'] = f"{c.get('room')} - GYP-1 dropped ceiling"
+            _extra.append(g)
+            c['assembly'] = 'FS-1 membrane above the dropped GYP-1 (A0.08 FS-1 LEVEL 2, 3, 4 THROUGHOUT)'
+    ceil += _extra + [dict(a_) for a_ in _r4['add']]
     ceilings = []
     RCP = {'L1': 'A3.01', 'L2': 'A3.02', 'L3': 'A3.03', 'L4': 'A3.04'}
     STRUCT = {'L1': (12.0, "L1 ceilings: 12'-0\" B.O. structure (5/A5.04, resolucion_L1)"),
