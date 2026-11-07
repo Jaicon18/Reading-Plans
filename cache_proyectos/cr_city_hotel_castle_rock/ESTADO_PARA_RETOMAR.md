@@ -52,4 +52,4 @@ Siguiente: integrar corner bead → bash scripts/cadena.sh 2 → armar_entrega.s
 - Hecho: F1 BAR 107 121.6 SF, F2 franja lobby 119.0, D6 nicho 40.2, F4/F5 GYP-1 de 215/222/223 (L2), D4 Generator 200.4 (L), D2 WS-1 descontado (L2/L3/L4); F3 / D1 / D3 / Vestibule 114 documentados sin cambio; D5 Scope EXCLUDED F&B; walls RFI-05: XW.6.4-L1-04 fuera, XW.6.3-L1-01 y FI.2-L1-06 partidos. RFI-22 nuevo (BAR core & shell).
 - Datos: canon/rcp_rev4.json (modify/add), canon_extras rcp_tags (35 tags), scripts/rcp_rev4_img.py (evidencia).
 - Skill v81cf61 PUBLICADA (BE-CR30 CB_RCP_TAGS + BE-CR31). Compuerta rev4 VERDE 172/4/0.
-- Subida: subir_entrega.py en background (log /root/cr/work/subida_rev4.log). Falta: verificar Drive (verif3.py), renombrar rev3 (id 1u6aAT3-npxRQfw_yULiHt0Vo2FGK6USZ) a 'rev3 — REPLACED BY rev4 (NO USAR)' + aviso, informe a COORDINACIÓN.
+- ENTREGADA 6-nov ~17:37 PST: Drive rev4 FINAL (id 14XP10I5gIkMitDgSK9ftBjNVtqS5Am2-) 38/38 + Auditoria.zip 2,109/2,109 verificados; rev3 renombrada "rev3 — REPLACED BY rev4 (NO USAR)" + aviso.
