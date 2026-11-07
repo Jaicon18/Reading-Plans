@@ -586,3 +586,8 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Los 943 markups traían su /Measure correcto (1/8 en A2/A3, 1/4 en A6/A7), pero ninguna página tenía /VP; la escala de página de Bluebeam quedaba en 0.125 también en A6.00–A6.02, A7.30, A7.45, A7.50, A7.55.
 - Arreglo: escala_pagina.py pone /VP (BBox = página, /Measure = el de sus markups) en las 15 hojas con markups → rev3c. Regla U-152; chequeo pendiente en CE_PDF_EDITABLE (próxima versión).
 - v81cf59 (6-nov): compuerta CE_PDF_EDITABLE ampliada (escala_pagina.revisar: cada markup /Measure en un /VP de su misma /R) + tools/escala_pagina.py; markups_bluebeam.escribir llama solo quitar_firmas_labels + escala_pagina. Test test_compuerta_entrega.py::test_u152_escala_pagina. Usuario 6-nov: "siempre tienes hacerlo en todos los proyectos, regla inviolable" (U-151 + U-152).
+
+## BE-149 — Wall Area de Bluebeam x864 en todos los markups (6-nov, CR City Hotel rev3c; también O'Reilly y Consumer Cellular, mismo markups_bluebeam.py)
+- Síntoma (captura del usuario): CH.6-2 4.30 ft x Depth 11 ft → Wall Area 40,867.16 sf (= 47.30 x 864).
+- Causa: markups_bluebeam.py escribía /DepthUnit [<</U(ft)/C 1/864 ...>>] ("formato de Revu" copiado sin verificar en Bluebeam); Bluebeam divide el área entre C.
+- Arreglo: /C 1 en los 891 markups → rev3d. Ninguna compuerta abría el Wall Area como lo calcula Bluebeam: revisaba que /Depth existiera, no el resultado. Regla U-153.
