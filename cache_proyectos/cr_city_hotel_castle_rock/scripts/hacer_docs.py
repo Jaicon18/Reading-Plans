@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """README_REVIEW.md (English), PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md y GUIA_DE_REVISION_DEL_ESTIMADOR.md (español,
-términos del trade en inglés) de CR City Hotel rev4 FINAL. Toda cifra se lee del Excel entregado y del canon; nada a mano.
+términos del trade en inglés) de CR City Hotel rev5 FINAL. Toda cifra se lee del Excel entregado y del canon; nada a mano.
 Uso: hacer_docs.py <entrega_dir> <proyecto_datos.json> <takeoff.json> <canon.json>"""
 import json, os, sys, collections
 import openpyxl
@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev4 FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev7 FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_City_Hotel_markups_rev4.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_City_Hotel_markups_rev7.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -108,18 +108,42 @@ _txt10 = ("10. **rev4 reemplaza a rev3** (tu revisión: 'revisa los rcp ... algu
           "XW.6.4-L1-04 fuera; XW.6.3-L1-01 y FI.2-L1-06 partidos en el límite del tenant medido en 1/A2.01 (las otras caras retail son de walls rated -2 y se quedan). "
           "Evidencia: `Auditoria/rcp_rev4/`. Delta por material contra rev3 (NET): " + "; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _delta34) + " (`Auditoria/DELTA_rev3_rev4.md`).")
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt10)
+_d45 = '/root/cr/work/etapas/DELTA_rev4_rev5.md'     # rev5: revisión de código (decisiones del usuario 7-nov)
+_delta45 = [x for x in open(_d45).read().split('\n') if x.startswith('| ') and not x.startswith('| Material') and not x.startswith('|---')] if os.path.exists(_d45) else []
+_c5 = json.load(open('/root/cr/work/etapas/4_canon/takeoff_canon.json'))
+_txt11 = ("11. **rev5 reemplaza a rev4** (tu revisión de código, carpeta 'Revision de codigo 2026-11-06'). En el BASE (regla R80e.38-4: mientras un RFI está abierto va la opción de MAYOR cantidad): "
+          + "; ".join(f"({x['n']}) {x['que']}: {x['sf']['v']:+,.2f} SF" for x in _c5.get('rev5_cambios') or []) + ". DEDUCT ALTERNATES: "
+          + "; ".join(f"{d['id']} {d['rfi'] or ''} {d['delta_sf']:,.2f} SF" for d in _c5.get('deduct_alternates') or [])
+          + ". verif_codigo.py sobre rev5: ROOF_HEAD 0. Delta por material contra rev4 (NET): " + "; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _delta45) + " (`Auditoria/DELTA_rev4_rev5.md`).")
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt11)
+_d56 = '/root/cr/work/etapas/DELTA_rev5_rev6.md'     # rev6: auditoría adversarial de COORDINACIÓN (7-nov)
+_delta56 = [x for x in open(_d56).read().split('\n') if x.startswith('| ') and not x.startswith('| Material') and not x.startswith('|---')] if os.path.exists(_d56) else []
+_txt12 = ("12. **rev6 reemplaza a rev5** (auditoría de COORDINACIÓN, cada punto verificado en el plano): "
+          "(E1) coffers del lobby CLG-L1-11 fuera: 2/, 4/ y 7/A7.31 ponen el 12'-0 3/4\" en el underside del rated assembly = membrana FS-1 de L1 ya cargada; "
+          "(E2) cement board de cada shower medido a la CARA DEL WALL (201 / 301 de 3.0 a 3.49 ft; 210 / 310 / 309 también); "
+          "(O1) angle molding = perímetro real de cada cuarto (60 renglones, antes 4 x raíz del área); "
+          "(O2) cove de corridors de L2 con la cara inferior impresa 4 1/2\" (7/A7.23), igual que L3 / L4; "
+          "(E3) la compuerta CB_BE_CF10 ahora lee el Project Manual (specs 05 40 00 ... 09 29 00) y ya no pasa en vacío. "
+          "Lo de rev5 (revisión de código, DEDUCT ALTERNATES) sigue igual. Delta por material contra rev5 (NET): "
+          + "; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _delta56) + " (`Auditoria/DELTA_rev5_rev6.md`).")
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt12)
+_txt13 = ("13. **rev7 reemplaza a rev6** (tu pregunta en Bluebeam: 'por qué unos tienen markups y otros no'): los 73 cielos / soffits cuantificados "
+          "como renglones aparte (CLG / SOF / RS6 / CAN / BW: baños, Women 417, Men 418, Elec 421, corridors, Cleaning 215, closets, lobby, BAR, "
+          "coves) ahora tienen su markup en verde en su RCP (o en la hoja ampliada donde se midieron), con ID, SF y causa. Cantidades SIN cambio. "
+          "Compuerta nueva CE_RCP_COMPLETO: todo cielo / soffit del Excel tiene su markup con el mismo SF / LF.")
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt13)
 open(os.path.join(E, "PARA_REVISAR_EN_LA_MANANA.md"), "w").write("\n".join(P) + "\n")
 S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGADO, U-048)", "",
      "| # RFI | Ítem | N/HOJA | Qué falta | Supuesto cargado | Delta |", "|---|---|---|---|---|---|"]
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev4 FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev7 FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev4.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev7.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -143,5 +167,8 @@ G += ["", "## Carpeta `Auditoria/` (solo si quieres comprobar algo a fondo)", ""
  "- `burbujas/` (verificación a ojo + CADENA.md), `schedules/` (lectura independiente), `resolucion.md` (cada diferencia A/B decidida con imagen), `rfi_img/`, `auditoria_U138/` (auditoría adversarial antes de entregar)."]
 G[2:2] = ["## CAMBIOS rev3 vs rev2 (revisa esto primero si ya viste rev2)", "", _txt9, "", "| Material | Unit | rev2 | rev3 | Delta |", "|---|---|---|---|---|"] + _delta23 + [""]
 G[2:2] = ["## CAMBIOS rev4 vs rev3 (revisa esto primero si ya viste rev3)", "", _txt10, "", "| Material | Unit | rev3 | rev4 | Delta |", "|---|---|---|---|---|"] + _delta34 + [""]
+G[2:2] = ["## CAMBIOS rev5 vs rev4 (revisa esto primero si ya viste rev4)", "", _txt11, "", "| Material | Unit | rev4 | rev5 | Delta |", "|---|---|---|---|---|"] + _delta45 + [""]
+G[2:2] = ["## CAMBIOS rev6 vs rev5 (revisa esto primero si ya viste rev5)", "", _txt12, "", "| Material | Unit | rev5 | rev6 | Delta |", "|---|---|---|---|---|"] + _delta56 + [""]
+G[2:2] = ["## CAMBIOS rev7 vs rev6 (revisa esto primero si ya viste rev6)", "", _txt13, ""]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 print("docs ok", len(rf), "rfis")
