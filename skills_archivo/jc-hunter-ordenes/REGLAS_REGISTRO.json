@@ -1,7 +1,7 @@
 {
- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags)",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 431,
+ "conteo": 436,
  "reglas": [
   {
    "id": "U-001",
@@ -990,7 +990,7 @@
     "take-off:tools/reglas.py::A_STRUT_STUD"
    ],
    "test": {
-    "archivo": "take-off:tools/test_strut_stud.py",
+    "archivo": "take-off:tools/test_soffit_doble.py",
     "token": "strut"
    },
    "cuando": "entrega"
@@ -1455,7 +1455,7 @@
     "take-off:tools/reglas.py::A_STRUT_STUD"
    ],
    "test": {
-    "archivo": "take-off:tools/test_strut_stud.py",
+    "archivo": "take-off:tools/test_soffit_doble.py",
     "token": "strut"
    },
    "cuando": "entrega"
@@ -5867,6 +5867,68 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_be_cr31_sin_firmas"
    }
+  },
+  {
+   "id": "CR-R6-E1",
+   "origen": "R80e.160.1 (CR City Hotel rev6, auditoría COORDINACIÓN 7-nov (U-138))",
+   "texto_corto": "un cielo a la altura del underside de un RATED ASSEMBLY es la membrana (ya cargada con su FS-x); no se carga otra vez como GYP sobre suspensión",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r6_e1"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "\"cr_r6_e1\""
+   }
+  },
+  {
+   "id": "CR-R6-O1",
+   "origen": "R80e.160.4 (CR City Hotel rev6, auditoría COORDINACIÓN 7-nov (U-138); U-114)",
+   "texto_corto": "angle molding / wall angle = perímetro real del polígono del cuarto; 4 x sqrt(área) = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r6_o1"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "\"cr_r6_o1\""
+   }
+  },
+  {
+   "id": "CR-R6-O2",
+   "origen": "R80e.160.5 (CR City Hotel rev6, auditoría COORDINACIÓN 7-nov (U-138))",
+   "texto_corto": "un detalle típico (cove / soffit) lleva el mismo ancho impreso en todos los pisos; anchos distintos sin width_reason = FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r6_o2"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "\"cr_r6_o2\""
+   }
+  },
+  {
+   "id": "CR-R6-E3",
+   "origen": "R80e.160.3 (CR City Hotel rev6, auditoría COORDINACIÓN 7-nov (U-138); U-137)",
+   "texto_corto": "CB_BE_CF10 lee el Project Manual (entrega.json specs_dir): N/A solo si la entrega no cita specs; sección citada y no leída = FAIL; cada renglón del Material Summary cita su sección (plantilla_excel spec_por_material)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf10"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_cr_rev6_cf10_specs"
+   }
+  },
+  {
+   "id": "CR-R6-E2",
+   "origen": "R80e.160.2 (CR City Hotel rev6, auditoría COORDINACIÓN 7-nov (U-138))",
+   "texto_corto": "el lado de un shower se mide a la cara del wall, nunca al extremo de las diagonales del shower pan; se barren todos los showers con la misma regla",
+   "categoria": "conducta"
   }
  ]
 }
