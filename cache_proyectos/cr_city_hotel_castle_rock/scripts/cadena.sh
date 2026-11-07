@@ -1,7 +1,7 @@
 #!/bin/bash
 # CR City Hotel - cadena pasos 4-7 (cada tool por bitacora.py run; para en el primer rc != 0). Uso: bash scripts/cadena.sh [desde]
 source /root/cr/work/scripts/env.sh
-REV=${REV:-rev4}; cd $W; C4=$W/etapas/4_canon; X=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_${REV}.xlsx
+REV=${REV:-rev6}; cd $W; C4=$W/etapas/4_canon; X=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_${REV}.xlsx
 N=0; DESDE=${1:-0}
 R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@" > $W/last.log 2>&1; rc=$?
       echo "$(TZ=America/Los_Angeles date +%H:%M) step $N rc=$rc $(basename $1) $2"
@@ -17,6 +17,9 @@ R scripts/finalizar_canon.py
 R scripts/shafts_l3l4.py
 R scripts/banos_cbu.py
 R scripts/canon_extras.py
+R scripts/rev5_codigo.py
+R scripts/rev6_auditoria.py
+R scripts/perimetros_angle.py
 R scripts/imagenes_walls.py
 R scripts/rfis.py
 R $T/inventario.py $C4/takeoff_canon.json $C4/out/inventario_walls.json

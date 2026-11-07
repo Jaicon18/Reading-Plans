@@ -33,6 +33,9 @@ MANUAL = {"L2": [("211", 585.4, 612.4, 1109.0, 1136.6)],
 _CBU_H = "Bath ceiling GYP-1 8'-6\" (A7.xx unit RCP) + 6\" above line of ceiling (A0.06 furred wood head detail) = 9'-0\" (cement board to the tile ceiling + 6\", estimator precedent #15 (B&N), RFI-11 closed)"
 
 
+SNAP_LOG = []
+
+
 def cajas(fl):
     sh, pg = PISO[fl]
     det = [s for s in showers(pg) if 2.5 * 9 <= s[3] - s[2] <= 4.2 * 9 and abs(s[1] - (s[4] if s[0] == 'V' else s[5])) >= 4.5 * 9]
@@ -47,7 +50,16 @@ def cajas(fl):
             y0, y1 = sorted([s[1], s[5]]); x0, x1 = s[2], s[3]
         out.append([x0, x1, y0, y1])
     assert len(out) == len(CUARTOS[fl]), (fl, len(out))
-    return [(CUARTOS[fl][i],) + tuple(b) for i, b in enumerate(out)] + MANUAL[fl]
+    cajas_ = [(CUARTOS[fl][i],) + tuple(b) for i, b in enumerate(out)] + MANUAL[fl]
+    # E2 (auditoría COORDINACIÓN 7-nov, rev6): cada lado a la CARA DEL WALL, no al extremo de las diagonales del pan
+    from snap_caja import snap
+    res = []
+    for r, x0, x1, y0, y1 in cajas_:
+        s = snap(D[pg], x0, x1, y0, y1)
+        if any(abs(a - b) > 0.3 for a, b in zip(s, (x0, x1, y0, y1))):
+            SNAP_LOG.append({"piso": fl, "cuarto": r, "antes": [round(v, 1) for v in (x0, x1, y0, y1)], "cara_del_wall": [round(v, 1) for v in s]})
+        res.append((r,) + tuple(s))
+    return res
 
 
 _lin = {}
@@ -172,7 +184,7 @@ for fl in PISO:
                        "height_source": _CBU_H if hh == 9.0 else f"{w0.get('height_source')} (cement board to the top of this wall: the RFI-11 tile line is above the wall top)",
                        "location": re.sub(r"faces:.*$", f"faces: {lbl}", str(w0.get('location', ''))), "img": w0.get("img"),
                        "length_status": "DERIVADO"})
-            nw['source'] = (f"1/{sh} [DERIVED] length: {room} shower {nom} side, shower box from the vector shower pan / partition lines "
+            nw['source'] = (f"1/{sh} [DERIVED] length: {room} shower {nom} side, shower box from the vector shower pan to the wall face (sides at the wall line, not at the pan diagonals) "
                             f"({hi2:.1f}-{lo2:.1f})/9 = {nw['length_ft']} ft; tile at the shower only (6/A7.02, 8/A7.03, 9/A7.03), A0.06 GN 13 | height: {nw['height_source']}")
             nw.pop('faces_none_reason', None)
             c['existing_walls'].insert(c['existing_walls'].index(w0) + 1, nw)
@@ -220,6 +232,7 @@ for e in c['existing_walls']:
         sf_new[e['floor']] += e['length_ft'] * e['height_ft']
 res['nuevo_sf'] = {k: round(v, 1) for k, v in sf_new.items()}
 json.dump(c, open(CP, 'w'), indent=1)
+res = {"filas": res, "cara_del_wall": SNAP_LOG} if isinstance(res, list) else dict(res, cara_del_wall=SNAP_LOG)
 json.dump(res, open(f'{W}/etapas/4_canon/out/banos_cbu.json', 'w'), indent=1)
 print('CBU antes', res['quitado_sf'], '| después', res['nuevo_sf'], '| showers', len(res['showers']), '| lados sin wall', len(res['sin_wall']), '| F6', len(res['f6']))
 for s in res['sin_wall']:

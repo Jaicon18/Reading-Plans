@@ -100,7 +100,7 @@ extra = [
  ("Retail 124 tenant finishes", "EXCLUDED - A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail faces (incl. the sweep of every -0 wall: XW.6.4-L1-04, retail parts of XW.6.3-L1-01 and FI.2-L1-06) and the GYP-1 11'-0\" band inside the retail (RFI-05)."),
  ("Separate-permit areas", "EXCLUDED - grey toned area 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' (A2.01-A2.04); existing historic building (A0.00)."),
  ("Doors, frames, windows, hardware", "EXCLUDED - A8.00 / A8.01 by others."),
- ("Structural steel: kickers, clip angles, L3x3 angles", "EXCLUDED - L3x3x1/4 KICKER at 4'-0\" o.c. (S1.02, 5/S3.08) and CLIP ANGLE with threaded rods into masonry (S3.04, S3.08) are structural steel (Div. 05 12 00), by the steel fabricator."),
+ ("Structural steel: kickers, clip angles, L3x3 angles", "EXCLUDED - L3x3x1/4 KICKER at 4'-0\" o.c. (S1.02, 5/S3.08) and CLIP ANGLE with threaded rods into masonry (S3.04, S3.08) are structural steel by the steel fabricator (S-sheets S1.02 / S3.04 / S3.08; not our trade, no spec section on file)."),
 ]
 for k, (n, x) in enumerate(extra, 1):
     alcances.append({"id": f"ALC-E{k:02d}", "nombre": n, "estado": "NO APLICA", "nota": x})
@@ -124,6 +124,23 @@ td = {
  "type_order": ["W.4-0", "W.6-0", "W.6-1", "W.6-2", "W.62-1", "FW.1-0", "FW.2-0", "FW.4-0", "FW.6-0", "DW.4-1", "FI.2-0", "FI.6-0", "CH.6-2",
                 "XW.6.2-0", "XW.6.2-2", "XW.6.3-0", "XW.6.3-2", "XW.6.4-0", "XW.6.4-2", "XW.6.6-1", "XW.6.6-2"],
  "walls": [], "materials": [],
+ # E3 rev6: sección / párrafo de spec de cada material (Project Manual Vol 1, specs/*.txt leídos)
+ "spec_por_material": [
+     [r"shaftliner", "09 21 16.23 2.3.A Gypsum Liner Panels, Type X"],
+     [r"exterior gypsum sheathing", "no spec section on file (06 10 00 refers to Section 06 16 00 'Sheathing', not in the Project Manual received)"],
+     [r"Type X W\.R\.|water resist", "09 29 00 2.3 Interior Gypsum Board (water-resistant core per the partition type, ASTM C 1396)"],
+     [r"Type C", "09 29 00 2.3 Interior Gypsum Board (Type C not named in the spec; A0.08 FS-1 / UL L546 name it)"],
+     [r"Type X", "09 29 00 2.3.A Gypsum Board, Type X"],
+     [r"cement board", "09 29 00 2.4.A Cementitious Backer Units"],
+     [r"main tee|cross tee|angle molding", "09 22 16 2.2 Grid Suspension System for Ceilings (ASTM C 645)"],
+     [r"carrying channel", "09 22 16 2.2 Carrying Channels"],
+     [r"hanger wire", "09 22 16 2.2 Wire Hangers"],
+     [r"resilient channel", "09 22 16 2.3 Resilient Furring Channels"],
+     [r"track|runner", "09 22 16 2.3 Steel Studs and Runners (ASTM C 645)"],
+     [r"control joint|corner bead|casing bead|trim", "09 29 00 2.5 Trim Accessories (ASTM C 1047)"],
+     [r"compound|tape", "09 29 00 2.6 Joint Treatment Materials"],
+     [r"C-H stud|J-runner|shaft", "09 21 16.23 2.4 Non-Load-Bearing Steel Framing"],
+ ],
  "rfis": rfis, "rfi_cierre": cierre, "revisar": plantilla_excel.ordenar_revisar(revisar), "alcances": alcances,
  "proyecto_datos": pd, "hojas_revisadas": hojas, "barrido_no_dibujado": barrido,
 }
