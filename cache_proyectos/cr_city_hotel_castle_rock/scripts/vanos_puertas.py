@@ -132,6 +132,34 @@ for wid, ws in grupos.items():
             e['door_openings'] = medio
             e['source'] = nota_largo(e.get('source'), f"; door opening(s) inside the run {medio} ft NOT deducted (conservative)")
         res['en_medio'].append({"id": wid, "sheet": w['sheet'], "gaps_ft": medio})
+# rev8 (COORDINACIÓN 7-nov, walls punto 5): en las hojas ampliadas (1/4" = 18 pt/ft) los vanos dentro del tramo cargado tampoco
+# se descuentan (U-057, conservador) y el Source lo tiene que decir, igual que en A2: solo se DOCUMENTA (no se recorta nada).
+_SC0 = SC
+for w in c['existing_walls']:
+    if not re.match(r'A7\.(30|45|50|55)$', w['sheet']) or len(w['path']) != 2 or w.get('door_openings'):
+        continue
+    (x0, y0), (x1, y1) = w['path']
+    if abs(x1 - x0) > 1.0 and abs(y1 - y0) > 1.0:
+        continue
+    SC = 18.0
+    try:
+        h, a0, a1, cc, m = cubierto(w['page'] - 1, w['path'])
+        L = a1 - a0
+        gaps, p_ = [], a0
+        for lo, hi in m + [[a1, a1]]:
+            if lo - p_ >= 2.0 * SC:
+                gaps.append((p_, lo))
+            p_ = max(p_, hi)
+        tags = segs(w['page'] - 1)[1]
+        gaps = [g for g in gaps if any(math.dist(((g[0] + g[1]) / 2, cc) if h else (cc, (g[0] + g[1]) / 2), t) <= 5.0 * SC for t in tags)]
+    finally:
+        SC = _SC0
+    if gaps and L > 0:
+        anch = [round((g[1] - g[0]) / 18.0, 2) for g in gaps]
+        w['door_openings'] = anch
+        solido = round(w['length_ft'] - sum(anch), 2)
+        w['source'] = nota_largo(w.get('source'), f"; door opening(s) inside the run {anch} ft NOT deducted (conservative, U-057; solid wall {solido} ft)")
+        res['en_medio'].append({"id": w['id'], "sheet": w['sheet'], "gaps_ft": anch, "solido_ft": solido})
 # correcciones verificadas a ojo (auditoría U-138 hallazgos 7 y 10; imágenes en auditoria_U138/img y scratchpad del 6-nov)
 _hs = list(json.load(open(f'{W}/set_texto.json'))['hojas'])
 for wid, why in (("W.4-L3-44", "the path is entirely the opening of door 308.2 on A2.03 (no wall drawn; verified by eye)"),
@@ -142,12 +170,15 @@ for wid, why in (("W.4-L3-44", "the path is entirely the opening of door 308.2 o
         res['eliminados'].append({"id": e['id'], "lf": e['length_ft'], "sheet": e['sheet']})
 for e in c['existing_walls']:
     if e['id'].split(' ')[0] == 'W.4-L4-21' and e['sheet'] == 'A2.04':
-        (ex0, ey0), (ex1, ey1) = e['path']
+        # rev8 (COORDINACIÓN 7-nov, revisión de walls punto 1): el path venía con el largo de A2.04 (19.2 pt a 9 pt/ft) puesto
+        # sobre A7.50 y se dividió entre 18 -> 1.06 ft (error de reescalado). En 3/A7.50 las dos líneas del wall corren
+        # y 1264.4-1302.8 (x 881.6 / 888.8): 38.4 / 18 = 2.13 ft = A2.04 (1222.2-1203.0)/9 = 2.13 ft.
         old = e['length_ft']
         e['sheet'], e['page'] = 'A7.50', _hs.index('A7.50') + 1
-        e['length_ft'] = round(math.dist((ex0, ey0), (ex1, ey1)) / 18.0, 2)
+        e['path'] = [[885.2, 1264.4], [885.2, 1302.8]]
+        e['length_ft'] = round((1302.8 - 1264.4) / 18.0, 2)
         e['source'] = str(e.get('source') or '').replace('A2.04 [DERIVED]', '3/A7.50 [DERIVED]')
-        e['source'] = nota_largo(e['source'], f"; path coordinates are on 3/A7.50 (1/4\" = 18 pt/ft): {round(math.dist((ex0, ey0), (ex1, ey1)), 2)}/18 = {e['length_ft']} ft (was {old} at 9 pt/ft on A2.04, auditoria U-138 finding 10)")
+        e['source'] = nota_largo(e['source'], f"; on 3/A7.50 (1/4\" = 18 pt/ft) the wall lines run y 1264.4-1302.8: (1302.8-1264.4)/18 = {e['length_ft']} ft (= A2.04 (1222.20-1203.00)/9 = 2.13 ft)")
 json.dump(c, open(CP, 'w'), indent=1)
 json.dump(res, open(f'{W}/etapas/4_canon/out/vanos_puertas.json', 'w'), indent=1)
 print('eliminados', len(res['eliminados']), round(sum(x['lf'] for x in res['eliminados']), 2), 'LF;',

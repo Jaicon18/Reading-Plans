@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev7 FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev8 FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_City_Hotel_markups_rev7.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_City_Hotel_markups_rev8.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -138,12 +138,12 @@ S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGA
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev7 FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev8 FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev7.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev8.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -169,6 +169,15 @@ G[2:2] = ["## CAMBIOS rev3 vs rev2 (revisa esto primero si ya viste rev2)", "", 
 G[2:2] = ["## CAMBIOS rev4 vs rev3 (revisa esto primero si ya viste rev3)", "", _txt10, "", "| Material | Unit | rev3 | rev4 | Delta |", "|---|---|---|---|---|"] + _delta34 + [""]
 G[2:2] = ["## CAMBIOS rev5 vs rev4 (revisa esto primero si ya viste rev4)", "", _txt11, "", "| Material | Unit | rev4 | rev5 | Delta |", "|---|---|---|---|---|"] + _delta45 + [""]
 G[2:2] = ["## CAMBIOS rev6 vs rev5 (revisa esto primero si ya viste rev5)", "", _txt12, "", "| Material | Unit | rev5 | rev6 | Delta |", "|---|---|---|---|---|"] + _delta56 + [""]
+_txt14 = ("14. **rev8 reemplaza a rev7** (revisión de TODOS los walls y de los RCP, orden tuya vía COORDINACIÓN): "
+          "W.4-L4-21 (Men 418) 1.06 -> 2.13 ft (3/A7.50, error de reescalado); W.6-L4-14 15.54 -> 15.51 (suma de su operación); "
+          "wall NUEVO W.6-L1-32 (wall en L junto a la traffic door del bar, 1/A7.30, tag W.6.1, 5.58 ft, cara del vestíbulo de los toilets); "
+          "markups que no seguían su wall movidos a los tramos medidos (jogs, piezas a cada lado de un vano); tags W.6.1 / XW.6.2 ligados a su wall; "
+          "vanos dentro del tramo en A7.xx declarados en el Source (no descontados, U-057) y W.6-L1-25 como Review Item con su delta. "
+          "Franjas de H 0'-2 7/8\": en los walls NO rated del baño el cement board llega a 9'-0\" (RFI-11: cielo 8'-6\" + 6\") y el board W.R. "
+          "del wall sigue arriba hasta la cara inferior del entrepiso (9'-2 7/8\"): esa franja de 2 7/8\" es cada renglón con H 0'-2 7/8\".")
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt14)
+G[2:2] = ["## CAMBIOS rev8 vs rev7 (revisa esto primero si ya viste rev7)", "", _txt14, ""]
 G[2:2] = ["## CAMBIOS rev7 vs rev6 (revisa esto primero si ya viste rev6)", "", _txt13, ""]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 print("docs ok", len(rf), "rfis")
