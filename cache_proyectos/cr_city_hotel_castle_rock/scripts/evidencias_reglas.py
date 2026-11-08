@@ -5,6 +5,7 @@ K = '/root/cr/work'
 P = os.path.join(K, "etapas", "4_canon", "evidencias_reglas.json")
 PC, RS, RV, TL = "PROCESO_CORRIDA.md", "3_revision/resolucion.md", "3_revision/revision.md", "TOOL_LIMITS_CALC.md"
 E = [
+ ("S:protocolo-de-ejecución:c67de2", PC, "PASO 1 Building Code Analysis: code edition IBC 2018 [CONFIRMED, A0.00 Code Summary]; Type IIIB, R-1 / A-2 / M / U, sprinklered (A0.00); every code citation of this run uses IBC 2018 (R80e.156)."),
  ("S:subagentes-ninguna-sesió:ce4728", PC, "Orchestrator launched the stages (inventory, readings A / B, independent schedule reader, bubble verifier, calculation) as subagents and passed only paths; it never handed figures between readings."),
  ("S:subagentes-ninguna-sesió:b02c6e", PC, "Readings split by FLOOR (L1-L4): one subagent per floor and reader (8 readings), each with its floor plan, RCP, enlarged plans, sections and details (U-120: floors never joined)."),
  ("S:subagentes-ninguna-sesió:f40b96", PC, "Readings A and B independent (separate folders, same clean PDF, inventory and brief); B was told not to open A's folder."),

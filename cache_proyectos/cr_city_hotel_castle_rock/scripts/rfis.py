@@ -101,9 +101,9 @@ R = [
  ("RFI-20", "A0.08 FS-1, A3.01, S1.02", ["WRAP STEEL BEAMS", "DEEPER THAN TRUSSES"],
   "Retail 124 steel beams wrapped by the FS-1 membrane (A0.08 note 'GYP AND RESILIENT CHANNELS WRAP STEEL BEAMS WHERE THEY ARE DEEPER THAN TRUSSES'; A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS. TYP.'): beam LF measured on A3.01 (154.2 LF), but the depth of each beam below the floor trusses (the wrapped side height) is not dimensioned. S1.02 prints '18\" PRE-ENGINEERED OPEN WEB WOOD TRUSSES' and W16 to W30 beams: the exposed side = beam depth - 18\" = 0\" to 12\" per beam; the 1'-0\" loaded is the maximum (auditoria U-138 #2 F10).",
   "wrap developed 2.59 ft = bottom flange 0.59 ft + 2 sides x 1'-0\" (5/8\" Type C on 3 RC lines; RC per estimator precedent (O'Reilly #5))", ("2 sides x 1'-0\" (as loaded)", "0"), ("2 sides x 6\" / 1'-6\"", "-154 SF / +154 SF Type C per 6\" of side height"), "BW-L1-RETAIL"),
- ("RFI-21", "08/A9.05, A5.03, A2.01", ["ENTRY CANOPY", "SOFFIT PANEL"],
-  "Entry canopy (08/A9.05 'GYP/METAL SOFFIT PANEL', called from 1/A5.03): the canopy depth is measured on the detail (4.85 ft) but its length along the wall is not dimensioned on the plans, elevations or details. S1.02 (with 3/S3.10) also notes 'PRE-FABRICATED ROOF CANOPY BY OTHERS' (HSS4X4 hangers); if that is this entry canopy, the soffit panel is by others (-58.2 SF board, -21.7 LF trim). Loaded per the estimator decision of 6-nov (the entry canopy soffit is ours).",
-  "12'-0\" long x 4.85 ft = 58.2 SF of 5/8\" exterior gypsum soffit board + 21.7 LF edge trim", ("12'-0\" (as loaded)", "0"), ("actual canopy length L", "+4.85 SF board and +1 LF trim per foot over 12'-0\""), "CAN-L1-ENTRY"),
+ ("RFI-21", "08/A9.05, 1/A3.01, 1/A7.31, A5.03, S1.02", ["ENTRY CANOPY", "SOFFIT PANEL"],
+  "Entry canopy (08/A9.05 'GYP/METAL SOFFIT PANEL', called from 1/A5.03): length 6.49 ft along the storefront 108.1 [DERIVED: 2/A5.03 175.3 / 27 pt, same edge drawn on 1/A3.01] x depth 4.85 ft [DERIVED: 08/A9.05] = 31.48 SF; S1.02 (with 3/S3.10) notes 'PRE-FABRICATED ROOF CANOPY BY OTHERS' (HSS4X4 hangers). Is the gypsum soffit panel by us or part of the prefabricated canopy?",
+  "LOADED (larger option while the RFI is open): 6.49 x 4.85 ft = 31.48 SF of 5/8\" exterior gypsum soffit board + 16.19 LF edge trim (front + 2 sides)", ("08/A9.05 'GYP/METAL SOFFIT PANEL' by us (as loaded)", "0"), ("S1.02 prefabricated canopy by others includes the soffit", "-31.48 SF board, -16.19 LF trim"), "CAN-L1-ENTRY"),
  ("RFI-22", "A5.04, A7.31, A0.00", ["BAR SUSPENDED", "CORE AND SHELL"],
   "BAR 107 ceiling: 1/A7.31 draws the bar field (WS-1 oval inside it) and A5.04 prints 'BAR SUSPENDED GYP CEILING' / 'CLG 11'-0\"', but A0.00 says 'THE BAR, DINING, AND KITCHEN AREAS ARE BEING PERMITTED AS CORE AND SHELL SPACES'. Is the BAR 107 suspended gypsum ceiling in this bid or in the future F&B tenant improvement?",
   "LOADED (R-ALC-10: the specific drawing governs the general note): 121.6 SF 5/8\" gyp board on drywall suspension at 11'-0\" (BAR 107 field); the 40.2 SF niche between the bar and toilets 110/111 (niche) is lobby-side and stays in either case",
@@ -117,13 +117,17 @@ R = [
   "BASE (larger option while the RFI is open): 118B 2 HR on all walls - W wall segment both faces +1 layer, E wall segment Data face +1 layer and Retail face 2 layers",
   ("A0.00 'IT ROOMS 2 HR': 118B enclosed 2 HR (as loaded in the base)", "0"), ("1/A7.50 tags: W 'W.6.1 | 0' and E W.6-0 (DEDUCT ALTERNATE DA-2)", "DA-2"), "W.6-L1-20 C, W.6-L1-23 E / F"),
  ("RFI-25", "1/A2.04, 2/A0.02, A0.06", ["FW.4", "1HR FP"],
-  "FW.4-L4-19 (Level 4, Deck Bar 411 / corridor 412): the tag on 1/A2.04 prints 'FW.4 | 1' and 2/A0.02 shows the bar walls as 1HR FP, but A0.06 prints the FW family only with rating '--' (no FW.4-1 row). CODE: IBC 2018 §708 fire partitions (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001). What is the 1-HR assembly of this wall?",
+  "FW.4-L4-19 (Level 4, Deck Bar 411 / corridor 412): the tag on 1/A2.04 prints 'FW.4 | 1' and 2/A0.02 shows the bar walls as 1HR FP and A8.00 rates door 411.1 CONVERTIBLE DECK BAR '20 MIN' (the 1 HR fire partition door of IBC Table 716.1(2)): the 1 HR is printed; but A0.06 prints the FW family only with rating '--' (no FW.4-1 row). CODE: IBC 2018 §708 fire partitions (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001). What is the 1-HR assembly of this wall?",
   "BASE (larger option while the RFI is open): 1 HR - 1 layer 5/8\" Type X added on the bar face; both faces to the underside of the roof sheathing (2/A0.10)",
-  ("tag 'FW.4 | 1' + 2/A0.02 '1HR FP': bar face added, both faces to the roof sheathing (as loaded in the base)", "0"), ("A0.06 FW.4 row (rating '--'): corridor face only, to the roof framing line (DEDUCT ALTERNATE DA-3)", "DA-3"), "FW.4-L4-19 A / B"),
+  ("tag 'FW.4 | 1' + 2/A0.02 '1HR FP': bar face added, both faces to the roof sheathing (as loaded in the base)", "0"), ("IBC 2018 Section 708 / UL listed 1 HR wood-stud fire partition: 1 layer 5/8\" Type X each face (as loaded)", "0"), "FW.4-L4-19 A / B"),
  ("RFI-26", "1/A6.02, 1/A2.01, A0.06", ["FACP", "FI.2"],
   "FACP 125 (Level 1, east of Stair 2): on 1/A6.02 the north wall is tagged 'FI.2 | 0' (loaded) and the east wall 'XM.0.1 | 2' (no finish), but the south wall (grid 14 CMU) has no tag; 1/A2.01 draws on it the same furring line as the tagged FI.2-0 furring of the same grid-14 wall west of the stair (FI.2-L1-06). Does the FACP 125 south face get FI.2-0 furring (1 layer 5/8\" Type X over rigid insulation)?",
   "BASE (larger option while the RFI is open): FI.2-0 on the FACP 125 south face, 4.27 ft x 12'-0\"",
   ("1/A2.01 furring line: FI.2-0 on the south face (as loaded in the base)", "0"), ("no furring on the south face (DEDUCT ALTERNATE DA-5)", "DA-5"), "FI.2-L1-12"),
+ ("RFI-28", "5/A5.04, A0.06, A0.10, S1.02", ["FIRE BARRIER", "B.O. DECK"],
+  "L1 2 HR fire barriers (W.6-2): no head detail of a 2 HR fire barrier against the L2 floor is printed (the A0.06 wood head carries the board up to the line of structure with no dimension; 2/A0.10 extends fire barriers to the underside of the ROOF sheathing only; 3/A0.10 is a fire partition). The take-off height was 12'-0\" B.O. DECK (5/A5.04). CODE: IBC 2018 Section 707.5 - fire barriers extend from the floor to the underside of the floor or roof sheathing above. To what height does the board of the L1 fire barriers run?",
+  "LOADED (conservative, IBC 2018 Section 707.5): 13'-9 1/2\" to the underside of the L2 floor sheathing (14'-0\" - 1 1/2\" topping - 1/4\" mat - 3/4\" sheathing, S1.02)",
+  ("5/A5.04 12'-0\" B.O. DECK (DEDUCT ALTERNATE DA-7)", "DA-7"), ("IBC 2018 Section 707.5 to the underside of the floor sheathing (as loaded)", "0"), "L1 W.6-2 fire barriers"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
@@ -175,13 +179,15 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-23": ["ELECTRICAL AND IT ROOMS", "2HR FB", "2 HR", "ELEC / TELE", "ELEC", "TELE", "120", "W.6", "FIRE BARRIER", "RATED", "A0.01", "A7.50"],
  "RFI-24": ["ELECTRICAL AND IT ROOMS", "DATA", "118B", "2HR FB", "2 HR", "W.6.1", "W.6", "FIRE BARRIER", "RATED", "IT ROOM", "A0.01", "A7.50"],
  "RFI-25": ["FW.4", "1HR FP", "FIRE PARTITION", "DECK BAR", "411", "LOUNGE", "RATED", "A0.06", "A0.02", "A2.04", "FURRED", "1 HR"],
+ "RFI-28": ["FIRE BARRIER", "B.O. DECK", "UNDERSIDE", "SHEATHING", "LINE OF STRUCTURE", "707.5", "2 HR", "W.6", "HEAD", "RATED ASSEMBLY", "FLOOR SHEATHING", "TOPPING", "2HR FB", "FIRE BARRIERS", "CONTINUOUS"],
  "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR"],
  "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
 CERR = {
  "RFI-09": ("Printed (U-140): the small box south of lobby 317 is the SOUTH 2-HR SHAFT of 7/A9.03 '2-HOUR SHAFTWALL ASSEMBLY (W419, U497) MAX. HEIGHT 54'-0\"' (continuous from L2, 10/A9.03 HEAD OF SHAFT) - loaded as CH.6-2 on L3 like CH-L2-01..04 (shaftliner + 2 layers 5/8\" Type X + C-H studs + J-runner); the north shaft (8/A9.03) loaded on L3 and L4 too (auditoria U-138 #2 F3)", "7/A9.03, 8/A9.03, 10/A9.03, 1/A2.03"),
- "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row / tags 'CH.6 2' on A7.50 vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): option A of the type tag loaded - 6\" C-H studs - estimator standing rule R-ALC-10 (U-082) with note: verify 7/A9.03, 8/A9.03 and spec 09 21 16.23 (shaft wall assemblies, C-H studs) / UL U415; delta to 2 1/2\" C-H = 546 LF of lighter studs + 101 LF runner, board unchanged", "R-ALC-10 / U-082 + 09 21 16.23"),
+ "RFI-20": ("Resolved with the printed set: exposed side of each wrapped beam = d - 16.5\" (3/S3.02 2x nailer 1 1/2\" on the top flange under the 18\" FT-1 trusses of S1.03; d / bf of the S1.02 sizes, AISC), beam by beam on the 154.23 LF measured on 1/A3.01 = 296.78 SF Type C (was 399.46 SF with 1'-0\" per side); 2/A5.00 'MAINTAIN CONTINUITY OF MEMBRANE OVER STRUCTURAL STEEL FRAMING VIA GYPSUM BD. & RESILIENT CHANNEL'", "3/S3.02 + S1.02 + S1.03 + 2/A5.00"),
+ "RFI-07": ("Plan vs plan conflict (A0.06 CH.6-2 row vs 7/A9.03 and 8/A9.03 overall 4 3/4\"): the detail the bubble calls governs (U-115) - the L2-L4 north / south shafts are loaded with 2-1/2\" 20 GA C-H studs + 2-1/2\" J runner; the L1 / L4 chase tagged 'CH.6 | 2' on 1/A7.50 keeps 6\" C-H; spec 09 21 16.23 Studs 'Depth: As indicated on Drawings'; Review Item with the delta to 6\" (same LF)", "U-115 + 09 21 16.23"),
  "RFI-11": ("estimator precedent #15 (B&N) (B&N): cement board to the highest printed finish + 6\" = bath ceiling GYP-1 8'-6\" + 6\" = 9'-0\"; the rated Type X W.R. layers of the type stay full height (UL design, A0.06 GN 11) and the CBU is added over them at tile faces", "estimator precedent #15 (B&N) + UL design"),
  "RFI-12": ("Estimator standing rule R-ALC-01 / BE-CF11: 'metal suspension OR wood framing' = the metal option goes (our scope) - loaded as USG drywall suspension", "R-ALC-01"),
  "RFI-16": ("Code / listed design (U-025): UL U415 C-H shaft wall studs at 24\" o.c. - loaded", "UL U415"),
@@ -252,6 +258,7 @@ for rid, src, terms, q, loaded, A, B, items in R:
         ('A8.00', 'RFI-17'): "A8.00 door 128.1 WATER ENTRY '90 MIN' is in the east CMU wall of 128 (tag 'CM.8 | 2' on 1/A2.01, 2 HR masonry, no gypsum); it says nothing about the ceiling of 128",
         ('A8.00', 'RFI-20'): "A8.00 '90 MIN' of door 122.1 TRASH BINS (RETAIL) rates that door's wall, not the retail steel beam wraps",
         ('A8.00', 'RFI-22'): "A8.00 '20 MIN' of the FOOD AND BEVERAGE doors rates the door / corridor wall, not the bar ceiling",
+        ('A8.00', 'RFI-28'): "A8.00 general notes 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN' and 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' are the door-rating rules of the door schedule; they rate the doors in fire barriers, not how high the barrier wall runs (deck vs 12'-0\" on 5/A5.04), which is what RFI-28 asks",
         ('A8.00', 'RFI-25'): "A8.00 general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' is a door rule; the bar doors at FW.4-L4-19 print '20 MIN' / storefront, so it does not give the 1-HR assembly of the wall",
     }
     _tema = {'RFI-13': 'the MB-1 stud size / C-channel', 'RFI-15': 'the RS-1 board type', 'RFI-20': 'the depth of the wrapped beams',
@@ -277,6 +284,22 @@ for rid, src, terms, q, loaded, A, B, items in R:
                  "opciones": {"A": {"source": src, "texto": A[0], "delta": A[1]}, "B": {"cita": B[0], "texto": B[0], "delta": B[1]}, "C": "____"},
                  "barrido": bar, "img": f"img/rfi/{fn}",
                  "fuentes_revisadas": ["designation: tag / type id on the plan and A0.06 / A0.07 / A0.08 rows", "other row: closest schedule row of the same family", "standard rule: IBC / UL design / manufacturer cited in option B", f"detail: {src}"]})
+# rev11 (revisión B, H10 / U-042): la opción B cita CÓDIGO (IBC 2018 / GA-216 / ASTM C840 / UL) o declara que ningún código aplica
+CODIGO_B = {
+    'RFI-04': "CODE: IBC 2018 Section 708 / 707 rate walls by use, they do not assign a partition type - no code answers the type of an untagged wall",
+    'RFI-13': "CODE: UL BXUV.1516 (listed 2 HR membrane) - the listed design fixes stud size / C-channel; IBC 2018 Section 703.2 requires the tested design",
+    'RFI-15': "CODE: none applies - the RS-1 roof ceiling is not rated (A0.10); GA-216 / ASTM C1396 allow 5/8\" Type X or 1/2\" sag-resistant ceiling board",
+    'RFI-17': "CODE: none applies - IBC 2018 does not require a ceiling in a non-rated utility room; scope question for the architect",
+    'RFI-20': "CODE: UL L546 / IBC 2018 Section 711.2.4 (membrane continuity of the horizontal assembly over the beams); the code does not dimension the wrap",
+    'RFI-21': "CODE: none applies - scope question (canopy soffit by us or by the prefabricated canopy supplier)",
+    'RFI-22': "CODE: none applies - permit / scope question (A0.00 core and shell)",
+    'RFI-26': "CODE: IBC 2018 Section 707 - the 2 HR fire barrier is the CMU; the furring is a finish layer, the code does not require it",
+}
+for r in rfis:
+    cb = CODIGO_B.get(r['id'])
+    if cb and isinstance(r.get('opciones', {}).get('B'), dict) and 'CODE:' not in str(r['opciones']['B'].get('cita')):
+        r['opciones']['B']['cita'] = f"{r['opciones']['B']['cita']}; {cb}"
+        r['opciones']['B']['codigo'] = cb
 c['rfis'] = rfis
 json.dump(c, open(C, 'w'), indent=1)
 L = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGADO, U-048)", "",

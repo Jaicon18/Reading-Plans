@@ -123,7 +123,9 @@ IDX['FW.4-L4-19 B']['head_detail'] = '2/A0.10 to underside of roof sheathing'
 ext_corr = r2(e['length_ft'] * dep)
 cambios.append({'n': 4, 'que': 'FW.4-L4-19 1 HR (RFI-25)', 'sf': Val(r2(s4 + ext_corr), 'DERIVADO',
                 operacion=f"bar face {e['length_ft']} x {e['height_ft']} = {s4} (= {base_bar} at 8.9375 ft + {r2(s4 - base_bar)} head to sheathing) + corridor face head {e['length_ft']} x {dep} = {ext_corr}", unidad='SF').as_dict()})
-ded.append({'id': 'DA-3', 'rfi': 'RFI-25', 'texto': 'FW.4-L4-19 as FW.4-0 (A0.06 FW row, no rating): no bar face, corridor face to the roof framing line', 'delta_sf': -r2(s4 + ext_corr), 'material': '5/8" Type X'})
+# rev11 (revisión B, H4): A8.00 '411.1 CONVERTIBLE DECK BAR / 20 MIN' en la línea del muro 'FW.4 | 1' (1/A2.04): 20 MIN = puerta de
+# fire partition de 1 HR (IBC Table 716.1(2)) -> el 1 HR es lo impreso; DA-3 retirado, RFI-25 queda solo por la composición del 1 HR
+if False: ded.append({'id': 'DA-3', 'rfi': 'RFI-25', 'texto': 'FW.4-L4-19 as FW.4-0 (A0.06 FW row, no rating): no bar face, corridor face to the roof framing line', 'delta_sf': -r2(s4 + ext_corr), 'material': '5/8" Type X'})
 # ---------- 5. XW.6.6-2 de L4: no se carga
 cambios.append({'n': 5, 'que': "XW.6.6-2 (L4) interior face: NOT extended - 04/A9.05 'ROOF DETAIL - PITCHED LEVEL 4 ROOF' ends the interior board at the top plate / ceiling (heel space filled with spray foam); no new RFI",
                 'sf': Val(0, 'DERIVADO', operacion='04/A9.05 detail read: no extension -> 0 SF', unidad='SF').as_dict()})

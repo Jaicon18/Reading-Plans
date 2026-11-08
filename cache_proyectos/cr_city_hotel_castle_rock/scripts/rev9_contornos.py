@@ -124,14 +124,20 @@ for rid, k in K.items():
         m['qty'] = round(float(m['qty']) * f, 2)
         nota = (f"{'run' if u == 'LF' else 'contour'} measured in vectors on {str(k.get('nhoja')).split(' (')[0]} = {new} {u}"
                 + (f" (plan {k['area_cargar_sf']} SF x slope factor {k['factor_pendiente']})" if k.get('factor_pendiente') else "") + f"; previous quantity {old} {u}")
-        if u == 'LF':
-            op = re.sub(r"^\s*[\d.]+", f"{new}", str(m['op']), count=1)
+        if u == 'LF':     # rev11 (F4): se reemplaza el LF viejo donde esté (no el primer número: '2 lines x LF')
+            op = str(m['op']).replace(f"{old} LF", f"{new} LF", 1) if f"{old} LF" in str(m['op']) else re.sub(r"^\s*[\d.]+", f"{new}", str(m['op']), count=1)
             op = re.sub(r"=\s*[\d.,]+", f"= {m['qty']}", op, count=1)
         elif m is bd:
             op = f"{new} SF x {lay} layer(s) = {m['qty']}"
         else:
             op = f"{new} SF x {round(float(m['qty']) / new, 4)} = {m['qty']}"
         m['op'] = f"{op} | {nota}"
+    # rev11 (F4): los accesorios del mismo elemento (trim_items '<id> ...': corner bead, trim) se recalculan con el largo nuevo
+    if u == 'LF':
+        for t_ in c.get('trim_items') or []:
+            if str(t_.get('ref', '')).startswith(rid + ' ') and t_.get('lf'):
+                t_['lf'] = round(float(t_['lf']) * f, 2)
+                t_['op'] = f"{t_['lf']} LF soffit length x 1 edge = {t_['lf']} (run measured in vectors on {k.get('nhoja')}; previous quantity {old} LF)"
     nm += 1
 print(nm, 'misc reescalados a la medición')
 # CLG-L1-COFRES: NO se carga (CB_CR_R6_E1 / R80e.160 E1: el fondo del cofre = cara inferior del RATED ASSEMBLY 2/A7.31 = la membrana
@@ -155,12 +161,12 @@ if False and kc and not any(str(m['ref']).startswith('CLG-L1-COFRES ') for m in 
             c['misc_items'].append(dict(b, ref=f"CLG-L1-COFRES {fam}", qty=q, op=op, detail=det,
                                         source=src + (" | hanger wire not loaded: the coffer bottom sits at the underside of the lobby structure (2/A7.31, 7/A7.31)" if fam == 'board' else "")))
     print('CLG-L1-COFRES agregado', A, 'SF', per, 'LF')
-# DA-6 / RFI-27: si el FS-1 no sigue sobre el bath (GYP-1 dropped lo reemplaza): - suma de las cajas de bath medidas (L2 / L3)
-_b = round(sum(float(K[x['room']].get('bath_sf') or 0) for x in c.get('ceilings') or []
-               if x['room'] in K and x['room'][:2] in ('L2', 'L3') and x.get('assembly', {}).get('id') == 'FS-1'), 2)
-da = c.setdefault('deduct_alternates', [])
-if _b and not any(d.get('id') == 'DA-6' for d in da):
-    da.append({"id": "DA-6", "rfi": "RFI-27", "texto": "FS-1 stops at the bath walls of the L2 / L3 guest units (bath boxes measured at the wall faces)",
-               "delta_sf": -_b, "material": "5/8\" Type C + resilient channel"})
+# rev10 (auditoría U-138, E1): RFI-27 / DA-6 retirados - A0.08 FS-1 'LEVEL 2, 3, 4 / THROUGHOUT / L546' dibuja la membrana Type C
+# continua y debajo 'DROPPED CEILING IS NOT A COMPONENT OF THE RATED ASSEMBLY. REFER TO CEILING PLANS AND DETAILS FOR MATERIALS.'
+for x in c.get('ceilings') or []:
+    if x.get('contorno') and x['room'][:2] in ('L2', 'L3') and (x.get('assembly') or {}).get('id') == 'FS-1':
+        x['source'] = str(x['source']) + (" | [CONFIRMED] membrane continuous over the bath dropped GYP-1: A0.08 FS-1 detail (LEVEL 2, 3, 4 THROUGHOUT, L546) "
+                                          "draws the 5/8\" Type C ceiling with the dropped ceiling below it and the note 'DROPPED CEILING IS NOT A COMPONENT OF THE RATED ASSEMBLY'")
+c['deduct_alternates'] = [d for d in c.get('deduct_alternates') or [] if d.get('id') != 'DA-6']
 json.dump(c, open(CP, 'w'), indent=1)
 print(n, 'ceilings con contorno medido de', len(c.get('ceilings') or []))
