@@ -223,11 +223,11 @@ for w in c['existing_walls'] + (c.get('walls') or []):
         dsf += float(w['length_ft']) * (H_FB - 12.0) * int(w.get('faces') or 1) * int(w.get('layers') or 1)
         w['height_ft'] = H_FB; w['height_status'] = 'DERIVADO'
         w['height_source'] = ("DERIVADO: 14'-0\" L1-L2 (5/A5.04) - 1 1/2\" topping - 1/4\" mat - 3/4\" floor sheathing (S1.02) = 14.0 - 0.125 - 0.0208 - 0.0625 "
-                              "= 13.7917 ft: 2 HR fire barrier to the underside of the L2 floor sheathing (IBC 2018 Section 707.5; head not detailed, RFI-28 / DA-7)")
+                              "= 13.7917 ft: 2 HR fire barrier to the underside of the L2 floor sheathing (IBC 2018 Section 707.5; head not detailed in the set: the code resolves it, U-155)")
         w['source'] = re.sub(r"\| height: [^|]*", "", str(w['source'])) + (" | height: [DERIVED] 13'-9 1/2\" = 14'-0\" L1-L2 - 1 1/2\" topping - 1/4\" mat - 3/4\" sheathing (S1.02): "
-            "2 HR fire barrier continuous to the underside of the floor sheathing, IBC 2018 Section 707.5 - the head is not detailed in the set (RFI-28, DA-7: 12'-0\" B.O. DECK 5/A5.04)")
+            "2 HR fire barrier continuous to the underside of the floor sheathing, IBC 2018 Section 707.5 - the head is not detailed in the set, the code resolves it (U-155); the bottom of the L2 floor trusses is 14'-0\" - 2 1/2\" - 18\" = 11'-11 1/2\" (S1.03), the barrier continues to the sheathing")
 da = c.setdefault('deduct_alternates', [])
-if dsf and not any(d.get('id') == 'DA-7' for d in da):
+if False and dsf and not any(d.get('id') == 'DA-7' for d in da):   # rev12 U-155: IBC 707.5 resuelve -> sin RFI-28 / DA-7
     da.append({"id": "DA-7", "rfi": "RFI-28", "texto": "L1 2 HR fire barriers (W.6-2) ending at 12'-0\" B.O. DECK (5/A5.04) instead of the underside of the L2 floor sheathing", "delta_sf": -round(dsf, 2), "material": "5/8\" Type X"})
     log.append(('H11', 'DA-7', round(dsf, 2)))
 json.dump(c, open(CP, 'w'), indent=1)

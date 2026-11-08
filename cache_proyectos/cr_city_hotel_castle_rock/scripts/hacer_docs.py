@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev11 FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev12 FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_City_Hotel_markups_rev11.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_City_Hotel_markups_rev12.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -138,12 +138,12 @@ S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGA
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev11 FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev12 FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev11.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev12.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -208,6 +208,16 @@ _txt17 = ("17. **rev11 reemplaza a rev10** (revisiones independientes A y B de C
           "curtain 12/A9.03 en 6 ubicaciones; beam wraps viga por viga (d - 16.5\", RFI-20 cerrado); DA-3 retirado (puerta 411.1 20 MIN = 1 HR); "
           "fire barriers 2 HR de L1 al underside del floor sheathing (IBC 707.5, RFI-28 / DA-7); Review Items 112 y 118B (puertas sin rating).")
 G[2:2] = ["## CAMBIOS rev11 vs rev10 (revisa esto primero si ya viste rev10)", "", _txt17, ""]
+_txt18 = ("18. **rev12 reemplaza a rev11** (orden del usuario U-155, 8-nov: 'buscar hasta encontrar las respuestas en los planos; si no, usa los códigos del IBC y cita su referencia'): "
+          "cada RFI abierto y cada valor 'assumed' re-buscado en todo el set (code plans A0.00-A0.02, door schedule A8.00, notas, leyendas, detalles, specs) y, si no está impreso, "
+          "resuelto con el código citado. RFI-28 CERRADO por código: IBC 2018 Section 707.5 (fire barrier hasta el underside del floor sheathing, más allá del fondo de las trusses 11'-11 1/2\") - "
+          "se retira DA-7, el base no cambia (13'-9 1/2\"). RFI-25 CERRADO: el 1 HR está impreso (tag 'FW.4 | 1', 2/A0.02 '1HR FP', puerta 411.1 20 MIN) y el ensamble es IBC 2018 Section 708 / Table 721.1(2), delta 0. "
+          "ELEC 321 y demising sin tag: rating impreso en el code plan (A0.02 '1HR FP') y en la nota de A0.00 'CORRIDOR AND UNIT DEMISING WALLS CONSTRUCTED AS 1HR FIRE PARTITIONS' - mismas capas cargadas. "
+          "Los RFI que siguen abiertos no los resuelve ni el plano ni el código (alcance / tenant / conflicto plano contra plano). "
+          "Revisión dirigida de COORDINACIÓN: deltas de DA-1 (-171.84) / DA-2 (-414.03) / Review Items 112 (-205.50) / 118B (-159.98) recalculados con la altura actual 13.7917; puerta 120.1 = 5'-0\" x 8'-0\" (A8.00) vs 7'-11\" en 1/A7.50; "
+          "vigas de borde norte de Retail 124 (S1.02 W27X94 / W21X50 / W24X55, 68.80 LF) envueltas por la membrana FS-1: +92.71 SF Type C, +137.60 LF RC; sheathing C1177 en la proposal; cita del compound completa.")
+G[2:2] = ["## CAMBIOS rev12 vs rev11 (revisa esto primero si ya viste rev11)", "", _txt18, ""]
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt18)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt17)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt16)
 G[2:2] = ["## CAMBIOS rev7 vs rev6 (revisa esto primero si ya viste rev6)", "", _txt13, ""]

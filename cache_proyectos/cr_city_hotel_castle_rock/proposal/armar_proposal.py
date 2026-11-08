@@ -1,4 +1,4 @@
-"""CR City Hotel proposal (take-off rev3 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
+"""CR City Hotel proposal (take-off rev12 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
 (rule U-150): sheet PROPOSAL DW (JC Hunter letterhead) + PRICING (material FBM / labor and OH with the template's own rates,
 live formulas) + FBM_PRICES (every FBM product used: SKU, name, price, unit, stock, link, date, branch).
 Model: consumer_cellular_centennial/proposal_calc/armar_proposal.py (approved rev4 FINAL).
@@ -7,6 +7,7 @@ WOOD-framed project: wood studs / blocking / sheathing = Div. 06 EXCLUDED; faste
 Usage: armar_proposal.py <template.xlsx> <takeoff.xlsx> <canon.json> <fbm_dir> <out.xlsx>"""
 import datetime, glob, json, math, re, sys
 import openpyxl
+REVN = "rev12"
 from openpyxl.styles import Alignment, Font, PatternFill
 
 TPL, TK, CN, FBM, OUT = sys.argv[1:6]
@@ -60,6 +61,7 @@ K = {  # Material Summary rows of this project (prefix -> exact name resolved at
     "cem": '5/8" cement board', "rc": "Resilient channel", "cb": "METAL trim", "cj": "Control joint",
     "C": '5/8" gypsum board, Type C', "sl": '1" gypsum shaftliner', "ext": '5/8" exterior gypsum sheathing',
     "ch": 'C-H stud 6"', "jr": 'J-runner 6"', "mud": "Joint compound", "tape": "Joint tape",
+    "ch25": 'C-H stud 2-1/2"', "jr25": 'J-runner 2-1/2"', "cc": "Carrying channel",
 }
 KX = {k: key(v) for k, v in K.items()}
 board_all = sum(net(K[k]) for k in ("X", "WR", "C", "sl", "ext", "cem"))      # every board SF (template 'Drywall finish' D25)
@@ -76,24 +78,27 @@ rc_sf = round(sum(c["area_sf"] for c in can["ceilings"] if c.get("system") == "r
 # (section, description, quantity, unit, FBM code or None, units of the FBM price per quantity unit, note)
 # BASE_ products: FBM price = 10 ft piece ($/MLF / 100, precios-materiales-fbm) -> $/LF = price x 0.1
 L = [  # M = metal framing / ceiling suspension, D = drywall & finish Level 4
- ("M", '6" C-H stud 20 GA, CH.6-2 shaft walls @ 24" o.c. (A0.06, A7.50, UL U415)', buy(K["ch"]), "LF", "BASE_SW600CH-33", 0.1, "A0.06 CH, A7.50"),
- ("M", '6" J-runner 20 GA, shaft wall top / bottom (A0.06 CH)', buy(K["jr"]), "LF", "BASE_TJ600-33", 0.1, "A0.06 CH, A7.50"),
+ ("M", '6" C-H stud 20 GA, L1 / L4 chase CH.6 (1/A7.50) @ 24" o.c. (A0.06 CH, UL U415)', buy(K["ch"]), "LF", "BASE_SW600CH-33", 0.1, "A0.06 CH, 1/A7.50"),
+ ("M", '6" J-runner 20 GA, chase top / bottom (A0.06 CH)', buy(K["jr"]), "LF", "BASE_TJ600-33", 0.1, "A0.06 CH, 1/A7.50"),
+ ("M", '2-1/2" C-H stud 20 GA, L2-L4 north / south shafts @ 24" o.c. (7/A9.03, 8/A9.03 4 3/4" 2-HOUR SHAFTWALL W419 / U497)', buy(K["ch25"]), "LF", None, None, "7/A9.03, 8/A9.03 - 2-1/2\" C-H SKU to confirm at FBM"),
+ ("M", '2-1/2" J-runner 20 GA, L2-L4 shafts top / bottom (7/A9.03, 8/A9.03)', buy(K["jr25"]), "LF", None, None, "7/A9.03, 8/A9.03 - 2-1/2\" J-runner SKU to confirm at FBM"),
+ ("M", 'Carrying channel 1-1/2" cold-rolled, GYP-2 / MB-1 ceilings (A0.08 MB-1)', buy(K["cc"]), "LF", None, None, "A0.08 MB-1 - carrying channel SKU to confirm at FBM"),
  ("M", 'Ceiling / soffit track at corridor bands, lobby coffers, L4 stair soffit (7/A7.23, 2/A7.31, 11/A6.01)', buy(K["trk"]), "LF", None, None,
   "7/A7.23, 2/A7.31 - track size not printed on the soffit details"),
  ("M", 'Resilient channel 1/2" deep (RC-1, 12 ft), FS-1 / RS-1 ceilings @ 16" o.c. (A0.08, 09 22 16)', buy(K["rc"]), "LF", "RC125P-12", 1 / 12, "A0.08 FS-1 / RS-1"),
  ("M", 'USG drywall suspension main tee DGLW26 12 ft (GYP-1 / GYP-2)', pcs(K["main"]), "PCS", "CGUDGLW26", 1 / 16, "A3.01-A3.04, A7.23"),
  ("M", 'USG drywall suspension cross tee DGLW424 4 ft', pcs(K["cross"]), "PCS", "CGUDGLW424", 1 / 48, "A3.01-A3.04, A7.23"),
  ("M", 'USG angle molding DGWM24 12 ft', buy(K["ang"]), "LF", None, None, "A3.01-A3.04 - USG DGWM24 not listed at FBM"),
- ("M", 'Hanger wire 12 ga', buy(K["wire"]), "LF", None, None, "A7.23 - hanger wire not listed at FBM"),
+ ("M", 'Hanger wire 8 ga (0.162" dia., 09 22 16 2.2.C)', buy(K["wire"]), "LF", None, None, "09 22 16 2.2.C - hanger wire not listed at FBM"),
  ("D", '5/8" Type X gypsum board 4x12 (A0.06 / A0.07 / A0.08 per type and rating)', buy(K["X"]), "SF", "D58F12-U", 1 / 48, "A0.06, A0.07"),
  ("D", '5/8" Type X W.R. (moisture / mold resistant) gypsum board 4x12 (A0.06 GN 11 / 12)', buy(K["WR"]), "SF", "D58MM12-U", 1 / 48, "A0.06 GN 11"),
  ("D", '5/8" Type C gypsum board 4x12, FS-1 ceilings (A0.08, UL L546)', buy(K["C"]), "SF", "D58C12-GE", 1 / 48, "A0.08 FS-1"),
  ("D", '1" Type X shaftliner 2x12 (CH.6-2, UL U415)', buy(K["sl"]), "SF", "D1SLMM12-U", 1 / 24, "A0.06 CH, A9.03"),
- ("D", '5/8" Type X exterior gypsum sheathing 4x8 (A0.07 XW rows)', buy(K["ext"]), "SF", "D58GS08-GE", 1 / 32, "A0.07 XW"),
+ ("D", '5/8" Type X glass-mat gypsum sheathing 4x8, ASTM C1177 (06 16 00 2.5.B; A0.07 XW rows)', buy(K["ext"]), "SF", None, None, "06 16 00 2.5.B glass-mat C1177 - FBM D58GS08-GE is a paper-faced sheathing panel, glass-mat SKU to confirm"),
  ("D", '5/8" cement board (Durock) 4x8 at guest bath tile walls (A0.06 GN 13, 09 29 00 2.4)', buy(K["cem"]), "SF", "DCB5808-U", 1 / 32, "A0.06 GN 13"),
  ("D", 'Metal corner bead 10 ft (09 29 00 2.5)', buy(K["cb"]), "LF", "DWB10-60", 0.1, "A2.01-A2.04"),
  ("D", 'Control joint 093 zinc 10 ft (A0.06 GN 15, ASTM C840)', buy(K["cj"]), "LF", "93EXP", 0.1, "A0.06 GN 15"),
- ("D", 'All-purpose joint compound 3-1/2 gal box (template: 1 box per 200 SF of finished board)', math.ceil(board_fin / 200), "BOX", "APUB3.5", 1.0, "Level 4"),
+ ("D", 'All-purpose joint compound (Material Summary LB: Level 4 exposed + Level 1 concealed layers, 09 29 00 3.6.E)', buy(K["mud"]), "LB", None, None, "Material Summary row (U-150) - price per LB / box weight to confirm"),
  ("D", 'Paper joint tape 500 ft roll', buy(K["tape"]), "LF", "DWT500W", 1 / 500, "Level 4"),
 ]
 # ---------------------------------------------------------------------------------------------- labor (template rates)
@@ -139,13 +144,13 @@ B = wb.create_sheet("PRICING"); F = wb.create_sheet("FBM_PRICES")
 F.append(["FBM code", "Product (as listed on myfbm.com)", "Category", "Price (USD)", "Price unit", "Min. order", "Stock", "Lead",
           "Link", "Read on", "Branch"])
 used = []
-B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev3 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
+B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev12 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
 import os as _os
-_d = '/root/cr/work/etapas/DELTA_rev2_rev3.md'      # rev3: delta de cantidades contra rev2 (orden COORDINACIÓN 6-nov)
+_d = '/root/cr/work/etapas/DELTA_rev11_rev12.md'      # rev4: delta de cantidades contra rev3 (orden COORDINACIÓN 7-nov)
 if _os.path.exists(_d):
     _ls = [x for x in open(_d).read().split('\n') if x.startswith('| ') and not x.startswith('| Material') and not x.startswith('|---')]
-    B.append(["QUANTITY CHANGES vs rev2 (take-off): " + ("; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _ls) or "none")
-              + " - 5 XW.6.6-0 walls now carry their exterior gyp sheathing (A0.07 XW.6.6 family)"])
+    B.append([f"QUANTITY CHANGES vs the previous revision (take-off): " + ("; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _ls) or "none")
+              + " - see GUIA_DE_REVISION_DEL_ESTIMADOR.md for each change and its sheet"])
 B.append(["Material: FBM myfbm.com visitor price (guest branch CO-086 Englewood / Denver area), read " + str(fecha) +
           "; contractor account price may differ. Labor / OH / markups: the user's Proposal Template rates (source per row)."])
 B.append([])
@@ -257,7 +262,7 @@ put("C8", "CR CITY HOTEL (new 4-story hotel, Type IIIB, wood framed)"); put("G8"
 put("C9", "PROJECT ADDRESS:"); put("G9", "DATE OF PLANS:")
 put("C10", "415 PERRY STREET, CASTLE ROCK, CO 80104"); put("G10", "Arch. / Struct. 04-22-2026 (Issued for Permit); MEP 06-01-2026")
 put("C11", "DATE OF PROPOSAL:"); put("G11", "ADDENDUM:")
-P["C12"].value = datetime.datetime(2026, 11, 6); P["C12"].number_format = "mm-dd-yyyy"
+P["C12"].value = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0); P["C12"].number_format = "mm-dd-yyyy"
 put("G12", "None reviewed [TO BE CONFIRMED]")
 put("C13", "PHONE NUMBER:"); put("G13", "E-MAIL:")
 put("C14", TBC); put("G14", TBC)
@@ -266,7 +271,7 @@ put("C16", "We propose to supply the material, labor, and equipment necessary to
            "and the scope listed below.")
 put("C17", "(Please take special note of the scope description; we are not required to perform any items or tasks not specifically listed)")
 put("C19", "1.-"); put("D19", "Division of work: DRYWALL & FINISH LEVEL 4, C-H SHAFT WALLS, CEILING SUSPENSION.", bold=True)
-inc = ["INCLUDED (quantities from the take-off rev3 FINAL: net and purchase = net + waste, with their sheets):"]
+inc = ["INCLUDED (quantities from the take-off rev12 FINAL: net and purchase = net + waste, with their sheets):"]
 for r in ms:
     if (r[2] or 0) > 0:
         pu = r[5] if isinstance(r[5], (int, float)) else r[2]
@@ -279,11 +284,12 @@ for rr in range(21, 44):                     # C21 spans the template rows 21-43
     P.row_dimensions[rr].height = max(15, 12.5 * nlines(inc, 140) / 23 + 1)
 put("C44", "1a. Gypsum board on the WOOD-framed walls (framing by others, Div. 06): 5/8\" Type X per face and layers per type and "
            "rating (A0.06, A0.07, UL U379 / U301 / U341 / V337), 5/8\" Type X W.R. at toilet / shower / janitor faces (A0.06 GN 11 / 12), "
-           "5/8\" cement board at guest bath tile walls (GN 13), 5/8\" Type X exterior gypsum sheathing per A0.07 XW rows.")
+           "5/8\" cement board at guest bath tile walls (GN 13), 5/8\" Type X glass-mat exterior gypsum sheathing, ASTM C1177 (06 16 00 2.5.B), per A0.07 XW rows.")
 put("C45", "1b. Ceilings: FS-1 5/8\" Type C on resilient channel (A0.08, UL L546), RS-1 5/8\" Type X on channel under the roof, "
            "GYP-1 / GYP-2 dropped ceilings on USG drywall suspension (main tee DGLW26, cross tee DGLW424, angle DGWM24, hanger wire), "
            "corridor bands, lobby coffers and stair soffit with ceiling / soffit track (7/A7.23, 2/A7.31, 11/A6.01).")
-put("C46", "1c. C-H shaft walls CH.6-2 (A0.06, A7.50, A9.03, UL U415): 6\" 20 GA C-H studs @ 24\" o.c., 6\" 20 GA J-runner, "
+put("C46", "1c. C-H shaft walls: L2-L4 north / south shafts 2-1/2\" 20 GA C-H studs + 2-1/2\" J-runner (7/A9.03, 8/A9.03 4 3/4\" "
+           "2-HOUR SHAFTWALL W419 / U497); L1 / L4 chase 6\" 20 GA C-H + 6\" J-runner (CH.6, 1/A7.50); studs @ 24\" o.c. to the liner height; "
            "1\" Type X shaftliner + 2 layers 5/8\" Type X.")
 put("C47", "1d. Metal corner bead (09 29 00 2.5), control joints (A0.06 GN 15, ASTM C840), joint tape and compound, Level 4 finish.")
 for rr in (44, 45, 46, 47):
@@ -299,19 +305,30 @@ for r in scope:
         why = re.sub(r"^.*?EXCLUDED[:\s-]*", "", str(r[3] or ""))
         ex.append(f"• {n}: {why}")
 ex += ["• Gypsum board & finish at the NON-rated retail-side faces of Retail 124 (A2.01 note 'BY FUTURE TENANT', RFI-05); "
-       "L1 retail steel beam wraps by future tenant",
+       "(the L1 retail steel beam wraps of the rated FS-1 membrane ARE included, RFI-20)",
        "• Area 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' (A2.01, RFI-06) and the existing historic building",
        "• Screws, anchors, pins and power-driven fasteners (estimator standing order U-053)",
-       "• Level 5 finish, FRP, access panels (none scheduled for our trade)",
+       "• Level 5 finish in the base (Level 4 per 09 29 00 3.6.E.4; see ADD ALTERNATE AA-1), FRP, access panels (none scheduled for our trade)",
        "• Bonds, permits and fees; temporary utilities, dumpster, prevailing wages, shop drawings",
        "• Addenda not reviewed in this pricing; anything not specifically listed in the INCLUDED scope"]
+_da = [d for d in (can.get("deduct_alternates") or []) if d.get('delta_sf')]
+_cl0 = [d for d in (can.get("deduct_alternates") or []) if not d.get('delta_sf')]
+_aa = can.get("add_alternates") or []
+if _cl0:   # P5: un alterno de 0 SF no es deduct: clarificación
+    ex += ["", "CLARIFICATIONS:"] + [f"• {d['id']}{' (' + d['rfi'] + ')' if d.get('rfi') else ''}: {d['texto']} - not in the base, no price effect" for d in _cl0]
+if _aa:   # F9: add alternates
+    ex += ["", "ADD ALTERNATES:"] + [f"• {d['id']}: {d['texto']} - ADD {d['delta_sf']:,.2f} SF {d['material']}" for d in _aa]
+if _da:   # R80e.38-4: base = larger option while the RFI is open; the other option is a DEDUCT ALTERNATE with its delta
+    ex += ["", "DEDUCT ALTERNATES (the base above carries the larger option while the RFI is open):"]
+    ex += [f"• {d['id']}{' (' + d['rfi'] + ')' if d.get('rfi') else ''}: {d['texto']} - DEDUCT {abs(d['delta_sf']):,.2f} SF {d['material']}" if d['delta_sf']
+           else f"• {d['id']}: {d['texto']} - 0 SF (not in base, nothing to deduct)" for d in _da]
 for m in [m for m in list(P.merged_cells.ranges) if 49 <= m.min_row <= 56]:
     P.unmerge_cells(str(m))
 P.merge_cells("C49:J56")
 put("C49", "\n".join(ex), size=9)
 for rr in range(49, 57):
     P.row_dimensions[rr].height = max(15, 12.5 * nlines(ex, 140) / 8 + 2)
-put("C57", "NOTE: PROPOSAL HOLDS GOOD ONLY FOR THE ITEMS AND QUANTITIES LISTED ABOVE (TAKE-OFF REV1 FINAL)")
+put("C57", "NOTE: PROPOSAL HOLDS GOOD ONLY FOR THE ITEMS AND QUANTITIES LISTED ABOVE (TAKE-OFF " + REVN.upper() + " FINAL)")
 put("C59", "3.-"); put("D59", "Work Standard:", bold=True)
 put("C60", "All work is to be completed in a workmanlike manner according to standard practices. Workers will remain on the job "
            "until completion of the project. The worksite will be cleaned daily and upon project completion. All agreements are "
@@ -358,13 +375,13 @@ put(f"C{r}", "CLARIFICATIONS (decisions applied in the quantities):", bold=True)
 cl = ["Wood-framed building: all W / FW / DW / FI / XW types are wood studs (A0.06, A0.07) - board only; framing, blocking, FRT plywood by Div. 06.",
       "RFI-10: WOOD / FURRED WOOD / DBL. WOOD sections print 5/8\" TYPE X GYP BD. TYP. - Type X loaded on every interior face (09 29 00 2.3 A).",
       "RFI-11: cement board at guest bath tile walls to 9'-0\" (bath ceiling 8'-6\" + 6\"); rated Type X W.R. layers stay full height.",
-      "RFI-07: shaft walls carried as the A0.06 CH.6-2 row (6\" C-H studs) - verify 7/A9.03, 8/A9.03 (4 3/4\" overall assembly).",
+      "RFI-07: L2-L4 shaft walls carried with 2-1/2\" C-H per 7/A9.03 / 8/A9.03 (4 3/4\" assembly); A0.06 CH.6-2 prints 6\" - same LF in 6\" if required.",
       "RFI-16 / RFI-14: C-H studs @ 24\" o.c. (UL U415); resilient channel @ 16\" o.c. (UL L546, 'spacing per assembly').",
       "RFI-12: GYP-1 'metal suspension OR wood framing' - metal option carried (USG drywall suspension).",
       "RS-1 ceilings under the roof: board type not printed - 5/8\" Type X carried; channel carried in the resilient channel row.",
       "RFI-05: retail faces of RATED assemblies stay loaded (1,033 SF); non-rated retail faces excluded (532.5 SF, by future tenant).",
       "RFI-18: L4 corridor 412 cove carried along the corridor walls (typical 7/A7.23); L1 lobby ceiling carried at 11'-0\", no step face.",
-      "Material prices: FBM (myfbm.com) list prices read 11-05-2026; exterior sheathing priced as 5/8\" Type X gypsum sheathing 4x8."]
+      "Material prices: FBM (myfbm.com) list prices read 11-05-2026; exterior sheathing = 5/8\" Type X glass-mat gypsum sheathing, ASTM C1177 (06 16 00 2.5.B); FBM glass-mat SKU [PRICE TO CONFIRM]."]
 for x in cl:
     r += 1
     P.merge_cells(f"C{r}:J{r}")
