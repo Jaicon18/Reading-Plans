@@ -108,6 +108,26 @@ R = [
   "BAR 107 ceiling: 1/A7.31 draws the bar field (WS-1 oval inside it) and A5.04 prints 'BAR SUSPENDED GYP CEILING' / 'CLG 11'-0\"', but A0.00 says 'THE BAR, DINING, AND KITCHEN AREAS ARE BEING PERMITTED AS CORE AND SHELL SPACES'. Is the BAR 107 suspended gypsum ceiling in this bid or in the future F&B tenant improvement?",
   "LOADED (R-ALC-10: the specific drawing governs the general note): 121.6 SF 5/8\" gyp board on drywall suspension at 11'-0\" (BAR 107 field); the 40.2 SF niche between the bar and toilets 110/111 (niche) is lobby-side and stays in either case",
   ("ceiling in this bid (as loaded)", "0"), ("bar is core & shell (F&B tenant)", "-121.6 SF board, -30.4 LF main tee, -91.2 LF cross tee, -44.1 LF angle, -8 hangers"), "CLG-L1-BAR107"),
+ ("RFI-23", "A0.00, 1/A0.01, 1/A7.50, 1/A2.01", ["ELECTRICAL AND IT ROOMS", "2HR FB"],
+  "ELEC/TELE 120 (Level 1): A0.00 Code Summary lists 'ELECTRICAL AND IT ROOMS - 2 HR' and 1/A0.01 tags the room '2HR FB' (no wall drawn with the 2 HR fire-barrier line), but 1/A7.50 rates only the north wall ('W.6 | 2'); the west and south tags 'W.6 |  ' have an EMPTY rating box and the east wall is part of W.6-L1-23 (W.6-0). CODE: IBC 2018 §707.1 / §707.5 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001) - a fire barrier encloses the room and is continuous; IBC 2018 Table 509 does not rate electrical / IT rooms (it refers to NFPA 70), so the 2 HR comes from the drawings (A0.00 / 1/A0.01). Which walls of 120 are the 2 HR fire barrier?",
+  "BASE (larger option while the RFI is open): all 4 walls 2 HR - W.6-L1-24 and W.6-L1-25 as W.6-2, east wall segment of W.6-L1-23 with 2 layers on the ELEC face and on the Retail face",
+  ("A0.00 + 1/A0.01 '2HR FB': all 4 walls 2 HR (as loaded in the base)", "0"), ("1/A7.50 tags: W / S / E rated 0, N 2 HR (DEDUCT ALTERNATE DA-1)", "DA-1"), "W.6-L1-24, W.6-L1-25, W.6-L1-23 C / D"),
+ ("RFI-24", "A0.00, 1/A7.50", ["ELECTRICAL AND IT ROOMS", "DATA"],
+  "DATA 118B (Level 1, IT room): A0.00 lists 'ELECTRICAL AND IT ROOMS - 2 HR'; on 1/A7.50 the N wall ('W.6.1 | 2') and S wall ('W.6 | 2') are 2 HR, but the W wall prints 'W.6.1 | 0' and the E wall is W.6-L1-23 (W.6-0); 1/A0.01 does not tag 118B '2HR FB'. CODE: IBC 2018 §707.1 / §707.5 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001) - a fire barrier encloses the room; Table 509 does not rate IT rooms, the 2 HR comes from A0.00. Is DATA 118B a 2 HR room?",
+  "BASE (larger option while the RFI is open): 118B 2 HR on all walls - W wall segment both faces +1 layer, E wall segment Data face +1 layer and Retail face 2 layers",
+  ("A0.00 'IT ROOMS 2 HR': 118B enclosed 2 HR (as loaded in the base)", "0"), ("1/A7.50 tags: W 'W.6.1 | 0' and E W.6-0 (DEDUCT ALTERNATE DA-2)", "DA-2"), "W.6-L1-20 C, W.6-L1-23 E / F"),
+ ("RFI-25", "1/A2.04, 2/A0.02, A0.06", ["FW.4", "1HR FP"],
+  "FW.4-L4-19 (Level 4, Deck Bar 411 / corridor 412): the tag on 1/A2.04 prints 'FW.4 | 1' and 2/A0.02 shows the bar walls as 1HR FP, but A0.06 prints the FW family only with rating '--' (no FW.4-1 row). CODE: IBC 2018 §708 fire partitions (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001). What is the 1-HR assembly of this wall?",
+  "BASE (larger option while the RFI is open): 1 HR - 1 layer 5/8\" Type X added on the bar face; both faces to the underside of the roof sheathing (2/A0.10)",
+  ("tag 'FW.4 | 1' + 2/A0.02 '1HR FP': bar face added, both faces to the roof sheathing (as loaded in the base)", "0"), ("A0.06 FW.4 row (rating '--'): corridor face only, to the roof framing line (DEDUCT ALTERNATE DA-3)", "DA-3"), "FW.4-L4-19 A / B"),
+ ("RFI-26", "1/A6.02, 1/A2.01, A0.06", ["FACP", "FI.2"],
+  "FACP 125 (Level 1, east of Stair 2): on 1/A6.02 the north wall is tagged 'FI.2 | 0' (loaded) and the east wall 'XM.0.1 | 2' (no finish), but the south wall (grid 14 CMU) has no tag; 1/A2.01 draws on it the same furring line as the tagged FI.2-0 furring of the same grid-14 wall west of the stair (FI.2-L1-06). Does the FACP 125 south face get FI.2-0 furring (1 layer 5/8\" Type X over rigid insulation)?",
+  "BASE (larger option while the RFI is open): FI.2-0 on the FACP 125 south face, 4.27 ft x 12'-0\"",
+  ("1/A2.01 furring line: FI.2-0 on the south face (as loaded in the base)", "0"), ("no furring on the south face (DEDUCT ALTERNATE DA-5)", "DA-5"), "FI.2-L1-12"),
+ ("RFI-27", "A0.08 FS-1, A7.00 / A7.05 / A7.09 unit RCPs (GN 1), A2.02 / A2.03", ["FS-1", "THROUGHOUT"],
+  "Guest units L2 / L3: the bath has a GYP-1 dropped ceiling at 8'-6\" (unit RCP tag) and A7.00 unit note 1 says untagged ceilings are the bottom of the floor/ceiling assembly. Does the rated FS-1 membrane (A0.08 FS-1, UL L546) continue above the bath dropped ceiling, or does the GYP-1 replace it there?",
+  "BASE (larger option while the RFI is open): FS-1 continuous over the whole unit = contour measured at the wall faces (bath included); the GYP-1 bath ceiling is its own row",
+  ("A0.08 FS-1 rated floor membrane (as loaded in the base)", "0"), ("FS-1 stops at the bath walls (DEDUCT ALTERNATE DA-6)", "DA-6"), "L2 / L3 guest-unit FS-1 rows"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
@@ -156,6 +176,11 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-15": ["RS-1", "REFLECTED CEILING", "ROOF", "CEILING", "HAT", "CHANNEL", "TYPE X", "GYP BD", "8' - 11", "R-38", "BATT", "RS-2"],
  "RFI-16": ["C-H", "24\"", "O.C.", "SHAFTWALL", "U415", "STUD", "SPACING", "SHAFT WALL LINER", "J RUNNER", "20GA", "CH.6", "09 21 16"],
  "RFI-22": ["BAR SUSPENDED", "CORE AND SHELL", "BAR 107", "SUSPENDED GYP", "CLG 11", "F&B", "FOOD AND BEVERAGE", "TENANT IMPROVEMENT", "NOT IN SCOPE", "DINING", "KITCHEN", "A7.31"],
+ "RFI-23": ["ELECTRICAL AND IT ROOMS", "2HR FB", "2 HR", "ELEC / TELE", "ELEC", "TELE", "120", "W.6", "FIRE BARRIER", "RATED", "A0.01", "A7.50"],
+ "RFI-24": ["ELECTRICAL AND IT ROOMS", "DATA", "118B", "2HR FB", "2 HR", "W.6.1", "W.6", "FIRE BARRIER", "RATED", "IT ROOM", "A0.01", "A7.50"],
+ "RFI-25": ["FW.4", "1HR FP", "FIRE PARTITION", "DECK BAR", "411", "LOUNGE", "RATED", "A0.06", "A0.02", "A2.04", "FURRED", "1 HR"],
+ "RFI-27": ["FS-1", "THROUGHOUT", "GYP-1", "8' - 6\"", "UNLESS OTHERWISE INDICATED BY A CEILING TAG", "FLOOR/CEILING", "L546"],
+ "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR"],
  "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
@@ -176,6 +201,11 @@ CERR = {
  "RFI-19": ("The plan resolves it (U-140): outside corners of ALL floors counted by program from the wall geometry at the printed scale (L junctions x 1 + free wall ends x 2, door jambs at printed door tags excluded) x wall height - trim_items CB-<floor>-<sheet>, images 4_canon/img/cb", "09 29 00 3.x + ASTM C840"),
  "RFI-14": ("estimator precedent (O'Reilly #5): drawn resilient channel is carried; spacing per ASTM C754 / UL design at 16\" o.c. (A0.08 FS-1 / RS-1 'spacing per assembly')", "estimator precedent (O'Reilly #5) + ASTM C754"),
 }
+_DA = {d['id']: d for d in c.get('deduct_alternates') or []}
+def _da(x):
+    d = _DA.get(x)
+    return f"{d['delta_sf']} SF {d['material']} (deduct alternate {x}, the base carries the larger option while the RFI is open)" if d else x
+R = [(rid, src, terms, q, loaded, A, (B[0], _da(B[1])), items) for rid, src, terms, q, loaded, A, B, items in R]
 rfis = []
 for rid, src, terms, q, loaded, A, B, items in R:
     terms = list(dict.fromkeys(terms + SIN.get(rid, [])))

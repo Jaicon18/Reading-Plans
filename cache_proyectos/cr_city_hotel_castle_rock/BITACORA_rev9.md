@@ -1,0 +1,13 @@
+# BITÁCORA rev9 — CR City Hotel
+- 2026-11-07 16:00 PST: COORDINACIÓN pide rev9 = contorno real de los 44 polígonos de cielos + 30 candidatos de A2.01.
+- 16:07: rev9_facp.py en la cadena (FACP 125: FI.2-L1-11 / FI.2-L1-12, RFI-26, DA-5). CHAIN-OK; imágenes de los dos muros revisadas.
+- 16:20: medición de 202 en vectores. El SF impreso excluye el bath; en 212 lo incluye. Decisión: cantidad = contorno medido, impreso = chequeo.
+- 16:25: 3 agentes miden con el mismo brief (L2L3, L4L1, MISC). Contornos a caras e imagen por cuarto; sin solapes entre polígonos (verificado).
+- 16:40: ajustes. 301-304 se cortan en la franja RS-6 (x 1007.35). 217 en la cara del muro del ascensor (66.45 vs 66 impreso).
+- 16:45: MISC pasada 2. Huecos en keyhole (cofres, Stair 1, óvalo WS-1, paneles WS-1 en vectores). CLG-L1-COFRES nuevo. CLG-L2-64 planta × factor de pendiente 1.165.
+- 16:51: CHAIN-OK. Delta: Type C +2,202 SF, Type X +917 SF, RC +1,662 LF.
+- Mensaje a COORDINACIÓN (00:23 UTC): estado de (a) y (b).
+- 17:05: compuerta ROJA, 12 FAIL. CB_CR_R6_E1: los fondos de los cofres son la membrana FS-1 (rev6 E1), así que CLG-L1-COFRES no se carga. También corregidos: textos en español, cita RFI-14, factor de pendiente en la vista y en la auditoría, piezas unidas en un anillo (214/314/317), CLG-L3-103 con el contorno de 322.
+- 17:40: el agente MISC midió los WS-1 de 412 en vectores; field 1,091.02 SF.
+- 18:00: el delta del angle molding dio +1,743 LF: los baths tomaban el perímetro de la unidad. Corregido (+17.15 LF final) y registrado como R80e.163.6.
+- 18:15: COORDINACIÓN (check-in 02:16 UTC): seguir sin parar hasta entregar y publicar.

@@ -16,7 +16,13 @@ rows = [("0", "Arranque (órdenes U-001..U-150, skill v81cf52) + descarga Buildi
         ("rev2-d", "Subida rev2 (2,093 archivos) + aviso REPLACED BY rev2 en rev1 + listado de Drive", "2026-11-06 04:25", "2026-11-06 07:17", "SUBIDA_OK.json rev2"),
         ("rev2-e", "BE-CR28 (orden de subida, Auditoria.zip) + recheck v81cf57 / BE-CR29 (chequeos en vacío) -> hallazgo XW.6.6-0", "2026-11-06 07:17", "2026-11-06 07:38", "ENTREGA_OK_recheck_v81cf57.json"),
         ("rev3", "rev3: sheathing XW.6.6-0 + barrido de ratings + citas coves + compuerta VERDE + skill v81cf57 + subida (Auditoria.zip) + aviso en rev2 + listado", "2026-11-06 07:38", "2026-11-06 07:57", "ENTREGA_OK.json / SUBIDA_OK.json rev3"),
-        ("rev4", "rev4 (orden COORDINACIÓN 16:56 PST: revisión de RCP + walls -0 hacia Retail 124): medición de F1-F5 / D1-D6 en vectores, barrido de los 35 tags GYP de RCP (BE-CR30, skill v81cf61), cadena + compuerta VERDE + subida + aviso en rev3", "2026-11-06 16:56", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev4")]
+        ("rev4", "rev4 (orden COORDINACIÓN 16:56 PST: revisión de RCP + walls -0 hacia Retail 124): medición de F1-F5 / D1-D6 en vectores, barrido de los 35 tags GYP de RCP (BE-CR30, skill v81cf61), cadena + compuerta VERDE + subida + aviso en rev3", "2026-11-06 16:56", "2026-11-06 17:37", "ENTREGA_OK.json / SUBIDA_OK.json rev4"),
+        ("rev4-b", "Revisión de código post-rev4 (6 puntos, verif_codigo.py, RFIs) + reglas del skill", "2026-11-06 20:54", "2026-11-06 21:26", "Revision de codigo 2026-11-06 (file times: arch.pdf download 20:55, RESUMEN v2 21:26)"),
+        ("rev5", "rev5: cambios de código en el base (L4 a roof sheathing, 120 / 118B 2 HR, FW.4-L4-19 1 HR) + deduct alternates + RFI-23/24/25 + compuerta + subida", "2026-11-06 21:35", "2026-11-06 22:28", "ENTREGA_OK.json / SUBIDA_OK.json rev5"),
+        ("rev6", "rev6: auditoría COORDINACIÓN (E1 coffers del lobby, E2 cement board a la cara del wall, E3 CB_BE_CF10 lee specs, O1 angle = perímetro real, O2 cove L2 4 1/2\") + compuerta + subida", "2026-11-07 06:34", "2026-11-07 07:20", "ENTREGA_OK.json / SUBIDA_OK.json rev6"),
+        ("rev7", "rev7: markup de todo cielo / soffit cuantificado (73 renglones de misc_items) + compuerta CE_RCP_COMPLETO + skill v81cf63", "2026-11-07 14:33", "2026-11-07 15:05", "ENTREGA_OK.json / SUBIDA_OK.json rev7"),
+        ("rev8", "rev8: revisión de walls (W.4-L4-21, W.6-L1-32 nuevo, markups a tramos medidos, tags, vanos A7) + CLG 0'-0\" + compuertas CE_MARKUP_EN_WALL / CR-R8-C", "2026-11-07 15:10", "2026-11-07 16:00", "ENTREGA_OK.json / SUBIDA_OK.json rev8"),
+        ("rev9", "rev9: FACP 125 + contorno real de todos los cielos (52 ceilings + 22 misc medidos en vectores) + RFI-27 / DA-6 + compuerta CE_CONTORNO_REAL", "2026-11-07 16:00", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev9")]
 L = ["# CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)", "",
      "Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.", "",
      "| # | Paso | Inicio | Fin | Duración | Evidencia |", "|---|---|---|---|---|---|"]
@@ -25,5 +31,5 @@ for r in rows:
     d = int((F(r[3]) - F(r[2])).total_seconds() // 60); tot += d
     L.append(f"| {r[0]} | {r[1]} | {r[2][5:]} PST | {r[3][5:]} PST | {d} min | {r[4]} |")
 r1 = sum(int((F(r[3]) - F(r[2])).total_seconds() // 60) for r in rows if not r[0].startswith('rev'))
-L.append(f"| **TOTAL** | **rev1 {r1} min ({r1 // 60} h {r1 % 60:02d}) + rev2/rev3/rev4 {tot - r1} min ({(tot - r1) // 60} h {(tot - r1) % 60:02d})** | **11-05 11:16 PST** | **{fin[5:]} PST** | **{tot} min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |")
+L.append(f"| **TOTAL** | **rev1 {r1} min ({r1 // 60} h {r1 % 60:02d}) + rev2-rev8 {tot - r1} min ({(tot - r1) // 60} h {(tot - r1) % 60:02d})** | **11-05 11:16 PST** | **{fin[5:]} PST** | **{tot} min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |")
 open('/root/cr/work/TIEMPOS.md', 'w').write('\n'.join(L) + '\n'); print(L[-1])

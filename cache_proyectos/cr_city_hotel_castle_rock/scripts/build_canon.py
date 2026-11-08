@@ -181,7 +181,7 @@ def main():
                              "assembly": {"id": 'FS-1' if k == 'FS-1' else 'RS-1',
                                           "source": "A0.08 FS-1 (5/8\" TYPE C GYP BD CEILING, RESILIENT CHANNELS 'SPACING PER ASSEMBLY', UL L546)" if k == 'FS-1'
                                           else "A0.08 RS-1 (ceiling 'RE: REFLECTED CEILING PLANS', board on channel under wood framing drawn) - board type not printed: 5/8\" Type X loaded (RFI-CR-RS1)"},
-                             "rc_oc_in": {"value": 16, "source": "UL L546 / RS-1 (spacing 'per assembly', not printed): 16 in. o.c. loaded (RFI-CR-RC, alt 12 in. o.c.)"},
+                             "rc_oc_in": {"value": 16, "source": "UL L546 / RS-1 (spacing 'per assembly', not printed): 16 in. o.c. loaded (RFI-14, alt 12 in. o.c.)"},
                              "layers": {"value": 1, "source": "A0.08 " + ('FS-1 1 layer' if k == 'FS-1' else 'RS-1 1 layer drawn')},
                              "detail": ('4/A5.05' if k == 'FS-1' else '1/A5.06'),
                              "source": f"A0.08 / RCP {RCP.get(fl, '')}: {src}", "floor": fl, "img": c.get('img'), "height_ft": c.get('height_ft')})

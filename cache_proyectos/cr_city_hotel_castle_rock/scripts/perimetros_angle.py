@@ -96,6 +96,15 @@ MANUAL = {
     "CLG-L4-118": ("A2.04", [(683.5, 784.0, 1143.4, 1221.7)], 94.0, "MEN 418 (stall 418.2 apart)"),
     "CLG-L4-119": ("A2.04", [(784.4, 797.0, 1142.4, 1224.0)], 11.0, "ELEC 421 (door 421.1)"),
 }
+import glob as _gl, math
+KM = {}
+for _f in sorted(_gl.glob('/root/cr/work/etapas/4_canon/rev9/contornos_*.json')):
+    for _k, _v in json.load(open(_f)).items():
+        KM.setdefault(_k, {}).update(_v)
+for _v in KM.values():   # N/HOJA limpia (la primera cita N/HOJA del texto del medidor)
+    _m = re.search(r"\b\d{1,2}/A\d\.\d\d\b", str(_v.get('nhoja') or ''))
+    _v['nhoja'] = _m.group(0) if _m else _v.get('sheet')
+
 board = {x['ref'][:-6]: x for x in c['misc_items'] if x.get('ref', '').startswith('CLG') and x['ref'].endswith(' board')}
 LOG, FALLA = [], []
 for x in c['misc_items']:
@@ -111,6 +120,25 @@ for x in c['misc_items']:
         rects = [tuple(float(v) for v in mL.groups())]
     rec = {"ref": ref, "antes": x['qty'], "op_antes": x['op']}
     de_fs1 = False
+    # rev9: contorno MEDIDO (anillo exterior a caras de los walls; los huecos WS-1 / shaft llevan trim, no wall angle)
+    _k = KM.get(ref)
+    _pp = None
+    if _k:
+        _pp = ([_k['polygon']] if _k.get('polygon') else _k.get('polygons_final') or _k.get('polygons')); _sh = _k['sheet']
+    elif not RX.findall(src) and not re.search(r"x(\d+\.?\d*)-(\d+\.?\d*), vertical coord", src) and ref not in MANUAL:
+        # solo la fila que se dibujaba con la entrada FS-1 del MISMO cuarto (no un bath / closet dentro de la unidad)
+        _nums = re.findall(r"\b([1-4]\d\d)\b", src.split('|')[0]); _fl = ref.split('-')[1]
+        for cx in c.get('ceilings') or []:
+            if (cx.get('contorno_polygon') and cx.get('floor', cx['room'][:2]) == _fl and _nums and re.search(rf"\b{_nums[0]}\b", cx['room'])
+                    and not re.search(r"(?i)\b(bath|shower|toilet|closet)\b", src.split('|')[0])):
+                _P = cx['contorno_polygon']; _pp = [_P] if isinstance(_P[0][0], (int, float)) else _P; _sh = cx['contorno']['sheet']; break
+    if _pp:
+        _s = 18.0 if _sh.startswith(('A6', 'A7')) else 9.0
+        P = round(sum(sum(math.dist(Q[i], Q[(i + 1) % len(Q)]) for i in range(len(Q))) for Q in _pp) / _s, 2)
+        x['qty'] = P
+        x['op'] = f"perimeter of the contour measured in vectors on {(_k or {}).get('nhoja') or _sh} (wall faces, outer ring) / {_s:g} pt/ft = {P} LF"
+        rec.update(despues=P, metodo="contorno", op=x['op']); LOG.append(rec)
+        continue
     if not rects:   # polígono medido en la entrada FS-1 del mismo cuarto (218 / 318 / 322 / 323)
         nums = re.findall(r"\b([1-4]\d\d)\b", src.split('|')[0])
         fl_ = ref.split('-')[1]

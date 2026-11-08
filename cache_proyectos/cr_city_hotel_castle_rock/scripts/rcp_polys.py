@@ -11,6 +11,7 @@ c = json.load(open(f'{W}/etapas/4_canon/takeoff_canon.json'))
 pdf = fitz.open(f'{W}/plans/bidset_SIN_MARKUPS.pdf')
 PG = {'A3.01': 22, 'A3.02': 23, 'A3.03': 24, 'A3.04': 25}
 RCP = {'L1': 'A3.01', 'L2': 'A3.02', 'L3': 'A3.03', 'L4': 'A3.04'}
+OFF = json.load(open(f'{W}/etapas/6_markups/offset_plan_rcp.json'))
 cache = {}
 def raster(sh):
     if sh in cache: return cache[sh]
@@ -28,6 +29,15 @@ out, chk = [], []
 for x in c.get('ceilings') or []:
     fl = x.get('floor'); sh = RCP.get(fl)
     if not sh: continue
+    if x.get('contorno_polygon'):   # rev9: contorno MEDIDO en vectores (caras de los walls) -> su RCP con el offset planta->RCP
+        k_ = x['contorno']; P = x['contorno_polygon']; P = P if isinstance(P[0][0], (int, float)) else P[0]
+        hs = k_['sheet']
+        if hs.startswith('A2.0'):
+            dx, dy = OFF[fl]; P = [[q[0] + dx, q[1] + dy] for q in P]; hs = sh
+        out.append({"room": x['room'], "polygon": P}); x['sheet'] = hs
+        chk.append({"room": x['room'], "sheet": hs, "status": f"contour measured in vectors on {k_.get('nhoja')} (wall faces)"
+                    + (f" -> drawn on its RCP {sh} (offset plan->RCP {OFF[fl]} pt)" if k_['sheet'].startswith('A2.0') else "")})
+        continue
     p, dark = raster(sh)
     if x.get('poly_hint'):   # área de toda la planta (membrana FS-1 bajo el piso de arriba): caja de los walls del canon del piso
         a0, b0, a1, b1 = x['poly_hint']
@@ -107,6 +117,12 @@ for o in out:
 st_ = {k['room']: k['status'] for k in chk}
 for x in c.get('ceilings') or []:
     if x['room'] in st_:
+        if x.get('contorno'):
+            k_ = x['contorno']
+            x['area_cause'] = (f"polygon = {st_[x['room']]}; loaded SF = the measured contour {x['area_sf']} SF"
+                               + (f"; printed room SF {k_['sf_referencia']} = {k_.get('cuadra_con')}" if k_.get('sf_referencia') else ""))
+            x['hatch_check_cause'] = x['area_cause']
+            continue
         x['area_cause'] = (f"polygon = {st_[x['room']]} (locates the room on the RCP); loaded SF = PRINTED room SF {x['area_sf']} (plan room tag), "
                            f"FS-1 / RS-1 over the whole unit incl. bath / closets")
         x['hatch_check_cause'] = (f"polygon = {st_[x['room']]}; it locates the room on the RCP. The loaded SF is the PRINTED room SF "
