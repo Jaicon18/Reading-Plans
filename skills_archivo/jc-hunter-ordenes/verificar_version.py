@@ -262,7 +262,7 @@ def revisar_banco(archivo):
     v = vig[-1]
     if not re.search(r"(?i)banco", v):
         return ["U-043: la versión vigente no registra la prueba del banco (todas las lecturas guardadas)"]
-    if not re.search(r"(?i)= ?0 (familias )?(distintas|diferencias)|0 familias distintas|0 diferencias", v):
+    if not re.search(r"(?i)= ?0 (familias )?(distintas|diferencias)|0 familias distintas|0 diferencias|banco:? 0 distintas", v):
         return ["U-043: el banco de la versión vigente no dice 0 familias distintas / 0 diferencias"]
     return []
 
