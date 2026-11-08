@@ -78,8 +78,13 @@ s2 += nuevo('W.6-L1-23 B', 'W.6-L1-23 C', Le, 12.0, 1, 1, [[2022.5, 1299.1], [20
 s2 += nuevo('W.6-L1-23 B', 'W.6-L1-23 D', Le, 12.0, 1, 2, [[2022.5, 1299.1], [2022.5, 1348.8]],
             'L1 ELEC/TELE 120 east wall, Retail 124 side | faces: RETAIL 124 side of the 2 HR fire barrier (rated face stays in our scope, RFI-05 criterion)',
             f"{SRC2}; [DERIVED] length {Le.operacion} = {Le.v} | height: 12'-0\" B.O. DECK printed on 5/A5.04")
-cambios.append({'n': 2, 'que': 'ELEC/TELE 120 2 HR on all 4 walls (RFI-23)', 'sf': Val(r2(s2), 'DERIVADO', operacion='W.6-L1-24 50.16 + W.6-L1-25 192.24 + E ELEC 33.12 + E Retail 66.24', unidad='SF').as_dict()})
-ded.append({'id': 'DA-1', 'rfi': 'RFI-23', 'texto': 'ELEC/TELE 120 walls as tagged on 1/A7.50 (W / S / E rated 0; N 2 HR stays)', 'delta_sf': -r2(s2), 'material': '5/8" Type X'})
+cambios.append({'n': 2, 'que': 'ELEC/TELE 120 2 HR on all 4 walls (S printed by door 120.1 90 MIN; W / E RFI-23)', 'sf': Val(r2(s2), 'DERIVADO', operacion='W.6-L1-24 50.16 + W.6-L1-25 192.24 + E ELEC 33.12 + E Retail 66.24', unidad='SF').as_dict()})
+# rev10 (auditoría U-138, E2): A8.00 door 120.1 ELEC / TELE '90 MIN' + A8.00 'DOOR RATING REQUIREMENTS PER TABLE 716.1(2): FIRE WALLS AND
+# FIRE BARRIERS HAVING 2HR RATING: 90 MIN' -> el muro que contiene la puerta (W.6-L1-25, sur) es 2 HR POR LO IMPRESO; DA-1 solo W y E.
+_s25 = r2(IDX['W.6-L1-25']['length_ft'] * IDX['W.6-L1-25']['height_ft'] * IDX['W.6-L1-25']['faces'] * 1)
+IDX['W.6-L1-25']['source'] = str(IDX['W.6-L1-25']['source']).replace("RFI-23 (base = larger option while the RFI is open): 2 HR per",
+    "[CONFIRMED] 2 HR: A8.00 door schedule 120.1 ELEC / TELE '90 MIN' in this wall + A8.00 'DOOR RATING REQUIREMENTS PER TABLE 716.1(2)' + 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN'; also")
+ded.append({'id': 'DA-1', 'rfi': 'RFI-23', 'texto': 'ELEC/TELE 120 W and E walls as tagged on 1/A7.50 (rated 0); N 2 HR and S 2 HR (door 120.1 90 MIN, A8.00) stay', 'delta_sf': -r2(s2 - _s25), 'material': '5/8" Type X'})
 # ---------- 3. DATA 118B 2 HR completo
 Lw = seg(1188.6, 1293.04, 'DATA 118B west wall = W.6-L1-20 segment (Data part)')
 Lx = seg(1188.6, 1299.1, 'DATA 118B east wall = W.6-L1-23 segment')

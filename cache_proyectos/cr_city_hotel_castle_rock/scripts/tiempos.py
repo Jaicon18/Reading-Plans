@@ -22,7 +22,8 @@ rows = [("0", "Arranque (órdenes U-001..U-150, skill v81cf52) + descarga Buildi
         ("rev6", "rev6: auditoría COORDINACIÓN (E1 coffers del lobby, E2 cement board a la cara del wall, E3 CB_BE_CF10 lee specs, O1 angle = perímetro real, O2 cove L2 4 1/2\") + compuerta + subida", "2026-11-07 06:34", "2026-11-07 07:20", "ENTREGA_OK.json / SUBIDA_OK.json rev6"),
         ("rev7", "rev7: markup de todo cielo / soffit cuantificado (73 renglones de misc_items) + compuerta CE_RCP_COMPLETO + skill v81cf63", "2026-11-07 14:33", "2026-11-07 15:05", "ENTREGA_OK.json / SUBIDA_OK.json rev7"),
         ("rev8", "rev8: revisión de walls (W.4-L4-21, W.6-L1-32 nuevo, markups a tramos medidos, tags, vanos A7) + CLG 0'-0\" + compuertas CE_MARKUP_EN_WALL / CR-R8-C", "2026-11-07 15:10", "2026-11-07 16:00", "ENTREGA_OK.json / SUBIDA_OK.json rev8"),
-        ("rev9", "rev9: FACP 125 + contorno real de todos los cielos (52 ceilings + 22 misc medidos en vectores) + RFI-27 / DA-6 + compuerta CE_CONTORNO_REAL", "2026-11-07 16:00", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev9")]
+        ("rev9", "rev9: FACP 125 + contorno real de todos los cielos (52 ceilings + 22 misc medidos en vectores) + RFI-27 / DA-6 + compuerta CE_CONTORNO_REAL", "2026-11-07 16:00", "2026-11-07 18:42", "ENTREGA_OK.json / SUBIDA_OK.json rev9"),
+        ("rev10", "rev10: auditoría U-138 sobre rev9 (E1 RFI-27 impreso en A0.08, E2 puerta 120.1 90 MIN, R1 shafts 2-1/2\" C-H, m1 altura L2, m2 filas C-H, m3 conteos) + 3 compuertas", "2026-11-08 06:34", fin, "ENTREGA_OK.json / SUBIDA_OK.json rev10")]
 L = ["# CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)", "",
      "Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.", "",
      "| # | Paso | Inicio | Fin | Duración | Evidencia |", "|---|---|---|---|---|---|"]

@@ -53,11 +53,11 @@ R = [
  ("RFI-06", "A2.01", ["SEPARATE PERMIT", "NOT IN SCOPE"],
   "Tags PA0006 'XW.6.3|2' and PA0007 'XW.6.4|1' east of door 107.1 point to a short wall on the boundary of the grey 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' area.",
   "not loaded (boundary of the separate-permit area)", ("A2.01 grey area note: not in scope", "0 SF"), ("n/a", "+202 SF if in scope"), "A2.01 east of door 107.1"),
- ("RFI-07", "A9.03, A0.06", ["SHAFTWALL", "C-H", "4 3/4"],
-  "Shaft walls at the L2 north / south shafts: 7/A9.03 and 8/A9.03 print a 4 3/4\" overall assembly (2 1/2\" C-H stud) while the 2-HOUR row of A0.06 is CH.6-2 (6\" C-H stud).",
-  "CH.6-2: 6\" 20 GA C-H studs @ 24\" o.c., J runner top and bottom, 1\" shaftliner + 2 layers 5/8\" Type X",
-  ("A0.06 CH.6-2 (as loaded)", "0"), ("UL U415 permits 2 1/2\" C-H studs for the 2 HR design", "board unchanged; stud / runner size 6\" -> 2 1/2\" (lighter, cheaper)"),
-  "CH-L2-01..07, CH.6-L1 / L4"),
+ ("RFI-07", "7/A9.03, 8/A9.03, A0.06", ["SHAFTWALL", "C-H", "4 3/4"],
+  "Shaft walls at the L2-L4 north / south shafts: the bubbles call 7/A9.03 ('2-HOUR SHAFTWALL ASSEMBLY (W419, U497)') and 8/A9.03, both printing a 4 3/4\" wall (2 1/2\" C-H + 1\" liner + 2 x 5/8\"), while the 2-HOUR row of A0.06 is CH.6-2 (6\" C-H stud). Confirm the 2 1/2\" C-H of the details.",
+  "LOADED per the detail the bubble calls (U-115): 2-1/2\" 20 GA C-H studs @ 24\" o.c. + 2-1/2\" J-runner, 1\" shaftliner + 2 layers 5/8\" Type X",
+  ("7/A9.03 / 8/A9.03 4 3/4\" (as loaded)", "0"), ("A0.06 CH.6-2 6\" C-H", "same LF of C-H stud and J-runner, 6\" instead of 2-1/2\" (heavier)"),
+  "CH-L2/L3/L4-01..07"),
  ("RFI-08", "A5.04, A4.04", ["MEZZANINE", "219"],
   "Mech & water heater mezzanine 219 (L2): wall board heights are not dimensioned (eave / gable).",
   "eave walls 5.91 ft, gable walls 7.28 ft average (2/A5.04 vector at printed scale)",
@@ -109,9 +109,9 @@ R = [
   "LOADED (R-ALC-10: the specific drawing governs the general note): 121.6 SF 5/8\" gyp board on drywall suspension at 11'-0\" (BAR 107 field); the 40.2 SF niche between the bar and toilets 110/111 (niche) is lobby-side and stays in either case",
   ("ceiling in this bid (as loaded)", "0"), ("bar is core & shell (F&B tenant)", "-121.6 SF board, -30.4 LF main tee, -91.2 LF cross tee, -44.1 LF angle, -8 hangers"), "CLG-L1-BAR107"),
  ("RFI-23", "A0.00, 1/A0.01, 1/A7.50, 1/A2.01", ["ELECTRICAL AND IT ROOMS", "2HR FB"],
-  "ELEC/TELE 120 (Level 1): A0.00 Code Summary lists 'ELECTRICAL AND IT ROOMS - 2 HR' and 1/A0.01 tags the room '2HR FB' (no wall drawn with the 2 HR fire-barrier line), but 1/A7.50 rates only the north wall ('W.6 | 2'); the west and south tags 'W.6 |  ' have an EMPTY rating box and the east wall is part of W.6-L1-23 (W.6-0). CODE: IBC 2018 §707.1 / §707.5 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001) - a fire barrier encloses the room and is continuous; IBC 2018 Table 509 does not rate electrical / IT rooms (it refers to NFPA 70), so the 2 HR comes from the drawings (A0.00 / 1/A0.01). Which walls of 120 are the 2 HR fire barrier?",
+  "ELEC/TELE 120 (Level 1): A0.00 Code Summary lists 'ELECTRICAL AND IT ROOMS - 2 HR' and 1/A0.01 tags the room '2HR FB' (no wall drawn with the 2 HR fire-barrier line), but 1/A7.50 rates only the north wall ('W.6 | 2'); the west and south tags 'W.6 |  ' have an EMPTY rating box and the east wall is part of W.6-L1-23 (W.6-0). The SOUTH wall is 2 HR by the printed door schedule: A8.00 door 120.1 ELEC / TELE '90 MIN' + A8.00 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN' (IBC Table 716.1(2)) - loaded, not part of this question. CODE: IBC 2018 §707.1 / §707.5 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001) - a fire barrier encloses the room and is continuous; IBC 2018 Table 509 does not rate electrical / IT rooms (it refers to NFPA 70), so the 2 HR comes from the drawings (A0.00 / 1/A0.01). Are the WEST and EAST walls of 120 part of the 2 HR fire barrier?",
   "BASE (larger option while the RFI is open): all 4 walls 2 HR - W.6-L1-24 and W.6-L1-25 as W.6-2, east wall segment of W.6-L1-23 with 2 layers on the ELEC face and on the Retail face",
-  ("A0.00 + 1/A0.01 '2HR FB': all 4 walls 2 HR (as loaded in the base)", "0"), ("1/A7.50 tags: W / S / E rated 0, N 2 HR (DEDUCT ALTERNATE DA-1)", "DA-1"), "W.6-L1-24, W.6-L1-25, W.6-L1-23 C / D"),
+  ("A0.00 + 1/A0.01 '2HR FB': all 4 walls 2 HR (as loaded in the base)", "0"), ("1/A7.50 tags: W / E rated 0; N and S (door 120.1 90 MIN) 2 HR (DEDUCT ALTERNATE DA-1)", "DA-1"), "W.6-L1-24, W.6-L1-23 C / D"),
  ("RFI-24", "A0.00, 1/A7.50", ["ELECTRICAL AND IT ROOMS", "DATA"],
   "DATA 118B (Level 1, IT room): A0.00 lists 'ELECTRICAL AND IT ROOMS - 2 HR'; on 1/A7.50 the N wall ('W.6.1 | 2') and S wall ('W.6 | 2') are 2 HR, but the W wall prints 'W.6.1 | 0' and the E wall is W.6-L1-23 (W.6-0); 1/A0.01 does not tag 118B '2HR FB'. CODE: IBC 2018 §707.1 / §707.5 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001) - a fire barrier encloses the room; Table 509 does not rate IT rooms, the 2 HR comes from A0.00. Is DATA 118B a 2 HR room?",
   "BASE (larger option while the RFI is open): 118B 2 HR on all walls - W wall segment both faces +1 layer, E wall segment Data face +1 layer and Retail face 2 layers",
@@ -124,10 +124,6 @@ R = [
   "FACP 125 (Level 1, east of Stair 2): on 1/A6.02 the north wall is tagged 'FI.2 | 0' (loaded) and the east wall 'XM.0.1 | 2' (no finish), but the south wall (grid 14 CMU) has no tag; 1/A2.01 draws on it the same furring line as the tagged FI.2-0 furring of the same grid-14 wall west of the stair (FI.2-L1-06). Does the FACP 125 south face get FI.2-0 furring (1 layer 5/8\" Type X over rigid insulation)?",
   "BASE (larger option while the RFI is open): FI.2-0 on the FACP 125 south face, 4.27 ft x 12'-0\"",
   ("1/A2.01 furring line: FI.2-0 on the south face (as loaded in the base)", "0"), ("no furring on the south face (DEDUCT ALTERNATE DA-5)", "DA-5"), "FI.2-L1-12"),
- ("RFI-27", "A0.08 FS-1, A7.00 / A7.05 / A7.09 unit RCPs (GN 1), A2.02 / A2.03", ["FS-1", "THROUGHOUT"],
-  "Guest units L2 / L3: the bath has a GYP-1 dropped ceiling at 8'-6\" (unit RCP tag) and A7.00 unit note 1 says untagged ceilings are the bottom of the floor/ceiling assembly. Does the rated FS-1 membrane (A0.08 FS-1, UL L546) continue above the bath dropped ceiling, or does the GYP-1 replace it there?",
-  "BASE (larger option while the RFI is open): FS-1 continuous over the whole unit = contour measured at the wall faces (bath included); the GYP-1 bath ceiling is its own row",
-  ("A0.08 FS-1 rated floor membrane (as loaded in the base)", "0"), ("FS-1 stops at the bath walls (DEDUCT ALTERNATE DA-6)", "DA-6"), "L2 / L3 guest-unit FS-1 rows"),
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("not labeled", "0"), ("n/a", "if exposed structure: -182 SF board and grid"), "L1 128"),
@@ -179,7 +175,6 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-23": ["ELECTRICAL AND IT ROOMS", "2HR FB", "2 HR", "ELEC / TELE", "ELEC", "TELE", "120", "W.6", "FIRE BARRIER", "RATED", "A0.01", "A7.50"],
  "RFI-24": ["ELECTRICAL AND IT ROOMS", "DATA", "118B", "2HR FB", "2 HR", "W.6.1", "W.6", "FIRE BARRIER", "RATED", "IT ROOM", "A0.01", "A7.50"],
  "RFI-25": ["FW.4", "1HR FP", "FIRE PARTITION", "DECK BAR", "411", "LOUNGE", "RATED", "A0.06", "A0.02", "A2.04", "FURRED", "1 HR"],
- "RFI-27": ["FS-1", "THROUGHOUT", "GYP-1", "8' - 6\"", "UNLESS OTHERWISE INDICATED BY A CEILING TAG", "FLOOR/CEILING", "L546"],
  "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR"],
  "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
@@ -250,6 +245,22 @@ for rid, src, terms, q, loaded, A, B, items in R:
             else:
                 why = "architectural sheet: the dimensions and notes printed are heights / lengths / details of other elements; nothing printed answers this question"
             bar["descartes"][h2] = f"read on {h2}: {why} ({q[:90]})"
+    # rev10 (R80e.164.1): frases de respuesta impresas cerca de los términos, leídas una por una; el descarte CITA la frase
+    _FR = {
+        ('A0.08', '*'): "A0.08 'DROPPED CEILING IS NOT A COMPONENT OF THE RATED ASSEMBLY' is the note of the FS-1 floor / ceiling details (the dropped ceiling below the Type C membrane, applied to the FS-1 rows); it says nothing about",
+        ('A8.00', 'RFI-23'): "A8.00 door 120.1 ELEC / TELE '90 MIN' -> the SOUTH wall of 120 (W.6-L1-25, which contains the door) is loaded 2 HR by the printed door schedule (IBC Table 716.1(2)); it does not rate the W and E walls asked here; the general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' is the door rule for 1 HR barriers (no 45 MIN door in 120); the other 'ELEC' doors of the schedule (104.1 ELEC '90 MIN', the L2-L4 ELEC closets '20 MIN') belong to other rooms",
+        ('A8.00', 'RFI-17'): "A8.00 door 128.1 WATER ENTRY '90 MIN' is in the east CMU wall of 128 (tag 'CM.8 | 2' on 1/A2.01, 2 HR masonry, no gypsum); it says nothing about the ceiling of 128",
+        ('A8.00', 'RFI-20'): "A8.00 '90 MIN' of door 122.1 TRASH BINS (RETAIL) rates that door's wall, not the retail steel beam wraps",
+        ('A8.00', 'RFI-22'): "A8.00 '20 MIN' of the FOOD AND BEVERAGE doors rates the door / corridor wall, not the bar ceiling",
+        ('A8.00', 'RFI-25'): "A8.00 general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' is a door rule; the bar doors at FW.4-L4-19 print '20 MIN' / storefront, so it does not give the 1-HR assembly of the wall",
+    }
+    _tema = {'RFI-13': 'the MB-1 stud size / C-channel', 'RFI-15': 'the RS-1 board type', 'RFI-20': 'the depth of the wrapped beams',
+             'RFI-22': 'the bar ceiling scope', 'RFI-23': 'the rating of the ELEC / TELE 120 walls', 'RFI-24': 'the rating of DATA 118B',
+             'RFI-25': 'the 1-HR assembly of FW.4-L4-19', 'RFI-17': 'the ceiling of WATER ENTRY 128'}
+    if rid not in CERR:
+        for (h_, r_), txt_ in _FR.items():
+            if r_ in ('*', rid) and h_ in st["hojas"]:
+                bar["descartes"][h_] = (txt_ + (f" {_tema.get(rid, 'this question')}." if r_ == '*' else ".") + " " + bar["descartes"].get(h_, ""))[:900]
     if rid == 'RFI-04':   # descartes de las hojas de enlarged plans (sus tags son de otros walls)
         for h2 in sorted(st["hojas"]):
             if not re.match(r"A2\.0[1-4]$", h2):   # solo las plantas A2.01-A2.04 podrían tipar estos walls
