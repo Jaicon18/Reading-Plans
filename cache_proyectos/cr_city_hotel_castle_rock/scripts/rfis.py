@@ -180,7 +180,7 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-24": ["ELECTRICAL AND IT ROOMS", "DATA", "118B", "2HR FB", "2 HR", "W.6.1", "W.6", "FIRE BARRIER", "RATED", "IT ROOM", "A0.01", "A7.50"],
  "RFI-25": ["FW.4", "1HR FP", "FIRE PARTITION", "DECK BAR", "411", "LOUNGE", "RATED", "A0.06", "A0.02", "A2.04", "FURRED", "1 HR"],
  "RFI-28": ["FIRE BARRIER", "B.O. DECK", "UNDERSIDE", "SHEATHING", "LINE OF STRUCTURE", "707.5", "2 HR", "W.6", "HEAD", "RATED ASSEMBLY", "FLOOR SHEATHING", "TOPPING", "2HR FB", "FIRE BARRIERS", "CONTINUOUS"],
- "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR"],
+ "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR", "FIRE ALARM", "FURR", "CM.8", "MASONRY", "FIRE CONTROL"],
  "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
@@ -261,6 +261,7 @@ for rid, src, terms, q, loaded, A, B, items in R:
         ('A8.00', 'RFI-20'): "A8.00 '90 MIN' of door 122.1 TRASH BINS (RETAIL) rates that door's wall, not the retail steel beam wraps",
         ('A8.00', 'RFI-22'): "A8.00 '20 MIN' of the FOOD AND BEVERAGE doors rates the door / corridor wall, not the bar ceiling",
         ('A8.00', 'RFI-28'): "A8.00 general notes 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN' and 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' are the door-rating rules of the door schedule; they rate the doors in fire barriers, not how high the barrier wall runs (deck vs 12'-0\" on 5/A5.04), which is what RFI-28 asks",
+        ('A8.00', 'RFI-26'): "A8.00 door 125.1 FACP '90 MIN.' (2'-8\" x 6'-8\") rates the door of the FACP room = 2 HR enclosure (IBC 2018 Table 716.1(2)); the 2 HR there is the masonry (CMU grid 14 / XM.0.1), it does not say whether the CMU south face gets the FI.2 furring, which is what RFI-26 asks",
         ('A8.00', 'RFI-25'): "A8.00 general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' is a door rule; the bar doors at FW.4-L4-19 print '20 MIN' / storefront, so it does not give the 1-HR assembly of the wall",
     }
     _tema = {'RFI-13': 'the MB-1 stud size / C-channel', 'RFI-15': 'the RS-1 board type', 'RFI-20': 'the depth of the wrapped beams',
@@ -290,7 +291,7 @@ for rid, src, terms, q, loaded, A, B, items in R:
 CODIGO_B = {
     'RFI-04': "CODE: IBC 2018 Section 708 / 707 rate walls by use, they do not assign a partition type - no code answers the type of an untagged wall",
     'RFI-13': "CODE: UL BXUV.1516 (listed 2 HR membrane) - the listed design fixes stud size / C-channel; IBC 2018 Section 703.2 requires the tested design",
-    'RFI-15': "CODE: none applies - the RS-1 roof ceiling is not rated (A0.10); GA-216 / ASTM C1396 allow 5/8\" Type X or 1/2\" sag-resistant ceiling board",
+    'RFI-15': "CODE: none applies - the RS-1 roof ceiling is not rated (A0.10); board material per IBC 2018 Table 2508.1 (gypsum board standards); ASTM C840 Table 1 and GA-216 Table 1 (maximum framing spacing) allow 1/2\" sag-resistant ceiling board or 5/8\" board across 24\" o.c. ceiling framing",
     'RFI-17': "CODE: none applies - IBC 2018 does not require a ceiling in a non-rated utility room; scope question for the architect",
     'RFI-20': "CODE: UL L546 / IBC 2018 Section 711.2.4 (membrane continuity of the horizontal assembly over the beams); the code does not dimension the wrap",
     'RFI-21': "CODE: none applies - scope question (canopy soffit by us or by the prefabricated canopy supplier)",

@@ -94,6 +94,7 @@ A = [
  ("ALC-22", "CUANTIFICADO", "Rated assemblies per A0.00-A0.03 code plans and A0.06 / A0.07 / A0.08 UL designs (U379, U301, U341, U415, V337, L546): Type X layers per rating loaded."),
  ("ALC-23", "NO APLICA", "No ballistic / lead-lined / abuse-resistant panels in the set (A0.06, A7.19)."),
  ("ALC-24", "CUANTIFICADO", "Level 4 finish on all board (09 29 00 3.6.E.4: under plaster / wallcovering and back of house); no Level 5 area (A7.19 TF-1 plaster / vinyl wallcovering everywhere); compound and tape by yield (A0.00-A0.04, A0.09 are code text)."),
+ ("ALC-25", "CUANTIFICADO", "Roof assemblies A0.08 tagged on the roof plan A2.05 (swept tag by tag): RS-1 x3 -> L4 ceilings 'RS-1' (board on channel, A3.04); RS-2 x3 and RS-3 x2 -> no board in the assembly (ceiling 'RE: REFLECTED CEILING PLANS' = the RCP rows below); RS-4 x1 (Deck Bar 411) 'CEILING ASSEMBLY - TBD' -> not in scope (A7.55 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT'); RS-5 x2 -> membrane on METAL DECK, no gypsum; RS-6 x2 -> 2 LAYERS 5/8\" TYPE 'X' loaded as RS-6 rows 'RS6-L3 board' (terrace 420 / 421 over 301-304) and 'RS6-L3-309 board' (covered deck over 309); RS-7 x1 -> steel roof tile, no gypsum."),
 ]
 reg = json.load(open(f'{K}/registro.json'))
 NOMB = {r["id"]: r.get("ubicacion") for r in reg["renglones"]}

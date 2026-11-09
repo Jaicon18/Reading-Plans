@@ -1,4 +1,4 @@
-"""CR City Hotel proposal (take-off rev12 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
+"""CR City Hotel proposal (take-off rev13 FINAL quantities, no new take-off pass), from the user's "Proposal Template.xlsx"
 (rule U-150): sheet PROPOSAL DW (JC Hunter letterhead) + PRICING (material FBM / labor and OH with the template's own rates,
 live formulas) + FBM_PRICES (every FBM product used: SKU, name, price, unit, stock, link, date, branch).
 Model: consumer_cellular_centennial/proposal_calc/armar_proposal.py (approved rev4 FINAL).
@@ -7,7 +7,7 @@ WOOD-framed project: wood studs / blocking / sheathing = Div. 06 EXCLUDED; faste
 Usage: armar_proposal.py <template.xlsx> <takeoff.xlsx> <canon.json> <fbm_dir> <out.xlsx>"""
 import datetime, glob, json, math, re, sys
 import openpyxl
-REVN = "rev12"
+REVN = "rev13"
 from openpyxl.styles import Alignment, Font, PatternFill
 
 TPL, TK, CN, FBM, OUT = sys.argv[1:6]
@@ -144,9 +144,9 @@ B = wb.create_sheet("PRICING"); F = wb.create_sheet("FBM_PRICES")
 F.append(["FBM code", "Product (as listed on myfbm.com)", "Category", "Price (USD)", "Price unit", "Min. order", "Stock", "Lead",
           "Link", "Read on", "Branch"])
 used = []
-B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev12 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
+B.append(["CR CITY HOTEL - CASTLE ROCK, CO - PRICING (quantities from Take-off rev13 FINAL; no new take-off pass) - INTERNAL, NOT FOR THE CLIENT"])
 import os as _os
-_d = '/root/cr/work/etapas/DELTA_rev11_rev12.md'      # rev4: delta de cantidades contra rev3 (orden COORDINACIÓN 7-nov)
+_d = '/root/cr/work/etapas/DELTA_rev12_rev13.md'      # rev4: delta de cantidades contra rev3 (orden COORDINACIÓN 7-nov)
 if _os.path.exists(_d):
     _ls = [x for x in open(_d).read().split('\n') if x.startswith('| ') and not x.startswith('| Material') and not x.startswith('|---')]
     B.append([f"QUANTITY CHANGES vs the previous revision (take-off): " + ("; ".join(f"{x.split('|')[1].strip()} {x.split('|')[5].strip()} {x.split('|')[2].strip()}" for x in _ls) or "none")
@@ -271,7 +271,7 @@ put("C16", "We propose to supply the material, labor, and equipment necessary to
            "and the scope listed below.")
 put("C17", "(Please take special note of the scope description; we are not required to perform any items or tasks not specifically listed)")
 put("C19", "1.-"); put("D19", "Division of work: DRYWALL & FINISH LEVEL 4, C-H SHAFT WALLS, CEILING SUSPENSION.", bold=True)
-inc = ["INCLUDED (quantities from the take-off rev12 FINAL: net and purchase = net + waste, with their sheets):"]
+inc = ["INCLUDED (quantities from the take-off rev13 FINAL: net and purchase = net + waste, with their sheets):"]
 for r in ms:
     if (r[2] or 0) > 0:
         pu = r[5] if isinstance(r[5], (int, float)) else r[2]

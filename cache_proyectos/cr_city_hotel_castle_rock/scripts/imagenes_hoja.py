@@ -11,7 +11,7 @@ for i, p in enumerate(d):
     if not an:
         continue
     sheet = next((h.split(' ')[0] for h in (m.get('por_hoja') or {}) if h.endswith(f"(p.{i + 1})")), f"p{i + 1}")
-    fn = f"{sheet}_marked_by_type_rev12.png"
+    fn = f"{sheet}_marked_by_type_rev13.png"
     p.get_pixmap(dpi=110, annots=True).save(f'{W}/7_imagenes/{fn}')
     assert os.path.getsize(f'{W}/7_imagenes/{fn}') > 0
     out.append({"sheet": sheet, "page": i + 1, "annots": len(an), "types": sorted({a.info.get('subject') for a in an}), "png": fn})

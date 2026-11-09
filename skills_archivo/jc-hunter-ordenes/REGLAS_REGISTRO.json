@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 455,
+ "conteo": 458,
  "reglas": [
   {
    "id": "U-001",
@@ -6147,6 +6147,41 @@
    "id": "CR-R12-E2",
    "origen": "R80e.165.15-.16 (CR City Hotel rev12, COORDINACIÓN 8-nov)",
    "texto_corto": "proposal con el delta real y el producto del spec; citas del MS completas; vigas de borde dentro de la membrana rated envueltas",
+   "categoria": "conducta"
+  },
+  {
+   "id": "CR-R13-E1",
+   "origen": "R80e.165.17 (CR City Hotel rev13, auditoría U-138 de COORDINACIÓN 9-nov)",
+   "texto_corto": "la cara de exterior sheathing toma la altura de su propia línea, no la del board interior",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r13_e1"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cr_r13_e1"
+   }
+  },
+  {
+   "id": "CR-R13-E2",
+   "origen": "R80e.165.18 (CR City Hotel rev13)",
+   "texto_corto": "norma citada con sección / tabla; detector de RFI 'no impreso' con sinónimos",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_155",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_busqueda"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_cr_r13_detector_no_impreso"
+   }
+  },
+  {
+   "id": "CR-R13-RS",
+   "origen": "R80e.165.19 (CR City Hotel rev13)",
+   "texto_corto": "roof / floor assemblies barridos tag por tag con renglón nombrado o motivo impreso",
    "categoria": "conducta"
   }
  ]

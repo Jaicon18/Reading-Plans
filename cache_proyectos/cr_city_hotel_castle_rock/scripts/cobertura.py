@@ -27,6 +27,8 @@ for tid, t in (fi.get('types') or {}).items():
         add('schedule type', tid, f"{types_canon[tid]} wall entries (Partition Takeoff, block {tid})", 'COVERED', t.get('sheet') or '')
     elif base in fam:
         add('schedule type', tid, f"family {base} loaded with the printed rating of each tag; this rating row is not tagged on the plans", 'COVERED (not used)', t.get('sheet') or '')
+    elif str(tnr.get(tid.upper()) or tnr.get(base) or '').startswith('LOADED'):   # rev13: roof / floor assemblies cargados (RS-1, RS-6, FS-1, MB-1)
+        add('schedule type', tid, str(tnr.get(tid.upper()) or tnr.get(base)), 'COVERED', t.get('sheet') or '')
     elif base in tnr or any(base.startswith(k.split('.')[0] + '.') and k.split('.')[0] in ('C', 'CM') for k in tnr):
         add('schedule type', tid, f"EXCLUDED: {tnr.get(base, 'concrete / CMU, not our trade (U-061)')}", 'COVERED (excluded)', t.get('sheet') or '')
     else:
@@ -79,7 +81,7 @@ for r in c['rfis']:
         add('open RFI', r['id'], f"conservative value LOADED: {str(r['loaded'])[:120]}", 'COVERED (RFI)', r['source'])
 
 n = len(rows); gaps = [r for r in rows if r['status'] == 'GAP']
-L = ["# COBERTURA - Paso 12 (coverage matrix) - CR City Hotel rev12", "",
+L = ["# COBERTURA - Paso 12 (coverage matrix) - CR City Hotel rev13", "",
      f"{n} items · {n - len(gaps)} covered · {len(gaps)} GAP · {100 * (n - len(gaps)) / n:.1f} %", "",
      "| # | Category | Item | Destination | Status | Source |", "|---|---|---|---|---|---|"]
 for i, r in enumerate(rows, 1):
