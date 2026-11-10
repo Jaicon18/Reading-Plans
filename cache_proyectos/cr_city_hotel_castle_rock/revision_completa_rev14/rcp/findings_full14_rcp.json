@@ -1,0 +1,147 @@
+{
+ "findings": [
+  {
+   "id": "F01",
+   "sev": "alta",
+   "cat": "A",
+   "sheet": "A3.04",
+   "room": "2 duct chases (401 NE, 401/402) sin número",
+   "excel_markup": "EXCLUDED - duct chase, no ceiling drawn on the RCP (1/A3.04 graphic only); 0 SF",
+   "plan": "1/A3.04 dibuja stipple de cielo dentro de ambos chases (igual que chases a/b/c y 405C/403C/404C que sí se cargaron como RS-1); el motivo no está impreso y lo contradice el plano",
+   "delta": "+17.72 SF Type X (10.40+7.32) y ~+13.3 LF resilient channel si se trata igual que CLG-L4-405C (0.75 LF/SF) [DERIVED]",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F01_A3.04_duct_chases_stipple_clean.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F01_A3.04_duct_chases_markup.png"
+   ]
+  },
+  {
+   "id": "F02",
+   "sev": "media",
+   "cat": "B",
+   "sheet": "A3.04/A7.45/A7.50",
+   "room": "410, 411, 410.3, 420, 421 terrace (A3.04); 101 Corridor, NW box (A7.45); 419 (A7.50)",
+   "excel_markup": "8 textos EXCLUDED sin polígono gris (24 textos vs 16 polígonos)",
+   "plan": "U-160 exige polígono gris + texto dentro del cuarto",
+   "delta": "0 SF",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A3.04_410_411_4103_text_without_polygon.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A3.04_420_421_terrace_text_only.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A7.45_101_text_outside_no_polygon.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A7.45_NW_box_text_only.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A7.50_419_text_only.png"
+   ]
+  },
+  {
+   "id": "F03",
+   "sev": "media",
+   "cat": "B",
+   "sheet": "A3.04/A7.45/A7.50",
+   "room": "textos fuera del cuarto o sobre otro cuarto",
+   "excel_markup": "410.3 text sobre MEN 418 y ELEC 421; 410 text tapa nota impresa SEE ENLARGED RCP; 411 text cruza muro 410/411; 419 text sale del edificio (x497<552); shafts N/S, duct chases y elevadores: texto 124-216 pt de ancho sobre polígonos de 23-35 pt (10-63% dentro), invade 405/401/402/412/417; A7.45 101 text fuera del edificio (0% dentro); A7.50 CH.6 shaft 31% dentro; textos ACT A7.45/A7.50 salen del muro exterior",
+   "plan": "U-160: texto dentro del contorno, sin pisar otros cuartos",
+   "delta": "0 SF",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F04_A3.04_4103_text_over_Men418_Elec421.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F04_A3.04_shaft_elevator_text_overflow.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A7.45_101_text_outside_no_polygon.png"
+   ]
+  },
+  {
+   "id": "F04",
+   "sev": "media",
+   "cat": "A/C",
+   "sheet": "A3.02, A3.03",
+   "room": "Corridor ceilings CLG-L2-56/58, CLG-L3-87/88",
+   "excel_markup": "polígonos dibujados con coordenadas de planta (A2.02/A2.03) sin el offset plan->RCP (~13,19 pt) que sí llevan los demás; invaden 201-204/301-304 y salen del muro sur; edge coverage 8.5-11%",
+   "plan": "corredor 216/218 y 316/318 en 1/A3.02 y 1/A3.03",
+   "delta": "0 SF (área medida en planta es correcta; solo ubicación)",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F05_A3.02_CLG-L2-56_offset.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F05_A3.03_CLG-L3-87_offset.png"
+   ]
+  },
+  {
+   "id": "F05",
+   "sev": "baja-media",
+   "cat": "A/B",
+   "sheet": "A7.50",
+   "room": "L1 staff: CLG-L1-14..18 y exclusiones ACT 115/117/118B/119",
+   "excel_markup": "markups en la vista 1/A7.50 ENLARGED PLAN, no en la vista 2/A7.50 ENLARGED RCP (solo CLG-L1-126 va en el RCP)",
+   "plan": "2/A7.50 ENLARGED RCP - STAFF & SERVICE (GYP-1 9-0, GYP-2 9-6, ACT-2 9-6); tipos coinciden al mapear",
+   "delta": "0 SF",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F06_A7.50_ceilings_on_floor_plan_view.png"
+   ]
+  },
+  {
+   "id": "F06",
+   "sev": "duda",
+   "cat": "A",
+   "sheet": "A3.02, A3.03",
+   "room": "cajas de chase/closet en muro exterior de guest rooms (ej. 201 NE)",
+   "excel_markup": "recortadas (notch) del polígono FS-1 Type C sin renglón ni EXCLUDED; notch 9-20 SF por unidad",
+   "plan": "1/A3.02 dibuja stipple dentro de la caja de 201 (verificado); resto no verificado una por una",
+   "delta": "duda: ~+9 a +16 SF Type C por unidad afectada (no cuantificado en total)",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F07_A3.02_201_chase_box_stipple_notched.png"
+   ]
+  },
+  {
+   "id": "F07",
+   "sev": "duda",
+   "cat": "A",
+   "sheet": "A7.45",
+   "room": "NW box sin número",
+   "excel_markup": "EXCLUDED - enclosed box, no ceiling drawn on the RCP (3/A7.45)",
+   "plan": "3/A7.45 es ENLARGED PLAN, no RCP; 1/A3.01 no dibuja esa caja. Motivo inferido, no impreso; la fuente correcta seria 1/A3.01",
+   "delta": "0 SF",
+   "img": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rcp/ev/F03_A7.45_NW_box_text_only.png"
+   ]
+  },
+  {
+   "id": "F08",
+   "sev": "baja",
+   "cat": "C",
+   "sheet": "todas",
+   "room": "PDF",
+   "excel_markup": "FreeText EXCLUDED con /CL (línea de callout) desde la esquina de la hoja (0,1728) y fuente Helv 5.5 pt; 4 objetos /Sig huérfanos (fuera del árbol de páginas, sin AcroForm)",
+   "plan": "Bluebeam: sin firmas vivas; callout podría dibujar línea si se edita (duda)",
+   "delta": "0",
+   "img": []
+  },
+  {
+   "id": "F09",
+   "sev": "baja",
+   "cat": "C",
+   "sheet": "A6.01, A7.23, A7.24, A7.31",
+   "room": "VP",
+   "excel_markup": "un solo /VP de página completa a 1/4\" aunque la hoja tiene detalles a 1/2\" y 3/4\"",
+   "plan": "markups solo dentro de vistas 1/4\" -> correcto; medición manual en los detalles daría escala equivocada",
+   "delta": "0",
+   "img": []
+  }
+ ],
+ "checks": {
+  "C_checks": {
+   "labels": "149/149 únicos = hoja impresa",
+   "sig_live": 0,
+   "pages_with_measure": 16,
+   "vp_ok": "16/16 (1/8 en A2.0x/A3.0x, 1/4 en A6.0x/A7.xx = escala impresa de la vista)",
+   "depthunit_bad": 0,
+   "polyline_LxD_bad": "0/1003",
+   "polygon_area_bad": "0/131",
+   "names": "solo verificable en guia.md: OPEN THIS IN BLUEBEAM ok; PNG IMAGE ONLY no verificados (no se tienen los archivos)"
+  },
+  "retracted": [
+   "219 MECH mezzanine: sí cargado como CLG-L2-64 (460.70 SF, slope 1.165)",
+   "L3 301-304 contorno corto: el resto es la franja RS6-L3 (427.5 SF x 2 capas), no falta"
+  ],
+  "consistent": [
+   "410/411/419/100 F&B: nota impresa en 1/A2.04, 3/A7.50, 1-2/A7.55, 1/A7.45 + A0.00 core & shell; roof 0 HR (A0.00/A0.10) -> sin membrana rated requerida",
+   "ACT-1/ACT-2 exclusiones coinciden con 4/A7.45, 2/A7.50, 1/A3.01",
+   "GYP-2 rated: 104 CLG-L1-00, 103 CLG-L1-01, 116 CLG-L1-18 cargados con liner",
+   "L4 417/418 stalls cargados, 117=129 SF impreso (sin stalls)"
+  ]
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "scope": "CR City Hotel rev14 - Partition Takeoff walls, full review (896 face rows / 905 PolyLine markups)",
+ "counts": {
+  "rows": 896,
+  "markups": 905,
+  "excel_vs_markup_mismatch": 0,
+  "endpoints_checked": 1810,
+  "endpoints_unexplained": 1,
+  "gaps_on_continuous_faces": 11,
+  "height_values_traced": 43,
+  "type_families_checked": 23
+ },
+ "findings": [
+  {
+   "id": "F01",
+   "wall": "W.62-L4-02 / W.62-L4-03",
+   "sheet": "A2.04 (1/8\"=1'-0\")",
+   "excel": "18.56 + 37.49 LF, 2 faces x 2 layers 5/8 Type X @ 10.4375 ft",
+   "plan": "Corridor 412 face is one continuous vector line across the 401/402 DW.4 junction; markups stop at 613.8 and restart at 620.8 pt -> 0.77 ft of the corridor face not taken off (room faces correctly interrupted)",
+   "delta_sf": 16.1,
+   "status": "verified",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_walls/ev/F01_W62-L4-02_03_corridor_gap_A204.png"
+  },
+  {
+   "id": "F02",
+   "wall": "XW.6.6-L4-03 B/04 A/05 A, 06 A/07 A, 08 A/09 A/10 A/11 A, 12 B/13 C/14 B/15 B (EXTERIOR face rows)",
+   "sheet": "A2.04",
+   "excel": "L4 exterior sheathing face split per room; 9 gaps (0.39-0.78 ft) at every DW/W junction = 5.76 LF not covered",
+   "plan": "Exterior face of XW.6.6 is continuous across interior wall junctions (vector line continuous); at L2/L3 the same faces are single continuous runs (e.g. XW.6.3-L2-07 A 84.18 LF)",
+   "delta_sf": 59.1,
+   "board": "5/8 exterior gyp sheathing Type X, 1 layer, H 10.24 (A0.07 XW.6.6, 1/A5.06 + 3/A5.07)",
+   "status": "verified (one junction imaged; all 9 measured by vector)",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_walls/ev/F02_XW66-L4-08A_09A_ext_gap_A204.png"
+  },
+  {
+   "id": "F03",
+   "wall": "W.6-L4-09 (Elec 421 east wall)",
+   "sheet": "A7.50 3/ (1/4\"=1'-0\")",
+   "excel": "8.77 LF x 2 faces (421 + corridor 412) x 1 layer @ 10.225",
+   "plan": "421 face x=1060.08 from 1145.04 to 1302.84 = 8.77 ft (OK); corridor face x=1070.16 from 1134.96 to 1312.92 = 9.89 ft -> corridor face short 1.12 ft. Markup also drawn 1135.0-1292.9 (shifted 10 pt = 0.56 ft, ends do not sit on either face end)",
+   "delta_sf": 11.4,
+   "status": "verified length; corridor side per row description",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_walls/ev/F05_W6-L4-09_elec421_A750.png"
+  },
+  {
+   "id": "F04",
+   "wall": "W.6-L1-20 A / W.6-L1-24 and W.6-L1-30 / W.6-L1-29 (Break 115 face)",
+   "sheet": "A7.50 1/",
+   "excel": "Break 115 face stops 0.67 ft at the junctions with W.6-L1-22 and W.6-L1-31",
+   "plan": "Break 115 face line continuous; but W.6-L1-22 and W.6-L1-31 are measured through the vertical wall to the Break face (+~0.56 ft per face), so the area is shifted, not lost",
+   "delta_sf": 0,
+   "delta_note": "Break face -8 to -18.5 SF each junction vs over-length of W.6-L1-22 / -31 faces; net about 0 (duda: net sign depends on layers)",
+   "status": "duda (allocation, not quantity)",
+   "png": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_walls/ev/F03_W6-L1-20A_24_break_gap_A750.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_walls/ev/F04_W6-L1-30_29_break_gap_A750.png"
+   ]
+  }
+ ],
+ "total_delta_sf": 86.6,
+ "no_issue": {
+  "heights": "43 distinct level/H values traced to printed source; printed strings confirmed in clean set: 9'-2 7/8\", 1'-9 1/8\", 1'-1 1/4\" (A5.05), 1'-1 3/8\" (A7.23), 8'-11 1/4\" (A5.06), 12'-0\" / 11'-2 5/8\" (A5.08). Face-specific: corridor 9.8854 vs room 9.2396, exterior 11.0 vs interior 9.8958, shower cement board 9.0 = GYP-1 8'-6\" + 6\"",
+  "types": "A0.06 / A0.07 layer counts per face match for all families; rated faces keep Type X under cement board; non-rated Type X per RFI-10 closed; XW -0 interior only (exterior plywood) except XW.6.2-0 / XW.6.6-0 which have gyp both sides and are loaded both sides",
+  "coverage": "A2.02 / A2.03 / A2.04 uncovered wall-line runs reviewed visually: remaining are shower glass/curb lines, CMU stair/elevator inner faces (no FI tag), match lines, grey separate-permit area, F&B 410/411/419 interiors, retail non-rated faces (RFI-05); L1 enlarged A7.30/A7.45/A7.50/A6.0x reviewed",
+  "placement": "902 of 905 markups within 0.5 ft of a wall line; 3 off: two tiny jogs (W.6-L2-01 C 0.18 LF, FW.2-L3-10 C 0.36 LF) and XW.6.3-L2-11/L3-12 at 0.57 ft inside thick exterior band"
+ },
+ "duda": [
+  "42 rows (3,918 SF) carry TYPE ASSUMED (RFI-04 open) - not re-decided here"
+ ]
+}

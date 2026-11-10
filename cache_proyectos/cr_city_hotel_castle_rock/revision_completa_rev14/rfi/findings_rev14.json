@@ -1,0 +1,148 @@
+{
+ "findings": [
+  {
+   "id": "F01",
+   "sev": "alto",
+   "area": "RFI-16 (cerrado) / RFI-13",
+   "excel": "C-H studs de shaft walls y MB-1 a 24 in o.c. (RFI-16 cerrado 'spacing not printed' por UL U415; RFI-13 lo llama 'conservative')",
+   "plan": "A0.06 PARTITION TYPES GN 6: 'ALL METAL STUDS TO BE SPACED @ 16\" O.C. UNLESS NOTED OTHERWISE'; spec 09 21 16.23 3.1.A.1 'ASTM C 754 ... except comply with framing spacing indicated'",
+   "delta": "[DERIVED n=ceil(L/1.333)+1 x H por wall] C-H 2-1/2\": 620.81 -> 806.13 LF (+185.32); C-H 6\" walls: 314.12 -> 359.00 LF (+44.88); MB-1 studs 263.02 LF x ~1.5 = ~+131 LF (duda); J-runner sin cambio",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F01_A0.06_GN6_16in_oc.png"
+  },
+  {
+   "id": "F02",
+   "sev": "medio",
+   "area": "PENDING 1/A5.08 2HR SHAFT CEILING",
+   "excel": "sin renglon; RESUMEN lo deja 'pendiente para ti' sin area",
+   "plan": "1/A5.08 '2HR SHAFT CEILING' + 'STEEL SUPPORT PLATFORM WITH 2HR RATED FIRE PROOFING' en la base del north shaft (callout 11/A9.03 'HORIZONTAL ASSEMBLY, SEE OTHER DETAILS'); 8/A9.03 shaft interior 2'-3\" x 4'-3 5/8\". El shaft esta al oeste de ELEC 104 (sobre el ACT), no sobre 104.",
+   "delta": "area [DERIVED] 2.25 x 4.302 = 9.68 SF; assembly no impreso -> cargar supuesto conservador (ej. liner 1\" + 2 capas 5/8 Type X = +9.68 SF liner, +19.36 SF Type X) + RFI (U-048). El barrido de RFI-13 lista 'SHAFT CEILING' pero sus hits omiten A5.08 (detector ciego, U-137). Base del south shaft (7/A9.03) no revisada: duda",
+   "png": [
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F02_A5.08_2HR_SHAFT_CEILING.png",
+    "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F02b_A9.03_8_north_shaft_dims.png"
+   ]
+  },
+  {
+   "id": "F03",
+   "sev": "medio",
+   "area": "RFI-04 resto (ELEC 221/321) + ELEC 421 vs RFI-24",
+   "excel": "A0.00 'ELECTRICAL AND IT ROOMS 2 HR' se aplica a DATA 118B y ELEC/TELE 120, pero ELEC 221 (UNTYPED-L2-12), ELEC 321 (NULL-L3-08/09) y ELEC 421 (W.4-L4-18, W.6-L4-09, parte de W.6-L4-08) van a 1 capa por cara",
+   "plan": "A0.00 Code Summary 'ELECTRICAL AND IT ROOMS - 2 HR' (general, todos los niveles)",
+   "delta": "duda/[DERIVED aprox] +1 capa por cara: 321 +143.7 SF, 221 +41.8 SF, 421 +336 SF + parte de W.6-L4-08 = ~+520 SF 5/8 Type X. Criterio inconsistente: o A0.00 manda en todos los cuartos ELEC/IT o en ninguno; debe ir como opcion A del RFI-04 con delta",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F03_A0.00_ELEC_IT_ROOMS_2HR.png"
+  },
+  {
+   "id": "F04",
+   "sev": "bajo-medio",
+   "area": "RFI-22 (cerrado rev14)",
+   "excel": "cerrado 'impreso, opcion A, delta 0': el BAR 107 suspended gyp ceiling queda en el bid",
+   "plan": "A0.00 narrativa: 'THE BAR, DINING, AND KITCHEN AREAS ARE BEING PERMITTED AS CORE AND SHELL SPACES FOR PURPOSES OF THIS PERMIT. THE LAYOUT AND DESIGN OF THOSE SPACES WILL BE SUBMITTED UNDER A SEPARATE PERMIT.' El cierre no lo cita. A5.04 'BAR SUSPENDED GYP CEILING' y A7.31 3 'SECTION - BAR CEILING' si estan impresos",
+   "delta": "es conflicto plano-vs-plano, no respuesta impresa unica: dejar como decision (R-ALC-10) con delta -121.6 SF visible en Pending; ALC-E08 dice 'Bar' excluido y a la vez carga el cielo del bar",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F04_A0.00_BAR_core_and_shell.png"
+  },
+  {
+   "id": "F05",
+   "sev": "bajo",
+   "area": "RFI-17",
+   "excel": "Pending y SEGUIMIENTO: delta '-182 SF board and grid'",
+   "plan": "Material Summary carga CLG-L1-10 188.01 SF + 47.0 LF main tee + 141.01 LF cross tee + 55.57 LF angle + 12.4 LF hanger (RESUMEN)",
+   "delta": "delta desactualizado (-188.01 SF + grid). Opcion A solo dice 'not labeled'; A0.01 no dibuja 2HR FB alrededor de 128 aunque A8.00 128.1 es 90 MIN; E2.01 pone S3 surface-mount en 128 (no resuelve el cielo). RFI valido (no hay respuesta impresa encontrada); IBC 913.2.1 / 707.5 / Table 601 bien citados",
+   "png": null
+  },
+  {
+   "id": "F06",
+   "sev": "bajo",
+   "area": "RFI-04 higiene (U-116)",
+   "excel": "UNTYPED-L2-01/02 y NULL-L3-01 siguen rotulados '[TYPE ASSUMED - RFI-04] Demising'; la pregunta de RFI-04 aun lista demising y lobby 217/317 sur",
+   "plan": "rev14 los cerro por 3/A0.01, 1/A0.02 '1HR FP' y '2HR FB'",
+   "delta": "0 SF; solo rotulo/texto",
+   "png": null
+  },
+  {
+   "id": "F07",
+   "sev": "bajo",
+   "area": "Formato U-042 / citas",
+   "excel": "RFI-21 (B)= S1.02 y RFI-24 (B)= tags de 1/A7.50: son lecturas de plano, no codigo; RFI-23 dice 'Table 509 ... refers to NFPA 70'",
+   "plan": "U-042: A=planos, B=codigo. IBC 2018 Table 509 no remite a NFPA 70 (duda de redaccion)",
+   "delta": "0",
+   "png": null
+  },
+  {
+   "id": "F08",
+   "sev": "medio (compra)",
+   "area": "Material Summary C-H studs",
+   "excel": "Pieces = ROUNDUP(LF x 1.15 / 20 ft): 36 (2-1/2\") y 34 (6\")",
+   "plan": "studs de 10.44-12.0 ft: 1 stud por stick de 20 ft (el sobrante no sirve)",
+   "delta": "[DERIVED] 2-1/2\": 620.81/11 ~ 56 studs (+15% = 65) vs 36; 6\": ~48 studs vs 34. Net LF correcto; piezas a comprar subestimadas ~40% salvo pedido cut-to-length (duda proveedor)",
+   "png": null
+  },
+  {
+   "id": "F09",
+   "sev": "bajo",
+   "area": "Spec 09 29 00 2.6.E",
+   "excel": "solo 'Joint compound, all purpose' y 'Joint tape, paper'; CBU 3,694.36 SF sin tratamiento de juntas",
+   "plan": "09 29 00 2.6.E.1 W.R. board: setting-type taping + setting-type sandable topping; 2.6.E.3 / 3.6.G CBU per manufacturer (mesh tape)",
+   "delta": "[DERIVED con yields del Excel] W.R. 28,073.5 SF x 0.072 = 2,021 lb pasan a setting-type; CBU 3,694.36 x 0.37 = 1,367 LF mesh tape no cargado (duda de criterio)",
+   "png": null
+  },
+  {
+   "id": "F10",
+   "sev": "bajo (duda)",
+   "area": "118B / 120 alturas de capa",
+   "excel": "2a capa 2 HR (W.6-L1-20 C, W.6-L1-23 C/E) a 13.79 ft (RFI-28) pero la 1a capa de esas mismas caras esta en filas A/B a 12.0 ft; W.6-L1-23 B pone W.R. en los 25.39 LF incl. caras Data/Elec",
+   "plan": "IBC 2018 707.5 (aplicado en RFI-28): todas las capas del fire barrier al underside of sheathing",
+   "delta": "[DERIVED] 5.8x2x1.79 + (2.76+6.14)x1.79 = +36.7 SF Type X",
+   "png": null
+  },
+  {
+   "id": "F11",
+   "sev": "duda",
+   "area": "Ceiling / soffit track 2,616.04 LF",
+   "excel": "track metalico para SOF-L1..L4 sin studs",
+   "plan": "7/A7.23 'WALL DETAIL - CORRIDOR CEILING' dibuja el armado del cove con piezas rectangulares tipo madera; GYP-1 'ON METAL SUSPENSION SYSTEM, OR WOOD FRAMING'",
+   "delta": "si es madera: Div. 06 EXCLUDED (-1,987 LF de corridors L2-L4); si es metal: faltan studs/cripples. Verificar",
+   "png": "/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/F11_A7.23_7_cove_framing.png"
+  },
+  {
+   "id": "F12",
+   "sev": "duda",
+   "area": "Hanger wire 483.4 LF",
+   "excel": "ej. CLG-L2-56 442.09 SF -> 14.11 LF",
+   "plan": "hangers @ 48\" (=1 por 16 SF) y drop >= 9 1/2\" (7/A7.23)",
+   "delta": "CLG-L2-56: 27.6 hangers x 0.79 ft = 21.9 LF min vs 14.11; sin amarre. Bajo valor",
+   "png": null
+  },
+  {
+   "id": "F13",
+   "sev": "duda",
+   "area": "Scope ALC-E12",
+   "excel": "kickers / clip angles EXCLUDED 'by the steel fabricator ... no spec section on file'",
+   "plan": "S1.02 / 5/S3.08 los dibuja como acero estructural; 'by the steel fabricator' no esta impreso",
+   "delta": "0; motivo inferido: citar la hoja S como acero estructural (otro trade) o la regla fija",
+   "png": null
+  }
+ ],
+ "verified": {
+  "RFI-15": "OK: A0.06 GN 10, A0.00 'ROOF CONSTRUCTION 0 HR', A0.10 'UNRATED ROOF ASSEMBLY', spec 09 29 00 2.3 A (nota: 2.3 C MR tambien es 5/8 Type X; 2.3 B ceiling board 1/2 no aplica por GN 10 '5/8')",
+  "RFI-23": "OK: 2/A0.01 caja cerrada '2HR FB' en ELEC/TELE 120 (/tmp/claude-0/-home-user-Reading-Plans/595957cc-977d-57d4-86d3-c6a412075f57/scratchpad/full14_rfi/png/V01_A0.01_ELEC_TELE_120_2HR_FB.png); A8.00 120.1 90 MIN",
+  "RFI-26": "parcial: A2.01 '7 SF FACP 125' y A8.00 125.1 '90 MIN.' 2'-8\"x6'-8\" confirmados; 1/A6.02 alcove no re-medido",
+  "RFI-04 parcial": "OK: A0.00 'CORRIDOR AND UNIT DEMISING WALLS CONSTRUCTED AS 1HR FIRE PARTITIONS'",
+  "RFI-21": "evidencia OK: S1.02 'PRE-FABRICATED ROOF CANOPY BY OTHERS', S3.10 'CANOPY BY OTHERS', 08/A9.05 'GYP/METAL SOFFIT PANEL'",
+  "RFI-24": "evidencia OK: A8.00 118.1 DATA sin rating; 1/A7.50 tags 'W.6.1 0'; 2HR atribuido a revision de codigo del usuario (rev5)",
+  "RFI-25/28": "citas OK: IBC 2018 707.5 (texto correcto), Table 721.1(2), Table 716.1(2)",
+  "RFI-17 B": "IBC 2018 913.2.1 (exc. 1 sprinklered 1 HR) y 707.5 correctos",
+  "RFI-13 B": "IBC 2018 703.2 / 703.3 item 1 / Table 2508.1 aplicables; pero ver F01"
+ },
+ "material_summary_checks": {
+  "breakdowns_resumados": 16,
+  "breakdown_vs_net": "16/16 cuadran (RC dif 0.05 LF redondeo)",
+  "filas_PT_vs_breakdowns": "897 filas, 0 diferencias",
+  "capas_por_type_vs_A0.06": "OK (W.62-1 2/cara, W.6-2 2, resto 1; 3 filas W.6-2 de 1 capa = capa adicional 118B/120)",
+  "both_sides": "8 walls W/DW con 1 cara, todas explicadas (F&B/retail excluido, cavidad)",
+  "compound": "0.072 x 117,630 = 8,469.4 lb (137,191 - 2/3 x 29,341 Level 1) OK",
+  "tape": "0.37 x 137,191 (Type X + W.R. + Type C) OK",
+  "grid": "main/cross consistentes con 6,719 SF vs GYP-1 suspendido 6,765 SF (-46 SF, duda)",
+  "waste_pieces": "OK salvo F08",
+  "screws_wood": "todos 0 / sin renglones de madera",
+  "dolares": "0 montos (solo referencias $B$ de formulas)"
+ }
+}
