@@ -601,3 +601,6 @@ Regla: antes de entregar, listar TODOS los N/A de la compuerta con el canon llen
 - Síntoma: CE_PDF_EDITABLE / CE_VISTA_BLUEBEAM FAIL: los polígonos de ceiling (markups_rcp) con /Measure 1/8" sin /VP en A3.01-A3.04; Page Labels numéricos en las páginas vector-only; DETALLES_REVISADOS / SCHEDULES_REVISADOS con AcroForm /SigFlags 3.
 - Causa: editable() corría en markups_bluebeam ANTES de markups_rcp; el inventario no nombraba las páginas vector-only; los PDF de revisión copian el AcroForm del bid set.
 - Arreglo: markups_rcp.escribir re-aplica mb.editable() con las Page Labels que ya trae; compuerta_entrega._sin_firmas al guardar DETALLES / SCHEDULES_REVISADOS; el proyecto pasa `--inventario` con TODAS las páginas (nombre de set_texto, la repetida con sufijo ' B'). Test test_compuerta_entrega.py::test_be_cr31_sin_firmas (v81cf61).
+
+## BE-150 (10-nov, CR City Hotel rev13)
+Ceilings de cuartos impresos en RCP sin renglón (stalls 417.3/417.4, Elec 421, closets L4). CE_RCP_COMPLETO solo revisaba Excel→markup. Arreglo: CE_RCP_CUARTOS (RCP→Excel) + test; U-159.
