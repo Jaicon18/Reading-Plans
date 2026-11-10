@@ -26,3 +26,5 @@ Cada línea dice qué regla vigente la reemplaza o en cuál se unió. Vigentes: 
 - [U-108 · DUPLICADO unido en U-090] REGLA INVIOLABLE (usuario 3-nov): UN SOLO folder de entregas = "Claude outputs" en la RAÍZ del shared drive JC HUNTER PROJECTS (id 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc), un folder por proyecto. PROHIBIDO usar el otro "Claude outputs" dentro de Projects (id 1rUgu9cFt59LWzuoCUbFPrEjyNXB6ot5h). Incluirlo en el brief de todo proyecto nuevo.
 - [U-109 · DUPLICADO unido en U-092] REGLA (usuario 3-nov, TODOS los proyectos): en la vigilancia de bids, avisar también si aparece OTRO GC invitando al mismo proyecto.
 - [U-110 · DUPLICADO unido en U-092] REGLA INVIOLABLE MÁXIMA (usuario 3-nov, BE-118): TODO proyecto queda monitoreado (addenda, cambios de fecha, otro GC) desde que arranca hasta su bid date; cada proyecto nuevo se agrega a "Vigilar addenda de bids activos" (trig_01LbGGSaZHAQ47dUFzEXWMfo) el MISMO turno en que se lanza.
+
+- (10-nov) U-160 tenía dos renglones (COORDINACIÓN: FreeText rojo; sesión CR: polígono gris con hatch); unificados en uno solo con ambos elementos.
