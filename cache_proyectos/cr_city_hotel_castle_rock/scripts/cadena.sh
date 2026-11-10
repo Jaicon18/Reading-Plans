@@ -1,7 +1,7 @@
 #!/bin/bash
 # CR City Hotel - cadena pasos 4-7 (cada tool por bitacora.py run; para en el primer rc != 0). Uso: bash scripts/cadena.sh [desde]
 source /root/cr/work/scripts/env.sh
-REV=${REV:-rev13}; cd $W; C4=$W/etapas/4_canon; X=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_${REV}.xlsx
+REV=${REV:-rev14}; cd $W; C4=$W/etapas/4_canon; X=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_${REV}.xlsx
 N=0; DESDE=${1:-0}
 R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@" > $W/last.log 2>&1; rc=$?
       echo "$(TZ=America/Los_Angeles date +%H:%M) step $N rc=$rc $(basename $1) $2"
@@ -26,6 +26,7 @@ R scripts/rev10_auditoria.py
 R scripts/rev11_auditoria.py
 R scripts/rev12_u155.py
 R scripts/rev13_auditoria.py
+R scripts/rev14_rfis.py
 R scripts/perimetros_angle.py
 R scripts/imagenes_walls.py
 R scripts/rfis.py
@@ -41,6 +42,7 @@ R scripts/insumos_canon.py alcance
 R $T/alcance_filtro.py $C4/alcance_in.json $C4/out/alcance_out.json
 R $T/markups_bluebeam.py $PDF $C4/takeoff_canon.json $W/etapas/6_markups/markups.pdf --json $W/etapas/6_markups/markups.json --inventario $W/etapas/1_inventario/paginas_hojas.json
 R $T/markups_rcp.py $W/etapas/6_markups/markups.pdf $C4/takeoff_canon.json $W/etapas/6_markups/rcp_polys.json $W/etapas/6_markups/markups_con_rcp.pdf $W/etapas/6_markups/rcp_png
+R $T/markups_rcp.py excluded $W/etapas/6_markups/markups_con_rcp.pdf $W/etapas/4_canon/rev14/rcp_cuartos.json
 R scripts/imagenes_hoja.py
 R $T/vigas_sobre_walls.py $PDF NONE A2.02@p18 $C4/takeoff_canon.json --json $C4/out/vigas_out.json
 R scripts/evidencias_reglas.py

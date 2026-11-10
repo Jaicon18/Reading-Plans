@@ -17,6 +17,9 @@ nuevos = [
      "L1 FACP 125 north wall, furring on CMU (1/A6.02) | faces: FACP 125",
      "1/A6.02; A6.02 [DERIVED] length (1/A6.02 vector at 18 pt/ft: FACP face of the north CMU band y 1313.4/1324.8 from the Stair 2 east wall face x 1383.0 to the grid-P wall face x 1441.6 = 58.6/18 = 3.26) | height: ",
      "tag 'FI.2 | 0' on 1/A6.02 -> FI.2-0 (A0.06: 1 layer 5/8\" Type X room side over rigid insulation)"),
+    # rev14 (U-156): FI.2-L1-12 RETIRADO - FACP 125 = 7 SF (1/A2.01) con la puerta 125.1 en su cara sur (1/A6.02, A8.00 '125.1 FACP 90 MIN. 2'-8" x 6'-8"');
+    # el muro de grid 14 queda 4'-1 3/8" FIN al sur, en el alcove exterior de la salida de Stair 2, sin hatch de CMU ni de FI (RFI-26 cerrado, opción B)
+] + [] if True else [
     ("FI.2-L1-12", "A2.01", [[1653.5, 1285.1], [1691.9, 1285.1]], 9.0,
      "L1 FACP 125 south wall (grid 14), furring on CMU [RFI-26] | faces: FACP 125",
      "1/A2.01; A2.01 [DERIVED] length (1/A2.01 vector at 9 pt/ft: FACP 125 face of the grid-14 CMU wall, furring line y 1285.1 (pair sep 8.7) from 1653.5 to 1691.9 = 38.4/9 = 4.27) | height: ",
@@ -37,7 +40,7 @@ for nid, sh, path, esc, loc, src, tipo in nuevos:
 c.setdefault('excluded_walls', []).append({"id": "XM.0.1-L1-FACP", "reader": "AB", "floor": "L1", "sheet": "A6.02", "tag_ids": [],
     "reason": "FACP 125 east wall (grid P) 'XM.0.1 | 2' on 1/A6.02: exterior masonry with finish '.1 NO FINISH' (A0.07 finish materials legend) - no gypsum board"})
 da = c.setdefault('deduct_alternates', [])
-if not any(d.get('id') == 'DA-5' for d in da):
+if False and not any(d.get('id') == 'DA-5' for d in da):   # rev14: RFI-26 cerrado, sin DA-5
     sf = round(4.27 * float(base['height_ft']), 2)
     da.append({"id": "DA-5", "rfi": "RFI-26", "texto": "FACP 125 south wall (grid 14) without furring: FI.2-L1-12 out", "delta_sf": -sf, "material": "5/8\" Type X"})
 json.dump(c, open(CP, 'w'), indent=1)
