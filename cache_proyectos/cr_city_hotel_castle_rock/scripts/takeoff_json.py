@@ -1,6 +1,6 @@
 """CR City Hotel: takeoff.json (formato plantilla_excel.py) desde el canon resuelto + proceso/proyecto_datos.json.
 SOLO TEXTO: toda cantidad del Excel sale de familias_out.json vía plantilla_excel."""
-import json, os, sys
+import json, os, sys, re
 sys.path.insert(0, sys.argv[1])
 import plantilla_excel
 K = '/root/cr/work'
@@ -90,7 +90,7 @@ A = [
  ("ALC-17", "NO APLICA", "EXCLUDED - framed openings for ducts / diffusers (standing order); no access panels in gypsum scheduled (A8.00, M1.01, M1.05, P4.00, P4.01, T0.01 legend)."),
  ("ALC-18", "CUANTIFICADO", "Corner bead / L-bead / U-bead per 09 29 00 2.5 and control joints per A0.06 GN 15 (A3.01-A3.04, A7.00): quantities from window returns and outside corners (window schedule A8.01 + elevations A4.00-A4.03, measured by program)."),
  ("ALC-20", "CUANTIFICADO", "5/8\" cement board (CBU) at tile walls of guest baths (A0.06 GN 13; 09 29 00 2.4.A.2 'match adjacent panel thicknesses'; A2.01-A2.04); FRP is exterior XI.2.7 on CMU (A0.07) - not ours; no FRP interior finish (A7.19)."),
- ("ALC-21", "CUANTIFICADO", "C-H shaft walls (A0.06 CH, A9.03, A5.08): L2-L4 north / south shafts (7/A9.03, 8/A9.03 4 3/4\" 2-HOUR SHAFTWALL W419 / U497) 2-1/2\" 20 GA C-H studs + 2-1/2\" J runner; L1 / L4 chase CH.6 (1/A7.50) 6\" 20 GA C-H + 6\" J runner (A0.06 'SHAFT SIDE \"J\" RUNNER CHANNEL'); studs @ 24\" o.c. to the height of the liner, 1\" shaftliner + 2 layers 5/8\" Type X; S2.02 elevator pit is concrete."),
+ ("ALC-21", "CUANTIFICADO", "C-H shaft walls (A0.06 CH, A9.03, A5.08): L2-L4 north / south shafts (7/A9.03, 8/A9.03 4 3/4\" 2-HOUR SHAFTWALL W419 / U497) 2-1/2\" 20 GA C-H studs + 2-1/2\" J runner; L1 / L4 chase CH.6 (1/A7.50) 6\" 20 GA C-H + 6\" J runner (A0.06 'SHAFT SIDE \"J\" RUNNER CHANNEL'); studs @ 16\" o.c. (A0.06 GN 6 'ALL METAL STUDS TO BE SPACED @ 16\" O.C.') to the height of the liner, 1\" shaftliner + 2 layers 5/8\" Type X; S2.02 elevator pit is concrete."),
  ("ALC-22", "CUANTIFICADO", "Rated assemblies per A0.00-A0.03 code plans and A0.06 / A0.07 / A0.08 UL designs (U379, U301, U341, U415, V337, L546): Type X layers per rating loaded."),
  ("ALC-23", "NO APLICA", "No ballistic / lead-lined / abuse-resistant panels in the set (A0.06, A7.19)."),
  ("ALC-24", "CUANTIFICADO", "Level 4 finish on all board (09 29 00 3.6.E.4: under plaster / wallcovering and back of house); no Level 5 area (A7.19 TF-1 plaster / vinyl wallcovering everywhere); compound and tape by yield (A0.00-A0.04, A0.09 are code text)."),
@@ -108,11 +108,11 @@ extra = [
  ("Insulation", "EXCLUDED - batt / mineral fiber / rigid insulation (A0.06, A0.07, A0.08)."),
  ("Plaster / wallcovering / paint", "EXCLUDED - TF-1 plaster, vinyl wallcovering, P-1 / P-2 paint (A7.19)."),
  ("CMU / concrete walls", "EXCLUDED - CM.x CMU and C.x cast-in-place concrete walls (A0.06, A6.00-A6.02): masonry / concrete trades."),
- ("Food & Beverage interiors (L1 Kitchen 100 / Bar / Dining, L4 410 / 411 / 419)", "EXCLUDED - 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT. WILL BE SUBMITTED IN FUTURE TENANT IMPROVEMENT PERMIT.' (1/A2.04, A3.04, A7.45, A7.50, A7.55) + A0.00 'core and shell': non-rated faces and ceilings by the tenant; rated walls and the FS-1 / RS-1 rated membranes stay (RFI-05 criterion). BAR 107 suspended gyp ceiling is loaded (A5.04, RFI-22)."),
+ ("Food & Beverage interiors (L1 Kitchen 100 / Dining, L4 410 / 411 / 419; BAR 107 except its printed ceiling)", "EXCLUDED - 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT. WILL BE SUBMITTED IN FUTURE TENANT IMPROVEMENT PERMIT.' (1/A2.04, A3.04, A7.45, A7.50, A7.55) + A0.00 'core and shell': non-rated faces and ceilings by the tenant; rated walls and the FS-1 / RS-1 rated membranes stay (RFI-05 criterion). Exception, BAR 107 ceiling: A5.04 'BAR SUSPENDED GYP CEILING' / 'CLG 11'-0\"' and 3/A7.31 'SECTION - BAR CEILING' are printed -> loaded by R-ALC-10 (the specific drawing governs A0.00 'core and shell'), CLG-L1-125 125.98 SF; delta if the bar is F&B tenant work: -125.98 SF board + grid (RFI-22)."),
  ("Retail 124 tenant finishes", "EXCLUDED - A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail faces (incl. the sweep of every -0 wall: XW.6.4-L1-04, retail parts of XW.6.3-L1-01 and FI.2-L1-06) and the GYP-1 11'-0\" band inside the retail (RFI-05)."),
  ("Separate-permit areas", "EXCLUDED - grey toned area 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' (A2.01-A2.04); existing historic building (A0.00)."),
  ("Doors, frames, windows, hardware", "EXCLUDED - A8.00 / A8.01 by others."),
- ("Structural steel: kickers, clip angles, L3x3 angles", "EXCLUDED - L3x3x1/4 KICKER at 4'-0\" o.c. (S1.02, 5/S3.08) and CLIP ANGLE with threaded rods into masonry (S3.04, S3.08) are structural steel by the steel fabricator (S-sheets S1.02 / S3.04 / S3.08; not our trade, no spec section on file)."),
+ ("Structural steel: kickers, clip angles, L3x3 angles", "EXCLUDED - L3x3x1/4 KICKER at 4'-0\" o.c. (S1.02, 5/S3.08) and CLIP ANGLE with threaded rods into masonry (S3.04, S3.08) are drawn and sized on the STRUCTURAL sheets (S1.02 'L3x3x1/4 KICKER AT 4'-0\" O.C.', 5/S3.08 'L3x3 KICKER, SEE PLAN FOR SPACING' with '(3) 3/4\" A325 BOLTS', S3.02 'L3x3x3/8 BRACE AT 4'-0\" O.C.', S3.04 / S3.06 / S3.08 / S4.02 'CLIP ANGLE ... A36 THREADED RODS') = structural steel members (Div. 05 structural steel), not cold-formed / drywall framing: other trade (standing rule: structural members on S-sheets are not our scope)."),
 ]
 for k, (n, x) in enumerate(extra, 1):
     alcances.append({"id": f"ALC-E{k:02d}", "nombre": n, "estado": "NO APLICA", "nota": x})
@@ -150,6 +150,7 @@ td = {
      [r"hanger wire", "09 22 16 2.2 Wire Hangers"],
      [r"resilient channel", "09 22 16 2.3 Resilient Furring Channels"],
      [r"track|runner", "09 22 16 2.3 Steel Studs and Runners (ASTM C 645)"],
+     [r"^2-1/2\" stud", "09 22 16 2.3 Steel Studs and Runners (ASTM C 645) - soffit cripple studs"],
      [r"control joint|corner bead|casing bead|trim", "09 29 00 2.5 Trim Accessories (ASTM C 1047)"],
      [r"compound|tape", "09 29 00 2.6 Joint Treatment Materials"],
      [r"C-H stud|J-runner|shaft", "09 21 16.23 2.4 Non-Load-Bearing Steel Framing"],
@@ -157,5 +158,22 @@ td = {
  "rfis": rfis, "rfi_cierre": cierre, "revisar": plantilla_excel.ordenar_revisar(revisar), "alcances": alcances,
  "proyecto_datos": pd, "hojas_revisadas": hojas, "barrido_no_dibujado": barrido,
 }
+# rev15 (revisión completa rev14 F08): piezas mínimas de C-H studs - un stud de largo > 10 ft (stock 20 ft / 2) sale de su propio stick
+import math as _mt
+_pm = {}
+for _m in c['misc_items']:
+    if not re.search(r"C-H stud", _m.get('familia', '')):
+        continue
+    _g = re.search(r"= (\d+) (?:cripple )?studs x (?:span )?([\d.]+) ft", str(_m.get('op')))
+    if _g:
+        _n, _h = int(_g.group(1)), float(_g.group(2))
+        _st = _n if _h > 10.0 else _mt.ceil(_n / max(1, int(20.0 // _h)))
+        _t = f"{_m['ref']} {_n} studs x {_h} ft -> {_st} sticks"
+    else:
+        _st = float(_m['qty']) / 20.0; _t = f"{_m['ref']} {_m['qty']} LF / 20 = {round(_st, 2)} sticks"
+    _e = _pm.setdefault(_m['familia'], {"s": 0.0, "t": []}); _e["s"] += _st; _e["t"].append(_t)
+td["piezas_min"] = {f: {"n": _mt.ceil(round(e["s"] * 1.15, 6)),
+                        "op": f"one 20 ft stick per stud longer than 10 ft (the drop is not reusable): {round(e['s'], 2)} sticks x 1.15 waste = "
+                              f"{_mt.ceil(round(e['s'] * 1.15, 6))} ({'; '.join(e['t'][:40])})"} for f, e in _pm.items()}
 json.dump(td, open(f'{K}/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print("rfis", len(rfis), "alcances", len(alcances))

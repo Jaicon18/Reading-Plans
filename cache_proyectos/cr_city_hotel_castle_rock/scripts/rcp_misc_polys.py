@@ -80,6 +80,35 @@ for cx in c.get('ceilings') or []:
     elif m and rr(cx.get('source', '')):
         fs1[(cx['room'][:2], m[0])] = rr(cx['source'])
 nuevos, LOG = [], []
+# rev15 (revisión completa rev14 F05, CE_RCP_CONTORNO): vistas PLAN de las hojas ampliadas -> su vista RCP (offset medido por voto de
+# segmentos de muro, etapas/4_canon/rev15/geometria_rcp.json); A7.45 vistas 2 / 3 no tienen RCP ampliado -> 1/A3.01.
+VISTA = [("A7.50", lambda x, y: x > 1300 and y > 700, "A7.50", lambda x, y: (x, y - 721.5), "1/A7.50 ENLARGED PLAN -> 2/A7.50 ENLARGED RCP (dy -721.5 pt)"),
+         ("A7.45", lambda x, y: x < 1250 and y > 900, "A7.45", lambda x, y: (x, y - 727.1), "1/A7.45 ENLARGED PLAN -> 4/A7.45 ENLARGED RCP (dy -727.1 pt)"),
+         ("A7.45", lambda x, y: x > 1400 and y < 950, "A3.01", lambda x, y: (x / 2 - 173, y / 2 + 166), "3/A7.45 (plan, no enlarged RCP) -> 1/A3.01 RCP (scale 1/2, offset -173 / +166 pt)"),
+         ("A7.45", lambda x, y: x > 1400 and y > 1150, "A3.01", lambda x, y: (x / 2 - 206, y / 2 + 570), "2/A7.45 (plan, no enlarged RCP) -> 1/A3.01 RCP (scale 1/2, offset -206 / +570 pt)")]
+BORDE_NO = {"RS6-L3": "east edge = L4 facade line (1065.5 on A2.04) of the roof strip above, not an RCP line of A3.03; south end at the derived 66.17 ft",
+            "CLG-L1-127": "niche boundary to the BAR field not drawn on 1/A7.31 (U-146: the higher adjacent printed height)",
+            "CLG-L2-214C": "hole of the FS-1 polygon copied from the floor-plan equipment square; 1/A3.02 draws plain stipple there, no box lines",
+            "CLG-L3-314C": "hole of the FS-1 polygon copied from the floor-plan equipment square; 1/A3.03 draws plain stipple there, no box lines"}
+
+
+def vista_rcp(e):
+    pols = e.get('polygons') or []
+    if pols:
+        xs = [q[0] for P_ in pols for q in P_]; ys = [q[1] for P_ in pols for q in P_]
+        cx, cy = sum(xs) / len(xs), sum(ys) / len(ys)
+        for sh, en, sh2, tf, txt in VISTA:
+            if e.get('sheet') == sh and en(cx, cy):
+                e['polygons'] = [[list(tf(q[0], q[1])) for q in P_] for P_ in pols]
+                if sh2 == 'A3.01':
+                    e['polygons'] = [[[q[0], q[1]] for q in P_] for P_ in e['polygons']]
+                    e['sf_escala'] = 9.0
+                e['sheet'] = sh2; e['cause'] = str(e.get('cause', '')) + f"; drawn on its RCP view: {txt}"
+                break
+    if e.get('id') in BORDE_NO:
+        e['cause'] = str(e.get('cause', '')) + f" [EDGE NOT DRAWN: {BORDE_NO[e['id']]}]"
+    return e
+
 import glob as _gl
 KM = {}
 for _f in sorted(_gl.glob(f'{W}/etapas/4_canon/rev9/contornos_*.json')):   # rev9: contornos MEDIDOS (caras de walls / recorrido real)
@@ -109,7 +138,7 @@ for x in c['misc_items']:
                 dx, dy = OFF[fl]; pols = [[[q[0] + dx, q[1] + dy] for q in P_] for P_ in pols]; sheet = PISO[fl][1]
             e.update(sheet=sheet, polygons=pols, cause=f"contour measured in vectors on {str(k_.get('nhoja')).split(' (')[0]} (wall faces; openings as keyhole)"
                      + (f"; board = drawn plan area x slope factor {k_['factor_pendiente']}" if k_.get('factor_pendiente') else ""))
-            nuevos.append(e); continue
+            nuevos.append(vista_rcp(e)); continue
         if rid in MANUAL:
             sheet, rects, _, que = MANUAL[rid]; como = f"room read in vectors on {sheet} ({que})"
         elif rr(src):
@@ -203,7 +232,7 @@ for x in c['misc_items']:
             f = (s_ + falta) / s_; lines[-1] = [a, [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]]
             como += f"; last segment adjusted {L:.2f} -> {lf} LF (loaded)"
         e.update(kind="line", sheet=sheet, lines=lines, lf=lf, depth_ft=round(dep, 4), cause=como)
-    nuevos.append(e)
+    nuevos.append(vista_rcp(e))
 json.dump(P + nuevos, open(f'{W}/etapas/6_markups/rcp_polys.json', 'w'), indent=1)
 json.dump({"agregados": [n['id'] for n in nuevos], "fallas": LOG}, open(f'{W}/etapas/6_markups/rcp_misc_log.json', 'w'), indent=1)
 print(len(nuevos), "misc markups;", "fallas", LOG)

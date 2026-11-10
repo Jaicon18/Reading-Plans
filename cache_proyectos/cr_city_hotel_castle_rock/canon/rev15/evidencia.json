@@ -1,0 +1,179 @@
+{
+ "A_elec_rooms_2HR": {
+  "printed": {
+   "A0.00": "[CONFIRMADO] Code summary 'ELECTRICAL AND IT ROOMS 2 HR' (general, no room numbers)",
+   "2/A0.01 L1": "[CONFIRMADO] ELEC / TELE 120: boxed tag '2HR FB' in the room; DATA 118B not labeled on the code plan (its 2 HR = user decision rev5, RFI-24, U-052)",
+   "3/A0.01 L2": "[CONFIRMADO] ELEC 221 (closet E of 210, door 221.1): walls drawn with the 1HR FP line ('1HR FP' text on its E wall); no 2HR FB line",
+   "1/A0.02 L3": "[CONFIRMADO] ELEC 321: same closet, walls drawn 1HR FP ('1HR FP' labels W and E); the '2HR FB' leader there points to the small riser box at the NE corner, not to the ELEC walls",
+   "2/A0.02 L4": "[CONFIRMADO] ELEC 421 (11 SF, closet E of Men 418): walls drawn 1HR FP ('1HR FP' both sides)",
+   "plan tags": "[CONFIRMADO] 1/A2.02 ELEC 221: 'W.62 | 1' tags on its walls; canon rows carry W.4-0 / W.6-0 / W.6-1 / W.62-1",
+   "doors": "[PENDIENTE] A8.00 rating of 221.1 / 321.1 / 421.1 not re-read in this pass"
+  },
+  "canon_rows": [
+   [
+    "UNTYPED-L2-12",
+    "W.4-0",
+    1,
+    2,
+    2.26,
+    9.2396
+   ],
+   [
+    "W.62-L2-07 A",
+    "W.62-1",
+    1,
+    1,
+    6.85,
+    9.0
+   ],
+   [
+    "UNTYPED-L2-04",
+    "W.62-1",
+    2,
+    2,
+    6.49,
+    9.2396
+   ],
+   [
+    "W.62-L2-06 A",
+    "W.62-1",
+    2,
+    1,
+    10.59,
+    9.2396
+   ],
+   [
+    "W.62-L2-07 C",
+    "W.62-1",
+    2,
+    1,
+    14.09,
+    9.2396
+   ],
+   [
+    "NULL-L3-08",
+    "W.4-0",
+    1,
+    2,
+    6.11,
+    9.2396
+   ],
+   [
+    "NULL-L3-09 A",
+    "W.4-0",
+    1,
+    1,
+    1.61,
+    9.2396
+   ],
+   [
+    "NULL-L3-09 B",
+    "W.4-0",
+    1,
+    1,
+    1.61,
+    9.8854
+   ],
+   [
+    "W.4-L4-18 A",
+    "W.4-0",
+    1,
+    1,
+    8.77,
+    8.9375
+   ],
+   [
+    "W.4-L4-18 B",
+    "W.4-0",
+    1,
+    1,
+    8.77,
+    8.9375
+   ],
+   [
+    "W.6-L4-09",
+    "W.6-1",
+    1,
+    2,
+    8.77,
+    10.22501
+   ],
+   [
+    "W.6-L4-08 B (418+421 face)",
+    "W.6-1",
+    1,
+    1,
+    13.03,
+    10.4375
+   ]
+  ],
+  "delta_option_A_DERIVADO": {
+   "221": "2.26x9.2396x2 = 41.76 SF",
+   "321": "6.11x9.2396x2 + 1.61x9.2396 + 1.61x9.8854 = 143.71 SF",
+   "421": "8.77x8.9375x2 + 8.77x10.225x2 = 336.11 SF",
+   "total": "+521.58 SF 5/8 Type X (+1 layer per 1-layer face) + 421 segment of W.6-L4-08 [PENDIENTE length]; W.62 faces already 2 layers (no change)"
+  },
+  "conclusion": "Printed reason to treat them differently EXISTS: the code plans (3/A0.01, 1/A0.02, 2/A0.02) draw ELEC 221/321/421 with the 1HR FP line, while 2/A0.01 prints '2HR FB' only at ELEC/TELE 120. Conflict A0.00 general table vs room-specific code plans -> keep option A = specific code plan (1HR FP, as loaded) and show +521.58 SF as alternative in RFI-04 (or reverse); not a silent pick.",
+  "png": [
+   "/root/cr/work/etapas/4_canon/img/rev15/A_A0.01_L1_ELEC-TELE120_2HR_FB.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/A_A0.01_L2_ELEC221_1HR_FP.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/A_A0.02_L3_ELEC321_1HR_FP.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/A_A0.02_L4_ELEC421_1HR_FP.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/A_A2.02_ELEC221_tag.png"
+  ]
+ },
+ "B_shaft_ceiling": {
+  "printed": {
+   "1/A5.08": "[CONFIRMADO] '2HR SHAFT CEILING' leader to the thin assembly on top of 'STEEL SUPPORT PLATFORM WITH 2HR RATED FIRE PROOFING' at the base of the north shaft; bubble 11/A9.03",
+   "11/A9.03": "[CONFIRMADO] 'WALL SECTION - BASE OF NORTH SHAFT': steel bracket platform + 'STEEL SUPPORT PLATFORM WITH 2HR RATED FIRE PROOFING'; NO gypsum layers / assembly text drawn. ('HORIZONTAL ASSEMBLY, SEE OTHER DETAILS' belongs to 12/A9.03 SMOKE CURTAIN, not to 11)",
+   "8/A9.03": "[CONFIRMADO] north shaft interior 2'-3\" x 4'-3 5/8\" (outer 4'-8 3/8\"), walls 4 3/4\"",
+   "7/A9.03": "[CONFIRMADO] south shaft interior 3'-8\" x 2'-0 1/8\" (outer 4'-5 1/2\" x 2'-9 1/2\"); 2-HOUR SHAFTWALL ASSEMBLY (W419, U497) MAX HEIGHT 54'-0\"",
+   "south base": "[PENDIENTE] no section in A5.0x / A9.0x cuts the base of the south shaft (only 10/A9.03 HEAD OF SHAFT and 11/A9.03 BASE OF NORTH SHAFT). Code: IBC 2018 713.11 (enclosure at the bottom of a shaft not extending to the bottom) -> RFI"
+  },
+  "area_DERIVADO": {
+   "north": "2.25 x 4.3021 = 9.68 SF",
+   "south": "3.6667 x 2.0104 = 7.37 SF"
+  },
+  "assembly": "[PENDIENTE] not printed (11/A9.03 shows only the steel platform with fireproofing) -> conservative assumption + RFI (U-048)",
+  "png": [
+   "/root/cr/work/etapas/4_canon/img/rev15/B_A5.08_1_2HR_SHAFT_CEILING.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/B_A9.03_11_base_north_shaft.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/B_A9.03_8_north_shaft_dims.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/B_A9.03_7_south_shaft_dims.png"
+  ]
+ },
+ "C_cove_7A723": {
+  "printed": "[CONFIRMADO] texts in 7/A7.23: '1'-1 3/8\" RATED ASSEMBLY', 'SANITARY AND PIPING', 'DIFFUSER BOX', 'WOOD WALL PANEL RE: ELEVATIONS', 8'-9\" / 8'-11\" A.F.F., 9 1/2\", 6 1/2\", 2 1/8\", 4 1/2\", 3'-11\", 7 3/4\", 4 1/2\". No text says wood or metal for the cove framing.",
+  "graphic": "cove / soffit framing members drawn as rectangles with X = same symbol as the wood top plates of the D.1 / F wood walls in the same detail (wood dimensional lumber convention); no C-stud symbol. Interpretation, not a printed word -> classify WOOD (Div. 06, A0.06 WOOD partitions / R80f.1) with RFI, delta = -metal track LF of the SOF corridor rows",
+  "hangers": "[CONFIRMADO] no hanger wire and no hanger spacing drawn/printed in 7/A7.23; the soffit board hangs 9 1/2\" below the rated assembly (drop = 9 1/2\" [CONFIRMADO]). 48\" o.c. hanger spacing is NOT printed here (manufacturer/ASTM C754)",
+  "png": [
+   "/root/cr/work/etapas/4_canon/img/rev15/C_A7.23_7_cove_framing.png"
+  ]
+ },
+ "D_118B_120_heights": {
+  "rows": "W.6-L1-20 A/B (13.43 LF, 1 layer each face, H 12.0) | W.6-L1-20 C (5.8 LF, 2 faces, 2nd layer, H 13.7917) | W.6-L1-23 B (25.39 LF, H 12.0, faces Toilets 113/119 + DATA 118B + ELEC/TELE 120) | W.6-L1-23 C (2.76 LF 120, 2nd layer, 13.7917) | W.6-L1-23 E (6.14 LF 118B, 2nd layer, 13.7917)",
+  "delta_DERIVADO": "(13.7917-12.0)=1.7917 ft; 5.8 x 2 faces x 1.7917 = 20.78 + (2.76+6.14) x 1.7917 = 15.95 -> +36.73 SF 5/8 Type X (1st layer raised to 13.79 on the rated segments; IBC 2018 707.5 as applied in RFI-28)"
+ },
+ "E_ALC_E12": {
+  "printed": "[CONFIRMADO] S1.02 'L3x3x1/4 KICKER AT 4'-0\" O.C.' (2 places, bubble 5/S3.08); 5/S3.08 SECTION 'L3x3 KICKER, SEE PLAN FOR SPACING', '1/2\" FULL HEIGHT STIFFENER', '(3) 3/4\" A325 BOLTS'; S3.02 'L3x3x3/8 BRACE AT 4'-0\" O.C.', 'L4x4x1/4 BRACE'; S3.04/S3.06/S3.08/S4.02 'CLIP ANGLE ... A36 THREADED RODS ... HILTI HIT HY270'",
+  "reason": "structural steel angles drawn and specified on the S (structural) sheets with A325 bolts / A36 rods = structural steel (Div. 05 12 00), not cold-formed framing; replace 'by the steel fabricator' with this printed citation. No S0 general-notes text with 'STRUCTURAL STEEL' found in the set text.",
+  "png": [
+   "/root/cr/work/etapas/4_canon/img/rev15/E_S1.02_kicker.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/E_S3.08_5_kicker.png"
+  ]
+ },
+ "F_bar": {
+  "printed": {
+   "A0.00": "[CONFIRMADO] 'THE BAR, DINING, AND KITCHEN AREAS ARE BEING PERMITTED AS CORE AND SHELL SPACES FOR PURPOSES OF THIS PERMIT. THE LAYOUT AND DESIGN OF THOSE SPACES WILL BE SUBMITTED UNDER A SEPARATE PERMIT.'",
+   "A5.04": "[CONFIRMADO] 'BAR SUSPENDED GYP CEILING' + '5/8\" ... CLG - B.O. DECK 11'-0\"'",
+   "3/A7.31": "[CONFIRMADO] 'SECTION - BAR CEILING EAST WEST' 1/4\"=1'-0\" ('RATED SOFFIT ASSEMBLY', 'DROPPED')"
+  },
+  "canon_rows": "CLG-L1-125 (BAR 107 field, WS-1 oval deducted; contour re-measured on 1/A7.31): board 125.98 SF, main tee 31.5 LF, cross tee 94.49 LF, angle 88.2 LF, hanger 8.29 LF. CLG-L1-127 niche 40.2 SF stays.",
+  "delta_option_B_DERIVADO": "-125.98 SF board, -31.5 LF main tee, -94.49 LF cross tee, -88.2 LF angle molding, -8.29 LF hanger (the -121.6 SF in RFI-22 text is the pre-rev9 area: outdated)",
+  "png": [
+   "/root/cr/work/etapas/4_canon/img/rev15/F_A0.00_bar_core_and_shell.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/F_A5.04_BAR_SUSPENDED_GYP_CEILING.png",
+   "/root/cr/work/etapas/4_canon/img/rev15/F_A7.31_3_bar_ceiling_section.png"
+  ]
+ }
+}

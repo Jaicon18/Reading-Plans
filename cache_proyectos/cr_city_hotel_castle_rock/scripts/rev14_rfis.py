@@ -34,8 +34,8 @@ NOMBRES = {'417.4 (stall)': 'CLG-L4-117A', '417.3 (stall)': 'CLG-L4-117B', '418.
            '(405 chase strip, no number)': 'CLG-L4-405C', '(403 SW chase, no number)': 'CLG-L4-403C', '(404/403 W chase, no number)': 'CLG-L4-404C',
            '(chase a, no number)': 'CLG-L4-412A', '(chase b, no number)': 'CLG-L4-412B', '(chase c, no number)': 'CLG-L4-412C'}
 for r in T['rooms']:
-    if r['sheet'] != 'A3.04' or r.get('disposition') != 'missing_loaded':
-        continue
+    if r['sheet'] != 'A3.04' or r.get('disposition') != 'missing_loaded' or r['room'] not in NOMBRES:
+        continue   # rev15: los duct chases 401 NE / 401-402 los carga rev15_revision.py
     rid = NOMBRES[r['room']]; A = float(r['area_sf']); P = r['polygon']
     per = round(sum(math.dist(P[i], P[(i + 1) % len(P)]) for i in range(len(P))) / 9.0, 2)
     src = (f"L4 {r['room']}: A3.04 [DERIVED] area {A} SF ({r.get('area_op')}) | measured in vectors on 1/A3.04 (wall faces); U-159 room sweep "

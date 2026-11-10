@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 464,
+ "conteo": 473,
  "reglas": [
   {
    "id": "U-001",
@@ -6264,6 +6264,135 @@
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u159_u160_rcp_cuartos"
+   }
+  },
+  {
+   "id": "CR-R15-BARRIDO",
+   "origen": "R80e.165.27 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "el barrido de un RFI lista toda hoja de cada término (sin corte de hits)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r15_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cr_r15_barrido"
+   }
+  },
+  {
+   "id": "CR-R15-U160",
+   "origen": "R80e.165.30 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "EXCLUDED: polígono obligatorio, texto >= 90 % dentro del cuarto, sin /CL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::rcp_excluded_geom_fallas",
+    "take-off:tools/markups_rcp.py::aplicar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_u160_texto_dentro_poligono"
+   }
+  },
+  {
+   "id": "CR-R15-CONTORNO",
+   "origen": "R80e.165.31 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "polígonos de cielo sobre las líneas del plano limpio (>= 60 %) y en la vista RCP",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rcp_contorno",
+    "take-off:tools/compuerta_entrega.py::rcp_contorno_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_rcp_contorno"
+   }
+  },
+  {
+   "id": "CR-R15-GUIA",
+   "origen": "R80e.165.34 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "la GUIA abre con CAMBIOS de la revisión entregada",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::guia_cambios_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_guia_cambios_primero"
+   }
+  },
+  {
+   "id": "CR-R15-PIEZAS",
+   "origen": "R80e.165.26 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "piezas de studs largos: un stick por stud, Pieces = MAX(LF / stock, studs)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/plantilla_excel.py::formula_piezas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_piezas_min"
+   }
+  },
+  {
+   "id": "CR-R15-GN6",
+   "origen": "R80e.165.25 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "una General Note de espaciado impresa manda sobre el máximo de un listado UL (todo stud metálico)",
+   "categoria": "conducta",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_busqueda"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_cr_r13_detector_no_impreso"
+   }
+  },
+  {
+   "id": "CR-R15-CARAS",
+   "origen": "R80e.165.32-33 (CR City Hotel rev15, revisión completa de rev14 'revisa todo otra vez', COORDINACIÓN 10-nov)",
+   "texto_corto": "caras continuas sin partir en cruces; capas de una cara rated a la misma altura; soffit metálico completo; hanger con drop impreso; CBU por fabricante",
+   "categoria": "conducta",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rcp_contorno"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_rcp_contorno"
+   }
+  },
+  {
+   "id": "BE-151",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev14 -> rev15, 10-nov)",
+   "texto_corto": "RFI-16 cerrado 'spacing not printed' por UL U415 con A0.06 GN 6 '16\" O.C.' impreso; barrido con hits cortados escondió A5.08 '2HR SHAFT CEILING'",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::cr_r15_barrido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "cr_r15_barrido"
+   }
+  },
+  {
+   "id": "BE-152",
+   "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev14 -> rev15, 10-nov)",
+   "texto_corto": "EXCLUDED con texto de 124-216 pt sobre shafts de 25 pt, sin polígono y con /CL desde la esquina de la hoja; corridors con offset planta->RCP doble; cielos L1 en la vista PLAN de A7.50",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::rcp_excluded_geom_fallas",
+    "take-off:tools/compuerta_entrega.py::rcp_contorno_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_rev15_rcp_contorno"
    }
   }
  ]
