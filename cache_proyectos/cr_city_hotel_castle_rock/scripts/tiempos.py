@@ -30,7 +30,8 @@ rows = [("0", "Arranque (órdenes U-001..U-150, skill v81cf52) + descarga Buildi
         ("rev14", "rev14: U-156 re-barrido de los 9 RFI abiertos (RFI-15 / 22 / 23 / 26 cerrados por lo impreso, RFI-04 parcial: lobby 217 / 317 2HR FB)", "2026-11-10 10:55", "2026-11-10 13:12", "ENTREGA_OK.json / SUBIDA_OK.json rev14"),
         ("rev15", "rev15: revisión completa de rev14 (3 revisores, 18 puntos): GN 6 16\" o.c., duct chases, 2HR shaft ceiling, U-160 texto dentro, vistas RCP, huecos de cara, cajas de closet", "2026-11-10 13:42", "2026-11-10 18:30", "ENTREGA_OK.json / SUBIDA_OK.json rev15"),
         ("rev16", "rev16: revisión dirigida de rev15 (ELEC 2 HR base + DA-6, cove de madera, áreas sin número del RCP, Review Items, Table 509, shaft ceiling en L1, base CBU)", "2026-11-10 15:45", "2026-11-10 19:30", "ENTREGA_OK.json / SUBIDA_OK.json rev16"),
-        ("rev17", "rev17: revisión dirigida de rev16 (caras reales de ELEC 221/321/421, WS-1 L4 un criterio, textos FS-1 / RS-1, soffit FCU)", "2026-11-10 17:10", "2026-11-10 20:30", "ENTREGA_OK.json / SUBIDA_OK.json rev17")]
+        ("rev17", "rev17: revisión dirigida de rev16 (caras reales de ELEC 221/321/421, WS-1 L4 un criterio, textos FS-1 / RS-1, soffit FCU)", "2026-11-10 17:10", "2026-11-10 20:30", "ENTREGA_OK.json / SUBIDA_OK.json rev17"),
+        ("rev18", "rev18 FINAL: respuestas del usuario a los RFI (U-161 / U-162 / U-163): todo RFI cerrado, 128 sin cielo", "2026-11-10 18:30", "2026-11-10 20:00", "ENTREGA_OK.json / SUBIDA_OK.json rev18")]
 L = ["# CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)", "",
      "Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.", "",
      "| # | Paso | Inicio | Fin | Duración | Evidencia |", "|---|---|---|---|---|---|"]

@@ -1,10 +1,10 @@
 # Markups vs Excel (R80f.7 / BE-117) — OK
 
-- PDF: `/root/cr/work/etapas/8_excel/CR_City_Hotel_markups_rev17.pdf`
-- Excel: `/root/cr/work/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev17.xlsx`
+- PDF: `/root/cr/work/etapas/8_excel/CR_City_Hotel_markups_rev18.pdf`
+- Excel: `/root/cr/work/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev18.xlsx`
 - canon: `/root/cr/work/etapas/4_canon/takeoff_canon.json`
-- anotaciones: 1173 · OK 1173 · FAIL 0 · fallas totales 0
-- markups por hoja: {'A2.01': 14, 'A2.02': 328, 'A2.03': 308, 'A2.04': 138, 'A3.01': 17, 'A3.02': 66, 'A3.03': 60, 'A3.04': 60, 'A6.00': 5, 'A6.01': 9, 'A6.02': 6, 'A7.30': 19, 'A7.31': 43, 'A7.45': 6, 'A7.50': 88, 'A7.55': 6} · hojas con elementos en el canon: ['A2.01', 'A2.02', 'A2.03', 'A2.04', 'A3.01', 'A3.02', 'A3.03', 'A3.04', 'A6.00', 'A6.01', 'A6.02', 'A7.30', 'A7.45', 'A7.50', 'A7.55']
+- anotaciones: 1172 · OK 1172 · FAIL 0 · fallas totales 0
+- markups por hoja: {'A2.01': 14, 'A2.02': 328, 'A2.03': 308, 'A2.04': 138, 'A3.01': 16, 'A3.02': 66, 'A3.03': 60, 'A3.04': 60, 'A6.00': 5, 'A6.01': 9, 'A6.02': 6, 'A7.30': 19, 'A7.31': 43, 'A7.45': 6, 'A7.50': 88, 'A7.55': 6} · hojas con elementos en el canon: ['A2.01', 'A2.02', 'A2.03', 'A2.04', 'A3.01', 'A3.02', 'A3.03', 'A3.04', 'A6.00', 'A6.01', 'A6.02', 'A7.30', 'A7.45', 'A7.50', 'A7.55']
 
 ## Una línea por anotación
 
@@ -799,7 +799,6 @@
 - OK   | p.22 A3.01 L1 FS-1 membrane under the LEVEL 2 floor (whole floor plate) | 5/8 TYPE C | LF None H None SF 7711.49 | MS fila 19 | /Measure 1/8 in = 1 ft | Area 7711.49 vs SF 7711.49 (+0.00 %) · causa: polygon = contour measured in vectors on 1/A2.02 (wall faces
 - OK   | p.22 A3.01 CLG-L1-00 | 5/8" GYP BOARD TYPE X | LF None H None SF 165.30 | MS fila 8 | /Measure 1/8 in = 1 ft | Area 165.30 vs SF 165.30 (+0.00 %) · causa: cause: rectangle(s) of the measured operation on A7.45; draw
 - OK   | p.22 A3.01 CLG-L1-01 | 5/8" GYP BOARD TYPE X | LF None H None SF 199.03 | MS fila 8 | /Measure 1/8 in = 1 ft | Area 199.03 vs SF 199.03 (+0.00 %) · causa: cause: contour measured in vectors on 3/A7.45 (wall faces; o
-- OK   | p.22 A3.01 CLG-L1-10 | 5/8" GYP BOARD TYPE X | LF None H None SF 188.01 | MS fila 8 | /Measure 1/8 in = 1 ft | Area 188.01 vs SF 188.01 (-0.00 %) · causa: cause: contour measured in vectors on 1/A3.01 (wall faces; o
 - OK   | p.22 A3.01 BW-L1-RETAIL | 5/8" GYP BOARD TYPE C | LF 22.35 H H 1'-9" SF 39.03 | MS fila 19 | /Measure 1/8 in = 1 ft | Length 22.35 vs LF 22.35 (-0.01 %) · causa: cause: run measured in vectors on 1/A3.01 (drawn soffit / be
 - OK   | p.22 A3.01 BW-L1-RETAIL | 5/8" GYP BOARD TYPE C | LF 22.32 H H 1'-9" SF 38.98 | MS fila 19 | /Measure 1/8 in = 1 ft | Length 22.32 vs LF 22.32 (+0.00 %) · causa: cause: run measured in vectors on 1/A3.01 (drawn soffit / be
 - OK   | p.22 A3.01 BW-L1-RETAIL | 5/8" GYP BOARD TYPE C | LF 22.34 H H 1'-9" SF 39.02 | MS fila 19 | /Measure 1/8 in = 1 ft | Length 22.35 vs LF 22.34 (+0.03 %) · causa: cause: run measured in vectors on 1/A3.01 (drawn soffit / be

@@ -4,11 +4,11 @@ set -e
 W=/root/cr/work
 P=$W/proposal
 OUT=$W/Proposal
-TK=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev17.xlsx
-N=CR_City_Hotel_Proposal_rev17
+TK=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev18.xlsx
+N=CR_City_Hotel_Proposal_rev18
 mkdir -p $P/out $OUT
 # rev12 E2: el DELTA de cantidades se regenera ANTES de la proposal (PRICING A2 sale del delta real)
-python3 -I $W/scripts/delta_rev.py rev16 rev17 > /dev/null
+python3 -I $W/scripts/delta_rev.py rev17 rev18 > /dev/null
 cd $P
 python3 armar_proposal.py tpl/Proposal_Template.xlsx $TK $W/etapas/4_canon/takeoff_canon.json fbm out/$N.xlsx
 cd out && rm -rf recalc && mkdir recalc
