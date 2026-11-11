@@ -67,3 +67,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - ACTUALIZACIÓN 11-nov: **v81cf80 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf80_tiempos-cita-altura-SF_2026-11-11.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
 - v81cf81 · Grand Kia Auto Dealership (dueña) · 10-nov · v81cf80 + BE-GK01 (deps del arranque + openpyxl) + BE-GK02 (capa OCR para hojas con texto en curvas, palabras_fitz.py ocr) · en curso
 - ACTUALIZACIÓN 10-nov: **v81cf81 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf81_GK-deps-OCR-texto-en-curvas_2026-11-10.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
+- v81cf82 · Xfinity Interquest (dueña) · 10-nov · v81cf81 + BE-XF01..BE-XF06 (descarga BC, clip visible, not_a_room en CE_RCP_CUARTOS, wood_walls_none_reason, hojas de un decimal en RX_HOJA_CONCRETA / A2, CC-R12 sin falso 0) · en curso
