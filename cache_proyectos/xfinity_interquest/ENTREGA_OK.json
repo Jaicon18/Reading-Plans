@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-10 22:45 PST",
- "fecha_iso": "2026-11-11T06:45:49.294827+00:00",
+ "fecha_california": "2026-11-10 23:01 PST",
+ "fecha_iso": "2026-11-11T07:01:41.307153+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 204,
+  "PASS": 206,
   "AMBER": 2,
   "FAIL": 0
  },
@@ -20,7 +20,7 @@
    "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
    "estado": "PASS",
    "evidencia": [
-    "285 archivos en rev1 FINAL PARA REVISAR"
+    "320 archivos en rev1 FINAL PARA REVISAR"
    ],
    "plausibilidad": "OK"
   },
@@ -255,7 +255,7 @@
    "descripcion": "U-165: en Planos marcados/ el PDF de markups se llama '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf' (PROY corto) y toda ruta Windows simulada (G:\\Shared drives\\JC HUNTER PROJECTS\\Claude outputs\\<proyecto>\\<revN>\\...) <= 230 caracteres; U-158: cada PNG '<HOJA> - IMAGE ONLY (not editable) - walls|ceilings|walls and ceilings revN'; '_rcp_markups', '_marked_by_type', 'pNN_' o duplicados = FAIL; la GUIA_DE_REVISION cita en su primer renglón el PDF que se abre en Bluebeam; U-164: un solo RESUMEN_rev*.md en la raíz",
    "estado": "PASS",
    "evidencia": [
-    "6 archivos con nombre que dice qué son; rutas Windows <= 230"
+    "7 archivos con nombre que dice qué son; rutas Windows <= 230"
    ],
    "plausibilidad": "OK"
   },
@@ -269,7 +269,7 @@
    "descripcion": "U-166 (usuario 11-nov: 'si ya sabes que va a pasar si cometes un error, por que no lo arreglas antes de que yo te lo diga'): simula el uso real del usuario en Windows / Bluebeam / Excel: (1) ruta Windows en Drive <= 230 (Auditoria.zip = un archivo, nombres dentro <= 120); (2) PDF de markups abre sin contraseña ni firmas y CE_VISTA_BLUEBEAM en PASS; (3) ningún nombre con < > : \" / \\ | ? *; (4) el Excel abre sin #REF! / #VALUE! / #DIV/0!; (5) test con la ruta de rev18 (264) = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "285 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
+    "320 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
    ],
    "plausibilidad": "OK"
   },
@@ -553,7 +553,7 @@
    "descripcion": "BE-CR28: entrega con más de 1,000 archivos = subir_entrega sube Auditoria/ como Auditoria.zip (desde los archivos verificados) y README_REVIEW.md lo dice; sin esa línea = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "285 archivos: subida archivo por archivo"
+    "320 archivos: subida archivo por archivo"
    ],
    "plausibilidad": "OK"
   },
@@ -568,6 +568,7 @@
    "descripcion": "U-151 / BE-147: todo PDF de Planos marcados sin firmas digitales (/Sig, /SigFlags, /Perms) y con Page Label = hoja en cada página (únicos, no numéricos salvo hoja impresa así); U-152 / BE-148: toda página con markups /Measure con escala de página /VP del mismo /R que sus markups",
    "estado": "PASS",
    "evidencia": [
+    "ALTURAS_REVISADAS.pdf: 4 páginas, 0 firmas, 4 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "DETALLES_REVISADOS.pdf: 6 páginas, 0 firmas, 6 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "SCHEDULES_REVISADOS.pdf: 5 páginas, 0 firmas, 5 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf: 18 páginas, 0 firmas, 18 Page Labels únicos, 3 página(s) con markups /Measure y su /VP del mismo /R"
@@ -590,6 +591,35 @@
     "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf: 20 markups revisados (20 OK) en 3 hojas, 16 renglones del Excel",
     "CSV: rev1 FINAL PARA REVISAR/Auditoria/VISTA_BLUEBEAM.csv",
     "/NM único y sin '/' en todo el PDF (U-167)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ALTURAS_3LADOS",
+   "reglas": [
+    "U-175"
+   ],
+   "descripcion": "U-175 (usuario 11-nov): ALTURAS a tres lados markup por markup, igual que el CSV: Depth de Bluebeam (Auditoria/VISTA_BLUEBEAM.csv) = Height del Excel = Auditoria/ALTURAS_IMPRESAS.csv (lectura independiente que NO ve el Excel: Wall ID, Printed H, Source N/HOJA, Operation, Status CONFIRMED / DERIVED, Image). FAIL: falta ALTURAS_IMPRESAS.csv, MISMATCH, fila sin Source / Image, DERIVED sin Operation, 0 markups comparados, COMPARACION_ALTURAS.csv que falta o no cuadra, CHECKLIST B2 sin N/N",
+   "estado": "PASS",
+   "evidencia": [
+    "20/20 markups: Depth de Bluebeam = Height del Excel = altura impresa (ALTURAS_IMPRESAS.csv); COMPARACION_ALTURAS.csv y CHECKLIST B2 al día (U-175)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ALTURAS_EXTREMO",
+   "reglas": [
+    "U-176"
+   ],
+   "descripcion": "U-176 REGLA DE ORO #2 (usuario 11-nov: 'me preocupan mucha las alturas'): los 6 controles de tools/alturas_extremo.py: (1) doble lectura ciega ALTURAS_IMPRESAS_A / _B con toda diferencia resuelta con recorte, (2) cierre dimensional de cada DERIVED ± 1/4\", (3) reglas físicas por wall (H <= B.O., to deck = B.O. + slip track, above ceiling = MAYOR C.H. + extensión, H >= C.H. de cada cuarto, board <= H), (4) cruce por cuarto del RCP, (5) ALTURAS_REVISADAS.pdf + capa 'HEIGHTS (U-176)' en el PDF de markups, (6) CHECKLIST B2 con la muestra al azar. Falta uno o 0 alturas = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "1_doble_lectura: 21 iguales + 0 resueltas de 21",
+    "2_cierre: 16/16 DERIVED cierran",
+    "3_reglas_fisicas: 15/15 elementos sin violación",
+    "4_cruce_cuartos: 3 cuartos, 6 pares cuarto-wall, 0 fallas",
+    "5_evidencia: 3 alturas distintas -> 3 páginas + sección; capa 'HEIGHTS (U-176)'",
+    "6_muestreo: 5 walls al azar, 3/3 alturas"
    ],
    "plausibilidad": "OK"
   },
@@ -2719,11 +2749,45 @@
   }
  ],
  "archivos": {
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_AB.csv": "01a5359207ed28f24a0945b5e738a154ff32b651d396855ff31e6be8090226ee",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_CONTROLES.json": "8219ad4afc7fd26c4148b567d14694cc53a01ec64d6d363ec6259beac4023037",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_CUARTOS.csv": "8353aea913c79682521f16d6dd7e3bc496fe79b8658c0034424a9a2a7e1e96b0",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_CUARTOS_A.csv": "8353aea913c79682521f16d6dd7e3bc496fe79b8658c0034424a9a2a7e1e96b0",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_CUARTOS_B.csv": "af6429981527757c9b21c3b62c1770c8d2e4633b9706cda935e84ff33e1cc306",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_IMPRESAS.csv": "ac9f4f562a90ff2f5e1bfdadd986b089fc6696003bd0607e6b3f8a19ca416922",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_IMPRESAS_A.csv": "ac9f4f562a90ff2f5e1bfdadd986b089fc6696003bd0607e6b3f8a19ca416922",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_IMPRESAS_B.csv": "1175de5dfd9f17b3b384e252f8ba533fdbeb1fa2a4fcf212b7aefbac2c728db0",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_MUESTRA.json": "d3d4169fd6ecb5a3f61683632b6981221e0f1242a9d1cdf273cb71ab79db7b99",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_NOTAS_A.md": "ad1b66eb2fc1ef75a5e0516ec0f2dc2637a69617255779fd7e85e71f724527ce",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_NOTAS_B.md": "c1f0e42cdb66bf9fdd8e2ae6ffdd31d52b2b72aff059672af306b477d4e0c90f",
+  "rev1 FINAL PARA REVISAR/Auditoria/ALTURAS_REVISADAS_PAGINAS.json": "bc7385e95bf6d8ba8489c23b2739432a9fa2fb8c8bd5616b89001844b6901461",
+  "rev1 FINAL PARA REVISAR/Auditoria/COMPARACION_ALTURAS.csv": "cc4baec2b245af3e42d8359a5a2ac7c25f2a67d2845b64a1cea3bbd86e08f6d3",
   "rev1 FINAL PARA REVISAR/Auditoria/DEMO_CRUCE.md": "b437ad83f18949745c1e412596fa4f8c3e36d021fa8735ee361e0187eca9f9ef",
   "rev1 FINAL PARA REVISAR/Auditoria/PROCESO_CORRIDA.md": "94def15f10805ffc10362999a1c3c01480d2fa725e9dd49260e2d78cc31ec61f",
   "rev1 FINAL PARA REVISAR/Auditoria/TOOL_LIMITS_CALC.md": "cf06a38d2c55ce2e3a92492f300b62571537053f13c85e1da76ad0a282d1d466",
   "rev1 FINAL PARA REVISAR/Auditoria/VERIFICACION_MARKUPS.md": "e92f590fed991ec4d47dba25b8e4ec6cd678267a25f88a75f0d6fd1a152b7e1b",
   "rev1 FINAL PARA REVISAR/Auditoria/VISTA_BLUEBEAM.csv": "33aa1faff61b369efe40d1b5492576f2f96f9b18fe234aaac3ef6227821c2d5c",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/CF_12-0_plus_6in.png": "462f33814265c88857d6c21ee4358675c95ef73ab40e4e62876c29b335ac8a59",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/DEMO_26ft_A0.1.png": "26c6e0099e085be33cc91df49fa382ccdaa8355781422e1c70825ff9b0c62766",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_100_Retail.png": "eae3cee810f42f9569bfb5321679bb62cb24b7d3e6e0774d9980a2f971e7890d",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_101_Storage.png": "68254ae818ee327af3d4d9172f8268a5df832fb16abb790f575d554f685f8449",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_102_Hallway.png": "f37144d7fd3c27e5cba211a97f8e84dc4c517ff0fa1cc804b6a811987d9754ee",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_103_Toilet.png": "f0308ad6265cc7e18118bd6d804a4af10ec859fab2be42f5df257f4b70bd8afa",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_104_AccessToilet.png": "2bcfead6ab5e5af365be8adcb9d9be6598a81fae115d5406d2f6d96babf8e4d3",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/ROOM_Landlord_NIC.png": "92a26d950129fdf4a5a815a548fc7febeb782d61220b0770eb1d21091ed104f1",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/SOF-01_developed.png": "7b33929e01abee36d34fcfad0e8d75efb84b68c8a9f6a58bc875f2576c9f1641",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/A/W2_12-0_plus_6in.png": "70b2e025d8288419db47fbd8a463e4c591ea18459aa549a3ab10d3a3da3e0cfa",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/CF-01_CF-02.png": "0771203fb7472bce42d4c1334076809f5b3f5588bb3cfd82fd954aac9ba476ac",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/DEMO-01_to_11.png": "87d6b04e5b78f3957f299e55d9dc8f7fd632500c67e933fe35f1cef1068b748c",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_100_RETAIL.png": "f7f111ce05c8d5046837f92a274f0c0cc3c3b5708e3cb9566e49f1ee433e63ed",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_101_STORAGE.png": "ed0b3ba8817577888c965e2b640be9d4aff118152d6c881b0c9473db84474f9e",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_102_HALLWAY.png": "31558b2bd04aec8c6e95731a4bb78ce52765f28ef2bd2e1a14983b15aa34bd20",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_103_TOILET.png": "3149dccdfb0ff3f2727dc7452b2a217587a81650e180f05bf0112cff3b252680",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_104_ACCESS_TOILET.png": "3abae5f577568ae78ee6395f92aca47b323fa10bc8e9f9fb3bd546e4f38a5233",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/ROOM_LANDLORD.png": "a7376c3ccf95b6b55f93251168e3091af8636675f3a36ac64a37b38f69e775b4",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/SOF-01.png": "1efd446192cb5bd1ffdfa2e57b84e3f04bcfad0ff8765fc93bcefe4b32482a46",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/W2-01.png": "d1e8bbc0d8e737f9e4b2306a4834f3895fce26364b76dc7584bc075bfa74592e",
+  "rev1 FINAL PARA REVISAR/Auditoria/alturas_img/B/W2-02.png": "a92f4686f45904c8283c08a6c7cb935c09f34e98b89cbc9b0dae033030ff13de",
   "rev1 FINAL PARA REVISAR/Auditoria/barrido_tags/inventario.json": "a9c98be31b2cda402ff4c9a48fa391d94dd515ec88d20316cb9324acb44420be",
   "rev1 FINAL PARA REVISAR/Auditoria/barrido_tags/inventario.md": "2134e3bc8ad22abc073bc6431b4a20ce23150199e969a06e0b0f438b3bea5b5c",
   "rev1 FINAL PARA REVISAR/Auditoria/barrido_tags/recortes/PC0001_W1_A2.0_p5.png": "819de31659a3d234ca1402d062d95e3c97e3e0dd4e69e0f4943ff830f7f6f7e3",
@@ -2985,23 +3049,24 @@
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedule_wall_types.png": "2d83630122b292d6b163aee4ce9dd0ad9e62799a774a450c2bafad0bfe233ae1",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "d673f749987c61770c3cdd5baba7469158e7cc4e1c18eee1599e20f69235953f",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/wall_legend.png": "5fcbd5bacae1e976218ffbc34c7e08f17f4dd9c05134a2705d84f1df266fe69b",
-  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "a88c646756137d90a56a8e78ae909e3577fe8921c81971cd71112a7d9c3ab702",
+  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "73102ce89ef5008dcf454d2e97d10cdaef1d1d2d5f189a507da838b8e0d03596",
   "rev1 FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "ae9de99350a804527a41e9e61427e0155d62f085ade2ed862e92216f187da306",
   "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "30e034a555364425cc96106a853968cf3084b6783a9cfeda4d41e7e4d4ad3b98",
   "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "b633e9cb9b43e39ff0449bea8568ad14fa9635f2af4c93b1991670cf406d4978",
   "rev1 FINAL PARA REVISAR/Planos marcados/A1.0 - IMAGE ONLY (not editable) - walls rev1.png": "3700d7a4fdedd053dabe387db653633c349b3b5c110fa2e56a7a6b15883afe9c",
   "rev1 FINAL PARA REVISAR/Planos marcados/A2.0 - IMAGE ONLY (not editable) - walls rev1.png": "f4961609235a2948272fe2f1264e90f5a433ddebb963ef20d38d9456ea395739",
   "rev1 FINAL PARA REVISAR/Planos marcados/A3.0 - IMAGE ONLY (not editable) - ceilings rev1.png": "80aa20565e9da437949848b1fcd6e65df95904f6bc5be703f42bfe8f746f4d01",
-  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "2ce309c61da0df77126040c1f0b024b9491bc8ed5f1efd5a8d8a3673a9eded73",
-  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "3521113b3db4cb994b46b7e4fd1e2a138b0c4979fea2c4969d61a7eacc30fc45",
-  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "b89ca98fca5b3b26584d8c8ed172e1ec51aad064d486ea321849476d57b3837e",
+  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "d530ee2757862538fe94dea15d0829cdd4cb56feaa436425f84dafcff6d067cb",
+  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "397bab4d66fe461529681f03504e99ea4ce2ef14cd4157b3017031f28999ab42",
+  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "3dd098fe0193ea7612c126f753cdb394e651f8b8dcd7d11fdf0185df30fd50ea",
+  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "e80dbf1b2811a331bda9eb8ad47d79defd5d3b63a305b9531995ef24e0453869",
   "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "b45ddfe03df78e4b9a1aa523275f674958d8d0e0984776c5dc61cbd7c9825118",
   "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "e63234d738a74bd380f213cdc09b42a946910156007505f2c39bb68949287c59",
   "rev1 FINAL PARA REVISAR/README_REVIEW.md": "7d6aeb5f062358c331a4037a9d143064b121663d56ddbf0a8a20a0fa0e889672",
   "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "8fd978572a992ef712da14b8985b2db1e09c6c1df716a0a763276f06a4b5d85d",
   "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "f0eddd82ba8a53bbfb6481473a804332f3db57f98b01f9637254a0d6e20ccfde",
   "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "eb2dc7dd29c0b561e73a3af4f01c852aded426168c7ce6c4f6daf0ef6bdc91a8",
-  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "0bd29c7edc3058388bf5ebf04096409ce1988878d2376e988604af22b851853e",
+  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "3ca3e6dc3b3d2b48378e4497316c516a47efe8828f23df3b0b3456f2a83e24d7",
   "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "6ecb46771f337a78cc3a5c317126953569061208ccde93a98c969a6033ecfe27",
   "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "72fe3e9aeb7d93bf523ea055e105d1501ecc36b8d7a4f0ad23917921386ed79f"
  },

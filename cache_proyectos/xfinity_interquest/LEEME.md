@@ -18,3 +18,9 @@
 - Actualizados: Pending Items (vacío), Review Item 4/8, Scope Checklist, SEGUIMIENTO, PARA_REVISAR, GUIA, RESUMEN, CHECKLIST, proposal (cláusula RFI-01 = decisión del usuario, total igual).
 - Drive: 18 anteriores renombrados "zz old U-174 …" (el PDF = "zz NO USAR - XF_markups_rev1b old (antes de U-174).pdf"), nuevos subidos con subir_entrega.py; nada borrado.
 - Compuerta VERDE 204 / 2 / 0 (CB_U_174 PASS). Skill v81cf85.
+
+## U-175 + U-176 alturas (11-nov, orden COORDINACIÓN)
+- Dos lecturas ciegas de alturas (H-A en alturas/A, H-B en alturas/B; ninguna vio el Excel ni la otra): 16 alturas iguales + 5 cuartos iguales (21/21).
+- comparar_alturas: 20/20 markups OK (Bluebeam Depth = Excel Height = altura impresa) -> Auditoria/COMPARACION_ALTURAS.csv; CHECKLIST B2 con el N/N y la muestra al azar (5 walls, 3/3 alturas).
+- alturas_extremo: cierre 16/16, reglas físicas 15/15, 3 cuartos / 6 pares cuarto-wall, ALTURAS_REVISADAS.pdf (3 alturas + sección) y capa 'HEIGHTS (U-176)' en el PDF de markups.
+- Compuerta VERDE 206 / 2 / 0. Drive: 5 anteriores 'zz old U-176 …' / 'zz NO USAR - XF_markups_rev1b old (antes de U-176).pdf', 40 nuevos. Skill v81cf86.

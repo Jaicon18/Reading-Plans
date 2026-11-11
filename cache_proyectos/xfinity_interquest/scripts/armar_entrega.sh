@@ -26,7 +26,15 @@ for f in $W/etapas/12_cobertura/cobertura.md; do [ -f $f ] && cp $f "$E/Auditori
 (cd $W && python3 $T/bitacora.py backcheck $W/revision_indep/R1/INFORME_R1.md $W/etapas/8_excel/XF_Takeoff_FINAL_rev1.xlsx | tail -1)
 python3 -I $W/scripts/tiempos.py > /dev/null; cp $W/entrega.json $W/TIEMPOS.md $D/; cp $W/TIEMPOS.md "$E/"
 python3 -I $W/scripts/hacer_docs.py "$E" $W/proceso/proyecto_datos.json $W/takeoff.json $W/etapas/4_canon/takeoff_canon.json
-python3 -I $T/checklist_revision.py "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" $PDF $W/etapas/4_canon/takeoff_canon.json "$E/CHECKLIST_REVISION.xlsx" --proy XF | tail -2
+# U-175: alturas a tres lados (lectura independiente /root/xf/alturas_indep, sin ver el Excel)
+python3 -I $W/scripts/alturas_entrega.py /root/xf/alturas_indep /root/xf/alturas_indep_B "$E"
+python3 -I $T/compuerta_entrega.py vista_bluebeam "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" --canon $W/etapas/4_canon/takeoff_canon.json --csv "$E/Auditoria/VISTA_BLUEBEAM.csv" | tail -1
+python3 -I $T/comparar_alturas.py "$E/Auditoria/VISTA_BLUEBEAM.csv" "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Auditoria/ALTURAS_IMPRESAS.csv" "$E/Auditoria/COMPARACION_ALTURAS.csv" | tee $W/alturas_3lados.txt || true
+# U-176: los 6 controles (capa HEIGHTS en el PDF de markups, ALTURAS_REVISADAS.pdf, muestra para B2); vista y 3 lados otra vez sobre el PDF con capa
+python3 -I $T/alturas_extremo.py "$E" $W/etapas/4_canon/takeoff_canon.json "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" | tee $W/alturas_extremo.txt || true
+python3 -I $T/compuerta_entrega.py vista_bluebeam "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" --canon $W/etapas/4_canon/takeoff_canon.json --csv "$E/Auditoria/VISTA_BLUEBEAM.csv" | tail -1
+python3 -I $T/comparar_alturas.py "$E/Auditoria/VISTA_BLUEBEAM.csv" "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Auditoria/ALTURAS_IMPRESAS.csv" "$E/Auditoria/COMPARACION_ALTURAS.csv" > /dev/null || true
+python3 -I $T/checklist_revision.py "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" $PDF $W/etapas/4_canon/takeoff_canon.json "$E/CHECKLIST_REVISION.xlsx" --proy XF --b2-3lados "$E/Auditoria/COMPARACION_ALTURAS.csv" --b2-muestra "$E/Auditoria/ALTURAS_MUESTRA.json" | tail -2
 (cd $D && python3 $T/compuerta_entrega.py detalles . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py schedules . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py banco . --cache /home/user/Reading-Plans > banco.txt 2>&1 || true; tail -3 banco.txt)
