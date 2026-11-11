@@ -1,0 +1,1538 @@
+{
+ "project": "Xfinity Interquest - 1333 Interquest Pkwy Lot 11, Colorado Springs CO 80921 (TI 1,798 SF) - reader B",
+ "constants": {
+  "plan_scale_pt_per_ft": {
+   "value": 18.0,
+   "source": "Printed \"1/4\\\" = 1'-0\\\"\" under 1/A2.0, 1/A1.0, 1/A3.0. Vector check A2.0 bottom dim string ticks (y=1817): 760.80->1562.88 = 802.08 pt for printed 44'-6 5/8\" (44.5521 ft) -> 18.003 pt/ft; 562.86->753.48 = 190.62 pt for 10'-7\" -> 18.01; 419.34->545.10 = 125.76 for 6'-11 7/8\" -> 17.99. A3.0: 3'-0\" dim ticks 1674.54->1728.48 = 53.94 pt -> 17.98. A1.0 (no dims): same geometry as A2.0 shifted (+81.6,+6.9): top wall 1160.4 pt vs 1160.3; interior 1244.5->1767.6 = 523.1 pt = 29.06 ft vs printed 29'-0 3/4\" (A2.0).",
+   "img": "img/scale_check_A20.png",
+   "img_extra": [
+    "img/scale_check_A30.png"
+   ]
+  },
+  "north_arrow": {
+   "value": "plan up = WEST, right = NORTH, down = EAST, left = SOUTH (A2.0/A1.0/A3.0). Side A = north/west = RIGHT face of V walls, TOP face of H walls",
+   "source": "A2.0 north arrow",
+   "img": "img/north_arrow_A20.png"
+  },
+  "coordinate_offsets": {
+   "value": "A1.0 = A2.0 + (81.6, 6.9) pt; A3.0 = A2.0 + (170.1, 129.6) pt",
+   "source": "matching existing grey wall rectangles"
+  },
+  "deck_heights": {
+   "value": null,
+   "status": "PENDIENTE",
+   "source": "not printed on any sheet (A0.1..P1.0 text and SHX annotations searched for DECK, B.O., BOTTOM OF, JOIST, STRUCTURE) -> RFI-01"
+  },
+  "ceiling_heights": {
+   "source": "A3.0 ceiling tags; A4.0 room finish schedule heights",
+   "RETAIL_100": 12.0,
+   "STORAGE_101": 10.0,
+   "HALLWAY_102_existing_GB": 9.0,
+   "TOILET_103_existing_GB": 9.0,
+   "TOILET_104_existing_GB": 9.0,
+   "HDR_01_GB_soffit": 8.5
+  },
+  "level_of_finish": {
+   "value": "Level 4",
+   "source": "A2.0 PARTITION PLAN GENERAL NOTES 3"
+  },
+  "board_spec": {
+   "value": "5/8\" Type X",
+   "source": "A0.3 GYPSUM DRYWALL \"A. GYPSUM BOARD: ... TYPE X 5/8 FIRECODE\"; B. trim beaded metal; C. tape ASTM C475"
+  }
+ },
+ "walls": [
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "tag": "W2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A2.0 W2 type text \"3-5/8\\\" METAL STUDS\"; 7/A2.0 \"3-5/8\\\" METAL TRACK\"; measured thickness 7.3 pt = 4.87\" = 3.625+2x0.625",
+   "gauge": "20 ga (33 mil) MIN - DERIVADO",
+   "gauge_source": "4/A2.0 brace note \"MATCH WALL STUD SIZE & GAUGE (3 5/8\\\" 20 GA. MIN.)\"; 2/A2.0 INTERIOR WALL LIMITING HEIGHTS: 362S125-33 @16\" o.c. = 16'-0\" >= 12'-6\" stud height (362S125-27 @16 = 15'-0\" also passes; 362S125-18 @16 = 12'-2\" FAILS). Gauge not printed in the type itself.",
+   "gauge_status": "DERIVADO",
+   "oc_in": 16,
+   "oc_source": "NOT PRINTED for W2 (type refers to limiting-heights table that lists 12/16/24 in. columns). 16\" carried as table-compliant (362S125-33: 12\"=17'-7\", 16\"=16'-0\", 24\"=14'-0\" all >= 12'-6\"). 8/A2.0 backing detail shows \"16 GA. METAL STUD 16\\\" O.C.\" only at backing. -> RFI-02",
+   "oc_status": "PENDIENTE",
+   "detail": "3/A2.0 (base), 4/A2.0 (top/bracing), 6/A2.0 (connection at demising), 7/A2.0 (door head/jamb)",
+   "detail_source": "A2.0 plan section cuts 4/A2.0 TYP and 3/A2.0 TYP on W2-01 (DB0010, DB0011); 6/A2.0 TYP bubble at W2/W1 junction (DB0008)",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "3/A2.0 \"BOTTOM TRACK WITH POWER-DRIVEN FASTENERS AT 16\\\" O.C. MAX. ICC-ESR-1752\"; 4/A2.0 \"TOP OF TRACK SECURED TO STUDS WITH #8 SHEET METAL SCREW EACH FLANGE\"",
+   "top_track_info": "Standard top track at 6\" above ceiling, NOT to deck. 4/A2.0: \"BRACE TO STRUCTURE, ALTERNATE SIDES. USE METAL STUDS AT 8'-0\\\" O.C. MAX., MATCH WALL STUD SIZE & GAUGE (3 5/8\\\" 20 GA. MIN.) PROVIDE BENT LEG & FASTEN TO TOP TRACK. MAXIMUM LENGTH OF BRACE 25'-0\\\"\". No slip/deflection track printed. Structure/deck height NOT printed on any sheet (searched A0.1-P1.0 text incl. SHX: DECK, B.O., JOIST, STRUCTURE) -> brace length PENDIENTE (RFI-01).",
+   "insulation": "none (single-direction hatch = legend \"FULL HEIGHT PARTITION TO 6\\\" ABOVE CEILING U.N.O.\"; the batt pattern is cross-hatch) - insulation excluded anyway",
+   "exterior": false,
+   "ours": true,
+   "scope_note": "NEW partition - ours (framing + board both sides + taping Level 4 per A2.0 general note 3)",
+   "level_of_finish": "Level 4 (A2.0 PARTITION PLAN GENERAL NOTES 3: \"TAPED, SANDED SMOOTH TO A \\\"LEVEL 4\\\" FINISH\")",
+   "type_text": "2/A2.0 WALL TYPE 2: \"5/8\\\" TYPE 'X' GYP. BD. BOTH SIDES OVER 3-5/8\\\" METAL STUDS FROM SLAB TO 6\\\" ABOVE CEILING U.N.O. ... REFER TO INTERIOR WALL LIMITING HEIGHTS THIS SHEET FOR STUD SPECS ... FOR FINISHES SEE ROOM FINISH SCHEDULE\"",
+   "height_img": "img/H_retail_12ft_A30.png",
+   "height_img_extra": [
+    "img/H_storage_10ft_A30.png",
+    "img/H_hall_9ft_A30.png",
+    "img/W2_type_text_A20.png"
+   ],
+   "thickness_measured_in": 4.867,
+   "thickness_check": "(760.8-753.5)/18*12 = 4.87 in = 3-5/8\" stud + 2 x 5/8\" GB  OK",
+   "id": "W2-01",
+   "tag_ids": [
+    "PC0002"
+   ],
+   "location": "Storage 101 / Retail 100 dividing partition, from existing W1 west demising wall (top of plan) south... (plan-down) to existing W4 stub at hallway; contains new door 101",
+   "band": {
+    "ori": "V",
+    "c0": 753.5,
+    "c1": 760.8,
+    "lo": 1237.6,
+    "hi": 1489.1,
+    "sheet": "A2.0"
+   },
+   "length_ft": 13.972,
+   "length_source": "A2.0 1/A2.0 vertical dim string at x=856: 4\" + 3'-0\" (DOOR) printed (ticks 1237.6/1243.6/1297.6); rest vector",
+   "length_op": "(1489.1-1237.6)/18 = 13.972 ft  [= 4\" (0.333) + 3'-0\" door 101 opening (printed) + (1489.1-1297.6)/18 = 10.639]",
+   "length_status": "DERIVADO",
+   "openings": [
+    {
+     "ref": "101",
+     "w_ft": 3.0,
+     "h_ft": 7.0,
+     "source": "A2.0 door schedule 101: 3'-0\" x 7'-0\", 1 3/4\" S.C. wood, HM frame type 1, new; plan dim 3'-0\"",
+     "status": "CONFIRMADO",
+     "jamb_detail": "7/A2.0 \"3-5/8\\\" METAL STUD NESTED IN METAL TRACK\" (F.R.T. wood blocking = Div 06, excluded)"
+    }
+   ],
+   "net_solid_length_ft": 10.972,
+   "net_op": "13.972 - 3.000 door 101",
+   "height_ft": 12.5,
+   "height_source": "Type W2 \"FROM SLAB TO 6\\\" ABOVE CEILING\" + higher adjacent ceiling = RETAIL 100 \"NEW GRID AND TILES 2x4 ACT 12'-0\\\" AFF\" (A3.0); A5.0 elevations \"12'-0\\\" TO B.O. CEILING\"",
+   "height_op": "12.0 + 0.5 = 12.5",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "room": "RETAIL 100",
+     "layers": 1,
+     "board": "5/8\" Type X",
+     "height_ft": 12.5,
+     "height_source": "A3.0 retail ACT 12'-0\" AFF + 6\" (W2 type)",
+     "height_status": "DERIVADO",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "STORAGE 101",
+     "layers": 1,
+     "board": "5/8\" Type X",
+     "height_ft": 10.5,
+     "height_source": "A3.0 storage \"EXIST. GRID & NEW TILES 2x4 ACT 10'-0\\\" AFF\" + 6\" (W2 type: board to 6\" above ceiling); if board is required full stud height carry 12.5 -> RFI-03",
+     "height_status": "DERIVADO",
+     "wet": false
+    }
+   ],
+   "img": "img/W2-01_A20.png",
+   "status": "DERIVADO"
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "tag": "W2",
+   "stud_size": "3-5/8\"",
+   "stud_source": "2/A2.0 W2 type text \"3-5/8\\\" METAL STUDS\"; 7/A2.0 \"3-5/8\\\" METAL TRACK\"; measured thickness 7.3 pt = 4.87\" = 3.625+2x0.625",
+   "gauge": "20 ga (33 mil) MIN - DERIVADO",
+   "gauge_source": "4/A2.0 brace note \"MATCH WALL STUD SIZE & GAUGE (3 5/8\\\" 20 GA. MIN.)\"; 2/A2.0 INTERIOR WALL LIMITING HEIGHTS: 362S125-33 @16\" o.c. = 16'-0\" >= 12'-6\" stud height (362S125-27 @16 = 15'-0\" also passes; 362S125-18 @16 = 12'-2\" FAILS). Gauge not printed in the type itself.",
+   "gauge_status": "DERIVADO",
+   "oc_in": 16,
+   "oc_source": "NOT PRINTED for W2 (type refers to limiting-heights table that lists 12/16/24 in. columns). 16\" carried as table-compliant (362S125-33: 12\"=17'-7\", 16\"=16'-0\", 24\"=14'-0\" all >= 12'-6\"). 8/A2.0 backing detail shows \"16 GA. METAL STUD 16\\\" O.C.\" only at backing. -> RFI-02",
+   "oc_status": "PENDIENTE",
+   "detail": "3/A2.0 (base), 4/A2.0 (top/bracing), 6/A2.0 (connection at demising), 7/A2.0 (door head/jamb)",
+   "detail_source": "A2.0 plan section cuts 4/A2.0 TYP and 3/A2.0 TYP on W2-01 (DB0010, DB0011); 6/A2.0 TYP bubble at W2/W1 junction (DB0008)",
+   "bottom_track": true,
+   "top_track": true,
+   "track_source": "3/A2.0 \"BOTTOM TRACK WITH POWER-DRIVEN FASTENERS AT 16\\\" O.C. MAX. ICC-ESR-1752\"; 4/A2.0 \"TOP OF TRACK SECURED TO STUDS WITH #8 SHEET METAL SCREW EACH FLANGE\"",
+   "top_track_info": "Standard top track at 6\" above ceiling, NOT to deck. 4/A2.0: \"BRACE TO STRUCTURE, ALTERNATE SIDES. USE METAL STUDS AT 8'-0\\\" O.C. MAX., MATCH WALL STUD SIZE & GAUGE (3 5/8\\\" 20 GA. MIN.) PROVIDE BENT LEG & FASTEN TO TOP TRACK. MAXIMUM LENGTH OF BRACE 25'-0\\\"\". No slip/deflection track printed. Structure/deck height NOT printed on any sheet (searched A0.1-P1.0 text incl. SHX: DECK, B.O., JOIST, STRUCTURE) -> brace length PENDIENTE (RFI-01).",
+   "insulation": "none (single-direction hatch = legend \"FULL HEIGHT PARTITION TO 6\\\" ABOVE CEILING U.N.O.\"; the batt pattern is cross-hatch) - insulation excluded anyway",
+   "exterior": false,
+   "ours": true,
+   "scope_note": "NEW partition - ours (framing + board both sides + taping Level 4 per A2.0 general note 3)",
+   "level_of_finish": "Level 4 (A2.0 PARTITION PLAN GENERAL NOTES 3: \"TAPED, SANDED SMOOTH TO A \\\"LEVEL 4\\\" FINISH\")",
+   "type_text": "2/A2.0 WALL TYPE 2: \"5/8\\\" TYPE 'X' GYP. BD. BOTH SIDES OVER 3-5/8\\\" METAL STUDS FROM SLAB TO 6\\\" ABOVE CEILING U.N.O. ... REFER TO INTERIOR WALL LIMITING HEIGHTS THIS SHEET FOR STUD SPECS ... FOR FINISHES SEE ROOM FINISH SCHEDULE\"",
+   "height_img": "img/H_retail_12ft_A30.png",
+   "height_img_extra": [
+    "img/H_storage_10ft_A30.png",
+    "img/H_hall_9ft_A30.png",
+    "img/W2_type_text_A20.png"
+   ],
+   "thickness_measured_in": 4.867,
+   "thickness_check": "(760.8-753.5)/18*12 = 4.87 in = 3-5/8\" stud + 2 x 5/8\" GB  OK",
+   "id": "W2-02",
+   "tag_ids": [
+    "PC0003"
+   ],
+   "location": "Hallway 102 east side (Retail 100 / Hallway 102), infill between existing W4 stubs",
+   "band": {
+    "ori": "V",
+    "c0": 753.5,
+    "c1": 760.8,
+    "lo": 1507.0,
+    "hi": 1579.0,
+    "sheet": "A2.0"
+   },
+   "length_ft": 4.0,
+   "length_source": "A2.0 1/A2.0 printed vertical dimension 4'-0\" (ticks at 1506.5 / 1579.2) next to Hallway 102",
+   "length_op": "printed 4'-0\"; vector check (1579.0-1507.0)/18 = 4.000",
+   "length_status": "CONFIRMADO",
+   "openings": [],
+   "height_ft": 12.5,
+   "height_source": "Type W2 to 6\" above ceiling; higher side RETAIL 100 ACT 12'-0\" AFF (A3.0)",
+   "height_op": "12.0 + 0.5 = 12.5",
+   "height_status": "DERIVADO",
+   "faces": [
+    {
+     "side": "A",
+     "room": "RETAIL 100",
+     "layers": 1,
+     "board": "5/8\" Type X",
+     "height_ft": 12.5,
+     "height_source": "A3.0 retail 12'-0\" AFF + 6\"",
+     "height_status": "DERIVADO",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "HALLWAY 102",
+     "layers": 1,
+     "board": "5/8\" Type X",
+     "height_ft": 9.5,
+     "height_source": "A3.0 hallway \"EXISTING GYP. BD. 9'-0\\\" AFF\" + 6\" (W2 type); board above an EXISTING hard ceiling may not be installable -> RFI-03",
+     "height_status": "DERIVADO",
+     "wet": false
+    }
+   ],
+   "img": "img/W2-02_A20.png",
+   "status": "CONFIRMADO"
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W1-01",
+   "tag": "W1",
+   "tag_ids": [
+    "PC0008",
+    "PC0009",
+    "PC0010"
+   ],
+   "location": "West demising wall (top of plan, lease line to lease line), Storage 101 + Retail 100",
+   "band": {
+    "ori": "H",
+    "c0": 1226.8,
+    "c1": 1237.6,
+    "lo": 419.4,
+    "hi": 1561.9,
+    "sheet": "A2.0"
+   },
+   "length_ft": 63.472,
+   "length_source": "A2.0 top dim string 18'-6 3/4\" + 4 7/8\" + 44'-6\" = 63'-5 5/8\" (63.469 ft); vector 63.472",
+   "length_op": "(1561.9-419.4)/18 = 63.472",
+   "length_status": "CONFIRMADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "adjacent tenant (outside lease)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "STORAGE 101 / RETAIL 100 (tenant side)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "6/A2.0 where new work ties in",
+   "type_text": "2/A2.0 WALL TYPE 1: \"EXISTING DEMISING/EXTERIOR WALL TO REMAIN PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) FOR FINISHES SEE ROOM FINISH SCHEDULE - TENANT SIDE\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04. A1.0 key note 3 \"EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES.\"",
+   "img": "img/W1-01_A20.png",
+   "status": "CONFIRMADO",
+   "exterior": true
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W1-02",
+   "tag": "W1",
+   "tag_ids": [
+    "PC0001",
+    "PC0006",
+    "PC0007"
+   ],
+   "location": "East demising wall (bottom of plan), Toilet 104 + Retail 100",
+   "band": {
+    "ori": "H",
+    "c0": 1760.9,
+    "c1": 1771.7,
+    "lo": 562.9,
+    "hi": 1562.9,
+    "sheet": "A2.0"
+   },
+   "length_ft": 55.556,
+   "length_source": "A2.0 bottom dims 10'-7\" + (4 7/8\" wall, printed on top string) + 44'-6 5/8\" = 55.542 ft; vector 55.556",
+   "length_op": "(1562.9-562.9)/18 = 55.556",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "TOILET 104 / RETAIL 100 (tenant side)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "adjacent tenant",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "6/A2.0 where new work ties in",
+   "type_text": "2/A2.0 WALL TYPE 1: \"EXISTING DEMISING/EXTERIOR WALL TO REMAIN PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) FOR FINISHES SEE ROOM FINISH SCHEDULE - TENANT SIDE\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04. A1.0 key note 3.",
+   "img": "img/W1-02_A20.png",
+   "status": "DERIVADO",
+   "exterior": true
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W1-03",
+   "tag": "W1",
+   "tag_ids": [
+    "PC0011"
+   ],
+   "location": "South/rear exterior wall at Storage 101 (left of plan), contains existing rear exit door 104",
+   "band": {
+    "ori": "V",
+    "c0": 401.6,
+    "c1": 419.4,
+    "lo": 1237.6,
+    "hi": 1489.1,
+    "sheet": "A2.0"
+   },
+   "length_ft": 13.972,
+   "length_source": "A2.0 left dim \"13'-11 5/8\\\"\" = 13.969 ft; vector 13.972",
+   "length_op": "(1489.1-1237.6)/18 = 13.972",
+   "length_status": "CONFIRMADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "STORAGE 101 (north face = right)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "exterior",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "6/A2.0 where new work ties in",
+   "type_text": "2/A2.0 WALL TYPE 1: \"EXISTING DEMISING/EXTERIOR WALL TO REMAIN PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) FOR FINISHES SEE ROOM FINISH SCHEDULE - TENANT SIDE\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W1-03_A20.png",
+   "status": "CONFIRMADO",
+   "exterior": true
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W1-04",
+   "tag": "W1",
+   "tag_ids": [
+    "PC0013"
+   ],
+   "location": "Storage 101 / Landlord room (N.I.C.) wall",
+   "band": {
+    "ori": "H",
+    "c0": 1489.1,
+    "c1": 1500.0,
+    "lo": 419.4,
+    "hi": 556.0,
+    "sheet": "A2.0"
+   },
+   "length_ft": 7.589,
+   "length_source": "vector at 18 pt/ft",
+   "length_op": "(556.0-419.4)/18 = 7.589",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "STORAGE 101",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "LANDLORD ROOM (N.I.C.)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "6/A2.0 where new work ties in",
+   "type_text": "2/A2.0 WALL TYPE 1: \"EXISTING DEMISING/EXTERIOR WALL TO REMAIN PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) FOR FINISHES SEE ROOM FINISH SCHEDULE - TENANT SIDE\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W1-04_A20.png",
+   "status": "DERIVADO",
+   "exterior": true
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W1-05",
+   "tag": "W1",
+   "tag_ids": [
+    "PC0017"
+   ],
+   "location": "Landlord room (N.I.C.) east wall, behind W4-03 at toilets 103/104",
+   "band": {
+    "ori": "V",
+    "c0": 545.0,
+    "c1": 556.0,
+    "lo": 1500.0,
+    "hi": 1760.9,
+    "sheet": "A2.0"
+   },
+   "length_ft": 14.494,
+   "length_source": "vector at 18 pt/ft",
+   "length_op": "(1760.9-1500.0)/18 = 14.494",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "behind W4-03 (toilets)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "LANDLORD ROOM (N.I.C.)",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "6/A2.0 where new work ties in",
+   "type_text": "2/A2.0 WALL TYPE 1: \"EXISTING DEMISING/EXTERIOR WALL TO REMAIN PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) FOR FINISHES SEE ROOM FINISH SCHEDULE - TENANT SIDE\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W1-05_A20.png",
+   "status": "DERIVADO",
+   "exterior": true
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-01",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0014"
+   ],
+   "location": "Restroom block north wall: Storage 101 / Existing Toilet 103 (PC0014 leader 1)",
+   "band": {
+    "ori": "H",
+    "c0": 1489.1,
+    "c1": 1500.6,
+    "lo": 556.0,
+    "hi": 676.8,
+    "sheet": "A2.0"
+   },
+   "length_ft": 6.711,
+   "length_source": "vector at 18 pt/ft",
+   "length_op": "(676.8-556.0)/18 = 6.711",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "STORAGE 101",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "EXISTING TOILET 103",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-01_A20.png",
+   "status": "DERIVADO",
+   "exterior": false
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-02",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0014"
+   ],
+   "location": "Existing Toilet 103 / Hallway 102, existing door 102 (PC0014 leader 2)",
+   "band": {
+    "ori": "V",
+    "c0": 669.5,
+    "c1": 676.8,
+    "lo": 1500.6,
+    "hi": 1646.8,
+    "sheet": "A2.0"
+   },
+   "length_ft": 8.122,
+   "length_source": "vector; A2.0 dims 5'-11 1/8\" / 4'-3 1/8\" locate it",
+   "length_op": "(1646.8-1500.6)/18 = 8.122",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "HALLWAY 102",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "EXISTING TOILET 103",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-02_A20.png",
+   "status": "DERIVADO",
+   "exterior": false
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-03",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0012"
+   ],
+   "location": "Toilets 103/104 west wall lining (against W1-05)",
+   "band": {
+    "ori": "V",
+    "c0": 556.0,
+    "c1": 562.9,
+    "lo": 1500.6,
+    "hi": 1760.9,
+    "sheet": "A2.0"
+   },
+   "length_ft": 14.461,
+   "length_source": "vector at 18 pt/ft",
+   "length_op": "(1760.9-1500.6)/18 = 14.461",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "EXISTING TOILET 103 / ACCESS. TOILET 104",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "W1-05",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-03_A20.png",
+   "status": "DERIVADO",
+   "exterior": false
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-04",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0015"
+   ],
+   "location": "Toilet 103 + Hallway 102 / Access. Toilet 104, existing door 103",
+   "band": {
+    "ori": "H",
+    "c0": 1646.8,
+    "c1": 1655.3,
+    "lo": 562.9,
+    "hi": 753.5,
+    "sheet": "A2.0"
+   },
+   "length_ft": 10.589,
+   "length_source": "A2.0 printed 10'-7\" (562.86-753.48)",
+   "length_op": "(753.5-562.9)/18 = 10.589",
+   "length_status": "CONFIRMADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "EXISTING TOILET 103 / HALLWAY 102",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "EXISTING ACCESS. TOILET 104",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-04_A20.png",
+   "status": "CONFIRMADO",
+   "exterior": false
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-05",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0004",
+    "PC0016"
+   ],
+   "location": "Hallway 102 + Toilet 104 / Retail 100 (south end of W2 line)",
+   "band": {
+    "ori": "V",
+    "c0": 753.5,
+    "c1": 760.8,
+    "lo": 1579.0,
+    "hi": 1760.9,
+    "sheet": "A2.0"
+   },
+   "length_ft": 10.106,
+   "length_source": "vector; = 29'-0 3/4\" - 4\" - 3'-0\" ... cross-check: 25'-8 3/4\" (1297.6-1760.9) printed",
+   "length_op": "(1760.9-1579.0)/18 = 10.106",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "RETAIL 100",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "HALLWAY 102 / ACCESS. TOILET 104",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-05_A20.png",
+   "status": "DERIVADO",
+   "exterior": false
+  },
+  {
+   "element": "wall",
+   "sheet": "A2.0",
+   "page": 5,
+   "id": "W4-06",
+   "tag": "W4",
+   "tag_ids": [
+    "PC0005"
+   ],
+   "location": "Existing stub at hallway NE corner between W2-01 and W2-02",
+   "band": {
+    "ori": "V",
+    "c0": 753.5,
+    "c1": 760.8,
+    "lo": 1489.1,
+    "hi": 1507.0,
+    "sheet": "A2.0"
+   },
+   "length_ft": 0.994,
+   "length_source": "vector at 18 pt/ft",
+   "length_op": "(1507.0-1489.1)/18 = 0.994",
+   "length_status": "DERIVADO",
+   "height_ft": null,
+   "height_source": "existing to remain - not quantified",
+   "height_status": "NO APLICA",
+   "faces": [
+    {
+     "side": "A",
+     "room": "RETAIL 100",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    },
+    {
+     "side": "B",
+     "room": "HALLWAY 102 / STORAGE 101",
+     "layers": 0,
+     "board": "existing",
+     "height_ft": null,
+     "height_source": "existing",
+     "height_status": "NO APLICA",
+     "wet": false
+    }
+   ],
+   "stud_size": "existing",
+   "gauge": "existing",
+   "oc_in": null,
+   "oc_source": "existing",
+   "detail": "",
+   "type_text": "2/A2.0 WALL TYPE 4: \"INTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\"",
+   "ours": false,
+   "scope_note": "EXISTING TO REMAIN - not counted. Type text only calls \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - no new board/furring drawn; patch extent not quantifiable -> RFI-04.",
+   "img": "img/W4-06_A20.png",
+   "status": "DERIVADO",
+   "exterior": false
+  }
+ ],
+ "nodes": [
+  {
+   "id": "N1",
+   "kind": "T",
+   "walls": [
+    "W1-01",
+    "W2-01"
+   ],
+   "at": [
+    757.2,
+    1237.6
+   ],
+   "source": "A2.0; 6/A2.0 WALL CONNECTION AT DEMISING TYP (\"EXIST. GYP. BD.\", \"METAL CORNER BEAD\", new 5/8\" Type X on metal studs)"
+  },
+  {
+   "id": "N2",
+   "kind": "butt-inline",
+   "walls": [
+    "W2-01",
+    "W4-06"
+   ],
+   "at": [
+    757.2,
+    1489.1
+   ],
+   "source": "A2.0 vector: hatch ends at 1489.1, grey existing stub 1489.1-1507.0"
+  },
+  {
+   "id": "N3",
+   "kind": "butt-inline",
+   "walls": [
+    "W4-06",
+    "W2-02"
+   ],
+   "at": [
+    757.2,
+    1507.0
+   ],
+   "source": "A2.0"
+  },
+  {
+   "id": "N4",
+   "kind": "butt-inline",
+   "walls": [
+    "W2-02",
+    "W4-05"
+   ],
+   "at": [
+    757.2,
+    1579.0
+   ],
+   "source": "A2.0 printed 4'-0\" ends"
+  },
+  {
+   "id": "N5",
+   "kind": "L",
+   "walls": [
+    "W4-01",
+    "W4-02"
+   ],
+   "at": [
+    673.2,
+    1495.0
+   ],
+   "source": "A2.0 (existing)"
+  },
+  {
+   "id": "N6",
+   "kind": "T",
+   "walls": [
+    "W4-04",
+    "W4-05"
+   ],
+   "at": [
+    757.2,
+    1651.0
+   ],
+   "source": "A2.0 (existing)"
+  },
+  {
+   "id": "N7",
+   "kind": "header",
+   "walls": [
+    "W4-02",
+    "W2-01/W4-06"
+   ],
+   "at": [
+    715,
+    1492.7
+   ],
+   "source": "A3.0 GYP. BD. 8'-6\" AFF strip = header over hallway opening, see ceilings HDR-01"
+  }
+ ],
+ "details": {
+  "2/A2.0": {
+   "title": "WALL TYPES",
+   "notes": "W1 existing demising/exterior to remain (patch & repair); W2 5/8\" X both sides 3-5/8\" studs slab to 6\" above clg; W2A = W2 omit GB one side; W3 5/8\" X both sides 6\" studs slab to 6\" above clg; W4 interior wall to remain (patch & repair). Plan uses only W1, W2, W4.",
+   "img": "img/W2_type_text_A20.png"
+  },
+  "WALL LEGEND/A2.0": {
+   "title": "WALL LEGEND",
+   "notes": "grey = existing to remain; single hatch = full height partition to 6\" above ceiling U.N.O.; cross hatch = same with sound batt. W2 on plan is single hatch.",
+   "img": "img/legend_A20_marked.png"
+  },
+  "3/A2.0": {
+   "title": "TYPICAL WALL - BASE DETAIL",
+   "notes": "bottom track, PDF @16\" o.c. max (fasteners excluded)",
+   "img": "img/det3_A20.png"
+  },
+  "4/A2.0": {
+   "title": "TYPICAL WALL AND CEILING DETAIL",
+   "notes": "top track to studs; brace to structure alternate sides @8'-0\" o.c. max, 3-5/8\" 20 ga min, max brace 25'-0\"; ACT wall angle (ACT trade)",
+   "img": "img/det4_A20.png"
+  },
+  "5/A2.0": {
+   "title": "NON-RATED COLUMN FURRING",
+   "notes": "5/8\" X one side over 2-1/2\" studs all sides, L-bead",
+   "img": "img/det5_A20.png"
+  },
+  "6/A2.0": {
+   "title": "WALL CONNECTION AT DEMISING",
+   "notes": "existing wall to remain; exist GB; metal corner bead; new 5/8\" X on studs",
+   "img": "img/det6_A20.png"
+  },
+  "7/A2.0": {
+   "title": "TYPICAL HEAD DETAIL (JAMB SIM)",
+   "notes": "3-5/8\" track at head, 3-5/8\" stud nested in track; F.R.T. wood blocking (Div 06 excluded)",
+   "img": "img/det7_A20.png"
+  },
+  "8/A2.0": {
+   "title": "BACKING DETAIL FOR MISC. EQUIP.",
+   "notes": "16 ga x 6\" x 1-1/2\" unpunched track backing, 16 ga studs 16\" o.c. at backing; extend 1 bay beyond; locations per A4.0/A5.0 (key notes 2, 6) - not taken off here",
+   "img": "img/det8_A20.png"
+  }
+ },
+ "ceilings": [
+  {
+   "ref": "HDR-01",
+   "element": "ceiling",
+   "type": "gypsum board header/bulkhead soffit over Hallway 102 opening (A3.0 tag \"GYP. BD. 8'-6\\\" AFF\", not labelled EXISTING)",
+   "room": "HALLWAY 102 / STORAGE 101 opening",
+   "sheet": "A3.0",
+   "ours": true,
+   "band": {
+    "ori": "H",
+    "c0": 1618.2,
+    "c1": 1625.5,
+    "lo": 846.8,
+    "hi": 923.3,
+    "sheet": "A3.0"
+   },
+   "length_ft": 4.25,
+   "length_op": "(923.3-846.8)/18 = 4.250 ft; = A2.0 printed hallway width 4'-3 1/8\" (4.260)",
+   "length_status": "DERIVADO",
+   "width_ft": 0.406,
+   "width_op": "(1625.5-1618.2)/18 = 0.406 ft (4.87\", same as a 3-5/8\" wall)",
+   "area_sf": 1.724,
+   "area_source": "A3.0 vector rectangle (846.8,1618.2)-(923.3,1625.5) at 18 pt/ft (soffit underside only)",
+   "area_op": "76.5 x 7.3 = 558.45 pt2 / 324 = 1.724 SF",
+   "area_status": "DERIVADO",
+   "height_ft": 8.5,
+   "height_source": "A3.0 tag \"GYP. BD. 8'-6\\\" AFF\" (leader dot at 883.4,1622.6 on the strip)",
+   "height_status": "CONFIRMADO",
+   "vertical_faces": "Storage side 8'-6\" up to 6\" above storage ACT 10'-0\" = 2.0 ft x 4.25 = 8.50 SF (DERIVADO, assumption on top); hallway side 8'-6\" to existing GB ceiling 9'-0\" = 0.5 x 4.25 = 2.13 SF (DERIVADO). Framing/top not detailed -> RFI-05",
+   "board": "5/8\" Type X (A3.0 legend \"5/8\\\" TYPE \\\"X\\\" GYPSUM BOARD CEILING\"; A0.3 GB spec Type X 5/8)",
+   "layers": 1,
+   "demo_link": "A1.0 dashed wall D-01 removed on the same line (A1.0 x 758.5-835 = A3.0 846.8-923.3)",
+   "img": "img/H_hdr_8-6_A30.png",
+   "status": "DERIVADO"
+  }
+ ],
+ "ceilings_info": {
+  "existing_gyp_not_ours": [
+   {
+    "room": "HALLWAY 102",
+    "area_sf": 35.393,
+    "area_op": "(923.3-846.8)x(1775.4-1625.5)=76.5x149.9/324",
+    "height": "EXISTING GYP. BD. 9'-0\" AFF (A3.0)",
+    "why": "labelled EXISTING; A1.0 key 16 \"EXISTING CEILING ... TO REMAIN\""
+   },
+   {
+    "room": "EXISTING TOILET 103",
+    "area_sf": 47.847,
+    "area_op": "(839.5-733.1)x(1775.4-1629.7)/324",
+    "height": "EXISTING GYP. BD. 9'-0\" AFF",
+    "why": "EXISTING; A1.0 keys 10,16"
+   },
+   {
+    "room": "EXISTING ACCESS. TOILET 104",
+    "area_sf": 61.932,
+    "area_op": "(923.3-733.1)x(1889.4-1783.9)/324",
+    "height": "EXISTING GYP. BD. 9'-0\" AFF",
+    "why": "EXISTING; A1.0 keys 10,16"
+   }
+  ],
+  "act_not_ours": [
+   {
+    "room": "RETAIL 100",
+    "text": "NEW GRID AND TILES 2x4 ACT 12'-0\" AFF (A3.0)"
+   },
+   {
+    "room": "STORAGE 101",
+    "text": "EXIST. GRID & NEW TILES 2x4 ACT 10'-0\" AFF (A3.0)"
+   }
+  ],
+  "nic": [
+   {
+    "room": "LANDLORD ROOM",
+    "text": "\"LANDLORD ROOM (N.I.C.)\" A1.0/A2.0/A3.0 - excluded"
+   }
+  ],
+  "storefront": "A1.0 key 13 \"EXISTING STOREFRONT BULKHEAD ABOVE. PATCH AND MATCH AS REQUIRED (V.I.F.)\" - existing, patch only, not quantified",
+  "img": [
+   "img/ceil_existing_gyp_A30.png",
+   "img/ceil_overview_A30.png",
+   "img/ceil_legend_A30.png"
+  ]
+ },
+ "column_furring": [
+  {
+   "ref": "CF-01",
+   "element": "column_furring",
+   "sheet": "A2.0",
+   "ours": true,
+   "location": "existing storefront column in RETAIL 100 (bubble 5/A2.0 SIM)",
+   "band": {
+    "x0": 1546.9,
+    "x1": 1559.9,
+    "y0": 1346.5,
+    "y1": 1363.4,
+    "sheet": "A2.0"
+   },
+   "sides": "3 exposed sides (4th side against existing storefront pier, grey)",
+   "perimeter_lf": 2.383,
+   "perimeter_op": "(1363.4-1346.5)/18 + 2 x (1559.9-1546.9)/18 = 0.939 + 2 x 0.722 = 2.383",
+   "perimeter_status": "DERIVADO",
+   "height_ft": 12.5,
+   "height_op": "RETAIL ACT 12'-0\" AFF (A3.0) + 6\" (key note 1 \"TO 6\\\" ABOVE CEILING\")",
+   "height_status": "DERIVADO",
+   "sf": 29.788,
+   "sf_op": "2.383 x 12.5",
+   "system": "5/A2.0: \"5/8\\\" TYPE 'X' GYP. BD. ONE SIDE OVER 2 1/2\\\" METAL STUDS (TYP. ALL SIDES)\"; \"FINISH CORNER 'L' BEAD, TAPE & FINISH SMOOTH FOR PAINT\"",
+   "source": "A2.0 key note 1 \"IF EXISTING COLUMNS ARE LOCATED IN SALES AREA COLUMNS TO BE FURRED WITH METAL STUDS & (1) LAYER 5/8\\\" GYP. BOARD TO 6\\\" ABOVE CEILING ... SEE DETAIL 5/A2.0\"; hatched furring outline in plan",
+   "img": "img/CF-01_col_A20.png",
+   "img_extra": [
+    "img/det5_A20.png",
+    "img/keynote1_A20.png"
+   ],
+   "status": "DERIVADO"
+  },
+  {
+   "ref": "CF-02",
+   "element": "column_furring",
+   "sheet": "A2.0",
+   "ours": true,
+   "location": "existing storefront column in RETAIL 100 (bubble 5/A2.0 SIM)",
+   "band": {
+    "x0": 1546.9,
+    "x1": 1559.9,
+    "y0": 1706.5,
+    "y1": 1723.4,
+    "sheet": "A2.0"
+   },
+   "sides": "3 exposed sides (4th side against existing storefront pier, grey)",
+   "perimeter_lf": 2.383,
+   "perimeter_op": "(1723.4-1706.5)/18 + 2 x (1559.9-1546.9)/18 = 0.939 + 2 x 0.722 = 2.383",
+   "perimeter_status": "DERIVADO",
+   "height_ft": 12.5,
+   "height_op": "RETAIL ACT 12'-0\" AFF (A3.0) + 6\" (key note 1 \"TO 6\\\" ABOVE CEILING\")",
+   "height_status": "DERIVADO",
+   "sf": 29.788,
+   "sf_op": "2.383 x 12.5",
+   "system": "5/A2.0: \"5/8\\\" TYPE 'X' GYP. BD. ONE SIDE OVER 2 1/2\\\" METAL STUDS (TYP. ALL SIDES)\"; \"FINISH CORNER 'L' BEAD, TAPE & FINISH SMOOTH FOR PAINT\"",
+   "source": "A2.0 key note 1 \"IF EXISTING COLUMNS ARE LOCATED IN SALES AREA COLUMNS TO BE FURRED WITH METAL STUDS & (1) LAYER 5/8\\\" GYP. BOARD TO 6\\\" ABOVE CEILING ... SEE DETAIL 5/A2.0\"; hatched furring outline in plan",
+   "img": "img/CF-02_col_A20.png",
+   "img_extra": [
+    "img/det5_A20.png",
+    "img/keynote1_A20.png"
+   ],
+   "status": "DERIVADO"
+  }
+ ],
+ "misc_items": [
+  {
+   "ref": "D-01",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "Hallway 102 north opening line, extends 1.33 ft east of the W2 line (L with D-02); replaced by HDR-01 header at 8'-6\"",
+   "band": {
+    "ori": "H",
+    "c0": 1495.8,
+    "c1": 1503.0,
+    "lo": 758.5,
+    "hi": 866.4,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 5.994,
+   "lf_op": "(866.4-758.5)/18 = 5.994",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 5.994 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-01_A10.png"
+  },
+  {
+   "ref": "D-02",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "short return of D-01 to the door jamb (existing door removed, key 7)",
+   "band": {
+    "ori": "V",
+    "c0": 859.2,
+    "c1": 866.4,
+    "lo": 1452.5,
+    "hi": 1495.8,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 2.406,
+   "lf_op": "(1495.8-1452.5)/18 = 2.406",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 2.406 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-02_A10.png"
+  },
+  {
+   "ref": "D-03",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "long partition across Retail 100 (L with D-04), with perpendicular ticks",
+   "band": {
+    "ori": "H",
+    "c0": 1452.6,
+    "c1": 1459.8,
+    "lo": 928.3,
+    "hi": 1394.5,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 25.9,
+   "lf_op": "(1394.5-928.3)/18 = 25.9",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 25.9 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-03_A10.png"
+  },
+  {
+   "ref": "D-04",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "return of D-03 (free end at 1350.8)",
+   "band": {
+    "ori": "V",
+    "c0": 1387.2,
+    "c1": 1394.4,
+    "lo": 1350.8,
+    "hi": 1452.6,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 5.656,
+   "lf_op": "(1452.6-1350.8)/18 = 5.656",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 5.656 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-04_A10.png"
+  },
+  {
+   "ref": "D-05",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "small L near west demising wall: leg from wall face (L with D-06)",
+   "band": {
+    "ori": "V",
+    "c0": 1341.0,
+    "c1": 1348.2,
+    "lo": 1244.5,
+    "hi": 1289.4,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 2.494,
+   "lf_op": "(1289.4-1244.5)/18 = 2.494",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 2.494 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-05_A10.png"
+  },
+  {
+   "ref": "D-06",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "small L, free leg",
+   "band": {
+    "ori": "H",
+    "c0": 1289.4,
+    "c1": 1296.6,
+    "lo": 1340.8,
+    "hi": 1394.5,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 2.983,
+   "lf_op": "(1394.5-1340.8)/18 = 2.983",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 2.983 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-06_A10.png"
+  },
+  {
+   "ref": "D-07",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "inner pair inside dashed counter outline (possible counter knee/pony wall) - L with D-08",
+   "band": {
+    "ori": "H",
+    "c0": 1629.6,
+    "c1": 1636.8,
+    "lo": 898.0,
+    "hi": 1100.4,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 11.244,
+   "lf_op": "(1100.4-898.0)/18 = 11.244",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 11.244 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-07_A10.png"
+  },
+  {
+   "ref": "D-08",
+   "element": "demo",
+   "familia": "demolition of existing metal-stud/gypsum partition (SF of wall only)",
+   "sheet": "A1.0",
+   "page": 4,
+   "location": "return of D-07 to the east demising wall face (1767.6)",
+   "band": {
+    "ori": "V",
+    "c0": 1093.2,
+    "c1": 1100.4,
+    "lo": 1636.8,
+    "hi": 1767.6,
+    "sheet": "A1.0"
+   },
+   "thickness_in": 4.8,
+   "lf": 7.267,
+   "lf_op": "(1767.6-1636.8)/18 = 7.267",
+   "lf_status": "DERIVADO",
+   "height_ft": null,
+   "height_status": "PENDIENTE",
+   "height_note": "No height printed for walls to be demolished (A1.0, A3.0, A5.0 searched). Candidates: to existing ceiling (unknown before demo), or to structure (not printed). -> RFI-06",
+   "qty": null,
+   "unit": "SF",
+   "op": "SF = 7.267 x H(PENDIENTE)",
+   "status": "PENDIENTE",
+   "source": "A1.0 key note 7 \"ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED\"; WALL DEMOLITION LEGEND \"MATERIAL TO BE DEMOLISHED\" (dashed); pair of dashed lines 7.2 pt apart (4.8\")",
+   "img": "img/D-08_A10.png"
+  }
+ ],
+ "demo_total_lf": 63.944,
+ "demo_total_op": "5.994 + 2.406 + 25.9 + 5.656 + 2.494 + 2.983 + 11.244 + 7.267",
+ "types_none_reason": {
+  "W2A": "only in 2/A2.0 legend (PC0020), not used on plan",
+  "W3": "only in 2/A2.0 legend (PC0021), not used on plan"
+ },
+ "tags_descartados": [
+  {
+   "id": "PC0018",
+   "motivo": "wall-type legend symbol in 2/A2.0 WALL TYPES (not a plan wall)",
+   "imagen": "img/tags_legend_PC0018-22_A20.png"
+  },
+  {
+   "id": "PC0019",
+   "motivo": "wall-type legend symbol in 2/A2.0 WALL TYPES (not a plan wall)",
+   "imagen": "img/tags_legend_PC0018-22_A20.png"
+  },
+  {
+   "id": "PC0020",
+   "motivo": "wall-type legend symbol in 2/A2.0 WALL TYPES (not a plan wall)",
+   "imagen": "img/tags_legend_PC0018-22_A20.png"
+  },
+  {
+   "id": "PC0021",
+   "motivo": "wall-type legend symbol in 2/A2.0 WALL TYPES (not a plan wall)",
+   "imagen": "img/tags_legend_PC0018-22_A20.png"
+  },
+  {
+   "id": "PC0022",
+   "motivo": "wall-type legend symbol in 2/A2.0 WALL TYPES (not a plan wall)",
+   "imagen": "img/tags_legend_PC0018-22_A20.png"
+  }
+ ],
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "pregunta": "Structure/deck height not printed on any sheet. 4/A2.0 requires W2 bracing \"TO STRUCTURE ... AT 8'-0\\\" O.C. MAX.\" (max brace 25'-0\"). Provide B.O. structure height at the W2 line.",
+   "source": "4/A2.0; searched all sheets (DECK, B.O., JOIST, STRUCTURE)",
+   "opciones": {
+    "A": {
+     "texto": "Carry studs 12'-6\" (6\" above 12'-0\" ACT) + braces PENDIENTE length",
+     "source": "2/A2.0, A3.0"
+    },
+    "B": {
+     "texto": "Studs full height to structure (field verify)",
+     "source": "none printed"
+    },
+    "C": ""
+   },
+   "delta": "braces LF unknown until height given"
+  },
+  {
+   "id": "RFI-02",
+   "pregunta": "W2 stud gauge and spacing not printed (type refers to the limiting-heights table). Confirm 362S125-33 (20 ga) @16\" o.c. for 12'-6\".",
+   "source": "2/A2.0 table; 4/A2.0 \"3 5/8\\\" 20 GA. MIN.\"",
+   "opciones": {
+    "A": {
+     "texto": "362S125-33 @16\" o.c. (16'-0\" limit)",
+     "source": "2/A2.0"
+    },
+    "B": {
+     "texto": "362S125-33 @24\" o.c. (14'-0\" limit)",
+     "source": "2/A2.0"
+    },
+    "C": ""
+   },
+   "delta": "stud count only"
+  },
+  {
+   "id": "RFI-03",
+   "pregunta": "W2 board height per face: type says board both sides \"FROM SLAB TO 6\\\" ABOVE CEILING\". Storage side ceiling 10'-0\", hallway side existing GB 9'-0\", retail 12'-0\". Carried per-face (10'-6\" / 9'-6\" / 12'-6\"). Confirm vs full stud height both sides.",
+   "source": "2/A2.0, A3.0",
+   "opciones": {
+    "A": {
+     "texto": "per face (as carried)",
+     "source": "2/A2.0"
+    },
+    "B": {
+     "texto": "both faces 12'-6\"",
+     "source": ""
+    },
+    "C": ""
+   },
+   "delta": "W2-01 B +2.0 ft x 13.97; W2-02 B +3.0 ft x 4.0"
+  },
+  {
+   "id": "RFI-04",
+   "pregunta": "W1 and W4 types: \"PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)\" - extent not shown. Also patching where demolished walls D-05 and D-08 met W1 walls and at the W2/W1 junction (6/A2.0). Allowance or extent?",
+   "source": "2/A2.0 W1/W4; A1.0 key 3",
+   "opciones": {
+    "A": {
+     "texto": "No quantity (as carried)",
+     "source": ""
+    },
+    "B": {
+     "texto": "Allowance",
+     "source": ""
+    },
+    "C": ""
+   },
+   "delta": "unknown"
+  },
+  {
+   "id": "RFI-05",
+   "pregunta": "A3.0 \"GYP. BD. 8'-6\\\" AFF\" strip over Hallway 102 opening (where A1.0 demolishes wall D-01): no section/detail. Confirm it is a new framed gypsum header from 8'-6\" up to above the storage ACT (10'-0\") and existing hallway GB ceiling (9'-0\").",
+   "source": "A3.0, A1.0",
+   "opciones": {
+    "A": {
+     "texto": "new header 4'-3\" long, 4.9\" wide, soffit 1.72 SF + faces ~10.6 SF",
+     "source": "A3.0 vector"
+    },
+    "B": {
+     "texto": "keep existing wall above 8'-6\" (demo only below)",
+     "source": "A1.0 shows full removal"
+    },
+    "C": ""
+   },
+   "delta": "small"
+  },
+  {
+   "id": "RFI-06",
+   "pregunta": "Height of existing partitions to be demolished (A1.0 key 7) not printed; D-07/D-08 may be a counter knee wall. Provide heights.",
+   "source": "A1.0",
+   "opciones": {
+    "A": {
+     "texto": "to existing ceiling (unknown)",
+     "source": ""
+    },
+    "B": {
+     "texto": "field verify",
+     "source": ""
+    },
+    "C": ""
+   },
+   "delta": "63.944 LF x H"
+  },
+  {
+   "id": "RFI-07",
+   "pregunta": "Column furring: column size/furring dimensions not dimensioned; measured from vector (0.94 x 0.72 ft outline, 3 exposed sides). Confirm furring at both storefront columns (5/A2.0 SIM) to 6\" above 12'-0\" ceiling.",
+   "source": "A2.0 key 1, 5/A2.0",
+   "opciones": {
+    "A": {
+     "texto": "as carried 2 columns",
+     "source": "A2.0"
+    },
+    "B": "",
+    "C": ""
+   },
+   "delta": "-"
+  }
+ ]
+}

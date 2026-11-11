@@ -1,0 +1,200 @@
+{
+ "reader": "independent schedule reader (did not see any take-off/Excel/other reader)",
+ "date": "2026-11-11",
+ "schedule_order": [
+  "W1",
+  "W3",
+  "W2A",
+  "W2",
+  "W4"
+ ],
+ "schedule_order_note": "2/A2.0 grid: top-left W1, top-right W3, bottom-left W2A + W2 (shared cell), bottom-right W4. Numeric order W1,W2,W2A,W3,W4",
+ "img_schedule": "img/schedule_wall_types.png",
+ "wall_legend": {
+  "EXISTING CONSTRUCTION TO REMAIN": "solid gray",
+  "FULL HEIGHT PARTITION TO 6\" ABOVE CEILING U.N.O.": "single diagonal hatch (used on W2 in plan)",
+  "FULL HEIGHT PARTITION TO 6\" ABOVE CEILING WITH SOUND BATT INSULATION U.N.O.": "cross hatch",
+  "img": "img/wall_legend.png",
+  "source": "WALL LEGEND A2.0"
+ },
+ "other_assemblies": {
+  "column_furring_5/A2.0": {
+   "text": "NON-RATED COLUMN FURRING: '5/8\" TYPE 'X' GYP. BD. ONE SIDE OVER 2 1/2\" METAL STUDS (TYP. ALL SIDES)'; 'FINISH CORNER 'L' BEAD, TAPE & FINISH SMOOTH FOR PAINT'; key note 1: 'COLUMNS TO BE FURRED WITH METAL STUDS & (1) LAYER 5/8\" GYP. BOARD TO 6\" ABOVE CEILING'",
+   "stud_size": "2-1/2\"",
+   "gauge_ga": "PENDING",
+   "oc_in": "PENDING",
+   "faces": [
+    {
+     "side": "exterior face of furring, all sides",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd."
+    }
+   ],
+   "height": "to 6\" above ceiling (KN1)",
+   "source": "5/A2.0 + A2.0 key note 1; '5/A2.0 SIM.' keyed at storefront columns on A2.0 plan",
+   "img": "img/det5_column_furring.png"
+  },
+  "backing_8/A2.0": {
+   "text": "16 GA. METAL STUD 16\" O.C. @ ALL BACKING STUD TRACKS; 16 GA. X 6\" X 1-1/2\" UNPUNCHED METAL TRACK W/LEGS CLIPPED & BENT @ EA. STUD... (TO MIN. 3 STUDS) EXTEND BACKING 1 BAY BEYOND EDGE OF CABINET / EQUIP.; W = MAX. 100 LB. PER STUD",
+   "source": "8/A2.0; A2.0 key notes 2, 6; A4.0 fixture key note 1",
+   "img": "img/det8_backing.png"
+  }
+ },
+ "types": {
+  "W1": {
+   "stud_size": null,
+   "stud_designation": null,
+   "gauge_ga": null,
+   "oc_in": null,
+   "faces": [],
+   "faces_note": "EXISTING demising/exterior wall to remain - no new board printed in the type. Tenant side: 'PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)', 'FOR FINISHES SEE ROOM FINISH SCHEDULE' (A4.0 lists GYP. BD. + P1/P2 = existing gyp. bd. painted). Other side = 'ADJACENT TENANT/ EXTERIOR SIDE' (not ours).",
+   "track": "n/a (existing)",
+   "height": "existing (not printed)",
+   "extras": [
+    "EXISTING DEMISING/ EXTERIOR WALL TO REMAIN",
+    "PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.) - patch/repair only, not quantified by the type",
+    "existing = not counted unless plans call new board (none called in the type)",
+    "new walls meeting W1 per 6/A2.0 WALL CONNECTION AT DEMISING: existing gyp. bd. + METAL CORNER BEAD at the new 5/8\" type X wall end",
+    "A1.0 key note: 'EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES.'",
+    "A1.0: 'G.C. MUST ENSURE THAT EXIST. SPACE HAS SMOOTH WALLS'"
+   ],
+   "sources": {
+    "stud": "n/a",
+    "board": "W1/2/A2.0 (p5)",
+    "height": "n/a",
+    "track": "n/a"
+   },
+   "img": "img/W1.png"
+  },
+  "W2": {
+   "stud_size": "3-5/8\"",
+   "stud_designation": "362S125-xx per 'INTERIOR WALL LIMITING HEIGHTS' (A2.0), 5 PSF, L/240. Neither the type nor the plan prints the thickness/spacing, so the row DEPENDS ON HEIGHT and spacing. Wall height used: 12'-6\" = retail ceiling 12'-0\" AFF (A3.0 tag 'NEW GRID AND TILES 2x4 ACT 12'-0\" AFF'; A4.0 room finish schedule 100 RETAIL ceiling height 12'-0\") + 6\" (type text 'FROM SLAB TO 6\" ABOVE CEILING') [DERIVED: 12.0+0.5=12.5 ft]. Rows that qualify at 12'-6\": @16\" o.c.: 362S125-27 (15'-0\"), -30 (15'-6\"), -33 (16'-0\"), -43 (17'-5\"); 362S125-18 @16\" = 12'-2\" < 12'-6\" FAILS (only 362S125-18 @12\" = 14'-0\" works). @24\" o.c.: 362S125-27 (13'-1\") minimum. Lightest at 16\" o.c. = 362S125-27; if the 20 GA min. from 4/A2.0 brace note governs (20 GA = 33 mil), row = 362S125-33 @16\" o.c. (16'-0\" >= 12'-6\"). Storage side alone would be 10'-6\" (10'-0\" ACT +6\") where 362S125-18 @16\" (12'-2\") would pass.",
+   "gauge_ga": 20,
+   "oc_in": 16,
+   "faces": [
+    {
+     "side": "side 1 (retail 100 side, east)",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd.",
+     "board_info": "5/8\" TYPE 'X' GYP. BD. (A0.3 FINISHES/GYPSUM DRYWALL A: \"TYPE X 5/8 FIRECODE, GOLD BOND, U.S.G. OR AN APPROVED EQUAL\"); water resistant gyp. bd./fiber board at areas subject to moisture or where tile is used (A2.0 key note 4)"
+    },
+    {
+     "side": "side 2 (storage 101 / hallway 102 side, west)",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd.",
+     "board_info": "5/8\" TYPE 'X' GYP. BD. (A0.3 FINISHES/GYPSUM DRYWALL A: \"TYPE X 5/8 FIRECODE, GOLD BOND, U.S.G. OR AN APPROVED EQUAL\"); water resistant gyp. bd./fiber board at areas subject to moisture or where tile is used (A2.0 key note 4)"
+    }
+   ],
+   "track": "bottom: 3-5/8\" metal track, 'BOTTOM TRACK WITH POWER-DRIVEN FASTENERS AT 16\" O.C. MAX. ICC-ESR-1752' (3/A2.0); top: track, 'TOP OF TRACK SECURED TO STUDS WITH #8 SHEET METAL SCREW EACH FLANGE' (4/A2.0); no slip/deflection track printed",
+   "bracing": "4/A2.0: 'BRACE TO STRUCTURE, ALTERNATE SIDES. USE METAL STUDS AT 8'-0\" O.C. MAX., MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.) PROVIDE BENT LEG & FASTEN TO TOP TRACK. MAXIMUM LENGTH OF BRACE 25'-0\"' (brace length PENDING: structure height not printed; A0.1 building '1 STORY - 26 FT')",
+   "height": "'FROM SLAB TO 6\" ABOVE CEILING U.N.O.' (studs and board); 4/A2.0 '6\" TYP' above suspended ceiling. Derived 12'-6\" at retail (12'-0\" ACT +6\")",
+   "extras": [
+    "5/8\" TYPE 'X' GYP. BD. BOTH SIDES",
+    "legend hatch used on plan = 'FULL HEIGHT PARTITION TO 6\" ABOVE CEILING U.N.O.' (no insulation); 3/4/A2.0 'INSULATION WHERE IT OCCURS' (not ours)",
+    "FOR FINISHES SEE ROOM FINISH SCHEDULE (A4.0)",
+    "details 3/A2.0 TYP and 4/A2.0 TYP are keyed on the W2 wall in plan",
+    "door 101 in W2 run: 7/A2.0 head (jamb sim): 3-5/8\" metal stud nested in metal track, F.R.T. wood blocking as req'd (Div 06, not ours)",
+    "Level 4 finish (A2.0 general note 3)"
+   ],
+   "sources": {
+    "stud": "W2/2/A2.0 (p5) '3-5/8\" METAL STUDS'; limiting heights table A2.0",
+    "board": "W2/2/A2.0 '5/8\" TYPE 'X' GYP. BD. BOTH SIDES'",
+    "height": "W2/2/A2.0 'FROM SLAB TO 6\" ABOVE CEILING U.N.O.'; 4/A2.0; ceiling heights A3.0/A4.0",
+    "track": "3/A2.0 (bottom), 4/A2.0 (top + brace)"
+   },
+   "img": "img/W2.png",
+   "gauge_info": "PENDING in type (type says 'REFER TO INTERIOR WALL LIMITING HEIGHTS THIS SHEET FOR STUD SPECS'); 4/A2.0 brace note implies wall studs '3 5/8\" 20 GA. MIN.' ('MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'); 16 GA studs at backing locations per 8/A2.0",
+   "gauge_source": "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'; A2.0 limiting heights table (362S125-33 @16\" = 16'-0\" >= 12'-6\")",
+   "oc_info": "PENDING - not printed (type and 3/4/A2.0 say 'SEE STUD TABLE FOR SPACING'); table offers 12/16/24; 8/A2.0: 16 GA studs @16\" o.c. at backing"
+  },
+  "W2A": {
+   "stud_size": "3-5/8\"",
+   "stud_designation": "same as W2 (depends on height; see W2). Note the limiting-height table is titled 'FULLY SHEATHED WITH GYPSUM BOARD OR PLYWOOD ON BOTH SIDES OF WALL' - a one-side-sheathed W2A is outside the table's stated condition unless 'OPTION: CONTINUOUS BRIDGING/ BLOCKING AT 60\" O.C. FULL HEIGHT OF WALL' is provided",
+   "gauge_ga": 20,
+   "oc_in": 16,
+   "faces": [
+    {
+     "side": "one side only ('WALL TYPE 2A - OMIT GYP.BD. ONE SIDE'; which side not printed)",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd.",
+     "board_info": "5/8\" TYPE 'X' GYP. BD. (A0.3 FINISHES/GYPSUM DRYWALL A: \"TYPE X 5/8 FIRECODE, GOLD BOND, U.S.G. OR AN APPROVED EQUAL\"); water resistant gyp. bd./fiber board at areas subject to moisture or where tile is used (A2.0 key note 4)"
+    }
+   ],
+   "track": "as W2 (3/A2.0 bottom, 4/A2.0 top)",
+   "height": "as W2: 'FROM SLAB TO 6\" ABOVE CEILING U.N.O.'",
+   "extras": [
+    "W2A tag does NOT appear on the A2.0 plan (only W1, W2, W4 tags found) - type defined but not used",
+    "if bridging option used: continuous bridging/blocking @60\" o.c. (table header)"
+   ],
+   "sources": {
+    "stud": "2/A2.0 (W2 text, W2A shares the cell)",
+    "board": "2/A2.0 'WALL TYPE 2A - OMIT GYP.BD. ONE SIDE'",
+    "height": "2/A2.0",
+    "track": "3/A2.0, 4/A2.0"
+   },
+   "img": "img/W2A.png",
+   "gauge_info": "as W2 (PENDING in type; 20 GA min. implied by 4/A2.0)",
+   "gauge_source": "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'; A2.0 limiting heights table (362S125-33 @16\" = 16'-0\" >= 12'-6\")",
+   "oc_info": "as W2 (PENDING)"
+  },
+  "W3": {
+   "stud_size": "6\"",
+   "stud_designation": "600S125-xx per limiting-heights table; depends on height. At 12'-6\" every 600S125 row passes (lightest 600S125-30: 25'-2\"/22'-11\"/18'-11\" @12/16/24). Gauge/spacing not printed",
+   "gauge_ga": 20,
+   "oc_in": 16,
+   "faces": [
+    {
+     "side": "side 1",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd.",
+     "board_info": "5/8\" TYPE 'X' GYP. BD. (A0.3 FINISHES/GYPSUM DRYWALL A: \"TYPE X 5/8 FIRECODE, GOLD BOND, U.S.G. OR AN APPROVED EQUAL\"); water resistant gyp. bd./fiber board at areas subject to moisture or where tile is used (A2.0 key note 4)"
+    },
+    {
+     "side": "side 2",
+     "layers": 1,
+     "board": "5/8\" Type 'X' gyp. bd.",
+     "board_info": "5/8\" TYPE 'X' GYP. BD. (A0.3 FINISHES/GYPSUM DRYWALL A: \"TYPE X 5/8 FIRECODE, GOLD BOND, U.S.G. OR AN APPROVED EQUAL\"); water resistant gyp. bd./fiber board at areas subject to moisture or where tile is used (A2.0 key note 4)"
+    }
+   ],
+   "track": "3/A2.0 and 4/A2.0 (details are drawn/noted for 3-5/8\" track - '3-5/8\" METAL TRACK'; for 6\" by similarity)",
+   "height": "'FROM SLAB TO 6\" ABOVE CEILING U.N.O.'",
+   "extras": [
+    "W3 tag does NOT appear on the A2.0 plan - type defined but not used",
+    "FOR FINISHES SEE ROOM FINISH SCHEDULE"
+   ],
+   "sources": {
+    "stud": "W3/2/A2.0 '5/8\" TYPE 'X' GYP. BD. BOTH SIDES OVER 6\" METAL STUDS'",
+    "board": "W3/2/A2.0",
+    "height": "W3/2/A2.0",
+    "track": "3/A2.0, 4/A2.0"
+   },
+   "img": "img/W3.png",
+   "gauge_info": "PENDING (type refers to table; 4/A2.0 brace note '20 GA. MIN.' written for 3 5/8\")",
+   "gauge_source": "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'; A2.0 limiting heights table (362S125-33 @16\" = 16'-0\" >= 12'-6\")",
+   "oc_info": "PENDING"
+  },
+  "W4": {
+   "stud_size": null,
+   "stud_designation": null,
+   "gauge_ga": null,
+   "oc_in": null,
+   "faces": [],
+   "faces_note": "EXISTING interior wall to remain (around existing toilets 103/104 and Landlord Room N.I.C.). 'PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)'. No new board printed.",
+   "track": "n/a (existing)",
+   "height": "existing (not printed)",
+   "extras": [
+    "INTERIOR WALL TO REMAIN",
+    "patch and repair only; existing = not counted",
+    "walls of LANDLORD ROOM (N.I.C.) - not ours",
+    "A4.0 room finish schedule 103/104: existing gyp. bd. + FRP 1, 'EXISTING FRP, BASE AND FLR FINISHES... UPGRADE/REPAIR/REPLACE AS REQUIRED'"
+   ],
+   "sources": {
+    "stud": "n/a",
+    "board": "W4/2/A2.0 (p5)",
+    "height": "n/a",
+    "track": "n/a"
+   },
+   "img": "img/W4.png"
+  }
+ }
+}

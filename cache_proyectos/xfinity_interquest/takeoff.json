@@ -1,0 +1,754 @@
+{
+ "proyecto": "Xfinity - Interquest (Branded Partner), 1333 Interquest Pkwy., Lot #11, Colorado Springs, CO 80921 - GC BCI National",
+ "bid_set": "Robert F. Vanney, Architect - Comm. 81-2116 'Complete PDF Set 10-08-26 R0': 17 sheets A0.1-A5.0, E0.0-E3.0, M0.0-M2.0, P1.0, Bid / Landlord / Permit Issue 10/08/2026; no addenda; clean copy without annotations",
+ "fecha": "2026-11-11",
+ "inputs": {
+  "waste_metal": 0.15,
+  "waste_no_metal": 0.06,
+  "sheet_w_ft": 4,
+  "sheet_l_ft": 12,
+  "stud_stock_ft": 14,
+  "track_stock_ft": 10,
+  "plan_scale_pt_per_ft": 18.0,
+  "bod_ft": 26.0
+ },
+ "inputs_notas": {
+  "bod_ft": "Structure height NOT printed on any sheet: 26'-0\" = A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' carried as the conservative value for the 4/A2.0 braces and the demolished wall height (RFI-01 open). Wall heights per wall in the Partition Takeoff (ceiling + 6\", 2/A2.0).",
+  "plan_scale_pt_per_ft": "A1.0 / A2.0 / A3.0 1/4\" = 1'-0\" (18 pt/ft, checked on the printed 25'-8 3/4\", 18'-6 3/4\", 44'-6\" and 29'-0 3/4\" of A2.0).",
+  "stud_stock_ft": "14 ft sticks: the W2 / CF studs are 12'-6\" long (ceiling 12'-0\" + 6\", 2/A2.0) and do not come out of a 12 ft stick.",
+  "drywall_screws_per_sf": "YIELD; fasteners EXCLUDED in this project (estimator standing order)."
+ },
+ "type_order": [
+  "W2",
+  "CF"
+ ],
+ "walls": [],
+ "materials": [],
+ "rfis": [
+  {
+   "id": "RFI-01",
+   "pregunta": "Height of the existing structure (underside of roof structure) is not printed on any sheet (A0.1-A5.0 text, E / M / P SHX searched: DECK, JOIST, STRUCTURE, B.O., BOTTOM OF, ROOF, CLG. HT., PLENUM, AFF; M1.0 only says 'EXISTING CONCRETE BEAM ABOVE CEILING'). Needed for the 4/A2.0 brace length and the SF of the walls demolished on A1.0. No code section gives an existing structure height. - carried: 26'-0\" (A0.1 building height, conservative) for the 5 braces of 4/A2.0 and the height of the demolished walls (conservative value loaded). Searched: A0.1, 4/A2.0, A1.0",
+   "delta": "(A) Drawings (A0.1): Drawings: only A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is printed -> 26'-0\" carried (conservative) - delta loaded: braces 5 x 19.09 = 95.46 LF; demo 75.71 LF x 26 = 1,968.56 SF (per element) | (B) Code (IBC 2021 Section 2508.1): Code: no section sets the height of an existing structure; braces per 4/A2.0 (max 25'-0\" each) and IBC 2021 Section 2508.1 (gypsum board installation) apply to whatever height is verified in the field - delta n/a (field verification) | (C) Other: ____ | sensitivity: each 1 ft lower B.O. structure: -7.07 LF braces (5 x 1.414) and -75.71 SF demolition; separately, if the counter core DEMO-08 / DEMO-09 (A1.0, 18.51 LF) is a 4'-0\" pony wall instead of full height: -407.22 SF",
+   "opciones": {
+    "A": {
+     "texto": "Drawings: only A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is printed -> 26'-0\" carried (conservative)",
+     "source": "A0.1",
+     "delta": "loaded: braces 5 x 19.09 = 95.46 LF; demo 75.71 LF x 26 = 1,968.56 SF (per element)"
+    },
+    "B": {
+     "texto": "Code: no section sets the height of an existing structure; braces per 4/A2.0 (max 25'-0\" each) and IBC 2021 Section 2508.1 (gypsum board installation) apply to whatever height is verified in the field",
+     "cita": "IBC 2021 Section 2508.1",
+     "delta": "n/a (field verification)"
+    },
+    "C": ""
+   },
+   "source": "A0.1, 4/A2.0, A1.0",
+   "barrido": {
+    "disciplinas": "ALL",
+    "hojas": "ALL",
+    "shx": "E0.0-E3.0, M0.0-M2.0 and P1.0 carry their text as 1,589 'AutoCAD SHX Text' annotations: all read by program (set_texto.json) and searched",
+    "vectorial": "A1.0 / A2.0 / A3.0 at the printed 1/4\" = 1'-0\" (18 pt/ft checked on 25'-8 3/4\", 44'-6\", 29'-0 3/4\"): plans only, no building / wall section, no elevation of the structure is drawn in the set",
+    "specs": "A0.3 SPECIFICATIONS (only spec sheet; no project manual, no addenda) searched",
+    "otros_sets": "single GC (BCI National, BuildingConnected 2 files: Complete PDF Set 10-08-26 R0 + 'Interquest Concrete Rough layout.png' (floor trench layout, no heights)); no survey / existing-conditions set",
+    "terminos": [
+     "DECK",
+     "JOIST",
+     "STRUCTURE",
+     "B.O.",
+     "BOTTOM OF",
+     "ROOF",
+     "CLG. HT.",
+     "CEILING HT",
+     "PLENUM",
+     "BEAM",
+     "26 FT",
+     "HEIGHT",
+     "AFF",
+     "SECTION",
+     "TRUSS",
+     "CLG. HT",
+     "T.O."
+    ],
+    "sets": [
+     "BCI National - Complete PDF Set 10-08-26 R0 (17 sheets)",
+     "Interquest Concrete Rough layout.png"
+    ],
+    "medida_vectorial": "no section / elevation of the structure to measure; plans are horizontal views",
+    "lugares": [
+     {
+      "sheet": "A0.1",
+      "term": "26 FT",
+      "img": "/root/xf/work/etapas/4_canon/img/review/RFI-01_A0.1_26FT.png"
+     },
+     {
+      "sheet": "A2.0",
+      "term": "BRACE TO STRUCTURE",
+      "img": "/root/xf/work/etapas/4_canon/img/review/RFI-01_A2.0_brace.png"
+     },
+     {
+      "sheet": "M1.0",
+      "term": "CONCRETE BEAM",
+      "img": "/root/xf/work/etapas/4_canon/img/review/RFI-01_M1.0_beam.png"
+     },
+     {
+      "sheet": "A3.0",
+      "term": "12'-0\" AFF",
+      "img": "/root/xf/work/etapas/4_canon/img/review/RFI-01_A3.0_ceiling.png"
+     }
+    ],
+    "descartes": {
+     "A0.1": "A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is the building height in the code analysis (to the top of the building), not the underside of the roof structure; it is the only structure-related figure printed and is carried as the conservative value (higher bound)",
+     "A0.2": "read on A0.2: 'astener, mounting device, or supporting structure. CARPET PILE THICKNESS & ACCESSIBLE ROUTE  404.2.4' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A0.2",
+     "A0.3": "read on A0.3: 'R OFF GROUND OR FLOOR, COVER WITH WATERPROOF COVERING AND PROVIDE ADEQUATE VENTILATION. B. DO NOT ST' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A0.3",
+     "A1.0": "read on A1.0: 'NOTIFY THE ARCHITECT IMMEDIATELY IF THE STRUCTURE APPEARS TO BE ENDANGERED.  DO NOT RESUME OPERATION' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A1.0",
+     "A2.0": "read on A2.0: 'FINISH SMOOTH FOR PAINT 6\" TYP BRACE TO STRUCTURE, ALTERNATE SIDES. USE METAL STUDS AT 8'-0\" O.C. MA' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A2.0",
+     "A3.0": "read on A3.0: 'IDE DIMENSION. STYLE: (EXAMPLE: STUD OR JOIST SECTION = S) THE FOUR ALPHA CHARCTERS UTILZED BY THE D' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A3.0",
+     "A4.0": "read on A4.0: 'SEE NOTE 12\"X12\" TILES, TYP. THROUGHOUT B.O.H. AREA (U.N.O.)  PROVIDE ARMSTRONG S-480 COMMERCIAL FLO' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A4.0",
+     "A5.0": "read on A5.0: '. ASSEMBLED & INSTALLED BY GC 12'-0\" TO B.O. CEILING P-1 B-1 P-1 B-1 B-1 P-1 EV-10-6 EV-10-6 DISCOVE' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on A5.0",
+     "E0.0": "read on E0.0: 'TANT TR = SURGE SUPPRESSOR SS = WEATHERPROOF WP = STANDARD RECEPTACLE (blank) = X X X X 90\" OR 6\" BE' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on E0.0",
+     "E1.0": "read on E1.0: ' TO ARCHITECTURAL DRAWINGS FOR MOUNTING HEIGHTS. REFER TO ARCHITECTURAL DRAWINGS FOR MOUNTING HEIGHT' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on E1.0",
+     "E2.0": "read on E2.0: 'ECTRICAL CLAMPS SECURE RIGID CONDUIT TO STRUCTURE FOR STABILIZING THROUGH ROOF PENETRATION PROPERLY ' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on E2.0",
+     "E3.0": "read on E3.0: 'T FIXTURES, OR BALLASTS FROM METAL ROOF DECK OR  FROM THE CEILING SUSPENSION WIRES. SUPPORT ALL LAY-' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on E3.0",
+     "M0.0": "read on M0.0: '08/2026 SHEET AND DETAILS M0.0  GAS (ON ROOF) G SANITARY SEWER (BELOW FLOOR/GRADE) SANITARY SEWER (A' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on M0.0",
+     "M1.0": "read on M1.0: 'ATIONS AND DUCTWORK AS REQUIRED. K. ALL ROOF CUTTING, PATCHING AND FLASHING REQUIRED TO INSTALL ALL ' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on M1.0",
+     "M2.0": "read on M2.0: 'ORTS:  PROPERLY SUPPORT ALL PIPING FROM JOISTS (TOP CHORD) OR PIPE HANGERS AND SUPPORTS:  PROPERLY S' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on M2.0",
+     "P1.0": "read on P1.0: 'E GENERAL CONTRACTOR MUST PENETRATE THE ROOF, THE OWNER - APPROVED ROOFER SHALL BE USED. C. WATER HE' - printed value of another element / condition (ceiling height, mounting height, roof work, stud / ceiling span tables, code data); no underside-of-structure height is printed on P1.0"
+    },
+    "grep": "full text of the 17 sheets (set_texto.json: page text + AutoCAD SHX annotations of E / M / P) - 258 hits; DECK: E3.0; JOIST: A3.0, M2.0; STRUCTURE: A0.2, A1.0, A2.0, A3.0, E2.0, E3.0, M2.0; B.O.: A0.2, A4.0, A5.0; BOTTOM OF: A0.1, A0.2, E3.0; ROOF: A0.1, A0.3, A1.0, A2.0, E0.0, E2.0, E3.0, M0.0, M1.0, M2.0, P1.0; CLG. HT.: A0.1; CEILING HT: A0.1; PLENUM: E2.0, E3.0, M1.0, M2.0; BEAM: E3.0, M1.0; 26 FT: A0.1; HEIGHT: A0.1, A0.2, A0.3, A1.0, A2.0, A4.0, A5.0, E1.0, E2.0, E3.0, M0.0, M1.0; AFF: A0.1, A1.0, A3.0, A4.0, A5.0, E0.0, E2.0, E3.0, M0.0, M1.0, M2.0; SECTION: A0.1, A0.2, A0.3, A3.0, A4.0, E0.0, E3.0, M1.0, M2.0; TRUSS: none; CLG. HT: A0.1; T.O.: A4.0",
+    "encontrado_en": [
+     "A0.1:26 FT",
+     "A0.1:AFF",
+     "A0.1:BOTTOM OF",
+     "A0.1:CEILING HT",
+     "A0.1:CLG. HT.",
+     "A0.1:HEIGHT",
+     "A0.1:ROOF",
+     "A0.1:SECTION",
+     "A0.2:B.O.",
+     "A0.2:BOTTOM OF",
+     "A0.2:HEIGHT",
+     "A0.2:SECTION",
+     "A0.2:STRUCTURE",
+     "A0.3:HEIGHT",
+     "A0.3:ROOF",
+     "A0.3:SECTION",
+     "A1.0:AFF",
+     "A1.0:HEIGHT",
+     "A1.0:ROOF",
+     "A1.0:STRUCTURE",
+     "A2.0:HEIGHT",
+     "A2.0:ROOF",
+     "A2.0:STRUCTURE",
+     "A3.0:AFF",
+     "A3.0:JOIST",
+     "A3.0:SECTION",
+     "A3.0:STRUCTURE",
+     "A4.0:AFF",
+     "A4.0:B.O.",
+     "A4.0:HEIGHT",
+     "A4.0:SECTION",
+     "A5.0:AFF",
+     "A5.0:B.O.",
+     "A5.0:HEIGHT",
+     "E0.0:AFF",
+     "E0.0:ROOF",
+     "E0.0:SECTION",
+     "E1.0:HEIGHT",
+     "E2.0:AFF",
+     "E2.0:HEIGHT",
+     "E2.0:PLENUM",
+     "E2.0:ROOF",
+     "E2.0:STRUCTURE",
+     "E3.0:AFF",
+     "E3.0:BEAM",
+     "E3.0:BOTTOM OF",
+     "E3.0:DECK",
+     "E3.0:HEIGHT",
+     "E3.0:PLENUM",
+     "E3.0:ROOF",
+     "E3.0:SECTION",
+     "E3.0:STRUCTURE",
+     "M0.0:AFF",
+     "M0.0:HEIGHT",
+     "M0.0:ROOF",
+     "M1.0:AFF",
+     "M1.0:BEAM",
+     "M1.0:HEIGHT",
+     "M1.0:PLENUM",
+     "M1.0:ROOF",
+     "M1.0:SECTION",
+     "M2.0:AFF",
+     "M2.0:JOIST",
+     "M2.0:PLENUM",
+     "M2.0:ROOF",
+     "M2.0:SECTION",
+     "M2.0:STRUCTURE",
+     "P1.0:ROOF"
+    ],
+    "swept_txt": "Swept: all 17 sheets (A / E / M / P, no S sheets, specs on A0.3), SHX text of E / M / P, the BuildingConnected files of the only GC; terms: DECK, JOIST, STRUCTURE, B.O., BOTTOM OF, ROOF, CLG. HT., CEILING HT, PLENUM, BEAM, 26 FT, HEIGHT, AFF, SECTION, TRUSS.",
+    "hojas_list": [
+     "A0.1",
+     "A0.2",
+     "A0.3",
+     "A1.0",
+     "A2.0",
+     "A3.0",
+     "A4.0",
+     "A5.0",
+     "E0.0",
+     "E1.0",
+     "E2.0",
+     "E2.1",
+     "E3.0",
+     "M0.0",
+     "M1.0",
+     "M2.0",
+     "P1.0"
+    ],
+    "result": "no B.O. structure / deck / joist height printed; A0.1 '1 STORY - 26 FT' only; M1.0 'EXISTING CONCRETE BEAM ABOVE CEILING' without height"
+   },
+   "img": "RFI-01_A0.1_26FT.png"
+  }
+ ],
+ "rfi_cierre": {
+  "RFI-02": {
+   "pregunta": "SOF-01: 8'-6\" gypsum header at the north end of Hallway 102 (A3.0 tag) - build of the header taken from type W2 framing. - CLOSED: CLOSED by the plans: A3.0 tags the strip 'GYP. BD. 8'-6\" AFF' (no 'EXISTING' on this tag, unlike the hallway 9'-0\" tag) where A1.0 removes DEMO-01; built as a framed header with type W2 framing, underside 1.73 SF + storage face to 10'-6\" + hallway face to 9'-6\" (A2.0 wall legend 'TO 6\" ABOVE CEILING') - loaded (option A).",
+   "delta": "0 (closed by the plans; resolution loaded in the quantities)"
+  },
+  "RFI-03": {
+   "pregunta": "DEMO-08 / DEMO-09: L-shaped dashed element in Retail 100 (A1.0) - wall to demolish per key note 7. - CLOSED: CLOSED by the plans: A1.0 key note 7 ('ALL EXISTING INTERIOR WALLS, DOORS AND WINDOWS AS SHOWN DASHED TO BE REMOVED') points at the inner dashed pair of the L element = wall; DEMO-08 / DEMO-09 loaded.",
+   "delta": "0 (closed by the plans; resolution loaded in the quantities)"
+  },
+  "RFI-04": {
+   "pregunta": "Door 101 rough opening - printed '3'-0\" DOOR' on A2.0. - CLOSED: CLOSED by the plans: A2.0 prints '3'-0\" DOOR' between the W2 ends = rough opening as drawn (option A); the wall is measured through the opening, so the R.O. only changes the head length.",
+   "delta": "0 (closed by the plans; resolution loaded in the quantities)"
+  },
+  "RFI-05": {
+   "pregunta": "Column furring CF-01 / CF-02 (5/A2.0, 2-1/2\" studs, 12'-6\" high) - stud designation from the A2.0 limiting heights table. - CLOSED: CLOSED by the plans: A2.0 INTERIOR WALL LIMITING HEIGHTS table, 250S125-43 @16\" = 13'-0\" >= 12'-6\" (lightest 2-1/2\" member passing at 16\" o.c.) - loaded (option A).",
+   "delta": "0 (closed by the plans; resolution loaded in the quantities)"
+  }
+ },
+ "revisar": [
+  {
+   "fase": "floor_plan",
+   "punto": "A1.0 demolition note 18: temporary non-combustible construction barriers 'where required' by the governing fire authority (full height floor to ceiling, studs at 24\" o.c. with 5/8\" Type X, non-combustible access door): conditional note, no location or length drawn on any sheet - nothing loaded; allowance by the estimator if the fire authority asks for barriers. Source A1.0 demolition note 18.",
+   "hoja_detalle": "A1.0 demolition note 18",
+   "imagen": "RI-07_A1.0_temporary_barriers.png",
+   "type": "DEMO",
+   "n": 1,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "Patch and repair of the existing walls to remain: 2/A2.0 WALL TYPE 1 'EXISTING DEMISING / EXTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)' and WALL TYPE 4 'INTERIOR WALL TO REMAIN. PATCH AND REPAIR' (12 existing walls W1-01, W1-02, W1-03, W1-04, W1-05, W4-01, W4-02, W4-03, W4-04, W4-05, W4-06, W4-07, 206.19 LF on plan). The area to patch is not drawn and not measurable from the drawings: allowance by the estimator; no quantity in the Excel. Source 2/A2.0.",
+   "hoja_detalle": "2/A2.0",
+   "imagen": "RI-01_2A2.0_patch_repair.png",
+   "type": "W1",
+   "n": 2,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "Metal blocking on EXISTING walls: A5.0 blocking legend (EV-44 / EV-45 '6\" SHEET METAL BLOCKING STRAPPING FOR FIXTURE ATTACHMENT') and A2.0 key notes 5 / 6 + 8/A2.0 backing at the fire extinguishers fall on existing walls W1 to remain: BK-EV44-N 7.25 LF on W1-01 (EXISTING demising wall - installation requires opening existing board, not detailed); BK-EV44-S 7.25 LF on W1-05 (EXISTING); BK-FE 5.333 LF on existing W1-02 / W1-05; BK-DF 6.0 LF on W4 (existing). Installing them requires opening and patching the existing board, not detailed (part of the patch and repair allowance). Source A5.0 / 8/A2.0.",
+   "hoja_detalle": "A5.0 / 8/A2.0",
+   "imagen": "RI-04_A5.0_blocking_legend.png",
+   "type": "W1",
+   "n": 3,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "RFI-01 open: height of the existing structure is not printed (A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is the only figure). 26'-0\" carried for the 5 braces to structure of 4/A2.0 (95.46 LF) and for the demolished walls DEMO-01..09 (1968.56 SF). Sensitivity per RFI-01: each 1 ft lower B.O. structure: -7.07 LF braces (5 x 1.414) and -75.71 SF demolition; separately, if the counter core DEMO-08 / DEMO-09 (A1.0, 18.51 LF) is a 4'-0\" pony wall instead of full height: -407.22 SF. Source 4/A2.0 / A0.1.",
+   "hoja_detalle": "4/A2.0 / A0.1",
+   "imagen": "RI-03_A0.1_26FT.png",
+   "type": "W2",
+   "n": 4,
+   "total": 8
+  },
+  {
+   "fase": "floor_plan",
+   "punto": "Finish of the new board: A0.3 PAINTING spec 'GYPSUM BOARD TREATMENT ... ALL PURPOSE TEXTURE FINISH OR EQUAL' vs A2.0 general note 3 'TAPED, SANDED SMOOTH TO A \"LEVEL 4\" FINISH'. Drawings govern over the specs: Level 4 smooth loaded (compound and tape by yield); a texture finish, if required, would be an add by the estimator. Source A0.3 / A2.0 general note 3.",
+   "hoja_detalle": "A0.3 / A2.0 general note 3",
+   "imagen": "RI-05_A0.3_texture.png",
+   "type": "W2",
+   "n": 5,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "Column furring CF-01 / CF-02 (5/A2.0): 5/A2.0 draws a free-standing column with 'FINISH CORNER 'L' BEAD' at the corners; on the plan both columns sit against the storefront pier. Conservative (larger) option loaded: the printed 'FINISH CORNER L BEAD' also at the 2 board edges against the existing pier of each column, LB-COL-PIER 50 LF. A: as loaded / B: no L bead at the pier edges (delta minus 50 LF of L bead). Source 5/A2.0.",
+   "hoja_detalle": "5/A2.0",
+   "imagen": "RI-02_5A2.0_L_bead.png",
+   "orden_plano": 1,
+   "n": 6,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "SOF-01 gyp. bd. header 8'-6\" AFF at the north end of Hallway 102 (A3.0 tag, where A1.0 removes DEMO-01): no soffit / header detail printed; built as a framed box with type W2 framing (2/A2.0), underside 1.727 SF + storage face to 10'-6\" + hallway face to 9'-6\" (RFI-02 closed by the plans). Estimator to confirm the framing method. Source 1/A3.0.",
+   "hoja_detalle": "1/A3.0",
+   "imagen": "RI-06_A3.0_SOF-01_8-6.png",
+   "orden_plano": 2,
+   "n": 7,
+   "total": 8
+  },
+  {
+   "fase": "detalle",
+   "punto": "Kicker braces 4/A2.0: each brace is 19.09 ft long ((26.0 - 12.5) x 1.414, RFI-01) and 4/A2.0 draws no splice: buy one 20 ft stick per brace (5 sticks). The 'Pieces to buy' column of the Material Summary divides the LF by the stud stick length of the Inputs (14 ft, chosen for the 12'-6\" wall studs); for the brace row read 5 sticks of 20 ft. Source 4/A2.0.",
+   "hoja_detalle": "4/A2.0",
+   "imagen": "RI-08_4A2.0_brace.png",
+   "orden_plano": 3,
+   "n": 8,
+   "total": 8
+  }
+ ],
+ "alcances": [
+  {
+   "id": "ALC-01",
+   "nombre": "Interior partition framing (studs + tracks)",
+   "estado": "CUANTIFICADO",
+   "nota": "Type W2 (2/A2.0): 5/8\" Type X both sides over 3-5/8\" studs from slab to 6\" above ceiling, 362S125-33 (20 ga) @ 16\" o.c. per the A2.0 interior wall limiting heights table (W2-01, W2-02); column furring CF-01 / CF-02 2-1/2\" studs 250S125-43 @ 16\" (5/A2.0, table); A0.3 lightgage framing. W1 / W4 existing to remain (not quantified); W2A / W3 legend only. A1.0 demolition note 18 temporary non-combustible construction barriers (studs @ 24\" o.c. with 5/8\" Type X): conditional note with no location or extent drawn on any sheet - not quantified, Review Item 7 (allowance by the estimator). PDF mentions: A0.3, A1.0, A2.0, A3.0."
+  },
+  {
+   "id": "ALC-02",
+   "nombre": "Exterior wall framing (CFMF)",
+   "estado": "NO APLICA",
+   "nota": "No exterior wall framing: A2.0 'EXTERIOR WALL TO REMAIN' is the 2/A2.0 WALL TYPE 1 existing demising / exterior wall (existing shell). PDF mentions: A2.0."
+  },
+  {
+   "id": "ALC-03",
+   "nombre": "Parapet framing",
+   "estado": "NO APLICA",
+   "nota": "No parapet framing in the set (existing 1-story shell, A0.1; interior tenant finish only)."
+  },
+  {
+   "id": "ALC-04",
+   "nombre": "Top / deflection and bottom track",
+   "estado": "CUANTIFICADO",
+   "nota": "Bottom track (3/A2.0) and standard top track screwed to the studs each flange (4/A2.0: wall stops 6\" above ceiling, braced to structure) by stud size 3-5/8\" / 2-1/2\"; slip / deflection track NOT APPLICABLE: no wall reaches the structure (A2.0 'DEFLECTION CHECKS' is a note of the limiting heights table). PDF mentions: A2.0."
+  },
+  {
+   "id": "ALC-05",
+   "nombre": "Headers, sills and jambs at openings",
+   "estado": "CUANTIFICADO",
+   "nota": "Door 101 (3'-0\" x 7'-0\", HM frame by others) in W2-01: 7/A2.0 track head with nested 3-5/8\" stud; jambs by the stud program. A0.3 'ANCHORS PER JAMB' = HM frame anchors (by others); A0.1 / A2.0 hits are hardware / contact text. PDF mentions: A0.1, A0.3, A2.0."
+  },
+  {
+   "id": "ALC-06",
+   "nombre": "Bracing / bridging",
+   "estado": "NO APLICA",
+   "nota": "No bridging / C.R. channel rows: the A2.0 limiting heights table assumes walls 'FULLY SHEATHED WITH GYPSUM BOARD ... ON BOTH SIDES' (W2 both sides), continuous bridging at 60\" o.c. only as an OPTION; A0.1 erection bracing and A1.0 note 16 shoring are temporary (GC); A3.0 lateral force bracing belongs to the ACT grid (other bid package). The 4/A2.0 kicker braces to structure are carried in their own row (metal stud brace to structure). PDF mentions: A0.1, A1.0, A2.0, A3.0."
+  },
+  {
+   "id": "ALC-07",
+   "nombre": "Gypsum board on walls (layers per type)",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" Type X gypsum board: W2 both sides, each face to its own ceiling + 6\" (2/A2.0, A2.0 wall legend, A3.0 heights); CF one side over 2-1/2\" studs (5/A2.0); SOF-01 header (A3.0); A0.3 GYPSUM BOARD 5/8\" Type X. PDF mentions: A0.1, A0.3, A2.0, A3.0, A4.0."
+  },
+  {
+   "id": "ALC-08",
+   "nombre": "Moisture / abuse / special board at wet zones",
+   "estado": "NO APLICA",
+   "nota": "No moisture-resistant board in new work: A2.0 key note 4 (water resistant board at wet areas) applies to the restrooms, all walls existing (W4); A1.0 note 24 'moisture resistant elements' refers to existing weather-exposed elements / warranties. PDF mentions: A1.0."
+  },
+  {
+   "id": "ALC-09",
+   "nombre": "Exterior gypsum / glass mat sheathing",
+   "estado": "NO APLICA",
+   "nota": "No exterior sheathing: existing shell (A0.1); the A2.0 hit is the limiting heights table note 'without the contribution of sheathing'. PDF mentions: A2.0."
+  },
+  {
+   "id": "ALC-10",
+   "nombre": "FRT plywood sheathing / substrate",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - wood (Div. 06), no RFI: A2.0 key note 10 server racks on 3/4\" FRT plywood (and 7/A2.0 / 8/A2.0 F.R.T. wood blocking), A4.0 / A5.0 EV-10-6 3/4\" plywood, A0.1 abbreviation PLYWD; the heading of the A2.0 limiting heights table ('... SHEATHED WITH GYPSUM BOARD OR PLYWOOD ON BOTH SIDES') is the design basis of the table, not a material of this project. PDF mentions: A0.1, A2.0, A4.0, A5.0."
+  },
+  {
+   "id": "ALC-11",
+   "nombre": "Gypsum board ceilings",
+   "estado": "CUANTIFICADO",
+   "nota": "Only new gypsum board ceiling element = the SOF-01 header underside 1.727 SF (A3.0 'GYP. BD. 8'-6\" AFF', no 'EXISTING'), carried with SOF-01; A3.0 legend '5/8\" TYPE X GYPSUM BOARD CEILING'. Hallway 102 / Toilets 103-104 tagged EXISTING with 'GYP. BD. 9'-0\" AFF' on A3.0, to remain (A1.0 key 16): EXCLUDED markups on A3.0. PDF mentions: A3.0."
+  },
+  {
+   "id": "ALC-12",
+   "nombre": "Ceiling suspension (furring / carrying channel / hanger wire / ceiling track)",
+   "estado": "NO APLICA",
+   "nota": "No gypsum ceiling suspension system: A0.3 12 ga hanger wires and A3.0 3/A3.0 / 4/A3.0 belong to the suspended acoustical ceilings (ACT, other bid package); A4.0 'HANGERS' = file folders. PDF mentions: A0.3, A3.0, A4.0."
+  },
+  {
+   "id": "ALC-13",
+   "nombre": "Soffits and bulkheads (framing + board)",
+   "estado": "CUANTIFICADO",
+   "nota": "SOF-01 gyp. bd. header 8'-6\" AFF at the north end of Hallway 102 (A3.0), framed as type W2 (2/A2.0, RFI-02 closed): track, studs and 5/8\" Type X board rows + corner bead. A1.0 key 13 storefront bulkhead is existing to remain. PDF mentions: A1.0, A3.0."
+  },
+  {
+   "id": "ALC-14",
+   "nombre": "Canopy / marquee framing and sheathing",
+   "estado": "NO APLICA",
+   "nota": "No canopy / marquee in the set (A0.1-A5.0)."
+  },
+  {
+   "id": "ALC-15",
+   "nombre": "Column furring / wraps",
+   "estado": "CUANTIFICADO",
+   "nota": "Column furring CF-01 / CF-02 at the two existing columns at the storefront (5/A2.0 NON-RATED COLUMN FURRING, A2.0 key note 1): 2-1/2\" studs, 5/8\" Type X, L bead at the corners. PDF mentions: A2.0."
+  },
+  {
+   "id": "ALC-16",
+   "nombre": "Blocking (FRT wood / metal) for millwork and accessories",
+   "estado": "CUANTIFICADO",
+   "nota": "Metal blocking: A5.0 blocking legend EV-44 / EV-45 6\" sheet metal blocking strapping (A4.0 locations) and A2.0 key notes 5 / 6 + 8/A2.0 backing at the fire extinguishers, the GF-14496 graphic frame on W2 (A4.0 key note 1, 8/A2.0 16 ga track + 16 ga studs) and the high-low drinking fountain (11/A5.0, R-ALC-02); items: BK-EV44-N 7.25 LF; BK-EV44-S 7.25 LF; BK-FE 5.333 LF; BK-GF14496 21.55 LF; BK-DF 6.0 LF. F.R.T. wood blocking (7/A2.0, A4.0 key 13) and plywood EXCLUDED (Div. 06); A2.0 table 'bridging / blocking' is a design option. PDF mentions: A0.1, A2.0, A4.0, A5.0."
+  },
+  {
+   "id": "ALC-17",
+   "nombre": "Framed openings (MEP, access panels, diffusers)",
+   "estado": "NO APLICA",
+   "nota": "No framed opening: A0.1 general note 7 'provide and locate access doors / panels ... as required' - none located on the drawings; A3.0 general note 4 no access hatches in gyp. bd. ceilings without owner approval; A1.0 note 18c is the access door of a temporary barrier; ducts / air devices EXCLUDED (estimator standing order). PDF mentions: A0.1, A1.0."
+  },
+  {
+   "id": "ALC-18",
+   "nombre": "Trim: corner bead, casing bead, control joints, reveals",
+   "estado": "CUANTIFICADO",
+   "nota": "Metal corner bead 6/A2.0 (W2 / demising junction) and at the SOF-01 header edges; L bead 5/A2.0 at the column furring; A0.3 TRIM manufacturer standard beaded metal trim. No control joint drawn ('CJ' abbreviation only, A0.1); longest new run 10.64 ft. PDF mentions: A0.1, A2.0."
+  },
+  {
+   "id": "ALC-19",
+   "nombre": "Acoustical sealant / sound attenuation (EXCLUDED: estimator standing order, all projects)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - acoustical sealant and sound attenuation (estimator standing order, all projects); W2 drawn with the plain hatch (no sound batt)."
+  },
+  {
+   "id": "ALC-20",
+   "nombre": "FRP / cement board / tile backer",
+   "estado": "NO APLICA",
+   "nota": "No FRP / cement board in our scope: FRP-1 (A4.0 / A5.0) at the existing toilet rooms and storage existing walls = finish trade. PDF mentions: A4.0, A5.0."
+  },
+  {
+   "id": "ALC-21",
+   "nombre": "Shaft walls / area separation walls",
+   "estado": "NO APLICA",
+   "nota": "No shaft wall / area separation wall in the set (2/A2.0 types W1-W4 only)."
+  },
+  {
+   "id": "ALC-22",
+   "nombre": "Rated assemblies (UL designs) and their board type",
+   "estado": "NO APLICA",
+   "nota": "No new rated assembly: W2 is non-rated (2/A2.0); W1 'maintain any existing fire rating (V.I.F.)' = existing; A1.0 note 21 abandoned penetrations of existing fire rated walls (patch, allowance). Type X board as printed. PDF mentions: A1.0."
+  },
+  {
+   "id": "ALC-23",
+   "nombre": "Special panels (ballistic, lead-lined, abuse)",
+   "estado": "NO APLICA",
+   "nota": "No ballistic, lead-lined or abuse-resistant panel in the set (2/A2.0 wall types, A0.3 specifications)."
+  },
+  {
+   "id": "ALC-24",
+   "nombre": "Finish level (Level 4 / Level 5)",
+   "estado": "CUANTIFICADO",
+   "nota": "Level 4 finish printed: A2.0 general note 3 'TAPED, SANDED SMOOTH TO A \"LEVEL 4\" FINISH'; joint compound and tape by yield (Review Item: A0.3 texture finish vs Level 4). PDF mentions: A2.0."
+  },
+  {
+   "id": "ALC-E01",
+   "nombre": "ACT ceilings and grid",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - 2x4 ACT ceilings, new grid / existing grid and tiles (A3.0, A0.3), seismic / lateral bracing of the grid (3/A3.0, 4/A3.0): other bid package."
+  },
+  {
+   "id": "ALC-E02",
+   "nombre": "Painting",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - painting (A0.3 painting spec, A4.0 finish schedule): other bid package."
+  },
+  {
+   "id": "ALC-E03",
+   "nombre": "Insulation",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - insulation not in scope (estimator standing order); W2 drawn with the plain hatch (no sound batt, A2.0 wall legend)."
+  },
+  {
+   "id": "ALC-E04",
+   "nombre": "Wood / F.R.T. blocking and plywood (Div. 06)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - Div. 06: 3/4\" FRT plywood for the server racks (A2.0 key note 10), F.R.T. wood blocking 7/A2.0 and 8/A2.0, A4.0 key 13 F.R. blocking, A5.0 EV-10-6 3/4\" plywood."
+  },
+  {
+   "id": "ALC-E05",
+   "nombre": "Fasteners",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - all fasteners (estimator standing order): 3/A2.0 power-driven fasteners, 4/A2.0 #8 sheet metal screws, 8/A2.0 screws, drywall / framing screws."
+  },
+  {
+   "id": "ALC-E06",
+   "nombre": "Acoustical sealant",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - acoustical sealant (estimator standing order, all projects)."
+  },
+  {
+   "id": "ALC-E07",
+   "nombre": "Doors, frames and hardware",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - doors, hollow metal frames and hardware (A2.0 door schedule / hardware groups, A0.3): other trades."
+  },
+  {
+   "id": "ALC-E08",
+   "nombre": "Storefront",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - existing aluminum storefront and door 100 (A2.0 door schedule): other trade."
+  },
+  {
+   "id": "ALC-E09",
+   "nombre": "MEP",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - electrical, mechanical, plumbing work (E / M / P sheets); recessed boxes in W2 by the electrician."
+  },
+  {
+   "id": "ALC-E10",
+   "nombre": "Ducts and air devices",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - ducts and framed openings for air devices (estimator standing order; M1.0 devices are lay-in in ACT)."
+  },
+  {
+   "id": "ALC-E11",
+   "nombre": "Existing ceiling demolition",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - A1.0 key note 14 'REMOVE EXISTING CEILING FINISHES ... AS REQUIRED' / key 15 'EXISTING CEILING GRID TO REMAIN. REMOVE ... CEILING TILES' (retail / storage = ACT, other trade): no existing gypsum ceiling demolition shown - EXCLUDED (existing ceiling type not indicated for removal; estimator standing rule for existing ceilings without type)."
+  },
+  {
+   "id": "ALC-E12",
+   "nombre": "Existing walls patch and repair (allowance)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED from the quantities - allowance by the estimator (Review Item): 2/A2.0 W1 / W4 'PATCH AND REPAIR' on 12 existing walls, area not measurable."
+  },
+  {
+   "id": "ALC-E13",
+   "nombre": "Existing walls W1 / W4 to remain (not quantified)",
+   "estado": "NO APLICA",
+   "nota": "NOT QUANTIFIED - existing construction to remain (2/A2.0 WALL TYPE 1 / WALL TYPE 4, A2.0 wall legend grey): W1-01 63.36 LF; W1-02 13.973 LF; W1-03 7.587 LF; W1-04 14.493 LF; W1-05 55.387 LF; W4-01 14.46 LF; W4-02 6.713 LF; W4-03 8.12 LF; W4-04 10.993 LF; W4-05 5.867 LF; W4-06 4.24 LF; W4-07 0.993 LF (total 206.19 LF on plan)."
+  },
+  {
+   "id": "ALC-E14",
+   "nombre": "Landlord room",
+   "estado": "NO APLICA",
+   "nota": "EXCLUDED - Landlord room (N.I.C.) not in contract (A1.0 / A2.0 / A3.0 label '(N.I.C.)')."
+  },
+  {
+   "id": "ALC-E15",
+   "nombre": "Braces to structure (4/A2.0)",
+   "estado": "CUANTIFICADO",
+   "nota": "QUANTIFIED - 4/A2.0 'BRACE TO STRUCTURE, ALTERNATE SIDES ... METAL STUDS AT 8'-0\" O.C. MAX ... 3 5/8\" 20 GA. MIN.': BRACE-W2-01 57.276 LF (3 pcs); BRACE-W2-02 38.184 LF (2 pcs); length at 45 deg to the 26'-0\" carried (RFI-01)."
+  },
+  {
+   "id": "ALC-E16",
+   "nombre": "Demolition of gypsum board and metal framing",
+   "estado": "CUANTIFICADO",
+   "nota": "QUANTIFIED - A1.0 key 7 dashed walls DEMO-01..09: SF = LF x H per element (no layers), H = 26'-0\" conservative (A0.1, RFI-01 open), total 1968.56 SF."
+  }
+ ],
+ "proyecto_datos": [
+  {
+   "campo": "project name / city",
+   "valor": "XFINITY BRANDED PARTNER - INTERQUEST COMMONS, Lot #11, Colorado Springs, CO (A0.3 summary of work: 'COMCAST/XFINITY')",
+   "fuente": "A0.1 title + title block all A-sheets; A0.3"
+  },
+  {
+   "campo": "address",
+   "valor": "1333 INTERQUEST PKWY., LOT #11, COLORADO SPRINGS, CO 80921 (Interquest Commons; tax schedule 6220002006-11; 'LOT 11, INTERQUEST COMMONS FILING NO 3A'; zoning PBC)",
+   "fuente": "A0.1 title block + PROJECT INFORMATION"
+  },
+  {
+   "campo": "type of project",
+   "valor": "Interior tenant improvement / change of use: 'SCOPE OF PROJECT: INTERIOR FINISH', 'WORK DESCRIPTION: MERCANTILE TENANT FINISH', '(FOR TENANT IMPROVEMENT ONLY)'; existing use group ASSEMBLY (A-2) -> new MERCANTILE",
+   "fuente": "A0.1 PROJECT INFORMATION / BUILDING DATA"
+  },
+  {
+   "campo": "owner / tenant",
+   "valor": "TENANT: BRANDED PARTNER - BRIDGE LOCATIONS, LLC, 3158 S. Main Street, Salt Lake City, UT 84115 (contact Roger Ishino). Brand: Xfinity/Comcast",
+   "fuente": "A0.1 TENANT box"
+  },
+  {
+   "campo": "landlord",
+   "valor": "IQ PROPERTIES, 1864 Woodmore Drive, Suite 400, Monument, CO 80132 (contact Blake Green)",
+   "fuente": "A0.1 LANDLORD box"
+  },
+  {
+   "campo": "architect",
+   "valor": "ROBERT F. VANNEY, ARCHITECT, 149 Thompson Ave. East, Ste 112, West Saint Paul, MN 55118 (Bob Vanney; PM Jim Hoepfl). MEP: Hallberg Engineering, Inc., White Bear Lake, MN",
+   "fuente": "A0.1 ARCHITECT / CONSULTANTS; title block"
+  },
+  {
+   "campo": "general contractor (GC)",
+   "valor": "BCI NATIONAL CONSTRUCTION & FACILITIES, 3158 S. Main St., Salt Lake City, UT 84115 (contact Duncan Johnsen)",
+   "fuente": "A0.1 GENERAL CONTRACTOR box"
+  },
+  {
+   "campo": "bid date",
+   "valor": "Friday Nov 13, 2026, end of day (BuildingConnected opportunity 'Xfinity - Inter Quest, CO TI Improvement Project: Drywall & Framing', due date 11/13/2026; GC reminder 11/09/2026); bid as day work (regular business hours)",
+   "fuente": "GC data: BuildingConnected opportunity and BCI National reminder e-mail of 11/09/2026 (a bid date is never a drawing datum)"
+  },
+  {
+   "campo": "bid set",
+   "valor": "'Complete PDF Set 10-08-26 R0' (per invite). Printed title block: Preliminary Issue -, Bid Issue 10/08/2026, Landlord Issue 10/08/2026, Permit Issue 10/08/2026, Construction Issue -; Comm. Number 81-2116, Date 10/08/2026, Drawn By RFV. 17 pages (A0.1-A5.0, E0.0-E3.0, M0.0-M2.0, P1.0). A0.1 also carries an older '07/26/2017 82-1017' string in the sheet-index area (template remnant)",
+   "fuente": "A0.1 title block; sheet index A0.1"
+  },
+  {
+   "campo": "total building area SF",
+   "valor": "TI: TOTAL LEASED AREA 1,798 S.F. (sales 1,337 SF, stock 288 SF, ancillary 173 SF); building: TOTAL BUILDING AREA 7,800 SF",
+   "fuente": "A0.1 BUILDING DATA / TENANT SPACE"
+  },
+  {
+   "campo": "stories",
+   "valor": "1 STORY - 26 FT",
+   "fuente": "A0.1 BUILDING DATA"
+  },
+  {
+   "campo": "construction type / classification",
+   "valor": "V-B FULLY SPRINKLERED (EXISTING)",
+   "fuente": "A0.1 BUILDING DATA"
+  },
+  {
+   "campo": "occupancy group",
+   "valor": "NEW USE GROUP: MERCANTILE (M); EXISTING USE GROUP: ASSEMBLY (A-2)",
+   "fuente": "A0.1 BUILDING DATA"
+  },
+  {
+   "campo": "codes",
+   "valor": "2021 IBC, 2021 IMC, 2023 NEC, 2021 IPC, 2009 ANSI 117.1 & ADA (A0.2: 2010 ADA Design Standards); restroom per 2021 IPC 403.2 Exception 3. AHJ: Colorado Springs Planning Department, 30 S. Nevada Ave., Suite 701",
+   "fuente": "A0.1 APPLICABLE CODES / BUILDING DEPARTMENT"
+  },
+  {
+   "campo": "occupant load",
+   "valor": "24 OCC. (sales 1,337/60 = 23; stock 288/300 = 1; ancillary 173/0 = 0). Exits req'd 2 / provided 2",
+   "fuente": "A0.1 TENANT SPACE / EXIT REQUIREMENTS"
+  },
+  {
+   "campo": "sprinklered",
+   "valor": "YES - 'V-B FULLY SPRINKLERED (EXISTING)'; deferred submittal 'FIRE SPRINKLER MODIFICATIONS'",
+   "fuente": "A0.1"
+  },
+  {
+   "campo": "demolition",
+   "valor": "YES - A1.0 DEMOLITION FLOOR PLAN: 'ALL EXISTING INTERIOR WALLS, DOORS, AND WINDOWS AS SHOWN DASHED TO BE REMOVED'; 'REMOVE EXISTING CEILING FINISHES, LIGHT FIXTURES AND DUCT WORK AS REQUIRED'; 'EXISTING CEILING GRID TO REMAIN. REMOVE LIGHT FIXTURES AND CEILING TILES'; existing demising wall/columns/doors/storefront to remain; 'EXISTING STOREFRONT BULKHEAD ABOVE. PATCH AND MATCH AS REQUIRED. (V.I.F.)'. Responsibility matrix: DEMOLITION by GC",
+   "fuente": "A1.0 (p4); A0.1 matrix"
+  },
+  {
+   "campo": "specs",
+   "valor": "A0.3 SPECIFICATIONS (one sheet, no CSI section numbers; headings METALS: LIGHTGAGE FRAMING; FINISHES: GYPSUM DRYWALL; PAINTING: GYPSUM BOARD TREATMENT; ACOUSTICAL CEILINGS; etc.). E3.0 electrical specs, M2.0 mechanical specs (not trade)",
+   "fuente": "A0.3 (p3)"
+  },
+  {
+   "campo": "level of finish",
+   "valor": "LEVEL 4 - A2.0 PARTITION PLAN GENERAL NOTE 3: 'UNLESS OTHERWISE NOTED, ALL GYPSUM BOARD SURFACES, WALLS, AND CEILINGS SHALL BE TAPED, SANDED SMOOTH TO A \"LEVEL 4\" FINISH, SO AS TO RECEIVE PAINT OR WALL COVERING MATERIAL'",
+   "fuente": "A2.0 general note 3"
+  },
+  {
+   "campo": "responsibility",
+   "valor": "DRYWALL PARTITIONS provided by GC / installed by GC; ACOUSTICAL CEILING SYSTEM GC/GC; STRUCTURAL/MISC METALS GC/GC; ROUGH CARPENTRY GC/GC",
+   "fuente": "A0.1 RESPONSIBILITY MATRIX"
+  }
+ ],
+ "hojas_revisadas": [
+  {
+   "categoria": "cover / index",
+   "estado": "reviewed",
+   "hojas": "A0.1 title sheet + sheet index (17 sheets A0.1-A5.0, E0.0-E3.0, M0.0-M2.0, P1.0), A0.2 ADA accessibility details (mounting heights; no framing detail)"
+  },
+  {
+   "categoria": "code analysis",
+   "estado": "reviewed",
+   "hojas": "A0.1 project information / building data / applicable codes: 2021 IBC, V-B fully sprinklered (existing), use group M (existing A-2), 1,798 SF leased, 1 story - 26 ft, 24 occupants"
+  },
+  {
+   "categoria": "general notes",
+   "estado": "reviewed",
+   "hojas": "A0.1 general notes 1-7 (note 7 access doors / panels as required), A1.0 general demolition notes 1-25, A2.0 partition plan general notes 1-3 (Level 4), A3.0 RCP general notes 1-4 (no access hatches in gyp. bd. ceilings)"
+  },
+  {
+   "categoria": "demolition + notes",
+   "estado": "reviewed",
+   "hojas": "A1.0 demolition floor plan + key notes (key 7 dashed walls removed = DEMO-01..09; keys 14 / 15 ceiling finishes / tiles; key 16 existing gyp. bd. ceiling to remain; note 18 temporary barriers)"
+  },
+  {
+   "categoria": "specs",
+   "estado": "reviewed",
+   "hojas": "A0.3 specifications: lightgage framing (metal studs as shown), gypsum board 5/8\" Type X, joint sealants, hollow metal frames (3 anchors per jamb), painting / board treatment (texture finish), acoustical ceilings; no project manual"
+  },
+  {
+   "categoria": "partition types + details",
+   "estado": "reviewed",
+   "hojas": "A2.0 2/A2.0 wall types W1 / W2 / W2A / W3 / W4, wall legend, interior wall limiting heights table, 3/A2.0 base, 4/A2.0 top / brace to structure, 5/A2.0 column furring, 6/A2.0 connection at demising, 7/A2.0 door head / jamb, 8/A2.0 backing"
+  },
+  {
+   "categoria": "floor plans",
+   "estado": "reviewed",
+   "hojas": "A2.0 1/A2.0 partition plan (tags W1, W2, W4; dimensions; key notes 1-13), A4.0 fixture & finish plan"
+  },
+  {
+   "categoria": "RCP",
+   "estado": "reviewed",
+   "hojas": "A3.0 reflected ceiling plan 1/A3.0 (Retail 2x4 ACT 12'-0\", Storage 2x4 ACT 10'-0\", Hallway / Toilets existing gyp. bd. 9'-0\", gyp. bd. 8'-6\" header, Landlord Room N.I.C.), legend, 2/A3.0 ceiling spans, 3/A3.0 suspended acoustical ceiling, 4/A3.0 light fixture at suspended ceiling"
+  },
+  {
+   "categoria": "elevations / sections",
+   "estado": "reviewed",
+   "hojas": "A5.0 interior elevations (9/A5.0 retail west wall = W2 line '12'-0\" TO B.O. CEILING'); no building / wall sections in the set besides the A2.0 / A3.0 details"
+  },
+  {
+   "categoria": "enlarged / interior elevations",
+   "estado": "reviewed",
+   "hojas": "A5.0 interior elevations & enlarged toilet plan, blocking legend (EV-44 / EV-45 6\" sheet metal strapping, EV-10-6 3/4\" plywood)"
+  },
+  {
+   "categoria": "schedules",
+   "estado": "reviewed",
+   "hojas": "A2.0 door schedule + hardware groups, A4.0 room finish schedule (ceiling heights), A2.0 interior wall limiting heights table"
+  },
+  {
+   "categoria": "structural",
+   "estado": "reviewed - none in the set",
+   "hojas": "no S sheets in the set (A0.1 sheet index); structure height not printed (RFI-01)"
+  },
+  {
+   "categoria": "MEP",
+   "estado": "reviewed",
+   "hojas": "E0.0 symbols, E1.0 lighting, E2.0 power / low voltage, E2.1 fixture elevations, E3.0 electrical specifications (access panel 'as appropriate', none located); M0.0, M1.0 HVAC plan (lay-in devices in ACT, existing concrete beam above ceiling), M2.0; P1.0 plumbing ('no plumbing allowed within tenant demising walls'): no framed opening or backing in our scope; ducts EXCLUDED by standing order"
+  }
+ ],
+ "barrido_no_dibujado": [
+  {
+   "item": "header",
+   "specs": "found 7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM): 3-5/8\" metal track + nested 3-5/8\" stud over the HM frame (door 101)",
+   "schedule": "found A2.0 door schedule (door 101 new in W2-01; 100 / 102-104 existing)",
+   "estructural": "none: no S sheets in the set"
+  },
+  {
+   "item": "deflection clips",
+   "specs": "none: 4/A2.0 wall to 6\" above ceiling, top track screwed to studs, braced to structure (no slip / deflection track)",
+   "schedule": "none",
+   "estructural": "none: no S sheets"
+  },
+  {
+   "item": "bracing",
+   "specs": "found 4/A2.0 brace to structure, alternate sides, metal studs @ 8'-0\" o.c. max, 3 5/8\" 20 ga min, max length 25'-0\"",
+   "schedule": "none: no bracing schedule",
+   "estructural": "none: no S sheets; structure height not printed (RFI-01)"
+  },
+  {
+   "item": "bridging",
+   "specs": "none: A2.0 limiting heights table - fully sheathed both sides, bridging at 60\" only as an option; 2/A2.0-8/A2.0 print no bridging row",
+   "schedule": "none",
+   "estructural": "none"
+  },
+  {
+   "item": "blocking",
+   "specs": "found A5.0 blocking legend (EV-44 / EV-45 6\" sheet metal strapping) + 8/A2.0; F.R.T. wood blocking 7/A2.0 / 8/A2.0 EXCLUDED",
+   "schedule": "found A4.0 EV fixture tags / A5.0 legend",
+   "estructural": "none"
+  },
+  {
+   "item": "backing",
+   "specs": "found 8/A2.0 backing at the fire extinguishers (A2.0 key notes 5 / 6)",
+   "schedule": "none",
+   "estructural": "none"
+  }
+ ]
+}

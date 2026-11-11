@@ -1,0 +1,41 @@
+"""Paso 12 (R80e.37): list of every trade detail / key note / spec line of the set with its destination, for runner/cobertura.py.
+Destinations = Excel rows (ALC-xx of the Scope Checklist / Material Summary families) or 'n/a - <reason>'."""
+import json
+L = [
+ ("A2.0", "key note 1", "column furring: (1) layer 5/8\" gyp board to 6\" above ceiling over studs, see 5/A2.0", "ALC-01"),
+ ("A2.0", "key note 2", "provide backing for wall mounted equipment and fixtures, see A4.0 / A5.0 blocking legend, 8/A2.0", "ALC-16"),
+ ("A2.0", "key note 3", "level floor for millwork and floor finishes", "n/a - flooring, not our trade"),
+ ("A2.0", "key note 4", "water resistant gypsum board at areas subject to moisture / tile", "n/a - restroom walls are existing W4 to remain (2/A2.0); no new board in wet areas"),
+ ("A2.0", "key note 5", "fire extinguisher bracket / backing", "ALC-16"),
+ ("A2.0", "key note 6", "provide and install all necessary wall backing, stiffeners, bracing, back-up plates, see 8/A2.0", "ALC-16"),
+ ("A2.0", "key note 7", "electronic equipment by tenant's vendors", "n/a - by tenant vendors"),
+ ("A2.0", "key note 8", "electrical equipment, see electrical", "n/a - electrical"),
+ ("A2.0", "key note 9", "prepare floor surfaces for finish", "n/a - flooring"),
+ ("A2.0", "key note 10", "(2) server racks on 3/4\" FRT plywood", "ALC-10"),
+ ("A2.0", "key note 11", "existing glazing and storefront to remain", "n/a - storefront, other trade"),
+ ("A2.0", "key notes 12-15", "exit route / tactile signage, exit doors, thresholds", "n/a - signage / doors, other trades"),
+ ("A2.0", "2/A2.0", "wall types W1, W2, W2A, W3, W4", "ALC-01"),
+ ("A2.0", "3/A2.0", "typical wall - base detail (bottom track)", "ALC-04"),
+ ("A2.0", "4/A2.0", "typical wall and ceiling detail (top track, braces to structure)", "ALC-04"),
+ ("A2.0", "5/A2.0", "non-rated column furring", "ALC-01"),
+ ("A2.0", "6/A2.0", "wall connection at demising (metal corner bead)", "ALC-18"),
+ ("A2.0", "7/A2.0", "typical head detail (jamb sim)", "ALC-05"),
+ ("A2.0", "8/A2.0", "backing detail for misc. equipment (16 ga track, 16 ga studs)", "ALC-16"),
+ ("A2.0", "limiting heights", "interior wall limiting heights table (stud designation / spacing)", "ALC-01"),
+ ("A2.0", "general note 3", "Level 4 finish", "ALC-24"),
+ ("A3.0", "2/A3.0", "allowable ceiling spans (no new framed gypsum ceiling system drawn)", "n/a - only gypsum element is the SOF-01 header (ALC-11)"),
+ ("A3.0", "3/A3.0", "suspended acoustical ceiling (ACT grid, seismic wires)", "n/a - ACT, other bid package"),
+ ("A3.0", "4/A3.0", "light fixture at suspended ceiling", "n/a - ACT / electrical"),
+ ("A3.0", "RCP tags", "GYP. BD. 8'-6\" AFF header; existing GYP. BD. 9'-0\"; 2x4 ACT 10'-0\" / 12'-0\"", "ALC-11"),
+ ("A1.0", "key note 7", "existing interior walls, doors and windows shown dashed to be removed", "Demolition - area of the element to demolish"),
+ ("A1.0", "key notes 14 / 15", "existing ceiling finishes / tiles removed, grid to remain", "n/a - existing ceiling type not indicated, ACT by others (R-ALC-05)"),
+ ("A1.0", "demolition note 18", "temporary non-combustible construction barriers where required", "n/a - conditional, no location drawn; Review Item 7"),
+ ("A5.0", "blocking legend", "6\" sheet metal blocking strapping for fixture attachment (EV-44 / EV-45)", "ALC-16"),
+ ("A5.0", "11/A5.0", "drinking fountain elevation (high-low fountain backing)", "ALC-16"),
+ ("A4.0", "key note 1", "provide blocking support behind wall-mounted equipment, see 8/A2.0 (GF-14496 graphic frame)", "ALC-16"),
+ ("A0.3", "METALS: LIGHTGAGE FRAMING", "light gage framing spec", "ALC-01"),
+ ("A0.3", "FINISHES: GYPSUM DRYWALL", "gypsum board spec (Type X, finishing)", "ALC-07"),
+ ("A0.3", "PAINTING: texture finish", "gypsum board treatment texture finish", "n/a - drawings govern: Level 4 (A2.0 general note 3), Review Item 4"),
+]
+json.dump([{"sheet": s, "type": t, "text": x, "destination": d} for s, t, x, d in L], open('/root/xf/work/etapas/12_cobertura/lista.json', 'w'), indent=1)
+print(len(L))

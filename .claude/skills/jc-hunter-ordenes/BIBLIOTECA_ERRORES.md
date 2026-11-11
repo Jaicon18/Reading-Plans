@@ -623,3 +623,12 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Síntoma: (F1) la 2ª capa 2 HR de ELEC 221 se puso en UNTYPED-L2-12, que está al otro lado del corridor 216 (la lectura lo rotulaba 'ELEC 221 | 222 LINEN'); (F2 / F3) tramos de ELEC 421 (norte, W.6-L4-03) y de 221 / 321 (muro norte de los baths 210 / 310) sin la capa; (F4) un tramo de 1.23 ft en dos filas C / D (la leyenda contaba 2 walls); (F5) CLG-L4-412WS cargado sobre el WS-1 sin RFI / Review / Scope y las otras 2 zonas WS-1 de L4 en blanco; textos 'FS-1 rated membrane above' en L4 y 'RS-1 rated membranes'; framing del soffit FCU (11/A6.01) metálico sin regla citada.
 - Causa: se buscaron los muros por el rótulo de la fila y no por la geometría del cuarto; el criterio WS-1 se tomó para una sola zona; textos copiados de L2 / L3 a L4.
 - Arreglo: R80e.165.42-.46; CB_CR_R17_SILENCIO (caso cr_r17_silencio); caras de los 3 ELEC medidas en vectores tramo por tramo; un tramo = una fila; WS-1 L4: un criterio para las 3 zonas.
+
+
+## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
+- BE-XF01 (conducta): BuildingConnected 'Download All' en Chromium headless detrás del proxy: SignatureDoesNotMatch de S3; se intercepta la URL del archivo y se baja con curl (cache_proyectos/herramientas/bc_descargar.js).
+- BE-XF02 (conducta): brief de lectura con clip de get_pixmap en espacio sin rotar: en hojas rotation 270 PyMuPDF toma el clip en pt VISIBLES; todo recorte se reabre (U-118).
+- BE-XF03 (programa): CE_RCP_CUARTOS leía como cuartos números que no lo son ('600 S 162' designator de acero, herraje '200D'): disposición not_a_room con motivo, N/HOJA e imagen. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF04 (programa): BE-CF04 'sin walls de madera en walls[]' caía en BE-CR25 (vacío) en un set sin madera: wood_walls_none_reason con hoja = PASS. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF05 (programa): RX_HOJA_CONCRETA y la cita de altura de CE_A2_ALTURAS exigían hoja de dos decimales (A2.01): A0.1 / A2.0 daban 'sin hoja'. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF06 (programa): CC-R12 con 0 walls de largo Y altura impresos fallaba por plausibilidad: se declara N/A con los walls de largo impreso. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.

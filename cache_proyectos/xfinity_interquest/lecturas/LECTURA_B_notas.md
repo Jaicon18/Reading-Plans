@@ -1,0 +1,11 @@
+# Reader B notes (Xfinity Interquest)
+- Crops: PyMuPDF 1.28 get_pixmap(clip=) takes VISIBLE-frame pt; all crops in img/ made that way (scripts/u.py) and re-opened. No derotated crop survives (first overview was regenerated).
+- Scale 18 pt/ft verified on A2.0 (44'-6 5/8" = 802.08 pt), A3.0 (3'-0" = 53.94 pt), A1.0 by identical geometry (offset +81.6,+6.9).
+- North arrow: plan up = WEST, right = NORTH. Side A = right face (V walls) / top face (H walls).
+- NEW work: only W2 (single-hatch = no batt): W2-01 13.972 LF (door 101 3'-0" inside), W2-02 4.000 LF (printed). Studs 12'-6" (retail ACT 12'-0" + 6"). Faces: retail 12.5, storage 10.5, hallway 9.5 (per-face 6" above ceiling, RFI-03).
+- W1 (5 lines) and W4 (6 lines) = existing to remain, "PATCH AND REPAIR" only -> listed, ours=false.
+- W2A, W3 legend only. PC0018-22 = legend symbols (discarded).
+- Column furring 5/A2.0 + key note 1: 2 storefront columns, 3 sides 2.383 LF each, 12.5 ft -> 29.79 SF each.
+- Ceilings ours: only HDR-01 GB header/soffit 8'-6" AFF over hallway opening (A3.0), 4.25 LF, underside 1.72 SF (+ faces, RFI-05). Hallway/toilets GB ceilings are EXISTING; Retail/Storage ACT not ours; Landlord room N.I.C.
+- Demo A1.0 key 7: 8 straight dashed wall lines, 63.944 LF, height PENDIENTE (RFI-06).
+- Deck/structure height not printed anywhere (RFI-01).

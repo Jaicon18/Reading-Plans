@@ -1,0 +1,1579 @@
+{
+ "_nota": "U-113/U-137/U-141 bubble verification, all 17 sheets swept by eye (36 dpi overviews + 85-120 dpi zooms of every plan/detail area) and by a vector circle scan. Detector inventario.ocurrencias.detail_bubble = 60: 27 real callouts (A2.0 11, A3.0 1, A4.0 10, A5.0 5, counting each arrow of an elevation marker; + 1 written ref added by eye on A2.0) PLUS 31 are VIEW TITLE markers of the destination views themselves (kept as no_es_burbuja + used for _destinos) and 2 are misreads of written notes (A0.1 DB0001 'ON/A0.2', A4.0 DB0039 'NO/A0.2'). detail_ref_text (6) and set_texto 'vector N/HOJA en una linea' items are WRITTEN references in keynotes (kept with ref_texto, destinations followed). set_texto burbujas 'marca de elevacion' ids are WRONG on A2.0, A4.0 (true: 8 top/7 right/6 bottom/9 left) and A5.0 (true: 2 top/3 right/4 bottom/5 left); all 11 indep_no_detectados rings are north arrows (7) or exit-sign symbols (3 on A3.0) -> img_verif/indep_anillos.png. Added by eye: 1/M0.0 bubble on M1.0 (grille & diffuser schedule header) and the written ref 8/A2.0 in A2.0 key note 6. Sheets with NO detail callouts: A0.1 (only title + legend), A0.2, A0.3, A1.0 (keynotes only), E0.0, E1.0, E2.0, E2.1, E3.0, M0.0, M2.0, P1.0 (E/M/P: hexagon key notes, circled view titles; text refs to 2/E1.0, 2/E2.0, 3/E2.0, 5/P1.0 only). Details with NO inbound callout: 2/A2.0 WALL TYPES (reached via W-tags), 7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM) (applies typ. at door heads; F.R.T. wood blocking in it = Div 06), 2/A3.0 ALLOWABLE CEILING SPANS L/240 (stud/joist table), 2/A4.0 ACCESSIBLE POS, BLOCKING LEGEND - SALES WALL FIXTURES (A5.0, unnumbered, reached by text). Rendering note: in this PyMuPDF (1.28/2.1) get_pixmap(clip=...) takes the VISIBLE rect directly; clip=rect*derotation_matrix renders the wrong area. All crops were made and re-opened with visible clips.",
+ "_frame": "visible frame pt (page.rect after rotation 270, 3024 x 2160, origin top-left = rendered PNG). set_texto indep_no_detectados were unrotated and are converted (x_vis=y_u, y_vis=2160-x_u). Text-ref x,y on E/P sheets are approximate positions inside the SHX note block.",
+ "A0.1": [
+  {
+   "x": 2217.9,
+   "y": 1951.2,
+   "img": "img_verif/no_burbujas_A0.1.png #0",
+   "no_es_burbuja": "written note 'PROVIDE \"EXIT\" TACTILE SIGNAGE ... SEE SHEET A0.2 FOR SIGNAGE DETAILS' in 1/A0.1 EXIT PLAN; detector read 'ON/A0.2' from two text lines. Sheet-level text reference to A0.2 (ADA signage) - not our trade",
+   "detector": "inventario DB0001 ON/A0.2",
+   "ref_texto": "A0.2 (sheet, no detail number)"
+  },
+  {
+   "x": 1908.2,
+   "y": 2025.7,
+   "img": "img_verif/no_burbujas_A0.1.png #1",
+   "no_es_burbuja": "view title marker of 1/A0.1 EXIT PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0002 1/A0.1"
+  },
+  {
+   "x": 388.1,
+   "y": 1302.1,
+   "img": "img_verif/no_burbujas_A0.1.png #2",
+   "no_es_burbuja": "generic symbol in SYMBOLS LEGEND (X/AX.X = detail / section / elevation reference legend), not a callout",
+   "ojo": true
+  },
+  {
+   "x": 388.1,
+   "y": 1383.2,
+   "img": "img_verif/no_burbujas_A0.1.png #3",
+   "no_es_burbuja": "generic symbol in SYMBOLS LEGEND (X/AX.X = detail / section / elevation reference legend), not a callout",
+   "ojo": true
+  },
+  {
+   "x": 387.9,
+   "y": 1477.3,
+   "img": "img_verif/no_burbujas_A0.1.png #4",
+   "no_es_burbuja": "generic symbol in SYMBOLS LEGEND (X/AX.X = detail / section / elevation reference legend), not a callout",
+   "ojo": true
+  },
+  {
+   "x": 387.9,
+   "y": 1536.7,
+   "img": "img_verif/no_burbujas_A0.1.png #5",
+   "no_es_burbuja": "generic symbol in SYMBOLS LEGEND (X/AX.X = detail / section / elevation reference legend), not a callout",
+   "ojo": true
+  },
+  {
+   "x": 1678.1,
+   "y": 2033.3,
+   "img": "img_verif/no_burbujas_A0.1.png #6",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 1291.1,
+   "y": 2033.3,
+   "img": "img_verif/no_burbujas_A0.1.png #7",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 2576.0,
+   "y": 2026.0,
+   "img": "img_verif/no_burbujas_A0.1.png #8",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 126.7,
+   "y": 1678.1,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "img": "img_verif/no_burbujas_A0.1.png #6",
+   "nota": "same ring as the entry at visible (1678.1, 2033.3): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  },
+  {
+   "x": 126.7,
+   "y": 1291.1,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "img": "img_verif/no_burbujas_A0.1.png #7",
+   "nota": "same ring as the entry at visible (1291.1, 2033.3): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  },
+  {
+   "x": 134.0,
+   "y": 2576.0,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados, unrotated coords converted x_vis=y_u, y_vis=2160-x_u); also in img_verif/indep_anillos.png",
+   "img": "img_verif/no_burbujas_A0.1.png #8",
+   "nota": "same ring as the entry at visible (2576.0, 2026.0): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "A0.2": [],
+ "A0.3": [],
+ "A1.0": [
+  {
+   "x": 499.7,
+   "y": 1887.8,
+   "img": "img_verif/no_burbujas_A1.0.png #0",
+   "no_es_burbuja": "view title marker of 1/A1.0 DEMOLITION PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0003 1/A1.0"
+  },
+  {
+   "x": 1664.2,
+   "y": 1888.1,
+   "img": "img_verif/no_burbujas_A1.0.png #1",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 1229.8,
+   "y": 1266.1,
+   "img": "img_verif/no_burbujas_A1.0.png #2",
+   "no_es_burbuja": "demolition keynote circle (number only, no divider/sheet) - all 71 small numbered circles on A1.0 are DEMOLITION PLAN KEY NOTES 1-18",
+   "ojo": true
+  },
+  {
+   "x": 2520,
+   "y": 1545,
+   "img": "img_verif/no_burbujas_A1.0.png #3",
+   "no_es_burbuja": "keynote 6 text 'FLOOR TRENCHING TO BE COORDINATED WITH ELECTRICAL DRAWINGS AND SHEET A4.0' - sheet-level text reference (governed by 4/A4.0 trenching), not a bubble; not our trade",
+   "ojo": true,
+   "ref_texto": "A4.0 (sheet) -> 4/A4.0"
+  },
+  {
+   "x": 271.9,
+   "y": 1664.2,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A1.0.png #1",
+   "nota": "same ring as the entry at visible (1664.2, 1888.1): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "A2.0": [
+  {
+   "x": 794.0,
+   "y": 1201.9,
+   "img": "img_verif/burbujas_A2.0.png #0",
+   "n": "6",
+   "hoja": "A2.0",
+   "dibujo": "'6/A2.0 TYP.' with dashed circle at the junction where the new full-height partition between STORAGE 101 and RETAIL 100 meets the existing north demising wall (W1)",
+   "detector": "inventario DB0008"
+  },
+  {
+   "x": 790.4,
+   "y": 1339.7,
+   "img": "img_verif/burbujas_A2.0.png #1",
+   "n": "4",
+   "hoja": "A2.0",
+   "dibujo": "section cut (arrow) 'TYP.' through the new STORAGE 101 / RETAIL 100 partition",
+   "detector": "inventario DB0010"
+  },
+  {
+   "x": 790.4,
+   "y": 1389.9,
+   "img": "img_verif/burbujas_A2.0.png #2",
+   "n": "3",
+   "hoja": "A2.0",
+   "dibujo": "section cut (arrow) 'TYP.' through the same STORAGE 101 / RETAIL 100 partition",
+   "detector": "inventario DB0011"
+  },
+  {
+   "x": 702.6,
+   "y": 1407.2,
+   "img": "img_verif/burbujas_A2.0.png #3",
+   "n": "1",
+   "hoja": "A5.0",
+   "dibujo": "enlarged-plan callout with leader to the dashed rectangle around EXISTING TOILET 103, EXISTING ACCESS. TOILET 104, HALLWAY 102 and the drinking-fountain/mop-sink alcove",
+   "detector": "inventario DB0014"
+  },
+  {
+   "x": 1110.2,
+   "y": 1485.9,
+   "img": "img_verif/burbujas_A2.0.png #4",
+   "n": "8",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in RETAIL 100 - TOP arrow: upper long wall of the plan (INTERNET / MOBILE 2 fixture wall)",
+   "detector": "inventario DB0007; set_texto burbujas[A2.0] (elevation-marker method) mislabels this marker: it lists n=6 @(1130.6,1506.4), n=6 @(1089.7,1506.4), n=7 and n=9 @(1110.2,1485.9) and misses the bottom bubble; by eye/vector the ids are 8 top, 7 right, 6 bottom, 9 left"
+  },
+  {
+   "x": 1130.6,
+   "y": 1506.4,
+   "img": "img_verif/burbujas_A2.0.png #5",
+   "n": "7",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in RETAIL 100 - RIGHT arrow: storefront wall (interior face)",
+   "detector": "inventario DB0004; set_texto burbujas[A2.0] (elevation-marker method) mislabels this marker: it lists n=6 @(1130.6,1506.4), n=6 @(1089.7,1506.4), n=7 and n=9 @(1110.2,1485.9) and misses the bottom bubble; by eye/vector the ids are 8 top, 7 right, 6 bottom, 9 left"
+  },
+  {
+   "x": 1110.2,
+   "y": 1526.8,
+   "img": "img_verif/burbujas_A2.0.png #6",
+   "n": "6",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in RETAIL 100 - BOTTOM arrow: lower long wall (MOBILE 1 / ENTERTAINMENT fixture wall)",
+   "detector": "inventario DB0005; set_texto burbujas[A2.0] (elevation-marker method) mislabels this marker: it lists n=6 @(1130.6,1506.4), n=6 @(1089.7,1506.4), n=7 and n=9 @(1110.2,1485.9) and misses the bottom bubble; by eye/vector the ids are 8 top, 7 right, 6 bottom, 9 left"
+  },
+  {
+   "x": 1089.7,
+   "y": 1506.4,
+   "img": "img_verif/burbujas_A2.0.png #7",
+   "n": "9",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in RETAIL 100 - LEFT arrow: STORAGE 101 / RETAIL 100 partition (graphic panel GF-14496, door 101)",
+   "detector": "inventario DB0006; set_texto burbujas[A2.0] (elevation-marker method) mislabels this marker: it lists n=6 @(1130.6,1506.4), n=6 @(1089.7,1506.4), n=7 and n=9 @(1110.2,1485.9) and misses the bottom bubble; by eye/vector the ids are 8 top, 7 right, 6 bottom, 9 left"
+  },
+  {
+   "x": 1500.4,
+   "y": 1318.9,
+   "img": "img_verif/burbujas_A2.0.png #8",
+   "n": "5",
+   "hoja": "A2.0",
+   "dibujo": "'5/A2.0 SIM.' with dashed circle around the existing column at the north end of the storefront (east) wall",
+   "detector": "inventario DB0012"
+  },
+  {
+   "x": 1500.4,
+   "y": 1678.9,
+   "img": "img_verif/burbujas_A2.0.png #9",
+   "n": "5",
+   "hoja": "A2.0",
+   "dibujo": "'5/A2.0 SIM.' with dashed circle around the existing column at the south end of the storefront (east) wall",
+   "detector": "inventario DB0013"
+  },
+  {
+   "x": 1619.0,
+   "y": 1553.6,
+   "img": "img_verif/burbujas_A2.0.png #10",
+   "n": "10",
+   "hoja": "A5.0",
+   "dibujo": "exterior elevation arrow outside the storefront / entry door 100 looking at the storefront",
+   "detector": "inventario DB0009"
+  },
+  {
+   "x": 2622,
+   "y": 1467,
+   "img": "img_verif/burbujas_A2.0.png #11",
+   "n": "8",
+   "hoja": "A2.0",
+   "dibujo": "WRITTEN reference in PARTITION PLAN KEY NOTE 6 'PROVIDE AND INSTALL ALL NECESSARY WALL BACKING ... SEE DETAIL 8/A2.0.' (keynote 6 circles at storage sink / fixtures). Text, not a drawn bubble; not in detector lists",
+   "ojo": true,
+   "tipo": "texto"
+  },
+  {
+   "x": 2734.2,
+   "y": 1281.8,
+   "img": "img_verif/no_burbujas_A2.0.png #0",
+   "no_es_burbuja": "WRITTEN reference 'SEE DETAIL 5/A2.0' at end of PARTITION PLAN KEY NOTE 1 (column furring) - text, not a circle (destination 5/A2.0 followed anyway)",
+   "detector": "set_texto burbujas[A2.0] vector N/HOJA en una linea + inventario DR0001",
+   "ref_texto": "5/A2.0"
+  },
+  {
+   "x": 252.9,
+   "y": 1905.7,
+   "img": "img_verif/no_burbujas_A2.0.png #1",
+   "no_es_burbuja": "view title marker of 1/A2.0 PARTITION PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0015"
+  },
+  {
+   "x": 1255.0,
+   "y": 768.9,
+   "img": "img_verif/no_burbujas_A2.0.png #2",
+   "no_es_burbuja": "view title marker of 2/A2.0 WALL TYPES (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0022"
+  },
+  {
+   "x": 1885.1,
+   "y": 2027.9,
+   "img": "img_verif/no_burbujas_A2.0.png #3",
+   "no_es_burbuja": "view title marker of 3/A2.0 TYPICAL WALL - BASE DETAIL (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0016"
+  },
+  {
+   "x": 1885.1,
+   "y": 1766.0,
+   "img": "img_verif/no_burbujas_A2.0.png #4",
+   "no_es_burbuja": "view title marker of 4/A2.0 TYPICAL WALL AND CEILING DETAIL (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0017"
+  },
+  {
+   "x": 1885.1,
+   "y": 1461.6,
+   "img": "img_verif/no_burbujas_A2.0.png #5",
+   "no_es_burbuja": "view title marker of 5/A2.0 NON-RATED COLUMN FURRING (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0018"
+  },
+  {
+   "x": 1885.1,
+   "y": 1204.8,
+   "img": "img_verif/no_burbujas_A2.0.png #6",
+   "no_es_burbuja": "view title marker of 6/A2.0 WALL CONNECTION AT DEMISING (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0019"
+  },
+  {
+   "x": 1885.1,
+   "y": 944.2,
+   "img": "img_verif/no_burbujas_A2.0.png #7",
+   "no_es_burbuja": "view title marker of 7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM) (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0020"
+  },
+  {
+   "x": 1885.1,
+   "y": 680.2,
+   "img": "img_verif/no_burbujas_A2.0.png #8",
+   "no_es_burbuja": "view title marker of 8/A2.0 BACKING DETAIL FOR MISC. EQUIP. (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0021"
+  },
+  {
+   "x": 1688.2,
+   "y": 1906.0,
+   "img": "img_verif/no_burbujas_A2.0.png #9",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 1528.4,
+   "y": 1266.8,
+   "img": "img_verif/no_burbujas_A2.0.png #10",
+   "no_es_burbuja": "partition-plan keynote circle (number only) - all small numbered circles in 1/A2.0 are PARTITION PLAN KEY NOTES 1-15",
+   "ojo": true
+  },
+  {
+   "detalle_existe": "6",
+   "x": 1885.1,
+   "y": 1198.8,
+   "x1": 2150.3,
+   "y1": 1228.8,
+   "img": "img_verif/destinos_titulos.png #0",
+   "titulo": "6 WALL CONNECTION AT DEMISING",
+   "nota": "destination view title (title bubble + title text) of 6/A2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #0; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "6/A2.0"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 1885.1,
+   "y": 1760.0,
+   "x1": 2166.3,
+   "y1": 1790.0,
+   "img": "img_verif/destinos_titulos.png #1",
+   "titulo": "4 TYPICAL WALL AND CEILING DETAIL",
+   "nota": "destination view title (title bubble + title text) of 4/A2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #1; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "4/A2.0"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 1885.1,
+   "y": 2021.9,
+   "x1": 2125.6,
+   "y1": 2051.9,
+   "img": "img_verif/destinos_titulos.png #2",
+   "titulo": "3 TYPICAL WALL - BASE DETAIL",
+   "nota": "destination view title (title bubble + title text) of 3/A2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #2; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "3/A2.0"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 1885.1,
+   "y": 1455.6,
+   "x1": 2134.3,
+   "y1": 1485.6,
+   "img": "img_verif/destinos_titulos.png #3",
+   "titulo": "5 NON-RATED COLUMN FURRING",
+   "nota": "destination view title (title bubble + title text) of 5/A2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #3; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "5/A2.0"
+  },
+  {
+   "detalle_existe": "8",
+   "x": 1885.1,
+   "y": 674.3,
+   "x1": 2163.1,
+   "y1": 704.3,
+   "img": "img_verif/destinos_titulos.png #4",
+   "titulo": "8 BACKING DETAIL FOR MISC. EQUIP.",
+   "nota": "destination view title (title bubble + title text) of 8/A2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #4; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "8/A2.0"
+  },
+  {
+   "x": 254.0,
+   "y": 1688.2,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A2.0.png #9",
+   "nota": "same ring as the entry at visible (1688.2, 1906.0): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "A3.0": [
+  {
+   "x": 1802.1,
+   "y": 1595.5,
+   "img": "img_verif/burbujas_A3.0.png #0",
+   "n": "10",
+   "hoja": "A5.0",
+   "dibujo": "exterior elevation arrow outside the storefront on the RCP (same callout as on A2.0/A4.0)",
+   "detector": "inventario DB0023"
+  },
+  {
+   "x": 2378.1,
+   "y": 867.3,
+   "img": "img_verif/no_burbujas_A3.0.png #0",
+   "no_es_burbuja": "WRITTEN reference 'ALL LIGHT FIXTURES ATTACHED TO CEILING GRID MUST ALSO BE INDEPENDENTLY SUPPORTED. SEE DETAIL 4/A3.0' (RCP keynote 2) - text",
+   "detector": "set_texto burbujas[A3.0] + inventario DR0002",
+   "ref_texto": "4/A3.0"
+  },
+  {
+   "x": 2433.9,
+   "y": 601.0,
+   "img": "img_verif/no_burbujas_A3.0.png #1",
+   "no_es_burbuja": "WRITTEN reference 'INSTALL SUSPENDED CEILING GRID PER DETAIL 3/A3.0, TYP.' (RCP general note 13) - text",
+   "detector": "inventario DR0003",
+   "ref_texto": "3/A3.0"
+  },
+  {
+   "x": 429.4,
+   "y": 2015.4,
+   "img": "img_verif/no_burbujas_A3.0.png #2",
+   "no_es_burbuja": "view title marker of 1/A3.0 REFLECTED CEILING PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0027"
+  },
+  {
+   "x": 1338.2,
+   "y": 1168.0,
+   "img": "img_verif/no_burbujas_A3.0.png #3",
+   "no_es_burbuja": "view title marker of 2/A3.0 ALLOWABLE CEILING SPANS - L/240 (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0026"
+  },
+  {
+   "x": 469.4,
+   "y": 1168.0,
+   "img": "img_verif/no_burbujas_A3.0.png #4",
+   "no_es_burbuja": "view title marker of 3/A3.0 SUSPENDED ACOUSTICAL CEILING (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0024"
+  },
+  {
+   "x": 469.4,
+   "y": 612.3,
+   "img": "img_verif/no_burbujas_A3.0.png #5",
+   "no_es_burbuja": "view title marker of 4/A3.0 LIGHT FIXTURE AT SUSPENDED CEILING (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0025"
+  },
+  {
+   "x": 1719.9,
+   "y": 1638.4,
+   "img": "img_verif/no_burbujas_A3.0.png #6",
+   "no_es_burbuja": "exit-sign symbol (circle with bow-tie) at storefront (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 914.7,
+   "y": 1400.0,
+   "img": "img_verif/no_burbujas_A3.0.png #7",
+   "no_es_burbuja": "exit-sign symbol at storage/retail partition (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 2389.7,
+   "y": 1411.7,
+   "img": "img_verif/no_burbujas_A3.0.png #8",
+   "no_es_burbuja": "exit-sign symbol in LIGHTING LEGEND (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 1897.3,
+   "y": 2015.7,
+   "img": "img_verif/no_burbujas_A3.0.png #9",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 435,
+   "y": 1484,
+   "img": "img_verif/no_burbujas_A3.0.png #10",
+   "no_es_burbuja": "text 'INTERNALLY ILLUMINATED EXTERIOR SIGNAGE - SEE SHT. A5.0 FOR ADD'L INFORMATION' (also at x1776,y1700) - sheet-level text reference to 10/A5.0; not a bubble; not our trade",
+   "ojo": true,
+   "ref_texto": "A5.0 (sheet) -> 10/A5.0"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 469.4,
+   "y": 1162.1,
+   "x1": 744.1,
+   "y1": 1192.1,
+   "img": "img_verif/destinos_titulos.png #20",
+   "titulo": "3 SUSPENDED ACOUSTICAL CEILING",
+   "nota": "destination view title (title bubble + title text) of 3/A3.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #20; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "3/A3.0"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 469.4,
+   "y": 606.3,
+   "x1": 782.4,
+   "y1": 636.3,
+   "img": "img_verif/destinos_titulos.png #21",
+   "titulo": "4 LIGHT FIXTURE AT SUSPENDED CEILING",
+   "nota": "destination view title (title bubble + title text) of 4/A3.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #21; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "4/A3.0"
+  },
+  {
+   "x": 521.6,
+   "y": 1719.9,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "exit-sign symbol (circle with bow-tie) at storefront (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A3.0.png #6",
+   "nota": "same ring as the entry at visible (1719.9, 1638.4): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  },
+  {
+   "x": 760.0,
+   "y": 914.7,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "exit-sign symbol at storage/retail partition (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A3.0.png #7",
+   "nota": "same ring as the entry at visible (914.7, 1400.0): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  },
+  {
+   "x": 748.3,
+   "y": 2389.7,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "exit-sign symbol in LIGHTING LEGEND (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A3.0.png #8",
+   "nota": "same ring as the entry at visible (2389.7, 1411.7): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  },
+  {
+   "x": 144.3,
+   "y": 1897.3,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A3.0.png #9",
+   "nota": "same ring as the entry at visible (1897.3, 2015.7): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "A4.0": [
+  {
+   "x": 600.1,
+   "y": 1369.0,
+   "img": "img_verif/burbujas_A4.0.png #0",
+   "n": "5",
+   "hoja": "A4.0",
+   "dibujo": "section/detail arrow at door 101 (STORAGE) threshold - LVT/VCT transition TS-2",
+   "detector": "inventario DB0030"
+  },
+  {
+   "x": 541.4,
+   "y": 1451.1,
+   "img": "img_verif/burbujas_A4.0.png #1",
+   "n": "11",
+   "hoja": "A5.0",
+   "dibujo": "elevation arrow at the drinking-fountain alcove north of the toilets (keynote 9)",
+   "detector": "inventario DB0029"
+  },
+  {
+   "x": 413.7,
+   "y": 1832.2,
+   "img": "img_verif/burbujas_A4.0.png #2",
+   "n": "1",
+   "hoja": "A5.0",
+   "dibujo": "enlarged-plan callout, leader to the dashed rectangle around toilets 103/104 + hallway 102",
+   "detector": "inventario DB0028"
+  },
+  {
+   "x": 925.9,
+   "y": 1554.9,
+   "img": "img_verif/burbujas_A4.0.png #3",
+   "n": "8",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in RETAIL 100 - TOP arrow: INTERNET / MOBILE 2 fixture wall",
+   "detector": "inventario DB0037; set_texto burbujas[A4.0] (elevation-marker method) mislabels this marker: it lists n=6 @(946.3,1575.3), n=6 @(905.5,1575.3), n=7 and n=9 @(925.9,1554.9) and misses the bottom bubble; by eye/vector the ids are 8 top, 7 right, 6 bottom, 9 left"
+  },
+  {
+   "x": 946.3,
+   "y": 1575.3,
+   "img": "img_verif/burbujas_A4.0.png #4",
+   "n": "7",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker - RIGHT arrow: storefront wall interior",
+   "detector": "inventario DB0034"
+  },
+  {
+   "x": 925.9,
+   "y": 1595.8,
+   "img": "img_verif/burbujas_A4.0.png #5",
+   "n": "6",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker - BOTTOM arrow: MOBILE 1 / ENTERTAINMENT fixture wall",
+   "detector": "inventario DB0035"
+  },
+  {
+   "x": 905.5,
+   "y": 1575.3,
+   "img": "img_verif/burbujas_A4.0.png #6",
+   "n": "9",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker - LEFT arrow: STORAGE/RETAIL partition with GRAPHIC GF-14496",
+   "detector": "inventario DB0036"
+  },
+  {
+   "x": 1429.5,
+   "y": 1340.7,
+   "img": "img_verif/burbujas_A4.0.png #7",
+   "n": "6",
+   "hoja": "A4.0",
+   "dibujo": "section arrow 'TYP' at the storefront base (LVT to existing storefront frame)",
+   "detector": "inventario DB0033"
+  },
+  {
+   "x": 1365.8,
+   "y": 1604.0,
+   "img": "img_verif/burbujas_A4.0.png #8",
+   "n": "3",
+   "hoja": "A4.0",
+   "dibujo": "section arrow 'TYP.' at entry door 100 - walk-off mat CPT-1 / LVT transition TS-1",
+   "detector": "inventario DB0031"
+  },
+  {
+   "x": 1563.1,
+   "y": 1589.1,
+   "img": "img_verif/burbujas_A4.0.png #9",
+   "n": "10",
+   "hoja": "A5.0",
+   "dibujo": "exterior elevation arrow outside the storefront",
+   "detector": "inventario DB0032"
+  },
+  {
+   "x": 420.7,
+   "y": 1145.4,
+   "img": "img_verif/no_burbujas_A4.0.png #0",
+   "no_es_burbuja": "note 'DOOR CLEARANCES FOR ACCESSIBILITY ... NO OBJECTS ... SEE SHEET A0.2 FOR ADDITIONAL INFORMATION' - detector read 'NO/A0.2' from two text lines; text reference to A0.2 (ADA) - not our trade",
+   "detector": "inventario DB0039 NO/A0.2",
+   "ref_texto": "A0.2 (sheet)"
+  },
+  {
+   "x": 2615.5,
+   "y": 1220.6,
+   "img": "img_verif/no_burbujas_A4.0.png #1",
+   "no_es_burbuja": "WRITTEN reference in FIXTURE PLAN KEY NOTE 1 'PROVIDE BLOCKING SUPPORT BEHIND WALL-MOUNTED EQUIPMENT - SEE DTL 8/A2.0' (keynote 1 circles not used on the plan; applies generally) - text",
+   "detector": "set_texto burbujas[A4.0] + inventario DR0004",
+   "ref_texto": "8/A2.0"
+  },
+  {
+   "x": 2404.5,
+   "y": 1400.3,
+   "img": "img_verif/no_burbujas_A4.0.png #2",
+   "no_es_burbuja": "WRITTEN reference in KEY NOTE 8 '... SEE 5/A4.0' (LVT/VCT transition) - text",
+   "detector": "set_texto burbujas[A4.0] + inventario DR0005",
+   "ref_texto": "5/A4.0"
+  },
+  {
+   "x": 2342.6,
+   "y": 1589.3,
+   "img": "img_verif/no_burbujas_A4.0.png #3",
+   "no_es_burbuja": "WRITTEN reference in KEY NOTE 15 '... DETAIL 4/A4.0 FOR TRENCHING DETAIL' - text",
+   "detector": "set_texto burbujas[A4.0] + inventario DR0006",
+   "ref_texto": "4/A4.0"
+  },
+  {
+   "x": 247.3,
+   "y": 1990.7,
+   "img": "img_verif/no_burbujas_A4.0.png #4",
+   "no_es_burbuja": "view title marker of 1/A4.0 FIXTURE PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0038"
+  },
+  {
+   "x": 1759.1,
+   "y": 2033.2,
+   "img": "img_verif/no_burbujas_A4.0.png #5",
+   "no_es_burbuja": "view title marker of 2/A4.0 ACCESSIBLE POS EV-51 (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0040"
+  },
+  {
+   "x": 1767.7,
+   "y": 1575.1,
+   "img": "img_verif/no_burbujas_A4.0.png #6",
+   "no_es_burbuja": "view title marker of 3/A4.0 TRANSITION STRIP DETAIL (TS-1) (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0043"
+  },
+  {
+   "x": 1702.0,
+   "y": 1248.1,
+   "img": "img_verif/no_burbujas_A4.0.png #7",
+   "no_es_burbuja": "view title marker of 4/A4.0 TRENCHING DETAIL (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0041"
+  },
+  {
+   "x": 1951.1,
+   "y": 837.5,
+   "img": "img_verif/no_burbujas_A4.0.png #8",
+   "no_es_burbuja": "view title marker of 5/A4.0 TRANSITION DETAIL (TS-2) (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0042"
+  },
+  {
+   "x": 1951.1,
+   "y": 576.1,
+   "img": "img_verif/no_burbujas_A4.0.png #9",
+   "no_es_burbuja": "view title marker of 6/A4.0 STOREFRONT TRIM DETAIL (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0044"
+  },
+  {
+   "x": 1517.9,
+   "y": 1991.1,
+   "img": "img_verif/no_burbujas_A4.0.png #10",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 1767.7,
+   "y": 1569.1,
+   "x1": 2028.1,
+   "y1": 1599.1,
+   "img": "img_verif/destinos_titulos.png #16",
+   "titulo": "3 TRANSITION STRIP DETAIL (TS-1)",
+   "nota": "destination view title (title bubble + title text) of 3/A4.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #16; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "3/A4.0"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 1702.0,
+   "y": 1242.1,
+   "x1": 1869.8,
+   "y1": 1272.1,
+   "img": "img_verif/destinos_titulos.png #17",
+   "titulo": "4 TRENCHING DETAIL",
+   "nota": "destination view title (title bubble + title text) of 4/A4.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #17; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "4/A4.0"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 1951.1,
+   "y": 831.5,
+   "x1": 2165.2,
+   "y1": 861.5,
+   "img": "img_verif/destinos_titulos.png #18",
+   "titulo": "5 TRANSITION DETAIL (TS-2)",
+   "nota": "destination view title (title bubble + title text) of 5/A4.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #18; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "5/A4.0"
+  },
+  {
+   "detalle_existe": "6",
+   "x": 1951.1,
+   "y": 570.1,
+   "x1": 2171.6,
+   "y1": 600.1,
+   "img": "img_verif/destinos_titulos.png #19",
+   "titulo": "6 STOREFRONT TRIM DETAIL",
+   "nota": "destination view title (title bubble + title text) of 6/A4.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #19; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "6/A4.0"
+  },
+  {
+   "x": 168.9,
+   "y": 1517.9,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A4.0.png #10",
+   "nota": "same ring as the entry at visible (1517.9, 1991.1): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "A5.0": [
+  {
+   "x": 417.9,
+   "y": 1264.4,
+   "img": "img_verif/burbujas_A5.0.png #0",
+   "n": "11",
+   "hoja": "A5.0",
+   "dibujo": "elevation arrow in 1/A5.0 ENLARGED TOILET PLAN at the drinking fountain (keynote 5) in the alcove north of TOILET 103",
+   "detector": "inventario DB0045"
+  },
+  {
+   "x": 585.8,
+   "y": 1766.0,
+   "img": "img_verif/burbujas_A5.0.png #1",
+   "n": "2",
+   "hoja": "A5.0",
+   "dibujo": "interior elevation marker in EXISTING ACCESS. TOILET 104 - TOP arrow (wall toward TOILET 103: water closet / grab bars)",
+   "detector": "inventario DB0048; set_texto burbujas[A5.0] mislabels this marker: n=4 @(565.3,1786.5), n=3 and n=5 @(585.8,1766.0), n=4 @(606.2,1786.5), bottom bubble missing; by eye ids are 2 top, 3 right, 4 bottom, 5 left"
+  },
+  {
+   "x": 606.2,
+   "y": 1786.5,
+   "img": "img_verif/burbujas_A5.0.png #2",
+   "n": "3",
+   "hoja": "A5.0",
+   "dibujo": "marker in TOILET 104 - RIGHT arrow (lavatory / mirror wall)",
+   "detector": "inventario DB0049; set_texto burbujas[A5.0] mislabels this marker: n=4 @(565.3,1786.5), n=3 and n=5 @(585.8,1766.0), n=4 @(606.2,1786.5), bottom bubble missing; by eye ids are 2 top, 3 right, 4 bottom, 5 left"
+  },
+  {
+   "x": 585.8,
+   "y": 1806.9,
+   "img": "img_verif/burbujas_A5.0.png #3",
+   "n": "4",
+   "hoja": "A5.0",
+   "dibujo": "marker in TOILET 104 - BOTTOM arrow (baby changing station / accessories wall)",
+   "detector": "inventario DB0046; set_texto burbujas[A5.0] mislabels this marker: n=4 @(565.3,1786.5), n=3 and n=5 @(585.8,1766.0), n=4 @(606.2,1786.5), bottom bubble missing; by eye ids are 2 top, 3 right, 4 bottom, 5 left"
+  },
+  {
+   "x": 565.3,
+   "y": 1786.5,
+   "img": "img_verif/burbujas_A5.0.png #4",
+   "n": "5",
+   "hoja": "A5.0",
+   "dibujo": "marker in TOILET 104 - LEFT arrow (water closet side wall, grab bars)",
+   "detector": "inventario DB0047; set_texto burbujas[A5.0] mislabels this marker: n=4 @(565.3,1786.5), n=3 and n=5 @(585.8,1766.0), n=4 @(606.2,1786.5), bottom bubble missing; by eye ids are 2 top, 3 right, 4 bottom, 5 left"
+  },
+  {
+   "x": 130.7,
+   "y": 2018.2,
+   "img": "img_verif/no_burbujas_A5.0.png #0",
+   "no_es_burbuja": "view title marker of 1/A5.0 ENLARGED TOILET PLAN (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0050"
+  },
+  {
+   "x": 767.0,
+   "y": 2018.2,
+   "img": "img_verif/no_burbujas_A5.0.png #1",
+   "no_es_burbuja": "view title marker of 2/A5.0 TOILET ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0051"
+  },
+  {
+   "x": 1315.4,
+   "y": 2018.2,
+   "img": "img_verif/no_burbujas_A5.0.png #2",
+   "no_es_burbuja": "view title marker of 3/A5.0 TOILET ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0052"
+  },
+  {
+   "x": 1754.9,
+   "y": 2018.2,
+   "img": "img_verif/no_burbujas_A5.0.png #3",
+   "no_es_burbuja": "view title marker of 4/A5.0 TOILET ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0053"
+  },
+  {
+   "x": 2338.9,
+   "y": 2018.2,
+   "img": "img_verif/no_burbujas_A5.0.png #4",
+   "no_es_burbuja": "view title marker of 5/A5.0 TOILET ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0054"
+  },
+  {
+   "x": 1143.3,
+   "y": 1298.0,
+   "img": "img_verif/no_burbujas_A5.0.png #5",
+   "no_es_burbuja": "view title marker of 6/A5.0 INTERIOR ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0056"
+  },
+  {
+   "x": 2059.3,
+   "y": 1298.0,
+   "img": "img_verif/no_burbujas_A5.0.png #6",
+   "no_es_burbuja": "view title marker of 7/A5.0 INTERIOR ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0057"
+  },
+  {
+   "x": 153.1,
+   "y": 887.4,
+   "img": "img_verif/no_burbujas_A5.0.png #7",
+   "no_es_burbuja": "view title marker of 8/A5.0 INTERIOR ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0060"
+  },
+  {
+   "x": 1116.5,
+   "y": 887.4,
+   "img": "img_verif/no_burbujas_A5.0.png #8",
+   "no_es_burbuja": "view title marker of 9/A5.0 INTERIOR ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0059"
+  },
+  {
+   "x": 1906.3,
+   "y": 887.4,
+   "img": "img_verif/no_burbujas_A5.0.png #9",
+   "no_es_burbuja": "view title marker of 10/A5.0 STOREFRONT ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0058"
+  },
+  {
+   "x": 767.0,
+   "y": 1569.1,
+   "img": "img_verif/no_burbujas_A5.0.png #10",
+   "no_es_burbuja": "view title marker of 11/A5.0 DRINKING FOUNTAIN ELEVATION (circle + divider, but it is the TITLE of the destination view, not a callout) - used as destination in _destinos",
+   "detector": "inventario DB0055"
+  },
+  {
+   "x": 677.7,
+   "y": 2018.6,
+   "img": "img_verif/no_burbujas_A5.0.png #11",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "set_texto": "indep_no_detectados"
+  },
+  {
+   "x": 315.5,
+   "y": 1750.9,
+   "img": "img_verif/no_burbujas_A5.0.png #12",
+   "no_es_burbuja": "TOILET ROOM KEYNOTE circle (number only, 1-13) - all small numbered circles in 1/A5.0 and 2-5/A5.0 are toilet keynotes",
+   "ojo": true
+  },
+  {
+   "x": 1490,
+   "y": 1401,
+   "img": "img_verif/no_burbujas_A5.0.png #13",
+   "no_es_burbuja": "text 'REFER TO SHEET A0.2 FOR ADD'L INFORMATION' (toilet general note 1; same at x1370/2021 y1982 in 3,4/A5.0 and 2233,1504 keynote 11, 2648,1060 in 7/A5.0) - sheet-level ADA reference, not a bubble",
+   "ojo": true,
+   "ref_texto": "A0.2 (sheet)"
+  },
+  {
+   "detalle_existe": "1",
+   "x": 130.7,
+   "y": 2012.3,
+   "x1": 333.6,
+   "y1": 2042.3,
+   "img": "img_verif/destinos_titulos.png #5",
+   "titulo": "1 ENLARGED TOILET PLAN",
+   "nota": "destination view title (title bubble + title text) of 1/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #5; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "1/A5.0"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 767.0,
+   "y": 2012.3,
+   "x1": 930.0,
+   "y1": 2042.3,
+   "img": "img_verif/destinos_titulos.png #6",
+   "titulo": "2 TOILET ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 2/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #6; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "2/A5.0"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 1315.4,
+   "y": 2012.3,
+   "x1": 1478.4,
+   "y1": 2042.3,
+   "img": "img_verif/destinos_titulos.png #7",
+   "titulo": "3 TOILET ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 3/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #7; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "3/A5.0"
+  },
+  {
+   "detalle_existe": "4",
+   "x": 1754.9,
+   "y": 2012.3,
+   "x1": 1917.9,
+   "y1": 2042.3,
+   "img": "img_verif/destinos_titulos.png #8",
+   "titulo": "4 TOILET ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 4/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #8; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "4/A5.0"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 2338.9,
+   "y": 2012.3,
+   "x1": 2501.8,
+   "y1": 2042.3,
+   "img": "img_verif/destinos_titulos.png #9",
+   "titulo": "5 TOILET ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 5/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #9; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "5/A5.0"
+  },
+  {
+   "detalle_existe": "6",
+   "x": 1143.3,
+   "y": 1292.0,
+   "x1": 1324.6,
+   "y1": 1322.0,
+   "img": "img_verif/destinos_titulos.png #10",
+   "titulo": "6 INTERIOR ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 6/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #10; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "6/A5.0"
+  },
+  {
+   "detalle_existe": "7",
+   "x": 2059.3,
+   "y": 1292.0,
+   "x1": 2240.6,
+   "y1": 1322.0,
+   "img": "img_verif/destinos_titulos.png #11",
+   "titulo": "7 INTERIOR ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 7/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #11; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "7/A5.0"
+  },
+  {
+   "detalle_existe": "8",
+   "x": 153.1,
+   "y": 881.4,
+   "x1": 334.4,
+   "y1": 911.4,
+   "img": "img_verif/destinos_titulos.png #12",
+   "titulo": "8 INTERIOR ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 8/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #12; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "8/A5.0"
+  },
+  {
+   "detalle_existe": "9",
+   "x": 1116.5,
+   "y": 881.4,
+   "x1": 1297.9,
+   "y1": 911.4,
+   "img": "img_verif/destinos_titulos.png #13",
+   "titulo": "9 INTERIOR ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 9/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #13; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "9/A5.0"
+  },
+  {
+   "detalle_existe": "10",
+   "x": 1906.3,
+   "y": 881.4,
+   "x1": 2117.9,
+   "y1": 911.4,
+   "img": "img_verif/destinos_titulos.png #14",
+   "titulo": "10 STOREFRONT ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 10/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #14; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "10/A5.0"
+  },
+  {
+   "detalle_existe": "11",
+   "x": 767.0,
+   "y": 1563.1,
+   "x1": 1027.3,
+   "y1": 1593.1,
+   "img": "img_verif/destinos_titulos.png #15",
+   "titulo": "11 DRINKING FOUNTAIN ELEVATION",
+   "nota": "destination view title (title bubble + title text) of 11/A5.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #15; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "11/A5.0"
+  },
+  {
+   "x": 141.4,
+   "y": 677.7,
+   "frame": "set_texto raw",
+   "no_es_burbuja": "north arrow (set_texto indep_no_detectados)",
+   "img": "img_verif/no_burbujas_A5.0.png #11",
+   "nota": "same ring as the entry at visible (677.7, 2018.6): set_texto indep_no_detectados stores it UNROTATED (x_u, y_u) although the sheet is labelled frame 'visible'; this entry carries the detector's own coordinates so the gate can match it"
+  }
+ ],
+ "E0.0": [],
+ "E1.0": [
+  {
+   "x": 1990,
+   "y": 1112,
+   "img": "img_verif/no_burbujas_EP.png #0",
+   "no_es_burbuja": "SHX text, LIGHTING PLAN KEYED NOTES 2 and 8 'REFER TO DETAIL #2 ON THIS SHEET' -> 2/E1.0 TIME CLOCK CONTROL DIAGRAM; no drawn bubble on E1.0 (hexagons = keyed notes; circles 1/2 = view titles)",
+   "ojo": true,
+   "ref_texto": "2/E1.0"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 595.3,
+   "y": 1832.4,
+   "x1": 1058.0,
+   "y1": 1874.4,
+   "img": "img_verif/destinos_titulos.png #23",
+   "titulo": "2 TIME CLOCK CONTROL DIAGRAM",
+   "nota": "destination view title (title bubble + title text) of 2/E1.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #23; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "2/E1.0"
+  }
+ ],
+ "E2.0": [
+  {
+   "x": 1330,
+   "y": 1020,
+   "img": "img_verif/no_burbujas_EP.png #1",
+   "no_es_burbuja": "SHX text, POWER AND LOW VOLTAGE KEYED NOTES 3 / 23 'REFER TO DETAIL 2 / DETAIL 3 THIS SHEET' -> 2/E2.0 TELEPHONE BOARD, 3/E2.0 WEBOOST ANTENNA; no drawn bubble on E2.0",
+   "ojo": true,
+   "ref_texto": "2/E2.0, 3/E2.0"
+  },
+  {
+   "detalle_existe": "2",
+   "x": 353.0,
+   "y": 800.7,
+   "x1": 653.6,
+   "y1": 842.7,
+   "img": "img_verif/destinos_titulos.png #24",
+   "titulo": "2 TELEPHONE BOARD",
+   "nota": "destination view title (title bubble + title text) of 2/E2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #24; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "2/E2.0"
+  },
+  {
+   "detalle_existe": "3",
+   "x": 188.5,
+   "y": 1665.0,
+   "x1": 757.3,
+   "y1": 1707.0,
+   "img": "img_verif/destinos_titulos.png #25",
+   "titulo": "3 WEBOOST ANTENNA ROOF ATTACHMENT",
+   "nota": "destination view title (title bubble + title text) of 3/E2.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #25; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "3/E2.0"
+  }
+ ],
+ "E2.1": [],
+ "E3.0": [],
+ "M0.0": [
+  {
+   "detalle_existe": "1",
+   "x": 1926.1,
+   "y": 1867.0,
+   "x1": 2432.1,
+   "y1": 1909.0,
+   "img": "img_verif/destinos_titulos.png #22",
+   "titulo": "1 TYP. DIFFUSER/DUCT CONNECTIONS",
+   "nota": "destination view title (title bubble + title text) of 1/M0.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #22; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "1/M0.0"
+  }
+ ],
+ "M1.0": [
+  {
+   "x": 1823.7,
+   "y": 1160.9,
+   "img": "img_verif/burbujas_M1.0.png #0",
+   "n": "1",
+   "hoja": "M0.0",
+   "dibujo": "bubble in the header of the GRILLE AND DIFFUSER SCHEDULE (diffuser connection detail)",
+   "ojo": true
+  }
+ ],
+ "M2.0": [],
+ "P1.0": [
+  {
+   "x": 2450,
+   "y": 1600,
+   "img": "img_verif/no_burbujas_EP.png #2",
+   "no_es_burbuja": "SHX text in ELECTRIC WATER HEATER SCHEDULE remarks 'REFER TO DETAIL 5/P1.0 ...' -> 5/P1.0 WATER HEATER DETAIL; no drawn bubble on P1.0 (hexagons = key notes)",
+   "ojo": true,
+   "ref_texto": "5/P1.0"
+  },
+  {
+   "detalle_existe": "5",
+   "x": 698.2,
+   "y": 1576.6,
+   "x1": 1046.3,
+   "y1": 1618.6,
+   "img": "img_verif/destinos_titulos.png #26",
+   "titulo": "5 WATER HEATER DETAIL",
+   "nota": "destination view title (title bubble + title text) of 5/P1.0, located from the sheet text and re-opened by eye on img_verif/destinos_titulos.png #26; visible-frame pt; the gate marks the rectangle (x-20, y-12, x1, y1)",
+   "destino_de": "5/P1.0"
+  }
+ ],
+ "_destinos": {
+  "6/A2.0": {
+   "detalle_existe": true,
+   "hoja": "A2.0",
+   "x": 1850,
+   "y": 965,
+   "x1": 2255,
+   "y1": 1225,
+   "title": "6 WALL CONNECTION AT DEMISING",
+   "titulo_burbuja_xy": [
+    1885.1,
+    1204.8
+   ],
+   "img": "img_verif/destinos.png #0",
+   "burbujas_dentro": [],
+   "gobierna": "OURS - demising connection: new metal-stud partition with 5/8\" Type 'X' gyp. bd. butting the existing wall to remain (existing gyp. bd. + METAL CORNER BEAD at the junction); stud size per WALL STUD LIMITING HEIGHTS table A2.0; 'maintain any fire ratings (V.I.F.)' on the existing wall. Text refs only (stud table / 'referenced details sheet A2.0'), no further bubble."
+  },
+  "4/A2.0": {
+   "detalle_existe": true,
+   "hoja": "A2.0",
+   "x": 1850,
+   "y": 1485,
+   "x1": 2255,
+   "y1": 1790,
+   "title": "4 TYPICAL WALL AND CEILING DETAIL",
+   "titulo_burbuja_xy": [
+    1885.1,
+    1766.0
+   ],
+   "img": "img_verif/destinos.png #1",
+   "burbujas_dentro": [
+    "text 'SEE RCP' (A3.0) for suspended acoustical ceiling -> RCP note 13 -> 3/A3.0 (ACT, not ours)"
+   ],
+   "gobierna": "OURS - wall head / ceiling: 5/8\" Type 'X' gyp. over metal studs to 6\" (TYP) above the suspended acoustical ceiling; top track secured to studs w/ #8 screw each flange; brace to structure alternate sides with metal studs @ 8'-0\" o.c. max, match wall stud size & gauge (3-5/8\" 20 ga min), bent leg fastened to top track, max brace length 25'-0\". Ceiling wall angle / ACT and insulation = not ours."
+  },
+  "3/A2.0": {
+   "detalle_existe": true,
+   "hoja": "A2.0",
+   "x": 1850,
+   "y": 1790,
+   "x1": 2255,
+   "y1": 2050,
+   "title": "3 TYPICAL WALL - BASE DETAIL",
+   "titulo_burbuja_xy": [
+    1885.1,
+    2027.9
+   ],
+   "img": "img_verif/destinos.png #2",
+   "burbujas_dentro": [],
+   "gobierna": "OURS - wall base: 5/8\" Type 'X' gypsum board each side over metal studs (size/spacing per metal stud table); bottom track to slab with power-driven fasteners @ 16\" o.c. max ICC-ESR-1752 (fasteners excluded from our count). Wall base per room finish schedule and insulation = not ours."
+  },
+  "5/A2.0": {
+   "detalle_existe": true,
+   "hoja": "A2.0",
+   "x": 1850,
+   "y": 1225,
+   "x1": 2255,
+   "y1": 1485,
+   "title": "5 NON-RATED COLUMN FURRING",
+   "titulo_burbuja_xy": [
+    1885.1,
+    1461.6
+   ],
+   "img": "img_verif/destinos.png #3",
+   "burbujas_dentro": [],
+   "gobierna": "OURS - column furring: existing column furred all sides with 2-1/2\" metal studs + 5/8\" Type 'X' gyp. bd. one side (typ. all sides), corner 'L' bead, tape & finish smooth; A2.0 key note 1: furring to 6\" above ceiling, size consistent and aligned. Applies to the 2 storefront columns (SIM)."
+  },
+  "8/A2.0": {
+   "detalle_existe": true,
+   "hoja": "A2.0",
+   "x": 1850,
+   "y": 430,
+   "x1": 2255,
+   "y1": 705,
+   "title": "8 BACKING DETAIL FOR MISC. EQUIP.",
+   "titulo_burbuja_xy": [
+    1885.1,
+    680.3
+   ],
+   "img": "img_verif/destinos.png #4",
+   "burbujas_dentro": [],
+   "gobierna": "OURS - metal backing: 16 ga x 6\" x 1-1/2\" unpunched metal track, legs clipped & bent at each stud, (3) #10 screws per stud, min 3 studs, extend 1 bay beyond cabinet/equipment; 16 ga studs @ 16\" o.c. at backing; W = max 100 lb per stud. Reached only by TEXT (A2.0 key note 6, A4.0 key note 1); no drawn bubble."
+  },
+  "1/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 110,
+   "y": 1080,
+   "x1": 720,
+   "y1": 2045,
+   "title": "1 ENLARGED TOILET PLAN",
+   "titulo_burbuja_xy": [
+    130.7,
+    2018.3
+   ],
+   "img": "img_verif/destinos.png #5",
+   "burbujas_dentro": [
+    "11/A5.0 (drinking fountain elevation)",
+    "2/A5.0, 3/A5.0, 4/A5.0, 5/A5.0 (elevation marker in TOILET 104)"
+   ],
+   "gobierna": "MOSTLY NOT OURS - existing toilet rooms 103/104 + hallway 102: ADA clearances, existing fixtures/accessories (V.I.F.), toilet keynotes. Only use for our trade: plan dimensions of the toilet/hallway walls (wall types come from the W-tags on A2.0: W2 / W4 = existing to remain, patch & repair)."
+  },
+  "2/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 740,
+   "y": 1590,
+   "x1": 1290,
+   "y1": 2045,
+   "title": "2 TOILET ELEVATION",
+   "titulo_burbuja_xy": [
+    767.0,
+    2018.3
+   ],
+   "img": "img_verif/destinos.png #6",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - ADA mounting heights of existing water closet / grab bars (V.I.F.), FRP-1, B-2 base; existing B.O. ceiling (V.I.F.)."
+  },
+  "3/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 1290,
+   "y": 1590,
+   "x1": 1740,
+   "y1": 2045,
+   "title": "3 TOILET ELEVATION",
+   "titulo_burbuja_xy": [
+    1315.4,
+    2018.3
+   ],
+   "img": "img_verif/destinos.png #7",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - lavatory / mirror ADA mounting heights, FRP-1, clear floor space (text 'SEE SHT. A0.2')."
+  },
+  "4/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 1740,
+   "y": 1590,
+   "x1": 2320,
+   "y1": 2045,
+   "title": "4 TOILET ELEVATION",
+   "titulo_burbuja_xy": [
+    1754.9,
+    2018.3
+   ],
+   "img": "img_verif/destinos.png #8",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - accessories / baby changing station ADA heights, existing B.O. ceiling 9'-0\" (V.I.F.), FRP-1 (text 'SEE SHT. A0.2')."
+  },
+  "5/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 2320,
+   "y": 1590,
+   "x1": 2750,
+   "y1": 2045,
+   "title": "5 TOILET ELEVATION",
+   "titulo_burbuja_xy": [
+    2338.9,
+    2018.3
+   ],
+   "img": "img_verif/destinos.png #9",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - water closet side wall grab bars ADA heights, FRP-1."
+  },
+  "6/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 1120,
+   "y": 920,
+   "x1": 1990,
+   "y1": 1315,
+   "title": "6 INTERIOR ELEVATION",
+   "titulo_burbuja_xy": [
+    1143.3,
+    1298.0
+   ],
+   "img": "img_verif/destinos.png #10",
+   "burbujas_dentro": [
+    "unnumbered BLOCKING LEGEND - SALES WALL FIXTURES (A5.0 top-left) via INTERIOR ELEVATION NOTE 1 'PROVIDE BLOCKING BEHIND FIXTURES. SEE BLOCKING LEGEND' (text)"
+   ],
+   "gobierna": "OURS (backing) - MOBILE 1 / ENTERTAINMENT wall: Discover wall fixtures EV-10-6 / EV-44 need blocking per BLOCKING LEGEND: '6\" SHEET METAL BLOCKING STRAPPING FOR FIXTURE ATTACHMENT' (EV-44/EV-45) = ours; '8\" HIGH SURFACE MOUNTED 3/4\" PLYWOOD' (EV-10-6) = Div 06, not ours. Elevation prints 12'-0\" TO B.O. CEILING. Millwork / fire extinguisher not ours."
+  },
+  "7/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 2030,
+   "y": 920,
+   "x1": 2700,
+   "y1": 1315,
+   "title": "7 INTERIOR ELEVATION",
+   "titulo_burbuja_xy": [
+    2059.3,
+    1298.0
+   ],
+   "img": "img_verif/destinos.png #11",
+   "burbujas_dentro": [
+    "text 'SEE A0.2' for tactile exit sign"
+   ],
+   "gobierna": "NOT OURS - interior face of existing storefront to remain (clean like new), exit sign, fire extinguisher."
+  },
+  "8/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 110,
+   "y": 520,
+   "x1": 1010,
+   "y1": 905,
+   "title": "8 INTERIOR ELEVATION",
+   "titulo_burbuja_xy": [
+    153.1,
+    887.4
+   ],
+   "img": "img_verif/destinos.png #12",
+   "burbujas_dentro": [
+    "unnumbered BLOCKING LEGEND - SALES WALL FIXTURES via interior elevation note 1 (text)"
+   ],
+   "gobierna": "OURS (backing) - INTERNET / MOBILE 2 wall: EV-10-6, EV-45, EV-44 fixture bays; 6\" sheet-metal blocking strap = ours, 3/4\" plywood = Div 06; 12'-0\" TO B.O. CEILING printed."
+  },
+  "9/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 1080,
+   "y": 520,
+   "x1": 1600,
+   "y1": 905,
+   "title": "9 INTERIOR ELEVATION",
+   "titulo_burbuja_xy": [
+    1116.5,
+    887.4
+   ],
+   "img": "img_verif/destinos.png #13",
+   "burbujas_dentro": [],
+   "gobierna": "PARTLY OURS - STORAGE/RETAIL partition elevation: wall-mounted graphic panel GF-14496 (backing per A2.0 key note 6 / 8/A2.0), door 101, 12'-0\" TO B.O. CEILING printed. Graphic panel itself not ours."
+  },
+  "10/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 1860,
+   "y": 200,
+   "x1": 2700,
+   "y1": 905,
+   "title": "10 STOREFRONT ELEVATION",
+   "titulo_burbuja_xy": [
+    1906.3,
+    887.4
+   ],
+   "img": "img_verif/destinos.png #14",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - exterior storefront elevation: existing construction/glazing to remain, tenant sign under separate permit."
+  },
+  "11/A5.0": {
+   "detalle_existe": true,
+   "hoja": "A5.0",
+   "x": 740,
+   "y": 1290,
+   "x1": 1110,
+   "y1": 1590,
+   "title": "11 DRINKING FOUNTAIN ELEVATION",
+   "titulo_burbuja_xy": [
+    767.0,
+    1569.1
+   ],
+   "img": "img_verif/destinos.png #15",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - high-low drinking fountain ADA heights, FRP-1, cane apron; only backing for the wall-hung fountain falls under A2.0 key note 6 / 8/A2.0."
+  },
+  "3/A4.0": {
+   "detalle_existe": true,
+   "hoja": "A4.0",
+   "x": 1690,
+   "y": 1270,
+   "x1": 2260,
+   "y1": 1600,
+   "title": "3 TRANSITION STRIP DETAIL (TS-1)",
+   "titulo_burbuja_xy": [
+    1767.7,
+    1575.1
+   ],
+   "img": "img_verif/destinos.png #16",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - flooring transition TS-1 / walk-off mat at entry."
+  },
+  "4/A4.0": {
+   "detalle_existe": true,
+   "hoja": "A4.0",
+   "x": 1690,
+   "y": 860,
+   "x1": 2260,
+   "y1": 1270,
+   "title": "4 TRENCHING DETAIL",
+   "titulo_burbuja_xy": [
+    1702.0,
+    1248.1
+   ],
+   "img": "img_verif/destinos.png #17",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - slab trenching for conduit (concrete / electrical)."
+  },
+  "5/A4.0": {
+   "detalle_existe": true,
+   "hoja": "A4.0",
+   "x": 1690,
+   "y": 600,
+   "x1": 2260,
+   "y1": 860,
+   "title": "5 TRANSITION DETAIL (TS-2)",
+   "titulo_burbuja_xy": [
+    1951.1,
+    837.5
+   ],
+   "img": "img_verif/destinos.png #18",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - LVT/VCT transition TS-2 at door 101."
+  },
+  "6/A4.0": {
+   "detalle_existe": true,
+   "hoja": "A4.0",
+   "x": 1690,
+   "y": 290,
+   "x1": 2260,
+   "y1": 600,
+   "title": "6 STOREFRONT TRIM DETAIL",
+   "titulo_burbuja_xy": [
+    1951.1,
+    576.1
+   ],
+   "img": "img_verif/destinos.png #19",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - flooring trim piece at existing storefront frame."
+  },
+  "3/A3.0": {
+   "detalle_existe": true,
+   "hoja": "A3.0",
+   "x": 430,
+   "y": 700,
+   "x1": 1000,
+   "y1": 1190,
+   "title": "3 SUSPENDED ACOUSTICAL CEILING",
+   "titulo_burbuja_xy": [
+    469.4,
+    1168.1
+   ],
+   "img": "img_verif/destinos.png #20",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - suspended acoustical ceiling grid, hanger and seismic bracing wires (ACT is another bid package)."
+  },
+  "4/A3.0": {
+   "detalle_existe": true,
+   "hoja": "A3.0",
+   "x": 430,
+   "y": 120,
+   "x1": 1000,
+   "y1": 630,
+   "title": "4 LIGHT FIXTURE AT SUSPENDED CEILING",
+   "titulo_burbuja_xy": [
+    469.4,
+    612.3
+   ],
+   "img": "img_verif/destinos.png #21",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - light fixture support wires in suspended (ACT) grid."
+  },
+  "1/M0.0": {
+   "detalle_existe": true,
+   "hoja": "M0.0",
+   "x": 1880,
+   "y": 1540,
+   "x1": 2500,
+   "y1": 1900,
+   "title": "1 TYP. DIFFUSER/DUCT CONNECTIONS",
+   "titulo_burbuja_xy": [
+    1934.1,
+    1881.0
+   ],
+   "img": "img_verif/destinos.png #22",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - HVAC diffuser/duct connection."
+  },
+  "2/E1.0": {
+   "detalle_existe": true,
+   "hoja": "E1.0",
+   "x": 540,
+   "y": 1560,
+   "x1": 1300,
+   "y1": 1870,
+   "title": "2 TIME CLOCK CONTROL DIAGRAM",
+   "titulo_burbuja_xy": [
+    603.3,
+    1846.4
+   ],
+   "img": "img_verif/destinos.png #23",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - electrical time clock control diagram."
+  },
+  "2/E2.0": {
+   "detalle_existe": true,
+   "hoja": "E2.0",
+   "x": 330,
+   "y": 130,
+   "x1": 900,
+   "y1": 830,
+   "title": "2 TELEPHONE BOARD",
+   "titulo_burbuja_xy": [
+    361.0,
+    814.7
+   ],
+   "img": "img_verif/destinos.png #24",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - telephone board: fire-treated 3/4\" plywood backboard (Div 06) + low-voltage."
+  },
+  "3/E2.0": {
+   "detalle_existe": true,
+   "hoja": "E2.0",
+   "x": 180,
+   "y": 880,
+   "x1": 800,
+   "y1": 1700,
+   "title": "3 WEBOOST ANTENNA ROOF ATTACHMENT",
+   "titulo_burbuja_xy": [
+    196.5,
+    1679.0
+   ],
+   "img": "img_verif/destinos.png #25",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - WeBoost antenna roof attachment (low voltage / roofing)."
+  },
+  "5/P1.0": {
+   "detalle_existe": true,
+   "hoja": "P1.0",
+   "x": 640,
+   "y": 1150,
+   "x1": 1330,
+   "y1": 1610,
+   "title": "5 WATER HEATER DETAIL",
+   "titulo_burbuja_xy": [
+    706.2,
+    1590.6
+   ],
+   "img": "img_verif/destinos.png #26",
+   "burbujas_dentro": [],
+   "gobierna": "NOT OURS - water heater on shelf above mop sink (plumbing)."
+  }
+ }
+}

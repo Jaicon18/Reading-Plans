@@ -625,3 +625,12 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 
 ## BE-GK02 (10-nov, Grand Kia, inventario)
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
+
+
+## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
+- BE-XF01 (conducta): BuildingConnected 'Download All' en Chromium headless detrás del proxy: SignatureDoesNotMatch de S3; se intercepta la URL del archivo y se baja con curl (cache_proyectos/herramientas/bc_descargar.js).
+- BE-XF02 (conducta): brief de lectura con clip de get_pixmap en espacio sin rotar: en hojas rotation 270 PyMuPDF toma el clip en pt VISIBLES; todo recorte se reabre (U-118).
+- BE-XF03 (programa): CE_RCP_CUARTOS leía como cuartos números que no lo son ('600 S 162' designator de acero, herraje '200D'): disposición not_a_room con motivo, N/HOJA e imagen. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF04 (programa): BE-CF04 'sin walls de madera en walls[]' caía en BE-CR25 (vacío) en un set sin madera: wood_walls_none_reason con hoja = PASS. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF05 (programa): RX_HOJA_CONCRETA y la cita de altura de CE_A2_ALTURAS exigían hoja de dos decimales (A2.01): A0.1 / A2.0 daban 'sin hoja'. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
+- BE-XF06 (programa): CC-R12 con 0 walls de largo Y altura impresos fallaba por plausibilidad: se declara N/A con los walls de largo impreso. Arreglo en el skill v81cf82 + test test_xf_hojas_un_decimal.
