@@ -1,13 +1,13 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 08:28 PST",
- "fecha_iso": "2026-11-11T16:28:11.824364+00:00",
+ "fecha_california": "2026-11-11 13:54 PST",
+ "fecha_iso": "2026-11-11T21:54:35.184794+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 213,
-  "AMBER": 0,
+  "PASS": 216,
+  "AMBER": 1,
   "FAIL": 0
  },
  "chequeos": [
@@ -348,7 +348,8 @@
    "reglas": [
     "CR-R15-CONTORNO",
     "U-159",
-    "U-160"
+    "U-160",
+    "U-177"
    ],
    "descripcion": "rev15 (revisión completa rev14 F04 / F05): cada polígono de cielo y cada EXCLUDED coincide con las líneas de su hoja (cobertura de borde >= 60 %) y, en hojas ampliadas A6 / A7, cae en la vista RCP (no en la vista PLAN)",
    "estado": "PASS",
@@ -497,7 +498,7 @@
    "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
    "estado": "PASS",
    "evidencia": [
-    "reglas.py OK (918 reglas)"
+    "reglas.py OK (925 reglas)"
    ],
    "plausibilidad": "OK"
   },
@@ -619,6 +620,20 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CE_GAUGE_IMPRESO",
+   "reglas": [
+    "BE-CR34",
+    "U-171",
+    "U-177"
+   ],
+   "descripcion": "BE-CR34: 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE (MIN. GAUGE) impreso en el set = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "STUD SCHEDULE impreso en ninguna hoja; ningún gauge declarado no impreso"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CE_MS_PRODUCTO_IMPRESO",
    "reglas": [
     "U-177"
@@ -652,6 +667,24 @@
    "estado": "PASS",
    "evidencia": [
     "0 RFI abiertos"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_PROTOCOLO_3H",
+   "reglas": [
+    "U-184"
+   ],
+   "descripcion": "U-184 'bien a la primera en 2-3 h': auditoría U-181 fechada antes de la primera subida, H-A / H-B dentro de las lecturas, Excel / PDF de markups con hash producido por la cadena (sello + bitácora, nada a mano: CR rev18b), <= 2 corridas finales de compuerta y TIEMPOS.md con las corridas contadas",
+   "estado": "AMBER",
+   "evidencia": [
+    "entrega con primera subida 2026-11-11T16:25:00+00:00 anterior a U-184: no se re-abre (U-180 (4) / U-184 (6))",
+    "(1) sin auditoría independiente U-181 FECHADA en Auditoria/ (informe con 'YYYY-MM-DD HH:MM' en el encabezado)",
+    "(2) TIEMPOS.md no registra H-A / H-B dentro del paso de lecturas (U-184 (1): van con las lecturas A / B, no después)",
+    "(3) sin bitácora de la cadena (bitacora.jsonl): no se puede probar que los archivos salieron de la cadena",
+    "(4) 3 corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))",
+    "(5) TIEMPOS.md sin 'corridas de compuerta: N' (U-184 (7))",
+    "3 corrida(s) final(es) sobre estos archivos, 3 en la rev"
    ],
    "plausibilidad": "OK"
   },
@@ -2276,6 +2309,32 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CB_U_184_ELEV",
+   "reglas": [
+    "U-184",
+    "U-184-ELEV"
+   ],
+   "descripcion": "U-184 (4) (CR rev19 east eave): una altura tomada de una ELEVACIÓN vale solo si en PLANTA se comprueba que el wall está en ese plano frontal: wall con height_source / height_op que cita una elevación sin 'height_plan_check' (N/HOJA de planta) = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "4 walls revisados: alturas tomadas de elevación (0) comprobadas en planta"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_184_EXCL",
+   "reglas": [
+    "U-184",
+    "U-184-EXCL"
+   ],
+   "descripcion": "U-184 (4) / U-159: una exclusión de ALCANCE (F&B / tenant / N.I.C. / by others / owner) vale solo para caras NO rated: su motivo dice 'non-rated' (o que la membrana rated se carga aparte); exclusión de alcance sin revisar el rating = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "exclusiones de alcance con el rating revisado"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CB_U_174",
    "reglas": [
     "U-174"
@@ -3134,8 +3193,8 @@
    "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92"
   }
  },
- "skill_version": "v81cf91",
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31",
+ "skill_version": "v81cf94",
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01)",
  "vigentes": {
   "pdf": {
    "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",

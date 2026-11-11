@@ -7557,6 +7557,50 @@
     "archivo": "take-off:tools/test_comparar_alturas.py",
     "token": "test_be_coord01_ids_csv_cr"
    }
+  },
+  {
+   "id": "BE-CR32",
+   "origen": "CR City Hotel rev19 (unión v81cf91): el parser BE-GK28 tomaba la medición vectorial de comprobación en vez de la cota impresa (L4 8'-11 1/4\" leído 8.94)",
+   "texto_corto": "en la fuente de altura, 'printed <ft-in>' seguido de cross-check / check / verified manda la cota IMPRESA; la medición vectorial solo comprueba",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/revision_markups.py::altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr32_impresa_sobre_crosscheck"
+   }
+  },
+  {
+   "id": "BE-CR33",
+   "origen": "CR City Hotel rev19: comparar_alturas no reconocía hojas con punto (A7.05, 4/A5.05) en height_diff_reason y exigía motivo a TODOS los renglones de un type con dos alturas",
+   "texto_corto": "height_diff_reason con N/HOJA acepta hojas con punto / guion; en el cruce cuarto-type los renglones con motivo impreso quedan explicados y falla solo si los renglones SIN motivo tienen alturas distintas",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::reglas_fisicas",
+    "take-off:tools/comparar_alturas.py::cruce_cuartos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr33_cruce_tipo_explicado"
+   }
+  },
+  {
+   "id": "BE-CR34",
+   "origen": "CR City Hotel rev19: el renglón de soffit studs y el RFI-30 decían 'gauge not printed' y A0.06 imprime STUD SCHEDULE 'STUD DEPTH 2 1/2\" MIN. GAUGE 25'",
+   "texto_corto": "antes de declarar un gauge no impreso se barre el set por STUD SCHEDULE / MIN. GAUGE; 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE impreso = FAIL (U-171)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_gauge_impreso",
+    "take-off:tools/compuerta_entrega.py::gauge_impreso_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cr34_gauge_impreso"
+   }
   }
  ]
 }

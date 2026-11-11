@@ -689,3 +689,8 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 
 ## BE-COORD01 — COORDINACIÓN (11-nov, CSV de Bluebeam de CR rev19)
 - BE-COORD01 (programa): cache_proyectos/herramientas/comparar_alturas.py (copia vieja) y el skill daban 'NO WALL ID' o un pedazo del ID ('TO-XW.6.3-L2-03 A' -> 'L2-03') con un CSV de Bluebeam que solo trae la columna ID. Arreglo: comparar_alturas.id_nm decodifica el /NM completo (TO-, %2F, ~n, -BOARD) y buscar empareja la cara A / B con su wall; la copia de herramientas = la del skill vigente. Prueba: test_comparar_alturas.py::test_be_coord01_ids_csv_cr con el CSV real (cache_proyectos/herramientas/tests/cr_rev19_markups.csv: 1,026 markups con Depth, 0 sin Wall ID).
+
+## BE-CR32..BE-CR34 — CR City Hotel rev19 (11-nov, unidas en v81cf95)
+- BE-CR32 (programa): el parser de altura impresa (revision_markups.altura_impresa) tomaba la comprobación vectorial en vez de la cota impresa ('printed <cota>' seguido de cross-check). Test test_hoja_sufijo::test_be_cr32_impresa_sobre_crosscheck.
+- BE-CR33 (programa): comparar_alturas no reconocía hojas con punto / guion en height_diff_reason (A7.05, 4/A5.05) y el cruce cuarto-type exigía motivo a todos los renglones. Tests test_comparar_alturas::test_be_cr33_*.
+- BE-CR34 (programa): 'gauge not printed' en el Material Summary o en un RFI con un STUD SCHEDULE (MIN. GAUGE) impreso en el set (A0.06) = FAIL: CE_GAUGE_IMPRESA (U-171). Test test_compuerta_entrega::test_be_cr34_gauge_impreso.
