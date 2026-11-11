@@ -33,3 +33,4 @@ Horas reales escritas al empezar / terminar cada paso (work/tiempos.log, `TZ=Ame
 
 - corridas de compuerta rev2: 10 (1 cortada al llegar la auditoría, 1 colgada 43 min, 1 cortada por re-armado de la GUIA; 3 ROJAS; 4 VERDES). El TIEMPOS.md dentro de la entrega rev2 dice 9: no contó la corrida 1 cortada (08:48-09:29).
 - Presupuesto U-180 (<= 2 h por ronda de corrección): rev2 lo pasó; causas: cuelgue de 43 min (BE-GK35), 6 re-verificaciones de la auditoría con hallazgos reales, 2 cambios de versión del skill (v81cf92 -> v81cf94) y la subida de 2,502 archivos sueltos de Auditoria/ (~13 por minuto).
+- NOTA: TIEMPOS.md de la entrega rev2 dice 9 corridas; real = 10 (corrida 1 cortada 08:48-09:29). No se re-arma rev2 (COORDINACIÓN, U-180 (4) / U-177); va a Auditoria/HISTORIAL_CAMBIOS solo si hay una revisión siguiente.
