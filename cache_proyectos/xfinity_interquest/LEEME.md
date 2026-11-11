@@ -6,3 +6,4 @@
 - Drive bid set: Projects › "Xfinity - Interquest, Colorado Springs, CO (BCI National) 11-13-26" (id 1j-XN0BxYIHRUtkQm1fxaCFgVqRmostin).
 - Descarga: cache_proyectos/herramientas/bc_descargar.js (BE-XF01: Download All por URL S3 interceptada + curl).
 - Reporta a COORDINACIÓN (session_01BLzQaGL6Hvg3oNXm79RWvR).
+- BE-XF02 (10-nov, error mío en el brief de lectura): dije que get_pixmap(clip=) va en espacio sin rotar (multiplicar por derotation_matrix). Falso: en hojas con rotation 270 PyMuPDF toma el clip en pt VISIBLES (prueba: 'STORAGE' de A2.0, clip visible = texto, clip derotado = blanco). Lo encontró el subagente de burbujas. Arreglo: brief corregido y aviso a las lecturas A/B para regenerar recortes; regla para todos los proyectos: el brief común dice "clip = rect visible" y todo recorte se reabre y se verifica (U-118). Va al registro con la próxima versión del skill.
