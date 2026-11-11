@@ -169,8 +169,29 @@ def versiones_unicas():
     assert V.revisar_versiones_unicas(d) == []
 
 
+def zip_200_bexf08():
+    """BE-XF08 (Xfinity 11-nov): v81cf86 se publicó con 208 archivos porque verificar_version se corrió sobre la CARPETA (el límite
+    solo se contaba en un .zip). Carpeta con 200 archivos = FAIL; 199 = OK; zip vigente de INDICE con 200 archivos = FAIL."""
+    d = tempfile.mkdtemp()
+    sk = os.path.join(d, "take-off-metal-frame-drywall")
+    os.makedirs(os.path.join(sk, "tools"))
+    open(os.path.join(sk, "SKILL.md"), "w").write("---\nname: a\ndescription: b\n---\n")
+    for i in range(198):
+        open(os.path.join(sk, "tools", f"t{i}.py"), "w").write("x")
+    assert V.revisar_zip(d) == [], V.revisar_zip(d)                 # 199 archivos
+    open(os.path.join(sk, "tools", "t198.py"), "w").write("x")
+    assert any("BE-XF08" in x for x in V.revisar_zip(d)), "200 archivos en la carpeta debe fallar"
+    a = tempfile.mkdtemp()
+    open(os.path.join(a, "INDICE.md"), "w").write("**VERSIÓN VIGENTE PARA EL PRÓXIMO PROYECTO: la última unida (hoy v9y = algo)**\n")
+    with zipfile.ZipFile(os.path.join(a, "take-off-metal-frame-drywall_v9y_P_2026-11-11.zip"), "w") as z:
+        z.writestr("take-off-metal-frame-drywall/SKILL.md", "---\nname: a\ndescription: b\n---\n")
+        for i in range(199):
+            z.writestr(f"take-off-metal-frame-drywall/tools/t{i}.py", "x")
+    assert any("BE-XF08" in x for x in V.revisar_indice(a)), "zip vigente con 200 archivos debe fallar"
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

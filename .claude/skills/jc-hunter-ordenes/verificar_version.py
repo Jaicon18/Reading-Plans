@@ -164,8 +164,14 @@ def revisar_registro(fuente, ordenes_dir, cache_dir=None):
 
 
 def revisar_zip(p):
-    """U-020 -> lista de faltas del zip del skill."""
+    """U-020 -> lista de faltas del zip del skill. BE-XF08 (Xfinity 11-nov, v81cf86 publicada con 208 archivos): con una CARPETA
+    candidata también se cuentan los archivos (antes solo se contaban en un .zip y la carpeta pasaba); 200 o más = FAIL."""
     if not zipfile.is_zipfile(p):
+        if os.path.isdir(p):
+            base = p if os.path.isfile(os.path.join(p, "SKILL.md")) else os.path.join(p, "take-off-metal-frame-drywall")
+            n = sum(len([f for f in fs]) for r, _d, fs in os.walk(base) if "__pycache__" not in r)
+            if n >= 200:
+                return [f"BE-XF08: la carpeta candidata tiene {n} archivos (límite de Upload skill < 200)"]
         return []
     f = []
     with zipfile.ZipFile(p) as z:
@@ -207,6 +213,10 @@ def revisar_indice(archivo):
         return [f"la versión vigente {v} no tiene zip en skills_archivo"]
     import hashlib
     distintos = {hashlib.md5(open(os.path.join(archivo, n), "rb").read()).hexdigest() for n in zs}
+    for n in zs:             # BE-XF08: el zip VIGENTE publicado también se revisa (U-020: < 200 archivos, sin directorios ni __pycache__)
+        malas = revisar_zip(os.path.join(archivo, n))
+        if malas:
+            return [f"BE-XF08: el zip vigente {n}: " + "; ".join(malas)]
     if len(distintos) > 1:   # BE-CF20 (copia idéntica FINAL-<Proyecto> de U-027 no cuenta): dos sesiones archivaron el MISMO número con contenido distinto (línea partida, BE-115)
         return [f"BE-CF20: la versión vigente {v} tiene {len(zs)} zips distintos ({', '.join(sorted(zs))}): unir en v+1"]
     return []
