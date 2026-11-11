@@ -7466,6 +7466,59 @@
    "texto_corto": "CE_MS_GAUGE rev2: (a) RX_GAUGE / DESIG aceptan tamaño de 4 dígitos (1000S162-43); (b) el renglón 'track - other (openings between walls)' se desglosa con los misc items que lo explican y se parte por designación (EXT-01..03 = 2 líneas: 1000T125-43 + 600T125-43); (c) blocking at edge = un renglón por designación del stud de cada wall; (d) additional head track toma el wall del vano desde su operación; (e) una altura equivalente (cara inclinada) va como 'área / largo' sin operandos medidos en la cita (derivación en height_source_info)",
    "categoria": "programa-pendiente",
    "motivo": "arreglos en canon.py / trazabilidad.py / plantilla_excel.py / compuerta_entrega.py (tools_post_v81cf92 + diffs); tests para la próxima versión"
+  },
+  {
+   "id": "U-184",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, protocolo bien a la primera en 2-3 h)",
+   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_protocolo_3h",
+    "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas",
+    "take-off:tools/chequeos_biblioteca.py::u_184_elev",
+    "take-off:tools/chequeos_biblioteca.py::u_184_excl"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u184_protocolo_3h"
+   }
+  },
+  {
+   "id": "U-180",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"No te puedes tardar tanto en un proyecto. Llevas más de 12 horas trabajando en ese. Necesito que termine las cosas más rápido y con más accuracy.\"; origen: CR City Hotel >31 h + correcciones",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-181",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"Y con los otros dos proyectos como base, me dijiste que ya estaban terminados también.\"; origen: COORDINACIÓN reportó Xfinity y Grand Kia \"terminados\" con solo verificación de FORMA (Length×",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-182",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"Cuando me pidas el archivo de CVS, es porque ya tienes absolutamente todo terminado, revisado, checado. Y lo último que vamos a hacer es checar toda contra el CVS.\"; origen: COORDINACIÓN pid",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-183",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "ORDEN DEL USUARIO (11-nov, texto literal: \"Olvídate de los otros dos proyectos, me refiero, no me des información. Nos vamos a enfocar nada más al CR. Continúa trabajando con los demás, pero dame únicamente información del CR. Ese lo tenemo",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
   }
  ]
 }
