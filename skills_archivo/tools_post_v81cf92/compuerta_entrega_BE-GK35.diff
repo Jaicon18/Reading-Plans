@@ -1,0 +1,44 @@
+113a114,144
+> def _walk_seguro(base):
+>     """BE-GK35: os.walk following symlinks (takeoff_work -> work dir) but never entering the same real directory twice:
+>     two delivery folders each holding a takeoff_work symlink back to the work dir made glob('**') branch exponentially."""
+>     seen = set()
+>     for r, ds, fs in os.walk(base, followlinks=True):
+>         rp = os.path.realpath(r)
+>         if rp in seen:
+>             ds[:] = []
+>             continue
+>         seen.add(rp)
+>         ds[:] = sorted(d for d in ds if os.path.realpath(os.path.join(r, d)) not in seen)
+>         yield r, ds, fs
+> 
+> 
+> def _rglob(raiz, pat):
+>     """BE-GK35: glob with '**' that is loop-safe (see _walk_seguro); without '**' = glob.glob."""
+>     if "**" not in pat:
+>         return glob.glob(os.path.join(raiz, pat))
+>     import fnmatch
+>     pre, post = pat.split("**", 1)
+>     post = post.lstrip("/")
+>     base = os.path.join(raiz, pre) if pre else raiz
+>     out = []
+>     for r, _, fs in _walk_seguro(base):
+>         for f in fs:
+>             rel = os.path.relpath(os.path.join(r, f), base)
+>             if fnmatch.fnmatch(rel, post) or fnmatch.fnmatch(rel, "*/" + post):
+>                 out.append(os.path.join(r, f))
+>     return out
+> 
+> 
+116c147
+<         xs = sorted(glob.glob(os.path.join(raiz, pat), recursive=True))
+---
+>         xs = sorted(_rglob(raiz, pat))
+1544c1575
+<     tp = (glob.glob(os.path.join(c.w, "**", "rcp_cuartos.json"), recursive=True) or [None])[0]
+---
+>     tp = (sorted(_rglob(c.w, "**/rcp_cuartos.json")) or [None])[0]   # BE-GK35
+2082c2113
+<     n = sum(len(fs) for _, _, fs in os.walk(c.entrega, followlinks=True))
+---
+>     n = sum(len(fs) for _, _, fs in _walk_seguro(c.entrega))   # BE-GK35
