@@ -29,5 +29,7 @@ python3 -I $W/scripts/hacer_docs.py "$E" $W/proceso/proyecto_datos.json $W/takeo
 (cd $D && python3 $T/compuerta_entrega.py detalles . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py schedules . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py banco . --cache /home/user/reading-plans > banco.txt 2>&1 || true; tail -3 banco.txt)
+# U-168: CHECKLIST_REVISION.xlsx en la raíz de la entrega (B1-B5), antes de la compuerta (CE_CHECKLIST_USUARIO lo exige)
+python3 -I $T/checklist_revision.py "$(ls "$E"/Take-off/*.xlsx)" "$(ls "$E"/Planos\ marcados/*OPEN\ IN\ BLUEBEAM.pdf | head -1)" $W/plans/bidset_SIN_MARKUPS.pdf $W/etapas/4_canon/takeoff_canon.json "$E/CR_CHECKLIST_REVISION.xlsx" --proy CR | head -3
 (cd $D && timeout 2400 python3 $T/compuerta_entrega.py . > gate.txt 2>&1 || true)
 grep -E "^(FAIL|AMBER)|COMPUERTA" $D/gate.txt | head -60
