@@ -66,4 +66,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf80 · CR City Hotel Castle Rock (dueña) · 11-nov · v81cf79 + CE_TIEMPOS (filas encimadas / TOTAL) + cita de hoja concreta en alturas + SF del proyecto con hoja en CE_DATOS_PROYECTO (U-170) · en curso
 - ACTUALIZACIÓN 11-nov: **v81cf80 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf80_tiempos-cita-altura-SF_2026-11-11.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
 - v81cf81 · Grand Kia Auto Dealership (dueña) · 10-nov · v81cf80 + BE-GK01 (deps del arranque + openpyxl) + BE-GK02 (capa OCR para hojas con texto en curvas, palabras_fitz.py ocr) · en curso
-- ACTUALIZACIÓN 10-nov: **v81cf81 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf81_GK-deps-OCR-texto-en-curvas_2026-11-10.zip (VIGENTE en INDICE; suite 48/48, 199 archivos, verificar_version OK).
+- ACTUALIZACIÓN 10-nov: **v81cf81 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf81_GK-deps-OCR-texto-en-curvas_2026-11-10.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
