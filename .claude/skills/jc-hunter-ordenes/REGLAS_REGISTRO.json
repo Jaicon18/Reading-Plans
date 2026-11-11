@@ -7533,6 +7533,15 @@
    "texto_corto": "toda tool que anota en la bitácora usa bitacora.anotar (renglón con 'prev', lock): comparar_alturas.capa_colores (v81cf94, U-184 (3)) escribía sin 'prev' y rompía la cadena -> CE_REGLAS FAIL en todo proyecto",
    "categoria": "programa-pendiente",
    "motivo": "arreglo en tools/comparar_alturas.py (tools_post_v81cf94 + diff); test (anotar dos veces por comparar_alturas y cadena_ok == 0) en la próxima versión"
+  },
+  {
+   "id": "BE-XF10",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity, U-184, 11-nov)",
+   "texto_corto": "sección nueva del SKILL.md sin entrada en reglas_clasificacion.py = CE_REGLAS FAIL ('regla sin clasificar'); un PASS que dice '0 walls' lo tumba el auditor de plausibilidad U-138: toda sección nueva lleva su entrada de catálogo y los PASS dicen cuántos elementos revisaron (lo hacen cumplir CE_REGLAS y auditar_compuerta)",
+   "categoria": "conducta",
+   "cuando": "version",
+   "chequeos": [],
+   "test": null
   }
  ]
 }
