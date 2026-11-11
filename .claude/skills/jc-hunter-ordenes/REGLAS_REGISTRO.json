@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf89 U-177 / BE-XF09 + v81cf92 U-178 / U-179",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
- "conteo": 552,
+ "conteo": 553,
  "reglas": [
   {
    "id": "U-001",
@@ -7459,6 +7459,13 @@
    "texto_corto": "búsqueda recursiva ('**' / os.walk followlinks) a prueba de ciclos: dos carpetas de entrega con symlink takeoff_work -> work dir hacían que glob('**') creciera exponencialmente (compuerta 'detalles' colgada 43 min; rev1 tardaba 2 min). Recorrido por realpath visto una sola vez; los symlinks de una entrega cerrada se ocultan ('.takeoff_work_revN')",
    "categoria": "programa-pendiente",
    "motivo": "arreglo en tools/compuerta_entrega.py (_walk_seguro/_rglob; tools_post_v81cf92 + diff); falta llevarlo a reglas.py / chequeos_biblioteca.py / corpus.py y test con dos symlinks en ciclo en la próxima versión"
+  },
+  {
+   "id": "BE-GK36",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, 11-nov)",
+   "texto_corto": "CE_MS_GAUGE rev2: (a) RX_GAUGE / DESIG aceptan tamaño de 4 dígitos (1000S162-43); (b) el renglón 'track - other (openings between walls)' se desglosa con los misc items que lo explican y se parte por designación (EXT-01..03 = 2 líneas: 1000T125-43 + 600T125-43); (c) blocking at edge = un renglón por designación del stud de cada wall; (d) additional head track toma el wall del vano desde su operación; (e) una altura equivalente (cara inclinada) va como 'área / largo' sin operandos medidos en la cita (derivación en height_source_info)",
+   "categoria": "programa-pendiente",
+   "motivo": "arreglos en canon.py / trazabilidad.py / plantilla_excel.py / compuerta_entrega.py (tools_post_v81cf92 + diffs); tests para la próxima versión"
   }
  ]
 }

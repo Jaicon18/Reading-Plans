@@ -1,0 +1,16 @@
+971a972,978
+> def _blk_nombre(k):
+>     """BE-GK36: 'edge <designation>' -> 'Stud blocking at edge of gypboard (structural detail) - <designation>' (U-177 (3))."""
+>     if str(k).startswith("edge ") and k != "edge":
+>         return BLK_NOMBRES["edge"] + " - " + k[5:]
+>     return BLK_NOMBRES.get(k, k)
+> 
+> 
+1036c1043
+<                     out.append(dict(base, material=BLK_NOMBRES.get(k, k), net=float(x),
+---
+>                     out.append(dict(base, material=_blk_nombre(k), net=float(x),
+1106c1113
+<                 mats.append(dict(m, material=BLK_NOMBRES.get(k, k), net=float(v),
+---
+>                 mats.append(dict(m, material=_blk_nombre(k), net=float(v),

@@ -92,7 +92,11 @@ def aplicar(d, out_dir, canon_p):
         for r in filas_de(fam, material):
             v = r.get("valor") if isinstance(r.get("valor"), (int, float)) else mq.get(r.get("ref"), _val_op(r.get("operacion")))
             if v:
-                out.append((str(r.get("ref") or r.get("room") or r.get("source")), v))
+                _id = r.get("ref") or r.get("room")
+                if not _id and fam == "additional head track":   # BE-GK36: '<opening> (<wall>): op' -> id with its wall
+                    _m = re.match(r"\s*(.+?\([A-Z]\d?-Z\d-\d{2}\)):", str(r.get("operacion") or ""))
+                    _id = _m.group(1) if _m else None
+                out.append((str(_id or r.get("source")), v))
         return out
 
     def size_de(name):
@@ -184,7 +188,10 @@ def aplicar(d, out_dir, canon_p):
                 its = [(r["id"][2:], r[k]) for r in ren]
                 if "openings between walls" in name:
                     _resto = round(float(net) - sum(float(v) for _, v in its), 2)
-                    if _resto > 0.01:
+                    _mi = items_filas(fam) if _resto > 0.01 else []   # BE-GK36: listed misc track items explain the rest
+                    if _mi and abs(sum(float(v) for _, v in _mi) - _resto) <= 0.05:
+                        its += _mi
+                    elif _resto > 0.01:
                         its.append(("rest of the family not in any wall row (track across openings between walls) = "
                                     "family total - sum of the per-size / element rows", _resto))
                 kk_ = locals().get("kk") if (k == "top_lf" and sz and ("slip" in name.lower() or "standard" in name.lower())) else None
@@ -670,7 +677,7 @@ def _por_producto(name, fam, its, walls, can):
             if prod and es_stud and not re.match(r"^\d{3}S\d{3}-\d{2}$", prod):
                 prod = None                              # R80w.21: un stud se agrupa solo por designación de STUD (S)
             if prod and (es_track or fam == "track de ceilings / soffits") and "S" in prod:
-                prod = re.sub(r"^(\d{3})S\d{3}-(\d{2})$", r"\1T125-\2", prod)
+                prod = re.sub(r"^(\d{3,4})S\d{3}-(\d{2})$", r"\1T125-\2", prod)   # BE-GK36: 1000S too
             _stp = ((can.get("constants") or {}).get("slip_track_product") or {})   # BE-GK13: product printed in the deflection detail
             if prod and es_track and re.search(r"slip / deflection", str(n), re.I) and isinstance(_stp, dict) \
                     and re.fullmatch(r"T\d{3}-\d{2}", str(_stp.get("value") or "")) and str(_stp.get("source") or "").strip():

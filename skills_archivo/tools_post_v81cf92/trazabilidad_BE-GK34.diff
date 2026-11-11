@@ -1,9 +1,0 @@
-259c259
-<             elif fam and (fam.startswith("5/8\" gyp") or fam.startswith("5/8\" glass mat tile backer") or fam in ("1/2\" gyp MOISTURE RESISTANT", "1/2\" gyp board")):
----
->             elif fam and (fam.startswith("5/8\" gyp") or fam.startswith("5/8\" glass mat tile backer") or fam in ("1/2\" gyp MOISTURE RESISTANT", "1/2\" gyp board", "1/2\" EXTERIOR gyp sheathing")):   # BE-GK34
-262c262,263
-<                 bk = ("5/8 glass mat tile backer" if "DENS" in fam.upper() else   # BE-GK04b: Dens Shield faces (canon BOARD_FAM key)
----
->                 bk = ("5/8 glass mat tile backer" if "DENS" in fam.upper() else
->                       "1/2 exterior gyp sheathing" if fam == "1/2\" EXTERIOR gyp sheathing" else   # BE-GK34: wall faces in the breakdown   # BE-GK04b: Dens Shield faces (canon BOARD_FAM key)

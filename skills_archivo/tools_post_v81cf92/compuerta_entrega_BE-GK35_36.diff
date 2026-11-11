@@ -42,3 +42,7 @@
 <     n = sum(len(fs) for _, _, fs in os.walk(c.entrega, followlinks=True))
 ---
 >     n = sum(len(fs) for _, _, fs in _walk_seguro(c.entrega))   # BE-GK35
+2628c2659
+< RX_GAUGE = re.compile(r"(?i)\b\d{3}(?:S|T|ZF|F|CR)\d{3}-\d{2}\b|\b\d{2}\s*ga\b|\b\d{2}\s*gauge\b|\b\d{2,3}\s*mil\b")
+---
+> RX_GAUGE = re.compile(r"(?i)\b\d{3,4}(?:S|T|ZF|F|CR)\d{3}-\d{2}\b|\b\d{2}\s*ga\b|\b\d{2}\s*gauge\b|\b\d{2,3}\s*mil\b")

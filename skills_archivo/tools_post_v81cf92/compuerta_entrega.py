@@ -2656,7 +2656,7 @@ def ce_alturas_extremo(c):
 
 RX_MS_FRAMING = re.compile(r"(?i)\b(stud|track|header|box beam|brace|runner)\b")
 RX_MS_NO_FRAMING = re.compile(r"(?i)screw|fastener|\bbead\b|\btrim\b|\bclip|anchor|\bpins?\b|insulat|reinforcement at MEP|deflection clips")
-RX_GAUGE = re.compile(r"(?i)\b\d{3}(?:S|T|ZF|F|CR)\d{3}-\d{2}\b|\b\d{2}\s*ga\b|\b\d{2}\s*gauge\b|\b\d{2,3}\s*mil\b")
+RX_GAUGE = re.compile(r"(?i)\b\d{3,4}(?:S|T|ZF|F|CR)\d{3}-\d{2}\b|\b\d{2}\s*ga\b|\b\d{2}\s*gauge\b|\b\d{2,3}\s*mil\b")
 
 
 def filas_ms(xlsx):

@@ -1,0 +1,17 @@
+2176a2177
+>         por_d = {}
+2181a2183,2184
+>                 _g = re.search(r"\b\d{3,4}S\d{3}-\d{2}\b", str(w.get("gauge") or ""))   # BE-GK36 / U-177 (3): row per wall stud designation
+>                 por_d[_g.group(0) if _g else ""] = por_d.get(_g.group(0) if _g else "", 0.0) + lf_w
+2183c2186,2190
+<         BLK_ORIGEN["edge"] = BLK_ORIGEN.get("edge", 0.0) + edge
+---
+>         if por_d and all(por_d):
+>             for d_, v_ in por_d.items():
+>                 BLK_ORIGEN["edge " + d_] = BLK_ORIGEN.get("edge " + d_, 0.0) + v_
+>         else:
+>             BLK_ORIGEN["edge"] = BLK_ORIGEN.get("edge", 0.0) + edge
+2186c2193
+<                                    f"{round(edge, 2)} (R78.33: {'; '.join(ops[:40]) or 'ninguna'})"})
+---
+>                                    f"{round(edge, 2)} (R78.33: {'; '.join(ops) or 'ninguna'})"})
