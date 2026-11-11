@@ -301,3 +301,73 @@ if not any(b['ref'] == 'BK-DF' for b in c['blocking_items']):
         "op": "width not printed -> standing rule R-ALC-02: 3'-0\" x 2 rows = 6.0 LF", "status": "DERIVADO",
         "note": "on an existing wall, like BK-FE: installation requires opening and patching the existing board (Review Item 2)"})
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+
+# --- U-177 (3) auditoría U-138 11-nov: designación (tamaño + gauge) con su N/HOJA en cada item de stud / track / brace ---
+_DES = {
+ "STUD16-GF": ("362S162-54", "[DERIVED] 16 ga = 54 mil from 8/A2.0 '16 GA. METAL STUD 16\" O.C. @ ALL BACKING STUD TRACKS'; 3-5/8\" = the W2 stud size (2/A2.0); "
+               "1-5/8\" flange (162) NOT printed - standard SSMA flange of a 16 ga stud, confirm at purchase"),
+ "SOF-01-STUDS": ("362S125-33", "framed as type W2: 2/A2.0 + A2.0 limiting heights table (362S125-33 @ 16\" o.c.)"),
+ "SOF-01-TRACK": ("362T125-33", "framed as type W2: track = stud gauge per 4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'"),
+ "BRACE-W2-01": ("362S125-33", "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)' = W2 stud 362S125-33"),
+ "BRACE-W2-02": ("362S125-33", "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)' = W2 stud 362S125-33"),
+}
+for m in c['misc_items']:
+    if m.get('ref') in _DES and _DES[m['ref']][0] not in str(m.get('source') or ''):
+        d_, s_ = _DES[m['ref']]
+        m['designation'] = d_
+        m['designation_source'] = s_
+        m['source'] = f"{m.get('source') or ''} | {d_}: {s_}"
+json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
+
+# --- U-138 auditoría 11-nov (punto 3): patch & repair de W1 / W4 con valor conservador CARGADO + RFI-06 A/B/C (U-172 -> U-064 no aplica tal cual) ---
+CH = {"Retail 100": 12.0, "Storage 101": 10.0, "Hallway 102": 9.0, "Toilet 103": 9.0, "Access Toilet 104": 9.0}
+PR = [  # (wall, LF, [rooms on the tenant faces]) - W1: only the tenant face; W1-04 tenant face is covered by the W4-01 lining, other face = Landlord N.I.C.
+ ("W1-01", 63.36, ["Retail 100"]), ("W1-02", 13.97, ["Storage 101"]), ("W1-03", 7.59, ["Storage 101"]), ("W1-05", 55.39, ["Retail 100"]),
+ ("W4-01", 14.46, ["Toilet 103"]), ("W4-02", 6.71, ["Storage 101", "Toilet 103"]), ("W4-03", 8.12, ["Toilet 103", "Hallway 102"]),
+ ("W4-04", 10.99, ["Toilet 103", "Access Toilet 104"]), ("W4-05", 5.87, ["Access Toilet 104", "Retail 100"]),
+ ("W4-06", 4.24, ["Hallway 102", "Retail 100"]), ("W4-07", 0.99, ["Hallway 102", "Retail 100"])]
+ex_img = {x["id"]: x.get("img") for x in c.get("existing_walls_info") or []}
+c['misc_items'] = [m for m in c['misc_items'] if not str(m.get('ref', '')).startswith('PR-')]
+tot_pr = 0.0
+for wid, lf, rooms in PR:
+    caras = [(r, CH[r] + 0.5) for r in rooms]
+    sf = round(sum(lf * h for _r, h in caras), 2); tot_pr += sf
+    c['misc_items'].append({"ref": f"PR-{wid}", "familia": "5/8\" gyp board Type X", "qty": sf, "unit": "SF", "element": "patch_repair",
+        "source": ("2/A2.0 WALL TYPE 1 'EXISTING DEMISING / EXTERIOR WALL TO REMAIN. PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)'"
+                   if wid.startswith("W1") else "2/A2.0 WALL TYPE 4 'INTERIOR WALL TO REMAIN. PATCH AND REPAIR'")
+                  + "; A1.0 'EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES'; A0.1 gen. note 3 'WHERE OCCURS, CONTRACTOR SHALL PATCH ANY EXISTING WALLS AND/OR CEILINGS AS NEEDED TO REFURBISH THE LEASE SPACE'; "
+                    "C.H. per A3.0 tags; RFI-06 option A (conservative, loaded)",
+        "op": " + ".join(f"{lf:g} LF x {h:g} ft ({r} C.H. {CH[r]:g} + 0.5, A3.0 / A2.0 wall legend)" for r, h in caras) + f" = {sf} SF (1 layer 5/8\" Type X, tenant face(s) only)",
+        "status": "DERIVADO", "img": ex_img.get(wid) or "/root/xf/work/etapas/4_canon/img/review/RI-01_2A2.0_patch_repair.png",
+        "label": f"{wid} patch and repair - tenant face replacement to C.H. + 6\" (conservative, RFI-06 A)"})
+tot_pr = round(tot_pr, 2)
+w1_ext = round((63.36 + 55.39) * (26.0 - 12.5) + (13.97 + 7.59) * (26.0 - 10.5), 2)
+c['rfis'] = [r for r in c['rfis'] if r['id'] != 'RFI-06']
+c['rfis'].append({"id": "RFI-06", "status": "open", "source": "2/A2.0 W1 / W4, A1.0, A0.1, A1.0 note 29",
+ "pregunta": "Extent of the patch and repair of the existing walls W1 / W4 to remain (2/A2.0) is not printed.",
+ "question": ("Extent of 'PATCH AND REPAIR (AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.))' on the existing walls W1 / W4 (2/A2.0, 11 walls, "
+              "206.19 LF on plan): no area, height or 'replace' is printed. A0.1 gen. note 3 says 'WHERE OCCURS, CONTRACTOR SHALL PATCH ANY EXISTING WALLS AND/OR CEILINGS AS NEEDED TO REFURBISH THE LEASE SPACE', "
+              "A1.0 says 'EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES' and A1.0 note 29 'REPAIR AND REPLACE ALL FIRE RATINGS IF DAMAGED'. "
+              "U-064 ('repair/replace Type X if required' = full face replacement) does not apply as printed: the note does not say replace."),
+ "opciones": {"A": {"texto": f"Drawings (conservative, LOADED): replace the tenant face(s) of W1 / W4 with 5/8\" Type X up to each room C.H. + 6\" (A3.0 tags + A2.0 wall legend): {tot_pr} SF", "source": "2/A2.0, A3.0, A1.0, A0.1", "delta": f"loaded: {tot_pr} SF"},
+              "B": {"texto": "Code: no section sets the extent of a repair; IBC 2021 Section 703.2 / 707.3 only require the existing rating to be maintained (A1.0 note 29: replace IF damaged) -> patch and repair allowance only, no board quantity", "cita": "IBC 2021 Section 703.2", "delta": f"-{tot_pr} SF board"},
+              "C": f"Other: W1 rated faces full height to the structure 26'-0\" (A0.1, U-174) to maintain the rating above the ceiling: +{w1_ext} SF board"},
+ "delta": f"A loaded {tot_pr} SF; B -{tot_pr} SF; C +{w1_ext} SF",
+ "loaded": f"{tot_pr} SF of 5/8\" Type X (misc items PR-W1-01 .. PR-W4-07, tenant faces to C.H. + 6\")",
+ "img": "/root/xf/work/etapas/4_canon/img/review/RI-01_2A2.0_patch_repair.png",
+ "fuentes_revisadas": "designation: 2/A2.0 W1 / W4 text; other row: A1.0 key note 'EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES', A1.0 notes 13 / 29, A0.1 gen. note 3; standard rule: U-064 (does not apply: no 'replace'); code: IBC 2021 Section 703.2",
+ "barrido": {"disciplinas": "ALL", "hojas": "ALL", "shx": "E / M / P SHX text searched (set_texto.json)", "vectorial": "existing walls drawn as 'EXISTING CONSTRUCTION TO REMAIN' (A2.0 wall legend); no wall elevation of W1 / W4",
+   "specs": "A0.3 SPECIFICATIONS searched (gypsum board section: no repair extent)", "otros_sets": "single GC set (BCI National, 2 files)", "sets": ["BCI National - Complete PDF Set 10-08-26 R0 (17 sheets)"],
+   "terminos": ["PATCH", "REPAIR", "REPLACE", "FIRE RATING", "MAINTAIN", "V.I.F.", "REFURBISH", "PREPARE FOR NEW FINISHES"],
+   "medida_vectorial": "no area to measure: the repair extent is not drawn", "grep": "set_texto.json (text + SHX of the 17 sheets)",
+   "encontrado_en": sorted(f"{h}:{t_}" for h, tx in json.load(open(f'{K}/set_texto.json'))['hojas'].items() for t_ in ["PATCH", "REPAIR", "REPLACE", "FIRE RATING", "MAINTAIN", "V.I.F.", "REFURBISH", "PREPARE FOR NEW FINISHES"] if t_.lower() in json.dumps(tx).lower()),
+   "lugares": [{"sheet": "A2.0", "term": "PATCH AND REPAIR", "img": "/root/xf/work/etapas/4_canon/img/review/RI-01_2A2.0_patch_repair.png"}],
+   "descartes": {"A0.1": "gen. note 3 'PATCH ANY EXISTING WALLS AND/OR CEILINGS AS NEEDED' (extent 'as needed', no area) and 'HEIGHT IN STORIES: 1 STORY - 26 FT' (building height, used only by option C): neither gives the repair extent",
+                 "A2.0": "2/A2.0 W1 / W4 'PATCH AND REPAIR (AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.))': states the work, not the extent or a replacement",
+                 "A1.0": "'EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES' and notes 13 / 29 ('PATCH AND REPAIR DAMAGED FINISHES', 'REPLACE ALL FIRE RATINGS IF DAMAGED'): conditional, no extent",
+                 "A0.3": "spec gypsum board section: materials only, no repair extent", "A3.0": "ceiling heights only (used for option A)", "A4.0": "finishes on existing walls: paint only ('PATCH' in the finish notes: prepare surfaces, no extent)",
+                 "A5.0": "elevations of new work only", "E3.0": "'PATCH' in an electrical note (patch openings left by removed devices): not the wall repair extent",
+                 "E": "electrical sheets: device removal notes only", "M1.0": "mechanical note PATCH (patch openings of removed ducts / grilles): not the wall repair extent", "M2.0": "mechanical note PATCH (patch openings of removed equipment): not the wall repair extent", "P": "plumbing sheet: no wall repair note"},
+   "swept_txt": "Swept: all 17 sheets (A / E / M / P, SHX), A0.3 specs; terms PATCH, REPAIR, REPLACE, FIRE RATING, MAINTAIN, V.I.F., REFURBISH, PREPARE FOR NEW FINISHES."}})
+json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
+print("PR SF", tot_pr, "C +", w1_ext)

@@ -86,8 +86,10 @@ RI = [
  ("floor_plan", "W1", None, "2/A2.0", "RI-01_2A2.0_patch_repair", ("A2.0", "PATCH AND REPAIR", (1292, 422)),
   f"Patch and repair of the existing walls to remain: 2/A2.0 WALL TYPE 1 'EXISTING DEMISING / EXTERIOR WALL TO REMAIN. PATCH AND "
   f"REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)' and WALL TYPE 4 'INTERIOR WALL TO REMAIN. PATCH AND REPAIR' "
-  f"({len(ex)} existing walls {ex_ids}, {ex_lf} LF on plan). The area to patch is not drawn and not measurable from the drawings: "
-  f"allowance by the estimator; no quantity in the Excel."),
+  f"({len(ex)} existing walls {ex_ids}, {ex_lf} LF on plan). The extent is not printed (A0.1 gen. note 3 'AS NEEDED', A1.0 note 29 'IF DAMAGED'); "
+  f"U-064 does not apply as printed (no 'replace'). Conservative value LOADED (RFI-06 option A): tenant face(s) replaced with 5/8\" Type X "
+  f"to each room C.H. + 6\" = {round(sum(m['qty'] for m in c['misc_items'] if str(m['ref']).startswith('PR-')), 2)} SF (misc items PR-W1-01 .. PR-W4-07). "
+  f"Delta per RFI-06: {next(r for r in c['rfis'] if r['id'] == 'RFI-06')['delta']}."),
  ("detalle", None, 1, "5/A2.0", "RI-02_5A2.0_L_bead", ("A2.0", "FINISH CORNER 'L' BEAD", (2142, 1269)),
   f"Column furring CF-01 / CF-02 (5/A2.0): 5/A2.0 draws a free-standing column with 'FINISH CORNER 'L' BEAD' at the corners; on the "
   f"plan both columns sit against the storefront pier. Conservative (larger) option loaded: the printed 'FINISH CORNER L BEAD' "
@@ -191,7 +193,7 @@ extra = [
  ("MEP", "EXCLUDED - electrical, mechanical, plumbing work (E / M / P sheets); recessed boxes in W2 by the electrician."),
  ("Ducts and air devices", "EXCLUDED - ducts and framed openings for air devices (estimator standing order; M1.0 devices are lay-in in ACT)."),
  ("Existing ceiling demolition", "EXCLUDED - " + c["demo_ceiling_excluded"]["why"].replace("R-ALC-05", "estimator standing rule for existing ceilings without type") + "."),
- ("Existing walls patch and repair (allowance)", f"EXCLUDED from the quantities - allowance by the estimator (Review Item): 2/A2.0 W1 / W4 'PATCH AND REPAIR' on {len(ex)} existing walls, area not measurable."),
+ ("Existing walls patch and repair", f"QUANTIFIED (conservative, RFI-06 option A): 2/A2.0 W1 / W4 'PATCH AND REPAIR' on {len(ex)} existing walls - tenant faces replaced with 5/8\" Type X to C.H. + 6\" = {round(sum(m['qty'] for m in c['misc_items'] if str(m['ref']).startswith('PR-')), 2)} SF; delta {next(r for r in c['rfis'] if r['id'] == 'RFI-06')['delta']}."),
  ("Existing walls W1 / W4 to remain (not quantified)", f"NOT QUANTIFIED - existing construction to remain (2/A2.0 WALL TYPE 1 / WALL TYPE 4, A2.0 wall legend grey): " + "; ".join(f"{e['id']} {e['lf']} LF" for e in ex) + f" (total {ex_lf} LF on plan)."),
  ("Landlord room", "EXCLUDED - Landlord room (N.I.C.) not in contract (A1.0 / A2.0 / A3.0 label '(N.I.C.)')."),
  ("Braces to structure (4/A2.0)", f"QUANTIFIED - 4/A2.0 'BRACE TO STRUCTURE, ALTERNATE SIDES ... METAL STUDS AT 8'-0\" O.C. MAX ... 3 5/8\" 20 GA. MIN.': " + "; ".join(f"{m['ref']} {m['qty']} LF ({m['pcs']} pcs)" for m in br) + "; length at 45 deg to the 26'-0\" carried (RFI-01 closed by user decision, U-174)."),

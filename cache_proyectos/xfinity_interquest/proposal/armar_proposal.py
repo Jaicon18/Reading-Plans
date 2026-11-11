@@ -40,8 +40,8 @@ def bk(prefix):
 trims = [n for n in MS if n.startswith("METAL trim")]
 cb = [n for n in trims if MS[n][2] < 50][0]; lb = [n for n in trims if MS[n][2] >= 50][0]
 L = [  # section M = metal framing, D = drywall & finish, F = trim
- ("M", '3-5/8" stud 20 ga (33 mil) 362S125-33 @ 16", type W2 + door 101 jambs (2/A2.0, limiting heights A2.0)', bk('3-5/8" metal stud (LF of material) - 362S125-33'), "LF", "BASE_S362S125-33", 0.1, "2/A2.0"),
- ("M", '3-5/8" stud 20 ga, SOF-01 header framing (A3.0, as W2)', bk('3-5/8" metal stud (LF of material) - per source'), "LF", "BASE_S362S125-33", 0.1, "A3.0"),
+ ("M", '3-5/8" stud 20 ga (33 mil) 362S125-33 @ 16", type W2 + door 101 jambs + SOF-01 header framing (2/A2.0, A3.0, limiting heights A2.0)', bk('3-5/8" metal stud (LF of material) - 362S125-33'), "LF", "BASE_S362S125-33", 0.1, "2/A2.0"),
+ ("M", '3-5/8" stud 16 ga (54 mil) 362S162-54 @ 16" at backing (8/A2.0 "16 GA. METAL STUD"; 1-5/8" flange not printed, confirm)', bk('3-5/8" metal stud (LF of material) - 362S162-54'), "LF", "BASE_S362S162-54", 0.1, "8/A2.0"),
  ("M", '2-1/2" stud 250S125-43 @ 16", column furring (5/A2.0, limiting heights A2.0)', bk('2-1/2" stud'), "LF", "BASE_S250S125-43", 0.1, "5/A2.0"),
  ("M", 'Bottom track 3-5/8" 20 ga (3/A2.0)', bk('Bottom track 3-5/8"'), "LF", "BASE_T362T125-33", 0.1, "3/A2.0"),
  ("M", 'Top track 3-5/8" 20 ga, standard (4/A2.0)', bk('Top track 3-5/8"'), "LF", "BASE_T362T125-33", 0.1, "4/A2.0"),
@@ -49,8 +49,8 @@ L = [  # section M = metal framing, D = drywall & finish, F = trim
  ("M", 'Header track SOF-01 (A3.0)', bk('Ceiling / soffit track'), "LF", "BASE_T362T125-33", 0.1, "A3.0"),
  ("M", 'Door 101 track head with nested stud (7/A2.0)', bk('Header / metal stud box beam'), "LF", "BASE_T362T125-33", 0.1, "7/A2.0"),
  ("M", 'Kicker braces to structure 3-5/8" 20 ga @ 8\'-0" (4/A2.0)', bk('Metal stud brace to structure'), "LF", "BASE_S362S125-33", 0.1, "4/A2.0"),
- ("M", '6" sheet metal blocking strapping (A5.0 blocking legend EV-44 / EV-45)', bk('Metal stud blocking at wall-mounted items (notes) - stud blocking'), "LF", "BASE_FS600-30", 0.1, "A5.0"),
- ("M", '16 ga 6" x 1-1/2" track backing at fire extinguishers (8/A2.0)', bk('Metal stud blocking at wall-mounted items (notes) - backing'), "LF", "BASE_T600T150-54", 0.1, "8/A2.0"),
+ ("M", '6" sheet metal blocking strapping (A5.0 blocking legend EV-44 / EV-45)', bk('Blocking / backing at wall-mounted items (notes) - 6" sheet metal blocking strapping'), "LF", "BASE_FS600-30", 0.1, "A5.0"),
+ ("M", '16 ga 6" x 1-1/2" unpunched track backing: fire extinguishers, GF-14496 graphic frame, drinking fountain (8/A2.0)', bk('Blocking / backing at wall-mounted items (notes) - 16 ga'), "LF", "BASE_T600T150-54", 0.1, "8/A2.0"),
  ("D", '5/8" Type X gypsum board 4x12 (2/A2.0, 5/A2.0, A3.0)', bk('5/8" gypsum board, Type X'), "SF", "D58F12-U", 1 / 48, "2/A2.0"),
  ("D", 'All-purpose joint compound (Material Summary LB; FBM 3-1/2 gal box priced at 1 box per 48 LB [CONVERSION TO CONFIRM])', bk('Joint compound'), "LB", "APUB3.5", 1 / 48, "Level 4 (A2.0 gen. note 3)"),
  ("D", 'Paper joint tape 500 ft roll', bk('Joint tape, paper'), "LF", "DWT500W", 1 / 500, "Level 4"),
@@ -283,7 +283,8 @@ put(f"C{r}", "CLARIFICATIONS (decisions applied in the quantities):", bold=True)
 rf_ = can["rfis"]
 r1 = next(x for x in rf_ if x["id"] == "RFI-01")
 cl = ["RFI-01 (user decision 2026-11-11, option A, rule U-174): height of the existing structure not printed - 26'-0\" (A0.1 building height) carried for the 4/A2.0 kicker braces and the demolished wall height; " + r1["delta"] + ".",
-      "Board measured through door 101 without deducting the opening (estimator standing rule); walls W1 / W4 are existing (patch and repair only).",
+      "Board measured through door 101 without deducting the opening (estimator standing rule).",
+      *[f"{x['id']} (open, conservative value included): {x['loaded']}; alternatives: {x['delta']}." for x in rf_ if x["status"] == "open"],
       "Level 4 finish per A2.0 general note 3 (the A0.3 'texture finish' line is superseded by the drawings).",
       "Closed by the drawings: " + "; ".join(x["resolved"]["answer"][:110] for x in rf_ if x["status"] != "open" and x["id"] != "RFI-01") + ".",
       "Demolition is priced by area (SF of each dashed wall of A1.0, key note 7), no layers.",

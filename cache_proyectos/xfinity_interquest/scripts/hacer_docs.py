@@ -54,7 +54,10 @@ R += ["", "## Bank comparison", "",
  f"- **Trim / corner bead - OUT OF RANGE (high): expected.** The new partition is only {sum(r[2] for r in pt):,.2f} LF, while the two column furrings "
  "(5/A2.0, 12'-6\" high) carry 'FINISH CORNER L BEAD' on every vertical edge (2 corners + 2 edges against the pier per column = 100 LF) and 6/A2.0 adds metal "
  "corner bead where W2 meets the existing demising wall plus the SOF-01 header edges: trim per LF of partition is high because the partition LF is small, not because "
- "trim is over-counted (each row with its operation in the Material Summary)."]
+ "trim is over-counted (each row with its operation in the Material Summary).",
+ f"- **Gypsum / cement board, Joint compound and Joint tape - OUT OF RANGE (high): expected.** {round(sum(m['qty'] for m in c['misc_items'] if str(m['ref']).startswith('PR-')), 2):,.2f} SF of the "
+ "board are the conservative patch and repair of the EXISTING walls W1 / W4 (RFI-06 option A, misc items PR-*: tenant faces to C.H. + 6\"), measured on 206 LF of existing "
+ f"walls but divided here by only {sum(r[2] for r in pt):,.2f} LF of NEW partition; compound and tape follow the board (Inputs yields). Option B of RFI-06 removes that board."]
 open(os.path.join(E, "README_REVIEW.md"), "w").write("\n".join(R) + "\n")
 
 P = [f"# Revisar primero — {TIT}", ""] + datos() + ["", "## Proyecto", "",
@@ -63,13 +66,13 @@ P = [f"# Revisar primero — {TIT}", ""] + datos() + ["", "## Proyecto", "",
  "## Revisar esto primero", "",
  f"1. Markups: `Planos marcados/{PDF}` (A2.0 walls, A1.0 demo, A3.0 header + cuartos EXCLUDED).",
  f"2. 5/8\" Type X: {fam('Type X')} · steel stud 3-5/8\": {fam('3-5/8\" metal stud')} · 2-1/2\": {fam('2-1/2\" stud')} · demolición: {fam('Demolition')}.",
- f"3. {len(rf)} RFI abiertos. RFI-01 (altura de la estructura) CERRADO por decisión del usuario 11-nov, opción A: 26'-0\" de A0.1 cargado (U-174); cantidades sin cambio. Otros {len(cr) - len(ud)} se cerraron con lo impreso.",
+ f"3. {len(rf)} RFI abierto(s) con el valor conservador CARGADO (SEGUIMIENTO.md): " + ", ".join(f"{r['id']} ({r.get('pregunta', '')[:70]}; {r.get('delta', '')[:90]})" for r in rf) + f". RFI-01 (altura de la estructura) CERRADO por decisión del usuario 11-nov, opción A (U-174). Otros {len(cr) - len(ud)} se cerraron con lo impreso.",
  "4. Review Items: patch and repair de los existentes (allowance), blocking sobre walls existentes, L-bead de las columnas, header SOF-01 no detallado, texture finish de la spec contra Level 4 del plano.", ""]
 open(os.path.join(E, "PARA_REVISAR_EN_LA_MANANA.md"), "w").write("\n".join(P) + "\n")
 S = ["# SEGUIMIENTO - Xfinity Interquest (RFI abiertos con supuesto conservador CARGADO, U-048)", "", f"RFI abiertos: {len(rf)}. Cerrados por decisión del usuario: " + "; ".join(f"{r['id']} - {r['resolved']['answer'][:260]}" for r in ud) + ".", "",
      "| # RFI | Ítem | N/HOJA | Qué falta | Supuesto cargado | Delta |", "|---|---|---|---|---|---|"]
 for r in rf:
-    S.append(f"| {r['id']} | braces 4/A2.0 + demolición A1.0 | {r.get('source', 'A0.1, 4/A2.0, A1.0')[:120]} | {r['question'][:220]} | {r['loaded'][:160]} | {r['delta'][:200]} |")
+    S.append(f"| {r['id']} | {r.get('pregunta', '')[:80]} | {r.get('source', 'A0.1, 4/A2.0, A1.0')[:120]} | {r['question'][:220]} | {r['loaded'][:160]} | {r['delta'][:200]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
 G = [f"OPEN IN BLUEBEAM: `Planos marcados/{PDF}` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", "",
  "# GUÍA DE REVISIÓN DEL ESTIMADOR — Xfinity Interquest, Colorado Springs CO · rev1 FINAL", "",
