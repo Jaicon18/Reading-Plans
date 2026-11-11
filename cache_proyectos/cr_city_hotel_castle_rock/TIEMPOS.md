@@ -1,6 +1,6 @@
 # CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)
 
-Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.
+Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). rev14-rev18 corregidas el 11-nov (COORDINACIÓN, U-094): inicio = hora en que llegó la orden, fin = commit de entrega (las filas anteriores de rev15-rev17 estaban en UTC con etiqueta PST y se enciman). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.
 
 | # | Paso | Inicio | Fin | Duración | Evidencia |
 |---|---|---|---|---|---|
@@ -28,9 +28,9 @@ Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). Pau
 | rev11 | rev11: revisiones independientes A (materiales / specs / exterior / proposal) y B (RFI / alturas / ratings / detalles) sobre rev10 + 3 compuertas (CB_CR_R11_F12, CB_U_155) | 11-08 12:33 PST | 11-08 14:33 PST | 120 min | ENTREGA_OK.json / SUBIDA_OK.json rev11 |
 | rev12 | rev12: U-155 (buscar hasta encontrar; si no, IBC citado) sobre todos los RFI abiertos y valores assumed: RFI-28 / RFI-25 cerrados, DA-7 retirado | 11-08 14:40 PST | 11-08 15:35 PST | 55 min | ENTREGA_OK.json / SUBIDA_OK.json rev12 |
 | rev13 | rev13: auditoría U-138 de rev12 (E1 caras exteriores con altura de la interior, E2 citas de norma con sección / tabla, detector no impreso, RS-1..RS-7 de A2.05) | 11-09 06:38 PST | 11-09 07:45 PST | 67 min | ENTREGA_OK.json / SUBIDA_OK.json rev13 |
-| rev14 | rev14: U-156 re-barrido de los 9 RFI abiertos (RFI-15 / 22 / 23 / 26 cerrados por lo impreso, RFI-04 parcial: lobby 217 / 317 2HR FB) | 11-10 10:55 PST | 11-10 13:12 PST | 137 min | ENTREGA_OK.json / SUBIDA_OK.json rev14 |
-| rev15 | rev15: revisión completa de rev14 (3 revisores, 18 puntos): GN 6 16" o.c., duct chases, 2HR shaft ceiling, U-160 texto dentro, vistas RCP, huecos de cara, cajas de closet | 11-10 13:42 PST | 11-10 18:30 PST | 288 min | ENTREGA_OK.json / SUBIDA_OK.json rev15 |
-| rev16 | rev16: revisión dirigida de rev15 (ELEC 2 HR base + DA-6, cove de madera, áreas sin número del RCP, Review Items, Table 509, shaft ceiling en L1, base CBU) | 11-10 15:45 PST | 11-10 19:30 PST | 225 min | ENTREGA_OK.json / SUBIDA_OK.json rev16 |
-| rev17 | rev17: revisión dirigida de rev16 (caras reales de ELEC 221/321/421, WS-1 L4 un criterio, textos FS-1 / RS-1, soffit FCU) | 11-10 17:10 PST | 11-10 20:30 PST | 200 min | ENTREGA_OK.json / SUBIDA_OK.json rev17 |
-| rev18 | rev18 FINAL: respuestas del usuario a los RFI (U-161 / U-162 / U-163): todo RFI cerrado, 128 sin cielo | 11-10 18:30 PST | 11-10 20:00 PST | 90 min | ENTREGA_OK.json / SUBIDA_OK.json rev18 |
-| **TOTAL** | **rev1 387 min (6 h 27) + rev2-rev8 2022 min (33 h 42)** | **11-05 11:16 PST** | **11-10 19:03 PST** | **2409 min** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |
+| rev14 | rev14: U-156 re-barrido de los 9 RFI abiertos (RFI-15 / 22 / 23 / 26 cerrados por lo impreso, RFI-04 parcial: lobby 217 / 317 2HR FB) | 11-10 10:51 PST | 11-10 13:19 PST | 148 min | ENTREGA_OK.json / SUBIDA_OK.json rev14 |
+| rev15 | rev15: revisión completa de rev14 (3 revisores, 18 puntos): GN 6 16" o.c., duct chases, 2HR shaft ceiling, U-160 texto dentro, vistas RCP, huecos de cara, cajas de closet | 11-10 14:05 PST | 11-10 15:30 PST | 85 min | ENTREGA_OK.json / SUBIDA_OK.json rev15 |
+| rev16 | rev16: revisión dirigida de rev15 (ELEC 2 HR base + DA-6, cove de madera, áreas sin número del RCP, Review Items, Table 509, shaft ceiling en L1, base CBU) | 11-10 15:45 PST | 11-10 16:57 PST | 72 min | ENTREGA_OK.json / SUBIDA_OK.json rev16 |
+| rev17 | rev17: revisión dirigida de rev16 (caras reales de ELEC 221/321/421, WS-1 L4 un criterio, textos FS-1 / RS-1, soffit FCU) | 11-10 17:10 PST | 11-10 18:06 PST | 56 min | ENTREGA_OK.json / SUBIDA_OK.json rev17 |
+| rev18 | rev18 FINAL: respuestas del usuario a los RFI (U-161 / U-162 / U-163): todo RFI cerrado, 128 sin cielo | 11-10 18:30 PST | 11-10 19:19 PST | 49 min | ENTREGA_OK.json / SUBIDA_OK.json rev18 |
+| **TOTAL** | **rev1-rev13 1469 min (24 h 29) + rev14-rev18 410 min (6 h 50)** | **11-05 11:16 PST** | **11-10 19:19 PST** | **1879 min (31 h 19)** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |

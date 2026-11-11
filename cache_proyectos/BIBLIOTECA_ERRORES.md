@@ -613,3 +613,9 @@ CSV exportado de Bluebeam sin 5 markups (cielos 401-405) cuyo /NM tenía "/"; 92
 
 ## BE-157 (11-nov, CR rev18, error de método de la sesión del proyecto)
 Una simulación de entrega hecha con `cp -al` (copia con hard links) de la carpeta rev18 ya subida corrió CE_VISTA_BLUEBEAM, y vista_csv reescribió Auditoria/VISTA_BLUEBEAM.csv dentro del inode compartido: cambió la copia local del original (Drive no). Se restauró desde Auditoria.zip de Drive (sha fe144e23… = ENTREGA_OK). Arreglo: compuerta_entrega escribe todo archivo con archivo nuevo + os.replace (_escribir, vista_csv), así el original nunca cambia; regla: una simulación sobre una entrega ya hecha usa copia real o hard links solo sobre archivos que no se escriben. Test: test_u167_nm_unico / test_be157 en test_compuerta_entrega.py.
+
+## BE-158 (11-nov, CR City Hotel TIEMPOS.md, hallado por COORDINACIÓN)
+Filas rev15-rev17 de TIEMPOS.md con horas UTC etiquetadas PST (encimadas: rev15 terminaba 18:30 y rev16 empezaba 15:45) y TOTAL con texto viejo (rev2-rev8). Arreglo: filas rev14-rev18 con la hora de la orden y la del commit de entrega (rev1-rev13 1,469 min + rev14-rev18 410 min = 1,879 min, 31 h 19); CE_TIEMPOS.tiempos_fallas: filas encimadas, Duración != fin - inicio o TOTAL != suma = FAIL; test test_tiempos_cita_sf.
+
+## BE-159 (11-nov, CR City Hotel rev18, hallado por A2 de U-168)
+La altura 9'-0" (106 filas) citaba 'A7.xx unit RCP' (hoja comodín) y 29 franjas 0'-2 7/8" no citaban hoja; el 8'-6" está impreso en A7.00 / A7.05 / A7.09 / A7.13. Arreglo: CE_CITA_ALTURA (toda height_source con hoja concreta N/HOJA o HOJA; comodín o sin hoja = FAIL); test con W.4-L2-03 A de rev18. CR: sin rev19 (la cantidad no cambia; el checklist lo anota).
