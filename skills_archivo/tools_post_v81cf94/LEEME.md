@@ -1,1 +1,2 @@
 BE-GK36b (Grand Kia rev2, U-181 R3-N3): trazabilidad.py per-wall Breakdown for each 'Stud blocking at edge - <designation>' row. v81cf94 + this file. Unir en la siguiente versión.
+BE-GK38 (Grand Kia rev2): comparar_alturas._bitacora anota por bitacora.anotar (con 'prev'); la versión v81cf94 escribía el renglón sin 'prev' y rompía la cadena (CE_REGLAS 'bitacora editada a mano'). Renglón 757 re-anotado por bitacora.anotar (copia: work/bitacora_antes_BE-GK38.jsonl).

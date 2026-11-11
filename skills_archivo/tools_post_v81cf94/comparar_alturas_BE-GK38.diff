@@ -1,0 +1,9 @@
+553a554,561
+>     try:                                    # BE-GK38: same hash chain as bitacora.py run (a row without 'prev' broke it)
+>         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+>         import bitacora as _B
+>         if os.path.realpath(_B.BIT) == os.path.realpath(p):
+>             _B.anotar({"tool": tool, "args": list(archivos), "rc": 0, "hashes": hs})
+>             return
+>     except ImportError:
+>         pass
