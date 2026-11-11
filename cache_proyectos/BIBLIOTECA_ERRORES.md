@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK18 (11-nov, Grand Kia rev1)
+## BE-GK03..BE-GK19 (11-nov, Grand Kia rev1)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -644,6 +644,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK16: markups_rcp: polígonos y FreeText de EXCLUDED en hojas rotadas se convierten con derotation_matrix (anotaciones en espacio sin rotar). Arreglo + test `test_be_gk12_16_guardas` (v81cf88).
 - BE-GK17: door en el hueco entre dos bandas medidas: el wall sigue sobre el frame; la banda del wall cuyo tag comparte la door en la línea se extiende sobre el R.O. impreso; si toca otro type colineal sin nodo -> type_change_rfi. Regla de conducta (scripts del proyecto).
 - BE-GK18: markups_rcp: el LF de cada pieza de un soffit se reparte por el largo de su trayectoria, nunca del primer al último punto (el lazo cerrado de SOF-08 daba 0 LF). Arreglo + test `test_be_gk18_polilinea_cerrada` (v81cf88).
+- BE-GK19: closer: el mínimo de studs de campo descuenta el stud del nodo de corte colineal ya contado en el wall vecino (A-Z3-06 / A-Z3-07 de 4.00 ft y F-Z2-05 se rechazaban con 3 < 4). Arreglo + test `test_be_gk19_closer_split` (v81cf88).
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
