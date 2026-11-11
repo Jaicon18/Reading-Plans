@@ -610,3 +610,6 @@ PDF de markups no abre en Windows/Bluebeam: ruta completa 264 > 260 caracteres. 
 
 ## BE-156 (11-nov, CR rev18)
 CSV exportado de Bluebeam sin 5 markups (cielos 401-405) cuyo /NM tenía "/"; 92 /NM duplicados en EXCLUDED. Arreglo: rev18b con NM únicos sin "/"; chequeo en CE_VISTA_BLUEBEAM; U-167.
+
+## BE-157 (11-nov, CR rev18, error de método de la sesión del proyecto)
+Una simulación de entrega hecha con `cp -al` (copia con hard links) de la carpeta rev18 ya subida corrió CE_VISTA_BLUEBEAM, y vista_csv reescribió Auditoria/VISTA_BLUEBEAM.csv dentro del inode compartido: cambió la copia local del original (Drive no). Se restauró desde Auditoria.zip de Drive (sha fe144e23… = ENTREGA_OK). Arreglo: compuerta_entrega escribe todo archivo con archivo nuevo + os.replace (_escribir, vista_csv), así el original nunca cambia; regla: una simulación sobre una entrega ya hecha usa copia real o hard links solo sobre archivos que no se escriben. Test: test_u167_nm_unico / test_be157 en test_compuerta_entrega.py.
