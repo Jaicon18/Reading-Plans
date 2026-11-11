@@ -69,3 +69,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - ACTUALIZACIÓN 10-nov: **v81cf81 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf81_GK-deps-OCR-texto-en-curvas_2026-11-10.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
 - v81cf82 · Xfinity Interquest (dueña) · 10-nov · v81cf81 + BE-XF01..BE-XF06 (descarga BC, clip visible, not_a_room en CE_RCP_CUARTOS, wood_walls_none_reason, hojas de un decimal en RX_HOJA_CONCRETA / A2, CC-R12 sin falso 0) · en curso
 - ACTUALIZACIÓN 10-nov: **v81cf82 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf82_XF-hojas-un-decimal-not-a-room_2026-11-10.zip (VIGENTE en INDICE; suite 48/48, banco 0 distintas, 199 archivos, verificar_version OK).
+- v81cf83 · Consumer Cellular Centennial (dueña) · 10-nov 10:04 PM PT · v81cf82 + U-173 (al reanudar: seguir donde se quedó y revisar addenda) en registro y SKILL.md · en curso
