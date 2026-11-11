@@ -686,3 +686,6 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 
 ## BE-XF10 — Xfinity (11-nov, U-184)
 - Al implementar U-184: una sección nueva del SKILL.md sin entrada en reglas_clasificacion.py deja CE_REGLAS en FAIL ('regla sin clasificar'); y un PASS que dice '0 walls …' lo tumba el auditor de plausibilidad U-138. Toda sección nueva lleva su entrada de catálogo; los textos de PASS dicen cuántos elementos se revisaron.
+
+## BE-COORD01 — COORDINACIÓN (11-nov, CSV de Bluebeam de CR rev19)
+- BE-COORD01 (programa): cache_proyectos/herramientas/comparar_alturas.py (copia vieja) y el skill daban 'NO WALL ID' o un pedazo del ID ('TO-XW.6.3-L2-03 A' -> 'L2-03') con un CSV de Bluebeam que solo trae la columna ID. Arreglo: comparar_alturas.id_nm decodifica el /NM completo (TO-, %2F, ~n, -BOARD) y buscar empareja la cara A / B con su wall; la copia de herramientas = la del skill vigente. Prueba: test_comparar_alturas.py::test_be_coord01_ids_csv_cr con el CSV real (cache_proyectos/herramientas/tests/cr_rev19_markups.csv: 1,026 markups con Depth, 0 sin Wall ID).

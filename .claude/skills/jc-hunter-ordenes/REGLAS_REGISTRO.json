@@ -7542,6 +7542,21 @@
    "cuando": "version",
    "chequeos": [],
    "test": null
+  },
+  {
+   "id": "BE-COORD01",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 11-nov, CSV de Bluebeam de CR rev19)",
+   "texto_corto": "comparar_alturas con un CSV que solo trae la columna ID (/NM 'TO-XW.6.3-L1-02 A'): 'NO WALL ID' o un pedazo del ID ('L1-02'); el /NM se decodifica completo (TO-, %2F, ~n, -BOARD) y la cara A / B se empareja con su wall; cache_proyectos/herramientas/comparar_alturas.py = la del skill vigente",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::wall_id",
+    "take-off:tools/comparar_alturas.py::id_nm"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_coord01_ids_csv_cr"
+   }
   }
  ]
 }
