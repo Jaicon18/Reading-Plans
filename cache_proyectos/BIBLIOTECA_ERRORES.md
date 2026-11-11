@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK30 (11-nov, Grand Kia rev1)
+## BE-GK03..BE-GK31 (11-nov, Grand Kia rev1)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -656,6 +656,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK28: CE_ALTURA_IMPRESA leía un paso intermedio de la operación ('xs = 1142.8-128.6 = 1014.2') o una cota de otro elemento ('4'-5 1/2"') como altura: ahora toma el resultado final (última suma 'C.H. + 0.5 = h' o última medición vectorial). Arreglo + test (v81cf88).
 - BE-GK29: alcances ALC-17: los access panels contados (renglón 'Access panel ...' con cantidad) cierran el alcance (no solo 'framed openings MEP'). Arreglo + test (v81cf88).
 - BE-GK30: U-177 (3): todo renglón de stud / track / header / sill / ceiling track lleva su designación (tamaño + gauge); un renglón de una sola designación la nombra; las aberturas toman el gauge de su wall. Arreglo + test (v81cf88).
+- BE-GK31: con > 1000 archivos subir_entrega subía Auditoria.zip; COORDINACIÓN (U-008) pide la carpeta Auditoria/ desempacada como en los demás proyectos: --auditoria-carpeta la sube en la misma carpeta de entrega y renombra el zip a 'zz Auditoria.zip'. Arreglo + test (para la unión v81cf91; tool en cache_proyectos/grand_kia/tools_post_v81cf88/).
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
