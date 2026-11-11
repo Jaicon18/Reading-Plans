@@ -30,8 +30,8 @@
   "1/2\" EXTERIOR gyp sheathing": 0.0,
   "FRT plywood (SF)": 0.0,
   "FRT blocking": 0.0,
-  "5/8\" gyp board Type X": 88165.61,
-  "5/8\" gyp Type X W.R.": 28151.88,
+  "5/8\" gyp board Type X": 88131.78,
+  "5/8\" gyp Type X W.R.": 28169.25,
   "8\" joist": 0.0,
   "USG drywall main tee (DGLW26)": 1679.86,
   "USG drywall cross tee (DGLW424)": 5039.7,
@@ -52,7 +52,7 @@
   "deep-leg slotted deflection track (printed)": 0.0,
   "sheathing screws (printed)": 0.0,
   "framing clips per stud (printed)": 0.0,
-  "resilient channel (printed)": 19624.2,
+  "resilient channel (printed)": 19598.31,
   "1/4\" gypsum board (printed)": 0.0,
   "flat strap bracing (printed)": 0.0,
   "Z-furring runner track (printed)": 0.0,
@@ -109,8 +109,8 @@
   "framing screws": 0.0,
   "slab pins": 0.0,
   "expansion anchors": 0.0,
-  "joint compound": 8524.9,
-  "joint tape": 51046.0,
+  "joint compound": 8523.71,
+  "joint tape": 51039.91,
   "deflection clips": 0.0,
   "framing screws heavy gauge": 0.0,
   "drywall screws heavy gauge": 0.0
@@ -3779,26 +3779,14 @@
   {
    "familia": "2-1/2\" stud",
    "ref": "SOF-L4-01 cripples",
-   "source": "L4 Lobby stair top (L4), gyp bd soffit enclosing FCU: full stair width = 7/A6.01 printed 8'-8 3/4\" | framed soffit vertical face 2.0 ft (op of SOF-L4-01 board) | 11/A6.01 'GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.' (framing not drawn): metal framed soffit (GYP-1 legend 'GYPSUM BOARD ON METAL SUSPENSION SYSTEM') = top + bottom track + cripple studs at 16\" o.c. (A0.06 GN 6); stud size not printed: 2-1/2\"",
+   "source": "L4 Lobby stair top (L4), gyp bd soffit enclosing FCU: full stair width = 7/A6.01 printed 8'-8 3/4\" | framed soffit vertical face 2.0 ft (op of SOF-L4-01 board) | 11/A6.01 'GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.' (framing not drawn: standing rule R-ALC-01 / BE-CF11, metal option when the detail does not choose): metal framed soffit (GYP-1 legend 'GYPSUM BOARD ON METAL SUSPENSION SYSTEM') = top + bottom track + cripple studs at 16\" o.c. (A0.06 GN 6); stud size not printed: 2-1/2\"",
    "operacion": "ROUNDUP(8.72/1.3333)+1 = 8 cripple studs x vertical face 2.0 ft = 16.0 (16 in. o.c., A0.06 GN 6)"
   },
   {
    "familia": "5/8\" gyp board Type X",
-   "ref": "CLG-L4-412WS board",
-   "source": "L4 Corridor 412 WS-1 wood slat area: A3.04 [DERIVED] area 34.52 SF ((857.04-821.52)*(749.04-670.32)/81 = 34.52 SF [DERIVADO] (WS-1 hatch border lines on 1/A3.04; edge coverage 0.97); same rect on A3.02 (821.28-856.68 x 671.04-749.76 = 34.40 SF) and A3.03) | the corridor 412 RS-1 field had a hole here; the WS-1 slats hang from their own grid below (6/A7.23 WOOD SLAT DETAIL 2, 5/A7.23 'HANGER WIRE BY OTHERS'); whether the RS-1 board continues above the WS-1 is not printed -> conservative (U-048): RS-1 continuous like the FS-1 over the WS-1 at L2 / L3 | RS-1 board on resilient channel (A0.08 RS-1); [CONFIRMED] height 8.94 (1/A5.06 8'-11 1/4\")",
-   "operacion": "34.52 SF x 1 layer(s) = 34.52"
-  },
-  {
-   "familia": "resilient channel (printed)",
-   "ref": "CLG-L4-412WS RC",
-   "source": "L4 Corridor 412 WS-1 wood slat area: A3.04 [DERIVED] area 34.52 SF ((857.04-821.52)*(749.04-670.32)/81 = 34.52 SF [DERIVADO] (WS-1 hatch border lines on 1/A3.04; edge coverage 0.97); same rect on A3.02 (821.28-856.68 x 671.04-749.76 = 34.40 SF) and A3.03) | the corridor 412 RS-1 field had a hole here; the WS-1 slats hang from their own grid below (6/A7.23 WOOD SLAT DETAIL 2, 5/A7.23 'HANGER WIRE BY OTHERS'); whether the RS-1 board continues above the WS-1 is not printed -> conservative (U-048): RS-1 continuous like the FS-1 over the WS-1 at L2 / L3 | RS-1 board on resilient channel (A0.08 RS-1); [CONFIRMED] height 8.94 (1/A5.06 8'-11 1/4\") | resilient channel 16 in. o.c. (RFI-14)",
-   "operacion": "34.52 SF x 12 / 16 in. o.c. = 25.89 LF"
-  },
-  {
-   "familia": "5/8\" gyp board Type X",
    "ref": "UNTYPED-L2-12",
-   "source": "1/A5.06; A2.02 [DERIVED] length (A2.02 vector at printed scale 1/8\"=1'-0\" (9 pt/ft), wall centerline between faces/centerlines of walls met; (1212.00-1191.70)/9 = 2.26) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [3/A0.01 ELEC 221] | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone) | type: NOT TYPED: no tag on A2.02 nor enlarged plans | detail: 1/A5.06",
-   "operacion": "UNTYPED-L2-12 existing wall 2.26 LF x 9.2396 ft x 2 face(s) x 2 layer(s) = 83.53 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+   "source": "1/A5.06; A2.02 [DERIVED] length (A2.02 vector at printed scale 1/8\"=1'-0\" (9 pt/ft), wall centerline between faces/centerlines of walls met; (1212.00-1191.70)/9 = 2.26) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone) | type: NOT TYPED: no tag on A2.02 nor enlarged plans | detail: 1/A5.06 | full review F1: this stub is EAST of corridor 216 next to LINEN 222 (1/A2.02 x=845.4); ELEC 221 is the closet WEST of the corridor behind door 221.1 (x 784.92-799.2) -> no 2 HR layer here",
+   "operacion": "UNTYPED-L2-12 existing wall 2.26 LF x 9.2396 ft x 2 face(s) x 1 layer(s) = 41.76 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "5/8\" gyp board Type X",
@@ -4457,19 +4445,19 @@
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "NULL-L3-08",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (1202.8-1147.8)/9 = 6.11) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (1202.8-1147.8)/9 = 6.11) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "operacion": "NULL-L3-08 existing wall 6.11 LF x 9.2396 ft x 2 face(s) x 2 layer(s) = 225.82 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "NULL-L3-09 A",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "operacion": "NULL-L3-09 A existing wall 1.61 LF x 9.2396 ft x 1 face(s) x 2 layer(s) = 29.75 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "NULL-L3-09 B",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: 4/A5.05 (p37) LEVEL 3 6222.75' - LEVEL 4 6233.75' = 11'-0\" printed, minus corridor rated floor/ceiling assembly 1'-1 3/8\" printed on 7/A7.23 (p67, typical corridor ceiling) per R3 | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: 4/A5.05 (p37) LEVEL 3 6222.75' - LEVEL 4 6233.75' = 11'-0\" printed, minus corridor rated floor/ceiling assembly 1'-1 3/8\" printed on 7/A7.23 (p67, typical corridor ceiling) per R3 | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "operacion": "NULL-L3-09 B existing wall 1.61 LF x 9.8854 ft x 1 face(s) x 2 layer(s) = 31.83 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
@@ -5285,13 +5273,13 @@
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "W.4-L4-18 A",
-   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
+   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
    "operacion": "W.4-L4-18 A existing wall 8.77 LF x 8.9375 ft x 1 face(s) x 2 layer(s) = 156.76 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "5/8\" gyp Type X W.R.",
    "ref": "W.4-L4-18 B",
-   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
+   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
    "operacion": "W.4-L4-18 B existing wall 8.77 LF x 8.9375 ft x 1 face(s) x 2 layer(s) = 156.76 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
@@ -5693,7 +5681,7 @@
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "W.6-L4-09 A",
-   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vector at 18 pt/ft; 3/A7.50: between W.6-L4-03 south face 1145.0 and W.6-L4-08 north face 1302.8 (both run through to corridor face 1070.2) -> 157.8/18 = 8.77) | full review walls F03: split by face, 421 face x=1060.08 1145.04-1302.84 = 8.77 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vector at 18 pt/ft; 3/A7.50: between W.6-L4-03 south face 1145.0 and W.6-L4-08 north face 1302.8 (both run through to corridor face 1070.2) -> 157.8/18 = 8.77) | full review walls F03: split by face, 421 face x=1060.08 1145.04-1302.84 = 8.77 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
    "operacion": "W.6-L4-09 A existing wall 8.77 LF x 10.22501 ft x 1 face(s) x 2 layer(s) = 179.35 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
@@ -9179,7 +9167,7 @@
   {
    "familia": "5/8\" gyp board Type X",
    "ref": "W.6-L4-09 B",
-   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vectors at 18 pt/ft: corridor face x=1070.16 from 1134.96 to 1312.92 = 177.96/18 = 9.89) | full review walls F03 | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vectors at 18 pt/ft: corridor face x=1070.16 from 1134.96 to 1312.92 = 177.96/18 = 9.89) | full review walls F03 | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
    "operacion": "W.6-L4-09 B existing wall 9.89 LF x 10.22501 ft x 1 face(s) x 2 layer(s) = 202.25 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
@@ -9202,15 +9190,39 @@
   },
   {
    "familia": "5/8\" gyp board Type X",
-   "ref": "W.6-L4-08 C",
-   "source": "3/A7.50; A7.50 [DERIVED] length = Elec 421 inside width: CLG-L4-119 10.8 SF (contour measured on 1/A2.04) / 8.77 ft (W.6-L4-09 A) = 1.2315 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
-   "operacion": "W.6-L4-08 C existing wall 1.23 LF x 10.4375 ft x 1 face(s) x 1 layer(s) = 12.84 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+   "ref": "W.4-L2-15 E",
+   "source": "1/A2.02; A2.02 [DERIVED] length = ELEC 221 inside width on the bath 210 north wall: (793.2 - 784.92)/9 = 0.92 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone)",
+   "operacion": "W.4-L2-15 E existing wall 0.92 LF x 9.2396 ft x 1 face(s) x 1 layer(s) = 8.5 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+  },
+  {
+   "familia": "5/8\" gyp Type X W.R.",
+   "ref": "W.4-L2-15 F",
+   "source": "1/A2.02; A2.02 [DERIVED] length = ELEC 221 inside width on the bath 210 north wall: (793.2 - 784.92)/9 = 0.92 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone)",
+   "operacion": "W.4-L2-15 F existing wall 0.92 LF x 9.2396 ft x 1 face(s) x 1 layer(s) = 8.5 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "5/8\" gyp board Type X",
-   "ref": "W.6-L4-08 D",
-   "source": "3/A7.50; A7.50 [DERIVED] length = Elec 421 inside width: CLG-L4-119 10.8 SF (contour measured on 1/A2.04) / 8.77 ft (W.6-L4-09 A) = 1.2315 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
-   "operacion": "W.6-L4-08 D existing wall 1.23 LF x 10.4375 ft x 1 face(s) x 1 layer(s) = 12.84 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+   "ref": "W.4-L3-26 E",
+   "source": "1/A2.03; A2.03 [DERIVED] length = ELEC 321 inside width on the bath 310 north wall: (793.56 - 784.92)/9 = 0.96 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)",
+   "operacion": "W.4-L3-26 E existing wall 0.96 LF x 9.2396 ft x 1 face(s) x 1 layer(s) = 8.87 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+  },
+  {
+   "familia": "5/8\" gyp Type X W.R.",
+   "ref": "W.4-L3-26 F",
+   "source": "1/A2.03; A2.03 [DERIVED] length = ELEC 321 inside width on the bath 310 north wall: (793.56 - 784.92)/9 = 0.96 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)",
+   "operacion": "W.4-L3-26 F existing wall 0.96 LF x 9.2396 ft x 1 face(s) x 1 layer(s) = 8.87 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "W.6-L4-03 C",
+   "source": "3/A7.50; A7.50 [DERIVED] length = ELEC 421 inside width (1060.08 - 1036.44)/18 = 1.31 ft (vectors, full review F2) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94",
+   "operacion": "W.6-L4-03 C existing wall 1.31 LF x 8.9375 ft x 2 face(s) x 1 layer(s) = 23.42 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
+  },
+  {
+   "familia": "5/8\" gyp board Type X",
+   "ref": "W.6-L4-08 C",
+   "source": "3/A7.50; A7.50 [DERIVED] length = ELEC 421 inside width (1060.08 - 1036.44)/18 = 1.31 ft (vectors; one segment, two faces = one row) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "operacion": "W.6-L4-08 C existing wall 1.31 LF x 10.4375 ft x 2 face(s) x 1 layer(s) = 27.35 SF (R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06))"
   },
   {
    "familia": "metal trim (corner bead, casing, shadow molding)",
@@ -9430,19 +9442,19 @@
   },
   {
    "familia": "joint compound",
-   "valor": 8524.9,
+   "valor": 8523.71,
    "unidad": "lb",
    "estado": "DERIVADO",
    "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B23 (72 lb per 1,000 SF, level 4)] | Level 1 on 29341.17 SF concealed layers (spec 3.6.E.1 'Level 1: For ceiling plenum areas, concealed areas'; 3.6.D Level 1 = tape set only, 1 of the 3 Level 4 applications) x 2/3 [DERIVED]",
-   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 88165.61 + 28151.88 + 21644.66 = 137962.15 - 29341.17 SF concealed layers x 2/3 (Level 1) = 118401.37 SF) = 8524.9"
+   "operacion": "0.072 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 88131.78 + 28169.25 + 21644.66 = 137945.69 - 29341.17 SF concealed layers x 2/3 (Level 1) = 118384.91 SF) = 8523.71"
   },
   {
    "familia": "joint tape",
-   "valor": 51046.0,
+   "valor": 51039.91,
    "unidad": "lf",
    "estado": "DERIVADO",
    "source": "default (no sheet): estimator standing criterion, not printed in this set [Estimator yield, Inputs!B24 (370 LF per 1,000 SF)]",
-   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 88165.61 + 28151.88 + 21644.66 = 137962.15 SF) = 51046.0"
+   "operacion": "0.37 x (0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 0.0 + 88131.78 + 28169.25 + 21644.66 = 137945.69 SF) = 51039.91"
   },
   {
    "familia": "Level 5 finish",
@@ -9466,7 +9478,7 @@
    "unidad": "pcs",
    "estado": "DERIVADO",
    "source": "GA-216; A0.06, A0.08",
-   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 165554.58"
+   "operacion": "EXCLUDED - all screws / anchors / pins excluded (estimator standing order U-053) (A0.06, A0.08); computed before the exclusion = 165534.83"
   },
   {
    "familia": "drywall screws heavy gauge",
@@ -9638,15 +9650,15 @@
   {
    "id": "UNTYPED-L2-12",
    "type_id": "W.4-0",
-   "location": "L2 ELEC 221 | 222 LINEN | faces: ELEC 221; 222 LINEN",
+   "location": "L2 corridor 216 east stub at LINEN 222 / door 222.1 | faces: 222 LINEN; corridor 216",
    "lf": 2.26,
    "height_ft": 9.2396,
-   "layers": 2,
+   "layers": 1,
    "faces": 2,
-   "board_sf": 83.53,
+   "board_sf": 41.76,
    "board": "5/8 type X",
    "keynote": "1/A5.06",
-   "source": "1/A5.06; A2.02 [DERIVED] length (A2.02 vector at printed scale 1/8\"=1'-0\" (9 pt/ft), wall centerline between faces/centerlines of walls met; (1212.00-1191.70)/9 = 2.26) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [3/A0.01 ELEC 221] | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone) | type: NOT TYPED: no tag on A2.02 nor enlarged plans | detail: 1/A5.06",
+   "source": "1/A5.06; A2.02 [DERIVED] length (A2.02 vector at printed scale 1/8\"=1'-0\" (9 pt/ft), wall centerline between faces/centerlines of walls met; (1212.00-1191.70)/9 = 2.26) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone) | type: NOT TYPED: no tag on A2.02 nor enlarged plans | detail: 1/A5.06 | full review F1: this stub is EAST of corridor 216 next to LINEN 222 (1/A2.02 x=845.4); ELEC 221 is the closet WEST of the corridor behind door 221.1 (x 784.92-799.2) -> no 2 HR layer here",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -11406,7 +11418,7 @@
    "board_sf": 225.82,
    "board": "5/8 type X",
    "keynote": "4/A5.05",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (1202.8-1147.8)/9 = 6.11) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (1202.8-1147.8)/9 = 6.11) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -11422,7 +11434,7 @@
    "board_sf": 29.75,
    "board": "5/8 type X",
    "keynote": "4/A5.05",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: A5.05 sect 4 (p37): LEVEL 3 6222.75' to LEVEL 4 6233.75' = 11'-0\" printed; deep floor/ceiling zone 1'-9 1/8\" printed (drawn identical at L4); board to underside of floor framing (bearing walls stop under trusses; rated w | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -11438,7 +11450,7 @@
    "board_sf": 31.83,
    "board": "5/8 type X",
    "keynote": "4/A5.05",
-   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [1/A0.02 ELEC 321] | height: 4/A5.05 (p37) LEVEL 3 6222.75' - LEVEL 4 6233.75' = 11'-0\" printed, minus corridor rated floor/ceiling assembly 1'-1 3/8\" printed on 7/A7.23 (p67, typical corridor ceiling) per R3 | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
+   "source": "4/A5.05; A2.03 [DERIVED] length (A2.03 vector centerline between faces of walls met, 1/8\"=1'-0\" (9 pt/ft); (799.5-785.0)/9 = 1.61) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [1/A0.02 ELEC 321] | height: 4/A5.05 (p37) LEVEL 3 6222.75' - LEVEL 4 6233.75' = 11'-0\" printed, minus corridor rated floor/ceiling assembly 1'-1 3/8\" printed on 7/A7.23 (p67, typical corridor ceiling) per R3 | type: none | detail:  | rating (U-155): A0.02 LEVEL 3 CODE PLAN draws the ELEC 321 / LINEN 322 / CLEANING 323 closets with the '1HR FP' line on the corridor side; 1 layer 5/8\" Type X each face = 1 HR wood-stud wall per IBC 2018 Table 721.1(2) (same layers as loaded)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -13614,7 +13626,7 @@
    "board_sf": 156.76,
    "board": "5/8 type X",
    "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
+   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -13630,7 +13642,7 @@
    "board_sf": 156.76,
    "board": "5/8 type X WR",
    "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
+   "source": "3/A7.50; A7.50 [DERIVED] length (A7.50 vector wall lines at printed scale (1/4\"=1'-0\" = 18 pt/ft), between faces of walls met; (1302.8-1145.0)/18 = 8.77) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94 | type: tag PC0215 printed \"W4.\" | detail: 3/A7.50",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -14702,7 +14714,7 @@
    "board_sf": 179.35,
    "board": "5/8 type X",
    "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vector at 18 pt/ft; 3/A7.50: between W.6-L4-03 south face 1145.0 and W.6-L4-08 north face 1302.8 (both run through to corridor face 1070.2) -> 157.8/18 = 8.77) | full review walls F03: split by face, 421 face x=1060.08 1145.04-1302.84 = 8.77 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vector at 18 pt/ft; 3/A7.50: between W.6-L4-03 south face 1145.0 and W.6-L4-08 north face 1302.8 (both run through to corridor face 1070.2) -> 157.8/18 = 8.77) | full review walls F03: split by face, 421 face x=1060.08 1145.04-1302.84 = 8.77 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -23998,7 +24010,7 @@
    "board_sf": 202.25,
    "board": "5/8 type X",
    "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vectors at 18 pt/ft: corridor face x=1070.16 from 1134.96 to 1312.92 = 177.96/18 = 9.89) | full review walls F03 | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "source": "3/A7.50; A7.50 [DERIVED] length (3/A7.50 vectors at 18 pt/ft: corridor face x=1070.16 from 1134.96 to 1312.92 = 177.96/18 = 9.89) | full review walls F03 | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 0.3 x 0.7917 ft (RJ-3) + 0.7 x 1.5 ft (RT-1) -> 1.28751 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.28751 = 10.22501 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -24052,33 +24064,97 @@
    "status": "DERIVADO"
   },
   {
-   "id": "W.6-L4-08 C",
-   "type_id": "W.6-1",
-   "location": "L4 Elec 421 south wall segment (inside W.6-L4-08) | faces: 421 Elec (2nd layer, 2 HR)",
-   "lf": 1.23,
-   "height_ft": 10.4375,
+   "id": "W.4-L2-15 E",
+   "type_id": "W.4-0",
+   "location": "L2 ELEC 221 south wall segment | faces: ELEC 221 (2nd layer, 2 HR)",
+   "lf": 0.92,
+   "height_ft": 9.2396,
    "layers": 1,
    "faces": 1,
-   "board_sf": 12.84,
+   "board_sf": 8.5,
    "board": "5/8 type X",
-   "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length = Elec 421 inside width: CLG-L4-119 10.8 SF (contour measured on 1/A2.04) / 8.77 ft (W.6-L4-09 A) = 1.2315 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "keynote": "4/A5.05",
+   "source": "1/A2.02; A2.02 [DERIVED] length = ELEC 221 inside width on the bath 210 north wall: (793.2 - 784.92)/9 = 0.92 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
   },
   {
-   "id": "W.6-L4-08 D",
-   "type_id": "W.6-1",
-   "location": "L4 Elec 421 south wall segment (inside W.6-L4-08) | faces: 412 Corridor side of the 421 segment (2nd layer, 2 HR)",
-   "lf": 1.23,
-   "height_ft": 10.4375,
+   "id": "W.4-L2-15 F",
+   "type_id": "W.4-0",
+   "location": "L2 bath 210 side of the ELEC 221 segment | faces: bath 210 (2nd rated layer under the CBU)",
+   "lf": 0.92,
+   "height_ft": 9.2396,
    "layers": 1,
    "faces": 1,
-   "board_sf": 12.84,
+   "board_sf": 8.5,
+   "board": "5/8 type X WR",
+   "keynote": "4/A5.05",
+   "source": "1/A2.02; A2.02 [DERIVED] length = ELEC 221 inside width on the bath 210 north wall: (793.2 - 784.92)/9 = 0.92 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 4/A5.05: 9'-2 7/8\" LEVEL 2 to underside of room floor zone (11'-0\" f-f, 1'-9 1/8\" floor zone)",
+   "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
+   "stud_text": null,
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W.4-L3-26 E",
+   "type_id": "W.4-0",
+   "location": "L3 ELEC 321 south wall segment | faces: ELEC 321 (2nd layer, 2 HR)",
+   "lf": 0.96,
+   "height_ft": 9.2396,
+   "layers": 1,
+   "faces": 1,
+   "board_sf": 8.87,
+   "board": "5/8 type X",
+   "keynote": "4/A5.05",
+   "source": "1/A2.03; A2.03 [DERIVED] length = ELEC 321 inside width on the bath 310 north wall: (793.56 - 784.92)/9 = 0.96 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)",
+   "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
+   "stud_text": null,
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W.4-L3-26 F",
+   "type_id": "W.4-0",
+   "location": "L3 bath 310 side of the ELEC 321 segment | faces: bath 310 (2nd rated layer under the CBU)",
+   "lf": 0.96,
+   "height_ft": 9.2396,
+   "layers": 1,
+   "faces": 1,
+   "board_sf": 8.87,
+   "board": "5/8 type X WR",
+   "keynote": "4/A5.05",
+   "source": "1/A2.03; A2.03 [DERIVED] length = ELEC 321 inside width on the bath 310 north wall: (793.56 - 784.92)/9 = 0.96 ft (vectors, full review F3) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 11'-0\" - 1'-9 1/8\" = 9'-2 7/8\" (4/A5.05 printed floor-to-floor minus printed deep floor / ceiling zone)",
+   "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
+   "stud_text": null,
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W.6-L4-03 C",
+   "type_id": "W.6-0",
+   "location": "L4 ELEC 421 north wall segment | faces: ELEC 421; corridor 412 (2nd layer each face, 2 HR)",
+   "lf": 1.31,
+   "height_ft": 8.9375,
+   "layers": 1,
+   "faces": 2,
+   "board_sf": 23.42,
    "board": "5/8 type X",
    "keynote": "3/A7.50",
-   "source": "3/A7.50; A7.50 [DERIVED] length = Elec 421 inside width: CLG-L4-119 10.8 SF (contour measured on 1/A2.04) / 8.77 ft (W.6-L4-09 A) = 1.2315 ft | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -558.70 SF (RFI-04) [2/A0.02 ELEC 421] | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
+   "source": "3/A7.50; A7.50 [DERIVED] length = ELEC 421 inside width (1060.08 - 1036.44)/18 = 1.31 ft (vectors, full review F2) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: 1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone cross-check 3/A5.07 (p39) vector ceiling/framing line vertical coord 282.1: (523.4-282.1)/27 = 8.94",
+   "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
+   "stud_text": null,
+   "status": "DERIVADO"
+  },
+  {
+   "id": "W.6-L4-08 C",
+   "type_id": "W.6-1",
+   "location": "L4 ELEC 421 south wall segment (inside W.6-L4-08) | faces: ELEC 421; corridor 412 (2nd layer each face, 2 HR)",
+   "lf": 1.31,
+   "height_ft": 10.4375,
+   "layers": 1,
+   "faces": 2,
+   "board_sf": 27.35,
+   "board": "5/8 type X",
+   "keynote": "3/A7.50",
+   "source": "3/A7.50; A7.50 [DERIVED] length = ELEC 421 inside width (1060.08 - 1036.44)/18 = 1.31 ft (vectors; one segment, two faces = one row) | rating: A0.00 code summary prints 'ELECTRICAL AND IT ROOMS' '2 HR' (fire barrier ratings) and 'INCIDENTIAL USE AREAS (TABLE 509):' 'ELECTRICAL ROOMS'; the code plan of the level draws the room 1HR FP -> plan vs plan conflict (IBC 2018 Section 707.3: fire barriers where required): base carries the larger option (2 HR = 2 layers 5/8\" Type X each face, as DATA 118B), the 1 HR as DEDUCT ALTERNATE DA-6, delta -576.76 SF (RFI-04) | height: roof framing depth over the run (S1.05 framing schedule and zones): 1.0 x 1.5 ft (RT-1) -> 1.5 ft; 8'-11 1/4\" (LEVEL 4 to underside of roof framing, 1/A5.06) + 1.5 = 10.4375 ft to the underside of the roof sheathing; 2/A0.10 'FIRE PARTITIONS AND FIRE BARRIERS EXTEND TO UNDERSIDE OR ROOF SHEATHING' (UNRATED ROOF ASSEMBLY, A0.08 RS-1 no rating); CODE: IBC 2018 §707.5 / §708.4 (https://codes.iccsafe.org/content/IBC2018P6/chapter-7-fire-and-smoke-protection-features; verified in ICC 2026-11-06, _PUENTE_CLAUDE COD-001)",
    "decision": "R80f.1 / U-139 (user 2026-11-01 / 2026-11-05): wood-framed wall - gypsum board is our scope, wood framing EXCLUDED (Div. 06)",
    "stud_text": null,
    "status": "DERIVADO"
@@ -24112,8 +24188,8 @@
    "framing screws": 0.0,
    "slab pins": 0.0,
    "expansion anchors": 0.0,
-   "joint compound": 8524.9,
-   "joint tape": 51046.0,
+   "joint compound": 8523.71,
+   "joint tape": 51039.91,
    "Level 5 finish": 0.0,
    "deflection clips": 0.0,
    "framing screws heavy gauge": 0.0,

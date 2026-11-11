@@ -74,7 +74,7 @@ if fuera:
             b['source'] = str(b['source']) + " | cove framing = wood per 7/A7.23 (wood symbol), Div. 06 EXCLUDED; board only (R-ALC-10, U-139)"
     LOG.append(f"cove 7/A7.23 wood: -{trk} LF track, -{crp} LF cripples (Div. 06 EXCLUDED)")
 DET = {'SOF-L1-01': "5/A7.31 'DETAIL - LOBBY CEILING' draws the coffer drop with no X-box member (PLASTER FINISH, metal 'T' grid 7/A7.31)",
-       'SOF-L4-01': "11/A6.01 'GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.' (framing not drawn)"}
+       'SOF-L4-01': "11/A6.01 'GYP BD SOFFIT AT FCU. CONTINUES FULL WIDTH OF STAIR.' (framing not drawn: standing rule R-ALC-01 / BE-CF11, metal option when the detail does not choose)"}
 for m in c['misc_items']:
     r = m['ref'].replace(' cripples', '')
     if m['ref'].endswith(' cripples') and r in DET and 'wood' in str(m['source']):

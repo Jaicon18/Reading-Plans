@@ -2,7 +2,7 @@
 U-158 (usuario 10-nov: 'usa otro nombre ya que me confunden'): el nombre dice QUÉ ES: '<HOJA> - IMAGE ONLY (not editable) - walls|ceilings|walls
 and ceilings revN.png', HOJA = Page Label impreso (nunca pNN). Una sola imagen por hoja (sin duplicados _rcp_markups)."""
 import json, os, glob, fitz
-W = '/root/cr/work/etapas'; REV = 'rev16'
+W = '/root/cr/work/etapas'; REV = 'rev17'
 d = fitz.open(f'{W}/6_markups/markups_con_rcp.pdf')
 os.makedirs(f'{W}/7_imagenes', exist_ok=True)
 for f in glob.glob(f'{W}/7_imagenes/*.png'):
