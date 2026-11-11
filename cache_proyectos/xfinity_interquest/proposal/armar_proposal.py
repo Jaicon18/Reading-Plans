@@ -282,10 +282,10 @@ P.merge_cells(f"C{r}:J{r}")
 put(f"C{r}", "CLARIFICATIONS (decisions applied in the quantities):", bold=True)
 rf_ = can["rfis"]
 r1 = next(x for x in rf_ if x["id"] == "RFI-01")
-cl = ["RFI-01 (open): height of the existing structure not printed - 26'-0\" (A0.1 building height) carried for the 4/A2.0 kicker braces and the demolished wall height; " + r1["delta"] + ".",
+cl = ["RFI-01 (user decision 2026-11-11, option A, rule U-174): height of the existing structure not printed - 26'-0\" (A0.1 building height) carried for the 4/A2.0 kicker braces and the demolished wall height; " + r1["delta"] + ".",
       "Board measured through door 101 without deducting the opening (estimator standing rule); walls W1 / W4 are existing (patch and repair only).",
       "Level 4 finish per A2.0 general note 3 (the A0.3 'texture finish' line is superseded by the drawings).",
-      "Closed by the drawings: " + "; ".join(x["resolved"]["answer"][:110] for x in rf_ if x["status"] != "open") + ".",
+      "Closed by the drawings: " + "; ".join(x["resolved"]["answer"][:110] for x in rf_ if x["status"] != "open" and x["id"] != "RFI-01") + ".",
       "Demolition is priced by area (SF of each dashed wall of A1.0, key note 7), no layers.",
       "Wood / F.R.T. blocking and 3/4\" FRT plywood (Div. 06), fasteners, insulation, ACT, paint, doors / frames and MEP are excluded (see exclusions).",
       "Material prices: FBM (myfbm.com) list prices read " + str(fecha) + "; 250S125-43 stud not listed on FBM ([PRICE TO CONFIRM])."]

@@ -12,3 +12,9 @@
 - Leyenda del PDF de markups con Subject LEGEND (antes 'W2' / 'CF' sin /Measure en página sin /VP: inflaban los grupos de Bluebeam).
 - Drive › rev1 FINAL PARA REVISAR › Planos marcados: 'XF_markups_rev1b - OPEN IN BLUEBEAM.pdf'; el anterior = 'zz NO USAR - XF_markups_rev1 old.pdf'. 12 archivos con contenido distinto renombrados 'zz old …' (drive_renombrados.json); nada borrado. Cantidades del Excel idénticas (0 celdas distintas).
 - Compuerta VERDE 203 PASS / 2 AMBER / 0 FAIL; skill v81cf84.
+
+## RFI-01 cerrado (11-nov, decisión del usuario, opción A — U-174)
+- 26'-0" de A0.1 ("1 STORY - 26 FT") queda como decisión del usuario; 0 RFI abiertos. Cantidades sin cambio (Partition Takeoff y Material Summary idénticos).
+- Actualizados: Pending Items (vacío), Review Item 4/8, Scope Checklist, SEGUIMIENTO, PARA_REVISAR, GUIA, RESUMEN, CHECKLIST, proposal (cláusula RFI-01 = decisión del usuario, total igual).
+- Drive: 18 anteriores renombrados "zz old U-174 …" (el PDF = "zz NO USAR - XF_markups_rev1b old (antes de U-174).pdf"), nuevos subidos con subir_entrega.py; nada borrado.
+- Compuerta VERDE 204 / 2 / 0 (CB_U_174 PASS). Skill v81cf85.

@@ -12,6 +12,8 @@ td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 pt = [r for r in wb["Partition Takeoff"].iter_rows(min_row=5, values_only=True) if r[1] and isinstance(r[2], (int, float)) and not str(r[1]).startswith(("SUBTOTAL", "TOTAL"))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]; cr = [r for r in c["rfis"] if r["status"] != "open"]
+ud = [r for r in cr if "user decision" in str((r.get("resolved") or {}).get("by", ""))]
+DLF = round(sum(m["lf"] for m in c["misc_items"] if m.get("element") == "demo" and m.get("lf")), 2)
 PDF = "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf"
 TIT = "Xfinity - Interquest, 1333 Interquest Pkwy, Lot 11, Colorado Springs, CO 80921 - Metal framing & drywall take-off, rev1 FINAL"
 def fam(sub, unit=True):
@@ -61,10 +63,10 @@ P = [f"# Revisar primero — {TIT}", ""] + datos() + ["", "## Proyecto", "",
  "## Revisar esto primero", "",
  f"1. Markups: `Planos marcados/{PDF}` (A2.0 walls, A1.0 demo, A3.0 header + cuartos EXCLUDED).",
  f"2. 5/8\" Type X: {fam('Type X')} · steel stud 3-5/8\": {fam('3-5/8\" metal stud')} · 2-1/2\": {fam('2-1/2\" stud')} · demolición: {fam('Demolition')}.",
- f"3. {len(rf)} RFI abierto(s) con el valor conservador CARGADO (SEGUIMIENTO.md): " + ", ".join(r['id'] for r in rf) + f". Otros {len(cr)} se cerraron con lo impreso.",
+ f"3. {len(rf)} RFI abiertos. RFI-01 (altura de la estructura) CERRADO por decisión del usuario 11-nov, opción A: 26'-0\" de A0.1 cargado (U-174); cantidades sin cambio. Otros {len(cr) - len(ud)} se cerraron con lo impreso.",
  "4. Review Items: patch and repair de los existentes (allowance), blocking sobre walls existentes, L-bead de las columnas, header SOF-01 no detallado, texture finish de la spec contra Level 4 del plano.", ""]
 open(os.path.join(E, "PARA_REVISAR_EN_LA_MANANA.md"), "w").write("\n".join(P) + "\n")
-S = ["# SEGUIMIENTO - Xfinity Interquest (RFI abiertos con supuesto conservador CARGADO, U-048)", "",
+S = ["# SEGUIMIENTO - Xfinity Interquest (RFI abiertos con supuesto conservador CARGADO, U-048)", "", f"RFI abiertos: {len(rf)}. Cerrados por decisión del usuario: " + "; ".join(f"{r['id']} - {r['resolved']['answer'][:260]}" for r in ud) + ".", "",
      "| # RFI | Ítem | N/HOJA | Qué falta | Supuesto cargado | Delta |", "|---|---|---|---|---|---|"]
 for r in rf:
     S.append(f"| {r['id']} | braces 4/A2.0 + demolición A1.0 | {r.get('source', 'A0.1, 4/A2.0, A1.0')[:120]} | {r['question'][:220]} | {r['loaded'][:160]} | {r['delta'][:200]} |")
@@ -82,13 +84,13 @@ G = [f"OPEN IN BLUEBEAM: `Planos marcados/{PDF}` (the only editable markups file
  "## PASO 4 — El Excel", "", f"- `Take-off/{XN}`: Partition Takeoff (W2 y CF con SUBTOTAL), Material Summary (Net, waste, compra; 'Where it comes from' con la hoja).",
  f"- Totales: Type X {fam('Type X')}; stud 3-5/8\" {fam('3-5/8\" metal stud')}; stud 2-1/2\" {fam('2-1/2\" stud')}; braces {fam('brace to structure')}; demolición {fam('Demolition')}.", "",
  "## PASO 5 — Alcance", "", "- EXCLUDED sin RFI: ACT y grid (otro bid package), painting (otro bid package), insulation, wood / F.R.T. blocking / plywood de server racks (Div. 06), tornillería, acoustical sealant, puertas / frames / storefront, MEP, ductos, demolición de cielos existentes (tipo no indicado).", "",
- "## PASO 6 — Lo que te toca decidir", ""] + [f"- **{r['id']}**: {r['question'][:240]} → cargado: {r['loaded'][:160]}. Delta: {r['delta'][:200]}" for r in rf] + [
+ "## PASO 6 — Lo que te toca decidir", "", f"- RFI abiertos: {len(rf)}. RFI-01 (altura de la estructura) ya lo decidiste el 11-nov: opción A, 26'-0\" cargado (U-174); queda solo como sensibilidad: cada pie menos = -7.07 LF de braces y -{DLF} SF de demolición."] + [f"- **{r['id']}**: {r['question'][:240]} → cargado: {r['loaded'][:160]}. Delta: {r['delta'][:200]}" for r in rf] + [
  "- Review Items del Excel (allowances y criterios): patch and repair de W1 / W4, blocking sobre walls existentes, L-bead de las columnas, header SOF-01.", "",
  "## Carpeta `Auditoria/`", "", "- `burbujas/`, `schedules/` (lectura independiente), `resolucion_AB/` (cada diferencia A/B con imagen), `rfi_img/`, `review_items/`, `revision_independiente/` (revisión antes de entregar, U-168 A1-A5)."]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 Z = ["# RESUMEN rev1 FINAL — Xfinity Interquest (Colorado Springs, CO)", "",
  "Primera y única entrega (U-169): revisión independiente completa hecha ANTES de entregar.", "",
  "| Material | Unit | Net |", "|---|---|---|"] + [f"| {r[0]} | {r[1]} | {r[2]:,.2f} |" for r in ms if r[2]] + ["",
- f"RFI abiertos: {len(rf)} (" + ", ".join(r['id'] for r in rf) + f"); cerrados por lo impreso: {len(cr)}."]
+ f"RFI abiertos: {len(rf)}; cerrados por lo impreso: {len(cr) - len(ud)}; cerrados por decisión del usuario: {len(ud)} (" + ", ".join(r['id'] for r in ud) + ", opción A 26'-0\", U-174; cantidades sin cambio)."]
 open(os.path.join(E, "RESUMEN_rev1.md"), "w").write("\n".join(Z) + "\n")
 print("docs ok", len(rf), "rfis open")

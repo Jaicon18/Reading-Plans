@@ -95,7 +95,7 @@ c['ceilings'][0]['system'] = ("framed header at the opening left by DEMO-01: 3-5
                               "faces to 6\" above the adjacent ceilings (A2.0 wall legend); A3.0 lighting legend '5/8\" TYPE X GYPSUM BOARD CEILING'")
 DLF = round(sum(m['lf'] for m in c['misc_items'] if m.get('element') == 'demo' and m.get('lf')), 2); DSF = round(sum(m.get('sf') or 0 for m in c['misc_items'] if m.get('element') == 'demo'), 2)
 for r in c['rfis']:
-    r['status'] = 'open' if r['id'] == 'RFI-01' else 'closed'
+    r['status'] = 'closed'   # RFI-01 closed 11-nov by user decision (button 'A: 26\'-0" (cargado)', U-174)
 RES = {
  'RFI-02': "CLOSED by the plans: A3.0 tags the strip 'GYP. BD. 8'-6\" AFF' (no 'EXISTING' on this tag, unlike the hallway 9'-0\" tag) where A1.0 removes DEMO-01; built as a framed header with type W2 framing, underside 1.73 SF + storage face to 10'-6\" + hallway face to 9'-6\" (A2.0 wall legend 'TO 6\" ABOVE CEILING') - loaded (option A).",
  'RFI-03': "CLOSED by the plans: A1.0 key note 7 ('ALL EXISTING INTERIOR WALLS, DOORS AND WINDOWS AS SHOWN DASHED TO BE REMOVED') points at the inner dashed pair of the L element = wall; DEMO-08 / DEMO-09 loaded.",
@@ -106,6 +106,7 @@ for r in c['rfis']:
     if r['id'] in RES:
         r['resolved'] = {"answer": RES[r['id']], "by": "plans (U-156 / U-162)"}
     if r['id'] == 'RFI-01':
+        r['resolved'] = {"answer": "user decision 11-nov (button 'A: 26'-0\" (cargado)', U-174): the height of the existing structure is not printed on any sheet, so the A0.1 code analysis building height 'HEIGHT IN STORIES: 1 STORY - 26 FT' is carried as loaded for the 5 braces of 4/A2.0 and the demolished walls DEMO-01..11; quantities unchanged. Sensitivity kept for the estimator: each 1 ft lower B.O. structure = -7.07 LF braces and -{0:.2f} SF demolition.".format(DLF), "by": "user decision (U-174)"}
         r['loaded'] = "26'-0\" (A0.1 building height, conservative) for the 5 braces of 4/A2.0 and the height of the demolished walls"
         r['question'] = ("Height of the existing structure (underside of roof structure) is not printed on any sheet (A0.1-A5.0 text, E / M / P SHX searched: DECK, JOIST, STRUCTURE, B.O., BOTTOM OF, ROOF, CLG. HT., PLENUM, AFF; "
                          "M1.0 only says 'EXISTING CONCRETE BEAM ABOVE CEILING'). Needed for the 4/A2.0 brace length and the SF of the walls demolished on A1.0. No code section gives an existing structure height.")

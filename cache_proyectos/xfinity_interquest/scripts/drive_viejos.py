@@ -3,6 +3,7 @@ el PDF de markups viejo -> 'zz NO USAR - XF_markups_rev1 old.pdf'. Uso: drive_vi
 import sys, os, json, hashlib, requests
 sys.path.insert(0, '/opt/takeoff'); import gdrive_fetch as G
 loc, raiz, hacer = sys.argv[1], sys.argv[2], '--hacer' in sys.argv
+U174 = "--u174" in sys.argv
 tok = G.access_token()
 def lst(fid):
     p = {"q": f"'{fid}' in parents and trashed = false", "fields": "nextPageToken, files(id,name,mimeType,size,md5Checksum)",
@@ -19,13 +20,17 @@ def rec(dl, fid):
         if it["mimeType"].endswith("folder"):
             if os.path.isdir(pl): rec(pl, it["id"])
             continue
+        if n.startswith("zz "):
+            continue
+        if U174 and n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
+            cambios.append((it["id"], os.path.relpath(pl, loc), "zz NO USAR - XF_markups_rev1b old (antes de U-174).pdf")); continue
         if n == "XF_markups_rev1 - OPEN IN BLUEBEAM.pdf":
             cambios.append((it["id"], os.path.relpath(pl, loc), "zz NO USAR - XF_markups_rev1 old.pdf"))
         elif os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
-            cambios.append((it["id"], os.path.relpath(pl, loc), "zz old " + n))
+            cambios.append((it["id"], os.path.relpath(pl, loc), ("zz old U-174 " if U174 else "zz old ") + n))
 rec(loc, raiz)
 for c in cambios:
     print(("RENOMBRADO " if hacer else "A RENOMBRAR ") + c[1] + " -> " + c[2])
     if hacer: G.rename(tok, c[0], c[2])
 print(len(cambios), "archivos")
-json.dump(cambios, open('/root/xf/work/drive_renombrados.json', 'w'), indent=1) if hacer else None
+json.dump(cambios, open('/root/xf/work/drive_renombrados' + ('_u174' if U174 else '') + '.json', 'w'), indent=1) if hacer else None

@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-10 22:13 PST",
- "fecha_iso": "2026-11-11T06:13:05.842990+00:00",
+ "fecha_california": "2026-11-10 22:45 PST",
+ "fecha_iso": "2026-11-11T06:45:49.294827+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 203,
+  "PASS": 204,
   "AMBER": 2,
   "FAIL": 0
  },
@@ -20,7 +20,7 @@
    "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
    "estado": "PASS",
    "evidencia": [
-    "284 archivos en rev1 FINAL PARA REVISAR"
+    "285 archivos en rev1 FINAL PARA REVISAR"
    ],
    "plausibilidad": "OK"
   },
@@ -198,7 +198,7 @@
    "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
    "estado": "PASS",
    "evidencia": [
-    "1 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
+    "0 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
    ],
    "plausibilidad": "OK"
   },
@@ -240,7 +240,7 @@
    "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
    "estado": "PASS",
    "evidencia": [
-    "1 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
+    "0 RFI abiertos y ningún 'not printed / assumed' sin RFI o decisión"
    ],
    "plausibilidad": "OK"
   },
@@ -269,7 +269,7 @@
    "descripcion": "U-166 (usuario 11-nov: 'si ya sabes que va a pasar si cometes un error, por que no lo arreglas antes de que yo te lo diga'): simula el uso real del usuario en Windows / Bluebeam / Excel: (1) ruta Windows en Drive <= 230 (Auditoria.zip = un archivo, nombres dentro <= 120); (2) PDF de markups abre sin contraseña ni firmas y CE_VISTA_BLUEBEAM en PASS; (3) ningún nombre con < > : \" / \\ | ? *; (4) el Excel abre sin #REF! / #VALUE! / #DIV/0!; (5) test con la ruta de rev18 (264) = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "284 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
+    "285 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
    ],
    "plausibilidad": "OK"
   },
@@ -364,7 +364,7 @@
    "descripcion": "U-140: un RFI 'not printed' abierto lleva la búsqueda completa: >= 12 términos con sinónimos, todas las disciplinas, SHX, medida vectorial a escala impresa, specs / addenda y sets de todos los GC",
    "estado": "PASS",
    "evidencia": [
-    "1 RFI 'not printed' con búsqueda exhaustiva (1 abiertos)"
+    "0 RFI 'not printed' con búsqueda exhaustiva (0 abiertos)"
    ],
    "plausibilidad": "OK"
   },
@@ -390,7 +390,7 @@
    "descripcion": "todo RFI cerrado (por plano o por el estimador) queda escrito en el Excel",
    "estado": "PASS",
    "evidencia": [
-    "8 cierres citados"
+    "10 cierres citados"
    ],
    "plausibilidad": "OK"
   },
@@ -490,7 +490,7 @@
    "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
    "estado": "PASS",
    "evidencia": [
-    "35 revisiones OK"
+    "34 revisiones OK"
    ],
    "plausibilidad": "OK"
   },
@@ -715,7 +715,7 @@
    "descripcion": "U-026 / BE-108: ningún RFI abierto sobre un tema que un precedente del estimador (R80e.34 / R80e.78) ya decidió, salvo que lo cite",
    "estado": "PASS",
    "evidencia": [
-    "1 RFI abiertos sin precedente decidido"
+    "0 RFI abiertos sin precedente decidido"
    ],
    "plausibilidad": "OK"
   },
@@ -922,7 +922,7 @@
    "descripcion": "U-155 (usuario 8-nov): 'buscar hasta encontrar las respuestas en los planos; si no, usa los códigos del IBC y cita su referencia': todo valor / opción 'per code / by code / CODE:' del Excel cita sección o tabla (IBC / CBC / ASTM / GA / UL / NFPA) o declara 'none applies'; sin cita = FAIL (la respuesta impresa la vigila CE_RFI_BARRIDO_IMPRESO)",
    "estado": "PASS",
    "evidencia": [
-    "1 valores por código con su sección / tabla"
+    "0 valores por código con su sección / tabla"
    ],
    "plausibilidad": "OK"
   },
@@ -2197,6 +2197,18 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CB_U_174",
+   "reglas": [
+    "U-174"
+   ],
+   "descripcion": "U-174 (usuario 11-nov, Xfinity Interquest RFI-01 botón 'A: 26'-0\" (cargado)'): altura de la estructura existente no impresa en ninguna hoja = se carga la altura del edificio del code analysis (ej. A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT') SIN RFI, con N/HOJA y delta por pie. RFI abierto de altura de estructura / deck / B.O. con altura del edificio impresa en el set (o en el propio RFI) = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "sin RFI de altura de estructura con altura del edificio impresa (U-174)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CB_U_163",
    "reglas": [
     "U-163"
@@ -2784,9 +2796,9 @@
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/img/015_ALERT_W1_A2.0_p5.png": "6972d1e7030ac9ca936992802c882f845b9ef8698ed7631bda3da9b3a6d09e4b",
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/img/016_ALERT_W4_A2.0_p5.png": "5d813b55bd9efd21b12c541948bc876d41c9479786b7c7e42c4cf0c26e65c52a",
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/img/demo_L_A1.0.png": "69b0ed1045ff476c4f5572f68b279a223ce1692d637c44ef0e93ac9be475b5aa",
-  "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion.md": "0e53fd9cb67221a1854a8e352dc84ad55789cac936de587de532bbca0ce625de",
+  "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion.md": "941a97d8b42a713413aa56bfb36f72bb8a27855aac55ea82e8349d435f979eca",
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/revision.md": "32902d2aff895a0ec2e9a614b50c3001087701f48d21d9bcf44e6558b664f422",
-  "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A0.1_26FT.png": "cc9854252c53138d0ba16beefb5bb92d73164aa0302c2b1c6bbce922dabac645",
+  "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A0.1_26FT.png": "a5e56198420359e03c860d0afcf758578cc43df6ddf41b1e1942b5f16a44da4c",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A2.0_brace.png": "ab13c162e2accb8416ebf6df3e892d16f1f67371823114062bc93f41834971d0",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A3.0_ceiling.png": "aea005993fe06740a4c9e908f4126428afadfa06601a8ea87e5d3ef1b064c279",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_M1.0_beam.png": "fb030d9db52ec0f835bbd006884e0fa2273a134c3e267c28413a588a50a97b14",
@@ -2928,7 +2940,7 @@
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/fix/legend_A2.0.png": "9c85b998d4e7c5c764ba08d53adf3c5372171629ef14af09b98387be91bf0378",
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/fix/legend_A3.0.png": "7bb57467072bb18cf15fb3dbaa7f64b12753af7a00d2289157015e926c74c439",
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/markups_indep.json": "870cad97c490c9b1d180dc63b3baacffe6477dfe1a18213265e9b954be11430a",
-  "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A0.1_26FT.png": "cc9854252c53138d0ba16beefb5bb92d73164aa0302c2b1c6bbce922dabac645",
+  "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A0.1_26FT.png": "a5e56198420359e03c860d0afcf758578cc43df6ddf41b1e1942b5f16a44da4c",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A2.0_brace.png": "ab13c162e2accb8416ebf6df3e892d16f1f67371823114062bc93f41834971d0",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A3.0_ceiling.png": "aea005993fe06740a4c9e908f4126428afadfa06601a8ea87e5d3ef1b064c279",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_M1.0_beam.png": "fb030d9db52ec0f835bbd006884e0fa2273a134c3e267c28413a588a50a97b14",
@@ -2973,25 +2985,25 @@
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedule_wall_types.png": "2d83630122b292d6b163aee4ce9dd0ad9e62799a774a450c2bafad0bfe233ae1",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "d673f749987c61770c3cdd5baba7469158e7cc4e1c18eee1599e20f69235953f",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/wall_legend.png": "5fcbd5bacae1e976218ffbc34c7e08f17f4dd9c05134a2705d84f1df266fe69b",
-  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "c18a09a8e9b49c74c5e31f89768f915e2e5e05871b05d97f8737a78dece8821e",
+  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "a88c646756137d90a56a8e78ae909e3577fe8921c81971cd71112a7d9c3ab702",
   "rev1 FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "ae9de99350a804527a41e9e61427e0155d62f085ade2ed862e92216f187da306",
-  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "69121394794f04224cd02d03229723728ecd170237bfda1d3cc701ad4ec1f601",
-  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "c29c2ef00f6a00cf169ae92266482c2e50e56aa204d38a80ff6232ca2267513b",
+  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "30e034a555364425cc96106a853968cf3084b6783a9cfeda4d41e7e4d4ad3b98",
+  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "b633e9cb9b43e39ff0449bea8568ad14fa9635f2af4c93b1991670cf406d4978",
   "rev1 FINAL PARA REVISAR/Planos marcados/A1.0 - IMAGE ONLY (not editable) - walls rev1.png": "3700d7a4fdedd053dabe387db653633c349b3b5c110fa2e56a7a6b15883afe9c",
   "rev1 FINAL PARA REVISAR/Planos marcados/A2.0 - IMAGE ONLY (not editable) - walls rev1.png": "f4961609235a2948272fe2f1264e90f5a433ddebb963ef20d38d9456ea395739",
   "rev1 FINAL PARA REVISAR/Planos marcados/A3.0 - IMAGE ONLY (not editable) - ceilings rev1.png": "80aa20565e9da437949848b1fcd6e65df95904f6bc5be703f42bfe8f746f4d01",
-  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "a9848c380a5769d40d01309ac8b1b40aa3d55830f5be4cbfb2204cb632b311c8",
-  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "4c2b101211b2c848a69b7957b2cb26c954ca124f23e1391563b056fa0f7eebcb",
-  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "2395fe5a6c55e4764df626b120f3c1c94079cc8a5290951e73e6e915de30f464",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "eac6182be988a78fd294f5ef78235d73a93364c97d82eea4274ade15c6e3fb8a",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "e00f0a2890614ff2ad7a7f8b4590e308e47e5a1a09d55698b8fba42f6a1641b9",
-  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "3c2987f35edbe0d977c068696b2d7f3a93f12b23f3ac9bd62a577c12f8db4fd6",
-  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "7a737d7406db52dc20a1ee0b69bc21f7f3b9d49f5f465af1d578a9b3d414a25f",
-  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "ac9728d6730ca1c0eee5bbe8cdf0ad6e24e6cec0fe1972a982690fe5b1673843",
-  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "2af985ff6cd09553d48165db68dc987323fdfcb8209e9239d4cb314bbb87880c",
-  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "2383463e77585dc2c573b5dede81980ebf237750d1257b38b0c46177a7b20532",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "40621c0a9c0e1bf10eac4a258556dc01ae84dbc48f78ddd63abb32edfb1cb4a4",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "5b7d81e04d86c2387071eac1080e327df0cf7873e914c0ea6e2e78b1d0511b32"
+  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "2ce309c61da0df77126040c1f0b024b9491bc8ed5f1efd5a8d8a3673a9eded73",
+  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "3521113b3db4cb994b46b7e4fd1e2a138b0c4979fea2c4969d61a7eacc30fc45",
+  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "b89ca98fca5b3b26584d8c8ed172e1ec51aad064d486ea321849476d57b3837e",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "b45ddfe03df78e4b9a1aa523275f674958d8d0e0984776c5dc61cbd7c9825118",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "e63234d738a74bd380f213cdc09b42a946910156007505f2c39bb68949287c59",
+  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "7d6aeb5f062358c331a4037a9d143064b121663d56ddbf0a8a20a0fa0e889672",
+  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "8fd978572a992ef712da14b8985b2db1e09c6c1df716a0a763276f06a4b5d85d",
+  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "f0eddd82ba8a53bbfb6481473a804332f3db57f98b01f9637254a0d6e20ccfde",
+  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "eb2dc7dd29c0b561e73a3af4f01c852aded426168c7ce6c4f6daf0ef6bdc91a8",
+  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "0bd29c7edc3058388bf5ebf04096409ce1988878d2376e988604af22b851853e",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "6ecb46771f337a78cc3a5c317126953569061208ccde93a98c969a6033ecfe27",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "72fe3e9aeb7d93bf523ea055e105d1501ecc36b8d7a4f0ad23917921386ed79f"
  },
  "drive": {
   "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",

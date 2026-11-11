@@ -58,7 +58,7 @@ for r in c["rfis"]:
     q = r.get("question") or r.get("pregunta")
     if r["status"] != "open":
         cierre[r["id"]] = {"pregunta": q + " - CLOSED: " + r["resolved"]["answer"],
-                           "delta": "0 (closed by the plans; resolution loaded in the quantities)"}
+                           "delta": ("0 (closed by user decision, option A; resolution loaded in the quantities, U-174)" if "user decision" in str(r["resolved"].get("by", "")) else "0 (closed by the plans; resolution loaded in the quantities)")}
         continue
     o = json.loads(json.dumps(r["opciones"]))
     terms = list(dict.fromkeys((r.get("barrido") or {}).get("terminos", []) + ["DECK", "JOIST", "STRUCTURE", "B.O.", "BOTTOM OF", "ROOF", "CLG. HT", "PLENUM", "HEIGHT", "BEAM", "T.O.", "26 FT"]))
@@ -94,10 +94,10 @@ RI = [
   f"also at the 2 board edges against the existing pier of each column, {lbp['ref']} {lbp['lf']:g} LF. A: as loaded / B: no L bead at the pier edges "
   f"(delta minus {lbp['lf']:g} LF of L bead)."),
  ("floor_plan", "W2", None, "4/A2.0 / A0.1", "RI-03_A0.1_26FT", ("A0.1", "26 FT", (2281, 1312)),
-  f"RFI-01 open: height of the existing structure is not printed (A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is the only figure). "
+  f"RFI-01 CLOSED by user decision 11-nov (option A, U-174): height of the existing structure is not printed (A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' is the only figure). "
   f"26'-0\" carried for the {sum(m.get('pcs', 0) for m in br)} braces to structure of 4/A2.0 "
   f"({round(sum(m['qty'] for m in br), 2)} LF) and for the demolished walls DEMO-01..09 "
-  f"({round(sum(m['qty'] for m in demo), 2)} SF). Sensitivity per RFI-01: {next(r for r in c['rfis'] if r['id'] == 'RFI-01')['delta']}."),
+  f"({round(sum(m['qty'] for m in demo), 2)} SF). Sensitivity kept for the estimator (RFI-01 delta): {next(r for r in c['rfis'] if r['id'] == 'RFI-01')['delta']}."),
  ("floor_plan", "W1", None, "A5.0 / 8/A2.0", "RI-04_A5.0_blocking_legend", ("A5.0", "BLOCKING LEGEND", (98, 97)),
   "Metal blocking on EXISTING walls: A5.0 blocking legend (EV-44 / EV-45 '6\" SHEET METAL BLOCKING STRAPPING FOR FIXTURE ATTACHMENT') "
   "and A2.0 key notes 5 / 6 + 8/A2.0 backing at the fire extinguishers fall on existing walls W1 to remain: "
@@ -141,7 +141,7 @@ hojas = [
  {"categoria": "elevations / sections", "estado": "reviewed", "hojas": "A5.0 interior elevations (9/A5.0 retail west wall = W2 line '12'-0\" TO B.O. CEILING'); no building / wall sections in the set besides the A2.0 / A3.0 details"},
  {"categoria": "enlarged / interior elevations", "estado": "reviewed", "hojas": "A5.0 interior elevations & enlarged toilet plan, blocking legend (EV-44 / EV-45 6\" sheet metal strapping, EV-10-6 3/4\" plywood)"},
  {"categoria": "schedules", "estado": "reviewed", "hojas": "A2.0 door schedule + hardware groups, A4.0 room finish schedule (ceiling heights), A2.0 interior wall limiting heights table"},
- {"categoria": "structural", "estado": "reviewed - none in the set", "hojas": "no S sheets in the set (A0.1 sheet index); structure height not printed (RFI-01)"},
+ {"categoria": "structural", "estado": "reviewed - none in the set", "hojas": "no S sheets in the set (A0.1 sheet index); structure height not printed (RFI-01 closed by user decision, option A 26'-0\", U-174)"},
  {"categoria": "MEP", "estado": "reviewed", "hojas": "E0.0 symbols, E1.0 lighting, E2.0 power / low voltage, E2.1 fixture elevations, E3.0 electrical specifications (access panel 'as appropriate', none located); M0.0, M1.0 HVAC plan (lay-in devices in ACT, existing concrete beam above ceiling), M2.0; P1.0 plumbing ('no plumbing allowed within tenant demising walls'): no framed opening or backing in our scope; ducts EXCLUDED by standing order"},
 ]
 
@@ -194,15 +194,15 @@ extra = [
  ("Existing walls patch and repair (allowance)", f"EXCLUDED from the quantities - allowance by the estimator (Review Item): 2/A2.0 W1 / W4 'PATCH AND REPAIR' on {len(ex)} existing walls, area not measurable."),
  ("Existing walls W1 / W4 to remain (not quantified)", f"NOT QUANTIFIED - existing construction to remain (2/A2.0 WALL TYPE 1 / WALL TYPE 4, A2.0 wall legend grey): " + "; ".join(f"{e['id']} {e['lf']} LF" for e in ex) + f" (total {ex_lf} LF on plan)."),
  ("Landlord room", "EXCLUDED - Landlord room (N.I.C.) not in contract (A1.0 / A2.0 / A3.0 label '(N.I.C.)')."),
- ("Braces to structure (4/A2.0)", f"QUANTIFIED - 4/A2.0 'BRACE TO STRUCTURE, ALTERNATE SIDES ... METAL STUDS AT 8'-0\" O.C. MAX ... 3 5/8\" 20 GA. MIN.': " + "; ".join(f"{m['ref']} {m['qty']} LF ({m['pcs']} pcs)" for m in br) + "; length at 45 deg to the 26'-0\" carried (RFI-01)."),
- ("Demolition of gypsum board and metal framing", f"QUANTIFIED - A1.0 key 7 dashed walls DEMO-01..09: SF = LF x H per element (no layers), H = 26'-0\" conservative (A0.1, RFI-01 open), total {round(sum(m['qty'] for m in demo), 2)} SF."),
+ ("Braces to structure (4/A2.0)", f"QUANTIFIED - 4/A2.0 'BRACE TO STRUCTURE, ALTERNATE SIDES ... METAL STUDS AT 8'-0\" O.C. MAX ... 3 5/8\" 20 GA. MIN.': " + "; ".join(f"{m['ref']} {m['qty']} LF ({m['pcs']} pcs)" for m in br) + "; length at 45 deg to the 26'-0\" carried (RFI-01 closed by user decision, U-174)."),
+ ("Demolition of gypsum board and metal framing", f"QUANTIFIED - A1.0 key 7 dashed walls DEMO-01..09: SF = LF x H per element (no layers), H = 26'-0\" conservative (A0.1; RFI-01 closed by user decision 11-nov, option A, U-174), total {round(sum(m['qty'] for m in demo), 2)} SF."),
 ]
 for k, (n, x) in enumerate(extra, 1):
     alcances.append({"id": f"ALC-E{k:02d}", "nombre": n, "estado": "CUANTIFICADO" if x.startswith(("QUANTIFIED", "INCLUDED")) else "NO APLICA", "nota": x})
 barrido = [
  {"item": "header", "specs": "found 7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM): 3-5/8\" metal track + nested 3-5/8\" stud over the HM frame (door 101)", "schedule": "found A2.0 door schedule (door 101 new in W2-01; 100 / 102-104 existing)", "estructural": "none: no S sheets in the set"},
  {"item": "deflection clips", "specs": "none: 4/A2.0 wall to 6\" above ceiling, top track screwed to studs, braced to structure (no slip / deflection track)", "schedule": "none", "estructural": "none: no S sheets"},
- {"item": "bracing", "specs": "found 4/A2.0 brace to structure, alternate sides, metal studs @ 8'-0\" o.c. max, 3 5/8\" 20 ga min, max length 25'-0\"", "schedule": "none: no bracing schedule", "estructural": "none: no S sheets; structure height not printed (RFI-01)"},
+ {"item": "bracing", "specs": "found 4/A2.0 brace to structure, alternate sides, metal studs @ 8'-0\" o.c. max, 3 5/8\" 20 ga min, max length 25'-0\"", "schedule": "none: no bracing schedule", "estructural": "none: no S sheets; structure height not printed (RFI-01 closed by user decision, option A 26'-0\", U-174)"},
  {"item": "bridging", "specs": "none: A2.0 limiting heights table - fully sheathed both sides, bridging at 60\" only as an option; 2/A2.0-8/A2.0 print no bridging row", "schedule": "none", "estructural": "none"},
  {"item": "blocking", "specs": "found A5.0 blocking legend (EV-44 / EV-45 6\" sheet metal strapping) + 8/A2.0; F.R.T. wood blocking 7/A2.0 / 8/A2.0 EXCLUDED", "schedule": "found A4.0 EV fixture tags / A5.0 legend", "estructural": "none"},
  {"item": "backing", "specs": "found 8/A2.0 backing at the fire extinguishers (A2.0 key notes 5 / 6)", "schedule": "none", "estructural": "none"},
@@ -214,7 +214,7 @@ td = {
  "inputs": {"waste_metal": 0.15, "waste_no_metal": 0.06, "sheet_w_ft": 4, "sheet_l_ft": 12, "stud_stock_ft": 14,
             "track_stock_ft": 10, "plan_scale_pt_per_ft": c["constants"]["plan_scale_pt_per_ft"]["value"],
             "bod_ft": c["constants"]["deck_heights"]["value"]},
- "inputs_notas": {"bod_ft": "Structure height NOT printed on any sheet: 26'-0\" = A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' carried as the conservative value for the 4/A2.0 braces and the demolished wall height (RFI-01 open). Wall heights per wall in the Partition Takeoff (ceiling + 6\", 2/A2.0).",
+ "inputs_notas": {"bod_ft": "Structure height NOT printed on any sheet: 26'-0\" = A0.1 'HEIGHT IN STORIES: 1 STORY - 26 FT' carried as the conservative value for the 4/A2.0 braces and the demolished wall height (RFI-01 closed by user decision 11-nov, option A, U-174). Wall heights per wall in the Partition Takeoff (ceiling + 6\", 2/A2.0).",
                   "plan_scale_pt_per_ft": "A1.0 / A2.0 / A3.0 1/4\" = 1'-0\" (18 pt/ft, checked on the printed 25'-8 3/4\", 18'-6 3/4\", 44'-6\" and 29'-0 3/4\" of A2.0).",
                   "stud_stock_ft": "14 ft sticks: the W2 / CF studs are 12'-6\" long (ceiling 12'-0\" + 6\", 2/A2.0) and do not come out of a 12 ft stick.",
                   "drywall_screws_per_sf": "YIELD; fasteners EXCLUDED in this project (estimator standing order)."},
