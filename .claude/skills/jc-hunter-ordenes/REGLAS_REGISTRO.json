@@ -7533,6 +7533,74 @@
    "texto_corto": "toda tool que anota en la bitácora usa bitacora.anotar (renglón con 'prev', lock): comparar_alturas.capa_colores (v81cf94, U-184 (3)) escribía sin 'prev' y rompía la cadena -> CE_REGLAS FAIL en todo proyecto",
    "categoria": "programa-pendiente",
    "motivo": "arreglo en tools/comparar_alturas.py (tools_post_v81cf94 + diff); test (anotar dos veces por comparar_alturas y cadena_ok == 0) en la próxima versión"
+  },
+  {
+   "id": "BE-XF10",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity, U-184, 11-nov)",
+   "texto_corto": "sección nueva del SKILL.md sin entrada en reglas_clasificacion.py = CE_REGLAS FAIL ('regla sin clasificar'); un PASS que dice '0 walls' lo tumba el auditor de plausibilidad U-138: toda sección nueva lleva su entrada de catálogo y los PASS dicen cuántos elementos revisaron (lo hacen cumplir CE_REGLAS y auditar_compuerta)",
+   "categoria": "conducta",
+   "cuando": "version",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "BE-COORD01",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 11-nov, CSV de Bluebeam de CR rev19)",
+   "texto_corto": "comparar_alturas con un CSV que solo trae la columna ID (/NM 'TO-XW.6.3-L1-02 A'): 'NO WALL ID' o un pedazo del ID ('L1-02'); el /NM se decodifica completo (TO-, %2F, ~n, -BOARD) y la cara A / B se empareja con su wall; cache_proyectos/herramientas/comparar_alturas.py = la del skill vigente",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::wall_id",
+    "take-off:tools/comparar_alturas.py::id_nm"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_coord01_ids_csv_cr"
+   }
+  },
+  {
+   "id": "BE-CR32",
+   "origen": "CR City Hotel rev19 (unión v81cf91): el parser BE-GK28 tomaba la medición vectorial de comprobación en vez de la cota impresa (L4 8'-11 1/4\" leído 8.94)",
+   "texto_corto": "en la fuente de altura, 'printed <ft-in>' seguido de cross-check / check / verified manda la cota IMPRESA; la medición vectorial solo comprueba",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/revision_markups.py::altura_impresa"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr32_impresa_sobre_crosscheck"
+   }
+  },
+  {
+   "id": "BE-CR33",
+   "origen": "CR City Hotel rev19: comparar_alturas no reconocía hojas con punto (A7.05, 4/A5.05) en height_diff_reason y exigía motivo a TODOS los renglones de un type con dos alturas",
+   "texto_corto": "height_diff_reason con N/HOJA acepta hojas con punto / guion; en el cruce cuarto-type los renglones con motivo impreso quedan explicados y falla solo si los renglones SIN motivo tienen alturas distintas",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::reglas_fisicas",
+    "take-off:tools/comparar_alturas.py::cruce_cuartos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr33_cruce_tipo_explicado"
+   }
+  },
+  {
+   "id": "BE-CR34",
+   "origen": "CR City Hotel rev19: el renglón de soffit studs y el RFI-30 decían 'gauge not printed' y A0.06 imprime STUD SCHEDULE 'STUD DEPTH 2 1/2\" MIN. GAUGE 25'",
+   "texto_corto": "antes de declarar un gauge no impreso se barre el set por STUD SCHEDULE / MIN. GAUGE; 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE impreso = FAIL (U-171)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_gauge_impreso",
+    "take-off:tools/compuerta_entrega.py::gauge_impreso_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cr34_gauge_impreso"
+   }
   }
  ]
 }

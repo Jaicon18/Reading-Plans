@@ -1,0 +1,537 @@
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/REGLAS_REGISTRO.json /root/skill/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v94/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-11 19:51:02.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-11 21:29:09.841462667 +0000
+@@ -1,7 +1,7 @@
+ {
+  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184",
+  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
+- "conteo": 544,
++ "conteo": 562,
+  "reglas": [
+   {
+    "id": "U-001",
+@@ -7524,6 +7524,57 @@
+    "cuando": "siempre",
+    "chequeos": [],
+    "test": null
++  },
++  {
++   "id": "BE-CR32",
++   "origen": "CR City Hotel rev19 (unión v81cf91): el parser BE-GK28 tomaba la medición vectorial de comprobación en vez de la cota impresa (L4 8'-11 1/4\" leído 8.94)",
++   "texto_corto": "en la fuente de altura, 'printed <ft-in>' seguido de cross-check / check / verified manda la cota IMPRESA; la medición vectorial solo comprueba",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/revision_markups.py::altura_impresa"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_hoja_sufijo.py",
++    "token": "test_be_cr32_impresa_sobre_crosscheck"
++   }
++  },
++  {
++   "id": "BE-CR33",
++   "origen": "CR City Hotel rev19: comparar_alturas no reconocía hojas con punto (A7.05, 4/A5.05) en height_diff_reason y exigía motivo a TODOS los renglones de un type con dos alturas",
++   "texto_corto": "height_diff_reason con N/HOJA acepta hojas con punto / guion; en el cruce cuarto-type los renglones con motivo impreso quedan explicados y falla solo si los renglones SIN motivo tienen alturas distintas",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/comparar_alturas.py::reglas_fisicas",
++    "take-off:tools/comparar_alturas.py::cruce_cuartos"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_comparar_alturas.py",
++    "token": "test_be_cr33_cruce_tipo_explicado"
++   }
++  },
++  {
++   "id": "BE-CR34",
++   "origen": "CR City Hotel rev19: el renglón de soffit studs y el RFI-30 decían 'gauge not printed' y A0.06 imprime STUD SCHEDULE 'STUD DEPTH 2 1/2\" MIN. GAUGE 25'",
++   "texto_corto": "antes de declarar un gauge no impreso se barre el set por STUD SCHEDULE / MIN. GAUGE; 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE impreso = FAIL (U-171)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_gauge_impreso",
++    "take-off:tools/compuerta_entrega.py::gauge_impreso_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_cr34_gauge_impreso"
++   }
++  },
++  {
++   "id": "BE-XF10",
++   "origen": "BIBLIOTECA_ERRORES.md (Xfinity 11-nov, U-184)",
++   "categoria": "conducta",
++   "cuando": "publicación del skill",
++   "texto_corto": "toda sección nueva del SKILL.md lleva su entrada en reglas_clasificacion.py (si no, CE_REGLAS 'regla sin clasificar'); los PASS dicen cuántos elementos se revisaron (un '0 walls' lo tumba el auditor de plausibilidad U-138)"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/SKILL.md /root/skill/take-off-metal-frame-drywall/SKILL.md
+--- v94/take-off-metal-frame-drywall/SKILL.md	2026-11-11 19:52:26.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/SKILL.md	2026-11-11 19:59:27.123492223 +0000
+@@ -7,6 +7,8 @@
+ 
+ **v81cf94 (11-nov-2026, Xfinity, orden COORDINACIÓN):** v81cf92 + Grand Kia tools_post_v81cf92 (BE-GK32..BE-GK36) + U-180..U-184: CE_PROTOCOLO_3H (auditoría U-181 fechada antes de la primera subida, H-A / H-B dentro de las lecturas, Excel / PDF con hash producido por la cadena, <= 2 corridas finales, TIEMPOS con corridas; test caso CR rev18b), CB_U_184_ELEV (altura de elevación con comprobación en planta), CB_U_184_EXCL (exclusión de alcance solo de caras no rated, U-159); subir_entrega conserva primera_subida_iso; comparar_alturas registra la capa HEIGHTS en la bitácora; flujo nuevo en la sección PROTOCOLO U-184.
+ 
++**v81cf95 (11-nov-2026, CR City Hotel rev19):** v81cf94 + U-177 CE_RCP_CONTORNO con piso duro (cobertura < 0.5 = FAIL aun con [EDGE NOT DRAWN]; pasa solo si declara 'source <HOJA> offset (dx, dy)' y en esa hoja coincide, o si el borde lo comparte otro cielo cargado de la misma página) + comparar_alturas multinivel (constants.deck_heights por nivel = tope físico H <= B.O. del nivel; existing_walls; salas desde location; pulgadas en fracción sola '1/4"' en el cierre) + **BE-CR32** (revision_markups.altura_impresa: 'printed <cota>; cross-check (Y1-Y0)/k' = manda la cota IMPRESA) + **BE-CR33** (height_diff_reason con hojas con punto / guion A7.05, 4/A5.05; en el cruce cuarto-type los renglones con motivo impreso quedan explicados) + **BE-CR34** (CE_GAUGE_IMPRESA: 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE 'MIN. GAUGE' impreso en el set = FAIL; barrer schedules antes de declarar un gauge no impreso, U-171). Conducta del 11-nov registrada: U-180 (presupuesto duro, reporte cada 30 min), U-181 (auditoría independiente de fondo antes de decir terminado; en CR rev19 encontró la altura 14'-0" mal aplicada al east facade y la cara de baño de 6 demising en Type X) y U-182 (el CSV de Bluebeam es el último paso), U-183 (con un proyecto urgente abierto se reporta solo de ese). Tests: test_compuerta_entrega::test_u177_rcp_contorno_duro, ::test_be_cr34_gauge_impreso; test_comparar_alturas::test_alturas_multinivel_cr, ::test_be_cr33_motivo_hoja_con_punto, ::test_be_cr33_cruce_tipo_explicado; test_hoja_sufijo::test_be_cr32_impresa_sobre_crosscheck.
++
+ **v81cf92 (11-nov-2026, Xfinity):** v81cf91 + U-178 (CB_U_178: los cinco temas que el usuario decidió como regla no llevan RFI; 'Verificar a mano' = RFI 'PENDING - user manual verification' con el conservador cargado y su nota en Pending / SEGUIMIENTO / GUIA) + U-179 (CE_RFI_LISTO: con cualquier otro FAIL de la compuerta y RFI abiertos no se pregunta - los errores se corrigen antes; cada opción con delta MEDIDO, número + unidad, sin '≈' / '+x %' sin operación, y recorte; test con el caso Grand Kia RFI-35).
+ 
+ **v81cf91 (11-nov-2026, UNIÓN, orden COORDINACIÓN):** v81cf88 (Grand Kia, BE-GK03..BE-GK30 + parte de U-177) + v81cf89 (Xfinity, U-177 completa + BE-XF09), unidas 3-way sobre v81cf87. trazabilidad: es_otro de Grand Kia (ceiling track, header, sill, head track, parapet, 10" stud) + brace to structure; el header toma el gauge del wall que lo aloja con IDs de cualquier proyecto '<vano> (<wall>)'; un solo bloque de sufijo de un producto (designación o producto impreso). CE_RCP_CONTORNO: piso PISO_CONTORNO = 0.5. ENTREGA_OK: 'vigente' + 'skill_version' (Grand Kia) y 'vigentes' con md5 (Xfinity, lo usa subir_entrega). CR construye encima de esta versión.
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/comparar_alturas.py /root/skill/take-off-metal-frame-drywall/tools/comparar_alturas.py
+--- v94/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-11 19:49:34.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-11 19:58:52.721407704 +0000
+@@ -278,7 +278,8 @@
+ 
+ 
+ # ---------- (2) cierre dimensional ----------
+-_RX_FTIN = re.compile(r"(\d+)'\s*-\s*(\d+(?:\.\d+)?)(?:\s+(\d+)/(\d+))?\"|(\d+)'(?![\d-])|(?<![\d'.])(\d+(?:\.\d+)?)(?:\s+(\d+)/(\d+))?\"")
++_RX_FTIN = re.compile(r"(\d+)'\s*-\s*(\d+(?:\.\d+)?)(?:\s+(\d+)/(\d+))?\"|(\d+)'(?![\d-])|(?<![\d'./])(\d+)/(\d+)\"|(?<![\d'./])(\d+(?:\.\d+)?)(?:\s+(\d+)/(\d+))?\"")
++# v81cf90 (CR rev19): '1/4"' sola (pulgada en fracción) se leía como '1/' + '4"' -> 14'-0" - 1 1/2" - 1/4" - 3/4" no cerraba
+ 
+ 
+ def _a_decimal(txt):
+@@ -287,8 +288,10 @@
+             v = int(m.group(1)) + (float(m.group(2)) + (int(m.group(3)) / int(m.group(4)) if m.group(3) else 0)) / 12
+         elif m.group(5) is not None:
+             v = float(m.group(5))
++        elif m.group(6) is not None:
++            v = int(m.group(6)) / int(m.group(7)) / 12
+         else:
+-            v = (float(m.group(6)) + (int(m.group(7)) / int(m.group(8)) if m.group(7) else 0)) / 12
++            v = (float(m.group(8)) + (int(m.group(9)) / int(m.group(10)) if m.group(9) else 0)) / 12
+         return f"{v:.6f}"
+     return _RX_FTIN.sub(rep, txt)
+ 
+@@ -337,9 +340,29 @@
+ 
+ 
+ # ---------- (3) / (4) reglas físicas y cruce por cuarto ----------
++def _rooms_de_location(loc):
++    """CR City Hotel (v81cf90): caras descritas en texto 'L2 Bath 208 north wall | faces: 208 living; corridor 216' -> salas."""
++    m = re.search(r"(?i)\bfaces?:\s*(.+)$", str(loc or ""))
++    if not m:
++        return []
++    out = []
++    for parte in re.split(r"[;/]", m.group(1)):
++        k = sala(parte)
++        if re.fullmatch(r"\d{3}[A-Z]?", k):
++            out.append(k)
++    return out
++
++
++def _es_madera(w):
++    """wall de madera (board only): sin top track metálico (U-139 / R80f.1); el slip track de U-056 no aplica."""
++    t = " ".join(str(w.get(k) or "") for k in ("stud_text", "decision", "type_id", "board"))
++    return bool(re.search(r"(?i)wood[- ]framed|board only|WOOD FRAMING EXCLUDED|U-139|R80f\.1", t))
++
++
+ def walls_de_canon(canon):
++    """walls[] + existing_walls[] (CR City Hotel: los walls de madera board-only viven en existing_walls)."""
+     out = []
+-    for w in canon.get("walls") or []:
++    for w in (canon.get("walls") or []) + (canon.get("existing_walls") or []):
+         if str(w.get("element") or "wall") not in ("wall", "column_wrap", "furring", "shaft_wall", "chase"):
+             continue
+         h = ftin(w.get("height_ft"))
+@@ -351,10 +374,11 @@
+         else:
+             m = re.search(r"(?i)(\d+(?:\.\d+)?)\s*(?:\"|IN\.?|INCH(?:ES)?)\s*ABOVE (THE )?(HIGHEST )?CEILING", txt)
+             regla, ext = ("above_ceiling", float(m.group(1)) / 12) if m else ("fixed", 0.0)
+-        caras = w.get("faces") or []
++        caras = w.get("faces") if isinstance(w.get("faces"), list) else []      # CR: faces = número; las salas van en location
++        rooms = [sala(f.get("room")) for f in caras if isinstance(f, dict) and f.get("room")] or _rooms_de_location(w.get("location"))
+         out.append({"id": w.get("id"), "tipo": w.get("tag") or w.get("type_id"), "h": h, "regla": regla, "ext": ext,
+-                    "rooms": [sala(f.get("room")) for f in caras if f.get("room")],
+-                    "board": [(f.get("side"), ftin(f.get("height_ft"))) for f in caras if ftin(f.get("height_ft")) is not None],
++                    "rooms": rooms, "floor": w.get("floor"), "madera": _es_madera(w),
++                    "board": [(f.get("side"), ftin(f.get("height_ft"))) for f in caras if isinstance(f, dict) and ftin(f.get("height_ft")) is not None],
+                     "top": str(w.get("top_track_kind") or ""), "motivo": w.get("height_diff_reason"),
+                     "bo": ftin(w.get("structure_bo_ft"))})   # BE-GK11: B.O. of structure AT this wall (sloped / stepped deck)
+     return out
+@@ -372,20 +396,25 @@
+     return out
+ 
+ 
++RX_HOJA_MOTIVO = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,2}-?\d{1,2}(?:\.\d{1,2})?\d*[A-Z]?\b|\b[A-Z]{1,2}-?\d{3}\b|\b[A-Z]{1,2}\d\.\d{2}[A-Z]?\b")
++
++
+ def reglas_fisicas(walls, cuartos, bo, demo=()):
+     """walls: [{id, h, regla, ext, rooms, board, top}]; cuartos: {sala: C.H.}; bo: B.O. estructura (None = no impreso). -> (n, fallas)"""
+     fallas, n = [], 0
+     bo_global = bo
++    por_nivel = isinstance(bo_global, dict)        # CR (v81cf92): edificio de varios niveles -> tope físico por nivel {L1: ft, ...}
+     for w in walls:
+         n += 1
+-        bo = w.get("bo") if w.get("bo") is not None else bo_global   # BE-GK11: per-wall B.O. (sloped deck) over the single value
++        bo = w.get("bo") if w.get("bo") is not None else (bo_global.get(w.get("floor")) if por_nivel else bo_global)   # BE-GK11
+         chs = [(r, cuartos[r]) for r in w["rooms"] if cuartos.get(r) is not None]
+         if bo is not None and w["h"] > bo + TOL_EXT:
+             fallas.append(f"{w['id']}: H {w['h']:.3f} > B.O. estructura {bo:.3f}")
+         # BE-GK12 (Grand Kia): a wall whose height is explained by a printed reason (height_diff_reason with N/HOJA:
+         # the room ceiling does not reach the wall line - open showroom side, cloud / well away from the wall) is not
+         # failed against that room's C.H.
+-        expl = bool(w.get("motivo") and re.search(r"\b[0-9A-Z]{1,3}/[A-Z]{1,2}\d{3}|\b[A-Z]{1,2}\d{3}\b", str(w.get("motivo"))))
++        # BE-CR33 (CR City Hotel rev19): hojas con punto / guion (A7.05, 4/A5.05, A-101) también son N/HOJA
++        expl = bool(w.get("motivo") and RX_HOJA_MOTIVO.search(str(w.get("motivo"))))
+         for r, ch in chs:
+             if w["h"] + TOL_EXT < ch and not expl:
+                 fallas.append(f"{w['id']}: H {w['h']:.3f} < C.H. {ch:.3f} del cuarto {r}")
+@@ -399,11 +428,12 @@
+                 if abs(w["h"] - esp) > TOL_EXT:
+                     fallas.append(f"{w['id']}: 'above ceiling' = MAYOR C.H. {max(ch for _r, ch in chs):.3f} + {w['ext'] * 12:g}\" = {esp:.3f}, cargado {w['h']:.3f}")
+         if w["regla"] == "to_deck":
++            exacto = w.get("bo") if w.get("bo") is not None else (None if por_nivel else bo)   # por nivel = tope, no igualdad
+             if bo is None:
+                 fallas.append(f"{w['id']}: 'to deck' sin B.O. de estructura en el canon")
+-            elif abs(w["h"] - bo) > TOL_EXT:
+-                fallas.append(f"{w['id']}: 'to deck' = B.O. {bo:.3f}, cargado {w['h']:.3f}")
+-            if not re.search(r"(?i)slip|deflect|DTR|double", w.get("top") or ""):
++            elif exacto is not None and abs(w["h"] - exacto) > TOL_EXT:
++                fallas.append(f"{w['id']}: 'to deck' = B.O. {exacto:.3f}, cargado {w['h']:.3f}")
++            if not w.get("madera") and not re.search(r"(?i)slip|deflect|DTR|double", w.get("top") or ""):
+                 fallas.append(f"{w['id']}: 'to deck' sin slip / deflection track (U-056)")
+         for lado, hb in w["board"]:
+             if hb > w["h"] + TOL_EXT:
+@@ -411,8 +441,9 @@
+     bo = bo_global
+     for d in demo:
+         n += 1
+-        if bo is not None and d["h"] > bo + TOL_EXT:
+-            fallas.append(f"{d['id']}: demolición H {d['h']:.3f} > B.O. / altura de estructura {bo:.3f}")
++        bo_d = max((v for v in bo_global.values() if v is not None), default=None) if por_nivel else bo_global
++        if bo_d is not None and d["h"] > bo_d + TOL_EXT:
++            fallas.append(f"{d['id']}: demolición H {d['h']:.3f} > B.O. / altura de estructura {bo_d:.3f}")
+     return n, fallas
+ 
+ 
+@@ -428,14 +459,17 @@
+             # BE-GK24 (Grand Kia): a wall below the room C.H. whose printed reason (height_diff_reason with N/HOJA) names an open
+             # RFI or Review Item is a declared print conflict, not a silent error
+             declarado = re.search(r"\bRFI-\d+|\bReview Item\b|\bRI-\d+", str(w.get("motivo") or "")) and \
+-                re.search(r"\b[A-Z]{1,2}-?\d{3}\b|\b\d+/[A-Z]{1,2}-?\d{3}\b", str(w.get("motivo") or ""))
++                RX_HOJA_MOTIVO.search(str(w.get("motivo") or ""))
+             if w["h"] + TOL_EXT < ch and not declarado:
+                 fallas.append(f"cuarto {r} (C.H. {ch:.3f}): {w['id']} H {w['h']:.3f} por debajo del cielo")
+         por_tipo = {}
+         for w in ws:
+             por_tipo.setdefault(w["tipo"], set()).add(round(w["h"], 3))
+         for t, hs in por_tipo.items():
+-            if len(hs) > 1 and not all(w.get("motivo") for w in ws if w["tipo"] == t):
++            # BE-CR33: los renglones con motivo impreso (height_diff_reason con N/HOJA) ya están explicados; el type falla si los
++            # renglones SIN motivo tienen alturas distintas entre sí, o si alguna altura distinta queda sin ningún renglón explicado
++            sin = {round(w["h"], 3) for w in ws if w["tipo"] == t and not (w.get("motivo") and RX_HOJA_MOTIVO.search(str(w.get("motivo"))))}
++            if len(hs) > 1 and len(sin) > 1:
+                 fallas.append(f"cuarto {r}: type {t} con alturas distintas {sorted(hs)} sin motivo impreso (height_diff_reason)")
+     n = len({f["Room"] for f in filas})
+     return n, fallas, filas
+@@ -478,7 +512,10 @@
+     corto = lambda ids: ", ".join(ids) if len(ids) <= 4 else f"{ids[0]}..{ids[-1]} ({len(ids)})"
+     niveles += [(h, f"LOADED H {h:.3f}: {corto([x['Wall ID'] for x in rs])}", _color(i)) for i, (h, rs) in enumerate(sorted(grupos.items()))]
+     if bo is not None:
+-        niveles.append((bo, f"B.O. STRUCTURE {bo:.3f}", (0.6, 0.0, 0.0)))
++        if isinstance(bo, dict):                                   # v81cf90: B.O. por nivel (edificio de varios niveles)
++            niveles += [(v_, f"B.O. {k_} {v_:.3f}", (0.6, 0.0, 0.0)) for k_, v_ in sorted(bo.items()) if v_ is not None]
++        else:
++            niveles.append((bo, f"B.O. STRUCTURE {bo:.3f}", (0.6, 0.0, 0.0)))
+     junt = {}
+     for v, lab, col in niveles:                                     # un renglón por valor (sin etiquetas encimadas)
+         k = round(v, 3)
+@@ -626,7 +663,8 @@
+     for k, v in leer_cuartos(P("ALTURAS_CUARTOS.csv")):
+         cuartos[k] = v
+     can = json.load(open(canon)) if isinstance(canon, str) else canon
+-    bo = ftin(((can.get("constants") or {}).get("deck_heights") or {}).get("value"))
++    dh = ((can.get("constants") or {}).get("deck_heights") or {}).get("value")
++    bo = {k: ftin(v) for k, v in dh.items()} if isinstance(dh, dict) else ftin(dh)    # v81cf90: por nivel {L1: 14'-0", ...}
+     ws = walls_de_canon(can)
+     n3, f3 = reglas_fisicas(ws, cuartos, bo, demo_de_canon(can))
+     res["conteos"]["3_reglas_fisicas"] = f"{n3 - len({x.split(':')[0] for x in f3})}/{n3} elementos sin violación"
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/compuerta_entrega.py /root/skill/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v94/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-11 19:49:13.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-11 19:58:52.721899547 +0000
+@@ -1677,29 +1677,57 @@
+ PISO_CONTORNO = 0.50     # U-177 (2) (auditoría U-138 11-nov: CE_RCP_CONTORNO pasaba con min 0.0 por exenciones)
+ 
+ 
+-def rcp_contorno_fallas(doc, umbral=0.60, limpio=None):
+-    """rev15: por cada polígono de cielo (title 'take-off') y cada polígono EXCLUDED: (1) cobertura de borde contra las líneas de la hoja
+-    >= umbral (CLG-L2-56 con el offset planta->RCP sumado dos veces: 0.28-0.36); (2) en hojas A6 / A7 su vista es un RCP, no un PLAN
+-    (CLG-L1-14..18 en 1/A7.50 ENLARGED PLAN en vez de 2/A7.50 ENLARGED RCP). -> (fallas, n, stats)"""
++RX_FUENTE_POLI = re.compile(r"source ([A-Z]{1,2}\d{1,2}\.\d{2}[A-Z]?) offset \((-?[\d.]+), (-?[\d.]+)\)")
++
++
++def rcp_contorno_fallas(doc, umbral=0.60, limpio=None, minimo=PISO_CONTORNO):
++    """rev15 + U-177: por cada polígono de cielo (title 'take-off') y cada polígono EXCLUDED: (1) cobertura de borde contra las líneas de
++    la hoja >= umbral (CLG-L2-56 con el offset planta->RCP sumado dos veces: 0.28-0.36); un borde que no dibuja la hoja se declara
++    '[EDGE NOT DRAWN: motivo]' y entonces basta >= minimo; (2) U-177: por debajo de 'minimo' (0.5) = FAIL siempre, salvo que el texto
++    declare la hoja que SÍ dibuja el contorno, 'source <HOJA> offset (dx, dy)', y ahí (restando el offset) la cobertura sea >= minimo;
++    el borde compartido con otro polígono del take-off de la misma página cuenta como cubierto (límite entre dos cielos cargados);
++    (3) en hojas A6 / A7 su vista es un RCP, no un PLAN. -> (fallas, n, stats)"""
++    lab_pag = {(p.get_label() or "").strip(): p.number for p in doc}
+     ev, n, covs = [], 0, []
+     for p in doc:
+         lab = (p.get_label() or "").strip()
+         anns = [a for a in p.annots() or [] if a.type[1] == "Polygon" and (a.info.get("title") == "take-off" or a.info.get("subject") == "EXCLUDED")]
+         if not anns:
+             continue
+-        grid = _segs_pagina(limpio[p.number] if limpio is not None else p)   # líneas del plano LIMPIO (el PDF de markups trae sus propios trazos)
+-        for a in anns:
+-            v = [[q[0], q[1]] for q in a.vertices]
++        base = _segs_pagina(limpio[p.number] if limpio is not None else p)   # líneas del plano LIMPIO (el PDF de markups trae sus propios trazos)
++        polis = [[[q[0], q[1]] for q in a.vertices] for a in anns]
++        for k, a in enumerate(anns):
++            v = polis[k]
+             if len(v) < 3:
+                 continue
+             n += 1
+             nom = re.search(r"((?:CLG|SOF|RS6|CAN|BW)-[A-Z0-9.-]+)", str(a.info.get("content"))) or re.search(r"(EXCLUDED - .{0,40})", str(a.info.get("content")))
+             nom = nom.group(1) if nom else a.info.get("subject")
+-            cv = cobertura_borde(grid, v); covs.append(cv)
+-            exento = re.search(r"\[EDGE NOT DRAWN: ([^\]]{12,})\]", str(a.info.get("content")))   # borde que la hoja no dibuja, con motivo
+-            if cv < PISO_CONTORNO:                                   # U-177 (2) / BE-AUD02: por debajo de 0.5 ni el motivo [EDGE NOT DRAWN] lo salva
+-                ev.append(f"{lab} {nom}: solo {cv:.0%} del contorno sobre líneas de la hoja (< {PISO_CONTORNO:.0%}, piso U-177: ni con EDGE NOT DRAWN)")
+-            elif cv < umbral and not exento:
++            grid = {key: list(val) for key, val in base.items()}
++            if a.info.get("title") == "take-off":
++                for k2, w in enumerate(polis):                   # bordes de los OTROS cielos cargados de la página
++                    if k2 == k or anns[k2].info.get("title") != "take-off":
++                        continue
++                    for i_ in range(len(w)):
++                        sg = (w[i_][0], w[i_][1], w[(i_ + 1) % len(w)][0], w[(i_ + 1) % len(w)][1])
++                        for gx in range(int(min(sg[0], sg[2]) // 20), int(max(sg[0], sg[2]) // 20) + 1):
++                            for gy in range(int(min(sg[1], sg[3]) // 20), int(max(sg[1], sg[3]) // 20) + 1):
++                                grid.setdefault((gx, gy), []).append(sg)
++            cv = cobertura_borde(grid, v)
++            txt = str(a.info.get("content"))
++            exento = re.search(r"\[EDGE NOT DRAWN: ([^\]]{12,})\]", txt)   # borde que la hoja no dibuja, con motivo
++            fuente = RX_FUENTE_POLI.search(txt)
++            cvf = None
++            if fuente and fuente.group(1) in lab_pag and limpio is not None:
++                dx, dy = float(fuente.group(2)), float(fuente.group(3))
++                cvf = cobertura_borde(_segs_pagina(limpio[lab_pag[fuente.group(1)]]), [[x - dx, y - dy] for x, y in v])
++            mejor = max(cv, cvf or 0)
++            covs.append(mejor)
++            if mejor < minimo:                                       # U-177 (2) / BE-AUD02: por debajo del piso ni [EDGE NOT DRAWN] lo salva
++                ev.append(f"{lab} {nom}: solo {cv:.0%} del contorno sobre líneas de la hoja"
++                          + (f" y {cvf:.0%} sobre {fuente.group(1)} (offset {fuente.group(2)}, {fuente.group(3)})" if cvf is not None else "")
++                          + f" (< {minimo:.0%}, piso U-177: ni con EDGE NOT DRAWN; declare 'source <HOJA> offset (dx, dy)' de la hoja que sí lo dibuja)")
++            elif cv < umbral and not exento and (cvf is None or cvf < umbral):
+                 ev.append(f"{lab} {nom}: solo {cv:.0%} del contorno sobre líneas de la hoja (< {umbral:.0%}: ¿offset / vista equivocada?)")
+             if re.match(r"A[67]\.", lab):
+                 cx, cy = sum(q[0] for q in v) / len(v), sum(q[1] for q in v) / len(v)
+@@ -1711,7 +1739,7 @@
+     return ev, n, st
+ 
+ 
+-@chequeo("CE_RCP_CONTORNO", ["U-159", "U-160"], "rev15 (revisión completa rev14 F04 / F05): cada polígono de cielo y cada EXCLUDED coincide con las "
++@chequeo("CE_RCP_CONTORNO", ["U-159", "U-160", "U-177"], "rev15 (revisión completa rev14 F04 / F05): cada polígono de cielo y cada EXCLUDED coincide con las "
+          "líneas de su hoja (cobertura de borde >= 60 %) y, en hojas ampliadas A6 / A7, cae en la vista RCP (no en la vista PLAN)")
+ def ce_rcp_contorno(c):
+     if not (c.markups and os.path.isfile(c.markups)):
+@@ -2723,6 +2751,40 @@
+     return R("FAIL", *ev[:30]) if ev else R("PASS" if n else "AMBER", f"{n} renglones de stud / track / header / brace con gauge y N/HOJA")
+ 
+ 
++RX_GAUGE_NO_IMPRESO = re.compile(r"(?i)gauge (?:is )?not printed|no (?:printed )?gauge|gauge not (?:shown|given|specified)|sin gauge impreso")
++RX_STUD_SCHEDULE = re.compile(r"(?is)STUD\s+SCHEDULE.{0,200}?(?:MIN\.?\s*)?GAU?GE")
++
++
++def gauge_impreso_fallas(filas, rfis, hojas_txt):
++    """BE-CR34 (CR City Hotel rev19): el renglón del Material Summary / el RFI decía 'gauge not printed' y A0.06 imprime un STUD SCHEDULE
++    ('STUD DEPTH 2 1/2\" MIN. GAUGE 25'): antes de declarar un gauge no impreso se barre el set por STUD SCHEDULE / MIN. GAUGE.
++    -> [fallas]"""
++    hs = sorted(h for h, t in (hojas_txt or {}).items() if RX_STUD_SCHEDULE.search(str(t)))
++    if not hs:
++        return []
++    ev = [f"Material Summary fila {f['fila']} '{f['material'][:70]}': dice gauge no impreso y {', '.join(hs[:3])} imprime STUD SCHEDULE "
++          f"con MIN. GAUGE (cítelo, U-171)" for f in filas if RX_GAUGE_NO_IMPRESO.search(f["material"] + " " + str(f.get("cita") or ""))]
++    for r in rfis or []:
++        if isinstance(r, dict) and str(r.get("status") or "").lower() != "closed" and RX_GAUGE_NO_IMPRESO.search(
++                " ".join(str(r.get(k) or "") for k in ("pregunta", "question", "loaded"))):
++            ev.append(f"{r.get('id')}: pregunta un gauge que {', '.join(hs[:3])} imprime en su STUD SCHEDULE (U-171: no se pregunta lo que el plano resuelve)")
++    return ev
++
++
++@chequeo("CE_GAUGE_IMPRESO", ["BE-CR34", "U-171", "U-177"], "BE-CR34: 'gauge not printed' en un renglón o RFI con un STUD SCHEDULE "
++         "(MIN. GAUGE) impreso en el set = FAIL")
++def ce_gauge_impreso(c):
++    if not c.excel:
++        return R("FAIL", "sin Excel (U-137)")
++    st = _json(c.set_p) if getattr(c, "set_p", None) else None
++    hojas_txt = (st or {}).get("hojas") if isinstance(st, dict) else None
++    if not hojas_txt:
++        return R("FAIL", "sin set_texto.json (U-137)")
++    ev = gauge_impreso_fallas(filas_ms(c.excel), [r for r in c.rfis() if isinstance(r, dict)], hojas_txt)
++    hs = sorted(h for h, t in hojas_txt.items() if RX_STUD_SCHEDULE.search(str(t)))
++    return R("FAIL", *ev[:20]) if ev else R("PASS", f"STUD SCHEDULE impreso en {', '.join(hs) or 'ninguna hoja'}; ningún gauge declarado no impreso")
++
++
+ @chequeo("CE_MS_PRODUCTO_IMPRESO", ["U-177"], "U-177 (4): el renglón del Material Summary donde cae un item con producto impreso "
+          "(canon product, p. ej. '6\" sheet metal blocking strapping') lleva ese producto en su nombre")
+ def ce_ms_producto(c):
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/revision_markups.py /root/skill/take-off-metal-frame-drywall/tools/revision_markups.py
+--- v94/take-off-metal-frame-drywall/tools/revision_markups.py	2026-11-11 14:09:04.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/revision_markups.py	2026-11-11 19:58:52.722304339 +0000
+@@ -132,6 +132,11 @@
+     # BE-GK28 (Grand Kia): vector measurement on the section at the printed scale "(Y1-Y0)/k = h" (the LAST one before the
+     # first '|' is the result; intermediate steps such as "xs = 1142.8-128.6 = 1014.2" are not the height); re-computed here
+     seg = t.split("|")[0]
++    # BE-CR32 (CR City Hotel rev19, unión v81cf91): "printed 8'-11 1/4\" ...; cross-check (523.4-282.1)/27 = 8.94" -> manda la cota
++    # IMPRESA; una medición vectorial que solo comprueba (cross-check / check / verified) no la reemplaza
++    mi = re.search(r"(?i)\bprinted\s+" + _FI, seg)
++    if mi and re.search(r"(?i)cross[- ]?check|\bcheck\b|verified|confirm", seg[mi.end():]):
++        return round(_fi(mi), 4), "printed dimension (vector cross-check does not replace it)", hojas
+     ad = [m for m in re.finditer(r"(?<![\d.])(\d+\.?\d*)\s*\+\s*(\d+\.?\d*)\s*=\s*(\d+\.?\d*)(?![\d.])", seg)
+           if abs(float(m.group(1)) + float(m.group(2)) - float(m.group(3))) <= 0.01]
+     if ad and ad[-1].end() >= len(seg.rstrip(" ;,")) - 2:     # BE-GK28b: the operation ENDS with "C.H. + 0.5 = h" (A550 6" above ceiling)
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/test_comparar_alturas.py /root/skill/take-off-metal-frame-drywall/tools/test_comparar_alturas.py
+--- v94/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-11 07:11:27.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-11 19:58:52.722478815 +0000
+@@ -118,3 +118,62 @@
+ if __name__ == "__main__":
+     test_u175_comparar_alturas()
+     test_u176_alturas_extremo()
++
++
++def test_alturas_multinivel_cr():
++    """v81cf90 (CR City Hotel rev19, 4 niveles, walls de madera board-only en existing_walls): comparar_alturas extremo lee
++    existing_walls, las salas desde 'location ... | faces: 208 living; corridor 216', el B.O. por nivel (deck_heights dict) y no
++    pide slip track a un wall de madera 'to roof'; un wall más alto que el floor-to-floor de su nivel = FAIL."""
++    import comparar_alturas as CA
++    can = {"constants": {"deck_heights": {"value": {"L2": "11'-0\"", "L4": "14'-0\""}}},
++           "existing_walls": [
++               {"id": "W.4-L2-41 A", "type_id": "W.4-0", "floor": "L2", "height_ft": "9.2396", "location": "L2 Bath 208 north wall | faces: 208 living",
++                "decision": "R80f.1 / U-139: wood-framed wall - gypsum board is our scope, wood framing EXCLUDED", "height_source": "4/A5.05"},
++               {"id": "W.4-L4-01 A", "type_id": "W.4-0", "floor": "L4", "height_ft": "8.9375", "location": "L4 room 401 | faces: 401 room",
++                "decision": "wood-framed wall (board only)", "height_source": "1/A5.06 to the underside of roof sheathing"},
++               {"id": "W.4-L2-99", "type_id": "W.4-0", "floor": "L2", "height_ft": "11.5", "location": "L2 | faces: 209 room",
++                "decision": "board only", "height_source": "x"}]}
++    ws = CA.walls_de_canon(can)
++    assert len(ws) == 3 and ws[0]["rooms"] == ["208"] and ws[1]["regla"] == "to_deck" and ws[1]["madera"], ws
++    bo = {k: CA.ftin(v) for k, v in can["constants"]["deck_heights"]["value"].items()}
++    n, f = CA.reglas_fisicas(ws, {"208": 8.5, "401": 8.0}, bo)
++    assert n == 3 and len(f) == 1 and "W.4-L2-99" in f[0] and "B.O." in f[0], f      # 11.5 > 11'-0" del nivel; sin pedir slip a madera
++    n, f = CA.reglas_fisicas(ws, {"208": 9.5}, bo)
++    assert any("W.4-L2-41 A" in x and "C.H." in x for x in f), f                        # wall por debajo del cielo de su cuarto
++    ok, det = CA.cierre("14'-0\" - 1 1/2\" - 1/4\" - 3/4\" = 13'-9 1/2\"", 13.7917)     # pulgada en fracción sola (CR rev19)
++    assert ok, det
++    assert not CA.cierre("14'-0\" - 1/4\" = 13'-9 1/2\"", 13.7917)[0]
++    print("test_alturas_multinivel_cr OK")
++
++
++test_alturas_multinivel_cr()
++
++
++def test_be_cr33_motivo_hoja_con_punto():
++    """BE-CR33 (CR City Hotel rev19): height_diff_reason citing 'A7.05' / '4/A5.05' (dotted sheets) explains a partial row below the room C.H."""
++    import comparar_alturas as CA
++    w = {"id": "W.4-L2-03 A", "h": 9.0, "regla": "fixed", "ext": 0.0, "rooms": ["213"], "board": [], "top": "", "floor": "L2", "madera": True,
++         "motivo": "material split of the face (A7.05 bath 'GYP-1 8'-6\"' + 6\"; continues per 4/A5.05)"}
++    n, f = CA.reglas_fisicas([w], {"213": 9.24}, {"L2": 11.0})
++    assert not f, f
++    w["motivo"] = "material split of the face (no sheet)"
++    n, f = CA.reglas_fisicas([w], {"213": 9.24}, {"L2": 11.0})
++    assert f and "C.H." in f[0], f
++
++
++def test_be_cr33_cruce_tipo_explicado():
++    """BE-CR33 (b): same type with two heights in one room: explained rows (motivo with N/HOJA) do not count; two unexplained heights still FAIL."""
++    import comparar_alturas as CA
++    mk = lambda i, h, mot=None: {"id": i, "tipo": "W.4-0", "h": h, "rooms": ["213"], "motivo": mot}   # noqa: E731
++    n, f, _ = CA.cruce_cuartos([mk("A", 9.24), mk("B", 9.24), mk("C", 9.24 + 0.5, "S1.05 zone over the wall (2/A0.10)")], {"213": 9.24})
++    assert not f, f
++    n, f, _ = CA.cruce_cuartos([mk("A", 9.24), mk("B", 9.74)], {"213": 9.24})
++    assert any("alturas distintas" in x for x in f), f
++    n, f, _ = CA.cruce_cuartos([mk("A", 9.24), mk("B", 9.74, "no sheet")], {"213": 9.24})
++    assert any("alturas distintas" in x for x in f), f
++
++
++if __name__ == "__main__":
++    test_be_cr33_motivo_hoja_con_punto()
++    test_be_cr33_cruce_tipo_explicado()
++    print("test_be_cr33 OK")
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py /root/skill/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v94/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-11 19:49:54.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-11 19:58:58.576511605 +0000
+@@ -1465,3 +1465,55 @@
+ 
+ 
+ test_u184_protocolo_3h()
++
++def test_u177_rcp_contorno_duro():
++    """U-177 (auditoría 11-nov, CR rev18b): CE_RCP_CONTORNO pasaba con 'min 0.0' (EXCLUDED de la caja de equipo exterior con
++    [EDGE NOT DRAWN]). Ahora < 0.5 = FAIL con o sin [EDGE NOT DRAWN]; pasa si declara 'source <HOJA> offset (dx, dy)' y en esa hoja
++    (restando el offset) coincide; el borde compartido entre dos cielos cargados de la misma página cuenta como cubierto."""
++    import pymupdf as fitz
++    import compuerta_entrega as CE
++    limpio, mk = fitz.open(), fitz.open()
++    for d in (limpio, mk):
++        d.new_page(width=800, height=600)
++        d.new_page(width=800, height=600)
++    limpio[1].draw_rect(fitz.Rect(90, 95, 190, 195), color=(0, 0, 0), width=1)          # la caja dibujada en el plano (A2.01)
++    limpio[0].draw_rect(fitz.Rect(400, 100, 600, 300), color=(0, 0, 0), width=1)        # contorno exterior de dos cielos (A3.01)
++    mk.set_page_labels([{"startpage": 0, "prefix": "A3.01", "style": ""}, {"startpage": 1, "prefix": "A2.01", "style": ""}])
++
++    def poli(pts, titulo, sub, txt):
++        a = mk[0].add_polygon_annot(pts)
++        a.set_info(title=titulo, subject=sub, content=txt)
++        a.update()
++    caja = [(100, 100), (200, 100), (200, 200), (100, 200)]
++    poli(caja, "Take-off excluded", "EXCLUDED", "EXCLUDED - exterior equipment box [EDGE NOT DRAWN: the box is drawn only on 1/A2.01]")
++    poli([(400, 100), (500, 100), (500, 300), (400, 300)], "take-off", "GYP", "GYP · CEILING CLG-1 · 1/A3.01")
++    poli([(500, 100), (600, 100), (600, 300), (500, 300)], "take-off", "GYP", "GYP · CEILING CLG-2 · 1/A3.01")
++    ev, n, st = CE.rcp_contorno_fallas(mk, limpio=limpio)
++    assert n == 3 and len(ev) == 1 and "equipment box" in ev[0] and "piso U-177" in ev[0], ev            # 0.0 = FAIL (antes pasaba)
++    for a in mk[0].annots():                              # una pasada: la annot solo vale dentro del iterador
++        if a.info.get("subject") == "EXCLUDED":
++            a.set_info(content=a.info["content"].replace("1/A2.01]", "1/A2.01; source A2.01 offset (10, 5)]"))
++            a.update()
++    ev, n, st = CE.rcp_contorno_fallas(mk, limpio=limpio)
++    assert ev == [], ev                                   # medido en A2.01 restando el offset = 1.0; el borde x=500 compartido cuenta
++    print("test_u177_rcp_contorno_duro OK")
++
++
++test_u177_rcp_contorno_duro()
++
++
++def test_be_cr34_gauge_impreso():
++    """BE-CR34 (CR City Hotel rev19): 'gauge not printed' + RFI con A0.06 STUD SCHEDULE 'MIN. GAUGE 25' impreso = FAIL; citado = PASS."""
++    import compuerta_entrega as CE
++    hojas = {"A0.06": "PARTITION TYPES - GENERAL NOTES STUD SCHEDULE STUD SUFFIX STUD DEPTH MIN. GAUGE HEIGHT LIMIT 2 2 1/2\" 25 11'-3\""}
++    fila = {"fila": 4, "material": '2-1/2" stud, 18 mil min. ASTM C 645 (gauge not printed, RFI-30)', "net": 253.05, "cita": "N/SHEET: 5/A7.31"}
++    rfi = {"id": "RFI-30", "status": "open", "pregunta": "the details print no stud size or gauge; gauge not printed"}
++    ev = CE.gauge_impreso_fallas([fila], [rfi], hojas)
++    assert len(ev) == 2 and "A0.06" in ev[0], ev
++    fila["material"] = '2-1/2" stud, 25 ga min. (A0.06 STUD SCHEDULE)'
++    assert CE.gauge_impreso_fallas([fila], [], hojas) == []
++    assert CE.gauge_impreso_fallas([dict(fila, material="x (gauge not printed)")], [], {"A1.01": "PLAN"}) == []   # sin schedule: no aplica
++    print("test_be_cr34_gauge_impreso OK")
++
++
++test_be_cr34_gauge_impreso()
+diff -ruN -x __pycache__ -x '*.pyc' v94/take-off-metal-frame-drywall/tools/test_hoja_sufijo.py /root/skill/take-off-metal-frame-drywall/tools/test_hoja_sufijo.py
+--- v94/take-off-metal-frame-drywall/tools/test_hoja_sufijo.py	2026-11-11 15:51:17.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/test_hoja_sufijo.py	2026-11-11 19:58:52.723018441 +0000
+@@ -149,3 +149,18 @@
+ test_be_gk21_gauge_texto()
+ test_be_gk22_26_guardas()
+ print("test_hoja_sufijo OK")
++
++
++def test_be_cr32_impresa_sobre_crosscheck():
++    """BE-CR32 (CR City Hotel rev19, unión v81cf91): la regla BE-GK28 (última medición vectorial = altura) tomaba el cross-check
++    '(523.4-282.1)/27 = 8.94' en vez de la cota impresa 8'-11 1/4" de 1/A5.06 -> 48 walls de L4 cambiaban de altura."""
++    import revision_markups as RM
++    h, regla, _ = RM.altura_impresa("1/A5.06 (p38) printed 8'-11 1/4\" LEVEL 4 to underside of roof framing; corridor/F&B zone "
++                                    "cross-check 3/A5.07 (p39) vector ceiling/framing line y=282.1: (523.4-282.1)/27 = 8.94")
++    assert h == 8.9375 and "printed" in regla, (h, regla)
++    h, _r, _ = RM.altura_impresa("2/A5.04 vector: L4 vertical coord 797.4, underside roof framing 609.4 -> (797.4-609.4)/18 = 10.44")
++    assert h == 10.44, h                                # sin cota impresa, la medición vectorial sigue valiendo (BE-GK28)
++    print("test_be_cr32_impresa_sobre_crosscheck OK")
++
++
++test_be_cr32_impresa_sobre_crosscheck()
