@@ -57,3 +57,5 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf75 · 11-nov · v81cf74 + U-164 · PUBLICADA (VIGENTE en INDICE; suite 49/49, 199 archivos)
 - v81cf76 · CR City Hotel Castle Rock (dueña) · 11-nov · v81cf75 + U-165 / BE-155 (ruta Windows <= 230; PDF de markups '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf') · en curso
 - ACTUALIZACIÓN 11-nov: **v81cf76 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf76_U165-ruta-Windows-230_2026-11-11.zip (VIGENTE en INDICE; suite 49/49, banco 0 distintas, 199 archivos, verificar_version OK).
+- v81cf77 · CR City Hotel Castle Rock (dueña) · 11-nov · v81cf76 + U-166 (CE_USO_REAL) + decisión COORDINACIÓN U-165 (carpeta 'revN FINAL PARA REVISAR', rutas como en Drive, Auditoria.zip nombres <= 120) · en curso
+- ACTUALIZACIÓN 11-nov: **v81cf77 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf77_U166-uso-real-carpeta-corta_2026-11-11.zip (VIGENTE en INDICE; suite 49/49, banco 0 distintas, 199 archivos, verificar_version OK).

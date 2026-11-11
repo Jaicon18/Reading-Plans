@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr.",
- "conteo": 490,
+ "conteo": 491,
  "reglas": [
   {
    "id": "U-001",
@@ -6619,7 +6619,9 @@
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::rutas_windows_fallas",
     "take-off:tools/compuerta_entrega.py::ce_nombres_entrega",
-    "take-off:tools/subir_entrega.py::candados"
+    "take-off:tools/subir_entrega.py::candados",
+    "take-off:tools/compuerta_entrega.py::rutas_entrega_fallas",
+    "take-off:tools/compuerta_entrega.py::carpeta_rev_fallas"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -6635,11 +6637,30 @@
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::rutas_windows_fallas",
     "take-off:tools/compuerta_entrega.py::ce_nombres_entrega",
-    "take-off:tools/subir_entrega.py::candados"
+    "take-off:tools/subir_entrega.py::candados",
+    "take-off:tools/compuerta_entrega.py::rutas_entrega_fallas",
+    "take-off:tools/compuerta_entrega.py::carpeta_rev_fallas"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u165_ruta_windows"
+   }
+  },
+  {
+   "id": "U-166",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, vía COORDINACIÓN)",
+   "texto_corto": "CE_USO_REAL simula el uso real antes de entregar: ruta Windows <= 230, PDF sin contraseña ni firmas + CE_VISTA_BLUEBEAM PASS, nombres sin < > : \" / \\ | ? *, Excel sin #REF! / #VALUE! / #DIV/0!",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_uso_real",
+    "take-off:tools/compuerta_entrega.py::nombres_prohibidos_fallas",
+    "take-off:tools/compuerta_entrega.py::excel_errores_fallas",
+    "take-off:tools/compuerta_entrega.py::pdf_abre_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u166_uso_real"
    }
   }
  ]

@@ -2,7 +2,7 @@
 # CR City Hotel rev18 FINAL: carpeta de entrega (estructura O'Reilly rev30, U-145) + subcompuertas + compuerta completa.
 set -e
 source /root/cr/work/scripts/env.sh
-D=$W/entrega; E="$D/rev18 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"
+D=$W/entrega; E="$D/rev18 FINAL — ESTA ES LA VERSIÓN FINAL PARA REVISAR"   # desde rev19: E="$D/revN FINAL PARA REVISAR" y entrega.json entrega_dir igual (U-089 / U-165, COORDINACION 11-nov)
 rm -rf "$D" && mkdir -p "$E/Take-off" "$E/Planos marcados" "$E/Auditoria/burbujas" "$E/Auditoria/schedules" "$E/Auditoria/review_items" "$E/Auditoria/rfi_img" "$E/Auditoria/resolucion_AB" "$E/Auditoria/barrido_tags"
 ln -s $W/etapas $D/takeoff_work_etapas; ln -s $W $D/takeoff_work
 # burbujas_unir.py ya corrido; burbujas_verificadas.json final (con destinos agregados a mano) es la fuente -- no re-unir
