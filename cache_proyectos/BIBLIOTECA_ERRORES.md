@@ -619,3 +619,9 @@ Filas rev15-rev17 de TIEMPOS.md con horas UTC etiquetadas PST (encimadas: rev15 
 
 ## BE-159 (11-nov, CR City Hotel rev18, hallado por A2 de U-168)
 La altura 9'-0" (106 filas) citaba 'A7.xx unit RCP' (hoja comodín) y 29 franjas 0'-2 7/8" no citaban hoja; el 8'-6" está impreso en A7.00 / A7.05 / A7.09 / A7.13. Arreglo: CE_CITA_ALTURA (toda height_source con hoja concreta N/HOJA o HOJA; comodín o sin hoja = FAIL); test con W.4-L2-03 A de rev18. CR: sin rev19 (la cantidad no cambia; el checklist lo anota).
+
+## BE-GK01 (10-nov, Grand Kia, arranque)
+El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf / pdfplumber / openpyxl (el bootstrap solo revisa `requests`). Toda tool del skill habría fallado al primer import. Arreglo: al arrancar un proyecto, `pip install pymupdf pypdf pdfplumber openpyxl pillow pikepdf numpy opencv-python-headless pytesseract` + `apt-get install tesseract-ocr` ANTES del paso 1, y verificar con `python3 -I -c "import fitz, pikepdf, pdfplumber, openpyxl"`. Regla para todos los proyectos; pendiente: que bootstrap.py revise estos módulos.
+
+## BE-GK02 (10-nov, Grand Kia, inventario)
+Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
