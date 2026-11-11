@@ -122,6 +122,14 @@ def aplicar(d, out_dir, canon_p):
                         if "framed_soffit" in str(r.get("operacion"))]
                 extra = "Breakdown [DERIVED]: " + " + ".join(ops_) + f" = {_fmt(net)} LF (framed soffit joists)" if ops_ else \
                     "framed soffit joists carried in its own row"
+            elif name.startswith("Stud blocking at edge of gypboard (structural detail) - "):   # BE-GK36 / R3-N3: per wall
+                d_ = name.rsplit(" - ", 1)[1]
+                op_ = " ".join(str(r.get("operacion") or "") for r in filas_de("blocking edge"))
+                its = [(i, float(v)) for i, v in re.findall(r"([A-Z]\d?-Z\d-\d{2}) \[[^\]]*\] x \d+ row\(s\) = (\d+\.?\d*)", op_)
+                       if (lambda g: g and g.group(0) == d_)(re.search(r"\b\d{3,4}S\d{3}-\d{2}\b", str(walls.get(i, {}).get("gauge") or "")))]
+                cita = _nh(*[det.get(i, "") for i, _ in its], *[r.get("source") for r in filas_de("blocking edge")])
+                extra = _desglose(its, net, "LF (per wall: length of the faces whose board piece is over the stock sheet length, "
+                                            "x stud rows; designation = the wall stud)", name)
             elif fam == "1-1/2\" Z-furring" and unit == "LF":       # R80e.83: desglose del Z-furring por wall (BE-40)
                 rows_ = [w for w in so["walls"] if re.search(r"z-furring|\bzf|hat channel", str(w.get("stud_size")).lower()) and w.get("lf")]   # BE-HF1
                 its = [(w["id"], w["lf"]) for w in rows_]

@@ -6,26 +6,35 @@
 >                     _m = re.match(r"\s*(.+?\([A-Z]\d?-Z\d-\d{2}\)):", str(r.get("operacion") or ""))
 >                     _id = _m.group(1) if _m else None
 >                 out.append((str(_id or r.get("source")), v))
-187c191,194
+120a125,132
+>             elif name.startswith("Stud blocking at edge of gypboard (structural detail) - "):   # BE-GK36 / R3-N3: per wall
+>                 d_ = name.rsplit(" - ", 1)[1]
+>                 op_ = " ".join(str(r.get("operacion") or "") for r in filas_de("blocking edge"))
+>                 its = [(i, float(v)) for i, v in re.findall(r"([A-Z]\d?-Z\d-\d{2}) \[[^\]]*\] x \d+ row\(s\) = (\d+\.?\d*)", op_)
+>                        if (lambda g: g and g.group(0) == d_)(re.search(r"\b\d{3,4}S\d{3}-\d{2}\b", str(walls.get(i, {}).get("gauge") or "")))]
+>                 cita = _nh(*[det.get(i, "") for i, _ in its], *[r.get("source") for r in filas_de("blocking edge")])
+>                 extra = _desglose(its, net, "LF (per wall: length of the faces whose board piece is over the stock sheet length, "
+>                                             "x stud rows; designation = the wall stud)", name)
+187c199,202
 <                     if _resto > 0.01:
 ---
 >                     _mi = items_filas(fam) if _resto > 0.01 else []   # BE-GK36: listed misc track items explain the rest
 >                     if _mi and abs(sum(float(v) for _, v in _mi) - _resto) <= 0.05:
 >                         its += _mi
 >                     elif _resto > 0.01:
-259c266
+259c274
 <             elif fam and (fam.startswith("5/8\" gyp") or fam.startswith("5/8\" glass mat tile backer") or fam in ("1/2\" gyp MOISTURE RESISTANT", "1/2\" gyp board")):
 ---
 >             elif fam and (fam.startswith("5/8\" gyp") or fam.startswith("5/8\" glass mat tile backer") or fam in ("1/2\" gyp MOISTURE RESISTANT", "1/2\" gyp board", "1/2\" EXTERIOR gyp sheathing")):   # BE-GK34
-262c269,270
+262c277,278
 <                 bk = ("5/8 glass mat tile backer" if "DENS" in fam.upper() else   # BE-GK04b: Dens Shield faces (canon BOARD_FAM key)
 ---
 >                 bk = ("5/8 glass mat tile backer" if "DENS" in fam.upper() else
 >                       "1/2 exterior gyp sheathing" if fam == "1/2\" EXTERIOR gyp sheathing" else   # BE-GK34: wall faces in the breakdown   # BE-GK04b: Dens Shield faces (canon BOARD_FAM key)
-406a415,416
+406a423,424
 >                     if fam == "additional head track":      # BE-GK36: itemized by opening (wall) so it splits by the wall designation
 >                         its = items_filas(fam)
-672c682
+672c690
 <                 prod = re.sub(r"^(\d{3})S\d{3}-(\d{2})$", r"\1T125-\2", prod)
 ---
 >                 prod = re.sub(r"^(\d{3,4})S\d{3}-(\d{2})$", r"\1T125-\2", prod)   # BE-GK36: 1000S too
