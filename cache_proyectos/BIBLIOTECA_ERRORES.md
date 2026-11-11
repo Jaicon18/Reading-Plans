@@ -607,3 +607,6 @@ Ceilings de cuartos impresos en RCP sin renglón (stalls 417.3/417.4, Elec 421, 
 
 ## BE-155 (11-nov, CR City Hotel rev18)
 PDF de markups no abre en Windows/Bluebeam: ruta completa 264 > 260 caracteres. Arreglo: nombre corto "CR_markups_rev18 - OPEN IN BLUEBEAM.pdf" (219) + chequeo de longitud ≤ 230 en CE_NOMBRES_ENTREGA; U-165.
+
+## BE-156 (11-nov, CR rev18)
+CSV exportado de Bluebeam sin 5 markups (cielos 401-405) cuyo /NM tenía "/"; 92 /NM duplicados en EXCLUDED. Arreglo: rev18b con NM únicos sin "/"; chequeo en CE_VISTA_BLUEBEAM; U-167.
