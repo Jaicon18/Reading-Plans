@@ -1,0 +1,8 @@
+# Xfinity - Inter Quest, CO TI Improvement Project — caché del take-off (skill v81cf77)
+- GC único (Gmail estimating@jchunter.us revisado 10-nov 8:25 PM PT, U-091): BCI National Construction & Facilities (Kyle McGee, Estimating Lead; Morgan Fergus, Assistant Estimator). BuildingConnected opportunity 6aed6ad3afb7ca85c2b332e1 "Drywall & Framing"; también ACT (6aed6a9b934f0dc6ba8b695d) y Painting (6aed6bc0f2d63c4f3e746ff8) = no son nuestro alcance. Bid Nov 13, 2026 end of day; cotizar como day work.
+- 1333 Interquest Parkway, Lot 11, Colorado Springs, CO 80921. 1,798 SF TI, 1 story, IBC 2021, Type V-B sprinklered. Architect: Robert F. Vanney.
+- BC Files: "Xfinity BP_Colorado Springs, CO_Interquest_Complete PDF Set_10-08-26_R0.pdf" (17 hojas: A0.1-A5.0, E0.0-E3.0, M0.0-M2.0, P1.0) + "Interquest Concrete Rough layout.png". Sin addenda. Specs en hoja A0.3.
+- Copia limpia = original (1,589 anotaciones, TODAS "AutoCAD SHX Text" en E/M/P = texto del dibujo, se conservan R80f.1; 0 markups de take-off).
+- Drive bid set: Projects › "Xfinity - Interquest, Colorado Springs, CO (BCI National) 11-13-26" (id 1j-XN0BxYIHRUtkQm1fxaCFgVqRmostin).
+- Descarga: cache_proyectos/herramientas/bc_descargar.js (BE-XF01: Download All por URL S3 interceptada + curl).
+- Reporta a COORDINACIÓN (session_01BLzQaGL6Hvg3oNXm79RWvR).
