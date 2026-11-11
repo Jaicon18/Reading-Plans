@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK20 (11-nov, Grand Kia rev1)
+## BE-GK03..BE-GK27 (11-nov, Grand Kia rev1)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -646,6 +646,13 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK18: markups_rcp: el LF de cada pieza de un soffit se reparte por el largo de su trayectoria, nunca del primer al último punto (el lazo cerrado de SOF-08 daba 0 LF). Arreglo + test `test_be_gk18_polilinea_cerrada` (v81cf88).
 - BE-GK19: closer: el mínimo de studs de campo descuenta el stud del nodo de corte colineal ya contado en el wall vecino (A-Z3-06 / A-Z3-07 de 4.00 ft y F-Z2-05 se rechazaban con 3 < 4). Arreglo + test `test_be_gk19_closer_split` (v81cf88).
 - BE-GK20: capa OCR de 40 hojas S/M/P/E en un solo proceso (insert_text por palabra, ~100 s por hoja) se cortó dos veces a los 30 / 50 min sin guardar. Arreglo: `palabras_fitz.capa_ocr_paralelo` (una hoja por proceso + reemplazo de página) + test `test_be_gk20_capa_paralela` (v81cf88). Un TextWriter por página se probó y descartó: no coloca las palabras igual (127 / 2560 coincidencias). insert_pdf / delete_page rompen el árbol /PageLabels: capa_ocr_paralelo lo restaura con get_page_labels / set_page_labels.
+- BE-GK21: revision_materiales: un gauge_ga con texto ('[PENDING] SEE STRUCTURAL...') es AMBER, nunca int() (la compuerta se caía). Arreglo + test `test_be_gk21_gauge_texto` (v81cf88).
+- BE-GK22: DensShield (glass-mat tile backer) cuenta en ALC-08 / ALC-20 (alcances.py) y en el driver de joint compound / tape (revision_materiales). Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK23: headers.py: la regla de double sill track sin hoja nombra la decisión del estimador #18 (no 'default'); el canon puede traer sill_rule con su fuente. Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK24: cruce cuarto-wall (U-176): un wall bajo el C.H. del cuarto con height_diff_reason que cita hoja + RFI / Review Item es un conflicto declarado, no una falla. Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK25: CE_A2_ALTURAS: hojas sin punto (A131, A-201), etiquetas RCP '12-0' y texto desde la copia OCR del set (entrega.json bidset_texto). Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK26: U-017: la resolución escrita que dice que el wall del lector con el mismo ID es OTRO wall del canon ('reader B's ... is the canon wall ...') no es resolución contra la cota impresa. Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK27: BE-CF04: el PASS sin walls de madera no escribe '0 walls' (U-138 lo leía como conteo vacío). Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)

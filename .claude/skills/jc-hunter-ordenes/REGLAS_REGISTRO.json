@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
- "conteo": 530,
+ "conteo": 537,
  "reglas": [
   {
    "id": "U-001",
@@ -7185,6 +7185,104 @@
    "test": {
     "archivo": "take-off:tools/test_hoja_sufijo.py",
     "token": "test_be_gk20_capa_paralela"
+   }
+  },
+  {
+   "id": "BE-GK21",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "revision_materiales: un gauge_ga con texto ('[PENDING] SEE STRUCTURAL...') es AMBER, nunca int() (la compuerta se caía)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/revision_materiales.py::comparar_type"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk21_gauge_texto"
+   }
+  },
+  {
+   "id": "BE-GK22",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "DensShield (glass-mat tile backer) cuenta en ALC-08 / ALC-20 (alcances.py) y en el driver de joint compound / tape (revision_materiales)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/alcances.py::ALCANCES"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
+   }
+  },
+  {
+   "id": "BE-GK23",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "headers.py: la regla de double sill track sin hoja nombra la decisión del estimador #18 (no 'default'); el canon puede traer sill_rule con su fuente",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/headers.py::SILL_RULE_DEFAULT"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
+   }
+  },
+  {
+   "id": "BE-GK24",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "cruce cuarto-wall (U-176): un wall bajo el C.H. del cuarto con height_diff_reason que cita hoja + RFI / Review Item es un conflicto declarado, no una falla",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::cruce_cuartos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
+   }
+  },
+  {
+   "id": "BE-GK25",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "CE_A2_ALTURAS: hojas sin punto (A131, A-201), etiquetas RCP '12-0' y texto desde la copia OCR del set (entrega.json bidset_texto)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::a2_alturas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
+   }
+  },
+  {
+   "id": "BE-GK26",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "U-017: la resolución escrita que dice que el wall del lector con el mismo ID es OTRO wall del canon ('reader B's ... is the canon wall ...') no es resolución contra la cota impresa",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_017"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
+   }
+  },
+  {
+   "id": "BE-GK27",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
+   "texto_corto": "BE-CF04: el PASS sin walls de madera no escribe '0 walls' (U-138 lo leía como conteo vacío)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cf04"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk22_26_guardas"
    }
   }
  ]
