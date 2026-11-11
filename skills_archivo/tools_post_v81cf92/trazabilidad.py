@@ -412,6 +412,8 @@ def aplicar(d, out_dir, canon_p):
                     cita = cita or _nh(extra) or list(dict.fromkeys(RX_HOJA.findall(extra)))
                 elif "Inputs" not in src0:
                     extra = "; ".join(dict.fromkeys(str(r.get("operacion")) for r in rs if r.get("operacion")))[:3000]   # v80r: sin cortar
+                    if fam == "additional head track":      # BE-GK36: itemized by opening (wall) so it splits by the wall designation
+                        its = items_filas(fam)
             else:
                 rs = filas_de(fam) if fam else []
                 cita = _nh(src0, *[r.get("source") for r in rs]) or \

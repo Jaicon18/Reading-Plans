@@ -22,7 +22,10 @@
 ---
 >                 bk = ("5/8 glass mat tile backer" if "DENS" in fam.upper() else
 >                       "1/2 exterior gyp sheathing" if fam == "1/2\" EXTERIOR gyp sheathing" else   # BE-GK34: wall faces in the breakdown   # BE-GK04b: Dens Shield faces (canon BOARD_FAM key)
-672c680
+406a415,416
+>                     if fam == "additional head track":      # BE-GK36: itemized by opening (wall) so it splits by the wall designation
+>                         its = items_filas(fam)
+672c682
 <                 prod = re.sub(r"^(\d{3})S\d{3}-(\d{2})$", r"\1T125-\2", prod)
 ---
 >                 prod = re.sub(r"^(\d{3,4})S\d{3}-(\d{2})$", r"\1T125-\2", prod)   # BE-GK36: 1000S too
