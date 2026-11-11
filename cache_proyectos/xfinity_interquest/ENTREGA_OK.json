@@ -1,7 +1,7 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 07:09 PST",
- "fecha_iso": "2026-11-11T15:09:46.645940+00:00",
+ "fecha_california": "2026-11-11 08:23 PST",
+ "fecha_iso": "2026-11-11T16:23:02.280904+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
@@ -638,8 +638,8 @@
    "descripcion": "U-177 (1): la entrega tiene UN PDF de markups vigente y UN Excel vigente (sin zz / REPLACED / NO USAR); ENTREGA_OK guarda su nombre + sha256 + md5 y la lista de chequeos; subir_entrega.py y `compuerta_entrega.py vigente` comparan con Drive (md5) y con los chequeos del skill vigente: otro archivo en Drive o compuerta vieja = la entrega NO está en verde",
    "estado": "PASS",
    "evidencia": [
-    "pdf: XF_markups_rev1b - OPEN IN BLUEBEAM.pdf sha256 f333da6e30b0",
-    "excel: XF_Takeoff_FINAL_rev1.xlsx sha256 2ea06f2b9c19"
+    "pdf: XF_markups_rev1b - OPEN IN BLUEBEAM.pdf sha256 cbb9e4edc7a6",
+    "excel: XF_Takeoff_FINAL_rev1.xlsx sha256 b663c76fd3ad"
    ],
    "plausibilidad": "OK"
   },
@@ -734,6 +734,7 @@
   {
    "id": "CB_U_017",
    "reglas": [
+    "BE-GK26",
     "U-017"
    ],
    "descripcion": "U-017: una cota IMPRESA que coincide con una lectura manda: la resolución AB nunca toma la otra lectura",
@@ -2026,13 +2027,14 @@
    "id": "CB_BE_CF04",
    "reglas": [
     "BE-CF04",
+    "BE-GK27",
     "BE-XF04",
     "U-079"
    ],
    "descripcion": "BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)",
    "estado": "PASS",
    "evidencia": [
-    "0 walls de madera: no wood-framed wall in the set: new walls are metal (2/A2.0 W2 3-5/8\" metal studs, 5/A2.0 2-1/2\" metal studs); W1 / W4 existing to remain (2/A2.0, not quantifie"
+    "walls de madera: ninguno en el set (no wood-framed wall in the set: new walls are metal (2/A2.0 W2 3-5/8\" metal studs, 5/A2.0 2-1/2\" metal studs); W1 / W4 existing to remain (2/A2.0, not quantifie)"
    ],
    "plausibilidad": "OK"
   },
@@ -3072,43 +3074,54 @@
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedule_wall_types.png": "2d83630122b292d6b163aee4ce9dd0ad9e62799a774a450c2bafad0bfe233ae1",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "d673f749987c61770c3cdd5baba7469158e7cc4e1c18eee1599e20f69235953f",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/wall_legend.png": "5fcbd5bacae1e976218ffbc34c7e08f17f4dd9c05134a2705d84f1df266fe69b",
-  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "6a953d583c716415d86bfbb6e6fae04fc76a35eaf314777f22ac634e26e4a33c",
+  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "14b637c1c8c1b61a68b1a1cb312404ddc58b11b7e3191ad71458807472e6e0e7",
   "rev1 FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "ae9de99350a804527a41e9e61427e0155d62f085ade2ed862e92216f187da306",
-  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "78193067e039160d96ab25d2a945070399baec5761884d5f8544d365ad7290c6",
-  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "06d562c7144b5d88345fa15a34963c11ac1a19b1364ede427113e43471da3fae",
+  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "b3d8f897534d0a0ebcac0b3b19708d2b1fbd8b9098e68bab012f7e49e4a4bf96",
+  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "ffcd5cf775125999fc22dd2c0439095e7753615dc18822f62dfce18f15439b61",
   "rev1 FINAL PARA REVISAR/Planos marcados/A1.0 - IMAGE ONLY (not editable) - walls rev1.png": "3700d7a4fdedd053dabe387db653633c349b3b5c110fa2e56a7a6b15883afe9c",
   "rev1 FINAL PARA REVISAR/Planos marcados/A2.0 - IMAGE ONLY (not editable) - walls rev1.png": "f4961609235a2948272fe2f1264e90f5a433ddebb963ef20d38d9456ea395739",
   "rev1 FINAL PARA REVISAR/Planos marcados/A3.0 - IMAGE ONLY (not editable) - ceilings rev1.png": "80aa20565e9da437949848b1fcd6e65df95904f6bc5be703f42bfe8f746f4d01",
-  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "2050821b00b71a83013638fd1b559e60e7714a0b121aaca0ab4fe9f381e23fbd",
-  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "3fd67ea6ac1d5a8b59abfaf26876a23fd3ee8d2341170f806409e3f56af43c83",
-  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "9ad6fb0779a3f8002f502fe2f3ddfb968338ae50ceb3306e6449aa234d6207ee",
-  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "f333da6e30b03c16f53429b738a2144931a8641c1f4452d91de266607e3b8c14",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "1c5f3d6351c42fd7a05b9caaa7b22b8c2ff3db71d7ce02c8a4ba7fb25322a99c",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "d7c4b5420441e02d38095dd5401e46ef51979cb17dfbfddd3f4799296dbabbc4",
-  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "b5842a789947e4db6fde75b7b989a467cec8ca037842c0df86e35d0a24dccbd3",
-  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "41c4a8157abc917939d26ddf07c52dfe44c892f9185ef2b50678f4bbaaba8896",
-  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "320f612cfd649d3c55a77d03d615d110fb26b325b526c5f8248b8cfe082e8968",
-  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "e4a36d4bf7c54cb266e9d2a0a93bd4255485d030135a26acc66831b6ee440140",
-  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "25562d4381e0c60da6bd85466df1f8dbf93a186d96148ac2e3c85eadb84eeab1",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "2ea06f2b9c192c4da44d7cf916624c2b840d984f37f33c63d4f7111567154dcf",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "60197bae26e58f4d60f5f783e56f60d60eb8b6fafddcbb83a52aaa11b9a53bcc"
+  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "1b158676c26fd9ca2847b056ae44cf666c39d97565d09763517bbb439d39e0c2",
+  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "ea8052da2b640f603b128194d7c275f966bce5782e6bab06caeea8bd591a9d10",
+  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "bfa095d2898b87bc1b55059c291867c2024816d84ee7acce43a47f9ca1bbb521",
+  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "cbb9e4edc7a6f71c960cd1b6575328247b3db4a24b3811192822a6fc0510de9d",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "f2a18f71b1a2cb066bf61affebaffeabdd201c7ef2ddafa4b31766bb57c7926e",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "a0b561b1c8c402360675d89db4618636419e4b88741fa4e9ee01392107d9b0f4",
+  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "b49a369836096131e52080d75771b9cb5ad100e5866618db5a6744ad02fa8e7a",
+  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "2461ab2d7b742f32569d6ab96917ed0484f537155c57aa93f42c4753b8ea8c75",
+  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "c296bad1e797583430dc18bb9b82774fe1c61a5c21c44010be8b59d5e70adac4",
+  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "305470de44a83ccb3708dfa1a0d9216d85705de05258bdae3926ae1271decdfa",
+  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "4678dd3cd4572de10069b2779e2162c4f9ea8dd6cf664f77a8d1dfb293c090f4",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "e481da7b952dd1a3c5837ee16a04ca6bea46dbc2cb6b8533e9101450ea91a801"
  },
  "drive": {
   "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
   "carpeta_proyecto": "Xfinity - Interquest, Colorado Springs, CO (BCI National) 11-13-26",
   "carpeta_proyecto_id": "1R2ZrIX9VrP0rsoY4xQPQB8SyqDzx-TLX"
  },
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf89 U-177 / BE-XF09",
- "vigentes": {
-  "pdf": {
+ "vigente": {
+  "markups_pdf": {
    "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",
-   "sha256": "f333da6e30b03c16f53429b738a2144931a8641c1f4452d91de266607e3b8c14",
-   "md5": "204d568c65a0cf09ffe672326ba8552d"
+   "sha256": "cbb9e4edc7a6f71c960cd1b6575328247b3db4a24b3811192822a6fc0510de9d"
   },
   "excel": {
    "nombre": "XF_Takeoff_FINAL_rev1.xlsx",
-   "sha256": "2ea06f2b9c192c4da44d7cf916624c2b840d984f37f33c63d4f7111567154dcf",
-   "md5": "520b80276fd6c63e09103f21b5a097f9"
+   "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92"
+  }
+ },
+ "skill_version": "v81cf91",
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31",
+ "vigentes": {
+  "pdf": {
+   "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",
+   "sha256": "cbb9e4edc7a6f71c960cd1b6575328247b3db4a24b3811192822a6fc0510de9d",
+   "md5": "44cb6afcc126711ea0453854db090eed"
+  },
+  "excel": {
+   "nombre": "XF_Takeoff_FINAL_rev1.xlsx",
+   "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92",
+   "md5": "f9e1bbb38b03a0c3fb7a0bd804da8cd8"
   }
  }
 }

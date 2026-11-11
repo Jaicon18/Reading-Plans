@@ -30,3 +30,6 @@
 - Blocking: '6" sheet metal blocking strapping' 14.5 LF (A5.0 EV-44 / EV-45, coil LF) y '16 ga x 6" x 1-1/2" unpunched track' 32.88 LF (8/A2.0).
 - Patch & repair W1 / W4: U-064 no aplica tal cual (no dice 'replace'); conservador cargado (RFI-06 A): caras del tenant a C.H. + 6" = 2,589.62 SF de 5/8" Type X (misc PR-*); B = -2,589.62 SF (solo allowance), C = +1,937.32 SF (W1 a estructura 26'-0").
 - Compuerta VERDE 211 / 0 / 0; Drive: 18 'zz old U-177' + 18 nuevos; `subir_entrega.py --vigente` PASS. Proposal $17,192 con impuesto (antes $8,814).
+
+## U-178 (11-nov): RFI-06 'Verificar a mano'
+- A conservador (+2,589.62 SF) sigue cargado; RFI-06 = PENDING - user manual verification en Pending Items, SEGUIMIENTO, PARA_REVISAR y GUIA (hojas A2.0, A0.1 nota 3, A1.0). Compuerta v81cf91 211/0/0; Drive 16 'zz old U-178' + 16 nuevos; --vigente PASS.

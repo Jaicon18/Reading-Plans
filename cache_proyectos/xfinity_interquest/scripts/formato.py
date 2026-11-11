@@ -371,3 +371,13 @@ c['rfis'].append({"id": "RFI-06", "status": "open", "source": "2/A2.0 W1 / W4, A
    "swept_txt": "Swept: all 17 sheets (A / E / M / P, SHX), A0.3 specs; terms PATCH, REPAIR, REPLACE, FIRE RATING, MAINTAIN, V.I.F., REFURBISH, PREPARE FOR NEW FINISHES."}})
 json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
 print("PR SF", tot_pr, "C +", w1_ext)
+
+# --- U-178 (usuario 11-nov, RFI-06 botón "Verificar a mano"): A conservador sigue cargado; RFI-06 PENDING - user manual verification ---
+for r in c['rfis']:
+    if r['id'] == 'RFI-06':
+        r['status'] = 'open'
+        r['pending'] = "PENDING - user manual verification (U-178, 11-nov): the estimator checks A2.0 (2/A2.0 W1 / W4 'PATCH AND REPAIR'), A0.1 gen. note 3 and A1.0 ('PREPARE FOR NEW FINISHES', notes 13 / 29) on site / by hand"
+        if not str(r['question']).startswith('[PENDING - user manual verification]'):
+            r['question'] = '[PENDING - user manual verification] ' + r['question']
+            r['pregunta'] = '[PENDING - user manual verification] ' + r['pregunta']
+json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
