@@ -55,3 +55,5 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf74 · CR City Hotel Castle Rock (dueña) · 11-nov 6:30 PM PT · v81cf73 + U-161/U-162/U-163 (respuestas del usuario a los RFI: todo RFI cerrado) · en curso
 - ACTUALIZACIÓN 11-nov: **v81cf74 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf74_U161-U162-U163-CR-R18-FINAL_2026-11-11.zip (VIGENTE en INDICE; suite 49/49, banco 0 distintas, 199 archivos). CR City Hotel rev18 FINAL entregada con ella (196/4/0, 0 RFI abiertos).
 - v81cf75 · 11-nov · v81cf74 + U-164 · PUBLICADA (VIGENTE en INDICE; suite 49/49, 199 archivos)
+- v81cf76 · CR City Hotel Castle Rock (dueña) · 11-nov · v81cf75 + U-165 / BE-155 (ruta Windows <= 230; PDF de markups '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf') · en curso
+- ACTUALIZACIÓN 11-nov: **v81cf76 PUBLICADA** = skills_archivo/take-off-metal-frame-drywall_v81cf76_U165-ruta-Windows-230_2026-11-11.zip (VIGENTE en INDICE; suite 49/49, banco 0 distintas, 199 archivos, verificar_version OK).

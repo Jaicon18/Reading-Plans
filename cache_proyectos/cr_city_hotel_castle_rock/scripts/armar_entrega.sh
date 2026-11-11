@@ -13,7 +13,7 @@ cp $W/indep/schedules_indep.json $W/indep/fichas.json $W/indep/NOTAS.md "$E/Audi
 X=$W/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_rev18.xlsx
 ln -s $X "$E/Take-off/CR_City_Hotel_Takeoff_FINAL_rev18.xlsx"
 [ -f $X.sello.json ] && ln -s $X.sello.json "$E/Take-off/CR_City_Hotel_Takeoff_FINAL_rev18.xlsx.sello.json"
-cp $W/etapas/8_excel/CR_City_Hotel_markups_rev18.pdf "$E/Planos marcados/CR_City_Hotel_markups_rev18 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf"
+cp $W/etapas/8_excel/CR_City_Hotel_markups_rev18.pdf "$E/Planos marcados/CR_markups_rev18 - OPEN IN BLUEBEAM.pdf"
 cp $W/etapas/7_imagenes/*" - IMAGE ONLY (not editable) - "*" rev18.png" "$E/Planos marcados/"
 cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/rfi_img/"; cp $W/etapas/4_canon/img/rfi/*.png "$E/Auditoria/review_items/"
 cp $W/etapas/3_revision/resolucion*.md $W/etapas/3_revision/revision.md $W/etapas/3_revision/comparacion_AB.json "$E/Auditoria/resolucion_AB/"

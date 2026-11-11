@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_City_Hotel_markups_rev18 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_markups_rev18 - OPEN IN BLUEBEAM.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -143,7 +143,7 @@ G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · r
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev18 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_markups_rev18 - OPEN IN BLUEBEAM.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -275,6 +275,6 @@ P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt19)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt18)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt17)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt16)
-G = ["OPEN THIS IN BLUEBEAM: `Planos marcados/CR_City_Hotel_markups_rev18 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
+G = ["OPEN IN BLUEBEAM: `Planos marcados/CR_markups_rev18 - OPEN IN BLUEBEAM.pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 print("docs ok", len(rf), "rfis")
