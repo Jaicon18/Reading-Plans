@@ -3,7 +3,7 @@ sheet PROPOSAL DW (JC Hunter letterhead) + PRICING (material FBM / labor and OH 
 FBM_PRICES (every FBM product used: SKU, name, price, unit, stock, link, date, branch). Precedent: B&N armar_proposal.py.
 Rates not in the template -> "[RATE TO CONFIRM]" (0 in the totals, listed); FBM SKU not found -> "[PRICE TO CONFIRM]".
 Usage: armar_proposal.py <template.xlsx> <rev4 takeoff.xlsx> <canon.json> <fbm_dir> <out.xlsx>"""
-import datetime, glob, json, math, re, sys
+import datetime, glob, json, math, os, re, sys
 import openpyxl
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
@@ -217,7 +217,9 @@ put("C9", "PROJECT ADDRESS:"); put("G9", "DATE OF PLANS:")
 put("C10", "8283 S. AKRON ST., SUITE 110, CENTENNIAL, CO 80112"); put("G10", "10-15-2026 (90% set / permit set, 37 sheets)")
 put("C11", "DATE OF PROPOSAL:"); put("G11", "ADDENDUM:")
 P["C12"].value = datetime.datetime(2026, 11, 5); P["C12"].number_format = "mm-dd-yyyy"
-put("G12", "Addenda issued 11-05-2026 (Elite / Elder-Jones) received - not included in this pricing")
+ADD_OK = os.environ.get("ADDENDA_REVIEWED")     # rev4b (U-173): addenda reviewed 11-11-2026, no quantity impact
+put("G12", "Rev 2 Permit Set 11-04-2026 (Elite / Elder-Jones addenda 11-05-2026) reviewed - no quantity impact" if ADD_OK else
+    "Addenda issued 11-05-2026 (Elite / Elder-Jones) received - not included in this pricing")
 put("C13", "PHONE NUMBER:"); put("G13", "E-MAIL:")
 put("C14", TBC); put("G14", TBC)
 put("C15", "Scope of Work:", bold=True)
@@ -256,7 +258,8 @@ for r in scope:
         ex.append(f"• {n}: {why}")
 ex += ["• iPad backing plate 4/A104 ('BACKING PLATE BY G.C.')", "• Existing ceiling demolition (D100 keynote 7) - for lack of information",
        "• Bonds, permits and fees", "• Temporary utilities, dumpster, prevailing wages, shop drawings",
-       "• Addenda issued 11-05-2026 (not reviewed in this pricing)", "• Anything not specifically listed in the INCLUDED scope"]
+       ("• Work at the existing 3-hour fire-rated demising wall: rated assembly, firestopping and permanent identification above the ceiling (A100, A200, G003 Rev 2)"
+        if ADD_OK else "• Addenda issued 11-05-2026 (not reviewed in this pricing)"), "• Anything not specifically listed in the INCLUDED scope"]
 for m in [m for m in list(P.merged_cells.ranges) if 49 <= m.min_row <= 56]:
     P.unmerge_cells(str(m))
 P.merge_cells("C49:J56")
@@ -316,6 +319,9 @@ cl = ["RFI-01 (user decision 2026-11-05, option A, rule U-146): two printed deck
       "Demolition is priced by area (SF); existing walls to demolish carried to the printed B.O. structure (D100, A100).",
       "Wood blocking / FRT plywood (Div. 06), fasteners, insulation, ACT, paint and MEP are excluded (see exclusions).",
       "Material prices: FBM (myfbm.com) list prices read 11-05-2026; FRP trim priced with equal products (Marlite M370 / M360 / M350 not listed)."]
+if ADD_OK:
+    cl += ["Addenda: Rev 2 Permit Set 11-04-2026 (city comments) and the architect / MEP response letters reviewed sheet by sheet - no change to partitions, board, ceilings or demolition; pricing unchanged.",
+           "Patch and repair at the removed electrical panels (D100 keynote 12, Rev 2) is inside the patch & repair allowance."]
 for x in cl:
     r += 1
     P.merge_cells(f"C{r}:J{r}")
