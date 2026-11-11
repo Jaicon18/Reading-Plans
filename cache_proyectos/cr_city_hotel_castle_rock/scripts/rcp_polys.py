@@ -130,6 +130,9 @@ for x in c.get('ceilings') or []:
                                   f"GYP-1 dropped bath ceiling), so the RCP hatch does not match the polygon one-to-one")
 for o in out:
     o['cause'] = next((x['area_cause'] for x in c.get('ceilings') or [] if x['room'] == o['room'] and x.get('area_cause')), None)
+    if str(o.get('room', '')).startswith('L1 FS-1 membrane') and o.get('cause'):   # rev16: huecos de hoistways / bases de shaft por keyhole
+        o['cause'] += (" [EDGE NOT DRAWN: keyhole bridges to the hoistway and shaft-base holes (no membrane where the hoistways pass the L2 floor; "
+                       "the shaft bases are not drawn on A3.01, they sit above the L1 ceiling)]")
 json.dump(out, open(f'{W}/etapas/6_markups/rcp_polys.json', 'w'), indent=1)
 json.dump(chk, open(f'{W}/etapas/6_markups/rcp_polys_check.json', 'w'), indent=1)
 json.dump(c, open(f'{W}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1)

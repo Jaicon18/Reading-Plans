@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev15 FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev16 FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_City_Hotel_markups_rev15 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_City_Hotel_markups_rev16 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -138,12 +138,12 @@ S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGA
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev15 FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev16 FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev15 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_City_Hotel_markups_rev16 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -246,11 +246,21 @@ _txt21 = ("21. **rev15 reemplaza a rev14** (orden del usuario 10-nov 'revisa tod
           "(12) CBU: mesh tape + setting compound (09 29 00 2.6.E.3); (17) 24 cajas de closet de guest rooms L2 / L3 con stipple: Type C + RC.")
 G[2:2] = ["## CAMBIOS rev15 vs rev14 (revisa esto primero si ya viste rev14)", "", _txt21, ""]
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt21)
+_txt22 = ("22. **rev16 reemplaza a rev15** (revisión dirigida de rev15, orden del usuario 'revisa todo otra vez'; detalle en RESUMEN_rev16.md y "
+          "DELTA_rev15_rev16.md): (1) ELEC 221 / 321 / 421: A0.00 'ELECTRICAL AND IT ROOMS' '2 HR' + 'INCIDENTIAL USE AREAS (TABLE 509):' ... "
+          "ELECTRICAL ROOMS' contra los code plans 1HR FP = conflicto; el base lleva la opción mayor (2 HR, +1 capa de 5/8\" Type X por cara, como 118B) y el "
+          "1 HR va como DEDUCT ALTERNATE DA-6 en RFI-04; (2) cove de corridor 7/A7.23: el detalle dibuja madera (caja con X) -> framing Div. 06 EXCLUDED, "
+          "fuera tracks y cripples de los coves (el board sigue); lobby y stair FCU siguen metálicos; (3) áreas sin número del RCP (hoistways, stairs, "
+          "shafts, ELEC/TELE 120, pasillo 410/411, WS-1 de L4) con renglón o EXCLUDED; (4) Review Items coherentes con Pending Items (BAR 125.98); "
+          "(5) IBC 2018 Table 509 citada con su fila 'Electrical installations and transformers' (NFPA 70); (6) 2HR shaft ceiling dibujado en el RCP de L1; "
+          "(7) base del CBU = la del Material Summary.")
+G[2:2] = ["## CAMBIOS rev16 vs rev15 (revisa esto primero si ya viste rev15)", "", _txt22, ""]
+P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt22)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt20)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt19)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt18)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt17)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt16)
-G = ["OPEN THIS IN BLUEBEAM: `Planos marcados/CR_City_Hotel_markups_rev15 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
+G = ["OPEN THIS IN BLUEBEAM: `Planos marcados/CR_City_Hotel_markups_rev16 - OPEN THIS IN BLUEBEAM (walls + ceilings, editable).pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 print("docs ok", len(rf), "rfis")

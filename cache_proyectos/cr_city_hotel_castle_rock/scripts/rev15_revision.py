@@ -177,14 +177,12 @@ for r in T['rooms']:
         LOG.append(f"{rid} +{A} SF Type X, +{rc} LF RC")
 
 # ---- 3. 2HR SHAFT CEILING (1/A5.08) base north shaft (8/A9.03) + south shaft (7/A9.03): MB-1 conservador + RFI-29 ----
-SH = [("CLG-L2-SHN", "north", 2.25, 4.3021, "8/A9.03 shaft interior 2'-3\" x 4'-3 5/8\" [CONFIRMED]", (720.4 + 744.15) / 2, (417.0 + 455.7) / 2),
-      ("CLG-L2-SHS", "south", 3.6667, 2.0104, "7/A9.03 shaft interior 3'-8\" x 2'-0 1/8\" [CONFIRMED]", (757.1 + 793.6) / 2, (1075.05 + 1096.7) / 2)]
-for rid, nm, a, b_, dims, cx, cy in SH:
+SH = [("CLG-L1-SHN", "north", 2.25, 4.3021, "8/A9.03 shaft interior 2'-3\" x 4'-3 5/8\" [CONFIRMED]", [[735.26, 436.49], [755.51, 436.49], [755.51, 475.21], [735.26, 475.21]]),
+      ("CLG-L1-SHS", "south", 3.6667, 2.0104, "7/A9.03 shaft interior 3'-8\" x 2'-0 1/8\" [CONFIRMED]", [[771.95, 1096.33], [804.95, 1096.33], [804.95, 1114.43], [771.95, 1114.43]])]
+for rid, nm, a, b_, dims, P in SH:   # rev16 #6: la membrana está en el plenum de L1 (1/A5.08) -> RCP de L1 (A3.01, misma posición de núcleo que A3.02-A3.04)
     A = round(a * b_, 2)
-    hw, hh = (a * 9 / 2, b_ * 9 / 2) if nm == 'south' else (a * 9 / 2, b_ * 9 / 2)
-    P = [[round(cx - hw, 2), round(cy - hh, 2)], [round(cx + hw, 2), round(cy - hh, 2)], [round(cx + hw, 2), round(cy + hh, 2)], [round(cx - hw, 2), round(cy + hh, 2)]]
-    KZ[rid] = {"sheet": "A2.02", "polygons_final": [P], "polygon": P, "area_sf": A, "nhoja": "1/A5.08",
-               "metodo": f"rev15: {nm} shaft footprint (CH-L2 walls on A2.02, inner dims of {dims.split(' [')[0]}) -> its RCP A3.02"}
+    KZ[rid] = {"sheet": "A3.01", "polygons_final": [P], "polygon": P, "area_sf": A, "nhoja": "1/A5.08",
+               "metodo": f"{nm} shaft base at the L1 ceiling plenum (1/A5.08), drawn on the L1 RCP 1/A3.01 at the core position shared by A3.01-A3.04 (inner dims of {dims.split(' [')[0]})"}
     if f"{rid} board" in ya:
         continue
     base = ("1/A5.08 '2HR SHAFT CEILING' + 'STEEL SUPPORT PLATFORM WITH 2HR RATED FIRE PROOFING' at the base of the north shaft (11/A9.03 WALL SECTION - "
@@ -208,7 +206,7 @@ for rid, nm, a, b_, dims, cx, cy in SH:
     LOG.append(f"{rid} {A} SF: +{round(A * 3, 2)} SF Type X, +{A} SF liner, +{round(ns * sp_, 2)} LF C-H 6\", +{round(2 * max(a, b_), 2)} LF J-runner")
 
 # ---- 12. CBU: juntas por fabricante (09 29 00 2.6.E.3 / 3.6.G) ----
-cbu = round(sum(float(w['length_ft']) * float(w['height_ft']) * int(w['faces']) * int(w.get('layers') or 1) for w in WALLS
+cbu = round(sum(round(float(w['length_ft']) * float(w['height_ft']) * int(w['faces']) * int(w.get('layers') or 1), 2) for w in WALLS   # = familia '5/8" cement board' de canon.py (por fila redondeada)
                 if 'cement board' in str(w.get('board'))), 2)
 if 'CBU joint mesh tape' not in ya:
     s12 = ("spec 09 29 00 2.6.E.3 'Joint Compound for Tile Backing Panels - Cementitious Backer Units: As recommended by backer unit manufacturer' "

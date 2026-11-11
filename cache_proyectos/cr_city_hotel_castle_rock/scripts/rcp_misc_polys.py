@@ -88,6 +88,8 @@ VISTA = [("A7.50", lambda x, y: x > 1300 and y > 700, "A7.50", lambda x, y: (x, 
          ("A7.45", lambda x, y: x > 1400 and y > 1150, "A3.01", lambda x, y: (x / 2 - 206, y / 2 + 570), "2/A7.45 (plan, no enlarged RCP) -> 1/A3.01 RCP (scale 1/2, offset -206 / +570 pt)")]
 BORDE_NO = {"RS6-L3": "east edge = L4 facade line (1065.5 on A2.04) of the roof strip above, not an RCP line of A3.03; south end at the derived 66.17 ft",
             "CLG-L1-127": "niche boundary to the BAR field not drawn on 1/A7.31 (U-146: the higher adjacent printed height)",
+            "CLG-L1-SHN": "A3.01 does not draw the shafts (they sit above the L1 ceiling); outline at the core position shared by A3.01-A3.04 (1/A5.08 base)",
+            "CLG-L1-SHS": "A3.01 does not draw the shafts (they sit above the L1 ceiling); outline at the core position shared by A3.01-A3.04 (7/A9.03 base)",
             "CLG-L2-214C": "hole of the FS-1 polygon copied from the floor-plan equipment square; 1/A3.02 draws plain stipple there, no box lines",
             "CLG-L3-314C": "hole of the FS-1 polygon copied from the floor-plan equipment square; 1/A3.03 draws plain stipple there, no box lines"}
 

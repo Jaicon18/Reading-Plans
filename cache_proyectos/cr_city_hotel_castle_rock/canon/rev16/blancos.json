@@ -1,0 +1,879 @@
+{
+ "_doc": "rev16 fork solo lectura (10-nov): áreas en blanco de RCP (U-159/U-160) + base de shafts en A3.01. Coordenadas pt de la hoja (PDF limpio). Áreas [DERIVADO] pt2/81 (1/8) o /324 (1/4).",
+ "vertical_levels": {
+  "hoistway-service": "L1-L4 (pit below L1; 1-6/A6.00); no ceiling at any level, top at L4 EXCLUDED",
+  "hoistway-lobby": "L1-L4 (pit; 7-12/A6.00)",
+  "stair-W": "lobby stair STAIR 127 (A2.01) L1-L4 (7-11/A6.01): ceiling only at L4 top (row)",
+  "stair-E": "SE stair STAIR 126 (A2.01) / 413 (L4) L1-L4 (1-5/A6.02): ceiling only at L4 top (row)",
+  "shaft-N": "from LEVEL 2 to roof (8/A9.03, 11/A9.03 base of north shaft, 1/A5.08): base at L1 ceiling = 2HR SHAFT CEILING; L2-L4 EXCLUDED",
+  "shaft-S": "from LEVEL 2 to roof (7/A9.03, CH-L2-01..04; base not cut, IBC 2018 713.11): base at L1 ceiling = shaft ceiling; L2-L4 EXCLUDED"
+ },
+ "items": [
+  {
+   "vertical": "hoistway-service",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(service elevator hoistway)",
+   "polygon": [
+    [
+     737.54,
+     482.06
+    ],
+    [
+     804.98,
+     482.06
+    ],
+    [
+     804.98,
+     533.78
+    ],
+    [
+     737.54,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "rev15": "covered by the L1 FS-1 membrane polygon (Type C) - no EXCLUDED",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "1/A6.00; 6/A6.00; 2/A0.01"
+  },
+  {
+   "vertical": "hoistway-lobby",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(lobby elevator hoistway)",
+   "polygon": [
+    [
+     726.38,
+     950.3
+    ],
+    [
+     802.94,
+     950.3
+    ],
+    [
+     802.94,
+     1018.22
+    ],
+    [
+     726.38,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "rev15": "covered by the L1 FS-1 membrane polygon (Type C) - no EXCLUDED",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "8/A6.00; 12/A6.00; 2/A0.01"
+  },
+  {
+   "vertical": "shaft-N",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(north shaft, no number)",
+   "polygon": null,
+   "area_sf": 9.58,
+   "rev15": "under L1 FS-1 polygon; shaft base ceiling drawn on A3.02 (CLG-L2-SHN)",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "row: 2HR shaft ceiling (base) goes here, see shaft_base_A3.01 (point 6)"
+  },
+  {
+   "vertical": "shaft-S",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(south shaft, no number)",
+   "polygon": null,
+   "area_sf": 7.38,
+   "rev15": "under L1 FS-1 polygon; shaft base ceiling drawn on A3.02 (CLG-L2-SHS)",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "row: 2HR shaft ceiling (base) goes here, see shaft_base_A3.01 (point 6)"
+  },
+  {
+   "vertical": "stair-W",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(lobby stair W, STAIR 127)",
+   "polygon": [
+    [
+     726.26,
+     649.32
+    ],
+    [
+     804.86,
+     649.32
+    ],
+    [
+     804.86,
+     805.8
+    ],
+    [
+     726.26,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "10/A6.01; 11/A6.01"
+  },
+  {
+   "vertical": "stair-E",
+   "sheet": "A3.01",
+   "level": "L1",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "polygon": [
+    [
+     1505.06,
+     1211.52
+    ],
+    [
+     1661.54,
+     1211.52
+    ],
+    [
+     1661.54,
+     1290.0
+    ],
+    [
+     1505.06,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "1/A6.02; 5/A6.02"
+  },
+  {
+   "vertical": "hoistway-service",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(service elevator hoistway)",
+   "polygon": [
+    [
+     737.04,
+     482.06
+    ],
+    [
+     804.48,
+     482.06
+    ],
+    [
+     804.48,
+     533.78
+    ],
+    [
+     737.04,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "rev15": "BLANK",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "3/A6.00; 6/A6.00; 3/A0.01"
+  },
+  {
+   "vertical": "hoistway-lobby",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(lobby elevator hoistway)",
+   "polygon": [
+    [
+     725.88,
+     950.3
+    ],
+    [
+     802.44,
+     950.3
+    ],
+    [
+     802.44,
+     1018.22
+    ],
+    [
+     725.88,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "rev15": "BLANK",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "11/A6.00; 12/A6.00; 3/A0.01"
+  },
+  {
+   "vertical": "shaft-N",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(north shaft, no number)",
+   "polygon": [
+    [
+     735.48,
+     438.14
+    ],
+    [
+     755.76,
+     438.14
+    ],
+    [
+     755.76,
+     476.42
+    ],
+    [
+     735.48,
+     476.42
+    ]
+   ],
+   "area_sf": 9.58,
+   "rev15": "CLG-L2-SHN markup (to move to A3.01 -> then BLANK)",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "nhoja": "1/A5.08; 8/A9.03"
+  },
+  {
+   "vertical": "shaft-S",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(south shaft, no number)",
+   "polygon": [
+    [
+     772.2,
+     1096.22
+    ],
+    [
+     805.2,
+     1096.22
+    ],
+    [
+     805.2,
+     1114.34
+    ],
+    [
+     772.2,
+     1114.34
+    ]
+   ],
+   "area_sf": 7.38,
+   "rev15": "CLG-L2-SHS markup (to move to A3.01 -> then BLANK)",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "nhoja": "7/A9.03; 10/A9.03"
+  },
+  {
+   "vertical": "stair-W",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(lobby stair W, STAIR 127)",
+   "polygon": [
+    [
+     725.76,
+     649.32
+    ],
+    [
+     804.36,
+     649.32
+    ],
+    [
+     804.36,
+     805.8
+    ],
+    [
+     725.76,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "9/A6.01; 11/A6.01"
+  },
+  {
+   "vertical": "stair-E",
+   "sheet": "A3.02",
+   "level": "L2",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "polygon": [
+    [
+     1504.56,
+     1211.52
+    ],
+    [
+     1661.04,
+     1211.52
+    ],
+    [
+     1661.04,
+     1290.0
+    ],
+    [
+     1504.56,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "2/A6.02; 5/A6.02"
+  },
+  {
+   "vertical": "hoistway-service",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(service elevator hoistway)",
+   "polygon": [
+    [
+     737.54,
+     482.06
+    ],
+    [
+     804.98,
+     482.06
+    ],
+    [
+     804.98,
+     533.78
+    ],
+    [
+     737.54,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "rev15": "BLANK",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "4/A6.00; 6/A6.00; 1/A0.02"
+  },
+  {
+   "vertical": "hoistway-lobby",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(lobby elevator hoistway)",
+   "polygon": [
+    [
+     726.38,
+     950.3
+    ],
+    [
+     802.94,
+     950.3
+    ],
+    [
+     802.94,
+     1018.22
+    ],
+    [
+     726.38,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "rev15": "BLANK",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "elevator hoistway, no ceiling",
+   "nhoja": "10/A6.00; 12/A6.00; 1/A0.02"
+  },
+  {
+   "vertical": "shaft-N",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(north shaft, no number)",
+   "polygon": [
+    [
+     735.98,
+     438.14
+    ],
+    [
+     756.26,
+     438.14
+    ],
+    [
+     756.26,
+     476.42
+    ],
+    [
+     735.98,
+     476.42
+    ]
+   ],
+   "area_sf": 9.58,
+   "rev15": "BLANK",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "nhoja": "1/A5.08; 8/A9.03"
+  },
+  {
+   "vertical": "shaft-S",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(south shaft, no number)",
+   "polygon": [
+    [
+     772.7,
+     1096.22
+    ],
+    [
+     805.7,
+     1096.22
+    ],
+    [
+     805.7,
+     1114.34
+    ],
+    [
+     772.7,
+     1114.34
+    ]
+   ],
+   "area_sf": 7.38,
+   "rev15": "BLANK",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "nhoja": "7/A9.03; 10/A9.03"
+  },
+  {
+   "vertical": "stair-W",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(lobby stair W, STAIR 127)",
+   "polygon": [
+    [
+     726.26,
+     649.32
+    ],
+    [
+     804.86,
+     649.32
+    ],
+    [
+     804.86,
+     805.8
+    ],
+    [
+     726.26,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "8/A6.01; 11/A6.01"
+  },
+  {
+   "vertical": "stair-E",
+   "sheet": "A3.03",
+   "level": "L3",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "polygon": [
+    [
+     1505.06,
+     1211.52
+    ],
+    [
+     1661.54,
+     1211.52
+    ],
+    [
+     1661.54,
+     1290.0
+    ],
+    [
+     1505.06,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "rev15": "BLANK",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "EXCLUDED",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "nhoja": "3/A6.02; 5/A6.02"
+  },
+  {
+   "vertical": "hoistway-service",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(service elevator hoistway)",
+   "polygon": [
+    [
+     737.04,
+     481.56
+    ],
+    [
+     804.48,
+     481.56
+    ],
+    [
+     804.48,
+     533.28
+    ],
+    [
+     737.04,
+     533.28
+    ]
+   ],
+   "area_sf": 43.06,
+   "rev15": "EXCLUDED",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  },
+  {
+   "vertical": "hoistway-lobby",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(lobby elevator hoistway)",
+   "polygon": [
+    [
+     725.88,
+     949.8
+    ],
+    [
+     802.44,
+     949.8
+    ],
+    [
+     802.44,
+     1017.72
+    ],
+    [
+     725.88,
+     1017.72
+    ]
+   ],
+   "area_sf": 64.2,
+   "rev15": "EXCLUDED",
+   "printed_inside": "X (hoistway symbol), no ceiling tag, no stipple [CONFIRMADO render BL_*_core.png]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  },
+  {
+   "vertical": "shaft-N",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(north shaft, no number)",
+   "polygon": [
+    [
+     735.48,
+     437.64
+    ],
+    [
+     755.76,
+     437.64
+    ],
+    [
+     755.76,
+     475.92
+    ],
+    [
+     735.48,
+     475.92
+    ]
+   ],
+   "area_sf": 9.58,
+   "rev15": "EXCLUDED",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  },
+  {
+   "vertical": "shaft-S",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(south shaft, no number)",
+   "polygon": [
+    [
+     772.2,
+     1095.72
+    ],
+    [
+     805.2,
+     1095.72
+    ],
+    [
+     805.2,
+     1113.84
+    ],
+    [
+     772.2,
+     1113.84
+    ]
+   ],
+   "area_sf": 7.38,
+   "rev15": "EXCLUDED",
+   "printed_inside": "empty box, no tag, no stipple [CONFIRMADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  },
+  {
+   "vertical": "stair-W",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(lobby stair W, STAIR 127)",
+   "polygon": [
+    [
+     725.76,
+     648.82
+    ],
+    [
+     804.36,
+     648.82
+    ],
+    [
+     804.36,
+     805.3
+    ],
+    [
+     725.76,
+     805.3
+    ]
+   ],
+   "area_sf": 151.84,
+   "rev15": "ROW (L4 Lobby stair 151.84 SF RS-1)",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  },
+  {
+   "vertical": "stair-E",
+   "sheet": "A3.04",
+   "level": "L4",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "polygon": [
+    [
+     1504.56,
+     1211.02
+    ],
+    [
+     1661.04,
+     1211.02
+    ],
+    [
+     1661.04,
+     1289.5
+    ],
+    [
+     1504.56,
+     1289.5
+    ]
+   ],
+   "area_sf": 151.61,
+   "rev15": "ROW (L4 SE stair 413 151.61 SF RS-1)",
+   "printed_inside": "stair run lines dashed, no ceiling tag, no stipple (stipple-stroke density 0.1-1.2 /SF vs 7.1 /SF in a loaded chase = stray marks at the walls) [DERIVADO]",
+   "poly_method": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.0) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "action": "none (already EXCLUDED / row)"
+  }
+ ],
+ "a3_04_label_style": {
+  "room": "(service elevator hoistway) / (north shaft, no number)",
+  "reason": [
+   "elevator hoistway, no ceiling",
+   "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling"
+  ],
+  "nhoja": "5/A6.00; 2/A0.02"
+ },
+ "elec_tele_120_A7.50": {
+  "sheet": "A7.50",
+  "view": "2/A7.50 ENLARGED RCP",
+  "room": "120",
+  "name": "ELEC/TELE",
+  "polygon": [
+   [
+    1883.28,
+    581.82
+   ],
+   [
+    2017.44,
+    581.82
+   ],
+   [
+    2017.44,
+    623.22
+   ],
+   [
+    1883.28,
+    623.22
+   ]
+  ],
+  "area_sf": 17.14,
+  "area_op": "(2017.44-1883.28)*(1344.72-1303.32)/324 = 17.14 SF [DERIVADO] (plan view 1/A7.50 wall faces, -> RCP view dy -721.5; edge coverage 1.0)",
+  "printed": "ACT lay-in grid drawn (2 ft module, 3 vertical + 1 horizontal grid line), no ceiling tag / height text inside the room [CONFIRMADO render BL_A7.50_2_ELEC-TELE120_rcp.png]",
+  "action": "EXCLUDED",
+  "reason": "lay-in ACT ceiling (ACT grid drawn, no tag), not drywall scope; FS-1 rated membrane above is loaded",
+  "nhoja": "2/A7.50",
+  "note": "same block / style as 118B and 119 (under_L2_plate)"
+ },
+ "passage_410_411_A3.04": {
+  "sheet": "A3.04",
+  "room": "(410/411 passage, no number)",
+  "polygon": [
+   [
+    1252.8,
+    1104.96
+   ],
+   [
+    1310.76,
+    1104.96
+   ],
+   [
+    1310.76,
+    1156.3
+   ],
+   [
+    1301.8,
+    1156.3
+   ],
+   [
+    1301.8,
+    1230.0
+   ],
+   [
+    1261.92,
+    1230.0
+   ],
+   [
+    1261.92,
+    1156.3
+   ],
+   [
+    1252.8,
+    1156.3
+   ]
+  ],
+  "area_sf": 73.02,
+  "area_op": "(1310.76-1252.8)*(1156.3-1104.96)/81 + (1301.8-1261.92)*(1230.0-1156.3)/81 = 36.74 + 36.29 = 73.02 SF [DERIVADO] (wall faces 1/A3.04; jog y 1153.8-1158.8 taken at 1156.3; edge coverage 0.75)",
+  "printed_A3.04": "ceiling stipple inside, no tag, no number [CONFIRMADO BL_A3.04_passage_410_411_clean.png]",
+  "printed_A2.04": "1/A2.04: the passage opens only through doors 410.1 (from F&B 410) and 411.2 (from Deck Bar 411); no door to corridor 412; the note on 411 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT. WILL BE SUBMITTED IN FUTURE TENANT IMPROVEMENT PERMIT' [CONFIRMADO reviewer A2.04_room_between_410_411.png]; doors numbered 410.x / 411.x = part of the F&B suite",
+  "recommend": "EXCLUDED - Food & Beverage interior not in scope of this permit, future TI permit (1/A2.04: doors 410.1 / 411.2, note inside 411); alternative if loaded as RS-1 like CLG-L4-405C: +73.02 SF Type X, +54.77 LF RC (73.02 x 12/16)",
+  "action": "EXCLUDED"
+ },
+ "ws1_corridor_412_A3.04": {
+  "sheet": "A3.04",
+  "polygon": [
+   [
+    821.52,
+    670.32
+   ],
+   [
+    857.04,
+    670.32
+   ],
+   [
+    857.04,
+    749.04
+   ],
+   [
+    821.52,
+    749.04
+   ]
+  ],
+  "area_sf": 34.52,
+  "area_op": "(857.04-821.52)*(749.04-670.32)/81 = 34.52 SF [DERIVADO] (WS-1 hatch border lines on 1/A3.04; edge coverage 0.97); same rect on A3.02 (821.28-856.68 x 671.04-749.76 = 34.40 SF) and A3.03",
+  "rev15": "the L4 412 Corridor (field ceiling) RS-1 polygon has a HOLE exactly at this rect (rcp_polys.json: 857.04/670.32 - 821.52/749.04) -> WS-1 area not loaded at L4; at L2/L3 the FS-1 Type C stays under WS-1",
+  "above": "roof: A0.08 RS-1 ceiling assembly (board on resilient channel under the roof framing, 1/A5.06 8'-11 1/4\"), the same membrane as the corridor field",
+  "evidence": "6/A7.23 WOOD SLAT DETAIL 2: slats on 1/2\" x 1-1/4\" battens screwed to the 15/16\" heavy duty DX grid, 'BLACK FABRIC', leader 'CEILING, RE: RCP' at the grid / ceiling line above the slats; 5/A7.23 'HANGER WIRE BY OTHERS' (WS-1 hangs from the structure, by others) [CONFIRMADO BL_A7.23_6_wood_slat_ceiling_above.png]; L2/L3 precedent: membrane continuous above WS-1",
+  "recommend": "row: RS-1 board continuous above WS-1 as the corridor field (the WS-1 system hangs below it): +34.52 SF 5/8\" Type X, +25.89 LF RC (34.52 x 12/16) [DERIVADO]; the WS-1 slats / grid stay EXCLUDED (other trade). Not printed whether the RS-1 board continues above WS-1 at L4 (roof unrated, A0.10) -> conservative load, RFI-able",
+  "delta": "+34.52 SF Type X, +25.89 LF RC"
+ },
+ "shaft_base_A3.01": {
+  "finding": "RCP sheets A3.01-A3.04 share the same origin for the core (hoistway / stair polygons fit A3.01 at shift <= 1 pt, coverage 1.0); floor plans do NOT: A2.01 = A3.0x - (13.1, 8.5..9.0) while A2.02 = A3.0x - (13.1, 19.5) (A2.01 and A2.02 differ by ~11 pt in y) [DERIVADO]. offset_plan_rcp L1 (13.7, 8.7) = A2.01->A3.01 is consistent",
+  "A3.01_draws_shaft": "no: at L1 the shafts sit above the ceiling; A3.01 has no lines at the shaft footprint (edge coverage 0.23-0.37) -> polygon at the A3.0x core position (same coords as A3.02 / A3.04)",
+  "shaft-N": {
+   "polygon": [
+    [
+     735.26,
+     436.49
+    ],
+    [
+     755.51,
+     436.49
+    ],
+    [
+     755.51,
+     475.21
+    ],
+    [
+     735.26,
+     475.21
+    ]
+   ],
+   "area_sf": 9.68,
+   "op": "center (745.38, 455.85) = A2.02 (732.28, 436.35) + L2 offset (13.1, 19.5); 2.25 x 4.3021 ft (8/A9.03) -> 20.25 x 38.72 pt = 9.68 SF; A3.04 north shaft wall faces 735.48-755.76 x 437.64-475.92"
+  },
+  "shaft-S": {
+   "polygon": [
+    [
+     771.95,
+     1096.33
+    ],
+    [
+     804.95,
+     1096.33
+    ],
+    [
+     804.95,
+     1114.43
+    ],
+    [
+     771.95,
+     1114.43
+    ]
+   ],
+   "area_sf": 7.37,
+   "op": "center (788.45, 1105.38) = A2.02 (775.35, 1085.88) + (13.1, 19.5); 3.6667 x 2.0104 ft (7/A9.03) -> 33.0 x 18.09 pt = 7.37 SF; A3.04 south shaft wall faces 772.2-805.2 x 1095.72-1113.84"
+  },
+  "nhoja": "1/A5.08 (membrane at the L1 ceiling plenum, below LEVEL 2)"
+ },
+ "finding_out_of_scope": "A3.01 L1 FS-1 membrane polygon ('L1 FS-1 membrane under the LEVEL 2 floor') covers both hoistway footprints (and the N/S shaft footprints): hoistways pass through the L2 floor, so no floor/ceiling membrane there -> possible overcount 43.06 + 64.20 = 107.26 SF Type C (+ RC) [DERIVADO, hoistway polygons]; shaft footprints 9.58 + 7.38 SF overlap the shaft-base ceiling. Stairs W/E are already holes in that polygon.",
+ "pngs": [
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.01_core.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.01_Estair.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.02_core.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.02_Estair.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.03_core.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.03_Estair.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A7.50_2_ELEC-TELE120_rcp.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A3.04_passage_410_411_clean.png",
+  "/root/cr/work/etapas/4_canon/img/rev16/BL_A7.23_6_wood_slat_ceiling_above.png"
+ ]
+}

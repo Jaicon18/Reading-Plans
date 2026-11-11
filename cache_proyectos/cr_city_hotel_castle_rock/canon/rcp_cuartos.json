@@ -1143,7 +1143,8 @@
    "board": null,
    "img": "/root/cr/work/etapas/4_canon/img/rev14/U159_A3.04_service_elevator_hoistway.png",
    "img_note": "red = polygon / circle (page coords of A3.04), dot = label point",
-   "reason_short": "elevator hoistway, no ceiling"
+   "reason_short": "elevator hoistway, no ceiling",
+   "vertical": "hoistway-service"
   },
   {
    "sheet": "A3.04",
@@ -1184,7 +1185,8 @@
    "board": null,
    "img": "/root/cr/work/etapas/4_canon/img/rev14/U159_A3.04_lobby_elevator_hoistway.png",
    "img_note": "red = polygon / circle (page coords of A3.04), dot = label point",
-   "reason_short": "elevator hoistway, no ceiling"
+   "reason_short": "elevator hoistway, no ceiling",
+   "vertical": "hoistway-lobby"
   },
   {
    "sheet": "A3.04",
@@ -1225,7 +1227,8 @@
    "board": null,
    "img": "/root/cr/work/etapas/4_canon/img/rev14/U159_A3.04_north_shaft_no_number.png",
    "img_note": "red = polygon / circle (page coords of A3.04), dot = label point",
-   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling"
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "vertical": "shaft-N"
   },
   {
    "sheet": "A3.04",
@@ -1266,7 +1269,8 @@
    "board": null,
    "img": "/root/cr/work/etapas/4_canon/img/rev14/U159_A3.04_south_shaft_no_number.png",
    "img_note": "red = polygon / circle (page coords of A3.04), dot = label point",
-   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling"
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "vertical": "shaft-S"
   },
   {
    "sheet": "A3.04",
@@ -3014,6 +3018,699 @@
     "L3 Corridor 318",
     "CLG-L3-88 board",
     "SOF-L3-318 board"
+   ]
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(service elevator hoistway)",
+   "name": "(service elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-service",
+   "rows": [],
+   "nhoja": "1/A6.00; 6/A6.00; 2/A0.01",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     737.54,
+     482.06
+    ],
+    [
+     804.98,
+     482.06
+    ],
+    [
+     804.98,
+     533.78
+    ],
+    [
+     737.54,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "label_xy": [
+    771.3,
+    507.9
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(lobby elevator hoistway)",
+   "name": "(lobby elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-lobby",
+   "rows": [],
+   "nhoja": "8/A6.00; 12/A6.00; 2/A0.01",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     726.38,
+     950.3
+    ],
+    [
+     802.94,
+     950.3
+    ],
+    [
+     802.94,
+     1018.22
+    ],
+    [
+     726.38,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "label_xy": [
+    764.7,
+    984.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(north shaft, no number)",
+   "disposition": "row",
+   "vertical": "shaft-N",
+   "rows": [
+    "CLG-L1-SHN board"
+   ]
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(south shaft, no number)",
+   "disposition": "row",
+   "vertical": "shaft-S",
+   "rows": [
+    "CLG-L1-SHS board"
+   ]
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(lobby stair W, STAIR 127)",
+   "name": "(lobby stair W, STAIR 127)",
+   "disposition": "exclusion",
+   "vertical": "stair-W",
+   "rows": [],
+   "nhoja": "10/A6.01; 11/A6.01",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     726.26,
+     649.32
+    ],
+    [
+     804.86,
+     649.32
+    ],
+    [
+     804.86,
+     805.8
+    ],
+    [
+     726.26,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "label_xy": [
+    765.6,
+    727.6
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.01",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "name": "(SE stair E, STAIR 126 / 413)",
+   "disposition": "exclusion",
+   "vertical": "stair-E",
+   "rows": [],
+   "nhoja": "1/A6.02; 5/A6.02",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     1505.06,
+     1211.52
+    ],
+    [
+     1661.54,
+     1211.52
+    ],
+    [
+     1661.54,
+     1290.0
+    ],
+    [
+     1505.06,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "label_xy": [
+    1583.3,
+    1250.8
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(service elevator hoistway)",
+   "name": "(service elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-service",
+   "rows": [],
+   "nhoja": "3/A6.00; 6/A6.00; 3/A0.01",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     737.04,
+     482.06
+    ],
+    [
+     804.48,
+     482.06
+    ],
+    [
+     804.48,
+     533.78
+    ],
+    [
+     737.04,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "label_xy": [
+    770.8,
+    507.9
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(lobby elevator hoistway)",
+   "name": "(lobby elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-lobby",
+   "rows": [],
+   "nhoja": "11/A6.00; 12/A6.00; 3/A0.01",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     725.88,
+     950.3
+    ],
+    [
+     802.44,
+     950.3
+    ],
+    [
+     802.44,
+     1018.22
+    ],
+    [
+     725.88,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "label_xy": [
+    764.2,
+    984.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(north shaft, no number)",
+   "name": "(north shaft, no number)",
+   "disposition": "exclusion",
+   "vertical": "shaft-N",
+   "rows": [],
+   "nhoja": "1/A5.08; 8/A9.03",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "polygon": [
+    [
+     735.48,
+     438.14
+    ],
+    [
+     755.76,
+     438.14
+    ],
+    [
+     755.76,
+     476.42
+    ],
+    [
+     735.48,
+     476.42
+    ]
+   ],
+   "area_sf": 9.58,
+   "label_xy": [
+    745.6,
+    457.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(south shaft, no number)",
+   "name": "(south shaft, no number)",
+   "disposition": "exclusion",
+   "vertical": "shaft-S",
+   "rows": [],
+   "nhoja": "7/A9.03; 10/A9.03",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "polygon": [
+    [
+     772.2,
+     1096.22
+    ],
+    [
+     805.2,
+     1096.22
+    ],
+    [
+     805.2,
+     1114.34
+    ],
+    [
+     772.2,
+     1114.34
+    ]
+   ],
+   "area_sf": 7.38,
+   "label_xy": [
+    788.7,
+    1105.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(lobby stair W, STAIR 127)",
+   "name": "(lobby stair W, STAIR 127)",
+   "disposition": "exclusion",
+   "vertical": "stair-W",
+   "rows": [],
+   "nhoja": "9/A6.01; 11/A6.01",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     725.76,
+     649.32
+    ],
+    [
+     804.36,
+     649.32
+    ],
+    [
+     804.36,
+     805.8
+    ],
+    [
+     725.76,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "label_xy": [
+    765.1,
+    727.6
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.02",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "name": "(SE stair E, STAIR 126 / 413)",
+   "disposition": "exclusion",
+   "vertical": "stair-E",
+   "rows": [],
+   "nhoja": "2/A6.02; 5/A6.02",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     1504.56,
+     1211.52
+    ],
+    [
+     1661.04,
+     1211.52
+    ],
+    [
+     1661.04,
+     1290.0
+    ],
+    [
+     1504.56,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "label_xy": [
+    1582.8,
+    1250.8
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.0,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(service elevator hoistway)",
+   "name": "(service elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-service",
+   "rows": [],
+   "nhoja": "4/A6.00; 6/A6.00; 1/A0.02",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     737.54,
+     482.06
+    ],
+    [
+     804.98,
+     482.06
+    ],
+    [
+     804.98,
+     533.78
+    ],
+    [
+     737.54,
+     533.78
+    ]
+   ],
+   "area_sf": 43.06,
+   "label_xy": [
+    771.3,
+    507.9
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(lobby elevator hoistway)",
+   "name": "(lobby elevator hoistway)",
+   "disposition": "exclusion",
+   "vertical": "hoistway-lobby",
+   "rows": [],
+   "nhoja": "10/A6.00; 12/A6.00; 1/A0.02",
+   "reason": "elevator hoistway, no ceiling",
+   "reason_short": "elevator hoistway, no ceiling",
+   "polygon": [
+    [
+     726.38,
+     950.3
+    ],
+    [
+     802.94,
+     950.3
+    ],
+    [
+     802.94,
+     1018.22
+    ],
+    [
+     726.38,
+     1018.22
+    ]
+   ],
+   "area_sf": 64.2,
+   "label_xy": [
+    764.7,
+    984.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(north shaft, no number)",
+   "name": "(north shaft, no number)",
+   "disposition": "exclusion",
+   "vertical": "shaft-N",
+   "rows": [],
+   "nhoja": "1/A5.08; 8/A9.03",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "polygon": [
+    [
+     735.98,
+     438.14
+    ],
+    [
+     756.26,
+     438.14
+    ],
+    [
+     756.26,
+     476.42
+    ],
+    [
+     735.98,
+     476.42
+    ]
+   ],
+   "area_sf": 9.58,
+   "label_xy": [
+    746.1,
+    457.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(south shaft, no number)",
+   "name": "(south shaft, no number)",
+   "disposition": "exclusion",
+   "vertical": "shaft-S",
+   "rows": [],
+   "nhoja": "7/A9.03; 10/A9.03",
+   "reason": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "reason_short": "2-hour shaft, walls continuous to underside of roof sheathing, no ceiling",
+   "polygon": [
+    [
+     772.7,
+     1096.22
+    ],
+    [
+     805.7,
+     1096.22
+    ],
+    [
+     805.7,
+     1114.34
+    ],
+    [
+     772.7,
+     1114.34
+    ]
+   ],
+   "area_sf": 7.38,
+   "label_xy": [
+    789.2,
+    1105.3
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(lobby stair W, STAIR 127)",
+   "name": "(lobby stair W, STAIR 127)",
+   "disposition": "exclusion",
+   "vertical": "stair-W",
+   "rows": [],
+   "nhoja": "8/A6.01; 11/A6.01",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     726.26,
+     649.32
+    ],
+    [
+     804.86,
+     649.32
+    ],
+    [
+     804.86,
+     805.8
+    ],
+    [
+     726.26,
+     805.8
+    ]
+   ],
+   "area_sf": 151.84,
+   "label_xy": [
+    765.6,
+    727.6
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.03",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "name": "(SE stair E, STAIR 126 / 413)",
+   "disposition": "exclusion",
+   "vertical": "stair-E",
+   "rows": [],
+   "nhoja": "3/A6.02; 5/A6.02",
+   "reason": "stair enclosure open to the floor above, no ceiling at this level",
+   "reason_short": "stair enclosure open to the floor above, no ceiling at this level",
+   "polygon": [
+    [
+     1505.06,
+     1211.52
+    ],
+    [
+     1661.54,
+     1211.52
+    ],
+    [
+     1661.54,
+     1290.0
+    ],
+    [
+     1505.06,
+     1290.0
+    ]
+   ],
+   "area_sf": 151.61,
+   "label_xy": [
+    1583.3,
+    1250.8
+   ],
+   "polygon_src": "A3.04 polygon (wall faces, vectors) shifted (0.5,0.5) pt: RCP sheets A3.01-A3.04 share origin, edge coverage 1.0 at tol 0.6 pt [DERIVADO]",
+   "img": null
+  },
+  {
+   "sheet": "A3.04",
+   "room": "(lobby stair W, STAIR 127)",
+   "disposition": "row",
+   "vertical": "stair-W",
+   "rows": [
+    "L4 Lobby stair (top floor, under roof; roof hatch + alternating tread device)"
+   ]
+  },
+  {
+   "sheet": "A3.04",
+   "room": "(SE stair E, STAIR 126 / 413)",
+   "disposition": "row",
+   "vertical": "stair-E",
+   "rows": [
+    "L4 SE stair 413 (top floor, under roof)"
+   ]
+  },
+  {
+   "sheet": "A7.50",
+   "room": "120",
+   "name": "ELEC/TELE",
+   "disposition": "exclusion",
+   "rows": [],
+   "nhoja": "2/A7.50",
+   "reason": "lay-in ACT ceiling (ACT grid drawn, no tag), not drywall scope; FS-1 rated membrane above is loaded",
+   "reason_short": "lay-in ACT ceiling (ACT grid drawn, no tag), not drywall scope; FS-1 rated membrane above is loaded",
+   "polygon": [
+    [
+     1883.28,
+     581.82
+    ],
+    [
+     2017.44,
+     581.82
+    ],
+    [
+     2017.44,
+     623.22
+    ],
+    [
+     1883.28,
+     623.22
+    ]
+   ],
+   "area_sf": 17.14,
+   "label_xy": [
+    1950.4,
+    602.5
+   ]
+  },
+  {
+   "sheet": "A3.04",
+   "room": "(410/411 passage, no number)",
+   "disposition": "exclusion",
+   "rows": [],
+   "nhoja": "1/A2.04",
+   "reason": "Food & Beverage interior not in scope of this permit, future TI permit (passage reached only from 410 / 411)",
+   "reason_short": "Food & Beverage interior not in scope of this permit, future TI permit (passage reached only from 410 / 411)",
+   "polygon": [
+    [
+     1252.8,
+     1104.96
+    ],
+    [
+     1310.76,
+     1104.96
+    ],
+    [
+     1310.76,
+     1156.3
+    ],
+    [
+     1301.8,
+     1156.3
+    ],
+    [
+     1301.8,
+     1230.0
+    ],
+    [
+     1261.92,
+     1230.0
+    ],
+    [
+     1261.92,
+     1156.3
+    ],
+    [
+     1252.8,
+     1156.3
+    ]
+   ],
+   "area_sf": 73.02,
+   "label_xy": [
+    1281.8,
+    1161.9
    ]
   }
  ],
