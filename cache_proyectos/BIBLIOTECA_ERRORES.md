@@ -682,3 +682,6 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 
 ## BE-XF09 — Xfinity Interquest (11-nov, auditoría U-138)
 - BE-XF09 (programa): CE_MATERIALES_SCHEDULE salía AMBER aunque 2/A2.0 y la tabla de limiting heights imprimen stud, board y both sides. Causas: type existente 'TO REMAIN' sin walls nuevos, regla '6" ABOVE CEILING' leída como altura sin imprimir, track contado por familia, cada nota informativa del type como 'extra', column furring 5/A2.0 fuera del schedule aunque la lectura independiente lo trae en other_assemblies, renglones 0 con 'none' / EXCLUDED por orden del estimador citados, y la hoja LEGEND (sin markups que midan) pidiendo escala. Arreglo en revision_materiales.comparar_type / sumas y compuerta_entrega. Junto con U-177 (CE_ENTREGA_VIGENTE, CE_RCP_CONTORNO piso 0.5, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO). Prueba: test_compuerta_entrega.py::test_u177_auditoria (v81cf89).
+
+## BE-XF10 — Xfinity (11-nov, U-184)
+- Al implementar U-184: una sección nueva del SKILL.md sin entrada en reglas_clasificacion.py deja CE_REGLAS en FAIL ('regla sin clasificar'); y un PASS que dice '0 walls …' lo tumba el auditor de plausibilidad U-138. Toda sección nueva lleva su entrada de catálogo; los textos de PASS dicen cuántos elementos se revisaron.

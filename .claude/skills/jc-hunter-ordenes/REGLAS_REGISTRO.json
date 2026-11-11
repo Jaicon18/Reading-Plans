@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf89 U-177 / BE-XF09 + v81cf92 U-178 / U-179",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
- "conteo": 554,
+ "conteo": 559,
  "reglas": [
   {
    "id": "U-001",
@@ -7473,6 +7473,59 @@
    "texto_corto": "wall de doble fila de studs (10\" + 6\" outer): cada fila lleva SOLO los tracks / conexiones que su detalle dibuja (S403 241/242: la fila exterior lleva CFS track arriba (kn 8) y abajo clip L2x2x18 GA a cada stud y joist (kn 18), sin bottom track); toda conexión impresa que se cita como motivo se cuantifica en su propio renglón",
    "categoria": "conducta",
    "cuando": "siempre"
+  },
+  {
+   "id": "U-184",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, protocolo bien a la primera en 2-3 h)",
+   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_protocolo_3h",
+    "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas",
+    "take-off:tools/chequeos_biblioteca.py::u_184_elev",
+    "take-off:tools/chequeos_biblioteca.py::u_184_excl"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u184_protocolo_3h"
+   }
+  },
+  {
+   "id": "U-180",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"No te puedes tardar tanto en un proyecto. Llevas más de 12 horas trabajando en ese. Necesito que termine las cosas más rápido y con más accuracy.\"; origen: CR City Hotel >31 h + correcciones",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-181",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"Y con los otros dos proyectos como base, me dijiste que ya estaban terminados también.\"; origen: COORDINACIÓN reportó Xfinity y Grand Kia \"terminados\" con solo verificación de FORMA (Length×",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-182",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"Cuando me pidas el archivo de CVS, es porque ya tienes absolutamente todo terminado, revisado, checado. Y lo último que vamos a hacer es checar toda contra el CVS.\"; origen: COORDINACIÓN pid",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
+  },
+  {
+   "id": "U-183",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
+   "texto_corto": "ORDEN DEL USUARIO (11-nov, texto literal: \"Olvídate de los otros dos proyectos, me refiero, no me des información. Nos vamos a enfocar nada más al CR. Continúa trabajando con los demás, pero dame únicamente información del CR. Ese lo tenemo",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "chequeos": [],
+   "test": null
   }
  ]
 }
