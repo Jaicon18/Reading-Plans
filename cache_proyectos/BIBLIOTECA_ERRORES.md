@@ -604,3 +604,6 @@ Regla: antes de entregar, listar TODOS los N/A de la compuerta con el canon llen
 
 ## BE-150 (10-nov, CR City Hotel rev13)
 Ceilings de cuartos impresos en RCP sin renglón (stalls 417.3/417.4, Elec 421, closets L4). CE_RCP_COMPLETO solo revisaba Excel→markup. Arreglo: CE_RCP_CUARTOS (RCP→Excel) + test; U-159.
+
+## BE-155 (11-nov, CR City Hotel rev18)
+PDF de markups no abre en Windows/Bluebeam: ruta completa 264 > 260 caracteres. Arreglo: nombre corto "CR_markups_rev18 - OPEN IN BLUEBEAM.pdf" (219) + chequeo de longitud ≤ 230 en CE_NOMBRES_ENTREGA; U-165.
