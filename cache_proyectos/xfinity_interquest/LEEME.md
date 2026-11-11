@@ -24,3 +24,9 @@
 - comparar_alturas: 20/20 markups OK (Bluebeam Depth = Excel Height = altura impresa) -> Auditoria/COMPARACION_ALTURAS.csv; CHECKLIST B2 con el N/N y la muestra al azar (5 walls, 3/3 alturas).
 - alturas_extremo: cierre 16/16, reglas físicas 15/15, 3 cuartos / 6 pares cuarto-wall, ALTURAS_REVISADAS.pdf (3 alturas + sección) y capa 'HEIGHTS (U-176)' en el PDF de markups.
 - Compuerta VERDE 206 / 2 / 0. Drive: 5 anteriores 'zz old U-176 …' / 'zz NO USAR - XF_markups_rev1b old (antes de U-176).pdf', 40 nuevos. Skill v81cf86.
+
+## Auditoría U-138 (11-nov) — U-177
+- Material Summary con gauge y N/HOJA en cada renglón de stud / track / header / brace: 362S125-33 (W2 + SOF-01, 250.67 LF), 362S162-54 (16 ga de 8/A2.0, 125 LF; ala 1-5/8" no impresa, confirmar), 250S125-43 / 250T125-43 (CF), 362T125-33 tracks.
+- Blocking: '6" sheet metal blocking strapping' 14.5 LF (A5.0 EV-44 / EV-45, coil LF) y '16 ga x 6" x 1-1/2" unpunched track' 32.88 LF (8/A2.0).
+- Patch & repair W1 / W4: U-064 no aplica tal cual (no dice 'replace'); conservador cargado (RFI-06 A): caras del tenant a C.H. + 6" = 2,589.62 SF de 5/8" Type X (misc PR-*); B = -2,589.62 SF (solo allowance), C = +1,937.32 SF (W1 a estructura 26'-0").
+- Compuerta VERDE 211 / 0 / 0; Drive: 18 'zz old U-177' + 18 nuevos; `subir_entrega.py --vigente` PASS. Proposal $17,192 con impuesto (antes $8,814).

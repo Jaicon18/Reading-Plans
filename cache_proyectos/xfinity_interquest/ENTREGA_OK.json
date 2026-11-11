@@ -1,13 +1,13 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-10 23:01 PST",
- "fecha_iso": "2026-11-11T07:01:41.307153+00:00",
+ "fecha_california": "2026-11-11 07:09 PST",
+ "fecha_iso": "2026-11-11T15:09:46.645940+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 206,
-  "AMBER": 2,
+  "PASS": 211,
+  "AMBER": 0,
   "FAIL": 0
  },
  "chequeos": [
@@ -120,6 +120,7 @@
    "id": "CE_DATOS_PROYECTO",
    "reglas": [
     "BE-114",
+    "BE-XF05",
     "R-ALC-08",
     "R-ALC-09",
     "U-076",
@@ -198,7 +199,7 @@
    "descripcion": "cada RFI abierto: (A) planos con N/HOJA y delta · (B) código con cita y delta · (C) otro, en ese orden, y el valor conservador CARGADO declarado",
    "estado": "PASS",
    "evidencia": [
-    "0 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
+    "1 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
    ],
    "plausibilidad": "OK"
   },
@@ -240,7 +241,7 @@
    "descripcion": "BE-120: por cada RFI abierto se buscan sus términos en el TEXTO COMPLETO del set (incl. SHX); falla si aparecen en una hoja fuera de su barrido o junto a un valor impreso sin descarte escrito",
    "estado": "PASS",
    "evidencia": [
-    "0 RFI abiertos y ningún 'not printed / assumed' sin RFI o decisión"
+    "1 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
    ],
    "plausibilidad": "OK"
   },
@@ -288,6 +289,7 @@
   {
    "id": "CE_A2_ALTURAS",
    "reglas": [
+    "BE-XF05",
     "U-168"
    ],
    "descripcion": "U-168 A2: cada altura distinta (Depth) del Excel contra la cota impresa de la hoja que cita (o, si es [DERIVED], cada cota / elevación de su operación impresa en esa hoja)",
@@ -330,6 +332,7 @@
    "id": "CE_RCP_CUARTOS",
    "reglas": [
     "BE-150",
+    "BE-XF03",
     "U-159",
     "U-160"
    ],
@@ -359,12 +362,13 @@
    "reglas": [
     "CR-R13-E2",
     "U-140",
-    "U-156"
+    "U-156",
+    "U-172"
    ],
    "descripcion": "U-140: un RFI 'not printed' abierto lleva la búsqueda completa: >= 12 términos con sinónimos, todas las disciplinas, SHX, medida vectorial a escala impresa, specs / addenda y sets de todos los GC",
    "estado": "PASS",
    "evidencia": [
-    "0 RFI 'not printed' con búsqueda exhaustiva (0 abiertos)"
+    "1 RFI 'not printed' con búsqueda exhaustiva (1 abiertos)"
    ],
    "plausibilidad": "OK"
   },
@@ -417,10 +421,9 @@
     "U-099"
    ],
    "descripcion": "BE-119: cada markup re-medido a la escala IMPRESA y su Depth comparado contra la altura IMPRESA de su fuente (N/HOJA), no contra el Excel. RED = FAIL; sin altura impresa = AMBER",
-   "estado": "AMBER",
+   "estado": "PASS",
    "evidencia": [
-    "0 RED / 0 AMBER de 4",
-    "LEGEND: la hoja del PDF de markups no tiene capa de texto; escala tomada del canon (18.000 pt/ft)"
+    "4 filas GREEN contra la altura impresa"
    ],
    "plausibilidad": "OK"
   },
@@ -430,36 +433,15 @@
     "BE-122",
     "BE-126",
     "BE-134",
+    "BE-XF09",
     "R80f.30",
     "R80f.34",
     "U-111"
    ],
    "descripcion": "BE-122 (j): lectura INDEPENDIENTE del Partition Type Schedule (fichas.json, subagente que no vio el Excel) vs lo cargado por wall / type (revision_materiales.comparar_type) + cada renglón del Material Summary = suma de walls por type con origen impreso (revision_materiales.sumas). RED = FAIL",
-   "estado": "AMBER",
+   "estado": "PASS",
    "evidencia": [
-    "type W1: AMBER (el schedule no lo dice)",
-    "type W2: AMBER (el schedule no lo dice)",
-    "type W2A: AMBER (el schedule no lo dice)",
-    "type W3: AMBER (el schedule no lo dice)",
-    "type W4: AMBER (el schedule no lo dice)",
-    "walls fuera del schedule: CF CF-01",
-    "walls fuera del schedule: CF CF-02",
-    "Material Summary fila 20 AMBER: 0 - none: 7/A2.0 draws one track head with a nested stud over the HM frame (carried by the ope",
-    "Material Summary fila 21 AMBER: 0 - none: no MEP equipment hung on the new W2 walls (E2.0, M1.0 and P1.0 swept) (E2.0, M1.0, P",
-    "Material Summary fila 22 AMBER: 0 - none: no ATM / recessed equipment in the set (A2.0, A5.0) (A2.0)",
-    "Material Summary fila 23 AMBER: 0 - none: no coiling grille in the set (A2.0 door schedule, A5.0; security shutters are a defe",
-    "Material Summary fila 24 AMBER: 0 - none: door 101 in a hollow metal frame (A2.0 door schedule, 7/A2.0); hallway opening jambs",
-    "Material Summary fila 25 AMBER: 0 - none: FRP-1 only in existing toilet rooms ('EXISTING FRP ...' A4.0 RFS) and 48\" at drinkin",
-    "Material Summary fila 26 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 27 AMBER: 0 - none: none drawn or scheduled; A3.0 gen. note 4 forbids hatches in gyp ceilings without ow",
-    "Material Summary fila 28 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 29 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 30 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 31 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 34 AMBER: 0 - none: A2.0 partition plan general note 3: 'TAPED, SANDED SMOOTH TO A LEVEL 4 FINISH' (Leve",
-    "Material Summary fila 35 AMBER: 0 - none: no deflection/slip track or clips: 4/A2.0 wall stops 6\" above ceiling, top track scr",
-    "Material Summary fila 36 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 ",
-    "Material Summary fila 37 AMBER: 0 - EXCLUDED - estimator order: all fasteners excluded (3/A2.0 power-driven fasteners, 8/A2.0 "
+    "5 types y 34 renglones del Material Summary en verde"
    ],
    "plausibilidad": "OK"
   },
@@ -490,7 +472,7 @@
    "descripcion": "auditoria_entrega.py: orden del schedule, SUBTOTAL por type, GRAND TOTAL, PNG por hoja marcada, PROJECT DATA, RFI abiertos con (A)/(B)/(C)",
    "estado": "PASS",
    "evidencia": [
-    "34 revisiones OK"
+    "35 revisiones OK"
    ],
    "plausibilidad": "OK"
   },
@@ -540,7 +522,7 @@
    "descripcion": "U-130: COMPARATIVA_BANCO.md (compuerta_entrega.py banco) del Excel entregado contra las referencias verificadas del banco, familias normalizadas por LF de partition y por SF de piso; toda familia OUT OF RANGE explicada en README_REVIEW.md (sección 'Bank comparison')",
    "estado": "PASS",
    "evidencia": [
-    "1 familia(s) fuera de rango explicadas"
+    "4 familia(s) fuera de rango explicadas"
    ],
    "plausibilidad": "OK"
   },
@@ -580,6 +562,7 @@
    "reglas": [
     "BE-149",
     "BE-156",
+    "BE-XF07",
     "U-010",
     "U-121",
     "U-153",
@@ -611,7 +594,7 @@
    "reglas": [
     "U-176"
    ],
-   "descripcion": "U-176 REGLA DE ORO #2 (usuario 11-nov: 'me preocupan mucha las alturas'): los 6 controles de tools/alturas_extremo.py: (1) doble lectura ciega ALTURAS_IMPRESAS_A / _B con toda diferencia resuelta con recorte, (2) cierre dimensional de cada DERIVED ± 1/4\", (3) reglas físicas por wall (H <= B.O., to deck = B.O. + slip track, above ceiling = MAYOR C.H. + extensión, H >= C.H. de cada cuarto, board <= H), (4) cruce por cuarto del RCP, (5) ALTURAS_REVISADAS.pdf + capa 'HEIGHTS (U-176)' en el PDF de markups, (6) CHECKLIST B2 con la muestra al azar. Falta uno o 0 alturas = FAIL",
+   "descripcion": "U-176 REGLA DE ORO #2 (usuario 11-nov: 'me preocupan mucha las alturas'): los 6 controles de tools/comparar_alturas.py extremo: (1) doble lectura ciega ALTURAS_IMPRESAS_A / _B con toda diferencia resuelta con recorte, (2) cierre dimensional de cada DERIVED ± 1/4\", (3) reglas físicas por wall (H <= B.O., to deck = B.O. + slip track, above ceiling = MAYOR C.H. + extensión, H >= C.H. de cada cuarto, board <= H), (4) cruce por cuarto del RCP, (5) ALTURAS_REVISADAS.pdf + capa 'HEIGHTS (U-176)' en el PDF de markups, (6) CHECKLIST B2 con la muestra al azar. Falta uno o 0 alturas = FAIL",
    "estado": "PASS",
    "evidencia": [
     "1_doble_lectura: 21 iguales + 0 resueltas de 21",
@@ -620,6 +603,43 @@
     "4_cruce_cuartos: 3 cuartos, 6 pares cuarto-wall, 0 fallas",
     "5_evidencia: 3 alturas distintas -> 3 páginas + sección; capa 'HEIGHTS (U-176)'",
     "6_muestreo: 5 walls al azar, 3/3 alturas"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MS_GAUGE",
+   "reglas": [
+    "U-177"
+   ],
+   "descripcion": "U-177 (3): todo renglón de stud / track / header / brace del Material Summary con cantidad dice su tamaño y GAUGE (designación SSMA 362S162-54, '16 ga' o mil) y su N/HOJA; 'per source' sin gauge = FAIL (nadie compra 20 ga por 16 ga)",
+   "estado": "PASS",
+   "evidencia": [
+    "11 renglones de stud / track / header / brace con gauge y N/HOJA"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_MS_PRODUCTO_IMPRESO",
+   "reglas": [
+    "U-177"
+   ],
+   "descripcion": "U-177 (4): el renglón del Material Summary donde cae un item con producto impreso (canon product, p. ej. '6\" sheet metal blocking strapping') lleva ese producto en su nombre",
+   "estado": "PASS",
+   "evidencia": [
+    "5 items con producto impreso: cada uno nombra su renglón"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_ENTREGA_VIGENTE",
+   "reglas": [
+    "U-177"
+   ],
+   "descripcion": "U-177 (1): la entrega tiene UN PDF de markups vigente y UN Excel vigente (sin zz / REPLACED / NO USAR); ENTREGA_OK guarda su nombre + sha256 + md5 y la lista de chequeos; subir_entrega.py y `compuerta_entrega.py vigente` comparan con Drive (md5) y con los chequeos del skill vigente: otro archivo en Drive o compuerta vieja = la entrega NO está en verde",
+   "estado": "PASS",
+   "evidencia": [
+    "pdf: XF_markups_rev1b - OPEN IN BLUEBEAM.pdf sha256 f333da6e30b0",
+    "excel: XF_Takeoff_FINAL_rev1.xlsx sha256 2ea06f2b9c19"
    ],
    "plausibilidad": "OK"
   },
@@ -745,7 +765,7 @@
    "descripcion": "U-026 / BE-108: ningún RFI abierto sobre un tema que un precedente del estimador (R80e.34 / R80e.78) ya decidió, salvo que lo cite",
    "estado": "PASS",
    "evidencia": [
-    "0 RFI abiertos sin precedente decidido"
+    "1 RFI abiertos sin precedente decidido"
    ],
    "plausibilidad": "OK"
   },
@@ -788,6 +808,7 @@
   {
    "id": "CB_CC_R12",
    "reglas": [
+    "BE-XF06",
     "CC-R12"
    ],
    "descripcion": "CC-R12 / U-114 (Consumer Cellular rev3 audit): un wall cuyo largo es la cota impresa (length_status CONFIRMADO) va [CONFIRMED] en la Partition Takeoff, no [DERIVED]",
@@ -947,12 +968,13 @@
     "CR-R13-E2",
     "U-155",
     "U-156",
-    "U-162"
+    "U-162",
+    "U-172"
    ],
    "descripcion": "U-155 (usuario 8-nov): 'buscar hasta encontrar las respuestas en los planos; si no, usa los códigos del IBC y cita su referencia': todo valor / opción 'per code / by code / CODE:' del Excel cita sección o tabla (IBC / CBC / ASTM / GA / UL / NFPA) o declara 'none applies'; sin cita = FAIL (la respuesta impresa la vigila CE_RFI_BARRIDO_IMPRESO)",
    "estado": "PASS",
    "evidencia": [
-    "0 valores por código con su sección / tabla"
+    "1 valores por código con su sección / tabla"
    ],
    "plausibilidad": "OK"
   },
@@ -1124,7 +1146,7 @@
    "descripcion": "BE-12: toda cita textual (entre comillas) del Excel existe impresa en el set",
    "estado": "PASS",
    "evidencia": [
-    "29 citas textuales impresas"
+    "33 citas textuales impresas"
    ],
    "plausibilidad": "OK"
   },
@@ -1148,7 +1170,7 @@
    "descripcion": "BE-14: ninguna afirmación 'not printed / not specified' cuyo término aparece impreso con su valor en el set",
    "estado": "PASS",
    "evidencia": [
-    "2 afirmaciones 'not printed' sin valor impreso en el set"
+    "3 afirmaciones 'not printed' sin valor impreso en el set"
    ],
    "plausibilidad": "OK"
   },
@@ -1346,7 +1368,7 @@
    "descripcion": "BE-45: proporciones en rango (board del Material Summary vs Σ Board SF del Partition Takeoff) o explicadas",
    "estado": "PASS",
    "evidencia": [
-    "board MS / PT = 1.03"
+    "board MS / PT = 6.55"
    ],
    "plausibilidad": "OK"
   },
@@ -2004,6 +2026,7 @@
    "id": "CB_BE_CF04",
    "reglas": [
     "BE-CF04",
+    "BE-XF04",
     "U-079"
    ],
    "descripcion": "BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)",
@@ -2158,7 +2181,7 @@
    "descripcion": "CR-R15 (CR City Hotel revisión completa rev14 F02, U-137): el barrido de un RFI lista TODA hoja donde aparece cada término (sheet:term). Antes los hits se ordenaban y se cortaban a 60 / 12: A5.08 '2HR SHAFT CEILING' quedó fuera del corte y el RFI-13 se dio por 'no impreso'. Un (hoja, término) presente en set_texto y ausente de barrido.encontrado_en = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "68 (hoja, término) de los barridos de RFI listados completos"
+    "115 (hoja, término) de los barridos de RFI listados completos"
    ],
    "plausibilidad": "OK"
   },
@@ -2862,7 +2885,7 @@
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/img/demo_L_A1.0.png": "69b0ed1045ff476c4f5572f68b279a223ce1692d637c44ef0e93ac9be475b5aa",
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion.md": "941a97d8b42a713413aa56bfb36f72bb8a27855aac55ea82e8349d435f979eca",
   "rev1 FINAL PARA REVISAR/Auditoria/resolucion_AB/revision.md": "32902d2aff895a0ec2e9a614b50c3001087701f48d21d9bcf44e6558b664f422",
-  "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A0.1_26FT.png": "a5e56198420359e03c860d0afcf758578cc43df6ddf41b1e1942b5f16a44da4c",
+  "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A0.1_26FT.png": "cc9854252c53138d0ba16beefb5bb92d73164aa0302c2b1c6bbce922dabac645",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A2.0_brace.png": "ab13c162e2accb8416ebf6df3e892d16f1f67371823114062bc93f41834971d0",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_A3.0_ceiling.png": "aea005993fe06740a4c9e908f4126428afadfa06601a8ea87e5d3ef1b064c279",
   "rev1 FINAL PARA REVISAR/Auditoria/review_items/RFI-01_M1.0_beam.png": "fb030d9db52ec0f835bbd006884e0fa2273a134c3e267c28413a588a50a97b14",
@@ -3004,7 +3027,7 @@
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/fix/legend_A2.0.png": "9c85b998d4e7c5c764ba08d53adf3c5372171629ef14af09b98387be91bf0378",
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/fix/legend_A3.0.png": "7bb57467072bb18cf15fb3dbaa7f64b12753af7a00d2289157015e926c74c439",
   "rev1 FINAL PARA REVISAR/Auditoria/revision_independiente/R2/markups_indep.json": "870cad97c490c9b1d180dc63b3baacffe6477dfe1a18213265e9b954be11430a",
-  "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A0.1_26FT.png": "a5e56198420359e03c860d0afcf758578cc43df6ddf41b1e1942b5f16a44da4c",
+  "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A0.1_26FT.png": "cc9854252c53138d0ba16beefb5bb92d73164aa0302c2b1c6bbce922dabac645",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A2.0_brace.png": "ab13c162e2accb8416ebf6df3e892d16f1f67371823114062bc93f41834971d0",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_A3.0_ceiling.png": "aea005993fe06740a4c9e908f4126428afadfa06601a8ea87e5d3ef1b064c279",
   "rev1 FINAL PARA REVISAR/Auditoria/rfi_img/RFI-01_M1.0_beam.png": "fb030d9db52ec0f835bbd006884e0fa2273a134c3e267c28413a588a50a97b14",
@@ -3049,31 +3072,43 @@
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedule_wall_types.png": "2d83630122b292d6b163aee4ce9dd0ad9e62799a774a450c2bafad0bfe233ae1",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/schedules_indep.json": "d673f749987c61770c3cdd5baba7469158e7cc4e1c18eee1599e20f69235953f",
   "rev1 FINAL PARA REVISAR/Auditoria/schedules/wall_legend.png": "5fcbd5bacae1e976218ffbc34c7e08f17f4dd9c05134a2705d84f1df266fe69b",
-  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "73102ce89ef5008dcf454d2e97d10cdaef1d1d2d5f189a507da838b8e0d03596",
+  "rev1 FINAL PARA REVISAR/CHECKLIST_REVISION.xlsx": "6a953d583c716415d86bfbb6e6fae04fc76a35eaf314777f22ac634e26e4a33c",
   "rev1 FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "ae9de99350a804527a41e9e61427e0155d62f085ade2ed862e92216f187da306",
-  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "30e034a555364425cc96106a853968cf3084b6783a9cfeda4d41e7e4d4ad3b98",
-  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "b633e9cb9b43e39ff0449bea8568ad14fa9635f2af4c93b1991670cf406d4978",
+  "rev1 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "78193067e039160d96ab25d2a945070399baec5761884d5f8544d365ad7290c6",
+  "rev1 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "06d562c7144b5d88345fa15a34963c11ac1a19b1364ede427113e43471da3fae",
   "rev1 FINAL PARA REVISAR/Planos marcados/A1.0 - IMAGE ONLY (not editable) - walls rev1.png": "3700d7a4fdedd053dabe387db653633c349b3b5c110fa2e56a7a6b15883afe9c",
   "rev1 FINAL PARA REVISAR/Planos marcados/A2.0 - IMAGE ONLY (not editable) - walls rev1.png": "f4961609235a2948272fe2f1264e90f5a433ddebb963ef20d38d9456ea395739",
   "rev1 FINAL PARA REVISAR/Planos marcados/A3.0 - IMAGE ONLY (not editable) - ceilings rev1.png": "80aa20565e9da437949848b1fcd6e65df95904f6bc5be703f42bfe8f746f4d01",
-  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "d530ee2757862538fe94dea15d0829cdd4cb56feaa436425f84dafcff6d067cb",
-  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "397bab4d66fe461529681f03504e99ea4ce2ef14cd4157b3017031f28999ab42",
-  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "3dd098fe0193ea7612c126f753cdb394e651f8b8dcd7d11fdf0185df30fd50ea",
-  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "e80dbf1b2811a331bda9eb8ad47d79defd5d3b63a305b9531995ef24e0453869",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "b45ddfe03df78e4b9a1aa523275f674958d8d0e0984776c5dc61cbd7c9825118",
-  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "e63234d738a74bd380f213cdc09b42a946910156007505f2c39bb68949287c59",
-  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "7d6aeb5f062358c331a4037a9d143064b121663d56ddbf0a8a20a0fa0e889672",
-  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "8fd978572a992ef712da14b8985b2db1e09c6c1df716a0a763276f06a4b5d85d",
-  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "f0eddd82ba8a53bbfb6481473a804332f3db57f98b01f9637254a0d6e20ccfde",
-  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "eb2dc7dd29c0b561e73a3af4f01c852aded426168c7ce6c4f6daf0ef6bdc91a8",
-  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "3ca3e6dc3b3d2b48378e4497316c516a47efe8828f23df3b0b3456f2a83e24d7",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "6ecb46771f337a78cc3a5c317126953569061208ccde93a98c969a6033ecfe27",
-  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "72fe3e9aeb7d93bf523ea055e105d1501ecc36b8d7a4f0ad23917921386ed79f"
+  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "2050821b00b71a83013638fd1b559e60e7714a0b121aaca0ab4fe9f381e23fbd",
+  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "3fd67ea6ac1d5a8b59abfaf26876a23fd3ee8d2341170f806409e3f56af43c83",
+  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "9ad6fb0779a3f8002f502fe2f3ddfb968338ae50ceb3306e6449aa234d6207ee",
+  "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "f333da6e30b03c16f53429b738a2144931a8641c1f4452d91de266607e3b8c14",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "1c5f3d6351c42fd7a05b9caaa7b22b8c2ff3db71d7ce02c8a4ba7fb25322a99c",
+  "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "d7c4b5420441e02d38095dd5401e46ef51979cb17dfbfddd3f4799296dbabbc4",
+  "rev1 FINAL PARA REVISAR/README_REVIEW.md": "b5842a789947e4db6fde75b7b989a467cec8ca037842c0df86e35d0a24dccbd3",
+  "rev1 FINAL PARA REVISAR/RESUMEN_rev1.md": "41c4a8157abc917939d26ddf07c52dfe44c892f9185ef2b50678f4bbaaba8896",
+  "rev1 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "320f612cfd649d3c55a77d03d615d110fb26b325b526c5f8248b8cfe082e8968",
+  "rev1 FINAL PARA REVISAR/SEGUIMIENTO.md": "e4a36d4bf7c54cb266e9d2a0a93bd4255485d030135a26acc66831b6ee440140",
+  "rev1 FINAL PARA REVISAR/TIEMPOS.md": "25562d4381e0c60da6bd85466df1f8dbf93a186d96148ac2e3c85eadb84eeab1",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx": "2ea06f2b9c192c4da44d7cf916624c2b840d984f37f33c63d4f7111567154dcf",
+  "rev1 FINAL PARA REVISAR/Take-off/XF_Takeoff_FINAL_rev1.xlsx.sello.json": "60197bae26e58f4d60f5f783e56f60d60eb8b6fafddcbb83a52aaa11b9a53bcc"
  },
  "drive": {
   "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
   "carpeta_proyecto": "Xfinity - Interquest, Colorado Springs, CO (BCI National) 11-13-26",
   "carpeta_proyecto_id": "1R2ZrIX9VrP0rsoY4xQPQB8SyqDzx-TLX"
  },
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas)"
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf89 U-177 / BE-XF09",
+ "vigentes": {
+  "pdf": {
+   "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",
+   "sha256": "f333da6e30b03c16f53429b738a2144931a8641c1f4452d91de266607e3b8c14",
+   "md5": "204d568c65a0cf09ffe672326ba8552d"
+  },
+  "excel": {
+   "nombre": "XF_Takeoff_FINAL_rev1.xlsx",
+   "sha256": "2ea06f2b9c192c4da44d7cf916624c2b840d984f37f33c63d4f7111567154dcf",
+   "md5": "520b80276fd6c63e09103f21b5a097f9"
+  }
+ }
 }
