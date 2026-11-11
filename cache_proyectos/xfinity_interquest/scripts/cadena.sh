@@ -7,7 +7,7 @@
 source /root/xf/work/scripts/env.sh
 REV=${REV:-rev1}; export REV
 cd $K; C4=$K/etapas/4_canon; M=$K/etapas/6_markups; X=$K/etapas/8_excel/XF_Takeoff_FINAL_${REV}.xlsx
-FINAL="$K/etapas/8_excel/XF_markups_${REV} - OPEN IN BLUEBEAM.pdf"
+PDFREV=${PDFREV:-rev1b}; FINAL="$K/etapas/8_excel/XF_markups_${PDFREV} - OPEN IN BLUEBEAM.pdf"  # BE-XF07: rev1b = leyenda con Subject LEGEND
 mkdir -p $C4/out $M $K/etapas/7_imagenes $K/etapas/8_excel
 N=0; DESDE=${1:-0}
 R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@" > $K/last.log 2>&1; rc=$?

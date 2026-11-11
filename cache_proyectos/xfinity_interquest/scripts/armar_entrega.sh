@@ -12,7 +12,7 @@ cp $W/burbujas/callouts_no_aplican.json $D/
 cp $W/indep/schedules_indep.json $W/indep/fichas.json $W/indep/NOTAS.md "$E/Auditoria/schedules/"; cp $W/indep/img/*.png "$E/Auditoria/schedules/" 2>/dev/null || true
 X=$W/etapas/8_excel/XF_Takeoff_FINAL_rev1.xlsx
 cp $X "$E/Take-off/"; cp $X.sello.json "$E/Take-off/"
-cp "$W/etapas/8_excel/XF_markups_rev1 - OPEN IN BLUEBEAM.pdf" "$E/Planos marcados/"
+cp "$W/etapas/8_excel/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" "$E/Planos marcados/"
 cp "$W/etapas/7_imagenes/"*" - IMAGE ONLY (not editable) - "*" rev1.png" "$E/Planos marcados/"
 cp $W/etapas/4_canon/img/review/RFI-*.png "$E/Auditoria/rfi_img/"; cp $W/etapas/4_canon/img/review/*.png "$E/Auditoria/review_items/"
 cp $W/etapas/3_revision/resolucion.md $W/etapas/3_revision/revision.md "$E/Auditoria/resolucion_AB/"; cp -a $W/etapas/3_revision/img "$E/Auditoria/resolucion_AB/"
@@ -26,7 +26,7 @@ for f in $W/etapas/12_cobertura/cobertura.md; do [ -f $f ] && cp $f "$E/Auditori
 (cd $W && python3 $T/bitacora.py backcheck $W/revision_indep/R1/INFORME_R1.md $W/etapas/8_excel/XF_Takeoff_FINAL_rev1.xlsx | tail -1)
 python3 -I $W/scripts/tiempos.py > /dev/null; cp $W/entrega.json $W/TIEMPOS.md $D/; cp $W/TIEMPOS.md "$E/"
 python3 -I $W/scripts/hacer_docs.py "$E" $W/proceso/proyecto_datos.json $W/takeoff.json $W/etapas/4_canon/takeoff_canon.json
-python3 -I $T/checklist_revision.py "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Planos marcados/XF_markups_rev1 - OPEN IN BLUEBEAM.pdf" $PDF $W/etapas/4_canon/takeoff_canon.json "$E/CHECKLIST_REVISION.xlsx" --proy XF | tail -2
+python3 -I $T/checklist_revision.py "$E/Take-off/XF_Takeoff_FINAL_rev1.xlsx" "$E/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" $PDF $W/etapas/4_canon/takeoff_canon.json "$E/CHECKLIST_REVISION.xlsx" --proy XF | tail -2
 (cd $D && python3 $T/compuerta_entrega.py detalles . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py schedules . | tail -1)
 (cd $D && python3 $T/compuerta_entrega.py banco . --cache /home/user/Reading-Plans > banco.txt 2>&1 || true; tail -3 banco.txt)

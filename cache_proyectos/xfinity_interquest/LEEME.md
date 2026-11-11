@@ -7,3 +7,8 @@
 - Descarga: cache_proyectos/herramientas/bc_descargar.js (BE-XF01: Download All por URL S3 interceptada + curl).
 - Reporta a COORDINACIÓN (session_01BLzQaGL6Hvg3oNXm79RWvR).
 - BE-XF02 (10-nov, error mío en el brief de lectura): dije que get_pixmap(clip=) va en espacio sin rotar (multiplicar por derotation_matrix). Falso: en hojas con rotation 270 PyMuPDF toma el clip en pt VISIBLES (prueba: 'STORAGE' de A2.0, clip visible = texto, clip derotado = blanco). Lo encontró el subagente de burbujas. Arreglo: brief corregido y aviso a las lecturas A/B para regenerar recortes; regla para todos los proyectos: el brief común dice "clip = rect visible" y todo recorte se reabre y se verifica (U-118). Va al registro con la próxima versión del skill.
+
+## rev1b (10-nov, COORDINACIÓN BE-XF07)
+- Leyenda del PDF de markups con Subject LEGEND (antes 'W2' / 'CF' sin /Measure en página sin /VP: inflaban los grupos de Bluebeam).
+- Drive › rev1 FINAL PARA REVISAR › Planos marcados: 'XF_markups_rev1b - OPEN IN BLUEBEAM.pdf'; el anterior = 'zz NO USAR - XF_markups_rev1 old.pdf'. 12 archivos con contenido distinto renombrados 'zz old …' (drive_renombrados.json); nada borrado. Cantidades del Excel idénticas (0 celdas distintas).
+- Compuerta VERDE 203 PASS / 2 AMBER / 0 FAIL; skill v81cf84.
