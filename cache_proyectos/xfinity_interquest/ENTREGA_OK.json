@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 08:23 PST",
- "fecha_iso": "2026-11-11T16:23:02.280904+00:00",
+ "fecha_california": "2026-11-11 08:28 PST",
+ "fecha_iso": "2026-11-11T16:28:11.824364+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 211,
+  "PASS": 213,
   "AMBER": 0,
   "FAIL": 0
  },
@@ -640,6 +640,18 @@
    "evidencia": [
     "pdf: XF_markups_rev1b - OPEN IN BLUEBEAM.pdf sha256 cbb9e4edc7a6",
     "excel: XF_Takeoff_FINAL_rev1.xlsx sha256 b663c76fd3ad"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RFI_LISTO",
+   "reglas": [
+    "U-179"
+   ],
+   "descripcion": "U-179: un RFI se presenta al usuario solo con la compuerta en VERDE (ningún otro FAIL: los errores se corrigen ANTES de preguntar) y con el delta de cada opción MEDIDO en la geometría impresa (número + unidad, con operación; '≈' / '+x %' = FAIL) y su recorte; un RFI 'PENDING - user manual verification' (U-178) solo pide su valor cargado",
+   "estado": "PASS",
+   "evidencia": [
+    "0 RFI abiertos"
    ],
    "plausibilidad": "OK"
   },
@@ -2248,6 +2260,18 @@
    "estado": "PASS",
    "evidencia": [
     "sin RFI de rating eléctrico / canopy (U-161)"
+   ],
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_178",
+   "reglas": [
+    "U-178"
+   ],
+   "descripcion": "U-178 (usuario 11-nov, Grand Kia RFI-01/05/07/34/35 + Xfinity RFI-06): decisiones = regla, SIN RFI: wall más alto que la tabla de limiting heights = gauge SFIA conservador; wall sin tag = type del wall que conecta; C.H. distinta entre hojas = la MAYOR; wall bajo el cielo = C.H. + 6\"; wall inclinado / VARIES = largo inclinado real. RFI abierto de esos temas = FAIL; 'Verificar a mano' = PENDING",
+   "estado": "PASS",
+   "evidencia": [
+    "sin RFI de los temas que U-178 resuelve por regla"
    ],
    "plausibilidad": "OK"
   },
