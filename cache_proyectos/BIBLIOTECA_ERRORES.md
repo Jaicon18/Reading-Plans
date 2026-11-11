@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK27 (11-nov, Grand Kia rev1)
+## BE-GK03..BE-GK28 (11-nov, Grand Kia rev1)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -653,6 +653,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK25: CE_A2_ALTURAS: hojas sin punto (A131, A-201), etiquetas RCP '12-0' y texto desde la copia OCR del set (entrega.json bidset_texto). Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
 - BE-GK26: U-017: la resolución escrita que dice que el wall del lector con el mismo ID es OTRO wall del canon ('reader B's ... is the canon wall ...') no es resolución contra la cota impresa. Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
 - BE-GK27: BE-CF04: el PASS sin walls de madera no escribe '0 walls' (U-138 lo leía como conteo vacío). Arreglo + test `test_be_gk22_26_guardas` (v81cf88).
+- BE-GK28: CE_ALTURA_IMPRESA leía un paso intermedio de la operación ('xs = 1142.8-128.6 = 1014.2') o una cota de otro elemento ('4'-5 1/2"') como altura: ahora toma el resultado final (última suma 'C.H. + 0.5 = h' o última medición vectorial). Arreglo + test (v81cf88).
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
