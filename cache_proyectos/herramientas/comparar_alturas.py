@@ -8,7 +8,7 @@ Comparación a TRES lados de la ALTURA de cada markup, igual que comparar_csv_bl
   3) PLANO      : Auditoria/ALTURAS_IMPRESAS.csv, armado por una lectura INDEPENDIENTE que no ve el Excel (U-099/BE-119):
                   columnas  Wall ID, Printed H (ft o 12'-6"), Source (N/HOJA), Operation, Status, Image
                   Status = CONFIRMED (cota impresa) o DERIVED (con su operación, ej. "C.H. 12'-0 (A3.0) + 6\" (2/A2.0)").
-Resultado por markup: OK si los tres coinciden (tolerancia 0.02 ft = 1/4"); si no, MISMATCH con qué lado difiere.
+Resultado por markup: OK si los tres coinciden (tolerancia ± 0.02 ft, un cuarto de pulgada); si no, MISMATCH con qué lado difiere.
 Además: altura del plano sin Source o sin Image = SIN FUENTE (falla), DERIVED sin Operation = falla.
 Sale con código 1 si hay cualquier falla. Escribe COMPARACION_ALTURAS.csv con una fila por markup y un resumen por altura.
 
