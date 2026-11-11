@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK33 (11-nov, Grand Kia rev1 + rev2)
+## BE-GK03..BE-GK34 (11-nov, Grand Kia rev1 + rev2)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -659,6 +659,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK31: con > 1000 archivos subir_entrega subía Auditoria.zip; COORDINACIÓN (U-008) pide la carpeta Auditoria/ desempacada como en los demás proyectos: --auditoria-carpeta la sube en la misma carpeta de entrega y renombra el zip a 'zz Auditoria.zip'. Arreglo + test (para la unión v81cf91; tool en cache_proyectos/grand_kia/tools_post_v81cf88/).
 - BE-GK32 (rev2, auditoría U-181 F1): C-Z3-01/02 cara exterior '1/2" glass mat sheathing under EIFS' cargada como 5/8" Dens Shield tile backer (94.10 SF) y citando A301 kn 22 (= R-27 batt). Impreso: A301 kn 19 'EIFS OVER 1/2" GLASS MAT SHEATHING' + 17/A521 '1/2" GLASS MAT SHEATHING'; A550 kn 3 limita Dens Shield a tile. Arreglo: renglón 1/2" exterior sheathing, cita kn 19. Regla: cara exterior con glass mat sheathing nunca va al tile backer; el keynote se lee en la hoja.
 - BE-GK33 (rev2, auditoría U-181 F2/F3): RFI cerrados por decisión del usuario conservaban 'loaded'/'opciones' viejos (RFI-35 decía '+10%' y el delta real fue -56.60 SF); height_source con 'RFI-07 (open)', placeholder '[scale check]', texto cortado ('scale verified 18') y tags de A131 cruzados entre F-Z1-06/07. Regla: al cerrar un RFI se reescriben loaded/opciones con el delta medido; ninguna fuente lleva estado viejo, placeholder o texto cortado.
+- BE-GK34 (rev2): el renglón 1/2" EXTERIOR gyp sheathing sumaba las caras de walls (C-Z3-01/02, 94.10 SF) pero su nota solo listaba las filas misc (1,037.03 de 1,131.13): trazabilidad.py no tenía esa familia en el desglose por caras. Arreglo en tools_post_v81cf92/trazabilidad.py. Regla: todo renglón de board lista caras + filas y la suma = NET.
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
