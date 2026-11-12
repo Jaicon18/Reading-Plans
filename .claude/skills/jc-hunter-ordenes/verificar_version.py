@@ -14,6 +14,7 @@ Uso: python3 -I verificar_version.py <skill_dir_o_zip> <skills_archivo_dir> [<ca
    revisar_indice_encabezado: el "(hoy vN" del encabezado = la última línea "vN = VERSIÓN VIGENTE".
 Sale con código 1 si falta algo (no arrancar el proyecto ni marcar la versión vigente).
 """
+import datetime
 import json
 import os
 import re
@@ -330,6 +331,26 @@ def revisar_ordenes(cache, horas=24):
 
 
 RX_POSTMORTEM = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})[\w.-]*\.md$")
+RX_GUIONES = re.compile("[\u2010-\u2015\u2212\u2E3A\u2E3B\uFE58\uFE63\uFF0D\u00AD]")
+RX_ANCHO_CERO = re.compile("[\u200B-\u200D\u2060\uFEFF]")
+
+
+def norm_txt(s, lower=True):
+    """v120 (verificación 4): normalización COMÚN de todo texto que se compara (estados, ids, disposiciones, gap_proof): NFKC + todo guion
+    Unicode -> '-' (y '--' -> '-') + ancho cero fuera + espacios / NBSP / tabs colapsados + minúsculas. La MISMA función está en
+    compuerta_entrega.norm_txt."""
+    import unicodedata
+    t = unicodedata.normalize("NFKC", str(s or ""))
+    t = RX_ANCHO_CERO.sub("", RX_GUIONES.sub("-", t))
+    t = re.sub(r"-{2,}", "-", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    return t.lower() if lower else t
+
+
+RX_PM_CERRADO = re.compile(r"ok ?- ?confirmed-closed")   # v120: estado de cierre, match COMPLETO sobre norm_txt(estado)
+RX_PM_FECHA = re.compile(r"(?im)^\W*fecha\s*:\s*(\d{4}-\d{2}-\d{2})[ t](\d{1,2}):(\d{2})\s*(pt|pst|pdt|utc|z)\b")
+PM_ARRASTRE_DESDE = ("2026-11-12", "b")    # v120: desde el 12b (primer post-mortem con verificación independiente) los abiertos se arrastran
+                                          # entre principales; los anteriores los cerró la re-revisión completa del 2026-11-12 (124 renglones)
 RX_PM_PRINCIPAL = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})([a-z]?)\.md$")   # el post-mortem; _VERIFICACION / _CIERRE
                                                                                         # / copias son acompañantes, no lo reemplazan
 
@@ -420,6 +441,16 @@ def _pm_hora(nombre, txt):
     return datetime.datetime.fromisoformat(d + "T23:59:59").replace(tzinfo=pt)
 
 
+def fecha_verificacion(txt):
+    """U-185 (verificación 4): el campo explícito 'Fecha: YYYY-MM-DD HH:MM PT' (o UTC) del encabezado (primeras 15 líneas). -> datetime o None"""
+    from zoneinfo import ZoneInfo
+    m = RX_PM_FECHA.search("\n".join(norm_txt(l, lower=False) for l in str(txt).splitlines()[:15]))
+    if not m:
+        return None
+    t = datetime.datetime.fromisoformat(f"{m.group(1)}T{int(m.group(2)):02d}:{m.group(3)}")
+    return t.replace(tzinfo=datetime.timezone.utc if m.group(4).lower() in ("utc", "z") else ZoneInfo("America/Los_Angeles"))
+
+
 def revisar_postmortem(cache):
     """U-185 (COORDINACIÓN 12-nov) + post-mortem 2026-11-12b (WEAK U-185): el CIERRE es la última subida de la rev vigente del proyecto
     cerrado más reciente (fecha_iso de TODOS sus SUBIDA_OK*.json, hora completa; no primera_subida_iso, no por día). Se evalúa SOLO
@@ -449,46 +480,60 @@ def revisar_postmortem(cache):
     pms = sorted((RX_PM_PRINCIPAL.match(n).groups(), n) for n in os.listdir(cache) if RX_PM_PRINCIPAL.match(n))
     if not pms:
         return [f"{proy} cerrado {cierre.isoformat()} sin cache_proyectos/POSTMORTEM_COBERTURA_<fecha>[letra].md posterior (U-185)"]
-    n = pms[-1][1]                                       # SOLO el principal más nuevo (un _VERIFICACION / _CIERRE no lo reemplaza)
+    n = pms[-1][1]                                       # el principal más nuevo: hora y tabla
     txt = open(os.path.join(cache, n), encoding="utf-8").read()
     if _pm_hora(n, txt) < cierre:
         return [f"{proy} cerrado {cierre.isoformat()}: el post-mortem más nuevo ({n}) es anterior al cierre (U-185)"]
     if not tabla_postmortem(txt):
         return [f"{n}: sin la tabla principal 'id | error / regla | chequeo | test | estado' (0 renglones) = falla (U-185)"]
-    base = n[:-3] + "_"
-    todos = sorted(m for m in os.listdir(cache) if m.startswith(base) and m.endswith(".md"))
-    txts = {m: open(os.path.join(cache, m), encoding="utf-8").read() for m in todos}
-    verifs = sorted((_pm_hora(n, txts[m]), m) for m in todos if "_VERIFICACION" in m.upper())
-    otros = [m for m in todos if "_VERIFICACION" not in m.upper()]
-    faltas = [f"{m}: verificación sin la tabla 'id | … | estado' = falla (U-185: no pasa en vacío)" for _t, m in verifs if not tabla_postmortem(txts[m])]
-    # verificación 2 (75f98d5): estado por renglón = principal + _CIERRE / copias (nunca relajan) y luego TODAS las _VERIFICACION en orden
-    # de hora; un renglón abierto solo se cierra cuando una verificación MÁS NUEVA lo nombra explícitamente CONFIRMED-CLOSED; si la nueva lo
-    # omite, sigue como estaba
-    abiertos = {}
-    for m in [n] + otros:
-        t = txt if m == n else txts[m]
-        for i, e in abiertos_postmortem(t) + causas_no_guard(t):
-            abiertos.setdefault(i, (e, m))
-    for _t, m in verifs:
-        for i, e in tabla_postmortem(txts[m]):
-            claves = {i} | {f"causa {x}" for x in re.findall(r"NG-?(\d+\.\d+)", i)}
-            u = e.strip("* ")
-            if re.search(r"(?i)CONFIRMED[- ]CLOSED", u):
-                for k in claves:
-                    abiertos.pop(k, None)
-            elif re.match(r"(?i)(WEAK|MISSING|STILL)", u):
-                for k in claves:
-                    abiertos[k] = ("MISSING" if re.match(r"(?i)MISSING", u) else "WEAK", m)
+    cadena = [m for g, m in pms if g >= PM_ARRASTRE_DESDE] or [n]
+    abiertos, faltas, leidos = {}, [], []
+    for pm in cadena:                                    # v120 (verificación 3, C1 / A2): un principal nuevo NO borra los abiertos de uno
+        tp = txt if pm == n else open(os.path.join(cache, pm), encoding="utf-8").read()   # anterior: se arrastran
+        base = pm[:-3] + "_"
+        todos = sorted(m for m in os.listdir(cache) if m.startswith(base) and m.endswith(".md"))
+        txts = {m: open(os.path.join(cache, m), encoding="utf-8").read() for m in todos}
+        verifs, ahora = [], datetime.datetime.now(datetime.timezone.utc)
+        for m in todos:
+            if "_VERIFICACION" not in m.upper():
+                continue
+            t_ = fecha_verificacion(txts[m])
+            if t_ is None:
+                faltas.append(f"{m}: verificación sin el campo 'Fecha: YYYY-MM-DD HH:MM PT' en su encabezado = falla (U-185)")
+            elif t_ > ahora + datetime.timedelta(minutes=10):
+                faltas.append(f"{m}: 'Fecha: {t_.isoformat()}' en el futuro = falla (U-185)")
+            else:
+                verifs.append((t_, m))
+        verifs.sort()
+        otros = [m for m in todos if "_VERIFICACION" not in m.upper()]
+        faltas += [f"{m}: verificación sin la tabla 'id | … | estado' = falla (U-185: no pasa en vacío)" for _t, m in verifs
+                   if not tabla_postmortem(txts[m])]
+        for m in [pm] + otros:
+            t = tp if m == pm else txts[m]
+            for i, e in abiertos_postmortem(t) + causas_no_guard(t):
+                abiertos.setdefault(norm_txt(i), (e, m, i))
+        for _t, m in verifs:                             # un renglón se cierra SOLO con el estado 'ok - confirmed-closed' (match COMPLETO
+            for i, e in tabla_postmortem(txts[m]):       # después de norm_txt) y SOLO el id de su PRIMERA columna (verificación 4)
+                k0 = norm_txt(i)
+                ng = re.fullmatch(r"ng-?(\d+\.\d+)(?: ?/ ?([a-z0-9][\w.-]*))?", k0)
+                claves = {k0} | ({f"causa {ng.group(1)}"} | ({ng.group(2)} if ng.group(2) else set()) if ng else set())
+                u = norm_txt(e.strip("* "))
+                if RX_PM_CERRADO.fullmatch(u):
+                    for k in claves:
+                        abiertos.pop(k, None)
+                elif re.match(r"(weak|missing|still)", u):
+                    for k in claves:
+                        abiertos[k] = ("MISSING" if u.startswith("missing") else "WEAK", m, i)
+        leidos += [pm] + otros + [m for _t, m in verifs]
     if not abiertos and not faltas:
         return []
-    ab = list(abiertos.items())
+    ab = [(v[2], (v[0], v[1])) for v in abiertos.values()]
     nw = sum(1 for _i, (e, _m) in ab if e == "WEAK")
     nm = sum(1 for _i, (e, _m) in ab if e == "MISSING")
     ng = sum(1 for _i, (e, _m) in ab if e == "NO GUARD")
-    acomp = otros + [m for _t, m in verifs]
-    return faltas + ([f"{n}{' + ' + ', '.join(acomp) if acomp else ''}: {nw} WEAK / {nm} MISSING / {ng} NO GUARD abiertos ({len(ab)} "
-                      "renglones; se cierran solo con CONFIRMED-CLOSED en una verificación más nueva; U-185): " + ", ".join(i for i, _e in ab[:30])]
-                     if ab else [])
+    return faltas + ([f"{' + '.join(leidos)}: {nw} WEAK / {nm} MISSING / {ng} NO GUARD abiertos ({len(ab)} renglones; se cierran solo con "
+                      "el estado 'OK — CONFIRMED-CLOSED' en una verificación; un principal nuevo no los borra; U-185): "
+                      + ", ".join(i for i, _e in ab[:30])] if ab else [])
 
 
 RX_DEF_TEST = re.compile(r"(?m)^def (test_\w+)\(")
@@ -533,39 +578,82 @@ def sha_tools(fuente):
 FECHA_U157 = "2026-11-10T00:00:00+00:00"               # U-157: la comparación del CSV del usuario cierra un proyecto (desde aquí)
 
 
-def proyectos_abiertos_cache(cache):
-    """BE-PM04 (verificación 2): proyectos con entrega vigente NO cerrada: tienen SUBIDA_OK*.json en cache_proyectos/<p>/ con la última
-    subida desde U-157 y NO tienen CSV_BLUEBEAM_<rev de esa subida>/RESULTADO.md con 'N CSV / N PDF / N emparejados' y 0 faltantes."""
+RX_COMPARADO = re.compile(r"(?im)^\W*comparado\s*:\s*(\d{4}-\d{2}-\d{2})[ t](\d{1,2}):(\d{2})(?::\d{2})?\s*(pt|pst|pdt|utc|z|[+-]\d{2}:?\d{2})\b")
+
+
+def _fecha_resultado(tx):
+    """v120 (verificación 4): el momento de la comparación del CSV es SOLO el campo explícito 'Comparado: YYYY-MM-DD HH:MM PT|UTC|±hh:mm'
+    de RESULTADO.md. -> datetime con zona o None (sin el campo = el proyecto cuenta como ABIERTO)."""
+    from zoneinfo import ZoneInfo
+    m = RX_COMPARADO.search(norm_txt(tx, lower=False))
+    if not m:
+        return None
+    t = datetime.datetime.fromisoformat(f"{m.group(1)}T{int(m.group(2)):02d}:{m.group(3)}")
+    z = m.group(4).lower()
+    if z in ("utc", "z"):
+        return t.replace(tzinfo=datetime.timezone.utc)
+    if z in ("pt", "pst", "pdt"):
+        return t.replace(tzinfo=ZoneInfo("America/Los_Angeles"))
+    return datetime.datetime.fromisoformat(t.isoformat() + (z if ":" in z else z[:3] + ":" + z[3:]))
+
+
+def _es_proyecto(dd):
+    import glob as _g
+    return bool(_g.glob(os.path.join(dd, "SUBIDA_OK*.json"))) or os.path.isfile(os.path.join(dd, "VERSION_PROYECTO.txt"))
+
+
+def proyectos_abiertos_cache(cache, errores=None):
+    """BE-PM04 (verificaciones 2, 3 y 4): proyectos con entrega vigente NO cerrada. Abierto = tiene SUBIDA_OK*.json (con o sin rev; fecha en
+    'fecha_iso' o 'fecha', con zona; sin fecha o sin zona -> `errores`) con la última subida desde U-157, y NO hay un
+    CSV_BLUEBEAM_*/RESULTADO.md con 'N CSV / N PDF / N emparejados' (N > 0), '0 faltantes' sin otro 'K faltantes' y 'Comparado: <fecha>'
+    POSTERIOR a la última subida y al último VERSION_PROYECTO.txt (una rev nueva en curso = abierto)."""
     import json
     import glob as _g
     out = []
+    errores = errores if errores is not None else []
     if not cache or not os.path.isdir(cache):
         return out
     for d in sorted(os.listdir(cache)):
         dd = os.path.join(cache, d)
-        subs = []
+        subs, dudoso = [], False
         for f in _g.glob(os.path.join(dd, "SUBIDA_OK*.json")):
             try:
                 x = json.load(open(f, encoding="utf-8"))
-            except Exception:
+            except Exception as e:
+                errores.append(f"{d}/{os.path.basename(f)} ilegible: {e}")
+                dudoso = True
                 continue
-            t = _cierre_dt(x.get("fecha_iso") or x.get("primera_subida_iso"))
-            if t:
-                subs.append((t, os.path.basename(f)))
+            t = _cierre_dt(x.get("fecha_iso") or x.get("fecha") or x.get("primera_subida_iso"))
+            if t is None:
+                errores.append(f"{d}/{os.path.basename(f)} sin fecha ('fecha_iso' / 'fecha'): no se puede saber si está cerrado (BE-PM04)")
+                dudoso = True
+            elif t.tzinfo is None:
+                errores.append(f"{d}/{os.path.basename(f)}: fecha sin zona horaria ({t.isoformat()}) (BE-PM04)")
+                dudoso = True
+            else:
+                subs.append(t)
+        if dudoso:
+            out.append(d)                                # una subida que no se puede fechar = abierto (y FAIL en revisar)
+            continue
         if not subs:
             continue
-        t, f = max(subs)
-        if t < _cierre_dt(FECHA_U157):
+        ult = max(subs)
+        if ult < _cierre_dt(FECHA_U157):
             continue
-        m = re.match(r"SUBIDA_OK_(rev\w+)\.json$", f)
+        vp = os.path.join(dd, "VERSION_PROYECTO.txt")
+        if os.path.isfile(vp):
+            for ln in open(vp, encoding="utf-8", errors="ignore"):
+                t = _cierre_dt(ln.split("|")[0].strip())
+                if t and t.tzinfo and t > ult:
+                    ult = t
         cerr = False
         for r in _g.glob(os.path.join(dd, "CSV_BLUEBEAM_*", "RESULTADO.md")):
-            rv = os.path.basename(os.path.dirname(r))[len("CSV_BLUEBEAM_"):]
-            if m and rv != m.group(1):
-                continue
-            tx = open(r, encoding="utf-8", errors="ignore").read()
+            tx = norm_txt(open(r, encoding="utf-8", errors="ignore").read(), lower=False)
             n = re.search(r"(\d+)\s*CSV\s*/\s*(\d+)\s*PDF\s*/\s*(\d+)\s*emparejados", tx)
-            if n and len({n.group(1), n.group(2), n.group(3)}) == 1 and re.search(r"\b0 faltantes", tx):
+            otros = [k for k in re.findall(r"\b(\d+)\s+faltantes", tx) if k != "0"]
+            fr = _fecha_resultado(tx)
+            if n and len({n.group(1), n.group(2), n.group(3)}) == 1 and int(n.group(1)) > 0 and re.search(r"\b0 faltantes", tx) \
+                    and not otros and fr and fr > ult:
                 cerr = True
         if not cerr:
             out.append(d)
@@ -597,7 +685,17 @@ def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119), cache=None):
     out = []
     if not abiertos:
         out.append("skills_archivo/PROYECTOS_ABIERTOS.json con la lista VACÍA (U-137: no pasa en vacío)")
-    reales = [p for p in proyectos_abiertos_cache(cache) if p not in abiertos]
+    cache = cache or os.path.join(os.path.dirname(os.path.abspath(archivo)), "cache_proyectos")   # v120: el detector corre SIEMPRE
+    if not os.path.isdir(cache):
+        out.append(f"sin cache_proyectos ({cache}): el detector de proyectos abiertos no puede correr (BE-PM04)")
+    else:
+        fantasmas = [p for p in abiertos if not _es_proyecto(os.path.join(cache, p))]
+        if fantasmas:
+            out.append("PROYECTOS_ABIERTOS.json nombra carpetas que no son proyectos de cache_proyectos (sin SUBIDA_OK ni "
+                       "VERSION_PROYECTO.txt): " + ", ".join(fantasmas))
+    errs = []
+    reales = [p for p in proyectos_abiertos_cache(cache, errs) if p not in abiertos]
+    out += errs
     if reales:
         out.append("PROYECTOS_ABIERTOS.json no trae proyectos con entrega vigente sin CSV comparado N/N: " + ", ".join(reales))
     f = os.path.join(archivo, f"PRUEBA_ABIERTOS_{v}.json")
@@ -614,8 +712,21 @@ def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119), cache=None):
         if malos:
             out.append(f"{os.path.basename(f)}: {', '.join(malos)} corrido(s) con otras tools (sha_tools distinto del candidato "
                        f"{sha[:12]}): re-correr prueba_abiertos con el candidato final")
-    if x.get("version_candidata") not in (None, v):
+    if x.get("version_candidata") != v:
         out.append(f"{os.path.basename(f)} es de la versión {x.get('version_candidata')}, no de {v}")
+    for k, pv in (x.get("proyectos") or {}).items():       # v120 (verificación 3, P3): las regresiones de CADA proyecto se leen
+        regs = [r for r in x.get("regresiones") or [] if r.get("proyecto") == k]
+        sinx = [r for r in regs if not str(r.get("explicacion") or "").strip()]
+        nreg = int(pv.get("regresiones") or 0)
+        fv = int(((pv.get("vigente") or {}).get("FAIL")) or 0)
+        fc = int(((pv.get("candidata") or {}).get("FAIL")) or 0)
+        vig, cand = pv.get("vigente") or {}, pv.get("candidata") or {}
+        if not (sum(int(v or 0) for v in vig.values()) > 0 and sum(int(v or 0) for v in cand.values()) > 0):
+            out.append(f"{os.path.basename(f)}: {k}: sin los conteos de la compuerta vigente Y de la candidata (> 0): corrida hecha a mano o "
+                       "vacía (BE-PM04)")
+        if int(pv.get("sin_explicar") or 0) or sinx or nreg != len(regs) or fc > fv + nreg:
+            out.append(f"{os.path.basename(f)}: {k}: regresiones {nreg} / sin explicar {pv.get('sin_explicar') or len(sinx)} / FAIL "
+                       f"{fv} -> {fc} no cuadran o están sin explicar")
     pr = x.get("proyectos") or {}
     falt = [a for a in abiertos if a not in pr]
     if falt:

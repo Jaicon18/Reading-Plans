@@ -162,3 +162,14 @@ Pruebas (Ampliación 3):
 - selftest OK.
 - PRUEBA_ABIERTOS de XF con las tools finales (sha cb4adc4a0566): 0 regresiones.
 - Parche probado con -p1 sobre el zip de v119.
+
+## PUBLICADA 12-nov (orden COORDINACIÓN 21:59)
+
+- v81cf120 = 056b3a0; el zip está en skills_archivo/take-off-metal-frame-drywall_v81cf120_verificacion4-retroactivo_2026-11-12.zip.
+- Órdenes: verificar_version + su test (apartados/ordenes_v120) y REGLAS_REGISTRO (= el del skill).
+- BIBLIOTECA (órdenes y cache) actualizada.
+- PROYECTOS_ABIERTOS.json sin cambios (XF, GK, CR).
+- skills_archivo/PRUEBA_ABIERTOS_v81cf120.json trae XF. GK y CR lo agregan antes de su compuerta final:
+  `compuerta_entrega.py prueba_abiertos <tools v119> skills_archivo/PRUEBA_ABIERTOS_v81cf120.json <proyecto>=<workdir>`.
+- El post-mortem 12b queda abierto hasta la verificación 5, que trae 'Fecha:' en su encabezado.
+- Congelado de nuevo.
