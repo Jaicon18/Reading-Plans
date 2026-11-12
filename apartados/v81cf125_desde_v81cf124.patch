@@ -1,0 +1,145 @@
+diff -ruN v124/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v125/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v124/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:04:16.490314012 +0000
++++ v125/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:04:16.497708204 +0000
+@@ -8627,7 +8627,7 @@
+    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
+    "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente",
++   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
+     "take-off:tools/compuerta_entrega.py::ce_cobertura",
+@@ -8638,7 +8638,7 @@
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+-    "token": "test_v124_gk_rev_y_material"
++    "token": "test_v125_gk54_face_centre"
+    }
+   },
+   {
+diff -ruN v124/take-off-metal-frame-drywall/SKILL.md v125/take-off-metal-frame-drywall/SKILL.md
+--- v124/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:04:16.496067690 +0000
++++ v125/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:04:16.501365339 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf124** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf125** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,9 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf125 (COORDINACIÓN 12-nov 22:58, caso real de GK):** GK54(b) acepta cualquier gap medido > 0, face-to-face o centre-to-centre,
++  con el material impreso (p. ej. '4.0" face-to-face / 10.0" centre-to-centre (46/A550) - CMU type K'); el valor de gap_proof cuenta como
++  texto de gap aunque no diga 'gap'.
+ - **v81cf124 (COORDINACIÓN 12-nov 22:56, bugs de GK):** (1) la etiqueta de rev se lee también en 'entrega_rev3b' ('_' no corta);
+   (2) BE-GK54 distingue: (a) MISMO MURO (la leaf se cuenta dentro de otro wall; 'same wall' o cualquier equivalente) = gap_proof con N/HOJA
+   y gap medido 0; (b) NO ES NUESTRO de OTRO material impreso (CMU, masonry, concrete, existing, by others) = motivo con el material +
+Binary files v124/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v125/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v125/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v125/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v124/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v125/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v124/take-off-metal-frame-drywall/tools/compuerta_entrega.py v125/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v124/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:04:16.493860461 +0000
++++ v125/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:04:16.500870236 +0000
+@@ -6556,12 +6556,13 @@
+     """v124 (GK) caso (b): 'NO ES NUESTRO' de OTRO material impreso: nombra el material (CMU / masonry / concrete / existing / by others),
+     trae N/HOJA válido y el gap MEDIDO > 0 (la medida más cercana a 'gap'): el gap prueba que son dos muros."""
+     t = norm_txt(txt, lower=False)
+-    if not (RX_OTRO_MATERIAL.search(t) and RX_NH_VALIDA.search(t) and re.search(r"(?i)gap", t)):
++    rx_gap = r"(?i)gap|face[\s-]+to[\s-]+face|cent(?:re|er)[\s-]+to[\s-]+cent(?:re|er)|\bc\.?/c\.?\b|\bclear\b"   # v125
++    if not (RX_OTRO_MATERIAL.search(t) and RX_NH_VALIDA.search(t) and re.search(rx_gap, t)):
+         return False
+     ms = [(m.start(), m.end(), float(m.group(1)) + (float(m.group(2)) / float(m.group(3)) if m.group(2) else 0.0))
+           for m in RX_GAP_MEDIDA.finditer(t)]
+     med = []
+-    for g in re.finditer(r"(?i)gap", t):
++    for g in re.finditer(rx_gap, t):                    # v125: face-to-face o centre-to-centre, cualquiera > 0 (la medida más cercana)
+         cerca = sorted((min(abs(g.start() - e), abs(a - g.end())), v) for a, e, v in ms)
+         if cerca and cerca[0][0] <= 14:
+             med.append(cerca[0][1])
+@@ -6681,8 +6682,9 @@
+                 str(x.get(k) or "") for k in ("id", "reason", "gap_proof"))))}]
+             if est == "ROJO" and not ligadas:           # ROJO sin exclusión que lo cite: lo cuenta CE_COBERTURA (rojo sin disponer)
+                 continue
+-            textos = [dtx] + [str(x.get("reason") or "") + " " + str(x.get("gap_proof") or "") for x in ligadas]
+-            pruebas = [dtx] + [str(x.get("gap_proof") or "") for x in ligadas]
++            gp = lambda x: ("gap: " + str(x.get("gap_proof"))) if str(x.get("gap_proof") or "").strip() else ""   # noqa: E731  v125: el
++            textos = [dtx] + [str(x.get("reason") or "") + " " + gp(x) for x in ligadas]          # valor de gap_proof ES texto de gap
++            pruebas = [dtx] + [gp(x) for x in ligadas]
+             if any(es_mismo_muro(t, walls) for t in textos):          # v124 (a) MISMO MURO: gap medido = 0 + N/HOJA
+                 if any(gap_prueba_ok(t) for t in pruebas):
+                     continue
+diff -ruN v124/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v125/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v124/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:04:16.491066579 +0000
++++ v125/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:04:16.498253027 +0000
+@@ -3122,3 +3122,24 @@
+ 
+ 
+ test_v124_gk_rev_y_material()
++
++
++def test_v125_gk54_face_centre():
++    """v125 (COORDINACIÓN 12-nov 22:58, caso real de GK con ids sintéticos): GK54(b) acepta cualquier gap medido > 0, face-to-face o
++    centre-to-centre, con el material impreso; el valor del campo gap_proof cuenta como texto de gap aunque no diga 'gap'."""
++    t = 'gap_proof: 4.0" face-to-face / 10.0" centre-to-centre (46/A550) - CMU type K'
++    assert CE.otro_material_ok(t) and not CE.es_mismo_muro(t)
++    assert CE.otro_material_ok('4.0" face-to-face / 10.0" center-to-center (46/A550) - CMU type K')
++    assert not CE.otro_material_ok('0" face-to-face (46/A550) - CMU type K'), "gap 0 no prueba dos muros en (b)"
++    band = {"ori": "V", "c0": 1509.0, "c1": 1512.8, "lo": 1124.0, "hi": 1163.8, "sheet": "Z9.11"}
++    rojo = [{"hoja": "Z9.11", "tipo": "muro", "id": "M-29", "x": "1499.5", "y": "1145.0", "largo_ft": "4.0", "estado": "ROJO"}]
++    ex = [{"id": "EX", "reason": "by others: CMU type K beside W1", "gap_proof": t.split("gap_proof: ")[1]}]
++    assert not CE.be_gk54_fallas({"walls": [{"id": "W1", "band": band}], "excluded_walls": ex}, rojo), "gap_proof sin la palabra 'gap'"
++    disp = [dict(rojo[0], estado="DISPUESTO", disposicion="NO ES NUESTRO: " + t)]
++    assert not CE.be_gk54_fallas({"walls": [{"id": "W1", "band": band}], "excluded_walls": []}, disp)
++    ex2 = [{"id": "EX", "reason": "same wall as W1", "gap_proof": t.split("gap_proof: ")[1]}]
++    assert CE.be_gk54_fallas({"walls": [{"id": "W1", "band": band}], "excluded_walls": ex2}, rojo), "'same wall' con gap 4 in = FAIL"
++    print("test_v125_gk54_face_centre OK")
++
++
++test_v125_gk54_face_centre()

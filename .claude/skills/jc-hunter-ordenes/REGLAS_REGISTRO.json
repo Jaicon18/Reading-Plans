@@ -8627,7 +8627,7 @@
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente",
+   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
     "take-off:tools/compuerta_entrega.py::ce_cobertura",
@@ -8638,7 +8638,7 @@
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v124_gk_rev_y_material"
+    "token": "test_v125_gk54_face_centre"
    }
   },
   {
