@@ -1,0 +1,406 @@
+diff -ruN v127/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v128/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v127/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:50:45.487507783 +0000
++++ v128/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:50:45.496815210 +0000
+@@ -6707,7 +6707,7 @@
+   {
+    "id": "U-165",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, vía COORDINACIÓN)",
+-   "texto_corto": "ruta Windows simulada de todo archivo de la entrega <= 230 caracteres; PDF de markups '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf' (PROY corto); la GUIA lo cita",
++   "texto_corto": "ruta Windows simulada de todo archivo de la entrega <= 230 caracteres; PDF de markups '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf' (PROY corto); la GUIA lo cita ; v128 (CR rev20b): REV_PAT con letra en todos los sitios, orden 20 < 20a < 20b < 21, rev no identificada = FAIL (no PASS en vacío)",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -6715,11 +6715,14 @@
+     "take-off:tools/compuerta_entrega.py::ce_nombres_entrega",
+     "take-off:tools/subir_entrega.py::candados",
+     "take-off:tools/compuerta_entrega.py::rutas_entrega_fallas",
+-    "take-off:tools/compuerta_entrega.py::carpeta_rev_fallas"
++    "take-off:tools/compuerta_entrega.py::carpeta_rev_fallas",
++    "take-off:tools/compuerta_entrega.py::rev_clave",
++    "take-off:tools/compuerta_entrega.py::rev_de",
++    "take-off:tools/compuerta_entrega.py::guia_cambios_fallas"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+-    "token": "test_u165_ruta_windows"
++    "token": "test_v128_rev_con_letra"
+    }
+   },
+   {
+@@ -8658,6 +8661,20 @@
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "test_be_gk55"
+    }
++  },
++  {
++   "id": "BE-GK56",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, medición U-193 / BE-GK54 del revisor independiente, RI-18C, 12-nov; unido de apartados/be_gk56 en v81cf128)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "el destino de una exclusión 'same wall as <X>' es el wall del canon cuya band comparte la pieza, MEDIDO en el plano (gap_proof = gap medido + N/HOJA), nunca un id del lector; X fuera del canon = FAIL; gap > 0 = FALTA que entra por la cadena ('loaded as <ref>' con la ref en el canon)",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::be_gk56_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_gk56"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v127/take-off-metal-frame-drywall/SKILL.md v128/take-off-metal-frame-drywall/SKILL.md
+--- v127/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:50:45.494907035 +0000
++++ v128/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:50:45.502424277 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf127** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf128** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,11 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf128 (COORDINACIÓN 12-nov 23:44, CR rev20b):** UNA constante REV_PAT = rev(\d+[a-z]?) con límites alfanuméricos en
++  compuerta_entrega / chequeos_biblioteca (carpeta 'revN FINAL PARA REVISAR', GUÍA 'CAMBIOS revN vs revM', RESUMEN / BITACORA, proposal,
++  README); orden 20 < 20a < 20b < 21 (rev_clave); un chequeo que no identifica su rev da FAIL 'no se pudo identificar la rev', nunca PASS en
++  vacío. BE-GK56 (GK rev3b): el destino de 'same wall as <X>' es el wall del canon MEDIDO en el plano (gap_proof = gap medido + N/HOJA),
++  nunca un id del lector; gap > 0 = FALTA por la cadena ('loaded as <ref>'). CLI `compuerta_entrega.py be_gk56 <canon>`.
+ - **v81cf127 (COORDINACIÓN 12-nov 23:16, CR):** la etiqueta de la rev (RETRO, inicio_rev_info) se toma en este orden: (1) el nombre del
+   Excel o del PDF de markups de la entrega ('…_rev20b.xlsx'); (2) VERSION_PROYECTO.txt (--rev); (3) el nombre de la carpeta. Un workdir
+   'entrega' sin revN ya no deja la rev sin fecha.
+Binary files v127/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v128/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v128/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v128/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v127/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v128/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v127/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v128/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v127/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 23:50:45.488391669 +0000
++++ v128/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 23:50:45.497495083 +0000
+@@ -39,7 +39,7 @@
+                          r"\bfasteners?\b|kwik|x-?edni|hus-?ez")
+ RX_SLIP = re.compile(r"(?i)slip|deflection|deep[- ]leg|slotted")
+ RX_INTERNO = re.compile(r"(?i)\.json\b|\.py\b|\.jsonl\b|takeoff_work|proceso_calc|/etapas/|etapas/\d|scratchpad|takeoff_canon|familias_out")
+-RX_PLAN_CHECK = re.compile(r"\bC7-0\d\b|\bC-0\d\b|\bN-0\d\b|(?i:\brev\d+ plan check\b|\bplan check\b)")
++RX_PLAN_CHECK = re.compile(r"\bC7-0\d\b|\bC-0\d\b|\bN-0\d\b|(?i:(?<![a-z0-9])rev\d+[a-z]? plan check\b|\bplan check\b)")
+ RX_ESPANOL = re.compile(r"\b(?:DISCREPANCIA|PENDIENTE|DERIVADO|CONFIRMADO|SUPUESTO|cara(?:s)?|altura|hoja|muro|techo|"
+                         r"tornillos|cantidad|falta|revisar)\b", re.I)
+ 
+@@ -1742,7 +1742,7 @@
+     cs = [(k, c) for k, c in (("A", b.canon_a), ("B", b.canon_b)) if c]
+     if not cs:
+         return NA("sin lecturas guardadas")
+-    rx = re.compile(r"(?i)FINAL_FOR_REVIEW|RESPUESTAS_RFI|takeoff_canon_FINAL|_rev\d+\.(xlsx|json)|rev13")
++    rx = re.compile(r"(?i)FINAL_FOR_REVIEW|RESPUESTAS_RFI|takeoff_canon_FINAL|_rev\d+[a-z]?\.(xlsx|json)|rev13")
+     ev = [f"lectura {k}: cita '{rx.search(json.dumps(c)).group(0)}' (contaminación)" for k, c in cs if rx.search(json.dumps(c))]
+     return R("FAIL", *ev) if ev else R("PASS", "lecturas sin rutas de respuestas")
+ 
+@@ -4029,7 +4029,7 @@
+             ev.append(f"{h}!{c}: español ({', '.join(idioma_es.es_espanol(sin_el(t))[:3])}) '{str(t)[:60]}'")
+     rd = next((t for n, t in b.docs.items() if n.upper().startswith("README")), None)
+     if rd:
+-        rd = re.sub(r"(?i)ESTA ES LA VERSI[OÓ]N FINAL PARA REVISAR|rev\d+ FINAL PARA REVISAR", "", rd)      # rótulo obligatorio U-089 (corto desde U-165)
++        rd = re.sub(r"(?i)ESTA ES LA VERSI[OÓ]N FINAL PARA REVISAR|(?<![a-z0-9])rev\d+[a-z]? FINAL PARA REVISAR", "", rd)   # v128      # rótulo obligatorio U-089 (corto desde U-165)
+         for i, l in enumerate(rd.splitlines(), 1):
+             if idioma_es.es_espanol(sin_el(l)):
+                 ev.append(f"README_REVIEW.md línea {i}: español '{l[:60]}'")
+diff -ruN v127/take-off-metal-frame-drywall/tools/compuerta_entrega.py v128/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v127/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:50:45.491635001 +0000
++++ v128/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:50:45.501390418 +0000
+@@ -837,6 +837,22 @@
+     return out
+ 
+ 
++REV_PAT = r"(?<![a-z0-9])rev(\d+[a-z]?)(?![a-z0-9])"     # v128 (CR rev20b): LA constante de rev (letra incluida); usar en todos los sitios
++RX_REV = re.compile("(?i)" + REV_PAT)
++
++
++def rev_clave(r):
++    """v128: orden de revs 20 < 20a < 20b < 21. r = '20b' / 'rev20b' / 20 -> (20, 'b'); None si no es una rev."""
++    m = re.fullmatch(r"(?i)(?:rev)?\s*(\d+)([a-z]?)", str(r or "").strip())
++    return (int(m.group(1)), m.group(2).lower()) if m else None
++
++
++def rev_de(texto):
++    """v128: la rev ('20b') del primer REV_PAT en el texto, o None."""
++    m = RX_REV.search(str(texto or ""))
++    return m.group(1).lower() if m else None
++
++
+ RX_REV_ETIQ = re.compile(r"(?i)(?<![a-z0-9])rev\s*-?\s*(\d{1,3}[a-z]?)(?![a-z0-9])")   # v124 (GK): 'entrega_rev3b' ('_' no corta \b)
+ 
+ 
+@@ -1441,7 +1457,7 @@
+ UMBRAL_AUDITORIA_ZIP = 1000     # subir_entrega.empaquetar_auditoria: con más archivos, Auditoria/ se sube como UN Auditoria.zip
+ MAX_NOMBRE_EN_ZIP = 120         # COORDINACIÓN 11-nov: nombre dentro de Auditoria.zip <= 120 caracteres
+ CARACTERES_PROHIBIDOS_WINDOWS = '<>:"/\\|?*'
+-CARPETA_REV_RE = r"rev\d+ FINAL PARA REVISAR"      # U-089 / U-165 (COORDINACIÓN 11-nov): nombre corto de la carpeta de entrega
++CARPETA_REV_RE = r"rev\d+[a-z]? FINAL PARA REVISAR"   # v128: con letra (rev20b)      # U-089 / U-165 (COORDINACIÓN 11-nov): nombre corto de la carpeta de entrega
+ 
+ 
+ def rutas_drive(rels, umbral=UMBRAL_AUDITORIA_ZIP):
+@@ -1466,7 +1482,7 @@
+ 
+ def carpeta_rev_fallas(carpeta_rev):
+     """U-089 / U-165: desde rev19 la carpeta de entrega es 'revN FINAL PARA REVISAR'; el formato largo 'revN FINAL — ESTA ES ...' = FAIL."""
+-    if re.match(r"rev\d+ FINAL\b", carpeta_rev or "") and not re.fullmatch(CARPETA_REV_RE, carpeta_rev):
++    if re.match(r"rev\d+[a-z]? FINAL\b", carpeta_rev or "") and not re.fullmatch(CARPETA_REV_RE, carpeta_rev):
+         return [f"carpeta de entrega '{carpeta_rev}': usar 'revN FINAL PARA REVISAR' (U-089 / U-165)"]
+     return []
+ 
+@@ -1564,7 +1580,8 @@
+     if not any(n.lower().endswith(".png") for n in nombres):
+         ev.append("0 PNG en Planos marcados/ (PASS en vacío prohibido)")
+     if os.path.isfile(g):
+-        ev += guia_cambios_fallas(open(g, encoding="utf-8").read(), os.path.basename(os.path.dirname(pl)))
++        ev += guia_cambios_fallas(open(g, encoding="utf-8").read(), os.path.basename(os.path.dirname(pl)),
++                                  _etiqueta_rev(os.path.dirname(pl), getattr(c, "entrega", None)))   # v128: rev del Excel / PDF si la carpeta no la dice
+     ev += resumenes_fallas(os.listdir(os.path.dirname(pl)))
+     raiz = os.path.dirname(pl)
+     rels = [os.path.relpath(os.path.join(r, f), raiz) for r, _, fs in os.walk(raiz) for f in fs]
+@@ -2021,24 +2038,27 @@
+ def resumenes_fallas(nombres_raiz):
+     """U-164 (usuario 11-nov: 'RESUMEN_rev5 al 17, cual es la reazon de crear tantos'): la raíz de la entrega lleva UN SOLO RESUMEN (el de la
+     versión vigente); la historia va en Auditoria/HISTORIAL_CAMBIOS.md. Más de un RESUMEN_rev*.md en la raíz = FAIL."""
+-    rs = sorted(n for n in nombres_raiz if re.match(r"(?i)RESUMEN_rev\d+.*\.md$", n))
++    rs = sorted(n for n in nombres_raiz if re.match(r"(?i)RESUMEN_" + REV_PAT + r".*\.md$", n))
+     return [f"U-164: {len(rs)} RESUMEN en la raíz de la entrega ({', '.join(rs[:6])}...): solo el de la versión vigente; los viejos a Auditoria/HISTORIAL_CAMBIOS.md"] if len(rs) > 1 else []
+ 
+ 
+-def guia_cambios_fallas(texto, carpeta):
++def guia_cambios_fallas(texto, carpeta, rev=None):
+     """rev15 (revisión completa rev14 #18): la PRIMERA sección 'CAMBIOS revN vs revM' de la GUIA es la de la revisión entregada
+-    (revN = la de la carpeta 'revN FINAL ...') y M = N - 1. rev14 abría con 'CAMBIOS rev7 vs rev6' (bloque insertado al final)."""
+-    m = re.search(r"(?i)\brev(\d+)\b", carpeta or "")
+-    c1 = re.search(r"(?m)^##\s*CAMBIOS\s+rev(\d+)\s+vs\s+rev(\d+)", texto or "")
+-    if not m:
+-        return []
+-    n = int(m.group(1))
+-    if n <= 1:
++    (revN = la de la carpeta 'revN FINAL ...') y M es una rev ANTERIOR (sin letra: M = N - 1). v128 (CR rev20b): revs con letra (REV_PAT,
++    orden 20 < 20a < 20b < 21); si no se puede identificar la rev (ni en la carpeta ni en `rev`) = FAIL, no PASS en vacío (U-137)."""
++    n = rev_de(carpeta) or (rev_de("rev" + str(rev)) if rev else None)
++    if not n:
++        return [f"GUIA: no se pudo identificar la rev de la entrega (carpeta '{carpeta}'): 'CAMBIOS revN vs revM' no se puede revisar (U-137)"]
++    kn = rev_clave(n)
++    if kn <= (1, ""):
+         return []
++    c1 = re.search(r"(?mi)^##\s*CAMBIOS\s+rev(\d+[a-z]?)\s+vs\s+rev(\d+[a-z]?)(?![a-z0-9])", texto or "")
++    prev = f"rev{kn[0] - 1}" if not kn[1] else "rev<anterior>"
+     if not c1:
+-        return [f"GUIA: sin sección 'CAMBIOS rev{n} vs rev{n - 1}'"]
+-    if (int(c1.group(1)), int(c1.group(2))) != (n, n - 1):
+-        return [f"GUIA: la primera sección de cambios es 'CAMBIOS rev{c1.group(1)} vs rev{c1.group(2)}', debe ser 'CAMBIOS rev{n} vs rev{n - 1}' (#18)"]
++        return [f"GUIA: sin sección 'CAMBIOS rev{n} vs {prev}'"]
++    a, b = rev_clave(c1.group(1)), rev_clave(c1.group(2))
++    if a != kn or not (b < kn and (kn[1] or b[0] == kn[0] - 1)):
++        return [f"GUIA: la primera sección de cambios es 'CAMBIOS rev{c1.group(1)} vs rev{c1.group(2)}', debe ser 'CAMBIOS rev{n} vs {prev}' (#18)"]
+     return []
+ 
+ 
+@@ -2225,7 +2245,7 @@
+     return max(vs, key=_ver_clave) if vs else None
+ 
+ 
+-RX_REV_TOK = re.compile(r"(?i)\brev\s*(\d+)([a-z]?)(?![a-z0-9])")
++RX_REV_TOK = re.compile(r"(?i)(?<![a-z0-9])rev\s*(\d+)([a-z]?)(?![a-z0-9])")   # v128
+ 
+ 
+ def _rev_norm(m):
+@@ -4333,7 +4353,7 @@
+                 continue
+             hdr = [h.strip().lower() for h in ln.strip("|").split("|")]
+             cm = next((k for k, h in enumerate(hdr) if "material" in h), None)
+-            cols = [k for k, h in enumerate(hdr) if rev and re.fullmatch(rf"rev\s*{rev}\b.*", h)] or \
++            cols = [k for k, h in enumerate(hdr) if rev and re.fullmatch(rf"(?i)rev\s*{rev}(?![a-z0-9]).*", h)] or \
+                    [k for k, h in enumerate(hdr) if re.fullmatch(r"(net|net \(excel\)|total|qty|quantity|excel)", h)]
+             i += 2
+             while i < len(lineas) and lineas[i].strip().startswith("|"):
+@@ -4363,12 +4383,12 @@
+     for base in {getattr(c, "w", None), getattr(c, "entrega", None)} - {None}:
+         for pre in prefijos:
+             for p in glob.glob(os.path.join(base, f"{pre}*.md")) + glob.glob(os.path.join(base, "*", f"{pre}*.md")):
+-                m = re.search(r"rev(\d+)", os.path.basename(p))
+-                if m:
+-                    fs.setdefault(int(m.group(1)), []).append(p)
++                r = rev_de(os.path.basename(p))          # v128: rev20 y rev20b son revs distintas (20 < 20a < 20b < 21)
++                if r:
++                    fs.setdefault(r, []).append(p)
+     if not fs:
+         return {}, None
+-    n = max(fs)
++    n = max(fs, key=rev_clave)
+     return {os.path.basename(p): open(p, encoding="utf-8", errors="ignore").read() for p in fs[n]}, n
+ 
+ 
+@@ -4844,8 +4864,8 @@
+                 t = str(v or "")
+                 if re.search(r"(?i)template:\s*1 box|per 200 SF of finished board", t):
+                     out.append(f"{ws.title}: cantidad por regla de plantilla, no del Material Summary: '{t[:80]}'")
+-                for mm in re.finditer(r"(?i)\b(?:take-off\s+)?rev\s?(\d+)\b", t):
+-                    if re.search(r"(?i)take-off|vs rev|rev\s?\d+\s+final", t) and mm.group(1) != str(rev_actual):
++                for mm in re.finditer(r"(?i)(?<![a-z0-9])(?:take-off\s+)?rev\s?(\d+[a-z]?)(?![a-z0-9])", t):   # v128: con letra
++                    if re.search(r"(?i)take-off|vs rev|rev\s?\d+[a-z]?\s+final", t) and rev_clave(mm.group(1)) != rev_clave(rev_actual):
+                         out.append(f"{ws.title}: cita la revisión {mm.group(0)} (vigente rev{rev_actual}): '{t[:80]}'")
+                         break
+     return out
+@@ -4863,9 +4883,11 @@
+     fs = coherencia_r11(can, (st or {}).get("hojas") if isinstance(st, dict) else None, dob)
+     xs = sorted(glob.glob(os.path.join(c.entrega or "", "Proposal", "*.xlsx"))) if c.entrega else []
+     for x in xs:
+-        mrev = re.search(r"rev(\d+)", os.path.basename(x))
++        mrev = rev_de(os.path.basename(x))               # v128: Proposal_rev20b -> '20b'
+         if mrev:
+-            fs += [f"{os.path.basename(x)}: {e}" for e in proposal_coherente(x, mrev.group(1))]
++            fs += [f"{os.path.basename(x)}: {e}" for e in proposal_coherente(x, mrev)]
++        else:
++            fs.append(f"{os.path.basename(x)}: no se pudo identificar la rev de la proposal (revN en el nombre; U-137)")
+     return R("FAIL", *fs[:30]) if fs else R("PASS", "shaft walls, accesorios, cielos de shower y proposal coherentes")
+ 
+ 
+@@ -6630,6 +6652,35 @@
+     return out
+ 
+ 
++RX_GK56_GAP = re.compile(r"(?i)\bgap\s*:?\s*(\d+(?:\.\d+)?)\s*(?:\"|in\b)")
++
++
++def be_gk56_fallas(canon):
++    """BE-GK56 (Grand Kia rev3b, medición U-193 / BE-GK54 del revisor independiente, 12-nov; unido de apartados/be_gk56 en v81cf128): el
++    destino de una exclusión 'same wall as <X>' salía del primer id escrito en el texto, que es numeración del LECTOR (5 de 10 destinos
++    apuntaban a otro wall). Regla: el destino es el wall del canon cuya band comparte la pieza, MEDIDO en el plano (gap_proof = gap medido
++    + N/HOJA); X que no es del canon = FAIL; gap > 0 = FALTA que entra por la cadena (la exclusión dice 'loaded as <ref>' y la ref existe).
++    CLI: compuerta_entrega.py be_gk56 <canon.json>."""
++    ids = {w.get("id") for w in (canon or {}).get("walls") or [] if isinstance(w, dict)}
++    ev = []
++    for e in (canon or {}).get("excluded_walls") or []:
++        r = str(e.get("reason") or "")
++        m = re.match(r"(?i)same wall as ([A-Za-z][\w.]*-[\w.-]*\w)\s*:", r)
++        if not m:
++            continue
++        x, gp = m.group(1), str(e.get("gap_proof") or "")
++        g = RX_GK56_GAP.search(gp)
++        if x not in ids:
++            ev.append(f"{e.get('id')}: 'same wall as {x}' but {x} is not a canon wall (BE-GK56)")
++        elif not (g and RX_NH_VALIDA.search(gp)):
++            ev.append(f"{e.get('id')}: 'same wall as {x}' without a measured gap_proof (gap + N/SHEET): the target may be a reader id read as "
++                      "a canon id; measure on the plan which canon band the piece lies on (BE-GK56)")
++        elif float(g.group(1)) > 0 and not any(re.search(r"(?i)loaded as " + re.escape(str(mi.get("ref", "")).split()[0]) + r"\b", r + " " + gp)
++                                                for mi in (canon or {}).get("misc_items") or [] if mi.get("ref")):
++            ev.append(f"{e.get('id')}: measured gap {g.group(1)}\" > 0 to {x}: not the same wall - it is a FALTA and goes through the chain (BE-GK56)")
++    return ev
++
++
+ def _gk55_clave(n):
+     if n.get("kind") == "T":
+         return ("T", n.get("branch"), n.get("through"))
+@@ -7056,6 +7107,10 @@
+             print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
+         print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
+         return 0 if o["ok"] else 1
++    if len(argv) > 2 and argv[1] == "be_gk56":                      # BE-GK56: destino 'same wall' medido
++        ev = be_gk56_fallas(json.load(open(argv[2], encoding="utf-8")))
++        print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
++        return 1 if ev else 0
+     if len(argv) > 3 and argv[1] == "be_gk55":                      # BE-GK55: canon anterior contra canon nuevo
+         ev = be_gk55_fallas(json.load(open(argv[2], encoding="utf-8")), json.load(open(argv[3], encoding="utf-8")),
+                             open(argv[4], encoding="utf-8").read() if len(argv) > 4 else "")
+diff -ruN v127/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v128/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v127/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:50:45.488554431 +0000
++++ v128/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:50:45.497590024 +0000
+@@ -3198,3 +3198,53 @@
+ 
+ 
+ test_v127_etiqueta_rev_cr()
++
++
++def test_v128_rev_con_letra():
++    """v128 (COORDINACIÓN 12-nov 23:44, CR rev20b, sintético): UNA REV_PAT con letra; orden 20 < 20a < 20b < 21; la carpeta 'rev20b FINAL
++    PARA REVISAR' valida de verdad (falta 'CAMBIOS rev20b vs rev20' = FAIL; RESUMEN_rev20 + RESUMEN_rev20b en la raíz = FAIL); sin rev
++    identificable = FAIL 'no se pudo identificar la rev' (no PASS en vacío)."""
++    assert sorted(["21", "20b", "20", "20a"], key=CE.rev_clave) == ["20", "20a", "20b", "21"]
++    assert CE.rev_de("Proposal_rev20b.xlsx") == "20b" and CE.rev_de("entrega_rev3b") == "3b" and CE.rev_de("prev3") is None
++    c = "rev20b FINAL PARA REVISAR"
++    assert CE.carpeta_rev_fallas(c) == [] and CE.carpeta_rev_fallas("rev20b FINAL — ESTA ES LA VERSION") != []
++    ev = CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev20 vs rev19\n", c)
++    assert ev and "rev20b" in ev[0], ev                                 # la primera sección es de otra rev = FAIL
++    assert CE.guia_cambios_fallas("# GUIA\nsin cambios\n", c), "falta la sección = FAIL"
++    assert CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev20b vs rev20\n", c) == []
++    assert CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev20b vs rev20a\n", c) == []
++    assert CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev21 vs rev20b\n", "rev21 FINAL PARA REVISAR") == []
++    ev = CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev20b vs rev20\n", "entrega")
++    assert ev and "no se pudo identificar la rev" in ev[0], ev          # sin rev = FAIL, no []
++    assert CE.guia_cambios_fallas("# GUIA\n## CAMBIOS rev20b vs rev20\n", "entrega", "20b") == []   # rev del Excel / PDF
++    assert CE.resumenes_fallas(["RESUMEN_rev20.md", "RESUMEN_rev20b.md", "GUIA.md"]), "dos RESUMEN en la raíz = FAIL"
++    d = tempfile.mkdtemp(prefix="v128_")
++    for n in ("RESUMEN_rev20.md", "RESUMEN_rev20b.md", "RESUMEN_rev9.md"):
++        open(os.path.join(d, n), "w").write(n)
++    class C:
++        w, entrega = d, None
++    txt, n = CE._ultimos_md(C())
++    assert n == "20b" and list(txt) == ["RESUMEN_rev20b.md"], (n, list(txt))   # rev20 y rev20b no se mezclan
++    print("test_v128_rev_con_letra OK")
++
++
++test_v128_rev_con_letra()
++
++
++def test_be_gk56():
++    """BE-GK56 (unido de apartados/be_gk56; casos de Grand Kia rev3b con ids sintéticos): destino 'same wall' leído del texto del lector
++    sin medición = FAIL; medido = PASS; gap > 0 sin cargar = FAIL (FALTA); cargado como RI-x = PASS; destino fuera del canon = FAIL."""
++    walls = [{"id": "X9-Z1-06"}, {"id": "X9-Z1-08"}, {"id": "G-Z2-19"}]
++    assert CE.be_gk56_fallas({"walls": walls, "excluded_walls": [{"id": "readerB_X9-Z1-05", "reason": "same wall as X9-Z1-06: Merged: same leaf"}]})
++    assert not CE.be_gk56_fallas({"walls": walls, "excluded_walls": [{"id": "readerB_X9-Z1-05", "reason": "same wall as X9-Z1-08: Merged",
++                                                                     "gap_proof": "gap 0\" (1/Z9.11) - the piece lies on the band"}]})
++    falta = {"walls": walls, "excluded_walls": [{"id": "readerA_G-Z2-15", "reason": "same wall as G-Z2-19: x", "gap_proof": "gap 6.9\" (1/Z9.11)"}]}
++    assert CE.be_gk56_fallas(falta), "gap > 0 = FALTA"
++    assert CE.be_gk56_fallas({"walls": walls, "excluded_walls": [{"id": "q", "reason": "same wall as X-Z9-99: x", "gap_proof": "gap 0\" (1/Z9.11)"}]})
++    cargada = {"walls": walls, "misc_items": [{"ref": "RI-18C furring board", "qty": 18.2}], "excluded_walls": [{"id": "readerA_G-Z2-15",
++               "reason": "same wall as G-Z2-19: its last part is a separate furring, loaded as RI-18C", "gap_proof": "gap 6.9\" (1/Z9.11)"}]}
++    assert not CE.be_gk56_fallas(cargada)
++    print("test_be_gk56 OK")
++
++
++test_be_gk56()
