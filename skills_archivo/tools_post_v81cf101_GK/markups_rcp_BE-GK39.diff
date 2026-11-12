@@ -1,0 +1,41 @@
+486,487c486
+<         # BE-CR36 (CR rev19, U-187): tampoco encima de otro FreeText ya puesto en la hoja (dos cuartos vecinos: 118B / 119 en A7.50)
+<         txt_imp += [tuple(fitz.Rect(an.rect * RM) + (-2, -2, 2, 2)) for an in p.annots() or [] if an.type[1] == "FreeText"]
+---
+>         txt_imp += [tuple(fitz.Rect(a_.rect) * RM) for a_ in p.annots() or [] if a_.type[1] == "FreeText"]   # BE-GK39 / U-187: never on another label
+495a495,529
+>         # BE-GK39 / U-187: two EXCLUDED rooms sharing one polygon (or touching) put their labels on top of each other: slide the
+>         # label up / down inside the room box until it touches no other label (visible coordinates)
+>         _otras = [fitz.Rect(a_.rect) * RM for a_ in p.annots() or [] if a_.type[1] == "FreeText"]
+>         def _choca(rr):
+>             return any(not (rr & o).is_empty and (rr & o).width > 0.5 and (rr & o).height > 0.5 for o in _otras)
+>         if _choca(rect):
+>             for k in range(1, 200):
+>                 hit = None
+>                 for sg in (1, -1):
+>                     c_ = rect + (0, sg * k * (alto + 1), 0, sg * k * (alto + 1))
+>                     if c_.y0 >= y0 - 0.01 and c_.y1 <= y1 + 0.01 and not _choca(c_):
+>                         hit = c_
+>                         break
+>                 if hit is not None:
+>                     rect = hit
+>                     break
+>                 if cy - k * (alto + 1) < y0 and cy + k * (alto + 1) > y1:
+>                     break
+>         if _choca(rect):                      # no slot at this font size: largest free band of the room box, text refitted to it
+>             occ = sorted((max(y0, o.y0), min(y1, o.y1)) for o in _otras if o.x1 > x0 and o.x0 < x1 and o.y1 > y0 and o.y0 < y1)
+>             gaps, yy = [], y0
+>             for a0, a1 in occ:
+>                 if a0 > yy:
+>                     gaps.append((yy, a0))
+>                 yy = max(yy, a1)
+>             if yy < y1:
+>                 gaps.append((yy, y1))
+>             for g0, g1 in sorted(gaps, key=lambda g: g[0] - g[1]):
+>                 fs2, tt2 = _ajustar(t, x1 - x0, g1 - g0 - 1)
+>                 if fs2 is not None:
+>                     al2 = len(tt2.split("\n")) * fs2 * 1.22 + 2
+>                     c2 = fitz.Rect(x0, (g0 + g1) / 2 - al2 / 2, x1, (g0 + g1) / 2 + al2 / 2)
+>                     if not _choca(c2):
+>                         rect, fs, tt = c2, fs2, tt2
+>                         break

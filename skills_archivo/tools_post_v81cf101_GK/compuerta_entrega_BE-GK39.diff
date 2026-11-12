@@ -1,0 +1,13 @@
+575,577c575,582
+<     def libre(c):
+<         return all((c & o).is_empty or (c & o).width <= tol or (c & o).height <= tol for o in ya)
+<     sel = next((c for c in cands if pr.contains(c) and libre(c)), next((c for c in cands if libre(c)), r))
+---
+>     def libre(c, contra=None):
+>         return all((c & o).is_empty or (c & o).width <= tol or (c & o).height <= tol for o in (ya if contra is None else contra))
+>     # BE-GK39 (Grand Kia rev2): a label inside a big destination Square (a whole detail view) never found a slot free of
+>     # EVERY annotation and fell back to `r`, so two '#k' of the same destination landed on top of each other. Second pass:
+>     # free of the other labels (FreeText) - text never on text (U-187).
+>     ya_txt = [pymupdf.Rect(a.rect) for a in pg.annots() or [] if a.type[1] == "FreeText"]
+>     sel = next((c for c in cands if pr.contains(c) and libre(c)), None) or \
+>         next((c for c in cands if pr.contains(c) and libre(c, ya_txt)), None) or next((c for c in cands if libre(c, ya_txt)), r)
