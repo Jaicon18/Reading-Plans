@@ -1,6 +1,6 @@
 diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:29:40.669711873 +0000
-+++ v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:29:40.676014088 +0000
++++ v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:32:05.928624851 +0000
 @@ -7846,7 +7846,7 @@
    {
     "id": "U-185",
@@ -52,13 +52,13 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     "categoria": "programa",
     "cuando": "entrega",
 -   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL",
-+   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas)",
++   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL",
     "chequeos": [
      "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
      "take-off:tools/compuerta_entrega.py::ce_cobertura"
 diff -ruN v119/take-off-metal-frame-drywall/SKILL.md v120/take-off-metal-frame-drywall/SKILL.md
 --- v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:29:40.673816205 +0000
-+++ v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:29:40.680713534 +0000
++++ v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:32:05.933307402 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -84,7 +84,7 @@ diff -ruN v119/take-off-metal-frame-drywall/SKILL.md v120/take-off-metal-frame-d
  
 diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:29:40.673689794 +0000
-+++ v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:29:40.676674427 +0000
++++ v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:32:05.929270361 +0000
 @@ -687,6 +687,7 @@
  FECHA_V109 = "2026-11-12T04:50:00+00:00"      # v81cf109: U-191 (documento citado con su ítem / párrafo)
  FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
@@ -191,17 +191,20 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
          out["regresiones"] = [r for r in out["regresiones"] if r.get("proyecto") != nom]
          vig = _correr_con(tools_vigente, w, os.path.join(_tf.mkdtemp(prefix="pa_"), "vig.json")) or {}
          cand = correr(w)
-@@ -6296,7 +6323,8 @@
+@@ -6296,7 +6323,11 @@
      return {"hojas": res, "filas": filas, "rojos": sum(r["rojos"] for r in res.values()), "ciegas": ciegas, "ciegas_rcp": ciegas_rcp}
  
  
 -RX_GK54_SAME = re.compile(r"(?i)\bsame\s+(?:single\s+)?wall\s+as\s+([A-Z][A-Z0-9]*-Z\d-\d{2})")
 +RX_GK54_SAME = re.compile(r"(?i)\b(?:same\s+(?:single\s+)?(?:wall\s+)?as|duplicate\s+of|part\s+of(?:\s+wall)?)\s+(?:wall\s+)?"
 +                          r"([A-Za-z0-9][\w./-]*[A-Za-z0-9])")      # v120: cualquier formato de id y los sinónimos
++
++
++RX_GK54_DISP_MISMO = re.compile(r"(?i)\bsame\s+(?:single\s+)?wall\b|\bsame\s+as\b|\bduplicate\s+of\b|\bpart\s+of\s+wall\b|\bmismo\s+muro\b")
  
  
  def be_gk54_fallas(canon, cob_rows, esc=9.0, gap_in=14.0, to_canon=None, escalas=None):
-@@ -6309,10 +6337,16 @@
+@@ -6309,24 +6340,34 @@
      ev = []
      for e in (canon or {}).get("excluded_walls") or []:
          m = RX_GK54_SAME.search(str(e.get("reason") or ""))
@@ -220,7 +223,27 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
              continue
          c_mid = (float(b["c0"]) + float(b["c1"])) / 2
          lo, hi = sorted((float(b["lo"]), float(b["hi"])))
-@@ -6489,14 +6523,18 @@
+         esc = float((escalas or {}).get(b.get("sheet")) or esc)          # escala de la hoja del mapa (pt / ft); GK A111 = 9
+         tol = (gap_in / 12.0) * esc + abs(float(b["c1"]) - float(b["c0"]))
+         for r in cob_rows:
+-            if r.get("hoja") != b.get("sheet") or r.get("tipo") != "muro" or r.get("estado") != "ROJO":
++            if r.get("hoja") != b.get("sheet") or r.get("tipo") != "muro" or r.get("estado") not in ("ROJO", "DISPUESTO"):
+                 continue
++            if r.get("estado") == "DISPUESTO":          # v120 (G4): una disposición 'same wall' no tapa la leaf sin la prueba del gap
++                dtx = str(r.get("disposicion") or "")
++                if dtx.strip() and (not RX_GK54_DISP_MISMO.search(dtx) or (re.search(r"(?i)\bgap\b", dtx) and RX_NH_TRAZA.search(dtx))):
++                    continue                                # (DISPUESTO sin el texto de su disposición = no se puede evaluar = FAIL)
+             rx, ry = to_canon(r["hoja"], float(r["x"]), float(r["y"]))
+             L = float(r.get("largo_ft") or 0) * esc
+             along, cross = (rx, ry) if b["ori"] == "H" else (ry, rx)
+             if abs(cross - c_mid) <= tol and along + L / 2 >= lo - esc and along - L / 2 <= hi + esc and abs(cross - c_mid) > 0.5:
+                 ev.append(f"{e.get('id')}: excluded as 'same wall as {m.group(1)}' but the coverage map has a separate parallel band "
+-                          f"{r['id']} ({rx:.1f}, {ry:.1f}) {r.get('largo_ft')} ft at {abs(cross - c_mid) / esc * 12:.1f} in. from it, RED: two "
++                          f"{r['id']} ({rx:.1f}, {ry:.1f}) {r.get('largo_ft')} ft at {abs(cross - c_mid) / esc * 12:.1f} in. from it, {r.get('estado')}: two "
+                           "leaves with a gap are two walls (BE-GK54); prove the gap does not exist ('gap_proof' with N/SHEET) or carry it")
+     return ev
+ 
+@@ -6489,14 +6530,18 @@
      ev += [f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')} con decision '{d.get('decision')}': solo "
             "NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo limpian un rojo (FALTA se corrige en la cadena)" for d in disp
             if not RX_COB_DECISION_OK.match(str(d.get("decision") or "").strip()) and not re.match(r"(?i)FALTA|MISSING", str(d.get("decision") or "").strip())]
@@ -244,7 +267,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
                        + ("escribió etapas 2-7 de la cadena (autor del canon / take-off)" if rv in autores else
                           "no está registrado en la bitácora con el rol revisor_cobertura (python3 tools/bitacora.py subagente "
                           "revisor_cobertura <id>)") + " (U-193)")
-@@ -6505,6 +6543,9 @@
+@@ -6505,6 +6550,9 @@
      if not (re.search(r"(?i)diagonal", gt) and re.search(r"(?i)(?:single|one|una sola)\s+(?:missing\s+)?(?:face|cara)", gt)):
          ev.append("la GUÍA del estimador no documenta los límites del mapa de cobertura (una sola cara faltante y los muros en diagonal NO "
                    "salen en rojo; COORDINACIÓN 12-nov)")
@@ -256,7 +279,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
              ev.append(f"falta {os.path.relpath(rutas[k], c.entrega)}: python3 -I tools/compuerta_entrega.py cobertura <carpeta de entrega>")
 diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:29:40.673577079 +0000
-+++ v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:29:40.676584812 +0000
++++ v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:32:05.929195110 +0000
 @@ -2445,7 +2445,8 @@
              wr.writerow({"hoja": f["hoja"], "tipo": f["tipo"], "id": f["id"], "x": f["x"], "y": f["y"], "decision": "NO ES NUESTRO",
                           "motivo": "EXISTING CONSTRUCTION TO REMAIN", "nhoja": "2/X9.01", "reviewer": "subagente R9", "imagen": f["imagen"]})
@@ -332,7 +355,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120
      finally:
          CE._correr_con, CE.correr = o1, o2
      print("test_v119_prueba_abiertos OK")
-@@ -2766,6 +2788,19 @@
+@@ -2766,6 +2788,25 @@
      tc = CE._gk54_desde_pdf(f)
      q = pymupdf.Point(1014.3, 1505.7) * pymupdf.open(f)[0].rotation_matrix
      assert tc("Z9.11", 1014.3, 1505.7) == (q.x, q.y) and tc("Z9", 1.0, 2.0) == (1.0, 2.0)
@@ -347,12 +370,18 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120
 +    assert not gk("X9-Z9-08", "same wall as X9-Z9-08", {"gap_proof": "1/X9.50 one wall, no gap"})
 +    ev = gk("X9-Z9-08", "same wall as X9-Z9-08", b={})
 +    assert ev and "no 'band'" in ev[0], ev                              # G6: sin band = FAIL, no salto silencioso
++    disp = lambda txt: [dict(red_v[0], estado="DISPUESTO", disposicion=txt)]          # noqa: E731   v120 (G4)
++    assert CE.be_gk54_fallas(canon, disp("NO ES NUESTRO: same wall as X9-Z9-08 (1/X9.11)")), "G4: disposición 'same wall' sin gap"
++    assert CE.be_gk54_fallas(canon, disp("duplicate of X9-Z9-08 (1/X9.11)"))
++    assert not CE.be_gk54_fallas(canon, disp("same wall as X9-Z9-08: no gap, 1/X9.50 shows one wall (1/X9.50)")), "con la prueba del gap"
++    assert not CE.be_gk54_fallas(canon, disp("EXISTING CONSTRUCTION TO REMAIN (2/X9.11)")), "otra disposición no es GK54"
++    assert CE.be_gk54_fallas(canon, disp("")), "DISPUESTO sin texto de disposición no se puede evaluar = FAIL"
 +    ev = CE.be_gk54_fallas({"walls": [], "excluded_walls": [{"id": "EX", "reason": "same wall as X9-Z9-77"}]}, red_v)
 +    assert ev and "not a wall of the canon" in ev[0], ev
      print("test_be_gk54 OK")
  
  
-@@ -2810,6 +2845,11 @@
+@@ -2810,6 +2851,11 @@
      rows = [json.loads(x) for x in open(os.path.join(w, "bitacora.jsonl"))]
      import bitacora as BT
      assert BT.cadena_ok(rows) == 0, "los sellos respetan la cadena de hashes"

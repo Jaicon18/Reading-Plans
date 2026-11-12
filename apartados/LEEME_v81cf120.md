@@ -63,3 +63,16 @@ AL PUBLICAR:
 - REGLAS_REGISTRO.json (el del skill) va al registro de las órdenes;
 - PRUEBA_ABIERTOS_v81cf120.json (con XF, GK y CR) va a skills_archivo/;
 - INDICE.
+
+## Ampliación (COORDINACIÓN 21:30)
+
+- Arrastre de U-185 desde el 12b: APROBADO (el 11-11 quedó re-revisado completo el 12-nov).
+- G4: be_gk54_fallas corre también sobre los rojos DISPUESTO. Da FAIL si la disposición dice 'same wall' / 'same as' / 'duplicate of' /
+  'part of wall' / 'mismo muro' sin la prueba del gap (la palabra 'gap' + N/HOJA), o si el DISPUESTO no trae el texto de su disposición.
+  Una disposición de otro tipo ('EXISTING CONSTRUCTION TO REMAIN') no es un caso GK54.
+  - Test: test_be_gk54 con 5 casos nuevos.
+  - adv_gk54 G4 = True.
+- G5 (leaves fusionadas por el detector) queda como límite documentado en la GUÍA.
+- Pruebas: test_compuerta_entrega + test_ciego re-corridos OK (el resto de la suite no cambió: 47/47); 199 archivos.
+- PRUEBA_ABIERTOS de XF re-corrida con el sha nuevo: 0 regresiones.
+- Parche re-generado y probado con -p1 sobre el zip de v119.
