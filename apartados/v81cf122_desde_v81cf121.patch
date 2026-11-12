@@ -1,0 +1,163 @@
+diff -ruN v121/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v122/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v121/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 22:49:27.560711208 +0000
++++ v122/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 22:49:27.568068678 +0000
+@@ -8481,7 +8481,7 @@
+   {
+    "id": "U-193",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
+-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121)",
++   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8497,7 +8497,8 @@
+     "take-off:tools/bitacora.py::subagente",
+     "take-off:tools/bitacora.py::run",
+     "take-off:tools/compuerta_entrega.py::norm_txt",
+-    "take-off:tools/compuerta_entrega.py::norm_agente"
++    "take-off:tools/compuerta_entrega.py::norm_agente",
++    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+diff -ruN v121/take-off-metal-frame-drywall/SKILL.md v122/take-off-metal-frame-drywall/SKILL.md
+--- v121/take-off-metal-frame-drywall/SKILL.md	2026-11-12 22:49:27.560555839 +0000
++++ v122/take-off-metal-frame-drywall/SKILL.md	2026-11-12 22:49:27.572156149 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf121** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf122** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,8 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf122 (COORDINACIÓN 12-nov, CR):** en CE_COBERTURA las corridas de la bitácora sin agente fechadas ANTES de v81cf119 salen AMBER
++  con su causa (como proceso_v119); las de después o sin fecha = FAIL (corridas_sin_agente_por_fecha).
+ - **BE-GK55 (Grand Kia rev3b, REVERIF17 R17-F1; unido en v81cf121):** un wall nuevo no cambia por proximidad las uniones de un wall que
+   no cambió (patch F-Z1-21 en T con A-Z1-13 con el CMU de por medio: +1 stud = +8.21 LF de 362S162-19). Entre dos revs, todo nodo NUEVO
+   (L / T / split) que toca un wall con la misma band va en CAMBIOS_<rev>.txt con los dos ids, o el par se declara 'no se tocan'
+Binary files v121/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v122/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v122/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v122/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v121/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v122/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v121/take-off-metal-frame-drywall/tools/compuerta_entrega.py v122/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v121/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 22:49:27.563611086 +0000
++++ v122/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 22:49:27.571530107 +0000
+@@ -3787,6 +3787,24 @@
+         t = t2
+ 
+ 
++def corridas_sin_agente_por_fecha(sin):
++    """v122 (COORDINACIÓN 12-nov, CR): corridas sin agente ('<tool> <ts>') -> (viejas: ts ANTES de FECHA_V119, nuevas: desde FECHA_V119 o
++    sin fecha). ts de bitacora.py sin zona = UTC (contenedor). Viejas = AMBER con causa; nuevas = FAIL."""
++    lim = datetime.datetime.fromisoformat(FECHA_V119)
++    viejas, nuevas = [], []
++    for x in sin or []:
++        m = re.search(r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?(?:[+-]\d{2}:\d{2}|Z)?)\s*$", str(x))
++        t = None
++        if m:
++            try:
++                t = datetime.datetime.fromisoformat(m.group(1).replace("Z", "+00:00"))
++                t = t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
++            except ValueError:
++                t = None
++        (viejas if t is not None and t < lim else nuevas).append(x)
++    return viejas, nuevas
++
++
+ def subagentes_bitacora(w):
+     """U-193 (verificaciones 12b, 2 y 3): de la bitácora SELLADA -> (revisores, autores, autores del canon, corridas sin agente).
+     Revisores = `bitacora.py subagente revisor_cobertura <id>` (rol EXACTO). Autores = el 'agente' (SUBAGENTE_ID) de cada corrida de
+@@ -6803,9 +6821,14 @@
+     if disp and not canon_ids:
+         ev.append("la bitácora no tiene corridas de canon.py con su agente (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py "
+                   "run): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
+-    if disp and sin_agente:
+-        ev.append(f"{len(sin_agente)} corrida(s) de las etapas 2-7 sin agente en la bitácora ({', '.join(sin_agente[:4])}): cada subagente "
+-                  "trabaja con SUBAGENTE_ID (U-193)")
++    viejas, nuevas = corridas_sin_agente_por_fecha(sin_agente)
++    amber = []
++    if disp and nuevas:
++        ev.append(f"{len(nuevas)} corrida(s) de las etapas 2-7 sin agente en la bitácora DESDE v81cf119 ({', '.join(nuevas[:4])}): cada "
++                  "subagente trabaja con SUBAGENTE_ID (U-193)")
++    if disp and viejas:                                 # v122 (COORDINACIÓN, CR: miles de corridas históricas)
++        amber.append(f"causa: {len(viejas)} corrida(s) sin agente fechadas ANTES de v81cf119 ({FECHA_V119}; la primera {viejas[0]}): "
++                     "SUBAGENTE_ID no se exige retroactivamente (como proceso_v119)")
+     for d in disp:
+         rv0 = str(d.get("revisor") or d.get("reviewer") or "").strip()
+         rv = norm_agente(rv0)
+@@ -6840,7 +6863,9 @@
+             ev.append(f"{cl[0]} no se pudo leer: {e}")
+     res = "; ".join(f"{h} {v['tipo']}: muros {v['cubierto_%_lf'] if v['cubierto_%_lf'] is not None else '-'} % LF, cuartos {v['cuartos_ok']}"
+                     f"+{v['cuartos_exc']} de {v['cuartos']}, rojos {v['rojos']}" for h, v in r["hojas"].items())
+-    return R("FAIL", *ev, res) if ev else R("PASS", f"0 rojos en {len(r['hojas'])} hoja(s): {res}")
++    if ev:
++        return R("FAIL", *ev, *amber, res)
++    return R("AMBER", *amber, res) if amber else R("PASS", f"0 rojos en {len(r['hojas'])} hoja(s): {res}")
+ 
+ def main(argv):
+     if len(argv) > 1 and argv[1] == "banco":
+diff -ruN v121/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v122/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v121/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 22:49:27.561262749 +0000
++++ v122/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 22:49:27.568649285 +0000
+@@ -3051,3 +3051,16 @@
+ 
+ 
+ test_be_gk55()
++
++
++def test_v122_sin_agente_historico():
++    """v122 (COORDINACIÓN 12-nov, CR con miles de corridas históricas sin agente): las corridas sin agente fechadas ANTES de
++    FECHA_V119 salen AMBER con su causa; las de después (o sin fecha) dan FAIL. Sintético."""
++    v, n = CE.corridas_sin_agente_por_fecha(["canon.py 2026-11-06T10:00:00", "calc.py 2026-11-12T18:59:00", "canon.py 2026-11-12T19:00:01",
++                                             "canon.py ", "excel.py 2026-11-12T20:00:00+00:00"])
++    assert v == ["canon.py 2026-11-06T10:00:00", "calc.py 2026-11-12T18:59:00"], v
++    assert n == ["canon.py 2026-11-12T19:00:01", "canon.py ", "excel.py 2026-11-12T20:00:00+00:00"], n
++    print("test_v122_sin_agente_historico OK")
++
++
++test_v122_sin_agente_historico()

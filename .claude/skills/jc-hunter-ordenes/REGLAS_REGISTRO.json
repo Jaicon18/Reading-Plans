@@ -8481,7 +8481,7 @@
   {
    "id": "U-193",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121)",
+   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8497,7 +8497,8 @@
     "take-off:tools/bitacora.py::subagente",
     "take-off:tools/bitacora.py::run",
     "take-off:tools/compuerta_entrega.py::norm_txt",
-    "take-off:tools/compuerta_entrega.py::norm_agente"
+    "take-off:tools/compuerta_entrega.py::norm_agente",
+    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
