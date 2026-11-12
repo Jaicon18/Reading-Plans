@@ -96,7 +96,7 @@ G += ["", "## Coverage map limits (U-193)",
       "detected (only horizontal / vertical walls); (3) a missing ceiling inside a stacked (double) ceiling is checked by the double-ceiling",
       "review (Auditoria/DOBLE_CIELO.csv), not by the map; (4) dimension / extension lines with 45-degree ticks and door leaves are filtered",
       "out, but dimensions drawn with ARROWS are not, so an arrow-dimension pair may still show as a red (the independent reviewer disposes it);",
-      "(5) two leaves of a wall that the map fuses into one covered wall do not show in red: a 'same wall' exclusion needs its gap_proof with N/SHEET."]
+      "(5) two leaves of a wall that the map fuses into one covered wall do not show in red: a 'same wall' exclusion needs its gap_proof with N/SHEET and the gap measured 0."]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 Z = ["# RESUMEN rev1 FINAL — Xfinity Interquest (Colorado Springs, CO)", "",
  "Primera y única entrega (U-169): revisión independiente completa hecha ANTES de entregar.", "",

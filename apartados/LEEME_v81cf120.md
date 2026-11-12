@@ -76,3 +76,57 @@ AL PUBLICAR:
 - Pruebas: test_compuerta_entrega + test_ciego re-corridos OK (el resto de la suite no cambió: 47/47); 199 archivos.
 - PRUEBA_ABIERTOS de XF re-corrida con el sha nuevo: 0 regresiones.
 - Parche re-generado y probado con -p1 sobre el zip de v119.
+
+## Ampliación 2 (COORDINACIÓN 21:42): verificación 4 (d67651e), última ronda — normalización común y parsers compartidos
+
+1. `norm_txt()`, UNA función con el mismo código en compuerta_entrega y en verificar_version:
+   - NFKC;
+   - todo guion Unicode a '-', y '--' a '-';
+   - fuera el ancho cero;
+   - espacios, NBSP y tabs colapsados;
+   - minúsculas.
+   La usan U-185 (estados e ids), U-193 (ids de agente y revisor), GK54 (razones, disposiciones, gap_proof) y el parser de TIEMPOS.md.
+2. U-185:
+   - el estado cierra solo con match COMPLETO de 'ok - confirmed-closed' después de norm_txt;
+   - cada `_VERIFICACION` lleva 'Fecha: YYYY-MM-DD HH:MM PT|UTC' en su encabezado; sin ella, o más de 10 min en el futuro, = FALLA y esa
+     verificación no cuenta;
+   - un renglón cierra SOLO el id de su primera columna; `NG-N.M / id` cierra la causa N.M y ese id; texto suelto no cierra nada.
+   - Ojo: las 4 verificaciones que ya existen no traen 'Fecha:', así que hoy verificar_version da 4 fallas más. La próxima verificación
+     tiene que traer el campo.
+   - Tests: `adv4_postmortem` (D1-D7) y `postmortem_u185`.
+3. BE-PM04:
+   - RESULTADO.md cierra solo con 'Comparado: <fecha con zona>' posterior a la última subida / VERSION_PROYECTO y con N > 0;
+   - SUBIDA_OK con 'fecha_iso' o 'fecha'; sin fecha o sin zona = FALLA en verificar_version y el proyecto cuenta como abierto;
+   - en PRUEBA_ABIERTOS cada proyecto trae los conteos de la vigente y de la candidata (> 0);
+   - una carpeta de la lista que no es proyecto (sin SUBIDA_OK ni VERSION_PROYECTO.txt) = FALLA.
+   - Tests: `adv4_prueba_abiertos` (Q1-Q6) y `prueba_abiertos_be_pm04`.
+   - Real: CR cuenta como abierto (su RESULTADO.md no trae 'Comparado:'); ya está en la lista.
+4. BE-PM06: `filas_tiempos` es EL parser de TIEMPOS.md.
+   - Lo usan `_pasos_tiempos` y `tiempos_fallas` (CE_TIEMPOS), `pasos_cerrados_tiempos` (exigir --paso) y `tiempos_cuadran_fallas`.
+   - Entiende: guiones Unicode, negritas, 4a, 3 columnas, columnas en cualquier orden según el encabezado, y filas sin número de paso
+     ('rev15') para los encimados de CE_TIEMPOS.
+   - '--paso 9' o '1-9' no cubren otros pasos.
+   - Test: `test_v120_adv4` (F0-F8).
+5. U-193:
+   - ids con norm_txt (U7-U12: mayúsculas, doble espacio, NBSP, ancho cero, tab);
+   - la tool se toma por su nombre base ('tools/canon.py' = canon.py, U13).
+   - Test: `test_v120_adv4`.
+6. GK54:
+   - `gk54_mismo_muro`: lista amplia de sinónimos, la MISMA en la exclusión y en DISPUESTO (same wall/leaf (as, ':', comillas, paréntesis,
+     'same-wall'), duplicate / dup of, part of, already counted in / with, counted with / in, included in, identical to, see <id> (solo si
+     <id> es un wall del canon), mismo muro (que));
+   - `gap_prueba_ok`: N/HOJA válido (regex de hoja) + el gap MEDIDO en 0 (p. ej. 'gap 0" (1/A150)'); 'n/a', 'none', 'no gap' o un gap > 0
+     (H2b) = no vale.
+   - Test: `test_v120_adv4` (H0-H7).
+7. Todos los adv4_* están en la suite: test_compuerta_entrega::test_v120_adv4 y selftest de verificar_version (adv4_postmortem,
+   adv4_prueba_abiertos).
+
+Pruebas (Ampliación 2):
+- suite 47/47; una corrida intermedia falló en test_tiempos_cita_sf (filas 'rev15' sin número de paso) y quedó arreglada en filas_tiempos;
+- banco 0 distintas en 8 proyectos;
+- reglas.py 0 sin clasificar;
+- 199 archivos;
+- selftest de verificar_version OK (incluye adv4_postmortem y adv4_prueba_abiertos);
+- adversariales_v119 + adversariales_v120 corridos contra el candidato (adv4_pm con su copia mínima del cache).
+- PRUEBA_ABIERTOS de XF re-corrida con las tools finales (sha 5c903a278cbd): 0 regresiones.
+- Parche probado con -p1 sobre el zip de v119.
