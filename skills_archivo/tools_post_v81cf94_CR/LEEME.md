@@ -35,3 +35,8 @@ No es una versión publicada. INDICE.md y VERSION_EN_CURSO.md NO se tocaron.
 - Regla (todos los proyectos): antes de reemplazar un bloque de un script de entrega, diff contra la copia en cache_proyectos y dar cuenta de cada línea quitada.
 - Test: BE-CR38/test_be_cr38.py (2 casos: bloque borrado -> cobertura_ab FAIL; partidos en A / B / final -> 0 fallas). 2/2 OK contra v81cf102.
 - También en rev20 (U-181): las dos lecturas ciegas H-A / H-B del smoke curtain 12/A9.03 omitieron la 5a cara (lado shaft, 23.73"); la auditoría independiente la encontró. Lección para BE-GK40 / pregunta ciega: pedir "TODAS las caras con board, incluida la del lado del muro / shaft", y comparar contra la revisión anterior cuando el ancho BAJA.
+
+## BE-CR40 — CR City Hotel rev20 (12-nov, error mío de reporte) — carpeta BE-CR40/
+- Reporté a COORDINACIÓN que el cielo GYP-1 8'-11" de los corredores (7/A7.23) NO estaba cargado: busqué el TEXTO "8'-11"" en el JSON del canon, donde la comilla va escapada (8'-11\"), y no casó. Estaba cargado (CLG-L2-56 / -58, CLG-L3-87 / -88; L4 412 = RS-1) y canon.rcp_tags lo decía. COORDINACIÓN se lo repitió al usuario.
+- Regla (todos los proyectos): antes de reportar un faltante, buscar por ID / TAG en canon.rcp_tags (rows / none_reason) y por ref en misc_items / ceilings; nunca por texto libre del JSON.
+- Test: BE-CR40/test_be_cr40.py con faltante_por_tag() (búsqueda propuesta para la unión): 2/2 OK.
