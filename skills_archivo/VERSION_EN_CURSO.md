@@ -134,3 +134,5 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - CONGELADO de nuevo 2026-11-12 (orden COORDINACIÓN): no se publica v81cf114 hasta que COORDINACIÓN avise
 - v81cf114 APARTADA (sin publicar, congelado) · Xfinity · 12-nov 14:41 UTC · v81cf113 + BE-AUD05..09 (CB_U_191 'UL Lxxx' sin Item, CB_RCP_APILADOS en vacío, CE_RCP_COMPLETO N/A con SOF, CE_RESUMEN_EXCEL, versión de ENTREGA_OK) · en curso
 - v81cf114 APARTADA y lista (sin publicar, congelado): candidato en apartados/ (patch + LEEME), suite 47/47, banco 0, verificar OK; BIBLIOTECA / ORDENES con BE-AUD05..09 (el hook marca FALTAN para v113 mientras siga congelado)
+- ACTUALIZACIÓN 2026-11-12: **v81cf114 PUBLICADA** (orden COORDINACIÓN 14:56 UTC, para CR rev20a / GK rev3a) = skills_archivo/take-off-metal-frame-drywall_v81cf114_BE-AUD05-09-sin-vacios_2026-11-12.zip = v81cf113 + BE-AUD05..09 + BE-GK49 (VIGENTE en INDICE; 199 archivos, suite 47/47, banco 0 distintas en 8 proyectos, verificar_version OK de carpeta y zip)
+- CONGELADO de nuevo 2026-11-12 (orden COORDINACIÓN): no se publica v81cf115 hasta que COORDINACIÓN avise
