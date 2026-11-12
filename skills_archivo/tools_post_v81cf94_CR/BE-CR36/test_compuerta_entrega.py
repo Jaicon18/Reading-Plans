@@ -1747,13 +1747,36 @@ def test_u187_textos_legibles():
 test_u187_textos_legibles()
 
 
+def test_be_cr35_not_blind():
+    """BE-CR35 (CR rev19, 12-nov): soffits / beam wraps (SOF-*, BW-*, Depth = ancho desarrollado) entraron a ALTURAS_IMPRESAS como
+    '[take-off detail reading, not blind]' sin la doble lectura ciega H-A / H-B: 'not blind' = FAIL y todo markup con Depth falta en A /
+    B = FAIL; con SOF / BW leídos por A y B = PASS; la página de ALTURAS_REVISADAS de un SOF dice 'developed board width per LF'."""
+    import comparar_alturas as CA
+    a = [{"Wall ID": "Z9-01", "Printed H": "10"}]
+    final = a + [{"Wall ID": "SOF-Z9-01", "Printed H": "0.917", "Source": "X9.3 [take-off detail reading, not blind]", "Status": "DERIVED"}]
+    ev = CA.cobertura_ab(a, list(a), final, ["Z9-01 A", "BW-Z9-02"])
+    assert any("not blind" in e for e in ev) and sum("SOF-Z9-01: falta" in e for e in ev) == 2 and sum("BW-Z9-02: falta" in e for e in ev) == 2, ev
+    ab = a + [{"Wall ID": "SOF-Z9-01", "Printed H": "0.917"}, {"Wall ID": "BW-Z9-02", "Printed H": "2.5"}]
+    final_ok = ab[:2]
+    assert CA.cobertura_ab(ab, list(ab), [dict(r, Source="X9.3 + 4/X9.5") for r in final_ok], ["Z9-01 A", "BW-Z9-02", "DEMO-DEMO-03"][:2]) == []
+    w = tempfile.mkdtemp(prefix="cr35_")
+    pdf = os.path.join(w, "ALTURAS_REVISADAS.pdf")
+    CA.alturas_revisadas([{"Wall ID": "SOF-Z9-01", "Printed H": "0.917", "Source": "X9.3", "Operation": "", "Status": "DERIVED", "Image": ""}],
+                         w, pdf, {"L9": 10.0}, {})
+    assert "developed board width per LF" in pymupdf.open(pdf)[0].get_text()
+    print("test_be_cr35_not_blind OK")
+
+
+test_be_cr35_not_blind()
+
+
 def test_be_cr36_textos_markups():
     """BE-CR36 (CR rev19, U-187): LEGEND - una celda larga cabe en su columna; EXCLUDED de dos cuartos vecinos no se enciman."""
     import pymupdf
     import markups_bluebeam as MB
     import markups_rcp as MR
     fs, v = MB.celda_legible("CH.6-2 - SHAFT WALL (C-H STUDS AND J-RUNNER, 1 IN LINER, 2 HR) - 2 LAYERS EACH SIDE", 194)
-    assert pymupdf.get_text_length(v, fontname="helv", fontsize=fs) <= 194 and fs >= 5.5, (fs, v)
+    assert pymupdf.get_text_length(v, fontname="helv", fontsize=fs) <= 194 and fs >= 3.5 and "..." not in v, (fs, v)
     assert MB.celda_legible("50", 64) == (10.0, "50")
     d = pymupdf.open(); pg = d.new_page(width=800, height=600); d.set_page_labels([{"startpage": 0, "prefix": "A7.50", "style": ""}])
     tmp = "/tmp/_be_cr36.pdf"; d.save(tmp)
@@ -1768,3 +1791,23 @@ def test_be_cr36_textos_markups():
 
 
 test_be_cr36_textos_markups()
+
+
+def test_be_cr37_un_lado():
+    """BE-CR37 (CR rev19 7/A7.23, usuario 12-nov): el ancho desarrollado de un soffit de corridor se armó con el fondo 4 1/2" del lado
+    DERECHO + la caída 6 1/2" del IZQUIERDO = FAIL; sin side / faces = FAIL; las dos cotas del mismo lado con side = PASS; en
+    CE_ALTURAS_EXTREMO es FAIL en entregas nuevas y AMBER en las subidas antes de v81cf100."""
+    import comparar_alturas as CA
+    mal = [{"Wall ID": "SOF-Z9-01", "Printed H": "0.917", "side": "", "faces": 'bottom 4 1/2" right; drop 6 1/2" left'}]
+    ev = CA.lados_fallas(mal)
+    assert any("lados distintos" in e for e in ev) and any("sin 'side'" in e for e in ev), ev
+    assert any("sin 'faces'" in e for e in CA.lados_fallas([{"Wall ID": "BW-Z9-02", "Printed H": "1.5", "side": "left"}]))
+    bien = [{"Wall ID": "SOF-Z9-01", "Printed H": "0.917", "side": "right", "faces": 'bottom 4 1/2" right; drop 6 1/2" right'},
+            {"Wall ID": "SOF-Z9-01 L", "Printed H": "0.75", "side": "left", "faces": 'bottom 4 1/2" x=310; drop 4 1/2" x=322'},
+            {"Wall ID": "Z9-01", "Printed H": "10"}]
+    assert CA.lados_fallas(bien) == []
+    assert CE.FECHA_V100 > CE.FECHA_V96
+    print("test_be_cr37_un_lado OK")
+
+
+test_be_cr37_un_lado()

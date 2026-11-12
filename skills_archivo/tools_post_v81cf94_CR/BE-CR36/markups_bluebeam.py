@@ -611,16 +611,14 @@ def totales(canon, geo):
     return dict(sorted(out.items(), key=lambda kv: (kv[0].startswith(OTHER), kv[0])))
 
 
-def celda_legible(v, ancho, fs=10.0, minimo=5.5):
+def celda_legible(v, ancho, fs=10.0, minimo=3.5):
     """BE-CR36 (CR rev19, usuario 12-nov 'datos ensimados'): texto de una celda de la LEGEND que cabe en su columna: baja la letra hasta
-    'minimo'; si aun así no cabe, recorta con '...' (el type completo sigue en el Subject del markup). -> (fontsize, texto)"""
+    'minimo' (3.5 pt); nunca recorta (el verificador exige el type completo en la leyenda). -> (fontsize, texto)"""
     import pymupdf
     v = str(v)
     while fs > minimo and pymupdf.get_text_length(v, fontname="helv", fontsize=fs) > ancho:
         fs = round(fs - 0.5, 2)
-    while len(v) > 4 and pymupdf.get_text_length(v, fontname="helv", fontsize=fs) > ancho:
-        v = v[:-4] + "..."
-    return fs, v
+    return fs, v      # nunca se recorta: la leyenda lleva el type completo (verificar: 'falta el type ...'); la letra baja hasta caber
 
 
 def _leyenda(doc, canon, geo, sin, cols, nombre_canon):
