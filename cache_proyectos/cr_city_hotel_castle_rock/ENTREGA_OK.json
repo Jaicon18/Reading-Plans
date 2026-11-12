@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 22:31 PST",
- "fecha_iso": "2026-11-12T06:31:00.191939+00:00",
+ "fecha_california": "2026-11-12 07:51 PST",
+ "fecha_iso": "2026-11-12T15:51:52.506560+00:00",
  "workdir": "/root/cr/work/entrega",
  "entrega_dir": "rev20 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 227,
+  "PASS": 229,
   "AMBER": 6,
   "FAIL": 0
  },
@@ -34,7 +34,7 @@
    "descripcion": "carpeta de entrega completa: Take-off/*.xlsx, Planos marcados/ (PDF + PNG), README_REVIEW.md, PARA_REVISAR_EN_LA_MANANA.md, SEGUIMIENTO.md",
    "estado": "PASS",
    "evidencia": [
-    "2467 archivos en rev20 FINAL PARA REVISAR"
+    "2478 archivos en rev20 FINAL PARA REVISAR"
    ],
    "segundos": 0.0,
    "plausibilidad": "OK"
@@ -70,14 +70,15 @@
   {
    "id": "CE_PROPOSAL",
    "reglas": [
-    "U-150"
+    "U-150",
+    "U-192"
    ],
    "descripcion": "U-150: la proposal (Proposal/) tiene INCLUDED y NOT INCLUDED, cada renglón cargado del Material Summary en INCLUDED, cada EXCLUDED del Scope en NOT INCLUDED y cada precio de material con su fuente y fecha FBM",
    "estado": "PASS",
    "evidencia": [
     "1 proposal(s): INCLUDED / NOT INCLUDED completos y precios FBM con fuente"
    ],
-   "segundos": 0.43,
+   "segundos": 0.49,
    "plausibilidad": "OK"
   },
   {
@@ -154,7 +155,7 @@
    "evidencia": [
     "datos del proyecto en las 4 fuentes"
    ],
-   "segundos": 0.11,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -168,7 +169,7 @@
    "estado": "AMBER",
    "evidencia": [
     "pasos 1–9 con hora, sin filas encimadas, TOTAL = suma; TIEMPOS.md",
-    "TOTAL 2699 min = 375 % del presupuesto 720 min (84 hojas A) — causa escrita"
+    "TOTAL 3258 min = 452 % del presupuesto 720 min (84 hojas A) — causa escrita"
    ],
    "segundos": 0.01,
    "plausibilidad": "OK"
@@ -186,7 +187,7 @@
    "evidencia": [
     "0 textos encimados en 4 PDF generados"
    ],
-   "segundos": 3.49,
+   "segundos": 3.27,
    "plausibilidad": "OK"
   },
   {
@@ -217,7 +218,7 @@
    "evidencia": [
     "sin horas en UTC"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -232,7 +233,7 @@
    "evidencia": [
     "sin montos en dólares"
    ],
-   "segundos": 0.5,
+   "segundos": 0.44,
    "plausibilidad": "OK"
   },
   {
@@ -264,7 +265,7 @@
    "evidencia": [
     "0 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
    ],
-   "segundos": 0.05,
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -308,7 +309,7 @@
    "evidencia": [
     "0 RFI abiertos y ningún 'not printed / assumed' sin RFI o decisión"
    ],
-   "segundos": 0.05,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -324,7 +325,7 @@
    "evidencia": [
     "21 archivos con nombre que dice qué son; rutas Windows <= 230"
    ],
-   "segundos": 0.1,
+   "segundos": 0.13,
    "plausibilidad": "OK"
   },
   {
@@ -337,9 +338,9 @@
    "descripcion": "U-166 (usuario 11-nov: 'si ya sabes que va a pasar si cometes un error, por que no lo arreglas antes de que yo te lo diga'): simula el uso real del usuario en Windows / Bluebeam / Excel: (1) ruta Windows en Drive <= 230 (Auditoria.zip = un archivo, nombres dentro <= 120); (2) PDF de markups abre sin contraseña ni firmas y CE_VISTA_BLUEBEAM en PASS; (3) ningún nombre con < > : \" / \\ | ? *; (4) el Excel abre sin #REF! / #VALUE! / #DIV/0!; (5) test con la ruta de rev18 (264) = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "2467 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
+    "2478 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
    ],
-   "segundos": 20.22,
+   "segundos": 20.38,
    "plausibilidad": "OK"
   },
   {
@@ -352,7 +353,7 @@
    "evidencia": [
     "10 walls más largas re-medidas en vectores: max |delta| 0.79 ft"
    ],
-   "segundos": 4.88,
+   "segundos": 5.37,
    "plausibilidad": "OK"
   },
   {
@@ -366,7 +367,7 @@
    "evidencia": [
     "31 alturas distintas con su cota impresa (o sus valores impresos)"
    ],
-   "segundos": 1.85,
+   "segundos": 1.91,
    "plausibilidad": "OK"
   },
   {
@@ -397,7 +398,7 @@
    "evidencia": [
     "CR_CHECKLIST_REVISION.xlsx: 5 secciones llenas (10 walls, todas las alturas, todas las exclusiones)"
    ],
-   "segundos": 0.24,
+   "segundos": 0.25,
    "plausibilidad": "OK"
   },
   {
@@ -414,7 +415,21 @@
    "evidencia": [
     "68 cuartos en 5 hojas RCP: renglón o exclusión; 22 exclusiones con su FreeText EXCLUDED ({'A3.01': 8, 'A3.02': 6, 'A3.03': 6, 'A3.04': 14, 'A7.30': 2, 'A7.45': 3, 'A7.50': 6, 'LEGEND': 1})"
    ],
-   "segundos": 0.52,
+   "segundos": 0.53,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_VERSION_ENTREGA",
+   "reglas": [
+    "BE-AUD09",
+    "U-177"
+   ],
+   "descripcion": "BE-AUD09 (GK rev3: ENTREGA_OK decía v101 y el LEEME v113): la versión que escribe la compuerta en ENTREGA_OK (línea VERSION de SKILL.md) es la versión vigente del skill y la que declaran LEEME / README / TIEMPOS",
+   "estado": "PASS",
+   "evidencia": [
+    "compuerta con v81cf116; 3 documento(s) de la entrega sin otra versión declarada"
+   ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -445,7 +460,7 @@
    "evidencia": [
     "214 polígonos de cielo / EXCLUDED sobre las líneas de su hoja y en su vista RCP {'n': 214, 'min': 0.58, 'mediana': 1.0}"
    ],
-   "segundos": 11.21,
+   "segundos": 12.13,
    "plausibilidad": "OK"
   },
   {
@@ -461,7 +476,7 @@
    "evidencia": [
     "0 RFI 'not printed' con búsqueda exhaustiva (0 abiertos)"
    ],
-   "segundos": 0.0,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -475,7 +490,7 @@
    "evidencia": [
     "toda decisión del estimador con cita"
    ],
-   "segundos": 0.03,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -489,7 +504,7 @@
    "evidencia": [
     "59 cierres citados"
    ],
-   "segundos": 1.11,
+   "segundos": 1.05,
    "plausibilidad": "OK"
   },
   {
@@ -520,7 +535,7 @@
    "evidencia": [
     "919 filas GREEN contra la altura impresa"
    ],
-   "segundos": 2.91,
+   "segundos": 2.75,
    "plausibilidad": "OK"
   },
   {
@@ -563,7 +578,7 @@
     "type XW.6.2-0: AMBER (el schedule no lo dice)",
     "type XW.6.2-2: AMBER (el schedule no lo dice)"
    ],
-   "segundos": 0.14,
+   "segundos": 0.15,
    "plausibilidad": "OK"
   },
   {
@@ -596,7 +611,7 @@
    "evidencia": [
     "3640 revisiones OK"
    ],
-   "segundos": 2.66,
+   "segundos": 2.98,
    "plausibilidad": "OK"
   },
   {
@@ -620,9 +635,9 @@
    "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
    "estado": "PASS",
    "evidencia": [
-    "reglas.py OK (938 reglas)"
+    "reglas.py OK (941 reglas)"
    ],
-   "segundos": 7.88,
+   "segundos": 8.31,
    "plausibilidad": "OK"
   },
   {
@@ -636,7 +651,7 @@
    "evidencia": [
     "148 páginas = original (XObjects faltantes: original 0, copia 0, todos también en el original)"
    ],
-   "segundos": 38.53,
+   "segundos": 43.34,
    "plausibilidad": "OK"
   },
   {
@@ -661,7 +676,7 @@
    "descripcion": "BE-CR28: entrega con más de 1,000 archivos = subir_entrega sube Auditoria/ como Auditoria.zip (desde los archivos verificados) y README_REVIEW.md lo dice; sin esa línea = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "2467 archivos: Auditoria/ va como Auditoria.zip y README_REVIEW.md lo dice"
+    "2478 archivos: Auditoria/ va como Auditoria.zip y README_REVIEW.md lo dice"
    ],
    "segundos": 0.0,
    "plausibilidad": "OK"
@@ -682,7 +697,7 @@
     "DETALLES_REVISADOS.pdf: 104 páginas, 0 firmas, 104 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "SCHEDULES_REVISADOS.pdf: 8 páginas, 0 firmas, 8 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R"
    ],
-   "segundos": 1.0,
+   "segundos": 1.05,
    "plausibilidad": "OK"
   },
   {
@@ -703,7 +718,7 @@
     "CSV: rev20 FINAL PARA REVISAR/Auditoria/VISTA_BLUEBEAM.csv",
     "/NM único y sin '/' en todo el PDF (U-167)"
    ],
-   "segundos": 18.87,
+   "segundos": 19.8,
    "plausibilidad": "OK"
   },
   {
@@ -716,7 +731,7 @@
    "evidencia": [
     "1068/1068 markups: Depth de Bluebeam = Height del Excel = altura impresa (ALTURAS_IMPRESAS.csv); COMPARACION_ALTURAS.csv y CHECKLIST B2 al día (U-175)"
    ],
-   "segundos": 8.58,
+   "segundos": 8.59,
    "plausibilidad": "OK"
   },
   {
@@ -766,7 +781,7 @@
    "evidencia": [
     "STUD SCHEDULE impreso en A0.06; ningún gauge declarado no impreso"
    ],
-   "segundos": 0.12,
+   "segundos": 0.14,
    "plausibilidad": "OK"
   },
   {
@@ -780,7 +795,7 @@
    "evidencia": [
     "0 items con producto impreso: cada uno nombra su renglón"
    ],
-   "segundos": 0.21,
+   "segundos": 0.26,
    "plausibilidad": "OK"
   },
   {
@@ -793,9 +808,9 @@
    "estado": "PASS",
    "evidencia": [
     "pdf: CR_markups_rev20 - OPEN IN BLUEBEAM.pdf sha256 fe550b85f057",
-    "excel: CR_City_Hotel_Takeoff_FINAL_rev20.xlsx sha256 748fdb2d8904"
+    "excel: CR_City_Hotel_Takeoff_FINAL_rev20.xlsx sha256 834fc00cdf17"
    ],
-   "segundos": 0.07,
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -820,18 +835,32 @@
    "descripcion": "U-184 'bien a la primera en 2-3 h': auditoría U-181 fechada antes de la primera subida, H-A / H-B dentro de las lecturas, Excel / PDF de markups con hash producido por la cadena (sello + bitácora, nada a mano: CR rev18b), <= 2 corridas finales de compuerta y TIEMPOS.md con las corridas contadas",
    "estado": "PASS",
    "evidencia": [
-    "auditoría U-181 2026-11-11T22:24:00+00:00 (AUDITORIA_U181_rev20.md)",
-    "1 corrida(s) final(es) sobre estos archivos, 2 en la rev",
-    "TIEMPOS.md: corridas de compuerta 4",
-    "registro: 2 inicio(s) de compuerta en la rev (1 cortada(s)), 1 roja(s)",
+    "auditoría U-181 2026-11-12T07:44:00+00:00 (AUDITORIA_U181_rev20.md)",
+    "1 corrida(s) final(es) sobre estos archivos, 3 en la rev",
+    "TIEMPOS.md: corridas de compuerta 6",
+    "registro: 4 inicio(s) de compuerta en la rev (2 cortada(s)), 1 roja(s)",
     "2 corrida(s) sin renglón en compuerta_corridas.jsonl, cada una con su 'causa:' de registro perdido en TIEMPOS.md"
    ],
-   "segundos": 0.32,
+   "segundos": 0.34,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_RESUMEN_EXCEL",
+   "reglas": [
+    "BE-AUD08"
+   ],
+   "descripcion": "BE-AUD08 (CR rev20: el RESUMEN traía la cifra de RC distinta del Material Summary): cada cifra de material de la rev actual en las tablas de RESUMEN_revN.md y BITACORA_revN.md = la del Material Summary del Excel (+-0.01)",
+   "estado": "PASS",
+   "evidencia": [
+    "BITACORA_rev20.md, RESUMEN_rev20.md: 20 cifra(s) de tablas de material de la rev20 = Material Summary del Excel"
+   ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_RCP_COMPLETO",
    "reglas": [
+    "BE-AUD07",
     "CR-R7-01",
     "U-124",
     "U-137"
@@ -841,7 +870,7 @@
    "evidencia": [
     "187 cielos / soffits cuantificados, todos con su markup (Excel -> markup)"
    ],
-   "segundos": 18.57,
+   "segundos": 18.32,
    "plausibilidad": "OK"
   },
   {
@@ -856,7 +885,7 @@
    "evidencia": [
     "926 markups de wall sobre su banda dibujada (2 con excepción escrita)"
    ],
-   "segundos": 5.09,
+   "segundos": 5.74,
    "plausibilidad": "OK"
   },
   {
@@ -871,7 +900,7 @@
    "evidencia": [
     "309 markups de cielo / soffit con contorno medido; 52 ceilings con contorno == cargado"
    ],
-   "segundos": 165.21,
+   "segundos": 179.93,
    "plausibilidad": "OK"
   },
   {
@@ -935,7 +964,7 @@
    "evidencia": [
     "ninguna resolución contra una cota impresa"
    ],
-   "segundos": 11.02,
+   "segundos": 11.78,
    "plausibilidad": "OK"
   },
   {
@@ -1058,7 +1087,7 @@
    "evidencia": [
     "A y B completas sobre ['A2.01', 'A2.02', 'A2.03', 'A2.04', 'A6.00', 'A6.01', 'A6.02', 'A7.30', 'A7.45', 'A7.50', 'A7.55']"
    ],
-   "segundos": 0.02,
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -1188,7 +1217,7 @@
    "evidencia": [
     "21 valores por código con su sección / tabla"
    ],
-   "segundos": 0.06,
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -1202,7 +1231,7 @@
    "evidencia": [
     "33 conflictos con N/HOJA + sección + delta"
    ],
-   "segundos": 0.06,
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -1269,7 +1298,7 @@
    "evidencia": [
     "caras de wet rooms en W.R."
    ],
-   "segundos": 0.01,
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1295,7 +1324,7 @@
    "evidencia": [
     "capas por cara = fuente"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -1321,7 +1350,7 @@
    "evidencia": [
     "N/A: ningún tag '<type> SIM.' en las plantas"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -1334,7 +1363,7 @@
    "evidencia": [
     "sin walls existing como nuevos"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -1360,7 +1389,7 @@
    "evidencia": [
     "N/A: ningún área rotulada de plywood / backing"
    ],
-   "segundos": 0.0,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1372,7 +1401,7 @@
    "descripcion": "BE-12: toda cita textual (entre comillas) del Excel existe impresa en el set",
    "estado": "PASS",
    "evidencia": [
-    "348 citas textuales impresas"
+    "326 citas textuales impresas"
    ],
    "segundos": 0.06,
    "plausibilidad": "OK"
@@ -1428,7 +1457,7 @@
    "evidencia": [
     "4 accesorios impresos con destino"
    ],
-   "segundos": 0.07,
+   "segundos": 0.08,
    "plausibilidad": "OK"
   },
   {
@@ -1705,7 +1734,7 @@
    "evidencia": [
     "N/A: sin coberturas heredadas"
    ],
-   "segundos": 0.08,
+   "segundos": 0.05,
    "plausibilidad": "OK"
   },
   {
@@ -1810,7 +1839,7 @@
    "evidencia": [
     "elements normalizados"
    ],
-   "segundos": 0.08,
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -1837,7 +1866,7 @@
    "evidencia": [
     "lecturas sin rutas de respuestas"
    ],
-   "segundos": 0.08,
+   "segundos": 0.1,
    "plausibilidad": "OK"
   },
   {
@@ -1906,7 +1935,7 @@
    "evidencia": [
     "cielos en el canon (['A0.06', 'A0.08', 'A3.01'])"
    ],
-   "segundos": 0.02,
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -1958,7 +1987,7 @@
    "evidencia": [
     "diferencias de atributos listadas"
    ],
-   "segundos": 0.41,
+   "segundos": 0.5,
    "plausibilidad": "OK"
   },
   {
@@ -1997,7 +2026,7 @@
    "evidencia": [
     "nones contradichos listados"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2025,7 +2054,7 @@
    "evidencia": [
     "sin dobles conteos"
    ],
-   "segundos": 0.52,
+   "segundos": 0.55,
    "plausibilidad": "OK"
   },
   {
@@ -2185,7 +2214,7 @@
    "evidencia": [
     "hojas citadas existen"
    ],
-   "segundos": 0.06,
+   "segundos": 0.08,
    "plausibilidad": "OK"
   },
   {
@@ -2318,7 +2347,7 @@
    "evidencia": [
     "N/A: sin board 1/2\" regular"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2334,7 +2363,7 @@
    "evidencia": [
     "499 walls de madera board-only con framing EXCLUDED; 0 walls de madera con framing en walls[]"
    ],
-   "segundos": 0.03,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -2468,7 +2497,7 @@
    "evidencia": [
     "2 deltas recalculados desde las filas actuales"
    ],
-   "segundos": 0.02,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -2495,7 +2524,7 @@
    "evidencia": [
     "3174 (hoja, término) de los barridos de RFI listados completos"
    ],
-   "segundos": 0.89,
+   "segundos": 0.95,
    "plausibilidad": "OK"
   },
   {
@@ -2618,7 +2647,7 @@
    "evidencia": [
     "sin RFI de altura de estructura con altura del edificio impresa (U-174)"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2686,7 +2715,7 @@
     "L3 type x: 51270.1 SF vs mediana de los típicos 38188.8 SF (+34 %) sin stack_reasons",
     "L4 type x: 25107.5 SF vs mediana de los típicos 38188.8 SF (-34 %) sin stack_reasons"
    ],
-   "segundos": 0.0,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2711,9 +2740,9 @@
    "descripcion": "BE-GK33 / 33b (Grand Kia rev2, auditoría U-181 F2/F3 y re-verificación): barrido GLOBAL de todo string del canon (walls, caras, misc, rfis): '(open)' de un RFI cerrado, '[scale check]', '[TBD]' o texto cortado ('…') = FAIL; un RFI cerrado (status != open) cuyo loaded / opciones conserva '+x %' o '≈' = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "32333 strings del canon barridos y 28 RFI cerrados sin textos viejos ni deltas vagos"
+    "32334 strings del canon barridos y 28 RFI cerrados sin textos viejos ni deltas vagos"
    ],
-   "segundos": 0.03,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -2740,7 +2769,7 @@
    "evidencia": [
     "27 caras / ceilings ELEC / IT; ratings impresos ninguno: sin doble rating (U-161)"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2768,7 +2797,7 @@
    "evidencia": [
     "919 walls revisados; 0 inclinados / VARIES con su operación de geometría"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2795,7 +2824,7 @@
    "evidencia": [
     "markups en inglés con número de hoja"
    ],
-   "segundos": 0.01,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2862,7 +2891,7 @@
    "evidencia": [
     "una fila por Wall ID; inglés"
    ],
-   "segundos": 0.05,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -2968,7 +2997,7 @@
    "evidencia": [
     "SF de markups = Excel"
    ],
-   "segundos": 30.15,
+   "segundos": 30.43,
    "plausibilidad": "OK"
   },
   {
@@ -3068,7 +3097,7 @@
     "153 burbujas citadas + declaradas (530 burbujas de dos líneas), cadenas seguidas por 88 hojas",
     "conteos (CR-R10-m3): 153 = destinos N/HOJA ÚNICOS citados en el Excel / canon o declarados; 530 = burbujas (instancias) en las 88 hojas que alcanza la cadena del trade; CE_DETALLES_CIRCULADOS cuenta en cambio TODAS las burbujas de todas las hojas de origen del set (también S / M / P / E fuera de la cadena)"
    ],
-   "segundos": 0.15,
+   "segundos": 0.16,
    "plausibilidad": "OK"
   },
   {
@@ -3083,7 +3112,7 @@
    "evidencia": [
     "1984 números con estado, hoja u operación"
    ],
-   "segundos": 0.11,
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -3098,7 +3127,7 @@
    "evidencia": [
     "toda partida cita N/HOJA"
    ],
-   "segundos": 0.0,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -3114,7 +3143,7 @@
    "evidencia": [
     "todo supuesto con su RFI / precedente / código"
    ],
-   "segundos": 0.2,
+   "segundos": 0.18,
    "plausibilidad": "OK"
   },
   {
@@ -3130,7 +3159,7 @@
    "evidencia": [
     "361 ubicaciones numeradas, circuladas, verificadas y contadas"
    ],
-   "segundos": 0.36,
+   "segundos": 0.39,
    "plausibilidad": "OK"
   },
   {
@@ -3145,7 +3174,7 @@
    "evidencia": [
     "toda afirmación con imagen circulada"
    ],
-   "segundos": 12.62,
+   "segundos": 14.16,
    "plausibilidad": "OK"
   },
   {
@@ -3160,7 +3189,7 @@
    "evidencia": [
     "entregable en inglés"
    ],
-   "segundos": 0.29,
+   "segundos": 0.28,
    "plausibilidad": "OK"
   },
   {
@@ -3176,7 +3205,7 @@
    "evidencia": [
     "un eje / fachada por número"
    ],
-   "segundos": 0.02,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -3205,7 +3234,7 @@
    "evidencia": [
     "términos del trade en inglés"
    ],
-   "segundos": 0.11,
+   "segundos": 0.08,
    "plausibilidad": "OK"
   },
   {
@@ -3225,7 +3254,7 @@
     "DW.4-L3-04b (DW.4-1): 1 cara(s) con board; el type imprime 2 () - motivo: DW.4 double wall: this entry is the north (304) leaf; its south side faces the c",
     "XW.6.2-L1-03 (XW.6.2-0): 1 cara(s) con board; el type imprime 2 () - motivo: other face (Retail 124) by tenant: '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE"
    ],
-   "segundos": 0.58,
+   "segundos": 0.62,
    "plausibilidad": "OK"
   },
   {
@@ -3239,7 +3268,7 @@
    "evidencia": [
     "cifras del Scope Checklist / Inputs / README = Material Summary"
    ],
-   "segundos": 0.08,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -3255,26 +3284,28 @@
    "evidencia": [
     "52 tags de gypsum en 12 hojas de RCP: 31 con renglón, 21 con motivo N/HOJA"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
    "id": "CB_U_191_REF",
    "reglas": [
+    "BE-AUD05",
     "BE-CR41",
     "U-191"
    ],
    "descripcion": "U-191 / BE-CR41 (usuario 12-nov: 'toda la información biene en los planos'; CR RFI-14: RC 'spacing per assembly' dejado a 16 in. sin abrir UL L546, cuyo Item 6 imprime 12 in.): todo renglón / RFI / supuesto cuya fuente dice 'per assembly', 'per UL', 'per manufacturer', 'see spec' o cita un UL / GA lleva la cita del ítem / párrafo / sección del documento referido; sin ella = FAIL",
    "estado": "PASS",
    "evidencia": [
-    "303 referencias a documentos citados, cada una con su ítem / párrafo"
+    "406 referencias a documentos citados, cada una con su ítem / párrafo"
    ],
-   "segundos": 0.07,
+   "segundos": 0.17,
    "plausibilidad": "OK"
   },
   {
    "id": "CB_RCP_APILADOS",
    "reglas": [
+    "BE-AUD06",
     "BE-CR39",
     "U-189",
     "U-190"
@@ -3326,7 +3357,7 @@
    "evidencia": [
     "13 schedules, 289 types / renglones marcados, 597 materiales cruzados con el Material Summary"
    ],
-   "segundos": 1.02,
+   "segundos": 0.86,
    "plausibilidad": "OK"
   },
   {
@@ -3339,7 +3370,7 @@
    "evidencia": [
     "13 schedules del trade, 289 filas revisadas, materiales listados y marcadas"
    ],
-   "segundos": 0.36,
+   "segundos": 0.34,
    "plausibilidad": "OK"
   },
   {
@@ -3355,7 +3386,7 @@
     "647 burbujas circuladas en origen y destino en 104 hojas; por hoja de origen: A2.01 25, A2.02 20, A2.03 7, A2.04 14, A3.01 3, A3.02 11, A3.03 2, A3.04 7, A6.00 11, A6.01 4, A6.02 4, A7.30 6, A7.45 1, A7.50 1, A7.55 4, A4.05 2, A9.03 3, A4.04 11, A4.03 10, A0.03 5, A5.07 10, A7.31 9, A7.23 10, A7.24 10, A7.32 5, A7.33 7, A5.08 14, A5.02 15, A5.04 19, A5.05 12, A9.06 1, A5.00 17, A5.06 14, A5.03 16, A9.02 1, A9.04 1, A0.01 10, A0.02 8, A2.05 24, A4.00 11, A4.01 8, A4.02 10, A5.01 22, A7.01 1, A7.02 1, A7.03 2, A7.04 3, A7.06 3, A7.07 4, A7.08 3, A7.10 2, A7.11 4, A7.12 2, A7.14 2, A7.15 3, A7.17 3, A7.18 3, A7.34 3, A8.01 18, S1.01 20, S1.02 28, S1.03 10, S1.04 15, S1.05 12, M1.01 1, P1.02 14, P1.03 14, P1.04 5, E1.02 14, E1.03 14, E1.04 5, E2.02 14, E2.03 14, E2.04 5",
     "conteos (CR-R10-m3): este total = TODAS las burbujas de todas las hojas de origen del set, por disciplina A 462, E 66, M 1, P 33, S 85; CE_CALLOUTS cuenta los destinos N/HOJA únicos citados y las burbujas de las hojas alcanzadas por la cadena del trade (subconjunto)"
    ],
-   "segundos": 2.01,
+   "segundos": 2.06,
    "plausibilidad": "OK"
   }
  ],
@@ -3373,7 +3404,7 @@
   "rev20 FINAL PARA REVISAR/Auditoria/ALTURAS_NOTAS_A.md": "3f8daa70b218b738f71a61ea6350191dc818b1e95dd8d3c27f6d1adceb1d7570",
   "rev20 FINAL PARA REVISAR/Auditoria/ALTURAS_NOTAS_B.md": "c49adc1006d46433b9c3c9f0c562140f44dbe7418209afdb9b6b0382ab019559",
   "rev20 FINAL PARA REVISAR/Auditoria/ALTURAS_REVISADAS_PAGINAS.json": "b58b127957ccc826a250fc24cb3c3abcd0281157b262b492cd84ecbb47ad1ec2",
-  "rev20 FINAL PARA REVISAR/Auditoria/AUDITORIA_U181_rev20.md": "2b9bf9dcf3677d6ebb55cb4351edf222a959b5d4fab2e81239d107077ca3c160",
+  "rev20 FINAL PARA REVISAR/Auditoria/AUDITORIA_U181_rev20.md": "3ddd74b139f27bc9310bfb8c967e2dc988513452f74f7df825f2f499f51fd69e",
   "rev20 FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.json": "3ea037c30566883abbfc976d4ae2c2a9d1369cb178f74f07ed9c19eecb0424e3",
   "rev20 FINAL PARA REVISAR/Auditoria/COBERTURA_PASO12.md": "cf234448cc2170615912554eb689718c5ad9af1a2f8653344c18156a426c906c",
   "rev20 FINAL PARA REVISAR/Auditoria/COMPARACION_ALTURAS.csv": "d00f459157001789a9ef758ab628abc99dd261e1fbdec1537f30a7fd0d8de2dc",
@@ -3394,7 +3425,7 @@
   "rev20 FINAL PARA REVISAR/Auditoria/DELTA_rev8_rev9.md": "9dfba50c2741269e38ae0c8d08040001cccfd2bd937a2b2b261746ef213e7e6d",
   "rev20 FINAL PARA REVISAR/Auditoria/DELTA_rev9_rev10.md": "1b4d37bd4d00a3939891f50270bd3f569205061de8585fbbd8eca0a6c0e2bb6c",
   "rev20 FINAL PARA REVISAR/Auditoria/DOBLE_CIELO.csv": "7901418559a34d287d0d47d75fd6f53ed877ecfa5bfc935ae33b6cb798b282ef",
-  "rev20 FINAL PARA REVISAR/Auditoria/HISTORIAL_CAMBIOS.md": "94f326e5dc48ab54bfcd3e1d915e43b7cf212b24a023a47e643dc69b77378855",
+  "rev20 FINAL PARA REVISAR/Auditoria/HISTORIAL_CAMBIOS.md": "57bd76d04546583faacc7b961d9dc3071bced3865508143d3ece418192c4ce94",
   "rev20 FINAL PARA REVISAR/Auditoria/PROCESO_CORRIDA.md": "04064ef41a8bba47724305ae193bee1397ff382f9047ec4cf3d39954615a6079",
   "rev20 FINAL PARA REVISAR/Auditoria/TOOL_LIMITS_CALC.md": "a7cb487839d86ff428c8a83f6c610bb349a68d71b254b9116eb7538be0278362",
   "rev20 FINAL PARA REVISAR/Auditoria/VERIFICACION_MARKUPS.md": "1b9cfe35cb8408a16b74b75219d9e03ad57b278a2a65f6f7f7534c09aa335971",
@@ -5395,6 +5426,17 @@
   "rev20 FINAL PARA REVISAR/Auditoria/evidencia_walls/walls/XW.6.6-L4-17_A2.04.png": "003803a0a7a6e4e09b7fb004b800060b75b2d0d2be50e6d61d42d62e092b0e14",
   "rev20 FINAL PARA REVISAR/Auditoria/evidencia_walls/walls/XW.6.6-L4-18_A2.04.png": "35ae40a4919fa4a5b879964300b7108ba9a13600674fc6dcdf4cf2aa0e9419d9",
   "rev20 FINAL PARA REVISAR/Auditoria/evidencia_walls/walls/XW.6.6-L4-19_A2.04.png": "356b3cada14265960003e2e8713fa4df00c340dc66063f2d21b4ed3b13ec9b47",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/RC_REVIEW.md": "5ebfbae3a406a1dbba47313ffeeb889cb14e9a94fc045a5e306639b163a536ed",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/a008_fs1.png": "ae8bc203b622808d042e69de09e64fb02a1767229e86f98e8d510656bf7a79e2",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/a008_rs1.png": "7227bdb9dcd5c32ab47f94353a9287389c8118121e1652afa01f5b5ac1aea660",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/crop_A3.01.png": "9c58c5f452309d02edfc523a8ac3867b9db796d6d3944a8c0fefaccb13f80d9d",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/crop_A3.02.png": "1927f4965c5e25eb9351769d88bcc07612aa7ea59ee40f4845bb162a4fd4b910",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/crop_A3.03.png": "231b5e0c79a983032adb920eabaf1f31d112b6821f91b91b8d3d231795f3d591",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/crop_A3.04.png": "5e5425f8e2ac6abbf2d281427478cdbee01787cd38b48b1fe300cbe393757571",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/ov_A3.01.png": "9877cde2d757d258413a42b2cecc4b4f4a33315c60e7f872f8972b9ffd5666fc",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/ov_A3.02.png": "49487f891413136011760803152b6b89dc2c96cfa6ac0b5eca20108e260be393",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/ov_A3.03.png": "b64d9ddf8821880cd2c06e60e914364429bbf387c0f4e9177bc57f9938b3aa62",
+  "rev20 FINAL PARA REVISAR/Auditoria/rc_review/ov_A3.04.png": "1928b48ff40cbc18eea9d7f679a933dcacad1ce114d5a075a226be0f2f2d5134",
   "rev20 FINAL PARA REVISAR/Auditoria/rcp_polys_check.json": "9ad3947191d60df452b2d63e508d7afd753bba8291b3190482acacef05126aed",
   "rev20 FINAL PARA REVISAR/Auditoria/resolucion_AB/comparacion_AB.json": "13609bd3f059800a08e6568d22590c2573c4fc010134568b9dc6cf5728438404",
   "rev20 FINAL PARA REVISAR/Auditoria/resolucion_AB/resolucion.md": "e221152d05ca41b1073b7df27921962b50019ad628457aa83a2fc68c650214d0",
@@ -5792,8 +5834,8 @@
   "rev20 FINAL PARA REVISAR/Auditoria/schedules/thumb_p62.png": "c23e3805345f338fbd76878c801f279cad12b30e46e29e601b72e803e0644e58",
   "rev20 FINAL PARA REVISAR/Auditoria/schedules/thumb_p63.png": "e88f925c0c4bdff18c57d0098434458d3ff2382d1b8012f898804f6f9767467a",
   "rev20 FINAL PARA REVISAR/Auditoria/schedules/thumb_p78.png": "d11c074a554dcacca153f2a6b77bb251e530206ac2a41d271c129e97629776ab",
-  "rev20 FINAL PARA REVISAR/BITACORA.md": "eff8a3f8a3964f1984975e9e8c227538229dba759b0bf316d16567c94bbfd974",
-  "rev20 FINAL PARA REVISAR/CR_CHECKLIST_REVISION.xlsx": "859549fbef65535fef509965636de5cfc7a2d2b0a66b2c31213d00febcb589d5",
+  "rev20 FINAL PARA REVISAR/BITACORA.md": "c170a49853a472a1544f737b0799fb9711c10b1075bbf2e03d94e7ea5d3c65a7",
+  "rev20 FINAL PARA REVISAR/CR_CHECKLIST_REVISION.xlsx": "b5d39269b4a6dd1dca063ed3d512c10c01e687624256ca77fea48f363eac96e4",
   "rev20 FINAL PARA REVISAR/DETALLES_REVISADOS_INDEX.md": "05330b8f9d6615ba73b52e0c5fa4901f1c83856fad68a99155e3a42e01c1abdf",
   "rev20 FINAL PARA REVISAR/GUIA_DE_REVISION_DEL_ESTIMADOR.md": "34c0c175bcb10d445f1968c9a9611c000844708799480c7fd2257d24b7bd021a",
   "rev20 FINAL PARA REVISAR/PARA_REVISAR_EN_LA_MANANA.md": "46383d8446be3da1d952c9a309d6af27f83e657234e4299da5416fbb2dbbfa43",
@@ -5813,20 +5855,20 @@
   "rev20 FINAL PARA REVISAR/Planos marcados/A7.45 - IMAGE ONLY (not editable) - walls rev20.png": "700db794d0b3274deb82160978674cf6564efd82da3094de966c76a44b9a460a",
   "rev20 FINAL PARA REVISAR/Planos marcados/A7.50 - IMAGE ONLY (not editable) - walls and ceilings rev20.png": "e7bd390c0c959a39e14bc61a44917dbf17b1d1c39ed1275e844323351795a719",
   "rev20 FINAL PARA REVISAR/Planos marcados/A7.55 - IMAGE ONLY (not editable) - walls rev20.png": "bc35d84fafd59072e2532dccedc92372b5d2cfcab49d100607c4f7b4bf4d70f7",
-  "rev20 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "cc69635a50988da5c22bcdb7ca58cbb82bdd8a6992ad927ac088cde942aeef1f",
+  "rev20 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "d77cb4a64c1bc65a6e63f846b237a0b25598e88c4a87234003ca0713b9eb6443",
   "rev20 FINAL PARA REVISAR/Planos marcados/CR_markups_rev20 - OPEN IN BLUEBEAM.pdf": "fe550b85f057723fe1cb3a3ed999f5c9402dd858069ea440f5c41cb434e94598",
-  "rev20 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "9ec804cf001cc01d4e8ab4de4f9083a43650571c981160ad7f813bffdde5f83b",
+  "rev20 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "538f1708481f07eb46f1335671b3174e70884a6f5f176fed563424e3355e5432",
   "rev20 FINAL PARA REVISAR/Planos marcados/LEGEND - IMAGE ONLY (not editable) - walls rev20.png": "08c52cbebda7fb87075d39e57c0bbb7b16f431e2cd25fcd6ab077802e357a1e2",
-  "rev20 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "c06370a50ca9abf80459567fc7ad6af4333ef09d1dbb0ee9a21efdbc79f6a4de",
-  "rev20 FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev20.xlsx": "3970bf23c5e9c2fb6e0cc3a653eb5d71ba7e04d7e2c71eccba0008b97475a6c5",
-  "rev20 FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev20_PROPOSAL.pdf": "c51c2bd2804274d147b76a261e45365b3ee8fb6281ccb1aeb251b1af443048b5",
-  "rev20 FINAL PARA REVISAR/README_REVIEW.md": "fa4bd89617ca61a00f2967b7fe1fac85a68d14325b2ce348ad719988dfb2a5aa",
-  "rev20 FINAL PARA REVISAR/RESUMEN_rev20.md": "1b471ba16334e1552489950ba75e4cad6dce4d9ab5d5752b8719cd0dd8b5e6af",
+  "rev20 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "5aa2bd35f290bb82ea4d4c0b71a5943927f32250b4e27040dad13c19a613d9d5",
+  "rev20 FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev20.xlsx": "49b51b4d1e7e91f1c2cc8f73b6f662a570abc060951c6a39a17ffb6a72eb9e73",
+  "rev20 FINAL PARA REVISAR/Proposal/CR_City_Hotel_Proposal_rev20_PROPOSAL.pdf": "3a2b831c2d12f64ae9a5986a28d20bcd40651e8fa8261415454ce4eb623c2dfe",
+  "rev20 FINAL PARA REVISAR/README_REVIEW.md": "ddda2faaf638569475e67efc2a2f512bdce302db7496f500de924d429d054c05",
+  "rev20 FINAL PARA REVISAR/RESUMEN_rev20.md": "770b845a541e30bdca0cef6a12c851c8c3097ec4e28c9de9963c74535c7ad699",
   "rev20 FINAL PARA REVISAR/SCHEDULES_MATERIALES.md": "40a2e5b81e4ff5593a31faced10c04ce02380e599119c36da6f9dd5bd663856e",
   "rev20 FINAL PARA REVISAR/SEGUIMIENTO.md": "4534e7bc32eed5123d2e5513a663f9188e1da9b9749c128830ee1fe57302ec31",
-  "rev20 FINAL PARA REVISAR/TIEMPOS.md": "94161f02f8a3fcff4f2bc27dae58dc6a81bf3154b369cdb85a3e364c2d1dc7f9",
-  "rev20 FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev20.xlsx": "748fdb2d8904e91dc4239837a241ba432769182935a691df85f8436aefde1a7f",
-  "rev20 FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev20.xlsx.sello.json": "5dfb633b754e7d22f1a347d4cee6988989cde14af5724d517f88a81e864ffafe"
+  "rev20 FINAL PARA REVISAR/TIEMPOS.md": "5f648b14a0705079a8d73143eb1e340b5ef53176f99f0ad7da3f86f7a640b973",
+  "rev20 FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev20.xlsx": "834fc00cdf17924058743bebd4e2e41546774449b0254c4ec649327a49d49298",
+  "rev20 FINAL PARA REVISAR/Take-off/CR_City_Hotel_Takeoff_FINAL_rev20.xlsx.sello.json": "2fefacfdb464d0450ce491ed5f6158f99ebb9839089e77d77f1773d7cb3fa1d4"
  },
  "drive": {
   "parent_id": "1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc",
@@ -5840,11 +5882,11 @@
   },
   "excel": {
    "nombre": "CR_City_Hotel_Takeoff_FINAL_rev20.xlsx",
-   "sha256": "748fdb2d8904e91dc4239837a241ba432769182935a691df85f8436aefde1a7f"
+   "sha256": "834fc00cdf17924058743bebd4e2e41546774449b0254c4ec649327a49d49298"
   }
  },
- "skill_version": "v81cf101",
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla)",
+ "skill_version": "v81cf116",
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos + v81cf115 BE-AUD09 solo la rev vigente + v81cf116 Listing: en trazabilidad (BE-AUD05) + BE-GK50 BE-GK51 unidos",
  "vigentes": {
   "pdf": {
    "nombre": "CR_markups_rev20 - OPEN IN BLUEBEAM.pdf",
@@ -5853,11 +5895,11 @@
   },
   "excel": {
    "nombre": "CR_City_Hotel_Takeoff_FINAL_rev20.xlsx",
-   "sha256": "748fdb2d8904e91dc4239837a241ba432769182935a691df85f8436aefde1a7f",
-   "md5": "f464b380ee021690222724ea74be06a7"
+   "sha256": "834fc00cdf17924058743bebd4e2e41546774449b0254c4ec649327a49d49298",
+   "md5": "ed1c7d8c0fa4e66c5ea17c134e6ec64f"
   }
  },
- "corrida": "e5ddda83d474",
+ "corrida": "e5397aff1faf",
  "tipo": "final",
  "paso": null
 }

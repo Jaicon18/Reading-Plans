@@ -49,6 +49,14 @@ RI = [
  ("floor_plan", "ACT-1", None, "A3.01 / A7.32", "Vestibule 114 ceiling = ACT-1 (A3.01, other trade) - no gypsum; A7.32 is the glass entry vestibule 108.x (no ceiling of its own). No change.", "RCPREV_V114_A301.png"),
  ("floor_plan", "FS-1", None, "A0.08 FS-1 / 1/A2.01", "The L1 FS-1 membrane (underside of the LEVEL 2 floor) includes Retail 124 (2,373 SF printed) and Kitchen 100 (682.7 SF, flood fill of 1/A2.01): kept because the 1 HR floor assembly is printed (RFI-05 criterion: rated stays); delta -3,055.7 SF Type C + resilient channel if the tenant builds it.", "RFI-05.png"),
  ("floor_plan", "FI.2", None, "1/A2.01", "Walls facing Retail 124 (RFI-05 sweep of every -0 wall): XW.6.4-L1-04 excluded; XW.6.3-L1-01 and FI.2-L1-06 split at the measured tenant boundary - see Excluded walls.", "RCPREV_W_retail_A201_FI2.png"),
+ ("floor_plan", "SOF", None, "7/A7.23 / 1/A7.23 / 1/A7.24", "Corridor band SOF-L2-01 / L2-02 / L3-316 / L3-318 / L4-02 loaded GROSS at 23 1/4\" per side (7/A7.23 printed 6 1/2\" + 4 1/2\" + 4 1/2\" + 7 3/4\"). The 5 1/4\" DIFFUSER BOX of 7/A7.23 leaves 2 1/2\" of the 7 3/4\" cove bottom on that side (18\" = 1.50 ft); the drawn 'MECHANICAL LOUVER, IN COVE, RE: MECH' pieces measure 216 W 16 LF, 218 S 17 LF, 316 W 16 LF, 412 W 16 LF (18 pt/ft). DEDUCT -28.44 SF 5/8\" Type X if the box runs only at the drawn louvers (65 LF x 0.4375). Decision by rule U-052 / U-171 (gross = drawn).", "RI20_diffuser_216_A723.png"),
+ ("floor_plan", "SOF", None, "5/A7.31", "Lobby coffers SOF-L1-01 loaded with the printed downstand face '10 3/4\"' (U-017) = 1.25 ft per LF of coffer perimeter. Both blind readers measured the face to the bottom board at 11.24\" (1.29 ft): ADD +11.83 SF 5/8\" Type X if the measured face is used.", "RI20_coffer_5-A731.png"),
+ ("floor_plan", "SOF", None, "7/A7.23", "Corridor right-hand soffit box face above the 8'-11\" GYP-1 field (plenum), drawn as gypsum up to the rated assembly: 9 1/2\" + 2 1/8\" printed = 11 5/8\" = 0.9688 ft. LOADED (drawn = loaded, U-052 / U-083): SOF-L2-01P / L2-02P / L3-316P / L3-318P / L4-02P, one side, 501.74 LF. DEDUCT -486.09 SF 5/8\" Type X if the plenum face is not built.", "RI20_box_face_above_ceiling_7-A723.png"),
+ ("floor_plan", "SOF", None, "5/A7.31 / 2/A7.31 / 3/A7.31 / 1/A7.31", "Lobby coffer field, outer edge measured (U-114): 124.92 LF of the 295.83 LF of coffer perimeters border the flat 11'-0\" ceiling (2/A7.31, 3/A7.31: 12'-0 3/4\" - '1'-0 3/4\" DROPPED SOFFIT' = 11'-0\", no outer face): 0 SF to add. The 4 1/4\" of downstand bottom per LF in SOF-L1-01 (295.83 x 0.3542 = 104.77 SF) lies inside the plan area of CLG-L1-12: DEDUCT -104.77 SF 5/8\" Type X if the double count is confirmed (1.25 ft kept per the coordination decision, U-052).", "RI20_coffer_bottom_5-A731.png"),
+ ("floor_plan", "W.6-0", None, "1/A7.45 / 1/A7.30 / 1/A2.04 / 3/A7.50", "BOTH SIDES: the F&B faces of 5 non-rated W.6-0 walls are EXCLUDED by the printed note 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' (U-162, U-159, U-184 (4)): W.6-L1-03 B (Kitchen 100) 22.80 LF x 11.2188 = 255.79 SF, W.6-L1-04 (Kitchen 100) 37.23 x 12.0625 = 449.09, W.6-L1-32 (Bar 107) 5.58 x 11.2188 = 62.60, W.6-L4-05 B (419) 15.67 x 8.9375 = 140.05, W.6-L4-07 B (419) 3.64 x 8.9375 = 32.53. ADD +940.06 SF 5/8\" Type X (1 layer) if the tenant faces are ours. DW.4-L3-04b: the other side is the cavity against XW.6.3-L3-06 (1/A2.03), no board.", "RI20_FB_note_1-A745.png"),
+ ("floor_plan", "SOF", None, "1/A7.23 / 2/A7.23 / 5/A7.23 / 6/A7.23", "Lobby 217 / 317: dropped GYP-1 field (CLG-L2-217F / CLG-L3-317F), vestibule band loop (SOF-L2-217V / L3-317V, 27.35 LF x 1.9375) and the gypsum border box around the wood slat panel (SOF-L2-217B / L3-317B, 38.16 LF x 2.2083, both faces drawn in 5/A7.23 and 6/A7.23) LOADED (U-052 / U-083). DEDUCT the border box inner face (38.16 x 11/12 = -34.98 SF per level) if it is not boarded behind the slats.", "RI20_lobby217_A723.png"),
+ ("floor_plan", "GYP-1", None, "1/A3.01 / 1/A7.31 / 5/A7.31 / 7/A7.31", "L1 lobby field: CLG-L1-12 loads 590.81 SF of gypsum from the 1/A3.01 tag 'GYP-1 11'-0\"'; the enlarged 1/A7.31 tags the same field 'WS-1 11'-0\"' and 5/A7.31 / 7/A7.31 draw wood panels on a T-grid. Plan vs plan conflict (09 29 00 Gypsum Board vs WS-1 wood slat ceiling by others): the base keeps the larger (gypsum loaded, U-146). delta: -590.81 SF (deduct) 5/8\" Type X + suspension (main tee 147.70 LF, cross tee 443.11 LF, angle 162.97 LF, hanger wire 36.99) if WS-1 governs.", "RI20_lobby_WS1_1-A731.png"),
+ ("floor_plan", "BW", None, "A5.00 / A0.08 FS-1 / 7/A7.31", "Retail beam wraps BW-L1-RETAIL: build-up around the beam loaded 1 1/8\" (A5.00 'GYPSUM BD. & RESILIENT CHANNEL', 5/8\" + 1/2\" RC); if the 2 1/8\" ceiling channel zone of 7/A7.31 also wraps the beams (2 3/4\"): ADD +0.542 ft/LF x 154.23 LF = +83.6 SF Type C / FS-1 board.", "RI20_BW_buildup_A500.png"),
 ]
 revisar = []
 for f, t, o, h, txt, img in RI:
@@ -110,6 +118,7 @@ extra = [
  ("CMU / concrete walls", "EXCLUDED - CM.x CMU and C.x cast-in-place concrete walls (A0.06, A6.00-A6.02): masonry / concrete trades."),
  ("Food & Beverage interiors (L1 Kitchen 100 / Dining, L4 410 / 411 / 419; BAR 107 except its printed ceiling)", "EXCLUDED - 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT. WILL BE SUBMITTED IN FUTURE TENANT IMPROVEMENT PERMIT.' (1/A2.04, A3.04, A7.45, A7.50, A7.55) + A0.00 'core and shell': non-rated faces and ceilings by the tenant; rated walls and the FS-1 rated floor / ceiling membranes stay (RFI-05 criterion); the RS-1 roof ceiling is unrated (A0.08 RS-1 rating blank, A0.00 'ROOF CONSTRUCTION 0 HR') and is not loaded inside the F&B rooms. Exception, BAR 107 ceiling: A5.04 'BAR SUSPENDED GYP CEILING' / 'CLG 11'-0\"' and 3/A7.31 'SECTION - BAR CEILING' are printed -> loaded by R-ALC-10 (the specific drawing governs A0.00 'core and shell'), CLG-L1-125 125.98 SF; delta if the bar is F&B tenant work: -125.98 SF board + grid (RFI-22)."),
  ("F&B 410 / 411 rated faces kept (U-159)", "LOADED - tenant-side faces of RATED types stay: their layers are part of the rated assembly (U-159: in F&B exclusions the rated membrane is verified): XW.6.6-L4-17 B (XW.6.6-2, 2 HR exterior wall, 2 layers, 502.65 SF), XW.6.6-L4-18 B (XW.6.6-1, 122.85 SF), W.62-L4-05 / -06 (W.62-1, 139.01 + 47.18 SF), X-L4-03 B (DW.4-1, 169.9 SF), FW.4-L4-19 B (FW.4-1 1 HR, 127.1 SF); ratings per the A0.06 / A0.07 type rows and A0.02 code plan, tags on 1/A2.04; the F&B note (1/A2.04, 3/A5.07) excludes only non-rated tenant interior work."),
+ ("Retail 124 steel beam wraps (rated FS-1 membrane)", "LOADED - A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' does not remove the rated L1 FS-1 floor-ceiling membrane: A0.08 FS-1 'GYP AND RESILIENT CHANNELS WRAP STEEL BEAMS WHERE THEY ARE DEEPER THAN TRUSSES' and A3.01 'ASSEMBLY TO WRAP BOTTOM OF STEEL BEAMS. TYP.' (ALC-15, U-184 (4)); 7 interior beams beam by beam (S1.02 designations, AISC d / bf) + north edge beams = 375.56 SF (BW-L1-RETAIL)."),
  ("Retail 124 tenant finishes", "EXCLUDED - A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT': non-rated retail faces (incl. the sweep of every -0 wall: XW.6.4-L1-04, retail parts of XW.6.3-L1-01 and FI.2-L1-06) and the GYP-1 11'-0\" band inside the retail (RFI-05)."),
  ("Separate-permit areas", "EXCLUDED - grey toned area 'UNDER A SEPARATE PERMIT AND NOT IN SCOPE' (A2.01-A2.04); existing historic building (A0.00)."),
  ("Doors, frames, windows, hardware", "EXCLUDED - A8.00 / A8.01 by others."),
@@ -148,7 +157,7 @@ td = {
      [r"exterior gypsum sheathing", "06 16 00 2.5.B Glass-Mat Gypsum Wall Sheathing, ASTM C 1177/1177M, 5/8 inch, Type X where indicated (Project Manual Vol 1 p. 214)"],
      [r"hanger wire", "09 22 16 2.2.C Wire Hangers: ASTM A 641/A 641M, Class 1 zinc coating, soft temper, 0.162-inch diameter (8 ga)"],
      [r"Type X W\.R\.|water resist", "09 29 00 2.3 Interior Gypsum Board (water-resistant core per the partition type, ASTM C 1396)"],
-     [r"Type C", "09 29 00 2.3 Interior Gypsum Board (Type C not named in the spec; A0.08 FS-1 / UL L546 name it)"],
+     [r"Type C", "09 29 00 2.3 Interior Gypsum Board (Type C not named in the spec; A0.08 FS-1 / UL L546 Item 7 name it)"],
      [r"Type X", "09 29 00 2.3.A Gypsum Board, Type X"],
      [r"cement board", "09 29 00 2.4.A Cementitious Backer Units"],
      [r"main tee|cross tee|angle molding", "09 22 16 2.2 Grid Suspension System for Ceilings (ASTM C 645)"],
@@ -181,5 +190,19 @@ for _m in c['misc_items']:
 td["piezas_min"] = {f: {"n": _mt.ceil(round(e["s"] * 1.15, 6)),
                         "op": f"one 20 ft stick per stud longer than 10 ft (the drop is not reusable): {round(e['s'], 2)} sticks x 1.15 waste = "
                               f"{_mt.ceil(round(e['s'] * 1.15, 6))} ({'; '.join(e['t'][:40])})"} for f, e in _pm.items()}
+# rev20a (U-191, auditoría U-138 12-nov hallazgo 3): el renglón del RC cita el ítem del listing, no 'L546' suelto
+import re as _re
+_RC_CITA = ("UL L546 Item 6: 12 in o.c. with insulation (FS-1) + 2 channels 6 in apart at end joints; "
+            "RS-1 16 in o.c. (A0.08; RS-1 has no UL #: spec 09 22 16 3.1.A)")
+for _sp in td.get('spec_por_material') or []:          # la cita entra en 'Where it comes from' (plantilla: '| Spec: <cita>')
+    if _re.search(r"(?i)resilient", str(_sp[1])) and 'Item 6' not in str(_sp[1]):
+        _sp[1] = f"{_sp[1]}; {_RC_CITA}"
+for _m in td.get('materials') or []:
+    if str(_m.get('material', '')).startswith('Resilient channel'):
+        for _k in ('cita', 'source'):
+            if _m.get(_k) and 'Item 6' not in str(_m[_k]):
+                _m[_k] = _re.sub(r"(?<![\w/])L546(?![\w])", _RC_CITA, str(_m[_k]), count=1)
+                if 'Item 6' not in _m[_k]:
+                    _m[_k] = _RC_CITA + " | " + _m[_k]
 json.dump(td, open(f'{K}/takeoff.json', 'w'), indent=1, ensure_ascii=False)
 print("rfis", len(rfis), "alcances", len(alcances))
