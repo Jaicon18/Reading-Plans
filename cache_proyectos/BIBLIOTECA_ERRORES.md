@@ -723,3 +723,9 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 
 ## BE-XF11 — hash de commit reportado antes de existir (Xfinity, 12-nov)
 - BE-XF11 (conducta): tres veces se reportó a COORDINACIÓN un hash de commit escrito a mano antes de leerlo (30b4f55, 30a2d17, 1d3bd9e: ninguno existía). Regla: un hash se reporta solo copiado de la salida de `git log --oneline -1` del mismo paso que hizo el push, en el mismo mensaje armado después de esa salida; nunca un hash tipeado. Motivo de conducta: el mensaje a otra sesión no pasa por la compuerta.
+
+## U-189 / BE-CR39 / BE-CR38 en el skill (12-nov, v81cf103)
+- CB_RCP_APILADOS (chequeos_biblioteca.rcp_apilados): dos tags de cielo del mismo cuarto a distinta altura cubiertos por un solo renglón, o uno sin renglón ni motivo = FAIL (caso corredor de CR). Solo ve los tags que están en rcp_tags: un tag que nadie leyó lo atrapa el conteo de CB_RCP_TAGS (hoy solo GYP-n).
+- CB_DETALLE_CARAS (chequeos_biblioteca.detalle_caras): todo detalle que gobierna un SOF / BW con su revisión cara por cara en detail_faces; cara sin loaded ni none_reason = FAIL (caso 7/A7.23 caja en plenum, 12/A9.03 cara del shaft).
+- CE_PROTOCOLO_3H: la auditoría U-181 lleva sección COBERTURA con todo detalle que gobierna cantidad y toda hoja RCP (cobertura_fallas).
+- Entregas anteriores a v81cf103 = AMBER (U-180 (4)). Tests: CASOS rcp_apilados / detalle_caras, test_u189_cobertura_y_gating, test_be_cr38_renglones_partidos.
