@@ -148,3 +148,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf118 · Xfinity · 12-nov 15:43 UTC (orden COORDINACIÓN, GK) · v81cf117 + CB_U_191_REF salta renglones EXCLUDED con cantidad 0 · en curso
 - ACTUALIZACIÓN 2026-11-12: **v81cf118 PUBLICADA** (GK) = skills_archivo/take-off-metal-frame-drywall_v81cf118_U191-excluded-cero_2026-11-12.zip = v81cf117 + CB_U_191 salta EXCLUDED 0 (VIGENTE en INDICE; 199 archivos, suite 47/47, banco 0 distintas en 8 proyectos, verificar_version OK de carpeta y zip)
 - CONGELADO de nuevo 2026-11-12 (orden COORDINACIÓN): no se publica v81cf119 hasta que COORDINACIÓN avise
+- v81cf119 APARTADA (sin publicar, congelado) · Xfinity · 12-nov 18:52 UTC (orden COORDINACIÓN) · v81cf118 + U-193 MAPA DE COBERTURA (muros / cielos NO marcados, CE_COBERTURA, B6) + BE-GK53 · en curso
