@@ -652,3 +652,12 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - BE-CR32 (programa): el parser de altura impresa (revision_markups.altura_impresa) tomaba la comprobación vectorial en vez de la cota impresa ('printed <cota>' seguido de cross-check). Test test_hoja_sufijo::test_be_cr32_impresa_sobre_crosscheck.
 - BE-CR33 (programa): comparar_alturas no reconocía hojas con punto / guion en height_diff_reason (A7.05, 4/A5.05) y el cruce cuarto-type exigía motivo a todos los renglones. Tests test_comparar_alturas::test_be_cr33_*.
 - BE-CR34 (programa): 'gauge not printed' en el Material Summary o en un RFI con un STUD SCHEDULE (MIN. GAUGE) impreso en el set (A0.06) = FAIL: CE_GAUGE_IMPRESA (U-171). Test test_compuerta_entrega::test_be_cr34_gauge_impreso.
+
+## BE-AUD01..04 / BE-PM — post-mortem de cobertura del 11-nov (12-nov, v81cf96, U-185)
+- BE-AUD01 (programa): verde de otro archivo / skill viejo (CR rev18b) — CE_ENTREGA_VIGENTE + subir_entrega --vigente. Test test_compuerta_entrega::test_u177_auditoria.
+- BE-AUD02 (programa): polígono RCP con coincidencia 0.0 pasaba y 0 polígonos salía AMBER — piso 0.5 y, con cielos en el canon / hojas RCP, 0 polígonos o 0 cuartos = FAIL. Test test_p5_rcp_no_pasa_en_vacio.
+- BE-AUD03 (programa): stud / track del Material Summary sin gauge (Xfinity renglón 10) — CE_MS_GAUGE. Test test_u177_auditoria.
+- BE-AUD04 (programa): producto distinto al impreso (Xfinity renglón 15) — CE_MS_PRODUCTO_IMPRESO. Test test_u177_auditoria.
+- BE-PM01 (programa): la compuerta solo registraba corridas TERMINADAS (GK: TIEMPOS decía 9, hubo 10 con dos cortadas), sin tope de tiempo por chequeo, y varios chequeos pasaban en vacío. Arreglo v81cf96: inicio + fin en compuerta_corridas.jsonl, watchdog por chequeo, RCP en FAIL con cielos esperados, presupuesto de horas. Tests test_p3_registro_corridas / test_be_gk35_watchdog_y_ciclos / test_p6_presupuesto_horas.
+- BE-GK37 (programa desde v81cf96): track de una fila de studs citando un detalle cuya hoja no dice TRACK / RUNNER, o clip / angle citado con qty 0 = FAIL (CE_FILA_DETALLE). Test test_be_gk37_fila_detalle.
+

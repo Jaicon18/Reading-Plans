@@ -329,6 +329,86 @@ def revisar_ordenes(cache, horas=24):
     return faltas
 
 
+RX_POSTMORTEM = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})[\w.-]*\.md$")
+
+
+def tabla_postmortem(txt):
+    """U-185: renglones de la tabla 'id | error / regla | chequeo | test | estado' -> [(id, estado)]."""
+    out, dentro = [], False
+    for ln in txt.splitlines():
+        cs = [x.strip() for x in ln.strip().strip("|").split("|")]
+        if ln.lstrip().startswith("|") and cs and cs[0].lower() == "id" and cs[-1].lower().startswith("estado"):
+            dentro = True
+            continue
+        if dentro and not ln.lstrip().startswith("|"):
+            dentro = False
+            continue
+        if dentro and cs and not set(cs[0]) <= set("-: "):
+            out.append((cs[0], cs[-1]))
+    return out
+
+
+def abiertos_postmortem(txt):
+    """U-185: renglones WEAK / MISSING abiertos. Cerrado = 'OK ...' o 'conducta: <motivo de al menos 3 palabras>'."""
+    ab = []
+    for i, e in tabla_postmortem(txt):
+        u = e.strip("* ")
+        if re.match(r"(?i)OK\b", u):
+            continue
+        m = re.match(r"(?i)conducta\s*[:—–-]\s*(.+)", u)
+        if m and len(m.group(1).split()) >= 3:
+            continue
+        ab.append((i, (re.match(r"(?i)(WEAK|MISSING)", u) or re.match(r"(\S*)", u)).group(1).upper() or "SIN ESTADO"))
+    return ab
+
+
+def _cierre_pt(iso):
+    import datetime
+    try:
+        t = datetime.datetime.fromisoformat(str(iso).replace("Z", "+00:00"))
+        from zoneinfo import ZoneInfo
+        return t.astimezone(ZoneInfo("America/Los_Angeles")).strftime("%Y-%m-%d")
+    except Exception:
+        return str(iso or "")[:10]
+
+
+def revisar_postmortem(cache):
+    """U-185 (COORDINACIÓN 12-nov: 'revisa todo para que no vuelvas a cometer los mismos errores'): el último proyecto cerrado
+    (SUBIDA_OK.json más reciente en cache_proyectos/<proyecto>/) necesita cache_proyectos/POSTMORTEM_COBERTURA_<fecha>.md con fecha
+    >= su cierre (hora de California) y 0 WEAK / 0 MISSING abiertos (lo de conducta solo cuenta con su motivo)."""
+    import json
+    if not cache or not os.path.isdir(cache):
+        return []
+    cierres = []
+    for d in os.listdir(cache):
+        p = os.path.join(cache, d, "SUBIDA_OK.json")
+        if os.path.isfile(p):
+            try:
+                x = json.load(open(p, encoding="utf-8"))
+            except Exception:
+                continue
+            f = x.get("primera_subida_iso") or x.get("fecha_iso")
+            if f:
+                cierres.append((_cierre_pt(f), d))
+    if not cierres:
+        return []
+    fecha, proy = max(cierres)
+    pms = sorted((m.group(1), n) for n in os.listdir(cache) for m in [RX_POSTMORTEM.match(n)] if m and m.group(1) >= fecha)
+    if not pms:
+        return [f"{proy} cerrado {fecha} sin cache_proyectos/POSTMORTEM_COBERTURA_<fecha>.md de esa fecha o posterior (U-185)"]
+    ok = []
+    for _f, n in reversed(pms):
+        ab = abiertos_postmortem(open(os.path.join(cache, n), encoding="utf-8").read())
+        if not ab:
+            return []
+        ok.append((n, ab))
+    n, ab = ok[0]
+    nw = sum(1 for _i, e in ab if e == "WEAK")
+    nm = sum(1 for _i, e in ab if e == "MISSING")
+    return [f"{n}: {nw} WEAK / {nm} MISSING abiertos ({len(ab)} renglones sin OK ni 'conducta: motivo'; U-185): "
+            + ", ".join(i for i, _e in ab[:30])]
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -358,8 +438,10 @@ def main(argv):
     bc = revisar_banco(archivo)
     od = revisar_ordenes(extra[0] if extra else None)
     vu = revisar_versiones_unicas(archivo)
+    pm = revisar_postmortem(extra[0] if extra else None)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
-                       ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu)):
+                       ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
+                       ("POSTMORTEM (U-185)", pm)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

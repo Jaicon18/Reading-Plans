@@ -11,6 +11,7 @@ import zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import verificar_version as V  # noqa: E402
 
+AQUI_T = os.path.dirname(os.path.abspath(__file__))
 U = "U-"   # ids armados en tiempo de corrida: el texto del test no debe parecer una regla acumulada (PAT)
 
 
@@ -190,8 +191,30 @@ def zip_200_bexf08():
     assert any("BE-XF08" in x for x in V.revisar_indice(a)), "zip vigente con 200 archivos debe fallar"
 
 
+def postmortem_u185():
+    """U-185: último proyecto cerrado sin post-mortem = falta; post-mortem 11-nov (29 WEAK / 16 MISSING) = falta; tabla rehecha con cada
+    renglón OK o 'conducta: motivo' = sin falta; 'conducta' sin motivo sigue abierto."""
+    import shutil
+    c = tempfile.mkdtemp(prefix="pm_")
+    os.makedirs(os.path.join(c, "proy_x"))
+    json.dump({"primera_subida_iso": "2026-11-12T00:23:19+00:00"}, open(os.path.join(c, "proy_x", "SUBIDA_OK.json"), "w"))
+    assert any("sin cache_proyectos/POSTMORTEM" in x for x in V.revisar_postmortem(c)), V.revisar_postmortem(c)
+    real = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(AQUI_T))), "cache_proyectos", "POSTMORTEM_COBERTURA_2026-11-11.md")
+    if os.path.isfile(real):
+        shutil.copy(real, os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-11.md"))
+        r = V.revisar_postmortem(c)
+        assert r and "29 WEAK / 16 MISSING" in r[0], r
+    cab = "| id | error / regla | chequeo | test | estado |\n|---|---|---|---|---|\n"
+    open(os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12.md"), "w").write(
+        cab + "| BE-Q1 | x | ce_x | test_x | OK |\n| BE-Q2 | y | conducta | — | conducta: no se puede leer desde un programa |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    open(os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12.md"), "w").write(cab + "| BE-Q2 | y | conducta | — | conducta |\n| BE-Q3 | z | n | — | WEAK |\n")
+    r = V.revisar_postmortem(c)
+    assert r and "1 WEAK" in r[0] and "BE-Q2" in r[0], r
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
