@@ -1,0 +1,854 @@
+diff -ruN v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 15:47:43.101587661 +0000
++++ v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 19:41:45.204994847 +0000
+@@ -1,7 +1,7 @@
+ {
+- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos + v81cf115 BE-AUD09 solo la rev vigente + v81cf116 Listing: en trazabilidad (BE-AUD05) + BE-GK50 BE-GK51 unidos + v81cf117 ceilings_misc (BE-AUD06) + BE-GK52 unidos + v81cf118 U_191 salta EXCLUDED 0",
++ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos + v81cf115 BE-AUD09 solo la rev vigente + v81cf116 Listing: en trazabilidad (BE-AUD05) + BE-GK50 BE-GK51 unidos + v81cf117 ceilings_misc (BE-AUD06) + BE-GK52 unidos + v81cf118 U_191 salta EXCLUDED 0 + v81cf119 U-193 mapa de cobertura (CE_COBERTURA, B6) + BE-GK53 unidos",
+  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
+- "conteo": 564,
++ "conteo": 566,
+  "reglas": [
+   {
+    "id": "U-001",
+@@ -8459,6 +8459,30 @@
+    "categoria": "conducta",
+    "texto_corto": "nunca se edita un script de bash (cadena.sh / armar_entrega.sh) mientras corre: bash lo lee por posición y un cambio de largo en una línea hace que la corrida ejecute texto corrido; primero se para la corrida (TaskStop + pkill) y después se edita y se relanza",
+    "motivo": "se editó la línea 12 de cadena.sh con la cadena de rev3a corriendo; se paró y se relanzó completa"
++  },
++  {
++   "id": "U-193",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
++   "texto_corto": "MAPA DE COBERTURA: verificación negativa de muros y cielos NO marcados (compuerta_entrega.mapa_cobertura / cobertura); todo ROJO con markup o disposición (motivo + N/HOJA); 0 muros en una planta = detector ciego; COBERTURA - IMAGE ONLY.pdf + Auditoria/COBERTURA.csv + CHECKLIST B6",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_cobertura",
++    "take-off:tools/compuerta_entrega.py::mapa_cobertura",
++    "take-off:tools/compuerta_entrega.py::cob_muros",
++    "take-off:tools/checklist_revision.py::escribir"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v119_cobertura"
++   }
++  },
++  {
++   "id": "BE-GK53",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a, re-verificación U-181 R15-F1, 12-nov)",
++   "categoria": "conducta",
++   "texto_corto": "antes de atribuir una nota a un detalle N/HOJA se mira de qué lado de su dibujo va el título EN ESA HOJA (en A540 el título va debajo del dibujo): la nota '12 GA HANGER WIRE AT 4'-0\" O.C.' quedó citada como 1/A540 porque estaba justo bajo el título 1, pero es de 2/A540 (4-WAY TEE BRACING); el recorte de evidencia incluye el título del detalle al que pertenece la nota",
++   "motivo": "nota atribuida al título de arriba; el recorte no mostraba el título correcto"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v118/take-off-metal-frame-drywall/SKILL.md v119/take-off-metal-frame-drywall/SKILL.md
+--- v118/take-off-metal-frame-drywall/SKILL.md	2026-11-12 15:44:53.621060157 +0000
++++ v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 19:38:53.019474486 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf118** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf119** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -333,6 +333,17 @@
+ - **Renglones EXCLUDED en 0 (v81cf118):** un renglón del Material Summary con Net 0 y EXCLUDED en su texto no carga nada: CB_U_191 no le
+   pide cita (p. ej. el yield 'GA-216' de los drywall screws excluidos, U-053). Con cantidad > 0, un listing sin ítem sigue en FAIL. No se inventa
+   una sección de GA en la plantilla.
++- **U-193 MAPA DE COBERTURA (verificación negativa, antes de cada entrega):** `python3 -I tools/compuerta_entrega.py cobertura <carpeta de
++  entrega>` escribe 'Planos marcados/COBERTURA - IMAGE ONLY.pdf' (una página por hoja: la hoja en gris, lo cubierto en verde tenue, lo ROJO
++  grueso, circulado y numerado) y Auditoria/COBERTURA.csv (hoja, tipo muro / cielo, id, coordenadas, largo, estado, disposición). Muros:
++  pares de líneas paralelas a 2.5"-14" (escala de la hoja), traslape >= 2 ft, sin texto entre las líneas, con el ESTILO de trazo de los
++  muros que sí tienen markup en la hoja (o en el documento), dentro del edificio (trazos de muro conectados a los markups); cubierto =
++  markup a <= max(0.5 ft, medio espesor + 2") del eje; un muro parcialmente marcado sale con su parte ROJA aparte. Cielos: todo número de
++  cuarto de un RCP dentro de un polígono de cielo con /Measure o EXCLUDED (siguiendo la línea guía si el tag está afuera). Todo ROJO lleva
++  markup o un renglón en Auditoria/COBERTURA_DISPOSICION.csv (hoja, tipo, id o x / y o zona x0, y0, x1, y1, motivo, nhoja N/HOJA).
++  CE_COBERTURA: ROJO sin disposición = FAIL; 0 muros en una planta con markups = detector ciego = FAIL; CHECKLIST B6
++  (`checklist_revision.py --b6 Auditoria/COBERTURA.csv`). Límites: muros en diagonal no se detectan; un muro marcado por una sola cara
++  cuenta como cubierto; dos cielos apilados en el mismo cuarto los revisa CB_RCP_APILADOS, no este mapa.
+ 
+ ## Etapa 4 — CÁLCULO
+ 
+diff -ruN v118/take-off-metal-frame-drywall/tools/checklist_revision.py v119/take-off-metal-frame-drywall/tools/checklist_revision.py
+--- v118/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-12 15:43:36.840914020 +0000
++++ v119/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-12 19:32:39.314157685 +0000
+@@ -11,6 +11,7 @@
+   B3 Sheets to walk            hojas de planta / RCP / ampliadas con markups: casilla "no blank rooms / walls"
+   B4 Exclusions & decisions    toda exclusión del Scope Checklist y toda decisión de Review Items con su delta: casilla "agree"
+   B5 Bluebeam CSV              pasos para exportar el CSV de Bluebeam y subirlo (U-157 / U-167): casilla por paso
++  B6 Coverage                  (U-193, --b6 Auditoria/COBERTURA.csv) hojear 'COBERTURA - IMAGE ONLY.pdf': 0 rojos por hoja
+ 
+ Uso: python3 -I checklist_revision.py <takeoff.xlsx> <markups.pdf> <bidset_limpio.pdf> <canon.json> <salida.xlsx>
+          [--proy CR] [--b5-hecho "<texto de la comparación ya hecha>"] [--b2-3lados Auditoria/COMPARACION_ALTURAS.csv (U-175)] [--b2-muestra Auditoria/ALTURAS_MUESTRA.json (U-176)]
+@@ -68,7 +69,7 @@
+     return a1, f1, a2, f2, b3, b4
+ 
+ 
+-def escribir(salida, xlsx, markups_pdf, a1, f1, a2, f2, b3, b4, proy="", b5_hecho="", b2_3lados="", b2_muestra=""):
++def escribir(salida, xlsx, markups_pdf, a1, f1, a2, f2, b3, b4, proy="", b5_hecho="", b2_3lados="", b2_muestra="", b6=""):
+     import openpyxl
+     from openpyxl.styles import Alignment, Font, PatternFill
+     from openpyxl.worksheet.datavalidation import DataValidation
+@@ -176,6 +177,24 @@
+         dv.add(f"C{ws.max_row}")
+     ws.append([])
+     ws.append(["", "CSV comparison: " + (b5_hecho or "pending (upload the CSV)")])
++    if b6:                                              # U-193: hojear el mapa de cobertura, 0 rojos
++        import csv as _csv
++        ws, dv = hoja("B6 Coverage", "B6 - Walk 'COBERTURA - IMAGE ONLY.pdf': 0 red walls / rooms",
++                      "Abre 'Planos marcados/COBERTURA - IMAGE ONLY.pdf': lo verde tiene markup, lo ROJO (grueso, circulado y numerado) es un "
++                      "muro o cuarto dibujado SIN markup ni disposición. Marca la casilla de cada hoja cuando no quede ningún rojo.",
++                      ["Sheet (Page Label)", "Walls detected", "Wall LF covered %", "Rooms (ceiling / excluded)", "RED", "0 red (checked)"],
++                      [16, 16, 18, 24, 8, 16])
++        filas = list(_csv.DictReader(open(b6, encoding="utf-8")))
++        for h in dict.fromkeys(f["hoja"] for f in filas):
++            fh = [f for f in filas if f["hoja"] == h]
++            mu = [f for f in fh if f["tipo"] == "muro"]
++            lf = sum(float(f["largo_ft"] or 0) for f in mu)
++            ok = sum(float(f["largo_ft"] or 0) for f in mu if f["estado"] != "ROJO")
++            cu = [f for f in fh if f["tipo"] == "cielo"]
++            ws.append([h, len(mu), round(100 * ok / lf) if lf else None,
++                       f"{sum(1 for f in cu if f['estado'] == 'CUBIERTO')} / {sum(1 for f in cu if f['estado'] in ('EXCLUDED', 'DISPUESTO'))}",
++                       sum(1 for f in fh if f["estado"] == "ROJO"), NO])
++            dv.add(f"F{ws.max_row}")
+     os.makedirs(os.path.dirname(os.path.abspath(salida)) or ".", exist_ok=True)
+     tmp = salida + ".tmp.xlsx"
+     wb.save(tmp)
+@@ -191,9 +210,10 @@
+     b5 = argv[argv.index("--b5-hecho") + 1] if "--b5-hecho" in argv else ""
+     b23 = argv[argv.index("--b2-3lados") + 1] if "--b2-3lados" in argv else ""
+     b2m = argv[argv.index("--b2-muestra") + 1] if "--b2-muestra" in argv else ""
++    b6 = argv[argv.index("--b6") + 1] if "--b6" in argv else ""          # U-193: Auditoria/COBERTURA.csv
+     xlsx, mk, plano, canon, salida = argv[1:6]
+     a1, f1, a2, f2, b3, b4 = datos(xlsx, mk, plano, canon)
+-    escribir(salida, xlsx, mk, a1, f1, a2, f2, b3, b4, proy, b5, b23, b2m)
++    escribir(salida, xlsx, mk, a1, f1, a2, f2, b3, b4, proy, b5, b23, b2m, b6)
+     fs = CE.checklist_fallas(salida, xlsx)
+     print(f"{salida}: B1 {len(a1)} walls (A1 {'PASS' if not f1 else 'FAIL ' + str(len(f1))}), B2 {len(a2)} heights "
+           f"(A2 {'PASS' if not f2 else 'FAIL ' + str(len(f2))}), B3 {len(b3)} sheets, B4 {len(b4)} items, B5 "
+diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 15:43:36.849152664 +0000
++++ v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 19:40:50.379903590 +0000
+@@ -686,8 +686,9 @@
+ FECHA_V105 = "2026-11-12T03:20:00+00:00"      # v81cf105: U-190 REGLA DE ORO #3 (doble cielo) exigida desde aquí      # v81cf104: CB_RCP_TAGS cuenta TODO tag de cielo (no solo GYP)
+ FECHA_V109 = "2026-11-12T04:50:00+00:00"      # v81cf109: U-191 (documento citado con su ítem / párrafo)
+ FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
++FECHA_V119 = "2026-11-12T19:00:00+00:00"      # v81cf119: U-193 mapa de cobertura (CE_COBERTURA)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+-U189_CB = {"CB_RCP_APILADOS": FECHA_V114, "CB_DETALLE_CARAS": FECHA_V103, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
++U189_CB = {"CB_RCP_APILADOS": FECHA_V114, "CB_DETALLE_CARAS": FECHA_V103, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114, "CE_COBERTURA": FECHA_V119}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
+ 
+ 
+ def entrega_nueva(c, fecha=None):
+@@ -2948,7 +2949,7 @@
+     """PDF de Planos marcados con markups del take-off (DETALLES_REVISADOS / SCHEDULES_REVISADOS no miden)."""
+     return [p for p in sorted(glob.glob(os.path.join(c.planos, "*.pdf"))) if getattr(c, "planos", None)
+             and not os.path.basename(p).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS"))
+-            and "NO USAR" not in os.path.basename(p)]
++            and "NO USAR" not in os.path.basename(p) and "COBERTURA" not in os.path.basename(p).upper()]
+ 
+ 
+ def subject_sin_medida_fallas(pdf, xlsx=None, tipos=None):
+@@ -5284,6 +5285,600 @@
+     return hojas
+ 
+ 
++
++# ------------------------------------------------------------------------------------------- U-193 MAPA DE COBERTURA
++# U-193 (usuario 12-nov: "que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera
++# rápida"): verificación NEGATIVA — se muestra lo que NO tiene markup. Muros: pares de líneas paralelas del plano (espesor 2.5"-14"
++# a la escala de la hoja, largo >= 1 ft) sin un markup de /Measure a <= tol de su eje en >= 90 % del largo. Cielos: todo número de
++# cuarto impreso en una hoja RCP fuera de un polígono de cielo con /Measure y de un EXCLUDED. Lo ROJO necesita markup o una
++# disposición en Auditoria/COBERTURA_DISPOSICION.csv (hoja, tipo, id, x, y, motivo, nhoja) con motivo impreso y N/HOJA.
++COB_T_MIN_IN, COB_T_MAX_IN, COB_L_MIN_FT, COB_TOL_FT, COB_FRAC = 2.5, 14.0, 1.0, 0.5, 0.90
++COB_PAR_MIN_FT, COB_MARGEN_FT = 2.0, 4.0          # traslape mínimo del par (muebles / marcos < 2 ft) y margen de la zona del plano
++RX_COB_RCP = re.compile(r"(?i)REFLECTED\s+CEILING|CEILING\s+PLAN|\bRCP\b")
++RX_COB_PLANTA = re.compile(r"(?i)\b(?:FLOOR|PARTITION|CONSTRUCTION|DIMENSION|ENLARGED|LEVEL\s*\d+)\s+PLAN\b")
++RX_COB_DEMO = re.compile(r"(?i)DEMOLITION\s+PLAN|DEMO\s+PLAN")
++RX_COB_CUARTO = re.compile(r"^[A-Z]?\d{3,4}[A-Z]?$")
++RX_COB_ESC = re.compile(r"(?i)(\d+(?:[ -]\d+/\d+|/\d+|\.\d+)?)\s*in\s*=\s*(\d+(?:\.\d+)?)\s*ft")
++
++
++def _cob_frac(t):
++    t = t.strip().replace("-", " ")
++    tot = 0.0
++    for p in t.split():
++        tot += (float(p.split("/")[0]) / float(p.split("/")[1])) if "/" in p else float(p)
++    return tot
++
++
++def cob_escala(doc, page):
++    """pt por pie de la hoja: /VP /Measure /R de la página o, si no, el /R de sus markups ('1/4 in = 1 ft' -> 18)."""
++    txts = [doc.xref_get_key(page.xref, "VP")[1]]
++    for a in page.annots() or []:
++        txts.append(doc.xref_get_key(a.xref, "Measure")[1])
++    for t in txts:
++        m = RX_COB_ESC.search(str(t or ""))
++        if m:
++            try:
++                return _cob_frac(m.group(1)) * 72.0 / float(m.group(2))
++            except (ValueError, ZeroDivisionError):
++                continue
++    return None
++
++
++RX_COB_DISC = re.compile(r"^(?:A|ID|I)[-\s]?\d", re.I)
++
++
++RX_COB_NO_MURO = re.compile(r"(?i)^\s*(?:\d|GYP|GYPSUM|DEMO|LEGEND|EXCLUDED|CEILING|SOFFIT|CLG\b)")
++
++
++def cob_tipo_hoja(doc, page):
++    """-> (es_planta, es_rcp). Por los markups: walls (PolyLine con /Measure cuyo Subject es un type: no '5/8…', GYP, DEMO, LEGEND,
++    EXCLUDED) = planta; polígonos de cielo con /Measure o EXCLUDED (>= 3, o >= los walls) = RCP. Plano de demolición (solo DEMO) = ni uno.
++    Sin markups (hoja que quizá se pasó por alto): hoja de arquitectura con un TÍTULO DE VISTA (span completo) 'FLOOR / PARTITION …
++    PLAN' o 'REFLECTED CEILING PLAN'."""
++    n_w = n_c = n_d = 0
++    for a in page.annots() or []:
++        sub, ct = a.info.get("subject") or "", a.info.get("content") or ""
++        med = doc.xref_get_key(a.xref, "Measure")[0] != "null"
++        if re.search(r"(?i)\bLEGEND\b", sub):
++            continue
++        if a.type[1] in ("Polygon", "Square") and (med or re.search(r"(?i)\bEXCLUDED\b", f"{sub} {ct}")):
++            n_c += 1
++        elif a.type[1] in ("PolyLine", "Line") and med:
++            if re.match(r"(?i)\s*DEMO", sub):
++                n_d += 1
++            elif not RX_COB_NO_MURO.match(sub):
++                n_w += 1
++    planta, rcp = n_w > 0, n_c >= 3 or (n_c > 0 and n_c >= n_w)
++    if not (planta or rcp or n_d or n_c) and RX_COB_DISC.match(page.get_label() or ""):
++        spans = [s_["text"].strip().upper() for b in page.get_text("dict")["blocks"] for l_ in b.get("lines", []) for s_ in l_["spans"]]
++        rcp = any(re.fullmatch(r"(?:\d+\s+)?(?:(?:LEVEL|FLOOR)\s*\w*\s+)?(?:OVERALL\s+|ENLARGED\s+)?(?:REFLECTED\s+)?CEILING\s+PLAN(?:\s*-\s*\w.*)?", t) for t in spans)
++        planta = any(re.fullmatch(r"(?:\d+\s+)?(?:(?:LEVEL|FLOOR)\s*\w*\s+|\w+\s+)?(?:OVERALL\s+|ENLARGED\s+)?(?:FLOOR|PARTITION|CONSTRUCTION|DIMENSION)\s+PLAN(?:\s*-\s*\w.*)?", t)
++                     for t in spans)
++    return planta, rcp
++
++
++def _cob_markups(doc, page):
++    """-> (segmentos de markups con /Measure (walls, DEMO, soffits), polígonos EXCLUDED, polígonos de cielo con /Measure)."""
++    segs, exc, clg = [], [], []
++    for a in page.annots() or []:
++        sub = f"{a.info.get('subject') or ''} {a.info.get('content') or ''}"
++        if re.search(r"(?i)\bLEGEND\b", a.info.get("subject") or ""):
++            continue
++        V = [(v[0], v[1]) for v in (a.vertices or [])]
++        tipo = a.type[1]
++        if re.search(r"(?i)\bEXCLUDED\b", sub) and tipo in ("Polygon", "Square") and (V or tipo == "Square"):
++            exc.append(V or [(a.rect.x0, a.rect.y0), (a.rect.x1, a.rect.y0), (a.rect.x1, a.rect.y1), (a.rect.x0, a.rect.y1)])
++            continue
++        if doc.xref_get_key(a.xref, "Measure")[0] == "null":
++            continue
++        if tipo == "Polygon" and len(V) >= 3:
++            clg.append(V)
++        if len(V) >= 2:
++            segs += [(V[k][0], V[k][1], V[k + 1][0], V[k + 1][1]) for k in range(len(V) - 1)]
++            if tipo == "Polygon":
++                segs.append((V[-1][0], V[-1][1], V[0][0], V[0][1]))
++    return segs, exc, clg
++
++
++def _cob_dentro(P, x, y):
++    c = False
++    for i in range(len(P)):
++        x1, y1 = P[i]
++        x2, y2 = P[(i + 1) % len(P)]
++        if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / ((y2 - y1) or 1e-9) + x1:
++            c = not c
++    return c
++
++
++def _cob_region(page, segs, exc, clg, esc):
++    """zona del plano: caja de TODOS los markups de la hoja ampliada 4 ft; sin markups = la página entera."""
++    pts = [(s[0], s[1]) for s in segs] + [(s[2], s[3]) for s in segs] + [p for P in exc + clg for p in P]
++    r = page.cropbox if page.rotation else page.rect
++    if not pts:
++        return (r.x0, r.y0, r.x1, r.y1)
++    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
++    mx = my = COB_MARGEN_FT * esc                       # muros perimetrales: los marca el XW / exterior; burbujas de ejes fuera
++    return (max(r.x0, min(xs) - mx), max(r.y0, min(ys) - my), min(r.x1, max(xs) + mx), min(r.y1, max(ys) + my))
++
++
++def cob_region_edificio(drs, estilos, esc, reg_mk):
++    """zona del EDIFICIO: componentes conexos (rejilla de 2 ft) de los trazos con estilo de muro que tocan la zona de los markups -> caja.
++    Así entra un muro / ala SIN ningún markup cerca (lo que la caja de los markups sola dejaba fuera) y no entran tablas ni detalles
++    sueltos. -> (x0, y0, x1, y1) o reg_mk si no hay estilos."""
++    if not estilos:
++        return reg_mk
++    cel = 2.0 * esc
++    occ = {}
++    for dr in drs:
++        if _cob_estilo(dr) not in estilos:
++            continue
++        for it in dr["items"]:
++            if it[0] != "l":
++                continue
++            a_, b_ = it[1], it[2]
++            n = max(1, int(math.hypot(b_.x - a_.x, b_.y - a_.y) / cel) + 1)
++            for k in range(n + 1):
++                x = a_.x + (b_.x - a_.x) * k / n
++                y = a_.y + (b_.y - a_.y) * k / n
++                occ[(int(x // cel), int(y // cel))] = (x, y)
++    semillas = [k for k, (x, y) in occ.items() if reg_mk[0] <= x <= reg_mk[2] and reg_mk[1] <= y <= reg_mk[3]]
++    vis, pila = set(semillas), list(semillas)
++    while pila:
++        cx, cy = pila.pop()
++        for dx in (-1, 0, 1):
++            for dy in (-1, 0, 1):
++                q = (cx + dx, cy + dy)
++                if q in occ and q not in vis:
++                    vis.add(q)
++                    pila.append(q)
++    if not vis:
++        return reg_mk
++    xs = [occ[k][0] for k in vis]
++    ys = [occ[k][1] for k in vis]
++    m = COB_MARGEN_FT * esc
++    return (min(min(xs) - m, reg_mk[0]), min(min(ys) - m, reg_mk[1]), max(max(xs) + m, reg_mk[2]), max(max(ys) + m, reg_mk[3]))
++
++
++def cob_muros(page, esc, region=None, words=None, mk_segs=None, estilos="aprender"):
++    """tramos de muro del plano: pares de líneas H / V paralelas a 2.5"-14" (escala de la hoja), traslapadas >= 1 ft, sin texto entre
++    las dos líneas (descarta tablas / notas), unidos los pares del mismo muro. -> [{ori, lo, hi, c, t}] (pt de la página)."""
++    tmin, tmax, lmin = COB_T_MIN_IN / 12 * esc, COB_T_MAX_IN / 12 * esc, COB_L_MIN_FT * esc
++    x0r, y0r, x1r, y1r = region or (-1e9, -1e9, 1e9, 1e9)
++    H, V = [], []
++    drs = page.get_drawings()
++    if estilos == "aprender":
++        estilos = cob_estilos_muro(drs, mk_segs, esc)
++    if region is not None:
++        region = cob_region_edificio(drs, estilos, esc, region)   # el edificio entero, no solo la caja de los markups
++        x0r, y0r, x1r, y1r = region
++    for dr in drs:
++        relleno = dr.get("fill") is not None
++        if estilos is not None and _cob_estilo(dr) not in estilos:
++            continue                                    # trazo con otro estilo que los muros de la hoja (muebles, puertas, cotas, tags)
++        if _cob_cromatico(_cob_estilo(dr)[0]) and not relleno:
++            continue
++        bb = dr.get("rect")
++        if bb is not None and bb.width <= 3.0 * esc and bb.height <= 3.0 * esc and (relleno or len(dr["items"]) <= 4):
++            continue                                    # columna / pilastra / caja chica: no es un tramo de muro
++        for it in dr["items"]:
++            ss = []
++            if it[0] == "l":
++                ss = [(it[1].x, it[1].y, it[2].x, it[2].y)]
++            elif it[0] == "re":
++                q = it[1]
++                ss = [(q.x0, q.y0, q.x1, q.y0), (q.x1, q.y0, q.x1, q.y1), (q.x0, q.y1, q.x1, q.y1), (q.x0, q.y0, q.x0, q.y1)]
++            for a, b, c_, d_ in ss:
++                if abs(d_ - b) < 0.3 and abs(c_ - a) >= lmin and y0r <= b <= y1r:
++                    H.append((max(min(a, c_), x0r), min(max(a, c_), x1r), (b + d_) / 2))
++                elif abs(c_ - a) < 0.3 and abs(d_ - b) >= lmin and x0r <= a <= x1r:
++                    V.append((max(min(b, d_), y0r), min(max(b, d_), y1r), (a + c_) / 2))
++    W = words if words is not None else page.get_text("words")
++    gw, cw = {}, 4.0 * esc                              # rejilla de palabras (texto entre las dos líneas = tabla / nota)
++    for w in W:
++        cx_, cy_ = (w[0] + w[2]) / 2, (w[1] + w[3]) / 2
++        gw.setdefault((int(cx_ // cw), int(cy_ // cw)), []).append((cx_, cy_))
++
++    def _txt_entre(ori, lo, hi, c0, c1):
++        if ori == "H":
++            xs_, ys_ = (lo, hi), (c0, c1)
++        else:
++            xs_, ys_ = (c0, c1), (lo, hi)
++        for gx in range(int(xs_[0] // cw), int(xs_[1] // cw) + 1):
++            for gy in range(int(ys_[0] // cw), int(ys_[1] // cw) + 1):
++                for px, py in gw.get((gx, gy), ()):
++                    if ori == "H" and lo <= px <= hi and c0 < py < c1 or ori == "V" and lo <= py <= hi and c0 < px < c1:
++                        return True
++        return False
++    pmin = COB_PAR_MIN_FT * esc
++    pares = []
++    for L, ori in ((H, "H"), (V, "V")):
++        L = sorted(x for x in L if x[1] - x[0] >= lmin)
++        L.sort(key=lambda x: x[2])
++        import bisect
++        cs = [x[2] for x in L]
++        for i, a in enumerate(L):
++            cands = []
++            for b in L[i + 1:]:
++                dd = b[2] - a[2]
++                if dd > tmax:
++                    break
++                if dd < tmin:
++                    continue
++                lo, hi = max(a[0], b[0]), min(a[1], b[1])
++                if hi - lo >= pmin:
++                    cands.append((hi - lo, -dd, lo, hi, b))
++            for _ov, _dd, lo, hi, b in sorted(cands, reverse=True)[:2]:     # la pareja de MAYOR traslape (no la primera)
++                c0, c1 = a[2], b[2]
++                dd = c1 - c0
++                trama = 0                                   # rayado / trama: líneas a la MISMA distancia antes y después
++                for cc in (c0 - dd, c1 + dd):
++                    j0 = bisect.bisect_left(cs, cc - 0.4)
++                    while j0 < len(L) and L[j0][2] <= cc + 0.4:
++                        if min(L[j0][1], hi) - max(L[j0][0], lo) >= 0.8 * (hi - lo):
++                            trama += 1
++                            break
++                        j0 += 1
++                if trama == 2:
++                    continue
++                if not _txt_entre(ori, lo, hi, c0, c1):
++                    pares.append([ori, lo, hi, (c0 + c1) / 2, dd])
++                    break
++    pares.sort(key=lambda p: (p[0], p[3], p[1]))
++    out = []
++    for p in pares:                                     # une pares del mismo muro (líneas de acabado, muros de 3 líneas)
++        q = next((q for q in out if q[0] == p[0] and abs(q[3] - p[3]) <= max(q[4], p[4]) / 2 + 1 and p[1] <= q[2] and q[1] <= p[2]), None)
++        if q:
++            q[1], q[2], q[4] = min(q[1], p[1]), max(q[2], p[2]), max(q[4], p[4])
++        else:
++            out.append(p)
++    out.sort(key=lambda p: (p[0], p[3], p[1]))
++    unidos = []                                         # tramos colineales separados por un vano / columna (<= 3 ft) = un muro
++    for p in out:
++        q = unidos[-1] if unidos else None
++        if q and q[0] == p[0] and abs(q[3] - p[3]) <= 1.0 and 0 <= p[1] - q[2] <= 3.0 * esc and abs(q[4] - p[4]) <= 2 / 12 * esc:
++            q[2] = max(q[2], p[2])
++        else:
++            unidos.append(list(p))
++    return [{"ori": o, "lo": lo, "hi": hi, "c": c, "t": t} for o, lo, hi, c, t in unidos]
++
++
++def _cob_lider(lineas, x, y, esc, saltos=6):
++    """extremos SUELTOS de la línea guía que sale del tag de cuarto: tramos con un extremo a <= 2.5 ft del número y los que siguen
++    conectados (extremo con extremo, hasta 6 saltos); solo cuenta el punto donde la guía termina (no sigue a otra línea), que es el
++    que cae dentro del cuarto al que apunta el tag."""
++    sueltos, front, vistos = [], [(x, y, 2.5 * esc)], set()
++    for _ in range(saltos):
++        nuevo = []
++        for px, py, rad in front:
++            hijos = 0
++            for k, (x0, y0, x1, y1) in enumerate(lineas):
++                if k in vistos:
++                    continue
++                if math.hypot(x0 - px, y0 - py) <= rad:
++                    vistos.add(k)
++                    nuevo.append((x1, y1, 1.0))
++                    hijos += 1
++                elif math.hypot(x1 - px, y1 - py) <= rad:
++                    vistos.add(k)
++                    nuevo.append((x0, y0, 1.0))
++                    hijos += 1
++            if not hijos and rad == 1.0:
++                sueltos.append((px, py))
++        if not nuevo:
++            break
++        front = nuevo
++    else:
++        sueltos += [(a, b) for a, b, _r in front]
++    return sueltos
++
++
++def _cob_estilo(dr):
++    col = tuple(round(c, 2) for c in (dr.get("color") or ()))
++    return (col, round(dr.get("width") or 0.0, 2), dr.get("fill") is not None)
++
++
++def _cob_cromatico(col):
++    return bool(col) and max(col) - min(col) > 0.15          # color (no gris): markups quemados / capas de revisión, no muros del plano
++
++
++def cob_estilos_muro(drs, mk_segs, esc):
++    """estilos de trazo (color, grosor, relleno) con que ESTA hoja dibuja sus muros, aprendidos de los muros que sí tienen markup:
++    estilos con >= 10 trazos de >= 2 ft y >= 60 % de ellos bajo un markup de wall (y gris / negro). -> set, o None si no hay de dónde
++    aprender (sin markups: no se filtra por estilo)."""
++    if not mk_segs:
++        return None
++    ix = _IndiceSegs(mk_segs, 1.0 * esc)
++    tot, bajo = {}, {}
++    for dr in drs:
++        k = _cob_estilo(dr)
++        for it in dr["items"]:
++            if it[0] == "l" and math.hypot(it[2].x - it[1].x, it[2].y - it[1].y) >= 2 * esc:
++                tot[k] = tot.get(k, 0) + 1
++                if ix.dist((it[1].x + it[2].x) / 2, (it[1].y + it[2].y) / 2) <= 0.6 * esc:
++                    bajo[k] = bajo.get(k, 0) + 1
++    ok = {k for k, n in tot.items() if n >= 10 and bajo.get(k, 0) >= 0.6 * n and not _cob_cromatico(k[0])}
++    cob_estilos_muro.soporte = sum(bajo.get(k, 0) for k in ok)
++    return ok or None
++
++
++def _cob_xy(tr, f):
++    v = tr["lo"] + f * (tr["hi"] - tr["lo"])
++    return (v, tr["c"]) if tr["ori"] == "H" else (tr["c"], v)
++
++
++def cob_cubierto(tr, ix, esc):
++    """fracción del largo del tramo con un markup a <= max(COB_TOL_FT, medio espesor + 2 in) de su eje (ix = _IndiceSegs de los markups)."""
++    tol = max(COB_TOL_FT * esc, tr["t"] / 2 + 2 / 12 * esc)
++    n = max(4, int((tr["hi"] - tr["lo"]) / (0.25 * esc)))
++    ok = sum(1 for k in range(n + 1) if ix.dist(*_cob_xy(tr, k / n)) <= tol)
++    return ok / (n + 1)
++
++
++def cob_partir(tr, ix, esc, hay_mk=True):
++    """parte un tramo en corridas cubiertas / no cubiertas (muestras a lo largo del eje; una corrida sin markup más corta que
++    COB_L_MIN_FT se absorbe).
++    -> [tramo + {"f": fracción cubierta}]. Un muro con markup en un tramo y sin markup en otro sale con su parte ROJA aparte."""
++    tol = max(COB_TOL_FT * esc, tr["t"] / 2 + 2 / 12 * esc)
++    n = max(4, int((tr["hi"] - tr["lo"]) / (0.25 * esc)))
++    ok = [hay_mk and ix.dist(*_cob_xy(tr, k / n)) <= tol for k in range(n + 1)]
++    runs, k0 = [], 0
++    for k in range(1, n + 2):
++        if k == n + 1 or ok[k] != ok[k0]:
++            runs.append([ok[k0], k0, k - 1])
++            k0 = k
++    paso = (tr["hi"] - tr["lo"]) / n
++    for r_ in runs:                                     # una falta corta (< 1 ft) dentro de un muro cubierto no es un muro
++        if not r_[0] and (r_[2] - r_[1] + 1) * paso < COB_L_MIN_FT * esc and len(runs) > 1:
++            r_[0] = True
++    m = []
++    for r_ in runs:
++        if m and m[-1][0] == r_[0]:
++            m[-1][2] = r_[2]
++        else:
++            m.append(list(r_))
++    out = []
++    for c_, a_, b_ in m:
++        lo, hi = tr["lo"] + a_ * paso, tr["lo"] + b_ * paso
++        if hi - lo < 0.5 * esc and len(m) > 1:
++            continue
++        out.append(dict(tr, lo=lo, hi=max(hi, lo + paso), f=1.0 if c_ else 0.0))
++    return out or [dict(tr, f=sum(ok) / len(ok))]
++
++
++def _cob_disp(disp, hoja, tipo, x, y, ident, esc):
++    for d in disp or []:
++        if str(d.get("hoja")) != str(hoja) or str(d.get("tipo") or tipo) != tipo:
++            continue
++        if not (re.search(r"\S", str(d.get("motivo") or "")) and RX_NH_TRAZA.search(str(d.get("nhoja") or ""))):
++            continue
++        if ident and str(d.get("id") or "") == str(ident):
++            return d
++        try:                                            # disposición por zona: x0, y0, x1, y1 (pt de la hoja)
++            bx = [float(d.get(k)) for k in ("x0", "y0", "x1", "y1")]
++            if min(bx[0], bx[2]) <= x <= max(bx[0], bx[2]) and min(bx[1], bx[3]) <= y <= max(bx[1], bx[3]):
++                return d
++        except (TypeError, ValueError):
++            pass
++        try:
++            if math.hypot(float(d.get("x")) - x, float(d.get("y")) - y) <= 2.0 * esc:
++                return d
++        except (TypeError, ValueError):
++            pass
++    return None
++
++
++RX_NH_TRAZA = re.compile(r"\b[0-9A-Z]{1,3}/[A-Z]{1,3}[-.]?\d")
++
++
++def leer_disposicion(p):
++    """Auditoria/COBERTURA_DISPOSICION.csv -> [dict] (hoja, tipo, id, x, y, motivo, nhoja; o una zona x0, y0, x1, y1)."""
++    if not p or not os.path.isfile(p):
++        return []
++    import csv
++    return [{k.strip().lower(): (v or "").strip() for k, v in r.items() if k} for r in csv.DictReader(open(p, encoding="utf-8-sig"))]
++
++
++def mapa_cobertura(markups_pdf, disp=None, out_pdf=None, out_csv=None, hojas=None):
++    """U-193: -> {"hojas": {label: {tipo, muros, muros_lf, cubierto_lf, rojos, cuartos, cuartos_ok, ...}}, "filas": [...], "rojos": n,
++    "ciegas": [hojas de planta con 0 muros detectados]}. Escribe el PDF 'COBERTURA - IMAGE ONLY' y el CSV si se piden."""
++    import pymupdf
++    doc = pymupdf.open(markups_pdf)
++    res, filas, ciegas, dib = {}, [], [], {}
++    est_hoja, est_global = {}, {}                       # pre-pasada: estilos de muro aprendidos por hoja; las hojas con pocos muros
++    for i, pg in enumerate(doc):                        # marcados usan los estilos del documento (los de las plantas grandes)
++        if hojas and (pg.get_label() or str(i + 1)) not in hojas:
++            continue
++        if cob_tipo_hoja(doc, pg)[0]:
++            e_ = cob_escala(doc, pg)
++            if e_:
++                es = cob_estilos_muro(pg.get_drawings(), _cob_markups(doc, pg)[0], e_)
++                est_hoja[i] = (es, getattr(cob_estilos_muro, "soporte", 0))
++                for k in es or ():
++                    est_global[k] = est_global.get(k, 0) + est_hoja[i][1]
++    for i, pg in enumerate(doc):
++        lab = pg.get_label() or str(i + 1)
++        if hojas and lab not in hojas:
++            continue
++        W = pg.get_text("words")
++        segs, exc, clg = _cob_markups(doc, pg)
++        es_planta, es_rcp = cob_tipo_hoja(doc, pg)
++        if not (es_rcp or es_planta):
++            continue
++        esc = cob_escala(doc, pg)
++        if not esc:
++            continue
++        reg = _cob_region(pg, segs, exc, clg, esc)
++        reg_c = (reg[0] - 12 * esc, reg[1] - 12 * esc, reg[2] + 12 * esc, reg[3] + 12 * esc)   # tags de cuarto afuera con línea guía
++        r = {"tipo": "RCP" if es_rcp and not es_planta else ("planta" if not es_rcp else "planta+RCP"), "escala_pt_ft": round(esc, 3),
++             "muros": 0, "muros_lf": 0.0, "cubierto_lf": 0.0, "rojos": 0, "cuartos": 0, "cuartos_ok": 0, "cuartos_exc": 0}
++        dib[i] = []
++        if es_planta:
++            ix = _IndiceSegs(segs, max(COB_TOL_FT * esc, COB_T_MAX_IN / 24 * esc + 2 / 12 * esc))
++            es, sop = est_hoja.get(i, (None, 0))
++            if (es is None or sop < 40) and est_global:
++                es = set(est_global)                        # pocos muros marcados en la hoja: estilos del documento
++            trs = cob_muros(pg, esc, reg, W, [x for x in segs], estilos=es)
++            for alt in (est_hoja.get(i, (None, 0))[0], None):   # 0 muros con esos estilos: los de la hoja; luego sin filtro de estilo
++                if trs or alt == es:
++                    break
++                es = alt
++                trs = cob_muros(pg, esc, reg, W, [x for x in segs], estilos=alt)
++            r["muros"] = len(trs)
++            if not trs:
++                ciegas.append(lab)
++            trs = [t for tr in trs for t in cob_partir(tr, ix, esc, bool(segs))]
++            r["muros"] = len(trs)
++            for k, tr in enumerate(trs, 1):
++                lf = (tr["hi"] - tr["lo"]) / esc
++                x, y = _cob_xy(tr, 0.5)
++                f = tr["f"]
++                en_exc = any(_cob_dentro(P, x, y) for P in exc)
++                ident = f"M-{lab}-{k}"
++                d = None if (f >= COB_FRAC or en_exc) else _cob_disp(disp, lab, "muro", x, y, ident, esc)
++                est = "CUBIERTO" if f >= COB_FRAC else ("EXCLUDED" if en_exc else ("DISPUESTO" if d else "ROJO"))
++                r["muros_lf"] += lf
++                r["cubierto_lf"] += lf if est != "ROJO" else 0.0
++                r["rojos"] += est == "ROJO"
++                filas.append({"hoja": lab, "tipo": "muro", "id": ident, "x": round(x, 1), "y": round(y, 1), "largo_ft": round(lf, 2),
++                              "espesor_in": round(tr["t"] / esc * 12, 1), "cubierto_%": round(100 * f), "estado": est,
++                              "disposicion": f"{d.get('motivo')} ({d.get('nhoja')})" if d else ""})
++                dib[i].append(("muro", tr, est, k))
++        if es_rcp:
++            lineas = [(it[1].x, it[1].y, it[2].x, it[2].y) for dr in pg.get_drawings() for it in dr["items"] if it[0] == "l"
++                      and math.hypot(it[2].x - it[1].x, it[2].y - it[1].y) >= 1.0 * esc]
++            for w in W:
++                if not RX_COB_CUARTO.match(w[4]):
++                    continue
++                x, y = (w[0] + w[2]) / 2, (w[1] + w[3]) / 2
++                if not (reg_c[0] <= x <= reg_c[2] and reg_c[1] <= y <= reg_c[3]):
++                    continue
++                if sum(1 for v in W if v[5] == w[5] and v[6] == w[6]) >= 4:
++                    continue                                    # número dentro de una nota / tabla, no tag de cuarto
++                en_c = any(_cob_dentro(P, x, y) for P in clg)
++                en_e = any(_cob_dentro(P, x, y) for P in exc)
++                if not (en_c or en_e):                          # tag fuera del cuarto con su línea guía: se sigue la guía
++                    pts = [p for p in _cob_lider(lineas, x, y, esc)
++                           if not any(_IndiceSegs([(P[q][0], P[q][1], P[(q + 1) % len(P)][0], P[(q + 1) % len(P)][1])
++                                                   for q in range(len(P))], 0.5 * esc).dist(*p) < 0.5 * esc for P in clg + exc)]
++                    en_c = any(_cob_dentro(P, px, py) for P in clg for px, py in pts)
++                    en_e = any(_cob_dentro(P, px, py) for P in exc for px, py in pts)
++                d = None if (en_c or en_e) else _cob_disp(disp, lab, "cielo", x, y, w[4], esc)
++                est = "CUBIERTO" if en_c else ("EXCLUDED" if en_e else ("DISPUESTO" if d else "ROJO"))
++                r["cuartos"] += 1
++                r["cuartos_ok"] += est == "CUBIERTO"
++                r["cuartos_exc"] += est in ("EXCLUDED", "DISPUESTO")
++                r["rojos"] += est == "ROJO"
++                filas.append({"hoja": lab, "tipo": "cielo", "id": w[4], "x": round(x, 1), "y": round(y, 1), "largo_ft": "",
++                              "espesor_in": "", "cubierto_%": 100 if en_c else 0, "estado": est,
++                              "disposicion": f"{d.get('motivo')} ({d.get('nhoja')})" if d else ""})
++                dib[i].append(("cielo", w, est, len([z for z in dib[i] if z[0] == "cielo"]) + 1))
++        r["muros_lf"], r["cubierto_lf"] = round(r["muros_lf"], 1), round(r["cubierto_lf"], 1)
++        r["cubierto_%_lf"] = round(100 * r["cubierto_lf"] / r["muros_lf"]) if r["muros_lf"] else None
++        res[lab] = r
++    if out_csv:
++        import csv
++        os.makedirs(os.path.dirname(out_csv) or ".", exist_ok=True)
++        cols = ["hoja", "tipo", "id", "x", "y", "largo_ft", "espesor_in", "cubierto_%", "estado", "disposicion"]
++        with open(out_csv, "w", newline="", encoding="utf-8") as fh:
++            wr = csv.DictWriter(fh, fieldnames=cols)
++            wr.writeheader()
++            wr.writerows(filas)
++    if out_pdf and dib:
++        _cob_pdf(doc, dib, res, out_pdf)
++    return {"hojas": res, "filas": filas, "rojos": sum(r["rojos"] for r in res.values()), "ciegas": ciegas}
++
++
++def _cob_pdf(doc, dib, res, out_pdf):
++    """una página por hoja: la hoja en gris claro, lo cubierto en verde tenue, lo ROJO grueso, circulado y numerado; IMAGE ONLY."""
++    import pymupdf
++    tmp = pymupdf.open()
++    tmp.insert_pdf(doc)
++    out = pymupdf.open()
++    for i, items in sorted(dib.items()):
++        pg = tmp[i]
++        for a in list(pg.annots() or []):
++            pg.delete_annot(a)
++        r = pg.cropbox if pg.rotation else pg.rect
++        pg.draw_rect(r, color=None, fill=(1, 1, 1), fill_opacity=0.55, overlay=True)
++        esc = res.get(pg.get_label() or str(i + 1), {}).get("escala_pt_ft") or 18.0
++        for tipo, o, est, k in items:
++            col = (0.2, 0.7, 0.3) if est != "ROJO" else (0.85, 0.0, 0.0)
++            if tipo == "muro":
++                a_, b_ = _cob_xy(o, 0.0), _cob_xy(o, 1.0)
++                pg.draw_line(pymupdf.Point(*a_), pymupdf.Point(*b_), color=col, width=(1.5 if est != "ROJO" else 5),
++                             stroke_opacity=(0.5 if est != "ROJO" else 1))
++                cx, cy = _cob_xy(o, 0.5)
++            else:
++                cx, cy = (o[0] + o[2]) / 2, (o[1] + o[3]) / 2
++                if est != "ROJO":
++                    pg.draw_circle(pymupdf.Point(cx, cy), 0.8 * esc, color=col, width=1.5, stroke_opacity=0.5)
++            if est == "ROJO":
++                pg.draw_circle(pymupdf.Point(cx, cy), 1.6 * esc, color=col, width=4)
++                pg.insert_text(pymupdf.Point(cx + 1.8 * esc, cy - 1.8 * esc), str(k), fontsize=max(10, 0.9 * esc), color=col,
++                               rotate=pg.rotation)
++        pix = pg.get_pixmap(dpi=110)
++        np_ = out.new_page(width=pix.width * 72 / 110, height=pix.height * 72 / 110)
++        np_.insert_image(np_.rect, pixmap=pix)
++    try:
++        out.set_page_labels([{"startpage": k, "prefix": f"{tmp[i].get_label() or i + 1} COBERTURA", "style": ""}
++                             for k, i in enumerate(sorted(dib))])
++    except Exception:                                                   # noqa: BLE001
++        pass
++    os.makedirs(os.path.dirname(out_pdf) or ".", exist_ok=True)
++    out.save(out_pdf, deflate=True)
++
++
++COB_PDF, COB_CSV, COB_DISP = "COBERTURA - IMAGE ONLY.pdf", "COBERTURA.csv", "COBERTURA_DISPOSICION.csv"
++
++
++def cobertura_entrega(entrega, escribir=True):
++    """U-193: corre el mapa de cobertura sobre el PDF de markups de la entrega -> (resumen, rutas). Escribe 'Planos marcados/COBERTURA -
++    IMAGE ONLY.pdf' y 'Auditoria/COBERTURA.csv' si escribir; lee Auditoria/COBERTURA_DISPOSICION.csv."""
++    pl = os.path.join(entrega, "Planos marcados")
++    pdfs = [p for p in sorted(glob.glob(os.path.join(pl, "*.pdf"))) if not os.path.basename(p).startswith(
++            ("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS")) and "NO USAR" not in p and "COBERTURA" not in p.upper()]
++    if not pdfs:
++        return None, {}
++    disp = leer_disposicion(os.path.join(entrega, "Auditoria", COB_DISP))
++    rutas = {"pdf": os.path.join(pl, COB_PDF), "csv": os.path.join(entrega, "Auditoria", COB_CSV)}
++    r = mapa_cobertura(pdfs[0], disp, out_pdf=rutas["pdf"] if escribir else None, out_csv=rutas["csv"] if escribir else None)
++    return r, rutas
++
++
++@chequeo("CE_COBERTURA", ["U-193", "U-137"], "U-193 (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo'): mapa de cobertura — todo "
++         "muro dibujado en las plantas (par de líneas 2.5\"-14\", >= 2 ft) tiene markup a <= 0.5 ft de su eje en >= 90 % de su largo, todo "
++         "cuarto de un RCP cae en un polígono de cielo o EXCLUDED; lo ROJO necesita disposición con motivo y N/HOJA; 0 muros detectados en "
++         "una planta = detector ciego; COBERTURA - IMAGE ONLY.pdf, Auditoria/COBERTURA.csv y B6 del CHECKLIST")
++def ce_cobertura(c):
++    if not getattr(c, "entrega", None):
++        return R("FAIL", "sin carpeta de entrega (U-137)")
++    r, rutas = cobertura_entrega(c.entrega, escribir=False)
++    if r is None:
++        return R("FAIL", "sin PDF de markups en Planos marcados (U-137: no pasa en vacío)")
++    ev = []
++    if not r["hojas"]:
++        ev.append("ninguna planta ni RCP reconocida en el PDF de markups (detector ciego, U-137)")
++    ev += [f"{h}: 0 muros detectados en una planta con markups de walls (detector ciego, U-137)" for h in r["ciegas"]]
++    rojos = [f for f in r["filas"] if f["estado"] == "ROJO"]
++    ev += [f"{f['hoja']} {f['tipo']} {f['id']} ({f['x']}, {f['y']}) {str(f['largo_ft']) + ' ft' if f['largo_ft'] != '' else ''}: ROJO sin markup "
++           f"ni disposición en Auditoria/{COB_DISP}" for f in rojos[:40]]
++    if rojos[40:]:
++        ev.append(f"... y {len(rojos) - 40} rojo(s) más (Auditoria/{COB_CSV})")
++    for k in ("pdf", "csv"):
++        if not os.path.isfile(rutas[k]):
++            ev.append(f"falta {os.path.relpath(rutas[k], c.entrega)}: python3 -I tools/compuerta_entrega.py cobertura <carpeta de entrega>")
++    cl = [f for f in os.listdir(os.path.dirname(os.path.join(c.entrega, "x"))) if re.fullmatch(CHECKLIST_RE, f)]
++    if cl:
++        try:
++            import openpyxl
++            if not any(n.startswith("B6") for n in openpyxl.load_workbook(os.path.join(c.entrega, cl[0]), read_only=True).sheetnames):
++                ev.append(f"{cl[0]} sin la hoja B6 'COVERAGE' (hojear COBERTURA, 0 rojos): checklist_revision.py --b6 Auditoria/{COB_CSV}")
++        except Exception as e:                                          # noqa: BLE001
++            ev.append(f"{cl[0]} no se pudo leer: {e}")
++    res = "; ".join(f"{h} {v['tipo']}: muros {v['cubierto_%_lf'] if v['cubierto_%_lf'] is not None else '-'} % LF, cuartos {v['cuartos_ok']}"
++                    f"+{v['cuartos_exc']} de {v['cuartos']}, rojos {v['rojos']}" for h, v in r["hojas"].items())
++    return R("FAIL", *ev, res) if ev else R("PASS", f"0 rojos en {len(r['hojas'])} hoja(s): {res}")
++
+ def main(argv):
+     if len(argv) > 1 and argv[1] == "banco":
+         a = argv[2:]
+@@ -5365,6 +5960,16 @@
+         ns = sum(len(v["sin_leer"]) for v in st["burbujas"].values())
+         print(f"burbujas: {len(st['burbujas'])} hojas barridas, {nb} leídas, {ns} sin leer -> {stp}")
+         return 0
++    if len(argv) > 2 and argv[1] == "cobertura":                    # U-193: mapa de cobertura de una carpeta de entrega
++        r, rutas = cobertura_entrega(argv[2])
++        if r is None:
++            print("sin PDF de markups en Planos marcados")
++            return 2
++        for h, v in r["hojas"].items():
++            print(f"{h:8} {v['tipo']:11} muros {v['muros']:4} ({v['muros_lf']:.0f} LF, cubierto {v['cubierto_%_lf']} %) cuartos {v['cuartos']} "
++                  f"(cielo {v['cuartos_ok']}, EXCLUDED / dispuesto {v['cuartos_exc']}) ROJOS {v['rojos']}")
++        print(f"COBERTURA: {r['rojos']} rojo(s); ciegas {r['ciegas']} -> {rutas['pdf']} / {rutas['csv']}")
++        return 1 if (r["rojos"] or r["ciegas"]) else 0
+     if len(argv) > 2 and argv[1] == "armar":                        # BE-CR43: re-armar la carpeta SIN perder el registro
+         rev = argv[argv.index("--rev") + 1] if "--rev" in argv else None
+         h = armar_carpeta(argv[2], rev)
+diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 15:46:38.066349527 +0000
++++ v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 19:33:59.839141399 +0000
+@@ -2335,3 +2335,77 @@
+ 
+ 
+ test_v118_excluded_cero()
++
++
++def test_v119_cobertura():
++    """U-193 (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo'): mapa de cobertura sintético a 1/4" = 1'-0" (18 pt/ft).
++    Dos muros dibujados (pares de líneas a 4.875"): uno con markup W9 con /Measure (CUBIERTO), otro sin markup (ROJO); con disposición
++    (motivo + N/HOJA) pasa a DISPUESTO. RCP: cuarto 901 dentro de un polígono de cielo (CUBIERTO), 902 sin polígono (ROJO), 903 dentro de
++    un EXCLUDED. Sin markups de wall que aprender, mueble de líneas finas a 30" no es muro. Valores sintéticos."""
++    import pymupdf
++    d = tempfile.mkdtemp(prefix="v119_")
++    pdf = os.path.join(d, "Z9_markups - OPEN IN BLUEBEAM.pdf")
++    doc = pymupdf.open()
++    med = "<</Type/Measure/Subtype/RL/R(1/4 in = 1 ft)/X[<</Type/NumberFormat/C .055555557/D 100/U(ft)>>]/D[<</Type/NumberFormat/C 1/D 100/U(ft)>>]/A[<</Type/NumberFormat/C 1/D 100/U(sf)>>]>>"
++    t = 4.875 / 12 * 18
++    pg = doc.new_page(width=1728, height=1152)
++
++    def muro(p0, p1, marcar):
++        (x0, y0), (x1, y1) = p0, p1
++        if y0 == y1:
++            pg.draw_line((x0, y0), (x1, y0), width=1.2)
++            pg.draw_line((x0, y0 + t), (x1, y0 + t), width=1.2)
++            eje = [(x0, y0 + t / 2), (x1, y0 + t / 2)]
++        else:
++            pg.draw_line((x0, y0), (x0, y1), width=1.2)
++            pg.draw_line((x0 + t, y0), (x0 + t, y1), width=1.2)
++            eje = [(x0 + t / 2, y0), (x0 + t / 2, y1)]
++        if marcar:
++            a = pg.add_polyline_annot(eje)
++            a.set_info(title="take-off", subject="W9")
++            a.update()
++            doc.xref_set_key(a.xref, "Measure", med)
++        return eje
++    muro((200, 300), (920, 300), True)                                   # muro largo marcado
++    for k, x in enumerate((200, 380, 560, 740, 900)):                     # 5 muros verticales marcados (de aquí se aprende el estilo)
++        muro((x, 300 + t), (x, 600), True)
++    muro((200, 600), (920, 600), False)                                   # muro de abajo SIN markup, conectado al edificio
++    pg.draw_rect(pymupdf.Rect(420, 380, 460, 380 + 30 / 12 * 18), width=0.24)   # mueble de 30 in de fondo
++    pg.insert_text((900, 1000), "1 Z9 PARTITION PLAN", fontsize=14)
++    pg2 = doc.new_page(width=1728, height=1152)
++    pg2.insert_text((900, 1000), "1 Z9 REFLECTED CEILING PLAN", fontsize=14)
++    for k, (x0, num) in enumerate(((200, "901"), (500, "902"), (800, "903"))):
++        pg2.draw_rect(pymupdf.Rect(x0, 200, x0 + 200, 400), width=1.2)
++        pg2.insert_text((x0 + 90, 300), num, fontsize=10)
++    p1 = pg2.add_polygon_annot([(205, 205), (395, 205), (395, 395), (205, 395)])
++    p1.set_info(title="take-off", subject="5/8 GYP BOARD TYPE X")
++    p1.update()
++    doc.xref_set_key(p1.xref, "Measure", med)
++    for x0, sub in ((805, "EXCLUDED"), (1205, "EXCLUDED"), (1405, "EXCLUDED")):
++        p_ = pg2.add_polygon_annot([(x0, 205), (x0 + 190, 205), (x0 + 190, 395), (x0, 395)])
++        p_.set_info(title="take-off", subject=sub, content="EXCLUDED - by others (X9.01)")
++        p_.update()
++    doc.set_page_labels([{"startpage": 0, "prefix": "Z9.01", "style": ""}, {"startpage": 1, "prefix": "Z9.31", "style": ""}])
++    doc.save(pdf)
++    r = CE.mapa_cobertura(pdf, out_pdf=os.path.join(d, "COBERTURA - IMAGE ONLY.pdf"), out_csv=os.path.join(d, "COBERTURA.csv"))
++    est = {(f["hoja"], f["tipo"], f["id"]): f["estado"] for f in r["filas"] if f["tipo"] == "cielo"}
++    mur = {}
++    for f in r["filas"]:
++        if f["tipo"] == "muro":
++            mur.setdefault(round(f["y"]), []).append((f["estado"], f["largo_ft"]))
++    assert {e for e, _l in mur.get(round(300 + t / 2), [])} == {"CUBIERTO"}, mur
++    assert sum(l_ for e, l_ in mur.get(round(600 + t / 2), []) if e == "ROJO") >= 30, mur      # los ~36 ft sin markup entre los verticales
++    assert not any(f["estado"] == "ROJO" and 360 < f["y"] < 430 and 400 < f["x"] < 480 for f in r["filas"]), "mueble de 30 in no es muro"
++    assert est.get(("Z9.31", "cielo", "901")) == "CUBIERTO" and est.get(("Z9.31", "cielo", "902")) == "ROJO", est
++    assert est.get(("Z9.31", "cielo", "903")) == "EXCLUDED", est
++    n_r = r["rojos"]
++    assert os.path.isfile(os.path.join(d, "COBERTURA - IMAGE ONLY.pdf")) and n_r >= 2, n_r
++    disp = [{"hoja": "Z9.01", "tipo": "muro", "x0": "150", "y0": str(590), "x1": "960", "y1": str(620), "motivo": "existing to remain", "nhoja": "1/X9.01"},
++            {"hoja": "Z9.31", "tipo": "cielo", "id": "902", "motivo": "open to structure", "nhoja": "1/X9.31"}]
++    r2 = CE.mapa_cobertura(pdf, disp)
++    assert r2["rojos"] == 0, [f for f in r2["filas"] if f["estado"] == "ROJO"]
++    assert CE.mapa_cobertura(pdf, [dict(disp[0], nhoja=""), disp[1]])["rojos"] == n_r - 1, "disposición sin N/HOJA no vale"
++    print("test_v119_cobertura OK")
++
++
++test_v119_cobertura()
