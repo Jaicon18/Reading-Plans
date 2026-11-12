@@ -30,4 +30,4 @@ Cache del proyecto (scripts del pipeline y configuración) para retomarlo o reus
 - Auditoría U-181: REVERIF15 (2 LOW: cita 1/A540 → 2/A540, C636 como hoja) → REVERIF16 open: 0.
 - Sin cambio de cantidades vs rev3: clips "3" x 3" x 0'-3" x 20 ga" (64/S204 nota 6), "Hanger wire, 12 ga (No. 12 SWG)" (3/A540, 2/A540), RFI-18 loaded = Type X, canon.ceilings_misc (v81cf117) para CB_RCP_APILADOS, Auditoria/RCP_APILADOS.csv y revision_materiales (U-111).
 - Subida: 2,626 archivos (Auditoria 2,598) a Claude outputs › Grand Kia Auto Dealership - Denver, CO (Brinkman) › rev3a FINAL PARA REVISAR; --vigente PASS; Drive = local, 0 duplicados. rev3 renombrada "BORRAR (NO USAR) - rev3 FINAL PARA REVISAR - REPLACED BY rev3a".
-- Reglas de esta ronda: BE-GK50..BE-GK55 (BE-GK54 y BE-GK55 = rev3b, apartados/be_gk54 y be_gk55).
+- Reglas de esta ronda: BE-GK50..BE-GK56 (BE-GK54..56 = rev3b, apartados/be_gk54, be_gk55, be_gk56).
