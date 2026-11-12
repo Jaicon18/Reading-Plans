@@ -130,3 +130,35 @@ Pruebas (Ampliación 2):
 - adversariales_v119 + adversariales_v120 corridos contra el candidato (adv4_pm con su copia mínima del cache).
 - PRUEBA_ABIERTOS de XF re-corrida con las tools finales (sha 5c903a278cbd): 0 regresiones.
 - Parche probado con -p1 sobre el zip de v119.
+
+## Ampliación 3 (COORDINACIÓN 21:47 / 21:48 / 21:53): retroactivo de proceso (CR rev20b, GK rev3b) + CB_FALTANTES_AUDITORIA (GK)
+
+(a) `proceso_v119` en CE_PROTOCOLO_3H:
+- Los requisitos de PROCESO de v119 son BE-PM05 (VERSION_PROYECTO), BE-PM06 (tiempos.log ISO que cuadra con TIEMPOS, --paso por paso,
+  sellos) y la alarma (ALERTA_PRESUPUESTO).
+- En una rev que arrancó ANTES de FECHA_V119 salen AMBER, con la causa escrita.
+- La fecha de arranque (`inicio_rev`) es la primera marca de tiempos.log o, si no hay, el primer commit que toca la carpeta de la rev.
+- `marcas_tiempos_log` lee también el formato viejo ('05-nov 11:26 PST', '10-nov 21:01 PST') y lo convierte a ISO.
+- Una rev que no se puede fechar = FAIL. Una rev que arrancó después de FECHA_V119 = FAIL, como antes.
+- Test: `test_v120_retroactivo_proceso`, con los casos:
+  - CR: log viejo y cierres 7-10 solo en commits = AMBER;
+  - GK: formato '10-nov 21:01 PST' = AMBER;
+  - rev posterior = FAIL;
+  - sin fecha = FAIL;
+  - fecha por el primer commit = AMBER.
+
+(b) CB_FALTANTES_AUDITORIA (`faltantes_auditoria`):
+- el cierre vale con CUALQUIER ref que exista cargada en el canon (`RX_REF_CANON` + `_ref_cargada`, que mira misc, ceilings, walls,
+  existing_walls, trim, blocking y framed_soffits): EXT-, SOF-, CLG-, BW-, CW-…;
+- una línea de hoja o dibujo faltante ('30/A520 (missing)') no es un cielo faltante y no se evalúa (`RX_HOJA_FALTANTE`);
+- los cuartos que ya cubre Auditoria/DOBLE_CIELO.csv (renglón con upper y lower) se resuelven contra esa tabla (`cuartos_doble_cielo`).
+- Test: `test_v119_be_cr40_verificacion`, con los casos GK #8 y H-04 con ids sintéticos y el cierre con EXT-.
+
+Pruebas (Ampliación 3):
+- suite 47/47. test_ciego marcó 'A520' y 'GK #8' en un comentario; quedaron sintéticos y se re-corrió OK;
+- banco 0 distintas en 8 proyectos;
+- reglas.py 0 sin clasificar;
+- 199 archivos;
+- selftest OK.
+- PRUEBA_ABIERTOS de XF con las tools finales (sha cb4adc4a0566): 0 regresiones.
+- Parche probado con -p1 sobre el zip de v119.

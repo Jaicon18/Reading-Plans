@@ -1,6 +1,6 @@
 diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:29:40.669711873 +0000
-+++ v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:53:17.608243700 +0000
++++ v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:59:03.443940551 +0000
 @@ -7846,17 +7846,19 @@
    {
     "id": "U-185",
@@ -24,7 +24,24 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     }
    },
    {
-@@ -8473,7 +8475,7 @@
+@@ -8151,13 +8153,14 @@
+   {
+    "id": "BE-CR40",
+    "origen": "skills_archivo/tools_post_v81cf94_CR/LEEME.md (CR City Hotel rev20, 12-nov, commit 93915a3)",
+-   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada",
++   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+     "take-off:tools/chequeos_biblioteca.py::faltante_por_tag",
+     "take-off:tools/chequeos_biblioteca.py::faltantes_auditoria",
+-    "take-off:tools/chequeos_biblioteca.py::resolver_faltante"
++    "take-off:tools/chequeos_biblioteca.py::resolver_faltante",
++    "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+@@ -8473,7 +8476,7 @@
    {
     "id": "U-193",
     "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
@@ -33,7 +50,7 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
-@@ -8487,7 +8489,8 @@
+@@ -8487,7 +8490,8 @@
      "take-off:tools/compuerta_entrega.py::_cob_es_cota",
      "take-off:tools/compuerta_entrega.py::subagentes_bitacora",
      "take-off:tools/bitacora.py::subagente",
@@ -43,7 +60,7 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
-@@ -8504,7 +8507,7 @@
+@@ -8504,7 +8508,7 @@
    {
     "id": "BE-PM04",
     "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
@@ -52,7 +69,7 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     "categoria": "programa",
     "cuando": "version",
     "chequeos": [
-@@ -8512,11 +8515,13 @@
+@@ -8512,22 +8516,26 @@
      "ordenes:verificar_version.py::revisar_prueba_abiertos",
      "ordenes:verificar_version.py::sha_tools",
      "ordenes:verificar_version.py::proyectos_abiertos_cache",
@@ -68,16 +85,31 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     }
    },
    {
-@@ -8537,7 +8542,7 @@
+    "id": "BE-PM05",
+    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
+-   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H",
++   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::version_proyecto_fallas",
+-    "take-off:tools/compuerta_entrega.py::fijar_version_proyecto"
++    "take-off:tools/compuerta_entrega.py::fijar_version_proyecto",
++    "take-off:tools/compuerta_entrega.py::proceso_v119",
++    "take-off:tools/compuerta_entrega.py::inicio_rev"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8537,7 +8545,7 @@
    {
     "id": "BE-PM06",
     "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
 -   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL)",
-+   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL); v120: las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md (no por el texto 'N fin' del log); v120 verificación 4: UN solo parser de TIEMPOS.md (filas_tiempos) para CE_TIEMPOS y --paso: guiones Unicode, negritas, 4a, 3 columnas, columnas en cualquier orden",
++   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL); v120: las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md (no por el texto 'N fin' del log); v120 verificación 4: UN solo parser de TIEMPOS.md (filas_tiempos) para CE_TIEMPOS y --paso: guiones Unicode, negritas, 4a, 3 columnas, columnas en cualquier orden; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL",
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
-@@ -8546,11 +8551,14 @@
+@@ -8546,11 +8554,16 @@
      "take-off:tools/compuerta_entrega.py::alarma_fallas",
      "take-off:tools/compuerta_entrega.py::sellar_bitacora",
      "take-off:tools/compuerta_entrega.py::sellos_fallas",
@@ -85,7 +117,9 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
 +    "take-off:tools/compuerta_entrega.py::tiempos_cuadran_fallas",
 +    "take-off:tools/compuerta_entrega.py::pasos_cerrados_tiempos",
 +    "take-off:tools/compuerta_entrega.py::filas_tiempos",
-+    "take-off:tools/compuerta_entrega.py::_paso_corrido"
++    "take-off:tools/compuerta_entrega.py::_paso_corrido",
++    "take-off:tools/compuerta_entrega.py::proceso_v119",
++    "take-off:tools/compuerta_entrega.py::inicio_rev"
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -94,7 +128,7 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
     }
    },
    {
-@@ -8601,10 +8609,12 @@
+@@ -8601,10 +8614,12 @@
     "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
     "categoria": "programa",
     "cuando": "entrega",
@@ -111,7 +145,7 @@ diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-m
      "archivo": "take-off:tools/test_compuerta_entrega.py",
 diff -ruN v119/take-off-metal-frame-drywall/SKILL.md v120/take-off-metal-frame-drywall/SKILL.md
 --- v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:29:40.673816205 +0000
-+++ v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:53:17.611987412 +0000
++++ v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:59:03.447300295 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -141,9 +175,87 @@ diff -ruN v119/take-off-metal-frame-drywall/SKILL.md v120/take-off-metal-frame-d
  
  ## Etapa 4 — CÁLCULO
  
+diff -ruN v119/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v119/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 21:29:40.673369565 +0000
++++ v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 21:59:03.444482301 +0000
+@@ -4345,6 +4345,7 @@
+     cuarto contra ceilings / misc del canon. Lo que no se puede resolver = FAIL (no N/A); algo cargado declarado faltante = FAIL."""
+     ev, n, ok = [], 0, 0
+     canon = b.canon or {}
++    dc = cuartos_doble_cielo(b)                          # v120 (GK H-04): cuartos ya cubiertos en Auditoria/DOBLE_CIELO.csv
+     for k, t in sorted((b.textos or {}).items()):
+         if not (re.search(r"(?i)AUDITORIA|INFORME|revision_independiente|auditoria_U138", k) and k.lower().endswith((".md", ".txt"))):
+             continue
+@@ -4352,15 +4353,22 @@
+             tg = RX_TAG_CIELO_H.search(ln)
+             if not (RX_HALLAZGO_FALTA.search(ln) and (tg or RX_CIELO_PALABRA.search(ln))):
+                 continue
++            if RX_HOJA_FALTANTE.search(ln):              # v120 (caso de GK): 'N/HOJA (missing)' = falta una HOJA / un dibujo, no un cielo
++                continue
+             n += 1
+             nom, txt = os.path.basename(k), ln.strip()[:100]
+-            refs = RX_REF_CIERRE.findall(ln)                 # cierre del hallazgo: la ref que lo cargó, verificada en el canon
++            cand = [r for r in RX_REF_CANON.findall(ln) if not RX_TAG_CIELO_H.fullmatch(r)]
++            cargadas = [r for r in cand if _ref_cargada(canon, r)]
++            if cargadas:                                 # v120: el cierre vale con CUALQUIER ref que exista cargada en el canon
++                ok += 1
++                continue
++            refs = RX_REF_CIERRE.findall(ln)
+             if refs:
+-                no = [r for r in refs if not _ref_cargada(canon, r)]
+-                if no:
+-                    ev.append(f"{nom}: '{txt}' cierra el hallazgo con {', '.join(no[:4])}, que no está cargado en el canon (BE-CR40)")
+-                else:
+-                    ok += 1
++                ev.append(f"{nom}: '{txt}' cierra el hallazgo con {', '.join(refs[:4])}, que no está cargado en el canon (BE-CR40)")
++                continue
++            cs = {m.group(1) for m in RX_CUARTO_H.finditer(RX_HOJA_H.sub(" ", ln))}
++            if cs and dc and cs <= dc:                   # todos los cuartos del renglón están en DOBLE_CIELO.csv: resuelto por la tabla
++                ok += 1
+                 continue
+             falta, motivo = resolver_faltante(canon, ln)
+             if falta is None:
+@@ -4376,10 +4384,37 @@
+     return R("FAIL", *ev[:20]) if ev else R("PASS", f"{ok} hallazgo(s) de cielo faltante verificados contra el canon (faltante_por_tag / cuarto)")
+ 
+ 
++RX_REF_CANON = re.compile(r"\b([A-Z][A-Z0-9]{1,5}-[A-Z0-9][\w.]*(?:-[\w.]+)*)")      # v120: cualquier ref (EXT-, SOF-, CLG-, BW-, misc…)
++RX_HOJA_FALTANTE = re.compile(r"(?i)\b\d{1,2}/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\s*\(?\s*(?:missing|falta(?:nte)?|not\s+(?:in|included)|"
++                              r"no\s+est[aá])|\b(?:sheet|hoja|drawing|dibujo|plano)\s+[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\s+(?:is\s+)?(?:missing|falta)")
++
++
++def cuartos_doble_cielo(b):
++    """v120 (GK H-04): números de cuarto de Auditoria/DOBLE_CIELO.csv (columna Room) con sus renglones upper / lower."""
++    import csv as _csv
++    import io as _io
++    out = set()
++    for k, t in (b.textos or {}).items():
++        if os.path.basename(k) != "DOBLE_CIELO.csv":
++            continue
++        for r in _csv.DictReader(_io.StringIO(t.lstrip("\ufeff"))):
++            room = str(r.get("Room") or r.get("room") or "")
++            fila = str(r.get("Row / reason") or r.get("row") or "")
++            if re.search(r"(?i)upper", fila) and re.search(r"(?i)lower", fila):
++                out |= {m.group(1) for m in RX_CUARTO_H.finditer(RX_HOJA_H.sub(" ", room))}
++    return out
++
++
+ RX_REF_CIERRE = re.compile(r"\b((?:CLG|SOF|BW|CW)-[A-Z0-9]+(?:-[A-Z0-9]+)+)\b")    # ref de renglón del canon (no un tag GYP-1)
+ 
+ 
+ def _ref_cargada(canon, ref):
++    """v120 (GK): la ref existe CARGADA en el canon: misc_items (ref o 'ref <cara>' con qty > 0), ceilings (ref / id con área), walls /
++    existing_walls / trim / blocking (id o ref)."""
++    for lst in ("walls", "existing_walls", "trim_items", "blocking_items", "framed_soffits"):
++        for x in canon.get(lst) or []:
++            if isinstance(x, dict) and ref in (str(x.get("id") or ""), str(x.get("ref") or "")):
++                return True
+     for m in canon.get("misc_items") or []:
+         r = str(m.get("ref") or "") if isinstance(m, dict) else ""
+         if (r == ref or r.startswith(ref + " ")) and float(m.get("qty") or 0) > 0:
 diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:29:40.673689794 +0000
-+++ v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:53:17.608813451 +0000
++++ v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:59:03.444592822 +0000
 @@ -501,19 +501,72 @@
      return R("FAIL", *[" · ".join(map(str, f)) for f in fs]) if fs else R("PASS", "datos del proyecto en las 4 fuentes")
  
@@ -282,7 +394,79 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
  FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
  U189_CB = {"CB_RCP_APILADOS": FECHA_V119, "CB_DETALLE_CARAS": FECHA_V119, "CB_FALTANTES_AUDITORIA": FECHA_V119, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114, "CE_COBERTURA": FECHA_V119}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
  
-@@ -796,33 +846,35 @@
+@@ -741,19 +791,68 @@
+     return sum(1 for k in hojas or {} if RX_HOJA_A.match(str(k).strip()))
+ 
+ 
+-def marcas_tiempos_log(p):
+-    """[(datetime naive en hora de California, texto)] de tiempos.log ('YYYY-MM-DD HH:MM | …')."""
++MESES_LOG = {"ene": 1, "jan": 1, "feb": 2, "mar": 3, "abr": 4, "apr": 4, "may": 5, "jun": 6, "jul": 7, "ago": 8, "aug": 8, "sep": 9,
++             "oct": 10, "nov": 11, "dic": 12, "dec": 12}
++
++
++def marcas_tiempos_log(p, anio=2026):
++    """[(datetime naive en hora de California, texto)] de tiempos.log: ISO 'YYYY-MM-DD HH:MM | …' y el formato viejo '05-nov 11:26 PST'
++    (v120, CR rev20b / GK rev3b), convertido a ISO."""
+     out = []
+     try:
+         for ln in open(p, encoding="utf-8", errors="ignore"):
+-            m = re.match(r"\s*(\d{4}-\d{2}-\d{2})[ T](\d{1,2}):(\d{2})", ln)
++            l2 = norm_txt(ln, lower=False)
++            m = re.match(r"\s*(\d{4}-\d{2}-\d{2})[ T](\d{1,2}):(\d{2})", l2)
+             if m:
+                 out.append((datetime.datetime.fromisoformat(f"{m.group(1)}T{int(m.group(2)):02d}:{m.group(3)}"), ln.strip()))
++                continue
++            m = re.match(r"(?i)\s*(\d{1,2})-([a-z]{3})\w*\.?(?:-(\d{4}))?\s+(\d{1,2}):(\d{2})", l2)
++            if m and m.group(2).lower() in MESES_LOG:
++                out.append((datetime.datetime(int(m.group(3) or anio), MESES_LOG[m.group(2).lower()], int(m.group(1)),
++                                              int(m.group(4)), int(m.group(5))), ln.strip()))
+     except OSError:
+         pass
+     return out
+ 
+ 
++def inicio_rev(w, entrega=None):
++    """v120 (COORDINACIÓN, CR rev20b / GK rev3b): fecha de arranque de la rev = la primera marca de tiempos.log (ISO o formato viejo, hora
++    de California) o, si no hay, el primer commit que toca la carpeta de la rev. -> datetime con zona o None (no se puede fechar)."""
++    from zoneinfo import ZoneInfo
++    p = _tiempos_log(w)
++    ms = marcas_tiempos_log(p) if p else []
++    if ms:
++        return min(t for t, _l in ms).replace(tzinfo=ZoneInfo("America/Los_Angeles"))
++    for d in (entrega, w):
++        if not d or not os.path.isdir(d):
++            continue
++        try:
++            r = subprocess.run(["git", "-C", d, "log", "--reverse", "--format=%cI", "--", "."], capture_output=True, text=True, timeout=30)
++            ln = (r.stdout or "").strip().splitlines()
++            if r.returncode == 0 and ln:
++                return datetime.datetime.fromisoformat(ln[0])
++        except (OSError, subprocess.SubprocessError, ValueError):
++            continue
++    return None
++
++
++def proceso_v119(w, entrega, tt, na):
++    """v120 (COORDINACIÓN): requisitos de PROCESO que entraron en v119 (BE-PM05 VERSION_PROYECTO, BE-PM06 tiempos.log / --paso / sellos,
++    alarma de presupuesto). -> (estado, mensajes): FAIL si fallan en una rev que arrancó desde FECHA_V119 o si la rev no se puede fechar;
++    AMBER con la causa escrita si la rev arrancó ANTES (no se re-abren retroactivamente); PASS si no hay fallas."""
++    ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt)
++    if not ev:
++        return "PASS", []
++    ini = inicio_rev(w, entrega)
++    if ini is None:
++        return "FAIL", ["la rev no se puede fechar (sin marcas en tiempos.log ni commits de su carpeta): los requisitos de proceso de "
++                        "v81cf119 aplican = FAIL"] + ev
++    if ini < datetime.datetime.fromisoformat(FECHA_V119):
++        return "AMBER", [f"causa: la rev arrancó {ini.isoformat()} (primera marca de tiempos.log / primer commit), ANTES de v81cf119 "
++                         f"({FECHA_V119}): los requisitos de proceso BE-PM05 / BE-PM06 / alarma no se exigen retroactivamente"] + ev
++    return "FAIL", ev
++
++
+ def _tiempos_log(w):
+     return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
+ 
+@@ -796,33 +895,35 @@
      return ev
  
  
@@ -336,7 +520,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
      return ev
  
  
-@@ -845,10 +897,16 @@
+@@ -845,10 +946,16 @@
                                                   if x.strip().startswith("{")] if os.path.isfile(os.path.join(w, "compuerta_corridas.jsonl")) else []
      corridos = {str(r.get("paso")) for r in reg if r.get("paso")}
      fins = [(t, m.group(1)) for t, ln in ms for m in RX_PASO_FIN.finditer(ln)]
@@ -353,7 +537,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
          if not ({paso} | {str(n) for n in nums}) & corridos:
              ev.append(f"paso {paso} cerrado {t:%Y-%m-%d %H:%M} (tiempos.log) sin su corrida 'compuerta_entrega.py <w> --paso {paso}' "
                        "(BE-PM06)")
-@@ -3602,27 +3660,32 @@
+@@ -3602,27 +3709,32 @@
  
  TOOLS_REVISION = {"compuerta_entrega.py", "checklist_revision.py", "subir_entrega.py", "comparar_csv_bluebeam.py", "BACKCHECK", "SELLO",
                    "SUBAGENTE"}
@@ -403,7 +587,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
  
  
  def protocolo_3h_fallas(w, entrega, excel, pdf, subida=None, tiempos_txt="", corridas=None, ahora=None, registro_corridas=None, cobertura=None):
-@@ -3781,8 +3844,9 @@
+@@ -3781,8 +3893,9 @@
              out["regresiones"] = prev.get("regresiones") or []
              out["version_vigente"] = prev.get("version_vigente")
      for w in workdirs:
@@ -415,7 +599,31 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
          out["regresiones"] = [r for r in out["regresiones"] if r.get("proyecto") != nom]
          vig = _correr_con(tools_vigente, w, os.path.join(_tf.mkdtemp(prefix="pa_"), "vig.json")) or {}
          cand = correr(w)
-@@ -6296,38 +6360,77 @@
+@@ -3865,13 +3978,19 @@
+     ev, info = protocolo_3h_fallas(c.w, c.entrega, vg.get("excel"), vg.get("pdf"), sub, tt, corridas_compuerta(c.w, c.entrega) + [actual],
+                                    registro_corridas=registro_corridas(c.w, c.entrega),
+                                    cobertura=cobertura_esperada(c.canon, (st or {}).get("hojas") or {}))
+-    if entrega_nueva(c, FECHA_V119):                    # post-mortem 2026-11-12b NO GUARD 3.2: versión fija por proyecto
+-        ev += version_proyecto_fallas(c.w, _skill_version(), tt)
+-        ev += alarma_fallas(c.w, hojas_a((st or {}).get("hojas") or {}), tiempos_txt=tt)   # NO GUARD 3.3: --paso + alerta + sellos
++    amber_proc = []
++    if entrega_nueva(c, FECHA_V119):                    # NO GUARD 3.2 / 3.3: versión fija, --paso, alerta, sellos (v120: AMBER si la rev
++        est_p, msg_p = proceso_v119(c.w, c.entrega, tt, hojas_a((st or {}).get("hojas") or {}))   # arrancó antes de v119)
++        if est_p == "FAIL":
++            ev += msg_p
++        elif est_p == "AMBER":
++            amber_proc = msg_p
+     primera = _iso((sub or {}).get("primera_subida_iso") or (sub or {}).get("fecha_iso")) if sub else None
+     if ev and primera and primera < datetime.datetime.fromisoformat(FECHA_U184):
+         return R("AMBER", f"entrega con primera subida {primera.isoformat()} anterior a U-184: no se re-abre (U-180 (4) / U-184 (6))", *ev[:10], *info)
+-    return R("FAIL", *ev[:20], *info) if ev else R("PASS", *info)
++    if ev:
++        return R("FAIL", *ev[:20], *info)
++    return R("AMBER", *amber_proc[:20], *info) if amber_proc else R("PASS", *info)
+ 
+ 
+ RX_CAUSA_SIN_REGISTRO = re.compile(r"(?im)^.*\bcausa\s*:.*\b(?:registro|record|log|jsonl)\b.*$")   # BE-CR43: un renglón por corrida
+@@ -6296,38 +6415,77 @@
      return {"hojas": res, "filas": filas, "rojos": sum(r["rojos"] for r in res.values()), "ciegas": ciegas, "ciegas_rcp": ciegas_rcp}
  
  
@@ -467,17 +675,25 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
      for e in (canon or {}).get("excluded_walls") or []:
 -        m = RX_GK54_SAME.search(str(e.get("reason") or ""))
 -        if not m or str(e.get("gap_proof") or "").strip():
-+        if gap_prueba_ok(e.get("gap_proof")):
-             continue
+-            continue
 -        b = (walls.get(m.group(1)) or {}).get("band") or {}
 -        if b.get("ori") not in ("H", "V"):
--            continue
++        if gap_prueba_ok(e.get("gap_proof")):
+             continue
 -        c_mid = (float(b["c0"]) + float(b["c1"])) / 2
 -        lo, hi = sorted((float(b["lo"]), float(b["hi"])))
 -        esc = float((escalas or {}).get(b.get("sheet")) or esc)          # escala de la hoja del mapa (pt / ft); GK A111 = 9
 -        tol = (gap_in / 12.0) * esc + abs(float(b["c1"]) - float(b["c0"]))
 -        for r in cob_rows:
 -            if r.get("hoja") != b.get("sheet") or r.get("tipo") != "muro" or r.get("estado") != "ROJO":
+-                continue
+-            rx, ry = to_canon(r["hoja"], float(r["x"]), float(r["y"]))
+-            L = float(r.get("largo_ft") or 0) * esc
+-            along, cross = (rx, ry) if b["ori"] == "H" else (ry, rx)
+-            if abs(cross - c_mid) <= tol and along + L / 2 >= lo - esc and along - L / 2 <= hi + esc and abs(cross - c_mid) > 0.5:
+-                ev.append(f"{e.get('id')}: excluded as 'same wall as {m.group(1)}' but the coverage map has a separate parallel band "
+-                          f"{r['id']} ({rx:.1f}, {ry:.1f}) {r.get('largo_ft')} ft at {abs(cross - c_mid) / esc * 12:.1f} in. from it, RED: two "
+-                          "leaves with a gap are two walls (BE-GK54); prove the gap does not exist ('gap_proof' with N/SHEET) or carry it")
 +        for wid, _k in gk54_mismo_muro(e.get("reason"), walls)[:1]:
 +            if wid not in walls:
 +                ev.append(f"{e.get('id')}: excluded as the same wall as '{wid}' but that is not a wall of the canon: the exclusion cannot be "
@@ -487,14 +703,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
 +            if b.get("ori") not in ("H", "V"):
 +                ev.append(f"{e.get('id')}: excluded as the same wall as {wid} but {wid} has no 'band' (ori H / V, c0, c1, lo, hi, sheet) in "
 +                          "the canon: the gap cannot be checked (BE-GK54); add the band or a gap_proof with N/SHEET and the gap size")
-                 continue
--            rx, ry = to_canon(r["hoja"], float(r["x"]), float(r["y"]))
--            L = float(r.get("largo_ft") or 0) * esc
--            along, cross = (rx, ry) if b["ori"] == "H" else (ry, rx)
--            if abs(cross - c_mid) <= tol and along + L / 2 >= lo - esc and along - L / 2 <= hi + esc and abs(cross - c_mid) > 0.5:
--                ev.append(f"{e.get('id')}: excluded as 'same wall as {m.group(1)}' but the coverage map has a separate parallel band "
--                          f"{r['id']} ({rx:.1f}, {ry:.1f}) {r.get('largo_ft')} ft at {abs(cross - c_mid) / esc * 12:.1f} in. from it, RED: two "
--                          "leaves with a gap are two walls (BE-GK54); prove the gap does not exist ('gap_proof' with N/SHEET) or carry it")
++                continue
 +            c_mid = (float(b["c0"]) + float(b["c1"])) / 2
 +            lo, hi = sorted((float(b["lo"]), float(b["hi"])))
 +            esc = float((escalas or {}).get(b.get("sheet")) or esc)
@@ -517,7 +726,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
      return ev
  
  
-@@ -6489,14 +6592,18 @@
+@@ -6489,14 +6647,18 @@
      ev += [f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')} con decision '{d.get('decision')}': solo "
             "NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo limpian un rojo (FALTA se corrige en la cadena)" for d in disp
             if not RX_COB_DECISION_OK.match(str(d.get("decision") or "").strip()) and not re.match(r"(?i)FALTA|MISSING", str(d.get("decision") or "").strip())]
@@ -541,7 +750,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
                        + ("escribió etapas 2-7 de la cadena (autor del canon / take-off)" if rv in autores else
                           "no está registrado en la bitácora con el rol revisor_cobertura (python3 tools/bitacora.py subagente "
                           "revisor_cobertura <id>)") + " (U-193)")
-@@ -6505,6 +6612,9 @@
+@@ -6505,6 +6667,9 @@
      if not (re.search(r"(?i)diagonal", gt) and re.search(r"(?i)(?:single|one|una sola)\s+(?:missing\s+)?(?:face|cara)", gt)):
          ev.append("la GUÍA del estimador no documenta los límites del mapa de cobertura (una sola cara faltante y los muros en diagonal NO "
                    "salen en rojo; COORDINACIÓN 12-nov)")
@@ -551,9 +760,34 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take
      for k in ("pdf", "csv"):
          if not os.path.isfile(rutas[k]):
              ev.append(f"falta {os.path.relpath(rutas[k], c.entrega)}: python3 -I tools/compuerta_entrega.py cobertura <carpeta de entrega>")
+diff -ruN v119/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v120/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v119/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 21:29:40.673460024 +0000
++++ v120/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 21:59:03.444376989 +0000
+@@ -629,6 +629,21 @@
+     assert e == "PASS", (e, ev)
+     e, ev = fn(B(canon=can3, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 1 | corridor 901 ceiling missing | added CLG-Z9-999 |"}))
+     assert e == "FAIL" and "CLG-Z9-999" in ev[0], (e, ev)                 # cierre con una ref que no existe
++    # v120 (GK #8 / H-04, ids sintéticos): cierre con CUALQUIER ref cargada del canon; 'hoja faltante' no es cielo; DOBLE_CIELO.csv resuelve
++    can4 = dict(can, misc_items=[{"ref": "EXT-Z9-901 board", "qty": 30.0}])
++    e, ev = fn(B(canon=can4, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 3 | corridor 901 ceiling missing | closed: EXT-Z9-901 |"}))
++    assert e == "PASS", (e, ev)                                          # EXT- (no solo CLG / SOF / BW / CW)
++    e, ev = fn(B(canon=can, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 8 | soffit 30/X9.20 (missing) for the ceiling band | n/a |"}))
++    assert "sin hallazgos" in str(ev), (e, ev)                           # GK #8: falta una HOJA, no un cielo
++    dcsv = ("Room,Level,Type,Upper ceiling,Lower ceiling,Heights,N/SHEET,Framing,Row / reason\n"
++            "Z9 911 Lobby,Z9,double,FS-9,GYP,9',1/X9.31,x,upper: FS-9 [0]; lower: CLG-Z9-911\n"
++            "Z9 912 Bar,Z9,double,FS-9,GYP,9',1/X9.31,x,upper: FS-9 [1]; lower: CLG-Z9-912\n")
++    tx = {"Auditoria/AUDITORIA_U181_rev9.md": "| H-04 | upper ceiling missing in rooms 911 and 912 | see DOBLE_CIELO |", "Auditoria/DOBLE_CIELO.csv": dcsv}
++    e, ev = fn(B(canon=can, textos=tx))
++    assert e == "PASS", (e, ev)                                          # H-04: resuelto por DOBLE_CIELO.csv
++    tx["Auditoria/AUDITORIA_U181_rev9.md"] = "| H-04 | upper ceiling missing in rooms 911 and 913 | see DOBLE_CIELO |"
++    e, ev = fn(B(canon=can, textos=tx))
++    assert e == "PASS" or "913" in str(ev), (e, ev)                      # 913 no está en la tabla: se resuelve contra el canon
+     print("test_v119_be_cr40_verificacion OK")
+ 
+ 
 diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:29:40.673577079 +0000
-+++ v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:53:17.608717805 +0000
++++ v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:59:03.444414066 +0000
 @@ -2445,7 +2445,8 @@
              wr.writerow({"hoja": f["hoja"], "tipo": f["tipo"], "id": f["id"], "x": f["x"], "y": f["y"], "decision": "NO ES NUESTRO",
                           "motivo": "EXISTING CONSTRUCTION TO REMAIN", "nhoja": "2/X9.01", "reviewer": "subagente R9", "imagen": f["imagen"]})
@@ -664,7 +898,7 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120
      print("test_be_gk54 OK")
  
  
-@@ -2810,7 +2851,81 @@
+@@ -2810,7 +2851,116 @@
      rows = [json.loads(x) for x in open(os.path.join(w, "bitacora.jsonl"))]
      import bitacora as BT
      assert BT.cadena_ok(rows) == 0, "los sellos respetan la cadena de hashes"
@@ -746,3 +980,38 @@ diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120
 +
 +
 +test_v120_adv4()
++
++
++def test_v120_retroactivo_proceso():
++    """v120 (COORDINACIÓN, CR rev20b / GK rev3b, sintético): los requisitos de PROCESO de v119 (BE-PM05 VERSION_PROYECTO, BE-PM06
++    tiempos.log / --paso / sellos, alarma) salen AMBER con la causa escrita en una rev que arrancó ANTES de FECHA_V119; el formato viejo del
++    log ('12-nov 08:00 PST' / '10-nov 21:01 PST') se lee como ISO; sin marcas, la fecha sale del primer commit; sin fecha = FAIL; una rev
++    que arrancó después = FAIL."""
++    tt = ("| # | Paso | Inicio | Fin | Duración |\n|---|---|---|---|---|\n| 7 | calc | 11-12 08:30 PST | 11-12 09:00 PST | 30 min |\n"
++          "| 8-10 | docs | 11-12 09:00 PST | 11-12 09:40 PST | 40 min |\n| TOTAL | | | | 70 min |\n")
++    w = tempfile.mkdtemp(prefix="retro_")
++    open(os.path.join(w, "tiempos.log"), "w").write("12-nov 08:00 PST | rev9b inicio\n12-nov 08:20 PST | 6 fin\n")   # cierres 7-10 solo en commits
++    ms = CE.marcas_tiempos_log(os.path.join(w, "tiempos.log"))
++    assert [t.isoformat() for t, _l in ms] == ["2026-11-12T08:00:00", "2026-11-12T08:20:00"], ms
++    est, msg = CE.proceso_v119(w, None, tt, 5)
++    assert est == "AMBER" and "causa:" in msg[0] and any("--paso 7" in x for x in msg) and any("VERSION_PROYECTO" in x for x in msg), (est, msg)
++    open(os.path.join(w, "tiempos.log"), "w").write("10-nov 21:01 PST | rev9b inicio (formato GK)\n")
++    assert CE.proceso_v119(w, None, tt, 5)[0] == "AMBER"
++    open(os.path.join(w, "tiempos.log"), "w").write("12-nov 14:00 PST | rev9c inicio\n")                               # 22:00 UTC > v119
++    assert CE.proceso_v119(w, None, tt, 5)[0] == "FAIL"
++    w2 = tempfile.mkdtemp(prefix="retro2_")                             # sin tiempos.log ni git = no se puede fechar = FAIL
++    est, msg = CE.proceso_v119(w2, None, tt, 5)
++    assert est == "FAIL" and "no se puede fechar" in msg[0], (est, msg)
++    e3 = os.path.join(w2, "FINAL_FOR_REVIEW_rev9b")                     # sin marcas: la fecha del primer commit de la carpeta de la rev
++    os.makedirs(e3)
++    open(os.path.join(e3, "x.md"), "w").write("x\n")
++    env = dict(os.environ, GIT_AUTHOR_DATE="2026-11-12T08:00:00-08:00", GIT_COMMITTER_DATE="2026-11-12T08:00:00-08:00",
++               GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@x", GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@x")
++    for cmd in (["git", "init", "-q"], ["git", "add", "-A"], ["git", "commit", "-q", "-m", "rev9b"]):
++        subprocess.run(cmd, cwd=w2, env=env, check=True, capture_output=True)
++    assert CE.inicio_rev(w2, e3).isoformat().startswith("2026-11-12T08:00:00")
++    assert CE.proceso_v119(w2, e3, tt, 5)[0] == "AMBER"
++    print("test_v120_retroactivo_proceso OK")
++
++
++test_v120_retroactivo_proceso()
