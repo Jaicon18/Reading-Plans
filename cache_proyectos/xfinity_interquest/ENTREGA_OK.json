@@ -1,16 +1,30 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 13:54 PST",
- "fecha_iso": "2026-11-11T21:54:35.184794+00:00",
+ "fecha_california": "2026-11-11 17:15 PST",
+ "fecha_iso": "2026-11-12T01:15:45.221707+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 216,
-  "AMBER": 1,
+  "PASS": 224,
+  "AMBER": 4,
   "FAIL": 0
  },
  "chequeos": [
+  {
+   "id": "CE_ORDENES_VIGENTES",
+   "reglas": [
+    "BE-CF27",
+    "U-180"
+   ],
+   "descripcion": "candado de órdenes al inicio de la compuerta",
+   "estado": "PASS",
+   "evidencia": [
+    "el skill de la compuerta tiene todas las órdenes U-NNN del remoto (o no hay repo remoto)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
   {
    "id": "CE_ENTREGABLES",
    "reglas": [
@@ -22,6 +36,7 @@
    "evidencia": [
     "320 archivos en rev1 FINAL PARA REVISAR"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -35,6 +50,7 @@
    "evidencia": [
     "13 piezas del estándar O'Reilly rev10 presentes"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -48,6 +64,7 @@
    "evidencia": [
     "sin archivos de proposal fuera de Proposal/ (U-150)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -60,6 +77,7 @@
    "evidencia": [
     "1 proposal(s): INCLUDED / NOT INCLUDED completos y precios FBM con fuente"
    ],
+   "segundos": 0.36,
    "plausibilidad": "OK"
   },
   {
@@ -75,6 +93,7 @@
    "evidencia": [
     "6 hojas + encabezados fijos OK"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -87,6 +106,7 @@
    "evidencia": [
     "7 renglones de tornillería en 0 con EXCLUDED"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -100,6 +120,7 @@
    "evidencia": [
     "6 renglones estándar / 0 slip-deflection, separados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -114,6 +135,7 @@
    "evidencia": [
     "todos los renglones con fuente"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -132,19 +154,45 @@
    "evidencia": [
     "datos del proyecto en las 4 fuentes"
    ],
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_TIEMPOS",
    "reglas": [
     "BE-158",
-    "U-094"
+    "U-094",
+    "U-169"
    ],
    "descripcion": "TIEMPOS.md con hora de inicio / fin (hora de California) de cada paso 1–9 y TOTAL; ninguna fila encimada con otra, Duración = fin - inicio y TOTAL = suma de las filas (CR City Hotel 11-nov)",
-   "estado": "PASS",
+   "estado": "AMBER",
    "evidencia": [
-    "pasos 1–9 con hora, sin filas encimadas, TOTAL = suma; TIEMPOS.md"
+    "pasos 1–9 con hora, sin filas encimadas, TOTAL = suma; TIEMPOS.md",
+    "TOTAL 740 min = 411 % del presupuesto 180 min (8 hojas A): más del 100 % sin 'causa:' en TIEMPOS.md (P6 / U-184) (entrega con primera subida anterior al presupuesto P6: no se re-abre, U-180 (4))"
    ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CE_CAMPOS_CANON",
+   "reglas": [
+    "BE-CR20",
+    "BE-CR22",
+    "BE-CR27",
+    "BE-PM02",
+    "U-137",
+    "U-178"
+   ],
+   "descripcion": "v81cf97: el canon trae lleno o con none_reason cada campo que usan los chequeos de v81cf96 (rated_floor_assemblies, typical_floors, stack_reasons, posiciones de puerta); sin ellos = FAIL (AMBER en entregas anteriores a v81cf96)",
+   "estado": "AMBER",
+   "evidencia": [
+    "entrega anterior a v81cf96: no se re-abre (U-180 (4))",
+    "canon sin 'rated_floor_assemblies' ni 'rated_floor_assemblies_none_reason' (U-137: el chequeo que lo usa pasaría en vacío)",
+    "canon sin 'typical_floors' ni 'typical_floors_none_reason' (U-137: el chequeo que lo usa pasaría en vacío)",
+    "canon sin 'stack_reasons' ni 'stack_reasons_none_reason' (U-137: el chequeo que lo usa pasaría en vacío)",
+    "1 de 1 puertas del opening_schedule sin sheet + center_pt (Door 101) ni opening_positions_none_reason (BE-CR22)"
+   ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -157,6 +205,7 @@
    "evidencia": [
     "sin horas en UTC"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -171,6 +220,7 @@
    "evidencia": [
     "sin montos en dólares"
    ],
+   "segundos": 0.08,
    "plausibilidad": "OK"
   },
   {
@@ -186,6 +236,7 @@
    "evidencia": [
     "parent 1UReOABlgJPIkGLe8-nRO6U-6i7xpKoIc › 'Xfinity - Interquest, Colorado Springs, CO (BCI National) 11-13-26' (subir_entrega.py lo verifica en vivo con gdrive_fetch list)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -201,6 +252,7 @@
    "evidencia": [
     "1 RFI abiertos con A/B/C + delta + valor cargado; todo 'not printed / assumed' del Excel remite a un RFI o a su decisión"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -221,6 +273,7 @@
    "evidencia": [
     "ningún RFI sobre temas con orden fija"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -243,6 +296,7 @@
    "evidencia": [
     "1 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
    ],
+   "segundos": 0.14,
    "plausibilidad": "OK"
   },
   {
@@ -258,6 +312,7 @@
    "evidencia": [
     "7 archivos con nombre que dice qué son; rutas Windows <= 230"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -272,6 +327,7 @@
    "evidencia": [
     "320 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
    ],
+   "segundos": 0.28,
    "plausibilidad": "OK"
   },
   {
@@ -284,6 +340,7 @@
    "evidencia": [
     "4 walls más largas re-medidas en vectores: max |delta| 0.01 ft"
    ],
+   "segundos": 0.41,
    "plausibilidad": "OK"
   },
   {
@@ -297,6 +354,7 @@
    "evidencia": [
     "1 alturas distintas con su cota impresa (o sus valores impresos)"
    ],
+   "segundos": 0.08,
    "plausibilidad": "OK"
   },
   {
@@ -312,6 +370,7 @@
    "evidencia": [
     "4 walls con la altura citada a una hoja concreta"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -326,12 +385,14 @@
    "evidencia": [
     "CHECKLIST_REVISION.xlsx: 5 secciones llenas (10 walls, todas las alturas, todas las exclusiones)"
    ],
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_RCP_CUARTOS",
    "reglas": [
     "BE-150",
+    "BE-AUD02",
     "BE-XF03",
     "U-159",
     "U-160"
@@ -341,11 +402,13 @@
    "evidencia": [
     "13 cuartos en 2 hojas RCP: renglón o exclusión; 11 exclusiones con su FreeText EXCLUDED ({'A3.0': 6})"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_RCP_CONTORNO",
    "reglas": [
+    "BE-AUD02",
     "CR-R15-CONTORNO",
     "U-159",
     "U-160",
@@ -356,6 +419,7 @@
    "evidencia": [
     "6 polígonos de cielo / EXCLUDED sobre las líneas de su hoja y en su vista RCP {'n': 6, 'min': 0.77, 'mediana': 0.98}"
    ],
+   "segundos": 0.17,
    "plausibilidad": "OK"
   },
   {
@@ -371,6 +435,7 @@
    "evidencia": [
     "1 RFI 'not printed' con búsqueda exhaustiva (1 abiertos)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -384,6 +449,7 @@
    "evidencia": [
     "toda decisión del estimador con cita"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -397,6 +463,7 @@
    "evidencia": [
     "10 cierres citados"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -409,6 +476,7 @@
    "evidencia": [
     "RFI abiertos en SEGUIMIENTO"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -426,6 +494,7 @@
    "evidencia": [
     "4 filas GREEN contra la altura impresa"
    ],
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -444,6 +513,7 @@
    "evidencia": [
     "5 types y 34 renglones del Material Summary en verde"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -459,6 +529,7 @@
    "evidencia": [
     "markups = Excel = escala impresa"
    ],
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -475,6 +546,7 @@
    "evidencia": [
     "35 revisiones OK"
    ],
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -498,8 +570,9 @@
    "descripcion": "reglas.py compuerta en modo final (--excel): todas las compuertas A_* del catálogo (etapas, bitácora, no dibujado, strut, barrido, markups, ...)",
    "estado": "PASS",
    "evidencia": [
-    "reglas.py OK (925 reglas)"
+    "reglas.py OK (930 reglas)"
    ],
+   "segundos": 1.15,
    "plausibilidad": "OK"
   },
   {
@@ -513,6 +586,7 @@
    "evidencia": [
     "17 páginas = original (XObjects faltantes: original 0, copia 0, todos también en el original)"
    ],
+   "segundos": 2.33,
    "plausibilidad": "OK"
   },
   {
@@ -525,6 +599,7 @@
    "evidencia": [
     "4 familia(s) fuera de rango explicadas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -538,6 +613,7 @@
    "evidencia": [
     "320 archivos: subida archivo por archivo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -556,6 +632,7 @@
     "SCHEDULES_REVISADOS.pdf: 5 páginas, 0 firmas, 5 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf: 18 páginas, 0 firmas, 18 Page Labels únicos, 3 página(s) con markups /Measure y su /VP del mismo /R"
    ],
+   "segundos": 0.1,
    "plausibilidad": "OK"
   },
   {
@@ -576,6 +653,7 @@
     "CSV: rev1 FINAL PARA REVISAR/Auditoria/VISTA_BLUEBEAM.csv",
     "/NM único y sin '/' en todo el PDF (U-167)"
    ],
+   "segundos": 0.18,
    "plausibilidad": "OK"
   },
   {
@@ -588,6 +666,7 @@
    "evidencia": [
     "20/20 markups: Depth de Bluebeam = Height del Excel = altura impresa (ALTURAS_IMPRESAS.csv); COMPARACION_ALTURAS.csv y CHECKLIST B2 al día (U-175)"
    ],
+   "segundos": 0.05,
    "plausibilidad": "OK"
   },
   {
@@ -605,11 +684,13 @@
     "5_evidencia: 3 alturas distintas -> 3 páginas + sección; capa 'HEIGHTS (U-176)'",
     "6_muestreo: 5 walls al azar, 3/3 alturas"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_MS_GAUGE",
    "reglas": [
+    "BE-AUD03",
     "U-177"
    ],
    "descripcion": "U-177 (3): todo renglón de stud / track / header / brace del Material Summary con cantidad dice su tamaño y GAUGE (designación SSMA 362S162-54, '16 ga' o mil) y su N/HOJA; 'per source' sin gauge = FAIL (nadie compra 20 ga por 16 ga)",
@@ -617,6 +698,7 @@
    "evidencia": [
     "11 renglones de stud / track / header / brace con gauge y N/HOJA"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -631,11 +713,13 @@
    "evidencia": [
     "STUD SCHEDULE impreso en ninguna hoja; ningún gauge declarado no impreso"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_MS_PRODUCTO_IMPRESO",
    "reglas": [
+    "BE-AUD04",
     "U-177"
    ],
    "descripcion": "U-177 (4): el renglón del Material Summary donde cae un item con producto impreso (canon product, p. ej. '6\" sheet metal blocking strapping') lleva ese producto en su nombre",
@@ -643,11 +727,13 @@
    "evidencia": [
     "5 items con producto impreso: cada uno nombra su renglón"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_ENTREGA_VIGENTE",
    "reglas": [
+    "BE-AUD01",
     "U-177"
    ],
    "descripcion": "U-177 (1): la entrega tiene UN PDF de markups vigente y UN Excel vigente (sin zz / REPLACED / NO USAR); ENTREGA_OK guarda su nombre + sha256 + md5 y la lista de chequeos; subir_entrega.py y `compuerta_entrega.py vigente` comparan con Drive (md5) y con los chequeos del skill vigente: otro archivo en Drive o compuerta vieja = la entrega NO está en verde",
@@ -656,6 +742,7 @@
     "pdf: XF_markups_rev1b - OPEN IN BLUEBEAM.pdf sha256 cbb9e4edc7a6",
     "excel: XF_Takeoff_FINAL_rev1.xlsx sha256 b663c76fd3ad"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -668,11 +755,13 @@
    "evidencia": [
     "0 RFI abiertos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_PROTOCOLO_3H",
    "reglas": [
+    "U-181",
     "U-184"
    ],
    "descripcion": "U-184 'bien a la primera en 2-3 h': auditoría U-181 fechada antes de la primera subida, H-A / H-B dentro de las lecturas, Excel / PDF de markups con hash producido por la cadena (sello + bitácora, nada a mano: CR rev18b), <= 2 corridas finales de compuerta y TIEMPOS.md con las corridas contadas",
@@ -682,10 +771,12 @@
     "(1) sin auditoría independiente U-181 FECHADA en Auditoria/ (informe con 'YYYY-MM-DD HH:MM' en el encabezado)",
     "(2) TIEMPOS.md no registra H-A / H-B dentro del paso de lecturas (U-184 (1): van con las lecturas A / B, no después)",
     "(3) sin bitácora de la cadena (bitacora.jsonl): no se puede probar que los archivos salieron de la cadena",
-    "(4) 3 corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))",
+    "(4) 4 corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))",
     "(5) TIEMPOS.md sin 'corridas de compuerta: N' (U-184 (7))",
-    "3 corrida(s) final(es) sobre estos archivos, 3 en la rev"
+    "4 corrida(s) final(es) sobre estos archivos, 4 en la rev",
+    "registro: 4 inicio(s) de compuerta en la rev (1 cortada(s)), 1 roja(s)"
    ],
+   "segundos": 0.05,
    "plausibilidad": "OK"
   },
   {
@@ -700,6 +791,7 @@
    "evidencia": [
     "N/A: el canon no trae cielos ni soffits cuantificados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -714,6 +806,7 @@
    "evidencia": [
     "8 markups de wall sobre su banda dibujada (0 con excepción escrita)"
    ],
+   "segundos": 0.78,
    "plausibilidad": "OK"
   },
   {
@@ -728,6 +821,7 @@
    "evidencia": [
     "1 markups de cielo / soffit con contorno medido; 0 ceilings con contorno == cargado"
    ],
+   "segundos": 0.09,
    "plausibilidad": "OK"
   },
   {
@@ -742,6 +836,7 @@
    "evidencia": [
     "N/A: el set no imprime door schedule con rating"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -757,6 +852,7 @@
    "evidencia": [
     "shafts con su detalle, alturas de cuarto sin detalle de corridor, filas C-H con su stud"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -774,6 +870,7 @@
    "evidencia": [
     "shaft walls, accesorios, cielos de shower y proposal coherentes"
    ],
+   "segundos": 0.1,
    "plausibilidad": "OK"
   },
   {
@@ -787,6 +884,7 @@
    "evidencia": [
     "ninguna resolución contra una cota impresa"
    ],
+   "segundos": 0.7,
    "plausibilidad": "OK"
   },
   {
@@ -800,6 +898,7 @@
    "evidencia": [
     "1 walls con cota impresa = LF"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -813,6 +912,7 @@
    "evidencia": [
     "1 RFI abiertos sin precedente decidido"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -825,6 +925,7 @@
    "evidencia": [
     "34 renglones sin desglose duplicado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -837,6 +938,7 @@
    "evidencia": [
     "ningún renglón de residuo de redondeo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -849,6 +951,7 @@
    "evidencia": [
     "ningún EXCLUDED sobre un material cargado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -862,6 +965,7 @@
    "evidencia": [
     "N/A: ningún wall con largo Y altura impresos a la vez; largo impreso con altura derivada: W2-02"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -874,6 +978,7 @@
    "evidencia": [
     "ningún RFI abierto sobre el corte de deck (U-146)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -886,6 +991,7 @@
    "evidencia": [
     "ningún RFI abierto sobre el level of finish (U-147)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -901,6 +1007,7 @@
    "evidencia": [
     "A y B completas sobre ['A2.0']"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -914,6 +1021,7 @@
    "evidencia": [
     "escala + band.sheet + barrido MEP presentes"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -928,6 +1036,7 @@
    "evidencia": [
     "22 tags del inventario con wall de su type"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -941,6 +1050,7 @@
    "evidencia": [
     "N/A: se revisa al armar la versión (verificar_version.py revisar_banco)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -954,6 +1064,7 @@
    "evidencia": [
     "N/A: sin copia del bid set en la carpeta (entrega.json bidset / copia_limpia*.pdf)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -967,6 +1078,7 @@
    "evidencia": [
     "sin alturas a escala ni aberturas descontadas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -980,6 +1092,7 @@
    "evidencia": [
     "ninguna cara interior con altura de cota exterior"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -993,6 +1106,7 @@
    "evidencia": [
     "9 / 9 hojas M/P/E con texto"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1006,6 +1120,7 @@
    "evidencia": [
     "A vs B de ['ceilings', 'misc_items']"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1022,6 +1137,7 @@
    "evidencia": [
     "1 valores por código con su sección / tabla"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1035,6 +1151,7 @@
    "evidencia": [
     "N/A: ningún conflicto plano vs spec / código en el Excel"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1047,6 +1164,7 @@
    "evidencia": [
     "N/A: ningún blocking de accesorio sin medida impresa"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1060,6 +1178,7 @@
    "evidencia": [
     "N/A: el set no tiene demolición de gyp / metal"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1072,6 +1191,7 @@
    "evidencia": [
     "N/A: el set no imprime fire stop en la línea de cielo"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1085,6 +1205,7 @@
    "evidencia": [
     "N/A: ninguna nota W.R. para cielos ni para wet locations"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1097,6 +1218,7 @@
    "evidencia": [
     "caras de wet rooms en W.R."
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1109,6 +1231,7 @@
    "evidencia": [
     "ninguna cara sin gypsum con board"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1121,6 +1244,7 @@
    "evidencia": [
     "capas por cara = fuente"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1133,6 +1257,7 @@
    "evidencia": [
     "1 soffits con lados + fondo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1145,6 +1270,7 @@
    "evidencia": [
     "N/A: ningún tag '<type> SIM.' en las plantas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1157,6 +1283,7 @@
    "evidencia": [
     "sin walls existing como nuevos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1169,6 +1296,7 @@
    "evidencia": [
     "ninguna cota HOLD sin cuantificar"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -1181,6 +1309,7 @@
    "evidencia": [
     "N/A: ningún área rotulada de plywood / backing"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1194,6 +1323,7 @@
    "evidencia": [
     "33 citas textuales impresas"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -1206,6 +1336,7 @@
    "evidencia": [
     "backboard de ['E2.0', 'E3.0'] con destino"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1218,6 +1349,7 @@
    "evidencia": [
     "3 afirmaciones 'not printed' sin valor impreso en el set"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1231,6 +1363,7 @@
    "evidencia": [
     "miembros y burbujas citadas coinciden"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1244,6 +1377,7 @@
    "evidencia": [
     "N/A: ningún accesorio impreso en hojas A / S"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1256,6 +1390,7 @@
    "evidencia": [
     "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1269,6 +1404,7 @@
    "evidencia": [
     "cobertura sin GAP"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1282,6 +1418,7 @@
    "evidencia": [
     "N/A: tornillería EXCLUDED (U-053) o sin fasteners cargados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1295,6 +1432,7 @@
    "evidencia": [
     "soffits con studs + tracks"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1307,6 +1445,7 @@
    "evidencia": [
     "N/A: sin renglón de glass mat"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1319,6 +1458,7 @@
    "evidencia": [
     "N/A: sin renglón de jamb return"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1331,6 +1471,7 @@
    "evidencia": [
     "sin acoustical sealant cargado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1344,6 +1485,7 @@
    "evidencia": [
     "1 cielos con su detalle de sistema"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1356,6 +1498,7 @@
    "evidencia": [
     "N/A: sin ballistic"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1368,6 +1511,7 @@
    "evidencia": [
     "N/A: sin ATM / recess"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1380,6 +1524,7 @@
    "evidencia": [
     "N/A: sin canopy / parapet de framing"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1392,6 +1537,7 @@
    "evidencia": [
     "headers con schedule, RFI o precedente"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1404,6 +1550,7 @@
    "evidencia": [
     "sin nombres internos en el Excel"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1416,6 +1563,7 @@
    "evidencia": [
     "board MS / PT = 6.55"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1428,6 +1576,7 @@
    "evidencia": [
     "un espesor / tamaño por renglón"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1440,6 +1589,7 @@
    "evidencia": [
     "IDs citados existen"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1452,6 +1602,7 @@
    "evidencia": [
     "markups sin nombres internos"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1464,6 +1615,7 @@
    "evidencia": [
     "1 cotas confirmadas por el dibujo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1476,6 +1628,7 @@
    "evidencia": [
     "N/A: sin asignaciones a otro contratista en E/M/P"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1488,6 +1641,7 @@
    "evidencia": [
     "piezas por stock length"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1500,6 +1654,7 @@
    "evidencia": [
     "N/A: sin coberturas heredadas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1512,6 +1667,7 @@
    "evidencia": [
     "deltas con las piezas citadas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1524,6 +1680,7 @@
    "evidencia": [
     "deducciones por cara"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1536,6 +1693,7 @@
    "evidencia": [
     "sin códigos internos"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1548,6 +1706,7 @@
    "evidencia": [
     "waste no metal en no metálicos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1560,6 +1719,7 @@
    "evidencia": [
     "Excel con sello de la cadena (<excel>.sello.json)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1573,6 +1733,7 @@
    "evidencia": [
     "A y B dentro del esquema"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1585,6 +1746,7 @@
    "evidencia": [
     "AB 4 walls vs A 17 / B 15"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1597,6 +1759,7 @@
    "evidencia": [
     "elements normalizados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1610,6 +1773,7 @@
    "evidencia": [
     "walls del AB con largos de la lectura"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1622,6 +1786,7 @@
    "evidencia": [
     "lecturas sin rutas de respuestas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1635,6 +1800,7 @@
    "evidencia": [
     "N/A: corrida por suscripción (sin costos.csv)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1649,6 +1815,7 @@
    "evidencia": [
     "referencias íntegras"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1662,6 +1829,7 @@
    "evidencia": [
     "evidencia con estado y hoja"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1674,6 +1842,7 @@
    "evidencia": [
     "Type X sin regular / MR"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1686,6 +1855,7 @@
    "evidencia": [
     "cielos en el canon (['A2.0', 'A3.0', 'A4.0'])"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1698,6 +1868,7 @@
    "evidencia": [
     "resolución y cobertura escritas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1710,6 +1881,7 @@
    "evidencia": [
     "filas con type"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1722,6 +1894,7 @@
    "evidencia": [
     "N/A: ninguna decisión general de board tomada (generales.board vacío)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1734,6 +1907,7 @@
    "evidencia": [
     "diferencias de atributos listadas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1746,6 +1920,7 @@
    "evidencia": [
     "alturas con hoja impresa"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1758,6 +1933,7 @@
    "evidencia": [
     "caras completas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1770,6 +1946,7 @@
    "evidencia": [
     "nones contradichos listados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1782,6 +1959,7 @@
    "evidencia": [
     "schedule completo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1795,6 +1973,7 @@
    "evidencia": [
     "sin dobles conteos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1809,6 +1988,7 @@
    "evidencia": [
     "caras topadas al cielo"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1821,6 +2001,7 @@
    "evidencia": [
     "trim cargado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1833,6 +2014,7 @@
    "evidencia": [
     "nones sin contradicción"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1845,6 +2027,7 @@
    "evidencia": [
     "Pending Items en 3 columnas"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1858,6 +2041,7 @@
    "evidencia": [
     "N/A: sin nodes suficientes"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1870,6 +2054,7 @@
    "evidencia": [
     "openings declarados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1882,6 +2067,7 @@
    "evidencia": [
     "N/A: corrida por suscripción (sin claude -p)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1894,6 +2080,7 @@
    "evidencia": [
     "decisiones con objeto"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1906,6 +2093,7 @@
    "evidencia": [
     "curvos por arco"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1918,6 +2106,7 @@
    "evidencia": [
     "caras con side"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1930,6 +2119,7 @@
    "evidencia": [
     "exclusión por type aplicada"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1943,6 +2133,7 @@
    "evidencia": [
     "hojas citadas existen"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1955,6 +2146,7 @@
    "evidencia": [
     "walls con geometría"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1967,6 +2159,7 @@
    "evidencia": [
     "sistemas dobles cargados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1979,6 +2172,7 @@
    "evidencia": [
     "lo impreso cargado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1991,6 +2185,7 @@
    "evidencia": [
     "sin criterios heredados sin cita"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2003,6 +2198,7 @@
    "evidencia": [
     "tornillería EXCLUDED"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2015,6 +2211,7 @@
    "evidencia": [
     "demolición solo en SF del elemento, sin capas ni RFI de composición"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2028,6 +2225,7 @@
    "evidencia": [
     "ningún wood con cantidad en el Material Summary"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2040,6 +2238,7 @@
    "evidencia": [
     "deep-leg en colgados y control joints"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2053,6 +2252,7 @@
    "evidencia": [
     "N/A: sin types con decimal"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2066,6 +2266,7 @@
    "evidencia": [
     "N/A: sin board 1/2\" regular"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2081,6 +2282,7 @@
    "evidencia": [
     "walls de madera: ninguno en el set (no wood-framed wall in the set: new walls are metal (2/A2.0 W2 3-5/8\" metal studs, 5/A2.0 2-1/2\" metal studs); W1 / W4 existing to remain (2/A2.0, not quantifie)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2094,6 +2296,7 @@
    "evidencia": [
     "17 / 17 hojas con número"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2106,6 +2309,7 @@
    "evidencia": [
     "rótulos = tamaño impreso"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2119,6 +2323,7 @@
    "evidencia": [
     "bracing con detalle; Subjects por type"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2133,6 +2338,7 @@
    "evidencia": [
     "N/A: el set no trae specs del trade y la entrega no cita ninguna sección"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2145,6 +2351,7 @@
    "evidencia": [
     "todos los ceilings con altura"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2157,6 +2364,7 @@
    "evidencia": [
     "angle molding = perímetro medido"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2169,6 +2377,7 @@
    "evidencia": [
     "0 detalles típicos con un solo ancho"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2181,6 +2390,7 @@
    "evidencia": [
     "0 membranas sin cielo duplicado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2193,6 +2403,7 @@
    "evidencia": [
     "0 caras de sheathing >= sus caras interiores"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2205,6 +2416,7 @@
    "evidencia": [
     "0 deltas recalculados desde las filas actuales"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2217,6 +2429,7 @@
    "evidencia": [
     "0 caras de sheathing con su propia altura"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2230,6 +2443,7 @@
    "evidencia": [
     "115 (hoja, término) de los barridos de RFI listados completos"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -2243,6 +2457,7 @@
    "evidencia": [
     "0 deltas de Review Items iguales a su RFI"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2256,6 +2471,7 @@
    "evidencia": [
     "Table 509 citada con su fila de electrical installations"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2269,6 +2485,7 @@
    "evidencia": [
     "sin framing metálico donde el detalle dibuja madera"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2282,6 +2499,7 @@
    "evidencia": [
     "0 renglones conservadores citados en Pending / Review / Scope"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2294,6 +2512,7 @@
    "evidencia": [
     "sin RFI de rating eléctrico / canopy (U-161)"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2306,6 +2525,7 @@
    "evidencia": [
     "sin RFI de los temas que U-178 resuelve por regla"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2319,6 +2539,7 @@
    "evidencia": [
     "4 walls revisados: alturas tomadas de elevación (0) comprobadas en planta"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2332,6 +2553,7 @@
    "evidencia": [
     "exclusiones de alcance con el rating revisado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2344,6 +2566,7 @@
    "evidencia": [
     "sin RFI de altura de estructura con altura del edificio impresa (U-174)"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2356,6 +2579,128 @@
    "evidencia": [
     "assemblies con solo gypsum board + metal framing (U-163)"
    ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CR20_MEMBRANA",
+   "reglas": [
+    "BE-CR20"
+   ],
+   "descripcion": "BE-CR20 (CR City Hotel, auditoría U-138, ALTA): un floor/ceiling assembly rated listado por LEVEL N (rated_floor_assemblies {id, levels, source}) = membrana en el cielo del nivel N-1; nivel N-1 sin renglón de membrana (ceilings / misc_items con el id del assembly o 'membrane') ni below_none_reason = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin floor/ceiling assembly rated listado por nivel (rated_floor_assemblies)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CR22_VANOS",
+   "reglas": [
+    "BE-CR22"
+   ],
+   "descripcion": "BE-CR22 (CR City Hotel, auditoría U-138): un wall cuya banda es SOLO el vano de una puerta del opening_schedule (misma hoja, >= 80 % del largo dentro del R.O.) = wall fantasma; una puerta dentro del LF de un wall sin citarla (openings[].ref / door_reason) = FAIL. Head / infill del vano no cuenta",
+   "estado": "AMBER",
+   "evidencia": [
+    "sin posición (sheet + center_pt) de las 1 puertas del opening_schedule: no se puede probar"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_CR27_STACK",
+   "reglas": [
+    "BE-CR27"
+   ],
+   "descripcion": "BE-CR27 (CR City Hotel rev2, auditoría U-138 #2): pisos típicos (mismo patrón de números de cuarto por nivel, o typical_floors) = misma carga: SF de board por familia con |delta| > 10 % contra la mediana de los típicos sin stack_reasons = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin pisos típicos (mismo patrón de cuartos en 2+ niveles; 0 niveles con board)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_GK32_SHEATHING_EXTERIOR",
+   "reglas": [
+    "BE-GK32"
+   ],
+   "descripcion": "BE-GK32 (Grand Kia rev2, auditoría U-181 F1): una cara exterior / EIFS / sheathing cargada con la familia tile backer (Dens Shield, ASTM C1178) = FAIL: el glass mat sheathing exterior es su propia familia (exterior sheathing)",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin caras exteriores / EIFS / sheathing (6 caras revisadas)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_GK33_TEXTOS_VIEJOS",
+   "reglas": [
+    "BE-GK33",
+    "BE-GK33b"
+   ],
+   "descripcion": "BE-GK33 / 33b (Grand Kia rev2, auditoría U-181 F2/F3 y re-verificación): barrido GLOBAL de todo string del canon (walls, caras, misc, rfis): '(open)' de un RFI cerrado, '[scale check]', '[TBD]' o texto cortado ('…') = FAIL; un RFI cerrado (status != open) cuyo loaded / opciones conserva '+x %' o '≈' = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "1424 strings del canon barridos y 5 RFI cerrados sin textos viejos ni deltas vagos"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_BE_GK37_FILA_DETALLE",
+   "reglas": [
+    "BE-GK37"
+   ],
+   "descripcion": "BE-GK37 (Grand Kia re-verificación U-181 3/4): un track / runner de misc_items cuya fuente cita un detalle N/HOJA cuya hoja (set_texto) no tiene TRACK / RUNNER = FAIL (la fila lleva solo lo que su detalle dibuja); una conexión ('clip' / 'angle') citada como motivo sin renglón con qty > 0, o un renglón clip / angle con qty 0 sin none_reason = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin track / runner con detalle citado ni conexiones clip / angle (28 misc_items revisados)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_161_VALOR",
+   "reglas": [
+    "U-161",
+    "U-161-VALOR"
+   ],
+   "descripcion": "U-161 (valor cargado; post-mortem 11-nov #8): cuarto ELEC / IT con DOS ratings impresos en set_texto (tabla de código vs code plan) = se carga el MAYOR; wall / ceiling de ese cuarto con rating_hr menor que el mayor impreso = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: sin caras / ceilings de cuartos ELEC / IT"
+   ],
+   "segundos": 0.01,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_174_VALOR",
+   "reglas": [
+    "U-174",
+    "U-174-VALOR"
+   ],
+   "descripcion": "U-174 (valor cargado; post-mortem 11-nov #8): wall cuya altura dice 'structure height not printed' se carga con la altura del edificio del code analysis (A0.x 'HEIGHT ... N FT'); otra altura = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "N/A: ningún wall con altura de estructura no impresa (4 walls revisados)"
+   ],
+   "segundos": 0.0,
+   "plausibilidad": "OK"
+  },
+  {
+   "id": "CB_U_178_LARGO",
+   "reglas": [
+    "U-178",
+    "U-178-LARGO"
+   ],
+   "descripcion": "U-178 (5) (valor cargado; post-mortem 11-nov #8): wall con 'VARIES' / 'sloped' en su fuente = largo inclinado real: sin length_op (o height_op para la altura) con la geometría inclinada (sqrt / pendiente / promedio) = FAIL",
+   "estado": "PASS",
+   "evidencia": [
+    "4 walls revisados; 0 inclinados / VARIES con su operación de geometría"
+   ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2368,6 +2713,7 @@
    "evidencia": [
     "sin RFI de opción wood / metal"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2381,6 +2727,7 @@
    "evidencia": [
     "markups en inglés con número de hoja"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2393,6 +2740,7 @@
    "evidencia": [
     "3 escalas = rótulo impreso"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2405,6 +2753,7 @@
    "evidencia": [
     "nada impreso en 0"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2417,6 +2766,7 @@
    "evidencia": [
     "top track en sus familias"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2429,6 +2779,7 @@
    "evidencia": [
     "bracing según la condición impresa"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2443,6 +2794,7 @@
    "evidencia": [
     "una fila por Wall ID; inglés"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2455,6 +2807,7 @@
    "evidencia": [
     "RFI de altura con barrido completo"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2467,6 +2820,7 @@
    "evidencia": [
     "N/A: la spec no pide Type X en todo"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2480,6 +2834,7 @@
    "evidencia": [
     "sin productos duplicados"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2492,6 +2847,7 @@
    "evidencia": [
     "productos impresos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2504,6 +2860,7 @@
    "evidencia": [
     "N/A: sin nota de bridging que excluya walls con board en las dos caras"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2516,6 +2873,7 @@
    "evidencia": [
     "11 elementos de demo completos"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2528,6 +2886,7 @@
    "evidencia": [
     "sin cierres por 'no dibujado'"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2541,6 +2900,7 @@
    "evidencia": [
     "SF de markups = Excel"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2553,6 +2913,7 @@
    "evidencia": [
     "notas impresas cargadas"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2565,6 +2926,7 @@
    "evidencia": [
     "altura de la Source = altura cargada"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2578,6 +2940,7 @@
    "evidencia": [
     "11 markups DEMO en demolition plans"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2590,6 +2953,7 @@
    "evidencia": [
     "todo RFI 'not printed' con búsqueda completa"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2602,6 +2966,7 @@
    "evidencia": [
     "todo RFI resuelto habla desde el valor cargado"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2614,6 +2979,7 @@
    "evidencia": [
     "1 hojas con markups; 11 elementos de demo con su markup DEMO"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2634,6 +3000,7 @@
     "8 burbujas citadas + declaradas (31 burbujas de dos líneas), cadenas seguidas por 6 hojas",
     "conteos (CR-R10-m3): 8 = destinos N/HOJA ÚNICOS citados en el Excel / canon o declarados; 31 = burbujas (instancias) en las 6 hojas que alcanza la cadena del trade; CE_DETALLES_CIRCULADOS cuenta en cambio TODAS las burbujas de todas las hojas de origen del set (también S / M / P / E fuera de la cadena)"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2648,6 +3015,7 @@
    "evidencia": [
     "14 números con estado, hoja u operación"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2662,6 +3030,7 @@
    "evidencia": [
     "toda partida cita N/HOJA"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2677,6 +3046,7 @@
    "evidencia": [
     "todo supuesto con su RFI / precedente / código"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2692,6 +3062,7 @@
    "evidencia": [
     "22 ubicaciones numeradas, circuladas, verificadas y contadas"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -2706,6 +3077,7 @@
    "evidencia": [
     "toda afirmación con imagen circulada"
    ],
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -2720,6 +3092,7 @@
    "evidencia": [
     "entregable en inglés"
    ],
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
@@ -2735,6 +3108,7 @@
    "evidencia": [
     "un eje / fachada por número"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2749,6 +3123,7 @@
    "evidencia": [
     "20 markups con Subject, Page Label, Length, Depth y Wall Area"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2762,6 +3137,7 @@
    "evidencia": [
     "términos del trade en inglés"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2775,6 +3151,7 @@
    "evidencia": [
     "2 walls: caras y capas = schedule"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2788,6 +3165,7 @@
    "evidencia": [
     "cifras del Scope Checklist / Inputs / README = Material Summary"
    ],
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2801,6 +3179,7 @@
    "evidencia": [
     "N/A: ninguna hoja de RCP con tags GYP-n impresos"
    ],
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -2814,6 +3193,7 @@
    "evidencia": [
     "4 walls en el canon frente a 9 filas del Partition Takeoff"
    ],
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2827,6 +3207,7 @@
    "evidencia": [
     "12 schedules, 181 types / renglones marcados, 224 materiales cruzados con el Material Summary"
    ],
+   "segundos": 0.33,
    "plausibilidad": "OK"
   },
   {
@@ -2839,11 +3220,13 @@
    "evidencia": [
     "12 schedules del trade, 181 filas revisadas, materiales listados y marcadas"
    ],
+   "segundos": 0.16,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_DETALLES_CIRCULADOS",
    "reglas": [
+    "BE-CR23",
     "CR-R10-m3",
     "U-141"
    ],
@@ -2853,6 +3236,7 @@
     "46 burbujas circuladas en origen y destino en 6 hojas; por hoja de origen: A2.0 17, A5.0 9, A3.0 2, A4.0 17, M1.0 1",
     "conteos (CR-R10-m3): este total = TODAS las burbujas de todas las hojas de origen del set, por disciplina A 45, M 1; CE_CALLOUTS cuenta los destinos N/HOJA únicos citados y las burbujas de las hojas alcanzadas por la cadena del trade (subconjunto)"
    ],
+   "segundos": 1.0,
    "plausibilidad": "OK"
   }
  ],
@@ -3193,8 +3577,8 @@
    "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92"
   }
  },
- "skill_version": "v81cf94",
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01)",
+ "skill_version": "v81cf97",
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON)",
  "vigentes": {
   "pdf": {
    "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",
@@ -3206,5 +3590,8 @@
    "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92",
    "md5": "f9e1bbb38b03a0c3fb7a0bd804da8cd8"
   }
- }
+ },
+ "corrida": "a25bab46542a",
+ "tipo": "final",
+ "paso": null
 }
