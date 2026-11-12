@@ -1,6 +1,15 @@
 diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 22:34:21.369985110 +0000
-+++ v121/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 22:34:21.377302715 +0000
++++ v121/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 22:43:24.337760174 +0000
+@@ -1,7 +1,7 @@
+ {
+  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos + v81cf115 BE-AUD09 solo la rev vigente + v81cf116 Listing: en trazabilidad (BE-AUD05) + BE-GK50 BE-GK51 unidos + v81cf117 ceilings_misc (BE-AUD06) + BE-GK52 unidos + v81cf118 U_191 salta EXCLUDED 0 + v81cf119 U-193 mapa de cobertura (CE_COBERTURA, B6) + BE-GK53 unidos + v81cf119 post-mortem 12b (U-185, U-189 / BE-CR39, U-190, BE-CR40, BE-CR42, BE-PM04..07) + v81cf119 U-193 MAPA DE COBERTURA (filtro de cotas, revisión de rojos con revisor registrado) + post-mortem 2026-11-12b (BE-PM04..09, U-185 / BE-CR40 / U-189 / U-190) + BE-GK53 / BE-GK54 unidos; 5 WEAK del post-mortem 12b abiertos -> v120 + v81cf120 verificaciones 3 y 4 de v119 (norm_txt común, parser único de TIEMPOS.md, Fecha / Comparado explícitos, GK54 sinónimos y gap medido, U-193 agente obligatorio) + retroactivo de proceso (AMBER antes de v119) + CB_FALTANTES_AUDITORIA (cualquier ref, hoja faltante, DOBLE_CIELO); post-mortem 12b abierto hasta la verificación 5",
+  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
+- "conteo": 573,
++ "conteo": 574,
+  "reglas": [
+   {
+    "id": "U-001",
 @@ -7846,7 +7846,7 @@
    {
     "id": "U-185",
@@ -26,12 +35,12 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     }
    },
    {
-@@ -8153,18 +8155,20 @@
+@@ -8153,18 +8155,21 @@
    {
     "id": "BE-CR40",
     "origen": "skills_archivo/tools_post_v81cf94_CR/LEEME.md (CR City Hotel rev20, 12-nov, commit 93915a3)",
 -   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla",
-+   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo",
++   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo",
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
@@ -41,7 +50,8 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
 -    "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo"
 +    "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo",
 +    "take-off:tools/chequeos_biblioteca.py::_cant_ref",
-+    "take-off:tools/chequeos_biblioteca.py::_seg_cargado"
++    "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
++    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto"
     ],
     "test": {
      "archivo": "take-off:tools/test_chequeos_biblioteca.py",
@@ -50,7 +60,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     }
    },
    {
-@@ -8476,7 +8480,7 @@
+@@ -8476,7 +8481,7 @@
    {
     "id": "U-193",
     "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
@@ -59,7 +69,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
-@@ -8491,11 +8495,12 @@
+@@ -8491,11 +8496,12 @@
      "take-off:tools/compuerta_entrega.py::subagentes_bitacora",
      "take-off:tools/bitacora.py::subagente",
      "take-off:tools/bitacora.py::run",
@@ -74,7 +84,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     }
    },
    {
-@@ -8508,7 +8513,7 @@
+@@ -8508,7 +8514,7 @@
    {
     "id": "BE-PM04",
     "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
@@ -83,7 +93,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     "categoria": "programa",
     "cuando": "version",
     "chequeos": [
-@@ -8518,34 +8523,38 @@
+@@ -8518,34 +8524,38 @@
      "ordenes:verificar_version.py::proyectos_abiertos_cache",
      "take-off:tools/compuerta_entrega.py::sha_tools",
      "ordenes:verificar_version.py::_fecha_resultado",
@@ -128,7 +138,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
-@@ -8559,11 +8568,13 @@
+@@ -8559,11 +8569,13 @@
      "take-off:tools/compuerta_entrega.py::filas_tiempos",
      "take-off:tools/compuerta_entrega.py::_paso_corrido",
      "take-off:tools/compuerta_entrega.py::proceso_v119",
@@ -144,7 +154,7 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     }
    },
    {
-@@ -8614,7 +8625,7 @@
+@@ -8614,7 +8626,7 @@
     "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
     "categoria": "programa",
     "cuando": "entrega",
@@ -153,18 +163,32 @@ diff -ruN v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v121/take-off-m
     "chequeos": [
      "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
      "take-off:tools/compuerta_entrega.py::ce_cobertura",
-@@ -8623,7 +8634,7 @@
+@@ -8623,7 +8635,21 @@
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
 -    "token": "test_be_gk54"
 +    "token": "test_v121_estructurales"
++   }
++  },
++  {
++   "id": "BE-GK55",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, REVERIF17 R17-F1, 12-nov; unido de apartados/be_gk55 en v81cf121)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "un wall nuevo no cambia por proximidad las uniones de un wall que no cambió: todo nodo NUEVO (L / T / split) que toca un wall con la misma band va en CAMBIOS_<rev>.txt con los dos ids o se declara 'no se tocan' (corner_skip con N/HOJA); si no = FAIL",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::be_gk55_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_gk55"
     }
    }
   ]
 diff -ruN v120/take-off-metal-frame-drywall/SKILL.md v121/take-off-metal-frame-drywall/SKILL.md
 --- v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 22:34:21.375604299 +0000
-+++ v121/take-off-metal-frame-drywall/SKILL.md	2026-11-12 22:34:21.377407221 +0000
++++ v121/take-off-metal-frame-drywall/SKILL.md	2026-11-12 22:43:24.337928296 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -174,7 +198,7 @@ diff -ruN v120/take-off-metal-frame-drywall/SKILL.md v121/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -353,7 +353,16 @@
+@@ -353,7 +353,20 @@
    y se re-corre; NO ES NUESTRO = renglón en COBERTURA_DISPOSICION.csv con decision, motivo impreso, nhoja N/HOJA, revisor e imagen
    (ROJOS/<id>.png, columna 'reviewer' o 'revisor'). Disposición sin revisor o sin imagen no vale; rojo sin recorte = FAIL. Se entrega con
    0 rojos abiertos; el usuario solo lo hojea (B6). LÍMITES (van escritos en la GUÍA del estimador, sección 'Coverage map limits', o
@@ -189,12 +213,16 @@ diff -ruN v120/take-off-metal-frame-drywall/SKILL.md v121/take-off-metal-frame-d
 +  (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
 +  de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
 +  dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **BE-GK55 (Grand Kia rev3b, REVERIF17 R17-F1; unido en v81cf121):** un wall nuevo no cambia por proximidad las uniones de un wall que
++  no cambió (patch F-Z1-21 en T con A-Z1-13 con el CMU de por medio: +1 stud = +8.21 LF de 362S162-19). Entre dos revs, todo nodo NUEVO
++  (L / T / split) que toca un wall con la misma band va en CAMBIOS_<rev>.txt con los dos ids, o el par se declara 'no se tocan'
++  (corner_skip con N/HOJA). Chequeo: `compuerta_entrega.py be_gk55 <canon_prev> <canon_new> CAMBIOS_<rev>.txt` (be_gk55_fallas).
  - **Post-mortem 2026-11-12b (v81cf119):** (1) antes de publicar una versión: `compuerta_entrega.py prueba_abiertos <tools vigente>
    skills_archivo/PRUEBA_ABIERTOS_vN.json <workdir abierto> …` — PASS -> FAIL sin explicación = no se publica; (2) al arrancar cada rev:
    `compuerta_entrega.py version_proyecto <workdir> --rev revN` (VERSION_PROYECTO.txt; cambiarla a mitad exige --causa y 'causa:' en
 diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
 --- v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 22:34:21.370692509 +0000
-+++ v121/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 22:34:21.377999011 +0000
++++ v121/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 22:43:24.338431601 +0000
 @@ -4330,7 +4330,8 @@
      return True, "rows del tag no existen en el canon"
  
@@ -215,11 +243,19 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
  def faltantes_auditoria(b):
      """BE-CR40 (+ verificación 12b): todo hallazgo de cielo faltante de CUALQUIER .md de Auditoria/ (y de los informes / auditorías) se
      resuelve contra el canon llamando a faltante_por_tag; el texto 'faltante_por_tag: …' del renglón NO es prueba. Sin tag: por número de
-@@ -4353,18 +4355,18 @@
+@@ -4349,28 +4351,40 @@
+     for k, t in sorted((b.textos or {}).items()):
+         if not (re.search(r"(?i)AUDITORIA|INFORME|revision_independiente|auditoria_U138", k) and k.lower().endswith((".md", ".txt"))):
+             continue
++        if re.match(r"(?i)(?:BRIEF|LEEME|README)", os.path.basename(k)):   # v121 (CR): instrucciones de los revisores, no hallazgos
++            continue
+         for ln in t.splitlines():
              tg = RX_TAG_CIELO_H.search(ln)
              if not (RX_HALLAZGO_FALTA.search(ln) and (tg or RX_CIELO_PALABRA.search(ln))):
                  continue
 -            if RX_HOJA_FALTANTE.search(ln):              # v120 (caso de GK): 'N/HOJA (missing)' = falta una HOJA / un dibujo, no un cielo
++            if not es_hallazgo_concreto(ln):            # v121 (CR): definición de categoría ('- FALTA — a wall / ceiling …') no es hallazgo
++                continue
 +            if RX_HOJA_FALTANTE.search(ln) and not RX_PALABRA_CIELO_V121.search(ln):   # v121: 'N/HOJA (missing)' sin palabra de cielo = HOJA
                  continue
              n += 1
@@ -228,7 +264,13 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
 -            cargadas = [r for r in cand if _ref_cargada(canon, r)]
 -            if cargadas:                                 # v120: el cierre vale con CUALQUIER ref que exista cargada en el canon
 -                ok += 1
--                continue
++            cex = RX_CERRADO_EXCL.search(ln)
++            if cex:                                      # v121 (GK H-04): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)'
++                if len(cex.group(1).strip(" -—–:")) >= 3 and cex.group(2):
++                    ok += 1
++                else:
++                    ev.append(f"{nom}: '{txt}' cierra como EXCLUDED sin motivo impreso o sin (N/HOJA) (BE-CR40)")
+                 continue
 -            refs = RX_REF_CIERRE.findall(ln)
 -            if refs:
 -                ev.append(f"{nom}: '{txt}' cierra el hallazgo con {', '.join(refs[:4])}, que no está cargado en el canon (BE-CR40)")
@@ -243,7 +285,15 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
                  continue
              cs = {m.group(1) for m in RX_CUARTO_H.finditer(RX_HOJA_H.sub(" ", ln))}
              if cs and dc and cs <= dc:                   # todos los cuartos del renglón están en DOBLE_CIELO.csv: resuelto por la tabla
-@@ -4390,9 +4392,12 @@
+                 ok += 1
+                 continue
+-            falta, motivo = resolver_faltante(canon, ln)
++            # v121 (GK H-04): cuarto por cuarto; los resueltos por DOBLE_CIELO.csv (cargados o EXCLUDED) no se vuelven a buscar
++            falta, motivo = resolver_faltante(canon, ln, cuartos=(cs - dc) if cs and dc and not tg else None)
+             if falta is None:
+                 ev.append(f"{nom}: '{txt}' declara un cielo faltante que no se puede resolver contra el canon ({motivo}); escribir hoja + "
+                           "tag + altura o el número de cuarto (BE-CR40)")
+@@ -4390,9 +4404,12 @@
  
  
  def cuartos_doble_cielo(b):
@@ -257,13 +307,15 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
      out = set()
      for k, t in (b.textos or {}).items():
          if os.path.basename(k) != "DOBLE_CIELO.csv":
-@@ -4400,11 +4405,56 @@
+@@ -4400,11 +4417,71 @@
          for r in _csv.DictReader(_io.StringIO(t.lstrip("\ufeff"))):
              room = str(r.get("Room") or r.get("room") or "")
              fila = str(r.get("Row / reason") or r.get("row") or "")
 -            if re.search(r"(?i)upper", fila) and re.search(r"(?i)lower", fila):
 +            segs = {m.group(1).lower(): m.group(2) for m in re.finditer(r"(?i)\b(upper|lower)\s*:\s*([^;|]*)", fila)}
-+            if all(_seg_cargado(canon, segs.get(lado, "")) for lado in ("upper", "lower")):
++            nh = str(r.get("N/SHEET") or r.get("N/HOJA") or "") + " " + fila
++            excl = bool(re.search(r"(?i)\bEXCLUDED\b", fila) and RX_NH_CB.search(nh))   # v121 (GK H-04): EXCLUDED + N/HOJA, cualquier fila
++            if excl or all(_seg_cargado(canon, segs.get(lado, "")) for lado in ("upper", "lower")):
                  out |= {m.group(1) for m in RX_CUARTO_H.finditer(RX_HOJA_H.sub(" ", room))}
      return out
  
@@ -309,14 +361,40 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
 +
 +RX_CERRADO_V121 = re.compile(r"(?i)\b(?:CERRADO|CLOSED)\s*:\s*([A-Za-z][\w.]*-[\w.\-]+|ceilings\[\d+\])\s*"
 +                             r"(?:\(\s*(\d{1,2}/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?)\s*\))?")
++RX_NH_CB = re.compile(r"\b\d{1,2}[A-Z]?/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\b")
++RX_CERRADO_EXCL = re.compile(r"(?i)\b(?:CERRADO|CLOSED)\s*:\s*EXCLUDED\b\s*[-—–:]?\s*([^()|]*?)\s*(?:\(\s*(\d{1,2}[A-Z]?/[A-Z]{1,2}-?\d{1,3}"
++                             r"(?:\.\d{1,2})?)\s*\))?(?=\s*(?:\||$))")
++
++
++def es_hallazgo_concreto(ln):
++    """v121 (CR): un hallazgo nombra un cuarto (número), un tag de cielo o una ref concreta; una definición de categoría ('- FALTA — a wall
++    / ceiling in OUR scope … that is not loaded') no."""
++    sin_hojas = RX_HOJA_H.sub(" ", ln)
++    return bool(RX_CUARTO_H.search(sin_hojas) or RX_TAG_CIELO_H.search(ln) or RX_HOJA_H.search(ln)
++                or [r for r in RX_REF_CANON.findall(ln) if not RX_TAG_CIELO_H.fullmatch(r)])
++
++
 +RX_PALABRA_CIELO_V121 = re.compile(r"(?i)\b(?:ceilings?|cielos?|clg|gyp-?\d+[a-z]?|soffits?|plafond)\b")
 +
 +
  RX_REF_CIERRE = re.compile(r"\b((?:CLG|SOF|BW|CW)-[A-Z0-9]+(?:-[A-Z0-9]+)+)\b")    # ref de renglón del canon (no un tag GYP-1)
  
  
-@@ -4449,12 +4499,15 @@
-     cuartos = {m.group(1) for m in RX_CUARTO_H.finditer(sin_hojas)}
+@@ -4427,7 +4504,7 @@
+ RX_CUARTO_H = re.compile(r"(?<![\w.'/-])(\d{3,4}[A-Z]?)(?![\w.'\"/-])")
+ 
+ 
+-def resolver_faltante(canon, ln):
++def resolver_faltante(canon, ln, cuartos=None):
+     """BE-CR40: -> (True = de verdad falta | False = está cargado | None = no se puede resolver, motivo). Con tag: faltante_por_tag con
+     hoja / altura del renglón; si faltan, cada entrada de rcp_tags con ese tag (y hoja si la trae) — una cargada = no se puede afirmar
+     'falta'. Sin tag: número de cuarto contra canon.ceilings (room) y misc_items de cielo (ref CLG / SOF con el cuarto en ref / source)."""
+@@ -4446,15 +4523,18 @@
+             return res[0]
+         return None, f"{tag} tiene {len(res)} entradas en rcp_tags y {sum(1 for f, _m in res if not f)} están cargadas"
+     sin_hojas = RX_HOJA_H.sub(" ", ln)
+-    cuartos = {m.group(1) for m in RX_CUARTO_H.finditer(sin_hojas)}
++    cuartos = set(cuartos) if cuartos else {m.group(1) for m in RX_CUARTO_H.finditer(sin_hojas)}
      if not cuartos:
          return None, "sin tag de cielo ni número de cuarto"
 +    sof = bool(re.search(r"(?i)\bsoffits?\b|\bSOF-", ln))           # v121: un soffit no es el cielo del cuarto (y al revés)
@@ -334,7 +412,7 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v121/ta
              return False, f"cuarto {c} cargado en " + ", ".join(cargados[:4])
 diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 22:34:21.370817129 +0000
-+++ v121/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 22:34:21.377873940 +0000
++++ v121/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 22:43:24.338525181 +0000
 @@ -519,6 +519,23 @@
  
  RX_PASO_CELDA = re.compile(r"^(\d{1,2})[a-z]?(?: ?- ?(\d{1,2})[a-z]?)?$")
@@ -553,7 +631,45 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take
  
  
  def gk54_mismo_muro(txt, walls):
-@@ -6450,7 +6535,8 @@
+@@ -6446,11 +6531,46 @@
+     return out
+ 
+ 
++def _gk55_clave(n):
++    if n.get("kind") == "T":
++        return ("T", n.get("branch"), n.get("through"))
++    if n.get("kind") in ("L", "split"):
++        return (n["kind"],) + tuple(sorted(n.get("walls") or []))
++    return ("free", n.get("wall"))
++
++
++def be_gk55_fallas(prev, new, cambios=""):
++    """BE-GK55 (Grand Kia rev3b, REVERIF17 R17-F1, 12-nov; unido de apartados/be_gk55 en v81cf121): un wall nuevo no cambia por
++    proximidad las uniones de un wall que no cambió (un patch nuevo quedó en T con un wall viejo con el CMU de por medio). Entre dos
++    revs, todo nodo NUEVO (L / T / split) que toca un wall con la misma band va en CAMBIOS_<rev>.txt (los dos ids) o se declara 'no se
++    tocan' (corner_skip con N/HOJA); si no = FAIL. CLI: compuerta_entrega.py be_gk55 <canon_prev> <canon_new> [CAMBIOS.txt]."""
++    bp = {w["id"]: w.get("band") for w in (prev or {}).get("walls") or []}
++    bn = {w["id"]: w for w in (new or {}).get("walls") or []}
++    viejos = {_gk55_clave(n) for n in (prev or {}).get("nodes") or []}
++    ev = []
++    for n in (new or {}).get("nodes") or []:
++        k = _gk55_clave(n)
++        if k[0] == "free" or k in viejos:
++            continue
++        ids = [x for x in k[1:] if x]
++        quietos = [x for x in ids if x in bp and bp[x] == (bn.get(x) or {}).get("band")]
++        if not quietos:
++            continue
++        skip = any(o in ((bn.get(x) or {}).get("corner_skip_info") or (bn.get(x) or {}).get("corner_skip") or {}) for x in ids for o in ids if o != x)
++        if skip or all(x in (cambios or "") for x in ids):
++            continue
++        ev.append(f"new node {k[0]} {' / '.join(ids)}: touches unchanged wall(s) {', '.join(quietos)} and is not explained in CAMBIOS "
++                  "(both ids) nor declared non-meeting (corner_skip with N/SHEET) - a new wall must not change the joints of an old one "
++                  "by proximity (BE-GK55)")
++    return ev
++
++
+ def be_gk54_fallas(canon, cob_rows, esc=9.0, gap_in=14.0, to_canon=None, escalas=None):
      """BE-GK54 (Grand Kia rev3a, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54; ampliado en v120): dos bandas paralelas con gap
      (o con dos tags) son DOS walls. Una exclusión que dice que es el MISMO muro que <X> (gk54_mismo_muro) sin una prueba del gap válida
      (gap_prueba_ok) da FAIL cuando el mapa tiene una banda ROJA (o DISPUESTA como 'mismo muro' sin prueba) paralela a la de X, en la misma
@@ -563,7 +679,7 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take
      to_canon = to_canon or (lambda h, x, y: (x, y))
      walls = {norm_txt(w.get("id")): w for w in (canon or {}).get("walls") or [] if isinstance(w, dict)}
      ev = []
-@@ -6467,25 +6553,57 @@
+@@ -6467,25 +6587,57 @@
                  ev.append(f"{e.get('id')}: excluded as the same wall as {wid} but {wid} has no 'band' (ori H / V, c0, c1, lo, hi, sheet) in "
                            "the canon: the gap cannot be checked (BE-GK54); add the band or a gap_proof with N/SHEET and the gap size")
                  continue
@@ -637,7 +753,7 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take
      return ev
  
  
-@@ -6656,7 +6774,7 @@
+@@ -6656,7 +6808,7 @@
                    "trabaja con SUBAGENTE_ID (U-193)")
      for d in disp:
          rv0 = str(d.get("revisor") or d.get("reviewer") or "").strip()
@@ -646,7 +762,7 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take
          if rv and (rv not in rev_ok or rv in autores):
              ev.append(f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')}: reviewer '{rv0[:40]}' "
                        + ("escribió etapas 2-7 de la cadena (autor del canon / take-off)" if rv in autores else
-@@ -6670,6 +6788,9 @@
+@@ -6670,6 +6822,9 @@
      if entrega_nueva(c, FECHA_V120) and not re.search(r"(?is)(?:fus|merg)\w*.{0,60}?\b(?:leaves|leaf|hojas)\b|\b(?:leaves|leaf|hojas)\b.{0,60}?(?:fus|merg)\w*", gt):
          ev.append("la GUÍA no documenta el límite BE-GK54: dos leaves que el mapa fusiona en un solo muro cubierto no salen en rojo (la "
                    "exclusión 'same wall' necesita su gap_proof con N/HOJA; v120)")
@@ -656,10 +772,30 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py v121/take
      for k in ("pdf", "csv"):
          if not os.path.isfile(rutas[k]):
              ev.append(f"falta {os.path.relpath(rutas[k], c.entrega)}: python3 -I tools/compuerta_entrega.py cobertura <carpeta de entrega>")
+@@ -6778,6 +6933,11 @@
+             print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
+         print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
+         return 0 if o["ok"] else 1
++    if len(argv) > 3 and argv[1] == "be_gk55":                      # BE-GK55: canon anterior contra canon nuevo
++        ev = be_gk55_fallas(json.load(open(argv[2], encoding="utf-8")), json.load(open(argv[3], encoding="utf-8")),
++                            open(argv[4], encoding="utf-8").read() if len(argv) > 4 else "")
++        print("\n".join(ev) if ev else "BE-GK55 PASS: every new node is explained")
++        return 1 if ev else 0
+     if len(argv) > 2 and argv[1] == "version_proyecto":            # NO GUARD 3.2
+         rev = argv[argv.index("--rev") + 1] if "--rev" in argv else "rev?"
+         causa = argv[argv.index("--causa") + 1] if "--causa" in argv else ""
 diff -ruN v120/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v121/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
 --- v120/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 22:34:21.370580175 +0000
-+++ v121/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 22:34:21.381152065 +0000
-@@ -625,28 +625,74 @@
++++ v121/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 22:43:24.338388686 +0000
+@@ -618,35 +618,112 @@
+     e, ev = fn(B(canon=can, textos=t("corridor 902 ceiling missing")))
+     assert e == "PASS", (e, ev)                                           # cuarto sin cielo en el canon: falta de verdad
+     e, ev = fn(B(canon=can, textos=t("corridor ceiling missing")))
+-    assert e == "FAIL" and "no se puede resolver" in ev[0], (e, ev)
++    assert "sin hallazgos" in str(ev), (e, ev)                           # v121 (CR): sin cuarto / tag / ref no es hallazgo (definición)
+     can2 = dict(can, rcp_tags=can["rcp_tags"] + [{"sheet": "X9.02", "tag": "GYP-9", "height": "9'-0\"", "rows": []}])
+     e, ev = fn(B(canon=can2, textos=t("GYP-9 missing")))
+     assert e == "FAIL" and "no se puede resolver" in ev[0], (e, ev)       # tag ambiguo (una cargada, otra no) = FAIL
      can3 = dict(can, misc_items=[{"ref": "CLG-Z9-901 board", "qty": 50.0}])                      # cierre con la ref que lo cargó
      e, ev = fn(B(canon=can3, textos=t("corridor 901 ceiling missing", nom="Auditoria/AUDITORIA_U181_rev9.md") | {"x": ""}))
      assert e == "FAIL", (e, ev)                                           # sin cierre en el renglón: cargado = FAIL
@@ -738,20 +874,52 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v1
 +    print("test_v121_be_cr40_cierre_explicito OK")
 +
 +
++def test_v121_excluded_y_brief():
++    """v121 (COORDINACIÓN 12-nov 22:15 / 22:30, casos GK H-04 y CR, sintético): (a) 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)'
++    cierra; una fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto, el SOF de otro elemento
++    con el mismo número no vuelve 'cargado' un cuarto EXCLUDED; (b) BRIEF*.md / LEEME* y los renglones de definición no son hallazgos."""
++    fn = CB.faltantes_auditoria
++    can = {"walls": [], "ceilings": [{"room": "Z9 Bar 912", "area_sf": 30.0}],
++           "misc_items": [{"ref": "SOF-Z9-911 board", "qty": 25.0}], "rcp_tags": []}
++    A = "Auditoria/AUDITORIA_U181_rev9.md"
++    run = lambda ln, x=None: fn(B(canon=can, textos=dict({A: "| H-04 | " + ln + " |"}, **(x or {}))))      # noqa: E731
++    assert run("room 913 ceiling missing | CERRADO: EXCLUDED - OPEN TO STRUCTURE PER RCP (1/X9.31)")[0] == "PASS"
++    e, ev = run("room 913 ceiling missing | CERRADO: EXCLUDED - OPEN TO STRUCTURE")
++    assert e == "FAIL" and "EXCLUDED" in ev[0], (e, ev)                  # sin N/HOJA
++    dc = ("Room,Level,Type,Upper ceiling,Lower ceiling,Heights,N/SHEET,Framing,Row / reason\n"
++          "Z9 911 Lobby,Z9,single,,,,1/X9.31,,EXCLUDED - OPEN TO STRUCTURE (no ceiling of ours)\n")
++    x = {"Auditoria/DOBLE_CIELO.csv": dc}
++    assert CB.cuartos_doble_cielo(B(canon=can, textos=x)) == {"911"}
++    e, ev = run("ceiling missing in rooms 911 and 913", x)
++    assert e == "PASS", (e, ev)                                          # 911 EXCLUDED (su SOF no lo vuelve cargado); 913 falta de verdad
++    e, ev = run("ceiling missing in rooms 911 and 912", x)
++    assert e == "FAIL" and "912" in ev[0], (e, ev)                       # 912 sí está cargado: cuarto por cuarto
++    assert CB.cuartos_doble_cielo(B(canon=can, textos={"Auditoria/DOBLE_CIELO.csv": dc.replace("1/X9.31", "")})) == set()   # sin N/HOJA
++    defin = "- FALTA — a wall / ceiling in OUR scope that is not loaded\n- NO ES NUESTRO — existing, by others\n"
++    e, ev = fn(B(canon=can, textos={"Auditoria/auditoria_cobertura_rev9/BRIEF.md": defin + "room 912 ceiling missing\n"}))
++    assert "sin hallazgos" in str(ev), (e, ev)                           # BRIEF*.md no se lee
++    e, ev = fn(B(canon=can, textos={A: defin}))
++    assert "sin hallazgos" in str(ev), (e, ev)                           # renglón de definición no es hallazgo
++    e, ev = fn(B(canon=can, textos={A: defin + "| 1 | room 912 ceiling missing | OPEN |\n"}))
++    assert e == "FAIL" and "912" in ev[0], (e, ev)                       # el hallazgo concreto sí se revisa
++    print("test_v121_excluded_y_brief OK")
++
++
  def test_v96_sin_falsos_positivos_cr():
      """v81cf96 (canon cerrado de CR City Hotel corrido con los chequeos nuevos): (1) BE-GK37 no aplica a track de soffit (SOF-) ni a un
      track cuya fuente cita el texto impreso ('"J" RUNNER CHANNEL') o una hoja que lo dice; (2) U-178 (5): 'sloped ceiling' en la
-@@ -850,6 +896,7 @@
+@@ -850,6 +927,8 @@
      print("ok casos", len(CASOS))
      test_v96_sin_falsos_positivos_cr()
      test_v119_be_cr40_verificacion()
 +    test_v121_be_cr40_cierre_explicito()
++    test_v121_excluded_y_brief()
      test_be_06_soffit_sides()
      test_callouts_extra()
      print("ok callouts")
 diff -ruN v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v121/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 22:34:21.370622264 +0000
-+++ v121/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 22:34:21.381065380 +0000
++++ v121/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 22:43:24.341089821 +0000
 @@ -2446,7 +2446,8 @@
                           "motivo": "EXISTING CONSTRUCTION TO REMAIN", "nhoja": "2/X9.01", "reviewer": "subagente R9", "imagen": f["imagen"]})
      open(os.path.join(e, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write(
@@ -799,7 +967,7 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v121
      assert gk(f"same wall as {W}", {"gap_proof": "n/a (1/A111)"}) and gk(f"same wall as {W}", {"gap_proof": "there IS a 6in gap 3/A111"})   # H2 / H2b
      assert gk(f"same wall as {W}", {"gap_proof": "no gap (1/A111)"}) and not gk(f"same wall as {W}", {"gap_proof": 'gap 0" (1/A150)'})
      assert not gk(f"see note 3 (1/X9.11)")                               # 'see' sin un wall del canon no es GK54
-@@ -2964,3 +2968,67 @@
+@@ -2964,3 +2968,86 @@
  
  
  test_v120_retroactivo_proceso()
@@ -867,3 +1035,22 @@ diff -ruN v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v121
 +
 +
 +test_v121_estructurales()
++
++
++def test_be_gk55():
++    """BE-GK55 (unido de apartados/be_gk55; caso R17-F1 de Grand Kia rev3b, ids sintéticos): T falsa sobre un wall que no cambió = FAIL;
++    con corner_skip o con los dos ids en CAMBIOS = PASS; un nodo entre dos walls NUEVOS no se revisa."""
++    a13 = {"id": "X9-Z1-13", "band": {"ori": "H", "c0": 1327.4, "c1": 1331.2, "lo": 1275.0, "hi": 1388.2, "sheet": "Z9.11"}}
++    f21 = {"id": "F-Z1-21", "band": {"ori": "V", "c0": 1395.4, "c1": 1396.4, "lo": 1326.6, "hi": 1362.6, "sheet": "Z9.11"}}
++    prev = {"walls": [a13], "nodes": [{"kind": "free", "wall": "X9-Z1-13"}]}
++    new = {"walls": [a13, f21], "nodes": [{"kind": "T", "branch": "X9-Z1-13", "through": "F-Z1-21"}]}
++    assert CE.be_gk55_fallas(prev, new, "F-Z1-21 + F-Z1-22 (nuevos): keynote patch"), "T falsa sobre un wall sin cambio = FAIL"
++    new_skip = {"walls": [a13, dict(f21, corner_skip_info={"X9-Z1-13": "infill between (Z9.11)"})], "nodes": new["nodes"]}
++    assert not CE.be_gk55_fallas(prev, new_skip, ""), "par declarado 'no se tocan'"
++    assert not CE.be_gk55_fallas(prev, new, "X9-Z1-13 / F-Z1-21: corner checked on Z9.11"), "explicado en CAMBIOS"
++    f22 = {"id": "F-Z1-22", "band": {"ori": "V", "c0": 1395.4, "c1": 1396.4, "lo": 1370.9, "hi": 1374.6, "sheet": "Z9.11"}}
++    assert not CE.be_gk55_fallas(prev, {"walls": [a13, f21, f22], "nodes": [{"kind": "split", "walls": ["F-Z1-21", "F-Z1-22"]}]}, "")
++    print("test_be_gk55 OK")
++
++
++test_be_gk55()

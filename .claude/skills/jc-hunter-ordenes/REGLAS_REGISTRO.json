@@ -7846,7 +7846,7 @@
   {
    "id": "U-185",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, vía COORDINACIÓN)",
-   "texto_corto": "post-mortem de cobertura al cerrar cada proyecto: verificar_version FALLA si el último proyecto cerrado no tiene POSTMORTEM_COBERTURA_<fecha>.md con 0 WEAK / 0 MISSING abiertos (conducta solo con su motivo); v81cf119: cierre = última subida de la rev vigente (hora completa) y solo el post-mortem MÁS NUEVO; verificación 12b: solo cuenta POSTMORTEM_COBERTURA_<fecha>[letra].md con su tabla (sin tabla = FALLA), los _VERIFICACION / _CIERRE se leen y manda el más estricto, y la tabla de causas con NO GUARD = abierto; verificación 2: TODAS las _VERIFICACION* en orden de hora; un renglón abierto se cierra solo con CONFIRMED-CLOSED explícito en una verificación más nueva (omitirlo no lo cierra); verificación sin tabla = FALLA; v120 (verificación 3): cierre = estado EXACTO 'OK — CONFIRMED-CLOSED' (anclado); un principal nuevo no borra los abiertos de uno anterior (se arrastran desde el 12b); v120 verificación 4: norm_txt común, estado con match COMPLETO 'ok - confirmed-closed', 'Fecha:' explícita en cada verificación (sin ella o futura = FALLA), cierra solo el id de la PRIMERA columna",
+   "texto_corto": "post-mortem de cobertura al cerrar cada proyecto: verificar_version FALLA si el último proyecto cerrado no tiene POSTMORTEM_COBERTURA_<fecha>.md con 0 WEAK / 0 MISSING abiertos (conducta solo con su motivo); v81cf119: cierre = última subida de la rev vigente (hora completa) y solo el post-mortem MÁS NUEVO; verificación 12b: solo cuenta POSTMORTEM_COBERTURA_<fecha>[letra].md con su tabla (sin tabla = FALLA), los _VERIFICACION / _CIERRE se leen y manda el más estricto, y la tabla de causas con NO GUARD = abierto; verificación 2: TODAS las _VERIFICACION* en orden de hora; un renglón abierto se cierra solo con CONFIRMED-CLOSED explícito en una verificación más nueva (omitirlo no lo cierra); verificación sin tabla = FALLA; v120 (verificación 3): cierre = estado EXACTO 'OK — CONFIRMED-CLOSED' (anclado); un principal nuevo no borra los abiertos de uno anterior (se arrastran desde el 12b); v120 verificación 4: norm_txt común, estado con match COMPLETO 'ok - confirmed-closed', 'Fecha:' explícita en cada verificación (sin ella o futura = FALLA), cierra solo el id de la PRIMERA columna ; v121: '**Fecha:**' en negritas; columna 'estado' por encabezado; sin 'Fecha:' = fecha del commit en git (sin git = FALLA); sin 3er argumento usa la ruta por defecto del cache (corre siempre)",
    "categoria": "programa",
    "cuando": "version",
    "chequeos": [
@@ -7854,11 +7854,13 @@
     "ordenes:verificar_version.py::tests_sin_llamar",
     "ordenes:verificar_version.py::causas_no_guard",
     "ordenes:verificar_version.py::norm_txt",
-    "ordenes:verificar_version.py::fecha_verificacion"
+    "ordenes:verificar_version.py::fecha_verificacion",
+    "ordenes:verificar_version.py::fecha_git",
+    "ordenes:verificar_version.py::tabla_postmortem"
    ],
    "test": {
     "archivo": "ordenes:test_verificar_version.py",
-    "token": "adv4_postmortem"
+    "token": "adv5_v121"
    }
   },
   {
@@ -8153,18 +8155,21 @@
   {
    "id": "BE-CR40",
    "origen": "skills_archivo/tools_post_v81cf94_CR/LEEME.md (CR City Hotel rev20, 12-nov, commit 93915a3)",
-   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla",
+   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
     "take-off:tools/chequeos_biblioteca.py::faltante_por_tag",
     "take-off:tools/chequeos_biblioteca.py::faltantes_auditoria",
     "take-off:tools/chequeos_biblioteca.py::resolver_faltante",
-    "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo"
+    "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo",
+    "take-off:tools/chequeos_biblioteca.py::_cant_ref",
+    "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
+    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto"
    ],
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
-    "token": "test_v119_be_cr40_verificacion"
+    "token": "test_v121_be_cr40_cierre_explicito"
    }
   },
   {
@@ -8476,7 +8481,7 @@
   {
    "id": "U-193",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base",
+   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121)",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8491,11 +8496,12 @@
     "take-off:tools/compuerta_entrega.py::subagentes_bitacora",
     "take-off:tools/bitacora.py::subagente",
     "take-off:tools/bitacora.py::run",
-    "take-off:tools/compuerta_entrega.py::norm_txt"
+    "take-off:tools/compuerta_entrega.py::norm_txt",
+    "take-off:tools/compuerta_entrega.py::norm_agente"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v119_cobertura"
+    "token": "test_v121_estructurales"
    }
   },
   {
@@ -8508,7 +8514,7 @@
   {
    "id": "BE-PM04",
    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
-   "texto_corto": "NO GUARD 3.1 (post-mortem 2026-11-12b): ninguna versión se publica sin correr la compuerta de la candidata y de la vigente sobre las entregas abiertas; PASS -> FAIL sin explicación = no se publica (compuerta_entrega.py prueba_abiertos -> skills_archivo/PRUEBA_ABIERTOS_vN.json, verificar_version lo exige); verificación 12b: '<proyecto>=<carpeta>', corridas de varias sesiones se unen; verificar_version exige para la versión del CANDIDATO todos los proyectos de skills_archivo/PROYECTOS_ABIERTOS.json con 0 regresiones sin explicar; verificación 2: lista vacía = FALLA; todo proyecto con entrega vigente (SUBIDA_OK desde U-157) sin CSV_BLUEBEAM_<rev>/RESULTADO.md N/N y 0 faltantes tiene que estar en la lista; cada proyecto del PRUEBA guarda el sha256 del árbol tools/ y tiene que ser el del candidato; v120: SUBIDA_OK con o sin rev o VERSION_PROYECTO.txt más nuevo que el CSV N/N (con fecha) = abierto; regresiones de cada proyecto leídas; detector siempre (cache_proyectos junto a skills_archivo); version_candidata y sha_tools obligatorios; prueba_abiertos exige '<proyecto>='; v120 verificación 4: 'Comparado: <fecha>' explícito (sin él o con N = 0 = abierto), SUBIDA_OK con fecha_iso / fecha con zona (sin ella = FALLA y abierto), conteos vigente y candidata > 0, carpeta que no es proyecto = FALLA",
+   "texto_corto": "NO GUARD 3.1 (post-mortem 2026-11-12b): ninguna versión se publica sin correr la compuerta de la candidata y de la vigente sobre las entregas abiertas; PASS -> FAIL sin explicación = no se publica (compuerta_entrega.py prueba_abiertos -> skills_archivo/PRUEBA_ABIERTOS_vN.json, verificar_version lo exige); verificación 12b: '<proyecto>=<carpeta>', corridas de varias sesiones se unen; verificar_version exige para la versión del CANDIDATO todos los proyectos de skills_archivo/PROYECTOS_ABIERTOS.json con 0 regresiones sin explicar; verificación 2: lista vacía = FALLA; todo proyecto con entrega vigente (SUBIDA_OK desde U-157) sin CSV_BLUEBEAM_<rev>/RESULTADO.md N/N y 0 faltantes tiene que estar en la lista; cada proyecto del PRUEBA guarda el sha256 del árbol tools/ y tiene que ser el del candidato; v120: SUBIDA_OK con o sin rev o VERSION_PROYECTO.txt más nuevo que el CSV N/N (con fecha) = abierto; regresiones de cada proyecto leídas; detector siempre (cache_proyectos junto a skills_archivo); version_candidata y sha_tools obligatorios; prueba_abiertos exige '<proyecto>='; v120 verificación 4: 'Comparado: <fecha>' explícito (sin él o con N = 0 = abierto), SUBIDA_OK con fecha_iso / fecha con zona (sin ella = FALLA y abierto), conteos vigente y candidata > 0, carpeta que no es proyecto = FALLA ; v121: el CSV cierra solo la MISMA rev de la última subida (CSV_BLUEBEAM_<rev> = rev del SUBIDA_OK más nuevo), SUBIDA_OK*.json recursivo, 'Comparado:' por línea antes de norm, conteos con miles con coma y toda forma de faltantes / sin pareja != 0 = abierto",
    "categoria": "programa",
    "cuando": "version",
    "chequeos": [
@@ -8518,34 +8524,38 @@
     "ordenes:verificar_version.py::proyectos_abiertos_cache",
     "take-off:tools/compuerta_entrega.py::sha_tools",
     "ordenes:verificar_version.py::_fecha_resultado",
-    "ordenes:verificar_version.py::_es_proyecto"
+    "ordenes:verificar_version.py::_es_proyecto",
+    "ordenes:verificar_version.py::_subidas_ok",
+    "ordenes:verificar_version.py::_rev_subida",
+    "ordenes:verificar_version.py::csv_cuadra"
    ],
    "test": {
     "archivo": "ordenes:test_verificar_version.py",
-    "token": "adv4_prueba_abiertos"
+    "token": "adv5_v121"
    }
   },
   {
    "id": "BE-PM05",
    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
-   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL",
+   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121 RETRO: arranque = marca de tiempos.log con 'rev<N>' o la primera después de las de otra rev, en orden del archivo; log acumulado sin etiqueta, año imposible o marcas fuera de orden = FAIL",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::version_proyecto_fallas",
     "take-off:tools/compuerta_entrega.py::fijar_version_proyecto",
     "take-off:tools/compuerta_entrega.py::proceso_v119",
-    "take-off:tools/compuerta_entrega.py::inicio_rev"
+    "take-off:tools/compuerta_entrega.py::inicio_rev",
+    "take-off:tools/compuerta_entrega.py::inicio_rev_info"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v119_postmortem_12b"
+    "token": "test_v121_estructurales"
    }
   },
   {
    "id": "BE-PM06",
    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
-   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL); v120: las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md (no por el texto 'N fin' del log); v120 verificación 4: UN solo parser de TIEMPOS.md (filas_tiempos) para CE_TIEMPOS y --paso: guiones Unicode, negritas, 4a, 3 columnas, columnas en cualquier orden; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL",
+   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL); v120: las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md (no por el texto 'N fin' del log); v120 verificación 4: UN solo parser de TIEMPOS.md (filas_tiempos) para CE_TIEMPOS y --paso: guiones Unicode, negritas, 4a, 3 columnas, columnas en cualquier orden; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121: celda de paso con cualquier prefijo ('Paso 1', 'Step 1', 'Steps 2-3', '1. Inventario', '1 Inventario') -> paso_de_celda; arranque de la rev por inicio_rev_info",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8559,11 +8569,13 @@
     "take-off:tools/compuerta_entrega.py::filas_tiempos",
     "take-off:tools/compuerta_entrega.py::_paso_corrido",
     "take-off:tools/compuerta_entrega.py::proceso_v119",
-    "take-off:tools/compuerta_entrega.py::inicio_rev"
+    "take-off:tools/compuerta_entrega.py::inicio_rev",
+    "take-off:tools/compuerta_entrega.py::paso_de_celda",
+    "take-off:tools/compuerta_entrega.py::inicio_rev_info"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v120_adv4"
+    "token": "test_v121_estructurales"
    }
   },
   {
@@ -8614,7 +8626,7 @@
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0",
+   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
     "take-off:tools/compuerta_entrega.py::ce_cobertura",
@@ -8623,23 +8635,22 @@
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_be_gk54"
+    "token": "test_v121_estructurales"
    }
   },
   {
    "id": "BE-GK55",
-   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, re-verificación U-181 REVERIF17 R17-F1, 12-nov)",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, REVERIF17 R17-F1, 12-nov; unido de apartados/be_gk55 en v81cf121)",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "un wall NUEVO no cambia por proximidad las uniones de un wall que no cambió: entre dos revs, todo nodo nuevo (L / T / split) que toca un wall con la misma band va en CAMBIOS (los dos ids) o el par se declara 'no se tocan' (corner_skip con N/HOJA); el patch F-Z1-21 (cara este del infill kn 51) quedó en T con A-Z1-13 (cara oeste), con el CMU entre los dos, y sumó 1 stud = +8.21 LF de 362S162-19 sin explicación",
+   "texto_corto": "un wall nuevo no cambia por proximidad las uniones de un wall que no cambió: todo nodo NUEVO (L / T / split) que toca un wall con la misma band va en CAMBIOS_<rev>.txt con los dos ids o se declara 'no se tocan' (corner_skip con N/HOJA); si no = FAIL",
    "chequeos": [
-    "take-off:tools/be_gk55.py::fallas"
+    "take-off:tools/compuerta_entrega.py::be_gk55_fallas"
    ],
    "test": {
-    "archivo": "take-off:tools/test_be_gk55.py",
-    "token": "test_be_gk55 OK"
-   },
-   "apartado": "apartados/be_gk55/ (chequeo + test, a unir en la próxima versión)"
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_gk55"
+   }
   }
  ]
 }

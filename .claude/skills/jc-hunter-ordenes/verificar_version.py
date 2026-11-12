@@ -24,6 +24,7 @@ import tempfile
 import zipfile
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+CACHE_DEFECTO = os.path.normpath(os.path.join(AQUI, "..", "..", "..", "cache_proyectos"))   # <repo>/.claude/skills/jc-hunter-ordenes -> <repo>/cache_proyectos
 # Ids citados solo como "no existe" (no son reglas).
 IGNORAR = {"BE-109"}
 
@@ -356,18 +357,20 @@ RX_PM_PRINCIPAL = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})([a-z]?)
 
 
 def tabla_postmortem(txt):
-    """U-185: renglones de la tabla 'id | error / regla | chequeo | test | estado' -> [(id, estado)]."""
-    out, dentro = [], False
+    """U-185: renglones de la tabla 'id | error / regla | chequeo | test | estado' -> [(id, estado)]. v121: la columna 'estado' se toma
+    por su ENCABEZADO (puede haber columnas después, p. ej. 'notas'); celdas sin negritas."""
+    out, ke = [], None
     for ln in txt.splitlines():
-        cs = [x.strip() for x in ln.strip().strip("|").split("|")]
-        if ln.lstrip().startswith("|") and cs and cs[0].lower() == "id" and cs[-1].lower().startswith("estado"):
-            dentro = True
+        cs = [re.sub(r"[*`]", "", x).strip() for x in ln.strip().strip("|").split("|")]
+        if not ln.lstrip().startswith("|"):
+            ke = None
             continue
-        if dentro and not ln.lstrip().startswith("|"):
-            dentro = False
+        cl = [c.lower() for c in cs]
+        if cs and cl[0] == "id" and any(c.startswith("estado") or c.startswith("status") for c in cl):
+            ke = next(k for k, c in enumerate(cl) if c.startswith("estado") or c.startswith("status"))
             continue
-        if dentro and cs and not set(cs[0]) <= set("-: "):
-            out.append((cs[0], cs[-1]))
+        if ke is not None and cs and not set(cs[0]) <= set("-: ") and ke < len(cs):
+            out.append((cs[0], cs[ke]))
     return out
 
 
@@ -444,11 +447,24 @@ def _pm_hora(nombre, txt):
 def fecha_verificacion(txt):
     """U-185 (verificación 4): el campo explícito 'Fecha: YYYY-MM-DD HH:MM PT' (o UTC) del encabezado (primeras 15 líneas). -> datetime o None"""
     from zoneinfo import ZoneInfo
-    m = RX_PM_FECHA.search("\n".join(norm_txt(l, lower=False) for l in str(txt).splitlines()[:15]))
+    m = RX_PM_FECHA.search("\n".join(norm_txt(re.sub(r"[*_`]", "", l), lower=False) for l in str(txt).splitlines()[:15]))   # v121: **Fecha:**
     if not m:
         return None
     t = datetime.datetime.fromisoformat(f"{m.group(1)}T{int(m.group(2)):02d}:{m.group(3)}")
     return t.replace(tzinfo=datetime.timezone.utc if m.group(4).lower() in ("utc", "z") else ZoneInfo("America/Los_Angeles"))
+
+
+def fecha_git(path):
+    """v121 (U-185, verificación 5): fecha del commit que AGREGÓ el archivo en git (para verificaciones sin 'Fecha:'). -> datetime o None
+    (sin git / archivo sin commit)."""
+    import subprocess
+    try:
+        r = subprocess.run(["git", "-C", os.path.dirname(os.path.abspath(path)), "log", "--diff-filter=A", "--follow", "--format=%cI", "--",
+                            os.path.basename(path)], capture_output=True, text=True, timeout=30)
+        ln = (r.stdout or "").strip().splitlines()
+        return datetime.datetime.fromisoformat(ln[-1]) if r.returncode == 0 and ln else None
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
 
 
 def revisar_postmortem(cache):
@@ -457,18 +473,17 @@ def revisar_postmortem(cache):
     el post-mortem MÁS NUEVO (orden de nombre: 2026-11-12b > 2026-11-12) y tiene que ser posterior al cierre; con WEAK / MISSING
     abiertos = falta (un post-mortem limpio más viejo ya no lo tapa)."""
     import json
+    cache = cache or CACHE_DEFECTO                       # v121: sin 3er arg = la ruta por defecto del repo (U-185 corre siempre)
     if not cache or not os.path.isdir(cache):
-        return []
+        return [f"sin cache_proyectos ({cache}): el post-mortem no se puede revisar = falla (U-185 corre siempre)"]
     cierres = []
     for d in os.listdir(cache):
         dd = os.path.join(cache, d)
         if not os.path.isdir(dd):
             continue
-        for n in os.listdir(dd):
-            if not re.match(r"SUBIDA_OK.*\.json$", n):
-                continue
+        for n in _subidas_ok(dd):                         # v121: recursivo (como BE-PM04)
             try:
-                x = json.load(open(os.path.join(dd, n), encoding="utf-8"))
+                x = json.load(open(n, encoding="utf-8"))
             except Exception:
                 continue
             t = _cierre_dt(x.get("fecha_iso") or x.get("primera_subida_iso"))
@@ -497,9 +512,9 @@ def revisar_postmortem(cache):
         for m in todos:
             if "_VERIFICACION" not in m.upper():
                 continue
-            t_ = fecha_verificacion(txts[m])
+            t_ = fecha_verificacion(txts[m]) or fecha_git(os.path.join(cache, m))   # v121: sin 'Fecha:' = la fecha de su commit en git
             if t_ is None:
-                faltas.append(f"{m}: verificación sin el campo 'Fecha: YYYY-MM-DD HH:MM PT' en su encabezado = falla (U-185)")
+                faltas.append(f"{m}: verificación sin el campo 'Fecha: YYYY-MM-DD HH:MM PT' en su encabezado ni commit en git = falla (U-185)")
             elif t_ > ahora + datetime.timedelta(minutes=10):
                 faltas.append(f"{m}: 'Fecha: {t_.isoformat()}' en el futuro = falla (U-185)")
             else:
@@ -585,8 +600,8 @@ def _fecha_resultado(tx):
     """v120 (verificación 4): el momento de la comparación del CSV es SOLO el campo explícito 'Comparado: YYYY-MM-DD HH:MM PT|UTC|±hh:mm'
     de RESULTADO.md. -> datetime con zona o None (sin el campo = el proyecto cuenta como ABIERTO)."""
     from zoneinfo import ZoneInfo
-    m = RX_COMPARADO.search(norm_txt(tx, lower=False))
-    if not m:
+    m = next((x for x in (RX_COMPARADO.match(norm_txt(re.sub(r"[*_`]", "", ln), lower=False)) for ln in str(tx).splitlines()) if x), None)
+    if not m:                                            # v121: 'Comparado:' se lee POR LÍNEA, antes de norm (norm junta las líneas)
         return None
     t = datetime.datetime.fromisoformat(f"{m.group(1)}T{int(m.group(2)):02d}:{m.group(3)}")
     z = m.group(4).lower()
@@ -597,9 +612,46 @@ def _fecha_resultado(tx):
     return datetime.datetime.fromisoformat(t.isoformat() + (z if ":" in z else z[:3] + ":" + z[3:]))
 
 
-def _es_proyecto(dd):
+def _subidas_ok(dd):
+    """v121 (BE-PM04): TODOS los SUBIDA_OK*.json del proyecto, buscados de forma RECURSIVA (REV10_FINAL/SUBIDA_OK.json)."""
     import glob as _g
-    return bool(_g.glob(os.path.join(dd, "SUBIDA_OK*.json"))) or os.path.isfile(os.path.join(dd, "VERSION_PROYECTO.txt"))
+    return sorted(_g.glob(os.path.join(dd, "**", "SUBIDA_OK*.json"), recursive=True))
+
+
+def _rev_de(nombre):
+    m = re.search(r"(?i)(?:^|[_\-\s])(rev\s*-?\s*\d{1,3}[a-z]?)(?=$|[_\-\s.])", nombre)
+    return re.sub(r"[\s-]", "", m.group(1)).lower() if m else None
+
+
+def _rev_subida(f, dd):
+    """rev de un SUBIDA_OK: sufijo del nombre (SUBIDA_OK_rev20a.json), si no la carpeta más cercana con 'revN' (REV10_FINAL_5nov)."""
+    r = _rev_de(os.path.basename(f)[:-5])
+    d = os.path.dirname(f)
+    while not r and os.path.realpath(d).startswith(os.path.realpath(dd)) and os.path.realpath(d) != os.path.realpath(dd):
+        r, d = _rev_de(os.path.basename(d)), os.path.dirname(d)
+    return r
+
+
+def _es_proyecto(dd):
+    return bool(_subidas_ok(dd)) or os.path.isfile(os.path.join(dd, "VERSION_PROYECTO.txt"))
+
+
+RX_CONTEO_CSV = re.compile(r"(?i)(\d[\d,]*)\s*CSV\s*/\s*(\d[\d,]*)\s*PDF\s*/\s*(\d[\d,]*)\s*emparejados")
+RX_FALTAN_N = re.compile(r"(?i)\b(\d[\d,]*)\s+(?:markups?\s+)?(?:faltantes?|sin\s+pareja|unmatched|missing)\b"
+                         r"|\b(?:faltantes?|sin\s+pareja|unmatched|missing)\b[^\d\n|;]{0,30}?[:=]\s*(\d[\d,]*)")
+
+
+def csv_cuadra(tx):
+    """v121 (BE-PM04): RESULTADO.md cuadra: 'N CSV / N PDF / N emparejados' (miles con coma) iguales y > 0, '0 faltantes' y NINGÚN otro
+    número de faltantes / sin pareja / unmatched / missing distinto de 0 (formas 'K faltantes', 'faltantes en el CSV: K', 'K markups sin
+    pareja')."""
+    t = norm_txt(re.sub(r"[*_`]", "", str(tx)), lower=False)
+    n = RX_CONTEO_CSV.search(t)
+    if not n:
+        return False
+    v = {int(x.replace(",", "")) for x in n.groups()}
+    otros = [int((a or b).replace(",", "")) for a, b in RX_FALTAN_N.findall(t)]
+    return len(v) == 1 and v.pop() > 0 and bool(re.search(r"\b0\s+faltantes", t)) and not any(otros)
 
 
 def proyectos_abiertos_cache(cache, errores=None):
@@ -616,7 +668,8 @@ def proyectos_abiertos_cache(cache, errores=None):
     for d in sorted(os.listdir(cache)):
         dd = os.path.join(cache, d)
         subs, dudoso = [], False
-        for f in _g.glob(os.path.join(dd, "SUBIDA_OK*.json")):
+        revs = []
+        for f in _subidas_ok(dd):                         # v121: recursivo
             try:
                 x = json.load(open(f, encoding="utf-8"))
             except Exception as e:
@@ -632,6 +685,7 @@ def proyectos_abiertos_cache(cache, errores=None):
                 dudoso = True
             else:
                 subs.append(t)
+                revs.append((t, _rev_subida(f, dd) is not None, _rev_subida(f, dd)))
         if dudoso:
             out.append(d)                                # una subida que no se puede fechar = abierto (y FAIL en revisar)
             continue
@@ -647,13 +701,13 @@ def proyectos_abiertos_cache(cache, errores=None):
                 if t and t.tzinfo and t > ult:
                     ult = t
         cerr = False
-        for r in _g.glob(os.path.join(dd, "CSV_BLUEBEAM_*", "RESULTADO.md")):
-            tx = norm_txt(open(r, encoding="utf-8", errors="ignore").read(), lower=False)
-            n = re.search(r"(\d+)\s*CSV\s*/\s*(\d+)\s*PDF\s*/\s*(\d+)\s*emparejados", tx)
-            otros = [k for k in re.findall(r"\b(\d+)\s+faltantes", tx) if k != "0"]
+        rev_ult = max(revs)[2] if revs else None          # v121: el CSV cierra SOLO la MISMA rev de la última subida
+        for r in _g.glob(os.path.join(dd, "**", "CSV_BLUEBEAM_*", "RESULTADO.md"), recursive=True):
+            if not rev_ult or _rev_de(os.path.basename(os.path.dirname(r))) != rev_ult:
+                continue
+            tx = open(r, encoding="utf-8", errors="ignore").read()
             fr = _fecha_resultado(tx)
-            if n and len({n.group(1), n.group(2), n.group(3)}) == 1 and int(n.group(1)) > 0 and re.search(r"\b0 faltantes", tx) \
-                    and not otros and fr and fr > ult:
+            if csv_cuadra(tx) and fr and fr > ult:
                 cerr = True
         if not cerr:
             out.append(d)
@@ -767,7 +821,7 @@ def main(argv):
     bc = revisar_banco(archivo)
     od = revisar_ordenes(extra[0] if extra else None)
     vu = revisar_versiones_unicas(archivo)
-    pm = revisar_postmortem(extra[0] if extra else None)
+    pm = revisar_postmortem(extra[0] if extra else os.path.join(os.path.dirname(os.path.abspath(archivo)), "cache_proyectos"))
     tl = tests_sin_llamar(Fuente(candidato))
     pa = revisar_prueba_abiertos(archivo, Fuente(candidato), cache=extra[0] if extra else None)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),

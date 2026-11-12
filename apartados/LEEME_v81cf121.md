@@ -1,4 +1,4 @@
-# v81cf121 APARTADA (NO publicada; orden de COORDINACIÓN 12-nov 22:11): arreglos ESTRUCTURALES de la verificación 5
+# v81cf121 PUBLICADA (orden de COORDINACIÓN 12-nov 22:11; publicada por su aviso de 22:35): arreglos ESTRUCTURALES de la verificación 5
 
 Base: v81cf120 (vigente). Aplicar con `patch -p1` desde la carpeta que contiene `take-off-metal-frame-drywall/`:
 - descomprimir el zip de v81cf120 en una carpeta X;
@@ -58,3 +58,16 @@ Límites (se documentan, no esconden un error de CANTIDAD):
 - la identidad del subagente es declarada (V6: un autor que corre sus tools fuera de bitacora.py no queda registrado);
 - un 'Fecha:' copiado de la verificación anterior empata y se desempata por nombre (E5);
 - una etiqueta 'rev<N>' insertada a mano en medio del log con una fecha vieja: el orden de las marcas solo se revisa desde la etiqueta.
+
+Agregado antes de publicar (COORDINACIÓN 22:15 / 22:30 / 22:35):
+8. GK H-04: 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; una fila de DOBLE_CIELO.csv con EXCLUDED + N/HOJA resuelve el
+   cuarto (cualquier fila, no solo 'double'); un hallazgo con N cuartos se resuelve cuarto por cuarto (un cuarto EXCLUDED no queda
+   'cargado' por el SOF de otro elemento con el mismo número). Test: test_v121_excluded_y_brief.
+9. CR: CB_FALTANTES_AUDITORIA ignora BRIEF*.md / LEEME* / README* y los renglones de definición; un hallazgo nombra un cuarto, un tag,
+   una hoja o una ref concreta (`es_hallazgo_concreto`). Test: test_v121_excluded_y_brief; 'corridor ceiling missing' (sin cuarto) ya no es
+   hallazgo (test_v119_be_cr40_verificacion actualizado).
+10. BE-GK55 (de GK, commit 005540a) unido dentro de compuerta_entrega.py (`be_gk55_fallas`, CLI `compuerta_entrega.py be_gk55 <prev>
+    <new> [CAMBIOS.txt]`) por el tope de 199 archivos. Test: test_be_gk55.
+Zip: skills_archivo/take-off-metal-frame-drywall_v81cf121_estructurales-verificacion5_2026-11-12.zip (199 archivos, zip -D).
+verificar_version de carpeta y zip: 0 reglas faltantes; 2 fallas esperadas (post-mortem 12b hasta la verificación 6; PRUEBA_ABIERTOS solo
+con XF, GK y CR se agregan).

@@ -432,18 +432,18 @@ def adv4_prueba_abiertos():
         return c
     csv = "Comparado: 2026-11-12 12:00 PT\n- 10 CSV / 10 PDF / 10 emparejados; 0 faltantes en cada lado.\n"
     sub = lambda t: {"fecha_iso": t}                                    # noqa: E731
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv})) == []
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv,
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv})) == []
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv,
                                                  "SUBIDA_OK_rev2.json": {"fecha": "2026-11-12T23:00:00+00:00"}})) == ["proj"]   # Q1
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
                                                  "Comparado: 2026-11-12 12:00 PT\n0 CSV / 0 PDF / 0 emparejados; 0 faltantes\n"})) == ["proj"]  # Q2
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T20:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T20:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
                                                  "Bid due 2026-11-20 14:00\nComparado: 2026-11-12 09:00 PT\n10 CSV / 10 PDF / 10 emparejados; 0 faltantes\n"})) == ["proj"]  # Q3
     e = []
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T20:00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv}), e) == ["proj"] and e  # Q4
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T20:00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md": csv}), e) == ["proj"] and e  # Q4
     e = []
     assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": {"x": 1}}), e) == ["proj"] and "sin fecha" in e[0], e
-    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
+    assert V.proyectos_abiertos_cache(cache_con({"SUBIDA_OK_rev1.json": sub("2026-11-12T10:00:00+00:00"), "CSV_BLUEBEAM_rev1/RESULTADO.md":
                                                  "2026-11-12 12:00 PT\n10 CSV / 10 PDF / 10 emparejados; 0 faltantes\n"})) == ["proj"]   # sin 'Comparado:'
     d = tempfile.mkdtemp(prefix="adv4pad_")
     open(os.path.join(d, "SKILL.md"), "w").write("x\n**VERSION: v81cf901**\n")
@@ -464,8 +464,69 @@ def adv4_prueba_abiertos():
                                                     "herramientas": {"sha_tools": sha, "vigente": {"PASS": 9}, "candidata": {"PASS": 9}}}))  # Q6
 
 
+def adv5_v121():
+    """v121 (verificación 5, adv5_pm / adv5_pm04, sintético): U-185 'Fecha:' en negritas, columna 'estado' por encabezado (columna extra
+    después), sin 'Fecha:' = fecha del commit en git (sin git = falla), sin 3er argumento = ruta por defecto (corre siempre); BE-PM04 el
+    CSV cierra solo la MISMA rev de la última subida, SUBIDA_OK recursivo, 'Comparado:' en la primera línea, miles con coma y formas
+    'faltantes en el CSV: 3' / '3 markups sin pareja'."""
+    import subprocess
+    cab = "| id | error / regla | chequeo | test | estado |\n|---|---|---|---|---|\n"
+    def base():
+        c = tempfile.mkdtemp(prefix="adv5_")
+        os.makedirs(os.path.join(c, "proy_x"))
+        json.dump({"fecha_iso": "2026-11-01T10:00:00+00:00"}, open(os.path.join(c, "proy_x", "SUBIDA_OK.json"), "w"))
+        open(os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b.md"), "w").write("# PM b 2026-11-01 16:00 PT\n" + cab + "| BE-Q1 | x | x | x | WEAK |\n")
+        return c
+    vn = "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION.md"
+    c = base()
+    open(os.path.join(c, vn), "w").write("# V\n\n**Fecha:** 2026-11-02 09:00 PT\n\n" + cab + "| BE-Q1 | x | x | x | **OK — CONFIRMED-CLOSED** |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)                                   # E1 / E2
+    c = base()
+    open(os.path.join(c, vn), "w").write("# V\n\nFecha: 2026-11-02 09:00 PT\n\n| id | error | chequeo | test | estado | notas |\n|---|---|---|---|---|---|\n"
+                                        "| BE-Q1 | x | x | x | OK — CONFIRMED-CLOSED | n |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)                                   # E8 columna extra
+    c = base()
+    open(os.path.join(c, vn), "w").write("# V\n\n" + cab + "| BE-Q1 | x | x | x | OK — CONFIRMED-CLOSED |\n")
+    r = V.revisar_postmortem(c)
+    assert any("ni commit en git" in x for x in r), r                                              # sin Fecha y sin git = falla
+    g = dict(os.environ, GIT_AUTHOR_DATE="2026-11-02T09:00:00-08:00", GIT_COMMITTER_DATE="2026-11-02T09:00:00-08:00",
+             GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@t", GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@t")
+    subprocess.run(["git", "init", "-q", c], check=True)
+    subprocess.run(["git", "-C", c, "add", "-A"], check=True)
+    subprocess.run(["git", "-C", c, "commit", "-q", "-m", "v"], check=True, env=g)
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)                                   # fecha del commit en git
+    viejo = V.CACHE_DEFECTO
+    V.CACHE_DEFECTO = os.path.join(c, "no_existe")
+    try:
+        assert V.revisar_postmortem(None), "sin 3er argumento: corre con la ruta por defecto (aquí no existe = falla)"
+    finally:
+        V.CACHE_DEFECTO = viejo
+    assert V.CACHE_DEFECTO.endswith("cache_proyectos")
+    def cache_con(files, sub_dir=""):
+        c = tempfile.mkdtemp(prefix="adv5pa_")
+        for n, v in files.items():
+            p = os.path.join(c, "proj", n)
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            open(p, "w").write(json.dumps(v) if isinstance(v, dict) else v)
+        return c
+    ok = lambda t: "# R\nComparado: " + t + "\n- 1351 CSV / 1351 PDF / 1351 emparejados; 0 faltantes en cada lado.\n"   # noqa: E731
+    s20 = {"SUBIDA_OK_rev20.json": {"fecha_iso": "2026-11-12T18:00:00+00:00"}}
+    assert V.proyectos_abiertos_cache(cache_con(dict(s20, **{"CSV_BLUEBEAM_rev20/RESULTADO.md": ok("2026-11-12 12:00 PT")}))) == []   # R0
+    s19 = dict(s20, **{"SUBIDA_OK_rev19.json": {"fecha_iso": "2026-11-11T18:00:00+00:00"}})
+    assert V.proyectos_abiertos_cache(cache_con(dict(s19, **{"CSV_BLUEBEAM_rev19/RESULTADO.md": ok("2026-11-12 12:00 PT")}))) == ["proj"]   # R1
+    c = cache_con({"REV3_FINAL/SUBIDA_OK.json": {"fecha_iso": "2026-11-12T18:00:00+00:00"}})
+    assert V.proyectos_abiertos_cache(c) == ["proj"] and V._es_proyecto(os.path.join(c, "proj"))                    # R2 recursivo
+    c = cache_con({"REV3_FINAL/SUBIDA_OK.json": {"fecha_iso": "2026-11-12T18:00:00+00:00"}, "CSV_BLUEBEAM_rev3/RESULTADO.md": ok("2026-11-12 12:00 PT")})
+    assert V.proyectos_abiertos_cache(c) == [], V.proyectos_abiertos_cache(c)                      # rev de la carpeta = rev del CSV
+    for malo in ("Comparado: 2026-11-12 12:00 PT\n1,351 CSV / 1,351 PDF / 1,350 emparejados; 0 faltantes\n",
+                 "Comparado: 2026-11-12 12:00 PT\n1351 CSV / 1351 PDF / 1351 emparejados; 0 faltantes en el PDF; faltantes en el CSV: 3\n",
+                 "Comparado: 2026-11-12 12:00 PT\n1351 CSV / 1351 PDF / 1351 emparejados; 0 faltantes en el PDF; 3 markups sin pareja en el CSV\n"):
+        assert V.proyectos_abiertos_cache(cache_con(dict(s20, **{"CSV_BLUEBEAM_rev20/RESULTADO.md": malo}))) == ["proj"], malo   # R3 / R5
+    assert V.proyectos_abiertos_cache(cache_con(dict(s20, **{"CSV_BLUEBEAM_rev20/RESULTADO.md":
+                                                             "Comparado: 2026-11-12 12:00 PT\n1,351 CSV / 1,351 PDF / 1,351 emparejados; 0 faltantes\n"}))) == []
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
