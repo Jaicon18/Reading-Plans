@@ -303,3 +303,13 @@ Pruebas del candidato (Ampliación 5):
   (apartados/PRUEBA_ABIERTOS_v81cf119.json).
 - GK y CR: re-correr con ESTE candidato (el sha cambió) y agregarse a ese mismo archivo.
 - Parche probado con la instrucción exacta (-p1 desde la carpeta que contiene take-off-metal-frame-drywall/): da el candidato idéntico.
+
+## PUBLICADA 12-nov (orden COORDINACIÓN 21:17)
+
+- v81cf119 = e55a8ae; el zip está en skills_archivo/take-off-metal-frame-drywall_v81cf119_U193-cobertura_2026-11-12.zip.
+- skills_archivo/PROYECTOS_ABIERTOS.json = xfinity_interquest, grand_kia, cr_city_hotel_castle_rock (CR abierto: rev20b en curso).
+- PRUEBA_ABIERTOS: que falten GK y CR NO bloquea esta publicación. Los dos corren
+  `compuerta_entrega.py prueba_abiertos <tools v118> skills_archivo/PRUEBA_ABIERTOS_v81cf119.json <proyecto>=<workdir>`
+  ANTES de su compuerta final, y se agregan a ese archivo.
+- El post-mortem 12b queda ABIERTO: 5 WEAK de la verificación 3 (f6d46a0). verificar_version FALLA por U-185 hasta v120, y eso es
+  lo esperado: no arranca ningún proyecto nuevo hasta v120.
