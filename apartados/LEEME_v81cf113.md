@@ -1,4 +1,4 @@
-# v81cf113 APARTADA (NO publicada: versiones congeladas por orden de COORDINACIÓN, 12-nov)
+# v81cf113 PUBLICADA 12-nov (era el apartado; zip en skills_archivo). Este patch queda como historia.
 
 Base: v81cf112 (skills_archivo/take-off-metal-frame-drywall_v81cf112_3H-forma-CR-tope-3s_2026-11-12.zip).
 Aplicar: descomprimir v81cf112 en /tmp/v113 y `patch -p1 -d /tmp/v113/take-off-metal-frame-drywall < v81cf113_desde_v81cf112.patch`.
