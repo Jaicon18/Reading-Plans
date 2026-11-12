@@ -23,3 +23,11 @@ Cache del proyecto (scripts del pipeline y configuración) para retomarlo o reus
 - RFIs abiertos: 0 (RFI-36 SOF-18 cerrado por precedente #6 con delta −91.00 / −81.22 SF).
 - Deltas vs rev2: board +550.66 SF; 1/2" ext. sheathing +24.90 SF; 1000S162-43 −387.76 LF; 600S162-43 parapet −110.04; 600S162-43 −6.75; 362S162-33 +185.82; 362S162-43 −24.09; 250S162-33 +0.99; ceiling/soffit track +60.00 LF; hanger wire −16.00 LF; compound +39.65 LB; tape +203.74 LF.
 - Reglas de esta ronda: BE-GK42..BE-GK49.
+
+## rev3a (12-nov) — ENTREGADA (auditoría U-138 de COORDINACIÓN sobre rev3)
+- Compuerta final con v81cf118: VERDE 231 PASS / 4 AMBER / 0 FAIL (12-nov 08:12 PST); skill_version v81cf118.
+- Excel sha256 4db25b9d54c731dc3372334824e5dbb1eb92db6ae0de3c18408d600f8d1f723e; markups f98d253eb8298a0ef6ca0061450b61709c7f7a8a64af82176e51c44568970e31.
+- Auditoría U-181: REVERIF15 (2 LOW: cita 1/A540 → 2/A540, C636 como hoja) → REVERIF16 open: 0.
+- Sin cambio de cantidades vs rev3: clips "3" x 3" x 0'-3" x 20 ga" (64/S204 nota 6), "Hanger wire, 12 ga (No. 12 SWG)" (3/A540, 2/A540), RFI-18 loaded = Type X, canon.ceilings_misc (v81cf117) para CB_RCP_APILADOS, Auditoria/RCP_APILADOS.csv y revision_materiales (U-111).
+- Subida: 2,626 archivos (Auditoria 2,598) a Claude outputs › Grand Kia Auto Dealership - Denver, CO (Brinkman) › rev3a FINAL PARA REVISAR; --vigente PASS; Drive = local, 0 duplicados. rev3 renombrada "BORRAR (NO USAR) - rev3 FINAL PARA REVISAR - REPLACED BY rev3a".
+- Reglas de esta ronda: BE-GK50..BE-GK53.
