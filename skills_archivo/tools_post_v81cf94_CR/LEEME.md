@@ -19,3 +19,6 @@ No es una versión publicada. INDICE.md y VERSION_EN_CURSO.md NO se tocaron.
 - BE-CR32: el parser de altura impresa tomaba la comprobación vectorial en vez de la cota impresa.
 - BE-CR33: hojas con punto no se reconocían en height_diff_reason; el cruce exigía motivo a todos los renglones.
 - BE-CR34: "gauge not printed" con un STUD SCHEDULE impreso en A0.06; lecciones de la auditoría U-181: altura de una ELEVACIÓN solo si en planta el wall está en ese plano frontal (CR east facade L4); exclusión tenant solo de caras de types NO rated (U-159).
+
+## BE-CR35 — CR City Hotel rev19 (12-nov, usuario revisando ALTURAS_REVISADAS página 0.917)
+- Los 14 renglones de soffits / beam wraps (SOF-*, BW-L1-RETAIL; Depth = ancho desarrollado del board, no altura de wall) entraron a ALTURAS_IMPRESAS como "[take-off detail reading, not blind]": NO pasaron por la doble lectura ciega U-176 (1) (H-A / H-B solo leyeron walls), y la imagen de 0.917 solo circulaba una cota del RCP. Regla: TODO renglón con Depth en Bluebeam (walls, soffits, bandas, beam wraps) pasa por H-A / H-B; un renglón "not blind" = FAIL (candado en v98, COORDINACIÓN). La página de cada ancho desarrollado lleva TODAS las cotas de la operación circuladas (RCP + detalle) y el texto "developed width per LF ... Depth in Bluebeam = board strip, not a wall height".
