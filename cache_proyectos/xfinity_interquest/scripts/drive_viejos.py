@@ -2,6 +2,7 @@
 el PDF de markups viejo -> 'BORRAR (NO USAR) - XF_markups_rev1 old.pdf'. Uso: drive_viejos.py <carpeta_local_entrega> <id_drive> [--hacer]"""
 import sys, os, json, hashlib, requests
 sys.path.insert(0, '/opt/takeoff'); import gdrive_fetch as G
+sys.path.insert(0, os.environ.get("T", "/root/xf/skill98/take-off-metal-frame-drywall/tools")); import subir_entrega as SE   # U-186
 loc, raiz, hacer = sys.argv[1], sys.argv[2], '--hacer' in sys.argv
 U174 = "--u174" in sys.argv or "--tag" in sys.argv
 TAG = sys.argv[sys.argv.index("--tag") + 1] if "--tag" in sys.argv else "U-174"
@@ -28,7 +29,8 @@ def rec(dl, fid):
         if n == "XF_markups_rev1 - OPEN IN BLUEBEAM.pdf":
             cambios.append((it["id"], os.path.relpath(pl, loc), "BORRAR (NO USAR) - XF_markups_rev1 old.pdf"))
         elif os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
-            cambios.append((it["id"], os.path.relpath(pl, loc), (f"BORRAR (NO USAR) - old {TAG} " if U174 else "BORRAR (NO USAR) - old ") + n))
+            cambios.append((it["id"], os.path.relpath(pl, loc), SE.nombre_borrar(f"old {TAG} {n}" if U174 else f"old {n}",
+                                                                                  f"{n} ({TAG})" if U174 else n)))   # U-186
 rec(loc, raiz)
 for c in cambios:
     print(("RENOMBRADO " if hacer else "A RENOMBRAR ") + c[1] + " -> " + c[2])
