@@ -159,3 +159,86 @@ lo confirma) y skills_archivo/PRUEBA_ABIERTOS_v81cf119.json con los 3 proyectos.
   líneas finas sin relleno ni trama), que no está en esta orden.
 
 Archivos: cobertura_v119/revision_falsos/ (res_GK.json, res_CR1.json, res_CR2.json, cr_muestra.txt semilla 119, crops_revision.py).
+
+- Siguiente mejora (COORDINACIÓN 20:33: NO meterla todavía): filtro de falsos de otro tipo (equipo / escalera / vidrio de storefront /
+  curb: líneas finas sin relleno ni trama) para bajar GK y CR de 7.5 % a <= 2 %. Por ahora el revisor independiente los limpia.
+
+
+## Ampliación 4 (COORDINACIÓN 20:10 / 20:25 / 20:33): los 5 STILL-WEAK de la verificación (a2babc8) + GK (a) (b), cada uno con test
+
+1. U-185 (`apartados/ordenes_v119/verificar_version.py`):
+   - solo cuenta `POSTMORTEM_COBERTURA_<fecha>[letra].md`;
+   - sin la tabla principal = FALLA (antes pasaba en vacío);
+   - los acompañantes del mismo post-mortem se leen y manda el más estricto: un `_CIERRE` o una copia nunca relajan lo que deja abierto
+     el principal; de las `_VERIFICACION*` cuenta la MÁS NUEVA (hora del encabezado), así una verificación nueva limpia puede cerrar;
+   - la tabla de causas (`# | causa | candado | estado`) con `NO GUARD` = abierto.
+   - Test: `postmortem_u185`, ampliado con 5 casos nuevos.
+   - Sobre el cache real da hoy: 12b + 12b_VERIFICACION = 10 WEAK / 3 NO GUARD abiertos. Es lo esperado: cerrar exige un post-mortem
+     principal nuevo, o el 12b corregido, más una verificación limpia.
+2. BE-CR40 (`chequeos_biblioteca.faltantes_auditoria` + `resolver_faltante`):
+   - lee todo `.md` de `Auditoria/`;
+   - el texto `faltante_por_tag:` no es prueba: la compuerta llama a la función;
+   - sin tag, resuelve por número de cuarto contra ceilings / misc del canon;
+   - tag ambiguo o sin tag ni cuarto = FAIL (antes N/A);
+   - un hallazgo cerrado cita la ref que lo cargó (CLG- / SOF- / BW-), y esa ref tiene que existir en el canon.
+   - Test: `test_v119_be_cr40_verificacion`.
+   - Sobre la Auditoria real de CR rev20a contra el canon del cache: FAIL en 3 renglones.
+     - Dos refs de cierre (SOF-L2-01P, CLG-L4-106R) no están en el canon del cache (es anterior a rev20).
+     - El narrativo de U-138 "falta del cielo de 412" no cita su cierre.
+     - CR rev20a ya está subido: este chequeo da AMBER para entregas anteriores a FECHA_V119.
+3. BE-PM04 (`prueba_abiertos` + `verificar_version.revisar_prueba_abiertos`):
+   - workdirs `<proyecto>=<carpeta>`;
+   - las corridas de cada sesión se UNEN en el mismo `PRUEBA_ABIERTOS_vN.json`;
+   - verificar_version exige, para la versión del CANDIDATO (línea `VERSION:` de su SKILL.md, no la del INDICE), todos los proyectos de
+     `skills_archivo/PROYECTOS_ABIERTOS.json` con 0 regresiones sin explicar.
+   - Tests: `prueba_abiertos_be_pm04` (verificar) y `test_v119_prueba_abiertos` (compuerta).
+   - Propuesta de lista: `apartados/PROYECTOS_ABIERTOS_propuesta.json` (XF, GK, CR).
+4. BE-PM06 (`alarma_fallas` en CE_PROTOCOLO_3H, entregas nuevas):
+   - todo paso 1-9 cerrado en `tiempos.log` (`| N fin`) tiene su corrida `--paso N` en `compuerta_corridas.jsonl`;
+   - el cruce del 50 % / 100 % tiene su alerta en `ALERTA_PRESUPUESTO.json` (historial con la hora del log), escrita a más tardar al
+     cerrar el paso siguiente al cruce.
+   - Test: `test_v119_alarma_presupuesto`, con 4 casos, uno de ellos la alerta escrita tarde.
+5. U-193:
+   - `_cob_disp` lee `decision`: FALTA nunca limpia un rojo; solo NO ES NUESTRO / NO ES MURO / CUBIERTO.
+   - El revisor se registra con `bitacora.py subagente <rol> <id>`, en la cadena de hashes. CE_COBERTURA exige que el `reviewer` sea un
+     id registrado como `revisor_cobertura` y distinto de los del canon.
+   - Sin CHECKLIST con B6 = FAIL (antes, sin CHECKLIST no se revisaba).
+   - RCP con 0 cuartos = detector ciego.
+   - Tests nuevos de `ce_cobertura`: sin B6, B6 faltante, revisor no registrado o igual al del canon, FALTA, sin CSV, sin PDF, detector
+     ciego de planta y de RCP.
+   - Mutación sintética en la suite (`test_v119_mutacion_cobertura`, equivalente a la de CR):
+     - sin las dos caras de un muro = ROJO;
+     - sin los dos cielos apilados de un cuarto = ROJO;
+     - sin una sola cara = no sale (límite documentado).
+   - HALLAZGO con datos reales: "RCP con 0 cuartos" dispara en CR A3.01 / A7.30 / A7.31 y GK A220. En esas hojas los números de cuarto
+     no están como texto, o están fuera del edificio. Para que la compuerta tenga una salida VERIFICABLE, hay un renglón `tipo=hoja_ciega`
+     en COBERTURA_DISPOSICION.csv con:
+     - decision CUBIERTO;
+     - motivo;
+     - nhoja N/HOJA;
+     - reviewer registrado;
+     - imagen.
+     El revisor independiente revisó a mano todos los cielos de esa hoja. Con FALTA o con un revisor no registrado sigue en FAIL.
+   - Para rev1d de Xfinity: registrar al revisor con `bitacora.py subagente revisor_cobertura <id>` y poner ese id en la columna reviewer.
+6. GK (a), BE-PM08: `nombres_planos` exceptúa `COBERTURA - IMAGE ONLY.pdf`; una copia con otro nombre sigue fallando.
+7. GK (b), BE-PM09: `_bitacoras` lee `$BITACORA`, `<w>/bitacora.jsonl` y `<w>/takeoff_work/bitacora.jsonl`.
+   - Test de 6 y 7: `test_v119_gk_nombres_y_bitacora`.
+   - Los ids BE-PM08 / 09 son nuevos porque GK ya usó BE-GK54 en su candidato aparte.
+
+AL PUBLICAR, además:
+- `apartados/ordenes_v119/BIBLIOTECA_agregar_al_publicar.md` va a `BIBLIOTECA_ERRORES.md`;
+- la lista de proyectos abiertos, confirmada, va a `skills_archivo/PROYECTOS_ABIERTOS.json`;
+- un solo `PRUEBA_ABIERTOS_v81cf119.json` con los 3 proyectos. GK y CR re-corren con el candidato final:
+  `compuerta_entrega.py prueba_abiertos <tools v118> <salida> grand_kia=<workdir>`.
+
+Pruebas del candidato (Ampliación 4):
+- suite 47/47;
+- banco 0 distintas en 8 proyectos;
+- reglas.py 0 sin clasificar (borré REGLAS_FALLAS.md y reglas_out.json, que esa corrida deja en la carpeta);
+- 199 archivos;
+- selftest de verificar_version 13/13 OK;
+- verificar_version del candidato:
+  - con el CIERRE propuesto (tabla de causas 3.1-3.3 con su candado) y PRUEBA_ABIERTOS con la lista completa = OK;
+  - con el cache real = FALLA U-185 (12b + 12b_VERIFICACION abiertos, como se pidió) + PRUEBA ABIERTOS (falta la lista).
+- PRUEBA_ABIERTOS de Xfinity con el candidato final: 227/8/0 -> 228/9/0, 0 regresiones (apartados/PRUEBA_ABIERTOS_v81cf119.json, que es el
+  archivo único al que GK y CR agregan su proyecto).

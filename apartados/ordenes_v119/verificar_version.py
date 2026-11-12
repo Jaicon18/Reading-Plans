@@ -330,6 +330,8 @@ def revisar_ordenes(cache, horas=24):
 
 
 RX_POSTMORTEM = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})[\w.-]*\.md$")
+RX_PM_PRINCIPAL = re.compile(r"^POSTMORTEM_COBERTURA_(\d{4}-\d{2}-\d{2})([a-z]?)\.md$")   # el post-mortem; _VERIFICACION / _CIERRE
+                                                                                        # / copias son acompañantes, no lo reemplazan
 
 
 def tabla_postmortem(txt):
@@ -345,6 +347,22 @@ def tabla_postmortem(txt):
             continue
         if dentro and cs and not set(cs[0]) <= set("-: "):
             out.append((cs[0], cs[-1]))
+    return out
+
+
+def causas_no_guard(txt):
+    """U-185 (verificación 12b): tabla de causas '# | causa | candado | estado': un renglón con 'NO GUARD' en su estado sigue abierto."""
+    out, dentro = [], False
+    for ln in txt.splitlines():
+        cs = [x.strip() for x in ln.strip().strip("|").split("|")]
+        if ln.lstrip().startswith("|") and cs and cs[0] == "#" and cs[-1].lower().startswith("estado"):
+            dentro = True
+            continue
+        if dentro and not ln.lstrip().startswith("|"):
+            dentro = False
+            continue
+        if dentro and cs and not set(cs[0]) <= set("-: ") and re.search(r"(?i)NO\s+GUARD", cs[-1]):
+            out.append((f"causa {cs[0]}", "NO GUARD"))
     return out
 
 
@@ -428,20 +446,34 @@ def revisar_postmortem(cache):
     if not cierres:
         return []
     cierre, proy = max(cierres)
-    pms = sorted(n for n in os.listdir(cache) if RX_POSTMORTEM.match(n))
+    pms = sorted((RX_PM_PRINCIPAL.match(n).groups(), n) for n in os.listdir(cache) if RX_PM_PRINCIPAL.match(n))
     if not pms:
-        return [f"{proy} cerrado {cierre.isoformat()} sin cache_proyectos/POSTMORTEM_COBERTURA_<fecha>.md posterior (U-185)"]
-    n = pms[-1]                                          # SOLO el más nuevo
+        return [f"{proy} cerrado {cierre.isoformat()} sin cache_proyectos/POSTMORTEM_COBERTURA_<fecha>[letra].md posterior (U-185)"]
+    n = pms[-1][1]                                       # SOLO el principal más nuevo (un _VERIFICACION / _CIERRE no lo reemplaza)
     txt = open(os.path.join(cache, n), encoding="utf-8").read()
     if _pm_hora(n, txt) < cierre:
         return [f"{proy} cerrado {cierre.isoformat()}: el post-mortem más nuevo ({n}) es anterior al cierre (U-185)"]
-    ab = abiertos_postmortem(txt)
-    if not ab:
+    if not tabla_postmortem(txt):
+        return [f"{n}: sin la tabla principal 'id | error / regla | chequeo | test | estado' (0 renglones) = falla (U-185)"]
+    base = n[:-3] + "_"
+    todos = sorted(m for m in os.listdir(cache) if m.startswith(base) and m.endswith(".md"))
+    verifs = sorted((_pm_hora(n, open(os.path.join(cache, m), encoding="utf-8").read()), m) for m in todos if "_VERIFICACION" in m.upper())
+    acomp = [m for m in todos if "_VERIFICACION" not in m.upper()] + ([verifs[-1][1]] if verifs else [])
+    # manda el más estricto entre el principal, cada acompañante (_CIERRE / copias) y la verificación MÁS NUEVA (una verificación nueva
+    # reemplaza a la anterior; un _CIERRE o una copia nunca relajan lo que el principal o la verificación dejan abierto)
+    abiertos = {}                                        # manda el más estricto: abierto en el principal O en un acompañante
+    for m in [n] + acomp:
+        t = txt if m == n else open(os.path.join(cache, m), encoding="utf-8").read()
+        for i, e in abiertos_postmortem(t) + causas_no_guard(t):
+            abiertos.setdefault(i, (e, m))
+    if not abiertos:
         return []
-    nw = sum(1 for _i, e in ab if e == "WEAK")
-    nm = sum(1 for _i, e in ab if e == "MISSING")
-    return [f"{n}: {nw} WEAK / {nm} MISSING abiertos ({len(ab)} renglones sin OK ni 'conducta: motivo'; U-185): "
-            + ", ".join(i for i, _e in ab[:30])]
+    ab = list(abiertos.items())
+    nw = sum(1 for _i, (e, _m) in ab if e == "WEAK")
+    nm = sum(1 for _i, (e, _m) in ab if e == "MISSING")
+    ng = sum(1 for _i, (e, _m) in ab if e == "NO GUARD")
+    return [f"{n}{' + ' + ', '.join(acomp) if acomp else ''}: {nw} WEAK / {nm} MISSING / {ng} NO GUARD abiertos ({len(ab)} renglones sin OK "
+            "ni 'conducta: motivo'; manda el más estricto; U-185): " + ", ".join(i for i, _e in ab[:30])]
 
 
 RX_DEF_TEST = re.compile(r"(?m)^def (test_\w+)\(")
@@ -468,28 +500,49 @@ def tests_sin_llamar(fuente):
     return out
 
 
-def revisar_prueba_abiertos(archivo, desde=(81, 119)):
-    """NO GUARD 3.1 (post-mortem 2026-11-12b): la versión VIGENTE (desde v81cf119) tiene skills_archivo/PRUEBA_ABIERTOS_<v>.json — la
-    compuerta de la candidata corrida (--solo, todos los chequeos) sobre las entregas abiertas contra la vigente anterior — con
-    'ok': true (ningún PASS que pasó a FAIL sin 'explicacion')."""
+RX_VERSION_SKILL = re.compile(r"\*\*VERSION:\s*(v(\d+)cf(\d+)[a-z]?)\*\*")
+
+
+def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119)):
+    """NO GUARD 3.1 / BE-PM04 (+ verificación 12b): ANTES de publicar, la versión del CANDIDATO (línea **VERSION: vNcfM** de su SKILL.md;
+    si no, la vigente del INDICE) desde v81cf119 tiene skills_archivo/PRUEBA_ABIERTOS_<v>.json con TODOS los proyectos de
+    skills_archivo/PROYECTOS_ABIERTOS.json ({"proyectos": [nombres de cache_proyectos]}), cada uno con 0 regresiones sin explicar."""
     import json
-    p = os.path.join(archivo, "INDICE.md")
-    if not os.path.isfile(p):
-        return []
-    m = re.search(r"VERSIÓN VIGENTE[^:]*: [^(]*\(hoy (v(\d+)cf(\d+)[a-z]?)", open(p, encoding="utf-8").read())
+    m = RX_VERSION_SKILL.search((fuente.leer("SKILL.md") or "") if fuente else "")
+    if not m:
+        p = os.path.join(archivo, "INDICE.md")
+        if not os.path.isfile(p):
+            return []
+        m = re.search(r"VERSIÓN VIGENTE[^:]*: [^(]*\(hoy (v(\d+)cf(\d+)[a-z]?)", open(p, encoding="utf-8").read())
     if not m or (int(m.group(2)), int(m.group(3))) < desde:
         return []
-    f = os.path.join(archivo, f"PRUEBA_ABIERTOS_{m.group(1)}.json")
+    v = m.group(1)
+    fa = os.path.join(archivo, "PROYECTOS_ABIERTOS.json")
+    try:
+        abiertos = list(json.load(open(fa, encoding="utf-8")).get("proyectos") or [])
+    except Exception:
+        return [f"sin skills_archivo/PROYECTOS_ABIERTOS.json legible (lista de proyectos abiertos que la versión {v} tiene que probar)"]
+    f = os.path.join(archivo, f"PRUEBA_ABIERTOS_{v}.json")
     if not os.path.isfile(f):
-        return [f"la versión vigente {m.group(1)} no tiene skills_archivo/PRUEBA_ABIERTOS_{m.group(1)}.json (compuerta de la candidata "
-                "sobre los proyectos abiertos antes de publicar)"]
+        return [f"la versión {v} no tiene skills_archivo/PRUEBA_ABIERTOS_{v}.json (compuerta de la candidata sobre los proyectos "
+                "abiertos antes de publicar)"]
     try:
         x = json.load(open(f, encoding="utf-8"))
     except Exception as e:
         return [f"{os.path.basename(f)} ilegible: {e}"]
-    if not x.get("ok"):
-        return [f"{os.path.basename(f)}: 'ok' falso — {len(x.get('regresiones') or [])} PASS -> FAIL sin explicación"]
-    return []
+    out = []
+    if x.get("version_candidata") not in (None, v):
+        out.append(f"{os.path.basename(f)} es de la versión {x.get('version_candidata')}, no de {v}")
+    pr = x.get("proyectos") or {}
+    falt = [a for a in abiertos if a not in pr]
+    if falt:
+        out.append(f"{os.path.basename(f)}: faltan proyectos abiertos {', '.join(falt)} (PROYECTOS_ABIERTOS.json)")
+    sin = [r for r in x.get("regresiones") or [] if not str(r.get("explicacion") or "").strip()]
+    if sin or not x.get("ok"):
+        out.append(f"{os.path.basename(f)}: {len(sin)} regresión(es) PASS -> FAIL sin explicación: "
+                   + ", ".join(f"{r.get('proyecto')}:{r.get('chequeo')}" for r in sin[:10]))
+    return out
+
 
 def main(argv):
     if argv[1:] == ["--selftest"]:
@@ -522,7 +575,7 @@ def main(argv):
     vu = revisar_versiones_unicas(archivo)
     pm = revisar_postmortem(extra[0] if extra else None)
     tl = tests_sin_llamar(Fuente(candidato))
-    pa = revisar_prueba_abiertos(archivo)
+    pa = revisar_prueba_abiertos(archivo, Fuente(candidato))
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
                        ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa)):

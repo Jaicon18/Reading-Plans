@@ -213,6 +213,34 @@ def postmortem_u185():
         "# PM b 2026-11-12 16:00 PT\n" + cab + "| BE-Q2 | y | conducta | — | conducta |\n" + "".join(f"| BE-W{k} | z | n | — | WEAK |\n" for k in range(7)))
     r = V.revisar_postmortem(c)
     assert r and "7 WEAK" in r[0] and "BE-Q2" in r[0] and "12b" in r[0], r   # el caso de hoy: el limpio más viejo NO lo tapa
+    pb = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b.md")         # verificación 12b: (1) principal sin tabla = falla, no pasa en vacío
+    open(pb, "w").write("# PM b 2026-11-12 16:00 PT\nsin tabla\n")
+    r = V.revisar_postmortem(c)
+    assert r and "sin la tabla principal" in r[0], r
+    open(pb, "w").write("# PM b 2026-11-12 16:00 PT\n" + limpio)
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    pv = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION.md")   # (2) el acompañante no reemplaza: manda el más estricto
+    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | WEAK — STILL-WEAK |\n")
+    r = V.revisar_postmortem(c)
+    assert r and "BE-Q1" in r[0] and "1 WEAK" in r[0] and "_VERIFICACION" in r[0], r
+    pv2 = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION2.md")     # una verificación MÁS NUEVA reemplaza a la vieja
+    open(pv2, "w").write("# VERIF 2 2026-11-12 18:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | OK — CONFIRMED-CLOSED |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    pc = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_CIERRE.md")              # un _CIERRE nunca relaja: abierto en él = abierto
+    open(pc, "w").write("# CIERRE 2026-11-12 18:30 PT\n" + cab + "| BE-Q3 | x | ce_x | — | WEAK |\n")
+    r = V.revisar_postmortem(c)
+    assert r and "BE-Q3" in r[0], r
+    os.remove(pc)
+    os.remove(pv2)
+    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\nsin tabla, todo bien\n")      # un acompañante sin tabla no tapa ni abre nada
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    causas = "\n| # | causa | candado | estado |\n|---|---|---|---|\n| 3.1 | x | — | **NO GUARD** |\n| 3.2 | y | ce_y | candado OK |\n"
+    open(pb, "w").write("# PM b 2026-11-12 16:00 PT\n" + limpio + causas)            # (3) tabla de causas con NO GUARD = abierto
+    r = V.revisar_postmortem(c)
+    assert r and "1 NO GUARD" in r[0] and "causa 3.1" in r[0] and "3.2" not in r[0], r
+    open(os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12c_COPIA.md"), "w").write("# copia 2026-11-12 23:00 PT\n")   # no es principal
+    r = V.revisar_postmortem(c)
+    assert r and "12b.md" in r[0], r
 
 
 def tests_llamados():
@@ -226,8 +254,35 @@ def tests_llamados():
     assert V.tests_sin_llamar(V.Fuente(d)) == []
 
 
+def prueba_abiertos_be_pm04():
+    """verificación 12b (BE-PM04 STILL-WEAK): desde v81cf119 la versión del CANDIDATO necesita PRUEBA_ABIERTOS_<v>.json con TODOS los
+    proyectos de PROYECTOS_ABIERTOS.json y 0 regresiones sin explicar; uno solo de tres no alcanza. Datos sintéticos."""
+    a = tempfile.mkdtemp(prefix="pa_")
+    d = tempfile.mkdtemp(prefix="pac_")
+    open(os.path.join(d, "SKILL.md"), "w").write("x\n**VERSION: v81cf901**\n")
+    f = V.Fuente(d)
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "PROYECTOS_ABIERTOS" in r[0], r
+    json.dump({"proyectos": ["proy_a", "proy_b", "proy_c"]}, open(os.path.join(a, "PROYECTOS_ABIERTOS.json"), "w"))
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "no tiene" in r[0], r
+    pa = os.path.join(a, "PRUEBA_ABIERTOS_v81cf901.json")
+    uno = {"version_candidata": "v81cf901", "ok": True, "regresiones": [], "proyectos": {"proy_a": {"regresiones": 0}}}
+    json.dump(uno, open(pa, "w"))
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "proy_b" in r[0] and "proy_c" in r[0], r                  # el caso de la verificación: un proyecto solo pasaba
+    tres = dict(uno, proyectos={k: {"regresiones": 0} for k in ("proy_a", "proy_b", "proy_c")})
+    json.dump(tres, open(pa, "w"))
+    assert V.revisar_prueba_abiertos(a, f) == [], V.revisar_prueba_abiertos(a, f)
+    json.dump(dict(tres, ok=False, regresiones=[{"proyecto": "proy_b", "chequeo": "CE_X9", "explicacion": ""}]), open(pa, "w"))
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "proy_b:CE_X9" in r[0], r
+    open(os.path.join(d, "SKILL.md"), "w").write("x\n**VERSION: v81cf118**\n")       # versiones anteriores a v81cf119: no se exige
+    assert V.revisar_prueba_abiertos(a, V.Fuente(d)) == []
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
