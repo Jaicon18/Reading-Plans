@@ -1,0 +1,29 @@
+--- /tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad/v98/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 01:49:31.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 01:53:14.942006294 +0000
+@@ -1745,3 +1745,26 @@
+ 
+ 
+ test_u187_textos_legibles()
++
++
++def test_be_cr36_textos_markups():
++    """BE-CR36 (CR rev19, U-187): LEGEND - una celda larga cabe en su columna; EXCLUDED de dos cuartos vecinos no se enciman."""
++    import pymupdf
++    import markups_bluebeam as MB
++    import markups_rcp as MR
++    fs, v = MB.celda_legible("CH.6-2 - SHAFT WALL (C-H STUDS AND J-RUNNER, 1 IN LINER, 2 HR) - 2 LAYERS EACH SIDE", 194)
++    assert pymupdf.get_text_length(v, fontname="helv", fontsize=fs) <= 194 and fs >= 5.5, (fs, v)
++    assert MB.celda_legible("50", 64) == (10.0, "50")
++    d = pymupdf.open(); pg = d.new_page(width=800, height=600); d.set_page_labels([{"startpage": 0, "prefix": "A7.50", "style": ""}])
++    tmp = "/tmp/_be_cr36.pdf"; d.save(tmp)
++    rooms = [{"sheet": "A7.50", "room": r, "disposition": "exclusion", "reason": "lay-in ACT ceiling (ACT-2), not drywall scope; FS-1 rated membrane above is loaded",
++              "nhoja": "2/A7.50", "polygon": pol} for r, pol in (("118B", [[100, 100], [300, 100], [300, 140], [100, 140]]),
++                                                                ("119", [[299, 95], [460, 95], [460, 140], [299, 140]]))]
++    hechos, faltan = MR.aplicar(tmp, {"rooms": rooms})
++    assert len(hechos) == 2 and not faltan, (hechos, faltan)
++    fts = [a.rect for a in pymupdf.open(tmp)[0].annots() if a.type[1] == "FreeText"]
++    assert len(fts) == 2 and (fts[0] & fts[1]).is_empty or (fts[0] & fts[1]).get_area() < 0.5, fts
++    print("test_be_cr36_textos_markups OK")
++
++
++test_be_cr36_textos_markups()

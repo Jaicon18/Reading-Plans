@@ -1,0 +1,35 @@
+--- /tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad/v98/take-off-metal-frame-drywall/tools/markups_bluebeam.py	2026-11-12 01:43:01.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/markups_bluebeam.py	2026-11-12 01:53:09.846502718 +0000
+@@ -611,6 +611,18 @@
+     return dict(sorted(out.items(), key=lambda kv: (kv[0].startswith(OTHER), kv[0])))
+ 
+ 
++def celda_legible(v, ancho, fs=10.0, minimo=5.5):
++    """BE-CR36 (CR rev19, usuario 12-nov 'datos ensimados'): texto de una celda de la LEGEND que cabe en su columna: baja la letra hasta
++    'minimo'; si aun así no cabe, recorta con '...' (el type completo sigue en el Subject del markup). -> (fontsize, texto)"""
++    import pymupdf
++    v = str(v)
++    while fs > minimo and pymupdf.get_text_length(v, fontname="helv", fontsize=fs) > ancho:
++        fs = round(fs - 0.5, 2)
++    while len(v) > 4 and pymupdf.get_text_length(v, fontname="helv", fontsize=fs) > ancho:
++        v = v[:-4] + "..."
++    return fs, v
++
++
+ def _leyenda(doc, canon, geo, sin, cols, nombre_canon):
+     """Página nueva AL FINAL: totales por type + annot Line de muestra por color + walls sin geometría."""
+     W, H = 1224.0, 792.0                                           # 17 x 11 in, horizontal
+@@ -638,9 +650,10 @@
+         rgb, dashes = cols.get(t, (LAVANDA, None))
+         _annot(doc, p, [(xs[0], y - 4), (xs[0] + 70, y - 4)], rgb, dashes, "LEGEND",   # BE-XF07: Subject LEGEND, never a type
+                f"LEGEND · {t} · {d['walls']} walls · {d['lf']:.2f} LF", AUTOR_LEYENDA, NM_LEY + t)
+-        for x, v in zip(xs[1:], (t, str(d["walls"]), f"{d['lf']:.2f}", str(d["marcados"]),
+-                                 str(d["sin_geometria"]))):
+-            p.insert_text((x, y), v, fontsize=10, fontname="helv")
++        for k_, (x, v) in enumerate(zip(xs[1:], (t, str(d["walls"]), f"{d['lf']:.2f}", str(d["marcados"]),
++                                               str(d["sin_geometria"])))):
++            fs_, v_ = celda_legible(v, (xs[k_ + 2] if k_ + 2 < len(xs) else W - 40) - x - 6)   # BE-CR36 (U-187): nada se encima
++            p.insert_text((x, y), v_, fontsize=fs_, fontname="helv")
+         filas += 1
+     y += 10
+     p.draw_line((40, y), (W - 40, y), color=(0, 0, 0), width=0.5)
