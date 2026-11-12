@@ -1,0 +1,328 @@
+diff -ruN v125/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v126/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v125/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:18:57.646606136 +0000
++++ v126/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:18:57.655043741 +0000
+@@ -8155,7 +8155,7 @@
+   {
+    "id": "BE-CR40",
+    "origen": "skills_archivo/tools_post_v81cf94_CR/LEEME.md (CR City Hotel rev20, 12-nov, commit 93915a3)",
+-   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo",
++   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo ; v126: no se leen entrega_rev* de otra rev ni symlinks a entregas previas",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8165,7 +8165,8 @@
+     "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo",
+     "take-off:tools/chequeos_biblioteca.py::_cant_ref",
+     "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
+-    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto"
++    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto",
++    "take-off:tools/chequeos_biblioteca.py::texto_de_otra_rev"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+@@ -8481,7 +8482,7 @@
+   {
+    "id": "U-193",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
+-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL",
++   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL ; v126 (GK): corrida sin agente reemplazada después por la misma tool con agente = AMBER 'cadena interrumpida y reemplazada'",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8498,7 +8499,9 @@
+     "take-off:tools/bitacora.py::run",
+     "take-off:tools/compuerta_entrega.py::norm_txt",
+     "take-off:tools/compuerta_entrega.py::norm_agente",
+-    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha"
++    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha",
++    "take-off:tools/compuerta_entrega.py::sin_agente_reemplazadas",
++    "take-off:tools/compuerta_entrega.py::corridas_con_agente"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8627,7 +8630,7 @@
+    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
+    "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap",
++   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap ; v126: enlace exclusión-rojo SOLO por id de canon del muro; la disposición se juzga sola",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
+     "take-off:tools/compuerta_entrega.py::ce_cobertura",
+@@ -8638,7 +8641,7 @@
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+-    "token": "test_v125_gk54_face_centre"
++    "token": "test_v126_bloqueos_gk_cr"
+    }
+   },
+   {
+diff -ruN v125/take-off-metal-frame-drywall/SKILL.md v126/take-off-metal-frame-drywall/SKILL.md
+--- v125/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:18:57.653263296 +0000
++++ v126/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:18:57.658987986 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf125** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf126** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,11 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf126 (COORDINACIÓN 12-nov 23:13, bloqueos de entrega de GK y CR):** (1) CE_COBERTURA: una corrida sin agente REEMPLAZADA (la
++  misma tool corrida después con SUBAGENTE_ID) = AMBER 'cadena interrumpida y reemplazada'; sin reemplazo = FAIL; (2) BE-GK54 enlaza
++  exclusión y rojo SOLO por el id de CANON del muro (campos id / wall o el id de canon citado), nunca por ids de lector; la disposición se
++  juzga sola (NO ES NUESTRO con prueba de material no se cruza con la fusión de otra pieza); (3) CB_FALTANTES / auditorías no leen
++  carpetas entrega_rev* / FINAL_FOR_REVIEW_rev* de otra rev ni symlinks a entregas previas.
+ - **v81cf125 (COORDINACIÓN 12-nov 22:58, caso real de GK):** GK54(b) acepta cualquier gap medido > 0, face-to-face o centre-to-centre,
+   con el material impreso (p. ej. '4.0" face-to-face / 10.0" centre-to-centre (46/A550) - CMU type K'); el valor de gap_proof cuenta como
+   texto de gap aunque no diga 'gap'.
+Binary files v125/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v126/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v126/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v126/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v125/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v126/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v125/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v126/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v125/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 23:18:57.647271822 +0000
++++ v126/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 23:18:57.655582674 +0000
+@@ -73,6 +73,31 @@
+ 
+ # ============================================================================================== contexto
+ 
++def _rev_carpeta(nombre):
++    m = re.search(r"(?i)(?<![a-z0-9])rev[_-]?(\d{1,3}[a-z]?)(?![a-z0-9])", nombre or "")
++    return m.group(1).lower() if m and re.match(r"(?i)(?:entrega|final_for_review)", nombre or "") else None
++
++
++def texto_de_otra_rev(w, p, entrega=None):
++    """v126 (COORDINACIÓN 12-nov 23:13, GK / CR): un .md bajo una carpeta entrega_rev<N> / FINAL_FOR_REVIEW_rev<N> que NO es la rev actual
++    (la de `entrega`), o bajo un symlink que apunta a una entrega previa, no se audita (CB_FALTANTES / auditorías)."""
++    actual = _rev_carpeta(os.path.basename(os.path.normpath(entrega))) if entrega else None
++    real_act = os.path.realpath(entrega) if entrega else None
++    rel = os.path.relpath(p, w).split(os.sep)
++    cur = w
++    for comp in rel[:-1]:
++        cur = os.path.join(cur, comp)
++        r = _rev_carpeta(comp)
++        if r and actual and r != actual:                 # sin entrega actual conocida no se descarta por nombre
++            return True
++        if os.path.islink(cur):
++            dest = os.path.realpath(cur)
++            rd = _rev_carpeta(os.path.basename(dest))
++            if rd and real_act and dest != real_act and not real_act.startswith(dest + os.sep):
++                return True
++    return False
++
++
+ def _rglob_seguro(raiz, pat):
+     """BE-GK35 (post-mortem 11-nov): glob con '**' a prueba de ciclos de symlinks (takeoff_work -> work dir): glob.glob(recursive=True)
+     sigue los symlinks de directorio y no termina. Recorre con os.walk(followlinks) sin entrar dos veces al mismo directorio real."""
+@@ -184,6 +209,8 @@
+                     "**/*COBERTURA*.md", "**/PASO12*.md", "**/DOBLE_CIELO.csv", "**/AUDITORIA*.md", "**/INFORME*.md",
+                     "**/revision_independiente/**/*.md", "**/auditoria_U138*/**/*.md", "**/Auditoria/**/*.md"):   # verificación 12b: TODO .md de Auditoria/   # v81cf119: hallazgos de la auditoría (BE-CR40)     # BE-AUD06: DOBLE_CIELO.csv para CB_RCP_APILADOS
+             for p in _rglob_seguro(w, pat):                 # BE-GK35
++                if texto_de_otra_rev(w, p, getattr(c, "entrega", None)):    # v126 (GK / CR): entregas previas no se auditan
++                    continue
+                 try:
+                     textos[os.path.relpath(p, w)] = open(p, encoding="utf-8", errors="ignore").read()
+                 except OSError:
+diff -ruN v125/take-off-metal-frame-drywall/tools/compuerta_entrega.py v126/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v125/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:18:57.650946045 +0000
++++ v126/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:18:57.658441946 +0000
+@@ -3789,6 +3789,30 @@
+         t = t2
+ 
+ 
++def corridas_con_agente(w):
++    """v126: [(tool, ts)] de las corridas de `bitacora.py run` de las etapas 2-7 CON agente (mismo filtro que subagentes_bitacora)."""
++    out = []
++    for r in _renglones_bitacora(w):
++        tool = os.path.basename(str(r.get("tool") or ""))
++        if tool == "SUBAGENTE" or tool in TOOLS_REVISION or tool in TOOLS_ETAPA_0_1 or "log" not in r:
++            continue
++        if norm_agente(r.get("agente")):
++            out.append((tool, str(r.get("ts") or "")))
++    return out
++
++
++def sin_agente_reemplazadas(sin, con):
++    """v126 (COORDINACIÓN 12-nov 23:13, GK): una corrida sin agente ('<tool> <ts>') queda REEMPLAZADA si la misma tool se volvió a correr
++    CON agente más tarde (la cadena se interrumpió y se corrió completa con SUBAGENTE_ID). -> (reemplazadas, no_reemplazadas)."""
++    rep, no = [], []
++    for x in sin or []:
++        tool, _, ts = str(x).partition(" ")
++        ts = ts.strip()
++        ok = bool(ts) and any(t == tool and t2 > ts for t, t2 in con)
++        (rep if ok else no).append(x)
++    return rep, no
++
++
+ def corridas_sin_agente_por_fecha(sin):
+     """v122 (COORDINACIÓN 12-nov, CR): corridas sin agente ('<tool> <ts>') -> (viejas: ts ANTES de FECHA_V119, nuevas: desde FECHA_V119 o
+     sin fecha). ts de bitacora.py sin zona = UTC (contenedor). Viejas = AMBER con causa; nuevas = FAIL."""
+@@ -6677,23 +6701,28 @@
+             if not (0.5 < abs(cross - c_mid) <= tol and a1 >= lo - e_h and a0 <= hi + e_h) or (wid, hid) in vistos:
+                 continue
+             vistos.add((wid, hid))
+-            ids = {norm_txt(hid), wid}
+-            ligadas = [x for x in excl if ids & {norm_txt(t) for t in re.findall(r"[\w./-]+", norm_txt(" ".join(
+-                str(x.get(k) or "") for k in ("id", "reason", "gap_proof"))))}]
++            ligadas = [x for x in excl if wid in {norm_txt(x.get("id")), norm_txt(x.get("wall"))}
++                       or (est == "EXCLUIDA" and norm_txt(x.get("id")) == norm_txt(hid))
++                       or wid in {norm_txt(t) for t in re.findall(r"[\w./-]+", norm_txt(str(x.get("reason") or "")))}]
++            # v126 (GK): SOLO por el id de CANON del muro (campos id / wall o el id de canon citado); un id de lector no enlaza
+             if est == "ROJO" and not ligadas:           # ROJO sin exclusión que lo cite: lo cuenta CE_COBERTURA (rojo sin disponer)
+                 continue
+-            gp = lambda x: ("gap: " + str(x.get("gap_proof"))) if str(x.get("gap_proof") or "").strip() else ""   # noqa: E731  v125: el
+-            textos = [dtx] + [str(x.get("reason") or "") + " " + gp(x) for x in ligadas]          # valor de gap_proof ES texto de gap
+-            pruebas = [dtx] + [gp(x) for x in ligadas]
+-            if any(es_mismo_muro(t, walls) for t in textos):          # v124 (a) MISMO MURO: gap medido = 0 + N/HOJA
+-                if any(gap_prueba_ok(t) for t in pruebas):
+-                    continue
+-                motivo = "is counted as the SAME wall without a gap_proof (N/SHEET + gap measured 0)"
+-            else:                                       # v124 (b) NO ES NUESTRO de otro material impreso: material + N/HOJA + gap > 0
+-                if any(otro_material_ok(t) for t in textos) or any(gap_prueba_ok(t) for t in pruebas):   # gap 0 medido también prueba
++            gp = lambda x: ("gap: " + str(x.get("gap_proof"))) if str(x.get("gap_proof") or "").strip() else ""   # noqa: E731  v125
++
++            def vale(texto, prueba):                    # v124 (a) MISMO MURO = gap 0 + N/HOJA; (b) otro material = material + N/HOJA + gap > 0
++                if es_mismo_muro(texto, walls):
++                    return gap_prueba_ok(prueba)
++                return otro_material_ok(texto) or gap_prueba_ok(prueba)
++            if dtx.strip():                             # v126: la disposición se juzga SOLA (no se cruza con la exclusión de otra pieza)
++                if vale(dtx, dtx) or (es_mismo_muro(dtx, walls) and any(es_mismo_muro(str(x.get("reason") or ""), walls)
++                                                                       and gap_prueba_ok(gp(x)) for x in ligadas)):
+                     continue
+-                motivo = ("is disposed / excluded without proof: same wall = gap_proof with gap measured 0 + N/SHEET; another printed "
+-                          "material (CMU / masonry / concrete / existing / by others) = material + N/SHEET + gap measured > 0")
++            elif any(vale(str(x.get("reason") or "") + " " + gp(x), gp(x)) for x in ligadas):
++                continue
++            mm = es_mismo_muro(dtx, walls) if dtx.strip() else any(es_mismo_muro(str(x.get("reason") or ""), walls) for x in ligadas)
++            motivo = ("is counted as the SAME wall without a gap_proof (N/SHEET + gap measured 0)" if mm else
++                      "is disposed / excluded without proof: same wall = gap_proof with gap measured 0 + N/SHEET; another printed "
++                      "material (CMU / masonry / concrete / existing / by others) = material + N/SHEET + gap measured > 0")
+             ev.append(f"{w.get('id')}: parallel leaf {hid} ({est}) at {abs(cross - c_mid) / e_h * 12:.1f} in. from its band on "
+                       f"{b.get('sheet')} {motivo} (BE-GK54)")
+     return ev
+@@ -6862,7 +6891,11 @@
+         ev.append("la bitácora no tiene corridas de canon.py con su agente (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py "
+                   "run): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
+     viejas, nuevas = corridas_sin_agente_por_fecha(sin_agente)
++    reemp, nuevas = sin_agente_reemplazadas(nuevas, corridas_con_agente(c.w))
+     amber = []
++    if disp and reemp:                                  # v126 (GK): cadena interrumpida y reemplazada = AMBER con causa
++        amber.append(f"causa: cadena interrumpida y reemplazada: {len(reemp)} corrida(s) sin agente ({', '.join(reemp[:4])}) se volvieron "
++                     "a correr completas CON agente más tarde (U-193)")
+     if disp and nuevas:
+         ev.append(f"{len(nuevas)} corrida(s) de las etapas 2-7 sin agente en la bitácora DESDE v81cf119 ({', '.join(nuevas[:4])}): cada "
+                   "subagente trabaja con SUBAGENTE_ID (U-193)")
+diff -ruN v125/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v126/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v125/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 23:18:57.647213907 +0000
++++ v126/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-12 23:18:57.655538117 +0000
+@@ -724,6 +724,22 @@
+     print("test_v121_excluded_y_brief OK")
+ 
+ 
++def test_v126_entregas_previas():
++    """v126 (COORDINACIÓN 12-nov 23:13, CR / GK, sintético): CB_FALTANTES no audita carpetas entrega_rev* de otra rev ni symlinks a
++    entregas previas."""
++    w = tempfile.mkdtemp(prefix="v126cb_")
++    for d in ("entrega_rev3a/Auditoria", "entrega_rev3b/Auditoria", "FINAL_FOR_REVIEW_rev2/Auditoria"):
++        os.makedirs(os.path.join(w, d))
++    os.symlink(os.path.join(w, "entrega_rev3a"), os.path.join(w, "anterior"))
++    act = os.path.join(w, "entrega_rev3b")
++    assert not CB.texto_de_otra_rev(w, os.path.join(act, "Auditoria", "x.md"), act)
++    assert CB.texto_de_otra_rev(w, os.path.join(w, "entrega_rev3a", "Auditoria", "x.md"), act)
++    assert CB.texto_de_otra_rev(w, os.path.join(w, "FINAL_FOR_REVIEW_rev2", "Auditoria", "x.md"), act)
++    assert CB.texto_de_otra_rev(w, os.path.join(w, "anterior", "Auditoria", "x.md"), act)          # symlink a una entrega previa
++    assert not CB.texto_de_otra_rev(w, os.path.join(w, "Auditoria", "x.md"), act)
++    print("test_v126_entregas_previas OK")
++
++
+ def test_v96_sin_falsos_positivos_cr():
+     """v81cf96 (canon cerrado de CR City Hotel corrido con los chequeos nuevos): (1) BE-GK37 no aplica a track de soffit (SOF-) ni a un
+     track cuya fuente cita el texto impreso ('"J" RUNNER CHANNEL') o una hoja que lo dice; (2) U-178 (5): 'sloped ceiling' en la
+@@ -929,6 +945,7 @@
+     test_v119_be_cr40_verificacion()
+     test_v121_be_cr40_cierre_explicito()
+     test_v121_excluded_y_brief()
++    test_v126_entregas_previas()
+     test_be_06_soffit_sides()
+     test_callouts_extra()
+     print("ok callouts")
+diff -ruN v125/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v126/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v125/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:18:57.647382284 +0000
++++ v126/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:18:57.655719793 +0000
+@@ -3143,3 +3143,30 @@
+ 
+ 
+ test_v125_gk54_face_centre()
++
++
++def test_v126_bloqueos_gk_cr():
++    """v126 (COORDINACIÓN 12-nov 23:13, bloqueos de entrega de GK y CR, sintético): (1) corridas sin agente REEMPLAZADAS (la misma tool
++    corrida después con agente) = AMBER 'cadena interrumpida y reemplazada'; sin reemplazo = FAIL; (2) GK54 enlaza exclusión y rojo SOLO
++    por el id de canon del muro; una disposición NO ES NUESTRO con prueba de material no se cruza con la exclusión de fusión de otra pieza."""
++    sin = ["disponer_tags.py 2026-11-12T21:24:01", "canon.py 2026-11-12T21:24:10", "test_ciego.py 2026-11-12T21:24:30"]
++    con = [("disponer_tags.py", "2026-11-12T21:40:00"), ("canon.py", "2026-11-12T21:41:00"), ("test_ciego.py", "2026-11-12T21:45:00")]
++    assert CE.sin_agente_reemplazadas(sin, con) == (sin, [])
++    rep, no = CE.sin_agente_reemplazadas(sin, con[:2])
++    assert rep == sin[:2] and no == sin[2:], (rep, no)                  # test_ciego sin reemplazo = FAIL
++    assert CE.sin_agente_reemplazadas(["canon.py 2026-11-12T21:50:00"], con) == ([], ["canon.py 2026-11-12T21:50:00"])   # agente ANTES
++    band = {"ori": "V", "c0": 1509.0, "c1": 1512.8, "lo": 1124.0, "hi": 1163.8, "sheet": "Z9.11"}
++    W, W2 = "X9-Z9-08", "X9-Z9-30"
++    walls = [{"id": W, "band": band}, {"id": W2, "band": dict(band, c0=1700.0, c1=1703.8)}]
++    disp = [{"hoja": "Z9.11", "tipo": "muro", "id": "M-29", "x": "1497.0", "y": "1145.0", "largo_ft": "4.0", "estado": "DISPUESTO",
++             "disposicion": 'NO ES NUESTRO: existing CMU, gap 13.5" (1/Z9.11)'}]
++    fusion = [{"id": "X9-Z9-31", "reason": f"same wall as {W2} (M-29 read by the reader)"}]      # fusión de OTRA pieza; cita el id de lector
++    assert not CE.be_gk54_fallas({"walls": walls, "excluded_walls": fusion}, disp), "la exclusión de otra pieza no se cruza"
++    rojo = [dict(disp[0], estado="ROJO", disposicion="")]
++    assert not CE.be_gk54_fallas({"walls": walls, "excluded_walls": fusion}, rojo), "el id de lector en el texto no enlaza"
++    assert CE.be_gk54_fallas({"walls": walls, "excluded_walls": [{"id": "X9-Z9-31", "reason": f"same wall as {W}"}]}, rojo)
++    assert CE.be_gk54_fallas({"walls": walls, "excluded_walls": [{"id": "X9-Z9-31", "wall": W, "reason": "leaf"}]}, rojo), "campo wall"
++    print("test_v126_bloqueos_gk_cr OK")
++
++
++test_v126_bloqueos_gk_cr()

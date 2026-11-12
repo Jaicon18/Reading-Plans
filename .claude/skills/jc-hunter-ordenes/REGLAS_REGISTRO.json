@@ -8155,7 +8155,7 @@
   {
    "id": "BE-CR40",
    "origen": "skills_archivo/tools_post_v81cf94_CR/LEEME.md (CR City Hotel rev20, 12-nov, commit 93915a3)",
-   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo",
+   "texto_corto": "un faltante se busca por tag en canon.rcp_tags (rows / none_reason), nunca por texto libre del JSON (la comilla escapada no casa); v81cf119: CB_FALTANTES_AUDITORIA verifica cada hallazgo 'falta' de la auditoría U-181 / U-138 con faltante_por_tag (CLI chequeos_biblioteca.py faltante); verificación 12b: todo .md de Auditoria/, el texto 'faltante_por_tag:' no es prueba (se llama la función), sin tag se resuelve por cuarto, sin forma de resolverlo = FAIL, el cierre del hallazgo cita la ref cargada; v120 (GK #8 / H-04): el cierre vale con CUALQUIER ref cargada del canon (EXT-, misc, SOF, CLG, BW, CW, walls…); una línea de hoja / dibujo faltante ('30/A520 (missing)') no es un cielo faltante; cuartos cubiertos en DOBLE_CIELO.csv se resuelven contra esa tabla ; v121 (verificación 5): solo 'CERRADO: <ref> (<N/HOJA>)' con la ref en el canon con cantidad > 0 cierra (una ref suelta no); 'N/HOJA (missing)' se salta solo sin palabra de cielo; DOBLE_CIELO.csv resuelve solo con refs upper / lower cargadas; un soffit cargado no es el cielo del cuarto; 'not included' / 'not in canon' son hallazgo ; v121 (GK H-04 / CR): 'CERRADO: EXCLUDED - <motivo impreso> (<N/HOJA>)' cierra; fila EXCLUDED + N/HOJA de DOBLE_CIELO.csv resuelve el cuarto (cualquier fila); cuarto por cuarto; BRIEF*.md / LEEME* y renglones de definición (sin cuarto, tag ni ref) no son hallazgo ; v126: no se leen entrega_rev* de otra rev ni symlinks a entregas previas",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8165,7 +8165,8 @@
     "take-off:tools/chequeos_biblioteca.py::cuartos_doble_cielo",
     "take-off:tools/chequeos_biblioteca.py::_cant_ref",
     "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
-    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto"
+    "take-off:tools/chequeos_biblioteca.py::es_hallazgo_concreto",
+    "take-off:tools/chequeos_biblioteca.py::texto_de_otra_rev"
    ],
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
@@ -8481,7 +8482,7 @@
   {
    "id": "U-193",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL",
+   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas; v120 verificación 4: ids con norm_txt (NBSP, tabs, ancho cero, espacios), tool por su nombre base ; v121: ids con norm_agente (solo alfanumérico, sin prefijo subagente / agent); la GUÍA documenta que la identidad es declarada (entregas desde FECHA_V121) ; v122 (CR): corridas sin agente fechadas antes de FECHA_V119 = AMBER con causa; después o sin fecha = FAIL ; v126 (GK): corrida sin agente reemplazada después por la misma tool con agente = AMBER 'cadena interrumpida y reemplazada'",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8498,7 +8499,9 @@
     "take-off:tools/bitacora.py::run",
     "take-off:tools/compuerta_entrega.py::norm_txt",
     "take-off:tools/compuerta_entrega.py::norm_agente",
-    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha"
+    "take-off:tools/compuerta_entrega.py::corridas_sin_agente_por_fecha",
+    "take-off:tools/compuerta_entrega.py::sin_agente_reemplazadas",
+    "take-off:tools/compuerta_entrega.py::corridas_con_agente"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -8627,7 +8630,7 @@
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap",
+   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas); G4: un rojo DISPUESTO cuya disposición dice 'same wall' (o sinónimo) sin la prueba del gap con N/HOJA, o sin texto, = FAIL; v120 verificación 4: sinónimos amplios (same wall/leaf, duplicate/dup of, part of, already counted in/with, counted with/in, included in, identical to, see <id>, mismo muro que), iguales en la exclusión y en DISPUESTO; gap_proof = N/HOJA válido + gap medido en 0 ; v121 ESTRUCTURAL: todo par de bandas paralelas a <= 14 in en el que una quede excluida o dispuesta (cualquier texto, también NO ES NUESTRO) exige gap_proof con N/HOJA + gap medido 0 (la medida más cercana a 'gap'); recorre excluded_walls y COBERTURA_DISPOSICION; no depende de sinónimos ; v124 (GK): (a) MISMO MURO = gap_proof N/HOJA + gap medido 0; (b) NO ES NUESTRO de otro material impreso (CMU / masonry / concrete / existing / by others) = material + N/HOJA + gap medido > 0, solo si el texto no dice 'same wall' ni equivalente ; v125: (b) gap medido > 0 face-to-face o centre-to-centre; el valor de gap_proof es texto de gap ; v126: enlace exclusión-rojo SOLO por id de canon del muro; la disposición se juzga sola",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
     "take-off:tools/compuerta_entrega.py::ce_cobertura",
@@ -8638,7 +8641,7 @@
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v125_gk54_face_centre"
+    "token": "test_v126_bloqueos_gk_cr"
    }
   },
   {
