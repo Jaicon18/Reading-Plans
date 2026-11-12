@@ -1,0 +1,11 @@
+--- /tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad/v98/take-off-metal-frame-drywall/tools/markups_rcp.py	2026-11-12 01:43:01.000000000 +0000
++++ /root/skill/take-off-metal-frame-drywall/tools/markups_rcp.py	2026-11-12 01:53:09.845760901 +0000
+@@ -483,6 +483,8 @@
+                    content=t + (f" [EDGE NOT DRAWN: {r['edge_not_drawn']}]" if r.get("edge_not_drawn") else ""))
+         a.update()
+         txt_imp = [tuple(fitz.Rect(b[:4]) * RM) for b in p.get_text("blocks") if str(b[4]).strip()]
++        # BE-CR36 (CR rev19, U-187): tampoco encima de otro FreeText ya puesto en la hoja (dos cuartos vecinos: 118B / 119 en A7.50)
++        txt_imp += [tuple(fitz.Rect(an.rect * RM) + (-2, -2, 2, 2)) for an in p.annots() or [] if an.type[1] == "FreeText"]
+         x0, y0, x1, y1 = caja_interior(poly, evitar=txt_imp)
+         fs, tt = _ajustar(t, x1 - x0, y1 - y0)
+         if fs is None:

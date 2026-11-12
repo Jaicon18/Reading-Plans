@@ -22,3 +22,8 @@ No es una versión publicada. INDICE.md y VERSION_EN_CURSO.md NO se tocaron.
 
 ## BE-CR35 — CR City Hotel rev19 (12-nov, usuario revisando ALTURAS_REVISADAS página 0.917)
 - Los 14 renglones de soffits / beam wraps (SOF-*, BW-L1-RETAIL; Depth = ancho desarrollado del board, no altura de wall) entraron a ALTURAS_IMPRESAS como "[take-off detail reading, not blind]": NO pasaron por la doble lectura ciega U-176 (1) (H-A / H-B solo leyeron walls), y la imagen de 0.917 solo circulaba una cota del RCP. Regla: TODO renglón con Depth en Bluebeam (walls, soffits, bandas, beam wraps) pasa por H-A / H-B; un renglón "not blind" = FAIL (candado en v98, COORDINACIÓN). La página de cada ancho desarrollado lleva TODAS las cotas de la operación circuladas (RCP + detalle) y el texto "developed width per LF ... Depth in Bluebeam = board strip, not a wall height".
+
+## BE-CR36 — CR City Hotel rev19 (12-nov, U-187 CE_TEXTOS_LEGIBLES sobre el PDF de markups) — carpeta BE-CR36/ (parches contra v81cf98)
+- A7.50: dos EXCLUDED de cuartos vecinos (118B DATA / 119 TOILET, mismo texto 'lay-in ACT ceiling (ACT-2)…') se encimaban 0.9 pt: markups_rcp.aplicar esquivaba el texto impreso pero no los FreeText ya puestos. Arreglo: caja_interior también evita los FreeText de la hoja (+2 pt).
+- LEGEND: celdas de type largas ('CH.6-2 - SHAFT WALL …') a 10 pt fijos encima de las columnas Walls / LF. Arreglo: markups_bluebeam.celda_legible (baja la letra hasta caber, mínimo 5.5 pt; si no, recorta con '...'; el type completo queda en el Subject).
+- Test: test_compuerta_entrega::test_be_cr36_textos_markups (celda larga cabe; dos cuartos vecinos sin FreeText encimados).
