@@ -23,3 +23,4 @@
 - 2026-11-05 (jue) ~9:17 AM PT: 88 % semanal (captura del usuario). Consumer Cellular completo (rev1–rev4 + auditoría) ≈ 3 % (85 → 88 %).
 
 - 2026-11-10 20:53 PST (captura usuario): semana 32% usado, reset viernes 2:00 AM; "On track. You should reach Friday’s reset with room to spare." Plan Ultra. Proyecto activo: Xfinity Interquest (inicio 20:02 PST). CR City Hotel rev18b cerrado (~31 h).
+- 2026-11-11 21:23 PST (captura usuario): semana 69 % usado (Ultra, reset vie 2:00 AM; 'On track… room to spare'). +37 % desde 10-nov 20:53 (32 %): CR rev19 cierre + rev20 completa, Grand Kia rev2 + rev3, Xfinity rev1 (RFI / regeneraciones), skill v81cf86→v81cf109 (24 versiones, post-mortem U-185) y COORDINACIÓN. Reparto ESTIMADO por horas activas: CR ≈ 13 %, Grand Kia ≈ 11 %, Xfinity ≈ 5 %, skill / post-mortem ≈ 6 %, COORDINACIÓN ≈ 2 %. Desde aquí: captura al inicio y al fin de cada proyecto para medirlo exacto.
