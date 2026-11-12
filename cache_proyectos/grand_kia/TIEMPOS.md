@@ -26,10 +26,10 @@ Horas reales escritas al empezar / terminar cada paso (work/tiempos.log, `TZ=Ame
 | R2.11 | Subida bloqueada (BE-CF27: skill sin U-180..U-184) -> skill v81cf94 + cadena 12:28-12:36 + armar: corrida 9 ROJA (3 FAIL: bitácora BE-GK38, U-184 protocolo, exclusiones) | 11-nov 12:27 PST | 11-nov 12:46 PST | 19 min | cadena_rev2i.log |
 | R2.12 | Correcciones BE-GK38 / U-184 / not rated + cadena 12:49-12:57 + armar: corrida 10 VERDE (13:05, 213/3/0) + re-verificación 6 (13:07: 0 abiertos) | 11-nov 12:46 PST | 11-nov 13:07 PST | 21 min | entrega_rev2/ENTREGA_OK.json, REVERIF6.md |
 | R2.13 | Subida tramo 1 (--auditoria-carpeta): cortada por el límite de 2 h de la tarea, ~1,350 de 2,502 archivos de Auditoria/ | 11-nov 13:07 PST | 11-nov 15:08 PST | 121 min | subida_rev2.log |
-| R2.14 | Subida tramo 2 (retoma R80f.42) - EN CURSO | 11-nov 15:08 PST | 11-nov 15:19 PST | 11 min | subida_rev2_t2.log |
+| R2.14 | Subida tramo 2 (retoma R80f.42): SUBIDA_OK 16:23 (2,530 archivos; Auditoria 2,502) + --vigente PASS + rev1 renombrada 'zz rev1 FINAL - REPLACED BY rev2 (NO USAR)' + conteo Drive = local, 0 duplicados | 11-nov 15:08 PST | 11-nov 16:25 PST | 77 min | entrega_rev2/SUBIDA_OK.json |
 | **TOTAL rev1** | Arranque -> entrega rev1 (incl. subida 07:20-07:32) | 10-nov 21:01 PST | 11-nov 07:32 PST | **631 min** | 10.52 h |
-| **TOTAL rev2** | 07:32 -> 15:19 (subida aún en curso) | 11-nov 07:32 PST | 11-nov 15:19 PST | **467 min** | |
-| **TOTAL rev1 + rev2** | | 10-nov 21:01 PST | 11-nov 15:19 PST | **1098 min** | 18.30 h; 0.443 h por 1,000 SF (41,287 SF, A000) |
+| **TOTAL rev2** | 07:32 -> 16:25 (cerrada) | 11-nov 07:32 PST | 11-nov 16:25 PST | **533 min** | 8.88 h |
+| **TOTAL rev1 + rev2** | | 10-nov 21:01 PST | 11-nov 16:25 PST | **1164 min** | 19.40 h; 0.470 h por 1,000 SF (41,287 SF, A000) |
 
 - corridas de compuerta rev2: 10 (1 cortada al llegar la auditoría, 1 colgada 43 min, 1 cortada por re-armado de la GUIA; 3 ROJAS; 4 VERDES). El TIEMPOS.md dentro de la entrega rev2 dice 9: no contó la corrida 1 cortada (08:48-09:29).
 - Presupuesto U-180 (<= 2 h por ronda de corrección): rev2 lo pasó; causas: cuelgue de 43 min (BE-GK35), 6 re-verificaciones de la auditoría con hallazgos reales, 2 cambios de versión del skill (v81cf92 -> v81cf94) y la subida de 2,502 archivos sueltos de Auditoria/ (~13 por minuto).
