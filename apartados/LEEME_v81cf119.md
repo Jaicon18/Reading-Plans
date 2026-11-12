@@ -242,3 +242,5 @@ Pruebas del candidato (Ampliación 4):
   - con el cache real = FALLA U-185 (12b + 12b_VERIFICACION abiertos, como se pidió) + PRUEBA ABIERTOS (falta la lista).
 - PRUEBA_ABIERTOS de Xfinity con el candidato final: 227/8/0 -> 228/9/0, 0 regresiones (apartados/PRUEBA_ABIERTOS_v81cf119.json, que es el
   archivo único al que GK y CR agregan su proyecto).
+
+COORDINACIÓN 20:47: lista PROYECTOS_ABIERTOS confirmada (xfinity_interquest, grand_kia, cr_city_hotel_castle_rock; va a skills_archivo/ al publicar) y salida hoja_ciega aceptada. Verificación independiente final lanzada; no se publica sin su aviso.
