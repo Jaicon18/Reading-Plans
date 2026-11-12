@@ -1,6 +1,8 @@
 # CR City Hotel - Castle Rock, CO — registro de tiempos (hora de California, PST)
 
-Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). rev14-rev18 corregidas el 11-nov (COORDINACIÓN, U-094): inicio = hora en que llegó la orden, fin = commit de entrega (las filas anteriores de rev15-rev17 estaban en UTC con etiqueta PST y se enciman). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.
+Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). rev14-rev18 corregidas el 11-nov (COORDINACIÓN, U-094): inicio = hora en que llegó la orden, fin = commit de entrega (las filas anteriores de rev15-rev17 tenían la hora del servidor (no California) con etiqueta PST y se enciman). Pausa 05-nov 12:18-18:50 por orden del usuario y espera 06-nov 00:21-02:12 (rev1 entregada, hasta la orden de rev2) fuera del total.
+
+rev19 — corridas de compuerta: 9 (finales sobre la misma revisión; causa: hallazgos de fondo de la auditoría independiente U-181, dos cambios de alcance F&B de COORDINACIÓN y las órdenes U-183 / U-184 que entraron durante el trabajo; todo arreglo por la cadena, ninguno a mano). Lecturas de alturas H-A / H-B (doble lectura ciega U-176) hechas dentro del paso de lecturas de rev19, antes de la resolución.
 
 | # | Paso | Inicio | Fin | Duración | Evidencia |
 |---|---|---|---|---|---|
@@ -33,4 +35,5 @@ Horas reales (tiempos.log, commits del repo, `TZ=America/Los_Angeles date`). rev
 | rev16 | rev16: revisión dirigida de rev15 (ELEC 2 HR base + DA-6, cove de madera, áreas sin número del RCP, Review Items, Table 509, shaft ceiling en L1, base CBU) | 11-10 15:45 PST | 11-10 16:57 PST | 72 min | ENTREGA_OK.json / SUBIDA_OK.json rev16 |
 | rev17 | rev17: revisión dirigida de rev16 (caras reales de ELEC 221/321/421, WS-1 L4 un criterio, textos FS-1 / RS-1, soffit FCU) | 11-10 17:10 PST | 11-10 18:06 PST | 56 min | ENTREGA_OK.json / SUBIDA_OK.json rev17 |
 | rev18 | rev18 FINAL: respuestas del usuario a los RFI (U-161 / U-162 / U-163): todo RFI cerrado, 128 sin cielo | 11-10 18:30 PST | 11-10 19:19 PST | 49 min | ENTREGA_OK.json / SUBIDA_OK.json rev18 |
-| **TOTAL** | **rev1-rev13 1469 min (24 h 29) + rev14-rev18 410 min (6 h 50)** | **11-05 11:16 PST** | **11-10 19:19 PST** | **1879 min (31 h 19)** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |
+| rev19 | rev19: auditoría COORDINACIÓN 11-nov (compuerta v81cf87 completa sobre la entrega vigente, U-175 / U-176 alturas: lecturas ciegas H-A / H-B, 3 lados, 6 controles, ALTURAS_REVISADAS + capa HEIGHTS; CE_RCP_CONTORNO >= 0.5 con hoja fuente; zona somera de 4/A5.05 medida; detalles 14/A8.02, 1/A9.06, 12/A9.05) | 11-11 06:44 PST | 11-11 12:13 PST | 329 min | ENTREGA_OK.json / SUBIDA_OK.json rev19 |
+| **TOTAL** | **rev1-rev13 1469 min (24 h 29) + rev14-rev19 739 min (12 h 19)** | **11-05 11:16 PST** | **11-11 12:13 PST** | **2208 min (36 h 48)** | meta U-041 2 h; referencia O'Reilly ~3 h, VS ~5.5 h, Chuze ~8-9 h, Consumer Cellular ~6 h |
