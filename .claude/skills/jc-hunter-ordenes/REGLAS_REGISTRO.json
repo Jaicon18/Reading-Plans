@@ -1,7 +1,7 @@
 {
- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf89 U-177 / BE-XF09 + v81cf92 U-178 / U-179",
+ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa)",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
- "conteo": 560,
+ "conteo": 544,
  "reglas": [
   {
    "id": "U-001",
@@ -5521,22 +5521,43 @@
    "id": "BE-CR06",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "markups Subject por type_id board-only",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/markups_bluebeam.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_markups_excel.py",
+    "token": "BE-CR06"
+   }
   },
   {
    "id": "BE-CR07",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "trazabilidad Type C / exterior / capas de ceiling",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py::aplicar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_traza_hojas.py",
+    "token": "BE-CR07"
+   }
   },
   {
    "id": "BE-CR08",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "ALC-20 cement board; existing walls por type con subtotal",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/plantilla_excel.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_markups_excel.py",
+    "token": "BE-CR08"
+   }
   },
   {
    "id": "BE-CR09",
@@ -5570,14 +5591,22 @@
    "id": "BE-CR11",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "revision_markups: Wall ID con lado ('CH-L2-01 A')",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/revision_markups.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_markups_excel.py",
+    "token": "BE-CR11"
+   }
   },
   {
    "id": "BE-CR12",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "height_source con la operación impresa explícita y altura = cota impresa exacta (proceso)",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "la lectura de la cota impresa de un wall board-only la hace el lector; el programa ya exige cita impresa y la triple comparación de alturas"
   },
   {
    "id": "BE-CR13",
@@ -5597,72 +5626,127 @@
    "id": "BE-CR14",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "lista_schedules lee hoja / pos / stud / wood de fichas; types no usados; C-H track = J-runner",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::lista_schedules"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr14_fichas"
+   }
   },
   {
    "id": "BE-CR15",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "corner bead por programa, nunca RFI de 'no contado'; page del canon base 1",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "decidir que un corner bead está dibujado en el detalle es lectura gráfica del plano; el barrido de texto impreso ya cubre el caso escrito"
   },
   {
    "id": "BE-CR16",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "cruzar leyenda RCP / tags con LEVEL / LOCATION / RATING de los schedules de assemblies antes de un RFI",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "el rating de un cielo por LOCATION del schedule se lee en el plano; el programa exige renglón o EXCLUDED por cuarto RCP"
   },
   {
    "id": "BE-CR17",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "dos carpetas de Drive: Projects = bid set, Claude outputs = entrega; listar ambas antes de concluir",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "listar Projects y Claude outputs en Drive antes de concluir que una carpeta está vacía es acción del agente fuera de la cadena"
   },
   {
    "id": "BE-CR18",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "cadena_detalles re-siembra la cola aunque la última hoja ya esté visitada",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr18_cr24_cadena"
+   }
   },
   {
    "id": "BE-CR19",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "Partition Takeoff board-only: LF físico una vez por wall y GRAND TOTAL al final",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/plantilla_excel.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_markups_excel.py",
+    "token": "BE-CR19"
+   }
   },
   {
    "id": "BE-CR20",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "assembly de piso LEVEL N = membrana en el cielo del nivel N-1 en toda la placa",
-   "categoria": "conducta"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cr20_membrana"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cr20_membrana"
+   }
   },
   {
    "id": "BE-CR21",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "antes de excluir por tenant / separate permit, ver si es parte de un assembly rated",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "si una cara pertenece al assembly rated se decide leyendo el UL del set; el programa ya rechaza la exclusión de una cara rated declarada"
   },
   {
    "id": "BE-CR22",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "paths sobre vanos de puerta (vanos_puertas), corner bead de window returns y soffits",
-   "categoria": "conducta"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cr22_vanos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cr22_vanos"
+   }
   },
   {
    "id": "BE-CR23",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "CE_DETALLES_CIRCULADOS: destino en una hoja que no está en el set no pide marca",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf55 (CR City Hotel); test dedicado pendiente: lo valida la corrida real (compuerta VERDE 155/16/0)"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_detalles_circulados"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr23_destino_fuera_del_set"
+   }
   },
   {
    "id": "BE-CR24",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel, 6-nov)",
    "texto_corto": "burbuja con cero a la izquierda ('08/A9.05') = '8/A9.05' en las citas",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo de código en v81cf56 (n.lstrip('0') en CE_CALLOUTS / CE_DETALLES_CIRCULADOS); lo valida la corrida real de CR City Hotel (08/A9.05 citado)"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_cr18_cr24_cadena"
+   }
   },
   {
    "id": "BE-CR25",
@@ -5683,13 +5767,22 @@
    "id": "BE-CR26",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, auditoría U-138 #2)",
    "texto_corto": "cada paso de la cadena lee la salida del anterior; candado de que el efecto de cada paso llega al canon final (vanos_puertas escribía un archivo que nadie leía)",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "un archivo intermedio que nadie lee es diseño de la cadena del proyecto; el programa ya prueba que lo entregado salió de la cadena"
   },
   {
    "id": "BE-CR27",
    "origen": "BIBLIOTECA_ERRORES.md (CR City Hotel rev2, auditoría U-138 #2)",
    "texto_corto": "cement board solo en las paredes sólidas de cada shower (caja medida en vectores, misma regla en todos los pisos); non-rated: cement board en lugar del board; shafts del mismo stack en todos los pisos",
-   "categoria": "conducta"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_cr27_stack"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_cr27_stack"
+   }
   },
   {
    "id": "BE-CR28",
@@ -6559,7 +6652,8 @@
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
-    "take-off:tools/chequeos_biblioteca.py::u_161"
+    "take-off:tools/chequeos_biblioteca.py::u_161",
+    "take-off:tools/chequeos_biblioteca.py::u_161_valor"
    ],
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
@@ -6730,8 +6824,17 @@
   {
    "id": "U-169",
    "origen": "REGLAS_USUARIO_CLAUDE.md / ORDENES_DEL_USUARIO.md (usuario 11-nov)",
-   "texto_corto": "cada proyecto arranca con la versión vigente; UNA SOLA ENTREGA con la revisión completa (U-168 A1-A5) antes; presupuesto de horas por tamaño",
-   "categoria": "conducta"
+   "texto_corto": "cada proyecto arranca con la versión vigente; UNA SOLA ENTREGA con la revisión completa (U-168 A1-A5) antes; presupuesto de horas por tamaño — v81cf96 P6: presupuesto por hojas A (180 / 360 / 720 min), > 60 % AMBER, > 100 % sin 'causa:' FAIL",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_tiempos",
+    "take-off:tools/compuerta_entrega.py::presupuesto_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_p6_presupuesto_horas"
+   }
   },
   {
    "id": "U-170",
@@ -6811,13 +6914,15 @@
    "id": "BE-XF01",
    "origen": "BIBLIOTECA_ERRORES.md (Xfinity Interquest rev1, 10-nov)",
    "texto_corto": "BuildingConnected 'Download All' en Chromium headless detrás del proxy: SignatureDoesNotMatch de S3; se intercepta la URL del archivo y se baja con curl (cache_proyectos/herramientas/bc_descargar.js)",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "la descarga del bid set ocurre antes de que corra el skill; el skill verifica el set limpio que recibe (CE_COPIA_LIMPIA)"
   },
   {
    "id": "BE-XF02",
    "origen": "BIBLIOTECA_ERRORES.md (Xfinity Interquest rev1, 10-nov)",
    "texto_corto": "brief de lectura con clip de get_pixmap en espacio sin rotar: en hojas rotation 270 PyMuPDF toma el clip en pt VISIBLES; todo recorte se reabre (U-118)",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "que el recorte salga rotado como la hoja se ve en la imagen; el programa ya exige la imagen circulada de cada wall"
   },
   {
    "id": "BE-XF03",
@@ -6878,6 +6983,38 @@
    }
   },
   {
+   "id": "U-171",
+   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov)",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "texto_corto": "no preguntarle al usuario lo que se sabe o se puede comprobar (estado, si quedó 100 %, si sigo / corrijo lo que es mi trabajo); solo se pregunta lo que solo el usuario decide, al final y con recomendación",
+   "motivo": "'no preguntar lo que ya sé' depende de lo que el agente ya resolvió en la conversación; lo impreso ya lo revisa el barrido"
+  },
+  {
+   "id": "U-172",
+   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov, REGLA DE ORO)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "REGLA DE ORO: las respuestas están en los planos al 100 %; búsqueda exhaustiva en TODO el set (N/HOJA + recorte); solo lo que no aparezca tras esa búsqueda = IBC con sección / tabla exacta, cargado, sin preguntar. Mismo programa que U-140 / U-155 / U-156",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u_155",
+    "take-off:tools/compuerta_entrega.py::respuestas_cerca",
+    "take-off:tools/compuerta_entrega.py::ce_rfi_busqueda"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "u_155"
+   }
+  },
+  {
+   "id": "U-173",
+   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov, Consumer Cellular)",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "texto_corto": "al reanudar un proyecto detenido: seguir exactamente donde se quedó (TIEMPOS / LEEME / último reporte) y ANTES revisar addenda / revisiones de todos los GC (solo lectura); con cambio de trade = revisión siguiente; sin cambio = nota 'addendum reviewed – no quantity impact' con las hojas revisadas",
+   "motivo": "al reanudar una sesión el agente lee ESTADO_PARA_RETOMAR y las addenda antes de cualquier programa; no hay archivo de la entrega que lo pruebe"
+  },
+  {
    "id": "BE-XF07",
    "origen": "BIBLIOTECA_ERRORES.md (Xfinity Interquest rev1, COORDINACIÓN 10-nov)",
    "texto_corto": "Muestras de la leyenda con Subject = type (W2 / CF) sin /Measure en página sin /VP inflaban los grupos de Bluebeam (W2 3, CF 7): Subject type o DEMO sin /Measure o en página sin /VP = FAIL en CE_VISTA_BLUEBEAM; la leyenda va con Subject LEGEND",
@@ -6899,7 +7036,8 @@
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
-    "take-off:tools/chequeos_biblioteca.py::u_174"
+    "take-off:tools/chequeos_biblioteca.py::u_174",
+    "take-off:tools/chequeos_biblioteca.py::u_174_valor"
    ],
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
@@ -7123,7 +7261,8 @@
    "id": "BE-GK15",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
    "texto_corto": "set_texto con capa OCR: las etiquetas de hoja se re-asignan por página con el sheetmap verificado (A51->A510, A350->A550); toda hoja S/M/P/E con texto en curvas lleva capa OCR antes del barrido de RFIs",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "re-asignar etiquetas de hoja necesita el sheetmap verificado a ojo de cada set; no hay fuente impresa contra la cual compararlo"
   },
   {
    "id": "BE-GK16",
@@ -7143,7 +7282,8 @@
    "id": "BE-GK17",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia, 11-nov)",
    "texto_corto": "door en el hueco entre dos bandas medidas: el wall sigue sobre el frame; la banda del wall cuyo tag comparte la door en la línea se extiende sobre el R.O. impreso; si toca otro type colineal sin nodo -> type_change_rfi",
-   "categoria": "conducta"
+   "categoria": "conducta",
+   "motivo": "una puerta entre dos bandas medidas se resuelve leyendo la planta; el programa ya prueba que cada markup cae sobre el wall dibujado"
   },
   {
    "id": "BE-GK18",
@@ -7300,45 +7440,20 @@
    }
   },
   {
-   "id": "U-171",
-   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov)",
-   "categoria": "conducta",
-   "cuando": "siempre",
-   "texto_corto": "no preguntarle al usuario lo que se sabe o se puede comprobar (estado, si quedó 100 %, si sigo / corrijo lo que es mi trabajo); solo se pregunta lo que solo el usuario decide, al final y con recomendación"
-  },
-  {
-   "id": "U-172",
-   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov, REGLA DE ORO)",
-   "categoria": "programa",
-   "cuando": "entrega",
-   "texto_corto": "REGLA DE ORO: las respuestas están en los planos al 100 %; búsqueda exhaustiva en TODO el set (N/HOJA + recorte); solo lo que no aparezca tras esa búsqueda = IBC con sección / tabla exacta, cargado, sin preguntar. Mismo programa que U-140 / U-155 / U-156",
-   "chequeos": [
-    "take-off:tools/chequeos_biblioteca.py::u_155",
-    "take-off:tools/compuerta_entrega.py::respuestas_cerca",
-    "take-off:tools/compuerta_entrega.py::ce_rfi_busqueda"
-   ],
-   "test": {
-    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
-    "token": "u_155"
-   }
-  },
-  {
-   "id": "U-173",
-   "origen": "REGLAS_USUARIO_CLAUDE.md (usuario 11-nov, Consumer Cellular)",
-   "categoria": "conducta",
-   "cuando": "siempre",
-   "texto_corto": "al reanudar un proyecto detenido: seguir exactamente donde se quedó (TIEMPOS / LEEME / último reporte) y ANTES revisar addenda / revisiones de todos los GC (solo lectura); con cambio de trade = revisión siguiente; sin cambio = nota 'addendum reviewed – no quantity impact' con las hojas revisadas"
-  },
-  {
    "id": "U-177",
    "origen": "ORDENES_DEL_USUARIO.md (11-nov, auditoría adversarial U-138)",
-   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso",
+   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO)",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::_skill_version",
     "take-off:tools/compuerta_entrega.py::rcp_contorno_fallas",
-    "take-off:tools/trazabilidad.py::_por_producto"
+    "take-off:tools/trazabilidad.py::_por_producto",
+    "take-off:tools/compuerta_entrega.py::ce_entrega_vigente",
+    "take-off:tools/compuerta_entrega.py::vigente_fallas",
+    "take-off:tools/subir_entrega.py::verificar_vigente",
+    "take-off:tools/compuerta_entrega.py::ce_ms_gauge",
+    "take-off:tools/compuerta_entrega.py::ce_ms_producto"
    ],
    "test": {
     "archivo": "take-off:tools/test_hoja_sufijo.py",
@@ -7403,21 +7518,6 @@
    }
   },
   {
-   "id": "U-179",
-   "origen": "ORDENES_DEL_USUARIO.md (11-nov, Grand Kia RFI-35)",
-   "texto_corto": "antes de proponer un RFI: errores corregidos, cada opción MEDIDA en la geometría impresa (delta con operación, N/HOJA, recorte; nada de '≈' / '+x %' sin operación) y compuerta en VERDE",
-   "categoria": "programa",
-   "cuando": "entrega",
-   "chequeos": [
-    "take-off:tools/compuerta_entrega.py::rfi_listo_fallas",
-    "take-off:tools/compuerta_entrega.py::ce_rfi_listo"
-   ],
-   "test": {
-    "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_u179_rfi_listo"
-   }
-  },
-  {
    "id": "U-178",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, Grand Kia RFI-01/05/07/34/35 + Xfinity RFI-06)",
    "texto_corto": "decisiones = regla sin RFI (limiting heights excedida = gauge SFIA conservador; wall sin tag = type del que conecta; C.H. distinta = la mayor; wall bajo el cielo = C.H. + 6\"; wall inclinado = largo real); 'Verificar a mano' = PENDING - user manual verification con el conservador cargado",
@@ -7425,7 +7525,8 @@
    "cuando": "entrega",
    "chequeos": [
     "take-off:tools/chequeos_biblioteca.py::u_178",
-    "take-off:tools/compuerta_entrega.py::rfi_listo_fallas"
+    "take-off:tools/compuerta_entrega.py::rfi_listo_fallas",
+    "take-off:tools/chequeos_biblioteca.py::u_178_largo"
    ],
    "test": {
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
@@ -7433,46 +7534,91 @@
    }
   },
   {
+   "id": "U-179",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov: 'Siempre que halla errores corrígelos antes de preguntar lo rfi')",
+   "texto_corto": "RFI presentable solo con la compuerta en VERDE (errores corregidos antes) y cada opción medida en la geometría impresa con su delta real (número + unidad; '≈' / '+x %' = FAIL) y recorte",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rfi_listo",
+    "take-off:tools/compuerta_entrega.py::rfi_listo_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u179_rfi_listo"
+   }
+  },
+  {
    "id": "BE-GK32",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, auditoría U-181, 11-nov)",
    "texto_corto": "cara exterior con 'glass mat sheathing' (keynote / detalle de fachada) = renglón exterior sheathing del espesor impreso, nunca el tile backer (Dens Shield solo donde A550 kn 3 dice tile); la cita del keynote se lee en la hoja (kn 19, no kn 22)",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo en el proyecto (build_canon: cara 'glass mat sheathing under EIFS' -> '1/2 exterior gyp sheathing' con board_source A301 kn 19 + 17/A521); chequeo en compuerta (cara exterior con board tile backer = FAIL) queda para la próxima versión del skill"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_gk32_sheathing_exterior"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_gk32_sheathing_exterior"
+   }
   },
   {
    "id": "BE-GK33",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, auditoría U-181, 11-nov)",
    "texto_corto": "al cerrar un RFI con decisión del usuario: 'loaded' y 'opciones' se reescriben para la opción aplicada con su delta medido (ni el texto previo ni '+x %'); height_source sin 'RFI-xx (open)' de RFI cerrados, sin placeholders '[...]', sin texto cortado y con la cita del tag del propio cuarto",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo en el proyecto (rfis_final.json RFI-01/34/35; build_canon _TXT); chequeo en compuerta (RFI closed con 'loaded'/'opciones' sin la letra aplicada, '(open)' de RFI cerrado, '[' placeholder, fuente que termina en cifra suelta) queda para la próxima versión del skill"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_gk33_textos_viejos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_gk33_textos_viejos"
+   }
   },
   {
    "id": "BE-GK34",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, 11-nov)",
    "texto_corto": "renglón '1/2\" EXTERIOR gyp sheathing': el Breakdown [DERIVED] incluye las caras de walls con ese board (antes solo listaba las filas misc y la nota no cuadraba con el NET); cita la hoja de cada wall",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo en tools/trazabilidad.py (skills_archivo/tools_post_v81cf92/trazabilidad.py + diff); test y chequeo de compuerta (Breakdown suma = NET en todo renglón de board) para la próxima versión del skill"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/trazabilidad.py::aplicar"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_traza_hojas.py",
+    "token": "BE-GK34"
+   }
   },
   {
    "id": "BE-GK35",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, 11-nov)",
-   "texto_corto": "búsqueda recursiva ('**' / os.walk followlinks) a prueba de ciclos: dos carpetas de entrega con symlink takeoff_work -> work dir hacían que glob('**') creciera exponencialmente (compuerta 'detalles' colgada 43 min; rev1 tardaba 2 min). Recorrido por realpath visto una sola vez; los symlinks de una entrega cerrada se ocultan ('.takeoff_work_revN')",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo en tools/compuerta_entrega.py (_walk_seguro/_rglob; tools_post_v81cf92 + diff); falta llevarlo a reglas.py / chequeos_biblioteca.py / corpus.py y test con dos symlinks en ciclo en la próxima versión"
+   "texto_corto": "búsqueda recursiva ('**' / os.walk followlinks) a prueba de ciclos: dos carpetas de entrega con symlink takeoff_work -> work dir hacían que glob('**') creciera exponencialmente (compuerta 'detalles' colgada 43 min; rev1 tardaba 2 min). Recorrido por realpath visto una sola vez; los symlinks de una entrega cerrada se ocultan ('.takeoff_work_revN') — v81cf96: _rglob_seguro en chequeos_biblioteca.B.desde_ctx y reglas.py + watchdog por chequeo (correr_con_tope) + 'segundos' por chequeo en ENTREGA_OK",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::correr_con_tope",
+    "take-off:tools/chequeos_biblioteca.py::_rglob_seguro",
+    "take-off:tools/reglas.py::_rglob_seguro"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_gk35_watchdog_y_ciclos"
+   }
   },
   {
    "id": "BE-GK36",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, 11-nov)",
    "texto_corto": "CE_MS_GAUGE rev2: (a) RX_GAUGE / DESIG aceptan tamaño de 4 dígitos (1000S162-43); (b) el renglón 'track - other (openings between walls)' se desglosa con los misc items que lo explican y se parte por designación (EXT-01..03 = 2 líneas: 1000T125-43 + 600T125-43); (c) blocking at edge = un renglón por designación del stud de cada wall; (d) additional head track toma el wall del vano desde su operación; (e) una altura equivalente (cara inclinada) va como 'área / largo' sin operandos medidos en la cita (derivación en height_source_info)",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglos en canon.py / trazabilidad.py / plantilla_excel.py / compuerta_entrega.py (tools_post_v81cf92 + diffs); tests para la próxima versión"
-  },
-  {
-   "id": "BE-GK37",
-   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, re-verificaciones U-181 3 y 4, 11-nov)",
-   "texto_corto": "wall de doble fila de studs (10\" + 6\" outer): cada fila lleva SOLO los tracks / conexiones que su detalle dibuja (S403 241/242: la fila exterior lleva CFS track arriba (kn 8) y abajo clip L2x2x18 GA a cada stud y joist (kn 18), sin bottom track); toda conexión impresa que se cita como motivo se cuantifica en su propio renglón",
-   "categoria": "conducta",
-   "cuando": "siempre"
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ms_gauge_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk36_gauge_1000s"
+   }
   },
   {
    "id": "U-184",
@@ -7495,19 +7641,34 @@
    "id": "U-180",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
    "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"No te puedes tardar tanto en un proyecto. Llevas más de 12 horas trabajando en ese. Necesito que termine las cosas más rápido y con más accuracy.\"; origen: CR City Hotel >31 h + correcciones",
-   "categoria": "conducta",
-   "cuando": "siempre",
-   "chequeos": [],
-   "test": null
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::correr_con_tope",
+    "take-off:tools/compuerta_entrega.py::registro_corridas",
+    "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_p3_registro_corridas"
+   },
+   "motivo": "v81cf96: la parte programable (watchdog por chequeo, tope de corridas / rojas por rev, presupuesto de horas P6) va por programa; el reporte cada 30 min es conducta de COORDINACIÓN"
   },
   {
    "id": "U-181",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov)",
    "texto_corto": "REGLA INVIOLABLE (usuario 11-nov, texto literal: \"Y con los otros dos proyectos como base, me dijiste que ya estaban terminados también.\"; origen: COORDINACIÓN reportó Xfinity y Grand Kia \"terminados\" con solo verificación de FORMA (Length×",
-   "categoria": "conducta",
-   "cuando": "siempre",
-   "chequeos": [],
-   "test": null
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_protocolo_3h",
+    "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u184_protocolo_3h"
+   },
+   "motivo": "v81cf96 P4: la auditoría U-181 cita el sha256 del Excel / PDF vigente y cierra con 'abiertos: 0'"
   },
   {
    "id": "U-182",
@@ -7516,7 +7677,8 @@
    "categoria": "conducta",
    "cuando": "siempre",
    "chequeos": [],
-   "test": null
+   "test": null,
+   "motivo": "el CSV de Bluebeam lo exporta el usuario en su Bluebeam al final; el skill no tiene ese archivo hasta que lo recibe"
   },
   {
    "id": "U-183",
@@ -7525,14 +7687,36 @@
    "categoria": "conducta",
    "cuando": "siempre",
    "chequeos": [],
-   "test": null
+   "test": null,
+   "motivo": "de qué proyecto se le informa al usuario es una decisión de conversación de COORDINACIÓN"
+  },
+  {
+   "id": "BE-GK37",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2, re-verificaciones U-181 3 y 4, 11-nov)",
+   "texto_corto": "wall de doble fila de studs (10\" + 6\" outer): cada fila lleva SOLO los tracks / conexiones que su detalle dibuja (S403 241/242: la fila exterior lleva CFS track arriba (kn 8) y abajo clip L2x2x18 GA a cada stud y joist (kn 18), sin bottom track); toda conexión impresa que se cita como motivo se cuantifica en su propio renglón",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_gk37_fila_detalle"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_gk37_fila_detalle"
+   }
   },
   {
    "id": "BE-GK38",
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev2 con v81cf94, 11-nov)",
    "texto_corto": "toda tool que anota en la bitácora usa bitacora.anotar (renglón con 'prev', lock): comparar_alturas.capa_colores (v81cf94, U-184 (3)) escribía sin 'prev' y rompía la cadena -> CE_REGLAS FAIL en todo proyecto",
-   "categoria": "programa-pendiente",
-   "motivo": "arreglo en tools/comparar_alturas.py (tools_post_v81cf94 + diff); test (anotar dos veces por comparar_alturas y cadena_ok == 0) en la próxima versión"
+   "categoria": "programa",
+   "cuando": "siempre",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_hoja_sufijo.py",
+    "token": "test_be_gk38_bitacora_prev"
+   }
   },
   {
    "id": "BE-XF10",
@@ -7601,6 +7785,106 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_be_cr34_gauge_impreso"
    }
+  },
+  {
+   "id": "BE-AUD01",
+   "origen": "POSTMORTEM_COBERTURA_2026-11-11.md / U-177 (CR rev18b)",
+   "texto_corto": "ENTREGA_OK vale solo para los archivos que validó (nombre + sha256) y la versión del skill; subir --vigente",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_entrega_vigente"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u177_auditoria"
+   }
+  },
+  {
+   "id": "BE-AUD02",
+   "origen": "POSTMORTEM_COBERTURA_2026-11-11.md / U-177",
+   "texto_corto": "polígono RCP con coincidencia < 0.5 = FAIL; 0 polígonos o 0 cuartos con cielos en el canon / hojas RCP = FAIL (P5, no AMBER)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_rcp_contorno",
+    "take-off:tools/compuerta_entrega.py::ce_rcp_cuartos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_p5_rcp_no_pasa_en_vacio"
+   }
+  },
+  {
+   "id": "BE-AUD03",
+   "origen": "POSTMORTEM_COBERTURA_2026-11-11.md / U-177 (Xfinity renglón 10)",
+   "texto_corto": "todo stud / track / header del Material Summary con tamaño + gauge (designación)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_ms_gauge"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u177_auditoria"
+   }
+  },
+  {
+   "id": "BE-AUD04",
+   "origen": "POSTMORTEM_COBERTURA_2026-11-11.md / U-177 (Xfinity renglón 15)",
+   "texto_corto": "nombre del producto del Material Summary = el impreso en el set",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_ms_producto"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u177_auditoria"
+   }
+  },
+  {
+   "id": "U-185",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, vía COORDINACIÓN)",
+   "texto_corto": "post-mortem de cobertura al cerrar cada proyecto: verificar_version FALLA si el último proyecto cerrado no tiene POSTMORTEM_COBERTURA_<fecha>.md con 0 WEAK / 0 MISSING abiertos (conducta solo con su motivo)",
+   "categoria": "programa",
+   "cuando": "version",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_postmortem"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "postmortem_u185"
+   }
+  },
+  {
+   "id": "BE-PM01",
+   "origen": "BIBLIOTECA_ERRORES.md (post-mortem 11-nov, v81cf96)",
+   "texto_corto": "compuerta: inicio + fin de cada corrida registrados (cortadas cuentan), watchdog por chequeo, sin pasar en vacío",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::registro_corridas",
+    "take-off:tools/compuerta_entrega.py::correr_con_tope"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_p3_registro_corridas"
+   }
+  },
+  {
+   "id": "BE-GK33b",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::be_gk33_textos_viejos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "be_gk33_textos_viejos"
+   },
+   "origen": "BIBLIOTECA_ERRORES.md / POSTMORTEM_COBERTURA_2026-11-11.md (Grand Kia rev2)",
+   "texto_corto": "un arreglo por ID deja textos viejos en walls hermanos: barrido global de textos viejos en todo el canon"
   }
  ]
 }
