@@ -28,3 +28,10 @@ No es una versión publicada. INDICE.md y VERSION_EN_CURSO.md NO se tocaron.
 - LEGEND: celdas de type largas ('CH.6-2 - SHAFT WALL …') a 10 pt fijos encima de las columnas Walls / LF. Arreglo: markups_bluebeam.celda_legible (baja la letra hasta caber, mínimo 5.5 pt; si no, recorta con '...'; el type completo queda en el Subject).
 - Test: test_compuerta_entrega::test_be_cr36_textos_markups (celda larga cabe; dos cuartos vecinos sin FreeText encimados).
 - BE-CR36b (12-nov, corrida rev20): celda_legible NO recorta ('...'): markups_bluebeam.verificar exige el type completo en la leyenda ('FALLA leyenda: falta el type CH.6-2 - …'); baja la letra hasta 3.5 pt. Parches contra v81cf100 en BE-CR36/*.v100.patch.
+
+## BE-CR38 — CR City Hotel rev20 (12-nov, error mío en la corrida) — carpeta BE-CR38/ (para la próxima unión de Xfinity)
+- Al reemplazar el bloque "not blind" de soffits en el script de proyecto alturas_entrega.py se borró también el bloque de rev19 que agrega los 12 renglones partidos de los DW.4 (cara de baño W.R., A0.06 GN 11). La pre-revisión BE-CR35 (cobertura_ab) lo detectó: 6 FAIL 'TO-DW.4-L3-03/04/08 C/D falta en ALTURAS_IMPRESAS_A/_B'.
+- Arreglo: bloque restaurado; los renglones partidos copian la lectura ciega de su padre ' A' en A, en B y en la final (misma cara física).
+- Regla (todos los proyectos): antes de reemplazar un bloque de un script de entrega, diff contra la copia en cache_proyectos y dar cuenta de cada línea quitada.
+- Test: BE-CR38/test_be_cr38.py (2 casos: bloque borrado -> cobertura_ab FAIL; partidos en A / B / final -> 0 fallas). 2/2 OK contra v81cf102.
+- También en rev20 (U-181): las dos lecturas ciegas H-A / H-B del smoke curtain 12/A9.03 omitieron la 5a cara (lado shaft, 23.73"); la auditoría independiente la encontró. Lección para BE-GK40 / pregunta ciega: pedir "TODAS las caras con board, incluida la del lado del muro / shaft", y comparar contra la revisión anterior cuando el ancho BAJA.
