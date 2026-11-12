@@ -25,3 +25,6 @@
 - 2026-11-10 20:53 PST (captura usuario): semana 32% usado, reset viernes 2:00 AM; "On track. You should reach Friday’s reset with room to spare." Plan Ultra. Proyecto activo: Xfinity Interquest (inicio 20:02 PST). CR City Hotel rev18b cerrado (~31 h).
 - 2026-11-11 21:23 PST (captura usuario): semana 69 % usado (Ultra, reset vie 2:00 AM; 'On track… room to spare'). +37 % desde 10-nov 20:53 (32 %): CR rev19 cierre + rev20 completa, Grand Kia rev2 + rev3, Xfinity rev1 (RFI / regeneraciones), skill v81cf86→v81cf109 (24 versiones, post-mortem U-185) y COORDINACIÓN. Reparto ESTIMADO por horas activas: CR ≈ 13 %, Grand Kia ≈ 11 %, Xfinity ≈ 5 %, skill / post-mortem ≈ 6 %, COORDINACIÓN ≈ 2 %. Desde aquí: captura al inicio y al fin de cada proyecto para medirlo exacto.
 - 2026-11-11 (usuario): plan Ultra = 200 USD / mes → ≈ 46.2 USD / semana → 1 % semanal ≈ 0.46 USD. Precio por proyecto a pedido del usuario: CR ≈ 6.0, Grand Kia ≈ 5.1, Xfinity ≈ 2.3, Consumer Cellular ≈ 1.4, HFT ≈ 1.4–1.8 USD.
+
+## 12-nov-2026 ~9:44 AM PT (captura del usuario)
+- Semana: 74 % usado (resetea viernes 2:00 AM). "On track". Antes: 69 % el 11-nov 21:23 PST → +5 % en ~12 h (CR rev20a + GK rev3a + skill v113–v118 + auditoría U-138).
