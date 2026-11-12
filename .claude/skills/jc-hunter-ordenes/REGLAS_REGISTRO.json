@@ -1,7 +1,7 @@
 {
  "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41",
  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
- "conteo": 544,
+ "conteo": 548,
  "reglas": [
   {
    "id": "U-001",
@@ -8236,6 +8236,34 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_v109_u191"
    }
+  },
+  {
+   "id": "BE-GK42",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3, compuerta v81cf108 ROJA 13 FAIL, 12-nov)",
+   "categoria": "conducta",
+   "texto_corto": "cuando llega una versión nueva del skill a mitad de una rev, ANTES de la compuerta final se corren con --solo los chequeos que esa versión y las anteriores no corridas agregaron (correr(solo=...)): la rev3 llegó a la compuerta final con 13 FAIL de chequeos de v81cf95..v81cf108 que nunca se habían corrido sobre el proyecto",
+   "motivo": "la compuerta final no es la primera vez que se ven los chequeos nuevos (U-184 P3: compuertas tempranas por paso)"
+  },
+  {
+   "id": "BE-GK43",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3, CE_ALTURAS_EXTREMO control 1 y 7, 12-nov)",
+   "categoria": "conducta",
+   "texto_corto": "toda lectura ciega que se agrega a ALTURAS_IMPRESAS_A / _B lleva en el MISMO script su renglón de ALTURAS_AB_RESOLUCION (resolución + recorte) cuando A != B, y todo ancho desarrollado SOF / BW lleva side + faces (una cara por entrada, con su lado o su x); se prueba con comparar_alturas.comparar_ab / lados_fallas antes de armar",
+   "motivo": "BE-CR35 agregó 14 lecturas A / B sin su resolución y 16 SOF sin side / faces (BE-CR37)"
+  },
+  {
+   "id": "BE-GK44",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3, CB_U_116 / CE_RFI_FORMATO, 12-nov)",
+   "categoria": "conducta",
+   "texto_corto": "un Review Item que dice 'not printed' se resuelve primero con el plano (A530 'STUD FURRING AS OCCURS - SEE FLOOR PLAN' -> type del wall de la planta, U-083) y solo si nada lo resuelve se abre su RFI con el conservador cargado y el delta de cada alternativa (U-048); nunca 'not printed -> conservative' sin RFI ni decisión citada",
+   "motivo": "RI-44 (stud del furring EXT-08) lo resolvía la planta (type G 3-5/8\"); RI-45 (SOF-18 'MATCH EXISTING') = RFI-36"
+  },
+  {
+   "id": "BE-GK45",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3, CB_BE_12 / CE_CALLOUTS / CB_RCP_TAGS, 12-nov)",
+   "categoria": "conducta",
+   "texto_corto": "al reescribir el texto de un renglón se conservan (1) las citas N/HOJA en su forma de burbuja (D/A301, no 'A301 D-D': CE_CALLOUTS solo ve la burbuja) y (2) las citas textuales con el texto como lo trae el OCR (fragmentos con '…' si el OCR parte la nota); y el canon trae rcp_tags contados con chequeos_biblioteca.tags_cielo, uno por instancia impresa, con su renglón o none_reason N/HOJA",
+   "motivo": "rev3 cambió la fuente de SOF-15 y perdió la única cita D/A301 (10 burbujas sin disposición); RI-22 citaba la nota de A132 unida"
   }
  ]
 }
