@@ -1,0 +1,523 @@
+diff -ruN v113/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v114/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v113/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 07:20:47.386150300 +0000
++++ v114/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 14:54:33.995476837 +0000
+@@ -1,7 +1,7 @@
+ {
+- "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos",
++ "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos",
+  "regla": "BE-121: toda regla 'programa' lleva chequeo + test; verificar_version.py falla si falta alguno. Rutas: 'take-off:' = dentro del skill de take-off; 'ordenes:' = .claude/skills/jc-hunter-ordenes/. cuando: entrega = compuerta_entrega.py / version = verificar_version.py / corrida = la tool lo hace cumplir al correr. + v81cf82 BE-XF01..BE-XF06 (Xfinity Interquest)",
+- "conteo": 555,
++ "conteo": 561,
+  "reglas": [
+   {
+    "id": "U-001",
+@@ -8351,6 +8351,90 @@
+    "categoria": "conducta",
+    "texto_corto": "después de una ronda de correcciones de texto, ANTES de la compuerta final se corre --solo con TODOS los chequeos (no solo los que fallaron): cada corrección puede romper otro chequeo. En rev3: hora en UTC en TIEMPOS (U-045), cita '46/A550' que la hoja no tiene (BE-15; el type es G/A550), RFI con la palabra de un precedente sin citarlo ni decir por qué no aplica (U-026) y un detalle nuevo citado (D/A301) sin su revisión cara por cara en detail_faces (U-189 (2))",
+    "motivo": "las 4 FAIL de la compuerta 2 salieron de correcciones hechas para la corrida 1 y nunca pasaron por --solo"
++  },
++  {
++   "id": "BE-AUD05",
++   "origen": "BIBLIOTECA_ERRORES.md (auditoría U-138 del 12-nov, orden COORDINACIÓN)",
++   "texto_corto": "CB_U_191 dejaba pasar 'L546' / 'UL Lxxx' sin 'Item N' (CR rev20, renglón de RC): un listing UL (con o sin 'UL' delante) exige 'Item N' y, en renglones de RC / furring / channel, el espaciamiento 'N in. o.c.'; también revisa la fuente del Material Summary",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/chequeos_biblioteca.py::falta_cita_u191",
++    "take-off:tools/chequeos_biblioteca.py::u_191_ref"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v114_auditoria_u138"
++   }
++  },
++  {
++   "id": "BE-AUD06",
++   "origen": "BIBLIOTECA_ERRORES.md (auditoría U-138 del 12-nov, orden COORDINACIÓN)",
++   "texto_corto": "CB_RCP_APILADOS pasaba con '0 cuartos' teniendo rcp_tags y DOBLE_CIELO.csv con filas (GK rev3): tags o DOBLE_CIELO con filas y 0 cuartos evaluados = FAIL (U-137)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/chequeos_biblioteca.py::rcp_apilados",
++    "take-off:tools/chequeos_biblioteca.py::filas_doble_cielo"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v114_auditoria_u138"
++   }
++  },
++  {
++   "id": "BE-AUD07",
++   "origen": "BIBLIOTECA_ERRORES.md (auditoría U-138 del 12-nov, orden COORDINACIÓN)",
++   "texto_corto": "CE_RCP_COMPLETO decía 'N/A sin cielos' con SOF-01 en el Excel y un contorno RCP en los markups (Xfinity rev1b): esperados vacío + cielo / soffit en el Excel o contornos RCP = FAIL (AMBER en entregas anteriores)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_rcp_completo",
++    "take-off:tools/compuerta_entrega.py::cielos_en_excel",
++    "take-off:tools/compuerta_entrega.py::contar_contornos_rcp"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v114_auditoria_u138"
++   }
++  },
++  {
++   "id": "BE-AUD08",
++   "origen": "BIBLIOTECA_ERRORES.md (auditoría U-138 del 12-nov, orden COORDINACIÓN)",
++   "texto_corto": "RESUMEN_rev20 decía RC con otra cifra que el Material Summary (CR rev20): CE_RESUMEN_EXCEL — toda cifra de material de la rev actual en las tablas de RESUMEN_revN.md / BITACORA_revN.md = Material Summary del Excel (+-0.01)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_resumen_excel",
++    "take-off:tools/compuerta_entrega.py::resumen_excel_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v114_auditoria_u138"
++   }
++  },
++  {
++   "id": "BE-AUD09",
++   "origen": "BIBLIOTECA_ERRORES.md (auditoría U-138 del 12-nov, orden COORDINACIÓN)",
++   "texto_corto": "ENTREGA_OK.json decía v101 con la compuerta de v113 (GK rev3): _skill_version lee la línea '**VERSION: v81cfNNN**' de SKILL.md (no el primer párrafo); CE_VERSION_ENTREGA: la línea VERSION no es más vieja que lo que cita SKILL.md y LEEME / README / TIEMPOS declaran la misma versión",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::_skill_version",
++    "take-off:tools/compuerta_entrega.py::version_fallas",
++    "take-off:tools/compuerta_entrega.py::ce_version_entrega"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v114_auditoria_u138"
++   }
++  },
++  {
++   "id": "BE-GK49",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3, CE_PROPOSAL con v81cf113, 12-nov)",
++   "categoria": "conducta",
++   "texto_corto": "la carpeta de entrega de la rev N lleva SOLO la Proposal de la rev N (Grand_Kia_Proposal_revN.*): armar_entrega.sh copiaba toda work/Proposal/ y la entrega rev3 llevaba también la Proposal rev2, que el chequeo de U-192 leyó con el tax viejo '[RATE TO CONFIRM]'; la de la rev anterior ya está en su carpeta de Drive",
++   "motivo": "cp -a $W/Proposal/. copiaba todas las revs"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v113/take-off-metal-frame-drywall/SKILL.md v114/take-off-metal-frame-drywall/SKILL.md
+--- v113/take-off-metal-frame-drywall/SKILL.md	2026-11-12 06:45:47.377644455 +0000
++++ v114/take-off-metal-frame-drywall/SKILL.md	2026-11-12 14:46:33.640277723 +0000
+@@ -5,6 +5,8 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
++**VERSION: v81cf114** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+ **v81cf100 (12-nov-2026, Xfinity, orden COORDINACIÓN):** v81cf99 + BE-CR36 (CR: markups_rcp esquiva los FreeText ya colocados con 2 pt de margen; markups_bluebeam.celda_legible baja la letra hasta caber, mínimo 5.5 pt, y luego recorta con "…") + BE-CR37 (CR 7/A7.23: un ancho desarrollado de SOF / BW sumaba cotas de lados distintos del corridor: comparar_alturas.lados_fallas — columnas side / faces en ALTURAS_IMPRESAS, cotas de lados distintos o sin side / faces = FAIL en CE_ALTURAS_EXTREMO; AMBER en entregas anteriores).
+@@ -315,6 +317,11 @@
+   cielo / soffit (como el track de walls dentro del stud, sin renglón aparte); corner bead / control joint / trims = incluidos en la labor
+   de taping; sales tax = la tasa de la plantilla salvo que el usuario dé otra. Solo la labor de resilient channel queda [RATE TO CONFIRM]
+   con su LF a la vista. CE_PROPOSAL (revisar_proposal / u192_fallas): cualquiera de las otras en [RATE TO CONFIRM] = FAIL.
++- **Chequeos que no pasan en vacío (auditoría U-138 del 12-nov, BE-AUD05..09):** CB_U_191 exige 'Item N' a todo listing UL ('L546' suelto
++  incluido) y 'N in. o.c.' en renglones de RC / furring; CB_RCP_APILADOS con tags o DOBLE_CIELO.csv lleno y 0 cuartos = FAIL; CE_RCP_COMPLETO
++  'N/A' solo si ni el Excel ni los markups tienen cielos / soffits; CE_RESUMEN_EXCEL: las cifras de material de la rev actual en
++  RESUMEN_revN.md / BITACORA_revN.md = Material Summary (+-0.01); CE_VERSION_ENTREGA: la línea **VERSION** de arriba de este SKILL.md
++  es la versión que va a ENTREGA_OK y la que declaran LEEME / README / TIEMPOS — se sube en CADA versión nueva.
+ 
+ ## Etapa 4 — CÁLCULO
+ 
+diff -ruN v113/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v114/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v113/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 06:44:19.810403840 +0000
++++ v114/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-12 14:49:31.435726552 +0000
+@@ -181,7 +181,7 @@
+         kw["inventario"] = inv if isinstance(inv, list) else None
+         textos = {}
+         for pat in ("**/resolucion.md", "**/revision_extra.md", "**/revision.md", "**/demo_cruce.md", "**/DEMO_CRUCE*.md", "**/*cobertura*.md",   # v81cf25: DEMO_CRUCE.md (demo_cruce.py)
+-                    "**/*COBERTURA*.md", "**/PASO12*.md"):
++                    "**/*COBERTURA*.md", "**/PASO12*.md", "**/DOBLE_CIELO.csv"):     # BE-AUD06: DOBLE_CIELO.csv para CB_RCP_APILADOS
+             for p in _rglob_seguro(w, pat):                 # BE-GK35
+                 try:
+                     textos[os.path.relpath(p, w)] = open(p, encoding="utf-8", errors="ignore").read()
+@@ -4332,6 +4332,24 @@
+ RX_REF_EXT = re.compile(r"(?i:\bper\s+(?:the\s+)?(?:assembly|UL\b|manufacturer|mfr\.?)|\bsee\s+spec(?:ification)?s?\b)"
+                         r"|\b(?:UL|U\.L\.)\s*(?:[Dd]esign\s*)?[A-Z]?\d{3}\b|\bGA[- ](?:[Ff]ile\s*)?(?:[Nn]o\.?\s*)?[A-Z]{0,3}\s?\d{3,}")   # GA solo en mayúsculas
+ RX_CITA_ITEM = re.compile(r"(?i)\bitem\s*\d+|\bpara(?:graph)?\.?\s*\d|§\s*\d|\bsection\s*\d|\bpart\s*\d|\bart(?:icle)?\.?\s*\d|\b\d{2}\s\d{2}\s\d{2}(?:\.\d+)?\s*[-–]?\s*\d|\btable\s*\d|\bfig(?:ure)?\.?\s*\d")
++RX_UL_SUELTO = re.compile(r"(?<![\w./-])[LUV]\d{3}(?![\w./-]|\.\d)")    # BE-AUD05: 'L546' sin 'UL' delante también es un listing UL
++RX_UL_ITEM = re.compile(r"(?i)\bitem\s*\d+")
++RX_RC_CTX = re.compile(r"(?i)\bresilient|\bRC\b|\bfurring\b|\bhat\s+channel|\bchannels?\b")
++RX_OC = re.compile(r"(?i)\d+(?:\.\d+)?\s*(?:in\.?|\"|”|'')\s*o\.?\s*c\.?|\d+(?:\.\d+)?\s*(?:in\.?|\")\s*(?:on\s+center|spacing)")
++
++
++def falta_cita_u191(seg):
++    """U-191 / BE-AUD05: qué le falta a un segmento que cita un documento. Un listing UL ('UL L546' o 'L546' suelto) exige 'Item N';
++    si además es un renglón de RC / furring / channel exige el espaciamiento 'N in. o.c.'. Otras referencias: ítem / párrafo / sección."""
++    ul = bool(RX_UL_SUELTO.search(seg)) or bool(re.search(r"(?i)\bUL\b|U\.L\.", seg))
++    if not (RX_REF_EXT.search(seg) or RX_UL_SUELTO.search(seg)):
++        return None
++    if ul:
++        f = [] if RX_UL_ITEM.search(seg) else ["'Item N' del listing"]
++        if RX_RC_CTX.search(seg) and not RX_OC.search(seg):
++            f.append("espaciamiento 'N in. o.c.'")
++        return f
++    return [] if RX_CITA_ITEM.search(seg) else ["ítem / párrafo"]
+ 
+ 
+ def _textos_u191(canon):
+@@ -4361,16 +4379,18 @@
+      "dejado a 16 in. sin abrir UL L546, cuyo Item 6 imprime 12 in.): todo renglón / RFI / supuesto cuya fuente dice 'per assembly', 'per "
+      "UL', 'per manufacturer', 'see spec' o cita un UL / GA lleva la cita del ítem / párrafo / sección del documento referido; sin ella = FAIL")
+ def u_191_ref(b):
+-    ts = _textos_u191(b.canon)
++    ts = _textos_u191(b.canon) + [(f"MS fila {f.get('fila')} '{str(f.get('material'))[:30]}'.fuente", str(f.get("fuente")))
++                                  for f in (getattr(b, "ms", None) or []) if isinstance(f, dict) and f.get("fuente")]   # BE-AUD05: también el Excel
+     if not ts:
+         return NA("sin renglones / RFI con fuente en el canon")
+     ev, n = [], 0
+     for donde, t in ts:
+         for seg in re.split(r"\s*(?:\||;|\n)\s*", t):
+-            if RX_REF_EXT.search(seg):
++            f = falta_cita_u191(seg)
++            if f is not None:
+                 n += 1
+-                if not RX_CITA_ITEM.search(seg):
+-                    ev.append(f"{donde}: '{seg[:110]}' cita un documento por referencia sin el ítem / párrafo aplicado (U-191: abrirlo y citarlo)")
++                if f:
++                    ev.append(f"{donde}: '{seg[:110]}' cita un documento por referencia sin {' ni '.join(f)} (U-191 / BE-AUD05: abrirlo y citarlo)")
+     if not n:
+         return NA(f"{len(ts)} textos del canon sin referencias a assembly / UL / spec / fabricante")
+     return R("FAIL", *ev[:20]) if ev else R("PASS", f"{n} referencias a documentos citados, cada una con su ítem / párrafo")
+@@ -4384,12 +4404,21 @@
+     return int(m.group(1)) if m and int(m.group(1)) < nce else None
+ 
+ 
++def filas_doble_cielo(b):
++    """BE-AUD06: renglones de datos de Auditoria/DOBLE_CIELO.csv (U-190) que trae la corrida."""
++    return sum(max(0, len([ln for ln in t.splitlines() if ln.strip()]) - 1) for k, t in (b.textos or {}).items()
++               if os.path.basename(k) == "DOBLE_CIELO.csv")
++
++
+ @chk("U-189", "BE-CR39", desc="U-189 (1) / BE-CR39 (CR rev19 corredor 216: FS-1 rated cargado y el GYP-1 8'-11\" colgado debajo faltante): en "
+      "cada cuarto, cada cielo dibujado a distinta altura (rated FS / RS arriba + GYP / ACT / WS abajo) tiene SU renglón; dos tags de "
+      "cielo distintos del mismo cuarto cubiertos por un solo renglón, o un cuarto con cielo rated y un tag colgado sin renglón ni motivo = FAIL")
+ def rcp_apilados(b):
+     tg = [x for x in b.canon.get("rcp_tags") or [] if isinstance(x, dict)]
+     cl = b.ceilings()
++    nd = filas_doble_cielo(b)
++    if not tg and nd:
++        return R("FAIL", f"en vacío (U-137 / BE-AUD06): DOBLE_CIELO.csv tiene {nd} renglones y el canon no trae rcp_tags: 0 cuartos evaluados")
+     if not tg:
+         return NA("sin rcp_tags (lo exige CB_RCP_TAGS cuando hay RCP)") if not cl else NA(f"sin rcp_tags; {len(cl)} cielos sin tags que cruzar")
+     nce = len(cl)
+@@ -4417,6 +4446,9 @@
+             if len(ts) > 1:
+                 ev.append(f"{c}: un solo renglón (ceilings[{k}]) cubre {len(ts)} cielos dibujados a distinta altura "
+                           f"({', '.join(f'{t} {h}' for t, h in sorted(ts))}): cada cielo apilado lleva su renglón (BE-CR39)")
++    if not cuarto:                                       # BE-AUD06 (GK rev3: '0 cuartos' con tags y DOBLE_CIELO lleno = pasaba en vacío)
++        return R("FAIL", f"en vacío (U-137 / BE-AUD06): {len(tg)} rcp_tags y {nd} renglones de DOBLE_CIELO.csv, pero 0 cuartos evaluados "
++                 "(ningún tag con rows 'ceilings[k]' ni match a un cuarto del canon)")
+     return R("FAIL", *ev[:20]) if ev else R("PASS", f"{len(cuarto)} cuartos con tags de RCP; {n2} con cielos apilados, cada uno con su renglón")
+ 
+ 
+diff -ruN v113/take-off-metal-frame-drywall/tools/compuerta_entrega.py v114/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v113/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 06:45:24.235227320 +0000
++++ v114/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 14:49:31.437795329 +0000
+@@ -686,7 +686,8 @@
+ FECHA_V105 = "2026-11-12T03:20:00+00:00"      # v81cf105: U-190 REGLA DE ORO #3 (doble cielo) exigida desde aquí      # v81cf104: CB_RCP_TAGS cuenta TODO tag de cielo (no solo GYP)
+ FECHA_V109 = "2026-11-12T04:50:00+00:00"      # v81cf109: U-191 (documento citado con su ítem / párrafo)
+ FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
+-U189_CB = {"CB_RCP_APILADOS": FECHA_V103, "CB_DETALLE_CARAS": FECHA_V103, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V109}      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
++FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
++U189_CB = {"CB_RCP_APILADOS": FECHA_V114, "CB_DETALLE_CARAS": FECHA_V103, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
+ 
+ 
+ def entrega_nueva(c, fecha=None):
+@@ -1831,16 +1832,62 @@
+                                                      f"{n_ex} exclusiones con su FreeText EXCLUDED ({ {k: len(v) for k, v in ex.items()} })")
+ 
+ 
++RX_VER = re.compile(r"\bv(\d+)cf(\d+)([a-z]?)\b")
++
++
++def _ver_clave(v):
++    m = RX_VER.search(str(v or ""))
++    return (int(m.group(1)), int(m.group(2)), m.group(3)) if m else (0, 0, "")
++
++
+ def _skill_version():
+-    """U-177 (1): the skill version the gate ran with (VERSION line of the skill's INDICE / SKILL.md)."""
+-    base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+-    for f in ("VERSION", "INDICE.md", "SKILL.md"):
+-        p = os.path.join(base, f)
+-        if os.path.isfile(p):
+-            m = re.search(r"v\d+cf\d+[a-z]?", open(p, encoding="utf-8", errors="ignore").read()[:20000])
+-            if m:
+-                return m.group(0)
+-    return None
++    """U-177 (1) / BE-AUD09: versión con la que corre la compuerta = la línea '**VERSION: v81cfNNN**' de SKILL.md. Antes tomaba la PRIMERA
++    'v81cf' del archivo (el párrafo de arriba se quedó en v81cf101 y GK rev3 con v81cf113 salió 'v101' en ENTREGA_OK). Sin esa línea:
++    la versión MÁS ALTA citada en SKILL.md."""
++    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "SKILL.md")
++    if not os.path.isfile(p):
++        return None
++    t = open(p, encoding="utf-8", errors="ignore").read()
++    m = re.search(r"(?m)^\*\*VERSION:\s*(v\d+cf\d+[a-z]?)\*\*", t)
++    if m:
++        return m.group(1)
++    vs = [x.group(0) for x in RX_VER.finditer(t)]
++    return max(vs, key=_ver_clave) if vs else None
++
++
++def version_fallas(skill_md_txt, version, docs):
++    """BE-AUD09: (1) la línea VERSION de SKILL.md no es más vieja que la versión más alta que el propio SKILL.md cita (se olvidó subirla);
++    (2) toda declaración de versión de la compuerta / entrega en los documentos de la entrega ('compuerta … v81cfNNN', 'skill vigente:',
++    'gate …') = la versión con la que corrió la compuerta. docs {nombre: texto}. -> [faltas]"""
++    ev = []
++    vs = [x.group(0) for x in RX_VER.finditer(skill_md_txt or "")]
++    if version and vs and _ver_clave(max(vs, key=_ver_clave)) > _ver_clave(version):
++        ev.append(f"SKILL.md: la línea VERSION dice {version} y el mismo SKILL.md cita {max(vs, key=_ver_clave)}: subir la línea VERSION")
++    for nom, txt in sorted((docs or {}).items()):
++        for ln in (txt or "").splitlines():
++            if not re.search(r"(?i)compuerta|\bgate\b|ENTREGA_OK|skill (?:vigente|version)|versi[oó]n (?:vigente|del skill)", ln) or \
++                    re.search(r"(?i)arranque|start(?:ed)? with|antes|previous|anterior", ln):
++                continue
++            for x in RX_VER.finditer(ln):
++                if version and x.group(0) != version:
++                    ev.append(f"{nom}: declara {x.group(0)} y ENTREGA_OK / la compuerta corrió con {version}: '{ln.strip()[:110]}'")
++    return ev
++
++
++@chequeo("CE_VERSION_ENTREGA", ["BE-AUD09", "U-177"], "BE-AUD09 (GK rev3: ENTREGA_OK decía v101 y el LEEME v113): la versión que escribe "
++         "la compuerta en ENTREGA_OK (línea VERSION de SKILL.md) es la versión vigente del skill y la que declaran LEEME / README / TIEMPOS")
++def ce_version_entrega(c):
++    v = _skill_version()
++    sk = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "SKILL.md")
++    docs = {}
++    for base in {getattr(c, "w", None), getattr(c, "entrega", None)} - {None}:
++        for pat in ("LEEME*.md", "README*.md", "TIEMPOS.md"):
++            for p in glob.glob(os.path.join(base, pat)):
++                docs[os.path.relpath(p, c.w)] = open(p, encoding="utf-8", errors="ignore").read()
++    ev = version_fallas(open(sk, encoding="utf-8", errors="ignore").read() if os.path.isfile(sk) else "", v, docs)
++    if not v:
++        ev.insert(0, "no se pudo leer la versión del skill (línea VERSION de SKILL.md)")
++    return R("FAIL", *ev[:20]) if ev else R("PASS", f"compuerta con {v}; {len(docs)} documento(s) de la entrega sin otra versión declarada")
+ 
+ 
+ def _segs_pagina(page, min_len=3.0):
+@@ -3589,6 +3636,87 @@
+     return fallas
+ 
+ 
++def _num_md(t):
++    t = str(t or "").strip().replace("−", "-").replace("–", "-").replace("*", "").replace(",", "")
++    m = re.fullmatch(r"[+-]?\d+(?:\.\d+)?", t)
++    return float(t) if m else None
++
++
++def _norm_mat(t):
++    return re.sub(r"[^a-z0-9/.\"-]+", " ", str(t or "").lower()).strip()
++
++
++def resumen_excel_fallas(textos, ms_filas, rev=None, tol=0.01):
++    """BE-AUD08 (CR rev20: el RESUMEN traía la cifra de RC de otra corrida, distinta del Material Summary): en cada tabla markdown con columna 'Material'
++    de RESUMEN_revN.md / BITACORA_revN.md, la cifra de la rev actual ('revN', o 'Net' / 'Total' / 'Qty') = la del Material Summary del
++    Excel (+-tol). Las columnas Delta / revs anteriores no se comparan. ms_filas [(material, [números del renglón])]. -> [faltas]"""
++    ms = [(_norm_mat(m), vals) for m, vals in ms_filas if m]
++    ev, n = [], 0
++    for nom, txt in sorted(textos.items()):
++        lineas = txt.splitlines()
++        i = 0
++        while i < len(lineas):
++            ln = lineas[i].strip()
++            if not (ln.startswith("|") and i + 1 < len(lineas) and re.match(r"^\|?\s*:?-{3,}", lineas[i + 1].strip())):
++                i += 1
++                continue
++            hdr = [h.strip().lower() for h in ln.strip("|").split("|")]
++            cm = next((k for k, h in enumerate(hdr) if "material" in h), None)
++            cols = [k for k, h in enumerate(hdr) if rev and re.fullmatch(rf"rev\s*{rev}\b.*", h)] or \
++                   [k for k, h in enumerate(hdr) if re.fullmatch(r"(net|net \(excel\)|total|qty|quantity|excel)", h)]
++            i += 2
++            while i < len(lineas) and lineas[i].strip().startswith("|"):
++                cel = [x.strip() for x in lineas[i].strip().strip("|").split("|")]
++                if cm is not None and cols and cm < len(cel):
++                    mat = _norm_mat(cel[cm])
++                    hit = next((vals for m, vals in ms if m == mat), None) or \
++                        next((vals for m, vals in ms if len(mat) >= 15 and (m.startswith(mat) or mat.startswith(m))), None)
++                    for k in cols:
++                        v = _num_md(cel[k]) if k < len(cel) else None
++                        if v is None:
++                            continue
++                        n += 1
++                        if hit is None:
++                            if abs(v) > tol:
++                                ev.append(f"{nom}: '{cel[cm][:50]}' = {cel[k]} y ese material no está en el Material Summary del Excel")
++                        elif not any(abs(v - x) <= tol for x in hit):
++                            ev.append(f"{nom}: '{cel[cm][:50]}' = {cel[k]} y el Material Summary del Excel dice "
++                                      f"{', '.join(f'{x:,.2f}' for x in hit[:3])} (BE-AUD08: toda cifra del resumen = el Excel)")
++                i += 1
++    return ev, n
++
++
++def _ultimos_md(c, prefijos=("RESUMEN_rev", "BITACORA_rev")):
++    """{nombre: texto} del RESUMEN_revN.md / BITACORA_revN.md de la rev más alta en la carpeta de trabajo y la de entrega. -> (textos, N)"""
++    fs = {}
++    for base in {getattr(c, "w", None), getattr(c, "entrega", None)} - {None}:
++        for pre in prefijos:
++            for p in glob.glob(os.path.join(base, f"{pre}*.md")) + glob.glob(os.path.join(base, "*", f"{pre}*.md")):
++                m = re.search(r"rev(\d+)", os.path.basename(p))
++                if m:
++                    fs.setdefault(int(m.group(1)), []).append(p)
++    if not fs:
++        return {}, None
++    n = max(fs)
++    return {os.path.basename(p): open(p, encoding="utf-8", errors="ignore").read() for p in fs[n]}, n
++
++
++@chequeo("CE_RESUMEN_EXCEL", ["BE-AUD08"], "BE-AUD08 (CR rev20: el RESUMEN traía la cifra de RC distinta del Material Summary): cada "
++         "cifra de material de la rev actual en las tablas de RESUMEN_revN.md y BITACORA_revN.md = la del Material Summary del Excel (+-0.01)")
++def ce_resumen_excel(c):
++    txt, n = _ultimos_md(c)
++    if not txt:
++        return R("PASS", "N/A: sin RESUMEN_revN.md / BITACORA_revN.md en la carpeta")
++    wb = c.wb()
++    if wb is None or "Material Summary" not in wb.sheetnames:
++        return R("FAIL", "hay RESUMEN / BITACORA y no hay Material Summary del Excel para cruzar (U-137)")
++    ms = [(str(r[0]), [float(x) for x in r[1:] if isinstance(x, (int, float))])
++          for r in wb["Material Summary"].iter_rows(min_row=2, values_only=True) if r and r[0]]
++    ev, k = resumen_excel_fallas(txt, ms, n)
++    return R("FAIL", *ev[:30]) if ev else R("PASS", f"{', '.join(sorted(txt))}: {k} cifra(s) de tablas de material de la rev{n} = Material "
++                                            "Summary del Excel" + ("" if k else " (sin tablas de material: nada que cruzar)"))
++
++
+ @chequeo("CE_RCP_COMPLETO", ["CR-R7-01", "U-124", "U-137"], "CR-R7-01 (rev7 CR City Hotel, pregunta del usuario en Bluebeam A3.04 'por que "
+          "unos tienen markups y otros no'): Excel -> markup: cada cielo / soffit cuantificado (ceilings[] y misc_items '... board') "
+          "tiene su markup TO-<id> con el mismo SF (área) o LF (+-0.5 %); falta uno = FAIL")
+@@ -3598,7 +3726,12 @@
+         return R("FAIL", "sin PDF de markups o sin Excel (U-137: no pasa en vacío)")
+     esp = esperados_rcp(c.canon if getattr(c, "canon", None) else None)
+     if not esp:
+-        return R("PASS", "N/A: el canon no trae cielos ni soffits cuantificados")
++        xl_rc, mk_rc = cielos_en_excel(c.excel), sum(contar_contornos_rcp(p) for p in pdfs)
++        if xl_rc or mk_rc:                              # BE-AUD07 (Xfinity rev1b SOF-01: 'N/A sin cielos' con soffit en el Excel)
++            return R("FAIL" if entrega_nueva(c, FECHA_V114) else "AMBER", f"en vacío (U-137 / BE-AUD07): el canon no da cielos / soffits esperados (esperados_rcp vacío) pero el Excel "
++                     f"tiene {len(xl_rc)} renglón(es) de cielo / soffit y los markups {mk_rc} contorno(s) RCP: el cruce Excel -> markup no corrió",
++                     *[f"Excel: {x}" for x in xl_rc[:10]])
++        return R("PASS", "N/A: el canon no trae cielos ni soffits cuantificados (y el Excel / los markups tampoco)")
+     filas = []
+     for p in pdfs:
+         filas += vista_bluebeam(p, c.excel, c.canon if getattr(c, "canon", None) else None)[0]
+@@ -3607,6 +3740,49 @@
+         R("PASS", f"{len(esp)} cielos / soffits cuantificados, todos con su markup (Excel -> markup)")
+ 
+ 
++RX_CIELO_XL = re.compile(r"^(?:SOF|CLG|BW)-?\w|^(?:GYP|ACT|FS|RS|WS)-\d+\b.*\b(?:ceiling|clg)\b", re.I)
++
++
++def cielos_en_excel(xlsx):
++    """BE-AUD07: renglones del Excel (Partition Takeoff / Material Summary) cuyo ID / material es un cielo o soffit
++    ('SOF-01', 'CLG-…', 'BW-…', o 'Ceiling' / 'Soffit' en el nombre del renglón de board / framing). -> ['hoja!celda: texto']"""
++    out = []
++    try:
++        import openpyxl
++        wb = openpyxl.load_workbook(xlsx, read_only=True, data_only=True)
++    except Exception:                                                   # noqa: BLE001
++        return out
++    for nm in ("Partition Takeoff", "Material Summary"):
++        if nm not in wb.sheetnames:
++            continue
++        for i, row in enumerate(wb[nm].iter_rows(values_only=True), start=1):
++            mat = str(row[0] or "").strip() if row else ""
++            if re.search(r"(?i)^demo", mat):
++                continue                                                # demolición: no es un cielo nuevo
++            for v in row[:3]:
++                t = str(v or "").strip()
++                if t and (RX_CIELO_XL.search(t) or (nm == "Material Summary" and re.search(r"(?i)\b(ceiling|soffit)s?\b", t)
++                                                      and not re.search(r"(?i)\bto (?:the )?(?:underside of )?ceiling|above ceiling", t))):
++                    out.append(f"{nm}!fila {i}: {t[:60]}")
++                    break
++            else:
++                if nm == "Material Summary" and any(re.search(r"\b(?:SOF|CLG|BW)-\d", str(v or "")) for v in row[3:]):
++                    out.append(f"{nm}!fila {i}: {mat[:40]} (desglose con un SOF / CLG / BW)")
++    return out
++
++
++def contar_contornos_rcp(pdf):
++    """BE-AUD07: markups TO-<id> de cielo / soffit (Contents con CEILING o SOFFIT) en un PDF de markups."""
++    try:
++        import pymupdf
++        d = pymupdf.open(pdf)
++        return sum(1 for pg in d for a in pg.annots() or []
++                   if _nm_leer(d.xref_get_key(a.xref, "NM")[1].strip("()")).startswith("TO-")
++                   and re.search(r"\b(CEILING|SOFFIT)\b", a.info.get("content") or ""))
++    except Exception:                                                   # noqa: BLE001
++        return 0
++
++
+ def _segs_plano(page):
+     S = []
+     for dr in page.get_drawings():
+diff -ruN v113/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v114/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v113/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 06:44:19.792341079 +0000
++++ v114/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 14:51:02.063367336 +0000
+@@ -2194,3 +2194,61 @@
+ 
+ 
+ test_v111_registro_y_tope()
++
++
++def test_v114_auditoria_u138():
++    """BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos débiles / en vacío). Valores sintéticos.
++    (a) BE-AUD05 CB_U_191: 'L946' suelto o 'UL L946' sin 'Item N' (y sin 'N in. o.c.' en un renglón de RC) = FAIL; con Item + o.c. = PASS.
++    (b) BE-AUD06 CB_RCP_APILADOS: tags / DOBLE_CIELO.csv con filas y 0 cuartos evaluados = FAIL.
++    (c) BE-AUD07 CE_RCP_COMPLETO: esperados vacío con SOF en el Excel o contornos RCP = FAIL (antes 'N/A sin cielos').
++    (d) BE-AUD08 CE_RESUMEN_EXCEL: cifra de la rev actual en RESUMEN / BITACORA != Material Summary = FAIL; deltas y revs viejas no cuentan.
++    (e) BE-AUD09 CE_VERSION_ENTREGA: la versión de ENTREGA_OK sale de la línea VERSION de SKILL.md (no del primer párrafo) y lo
++    declarado en LEEME / README tiene que coincidir."""
++    import chequeos_biblioteca as CB
++    import re
++    import openpyxl
++    mal = {"walls": [], "misc_items": [{"ref": "CLG-Z9 RC", "source": "resilient channel 16 in. o.c. per L946"}]}
++    mal2 = {"walls": [], "misc_items": [{"ref": "CLG-Z9 RC", "source": "resilient channel per UL L946 Item 6"}]}
++    bien = {"walls": [], "misc_items": [{"ref": "CLG-Z9 RC", "source": "resilient channel per UL L946 Item 6: 12 in. o.c."}]}
++    assert CB.u_191_ref(CB.B(canon=mal))[0] == "FAIL"
++    assert CB.u_191_ref(CB.B(canon=mal2))[0] == "FAIL", "RC sin espaciamiento"
++    assert CB.u_191_ref(CB.B(canon=bien))[0] == "PASS"
++    assert CB.falta_cita_u191("plan X9.01 sheet L-901, wall U-191 note") is None
++    can = {"walls": [], "ceilings": [{"room": "Z9 Corridor 901", "area_sf": 10.0}],
++           "rcp_tags": [{"tag": "GYP-9", "height": "9'-0\"", "rows": ["walls[0]"]}]}
++    e, ev = CB.rcp_apilados(CB.B(canon=can, textos={"Auditoria/DOBLE_CIELO.csv": "Room,Upper,Lower\nZ9 901,FS-9,GYP-9\n"}))
++    assert e == "FAIL" and "en vacío" in ev[0], ev
++    e, ev = CB.rcp_apilados(CB.B(canon={"walls": [], "ceilings": []}, textos={"x/DOBLE_CIELO.csv": "Room,Upper\nZ9 901,FS-9\n"}))
++    assert e == "FAIL", ev
++    d = tempfile.mkdtemp(prefix="v114_")
++    xl = os.path.join(d, "t.xlsx")
++    wb = openpyxl.Workbook()
++    ws = wb.active
++    ws.title = "Material Summary"
++    ws.append(["Material", "Unit", "Net"])
++    ws.append(["Resilient channel - printed product", "LF", 1234.56])
++    ws.append(["5/8\" gypsum board, Type X", "SF", 999.0, None, None, None, None, None, "Breakdown: Z9-01 990 + SOF-99 9"])
++    wb.save(xl)
++    assert CE.cielos_en_excel(xl), "SOF en el desglose del Material Summary"
++    ms = [("Resilient channel - printed product", [1234.56]), ("5/8\" gypsum board, Type X", [999.0])]
++    t_mal = {"RESUMEN_rev9.md": "| Material | Unit | rev8 | rev9 | Delta |\n|---|---|---|---|---|\n"
++                                "| Resilient channel - printed product | LF | 1,000.00 | 1,111.11 | +111.11 |\n"}
++    t_bien = {"RESUMEN_rev9.md": t_mal["RESUMEN_rev9.md"].replace("1,111.11 | +111.11", "1,234.56 | +234.56")}
++    ev, n = CE.resumen_excel_fallas(t_mal, ms, 9)
++    assert ev and n == 1, ev
++    ev, n = CE.resumen_excel_fallas(t_bien, ms, 9)
++    assert ev == [] and n == 1, ev
++    assert CE.resumen_excel_fallas({"BITACORA_rev9.md": "| Material | Net |\n|---|---|\n| Mystery product | 5.00 |\n"}, ms, 9)[0]
++    sk = "**VERSION: v81cf901**\n... v81cf900 ... v81cf902 ..."
++    assert CE.version_fallas(sk, "v81cf901", {}), "VERSION más vieja que lo citado en SKILL.md"
++    assert CE.version_fallas("**VERSION: v81cf902**\nv81cf900", "v81cf902", {"LEEME.md": "Compuerta final VERDE con v81cf902\nArranque: skill v81cf800\n"}) == []
++    assert CE.version_fallas("**VERSION: v81cf902**", "v81cf902", {"LEEME.md": "Compuerta final VERDE con v81cf901\n"})
++    skp = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(CE.__file__))), "SKILL.md")
++    if os.path.isfile(skp):                                              # en la suite (tools copiados solos) no hay SKILL.md
++        sk_txt = open(skp, encoding="utf-8").read()
++        assert CE._skill_version() == re.search(r"(?m)^\*\*VERSION:\s*(v\d+cf\d+)", sk_txt).group(1)
++        assert not CE.version_fallas(sk_txt, CE._skill_version(), {}), "subir la línea VERSION de SKILL.md"
++    print("test_v114_auditoria_u138 OK")
++
++
++test_v114_auditoria_u138()
