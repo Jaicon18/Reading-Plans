@@ -104,3 +104,24 @@ La regla y su texto van en ORDENES_DEL_USUARIO.md y en la BIBLIOTECA AL PUBLICAR
 
 AL PUBLICAR: copiar apartados/ordenes_v119/*.py a .claude/skills/jc-hunter-ordenes/, el registro, el cierre del post-mortem (si COORDINACIÓN
 lo confirma) y skills_archivo/PRUEBA_ABIERTOS_v81cf119.json con los 3 proyectos.
+
+
+## Ampliación 2 (COORDINACIÓN 19:44 / 19:49)
+
+- Recortes: Auditoria/ROJOS/<id>.png (muro: M-<hoja>-<n>.png; cielo: C-<hoja>-<cuarto>.png), a escala, circulados y con el número; la
+  disposición acepta la columna 'reviewer' (o 'revisor'). CE_COBERTURA: rojo sin recorte = FAIL; renglón de disposición sin reviewer o
+  sin imagen = FAIL. (El script de GK, scripts/recortes_rojos.py, no está en el repo; la tool ya hace lo mismo.)
+- LÍMITES DOCUMENTADOS (aquí, en SKILL.md y exigidos en la GUÍA del estimador por CE_COBERTURA): (1) una sola cara faltante de un muro
+  que sí tiene markup en la otra cara NO sale en rojo (CR marca A / B por cara sobre la misma línea); (2) los muros en diagonal NO se
+  detectan (solo pares H / V); (3) dos cielos apilados donde falta uno los revisa CB_RCP_APILADOS, no el mapa.
+- Xfinity rev1c: los 16 rojos de A2.0 los revisa un revisor independiente (subagente) sobre sus recortes -> COBERTURA_DISPOSICION.csv
+  en /root/xf/work/cobertura_v119/ (listo para rev1d cuando se publique v119; la entrega no cambia antes).
+
+- Xfinity rev1c, revisión de rojos por el revisor independiente (subagente que no hizo el take-off): 16 / 16 NO ES NUESTRO.
+  - 4 W1 / W4 existentes (2/A2.0).
+  - 6 pilastras existentes del storefront y 2 tramos de storefront existente (key note 11, 1/A2.0).
+  - 4 NO son muros: líneas de extensión de cotas y la línea de una hoja de puerta, que el detector tomó como muros. Son falsos
+    rojos = 25 % en esta hoja, lejos del <= 2 % pedido; queda anotado como límite para afinar (filtrar líneas de cota).
+  - Con apartados/cobertura_v119/XF_COBERTURA_DISPOSICION.csv el mapa da 0 rojos abiertos (16 DISPUESTO).
+  - Para rev1d (cuando se publique v119): la disposición y la sección 'Coverage map limits' de la GUÍA ya están preparadas
+    (scripts/hacer_docs.py).

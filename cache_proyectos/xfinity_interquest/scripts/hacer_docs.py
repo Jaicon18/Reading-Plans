@@ -90,6 +90,11 @@ G = [f"OPEN IN BLUEBEAM: `Planos marcados/{PDF}` (the only editable markups file
  "## PASO 6 — Lo que te toca decidir", "", "- **RFI-06 - PENDING - user manual verification (U-178)**: tú lo verificas a mano. Hojas a revisar: A2.0 (2/A2.0 W1 / W4 'PATCH AND REPAIR AND MAINTAIN ANY EXISTING FIRE RATING (V.I.F.)'), A0.1 nota general 3 ('PATCH ANY EXISTING WALLS AND/OR CEILINGS AS NEEDED TO REFURBISH THE LEASE SPACE') y A1.0 ('EXISTING DEMISING WALL TO REMAIN. PREPARE FOR NEW FINISHES', notas 13 y 29). Cargado mientras tanto: opción A conservadora (+2,589.62 SF de 5/8\" Type X, misc items PR-*).", f"- RFI abiertos: {len(rf)}. RFI-01 (altura de la estructura) ya lo decidiste el 11-nov: opción A, 26'-0\" cargado (U-174); queda solo como sensibilidad: cada pie menos = -7.07 LF de braces y -{DLF} SF de demolición."] + [f"- **{r['id']}**: {r['question'][:240]} → cargado: {r['loaded'][:160]}. Delta: {r['delta'][:200]}" for r in rf] + [
  "- Review Items del Excel (allowances y criterios): patch and repair de W1 / W4, blocking sobre walls existentes, L-bead de las columnas, header SOF-01.", "",
  "## Carpeta `Auditoria/`", "", "- `burbujas/`, `schedules/` (lectura independiente), `resolucion_AB/` (cada diferencia A/B con imagen), `rfi_img/`, `review_items/`, `revision_independiente/` (revisión antes de entregar, U-168 A1-A5)."]
+G += ["", "## Coverage map limits (U-193)",
+      "`Planos marcados/COBERTURA - IMAGE ONLY.pdf` shows in RED every wall / room drawn on the plans that has no take-off markup (green = marked).",
+      "Limits of that map: (1) a single missing face of a wall whose other face is marked does NOT show in red; (2) diagonal walls are NOT",
+      "detected (only horizontal / vertical walls); (3) a missing ceiling inside a stacked (double) ceiling is checked by the double-ceiling",
+      "review (Auditoria/DOBLE_CIELO.csv), not by the map."]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 Z = ["# RESUMEN rev1 FINAL — Xfinity Interquest (Colorado Springs, CO)", "",
  "Primera y única entrega (U-169): revisión independiente completa hecha ANTES de entregar.", "",
