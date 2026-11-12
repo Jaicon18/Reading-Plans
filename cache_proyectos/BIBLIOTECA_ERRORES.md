@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK52 (11/12-nov, Grand Kia rev1 + rev2 + rev3)
+## BE-GK03..BE-GK53 (11/12-nov, Grand Kia rev1 + rev2 + rev3)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -679,6 +679,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK50 (rev3a): los scripts del proyecto aceptan una revisión con letra (rev3a): la revisión anterior de revNa es revN (de revNb es revNa); nunca int(REV.replace('rev','')); CAMBIOS_<REV>.txt. Causa: hacer_docs.py hacía int('3a') al armar rev3a.
 - BE-GK51 (rev3a): al cerrar o resolver un RFI se reescribe también su 'loaded' para que diga lo que está cargado: RFI-18 decía 'regular 5/8" board on the furring is loaded' (texto de rev1) mientras 'resolved' y el Excel cargaban Type X por A550 keynote 3; la revisión U-111 (revision_materiales.py) lo hizo visible. Causa: loaded viejo sin tocar al cambiar la decisión.
 - BE-GK52 (rev3a): nunca se edita un script de bash (cadena.sh / armar_entrega.sh) mientras corre: bash lo lee por posición y un cambio de largo en una línea hace que la corrida ejecute texto corrido; primero se para la corrida (TaskStop + pkill) y después se edita y se relanza. Causa: se editó la línea 12 de cadena.sh con la cadena de rev3a corriendo; se paró y se relanzó completa.
+- BE-GK53 (rev3a): antes de atribuir una nota a un detalle N/HOJA se mira de qué lado de su dibujo va el título EN ESA HOJA (en A540 el título va debajo del dibujo): la nota '12 GA HANGER WIRE AT 4'-0" O.C.' quedó citada como 1/A540 porque estaba justo bajo el título 1, pero es de 2/A540 (4-WAY TEE BRACING); el recorte de evidencia incluye el título del detalle al que pertenece la nota. Causa: nota atribuida al título de arriba; el recorte no mostraba el título correcto.
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
