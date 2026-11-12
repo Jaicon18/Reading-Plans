@@ -1,5 +1,5 @@
-"""BE-XF07: antes de re-subir rev1 FINAL, renombra en Drive (NUNCA borra) los archivos cuyo contenido cambió: 'zz old <nombre>';
-el PDF de markups viejo -> 'zz NO USAR - XF_markups_rev1 old.pdf'. Uso: drive_viejos.py <carpeta_local_entrega> <id_drive> [--hacer]"""
+"""BE-XF07: antes de re-subir rev1 FINAL, renombra en Drive (NUNCA borra) los archivos cuyo contenido cambió: 'BORRAR (NO USAR) - old <nombre>' (U-186; antes 'zz old');
+el PDF de markups viejo -> 'BORRAR (NO USAR) - XF_markups_rev1 old.pdf'. Uso: drive_viejos.py <carpeta_local_entrega> <id_drive> [--hacer]"""
 import sys, os, json, hashlib, requests
 sys.path.insert(0, '/opt/takeoff'); import gdrive_fetch as G
 loc, raiz, hacer = sys.argv[1], sys.argv[2], '--hacer' in sys.argv
@@ -21,14 +21,14 @@ def rec(dl, fid):
         if it["mimeType"].endswith("folder"):
             if os.path.isdir(pl): rec(pl, it["id"])
             continue
-        if n.startswith("zz "):
+        if n.startswith(("zz ", "BORRAR (NO USAR) - ")):
             continue
         if U174 and n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
-            cambios.append((it["id"], os.path.relpath(pl, loc), f"zz NO USAR - XF_markups_rev1b old (antes de {TAG}).pdf")); continue
+            cambios.append((it["id"], os.path.relpath(pl, loc), f"BORRAR (NO USAR) - XF_markups_rev1b old (antes de {TAG}).pdf")); continue
         if n == "XF_markups_rev1 - OPEN IN BLUEBEAM.pdf":
-            cambios.append((it["id"], os.path.relpath(pl, loc), "zz NO USAR - XF_markups_rev1 old.pdf"))
+            cambios.append((it["id"], os.path.relpath(pl, loc), "BORRAR (NO USAR) - XF_markups_rev1 old.pdf"))
         elif os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
-            cambios.append((it["id"], os.path.relpath(pl, loc), (f"zz old {TAG} " if U174 else "zz old ") + n))
+            cambios.append((it["id"], os.path.relpath(pl, loc), (f"BORRAR (NO USAR) - old {TAG} " if U174 else "BORRAR (NO USAR) - old ") + n))
 rec(loc, raiz)
 for c in cambios:
     print(("RENOMBRADO " if hacer else "A RENOMBRAR ") + c[1] + " -> " + c[2])
