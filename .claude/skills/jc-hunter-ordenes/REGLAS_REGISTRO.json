@@ -8541,7 +8541,7 @@
   {
    "id": "BE-PM05",
    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
-   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121 RETRO: arranque = marca de tiempos.log con 'rev<N>' o la primera después de las de otra rev, en orden del archivo; log acumulado sin etiqueta, año imposible o marcas fuera de orden = FAIL ; v123: las fechas de gating (FECHA_V119 / V120 / V121) = hora REAL del commit de publicación (fe675f8 / 1554ae1 / 51ce837): una regla aplica solo a revs que arrancaron después de publicada ; v124: RX_REV_ETIQ con límites alfanuméricos ('entrega_rev3b')",
+   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121 RETRO: arranque = marca de tiempos.log con 'rev<N>' o la primera después de las de otra rev, en orden del archivo; log acumulado sin etiqueta, año imposible o marcas fuera de orden = FAIL ; v123: las fechas de gating (FECHA_V119 / V120 / V121) = hora REAL del commit de publicación (fe675f8 / 1554ae1 / 51ce837): una regla aplica solo a revs que arrancaron después de publicada ; v124: RX_REV_ETIQ con límites alfanuméricos ('entrega_rev3b') ; v127 (CR): etiqueta de la rev = nombre del Excel / PDF de la entrega -> VERSION_PROYECTO.txt -> carpeta",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8549,11 +8549,12 @@
     "take-off:tools/compuerta_entrega.py::fijar_version_proyecto",
     "take-off:tools/compuerta_entrega.py::proceso_v119",
     "take-off:tools/compuerta_entrega.py::inicio_rev",
-    "take-off:tools/compuerta_entrega.py::inicio_rev_info"
+    "take-off:tools/compuerta_entrega.py::inicio_rev_info",
+    "take-off:tools/compuerta_entrega.py::_etiqueta_rev"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
-    "token": "test_v123_fechas_publicacion"
+    "token": "test_v127_etiqueta_rev_cr"
    }
   },
   {

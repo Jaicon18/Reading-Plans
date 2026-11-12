@@ -1,0 +1,173 @@
+diff -ruN v126/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v127/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v126/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:23:21.970721493 +0000
++++ v127/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 23:23:21.978636170 +0000
+@@ -8541,7 +8541,7 @@
+   {
+    "id": "BE-PM05",
+    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
+-   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121 RETRO: arranque = marca de tiempos.log con 'rev<N>' o la primera después de las de otra rev, en orden del archivo; log acumulado sin etiqueta, año imposible o marcas fuera de orden = FAIL ; v123: las fechas de gating (FECHA_V119 / V120 / V121) = hora REAL del commit de publicación (fe675f8 / 1554ae1 / 51ce837): una regla aplica solo a revs que arrancaron después de publicada ; v124: RX_REV_ETIQ con límites alfanuméricos ('entrega_rev3b')",
++   "texto_corto": "NO GUARD 3.2: versión del skill fija por proyecto (VERSION_PROYECTO.txt al arrancar cada rev; compuerta_entrega.py version_proyecto); la compuerta final corre con esa versión; cambiarla a mitad de la rev exige causa y re-corrida completa, si no FAIL en CE_PROTOCOLO_3H; v120 (COORDINACIÓN, CR rev20b / GK rev3b): en una rev que arrancó ANTES de FECHA_V119 (primera marca de tiempos.log, formato viejo '05-nov 11:26 PST' incluido, o primer commit de la rev) los requisitos de proceso salen AMBER con la causa escrita; rev sin fecha = FAIL ; v121 RETRO: arranque = marca de tiempos.log con 'rev<N>' o la primera después de las de otra rev, en orden del archivo; log acumulado sin etiqueta, año imposible o marcas fuera de orden = FAIL ; v123: las fechas de gating (FECHA_V119 / V120 / V121) = hora REAL del commit de publicación (fe675f8 / 1554ae1 / 51ce837): una regla aplica solo a revs que arrancaron después de publicada ; v124: RX_REV_ETIQ con límites alfanuméricos ('entrega_rev3b') ; v127 (CR): etiqueta de la rev = nombre del Excel / PDF de la entrega -> VERSION_PROYECTO.txt -> carpeta",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8549,11 +8549,12 @@
+     "take-off:tools/compuerta_entrega.py::fijar_version_proyecto",
+     "take-off:tools/compuerta_entrega.py::proceso_v119",
+     "take-off:tools/compuerta_entrega.py::inicio_rev",
+-    "take-off:tools/compuerta_entrega.py::inicio_rev_info"
++    "take-off:tools/compuerta_entrega.py::inicio_rev_info",
++    "take-off:tools/compuerta_entrega.py::_etiqueta_rev"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+-    "token": "test_v123_fechas_publicacion"
++    "token": "test_v127_etiqueta_rev_cr"
+    }
+   },
+   {
+diff -ruN v126/take-off-metal-frame-drywall/SKILL.md v127/take-off-metal-frame-drywall/SKILL.md
+--- v126/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:23:21.976757433 +0000
++++ v127/take-off-metal-frame-drywall/SKILL.md	2026-11-12 23:23:21.982923412 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf126** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf127** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,9 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf127 (COORDINACIÓN 12-nov 23:16, CR):** la etiqueta de la rev (RETRO, inicio_rev_info) se toma en este orden: (1) el nombre del
++  Excel o del PDF de markups de la entrega ('…_rev20b.xlsx'); (2) VERSION_PROYECTO.txt (--rev); (3) el nombre de la carpeta. Un workdir
++  'entrega' sin revN ya no deja la rev sin fecha.
+ - **v81cf126 (COORDINACIÓN 12-nov 23:13, bloqueos de entrega de GK y CR):** (1) CE_COBERTURA: una corrida sin agente REEMPLAZADA (la
+   misma tool corrida después con SUBAGENTE_ID) = AMBER 'cadena interrumpida y reemplazada'; sin reemplazo = FAIL; (2) BE-GK54 enlaza
+   exclusión y rojo SOLO por el id de CANON del muro (campos id / wall o el id de canon citado), nunca por ids de lector; la disposición se
+Binary files v126/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v127/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v127/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v127/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v126/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v127/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v126/take-off-metal-frame-drywall/tools/compuerta_entrega.py v127/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v126/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:23:21.974383931 +0000
++++ v127/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 23:23:21.982016619 +0000
+@@ -840,7 +840,32 @@
+ RX_REV_ETIQ = re.compile(r"(?i)(?<![a-z0-9])rev\s*-?\s*(\d{1,3}[a-z]?)(?![a-z0-9])")   # v124 (GK): 'entrega_rev3b' ('_' no corta \b)
+ 
+ 
+-def _etiqueta_rev(w):
++def _etiqueta_rev(w, entrega=None):
++    """v127 (COORDINACIÓN 12-nov 23:16, CR: workdir '/root/cr/work/entrega' sin revN): etiqueta de la rev, en este orden: (1) el nombre
++    del Excel o del PDF de markups de la entrega ('…_rev20b.xlsx'; si hay varias, la del archivo más nuevo); (2) VERSION_PROYECTO.txt
++    (la rev de su último renglón, la de --rev); (3) el nombre de la carpeta."""
++    cand = []
++    for d in [x for x in (entrega, w) if x and os.path.isdir(x)]:
++        for r, ds, fs in os.walk(d):
++            if os.path.relpath(r, d).count(os.sep) >= 2:
++                ds[:] = []
++            for f in fs:
++                if f.lower().endswith((".xlsx", ".pdf")):
++                    m = RX_REV_ETIQ.search(os.path.splitext(f)[0])
++                    if m:
++                        try:
++                            cand.append((os.path.getmtime(os.path.join(r, f)), m.group(1).lower()))
++                        except OSError:
++                            pass
++    if cand:
++        return max(cand)[1]
++    for d in [x for x in (w, entrega, os.path.dirname(os.path.normpath(w or ""))) if x]:
++        vp = os.path.join(d, "VERSION_PROYECTO.txt")
++        if os.path.isfile(vp):
++            revs = [RX_REV_ETIQ.search(ln.split("|")[1]) for ln in open(vp, encoding="utf-8", errors="ignore") if ln.count("|") >= 2]
++            revs = [m.group(1).lower() for m in revs if m]
++            if revs:
++                return revs[-1]
+     m = RX_REV_ETIQ.search(os.path.basename(os.path.normpath(w or "")))
+     return m.group(1).lower() if m else None
+ 
+@@ -857,7 +882,7 @@
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
+     if ms:
+-        et = _etiqueta_rev(w)
++        et = _etiqueta_rev(w, entrega)
+         etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
+         propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
+         if propias:
+diff -ruN v126/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v127/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v126/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:23:21.971425157 +0000
++++ v127/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 23:23:21.979267220 +0000
+@@ -3170,3 +3170,31 @@
+ 
+ 
+ test_v126_bloqueos_gk_cr()
++
++
++def test_v127_etiqueta_rev_cr():
++    """v127 (COORDINACIÓN 12-nov 23:16, caso CR, sintético): workdir 'entrega' sin revN + Excel '..._rev20b.xlsx' + marca 'inicio rev20b'
++    anterior a FECHA_V119 = AMBER; orden Excel / PDF -> VERSION_PROYECTO.txt -> carpeta."""
++    w = os.path.join(tempfile.mkdtemp(prefix="v127_"), "entrega")
++    os.makedirs(os.path.join(w, "Take-off"))
++    open(os.path.join(w, "Take-off", "Z9_Hotel_TakeOff_rev20b.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("10-nov 21:01 PST | (copiado de rev20a) arranque\n12-nov 11:49 PST | 1 inicio rev20b\n")
++    assert CE._etiqueta_rev(w) == "20b"
++    tt = "| Paso | Inicio | Fin | Duración |\n|---|---|---|---|\n| 7 | 11-12 11:50 | 11-12 12:20 | 30 min |\n"
++    est, msg = CE.proceso_v119(w, None, tt, 5)
++    assert est == "AMBER" and "causa:" in msg[0], (est, msg)          # 19:49 UTC < FECHA_V119 (21:21:52Z)
++    w2 = os.path.join(tempfile.mkdtemp(prefix="v127b_"), "entrega")
++    os.makedirs(w2)
++    open(os.path.join(w2, "VERSION_PROYECTO.txt"), "w").write("2026-11-12T10:00:00+00:00 | rev20a | v81cf118 | \n2026-11-12T19:49:00+00:00 | rev20b | v81cf118 | \n")
++    assert CE._etiqueta_rev(w2) == "20b"                              # (2) VERSION_PROYECTO.txt
++    w3 = os.path.join(tempfile.mkdtemp(prefix="v127c_"), "entrega_rev3b")
++    os.makedirs(w3)
++    assert CE._etiqueta_rev(w3) == "3b"                               # (3) carpeta
++    open(os.path.join(w3, "VERSION_PROYECTO.txt"), "w").write("2026-11-12T10:00:00+00:00 | rev3c | v81cf118 | \n")
++    assert CE._etiqueta_rev(w3) == "3c"                               # VERSION_PROYECTO antes que la carpeta
++    open(os.path.join(w3, "X_markups_rev3d.pdf"), "w").write("x")
++    assert CE._etiqueta_rev(w3) == "3d"                               # el PDF / Excel de la entrega manda
++    print("test_v127_etiqueta_rev_cr OK")
++
++
++test_v127_etiqueta_rev_cr()
