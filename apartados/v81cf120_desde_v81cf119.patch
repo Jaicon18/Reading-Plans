@@ -1,0 +1,366 @@
+diff -ruN v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:29:40.669711873 +0000
++++ v120/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 21:29:40.676014088 +0000
+@@ -7846,7 +7846,7 @@
+   {
+    "id": "U-185",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, vía COORDINACIÓN)",
+-   "texto_corto": "post-mortem de cobertura al cerrar cada proyecto: verificar_version FALLA si el último proyecto cerrado no tiene POSTMORTEM_COBERTURA_<fecha>.md con 0 WEAK / 0 MISSING abiertos (conducta solo con su motivo); v81cf119: cierre = última subida de la rev vigente (hora completa) y solo el post-mortem MÁS NUEVO; verificación 12b: solo cuenta POSTMORTEM_COBERTURA_<fecha>[letra].md con su tabla (sin tabla = FALLA), los _VERIFICACION / _CIERRE se leen y manda el más estricto, y la tabla de causas con NO GUARD = abierto; verificación 2: TODAS las _VERIFICACION* en orden de hora; un renglón abierto se cierra solo con CONFIRMED-CLOSED explícito en una verificación más nueva (omitirlo no lo cierra); verificación sin tabla = FALLA",
++   "texto_corto": "post-mortem de cobertura al cerrar cada proyecto: verificar_version FALLA si el último proyecto cerrado no tiene POSTMORTEM_COBERTURA_<fecha>.md con 0 WEAK / 0 MISSING abiertos (conducta solo con su motivo); v81cf119: cierre = última subida de la rev vigente (hora completa) y solo el post-mortem MÁS NUEVO; verificación 12b: solo cuenta POSTMORTEM_COBERTURA_<fecha>[letra].md con su tabla (sin tabla = FALLA), los _VERIFICACION / _CIERRE se leen y manda el más estricto, y la tabla de causas con NO GUARD = abierto; verificación 2: TODAS las _VERIFICACION* en orden de hora; un renglón abierto se cierra solo con CONFIRMED-CLOSED explícito en una verificación más nueva (omitirlo no lo cierra); verificación sin tabla = FALLA; v120 (verificación 3): cierre = estado EXACTO 'OK — CONFIRMED-CLOSED' (anclado); un principal nuevo no borra los abiertos de uno anterior (se arrastran desde el 12b)",
+    "categoria": "programa",
+    "cuando": "version",
+    "chequeos": [
+@@ -8473,7 +8473,7 @@
+   {
+    "id": "U-193",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo y no lo vayas a contar ... verificar esto de una manera rápida')",
+-   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7",
++   "texto_corto": "⭐ REGLA INVIOLABLE — MAPA DE COBERTURA: verificación negativa (muros y cielos NO marcados = ROJO), REVISIÓN DE ROJOS por un revisor independiente con su recorte (Auditoria/ROJOS/) antes de entregar — FALTA = se agrega por la cadena; NO ES NUESTRO = disposición con motivo impreso N/HOJA, revisor e imagen —; COBERTURA - IMAGE ONLY.pdf con 0 rojos abiertos + COBERTURA.csv + CHECKLIST B6; verificación 12b: decision FALTA nunca limpia un rojo (solo NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo); reviewer = id de subagente registrado en la bitácora (bitacora.py subagente revisor_cobertura <id>) y distinto del que armó el canon; RCP con 0 cuartos = detector ciego; sin CHECKLIST con B6 = FAIL; mutación sintética en la suite (test_v119_mutacion_cobertura); verificación 2: los autores se registran SOLOS (SUBAGENTE_ID en el entorno: bitacora.py run anota 'agente'); sin autores del canon registrados = FAIL; solo el rol exacto revisor_cobertura; el revisor no puede haber escrito ninguna etapa 2-7; v120: autor = agente de las corridas selladas (toda corrida de etapas 2-7 con agente o FAIL; autor del canon solo de canon.py), ids en minúsculas",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8504,7 +8504,7 @@
+   {
+    "id": "BE-PM04",
+    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
+-   "texto_corto": "NO GUARD 3.1 (post-mortem 2026-11-12b): ninguna versión se publica sin correr la compuerta de la candidata y de la vigente sobre las entregas abiertas; PASS -> FAIL sin explicación = no se publica (compuerta_entrega.py prueba_abiertos -> skills_archivo/PRUEBA_ABIERTOS_vN.json, verificar_version lo exige); verificación 12b: '<proyecto>=<carpeta>', corridas de varias sesiones se unen; verificar_version exige para la versión del CANDIDATO todos los proyectos de skills_archivo/PROYECTOS_ABIERTOS.json con 0 regresiones sin explicar; verificación 2: lista vacía = FALLA; todo proyecto con entrega vigente (SUBIDA_OK desde U-157) sin CSV_BLUEBEAM_<rev>/RESULTADO.md N/N y 0 faltantes tiene que estar en la lista; cada proyecto del PRUEBA guarda el sha256 del árbol tools/ y tiene que ser el del candidato",
++   "texto_corto": "NO GUARD 3.1 (post-mortem 2026-11-12b): ninguna versión se publica sin correr la compuerta de la candidata y de la vigente sobre las entregas abiertas; PASS -> FAIL sin explicación = no se publica (compuerta_entrega.py prueba_abiertos -> skills_archivo/PRUEBA_ABIERTOS_vN.json, verificar_version lo exige); verificación 12b: '<proyecto>=<carpeta>', corridas de varias sesiones se unen; verificar_version exige para la versión del CANDIDATO todos los proyectos de skills_archivo/PROYECTOS_ABIERTOS.json con 0 regresiones sin explicar; verificación 2: lista vacía = FALLA; todo proyecto con entrega vigente (SUBIDA_OK desde U-157) sin CSV_BLUEBEAM_<rev>/RESULTADO.md N/N y 0 faltantes tiene que estar en la lista; cada proyecto del PRUEBA guarda el sha256 del árbol tools/ y tiene que ser el del candidato; v120: SUBIDA_OK con o sin rev o VERSION_PROYECTO.txt más nuevo que el CSV N/N (con fecha) = abierto; regresiones de cada proyecto leídas; detector siempre (cache_proyectos junto a skills_archivo); version_candidata y sha_tools obligatorios; prueba_abiertos exige '<proyecto>='",
+    "categoria": "programa",
+    "cuando": "version",
+    "chequeos": [
+@@ -8537,7 +8537,7 @@
+   {
+    "id": "BE-PM06",
+    "origen": "POSTMORTEM_COBERTURA_2026-11-12b.md (CR rev20a, U-185)",
+-   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL)",
++   "texto_corto": "NO GUARD 3.3: alarma de presupuesto en vivo: compuerta --paso mide tiempos.log y escribe ALERTA_PRESUPUESTO.json al 50 % y al 100 % del presupuesto U-169; pasado el 100 % hace falta 'causa:' Y 'plan:' (el corte decidido) o FAIL; verificación 12b: CE_PROTOCOLO_3H (entregas nuevas) exige una corrida --paso por cada paso 1-9 cerrado en tiempos.log y la alerta del 50 % / 100 % escrita a más tardar al cerrar el paso siguiente al cruce (historial en ALERTA_PRESUPUESTO.json); verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y tiempos.log cuadran (marca a la hora de cada paso cerrado, no menos marcas que pasos); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl sellados en la cadena de hashes de la bitácora (editados a mano = FAIL); v120: las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md (no por el texto 'N fin' del log)",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -8546,7 +8546,8 @@
+     "take-off:tools/compuerta_entrega.py::alarma_fallas",
+     "take-off:tools/compuerta_entrega.py::sellar_bitacora",
+     "take-off:tools/compuerta_entrega.py::sellos_fallas",
+-    "take-off:tools/compuerta_entrega.py::tiempos_cuadran_fallas"
++    "take-off:tools/compuerta_entrega.py::tiempos_cuadran_fallas",
++    "take-off:tools/compuerta_entrega.py::pasos_cerrados_tiempos"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8601,7 +8602,7 @@
+    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3a -> rev3b, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54 en v81cf119)",
+    "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL",
++   "texto_corto": "dos bandas paralelas con gap impreso o con dos tags son DOS walls: meter uno en excluded_walls como 'same wall as X' exige probar que el gap no existe (gap_proof con N/HOJA); CE_COBERTURA cruza cada exclusión 'same wall' con el mapa de cobertura (banda ROJA paralela a <=14\" + espesor) = FAIL; v120: cualquier formato de id y sinónimos (same as / duplicate of / part of wall), gap_proof solo con N/HOJA, wall sin band o inexistente = FAIL, límite de leaves fusionadas en la GUÍA (entregas nuevas)",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::be_gk54_fallas",
+     "take-off:tools/compuerta_entrega.py::ce_cobertura"
+diff -ruN v119/take-off-metal-frame-drywall/SKILL.md v120/take-off-metal-frame-drywall/SKILL.md
+--- v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:29:40.673816205 +0000
++++ v120/take-off-metal-frame-drywall/SKILL.md	2026-11-12 21:29:40.680713534 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf119** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf120** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -375,6 +375,13 @@
+   con TIEMPOS.md (una marca a la hora de cada paso cerrado); ALERTA_PRESUPUESTO.json y compuerta_corridas.jsonl los escribe y SELLA la
+   compuerta en la bitácora (editarlos a mano = FAIL). prueba_abiertos guarda el sha256 de tools/: re-correrla con el candidato FINAL.
+   BE-GK54: excluir un wall como 'same wall as X' exige gap_proof con N/HOJA si el mapa muestra otra banda paralela roja.
++  v81cf120 (verificación 3 de v119): el cierre de un renglón del post-mortem es SOLO el estado exacto 'OK — CONFIRMED-CLOSED' en una
++  verificación, y un principal nuevo no borra los abiertos del anterior; prueba_abiertos exige '<proyecto>=<carpeta>' y verificar_version
++  lee las regresiones de cada proyecto y detecta SIEMPRE los abiertos (SUBIDA_OK con o sin rev o VERSION_PROYECTO.txt más nuevo que el
++  CSV N/N con fecha = abierto); las corridas --paso se exigen por cada paso cerrado en TIEMPOS.md; toda corrida de las etapas 2-7 lleva
++  su agente (SUBAGENTE_ID) o CE_COBERTURA = FAIL, el autor del canon sale solo de las corridas de canon.py, ids en minúsculas;
++  BE-GK54 reconoce cualquier id y 'same as' / 'duplicate of' / 'part of wall', gap_proof solo con N/HOJA, wall sin band = FAIL, y la
++  GUÍA documenta que dos leaves fusionadas por el mapa no salen en rojo.
+ 
+ ## Etapa 4 — CÁLCULO
+ 
+diff -ruN v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:29:40.673689794 +0000
++++ v120/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 21:29:40.676674427 +0000
+@@ -687,6 +687,7 @@
+ FECHA_V109 = "2026-11-12T04:50:00+00:00"      # v81cf109: U-191 (documento citado con su ítem / párrafo)
+ FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
+ FECHA_V119 = "2026-11-12T19:00:00+00:00"      # v81cf119: U-193 mapa de cobertura (CE_COBERTURA)
++FECHA_V120 = "2026-11-12T21:30:00+00:00"          # v81cf120 (BE-GK54 límite en la GUÍA): entregas subidas antes = no se exige
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+ U189_CB = {"CB_RCP_APILADOS": FECHA_V119, "CB_DETALLE_CARAS": FECHA_V119, "CB_FALTANTES_AUDITORIA": FECHA_V119, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114, "CE_COBERTURA": FECHA_V119}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
+ 
+@@ -800,6 +801,20 @@
+ RX_TIEMPOS_FIN = re.compile(r"(?:(\d{1,2})-(\d{1,2})\s+)?(\d{1,2}):(\d{2})")
+ 
+ 
++def pasos_cerrados_tiempos(tiempos_txt):
++    """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila '| N | … | inicio | fin con hora | …'). -> ['1', '2-3', …]"""
++    out = []
++    for ln in str(tiempos_txt or "").splitlines():
++        m = RX_TIEMPOS_FILA.match(ln.strip())
++        if not m:
++            continue
++        nums = [int(x) for x in re.findall(r"\d+", m.group(1))]
++        cs = [x.strip() for x in ln.strip().strip("|").split("|")]
++        if any(1 <= n <= 9 for n in nums) and len(cs) > 3 and RX_TIEMPOS_FIN.search(cs[3]):
++            out.append(m.group(1).replace(" ", ""))
++    return out
++
++
+ def tiempos_cuadran_fallas(tiempos_txt, ms):
+     """BE-PM06 (verificación 2): TIEMPOS.md y tiempos.log cuadran: cada paso 1-9 cerrado en TIEMPOS.md (columna Fin con hora) tiene en
+     tiempos.log una marca a esa misma hora (y fecha MM-DD si la trae), y el log tiene al menos tantas marcas como pasos cerrados."""
+@@ -845,10 +860,17 @@
+                                                  if x.strip().startswith("{")] if os.path.isfile(os.path.join(w, "compuerta_corridas.jsonl")) else []
+     corridos = {str(r.get("paso")) for r in reg if r.get("paso")}
+     fins = [(t, m.group(1)) for t, ln in ms for m in RX_PASO_FIN.finditer(ln)]
++    if tiempos_txt is not None:                         # v120 (verificación 3, E3): los pasos cerrados salen de TIEMPOS.md, no del texto del log
++        for paso in pasos_cerrados_tiempos(tiempos_txt):
++            nums = [int(x) for x in paso.split("-")]
++            if not ({paso} | {str(n) for n in nums}) & corridos:
++                ev.append(f"paso {paso} cerrado en TIEMPOS.md sin su corrida 'compuerta_entrega.py <w> --paso {paso}' (BE-PM06)")
+     for t, paso in fins:
+         nums = [int(x) for x in paso.split("-")]
+         if not any(1 <= n <= 9 for n in nums):
+             continue                                    # 0 = arranque, 10 = subida (después de la compuerta final)
++        if tiempos_txt is not None and paso in pasos_cerrados_tiempos(tiempos_txt):
++            continue                                    # ya revisado arriba
+         if not ({paso} | {str(n) for n in nums}) & corridos:
+             ev.append(f"paso {paso} cerrado {t:%Y-%m-%d %H:%M} (tiempos.log) sin su corrida 'compuerta_entrega.py <w> --paso {paso}' "
+                       "(BE-PM06)")
+@@ -3602,27 +3624,31 @@
+ 
+ TOOLS_REVISION = {"compuerta_entrega.py", "checklist_revision.py", "subir_entrega.py", "comparar_csv_bluebeam.py", "BACKCHECK", "SELLO",
+                   "SUBAGENTE"}
++TOOLS_ETAPA_0_1 = {"arranque.py", "inventario_tags.py", "palabras_fitz.py", "escala_pagina.py", "quitar_firmas_labels.py"}
+ 
+ 
+ def subagentes_bitacora(w):
+-    """U-193 (verificaciones 12b y 2): -> (ids registrados con el rol EXACTO revisor_cobertura, ids autores de las etapas 2-7, ids autores
+-    del canon). Autores = el 'agente' (SUBAGENTE_ID) de cada corrida de `bitacora.py run` de una tool de la cadena (no de revisión) +
+-    los `bitacora.py subagente <rol> <id>` con otro rol; autores del canon = los de canon.py o con rol canon / lectura."""
+-    rev, autores, canon = set(), set(), set()
++    """U-193 (verificaciones 12b, 2 y 3): de la bitácora SELLADA -> (revisores, autores, autores del canon, corridas sin agente).
++    Revisores = `bitacora.py subagente revisor_cobertura <id>` (rol EXACTO). Autores = el 'agente' (SUBAGENTE_ID) de cada corrida de
++    `bitacora.py run` de una tool de las etapas 2-7 (no de revisión, no de arranque / inventario) y los `subagente` con otro rol; autores
++    del canon = SOLO el agente de las corridas de canon.py (un `subagente canon` declarado no cuenta). Ids en minúsculas. Corridas de
++    etapas 2-7 sin agente -> lista (FAIL en CE_COBERTURA)."""
++    rev, autores, canon, sin = set(), set(), set(), []
+     for r in _renglones_bitacora(w):
+         if r.get("tool") == "SUBAGENTE":
+             rol, i = [str(x).strip() for x in (list(r.get("args") or []) + ["", ""])[:2]]
+-            if rol == "revisor_cobertura":
+-                rev.add(i)
+-            else:
+-                autores.add(i)
+-                if re.match(r"(?i)canon|lectura|takeoff", rol):
+-                    canon.add(i)
+-        elif str(r.get("agente") or "").strip() and r.get("tool") not in TOOLS_REVISION:
+-            autores.add(str(r["agente"]).strip())
+-            if r.get("tool") == "canon.py":
+-                canon.add(str(r["agente"]).strip())
+-    return rev, autores, canon
++            (rev if rol == "revisor_cobertura" else autores).add(i.lower())
++            continue
++        if r.get("tool") in TOOLS_REVISION or r.get("tool") in TOOLS_ETAPA_0_1 or "log" not in r:
++            continue                                    # solo corridas de `bitacora.py run` de las etapas 2-7
++        ag = str(r.get("agente") or "").strip().lower()
++        if not ag:
++            sin.append(f"{r.get('tool')} {r.get('ts', '')}")
++            continue
++        autores.add(ag)
++        if r.get("tool") == "canon.py":
++            canon.add(ag)
++    return rev, autores, canon, sin
+ 
+ 
+ def protocolo_3h_fallas(w, entrega, excel, pdf, subida=None, tiempos_txt="", corridas=None, ahora=None, registro_corridas=None, cobertura=None):
+@@ -3781,8 +3807,9 @@
+             out["regresiones"] = prev.get("regresiones") or []
+             out["version_vigente"] = prev.get("version_vigente")
+     for w in workdirs:
+-        nom, w = (w.split("=", 1) if "=" in w and not os.path.exists(w) else
+-                  (os.path.basename(os.path.abspath(w).rstrip("/")) or w, w))   # 'grand_kia=<workdir>': nombre del proyecto
++        if "=" not in w or os.path.exists(w):               # v120 (verificación 3): la clave es el NOMBRE del proyecto de cache_proyectos
++            raise ValueError(f"prueba_abiertos: '{w}' sin '<proyecto>=<carpeta>' (nombre de cache_proyectos, BE-PM04)")
++        nom, w = w.split("=", 1)
+         out["regresiones"] = [r for r in out["regresiones"] if r.get("proyecto") != nom]
+         vig = _correr_con(tools_vigente, w, os.path.join(_tf.mkdtemp(prefix="pa_"), "vig.json")) or {}
+         cand = correr(w)
+@@ -6296,7 +6323,8 @@
+     return {"hojas": res, "filas": filas, "rojos": sum(r["rojos"] for r in res.values()), "ciegas": ciegas, "ciegas_rcp": ciegas_rcp}
+ 
+ 
+-RX_GK54_SAME = re.compile(r"(?i)\bsame\s+(?:single\s+)?wall\s+as\s+([A-Z][A-Z0-9]*-Z\d-\d{2})")
++RX_GK54_SAME = re.compile(r"(?i)\b(?:same\s+(?:single\s+)?(?:wall\s+)?as|duplicate\s+of|part\s+of(?:\s+wall)?)\s+(?:wall\s+)?"
++                          r"([A-Za-z0-9][\w./-]*[A-Za-z0-9])")      # v120: cualquier formato de id y los sinónimos
+ 
+ 
+ def be_gk54_fallas(canon, cob_rows, esc=9.0, gap_in=14.0, to_canon=None, escalas=None):
+@@ -6309,10 +6337,16 @@
+     ev = []
+     for e in (canon or {}).get("excluded_walls") or []:
+         m = RX_GK54_SAME.search(str(e.get("reason") or ""))
+-        if not m or str(e.get("gap_proof") or "").strip():
++        if not m or RX_NH_TRAZA.search(str(e.get("gap_proof") or "")):
++            continue                                    # v120: gap_proof vale solo con su N/HOJA impresa
++        if m.group(1) not in walls:
++            ev.append(f"{e.get('id')}: excluded as 'same wall as {m.group(1)}' but {m.group(1)} is not a wall of the canon: the exclusion "
++                      "cannot be checked against the coverage map (BE-GK54)")
+             continue
+-        b = (walls.get(m.group(1)) or {}).get("band") or {}
++        b = walls[m.group(1)].get("band") or {}
+         if b.get("ori") not in ("H", "V"):
++            ev.append(f"{e.get('id')}: excluded as 'same wall as {m.group(1)}' but {m.group(1)} has no 'band' (ori H / V, c0, c1, lo, hi, "
++                      "sheet) in the canon: the gap cannot be checked (BE-GK54); add the band or a gap_proof with N/SHEET")
+             continue
+         c_mid = (float(b["c0"]) + float(b["c1"])) / 2
+         lo, hi = sorted((float(b["lo"]), float(b["hi"])))
+@@ -6489,14 +6523,18 @@
+     ev += [f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')} con decision '{d.get('decision')}': solo "
+            "NO ES NUESTRO / NO ES MURO / CUBIERTO con motivo limpian un rojo (FALTA se corrige en la cadena)" for d in disp
+            if not RX_COB_DECISION_OK.match(str(d.get("decision") or "").strip()) and not re.match(r"(?i)FALTA|MISSING", str(d.get("decision") or "").strip())]
+-    rev_ok, autores, canon_ids = subagentes_bitacora(c.w)   # verificación 2: revisor REGISTRADO (rol exacto) y distinto de los autores
++    rev_ok, autores, canon_ids, sin_agente = subagentes_bitacora(c.w)   # revisor REGISTRADO (rol exacto), distinto de TODO autor 2-7
+     if disp and not canon_ids:
+-        ev.append("la bitácora no registra autores del canon (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py run, o "
+-                  "`bitacora.py subagente canon <id>`): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
++        ev.append("la bitácora no tiene corridas de canon.py con su agente (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py "
++                  "run): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
++    if disp and sin_agente:
++        ev.append(f"{len(sin_agente)} corrida(s) de las etapas 2-7 sin agente en la bitácora ({', '.join(sin_agente[:4])}): cada subagente "
++                  "trabaja con SUBAGENTE_ID (U-193)")
+     for d in disp:
+-        rv = str(d.get("revisor") or d.get("reviewer") or "").strip()
++        rv0 = str(d.get("revisor") or d.get("reviewer") or "").strip()
++        rv = rv0.lower()
+         if rv and (rv not in rev_ok or rv in autores):
+-            ev.append(f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')}: reviewer '{rv[:40]}' "
++            ev.append(f"{COB_DISP}: renglón {d.get('hoja')} {d.get('id') or d.get('x') or d.get('x0')}: reviewer '{rv0[:40]}' "
+                       + ("escribió etapas 2-7 de la cadena (autor del canon / take-off)" if rv in autores else
+                          "no está registrado en la bitácora con el rol revisor_cobertura (python3 tools/bitacora.py subagente "
+                          "revisor_cobertura <id>)") + " (U-193)")
+@@ -6505,6 +6543,9 @@
+     if not (re.search(r"(?i)diagonal", gt) and re.search(r"(?i)(?:single|one|una sola)\s+(?:missing\s+)?(?:face|cara)", gt)):
+         ev.append("la GUÍA del estimador no documenta los límites del mapa de cobertura (una sola cara faltante y los muros en diagonal NO "
+                   "salen en rojo; COORDINACIÓN 12-nov)")
++    if entrega_nueva(c, FECHA_V120) and not re.search(r"(?is)(?:fus|merg)\w*.{0,60}?\b(?:leaves|leaf|hojas)\b|\b(?:leaves|leaf|hojas)\b.{0,60}?(?:fus|merg)\w*", gt):
++        ev.append("la GUÍA no documenta el límite BE-GK54: dos leaves que el mapa fusiona en un solo muro cubierto no salen en rojo (la "
++                  "exclusión 'same wall' necesita su gap_proof con N/HOJA; v120)")
+     for k in ("pdf", "csv"):
+         if not os.path.isfile(rutas[k]):
+             ev.append(f"falta {os.path.relpath(rutas[k], c.entrega)}: python3 -I tools/compuerta_entrega.py cobertura <carpeta de entrega>")
+diff -ruN v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:29:40.673577079 +0000
++++ v120/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 21:29:40.676584812 +0000
+@@ -2445,7 +2445,8 @@
+             wr.writerow({"hoja": f["hoja"], "tipo": f["tipo"], "id": f["id"], "x": f["x"], "y": f["y"], "decision": "NO ES NUESTRO",
+                          "motivo": "EXISTING CONSTRUCTION TO REMAIN", "nhoja": "2/X9.01", "reviewer": "subagente R9", "imagen": f["imagen"]})
+     open(os.path.join(e, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write(
+-        "## Coverage map limits\nA single missing face of a marked wall does not show in red; diagonal walls are not detected.\n")
++        "## Coverage map limits\nA single missing face of a marked wall does not show in red; diagonal walls are not detected; two leaves "
++        "fused by the map into one covered wall do not show in red (a 'same wall' exclusion needs its gap_proof with N/SHEET).\n")
+     CE.cobertura_entrega(e)
+     ev = chk(CE.ce_cobertura, CE.Ctx(w))                                # verificación 12b: sin CHECKLIST con B6 = FAIL
+     assert ev[0] == "FAIL" and "CHECKLIST" in str(ev[1]) and "reviewer 'subagente R9'" in str(ev[1]), ev   # y revisor no registrado
+@@ -2453,7 +2454,7 @@
+     BT.BIT = os.path.join(w, "bitacora.jsonl")
+     BT.subagente("revisor_cobertura", "subagente R9")
+     ev = chk(CE.ce_cobertura, CE.Ctx(w))                                # verificación 2: sin autores del canon registrados = FAIL
+-    assert ev[0] == "FAIL" and "autores del canon" in str(ev[1]), ev
++    assert ev[0] == "FAIL" and "corridas de canon.py con su agente" in str(ev[1]), ev
+     tl_ = os.path.join(w, "canon.py")                                   # los autores se registran SOLOS: SUBAGENTE_ID al correr canon.py
+     open(tl_, "w").write("print('canon sintético')\n")
+     viejo = os.environ.get("SUBAGENTE_ID")
+@@ -2463,6 +2464,15 @@
+     finally:
+         os.environ.pop("SUBAGENTE_ID") if viejo is None else os.environ.__setitem__("SUBAGENTE_ID", viejo)
+     assert [r.get("agente") for r in BT.leer() if r.get("tool") == "canon.py"] == ["subagente C9"]
++    ev = chk(CE.ce_cobertura, CE.Ctx(w))                                # v120 (U6): un canon.py SIN agente = FAIL aunque haya otro con agente
++    shutil.copy(os.path.join(w, "bitacora.jsonl"), os.path.join(w, "bit_c9.jsonl"))
++    BT.run(tl_, [])
++    ev = chk(CE.ce_cobertura, CE.Ctx(w))
++    assert ev[0] == "FAIL" and "sin agente" in str(ev[1]), ev
++    shutil.copy(os.path.join(w, "bit_c9.jsonl"), os.path.join(w, "bitacora.jsonl"))
++    BT.subagente("canon", "FAKE-CANON")                                 # un 'subagente canon' declarado no es autor del canon
++    assert "fake-canon" not in CE.subagentes_bitacora(w)[2]
++    shutil.copy(os.path.join(w, "bit_c9.jsonl"), os.path.join(w, "bitacora.jsonl"))
+     wb = openpyxl.Workbook()
+     wb.active.title = "B1 Excel"
+     wb.create_sheet("B6 Coverage")
+@@ -2475,11 +2485,12 @@
+     ev = chk(CE.ce_cobertura, CE.Ctx(w))
+     assert ev[0] == "FAIL" and "B6" in str(ev[1]), ev                     # CHECKLIST sin la hoja B6
+     shutil.copy(os.path.join(w, "bitacora.jsonl"), os.path.join(w, "bit0.jsonl"))
+-    BT.anotar({"tool": "resolver.py", "args": [], "rc": 0, "hashes": {}, "agente": "subagente R9"})   # el revisor escribió una etapa
++    BT.anotar({"tool": "resolver.py", "args": [], "rc": 0, "hashes": {}, "log": "x", "agente": "SUBAGENTE r9"})   # el revisor escribió
++    # una etapa (U7: los ids se comparan en minúsculas)
+     ev = chk(CE.ce_cobertura, CE.Ctx(w))
+     assert ev[0] == "FAIL" and "escribió etapas 2-7" in str(ev[1]), ev
+     shutil.copy(os.path.join(w, "bit0.jsonl"), os.path.join(w, "bitacora.jsonl"))
+-    BT.anotar({"tool": "compuerta_entrega.py", "args": [], "rc": 0, "hashes": {}, "agente": "subagente R9"})   # correr la compuerta no
++    BT.anotar({"tool": "compuerta_entrega.py", "args": [], "rc": 0, "hashes": {}, "log": "x", "agente": "subagente R9"})   # la compuerta no
+     ev = chk(CE.ce_cobertura, CE.Ctx(w))                                # lo vuelve autor (aquí solo falta la B6 del paso anterior)
+     assert "escribió etapas" not in str(ev[1:]) and "B6" in str(ev[1:]), ev
+     shutil.copy(os.path.join(w, "bit0.jsonl"), os.path.join(w, "bitacora.jsonl"))
+@@ -2504,6 +2515,12 @@
+     assert ev[0] == "FAIL" and CE.COB_PDF in str(ev[1]), ev
+     CE.cobertura_entrega(e)
+     assert chk(CE.ce_cobertura, CE.Ctx(w))[0] == "PASS"
++    gp = os.path.join(e, "GUIA_DE_REVISION_DEL_ESTIMADOR.md")         # v120 BE-GK54: la GUÍA documenta el límite de leaves fusionadas
++    gtxt = open(gp).read()
++    open(gp, "w").write("## Coverage map limits\nA single missing face of a marked wall does not show in red; diagonal walls are not detected.\n")
++    ev = chk(CE.ce_cobertura, CE.Ctx(w))
++    assert ev[0] == "FAIL" and "BE-GK54" in str(ev[1]), ev
++    open(gp, "w").write(gtxt)
+     o = CE.mapa_cobertura                                               # detector ciego: planta con 0 muros / RCP con 0 cuartos = FAIL
+     for k, cg in (("ciegas", ["Z9.01"]), ("ciegas_rcp", ["Z9.31"])):
+         CE.mapa_cobertura = lambda *a, _k=k, _cg=cg, **kw: dict(o(*a, **kw), **{_k: _cg})
+@@ -2704,6 +2721,11 @@
+         assert o["ok"] and len(o["regresiones"]) == 1, o                                  # re-correr el mismo proyecto lo reemplaza
+         o = CE.prueba_abiertos("/no/importa", [f"proy_b={w2}"], sal, {"CE_X9": "explicado"})
+         assert set(o["proyectos"]) == {"proy_a", "proy_b"} and o["ok"], o                 # otra sesión: se unen
++        try:                                                            # v120: sin '<proyecto>=' no corre (la clave es el nombre)
++            CE.prueba_abiertos("/no/importa", [w2], sal)
++            raise AssertionError("prueba_abiertos sin nombre de proyecto debió fallar")
++        except ValueError:
++            pass
+     finally:
+         CE._correr_con, CE.correr = o1, o2
+     print("test_v119_prueba_abiertos OK")
+@@ -2766,6 +2788,19 @@
+     tc = CE._gk54_desde_pdf(f)
+     q = pymupdf.Point(1014.3, 1505.7) * pymupdf.open(f)[0].rotation_matrix
+     assert tc("Z9.11", 1014.3, 1505.7) == (q.x, q.y) and tc("Z9", 1.0, 2.0) == (1.0, 2.0)
++    def gk(wid, reason, extra=None, b=None):                            # v120 (verificación 3, adv_gk54)
++        band = canon["walls"][0]["band"] if b is None else b
++        can = {"walls": [{"id": wid, "band": band}], "excluded_walls": [dict({"id": "EX", "reason": reason}, **(extra or {}))]}
++        return CE.be_gk54_fallas(can, red_v)
++    assert gk("TO-W.4-L9-02", "same single wall as TO-W.4-L9-02"), "G1: id con otro formato"
++    assert gk("W-12", "same wall as W-12"), "G1b"
++    assert gk("X9-Z9-08", "duplicate of X9-Z9-08 (one wall)") and gk("X9-Z9-08", "same as X9-Z9-08") and gk("X9-Z9-08", "part of wall X9-Z9-08")
++    assert gk("X9-Z9-08", "same wall as X9-Z9-08", {"gap_proof": "n/a"}), "G3: gap_proof sin N/HOJA no vale"
++    assert not gk("X9-Z9-08", "same wall as X9-Z9-08", {"gap_proof": "1/X9.50 one wall, no gap"})
++    ev = gk("X9-Z9-08", "same wall as X9-Z9-08", b={})
++    assert ev and "no 'band'" in ev[0], ev                              # G6: sin band = FAIL, no salto silencioso
++    ev = CE.be_gk54_fallas({"walls": [], "excluded_walls": [{"id": "EX", "reason": "same wall as X9-Z9-77"}]}, red_v)
++    assert ev and "not a wall of the canon" in ev[0], ev
+     print("test_be_gk54 OK")
+ 
+ 
+@@ -2810,6 +2845,11 @@
+     rows = [json.loads(x) for x in open(os.path.join(w, "bitacora.jsonl"))]
+     import bitacora as BT
+     assert BT.cadena_ok(rows) == 0, "los sellos respetan la cadena de hashes"
++    w3 = tempfile.mkdtemp(prefix="al3_")                                # v120 (verificación 3, E3): log a las horas de fin SIN 'N fin'
++    open(os.path.join(w3, "tiempos.log"), "w").write("2026-01-05 10:00 | inicio\n2026-01-05 10:20 | inventario listo\n2026-01-05 10:50 | lecturas listas\n")
++    ev = CE.alarma_fallas(w3, 5, [], tiempos_txt=tt)
++    assert any("paso 1 cerrado en TIEMPOS.md" in x for x in ev) and any("paso 2-3 cerrado en TIEMPOS.md" in x for x in ev), ev
++    assert CE.alarma_fallas(w3, 5, [{"evento": "fin", "paso": "1"}, {"evento": "fin", "paso": "2-3"}], tiempos_txt=tt) == []
+     print("test_v119_alarma_verificacion2 OK")
+ 
+ 
