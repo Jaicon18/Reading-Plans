@@ -94,7 +94,8 @@ G += ["", "## Coverage map limits (U-193)",
       "`Planos marcados/COBERTURA - IMAGE ONLY.pdf` shows in RED every wall / room drawn on the plans that has no take-off markup (green = marked).",
       "Limits of that map: (1) a single missing face of a wall whose other face is marked does NOT show in red; (2) diagonal walls are NOT",
       "detected (only horizontal / vertical walls); (3) a missing ceiling inside a stacked (double) ceiling is checked by the double-ceiling",
-      "review (Auditoria/DOBLE_CIELO.csv), not by the map."]
+      "review (Auditoria/DOBLE_CIELO.csv), not by the map; (4) dimension / extension lines with 45-degree ticks and door leaves are filtered",
+      "out, but dimensions drawn with ARROWS are not, so an arrow-dimension pair may still show as a red (the independent reviewer disposes it)."]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 Z = ["# RESUMEN rev1 FINAL — Xfinity Interquest (Colorado Springs, CO)", "",
  "Primera y única entrega (U-169): revisión independiente completa hecha ANTES de entregar.", "",

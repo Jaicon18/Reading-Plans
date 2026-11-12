@@ -1,7 +1,7 @@
 # v81cf119 APARTADA (NO publicada: versiones congeladas por orden de COORDINACIÓN, 12-nov)
 
 Base: v81cf118. Aplicar: descomprimir v81cf118 en /tmp/v119 y
-`patch -p1 -d /tmp/v119/take-off-metal-frame-drywall < v81cf119_desde_v81cf118.patch`.
+`patch -p2 -d /tmp/v119/take-off-metal-frame-drywall < v81cf119_desde_v81cf118.patch` (verificado: el resultado es idéntico al candidato).
 
 ## Contenido: la regla nueva del usuario (MAPA DE COBERTURA) + BE-GK53 unido
 
@@ -125,3 +125,37 @@ lo confirma) y skills_archivo/PRUEBA_ABIERTOS_v81cf119.json con los 3 proyectos.
   - Con apartados/cobertura_v119/XF_COBERTURA_DISPOSICION.csv el mapa da 0 rojos abiertos (16 DISPUESTO).
   - Para rev1d (cuando se publique v119): la disposición y la sección 'Coverage map limits' de la GUÍA ya están preparadas
     (scripts/hacer_docs.py).
+
+
+## Ampliación 3 (COORDINACIÓN 20:06): filtro de cotas, extensión y hojas de puerta
+
+- `cob_marcas_cota` + `_cob_es_cota` (dentro de compuerta_entrega.py): no se forma un par de muro con una línea que tenga un tick de cota
+  a 45° (una línea sola o un paralelogramo relleno delgado, 2.5 pt-0.75 ft) con su centro EN el cruce H / V (<= 0.4 pt, COB_TICK_TOL_PT)
+  a <= 0.6 ft de su extremo, ni con la hoja de una puerta (un extremo toca el arco y el otro extremo es el centro del arco).
+- Lo que se probó y se descartó (cada uno borraba muros reales cubiertos): cualquier relleno chico como tick (XF perdió 15.6 LF
+  cubiertos; GK 283 LF); flechas como marca de cota (GK A111: la flecha de la línea guía de una burbuja cae en la esquina de un muro;
+  GK perdió 117.6 LF cubiertos); tolerancia 0.8 pt (un pedazo de trama en una esquina de GK A113 quitaba un rojo que es muro).
+  Las cotas con FLECHA quedan como límite documentado (SKILL.md y GUÍA 'Coverage map limits' punto 4).
+- Disposición de muros: el id M-<hoja>-<n> es un número de secuencia que cambia si cambia el detector (este filtro renumeró XF). Desde
+  ahora una disposición de muro por id vale solo con su x / y (a <= 2 ft); por id solo = no vale. Cielos siguen por número de cuarto.
+  La disposición de Xfinity se re-mapeó por posición (columna id_anterior): 12 renglones, 0 rojos abiertos; los 4 renglones de los
+  falsos (M-A2.0-4, -14, -17, -18 de antes) se quitaron porque el filtro ya no los saca.
+- Test: test_v119_cobertura agrega 2 líneas de extensión con tick y una hoja de puerta de 3'-6" con su arco (las dos partes fallan con
+  el candidato anterior y pasan con el filtro) y el caso muro-por-id sin x / y.
+
+### Falsos rojos por proyecto (falso = lo marcado NO es un muro; revisores independientes con recortes ctx + zoom)
+
+| Proyecto | Rojos de muro antes | Falsos antes | Rojos después | Falsos después | Quitados por el filtro | Cubiertos perdidos |
+|---|---|---|---|---|---|---|
+| Xfinity rev1c | 16 | 4 (25 %), todos cota / extensión / hoja | 12 | 0 (0 %) | 4 (los 4 falsos) | 0 muros reales (se fue 1 par cota + cara, 4.0 LF, imagen revisada) |
+| GK rev3a | 40 | 3 (7.5 %, IC95 2.6-19.9 %) + 1 dudoso | 40 | igual: 7.5 % | 0 | 0 |
+| CR rev20a | 437 | muestra 120: 9 (7.5 %, IC95 4.0-13.6 %) + 5 dudosos | 437 | igual: 7.5 % | 0 | 0 |
+
+- GK y CR NO tienen falsos de cota / extensión / puerta en lo revisado: sus falsos son de otro tipo:
+  - GK: escalera existente (borde / stringer / huellas, 3);
+  - CR: equipo en el trash area (3 lados de un cuadro), vidrio de storefront (2), ventana (1), borde de losa / curb exterior (2), una
+    puerta en el vano (1); dudosos: el "U" de 12" en la fachada sur repetido en cada nivel (parapet / marco, 5).
+- Meta <= 2 %: se cumple en Xfinity; NO en GK ni CR (7.5 %). Para bajarlos haría falta otro filtro (equipo / escalera / storefront:
+  líneas finas sin relleno ni trama), que no está en esta orden.
+
+Archivos: cobertura_v119/revision_falsos/ (res_GK.json, res_CR1.json, res_CR2.json, cr_muestra.txt semilla 119, crops_revision.py).

@@ -1,6 +1,6 @@
 diff -ruN v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 15:47:43.101587661 +0000
-+++ v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 20:05:57.713081189 +0000
++++ v119/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-12 20:28:36.981161987 +0000
 @@ -1,7 +1,7 @@
  {
 - "version": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL) + v81cf100 BE-CR36 / BE-CR37 + v81cf101 BE-CR36b + v81cf102 BE-GK39 / BE-GK40 (Grand Kia) + BE-XF11 + v81cf103 U-189 / BE-CR39 / BE-CR38 / U-188 + v81cf104 BE-PM03 (CB_RCP_TAGS todos los tags) + v81cf105 U-190 (REGLA DE ORO #3 doble cielo) + BE-CR40 + v81cf106 BE-XF12 + v81cf107 BE-GK41 + v81cf108 BE-XF13 + v81cf109 U-191 / BE-CR41 + v81cf110 BE-CR42 (conflict_note / delta temprano) + BE-GK42..47 unidos (GK47 arreglado en CB_BE_HF02) + v81cf111 BE-CR43 (registro de la compuerta sobrevive al re-armado, causa por corrida sin registro) + BE-XF14 (tope del watchdog con todos los markups, rejilla) + v81cf112 BE-CR43 forma CR '#N sin registro: causa' + BE-XF14 3 s / markup + v81cf113 U-192 (tasas de la Proposal decididas por el usuario) + BE-GK48 unidos + v81cf114 BE-AUD05..09 (auditoría U-138 del 12-nov) + BE-GK49 unidos + v81cf115 BE-AUD09 solo la rev vigente + v81cf116 Listing: en trazabilidad (BE-AUD05) + BE-GK50 BE-GK51 unidos + v81cf117 ceilings_misc (BE-AUD06) + BE-GK52 unidos + v81cf118 U_191 salta EXCLUDED 0",
@@ -109,7 +109,7 @@ diff -ruN v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v119/take-off-m
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
-@@ -8459,6 +8467,91 @@
+@@ -8459,6 +8467,93 @@
     "categoria": "conducta",
     "texto_corto": "nunca se edita un script de bash (cadena.sh / armar_entrega.sh) mientras corre: bash lo lee por posición y un cambio de largo en una línea hace que la corrida ejecute texto corrido; primero se para la corrida (TaskStop + pkill) y después se edita y se relanza",
     "motivo": "se editó la línea 12 de cadena.sh con la cadena de rev3a corriendo; se paró y se relanzó completa"
@@ -126,7 +126,9 @@ diff -ruN v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v119/take-off-m
 +    "take-off:tools/compuerta_entrega.py::cob_muros",
 +    "take-off:tools/checklist_revision.py::escribir",
 +    "take-off:tools/compuerta_entrega.py::_cob_recortes",
-+    "take-off:tools/compuerta_entrega.py::leer_disposicion"
++    "take-off:tools/compuerta_entrega.py::leer_disposicion",
++    "take-off:tools/compuerta_entrega.py::cob_marcas_cota",
++    "take-off:tools/compuerta_entrega.py::_cob_es_cota"
 +   ],
 +   "test": {
 +    "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -204,7 +206,7 @@ diff -ruN v118/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v119/take-off-m
 \ No newline at end of file
 diff -ruN v118/take-off-metal-frame-drywall/SKILL.md v119/take-off-metal-frame-drywall/SKILL.md
 --- v118/take-off-metal-frame-drywall/SKILL.md	2026-11-12 15:44:53.621060157 +0000
-+++ v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 20:03:10.745387814 +0000
++++ v119/take-off-metal-frame-drywall/SKILL.md	2026-11-12 20:28:36.968213159 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -214,7 +216,7 @@ diff -ruN v118/take-off-metal-frame-drywall/SKILL.md v119/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -333,6 +333,30 @@
+@@ -333,6 +333,34 @@
  - **Renglones EXCLUDED en 0 (v81cf118):** un renglón del Material Summary con Net 0 y EXCLUDED en su texto no carga nada: CB_U_191 no le
    pide cita (p. ej. el yield 'GA-216' de los drywall screws excluidos, U-053). Con cantidad > 0, un listing sin ítem sigue en FAIL. No se inventa
    una sección de GA en la plantilla.
@@ -224,7 +226,11 @@ diff -ruN v118/take-off-metal-frame-drywall/SKILL.md v119/take-off-metal-frame-d
 +  pares de líneas paralelas a 2.5"-14" (escala de la hoja), traslape >= 2 ft, sin texto entre las líneas, con el ESTILO de trazo de los
 +  muros que sí tienen markup en la hoja (o en el documento), dentro del edificio (trazos de muro conectados a los markups); cubierto =
 +  markup a <= max(0.5 ft, medio espesor + 2") del eje; un muro parcialmente marcado sale con su parte ROJA aparte. Cielos: todo número de
-+  cuarto de un RCP dentro de un polígono de cielo con /Measure o EXCLUDED (siguiendo la línea guía si el tag está afuera). Todo ROJO lleva
++  cuarto de un RCP dentro de un polígono de cielo con /Measure o EXCLUDED (siguiendo la línea guía si el tag está afuera). FILTRO DE
++  COTAS (COORDINACIÓN 12-nov, meta falsos rojos <= 2 %): no se forma un par con una línea de cota / extensión (tick de 45° -una línea o
++  un paralelogramo delgado- con su centro en el cruce H / V a <= 0.4 pt, a <= 0.6 ft del extremo de la línea) ni con la hoja de una puerta
++  (un extremo toca el arco y el otro es su centro); las cotas con FLECHA no se filtran (la flecha de una línea guía en la esquina de un muro
++  borraba muros reales). Todo ROJO lleva
 +  markup o un renglón en Auditoria/COBERTURA_DISPOSICION.csv (hoja, tipo, id o x / y o zona x0, y0, x1, y1, motivo, nhoja N/HOJA).
 +  CE_COBERTURA: ROJO sin disposición = FAIL; 0 muros en una planta con markups = detector ciego = FAIL; CHECKLIST B6
 +  (`checklist_revision.py --b6 Auditoria/COBERTURA.csv`). Límites: muros en diagonal no se detectan; un muro marcado por una sola cara
@@ -435,7 +441,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v119/ta
          return 2
 diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 15:43:36.849152664 +0000
-+++ v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 20:02:36.825309540 +0000
++++ v119/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-12 20:29:52.050574873 +0000
 @@ -575,7 +575,7 @@
          return R("FAIL", *ev)
      st = _json(c.set_p) if getattr(c, "set_p", None) else None
@@ -721,7 +727,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
      primera = _iso((sub or {}).get("primera_subida_iso") or (sub or {}).get("fecha_iso")) if sub else None
      if ev and primera and primera < datetime.datetime.fromisoformat(FECHA_U184):
          return R("AMBER", f"entrega con primera subida {primera.isoformat()} anterior a U-184: no se re-abre (U-180 (4) / U-184 (6))", *ev[:10], *info)
-@@ -5284,6 +5472,663 @@
+@@ -5284,6 +5472,772 @@
      return hojas
  
  
@@ -733,7 +739,8 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +# cuarto impreso en una hoja RCP fuera de un polígono de cielo con /Measure y de un EXCLUDED. Lo ROJO necesita markup o una
 +# disposición en Auditoria/COBERTURA_DISPOSICION.csv (hoja, tipo, id, x, y, motivo, nhoja) con motivo impreso y N/HOJA.
 +COB_T_MIN_IN, COB_T_MAX_IN, COB_L_MIN_FT, COB_TOL_FT, COB_FRAC = 2.5, 14.0, 1.0, 0.5, 0.90
-+COB_PAR_MIN_FT, COB_MARGEN_FT = 2.0, 4.0          # traslape mínimo del par (muebles / marcos < 2 ft) y margen de la zona del plano
++COB_PAR_MIN_FT, COB_MARGEN_FT = 2.0, 4.0
++COB_TICK_TOL_PT = 0.4                                   # filtro de cotas: el tick cae en el cruce de la cota y su extensión          # traslape mínimo del par (muebles / marcos < 2 ft) y margen de la zona del plano
 +RX_COB_RCP = re.compile(r"(?i)REFLECTED\s+CEILING|CEILING\s+PLAN|\bRCP\b")
 +RX_COB_PLANTA = re.compile(r"(?i)\b(?:FLOOR|PARTITION|CONSTRUCTION|DIMENSION|ENLARGED|LEVEL\s*\d+)\s+PLAN\b")
 +RX_COB_DEMO = re.compile(r"(?i)DEMOLITION\s+PLAN|DEMO\s+PLAN")
@@ -891,6 +898,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +    if region is not None:
 +        region = cob_region_edificio(drs, estilos, esc, region)   # el edificio entero, no solo la caja de los markups
 +        x0r, y0r, x1r, y1r = region
++    marcas, hojas_p = cob_marcas_cota(drs, esc)         # ticks / flechas de cota y arcos de puerta (filtro de cotas, U-193)
 +    for dr in drs:
 +        relleno = dr.get("fill") is not None
 +        if estilos is not None and _cob_estilo(dr) not in estilos:
@@ -909,9 +917,11 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +                ss = [(q.x0, q.y0, q.x1, q.y0), (q.x1, q.y0, q.x1, q.y1), (q.x0, q.y1, q.x1, q.y1), (q.x0, q.y0, q.x0, q.y1)]
 +            for a, b, c_, d_ in ss:
 +                if abs(d_ - b) < 0.3 and abs(c_ - a) >= lmin and y0r <= b <= y1r:
-+                    H.append((max(min(a, c_), x0r), min(max(a, c_), x1r), (b + d_) / 2))
++                    H.append((max(min(a, c_), x0r), min(max(a, c_), x1r), (b + d_) / 2,
++                              _cob_es_cota(marcas, hojas_p, (a, b, c_, d_), esc)))
 +                elif abs(c_ - a) < 0.3 and abs(d_ - b) >= lmin and x0r <= a <= x1r:
-+                    V.append((max(min(b, d_), y0r), min(max(b, d_), y1r), (a + c_) / 2))
++                    V.append((max(min(b, d_), y0r), min(max(b, d_), y1r), (a + c_) / 2,
++                              _cob_es_cota(marcas, hojas_p, (a, b, c_, d_), esc)))
 +    W = words if words is not None else page.get_text("words")
 +    gw, cw = {}, 4.0 * esc                              # rejilla de palabras (texto entre las dos líneas = tabla / nota)
 +    for w in W:
@@ -932,7 +942,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +    pmin = COB_PAR_MIN_FT * esc
 +    pares = []
 +    for L, ori in ((H, "H"), (V, "V")):
-+        L = sorted(x for x in L if x[1] - x[0] >= lmin)
++        L = sorted((x for x in L if x[1] - x[0] >= lmin), key=lambda x: x[:3])
 +        L.sort(key=lambda x: x[2])
 +        import bisect
 +        cs = [x[2] for x in L]
@@ -948,6 +958,8 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +                if hi - lo >= pmin:
 +                    cands.append((hi - lo, -dd, lo, hi, b))
 +            for _ov, _dd, lo, hi, b in sorted(cands, reverse=True)[:2]:     # la pareja de MAYOR traslape (no la primera)
++                if a[3] or b[3]:
++                    continue                                # línea de cota / extensión (tick en su extremo) u hoja de puerta: no es muro
 +                c0, c1 = a[2], b[2]
 +                dd = c1 - c0
 +                trama = 0                                   # rayado / trama: líneas a la MISMA distancia antes y después
@@ -980,6 +992,101 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +        else:
 +            unidos.append(list(p))
 +    return [{"ori": o, "lo": lo, "hi": hi, "c": c, "t": t} for o, lo, hi, c, t in unidos]
++
++
++def cob_marcas_cota(drs, esc):
++    """filtro de cotas (U-193, falsos rojos): -> (marcas, arcos). marcas = centros de los ticks de cota (trazo oblicuo corto:
++    una línea sola o un paralelogramo relleno delgado) que caen en el CRUCE de una línea H y una V (la línea de cota y su línea de
++    extensión). arcos = arcos de puerta (para la hoja de la puerta). Las flechas no cuentan (límite documentado)."""
++    cand, arcos, HH, VV = [], [], [], []
++    for dr in drs:
++        bb, its = dr.get("rect"), dr["items"]
++        if bb is None:
++            continue
++        for it in its:
++            if it[0] == "l":
++                a, b = it[1], it[2]
++                if abs(a.y - b.y) < 0.3 and abs(a.x - b.x) >= 0.1 * esc:
++                    HH.append((min(a.x, b.x), max(a.x, b.x), a.y))
++                elif abs(a.x - b.x) < 0.3 and abs(a.y - b.y) >= 0.1 * esc:
++                    VV.append((min(a.y, b.y), max(a.y, b.y), a.x))
++        if any(it[0] == "c" for it in its):
++            pts = [p for it in its if it[0] == "c" for p in (it[1], it[4])]
++            if len(pts) >= 2 and max(bb.width, bb.height) >= 1.2 * esc:
++                arcos.append([(p.x, p.y) for p in pts])
++            continue
++        if not all(it[0] == "l" for it in its):
++            continue
++        vs = []
++        for it in its:
++            for q in (it[1], it[2]):
++                if not any(abs(q.x - v[0]) < 0.05 and abs(q.y - v[1]) < 0.05 for v in vs):
++                    vs.append((q.x, q.y))
++        if len(vs) < 2 or len(vs) > 8:
++            continue
++        L, (p0, p1) = max((math.hypot(u[0] - v[0], u[1] - v[1]), (u, v)) for u in vs for v in vs)
++        if not max(0.12 * esc, 2.5) <= L <= 0.75 * esc:
++            continue
++        ux, uy = (p1[0] - p0[0]) / L, (p1[1] - p0[1]) / L
++        ancho = max(abs((v[0] - p0[0]) * uy - (v[1] - p0[1]) * ux) for v in vs)
++        relleno = dr.get("fill") is not None
++        if not relleno and len(its) > 1:
++            continue                                    # varias líneas sin relleno (caja, cruz, texto): no es un tick
++        oblicuo = 0.45 <= abs(ux) / max(abs(uy), 1e-9) <= 1 / 0.45
++        if oblicuo and (not relleno or len(vs) >= 4 and ancho <= 0.25 * L):
++            cand.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))        # tick a 45° (una línea o paralelogramo delgado): su centro
++        # las FLECHAS no cuentan: en GK A111 la flecha de la línea guía de una burbuja cae en la esquina de un muro (H y V la cruzan) y
++        # borraba muros reales cubiertos; las cotas con flecha quedan como límite documentado (LEEME / GUÍA)
++    tol = COB_TICK_TOL_PT                               # el centro del tick está EN el cruce (un pedazo de trama en una esquina no)
++
++    def _cruza(lst, x, y, h):
++        for lo, hi, c in lst:
++            if abs(c - (y if h else x)) <= tol and lo - tol <= (x if h else y) <= hi + tol:
++                return True
++        return False
++    gH, gV = {}, {}
++    for lo, hi, c in HH:
++        for k in range(int(lo // esc), int(hi // esc) + 1):
++            gH.setdefault((k, int(c // esc)), []).append((lo, hi, c))
++    for lo, hi, c in VV:
++        for k in range(int(lo // esc), int(hi // esc) + 1):
++            gV.setdefault((int(c // esc), k), []).append((lo, hi, c))
++    g, ga = {}, {}
++    for x, y in cand:
++        k = (int(x // esc), int(y // esc))
++        okH = _cruza(gV.get(k, ()), x, y, False)        # para una línea H: una V (la otra línea) pasa por la marca
++        okV = _cruza(gH.get(k, ()), x, y, True)
++        if okH and okV:
++            g.setdefault(k, []).append((x, y))
++    for pts in arcos:                                   # arcos indexados por la celda de cada punto (1 ft)
++        for k in {(int(x // esc), int(y // esc)) for x, y in pts}:
++            ga.setdefault(k, []).append(pts)
++    return g, ga
++
++
++def _cob_es_cota(marcas, arcos, seg, esc):
++    """True si la línea H / V tiene un tick / flecha de cota sobre su eje a <= 0.6 ft de un extremo (línea de extensión o de cota);
++    "hoja" si es la hoja de una puerta (un extremo toca un arco y el otro extremo es el centro del arco); False si no."""
++    a, b, c_, d_ = seg
++    H_ = abs(d_ - b) < 0.3
++    L = math.hypot(c_ - a, d_ - b)
++    tol = COB_TICK_TOL_PT
++    for ex, ey in ((a, b), (c_, d_)):
++        for gx in range(int(ex // esc) - 1, int(ex // esc) + 2):
++            for gy in range(int(ey // esc) - 1, int(ey // esc) + 2):
++                for mx, my in marcas.get((gx, gy), ()):
++                    if H_ and abs(my - ey) <= tol and abs(mx - ex) <= 0.6 * esc and min(a, c_) - 0.3 * esc <= mx <= max(a, c_) + 0.3 * esc:
++                        return True
++                    if not H_ and abs(mx - ex) <= tol and abs(my - ey) <= 0.6 * esc and min(b, d_) - 0.3 * esc <= my <= max(b, d_) + 0.3 * esc:
++                        return True
++    if 1.5 * esc <= L <= 4.5 * esc:
++        for (ex, ey), (ox, oy) in (((a, b), (c_, d_)), ((c_, d_), (a, b))):
++            cerca = [pts for gx in (-1, 0, 1) for gy in (-1, 0, 1) for pts in arcos.get((int(ex // esc) + gx, int(ey // esc) + gy), ())]
++            for pts in cerca:
++                if any(math.hypot(px - ex, py - ey) <= 0.3 * esc for px, py in pts) and \
++                        any(math.hypot(px - ex, py - ey) >= 0.5 * L and abs(math.hypot(px - ox, py - oy) - L) <= 0.12 * L for px, py in pts):
++                    return "hoja"
++    return False
 +
 +
 +def _cob_lider(lineas, x, y, esc, saltos=6):
@@ -1096,7 +1203,14 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +        if d.get("_base") and not os.path.isfile(os.path.join(d["_base"], str(d.get("imagen")))):
 +            continue
 +        if ident and str(d.get("id") or "") == str(ident):
-+            return d
++            if tipo != "muro":
++                return d                                # cielo: el id es el número de cuarto impreso (estable)
++            try:                                        # muro: M-<hoja>-<n> es un número de secuencia que CAMBIA si cambia el
++                if math.hypot(float(d.get("x")) - x, float(d.get("y")) - y) <= 2.0 * esc:   # detector; vale solo con su x / y
++                    return d
++            except (TypeError, ValueError):
++                pass
++            continue
 +        try:                                            # disposición por zona: x0, y0, x1, y1 (pt de la hoja)
 +            bx = [float(d.get(k)) for k in ("x0", "y0", "x1", "y1")]
 +            if min(bx[0], bx[2]) <= x <= max(bx[0], bx[2]) and min(bx[1], bx[3]) <= y <= max(bx[1], bx[3]):
@@ -1115,7 +1229,8 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
 +
 +
 +def leer_disposicion(p):
-+    """Auditoria/COBERTURA_DISPOSICION.csv -> [dict] (hoja, tipo, id, x, y — o zona x0, y0, x1, y1 —, decision FALTA / NO ES NUESTRO,
++    """Auditoria/COBERTURA_DISPOSICION.csv -> [dict] (hoja, tipo, id, x, y — o zona x0, y0, x1, y1; un muro por id SIN x / y no vale:
++    su número cambia si cambia el detector —, decision FALTA / NO ES NUESTRO,
 +    motivo, nhoja, revisor, imagen = ROJOS/<n>.png relativa a Auditoria/)."""
 +    if not p or not os.path.isfile(p):
 +        return []
@@ -1385,7 +1500,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
  def main(argv):
      if len(argv) > 1 and argv[1] == "banco":
          a = argv[2:]
-@@ -5365,6 +6210,31 @@
+@@ -5365,6 +6319,31 @@
          ns = sum(len(v["sin_leer"]) for v in st["burbujas"].values())
          print(f"burbujas: {len(st['burbujas'])} hojas barridas, {nb} leídas, {ns} sin leer -> {stp}")
          return 0
@@ -1417,7 +1532,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/compuerta_entrega.py v119/take
      if len(argv) > 2 and argv[1] == "armar":                        # BE-CR43: re-armar la carpeta SIN perder el registro
          rev = argv[argv.index("--rev") + 1] if "--rev" in argv else None
          h = armar_carpeta(argv[2], rev)
-@@ -5401,6 +6271,14 @@
+@@ -5401,6 +6380,14 @@
          f.write(json.dumps({"evento": "inicio", "corrida": cid, "tipo": tipo, "paso": paso,
                              "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(), "entrega_dir": ed0}) + "\n")
      out = correr(argv[1], ej, solo=solo)
@@ -1460,7 +1575,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v1
      [RATE TO CONFIRM] = FAIL; la labor de resilient channel sí puede quedar [RATE TO CONFIRM]. Valores sintéticos."""
 diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 15:46:38.066349527 +0000
-+++ v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 20:03:43.414312097 +0000
++++ v119/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-12 20:29:06.909842847 +0000
 @@ -1936,7 +1936,8 @@
      import csv
      import comparar_alturas as CA
@@ -1480,7 +1595,7 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119
               "Framing": "direct to wood (2/X5.04)"}]
      assert CE.doble_cielo_fallas(bien, cq, {"L9"}) == []
      bien2 = [dict(bien[0], **{"Row / reason": "upper: CLG-L9-01 RS"})] + bien[1:]
-@@ -2335,3 +2336,156 @@
+@@ -2335,3 +2336,172 @@
  
  
  test_v118_excluded_cero()
@@ -1520,6 +1635,13 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119
 +        muro((x, 300 + t), (x, 600), True)
 +    muro((200, 600), (920, 600), False)                                   # muro de abajo SIN markup, conectado al edificio
 +    pg.draw_rect(pymupdf.Rect(420, 380, 460, 380 + 30 / 12 * 18), width=0.24)   # mueble de 30 in de fondo
++    for xe in (300, 300 + t):                                             # filtro de cotas: 2 líneas de extensión con su tick (45°)
++        pg.draw_line((xe, 612), (xe, 680), width=1.2)                     # en el cruce con la línea de cota: NO son un muro
++        pg.draw_polyline([(xe - 2.5, 672.5), (xe - 2, 673), (xe + 2.5, 667.5), (xe + 2, 667), (xe - 2.5, 672.5)], width=0, fill=(0, 0, 0))
++    pg.draw_line((285, 670), (325, 670), width=0.48)
++    pg.draw_line((700, 610), (700, 673), width=1.2)                       # hoja de puerta de 3'-6" (con su arco) junto a un jamb
++    pg.draw_line((700 + t, 610), (700 + t, 673), width=1.2)
++    pg.draw_bezier((700, 673), (735, 673), (763, 645), (763, 610), width=0.48)
 +    pg.insert_text((900, 1000), "1 Z9 PARTITION PLAN", fontsize=14)
 +    pg2 = doc.new_page(width=1728, height=1152)
 +    pg2.insert_text((900, 1000), "1 Z9 REFLECTED CEILING PLAN", fontsize=14)
@@ -1545,6 +1667,8 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119
 +    assert {e for e, _l in mur.get(round(300 + t / 2), [])} == {"CUBIERTO"}, mur
 +    assert sum(l_ for e, l_ in mur.get(round(600 + t / 2), []) if e == "ROJO") >= 30, mur      # los ~36 ft sin markup entre los verticales
 +    assert not any(f["estado"] == "ROJO" and 360 < f["y"] < 430 and 400 < f["x"] < 480 for f in r["filas"]), "mueble de 30 in no es muro"
++    assert not any(f["tipo"] == "muro" and 610 < f["y"] < 690 and 290 < f["x"] < 320 for f in r["filas"]), "líneas de extensión de cota"
++    assert not any(f["tipo"] == "muro" and 610 < f["y"] < 680 and 695 < f["x"] < 712 for f in r["filas"]), "hoja de puerta no es muro"
 +    assert est.get(("Z9.31", "cielo", "901")) == "CUBIERTO" and est.get(("Z9.31", "cielo", "902")) == "ROJO", est
 +    assert est.get(("Z9.31", "cielo", "903")) == "EXCLUDED", est
 +    n_r = r["rojos"]
@@ -1560,6 +1684,13 @@ diff -ruN v118/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v119
 +    assert CE.mapa_cobertura(pdf, [dict(disp[0], nhoja=""), disp[1]])["rojos"] == n_r - 1, "disposición sin N/HOJA no vale"
 +    assert CE.mapa_cobertura(pdf, [dict(disp[0], revisor=""), disp[1]])["rojos"] == n_r - 1, "disposición sin revisor no vale"
 +    assert CE.mapa_cobertura(pdf, [dict(disp[0], imagen="", ), disp[1]])["rojos"] == n_r - 1, "disposición sin recorte no vale"
++    rm = [f for f in r["filas"] if f["tipo"] == "muro" and f["estado"] == "ROJO"][0]       # muro por id: vale solo con su x / y
++    d_id = {"hoja": rm["hoja"], "tipo": "muro", "id": rm["id"], "decision": "NO ES NUESTRO", "motivo": "existing to remain",
++            "nhoja": "1/X9.01", "revisor": "subagente R9", "imagen": "ROJOS/" + rojos_png[0]}
++    f_id = lambda dd: next(f for f in CE.mapa_cobertura(pdf, [dd])["filas"] if f["id"] == rm["id"])["estado"]
++    assert f_id(d_id) == "ROJO", "muro por id sin x / y no vale (el número cambia si cambia el detector)"
++    assert f_id(dict(d_id, x=str(rm["x"]), y=str(rm["y"]))) == "DISPUESTO"
++    assert f_id(dict(d_id, x=str(rm["x"] + 200), y=str(rm["y"]))) == "ROJO", "mismo id en otra posición = otro muro"
 +    w = tempfile.mkdtemp(prefix="v119ce_")                              # CE_COBERTURA de punta a punta sobre una carpeta de entrega
 +    e = os.path.join(w, "FINAL_FOR_REVIEW_rev9")
 +    os.makedirs(os.path.join(e, "Planos marcados"))
