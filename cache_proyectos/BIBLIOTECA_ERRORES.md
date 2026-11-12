@@ -627,7 +627,7 @@ El hook de arranque dijo "deps OK" pero el entorno NO tenía PyMuPDF / pikepdf /
 Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 caracteres de texto. inventario_tags.py / verif_callouts / grep quedan ciegos (U-137: detector ciego = FALLA). Arreglo: tools/ocr_capa.py — capa de texto INVISIBLE por OCR (tesseract psm 11, 250 dpi, horizontal + vertical) en las mismas coordenadas visibles (derotation_matrix), sin tocar la geometría; tesseract con OMP_THREAD_LIMIT=1 cuando corren varios procesos en paralelo (4 procesos × 4 hilos en 4 núcleos se atascaron, load 15). Todo número leído por OCR se confirma a ojo en el recorte (U-114). Regla para todos los proyectos: hoja sin capa de texto = ocr_capa.py antes del inventario.
 
 
-## BE-GK03..BE-GK40 (11-nov, Grand Kia rev1 + rev2)
+## BE-GK03..BE-GK41 (11-nov, Grand Kia rev1 + rev2)
 - BE-GK03: inventario_tags con capa OCR: --types-json (types del lector independiente cuando el schedule no tiene texto), --paginas-ocr (normaliza l/I/| -> 1 en tags) y --sheetmap (título verificado a ojo). Arreglo + test `test_be_gk03_ocr_normalizar` (v81cf88).
 - BE-GK04: Dens Shield (glass-mat tile backer ASTM C1178) es familia propia de board con su renglón y su desglose por cara (no cae en Type X). Arreglo + test `test_be_gk04_gk06_familias` (v81cf88).
 - BE-GK05: double_row_types sale de constants.double_row_types {value, source} del canon (nunca una lista fija de otro proyecto). Arreglo + test `test_be_gk05_10_guardas` (v81cf88).
@@ -667,6 +667,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 - BE-GK38 (rev2 con v81cf94): CE_REGLAS FAIL "bitacora editada a mano: cadena rota en el renglón 757": comparar_alturas.capa_colores (nuevo en v81cf94, U-184 (3)) escribe su renglón sin "prev". Afecta a TODOS los proyectos con v81cf94. Arreglo: anotar por bitacora.anotar (tools_post_v81cf94/comparar_alturas.py); el renglón roto se re-anotó por la misma función (copia de la bitácora previa guardada). También CE_PROTOCOLO_3H: informe U-181 fechado generado por la cadena (scripts/informe_u181.py) y TIEMPOS con H-A / H-B y corridas de compuerta; CB_U_184_EXCL: exclusiones con rating revisado (A002 0 HR non-bearing).
 - BE-GK39 (rev2, U-187): DETALLES_REVISADOS con 345 "#k" encimados (hueco_etiqueta devolvía la posición original cuando la etiqueta caía dentro del Square grande de una vista de destino) y markups con 5 EXCLUDED encimados (cuartos 145/146/147 con el mismo polígono; caja_interior no esquivaba otras etiquetas). Arreglo: segunda pasada libre de FreeText + deslizar / reajustar la etiqueta EXCLUDED.
 - BE-GK40 (rev2, BE-CR35): la lista ciega preguntó "depth of the joists" para EXT-07 y lo cargado (0.82 ft) era el LARGO del joist: los dos lectores midieron 0.30 (peralte). Regla: la pregunta ciega se genera desde la operación del Depth cargado con su definición (pregunta_ciega.py).
+- BE-GK41 (rev3, U-190): la página DOUBLE CEILING de ALTURAS_REVISADAS salió con 6 textos encimados: paginas_doble_cielo achica la letra hasta 4 pt pero no recorta, y las celdas largas de DOBLE_CIELO.csv invaden la columna de al lado. Arreglo: celdas que caben a 4 pt + texto completo en Row / reason; pendiente: recorte en la tool.
 
 
 ## BE-XF01..BE-XF06 — Xfinity Interquest rev1 (10-nov)
