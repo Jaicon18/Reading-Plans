@@ -1,7 +1,7 @@
 # v81cf119 APARTADA (NO publicada: versiones congeladas por orden de COORDINACIÓN, 12-nov)
 
-Base: v81cf118. Aplicar: descomprimir v81cf118 en /tmp/v119 y
-`patch -p2 -d /tmp/v119/take-off-metal-frame-drywall < v81cf119_desde_v81cf118.patch` (verificado: el resultado es idéntico al candidato).
+Base: v81cf118. Aplicar: con `patch -p1` desde la carpeta que contiene `take-off-metal-frame-drywall/` (descomprimir v81cf118 en una
+carpeta X, `cd X` y `patch -p1 < v81cf119_desde_v81cf118.patch`; las rutas del parche empiezan con `v118/` y `v119/`).
 
 ## Contenido: la regla nueva del usuario (MAPA DE COBERTURA) + BE-GK53 unido
 
@@ -244,3 +244,62 @@ Pruebas del candidato (Ampliación 4):
   archivo único al que GK y CR agregan su proyecto).
 
 COORDINACIÓN 20:47: lista PROYECTOS_ABIERTOS confirmada (xfinity_interquest, grand_kia, cr_city_hotel_castle_rock; va a skills_archivo/ al publicar) y salida hoja_ciega aceptada. Verificación independiente final lanzada; no se publica sin su aviso.
+
+
+## Ampliación 5 (COORDINACIÓN 20:54): verificación 2 (75f98d5) — 4 STILL-WEAK + BE-GK54, cada uno con su test adversarial
+
+1. U-185 (`apartados/ordenes_v119/verificar_version.py`):
+   - se leen TODAS las `_VERIFICACION*` en orden de hora;
+   - un renglón abierto (en el principal, en un `_CIERRE` o en cualquier verificación) solo se cierra cuando una verificación MÁS NUEVA
+     lo nombra explícitamente CONFIRMED-CLOSED; si la nueva lo omite, o dice solo 'OK', sigue abierto;
+   - una `_VERIFICACION` sin tabla = FALLA;
+   - la causa N de la tabla de causas se cierra con el renglón `NG-N` de la verificación.
+   - Test: `postmortem_u185`, con los casos A3b (verificación nueva sin tabla), A4 (renglón omitido), 'OK' sin CONFIRMED-CLOSED y
+     NG-3.1.
+   - Sobre el cache real queda abierto exactamente lo de la verificación 2: U-185, NG-3.1 / BE-PM04, NG-3.3 / BE-PM06, U-193 y las
+     causas 3.1 / 3.3.
+2. BE-PM04:
+   - `PROYECTOS_ABIERTOS.json` vacío = FALLA;
+   - `proyectos_abiertos_cache`: un proyecto con `SUBIDA_OK*` desde U-157 y sin `CSV_BLUEBEAM_<rev subida>/RESULTADO.md` con
+     N CSV / N PDF / N emparejados y 0 faltantes tiene que estar en la lista. Hoy son grand_kia y xfinity_interquest; CR está cerrado
+     por CSV N/N y Consumer Cellular es de antes de U-157;
+   - cada proyecto del PRUEBA guarda el `sha_tools` (sha256 del árbol `tools/`), que tiene que ser el del candidato. La compuerta y
+     verificar_version dan el mismo sha.
+   - Test: `prueba_abiertos_be_pm04` con los casos B1 (lista vacía), B2 (otro build) y el cache sintético.
+   - Consecuencia: XF re-corre con el candidato final (abajo); GK y CR también.
+3. BE-PM06 (CE_PROTOCOLO_3H, entregas nuevas):
+   - sin `tiempos.log` = FAIL;
+   - TIEMPOS.md y `tiempos.log` cuadran: una marca a la hora (y MM-DD) de cada paso 1-9 cerrado, y no menos marcas que pasos;
+   - `ALERTA_PRESUPUESTO.json` y `compuerta_corridas.jsonl` los sella la compuerta en la cadena de hashes de la bitácora (renglón
+     SELLO), cada vez que los escribe; si el sha actual no es el del último sello = FAIL.
+   - Test: `test_v119_alarma_verificacion2`, que incluye ediciones a mano de los dos archivos y comprueba que la cadena de hashes sigue
+     íntegra.
+4. U-193:
+   - `bitacora.py run` anota `agente` = `$SUBAGENTE_ID`, así que los autores del canon quedan registrados SOLOS;
+   - CE_COBERTURA:
+     - sin autores del canon registrados = FAIL;
+     - solo el rol EXACTO `revisor_cobertura` cuenta como revisor (otro rol = autor);
+     - el revisor no puede haber corrido ninguna tool de la cadena (etapas 2-7). Correr la compuerta o el checklist no lo vuelve autor.
+   - Test: `test_v119_cobertura`.
+5. BE-GK54, unido dentro de `compuerta_entrega.py` porque el tope es de 199 archivos:
+   - `be_gk54_fallas` + `_gk54_desde_pdf` (la conversión con `rotation_matrix`, como el CLI de GK), con la escala de cada hoja del mapa;
+   - CE_COBERTURA la llama;
+   - test `test_be_gk54` con el caso real M-A111-29;
+   - registro BE-GK54 en el candidato.
+6. Patch: la instrucción de arriba dice exactamente `-p1` desde la carpeta que contiene `take-off-metal-frame-drywall/`.
+
+Pruebas del candidato (Ampliación 5):
+- suite 47/47. test_ciego rechazó los ids reales de GK en test_be_gk54; ahora usa valores sintéticos equivalentes y se re-corrió OK;
+- banco 0 distintas en 8 proyectos;
+- reglas.py 0 sin clasificar;
+- 199 archivos;
+- selftest de verificar_version OK.
+- verificar_version:
+  - (a) con el cache y el archivo reales: faltan 0 reglas (BE-GK54 ya está), U-185 abierto (lo de la verificación 2) y sin
+    PROYECTOS_ABIERTOS.json — lo esperado;
+  - (b) con la lista completa y el post-mortem cerrado: FALLA solo porque faltan GK y CR en la PRUEBA_ABIERTOS;
+  - (c) con GK y CR simulados con el mismo sha = OK.
+- PRUEBA_ABIERTOS de XF con el candidato FINAL: 227/8/0 -> 228/9/0, 0 regresiones, sha_tools igual al del candidato
+  (apartados/PRUEBA_ABIERTOS_v81cf119.json).
+- GK y CR: re-correr con ESTE candidato (el sha cambió) y agregarse a ese mismo archivo.
+- Parche probado con la instrucción exacta (-p1 desde la carpeta que contiene take-off-metal-frame-drywall/): da el candidato idéntico.

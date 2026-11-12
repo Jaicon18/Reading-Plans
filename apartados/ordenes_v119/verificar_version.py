@@ -457,23 +457,38 @@ def revisar_postmortem(cache):
         return [f"{n}: sin la tabla principal 'id | error / regla | chequeo | test | estado' (0 renglones) = falla (U-185)"]
     base = n[:-3] + "_"
     todos = sorted(m for m in os.listdir(cache) if m.startswith(base) and m.endswith(".md"))
-    verifs = sorted((_pm_hora(n, open(os.path.join(cache, m), encoding="utf-8").read()), m) for m in todos if "_VERIFICACION" in m.upper())
-    acomp = [m for m in todos if "_VERIFICACION" not in m.upper()] + ([verifs[-1][1]] if verifs else [])
-    # manda el más estricto entre el principal, cada acompañante (_CIERRE / copias) y la verificación MÁS NUEVA (una verificación nueva
-    # reemplaza a la anterior; un _CIERRE o una copia nunca relajan lo que el principal o la verificación dejan abierto)
-    abiertos = {}                                        # manda el más estricto: abierto en el principal O en un acompañante
-    for m in [n] + acomp:
-        t = txt if m == n else open(os.path.join(cache, m), encoding="utf-8").read()
+    txts = {m: open(os.path.join(cache, m), encoding="utf-8").read() for m in todos}
+    verifs = sorted((_pm_hora(n, txts[m]), m) for m in todos if "_VERIFICACION" in m.upper())
+    otros = [m for m in todos if "_VERIFICACION" not in m.upper()]
+    faltas = [f"{m}: verificación sin la tabla 'id | … | estado' = falla (U-185: no pasa en vacío)" for _t, m in verifs if not tabla_postmortem(txts[m])]
+    # verificación 2 (75f98d5): estado por renglón = principal + _CIERRE / copias (nunca relajan) y luego TODAS las _VERIFICACION en orden
+    # de hora; un renglón abierto solo se cierra cuando una verificación MÁS NUEVA lo nombra explícitamente CONFIRMED-CLOSED; si la nueva lo
+    # omite, sigue como estaba
+    abiertos = {}
+    for m in [n] + otros:
+        t = txt if m == n else txts[m]
         for i, e in abiertos_postmortem(t) + causas_no_guard(t):
             abiertos.setdefault(i, (e, m))
-    if not abiertos:
+    for _t, m in verifs:
+        for i, e in tabla_postmortem(txts[m]):
+            claves = {i} | {f"causa {x}" for x in re.findall(r"NG-?(\d+\.\d+)", i)}
+            u = e.strip("* ")
+            if re.search(r"(?i)CONFIRMED[- ]CLOSED", u):
+                for k in claves:
+                    abiertos.pop(k, None)
+            elif re.match(r"(?i)(WEAK|MISSING|STILL)", u):
+                for k in claves:
+                    abiertos[k] = ("MISSING" if re.match(r"(?i)MISSING", u) else "WEAK", m)
+    if not abiertos and not faltas:
         return []
     ab = list(abiertos.items())
     nw = sum(1 for _i, (e, _m) in ab if e == "WEAK")
     nm = sum(1 for _i, (e, _m) in ab if e == "MISSING")
     ng = sum(1 for _i, (e, _m) in ab if e == "NO GUARD")
-    return [f"{n}{' + ' + ', '.join(acomp) if acomp else ''}: {nw} WEAK / {nm} MISSING / {ng} NO GUARD abiertos ({len(ab)} renglones sin OK "
-            "ni 'conducta: motivo'; manda el más estricto; U-185): " + ", ".join(i for i, _e in ab[:30])]
+    acomp = otros + [m for _t, m in verifs]
+    return faltas + ([f"{n}{' + ' + ', '.join(acomp) if acomp else ''}: {nw} WEAK / {nm} MISSING / {ng} NO GUARD abiertos ({len(ab)} "
+                      "renglones; se cierran solo con CONFIRMED-CLOSED en una verificación más nueva; U-185): " + ", ".join(i for i, _e in ab[:30])]
+                     if ab else [])
 
 
 RX_DEF_TEST = re.compile(r"(?m)^def (test_\w+)\(")
@@ -500,10 +515,67 @@ def tests_sin_llamar(fuente):
     return out
 
 
+def sha_tools(fuente):
+    """BE-PM04 (verificación 2): sha256 del árbol tools/ del candidato (ruta relativa + sha256 de cada archivo, sin __pycache__ / .pyc);
+    compuerta_entrega.sha_tools calcula lo mismo sobre sus propias tools y lo guarda en PRUEBA_ABIERTOS."""
+    import hashlib
+    if fuente.zip:
+        nombres = [n[len(fuente.base):] for n in fuente.zip.namelist() if n.startswith(fuente.base + "tools/") and not n.endswith("/")]
+        leer = lambda r: fuente.zip.read(fuente.base + r)                                  # noqa: E731
+    else:
+        t = os.path.join(fuente.base, "tools")
+        nombres = [os.path.relpath(os.path.join(r, f), fuente.base) for r, _d, fs in os.walk(t) for f in fs]
+        leer = lambda r: open(os.path.join(fuente.base, r), "rb").read()                    # noqa: E731
+    nombres = sorted(n.replace(os.sep, "/") for n in nombres if "__pycache__" not in n and not n.endswith(".pyc"))
+    return hashlib.sha256("\n".join(f"{n} {hashlib.sha256(leer(n)).hexdigest()}" for n in nombres).encode()).hexdigest()
+
+
+FECHA_U157 = "2026-11-10T00:00:00+00:00"               # U-157: la comparación del CSV del usuario cierra un proyecto (desde aquí)
+
+
+def proyectos_abiertos_cache(cache):
+    """BE-PM04 (verificación 2): proyectos con entrega vigente NO cerrada: tienen SUBIDA_OK*.json en cache_proyectos/<p>/ con la última
+    subida desde U-157 y NO tienen CSV_BLUEBEAM_<rev de esa subida>/RESULTADO.md con 'N CSV / N PDF / N emparejados' y 0 faltantes."""
+    import json
+    import glob as _g
+    out = []
+    if not cache or not os.path.isdir(cache):
+        return out
+    for d in sorted(os.listdir(cache)):
+        dd = os.path.join(cache, d)
+        subs = []
+        for f in _g.glob(os.path.join(dd, "SUBIDA_OK*.json")):
+            try:
+                x = json.load(open(f, encoding="utf-8"))
+            except Exception:
+                continue
+            t = _cierre_dt(x.get("fecha_iso") or x.get("primera_subida_iso"))
+            if t:
+                subs.append((t, os.path.basename(f)))
+        if not subs:
+            continue
+        t, f = max(subs)
+        if t < _cierre_dt(FECHA_U157):
+            continue
+        m = re.match(r"SUBIDA_OK_(rev\w+)\.json$", f)
+        cerr = False
+        for r in _g.glob(os.path.join(dd, "CSV_BLUEBEAM_*", "RESULTADO.md")):
+            rv = os.path.basename(os.path.dirname(r))[len("CSV_BLUEBEAM_"):]
+            if m and rv != m.group(1):
+                continue
+            tx = open(r, encoding="utf-8", errors="ignore").read()
+            n = re.search(r"(\d+)\s*CSV\s*/\s*(\d+)\s*PDF\s*/\s*(\d+)\s*emparejados", tx)
+            if n and len({n.group(1), n.group(2), n.group(3)}) == 1 and re.search(r"\b0 faltantes", tx):
+                cerr = True
+        if not cerr:
+            out.append(d)
+    return out
+
+
 RX_VERSION_SKILL = re.compile(r"\*\*VERSION:\s*(v(\d+)cf(\d+)[a-z]?)\*\*")
 
 
-def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119)):
+def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119), cache=None):
     """NO GUARD 3.1 / BE-PM04 (+ verificación 12b): ANTES de publicar, la versión del CANDIDATO (línea **VERSION: vNcfM** de su SKILL.md;
     si no, la vigente del INDICE) desde v81cf119 tiene skills_archivo/PRUEBA_ABIERTOS_<v>.json con TODOS los proyectos de
     skills_archivo/PROYECTOS_ABIERTOS.json ({"proyectos": [nombres de cache_proyectos]}), cada uno con 0 regresiones sin explicar."""
@@ -522,15 +594,26 @@ def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119)):
         abiertos = list(json.load(open(fa, encoding="utf-8")).get("proyectos") or [])
     except Exception:
         return [f"sin skills_archivo/PROYECTOS_ABIERTOS.json legible (lista de proyectos abiertos que la versión {v} tiene que probar)"]
+    out = []
+    if not abiertos:
+        out.append("skills_archivo/PROYECTOS_ABIERTOS.json con la lista VACÍA (U-137: no pasa en vacío)")
+    reales = [p for p in proyectos_abiertos_cache(cache) if p not in abiertos]
+    if reales:
+        out.append("PROYECTOS_ABIERTOS.json no trae proyectos con entrega vigente sin CSV comparado N/N: " + ", ".join(reales))
     f = os.path.join(archivo, f"PRUEBA_ABIERTOS_{v}.json")
     if not os.path.isfile(f):
-        return [f"la versión {v} no tiene skills_archivo/PRUEBA_ABIERTOS_{v}.json (compuerta de la candidata sobre los proyectos "
-                "abiertos antes de publicar)"]
+        return out + [f"la versión {v} no tiene skills_archivo/PRUEBA_ABIERTOS_{v}.json (compuerta de la candidata sobre los proyectos "
+                      "abiertos antes de publicar)"]
     try:
         x = json.load(open(f, encoding="utf-8"))
     except Exception as e:
-        return [f"{os.path.basename(f)} ilegible: {e}"]
-    out = []
+        return out + [f"{os.path.basename(f)} ilegible: {e}"]
+    if fuente is not None:                              # cada proyecto corrido con ESTAS tools (sha del árbol tools/ del candidato)
+        sha = sha_tools(fuente)
+        malos = [k for k, pv in (x.get("proyectos") or {}).items() if pv.get("sha_tools") != sha]
+        if malos:
+            out.append(f"{os.path.basename(f)}: {', '.join(malos)} corrido(s) con otras tools (sha_tools distinto del candidato "
+                       f"{sha[:12]}): re-correr prueba_abiertos con el candidato final")
     if x.get("version_candidata") not in (None, v):
         out.append(f"{os.path.basename(f)} es de la versión {x.get('version_candidata')}, no de {v}")
     pr = x.get("proyectos") or {}
@@ -575,7 +658,7 @@ def main(argv):
     vu = revisar_versiones_unicas(archivo)
     pm = revisar_postmortem(extra[0] if extra else None)
     tl = tests_sin_llamar(Fuente(candidato))
-    pa = revisar_prueba_abiertos(archivo, Fuente(candidato))
+    pa = revisar_prueba_abiertos(archivo, Fuente(candidato), cache=extra[0] if extra else None)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
                        ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa)):

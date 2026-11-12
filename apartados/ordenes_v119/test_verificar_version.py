@@ -219,25 +219,38 @@ def postmortem_u185():
     assert r and "sin la tabla principal" in r[0], r
     open(pb, "w").write("# PM b 2026-11-12 16:00 PT\n" + limpio)
     assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
-    pv = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION.md")   # (2) el acompañante no reemplaza: manda el más estricto
-    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | WEAK — STILL-WEAK |\n")
+    pv = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION.md")   # (2) verificación con WEAK = abierto
+    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | WEAK — STILL-WEAK |\n"
+                        "| BE-Q9 | x | ce_x | test_x | WEAK — STILL-WEAK |\n")
     r = V.revisar_postmortem(c)
-    assert r and "BE-Q1" in r[0] and "1 WEAK" in r[0] and "_VERIFICACION" in r[0], r
-    pv2 = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION2.md")     # una verificación MÁS NUEVA reemplaza a la vieja
-    open(pv2, "w").write("# VERIF 2 2026-11-12 18:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | OK — CONFIRMED-CLOSED |\n")
-    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    assert r and "BE-Q1" in r[0] and "2 WEAK" in r[0] and "_VERIFICACION" in r[0], r
+    pv3 = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_VERIFICACION3.md")     # verificación 2 (A3b): una nueva SIN tabla = falla y
+    open(pv3, "w").write("# VERIF 3 2026-11-12 19:00 PT\nsin tabla, todo bien\n")   # no borra los WEAK de la anterior
+    r = V.revisar_postmortem(c)
+    assert any("sin la tabla" in x for x in r) and any("BE-Q1" in x and "BE-Q9" in x for x in r), r
+    open(pv3, "w").write("# VERIF 3 2026-11-12 19:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | OK — CONFIRMED-CLOSED |\n")
+    r = V.revisar_postmortem(c)                                          # (A4) la nueva cierra Q1 y OMITE Q9: Q9 sigue abierto
+    assert r and "BE-Q9" in r[0] and "BE-Q1" not in r[0] and "1 WEAK" in r[0], r
+    open(pv3, "w").write("# VERIF 3 2026-11-12 19:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | OK |\n| BE-Q9 | x | x | x | OK — CONFIRMED-CLOSED |\n")
+    r = V.revisar_postmortem(c)                                          # 'OK' sin CONFIRMED-CLOSED no cierra
+    assert r and "BE-Q1" in r[0] and "BE-Q9" not in r[0], r
+    open(pv3, "w").write("# VERIF 3 2026-11-12 19:00 PT\n" + cab + "| BE-Q1 | x | ce_x | test_x | OK — CONFIRMED-CLOSED |\n"
+                         "| BE-Q9 | x | x | x | OK — CONFIRMED-CLOSED |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)       # una verificación más nueva que cierra todo explícitamente
     pc = os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12b_CIERRE.md")              # un _CIERRE nunca relaja: abierto en él = abierto
     open(pc, "w").write("# CIERRE 2026-11-12 18:30 PT\n" + cab + "| BE-Q3 | x | ce_x | — | WEAK |\n")
     r = V.revisar_postmortem(c)
     assert r and "BE-Q3" in r[0], r
     os.remove(pc)
-    os.remove(pv2)
-    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\nsin tabla, todo bien\n")      # un acompañante sin tabla no tapa ni abre nada
-    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)
+    os.remove(pv3)
+    os.remove(pv)
     causas = "\n| # | causa | candado | estado |\n|---|---|---|---|\n| 3.1 | x | — | **NO GUARD** |\n| 3.2 | y | ce_y | candado OK |\n"
     open(pb, "w").write("# PM b 2026-11-12 16:00 PT\n" + limpio + causas)            # (3) tabla de causas con NO GUARD = abierto
     r = V.revisar_postmortem(c)
     assert r and "1 NO GUARD" in r[0] and "causa 3.1" in r[0] and "3.2" not in r[0], r
+    open(pv, "w").write("# VERIF 2026-11-12 17:00 PT\n" + cab + "| NG-3.1 / BE-Q4 | x | x | x | OK — CONFIRMED-CLOSED |\n")
+    assert V.revisar_postmortem(c) == [], V.revisar_postmortem(c)       # la verificación cierra la causa 3.1 por su id NG-3.1
+    os.remove(pv)
     open(os.path.join(c, "POSTMORTEM_COBERTURA_2026-11-12c_COPIA.md"), "w").write("# copia 2026-11-12 23:00 PT\n")   # no es principal
     r = V.revisar_postmortem(c)
     assert r and "12b.md" in r[0], r
@@ -267,16 +280,43 @@ def prueba_abiertos_be_pm04():
     r = V.revisar_prueba_abiertos(a, f)
     assert r and "no tiene" in r[0], r
     pa = os.path.join(a, "PRUEBA_ABIERTOS_v81cf901.json")
-    uno = {"version_candidata": "v81cf901", "ok": True, "regresiones": [], "proyectos": {"proy_a": {"regresiones": 0}}}
+    uno = {"version_candidata": "v81cf901", "ok": True, "regresiones": [], "proyectos": {"proy_a": {"regresiones": 0, "sha_tools": V.sha_tools(f)}}}
     json.dump(uno, open(pa, "w"))
     r = V.revisar_prueba_abiertos(a, f)
     assert r and "proy_b" in r[0] and "proy_c" in r[0], r                  # el caso de la verificación: un proyecto solo pasaba
-    tres = dict(uno, proyectos={k: {"regresiones": 0} for k in ("proy_a", "proy_b", "proy_c")})
+    tres = dict(uno, proyectos={k: {"regresiones": 0, "sha_tools": V.sha_tools(f)} for k in ("proy_a", "proy_b", "proy_c")})
     json.dump(tres, open(pa, "w"))
     assert V.revisar_prueba_abiertos(a, f) == [], V.revisar_prueba_abiertos(a, f)
     json.dump(dict(tres, ok=False, regresiones=[{"proyecto": "proy_b", "chequeo": "CE_X9", "explicacion": ""}]), open(pa, "w"))
     r = V.revisar_prueba_abiertos(a, f)
     assert r and "proy_b:CE_X9" in r[0], r
+    sha = V.sha_tools(f)                                                 # verificación 2 (B2): el PRUEBA está atado al sha de las tools
+    json.dump(dict(tres, proyectos={k: {"regresiones": 0, "sha_tools": "viejo"} for k in ("proy_a", "proy_b", "proy_c")}), open(pa, "w"))
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "otras tools" in r[0], r
+    json.dump(dict(tres, proyectos={k: {"regresiones": 0, "sha_tools": sha} for k in ("proy_a", "proy_b", "proy_c")}), open(pa, "w"))
+    assert V.revisar_prueba_abiertos(a, f) == [], V.revisar_prueba_abiertos(a, f)
+    os.makedirs(os.path.join(d, "tools"), exist_ok=True)
+    open(os.path.join(d, "tools", "x.py"), "w").write("y = 1\n")         # cambiar una tool cambia el sha
+    assert V.revisar_prueba_abiertos(a, V.Fuente(d)), "un build distinto del mismo v81cf901 no vale"
+    os.remove(os.path.join(d, "tools", "x.py"))
+    json.dump({"proyectos": []}, open(os.path.join(a, "PROYECTOS_ABIERTOS.json"), "w"))   # (B1) lista vacía = falla
+    json.dump(dict(tres, proyectos={}), open(pa, "w"))
+    r = V.revisar_prueba_abiertos(a, f)
+    assert r and "VACÍA" in r[0], r
+    c = tempfile.mkdtemp(prefix="pac_cache_")                            # proyectos con entrega vigente sin CSV N/N que faltan en la lista
+    for nom, fecha, csv_ok in (("proy_a", "2026-11-12T10:00:00+00:00", False), ("proy_d", "2026-11-12T11:00:00+00:00", False),
+                               ("proy_e", "2026-11-12T12:00:00+00:00", True), ("proy_viejo", "2026-11-05T10:00:00+00:00", False)):
+        os.makedirs(os.path.join(c, nom))
+        json.dump({"fecha_iso": fecha}, open(os.path.join(c, nom, "SUBIDA_OK_rev2.json"), "w"))
+        if csv_ok:
+            os.makedirs(os.path.join(c, nom, "CSV_BLUEBEAM_rev2"))
+            open(os.path.join(c, nom, "CSV_BLUEBEAM_rev2", "RESULTADO.md"), "w").write("- comparar: 10 CSV / 10 PDF / 10 emparejados; 0 faltantes")
+    assert V.proyectos_abiertos_cache(c) == ["proy_a", "proy_d"], V.proyectos_abiertos_cache(c)
+    json.dump({"proyectos": ["proy_a", "proy_b", "proy_c"]}, open(os.path.join(a, "PROYECTOS_ABIERTOS.json"), "w"))
+    json.dump(dict(tres, proyectos={k: {"regresiones": 0, "sha_tools": sha} for k in ("proy_a", "proy_b", "proy_c")}), open(pa, "w"))
+    r = V.revisar_prueba_abiertos(a, f, cache=c)
+    assert r and "proy_d" in r[0] and "proy_e" not in r[0] and "proy_viejo" not in r[0], r
     open(os.path.join(d, "SKILL.md"), "w").write("x\n**VERSION: v81cf118**\n")       # versiones anteriores a v81cf119: no se exige
     assert V.revisar_prueba_abiertos(a, V.Fuente(d)) == []
 
