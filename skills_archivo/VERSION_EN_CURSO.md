@@ -139,3 +139,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - v81cf115 · Xfinity · 12-nov 15:07 UTC (orden COORDINACIÓN, urgente CR rev20a) · v81cf114 + CE_VERSION_ENTREGA solo la rev vigente de la entrega (falso positivo con la historia de TIEMPOS) · en curso
 - ACTUALIZACIÓN 2026-11-12: **v81cf115 PUBLICADA** (urgente CR rev20a) = skills_archivo/take-off-metal-frame-drywall_v81cf115_version-solo-rev-vigente_2026-11-12.zip = v81cf114 + BE-AUD09 ampliación (VIGENTE en INDICE; 199 archivos, suite 47/47, banco 0 distintas en 8 proyectos, verificar_version OK de carpeta y zip)
 - CONGELADO de nuevo 2026-11-12 (orden COORDINACIÓN): no se publica v81cf116 hasta que COORDINACIÓN avise
+- v81cf116 · Xfinity · 12-nov 15:17 UTC (orden COORDINACIÓN, urgente CR) · v81cf115 + trazabilidad.py: listings UL / GA fuera de N/SHEET a 'Listing:' con el item del canon + BE-GK50 / BE-GK51 · en curso
