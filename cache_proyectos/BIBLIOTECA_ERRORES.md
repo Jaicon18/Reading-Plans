@@ -713,3 +713,7 @@ Las 48 hojas A del set (vectoriales, rotation 270) traen el TEXTO EN CURVAS: 0 c
 
 ## BE-CR35 — alturas "not blind" (CR rev19, 12-nov, v81cf99)
 - BE-CR35 (programa): 14 renglones SOF / BW (Depth = ancho desarrollado) entraron a ALTURAS_IMPRESAS como "[take-off detail reading, not blind]" sin pasar por H-A / H-B, y la compuerta no lo vio. comparar_alturas.cobertura_ab (control 1 de CE_ALTURAS_EXTREMO): todo renglón final y todo markup con Depth en A y en B; "not blind" = FAIL; página de SOF / BW con "developed board width per LF"; brief de H-A / H-B con soffits y bulkheads. Test test_compuerta_entrega::test_be_cr35_not_blind.
+
+## BE-CR36 / BE-CR37 — CR rev19 (12-nov, v81cf100)
+- BE-CR36 (programa, parche de CR): textos de markups encimados (U-187): markups_rcp esquiva los FreeText ya colocados (2 pt de margen); markups_bluebeam.celda_legible baja la letra hasta caber (mínimo 5.5 pt) y recorta con "…". Test test_compuerta_entrega::test_be_cr36_textos_markups.
+- BE-CR37 (programa): 7/A7.23 — el ancho desarrollado de un soffit de corridor (Depth 0.917) sumó el fondo 4 1/2" del lado DERECHO + la caída 6 1/2" del IZQUIERDO. Un ancho desarrollado POR LADO: ALTURAS_IMPRESAS con side / faces; comparar_alturas.lados_fallas (control 7 de CE_ALTURAS_EXTREMO) = FAIL si mezcla lados o falta side / faces (AMBER en entregas anteriores a v81cf100); brief de H-A / H-B: cara contra la pared = board o wood panel / N.I.C. según el detalle. Test test_compuerta_entrega::test_be_cr37_un_lado.

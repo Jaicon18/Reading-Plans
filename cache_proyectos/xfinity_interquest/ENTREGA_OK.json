@@ -1,12 +1,12 @@
 {
  "version": "compuerta_entrega v3 (BE-121 + biblioteca + CE_CALLOUTS + R80f.29-31, 3-nov-2026)",
- "fecha_california": "2026-11-11 17:15 PST",
- "fecha_iso": "2026-11-12T01:15:45.221707+00:00",
+ "fecha_california": "2026-11-11 17:56 PST",
+ "fecha_iso": "2026-11-12T01:56:32.205254+00:00",
  "workdir": "/root/xf/work/entrega",
  "entrega_dir": "rev1 FINAL PARA REVISAR",
  "ok": true,
  "resumen": {
-  "PASS": 224,
+  "PASS": 225,
   "AMBER": 4,
   "FAIL": 0
  },
@@ -77,7 +77,7 @@
    "evidencia": [
     "1 proposal(s): INCLUDED / NOT INCLUDED completos y precios FBM con fuente"
    ],
-   "segundos": 0.36,
+   "segundos": 0.3,
    "plausibilidad": "OK"
   },
   {
@@ -174,6 +174,20 @@
    "plausibilidad": "OK"
   },
   {
+   "id": "CE_TEXTOS_LEGIBLES",
+   "reglas": [
+    "BE-COORD02",
+    "U-187"
+   ],
+   "descripcion": "U-187: ningún texto que generamos se encima — ALTURAS_REVISADAS (todas las páginas), FreeText y leyenda del PDF de markups, anotaciones de DETALLES / SCHEDULES_REVISADOS (CR rev19: 74 encimados en la sección)",
+   "estado": "PASS",
+   "evidencia": [
+    "0 textos encimados en 4 PDF generados"
+   ],
+   "segundos": 0.86,
+   "plausibilidad": "OK"
+  },
+  {
    "id": "CE_CAMPOS_CANON",
    "reglas": [
     "BE-CR20",
@@ -220,7 +234,7 @@
    "evidencia": [
     "sin montos en dólares"
    ],
-   "segundos": 0.08,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -296,7 +310,7 @@
    "evidencia": [
     "1 RFI: ningún término en hojas sin barrer ni junto a valores impresos sin descarte"
    ],
-   "segundos": 0.14,
+   "segundos": 0.16,
    "plausibilidad": "OK"
   },
   {
@@ -327,7 +341,7 @@
    "evidencia": [
     "320 archivos: rutas Windows <= 230, nombres válidos, 1 PDF de markups abre sin contraseña ni firmas, vista Bluebeam PASS, Excel sin errores"
    ],
-   "segundos": 0.28,
+   "segundos": 0.27,
    "plausibilidad": "OK"
   },
   {
@@ -340,7 +354,7 @@
    "evidencia": [
     "4 walls más largas re-medidas en vectores: max |delta| 0.01 ft"
    ],
-   "segundos": 0.41,
+   "segundos": 0.32,
    "plausibilidad": "OK"
   },
   {
@@ -354,7 +368,7 @@
    "evidencia": [
     "1 alturas distintas con su cota impresa (o sus valores impresos)"
    ],
-   "segundos": 0.08,
+   "segundos": 0.05,
    "plausibilidad": "OK"
   },
   {
@@ -385,7 +399,7 @@
    "evidencia": [
     "CHECKLIST_REVISION.xlsx: 5 secciones llenas (10 walls, todas las alturas, todas las exclusiones)"
    ],
-   "segundos": 0.06,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -402,7 +416,7 @@
    "evidencia": [
     "13 cuartos en 2 hojas RCP: renglón o exclusión; 11 exclusiones con su FreeText EXCLUDED ({'A3.0': 6})"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -419,7 +433,7 @@
    "evidencia": [
     "6 polígonos de cielo / EXCLUDED sobre las líneas de su hoja y en su vista RCP {'n': 6, 'min': 0.77, 'mediana': 0.98}"
    ],
-   "segundos": 0.17,
+   "segundos": 0.16,
    "plausibilidad": "OK"
   },
   {
@@ -494,7 +508,7 @@
    "evidencia": [
     "4 filas GREEN contra la altura impresa"
    ],
-   "segundos": 0.09,
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -513,7 +527,7 @@
    "evidencia": [
     "5 types y 34 renglones del Material Summary en verde"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -529,7 +543,7 @@
    "evidencia": [
     "markups = Excel = escala impresa"
    ],
-   "segundos": 0.09,
+   "segundos": 0.07,
    "plausibilidad": "OK"
   },
   {
@@ -546,7 +560,7 @@
    "evidencia": [
     "35 revisiones OK"
    ],
-   "segundos": 0.07,
+   "segundos": 0.05,
    "plausibilidad": "OK"
   },
   {
@@ -572,7 +586,7 @@
    "evidencia": [
     "reglas.py OK (930 reglas)"
    ],
-   "segundos": 1.15,
+   "segundos": 1.03,
    "plausibilidad": "OK"
   },
   {
@@ -586,7 +600,7 @@
    "evidencia": [
     "17 páginas = original (XObjects faltantes: original 0, copia 0, todos también en el original)"
    ],
-   "segundos": 2.33,
+   "segundos": 2.36,
    "plausibilidad": "OK"
   },
   {
@@ -632,7 +646,7 @@
     "SCHEDULES_REVISADOS.pdf: 5 páginas, 0 firmas, 5 Page Labels únicos, 0 página(s) con markups /Measure y su /VP del mismo /R",
     "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf: 18 páginas, 0 firmas, 18 Page Labels únicos, 3 página(s) con markups /Measure y su /VP del mismo /R"
    ],
-   "segundos": 0.1,
+   "segundos": 0.11,
    "plausibilidad": "OK"
   },
   {
@@ -653,7 +667,7 @@
     "CSV: rev1 FINAL PARA REVISAR/Auditoria/VISTA_BLUEBEAM.csv",
     "/NM único y sin '/' en todo el PDF (U-167)"
    ],
-   "segundos": 0.18,
+   "segundos": 0.17,
    "plausibilidad": "OK"
   },
   {
@@ -666,12 +680,13 @@
    "evidencia": [
     "20/20 markups: Depth de Bluebeam = Height del Excel = altura impresa (ALTURAS_IMPRESAS.csv); COMPARACION_ALTURAS.csv y CHECKLIST B2 al día (U-175)"
    ],
-   "segundos": 0.05,
+   "segundos": 0.03,
    "plausibilidad": "OK"
   },
   {
    "id": "CE_ALTURAS_EXTREMO",
    "reglas": [
+    "BE-CR35",
     "U-176"
    ],
    "descripcion": "U-176 REGLA DE ORO #2 (usuario 11-nov: 'me preocupan mucha las alturas'): los 6 controles de tools/comparar_alturas.py extremo: (1) doble lectura ciega ALTURAS_IMPRESAS_A / _B con toda diferencia resuelta con recorte, (2) cierre dimensional de cada DERIVED ± 1/4\", (3) reglas físicas por wall (H <= B.O., to deck = B.O. + slip track, above ceiling = MAYOR C.H. + extensión, H >= C.H. de cada cuarto, board <= H), (4) cruce por cuarto del RCP, (5) ALTURAS_REVISADAS.pdf + capa 'HEIGHTS (U-176)' en el PDF de markups, (6) CHECKLIST B2 con la muestra al azar. Falta uno o 0 alturas = FAIL",
@@ -713,7 +728,7 @@
    "evidencia": [
     "STUD SCHEDULE impreso en ninguna hoja; ningún gauge declarado no impreso"
    ],
-   "segundos": 0.03,
+   "segundos": 0.04,
    "plausibilidad": "OK"
   },
   {
@@ -771,12 +786,13 @@
     "(1) sin auditoría independiente U-181 FECHADA en Auditoria/ (informe con 'YYYY-MM-DD HH:MM' en el encabezado)",
     "(2) TIEMPOS.md no registra H-A / H-B dentro del paso de lecturas (U-184 (1): van con las lecturas A / B, no después)",
     "(3) sin bitácora de la cadena (bitacora.jsonl): no se puede probar que los archivos salieron de la cadena",
-    "(4) 4 corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))",
+    "(4) 6 corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))",
     "(5) TIEMPOS.md sin 'corridas de compuerta: N' (U-184 (7))",
-    "4 corrida(s) final(es) sobre estos archivos, 4 en la rev",
-    "registro: 4 inicio(s) de compuerta en la rev (1 cortada(s)), 1 roja(s)"
+    "(6) 6 corridas de compuerta (1 rojas) en la rev: tope 4 corridas / 2 rojas sin 'causa:' escrita en TIEMPOS.md (P3 / U-184: usar --solo / --paso para las compuertas tempranas)",
+    "6 corrida(s) final(es) sobre estos archivos, 6 en la rev",
+    "registro: 6 inicio(s) de compuerta en la rev (1 cortada(s)), 1 roja(s)"
    ],
-   "segundos": 0.05,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -806,7 +822,7 @@
    "evidencia": [
     "8 markups de wall sobre su banda dibujada (0 con excepción escrita)"
    ],
-   "segundos": 0.78,
+   "segundos": 0.57,
    "plausibilidad": "OK"
   },
   {
@@ -821,7 +837,7 @@
    "evidencia": [
     "1 markups de cielo / soffit con contorno medido; 0 ceilings con contorno == cargado"
    ],
-   "segundos": 0.09,
+   "segundos": 0.06,
    "plausibilidad": "OK"
   },
   {
@@ -884,7 +900,7 @@
    "evidencia": [
     "ninguna resolución contra una cota impresa"
    ],
-   "segundos": 0.7,
+   "segundos": 0.63,
    "plausibilidad": "OK"
   },
   {
@@ -1296,7 +1312,7 @@
    "evidencia": [
     "ninguna cota HOLD sin cuantificar"
    ],
-   "segundos": 0.02,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -1336,7 +1352,7 @@
    "evidencia": [
     "backboard de ['E2.0', 'E3.0'] con destino"
    ],
-   "segundos": 0.01,
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1511,7 +1527,7 @@
    "evidencia": [
     "N/A: sin ATM / recess"
    ],
-   "segundos": 0.01,
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -1628,7 +1644,7 @@
    "evidencia": [
     "N/A: sin asignaciones a otro contratista en E/M/P"
    ],
-   "segundos": 0.01,
+   "segundos": 0.0,
    "plausibilidad": "OK"
   },
   {
@@ -2443,7 +2459,7 @@
    "evidencia": [
     "115 (hoja, término) de los barridos de RFI listados completos"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -2913,7 +2929,7 @@
    "evidencia": [
     "notas impresas cargadas"
    ],
-   "segundos": 0.02,
+   "segundos": 0.01,
    "plausibilidad": "OK"
   },
   {
@@ -3062,7 +3078,7 @@
    "evidencia": [
     "22 ubicaciones numeradas, circuladas, verificadas y contadas"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -3092,7 +3108,7 @@
    "evidencia": [
     "entregable en inglés"
    ],
-   "segundos": 0.03,
+   "segundos": 0.02,
    "plausibilidad": "OK"
   },
   {
@@ -3207,7 +3223,7 @@
    "evidencia": [
     "12 schedules, 181 types / renglones marcados, 224 materiales cruzados con el Material Summary"
    ],
-   "segundos": 0.33,
+   "segundos": 0.43,
    "plausibilidad": "OK"
   },
   {
@@ -3220,7 +3236,7 @@
    "evidencia": [
     "12 schedules del trade, 181 filas revisadas, materiales listados y marcadas"
    ],
-   "segundos": 0.16,
+   "segundos": 0.21,
    "plausibilidad": "OK"
   },
   {
@@ -3236,7 +3252,7 @@
     "46 burbujas circuladas en origen y destino en 6 hojas; por hoja de origen: A2.0 17, A5.0 9, A3.0 2, A4.0 17, M1.0 1",
     "conteos (CR-R10-m3): este total = TODAS las burbujas de todas las hojas de origen del set, por disciplina A 45, M 1; CE_CALLOUTS cuenta los destinos N/HOJA únicos citados y las burbujas de las hojas alcanzadas por la cadena del trade (subconjunto)"
    ],
-   "segundos": 1.0,
+   "segundos": 0.88,
    "plausibilidad": "OK"
   }
  ],
@@ -3548,9 +3564,9 @@
   "rev1 FINAL PARA REVISAR/Planos marcados/A1.0 - IMAGE ONLY (not editable) - walls rev1.png": "3700d7a4fdedd053dabe387db653633c349b3b5c110fa2e56a7a6b15883afe9c",
   "rev1 FINAL PARA REVISAR/Planos marcados/A2.0 - IMAGE ONLY (not editable) - walls rev1.png": "f4961609235a2948272fe2f1264e90f5a433ddebb963ef20d38d9456ea395739",
   "rev1 FINAL PARA REVISAR/Planos marcados/A3.0 - IMAGE ONLY (not editable) - ceilings rev1.png": "80aa20565e9da437949848b1fcd6e65df95904f6bc5be703f42bfe8f746f4d01",
-  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "1b158676c26fd9ca2847b056ae44cf666c39d97565d09763517bbb439d39e0c2",
-  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "ea8052da2b640f603b128194d7c275f966bce5782e6bab06caeea8bd591a9d10",
-  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "bfa095d2898b87bc1b55059c291867c2024816d84ee7acce43a47f9ca1bbb521",
+  "rev1 FINAL PARA REVISAR/Planos marcados/ALTURAS_REVISADAS.pdf": "4b1fdff4e5c43b9915e53088bbf5b71a18121746cca842361783eaf721daf426",
+  "rev1 FINAL PARA REVISAR/Planos marcados/DETALLES_REVISADOS.pdf": "9db1a4bd7a2f7e4dbfdf5dde53f4fca75924fbeda57d592a084e2c3cfe1da89a",
+  "rev1 FINAL PARA REVISAR/Planos marcados/SCHEDULES_REVISADOS.pdf": "613e8e59cb7b08bd199831ec8ea8e6840634bbe55d199061a0ba90ce77d378fa",
   "rev1 FINAL PARA REVISAR/Planos marcados/XF_markups_rev1b - OPEN IN BLUEBEAM.pdf": "cbb9e4edc7a6f71c960cd1b6575328247b3db4a24b3811192822a6fc0510de9d",
   "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1.xlsx": "f2a18f71b1a2cb066bf61affebaffeabdd201c7ef2ddafa4b31766bb57c7926e",
   "rev1 FINAL PARA REVISAR/Proposal/XF_Proposal_rev1_PROPOSAL.pdf": "a0b561b1c8c402360675d89db4618636419e4b88741fa4e9ee01392107d9b0f4",
@@ -3577,8 +3593,8 @@
    "sha256": "b663c76fd3ad6098731c7c5bfd905b2baf1c8eb83256d6a171c82a8d549c5b92"
   }
  },
- "skill_version": "v81cf97",
- "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON)",
+ "skill_version": "v81cf99",
+ "registro": "registro (v81cf45, 2026-11-05: + U-142 / U-143 unidos (O'Reilly + CFA), BE-CF25..27, BE-144 / U-144) + v81cf48 BE-CC01..06 + v81cf49 BE-CC07..10 + v81cf50 U-146 / U-147 + v81cf51 CC-R1..R12 (auditoría U-138 de Consumer Cellular rev3) + v81cf54 U-150 (proposal) + v81cf55 BE-CR01..23 + R80f.55 multinivel (CR City Hotel) + v81cf56 BE-CR24 / BE-CR25 (compuerta en vacío, rev2 CR City Hotel) + v81cf57 BE-CR29 (recheck sin chequeos en vacío) + v81cf58 U-151 / BE-147 (CE_PDF_EDITABLE, quitar_firmas_labels.py) + BE-146 (encabezado de INDICE = última VERSIÓN VIGENTE) + v81cf59 U-152 / BE-148 (CE_PDF_EDITABLE con escala de página /VP, tools/escala_pagina.py; markups_bluebeam.escribir lo llama solo) + v81cf60 U-153 / BE-149 (DepthUnit /C 1, etiqueta SF wall, compuerta CE_VISTA_BLUEBEAM que simula el Markups List de Bluebeam + VISTA_BLUEBEAM.csv) + v81cf61 BE-CR30 (CB_RCP_TAGS: cada tag GYP del RCP con renglón o motivo) / BE-CR31 (markups_rcp con /VP, DETALLES / SCHEDULES_REVISADOS sin /SigFlags) + v81cf62 R80e.160 (CR City Hotel rev6: CR-R6-E1 / E2 / E3 / O1 / O2) + v81cf63 R80e.161 (CR-R7-01 CE_RCP_COMPLETO) + v81cf64 R80e.162 (CR-R8-W1 / W2 / C) + v81cf81 BE-GK01 / BE-GK02 (Grand Kia: deps del arranque, capa OCR para hojas con texto en curvas) + v81cf83 U-171 / U-172 / U-173 + v81cf84 BE-XF07 (Xfinity: Subject type sin /Measure = FAIL, leyenda LEGEND) + v81cf85 U-174 (CB_U_174) + v81cf86 U-175 (CE_ALTURAS_3LADOS, comparar_alturas.py) + U-176 (CE_ALTURAS_EXTREMO, alturas_extremo.py) + v81cf87 BE-XF08 (verificar_version cuenta archivos de la carpeta y del zip vigente) + v81cf91 UNIÓN v81cf88 (Grand Kia BE-GK03..30) + v81cf89 (Xfinity U-177 / BE-XF09) + BE-GK31 + v81cf92 U-178 / U-179 + v81cf94 GK32..36 + U-180..U-184 + v81cf95 UNIÓN (GK38 + CR rev19 BE-CR32..34 + BE-XF10 + BE-COORD01) + v81cf96 (post-mortem 11-nov: P1..P10 + U-185; BE-AUD01..04, BE-GK33b, BE-GK35, BE-GK37 a programa) + v81cf97 U-186 (BORRAR (NO USAR) en todo rename de reemplazo) + BE-PM02 (CE_CAMPOS_CANON) + v81cf98 U-187 / BE-COORD02 (CE_TEXTOS_LEGIBLES) + v81cf99 BE-CR35 (not blind = FAIL)",
  "vigentes": {
   "pdf": {
    "nombre": "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf",
@@ -3591,7 +3607,7 @@
    "md5": "f9e1bbb38b03a0c3fb7a0bd804da8cd8"
   }
  },
- "corrida": "a25bab46542a",
+ "corrida": "c1a036352aec",
  "tipo": "final",
  "paso": null
 }
