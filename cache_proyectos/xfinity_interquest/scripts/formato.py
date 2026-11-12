@@ -26,15 +26,15 @@ if s:
       "op": f"header box: 2 bottom tracks (both faces at 8'-6\") + 2 top tracks = 4 x {L} = {round(4*L,3)} LF 3-5/8\" track", "status": "DERIVADO"},
      {"ref": "SOF-01-STUDS", "familia": "3-5/8\" stud (todos los gauges)", "qty": round(n_st * 2.0 + n_st * 1.0, 3), "unit": "LF", "source": "A3.0; 2/A2.0 W2 framing @16\" o.c.",
       "op": f"ROUNDUP({L}/1.333)+1 = {n_st} studs storage face 8.5->10.5 (2.0 ft) + {n_st} studs hallway face 8.5->9.5 (1.0 ft) = {n_st*3.0} LF", "status": "DERIVADO"},
-     {"ref": "SOF-01-BOARD", "familia": "5/8\" gyp board Type X", "qty": round(1.727 + 2.0 * L + 1.0 * L, 2), "unit": "SF", "source": "A3.0 '5/8\" TYPE X GYPSUM BOARD CEILING' legend + A3.0 8'-6\" tag; A2.0 legend 6\" above ceiling",
-      "op": f"underside 1.727 (A3.0 vector 76.44 x 7.32 pt / 324) + storage face 2.0 x {L} + hallway face 1.0 x {L} = {round(1.727+3.0*L,2)} SF", "status": "DERIVADO"},
+     {"ref": "SOF-01 board", "familia": "5/8\" gyp board Type X", "qty": round(1.727 + 2.0 * L + 1.0 * L, 2), "unit": "SF", "source": "1/A3.0 REFLECTED CEILING PLAN tag 'GYP. BD. 8'-6\" AFF' + A3.0 '5/8\" TYPE X GYPSUM BOARD CEILING' legend; A2.0 legend 6\" above ceiling",
+      "op": f"{L} LF x {round((1.727 + 3.0 * L) / L, 3)} ft developed (underside 1.727 SF (1/A3.0 vector 76.44 x 7.32 pt / 324) / {L} LF = {round(1.727 / L, 3)} + storage face 2.0 + hallway face 1.0) = {round(1.727+3.0*L,2)} SF", "status": "DERIVADO"},
     ]
     c['misc_items'] += items
     c['trim_items'] = [t for t in c.get('trim_items', []) if t['ref'] != 'CB-SOF-01'] + [
      {"ref": "CB-SOF-01", "kind": "corner_bead", "lf": round(2 * L, 3), "label": "SOF-01 header: two bottom edges", "source": "A3.0", "op": f"2 x {L} = {round(2*L,3)}", "status": "DERIVADO"}]
     c['ceilings'] = [x for x in c['ceilings'] if x['ref'] != 'SOF-01']
     c['soffit_header_info'] = {k: s[k] for k in ('ref', 'type', 'room', 'sheet', 'band', 'area_sf', 'area_source', 'area_op', 'height_ft', 'height_source', 'img', 'height_img') if k in s}
-    c['ceilings_info'] = (c.get('ceilings_info') or '') + " | SOF-01 8'-6\" gypsum header at the north end of Hallway 102: carried as misc items SOF-01-TRACK / STUDS / BOARD + CB-SOF-01 (framing as type W2, RFI-02 closed)."
+    c['ceilings_info'] = (c.get('ceilings_info') or '') + " | SOF-01 8'-6\" gypsum header at the north end of Hallway 102: carried as misc items SOF-01-TRACK / SOF-01-STUDS / 'SOF-01 board' + CB-SOF-01 (framing as type W2, RFI-02 closed)."
 json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 print('ok', [w['id'] for w in c['walls']], len(c['ceilings']))
 # --- wall schema fields (canon.py), W2 walls ---
@@ -276,11 +276,11 @@ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
 c = json.load(open(P))
 c['constants']['plan_scale_by_sheet'] = {h: {"value": 18.0, "source": f"1/{h} view title 1/4\" = 1'-0\" (vector check on printed dimensions)"} for h in ("A1.0", "A2.0", "A3.0")}
 s = c.get('soffit_header_info') or {}
-c['framed_soffits'] = [{"id": "SOF-01", "ref": "SOF-01", "source": "A3.0 'GYP. BD. 8'-6\" AFF' + A2.0 wall legend 6\" above ceiling; framing as type W2 (2/A2.0)",
+c['framed_soffits'] = [{"id": "SOF-01", "ref": "SOF-01", "source": "1/A3.0 'GYP. BD. 8'-6\" AFF' + A2.0 wall legend 6\" above ceiling; framing as type W2 (2/A2.0)",
     "faces": [{"side": "bottom", "layers": 1, "board": "5/8 type X", "sf": s.get('area_sf')},
               {"side": "storage face (8'-6\" to 10'-6\")", "layers": 1, "board": "5/8 type X"},
               {"side": "hallway face (8'-6\" to 9'-6\")", "layers": 1, "board": "5/8 type X"}],
-    "quantities": "misc_items SOF-01-TRACK / SOF-01-STUDS / SOF-01-BOARD + trim CB-SOF-01 (this record carries no quantity)"}]
+    "quantities": "misc_items SOF-01-TRACK / SOF-01-STUDS / 'SOF-01 board' + trim CB-SOF-01 (this record carries no quantity)"}]
 c['wood_walls_none_reason'] = "no wood-framed wall in the set: new walls are metal (2/A2.0 W2 3-5/8\" metal studs, 5/A2.0 2-1/2\" metal studs); W1 / W4 existing to remain (2/A2.0, not quantified)"
 c['excluded_walls'] = [{"id": e['id'], "why": e['why']} for e in c.get('existing_walls_info') or []] + [{"id": "W2-01a", "why": "reading A 4\" stub merged into W2-01 (wall measured through the door 101 R.O., resolution item 1)"}]
 for w in c['walls']:

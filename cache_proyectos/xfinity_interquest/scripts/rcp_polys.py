@@ -153,12 +153,12 @@ json.dump({"sheet": RCP, "rule": "U-159 / U-160: every room printed on the RCP h
 sh = c["soffit_header_info"]
 b = sh["band"]
 assert b["sheet"] == RCP
-brd = next(x for x in c["misc_items"] if x["ref"] == "SOF-01-BOARD")
+brd = next(x for x in c["misc_items"] if x["ref"] == "SOF-01 board")   # rev1c: '<id> board' -> esperados_rcp (BE-AUD07)
 ax = (b["c0"] + b["c1"]) / 2
 lf = (b["hi"] - b["lo"]) / S
-polys = [{"misc": True, "id": "SOF-01-BOARD", "sheet": RCP, "kind": "line", "lines": [[[b["lo"], ax], [b["hi"], ax]]],
+polys = [{"misc": True, "id": "SOF-01", "sheet": RCP, "kind": "line", "lines": [[[b["lo"], ax], [b["hi"], ax]]],
           "lf": round(lf, 3), "depth_ft": round(float(brd["qty"]) / lf, 3), "layers": 1, "board": "5/8 GYPSUM BOARD TYPE X",
-          "nhoja": RCP, "cause": "SOF-01 gyp. bd. header 8'-6\" AFF at the north end of Hallway 102; board = " + brd["op"],
+          "nhoja": "1/" + RCP, "cause": "SOF-01 gyp. bd. header 8'-6\" AFF at the north end of Hallway 102; board = " + brd["op"],
           "source": "canon soffit_header_info.band (" + sh["area_source"] + ")"}]
 json.dump(polys, open(os.path.join(K, "etapas/6_markups/rcp_polys.json"), "w"), indent=1, ensure_ascii=False)
 

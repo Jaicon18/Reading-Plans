@@ -33,3 +33,12 @@
 
 ## U-178 (11-nov): RFI-06 'Verificar a mano'
 - A conservador (+2,589.62 SF) sigue cargado; RFI-06 = PENDING - user manual verification en Pending Items, SEGUIMIENTO, PARA_REVISAR y GUIA (hojas A2.0, A0.1 nota 3, A1.0). Compuerta v81cf91 211/0/0; Drive 16 'zz old U-178' + 16 nuevos; --vigente PASS.
+
+## rev1c (12-nov, orden COORDINACIÓN, auditoría U-138 / BE-AUD07)
+- SOF-01: el misc del board se llamaba 'SOF-01-BOARD' y esperados_rcp solo lee '<id> board' -> CE_RCP_COMPLETO daba 'N/A sin cielos'.
+  Ahora 'SOF-01 board' con op '4.247 LF x 3.407 ft developed (...) = 14.47 SF', fuente 1/A3.0 REFLECTED CEILING PLAN; markup TO-SOF-01 en
+  A3.0: Length 4.25 x Depth 3.407 = 14.47 SF = Material Summary fila 13 (vista_bluebeam OK); esperados_rcp = {SOF-01: 4.247 LF}, 0 fallas.
+- Cadena completa (cadena.sh, PDFREV=rev1c) CHAIN-OK; armar_entrega.sh con `compuerta_entrega.py armar` (BE-CR43, SUBIDA_OK conservado).
+- Compuerta v81cf114: PASS 226 / AMBER 9 / FAIL 0 VERDE (CE_RCP_COMPLETO PASS, CE_VERSION_ENTREGA PASS, CE_RESUMEN_EXCEL PASS).
+- Drive: 15 archivos cambiados renombrados 'BORRAR (NO USAR) - ... - REPLACED BY ...' (U-186, drive_viejos.py --tag rev1c); subir_entrega 320
+  archivos; --vigente PASS.

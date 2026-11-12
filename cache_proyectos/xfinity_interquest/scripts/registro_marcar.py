@@ -30,8 +30,8 @@ for w in c["walls"]:
 for o in c["opening_schedule"]["items"]:
     nota[o["ref"]] = f"CUANTIFICADO: {o['ref']} R.O. {o['ro_w_ft']} ft in {o['wall']}, head per 7/A2.0 (header row of {X}); {o['ro_status']}"
 sh = c["soffit_header_info"]
-nota[sh["ref"]] = (f"CUANTIFICADO: SOF-01-TRACK / STUDS / BOARD + CB-SOF-01 (canon misc_items, RFI-02 closed); {sh['area_op']}; "
-                   f"markup TO-SOF-01-BOARD on A3.0; image {os.path.basename(sh['img'])}")
+nota[sh["ref"]] = (f"CUANTIFICADO: SOF-01-TRACK / SOF-01-STUDS / 'SOF-01 board' + CB-SOF-01 (canon misc_items, RFI-02 closed); {sh['area_op']}; "
+                   f"markup TO-SOF-01 on 1/A3.0; image {os.path.basename(sh['img'])}")
 for m in c["misc_items"]:
     if m["ref"].startswith(("DEMO", "BRACE")):
         nota[m["ref"]] = f"CUANTIFICADO: {m['op']} ({m['source']}); Material Summary of {X}" + (

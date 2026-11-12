@@ -14,7 +14,7 @@ pt = [r for r in wb["Partition Takeoff"].iter_rows(min_row=5, values_only=True) 
 rf = [r for r in c["rfis"] if r["status"] == "open"]; cr = [r for r in c["rfis"] if r["status"] != "open"]
 ud = [r for r in cr if "user decision" in str((r.get("resolved") or {}).get("by", ""))]
 DLF = round(sum(m["lf"] for m in c["misc_items"] if m.get("element") == "demo" and m.get("lf")), 2)
-PDF = "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf"
+PDF = "XF_markups_rev1c - OPEN IN BLUEBEAM.pdf"
 TIT = "Xfinity - Interquest, 1333 Interquest Pkwy, Lot 11, Colorado Springs, CO 80921 - Metal framing & drywall take-off, rev1 FINAL"
 def fam(sub, unit=True):
     v = [r for r in ms if sub.lower() in str(r[0]).lower() and r[2]]

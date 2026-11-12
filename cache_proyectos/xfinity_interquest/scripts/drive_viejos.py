@@ -24,6 +24,8 @@ def rec(dl, fid):
             continue
         if n.startswith(("zz ", "BORRAR (NO USAR) - ")):
             continue
+        if n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and TAG == "rev1c":           # rev1c: el PDF rev1b ya no es vigente
+            cambios.append((it["id"], os.path.relpath(pl, loc), SE.nombre_borrar(n, "XF_markups_rev1c - OPEN IN BLUEBEAM.pdf"))); continue
         if U174 and n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
             cambios.append((it["id"], os.path.relpath(pl, loc), f"BORRAR (NO USAR) - XF_markups_rev1b old (antes de {TAG}).pdf")); continue
         if n == "XF_markups_rev1 - OPEN IN BLUEBEAM.pdf":

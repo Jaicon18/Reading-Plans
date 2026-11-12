@@ -734,7 +734,7 @@
  },
  "openings_extra": [],
  "ceilings": [],
- "ceilings_info": "A3.0 RCP / A4.0 RFS: RETAIL 100 '2x4 ACT 12'-0\" AFF' NEW GRID AND TILES (rectangle 760.8-1559.88 x 1237.56-1760.88 = 1290.7 SF, A2.0 vector) - NOT ours (ACT); STORAGE 101 'EXIST. GRID & NEW TILES 2x4 ACT 10'-0\" AFF' (419.4-753.48 x 1237.56-1489.08 = 259.3 SF) - NOT ours; HALLWAY 102 'EXISTING GYP. BD. 9'-0\" AFF' (676.8-753.48 x 1496.4-1646.76 = 35.6 SF) - EXISTING to remain (A1.0 key 16) - not ours; TOILET 103 'EXISTING GYP. BD. 9'-0\" AFF' (same tag leader branch; 562.92-669.48 x 1500.6-1646.76 = 48.1 SF) - existing, not ours; ACCESS TOILET 104 'EXISTING GYP. BD. 9'-0\" AFF' (562.92-753.48 x 1655.28-1760.88 = 62.1 SF) - existing, not ours; LANDLORD ROOM (N.I.C.) excluded. Only new gyp ceiling element = SOF-01. All areas = (dx*dy)/324 at 18 pt/ft. | SOF-01 8'-6\" gypsum header at the north end of Hallway 102: carried as misc items SOF-01-TRACK / STUDS / BOARD + CB-SOF-01 (framing as type W2, RFI-02 closed).",
+ "ceilings_info": "A3.0 RCP / A4.0 RFS: RETAIL 100 '2x4 ACT 12'-0\" AFF' NEW GRID AND TILES (rectangle 760.8-1559.88 x 1237.56-1760.88 = 1290.7 SF, A2.0 vector) - NOT ours (ACT); STORAGE 101 'EXIST. GRID & NEW TILES 2x4 ACT 10'-0\" AFF' (419.4-753.48 x 1237.56-1489.08 = 259.3 SF) - NOT ours; HALLWAY 102 'EXISTING GYP. BD. 9'-0\" AFF' (676.8-753.48 x 1496.4-1646.76 = 35.6 SF) - EXISTING to remain (A1.0 key 16) - not ours; TOILET 103 'EXISTING GYP. BD. 9'-0\" AFF' (same tag leader branch; 562.92-669.48 x 1500.6-1646.76 = 48.1 SF) - existing, not ours; ACCESS TOILET 104 'EXISTING GYP. BD. 9'-0\" AFF' (562.92-753.48 x 1655.28-1760.88 = 62.1 SF) - existing, not ours; LANDLORD ROOM (N.I.C.) excluded. Only new gyp ceiling element = SOF-01. All areas = (dx*dy)/324 at 18 pt/ft. | SOF-01 8'-6\" gypsum header at the north end of Hallway 102: carried as misc items SOF-01-TRACK / SOF-01-STUDS / 'SOF-01 board' + CB-SOF-01 (framing as type W2, RFI-02 closed).",
  "plywood_strips": [],
  "blocking_items": [
   {
@@ -1242,12 +1242,12 @@
    "designation_source": "framed as type W2: 2/A2.0 + A2.0 limiting heights table (362S125-33 @ 16\" o.c.)"
   },
   {
-   "ref": "SOF-01-BOARD",
+   "ref": "SOF-01 board",
    "familia": "5/8\" gyp board Type X",
    "qty": 14.47,
    "unit": "SF",
-   "source": "A3.0 '5/8\" TYPE X GYPSUM BOARD CEILING' legend + A3.0 8'-6\" tag; A2.0 legend 6\" above ceiling",
-   "op": "underside 1.727 (A3.0 vector 76.44 x 7.32 pt / 324) + storage face 2.0 x 4.247 + hallway face 1.0 x 4.247 = 14.47 SF",
+   "source": "1/A3.0 REFLECTED CEILING PLAN tag 'GYP. BD. 8'-6\" AFF' + A3.0 '5/8\" TYPE X GYPSUM BOARD CEILING' legend; A2.0 legend 6\" above ceiling",
+   "op": "4.247 LF x 3.407 ft developed (underside 1.727 SF (1/A3.0 vector 76.44 x 7.32 pt / 324) / 4.247 LF = 0.407 + storage face 2.0 + hallway face 1.0) = 14.47 SF",
    "status": "DERIVADO"
   },
   {
@@ -2136,7 +2136,7 @@
   {
    "id": "SOF-01",
    "ref": "SOF-01",
-   "source": "A3.0 'GYP. BD. 8'-6\" AFF' + A2.0 wall legend 6\" above ceiling; framing as type W2 (2/A2.0)",
+   "source": "1/A3.0 'GYP. BD. 8'-6\" AFF' + A2.0 wall legend 6\" above ceiling; framing as type W2 (2/A2.0)",
    "faces": [
     {
      "side": "bottom",
@@ -2155,7 +2155,7 @@
      "board": "5/8 type X"
     }
    ],
-   "quantities": "misc_items SOF-01-TRACK / SOF-01-STUDS / SOF-01-BOARD + trim CB-SOF-01 (this record carries no quantity)"
+   "quantities": "misc_items SOF-01-TRACK / SOF-01-STUDS / 'SOF-01 board' + trim CB-SOF-01 (this record carries no quantity)"
   }
  ],
  "wood_walls_none_reason": "no wood-framed wall in the set: new walls are metal (2/A2.0 W2 3-5/8\" metal studs, 5/A2.0 2-1/2\" metal studs); W1 / W4 existing to remain (2/A2.0, not quantified)",
