@@ -1,7 +1,7 @@
 diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v1381/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 14:56:24.682152077 +0000
-+++ v1381/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 18:27:03.011815292 +0000
-@@ -8862,6 +8862,22 @@
++++ v1381/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 18:46:02.610499157 +0000
+@@ -8862,6 +8862,21 @@
     "categoria": "conducta",
     "texto_corto": "todo proceso largo (compuerta, PRUEBA_ABIERTOS, OCR, subida) se lanza SOLO como tarea de background vigilada (run_in_background / Monitor) con su archivo de progreso, nunca con '&' dentro de un comando de primer plano; a los 2 min se verifica que el PID siga vivo y que su salida o su proceso hijo avancen",
     "motivo": "un proceso muerto en silencio costó 1 h 17 min; el chequeo de programa (log de 0 bytes y sin proceso vivo a los 5 min = ALARMA) queda propuesto para una versión siguiente"
@@ -16,11 +16,10 @@ diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.jso
 +  },
 +  {
 +   "id": "U-200",
-+   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 59e2c4c)",
-+   "categoria": "programa-pendiente",
-+   "cuando": "entrega",
-+   "texto_corto": "CHECKLIST_REVISION = 'Hoja de 15 min': UNA hoja con las 10 walls más largas, 5 alturas al azar con su página de ALTURAS_REVISADAS, MAPA DE COBERTURA (0 rojos) y decisiones / exclusiones con su delta",
-+   "motivo": "CE_CHECKLIST_USUARIO adaptado (falta una de las 4 partes o más de 1 hoja = FAIL) va a v81cf140 (COORDINACIÓN 18:22)"
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 59e2c4c; CAMBIADA por el usuario en commit 332cfd8)",
++   "categoria": "conducta",
++   "texto_corto": "el CHECKLIST_REVISION se queda COMPLETO como en U-168 B1-B5 + B6 (nada se recorta); lo revisa el chequeo existente CE_CHECKLIST_USUARIO, sin cambio de programa",
++   "motivo": "el usuario cambió U-200 el 13-nov (COORDINACIÓN 18:45): la 'Hoja de 15 min' queda sin efecto; no hay adaptación de CE_CHECKLIST_USUARIO en v140"
    }
   ]
  }
