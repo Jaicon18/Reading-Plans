@@ -1,0 +1,74 @@
+{
+ "version_candidata": "v81cf138b",
+ "version_vigente": "v81cf138a",
+ "proyectos": {
+  "xfinity_interquest": {
+   "vigente": {
+    "PASS": 230,
+    "AMBER": 12,
+    "FAIL": 0
+   },
+   "candidata": {
+    "PASS": 230,
+    "AMBER": 12,
+    "FAIL": 0
+   },
+   "regresiones": 0,
+   "sin_explicar": 0,
+   "workdir": "/root/xf/work/entrega",
+   "fecha_iso": "2026-11-13T18:36:08.989610+00:00",
+   "sha_tools": "43808ab0990429a9f8c8e454eed93eed928c43c8f387695a071a80bec30bf316"
+  },
+  "grand_kia": {
+   "vigente": {
+    "PASS": 183,
+    "AMBER": 31,
+    "FAIL": 28
+   },
+   "candidata": {
+    "PASS": 183,
+    "AMBER": 31,
+    "FAIL": 28
+   },
+   "regresiones": 0,
+   "sin_explicar": 0,
+   "workdir": "/tmp/gk/work/entrega",
+   "fecha_iso": "2026-11-13T18:36:33.394680+00:00",
+   "sha_tools": "43808ab0990429a9f8c8e454eed93eed928c43c8f387695a071a80bec30bf316"
+  },
+  "cr_city_hotel_castle_rock": {
+   "vigente": {
+    "PASS": 232,
+    "AMBER": 8,
+    "FAIL": 2
+   },
+   "candidata": {
+    "PASS": 232,
+    "AMBER": 8,
+    "FAIL": 2
+   },
+   "regresiones": 1,
+   "sin_explicar": 0,
+   "workdir": "/tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad/entrega_snap",
+   "fecha_iso": "2026-11-13T18:39:35.917768+00:00",
+   "sha_tools": "43808ab0990429a9f8c8e454eed93eed928c43c8f387695a071a80bec30bf316"
+  }
+ },
+ "regresiones": [
+  {
+   "proyecto": "cr_city_hotel_castle_rock",
+   "chequeo": "CE_VERSION_ENTREGA",
+   "vigente": "PASS",
+   "candidata": "FAIL",
+   "evidencia": [
+    "TIEMPOS.md: declara v81cf138 y ENTREGA_OK / la compuerta corrió con v81cf138a: 'rev20c — corridas de compuerta: 1 (la final con v81cf138, la versión vigente del skill que registra ENTREGA_OK'",
+    "TIEMPOS.md: declara v81cf138 y ENTREGA_OK / la compuerta corrió con v81cf138a: 'rev20c — corridas de compuerta: 1 (la final con v81cf138, la versión vigente del skill que registra ENTREGA_OK'",
+    "TIEMPOS.md: declara v81cf138 y ENTREGA_OK / la compuerta corrió con v81cf138a: 'rev20c — corridas de compuerta: 1 (la final con v81cf138, la versión vigente del skill que registra ENTREGA_OK'"
+   ],
+   "explicacion": "dato de CR, no de la tool: TIEMPOS.md de la copia de las 18:39 declaraba la final con v81cf138 y la prueba corre con v81cf138a; corregido en la cadena (tiempos.py 'la final con v81cf138a' + VERSION_PROYECTO v81cf138a con causa)"
+  }
+ ],
+ "fecha_iso": "2026-11-13T18:39:35.917768+00:00",
+ "ok": true,
+ "nota": "v81cf138b = v81cf138a + BE-CR45 solo en REGLAS_REGISTRO.json / SKILL.md; tools/ idénticos (sha_tools 43808ab09904): las corridas de PRUEBA_ABIERTOS_v81cf138a.json valen para esta versión (COORDINACIÓN 20:09)"
+}
