@@ -8683,6 +8683,28 @@
    "categoria": "conducta",
    "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
    "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
+  },
+  {
+   "id": "BE-GK57",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 12-nov: tres veces en la misma rev)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "nunca se deja una copia / backup de un insumo de la cadena (ni una entrega anterior) DENTRO del árbol de trabajo: la cadena la lee por glob o como 'la más reciente' (resuelto_Z1.rev3a.bak.json cargó el A-Z1-20 viejo; CADENA.prev.md / G2/CADENA.md editadas dieron un falso 'A501 sin círculo'; entrega_rev*/ se escaneó por el link takeoff_work); van a bak_<rev>/ o entregas_previas/ fuera del árbol",
+   "chequeos": [
+    "take-off:tools/be_gk57.py::fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_be_gk57.py",
+    "token": "test_be_gk57 OK"
+   },
+   "apartado": "apartados/be_gk57/"
+  },
+  {
+   "id": "BE-GK58",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, compuerta final #2 ROJA, 12-nov)",
+   "categoria": "conducta",
+   "texto_corto": "toda hora que se escribe en TIEMPOS.md / tiempos.log / notas de causa va en hora de California (PST), también las de una corrida cortada o un reinicio; la nota de la corrida cortada se escribió '00:52 UTC' y la compuerta final #2 salió ROJA solo por CE_HORAS_CALIFORNIA (U-045; ya había pasado en rev3)",
+   "motivo": "hora copiada del registro de la compuerta (ts en UTC) sin convertir"
   }
  ]
 }
