@@ -1,76 +1,17 @@
-# v81cf138 WIP: arreglos de los 7 STILL-WEAK de la verificación 6 (post-mortem 12b)
+# v81cf138 ANGOSTA (candidato, sin publicar): solo lo que necesita CR rev20c
 
-Estado: preparado, NO publicado. Vigente: v81cf137. Se publica cuando COORDINACIÓN avise, después de que CR cierre rev20c.
+Orden de COORDINACIÓN 13-nov 09:50: v138 = v137 + 5 arreglos, nada más. Los 7 STILL-WEAK del post-mortem y la base ancha van a v139 (apartados/v81cf139_wip/).
 
-## Contenido
+Parche: `v81cf138_desde_v81cf137.patch`. Archivos que cambian: compuerta_entrega.py, test_compuerta_entrega.py, chequeos_biblioteca.py (SOLO be_cf04), runner/completitud.py, REGLAS_REGISTRO.json, SKILL.md. verificar_version y las órdenes: igual que v137 (más la entrada BE-XF18 del registro).
 
-- `v81cf138_desde_v81cf137.patch`: parche completo del skill.
-- `ordenes/`: verificar_version.py, test_verificar_version.py y REGLAS_REGISTRO.json candidatos.
-- `adversariales/`: los adv6_* de la verificación 6, con su salida antes (`before/`) y después (`after/`).
-- `PRUEBA_ABIERTOS_v81cf138_XF.json`.
-
-## Qué cambia (un test por caso)
-
-| renglón | arreglo | test |
+| arreglo | qué | test |
 |---|---|---|
-| NG-3.1 / BE-PM04 (prioridad) | PRUEBA_ABIERTOS sin un proyecto abierto = "BLOQUEA LA PUBLICACIÓN" (main sale con 1 y dice NO PUBLICAR); un proyecto en curso sin SUBIDA_OK cuenta como abierto (canon o TIEMPOS / log / VERSION_PROYECTO con fecha); csv_cuadra con no emparejados / duplicados / huérfanos / diferencias > 0 = no cerrado; VERSION_PROYECTO en subcarpetas | adv6_pm04 (test_verificar_version) |
-| BE-CR40 / v120-FALT | lista abierta de faltante (en / es) y de cielo (techo, plafón, hard lid, bulkhead); cuartos C-12 / B12 / room 12; hallazgos en COORDINACION / REVIEW / HALLAZGO / RESUMEN / BITACORA / FINDINGS (solo la rev actual); CERRADO: y DOBLE_CIELO solo con ref DEL cuarto; faltante y cielo en la misma frase ('above ceiling' es altura) | test_v138_faltantes_listas_abiertas, test_v138_faltante_misma_frase |
-| NG-3.3 / BE-PM06 | plazo por las marcas "\| N fin" y por TIEMPOS.md; sin ninguna, cada marca del log cierra | test_v138_alarma_plazo_tiempos |
-| U-193 | una corrida solo reemplaza a la sin agente con rc 0, resultado, mismos args y hashes, sin --help | test_v138_reemplazo_corrida_sin_agente |
-| BE-GK54 | gap_proof 'gap 0' con distancia medida > 2 in = FAIL | test_v138_gk54_gap_medido |
-| v120-RETRO | el AMBER retroactivo exige inicio independiente (VERSION_PROYECTO / bitácora / git) anterior a v119 y a <= 24 h del log | test_v138_retro_fuente_independiente |
+| BE-XF18 | PDF de markups por nombre (entrega.json 'markups' o el '… - OPEN IN BLUEBEAM.pdf' de la rev en curso, la del Excel de Take-off/ más nuevo); nunca 'IMAGE ONLY' / mapa; 'markups' inexistente, ninguno de la rev en curso o ambigüedad = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO) | test_be_xf18_pdf_markups_por_nombre |
+| CB_BE_83 | existing_walls con 'faces' numérico = una cara (cuarto del location); 'faces: exterior; 905 GUEST' juzga la cara interior; 'underside of ceiling' no justifica, sí roof / floor / structure / deck / sheathing / joist / framing, 'floor to floor', 'stair enclosure' | test_v138_be83_faces_numero |
+| CB_BE_CF04 | PASS sin '0 walls' (red U-138); madera: '2 X 6', '2x6', '2×6', '2 x 4', 'DF stud', 'Douglas fir', 'SPF', 'timber', 'wood' = FAIL | test_v138_cf04_wood_board_only_plausible |
+| CE_PROTOCOLO_3H | rev que arrancó después de v119: solo se juzgan sus pasos; arranque = el MÁS TEMPRANO de la marca del log, el sello de VERSION_PROYECTO y git (arranque_rev_desde) | test_v138_protocolo_rev_posterior_solo_sus_pasos |
+| CE_COBERTURA_DIAG | discontinuos fuera; hatch solo si es el MISMO a los dos lados (ángulo, estilo, espaciado) o cross-hatch dentro de la banda; tag solo con la palabra encerrada en caja o palabras a los dos lados | test_v138_cob_diag_familias_cr (+ K2-K4 de la verificación 7) |
 
-## BE-XF18 (COORDINACIÓN 08:12)
-
-`Ctx` elegía el PDF de markups por orden alfabético inverso. Desde v133, 'MAPA DE COBERTURA - IMAGE ONLY.pdf' ordena antes que '<PROY>_markups…' cuando el prefijo del proyecto es menor que M (CR, GK); la compuerta leía el mapa (0 annots) y daba FAIL falsos. Ahora `elegir_pdf_markups` toma entrega.json 'markups' o el único '… - OPEN IN BLUEBEAM.pdf' (U-165); nunca 'IMAGE ONLY' / COBERTURA; sin candidato o con más de uno = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO). Test test_be_xf18_pdf_markups_por_nombre.
-Entregas revisadas (ENTREGA_OK archivos): GK rev2 / rev3 / rev3a / rev3b y XF rev1c leyeron su PDF OPEN IN BLUEBEAM. En GK rev3b el mapa todavía se llamaba 'COBERTURA - IMAGE ONLY.pdf', que ordena antes que 'GK_…', así que la regla vieja acertó. El error aparece solo con el nombre de v133 ('MAPA…').
-
-## Pedidos de CR rev20c con v137 (COORDINACIÓN 08:25)
-
-1. CB_BE_83 'int object is not iterable': runner/completitud.caras_sobre_ceiling ahora lee existing_walls (BE-XF16), y en CR 'faces' es un número. Un muro así cuenta como UNA cara (altura del muro, cuarto del location). Justificaciones agregadas: 'underside of roof / floor / structure', 'extend to …', 'floor to floor', 'stair enclosure'; la cara exterior no se compara con el cielo del cuarto. CR rev20b: 86 → 0. Test test_v138_be83_faces_numero.
-2. CB_BE_CF04 en set wood-framed: su PASS decía 'cero walls de madera con framing' en cifras; desde v134 la red U-138 espera 943 muros en CR y lo volvía FAIL. Redacción sin conteo. Test test_v138_cf04_wood_board_only_plausible.
-3. CE_PROTOCOLO_3H AMBER → FAIL en CR rev20c: el código es idéntico entre v134 y v137. Con v137, el arranque de la rev sale de la marca 'inicio rev20c' del log acumulado (12-nov, posterior a v119), y entonces BE-PM06 juzgaba TAMBIÉN los pasos 1-10 de TIEMPOS.md del 5-6 nov, que son de la rev original. Arreglo: si la rev arrancó después de v119, alarma_fallas / tiempos_cuadran juzgan solo las marcas y filas de TIEMPOS.md que cierran desde el arranque (tiempos_desde, _fin_dt); el plazo de la alarma se mide desde ahí. Los pasos de revs anteriores quedan exentos, con la causa escrita. Los pasos de la rev actual sin '--paso' siguen dando FAIL. Test test_v138_protocolo_rev_posterior_solo_sus_pasos. CR ya escribió VERSION_PROYECTO.txt (v81cf137).
-4. CE_COBERTURA_DIAG 555 en CR: los 7 revisores de CR dieron 15 FALTA reales (2.7 %); el resto son falsos: 405 NO ES MURO, 78 CUBIERTO en otra hoja, 57 NO ES NUESTRO. Filtros nuevos para las familias más grandes:
-   - (1) divisor de la caja del tag de muro: palabras pegadas a los dos lados (_cob_divisor_tag);
-   - (5) y (8) trazos discontinuos (grid lines, leaders, límites de vista) (_cob_discontinua);
-   - (4) y (10) hatch denso de líneas cortas que no tienen el estilo de muro: piso, brick paving, CMU cross-hatch (_cob_en_hatch).
-   Test test_v138_cob_diag_familias_cr: el stub real sigue saliendo; tag, discontinuo y hatch no. En XF no cambia nada: el caso real de la jamba de la puerta 103 sigue saliendo.
-   Sin filtro todavía: (2) secciones / elevaciones dentro de la hoja, (3) guardrails de escalera, (6) marcos / jambas, (7) equipo y símbolos, (9) cubierto en otra hoja (planta ampliada contra A2.0x). Esos se cierran con disposición. La tasa nueva sobre los 555 la mide CR, que tiene el PDF.
-
-## Lo que NO cierra (para la verificación 7)
-
-- BE-GK54 Q2: una hoja sin escala en `escalas` usa 9 pt/ft por omisión; una leaf de una hoja a 1/4" se sale de la ventana.
-- BE-GK54 Q3: 'existing' se acepta como otro material aunque la leaf sea de metal.
-- BE-GK54 Q4: una exclusión 'same wall' sin gap_proof con la leaf dispuesta como caso (b) no se juzga.
-- BE-GK54 K3: 'no gap between leaves' sigue rechazado (es ruidoso, no silencioso).
-- Ambigüedades conservadoras: 'room 12' contra 'C-12' se resuelve como cargado (FAIL de más); 'techo' puede ser roof en español.
-- NG-3.1: falta el candado automático en el commit de publicación. Hasta que exista, quien publica tiene que abortar si verificar_version sale con 1 por PRUEBA ABIERTOS.
-
-## Validación
-
-suite 47/47 · banco 0 distintas (8) · XF PRUEBA_ABIERTOS 0 regresiones (231 / 12 / 0, con BE-XF18) · reglas 0 sin clasificar · 199 archivos. La primera corrida dio un falso positivo nuevo en XF (CB_FALTANTES_AUDITORIA leía 'not quantified' + 'above ceiling' de una fila del Scope); quedó corregido con la regla de "misma frase".
-No dice CONFIRMED-CLOSED en ningún lado: eso lo decide la verificación independiente 7.
-
-## CE_COBERTURA_DIAG, segunda pasada (con el PDF de markups de CR rev20b, bajado de Drive en modo lectura)
-
-La primera pasada casi no filtraba nada en CR (CR rev20c: 555 → 520). Causas:
-- el tag de CR es un rectángulo DOBLE con la palabra a un solo lado; ahora vale una palabra pegada a un lado y contenida dentro del largo del par;
-- el hatch tiene el mismo estilo que los muros de la hoja; ahora no se excluyen estilos y se piden >= 18 líneas cortas paralelas en 1 ft (en XF la jamba real tiene 13);
-- el CMU es cross-hatch a 45 y 135 grados; ahora alcanza con >= 4 líneas cortas en cada diagonal.
-Medido sobre el CR rev20b (no cubiertos, v137 → v138): A2.01 91 → 25 · A2.03 12 → 0 · A2.04 15 → 12 · A6.00 154 → 55 · A6.01 74 → 43 · A6.02 63 → 42 · A7.30 18 → 15 · A7.45 33 → 16 · A7.50 12 → 7 · TOTAL 478 → 220 (−54 %).
-XF: el caso real (jamba de la puerta 103) sigue saliendo y el falso del mop sink ya no sale.
-PENDIENTE: CR confirma sobre rev20c que los 15 FALTA siguen saliendo. Riesgo: un furring real pegado a un CMU con cross-hatch.
-
-## CE_COBERTURA_DIAG, tercera pasada (CR rev20c: con la segunda pasada se caían 3 FALTA reales)
-
-CR midió la segunda pasada sobre rev20c: 555 → 248, pero se caían 3 de sus 15 FALTA reales. Los tres son furrings pegados a un CMU con cross-hatch:
-- A6.00 (1683.1, 297.4);
-- A6.02 (1036.9, 1024.0);
-- A7.50 (1556.4, 907.2).
-
-Ahora el hatch (paralelo o cross) tiene que estar a los DOS lados del par, o entre sus dos líneas. Un furring pegado al CMU lo tiene de un solo lado y sigue saliendo.
-Sobre el CR rev20b, los 4 furrings contra CMU que CR dio como FALTA siguen saliendo. A6.00 sale a 0.66 ft de la coordenada de CR: el dedupe se queda con otro par del mismo extremo de muro, también no cubierto.
-Total no cubiertos en rev20b: 478 → 302 (−37 %; la segunda pasada daba 220, pero perdía FALTA).
-XF: sigue saliendo el caso real de la puerta 103 y ya no el mop sink.
-Test: test_v138_cob_diag_familias_cr agrega el furring contra CMU, que tiene que seguir saliendo.
-PENDIENTE: medición de CR sobre rev20c (15 / 15 FALTA).
+Medidas: CR rev20b no cubiertos 478 → 357; los 4 furrings FALTA contra CMU siguen saliendo; XF: el caso real de la puerta 103 sigue saliendo.
+Validación: suite 47/47 · banco 0 distintas (8) · XF 0 regresiones (231 / 12 / 0) · reglas 0 sin clasificar · 199 archivos.
+Pendiente: verificación 8 (solo el diff), PRUEBA_ABIERTOS de GK y de CR, aprobación de COORDINACIÓN.
