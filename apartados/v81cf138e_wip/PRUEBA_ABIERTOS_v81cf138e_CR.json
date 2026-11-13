@@ -1,0 +1,37 @@
+{
+ "version_candidata": "v81cf138e",
+ "proyectos": {
+  "cr_city_hotel_castle_rock": {
+   "vigente": {
+    "PASS": 231,
+    "AMBER": 8,
+    "FAIL": 3
+   },
+   "candidata": {
+    "PASS": 230,
+    "AMBER": 8,
+    "FAIL": 4
+   },
+   "regresiones": 1,
+   "sin_explicar": 0,
+   "workdir": "/root/cr/work/entrega",
+   "fecha_iso": "2026-11-13T22:34:56.629941+00:00",
+   "sha_tools": "701652b0728e6103bb035c1ca3bb93910ba5146aa797e05dce0b3d408b735e8f"
+  }
+ },
+ "regresiones": [
+  {
+   "proyecto": "cr_city_hotel_castle_rock",
+   "chequeo": "CE_VERSION_ENTREGA",
+   "vigente": "PASS",
+   "candidata": "FAIL",
+   "evidencia": [
+    "rev20d FINAL PARA REVISAR/README_REVIEW.md: declara v81cf138d y ENTREGA_OK / la compuerta corrió con v81cf138e: '- The delivery gate (skill v81cf138d) reports one FAIL: CE_PROTOCOLO_3H on the steps of the ORIGINAL revision '"
+   ],
+   "explicacion": "dato de CR, no de la tool: README_REVIEW / TIEMPOS de la entrega rev20d declaran la versión con la que correrá la final (v81cf138d); la prueba corre con v81cf138e; se corrige al fijar la versión de la final en la cadena (VERSION_PROYECTO + textos)"
+  }
+ ],
+ "fecha_iso": "2026-11-13T22:34:56.629941+00:00",
+ "version_vigente": "v81cf138d",
+ "ok": false
+}
