@@ -8939,6 +8939,21 @@
    "categoria": "conducta",
    "cuando": "siempre",
    "texto_corto": "respuestas al usuario CORTAS, de unos 6 renglones como máximo, aunque pregunte varias veces; detalle solo si lo pide ('dame detalles'); refuerza U-188"
+  },
+  {
+   "id": "BE-XF20",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity rev1c -> rev1d 13-nov, auditoría adversarial E-1, post-mortem XF13-E1; U-202)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "studs de otro gauge impresos para una zona de un wall (8/A2.0 backing studs 16 ga) REEMPLAZAN los studs del wall en esos bays: fila de deducción del stud del wall (mismo N/HOJA, misma cantidad) o 'decision' con el N/HOJA que los suma; nunca el delta solo en una nota",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::stud_zona_reemplaza",
+    "take-off:tools/chequeos_biblioteca.py::stud_zona_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_xf20_stud_zona"
+   }
   }
  ]
 }

@@ -1,12 +1,10 @@
 diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138g/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
---- v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:12:13.112539881 +0000
-+++ v138g/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:13:43.140545233 +0000
-@@ -8932,6 +8932,21 @@
-    "cuando": "publicación",
-    "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
+--- v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 23:09:44.376849356 +0000
++++ v138g/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 23:09:44.408745037 +0000
+@@ -8934,6 +8934,21 @@
     "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
-+  },
-+  {
+   },
+   {
 +   "id": "BE-XF20",
 +   "origen": "BIBLIOTECA_ERRORES.md (Xfinity rev1c -> rev1d 13-nov, auditoría adversarial E-1, post-mortem XF13-E1; U-202)",
 +   "categoria": "programa",
@@ -20,10 +18,11 @@ diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 +    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
 +    "token": "test_be_xf20_stud_zona"
 +   }
-   }
-  ]
- }
-\ No newline at end of file
++  },
++  {
+    "id": "U-203",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commits c5a2456 / 4a4adff)",
+    "categoria": "conducta",
 diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/SKILL.md v138g/take-off-metal-frame-drywall/SKILL.md
 --- v138f/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:12:13.116539881 +0000
 +++ v138g/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:13:43.150875503 +0000
