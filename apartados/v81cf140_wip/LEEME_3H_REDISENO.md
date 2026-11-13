@@ -19,3 +19,11 @@ the delivery's canon, FAIL with the list.
 FECHAS_PUBLICACION for v140 (BE-XF17; not added in v138a/b/c so tools/ stayed intact): v81cf138a = 2026-11-13T19:04:56+00:00 (3744012),
 v81cf138b = 2026-11-13T20:13:34+00:00 (4c173e1), v81cf138c = 2026-11-13T21:12:20+00:00 (3333868). Also: verificar_version.revisar_fechas only
 reads 'v81cfNNN' (no letter suffix) -> make it accept [a-z]? and check the lettered versions too.
+
+CE_ALTURAS_EXTREMO / U-176 (3) (COORDINACIÓN 21:20, CR rev19 FW rows at B.O. 9.2396 / 9.8958 instead of 6" above LINE OF CEILING = 9.0 / 9.4167):
+preliminary cause in tools/comparar_alturas.py walls_de_canon: (1) the rule ('to_deck' / 'above_ceiling') is read ONLY from the wall's own
+height_op / height_source / height_source_info / top_track_info, never from the printed TYPE head (A0.06 FURRED WOOD '6 in above LINE OF
+CEILING'); a canon that wrote 'to B.O. structure' is judged as to_deck and H = B.O. passes; (2) the regex 'ABOVE (THE )?(HIGHEST )?CEILING' does
+not match 'ABOVE LINE OF CEILING'. Fix in v140: rule from the type head (fichas / partition types of the canon) wins over the wall text, a
+conflict between them = FAIL; regex '(N)" ABOVE (THE )?(LINE OF |HIGHEST )?CEILING'; test with CR's rows (rev19 canon = FAIL, rev20d = PASS).
+Waiting for CR's BE + evidence to confirm.
