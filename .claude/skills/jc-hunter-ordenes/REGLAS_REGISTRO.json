@@ -8881,10 +8881,18 @@
   {
    "id": "BE-CR45",
    "origen": "BIBLIOTECA_ERRORES.md (CR rev20d 13-nov, orden COORDINACIÓN 19:55 / 20:01 UTC; commit 77d8d06)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
    "texto_corto": "la regla de cement board / tile corre por programa sobre el canon FINAL, después de TODA cara cargada (revisiones y FALTA posteriores incluidas); NON-rated: el cement board REEMPLAZA el board y queda la franja H - altura del cement board; rated: las capas quedan y el cement board va encima; el markup del cement board va en la cara real del shower (línea más cercana a la caja del shower pan), mismo id / NM",
-   "motivo": "COORDINACIÓN 20:09: el chequeo CB_DUCHA_CBU (= cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_ducha_cbu.py sobre el canon de la entrega, FAIL con la lista) entra en v81cf140; v81cf138b solo registra la regla"
+   "motivo": "v81cf138f (U-202, COORDINACIÓN 22:01): CB_DUCHA_CBU = el test de CR test_ducha_cbu.py hecho genérico sobre el canon de la entrega (showers del canon o banos_cbu.json): (a) doble conteo en cara NON-rated y (b) cement board fuera de la cara del shower = FAIL; caso real CR rev20c 6 + 6 FAIL, rev20d 0",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::ducha_cbu",
+    "take-off:tools/chequeos_biblioteca.py::ducha_cbu_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr45_ducha_cbu"
+   }
   },
   {
    "id": "BE-XF19",
@@ -8924,6 +8932,13 @@
    "cuando": "publicación",
    "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
    "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
+  },
+  {
+   "id": "U-203",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commits c5a2456 / 4a4adff)",
+   "categoria": "conducta",
+   "cuando": "siempre",
+   "texto_corto": "respuestas al usuario CORTAS, de unos 6 renglones como máximo, aunque pregunte varias veces; detalle solo si lo pide ('dame detalles'); refuerza U-188"
   }
  ]
 }

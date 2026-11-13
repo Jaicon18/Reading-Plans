@@ -1,6 +1,6 @@
 diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v138e/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:10:14.508670442 +0000
-+++ v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:12:13.112539881 +0000
++++ v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 23:09:44.376849356 +0000
 @@ -8881,10 +8881,18 @@
    {
     "id": "BE-CR45",
@@ -22,6 +22,21 @@ diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
    },
    {
     "id": "BE-XF19",
+@@ -8924,6 +8932,13 @@
+    "cuando": "publicación",
+    "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
+    "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
++  },
++  {
++   "id": "U-203",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commits c5a2456 / 4a4adff)",
++   "categoria": "conducta",
++   "cuando": "siempre",
++   "texto_corto": "respuestas al usuario CORTAS, de unos 6 renglones como máximo, aunque pregunte varias veces; detalle solo si lo pide ('dame detalles'); refuerza U-188"
+   }
+  ]
+ }
+\ No newline at end of file
 diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/SKILL.md v138f/take-off-metal-frame-drywall/SKILL.md
 --- v138e/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:10:14.518445919 +0000
 +++ v138f/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:12:13.116539881 +0000
