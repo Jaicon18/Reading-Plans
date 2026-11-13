@@ -1,0 +1,179 @@
+diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.126244866 +0000
++++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.135313521 +0000
+@@ -8683,6 +8683,28 @@
+    "categoria": "conducta",
+    "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
+    "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
++  },
++  {
++   "id": "BE-GK57",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 12-nov: tres veces en la misma rev)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "nunca se deja una copia / backup de un insumo de la cadena (ni una entrega anterior) DENTRO del árbol de trabajo: la cadena la lee por glob o como 'la más reciente' (resuelto_Z1.rev3a.bak.json cargó el A-Z1-20 viejo; CADENA.prev.md / G2/CADENA.md editadas dieron un falso 'A501 sin círculo'; entrega_rev*/ se escaneó por el link takeoff_work); van a bak_<rev>/ o entregas_previas/ fuera del árbol",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::be_gk57_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_gk57"
++   },
++   "apartado": "apartados/be_gk57/"
++  },
++  {
++   "id": "BE-GK58",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, compuerta final #2 ROJA, 12-nov)",
++   "categoria": "conducta",
++   "texto_corto": "toda hora que se escribe en TIEMPOS.md / tiempos.log / notas de causa va en hora de California (PST), también las de una corrida cortada o un reinicio; la nota de la corrida cortada se escribió '00:52 UTC' y la compuerta final #2 salió ROJA solo por CE_HORAS_CALIFORNIA (U-045; ya había pasado en rev3)",
++   "motivo": "hora copiada del registro de la compuerta (ts en UTC) sin convertir"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-drywall/SKILL.md
+--- v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.132532314 +0000
++++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.140376851 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf130** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf131** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,10 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **BE-GK57 / BE-GK58 (Grand Kia rev3b, unidas en v81cf131):** (57) copias, backups y entregas previas van FUERA del árbol de trabajo
++  (bak_<rev>/, entregas_previas/): una copia dentro la lee un glob o 'la más reciente' (`compuerta_entrega.py be_gk57 <workdir> <rev>`);
++  (58, conducta) toda hora escrita en TIEMPOS.md / tiempos.log va en hora de California (PST), nunca copiada en UTC del registro de la
++  compuerta (U-045; CE_HORAS_CALIFORNIA).
+ - **v81cf130 (COORDINACIÓN 13-nov 01:02, bloqueaba la subida de CR):** el auditor de plausibilidad (U-138, auditar_compuerta) ignora los
+   conteos de subcategorías (entre paréntesis, 'vía …', 'de los cuales …'); solo vale el conteo principal del chequeo. CB_RCP_APILADOS
+   escribe primero el total ('52 cielos evaluados (0 vía ceilings_misc)' solo si hay ceilings_misc).
+Binary files v130/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v131/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v131/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v131/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.130106587 +0000
++++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.139705206 +0000
+@@ -6665,6 +6665,30 @@
+     return out
+ 
+ 
++RX_GK57_COPIA = re.compile(r"(?i)(?:\.bak|\.prev|\.old|[._ -]copy|backup|\.orig)(?:\.|$)|\.rev\d+[a-z]?\.(?:bak\.)?(?:json|csv|md)$")
++GK57_SALTA = ("bak_", "entregas_previas", "bitacora_logs", ".git", "__pycache__")
++
++
++def be_gk57_fallas(w, rev=""):
++    """BE-GK57 (Grand Kia rev3b, 12-nov, tres veces en la misma rev; unido de apartados/be_gk57 en v81cf131): una copia / backup de un
++    insumo de la cadena DENTRO del árbol de trabajo la lee un glob o 'la más reciente' (resuelto_Z1.rev3a.bak.json cargó el wall viejo;
++    CADENA.prev.md dio un falso 'sin círculo'; entrega_rev* viejas escaneadas por el link takeoff_work). Regla: copias, backups y entregas
++    previas FUERA del árbol (bak_<rev>/, entregas_previas/). CLI: compuerta_entrega.py be_gk57 <workdir> [rev]."""
++    ev = []
++    for raiz, ds, fs in os.walk(w, followlinks=False):
++        ds[:] = [d for d in ds if not d.startswith(GK57_SALTA)]
++        rel = os.path.relpath(raiz, w)
++        if rel == ".":
++            for d in ds:
++                if re.match(r"entrega(?:_rev\w+)?$", d) and d != f"entrega_{rev}" and d != "entrega":
++                    ev.append(f"{d}/: previous delivery inside the work tree (scanned by globs / takeoff_work link): move it out (BE-GK57)")
++        for f in fs:
++            if RX_GK57_COPIA.search(f):
++                ev.append(f"{os.path.join(rel, f)}: copy / backup inside the work tree (read by a glob or as 'most recent'): move it to "
++                          "bak_<rev>/ (BE-GK57)")
++    return ev
++
++
+ RX_GK56_GAP = re.compile(r"(?i)\bgap\s*:?\s*(\d+(?:\.\d+)?)\s*(?:\"|in\b)")
+ 
+ 
+@@ -7120,6 +7144,10 @@
+             print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
+         print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
+         return 0 if o["ok"] else 1
++    if len(argv) > 2 and argv[1] == "be_gk57":                      # BE-GK57: copias dentro del árbol de trabajo
++        ev = be_gk57_fallas(argv[2], argv[3] if len(argv) > 3 else "")
++        print("\n".join(ev[:40]) if ev else "BE-GK57 PASS: no copies / backups / previous deliveries inside the work tree")
++        return 1 if ev else 0
+     if len(argv) > 2 and argv[1] == "be_gk56":                      # BE-GK56: destino 'same wall' medido
+         ev = be_gk56_fallas(json.load(open(argv[2], encoding="utf-8")))
+         print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
+diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.127141891 +0000
++++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.136127829 +0000
+@@ -3269,3 +3269,31 @@
+ 
+ 
+ test_v130_plausibilidad_subconteo()
++
++
++def test_be_gk57():
++    """BE-GK57 (unido de apartados/be_gk57; casos de Grand Kia rev3b): backup junto a su insumo = FAIL; CADENA.prev.md = FAIL; entrega_rev3a/
++    en el workdir = FAIL; los mismos archivos en bak_rev3a/ y la entrega actual = PASS."""
++    w = tempfile.mkdtemp(prefix="gk57_")
++    def mk(p):
++        os.makedirs(os.path.dirname(os.path.join(w, p)), exist_ok=True)
++        open(os.path.join(w, p), "w").write("x")
++    mk("etapas/4_canon/resuelto_Z1.json")
++    mk("etapas/4_canon/resuelto_Z1.rev3a.bak.json")
++    assert CE.be_gk57_fallas(w, "rev3b"), "backup junto a su insumo = FAIL"
++    os.remove(os.path.join(w, "etapas/4_canon/resuelto_Z1.rev3a.bak.json"))
++    mk("burbujas/CADENA.md")
++    mk("burbujas/CADENA.prev.md")
++    assert CE.be_gk57_fallas(w, "rev3b"), ".prev = FAIL"
++    os.remove(os.path.join(w, "burbujas/CADENA.prev.md"))
++    os.makedirs(os.path.join(w, "entrega_rev3a"))
++    assert CE.be_gk57_fallas(w, "rev3b"), "entrega previa en el workdir = FAIL"
++    os.rmdir(os.path.join(w, "entrega_rev3a"))
++    os.makedirs(os.path.join(w, "entrega_rev3b"))
++    mk("bak_rev3a/resuelto_Z1.rev3a.bak.json")
++    mk("bak_rev3a/CADENA.prev.md")
++    assert not CE.be_gk57_fallas(w, "rev3b"), "copias en bak_<rev>/ y la entrega actual = PASS"
++    print("test_be_gk57 OK")
++
++
++test_be_gk57()
