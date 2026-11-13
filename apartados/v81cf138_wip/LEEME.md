@@ -30,7 +30,12 @@ Entregas revisadas (ENTREGA_OK archivos): GK rev2 / rev3 / rev3a / rev3b y XF re
 1. CB_BE_83 'int object is not iterable': runner/completitud.caras_sobre_ceiling ahora lee existing_walls (BE-XF16), y en CR 'faces' es un número. Un muro así cuenta como UNA cara (altura del muro, cuarto del location). Justificaciones agregadas: 'underside of roof / floor / structure', 'extend to …', 'floor to floor', 'stair enclosure'; la cara exterior no se compara con el cielo del cuarto. CR rev20b: 86 → 0. Test test_v138_be83_faces_numero.
 2. CB_BE_CF04 en set wood-framed: su PASS decía 'cero walls de madera con framing' en cifras; desde v134 la red U-138 espera 943 muros en CR y lo volvía FAIL. Redacción sin conteo. Test test_v138_cf04_wood_board_only_plausible.
 3. CE_PROTOCOLO_3H AMBER → FAIL en CR rev20c: el código es idéntico entre v134 y v137. Con v137, el arranque de la rev sale de la marca 'inicio rev20c' del log acumulado (12-nov, posterior a v119), y entonces BE-PM06 juzgaba TAMBIÉN los pasos 1-10 de TIEMPOS.md del 5-6 nov, que son de la rev original. Arreglo: si la rev arrancó después de v119, alarma_fallas / tiempos_cuadran juzgan solo las marcas y filas de TIEMPOS.md que cierran desde el arranque (tiempos_desde, _fin_dt); el plazo de la alarma se mide desde ahí. Los pasos de revs anteriores quedan exentos, con la causa escrita. Los pasos de la rev actual sin '--paso' siguen dando FAIL. Test test_v138_protocolo_rev_posterior_solo_sus_pasos. CR ya escribió VERSION_PROYECTO.txt (v81cf137).
-4. CE_COBERTURA_DIAG 555 en CR: pedí a CR las familias de falsos con ejemplos (o el PDF de markups de rev20c). PENDIENTE.
+4. CE_COBERTURA_DIAG 555 en CR: los 7 revisores de CR dieron 15 FALTA reales (2.7 %); el resto son falsos: 405 NO ES MURO, 78 CUBIERTO en otra hoja, 57 NO ES NUESTRO. Filtros nuevos para las familias más grandes:
+   - (1) divisor de la caja del tag de muro: palabras pegadas a los dos lados (_cob_divisor_tag);
+   - (5) y (8) trazos discontinuos (grid lines, leaders, límites de vista) (_cob_discontinua);
+   - (4) y (10) hatch denso de líneas cortas que no tienen el estilo de muro: piso, brick paving, CMU cross-hatch (_cob_en_hatch).
+   Test test_v138_cob_diag_familias_cr: el stub real sigue saliendo; tag, discontinuo y hatch no. En XF no cambia nada: el caso real de la jamba de la puerta 103 sigue saliendo.
+   Sin filtro todavía: (2) secciones / elevaciones dentro de la hoja, (3) guardrails de escalera, (6) marcos / jambas, (7) equipo y símbolos, (9) cubierto en otra hoja (planta ampliada contra A2.0x). Esos se cierran con disposición. La tasa nueva sobre los 555 la mide CR, que tiene el PDF.
 
 ## Lo que NO cierra (para la verificación 7)
 
