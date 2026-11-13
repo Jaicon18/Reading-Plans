@@ -1,0 +1,34 @@
+=== v137/take-off-metal-frame-drywall
+A0 control lista de caras, fuente sin justificar -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A1 (regresión) lista de caras; fuente = cielo hung from 'underside of floor joists' -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A2 (regresión) lista de caras; fuente solo MENCIONA 'stair enclosure' (otro detalle) -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A3 (regresión) lista de caras; 'floor to floor' como dato de nivel (no de la cara) -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A4 (regresión) lista de caras; 'extends to structure' de OTRO elemento -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A5 lista de caras; 'underside of ceiling' (no justifica: control del autor) -> []
+B1 faces = 2 (número), sin justificar (antes: crash) -> EXC TypeError
+B2 faces ausente (None) y location 'of 905 GUEST' de un muro EXTERIOR (exterior: true) -> []
+B3 faces = 1, location 'faces: exterior' (única cara exterior) -> EXC TypeError
+B4 faces = 1, location 'faces: outside face, 905 GUEST' (coma: la cara interior debe juzgarse) -> EXC TypeError
+B5 faces = 2, location 'faces: EXT; 905 GUEST' ('EXT' abreviado) -> EXC TypeError
+B6 faces = 2, location 'faces: exterior (905 GUEST side is sheathing only)' -> EXC TypeError
+B7 faces = 1, sin height_source pero 'source' con la justificación -> EXC TypeError
+B8 faces = 1, room del cuarto SOLO en 'rooms' (location sin número) -> EXC TypeError
+B9 faces = [] (lista vacía) -> []
+B10 faces = {'905 GUEST': 11} (dict) -> []
+=== take-off-metal-frame-drywall
+A0 control lista de caras, fuente sin justificar -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+A1 (regresión) lista de caras; fuente = cielo hung from 'underside of floor joists' -> []
+A2 (regresión) lista de caras; fuente solo MENCIONA 'stair enclosure' (otro detalle) -> []
+A3 (regresión) lista de caras; 'floor to floor' como dato de nivel (no de la cara) -> []
+A4 (regresión) lista de caras; 'extends to structure' de OTRO elemento -> []
+A5 lista de caras; 'underside of ceiling' (no justifica: control del autor) -> []
+B1 faces = 2 (número), sin justificar (antes: crash) -> [('Z9-L9-07', 'L9 | 905 GUEST', 11.0, 9.0)]
+B2 faces ausente (None) y location 'of 905 GUEST' de un muro EXTERIOR (exterior: true) -> [('Z9-L9-07', 'storefront pier of 905 GUEST - exterior 6" CFMF (faces N+W)', 11.0, 9.0)]
+B3 faces = 1, location 'faces: exterior' (única cara exterior) -> []
+B4 faces = 1, location 'faces: outside face, 905 GUEST' (coma: la cara interior debe juzgarse) -> [('Z9-L9-07', '905 GUEST', 11.0, 9.0)]
+B5 faces = 2, location 'faces: EXT; 905 GUEST' ('EXT' abreviado) -> [('Z9-L9-07', 'EXT; 905 GUEST', 11.0, 9.0)]
+B6 faces = 2, location 'faces: exterior (905 GUEST side is sheathing only)' -> []
+B7 faces = 1, sin height_source pero 'source' con la justificación -> []
+B8 faces = 1, room del cuarto SOLO en 'rooms' (location sin número) -> []
+B9 faces = [] (lista vacía) -> []
+B10 faces = {'905 GUEST': 11} (dict) -> [('Z9-L9-07', 'L9 | 905 GUEST', 11.0, 9.0)]

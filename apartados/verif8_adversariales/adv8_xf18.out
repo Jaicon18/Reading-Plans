@@ -1,0 +1,40 @@
+R1 un solo OPEN IN BLUEBEAM de la rev ANTERIOR + markups de la rev en curso sin sufijo; Excel rev20c
+   v137 lee: CR_markups_rev20c.pdf
+   cand: PASS lee: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf ['PDF de markups leído: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf']
+   -> v137 OK / cand MAL-EN-SILENCIO
+R2 un solo OPEN IN BLUEBEAM y es de la rev ANTERIOR (falta el de la rev en curso); Excel rev20c
+   v137 lee: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf
+   cand: PASS lee: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf ['PDF de markups leído: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf']
+   -> v137 MAL / cand MAL-EN-SILENCIO
+R3 dos OPEN IN BLUEBEAM (20b, 20c), Excel rev20c (control)
+   v137 lee: CR_markups_rev20c - OPEN IN BLUEBEAM.pdf
+   cand: PASS lee: CR_markups_rev20c - OPEN IN BLUEBEAM.pdf ['PDF de markups leído: CR_markups_rev20c - OPEN IN BLUEBEAM.pdf']
+   -> v137 OK / cand OK
+R4 dos OPEN IN BLUEBEAM (20b, 20c), dos Excel: el más nuevo es el rev20b (re-guardado)
+   v137 lee: CR_markups_rev20c - OPEN IN BLUEBEAM.pdf
+   cand: PASS lee: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf ['PDF de markups leído: CR_markups_rev20b - OPEN IN BLUEBEAM.pdf']
+   -> v137 OK / cand MAL-EN-SILENCIO
+R5 pre-U-165: markups + mapa con guion 'IMAGE-ONLY' (v137 elegía bien)
+   v137 lee: CR_markups_rev20c.pdf
+   cand: FAIL lee: - ["2 PDF candidatos sin 'OPEN IN BLUEBEAM' (CR_MAPA - IMAGE-ONLY.pdf, CR_markups_rev20c.pdf): no se sabe cuál leer (BE-XF18)"]
+   -> v137 OK / cand FAIL-con-causa
+R6 pre-U-165: markups + 'flattened' de la misma rev (v137 elegía el markups)
+   v137 lee: CR_markups_rev20c_flattened.pdf
+   cand: FAIL lee: - ["2 PDF candidatos sin 'OPEN IN BLUEBEAM' (CR_markups_rev20c.pdf, CR_markups_rev20c_flattened.pdf): no se sabe cuál leer (BE-XF18)"]
+   -> v137 OK / cand FAIL-con-causa
+R7 OPEN IN BLUEBEAM con 'rev20c' en minúsculas distinta: 'CR_markups_REV20C - open in bluebeam.pdf' + mapa
+   v137 lee: MAPA DE COBERTURA - IMAGE ONLY.pdf
+   cand: PASS lee: CR_markups_REV20C - open in bluebeam.pdf ['PDF de markups leído: CR_markups_REV20C - open in bluebeam.pdf']
+   -> v137 MAL / cand OK
+R8 entrega.json 'markups' = el mapa IMAGE ONLY
+   v137 lee: MAPA DE COBERTURA - IMAGE ONLY.pdf
+   cand: FAIL lee: - ["entrega.json 'markups' apunta a 'MAPA DE COBERTURA - IMAGE ONLY.pdf', que no es el PDF de markups (IMAGE ONLY / mapa) (BE-XF18)"]
+   -> v137 MAL / cand FAIL-con-causa
+R9 solo el mapa IMAGE ONLY (sin markups)
+   v137 lee: MAPA DE COBERTURA - IMAGE ONLY.pdf
+   cand: FAIL lee: - ['0 PDF de markups en Planos marcados/ (hay 1 PDF, todos IMAGE ONLY / mapa / DETALLES / SCHEDULES) (BE-XF18)']
+   -> v137 MAL / cand FAIL-con-causa
+R10 markups real cuyo nombre lleva 'COBERTURA' (p. ej. 'CR_markups_rev20c_COBERTURA-FIX - OPEN IN BLUEBEAM.pdf') + mapa
+   v137 lee: MAPA DE COBERTURA - IMAGE ONLY.pdf
+   cand: FAIL lee: - ['0 PDF de markups en Planos marcados/ (hay 2 PDF, todos IMAGE ONLY / mapa / DETALLES / SCHEDULES) (BE-XF18)']
+   -> v137 MAL / cand FAIL-con-causa
