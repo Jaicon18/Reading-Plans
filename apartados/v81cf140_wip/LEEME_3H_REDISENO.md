@@ -15,3 +15,7 @@ BE-CR45 (CR rev20d, COORDINACIÓN 19:55 / 20:01; commit 77d8d06): the cement boa
 the cement board goes on top; the cement board markup goes on the real shower face (line nearest to the shower pan box), same id / NM. Check CB_DUCHA_CBU =
 the CR test (cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_ducha_cbu.py + test_be_cr45.sh, fixtures rev20c -> 6 (a) + 6 (b) rc 1; rev20d -> 0) over
 the delivery's canon, FAIL with the list.
+
+FECHAS_PUBLICACION for v140 (BE-XF17; not added in v138a/b/c so tools/ stayed intact): v81cf138a = 2026-11-13T19:04:56+00:00 (3744012),
+v81cf138b = 2026-11-13T20:13:34+00:00 (4c173e1), v81cf138c = 2026-11-13T21:12:20+00:00 (3333868). Also: verificar_version.revisar_fechas only
+reads 'v81cfNNN' (no letter suffix) -> make it accept [a-z]? and check the lettered versions too.
