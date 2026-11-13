@@ -1,0 +1,183 @@
+diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138j/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138i/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:33:49.648616951 +0000
++++ v138j/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:33:54.533734328 +0000
+@@ -8851,10 +8851,18 @@
+   {
+    "id": "BE-XF18",
+    "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+    "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
+-   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
++   "motivo": "v81cf138j (U-202): Ctx elige el PDF de markups con elegir_markups (entrega.json 'markups' o el OPEN IN BLUEBEAM de la rev más alta; nunca IMAGE ONLY / cobertura); CE_PDF_MARKUPS_ELEGIDO = FAIL con la causa si no hay o es ambiguo",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_pdf_markups_elegido",
++    "take-off:tools/compuerta_entrega.py::elegir_markups"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_xf18_markups_por_nombre"
++   }
+   },
+   {
+    "id": "BE-CR44",
+diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/SKILL.md v138j/take-off-metal-frame-drywall/SKILL.md
+--- v138i/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:33:49.657131994 +0000
++++ v138j/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:33:49.715030482 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138i** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138j** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR47 (programa desde v81cf138i, CR rev20d 13-nov):** el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath'; '201 … - Room' = '201'. Antes los dos colapsaban en '201' (ganaba la última fila de ALTURAS_CUARTOS.csv) y la cara de baño salía 'por debajo del cielo' de la habitación. Sin fila propia del baño, toma la de la unidad. Test test_be_cr47_bano_propio_espacio (caso real CR).
++- **BE-XF18 (programa desde v81cf138j, COORDINACIÓN 13-nov 08:12):** el PDF de markups se elige por NOMBRE: entrega.json 'markups' o el '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' de la rev más alta; nunca un 'IMAGE ONLY' / mapa de cobertura ni el último por orden alfabético. Programa: Ctx usa elegir_markups; CE_PDF_MARKUPS_ELEGIDO = FAIL con la causa (sin candidato, dos de la misma rev, 'markups' apuntando a un mapa). Test test_be_xf18_markups_por_nombre.
+ - **BE-XF21 (programa desde v81cf138h, Xfinity rev1c E-2 13-nov):** el producto de CADA pieza de un head detail es el impreso: 'METAL STUD NESTED IN METAL TRACK' = 1 track + 1 stud con su fila de stud que cite la abertura; nunca 2 piezas de track. Programa: CB_HEAD_PIEZAS. Test test_be_xf21_head_piezas (canon real XF rev1c FAIL / rev1d PASS).
+ - **BE-XF20 (programa desde v81cf138g, Xfinity rev1c E-1 13-nov):** studs de otro gauge impresos para una zona de un wall (backing studs 16 ga de 8/A2.0) REEMPLAZAN los studs del wall en esos bays: fila de deducción del stud del wall (qty < 0, mismo N/HOJA, misma cantidad) o 'decision' con el N/HOJA que los suma. Programa: CB_STUD_ZONA_REEMPLAZA. Test test_be_xf20_stud_zona (canon real XF rev1c FAIL / rev1d PASS).
+ - **BE-CR45 (programa desde v81cf138f, CR rev20d 13-nov):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Programa: CB_DUCHA_CBU (chequeos_biblioteca.ducha_cbu) con la lista de showers del canon (`showers`: floor, room, box, cbu [{side, id}]) o banos_cbu.json: doble conteo NON-rated o cement board en la línea de atrás = FAIL; cement board sin lista de showers = AMBER. Test test_be_cr45_ducha_cbu (caso real CR rev20c 6 + 6 / rev20d 0).
+diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138j/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v138i/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 22:10:14.521122543 +0000
++++ v138j/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 22:33:36.378736416 +0000
+@@ -173,8 +173,7 @@
+         self.entrega = ed
+         e = ed or self.w
+         self.excel = g("excel") or _ultimo(["Take-off/*.xlsx"], e)
+-        self.markups = g("markups") or next((p for p in sorted(glob.glob(os.path.join(e, "Planos marcados", "*.pdf")), reverse=True)
+-                                             if not os.path.basename(p).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS"))), None)
++        self.markups, self.markups_causa = elegir_markups(g("markups"), os.path.join(e, "Planos marcados"))   # BE-XF18: por NOMBRE
+         self.planos = os.path.join(e, "Planos marcados")
+         self.readme = os.path.join(e, "README_REVIEW.md")
+         self.para = os.path.join(e, "PARA_REVISAR_EN_LA_MANANA.md")
+@@ -4390,6 +4389,49 @@
+     return salida
+ 
+ 
++RX_NO_MARKUPS = re.compile(r"(?i)IMAGE ONLY|COBERTURA|COVERAGE|NO USAR|BID ?SET|^(?:DETALLES|SCHEDULES|ALTURAS)_REVISAD[AO]S")
++
++
++def _rev_num(nombre):
++    m = re.search(r"(?i)_rev(\d+)([a-z]?)\b", nombre)
++    return (int(m.group(1)), m.group(2)) if m else (-1, "")
++
++
++def elegir_markups(cfg_markups, planos):
++    """BE-XF18 (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups porque elegía el
++    último por orden alfabético): el PDF de markups se elige por NOMBRE: entrega.json 'markups' (si existe y no es un mapa / IMAGE ONLY) o el
++    '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' de la rev más alta; nunca un 'IMAGE ONLY' / mapa de cobertura / *_REVISADOS. -> (ruta, causa)"""
++    todos = sorted(glob.glob(os.path.join(planos, "*.pdf"))) if planos and os.path.isdir(planos) else []
++    cand = [p for p in todos if re.fullmatch(MARKUPS_RE, os.path.basename(p))]
++    if cfg_markups:
++        cm = str(cfg_markups)
++        if not os.path.isabs(cm) and planos and not os.path.isfile(cm):      # verificación i #4: relativo a la carpeta de entrega
++            for base in (os.path.dirname(planos), planos):
++                if os.path.isfile(os.path.join(base, cm)):
++                    cm = os.path.join(base, cm)
++                    break
++        b = os.path.basename(cm)
++        if RX_NO_MARKUPS.search(b):
++            return None, f"entrega.json 'markups' = '{b}': es un mapa / IMAGE ONLY / revisión, no el PDF de markups (BE-XF18)"
++        if not os.path.isfile(cm):
++            return None, f"entrega.json 'markups' = '{cfg_markups}' no existe (relativo a la carpeta de trabajo o a la de entrega) (BE-XF18)"
++        mas = [os.path.basename(p) for p in cand if _rev_num(os.path.basename(p)) > _rev_num(b)]
++        if mas:                                                               # verificación i #3: apunta a una rev vieja
++            return None, f"entrega.json 'markups' = '{b}' y en Planos marcados hay una rev más alta {mas[:3]} (BE-XF18)"
++        return cm, None
++    if not cand:
++        otros = [os.path.basename(p) for p in todos if not RX_NO_MARKUPS.search(os.path.basename(p))]
++        if len(otros) == 1:                       # verificación i #2: un nombre fuera de U-165 se lee, pero con aviso (AMBER), nunca en silencio
++            return os.path.join(planos, otros[0]), f"AVISO: '{otros[0]}' no se llama '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' (U-165); se lee por ser el único PDF (BE-XF18)"
++        return None, (f"sin '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' en Planos marcados ni entrega.json 'markups' "
++                      f"({len(otros)} PDF candidatos: {otros[:4]}) (BE-XF18 / U-165)")
++    top = max(_rev_num(os.path.basename(p)) for p in cand)
++    mejores = [p for p in cand if _rev_num(os.path.basename(p)) == top]
++    if len(mejores) > 1:
++        return None, f"{len(mejores)} PDF 'OPEN IN BLUEBEAM' de la misma rev: {[os.path.basename(p) for p in mejores]}: fijar entrega.json 'markups' (BE-XF18)"
++    return mejores[0], None
++
++
+ def _pdfs_markups(c):
+     """PDF de Planos marcados con markups del take-off (DETALLES_REVISADOS / SCHEDULES_REVISADOS no miden)."""
+     return [p for p in sorted(glob.glob(os.path.join(c.planos, "*.pdf"))) if getattr(c, "planos", None)
+@@ -4397,6 +4439,19 @@
+             and "NO USAR" not in os.path.basename(p) and "COBERTURA" not in os.path.basename(p).upper()]
+ 
+ 
++@chequeo("CE_PDF_MARKUPS_ELEGIDO", ["BE-XF18", "U-165"], "BE-XF18: la compuerta lee el PDF de markups elegido por NOMBRE (entrega.json "
++         "'markups' o el 'OPEN IN BLUEBEAM' de la rev más alta), nunca un mapa 'IMAGE ONLY' / de cobertura; sin candidato o ambiguo = FAIL con la causa")
++def ce_pdf_markups_elegido(c):
++    causa = getattr(c, "markups_causa", None)
++    if causa and str(causa).startswith("AVISO") and getattr(c, "markups", None):
++        return R("AMBER", causa)
++    if causa:
++        return R("FAIL", causa)
++    if not getattr(c, "markups", None):
++        return R("FAIL", "sin PDF de markups (U-137)")
++    return R("PASS", f"PDF de markups leído: {os.path.basename(c.markups)}")
++
++
+ def subject_sin_medida_fallas(pdf, xlsx=None, tipos=None):
+     """BE-XF07 (Xfinity Interquest rev1, COORDINACIÓN 10-nov): todo markup cuyo Subject es un type del Partition Takeoff o DEMO
+     lleva /Measure y cae en una página con /VP; si no, Bluebeam lo suma al grupo del type en la Markups List / CSV (W2 3 en vez
+diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138j/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v138i/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 18:32:29.567537896 +0000
++++ v138j/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 22:33:36.381442348 +0000
+@@ -3969,3 +3969,52 @@
+ 
+ 
+ test_v1381_excepcion_usuario_subida()
++
++
++def test_be_xf18_markups_por_nombre():
++    """BE-XF18 (COORDINACIÓN 13-nov 08:12, caso real CR rev20: la compuerta eligió 'MAPA DE COBERTURA - IMAGE ONLY.pdf' por ser el último
++    en orden alfabético inverso frente a 'CR_markups_rev20 - OPEN IN BLUEBEAM.pdf'). v81cf137 = el mapa; ahora = el OPEN IN BLUEBEAM;
++    rev más alta gana; dos de la misma rev = FAIL; entrega.json 'markups' apuntando al mapa = FAIL; sin candidato = FAIL; un solo PDF
++    sin el nombre (proyectos viejos del banco) = ese."""
++    d = tempfile.mkdtemp(prefix="bexf18_")
++    pl = os.path.join(d, "Planos marcados")
++    os.makedirs(pl)
++    for n in ("CR_markups_rev20 - OPEN IN BLUEBEAM.pdf", "MAPA DE COBERTURA - IMAGE ONLY.pdf", "DETALLES_REVISADOS.pdf"):
++        open(os.path.join(pl, n), "wb").write(b"%PDF-1.4")
++    viejo = next((p for p in sorted(glob_mod.glob(os.path.join(pl, "*.pdf")), reverse=True)
++                  if not os.path.basename(p).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS"))), None)
++    assert os.path.basename(viejo) == "MAPA DE COBERTURA - IMAGE ONLY.pdf"          # el error original (v81cf137)
++    p, causa = CE.elegir_markups(None, pl)
++    assert os.path.basename(p) == "CR_markups_rev20 - OPEN IN BLUEBEAM.pdf" and causa is None, (p, causa)
++    open(os.path.join(pl, "CR_markups_rev20d - OPEN IN BLUEBEAM.pdf"), "wb").write(b"%PDF-1.4")
++    open(os.path.join(pl, "CR_markups_rev9 - OPEN IN BLUEBEAM.pdf"), "wb").write(b"%PDF-1.4")
++    p, causa = CE.elegir_markups(None, pl)
++    assert os.path.basename(p) == "CR_markups_rev20d - OPEN IN BLUEBEAM.pdf", (p, causa)
++    open(os.path.join(pl, "XX_markups_rev20d - OPEN IN BLUEBEAM.pdf"), "wb").write(b"%PDF-1.4")
++    p, causa = CE.elegir_markups(None, pl)
++    assert p is None and "misma rev" in causa, (p, causa)
++    p, causa = CE.elegir_markups(os.path.join(pl, "MAPA DE COBERTURA - IMAGE ONLY.pdf"), pl)
++    assert p is None and "IMAGE ONLY" in causa, (p, causa)
++    p, causa = CE.elegir_markups(os.path.join(pl, "XX_markups_rev20d - OPEN IN BLUEBEAM.pdf"), pl)
++    assert causa is None and p.endswith("XX_markups_rev20d - OPEN IN BLUEBEAM.pdf")   # 'markups' resuelve el empate de la misma rev
++    vacio = os.path.join(d, "v")
++    os.makedirs(vacio)
++    open(os.path.join(vacio, "MAPA DE COBERTURA - IMAGE ONLY.pdf"), "wb").write(b"%PDF-1.4")
++    assert CE.elegir_markups(None, vacio)[0] is None
++    open(os.path.join(vacio, "ALTURAS_REVISADAS.pdf"), "wb").write(b"%PDF-1.4")
++    assert CE.elegir_markups(None, vacio)[0] is None                  # verificación i #1: ALTURAS_REVISADAS nunca es el PDF de markups
++    open(os.path.join(vacio, "markups_viejo.pdf"), "wb").write(b"%PDF-1.4")
++    p, causa = CE.elegir_markups(None, vacio)
++    assert os.path.basename(p) == "markups_viejo.pdf" and causa.startswith("AVISO")   # #2: se lee con aviso (AMBER)
++    p, causa = CE.elegir_markups(os.path.join(pl, "CR_markups_rev9 - OPEN IN BLUEBEAM.pdf"), pl)
++    assert p is None and "más alta" in causa, causa                  # #3: 'markups' en una rev vieja
++    p, causa = CE.elegir_markups("Planos marcados/CR_markups_rev20d - OPEN IN BLUEBEAM.pdf", pl)
++    assert causa is None and p.endswith("rev20d - OPEN IN BLUEBEAM.pdf"), causa      # #4: relativo a la entrega
++    class _C:
++        markups_causa, markups = "x (BE-XF18)", None
++    assert CE.ce_pdf_markups_elegido(_C())[0] == "FAIL"
++    print("test_be_xf18_markups_por_nombre OK")
++
++
++import glob as glob_mod  # noqa: E402
++test_be_xf18_markups_por_nombre()
