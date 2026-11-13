@@ -1,0 +1,541 @@
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/SKILL.md v139p/take-off-metal-frame-drywall/SKILL.md
+--- v138fb/take-off-metal-frame-drywall/SKILL.md	2026-11-13 13:30:04.076927812 +0000
++++ v139p/take-off-metal-frame-drywall/SKILL.md	2026-11-13 13:36:22.692818046 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf139** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py v139p/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:34:54.279895753 +0000
++++ v139p/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 15:22:45.649812224 +0000
+@@ -1560,7 +1560,7 @@
+         g = lambda k: RX_HORA_CELDA.search(cs[k]) if k is not None and k < len(cs) else None      # noqa: E731
+         d = re.search(r"(\d[\d,]*)\s*min", cs[kd]) if kd is not None and kd < len(cs) else None
+         out.append({"paso": paso.replace(" ", ""), "nums": nums, "inicio": g(ki), "fin": g(kf),
+-                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs})
++                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs, "linea": ln})
+     return out
+ 
+ 
+@@ -1749,7 +1749,7 @@
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+                       "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+                       "v81cf135": "2026-11-13T06:07:55+00:00", "v81cf136": "2026-11-13T06:12:55+00:00",
+-                      "v81cf137": "2026-11-13T06:24:26+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a · v137 0a5f40f; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
++                      "v81cf137": "2026-11-13T06:24:26+00:00", "v81cf138": "2026-11-13T15:22:27+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a · v137 0a5f40f · v138 88707bb; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+@@ -1879,6 +1879,90 @@
+     return m.group(1).lower() if m else None
+ 
+ 
++def _k0_rev(ms, w, entrega, p):
++    """índice (ORDEN DEL ARCHIVO) de la primera marca de tiempos.log que es de esta rev: la primera con su etiqueta; si no, la siguiente a
++    la última marca de otra rev; log acumulado sin etiqueta = None (no se reparte). Lo usan inicio_rev_info y la exención de pasos de la
++    rev anterior (verif. 10: solo las marcas ANTES de este índice pueden ser de la rev anterior)."""
++    et = _etiqueta_rev(w, entrega)
++    etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
++    propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
++    if propias:
++        return propias[0]
++    otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
++    if os.path.dirname(os.path.realpath(p)) != os.path.realpath(w):
++        return None
++    return max(otras, default=-1) + 1
++
++
++RX_EVID_INICIO = re.compile(r"(?<![\w-])inicio\s+rev(\d{1,3}[a-z]?)\b")                     # COORDINACIÓN 13:25: 'inicio revN' (rev pegado, minúsculas)
++RX_EVID_ENTREGA = re.compile(r"(?<![\w-])rev(\d{1,3}[a-z]?)\s+(?:entregad[ao]|subid[ao])\b(?!\s*\?)")
++RX_EVID_NEGACION = re.compile(r"(?i)\?|\b(?:no|not|falta|faltan|pendiente|sin|todav[ií]a|aun|aún)\b")   # verif. 12 O1-O3: una marca con negación / duda no es evidencia   # 'revN entregada' / 'revN subida'
++
++
++def _rev_clave(r):
++    """'20c' -> (20, 'c'): orden natural de revs (rev20c > rev20b > rev9)."""
++    m = re.match(r"(\d+)([a-z]?)", str(r or "").lower())
++    return (int(m.group(1)), m.group(2)) if m else None
++
++
++def _rev_actual_proyecto(w, ms, k0):
++    """W1 (verificación 12, COORDINACIÓN 13:35): la rev ACTUAL sale SOLO del proyecto: la marca 'inicio revN' del arranque (ms[k0]) y / o
++    el último renglón de VERSION_PROYECTO.txt; nunca de nombres de PDF de planos ('A-101 Rev 25.pdf'). Si las dos están y no coinciden,
++    o no hay ninguna = None (nada se exime). -> (N, letra) o None"""
++    m = RX_EVID_INICIO.search(ms[k0][1]) if 0 <= k0 < len(ms) else None
++    del_log = _rev_clave(m.group(1)) if m else None
++    vp = version_proyecto_leer(w) if w and os.path.isdir(w) else []
++    mv = RX_REV_ETIQ.search(vp[-1]["rev"]) if vp else None
++    del_vp = _rev_clave(mv.group(1).lower()) if mv else None
++    if del_log and del_vp and del_log != del_vp:
++        return None
++    return del_log or del_vp
++
++
++def marcas_rev_anterior(w, entrega=None, con_tope=False, desde=None):
++    """verif. 10 / 11 + COORDINACIÓN 13:25 (opción B estricta): marcas de tiempos.log de una rev ANTERIOR, solo con evidencia VALIDADA:
++    una marca 'inicio revN' o 'revN entregada|subida' con N MENOR que la rev actual, hora < arranque (`desde`) y ANTES del arranque en el
++    orden del ARCHIVO; palabras sueltas ('subido', 'upload', 'Rev 5' de planos) no cuentan. Si no hay, VERSION_PROYECTO.txt con un renglón
++    de rev MENOR y sello < arranque. tope = min(hora de la última evidencia, arranque - GAP_REV_ANTERIOR_H). Se devuelven solo las marcas
++    de antes de la evidencia con hora <= tope, más las marcas de evidencia. Sin evidencia válida = [] (nada se exime, como v137). -> marcas o (marcas, tope)"""
++    vacio = ([], None, []) if con_tope else []
++    p = _tiempos_log(w)
++    ms = marcas_tiempos_log(p) if p else []
++    if desde is None or not ms:
++        return vacio
++    k0 = _k0_rev(ms, w, entrega, p)
++    if not k0 or k0 >= len(ms):
++        return vacio
++    et = _rev_actual_proyecto(w, ms, k0)              # W1 (verif. 12): nunca de los PDF de planos
++    if et is None:
++        return vacio
++    lim = (desde - datetime.timedelta(hours=GAP_REV_ANTERIOR_H)).replace(tzinfo=None)
++    d0 = desde.replace(tzinfo=None)
++
++    def menor(n):
++        k = _rev_clave(n)
++        return k is not None and k < et
++    ev = [k for k, (t, l) in enumerate(ms[:k0]) if t < d0 and not RX_EVID_NEGACION.search(l) and
++          any(m and menor(m.group(1)) for m in (RX_EVID_INICIO.search(l), RX_EVID_ENTREGA.search(l)))]
++    if ev:
++        tope, fin = min(ms[ev[-1]][0], lim), ev[-1] + 1
++    else:
++        from zoneinfo import ZoneInfo
++        pt = ZoneInfo("America/Los_Angeles")
++        ts = []
++        for x in (version_proyecto_leer(w) if os.path.isdir(w) else []):
++            m = RX_REV_ETIQ.search(x["rev"])
++            t = _dt_utc(x["ts"])
++            if m and t and menor(m.group(1).lower()) and t < desde:
++                ts.append(t.astimezone(pt).replace(tzinfo=None))
++        if not ts:
++            return vacio
++        tope, fin = min(max(ts), lim), k0
++    idx = [k for k in range(fin) if ms[k][0] <= tope or k in ev]   # + las marcas de evidencia (arranque / entrega de la rev anterior)
++    out = [ms[k] for k in idx]
++    return (out, tope, idx) if con_tope else out
++
++
+ def inicio_rev_info(w, entrega=None):
+     """v121 (RETRO, verificación 5): arranque de la rev = (1) la PRIMERA marca de tiempos.log con la etiqueta de la rev ('rev21'); si no,
+     (2) en el log PROPIO de la rev, la primera marca DESPUÉS de la última marca de la rev anterior (marca con OTRA etiqueta revN), en
+@@ -1891,18 +1975,10 @@
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
+     if ms:
+-        et = _etiqueta_rev(w, entrega)
+-        etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
+-        propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
+-        if propias:
+-            k0 = propias[0]
+-        else:
+-            otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
+-            acumulado = os.path.dirname(os.path.realpath(p)) != os.path.realpath(w)
+-            k0 = max(otras, default=-1) + 1
+-            if acumulado:                               # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
+-                return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
+-                              "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
++        k0 = _k0_rev(ms, w, entrega, p)
++        if k0 is None:                                  # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
++            return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
++                          "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
+         if k0 >= len(ms):
+             return None, "tiempos.log no tiene marcas de esta rev después de las de la rev anterior"
+         previas, rev = ms[:k0], ms[k0:]
+@@ -1940,6 +2016,14 @@
+     if not ev:
+         return "PASS", []
+     ini, problema = inicio_rev_info(w, entrega)
++    desde = arranque_rev_desde(w, entrega, ini) if not problema and ini is not None else None   # log sin fecha = FAIL (v137)
++    if desde is not None and desde >= datetime.datetime.fromisoformat(FECHA_V119):
++        _prev, _tope, _idx = marcas_rev_anterior(w, entrega, con_tope=True, desde=desde)   # opción B estricta (COORDINACIÓN 13:25)
++        _t2, n_ex = tiempos_desde(tt, desde, _prev, _tope)   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
++        ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde, previas=_prev, tope=_tope, previas_idx=_idx)
++        if not ev:
++            return "PASS", ([f"{n_ex} paso(s) de TIEMPOS.md cerrados antes del arranque de la rev ({desde.isoformat()}) son de una rev "
++                             "anterior: no se juzgan otra vez (v138)"] if n_ex else [])
+     if problema:
+         return "FAIL", [f"la fecha de arranque de la rev no es confiable ({problema}): los requisitos de proceso de v81cf119 aplican = "
+                         "FAIL (v121)"] + ev
+@@ -1952,6 +2036,41 @@
+     return "FAIL", ev
+ 
+ 
++def _dt_utc(x):
++    """ISO con o sin zona (sin zona = UTC, como fijar_version_proyecto) -> datetime con zona o None."""
++    try:
++        t = datetime.datetime.fromisoformat(str(x).strip().replace("Z", "+00:00"))
++    except (TypeError, ValueError):
++        return None
++    return t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
++
++
++def arranque_rev_desde(w, entrega=None, ini=None):
++    """v138 (COORDINACIÓN, CE_PROTOCOLO_3H): arranque de la rev para juzgar solo sus pasos = el MÁS TEMPRANO entre (i) la marca de inicio
++    de la rev en tiempos.log (inicio_rev_info, `ini`), (ii) el sello UTC del renglón de la rev en VERSION_PROYECTO.txt (si ningún renglón
++    trae la etiqueta de la rev, el primero) y (iii) el primer commit git de la carpeta de la rev, si existe. Nunca el más tardío: una
++    marca 'inicio revN' escrita tarde no deja fuera los pasos que la rev ya cerró. -> datetime en hora del Pacífico (la de tiempos.log
++    y TIEMPOS.md) o None."""
++    from zoneinfo import ZoneInfo
++    tz = ZoneInfo("America/Los_Angeles")
++    cand = [ini] if ini is not None else []
++    vp = version_proyecto_leer(w) if w and os.path.isdir(w) else []
++    if vp:
++        et = _etiqueta_rev(w, entrega)
++        propias = [x for x in vp if et and RX_REV_ETIQ.search(x["rev"]) and RX_REV_ETIQ.search(x["rev"]).group(1).lower() == et] or vp[:1]
++        cand += [t for t in (_dt_utc(x["ts"]) for x in propias) if t]
++    for d in [x for x in (entrega, w) if x and os.path.isdir(x)][:1] or []:
++        try:
++            r = subprocess.run(["git", "-C", d, "log", "--reverse", "--format=%cI", "--", "."], capture_output=True, text=True, timeout=30)
++            ln = (r.stdout or "").strip().splitlines()
++            if r.returncode == 0 and ln:
++                cand.append(datetime.datetime.fromisoformat(ln[0]))
++        except (OSError, subprocess.SubprocessError, ValueError):
++            pass
++    cand = [t if t.tzinfo else t.replace(tzinfo=tz) for t in cand]
++    return min(cand).astimezone(tz) if cand else None
++
++
+ def _tiempos_log(w):
+     return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
+ 
+@@ -1996,6 +2115,50 @@
+ 
+ 
+ 
++def _fin_dt(f, ref):
++    """hora de Fin de una fila de TIEMPOS.md como datetime (año del arranque `ref`; MM-DD de la celda si lo trae) o None sin fecha."""
++    h = f.get("fin")
++    if not h or not h.group(2):
++        return None
++    try:
++        return datetime.datetime(ref.year, int(h.group(2)), int(h.group(3)), int(h.group(4)), int(h.group(5)), tzinfo=ref.tzinfo)
++    except ValueError:
++        return None
++
++
++GAP_REV_ANTERIOR_H = 12   # verificación 9: un paso cerrado a menos de 12 h del arranque no se da por de una rev anterior
++
++
++def tiempos_desde(tiempos_txt, desde, marcas=None, tope=None):
++    """v138 (CR rev20c; rev2 por la verificación 8 Q1b / Q2 / Q4): TIEMPOS.md sin las filas de pasos de una rev ANTERIOR. Una fila
++    queda exenta solo con las DOS pruebas: (a) su Fin (con fecha MM-DD) es al menos GAP_REV_ANTERIOR_H horas anterior al arranque de la rev actual (verif. 9: otra sesión de trabajo) y (b) tiempos.log
++    tiene la marca de ese cierre (misma fecha y hora) antes del arranque, o el cierre es anterior a la marca de evidencia de otra rev (`tope`: su arranque / entrega, CR 13:15). Sin marcas (log sin fechas, una sola marca tardía, sin log)
++    nada queda exento: se juzga como v137. Se quita la fila EXACTA (su línea), nunca por coincidencia de hora con otra fila.
++    -> (texto filtrado, n filas exentas)"""
++    if tiempos_txt is None or desde is None or not marcas:
++        return tiempos_txt, 0                         # sin marcas de una rev anterior (sin evidencia positiva) nada se exime
++    previas = [t for t, _l in marcas if t < desde.replace(tzinfo=t.tzinfo)]
++    fuera = []
++    for f in filas_tiempos(tiempos_txt):
++        t = _fin_dt(f, desde)
++        if t is None or t > desde.replace(tzinfo=t.tzinfo) - datetime.timedelta(hours=GAP_REV_ANTERIOR_H):
++            continue                                  # verif. 9: a menos de 12 h del arranque = la misma rev (se juzga como v137)
++        if any((m.month, m.day, m.hour, m.minute) == (t.month, t.day, t.hour, t.minute) for m in previas):
++            fuera.append(f)
++        elif tope is not None and t < tope.replace(tzinfo=t.tzinfo):
++            fuera.append(f)                           # CR 13:15: cerró ANTES de la marca de evidencia de otra rev (su arranque / entrega)
++    if not fuera:
++        return tiempos_txt, 0
++    malas = [f["linea"] for f in fuera]
++    lineas, out = tiempos_txt.splitlines(), []
++    for ln in lineas:
++        if ln in malas:
++            malas.remove(ln)                              # una sola vez por fila exenta (dos filas iguales: solo la exenta)
++            continue
++        out.append(ln)
++    return "\n".join(out), len(fuera)
++
++
+ def pasos_cerrados_tiempos(tiempos_txt):
+     """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila con hora de fin), con EL MISMO parser de CE_TIEMPOS. -> ['1', '2-3', '4a', …]"""
+     return [f["paso"] for f in filas_tiempos(tiempos_txt) if f["fin"] and any(1 <= n <= 9 for n in f["nums"])]
+@@ -2026,13 +2189,18 @@
+     return ev
+ 
+ 
+-def alarma_fallas(w, na, registro=None, tiempos_txt=None):
++def alarma_fallas(w, na, registro=None, tiempos_txt=None, desde=None, previas=None, tope=None, previas_idx=None):
+     """verificación 12b (NO GUARD 3.3 / BE-PM06 STILL-WEAK: la alarma era opcional): (1) todo paso 1-9 cerrado en tiempos.log
+     ('| N fin …') tiene su corrida 'compuerta_entrega.py <w> --paso N' en compuerta_corridas.jsonl; (2) si el tiempo pasó el 50 % / 100 %
+     del presupuesto, ALERTA_PRESUPUESTO.json tiene esa alerta escrita EN ESE MOMENTO: medida con la hora del log a más tardar en el primer
+     cierre de paso después del cruce. -> [fallas]"""
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
++    if desde is not None:                               # v138 (CR rev20c): solo la rev actual (marcas desde su arranque)
++        previas = previas or []                         # verif. 10: solo las marcas que el ARCHIVO pone antes del arranque de la rev
++        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, previas, tope)
++        quitar = set(previas_idx or [])                 # D1 / D2 (verif. 12): se quitan por POSICIÓN en tiempos.log, nunca por valor
++        ms = [x for k, x in enumerate(ms) if k not in quitar]   # R6: el arranque propio de la rev se queda
+     ev = []
+     if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
+         if not p:
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v139p/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:30:04.100457335 +0000
++++ v139p/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:38:07.300436170 +0000
+@@ -3851,6 +3851,59 @@
+ test_v138_cf04_wood_board_only_plausible()
+ 
+ 
++def test_v138_protocolo_rev_posterior_solo_sus_pasos():
++    """v138 (CR rev20c, COORDINACIÓN 08:25): una rev que arranca DESPUÉS de v119 en un tiempos.log acumulado ('inicio revN') solo se juzga
++    con los pasos que cierran desde su arranque: los pasos de la rev original (otro día) quedan exentos con la causa escrita; un paso de
++    la rev actual sin su corrida '--paso' sigue = FAIL; con la corrida = PASS."""
++    w = tempfile.mkdtemp(prefix="p3h_")
++    e = os.path.join(w, "rev9c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev9c.xlsx"), "w").write("x")
++    log_sin = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 11:34 PST | 1 Inventario | inicio\n"
++               "05-nov 12:10 PST | 1 Inventario | fin\n12-nov 20:46 PST | inicio rev9c\n12-nov 21:30 PST | 4 Lectura | fin\n")
++    # COORDINACIÓN 13:12 (opción B, verif. 10 B1): sin evidencia POSITIVA de la rev anterior nada se exime (= v137)
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin)
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    est, ev = CE.proceso_v119(w, e, ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++                                      "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n"), 10)
++    assert est == "FAIL" and any("paso 1 " in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    # con la marca de entrega de la rev anterior (rev9b entregada) el paso 1 de esa rev queda exento
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin.replace("05-nov 12:10 PST | 1 Inventario | fin\n",
++                                                                    "05-nov 12:10 PST | 1 Inventario | fin\n05-nov 19:00 PST | rev9b entregada\n"))
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 4" in x for x in ev) and not any("paso 1 " in x for x in ev), (est, ev)
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    # v138 (verificación 7, P1 / P2): la marca 'inicio revN' escrita TARDE no exime los pasos que la rev ya cerró: manda el arranque más
++    # temprano (VERSION_PROYECTO.txt fijado al arrancar). Pasos 1 y 2-3 de la misma rev sin '--paso' = FAIL.
++    filas = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++             "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n| 4 | Comparación | 11-13 10:00 | 11-13 10:30 | x |\n")
++    for acumulado in (False, True):
++        w0 = tempfile.mkdtemp(prefix="p3h_tarde_")
++        w = os.path.join(w0, "rev21") if acumulado else w0
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        log = ("2026-11-13 10:00 | 4 inicio rev21\n2026-11-13 10:30 | 4 fin\n" if not acumulado else
++               "05-nov 11:26 PST | 0 Arranque rev20 | inicio\n05-nov 19:00 PST | rev20 entregada\n2026-11-13 08:00 | 1 inicio\n"
++               "2026-11-13 08:30 | 1 fin\n2026-11-13 09:30 | 2-3 fin\n2026-11-13 10:00 | inicio rev21\n2026-11-13 10:30 | 4 fin\n")
++        open(os.path.join(w0, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T16:00:00+00:00 | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        est, ev = CE.proceso_v119(w, e, filas, 5)
++        assert est == "FAIL" and any("paso 1 " in x for x in ev) and any("paso 2-3" in x for x in ev), (acumulado, est, ev)
++    print("test_v138_protocolo_rev_posterior_solo_sus_pasos OK")
++
++
++test_v138_protocolo_rev_posterior_solo_sus_pasos()
++
++
+ def test_v138r2_verif8_caras_lista_como_v137():
+     """v138 rev2 (verificación 8): una LISTA de caras se juzga exactamente como v137 (solo full height / to deck / above ceiling
+     justifican): una palabra suelta de otro elemento en la fuente no calla la cara; un muro SIN faces no se juzga (como v137); faces =
+@@ -3879,6 +3932,34 @@
+ test_v138r2_verif8_caras_lista_como_v137()
+ 
+ 
++def test_v138r2_verif8_tiempos_desde_pruebas():
++    """v138 rev2 (verificación 8): una fila de TIEMPOS.md queda exenta (rev anterior) SOLO si cierra antes del arranque Y tiempos.log
++    tiene la marca de ese cierre antes del arranque; se quita la fila exacta, nunca otra que comparta la hora; sin marcas nada queda
++    exento."""
++    from zoneinfo import ZoneInfo
++    import datetime as _dt
++    tz = ZoneInfo("America/Los_Angeles")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 9 | Subida | 11-12 08:00 | 11-12 08:40 | 40 |\n"
++          "| 1 | Inventario | 11-12 08:40 | 11-13 09:30 | 50 |\n")
++    desde = _dt.datetime(2026, 11, 13, 8, 45, tzinfo=tz)
++    m = [(_dt.datetime(2026, 11, 12, 8, 40, tzinfo=tz), "9 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "1 fin")]
++    txt, n = CE.tiempos_desde(tt, desde, m)
++    assert n == 1 and "Inventario" in txt and "Subida" not in txt, (n, txt)
++    assert CE.tiempos_desde(tt, desde, []) == (tt, 0)
++    assert CE.tiempos_desde(tt, desde, m[1:])[1] == 0                 # el cierre del paso viejo sin marca: no se exime
++    tarde = _dt.datetime(2026, 11, 13, 13, 50, tzinfo=tz)
++    assert CE.tiempos_desde(tt, tarde, [(tarde, "inicio")])[1] == 0  # una sola marca tardía no exime la mañana
++    # verif. 9 (Q4 residual): la misma mañana, con las marcas de cierre en el log y el arranque anotado tarde = no se exime
++    tt2 = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | 30 |\n"
++           "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | 60 |\n")
++    m2 = [(_dt.datetime(2026, 11, 13, 8, 30, tzinfo=tz), "1 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "2-3 fin")]
++    assert CE.tiempos_desde(tt2, _dt.datetime(2026, 11, 13, 10, 0, tzinfo=tz), m2)[1] == 0
++    print("test_v138r2_verif8_tiempos_desde_pruebas OK")
++
++
++test_v138r2_verif8_tiempos_desde_pruebas()
++
++
+ def test_v138r2_caras_numero_clausula_propia():
+     """v138 rev2 (COORDINACIÓN): con 'faces' = número la justificación cuenta solo en la cláusula propia de la cara: una cláusula de
+     OTRO elemento (see …, duct / shaft, cielo colgado) no calla la cara; la cláusula propia sí."""
+@@ -3898,3 +3979,167 @@
+ 
+ 
+ test_v138r2_caras_numero_clausula_propia()
++
++
++def test_v138r2_protocolo_log_sin_fecha_como_v137():
++    """v138 rev2 (COORDINACIÓN): un tiempos.log que no se puede fechar = FAIL como v137, aunque VERSION_PROYECTO.txt traiga la hora:
++    ningún paso queda exento."""
++    w = tempfile.mkdtemp(prefix="p3h_sinfecha_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("arranque\n1 fin\n2-3 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T22:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++          "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 5)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_log_sin_fecha_como_v137 OK")
++
++
++test_v138r2_protocolo_log_sin_fecha_como_v137()
++
++
++def test_v138r2_protocolo_marcas_despues_del_arranque():
++    """v138 rev2 (verificación 10 C1): una marca que el ARCHIVO tiempos.log pone DESPUÉS del arranque de la rev es de la rev actual aunque
++    su hora sea más vieja (saltos atrás de menos de 12 h): su paso no se exime como de una rev anterior."""
++    w = tempfile.mkdtemp(prefix="p3h_c1_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("2026-11-13 10:00 | inicio rev21\n2026-11-12 23:00 | 1 fin\n"
++                                                     "2026-11-12 12:00 | 2-3 fin\n2026-11-13 10:30 | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T18:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-12 22:00 | 11-12 23:00 | x |\n"
++          "| 2-3 | Lect | 11-12 11:00 | 11-12 12:00 | x |\n| 4 | Comp | 11-13 10:00 | 11-13 10:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write("".join(json.dumps({"paso": p, "rc": 0}) + "\n" for p in ("1", "4")))
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 2-3" in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    assert CE.marcas_rev_anterior(w, e) == []
++    print("test_v138r2_protocolo_marcas_despues_del_arranque OK")
++
++
++test_v138r2_protocolo_marcas_despues_del_arranque()
++
++
++def test_v138r2_protocolo_tope_evidencia_otra_rev():
++    """v138 rev2 (COORDINACIÓN opción B + CR 13:15): con una marca de OTRA rev antes del arranque (evidencia positiva), un renglón de
++    TIEMPOS.md que cerró ANTES de esa marca es de una rev anterior aunque su hora no tenga marca propia en tiempos.log; sin esa marca de
++    otra rev, nada se exime (= v137)."""
++    w = tempfile.mkdtemp(prefix="p3h_tope_")
++    e = os.path.join(w, "rev20c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev20c.xlsx"), "w").write("x")
++    con = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 12:10 PST | 1 fin\n05-nov 14:00 PST | 2-3 fin\n05-nov 20:07 PST | 7-8 avance\n"
++           "12-nov 11:49 PST | inicio rev20b | arranque\n12-nov 20:46 PST | inicio rev20c\n12-nov 21:30 PST | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev20c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 2-3 | Lect | 11-05 12:10 | 11-05 14:00 | x |\n| 7-8 | Excel | 11-05 18:00 | 11-05 20:28 | x |\n"
++          "| 9-10 | Subida | 11-05 23:00 | 11-06 00:21 | x |\n| 4 | Comp | 11-12 20:50 | 11-12 21:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    open(os.path.join(w, "tiempos.log"), "w").write(con)
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    open(os.path.join(w, "tiempos.log"), "w").write(con.replace("12-nov 11:49 PST | inicio rev20b | arranque\n", ""))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_tope_evidencia_otra_rev OK")
++
++
++test_v138r2_protocolo_tope_evidencia_otra_rev()
++
++
++def test_v138r2_protocolo_evidencia_estricta_r1_r6():
++    """v138 rev2 (verificación 11, COORDINACIÓN 13:25): la evidencia de una rev anterior se VALIDA: solo 'inicio revN' / 'revN entregada|
++    subida' con N menor que la rev actual, hora anterior al arranque y antes en el archivo; VERSION_PROYECTO solo con rev menor y sello
++    anterior. Palabras sueltas (subidos / uploaded / 'Rev 5' de planos), una rev posterior o una marca con fecha posterior no eximen nada;
++    la alarma conserva el arranque propio de la rev."""
++    V = CE._skill_version() or "v81cf138"
++    H = "| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n"
++    filas = (H + "| 1 | Inv | 11-11 08:00 | 11-11 08:30 | x |\n| 2-3 | Lect | 11-11 08:30 | 11-11 09:30 | x |\n"
++             "| 4 | Comp | 11-13 10:00 | 11-13 10:30 | x |\n")
++
++    def corre(log, vp, tt=filas, na=40):
++        w = tempfile.mkdtemp(prefix="p3h_r16_")
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        open(os.path.join(w, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(vp)
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        return CE.proceso_v119(w, e, tt, na)
++    vp21 = f"2026-11-13T18:00:00Z | rev21 | {V}\n"
++    base = "2026-11-11 08:00 | 1 inicio\n2026-11-11 08:30 | 1 fin\n2026-11-11 09:30 | 2-3 fin\n"
++    fin = "2026-11-13 10:00 | inicio rev21\n2026-11-13 10:30 | 4 fin\n"
++    casos = {
++        "R1 nota 'subidos' de la rev actual": base + "2026-11-11 10:00 | planos subidos por el GC\n" + fin,
++        "R1b nota 'uploaded'": base + "2026-11-11 10:00 | drawings uploaded\n" + fin,
++        "R5 'Rev 5' de planos": base + "2026-11-11 10:00 | sheets Rev 5 entregada por el arquitecto\n" + fin,
++        "R4 'rev20 entregada' con fecha posterior al arranque": base + "2026-11-14 09:00 | rev20 entregada\n" + fin,
++        "rev POSTERIOR 'inicio rev22'": base + "2026-11-11 10:00 | inicio rev22\n" + fin,
++    }
++    for k, log in casos.items():
++        est, ev = corre(log, vp21)
++        assert est == "FAIL" and not any("rev anterior" in x for x in ev), (k, est, ev)
++    for k, vp in {"R2 VERSION_PROYECTO rev20 sellado DESPUÉS del arranque": f"2026-11-14T01:00:00Z | rev20 | {V}\n" + vp21,
++                  "R3 VERSION_PROYECTO rev22": f"2026-11-11T15:00:00Z | rev22 | {V}\n" + vp21}.items():
++        est, ev = corre(base + fin, vp)
++        assert est == "FAIL" and not any("rev anterior" in x for x in ev), (k, est, ev)
++    # control legítimo: 'rev20 entregada' antes del arranque = los pasos del 11-11 son de rev20
++    est, ev = corre(base + "2026-11-11 18:00 | rev20 entregada\n" + fin, vp21)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    # R6: con evidencia real, el arranque PROPIO de la rev (sin etiqueta, después de la evidencia) sigue en la alarma
++    log6 = base + "2026-11-11 18:00 | rev20 entregada\n2026-11-13 02:00 | 0 Arranque\n" + fin
++    est, ev = corre(log6, vp21, na=1)
++    assert est == "FAIL" and any("presupuesto" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_evidencia_estricta_r1_r6 OK")
++
++
++test_v138r2_protocolo_evidencia_estricta_r1_r6()
++
++
++def test_v139_protocolo_w1_d1_negaciones():
++    """v139 (verificación 12, COORDINACIÓN 13:35): (W1) la rev actual sale solo del proyecto (marca 'inicio revN' / VERSION_PROYECTO),
++    nunca de un PDF de planos 'Rev 25' más nuevo; (D1 / D2) la alarma quita marcas por POSICIÓN: una copia exacta de una marca exenta
++    sigue exigiendo su corrida '--paso'; (O1-O3) 're-inicio revN', 'revN entregada? no' y 'falta revN subida' no son evidencia."""
++    V = CE._skill_version() or "v81cf139"
++    H = "| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n"
++
++    def corre(log, tt, pdf=None, pasos=("4",), na=40):
++        w = tempfile.mkdtemp(prefix="p3h_v139_")
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        if pdf:
++            os.makedirs(os.path.join(e, "Planos"))
++            open(os.path.join(e, "Planos", pdf), "w").write("%PDF-1.4\n")
++        open(os.path.join(w, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T16:00:00Z | rev21 | {V}\n")
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write("".join(json.dumps({"paso": p, "rc": 0}) + "\n" for p in pasos))
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        return CE.proceso_v119(w, e, tt, na)
++    tt = H + "| 1 | Inv | 11-12 17:00 | 11-12 17:30 | x |\n| 2-3 | Lect | 11-12 17:30 | 11-12 18:30 | x |\n| 4 | Comp | 11-13 08:00 | 11-13 08:30 | x |\n"
++    # W1: pasos propios de rev21 anotados antes de 'inicio rev21' + PDF 'Rev 25' más nuevo -> no se eximen
++    log = ("2026-11-12 17:00 | 1 inicio\n2026-11-12 17:30 | 1 fin\n2026-11-12 18:30 | 2-3 fin\n2026-11-12 18:40 | inicio rev21\n"
++           "2026-11-13 08:30 | 4 fin\n")
++    est, ev = corre(log, tt, pdf="A-101 Rev 25.pdf")
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    # control legítimo + D1: con la copia exacta de '1 fin' después de la evidencia, el paso 1 vuelve a exigir su --paso
++    tt2 = H + "| 1 | Inv | 11-11 08:00 | 11-11 08:30 | x |\n| 4 | Comp | 11-13 08:00 | 11-13 08:30 | x |\n"
++    base = "2026-11-11 08:00 | 1 inicio\n2026-11-11 08:30 | 1 fin\n2026-11-11 18:00 | rev20 entregada\n"
++    fin = "2026-11-13 08:00 | inicio rev21\n2026-11-13 08:30 | 4 fin\n"
++    est, ev = corre(base + fin, tt2)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    est, ev = corre(base + "2026-11-11 08:30 | 1 fin\n" + fin, tt2)
++    assert est == "FAIL" and any("--paso 1" in x for x in ev), (est, ev)
++    # O1-O3: marcas con prefijo / negación / duda no son evidencia
++    for falsa in ("re-inicio rev20", "rev20 entregada? no, pendiente", "falta: rev20 subida"):
++        est, ev = corre(base.replace("rev20 entregada", falsa) + fin, tt2)
++        assert est == "FAIL" and not any("rev anterior" in x for x in ev), (falsa, est, ev)
++    print("test_v139_protocolo_w1_d1_negaciones OK")
++
++
++test_v139_protocolo_w1_d1_negaciones()
