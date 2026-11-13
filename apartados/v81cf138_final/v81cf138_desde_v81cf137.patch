@@ -1,0 +1,261 @@
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:15:06.865545715 +0000
++++ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 13:30:04.079144730 +0000
+@@ -8847,6 +8847,14 @@
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "fechas_be_xf17"
+    }
++  },
++  {
++   "id": "BE-XF18",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
++   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/SKILL.md v138fb/take-off-metal-frame-drywall/SKILL.md
+--- v137/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:15:06.891667935 +0000
++++ v138fb/take-off-metal-frame-drywall/SKILL.md	2026-11-13 13:30:04.076927812 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf137** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/runner/completitud.py v138fb/take-off-metal-frame-drywall/runner/completitud.py
+--- v137/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 06:13:40.429073866 +0000
++++ v138fb/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 13:30:04.073612803 +0000
+@@ -220,6 +220,46 @@
+     return False
+ 
+ 
++# v138 (CR, CB_BE_83): fuentes que justifican que la cara pase el cielo de su cuarto. 'underside of ceiling' NO justifica (la cara
++# para en el cielo): el underside tiene que ser de roof / floor / structure / deck / sheathing / joist / framing.
++RX_SUBE_JUSTIFICADO = re.compile(
++    r"full height|to deck|above ceiling|hasta deck|"
++    r"underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|"
++    r"extends?\s+to\s+(?:the\s+)?(?:underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|structure|roof|deck)|"
++    r"floor[\s-]+to[\s-]+floor|continuous\s+past\s+the\s+floor|stair\s+enclosure", re.I)
++RX_SUBE_V137 = re.compile(r"full height|to deck|above ceiling|hasta deck", re.I)   # lista de caras: igual que v137
++RX_OTRO_ELEMENTO = re.compile(r"(?i)\bsee\b|\bother\b|\bduct|\bshaft|\bpipe|\bbeam|\bcolumn|\bhung\b|ceiling\s+(?:framing|joist)")
++
++
++def sube_justificado_clausula(src):
++    """v138 rev2 (verificación 8 / COORDINACIÓN): la justificación cuenta SOLO dentro de la cláusula propia de la cara (separadas por
++    ';', salto de línea o '. '): una cláusula que habla de OTRO elemento ('see …', duct / shaft / beam, cielo colgado) no justifica."""
++    for cl in re.split(r";|\n|\.\s", str(src or "")):
++        if RX_SUBE_JUSTIFICADO.search(cl) and not RX_OTRO_ELEMENTO.search(cl):
++            return True
++    return False
++
++
++RX_CARA_EXTERIOR = re.compile(r"(?i)^\s*(?:exterior|outside)\b")
++
++
++def _cara_de_muro(w):
++    """v138 (CR): muro con 'faces' = número -> una cara con la altura y la fuente del muro y el cuarto del location. Las caras del
++    location ('faces: exterior; <cuarto>') que son exteriores se quitan; si la ÚNICA cara es exterior, el muro no tiene cara bajo
++    un cielo (-> []). La cara interior de un muro exterior se juzga igual que cualquier otra."""
++    loc = str(w.get("location") or "")
++    m = re.search(r"(?i)faces?\s*:\s*(.*)$", loc)
++    if m:
++        partes = [x.strip() for x in re.split(r"[;,/]", m.group(1)) if x.strip()]
++        interiores = [x for x in partes if not RX_CARA_EXTERIOR.search(x)]
++        if partes and not interiores:
++            return []                             # la única cara es exterior: no queda bajo el cielo de un cuarto
++        cuarto = "; ".join(interiores) or loc
++    else:
++        cuarto = loc
++    return [{"room": cuarto, "height_ft": w.get("height_ft"), "height_source": w.get("height_source") or w.get("source")}]
++
++
+ def caras_sobre_ceiling(c, margen_ft=1.0):
+     """R80e.48: una face cuyo room tiene ceiling en el canon (mismo número de cuarto) no sube a deck: su altura no puede
+     pasar la del ceiling + margen (board a ceiling / 6" sobre ceiling, partition notes), salvo que su fuente diga
+@@ -229,10 +269,19 @@
+             if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+     out = []
+     for w in _muros(c):
+-        for f in w.get("faces") or []:
++        fa = w.get("faces")
++        # v138 rev2 (verif. 8): lista de caras = EXACTAMENTE v137 (regex corta); 'faces' = número (antes crash) -> _cara_de_muro con
++        # sube_justificado_clausula (solo la cláusula propia); 'faces' ausente / dict / otro -> nada, como v137 (sin falsos nuevos en muros sin faces).
++        if isinstance(fa, list):
++            caras, rx = fa, RX_SUBE_V137.search
++        elif isinstance(fa, (int, float)) and not isinstance(fa, bool):
++            caras, rx = _cara_de_muro(w), sube_justificado_clausula
++        else:
++            caras, rx = [], RX_SUBE_V137.search
++        for f in caras:
+             if not isinstance(f, dict) or f.get("height_ft") is None:
+                 continue
+-            if re.search(r"full height|to deck|above ceiling|hasta deck", str(f.get("height_source") or ""), re.I) and \
++            if rx(str(f.get("height_source") or "")) and \
+                     not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                 continue
+             if altura_cielo_impresa(f):
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v138fb/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 06:13:40.429542551 +0000
++++ v138fb/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 13:30:04.075235736 +0000
+@@ -2297,7 +2297,14 @@
+ @chk("BE-CF04", desc="BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)")
+ def be_cf04(b):
+     crudos = [w for w in (b.canon.get("walls") or []) if isinstance(w, dict)]   # solo-metal: madera en walls[] (los board-only van aparte abajo)
+-    ws = [w for w in crudos if re.search(r"(?i)\bwood\b|\b2x\d", str(w.get("stud_size")) + " " + str(w.get("gauge")))]
++    # v138: madera escrita de cualquier forma ('2 X 6', '2×6', 'DF stud', 'Douglas fir', 'SPF', 'timber', 'wood') en stud_size / gauge /
++    # framing (framing solo si el wall no es board-only con la madera EXCLUDED)
++    rx = re.compile(r"(?i)\bwood\b|\b2\s*[x×]\s*\d|\bDF[\s-]*(?:L\b[\s-]*)?(?:stud|#\s*\d)|douglas[\s-]+fir|\bSPF\b|\btimber\b")
++    def fr(w):
++        f = w.get("framing")
++        f = f if isinstance(f, str) else (json.dumps(f) if f is not None else "")
++        return "" if (w.get("board_only") or re.search(r"(?i)exclu", f)) else f
++    ws = [w for w in crudos if rx.search(str(w.get("stud_size")) + " " + str(w.get("gauge")) + " " + fr(w))]
+     if ws:
+         return R("FAIL", *[f"{w.get('id')}: wall de madera con framing en walls[] (va board-only)" for w in ws[:10]])
+     # BE-CR29: los walls de madera board-only (existing_walls de un set wood-framed) se cuentan: framing EXCLUDED en cada uno
+@@ -2307,7 +2314,7 @@
+                                                     " ".join(str(e.get("decision")) for e in b.canon.get("existing_walls") or [] if str(e.get("id", "")).startswith(w["id"])))]
+         if malos:
+             return R("FAIL", f"{len(malos)} walls board-only sin la decisión 'wood framing EXCLUDED'", *malos[:10])
+-        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; 0 walls de madera con framing en walls[]")
++        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; ningún wall de madera con framing en walls[]")   # v138: sin '0 walls' (U-138)
+     wn = str(b.canon.get("wood_walls_none_reason") or "")   # BE-XF04 (Xfinity 10-nov): set metal-framed / existing only, declared with its sheet
+     if wn and re.search(r"[A-Z]{1,2}-?\d", wn):
+         return R("PASS", f"walls de madera: ninguno en el set ({wn[:160]})")   # BE-GK27: sin '0 walls' (U-138 lo leía como conteo vacío)
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:20:31.124356486 +0000
++++ v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:34:54.279895753 +0000
+@@ -1748,7 +1748,8 @@
+                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+                       "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+-                      "v81cf135": "2026-11-13T06:07:55+00:00", "v81cf136": "2026-11-13T06:12:55+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
++                      "v81cf135": "2026-11-13T06:07:55+00:00", "v81cf136": "2026-11-13T06:12:55+00:00",
++                      "v81cf137": "2026-11-13T06:24:26+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a · v137 0a5f40f; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:13:40.432753912 +0000
++++ v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:30:04.100457335 +0000
+@@ -3788,3 +3788,113 @@
+ 
+ 
+ test_u199_cierre_path_esquema_cr()
++
++
++def test_v138_be83_faces_numero():
++    """v138 (CR rev20c, CB_BE_83 'int object is not iterable'): completitud.caras_sobre_ceiling con existing_walls de 'faces' = número no
++    revienta; el muro cuenta como una cara (altura del muro, cuarto del location). Sobre el cielo sin fuente = sale; con 'floor to floor'
++    / 'underside of roof' / cara exterior = no sale."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++    can = {"walls": [], "ceilings": [{"room": "GUEST 905", "height_ft": 9.0}],
++           "existing_walls": [{"id": "Z9-L9-01", "faces": 2, "height_ft": 11.0, "location": "L9 | faces: 905 GUEST; corridor 916",
++                               "height_source": "4/Z9.05 printed level to level"}]}
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and xs[0][0] == "Z9-L9-01", xs
++    can["existing_walls"][0]["height_source"] = "2/Z9.10 'FIRE PARTITIONS EXTEND TO UNDERSIDE OF ROOF SHEATHING'"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0]["height_source"] = "stair enclosure open floor to floor (5/Z9.02)"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior")
++    assert CO.caras_sobre_ceiling(can) == []
++    # v138: la cara INTERIOR de un muro exterior se juzga igual (solo se salta cuando la única cara es exterior)
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior; 905 GUEST",
++                                    board="5/8 Type X (905 side) + 1/2 exterior gyp sheathing")
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and "905" in xs[0][1], xs
++    # 'extend to underside of ceiling' dice que para en el cielo: no justifica que suba
++    can["existing_walls"][0]["height_source"] = "GWB to extend to underside of ceiling (6/Z9.21)"
++    assert len(CO.caras_sobre_ceiling(can)) == 1
++    can["existing_walls"][0]["height_source"] = "studs extend to underside of floor framing (6/Z9.21)"
++    assert CO.caras_sobre_ceiling(can) == []
++    print("test_v138_be83_faces_numero OK")
++
++
++test_v138_be83_faces_numero()
++
++
++def test_v138_cf04_wood_board_only_plausible():
++    """v138 (CR rev20c): set wood-framed con todos los muros board-only (framing EXCLUDED, BE-CF05 / BE-CR29): CB_BE_CF04 = PASS y la red
++    U-138 no lo vuelve FAIL aunque el proyecto tenga muros esperados (antes la evidencia decía 'cero walls de madera con framing')."""
++    import chequeos_biblioteca as CB
++    class B:
++        canon = {"walls": [], "existing_walls": [{"id": "Z9-L9-01", "board_only": True, "decision": "wood framing EXCLUDED (Div. 06) per 1/Z9.0",
++                                                  "location": "L9 | faces: 905"}]}
++        def walls(self, c=None):
++            return [dict(w, board_only=True) for w in self.canon["existing_walls"]]
++    est, ev = CB.be_cf04(B())
++    assert est == "PASS", (est, ev)
++    res = [{"id": "CB_BE_CF04", "estado": est, "evidencia": ev}]
++    assert CE.auditar_compuerta(res, {"walls": 943, "markups": 943, "imagenes": 943}) == [] and res[0]["estado"] == "PASS", res
++    assert "0 walls" not in json.dumps(ev)
++    # v138: un wall de madera CON framing en walls[] escrito '2 X 6' / 'DF stud' / 'timber' / 'Douglas fir' / 'SPF' = FAIL
++    for ss, ga in (("2 X 6", "DF-L #2"), ("5-1/2 DF stud", "lumber"), ("6 timber stud", "n/a"), ("2×6", "SPF"), ("2 x 4", "Douglas fir")):
++        b = B()
++        b.canon = dict(B.canon, walls=[{"id": "Z9-W-01", "stud_size": ss, "gauge": ga}])
++        assert CB.be_cf04(b)[0] == "FAIL", (ss, ga)
++    b = B()
++    b.canon = dict(B.canon, walls=[{"id": "Z9-W-02", "stud_size": "", "gauge": "", "framing": "wood studs"}])
++    assert CB.be_cf04(b)[0] == "FAIL"                                              # 'wood' en framing también cuenta
++    print("test_v138_cf04_wood_board_only_plausible OK")
++
++
++test_v138_cf04_wood_board_only_plausible()
++
++
++def test_v138r2_verif8_caras_lista_como_v137():
++    """v138 rev2 (verificación 8): una LISTA de caras se juzga exactamente como v137 (solo full height / to deck / above ceiling
++    justifican): una palabra suelta de otro elemento en la fuente no calla la cara; un muro SIN faces no se juzga (como v137); faces =
++    número sigue sin crash y con su cara."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(faces=None, **w):
++        b = {"id": "Z9-W1", "location": "L9 | 905 GUEST", "height_ft": 11.0}
++        b.update(w)
++        if faces is not None:
++            b["faces"] = faces
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}], "walls": [b]}
++    F = lambda s: [{"room": "905 GUEST", "height_ft": 11.0, "height_source": s}]   # noqa: E731
++    for s in ("C-2 GWB ceiling hung from underside of floor joists above", "11'-0\" per 3/A3.1; see stair enclosure detail",
++              "level floor to floor 11'-0\" used as wall height", "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(F(s))), s
++    assert CO.caras_sobre_ceiling(can(F("full height to deck"))) == []
++    assert CO.caras_sobre_ceiling(can(None, location="pier of 905 GUEST", height_source="A3.1 11'-0\"")) == []
++    assert CO.caras_sobre_ceiling(can({"905 GUEST": 11.0}, height_source="A3.1")) == []
++    assert CO.caras_sobre_ceiling(can(2, height_source="A3.1 11'-0\""))
++    assert CO.caras_sobre_ceiling(can(1, location="L9 905 GUEST | faces: exterior", height_source="A3.1")) == []
++    print("test_v138r2_verif8_caras_lista_como_v137 OK")
++
++
++test_v138r2_verif8_caras_lista_como_v137()
++
++
++def test_v138r2_caras_numero_clausula_propia():
++    """v138 rev2 (COORDINACIÓN): con 'faces' = número la justificación cuenta solo en la cláusula propia de la cara: una cláusula de
++    OTRO elemento (see …, duct / shaft, cielo colgado) no calla la cara; la cláusula propia sí."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(src):
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}],
++                "walls": [{"id": "Z9-W2", "faces": 2, "location": "L9 | 905 GUEST", "height_ft": 11.0, "height_source": src}]}
++    for s_ in ("C-2 GWB ceiling hung from underside of floor joists above (A5.1); wall 11'-0\" per section",
++               "11'-0\" per 3/A3.1; see stair enclosure detail 5/A6.02 for the other wall",
++               "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(s_)), s_
++    for s_ in ("partition extends to underside of roof deck per 3/A3.1", "A3.1; wall full height to deck"):
++        assert CO.caras_sobre_ceiling(can(s_)) == [], s_
++    print("test_v138r2_caras_numero_clausula_propia OK")
++
++
++test_v138r2_caras_numero_clausula_propia()

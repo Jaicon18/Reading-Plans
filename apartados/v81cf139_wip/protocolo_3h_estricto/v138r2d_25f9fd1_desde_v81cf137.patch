@@ -1,0 +1,686 @@
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138r3/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:15:06.865545715 +0000
++++ v138r3/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 12:48:06.056257767 +0000
+@@ -8847,6 +8847,14 @@
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "fechas_be_xf17"
+    }
++  },
++  {
++   "id": "BE-XF18",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
++   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/SKILL.md v138r3/take-off-metal-frame-drywall/SKILL.md
+--- v137/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:15:06.891667935 +0000
++++ v138r3/take-off-metal-frame-drywall/SKILL.md	2026-11-13 12:47:09.397527793 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf137** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/runner/completitud.py v138r3/take-off-metal-frame-drywall/runner/completitud.py
+--- v137/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 06:13:40.429073866 +0000
++++ v138r3/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 12:46:03.627645321 +0000
+@@ -220,6 +220,46 @@
+     return False
+ 
+ 
++# v138 (CR, CB_BE_83): fuentes que justifican que la cara pase el cielo de su cuarto. 'underside of ceiling' NO justifica (la cara
++# para en el cielo): el underside tiene que ser de roof / floor / structure / deck / sheathing / joist / framing.
++RX_SUBE_JUSTIFICADO = re.compile(
++    r"full height|to deck|above ceiling|hasta deck|"
++    r"underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|"
++    r"extends?\s+to\s+(?:the\s+)?(?:underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|structure|roof|deck)|"
++    r"floor[\s-]+to[\s-]+floor|continuous\s+past\s+the\s+floor|stair\s+enclosure", re.I)
++RX_SUBE_V137 = re.compile(r"full height|to deck|above ceiling|hasta deck", re.I)   # lista de caras: igual que v137
++RX_OTRO_ELEMENTO = re.compile(r"(?i)\bsee\b|\bother\b|\bduct|\bshaft|\bpipe|\bbeam|\bcolumn|\bhung\b|ceiling\s+(?:framing|joist)")
++
++
++def sube_justificado_clausula(src):
++    """v138 rev2 (verificación 8 / COORDINACIÓN): la justificación cuenta SOLO dentro de la cláusula propia de la cara (separadas por
++    ';', salto de línea o '. '): una cláusula que habla de OTRO elemento ('see …', duct / shaft / beam, cielo colgado) no justifica."""
++    for cl in re.split(r";|\n|\.\s", str(src or "")):
++        if RX_SUBE_JUSTIFICADO.search(cl) and not RX_OTRO_ELEMENTO.search(cl):
++            return True
++    return False
++
++
++RX_CARA_EXTERIOR = re.compile(r"(?i)^\s*(?:exterior|outside)\b")
++
++
++def _cara_de_muro(w):
++    """v138 (CR): muro con 'faces' = número -> una cara con la altura y la fuente del muro y el cuarto del location. Las caras del
++    location ('faces: exterior; <cuarto>') que son exteriores se quitan; si la ÚNICA cara es exterior, el muro no tiene cara bajo
++    un cielo (-> []). La cara interior de un muro exterior se juzga igual que cualquier otra."""
++    loc = str(w.get("location") or "")
++    m = re.search(r"(?i)faces?\s*:\s*(.*)$", loc)
++    if m:
++        partes = [x.strip() for x in re.split(r"[;,/]", m.group(1)) if x.strip()]
++        interiores = [x for x in partes if not RX_CARA_EXTERIOR.search(x)]
++        if partes and not interiores:
++            return []                             # la única cara es exterior: no queda bajo el cielo de un cuarto
++        cuarto = "; ".join(interiores) or loc
++    else:
++        cuarto = loc
++    return [{"room": cuarto, "height_ft": w.get("height_ft"), "height_source": w.get("height_source") or w.get("source")}]
++
++
+ def caras_sobre_ceiling(c, margen_ft=1.0):
+     """R80e.48: una face cuyo room tiene ceiling en el canon (mismo número de cuarto) no sube a deck: su altura no puede
+     pasar la del ceiling + margen (board a ceiling / 6" sobre ceiling, partition notes), salvo que su fuente diga
+@@ -229,10 +269,19 @@
+             if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+     out = []
+     for w in _muros(c):
+-        for f in w.get("faces") or []:
++        fa = w.get("faces")
++        # v138 rev2 (verif. 8): lista de caras = EXACTAMENTE v137 (regex corta); 'faces' = número (antes crash) -> _cara_de_muro con
++        # sube_justificado_clausula (solo la cláusula propia); 'faces' ausente / dict / otro -> nada, como v137 (sin falsos nuevos en muros sin faces).
++        if isinstance(fa, list):
++            caras, rx = fa, RX_SUBE_V137.search
++        elif isinstance(fa, (int, float)) and not isinstance(fa, bool):
++            caras, rx = _cara_de_muro(w), sube_justificado_clausula
++        else:
++            caras, rx = [], RX_SUBE_V137.search
++        for f in caras:
+             if not isinstance(f, dict) or f.get("height_ft") is None:
+                 continue
+-            if re.search(r"full height|to deck|above ceiling|hasta deck", str(f.get("height_source") or ""), re.I) and \
++            if rx(str(f.get("height_source") or "")) and \
+                     not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                 continue
+             if altura_cielo_impresa(f):
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v138r3/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 06:13:40.429542551 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 12:45:43.239180210 +0000
+@@ -2297,7 +2297,14 @@
+ @chk("BE-CF04", desc="BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)")
+ def be_cf04(b):
+     crudos = [w for w in (b.canon.get("walls") or []) if isinstance(w, dict)]   # solo-metal: madera en walls[] (los board-only van aparte abajo)
+-    ws = [w for w in crudos if re.search(r"(?i)\bwood\b|\b2x\d", str(w.get("stud_size")) + " " + str(w.get("gauge")))]
++    # v138: madera escrita de cualquier forma ('2 X 6', '2×6', 'DF stud', 'Douglas fir', 'SPF', 'timber', 'wood') en stud_size / gauge /
++    # framing (framing solo si el wall no es board-only con la madera EXCLUDED)
++    rx = re.compile(r"(?i)\bwood\b|\b2\s*[x×]\s*\d|\bDF[\s-]*(?:L\b[\s-]*)?(?:stud|#\s*\d)|douglas[\s-]+fir|\bSPF\b|\btimber\b")
++    def fr(w):
++        f = w.get("framing")
++        f = f if isinstance(f, str) else (json.dumps(f) if f is not None else "")
++        return "" if (w.get("board_only") or re.search(r"(?i)exclu", f)) else f
++    ws = [w for w in crudos if rx.search(str(w.get("stud_size")) + " " + str(w.get("gauge")) + " " + fr(w))]
+     if ws:
+         return R("FAIL", *[f"{w.get('id')}: wall de madera con framing en walls[] (va board-only)" for w in ws[:10]])
+     # BE-CR29: los walls de madera board-only (existing_walls de un set wood-framed) se cuentan: framing EXCLUDED en cada uno
+@@ -2307,7 +2314,7 @@
+                                                     " ".join(str(e.get("decision")) for e in b.canon.get("existing_walls") or [] if str(e.get("id", "")).startswith(w["id"])))]
+         if malos:
+             return R("FAIL", f"{len(malos)} walls board-only sin la decisión 'wood framing EXCLUDED'", *malos[:10])
+-        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; 0 walls de madera con framing en walls[]")
++        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; ningún wall de madera con framing en walls[]")   # v138: sin '0 walls' (U-138)
+     wn = str(b.canon.get("wood_walls_none_reason") or "")   # BE-XF04 (Xfinity 10-nov): set metal-framed / existing only, declared with its sheet
+     if wn and re.search(r"[A-Z]{1,2}-?\d", wn):
+         return R("PASS", f"walls de madera: ninguno en el set ({wn[:160]})")   # BE-GK27: sin '0 walls' (U-138 lo leía como conteo vacío)
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:20:31.124356486 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:27:29.341645240 +0000
+@@ -1560,7 +1560,7 @@
+         g = lambda k: RX_HORA_CELDA.search(cs[k]) if k is not None and k < len(cs) else None      # noqa: E731
+         d = re.search(r"(\d[\d,]*)\s*min", cs[kd]) if kd is not None and kd < len(cs) else None
+         out.append({"paso": paso.replace(" ", ""), "nums": nums, "inicio": g(ki), "fin": g(kf),
+-                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs})
++                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs, "linea": ln})
+     return out
+ 
+ 
+@@ -1878,6 +1878,73 @@
+     return m.group(1).lower() if m else None
+ 
+ 
++def _k0_rev(ms, w, entrega, p):
++    """índice (ORDEN DEL ARCHIVO) de la primera marca de tiempos.log que es de esta rev: la primera con su etiqueta; si no, la siguiente a
++    la última marca de otra rev; log acumulado sin etiqueta = None (no se reparte). Lo usan inicio_rev_info y la exención de pasos de la
++    rev anterior (verif. 10: solo las marcas ANTES de este índice pueden ser de la rev anterior)."""
++    et = _etiqueta_rev(w, entrega)
++    etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
++    propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
++    if propias:
++        return propias[0]
++    otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
++    if os.path.dirname(os.path.realpath(p)) != os.path.realpath(w):
++        return None
++    return max(otras, default=-1) + 1
++
++
++RX_EVID_INICIO = re.compile(r"\binicio\s+rev(\d{1,3}[a-z]?)\b")                     # COORDINACIÓN 13:25: 'inicio revN' (rev pegado, minúsculas)
++RX_EVID_ENTREGA = re.compile(r"\brev(\d{1,3}[a-z]?)\s+(?:entregad[ao]|subid[ao])\b")   # 'revN entregada' / 'revN subida'
++
++
++def _rev_clave(r):
++    """'20c' -> (20, 'c'): orden natural de revs (rev20c > rev20b > rev9)."""
++    m = re.match(r"(\d+)([a-z]?)", str(r or "").lower())
++    return (int(m.group(1)), m.group(2)) if m else None
++
++
++def marcas_rev_anterior(w, entrega=None, con_tope=False, desde=None):
++    """verif. 10 / 11 + COORDINACIÓN 13:25 (opción B estricta): marcas de tiempos.log de una rev ANTERIOR, solo con evidencia VALIDADA:
++    una marca 'inicio revN' o 'revN entregada|subida' con N MENOR que la rev actual, hora < arranque (`desde`) y ANTES del arranque en el
++    orden del ARCHIVO; palabras sueltas ('subido', 'upload', 'Rev 5' de planos) no cuentan. Si no hay, VERSION_PROYECTO.txt con un renglón
++    de rev MENOR y sello < arranque. tope = min(hora de la última evidencia, arranque - GAP_REV_ANTERIOR_H). Se devuelven solo las marcas
++    de antes de la evidencia con hora <= tope, más las marcas de evidencia. Sin evidencia válida = [] (nada se exime, como v137). -> marcas o (marcas, tope)"""
++    vacio = ([], None) if con_tope else []
++    p = _tiempos_log(w)
++    ms = marcas_tiempos_log(p) if p else []
++    if desde is None or not ms:
++        return vacio
++    k0 = _k0_rev(ms, w, entrega, p)
++    et = _rev_clave(_etiqueta_rev(w, entrega))
++    if not k0 or et is None:
++        return vacio
++    lim = (desde - datetime.timedelta(hours=GAP_REV_ANTERIOR_H)).replace(tzinfo=None)
++    d0 = desde.replace(tzinfo=None)
++
++    def menor(n):
++        k = _rev_clave(n)
++        return k is not None and k < et
++    ev = [k for k, (t, l) in enumerate(ms[:k0]) if t < d0 and any(m and menor(m.group(1)) for m in
++                                                                   (RX_EVID_INICIO.search(l), RX_EVID_ENTREGA.search(l)))]
++    if ev:
++        tope, fin = min(ms[ev[-1]][0], lim), ev[-1] + 1
++    else:
++        from zoneinfo import ZoneInfo
++        pt = ZoneInfo("America/Los_Angeles")
++        ts = []
++        for x in (version_proyecto_leer(w) if os.path.isdir(w) else []):
++            m = RX_REV_ETIQ.search(x["rev"])
++            t = _dt_utc(x["ts"])
++            if m and t and menor(m.group(1).lower()) and t < desde:
++                ts.append(t.astimezone(pt).replace(tzinfo=None))
++        if not ts:
++            return vacio
++        tope, fin = min(max(ts), lim), k0
++    evs = {ms[k] for k in ev}                          # las marcas de evidencia validada son de la rev anterior (su arranque / entrega)
++    out = [x for x in ms[:fin] if x[0] <= tope or x in evs]
++    return (out, tope) if con_tope else out
++
++
+ def inicio_rev_info(w, entrega=None):
+     """v121 (RETRO, verificación 5): arranque de la rev = (1) la PRIMERA marca de tiempos.log con la etiqueta de la rev ('rev21'); si no,
+     (2) en el log PROPIO de la rev, la primera marca DESPUÉS de la última marca de la rev anterior (marca con OTRA etiqueta revN), en
+@@ -1890,18 +1957,10 @@
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
+     if ms:
+-        et = _etiqueta_rev(w, entrega)
+-        etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
+-        propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
+-        if propias:
+-            k0 = propias[0]
+-        else:
+-            otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
+-            acumulado = os.path.dirname(os.path.realpath(p)) != os.path.realpath(w)
+-            k0 = max(otras, default=-1) + 1
+-            if acumulado:                               # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
+-                return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
+-                              "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
++        k0 = _k0_rev(ms, w, entrega, p)
++        if k0 is None:                                  # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
++            return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
++                          "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
+         if k0 >= len(ms):
+             return None, "tiempos.log no tiene marcas de esta rev después de las de la rev anterior"
+         previas, rev = ms[:k0], ms[k0:]
+@@ -1939,6 +1998,14 @@
+     if not ev:
+         return "PASS", []
+     ini, problema = inicio_rev_info(w, entrega)
++    desde = arranque_rev_desde(w, entrega, ini) if not problema and ini is not None else None   # log sin fecha = FAIL (v137)
++    if desde is not None and desde >= datetime.datetime.fromisoformat(FECHA_V119):
++        _prev, _tope = marcas_rev_anterior(w, entrega, con_tope=True, desde=desde)   # opción B estricta (COORDINACIÓN 13:25)
++        _t2, n_ex = tiempos_desde(tt, desde, _prev, _tope)   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
++        ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde, previas=_prev, tope=_tope)
++        if not ev:
++            return "PASS", ([f"{n_ex} paso(s) de TIEMPOS.md cerrados antes del arranque de la rev ({desde.isoformat()}) son de una rev "
++                             "anterior: no se juzgan otra vez (v138)"] if n_ex else [])
+     if problema:
+         return "FAIL", [f"la fecha de arranque de la rev no es confiable ({problema}): los requisitos de proceso de v81cf119 aplican = "
+                         "FAIL (v121)"] + ev
+@@ -1951,6 +2018,41 @@
+     return "FAIL", ev
+ 
+ 
++def _dt_utc(x):
++    """ISO con o sin zona (sin zona = UTC, como fijar_version_proyecto) -> datetime con zona o None."""
++    try:
++        t = datetime.datetime.fromisoformat(str(x).strip().replace("Z", "+00:00"))
++    except (TypeError, ValueError):
++        return None
++    return t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
++
++
++def arranque_rev_desde(w, entrega=None, ini=None):
++    """v138 (COORDINACIÓN, CE_PROTOCOLO_3H): arranque de la rev para juzgar solo sus pasos = el MÁS TEMPRANO entre (i) la marca de inicio
++    de la rev en tiempos.log (inicio_rev_info, `ini`), (ii) el sello UTC del renglón de la rev en VERSION_PROYECTO.txt (si ningún renglón
++    trae la etiqueta de la rev, el primero) y (iii) el primer commit git de la carpeta de la rev, si existe. Nunca el más tardío: una
++    marca 'inicio revN' escrita tarde no deja fuera los pasos que la rev ya cerró. -> datetime en hora del Pacífico (la de tiempos.log
++    y TIEMPOS.md) o None."""
++    from zoneinfo import ZoneInfo
++    tz = ZoneInfo("America/Los_Angeles")
++    cand = [ini] if ini is not None else []
++    vp = version_proyecto_leer(w) if w and os.path.isdir(w) else []
++    if vp:
++        et = _etiqueta_rev(w, entrega)
++        propias = [x for x in vp if et and RX_REV_ETIQ.search(x["rev"]) and RX_REV_ETIQ.search(x["rev"]).group(1).lower() == et] or vp[:1]
++        cand += [t for t in (_dt_utc(x["ts"]) for x in propias) if t]
++    for d in [x for x in (entrega, w) if x and os.path.isdir(x)][:1] or []:
++        try:
++            r = subprocess.run(["git", "-C", d, "log", "--reverse", "--format=%cI", "--", "."], capture_output=True, text=True, timeout=30)
++            ln = (r.stdout or "").strip().splitlines()
++            if r.returncode == 0 and ln:
++                cand.append(datetime.datetime.fromisoformat(ln[0]))
++        except (OSError, subprocess.SubprocessError, ValueError):
++            pass
++    cand = [t if t.tzinfo else t.replace(tzinfo=tz) for t in cand]
++    return min(cand).astimezone(tz) if cand else None
++
++
+ def _tiempos_log(w):
+     return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
+ 
+@@ -1995,6 +2097,50 @@
+ 
+ 
+ 
++def _fin_dt(f, ref):
++    """hora de Fin de una fila de TIEMPOS.md como datetime (año del arranque `ref`; MM-DD de la celda si lo trae) o None sin fecha."""
++    h = f.get("fin")
++    if not h or not h.group(2):
++        return None
++    try:
++        return datetime.datetime(ref.year, int(h.group(2)), int(h.group(3)), int(h.group(4)), int(h.group(5)), tzinfo=ref.tzinfo)
++    except ValueError:
++        return None
++
++
++GAP_REV_ANTERIOR_H = 12   # verificación 9: un paso cerrado a menos de 12 h del arranque no se da por de una rev anterior
++
++
++def tiempos_desde(tiempos_txt, desde, marcas=None, tope=None):
++    """v138 (CR rev20c; rev2 por la verificación 8 Q1b / Q2 / Q4): TIEMPOS.md sin las filas de pasos de una rev ANTERIOR. Una fila
++    queda exenta solo con las DOS pruebas: (a) su Fin (con fecha MM-DD) es al menos GAP_REV_ANTERIOR_H horas anterior al arranque de la rev actual (verif. 9: otra sesión de trabajo) y (b) tiempos.log
++    tiene la marca de ese cierre (misma fecha y hora) antes del arranque, o el cierre es anterior a la marca de evidencia de otra rev (`tope`: su arranque / entrega, CR 13:15). Sin marcas (log sin fechas, una sola marca tardía, sin log)
++    nada queda exento: se juzga como v137. Se quita la fila EXACTA (su línea), nunca por coincidencia de hora con otra fila.
++    -> (texto filtrado, n filas exentas)"""
++    if tiempos_txt is None or desde is None or not marcas:
++        return tiempos_txt, 0                         # sin marcas de una rev anterior (sin evidencia positiva) nada se exime
++    previas = [t for t, _l in marcas if t < desde.replace(tzinfo=t.tzinfo)]
++    fuera = []
++    for f in filas_tiempos(tiempos_txt):
++        t = _fin_dt(f, desde)
++        if t is None or t > desde.replace(tzinfo=t.tzinfo) - datetime.timedelta(hours=GAP_REV_ANTERIOR_H):
++            continue                                  # verif. 9: a menos de 12 h del arranque = la misma rev (se juzga como v137)
++        if any((m.month, m.day, m.hour, m.minute) == (t.month, t.day, t.hour, t.minute) for m in previas):
++            fuera.append(f)
++        elif tope is not None and t < tope.replace(tzinfo=t.tzinfo):
++            fuera.append(f)                           # CR 13:15: cerró ANTES de la marca de evidencia de otra rev (su arranque / entrega)
++    if not fuera:
++        return tiempos_txt, 0
++    malas = [f["linea"] for f in fuera]
++    lineas, out = tiempos_txt.splitlines(), []
++    for ln in lineas:
++        if ln in malas:
++            malas.remove(ln)                              # una sola vez por fila exenta (dos filas iguales: solo la exenta)
++            continue
++        out.append(ln)
++    return "\n".join(out), len(fuera)
++
++
+ def pasos_cerrados_tiempos(tiempos_txt):
+     """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila con hora de fin), con EL MISMO parser de CE_TIEMPOS. -> ['1', '2-3', '4a', …]"""
+     return [f["paso"] for f in filas_tiempos(tiempos_txt) if f["fin"] and any(1 <= n <= 9 for n in f["nums"])]
+@@ -2025,13 +2171,18 @@
+     return ev
+ 
+ 
+-def alarma_fallas(w, na, registro=None, tiempos_txt=None):
++def alarma_fallas(w, na, registro=None, tiempos_txt=None, desde=None, previas=None, tope=None):
+     """verificación 12b (NO GUARD 3.3 / BE-PM06 STILL-WEAK: la alarma era opcional): (1) todo paso 1-9 cerrado en tiempos.log
+     ('| N fin …') tiene su corrida 'compuerta_entrega.py <w> --paso N' en compuerta_corridas.jsonl; (2) si el tiempo pasó el 50 % / 100 %
+     del presupuesto, ALERTA_PRESUPUESTO.json tiene esa alerta escrita EN ESE MOMENTO: medida con la hora del log a más tardar en el primer
+     cierre de paso después del cruce. -> [fallas]"""
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
++    if desde is not None:                               # v138 (CR rev20c): solo la rev actual (marcas desde su arranque)
++        previas = previas or []                         # verif. 10: solo las marcas que el ARCHIVO pone antes del arranque de la rev
++        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, previas, tope)
++        sp = set(previas)                               # R6 (verif. 11): solo se quitan las marcas de la rev anterior validada (<= tope
++        ms = [x for x in ms if x not in sp]             # y su marca de evidencia); el arranque propio de la rev se queda
+     ev = []
+     if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
+         if not p:
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:13:40.432753912 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:28:35.476402179 +0000
+@@ -3788,3 +3788,314 @@
+ 
+ 
+ test_u199_cierre_path_esquema_cr()
++
++
++def test_v138_be83_faces_numero():
++    """v138 (CR rev20c, CB_BE_83 'int object is not iterable'): completitud.caras_sobre_ceiling con existing_walls de 'faces' = número no
++    revienta; el muro cuenta como una cara (altura del muro, cuarto del location). Sobre el cielo sin fuente = sale; con 'floor to floor'
++    / 'underside of roof' / cara exterior = no sale."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++    can = {"walls": [], "ceilings": [{"room": "GUEST 905", "height_ft": 9.0}],
++           "existing_walls": [{"id": "Z9-L9-01", "faces": 2, "height_ft": 11.0, "location": "L9 | faces: 905 GUEST; corridor 916",
++                               "height_source": "4/Z9.05 printed level to level"}]}
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and xs[0][0] == "Z9-L9-01", xs
++    can["existing_walls"][0]["height_source"] = "2/Z9.10 'FIRE PARTITIONS EXTEND TO UNDERSIDE OF ROOF SHEATHING'"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0]["height_source"] = "stair enclosure open floor to floor (5/Z9.02)"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior")
++    assert CO.caras_sobre_ceiling(can) == []
++    # v138: la cara INTERIOR de un muro exterior se juzga igual (solo se salta cuando la única cara es exterior)
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior; 905 GUEST",
++                                    board="5/8 Type X (905 side) + 1/2 exterior gyp sheathing")
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and "905" in xs[0][1], xs
++    # 'extend to underside of ceiling' dice que para en el cielo: no justifica que suba
++    can["existing_walls"][0]["height_source"] = "GWB to extend to underside of ceiling (6/Z9.21)"
++    assert len(CO.caras_sobre_ceiling(can)) == 1
++    can["existing_walls"][0]["height_source"] = "studs extend to underside of floor framing (6/Z9.21)"
++    assert CO.caras_sobre_ceiling(can) == []
++    print("test_v138_be83_faces_numero OK")
++
++
++test_v138_be83_faces_numero()
++
++
++def test_v138_cf04_wood_board_only_plausible():
++    """v138 (CR rev20c): set wood-framed con todos los muros board-only (framing EXCLUDED, BE-CF05 / BE-CR29): CB_BE_CF04 = PASS y la red
++    U-138 no lo vuelve FAIL aunque el proyecto tenga muros esperados (antes la evidencia decía 'cero walls de madera con framing')."""
++    import chequeos_biblioteca as CB
++    class B:
++        canon = {"walls": [], "existing_walls": [{"id": "Z9-L9-01", "board_only": True, "decision": "wood framing EXCLUDED (Div. 06) per 1/Z9.0",
++                                                  "location": "L9 | faces: 905"}]}
++        def walls(self, c=None):
++            return [dict(w, board_only=True) for w in self.canon["existing_walls"]]
++    est, ev = CB.be_cf04(B())
++    assert est == "PASS", (est, ev)
++    res = [{"id": "CB_BE_CF04", "estado": est, "evidencia": ev}]
++    assert CE.auditar_compuerta(res, {"walls": 943, "markups": 943, "imagenes": 943}) == [] and res[0]["estado"] == "PASS", res
++    assert "0 walls" not in json.dumps(ev)
++    # v138: un wall de madera CON framing en walls[] escrito '2 X 6' / 'DF stud' / 'timber' / 'Douglas fir' / 'SPF' = FAIL
++    for ss, ga in (("2 X 6", "DF-L #2"), ("5-1/2 DF stud", "lumber"), ("6 timber stud", "n/a"), ("2×6", "SPF"), ("2 x 4", "Douglas fir")):
++        b = B()
++        b.canon = dict(B.canon, walls=[{"id": "Z9-W-01", "stud_size": ss, "gauge": ga}])
++        assert CB.be_cf04(b)[0] == "FAIL", (ss, ga)
++    b = B()
++    b.canon = dict(B.canon, walls=[{"id": "Z9-W-02", "stud_size": "", "gauge": "", "framing": "wood studs"}])
++    assert CB.be_cf04(b)[0] == "FAIL"                                              # 'wood' en framing también cuenta
++    print("test_v138_cf04_wood_board_only_plausible OK")
++
++
++test_v138_cf04_wood_board_only_plausible()
++
++
++def test_v138_protocolo_rev_posterior_solo_sus_pasos():
++    """v138 (CR rev20c, COORDINACIÓN 08:25): una rev que arranca DESPUÉS de v119 en un tiempos.log acumulado ('inicio revN') solo se juzga
++    con los pasos que cierran desde su arranque: los pasos de la rev original (otro día) quedan exentos con la causa escrita; un paso de
++    la rev actual sin su corrida '--paso' sigue = FAIL; con la corrida = PASS."""
++    w = tempfile.mkdtemp(prefix="p3h_")
++    e = os.path.join(w, "rev9c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev9c.xlsx"), "w").write("x")
++    log_sin = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 11:34 PST | 1 Inventario | inicio\n"
++               "05-nov 12:10 PST | 1 Inventario | fin\n12-nov 20:46 PST | inicio rev9c\n12-nov 21:30 PST | 4 Lectura | fin\n")
++    # COORDINACIÓN 13:12 (opción B, verif. 10 B1): sin evidencia POSITIVA de la rev anterior nada se exime (= v137)
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin)
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    est, ev = CE.proceso_v119(w, e, ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++                                      "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n"), 10)
++    assert est == "FAIL" and any("paso 1 " in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    # con la marca de entrega de la rev anterior (rev9b entregada) el paso 1 de esa rev queda exento
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin.replace("05-nov 12:10 PST | 1 Inventario | fin\n",
++                                                                    "05-nov 12:10 PST | 1 Inventario | fin\n05-nov 19:00 PST | rev9b entregada\n"))
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 4" in x for x in ev) and not any("paso 1 " in x for x in ev), (est, ev)
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    # v138 (verificación 7, P1 / P2): la marca 'inicio revN' escrita TARDE no exime los pasos que la rev ya cerró: manda el arranque más
++    # temprano (VERSION_PROYECTO.txt fijado al arrancar). Pasos 1 y 2-3 de la misma rev sin '--paso' = FAIL.
++    filas = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++             "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n| 4 | Comparación | 11-13 10:00 | 11-13 10:30 | x |\n")
++    for acumulado in (False, True):
++        w0 = tempfile.mkdtemp(prefix="p3h_tarde_")
++        w = os.path.join(w0, "rev21") if acumulado else w0
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        log = ("2026-11-13 10:00 | 4 inicio rev21\n2026-11-13 10:30 | 4 fin\n" if not acumulado else
++               "05-nov 11:26 PST | 0 Arranque rev20 | inicio\n05-nov 19:00 PST | rev20 entregada\n2026-11-13 08:00 | 1 inicio\n"
++               "2026-11-13 08:30 | 1 fin\n2026-11-13 09:30 | 2-3 fin\n2026-11-13 10:00 | inicio rev21\n2026-11-13 10:30 | 4 fin\n")
++        open(os.path.join(w0, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T16:00:00+00:00 | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        est, ev = CE.proceso_v119(w, e, filas, 5)
++        assert est == "FAIL" and any("paso 1 " in x for x in ev) and any("paso 2-3" in x for x in ev), (acumulado, est, ev)
++    print("test_v138_protocolo_rev_posterior_solo_sus_pasos OK")
++
++
++test_v138_protocolo_rev_posterior_solo_sus_pasos()
++
++
++def test_v138r2_verif8_caras_lista_como_v137():
++    """v138 rev2 (verificación 8): una LISTA de caras se juzga exactamente como v137 (solo full height / to deck / above ceiling
++    justifican): una palabra suelta de otro elemento en la fuente no calla la cara; un muro SIN faces no se juzga (como v137); faces =
++    número sigue sin crash y con su cara."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(faces=None, **w):
++        b = {"id": "Z9-W1", "location": "L9 | 905 GUEST", "height_ft": 11.0}
++        b.update(w)
++        if faces is not None:
++            b["faces"] = faces
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}], "walls": [b]}
++    F = lambda s: [{"room": "905 GUEST", "height_ft": 11.0, "height_source": s}]   # noqa: E731
++    for s in ("C-2 GWB ceiling hung from underside of floor joists above", "11'-0\" per 3/A3.1; see stair enclosure detail",
++              "level floor to floor 11'-0\" used as wall height", "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(F(s))), s
++    assert CO.caras_sobre_ceiling(can(F("full height to deck"))) == []
++    assert CO.caras_sobre_ceiling(can(None, location="pier of 905 GUEST", height_source="A3.1 11'-0\"")) == []
++    assert CO.caras_sobre_ceiling(can({"905 GUEST": 11.0}, height_source="A3.1")) == []
++    assert CO.caras_sobre_ceiling(can(2, height_source="A3.1 11'-0\""))
++    assert CO.caras_sobre_ceiling(can(1, location="L9 905 GUEST | faces: exterior", height_source="A3.1")) == []
++    print("test_v138r2_verif8_caras_lista_como_v137 OK")
++
++
++test_v138r2_verif8_caras_lista_como_v137()
++
++
++def test_v138r2_verif8_tiempos_desde_pruebas():
++    """v138 rev2 (verificación 8): una fila de TIEMPOS.md queda exenta (rev anterior) SOLO si cierra antes del arranque Y tiempos.log
++    tiene la marca de ese cierre antes del arranque; se quita la fila exacta, nunca otra que comparta la hora; sin marcas nada queda
++    exento."""
++    from zoneinfo import ZoneInfo
++    import datetime as _dt
++    tz = ZoneInfo("America/Los_Angeles")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 9 | Subida | 11-12 08:00 | 11-12 08:40 | 40 |\n"
++          "| 1 | Inventario | 11-12 08:40 | 11-13 09:30 | 50 |\n")
++    desde = _dt.datetime(2026, 11, 13, 8, 45, tzinfo=tz)
++    m = [(_dt.datetime(2026, 11, 12, 8, 40, tzinfo=tz), "9 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "1 fin")]
++    txt, n = CE.tiempos_desde(tt, desde, m)
++    assert n == 1 and "Inventario" in txt and "Subida" not in txt, (n, txt)
++    assert CE.tiempos_desde(tt, desde, []) == (tt, 0)
++    assert CE.tiempos_desde(tt, desde, m[1:])[1] == 0                 # el cierre del paso viejo sin marca: no se exime
++    tarde = _dt.datetime(2026, 11, 13, 13, 50, tzinfo=tz)
++    assert CE.tiempos_desde(tt, tarde, [(tarde, "inicio")])[1] == 0  # una sola marca tardía no exime la mañana
++    # verif. 9 (Q4 residual): la misma mañana, con las marcas de cierre en el log y el arranque anotado tarde = no se exime
++    tt2 = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | 30 |\n"
++           "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | 60 |\n")
++    m2 = [(_dt.datetime(2026, 11, 13, 8, 30, tzinfo=tz), "1 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "2-3 fin")]
++    assert CE.tiempos_desde(tt2, _dt.datetime(2026, 11, 13, 10, 0, tzinfo=tz), m2)[1] == 0
++    print("test_v138r2_verif8_tiempos_desde_pruebas OK")
++
++
++test_v138r2_verif8_tiempos_desde_pruebas()
++
++
++def test_v138r2_caras_numero_clausula_propia():
++    """v138 rev2 (COORDINACIÓN): con 'faces' = número la justificación cuenta solo en la cláusula propia de la cara: una cláusula de
++    OTRO elemento (see …, duct / shaft, cielo colgado) no calla la cara; la cláusula propia sí."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(src):
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}],
++                "walls": [{"id": "Z9-W2", "faces": 2, "location": "L9 | 905 GUEST", "height_ft": 11.0, "height_source": src}]}
++    for s_ in ("C-2 GWB ceiling hung from underside of floor joists above (A5.1); wall 11'-0\" per section",
++               "11'-0\" per 3/A3.1; see stair enclosure detail 5/A6.02 for the other wall",
++               "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(s_)), s_
++    for s_ in ("partition extends to underside of roof deck per 3/A3.1", "A3.1; wall full height to deck"):
++        assert CO.caras_sobre_ceiling(can(s_)) == [], s_
++    print("test_v138r2_caras_numero_clausula_propia OK")
++
++
++test_v138r2_caras_numero_clausula_propia()
++
++
++def test_v138r2_protocolo_log_sin_fecha_como_v137():
++    """v138 rev2 (COORDINACIÓN): un tiempos.log que no se puede fechar = FAIL como v137, aunque VERSION_PROYECTO.txt traiga la hora:
++    ningún paso queda exento."""
++    w = tempfile.mkdtemp(prefix="p3h_sinfecha_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("arranque\n1 fin\n2-3 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T22:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++          "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 5)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_log_sin_fecha_como_v137 OK")
++
++
++test_v138r2_protocolo_log_sin_fecha_como_v137()
++
++
++def test_v138r2_protocolo_marcas_despues_del_arranque():
++    """v138 rev2 (verificación 10 C1): una marca que el ARCHIVO tiempos.log pone DESPUÉS del arranque de la rev es de la rev actual aunque
++    su hora sea más vieja (saltos atrás de menos de 12 h): su paso no se exime como de una rev anterior."""
++    w = tempfile.mkdtemp(prefix="p3h_c1_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("2026-11-13 10:00 | inicio rev21\n2026-11-12 23:00 | 1 fin\n"
++                                                     "2026-11-12 12:00 | 2-3 fin\n2026-11-13 10:30 | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T18:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-12 22:00 | 11-12 23:00 | x |\n"
++          "| 2-3 | Lect | 11-12 11:00 | 11-12 12:00 | x |\n| 4 | Comp | 11-13 10:00 | 11-13 10:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write("".join(json.dumps({"paso": p, "rc": 0}) + "\n" for p in ("1", "4")))
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 2-3" in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    assert CE.marcas_rev_anterior(w, e) == []
++    print("test_v138r2_protocolo_marcas_despues_del_arranque OK")
++
++
++test_v138r2_protocolo_marcas_despues_del_arranque()
++
++
++def test_v138r2_protocolo_tope_evidencia_otra_rev():
++    """v138 rev2 (COORDINACIÓN opción B + CR 13:15): con una marca de OTRA rev antes del arranque (evidencia positiva), un renglón de
++    TIEMPOS.md que cerró ANTES de esa marca es de una rev anterior aunque su hora no tenga marca propia en tiempos.log; sin esa marca de
++    otra rev, nada se exime (= v137)."""
++    w = tempfile.mkdtemp(prefix="p3h_tope_")
++    e = os.path.join(w, "rev20c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev20c.xlsx"), "w").write("x")
++    con = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 12:10 PST | 1 fin\n05-nov 14:00 PST | 2-3 fin\n05-nov 20:07 PST | 7-8 avance\n"
++           "12-nov 11:49 PST | inicio rev20b | arranque\n12-nov 20:46 PST | inicio rev20c\n12-nov 21:30 PST | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev20c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 2-3 | Lect | 11-05 12:10 | 11-05 14:00 | x |\n| 7-8 | Excel | 11-05 18:00 | 11-05 20:28 | x |\n"
++          "| 9-10 | Subida | 11-05 23:00 | 11-06 00:21 | x |\n| 4 | Comp | 11-12 20:50 | 11-12 21:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    open(os.path.join(w, "tiempos.log"), "w").write(con)
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    open(os.path.join(w, "tiempos.log"), "w").write(con.replace("12-nov 11:49 PST | inicio rev20b | arranque\n", ""))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_tope_evidencia_otra_rev OK")
++
++
++test_v138r2_protocolo_tope_evidencia_otra_rev()
++
++
++def test_v138r2_protocolo_evidencia_estricta_r1_r6():
++    """v138 rev2 (verificación 11, COORDINACIÓN 13:25): la evidencia de una rev anterior se VALIDA: solo 'inicio revN' / 'revN entregada|
++    subida' con N menor que la rev actual, hora anterior al arranque y antes en el archivo; VERSION_PROYECTO solo con rev menor y sello
++    anterior. Palabras sueltas (subidos / uploaded / 'Rev 5' de planos), una rev posterior o una marca con fecha posterior no eximen nada;
++    la alarma conserva el arranque propio de la rev."""
++    V = CE._skill_version() or "v81cf138"
++    H = "| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n"
++    filas = (H + "| 1 | Inv | 11-11 08:00 | 11-11 08:30 | x |\n| 2-3 | Lect | 11-11 08:30 | 11-11 09:30 | x |\n"
++             "| 4 | Comp | 11-13 10:00 | 11-13 10:30 | x |\n")
++
++    def corre(log, vp, tt=filas, na=40):
++        w = tempfile.mkdtemp(prefix="p3h_r16_")
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        open(os.path.join(w, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(vp)
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        return CE.proceso_v119(w, e, tt, na)
++    vp21 = f"2026-11-13T18:00:00Z | rev21 | {V}\n"
++    base = "2026-11-11 08:00 | 1 inicio\n2026-11-11 08:30 | 1 fin\n2026-11-11 09:30 | 2-3 fin\n"
++    fin = "2026-11-13 10:00 | inicio rev21\n2026-11-13 10:30 | 4 fin\n"
++    casos = {
++        "R1 nota 'subidos' de la rev actual": base + "2026-11-11 10:00 | planos subidos por el GC\n" + fin,
++        "R1b nota 'uploaded'": base + "2026-11-11 10:00 | drawings uploaded\n" + fin,
++        "R5 'Rev 5' de planos": base + "2026-11-11 10:00 | sheets Rev 5 entregada por el arquitecto\n" + fin,
++        "R4 'rev20 entregada' con fecha posterior al arranque": base + "2026-11-14 09:00 | rev20 entregada\n" + fin,
++        "rev POSTERIOR 'inicio rev22'": base + "2026-11-11 10:00 | inicio rev22\n" + fin,
++    }
++    for k, log in casos.items():
++        est, ev = corre(log, vp21)
++        assert est == "FAIL" and not any("rev anterior" in x for x in ev), (k, est, ev)
++    for k, vp in {"R2 VERSION_PROYECTO rev20 sellado DESPUÉS del arranque": f"2026-11-14T01:00:00Z | rev20 | {V}\n" + vp21,
++                  "R3 VERSION_PROYECTO rev22": f"2026-11-11T15:00:00Z | rev22 | {V}\n" + vp21}.items():
++        est, ev = corre(base + fin, vp)
++        assert est == "FAIL" and not any("rev anterior" in x for x in ev), (k, est, ev)
++    # control legítimo: 'rev20 entregada' antes del arranque = los pasos del 11-11 son de rev20
++    est, ev = corre(base + "2026-11-11 18:00 | rev20 entregada\n" + fin, vp21)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    # R6: con evidencia real, el arranque PROPIO de la rev (sin etiqueta, después de la evidencia) sigue en la alarma
++    log6 = base + "2026-11-11 18:00 | rev20 entregada\n2026-11-13 02:00 | 0 Arranque\n" + fin
++    est, ev = corre(log6, vp21, na=1)
++    assert est == "FAIL" and any("presupuesto" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_evidencia_estricta_r1_r6 OK")
++
++
++test_v138r2_protocolo_evidencia_estricta_r1_r6()
