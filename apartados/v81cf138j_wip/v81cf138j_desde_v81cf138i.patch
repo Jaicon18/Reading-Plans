@@ -44,18 +44,20 @@ diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/SKILL.md v138j/take-
  - **BE-CR45 (programa desde v81cf138f, CR rev20d 13-nov):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Programa: CB_DUCHA_CBU (chequeos_biblioteca.ducha_cbu) con la lista de showers del canon (`showers`: floor, room, box, cbu [{side, id}]) o banos_cbu.json: doble conteo NON-rated o cement board en la línea de atrás = FAIL; cement board sin lista de showers = AMBER. Test test_be_cr45_ducha_cbu (caso real CR rev20c 6 + 6 / rev20d 0).
 diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138j/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v138i/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 22:10:14.521122543 +0000
-+++ v138j/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 22:33:36.378736416 +0000
-@@ -173,8 +173,7 @@
++++ v138j/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 22:37:35.206490021 +0000
+@@ -173,8 +173,9 @@
          self.entrega = ed
          e = ed or self.w
          self.excel = g("excel") or _ultimo(["Take-off/*.xlsx"], e)
 -        self.markups = g("markups") or next((p for p in sorted(glob.glob(os.path.join(e, "Planos marcados", "*.pdf")), reverse=True)
 -                                             if not os.path.basename(p).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS"))), None)
-+        self.markups, self.markups_causa = elegir_markups(g("markups"), os.path.join(e, "Planos marcados"))   # BE-XF18: por NOMBRE
++        _m = self.cfg.get("markups")                       # verificación j #4: crudo (relativo a la entrega o a la carpeta de trabajo)
++        _m = (_m if os.path.isabs(str(_m)) or not os.path.isfile(os.path.join(self.w, str(_m))) else os.path.join(self.w, str(_m))) if _m else None
++        self.markups, self.markups_causa = elegir_markups(_m, os.path.join(e, "Planos marcados"))   # BE-XF18: por NOMBRE
          self.planos = os.path.join(e, "Planos marcados")
          self.readme = os.path.join(e, "README_REVIEW.md")
          self.para = os.path.join(e, "PARA_REVISAR_EN_LA_MANANA.md")
-@@ -4390,6 +4389,49 @@
+@@ -4390,6 +4391,49 @@
      return salida
  
  
@@ -105,7 +107,7 @@ diff -ruN -x __pycache__ v138i/take-off-metal-frame-drywall/tools/compuerta_entr
  def _pdfs_markups(c):
      """PDF de Planos marcados con markups del take-off (DETALLES_REVISADOS / SCHEDULES_REVISADOS no miden)."""
      return [p for p in sorted(glob.glob(os.path.join(c.planos, "*.pdf"))) if getattr(c, "planos", None)
-@@ -4397,6 +4439,19 @@
+@@ -4397,6 +4441,19 @@
              and "NO USAR" not in os.path.basename(p) and "COBERTURA" not in os.path.basename(p).upper()]
  
  

@@ -47,8 +47,8 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/SKILL.md v138i/take-
  - **BE-CR45 (programa desde v81cf138f, CR rev20d 13-nov):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Programa: CB_DUCHA_CBU (chequeos_biblioteca.ducha_cbu) con la lista de showers del canon (`showers`: floor, room, box, cbu [{side, id}]) o banos_cbu.json: doble conteo NON-rated o cement board en la línea de atrás = FAIL; cement board sin lista de showers = AMBER. Test test_be_cr45_ducha_cbu (caso real CR rev20c 6 + 6 / rev20d 0).
 diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_alturas.py v138i/take-off-metal-frame-drywall/tools/comparar_alturas.py
 --- v138h/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-13 22:29:55.881347942 +0000
-+++ v138i/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-13 22:32:46.098199325 +0000
-@@ -252,9 +252,27 @@
++++ v138i/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-13 22:37:30.326342747 +0000
+@@ -252,9 +252,42 @@
  
  
  def sala(nombre):
@@ -62,6 +62,21 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
 +        return re.sub(r"\s+", " ", str(nombre or "").strip().lower())
 +    pre = RX_PREP.split(" " + str(nombre or "") + " ", 1)[0]
 +    return m.group(1) + ("-bath" if _pal(pre) & PAL_HUMEDO else "")
++
++
++def llaves_ab(la, lb):
++    """BE-CR47: las dos lecturas ciegas pueden nombrar distinto el mismo cuarto ('Restroom 913' -> '913-bath', '913' -> '913'); si una
++    lectura no tiene la llave '-bath' y sí la del número (y la otra al revés), se comparan como el mismo cuarto ('913')."""
++    ka, kb = {k for k, _v in la}, {k for k, _v in lb}
++    def norm(lst, mias, otras):
++        out = []
++        for k, v in lst:
++            m = re.fullmatch(r"(\d{3}[A-Z]?)-bath", str(k))
++            if m and k not in otras and m.group(1) in otras and m.group(1) not in mias:
++                k = m.group(1)
++            out.append((k, v))
++        return out
++    return norm(la, ka, kb), norm(lb, kb, ka)
 +
 +
 +RX_LLAVE_CUARTO = re.compile(r"\d{3}[A-Z]?(?:-bath)?")
@@ -78,7 +93,7 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
  
  
  RX_NO_CUARTO = re.compile(r"(?i)\bheader\b|\bsoffit\b|\bbulkhead\b|\bSOF-\d")
-@@ -439,7 +457,7 @@
+@@ -439,7 +472,7 @@
      out = []
      for parte in re.split(r"[;/]", m.group(1)):
          k = sala(parte)
@@ -87,7 +102,25 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
              out.append(k)
      return out
  
-@@ -588,8 +606,11 @@
+@@ -557,11 +590,15 @@
+          "bathroom": "bath", "hall": "corridor", "hallway": "corridor", "corr": "corridor"}
+ 
+ 
++def _sing(w):
++    return w[:-1] if len(w) > 4 and w.endswith("s") and not w.endswith("ss") else w      # 'toilets' / 'showers' / 'restrooms'
++
++
+ def _pal(s):
+-    return {SINON.get(w, w) for w in RX_PAL_CUARTO.findall(str(s).lower())} - NO_PAL
++    return {SINON.get(_sing(w), _sing(w)) for w in RX_PAL_CUARTO.findall(str(s).lower())} - NO_PAL
+ 
+ 
+-RX_PREP = re.compile(r"(?i)\s(?:(?:north|south|east|west)\s+)?(?:of|near|behind|beside|next to|at|by|toward|towards|in front of)\s")
++RX_PREP = re.compile(r"(?i)\s(?:(?:north|south|east|west)\s+)?(?:of|near|behind|beside|next to|at|by|to|toward|towards|in front of)\s")
+ PAL_HUMEDO = {"bath"}
+ 
+ 
+@@ -588,8 +625,11 @@
          cand = [(ch, n) for s, ch, n in sc if s == mejor]
          if len({ch for ch, _n in cand}) == 1:
              return cand[0][0]
@@ -101,7 +134,7 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
      if len({ch for _n, ch in rows}) == 1 and not any(_pal(n) for n, _c in rows):
          return rows[0][1]
      return None
-@@ -650,7 +671,9 @@
+@@ -650,7 +690,9 @@
      for w in walls:
          n += 1
          bo = w.get("bo") if w.get("bo") is not None else (bo_global.get(w.get("floor")) if por_nivel else bo_global)   # BE-GK11
@@ -112,7 +145,7 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
          if bo is not None and w["h"] > bo + TOL_EXT:
              fallas.append(f"{w['id']}: H {w['h']:.3f} > B.O. estructura {bo:.3f}")
          # BE-GK12 (Grand Kia): a wall whose height is explained by a printed reason (height_diff_reason with N/HOJA:
-@@ -708,24 +731,26 @@
+@@ -708,24 +750,26 @@
      """-> (n_cuartos_con_walls, fallas, filas)"""
      fallas, filas = [], []
      for r, ch in sorted(cuartos.items()):
@@ -147,15 +180,29 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
              if len(hs) > 1 and len(sin) > 1:
                  fallas.append(f"cuarto {r}: type {t} con alturas distintas {sorted(hs)} sin motivo impreso (height_diff_reason)")
      n = len({f["Room"] for f in filas})
-@@ -1091,6 +1116,7 @@
+@@ -1067,8 +1111,10 @@
+     res["fallas"]["7_lados"] = lados_fallas(final)                               # BE-CR37
+     res["conteos"]["7_lados"] = f"{sum(1 for r in final if RX_ANCHO_DES.search(str(r.get('Wall ID') or '')))} anchos desarrollados con side / faces"
+     if os.path.isfile(P("ALTURAS_CUARTOS_A.csv")) and os.path.isfile(P("ALTURAS_CUARTOS_B.csv")):      # C.H. de cuartos también A / B
+-        ca = [{"Wall ID": "ROOM " + k, "Printed H": v} for k, v in leer_cuartos(P("ALTURAS_CUARTOS_A.csv"))]
+-        cb = [{"Wall ID": "ROOM " + k, "Printed H": v} for k, v in leer_cuartos(P("ALTURAS_CUARTOS_B.csv"))]
++        la, lb = leer_cuartos(P("ALTURAS_CUARTOS_A.csv")), leer_cuartos(P("ALTURAS_CUARTOS_B.csv"))
++        la, lb = llaves_ab(la, lb)                        # verificación i #2: 'Restroom 913' (A) y '913' (B) = el mismo cuarto
++        ca = [{"Wall ID": "ROOM " + k, "Printed H": v} for k, v in la]
++        cb = [{"Wall ID": "ROOM " + k, "Printed H": v} for k, v in lb]
+         fc, ff = comparar_ab([x for x in ca if x["Printed H"] is not None], [x for x in cb if x["Printed H"] is not None], resol)
+         filas_ab += fc
+         f1 += ff
+@@ -1091,6 +1137,8 @@
      cuartos = {}
      for k, v in leer_cuartos(P("ALTURAS_CUARTOS.csv")):
          cuartos[k] = v
++    cuartos_pdf = dict(cuartos)                           # verificación i #1: el PDF lista solo los cuartos impresos (sin alias)
 +    alias_cuartos(cuartos)                                # BE-CR47
      can = json.load(open(canon)) if isinstance(canon, str) else canon
      dh = ((can.get("constants") or {}).get("deck_heights") or {}).get("value")
      bo = {k: ftin(v) for k, v in dh.items()} if isinstance(dh, dict) else ftin(dh)    # v81cf90: por nivel {L1: 14'-0", ...}
-@@ -1104,7 +1130,13 @@
+@@ -1104,7 +1152,13 @@
      for r in leer_csv(P("ALTURAS_CUARTOS.csv")):
          if not RX_NO_CUARTO.search(str(r.get("Room") or "")) and ftin(r.get("C.H. (ft)")) is not None:
              det.setdefault(sala(r.get("Room")), []).append((str(r.get("Room") or "").lower(), ftin(r.get("C.H. (ft)"))))
@@ -169,9 +216,18 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/comparar_altur
      res["conteos"]["3b_head_type"] = (f"type heads 'N in above ceiling' en fichas.json: {sum(1 for v in hd.values() if v[0] == 'above_ceiling')}; "
                                       f"walls regidos por el head: {sum(1 for w in ws if str(w['fuente']).startswith('type head'))}")
      n3, f3 = reglas_fisicas(ws, cuartos, bo, demo_de_canon(can), det)
+@@ -1124,7 +1178,7 @@
+     pdf_rev = os.path.join(entrega, "Planos marcados", "ALTURAS_REVISADAS.pdf")
+     hs = sorted({round(ftin(r["Printed H"]), 3) for r in final})
+     if construir:
+-        paginas = alturas_revisadas(final, entrega, pdf_rev, bo, cuartos)
++        paginas = alturas_revisadas(final, entrega, pdf_rev, bo, cuartos_pdf)
+         json.dump({str(k): v for k, v in paginas.items()}, open(P("ALTURAS_REVISADAS_PAGINAS.json"), "w"), indent=1)
+         if markups_pdf:
+             capa_colores(markups_pdf, {r["Wall ID"]: round(ftin(r["Printed H"]), 3) for r in final}, markups_pdf + ".tmp.pdf")
 diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/test_comparar_alturas.py v138i/take-off-metal-frame-drywall/tools/test_comparar_alturas.py
 --- v138h/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-13 22:29:55.881845243 +0000
-+++ v138i/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-13 22:32:23.492611830 +0000
++++ v138i/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-13 22:37:10.456513813 +0000
 @@ -234,7 +234,9 @@
                                mk("F", "FI.2-0", 9.2, height_source="to structure", top_track_kind="slip"),
                                mk("G", "fw.2-1", 9.896), mk("H", "FW.2-0", 9.896, loc="x | faces: 299 storage"),
@@ -226,7 +282,7 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/test_comparar_
          det = {k: sorted(v) for k, v in det.items()}
          wsj = CA.walls_de_canon({"existing_walls": ws}, hd)
          n, f = CA.reglas_fisicas(wsj, {}, {"L2": 20.0, "L3": 30.0}, (), det)
-@@ -295,3 +300,32 @@
+@@ -295,3 +300,35 @@
  if __name__ == "__main__":
      test_be_cr46_head_del_type()
      print("test_be_cr46 OK")
@@ -254,6 +310,9 @@ diff -ruN -x __pycache__ v138h/take-off-metal-frame-drywall/tools/test_comparar_
 +    assert [x for x in f if "UNTYPED-L2-08" in x] == [], f                 # el error original (v81cf138d: 'por debajo del cielo 9.240')
 +    assert [x for x in f if "W-ROOM" in x], f                              # la cara de la habitación sigue contra 9.2396
 +    assert CA.alias_cuartos({"113": 9.0}) == {"113": 9.0, "113-bath": 9.0}  # CSV sin fila propia del baño
++    assert CA.sala("Women 920 toilets") == "920-bath" and CA.sala("Men's Locker Room 928 (passage to shower / restroom)") == "928"   # verif. i #3
++    a, b = CA.llaves_ab([("913-bath", 8.0)], [("913", 8.0)])
++    assert a == [("913", 8.0)] and b == [("913", 8.0)], (a, b)              # verif. i #2: A 'Restroom 913' / B '913' = el mismo cuarto
 +
 +
 +if __name__ == "__main__":
