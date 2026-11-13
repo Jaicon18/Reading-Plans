@@ -3514,7 +3514,7 @@ def test_u199_rated_y_excluded():
     assert any("Z9-ST" in f and "rating" in f for f in CE.rated_fallas(can)[0])
     can["walls"][0]["rating_hr"] = 2
     assert CE.rated_fallas(can)[0] == []
-    can["u199"]["rated_lines"] = [{"sheet": "Z9.1", "rating_hr": 2, "x0": 50, "y0": 400, "x1": 250, "y1": 400}]
+    can["u199"]["rated_lines"] = [{"sheet": "Z9.1", "rating_hr": 2, "x0": 50, "y0": 400, "x1": 250, "y1": 400, "nhoja": "1/G9.0"}]
     assert any("(6) línea rated" in f for f in CE.rated_fallas(can)[0])
     can["walls"][0]["band"] = {"sheet": "Z9.1", "ori": "H", "c0": 397, "c1": 403, "lo": 40, "hi": 260}
     assert CE.rated_fallas(can)[0] == []
@@ -3702,3 +3702,59 @@ def test_u199_casos_reales_replica():
 
 
 test_u199_casos_reales_replica()
+
+
+def test_alternate_impreso_sin_rfi():
+    """COORDINACIÓN 05:51 (caso CR: alternate impreso 'TF-1 ALT' en una hoja de interiores; ids sintéticos): un alternate IMPRESO en planos
+    o specs no lleva RFI: 'impreso' con la hoja o la sección y la razón la cita. Sin RFI y sin 'impreso' = FAIL; n entero, razón y
+    cantidades siguen obligatorios."""
+    import plantilla_excel as P
+    q = [{"material": "3-5/8\" stud 20 GA", "qty": 12.0, "unit": "LF", "op": "3 ft x 4 studs"}]
+    aa = {"n": 2, "texto": "TF-9 ALT finish at stair", "impreso": "X9.19", "cantidades": q,
+          "razon": "the plans print 'TF-9 ALT' on X9.19 as an alternate finish"}
+    assert P.add_alternates_err({"add_alternates": [aa]}) == [], P.add_alternates_err({"add_alternates": [aa]})
+    sec = dict(aa, impreso="SECTION 09 21 16", razon="specs list it as an alternate in 09 21 16 2.3")
+    assert P.add_alternates_err({"add_alternates": [sec]}) == []
+    sin = dict(aa); sin.pop("impreso")
+    assert any("rfi" in e for e in P.add_alternates_err({"add_alternates": [sin]}))          # sin RFI ni impreso = FAIL
+    assert any("razon" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, razon="printed alternate")]}))
+    assert any("'n'" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, n="dos")]}))
+    assert any("cantidades" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, cantidades=[])]}))
+    can = {"add_alternates": [aa]}
+    al = P.alcances_add_alternates(can)
+    sc = [(a["id"], a["nombre"], "ALTERNATE (ADD) - NOT IN BASE BID", a["nota"]) for a in al]
+    prop = ["BASE BID TOTAL", "ALTERNATE #2 (ADD): TF-9 ALT", "REASON: the plans print 'TF-9 ALT' on X9.19 as an alternate finish"]
+    assert CE.alternates_fallas(can, sc, ["5/8\" board"], prop) == [], CE.alternates_fallas(can, sc, ["5/8\" board"], prop)
+    ev = CE.alternates_fallas({"add_alternates": [sin]}, sc, ["5/8\" board"], prop)
+    assert ev and "rfi" in ev[0], ev
+    print("test_alternate_impreso_sin_rfi OK")
+
+
+test_alternate_impreso_sin_rfi()
+
+
+def test_u199_rated_opcion_b_replica_rfi():
+    """U-199 (6) opción (b) (COORDINACIÓN 05:57), réplica sintética del caso real (muro rated de la salida de una escalera que el canon
+    no tenía): el lector carga canon.u199.rated_lines solo para NUESTROS muros, cada línea con su N/HOJA; esquema CR (muros en
+    existing_walls con 'sheet' + 'path'). Sin el muro = FAIL; con el muro de rating 2 sobre la línea = PASS; con rating menor = FAIL;
+    línea sin N/HOJA = FAIL; set con code plan rated y 0 rated_lines = FAIL (U-137)."""
+    ln = {"id": "ST9-EXIT", "sheet": "Z9.01", "rating_hr": 2, "x0": 900.0, "y0": 700.0, "x1": 937.0, "y1": 700.0, "nhoja": "1/Z9.00"}
+    viejo = {"walls": [], "existing_walls": [{"id": "Z9.6.3-L1-03 A", "type_id": "Z9.6.3-2", "sheet": "Z9.01",
+                                              "path": [[600.0, 700.0], [880.0, 700.0]]}], "u199": {"rated_lines": [ln]}}
+    fs, n = CE.rated_fallas(viejo)
+    assert n == 1 and fs and "sin muro contado" in fs[0], fs
+    nuevo = json.loads(json.dumps(viejo))
+    nuevo["existing_walls"].append({"id": "Z9.6.3-L1-04 A", "type_id": "Z9.6.3-2", "sheet": "Z9.01", "path": [[900.0, 700.15], [937.0, 700.15]]})
+    assert CE.rated_fallas(nuevo)[0] == [], CE.rated_fallas(nuevo)
+    bajo = json.loads(json.dumps(nuevo))
+    bajo["existing_walls"][1]["type_id"] = "Z9.6.3-0"
+    assert CE.rated_fallas(bajo)[0]                                                        # rating menor que la línea = FAIL
+    sin_nh = json.loads(json.dumps(nuevo))
+    del sin_nh["u199"]["rated_lines"][0]["nhoja"]
+    assert any("N/HOJA" in f for f in CE.rated_fallas(sin_nh)[0])
+    vacio = {"walls": [{"id": "Z9-A", "faces": [{"room": "ROOM 905"}]}], "u199": {"rooms": []}}
+    assert any("(6)" in f and "0 evaluados" in f for f in CE.u199_fallas(vacio, {"G9.0": "CODE PLAN ... 2 HR RATED"})["6"][0])
+    print("test_u199_rated_opcion_b_replica_rfi OK")
+
+
+test_u199_rated_opcion_b_replica_rfi()

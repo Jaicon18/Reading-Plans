@@ -1,0 +1,1186 @@
+diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:03:41.181928322 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:03:41.205062332 +0000
+@@ -8779,12 +8779,13 @@
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"esta bien si lo pusiste cono alternate, pero tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa\")",
+    "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta",
++   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta ; v81cf135 (COORDINACIÓN 05:51): 'rfi' opcional si el alternate está IMPRESO en planos / specs ('impreso' = hoja o sección; la razón la cita)",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::alternates_fallas",
+     "take-off:tools/compuerta_entrega.py::ce_alternates",
+     "take-off:tools/plantilla_excel.py::razon_alternate",
+-    "take-off:tools/plantilla_excel.py::add_alternates_err"
++    "take-off:tools/plantilla_excel.py::add_alternates_err",
++    "take-off:tools/compuerta_entrega.py::alternate_impreso"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8811,10 +8812,23 @@
+   {
+    "id": "U-199",
+    "origen": "ORDENES_DEL_USUARIO.md / REGLAS_USUARIO_CLAUDE.md (usuario 13-nov: 'esto debe de estar blindado al 100000%')",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "REGLA INVIOLABLE: 13 controles contra elementos omitidos (cierre por cuarto, pisos gemelos, puertas, keynotes, área de cielo +-5 % por capa + mapa de cobertura con muros diagonales / cortos, rated lines, secciones, estructural / MEP, finish schedule, unidades típicas, specs locations, tercer lector, re-verificación de EXCLUDED); hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL",
+-   "motivo": "el código (CE_U199_OMITIDOS + CE_COBERTURA_DIAG + tests) está en v81cf135 APARTADA (orden COORDINACIÓN 05:22: 'U-199 va en v135, apartada'); v81cf134 se publica antes por orden 05:22 'publica v134 YA'. Pasa a 'programa' al publicar v81cf135."
++   "texto_corto": "REGLA INVIOLABLE: 13 controles contra elementos omitidos (CE_U199_OMITIDOS: (1) cierre por cuarto, (2) pisos gemelos, (3) puertas, (4) keynotes, (5) área de cielo +-5 % por capa, (6) rated lines, (7) secciones, (8) estructural / MEP, (9) finish schedule, (10) unidades típicas, (11) specs locations, (12) tercer lector, (13) re-verificación de EXCLUDED) + (5b) CE_COBERTURA_DIAG muros diagonales y cortos (< 2 ft) del mapa de cobertura; hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL (entregas anteriores a v81cf135: AMBER)",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_u199_omitidos",
++    "take-off:tools/compuerta_entrega.py::u199_fallas",
++    "take-off:tools/compuerta_entrega.py::cierre_cuartos_fallas",
++    "take-off:tools/compuerta_entrega.py::pisos_gemelos_fallas",
++    "take-off:tools/compuerta_entrega.py::rated_fallas",
++    "take-off:tools/compuerta_entrega.py::reverificacion_excluded_fallas",
++    "take-off:tools/compuerta_entrega.py::ce_cobertura_diag",
++    "take-off:tools/compuerta_entrega.py::cob_diag_cortos"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_u199_cierre_por_cuarto_mutacion"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
+--- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:03:41.203021154 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:03:41.210030345 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf134** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf135** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -374,11 +374,26 @@
+   VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si el VERDE es anterior a la publicación de la versión
+   siguiente (FECHAS_PUBLICACION, hora real del commit), la subida es posterior al VERDE y los hashes de Drive coinciden (b', 02:03). La re-corrida por
+   cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
++- **U-199 ⭐ REGLA INVIOLABLE (usuario 13-nov: "esto debe de estar blindado al 100000%"; v81cf135):** 13 controles contra
++  elementos omitidos en CE_U199_OMITIDOS (canon.u199: rooms [{room, sheet, polygon, area_sf, openings}], rated_lines, secciones,
++  keynotes, estructural_mep, finish_schedule, unidades_tipicas, specs_locations, lector3, disposiciones [{control, id, motivo, nhoja}];
++  excluded_walls[].reverificado {revisor, decision, nhoja}): (1) cierre por cuarto (perímetro cubierto por caras contadas / exterior /
++  EXCLUDED / vanos; quitar una cara = FAIL), (2) pisos gemelos (pisos típicos por número + nombre de cuarto; muro sin gemelo), (3) puertas
++  en muro contado (wall o sheet + center_pt), (4) keynotes con gypsum / stud / furring / soffit / shaft / patch, (5) área de cielo +-5 %
++  por capa, (6) rated lines (opción (b), COORDINACIÓN 05:57: el lector carga canon.u199.rated_lines SOLO de nuestros muros de framing,
++  cada una con su N/HOJA; línea sin muro contado de ese rating por band o path = FAIL; code plan rated y 0 líneas = FAIL; el extractor
++  raster del code plan es ayuda, no FAIL), (7) secciones / elevaciones, (8) estructural / MEP, (9) finish
++  schedule, (10) unidades típicas, (11) specs 'LOCATIONS', (12) tercer lector ciego en >= 10 % de hojas, (13) re-verificación de cada
++  EXCLUDED (motivo de interior sobre wall exterior: la cara exterior sigue en alcance). (5b) CE_COBERTURA_DIAG: muros diagonales y cortos
++  (< 2 ft) en el mapa de cobertura (Auditoria/COBERTURA_DISPOSICION.csv tipo muro_diag / muro_corto). Todos leen muros_canon (BE-XF16).
++  Hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL; entregas anteriores a v81cf135: AMBER.
+ - **U-198 (usuario 13-nov: "tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa"; v81cf134):** todo
+   ALTERNATE (U-195) lleva su razón para el cliente, en inglés: canon add_alternates[].razon (qué se ve en los planos con su N/HOJA y qué
+   falta) -> plantilla_excel.razon_alternate = 'REASON: <razon>; excluded from the base bid and priced as an add alternate until
+   clarified.', igual en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW. CE_ALTERNATES: alternate sin 'REASON:' con su
+   N/HOJA en cualquiera de esos lugares = FAIL.
++  v81cf135 (COORDINACIÓN 05:51, caso CR 'TF-1 ALT'): un alternate IMPRESO en planos o specs no lleva 'rfi': 'impreso' trae la hoja o la
++  sección (A7.19 / 09 21 16) y la razón la cita; n entero, razón y cantidades siguen obligatorios (test_alternate_impreso_sin_rfi).
+ - **U-196 (usuario 13-nov: "mapa de cobertura, ponle ese nombre y haz una descripcion para saber para que sirve cada cosa"; v81cf133):**
+   (1) el mapa de cobertura se llama 'Planos marcados/MAPA DE COBERTURA - IMAGE ONLY.pdf' (el nombre viejo 'COBERTURA - IMAGE ONLY.pdf' se
+   sigue aceptando en entregas anteriores); (2) `compuerta_entrega.py leeme <carpeta de entrega>` escribe en la raíz
+diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:03:41.197504957 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:03:41.209284358 +0000
+@@ -369,6 +369,16 @@
+     return str(x) if x is not None else ""
+ 
+ 
++RX_ALT_CITA = re.compile(r"\b(?:\d{1,2}[A-Z]?/)?[A-Z]{1,2}-?\d{1,3}\.\d{1,2}\b|\b(?:SECTION\s+)?0[5-9]\s?\d{2}\s?\d{2}\b")
++
++
++def alternate_impreso(x):
++    """COORDINACIÓN 05:51 (CR AA-1 'TF-1 ALT' en A7.19): un alternate IMPRESO en los planos o specs no necesita RFI: 'impreso' trae la
++    hoja o la sección (A7.19 / 09 21 16) y la razón la cita. -> la cita, o ''."""
++    imp = str(x.get("impreso") or "").strip()
++    return imp if imp and RX_ALT_CITA.search(imp) else ""
++
++
+ def _razon_en(txt, nh):
+     """U-198: 'REASON: …' con el N/HOJA de la razón dentro de los 400 caracteres siguientes."""
+     return bool(re.search(r"(?is)REASON\s*:.{0,400}?" + re.escape(nh), str(txt or "")))
+@@ -389,9 +399,10 @@
+         except (TypeError, ValueError):
+             ev.append(f"add_alternates: entrada sin 'n' entero ({str(x)[:60]}) (U-195)")
+     for n, x in sorted(aa.items()):
+-        if not x.get("rfi") or not x.get("cantidades"):
+-            ev.append(f"add_alternates #{n}: falta 'rfi' o 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada) (U-195)")
+-        m = RX_NH_VALIDA.search(str(x.get("razon") or ""))
++        impreso = alternate_impreso(x)
++        if not (x.get("rfi") or impreso) or not x.get("cantidades"):
++            ev.append(f"add_alternates #{n}: falta 'rfi' (o 'impreso' con la hoja / sección del alternate) o 'cantidades' [DERIVED] (U-195)")
++        m = RX_NH_VALIDA.search(str(x.get("razon") or "")) or (impreso and RX_ALT_CITA.search(str(x.get("razon") or "")))
+         if not m:
+             ev.append(f"add_alternates #{n}: sin 'razon' con N/HOJA (U-198: todo ALTERNATE lleva 'REASON: …' con su N/HOJA)")
+             continue
+@@ -416,6 +427,726 @@
+     return ev
+ 
+ 
++# ===================================================================================================== U-199 BLINDAJE CONTRA OMITIDOS
++# U-199 (usuario 13-nov, REGLA INVIOLABLE: "que otras sugieres, esto debe de estar blindado al 100000%" / "si, pero dime que mas"): 13
++# controles por programa contra elementos omitidos. Datos: canon["u199"] (lo llenan los lectores / el revisor independiente con N/HOJA) +
++# canon walls / excluded_walls / ceilings / opening_schedule + set_texto. Un hallazgo sin disposición (canon u199.disposiciones
++# [{control, id, motivo, nhoja}]) = FAIL; 0 elementos evaluados donde el plano los tiene = FAIL (U-137).
++RX_PISO = re.compile(r"(?i)(?:^|[-_ ])L(\d{1,2})(?:[-_ ]|$)")
++RX_CUARTO_NUM = re.compile(r"(?<![\w.'/-])(\d{3,4})[A-Z]?(?![\w'\"/-])")
++RX_RATED_ROOM = re.compile(r"(?i)\b(?:stairs?|stairway|exit\s+stair|elev(?:ator)?|shafts?|chase)\b")
++RX_INTERIOR_MOTIVO = re.compile(r"(?i)\b(?:interior\s+of|inside|tenant|future\s+tenant|not\s+in\s+scope\s+of\s+this\s+permit|interior\s+face)\b")
++RX_TIPO_EXTERIOR = re.compile(r"(?i)^(?:XW|EW|EXT|EX)[\w.]*")
++U199_KW = re.compile(r"(?i)\b(?:gyp(?:sum)?|gwb|gyp\.?\s*bd|drywall|metal\s+studs?|stud\s+wall|furring|furr(?:ed)?\s+(?:wall|down|out)|soffits?|bulkheads?|"
++                     r"shaft\s*walls?|chases?|c-?h\s+studs?|j-?runner|resilient\s+channel|patch(?:\s*(?:&|and)\s*repair)?\s+(?:the\s+)?(?:existing\s+)?"
++                     r"(?:gyp|wall|walls|drywall|board|partition|ceiling))\b")   # v135: 'patch' / 'framing' sueltos daban falsos (XF A1.0 / A2.0)
++U199_TOL_AREA = 0.05
++
++
++def _u199(canon):
++    return (canon or {}).get("u199") or {}
++
++
++def _caras(w):
++    """caras del muro como lista de dicts (CR guarda 'faces' como número: 2)."""
++    f = (w or {}).get("faces")
++    return [x for x in f if isinstance(x, dict)] if isinstance(f, list) else []
++
++
++def u199_dispuesto(canon, control, hid):
++    """disposición del revisor para el hallazgo `hid` del control: motivo + N/HOJA."""
++    for d in _u199(canon).get("disposiciones") or []:
++        if str(d.get("control")) == str(control) and norm_txt(d.get("id")) == norm_txt(hid) and \
++                str(d.get("motivo") or "").strip() and RX_NH_VALIDA.search(str(d.get("nhoja") or d.get("motivo") or "")):
++            return True
++    return False
++
++
++def _piso(w):
++    f = str(w.get("floor") or w.get("level") or "")
++    m = re.fullmatch(r"(?i)L?(\d{1,2})", f.strip()) if f else None
++    if m:
++        return int(m.group(1))
++    m = RX_PISO.search(str(w.get("id") or ""))
++    return int(m.group(1)) if m else None
++
++
++def _cuartos_de(w):
++    out = set()
++    for fc in _caras(w):
++        out |= {m.group(1) for m in RX_CUARTO_NUM.finditer(str(fc.get("room") or ""))}
++    if not out:
++        out = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(w.get("location") or ""))}
++    return out
++
++
++def _sufijo(cuarto):
++    return cuarto[-2:] if len(cuarto) >= 3 else cuarto
++
++
++U199_NO_NOMBRE = {"FACES", "FACE", "WALL", "WALLS", "SIDE", "NORTH", "SOUTH", "EAST", "WEST", "AND", "AT", "OF", "THE", "BETWEEN",
++                  "DOOR", "STUB", "SEE", "NOTE", "INSIDE", "END", "TYP", "TYPICAL", "FLOOR", "LEVEL"}
++
++
++def _texto_cuartos(w):
++    return " ; ".join([str(f.get("room") or "") for f in _caras(w)] + [str(w.get("location") or "")])
++
++
++def _sufijos_muro(w):
++    """sufijos (2 últimos dígitos) de los cuartos a los que da el muro: caras con room, o la parte 'faces:' del location."""
++    cs = {m.group(1) for f in _caras(w) for m in RX_CUARTO_NUM.finditer(str(f.get("room") or ""))}
++    if not cs:
++        t = str(w.get("location") or "")
++        m = re.search(r"(?i)faces?:(.*)$", t)
++        cs = {x.group(1) for x in RX_CUARTO_NUM.finditer(m.group(1) if m else t)}
++    return frozenset(_sufijo(c) for c in cs)
++
++
++def _nombres_piso(w):
++    """(sufijo, nombre) de cada cuarto nombrado junto a su número ('222 LINEN', 'linen 222'): decide si dos pisos son típicos."""
++    out = set()
++    for ch in re.split(r"[;|,/]", _texto_cuartos(w)):
++        ws = [x.upper()[:5] for x in re.findall(r"[A-Za-z][A-Za-z&]{2,}", ch) if x.upper() not in U199_NO_NOMBRE and not RX_PISO.match(" " + x)]
++        if ws:
++            out |= {(_sufijo(m.group(1)), ws[0]) for m in RX_CUARTO_NUM.finditer(ch)}
++    return out
++
++
++def pisos_gemelos_fallas(canon, min_comun=0.6):
++    """U-199 (2) PISOS GEMELOS: dos pisos con >= 60 % de cuartos gemelos (mismo sufijo de número Y mismo nombre: '222 LINEN' / '322
++    LINEN') son pisos típicos; cada muro de uno (type + sufijos de los cuartos a los que da) tiene su gemelo en el otro: un muro del
++    mismo type cuyos sufijos son iguales, o uno contiene al otro (tramos partidos A / B), o motivo impreso (disposición). Lee TODOS los
++    muros (muros_canon: walls + existing_walls, BE-XF16). -> (fallas, n)"""
++    por, nom = {}, {}
++    for w in muros_canon(canon or {}):
++        p = _piso(w)
++        if p is None:
++            continue
++        nom.setdefault(p, set()).update(_nombres_piso(w))
++        cs = _sufijos_muro(w)
++        if cs:
++            por.setdefault(p, []).append((str(w.get("type_id") or w.get("tag") or "").split("-")[0], cs, str(w.get("id"))))
++    cuartos = {p: set().union(*[c for _t, c, _i in ws]) for p, ws in por.items()}
++    ev, n = [], 0
++    pisos = sorted(por)
++    for i, a in enumerate(pisos):
++        for b in pisos[i + 1:]:
++            na, nb = nom.get(a, set()), nom.get(b, set())
++            if not na or not nb or len(na & nb) / min(len(na), len(nb)) < min_comun:
++                continue
++            for x, y in ((a, b), (b, a)):
++                for t, cs, wid in por[x]:
++                    if not cs <= cuartos[y]:
++                        continue                         # el cuarto no existe en el otro piso: no es gemelo
++                    n += 1
++                    if any(t2 == t and (cs <= c2 or c2 <= cs) for t2, c2, _i in por[y]):
++                        continue
++                    hid = f"L{y}:{t}:{'+'.join(sorted(cs))}"
++                    if u199_dispuesto(canon, 2, hid) or u199_dispuesto(canon, 2, wid):
++                        continue
++                    ev.append(f"(2) {wid} ({t}, cuartos ..{'/..'.join(sorted(cs))}) en L{x} sin gemelo en L{y} (piso típico) ni motivo "
++                              f"impreso (disposición '{hid}' o '{wid}') — U-199")
++    return ev, n
++
++
++def reverificacion_excluded_fallas(canon):
++    """U-199 (13) RE-VERIFICACIÓN DE CADA EXCLUDED: toda exclusión trae 'reverificado' {revisor, decision, nhoja} de un revisor
++    independiente; una exclusión con motivo de INTERIOR ('interior of', 'tenant', 'not in scope of this permit') sobre un wall de type
++    exterior (XW / EW / EXT o wall exterior del canon) excluye también su cara exterior = FAIL salvo que declare 'faces' solo interiores."""
++    todos = muros_canon(canon or {})
++    ext = {norm_txt(w.get("id")) for w in todos if isinstance(w, dict) and w.get("exterior")}
++    contados = {norm_txt(w.get("id")) for w in todos}
++    ext_contados = {norm_txt(w.get("id")) for w in todos if re.search(r"(?i)\bexterior\b|sheathing|\boutside\b",
++                                                                    str(w.get("location") or "") + " " + str(w.get("board") or ""))}
++    ev, n = [], 0
++    for e in (canon or {}).get("excluded_walls") or []:
++        if not isinstance(e, dict):
++            continue
++        n += 1
++        eid = str(e.get("id"))
++        rv = e.get("reverificado") or {}
++        if not (str(rv.get("revisor") or "").strip() and str(rv.get("decision") or "").strip() and RX_NH_VALIDA.search(str(rv.get("nhoja") or ""))) \
++                and not u199_dispuesto(canon, 13, eid):
++            ev.append(f"(13) {eid}: EXCLUDED sin re-verificación independiente ('reverificado' {{revisor, decision, nhoja}}) — U-199")
++        motivo = str(e.get("reason") or e.get("why") or "")
++        tipo = str(e.get("type_id") or e.get("tag") or eid)
++        if RX_INTERIOR_MOTIVO.search(motivo) and (RX_TIPO_EXTERIOR.match(tipo) or norm_txt(eid) in ext) and \
++                not (isinstance(e.get("faces"), list) and e.get("faces") and all(str(f).upper() not in ("B", "EXT", "EXTERIOR") for f in e.get("faces"))) and \
++                not any(x.startswith(norm_txt(re.sub(r"\s+[A-Z]$", "", eid)) + " ") for x in ext_contados) and \
++                not any(norm_txt(m.group(1)) in contados for m in re.finditer(r"(?i)counted\s+as\s+([\w.-]+(?:\s+[A-Z])?)\b", motivo)) and \
++                not u199_dispuesto(canon, 13, eid + ":exterior"):
++            ev.append(f"(13) {eid}: excluido con motivo de INTERIOR ('{motivo[:60]}') pero es un wall de type exterior: su cara exterior "
++                      "(sheathing / exterior board) sigue en el alcance; declarar 'faces' excluidas o cargar la cara — U-199")
++    return ev, n
++
++
++def _muro_en_punto(canon, hoja, pt, tol_pt=12.0):
++    """True si algún muro (contado, existente o excluido) de esa hoja pasa a <= tol_pt del punto: band H / V o path."""
++    try:
++        x, y = float(pt[0]), float(pt[1])
++    except (TypeError, ValueError, IndexError):
++        return False
++    todos = muros_canon(canon or {}) + [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict)]
++    for w in todos:
++        b = w.get("band") or {}
++        if b.get("ori") in ("H", "V") and str(b.get("sheet") or w.get("sheet")) == str(hoja):
++            c0, c1 = sorted((float(b["c0"]), float(b["c1"])))
++            lo, hi = sorted((float(b["lo"]), float(b["hi"])))
++            along, cross = (x, y) if b["ori"] == "H" else (y, x)
++            if c0 - tol_pt <= cross <= c1 + tol_pt and lo - tol_pt <= along <= hi + tol_pt:
++                return True
++        if str(w.get("sheet")) == str(hoja):
++            for p in (w.get("paths") or ([w["path"]] if w.get("path") else [])):
++                for a_, b_ in zip(p, p[1:]):
++                    if _dist_seg(x, y, (a_[0], a_[1], b_[0], b_[1])) <= tol_pt:
++                        return True
++    return False
++
++
++def puertas_fallas(canon, set_hojas=None):
++    """U-199 (3) PUERTAS: toda puerta del opening_schedule está en un muro CONTADO (walls) o en uno excluido / existente con motivo; un
++    schedule de puertas impreso con 0 puertas evaluadas y sin items_none_reason con hoja = FAIL."""
++    os_ = (canon or {}).get("opening_schedule") or {}
++    items = os_.get("items") if isinstance(os_, dict) else os_
++    ids = {norm_txt(w.get("id")) for w in muros_canon(canon or {}) if isinstance(w, dict)}
++    otros = {norm_txt(e.get("id")) for k in ("excluded_walls", "existing_walls") for e in (canon or {}).get(k) or [] if isinstance(e, dict)}
++    ev, n = [], 0
++    hay = any(re.search(r"(?i)\bDOOR\s+SCHEDULE\b", str(t)) for t in (set_hojas or {}).values())
++    for it in items or []:
++        if not isinstance(it, dict) or str(it.get("kind") or "door").lower() not in ("door", "puerta"):
++            continue
++        n += 1
++        w = norm_txt(it.get("wall"))
++        if w in ids or (w in otros and str(it.get("wall_reason") or it.get("source") or "").strip()):
++            continue
++        if not it.get("wall") and it.get("center_pt") and _muro_en_punto(canon, it.get("sheet"), it["center_pt"]):
++            continue                                    # sin 'wall': la puerta se ubica por geometría (GK: sheet + center_pt)
++        if not u199_dispuesto(canon, 3, it.get("ref")):
++            ev.append(f"(3) {it.get('ref')}: la puerta no está en un muro contado (wall '{it.get('wall')}')" +
++                      ("" if it.get("wall") or it.get("center_pt") else ": sin 'wall' ni 'center_pt' + 'sheet' no se puede verificar (U-137)") +
++                      " — U-199")
++    if hay and not n and not re.search(r"[A-Z]{1,2}-?\d{1,2}\.\d{1,2}|[A-Z]\d\.\d", str((os_ or {}).get("items_none_reason") if isinstance(os_, dict) else "")):
++        ev.append("(3) el set imprime un DOOR SCHEDULE y el canon evaluó 0 puertas sin items_none_reason con hoja (U-137) — U-199")
++    return ev, n
++
++
++def _ref_existe(canon, ref):
++    import chequeos_biblioteca as _CB
++    r = str(ref or "").strip()
++    if not r:
++        return False
++    if any(norm_txt(w.get("id")) == norm_txt(r) for w in muros_canon(canon or {}) if isinstance(w, dict)):
++        return True
++    return _CB._cant_ref(canon or {}, r) > 0
++
++
++def _lista_fallas(canon, clave, control, nombre, req=True):
++    """renglones de canon.u199[clave]: cada uno con 'ref' existente en el canon (cantidad > 0) o 'excluido' con N/HOJA."""
++    xs = _u199(canon).get(clave)
++    ev, n = [], 0
++    if xs is None:
++        return ([f"({control}) canon.u199.{clave} no existe: el lector no registró los {nombre} (U-137) — U-199"] if req else []), 0
++    for x in xs:
++        n += 1
++        hid = str(x.get("id") or f"{x.get('sheet')}:{x.get('num') or x.get('texto', '')[:30]}")
++        if _ref_existe(canon, x.get("ref")) or RX_NH_VALIDA.search(str(x.get("excluido") or "")) or u199_dispuesto(canon, control, hid):
++            continue
++        ev.append(f"({control}) {nombre} {hid}: sin renglón cargado ('ref' que exista en el canon) ni exclusión con N/HOJA — U-199")
++    return ev, n
++
++
++def keynotes_fallas(canon, set_hojas):
++    """U-199 (4) KEYNOTES / NOTAS con gypsum / stud / furring / soffit / shaft / patch: cada una en canon.u199.keynotes con renglón o
++    exclusión; una keynote de hoja A / I con esas palabras que no está en la lista = FAIL."""
++    ev, n = _lista_fallas(canon, "keynotes", 4, "keynote", req=bool(_keynotes_set(set_hojas)))
++    regs = {(str(x.get("sheet")), str(x.get("num"))) for x in _u199(canon).get("keynotes") or []}
++    for h, num, txt in _keynotes_set(set_hojas):
++        if (h, num) not in regs and not u199_dispuesto(canon, 4, f"{h}:{num}"):
++            ev.append(f"(4) keynote {num} de {h} ('{txt[:60]}') con gypsum / stud / furring / soffit / shaft / patch sin registrar — U-199")
++    return ev, max(n, len(_keynotes_set(set_hojas)))
++
++
++def _keynotes_set(set_hojas):
++    """(hoja, número, texto) de las keynotes numeradas de hojas A / I bajo un título KEYNOTES que nombran gypsum / stud / furring / soffit
++    / shaft / patch (extractor de texto; los falsos se disponen)."""
++    out = []
++    for h, t in (set_hojas or {}).items():
++        if not re.match(r"(?i)^[AI]\d", str(h)) or not re.search(r"(?i)\bKEY\s*NOTES?\b", str(t)):
++            continue
++        sec = str(t)[re.search(r"(?i)\bKEY\s*NOTES?\b", str(t)).end():][:6000]
++        for m in re.finditer(r"(?m)^\s*(\d{1,2})[.)]?\s+(.{8,200})$", sec):
++            if U199_KW.search(m.group(2)):
++                out.append((str(h), m.group(1), m.group(2).strip()))
++    return out
++
++
++def area_cielo_fallas(canon, tol=U199_TOL_AREA):
++    """U-199 (5) ÁREA DE CIELO = área del cuarto +-5 % por capa: canon.u199.rooms [{room, area_sf}] contra la suma de canon.ceilings del
++    mismo cuarto y la misma capa (layer / system); fuera de tolerancia sin disposición = FAIL."""
++    rooms = _u199(canon).get("rooms") or []
++    ceil = [c for c in (canon or {}).get("ceilings") or [] if isinstance(c, dict)]
++    ev, n = [], 0
++    for r in rooms:
++        a = float(r.get("area_sf") or 0)
++        nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(r.get("room") or ""))}
++        if a <= 0 or not nums:
++            continue
++        capas = {}
++        for c in ceil:
++            if {m.group(1) for m in RX_CUARTO_NUM.finditer(str(c.get("room") or ""))} & nums:
++                capas.setdefault(str(c.get("layer") or c.get("system") or "1"), 0.0)
++                capas[str(c.get("layer") or c.get("system") or "1")] += float(c.get("area_sf") or 0)
++        for capa, tot in capas.items():
++            n += 1
++            if abs(tot - a) > tol * a and not u199_dispuesto(canon, 5, f"{r.get('room')}:{capa}"):
++                ev.append(f"(5) {r.get('room')}: cielo '{capa}' {tot:.1f} SF vs cuarto {a:.1f} SF ({(tot - a) / a * 100:+.1f} % > 5 %) — U-199")
++    if not rooms and ceil:
++        ev.append("(5) canon.u199.rooms vacío con cielos cargados: el área de cada cuarto no se cruzó (U-137) — U-199")
++    return ev, n
++
++
++def _rating(w):
++    for k in ("rating_hr", "rating", "fire_rating"):
++        try:
++            if w.get(k) not in (None, ""):
++                return float(re.sub(r"[^\d.]", "", str(w.get(k))) or 0)
++        except ValueError:
++            pass
++    m = re.search(r"-(\d)(?:\b|$)", str(w.get("type_id") or w.get("tag") or ""))
++    return float(m.group(1)) if m else 0.0
++
++
++def rated_sin_muro(ln, walls, tol_pt=12.0, paso_pt=4.0):
++    """pt de la línea rated (x0, y0, x1, y1 en la hoja ln['sheet']) que NO quedan a <= tol_pt de un muro contado con rating >= el de la
++    línea: band H / V en esa hoja o path (esquema CR: 'sheet' + 'path' / 'paths')."""
++    try:
++        x0, y0, x1, y1 = (float(ln.get(k) or 0) for k in ("x0", "y0", "x1", "y1"))
++        rh = float(ln.get("rating_hr") or 0)
++    except (TypeError, ValueError):
++        return float("inf")
++    segs = []
++    for w in walls:
++        if _rating(w) < rh:
++            continue
++        b = w.get("band") or {}
++        if b.get("ori") in ("H", "V") and str(b.get("sheet") or w.get("sheet")) == str(ln.get("sheet")):
++            c = (float(b["c0"]) + float(b["c1"])) / 2
++            lo, hi = sorted((float(b["lo"]), float(b["hi"])))
++            segs.append((lo, c, hi, c) if b["ori"] == "H" else (c, lo, c, hi))
++        if str(w.get("sheet")) == str(ln.get("sheet")):
++            for p in (w.get("paths") or ([w["path"]] if w.get("path") else [])):
++                segs += [(a[0], a[1], b_[0], b_[1]) for a, b_ in zip(p, p[1:])]
++    L = math.hypot(x1 - x0, y1 - y0)
++    k = max(1, int(L // paso_pt))
++    sin = sum(1 for i in range(k + 1) if not any(_dist_seg(x0 + (x1 - x0) * i / k, y0 + (y1 - y0) * i / k, sg) <= tol_pt for sg in segs))
++    return sin * L / (k + 1)
++
++
++def rated_fallas(canon):
++    """U-199 (6) RATED LINES: (a) cada línea rated del code plan (canon.u199.rated_lines [{sheet, rating_hr, x0, y0, x1, y1, floor}])
++    está cubierta por un muro CONTADO con band en esa hoja y rating >= el de la línea; (b) todo cuarto de escalera / elevador / shaft
++    (canon.u199.rooms) tiene sus muros contados rated (>= 1 HR). -> (fallas, n)"""
++    walls = [w for w in muros_canon(canon or {}) if isinstance(w, dict)]
++    ev, n = [], 0
++    for ln in _u199(canon).get("rated_lines") or []:
++        n += 1
++        hid = f"{ln.get('sheet')}:{ln.get('id') or round(float(ln.get('x0') or 0))}"
++        if not RX_NH_VALIDA.search(str(ln.get("nhoja") or ln.get("source") or "")):
++            ev.append(f"(6) línea rated {hid} sin N/HOJA del code plan (opción (b): el lector carga solo las líneas de NUESTROS muros, "
++                      "cada una con su N/HOJA) — U-199")
++        falta = rated_sin_muro(ln, walls)
++        if falta > 12 and not u199_dispuesto(canon, 6, hid):
++            ev.append(f"(6) línea rated {ln.get('rating_hr')} HR de {ln.get('sheet')} ({hid}): {falta:.0f} pt sin muro contado con ese "
++                      "rating — U-199")
++    for r in _u199(canon).get("rooms") or []:
++        if not RX_RATED_ROOM.search(str(r.get("room") or "")):
++            continue
++        nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(r.get("room") or ""))}
++        nombre = norm_txt(re.sub(r"\d+", "", str(r.get("room") or "")))
++        ws = [w for w in walls if (_cuartos_de(w) & nums) or (nombre and nombre in norm_txt(" ".join(str(f.get("room") or "") for f in _caras(w))))]
++        n += 1
++        if not ws and not u199_dispuesto(canon, 6, r.get("room")):
++            ev.append(f"(6) {r.get('room')}: escalera / elevador / shaft sin ningún muro contado en su perímetro (rated) — U-199")
++        for w in ws:
++            if _rating(w) < 1 and not u199_dispuesto(canon, 6, w.get("id")):
++                ev.append(f"(6) {w.get('id')}: muro de {r.get('room')} sin rating (>= 1 HR) — U-199")
++    return ev, n
++
++
++def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
++    """U-199 (1) CIERRE POR CUARTO: el perímetro de cada cuarto (canon.u199.rooms [{room, sheet, polygon [[x, y], ...]}] en pt de la
++    planta) está cubierto por la band de un muro CONTADO con una cara de ese cuarto (o exterior), por un muro EXCLUDED con band, o por un
++    vano (canon.u199.rooms[].openings [[x0, y0, x1, y1]]); un tramo sin cubrir > ~1 ft = cara faltante = FAIL. -> (fallas, n)"""
++    walls = [w for w in muros_canon(canon or {}) if isinstance(w, dict) and (w.get("band") or {}).get("ori") in ("H", "V")]
++    excl = [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict) and (e.get("band") or {}).get("ori") in ("H", "V")]
++    ev, n = [], 0
++
++    def cubre(b, x, y):
++        c0, c1 = sorted((float(b["c0"]), float(b["c1"])))
++        lo, hi = sorted((float(b["lo"]), float(b["hi"])))
++        along, cross = (x, y) if b["ori"] == "H" else (y, x)
++        return c0 - tol_pt <= cross <= c1 + tol_pt and lo - tol_pt <= along <= hi + tol_pt
++    for r in _u199(canon).get("rooms") or []:
++        poly = r.get("polygon") or []
++        if len(poly) < 3:
++            continue
++        n += 1
++        nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(r.get("room") or ""))}
++        nombre = norm_txt(re.sub(r"\d+", "", str(r.get("room") or ""))).strip()
++        mios = [w["band"] for w in walls if w["band"].get("sheet") == r.get("sheet") and (
++            (_cuartos_de(w) & nums) or w.get("exterior") or
++            (nombre and any(nombre in norm_txt(f.get("room") or "") for f in _caras(w))))]
++        mios += [e["band"] for e in excl if e["band"].get("sheet") == r.get("sheet")]
++        vanos = r.get("openings") or []
++        hueco, peor = 0.0, (0.0, None)
++        pts = list(poly) + [poly[0]]
++        for (xa, ya), (xb, yb) in zip(pts, pts[1:]):
++            L = math.hypot(xb - xa, yb - ya)
++            k = max(1, int(L // paso_pt))
++            for i in range(k + 1):
++                x, y = xa + (xb - xa) * i / k, ya + (yb - ya) * i / k
++                ok = any(cubre(b, x, y) for b in mios) or any(
++                    min(v[0], v[2]) - tol_pt <= x <= max(v[0], v[2]) + tol_pt and min(v[1], v[3]) - tol_pt <= y <= max(v[1], v[3]) + tol_pt for v in vanos)
++                hueco = 0.0 if ok else hueco + L / k
++                if hueco > peor[0]:
++                    peor = (hueco, (round(x, 1), round(y, 1)))
++        if peor[0] > hueco_max_pt and not u199_dispuesto(canon, 1, r.get("room")):
++            ev.append(f"(1) {r.get('room')} ({r.get('sheet')}): {peor[0]:.0f} pt del perímetro sin cara contada / exterior / EXCLUDED cerca de "
++                      f"{peor[1]} (cara faltante) — U-199")
++    return ev, n
++
++
++def secciones_fallas(canon, tol_ft=0.5):
++    """U-199 (7) SECCIONES / ELEVACIONES: cada muro / soffit / cielo cortado (canon.u199.secciones [{sheet, detalle, elemento, altura_ft}])
++    existe en el canon con la misma altura (tolerancia tol_ft)."""
++    idx = {norm_txt(w.get("id")): w for w in muros_canon(canon or {}) if isinstance(w, dict)}
++    ev, n = [], 0
++    for s in _u199(canon).get("secciones") or []:
++        n += 1
++        hid = f"{s.get('detalle')}/{s.get('sheet')}:{s.get('elemento')}"
++        w = idx.get(norm_txt(s.get("elemento")))
++        if w is None and not _ref_existe(canon, s.get("elemento")):
++            if not u199_dispuesto(canon, 7, hid):
++                ev.append(f"(7) {hid}: elemento cortado en la sección que no existe en el canon — U-199")
++            continue
++        h = w.get("height_ft") if w else None
++        if h is None and w:
++            hs = [f.get("height_ft") for f in _caras(w) if f.get("height_ft") is not None]
++            h = max(hs) if hs else None
++        try:
++            if h is not None and s.get("altura_ft") is not None and abs(float(h) - float(s["altura_ft"])) > tol_ft and not u199_dispuesto(canon, 7, hid):
++                ev.append(f"(7) {hid}: altura en la sección {s['altura_ft']} ft vs canon {h} ft — U-199")
++        except (TypeError, ValueError):
++            pass
++    return ev, n
++
++
++def unidades_tipicas_fallas(canon, tol=U199_TOL_AREA):
++    """U-199 (10) UNIDADES TÍPICAS: cuartos del mismo tipo ('(Type N)' en canon.ceilings.room o canon.u199.unidades_tipicas) comparados
++    contra la típica: área de cielo +-5 % y mismo número de caras de muro; distinto sin disposición = FAIL."""
++    grupos = {}
++    for c in (canon or {}).get("ceilings") or []:
++        m = re.search(r"(?i)\(type\s*([\w.-]+)\)", str(c.get("room") or ""))
++        if m:
++            grupos.setdefault(m.group(1).upper(), {}).setdefault(str(c.get("room")), 0.0)
++            grupos[m.group(1).upper()][str(c.get("room"))] += float(c.get("area_sf") or 0)
++    for u in _u199(canon).get("unidades_tipicas") or []:
++        g = grupos.setdefault(str(u.get("tipo") or u.get("tipica")), {})
++        for r in [u.get("tipica")] + list(u.get("repetidas") or []):
++            g.setdefault(str(r), sum(float(c.get("area_sf") or 0) for c in (canon or {}).get("ceilings") or [] if str(c.get("room")) == str(r)))
++    ev, n = [], 0
++    for t, rs in grupos.items():
++        if len(rs) < 2:
++            continue
++        import statistics
++        med = statistics.median(rs.values())
++        for r, a in rs.items():
++            n += 1
++            if med > 0 and abs(a - med) > tol * med and not u199_dispuesto(canon, 10, r):
++                ev.append(f"(10) {r}: unidad típica Type {t} con {a:.1f} SF de cielo vs la típica {med:.1f} SF ({(a - med) / med * 100:+.1f} %) — U-199")
++    return ev, n
++
++
++def finish_schedule_fallas(canon, set_hojas):
++    """U-199 (9) FINISH SCHEDULE: cada cuarto con GYP en el finish schedule (canon.u199.finish_schedule [{room, gyp: 'ceiling' | 'walls'
++    | 'both'}]) tiene board cargado: un cielo (ceilings.room) o una cara de muro de ese cuarto."""
++    hay = any(re.search(r"(?i)\b(?:ROOM\s+)?FINISH\s+SCHEDULE\b", str(t)) for h, t in (set_hojas or {}).items() if re.match(r"(?i)^[AI]\d", str(h)))
++    fs = _u199(canon).get("finish_schedule")
++    if fs is None:
++        return (["(9) el set imprime un FINISH SCHEDULE y canon.u199.finish_schedule no existe (U-137) — U-199"] if hay else []), 0
++    cielo = {m.group(1) for c in (canon or {}).get("ceilings") or [] for m in RX_CUARTO_NUM.finditer(str(c.get("room") or ""))}
++    muro = set().union(*[_cuartos_de(w) for w in muros_canon(canon or {}) if isinstance(w, dict)] or [set()])
++    ev, n = [], 0
++    for x in fs:
++        nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(x.get("room") or ""))}
++        g = str(x.get("gyp") or "").lower()
++        if not g or not nums:
++            continue
++        n += 1
++        falta = (g in ("ceiling", "both") and not nums & cielo) or (g in ("walls", "both") and not nums & muro)
++        if falta and not u199_dispuesto(canon, 9, x.get("room")):
++            ev.append(f"(9) {x.get('room')}: el finish schedule pide GYP ({g}) y no hay board cargado de ese cuarto — U-199")
++    return ev, n
++
++
++def lector3_fallas(canon, set_hojas):
++    """U-199 (12) TERCER LECTOR CIEGO en >= 10 % de las hojas de planta (A / I) al azar: canon.u199.lector3 [{sheet, conteo_lector3,
++    conteo_canon, revision_completa}]; conteo distinto sin revision_completa = FAIL."""
++    planta = [h for h in (set_hojas or {}) if re.match(r"(?i)^[AI]\d", str(h))]
++    xs = _u199(canon).get("lector3") or []
++    ev = []
++    req = max(1, math.ceil(0.10 * len(planta))) if planta else 0
++    if len({x.get("sheet") for x in xs}) < req:
++        ev.append(f"(12) faltan hojas del tercer lector ciego: revisadas {len({x.get('sheet') for x in xs})}, se piden >= {req} (10 % de las "
++                  f"hojas A / I del set: {len(planta)}) — U-199")
++    for x in xs:
++        if x.get("conteo_lector3") != x.get("conteo_canon") and not x.get("revision_completa"):
++            ev.append(f"(12) {x.get('sheet')}: tercer lector {x.get('conteo_lector3')} vs canon {x.get('conteo_canon')} sin revisión completa de la hoja — U-199")
++    return ev, len(xs)
++
++
++def estructural_mep_fallas(canon, set_hojas):
++    """U-199 (8) ESTRUCTURAL / MEP: columnas / vigas expuestas -> wraps; shafts / chases -> shaft walls; cambio de deck -> soffit / muro:
++    canon.u199.estructural_mep [{id, tipo, ref | excluido}] obligatorio cuando el set trae hojas S o shafts / chases."""
++    hay = any(re.match(r"(?i)^S\d", str(h)) for h in (set_hojas or {})) or \
++        any(re.search(r"(?i)\b(?:SHAFT|CHASE)\b", str(t)) for t in (set_hojas or {}).values())
++    return _lista_fallas(canon, "estructural_mep", 8, "elemento estructural / MEP", req=hay)
++
++
++def specs_locations_fallas(canon, set_hojas):
++    """U-199 (11) SPECS 'locations': cada párrafo 'LOCATION(S)' de las secciones 05 / 09 del Project Manual (canon.u199.specs_locations
++    [{id, texto, ref | excluido}]) tiene renglón o exclusión; obligatorio cuando el set / specs traen 'SECTION 05 / 09' con LOCATION."""
++    hay = any(re.search(r"(?is)SECTION\s+0[59]\s?\d{2}\s?\d{2}.{0,4000}?\bLOCATIONS?\b", str(t)) for t in (set_hojas or {}).values())
++    return _lista_fallas(canon, "specs_locations", 11, "location de spec", req=hay)
++
++
++def _con_req(res, req):
++    fs, n = res
++    return (req + fs, n)
++
++
++U199_CONTROLES = [
++    ("1", "CIERRE POR CUARTO", lambda can, hj: _con_req(cierre_cuartos_fallas(can), _requerido(can, "rooms", 1, "cuartos en las plantas", any(
++        _cuartos_de(w) or any(str(f.get("room") or "").strip() for f in _caras(w)) for w in muros_canon(can) if isinstance(w, dict))))),
++    ("2", "PISOS GEMELOS", lambda can, hj: pisos_gemelos_fallas(can)),
++    ("3", "PUERTAS", lambda can, hj: puertas_fallas(can, hj)),
++    ("4", "KEYNOTES / NOTAS", lambda can, hj: keynotes_fallas(can, hj)),
++    ("5", "ÁREA DE CIELO", lambda can, hj: area_cielo_fallas(can)),
++    ("6", "RATED LINES", lambda can, hj: _con_req(rated_fallas(can), _requerido(can, "rated_lines", 6, "un code plan / life safety plan con muros rated",
++        _hay_en_set(hj, r"(?is)(?:CODE\s+PLAN|LIFE\s+SAFETY|CODE\s+ANALYSIS|EGRESS\s+PLAN).{0,3000}?\b(?:\d\s*-?\s*H(?:OU)?R|RATED)\b")))),
++    ("7", "SECCIONES / ELEVACIONES", lambda can, hj: _con_req(secciones_fallas(can), _requerido(can, "secciones", 7, "secciones / elevaciones",
++        _hay_en_set(hj, r"(?i)\b(?:BUILDING|WALL|INTERIOR)\s+(?:SECTIONS?|ELEVATIONS?)\b")))),
++    ("8", "ESTRUCTURAL / MEP", lambda can, hj: estructural_mep_fallas(can, hj)),
++    ("9", "FINISH SCHEDULE", lambda can, hj: finish_schedule_fallas(can, hj)),
++    ("10", "UNIDADES TÍPICAS", lambda can, hj: unidades_tipicas_fallas(can)),
++    ("11", "SPECS LOCATIONS", lambda can, hj: specs_locations_fallas(can, hj)),
++    ("12", "TERCER LECTOR", lambda can, hj: lector3_fallas(can, hj)),
++    ("13", "RE-VERIFICACIÓN EXCLUDED", lambda can, hj: reverificacion_excluded_fallas(can)),
++]
++
++
++def _requerido(canon, clave, control, nombre, hay):
++    """U-137: el set trae esos elementos (hay) y canon.u199[clave] no existe ni trae '<clave>_none_reason' con N/HOJA = FAIL."""
++    u = _u199(canon)
++    if not hay or clave in u or RX_NH_VALIDA.search(str(u.get(clave + "_none_reason") or "")):
++        return []
++    return [f"({control}) el set trae {nombre} y canon.u199.{clave} no existe (ni {clave}_none_reason con N/HOJA): 0 evaluados (U-137) — U-199"]
++
++
++def _hay_en_set(set_hojas, rx, hojas=r"^[AIG]\d"):
++    return any(re.search(rx, str(t)) for h, t in (set_hojas or {}).items() if re.match(r"(?i)" + hojas, str(h)))
++
++
++def u199_fallas(canon, set_hojas):
++    """-> ({control: (fallas, n)}) de los 13 controles U-199 (la 5b va en el mapa de cobertura, CE_COBERTURA_DIAG)."""
++    out = {}
++    for k, _nom, fn in U199_CONTROLES:
++        try:
++            out[k] = fn(canon or {}, set_hojas or {})
++        except Exception as e:                          # noqa: BLE001  un control que revienta = FAIL (no pasa en vacío)
++            out[k] = ([f"({k}) el control no corrió: {type(e).__name__}: {e} — U-199"], 0)
++    return out
++
++
++@chequeo("CE_U199_OMITIDOS", ["U-199"], "U-199 (usuario 13-nov, REGLA INVIOLABLE 'blindado al 100000%'): 13 controles contra elementos "
++         "omitidos (cierre por cuarto, pisos gemelos, puertas, keynotes, área de cielo, rated lines, secciones, estructural / MEP, finish "
++         "schedule, unidades típicas, specs locations, tercer lector, re-verificación de EXCLUDED); hallazgo sin disposición o 0 evaluados "
++         "donde el plano los tiene = FAIL")
++def ce_u199_omitidos(c):
++    can = c.canon if isinstance(getattr(c, "canon", None), dict) else (_json(c.canon) if getattr(c, "canon", None) else {}) or {}
++    if not can:
++        return R("FAIL", "sin canon (U-137)")
++    st = _json(c.set_p) if getattr(c, "set_p", None) else None
++    res = u199_fallas(can, (st or {}).get("hojas") or {})
++    ev = [f for k, (fs, _n) in res.items() for f in fs]
++    info = "; ".join(f"({k}) {n}" for k, (_fs, n) in res.items())
++    t135 = fecha_publicacion("v81cf135")
++    if ev and not entrega_nueva(c, t135.isoformat() if t135 else FECHA_V135):
++        return R("AMBER", "entrega anterior a U-199 (v81cf135): no se re-abre (U-180 (4))", *ev[:15], f"evaluados: {info}")
++    return R("FAIL", *ev[:40], f"evaluados: {info}") if ev else R("PASS", f"13 controles U-199 sin hallazgos abiertos; evaluados: {info}")
++
++
++def _dist_seg(px, py, s):
++    x0, y0, x1, y1 = s
++    dx, dy = x1 - x0, y1 - y0
++    L2 = dx * dx + dy * dy
++    t = 0.0 if L2 == 0 else max(0.0, min(1.0, ((px - x0) * dx + (py - y0) * dy) / L2))
++    return math.hypot(px - (x0 + t * dx), py - (y0 + t * dy))
++
++
++def _cob_cajas_texto(page, pad):
++    """cajas de las palabras de la hoja (+ pad): un par de líneas dentro de un texto / room tag / burbuja no es un muro."""
++    try:
++        return [(w[0] - pad, w[1] - pad, w[2] + pad, w[3] + pad) for w in page.get_text("words")]
++    except Exception:
++        return []
++
++
++def _cob_toca_muro(ext, p, q, largas, esc, d=0.0):
++    """True si alguna punta del par toca (<= 1.5 in + 1 pt) una línea larga (>= 1 ft) que NO es ninguna de las dos del par ni
++    paralela a ellas: el muro corto / diagonal arranca de otro muro."""
++    tol = 1.5 / 12 * esc + 1.0
++    ang = math.atan2(p[3] - p[1], p[2] - p[0])
++    for s_ in largas:
++        if s_ in (p, q):
++            continue
++        a2 = math.atan2(s_[3] - s_[1], s_[2] - s_[0])
++        if abs(math.sin(a2 - ang)) < 0.26:              # paralela (< 15 grados): la continuación del mismo trazo, no un remate
++            continue
++        if math.hypot(s_[2] - s_[0], s_[3] - s_[1]) * abs(math.sin(a2 - ang)) < d + 1.0 * esc:
++            continue                                    # la tapa de una caja (tan ancha como el par): eso cierra un símbolo
++        if any(_dist_seg(x, y, s_) <= tol for x, y in ext):
++            return True
++    return False
++
++
++def cob_estilos_pares(drs, esc):
++    """U-199 (5b) respaldo cuando la hoja no deja aprender estilos de los markups: estilos (gris / negro) con >= 10 trazos H / V de
++    >= 2 ft y >= 50 % de ellos con un trazo paralelo del mismo estilo a espesor de muro (2.5"-14") traslapado >= 1 ft. -> set o None."""
++    tmin, tmax = COB_T_MIN_IN / 12 * esc, COB_T_MAX_IN / 12 * esc
++    por = {}
++    for dr in drs:
++        k = _cob_estilo(dr)
++        if _cob_cromatico(k[0]):
++            continue
++        for it in dr["items"]:
++            if it[0] != "l":
++                continue
++            a, b = it[1], it[2]
++            if abs(a.y - b.y) <= 0.5 and abs(b.x - a.x) >= 2 * esc:
++                por.setdefault(k, []).append(("H", (a.y + b.y) / 2, min(a.x, b.x), max(a.x, b.x)))
++            elif abs(a.x - b.x) <= 0.5 and abs(b.y - a.y) >= 2 * esc:
++                por.setdefault(k, []).append(("V", (a.x + b.x) / 2, min(a.y, b.y), max(a.y, b.y)))
++    ok = set()
++    for k, ls in por.items():
++        if len(ls) < 10:
++            continue
++        con = sum(1 for o, c, lo, hi in ls if any(o2 == o and tmin <= abs(c2 - c) <= tmax and min(hi, hi2) - max(lo, lo2) >= esc
++                                                  for o2, c2, lo2, hi2 in ls))
++        if con >= 0.5 * len(ls):
++            ok.add(k)
++    return ok or None
++
++
++def cob_diag_cortos(page, esc, segs, region=None, estilos=None):
++    """U-199 (5b): muros que el mapa de cobertura H / V no ve: (a) DIAGONALES: par de líneas paralelas no horizontales ni verticales
++    (> 3 grados) a 2.5"-14" (escala de la hoja), traslapadas >= 1 ft; (b) CORTOS: par H / V de 0.5-2 ft a 2.5"-14". Cubierto = un
++    segmento de markup a <= 0.5 ft (+ medio espesor) del punto medio del eje. -> [{tipo, x, y, largo_ft, cubierto}]"""
++    tmin, tmax = COB_T_MIN_IN / 12 * esc, COB_T_MAX_IN / 12 * esc
++    x0r, y0r, x1r, y1r = region or (-1e9, -1e9, 1e9, 1e9)
++    lin, largas = [], []
++    for dr in page.get_drawings():
++        if _cob_cromatico(_cob_estilo(dr)[0]):
++            continue                                    # markups / capas de color: no son muros del plano
++        for it in dr["items"]:
++            if it[0] == "l" and math.hypot(it[2].x - it[1].x, it[2].y - it[1].y) >= 1.0 * esc:
++                largas.append((it[1].x, it[1].y, it[2].x, it[2].y))
++        if estilos is not None and _cob_estilo(dr) not in estilos or dr.get("fill") is not None and not estilos:
++            continue                                    # sin estilos aprendidos: los rellenos son símbolos (triángulos de callout)
++        for it in dr["items"]:
++            if it[0] != "l":
++                continue
++            a, b = it[1], it[2]
++            L = math.hypot(b.x - a.x, b.y - a.y)
++            if L < 0.5 * esc or not (x0r <= (a.x + b.x) / 2 <= x1r and y0r <= (a.y + b.y) / 2 <= y1r):
++                continue
++            ang = math.degrees(math.atan2(b.y - a.y, b.x - a.x)) % 180
++            diag = min(ang % 90, 90 - ang % 90) > 3
++            if diag and L >= 1.0 * esc or (not diag and L <= 2.0 * esc):
++                lin.append((a.x, a.y, b.x, b.y, ang, L, diag))
++    out, usados = [], set()
++    for i, p in enumerate(lin):
++        for j in range(i + 1, len(lin)):
++            q = lin[j]
++            if p[6] != q[6] or (i, j) in usados or min(abs(p[4] - q[4]), 180 - abs(p[4] - q[4])) > 2:
++                continue
++            ux, uy = math.cos(math.radians(p[4])), math.sin(math.radians(p[4]))
++            d = abs((q[0] - p[0]) * -uy + (q[1] - p[1]) * ux)
++            if not (tmin <= d <= tmax):
++                continue
++            pa = sorted(((p[0] - p[0]) * ux + (p[1] - p[1]) * uy, (p[2] - p[0]) * ux + (p[3] - p[1]) * uy))
++            qa = sorted(((q[0] - p[0]) * ux + (q[1] - p[1]) * uy, (q[2] - p[0]) * ux + (q[3] - p[1]) * uy))
++            ov = min(pa[1], qa[1]) - max(pa[0], qa[0])
++            if ov < (1.0 if p[6] else 0.5) * esc:
++                continue
++            usados.add((i, j))
++            ext = [p[:2], p[2:4], q[:2], q[2:4]]
++            if not _cob_toca_muro(ext, (p[0], p[1], p[2], p[3]), (q[0], q[1], q[2], q[3]), largas, esc, d):
++                continue                                # un muro corto / diagonal remata en otro muro; una caja de tag o un símbolo, no
++            m0 = (max(pa[0], qa[0]) + min(pa[1], qa[1])) / 2
++            cx = p[0] + ux * m0 - uy * d / 2 * (1 if (q[0] - p[0]) * -uy + (q[1] - p[1]) * ux > 0 else -1)
++            cy = p[1] + uy * m0 + ux * d / 2 * (1 if (q[0] - p[0]) * -uy + (q[1] - p[1]) * ux > 0 else -1)
++            tol = COB_TOL_FT * esc + d / 2
++            cub = any(_dist_seg(cx, cy, s) <= tol for s in segs or [])
++            out.append({"tipo": "muro_diag" if p[6] else "muro_corto", "x": round(cx, 1), "y": round(cy, 1),
++                        "largo_ft": round(ov / esc, 2), "cubierto": cub})
++    txt = _cob_cajas_texto(page, 0.25 * esc)
++    out = [f for f in out if not any(r[0] <= f["x"] <= r[2] and r[1] <= f["y"] <= r[3] for r in txt)]   # dentro de un texto / tag
++    ded = []                                            # un tramo por posición (líneas dobles / repetidas del mismo muro)
++    for f in sorted(out, key=lambda f: (not f["cubierto"], -f["largo_ft"])):
++        if not any(g["tipo"] == f["tipo"] and math.hypot(g["x"] - f["x"], g["y"] - f["y"]) <= 0.75 * esc for g in ded):
++            ded.append(f)
++    return ded
++
++
++@chequeo("CE_COBERTURA_DIAG", ["U-199", "U-193"], "U-199 (5b): el mapa de cobertura también revisa los muros DIAGONALES y CORTOS (< 2 ft) "
++         "de las plantas: un par de líneas de muro sin markup y sin disposición en Auditoria/COBERTURA_DISPOSICION.csv (tipo muro_diag / "
++         "muro_corto con su x, y) = FAIL")
++def ce_cobertura_diag(c):
++    if not getattr(c, "entrega", None):
++        return R("FAIL", "sin carpeta de entrega (U-137)")
++    pdfs = [p for p in _pdfs_markups(c) if "COBERTURA" not in os.path.basename(p).upper()] if getattr(c, "planos", None) else []
++    if not pdfs:
++        return R("FAIL", "sin PDF de markups (U-137)")
++    import pymupdf
++    doc = pymupdf.open(pdfs[0])
++    disp = leer_disposicion(os.path.join(c.entrega, "Auditoria", COB_DISP))
++    dp = [(str(d.get("hoja")), float(d.get("x") or 0), float(d.get("y") or 0)) for d in disp
++          if str(d.get("tipo") or "").lower() in ("muro_diag", "muro_corto") and RX_COB_DECISION_OK.match(str(d.get("decision") or "").strip())]
++    ev, n, nh = [], 0, 0
++    for i, pg in enumerate(doc):
++        es_planta, _r = cob_tipo_hoja(doc, pg)
++        esc = cob_escala(doc, pg) if es_planta else None
++        if not esc:
++            continue
++        nh += 1
++        segs, exc, clg = _cob_markups(doc, pg)
++        lab = pg.get_label() or str(i + 1)
++        es_ = cob_estilos_muro(pg.get_drawings(), segs, esc) or cob_estilos_pares(pg.get_drawings(), esc)   # estilo de muro de la hoja
++        for f in cob_diag_cortos(pg, esc, segs, _cob_region(pg, segs, exc, clg, esc), estilos=es_ or None):
++            n += 1
++            if f["cubierto"] or any(h == lab and math.hypot(x - f["x"], y - f["y"]) <= 2 * esc for h, x, y in dp):
++                continue
++            ev.append(f"{lab} {f['tipo']} ({f['x']}, {f['y']}) {f['largo_ft']} ft: sin markup ni disposición (U-199 (5b))")
++    t135 = fecha_publicacion("v81cf135")
++    if ev and not entrega_nueva(c, t135.isoformat() if t135 else FECHA_V135):
++        return R("AMBER", "entrega anterior a U-199 (v81cf135): no se re-abre (U-180 (4))", f"{len(ev)} sin markup", *ev[:10])
++    if not nh:
++        return R("FAIL", "0 plantas reconocidas en el PDF de markups (U-137)")
++    return R("FAIL", f"{len(ev)} muro(s) diagonal(es) / corto(s) sin markup", *ev[:30]) if ev else \
++        R("PASS", f"{n} tramo(s) diagonal(es) / corto(s) en {nh} planta(s), todos con markup o disposición")
++
++
+ LEEME_NOMBRE = "00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md"
+ # U-196 (usuario 13-nov: "haz una descripcion para saber para que sirve cada cosa, por que como son tantas ya no sabe uno ni para que
+ # sirven"): diccionario FIJO por patrón de nombre, en el ORDEN de revisión -> (QUÉ ES, PARA QUÉ SIRVE, CUÁNDO ABRIRLO)
+@@ -960,6 +1691,7 @@
+ FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
+ FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
+ FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
++FECHA_V135 = "2026-11-13T09:00:00+00:00"   # v135 (U-199): respaldo; manda la hora real del commit "Publica v81cf135"
+ FECHA_V133 = "2026-11-13T05:00:00+00:00"   # v133 (U-196 LEEME): respaldo; manda la hora real del commit "Publica v81cf133" (fecha_publicacion)
+ FECHA_V121 = "2026-11-12T22:44:35+00:00"      # v81cf121 (U-193: identidad declarada en la GUÍA); v123: commit de publicación 51ce837
+ FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121": FECHA_V121,
+@@ -7523,6 +8255,17 @@
+             print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
+         print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
+         return 0 if o["ok"] else 1
++    if len(argv) > 2 and argv[1] == "u199":                         # U-199: los 13 controles sobre un canon (+ set_texto.json opcional)
++        _can = json.load(open(argv[2], encoding="utf-8"))
++        _hj = (json.load(open(argv[3], encoding="utf-8")).get("hojas") or {}) if len(argv) > 3 else {}
++        _res = u199_fallas(_can, _hj)
++        print(f"U-199 sobre {argv[2]} ({len(muros_canon(_can))} muros: walls + existing_walls)")
++        for _k, _nom, _fn in U199_CONTROLES:
++            _fs, _n = _res[_k]
++            print(f"({_k}) {_nom}: evaluados {_n}, hallazgos {len(_fs)}")
++            for _f in _fs:
++                print("   - " + _f)
++        return 1 if any(fs for fs, _n in _res.values()) else 0
+     if len(argv) > 2 and argv[1] == "leeme":                        # U-196: 00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md
+         print(escribir_leeme(argv[2]))
+         ev = leeme_fallas(argv[2])
+diff -ruN vA/take-off-metal-frame-drywall/tools/plantilla_excel.py vB/take-off-metal-frame-drywall/tools/plantilla_excel.py
+--- vA/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:03:41.186646807 +0000
++++ vB/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:03:41.206540885 +0000
+@@ -206,11 +206,14 @@
+         if not isinstance(n, int) or n < 1 or n in ns:
+             err.append(f"add_alternates[{i}]: 'n' entero >= 1 sin repetir (ALTERNATE #N)")
+         ns.add(n)
+-        if not str(a.get("rfi") or "").strip() or not str(a.get("texto") or "").strip():
+-            err.append(f"add_alternates[{i}]: falta 'rfi' o 'texto'")
++        imp = str(a.get("impreso") or "").strip()            # COORDINACIÓN 05:51: alternate impreso en planos / specs: sin RFI
++        cita_imp = bool(imp) and bool(re.search(r"\b[A-Z]{1,2}-?\d{1,3}\.\d{1,2}\b|\b0[5-9]\s?\d{2}\s?\d{2}\b", imp))
++        if not (str(a.get("rfi") or "").strip() or cita_imp) or not str(a.get("texto") or "").strip():
++            err.append(f"add_alternates[{i}]: falta 'rfi' (o 'impreso' con la hoja / sección del alternate) o 'texto'")
+         if not a.get("cantidades"):
+             err.append(f"add_alternates[{i}]: sin 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada)")
+-        if not re.search(r"\b\d{1,2}[A-Z]?/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\b", str(a.get("razon") or "")):
++        if not re.search(r"\b\d{1,2}[A-Z]?/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\b", str(a.get("razon") or "")) and not (
++                cita_imp and re.search(r"\b[A-Z]{1,2}-?\d{1,3}\.\d{1,2}\b|\b0[5-9]\s?\d{2}\s?\d{2}\b", str(a.get("razon") or ""))):
+             err.append(f"add_alternates[{i}]: 'razon' con N/HOJA obligatoria (U-198: 'REASON: …' en Proposal, Scope Checklist y README_REVIEW)")
+         for j, q in enumerate(a.get("cantidades") or []):
+             if not all(q.get(k) not in (None, "") for k in ("material", "qty", "unit", "op")):
+diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:03:41.184930468 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:03:41.209185091 +0000
+@@ -3447,6 +3447,191 @@
+ test_u196_leeme_y_mapa()
+ 
+ 
++def _u199_canon():
++    """canon sintético: ROOM 905 (rectángulo 100-300 x 100-200 pt en Z9.1) cerrado por 4 muros con cara del cuarto."""
++    def w(i, ori, c, lo, hi, **k):
++        return dict({"id": i, "type_id": "Z9", "faces": [{"room": "ROOM 905"}],
++                     "band": {"sheet": "Z9.1", "ori": ori, "c0": c - 3, "c1": c + 3, "lo": lo, "hi": hi}}, **k)
++    return {"walls": [w("Z9-N", "H", 100, 100, 300), w("Z9-S", "H", 200, 100, 300), w("Z9-O", "V", 100, 100, 200), w("Z9-E", "V", 300, 100, 200)],
++            "ceilings": [{"room": "ROOM 905", "layer": "GYP", "area_sf": 100.0}],
++            "u199": {"rooms": [{"room": "ROOM 905", "sheet": "Z9.1", "polygon": [[100, 100], [300, 100], [300, 200], [100, 200]], "area_sf": 100.0}],
++                     "rated_lines": [], "secciones": [], "disposiciones": []}}
++
++
++def test_u199_cierre_por_cuarto_mutacion():
++    """U-199 (1): el perímetro del cuarto cerrado por sus 4 caras = PASS; MUTACIÓN: quitar UNA sola cara = FAIL; la cara cubierta por un
++    vano o por un muro EXCLUDED con band = PASS; disposición con N/HOJA = PASS."""
++    can = _u199_canon()
++    assert CE.cierre_cuartos_fallas(can) == ([], 1), CE.cierre_cuartos_fallas(can)
++    for k in range(4):                                  # cada una de las 4 caras, quitada sola
++        m = json.loads(json.dumps(can))
++        del m["walls"][k]
++        fs, n = CE.cierre_cuartos_fallas(m)
++        assert n == 1 and len(fs) == 1 and "(1) ROOM 905" in fs[0], (k, fs)
++    m = json.loads(json.dumps(can))
++    ex = m["walls"].pop(3)
++    m["excluded_walls"] = [dict(ex, reason="existing to remain per 9/Z9.1")]
++    assert CE.cierre_cuartos_fallas(m)[0] == []
++    m = json.loads(json.dumps(can))
++    del m["walls"][3]
++    m["u199"]["rooms"][0]["openings"] = [[297, 100, 303, 200]]
++    assert CE.cierre_cuartos_fallas(m)[0] == []
++    m = json.loads(json.dumps(can))
++    m["walls"][1]["band"]["hi"] = 250                   # cara corta: 50 pt sin cubrir
++    assert CE.cierre_cuartos_fallas(m)[0]
++    m["u199"]["disposiciones"] = [{"control": 1, "id": "ROOM 905", "motivo": "opening to corridor per 3/Z9.1", "nhoja": "3/Z9.1"}]
++    assert CE.cierre_cuartos_fallas(m)[0] == []
++    # (1) obligatorio: muros con cuartos y canon.u199.rooms ausente = FAIL (0 evaluados)
++    m = json.loads(json.dumps(can))
++    del m["u199"]["rooms"]
++    assert any("(1)" in f and "0 evaluados" in f for f in CE.u199_fallas(m, {})["1"][0])
++    print("test_u199_cierre_por_cuarto_mutacion OK")
++
++
++def test_u199_pisos_gemelos():
++    """U-199 (2) réplica sintética del caso real (muro de un cuarto de L-n sin su gemelo en L-n+1): dos pisos con los mismos sufijos de
++    cuarto; el muro del cuarto ..12 en L8 sin gemelo en L9 = FAIL; con gemelo o disposición = PASS."""
++    def w(i, piso, cuarto, t="Z9"):
++        return {"id": i, "type_id": t, "floor": f"L{piso}", "faces": [{"room": cuarto}]}
++    base = [w("Z9-L8-10", 8, "OFFICE 810"), w("Z9-L8-11", 8, "OFFICE 811"), w("Z9-L8-12", 8, "LINEN 812"),
++            w("Z9-L9-10", 9, "OFFICE 910"), w("Z9-L9-11", 9, "OFFICE 911"), w("Z9-L9-99", 9, "STOR 912", "Z8")]
++    fs, n = CE.pisos_gemelos_fallas({"walls": base})
++    assert n >= 3 and any("Z9-L8-12" in f and "L9" in f for f in fs), fs
++    ok = base + [w("Z9-L9-12", 9, "LINEN 912")]
++    assert not [f for f in CE.pisos_gemelos_fallas({"walls": ok})[0] if "Z9-L8-12" in f]
++    disp = {"walls": base, "u199": {"disposiciones": [{"control": 2, "id": "Z9-L8-12", "motivo": "not on L9 per 1/Z9.9", "nhoja": "1/Z9.9"}]}}
++    assert not [f for f in CE.pisos_gemelos_fallas(disp)[0] if "Z9-L8-12" in f]
++    print("test_u199_pisos_gemelos OK")
++
++
++def test_u199_rated_y_excluded():
++    """U-199 (6) réplica del caso real (muro de escalera sin contar): STAIR 9 sin muros contados = FAIL; muro sin rating = FAIL; rated
++    2 HR = PASS; línea rated del code plan sin muro con band = FAIL. (13) réplica del caso real: wall exterior excluido con motivo de
++    interior = FAIL (su cara exterior sigue en alcance); sin re-verificación = FAIL; re-verificado y con faces interiores = PASS."""
++    can = {"walls": [], "u199": {"rooms": [{"room": "STAIR 9 951"}]}}
++    assert any("STAIR 9" in f for f in CE.rated_fallas(can)[0])
++    can["walls"] = [{"id": "Z9-ST", "type_id": "Z9", "faces": [{"room": "STAIR 9 951"}]}]
++    assert any("Z9-ST" in f and "rating" in f for f in CE.rated_fallas(can)[0])
++    can["walls"][0]["rating_hr"] = 2
++    assert CE.rated_fallas(can)[0] == []
++    can["u199"]["rated_lines"] = [{"sheet": "Z9.1", "rating_hr": 2, "x0": 50, "y0": 400, "x1": 250, "y1": 400, "nhoja": "1/G9.0"}]
++    assert any("(6) línea rated" in f for f in CE.rated_fallas(can)[0])
++    can["walls"][0]["band"] = {"sheet": "Z9.1", "ori": "H", "c0": 397, "c1": 403, "lo": 40, "hi": 260}
++    assert CE.rated_fallas(can)[0] == []
++    can["walls"][0]["rating_hr"] = 1                    # rating menor al de la línea = FAIL
++    assert CE.rated_fallas(can)[0]
++    # (6) obligatorio: code plan con muros rated en el set y canon.u199.rated_lines ausente = FAIL
++    m = _u199_canon()
++    del m["u199"]["rated_lines"]
++    assert any("(6)" in f and "0 evaluados" in f for f in CE.u199_fallas(m, {"G9.0": "LIFE SAFETY PLAN ... 2 HR RATED"})["6"][0])
++    ex = {"excluded_walls": [{"id": "XW.9.9-L9-99", "type_id": "XW.9.9", "reason": "interior of tenant space, by others"}]}
++    fs, n = CE.reverificacion_excluded_fallas(ex)
++    assert n == 1 and any("re-verificación" in f for f in fs) and any("cara exterior" in f for f in fs), fs
++    ex["excluded_walls"][0]["reverificado"] = {"revisor": "lector B", "decision": "interior face only", "nhoja": "4/Z9.4"}
++    assert [f for f in CE.reverificacion_excluded_fallas(ex)[0] if "re-verificación" in f] == []
++    assert any("cara exterior" in f for f in CE.reverificacion_excluded_fallas(ex)[0])
++    ex["excluded_walls"][0]["faces"] = ["A"]
++    assert CE.reverificacion_excluded_fallas(ex)[0] == []
++    print("test_u199_rated_y_excluded OK")
++
++
++def test_u199_resto_controles():
++    """U-199 (3)(4)(5)(7)(8)(9)(10)(11)(12): cada control con su caso FAIL y su caso PASS; 0 evaluados donde el plano los tiene = FAIL."""
++    can = _u199_canon()
++    hj = {"Z9.1": "FLOOR PLAN", "A9.2": "KEYNOTES\n1 PROVIDE GYPSUM BOARD SOFFIT AT BULKHEAD\n2 CLEAN FLOOR\n", "Z9.3": "DOOR SCHEDULE"}
++    # (3) puertas
++    can["opening_schedule"] = {"items": [{"ref": "D9", "kind": "door", "wall": "Z9-N"}, {"ref": "D8", "kind": "door", "wall": "Z9-X"}]}
++    fs, n = CE.puertas_fallas(can, hj)
++    assert n == 2 and len(fs) == 1 and "D8" in fs[0]
++    assert any("0 puertas" in f for f in CE.puertas_fallas({"opening_schedule": {"items": []}}, hj)[0])
++    # (4) keynotes: la 1 (gypsum / soffit) sin registrar = FAIL; la 2 no
++    fs, n = CE.keynotes_fallas(can, hj)
++    assert any("keynote 1 de A9.2" in f for f in fs) and not any("keynote 2" in f for f in fs)
++    can["u199"]["keynotes"] = [{"sheet": "A9.2", "num": "1", "ref": "Z9-N"}]
++    assert CE.keynotes_fallas(can, hj)[0] == []
++    # (5) área de cielo +-5 %
++    assert CE.area_cielo_fallas(can)[0] == []
++    can["ceilings"][0]["area_sf"] = 90.0
++    assert CE.area_cielo_fallas(can)[0]
++    can["ceilings"][0]["area_sf"] = 100.0
++    # (7) secciones
++    can["walls"][0]["height_ft"] = 10.0
++    can["u199"]["secciones"] = [{"sheet": "Z9.5", "detalle": "1", "elemento": "Z9-N", "altura_ft": 12.0}]
++    assert any("(7)" in f for f in CE.secciones_fallas(can)[0])
++    can["u199"]["secciones"][0]["altura_ft"] = 10.2
++    assert CE.secciones_fallas(can)[0] == []
++    can["u199"]["secciones"].append({"sheet": "Z9.5", "detalle": "2", "elemento": "Z9-NO", "altura_ft": 9})
++    assert any("no existe" in f for f in CE.secciones_fallas(can)[0])
++    can["u199"]["secciones"].pop()
++    # (8) estructural / MEP: hojas S sin lista = FAIL
++    assert CE.estructural_mep_fallas(can, {"S9.1": "FRAMING PLAN"})[0]
++    can["u199"]["estructural_mep"] = [{"id": "COL-9", "tipo": "column wrap", "excluido": "exposed steel, no wrap per 2/Z9.6"}]
++    assert CE.estructural_mep_fallas(can, {"S9.1": "FRAMING PLAN"})[0] == []
++    # (9) finish schedule
++    can["u199"]["finish_schedule"] = [{"room": "ROOM 905", "gyp": "both"}, {"room": "ROOM 906", "gyp": "ceiling"}]
++    fs, n = CE.finish_schedule_fallas(can, {"A9.7": "ROOM FINISH SCHEDULE"})
++    assert n == 2 and len(fs) == 1 and "ROOM 906" in fs[0]
++    assert CE.finish_schedule_fallas({"walls": []}, {"A9.7": "ROOM FINISH SCHEDULE"})[0]
++    # (10) unidades típicas
++    tip = {"ceilings": [{"room": "UNIT 901 (Type A)", "area_sf": 100}, {"room": "UNIT 902 (Type A)", "area_sf": 100},
++                        {"room": "UNIT 903 (Type A)", "area_sf": 80}]}
++    fs, n = CE.unidades_tipicas_fallas(tip)
++    assert n == 3 and len(fs) == 1 and "UNIT 903" in fs[0]
++    # (11) specs locations
++    sp = {"Z9.8": "SECTION 09 21 16 GYPSUM BOARD ASSEMBLIES ... LOCATIONS: provide abuse resistant board at corridors"}
++    assert CE.specs_locations_fallas({}, sp)[0]
++    assert CE.specs_locations_fallas({"u199": {"specs_locations": [{"id": "09 21 16 2.2", "ref": "Z9-N"}]}, "walls": [{"id": "Z9-N"}]}, sp)[0] == []
++    # (12) tercer lector: 10 % de hojas A / I
++    hojas = {f"A9.{k}": "PLAN" for k in range(12)}
++    assert CE.lector3_fallas({}, hojas)[0]
++    l3 = {"u199": {"lector3": [{"sheet": "A9.1", "conteo_lector3": 5, "conteo_canon": 5}, {"sheet": "A9.2", "conteo_lector3": 4, "conteo_canon": 5}]}}
++    fs, n = CE.lector3_fallas(l3, hojas)
++    assert n == 2 and len(fs) == 1 and "A9.2" in fs[0]
++    l3["u199"]["lector3"][1]["revision_completa"] = True
++    assert CE.lector3_fallas(l3, hojas)[0] == []
++    # un control que revienta = FAIL (no pasa en vacío)
++    assert CE.u199_fallas({"walls": [{"id": "x", "faces": "roto"}], "u199": {"rooms": [{"room": "R 905", "polygon": "x"}]}}, {})
++    print("test_u199_resto_controles OK")
++
++
++def test_u199_cobertura_diag_cortos():
++    """U-199 (5b): el mapa de cobertura ve los muros DIAGONALES y CORTOS (< 2 ft) que el detector H / V no ve; una caja de tag con texto
++    y un par suelto que no remata en otro muro NO son muros; markup sobre el muro = cubierto."""
++    esc = 18.0                                          # 1/4" = 1'-0"
++    doc = pymupdf.open()
++    pg = doc.new_page(width=1200, height=900)
++    sh = pg.new_shape()
++
++    def par(x0, y0, x1, y1, dx, dy):
++        sh.draw_line((x0, y0), (x1, y1))
++        sh.draw_line((x0 + dx, y0 + dy), (x1 + dx, y1 + dy))
++    par(100, 400, 1000, 400, 0, 9)                      # muro largo H (espesor 6")
++    par(300, 409, 300, 409 + 1.5 * esc, 9, 0)           # muro CORTO de 1'-6" que arranca del muro largo
++    par(500, 400, 500 + 6 * esc, 400 - 6 * esc, 9, 0)   # muro DIAGONAL a 45 grados que arranca del muro largo
++    par(800, 600, 800 + 1.5 * esc, 600, 0, 12)          # par suelto (caja de símbolo): no remata en ningún muro
++    sh.finish(color=(0, 0, 0), width=0.7)
++    sh.commit()
++    pg.insert_text((210, 205), "905", fontsize=10)      # caja de room tag con texto: no es muro
++    sh = pg.new_shape()
++    sh.draw_rect(pymupdf.Rect(200, 195, 236, 209))
++    sh.finish(color=(0, 0, 0), width=0.7)
++    sh.commit()
++    f = CE.cob_diag_cortos(pg, esc, [])
++    tipos = sorted(x["tipo"] for x in f)
++    assert tipos == ["muro_corto", "muro_diag"], f
++    assert all(not x["cubierto"] for x in f)
++    mk = [(304, 409, 304, 436), (504, 400, 600, 304)]   # markups sobre los dos ejes
++    assert all(x["cubierto"] for x in CE.cob_diag_cortos(pg, esc, mk))
++    print("test_u199_cobertura_diag_cortos OK")
++
++
++test_u199_cierre_por_cuarto_mutacion()
++test_u199_pisos_gemelos()
++test_u199_rated_y_excluded()
++test_u199_resto_controles()
++test_u199_cobertura_diag_cortos()
++
++
+ def test_be_xf16_muros_canon():
+     """BE-XF16 (COORDINACIÓN 13-nov): canon estilo CR (walls = [], todos los muros en existing_walls). (1) muros_canon() los une;
+     (2) la red U-138 (esperado_proyecto) ve los muros (antes: 0 esperados = un '0 walls' pasaba); (3) CE_MUROS_CANON: las tools no
+@@ -3480,3 +3665,96 @@
+ 
+ 
+ test_be_xf16_muros_canon()
++
++
++def test_u199_casos_reales_replica():
++    """U-199 réplicas sintéticas de los casos reales con el esquema de CR (muros en existing_walls, 'faces' = número, cuartos en
++    'location'): (2) el muro del cuarto ..12 de L8 sin gemelo en L9 = FAIL y con su gemelo = PASS; (13) wall exterior excluido con
++    motivo de interior = FAIL; con su cara B contada ('<id> B') o 'counted as <id>' existente = PASS; (3) puerta sin 'wall' ubicada
++    por sheet + center_pt sobre la band de un muro = PASS, lejos = FAIL."""
++    def w(i, piso, loc, t="Z9-0"):
++        return {"id": i, "type_id": t, "floor": f"L{piso}", "faces": 2, "location": loc}
++    base = [w("Z9-L8-10", 8, "L8 office | faces: 810 OFFICE; corridor 816"), w("Z9-L8-11", 8, "faces: 811 OFFICE; corridor 816"),
++            w("Z9-L8-12", 8, "L8 corridor stub at LINEN 812 | faces: 812 LINEN; corridor 816"),
++            w("Z9-L9-10", 9, "faces: 910 OFFICE; corridor 916"), w("Z9-L9-11", 9, "faces: 911 OFFICE; corridor 916"),
++            w("Z9-L9-33", 9, "912 Linen / 913 Cleaning | faces: 912; 913", "Z8-0")]
++    can = {"walls": [], "existing_walls": base}
++    fs, n = CE.pisos_gemelos_fallas(can)
++    assert any("Z9-L8-12" in f for f in fs), fs
++    can["existing_walls"] = base + [w("Z9-L9-12", 9, "faces: 912 LINEN; corridor 916")]
++    assert not [f for f in CE.pisos_gemelos_fallas(can)[0] if "Z9-L8-12" in f]
++    ex = {"walls": [], "existing_walls": [{"id": "XW.9.9-L9-07 A", "faces": 1, "location": "faces: F&B 907 (tenant)"}],
++          "excluded_walls": [{"id": "XW.9.9-L9-07", "reason": "'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT' (Z9.4)",
++                              "reverificado": {"revisor": "lector B", "decision": "interior face only", "nhoja": "1/Z9.4"}}]}
++    assert any("cara exterior" in f for f in CE.reverificacion_excluded_fallas(ex)[0])
++    ex["existing_walls"].append({"id": "XW.9.9-L9-07 B", "faces": 1, "location": "east facade | faces: exterior"})
++    assert CE.reverificacion_excluded_fallas(ex)[0] == []
++    ex["existing_walls"].pop()
++    ex["existing_walls"].append({"id": "XW.9.9-L9-08", "faces": 1})
++    ex["excluded_walls"][0]["reason"] += " | exterior face counted as XW.9.9-L9-08"
++    assert CE.reverificacion_excluded_fallas(ex)[0] == []
++    pu = {"walls": [{"id": "Z9-N", "band": {"sheet": "Z9.1", "ori": "H", "c0": 97, "c1": 103, "lo": 100, "hi": 300}}],
++          "opening_schedule": {"items": [{"ref": "D9", "sheet": "Z9.1", "center_pt": [200, 101]},
++                                         {"ref": "D8", "sheet": "Z9.1", "center_pt": [200, 160]}, {"ref": "D7"}]}}
++    fs, n = CE.puertas_fallas(pu, {})
++    assert n == 3 and len(fs) == 2 and any("D8" in f for f in fs) and any("D7" in f and "center_pt" in f for f in fs), fs
++    print("test_u199_casos_reales_replica OK")
++
++
++test_u199_casos_reales_replica()
++
++
++def test_alternate_impreso_sin_rfi():
++    """COORDINACIÓN 05:51 (caso CR: alternate impreso 'TF-1 ALT' en una hoja de interiores; ids sintéticos): un alternate IMPRESO en planos
++    o specs no lleva RFI: 'impreso' con la hoja o la sección y la razón la cita. Sin RFI y sin 'impreso' = FAIL; n entero, razón y
++    cantidades siguen obligatorios."""
++    import plantilla_excel as P
++    q = [{"material": "3-5/8\" stud 20 GA", "qty": 12.0, "unit": "LF", "op": "3 ft x 4 studs"}]
++    aa = {"n": 2, "texto": "TF-9 ALT finish at stair", "impreso": "X9.19", "cantidades": q,
++          "razon": "the plans print 'TF-9 ALT' on X9.19 as an alternate finish"}
++    assert P.add_alternates_err({"add_alternates": [aa]}) == [], P.add_alternates_err({"add_alternates": [aa]})
++    sec = dict(aa, impreso="SECTION 09 21 16", razon="specs list it as an alternate in 09 21 16 2.3")
++    assert P.add_alternates_err({"add_alternates": [sec]}) == []
++    sin = dict(aa); sin.pop("impreso")
++    assert any("rfi" in e for e in P.add_alternates_err({"add_alternates": [sin]}))          # sin RFI ni impreso = FAIL
++    assert any("razon" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, razon="printed alternate")]}))
++    assert any("'n'" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, n="dos")]}))
++    assert any("cantidades" in e for e in P.add_alternates_err({"add_alternates": [dict(aa, cantidades=[])]}))
++    can = {"add_alternates": [aa]}
++    al = P.alcances_add_alternates(can)
++    sc = [(a["id"], a["nombre"], "ALTERNATE (ADD) - NOT IN BASE BID", a["nota"]) for a in al]
++    prop = ["BASE BID TOTAL", "ALTERNATE #2 (ADD): TF-9 ALT", "REASON: the plans print 'TF-9 ALT' on X9.19 as an alternate finish"]
++    assert CE.alternates_fallas(can, sc, ["5/8\" board"], prop) == [], CE.alternates_fallas(can, sc, ["5/8\" board"], prop)
++    ev = CE.alternates_fallas({"add_alternates": [sin]}, sc, ["5/8\" board"], prop)
++    assert ev and "rfi" in ev[0], ev
++    print("test_alternate_impreso_sin_rfi OK")
++
++
++test_alternate_impreso_sin_rfi()
++
++
++def test_u199_rated_opcion_b_replica_rfi():
++    """U-199 (6) opción (b) (COORDINACIÓN 05:57), réplica sintética del caso real (muro rated de la salida de una escalera que el canon
++    no tenía): el lector carga canon.u199.rated_lines solo para NUESTROS muros, cada línea con su N/HOJA; esquema CR (muros en
++    existing_walls con 'sheet' + 'path'). Sin el muro = FAIL; con el muro de rating 2 sobre la línea = PASS; con rating menor = FAIL;
++    línea sin N/HOJA = FAIL; set con code plan rated y 0 rated_lines = FAIL (U-137)."""
++    ln = {"id": "ST9-EXIT", "sheet": "Z9.01", "rating_hr": 2, "x0": 900.0, "y0": 700.0, "x1": 937.0, "y1": 700.0, "nhoja": "1/Z9.00"}
++    viejo = {"walls": [], "existing_walls": [{"id": "Z9.6.3-L1-03 A", "type_id": "Z9.6.3-2", "sheet": "Z9.01",
++                                              "path": [[600.0, 700.0], [880.0, 700.0]]}], "u199": {"rated_lines": [ln]}}
++    fs, n = CE.rated_fallas(viejo)
++    assert n == 1 and fs and "sin muro contado" in fs[0], fs
++    nuevo = json.loads(json.dumps(viejo))
++    nuevo["existing_walls"].append({"id": "Z9.6.3-L1-04 A", "type_id": "Z9.6.3-2", "sheet": "Z9.01", "path": [[900.0, 700.15], [937.0, 700.15]]})
++    assert CE.rated_fallas(nuevo)[0] == [], CE.rated_fallas(nuevo)
++    bajo = json.loads(json.dumps(nuevo))
++    bajo["existing_walls"][1]["type_id"] = "Z9.6.3-0"
++    assert CE.rated_fallas(bajo)[0]                                                        # rating menor que la línea = FAIL
++    sin_nh = json.loads(json.dumps(nuevo))
++    del sin_nh["u199"]["rated_lines"][0]["nhoja"]
++    assert any("N/HOJA" in f for f in CE.rated_fallas(sin_nh)[0])
++    vacio = {"walls": [{"id": "Z9-A", "faces": [{"room": "ROOM 905"}]}], "u199": {"rooms": []}}
++    assert any("(6)" in f and "0 evaluados" in f for f in CE.u199_fallas(vacio, {"G9.0": "CODE PLAN ... 2 HR RATED"})["6"][0])
++    print("test_u199_rated_opcion_b_replica_rfi OK")
++
++
++test_u199_rated_opcion_b_replica_rfi()

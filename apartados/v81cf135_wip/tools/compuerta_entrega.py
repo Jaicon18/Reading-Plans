@@ -369,6 +369,16 @@ def _textos(x):
     return str(x) if x is not None else ""
 
 
+RX_ALT_CITA = re.compile(r"\b(?:\d{1,2}[A-Z]?/)?[A-Z]{1,2}-?\d{1,3}\.\d{1,2}\b|\b(?:SECTION\s+)?0[5-9]\s?\d{2}\s?\d{2}\b")
+
+
+def alternate_impreso(x):
+    """COORDINACIÓN 05:51 (CR AA-1 'TF-1 ALT' en A7.19): un alternate IMPRESO en los planos o specs no necesita RFI: 'impreso' trae la
+    hoja o la sección (A7.19 / 09 21 16) y la razón la cita. -> la cita, o ''."""
+    imp = str(x.get("impreso") or "").strip()
+    return imp if imp and RX_ALT_CITA.search(imp) else ""
+
+
 def _razon_en(txt, nh):
     """U-198: 'REASON: …' con el N/HOJA de la razón dentro de los 400 caracteres siguientes."""
     return bool(re.search(r"(?is)REASON\s*:.{0,400}?" + re.escape(nh), str(txt or "")))
@@ -389,9 +399,10 @@ def alternates_fallas(canon, scope_rows, ms_nombres, proposal_textos=None, readm
         except (TypeError, ValueError):
             ev.append(f"add_alternates: entrada sin 'n' entero ({str(x)[:60]}) (U-195)")
     for n, x in sorted(aa.items()):
-        if not x.get("rfi") or not x.get("cantidades"):
-            ev.append(f"add_alternates #{n}: falta 'rfi' o 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada) (U-195)")
-        m = RX_NH_VALIDA.search(str(x.get("razon") or ""))
+        impreso = alternate_impreso(x)
+        if not (x.get("rfi") or impreso) or not x.get("cantidades"):
+            ev.append(f"add_alternates #{n}: falta 'rfi' (o 'impreso' con la hoja / sección del alternate) o 'cantidades' [DERIVED] (U-195)")
+        m = RX_NH_VALIDA.search(str(x.get("razon") or "")) or (impreso and RX_ALT_CITA.search(str(x.get("razon") or "")))
         if not m:
             ev.append(f"add_alternates #{n}: sin 'razon' con N/HOJA (U-198: todo ALTERNATE lleva 'REASON: …' con su N/HOJA)")
             continue
@@ -705,6 +716,32 @@ def _rating(w):
     return float(m.group(1)) if m else 0.0
 
 
+def rated_sin_muro(ln, walls, tol_pt=12.0, paso_pt=4.0):
+    """pt de la línea rated (x0, y0, x1, y1 en la hoja ln['sheet']) que NO quedan a <= tol_pt de un muro contado con rating >= el de la
+    línea: band H / V en esa hoja o path (esquema CR: 'sheet' + 'path' / 'paths')."""
+    try:
+        x0, y0, x1, y1 = (float(ln.get(k) or 0) for k in ("x0", "y0", "x1", "y1"))
+        rh = float(ln.get("rating_hr") or 0)
+    except (TypeError, ValueError):
+        return float("inf")
+    segs = []
+    for w in walls:
+        if _rating(w) < rh:
+            continue
+        b = w.get("band") or {}
+        if b.get("ori") in ("H", "V") and str(b.get("sheet") or w.get("sheet")) == str(ln.get("sheet")):
+            c = (float(b["c0"]) + float(b["c1"])) / 2
+            lo, hi = sorted((float(b["lo"]), float(b["hi"])))
+            segs.append((lo, c, hi, c) if b["ori"] == "H" else (c, lo, c, hi))
+        if str(w.get("sheet")) == str(ln.get("sheet")):
+            for p in (w.get("paths") or ([w["path"]] if w.get("path") else [])):
+                segs += [(a[0], a[1], b_[0], b_[1]) for a, b_ in zip(p, p[1:])]
+    L = math.hypot(x1 - x0, y1 - y0)
+    k = max(1, int(L // paso_pt))
+    sin = sum(1 for i in range(k + 1) if not any(_dist_seg(x0 + (x1 - x0) * i / k, y0 + (y1 - y0) * i / k, sg) <= tol_pt for sg in segs))
+    return sin * L / (k + 1)
+
+
 def rated_fallas(canon):
     """U-199 (6) RATED LINES: (a) cada línea rated del code plan (canon.u199.rated_lines [{sheet, rating_hr, x0, y0, x1, y1, floor}])
     está cubierta por un muro CONTADO con band en esa hoja y rating >= el de la línea; (b) todo cuarto de escalera / elevador / shaft
@@ -714,21 +751,13 @@ def rated_fallas(canon):
     for ln in _u199(canon).get("rated_lines") or []:
         n += 1
         hid = f"{ln.get('sheet')}:{ln.get('id') or round(float(ln.get('x0') or 0))}"
-        ok = False
-        for w in walls:
-            b = w.get("band") or {}
-            if b.get("sheet") != ln.get("sheet") or _rating(w) < float(ln.get("rating_hr") or 0) or b.get("ori") not in ("H", "V"):
-                continue
-            x0, y0, x1, y1 = (float(ln.get(k) or 0) for k in ("x0", "y0", "x1", "y1"))
-            mx, my = (x0 + x1) / 2, (y0 + y1) / 2
-            c = (float(b["c0"]) + float(b["c1"])) / 2
-            lo, hi = sorted((float(b["lo"]), float(b["hi"])))
-            along, cross = (mx, my) if b["ori"] == "H" else (my, mx)
-            if abs(cross - c) <= 12 and lo - 6 <= along <= hi + 6:
-                ok = True
-                break
-        if not ok and not u199_dispuesto(canon, 6, hid):
-            ev.append(f"(6) línea rated {ln.get('rating_hr')} HR de {ln.get('sheet')} ({hid}) sin muro contado con ese rating — U-199")
+        if not RX_NH_VALIDA.search(str(ln.get("nhoja") or ln.get("source") or "")):
+            ev.append(f"(6) línea rated {hid} sin N/HOJA del code plan (opción (b): el lector carga solo las líneas de NUESTROS muros, "
+                      "cada una con su N/HOJA) — U-199")
+        falta = rated_sin_muro(ln, walls)
+        if falta > 12 and not u199_dispuesto(canon, 6, hid):
+            ev.append(f"(6) línea rated {ln.get('rating_hr')} HR de {ln.get('sheet')} ({hid}): {falta:.0f} pt sin muro contado con ese "
+                      "rating — U-199")
     for r in _u199(canon).get("rooms") or []:
         if not RX_RATED_ROOM.search(str(r.get("room") or "")):
             continue
@@ -789,7 +818,7 @@ def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
 
 def secciones_fallas(canon, tol_ft=0.5):
     """U-199 (7) SECCIONES / ELEVACIONES: cada muro / soffit / cielo cortado (canon.u199.secciones [{sheet, detalle, elemento, altura_ft}])
-    existe en el canon con la misma altura (+-0.5 ft)."""
+    existe en el canon con la misma altura (tolerancia tol_ft)."""
     idx = {norm_txt(w.get("id")): w for w in muros_canon(canon or {}) if isinstance(w, dict)}
     ev, n = [], 0
     for s in _u199(canon).get("secciones") or []:
@@ -868,7 +897,8 @@ def lector3_fallas(canon, set_hojas):
     ev = []
     req = max(1, math.ceil(0.10 * len(planta))) if planta else 0
     if len({x.get("sheet") for x in xs}) < req:
-        ev.append(f"(12) tercer lector ciego en {len({x.get('sheet') for x in xs})} hoja(s); se piden >= {req} (10 % de {len(planta)} hojas A / I) — U-199")
+        ev.append(f"(12) faltan hojas del tercer lector ciego: revisadas {len({x.get('sheet') for x in xs})}, se piden >= {req} (10 % de las "
+                  f"hojas A / I del set: {len(planta)}) — U-199")
     for x in xs:
         if x.get("conteo_lector3") != x.get("conteo_canon") and not x.get("revision_completa"):
             ev.append(f"(12) {x.get('sheet')}: tercer lector {x.get('conteo_lector3')} vs canon {x.get('conteo_canon')} sin revisión completa de la hoja — U-199")

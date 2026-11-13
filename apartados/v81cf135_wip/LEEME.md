@@ -1,6 +1,6 @@
 # v81cf135 WIP: U-199 (13 controles contra elementos omitidos) + BE-XF16
 
-Estado: EN DESARROLLO (APARTADA, no publicada). La vigente es v81cf134.
+Estado: CERRADA y APARTADA (no publicada, espera la aprobación de COORDINACIÓN). La vigente es v81cf134. Parche completo: apartados/v81cf135_desde_v81cf134.patch; órdenes: apartados/ordenes_v135/.
 
 ## Cómo correrlo sobre un canon
 
@@ -32,7 +32,7 @@ Imprime cada control con evaluados / hallazgos. Sale con código 1 si hay hallaz
 |---|---|---|---|
 | (2) pisos gemelos | UNTYPED-L2-12 (LINEN 222 stub) sin gemelo en L3 | FAIL (lo atrapa) | resuelto (existe UNTYPED-L3-12) |
 | (13) EXCLUDED | XW.6.6-L4-16 (F&B 410) sin cara exterior | FAIL (lo atrapa) | resuelto (XW.6.6-L4-16 B contada) |
-| (6) rated | Stair 2 exit passage (RFI-31) | prototipo raster: 23 pts sin muro | 3 pts |
+| (6) rated, opción (b) | Stair 2 exit passage (RFI-31), línea 2 HR cargada en A2.01 con 1/A0.01 | FAIL (37 pt sin muro 2 HR) | PASS (XW.6.3-L1-04 A) |
 | (1) cierre | mutación quitar una cara | FAIL (test) | — |
 
 ## Falsos positivos medidos (solo canon, sin set)
@@ -40,3 +40,10 @@ Imprime cada control con evaluados / hallazgos. Sale con código 1 si hay hallaz
 - CR rev20b: (2) 14 de 582; (13) 2 de 48 (+ 46 sin 'reverificado', dato que falta); (10) 1; (1) / (5) piden canon.u199.rooms.
 - GK rev3b: (3) 26 de 36 puertas sin wall ni center_pt (no verificables); (13) 16 sin 'reverificado'.
 - XF: (13) 13 sin 'reverificado'; 5b en A2.0: 3 tramos sin markup (1 real en la jamba de la puerta 103, 1 dudoso, 1 falso por un mop sink).
+
+## Agregados al cierre
+
+- (6) opción (b) (COORDINACIÓN 05:57): rated_lines solo de nuestros muros, con N/HOJA; la cobertura sale por band o por path; test_u199_rated_opcion_b_replica_rfi. El extractor raster queda como ayuda (apartados/u199_proto), sin conectar como chequeo.
+- add_alternates: 'rfi' opcional si el alternate está impreso ('impreso' = hoja o sección), COORDINACIÓN 05:51; test_alternate_impreso_sin_rfi.
+- (13) la cara exterior hermana se busca por el id base (XW.6.2-L1-03 B ya no sale como falso).
+- Validación: suite 47/47, banco 0 distintas (8), XF 0 regresiones (230 / 12 / 0), reglas 0 sin clasificar, 199 archivos, verificar_version 0 reglas faltantes.
