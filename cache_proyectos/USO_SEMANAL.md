@@ -29,3 +29,4 @@
 ## 12-nov-2026 ~9:44 AM PT (captura del usuario)
 - Semana: 74 % usado (resetea viernes 2:00 AM). "On track". Antes: 69 % el 11-nov 21:23 PST → +5 % en ~12 h (CR rev20a + GK rev3a + skill v113–v118 + auditoría U-138).
 - 12-nov 10:25 PM PT: 92 % semana (reset vie 2:00 AM PT). 2 weekly resets disponibles (expiran 10-dic). Recomendado no usar reset: faltan 3.5 h.
+- 13-nov 3:47 PM PT (viernes): 12 % semana (reset vie 20-nov 2:00 AM PT). Aviso de la app: 'At this pace you'll run out Tuesday evening'. Tope diario para alcanzar: ~14 %/día. 2 weekly resets disponibles (expiran 10-dic).
