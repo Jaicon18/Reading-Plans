@@ -152,8 +152,12 @@ def hook_solo_usuario():
     m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
     for auto in ("<task-notification> <task-id>x</task-id>", "<agent-message from=\"a\"> [Subagent hand-back]",
                  "<cross-session-message from-session=\"s\">", "[SYSTEM NOTIFICATION - NOT USER INPUT] x",
-                 "<system-reminder>x</system-reminder>"):
+                 "<system-reminder>x</system-reminder>",
+                 "This session's worker process was restarted. If your previous turn was already complete, take no action and wait for the "
+                 "next event. Otherwise, continue from where you left off.",                          # v132: id 3b88645a6b4d
+                 "This session is being continued from a previous conversation that ran out of context."):
         assert not m.es_del_usuario(auto), auto
+    assert m.es_del_usuario("the worker process was restarted? revisa la subida"), "una frase del usuario que lo menciona sí se guarda"
     assert not m.es_del_usuario("mi password es x")
     assert m.es_del_usuario("si el type dice BOTH SIDES van las dos caras")
 

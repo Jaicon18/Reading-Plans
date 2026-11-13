@@ -5,7 +5,9 @@ import hashlib, json, os, re, sys, datetime
 SECRETO = re.compile(r"(password|passwd|contraseñ|api[_-]?key|secret|token\s*[:=]|BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,})", re.I)
 # BE-143: los avisos automáticos (tareas en segundo plano, subagentes, mensajes de otras sesiones,
 # tareas programadas) llegan como prompt pero NO son mensajes del usuario: no se guardan.
-AUTOMATICO = re.compile(r"^\s*(<task-notification|<agent-message|<cross-session-message|<system-reminder|<wake\b|<webhook-payload|<child-session-event|<event source=|\[SYSTEM NOTIFICATION)", re.I)
+AUTOMATICO = re.compile(r"^\s*(<task-notification|<agent-message|<cross-session-message|<system-reminder|<wake\b|<webhook-payload|<child-session-event|<event source=|\[SYSTEM NOTIFICATION"
+                        r"|This session's worker process was restarted"          # v132 (COORDINACIÓN 13-nov, id 3b88645a6b4d): aviso del sistema
+                        r"|This session is being continued from a previous conversation)", re.I)   # resumen automático al compactar
 def es_del_usuario(texto):
     return bool(texto) and not AUTOMATICO.search(texto) and not SECRETO.search(texto)
 def main():

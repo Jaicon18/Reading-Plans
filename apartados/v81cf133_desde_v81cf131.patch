@@ -1,0 +1,573 @@
+diff -ruN v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:01:38.261599741 +0000
++++ v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:01:38.270497270 +0000
+@@ -8730,6 +8730,42 @@
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "test_be_gk59"
+    }
++  },
++  {
++   "id": "U-195",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, CR City Hotel RFI-30: \"ponlo como alternate\"; commit e42d0b0; mecanismo COORDINACIÓN 04:49)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "elemento dibujado sin material impreso y con su referencia no emitida = ALTERNATE (ADD) completo fuera del base bid: canon add_alternates + línea 'ALTERNATE #N (ADD)' en el Scope Checklist con cantidades [DERIVED] + 'ALTERNATE #N (ADD)' en la Proposal fuera del total base (el Material Summary no lleva renglones ALTERNATE, SKILL §alcances 4); RFI cerrado como 'user decision: Alternate #N' sin las tres = FAIL",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_alternates",
++    "take-off:tools/compuerta_entrega.py::alternates_fallas",
++    "take-off:tools/plantilla_excel.py::add_alternates_err",
++    "take-off:tools/plantilla_excel.py::alcances_add_alternates"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_u195_add_alternates"
++   }
++  },
++  {
++   "id": "U-196",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"mapa de cobertura, ponle ese nombre y haz una descripcion para saber para que sirve cada cosa, por que como son tantas ya no sabe uno ni para que sierven\")",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "el PDF del mapa se llama 'MAPA DE COBERTURA - IMAGE ONLY.pdf' (se acepta el nombre viejo en entregas anteriores); '00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md' en la raíz de cada entrega, armado desde la lista real en el orden de revisión con QUÉ ES · PARA QUÉ SIRVE · CUÁNDO ABRIRLO por archivo; CE_LEEME_ARCHIVOS: falta el LEEME / archivo sin línea / línea de un archivo que no existe / patrón sin descripción = FAIL",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::ce_leeme_archivos",
++    "take-off:tools/compuerta_entrega.py::leeme_fallas",
++    "take-off:tools/compuerta_entrega.py::leeme_texto",
++    "take-off:tools/compuerta_entrega.py::escribir_leeme",
++    "take-off:tools/compuerta_entrega.py::nombres_planos",
++    "take-off:tools/compuerta_entrega.py::cobertura_entrega"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_u196_leeme_y_mapa"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v131/take-off-metal-frame-drywall/SKILL.md v133/take-off-metal-frame-drywall/SKILL.md
+--- v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:01:38.268358409 +0000
++++ v133/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:01:38.275933750 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf131** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf133** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -368,6 +368,19 @@
+   VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si el VERDE es anterior a la publicación de la versión
+   siguiente (FECHAS_PUBLICACION, hora real del commit), la subida es posterior al VERDE y los hashes de Drive coinciden (b', 02:03). La re-corrida por
+   cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
++- **U-196 (usuario 13-nov: "mapa de cobertura, ponle ese nombre y haz una descripcion para saber para que sirve cada cosa"; v81cf133):**
++  (1) el mapa de cobertura se llama 'Planos marcados/MAPA DE COBERTURA - IMAGE ONLY.pdf' (el nombre viejo 'COBERTURA - IMAGE ONLY.pdf' se
++  sigue aceptando en entregas anteriores); (2) `compuerta_entrega.py leeme <carpeta de entrega>` escribe en la raíz
++  '00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md' desde la lista REAL de archivos, en el orden de revisión, una línea por archivo
++  (QUÉ ES · PARA QUÉ SIRVE · CUÁNDO ABRIRLO; diccionario fijo LEEME_PATRONES); se corre al final de la cadena, antes de la compuerta;
++  (3) CE_LEEME_ARCHIVOS: falta el LEEME, archivo sin línea, línea de un archivo que no existe o patrón sin descripción = FAIL.
++- **U-195 (usuario 13-nov, CR RFI-30 "ponlo como alternate"; v81cf133):** elemento DIBUJADO cuyo material no está impreso y cuyo documento
++  de referencia no se emitió = se saca del BASE BID y va como ALTERNATE (ADD) completo (framing + board + acabado de la geometría dibujada,
++  [DERIVED]) con el mecanismo del skill (§alcances 4: el Material Summary NO lleva renglones ALTERNATE): canon `add_alternates[]`
++  {n, rfi, texto, cantidades [{material, qty, unit, op}]} -> línea 'ALTERNATE #N (ADD)' en el Scope Checklist con sus cantidades
++  [DERIVED] (plantilla_excel) y 'ALTERNATE #N (ADD)' con precio aparte en la Proposal, fuera del total base; el RFI se cierra como
++  'user decision: Alternate #N'. CE_ALTERNATES: RFI cerrado como Alternate sin add_alternates + línea en Scope + línea en Proposal = FAIL;
++  un ALTERNATE en el Material Summary = FAIL. Sin volver a preguntar en casos iguales.
+ - **BE-GK59 (Grand Kia rev3b, unida en v81cf131):** la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa); con
+   SUBIDA_OK.json, una re-corrida NO verde no reescribe ENTREGA_OK.json (queda el de la corrida subida; una VERDE sí, para re-subir);
+   SUBIDA_OK.json guarda el puntero 'corrida' / 'entrega_ok' a la corrida subida. CLI `compuerta_entrega.py be_gk59 <w>`.
+Binary files v131/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v133/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v133/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v133/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v133/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v131/take-off-metal-frame-drywall/tools/canon.py v133/take-off-metal-frame-drywall/tools/canon.py
+--- v131/take-off-metal-frame-drywall/tools/canon.py	2026-11-13 05:01:38.262929992 +0000
++++ v133/take-off-metal-frame-drywall/tools/canon.py	2026-11-13 05:01:38.271889555 +0000
+@@ -2687,6 +2687,7 @@
+     out["accesorios"] = {"familias": acc["familias"], "estado": acc["estado"], "unidades": acc["unidades"],
+                          "waste": acc["waste"], "nombres_excel": acc["nombres_excel"]}
+     out["rfis_accesorios"] = acc["rfis"]
++    out["add_alternates"] = [dict(x) for x in data.get("add_alternates") or [] if isinstance(x, dict)]   # U-195: ALTERNATE (ADD), fuera del base
+     out["estado_accesorios"] = acc["estado"]
+     out["obligatorias"] = OBLIGATORIAS + [f for f in accesorios.FAMS if f not in OBLIGATORIAS]
+     out["excluidas"] = {"insulation (batt, sound batt, rigid polyiso, rigid board)": "EXCLUDED - estimator standing order: insulation always EXCLUDED",   # R80e.88; R80w.20: sin nombre de archivo (R80e.84)
+diff -ruN v131/take-off-metal-frame-drywall/tools/checklist_revision.py v133/take-off-metal-frame-drywall/tools/checklist_revision.py
+--- v131/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-13 05:01:38.265458052 +0000
++++ v133/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-13 05:01:38.275052751 +0000
+@@ -11,7 +11,7 @@
+   B3 Sheets to walk            hojas de planta / RCP / ampliadas con markups: casilla "no blank rooms / walls"
+   B4 Exclusions & decisions    toda exclusión del Scope Checklist y toda decisión de Review Items con su delta: casilla "agree"
+   B5 Bluebeam CSV              pasos para exportar el CSV de Bluebeam y subirlo (U-157 / U-167): casilla por paso
+-  B6 Coverage                  (U-193, --b6 Auditoria/COBERTURA.csv) hojear 'COBERTURA - IMAGE ONLY.pdf': 0 rojos por hoja
++  B6 Coverage                  (U-193, --b6 Auditoria/COBERTURA.csv) hojear 'MAPA DE COBERTURA - IMAGE ONLY.pdf': 0 rojos por hoja
+ 
+ Uso: python3 -I checklist_revision.py <takeoff.xlsx> <markups.pdf> <bidset_limpio.pdf> <canon.json> <salida.xlsx>
+          [--proy CR] [--b5-hecho "<texto de la comparación ya hecha>"] [--b2-3lados Auditoria/COMPARACION_ALTURAS.csv (U-175)] [--b2-muestra Auditoria/ALTURAS_MUESTRA.json (U-176)]
+@@ -179,8 +179,8 @@
+     ws.append(["", "CSV comparison: " + (b5_hecho or "pending (upload the CSV)")])
+     if b6:                                              # U-193: hojear el mapa de cobertura, 0 rojos
+         import csv as _csv
+-        ws, dv = hoja("B6 Coverage", "B6 - Walk 'COBERTURA - IMAGE ONLY.pdf': 0 red walls / rooms",
+-                      "Abre 'Planos marcados/COBERTURA - IMAGE ONLY.pdf': lo verde tiene markup, lo ROJO (grueso, circulado y numerado) es un "
++        ws, dv = hoja("B6 Coverage", "B6 - Walk 'MAPA DE COBERTURA - IMAGE ONLY.pdf': 0 red walls / rooms",
++                      "Abre 'Planos marcados/MAPA DE COBERTURA - IMAGE ONLY.pdf': lo verde tiene markup, lo ROJO (grueso, circulado y numerado) es un "
+                       "muro o cuarto dibujado SIN markup ni disposición. Marca la casilla de cada hoja cuando no quede ningún rojo.",
+                       ["Sheet (Page Label)", "Walls detected", "Wall LF covered %", "Rooms (ceiling / excluded)", "RED", "0 red (checked)"],
+                       [16, 16, 18, 24, 8, 16])
+diff -ruN v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py v133/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 05:01:38.265475904 +0000
++++ v133/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 05:01:38.275071978 +0000
+@@ -357,6 +357,190 @@
+     return ev
+ 
+ 
++RX_ALT_CERRADO = re.compile(r"(?i)\buser\s+decision\s*:\s*alternate\s*#\s*(\d+)|\bclosed\s+as\s+(?:an?\s+)?alternate\s*#\s*(\d+)")
++RX_ALT_ADD = r"(?i)alternate\s*#\s*{n}\s*\(\s*add\s*\)"
++
++
++def _textos(x):
++    if isinstance(x, dict):
++        return " ".join(_textos(v) for v in x.values())
++    if isinstance(x, (list, tuple)):
++        return " ".join(_textos(v) for v in x)
++    return str(x) if x is not None else ""
++
++
++def alternates_fallas(canon, scope_rows, ms_nombres, proposal_textos=None):
++    """U-195 (usuario 13-nov, CR RFI-30 'ponlo como alternate'; COORDINACIÓN 04:49): un elemento dibujado sin material impreso y con su
++    referencia no emitida va como ALTERNATE (ADD), FUERA del base bid, con el mecanismo del skill (SKILL §alcances 4: el Material Summary
++    NO lleva renglones ALTERNATE): canon add_alternates[] {n, rfi, texto, cantidades [{material, qty, unit, op}] [DERIVED]}, línea
++    'ALTERNATE #N (ADD)' en el Scope Checklist y 'ALTERNATE #N (ADD)' en la Proposal, fuera del total base. Todo RFI cerrado como
++    'user decision: Alternate #N' sin su add_alternates + línea en el Scope + línea en la Proposal (si hay Proposal) = FAIL; un renglón
++    ALTERNATE en el Material Summary = FAIL. -> [fallas]"""
++    ev = []
++    aa = {}
++    for x in (canon or {}).get("add_alternates") or []:
++        try:
++            aa[int(x.get("n"))] = x
++        except (TypeError, ValueError):
++            ev.append(f"add_alternates: entrada sin 'n' entero ({str(x)[:60]}) (U-195)")
++    for n, x in sorted(aa.items()):
++        if not x.get("rfi") or not x.get("cantidades"):
++            ev.append(f"add_alternates #{n}: falta 'rfi' o 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada) (U-195)")
++    for m in ms_nombres or []:
++        if re.search(r"\bALTERNATE\b", str(m or "")):
++            ev.append(f"Material Summary '{str(m)[:60]}': un ALTERNATE no va en el Material Summary (se cotiza aparte, SKILL §alcances 4; U-195)")
++    txt_rfi = _textos([(canon or {}).get(k) for k in ("rfis", "rfi_cierre", "rfis_cerrados", "pending")]) + " " + _textos(scope_rows)
++    cerrados = {int(a or b) for a, b in RX_ALT_CERRADO.findall(txt_rfi)}
++    sc = _textos(scope_rows)
++    pr = " ".join(proposal_textos or [])
++    for n in sorted(cerrados | set(aa)):
++        if n not in aa:
++            ev.append(f"RFI cerrado como 'user decision: Alternate #{n}' sin su entrada en canon add_alternates (U-195)")
++        if not re.search(RX_ALT_ADD.format(n=n), sc):
++            ev.append(f"ALTERNATE #{n}: sin la línea 'ALTERNATE #{n} (ADD)' en el Scope Checklist (U-195)")
++        if proposal_textos is not None and not re.search(RX_ALT_ADD.format(n=n), pr):
++            ev.append(f"ALTERNATE #{n}: la Proposal no tiene 'ALTERNATE #{n} (ADD)' con su precio aparte, fuera del total base (U-195)")
++    return ev
++
++
++LEEME_NOMBRE = "00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md"
++# U-196 (usuario 13-nov: "haz una descripcion para saber para que sirve cada cosa, por que como son tantas ya no sabe uno ni para que
++# sirven"): diccionario FIJO por patrón de nombre, en el ORDEN de revisión -> (QUÉ ES, PARA QUÉ SIRVE, CUÁNDO ABRIRLO)
++LEEME_PATRONES = [
++    (r"GUIA_DE_REVISION_DEL_ESTIMADOR\.md$", ("Guía del estimador: cómo revisar esta entrega y sus límites",
++     "saber qué abrir, en qué orden y qué NO detecta el programa", "PRIMERO, antes de abrir cualquier otro archivo")),
++    (r"README_REVIEW\.md$", ("Resumen de la revisión: qué cambió, qué quedó pendiente y cómo se subió", "ver el estado de la entrega de un vistazo",
++     "después de la GUÍA")),
++    (r"^Take-off/.*\.xlsx$", ("Excel Take-off (6 hojas fijas: Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist)",
++     "las cantidades del base bid por wall / type y la lista de compra (Material Summary)", "para revisar o usar cualquier cantidad")),
++    (r"^Take-off/.*\.sello\.json$", ("Sello del Excel (sha256 que produjo la cadena)", "probar que el Excel no se editó a mano",
++     "solo si hay duda de que el Excel cambió")),
++    (r"^Planos marcados/.* - OPEN IN BLUEBEAM\.pdf$", ("PDF de markups editable (walls y ceilings con Subject, Page Label, Length, Depth, Wall Area)",
++     "revisar cada markup en Bluebeam (Markups List) contra el Excel", "en Bluebeam, junto con el Excel")),
++    (r"^Planos marcados/MAPA DE COBERTURA - IMAGE ONLY\.pdf$|^Planos marcados/COBERTURA - IMAGE ONLY\.pdf$",
++     ("MAPA DE COBERTURA (U-193): verde = tiene markup, ROJO = muro / cielo dibujado sin markup", "ver de un vistazo que no se pasó ningún muro ni cielo",
++      "después de los markups; hojearlo hoja por hoja (B6 del CHECKLIST)")),
++    (r"^Planos marcados/.* - IMAGE ONLY \(not editable\) - .*\.png$", ("Imagen de una hoja con sus markups (solo imagen, no editable)",
++     "ver los markups sin Bluebeam (celular / correo)", "cuando no hay Bluebeam a la mano")),
++    (r"^Planos marcados/ALTURAS_REVISADAS.*\.pdf$", ("Alturas revisadas: cada altura de wall con su N/HOJA circulada",
++     "comprobar de dónde sale cada Depth (altura) del Excel", "al revisar alturas")),
++    (r"^Planos marcados/DETALLES_REVISADOS.*\.pdf$|^DETALLES_REVISADOS_INDEX\.md$", ("Detalles revisados (+ su INDEX): cada detalle N/HOJA seguido hasta el final",
++     "ver qué detalle manda en cada wall, header, sill, blocking o soffit", "al revisar un detalle o una burbuja")),
++    (r"^Planos marcados/SCHEDULES_REVISADOS.*\.pdf$|^SCHEDULES_MATERIALES\.md$", ("Schedules revisados + SCHEDULES_MATERIALES: Partition Type Schedule y materiales impresos",
++     "comprobar stud size, gauge, board y capas de cada type", "al revisar un type o un material")),
++    (r"CHECKLIST_REVISION.*\.xlsx$", ("CHECKLIST de revisión (hojas B1..B6)", "marcar lo revisado; B6 = recorrer el MAPA DE COBERTURA",
++     "mientras se revisa, para no saltarse nada")),
++    (r"^PARA_REVISAR.*\.md$", ("Lista corta de lo que hay que mirar primero", "decidir RFIs y puntos abiertos", "en la mañana, antes del bid")),
++    (r"^SEGUIMIENTO.*\.md$", ("Seguimiento de RFIs / decisiones y su estado", "saber qué está abierto, cerrado o pendiente del usuario",
++     "antes de contestar un RFI")),
++    (r"^RESUMEN_rev.*\.md$", ("RESUMEN de la rev vigente: cifras principales y cambios", "tener las cantidades clave sin abrir el Excel",
++     "para un vistazo rápido")),
++    (r"^BITACORA_rev.*\.md$", ("BITÁCORA de la rev: qué se hizo y en qué orden", "auditar el proceso", "solo si hay que reconstruir algo")),
++    (r"^TIEMPOS\.md$", ("TIEMPOS por paso (hora de California)", "ver cuánto tomó cada paso y las corridas de compuerta",
++     "solo para control de tiempos")),
++    (r"^Proposal/.*\.(xlsx|pdf)$", ("Proposal (INCLUDED / NOT INCLUDED / ALTERNATES, precios FBM)", "la cotización al cliente",
++     "después de revisar el take-off, para enviar")),
++    (r"^Auditoria(\.zip)?/?$", ("Auditoría (carpeta o Auditoria.zip): pruebas, lecturas A/B, ROJOS, CSV de la compuerta",
++     "respaldo de cada cifra y de cada decisión", "solo si hay que comprobar algo a fondo")),
++]
++
++
++def leeme_items(entrega):
++    """U-196: archivos y carpetas REALES de la entrega que el LEEME describe: archivos de la raíz, de Take-off/, Planos marcados/ y
++    Proposal/, y Auditoria/ (o Auditoria.zip) como UNA línea. -> [ruta relativa con '/']"""
++    out = []
++    for f in sorted(os.listdir(entrega)):
++        p = os.path.join(entrega, f)
++        if f == LEEME_NOMBRE or f.startswith("."):
++            continue
++        if os.path.isdir(p):
++            if f == "Auditoria":
++                out.append("Auditoria/")
++                continue
++            for r, _d, fs in os.walk(p):
++                out += [os.path.relpath(os.path.join(r, x), entrega).replace(os.sep, "/") for x in sorted(fs) if not x.startswith(".")]
++        else:
++            out.append(f)
++    return out
++
++
++def _leeme_patron(rel):
++    return next(((k, d) for k, (rx, d) in enumerate(LEEME_PATRONES) if re.search(rx, rel)), (None, None))
++
++
++def leeme_texto(entrega):
++    """U-196: el texto del LEEME, armado desde la lista REAL de la entrega, en el orden de revisión del diccionario; un archivo sin
++    patrón queda con 'SIN DESCRIPCIÓN' (y CE_LEEME_ARCHIVOS da FAIL)."""
++    items = sorted(leeme_items(entrega), key=lambda r: (_leeme_patron(r)[0] if _leeme_patron(r)[0] is not None else 999, r))
++    ls = ["# 00 LEEME PRIMERO - QUÉ ES CADA ARCHIVO", "",
++          "Una línea por archivo, en el orden en que se revisa: QUÉ ES · PARA QUÉ SIRVE · CUÁNDO ABRIRLO (U-196).", ""]
++    for rel in items:
++        _k, d = _leeme_patron(rel)
++        if d:
++            ls.append(f"- `{rel}` — **QUÉ ES:** {d[0]} · **PARA QUÉ SIRVE:** {d[1]} · **CUÁNDO ABRIRLO:** {d[2]}")
++        else:
++            ls.append(f"- `{rel}` — SIN DESCRIPCIÓN")
++    return "\n".join(ls) + "\n"
++
++
++def escribir_leeme(entrega):
++    p = os.path.join(entrega, LEEME_NOMBRE)
++    open(p, "w", encoding="utf-8").write(leeme_texto(entrega))
++    return p
++
++
++def leeme_fallas(entrega):
++    """U-196 / CE_LEEME_ARCHIVOS: FAIL si falta el LEEME, si un archivo no tiene línea, si una línea cita un archivo que no existe o si un
++    archivo no tiene descripción en el diccionario (patrón). -> [fallas]"""
++    p = os.path.join(entrega, LEEME_NOMBRE)
++    if not os.path.isfile(p):
++        return [f"falta '{LEEME_NOMBRE}' en la raíz de la entrega (U-196: compuerta_entrega.py leeme <carpeta de entrega>)"]
++    txt = open(p, encoding="utf-8", errors="ignore").read()
++    citados = re.findall(r"(?m)^\s*-\s*`([^`]+)`", txt)
++    reales = leeme_items(entrega)
++    ev = [f"'{r}' sin línea en el LEEME (U-196)" for r in reales if r not in citados]
++    ev += [f"el LEEME cita '{r}' y no existe en la entrega (U-196)" for r in citados if r not in reales]
++    ev += [f"'{r}': ningún patrón del diccionario lo describe (agregar su QUÉ ES / PARA QUÉ SIRVE / CUÁNDO ABRIRLO, U-196)"
++           for r in reales if _leeme_patron(r)[1] is None]
++    ev += [f"línea de '{r}' sin descripción (U-196)" for r in citados
++           if re.search(rf"(?m)^\s*-\s*`{re.escape(r)}`\s*—\s*SIN DESCRIPCI", txt)]
++    return ev
++
++
++@chequeo("CE_LEEME_ARCHIVOS", ["U-196"], "U-196 (usuario 13-nov): '00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md' en la raíz de la entrega, armado "
++         "desde la lista REAL de archivos en el orden de revisión, una línea por archivo (QUÉ ES · PARA QUÉ SIRVE · CUÁNDO ABRIRLO); falta el "
++         "LEEME, un archivo sin línea, una línea de un archivo que no existe o un patrón sin descripción = FAIL")
++def ce_leeme_archivos(c):
++    if not getattr(c, "entrega", None):
++        return R("FAIL", "sin carpeta de entrega (U-137)")
++    ev = leeme_fallas(c.entrega)
++    t133 = fecha_publicacion("v81cf133")                 # v123: hora REAL del commit de publicación (git); si no, FECHA_V133
++    if ev and not entrega_nueva(c, t133.isoformat() if t133 else FECHA_V133):
++        return R("AMBER", "entrega anterior a U-196 (v81cf133): no se re-abre (U-180 (4))", *ev[:10])
++    return R("FAIL", *ev[:25]) if ev else R("PASS", f"{len(leeme_items(c.entrega))} archivo(s) / carpeta(s) descritos en {LEEME_NOMBRE}")
++
++
++@chequeo("CE_ALTERNATES", ["U-195"], "U-195 (usuario 13-nov, CR RFI-30 'ponlo como alternate'): elemento dibujado sin material impreso y con "
++         "su referencia no emitida = ALTERNATE (ADD) fuera del base bid: canon add_alternates + línea 'ALTERNATE #N (ADD)' en el Scope "
++         "Checklist + 'ALTERNATE #N (ADD)' en la Proposal; RFI cerrado como Alternate sin las tres = FAIL; ALTERNATE en el Material Summary = FAIL")
++def ce_alternates(c):
++    wb = c.wb()
++    if wb is None or "Material Summary" not in wb.sheetnames:
++        return R("FAIL", "sin Excel / Material Summary (U-137)")
++    can = c.canon if isinstance(getattr(c, "canon", None), dict) else (_json(c.canon) if getattr(c, "canon", None) else {}) or {}
++    ms = [r[0] for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r and r[0]]
++    sc = [r for r in wb["Scope Checklist"].iter_rows(min_row=2, values_only=True) if r and r[0]] if "Scope Checklist" in wb.sheetnames else []
++    xs = sorted(glob.glob(os.path.join(c.entrega or "", "Proposal", "*.xlsx"))) if c.entrega else []
++    pt = None
++    if xs:
++        import openpyxl
++        pt = [str(v) for x in xs for ws in openpyxl.load_workbook(x, read_only=True, data_only=True).worksheets
++              for row in ws.iter_rows(values_only=True) for v in row if v is not None]
++    ev = alternates_fallas(can, sc, ms, pt)
++    n = len((can or {}).get("add_alternates") or [])
++    return R("FAIL", *ev[:20]) if ev else R("PASS", f"{n} add alternate(s) fuera del base bid" if n else "N/A: sin RFIs cerrados como Alternate")
++
++
+ @chequeo("CE_PROPOSAL", ["U-150", "U-192"], "U-150: la proposal (Proposal/) tiene INCLUDED y NOT INCLUDED, cada renglón cargado del Material "
+          "Summary en INCLUDED, cada EXCLUDED del Scope en NOT INCLUDED y cada precio de material con su fuente y fecha FBM")
+ def ce_proposal(c):
+@@ -756,11 +940,13 @@
+ FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
+ FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
+ FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
++FECHA_V133 = "2026-11-13T05:00:00+00:00"   # v133 (U-196 LEEME): respaldo; manda la hora real del commit "Publica v81cf133" (fecha_publicacion)
+ FECHA_V121 = "2026-11-12T22:44:35+00:00"      # v81cf121 (U-193: identidad declarada en la GUÍA); v123: commit de publicación 51ce837
+ FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121": FECHA_V121,
+                       "v81cf122": "2026-11-12T22:50:08+00:00", "v81cf123": "2026-11-12T22:54:07+00:00", "v81cf124": "2026-11-12T23:00:49+00:00",
+                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
+-                      "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00"}
++                      "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
++                      "v81cf131": "2026-11-13T02:24:57+00:00"}   # v133: 9df76c7
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+@@ -1446,7 +1632,7 @@
+             elif "IMAGE ONLY" in b:
+                 ev.append(f"{b}: falta ' - walls|ceilings|walls and ceilings revN' (U-158)")
+         elif b.lower().endswith(".pdf") and not b.startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS")) \
+-                and b != COB_PDF and not re.fullmatch(MARKUPS_RE, b):            # GK (v119): el mapa de cobertura (U-193) no es de markups
++                and b not in COB_PDFS and not re.fullmatch(MARKUPS_RE, b):       # GK (v119) / U-196: el mapa de cobertura no es de markups
+             ev.append(f"{b}: PDF de markups sin el nombre '<PROY>_markups_revN - OPEN IN BLUEBEAM.pdf' (U-165, reemplaza U-158)")
+     return ev
+ 
+@@ -7062,7 +7248,9 @@
+     out.save(out_pdf, deflate=True)
+ 
+ 
+-COB_PDF, COB_CSV, COB_DISP = "COBERTURA - IMAGE ONLY.pdf", "COBERTURA.csv", "COBERTURA_DISPOSICION.csv"
++COB_PDF, COB_CSV, COB_DISP = "MAPA DE COBERTURA - IMAGE ONLY.pdf", "COBERTURA.csv", "COBERTURA_DISPOSICION.csv"   # U-196 (v133): nombre nuevo
++COB_PDF_VIEJO = "COBERTURA - IMAGE ONLY.pdf"          # entregas anteriores a v133: se sigue aceptando
++COB_PDFS = (COB_PDF, COB_PDF_VIEJO)
+ 
+ 
+ def cobertura_entrega(entrega, escribir=True):
+@@ -7075,6 +7263,8 @@
+         return None, {}
+     disp = leer_disposicion(os.path.join(entrega, "Auditoria", COB_DISP))
+     rutas = {"pdf": os.path.join(pl, COB_PDF), "csv": os.path.join(entrega, "Auditoria", COB_CSV)}
++    if not escribir and not os.path.isfile(rutas["pdf"]) and os.path.isfile(os.path.join(pl, COB_PDF_VIEJO)):
++        rutas["pdf"] = os.path.join(pl, COB_PDF_VIEJO)  # U-196: entrega anterior con el nombre viejo
+     r = mapa_cobertura(pdfs[0], disp, out_pdf=rutas["pdf"] if escribir else None, out_csv=rutas["csv"] if escribir else None)
+     return r, rutas
+ 
+@@ -7082,7 +7272,7 @@
+ @chequeo("CE_COBERTURA", ["U-193", "U-137"], "U-193 (usuario 12-nov: 'que se te vaya a pasar algún muro algún cielo'): mapa de cobertura — todo "
+          "muro dibujado en las plantas (par de líneas 2.5\"-14\", >= 2 ft) tiene markup a <= 0.5 ft de su eje en >= 90 % de su largo, todo "
+          "cuarto de un RCP cae en un polígono de cielo o EXCLUDED; lo ROJO necesita disposición con motivo y N/HOJA; 0 muros detectados en "
+-         "una planta = detector ciego; COBERTURA - IMAGE ONLY.pdf, Auditoria/COBERTURA.csv y B6 del CHECKLIST")
++         "una planta = detector ciego; MAPA DE COBERTURA - IMAGE ONLY.pdf (U-196; antes COBERTURA - IMAGE ONLY.pdf), Auditoria/COBERTURA.csv y B6 del CHECKLIST")
+ def ce_cobertura(c):
+     if not getattr(c, "entrega", None):
+         return R("FAIL", "sin carpeta de entrega (U-137)")
+@@ -7270,6 +7460,11 @@
+             print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
+         print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
+         return 0 if o["ok"] else 1
++    if len(argv) > 2 and argv[1] == "leeme":                        # U-196: 00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md
++        print(escribir_leeme(argv[2]))
++        ev = leeme_fallas(argv[2])
++        print("\n".join(ev) if ev else "CE_LEEME_ARCHIVOS PASS")
++        return 1 if ev else 0
+     if len(argv) > 2 and argv[1] == "be_gk59":                      # BE-GK59: ENTREGA_OK por corrida
+         ev = be_gk59_fallas(argv[2])
+         print("\n".join(ev) if ev else "BE-GK59 PASS: ENTREGA_OK.json es el de la corrida subida, guardado por corrida")
+diff -ruN v131/take-off-metal-frame-drywall/tools/plantilla_excel.py v133/take-off-metal-frame-drywall/tools/plantilla_excel.py
+--- v131/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 05:01:38.263228245 +0000
++++ v133/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 05:01:38.272156786 +0000
+@@ -54,6 +54,8 @@
+                "orden_plano": 1 (detalle), "punto": "...", "hoja_detalle": "6/A12.01", "imagen": "R01.jpg"} ],
+    (v77c U9/U10: orden floor plan por type A-Z, después detalles por orden_plano; ordenar_revisar lo hace)
+  "alcances": [ {"id": "ALC-01", "nombre": "...", "estado": "CUANTIFICADO | NO APLICA | RFI", "nota": "..."} ]
++ "add_alternates": [ {"n": 1, "rfi": "RFI-30", "texto": "...", "cantidades": [{"material", "qty", "unit", "op"}]} ]   (U-195, opcional;
++                   van al Scope Checklist como 'ALTERNATE #N (ADD)', NUNCA al Material Summary)
+ }
+ """
+ import json, os, re, shutil, subprocess, sys, tempfile
+@@ -189,12 +191,43 @@
+     for i, x in enumerate(d["rfis"]):
+         if x.get("delta") in (None, "", {}, []):
+             err.append(f"rfis[{i}] ({x.get('id')}): sin delta (número con unidad, o 'n/a: <motivo>'; v68)")
++    err += add_alternates_err(d)                                                   # U-195
+     for i, a in enumerate(d["alcances"]):
+-        if a.get("estado") not in ("CUANTIFICADO", "NO APLICA", "RFI", "CLOSED"):     # R80e.96: RFI cerrado por el estimador
++        if a.get("estado") not in ("CUANTIFICADO", "NO APLICA", "RFI", "CLOSED", "ALTERNATE"):     # R80e.96 / U-195
+             err.append(f"alcances[{i}]: estado debe ser CUANTIFICADO / NO APLICA / RFI (o CLOSED: RFI decidido)")
+     return err
+ 
+ 
++def add_alternates_err(d):
++    """U-195: cada add alternate = {n entero sin repetir, rfi, texto, cantidades [{material, qty, unit, op}]} ([DERIVED]). -> [errores]"""
++    err, ns = [], set()
++    for i, a in enumerate(d.get("add_alternates") or []):
++        n = a.get("n")
++        if not isinstance(n, int) or n < 1 or n in ns:
++            err.append(f"add_alternates[{i}]: 'n' entero >= 1 sin repetir (ALTERNATE #N)")
++        ns.add(n)
++        if not str(a.get("rfi") or "").strip() or not str(a.get("texto") or "").strip():
++            err.append(f"add_alternates[{i}]: falta 'rfi' o 'texto'")
++        if not a.get("cantidades"):
++            err.append(f"add_alternates[{i}]: sin 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada)")
++        for j, q in enumerate(a.get("cantidades") or []):
++            if not all(q.get(k) not in (None, "") for k in ("material", "qty", "unit", "op")):
++                err.append(f"add_alternates[{i}].cantidades[{j}]: material / qty / unit / op ([DERIVED]) obligatorios")
++    return err
++
++
++def alcances_add_alternates(d):
++    """U-195: una línea 'ALTERNATE #N (ADD)' del Scope Checklist por add alternate, con sus cantidades [DERIVED]; el Material Summary
++    no lleva renglones ALTERNATE (se cotizan aparte, SKILL §alcances 4)."""
++    out = []
++    for a in sorted(d.get("add_alternates") or [], key=lambda x: x.get("n") or 0):
++        cant = "; ".join(f"{q['material']} {q['qty']} {q['unit']} [DERIVED: {q['op']}]" for q in a.get("cantidades") or [])
++        out.append({"id": f"ALT-{a['n']}", "nombre": f"ALTERNATE #{a['n']} (ADD): {a.get('texto')}", "estado": "ALTERNATE",
++                    "nota": f"NOT in the base bid; priced separately as ALTERNATE #{a['n']} (ADD) in the Proposal. Quantities: {cant}. "
++                            f"{a.get('rfi')} closed as user decision: Alternate #{a['n']}"})
++    return out
++
++
+ # ---- Unidades de compra ----
+ # 15-oct (#8): 4x8 = 32 SF; batt / Level 5 por SF; sin waste en piezas de schedule.
+ # v68 (arbitraje #16): el desperdicio se aplica UNA vez: Pieces = ROUNDUP(NET x (1 + waste) / stock). Se retiró
+@@ -473,7 +506,7 @@
+ 
+ 
+ ESTADO_EN = {"CONFIRMADO": "CONFIRMED", "DERIVADO": "DERIVED", "PENDIENTE": "PENDING", "CUANTIFICADO": "QUANTIFIED",
+-             "NO APLICA": "NOT APPLICABLE", "RFI": "RFI"}
++             "NO APLICA": "NOT APPLICABLE", "RFI": "RFI", "ALTERNATE": "ALTERNATE (ADD) - NOT IN BASE BID"}
+ HOJA_REVISAR, HOJA_ALCANCES = "Review Items", "Scope Checklist"
+ 
+ 
+@@ -690,7 +723,7 @@
+                    os.path.basename(str(x.get("imagen"))) if x.get("imagen") else x.get("imagen")])   # R80e.153: nombre, sin ruta
+     ws = wb.create_sheet(HOJA_ALCANCES)
+     ws.append(["Scope ID", "Scope", "Status", "Note (quantity, NOT APPLICABLE + sheet, or RFI)"])
+-    for x in d["alcances"]:
++    for x in list(d["alcances"]) + alcances_add_alternates(d):   # U-195: una línea 'ALTERNATE #N (ADD)' por add alternate
+         ws.append([x.get("id"), en(x.get("nombre")), ESTADO_EN.get(x.get("estado"), x.get("estado")),
+                    en(resolver_cifras(x.get("nota"), d))])          # R80f.43: cifras por programa
+ 
+@@ -1104,6 +1137,8 @@
+                          f"accesorios_rfi con delta en el canon; nunca se omiten")
+     d = dict(d)
+     d["inputs"] = dict(d.get("inputs") or {})
++    if not d.get("add_alternates") and fo.get("add_alternates"):   # U-195: del canon (canon.py los pasa a familias_out.json)
++        d["add_alternates"] = fo["add_alternates"]
+     fam_canon = fo.get("familias") or {}
+     mats = []
+     # v72 (R71.8b, arbitraje #20): una familia citada por >= 2 renglones de su misma unidad está REPARTIDA (track por
+diff -ruN v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v133/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 05:01:38.262505261 +0000
++++ v133/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 05:01:38.271399832 +0000
+@@ -3362,3 +3362,70 @@
+ 
+ 
+ test_be_gk59()
++
++
++def test_u195_add_alternates():
++    """U-195 (usuario 13-nov, CR RFI-30 'ponlo como alternate'; COORDINACIÓN 04:49, ids sintéticos): el alternate va con el mecanismo del
++    skill: canon add_alternates + línea 'ALTERNATE #N (ADD)' en el Scope Checklist + 'ALTERNATE #N (ADD)' en la Proposal; nunca un
++    renglón ALTERNATE en el Material Summary. RFI cerrado como Alternate sin las tres = FAIL."""
++    import plantilla_excel as P
++    aa = [{"n": 1, "rfi": "RFI-30", "texto": "Stair Z9 furring 3 3/8\" (RE: INTERIOR DRAWINGS not issued)",
++           "cantidades": [{"material": "3-5/8\" stud 20 GA", "qty": 40.0, "unit": "LF", "op": "10 ft x 4 studs"},
++                          {"material": "5/8\" board", "qty": 90.0, "unit": "SF", "op": "10 x 9 x 1 face"}]}]
++    assert P.add_alternates_err({"add_alternates": aa}) == []
++    assert P.add_alternates_err({"add_alternates": [{"n": 1, "rfi": "RFI-30", "texto": "x", "cantidades": [{"material": "a"}]}]})
++    al = P.alcances_add_alternates({"add_alternates": aa})
++    assert al[0]["nombre"].startswith("ALTERNATE #1 (ADD)") and "[DERIVED: 10 ft x 4 studs]" in al[0]["nota"] and "Alternate #1" in al[0]["nota"]
++    can = {"add_alternates": aa, "rfi_cierre": {"RFI-30": {"pregunta": "stair furring", "delta": "user decision: Alternate #1"}}}
++    sc = [(a["id"], a["nombre"], "ALTERNATE (ADD) - NOT IN BASE BID", a["nota"]) for a in al]
++    ms = ["5/8\" Type X board"]
++    assert CE.alternates_fallas(can, sc, ms, ["BASE BID TOTAL", "ALTERNATE #1 (ADD): stair furring"]) == []
++    assert CE.alternates_fallas(can, sc, ms, None) == []                                     # sin Proposal pedida: no se exige
++    ev = CE.alternates_fallas(can, sc, ms, ["BASE BID TOTAL"])
++    assert ev and "Proposal" in ev[0], ev                                                    # falta en la Proposal
++    ev = CE.alternates_fallas(can, [("RFI-30", "stair", "CLOSED", "user decision: Alternate #1")], ms, ["ALTERNATE #1 (ADD)"])
++    assert ev and "Scope Checklist" in ev[0], ev                                             # falta la línea del Scope
++    ev = CE.alternates_fallas({"rfi_cierre": can["rfi_cierre"]}, sc, ms, ["ALTERNATE #1 (ADD)"])
++    assert ev and "add_alternates" in ev[0], ev                                              # RFI cerrado sin add_alternates
++    ev = CE.alternates_fallas(can, sc, ms + ["ALTERNATE #1 – 3-5/8\" stud"], ["ALTERNATE #1 (ADD)"])
++    assert ev and "Material Summary" in ev[0], ev                                            # ALTERNATE en el Material Summary = FAIL
++    assert CE.alternates_fallas({}, [], ms, None) == []
++    print("test_u195_add_alternates OK")
++
++
++test_u195_add_alternates()
++
++
++def test_u196_leeme_y_mapa():
++    """U-196 (usuario 13-nov: 'mapa de cobertura, ponle ese nombre y haz una descripcion para saber para que sirve cada cosa'): (1) el PDF
++    se llama 'MAPA DE COBERTURA - IMAGE ONLY.pdf' y el nombre viejo se sigue aceptando; (2) el LEEME se arma desde la lista REAL en el
++    orden de revisión; (3) CE_LEEME_ARCHIVOS: falta el LEEME / archivo sin línea / línea de un archivo que no existe / sin patrón = FAIL."""
++    assert CE.COB_PDF == "MAPA DE COBERTURA - IMAGE ONLY.pdf" and "COBERTURA - IMAGE ONLY.pdf" in CE.COB_PDFS
++    ok = ["Z9_markups_rev9 - OPEN IN BLUEBEAM.pdf", "Z9.01 - IMAGE ONLY (not editable) - walls rev9.png"]
++    assert CE.nombres_planos(ok + [CE.COB_PDF]) == [] and CE.nombres_planos(ok + [CE.COB_PDF_VIEJO]) == []
++    e = tempfile.mkdtemp(prefix="u196_")
++    for f in ("GUIA_DE_REVISION_DEL_ESTIMADOR.md", "README_REVIEW.md", "RESUMEN_rev9.md", "TIEMPOS.md", "CHECKLIST_REVISION.xlsx",
++              "Take-off/Z9_Takeoff_rev9.xlsx", "Planos marcados/Z9_markups_rev9 - OPEN IN BLUEBEAM.pdf", "Planos marcados/" + CE.COB_PDF,
++              "Planos marcados/DETALLES_REVISADOS.pdf", "Proposal/Z9_Proposal_rev9.xlsx", "Auditoria/x.csv"):
++        os.makedirs(os.path.dirname(os.path.join(e, f)) or e, exist_ok=True)
++        open(os.path.join(e, f), "w").write("x")
++    assert CE.leeme_fallas(e) and "falta" in CE.leeme_fallas(e)[0]                          # sin LEEME = FAIL
++    CE.escribir_leeme(e)
++    assert CE.leeme_fallas(e) == [], CE.leeme_fallas(e)
++    txt = open(os.path.join(e, CE.LEEME_NOMBRE), encoding="utf-8").read()
++    lineas = [l for l in txt.splitlines() if l.startswith("- `")]
++    assert lineas[0].startswith("- `GUIA_DE_REVISION") and "MAPA DE COBERTURA" in txt and "Auditoria/" in txt and "x.csv" not in txt
++    assert all("QUÉ ES:" in l and "PARA QUÉ SIRVE:" in l and "CUÁNDO ABRIRLO:" in l for l in lineas)
++    assert txt.index("OPEN IN BLUEBEAM") < txt.index("MAPA DE COBERTURA - IMAGE ONLY") < txt.index("Proposal/")   # orden de revisión
++    open(os.path.join(e, "SEGUIMIENTO.md"), "w").write("x")
++    assert any("sin línea" in x for x in CE.leeme_fallas(e))                                 # archivo nuevo sin línea = FAIL
++    CE.escribir_leeme(e)
++    os.remove(os.path.join(e, "TIEMPOS.md"))
++    assert any("no existe" in x for x in CE.leeme_fallas(e))                                 # línea de un archivo que no existe = FAIL
++    open(os.path.join(e, "notas_sueltas.txt"), "w").write("x")
++    CE.escribir_leeme(e)
++    assert any("ningún patrón" in x for x in CE.leeme_fallas(e))                             # archivo sin patrón = FAIL
++    print("test_u196_leeme_y_mapa OK")
++
++
++test_u196_leeme_y_mapa()
