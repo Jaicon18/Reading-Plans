@@ -792,6 +792,74 @@ def revisar_prueba_abiertos(archivo, fuente=None, desde=(81, 119), cache=None):
     return out
 
 
+def fechas_publicacion_skill(txt):
+    """BE-XF17: FECHAS_PUBLICACION del compuerta_entrega.py del candidato (literal; resuelve las constantes FECHA_Vnnn del módulo)."""
+    import ast
+    if not txt:
+        return {}
+    try:
+        mod = ast.parse(txt)
+    except SyntaxError:
+        return {}
+    cons, fechas = {}, {}
+    for nd in mod.body:
+        if isinstance(nd, ast.Assign) and len(nd.targets) == 1 and isinstance(nd.targets[0], ast.Name):
+            nm = nd.targets[0].id
+            if isinstance(nd.value, ast.Constant) and isinstance(nd.value.value, str):
+                cons[nm] = nd.value.value
+            elif nm == "FECHAS_PUBLICACION" and isinstance(nd.value, ast.Dict):
+                for k, v in zip(nd.value.keys, nd.value.values):
+                    val = v.value if isinstance(v, ast.Constant) else cons.get(getattr(v, "id", ""))
+                    if isinstance(k, ast.Constant) and val:
+                        fechas[k.value] = val
+    return fechas
+
+
+def commits_publicacion(repo):
+    """versión -> hora real (%cI) del commit 'Publica <v>' / '<v> VIGENTE' (el más viejo si hay varios)."""
+    import subprocess
+    try:
+        r = subprocess.run(["git", "-C", repo, "log", "--all", "--format=%cI %s"], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if r.returncode != 0:
+        return None
+    out = {}
+    for ln in (r.stdout or "").splitlines():
+        iso, _, msg = ln.partition(" ")
+        m = re.search(r"\bPublica (v81cf\d+)\b", msg) or re.search(r"\b(v81cf\d+) VIGENTE\b", msg)
+        if m:
+            out[m.group(1)] = iso                       # git log va de nuevo a viejo: queda el más viejo
+    return out
+
+
+def revisar_fechas(fuente, repo, tol_s=60):
+    """BE-XF17 (COORDINACIÓN 13-nov 06:13): FECHAS_PUBLICACION = hora REAL del commit de publicación de cada versión (se fija DESPUÉS
+    del commit, con git log -1 --format=%cI, nunca antes): una fecha a más de 60 s de su commit 'Publica vX' = FALTA; una versión del
+    dict sin commit de publicación = FALTA (salvo la propia candidata, que se publica con este commit)."""
+    f = fechas_publicacion_skill(fuente.leer("tools/compuerta_entrega.py"))
+    cm = commits_publicacion(repo)
+    if cm is None or not f:
+        return []
+    ver = re.search(r"\*\*VERSION:\s*(v81cf\d+)\*\*", fuente.leer("SKILL.md") or "")
+    propia = ver.group(1) if ver else None
+    out = []
+    for v, iso in sorted(f.items()):
+        if v not in cm:
+            if v != propia:
+                out.append(f"FECHAS_PUBLICACION[{v}] = {iso} y no hay commit 'Publica {v}' en git")
+            continue
+        try:
+            d = abs((datetime.datetime.fromisoformat(iso) - datetime.datetime.fromisoformat(cm[v])).total_seconds())
+        except ValueError:
+            out.append(f"FECHAS_PUBLICACION[{v}] = '{iso}' no es una fecha ISO")
+            continue
+        if d > tol_s:
+            out.append(f"FECHAS_PUBLICACION[{v}] = {iso} vs commit de publicación {cm[v]} ({d:.0f} s > {tol_s} s): la fecha va DESPUÉS del "
+                       "commit, con su hora real (BE-XF17)")
+    return out
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -824,9 +892,11 @@ def main(argv):
     pm = revisar_postmortem(extra[0] if extra else os.path.join(os.path.dirname(os.path.abspath(archivo)), "cache_proyectos"))
     tl = tests_sin_llamar(Fuente(candidato))
     pa = revisar_prueba_abiertos(archivo, Fuente(candidato), cache=extra[0] if extra else None)
+    fp = revisar_fechas(Fuente(candidato), os.path.dirname(os.path.abspath(archivo)))
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
-                       ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa)):
+                       ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa),
+                       ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

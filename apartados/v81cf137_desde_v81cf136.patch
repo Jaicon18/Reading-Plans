@@ -1,0 +1,1615 @@
+diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:23:17.101856174 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:23:17.111351995 +0000
+@@ -8830,6 +8830,23 @@
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "test_u199_cierre_por_cuarto_mutacion"
+    }
++  },
++  {
++   "id": "BE-XF17",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 06:13: v136 publicada con FECHAS_PUBLICACION fijada 2 min DESPUÉS de su commit real)",
++   "categoria": "programa",
++   "cuando": "publicacion",
++   "texto_corto": "FECHAS_PUBLICACION = hora REAL del commit de publicación: se fija DESPUÉS del commit (git log -1 --format=%cI) en la versión siguiente, nunca antes; la versión que se publica no va en el dict (fecha_publicacion la toma de git). verificar_version (revisar_fechas): fecha a más de 60 s de su commit 'Publica vX' o versión sin commit = falta",
++   "motivo": "v135 se fijó 06:08:00 (commit 06:07:55) y v136 06:15:00 (commit 06:12:55): el gating de las reglas nuevas quedaba corrido",
++   "chequeos": [
++    "ordenes:verificar_version.py::revisar_fechas",
++    "ordenes:verificar_version.py::commits_publicacion",
++    "ordenes:verificar_version.py::fechas_publicacion_skill"
++   ],
++   "test": {
++    "archivo": "ordenes:test_verificar_version.py",
++    "token": "fechas_be_xf17"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
+--- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:23:17.109368236 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:23:17.111157755 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf136** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf137** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -414,6 +414,9 @@
+   SUBIDA_OK.json guarda el puntero 'corrida' / 'entrega_ok' a la corrida subida. CLI `compuerta_entrega.py be_gk59 <w>`.
+ - **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
+   y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
++- **BE-XF17 (programa, COORDINACIÓN 13-nov 06:13; v81cf137):** FECHAS_PUBLICACION lleva la hora REAL del commit de publicación y se fija
++  DESPUÉS del commit (git log -1 --format=%cI), en la versión siguiente; la versión que se publica no va en el dict (fecha_publicacion
++  la toma del commit 'Publica vX'). verificar_version.revisar_fechas: fecha a más de 60 s de su commit, o sin commit = falta.
+ - **BE-XF16 (programa, COORDINACIÓN 13-nov; v81cf134):** el canon de CR guarda sus muros en existing_walls y deja walls = []: todo
+   chequeo / tool lee los muros con `muros_canon()` (walls + existing_walls, LISTAS_MUROS); una lectura a propósito solo de 'walls'
+   lleva '# solo-metal:' / '# nodo:' / '# campo:'. CE_MUROS_CANON: walls vacío con muros en otra lista y una lectura sin marcar = FAIL.
+diff -ruN vA/take-off-metal-frame-drywall/runner/evidencia.py vB/take-off-metal-frame-drywall/runner/evidencia.py
+--- vA/take-off-metal-frame-drywall/runner/evidencia.py	2026-11-13 06:23:17.102064401 +0000
++++ vB/take-off-metal-frame-drywall/runner/evidencia.py	2026-11-13 06:23:17.111517184 +0000
+@@ -153,7 +153,7 @@
+                           or (cs.get("plan_scale_pt_per_ft") or {}).get("value") or 9.0)
+     tags = [t for v in (inventario.get("ocurrencias") or {}).values() for t in v
+             if str(t.get("id", "")).startswith("PT") and t.get("center_pt")]
+-    walls = [w for w in c.get("walls") or [] if w.get("element", "wall") == "wall" and _rect(w.get("band") or {})]
++    walls = [w for w in c.get("walls") or [] if w.get("element", "wall") == "wall" and _rect(w.get("band") or {})]   # solo-metal: evidencia por band de walls metálicos; existing_walls tienen path, no band
+     asign, sin = {}, []
+     for t in tags:
+         x, y = t["center_pt"]
+@@ -193,7 +193,7 @@
+     """thickness_measured_in desde la band (c1 - c0) / escala x 12, con su operación. Nunca pisa la lectura."""
+     cs = c.get("constants") or {}
+     n = 0
+-    for w in c.get("walls") or []:
++    for w in c.get("walls") or []:   # solo-metal: evidencia por band de walls metálicos; existing_walls tienen path, no band
+         b = w.get("band") or {}
+         if b.get("ori") not in ("H", "V") or w.get("thickness_measured_in") is not None:
+             continue
+@@ -211,7 +211,7 @@
+     """R80e.52: una medida de band (length_source "band 67.6 pt / 9", "vector ...") sin hoja citada lleva la hoja donde se
+     midió: band.sheet (un hecho del dato, no texto para una compuerta). Y length_op = la misma operación si falta."""
+     n = 0
+-    for w in c.get("walls") or []:
++    for w in c.get("walls") or []:   # solo-metal: evidencia por band de walls metálicos; existing_walls tienen path, no band
+         src = str(w.get("length_source") or "")
+         h = (w.get("band") or {}).get("sheet") or w.get("sheet")
+         if h and src and not HOJA.search(src) and re.search(r"band|vector|\bpt\b", src, re.I):
+@@ -227,7 +227,7 @@
+         ev.n["tag_ids"], ev.n["tags_sin_wall"] = tags_a_walls(c, inventario)
+     ev.n["thickness"] = grosor(c)
+     ev.n["hoja_de_medida"] = hoja_de_medida(c)
+-    for w in c.get("walls") or []:
++    for w in c.get("walls") or []:   # solo-metal: evidencia por band de walls metálicos; existing_walls tienen path, no band
+         rec = ev.recorte(w)
+         pag = ev.hoja(_txt(w.get("source"), w.get("length_source"), w.get("sheet")))
+         _pon(w, "img", rec or pag, ev.n)
+diff -ruN vA/take-off-metal-frame-drywall/runner/overlay.py vB/take-off-metal-frame-drywall/runner/overlay.py
+--- vA/take-off-metal-frame-drywall/runner/overlay.py	2026-11-13 06:23:17.102268943 +0000
++++ vB/take-off-metal-frame-drywall/runner/overlay.py	2026-11-13 06:23:17.111665324 +0000
+@@ -56,7 +56,7 @@
+     emparejados o no. Cada una: {id, cuando: {board_in, room_rx?, element_in?}, board, board_source}. En orden: la
+     primera que aplica a una face gana. -> {id: faces cambiadas}"""
+     n = {}
+-    for w in c.get("walls") or []:
++    for w in c.get("walls") or []:   # solo-metal: overlay sobre faces por cara (lista de dicts) de walls metálicos; existing_walls tienen faces = número
+         for f in w.get("faces") or []:
+             if not isinstance(f, dict):
+                 continue
+@@ -127,8 +127,8 @@
+             else:
+                 cur.append(it)
+                 pos[it["ref"]] = len(cur) - 1
+-    byid = {w["id"]: w for w in c.get("walls") or []}
+-    for wo in o.get("walls") or []:
++    byid = {w["id"]: w for w in c.get("walls") or []}   # solo-metal: overlay sobre faces por cara (lista de dicts) de walls metálicos; existing_walls tienen faces = número
++    for wo in o.get("walls") or []:   # campo: walls del overlay
+         w = byid.get(wo["id"])
+         if w is None:
+             raise ValueError(f"overlay walls: {wo['id']} no está en el canon (la lectura no lo trae)")
+diff -ruN vA/take-off-metal-frame-drywall/runner/reconcile.py vB/take-off-metal-frame-drywall/runner/reconcile.py
+--- vA/take-off-metal-frame-drywall/runner/reconcile.py	2026-11-13 06:23:17.102129298 +0000
++++ vB/take-off-metal-frame-drywall/runner/reconcile.py	2026-11-13 06:23:17.111578822 +0000
+@@ -87,8 +87,8 @@
+     """-> {id_leido: id_ref} uno a uno, codicioso: 1) por distancia de bands (misma hoja, clase, ori);
+     2) si no, por traslape >= 80 % sobre la misma línea (otra partición de los tramos)."""
+     cand = []
+-    for w in leido.get("walls") or []:
+-        for r in ref.get("walls") or []:
++    for w in leido.get("walls") or []:   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
++        for r in ref.get("walls") or []:   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+             if w.get("sheet") != r.get("sheet") or _clase(w) != _clase(r):
+                 continue
+             tol = TOL_FT * _escala(ref, r.get("sheet"))
+@@ -131,12 +131,12 @@
+     (ya reconciliado) o en el que lo contiene, los dígitos coinciden y el candidato es único.
+     Solo toca walls[].openings[].ref."""
+     dig = lambda x: "".join(re.findall(r"\d+", str(x)))
+-    rws = ref.get("walls") or []
++    rws = ref.get("walls") or []   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+     c = copy.deepcopy(leido)
+     mapa = {}
+     todas = {str(o.get("ref")) for r in rws for o in r.get("openings") or []}
+-    usadas = {str(o.get("ref")) for w in c.get("walls") or [] for o in w.get("openings") or []} & todas
+-    for w in c.get("walls") or []:
++    usadas = {str(o.get("ref")) for w in c.get("walls") or [] for o in w.get("openings") or []} & todas   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
++    for w in c.get("walls") or []:   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+         # el mismo wall reconciliado o, si la lectura partió el tramo distinto, los walls de la referencia que lo
+         # contienen (misma hoja, traslape >= 80 % sobre la misma línea)
+         tol = TOL_FT * _escala(ref, w.get("sheet"))
+@@ -159,7 +159,7 @@
+     del wall de la LECTURA, proporcionales (la cantidad sigue saliendo de la lectura; la decisión fija el reparto).
+     [DERIVED] tramo_i x L_lectura / Σ tramos (el último absorbe el redondeo). -> [(wall, side, Σ, L)]"""
+     out = []
+-    for w in c.get("walls") or []:
++    for w in c.get("walls") or []:   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+         if w["id"] not in ids or w.get("length_ft") is None:
+             continue
+         L = float(w["length_ft"])
+@@ -249,20 +249,21 @@
+                 # nodes: derivados de la geometría de la lectura; sus ops sin objeto no son decisiones del estimador
+                 sin += [{"group": g.get("label"), "list": lista, "id": i, "derivado": lista == "nodes"} for i in sorted(f)]
+         # ítems NUEVOS de la decisión que cuelgan de un wall que la lectura no trae (p. ej. un node en SS-IN-E)
++        # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+         wc = {w["id"] for w in c.get("walls") or []} | \
+-            {x.get("id") for x in ((g.get("canon") or {}).get("items_upsert") or {}).get("walls") or []}
+-        wr = {w["id"] for w in ref.get("walls") or []}
++            {x.get("id") for x in ((g.get("canon") or {}).get("items_upsert") or {}).get("walls") or []}   # campo: items_upsert['walls'] de la decisión
++        wr = {w["id"] for w in ref.get("walls") or []}   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+         for lista, items in ((g.get("canon") or {}).get("items_upsert") or {}).items():
+             kk = ((g.get("canon") or {}).get("items_key") or {}).get(lista) or "ref"
+             for it in items:
+-                cuelga = [it.get("wall")] if isinstance(it.get("wall"), str) else list(it.get("walls") or [])
++                cuelga = [it.get("wall")] if isinstance(it.get("wall"), str) else list(it.get("walls") or [])   # nodo: walls del ítem que cuelga
+                 if any(isinstance(x, str) and x in wr and x not in wc for x in cuelga) and \
+                         it.get(kk) not in faltan.get(lista, set()):
+                     faltan.setdefault(lista, set()).add(it.get(kk))
+                     sin.append({"group": g.get("label"), "list": lista, "id": it.get(kk), "derivado": lista == "nodes",
+                                 "motivo": "cuelga de un wall que la lectura no trae"})
+         c = overlay._aplicar_uno(c, _filtrar(g, faltan))
+-        tocados = set((((g.get("canon") or {}).get("items_patch") or {}).get("walls") or {}).keys())
++        tocados = set((((g.get("canon") or {}).get("items_patch") or {}).get("walls") or {}).keys())   # campo: items_patch['walls'] de la decisión
+         for wid, lado, tot, L in reescalar_tramos(c, tocados):
+             sin.append({"group": g.get("label"), "list": "walls", "id": wid, "derivado": True,
+                         "motivo": f"side {lado}: tramos de la decisión Σ {tot} reescalados al largo de la lectura {L}"})
+@@ -298,6 +299,7 @@
+     # opening_schedule fijado por una decisión: una abertura que la lectura no trae en ningún wall = decisión sin objeto
+     sch = c.get("opening_schedule")
+     if isinstance(sch, dict) and sch.get("items"):
++        # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+         dadas = {str(o.get("ref")) for w in c.get("walls") or [] for o in w.get("openings") or []} | \
+             {str(i.get("ref")) for i in sch.get("none") or []}
+         quedan = [i for i in sch["items"] if str(i.get("ref")) in dadas]
+@@ -310,7 +312,7 @@
+         # (la decisión fijó la lista con los nombres de la referencia; no puede borrar una abertura leída)
+         tiene = {str(i.get("ref")) for i in sch["items"]} | {str(i.get("ref")) for i in sch.get("none") or []}
+         prop = {str(i.get("ref")): i for i in ((leido.get("opening_schedule") or {}).get("items") or [])}
+-        for w in c.get("walls") or []:
++        for w in c.get("walls") or []:   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+             for o in w.get("openings") or []:
+                 r = str(o.get("ref"))
+                 if r not in tiene:
+@@ -322,7 +324,7 @@
+     # wet_fixtures de la lectura cuyo face dejó de ser MR porque una decisión cambió el board (p. ej. RFI-27 type X WR):
+     # inventario.py exige fixture <-> face MR; el fixture sin face MR se quita y se lista (derivado de la decisión)
+     if c.get("wet_fixtures"):
+-        mr = {(w["id"], str(f.get("room"))) for w in c.get("walls") or [] for f in w.get("faces") or []
++        mr = {(w["id"], str(f.get("room"))) for w in c.get("walls") or [] for f in w.get("faces") or []   # solo-metal: reconciliación A/B por geometría / openings / faces de walls metálicos
+               if "MR" in str(f.get("board", "")).upper()}
+         quedan = [x for x in c["wet_fixtures"] if (x.get("wall"), str(x.get("room"))) in mr]
+         for x in c["wet_fixtures"]:
+diff -ruN vA/take-off-metal-frame-drywall/runner/run_takeoff.py vB/take-off-metal-frame-drywall/runner/run_takeoff.py
+--- vA/take-off-metal-frame-drywall/runner/run_takeoff.py	2026-11-13 06:23:17.102240534 +0000
++++ vB/take-off-metal-frame-drywall/runner/run_takeoff.py	2026-11-13 06:23:17.111638295 +0000
+@@ -58,9 +58,9 @@
+ def atributos_ab(a, b):
+     """Walls emparejados por geometría (reconcile.emparejar) con altura o boards por face distintos -> lista."""
+     mapa = reconcile.emparejar(a, b)
+-    wb = {w["id"]: w for w in b.get("walls") or []}
++    wb = {w["id"]: w for w in b.get("walls") or []}   # solo-metal: atributos A/B emparejados por reconcile.emparejar (geometría de walls metálicos)
+     out = []
+-    for w in a.get("walls") or []:
++    for w in a.get("walls") or []:   # solo-metal: atributos A/B emparejados por reconcile.emparejar (geometría de walls metálicos)
+         o = wb.get(mapa.get(w["id"]))
+         if not o:
+             continue
+@@ -338,7 +338,7 @@
+                 r = completitud.revisar(c, self.plan_sheets, otro)
+                 cn = completitud.conteos(c, *self._fuentes_conteo())       # R80e.40: conteos por type / hoja
+                 duro = v.returncode != 0 or r["faltan_hojas"] or r["faltan_types"]
+-                ap = cn["alturas_placeholder"]["walls"] if cn["alturas_placeholder"]["hojas"] else []
++                ap = cn["alturas_placeholder"]["walls"] if cn["alturas_placeholder"]["hojas"] else []   # campo: lista walls de alturas_placeholder de completitud
+                 if intento == MAX_CONTINUAR and not duro and (cn["faltan_tags"] or cn["faltan_columnas"] or ap
+                                                                or cn["faltan_discontinuas"] or r["faltan_vs_otra"]):
+                     # esquema OK y solo quedan faltantes de conteo: la lectura NO se descarta; se declaran
+@@ -356,7 +356,7 @@
+                     "" if not r["faltan_vs_otra"] else "TYPES / ELEMENTS QUE OTRA LECTURA SÍ ENCONTRÓ Y AQUÍ FALTAN (léelos en el plano, "
+                     "no los copies): " + ", ".join(r["faltan_vs_otra"])) if x)
+                 if not motivo:
+-                    log(f"   lectura {lado}: compuerta OK ({r['walls']} walls, {r['lf']} LF)")
++                    log(f"   lectura {lado}: compuerta OK ({r['walls']} walls, {r['lf']} LF)")   # campo: conteo 'walls' de completitud.revisar (ya une existing_walls)
+                     return
+             if intento == MAX_CONTINUAR:
+                 raise Alto(f"la lectura {lado} no pasa la compuerta después de {MAX_CONTINUAR} continuaciones:\n{motivo}")
+@@ -402,9 +402,9 @@
+         if os.path.exists(B):                     # la resolución parte de la lectura MÁS COMPLETA (walls, luego LF)
+             ra = completitud.revisar(json.load(open(A)), [])
+             rb = completitud.revisar(json.load(open(B)), [])
+-            if (rb["walls"], rb["lf"]) > (ra["walls"], ra["lf"]):
++            if (rb["walls"], rb["lf"]) > (ra["walls"], ra["lf"]):   # campo: conteo 'walls' de completitud.revisar (ya une existing_walls)
+                 A, B = B, A
+-                log(f"   resolución parte de la lectura B ({rb['walls']} walls) y no de la A ({ra['walls']})")
++                log(f"   resolución parte de la lectura B ({rb['walls']} walls) y no de la A ({ra['walls']})")   # campo: conteo 'walls' de completitud.revisar (ya une existing_walls)
+         if self.a.reusar_resolucion and not self.a.dry_run:     # resolución ya pagada de una corrida anterior
+             shutil.copy2(self.a.reusar_resolucion, final)
+             log(f"6/11 resolución reusada de {self.a.reusar_resolucion}")
+@@ -441,7 +441,7 @@
+             cs["plan_scale_pt_per_ft"] = {"value": hoja["value"], "source": f"[DERIVED] = plan_scale_by_sheet "
+                                           f"{self.a.plan_sheet} of the reading: {hoja.get('source', '')}"}
+             log(f"   plan_scale_pt_per_ft tomado de plan_scale_by_sheet {self.a.plan_sheet} = {hoja['value']}")
+-            sb = [w for w in leido.get("walls") or [] if isinstance(w.get("band"), dict) and not w["band"].get("sheet")
++            sb = [w for w in leido.get("walls") or [] if isinstance(w.get("band"), dict) and not w["band"].get("sheet")   # solo-metal: band.sheet: solo walls metálicos tienen band
+                   and w.get("sheet")]
+             for w in sb:                    # con escala de planta canon.py exige band.sheet: la hoja del mismo wall
+                 w["band"]["sheet"] = w["sheet"]
+diff -ruN vA/take-off-metal-frame-drywall/runner/trim.py vB/take-off-metal-frame-drywall/runner/trim.py
+--- vA/take-off-metal-frame-drywall/runner/trim.py	2026-11-13 06:23:17.102183093 +0000
++++ vB/take-off-metal-frame-drywall/runner/trim.py	2026-11-13 06:23:17.111623333 +0000
+@@ -25,12 +25,12 @@
+     libres = {}
+     for n in c.get("nodes") or []:
+         if isinstance(n, dict) and n.get("kind") == "free":
+-            for w in ([n.get("wall")] if n.get("wall") else (n.get("walls") or [])):
++            for w in ([n.get("wall")] if n.get("wall") else (n.get("walls") or [])):   # nodo: walls del nodo free
+                 libres[w] = libres.get(w, 0) + 1
+     nuevos = []
+     if not _tiene(c, "partial"):
+         lf_top, esq, ids = 0.0, 0.0, []
+-        for w in c.get("walls") or []:
++        for w in c.get("walls") or []:   # solo-metal: trim derivado (partial / column_wrap) de walls metálicos: cantidad, existing_walls no llevan ese trim
+             if w.get("element", "wall") != "wall" or w.get("height_ft") is None or w.get("length_ft") is None:
+                 continue
+             h = float(w["height_ft"])
+@@ -47,7 +47,7 @@
+                            "lf": round(lf_top + esq, 2), "source": "A-410 partial height types; A-101",
+                            "op": f"[DERIVED] top edges 2 x LF ({round(lf_top, 2)}) + free ends 2 corners x height ({round(esq, 2)}) on {', '.join(ids)}"})
+     if not _tiene(c, "column"):
+-        cw = [w for w in c.get("walls") or [] if w.get("element") == "column_wrap" and w.get("height_ft")
++        cw = [w for w in c.get("walls") or [] if w.get("element") == "column_wrap" and w.get("height_ft")   # solo-metal: trim derivado (partial / column_wrap) de walls metálicos: cantidad, existing_walls no llevan ese trim
+               and any(isinstance(f, dict) and "gyp" in str(f.get("board", "")).lower() or "type x" in str(f.get("board", "")).lower()
+                       for f in w.get("faces") or [])]      # sin board de gypsum (p. ej. solo FRT plywood) = sin corner bead
+         if cw:
+diff -ruN vA/take-off-metal-frame-drywall/runner/validar_canon.py vB/take-off-metal-frame-drywall/runner/validar_canon.py
+--- vA/take-off-metal-frame-drywall/runner/validar_canon.py	2026-11-13 06:23:17.102103654 +0000
++++ vB/take-off-metal-frame-drywall/runner/validar_canon.py	2026-11-13 06:23:17.111555841 +0000
+@@ -16,7 +16,7 @@
+     print("CANON ERROR: constants.plan_scale_pt_per_ft {value, source} obligatoria (inventario.py; sin ella canon.py no "
+           "cruza band vs length_ft)")
+     sys.exit(1)
+-sin = [w.get("id") for w in c.get("walls") or [] if isinstance(w.get("band"), dict) and not w["band"].get("sheet")]
++sin = [w.get("id") for w in c.get("walls") or [] if isinstance(w.get("band"), dict) and not w["band"].get("sheet")]   # solo-metal: band.sheet: solo walls metálicos tienen band
+ if sin:
+     print(f"CANON ERROR: band.sheet obligatorio en cada band: {sin[:10]}")
+     sys.exit(1)
+diff -ruN vA/take-off-metal-frame-drywall/tools/accesorios.py vB/take-off-metal-frame-drywall/tools/accesorios.py
+--- vA/take-off-metal-frame-drywall/tools/accesorios.py	2026-11-13 06:23:17.104370144 +0000
++++ vB/take-off-metal-frame-drywall/tools/accesorios.py	2026-11-13 06:23:17.113755457 +0000
+@@ -218,7 +218,7 @@
+     b, sb = k(data, "header_bearing_ft")
+     n = 0
+     sin_studs = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         # R80e.144 (O'Reilly rev5): un wall de FURRING (Z-furring / hat / furring channel sobre CMU / concreto) no tiene
+         # studs ni head de studs: la abertura lleva el lintel de la mampostería (su schedule), no head track adicional
+         if RX_FURRING.search(f"{w.get('stud_size') or ''} {w.get('element') or ''}"):
+@@ -271,7 +271,7 @@
+ 
+ def penetraciones(data, fo):
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             if str(op.get("kind")) in PEN_KINDS:
+                 out.append({"ref": op["ref"], "wall": w["id"], "oc_in": w.get("oc_in", 16), "kind": op.get("kind"),
+@@ -395,7 +395,7 @@
+         o.add(F_REINF, 0.0, "DERIVADO", sw["source"], f"registered sweep {hs}: no penetrations in stud walls")
+         return
+     vistos = set()
+-    rows_de = {str(w.get("id")): w.get("rows", 1) for w in data.get("walls") or []}
++    rows_de = {str(w.get("id")): w.get("rows", 1) for w in data.get("walls") or []}   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     delta_rows = 0
+     fuera = {"manual": [], "pipe": [], "otros": []}      # v73 (R73.5): fuera de la familia, a RFI con su delta
+     for p in pens:
+@@ -581,7 +581,7 @@
+     hubo = False
+     _atm_obligatorio(data)
+     vistos = {str(x["ref"]): x for x in data.get("_atm_wall") or []}
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             if not op.get("atm_recess"):
+                 continue
+@@ -622,6 +622,7 @@
+ def _atm_obligatorio(data):
+     """v67: una abertura ATM sin bloque de su recess = error (la familia salía PENDIENTE en silencio)."""
+     ef = {str(x.get("ref")) for x in data.get("extra_framing") or [] if x.get("kind") == "atm_recess"}
++    # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     ops = [op for w in data.get("walls") or [] for op in w.get("openings") or []] + \
+         list(data.get("openings_extra") or [])
+     for op in ops:
+@@ -674,7 +675,7 @@
+     """Coiling grille head: 2-1/2" CFMF @ O.C. ENTRE dos 6" CFMF BOX BEAM HEADER. Piezas = ROUNDUP(L/oc)+1;
+     largo de cada stud = espacio libre entre los dos box beams = head impreso - box beams - board del soffit,
+     NUNCA el alto total del head ni un "entre box beams" sin restar el board del soffit."""
+-    gh = [w for w in data.get("walls") or [] if w.get("element") == "grille_head"]
++    gh = [w for w in data.get("walls") or [] if w.get("element") == "grille_head"]   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     if not gh:
+         return
+     for w in gh:
+@@ -731,7 +732,7 @@
+     _storefront_de_cripples(data)
+     lf = 0.0
+     det = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             _sill_return(op)                              # v70: valida sill_return / source en toda abertura
+             if op.get("jamb_return"):
+@@ -762,7 +763,7 @@
+     """v67: toda abertura exterior declara si su sección dibuja GYPSUM BOARD JAMB RETURN (true / false + la
+     sección leída). Así un borde no se pierde en silencio (ATM, storefront heads, jambs contra wall)."""
+     ext = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             if str(op.get("kind", "door")) in PEN_KINDS:
+                 continue
+@@ -852,10 +853,10 @@
+     storefront_cripples se empareja con un storefront declarado (opening_ref o mismo ancho ± 0.1 ft); si no, el
+     storefront no se barrió y su jamb return / trim se pierde en silencio."""
+     sf = [op for op in (data.get("openings_extra") or []) if str(op.get("kind")) == "storefront"] + \
+-         [op for w in data.get("walls") or [] for op in w.get("openings") or [] if str(op.get("kind")) == "storefront"]
++         [op for w in data.get("walls") or [] for op in w.get("openings") or [] if str(op.get("kind")) == "storefront"]   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     refs = {str(op.get("ref")) for op in sf}
+     falta = []
+-    for w in (data.get("walls") or []) + (data.get("runs") or []):
++    for w in (data.get("walls") or []) + (data.get("runs") or []):   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "storefront_cripples":
+             continue
+         if w.get("opening_ref") is not None:
+@@ -996,6 +997,7 @@
+     """Parapet infill: bottom track al steel beam con PAFs @ 12" O.C. MAX -> por run ROUNDUP(L / sp); + duct
+     sleeves = una por penetración de ducto / fire damper en wall."""
+     sp, ssp = k(data, "parapet_paf_spacing_ft")
++    # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     par = [w for w in data.get("walls") or [] if w.get("element") == "parapet"] + \
+           [r for r in data.get("runs") or [] if r.get("element") == "parapet"]
+     tot = 0
+@@ -1067,7 +1069,7 @@
+     det = " + ".join(f"{round(float(fam.get(b, 0) or 0), 2)}" for b in BOARD_DRIVER)
+     hg = _pesados(data)
+     shg = 0.0
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w["id"] not in hg:
+             continue
+         for f_ in w.get("faces") or []:             # mismo modelo que board_caras (sin descuento de doors)
+@@ -1120,7 +1122,7 @@
+     n = 0
+     det = []
+     if studs_out:
+-        for w in studs_out.get("walls") or []:
++        for w in studs_out.get("walls") or []:   # campo: studs_out['walls'] = salida de studs_nodos
+             n += int(w.get("pcs_full", 0)) + int(w.get("cripples", 0))
+         det.append(f"partition walls (per-wall stud pieces) {n}")
+     for r in fam_out.get("filas") or []:
+@@ -1146,7 +1148,7 @@
+ 
+ def _pesados(data):
+     """v80o (BE-17): walls con gauge 18/16/14 (o más pesado) declarado en el canon (gauge del Metal Stud Schedule)."""
+-    return {w["id"] for w in data.get("walls") or [] if RX_HG.search(str(w.get("gauge") or ""))}
++    return {w["id"] for w in data.get("walls") or [] if RX_HG.search(str(w.get("gauge") or ""))}   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+ 
+ 
+ def framing_screws(data, fam_out, studs_out, o):
+@@ -1158,11 +1160,11 @@
+         o.pend(F_FS, "no stud pieces (pass --studs studs_out.json)")
+         return
+     hg = _pesados(data)
+-    nh = sum(int(w.get("pcs_full", 0)) + int(w.get("cripples", 0)) for w in (studs_out or {}).get("walls") or []
++    nh = sum(int(w.get("pcs_full", 0)) + int(w.get("cripples", 0)) for w in (studs_out or {}).get("walls") or []   # campo: studs_out['walls'] = salida de studs_nodos
+              if w.get("id") in hg)
+     # R80e.74: un wall sin bottom ni top track (Z-furring sobre CMU) no lleva tornillos stud-to-track
+-    st = {w["id"] for w in data.get("walls") or [] if w.get("bottom_track") is False and w.get("top_track") is False}
+-    nst = sum(int(w.get("pcs_full", 0)) + int(w.get("cripples", 0)) for w in (studs_out or {}).get("walls") or []
++    st = {w["id"] for w in data.get("walls") or [] if w.get("bottom_track") is False and w.get("top_track") is False}   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
++    nst = sum(int(w.get("pcs_full", 0)) + int(w.get("cripples", 0)) for w in (studs_out or {}).get("walls") or []   # campo: studs_out['walls'] = salida de studs_nodos
+               if w.get("id") in st and w.get("id") not in hg)
+     n -= nst
+     if nst:
+@@ -1170,10 +1172,10 @@
+     nl = n - nh
+     v = int(y) * nl
+     # v80p (R80e.31): desglose completo de las piezas, sin truncar (las de cada gauge suman su total)
+-    ph = [(w["id"], int(w.get("pcs_full", 0)) + int(w.get("cripples", 0))) for w in (studs_out or {}).get("walls") or []
++    ph = [(w["id"], int(w.get("pcs_full", 0)) + int(w.get("cripples", 0))) for w in (studs_out or {}).get("walls") or []   # campo: studs_out['walls'] = salida de studs_nodos
+           if w.get("id") in hg]
+     # v80q (R80e.32): las piezas livianas se listan por wall (25/20 ga) + las filas de canon, sin agregados
+-    pl = [(w["id"], int(w.get("pcs_full", 0)) + int(w.get("cripples", 0))) for w in (studs_out or {}).get("walls") or []
++    pl = [(w["id"], int(w.get("pcs_full", 0)) + int(w.get("cripples", 0))) for w in (studs_out or {}).get("walls") or []   # campo: studs_out['walls'] = salida de studs_nodos
+           if w.get("id") not in hg]
+     pl = [x for x in pl if x[1] and x[0] not in st]
+     otros = [x for x in det if not x.startswith("partition walls")]
+@@ -1194,9 +1196,9 @@
+     estimador) salvo `anchorage {value: anchors|pins, source N/HOJA}`; la parte sin tag de un box (R72.3) no entra en
+     ninguno sin `anchorage`: va a `sin_fuente` (RFI con delta)."""
+     import chequeos_v72
+-    partes = chequeos_v72.partes_de_box(data.get("walls") or [])
++    partes = chequeos_v72.partes_de_box(data.get("walls") or [])   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     inte, ext = [], []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         el = w.get("element", "wall")
+         if el in NOT_ON_SLAB or el not in ON_SLAB:
+             continue
+@@ -1315,9 +1317,9 @@
+     note = str(dc.get("note_source") or "").strip()
+     if not note:
+         raise ValueError("deflection_clips: note_source (nota que pide los clips) o none_reason + source")
+-    to_deck = {str(w.get("id")) for w in data.get("walls") or [] if w.get("to_deck")}
++    to_deck = {str(w.get("id")) for w in data.get("walls") or [] if w.get("to_deck")}   # solo-metal: familias de accesorios del framing metálico; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     n, k = 0, 0
+-    for w in (studs_out or {}).get("walls") or []:
++    for w in (studs_out or {}).get("walls") or []:   # campo: studs_out['walls'] = salida de studs_nodos
+         if str(w.get("id")) in to_deck:
+             n += int(w.get("pcs_full") or 0)
+             k += 1
+diff -ruN vA/take-off-metal-frame-drywall/tools/altura_stud.py vB/take-off-metal-frame-drywall/tools/altura_stud.py
+--- vA/take-off-metal-frame-drywall/tools/altura_stud.py	2026-11-13 06:23:17.104017223 +0000
++++ vB/take-off-metal-frame-drywall/tools/altura_stud.py	2026-11-13 06:23:17.113368545 +0000
+@@ -90,7 +90,7 @@
+         if d <= EPS:
+             raise ValueError(f"beam {k}: d_in <= 0")
+         beams[k] = (d, s)
+-    walls = data.get("walls")
++    walls = data.get("walls")   # solo-metal: altura de stud: solo walls con studs; existing_walls son board-only
+     if not isinstance(walls, list) or not walls:
+         raise ValueError("'walls' vacío o ausente")
+     filas, res, ids = [], {}, set()
+@@ -146,7 +146,7 @@
+         filas.append({"id": wid, "type": tp, "height_ft": round(H, 3), "height_avg_ft": round(Havg, 3),
+                       "operacion": op, "source": " · ".join(dict.fromkeys(fuentes))})
+         r = res.setdefault(tp, {"walls": 0, "min_ft": H, "max_ft": H})
+-        r["walls"] += 1
++        r["walls"] += 1   # campo: conteo del resumen por type
+         r["min_ft"], r["max_ft"] = round(min(r["min_ft"], H), 3), round(max(r["max_ft"], H), 3)
+     return {"resumen_por_tipo": res, "renglones": filas}
+ 
+diff -ruN vA/take-off-metal-frame-drywall/tools/board_caras.py vB/take-off-metal-frame-drywall/tools/board_caras.py
+--- vA/take-off-metal-frame-drywall/tools/board_caras.py	2026-11-13 06:23:17.104412571 +0000
++++ vB/take-off-metal-frame-drywall/tools/board_caras.py	2026-11-13 06:23:17.113798049 +0000
+@@ -95,7 +95,7 @@
+ def calcular(data):
+     det = data.get("details") or {}
+     tot, filas, avisos = {}, [], []
+-    for w in data["walls"]:
++    for w in data["walls"]:   # campo: data = board_in armado por canon.generar() (entrada del cálculo, no el canon); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         wid = w["id"]
+         if "layers_total" in w or "layers" in w:
+             raise ValueError(f"{wid}: campo 'layers' a nivel wall prohibido; usar layers por face")
+diff -ruN vA/take-off-metal-frame-drywall/tools/canon.py vB/take-off-metal-frame-drywall/tools/canon.py
+--- vA/take-off-metal-frame-drywall/tools/canon.py	2026-11-13 06:23:17.103070293 +0000
++++ vB/take-off-metal-frame-drywall/tools/canon.py	2026-11-13 06:23:17.112544798 +0000
+@@ -372,8 +372,8 @@
+     'other framing' por elemento; walls y elementos de un type siguen en su renglón por tamaño."""
+     en_pt = ids_partition_takeoff(pt) if pt else None
+     tam, kind, legs = {}, {}, {}
+-    wmap = {str(w.get("id")): w for w in (data.get("walls") or []) + (data.get("runs") or [])}
+-    for w in (data.get("walls") or []) + (data.get("runs") or []):
++    wmap = {str(w.get("id")): w for w in (data.get("walls") or []) + (data.get("runs") or [])}   # solo-metal: mapa de walls / runs metálicos para el cálculo; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
++    for w in (data.get("walls") or []) + (data.get("runs") or []):   # solo-metal: mapa de walls / runs metálicos para el cálculo; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         m = re.search(r'(\d+-\d+/\d+"|\d+(?:\.\d+)?")', str(w.get("stud_size") or ""))
+         if m:
+             tam[str(w.get("id"))] = m.group(1)
+@@ -531,7 +531,7 @@
+ 
+ 
+ def generar(data):
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: generar(): nodos / studs / track de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     runs_extra = data.get("runs") or []
+     _solapes([dict(w, id=w["id"], **({"line": "PAR:" + str(w["line"])} if _es_parapet(w) and w.get("line") is not None
+                                     else {})) for w in walls] + [dict(r, id=r["id"]) for r in runs_extra])
+@@ -546,7 +546,7 @@
+     ex_ids = {e.get("id") for e in data.get("existing_walls") or [] if isinstance(e, dict)} - {w["id"] for w in walls}
+     nodes = []
+     for n in data.get("nodes") or []:
+-        ws = set(n.get("walls") or []) | ({n["wall"]} if n.get("wall") else set())
++        ws = set(n.get("walls") or []) | ({n["wall"]} if n.get("wall") else set())   # nodo: lista de ids de walls del nodo
+         if ws and ws <= par_ids:
+             continue                                     # parapet: se cuenta por bay, sin nodos
+         if n.get("kind") == "abut" and n.get("into") in par_ids and n.get("wall") not in par_ids:
+@@ -575,9 +575,9 @@
+                   if k in w}
+             sw["openings"] = [{"ref": o["ref"], "ro_w_ft": o["ro_w_ft"], "head_ft": o["head_ft"],
+                                "sill_ft": o.get("sill_ft", 0)} for o in w.get("openings") or []]
+-            studs_in["walls"].append(sw)
++            studs_in["walls"].append(sw)   # campo: studs_in['walls'] = entrada de studs_nodos armada aquí
+         if w.get("faces"):
+-            board_in["walls"].append({"id": w["id"], "tag": w.get("tag"), "detail": w["detail"],
++            board_in["walls"].append({"id": w["id"], "tag": w.get("tag"), "detail": w["detail"],   # campo: board_in['walls'] = entrada de board_caras armada aquí
+                                       "length_vector_ft": w["length_ft"],
+                                       **({"length_printed_ft": w["length_printed_ft"]}
+                                          if w.get("length_printed_ft") is not None else {}),
+@@ -681,7 +681,7 @@
+     if data.get("header_params") is not None:
+         raise ValueError("header_params ya no existe (v65b): sill double > 4'-0\", window metal box, box = 4 piezas, "
+                          "door double y office front continuo son reglas (decisiones usuario #18-#22)")
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     por_id = {w["id"]: w for w in walls}
+     tags = {w["id"]: str(w.get("tag") or "").upper() for w in walls}
+     # roof step: filas dibujadas en el detalle (4/A02.02: 3)
+@@ -839,7 +839,7 @@
+ 
+ def _r79_purlin(data):
+     import criterios                                # v80 (R80.1): el mismo criterio que inventario._purlin
+-    con = [w for w in data.get("walls") or [] if w.get("purlin")]
++    con = [w for w in data.get("walls") or [] if w.get("purlin")]   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     for w in con:
+         impreso = criterios.purlin_impreso(w)
+         if criterios.purlin_detail_mal(w):
+@@ -869,7 +869,7 @@
+ 
+ def _v68_checks(data):
+     """Reglas deterministas del arbitraje #16 (17-oct-2026): lo que varió entre #16A y #16B con el mismo plano."""
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     # 1. 5/8" MR solo detrás del fixture (A08.01 F 'BEHIND TOILET AND LAVATORY'): wet_fixtures con back_source
+     wf = data.get("wet_fixtures") or []
+     for x in wf:
+@@ -1041,7 +1041,7 @@
+ def _v70_checks(data, avisos):
+     """Reglas v70 (#18A / #18B): canopy_soffit fuera de walls, faces de los elementos con board, claves fuera de
+     esquema. Corre ANTES que todo lo demás para que el mensaje sea el de la regla."""
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     for w in walls:
+         if w.get("element") == "canopy_soffit":
+             raise ValueError(f"{w['id']}: canopy_soffit en walls cuenta dos veces los canopy joists (ya salen del "
+@@ -1254,7 +1254,7 @@
+     ROUNDUP((bay - 0.6) / oc) - 1 intermedios) en runs de 2+ bays; run de UN bay (stub entre posts) = la fórmula sin
+     mínimo (v68, cálculo aprobado de la decisión usuario #3; constants.parapet_studs_per_bay_min lo cambia con source); LF = studs x altura ponderada por
+     LF del run. v66: run por línea."""
+-    par = [w for w in data.get("walls") or [] if _es_parapet(w)]
++    par = [w for w in data.get("walls") or [] if _es_parapet(w)]   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     if not par:
+         return
+     post = _c(data, "parapet_post_spacing_ft")
+@@ -1292,9 +1292,9 @@
+     una wall exterior (drive-up). Compuerta: la wall del ATM pasa por studs_nodos y corridas (si no, el metal del
+     recess no está en ningún type); la fórmula vieja = error (accesorios.atm_recess_valido)."""
+     data["_atm_wall"] = []
+-    st_w = {str(x.get("id")): x for x in (st or {}).get("walls") or []}
++    st_w = {str(x.get("id")): x for x in (st or {}).get("walls") or []}   # campo: st['walls'] = salida de studs_nodos.contar
+     co_w = {str(r.get("id")): r for r in (co or {}).get("renglones") or []}
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for o in w.get("openings") or []:
+             if not o.get("atm_recess"):
+                 continue
+@@ -1319,7 +1319,7 @@
+     jack por lado, 53.2) a ESE wall, altura completa x rows, en la familia de su stud.
+     v65 (#14A ADV1-3): con head_ft también los cripples sobre el head (FLOOR(R.O./oc) x (H - head) x rows) y el
+     bottom + top track sobre el R.O. (el track de los dos walls termina en las jambs; bottom continuo, E10)."""
+-    walls = {w["id"]: w for w in data.get("walls") or []}
++    walls = {w["id"]: w for w in data.get("walls") or []}   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     for o in data.get("openings_extra") or []:
+         jw = o.get("jamb_wall")
+         if not jw:
+@@ -1359,7 +1359,7 @@
+ 
+ def _kickers(data, fam, filas):
+     # v68 (#16B: la transición en `runs` no contaba kickers ni vertical studs: −<n> LF de 3-5/8"): walls Y runs
+-    for w in (data.get("walls") or []) + (data.get("runs") or []):
++    for w in (data.get("walls") or []) + (data.get("runs") or []):   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         k = w.get("kickers")
+         if w.get("element") == "ceiling_transition" and not k:
+             raise ValueError(f"{w['id']}: ceiling_transition sin kickers (detalle de la transición) — sus studs son kickers + "
+@@ -1440,7 +1440,7 @@
+ def _column_wraps(data, fam, filas):
+     """v65: column_wrap = studs por face (cada face lleva sus studs de esquina): Σ (ROUNDUP(face/oc) + 1), o los
+     studs_drawn {value, source} que dibuja el detalle. 5/A09.25: 4 faces x <n> -> <n> studs (A y B <n>)."""
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "column_wrap" and not (w.get("element") == "pier" and w.get("parts")):
+             continue                                  # v68: pier con parts = mismo trato que column_wrap (#16A)
+         k = next((f for key, f in STUD_FAM if key in str(w.get("stud_size", "")).lower()), None)
+@@ -1784,7 +1784,7 @@
+                       "operacion": op})
+     jr = 0.0
+     det = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for o in w.get("openings") or []:
+             if o.get("jamb_return"):
+                 _src(o, o["ref"], "jamb_return_source")
+@@ -1802,6 +1802,7 @@
+         filas.append({"familia": F_TRIM, "ref": "jamb returns", "source": "53.1",
+                       "operacion": f"bordes {round(jr, 2)} LF x 2 (corner bead + casing bead) = {round(2 * jr, 2)} "
+                                    f"[{'; '.join(det)}]"})
++    # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     tr = [w for w in data.get("walls") or [] if w.get("element") == "ceiling_transition"] + \
+          [r for r in data.get("runs") or [] if r.get("element") == "ceiling_transition"]
+     if tr:
+@@ -1818,7 +1819,7 @@
+ 
+ def _canopy_facades(data, fac, can):
+     """v63: cada canopy_soffit / fascia_box dice a qué facade pertenece; esa facade lleva banda de glass mat."""
+-    elems = [w for w in (data.get("walls") or []) + (data.get("runs") or []) if w.get("element") in CANOPY_ELEMS]
++    elems = [w for w in (data.get("walls") or []) + (data.get("runs") or []) if w.get("element") in CANOPY_ELEMS]   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     con_banda = {c.get("facade") for c in can}
+     cs = [e for e in elems if e["element"] == "canopy_soffit"]
+     if cs:                                         # #13A 1 línea / #13B 2 (default): +<n> LF entre agentes
+@@ -1849,7 +1850,7 @@
+     for s_ in data.get("plywood_strips") or []:
+         if "fascia" in str(s_.get("ref", "")).lower():
+             raise ValueError(f"plywood_strip '{s_['ref']}': el sheathing de fascia_box lo genera canon.py (v63)")
+-    for w in (data.get("walls") or []) + (data.get("runs") or []):
++    for w in (data.get("walls") or []) + (data.get("runs") or []):   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "fascia_box":
+             continue
+         hs = str(w.get("height_source") or "").strip()
+@@ -2000,7 +2001,7 @@
+         if not _banda_sin_sheathing(data, c):
+             band_gm_fac[c["facade"]] += float(c["band_lf"])
+     par_fac = {}
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if _es_parapet(w) and fac:
+             if w.get("facade") not in fac:
+                 raise ValueError(f"{w['id']}: parapet sin facade declarada (E25: la nailbase de esa facade sube a "
+@@ -2076,7 +2077,7 @@
+     if not isinstance(bw, list) or not bw:
+         raise ValueError(f"{pid}: parapet sin base_walls [ids de las walls exteriores de su fachada, mismo eje] (W2 "
+                          f"v78: el parapet sigue el largo de la wall exterior que remata)")
+-    ws = {str(w.get("id")): w for w in data.get("walls") or []}
++    ws = {str(w.get("id")): w for w in data.get("walls") or []}   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     tot, partes = 0.0, []
+     for i in bw:
+         w = ws.get(str(i))
+@@ -2175,7 +2176,7 @@
+         L_hoja = _c(data, "sheet_len_ft")
+         edge, ops = 0.0, []
+         por_d = {}
+-        for w in data.get("walls") or []:
++        for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+             lf_w, op_w = _edge_blocking_wall(w, L_hoja)   # v78 R78.33: por pieza de board y por face
+             if lf_w > EPS:
+                 edge += lf_w
+@@ -2398,7 +2399,7 @@
+         raise ValueError("braces_to_structure: spacing_in y structure_ft {value, source} obligatorios")
+     sp_in = float(spacing_in or sp["value"])
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element", "wall") != "wall" or not w.get("faces"):
+             continue
+         h = float(w.get("height_ft") or 0)
+@@ -2517,7 +2518,7 @@
+     bt = (data.get("constants") or {}).get("bracing_top_row_at_structure")
+     if not (isinstance(bt, dict) and bt.get("value") and str(bt.get("source") or "").strip()):
+         return
+-    wmap = {str(w.get("id")): w for w in data.get("walls") or []}
++    wmap = {str(w.get("id")): w for w in data.get("walls") or []}   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     for r in co.get("renglones") or []:
+         wid = str(r.get("id") or "").split(":", 1)[-1]
+         w = wmap.get(wid)
+@@ -2551,7 +2552,7 @@
+     SEAL.clear()
+     studs_in, board_in, corr_in, hdr_in, avisos = generar(data)
+     avisos += av70
+-    for r in (data.get("walls") or []) + (data.get("runs") or []):    # v67: E13 sin L x 2 encubierto
++    for r in (data.get("walls") or []) + (data.get("runs") or []):    # v67: E13 sin L x 2 encubierto   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         wl = r.get("wall_line_ft")
+         if r.get("element") == "canopy_soffit" and isinstance(wl, dict) and \
+                 abs(float(wl.get("value", 0)) - float(r["length_ft"])) < 0.01:
+@@ -2563,7 +2564,7 @@
+         avisos.append("SIN INVENTARIO: falta constants.plan_scale_pt_per_ft + walls[].band (v63, inventario.py)")
+     fam = {k: 0.0 for k in FAMS}
+     filas = []
+-    st = studs_nodos.contar(studs_in) if studs_in["walls"] else {"total_lf_por_stud": {}, "walls": []}   # BE-CR04
++    st = studs_nodos.contar(studs_in) if studs_in["walls"] else {"total_lf_por_stud": {}, "walls": []}   # BE-CR04   # campo: studs_in['walls'] = entrada de studs armada en generar()
+     for size, lf in st["total_lf_por_stud"].items():
+         k = next((f for key, f in STUD_FAM if key in size.lower()), None)
+         if k is None:
+@@ -2572,7 +2573,7 @@
+             raise ValueError(f"stud_size '{size}' parapet fuera de element parapet (se cuenta por bay, 59.4)")
+         fam[k] += lf
+     _parapet_studs(data, fam, filas)
+-    bo = board_caras.calcular(board_in) if board_in["walls"] else {"totales_sf": {}, "avisos": [], "caras": []}   # BE-CR04
++    bo = board_caras.calcular(board_in) if board_in["walls"] else {"totales_sf": {}, "avisos": [], "caras": []}   # BE-CR04   # campo: board_in['walls'] = entrada de board_caras armada en generar()
+     for b, sf in bo["totales_sf"].items():
+         if b not in BOARD_FAM:
+             raise ValueError(f"board '{b}' sin familia (usar {sorted(BOARD_FAM)})")
+@@ -2648,7 +2649,7 @@
+     zs = (data.get("constants") or {}).get("z_furring_size")
+     zs = zs.get("value") if isinstance(zs, dict) else zs
+     if not zs:
+-        for w_ in data.get("walls") or []:
++        for w_ in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+             sz_ = str(w_.get("stud_size") or "")
+             if any(k in sz_.lower() for k in ("zf", "z-furring", "hat channel")):
+                 m_ = re.match(r'\s*(\d+(?:-\d+/\d+)?(?:\.\d+)?)\s*"', sz_)
+@@ -2663,7 +2664,7 @@
+     zk = zk.get("value") if isinstance(zk, dict) else zk
+     if not zk:
+         kinds = set()
+-        for w_ in data.get("walls") or []:
++        for w_ in data.get("walls") or []:   # solo-metal: cálculo de framing / accesorios de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+             sz_ = str(w_.get("stud_size") or "").lower()
+             if next((f for key, f in STUD_FAM if key in sz_), None) == F_ZF:
+                 kinds.add("hat channel" if "hat channel" in sz_ else "Z-furring")
+diff -ruN vA/take-off-metal-frame-drywall/tools/checklist_revision.py vB/take-off-metal-frame-drywall/tools/checklist_revision.py
+--- vA/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-13 06:23:17.105841114 +0000
++++ vB/take-off-metal-frame-drywall/tools/checklist_revision.py	2026-11-13 06:23:17.115196551 +0000
+@@ -122,7 +122,7 @@
+                   ["Depth (ft)", "Depth (ft-in)", "Rows", "Example Wall ID", "Detail N/SHEET", "Printed dimension",
+                    "Claude A2 status", "Note", "OK"], [11, 13, 7, 22, 14, 22, 14, 70, 7])
+     for r in a2:
+-        ws.append([r["depth"], r["ftin"], r["walls"], r["ejemplo"], r["cita"], r["impresa"], r["estado"], r["nota"], NO])
++        ws.append([r["depth"], r["ftin"], r["walls"], r["ejemplo"], r["cita"], r["impresa"], r["estado"], r["nota"], NO])   # campo: conteo 'walls' del renglón
+         ws.cell(row=ws.max_row, column=8).alignment = Alignment(wrap_text=True, vertical="top")
+         dv.add(f"I{ws.max_row}")
+     ws.append([])
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v71.py vB/take-off-metal-frame-drywall/tools/chequeos_v71.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v71.py	2026-11-13 06:23:17.105564552 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v71.py	2026-11-13 06:23:17.114883561 +0000
+@@ -65,7 +65,7 @@
+ 
+ 
+ def r71_2(canon):
+-    ws = [(w, _box(w)) for w in canon.get("walls") or []]
++    ws = [(w, _box(w)) for w in canon.get("walls") or []]   # solo-metal: R71 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     ws = [(w, b) for w, b in ws if b is not None]
+     f = []
+     for i in range(len(ws)):
+@@ -84,7 +84,7 @@
+ 
+ 
+ def r71_3(canon):
+-    bh = sum(float(w.get("length_ft") or 0) for w in canon.get("walls") or [] if w.get("element") == "door_bulkhead")
++    bh = sum(float(w.get("length_ft") or 0) for w in canon.get("walls") or [] if w.get("element") == "door_bulkhead")   # solo-metal: R71 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     f = []
+     for k in ("sealant_items", "trim_items", "blocking_items"):
+         for it in canon.get(k) or []:
+@@ -171,7 +171,7 @@
+         m = str(t.get("motivo") or "")
+         if REMITE.search(m) and not (OTRA_TAREA.search(m) and not _owners(t.get("owner"))):   # ese ya es R71.5
+             chk("tag descartado", t.get("id"), m, t.get("owner"))
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: R71 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if not isinstance(w, dict) or [x for x in (w.get("tag_ids") or []) if x]:
+             continue
+         m = str(w.get("untagged_reason") or "")
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v72.py vB/take-off-metal-frame-drywall/tools/chequeos_v72.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v72.py	2026-11-13 06:23:17.104000403 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v72.py	2026-11-13 06:23:17.113351087 +0000
+@@ -75,7 +75,7 @@
+ def r72_1(canon):
+     f = []
+     kd = _k_details(canon)
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if not es_k(w, kd):
+             continue
+         if not [x for x in (w.get("tag_ids") or []) if x]:
+@@ -116,7 +116,7 @@
+ def r72_2(canon):
+     f = []
+     esc = _esc(canon)
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         b = w.get("band")
+         if not isinstance(b, dict) or str(b.get("ori")).upper() != "D":
+             continue
+@@ -187,7 +187,7 @@
+ 
+ 
+ def r72_3(canon):
+-    ws = canon.get("walls") or []
++    ws = canon.get("walls") or []   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     ids = {w["id"] for w in ws}
+     f = []
+     for w in ws:
+@@ -205,7 +205,7 @@
+ def r72_4(canon, vigas):
+     if not vigas:
+         return []
+-    por_id = {w["id"]: w for w in canon.get("walls") or []}
++    por_id = {w["id"]: w for w in canon.get("walls") or []}   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     f = []
+     for v in vigas.get("walls_bajo_viga") or []:
+         w = por_id.get(v.get("wall"))
+@@ -263,7 +263,7 @@
+     extra_framing de ATM a mano también."""
+     import accesorios
+     f = []
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             ar = op.get("atm_recess") if isinstance(op, dict) else None
+             if not isinstance(ar, dict):
+@@ -298,7 +298,7 @@
+ 
+ def r72_6(canon):
+     f = []
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: chequeo del cálculo de framing de walls metálicos (lo llama accesorios); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for c in w.get("faces") or []:
+             s = c.get("side")
+             if s is not None and str(s).upper() not in SIDES:
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v73.py vB/take-off-metal-frame-drywall/tools/chequeos_v73.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v73.py	2026-11-13 06:23:17.103172307 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v73.py	2026-11-13 06:23:17.112652432 +0000
+@@ -76,7 +76,7 @@
+ def r73_1(canon):
+     f = []
+     kd = _k_details(canon)
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: R73.1 / R73.2: walls K (ballistic, metal) con banda; existing_walls no son K
+         if not isinstance(w, dict) or not es_k(w, kd) or not [x for x in (w.get("tag_ids") or []) if x]:
+             continue
+         ds = w.get("dim_scan")
+@@ -123,7 +123,7 @@
+ def r73_2(canon):
+     f = []
+     kd = _k_details(canon)
+-    ks = [w for w in canon.get("walls") or [] if isinstance(w, dict) and es_k(w, kd)
++    ks = [w for w in canon.get("walls") or [] if isinstance(w, dict) and es_k(w, kd)   # solo-metal: R73.1 / R73.2: walls K (ballistic, metal) con banda; existing_walls no son K
+           and [x for x in (w.get("tag_ids") or []) if x]]
+     jogs = [j for j in canon.get("ballistic_jogs") or [] if isinstance(j, dict)]
+     if not ks and not jogs:
+@@ -177,7 +177,7 @@
+ 
+ def esperado_mep(canon):
+     """(valor, renglones) de stud reinforcement MEP según R73.5."""
+-    rows = {str(w.get("id")): int(w.get("rows", 1) or 1) for w in canon.get("walls") or [] if isinstance(w, dict)}
++    rows = {str(w.get("id")): int(w.get("rows", 1) or 1) for w in canon.get("walls") or [] if isinstance(w, dict)}   # solo-metal: R73.5: rows de los walls metálicos para el refuerzo de stud MEP; existing_walls no llevan studs
+     tot, det = 0, []
+     for p in canon.get("mep_penetrations") or []:
+         if not isinstance(p, dict):
+@@ -236,7 +236,7 @@
+     f = []
+     sch = {str(x.get("type")): _f(x.get("thickness_in")) for x in canon.get("partition_schedule") or []
+            if isinstance(x, dict)}
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: R73.7: espesor medido = stud + capas por cara (schema metálico); existing_walls no tienen stud_size
+         if not isinstance(w, dict) or [x for x in (w.get("tag_ids") or []) if x]:
+             continue
+         if not str(w.get("default_type_source") or "").strip():
+@@ -302,7 +302,7 @@
+ def r73_8(canon):
+     f = []
+     objs = []
+-    for w in canon.get("walls") or []:
++    for w in list((canon or {}).get("walls") or []) + list((canon or {}).get("existing_walls") or []):   # BE-XF16: R73.8 también en los board-only
+         if isinstance(w, dict):
+             objs.append((w.get("id"), w))
+             objs += [(f"{w.get('id')}/{o.get('ref')}", o) for o in w.get("openings") or [] if isinstance(o, dict)]
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v75.py vB/take-off-metal-frame-drywall/tools/chequeos_v75.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v75.py	2026-11-13 06:23:17.105436544 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v75.py	2026-11-13 06:23:17.114755073 +0000
+@@ -62,7 +62,7 @@
+ 
+ 
+ def verificar_r75_5(canon):
+-    malos = cambios_sin_nodo(canon.get("walls") or [])
++    malos = cambios_sin_nodo(canon.get("walls") or [])   # solo-metal: R75 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     if malos:
+         raise ValueError("R75.5: cambio de type colineal sin nodo dibujado (T / esquina) " +
+                          "; ".join(f"{a} / {b} en {p} pt" for a, b, p in malos) +
+@@ -76,7 +76,7 @@
+ #        llega a la cara exterior del lado del alcove. Por qué: el alcove no es wall de la lista; si se queda la esquina,
+ #        el type de la línea pierde un espesor por punta (en una prueba ciega el type salió CERCA por eso).
+ def alcove_con_esquina(canon, pt):
+-    W = {w["id"]: w for w in canon.get("walls") or []}
++    W = {w["id"]: w for w in canon.get("walls") or []}   # solo-metal: R75 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     out = []
+     for o in (pt or {}).get("other_framing") or []:
+         if o.get("element") != "alcove":
+@@ -101,7 +101,7 @@
+ #        Un return que arranca en la cara interior (cota − espesor) le quita al type un espesor por return; si el
+ #        plano lo pide así, `return_basis {value: "inner_face", source N/HOJA}` lo declara.
+ def returns_sin_esquina(canon, pt, corto_ft=2.0, esc=18.0):
+-    W = {w["id"]: w for w in canon.get("walls") or []}
++    W = {w["id"]: w for w in canon.get("walls") or []}   # solo-metal: R75 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     out = []
+     for x in ((pt or {}).get("types") or {}).values():
+         for f in x.get("filas") or []:
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v76.py vB/take-off-metal-frame-drywall/tools/chequeos_v76.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v76.py	2026-11-13 06:23:17.104962443 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v76.py	2026-11-13 06:23:17.114362487 +0000
+@@ -58,7 +58,7 @@
+ 
+ # ----------------------------------------------------------------------------------------------- R76.1 canopy
+ def r76_1(data):
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     ceil = data.get("ceilings") or []
+     cj = [c for c in ceil if c.get("system") == "canopy_joist"]
+     none = {}
+@@ -110,7 +110,7 @@
+ 
+ 
+ def r76_2(data):
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "column_wrap" or w.get("part_of"):
+             continue                                  # un pier sin board lleva el sheathing de su facade (nailbase)
+         if _caras_board(w):
+@@ -135,7 +135,7 @@
+ def sheathing_column_wraps(data):
+     """[(wall, material, sf, op)] del sheathing generado (R76.2)."""
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         sh = w.get("sheathing")
+         if w.get("element") not in ("column_wrap", "pier") or not isinstance(sh, dict):
+             continue
+@@ -183,7 +183,7 @@
+ 
+ 
+ def r76_3(data, esc=None):
+-    walls = data.get("walls") or []
++    walls = data.get("walls") or []   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     esc = esc or float(((data.get("constants") or {}).get("plan_scale_pt_per_ft") or {}).get("value") or 18.0)
+     req = jogs_k(walls)
+     js = data.get("ballistic_jogs") or []
+@@ -230,7 +230,7 @@
+ # ------------------------------------------------------------------------------------- R76.4 opening substrate
+ def aberturas_ext(data, es_ext):
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         for op in w.get("openings") or []:
+             if str(op.get("kind", "door")) in ("duct", "fire_damper", "penetration"):
+                 continue
+@@ -274,7 +274,7 @@
+ 
+ # ------------------------------------------------------------------------------------------- R76.5 box con tag
+ def r76_5(data):
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") not in ("pier", "column_wrap") or w.get("part_of"):
+             continue
+         t = _tag(w)
+@@ -294,7 +294,7 @@
+     """{room: LF de ceiling_transition que son borde de ese ceiling suspendido} (R76.6)."""
+     rooms = {str(c.get("room")) for c in data.get("ceilings") or [] if c.get("system") in susp}
+     out = {}
+-    for w in (data.get("walls") or []) + (data.get("runs") or []):
++    for w in (data.get("walls") or []) + (data.get("runs") or []):   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "ceiling_transition":
+             continue
+         eo = w.get("edge_of")
+@@ -320,7 +320,7 @@
+ def verificar(data, es_ext):
+     r76_1(data)
+     r76_2(data)
+-    if data.get("ballistic_jogs") is not None or any(_tag(w).endswith("K") for w in data.get("walls") or []):
++    if data.get("ballistic_jogs") is not None or any(_tag(w).endswith("K") for w in data.get("walls") or []):   # solo-metal: R76 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         r76_3(data)
+     r76_4(data, aberturas_ext(data, es_ext))
+     r76_5(data)
+diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_v77.py vB/take-off-metal-frame-drywall/tools/chequeos_v77.py
+--- vA/take-off-metal-frame-drywall/tools/chequeos_v77.py	2026-11-13 06:23:17.104586025 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_v77.py	2026-11-13 06:23:17.114011610 +0000
+@@ -63,7 +63,7 @@
+                 f.append(f"R77.4 {ref}: {capas} capas dibujadas y {plies} ply(s) del rótulo sin rfi con delta (D4)")
+         except (KeyError, TypeError, ValueError):
+             f.append(f"R77.4 {ref}: strip de pier sin plies + layers_drawn (D4)")
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R77 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") != "pier":
+             continue
+         js = w.get("jamb_strips")
+@@ -91,7 +91,7 @@
+     f, esc = [], _esc(data)
+     if not esc:
+         return f
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: R77 del cálculo de walls metálicos (lo llama canon.py); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         b = w.get("band") or {}
+         p0, p1 = b.get("p0"), b.get("p1")
+         if not (p0 and p1):
+diff -ruN vA/take-off-metal-frame-drywall/tools/comparar.py vB/take-off-metal-frame-drywall/tools/comparar.py
+--- vA/take-off-metal-frame-drywall/tools/comparar.py	2026-11-13 06:23:17.105285141 +0000
++++ vB/take-off-metal-frame-drywall/tools/comparar.py	2026-11-13 06:23:17.114610646 +0000
+@@ -112,7 +112,7 @@
+ 
+ def _tag_ids(canon):
+     """id de segmento del canon -> tag_ids del inventario que ese segmento cita."""
+-    return {w["id"]: set(w.get("tag_ids") or []) for w in canon.get("walls") or []}
++    return {w["id"]: set(w.get("tag_ids") or []) for w in canon.get("walls") or []}   # solo-metal: tag_ids de walls; los de existing_walls los cruza comparar_extra.por_tag (cierra la alerta)
+ 
+ 
+ def tags_inventario(inv):
+@@ -136,10 +136,10 @@
+     for c in canons:
+         if not isinstance(c, dict):
+             continue
+-        for w in c.get("walls") or []:
++        for w in list((c or {}).get("walls") or []) + list((c or {}).get("existing_walls") or []):   # BE-XF16: + board-only
+             for x in w.get("tag_ids") or []:
+                 if x:
+-                    citado[str(x)].add(str(w.get("tag")))
++                    citado[str(x)].add(str(w.get("tag") or w.get("type")))
+         for t in c.get("tags_descartados") or []:
+             if not isinstance(t, dict):
+                 continue
+@@ -175,7 +175,7 @@
+         if h.get("sheet") and h.get("page") is not None:
+             pags[str(h["sheet"])].add(int(h["page"]))
+     out = []
+-    for w in canon.get("walls") or []:
++    for w in list((canon or {}).get("walls") or []) + list((canon or {}).get("existing_walls") or []):   # BE-XF16: + board-only
+         sh, pg = w.get("sheet") or w.get("plan_sheet"), w.get("page")
+         if not sh or pg is None or str(sh) not in pags:
+             continue
+@@ -259,7 +259,7 @@
+         c = {"tag": o["id"], "type": o["type"], "sheet": o["sheet"], "page": o["page"], "center_pt": o["center_pt"],
+              "A": res["A"], "B": res["B"]}
+         cobertura.append(c)
+-        if not res["A"]["walls"] and not res["B"]["walls"]:
++        if not res["A"]["walls"] and not res["B"]["walls"]:   # campo: walls del resultado de cobertura
+             nv = res["A"]["sin_geometria"] + res["B"]["sin_geometria"]
+             alertas.append({"kind": "tag sin wall", "type": o["type"], "sheet": o["sheet"], "page": o["page"],
+                             "tag": o, "detalle": f"tag {o['id']} {o['type']} has no wall of its type within "
+diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:23:17.105998047 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:23:17.111840092 +0000
+@@ -1748,7 +1748,7 @@
+                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+                       "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+-                      "v81cf135": "2026-11-13T06:08:00+00:00", "v81cf136": "2026-11-13T06:15:00+00:00"}   # v133: dfcf5e7 · v134: 59947ce · v135: 3f73cbd (06:07:55) · v136: hora fijada justo antes del commit
++                      "v81cf135": "2026-11-13T06:07:55+00:00", "v81cf136": "2026-11-13T06:12:55+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+@@ -7774,8 +7774,8 @@
+ 
+ 
+ _AQUI = os.path.dirname(os.path.abspath(__file__))
+-LECTORES_DE_MUROS = [os.path.join(_AQUI, f) for f in ("compuerta_entrega.py", "chequeos_biblioteca.py", "revision_markups.py",
+-                     "revision_materiales.py", "trazabilidad.py", "markups_bluebeam.py")] + [os.path.join(_AQUI, "..", "runner", "completitud.py")]
++LECTORES_DE_MUROS = sorted(glob.glob(os.path.join(_AQUI, "*.py")) + glob.glob(os.path.join(_AQUI, "..", "runner", "*.py")))
++LECTORES_DE_MUROS = [p for p in LECTORES_DE_MUROS if not os.path.basename(p).startswith("test_")]   # v137: TODAS las tools (179 lecturas clasificadas)
+ RX_LEE_WALLS = re.compile(r"""\.get\(\s*["']walls["']|\[\s*["']walls["']\s*\]""")   # campo: patrón del escáner
+ 
+ 
+diff -ruN vA/take-off-metal-frame-drywall/tools/criterios.py vB/take-off-metal-frame-drywall/tools/criterios.py
+--- vA/take-off-metal-frame-drywall/tools/criterios.py	2026-11-13 06:23:17.103724360 +0000
++++ vB/take-off-metal-frame-drywall/tools/criterios.py	2026-11-13 06:23:17.113070977 +0000
+@@ -241,7 +241,7 @@
+         return [(None, canon)]
+     from collections import OrderedDict
+     g = OrderedDict()
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: subcanons por hoja para la partición / bandas de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         g.setdefault(hoja_de(w), []).append(w)
+     out = []
+     for sh, ws in g.items():
+@@ -252,7 +252,7 @@
+                                      else (k.get("plan_scale_pt_per_ft") or {}).get("source", "")}
+         k.pop("plan_scale_by_sheet", None)
+         c["constants"] = k
+-        c["walls"] = ws
++        c["walls"] = ws   # campo: escribe la lista walls del subcanon
+         out.append((sh, c))
+     return out
+ 
+diff -ruN vA/take-off-metal-frame-drywall/tools/cruzar_diagonal.py vB/take-off-metal-frame-drywall/tools/cruzar_diagonal.py
+--- vA/take-off-metal-frame-drywall/tools/cruzar_diagonal.py	2026-11-13 06:23:17.105059769 +0000
++++ vB/take-off-metal-frame-drywall/tools/cruzar_diagonal.py	2026-11-13 06:23:17.114451346 +0000
+@@ -113,7 +113,7 @@
+         print(__doc__)
+         return 2
+     canon, wid, pg, arq = a[0], a[1], int(a[2]), int(a[3])
+-    w = next((x for x in json.load(open(canon)).get("walls") or [] if x.get("id") == wid), None)
++    w = next((x for x in json.load(open(canon)).get("walls") or [] if x.get("id") == wid), None)   # solo-metal: wall con band ori D: solo walls metálicos tienen band
+     if w is None or str((w.get("band") or {}).get("ori")).upper() != "D":
+         print(f"ERROR: {wid} no está en el canon o su band no es ori D", file=sys.stderr)
+         return 1
+diff -ruN vA/take-off-metal-frame-drywall/tools/entregar.py vB/take-off-metal-frame-drywall/tools/entregar.py
+--- vA/take-off-metal-frame-drywall/tools/entregar.py	2026-11-13 06:23:17.103136625 +0000
++++ vB/take-off-metal-frame-drywall/tools/entregar.py	2026-11-13 06:23:17.112618249 +0000
+@@ -283,7 +283,7 @@
+     print('19/23 HANDOFF (se regenera del sello, nunca a mano)')
+     import handoff as HO
+     dh, ih = HO.escribir()
+-    print('    handoff -> %s  (%d walls, %d renglones)' % (dh, ih['walls'], ih['lineas']))
++    print('    handoff -> %s  (%d walls, %d renglones)' % (dh, ih['walls'], ih['lineas']))   # campo: conteo 'walls' del resultado del handoff
+ 
+     print('19b/23 MARKUPS BLUEBEAM (W3, R78.24: PDF con una annot por wall, verificado contra el canon)')
+     import reglas as _RGL
+diff -ruN vA/take-off-metal-frame-drywall/tools/esquinas.py vB/take-off-metal-frame-drywall/tools/esquinas.py
+--- vA/take-off-metal-frame-drywall/tools/esquinas.py	2026-11-13 06:23:17.104223273 +0000
++++ vB/take-off-metal-frame-drywall/tools/esquinas.py	2026-11-13 06:23:17.113606877 +0000
+@@ -55,7 +55,7 @@
+ 
+ def todas_las_bandas(canon):
+     """Todas las bandas (incluye elementos que no son partition: bulkheads, cripples, wraps) para cubrir huecos."""
+-    return [(w, geo(w)) for w in canon.get("walls") or [] if geo(w)]
++    return [(w, geo(w)) for w in canon.get("walls") or [] if geo(w)]   # solo-metal: esquinas / huecos entre bandas de walls metálicos; existing_walls tienen path, no band
+ 
+ 
+ def _hueco_explicado_por_geometria(wa, a, b, todas, tol):
+@@ -86,7 +86,7 @@
+ 
+ def walls_utiles(canon):
+     out = []
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: esquinas / huecos entre bandas de walls metálicos; existing_walls tienen path, no band
+         if w.get("element") in NO_PARTITION:
+             continue
+         g = geo(w)
+@@ -134,7 +134,7 @@
+     ws = walls_utiles(canon)
+     todas = todas_las_bandas(canon)
+     ok_gaps = {frozenset(x.get("between") or []) for x in canon.get("gaps_ok") or [] if x.get("reason")}
+-    ok_corners = {frozenset(x.get("walls") or []) for x in canon.get("corners_ok") or [] if x.get("reason")}
++    ok_corners = {frozenset(x.get("walls") or []) for x in canon.get("corners_ok") or [] if x.get("reason")}   # nodo: walls del corner_ok
+     fallas, esquinas, huecos = [], [], []
+     for i, (wa, ga) in enumerate(ws):
+         for wb, gb in ws[i + 1:]:
+diff -ruN vA/take-off-metal-frame-drywall/tools/etapas.py vB/take-off-metal-frame-drywall/tools/etapas.py
+--- vA/take-off-metal-frame-drywall/tools/etapas.py	2026-11-13 06:23:17.104601460 +0000
++++ vB/take-off-metal-frame-drywall/tools/etapas.py	2026-11-13 06:23:17.114025908 +0000
+@@ -162,12 +162,12 @@
+         c = cob.get(o["id"])
+         if c is None:
+             continue
+-        con_wall = bool((c.get("A") or {}).get("walls")) or bool((c.get("B") or {}).get("walls"))
++        con_wall = bool((c.get("A") or {}).get("walls")) or bool((c.get("B") or {}).get("walls"))   # campo: walls del renglón de cobertura de comparar
+         if not con_wall and o["id"] not in alertados:
+             fallas.append(f"tag {o['id']} {o.get('type')} ({o.get('sheet')} p.{o.get('page')}) sin wall y sin alerta")
+ 
+     for lado, c in (("A", ca), ("B", cb)):
+-        ws = c.get("walls") or []
++        ws = c.get("walls") or []   # solo-metal: aviso sin sheet / tag_ids de las lecturas; los existing_walls sin tag los cuenta comparar_extra (untagged_A/B)
+         sin_sh = [w.get("id") for w in ws if not w.get("sheet")]
+         sin_id = [w.get("id") for w in ws if not w.get("tag_ids")]
+         if sin_sh:
+@@ -295,7 +295,7 @@
+         return [e for _, sub in criterios.subcanons_por_hoja(canon) for e in validar_bandas(sub)]
+     esc = _escala(canon)
+     err = []
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: validar_bandas: band H/V; existing_walls tienen path (canon._existing_walls valida sus tramos)
+         b = w.get("band")
+         if not isinstance(b, dict) or b.get("ori") not in ("H", "V") or w.get("element") in CAJAS:
+             continue
+@@ -351,7 +351,7 @@
+     k, refs = _lista_openings(canon)
+     if k is None:
+         return []
+-    usadas = [(w.get("id"), str(o.get("ref"))) for w in canon.get("walls") or [] for o in w.get("openings") or []]
++    usadas = [(w.get("id"), str(o.get("ref"))) for w in canon.get("walls") or [] for o in w.get("openings") or []]   # solo-metal: openings solo en walls metálicos; existing_walls no llevan openings
+     usadas += [("openings_extra", str(o.get("ref"))) for o in canon.get("openings_extra") or []]
+     malas = [f"{wid}: '{r}'" for wid, r in usadas if r not in refs]
+     if not malas:
+@@ -391,7 +391,7 @@
+             else:
+                 _fusion_escalar(out, k, v, f, origen, (k, None), errores, avisos, k)
+     vistos = {}
+-    for w in out.get("walls") or []:
++    for w in list((out or {}).get("walls") or []) + list((out or {}).get("existing_walls") or []):   # BE-XF16: id único en las dos listas
+         if w.get("id") in vistos:
+             errores.append(f"wall id {w.get('id')} repetido ({vistos[w.get('id')]} y otro fragmento)")
+         vistos[w.get("id")] = w.get("sheet")
+@@ -426,7 +426,7 @@
+             return 1
+         with open(a[3], "w") as f:
+             json.dump(canon, f, indent=1, ensure_ascii=False)
+-        print(f"unidos {len(canon['fragmentos'])} fragmento(s), {len(canon.get('walls') or [])} wall(s) -> {a[3]}")
++        print(f"unidos {len(canon['fragmentos'])} fragmento(s), {len(list(canon.get('walls') or []) + list(canon.get('existing_walls') or []))} wall(s) (walls + existing_walls) -> {a[3]}")
+         return 0
+     if len(argv) != 3 or argv[1] not in ("estado", "compuerta"):
+         print(__doc__)
+diff -ruN vA/take-off-metal-frame-drywall/tools/eval_takeoff.py vB/take-off-metal-frame-drywall/tools/eval_takeoff.py
+--- vA/take-off-metal-frame-drywall/tools/eval_takeoff.py	2026-11-13 06:23:17.103801762 +0000
++++ vB/take-off-metal-frame-drywall/tools/eval_takeoff.py	2026-11-13 06:23:17.113191843 +0000
+@@ -73,7 +73,7 @@
+             lf0 = num(r[cl]) if cl < len(r) else None
+             if lf0 is not None:
+                 types.setdefault(cur, {"walls": 0, "lf": 0.0})
+-                types[cur]["walls"] += 1
++                types[cur]["walls"] += 1   # campo: conteo 'walls' del dict de types de la evaluación
+                 types[cur]["lf"] += lf0
+             continue
+         if first.upper().startswith("TYPE ") or first.upper().startswith("TYPE/"):
+@@ -94,7 +94,7 @@
+         if lf is None:
+             continue
+         types.setdefault(t, {"walls": 0, "lf": 0.0})
+-        types[t]["walls"] += 1
++        types[t]["walls"] += 1   # campo: conteo 'walls' del dict de types de la evaluación
+         types[t]["lf"] += lf
+     return types
+ 
+@@ -244,27 +244,27 @@
+             if t not in cp:
+                 hoja = otra_hoja(cwb, t)
+                 if hoja:      # el candidato lo tiene, pero en otra hoja (p.ej. "Opening Bands"): no es FALTA
+-                    res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": None,
++                    res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": None,   # campo: conteo 'walls' del dict de types de la evaluación
+                                          "cand_lf": None, "estado": f"EN OTRA HOJA ({hoja})", "dif": None,
+                                          "puntos": None})
+                     continue
+-                res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": None,
++                res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": None,   # campo: conteo 'walls' del dict de types de la evaluación
+                                      "cand_lf": None, "estado": "FALTA", "dif": None, "puntos": 0.0})
+                 continue
+             c = cp[t]
+             # v73: los rangos de types (_partition_types) mandan sobre la hoja de la ref (LF y número de walls)
+             tr = (rangos.get("_partition_types") or {}).get(t) or {}
+             lo, hi = tr.get("lf_min", tr.get("lf")), tr.get("lf_max", tr.get("lf"))
+-            wlo = tr.get("walls_min", tr.get("walls", r["walls"]))
+-            whi = tr.get("walls_max", tr.get("walls", r["walls"]))
++            wlo = tr.get("walls_min", tr.get("walls", r["walls"]))   # campo: conteo 'walls' del dict de types de la evaluación
++            whi = tr.get("walls_max", tr.get("walls", r["walls"]))   # campo: conteo 'walls' del dict de types de la evaluación
+             if lo is not None and hi is not None:
+                 est, d, pts = grade_rango(lo, hi, c["lf"], tol, close)
+                 est = est.replace(" (rango)", "")
+             else:
+                 est, d, pts = grade(r["lf"], c["lf"], tol, close)
+-            if not (wlo <= c["walls"] <= whi) and est == "IGUAL":
++            if not (wlo <= c["walls"] <= whi) and est == "IGUAL":   # campo: conteo 'walls' del dict de types de la evaluación
+                 est, pts = "CERCA", 0.5                  # mismos LF pero distinto número de walls: revisar
+-            res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": c["walls"],
++            res["types"].append({"type": t, "ref_walls": r["walls"], "ref_lf": r["lf"], "cand_walls": c["walls"],   # campo: conteo 'walls' del dict de types de la evaluación
+                                  "cand_lf": c["lf"], "estado": est, "dif": d, "puntos": pts})
+         res["types_sobran"] = [{"type": t, **cp[t]} for t in sorted(cp) if t not in rp and not t.startswith("OTHER")]
+ 
+@@ -322,7 +322,7 @@
+               "sus materiales sí cuentan en la tabla por familia): " + ", ".join(res["types_no_comparados"])]
+     if res["types_sobran"]:
+         L += ["", "## Types que solo están en el candidato (SOBRA)", ""]
+-        L += [f"- {t['type']}: {t['walls']} walls, {t['lf']:.2f} LF" for t in res["types_sobran"]]
++        L += [f"- {t['type']}: {t['walls']} walls, {t['lf']:.2f} LF" for t in res["types_sobran"]]   # campo: conteo 'walls' del dict de types de la evaluación
+     L += ["", "Antes de dar un MAL por error de Claude, abre el renglón: a veces la referencia o el "
+           "emparejamiento de nombres es el que está mal (regla del artículo: leer cada resultado)."]
+     return "\n".join(L) + "\n"
+diff -ruN vA/take-off-metal-frame-drywall/tools/handoff.py vB/take-off-metal-frame-drywall/tools/handoff.py
+--- vA/take-off-metal-frame-drywall/tools/handoff.py	2026-11-13 06:23:17.104732238 +0000
++++ vB/take-off-metal-frame-drywall/tools/handoff.py	2026-11-13 06:23:17.114130007 +0000
+@@ -389,7 +389,7 @@
+     w('')
+     for t in T:
+         w('### `%s` - %d wall%s: %s' % (t['tag'], t['n'], '' if t['n'] == 1 else 's',
+-                                        ', '.join('#%s' % x for x in t['walls'])))
++                                        ', '.join('#%s' % x for x in t['walls'])))   # campo: lista / conteo 'walls' del resultado del handoff
+         w('')
+         w('| Item | Value | State |')
+         w('|---|---|---|')
+@@ -690,4 +690,4 @@
+ if __name__ == '__main__':
+     d, info = escribir()
+     print('HANDOFF -> %s' % d)
+-    print('   %d walls, %d renglones, %d bytes' % (info['walls'], info['lineas'], info['bytes']))
++    print('   %d walls, %d renglones, %d bytes' % (info['walls'], info['lineas'], info['bytes']))   # campo: lista / conteo 'walls' del resultado del handoff
+diff -ruN vA/take-off-metal-frame-drywall/tools/inventario.py vB/take-off-metal-frame-drywall/tools/inventario.py
+--- vA/take-off-metal-frame-drywall/tools/inventario.py	2026-11-13 06:23:17.104087867 +0000
++++ vB/take-off-metal-frame-drywall/tools/inventario.py	2026-11-13 06:23:17.113484180 +0000
+@@ -68,7 +68,7 @@
+ 
+ def _bandas(data, scale, avisos):
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element", "wall") not in ELEMENTOS_BANDA:
+             continue
+         b = w.get("band")
+@@ -142,7 +142,7 @@
+ def _apilados(data, bandas, scale):
+     """Dos walls en la misma huella = split vertical. Solo con canopy_beam_split true y split_of."""
+     split = _const(data, "canopy_beam_split")
+-    con_beam = [w for w in data.get("walls") or [] if w.get("canopy_beam")]
++    con_beam = [w for w in data.get("walls") or [] if w.get("canopy_beam")]   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     if con_beam and split is None:
+         raise ValueError("constants.canopy_beam_split {value, source} obligatoria: hay walls con canopy_beam "
+                          "(decisión única del proyecto, no de cada agente — #13A continuo / #13B partido)")
+@@ -150,12 +150,12 @@
+     ok, motivo = criterios.split_valido((data.get("constants") or {}).get("canopy_beam_split"))
+     if not ok:
+         raise ValueError(motivo)
+-    errs = criterios.filas_dentro_del_padre(data.get("walls") or [], esc=float(scale or 18.0))
++    errs = criterios.filas_dentro_del_padre(data.get("walls") or [], esc=float(scale or 18.0))   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     if errs:
+         raise ValueError("filas apiladas (split_of): " + "; ".join(errs[:6]) + " — R80.2: la suma de los tramos "
+                          "split_of de un nivel es el wall padre")
+-    ids = {w["id"]: w for w in data.get("walls") or []}
+-    for w in data.get("walls") or []:
++    ids = {w["id"]: w for w in data.get("walls") or []}   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         p = w.get("split_of")
+         if p is None:
+             continue
+@@ -179,7 +179,7 @@
+     zs = _const(data, "deck_zones")
+     if zs is None:
+         return
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         z = w.get("zone")
+         if z is None:
+             continue
+@@ -193,7 +193,7 @@
+ 
+ def _mr(data):
+     fx = data.get("wet_fixtures")
+-    caras_mr = [(w, f) for w in data.get("walls") or [] for f in w.get("faces") or []
++    caras_mr = [(w, f) for w in data.get("walls") or [] for f in w.get("faces") or []   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+                 if "MR" in str(f.get("board", "")).upper() and not str(f.get("board", "")).startswith("1/2")]   # R80e.111
+     # v80w (R80w.11, Chuze): si la nota de wet areas DEL SET pide MR en cuartos completos (p. ej. "LOCKER ROOMS,
+     # RESTROOMS AND POOL AREAS TO BE MOISTURE RESISTANT GYP BOARD"), constants.mr_rooms_note {value: [palabras de
+@@ -246,11 +246,11 @@
+         raise ValueError(f"purlin = top track a deck PARALELO al flute ({flute}); corregir: {mal} "
+                          f"(#13B door bulkheads)")
+     runs = {}
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         if w.get("element") == "roof_step" and w.get("purlin"):
+             k = w.get("straight_run") or w.get("line") or w["id"]
+             runs.setdefault(k, []).append(w["id"])
+-    por = {w["id"]: w for w in data.get("walls") or []}
++    por = {w["id"]: w for w in data.get("walls") or []}   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     dob = {k: v for k, v in runs.items() if len(v) > 1 and
+            not any(criterios.filas_purlin_ok(por[a], por[b]) for i, a in enumerate(v) for b in v[i + 1:])}
+     if dob:
+@@ -260,7 +260,7 @@
+ def _rfi_split(data):
+     """Delta de partir en la canopy beam (para el RFI): track +2 L por familia; stud -studs x depth."""
+     out = []
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         cb = w.get("canopy_beam")
+         if not cb or w.get("split_of"):
+             continue
+@@ -290,15 +290,15 @@
+     _mr(data)
+     _purlin(data, bandas)
+     lf = {}
+-    for w in data.get("walls") or []:
++    for w in data.get("walls") or []:   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         k = f"{w.get('element', 'wall')}:{w.get('tag')}"
+         lf[k] = round(lf.get(k, 0.0) + float(w["length_ft"]) * int(w.get("rows", 1)), 2)
+     # v74 (R74.1 / R74.5): el inventario avisa lo que la partición va a retipar o descontar, para que la lectura lo
+     # corrija en el canon (el type del segmento y el box duplicado son de la lectura, no de la tool).
+     try:
+         import particion
+-        dups = particion.duplicados(data.get("walls") or [])
+-        ctx = particion.contexto([w for w in data.get("walls") or [] if w["id"] not in dups])
++        dups = particion.duplicados(data.get("walls") or [])   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
++        ctx = particion.contexto([w for w in data.get("walls") or [] if w["id"] not in dups])   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+         av += [m for _, m in particion.retipar(ctx, scale).values()]
+         av += [f"{k} sin tag con la huella del box {v} (con tag): mismo elemento leído dos veces (R74.5); declarar "
+                f"part_of" for k, v in dups.items()]
+@@ -309,7 +309,7 @@
+         tot = round(sum(r["bottom_track_lf"] for r in rfi), 2)
+         av.append(f"RFI canopy beam en la cavidad (detalles de la banda / canopy): continuo (cargado). Si se parte: "
+                   f"+{tot} LF bottom, +{tot} LF top, {round(sum(r['stud_lf'] for r in rfi), 2)} LF 6\" stud")
+-    return {"ok": True, "walls": len(data.get("walls") or []), "con_banda": len(bandas), "lf_por_tag": lf,
++    return {"ok": True, "walls": len(data.get("walls") or []), "con_banda": len(bandas), "lf_por_tag": lf,   # solo-metal: inventario del cálculo (bandas / filas / purlin / MR de walls metálicos); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+             "avisos": av, "rfi_split": rfi}
+ 
+ 
+@@ -327,7 +327,7 @@
+         open(argv[2], "w", encoding="utf-8").write(json.dumps(out, indent=1, ensure_ascii=False))
+     for a in out["avisos"]:
+         print("AVISO", a)
+-    print(f"INVENTARIO OK: {out['walls']} walls, {out['con_banda']} con banda en planta")
++    print(f"INVENTARIO OK: {out['walls']} walls, {out['con_banda']} con banda en planta")   # campo: conteo del resultado del inventario
+     return 0
+ 
+ 
+diff -ruN vA/take-off-metal-frame-drywall/tools/particion.py vB/take-off-metal-frame-drywall/tools/particion.py
+--- vA/take-off-metal-frame-drywall/tools/particion.py	2026-11-13 06:23:17.104542198 +0000
++++ vB/take-off-metal-frame-drywall/tools/particion.py	2026-11-13 06:23:17.113988402 +0000
+@@ -492,7 +492,7 @@
+                     continue
+                 e = res["types"][t]
+                 e["filas"] += d["filas"]
+-                e["walls"] += d["walls"]
++                e["walls"] += d["walls"]   # campo: conteo 'walls' del resultado de la partición
+                 e["lf"] = round(e["lf"] + d["lf"], 3)
+                 for k in ("stubs", "anexos"):
+                     if d.get(k):
+@@ -514,7 +514,7 @@
+     esc = escala(canon)
+     grupos = OrderedDict()
+     otros, avisos = [], []
+-    walls_c = canon.get("walls") or []
++    walls_c = canon.get("walls") or []   # solo-metal: partición por type de los walls metálicos (bandas); existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39)
+     retip, dups = {}, {}
+     externo = ctx is not None
+     ctx = list(ctx or [])
+@@ -606,7 +606,7 @@
+                 w["bands"] = []
+         d = out.setdefault(t, {"walls": 0, "lf": 0.0, "filas": []})
+         d["filas"] += walls
+-        d["walls"] += len(walls)
++        d["walls"] += len(walls)   # campo: conteo 'walls' del resultado de la partición
+         d["lf"] = round(d["lf"] + sum(w["lf"] for w in walls), 3)
+     for t, ap in aparte.items():
+         if t in out and (ap["stubs"] or ap["anexos"]):
+@@ -632,7 +632,7 @@
+             json.dump(r, f, indent=1, ensure_ascii=False)
+     print(f"modo = {r['modo']}")
+     for t, d in r["types"].items():
+-        print(f"{t:14s} {d['walls']:3d} walls {d['lf']:9.2f} LF")
++        print(f"{t:14s} {d['walls']:3d} walls {d['lf']:9.2f} LF")   # campo: conteo 'walls' del resultado de la partición
+     for x in r["avisos"]:
+         print("AVISO:", x)
+     return 0
+diff -ruN vA/take-off-metal-frame-drywall/tools/partition_types.py vB/take-off-metal-frame-drywall/tools/partition_types.py
+--- vA/take-off-metal-frame-drywall/tools/partition_types.py	2026-11-13 06:23:17.102735216 +0000
++++ vB/take-off-metal-frame-drywall/tools/partition_types.py	2026-11-13 06:23:17.112300195 +0000
+@@ -395,7 +395,7 @@
+                     continue
+                 e = res["types"][t]
+                 e["filas"] += d["filas"]
+-                e["walls"] += d["walls"]
++                e["walls"] += d["walls"]   # campo: conteo de walls por type del resultado de la partición
+                 e["lf"] = round(e["lf"] + d["lf"], 2)
+                 e["jogs"] = (e.get("jogs") or []) + (d.get("jogs") or [])
+                 if d.get("status") == "PENDIENTE":
+@@ -416,7 +416,7 @@
+     if not modo and isinstance(pr, dict) and pr.get("value") == "wall_id" and str(pr.get("source") or "").strip():
+         modo = "wall_id"
+     modo = modo or particion.MODO_DEFAULT
+-    walls = canon.get("walls") or []
++    walls = canon.get("walls") or []   # solo-metal: types / LF de la Partition Takeoff de los walls metálicos; existing_walls (board-only) los procesa aparte canon._existing_walls (R80w.39) y plantilla_excel los lista en su bloque
+     esc = float(((canon.get("constants") or {}).get("plan_scale_pt_per_ft") or {}).get("value") or 18.0)
+     tags_wall = {_norm(w.get("tag")) for w in walls if w.get("element", "wall") == "wall"}
+     tags_wall = {t: 1 for t in tags_wall}
+@@ -524,7 +524,7 @@
+     for t, d in r["types"].items():
+         j = f"  (incl. {len(d['jogs'])} jog/return: {sum(x['lf'] for x in d['jogs']):.2f} LF)" if d["jogs"] else ""
+         p = "  PENDIENTE" if d.get("status") == "PENDIENTE" else ""
+-        print(f"{t:14s} {d['walls']:3d} walls {d['lf']:9.2f} LF{j}{p}")
++        print(f"{t:14s} {d['walls']:3d} walls {d['lf']:9.2f} LF{j}{p}")   # campo: conteo impreso del resultado por type
+     print(f"OTHER FRAMING (no partition type): {len(r['other_framing'])} elementos")
+     for a in r["avisos"]:
+         print("AVISO", a)
+diff -ruN vA/take-off-metal-frame-drywall/tools/plantilla_excel.py vB/take-off-metal-frame-drywall/tools/plantilla_excel.py
+--- vA/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:23:17.103325847 +0000
++++ vB/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:23:17.112805929 +0000
+@@ -159,7 +159,7 @@
+     err += acoustical_err(d["materials"])                 # v77c U8 (R77.12)
+     err += revisar_err(d["revisar"])                       # v77c U9 / U10 (R77.13 / R77.14)
+     err += conflictos_sin_delta(d)                         # BE-CR42: la regla de CB_U_082 al armar, no en la compuerta final
+-    for i, w in enumerate(d["walls"]):
++    for i, w in enumerate(d["walls"]):   # campo: d['walls'] = renglones del Excel armados desde la partición (los board-only van en d['existing_walls'])
+         for k in WALL_KEYS:
+             if k not in w or w[k] in ("", None):
+                 err.append(f"walls[{i}] ({w.get('type')} #{w.get('wall')}): falta '{k}'")
+@@ -607,7 +607,7 @@
+     for c in range(1, len(hdr) + 1):
+         ws.cell(4, c).font = S["h"]; ws.cell(4, c).fill = S["hf"]
+     orden = []
+-    for w in d["walls"]:
++    for w in d["walls"]:   # campo: d['walls'] = renglones del Excel armados desde la partición (los board-only van en d['existing_walls'])
+         if w["type"] not in orden:
+             orden.append(w["type"])
+ 
+@@ -623,7 +623,7 @@
+     for t in orden:
+         ws.append([f"TYPE {t}"]); ws.cell(ws.max_row, 1).font = S["tipo"]; ws.cell(ws.max_row, 1).fill = S["tf"]
+         f0 = ws.max_row + 1
+-        for w in sorted([x for x in d["walls"] if x["type"] == t], key=lambda x: _nat(x["wall"])):   # por Wall ID
++        for w in sorted([x for x in d["walls"] if x["type"] == t], key=lambda x: _nat(x["wall"])):   # por Wall ID   # campo: d['walls'] = renglones del Excel armados desde la partición (los board-only van en d['existing_walls'])
+             ws.append(fila_wall(t, w))
+         f1 = ws.max_row
+         # v80e (§0.F): SUBTOTAL por type; texto en la col. B (la A vacía: no es un wall)
+@@ -1333,7 +1333,7 @@
+             return {"type": t, "wall": f["wall"], "location": f["location"], "length_lf": f["lf"],
+                     "height_ft": f["height_ft"], "stud_size": f["stud_size"], "stud_oc_in": f["oc_in"],
+                     "layers": f["layers"], "board_sf": f["board_sf"], "source": f["source"], "status": f["status"]}
+-        d["walls"] = [row(t, f) for t, x in pt["types"].items() for f in x["filas"]]
++        d["walls"] = [row(t, f) for t, x in pt["types"].items() for f in x["filas"]]   # campo: d['walls'] = renglones del Excel armados desde la partición (los board-only van en d['existing_walls'])
+         d["other_framing"] = [row(etiqueta_elemento(o), dict(o, wall=o["id"])) for o in pt.get("other_framing") or []]
+     if fo.get("existing_walls"):                          # R80w.39: muros existentes, solo board
+         d["existing_walls"] = list(fo["existing_walls"])
+diff -ruN vA/take-off-metal-frame-drywall/tools/reglas.py vB/take-off-metal-frame-drywall/tools/reglas.py
+--- vA/take-off-metal-frame-drywall/tools/reglas.py	2026-11-13 06:23:17.103000020 +0000
++++ vB/take-off-metal-frame-drywall/tools/reglas.py	2026-11-13 06:23:17.112476462 +0000
+@@ -168,7 +168,7 @@
+ 
+     # --- recorridos del canon
+     def walls(self, element=None):
+-        ws = (self.canon or {}).get("walls") or []
++        ws = (self.canon or {}).get("walls") or []   # solo-metal: Ctx.walls() = accesor de los walls metálicos (band / element / faces por cara) que usan las reglas; los board-only entran por chequeos_biblioteca.walls_todos / _walls_board_only (BE-CR10 / BE-CR25)
+         return [w for w in ws if isinstance(w, dict) and (element is None or w.get("element", "wall") in
+                                                             ((element,) if isinstance(element, str) else element))]
+ 
+@@ -1045,7 +1045,7 @@
+ def a_mep_sweep(ctx):
+     out = []
+     sw = (ctx.canon or {}).get("mep_sweep")
+-    if (ctx.canon or {}).get("walls") and not sw:
++    if (ctx.canon or {}).get("walls") and not sw:   # solo-metal: mep_sweep se exige para el refuerzo de studs MEP de walls metálicos; un set board-only (existing_walls) no lleva studs
+         return _lista("mep_sweep", "no está", "mep_sweep {sheets, registro, source} (A2)")
+     regs = []
+     if isinstance(sw, dict):
+diff -ruN vA/take-off-metal-frame-drywall/tools/studs_nodos.py vB/take-off-metal-frame-drywall/tools/studs_nodos.py
+--- vA/take-off-metal-frame-drywall/tools/studs_nodos.py	2026-11-13 06:23:17.104302178 +0000
++++ vB/take-off-metal-frame-drywall/tools/studs_nodos.py	2026-11-13 06:23:17.113693966 +0000
+@@ -82,8 +82,8 @@
+ 
+ 
+ def contar(data):
+-    walls = {w["id"]: w for w in data["walls"]}
+-    if len(walls) != len(data["walls"]):
++    walls = {w["id"]: w for w in data["walls"]}   # campo: data = studs_in armado por canon.generar() (entrada del cálculo, no el canon)
++    if len(walls) != len(data["walls"]):   # campo: data = studs_in armado por canon.generar() (entrada del cálculo, no el canon)
+         raise ValueError("id de wall repetido")
+     ends = {wid: 0 for wid in walls}
+     extra_row = {wid: 0 for wid in walls}     # se multiplica por rows
+@@ -98,7 +98,7 @@
+     for n in data.get("nodes", []):
+         k, nid = n["kind"], n["id"]
+         if k == "L":
+-            ws = n["walls"]
++            ws = n["walls"]   # nodo: walls del nodo
+             if len(ws) != 2:
+                 raise ValueError(f"nodo {nid}: L necesita 2 walls")
+             for wid in ws:
+@@ -112,7 +112,7 @@
+             extra_row[n["branch"]] += 1
+             nota[n["branch"]].append(f"T {nid} +1")
+         elif k == "X":
+-            ws = n["walls"]
++            ws = n["walls"]   # nodo: walls del nodo
+             for wid in ws:
+                 use(wid, nid)
+             extra_row[ws[0]] += 2
+@@ -120,7 +120,7 @@
+         elif k == "free":
+             use(n["wall"], nid)
+         elif k == "split":
+-            ws = n.get("walls") or []
++            ws = n.get("walls") or []   # nodo: walls del nodo
+             if len(ws) != 2:
+                 raise ValueError(f"nodo {nid}: split necesita 2 walls")
+             for wid in ws:
+diff -ruN vA/take-off-metal-frame-drywall/tools/track_por_tamano.py vB/take-off-metal-frame-drywall/tools/track_por_tamano.py
+--- vA/take-off-metal-frame-drywall/tools/track_por_tamano.py	2026-11-13 06:23:17.103830709 +0000
++++ vB/take-off-metal-frame-drywall/tools/track_por_tamano.py	2026-11-13 06:23:17.113225150 +0000
+@@ -36,7 +36,7 @@
+ 
+ def desglose(canon, total):
+     filas = OrderedDict()
+-    for w in canon.get("walls") or []:
++    for w in canon.get("walls") or []:   # solo-metal: desglose de track por tamaño: existing_walls no llevan track
+         if w.get("element") not in CON_TRACK:
+             continue
+         lf = float(w.get("length_ft") or 0) * int(w.get("rows", 1) or 1)
+diff -ruN vA/take-off-metal-frame-drywall/tools/vigas_sobre_walls.py vB/take-off-metal-frame-drywall/tools/vigas_sobre_walls.py
+--- vA/take-off-metal-frame-drywall/tools/vigas_sobre_walls.py	2026-11-13 06:23:17.103517494 +0000
++++ vB/take-off-metal-frame-drywall/tools/vigas_sobre_walls.py	2026-11-13 06:23:17.112937051 +0000
+@@ -288,7 +288,7 @@
+             pf = perfil(v, rot, otras=crudas)         # v68: rótulo en la hoja S; v71: un dueño por rótulo
+             p0, p1 = a_planta((v["p0"], v["p1"]), mapa)
+             vigas.append({"p0": p0, "p1": p1, "lw": v["lw"], "perfil": pf})
+-        walls = json.load(open(canon)).get("walls") or []
++        walls = json.load(open(canon)).get("walls") or []   # solo-metal: vigas sobre walls metálicos (headers / studs); existing_walls son board-only
+         res = cruzar(vigas, walls, float(opts["--tol"]), hoja=hoja_a)
+         otras = sorted({hoja_band(w) for w in walls if w.get("band") and hoja_band(w)
+                         and hoja_band(w) != hoja_a.strip().upper()})

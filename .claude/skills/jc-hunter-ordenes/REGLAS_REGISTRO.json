@@ -8830,6 +8830,23 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u199_cierre_por_cuarto_mutacion"
    }
+  },
+  {
+   "id": "BE-XF17",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 06:13: v136 publicada con FECHAS_PUBLICACION fijada 2 min DESPUÉS de su commit real)",
+   "categoria": "programa",
+   "cuando": "publicacion",
+   "texto_corto": "FECHAS_PUBLICACION = hora REAL del commit de publicación: se fija DESPUÉS del commit (git log -1 --format=%cI) en la versión siguiente, nunca antes; la versión que se publica no va en el dict (fecha_publicacion la toma de git). verificar_version (revisar_fechas): fecha a más de 60 s de su commit 'Publica vX' o versión sin commit = falta",
+   "motivo": "v135 se fijó 06:08:00 (commit 06:07:55) y v136 06:15:00 (commit 06:12:55): el gating de las reglas nuevas quedaba corrido",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_fechas",
+    "ordenes:verificar_version.py::commits_publicacion",
+    "ordenes:verificar_version.py::fechas_publicacion_skill"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "fechas_be_xf17"
+   }
   }
  ]
 }

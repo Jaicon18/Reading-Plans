@@ -529,8 +529,34 @@ def adv5_v121():
     assert V.proyectos_abiertos_cache(cache_con(dict(s20, **{"CSV_BLUEBEAM_rev20/RESULTADO.md":
                                                              "Comparado: 2026-11-12 12:00 PT\n1,351 CSV / 1,351 PDF / 1,351 emparejados; 0 faltantes\n"}))) == []
 
+def fechas_be_xf17():
+    """BE-XF17: FECHAS_PUBLICACION a más de 60 s del commit 'Publica vX' = falta; dentro de 60 s = ok; versión sin commit = falta salvo la
+    candidata (se publica con este commit)."""
+    import subprocess
+    d = tempfile.mkdtemp(prefix="xf17_")
+    run = lambda *a, **k: subprocess.run(["git", "-C", d] + list(a), capture_output=True, text=True, check=True, **k)
+    run("init", "-q")
+    run("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-q", "--allow-empty", "-m", "Publica v81cf901 (VIGENTE): prueba",
+        env=dict(os.environ, GIT_COMMITTER_DATE="2026-01-01T10:00:00+00:00", GIT_AUTHOR_DATE="2026-01-01T10:00:00+00:00"))
+    sk = os.path.join(d, "sk")
+    os.makedirs(os.path.join(sk, "tools"))
+
+    def poner(fechas, ver="v81cf902"):
+        open(os.path.join(sk, "SKILL.md"), "w").write(f"**VERSION: {ver}**\n")
+        open(os.path.join(sk, "tools", "compuerta_entrega.py"), "w").write(
+            'FECHA_X = "2026-01-01T10:00:30+00:00"\nFECHAS_PUBLICACION = {' + ", ".join(f'"{k}": {v}' for k, v in fechas.items()) + "}\n")
+    poner({"v81cf901": "FECHA_X"})
+    assert V.revisar_fechas(V.Fuente(sk), d) == []                                  # 30 s: ok (constante resuelta)
+    poner({"v81cf901": '"2026-01-01T10:02:05+00:00"'})
+    assert V.revisar_fechas(V.Fuente(sk), d) and "125 s" in V.revisar_fechas(V.Fuente(sk), d)[0]   # fijada antes / lejos = falta
+    poner({"v81cf901": '"2026-01-01T10:00:00+00:00"', "v81cf903": '"2026-01-01T11:00:00+00:00"'})
+    assert any("v81cf903" in x for x in V.revisar_fechas(V.Fuente(sk), d))         # versión sin commit = falta
+    poner({"v81cf901": '"2026-01-01T10:00:00+00:00"', "v81cf902": '"2026-01-01T11:00:00+00:00"'})
+    assert V.revisar_fechas(V.Fuente(sk), d) == []                                  # la candidata todavía no tiene commit
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")
