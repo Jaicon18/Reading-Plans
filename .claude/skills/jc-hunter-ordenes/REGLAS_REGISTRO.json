@@ -8954,6 +8954,21 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_xf20_stud_zona"
    }
+  },
+  {
+   "id": "BE-XF21",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity rev1c -> rev1d 13-nov, auditoría adversarial E-2, post-mortem XF13-E2; U-177 (4); U-202)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "el producto de CADA pieza de un head detail es el impreso: '3-5/8\" METAL STUD NESTED IN METAL TRACK' = 1 track + 1 STUD (fila de stud que cite la abertura), nunca 2 piezas de track",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::head_piezas",
+    "take-off:tools/chequeos_biblioteca.py::head_piezas_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_xf21_head_piezas"
+   }
   }
  ]
 }
