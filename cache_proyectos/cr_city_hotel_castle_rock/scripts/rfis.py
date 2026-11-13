@@ -141,6 +141,14 @@ R = [
  ("RFI-17", "A3.01", ["WATER ENTRY"],
   "L1 Water Entry 128 ceiling not labeled on A3.01 / A7.31.",
   "GYP-1 metal suspension, 1 layer 5/8\" Type X (adjacent typical)", ("A0.01 LEVEL 1 CODE PLAN draws no 2HR FB line around 128 while A8.00 door 128.1 WATER ENTRY is '90 MIN' (2 HR door) - the ceiling is not labeled on A3.01 / A7.31 (as loaded: GYP-1)", "0"), ("IBC 2018 Section 913.2.1 exception 1 (sprinklered: 1 HR) / Table 601 roof 0 HR: no rated ceiling required", "if exposed structure: -188.01 SF board, -47.0 LF main tee, -141.01 LF cross tee, -55.57 LF angle, -12.4 LF hanger wire (CLG-L1-10)"), "L1 128"),
+ ("RFI-30", "7/A6.01, 8/A6.01, 9/A6.01, 10/A6.01, 11/A6.01", ["3 3/8", "STAIR", "FURRING"],
+  "Lobby stair 127 (Stair 1): an untagged lining dimensioned 3 3/8\" is drawn on the stair side of the CMU on all 4 sides at L1-L4 (7-10/A6.01) and full height in section 11/A6.01 (vectors: one 5/8\" board line over a ~2 1/2\" cavity). No wall type, material or rating is printed for it (only the outer FW.1 / FW.2 / FW.4 faces of the stair are tagged, and counted). Is it gypsum board on furring (our scope) or a finish / CMU line?",
+  "LOADED conservative (U-048 / U-052): 5/8\" Type X one face on furring, 16 rows LIN-127-L1..L4-N/S/E/W = 2,325.5 SF (U-172 / U-191 sweep: specs 09 22 16 / 09 29 00 / 05 40 00, A6.0x sections, A0.06 / A0.07 types, code plans: not printed)", ("gypsum board 5/8\" Type X on furring, one face (as loaded); INTERIOR DRAWINGS referenced ('RE: INTERIOR DRAWINGS', 11/A6.01) but not issued in the bid set", "0"),
+  ("not gypsum: exposed / painted CMU (no lining) - OR (C) 2 1/2\" metal stud furring + 5/8\" Type X as the drawn 1/4\" + 2 1/2\" + 5/8\" band suggests: +2,046 LF 2 1/2\" studs @ 16\" (44 per level x H) + 400 LF track [DERIVED], board unchanged", "-2,325.5 SF 5/8\" Type X [DERIVED]: 50.0 LF per level (2 x 8.17 + 2 x 16.83) x H 14.00 (L1) + 11.00 (L2) + 11.00 (L3) + 10.51 (L4) = 50.0 x 46.51"), "Stair 127 L1-L4"),
+ ("RFI-31", "1/A2.01, 2/A6.02, 11/A9.01", ["126.1", "EXIT", "XW.6.3"],
+  "Stair 2 exit passage, south wall east of door 126.1 (grid 14, A2.01): ~4.1 LF drawn like the XW.6.3 exterior wall but with a bold inner element and no tag on A2.01 nor on the enlarged 2/A6.02; XW.6.3-L1-03 stops west of Stair 2. Which wall type is it?",
+  "LOADED conservative (U-048 / U-052) as the adjacent XW.6.3|2 (2 layers each side; XW.6.3-L1-04 A / B, 4.11 LF; U-172 / U-191 sweep: not printed)", ("XW.6.3 like the adjacent grid-14 facade (as loaded)", "0"),
+  ("not ours (CMU / other trade)", "-4.11 LF [DERIVED] A2.01: -115.08 SF 5/8\" exterior sheathing (4.11 x 14.0 x 2 layers, XW.6.3|2) - 99.15 SF 5/8\" Type X (4.11 x 12.0625 x 2 layers)"), "Stair 2 exit passage L1"),
 ]
 import fitz
 from PIL import Image, ImageDraw
@@ -192,6 +200,8 @@ SIN = {"RFI-01": ["W.6.1", "W.6", "W.62", "WOOD STUD", "2X6", "PARTITION TYPE", 
  "RFI-28": ["FIRE BARRIER", "B.O. DECK", "UNDERSIDE", "SHEATHING", "LINE OF STRUCTURE", "707.5", "2 HR", "W.6", "HEAD", "RATED ASSEMBLY", "FLOOR SHEATHING", "TOPPING", "2HR FB", "FIRE BARRIERS", "CONTINUOUS"],
  "RFI-26": ["FACP", "125", "FI.2", "FURRING", "GRID 14", "CMU", "XM.0.1", "A6.02", "A2.01", "SOUTHEAST STAIR", "FIRE ALARM", "FURR", "CM.8", "MASONRY", "FIRE CONTROL"],
  "RFI-29": ["SHAFT CEILING", "BASE OF NORTH SHAFT", "STEEL SUPPORT PLATFORM", "HORIZONTAL ASSEMBLY", "FIRE PROOFING", "FIREPROOFING", "2HR SHAFT", "SHAFT WALLS CONTINUOUS", "SHAFTWALL", "W419", "U497", "BOTTOM OF SHAFT", "RATED CEILING", "MB-1"],
+ "RFI-30": ["3 3/8", "STAIR", "FURRING", "LOBBY STAIR", "STAIR 1", "LINER", "LINING", "GYP BD", "INTERIOR DRAWINGS", "FINISH", "CMU", "CM.8", "FW.1", "SHAFT", "127"],
+ "RFI-31": ["126.1", "EXIT", "XW.6.3", "STAIR 2", "EXIT PASSAGE", "EXIT DISCHARGE", "CORRIDOR", "EXTERIOR WALL", "XW.6", "GRID 14", "SHEATHING", "VESTIBULE", "126"],
  "RFI-17": ["WATER ENTRY", "128", "CEILING", "EXPOSED", "GYP-1", "ACT", "OPEN TO STRUCTURE", "RCP", "A3.01", "A7.31", "FIRE RISER", "UTILITY"],
  "RFI-18": ["COVE", "SOFFIT", "WRAP BOTTOM OF STEEL BEAMS", "BULKHEAD", "DROPPED", "11' - 0", "9' - 0", "412", "CORRIDOR", "STEP", "BEAM", "LOBBY"],
  "RFI-19": ["CORNER", "CORNERBEAD", "CORNER BEAD", "OUTSIDE CORNER", "EXTERNAL CORNERS", "L-BEAD", "U-BEAD", "TRIM", "09 29 00", "BEAD", "RETURN", "EDGE"]}
@@ -284,6 +294,8 @@ for rid, src, terms, q, loaded, A, B, items in R:
         ('A8.00', 'RFI-28'): "A8.00 general notes 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN' and 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' are the door-rating rules of the door schedule; they rate the doors in fire barriers, not how high the barrier wall runs (deck vs 12'-0\" on 5/A5.04), which is what RFI-28 asks",
         ('A8.00', 'RFI-26'): "A8.00 door 125.1 FACP '90 MIN.' (2'-8\" x 6'-8\") rates the door of the FACP room = 2 HR enclosure (IBC 2018 Table 716.1(2)); the 2 HR there is the masonry (CMU grid 14 / XM.0.1), it does not say whether the CMU south face gets the FI.2 furring, which is what RFI-26 asks",
         ('A8.00', 'RFI-17'): "A8.00 door 128.1 WATER ENTRY '90 MIN' and the notes 'FIRE WALLS AND FIRE BARRIES HAVING 2HR RATING: 90 MIN' / 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' rate the door of the fire pump room enclosure (its walls, IBC 2018 Section 913.2.1); they say nothing about a ceiling in 128",
+        ('A8.00', 'RFI-30'): "A8.00 door 127.1 STAIR 1 '90 MIN' rates the 2 HR stair enclosure door (IBC 2018 Table 716.1(2)); the 2 HR is met by the CM.8|2 CMU (A0.00 / 1023.2); it does not say what the untagged 3 3/8\" lining on the stair side of the CMU is",
+        ('A8.00', 'RFI-31'): "A8.00 door 126.1 STAIR 2 '90 MIN' rates the stair door, the '20 MIN' of the CORRIDOR doors rates the corridor doors and the general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN.' is the door rule for 1 HR barriers (IBC 2018 Table 716.1(2)); neither gives the type of the untagged exit-passage wall east of 126.1",
         ('A8.00', 'RFI-25'): "A8.00 general note 'OTHER FIRE BARRIERS W/ 1 HR RATING: 45 MIN' is a door rule; the bar doors at FW.4-L4-19 print '20 MIN' / storefront, so it does not give the 1-HR assembly of the wall",
     }
     _tema = {'RFI-13': 'the MB-1 stud size / C-channel', 'RFI-15': 'the RS-1 board type', 'RFI-20': 'the depth of the wrapped beams',

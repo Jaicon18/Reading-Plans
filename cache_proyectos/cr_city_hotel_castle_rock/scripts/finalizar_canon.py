@@ -51,7 +51,7 @@ for fl, x in sorted(vt['floors'].items()):
     if False and x.get('corner_bead_corners_lf'):   # reemplazado por esquinas_cb.py (todos los pisos, RFI-19 cerrado)
         trims.append({"ref": f"CB-CORR-{fl}", "kind": "corner_bead", "lf": float(x['corner_bead_corners_lf']),
                       "label": f"{fl} corridor outside corners", "source": f"A2.0{fl[1]} corridor corners; 09 29 00 2.5 / 3.x 'install cornerbead at external corners'",
-                      "op": x.get('corner_bead_corners_op'), "status": "DERIVADO", "img": "2_lectura/img_ventanas"})
+                      "op": x.get('corner_bead_corners_op'), "status": "DERIVADO", "img": "2_lectura/img_ventanas/A8.02_det1-2-3_RO_wrap_and_wood_trim.png"})
     for r in []:   # reemplazado por runs del canon (abajo)
         if r.get('status') == 'PENDIENTE' or not r.get('length_ft'):
             continue
@@ -330,7 +330,7 @@ for fl, x in sorted(vt['floors'].items()):
     if m_ and float(m_.group(1)) > 0:
         d['trim_items'].append({"ref": f"CB-WIN-{fl}", "kind": "corner_bead", "lf": float(m_.group(1)), "label": f"{fl} window return perimeters",
             "source": f"{fl} window returns (1/A8.02, 2/A8.02, 3/A8.02 detail only the EXTERIOR side: no interior casing / stool printed) - outside corner of the 5/8\" board return at every window, 09 29 00 3.x 'install cornerbead at external corners'; windows per A8.01 + elevations A4.00-A4.03",
-            "op": f"window perimeters {m_.group(2)} = {m_.group(1)} LF", "status": "DERIVADO", "img": "2_lectura/img_ventanas"})
+            "op": f"window perimeters {m_.group(2)} = {m_.group(1)} LF", "status": "DERIVADO", "img": "2_lectura/img_ventanas/A8.02_det1-2-3_RO_wrap_and_wood_trim.png"})
 for m in [m for m in d['misc_items'] if str(m.get('ref', '')).startswith('SOF-') and str(m.get('ref', '')).endswith('board')]:
     m_ = re.match(r"\s*([\d.]+) LF", str(m.get('op') or ''))
     if m_:

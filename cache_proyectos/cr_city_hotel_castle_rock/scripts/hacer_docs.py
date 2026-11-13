@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev19 FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev20b FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_markups_rev19 - OPEN IN BLUEBEAM.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -138,12 +138,12 @@ S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGA
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev19 FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev20b FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_markups_rev19 - OPEN IN BLUEBEAM.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -280,12 +280,27 @@ _txt25 = ("25. **rev19 FINAL reemplaza a rev18 / rev18b** (auditoría de COORDIN
           "(3) Contorno RCP: todo polígono >= 0.5 sobre las líneas de su hoja o de la hoja que lo dibuja (EXCLUDED exteriores medidos en A2.01 / A2.04). "
           "(4) Detalles destino 14/A8.02, 1/A9.06 y 12/A9.05 existen (recortes en Auditoria/auditoria_coordinacion_rev19).")
 G[2:2] = ["## CAMBIOS rev19 vs rev18 (revisa esto primero si ya viste rev18 / rev18b)", "", _txt25, ""]
+_txt26 = ("26. **rev20 FINAL reemplaza a rev19** (12-nov; detalle y delta en RESUMEN_rev20.md): doble lectura ciega U-176 de los 14 renglones de soffits / "
+          "beam wraps (BE-CR35): banda del corredor 7/A7.23 = 23 1/4\" por lado (cara al corredor 6 1/2\" + fondo 4 1/2\" + cara al cove 4 1/2\" + fondo del cove "
+          "7 3/4\", antes 11\"); smoke-curtain housing 12/A9.03 = 3.06 ft (medido, antes 5.039); coffers del lobby 5/A7.31 = 1.25 ft (cota impresa 10 3/4\", "
+          "antes 1.063); beam wraps del retail viga por viga; textos legibles en ALTURAS_REVISADAS, DETALLES, SCHEDULES y en la LEGEND del PDF de markups (U-187).")
+G[2:2] = ["## CAMBIOS rev20 vs rev19 (revisa esto primero si ya viste rev19)", "", _txt26, ""]
+_txt27 = ("27. **rev20b FINAL reemplaza a rev20** (12-nov; delta regenerado del Excel en RESUMEN_rev20b.md y Auditoria/DELTA_rev20_rev20b.md): revisión del mapa de cobertura U-193 (457 rojos, 3 revisores independientes, 0 abiertos, Auditoria/COBERTURA_DISPOSICION.csv). Cargados: UNTYPED-L3-12, XW.6.6-L4-16 B, FW.2-L2-15 / FW.2-L3-15 / FW.2-L3-14 (+ FW.2-L2-14 extendido), XW.6.3-L1-01 S (pier al lobby, +35.53 SF). Cargados conservadores con RFI y delta: RFI-30 forro de la escalera 127 (LIN-127-L1..L4, 2,325.5 SF; INTERIOR DRAWINGS referenced but not issued in the bid set) y RFI-31 muro del pasillo de salida de Stair 2 (XW.6.3-L1-04 A / B). Addendum de BuildingConnected (Geotech / Irrigation / Landscape / Site Demo): sin impacto.")
+G[2:2] = ["## CAMBIOS rev20b vs rev20 (revisa esto primero si ya viste rev20)", "", _txt27, ""]
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt25)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt20)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt19)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt18)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt17)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt16)
-G = ["OPEN IN BLUEBEAM: `Planos marcados/CR_markups_rev19 - OPEN IN BLUEBEAM.pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
+G = ["OPEN IN BLUEBEAM: `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
+G += ["", "## Mapa de cobertura (U-193): qué revisa y sus límites", "",
+      "- `Planos marcados/COBERTURA - IMAGE ONLY.pdf` + `Auditoria/COBERTURA.csv`: todo muro dibujado (par de líneas) sin markup sale en ROJO; cada "
+      "rojo tiene su disposición en `Auditoria/COBERTURA_DISPOSICION.csv` (revisor independiente, motivo, N/HOJA, recorte en `Auditoria/ROJOS/`).",
+      "- LÍMITES: un muro al que le falta UNA SOLA cara (single face missing) NO sale en rojo (la otra cara cubre su eje), y los muros en DIAGONAL "
+      "no los detecta el mapa: esos se revisan en las plantas y en `Auditoria/VISTA_BLUEBEAM.csv`. En las hojas donde los números de cuarto no son "
+      "texto (A3.01, A7.30, A7.31) el revisor revisó todos los cielos a mano (renglón hoja_ciega).",
+      "- LÍMITE BE-GK54: dos leaves paralelas que el mapa fusiona en un solo muro cubierto (merged leaves) NO salen en rojo; por eso toda exclusión 'duplicate / same wall as X' lleva su gap_proof con N/HOJA y el gap medido (0\" = misma línea dibujada) en el canon (excluded_walls).",
+      "- Reviewer identity is DECLARED, not verified: each subagent declares its id (SUBAGENTE_ID / bitacora.py subagente); the gate only checks that the declared reviewer ids differ from the declared canon author id (CR-main-session-takeoff-author)."]
 open(os.path.join(E, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write("\n".join(G) + "\n")
 print("docs ok", len(rf), "rfis")

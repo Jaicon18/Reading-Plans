@@ -11,7 +11,7 @@ Geometría, en este orden (nada a ojo):
  (c) sin coordenadas en la fuente (solo dimensiones de un detalle / sección): LOCALIZADOR en la etiqueta impresa del elemento,
      con la medida cargada y la causa escrita (mismo criterio que rcp_polys 'locator').
 Salida: entradas {"misc": true, ...} agregadas a etapas/6_markups/rcp_polys.json (las dibuja markups_rcp.py)."""
-import json, re, math, sys
+import json, re, math, sys, os
 import pymupdf as fitz
 W = '/root/cr/work'
 c = json.load(open(f'{W}/etapas/4_canon/takeoff_canon.json'))
@@ -120,6 +120,41 @@ for _v in KM.values():   # N/HOJA limpia (la primera cita N/HOJA del texto del m
     _m = re.search(r"\b\d{1,2}/A\d\.\d\d\b", str(_v.get('nhoja') or ''))
     _v['nhoja'] = _m.group(0) if _m else _v.get('sheet')
 
+# rev20 (rev20_campo.py): geometrías MEDIDAS en vectores por los lectores del scratchpad -> KM (campo GYP-1 de los corredores, borde exterior de coffers)
+_SP = '/tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad'
+if os.path.isfile(f'{_SP}/corr_field/FIELD_FINAL.json'):
+    for _f in json.load(open(f'{_SP}/corr_field/FIELD_FINAL.json')):
+        KM[_f['id']] = {"sheet": _f['sheet'], "polygons": _f['polygons'], "nhoja": _f['nhoja']}
+_GL = json.load(open(f'{W}/etapas/4_canon/rev20/geom_lobby.json')) if os.path.isfile(f'{W}/etapas/4_canon/rev20/geom_lobby.json') else {}
+for _lv, _rm, _nh in (("L2", "217", "1/A7.23"), ("L3", "317", "2/A7.23")):   # rev20b: medido en 1/A7.23 / 2/A7.23, dibujado en su RCP A3.0x
+    if _lv not in _GL:
+        continue
+    _dx, _dy = OFF[_lv]; _sh = PISO[_lv][1]
+    _mv = lambda L_: [[[a[0] + _dx, a[1] + _dy], [b[0] + _dx, b[1] + _dy]] for a, b in L_]
+    KM[f"SOF-{_lv}-{_rm}V"] = {"sheet": _sh, "lines": _mv(_GL[_lv]["band"]), "nhoja": _nh}
+    KM[f"SOF-{_lv}-{_rm}B"] = {"sheet": _sh, "lines": _mv(_GL[_lv]["ring"]), "nhoja": _nh}
+    KM[f"CLG-{_lv}-{_rm}F"] = {"sheet": PISO[_lv][0], "polygons": [_GL[_lv]["poly"]], "nhoja": _nh}
+KM["BW-L1-NORTH"] = {"sheet": "A3.01", "lines": [[[645.6, 342.5], [799.1, 342.5]], [[799.1, 342.5], [1060.68, 342.5]]], "nhoja": "1/S1.02"}   # grid 1 (S1.02 -> A2.01 -161, -3 -> A3.01 +13.7, +8.7)
+KM['CLG-L1-219U'] = {"sheet": "A3.02", "polygons": [[[1142.0, 424.0], [1366.0, 424.0], [1366.0, 593.0], [1142.0, 593.0]]],
+                     "nhoja": "2/A5.04"}   # rev20 GAP-1: cara inferior del piso del mezzanine 219 (huella en 1/A3.02)
+if os.path.isfile(f'{_SP}/coffer_edge/COFFER_EDGE_FINAL.json'):
+    _e = json.load(open(f'{_SP}/coffer_edge/COFFER_EDGE_FINAL.json'))
+    KM['SOF-L1-01E'] = {"sheet": _e['sheet'], "lines": _e['lines'], "nhoja": _e['nhoja']}
+
+
+def _recortar(lines, lf, esc):
+    """rev20: las primeras líneas del recorrido del padre hasta sumar lf (cara de un solo lado = la mitad del LF de la banda)."""
+    out, acc = [], 0.0
+    for a, b in lines:
+        d = math.dist(a, b) / esc
+        if acc + d >= lf - 1e-9:
+            f = (lf - acc) / d if d else 0
+            out.append([a, [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]])
+            return out
+        out.append([a, b]); acc += d
+    return out
+
+
 for x in c['misc_items']:
     ref = str(x.get('ref', ''))
     if not ref.endswith(' board') or not re.match(r"(CLG|SOF|RS6|CAN|BW)-", ref):
@@ -211,7 +246,15 @@ for x in c['misc_items']:
                                      [[1424.5 + dx3, 1144.5 + dy3], [1424.5 + dx3, 1144.5 + 9.4 * 9 + dy3]]],
                            "S 799.5-1484.6, N 62.8 ft, jog 21.8 ft, returns 9.4 ft (operation) on the corridor 318 faces"),
         }
-        if rid in KM and KM[rid].get('lines'):
+        _pa = rid[:-1] if rid.endswith('P') else None
+        if _pa and ((_pa in KM and KM[_pa].get('lines')) or _pa in LINEAS):   # rev20: cara del plenum = un lado del recorrido de su banda
+            if _pa in KM and KM[_pa].get('lines'):
+                sheet, lines_p = KM[_pa]['sheet'], KM[_pa]['lines']
+            else:
+                sheet, lines_p, _ = LINEAS[_pa]
+            lines = _recortar([list(map(list, l_)) for l_ in lines_p], lf, 18.0 if sheet.startswith(('A7', 'A6')) else 9.0)
+            como = f"one side of the {_pa} band run (right-hand box face above the GYP-1 field, 7/A7.23): half of the band LF"
+        elif rid in KM and KM[rid].get('lines'):
             k_ = KM[rid]; sheet, lines = k_['sheet'], k_['lines']
             como = f"run measured in vectors on {str(k_.get('nhoja')).split(' (')[0]} (drawn soffit / beam lines)"
         elif rid in LINEAS:

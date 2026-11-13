@@ -5,6 +5,9 @@ W = '/root/cr/work'
 RA, RB = (sys.argv[1], sys.argv[2]) if len(sys.argv) > 2 else ('rev1', 'rev2')
 A = f'{W}/archivo_{RA}/8_excel/CR_City_Hotel_Takeoff_FINAL_{RA}.xlsx'
 B = f'{W}/etapas/8_excel/CR_City_Hotel_Takeoff_FINAL_{RB}.xlsx'
+import os as _os
+if not _os.path.isfile(B):   # rev20b: una rev ya entregada se lee de su archivo (archivo_revN = el Excel entregado, bajado de Drive)
+    B = f'{W}/archivo_{RB}/8_excel/CR_City_Hotel_Takeoff_FINAL_{RB}.xlsx'
 def ms(p):
     ws = openpyxl.load_workbook(p, data_only=True)['Material Summary']
     hdr, out = None, {}
