@@ -1,0 +1,461 @@
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/runner/completitud.py v138r2/take-off-metal-frame-drywall/runner/completitud.py
+--- v138n/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 09:54:05.071405305 +0000
++++ v138r2/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 12:33:03.387088100 +0000
+@@ -227,6 +227,7 @@
+     r"underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|"
+     r"extends?\s+to\s+(?:the\s+)?(?:underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|structure|roof|deck)|"
+     r"floor[\s-]+to[\s-]+floor|continuous\s+past\s+the\s+floor|stair\s+enclosure", re.I)
++RX_SUBE_V137 = re.compile(r"full height|to deck|above ceiling|hasta deck", re.I)   # lista de caras: igual que v137
+ RX_CARA_EXTERIOR = re.compile(r"(?i)^\s*(?:exterior|outside)\b")
+ 
+ 
+@@ -256,11 +257,19 @@
+             if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+     out = []
+     for w in _muros(c):
+-        caras = w.get("faces") if isinstance(w.get("faces"), list) else _cara_de_muro(w)   # v138 (CR): 'faces' = número
++        fa = w.get("faces")
++        # v138 rev2 (verif. 8): lista de caras = EXACTAMENTE v137 (regex corta); 'faces' = número (antes crash) -> _cara_de_muro con
++        # RX_SUBE_JUSTIFICADO; 'faces' ausente / dict / otro -> nada, como v137 (sin falsos nuevos en muros sin faces).
++        if isinstance(fa, list):
++            caras, rx = fa, RX_SUBE_V137
++        elif isinstance(fa, (int, float)) and not isinstance(fa, bool):
++            caras, rx = _cara_de_muro(w), RX_SUBE_JUSTIFICADO
++        else:
++            caras, rx = [], RX_SUBE_V137
+         for f in caras:
+             if not isinstance(f, dict) or f.get("height_ft") is None:
+                 continue
+-            if RX_SUBE_JUSTIFICADO.search(str(f.get("height_source") or "")) and \
++            if rx.search(str(f.get("height_source") or "")) and \
+                     not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                 continue
+             if altura_cielo_impresa(f):
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138r2/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 10:02:12.883238840 +0000
++++ v138r2/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 12:41:27.515926086 +0000
+@@ -164,49 +164,60 @@
+ NO_MARKUPS_PREFIJOS = ("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS")
+ 
+ 
++def _rev_clave(r):
++    """'20c' -> (20, 'c'): orden natural de revs (rev20c > rev20b > rev9)."""
++    m = re.match(r"(\d+)([a-z]?)", str(r or "").lower())
++    return (int(m.group(1)), m.group(2)) if m else (-1, "")
++
++
++def _rev_de(p):
++    m = RX_REV_ETIQ.search(os.path.splitext(os.path.basename(p))[0].split(" - ")[0])
++    return m.group(1).lower() if m else None
++
++
+ def _rev_en_curso_markups(entrega_dir):
+-    """BE-XF18 (a): etiqueta de la rev EN CURSO para elegir entre varios '… - OPEN IN BLUEBEAM.pdf': la revN del Excel de Take-off/ más
+-    nuevo (por fecha del archivo); si no hay Excel con revN, la del archivo más nuevo de la entrega que lleve revN. Dos archivos igual
+-    de nuevos con revs distintas = no se puede decidir. -> (rev o None, de dónde salió o la causa)"""
+-    def mas_nuevo(rutas):
+-        xs = []
+-        for p in rutas:
+-            m = RX_REV_ETIQ.search(os.path.splitext(os.path.basename(p))[0])
+-            if m:
+-                try:
+-                    xs.append((os.path.getmtime(p), m.group(1).lower(), os.path.basename(p)))
+-                except OSError:
+-                    pass
++    """BE-XF18 (a) (rev2, verif. 8 R4): rev EN CURSO = la rev MÁS ALTA (orden natural) de los Excel de Take-off/; nunca la fecha del
++    archivo (un Excel viejo re-guardado no baja la rev). Si no hay Excel con revN, la más alta de los archivos de la entrega (2
++    niveles). -> (rev o None, de dónde salió o None)"""
++    def mas_alta(rutas):
++        xs = [(_rev_clave(r), r, os.path.basename(p)) for p in rutas for r in [_rev_de(p)] if r]
+         if not xs:
+             return None, None
+-        t = max(x[0] for x in xs)
+-        revs = sorted({x[1] for x in xs if x[0] == t})
+-        if len(revs) > 1:
+-            return None, f"archivos igual de nuevos con revs distintas ({', '.join('rev' + r for r in revs)})"
+-        return revs[0], next(x[2] for x in xs if x[0] == t)
+-    xl = glob.glob(os.path.join(entrega_dir or "", "Take-off", "*.xlsx"))
+-    r, de = mas_nuevo(xl)
+-    if r or de:
+-        return r, (f"Excel {de}" if r else de)
++        k = max(x[0] for x in xs)
++        return next((x[1], x[2]) for x in xs if x[0] == k)
++    r, de = mas_alta(glob.glob(os.path.join(entrega_dir or "", "Take-off", "*.xlsx")))
++    if r:
++        return r, f"Excel {de}"
+     todos = []
+     for raiz, ds, fs in os.walk(entrega_dir or ""):
+         if os.path.relpath(raiz, entrega_dir).count(os.sep) >= 2:
+             ds[:] = []
+         todos += [os.path.join(raiz, f) for f in fs]
+-    r, de = mas_nuevo(todos)
+-    return r, (f"archivo más nuevo {de}" if r else de)
++    r, de = mas_alta(todos)
++    return r, (f"archivo {de}" if r else None)
++
++
++RX_IMAGE_ONLY = re.compile(r"(?i)image[\s_-]*only")
++RX_NO_MARKUPS = re.compile(r"(?i)cobertura|no[\s_-]*usar")
++RX_DERIVADO = re.compile(r"(?i)flatten|aplanad|print|impres")
+ 
+ 
+ def elegir_pdf_markups(entrega_dir, cfg_markups=None):
+-    """BE-XF18 (COORDINACIÓN 13-nov 08:12): el PDF de markups se elige por NOMBRE, no por orden alfabético (desde v133 'MAPA DE
+-    COBERTURA - IMAGE ONLY.pdf' quedaba antes que '<PROY>_markups…' y la compuerta leía un PDF sin annots: FAIL falsos en CR).
+-    Orden: entrega.json 'markups' si existe (si apunta a un archivo que no existe = causa); si no, el único '… - OPEN IN BLUEBEAM.pdf'
+-    (U-165) de Planos marcados/; si hay varios, el de la rev EN CURSO (_rev_en_curso_markups; uno de otra rev nunca; sin decidir =
+-    causa); si no hay ninguno, el único PDF candidato (entregas anteriores a U-165). Nunca un PDF 'IMAGE ONLY' / COBERTURA / DETALLES /
+-    SCHEDULES / ALTURAS / NO USAR. -> (ruta o None, causa o None)"""
++    """BE-XF18 (COORDINACIÓN 13-nov 08:12; rev2 por la verificación 8): el PDF de markups se elige por NOMBRE, no por orden
++    alfabético (desde v133 'MAPA DE COBERTURA - IMAGE ONLY.pdf' quedaba antes que '<PROY>_markups…': FAIL falsos en CR).
++    1) entrega.json 'markups' si existe (inexistente o IMAGE ONLY = causa).
++    2) Candidatos = PDF de Planos marcados/ que no son IMAGE ONLY / DETALLES / SCHEDULES / ALTURAS (ni COBERTURA / NO USAR salvo que
++       sean '… - OPEN IN BLUEBEAM').
++    3) Rev en curso conocida (_rev_en_curso_markups): se leen SOLO candidatos de esa rev (o sin rev): primero el único OPEN IN
++       BLUEBEAM; si no, el único candidato no derivado (sin 'flattened' / print). Un OPEN IN BLUEBEAM de OTRA rev nunca se lee en
++       silencio: si no hay uno de la rev en curso = causa.
++    4) Rev en curso desconocida: el único OPEN IN BLUEBEAM; si no hay, el único candidato no derivado.
++    -> (ruta o None, causa o None)"""
+     def malo(p):
+         b = os.path.basename(p)
+-        return b.startswith(NO_MARKUPS_PREFIJOS) or "IMAGE ONLY" in b.upper() or "COBERTURA" in b.upper() or "NO USAR" in b.upper()
++        if b.startswith(NO_MARKUPS_PREFIJOS) or RX_IMAGE_ONLY.search(b):
++            return True
++        return bool(RX_NO_MARKUPS.search(b)) and "OPEN IN BLUEBEAM" not in b.upper()
+     if cfg_markups:
+         if malo(cfg_markups):
+             return None, f"entrega.json 'markups' apunta a '{os.path.basename(cfg_markups)}', que no es el PDF de markups (IMAGE ONLY / mapa) (BE-XF18)"
+@@ -215,26 +226,33 @@
+         return cfg_markups, None
+     todos = sorted(glob.glob(os.path.join(entrega_dir or "", "Planos marcados", "*.pdf")))
+     cand = [p for p in todos if not malo(p)]
+-    ob = [p for p in cand if "OPEN IN BLUEBEAM" in os.path.basename(p).upper()]
+-    if len(ob) == 1:
+-        return ob[0], None
+-    if len(ob) > 1:
+-        nombres = ", ".join(os.path.basename(p) for p in ob[:4])
+-        rev, de = _rev_en_curso_markups(entrega_dir)
+-        if not rev:
+-            return None, (f"{len(ob)} PDF 'OPEN IN BLUEBEAM' en Planos marcados/ ({nombres}) y no se sabe la rev en curso"
+-                          f"{' (' + de + ')' if de else ''}: no se sabe cuál leer (BE-XF18)")
+-        de_rev = [p for p in ob if (lambda m: m and m.group(1).lower() == rev)(RX_REV_ETIQ.search(os.path.basename(p).split(" - ")[0]))]
+-        if len(de_rev) == 1:
+-            return de_rev[0], None
+-        return None, (f"{len(ob)} PDF 'OPEN IN BLUEBEAM' en Planos marcados/ ({nombres}); rev en curso rev{rev} ({de}): "
+-                      f"{len(de_rev)} de esa rev: no se sabe cuál leer (BE-XF18)")
+-    if len(cand) == 1:
+-        return cand[0], None
+     if not cand:
+         return None, (f"0 PDF de markups en Planos marcados/ (hay {len(todos)} PDF, todos IMAGE ONLY / mapa / DETALLES / SCHEDULES) (BE-XF18)"
+                       if todos else None)
+-    return None, f"{len(cand)} PDF candidatos sin 'OPEN IN BLUEBEAM' ({', '.join(os.path.basename(p) for p in cand[:4])}): no se sabe cuál leer (BE-XF18)"
++    es_ob = lambda p: "OPEN IN BLUEBEAM" in os.path.basename(p).upper()   # noqa: E731
++    nombres = lambda xs: ", ".join(os.path.basename(p) for p in xs[:4])   # noqa: E731
++    rev, de = _rev_en_curso_markups(entrega_dir)
++    if rev:
++        otra = [p for p in cand if _rev_de(p) and _rev_de(p) != rev]
++        cand = [p for p in cand if p not in otra]
++    else:
++        otra = []
++    ob = [p for p in cand if es_ob(p)]
++    if len(ob) == 1:
++        return ob[0], None
++    if len(ob) > 1:
++        return None, (f"{len(ob)} PDF 'OPEN IN BLUEBEAM'{' de la rev en curso rev' + rev if rev else ''} en Planos marcados/ "
++                      f"({nombres(ob)}): no se sabe cuál leer (BE-XF18)")
++    base = [p for p in cand if not RX_DERIVADO.search(os.path.basename(p))]
++    if rev and any(es_ob(p) for p in otra) and not base:
++        return None, (f"'OPEN IN BLUEBEAM' de OTRA rev ({nombres([p for p in otra if es_ob(p)])}); la rev en curso es "
++                      f"rev{rev} ({de}) y no hay PDF de markups de esa rev (BE-XF18)")
++    if len(base) == 1:
++        return base[0], None
++    if not base:
++        return None, (f"0 PDF de markups de la rev en curso rev{rev} ({de}) en Planos marcados/; de otra rev: {nombres(otra)} (BE-XF18)"
++                      if rev else f"0 PDF de markups en Planos marcados/ ({nombres(cand)}) (BE-XF18)")
++    return None, f"{len(base)} PDF candidatos sin 'OPEN IN BLUEBEAM' ({nombres(base)}): no se sabe cuál leer (BE-XF18)"
+ 
+ 
+ class Ctx:
+@@ -1200,6 +1218,28 @@
+     if not (vert or horiz) or largo <= 0:
+         return False
+ 
++    def cerrada(a0, a1, lo, hi, vert_):
++        """rev2 (verificación 8, muro real pegado a la caja de un tag): la caja está CERRADA: en los DOS extremos de la tapa (lo y hi)
++        hay una línea perpendicular que va del par a la tapa. Un muro con un tag pegado al lado no cierra la caja por los dos lados."""
++        a, b = min(a0, a1) + 1.5, max(a0, a1) - 1.5      # del par a la tapa (1.5 pt de tolerancia en cada punta)
++        ok = []
++        for e_ in (lo, hi):
++            hay = False
++            for s_ in todas:
++                if vert_:
++                    if abs(s_[1] - s_[3]) > 0.5 or abs((s_[1] + s_[3]) / 2 - e_) > 1.5:
++                        continue
++                    u0, u1 = min(s_[0], s_[2]), max(s_[0], s_[2])
++                else:
++                    if abs(s_[0] - s_[2]) > 0.5 or abs((s_[0] + s_[2]) / 2 - e_) > 1.5:
++                        continue
++                    u0, u1 = min(s_[1], s_[3]), max(s_[1], s_[3])
++                if u0 <= a and u1 >= b:
++                    hay = True
++                    break
++            ok.append(hay)
++        return all(ok)
++
+     def tapa(w, lado):
+         """línea paralela al par, más allá de la palabra (lado -1 / +1), de largo +-30 % del par, que traslapa la palabra."""
+         for s_ in todas:
+@@ -1211,14 +1251,16 @@
+                     continue
+                 c, lo, hi = (s_[0] + s_[2]) / 2, min(s_[1], s_[3]), max(s_[1], s_[3])
+                 lejos = (c >= w[2] - 0.5) if lado > 0 else (c <= w[0] + 0.5)
+-                if lejos and abs(c - x) <= r + (w[2] - w[0]) + 0.6 * esc and lo <= w[3] and hi >= w[1]:
++                if lejos and abs(c - x) <= r + (w[2] - w[0]) + 0.6 * esc and lo <= w[3] and hi >= w[1] and \
++                        cerrada(x, c, lo, hi, True):
+                     return True
+             else:
+                 if abs(s_[1] - s_[3]) > 0.5:
+                     continue
+                 c, lo, hi = (s_[1] + s_[3]) / 2, min(s_[0], s_[2]), max(s_[0], s_[2])
+                 lejos = (c >= w[3] - 0.5) if lado > 0 else (c <= w[1] + 0.5)
+-                if lejos and abs(c - y) <= r + (w[3] - w[1]) + 0.6 * esc and lo <= w[2] and hi >= w[0]:
++                if lejos and abs(c - y) <= r + (w[3] - w[1]) + 0.6 * esc and lo <= w[2] and hi >= w[0] and \
++                        cerrada(y, c, lo, hi, False):
+                     return True
+         return False
+     if vert:                                            # marco vertical de la caja: la palabra cabe dentro del alto del par
+@@ -1775,7 +1817,7 @@
+         g = lambda k: RX_HORA_CELDA.search(cs[k]) if k is not None and k < len(cs) else None      # noqa: E731
+         d = re.search(r"(\d[\d,]*)\s*min", cs[kd]) if kd is not None and kd < len(cs) else None
+         out.append({"paso": paso.replace(" ", ""), "nums": nums, "inicio": g(ki), "fin": g(kf),
+-                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs})
++                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs, "linea": ln})
+     return out
+ 
+ 
+@@ -2156,7 +2198,8 @@
+     ini, problema = inicio_rev_info(w, entrega)
+     desde = arranque_rev_desde(w, entrega, ini) if not problema else None
+     if desde is not None and desde >= datetime.datetime.fromisoformat(FECHA_V119):
+-        _t2, n_ex = tiempos_desde(tt, desde)            # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
++        _pl = _tiempos_log(w)
++        _t2, n_ex = tiempos_desde(tt, desde, marcas_tiempos_log(_pl) if _pl else [])   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
+         ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde)
+         if not ev:
+             return "PASS", ([f"{n_ex} paso(s) de TIEMPOS.md cerrados antes del arranque de la rev ({desde.isoformat()}) son de una rev "
+@@ -2263,25 +2306,32 @@
+         return None
+ 
+ 
+-def tiempos_desde(tiempos_txt, desde):
+-    """v138 (CR rev20c): TIEMPOS.md sin las filas de pasos que cerraron ANTES del arranque de la rev actual (son de una rev anterior:
+-    los requisitos de proceso no se les exigen otra vez). -> (texto filtrado, n filas exentas)"""
+-    if tiempos_txt is None or desde is None:
++def tiempos_desde(tiempos_txt, desde, marcas=None):
++    """v138 (CR rev20c; rev2 por la verificación 8 Q1b / Q2 / Q4): TIEMPOS.md sin las filas de pasos de una rev ANTERIOR. Una fila
++    queda exenta solo con las DOS pruebas: (a) su Fin (con fecha MM-DD) es anterior al arranque de la rev actual y (b) tiempos.log
++    tiene la marca de ese cierre (misma fecha y hora) antes del arranque. Sin marcas (log sin fechas, una sola marca tardía, sin log)
++    nada queda exento: se juzga como v137. Se quita la fila EXACTA (su línea), nunca por coincidencia de hora con otra fila.
++    -> (texto filtrado, n filas exentas)"""
++    if tiempos_txt is None or desde is None or not marcas:
+         return tiempos_txt, 0
++    previas = [t for t, _l in marcas if t < desde.replace(tzinfo=t.tzinfo)]
+     fuera = []
+     for f in filas_tiempos(tiempos_txt):
+         t = _fin_dt(f, desde)
+-        if t is not None and t < desde.replace(tzinfo=t.tzinfo):
++        if t is None or t >= desde.replace(tzinfo=t.tzinfo):
++            continue
++        if any((m.month, m.day, m.hour, m.minute) == (t.month, t.day, t.hour, t.minute) for m in previas):
+             fuera.append(f)
+     if not fuera:
+         return tiempos_txt, 0
+-    lineas = tiempos_txt.splitlines()
+-    malas = {f.get("linea") for f in fuera if f.get("linea")}
+-    if malas:
+-        return "\n".join(ln for ln in lineas if ln not in malas), len(fuera)
+-    claves = [re.escape(f["fin"].group(0)) for f in fuera]
+-    rx = re.compile("|".join(claves))
+-    return "\n".join(ln for ln in lineas if not (ln.lstrip().startswith("|") and rx.search(ln))), len(fuera)
++    malas = [f["linea"] for f in fuera]
++    lineas, out = tiempos_txt.splitlines(), []
++    for ln in lineas:
++        if ln in malas:
++            malas.remove(ln)                              # una sola vez por fila exenta (dos filas iguales: solo la exenta)
++            continue
++        out.append(ln)
++    return "\n".join(out), len(fuera)
+ 
+ 
+ def pasos_cerrados_tiempos(tiempos_txt):
+@@ -2322,8 +2372,8 @@
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
+     if desde is not None:                               # v138 (CR rev20c): solo la rev actual (marcas desde su arranque)
++        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, ms)
+         ms = [(t, l) for t, l in ms if t >= desde.replace(tzinfo=t.tzinfo)]
+-        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde)
+     ev = []
+     if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
+         if not p:
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138r2/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 10:02:12.878264765 +0000
++++ v138r2/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 12:43:58.887299019 +0000
+@@ -3780,7 +3780,11 @@
+     t9 = os.path.getmtime(os.path.join(pm, "CZ_markups_rev9 - OPEN IN BLUEBEAM.pdf"))
+     os.utime(os.path.join(pm, "CZ_markups_rev8 - OPEN IN BLUEBEAM.pdf"), (t9, t9))   # igual de nuevos y sin Excel: no se decide
+     p, causa = CE.elegir_pdf_markups(e)
+-    assert p is None and "2 PDF" in causa, (p, causa)                              # dos candidatos sin rev en curso = FAIL con la causa
++    assert causa is None and os.path.basename(p) == "CZ_markups_rev9 - OPEN IN BLUEBEAM.pdf", (p, causa)   # rev2: la rev MÁS ALTA
++    open(os.path.join(pm, "CZ_markups_rev9 copy - OPEN IN BLUEBEAM.pdf"), "w").write("x")
++    p, causa = CE.elegir_pdf_markups(e)
++    assert p is None and "2 PDF" in causa, (p, causa)                              # dos de la rev en curso = FAIL con la causa
++    os.remove(os.path.join(pm, "CZ_markups_rev9 copy - OPEN IN BLUEBEAM.pdf"))
+     c = type("C", (), {"markups": None, "markups_causa": causa})()
+     assert CE.ce_pdf_markups_elegido(c)[0] == "FAIL"
+     # v138 (a): varios OPEN IN BLUEBEAM: manda la rev EN CURSO (Excel de Take-off/ más nuevo), aunque el PDF de otra rev sea más nuevo
+@@ -3794,7 +3798,7 @@
+     os.remove(os.path.join(pm, "CZ_markups_rev9 - OPEN IN BLUEBEAM.pdf"))
+     open(os.path.join(pm, "Z9_markups_rev7 - OPEN IN BLUEBEAM.pdf"), "w").write("x")
+     p, causa = CE.elegir_pdf_markups(e)
+-    assert p is None and "rev9" in causa and "0 de esa rev" in causa, (p, causa)  # ninguno de la rev en curso: uno de otra rev nunca
++    assert p is None and "rev9" in causa and "OTRA rev" in causa, (p, causa)  # ninguno de la rev en curso: uno de otra rev nunca
+     # v138 (b): entrega.json 'markups' que apunta a un archivo que NO existe = causa
+     p, causa = CE.elegir_pdf_markups(e, os.path.join(pm, "CZ_markups_rev9b.pdf"))
+     assert p is None and "NO existe" in causa, (p, causa)
+@@ -3916,7 +3920,7 @@
+     (4) / (10) un par dentro de un hatch denso de líneas cortas no es muro; un stub real que remata en un muro sigue saliendo."""
+     esc = 18.0
+     doc = pymupdf.open()
+-    pg = doc.new_page(width=1600, height=1000)
++    pg = doc.new_page(width=1800, height=1000)
+ 
+     def par(x0, y0, x1, y1, dx, dy, dashes=None):
+         sh = pg.new_shape()
+@@ -3924,7 +3928,7 @@
+         sh.draw_line((x0 + dx, y0 + dy), (x1 + dx, y1 + dy))
+         sh.finish(color=(0, 0, 0), width=0.7, dashes=dashes)
+         sh.commit()
+-    par(100, 400, 1580, 400, 0, 9)                                  # muro largo H
++    par(100, 400, 1780, 400, 0, 9)                                  # muro largo H
+     par(300, 409, 300, 409 + 1.5 * esc, 9, 0)                      # stub real (debe salir)
+     par(600, 409, 600, 409 + 1.5 * esc, 9, 0)                      # (1) divisor de tag: palabras a los dos lados
+     pg.insert_text((582, 425), "Z9.1", fontsize=9)
+@@ -3972,10 +3976,24 @@
+     pg.insert_text((1312, 426), "Z9", fontsize=7)
+     sh = pg.new_shape()
+     sh.draw_line((1326, 409), (1326, 409 + 1.5 * esc))
++    sh.draw_line((1300, 409), (1326, 409))                          # rev2: la caja está CERRADA arriba y abajo
++    sh.draw_line((1300, 409 + 1.5 * esc), (1326, 409 + 1.5 * esc))
+     sh.finish(color=(0, 0, 0), width=0.7)
+     sh.commit()
++    par(1600, 409, 1600, 409 + 1.5 * esc, 9, 0)                    # rev2 (verif. 8): muro real con la caja CERRADA de un tag pegada afuera
++    pg.insert_text((1614, 426), "Z9", fontsize=7)
++    sh = pg.new_shape()
++    sh.draw_rect(pymupdf.Rect(1611, 409, 1628, 409 + 1.5 * esc))
++    sh.finish(color=(0, 0, 0), width=0.5)
++    sh.commit()
++    sh = pg.new_shape()
++    for a_, b_, c_, d_ in ((1611, 409, 1628, 409), (1628, 409, 1628, 409 + 1.5 * esc), (1611, 409 + 1.5 * esc, 1628, 409 + 1.5 * esc)):
++        sh.draw_line((a_, b_), (c_, d_))
++    sh.finish(color=(0, 0, 0), width=0.5)
++    sh.commit()
+     f = CE.cob_diag_cortos(pg, esc, [])
+     xs = sorted(round(x["x"]) for x in f if x["tipo"] == "muro_corto")
++    assert any(abs(x - 1604) <= 6 for x in xs), f                  # rev2: el muro real con el tag pegado sigue saliendo
+     for xk in (704, 804, 1004):
+         assert any(abs(x - xk) <= 6 for x in xs), (xk, f)         # K2 / K3 / K4 siguen saliendo
+     assert not any(abs(x - 1304) <= 6 for x in xs), f             # palabra ENCERRADA en la caja: divisor de tag
+@@ -4019,3 +4037,92 @@
+ 
+ 
+ test_u199_cierre_path_esquema_cr()
++
++
++def test_v138r2_verif8_markups_rev():
++    """v138 rev2 (verificación 8): el PDF de markups de OTRA rev nunca se lee en silencio. Un solo 'OPEN IN BLUEBEAM' de la rev anterior
++    con el markups de la rev en curso al lado = se lee el de la rev en curso; sin el de la rev en curso = FAIL con causa; la rev en curso
++    es la MÁS ALTA de los Excel, no la del Excel re-guardado más nuevo; un 'flattened' no gana al markups; 'COBERTURA' en el nombre de
++    un OPEN IN BLUEBEAM no lo descarta; 'IMAGE-ONLY' con guion es el mapa."""
++    import time
++
++    def caso(pdfs, xls):
++        w = tempfile.mkdtemp(prefix="xf18r2_")
++        pm, tk = os.path.join(w, "Planos marcados"), os.path.join(w, "Take-off")
++        os.makedirs(pm)
++        os.makedirs(tk)
++        t0 = time.time() - 1000
++        for k, n in enumerate(pdfs):
++            open(os.path.join(pm, n), "w").write("%PDF-1.4\n")
++        for k, n in enumerate(xls):
++            p = os.path.join(tk, n)
++            open(p, "w").write("x")
++            os.utime(p, (t0 + k, t0 + k))
++        r, causa = CE.elegir_pdf_markups(w)
++        return os.path.basename(r) if r else None, causa
++    ob_b, ob_c = "Z9_markups_rev20b - OPEN IN BLUEBEAM.pdf", "Z9_markups_rev20c - OPEN IN BLUEBEAM.pdf"
++    assert caso([ob_b, "Z9_markups_rev20c.pdf"], ["Z9_Takeoff_rev20c.xlsx"])[0] == "Z9_markups_rev20c.pdf"
++    r, causa = caso([ob_b], ["Z9_Takeoff_rev20c.xlsx"])
++    assert r is None and "OTRA rev" in causa, (r, causa)
++    assert caso([ob_b, ob_c], ["Z9_Takeoff_rev20c.xlsx", "Z9_Takeoff_rev20b.xlsx"])[0] == ob_c   # el rev20b re-guardado es el más nuevo
++    assert caso([ob_b, ob_c], ["Z9_Takeoff_rev20c.xlsx"])[0] == ob_c
++    assert caso(["Z9_markups_rev20c.pdf", "Z9_markups_rev20c_flattened.pdf"], ["Z9_Takeoff_rev20c.xlsx"])[0] == "Z9_markups_rev20c.pdf"
++    assert caso(["Z9_MAPA - IMAGE-ONLY.pdf", "Z9_markups_rev20c.pdf"], ["Z9_Takeoff_rev20c.xlsx"])[0] == "Z9_markups_rev20c.pdf"
++    fix = "Z9_markups_rev20c_COBERTURA-FIX - OPEN IN BLUEBEAM.pdf"
++    assert caso([fix, "MAPA DE COBERTURA - IMAGE ONLY.pdf"], ["Z9_Takeoff_rev20c.xlsx"])[0] == fix
++    assert caso([ob_c, "MAPA DE COBERTURA - IMAGE ONLY.pdf"], [])[0] == ob_c                      # sin Excel: el único OPEN
++    print("test_v138r2_verif8_markups_rev OK")
++
++
++test_v138r2_verif8_markups_rev()
++
++
++def test_v138r2_verif8_caras_lista_como_v137():
++    """v138 rev2 (verificación 8): una LISTA de caras se juzga exactamente como v137 (solo full height / to deck / above ceiling
++    justifican): una palabra suelta de otro elemento en la fuente no calla la cara; un muro SIN faces no se juzga (como v137); faces =
++    número sigue sin crash y con su cara."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(faces=None, **w):
++        b = {"id": "Z9-W1", "location": "L9 | 905 GUEST", "height_ft": 11.0}
++        b.update(w)
++        if faces is not None:
++            b["faces"] = faces
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}], "walls": [b]}
++    F = lambda s: [{"room": "905 GUEST", "height_ft": 11.0, "height_source": s}]   # noqa: E731
++    for s in ("C-2 GWB ceiling hung from underside of floor joists above", "11'-0\" per 3/A3.1; see stair enclosure detail",
++              "level floor to floor 11'-0\" used as wall height", "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(F(s))), s
++    assert CO.caras_sobre_ceiling(can(F("full height to deck"))) == []
++    assert CO.caras_sobre_ceiling(can(None, location="pier of 905 GUEST", height_source="A3.1 11'-0\"")) == []
++    assert CO.caras_sobre_ceiling(can({"905 GUEST": 11.0}, height_source="A3.1")) == []
++    assert CO.caras_sobre_ceiling(can(2, height_source="A3.1 11'-0\""))
++    assert CO.caras_sobre_ceiling(can(1, location="L9 905 GUEST | faces: exterior", height_source="A3.1")) == []
++    print("test_v138r2_verif8_caras_lista_como_v137 OK")
++
++
++test_v138r2_verif8_caras_lista_como_v137()
++
++
++def test_v138r2_verif8_tiempos_desde_pruebas():
++    """v138 rev2 (verificación 8): una fila de TIEMPOS.md queda exenta (rev anterior) SOLO si cierra antes del arranque Y tiempos.log
++    tiene la marca de ese cierre antes del arranque; se quita la fila exacta, nunca otra que comparta la hora; sin marcas nada queda
++    exento."""
++    from zoneinfo import ZoneInfo
++    import datetime as _dt
++    tz = ZoneInfo("America/Los_Angeles")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 9 | Subida | 11-13 08:00 | 11-13 08:40 | 40 |\n"
++          "| 1 | Inventario | 11-13 08:40 | 11-13 09:30 | 50 |\n")
++    desde = _dt.datetime(2026, 11, 13, 8, 45, tzinfo=tz)
++    m = [(_dt.datetime(2026, 11, 13, 8, 40, tzinfo=tz), "9 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "1 fin")]
++    txt, n = CE.tiempos_desde(tt, desde, m)
++    assert n == 1 and "Inventario" in txt and "Subida" not in txt, (n, txt)
++    assert CE.tiempos_desde(tt, desde, []) == (tt, 0)
++    assert CE.tiempos_desde(tt, desde, m[1:])[1] == 0                 # el cierre del paso viejo sin marca: no se exime
++    tarde = _dt.datetime(2026, 11, 13, 13, 50, tzinfo=tz)
++    assert CE.tiempos_desde(tt, tarde, [(tarde, "inicio")])[1] == 0  # una sola marca tardía no exime la mañana
++    print("test_v138r2_verif8_tiempos_desde_pruebas OK")
++
++
++test_v138r2_verif8_tiempos_desde_pruebas()

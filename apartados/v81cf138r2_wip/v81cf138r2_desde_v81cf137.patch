@@ -1,0 +1,468 @@
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138r3/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:15:06.865545715 +0000
++++ v138r3/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 12:48:06.056257767 +0000
+@@ -8847,6 +8847,14 @@
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "fechas_be_xf17"
+    }
++  },
++  {
++   "id": "BE-XF18",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
++   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/SKILL.md v138r3/take-off-metal-frame-drywall/SKILL.md
+--- v137/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:15:06.891667935 +0000
++++ v138r3/take-off-metal-frame-drywall/SKILL.md	2026-11-13 12:47:09.397527793 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf137** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/runner/completitud.py v138r3/take-off-metal-frame-drywall/runner/completitud.py
+--- v137/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 06:13:40.429073866 +0000
++++ v138r3/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 12:46:03.627645321 +0000
+@@ -220,6 +220,46 @@
+     return False
+ 
+ 
++# v138 (CR, CB_BE_83): fuentes que justifican que la cara pase el cielo de su cuarto. 'underside of ceiling' NO justifica (la cara
++# para en el cielo): el underside tiene que ser de roof / floor / structure / deck / sheathing / joist / framing.
++RX_SUBE_JUSTIFICADO = re.compile(
++    r"full height|to deck|above ceiling|hasta deck|"
++    r"underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|"
++    r"extends?\s+to\s+(?:the\s+)?(?:underside\s+(?:of\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|structure|roof|deck)|"
++    r"floor[\s-]+to[\s-]+floor|continuous\s+past\s+the\s+floor|stair\s+enclosure", re.I)
++RX_SUBE_V137 = re.compile(r"full height|to deck|above ceiling|hasta deck", re.I)   # lista de caras: igual que v137
++RX_OTRO_ELEMENTO = re.compile(r"(?i)\bsee\b|\bother\b|\bduct|\bshaft|\bpipe|\bbeam|\bcolumn|\bhung\b|ceiling\s+(?:framing|joist)")
++
++
++def sube_justificado_clausula(src):
++    """v138 rev2 (verificación 8 / COORDINACIÓN): la justificación cuenta SOLO dentro de la cláusula propia de la cara (separadas por
++    ';', salto de línea o '. '): una cláusula que habla de OTRO elemento ('see …', duct / shaft / beam, cielo colgado) no justifica."""
++    for cl in re.split(r";|\n|\.\s", str(src or "")):
++        if RX_SUBE_JUSTIFICADO.search(cl) and not RX_OTRO_ELEMENTO.search(cl):
++            return True
++    return False
++
++
++RX_CARA_EXTERIOR = re.compile(r"(?i)^\s*(?:exterior|outside)\b")
++
++
++def _cara_de_muro(w):
++    """v138 (CR): muro con 'faces' = número -> una cara con la altura y la fuente del muro y el cuarto del location. Las caras del
++    location ('faces: exterior; <cuarto>') que son exteriores se quitan; si la ÚNICA cara es exterior, el muro no tiene cara bajo
++    un cielo (-> []). La cara interior de un muro exterior se juzga igual que cualquier otra."""
++    loc = str(w.get("location") or "")
++    m = re.search(r"(?i)faces?\s*:\s*(.*)$", loc)
++    if m:
++        partes = [x.strip() for x in re.split(r"[;,/]", m.group(1)) if x.strip()]
++        interiores = [x for x in partes if not RX_CARA_EXTERIOR.search(x)]
++        if partes and not interiores:
++            return []                             # la única cara es exterior: no queda bajo el cielo de un cuarto
++        cuarto = "; ".join(interiores) or loc
++    else:
++        cuarto = loc
++    return [{"room": cuarto, "height_ft": w.get("height_ft"), "height_source": w.get("height_source") or w.get("source")}]
++
++
+ def caras_sobre_ceiling(c, margen_ft=1.0):
+     """R80e.48: una face cuyo room tiene ceiling en el canon (mismo número de cuarto) no sube a deck: su altura no puede
+     pasar la del ceiling + margen (board a ceiling / 6" sobre ceiling, partition notes), salvo que su fuente diga
+@@ -229,10 +269,19 @@
+             if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+     out = []
+     for w in _muros(c):
+-        for f in w.get("faces") or []:
++        fa = w.get("faces")
++        # v138 rev2 (verif. 8): lista de caras = EXACTAMENTE v137 (regex corta); 'faces' = número (antes crash) -> _cara_de_muro con
++        # sube_justificado_clausula (solo la cláusula propia); 'faces' ausente / dict / otro -> nada, como v137 (sin falsos nuevos en muros sin faces).
++        if isinstance(fa, list):
++            caras, rx = fa, RX_SUBE_V137.search
++        elif isinstance(fa, (int, float)) and not isinstance(fa, bool):
++            caras, rx = _cara_de_muro(w), sube_justificado_clausula
++        else:
++            caras, rx = [], RX_SUBE_V137.search
++        for f in caras:
+             if not isinstance(f, dict) or f.get("height_ft") is None:
+                 continue
+-            if re.search(r"full height|to deck|above ceiling|hasta deck", str(f.get("height_source") or ""), re.I) and \
++            if rx(str(f.get("height_source") or "")) and \
+                     not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                 continue
+             if altura_cielo_impresa(f):
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v138r3/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v137/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 06:13:40.429542551 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 12:45:43.239180210 +0000
+@@ -2297,7 +2297,14 @@
+ @chk("BE-CF04", desc="BE-CF04: walls de madera = board only con framing EXCLUDED (bloque BOARD ONLY - … WOOD-FRAMED)")
+ def be_cf04(b):
+     crudos = [w for w in (b.canon.get("walls") or []) if isinstance(w, dict)]   # solo-metal: madera en walls[] (los board-only van aparte abajo)
+-    ws = [w for w in crudos if re.search(r"(?i)\bwood\b|\b2x\d", str(w.get("stud_size")) + " " + str(w.get("gauge")))]
++    # v138: madera escrita de cualquier forma ('2 X 6', '2×6', 'DF stud', 'Douglas fir', 'SPF', 'timber', 'wood') en stud_size / gauge /
++    # framing (framing solo si el wall no es board-only con la madera EXCLUDED)
++    rx = re.compile(r"(?i)\bwood\b|\b2\s*[x×]\s*\d|\bDF[\s-]*(?:L\b[\s-]*)?(?:stud|#\s*\d)|douglas[\s-]+fir|\bSPF\b|\btimber\b")
++    def fr(w):
++        f = w.get("framing")
++        f = f if isinstance(f, str) else (json.dumps(f) if f is not None else "")
++        return "" if (w.get("board_only") or re.search(r"(?i)exclu", f)) else f
++    ws = [w for w in crudos if rx.search(str(w.get("stud_size")) + " " + str(w.get("gauge")) + " " + fr(w))]
+     if ws:
+         return R("FAIL", *[f"{w.get('id')}: wall de madera con framing en walls[] (va board-only)" for w in ws[:10]])
+     # BE-CR29: los walls de madera board-only (existing_walls de un set wood-framed) se cuentan: framing EXCLUDED en cada uno
+@@ -2307,7 +2314,7 @@
+                                                     " ".join(str(e.get("decision")) for e in b.canon.get("existing_walls") or [] if str(e.get("id", "")).startswith(w["id"])))]
+         if malos:
+             return R("FAIL", f"{len(malos)} walls board-only sin la decisión 'wood framing EXCLUDED'", *malos[:10])
+-        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; 0 walls de madera con framing en walls[]")
++        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; ningún wall de madera con framing en walls[]")   # v138: sin '0 walls' (U-138)
+     wn = str(b.canon.get("wood_walls_none_reason") or "")   # BE-XF04 (Xfinity 10-nov): set metal-framed / existing only, declared with its sheet
+     if wn and re.search(r"[A-Z]{1,2}-?\d", wn):
+         return R("PASS", f"walls de madera: ninguno en el set ({wn[:160]})")   # BE-GK27: sin '0 walls' (U-138 lo leía como conteo vacío)
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:20:31.124356486 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 12:46:03.626389475 +0000
+@@ -1560,7 +1560,7 @@
+         g = lambda k: RX_HORA_CELDA.search(cs[k]) if k is not None and k < len(cs) else None      # noqa: E731
+         d = re.search(r"(\d[\d,]*)\s*min", cs[kd]) if kd is not None and kd < len(cs) else None
+         out.append({"paso": paso.replace(" ", ""), "nums": nums, "inicio": g(ki), "fin": g(kf),
+-                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs})
++                    "dur": int(d.group(1).replace(",", "")) if d else None, "celdas": cs, "linea": ln})
+     return out
+ 
+ 
+@@ -1939,6 +1939,14 @@
+     if not ev:
+         return "PASS", []
+     ini, problema = inicio_rev_info(w, entrega)
++    desde = arranque_rev_desde(w, entrega, ini) if not problema and ini is not None else None   # log sin fecha = FAIL (v137)
++    if desde is not None and desde >= datetime.datetime.fromisoformat(FECHA_V119):
++        _pl = _tiempos_log(w)
++        _t2, n_ex = tiempos_desde(tt, desde, marcas_tiempos_log(_pl) if _pl else [])   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
++        ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde)
++        if not ev:
++            return "PASS", ([f"{n_ex} paso(s) de TIEMPOS.md cerrados antes del arranque de la rev ({desde.isoformat()}) son de una rev "
++                             "anterior: no se juzgan otra vez (v138)"] if n_ex else [])
+     if problema:
+         return "FAIL", [f"la fecha de arranque de la rev no es confiable ({problema}): los requisitos de proceso de v81cf119 aplican = "
+                         "FAIL (v121)"] + ev
+@@ -1951,6 +1959,41 @@
+     return "FAIL", ev
+ 
+ 
++def _dt_utc(x):
++    """ISO con o sin zona (sin zona = UTC, como fijar_version_proyecto) -> datetime con zona o None."""
++    try:
++        t = datetime.datetime.fromisoformat(str(x).strip().replace("Z", "+00:00"))
++    except (TypeError, ValueError):
++        return None
++    return t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
++
++
++def arranque_rev_desde(w, entrega=None, ini=None):
++    """v138 (COORDINACIÓN, CE_PROTOCOLO_3H): arranque de la rev para juzgar solo sus pasos = el MÁS TEMPRANO entre (i) la marca de inicio
++    de la rev en tiempos.log (inicio_rev_info, `ini`), (ii) el sello UTC del renglón de la rev en VERSION_PROYECTO.txt (si ningún renglón
++    trae la etiqueta de la rev, el primero) y (iii) el primer commit git de la carpeta de la rev, si existe. Nunca el más tardío: una
++    marca 'inicio revN' escrita tarde no deja fuera los pasos que la rev ya cerró. -> datetime en hora del Pacífico (la de tiempos.log
++    y TIEMPOS.md) o None."""
++    from zoneinfo import ZoneInfo
++    tz = ZoneInfo("America/Los_Angeles")
++    cand = [ini] if ini is not None else []
++    vp = version_proyecto_leer(w) if w and os.path.isdir(w) else []
++    if vp:
++        et = _etiqueta_rev(w, entrega)
++        propias = [x for x in vp if et and RX_REV_ETIQ.search(x["rev"]) and RX_REV_ETIQ.search(x["rev"]).group(1).lower() == et] or vp[:1]
++        cand += [t for t in (_dt_utc(x["ts"]) for x in propias) if t]
++    for d in [x for x in (entrega, w) if x and os.path.isdir(x)][:1] or []:
++        try:
++            r = subprocess.run(["git", "-C", d, "log", "--reverse", "--format=%cI", "--", "."], capture_output=True, text=True, timeout=30)
++            ln = (r.stdout or "").strip().splitlines()
++            if r.returncode == 0 and ln:
++                cand.append(datetime.datetime.fromisoformat(ln[0]))
++        except (OSError, subprocess.SubprocessError, ValueError):
++            pass
++    cand = [t if t.tzinfo else t.replace(tzinfo=tz) for t in cand]
++    return min(cand).astimezone(tz) if cand else None
++
++
+ def _tiempos_log(w):
+     return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
+ 
+@@ -1995,6 +2038,45 @@
+ 
+ 
+ 
++def _fin_dt(f, ref):
++    """hora de Fin de una fila de TIEMPOS.md como datetime (año del arranque `ref`; MM-DD de la celda si lo trae) o None sin fecha."""
++    h = f.get("fin")
++    if not h or not h.group(2):
++        return None
++    try:
++        return datetime.datetime(ref.year, int(h.group(2)), int(h.group(3)), int(h.group(4)), int(h.group(5)), tzinfo=ref.tzinfo)
++    except ValueError:
++        return None
++
++
++def tiempos_desde(tiempos_txt, desde, marcas=None):
++    """v138 (CR rev20c; rev2 por la verificación 8 Q1b / Q2 / Q4): TIEMPOS.md sin las filas de pasos de una rev ANTERIOR. Una fila
++    queda exenta solo con las DOS pruebas: (a) su Fin (con fecha MM-DD) es anterior al arranque de la rev actual y (b) tiempos.log
++    tiene la marca de ese cierre (misma fecha y hora) antes del arranque. Sin marcas (log sin fechas, una sola marca tardía, sin log)
++    nada queda exento: se juzga como v137. Se quita la fila EXACTA (su línea), nunca por coincidencia de hora con otra fila.
++    -> (texto filtrado, n filas exentas)"""
++    if tiempos_txt is None or desde is None or not marcas:
++        return tiempos_txt, 0
++    previas = [t for t, _l in marcas if t < desde.replace(tzinfo=t.tzinfo)]
++    fuera = []
++    for f in filas_tiempos(tiempos_txt):
++        t = _fin_dt(f, desde)
++        if t is None or t >= desde.replace(tzinfo=t.tzinfo):
++            continue
++        if any((m.month, m.day, m.hour, m.minute) == (t.month, t.day, t.hour, t.minute) for m in previas):
++            fuera.append(f)
++    if not fuera:
++        return tiempos_txt, 0
++    malas = [f["linea"] for f in fuera]
++    lineas, out = tiempos_txt.splitlines(), []
++    for ln in lineas:
++        if ln in malas:
++            malas.remove(ln)                              # una sola vez por fila exenta (dos filas iguales: solo la exenta)
++            continue
++        out.append(ln)
++    return "\n".join(out), len(fuera)
++
++
+ def pasos_cerrados_tiempos(tiempos_txt):
+     """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila con hora de fin), con EL MISMO parser de CE_TIEMPOS. -> ['1', '2-3', '4a', …]"""
+     return [f["paso"] for f in filas_tiempos(tiempos_txt) if f["fin"] and any(1 <= n <= 9 for n in f["nums"])]
+@@ -2025,13 +2107,16 @@
+     return ev
+ 
+ 
+-def alarma_fallas(w, na, registro=None, tiempos_txt=None):
++def alarma_fallas(w, na, registro=None, tiempos_txt=None, desde=None):
+     """verificación 12b (NO GUARD 3.3 / BE-PM06 STILL-WEAK: la alarma era opcional): (1) todo paso 1-9 cerrado en tiempos.log
+     ('| N fin …') tiene su corrida 'compuerta_entrega.py <w> --paso N' en compuerta_corridas.jsonl; (2) si el tiempo pasó el 50 % / 100 %
+     del presupuesto, ALERTA_PRESUPUESTO.json tiene esa alerta escrita EN ESE MOMENTO: medida con la hora del log a más tardar en el primer
+     cierre de paso después del cruce. -> [fallas]"""
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
++    if desde is not None:                               # v138 (CR rev20c): solo la rev actual (marcas desde su arranque)
++        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, ms)
++        ms = [(t, l) for t, l in ms if t >= desde.replace(tzinfo=t.tzinfo)]
+     ev = []
+     if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
+         if not p:
+diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:13:40.432753912 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 12:46:17.923587441 +0000
+@@ -3788,3 +3788,200 @@
+ 
+ 
+ test_u199_cierre_path_esquema_cr()
++
++
++def test_v138_be83_faces_numero():
++    """v138 (CR rev20c, CB_BE_83 'int object is not iterable'): completitud.caras_sobre_ceiling con existing_walls de 'faces' = número no
++    revienta; el muro cuenta como una cara (altura del muro, cuarto del location). Sobre el cielo sin fuente = sale; con 'floor to floor'
++    / 'underside of roof' / cara exterior = no sale."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++    can = {"walls": [], "ceilings": [{"room": "GUEST 905", "height_ft": 9.0}],
++           "existing_walls": [{"id": "Z9-L9-01", "faces": 2, "height_ft": 11.0, "location": "L9 | faces: 905 GUEST; corridor 916",
++                               "height_source": "4/Z9.05 printed level to level"}]}
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and xs[0][0] == "Z9-L9-01", xs
++    can["existing_walls"][0]["height_source"] = "2/Z9.10 'FIRE PARTITIONS EXTEND TO UNDERSIDE OF ROOF SHEATHING'"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0]["height_source"] = "stair enclosure open floor to floor (5/Z9.02)"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior")
++    assert CO.caras_sobre_ceiling(can) == []
++    # v138: la cara INTERIOR de un muro exterior se juzga igual (solo se salta cuando la única cara es exterior)
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior; 905 GUEST",
++                                    board="5/8 Type X (905 side) + 1/2 exterior gyp sheathing")
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and "905" in xs[0][1], xs
++    # 'extend to underside of ceiling' dice que para en el cielo: no justifica que suba
++    can["existing_walls"][0]["height_source"] = "GWB to extend to underside of ceiling (6/Z9.21)"
++    assert len(CO.caras_sobre_ceiling(can)) == 1
++    can["existing_walls"][0]["height_source"] = "studs extend to underside of floor framing (6/Z9.21)"
++    assert CO.caras_sobre_ceiling(can) == []
++    print("test_v138_be83_faces_numero OK")
++
++
++test_v138_be83_faces_numero()
++
++
++def test_v138_cf04_wood_board_only_plausible():
++    """v138 (CR rev20c): set wood-framed con todos los muros board-only (framing EXCLUDED, BE-CF05 / BE-CR29): CB_BE_CF04 = PASS y la red
++    U-138 no lo vuelve FAIL aunque el proyecto tenga muros esperados (antes la evidencia decía 'cero walls de madera con framing')."""
++    import chequeos_biblioteca as CB
++    class B:
++        canon = {"walls": [], "existing_walls": [{"id": "Z9-L9-01", "board_only": True, "decision": "wood framing EXCLUDED (Div. 06) per 1/Z9.0",
++                                                  "location": "L9 | faces: 905"}]}
++        def walls(self, c=None):
++            return [dict(w, board_only=True) for w in self.canon["existing_walls"]]
++    est, ev = CB.be_cf04(B())
++    assert est == "PASS", (est, ev)
++    res = [{"id": "CB_BE_CF04", "estado": est, "evidencia": ev}]
++    assert CE.auditar_compuerta(res, {"walls": 943, "markups": 943, "imagenes": 943}) == [] and res[0]["estado"] == "PASS", res
++    assert "0 walls" not in json.dumps(ev)
++    # v138: un wall de madera CON framing en walls[] escrito '2 X 6' / 'DF stud' / 'timber' / 'Douglas fir' / 'SPF' = FAIL
++    for ss, ga in (("2 X 6", "DF-L #2"), ("5-1/2 DF stud", "lumber"), ("6 timber stud", "n/a"), ("2×6", "SPF"), ("2 x 4", "Douglas fir")):
++        b = B()
++        b.canon = dict(B.canon, walls=[{"id": "Z9-W-01", "stud_size": ss, "gauge": ga}])
++        assert CB.be_cf04(b)[0] == "FAIL", (ss, ga)
++    b = B()
++    b.canon = dict(B.canon, walls=[{"id": "Z9-W-02", "stud_size": "", "gauge": "", "framing": "wood studs"}])
++    assert CB.be_cf04(b)[0] == "FAIL"                                              # 'wood' en framing también cuenta
++    print("test_v138_cf04_wood_board_only_plausible OK")
++
++
++test_v138_cf04_wood_board_only_plausible()
++
++
++def test_v138_protocolo_rev_posterior_solo_sus_pasos():
++    """v138 (CR rev20c, COORDINACIÓN 08:25): una rev que arranca DESPUÉS de v119 en un tiempos.log acumulado ('inicio revN') solo se juzga
++    con los pasos que cierran desde su arranque: los pasos de la rev original (otro día) quedan exentos con la causa escrita; un paso de
++    la rev actual sin su corrida '--paso' sigue = FAIL; con la corrida = PASS."""
++    w = tempfile.mkdtemp(prefix="p3h_")
++    e = os.path.join(w, "rev9c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev9c.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 11:34 PST | 1 Inventario | inicio\n"
++                                                     "05-nov 12:10 PST | 1 Inventario | fin\n12-nov 20:46 PST | inicio rev9c\n"
++                                                     "12-nov 21:30 PST | 4 Lectura | fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 4" in x for x in ev) and not any("paso 1 " in x for x in ev), (est, ev)
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    # v138 (verificación 7, P1 / P2): la marca 'inicio revN' escrita TARDE no exime los pasos que la rev ya cerró: manda el arranque más
++    # temprano (VERSION_PROYECTO.txt fijado al arrancar). Pasos 1 y 2-3 de la misma rev sin '--paso' = FAIL.
++    filas = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++             "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n| 4 | Comparación | 11-13 10:00 | 11-13 10:30 | x |\n")
++    for acumulado in (False, True):
++        w0 = tempfile.mkdtemp(prefix="p3h_tarde_")
++        w = os.path.join(w0, "rev21") if acumulado else w0
++        e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++        os.makedirs(os.path.join(e, "Take-off"))
++        open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++        log = ("2026-11-13 10:00 | 4 inicio rev21\n2026-11-13 10:30 | 4 fin\n" if not acumulado else
++               "05-nov 11:26 PST | 0 Arranque rev20 | inicio\n05-nov 19:00 PST | rev20 entregada\n2026-11-13 08:00 | 1 inicio\n"
++               "2026-11-13 08:30 | 1 fin\n2026-11-13 09:30 | 2-3 fin\n2026-11-13 10:00 | inicio rev21\n2026-11-13 10:30 | 4 fin\n")
++        open(os.path.join(w0, "tiempos.log"), "w").write(log)
++        open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T16:00:00+00:00 | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++        open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++        CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++        est, ev = CE.proceso_v119(w, e, filas, 5)
++        assert est == "FAIL" and any("paso 1 " in x for x in ev) and any("paso 2-3" in x for x in ev), (acumulado, est, ev)
++    print("test_v138_protocolo_rev_posterior_solo_sus_pasos OK")
++
++
++test_v138_protocolo_rev_posterior_solo_sus_pasos()
++
++
++def test_v138r2_verif8_caras_lista_como_v137():
++    """v138 rev2 (verificación 8): una LISTA de caras se juzga exactamente como v137 (solo full height / to deck / above ceiling
++    justifican): una palabra suelta de otro elemento en la fuente no calla la cara; un muro SIN faces no se juzga (como v137); faces =
++    número sigue sin crash y con su cara."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(faces=None, **w):
++        b = {"id": "Z9-W1", "location": "L9 | 905 GUEST", "height_ft": 11.0}
++        b.update(w)
++        if faces is not None:
++            b["faces"] = faces
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}], "walls": [b]}
++    F = lambda s: [{"room": "905 GUEST", "height_ft": 11.0, "height_source": s}]   # noqa: E731
++    for s in ("C-2 GWB ceiling hung from underside of floor joists above", "11'-0\" per 3/A3.1; see stair enclosure detail",
++              "level floor to floor 11'-0\" used as wall height", "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(F(s))), s
++    assert CO.caras_sobre_ceiling(can(F("full height to deck"))) == []
++    assert CO.caras_sobre_ceiling(can(None, location="pier of 905 GUEST", height_source="A3.1 11'-0\"")) == []
++    assert CO.caras_sobre_ceiling(can({"905 GUEST": 11.0}, height_source="A3.1")) == []
++    assert CO.caras_sobre_ceiling(can(2, height_source="A3.1 11'-0\""))
++    assert CO.caras_sobre_ceiling(can(1, location="L9 905 GUEST | faces: exterior", height_source="A3.1")) == []
++    print("test_v138r2_verif8_caras_lista_como_v137 OK")
++
++
++test_v138r2_verif8_caras_lista_como_v137()
++
++
++def test_v138r2_verif8_tiempos_desde_pruebas():
++    """v138 rev2 (verificación 8): una fila de TIEMPOS.md queda exenta (rev anterior) SOLO si cierra antes del arranque Y tiempos.log
++    tiene la marca de ese cierre antes del arranque; se quita la fila exacta, nunca otra que comparta la hora; sin marcas nada queda
++    exento."""
++    from zoneinfo import ZoneInfo
++    import datetime as _dt
++    tz = ZoneInfo("America/Los_Angeles")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 9 | Subida | 11-13 08:00 | 11-13 08:40 | 40 |\n"
++          "| 1 | Inventario | 11-13 08:40 | 11-13 09:30 | 50 |\n")
++    desde = _dt.datetime(2026, 11, 13, 8, 45, tzinfo=tz)
++    m = [(_dt.datetime(2026, 11, 13, 8, 40, tzinfo=tz), "9 fin"), (_dt.datetime(2026, 11, 13, 9, 30, tzinfo=tz), "1 fin")]
++    txt, n = CE.tiempos_desde(tt, desde, m)
++    assert n == 1 and "Inventario" in txt and "Subida" not in txt, (n, txt)
++    assert CE.tiempos_desde(tt, desde, []) == (tt, 0)
++    assert CE.tiempos_desde(tt, desde, m[1:])[1] == 0                 # el cierre del paso viejo sin marca: no se exime
++    tarde = _dt.datetime(2026, 11, 13, 13, 50, tzinfo=tz)
++    assert CE.tiempos_desde(tt, tarde, [(tarde, "inicio")])[1] == 0  # una sola marca tardía no exime la mañana
++    print("test_v138r2_verif8_tiempos_desde_pruebas OK")
++
++
++test_v138r2_verif8_tiempos_desde_pruebas()
++
++
++def test_v138r2_caras_numero_clausula_propia():
++    """v138 rev2 (COORDINACIÓN): con 'faces' = número la justificación cuenta solo en la cláusula propia de la cara: una cláusula de
++    OTRO elemento (see …, duct / shaft, cielo colgado) no calla la cara; la cláusula propia sí."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++
++    def can(src):
++        return {"ceilings": [{"room": "905 GUEST", "height_ft": 9.0}],
++                "walls": [{"id": "Z9-W2", "faces": 2, "location": "L9 | 905 GUEST", "height_ft": 11.0, "height_source": src}]}
++    for s_ in ("C-2 GWB ceiling hung from underside of floor joists above (A5.1); wall 11'-0\" per section",
++               "11'-0\" per 3/A3.1; see stair enclosure detail 5/A6.02 for the other wall",
++               "11'-0\"; duct shaft extends to structure (M2.1)"):
++        assert CO.caras_sobre_ceiling(can(s_)), s_
++    for s_ in ("partition extends to underside of roof deck per 3/A3.1", "A3.1; wall full height to deck"):
++        assert CO.caras_sobre_ceiling(can(s_)) == [], s_
++    print("test_v138r2_caras_numero_clausula_propia OK")
++
++
++test_v138r2_caras_numero_clausula_propia()
++
++
++def test_v138r2_protocolo_log_sin_fecha_como_v137():
++    """v138 rev2 (COORDINACIÓN): un tiempos.log que no se puede fechar = FAIL como v137, aunque VERSION_PROYECTO.txt traiga la hora:
++    ningún paso queda exento."""
++    w = tempfile.mkdtemp(prefix="p3h_sinfecha_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("arranque\n1 fin\n2-3 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T22:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-13 08:00 | 11-13 08:30 | x |\n"
++          "| 2-3 | Lecturas | 11-13 08:30 | 11-13 09:30 | x |\n")
++    est, ev = CE.proceso_v119(w, e, tt, 5)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_log_sin_fecha_como_v137 OK")
++
++
++test_v138r2_protocolo_log_sin_fecha_como_v137()
