@@ -170,3 +170,4 @@ Antes de ARMAR una versión del skill de take-off, la sesión aparta el número 
 - CONGELADO DE VERDAD otra vez: v81cf128 VIGENTE hasta las entregas de CR y GK.
 - v81cf129 · Xfinity · 13-nov ~00:15 UTC (COORDINACIÓN 00:10) · v81cf128 + U-194 en el registro / SKILL (conducta, 3b3d8b9) + be_vs_13 toma el id MÁS LARGO · PUBLICADA (skills_archivo/take-off-metal-frame-drywall_v81cf129_U194-vs13-id-largo_2026-11-13.zip; suite 47/47, banco 0 distintas, 199 archivos, XF 0 regresiones)
 - CONGELADO DE VERDAD otra vez: v81cf129 VIGENTE hasta las entregas de CR y GK.
+- v81cf130 · Xfinity · 13-nov ~01:07 UTC (COORDINACIÓN 01:02, bloquea la subida de CR) · v81cf129 + CB_RCP_APILADOS total de cielos evaluados primero + auditor de plausibilidad ignora subconteos ('vía', 'de los cuales', paréntesis) · en curso
