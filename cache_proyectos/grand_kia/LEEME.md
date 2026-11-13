@@ -30,7 +30,7 @@ Cache del proyecto (scripts del pipeline y configuración) para retomarlo o reus
 - Auditoría U-181: REVERIF15 (2 LOW: cita 1/A540 → 2/A540, C636 como hoja) → REVERIF16 open: 0.
 - Sin cambio de cantidades vs rev3: clips "3" x 3" x 0'-3" x 20 ga" (64/S204 nota 6), "Hanger wire, 12 ga (No. 12 SWG)" (3/A540, 2/A540), RFI-18 loaded = Type X, canon.ceilings_misc (v81cf117) para CB_RCP_APILADOS, Auditoria/RCP_APILADOS.csv y revision_materiales (U-111).
 - Subida: 2,626 archivos (Auditoria 2,598) a Claude outputs › Grand Kia Auto Dealership - Denver, CO (Brinkman) › rev3a FINAL PARA REVISAR; --vigente PASS; Drive = local, 0 duplicados. rev3 renombrada "BORRAR (NO USAR) - rev3 FINAL PARA REVISAR - REPLACED BY rev3a".
-- Reglas de esta ronda: BE-GK50..BE-GK58 (BE-GK54..58 = rev3b, apartados/be_gk54..be_gk57).
+- Reglas de esta ronda: BE-GK50..BE-GK59 (BE-GK54..59 = rev3b, apartados/be_gk54..be_gk57, be_gk59).
 
 ## rev3b (12/13-nov) — ENTREGADA (mapa de cobertura U-193 + revisor independiente)
 - FINAL = compuerta VERDE con v81cf129, 231 PASS / 6 AMBER / 0 FAIL (corrida 60914f5fc798, 12-nov 17:05 PST). Registro inmutable en compuerta_corridas_rev3b.jsonl.
@@ -44,4 +44,4 @@ Cache del proyecto (scripts del pipeline y configuración) para retomarlo o reus
   - rfis 3f0e8d24d2f6f07e6099d6495414aac7e02075558603bb4792e42332547ad177
 - REVERIF20 (auditor independiente): open 0. Revisor U-193 (a2b49d549b9d7d9a0): 45 renglones (40 NO ES NUESTRO, 4 NO ES MURO, 1 CUBIERTO), 0 FALTA abiertos.
 - Elementos nuevos: A-Z1-20 (leaf A del nicho), F1-Z1-06 (end cap 18/A521), F-Z1-21/22 (patch kn 52), WR-05 + TRIM-057 (ventana D de Serv Mgr 128), RI-18C (box del roof drain kn 6 en Dealer 140). Delta completo en DELTA_rev3a_rev3b.md.
-- Reglas de esta rev: BE-GK54..BE-GK58 (chequeos en apartados/be_gk54..be_gk57).
+- Reglas de esta rev: BE-GK54..BE-GK59 (chequeos en apartados/be_gk54..be_gk57 y be_gk59).
