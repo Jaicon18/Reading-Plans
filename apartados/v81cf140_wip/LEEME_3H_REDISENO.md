@@ -27,3 +27,9 @@ CEILING'); a canon that wrote 'to B.O. structure' is judged as to_deck and H = B
 not match 'ABOVE LINE OF CEILING'. Fix in v140: rule from the type head (fichas / partition types of the canon) wins over the wall text, a
 conflict between them = FAIL; regex '(N)" ABOVE (THE )?(LINE OF |HIGHEST )?CEILING'; test with CR's rows (rev19 canon = FAIL, rev20d = PASS).
 Waiting for CR's BE + evidence to confirm.
+
+BE-CR46 (CR rev19, COORDINACIÓN, commit 7ef8b27): the blind height readers (U-176) read the TYPE HEAD (A0.06 / A0.07) BEFORE the wall dimension;
+a head '6 in above (line of) ceiling' = room C.H. + 6" capped at structure, never the B.O. of structure; the A/B resolution cites the head with its crop.
+Check CB_HEAD_TYPE: each row's height <= C.H. + head offset when the type head does not reach structure (= the CE_ALTURAS_EXTREMO fix above: rule
+from the type head + regex 'LINE OF CEILING'); the U-176 readers' brief must cite the type head. Test: cache_proyectos/cr_city_hotel_castle_rock/
+scripts/tests/test_fw_head.py (fixture_fw_rev20c.json 41 fallas rc 1, fixture_fw_rev20d.json 0 rc 0).
