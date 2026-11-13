@@ -8862,6 +8862,21 @@
    "categoria": "conducta",
    "texto_corto": "todo proceso largo (compuerta, PRUEBA_ABIERTOS, OCR, subida) se lanza SOLO como tarea de background vigilada (run_in_background / Monitor) con su archivo de progreso, nunca con '&' dentro de un comando de primer plano; a los 2 min se verifica que el PID siga vivo y que su salida o su proceso hijo avancen",
    "motivo": "un proceso muerto en silencio costó 1 h 17 min; el chequeo de programa (log de 0 bytes y sin proceso vivo a los 5 min = ALARMA) queda propuesto para una versión siguiente"
+  },
+  {
+   "id": "U-201",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, CR City Hotel, commit 59e2c4c)",
+   "categoria": "programa-pendiente",
+   "cuando": "entrega",
+   "texto_corto": "decisiones del usuario 13-nov = regla: (1) rating mayor + DEDUCT; (2) sin tag = tipo del muro que conecta; (3) wrap con solo SFRM = gypsum + DEDUCT; (4) alternate de acabado contradictorio = [RATE TO CONFIRM]; (5) tasa que la plantilla no trae = [RATE TO CONFIRM]; (6) falla solo de proceso = subida con excepción autorizada por el usuario",
+   "motivo": "(6) programado en v81cf138a (subir_entrega.excepcion_usuario_fallas + test_v1381_excepcion_usuario_subida); (1)-(5) con sus chequeos van a v81cf140 (COORDINACIÓN 18:22)"
+  },
+  {
+   "id": "U-200",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 59e2c4c; CAMBIADA por el usuario en commit 332cfd8)",
+   "categoria": "conducta",
+   "texto_corto": "el CHECKLIST_REVISION se queda COMPLETO como en U-168 B1-B5 + B6 (nada se recorta); lo revisa el chequeo existente CE_CHECKLIST_USUARIO, sin cambio de programa",
+   "motivo": "el usuario cambió U-200 el 13-nov (COORDINACIÓN 18:45): la 'Hoja de 15 min' queda sin efecto; no hay adaptación de CE_CHECKLIST_USUARIO en v140"
   }
  ]
 }

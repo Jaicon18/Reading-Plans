@@ -1,0 +1,262 @@
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v1381/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 14:56:24.682152077 +0000
++++ v1381/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 18:46:02.610499157 +0000
+@@ -8862,6 +8862,21 @@
+    "categoria": "conducta",
+    "texto_corto": "todo proceso largo (compuerta, PRUEBA_ABIERTOS, OCR, subida) se lanza SOLO como tarea de background vigilada (run_in_background / Monitor) con su archivo de progreso, nunca con '&' dentro de un comando de primer plano; a los 2 min se verifica que el PID siga vivo y que su salida o su proceso hijo avancen",
+    "motivo": "un proceso muerto en silencio costó 1 h 17 min; el chequeo de programa (log de 0 bytes y sin proceso vivo a los 5 min = ALARMA) queda propuesto para una versión siguiente"
++  },
++  {
++   "id": "U-201",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, CR City Hotel, commit 59e2c4c)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "texto_corto": "decisiones del usuario 13-nov = regla: (1) rating mayor + DEDUCT; (2) sin tag = tipo del muro que conecta; (3) wrap con solo SFRM = gypsum + DEDUCT; (4) alternate de acabado contradictorio = [RATE TO CONFIRM]; (5) tasa que la plantilla no trae = [RATE TO CONFIRM]; (6) falla solo de proceso = subida con excepción autorizada por el usuario",
++   "motivo": "(6) programado en v81cf138a (subir_entrega.excepcion_usuario_fallas + test_v1381_excepcion_usuario_subida); (1)-(5) con sus chequeos van a v81cf140 (COORDINACIÓN 18:22)"
++  },
++  {
++   "id": "U-200",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 59e2c4c; CAMBIADA por el usuario en commit 332cfd8)",
++   "categoria": "conducta",
++   "texto_corto": "el CHECKLIST_REVISION se queda COMPLETO como en U-168 B1-B5 + B6 (nada se recorta); lo revisa el chequeo existente CE_CHECKLIST_USUARIO, sin cambio de programa",
++   "motivo": "el usuario cambió U-200 el 13-nov (COORDINACIÓN 18:45): la 'Hoja de 15 min' queda sin efecto; no hay adaptación de CE_CHECKLIST_USUARIO en v140"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/SKILL.md v1381/take-off-metal-frame-drywall/SKILL.md
+--- v138fb/take-off-metal-frame-drywall/SKILL.md	2026-11-13 13:30:04.076927812 +0000
++++ v1381/take-off-metal-frame-drywall/SKILL.md	2026-11-13 18:27:03.004711966 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138a** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3590,3 +3590,4 @@
+ - Arreglo de un PDF ya entregado: `python3 -I tools/markups_bluebeam.py sf_wall <in.pdf> <out.pdf>` (C 1 + etiqueta), versión nueva.
+ Test: tools/test_compuerta_entrega.py::test_u153_vista_bluebeam (C 1/864 = FAIL x864; C 1 = PASS; Length que no cuadra = FAIL;
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
++- **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py v1381/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v138fb/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:34:54.279895753 +0000
++++ v1381/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 18:27:02.995815291 +0000
+@@ -1749,7 +1749,7 @@
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+                       "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+                       "v81cf135": "2026-11-13T06:07:55+00:00", "v81cf136": "2026-11-13T06:12:55+00:00",
+-                      "v81cf137": "2026-11-13T06:24:26+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a · v137 0a5f40f; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
++                      "v81cf137": "2026-11-13T06:24:26+00:00", "v81cf138": "2026-11-13T15:22:27+00:00"}   # hora REAL del commit de publicación (git log -1 --format=%cI), fijada DESPUÉS del commit (BE-XF17): v133 dfcf5e7 · v134 59947ce · v135 3f73cbd · v136 1a3420a · v137 0a5f40f · v138 88707bb; la versión que se publica NO va aquí (fecha_publicacion la toma de git)
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/tools/subir_entrega.py v1381/take-off-metal-frame-drywall/tools/subir_entrega.py
+--- v138fb/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 06:13:40.432540113 +0000
++++ v1381/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 18:33:27.394504706 +0000
+@@ -95,8 +95,15 @@
+         q["pageToken"] = b["nextPageToken"]
+ 
+ 
+-def verificar_vigente(ok, log, listar=md5_drive, subida=None):
+-    """U-177 (1): -> fallas de CE.vigente_fallas con el md5 de Drive de las carpetas del PDF y del Excel vigentes."""
++def verificar_vigente(ok, log, listar=md5_drive, subida=None, w=None):
++    """U-177 (1): -> fallas de CE.vigente_fallas con el md5 de Drive de las carpetas del PDF y del Excel vigentes. U-201 (6): con la
++    excepción del usuario válida (excepcion_usuario_fallas == ''), la comparación de md5 se hace como si la compuerta fuera verde
++    (el ENTREGA_OK.json en disco no se toca)."""
++    if (not ok.get("ok") or _no_verdes(ok)) and w:
++        if excepcion_usuario_fallas(ok, w):
++            return ["compuerta no verde sin excepción del usuario válida (U-201 (6))"] if _no_verdes(ok) else \
++                CE.vigente_fallas(ok, {}, [x[0] for x in CE.CHEQUEOS], subida)
++        ok = dict(ok, ok=True)
+     vg = ok.get("vigentes") or {}
+     carpetas = {e["carpeta_id"] for e in log for v in vg.values() if os.path.basename(e["archivo"]) == v.get("nombre")}
+     md = {}
+@@ -105,6 +112,59 @@
+     return CE.vigente_fallas(ok, md, [x[0] for x in CE.CHEQUEOS], subida)    # v131: VERDE de la versión vigente al subir sigue válido
+ 
+ 
++RX_EXC_CHECK = re.compile(r"^(?:CE|CB)_[A-Z0-9_]+$")
++RX_EXC_FECHA = re.compile(r"^\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?)?$")
++
++
++def _no_verdes(ok):
++    """verificación v138a H1: todo estado que no es PASS ni AMBER cuenta como FAIL ('fail', 'ERROR', vacío...)."""
++    return [c for c in ok.get("chequeos") or [] if str(c.get("estado")) not in ("PASS", "AMBER")]
++
++
++def excepcion_usuario_fallas(ok, w):
++    """U-201 (6) (usuario 13-nov, v81cf138a): una compuerta con una falla SOLO de proceso se sube únicamente con la excepción
++    AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json 'excepcion_usuario' {check, texto, fecha, autorizado_por: "usuario"
++    [, evidencia]} y en README_REVIEW.md de la entrega (el nombre del chequeo como palabra entera y el texto completo en la MISMA
++    sección), solo si el ÚNICO resultado no verde (todo estado que no es PASS / AMBER) es exactamente ese chequeo (nombre y, si la
++    excepción la trae, evidencia) y la corrida es COMPLETA (vigentes + todos los chequeos actuales corridos). 'ok' y los resultados
++    no se tocan. -> '' si la excepción vale, o la causa"""
++    ex = ok.get("excepcion_usuario")
++    if not isinstance(ex, dict):
++        return "; sin excepcion_usuario autorizada (U-201 (6))"
++    for k in ("check", "texto", "fecha", "autorizado_por"):
++        if not isinstance(ex.get(k), str) or not ex.get(k).strip():
++            return f"; excepcion_usuario incompleta ('{k}' tiene que ser texto no vacío) (U-201 (6))"
++    if ex["autorizado_por"] != "usuario":
++        return f"; excepcion_usuario no autorizada por el usuario (autorizado_por = {ex['autorizado_por']!r}, tiene que ser 'usuario') (U-201 (6))"
++    if not RX_EXC_CHECK.match(ex["check"]):
++        return f"; excepcion_usuario: '{ex['check']}' no es el id de un chequeo (CE_… / CB_…) (U-201 (6))"
++    if not RX_EXC_FECHA.match(ex["fecha"].strip()):
++        return f"; excepcion_usuario: fecha {ex['fecha']!r} no es una fecha ISO (AAAA-MM-DD) (U-201 (6))"
++    if len(ex["texto"].strip()) < 30:
++        return "; excepcion_usuario: 'texto' demasiado corto (>= 30 caracteres: qué falla, por qué no afecta cantidades, quién autoriza) (U-201 (6))"
++    fails = _no_verdes(ok)
++    if not fails:
++        return "; corrida parcial: la excepción solo cubre un FAIL nombrado (U-201 (6))"
++    if len(fails) != 1 or fails[0].get("id") != ex["check"] or fails[0].get("estado") != "FAIL":
++        return (f"; la excepción nombra '{ex['check']}' y los resultados no verdes son "
++                f"{[(c.get('id'), c.get('estado')) for c in fails]}: solo se sube si el ÚNICO FAIL es ese chequeo (U-201 (6))")
++    if ex.get("evidencia") is not None and ex.get("evidencia") != fails[0].get("evidencia"):
++        return f"; la evidencia de la excepción no es la del FAIL de {ex['check']} (U-201 (6))"
++    corridos = {c.get("id") for c in ok.get("chequeos") or []}
++    faltan = [n for n in (x[0] for x in CE.CHEQUEOS) if n not in corridos]
++    if not ok.get("vigentes") or faltan:
++        return (f"; la excepción solo vale sobre una corrida COMPLETA de la compuerta (vigentes y todos los chequeos actuales"
++                f"{'; faltan ' + str(len(faltan)) if faltan else ''}) (U-201 (6))")
++    rd = os.path.join(w, ok.get("entrega_dir") or "", "README_REVIEW.md")
++    txt = open(rd, encoding="utf-8").read() if os.path.isfile(rd) else ""
++    secciones = re.split(r"(?m)^(?=#)", txt)
++    rx_chk = re.compile(r"(?<![A-Za-z0-9_])" + re.escape(ex["check"]) + r"(?![A-Za-z0-9_])")
++    if not any(rx_chk.search(sec) and ex["texto"].strip() in sec for sec in secciones):
++        return (f"; la excepción ({ex['check']}) no está escrita en README_REVIEW.md de la entrega (el chequeo como palabra entera y el "
++                "texto completo en la misma sección) (U-201 (6))")
++    return ""
++
++
+ def candados(workdir):
+     """-> (ENTREGA_OK dict, lista de archivos a subir). Lanza Bloqueo con el motivo."""
+     w = os.path.abspath(workdir)
+@@ -113,8 +173,10 @@
+         raise Bloqueo("no existe ENTREGA_OK.json: correr compuerta_entrega.py primero")
+     ok = json.load(open(okp, encoding="utf-8"))
+     malos = [c["id"] for c in ok.get("chequeos") or [] if c.get("estado") == "FAIL"]
+-    if not ok.get("ok") or malos:
+-        raise Bloqueo(f"ENTREGA_OK.json NO está en verde (FAIL: {', '.join(malos) or 'corrida parcial'})")
++    if not ok.get("ok") or malos or _no_verdes(ok):
++        causa = excepcion_usuario_fallas(ok, w)          # U-201 (6): única salida de una compuerta no verde
++        if causa:
++            raise Bloqueo(f"ENTREGA_OK.json NO está en verde (FAIL: {', '.join(str(x) for x in malos) or 'corrida parcial'}){causa}")
+     ed = ok.get("entrega_dir")
+     if not ed or not os.path.isdir(os.path.join(w, ed)):
+         raise Bloqueo("ENTREGA_OK.json sin carpeta de entrega existente")
+@@ -372,7 +434,7 @@
+             if nom == "Auditoria.zip":
+                 log.append({"archivo": "Auditoria.zip", "carpeta_id": ids[raiz_ed],
+                             "salida": _g("rename", it["id"], nombre_borrar("Auditoria.zip", "Auditoria (folder)")).strip()[-200:]})
+-    ev = verificar_vigente(ok, log) if ok.get("vigentes") else []   # U-177 (1): la compuerta vigente siempre escribe 'vigentes'; --vigente lo exige
++    ev = verificar_vigente(ok, log, w=w) if ok.get("vigentes") else []   # U-177 (1): la compuerta vigente siempre escribe 'vigentes'; --vigente lo exige
+     if ev:
+         raise Bloqueo("U-177 entrega vigente: " + "; ".join(ev))
+     ahora_iso = _ahora_iso()
+@@ -381,6 +443,7 @@
+            "entrega_ok_sha": CE._sha(os.path.join(w, "ENTREGA_OK.json")),
+            "corrida": ok.get("corrida"), "entrega_ok": f"ENTREGA_OK_{ok.get('corrida')}.json" if ok.get("corrida") else None,   # BE-GK59
+            "drive": d, "carpetas": ids, "subidos": log, "vigente_verificado": sorted((ok.get("vigentes") or {}).keys()),
++           "excepcion_usuario": ok.get("excepcion_usuario") if (not ok.get("ok") or _no_verdes(ok)) else None,   # U-201 (6): H4
+            "tramos": estado["tramo"]}
+     json.dump(res, open(os.path.join(w, "SUBIDA_OK.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+     return res
+@@ -405,7 +468,7 @@
+         ok = json.load(open(os.path.join(w, "ENTREGA_OK.json"), encoding="utf-8"))
+         sub = json.load(open(os.path.join(w, "SUBIDA_OK.json"), encoding="utf-8")) if os.path.isfile(os.path.join(w, "SUBIDA_OK.json")) else {}
+         log = sub.get("subidos") or []
+-        ev = verificar_vigente(ok, log, subida=sub)
++        ev = verificar_vigente(ok, log, subida=sub, w=w)
+         print("ENTREGA VIGENTE: " + ("FAIL - " + "; ".join(ev) if ev else "PASS (Drive = lo que validó la compuerta, con todos los chequeos del skill vigente)"))
+         return 1 if ev else 0
+     try:
+diff -ruN -x __pycache__ v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v1381/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v138fb/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:30:04.100457335 +0000
++++ v1381/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 18:32:29.567537896 +0000
+@@ -2252,7 +2252,7 @@
+     skp = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(CE.__file__))), "SKILL.md")
+     if os.path.isfile(skp):                                              # en la suite (tools copiados solos) no hay SKILL.md
+         sk_txt = open(skp, encoding="utf-8").read()
+-        assert CE._skill_version() == re.search(r"(?m)^\*\*VERSION:\s*(v\d+cf\d+)", sk_txt).group(1)
++        assert CE._skill_version() == re.search(r"(?m)^\*\*VERSION:\s*(v\d+cf\d+[a-z]?)", sk_txt).group(1)
+         assert not CE.version_fallas(sk_txt, CE._skill_version(), {}), "subir la línea VERSION de SKILL.md"
+     print("test_v114_auditoria_u138 OK")
+ 
+@@ -3898,3 +3898,74 @@
+ 
+ 
+ test_v138r2_caras_numero_clausula_propia()
++
++
++def test_v1381_excepcion_usuario_subida():
++    """v81cf138a / U-201 (6): una compuerta con UN FAIL de proceso se sube solo con la excepción del usuario (ENTREGA_OK 'excepcion_usuario'
++    {check, texto, fecha, autorizado_por usuario} + README_REVIEW en la misma sección) sobre una corrida COMPLETA y si ese es el ÚNICO
++    resultado no verde; otro no verde de más (FAIL / 'fail' / ERROR), otra check, sin excepción, README que solo la contiene dentro de otra
++    palabra, campos que no son texto, fecha no ISO o corrida incompleta = se niega como antes; 'ok' no se toca."""
++    w = workdir()
++    e = os.path.join(w, "FINAL_FOR_REVIEW")
++    TXT = "user authorized upload: process-only failure of a previous rev, no effect on quantities"
++    README_OK = f"# PROJECT DATA\nHoras en PST.\n\n## Process exception (U-201 (6))\nCE_PROTOCOLO_3H: {TXT}\n"
++    open(os.path.join(e, "README_REVIEW.md"), "w").write(README_OK)
++    TODOS = [x[0] for x in CE.CHEQUEOS]
++
++    def ok_con(fails, ex, ok=False, extra=(), completa=True, vig=True):
++        c = CE.Ctx(w)
++        arch = {os.path.relpath(p, w): CE._sha(p) for p in c.archivos_entrega()}
++        ch = [{"id": n, "estado": "PASS", "evidencia": ["ok"]} for n in (TODOS if completa else ["CE_X"]) if n not in fails]
++        ch += [{"id": f, "estado": "FAIL", "evidencia": [f"{f}: falla"]} for f in fails] + list(extra)
++        d = {"ok": ok, "entrega_dir": "FINAL_FOR_REVIEW", "chequeos": ch, "archivos": arch,
++             "drive": {"parent_id": CE.DRIVE_RAIZ, "carpeta_proyecto": "Proyecto X", "carpeta_proyecto_id": "FOLDER123"}}
++        if vig:
++            d["vigentes"] = {"excel": {"nombre": "P_Takeoff_FINAL.xlsx", "md5": "x"}}
++        if ex is not None:
++            d["excepcion_usuario"] = ex
++        json.dump(d, open(os.path.join(w, "ENTREGA_OK.json"), "w"))
++    EX = {"check": "CE_PROTOCOLO_3H", "texto": TXT, "fecha": "2026-11-13", "autorizado_por": "usuario"}
++    # (1) único FAIL = el chequeo nombrado + excepción, corrida completa -> pasa los candados; 'ok' no se toca
++    ok_con(["CE_PROTOCOLO_3H"], EX)
++    SE.candados(w)
++    assert SE.excepcion_usuario_fallas(json.load(open(os.path.join(w, "ENTREGA_OK.json"))), w) == ""
++    assert json.load(open(os.path.join(w, "ENTREGA_OK.json")))["ok"] is False
++    casos = (
++        (dict(fails=["CE_PROTOCOLO_3H", "CE_Y"]), EX, "ÚNICO FAIL"),                                         # (2) otro FAIL de más
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, check="CE_OTRO"), "ÚNICO FAIL"),                         # (3) otra check
++        (dict(fails=["CE_PROTOCOLO_3H"]), None, "sin excepcion_usuario"),                                    # (4) sin excepción
++        (dict(fails=["CE_PROTOCOLO_3H"], extra=[{"id": "CE_Z", "estado": "fail"}]), EX, "ÚNICO FAIL"),       # H1 'fail'
++        (dict(fails=["CE_PROTOCOLO_3H"], extra=[{"id": "CE_Z", "estado": "ERROR"}]), EX, "ÚNICO FAIL"),      # H1 ERROR
++        (dict(fails=["CE_PROTOCOLO_3H"], completa=False), EX, "COMPLETA"),                                   # H3 corrida incompleta
++        (dict(fails=["CE_PROTOCOLO_3H"], vig=False), EX, "COMPLETA"),                                        # H3 sin vigentes
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, autorizado_por=" Usuario "), "no autorizada"),            # H5
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, autorizado_por="coordinacion"), "no autorizada"),
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, fecha="x"), "fecha"),                                     # H5
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, texto=True), "incompleta"),                               # H2 texto bool
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, texto="P"), "corto"),                                     # H2 texto corto
++        (dict(fails=["CE_PROTOCOLO_3H"]), dict(EX, evidencia=["otra"]), "evidencia"),
++        (dict(fails=[]), EX, "corrida parcial"))
++    for kw, ex, msg in casos:
++        ok_con(ex=ex, **kw)
++        try:
++            SE.candados(w)
++            raise AssertionError(f"subió: {kw} {ex}")
++        except SE.Bloqueo as b:
++            assert "verde" in str(b) and msg in str(b), (msg, str(b))
++    # H4: ok true + un FAIL + excepción = se usa la excepción (y SUBIDA_OK la registraría)
++    ok_con(["CE_PROTOCOLO_3H"], EX, ok=True)
++    SE.candados(w)
++    # H2: el chequeo solo dentro de otra palabra / el texto en otra sección = se niega
++    for rd in (README_OK.replace("CE_PROTOCOLO_3H:", "CE_PROTOCOLO_3HX:"),
++               f"# A\nCE_PROTOCOLO_3H\n# B\n{TXT}\n", "# PROJECT DATA\nHoras en PST.\n"):
++        open(os.path.join(e, "README_REVIEW.md"), "w").write(rd)
++        ok_con(["CE_PROTOCOLO_3H"], EX)
++        try:
++            SE.candados(w)
++            raise AssertionError("subió sin la excepción escrita en README_REVIEW")
++        except SE.Bloqueo as b:
++            assert "README_REVIEW" in str(b), str(b)
++    print("test_v1381_excepcion_usuario_subida OK")
++
++
++test_v1381_excepcion_usuario_subida()
