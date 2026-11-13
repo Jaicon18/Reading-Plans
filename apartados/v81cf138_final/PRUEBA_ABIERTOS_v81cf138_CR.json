@@ -1,0 +1,39 @@
+{
+ "version_candidata": "v81cf138",
+ "proyectos": {
+  "cr_city_hotel_castle_rock": {
+   "vigente": {
+    "PASS": 229,
+    "AMBER": 8,
+    "FAIL": 5
+   },
+   "candidata": {
+    "PASS": 229,
+    "AMBER": 8,
+    "FAIL": 5
+   },
+   "regresiones": 1,
+   "sin_explicar": 0,
+   "workdir": "/tmp/claude-0/-home-user/18bfbfac-ecd6-55d5-8e44-1a0e0dafeecf/scratchpad/entrega_snap",
+   "fecha_iso": "2026-11-13T14:53:13.422311+00:00",
+   "sha_tools": "99674abbf95d307b40000cf0ad62ac58e6872e021ba3d49268e5a88fc445b775"
+  }
+ },
+ "regresiones": [
+  {
+   "proyecto": "cr_city_hotel_castle_rock",
+   "chequeo": "CE_VERSION_ENTREGA",
+   "vigente": "PASS",
+   "candidata": "FAIL",
+   "evidencia": [
+    "TIEMPOS.md: declara v81cf137 y ENTREGA_OK / la compuerta corrió con v81cf138: 'rev20c — corridas de compuerta: 1 (la final con v81cf137, la versión vigente del skill que registra ENTREGA_OK'",
+    "TIEMPOS.md: declara v81cf137 y ENTREGA_OK / la compuerta corrió con v81cf138: 'rev20c — corridas de compuerta: 1 (la final con v81cf137, la versión vigente del skill que registra ENTREGA_OK'",
+    "rev20c FINAL PARA REVISAR/TIEMPOS.md: declara v81cf137 y ENTREGA_OK / la compuerta corrió con v81cf138: 'rev20c — corridas de compuerta: 1 (la final con v81cf137, la versión vigente del skill que registra ENTREGA_OK'"
+   ],
+   "explicacion": "dato de CR, no de la tool: TIEMPOS.md de la copia de las 13:24 declaraba la final con v81cf137 y la prueba corre con v81cf138; corregido en la cadena (tiempos.py 'la final con v81cf138' + VERSION_PROYECTO v81cf138 con causa)"
+  }
+ ],
+ "fecha_iso": "2026-11-13T14:53:13.422311+00:00",
+ "version_vigente": "v81cf137",
+ "ok": false
+}
