@@ -1,0 +1,198 @@
+diff -ruN v129/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v129/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:09:21.758230160 +0000
++++ v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:09:21.767816571 +0000
+@@ -4773,13 +4773,14 @@
+    "origen": "REGLAS_USUARIO_CLAUDE.md",
+    "categoria": "programa",
+    "cuando": "entrega",
+-   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov): un VERDE no basta: auditar_compuerta extrae el conteo de la evidencia de cada chequeo y lo compara con lo esperado del proyecto (hojas, walls, tags, hojas de detalles); conteo 0 / implausible = FAIL de PLAUSIBILIDAD aunque diga PASS; + auditoría adversarial diaria por un revisor que no hizo el trabajo",
++   "texto_corto": "REGLA INVIOLABLE (usuario 4-nov): un VERDE no basta: auditar_compuerta extrae el conteo de la evidencia de cada chequeo y lo compara con lo esperado del proyecto (hojas, walls, tags, hojas de detalles); conteo 0 / implausible = FAIL de PLAUSIBILIDAD aunque diga PASS; + auditoría adversarial diaria por un revisor que no hizo el trabajo ; v130 (CR): los conteos de subcategorías (paréntesis, 'vía', 'de los cuales') no cuentan para la plausibilidad",
+    "chequeos": [
+-    "take-off:tools/compuerta_entrega.py::auditar_compuerta"
++    "take-off:tools/compuerta_entrega.py::auditar_compuerta",
++    "take-off:tools/compuerta_entrega.py::es_subconteo"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+-    "token": "test_auditar_compuerta"
++    "token": "test_v130_plausibilidad_subconteo"
+    }
+   },
+   {
+@@ -8064,7 +8065,7 @@
+   {
+    "id": "U-189",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, vía COORDINACIÓN; origen BE-CR39)",
+-   "texto_corto": "cielos apilados (cada cielo dibujado a distinta altura con su renglón), detalle completo cara por cara (detail_faces) y 'terminado' solo con auditoría U-181 de COBERTURA (lista de detalles y RCP), no muestra; v81cf119 (post-mortem 12b): 'double' de DOBLE_CIELO con 0 apilados evaluados = FAIL, la pila FS / RS + GYP se evalúa desde DOBLE_CIELO, 'loaded' = ref exacta, burbujas de letra en la cobertura",
++   "texto_corto": "cielos apilados (cada cielo dibujado a distinta altura con su renglón), detalle completo cara por cara (detail_faces) y 'terminado' solo con auditoría U-181 de COBERTURA (lista de detalles y RCP), no muestra; v81cf119 (post-mortem 12b): 'double' de DOBLE_CIELO con 0 apilados evaluados = FAIL, la pila FS / RS + GYP se evalúa desde DOBLE_CIELO, 'loaded' = ref exacta, burbujas de letra en la cobertura ; v130: el PASS de CB_RCP_APILADOS escribe el total de cielos evaluados primero",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+diff -ruN v129/take-off-metal-frame-drywall/SKILL.md v130/take-off-metal-frame-drywall/SKILL.md
+--- v129/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:09:21.765689901 +0000
++++ v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:09:21.773670148 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf129** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf130** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,9 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf130 (COORDINACIÓN 13-nov 01:02, bloqueaba la subida de CR):** el auditor de plausibilidad (U-138, auditar_compuerta) ignora los
++  conteos de subcategorías (entre paréntesis, 'vía …', 'de los cuales …'); solo vale el conteo principal del chequeo. CB_RCP_APILADOS
++  escribe primero el total ('52 cielos evaluados (0 vía ceilings_misc)' solo si hay ceilings_misc).
+ - **U-194 (conducta, usuario 12-nov):** no pedir permisos que el flujo necesita sí o sí; la regla de allow (gdrive_fetch.py / subir_entrega.py)
+   la agrega el usuario UNA vez (Claude no puede darse permisos a sí mismo); después no se vuelve a pedir.
+ - **v81cf129 (COORDINACIÓN 13-nov 00:10, CR):** BE-VS-13 (be_vs_13) asigna cada markup al id de wall MÁS LARGO que aparece en su texto
+Binary files v129/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v130/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v130/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v130/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v129/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v129/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v130/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v129/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 01:09:21.758976260 +0000
++++ v130/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 01:09:21.768551581 +0000
+@@ -4743,7 +4743,8 @@
+     if not cuarto:                                       # BE-AUD06 (GK rev3: '0 cuartos' con tags y DOBLE_CIELO lleno = pasaba en vacío)
+         return R("FAIL", f"en vacío (U-137 / BE-AUD06): {len(tg)} rcp_tags y {nd} renglones de DOBLE_CIELO.csv, pero 0 cuartos evaluados "
+                  "(ningún tag con rows 'ceilings[k]' / ref de ceilings_misc ni match a un cuarto del canon)")
+-    return R("FAIL", *ev[:20]) if ev else R("PASS", f"{len(cuarto)} cuartos con tags de RCP ({len(cm)} cielos vía ceilings_misc); {n2} con "
++    via = f" ({len(cm)} vía ceilings_misc)" if cm else ""        # v130 (CR): el TOTAL primero; '(0 … vía …)' no se escribe
++    return R("FAIL", *ev[:20]) if ev else R("PASS", f"{nce + len(cm)} cielos evaluados{via}; {len(cuarto)} cuartos con tags de RCP; {n2} con "
+                                             f"cielos apilados por tags + {n_dob_ok} de {len(dob)} 'double' de DOBLE_CIELO, cada cielo con su renglón")
+ 
+ 
+diff -ruN v129/take-off-metal-frame-drywall/tools/compuerta_entrega.py v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v129/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:09:21.762356120 +0000
++++ v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:09:21.772679774 +0000
+@@ -4935,6 +4935,17 @@
+             "types": tags, "hojas_detalle": det, "cielos": ncl}
+ 
+ 
++def es_subconteo(txt, i, j):
++    """v130 (COORDINACIÓN 13-nov 01:02, CR): el conteo txt[i:j] es de una SUBCATEGORÍA, no el conteo principal del chequeo: dentro de un
++    paréntesis, seguido de 'vía' / 'via' / 'from' / 'por', o precedido de 'de los cuales' / 'of which' / 'incl.' / 'including'."""
++    antes = txt[:i]
++    if antes.count("(") > antes.count(")"):
++        return True
++    if re.match(r"(?i)\s*(?:v[ií]a|from|por medio de)\b", txt[j:j + 12]):
++        return True
++    return bool(re.search(r"(?i)(?:de\s+los\s+cuales|de\s+las\s+cuales|of\s+which|incl\.?|including|entre\s+ellos)\W*$", antes[-30:]))
++
++
+ def auditar_compuerta(res, esp):
+     """U-138: marca PLAUSIBILIDAD por chequeo; un PASS / AMBER con un conteo 0 donde el proyecto sí los tiene (o 0-1
+     burbujas con >= 3 hojas de detalles) pasa a FAIL. Devuelve la lista de ids cambiados."""
+@@ -4950,6 +4961,8 @@
+                 if re.search(r"^\W*(?:\w+\W+){0,3}?(?:sin|without|missing|no |not |fuera|con error|mal|pendiente|faltan|de más|extra|"
+                              r"wrong|fail|rojo|red|duplicad)", cola) or re.search(r"(?:faltan|missing|sin|without|error)\W*$", cab):
+                     continue                                   # "0 walls sin imagen" = un cero bueno (conteo de faltantes)
++                if es_subconteo(str(ev), m_.start(), m_.end()):
++                    continue                                   # v130 (CR): '(0 cielos vía ceilings_misc)' es una subcategoría
+                 k, n = UNIDAD.get(u.lower()), int(n)
+                 if not k or not esp.get(k):
+                     continue
+diff -ruN v129/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v130/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v129/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 01:09:21.758924184 +0000
++++ v130/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 01:09:21.768499057 +0000
+@@ -755,6 +755,20 @@
+     print("test_v129_be_vs_13_id_largo OK")
+ 
+ 
++def test_v130_rcp_apilados_total():
++    """v130 (CR): el PASS de CB_RCP_APILADOS escribe primero el TOTAL de cielos evaluados y no escribe '(0 … vía ceilings_misc)'."""
++    can = {"ceilings": [{"room": "Z9 Bar 912", "area_sf": 30.0}, {"room": "Z9 Lobby 913", "area_sf": 40.0}],
++           "rcp_tags": [{"sheet": "X9.31", "tag": "GYP-9", "height": "9'-0\"", "rows": ["ceilings[0]"]},
++                        {"sheet": "X9.31", "tag": "GYP-8", "height": "9'-0\"", "rows": ["ceilings[1]"]}]}
++    e, ev = CB.rcp_apilados(B(canon=can))
++    assert e == "PASS" and ev[0].startswith("2 cielos evaluados;") and "vía" not in ev[0], (e, ev)
++    can["ceilings_misc"] = [{"ref": "CLG-Z9-914", "room": "Z9 914"}]
++    can["misc_items"] = [{"ref": "CLG-Z9-914", "qty": 10.0}]
++    e, ev = CB.rcp_apilados(B(canon=can))
++    assert e == "PASS" and ev[0].startswith("3 cielos evaluados (1 vía ceilings_misc);"), (e, ev)
++    print("test_v130_rcp_apilados_total OK")
++
++
+ def test_v96_sin_falsos_positivos_cr():
+     """v81cf96 (canon cerrado de CR City Hotel corrido con los chequeos nuevos): (1) BE-GK37 no aplica a track de soffit (SOF-) ni a un
+     track cuya fuente cita el texto impreso ('"J" RUNNER CHANNEL') o una hoja que lo dice; (2) U-178 (5): 'sloped ceiling' en la
+@@ -962,6 +976,7 @@
+     test_v121_excluded_y_brief()
+     test_v126_entregas_previas()
+     test_v129_be_vs_13_id_largo()
++    test_v130_rcp_apilados_total()
+     test_be_06_soffit_sides()
+     test_callouts_extra()
+     print("ok callouts")
+diff -ruN v129/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v129/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:09:21.759134626 +0000
++++ v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:09:21.768719043 +0000
+@@ -3248,3 +3248,24 @@
+ 
+ 
+ test_be_gk56()
++
++
++def test_v130_plausibilidad_subconteo():
++    """v130 (COORDINACIÓN 13-nov 01:02, bloqueaba la subida de CR): el auditor de plausibilidad no toma el '0' de una subcategoría
++    ('(0 cielos vía ceilings_misc)', 'de los cuales 0 cielos', '0 cielos vía misc'); un '0 cielos evaluados' real sigue = FAIL."""
++    esp = {"cielos": 52, "walls": 10}
++    def est(txt):
++        r = [{"id": "CB_RCP_APILADOS", "estado": "PASS", "evidencia": [txt]}]
++        CE.auditar_compuerta(r, esp)
++        return r[0]["estado"]
++    assert est("7 cuartos con tags de RCP (0 cielos vía ceilings_misc); 2 con cielos apilados por tags + 5 de 5 'double'") == "PASS"
++    assert est("52 cielos evaluados (0 vía ceilings_misc); 7 cuartos con tags de RCP") == "PASS"
++    assert est("52 cielos evaluados, de los cuales 0 cielos rated") == "PASS"
++    assert est("0 cielos vía misc; 52 cielos evaluados") == "PASS"
++    assert est("0 cielos evaluados; 7 cuartos con tags de RCP") == "FAIL"           # conteo principal en 0 = FAIL
++    assert est("0 walls revisados") == "FAIL"
++    assert CE.es_subconteo("a (b 0 cielos)", 5, 13) and not CE.es_subconteo("0 cielos evaluados", 0, 8)
++    print("test_v130_plausibilidad_subconteo OK")
++
++
++test_v130_plausibilidad_subconteo()
