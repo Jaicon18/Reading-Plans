@@ -60,3 +60,17 @@ La primera pasada casi no filtraba nada en CR (CR rev20c: 555 → 520). Causas:
 Medido sobre el CR rev20b (no cubiertos, v137 → v138): A2.01 91 → 25 · A2.03 12 → 0 · A2.04 15 → 12 · A6.00 154 → 55 · A6.01 74 → 43 · A6.02 63 → 42 · A7.30 18 → 15 · A7.45 33 → 16 · A7.50 12 → 7 · TOTAL 478 → 220 (−54 %).
 XF: el caso real (jamba de la puerta 103) sigue saliendo y el falso del mop sink ya no sale.
 PENDIENTE: CR confirma sobre rev20c que los 15 FALTA siguen saliendo. Riesgo: un furring real pegado a un CMU con cross-hatch.
+
+## CE_COBERTURA_DIAG, tercera pasada (CR rev20c: con la segunda pasada se caían 3 FALTA reales)
+
+CR midió la segunda pasada sobre rev20c: 555 → 248, pero se caían 3 de sus 15 FALTA reales. Los tres son furrings pegados a un CMU con cross-hatch:
+- A6.00 (1683.1, 297.4);
+- A6.02 (1036.9, 1024.0);
+- A7.50 (1556.4, 907.2).
+
+Ahora el hatch (paralelo o cross) tiene que estar a los DOS lados del par, o entre sus dos líneas. Un furring pegado al CMU lo tiene de un solo lado y sigue saliendo.
+Sobre el CR rev20b, los 4 furrings contra CMU que CR dio como FALTA siguen saliendo. A6.00 sale a 0.66 ft de la coordenada de CR: el dedupe se queda con otro par del mismo extremo de muro, también no cubierto.
+Total no cubiertos en rev20b: 478 → 302 (−37 %; la segunda pasada daba 220, pero perdía FALTA).
+XF: sigue saliendo el caso real de la puerta 103 y ya no el mop sink.
+Test: test_v138_cob_diag_familias_cr agrega el furring contra CMU, que tiene que seguir saliendo.
+PENDIENTE: medición de CR sobre rev20c (15 / 15 FALTA).

@@ -1,6 +1,6 @@
 diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 07:12:20.736025449 +0000
-+++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 09:06:13.013591508 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 09:29:26.060769571 +0000
 @@ -8173,7 +8173,12 @@
      "take-off:tools/chequeos_biblioteca.py::_cant_ref",
      "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
@@ -95,7 +95,7 @@ diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal
 \ No newline at end of file
 diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
 --- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 07:12:20.733138648 +0000
-+++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 09:06:13.021008891 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 09:29:26.065721041 +0000
 @@ -11,7 +11,7 @@
  principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
  como arreglo local de un proyecto ni en una rama aparte.
@@ -120,7 +120,7 @@ Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
 diff -ruN vA/take-off-metal-frame-drywall/runner/completitud.py vB/take-off-metal-frame-drywall/runner/completitud.py
 --- vA/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 07:12:20.736260268 +0000
-+++ vB/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 09:06:13.014004925 +0000
++++ vB/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 09:29:26.061025216 +0000
 @@ -229,10 +229,19 @@
              if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
      out = []
@@ -185,7 +185,7 @@ Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 07:12:20.744233013 +0000
-+++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 09:06:13.015122502 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 09:29:26.061605224 +0000
 @@ -89,6 +89,25 @@
      return m.group(1).lower() if m and re.match(r"(?i)(?:entrega|final_for_review)", nombre or "") else None
  
@@ -488,7 +488,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-o
          rx = re.compile(rf"(?<![\w.]){re.escape(c)}(?![\w])")
 diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 07:12:20.740612398 +0000
-+++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 09:06:13.019745773 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 09:29:26.065032238 +0000
 @@ -161,6 +161,37 @@
      return None
  
@@ -537,7 +537,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          self.planos = os.path.join(e, "Planos marcados")
          self.readme = os.path.join(e, "README_REVIEW.md")
          self.para = os.path.join(e, "PARA_REVISAR_EN_LA_MANANA.md")
-@@ -1097,16 +1127,67 @@
+@@ -1097,16 +1127,81 @@
      return ok or None
  
  
@@ -571,21 +571,35 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
 +
 +
 +def _cob_en_hatch(f, todas, esc, radio_ft=1.0, minimo=18, largo_max_ft=1.5, cruz_min=4):
-+    """v138 (CR familias 4 / 10): el par está dentro de un hatch: (a) >= `minimo` líneas CORTAS (< largo_max_ft) paralelas a <= radio_ft
-+    del centro (brick paving, piso de madera; junto a un muro real hay menos: XF, jamba de puerta = 13), o (b) cross-hatch de CMU: >=
-+    `cruz_min` líneas cortas en CADA diagonal (45 y 135 grados)."""
++    """v138 (CR familias 4 / 10): el par está DENTRO de un hatch (brick paving, piso de madera, CMU cross-hatch): hay líneas CORTAS
++    (< largo_max_ft) del hatch a los DOS lados del par (o entre sus dos líneas), a <= radio_ft del centro. Un muro real pegado al hatch
++    (furring contra CMU: CR rev20c, 3 FALTA reales) lo tiene de UN solo lado y sigue saliendo. (a) hatch paralelo: >= `minimo` líneas de
++    la misma dirección, con >= 2 a cada lado; (b) cross-hatch: >= `cruz_min` líneas en CADA diagonal (45 / 135 grados) dentro de
++    la banda del par, o a los dos lados."""
 +    x, y, rad = f["x"], f["y"], radio_ft * esc
-+    angs = {}
++    ang = f.get("ang")
++    ux, uy = (math.cos(math.radians(ang)), math.sin(math.radians(ang))) if ang is not None else (1.0, 0.0)
++    semi = (f.get("d") or 0) / 2 + 0.5
++    cnt = {}                                            # (dirección, lado) -> n; lado: -1 / 0 (dentro de la banda) / +1
 +    for s_ in todas:
-+        if math.hypot(s_[2] - s_[0], s_[3] - s_[1]) >= largo_max_ft * esc or _dist_seg(x, y, s_) > rad:
++        L = math.hypot(s_[2] - s_[0], s_[3] - s_[1])
++        if L == 0 or L >= largo_max_ft * esc or _dist_seg(x, y, s_) > rad:
 +            continue
 +        a = round(math.degrees(math.atan2(s_[3] - s_[1], s_[2] - s_[0])) % 180 / 3) * 3 % 180
-+        angs[a] = angs.get(a, 0) + 1
-+    if any(n >= minimo for n in angs.values()):
-+        return True
-+    d45 = sum(n for a, n in angs.items() if 39 <= a <= 51)
-+    d135 = sum(n for a, n in angs.items() if 129 <= a <= 141)
-+    return d45 >= cruz_min and d135 >= cruz_min
++        off = -((s_[0] + s_[2]) / 2 - x) * uy + ((s_[1] + s_[3]) / 2 - y) * ux
++        lado = 0 if abs(off) <= semi else (1 if off > 0 else -1)
++        cnt[(a, lado)] = cnt.get((a, lado), 0) + 1
++    if ang is None:                                     # sin geometría del par: no se filtra
++        return False
++    for a in {k[0] for k in cnt}:
++        n = {l: cnt.get((a, l), 0) for l in (-1, 0, 1)}
++        if sum(n.values()) >= minimo and n[-1] >= 2 and n[1] >= 2:
++            return True
++    def diag(lo, hi, lado):
++        return sum(v for (a, l), v in cnt.items() if lo <= a <= hi and l == lado)
++    dentro = diag(39, 51, 0) >= cruz_min and diag(129, 141, 0) >= cruz_min
++    dos_lados = all(diag(lo, hi, l) >= 2 for lo, hi in ((39, 51), (129, 141)) for l in (-1, 1))
++    return dentro or dos_lados
 +
  def cob_diag_cortos(page, esc, segs, region=None, estilos=None):
      """U-199 (5b): muros que el mapa de cobertura H / V no ve: (a) DIAGONALES: par de líneas paralelas no horizontales ni verticales
@@ -606,12 +620,12 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          for it in dr["items"]:
              if it[0] == "l" and math.hypot(it[2].x - it[1].x, it[2].y - it[1].y) >= 1.0 * esc:
                  largas.append((it[1].x, it[1].y, it[2].x, it[2].y))
-@@ -1148,9 +1229,12 @@
+@@ -1148,9 +1243,12 @@
              tol = COB_TOL_FT * esc + d / 2
              cub = any(_dist_seg(cx, cy, s) <= tol for s in segs or [])
              out.append({"tipo": "muro_diag" if p[6] else "muro_corto", "x": round(cx, 1), "y": round(cy, 1),
 -                        "largo_ft": round(ov / esc, 2), "cubierto": cub})
-+                        "largo_ft": round(ov / esc, 2), "cubierto": cub, "ang": round(p[4], 1)})
++                        "largo_ft": round(ov / esc, 2), "cubierto": cub, "ang": round(p[4], 1), "d": round(d, 2)})
      txt = _cob_cajas_texto(page, 0.25 * esc)
      out = [f for f in out if not any(r[0] <= f["x"] <= r[2] and r[1] <= f["y"] <= r[3] for r in txt)]   # dentro de un texto / tag
 +    palabras = _cob_cajas_texto(page, 0.0)
@@ -620,7 +634,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
      ded = []                                            # un tramo por posición (líneas dobles / repetidas del mismo muro)
      for f in sorted(out, key=lambda f: (not f["cubierto"], -f["largo_ft"])):
          if not any(g["tipo"] == f["tipo"] and math.hypot(g["x"] - f["x"], g["y"] - f["y"]) <= 0.75 * esc for g in ded):
-@@ -1939,6 +2023,12 @@
+@@ -1939,6 +2037,12 @@
      if not ev:
          return "PASS", []
      ini, problema = inicio_rev_info(w, entrega)
@@ -633,7 +647,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
      if problema:
          return "FAIL", [f"la fecha de arranque de la rev no es confiable ({problema}): los requisitos de proceso de v81cf119 aplican = "
                          "FAIL (v121)"] + ev
-@@ -1946,11 +2036,62 @@
+@@ -1946,11 +2050,62 @@
          return "FAIL", ["la rev no se puede fechar (sin marcas en tiempos.log ni commits de su carpeta): los requisitos de proceso de "
                          "v81cf119 aplican = FAIL"] + ev
      if ini < datetime.datetime.fromisoformat(FECHA_V119):
@@ -698,7 +712,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def _tiempos_log(w):
      return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
  
-@@ -1995,6 +2136,38 @@
+@@ -1995,6 +2150,38 @@
  
  
  
@@ -737,7 +751,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def pasos_cerrados_tiempos(tiempos_txt):
      """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila con hora de fin), con EL MISMO parser de CE_TIEMPOS. -> ['1', '2-3', '4a', …]"""
      return [f["paso"] for f in filas_tiempos(tiempos_txt) if f["fin"] and any(1 <= n <= 9 for n in f["nums"])]
-@@ -2025,13 +2198,35 @@
+@@ -2025,13 +2212,35 @@
      return ev
  
  
@@ -774,7 +788,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
      ev = []
      if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
          if not p:
-@@ -2060,11 +2255,12 @@
+@@ -2060,11 +2269,12 @@
      t0, b = ms[0][0], presupuesto_min(na)
      al = _json(os.path.join(w, "ALERTA_PRESUPUESTO.json")) or {}
      hist = al.get("historial") or ([al] if al.get("umbral") else [])
@@ -788,7 +802,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          ok = [h for h in hist if int(h.get("umbral") or 0) >= u and h.get("log_ts")
                and cruce <= datetime.datetime.fromisoformat(h["log_ts"]) <= (limite or datetime.datetime.max)]
          if not ok:
-@@ -4396,6 +4592,17 @@
+@@ -4396,6 +4606,17 @@
              and "NO USAR" not in os.path.basename(p) and "COBERTURA" not in os.path.basename(p).upper()]
  
  
@@ -806,7 +820,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def subject_sin_medida_fallas(pdf, xlsx=None, tipos=None):
      """BE-XF07 (Xfinity Interquest rev1, COORDINACIÓN 10-nov): todo markup cuyo Subject es un type del Partition Takeoff o DEMO
      lleva /Measure y cae en una página con /VP; si no, Bluebeam lo suma al grupo del type en la Markups List / CSV (W2 3 en vez
-@@ -4815,11 +5022,19 @@
+@@ -4815,11 +5036,19 @@
  TOOLS_ETAPA_0_1 = {"arranque.py", "inventario_tags.py", "palabras_fitz.py", "escala_pagina.py", "quitar_firmas_labels.py"}
  
  
@@ -828,7 +842,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
      while True:
          t2 = re.sub(r"^(?:subagente|subagent|agente|agent)", "", t)
          if t2 == t or not t2:
-@@ -4828,25 +5043,68 @@
+@@ -4828,25 +5057,68 @@
  
  
  def corridas_con_agente(w):
@@ -843,10 +857,9 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          if norm_agente(r.get("agente")):
 -            out.append((tool, str(r.get("ts") or "")))
 +            out.append((tool, str(r.get("ts") or ""), r))
-     return out
- 
- 
--def sin_agente_reemplazadas(sin, con):
++    return out
++
++
 +def corridas_sin_agente_filas(w):
 +    """v138 (verificación 6, V7): {'<tool> <ts>': renglón} de las corridas de las etapas 2-7 SIN agente (las mismas claves que
 +    subagentes_bitacora pone en su lista 'sin')."""
@@ -857,9 +870,10 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
 +            continue
 +        if not norm_agente(r.get("agente")):
 +            out[f"{tool} {r.get('ts', '')}"] = r
-+    return out
-+
-+
+     return out
+ 
+ 
+-def sin_agente_reemplazadas(sin, con):
 +RX_ARG_TRIVIAL = re.compile(r"(?i)^(?:-h|--help|-help|help|--version|-V|--dry-run|--selftest|--self-test|--list|--usage)$")
 +
 +
@@ -902,7 +916,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          (rep if ok else no).append(x)
      return rep, no
  
-@@ -7909,6 +8167,16 @@
+@@ -7909,6 +8181,16 @@
      return ev
  
  
@@ -919,7 +933,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def be_gk54_fallas(canon, cob_rows, esc=9.0, gap_in=14.0, to_canon=None, escalas=None):
      """BE-GK54 (Grand Kia rev3a, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54; ampliado en v120): dos bandas paralelas con gap
      (o con dos tags) son DOS walls. Una exclusión que dice que es el MISMO muro que <X> (gk54_mismo_muro) sin una prueba del gap válida
-@@ -7957,17 +8225,23 @@
+@@ -7957,17 +8239,23 @@
              except (KeyError, TypeError, ValueError):
                  continue
              along, cross = (rx, ry) if b["ori"] == "H" else (ry, rx)
@@ -946,7 +960,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
              if not (0.5 < abs(cross - c_mid) <= tol and a1 >= lo - e_h and a0 <= hi + e_h) or (wid, hid) in vistos:
                  continue
              vistos.add((wid, hid))
-@@ -7979,16 +8253,27 @@
+@@ -7979,16 +8267,27 @@
                  continue
              gp = lambda x: ("gap: " + str(x.get("gap_proof"))) if str(x.get("gap_proof") or "").strip() else ""   # noqa: E731  v125
  
@@ -978,7 +992,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
              mm = es_mismo_muro(dtx, walls) if dtx.strip() else any(es_mismo_muro(str(x.get("reason") or ""), walls) for x in ligadas)
              motivo = ("is counted as the SAME wall without a gap_proof (N/SHEET + gap measured 0)" if mm else
                        "is disposed / excluded without proof: same wall = gap_proof with gap measured 0 + N/SHEET; another printed "
-@@ -8165,7 +8450,7 @@
+@@ -8165,7 +8464,7 @@
          ev.append("la bitácora no tiene corridas de canon.py con su agente (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py "
                    "run): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
      viejas, nuevas = corridas_sin_agente_por_fecha(sin_agente)
@@ -989,7 +1003,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          amber.append(f"causa: cadena interrumpida y reemplazada: {len(reemp)} corrida(s) sin agente ({', '.join(reemp[:4])}) se volvieron "
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 07:12:20.744133087 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 09:06:13.014934526 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 09:29:26.061546686 +0000
 @@ -638,13 +638,15 @@
      e, ev = fn(B(canon=can, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 8 | soffit 30/X9.20 (missing) for the ceiling band | n/a |"}))
      assert e == "FAIL", (e, ev)                                          # v121: con palabra de cielo ya no se salta
@@ -1034,7 +1048,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/t
      for ln in ("X9.01 GYP-9 8'-11\" missing in corridor 901 along wall X9-901-01 | OPEN",
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 07:12:20.755841900 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 09:06:13.014631642 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 09:29:26.061411554 +0000
 @@ -14,6 +14,7 @@
  import shutil
  import subprocess
@@ -1122,7 +1136,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      est, msg = CE.proceso_v119(w, None, tt, 5)
      assert est == "AMBER" and "causa:" in msg[0], (est, msg)          # 19:49 UTC < FECHA_V119 (21:21:52Z)
      w2 = os.path.join(tempfile.mkdtemp(prefix="v127b_"), "entrega")
-@@ -3788,3 +3805,344 @@
+@@ -3788,3 +3805,352 @@
  
  
  test_u199_cierre_path_esquema_cr()
@@ -1437,7 +1451,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
 +        sh.draw_line((x0 + dx, y0 + dy), (x1 + dx, y1 + dy))
 +        sh.finish(color=(0, 0, 0), width=0.7, dashes=dashes)
 +        sh.commit()
-+    par(100, 400, 1500, 400, 0, 9)                                  # muro largo H
++    par(100, 400, 1580, 400, 0, 9)                                  # muro largo H
 +    par(300, 409, 300, 409 + 1.5 * esc, 9, 0)                      # stub real (debe salir)
 +    par(600, 409, 600, 409 + 1.5 * esc, 9, 0)                      # (1) divisor de tag: palabras a los dos lados
 +    pg.insert_text((582, 425), "Z9.1", fontsize=9)
@@ -1456,10 +1470,18 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
 +        sh.draw_line((1400 + k * 4, 412), (1390 + k * 4, 422))
 +    sh.finish(color=(0.1, 0.1, 0.1), width=0.24)
 +    sh.commit()
++    par(1500, 409, 1500, 409 + 1.5 * esc, 9, 0)                    # furring real pegado a un CMU: el hatch queda de UN solo lado
++    sh = pg.new_shape()
++    for k in range(6):
++        sh.draw_line((1512 + k * 4, 412), (1522 + k * 4, 422))
++        sh.draw_line((1522 + k * 4, 412), (1512 + k * 4, 422))
++    sh.finish(color=(0.1, 0.1, 0.1), width=0.24)
++    sh.commit()
 +    f = CE.cob_diag_cortos(pg, esc, [])
 +    xs = sorted(round(x["x"]) for x in f if x["tipo"] == "muro_corto")
 +    assert any(abs(x - 304) <= 6 for x in xs), f                   # el stub real sigue
 +    assert not any(abs(x - 1404) <= 6 for x in xs), f              # cross-hatch de CMU
++    assert any(abs(x - 1504) <= 6 for x in xs), f                  # el furring contra el CMU sigue (CR rev20c: 3 FALTA reales)
 +    assert not any(abs(x - 604) <= 6 for x in xs), f               # tag
 +    assert not any(abs(x - 904) <= 6 for x in xs), f               # discontinuo
 +    assert not any(abs(x - 1204) <= 6 for x in xs), f              # hatch
