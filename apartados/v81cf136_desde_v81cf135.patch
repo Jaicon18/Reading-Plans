@@ -1,0 +1,181 @@
+diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:12:28.808147865 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:12:28.815393924 +0000
+@@ -8823,7 +8823,8 @@
+     "take-off:tools/compuerta_entrega.py::rated_fallas",
+     "take-off:tools/compuerta_entrega.py::reverificacion_excluded_fallas",
+     "take-off:tools/compuerta_entrega.py::ce_cobertura_diag",
+-    "take-off:tools/compuerta_entrega.py::cob_diag_cortos"
++    "take-off:tools/compuerta_entrega.py::cob_diag_cortos",
++    "take-off:tools/compuerta_entrega.py::_cubridores"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
+--- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:12:28.813697129 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:12:28.819751046 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf135** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf136** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -387,6 +387,8 @@
+   EXCLUDED (motivo de interior sobre wall exterior: la cara exterior sigue en alcance). (5b) CE_COBERTURA_DIAG: muros diagonales y cortos
+   (< 2 ft) en el mapa de cobertura (Auditoria/COBERTURA_DISPOSICION.csv tipo muro_diag / muro_corto). Todos leen muros_canon (BE-XF16).
+   Hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL; entregas anteriores a v81cf135: AMBER.
++  v81cf136 (COORDINACIÓN 06:06): (1) cierre por cuarto acepta muros SIN band (esquema CR): 'path' / 'paths' ± medio espesor
++  (thickness_in del canon o 6 in; escala de constants.plan_scale_by_sheet); band manda cuando existe (test_u199_cierre_path_esquema_cr).
+ - **U-198 (usuario 13-nov: "tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa"; v81cf134):** todo
+   ALTERNATE (U-195) lleva su razón para el cliente, en inglés: canon add_alternates[].razon (qué se ve en los planos con su N/HOJA y qué
+   falta) -> plantilla_excel.razon_alternate = 'REASON: <razon>; excluded from the base bid and priced as an add alternate until
+diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:12:28.811583541 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:12:28.819095567 +0000
+@@ -773,19 +773,68 @@
+     return ev, n
+ 
+ 
++def _esc_hoja(canon, hoja):
++    """pt / ft de la hoja: constants.plan_scale_by_sheet[hoja] o plan_scale_pt_per_ft del canon (None si no lo dice)."""
++    k = (canon or {}).get("constants") or {}
++    for key, v in (k.get("plan_scale_by_sheet") or {}).items():
++        if str(hoja) in [x.strip() for x in str(key).split("/")]:
++            try:
++                return float((v or {}).get("value") if isinstance(v, dict) else v)
++            except (TypeError, ValueError):
++                pass
++    v = k.get("plan_scale_pt_per_ft")
++    try:
++        return float(v.get("value") if isinstance(v, dict) else v) if v else None
++    except (TypeError, ValueError):
++        return None
++
++
++def _espesor_in(w):
++    """espesor del muro en pulgadas: thickness_in / thickness del canon; si no, 6 in (supuesto conservador del control, no del take-off)."""
++    for k in ("thickness_in", "thickness", "wall_thickness_in"):
++        try:
++            if w.get(k) not in (None, ""):
++                return float(re.sub(r"[^\d.]", "", str(w.get(k))) or 0) or 6.0
++        except ValueError:
++            pass
++    return 6.0
++
++
++def _cubridores(canon, muros, hoja, tol_pt):
++    """lo que cubre un punto del perímetro en la hoja: band H / V (si existe) o path / paths del muro ± medio espesor (esquema CR, v136)."""
++    esc = _esc_hoja(canon, hoja) or 9.0
++    out = []
++    for w in muros:
++        b = w.get("band") or {}
++        if b.get("ori") in ("H", "V"):
++            if str(b.get("sheet") or w.get("sheet")) == str(hoja):
++                out.append(("band", b))
++            continue
++        if str(w.get("sheet")) != str(hoja):
++            continue
++        rad = _espesor_in(w) / 24.0 * esc + tol_pt
++        for p in (w.get("paths") or ([w["path"]] if w.get("path") else [])):
++            out += [("seg", (a[0], a[1], c[0], c[1]), rad) for a, c in zip(p, p[1:])]
++    return out
++
++
+ def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
+     """U-199 (1) CIERRE POR CUARTO: el perímetro de cada cuarto (canon.u199.rooms [{room, sheet, polygon [[x, y], ...]}] en pt de la
+-    planta) está cubierto por la band de un muro CONTADO con una cara de ese cuarto (o exterior), por un muro EXCLUDED con band, o por un
+-    vano (canon.u199.rooms[].openings [[x0, y0, x1, y1]]); un tramo sin cubrir > ~1 ft = cara faltante = FAIL. -> (fallas, n)"""
+-    walls = [w for w in muros_canon(canon or {}) if isinstance(w, dict) and (w.get("band") or {}).get("ori") in ("H", "V")]
+-    excl = [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict) and (e.get("band") or {}).get("ori") in ("H", "V")]
++    planta) está cubierto por un muro CONTADO con una cara de ese cuarto (o exterior), por un muro EXCLUDED, o por un vano
++    (canon.u199.rooms[].openings [[x0, y0, x1, y1]]); un tramo sin cubrir > ~1 ft = cara faltante = FAIL. Un muro cubre con su 'band'
++    si la tiene, o con su 'path' / 'paths' ± medio espesor (v136, COORDINACIÓN 06:06: los muros de CR no traen band). -> (fallas, n)"""
++    todos = [w for w in muros_canon(canon or {}) if isinstance(w, dict)]
++    excl = [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict)]
+     ev, n = [], 0
+ 
+-    def cubre(b, x, y):
++    def cubre_band(b, x, y):
+         c0, c1 = sorted((float(b["c0"]), float(b["c1"])))
+         lo, hi = sorted((float(b["lo"]), float(b["hi"])))
+         along, cross = (x, y) if b["ori"] == "H" else (y, x)
+         return c0 - tol_pt <= cross <= c1 + tol_pt and lo - tol_pt <= along <= hi + tol_pt
++
++    def cubre(cb, x, y):
++        return cubre_band(cb[1], x, y) if cb[0] == "band" else _dist_seg(x, y, cb[1]) <= cb[2]
+     for r in _u199(canon).get("rooms") or []:
+         poly = r.get("polygon") or []
+         if len(poly) < 3:
+@@ -793,10 +842,10 @@
+         n += 1
+         nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(r.get("room") or ""))}
+         nombre = norm_txt(re.sub(r"\d+", "", str(r.get("room") or ""))).strip()
+-        mios = [w["band"] for w in walls if w["band"].get("sheet") == r.get("sheet") and (
+-            (_cuartos_de(w) & nums) or w.get("exterior") or
+-            (nombre and any(nombre in norm_txt(f.get("room") or "") for f in _caras(w))))]
+-        mios += [e["band"] for e in excl if e["band"].get("sheet") == r.get("sheet")]
++        mios_w = [w for w in todos if (_cuartos_de(w) & nums) or w.get("exterior") or
++                  (nombre and any(nombre in norm_txt(f.get("room") or "") for f in _caras(w))) or
++                  (nombre and nombre in norm_txt(str(w.get("location") or "")))]
++        mios = _cubridores(canon, mios_w + excl, r.get("sheet"), tol_pt)
+         vanos = r.get("openings") or []
+         hueco, peor = 0.0, (0.0, None)
+         pts = list(poly) + [poly[0]]
+@@ -805,7 +854,7 @@
+             k = max(1, int(L // paso_pt))
+             for i in range(k + 1):
+                 x, y = xa + (xb - xa) * i / k, ya + (yb - ya) * i / k
+-                ok = any(cubre(b, x, y) for b in mios) or any(
++                ok = any(cubre(cb, x, y) for cb in mios) or any(
+                     min(v[0], v[2]) - tol_pt <= x <= max(v[0], v[2]) + tol_pt and min(v[1], v[3]) - tol_pt <= y <= max(v[1], v[3]) + tol_pt for v in vanos)
+                 hueco = 0.0 if ok else hueco + L / k
+                 if hueco > peor[0]:
+@@ -1699,7 +1748,7 @@
+                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+                       "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+-                      "v81cf135": "2026-11-13T06:08:00+00:00"}   # v133: dfcf5e7 · v134: 59947ce · v135: commit de publicación (hora fijada justo antes del commit)
++                      "v81cf135": "2026-11-13T06:08:00+00:00", "v81cf136": "2026-11-13T06:15:00+00:00"}   # v133: dfcf5e7 · v134: 59947ce · v135: 3f73cbd (06:07:55) · v136: hora fijada justo antes del commit
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:12:28.811489367 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:12:28.818983445 +0000
+@@ -3758,3 +3758,33 @@
+ 
+ 
+ test_u199_rated_opcion_b_replica_rfi()
++
++
++def test_u199_cierre_path_esquema_cr():
++    """v136 (COORDINACIÓN 06:06): (1) cierre por cuarto con muros SIN band, esquema CR (existing_walls con 'sheet' + 'path' y el cuarto en
++    'location'): el path cubre ± medio espesor (espesor por omisión si el canon no lo trae; escala de constants.plan_scale_by_sheet). Cuarto
++    cerrado = PASS; MUTACIÓN: quitar UNA cara = FAIL (cada una); 'band' sigue mandando cuando existe."""
++    def w(i, a, b):
++        return {"id": i, "type_id": "Z9-0", "sheet": "Z9.02", "faces": 2, "location": f"L9 | faces: 905 GUEST; corridor 916", "path": [a, b]}
++    muros = [w("Z9-N", [100.0, 100.0], [300.0, 100.0]), w("Z9-S", [100.0, 200.0], [300.0, 200.0]),
++             w("Z9-O", [100.0, 100.0], [100.0, 200.0]), w("Z9-E", [300.0, 100.0], [300.0, 200.0])]
++    # el polígono del cuarto va por la cara interior: medio espesor adentro del eje
++    poly = [[102.25, 102.25], [297.75, 102.25], [297.75, 197.75], [102.25, 197.75]]
++    can = {"walls": [], "existing_walls": muros, "constants": {"plan_scale_by_sheet": {"Z9.02": {"value": 9.0, "source": "x"}}},
++           "u199": {"rooms": [{"room": "GUEST 905", "sheet": "Z9.02", "polygon": poly}]}}
++    assert CE.cierre_cuartos_fallas(can) == ([], 1), CE.cierre_cuartos_fallas(can)
++    for k in range(4):
++        m = json.loads(json.dumps(can))
++        del m["existing_walls"][k]
++        fs, n = CE.cierre_cuartos_fallas(m)
++        assert n == 1 and len(fs) == 1 and "GUEST 905" in fs[0], (k, fs)
++    m = json.loads(json.dumps(can))                      # band manda cuando existe: una band corrida deja la cara abierta
++    m["existing_walls"][3]["band"] = {"sheet": "Z9.02", "ori": "V", "c0": 397, "c1": 403, "lo": 100, "hi": 200}
++    assert CE.cierre_cuartos_fallas(m)[0]
++    m = json.loads(json.dumps(can))                      # muro lejos del cuarto (otro piso / otra hoja) no cierra
++    m["existing_walls"][3]["sheet"] = "Z9.03"
++    assert CE.cierre_cuartos_fallas(m)[0]
++    print("test_u199_cierre_path_esquema_cr OK")
++
++
++test_u199_cierre_path_esquema_cr()

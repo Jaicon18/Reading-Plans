@@ -3758,3 +3758,33 @@ def test_u199_rated_opcion_b_replica_rfi():
 
 
 test_u199_rated_opcion_b_replica_rfi()
+
+
+def test_u199_cierre_path_esquema_cr():
+    """v136 (COORDINACIÓN 06:06): (1) cierre por cuarto con muros SIN band, esquema CR (existing_walls con 'sheet' + 'path' y el cuarto en
+    'location'): el path cubre ± medio espesor (espesor por omisión si el canon no lo trae; escala de constants.plan_scale_by_sheet). Cuarto
+    cerrado = PASS; MUTACIÓN: quitar UNA cara = FAIL (cada una); 'band' sigue mandando cuando existe."""
+    def w(i, a, b):
+        return {"id": i, "type_id": "Z9-0", "sheet": "Z9.02", "faces": 2, "location": f"L9 | faces: 905 GUEST; corridor 916", "path": [a, b]}
+    muros = [w("Z9-N", [100.0, 100.0], [300.0, 100.0]), w("Z9-S", [100.0, 200.0], [300.0, 200.0]),
+             w("Z9-O", [100.0, 100.0], [100.0, 200.0]), w("Z9-E", [300.0, 100.0], [300.0, 200.0])]
+    # el polígono del cuarto va por la cara interior: medio espesor adentro del eje
+    poly = [[102.25, 102.25], [297.75, 102.25], [297.75, 197.75], [102.25, 197.75]]
+    can = {"walls": [], "existing_walls": muros, "constants": {"plan_scale_by_sheet": {"Z9.02": {"value": 9.0, "source": "x"}}},
+           "u199": {"rooms": [{"room": "GUEST 905", "sheet": "Z9.02", "polygon": poly}]}}
+    assert CE.cierre_cuartos_fallas(can) == ([], 1), CE.cierre_cuartos_fallas(can)
+    for k in range(4):
+        m = json.loads(json.dumps(can))
+        del m["existing_walls"][k]
+        fs, n = CE.cierre_cuartos_fallas(m)
+        assert n == 1 and len(fs) == 1 and "GUEST 905" in fs[0], (k, fs)
+    m = json.loads(json.dumps(can))                      # band manda cuando existe: una band corrida deja la cara abierta
+    m["existing_walls"][3]["band"] = {"sheet": "Z9.02", "ori": "V", "c0": 397, "c1": 403, "lo": 100, "hi": 200}
+    assert CE.cierre_cuartos_fallas(m)[0]
+    m = json.loads(json.dumps(can))                      # muro lejos del cuarto (otro piso / otra hoja) no cierra
+    m["existing_walls"][3]["sheet"] = "Z9.03"
+    assert CE.cierre_cuartos_fallas(m)[0]
+    print("test_u199_cierre_path_esquema_cr OK")
+
+
+test_u199_cierre_path_esquema_cr()

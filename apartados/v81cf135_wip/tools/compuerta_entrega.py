@@ -773,19 +773,68 @@ def rated_fallas(canon):
     return ev, n
 
 
+def _esc_hoja(canon, hoja):
+    """pt / ft de la hoja: constants.plan_scale_by_sheet[hoja] o plan_scale_pt_per_ft del canon (None si no lo dice)."""
+    k = (canon or {}).get("constants") or {}
+    for key, v in (k.get("plan_scale_by_sheet") or {}).items():
+        if str(hoja) in [x.strip() for x in str(key).split("/")]:
+            try:
+                return float((v or {}).get("value") if isinstance(v, dict) else v)
+            except (TypeError, ValueError):
+                pass
+    v = k.get("plan_scale_pt_per_ft")
+    try:
+        return float(v.get("value") if isinstance(v, dict) else v) if v else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _espesor_in(w):
+    """espesor del muro en pulgadas: thickness_in / thickness del canon; si no, 6 in (supuesto conservador del control, no del take-off)."""
+    for k in ("thickness_in", "thickness", "wall_thickness_in"):
+        try:
+            if w.get(k) not in (None, ""):
+                return float(re.sub(r"[^\d.]", "", str(w.get(k))) or 0) or 6.0
+        except ValueError:
+            pass
+    return 6.0
+
+
+def _cubridores(canon, muros, hoja, tol_pt):
+    """lo que cubre un punto del perímetro en la hoja: band H / V (si existe) o path / paths del muro ± medio espesor (esquema CR, v136)."""
+    esc = _esc_hoja(canon, hoja) or 9.0
+    out = []
+    for w in muros:
+        b = w.get("band") or {}
+        if b.get("ori") in ("H", "V"):
+            if str(b.get("sheet") or w.get("sheet")) == str(hoja):
+                out.append(("band", b))
+            continue
+        if str(w.get("sheet")) != str(hoja):
+            continue
+        rad = _espesor_in(w) / 24.0 * esc + tol_pt
+        for p in (w.get("paths") or ([w["path"]] if w.get("path") else [])):
+            out += [("seg", (a[0], a[1], c[0], c[1]), rad) for a, c in zip(p, p[1:])]
+    return out
+
+
 def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
     """U-199 (1) CIERRE POR CUARTO: el perímetro de cada cuarto (canon.u199.rooms [{room, sheet, polygon [[x, y], ...]}] en pt de la
-    planta) está cubierto por la band de un muro CONTADO con una cara de ese cuarto (o exterior), por un muro EXCLUDED con band, o por un
-    vano (canon.u199.rooms[].openings [[x0, y0, x1, y1]]); un tramo sin cubrir > ~1 ft = cara faltante = FAIL. -> (fallas, n)"""
-    walls = [w for w in muros_canon(canon or {}) if isinstance(w, dict) and (w.get("band") or {}).get("ori") in ("H", "V")]
-    excl = [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict) and (e.get("band") or {}).get("ori") in ("H", "V")]
+    planta) está cubierto por un muro CONTADO con una cara de ese cuarto (o exterior), por un muro EXCLUDED, o por un vano
+    (canon.u199.rooms[].openings [[x0, y0, x1, y1]]); un tramo sin cubrir > ~1 ft = cara faltante = FAIL. Un muro cubre con su 'band'
+    si la tiene, o con su 'path' / 'paths' ± medio espesor (v136, COORDINACIÓN 06:06: los muros de CR no traen band). -> (fallas, n)"""
+    todos = [w for w in muros_canon(canon or {}) if isinstance(w, dict)]
+    excl = [e for e in (canon or {}).get("excluded_walls") or [] if isinstance(e, dict)]
     ev, n = [], 0
 
-    def cubre(b, x, y):
+    def cubre_band(b, x, y):
         c0, c1 = sorted((float(b["c0"]), float(b["c1"])))
         lo, hi = sorted((float(b["lo"]), float(b["hi"])))
         along, cross = (x, y) if b["ori"] == "H" else (y, x)
         return c0 - tol_pt <= cross <= c1 + tol_pt and lo - tol_pt <= along <= hi + tol_pt
+
+    def cubre(cb, x, y):
+        return cubre_band(cb[1], x, y) if cb[0] == "band" else _dist_seg(x, y, cb[1]) <= cb[2]
     for r in _u199(canon).get("rooms") or []:
         poly = r.get("polygon") or []
         if len(poly) < 3:
@@ -793,10 +842,10 @@ def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
         n += 1
         nums = {m.group(1) for m in RX_CUARTO_NUM.finditer(str(r.get("room") or ""))}
         nombre = norm_txt(re.sub(r"\d+", "", str(r.get("room") or ""))).strip()
-        mios = [w["band"] for w in walls if w["band"].get("sheet") == r.get("sheet") and (
-            (_cuartos_de(w) & nums) or w.get("exterior") or
-            (nombre and any(nombre in norm_txt(f.get("room") or "") for f in _caras(w))))]
-        mios += [e["band"] for e in excl if e["band"].get("sheet") == r.get("sheet")]
+        mios_w = [w for w in todos if (_cuartos_de(w) & nums) or w.get("exterior") or
+                  (nombre and any(nombre in norm_txt(f.get("room") or "") for f in _caras(w))) or
+                  (nombre and nombre in norm_txt(str(w.get("location") or "")))]
+        mios = _cubridores(canon, mios_w + excl, r.get("sheet"), tol_pt)
         vanos = r.get("openings") or []
         hueco, peor = 0.0, (0.0, None)
         pts = list(poly) + [poly[0]]
@@ -805,7 +854,7 @@ def cierre_cuartos_fallas(canon, tol_pt=6.0, paso_pt=9.0, hueco_max_pt=9.0):
             k = max(1, int(L // paso_pt))
             for i in range(k + 1):
                 x, y = xa + (xb - xa) * i / k, ya + (yb - ya) * i / k
-                ok = any(cubre(b, x, y) for b in mios) or any(
+                ok = any(cubre(cb, x, y) for cb in mios) or any(
                     min(v[0], v[2]) - tol_pt <= x <= max(v[0], v[2]) + tol_pt and min(v[1], v[3]) - tol_pt <= y <= max(v[1], v[3]) + tol_pt for v in vanos)
                 hueco = 0.0 if ok else hueco + L / k
                 if hueco > peor[0]:
@@ -1698,7 +1747,8 @@ FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121"
                       "v81cf122": "2026-11-12T22:50:08+00:00", "v81cf123": "2026-11-12T22:54:07+00:00", "v81cf124": "2026-11-12T23:00:49+00:00",
                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
-                      "v81cf131": "2026-11-13T02:24:57+00:00"}   # v133: 9df76c7
+                      "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
+                      "v81cf135": "2026-11-13T06:08:00+00:00", "v81cf136": "2026-11-13T06:15:00+00:00"}   # v133: dfcf5e7 · v134: 59947ce · v135: 3f73cbd (06:07:55) · v136: hora fijada justo antes del commit
 VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
 # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
 FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
