@@ -45,3 +45,16 @@ Cache del proyecto (scripts del pipeline y configuración) para retomarlo o reus
 - REVERIF20 (auditor independiente): open 0. Revisor U-193 (a2b49d549b9d7d9a0): 45 renglones (40 NO ES NUESTRO, 4 NO ES MURO, 1 CUBIERTO), 0 FALTA abiertos.
 - Elementos nuevos: A-Z1-20 (leaf A del nicho), F1-Z1-06 (end cap 18/A521), F-Z1-21/22 (patch kn 52), WR-05 + TRIM-057 (ventana D de Serv Mgr 128), RI-18C (box del roof drain kn 6 en Dealer 140). Delta completo en DELTA_rev3a_rev3b.md.
 - Reglas de esta rev: BE-GK54..BE-GK59 (chequeos en apartados/be_gk54..be_gk57 y be_gk59).
+
+## ADD #2 (13-nov): addendum reviewed – no quantity impact
+- Document: 261111-Grand Kia Addendum _2.pdf (TallyCM, 11.11.26, 1 page, md5 0fee4d09…). Downloaded read-only from BuildingConnected (Brinkman, opportunity 6ae904c6…, U-129: nothing accepted, nothing sent). Uploaded to Drive › Projects › Grand Kia Auto Dealership - Denver, CO (Brinkman) 11-17-26 (id 1Y-QT7DcXNvbzWM8dtULYUK25KkjBqcDW).
+- Content: one item. "1. Clarification. The bid due date shall be extended to Thursday December 3rd at 4:00PM MST." No new or revised sheets, no spec section.
+- Sheets reviewed:
+  - Grand Kia - Current Drawing Set.pdf re-downloaded: md5 b485d2578e537fb5700cdf7cd13d150c, identical to the set used in rev3b (Drive copy), so all 112 pages (A / S / M / P / E / civil) are unchanged.
+  - Project Specifications.pdf: md5 4edb78e283bfcc322499a0056d2be7e8, identical.
+  - Addendum #1 zip, Bid Instructions and Phasing Plan: same size as the Drive copies.
+  - New in the archive, all outside framing / drywall scope: KIA site photos.pdf, geotech and asbestos reports, 02 - General Requirements (SAMPLE contracts / insurance).
+- Quantity impact: none. rev3b stays the current delivery; no rev4.
+- Bid date updated in config/proyecto_datos.json:
+  - Brinkman: Thu Dec 3, 2026 4:00 PM MST, per the addendum. The BC message reported Dec 2; the addendum document governs.
+  - Crossland: Tue Dec 1, 2026 10:00 AM MST, per BC as reported by COORDINACIÓN.
