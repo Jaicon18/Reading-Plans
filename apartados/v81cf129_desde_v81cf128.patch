@@ -1,0 +1,146 @@
+diff -ruN v128/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v129/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v128/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 00:16:52.262340070 +0000
++++ v129/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 00:16:52.271122636 +0000
+@@ -8675,6 +8675,13 @@
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "test_be_gk56"
+    }
++  },
++  {
++   "id": "U-194",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, commit 3b3d8b9): \"no me pidas permisos que sabes que necesitas y que si te tengo que dar por fuerza\"",
++   "categoria": "conducta",
++   "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
++   "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v128/take-off-metal-frame-drywall/SKILL.md v129/take-off-metal-frame-drywall/SKILL.md
+--- v128/take-off-metal-frame-drywall/SKILL.md	2026-11-13 00:16:52.269374611 +0000
++++ v129/take-off-metal-frame-drywall/SKILL.md	2026-11-13 00:16:52.274995192 +0000
+@@ -5,7 +5,7 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf128** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf129** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -363,6 +363,10 @@
+   (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
+   de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
+   dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **U-194 (conducta, usuario 12-nov):** no pedir permisos que el flujo necesita sí o sí; la regla de allow (gdrive_fetch.py / subir_entrega.py)
++  la agrega el usuario UNA vez (Claude no puede darse permisos a sí mismo); después no se vuelve a pedir.
++- **v81cf129 (COORDINACIÓN 13-nov 00:10, CR):** BE-VS-13 (be_vs_13) asigna cada markup al id de wall MÁS LARGO que aparece en su texto
++  y no deja que un id corto tome un markup cuyo id sigue con ' <sufijo de cara>' ('XW.6.3-L1-01' vs 'XW.6.3-L1-01 S').
+ - **v81cf128 (COORDINACIÓN 12-nov 23:44, CR rev20b):** UNA constante REV_PAT = rev(\d+[a-z]?) con límites alfanuméricos en
+   compuerta_entrega / chequeos_biblioteca (carpeta 'revN FINAL PARA REVISAR', GUÍA 'CAMBIOS revN vs revM', RESUMEN / BITACORA, proposal,
+   README); orden 20 < 20a < 20b < 21 (rev_clave); un chequeo que no identifica su rev da FAIL 'no se pudo identificar la rev', nunca PASS en
+Binary files v128/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v129/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v129/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v129/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v128/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v129/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v128/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v129/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v128/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 00:16:52.263022759 +0000
++++ v129/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 00:16:52.272118473 +0000
+@@ -3235,7 +3235,7 @@
+         m = re.search(r"(?i)()([\d,]+(?:\.\d+)?)\s*SF board\b", a["contents"]) or \
+             re.search(r"(?i)\bSF\s*[:=]?\s*([\d,]+(?:\.\d+)?)()", a["contents"]) or \
+             re.search(r"(?i)()([\d,]+(?:\.\d+)?)\s*SF\b", a["contents"])
+-        wid = next((w for w in sf if re.search(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", a["contents"])), None)
++        wid = next((w for w in sorted(sf, key=len, reverse=True) if re.search(_rx_wid_exacto(w, sf), a["contents"])), None)   # v129
+         if m and wid and sf[wid]:
+             x_ = por_wid.setdefault(wid, [0.0, a["label"]])
+             x_[0] += float((m.group(1) or m.group(2)).replace(",", ""))   # R80f.37: los tramos de un wall (U-120) se suman
+@@ -3246,6 +3246,16 @@
+     return R("FAIL", *ev[:15]) if ev else R("PASS", "SF de markups = Excel")
+ 
+ 
++def _rx_wid_exacto(w, ids):
++    """v129 (CR, BE-VS-13): el id w en un texto de markup sin que lo siga ' <sufijo de cara>' de otro id más largo ('XW.6.3-L1-01' no toma
++    'XW.6.3-L1-01 S ...') ni un sufijo de cara suelto (N / S / E / W / A / B / INT / EXT / IN / OUT)."""
++    suf = sorted({k[len(w):].strip() for k in ids if k != w and k.startswith(w) and k[len(w):len(w) + 1] in " _-."}, key=len, reverse=True)
++    alt = "|".join(re.escape(x) for x in suf if x)
++    cara = r"(?:[NSEW]|[AB]|INT|EXT|IN|OUT|NORTH|SOUTH|EAST|WEST)"
++    no_sigue = (r"(?![ _\-.]?(?:" + alt + r")(?![\w-]))" if alt else "") + r"(?!\s+" + cara + r"(?![\w-]))"
++    return r"(?<![\w-])" + re.escape(w) + r"(?![\w-])" + no_sigue
++
++
+ @chk("BE-VS-14", desc="BE-VS-14: un RFI abierto no pregunta por una nota que el set imprime textual (se carga)")
+ def be_vs_14(b):
+     if b.hojas is None:
+diff -ruN v128/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v129/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v128/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 00:16:52.262964077 +0000
++++ v129/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 00:16:52.272076780 +0000
+@@ -740,6 +740,21 @@
+     print("test_v126_entregas_previas OK")
+ 
+ 
++def test_v129_be_vs_13_id_largo():
++    """v129 (COORDINACIÓN 13-nov 00:10, caso CR): be_vs_13 toma el id MÁS LARGO: un id y el mismo id con ' S' (sufijo de cara) dan PASS;
++    antes el id corto se quedaba con los markups de los dos."""
++    fn = CB.be_vs_13
++    pt = [{"wall": "XW.6.3-L1-01", "board": 24.37}, {"wall": "XW.6.3-L1-01 S", "board": 35.53}]
++    an = [{"contents": "XW.6.3-L1-01 · 24.37 SF board", "label": "p1", "subject": "X9"},
++          {"contents": "XW.6.3-L1-01 S · 35.53 SF board", "label": "p1", "subject": "X9"}]
++    e, ev = fn(B(pt=pt, annots=an))
++    assert e == "PASS", (e, ev)
++    an2 = an + [{"contents": "XW.6.3-L1-01 · 10.00 SF board", "label": "p2", "subject": "X9"}]
++    e, ev = fn(B(pt=pt, annots=an2))
++    assert e == "FAIL" and "XW.6.3-L1-01 " in ev[0] and "34.37" in ev[0], (e, ev)   # el corto sí suma sus propios tramos
++    print("test_v129_be_vs_13_id_largo OK")
++
++
+ def test_v96_sin_falsos_positivos_cr():
+     """v81cf96 (canon cerrado de CR City Hotel corrido con los chequeos nuevos): (1) BE-GK37 no aplica a track de soffit (SOF-) ni a un
+     track cuya fuente cita el texto impreso ('"J" RUNNER CHANNEL') o una hoja que lo dice; (2) U-178 (5): 'sloped ceiling' en la
+@@ -946,6 +961,7 @@
+     test_v121_be_cr40_cierre_explicito()
+     test_v121_excluded_y_brief()
+     test_v126_entregas_previas()
++    test_v129_be_vs_13_id_largo()
+     test_be_06_soffit_sides()
+     test_callouts_extra()
+     print("ok callouts")

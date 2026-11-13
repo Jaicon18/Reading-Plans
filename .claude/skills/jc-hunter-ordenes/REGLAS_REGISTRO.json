@@ -8675,6 +8675,13 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_be_gk56"
    }
+  },
+  {
+   "id": "U-194",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 12-nov, commit 3b3d8b9): \"no me pidas permisos que sabes que necesitas y que si te tengo que dar por fuerza\"",
+   "categoria": "conducta",
+   "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
+   "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
   }
  ]
 }
