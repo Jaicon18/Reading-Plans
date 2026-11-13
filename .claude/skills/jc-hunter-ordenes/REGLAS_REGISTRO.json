@@ -8969,6 +8969,22 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_xf21_head_piezas"
    }
+  },
+  {
+   "id": "BE-CR47",
+   "origen": "BIBLIOTECA_ERRORES.md (CR rev20d 13-nov 22:20 UTC, COORDINACIÓN; test del proyecto apartados/cr_bug_cuartos/test_cruce_cuartos_bano.py, commit f150aa3)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath', '201 … - Room' = '201'; nunca dos sub-espacios del mismo número en una llave (ganaba la última fila del CSV); sin fila propia del baño, la de la unidad",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::sala",
+    "take-off:tools/comparar_alturas.py::alias_cuartos",
+    "take-off:tools/compuerta_entrega.py::ce_alturas_extremo"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr47_bano_propio_espacio"
+   }
   }
  ]
 }
