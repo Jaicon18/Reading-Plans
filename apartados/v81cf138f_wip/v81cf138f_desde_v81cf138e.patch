@@ -1,0 +1,217 @@
+diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138e/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:10:14.508670442 +0000
++++ v138f/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:12:13.112539881 +0000
+@@ -8881,10 +8881,18 @@
+   {
+    "id": "BE-CR45",
+    "origen": "BIBLIOTECA_ERRORES.md (CR rev20d 13-nov, orden COORDINACIÓN 19:55 / 20:01 UTC; commit 77d8d06)",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+    "texto_corto": "la regla de cement board / tile corre por programa sobre el canon FINAL, después de TODA cara cargada (revisiones y FALTA posteriores incluidas); NON-rated: el cement board REEMPLAZA el board y queda la franja H - altura del cement board; rated: las capas quedan y el cement board va encima; el markup del cement board va en la cara real del shower (línea más cercana a la caja del shower pan), mismo id / NM",
+-   "motivo": "COORDINACIÓN 20:09: el chequeo CB_DUCHA_CBU (= cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_ducha_cbu.py sobre el canon de la entrega, FAIL con la lista) entra en v81cf140; v81cf138b solo registra la regla"
++   "motivo": "v81cf138f (U-202, COORDINACIÓN 22:01): CB_DUCHA_CBU = el test de CR test_ducha_cbu.py hecho genérico sobre el canon de la entrega (showers del canon o banos_cbu.json): (a) doble conteo en cara NON-rated y (b) cement board fuera de la cara del shower = FAIL; caso real CR rev20c 6 + 6 FAIL, rev20d 0",
++   "chequeos": [
++    "take-off:tools/chequeos_biblioteca.py::ducha_cbu",
++    "take-off:tools/chequeos_biblioteca.py::ducha_cbu_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr45_ducha_cbu"
++   }
+   },
+   {
+    "id": "BE-XF19",
+diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/SKILL.md v138f/take-off-metal-frame-drywall/SKILL.md
+--- v138e/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:10:14.518445919 +0000
++++ v138f/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:12:13.116539881 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138e** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138f** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3591,6 +3591,6 @@
+ Test: tools/test_compuerta_entrega.py::test_u153_vista_bluebeam (C 1/864 = FAIL x864; C 1 = PASS; Length que no cuadra = FAIL;
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+-- **BE-CR45 (programa-pendiente, CR rev20d 13-nov; v81cf138b solo registro):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Chequeo CB_DUCHA_CBU en la próxima versión del skill (la 140).
++- **BE-CR45 (programa desde v81cf138f, CR rev20d 13-nov):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Programa: CB_DUCHA_CBU (chequeos_biblioteca.ducha_cbu) con la lista de showers del canon (`showers`: floor, room, box, cbu [{side, id}]) o banos_cbu.json: doble conteo NON-rated o cement board en la línea de atrás = FAIL; cement board sin lista de showers = AMBER. Test test_be_cr45_ducha_cbu (caso real CR rev20c 6 + 6 / rev20d 0).
+ - **BE-CR46 (programa desde v81cf138e, CR rev19 / rev20d 13-nov):** los lectores ciegos de alturas leen el HEAD DEL TYPE antes de la cota de muro; "6 in above (line of) ceiling" = C.H. + 6" con tope en estructura, nunca la B.O.; la resolución A/B cita el head con su crop. Programa: CE_ALTURAS_EXTREMO lee el head de cada type de fichas.json (comparar_alturas.heads_de_fichas): H > MAYOR C.H. + offset (tope estructura) = FAIL; texto del wall "to deck" contra un head "above ceiling" = FAIL; el regex acepta "LINE OF CEILING". Test test_be_cr46_head_del_type (caso real CR rev20c FAIL / rev20d 0).
+ - **U-202 (usuario 13-nov):** las reglas se ejecutan EN ESE MOMENTO: cada chequeo + test se publica en cuanto pasa suite / banco / verificar_version, una versión por chequeo; nada queda como programa-pendiente más de 4 h.
+diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v138f/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v138e/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 13:30:04.075235736 +0000
++++ v138f/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 22:27:09.824365759 +0000
+@@ -4812,6 +4812,113 @@
+ RX_VACIO = re.compile(r"(?i)sin walls|(?:^|N/A: )sin canon\b|no hay walls|\ben el canon\b|en walls\[\]")   # BE-CR29: toda ausencia de una estructura del canon
+ 
+ 
++RX_CEMENT = re.compile(r"(?i)cement|\bCBU\b|durock|wonderboard|hardie\s*backer|tile\s*backer|backer\s*board")
++
++
++def _showers_cbu(b):
++    """BE-CR45: lista de showers {floor, room, box [x0, x1, y0, y1], cbu [{side W/E/N/S, id}]} del canon (showers) o de banos_cbu.json."""
++    sh = b.canon.get("showers")
++    if isinstance(sh, list):
++        return sh, "canon.showers"
++    for raiz in (b.canon_dir, b.raiz):
++        if raiz and os.path.isdir(raiz):
++            ps = _rglob_seguro(raiz, "**/banos_cbu.json")
++            if ps:
++                try:
++                    return json.load(open(ps[0], encoding="utf-8")).get("showers") or [], ps[0]
++                except (OSError, ValueError, AttributeError):
++                    return None, ps[0]
++    return None, None
++
++
++def ducha_cbu_fallas(canon, showers):
++    """BE-CR45 (CR rev20d, test de CR test_ducha_cbu.py hecho genérico): sobre el canon FINAL (toda cara cargada, también las tardías).
++    (a) DOBLE CONTEO: fila de board NO cement de un type NON-rated (type_id '-0') en la cara del shower (<= 10 pt de la caja con 'shower' en
++    'faces:', o furring <= 3.5 pt) con > 1 LF (9 pt) sobre el tramo del shower = FAIL (el cement board REEMPLAZA el board en NON-rated);
++    (b) MARKUP EN LA CARA: el cement board está en la línea más cercana a la caja del shower pan (no en la línea de atrás)."""
++    rows = [w for w in (canon.get("existing_walls") or []) + (canon.get("walls") or []) if isinstance(w, dict) and w.get("path")]
++    byid = {w.get("id"): w for w in rows}
++    es_cem = lambda r: bool(RX_CEMENT.search(str(r.get("board", ""))))      # noqa: E731
++    segs = lambda w: [p for p in (w.get("paths") or [w["path"]]) if len(p) >= 2]      # noqa: E731
++    fallas = []
++    for s in showers:
++        fl, room = s.get("floor"), s.get("room")
++        x0, x1, y0, y1 = s["box"]
++        for cb in s.get("cbu") or []:
++            side = str(cb["side"]).strip().upper()
++            vert = side in ("W", "E")
++            lado = (x0 if side == "W" else x1) if vert else (y0 if side == "N" else y1)
++            lo_b, hi_b = (y0, y1) if vert else (x0, x1)
++            k = 0 if vert else 1
++            w = byid.get(cb.get("id"))
++            if w:
++                lc = w["path"][0][k]
++                for r in rows:
++                    if r.get("floor") != fl or es_cem(r) or r.get("id") == cb.get("id"):
++                        continue
++                    for p in segs(r):
++                        if abs(p[0][k] - p[-1][k]) > 0.5:
++                            continue
++                        lr = p[0][k]
++                        if not (min(lc, lado) + 0.3 < lr <= max(lc, lado) + 0.3 or (abs(lr - lado) < abs(lc - lado) - 0.3 and abs(lr - lado) <= 3.5)):
++                            continue
++                        q = 1 - k
++                        ov = min(max(p[0][q], p[-1][q]), hi_b) - max(min(p[0][q], p[-1][q]), lo_b)
++                        if ov > 9 and abs(lr - lado) < abs(lc - lado):
++                            fallas.append(f"(b) {fl} {room} {side}: cement board {cb.get('id')} drawn at {lc} but the shower face is {r.get('id')} at {lr} (line behind, not the shower face)")
++                            break
++            else:
++                fallas.append(f"(b) {fl} {room} {side}: cement board {cb.get('id')} of the showers list is not in the canon")
++            for r in rows:
++                if r.get("floor") != fl or es_cem(r) or float(r.get("height_ft") or 0) <= 0.5:
++                    continue
++                hc = float((w or {}).get("height_ft") or 0)
++                if hc and float(r.get("height_ft") or 0) <= hc - 0.5:
++                    continue        # verificación f #1: la franja H - altura del cement board (más baja que el cement board) es legítima
++                if not str(r.get("type_id", "")).endswith("-0"):
++                    continue
++                caras = str(r.get("location", "")).split("faces:")[-1].lower()
++                dist = min(abs(p[0][k] - lado) for p in segs(r))
++                furring = str(r.get("type", "")).startswith("F")
++                if not (("shower" in caras and dist <= 10) or (furring and dist <= 3.5)):
++                    continue
++                for p in segs(r):
++                    (a, bb), (c, d2) = p[0], p[-1]
++                    if vert and abs(a - c) < 0.5 and abs(a - lado) <= 10:
++                        ov = min(max(bb, d2), hi_b) - max(min(bb, d2), lo_b)
++                    elif not vert and abs(bb - d2) < 0.5 and abs(bb - lado) <= 10:
++                        ov = min(max(a, c), hi_b) - max(min(a, c), lo_b)
++                    else:
++                        continue
++                    if ov > 9:
++                        fallas.append(f"(a) {fl} {room} {side}: {r.get('id')} ({r.get('board')}, {r.get('type_id')}) {ov / 9:.2f} LF x {r.get('height_ft')} ft over the shower "
++                                      f"+ cement board {cb.get('id')} = double count on a NON-rated face")
++    return fallas
++
++
++@chk("BE-CR45", desc="BE-CR45 (CR rev20d, v81cf138f): cement board / tile del shower por programa sobre el canon FINAL: en una cara NON-rated el "
++     "cement board REEMPLAZA el board (fila de board no cement sobre el tramo del shower = doble conteo, FAIL) y el markup del cement board va en "
++     "la cara real del shower (línea más cercana a la caja del shower pan). Lista de showers: canon.showers o banos_cbu.json; canon con cement "
++     "board y sin lista de showers = AMBER (no se puede probar)")
++def ducha_cbu(b):
++    ws = [w for w in (b.canon.get("existing_walls") or []) + (b.canon.get("walls") or []) if isinstance(w, dict)]
++    cem = [w for w in ws if RX_CEMENT.search(str(w.get("board") or ""))]
++    if not ws:
++        return NA("canon sin walls (no hay filas que revisar)")
++    if not cem:
++        return R("PASS", f"{len(ws)} filas del canon revisadas: ninguna lleva cement board (no hay cara de shower que revisar)")
++    sh, fuente = _showers_cbu(b)
++    if sh is None:
++        return R("AMBER", f"{len(cem)} filas de cement board y ninguna lista de showers (canon.showers o banos_cbu.json): no se puede probar") \
++            if not fuente else R("FAIL", f"{fuente}: no se pudo leer")
++    if not sh:
++        return R("AMBER", f"{len(cem)} filas de cement board y {fuente} trae una lista de showers vacía: no se puede probar")
++    f = ducha_cbu_fallas(b.canon, sh)
++    if f:
++        return R("FAIL", *f[:30], f"{len(f)} fallas en {len(sh)} showers ({fuente})")
++    return R("PASS", f"{len(sh)} showers ({fuente}): 0 dobles conteos, cada cement board en la cara del shower")
++
++
+ @chk("BE-CR25", "U-124", desc="BE-CR25 / U-124: canon con 0 walls (ni walls[] ni board-only de existing_walls) y Partition "
+      "Takeoff con > 0 filas = FAIL (la compuerta no puede pasar en vacío)")
+ def canon_no_vacio(b):
+diff -ruN -x __pycache__ v138e/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138f/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138e/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 06:13:40.429491876 +0000
++++ v138f/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 22:20:33.584791436 +0000
+@@ -588,6 +588,13 @@
+                                                               {"id": "XW-17 B", "height_ft": 11.3958, "board": "5/8 type X"}]}},
+                    {"canon": {"walls": [], "existing_walls": [{"id": "XW-17 A", "height_ft": 10.24, "board": "5/8 exterior gyp sheathing"},
+                                                               {"id": "XW-17 B", "height_ft": 8.9375, "board": "5/8 type X"}]}}),
++    # BE-CR45 (CR rev20d): board NON-rated sobre el tramo del shower + cement board = doble conteo; rated (-1) = capas quedan
++    "ducha_cbu": ({"canon": {"showers": [{"floor": "L2", "room": "214", "box": [100, 130, 50, 80], "cbu": [{"side": "W", "id": "CBU-1"}]}],
++                             "existing_walls": [{"id": "CBU-1", "floor": "L2", "board": "1/2 cement board", "height_ft": 9.0, "type_id": "W.4-0", "path": [[100, 50], [100, 80]]},
++                                                {"id": "W-1", "floor": "L2", "board": "5/8 type X", "height_ft": 9.24, "type_id": "W.4-0", "location": "| faces: shower 214", "path": [[100, 40], [100, 90]]}]}},
++                  {"canon": {"showers": [{"floor": "L2", "room": "214", "box": [100, 130, 50, 80], "cbu": [{"side": "W", "id": "CBU-1"}]}],
++                             "existing_walls": [{"id": "CBU-1", "floor": "L2", "board": "1/2 cement board", "height_ft": 9.0, "type_id": "W.4-0", "path": [[100, 50], [100, 80]]},
++                                                {"id": "W-1", "floor": "L2", "board": "5/8 type X", "height_ft": 9.24, "type_id": "W.4-1", "location": "| faces: shower 214", "path": [[100, 40], [100, 90]]}]}}),
+ }
+ 
+ 
+@@ -1189,3 +1196,38 @@
+ 
+ 
+ test_u192_tasas_decididas()
++
++
++def test_be_cr45_ducha_cbu():
++    """BE-CR45 (CR rev20d, v81cf138f): CB_DUCHA_CBU. Caso real CR: canon rev20c = 6 dobles conteos (a) + 6 cement board en la línea de
++    atrás (b) = FAIL; rev20d = 0 = PASS. Sin cement board = N/A; cement board sin lista de showers = AMBER (no pasa en vacío)."""
++    import json as _j
++    import chequeos_biblioteca as CB_
++    assert CB_.ducha_cbu(CB_.B(canon={"walls": [{"id": "x", "board": "5/8 type X"}]}))[0] == "PASS"
++    assert CB_.en_vacio(CB_.B(pt=[{"wall": "x"}]), "ducha_cbu", *CB_.ducha_cbu(CB_.B(canon={"walls": [{"id": "x", "board": "5/8 type X"}]})))[0] == "PASS"
++    assert CB_.ducha_cbu(CB_.B(canon={"walls": [{"id": "x", "board": "1/2 cement board"}]}))[0] == "AMBER"
++    sh = [{"floor": "L2", "room": "214", "box": [100, 130, 50, 80], "cbu": [{"side": "W", "id": "CBU-1"}]}]
++    can = {"existing_walls": [
++        {"id": "CBU-1", "floor": "L2", "board": "1/2 cement board", "height_ft": 9.0, "type_id": "W.4-0", "path": [[100, 50], [100, 80]]},
++        {"id": "W-1", "floor": "L2", "board": "5/8 type X", "height_ft": 9.24, "type_id": "W.4-0", "type": "W.4",
++         "location": "bath | faces: shower 214", "path": [[100, 40], [100, 90]]}], "showers": sh}
++    est, ev = CB_.ducha_cbu(CB_.B(canon=can))
++    assert est == "FAIL" and any(x.startswith("(a)") for x in ev), ev
++    can["existing_walls"][1]["type_id"] = "W.4-1"                    # rated: las capas quedan, no es doble conteo
++    assert CB_.ducha_cbu(CB_.B(canon=can))[0] == "PASS"
++    D = None
++    for raiz in (os.environ.get("TAKEOFF_REPO"), "/home/user/Reading-Plans", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")):
++        d = os.path.join(raiz or "", "cache_proyectos", "herramientas", "tests")
++        if raiz and os.path.isfile(os.path.join(d, "be_cr45_cr_banos_cbu.json")):
++            D = d
++            break
++    if not D:
++        print("AVISO test_be_cr45_ducha_cbu: datos de CR no encontrados (cache_proyectos/herramientas/tests); caso real saltado")
++        return
++    sh = _j.load(open(os.path.join(D, "be_cr45_cr_banos_cbu.json")))["showers"]
++    f = CB_.ducha_cbu_fallas(_j.load(open(os.path.join(D, "be_cr45_cr_canon_rev20c.json"))), sh)
++    assert sum(x.startswith("(a)") for x in f) == 6 and sum(x.startswith("(b)") for x in f) == 6, f
++    assert CB_.ducha_cbu_fallas(_j.load(open(os.path.join(D, "be_cr45_cr_canon_rev20d.json"))), sh) == []
++
++
++test_be_cr45_ducha_cbu()
