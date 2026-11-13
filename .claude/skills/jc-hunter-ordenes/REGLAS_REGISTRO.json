@@ -8904,10 +8904,18 @@
   {
    "id": "BE-CR46",
    "origen": "BIBLIOTECA_ERRORES.md (CR rev19 / rev20d 13-nov, U-124, orden COORDINACIÓN; commit 7ef8b27)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
    "texto_corto": "los lectores ciegos de alturas (U-176) leen el HEAD DEL TYPE (A0.06 / A0.07) ANTES de la cota de muro; un head '6 in above (line of) ceiling' = C.H. del cuarto + 6\" con tope en estructura, nunca la B.O. de estructura; la resolución A/B cita ese head con su crop",
-   "motivo": "COORDINACIÓN 21:22: el chequeo CB_HEAD_TYPE (altura <= C.H. + offset del head del type cuando el head no llega a estructura; = arreglo de CE_ALTURAS_EXTREMO: regla del head del type + 'LINE OF CEILING') y el brief U-176 que cite el head entran en la próxima versión del skill (la 140); test de CR cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_fw_head.py"
+   "motivo": "v81cf138e (U-202, COORDINACIÓN 22:01): CE_ALTURAS_EXTREMO lee el head de cada type en fichas.json (comparar_alturas.heads_de_fichas); head 'N in above (line of) ceiling' manda sobre el texto del wall: H > MAYOR C.H. + N (tope estructura) = FAIL, texto del wall 'to deck' vs head = FAIL (conflicto); regex con 'LINE OF CEILING'. Test con el caso real CR rev20c (FAIL) / rev20d (0)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_alturas_extremo",
+    "take-off:tools/comparar_alturas.py::heads_de_fichas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr46_head_del_type"
+   }
   },
   {
    "id": "U-202",
