@@ -1,6 +1,6 @@
 diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 07:12:20.736025449 +0000
-+++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 08:20:23.773823363 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 08:29:47.581932498 +0000
 @@ -8173,7 +8173,12 @@
      "take-off:tools/chequeos_biblioteca.py::_cant_ref",
      "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
@@ -95,7 +95,7 @@ diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal
 \ No newline at end of file
 diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
 --- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 07:12:20.733138648 +0000
-+++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 08:20:23.778952119 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 08:29:47.587038730 +0000
 @@ -11,7 +11,7 @@
  principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
  como arreglo local de un proyecto ni en una rama aparte.
@@ -118,6 +118,31 @@ diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywa
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+diff -ruN vA/take-off-metal-frame-drywall/runner/completitud.py vB/take-off-metal-frame-drywall/runner/completitud.py
+--- vA/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 07:12:20.736260268 +0000
++++ vB/take-off-metal-frame-drywall/runner/completitud.py	2026-11-13 08:29:47.582092657 +0000
+@@ -229,10 +229,19 @@
+             if isinstance(z, dict) and z.get("height_ft") is not None and num(z.get("room"))]
+     out = []
+     for w in _muros(c):
+-        for f in w.get("faces") or []:
++        caras = w.get("faces") if isinstance(w.get("faces"), list) else [   # v138 (CR): 'faces' = número -> una cara con los datos del muro
++            {"room": w.get("location"), "height_ft": w.get("height_ft"), "height_source": w.get("height_source") or w.get("source")}]
++        if not isinstance(w.get("faces"), list) and re.search(r"(?i)faces?:\s*(?:exterior|outside)|exterior\s+(?:gyp\s+)?sheathing",
++                                                              str(w.get("location") or "") + " " + str(w.get("board") or "")):
++            continue                              # v138 (CR): la cara exterior no queda bajo el cielo del cuarto
++        for f in caras:
+             if not isinstance(f, dict) or f.get("height_ft") is None:
+                 continue
+-            if re.search(r"full height|to deck|above ceiling|hasta deck", str(f.get("height_source") or ""), re.I) and \
++            if re.search(r"full height|to deck|above ceiling|hasta deck|"
++                         r"underside\s+(?:of\s+|or\s+)?(?:the\s+)?(?:roof|floor|deck|structure|sheathing|joist|framing)|"
++                         r"extends?\s+to\s+(?:the\s+)?(?:underside|structure|roof|deck)|to\s+(?:the\s+)?(?:structure|roof\s+(?:framing|sheathing|deck))|"
++                         r"floor[\s-]+to[\s-]+floor|continuous\s+past\s+the\s+floor|stair\s+enclosure",
++                         str(f.get("height_source") or ""), re.I) and \
+                     not re.search(r"B\.O\. DECK|B\.O\.D", str(f.get("height_source") or ""), re.I):
+                 continue
+             if altura_cielo_impresa(f):
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
@@ -160,7 +185,7 @@ Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 07:12:20.744233013 +0000
-+++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 08:20:23.774989954 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 08:29:47.582719240 +0000
 @@ -89,6 +89,25 @@
      return m.group(1).lower() if m and re.match(r"(?i)(?:entrega|final_for_review)", nombre or "") else None
  
@@ -214,6 +239,15 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-o
          cp = ult(["costos.csv", "**/costos.csv"])
          if cp:
              try:
+@@ -2307,7 +2339,7 @@
+                                                     " ".join(str(e.get("decision")) for e in b.canon.get("existing_walls") or [] if str(e.get("id", "")).startswith(w["id"])))]
+         if malos:
+             return R("FAIL", f"{len(malos)} walls board-only sin la decisión 'wood framing EXCLUDED'", *malos[:10])
+-        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; 0 walls de madera con framing en walls[]")
++        return R("PASS", f"{len(bo)} walls de madera board-only con framing EXCLUDED; ningún wall de madera con framing en walls[]")   # v138: sin '0 walls' (U-138)
+     wn = str(b.canon.get("wood_walls_none_reason") or "")   # BE-XF04 (Xfinity 10-nov): set metal-framed / existing only, declared with its sheet
+     if wn and re.search(r"[A-Z]{1,2}-?\d", wn):
+         return R("PASS", f"walls de madera: ninguno en el set ({wn[:160]})")   # BE-GK27: sin '0 walls' (U-138 lo leía como conteo vacío)
 @@ -4382,6 +4414,30 @@
  
  RX_HALLAZGO_FALTA = re.compile(r"(?i)\b(?:falta|faltante|missing|not loaded|no cargad[oa]|sin renglón|no está cargad[oa]|not\s+included|"
@@ -454,7 +488,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-o
          rx = re.compile(rf"(?<![\w.]){re.escape(c)}(?![\w])")
 diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 07:12:20.740612398 +0000
-+++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 08:20:23.774622167 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 08:29:47.582511886 +0000
 @@ -161,6 +161,37 @@
      return None
  
@@ -809,7 +843,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          amber.append(f"causa: cadena interrumpida y reemplazada: {len(reemp)} corrida(s) sin agente ({', '.join(reemp[:4])}) se volvieron "
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 07:12:20.744133087 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 08:20:23.774936867 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 08:29:47.582673303 +0000
 @@ -638,13 +638,15 @@
      e, ev = fn(B(canon=can, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 8 | soffit 30/X9.20 (missing) for the ceiling band | n/a |"}))
      assert e == "FAIL", (e, ev)                                          # v121: con palabra de cielo ya no se salta
@@ -854,7 +888,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/t
      for ln in ("X9.01 GYP-9 8'-11\" missing in corridor 901 along wall X9-901-01 | OPEN",
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 07:12:20.755841900 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 08:20:23.774450871 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 08:29:47.582373614 +0000
 @@ -14,6 +14,7 @@
  import shutil
  import subprocess
@@ -942,7 +976,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      est, msg = CE.proceso_v119(w, None, tt, 5)
      assert est == "AMBER" and "causa:" in msg[0], (est, msg)          # 19:49 UTC < FECHA_V119 (21:21:52Z)
      w2 = os.path.join(tempfile.mkdtemp(prefix="v127b_"), "entrega")
-@@ -3788,3 +3805,230 @@
+@@ -3788,3 +3805,272 @@
  
  
  test_u199_cierre_path_esquema_cr()
@@ -1173,3 +1207,45 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
 +
 +
 +test_be_xf18_pdf_markups_por_nombre()
++
++
++def test_v138_be83_faces_numero():
++    """v138 (CR rev20c, CB_BE_83 'int object is not iterable'): completitud.caras_sobre_ceiling con existing_walls de 'faces' = número no
++    revienta; el muro cuenta como una cara (altura del muro, cuarto del location). Sobre el cielo sin fuente = sale; con 'floor to floor'
++    / 'underside of roof' / cara exterior = no sale."""
++    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runner"))
++    import completitud as CO
++    can = {"walls": [], "ceilings": [{"room": "GUEST 905", "height_ft": 9.0}],
++           "existing_walls": [{"id": "Z9-L9-01", "faces": 2, "height_ft": 11.0, "location": "L9 | faces: 905 GUEST; corridor 916",
++                               "height_source": "4/Z9.05 printed level to level"}]}
++    xs = CO.caras_sobre_ceiling(can)
++    assert len(xs) == 1 and xs[0][0] == "Z9-L9-01", xs
++    can["existing_walls"][0]["height_source"] = "2/Z9.10 'FIRE PARTITIONS EXTEND TO UNDERSIDE OF ROOF SHEATHING'"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0]["height_source"] = "stair enclosure open floor to floor (5/Z9.02)"
++    assert CO.caras_sobre_ceiling(can) == []
++    can["existing_walls"][0].update(height_source="x", location="L9 | faces: exterior")
++    assert CO.caras_sobre_ceiling(can) == []
++    print("test_v138_be83_faces_numero OK")
++
++
++test_v138_be83_faces_numero()
++
++
++def test_v138_cf04_wood_board_only_plausible():
++    """v138 (CR rev20c): set wood-framed con todos los muros board-only (framing EXCLUDED, BE-CF05 / BE-CR29): CB_BE_CF04 = PASS y la red
++    U-138 no lo vuelve FAIL aunque el proyecto tenga muros esperados (antes la evidencia decía 'cero walls de madera con framing')."""
++    import chequeos_biblioteca as CB
++    class B:
++        canon = {"walls": [], "existing_walls": [{"id": "Z9-L9-01", "board_only": True, "decision": "wood framing EXCLUDED (Div. 06) per 1/Z9.0",
++                                                  "location": "L9 | faces: 905"}]}
++        def walls(self, c=None):
++            return [dict(w, board_only=True) for w in self.canon["existing_walls"]]
++    est, ev = CB.be_cf04(B())
++    assert est == "PASS", (est, ev)
++    res = [{"id": "CB_BE_CF04", "estado": est, "evidencia": ev}]
++    assert CE.auditar_compuerta(res, {"walls": 943, "markups": 943, "imagenes": 943}) == [] and res[0]["estado"] == "PASS", res
++    print("test_v138_cf04_wood_board_only_plausible OK")
++
++
++test_v138_cf04_wood_board_only_plausible()
