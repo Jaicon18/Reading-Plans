@@ -1,7 +1,7 @@
 diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:15:06.865545715 +0000
-+++ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 13:30:04.079144730 +0000
-@@ -8847,6 +8847,14 @@
++++ v138fb/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 14:56:24.682152077 +0000
+@@ -8847,6 +8847,21 @@
      "archivo": "ordenes:test_verificar_version.py",
      "token": "fechas_be_xf17"
     }
@@ -13,6 +13,13 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/REGLAS_REGISTRO.json 
 +   "cuando": "entrega",
 +   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
 +   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
++  },
++  {
++   "id": "BE-CR44",
++   "origen": "BIBLIOTECA_ERRORES.md (CR rev20c 13-nov, orden COORDINACIÓN 14:53 UTC): la PRUEBA_ABIERTOS de CR se lanzó con '&' dentro de un comando de primer plano, murió al cerrarse el shell y dejó un log de 0 bytes sin que nadie lo viera en 1 h 17 min",
++   "categoria": "conducta",
++   "texto_corto": "todo proceso largo (compuerta, PRUEBA_ABIERTOS, OCR, subida) se lanza SOLO como tarea de background vigilada (run_in_background / Monitor) con su archivo de progreso, nunca con '&' dentro de un comando de primer plano; a los 2 min se verifica que el PID siga vivo y que su salida o su proceso hijo avancen",
++   "motivo": "un proceso muerto en silencio costó 1 h 17 min; el chequeo de programa (log de 0 bytes y sin proceso vivo a los 5 min = ALARMA) queda propuesto para una versión siguiente"
    }
   ]
  }

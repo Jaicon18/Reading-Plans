@@ -7,3 +7,4 @@ CE_PROTOCOLO_3H = exactly v137. BE-XF18 = programa-pendiente in the registry (pr
 BE-XF17: FECHAS_PUBLICACION v81cf137 = 2026-11-13T06:24:26+00:00 (real time of commit 0a5f40f).
 Tests: test_v138_be83_faces_numero, test_v138_cf04_wood_board_only_plausible, test_v138r2_verif8_caras_lista_como_v137, test_v138r2_caras_numero_clausula_propia.
 For v139: apartados/v81cf139_wip/ (BE-XF18 + COBDIAG with the verif. 8 fixes; strict CE_PROTOCOLO_3H 25f9fd1 + W1 / D1-D2 from verif. 12).
+BE-CR44 (CR 14:54, conducta) added to the registry; tools/ unchanged (sha_tools 99674abbf95d, the same one CR is testing).
