@@ -50,3 +50,13 @@ Entregas revisadas (ENTREGA_OK archivos): GK rev2 / rev3 / rev3a / rev3b y XF re
 
 suite 47/47 · banco 0 distintas (8) · XF PRUEBA_ABIERTOS 0 regresiones (231 / 12 / 0, con BE-XF18) · reglas 0 sin clasificar · 199 archivos. La primera corrida dio un falso positivo nuevo en XF (CB_FALTANTES_AUDITORIA leía 'not quantified' + 'above ceiling' de una fila del Scope); quedó corregido con la regla de "misma frase".
 No dice CONFIRMED-CLOSED en ningún lado: eso lo decide la verificación independiente 7.
+
+## CE_COBERTURA_DIAG, segunda pasada (con el PDF de markups de CR rev20b, bajado de Drive en modo lectura)
+
+La primera pasada casi no filtraba nada en CR (CR rev20c: 555 → 520). Causas:
+- el tag de CR es un rectángulo DOBLE con la palabra a un solo lado; ahora vale una palabra pegada a un lado y contenida dentro del largo del par;
+- el hatch tiene el mismo estilo que los muros de la hoja; ahora no se excluyen estilos y se piden >= 18 líneas cortas paralelas en 1 ft (en XF la jamba real tiene 13);
+- el CMU es cross-hatch a 45 y 135 grados; ahora alcanza con >= 4 líneas cortas en cada diagonal.
+Medido sobre el CR rev20b (no cubiertos, v137 → v138): A2.01 91 → 25 · A2.03 12 → 0 · A2.04 15 → 12 · A6.00 154 → 55 · A6.01 74 → 43 · A6.02 63 → 42 · A7.30 18 → 15 · A7.45 33 → 16 · A7.50 12 → 7 · TOTAL 478 → 220 (−54 %).
+XF: el caso real (jamba de la puerta 103) sigue saliendo y el falso del mop sink ya no sale.
+PENDIENTE: CR confirma sobre rev20c que los 15 FALTA siguen saliendo. Riesgo: un furring real pegado a un CMU con cross-hatch.
