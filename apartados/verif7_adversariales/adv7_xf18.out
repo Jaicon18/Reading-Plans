@@ -1,0 +1,6 @@
+X0 control (mapa + OPEN IN BLUEBEAM) -> ('PASS', 'CR_markups_rev20c - OPEN IN BLUEBEAM.pdf', True)
+X1 entrega.json 'markups' apunta a un archivo que NO existe -> ('PASS', 'CR_markups_rev20b.pdf', False)
+X2 entrega.json 'markups' apunta al PDF de la rev ANTERIOR (existe) -> ('PASS', 'CR_markups_rev20b.pdf', True)
+X3 OPEN IN BLUEBEAM viejo (rev20b) + markups actual sin sufijo (rev20c) -> ('PASS', 'CR_markups_rev20b - OPEN IN BLUEBEAM.pdf', True)
+X4 mapa con nombre 'MAPA - IMAGE-ONLY.pdf' (guion) como único otro PDF + markups -> ('FAIL', '-', False)
+X5 mapa 'Coverage map - image only.pdf' (inglés) + markups sin sufijo -> ('FAIL', '-', False)

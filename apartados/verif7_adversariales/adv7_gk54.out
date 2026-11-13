@@ -1,0 +1,19 @@
+G0 control Q1 (13 in, 'gap 0"') -> FAIL? True
+G1 leaf a 13 in, prueba 'gap 0' -> FAIL? True
+G1 leaf a 13 in, prueba 'no gap' -> FAIL? True
+G1 leaf a 13 in, prueba 'flush' -> FAIL? True
+G1 leaf a 13 in, prueba 'touching' -> FAIL? True
+G1 leaf a 13 in, prueba 'abutting' -> FAIL? True
+G1 leaf a 13 in, prueba 'tight to' -> FAIL? True
+G1 leaf a 13 in, prueba 'gap 1/2"' -> FAIL? True
+G1 leaf a 13 in, prueba 'gap 1"' -> FAIL? True
+G1 leaf a 13 in, prueba 'gap 0\'-0"' -> FAIL? True
+G1 leaf a 13 in, prueba 'gap: none' -> FAIL? True
+G1 leaf a 13 in, prueba 'sin gap' -> FAIL? True
+G1 leaf a 13 in, prueba 'gap = 0 in' -> FAIL? True
+G2 leaf a 13 in con espesor_in=20 en la fila del mapa, 'gap 0"' -> FAIL? False
+G3 leaf a 13 in, disp (b) 'NO ES NUESTRO: existing (1/Z9.11)' sin gap -> FAIL? True
+G4 leaf a 4 in (gap real ~1.5 in), disp (b) 'NO ES NUESTRO: existing, gap 4 in (1/Z9.11)' (Q3) -> FAIL? False
+G5 Q2 repetido: 1/4" sin escala, leaf 10 in -> FAIL? False
+G6 Q2 sin argumento escalas (None) -> FAIL? False
+G7 Q4 repetido -> FAIL? False

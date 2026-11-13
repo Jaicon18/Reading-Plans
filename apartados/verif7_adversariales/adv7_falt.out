@@ -1,0 +1,42 @@
+== A: celdas de tabla separadas (faltante y cielo en celdas distintas), cuarto 901 CARGADO -> debe FAIL
+A0 control '| 1 | corridor 901 ceiling missing | OPEN |' -> FAIL | AUDITORIA_U181_rev9.md: '| 1 | corridor 901 ceiling missing | OPEN |' declara faltante algo CARGADO (cuarto 90
+A1 '| 1 | corridor 901 ceiling | MISSING | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A2 '| # | Item | Status |\n|---|---|---|\n| 1 | Corridor 901 ceiling | NOT LOADED |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A3 '| 1 | Room 901 | ceiling | missing |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A4 'corridor 901 ceiling; status: missing' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A5 '1\tcorridor 901 ceiling\tMISSING' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A6 '- Corridor 901 ceiling. Not loaded in the take-off.' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+A7 '| 1 | 901 | Corridor | CLG | FALTA |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+== B: otras formas de 'falta' (cuarto 901 CARGADO) -> debe FAIL
+B "| 1 | corridor 901 ceiling isn't loaded | OPEN |" -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B "| 1 | corridor 901 ceiling wasn't counted | OPEN |" -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling never added to the take-off | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling not in the take off | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling forgotten | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | se olvidó el cielo del corredor 901 | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling needs to be added | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | cielo del corredor 901 pendiente de cargar | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | no hay cielo en el corredor 901 | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling: 0 SF in the Excel | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+B '| 1 | corridor 901 ceiling not yet taken off | OPEN |' -> FAIL | AUDITORIA_U181_rev9.md: '| 1 | corridor 901 ceiling not yet taken off | OPEN |' declara faltante algo CARGADO 
+B '| 1 | corridor 901 ceiling - TBD, not in TO | OPEN |' -> PASS | N/A: sin hallazgos de cielo faltante en los .md de Auditoria/
+== D: CERRADO con una ref del MISMO cuarto que NO es cielo (cuarto 216 FALTA de verdad) -> debe FAIL
+D0 control (muro exterior) '| 1 | corridor 216 ceiling missing | CERRADO: EXT-Z9-2 (1/X9.31) | OPEN |' -> FAIL | AUDITORIA_U181_rev9.md: '| 1 | corridor 216 ceiling missing | CERRADO: EXT-Z9-2 (1/X9.31) | OPEN |' cierra con
+D1 blocking misc '| 1 | corridor 216 ceiling missing | CERRADO: BLK-216 (1/X9.31) | OPEN |' -> PASS | 1 hallazgo(s) de cielo faltante verificados contra el canon (faltante_por_tag / cuarto)
+D2 corner bead trim '| 1 | corridor 216 ceiling missing | CERRADO: CB-216 (1/X9.31) | OPEN |' -> PASS | 1 hallazgo(s) de cielo faltante verificados contra el canon (faltante_por_tag / cuarto)
+E1 DOBLE_CIELO upper/lower = blocking del 901 + hallazgo falso '901 missing' '| 1 | corridor 901 ceiling missing | OPEN |' -> PASS | 1 hallazgo(s) de cielo faltante verificados contra el canon (faltante_por_tag / cuarto)
+== C: descubrimiento real de archivos (Ctx -> B.desde_ctx), cuarto 901 CARGADO, hallazgo falso -> debe FAIL
+C COORDINACION/hallazgos_rev9.md -> ('PASS', [])
+C REVIEW_rev9.md -> ('FAIL', ['REVIEW_rev9.md'])
+C review_rev9.md -> ('PASS', [])
+C Review_rev9.md -> ('PASS', [])
+C hallazgos_rev9.md -> ('PASS', [])
+C Coordinacion/hallazgos.md -> ('PASS', [])
+C COORDINACIÓN/hallazgos.md -> ('PASS', [])
+C coordinacion/hallazgos.md -> ('PASS', [])
+C NOTAS_COORDINACION_rev9.md -> ('PASS', [])
+C QA_rev9.md -> ('PASS', [])
+C PENDIENTES_rev9.md -> ('PASS', [])
+C INFORME_COORDINACION_rev9.md -> ('FAIL', ['INFORME_COORDINACION_rev9.md'])
+C COORDINACION/hallazgos_rev9.xlsx.txt -> ('PASS', [])
+C-rev REVIEW_rev9.md + RESUMEN_rev10_plan.md -> ('PASS', ['RESUMEN_rev10_plan.md'])

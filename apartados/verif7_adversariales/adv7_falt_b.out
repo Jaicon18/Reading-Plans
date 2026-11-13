@@ -1,0 +1,18 @@
+== /tmp/verif7/v137
+celdas '| 1 | corridor 901 ceiling missing | OPEN |' -> FAIL
+celdas '| 1 | corridor 901 ceiling | MISSING | OPEN |' -> FAIL
+celdas '| 1 | Room 901 | ceiling | missing |' -> FAIL
+rglob Auditoria/hallazgos.csv []
+rglob Auditoria/notas.md []
+rglob Auditoria/sub/notas.md ['Auditoria/sub/notas.md']
+rglob COORDINACION/sub/hallazgos.md ['COORDINACION/sub/hallazgos.md']
+rglob COORDINACION/hallazgos.md []
+== /tmp/verif7
+celdas '| 1 | corridor 901 ceiling missing | OPEN |' -> FAIL
+celdas '| 1 | corridor 901 ceiling | MISSING | OPEN |' -> PASS
+celdas '| 1 | Room 901 | ceiling | missing |' -> PASS
+rglob Auditoria/hallazgos.csv []
+rglob Auditoria/notas.md []
+rglob Auditoria/sub/notas.md ['Auditoria/sub/notas.md']
+rglob COORDINACION/sub/hallazgos.md ['COORDINACION/sub/hallazgos.md']
+rglob COORDINACION/hallazgos.md []
