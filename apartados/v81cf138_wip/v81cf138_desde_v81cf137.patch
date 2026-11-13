@@ -1,6 +1,6 @@
 diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 07:12:20.736025449 +0000
-+++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 07:12:20.762442712 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 08:20:23.773823363 +0000
 @@ -8173,7 +8173,12 @@
      "take-off:tools/chequeos_biblioteca.py::_cant_ref",
      "take-off:tools/chequeos_biblioteca.py::_seg_cargado",
@@ -69,9 +69,33 @@ diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8847,6 +8861,22 @@
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "fechas_be_xf17"
+    }
++  },
++  {
++   "id": "BE-XF18",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o el único '… - OPEN IN BLUEBEAM.pdf', U-165), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; sin candidato o con más de uno = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO)",
++   "motivo": "desde v133 'MAPA DE COBERTURA - IMAGE ONLY.pdf' ordena antes que '<PROY>_markups…' (CR, GK): la compuerta leía un PDF sin annots y daba ~15 FAIL falsos (CB_U_121, CE_MARKUPS_EXCEL, CE_RCP_CONTORNO, CE_ALTURA_IMPRESA…)",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::elegir_pdf_markups",
++    "take-off:tools/compuerta_entrega.py::ce_pdf_markups_elegido"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_xf18_pdf_markups_por_nombre"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
 diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
 --- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 07:12:20.733138648 +0000
-+++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 07:12:20.766467746 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 08:20:23.778952119 +0000
 @@ -11,7 +11,7 @@
  principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
  como arreglo local de un proyecto ni en una rama aparte.
@@ -81,6 +105,16 @@ diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywa
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
+@@ -414,6 +414,9 @@
+   SUBIDA_OK.json guarda el puntero 'corrida' / 'entrega_ok' a la corrida subida. CLI `compuerta_entrega.py be_gk59 <w>`.
+ - **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
+   y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
++- **BE-XF18 (programa, COORDINACIÓN 13-nov 08:12; v81cf138):** el PDF de markups que lee la compuerta se elige por NOMBRE
++  (entrega.json 'markups' o el único '… - OPEN IN BLUEBEAM.pdf'), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura;
++  sin candidato o con más de uno = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO).
+ - **BE-XF17 (programa, COORDINACIÓN 13-nov 06:13; v81cf137):** FECHAS_PUBLICACION lleva la hora REAL del commit de publicación y se fija
+   DESPUÉS del commit (git log -1 --format=%cI), en la versión siguiente; la versión que se publica no va en el dict (fecha_publicacion
+   la toma del commit 'Publica vX'). verificar_version.revisar_fechas: fecha a más de 60 s de su commit, o sin commit = falta.
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
 Binary files vA/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and vB/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
@@ -126,7 +160,7 @@ Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups
 Binary files vA/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and vB/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 07:12:20.744233013 +0000
-+++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 07:12:20.763153783 +0000
++++ vB/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 08:20:23.774989954 +0000
 @@ -89,6 +89,25 @@
      return m.group(1).lower() if m and re.match(r"(?i)(?:entrega|final_for_review)", nombre or "") else None
  
@@ -420,8 +454,56 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py vB/take-o
          rx = re.compile(rf"(?<![\w.]){re.escape(c)}(?![\w])")
 diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 07:12:20.740612398 +0000
-+++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 07:12:20.762862205 +0000
-@@ -1946,11 +1946,62 @@
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 08:20:23.774622167 +0000
+@@ -161,6 +161,37 @@
+     return None
+ 
+ 
++NO_MARKUPS_PREFIJOS = ("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS")
++
++
++def elegir_pdf_markups(entrega_dir, cfg_markups=None):
++    """BE-XF18 (COORDINACIÓN 13-nov 08:12): el PDF de markups se elige por NOMBRE, no por orden alfabético (desde v133 'MAPA DE
++    COBERTURA - IMAGE ONLY.pdf' quedaba antes que '<PROY>_markups…' y la compuerta leía un PDF sin annots: FAIL falsos en CR).
++    Orden: entrega.json 'markups' si existe; si no, el único '… - OPEN IN BLUEBEAM.pdf' (U-165) de Planos marcados/; si no hay ninguno,
++    el único PDF candidato (entregas anteriores a U-165). Nunca un PDF 'IMAGE ONLY' / COBERTURA / DETALLES / SCHEDULES / ALTURAS / NO USAR.
++    -> (ruta o None, causa o None)"""
++    def malo(p):
++        b = os.path.basename(p)
++        return b.startswith(NO_MARKUPS_PREFIJOS) or "IMAGE ONLY" in b.upper() or "COBERTURA" in b.upper() or "NO USAR" in b.upper()
++    if cfg_markups:
++        if malo(cfg_markups):
++            return None, f"entrega.json 'markups' apunta a '{os.path.basename(cfg_markups)}', que no es el PDF de markups (IMAGE ONLY / mapa) (BE-XF18)"
++        return cfg_markups, None
++    todos = sorted(glob.glob(os.path.join(entrega_dir or "", "Planos marcados", "*.pdf")))
++    cand = [p for p in todos if not malo(p)]
++    ob = [p for p in cand if "OPEN IN BLUEBEAM" in os.path.basename(p).upper()]
++    if len(ob) == 1:
++        return ob[0], None
++    if len(ob) > 1:
++        return None, f"{len(ob)} PDF 'OPEN IN BLUEBEAM' en Planos marcados/ ({', '.join(os.path.basename(p) for p in ob[:4])}): no se sabe cuál leer (BE-XF18)"
++    if len(cand) == 1:
++        return cand[0], None
++    if not cand:
++        return None, (f"0 PDF de markups en Planos marcados/ (hay {len(todos)} PDF, todos IMAGE ONLY / mapa / DETALLES / SCHEDULES) (BE-XF18)"
++                      if todos else None)
++    return None, f"{len(cand)} PDF candidatos sin 'OPEN IN BLUEBEAM' ({', '.join(os.path.basename(p) for p in cand[:4])}): no se sabe cuál leer (BE-XF18)"
++
++
+ class Ctx:
+     def __init__(self, workdir, entrega_json=None):
+         self.w = os.path.abspath(workdir)
+@@ -173,8 +204,7 @@
+         self.entrega = ed
+         e = ed or self.w
+         self.excel = g("excel") or _ultimo(["Take-off/*.xlsx"], e)
+-        self.markups = g("markups") or next((p for p in sorted(glob.glob(os.path.join(e, "Planos marcados", "*.pdf")), reverse=True)
+-                                             if not os.path.basename(p).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS"))), None)
++        self.markups, self.markups_causa = elegir_pdf_markups(e, g("markups"))   # BE-XF18: por nombre, nunca el mapa IMAGE ONLY
+         self.planos = os.path.join(e, "Planos marcados")
+         self.readme = os.path.join(e, "README_REVIEW.md")
+         self.para = os.path.join(e, "PARA_REVISAR_EN_LA_MANANA.md")
+@@ -1946,11 +1976,62 @@
          return "FAIL", ["la rev no se puede fechar (sin marcas en tiempos.log ni commits de su carpeta): los requisitos de proceso de "
                          "v81cf119 aplican = FAIL"] + ev
      if ini < datetime.datetime.fromisoformat(FECHA_V119):
@@ -486,7 +568,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def _tiempos_log(w):
      return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
  
-@@ -2025,6 +2076,25 @@
+@@ -2025,6 +2106,25 @@
      return ev
  
  
@@ -512,7 +594,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def alarma_fallas(w, na, registro=None, tiempos_txt=None):
      """verificación 12b (NO GUARD 3.3 / BE-PM06 STILL-WEAK: la alarma era opcional): (1) todo paso 1-9 cerrado en tiempos.log
      ('| N fin …') tiene su corrida 'compuerta_entrega.py <w> --paso N' en compuerta_corridas.jsonl; (2) si el tiempo pasó el 50 % / 100 %
-@@ -2060,11 +2130,12 @@
+@@ -2060,11 +2160,12 @@
      t0, b = ms[0][0], presupuesto_min(na)
      al = _json(os.path.join(w, "ALERTA_PRESUPUESTO.json")) or {}
      hist = al.get("historial") or ([al] if al.get("umbral") else [])
@@ -526,7 +608,25 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          ok = [h for h in hist if int(h.get("umbral") or 0) >= u and h.get("log_ts")
                and cruce <= datetime.datetime.fromisoformat(h["log_ts"]) <= (limite or datetime.datetime.max)]
          if not ok:
-@@ -4815,11 +4886,19 @@
+@@ -4396,6 +4497,17 @@
+             and "NO USAR" not in os.path.basename(p) and "COBERTURA" not in os.path.basename(p).upper()]
+ 
+ 
++@chequeo("CE_PDF_MARKUPS_ELEGIDO", ["BE-XF18", "U-165"], "BE-XF18: la compuerta lee el PDF de markups elegido por NOMBRE ('OPEN IN BLUEBEAM' o "
++         "entrega.json 'markups'), nunca el mapa 'IMAGE ONLY'; sin candidato o con más de uno = FAIL con la causa")
++def ce_pdf_markups_elegido(c):
++    causa = getattr(c, "markups_causa", None)
++    if causa:
++        return R("FAIL", causa)
++    if not getattr(c, "markups", None):
++        return R("FAIL", "sin PDF de markups (U-137)")
++    return R("PASS", f"PDF de markups leído: {os.path.basename(c.markups)}")
++
++
+ def subject_sin_medida_fallas(pdf, xlsx=None, tipos=None):
+     """BE-XF07 (Xfinity Interquest rev1, COORDINACIÓN 10-nov): todo markup cuyo Subject es un type del Partition Takeoff o DEMO
+     lleva /Measure y cae en una página con /VP; si no, Bluebeam lo suma al grupo del type en la Markups List / CSV (W2 3 en vez
+@@ -4815,11 +4927,19 @@
  TOOLS_ETAPA_0_1 = {"arranque.py", "inventario_tags.py", "palabras_fitz.py", "escala_pagina.py", "quitar_firmas_labels.py"}
  
  
@@ -548,7 +648,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
      while True:
          t2 = re.sub(r"^(?:subagente|subagent|agente|agent)", "", t)
          if t2 == t or not t2:
-@@ -4828,25 +4907,68 @@
+@@ -4828,25 +4948,68 @@
  
  
  def corridas_con_agente(w):
@@ -622,7 +722,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          (rep if ok else no).append(x)
      return rep, no
  
-@@ -7909,6 +8031,16 @@
+@@ -7909,6 +8072,16 @@
      return ev
  
  
@@ -639,7 +739,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  def be_gk54_fallas(canon, cob_rows, esc=9.0, gap_in=14.0, to_canon=None, escalas=None):
      """BE-GK54 (Grand Kia rev3a, U-193 rojo M-A111-29, 12-nov; unido de apartados/be_gk54; ampliado en v120): dos bandas paralelas con gap
      (o con dos tags) son DOS walls. Una exclusión que dice que es el MISMO muro que <X> (gk54_mismo_muro) sin una prueba del gap válida
-@@ -7957,17 +8089,23 @@
+@@ -7957,17 +8130,23 @@
              except (KeyError, TypeError, ValueError):
                  continue
              along, cross = (rx, ry) if b["ori"] == "H" else (ry, rx)
@@ -666,7 +766,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
              if not (0.5 < abs(cross - c_mid) <= tol and a1 >= lo - e_h and a0 <= hi + e_h) or (wid, hid) in vistos:
                  continue
              vistos.add((wid, hid))
-@@ -7979,16 +8117,27 @@
+@@ -7979,16 +8158,27 @@
                  continue
              gp = lambda x: ("gap: " + str(x.get("gap_proof"))) if str(x.get("gap_proof") or "").strip() else ""   # noqa: E731  v125
  
@@ -698,7 +798,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
              mm = es_mismo_muro(dtx, walls) if dtx.strip() else any(es_mismo_muro(str(x.get("reason") or ""), walls) for x in ligadas)
              motivo = ("is counted as the SAME wall without a gap_proof (N/SHEET + gap measured 0)" if mm else
                        "is disposed / excluded without proof: same wall = gap_proof with gap measured 0 + N/SHEET; another printed "
-@@ -8165,7 +8314,7 @@
+@@ -8165,7 +8355,7 @@
          ev.append("la bitácora no tiene corridas de canon.py con su agente (SUBAGENTE_ID en el entorno al correr canon.py por bitacora.py "
                    "run): 'revisor distinto del autor' no se puede verificar = FAIL (U-193)")
      viejas, nuevas = corridas_sin_agente_por_fecha(sin_agente)
@@ -709,7 +809,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          amber.append(f"causa: cadena interrumpida y reemplazada: {len(reemp)} corrida(s) sin agente ({', '.join(reemp[:4])}) se volvieron "
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
 --- vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 07:12:20.744133087 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 07:12:20.763035545 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 08:20:23.774936867 +0000
 @@ -638,13 +638,15 @@
      e, ev = fn(B(canon=can, textos={"Auditoria/AUDITORIA_U181_rev9.md": "| 8 | soffit 30/X9.20 (missing) for the ceiling band | n/a |"}))
      assert e == "FAIL", (e, ev)                                          # v121: con palabra de cielo ya no se salta
@@ -754,8 +854,16 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py vB/t
      for ln in ("X9.01 GYP-9 8'-11\" missing in corridor 901 along wall X9-901-01 | OPEN",
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 07:12:20.755841900 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 07:12:20.765922029 +0000
-@@ -2946,9 +2946,15 @@
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 08:20:23.774450871 +0000
+@@ -14,6 +14,7 @@
+ import shutil
+ import subprocess
+ import sys
++import glob  # noqa: E402  BE-XF18
+ import tempfile
+ 
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+@@ -2946,9 +2947,15 @@
      open(os.path.join(w, "tiempos.log"), "w").write("12-nov 08:00 PST | rev9b inicio\n12-nov 08:20 PST | 6 fin\n")   # cierres 7-10 solo en commits
      ms = CE.marcas_tiempos_log(os.path.join(w, "tiempos.log"))
      assert [t.isoformat() for t, _l in ms] == ["2026-11-12T08:00:00", "2026-11-12T08:20:00"], ms
@@ -771,7 +879,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      assert CE.proceso_v119(w, None, tt, 5)[0] == "AMBER"
      open(os.path.join(w, "tiempos.log"), "w").write("12-nov 14:00 PST | rev9c inicio\n")                               # 22:00 UTC > v119
      assert CE.proceso_v119(w, None, tt, 5)[0] == "FAIL"
-@@ -3007,7 +3013,9 @@
+@@ -3007,7 +3014,9 @@
      assert est == "FAIL" and "fuera de orden" in msg[0], (est, msg)                                 # P5 año mal escrito
      est, msg = CE.proceso_v119(mk(parent="2026-11-10 09:00 | rev20 fin\n2025-11-11 09:00 | 1 inicio rev21\n"), None, TT, 5)
      assert est == "FAIL" and "año imposible" in msg[0], (est, msg)
@@ -782,7 +890,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      assert est == "AMBER" and "causa:" in msg[0], (est, msg)                                       # control: rev anterior a v119
      band = {"ori": "V", "c0": 1509.0, "c1": 1512.8, "lo": 1124.0, "hi": 1163.8, "sheet": "Z9.11"}
      red = [{"hoja": "Z9.11", "tipo": "muro", "id": "M-29", "x": "1505.7", "y": "1145.0", "largo_ft": "4.0", "estado": "ROJO"}]
-@@ -3078,6 +3086,7 @@
+@@ -3078,6 +3087,7 @@
          w = os.path.join(tempfile.mkdtemp(prefix="v123_"), "rev20b")
          os.makedirs(w)
          open(os.path.join(w, "tiempos.log"), "w").write(f"12-nov {hora} PST | 1 inicio rev20b\n")
@@ -790,7 +898,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
          est, msg = CE.proceso_v119(w, None, tt, 5)
          assert est == esperado, (hora, est, msg)
      v, n = CE.corridas_sin_agente_por_fecha(["canon.py 2026-11-12T19:49:00"])
-@@ -3109,11 +3118,13 @@
+@@ -3109,11 +3119,13 @@
      assert not gk('NO ES NUESTRO: CMU type K, gap 10.0" (1/Z9.11)', x=1499.5), "CMU type K a 10.0 in = PASS"
      assert gk('NO ES NUESTRO: existing CMU (1/Z9.11)'), "otro material sin gap medido = FAIL"
      assert gk('NO ES NUESTRO: existing CMU, gap 13.5"'), "sin N/HOJA = FAIL"
@@ -806,7 +914,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      ex = [{"id": "EX", "reason": f"by others: existing concrete beside {W}", "gap_proof": 'gap 12" (1/Z9.11)'}]
      assert not gk("", excl=ex) or True                                  # disposición vacía + exclusión: se revisa la exclusión
      rows_rojo = [{"hoja": "Z9.11", "tipo": "muro", "id": "M-29", "x": "1497.0", "y": "1145.0", "largo_ft": "4.0", "estado": "ROJO"}]
-@@ -3150,11 +3161,15 @@
+@@ -3150,11 +3162,15 @@
      corrida después con agente) = AMBER 'cadena interrumpida y reemplazada'; sin reemplazo = FAIL; (2) GK54 enlaza exclusión y rojo SOLO
      por el id de canon del muro; una disposición NO ES NUESTRO con prueba de material no se cruza con la exclusión de fusión de otra pieza."""
      sin = ["disponer_tags.py 2026-11-12T21:24:01", "canon.py 2026-11-12T21:24:10", "test_ciego.py 2026-11-12T21:24:30"]
@@ -826,7 +934,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      band = {"ori": "V", "c0": 1509.0, "c1": 1512.8, "lo": 1124.0, "hi": 1163.8, "sheet": "Z9.11"}
      W, W2 = "X9-Z9-08", "X9-Z9-30"
      walls = [{"id": W, "band": band}, {"id": W2, "band": dict(band, c0=1700.0, c1=1703.8)}]
-@@ -3181,6 +3196,7 @@
+@@ -3181,6 +3197,7 @@
      open(os.path.join(w, "tiempos.log"), "w").write("10-nov 21:01 PST | (copiado de rev20a) arranque\n12-nov 11:49 PST | 1 inicio rev20b\n")
      assert CE._etiqueta_rev(w) == "20b"
      tt = "| Paso | Inicio | Fin | Duración |\n|---|---|---|---|\n| 7 | 11-12 11:50 | 11-12 12:20 | 30 min |\n"
@@ -834,7 +942,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
      est, msg = CE.proceso_v119(w, None, tt, 5)
      assert est == "AMBER" and "causa:" in msg[0], (est, msg)          # 19:49 UTC < FECHA_V119 (21:21:52Z)
      w2 = os.path.join(tempfile.mkdtemp(prefix="v127b_"), "entrega")
-@@ -3788,3 +3804,204 @@
+@@ -3788,3 +3805,230 @@
  
  
  test_u199_cierre_path_esquema_cr()
@@ -1039,3 +1147,29 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/tak
 +
 +
 +test_v138_faltante_misma_frase()
++
++
++def test_be_xf18_pdf_markups_por_nombre():
++    """BE-XF18: con el mapa 'MAPA DE COBERTURA - IMAGE ONLY.pdf' y el PDF de markups en Planos marcados/, la compuerta lee el de markups
++    (el mapa ordena antes que '<PROY>_markups…' para proyectos que empiezan con letra menor que M); entrega.json 'markups' manda; dos
++    PDF OPEN IN BLUEBEAM o 'markups' apuntando al mapa = FAIL con la causa."""
++    e = tempfile.mkdtemp(prefix="xf18_")
++    pm = os.path.join(e, "Planos marcados")
++    os.makedirs(pm)
++    for n in ("CZ_markups_rev9 - OPEN IN BLUEBEAM.pdf", CE.COB_PDF, "DETALLES_REVISADOS.pdf", "ALTURAS_REVISADAS.pdf"):
++        open(os.path.join(pm, n), "w").write("x")
++    p, causa = CE.elegir_pdf_markups(e)
++    assert causa is None and os.path.basename(p) == "CZ_markups_rev9 - OPEN IN BLUEBEAM.pdf", (p, causa)
++    viejo = next(q for q in sorted(glob.glob(os.path.join(pm, "*.pdf")), reverse=True)
++                 if not os.path.basename(q).startswith(("DETALLES_REVISADOS", "SCHEDULES_REVISADOS", "ALTURAS_REVISADAS")))
++    assert "IMAGE ONLY" in viejo                                                   # la regla vieja leía el mapa (el error)
++    assert CE.elegir_pdf_markups(e, os.path.join(pm, CE.COB_PDF))[1]               # 'markups' apuntando al mapa = causa
++    open(os.path.join(pm, "CZ_markups_rev8 - OPEN IN BLUEBEAM.pdf"), "w").write("x")
++    p, causa = CE.elegir_pdf_markups(e)
++    assert p is None and "2 PDF" in causa, (p, causa)                              # dos candidatos = FAIL con la causa
++    c = type("C", (), {"markups": None, "markups_causa": causa})()
++    assert CE.ce_pdf_markups_elegido(c)[0] == "FAIL"
++    print("test_be_xf18_pdf_markups_por_nombre OK")
++
++
++test_be_xf18_pdf_markups_por_nombre()

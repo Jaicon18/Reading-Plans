@@ -8861,6 +8861,22 @@
     "archivo": "ordenes:test_verificar_version.py",
     "token": "fechas_be_xf17"
    }
+  },
+  {
+   "id": "BE-XF18",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o el único '… - OPEN IN BLUEBEAM.pdf', U-165), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; sin candidato o con más de uno = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO)",
+   "motivo": "desde v133 'MAPA DE COBERTURA - IMAGE ONLY.pdf' ordena antes que '<PROY>_markups…' (CR, GK): la compuerta leía un PDF sin annots y daba ~15 FAIL falsos (CB_U_121, CE_MARKUPS_EXCEL, CE_RCP_CONTORNO, CE_ALTURA_IMPRESA…)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::elegir_pdf_markups",
+    "take-off:tools/compuerta_entrega.py::ce_pdf_markups_elegido"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_xf18_pdf_markups_por_nombre"
+   }
   }
  ]
 }

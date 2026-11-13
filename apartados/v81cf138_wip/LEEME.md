@@ -20,6 +20,11 @@ Estado: preparado, NO publicado. Vigente: v81cf137. Se publica cuando COORDINACI
 | BE-GK54 | gap_proof 'gap 0' con distancia medida > 2 in = FAIL | test_v138_gk54_gap_medido |
 | v120-RETRO | el AMBER retroactivo exige inicio independiente (VERSION_PROYECTO / bitácora / git) anterior a v119 y a <= 24 h del log | test_v138_retro_fuente_independiente |
 
+## BE-XF18 (COORDINACIÓN 08:12)
+
+`Ctx` elegía el PDF de markups por orden alfabético inverso. Desde v133, 'MAPA DE COBERTURA - IMAGE ONLY.pdf' ordena antes que '<PROY>_markups…' cuando el prefijo del proyecto es menor que M (CR, GK); la compuerta leía el mapa (0 annots) y daba FAIL falsos. Ahora `elegir_pdf_markups` toma entrega.json 'markups' o el único '… - OPEN IN BLUEBEAM.pdf' (U-165); nunca 'IMAGE ONLY' / COBERTURA; sin candidato o con más de uno = FAIL con la causa (CE_PDF_MARKUPS_ELEGIDO). Test test_be_xf18_pdf_markups_por_nombre.
+Entregas revisadas (ENTREGA_OK archivos): GK rev2 / rev3 / rev3a / rev3b y XF rev1c leyeron su PDF OPEN IN BLUEBEAM. En GK rev3b el mapa todavía se llamaba 'COBERTURA - IMAGE ONLY.pdf', que ordena antes que 'GK_…', así que la regla vieja acertó. El error aparece solo con el nombre de v133 ('MAPA…').
+
 ## Lo que NO cierra (para la verificación 7)
 
 - BE-GK54 Q2: una hoja sin escala en `escalas` usa 9 pt/ft por omisión; una leaf de una hoja a 1/4" se sale de la ventana.
@@ -31,5 +36,5 @@ Estado: preparado, NO publicado. Vigente: v81cf137. Se publica cuando COORDINACI
 
 ## Validación
 
-suite 47/47 · banco 0 distintas (8) · XF PRUEBA_ABIERTOS 0 regresiones (230 / 12 / 0) · reglas 0 sin clasificar · 199 archivos. La primera corrida dio un falso positivo nuevo en XF (CB_FALTANTES_AUDITORIA leía 'not quantified' + 'above ceiling' de una fila del Scope); quedó corregido con la regla de "misma frase".
+suite 47/47 · banco 0 distintas (8) · XF PRUEBA_ABIERTOS 0 regresiones (231 / 12 / 0, con BE-XF18) · reglas 0 sin clasificar · 199 archivos. La primera corrida dio un falso positivo nuevo en XF (CB_FALTANTES_AUDITORIA leía 'not quantified' + 'above ceiling' de una fila del Scope); quedó corregido con la regla de "misma frase".
 No dice CONFIRMED-CLOSED en ningún lado: eso lo decide la verificación independiente 7.
