@@ -1,7 +1,51 @@
 diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.126244866 +0000
-+++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:15:05.141206529 +0000
-@@ -8683,6 +8683,35 @@
++++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:58:53.851093936 +0000
+@@ -7446,7 +7446,7 @@
+   {
+    "id": "U-177",
+    "origen": "ORDENES_DEL_USUARIO.md (11-nov, auditoría adversarial U-138)",
+-   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO)",
++   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si SUBIDA_OK es posterior a él y anterior a la publicación de la siguiente versión y los hashes coinciden (salvo versión que cambie cantidades, U-180 (4))",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+@@ -7457,11 +7457,13 @@
+     "take-off:tools/compuerta_entrega.py::vigente_fallas",
+     "take-off:tools/subir_entrega.py::verificar_vigente",
+     "take-off:tools/compuerta_entrega.py::ce_ms_gauge",
+-    "take-off:tools/compuerta_entrega.py::ce_ms_producto"
++    "take-off:tools/compuerta_entrega.py::ce_ms_producto",
++    "take-off:tools/compuerta_entrega.py::entrega_ok_anterior_valida",
++    "take-off:tools/compuerta_entrega.py::vigente_fallas"
+    ],
+    "test": {
+-    "archivo": "take-off:tools/test_hoja_sufijo.py",
+-    "token": "test_be_gk22_26_guardas"
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_v131_verde_subido_version_anterior"
+    }
+   },
+   {
+@@ -7627,14 +7629,15 @@
+   {
+    "id": "U-184",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, protocolo bien a la primera en 2-3 h)",
+-   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas",
++   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas ; v131: re-corrida por cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales (AMBER con causa)",
+    "categoria": "programa",
+    "cuando": "entrega",
+    "chequeos": [
+     "take-off:tools/compuerta_entrega.py::ce_protocolo_3h",
+     "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas",
+     "take-off:tools/chequeos_biblioteca.py::u_184_elev",
+-    "take-off:tools/chequeos_biblioteca.py::u_184_excl"
++    "take-off:tools/chequeos_biblioteca.py::u_184_excl",
++    "take-off:tools/compuerta_entrega.py::recorridas_por_version"
+    ],
+    "test": {
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+@@ -8683,6 +8686,35 @@
     "categoria": "conducta",
     "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
     "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
@@ -40,7 +84,7 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
 \ No newline at end of file
 diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-drywall/SKILL.md
 --- v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.132532314 +0000
-+++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:15:05.145216049 +0000
++++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:58:53.855831855 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -50,10 +94,15 @@ diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -363,6 +363,12 @@
+@@ -363,6 +363,17 @@
    (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
    de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
    dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **v81cf131 (COORDINACIÓN 13-nov 01:48, GK):** una entrega SUBIDA con el VERDE de la versión vigente al subir (SUBIDA_OK + ENTREGA_OK
++  de esa versión) sigue VÁLIDA aunque después se publique otra, salvo que una versión posterior cambie cantidades (U-180 (4),
++  VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si SUBIDA_OK es posterior a él y anterior a la
++  publicación de la versión siguiente (FECHAS_PUBLICACION, hora real del commit) y los hashes de Drive coinciden. La re-corrida por
++  cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
 +- **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
 +  y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
 +- **BE-GK57 / BE-GK58 (Grand Kia rev3b, unidas en v81cf131):** (57) copias, backups y entregas previas van FUERA del árbol de trabajo
@@ -108,8 +157,154 @@ Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_marku
 Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.130106587 +0000
-+++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:15:05.144653164 +0000
-@@ -6665,6 +6665,30 @@
++++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:58:53.855205606 +0000
+@@ -757,7 +757,11 @@
+ FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
+ FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
+ FECHA_V121 = "2026-11-12T22:44:35+00:00"      # v81cf121 (U-193: identidad declarada en la GUÍA); v123: commit de publicación 51ce837
+-FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121": FECHA_V121}   # v123 (COORDINACIÓN 12-nov 22:46): una
++FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121": FECHA_V121,
++                      "v81cf122": "2026-11-12T22:50:08+00:00", "v81cf123": "2026-11-12T22:54:07+00:00", "v81cf124": "2026-11-12T23:00:49+00:00",
++                      "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
++                      "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00"}
++VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+ U189_CB = {"CB_RCP_APILADOS": FECHA_V119, "CB_DETALLE_CARAS": FECHA_V119, "CB_FALTANTES_AUDITORIA": FECHA_V119, "CB_RCP_TAGS": FECHA_V104, "CB_U_191_REF": FECHA_V114, "CE_RESUMEN_EXCEL": FECHA_V114, "CE_VERSION_ENTREGA": FECHA_V114, "CE_COBERTURA": FECHA_V119}  # v81cf114: APILADOS / U_191 endurecidos (BE-AUD05 / 06) -> fecha nueva      # v81cf100: BE-CR37 (un ancho desarrollado por lado) exigido desde aquí       # v81cf96 publicada: campos nuevos del canon / posiciones de puerta exigidos desde aquí
+@@ -3693,7 +3697,7 @@
+     return h.hexdigest()
+ 
+ 
+-def vigente_fallas(ok, drive_listado, chequeos_actuales):
++def vigente_fallas(ok, drive_listado, chequeos_actuales, subida=None):
+     """U-177 (1): ENTREGA_OK vale solo para lo que validó. ok = ENTREGA_OK.json; drive_listado = {nombre: md5} de los archivos VIGENTES en
+     Drive (sin zz / REPLACED); chequeos_actuales = ids de CHEQUEOS de la versión vigente del skill. -> [fallas]"""
+     ev = []
+@@ -3710,7 +3714,7 @@
+             ev.append(f"{k} '{v.get('nombre')}': el de Drive (md5 {md[:8]}) no es el que validó la compuerta (md5 {str(v.get('md5'))[:8]})")
+     corridos = {r.get("id") for r in (ok or {}).get("chequeos") or []}
+     faltan = sorted(set(chequeos_actuales) - corridos)
+-    if faltan:
++    if faltan and not entrega_ok_anterior_valida(ok, subida)[0]:   # v131: VERDE de la versión vigente al subir = sigue válido
+         ev.append(f"la compuerta no corrió con el skill vigente: faltan {len(faltan)} chequeos ({', '.join(faltan[:8])})")
+     return ev
+ 
+@@ -3858,6 +3862,68 @@
+     return rep, no
+ 
+ 
++def _num_version(v):
++    m = re.search(r"v(\d+)cf(\d+)", str(v or ""))
++    return (int(m.group(1)), int(m.group(2))) if m else None
++
++
++def fecha_publicacion(version, repo=None):
++    """v131: hora REAL del commit que publicó la versión (tabla FECHAS_PUBLICACION; si no está, `git log` del repo con 'Publica <v>' /
++    '<v> VIGENTE'). -> datetime con zona o None."""
++    if version in FECHAS_PUBLICACION:
++        return datetime.datetime.fromisoformat(FECHAS_PUBLICACION[version])
++    repo = repo or os.environ.get("TAKEOFF_REPO") or "/home/user/Reading-Plans"
++    try:
++        r = subprocess.run(["git", "-C", repo, "log", "--format=%cI %s", "--fixed-strings", f"--grep={version}"], capture_output=True,
++                           text=True, timeout=30)
++        for ln in (r.stdout or "").splitlines():
++            t, _, msg = ln.partition(" ")
++            if re.search(rf"Publica {re.escape(version)}\b|{re.escape(version)} VIGENTE", msg):
++                return datetime.datetime.fromisoformat(t)
++    except (OSError, subprocess.SubprocessError, ValueError):
++        pass
++    return None
++
++
++def version_siguiente(version):
++    """la versión publicada inmediatamente después de `version` (por número), según FECHAS_PUBLICACION; None si es la última conocida."""
++    n = _num_version(version)
++    sig = sorted((k for k in FECHAS_PUBLICACION if n and _num_version(k) > n), key=_num_version)
++    if sig:
++        return sig[0]
++    return f"v{n[0]}cf{n[1] + 1}" if n else None
++
++
++def version_vigente_en(t):
++    """la versión vigente en el momento t (la última publicada con fecha <= t, de FECHAS_PUBLICACION); None antes de la tabla."""
++    vs = [(datetime.datetime.fromisoformat(f), v) for v, f in FECHAS_PUBLICACION.items()]
++    vs = [x for x in vs if t and x[0] <= t]
++    return max(vs)[1] if vs else None
++
++
++def entrega_ok_anterior_valida(ok, subida):
++    """v131 (COORDINACIÓN 13-nov 01:48, GK: VERDE v129 subido y luego se publica v130): una entrega SUBIDA con un VERDE de la versión que
++    era vigente al subir sigue VÁLIDA aunque después se publique otra, si (a) SUBIDA_OK es posterior a ese ENTREGA_OK y anterior a la
++    publicación de la versión siguiente, (b) los hashes coinciden (lo revisa vigente_fallas contra Drive) y (c) ninguna versión posterior
++    cambió cantidades (U-180 (4)). -> (bool, motivo)"""
++    v = (ok or {}).get("skill_version")
++    t_ok = _iso((ok or {}).get("fecha_iso"))
++    t_sub = _iso((subida or {}).get("fecha_iso") or (subida or {}).get("fecha"))
++    if not (v and t_ok and t_sub and (ok or {}).get("ok")):
++        return False, "sin versión / fecha de ENTREGA_OK o de SUBIDA_OK"
++    if t_sub < t_ok:
++        return False, f"SUBIDA_OK ({t_sub.isoformat()}) anterior al ENTREGA_OK ({t_ok.isoformat()})"
++    sig = version_siguiente(v)
++    t_sig = fecha_publicacion(sig) if sig else None
++    if t_sig is not None and t_sub >= t_sig:
++        return False, f"subida {t_sub.isoformat()} después de publicada {sig} ({t_sig.isoformat()}): el VERDE de {v} ya no era vigente"
++    n = _num_version(v)
++    cambia = [x for x in VERSIONES_CAMBIAN_CANTIDADES if n and _num_version(x) and _num_version(x) > n]
++    if cambia:
++        return False, f"versiones posteriores que cambian cantidades: {', '.join(sorted(cambia))} (U-180 (4))"
++    return True, f"VERDE de {v} ({t_ok.isoformat()}) subido {t_sub.isoformat()}, antes de publicarse {sig}: sigue válido (v131)"
++
++
+ def corridas_sin_agente_por_fecha(sin):
+     """v122 (COORDINACIÓN 12-nov, CR): corridas sin agente ('<tool> <ts>') -> (viejas: ts ANTES de FECHA_V119, nuevas: desde FECHA_V119 o
+     sin fecha). ts de bitacora.py sin zona = UTC (contenedor). Viejas = AMBER con causa; nuevas = FAIL."""
+@@ -3901,6 +3967,25 @@
+     return rev, autores, canon, sin
+ 
+ 
++def recorridas_por_version(fin, subida):
++    """v131 (COORDINACIÓN 13-nov 01:48, GK): corridas finales HECHAS DESPUÉS de un VERDE subido (SUBIDA_OK) con una versión del skill
++    distinta de la vigente al subir: no cuentan para el tope de 2 corridas finales (AMBER con causa). La versión de una corrida = su campo
++    'version' o la vigente a su hora (FECHAS_PUBLICACION); la corrida actual sin ts = la versión del skill que corre."""
++    t_sub = _iso((subida or {}).get("fecha_iso") or (subida or {}).get("fecha")) if subida else None
++    if not t_sub:
++        return []
++    v_sub = version_vigente_en(t_sub)
++    out = []
++    for x in fin or []:
++        t = _iso(x.get("ts")) if x.get("ts") else None
++        if t is not None and t <= t_sub:
++            continue
++        v = x.get("version") or (version_vigente_en(t) if t else _skill_version())
++        if v and v_sub and v != v_sub:
++            out.append(x)
++    return out
++
++
+ def protocolo_3h_fallas(w, entrega, excel, pdf, subida=None, tiempos_txt="", corridas=None, ahora=None, registro_corridas=None, cobertura=None):
+     """U-184 (usuario 11-nov: '... más de 30 horas ... tienes que terminarlo entre 2 y 3 horas'): (1) auditoría U-181 fechada ANTES de la
+     primera subida; (2) H-A / H-B dentro de las lecturas (ALTURAS_IMPRESAS_A / _B + TIEMPOS.md de las lecturas los nombra); (3) Excel y
+@@ -3955,6 +4040,11 @@
+     if corridas is not None:
+         fin = [x for x in corridas if x.get("excel") == (_sha(excel) if excel and os.path.isfile(excel) else None)
+                and x.get("pdf") == (_sha(pdf) if pdf and os.path.isfile(pdf) else None)]
++        recorr = recorridas_por_version(fin, subida)       # v131 (GK): re-corrida por cambio de versión después de un VERDE subido
++        if recorr:
++            fin = [x for x in fin if x not in recorr]
++            info.append(f"causa: re-corrida por cambio de versión: {len(recorr)} corrida(s) después del VERDE subido "
++                        f"({(subida or {}).get('fecha_iso')}) con otra versión del skill; no cuentan para el tope de 2 (v131, AMBER)")
+         info.append(f"{len(fin)} corrida(s) final(es) sobre estos archivos, {len(corridas)} en la rev")
+         if len(fin) > 2:
+             ev.append(f"(4) {len(fin)} corridas finales de compuerta sobre los mismos archivos (máximo 2): reportar la causa (compuerta temprana por paso, U-184 (2))")
+@@ -4154,6 +4244,7 @@
+         return R("AMBER", f"entrega con primera subida {primera.isoformat()} anterior a U-184: no se re-abre (U-180 (4) / U-184 (6))", *ev[:10], *info)
+     if ev:
+         return R("FAIL", *ev[:20], *info)
++    amber_proc += [x for x in info if x.startswith("causa: re-corrida por cambio de versión")]   # v131
+     return R("AMBER", *amber_proc[:20], *info) if amber_proc else R("PASS", *info)
+ 
+ 
+@@ -6665,6 +6756,30 @@
      return out
  
  
@@ -140,7 +335,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
  RX_GK56_GAP = re.compile(r"(?i)\bgap\s*:?\s*(\d+(?:\.\d+)?)\s*(?:\"|in\b)")
  
  
-@@ -7120,6 +7144,10 @@
+@@ -7120,6 +7235,10 @@
              print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
          print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
          return 0 if o["ok"] else 1
@@ -151,10 +346,60 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
      if len(argv) > 2 and argv[1] == "be_gk56":                      # BE-GK56: destino 'same wall' medido
          ev = be_gk56_fallas(json.load(open(argv[2], encoding="utf-8")))
          print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
+@@ -7197,7 +7316,7 @@
+     json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+     vg = out.get("vigentes") or {}                                     # U-184 (2)(7): registro de corridas de la compuerta
+     with open(reg_p, "a", encoding="utf-8") as f:
+-        f.write(json.dumps({"evento": "fin", "corrida": cid, "tipo": tipo, "paso": paso, "ts": out["fecha_iso"],
++        f.write(json.dumps({"evento": "fin", "corrida": cid, "tipo": tipo, "paso": paso, "ts": out["fecha_iso"], "version": _skill_version(),
+                             "entrega_dir": out.get("entrega_dir"), "ok": out["ok"], "resumen": out["resumen"],
+                             "excel": (vg.get("excel") or {}).get("sha256"), "pdf": (vg.get("pdf") or {}).get("sha256"),
+                             "segundos": round(sum(r.get("segundos") or 0 for r in out["chequeos"]), 1)}) + "\n")
+diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off-metal-frame-drywall/tools/subir_entrega.py
+--- v130/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 01:13:41.129829766 +0000
++++ v131/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 01:58:53.854982441 +0000
+@@ -95,14 +95,14 @@
+         q["pageToken"] = b["nextPageToken"]
+ 
+ 
+-def verificar_vigente(ok, log, listar=md5_drive):
++def verificar_vigente(ok, log, listar=md5_drive, subida=None):
+     """U-177 (1): -> fallas de CE.vigente_fallas con el md5 de Drive de las carpetas del PDF y del Excel vigentes."""
+     vg = ok.get("vigentes") or {}
+     carpetas = {e["carpeta_id"] for e in log for v in vg.values() if os.path.basename(e["archivo"]) == v.get("nombre")}
+     md = {}
+     for cid in carpetas:
+         md.update(listar(cid))
+-    return CE.vigente_fallas(ok, md, [x[0] for x in CE.CHEQUEOS])
++    return CE.vigente_fallas(ok, md, [x[0] for x in CE.CHEQUEOS], subida)    # v131: VERDE de la versión vigente al subir sigue válido
+ 
+ 
+ def candados(workdir):
+@@ -402,8 +402,9 @@
+     if "--vigente" in argv:                           # U-177 (1): antes de reportar o de un bid: Drive = lo validado, skill vigente
+         w = os.path.abspath(argv[1])
+         ok = json.load(open(os.path.join(w, "ENTREGA_OK.json"), encoding="utf-8"))
+-        log = (json.load(open(os.path.join(w, "SUBIDA_OK.json"), encoding="utf-8")) if os.path.isfile(os.path.join(w, "SUBIDA_OK.json")) else {}).get("subidos") or []
+-        ev = verificar_vigente(ok, log)
++        sub = json.load(open(os.path.join(w, "SUBIDA_OK.json"), encoding="utf-8")) if os.path.isfile(os.path.join(w, "SUBIDA_OK.json")) else {}
++        log = sub.get("subidos") or []
++        ev = verificar_vigente(ok, log, subida=sub)
+         print("ENTREGA VIGENTE: " + ("FAIL - " + "; ".join(ev) if ev else "PASS (Drive = lo que validó la compuerta, con todos los chequeos del skill vigente)"))
+         return 1 if ev else 0
+     try:
 diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.127141891 +0000
-+++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:15:05.141920577 +0000
-@@ -3269,3 +3269,31 @@
++++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:58:53.851897433 +0000
+@@ -3071,7 +3071,7 @@
+     arrancada a las 19:49 UTC (v118 vigente) no queda sujeta a las reglas de v119 (AMBER con causa); una arrancada después de 21:21:52Z sí."""
+     import datetime as _dt
+     assert CE.FECHA_V119 == "2026-11-12T21:21:52+00:00" and CE.FECHA_V120 == "2026-11-12T22:01:18+00:00"
+-    assert CE.FECHA_V121 == "2026-11-12T22:44:35+00:00" and set(CE.FECHAS_PUBLICACION) == {"v81cf119", "v81cf120", "v81cf121"}
++    assert CE.FECHA_V121 == "2026-11-12T22:44:35+00:00" and {"v81cf119", "v81cf120", "v81cf121"} <= set(CE.FECHAS_PUBLICACION)
+     assert CE.FECHA_V119 < CE.FECHA_V120 < CE.FECHA_V121
+     tt = "| Paso | Inicio | Fin | Duración |\n|---|---|---|---|\n| 7 | 11-12 11:50 | 11-12 12:20 | 30 min |\n"
+     for hora, esperado in (("11:49", "AMBER"), ("13:30", "FAIL")):          # PST: 19:49 UTC (antes de v119) / 21:30 UTC (después)
+@@ -3269,3 +3269,66 @@
  
  
  test_v130_plausibilidad_subconteo()
@@ -186,3 +431,38 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
 +
 +
 +test_be_gk57()
++
++
++def test_v131_verde_subido_version_anterior():
++    """v131 (COORDINACIÓN 13-nov 01:48, caso GK: VERDE v129 subido y luego se publica v130, sintético): (1) la entrega SUBIDA con el VERDE
++    de la versión vigente al subir sigue válida; (2) --vigente acepta ese ENTREGA_OK si SUBIDA_OK es posterior a él y anterior a la
++    publicación de la versión siguiente y los hashes coinciden; (3) la re-corrida por cambio de versión no cuenta para el tope (AMBER)."""
++    ok = {"ok": True, "skill_version": "v81cf129", "fecha_iso": "2026-11-13T00:40:00+00:00",
++          "vigentes": {"excel": {"nombre": "Z9_TakeOff_rev3b.xlsx", "md5": "aa"}, "pdf": {"nombre": "Z9_markups_rev3b.pdf", "md5": "bb"}},
++          "chequeos": [{"id": "CE_VIEJO"}]}
++    drive = {"Z9_TakeOff_rev3b.xlsx": "aa", "Z9_markups_rev3b.pdf": "bb"}
++    sub = {"fecha_iso": "2026-11-13T00:55:00+00:00"}
++    assert CE.entrega_ok_anterior_valida(ok, sub)[0]
++    assert CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"], sub) == []            # (1) / (2) válido
++    assert CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"]), "sin SUBIDA_OK sigue exigiendo el skill vigente"
++    tarde = {"fecha_iso": "2026-11-13T01:15:00+00:00"}                                         # subida después de publicarse v130
++    assert not CE.entrega_ok_anterior_valida(ok, tarde)[0] and CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"], tarde)
++    assert not CE.entrega_ok_anterior_valida(ok, {"fecha_iso": "2026-11-13T00:30:00+00:00"})[0]   # subida antes del VERDE
++    ev = CE.vigente_fallas(ok, dict(drive, **{"Z9_TakeOff_rev3b.xlsx": "cc"}), ["CE_VIEJO", "CE_NUEVO_V130"], sub)
++    assert ev and "md5" in ev[0], ev                                                          # (b) hash distinto = FAIL
++    viejo = CE.VERSIONES_CAMBIAN_CANTIDADES
++    CE.VERSIONES_CAMBIAN_CANTIDADES = {"v81cf130"}
++    try:
++        assert not CE.entrega_ok_anterior_valida(ok, sub)[0], "una versión posterior que cambia cantidades re-abre (U-180 (4))"
++    finally:
++        CE.VERSIONES_CAMBIAN_CANTIDADES = viejo
++    fin = [{"ts": "2026-11-13T00:40:00+00:00", "version": "v81cf129"}, {"ts": "2026-11-13T01:20:00+00:00"}, {"excel": "x", "version": "v81cf131"}]
++    rec = CE.recorridas_por_version(fin, sub)
++    assert rec == fin[1:], rec                                          # 01:20 (v130 vigente) y la actual = re-corridas por versión
++    assert CE.recorridas_por_version(fin, None) == []
++    assert CE.version_vigente_en(CE._iso("2026-11-13T01:20:00+00:00")) == "v81cf130"
++    assert CE.version_siguiente("v81cf129") == "v81cf130" and CE.version_siguiente("v81cf130") == "v81cf131"
++    print("test_v131_verde_subido_version_anterior OK")
++
++
++test_v131_verde_subido_version_anterior()

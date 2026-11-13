@@ -7446,7 +7446,7 @@
   {
    "id": "U-177",
    "origen": "ORDENES_DEL_USUARIO.md (11-nov, auditoría adversarial U-138)",
-   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO)",
+   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si SUBIDA_OK es posterior a él y anterior a la publicación de la siguiente versión y los hashes coinciden (salvo versión que cambie cantidades, U-180 (4))",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -7457,11 +7457,13 @@
     "take-off:tools/compuerta_entrega.py::vigente_fallas",
     "take-off:tools/subir_entrega.py::verificar_vigente",
     "take-off:tools/compuerta_entrega.py::ce_ms_gauge",
-    "take-off:tools/compuerta_entrega.py::ce_ms_producto"
+    "take-off:tools/compuerta_entrega.py::ce_ms_producto",
+    "take-off:tools/compuerta_entrega.py::entrega_ok_anterior_valida",
+    "take-off:tools/compuerta_entrega.py::vigente_fallas"
    ],
    "test": {
-    "archivo": "take-off:tools/test_hoja_sufijo.py",
-    "token": "test_be_gk22_26_guardas"
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_v131_verde_subido_version_anterior"
    }
   },
   {
@@ -7627,14 +7629,15 @@
   {
    "id": "U-184",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 11-nov, protocolo bien a la primera en 2-3 h)",
-   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas",
+   "texto_corto": "verificaciones de fondo dentro del flujo (H-A/H-B en lecturas, reglas físicas en resolución, auditoría U-181 antes de la primera subida), compuerta temprana (<= 2 corridas finales), cero arreglos a mano (hash de la cadena), altura de elevación con comprobación en planta, exclusión solo de caras no rated, TIEMPOS con corridas ; v131: re-corrida por cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales (AMBER con causa)",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::ce_protocolo_3h",
     "take-off:tools/compuerta_entrega.py::protocolo_3h_fallas",
     "take-off:tools/chequeos_biblioteca.py::u_184_elev",
-    "take-off:tools/chequeos_biblioteca.py::u_184_excl"
+    "take-off:tools/chequeos_biblioteca.py::u_184_excl",
+    "take-off:tools/compuerta_entrega.py::recorridas_por_version"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -8712,6 +8715,21 @@
    "categoria": "conducta",
    "texto_corto": "al publicar una versión, después del último fetch / rebase el REGLAS_REGISTRO.json se UNE por id (nunca cp encima de entradas que otra sesión subió) y verificar_version corre justo antes del commit de publicación: 'faltan' > 0 = no se publica",
    "motivo": "el cp del registro borró BE-GK57 / BE-GK58 que GK había subido 3 minutos antes; v130 quedó vigente con 2 reglas faltantes"
+  },
+  {
+   "id": "BE-GK59",
+   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 13-nov; aprobada por COORDINACIÓN)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl",
+   "chequeos": [
+    "take-off:tools/be_gk59.py::fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_be_gk59.py",
+    "token": "test_be_gk59 OK"
+   },
+   "apartado": "apartados/be_gk59/ (para v131)"
   }
  ]
 }
