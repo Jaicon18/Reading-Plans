@@ -131,7 +131,7 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/chequeos_biblio
          return R("PASS", f"walls de madera: ninguno en el set ({wn[:160]})")   # BE-GK27: sin '0 walls' (U-138 lo leía como conteo vacío)
 diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v137/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:20:31.124356486 +0000
-+++ v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:02:09.148307883 +0000
++++ v138r3/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 13:17:10.581266643 +0000
 @@ -1560,7 +1560,7 @@
          g = lambda k: RX_HORA_CELDA.search(cs[k]) if k is not None and k < len(cs) else None      # noqa: E731
          d = re.search(r"(\d[\d,]*)\s*min", cs[kd]) if kd is not None and kd < len(cs) else None
@@ -141,22 +141,97 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
      return out
  
  
-@@ -1939,6 +1939,14 @@
+@@ -1878,6 +1878,51 @@
+     return m.group(1).lower() if m else None
+ 
+ 
++def _k0_rev(ms, w, entrega, p):
++    """índice (ORDEN DEL ARCHIVO) de la primera marca de tiempos.log que es de esta rev: la primera con su etiqueta; si no, la siguiente a
++    la última marca de otra rev; log acumulado sin etiqueta = None (no se reparte). Lo usan inicio_rev_info y la exención de pasos de la
++    rev anterior (verif. 10: solo las marcas ANTES de este índice pueden ser de la rev anterior)."""
++    et = _etiqueta_rev(w, entrega)
++    etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
++    propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
++    if propias:
++        return propias[0]
++    otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
++    if os.path.dirname(os.path.realpath(p)) != os.path.realpath(w):
++        return None
++    return max(otras, default=-1) + 1
++
++
++RX_ENTREGA_LOG = re.compile(r"(?i)entregad|subid|SUBIDA_OK|deliver|upload")
++
++
++def marcas_rev_anterior(w, entrega=None, con_tope=False):
++    """verif. 10 + COORDINACIÓN 13:12 (opción B): marcas de tiempos.log que pueden ser de una rev ANTERIOR. Solo con evidencia POSITIVA de
++    esa rev: (1) antes del arranque (orden del ARCHIVO, ms[:k0]) hay una marca con la etiqueta de OTRA rev o una marca de entrega
++    ('entregada' / 'subida' / SUBIDA_OK): se devuelven las marcas hasta la última de esas (lo de después puede ser trabajo de esta rev);
++    (2) si no, VERSION_PROYECTO.txt tiene un renglón de OTRA rev: ms[:k0]. Sin evidencia = [] (nada se exime, como v137)."""
++    p = _tiempos_log(w)
++    ms = marcas_tiempos_log(p) if p else []
++    k0 = _k0_rev(ms, w, entrega, p) if ms else None
++    if not k0:
++        return ([], None) if con_tope else []
++    et = _etiqueta_rev(w, entrega)
++    ev = []
++    for k, (_t, l) in enumerate(ms[:k0]):
++        m = RX_REV_ETIQ.search(norm_txt(l, lower=False))
++        if (m and et and m.group(1).lower() != et) or RX_ENTREGA_LOG.search(l):
++            ev.append(k)
++    if ev:
++        out, tope = ms[:ev[-1] + 1], ms[ev[-1]][0]   # tope = hora de la última marca de evidencia (arranque / entrega de otra rev)
++    else:
++        otras = [x for x in version_proyecto_leer(w) if et and RX_REV_ETIQ.search(x["rev"]) and
++                 RX_REV_ETIQ.search(x["rev"]).group(1).lower() != et] if os.path.isdir(w) else []
++        from zoneinfo import ZoneInfo
++        ts = [t.astimezone(ZoneInfo("America/Los_Angeles")).replace(tzinfo=None) for t in (_dt_utc(x["ts"]) for x in otras) if t]
++        out, tope = (ms[:k0], max(ts) if ts else None) if otras else ([], None)
++    return (out, tope) if con_tope else out
++
++
+ def inicio_rev_info(w, entrega=None):
+     """v121 (RETRO, verificación 5): arranque de la rev = (1) la PRIMERA marca de tiempos.log con la etiqueta de la rev ('rev21'); si no,
+     (2) en el log PROPIO de la rev, la primera marca DESPUÉS de la última marca de la rev anterior (marca con OTRA etiqueta revN), en
+@@ -1890,18 +1935,10 @@
+     p = _tiempos_log(w)
+     ms = marcas_tiempos_log(p) if p else []
+     if ms:
+-        et = _etiqueta_rev(w, entrega)
+-        etq = [RX_REV_ETIQ.search(norm_txt(l, lower=False)) for _t, l in ms]
+-        propias = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() == et]
+-        if propias:
+-            k0 = propias[0]
+-        else:
+-            otras = [k for k, m in enumerate(etq) if m and et and m.group(1).lower() != et]   # sin etiqueta en la carpeta: no se reparte
+-            acumulado = os.path.dirname(os.path.realpath(p)) != os.path.realpath(w)
+-            k0 = max(otras, default=-1) + 1
+-            if acumulado:                               # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
+-                return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
+-                              "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
++        k0 = _k0_rev(ms, w, entrega, p)
++        if k0 is None:                                  # log del proyecto (carpeta madre): sin la etiqueta no se sabe qué marcas son de esta rev
++            return None, ("tiempos.log acumulado del proyecto sin la etiqueta de la rev ni marcas de otra rev: no se puede saber "
++                          "dónde arranca esta rev (escribir 'inicio rev<N>' en la marca de arranque)")
+         if k0 >= len(ms):
+             return None, "tiempos.log no tiene marcas de esta rev después de las de la rev anterior"
+         previas, rev = ms[:k0], ms[k0:]
+@@ -1939,6 +1976,14 @@
      if not ev:
          return "PASS", []
      ini, problema = inicio_rev_info(w, entrega)
 +    desde = arranque_rev_desde(w, entrega, ini) if not problema and ini is not None else None   # log sin fecha = FAIL (v137)
 +    if desde is not None and desde >= datetime.datetime.fromisoformat(FECHA_V119):
-+        _pl = _tiempos_log(w)
-+        _t2, n_ex = tiempos_desde(tt, desde, marcas_tiempos_log(_pl) if _pl else [])   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
-+        ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde)
++        _prev, _tope = marcas_rev_anterior(w, entrega, con_tope=True)   # verif. 10 / opción B: solo con evidencia de otra rev
++        _t2, n_ex = tiempos_desde(tt, desde, _prev, _tope)   # v138 (CR rev20c): los pasos de revs anteriores no se juzgan con la rev nueva
++        ev = version_proyecto_fallas(w, _skill_version(), tt) + alarma_fallas(w, na, tiempos_txt=tt, desde=desde, previas=_prev, tope=_tope)
 +        if not ev:
 +            return "PASS", ([f"{n_ex} paso(s) de TIEMPOS.md cerrados antes del arranque de la rev ({desde.isoformat()}) son de una rev "
 +                             "anterior: no se juzgan otra vez (v138)"] if n_ex else [])
      if problema:
          return "FAIL", [f"la fecha de arranque de la rev no es confiable ({problema}): los requisitos de proceso de v81cf119 aplican = "
                          "FAIL (v121)"] + ev
-@@ -1951,6 +1959,41 @@
+@@ -1951,6 +1996,41 @@
      return "FAIL", ev
  
  
@@ -198,7 +273,7 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
  def _tiempos_log(w):
      return next((q for q in (os.path.join(w, "tiempos.log"), os.path.join(os.path.dirname(w), "tiempos.log")) if os.path.isfile(q)), None)
  
-@@ -1995,6 +2038,48 @@
+@@ -1995,6 +2075,50 @@
  
  
  
@@ -216,14 +291,14 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
 +GAP_REV_ANTERIOR_H = 12   # verificación 9: un paso cerrado a menos de 12 h del arranque no se da por de una rev anterior
 +
 +
-+def tiempos_desde(tiempos_txt, desde, marcas=None):
++def tiempos_desde(tiempos_txt, desde, marcas=None, tope=None):
 +    """v138 (CR rev20c; rev2 por la verificación 8 Q1b / Q2 / Q4): TIEMPOS.md sin las filas de pasos de una rev ANTERIOR. Una fila
 +    queda exenta solo con las DOS pruebas: (a) su Fin (con fecha MM-DD) es al menos GAP_REV_ANTERIOR_H horas anterior al arranque de la rev actual (verif. 9: otra sesión de trabajo) y (b) tiempos.log
-+    tiene la marca de ese cierre (misma fecha y hora) antes del arranque. Sin marcas (log sin fechas, una sola marca tardía, sin log)
++    tiene la marca de ese cierre (misma fecha y hora) antes del arranque, o el cierre es anterior a la marca de evidencia de otra rev (`tope`: su arranque / entrega, CR 13:15). Sin marcas (log sin fechas, una sola marca tardía, sin log)
 +    nada queda exento: se juzga como v137. Se quita la fila EXACTA (su línea), nunca por coincidencia de hora con otra fila.
 +    -> (texto filtrado, n filas exentas)"""
 +    if tiempos_txt is None or desde is None or not marcas:
-+        return tiempos_txt, 0
++        return tiempos_txt, 0                         # sin marcas de una rev anterior (sin evidencia positiva) nada se exime
 +    previas = [t for t, _l in marcas if t < desde.replace(tzinfo=t.tzinfo)]
 +    fuera = []
 +    for f in filas_tiempos(tiempos_txt):
@@ -232,6 +307,8 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
 +            continue                                  # verif. 9: a menos de 12 h del arranque = la misma rev (se juzga como v137)
 +        if any((m.month, m.day, m.hour, m.minute) == (t.month, t.day, t.hour, t.minute) for m in previas):
 +            fuera.append(f)
++        elif tope is not None and t < tope.replace(tzinfo=t.tzinfo):
++            fuera.append(f)                           # CR 13:15: cerró ANTES de la marca de evidencia de otra rev (su arranque / entrega)
 +    if not fuera:
 +        return tiempos_txt, 0
 +    malas = [f["linea"] for f in fuera]
@@ -247,12 +324,12 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
  def pasos_cerrados_tiempos(tiempos_txt):
      """BE-PM06 (v120): pasos 1-9 cerrados en TIEMPOS.md (fila con hora de fin), con EL MISMO parser de CE_TIEMPOS. -> ['1', '2-3', '4a', …]"""
      return [f["paso"] for f in filas_tiempos(tiempos_txt) if f["fin"] and any(1 <= n <= 9 for n in f["nums"])]
-@@ -2025,13 +2110,17 @@
+@@ -2025,13 +2149,18 @@
      return ev
  
  
 -def alarma_fallas(w, na, registro=None, tiempos_txt=None):
-+def alarma_fallas(w, na, registro=None, tiempos_txt=None, desde=None):
++def alarma_fallas(w, na, registro=None, tiempos_txt=None, desde=None, previas=None, tope=None):
      """verificación 12b (NO GUARD 3.3 / BE-PM06 STILL-WEAK: la alarma era opcional): (1) todo paso 1-9 cerrado en tiempos.log
      ('| N fin …') tiene su corrida 'compuerta_entrega.py <w> --paso N' en compuerta_corridas.jsonl; (2) si el tiempo pasó el 50 % / 100 %
      del presupuesto, ALERTA_PRESUPUESTO.json tiene esa alerta escrita EN ESE MOMENTO: medida con la hora del log a más tardar en el primer
@@ -260,16 +337,17 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/compuerta_entre
      p = _tiempos_log(w)
      ms = marcas_tiempos_log(p) if p else []
 +    if desde is not None:                               # v138 (CR rev20c): solo la rev actual (marcas desde su arranque)
-+        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, ms)
-+        corte = desde - datetime.timedelta(hours=GAP_REV_ANTERIOR_H)   # verif. 9: solo se dejan fuera las marcas de la rev anterior
-+        ms = [(t, l) for t, l in ms if t > corte.replace(tzinfo=t.tzinfo)]
++        previas = previas or []                         # verif. 10: solo las marcas que el ARCHIVO pone antes del arranque de la rev
++        tiempos_txt, _n = tiempos_desde(tiempos_txt, desde, previas, tope)
++        kp = len(previas) if ms[:len(previas)] == previas else 0     # previas = marcas de la rev anterior con evidencia (mismo log)
++        ms = ms[kp:]                                    # opción B: las marcas hasta la evidencia de otra rev no son de esta rev
      ev = []
      if tiempos_txt is not None:                         # verificación 2: entrega nueva sin tiempos.log = FAIL; TIEMPOS.md y el log cuadran
          if not p:
 diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v137/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:13:40.432753912 +0000
-+++ v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:01:15.137203754 +0000
-@@ -3788,3 +3788,205 @@
++++ v138r3/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 13:16:16.404358247 +0000
+@@ -3788,3 +3788,264 @@
  
  
  test_u199_cierre_path_esquema_cr()
@@ -344,9 +422,17 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_
 +    e = os.path.join(w, "rev9c FINAL PARA REVISAR")
 +    os.makedirs(os.path.join(e, "Take-off"))
 +    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev9c.xlsx"), "w").write("x")
-+    open(os.path.join(w, "tiempos.log"), "w").write("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 11:34 PST | 1 Inventario | inicio\n"
-+                                                     "05-nov 12:10 PST | 1 Inventario | fin\n12-nov 20:46 PST | inicio rev9c\n"
-+                                                     "12-nov 21:30 PST | 4 Lectura | fin\n")
++    log_sin = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 11:34 PST | 1 Inventario | inicio\n"
++               "05-nov 12:10 PST | 1 Inventario | fin\n12-nov 20:46 PST | inicio rev9c\n12-nov 21:30 PST | 4 Lectura | fin\n")
++    # COORDINACIÓN 13:12 (opción B, verif. 10 B1): sin evidencia POSITIVA de la rev anterior nada se exime (= v137)
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin)
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
++    est, ev = CE.proceso_v119(w, e, ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
++                                      "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n"), 10)
++    assert est == "FAIL" and any("paso 1 " in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    # con la marca de entrega de la rev anterior (rev9b entregada) el paso 1 de esa rev queda exento
++    open(os.path.join(w, "tiempos.log"), "w").write(log_sin.replace("05-nov 12:10 PST | 1 Inventario | fin\n",
++                                                                    "05-nov 12:10 PST | 1 Inventario | fin\n05-nov 19:00 PST | rev9b entregada\n"))
 +    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev9c | {CE._skill_version() or 'v81cf138'}\n")
 +    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inventario | 11-05 11:34 | 11-05 12:10 | x |\n"
 +          "| 4 | Lectura | 11-12 20:50 | 11-12 21:30 | x |\n")
@@ -475,3 +561,54 @@ diff -ruN -x __pycache__ v137/take-off-metal-frame-drywall/tools/test_compuerta_
 +
 +
 +test_v138r2_protocolo_log_sin_fecha_como_v137()
++
++
++def test_v138r2_protocolo_marcas_despues_del_arranque():
++    """v138 rev2 (verificación 10 C1): una marca que el ARCHIVO tiempos.log pone DESPUÉS del arranque de la rev es de la rev actual aunque
++    su hora sea más vieja (saltos atrás de menos de 12 h): su paso no se exime como de una rev anterior."""
++    w = tempfile.mkdtemp(prefix="p3h_c1_")
++    e = os.path.join(w, "rev21 FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev21.xlsx"), "w").write("x")
++    open(os.path.join(w, "tiempos.log"), "w").write("2026-11-13 10:00 | inicio rev21\n2026-11-12 23:00 | 1 fin\n"
++                                                     "2026-11-12 12:00 | 2-3 fin\n2026-11-13 10:30 | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T18:00:00Z | rev21 | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-12 22:00 | 11-12 23:00 | x |\n"
++          "| 2-3 | Lect | 11-12 11:00 | 11-12 12:00 | x |\n| 4 | Comp | 11-13 10:00 | 11-13 10:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write("".join(json.dumps({"paso": p, "rc": 0}) + "\n" for p in ("1", "4")))
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and any("paso 2-3" in x for x in ev) and not any("rev anterior" in x for x in ev), (est, ev)
++    assert CE.marcas_rev_anterior(w, e) == []
++    print("test_v138r2_protocolo_marcas_despues_del_arranque OK")
++
++
++test_v138r2_protocolo_marcas_despues_del_arranque()
++
++
++def test_v138r2_protocolo_tope_evidencia_otra_rev():
++    """v138 rev2 (COORDINACIÓN opción B + CR 13:15): con una marca de OTRA rev antes del arranque (evidencia positiva), un renglón de
++    TIEMPOS.md que cerró ANTES de esa marca es de una rev anterior aunque su hora no tenga marca propia en tiempos.log; sin esa marca de
++    otra rev, nada se exime (= v137)."""
++    w = tempfile.mkdtemp(prefix="p3h_tope_")
++    e = os.path.join(w, "rev20c FINAL PARA REVISAR")
++    os.makedirs(os.path.join(e, "Take-off"))
++    open(os.path.join(e, "Take-off", "Z9_Takeoff_rev20c.xlsx"), "w").write("x")
++    con = ("05-nov 11:26 PST | 0 Arranque | inicio\n05-nov 12:10 PST | 1 fin\n05-nov 14:00 PST | 2-3 fin\n05-nov 20:07 PST | 7-8 avance\n"
++           "12-nov 11:49 PST | inicio rev20b | arranque\n12-nov 20:46 PST | inicio rev20c\n12-nov 21:30 PST | 4 fin\n")
++    open(os.path.join(w, "VERSION_PROYECTO.txt"), "w").write(f"2026-11-13T04:46:00Z | rev20c | {CE._skill_version() or 'v81cf138'}\n")
++    tt = ("| # | Paso | Inicio | Fin | Min |\n|---|---|---|---|---|\n| 1 | Inv | 11-05 11:34 | 11-05 12:10 | x |\n"
++          "| 2-3 | Lect | 11-05 12:10 | 11-05 14:00 | x |\n| 7-8 | Excel | 11-05 18:00 | 11-05 20:28 | x |\n"
++          "| 9-10 | Subida | 11-05 23:00 | 11-06 00:21 | x |\n| 4 | Comp | 11-12 20:50 | 11-12 21:30 | x |\n")
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(json.dumps({"paso": "4", "rc": 0}) + "\n")
++    CE.sellar_bitacora(w, os.path.join(w, "compuerta_corridas.jsonl"))
++    open(os.path.join(w, "tiempos.log"), "w").write(con)
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "PASS" and any("rev anterior" in x for x in ev), (est, ev)
++    open(os.path.join(w, "tiempos.log"), "w").write(con.replace("12-nov 11:49 PST | inicio rev20b | arranque\n", ""))
++    est, ev = CE.proceso_v119(w, e, tt, 10)
++    assert est == "FAIL" and not any("rev anterior" in x for x in ev), (est, ev)
++    print("test_v138r2_protocolo_tope_evidencia_otra_rev OK")
++
++
++test_v138r2_protocolo_tope_evidencia_otra_rev()

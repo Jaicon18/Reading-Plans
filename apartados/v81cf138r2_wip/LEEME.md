@@ -18,3 +18,9 @@ Verification 9 = adversarial ONLY on this diff, max 30 min.
 
 Verification 9 (49ef0ac): NO PUBLICAR (Q4 residual) -> fixed with the 12 h threshold; verification 10 only on that delta.
 Validation after the fix: suite 47/47, banco 0 distintas 8/8, XF 0 regresiones, GK 0 regresiones, 0 sin clasificar, 199 archivos.
+
+Verification 10 (37f154d): NO PUBLICAR for C1 (marks the file puts after the start) -> only marks the file puts BEFORE the start (_k0_rev / marcas_rev_anterior).
+COORDINACIÓN 13:12 option B: an exemption only with POSITIVE evidence of another rev (a mark with another rev's label or entregada/subida before the start, or a
+VERSION_PROYECTO line of another rev); without evidence nothing is exempt (= v137, B1 closed). CR 13:15: a row without its own mark is exempt if it closed BEFORE the
+other rev's evidence mark (tope). The alarm ignores the marks up to the evidence mark. Tests: test_v138r2_protocolo_marcas_despues_del_arranque,
+test_v138r2_protocolo_tope_evidencia_otra_rev. Verification 11 on this delta.
