@@ -24,3 +24,8 @@ COORDINACIÓN 13:12 option B: an exemption only with POSITIVE evidence of anothe
 VERSION_PROYECTO line of another rev); without evidence nothing is exempt (= v137, B1 closed). CR 13:15: a row without its own mark is exempt if it closed BEFORE the
 other rev's evidence mark (tope). The alarm ignores the marks up to the evidence mark. Tests: test_v138r2_protocolo_marcas_despues_del_arranque,
 test_v138r2_protocolo_tope_evidencia_otra_rev. Verification 11 on this delta.
+
+Verification 11 (3aa8703): NO PUBLICAR (R1-R6: loose evidence). COORDINACIÓN 13:25 (1) STRICT: evidence = 'inicio revN' / 'revN entregada|subida'
+with N LOWER than the current rev, time < start and placed before it in the file; VERSION_PROYECTO only rev < current and ts < start; tope = min(evidence, start - 12 h);
+the alarm drops only the previous rev's marks (<= tope + its evidence mark) and keeps the rev's own start. Test test_v138r2_protocolo_evidencia_estricta_r1_r6.
+Verification 12 on this delta. FALLBACK if verif. 12 finds anything: publish v138 = CF04 + BE83 only.
