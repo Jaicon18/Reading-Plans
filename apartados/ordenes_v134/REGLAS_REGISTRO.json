@@ -8790,6 +8790,31 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_u195_add_alternates"
    }
+  },
+  {
+   "id": "BE-XF16",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 05:26: el canon de CR guarda sus ~943 muros en existing_walls y deja walls = [])",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "todas las tools leen los muros del canon con muros_canon() = walls + existing_walls (LISTAS_MUROS); una lectura a propósito solo de 'walls' se marca '# solo-metal:' / '# nodo:' / '# campo:'; CE_MUROS_CANON = FAIL si 'walls' está vacío, hay muros en otra lista y queda alguna lectura solo de 'walls' sin marcar",
+   "motivo": "con walls = [] en CR, la red U-138 (esperado_proyecto) esperaba 0 walls / imágenes / markups, U-034 (completitud) veía 0 hojas de planta, los mapas de alturas y la trazabilidad de detalles quedaban vacíos: pasaban en vacío (U-137)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::muros_canon",
+    "take-off:tools/compuerta_entrega.py::lecturas_solo_walls",
+    "take-off:tools/compuerta_entrega.py::ce_muros_canon"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_xf16_muros_canon"
+   }
+  },
+  {
+   "id": "U-199",
+   "origen": "ORDENES_DEL_USUARIO.md / REGLAS_USUARIO_CLAUDE.md (usuario 13-nov: 'esto debe de estar blindado al 100000%')",
+   "categoria": "programa-pendiente",
+   "cuando": "entrega",
+   "texto_corto": "REGLA INVIOLABLE: 13 controles contra elementos omitidos (cierre por cuarto, pisos gemelos, puertas, keynotes, área de cielo +-5 % por capa + mapa de cobertura con muros diagonales / cortos, rated lines, secciones, estructural / MEP, finish schedule, unidades típicas, specs locations, tercer lector, re-verificación de EXCLUDED); hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL",
+   "motivo": "el código (CE_U199_OMITIDOS + CE_COBERTURA_DIAG + tests) está en v81cf135 APARTADA (orden COORDINACIÓN 05:22: 'U-199 va en v135, apartada'); v81cf134 se publica antes por orden 05:22 'publica v134 YA'. Pasa a 'programa' al publicar v81cf135."
   }
  ]
 }
