@@ -8885,6 +8885,21 @@
    "cuando": "entrega",
    "texto_corto": "la regla de cement board / tile corre por programa sobre el canon FINAL, después de TODA cara cargada (revisiones y FALTA posteriores incluidas); NON-rated: el cement board REEMPLAZA el board y queda la franja H - altura del cement board; rated: las capas quedan y el cement board va encima; el markup del cement board va en la cara real del shower (línea más cercana a la caja del shower pan), mismo id / NM",
    "motivo": "COORDINACIÓN 20:09: el chequeo CB_DUCHA_CBU (= cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_ducha_cbu.py sobre el canon de la entrega, FAIL con la lista) entra en v81cf140; v81cf138b solo registra la regla"
+  },
+  {
+   "id": "BE-XF19",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity 13-nov, CR rev20d bloqueada: v81cf138b escribió 'v81cf140' en SKILL.md y CE_VERSION_ENTREGA dio FAIL)",
+   "categoria": "programa",
+   "cuando": "publicación",
+   "texto_corto": "antes de publicar, verificar_version corre compuerta_entrega.version_fallas DEL CANDIDATO sobre su SKILL.md: ≠ 0 o sin poder correrla = falta (bloquea la publicación); en SKILL.md nunca el literal de una versión futura",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_version_skill",
+    "take-off:tools/compuerta_entrega.py::version_fallas"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "version_skill_be_xf19"
+   }
   }
  ]
 }

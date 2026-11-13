@@ -555,8 +555,34 @@ def fechas_be_xf17():
     assert V.revisar_fechas(V.Fuente(sk), d) == []                                  # la candidata todavía no tiene commit
 
 
+def version_skill_be_xf19():
+    """BE-XF19: verificar_version corre compuerta_entrega.version_fallas DEL CANDIDATO sobre su SKILL.md; el texto de v81cf138b ('VERSION: v81cf138b'
+    + 'Chequeo CB_DUCHA_CBU en v81cf140') = falta (bloquea); el de v81cf138c ('la próxima versión del skill (la 140)') = 0; sin poder correrla = falta."""
+    import tempfile
+    mod = ("import re\nRX_VER = re.compile(r'\\bv(\\d+)cf(\\d+)([a-z]?)\\b')\n"
+           "def _k(v):\n    m = RX_VER.search(str(v or ''))\n    return (int(m.group(1)), int(m.group(2)), m.group(3)) if m else (0, 0, '')\n"
+           "def version_fallas(t, version, docs, rev_actual=None):\n    vs = [x.group(0) for x in RX_VER.finditer(t or '')]\n"
+           "    return [f'SKILL.md: la línea VERSION dice {version} y el mismo SKILL.md cita {max(vs, key=_k)}: subir la línea VERSION'] "
+           "if version and vs and _k(max(vs, key=_k)) > _k(version) else []\n")
+
+    def cand(txt, con_mod=True):
+        d = tempfile.mkdtemp(prefix="vv_xf19_")
+        sk = os.path.join(d, "take-off-metal-frame-drywall")
+        os.makedirs(os.path.join(sk, "tools"))
+        open(os.path.join(sk, "SKILL.md"), "w").write(txt)
+        open(os.path.join(sk, "tools", "compuerta_entrega.py"), "w").write(mod if con_mod else "raise ImportError('x')\n")
+        return d
+    malo = "**VERSION: v81cf138b**\n- BE-CR45: Chequeo CB_DUCHA_CBU en v81cf140.\n"
+    bueno = "**VERSION: v81cf138c**\n- BE-CR45: Chequeo CB_DUCHA_CBU en la próxima versión del skill (la 140).\n"
+    ev = V.revisar_version_skill(cand(malo))
+    assert ev and "v81cf140" in ev[0] and "BE-XF19" in ev[0], ev
+    assert V.revisar_version_skill(cand(bueno)) == []
+    assert V.revisar_version_skill(cand(bueno, con_mod=False))                  # no se puede correr = falta
+    print("version_skill_be_xf19 OK")
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17, version_skill_be_xf19):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

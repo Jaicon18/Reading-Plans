@@ -860,6 +860,35 @@ def revisar_fechas(fuente, repo, tol_s=60):
     return out
 
 
+def revisar_version_skill(candidato):
+    """BE-XF19 (COORDINACIÓN 13-nov 21:08; v81cf138b escribió 'v81cf140' en SKILL.md y CE_VERSION_ENTREGA bloqueó la final rev20d de CR):
+    antes de publicar, compuerta_entrega.version_fallas DEL CANDIDATO sobre su propio SKILL.md (con la línea **VERSION**) = 0 fallas; si no,
+    o si no se puede correr, = falta (bloquea). Corre en un proceso aparte (python3 -I) con las tools del candidato (carpeta o zip)."""
+    import subprocess
+    import tempfile
+    base = candidato
+    tmp = None
+    if zipfile.is_zipfile(candidato):
+        tmp = tempfile.mkdtemp(prefix="vv_skill_")
+        zipfile.ZipFile(candidato).extractall(tmp)
+        base = tmp
+    sk = base if os.path.isfile(os.path.join(base, "SKILL.md")) else os.path.join(base, "take-off-metal-frame-drywall")
+    if not os.path.isfile(os.path.join(sk, "SKILL.md")) or not os.path.isfile(os.path.join(sk, "tools", "compuerta_entrega.py")):
+        return []                                           # sin SKILL.md / tools: lo cubren revisar_skill / revisar_zip
+    cod = ("import sys, re, json; sys.path.insert(0, sys.argv[1] + '/tools'); import compuerta_entrega as CE\n"
+           "t = open(sys.argv[1] + '/SKILL.md', encoding='utf-8', errors='ignore').read()\n"
+           "m = re.search(r'(?m)^\\*\\*VERSION:\\s*(v\\d+cf\\d+[a-z]?)\\*\\*', t)\n"
+           "print(json.dumps(['SKILL.md sin la línea **VERSION: vNcfM**'] if not m else CE.version_fallas(t, m.group(1), {})))")
+    try:
+        r = subprocess.run([sys.executable, "-I", "-c", cod, sk], capture_output=True, text=True, timeout=300, cwd=tempfile.gettempdir())
+        out = json.loads((r.stdout or "").strip().splitlines()[-1]) if r.returncode == 0 and (r.stdout or "").strip() else None
+    except (OSError, subprocess.SubprocessError, ValueError, IndexError):
+        out = None
+    if out is None:
+        return ["no se pudo correr compuerta_entrega.version_fallas del candidato sobre su SKILL.md (BE-XF19): no se publica sin esa prueba"]
+    return [f"{x} (BE-XF19: version_fallas del candidato ≠ 0; en SKILL.md no va el literal de una versión futura)" for x in out]
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -893,10 +922,11 @@ def main(argv):
     tl = tests_sin_llamar(Fuente(candidato))
     pa = revisar_prueba_abiertos(archivo, Fuente(candidato), cache=extra[0] if extra else None)
     fp = revisar_fechas(Fuente(candidato), os.path.dirname(os.path.abspath(archivo)))
+    vf = revisar_version_skill(candidato)
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
                        ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa),
-                       ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp)):
+                       ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp), ("VERSION DEL SKILL.md (BE-XF19)", vf)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")
