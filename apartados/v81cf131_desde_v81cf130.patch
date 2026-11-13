@@ -1,12 +1,12 @@
 diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.126244866 +0000
-+++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 02:02:41.078574541 +0000
++++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 02:07:02.774579978 +0000
 @@ -7446,7 +7446,7 @@
    {
     "id": "U-177",
     "origen": "ORDENES_DEL_USUARIO.md (11-nov, auditoría adversarial U-138)",
 -   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO)",
-+   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si SUBIDA_OK es posterior a él y anterior a la publicación de la siguiente versión y los hashes coinciden (salvo versión que cambie cantidades, U-180 (4))",
++   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si el VERDE es anterior a la publicación de la siguiente versión, la subida es posterior al VERDE y los hashes coinciden (b', COORDINACIÓN 02:03) (salvo versión que cambie cantidades, U-180 (4))",
     "categoria": "programa",
     "cuando": "entrega",
     "chequeos": [
@@ -45,7 +45,7 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
-@@ -8683,6 +8686,49 @@
+@@ -8683,6 +8686,50 @@
     "categoria": "conducta",
     "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
     "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
@@ -84,9 +84,10 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
 +   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 13-nov; aprobada por COORDINACIÓN)",
 +   "categoria": "programa",
 +   "cuando": "entrega",
-+   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl",
++   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl ; v131: SUBIDA_OK guarda el puntero 'corrida' / 'entrega_ok'; una corrida VERDE posterior sí actualiza ENTREGA_OK.json (aprobado por COORDINACIÓN 02:03)",
 +   "chequeos": [
-+    "take-off:tools/compuerta_entrega.py::be_gk59_fallas"
++    "take-off:tools/compuerta_entrega.py::be_gk59_fallas",
++    "take-off:tools/subir_entrega.py::subir"
 +   ],
 +   "test": {
 +    "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -98,7 +99,7 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
 \ No newline at end of file
 diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-drywall/SKILL.md
 --- v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.132532314 +0000
-+++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 02:02:41.084328800 +0000
++++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 02:07:02.779321376 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -108,17 +109,18 @@ diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -363,6 +363,19 @@
+@@ -363,6 +363,20 @@
    (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
    de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
    dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
 +- **v81cf131 (COORDINACIÓN 13-nov 01:48, GK):** una entrega SUBIDA con el VERDE de la versión vigente al subir (SUBIDA_OK + ENTREGA_OK
 +  de esa versión) sigue VÁLIDA aunque después se publique otra, salvo que una versión posterior cambie cantidades (U-180 (4),
-+  VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si SUBIDA_OK es posterior a él y anterior a la
-+  publicación de la versión siguiente (FECHAS_PUBLICACION, hora real del commit) y los hashes de Drive coinciden. La re-corrida por
++  VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si el VERDE es anterior a la publicación de la versión
++  siguiente (FECHAS_PUBLICACION, hora real del commit), la subida es posterior al VERDE y los hashes de Drive coinciden (b', 02:03). La re-corrida por
 +  cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
 +- **BE-GK59 (Grand Kia rev3b, unida en v81cf131):** la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa); con
-+  SUBIDA_OK.json, una re-corrida NO verde no reescribe ENTREGA_OK.json (queda el de la corrida subida). CLI `compuerta_entrega.py be_gk59 <w>`.
++  SUBIDA_OK.json, una re-corrida NO verde no reescribe ENTREGA_OK.json (queda el de la corrida subida; una VERDE sí, para re-subir);
++  SUBIDA_OK.json guarda el puntero 'corrida' / 'entrega_ok' a la corrida subida. CLI `compuerta_entrega.py be_gk59 <w>`.
 +- **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
 +  y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
 +- **BE-GK57 / BE-GK58 (Grand Kia rev3b, unidas en v81cf131):** (57) copias, backups y entregas previas van FUERA del árbol de trabajo
@@ -173,7 +175,7 @@ Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_marku
 Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.130106587 +0000
-+++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 02:02:41.083279028 +0000
++++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 02:07:02.778664517 +0000
 @@ -757,7 +757,11 @@
  FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
  FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
@@ -250,9 +252,9 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
 +
 +def entrega_ok_anterior_valida(ok, subida):
 +    """v131 (COORDINACIÓN 13-nov 01:48, GK: VERDE v129 subido y luego se publica v130): una entrega SUBIDA con un VERDE de la versión que
-+    era vigente al subir sigue VÁLIDA aunque después se publique otra, si (a) SUBIDA_OK es posterior a ese ENTREGA_OK y anterior a la
-+    publicación de la versión siguiente, (b) los hashes coinciden (lo revisa vigente_fallas contra Drive) y (c) ninguna versión posterior
-+    cambió cantidades (U-180 (4)). -> (bool, motivo)"""
++    era vigente al dar el VERDE sigue VÁLIDA aunque después se publique otra, si (b', COORDINACIÓN 02:03) el VERDE (ENTREGA_OK) es ANTERIOR
++    a la publicación de la versión siguiente y la subida es POSTERIOR al VERDE, (b) los hashes coinciden (lo revisa vigente_fallas contra
++    Drive) y (c) ninguna versión posterior cambió cantidades (U-180 (4)). -> (bool, motivo)"""
 +    v = (ok or {}).get("skill_version")
 +    t_ok = _iso((ok or {}).get("fecha_iso"))
 +    t_sub = _iso((subida or {}).get("fecha_iso") or (subida or {}).get("fecha"))
@@ -262,13 +264,13 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
 +        return False, f"SUBIDA_OK ({t_sub.isoformat()}) anterior al ENTREGA_OK ({t_ok.isoformat()})"
 +    sig = version_siguiente(v)
 +    t_sig = fecha_publicacion(sig) if sig else None
-+    if t_sig is not None and t_sub >= t_sig:
-+        return False, f"subida {t_sub.isoformat()} después de publicada {sig} ({t_sig.isoformat()}): el VERDE de {v} ya no era vigente"
++    if t_sig is not None and t_ok >= t_sig:                 # (b'): el VERDE antes de publicarse la siguiente; la subida puede ser después
++        return False, f"VERDE {t_ok.isoformat()} después de publicada {sig} ({t_sig.isoformat()}): el VERDE no es de la versión vigente"
 +    n = _num_version(v)
 +    cambia = [x for x in VERSIONES_CAMBIAN_CANTIDADES if n and _num_version(x) and _num_version(x) > n]
 +    if cambia:
 +        return False, f"versiones posteriores que cambian cantidades: {', '.join(sorted(cambia))} (U-180 (4))"
-+    return True, f"VERDE de {v} ({t_ok.isoformat()}) subido {t_sub.isoformat()}, antes de publicarse {sig}: sigue válido (v131)"
++    return True, f"VERDE de {v} ({t_ok.isoformat()}, antes de publicarse {sig}) subido {t_sub.isoformat()}: sigue válido (v131)"
 +
 +
  def corridas_sin_agente_por_fecha(sin):
@@ -351,7 +353,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
  RX_GK56_GAP = re.compile(r"(?i)\bgap\s*:?\s*(\d+(?:\.\d+)?)\s*(?:\"|in\b)")
  
  
-@@ -6694,6 +6809,39 @@
+@@ -6694,6 +6809,41 @@
      return ev
  
  
@@ -378,8 +380,10 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
 +    if not subida:
 +        return ["SUBIDA_OK.json sin una corrida VERDE terminada antes de la subida en compuerta_corridas.jsonl (BE-GK59)"]
 +    run = subida[-1]
++    if sub.get("corrida"):                              # puntero de SUBIDA_OK a la corrida subida (subir_entrega v131)
++        run = next((f for f in fins if f.get("corrida") == sub["corrida"]), dict(run, corrida=sub["corrida"]))
 +    ev = []
-+    if not os.path.isfile(os.path.join(w, f"ENTREGA_OK_{run.get('corrida')}.json")):
++    if not os.path.isfile(os.path.join(w, sub.get("entrega_ok") or f"ENTREGA_OK_{run.get('corrida')}.json")):
 +        ev.append(f"falta ENTREGA_OK_{run.get('corrida')}.json: el ENTREGA_OK de la corrida subida no está guardado por corrida (BE-GK59)")
 +    ok = _json(ep) or {}
 +    if not ok.get("ok"):
@@ -391,7 +395,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
  def _gk55_clave(n):
      if n.get("kind") == "T":
          return ("T", n.get("branch"), n.get("through"))
-@@ -7120,6 +7268,14 @@
+@@ -7120,6 +7270,14 @@
              print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
          print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
          return 0 if o["ok"] else 1
@@ -406,7 +410,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
      if len(argv) > 2 and argv[1] == "be_gk56":                      # BE-GK56: destino 'same wall' medido
          ev = be_gk56_fallas(json.load(open(argv[2], encoding="utf-8")))
          print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
-@@ -7194,10 +7350,16 @@
+@@ -7194,10 +7352,16 @@
              print(f"aviso: alerta de presupuesto no medida: {e}")
      out["corrida"], out["tipo"], out["paso"] = cid, tipo, paso
      p = os.path.join(out["workdir"], "ENTREGA_OK.json" if tipo == "final" else "ENTREGA_RAPIDA.json")
@@ -427,7 +431,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
                              "segundos": round(sum(r.get("segundos") or 0 for r in out["chequeos"]), 1)}) + "\n")
 diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off-metal-frame-drywall/tools/subir_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 01:13:41.129829766 +0000
-+++ v131/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 02:02:41.082986119 +0000
++++ v131/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 02:07:02.778438949 +0000
 @@ -95,14 +95,14 @@
          q["pageToken"] = b["nextPageToken"]
  
@@ -445,7 +449,15 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off
  
  
  def candados(workdir):
-@@ -402,8 +402,9 @@
+@@ -379,6 +379,7 @@
+     previa = CE._json(os.path.join(w, "SUBIDA_OK.json")) or {}          # U-184 (1): la PRIMERA subida se conserva entre rondas
+     res = {"fecha_iso": ahora_iso, "primera_subida_iso": previa.get("primera_subida_iso") or previa.get("fecha_iso") or ahora_iso,
+            "entrega_ok_sha": CE._sha(os.path.join(w, "ENTREGA_OK.json")),
++           "corrida": ok.get("corrida"), "entrega_ok": f"ENTREGA_OK_{ok.get('corrida')}.json" if ok.get("corrida") else None,   # BE-GK59
+            "drive": d, "carpetas": ids, "subidos": log, "vigente_verificado": sorted((ok.get("vigentes") or {}).keys()),
+            "tramos": estado["tramo"]}
+     json.dump(res, open(os.path.join(w, "SUBIDA_OK.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+@@ -402,8 +403,9 @@
      if "--vigente" in argv:                           # U-177 (1): antes de reportar o de un bid: Drive = lo validado, skill vigente
          w = os.path.abspath(argv[1])
          ok = json.load(open(os.path.join(w, "ENTREGA_OK.json"), encoding="utf-8"))
@@ -459,7 +471,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off
      try:
 diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.127141891 +0000
-+++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 02:02:41.079477800 +0000
++++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 02:07:02.775499900 +0000
 @@ -3071,7 +3071,7 @@
      arrancada a las 19:49 UTC (v118 vigente) no queda sujeta a las reglas de v119 (AMBER con causa); una arrancada después de 21:21:52Z sí."""
      import datetime as _dt
@@ -469,7 +481,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
      assert CE.FECHA_V119 < CE.FECHA_V120 < CE.FECHA_V121
      tt = "| Paso | Inicio | Fin | Duración |\n|---|---|---|---|\n| 7 | 11-12 11:50 | 11-12 12:20 | 30 min |\n"
      for hora, esperado in (("11:49", "AMBER"), ("13:30", "FAIL")):          # PST: 19:49 UTC (antes de v119) / 21:30 UTC (después)
-@@ -3269,3 +3269,90 @@
+@@ -3269,3 +3269,96 @@
  
  
  test_v130_plausibilidad_subconteo()
@@ -515,8 +527,10 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
 +    assert CE.entrega_ok_anterior_valida(ok, sub)[0]
 +    assert CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"], sub) == []            # (1) / (2) válido
 +    assert CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"]), "sin SUBIDA_OK sigue exigiendo el skill vigente"
-+    tarde = {"fecha_iso": "2026-11-13T01:15:00+00:00"}                                         # subida después de publicarse v130
-+    assert not CE.entrega_ok_anterior_valida(ok, tarde)[0] and CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"], tarde)
++    tarde = {"fecha_iso": "2026-11-13T01:43:19+00:00"}                                         # (b') caso real GK: subida 01:43 > v130
++    assert CE.entrega_ok_anterior_valida(ok, tarde)[0] and CE.vigente_fallas(ok, drive, ["CE_VIEJO", "CE_NUEVO_V130"], tarde) == []
++    ok_tarde = dict(ok, fecha_iso="2026-11-13T01:20:00+00:00")                                  # VERDE de v129 DESPUÉS de publicarse v130
++    assert not CE.entrega_ok_anterior_valida(ok_tarde, tarde)[0] and CE.vigente_fallas(ok_tarde, drive, ["CE_VIEJO", "CE_NUEVO_V130"], tarde)
 +    assert not CE.entrega_ok_anterior_valida(ok, {"fecha_iso": "2026-11-13T00:30:00+00:00"})[0]   # subida antes del VERDE
 +    ev = CE.vigente_fallas(ok, dict(drive, **{"Z9_TakeOff_rev3b.xlsx": "cc"}), ["CE_VIEJO", "CE_NUEVO_V130"], sub)
 +    assert ev and "md5" in ev[0], ev                                                          # (b) hash distinto = FAIL
@@ -556,6 +570,10 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
 +    os.remove(os.path.join(w, "ENTREGA_OK_c1aaaa.json"))
 +    wj("ENTREGA_OK.json", {"ok": True, "fecha_iso": "2026-11-13T01:05:13+00:00"})
 +    assert CE.be_gk59_fallas(w), "sin ENTREGA_OK_<corrida> de la corrida subida = FAIL"
++    wj("SUBIDA_OK.json", {"primera_subida_iso": "2026-11-13T01:43:19+00:00", "corrida": "c1aaaa", "entrega_ok": "ENTREGA_OK_c1aaaa.json"})
++    assert CE.be_gk59_fallas(w), "el puntero de SUBIDA_OK a un ENTREGA_OK_<corrida> que no existe = FAIL"
++    wj("ENTREGA_OK_c1aaaa.json", {"ok": True})
++    assert not CE.be_gk59_fallas(w), "puntero de SUBIDA_OK al ENTREGA_OK de la corrida subida = PASS"
 +    print("test_be_gk59 OK")
 +
 +

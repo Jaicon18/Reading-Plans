@@ -7446,7 +7446,7 @@
   {
    "id": "U-177",
    "origen": "ORDENES_DEL_USUARIO.md (11-nov, auditoría adversarial U-138)",
-   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si SUBIDA_OK es posterior a él y anterior a la publicación de la siguiente versión y los hashes coinciden (salvo versión que cambie cantidades, U-180 (4))",
+   "texto_corto": "ENTREGA_OK con nombre + sha256 del PDF de markups y del Excel vigentes y versión del skill; CE_RCP_CONTORNO < 0.5 = FAIL aunque traiga motivo; todo renglón de stud / track / header del MS con tamaño + gauge (designación) y N/HOJA; nombre del producto = el impreso (v81cf91: unión con Xfinity: CE_ENTREGA_VIGENTE con md5 de Drive + subir_entrega --vigente, CE_MS_GAUGE, CE_MS_PRODUCTO_IMPRESO) ; v131 (GK): ENTREGA_OK de la versión vigente al subir sigue válido si el VERDE es anterior a la publicación de la siguiente versión, la subida es posterior al VERDE y los hashes coinciden (b', COORDINACIÓN 02:03) (salvo versión que cambie cantidades, U-180 (4))",
    "categoria": "programa",
    "cuando": "entrega",
    "chequeos": [
@@ -8721,9 +8721,10 @@
    "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 13-nov; aprobada por COORDINACIÓN)",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl",
+   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl ; v131: SUBIDA_OK guarda el puntero 'corrida' / 'entrega_ok'; una corrida VERDE posterior sí actualiza ENTREGA_OK.json (aprobado por COORDINACIÓN 02:03)",
    "chequeos": [
-    "take-off:tools/compuerta_entrega.py::be_gk59_fallas"
+    "take-off:tools/compuerta_entrega.py::be_gk59_fallas",
+    "take-off:tools/subir_entrega.py::subir"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
