@@ -124,7 +124,7 @@ diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/tools/chequeos_bibli
  def canon_no_vacio(b):
 diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138g/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
 --- v138f/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 22:20:33.584791436 +0000
-+++ v138g/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 22:28:16.561250927 +0000
++++ v138g/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 22:32:46.085675583 +0000
 @@ -595,6 +595,12 @@
                    {"canon": {"showers": [{"floor": "L2", "room": "214", "box": [100, 130, 50, 80], "cbu": [{"side": "W", "id": "CBU-1"}]}],
                               "existing_walls": [{"id": "CBU-1", "floor": "L2", "board": "1/2 cement board", "height_ft": 9.0, "type_id": "W.4-0", "path": [[100, 50], [100, 80]]},
@@ -157,12 +157,12 @@ diff -ruN -x __pycache__ v138f/take-off-metal-frame-drywall/tools/test_chequeos_
 +    assert CB_.stud_zona_fallas(base) == []
 +    base["misc_items"][0]["decision"] = "see 1/A9.9"                    # verificación g #3: otro N/HOJA no libera
 +    assert CB_.stud_zona_fallas(base)
-+    grid = {"walls": [{"id": "A-01", "type_id": "A", "stud_size": "362S125-33"}],   # verificación g #1 (Grand Kia): eje 'A' no es el type A
++    grid = {"walls": [{"id": "Z9-01", "type_id": "A", "stud_size": "362S125-33"}],   # verificación g #1 (Grand Kia): eje 'A' no es el type A
 +            "misc_items": [{"ref": "Z", "qty": 10.0, "source": "ceiling framing at grid line A (H.1 to B) | 362S162-43"}]}
 +    assert CB_.stud_zona_fallas(grid) == []
 +    grid["misc_items"][0]["source"] = "backing zone on type A walls | 362S162-54"
 +    assert CB_.stud_zona_fallas(grid)
-+    tam = {"walls": [{"id": "B-01", "type_id": "B", "stud_size": "362S162-19"}],     # Grand Kia EXT-03B: el type citado solo por su tamaño
++    tam = {"walls": [{"id": "Y9-01", "type_id": "B", "stud_size": "362S162-19"}],     # Grand Kia EXT-03B: el type citado solo por su tamaño
 +           "misc_items": [{"ref": "EXT", "qty": 50.0, "source": "A200 EXT: stud framing; A220 type B 21'-0\" | 362S162-68"}]}
 +    assert CB_.stud_zona_fallas(tam) == []
 +    D = None
