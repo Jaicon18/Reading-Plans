@@ -18,6 +18,9 @@ Texto literal de las preferencias de cuenta que el usuario dio en los primeros d
 - ERRORES. Cada error: crear la solución, dejarla como regla para todos los proyectos y actualizar el skill el mismo turno. [U-124 · conducta; verificar_version.py]
 - Trade terms always in English, never translated ("tablaroca", "poste metálico", "canal" forbidden). [U-125 · CB_U_125]
 
+## ⭐ REGLA DE ORO #1 — TODO ES PARA TODOS (U-197, usuario 13-nov, texto literal: "recuerda, todos los cambios y mejoras que estamos haciendo es para todos lo futuros proyectos y para todas las seciones, esa en una regla de oro numero 1")
+TODO cambio, mejora, regla, arreglo de tool o decisión del usuario — venga del proyecto o la sesión que venga — se aplica a TODOS los proyectos futuros y a TODAS las sesiones (COORDINACIÓN, proyectos, Xfinity/skill), sin excepción: entra el mismo día a la línea única del skill (U-078) y a ORDENES (jc-hunter-ordenes, que carga toda sesión), y va en el brief de cada sesión nueva. Ninguna mejora queda solo en un proyecto ni en una sesión. Chequeo: verificar_version.py (0 faltantes) + hook de arranque en cada sesión.
+
 ## ⭐ REGLA DE ORO (U-172, usuario 11-nov, nunca olvidar)
 Las respuestas están en los planos al 100 %: buscarlas en TODO el set hasta encontrarlas (N/HOJA + recorte). Lo que no aparezca tras búsqueda exhaustiva = IBC con sección/tabla exacta, cargado, sin preguntar.
 
