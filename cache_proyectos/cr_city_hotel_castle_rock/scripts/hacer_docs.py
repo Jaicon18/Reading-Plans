@@ -10,7 +10,7 @@ wb = openpyxl.load_workbook(x, data_only=True)
 td = json.load(open(TJ)); c = json.load(open(CN))
 ms = [r for r in wb["Material Summary"].iter_rows(min_row=4, values_only=True) if r[0] and isinstance(r[2], (int, float))]
 rf = [r for r in c["rfis"] if r["status"] == "open"]
-TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev20b FINAL"
+TIT = "CR City Hotel - 415 Perry Street, Castle Rock, CO 80104 - Metal framing & drywall take-off, rev20c FINAL"
 XN = os.path.basename(x)
 tot = collections.OrderedDict()
 order = (c.get("constants") or {}).get("type_order", {}).get("value") or []
@@ -41,7 +41,7 @@ R = [f"# {TIT}", ""] + datos() + [
  "- 2026 Permit Drawings (Architectural 4.22.2026, Structural 4.22.2026, Mech/Plumb and Electrical 6.1.2026, Project Manual Vol 1 / 2) = current set; the 2025 Full Drawing Set is superseded (compared sheet by sheet by program).",
  "", "## What is in this folder", "",
  f"- `Take-off/{XN}` - fixed 6-sheet format (Inputs, Partition Takeoff, Material Summary, Pending Items, Review Items, Scope Checklist). Partition Takeoff: board-only rows per wall and FLOOR, one block per type in the A0.06 / A0.07 schedule order with SUBTOTAL.",
- "- `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
+ "- `Planos marcados/CR_markups_rev20c - OPEN IN BLUEBEAM.pdf` - Bluebeam markups (Subject = type, Page Label = sheet, Length, Depth = wall height, Wall Area; Contents = TYPE · LF · H · faces · board SF · DETAIL · Wall ID) on A2.01-A2.04 + enlarged plans, ceilings as polygons on A3.01-A3.04; PNG per sheet.",
  "- `Planos marcados/DETALLES_REVISADOS.pdf` + index (every detail / section bubble circled and numbered in origin and destination, U-141); `Planos marcados/SCHEDULES_REVISADOS.pdf` + SCHEDULES_MATERIALES (U-142).",
  "- `GUIA_DE_REVISION_DEL_ESTIMADOR.md` (review order and what each file contains, Spanish), `PARA_REVISAR_EN_LA_MANANA.md`, `SEGUIMIENTO.md` (open RFIs with the conservative value loaded).",
  "- `Auditoria/` - bubbles, independent schedule reading, A/B resolution per floor with crops, RFI images, adversarial audit.",
@@ -70,6 +70,16 @@ R += ["", "## Bank comparison", "",
  "- Track is in range only because of the soffit / ceiling track of the framed soffits (7/A7.23) and the C-H J-runner; board, finishing and trim are in range per partition LF."]
 if sum(len(fs) for _, _, fs in os.walk(E, followlinks=True)) > 1000:     # BE-CR28 / CE_SUBIDA_PAQUETE
     R += ["", "## Upload note", "", "- More than 1,000 files: `Auditoria/` is uploaded to Drive as **Auditoria.zip** (same files the delivery gate verified; unzip it to browse)."]
+_alts = sorted([x for x in c.get("add_alternates") or [] if isinstance(x.get("n"), int)], key=lambda x: x["n"])   # rev20c: el usuario pidió que el cliente vea la RAZÓN del alternate
+if _alts:
+    R[2:2] = ["## ADD ALTERNATES (NOT in the base bid)", ""] + [f"- **{x['id']} (ADD)** - {x['texto']}. REASON: {str(x.get('razon') or '').rstrip('.')}; excluded from the base bid and priced as an add alternate until clarified. "
+                                                                 "Quantities: " + "; ".join(f"{i['material']} {float(i['qty']):,.2f} {i['unit']}" for i in x.get("cantidades") or [])
+                                                                 + f". Priced apart in the Proposal ({x['id']} line)." for x in _alts] + [""]
+R += ["", "## USER-AUTHORIZED GATE EXCEPTION (13-nov)", "",
+      "- The delivery gate (skill v81cf138a) reports one FAIL: CE_PROTOCOLO_3H on the steps of the ORIGINAL revision of this project (5-6 nov: steps 1, 2-3, 4-6, "
+      "7-8 and 9-10 closed in TIEMPOS.md without a time-log mark or a '--paso' run; that process requirement did not exist then). No retroactive marks were created.",
+      "- The user authorized this exception on 13-nov (CE_PROTOCOLO_3H, original revision 5-6 nov; authorized by the user 13-nov; no quantity change; fix in v140). "
+      "It does not change any quantity; the skill fix is planned for v81cf140. Independent evidence of those closings: repo commit 9aedfeb (step 7-8) and SUBIDA_OK of rev1."]
 open(os.path.join(E, "README_REVIEW.md"), "w").write("\n".join(R) + "\n")
 
 fam = {str(r[0]): r for r in ms}
@@ -138,12 +148,12 @@ S = ["# SEGUIMIENTO - CR City Hotel (RFI abiertos con supuesto conservador CARGA
 for r in rf:
     S.append(f"| {r['id']} | {r['items']} | {r['source']} | {r['question'][:200]} | {r['loaded'][:160]} | {r['delta'][:220]} |")
 open(os.path.join(E, "SEGUIMIENTO.md"), "w").write("\n".join(S) + "\n")
-G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev20b FINAL", "",
+G = [f"# GUÍA DE REVISIÓN DEL ESTIMADOR — CR City Hotel, Castle Rock CO · rev20c FINAL", "",
  "Esta guía dice en qué orden revisar, qué contiene cada archivo y qué decides tú. Términos del trade en inglés.", "",
  "## ORDEN RECOMENDADO (de lo que más cuesta a lo que menos)", "",
  "1. Markups del floor plan de cada piso (que no falte ningún wall).", "2. Detalles que llama cada floor plan (que se hayan leído todos).", "3. Schedules y materiales por partition type.", "4. El Excel (cantidades).", "5. Alcance (Scope Checklist).", "6. Lo que te toca decidir (RFI).", "",
  "## PASO 1 — Markups del floor plan (que no falte ningún wall)", "",
- "- Archivo: `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
+ "- Archivo: `Planos marcados/CR_markups_rev20c - OPEN IN BLUEBEAM.pdf` (ábrelo en Bluebeam). Hojas A2.01 (L1), A2.02 (L2), A2.03 (L3), A2.04 (L4) y las ampliadas A6.0x / A7.xx donde la lectura midió.",
  "- Cada línea es un wall: Subject = type (por ejemplo `W.62-1 - BOARD ONLY (WOOD FRAMING EXCLUDED)`), Length = LF medido a la escala impresa, Depth = altura del board, Wall Area = SF. La leyenda va en el orden de A0.06 / A0.07.",
  "- Los pisos nunca se juntan: cada wall lleva su piso en el ID (W.62-L2-03).",
  f"- Totales por piso: " + "; ".join(f"{fl} {v[0]} walls / {v[1]:,.2f} LF" for fl, v in sorted(fl_tot.items())) + ".",
@@ -287,15 +297,17 @@ _txt26 = ("26. **rev20 FINAL reemplaza a rev19** (12-nov; detalle y delta en RES
 G[2:2] = ["## CAMBIOS rev20 vs rev19 (revisa esto primero si ya viste rev19)", "", _txt26, ""]
 _txt27 = ("27. **rev20b FINAL reemplaza a rev20** (12-nov; delta regenerado del Excel en RESUMEN_rev20b.md y Auditoria/DELTA_rev20_rev20b.md): revisión del mapa de cobertura U-193 (457 rojos, 3 revisores independientes, 0 abiertos, Auditoria/COBERTURA_DISPOSICION.csv). Cargados: UNTYPED-L3-12, XW.6.6-L4-16 B, FW.2-L2-15 / FW.2-L3-15 / FW.2-L3-14 (+ FW.2-L2-14 extendido), XW.6.3-L1-01 S (pier al lobby, +35.53 SF). Cargados conservadores con RFI y delta: RFI-30 forro de la escalera 127 (LIN-127-L1..L4, 2,325.5 SF; INTERIOR DRAWINGS referenced but not issued in the bid set) y RFI-31 muro del pasillo de salida de Stair 2 (XW.6.3-L1-04 A / B). Addendum de BuildingConnected (Geotech / Irrigation / Landscape / Site Demo): sin impacto.")
 G[2:2] = ["## CAMBIOS rev20b vs rev20 (revisa esto primero si ya viste rev20)", "", _txt27, ""]
+_txt28 = ("28. **rev20c FINAL reemplaza a rev20b** (13-nov; delta regenerado del Excel en RESUMEN_rev20c.md y Auditoria/DELTA_rev20b_rev20c.md): decisión del usuario sobre RFI-30 ('ponlo como alternate'): el forro de la escalera 127 (LIN-127-L1..L4, 7-10/A6.01, 11/A6.01; INTERIOR DRAWINGS referenced, not issued) SALE del base bid (-2,325.5 SF Type X y su compound / tape) y va como ALTERNATE #1 (ADD): 2-1/2\" metal stud furring @ 16\" o.c. + track + 5/8\" Type X, cantidades [DERIVED] en la línea ALTERNATE #1 del Scope Checklist y precio aparte en la Proposal. RFI-30 cerrado. RFI-31 resuelto con lo impreso (A0.01 \'2 HR RATED EXTERIOR WALL\', 1/A4.01 wood siding, A0.07: XW.6.3 | 2), XW.6.3-L1-04 A / B a 4.33 LF; Review Item con el delta si la cara exterior no lleva exterior gypsum (-121.24 SF). U-199 (revisor independiente, Auditoria/u199): 1 muro faltante cargado DW.4-L2-06b (cara de 204, 6.47 ft), 3 largos de L3 corregidos (NULL-L3-05 B / -06 / -07b B), 15 disposiciones con N/HOJA; luego la revisión U-199 completa (v81cf137, 13 controles, 5 revisores independientes R1-R5 en Auditoria/u199/rev): 14 FALTA cargadas por la cadena - cielo del vestíbulo del corridor 412 (+72.34 SF RS-1); W.6-L4-02 / 03 / 04 a W.6-1 (2/A0.02 1HR FP); W.6-L4-01, FW.4-L4-19 y XW.6.6-L4-18 a 2 HR (conflicto tag vs code plan 2/A0.02: base = mayor, RFI-32, DEDUCT ALTERNATE DA-7 -448.89 SF); exclusiones equivocadas vueltas al base: W.4-L3-44 A / B, W.4-L4-22 A / B, NT-L1-01 / 02 (TF-1 en 2/A7.35 y 3/A7.35, FW.6-0 asumido, RFI-33); altura de los cielos del corridor / lobby de L3 9.8958 (4/A5.05); franja RS-6 de L3 sin cambio (855.0 SF) con Review Item -185.84 SF si el cielo para en las caras de 301-304. barrido U-140 de las 3 DUDA (revisor R6): cargadas conservadoras - NT-L1-03 A / B / C (muro de grid 4 en la puerta 107.1: tag 'XW.6.3 | 2' de 1/A2.01, 7/A9.01 + lining, 328.64 SF), XW-L1-BAR15 A / B (pierna '1HR EXT WALL' de 2/A0.01, XW.6.6-1, 50.04 SF), W.6-L1-06S A-D (bloque 'SATIN BRASS SHEET APPLIED TO WALL' de 1/A7.35, 68.10 SF); RFI-33 (elementos sin tag de L1, con el delta de cada alternativa) y RFI-34 (beam wraps vs SFRM, DA-8 -164.24 SF). Las 60 exclusiones que quedan, re-verificadas una por una. AA-1 pasa a ALTERNATE #2 (ADD) con su REASON (1/A7.19, 09 29 00 3.6.E): aplica solo si el acabado alterno es pintura.")
+G[2:2] = ["## CAMBIOS rev20c vs rev20b (revisa esto primero si ya viste rev20b)", "", _txt28, ""]
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt25)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt20)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt19)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt18)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt17)
 P.insert(P.index(next(x for x in P if x.startswith("4. Alturas"))), _txt16)
-G = ["OPEN IN BLUEBEAM: `Planos marcados/CR_markups_rev20b - OPEN IN BLUEBEAM.pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
+G = ["OPEN IN BLUEBEAM: `Planos marcados/CR_markups_rev20c - OPEN IN BLUEBEAM.pdf` (the only editable markups file; the PNGs named 'IMAGE ONLY (not editable)' are pictures only).", ""] + G   # U-158: primer renglón
 G += ["", "## Mapa de cobertura (U-193): qué revisa y sus límites", "",
-      "- `Planos marcados/COBERTURA - IMAGE ONLY.pdf` + `Auditoria/COBERTURA.csv`: todo muro dibujado (par de líneas) sin markup sale en ROJO; cada "
+      "- `Planos marcados/MAPA DE COBERTURA - IMAGE ONLY.pdf` + `Auditoria/COBERTURA.csv`: todo muro dibujado (par de líneas) sin markup sale en ROJO; cada "
       "rojo tiene su disposición en `Auditoria/COBERTURA_DISPOSICION.csv` (revisor independiente, motivo, N/HOJA, recorte en `Auditoria/ROJOS/`).",
       "- LÍMITES: un muro al que le falta UNA SOLA cara (single face missing) NO sale en rojo (la otra cara cubre su eje), y los muros en DIAGONAL "
       "no los detecta el mapa: esos se revisan en las plantas y en `Auditoria/VISTA_BLUEBEAM.csv`. En las hojas donde los números de cuarto no son "

@@ -53,3 +53,22 @@ for f, tit in (('RESUMEN_rev20b.md', 'RESUMEN'), ('BITACORA_rev20b.md', 'BITACOR
          "Excel); never typed by hand.\n\n" + T2 + "\n" + CAMBIOS + sec(R20, "Entrega") + sec(R20, "Errores") + "\n")
     open(f'{W}/{f}', 'w', encoding='utf-8').write(t)
     print(f, 'filas delta:', T2.count('\n') - 1)
+
+# rev20c (decisión del usuario 13-nov sobre RFI-30 -> ALTERNATE #1): RESUMEN_rev20c.md / BITACORA_rev20c.md, delta rev20b -> rev20c
+# regenerado del Excel (etapas/DELTA_rev20b_rev20c.md: Excel rev20c contra el Excel rev20b entregado, archivo_rev20b); nunca a mano.
+D3 = open(f'{W}/etapas/DELTA_rev20b_rev20c.md', encoding='utf-8').read()
+T3 = "\n".join(l for l in D3.splitlines() if l.startswith('|'))
+_C = __import__('json').load(open(f'{W}/etapas/4_canon/takeoff_canon.json'))
+_A = next((a for a in _C.get('add_alternates') or [] if a.get('id') == 'ALTERNATE #1'), None)
+ALT = ("\n## ALTERNATE #1 (ADD) - NOT in the base (user decision 13-nov on RFI-30: 'ponlo como alternate')\n\n"
+       + (_A['texto'] + ". REASON: " + str(_A.get('razon', '')).rstrip('.') + "; excluded from the base bid and priced as an add alternate until clarified" + "\n\nIts quantities [DERIVED] are NOT in the Material Summary (the "
+          "Material Summary is the base bid): they are on the Scope Checklist line ALTERNATE #1 and in the Proposal ALTERNATE #1 PRICING block, each with its operation." if _A else "(missing)") + "\n")
+for f, tit in (('RESUMEN_rev20c.md', 'RESUMEN'), ('BITACORA_rev20c.md', 'BITACORA')):
+    t = (f"# {tit} rev20c FINAL — CR City Hotel (Castle Rock, CO)\n\n"
+         "rev20c is a NEW delivery that replaces rev20b: the user answered RFI-30 ('ponlo como alternate'). The stair 127 lining leaves the base bid "
+         "and is priced apart as ALTERNATE #1 (ADD). RFI-31 resolved from the printed rating + finish (A0.01 2 HR RATED EXTERIOR WALL, 1/A4.01 wood siding, A0.07 XW.6.3 | 2): XW.6.3-L1-04 A / B at 4.33 LF [DERIVED 39.0 / 9]; Review Item with the delta if the exterior face carries no exterior gypsum (-121.24 SF).\n\n"
+         "## Delta del Material Summary (NET) rev20b -> rev20c\n\n"
+         "Regenerated from the final Excel Material Summary (etapas/DELTA_rev20b_rev20c.md, delta_rev.py: rev20c Excel vs the delivered rev20b "
+         "Excel); never typed by hand.\n\n" + T3 + "\n" + ALT + sec(R20, "Entrega") + sec(R20, "Errores") + "\n")
+    open(f'{W}/{f}', 'w', encoding='utf-8').write(t)
+    print(f, 'filas delta:', T3.count('\n') - 1)

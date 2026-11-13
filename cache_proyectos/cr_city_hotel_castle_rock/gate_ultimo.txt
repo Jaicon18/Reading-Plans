@@ -4,6 +4,10 @@ PASS  CE_ORDENES_VIGENTES      BE-CF27, U-180
 PASS  CE_ENTREGABLES           U-011, U-048
 PASS  CE_ESTANDAR_OREILLY      U-145, U-148
 PASS  CE_SIN_PROPOSAL          U-015, U-150
+PASS  CE_U199_OMITIDOS         U-199
+PASS  CE_COBERTURA_DIAG        U-193, U-199
+PASS  CE_LEEME_ARCHIVOS        U-196
+PASS  CE_ALTERNATES            U-195, U-198
 PASS  CE_PROPOSAL              U-150, U-192
 PASS  CE_FORMATO_EXCEL         BE-43, U-003, U-016, U-121
 PASS  CE_TORNILLERIA           U-053
@@ -12,7 +16,7 @@ PASS  CE_FUENTES_MS            BE-40, U-025, U-115
 PASS  CE_DATOS_PROYECTO        BE-114, BE-XF05, R-ALC-08, R-ALC-09, U-076, U-077, U-170
 AMBER CE_TIEMPOS               BE-158, U-094, U-169
         - pasos 1–9 con hora, sin filas encimadas, TOTAL = suma; TIEMPOS.md
-        - TOTAL 3858 min = 536 % del presupuesto 720 min (84 hojas A) — causa y plan escritos
+        - TOTAL 4921 min = 683 % del presupuesto 720 min (84 hojas A) — causa y plan escritos
 PASS  CE_TEXTOS_LEGIBLES       BE-COORD02, BE-CR36, BE-GK41, U-187
 PASS  CE_CAMPOS_CANON          BE-CR20, BE-CR22, BE-CR27, BE-PM02, U-137, U-178
 PASS  CE_HORAS_CALIFORNIA      U-045
@@ -36,7 +40,7 @@ PASS  CE_ATRIBUCION_ESTIMADOR  BE-101, U-052
 PASS  CE_DECISIONES_EN_EXCEL   U-016, U-050
 PASS  CE_SEGUIMIENTO           U-048
 AMBER CE_ALTURA_IMPRESA        BE-119, BE-134, R80f.29, U-010, U-088, U-099
-        - 0 RED / 1 AMBER de 943
+        - 0 RED / 1 AMBER de 963
         - XW.6.6-L4-16 B: XW.6.6-L4-16 B: no printed height to compare (no printed height in the citation; sheets cited 04/A9.05, 1/A5.06, L4)
 AMBER CE_MATERIALES_SCHEDULE   BE-122, BE-126, BE-134, BE-XF09, R80f.30, R80f.34, U-111
         - type W.4-0: AMBER (el schedule no lo dice)
@@ -61,13 +65,13 @@ AMBER CE_MS_PRODUCTO_IMPRESO   BE-AUD04, U-177
         - 0 items con producto impreso: cada uno nombra su renglón
 PASS  CE_ENTREGA_VIGENTE       BE-AUD01, U-177
 PASS  CE_RFI_LISTO             U-179
-AMBER CE_PROTOCOLO_3H          U-181, U-184
-        - causa: la rev arrancó 2026-11-12T11:49:00-08:00 (primera marca de tiempos.log / primer commit), ANTES de v81cf119 (2026-11-12T21:21:52+00:00): los requisitos de proceso BE-PM05 / BE-PM06 / alarma no se exigen retroactiva
-        - (7) sin VERSION_PROYECTO.txt (versión del skill fijada al arrancar la rev: compuerta_entrega.py version_proyecto <workdir> --rev revN)
+FAIL  CE_PROTOCOLO_3H          U-181, U-184
         - TIEMPOS.md: el paso 7-8 cierra a las 11-05 20:28 y tiempos.log no tiene una marca a esa hora (BE-PM06)
         - TIEMPOS.md: el paso 9-10 cierra a las 11-06 00:21 y tiempos.log no tiene una marca a esa hora (BE-PM06)
         - paso 1 cerrado en TIEMPOS.md sin su corrida 'compuerta_entrega.py <w> --paso 1' (BE-PM06)
         - paso 2-3 cerrado en TIEMPOS.md sin su corrida 'compuerta_entrega.py <w> --paso 2-3' (BE-PM06)
+        - paso 2-3 cerrado en TIEMPOS.md sin su corrida 'compuerta_entrega.py <w> --paso 2-3' (BE-PM06)
+        - paso 4-6 cerrado en TIEMPOS.md sin su corrida 'compuerta_entrega.py <w> --paso 4-6' (BE-PM06)
 PASS  CE_RESUMEN_EXCEL         BE-AUD08
 PASS  CE_RCP_COMPLETO          BE-AUD07, CR-R7-01, U-124, U-137
 PASS  CE_MARKUP_EN_WALL        CR-R8-W2, U-120, U-137
@@ -156,7 +160,7 @@ PASS  CB_BE_78                 BE-78
 PASS  CB_BE_79                 BE-79
 PASS  CB_BE_80                 BE-80
 AMBER CB_BE_81                 BE-81
-        - type FW.4-1: la fila de rating no está impresa; la familia FW.4 sí (construcción de la familia)
+        - type FW.4-2: la fila de rating no está impresa; la familia FW.4 sí (construcción de la familia)
         - type XW.6.6-0: la fila de rating no está impresa; la familia XW.6.6 sí (construcción de la familia)
 PASS  CB_BE_82                 BE-82, BE-CH02
 PASS  CB_BE_83                 BE-83, BE-93, R80f.36
@@ -267,9 +271,10 @@ PASS  CB_CANON_NO_VACIO        BE-CR25, U-124
 PASS  CE_SCHEDULES_MARCADOS    U-111, U-142
 PASS  CE_SCHEDULES_REVISADOS   U-142
 PASS  CE_DETALLES_CIRCULADOS   BE-CR23, CR-R10-m3, U-141
+PASS  CE_MUROS_CANON           BE-XF16, U-137
 AMBER CE_COBERTURA             BE-GK54, U-137, U-193
         - causa: cadena interrumpida y reemplazada: 131 corrida(s) sin agente (rfis.py 2026-11-12T21:21:59, inventario.py 2026-11-12T21:21:59, sellos_evidencia.py 2026-11-12T21:22:24, test_ciego_tools.py 2026-11-12T21:22:27) se vo
         - causa: 4493 corrida(s) sin agente fechadas ANTES de v81cf119 (2026-11-12T21:21:52+00:00; la primera alcances.py 2026-11-06T05:44:01): SUBAGENTE_ID no se exige retroactivamente (como proceso_v119)
         - A2.01 planta: muros 100 % LF, cuartos 0+0 de 0, rojos 0; A2.02 planta: muros 100 % LF, cuartos 0+0 de 0, rojos 0; A2.03 planta: muros 100 % LF, cuartos 0+0 de 0, rojos 0; A2.04 planta: muros 100 % LF, cuartos 0+0 de 0, r
-COMPUERTA DE ENTREGA: PASS 228 / AMBER 9 / FAIL 0 -> VERDE (se puede subir con subir_entrega.py)
+COMPUERTA DE ENTREGA: PASS 233 / AMBER 8 / FAIL 1 -> ROJA: NO SE ENTREGA
 /root/cr/work/entrega/ENTREGA_OK.json
