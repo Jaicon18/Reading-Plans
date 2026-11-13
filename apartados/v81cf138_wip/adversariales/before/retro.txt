@@ -1,0 +1,5 @@
+Z0 control own log rev21 13-nov -> FAIL | (7) sin VERSION_PROYECTO.txt (versión del skill fijada al arrancar la rev: compuerta_entrega.py version_proyecto <workdir> --rev revN)
+Z1 cumulative log, rev20 closing line '05-nov ... rev20 entregada; sigue rev21 (RFI-30)' + rev21 13-nov -> FAIL | (7) sin VERSION_PROYECTO.txt (versión del skill fijada al arrancar la rev: compuerta_entrega.py version_proyecto <workdir> --rev revN)
+Z2 own log, one copied header line without rev label '10-nov 21:01 PST | arranque proyecto' -> AMBER | causa: la rev arrancó 2026-11-10T21:01:00-08:00 (primera marca de tiempos.log / primer commit), ANTES de v81cf119 (2026-11-12T21:21:52+00:00): los req
+Z3 own log, first line '2026-11-11 18:00 | nota: plan de la rev' then 13-nov -> AMBER | causa: la rev arrancó 2026-11-11T18:00:00-08:00 (primera marca de tiempos.log / primer commit), ANTES de v81cf119 (2026-11-12T21:21:52+00:00): los req
+Z4 own log, 'inicio rev21' with mistyped date 2026-11-03 then 13-nov marks -> AMBER | causa: la rev arrancó 2026-11-03T09:00:00-08:00 (primera marca de tiempos.log / primer commit), ANTES de v81cf119 (2026-11-12T21:21:52+00:00): los req

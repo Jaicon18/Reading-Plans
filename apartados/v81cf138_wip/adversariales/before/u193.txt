@@ -1,0 +1,26 @@
+OK subagente anotado: revisor_cobertura subagente R9
+V0 control distinct -> ('PASS', [])
+OK subagente anotado: revisor_cobertura subagente_A1
+V1 'subagente A1' vs 'subagente_A1' -> ('FAIL', ['reviewer subagente_A1 rechazado'])
+OK subagente anotado: revisor_cobertura subagente-A1
+V2 'subagente A1' vs 'subagente-A1' -> ('FAIL', ['reviewer subagente-A1 rechazado'])
+OK subagente anotado: revisor_cobertura subagente A1
+V3 SUBAGENTE_ID 'A1' vs 'subagente A1' -> ('FAIL', ['reviewer subagente A1 rechazado'])
+OK subagente anotado: revisor_cobertura lectura A
+V4 'lectura-A' vs 'lectura A' -> ('FAIL', ['reviewer lectura A rechazado'])
+OK subagente anotado: revisor_cobertura AGENT a1
+V4b 'Subagent_A1' vs 'AGENT a1' -> ('FAIL', ['reviewer AGENT a1 rechazado'])
+OK subagente anotado: revisor_cobertura A1
+V4c 'sub-agente A1' vs 'A1' -> ('FAIL', ['reviewer A1 rechazado'])
+OK subagente anotado: revisor_cobertura subagente 1
+V4d 'subagente #1' vs 'subagente 1' -> ('FAIL', ['reviewer subagente 1 rechazado'])
+OK subagente anotado: revisor_cobertura revisor A1
+V4e 'revisor A1' (role word as prefix) vs 'A1' -> ('PASS', [])
+OK subagente anotado: revisor_cobertura A1
+V4f 'A1 (canon)' vs 'A1' -> ('PASS', [])
+OK subagente anotado: revisor_cobertura A1
+V4g 'Ａ１' fullwidth vs 'A1' -> ('FAIL', ['reviewer A1 rechazado'])
+OK subagente anotado: revisor_cobertura R9
+V7 reviewer's unattributed markups run 'replaced' by a trivial later run of the same tool (rc 2, --help) -> ('AMBER', ['AMBER reemplazadas markups_bluebeam.py 2026-11-13T06:40:49'])
+OK subagente anotado: revisor_cobertura R9
+V7-0 control same without the trivial run -> ('FAIL', ['sin agente markups_bluebeam.py 2026-11-13T06:40:52'])
