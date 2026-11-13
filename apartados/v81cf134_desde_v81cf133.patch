@@ -1,7 +1,7 @@
 diff -ruN v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v134/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:17:14.306408602 +0000
-+++ v134/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:17:14.315129601 +0000
-@@ -8766,6 +8766,13 @@
++++ v134/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:21:39.772346385 +0000
+@@ -8766,6 +8766,30 @@
      "archivo": "take-off:tools/test_compuerta_entrega.py",
      "token": "test_u196_leeme_y_mapa"
     }
@@ -12,13 +12,30 @@ diff -ruN v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v134/take-off-m
 +   "categoria": "conducta",
 +   "texto_corto": "REGLA DE ORO #1: todo cambio o mejora es para TODOS los proyectos futuros y TODAS las sesiones: se une a la línea principal del skill (versión vigente), nunca queda como arreglo local de un proyecto ni en una rama aparte",
 +   "motivo": "orden del usuario 13-nov: los arreglos de cada proyecto tienen que servir a todos"
++  },
++  {
++   "id": "U-198",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"esta bien si lo pusiste cono alternate, pero tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa\")",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::alternates_fallas",
++    "take-off:tools/compuerta_entrega.py::ce_alternates",
++    "take-off:tools/plantilla_excel.py::razon_alternate",
++    "take-off:tools/plantilla_excel.py::add_alternates_err"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_u195_add_alternates"
++   }
    }
   ]
  }
 \ No newline at end of file
 diff -ruN v133/take-off-metal-frame-drywall/SKILL.md v134/take-off-metal-frame-drywall/SKILL.md
 --- v133/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:17:14.313343840 +0000
-+++ v134/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:17:14.319350952 +0000
++++ v134/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:21:39.776905408 +0000
 @@ -5,7 +5,13 @@
  
  # Take-off de Metal Frame y Drywall
@@ -34,6 +51,18 @@ diff -ruN v133/take-off-metal-frame-drywall/SKILL.md v134/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
+@@ -368,6 +374,11 @@
+   VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si el VERDE es anterior a la publicación de la versión
+   siguiente (FECHAS_PUBLICACION, hora real del commit), la subida es posterior al VERDE y los hashes de Drive coinciden (b', 02:03). La re-corrida por
+   cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
++- **U-198 (usuario 13-nov: "tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa"; v81cf134):** todo
++  ALTERNATE (U-195) lleva su razón para el cliente, en inglés: canon add_alternates[].razon (qué se ve en los planos con su N/HOJA y qué
++  falta) -> plantilla_excel.razon_alternate = 'REASON: <razon>; excluded from the base bid and priced as an add alternate until
++  clarified.', igual en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW. CE_ALTERNATES: alternate sin 'REASON:' con su
++  N/HOJA en cualquiera de esos lugares = FAIL.
+ - **U-196 (usuario 13-nov: "mapa de cobertura, ponle ese nombre y haz una descripcion para saber para que sirve cada cosa"; v81cf133):**
+   (1) el mapa de cobertura se llama 'Planos marcados/MAPA DE COBERTURA - IMAGE ONLY.pdf' (el nombre viejo 'COBERTURA - IMAGE ONLY.pdf' se
+   sigue aceptando en entregas anteriores); (2) `compuerta_entrega.py leeme <carpeta de entrega>` escribe en la raíz
 Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
 Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
 Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
@@ -77,3 +106,148 @@ Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.
 Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
 Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
 Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
+diff -ruN v133/take-off-metal-frame-drywall/tools/compuerta_entrega.py v134/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v133/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 05:17:14.310531719 +0000
++++ v134/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 05:21:39.776013391 +0000
+@@ -369,7 +369,12 @@
+     return str(x) if x is not None else ""
+ 
+ 
+-def alternates_fallas(canon, scope_rows, ms_nombres, proposal_textos=None):
++def _razon_en(txt, nh):
++    """U-198: 'REASON: …' con el N/HOJA de la razón dentro de los 400 caracteres siguientes."""
++    return bool(re.search(r"(?is)REASON\s*:.{0,400}?" + re.escape(nh), str(txt or "")))
++
++
++def alternates_fallas(canon, scope_rows, ms_nombres, proposal_textos=None, readme_txt=None, proposal_pdf_txt=None):
+     """U-195 (usuario 13-nov, CR RFI-30 'ponlo como alternate'; COORDINACIÓN 04:49): un elemento dibujado sin material impreso y con su
+     referencia no emitida va como ALTERNATE (ADD), FUERA del base bid, con el mecanismo del skill (SKILL §alcances 4: el Material Summary
+     NO lleva renglones ALTERNATE): canon add_alternates[] {n, rfi, texto, cantidades [{material, qty, unit, op}] [DERIVED]}, línea
+@@ -386,6 +391,14 @@
+     for n, x in sorted(aa.items()):
+         if not x.get("rfi") or not x.get("cantidades"):
+             ev.append(f"add_alternates #{n}: falta 'rfi' o 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada) (U-195)")
++        m = RX_NH_VALIDA.search(str(x.get("razon") or ""))
++        if not m:
++            ev.append(f"add_alternates #{n}: sin 'razon' con N/HOJA (U-198: todo ALTERNATE lleva 'REASON: …' con su N/HOJA)")
++            continue
++        for nom, t in (("el Scope Checklist", _textos(scope_rows)), ("la Proposal (PROPOSAL)", " ".join(proposal_textos) if proposal_textos is not None else None),
++                       ("el PDF de la Proposal", proposal_pdf_txt), ("README_REVIEW", readme_txt)):
++            if t is not None and not _razon_en(t, m.group(0)):
++                ev.append(f"ALTERNATE #{n}: {nom} sin 'REASON: …' con su N/HOJA ({m.group(0)}) (U-198)")
+     for m in ms_nombres or []:
+         if re.search(r"\bALTERNATE\b", str(m or "")):
+             ev.append(f"Material Summary '{str(m)[:60]}': un ALTERNATE no va en el Material Summary (se cotiza aparte, SKILL §alcances 4; U-195)")
+@@ -536,7 +549,14 @@
+         import openpyxl
+         pt = [str(v) for x in xs for ws in openpyxl.load_workbook(x, read_only=True, data_only=True).worksheets
+               for row in ws.iter_rows(values_only=True) for v in row if v is not None]
+-    ev = alternates_fallas(can, sc, ms, pt)
++    ppdf = None
++    pdfs_p = sorted(glob.glob(os.path.join(c.entrega or "", "Proposal", "*.pdf"))) if c.entrega else []
++    if pdfs_p:
++        import pymupdf
++        ppdf = " ".join(pg.get_text() for x in pdfs_p for pg in pymupdf.open(x))
++    rr = os.path.join(c.entrega or "", "README_REVIEW.md")
++    rd = open(rr, encoding="utf-8", errors="ignore").read() if c.entrega and os.path.isfile(rr) else ""
++    ev = alternates_fallas(can, sc, ms, pt, rd if (can or {}).get("add_alternates") else None, ppdf)
+     n = len((can or {}).get("add_alternates") or [])
+     return R("FAIL", *ev[:20]) if ev else R("PASS", f"{n} add alternate(s) fuera del base bid" if n else "N/A: sin RFIs cerrados como Alternate")
+ 
+diff -ruN v133/take-off-metal-frame-drywall/tools/plantilla_excel.py v134/take-off-metal-frame-drywall/tools/plantilla_excel.py
+--- v133/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 05:17:14.308131732 +0000
++++ v134/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 05:21:39.773770709 +0000
+@@ -54,7 +54,7 @@
+                "orden_plano": 1 (detalle), "punto": "...", "hoja_detalle": "6/A12.01", "imagen": "R01.jpg"} ],
+    (v77c U9/U10: orden floor plan por type A-Z, después detalles por orden_plano; ordenar_revisar lo hace)
+  "alcances": [ {"id": "ALC-01", "nombre": "...", "estado": "CUANTIFICADO | NO APLICA | RFI", "nota": "..."} ]
+- "add_alternates": [ {"n": 1, "rfi": "RFI-30", "texto": "...", "cantidades": [{"material", "qty", "unit", "op"}]} ]   (U-195, opcional;
++ "add_alternates": [ {"n": 1, "rfi": "RFI-30", "texto": "...", "razon": "... (N/HOJA)", "cantidades": [{"material", "qty", "unit", "op"}]} ]   (U-195 / U-198;
+                    van al Scope Checklist como 'ALTERNATE #N (ADD)', NUNCA al Material Summary)
+ }
+ """
+@@ -210,12 +210,22 @@
+             err.append(f"add_alternates[{i}]: falta 'rfi' o 'texto'")
+         if not a.get("cantidades"):
+             err.append(f"add_alternates[{i}]: sin 'cantidades' [DERIVED] (framing + board + acabado de la geometría dibujada)")
++        if not re.search(r"\b\d{1,2}[A-Z]?/[A-Z]{1,2}-?\d{1,3}(?:\.\d{1,2})?\b", str(a.get("razon") or "")):
++            err.append(f"add_alternates[{i}]: 'razon' con N/HOJA obligatoria (U-198: 'REASON: …' en Proposal, Scope Checklist y README_REVIEW)")
+         for j, q in enumerate(a.get("cantidades") or []):
+             if not all(q.get(k) not in (None, "") for k in ("material", "qty", "unit", "op")):
+                 err.append(f"add_alternates[{i}].cantidades[{j}]: material / qty / unit / op ([DERIVED]) obligatorios")
+     return err
+ 
+ 
++def razon_alternate(a):
++    """U-198 (usuario 13-nov: 'tienes que mencioar la razon … para que mi clientes lo sepa'): el texto de la razón para el CLIENTE, en
++    inglés, igual en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW: qué se ve en los planos (N/HOJA), qué falta y
++    'excluded from the base bid and priced as an add alternate until clarified'."""
++    r = str(a.get("razon") or "").strip().rstrip(".")
++    return f"REASON: {r}; excluded from the base bid and priced as an add alternate until clarified."
++
++
+ def alcances_add_alternates(d):
+     """U-195: una línea 'ALTERNATE #N (ADD)' del Scope Checklist por add alternate, con sus cantidades [DERIVED]; el Material Summary
+     no lleva renglones ALTERNATE (se cotizan aparte, SKILL §alcances 4)."""
+@@ -223,8 +233,8 @@
+     for a in sorted(d.get("add_alternates") or [], key=lambda x: x.get("n") or 0):
+         cant = "; ".join(f"{q['material']} {q['qty']} {q['unit']} [DERIVED: {q['op']}]" for q in a.get("cantidades") or [])
+         out.append({"id": f"ALT-{a['n']}", "nombre": f"ALTERNATE #{a['n']} (ADD): {a.get('texto')}", "estado": "ALTERNATE",
+-                    "nota": f"NOT in the base bid; priced separately as ALTERNATE #{a['n']} (ADD) in the Proposal. Quantities: {cant}. "
+-                            f"{a.get('rfi')} closed as user decision: Alternate #{a['n']}"})
++                    "nota": f"{razon_alternate(a)} Priced separately as ALTERNATE #{a['n']} (ADD) in the Proposal. "
++                            f"Quantities: {cant}. {a.get('rfi')} closed as user decision: Alternate #{a['n']}"})   # U-198
+     return out
+ 
+ 
+diff -ruN v133/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v134/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v133/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 05:17:14.307391193 +0000
++++ v134/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 05:21:39.773061098 +0000
+@@ -3370,6 +3370,7 @@
+     renglón ALTERNATE en el Material Summary. RFI cerrado como Alternate sin las tres = FAIL."""
+     import plantilla_excel as P
+     aa = [{"n": 1, "rfi": "RFI-30", "texto": "Stair Z9 furring 3 3/8\" (RE: INTERIOR DRAWINGS not issued)",
++           "razon": "drawn furring, no material printed and 'RE: INTERIOR DRAWINGS' not issued (5/X9.20)",
+            "cantidades": [{"material": "3-5/8\" stud 20 GA", "qty": 40.0, "unit": "LF", "op": "10 ft x 4 studs"},
+                           {"material": "5/8\" board", "qty": 90.0, "unit": "SF", "op": "10 x 9 x 1 face"}]}]
+     assert P.add_alternates_err({"add_alternates": aa}) == []
+@@ -3379,18 +3380,33 @@
+     can = {"add_alternates": aa, "rfi_cierre": {"RFI-30": {"pregunta": "stair furring", "delta": "user decision: Alternate #1"}}}
+     sc = [(a["id"], a["nombre"], "ALTERNATE (ADD) - NOT IN BASE BID", a["nota"]) for a in al]
+     ms = ["5/8\" Type X board"]
+-    assert CE.alternates_fallas(can, sc, ms, ["BASE BID TOTAL", "ALTERNATE #1 (ADD): stair furring"]) == []
++    prop_ok = ["BASE BID TOTAL", "ALTERNATE #1 (ADD): stair furring", "REASON: drawn, no material printed (5/X9.20)"]
++    assert CE.alternates_fallas(can, sc, ms, prop_ok) == []
+     assert CE.alternates_fallas(can, sc, ms, None) == []                                     # sin Proposal pedida: no se exige
+     ev = CE.alternates_fallas(can, sc, ms, ["BASE BID TOTAL"])
+-    assert ev and "Proposal" in ev[0], ev                                                    # falta en la Proposal
+-    ev = CE.alternates_fallas(can, [("RFI-30", "stair", "CLOSED", "user decision: Alternate #1")], ms, ["ALTERNATE #1 (ADD)"])
++    assert ev and any("Proposal" in x for x in ev), ev                                       # falta en la Proposal
++    ev = CE.alternates_fallas(can, [("RFI-30", "stair", "CLOSED", "user decision: Alternate #1")], ms, prop_ok)
+     assert ev and "Scope Checklist" in ev[0], ev                                             # falta la línea del Scope
+-    ev = CE.alternates_fallas({"rfi_cierre": can["rfi_cierre"]}, sc, ms, ["ALTERNATE #1 (ADD)"])
++    ev = CE.alternates_fallas({"rfi_cierre": can["rfi_cierre"]}, sc, ms, prop_ok)
+     assert ev and "add_alternates" in ev[0], ev                                              # RFI cerrado sin add_alternates
+-    ev = CE.alternates_fallas(can, sc, ms + ["ALTERNATE #1 – 3-5/8\" stud"], ["ALTERNATE #1 (ADD)"])
++    ev = CE.alternates_fallas(can, sc, ms + ["ALTERNATE #1 – 3-5/8\" stud"], prop_ok)
+     assert ev and "Material Summary" in ev[0], ev                                            # ALTERNATE en el Material Summary = FAIL
+     assert CE.alternates_fallas({}, [], ms, None) == []
+-    print("test_u195_add_alternates OK")
++    # U-198: REASON con N/HOJA en Proposal (+ PDF), Scope Checklist y README_REVIEW; sale de add_alternates[].razon
++    assert "REASON: drawn furring" in al[0]["nota"] and "5/X9.20" in al[0]["nota"] and "until clarified" in al[0]["nota"]
++    assert P.razon_alternate(aa[0]).startswith("REASON: drawn furring") and "add alternate until clarified" in P.razon_alternate(aa[0])
++    assert any("razon" in e for e in P.add_alternates_err({"add_alternates": [dict(aa[0], razon="no material printed")]}))
++    ev = CE.alternates_fallas({**can, "add_alternates": [dict(aa[0], razon="no material printed")]}, sc, ms, prop_ok)
++    assert ev and "N/HOJA" in ev[0], ev                                                      # razón sin N/HOJA = FAIL
++    assert CE.alternates_fallas(can, sc, ms, prop_ok, "README: ALTERNATE #1 (ADD) REASON: no material printed (5/X9.20)",
++                                "PROPOSAL PDF ... REASON: drawn (5/X9.20)") == []
++    ev = CE.alternates_fallas(can, sc, ms, prop_ok, "README sin la razón")
++    assert ev and "README_REVIEW" in ev[0], ev
++    ev = CE.alternates_fallas(can, sc, ms, prop_ok, None, "PDF sin la razón")
++    assert ev and "PDF de la Proposal" in ev[0], ev
++    ev = CE.alternates_fallas(can, sc, ms, ["ALTERNATE #1 (ADD): stair"])
++    assert ev and "REASON" in ev[0], ev                                                      # Proposal sin REASON = FAIL
++    print("test_u195_add_alternates OK (+ U-198)")
+ 
+ 
+ test_u195_add_alternates()

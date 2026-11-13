@@ -8773,6 +8773,23 @@
    "categoria": "conducta",
    "texto_corto": "REGLA DE ORO #1: todo cambio o mejora es para TODOS los proyectos futuros y TODAS las sesiones: se une a la línea principal del skill (versión vigente), nunca queda como arreglo local de un proyecto ni en una rama aparte",
    "motivo": "orden del usuario 13-nov: los arreglos de cada proyecto tienen que servir a todos"
+  },
+  {
+   "id": "U-198",
+   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"esta bien si lo pusiste cono alternate, pero tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa\")",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::alternates_fallas",
+    "take-off:tools/compuerta_entrega.py::ce_alternates",
+    "take-off:tools/plantilla_excel.py::razon_alternate",
+    "take-off:tools/plantilla_excel.py::add_alternates_err"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u195_add_alternates"
+   }
   }
  ]
 }
