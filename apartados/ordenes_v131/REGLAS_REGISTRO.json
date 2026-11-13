@@ -8705,6 +8705,13 @@
    "categoria": "conducta",
    "texto_corto": "toda hora que se escribe en TIEMPOS.md / tiempos.log / notas de causa va en hora de California (PST), también las de una corrida cortada o un reinicio; la nota de la corrida cortada se escribió '00:52 UTC' y la compuerta final #2 salió ROJA solo por CE_HORAS_CALIFORNIA (U-045; ya había pasado en rev3)",
    "motivo": "hora copiada del registro de la compuerta (ts en UTC) sin convertir"
+  },
+  {
+   "id": "BE-XF15",
+   "origen": "BIBLIOTECA_ERRORES.md (Xfinity 13-nov, publicación de v81cf130: registro de las órdenes pisado; orden COORDINACIÓN 01:14)",
+   "categoria": "conducta",
+   "texto_corto": "al publicar una versión, después del último fetch / rebase el REGLAS_REGISTRO.json se UNE por id (nunca cp encima de entradas que otra sesión subió) y verificar_version corre justo antes del commit de publicación: 'faltan' > 0 = no se publica",
+   "motivo": "el cp del registro borró BE-GK57 / BE-GK58 que GK había subido 3 minutos antes; v130 quedó vigente con 2 reglas faltantes"
   }
  ]
 }

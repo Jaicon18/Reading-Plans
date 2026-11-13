@@ -1,7 +1,7 @@
 diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.126244866 +0000
-+++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.135313521 +0000
-@@ -8683,6 +8683,28 @@
++++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:15:05.141206529 +0000
+@@ -8683,6 +8683,35 @@
     "categoria": "conducta",
     "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
     "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
@@ -27,13 +27,20 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
 +   "categoria": "conducta",
 +   "texto_corto": "toda hora que se escribe en TIEMPOS.md / tiempos.log / notas de causa va en hora de California (PST), también las de una corrida cortada o un reinicio; la nota de la corrida cortada se escribió '00:52 UTC' y la compuerta final #2 salió ROJA solo por CE_HORAS_CALIFORNIA (U-045; ya había pasado en rev3)",
 +   "motivo": "hora copiada del registro de la compuerta (ts en UTC) sin convertir"
++  },
++  {
++   "id": "BE-XF15",
++   "origen": "BIBLIOTECA_ERRORES.md (Xfinity 13-nov, publicación de v81cf130: registro de las órdenes pisado; orden COORDINACIÓN 01:14)",
++   "categoria": "conducta",
++   "texto_corto": "al publicar una versión, después del último fetch / rebase el REGLAS_REGISTRO.json se UNE por id (nunca cp encima de entradas que otra sesión subió) y verificar_version corre justo antes del commit de publicación: 'faltan' > 0 = no se publica",
++   "motivo": "el cp del registro borró BE-GK57 / BE-GK58 que GK había subido 3 minutos antes; v130 quedó vigente con 2 reglas faltantes"
    }
   ]
  }
 \ No newline at end of file
 diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-drywall/SKILL.md
 --- v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.132532314 +0000
-+++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.140376851 +0000
++++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:15:05.145216049 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -43,10 +50,12 @@ diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -363,6 +363,10 @@
+@@ -363,6 +363,12 @@
    (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
    de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
    dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
++- **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
++  y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
 +- **BE-GK57 / BE-GK58 (Grand Kia rev3b, unidas en v81cf131):** (57) copias, backups y entregas previas van FUERA del árbol de trabajo
 +  (bak_<rev>/, entregas_previas/): una copia dentro la lee un glob o 'la más reciente' (`compuerta_entrega.py be_gk57 <workdir> <rev>`);
 +  (58, conducta) toda hora escrita en TIEMPOS.md / tiempos.log va en hora de California (PST), nunca copiada en UTC del registro de la
@@ -99,7 +108,7 @@ Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_marku
 Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.130106587 +0000
-+++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.139705206 +0000
++++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:15:05.144653164 +0000
 @@ -6665,6 +6665,30 @@
      return out
  
@@ -144,7 +153,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
          print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
 diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.127141891 +0000
-+++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.136127829 +0000
++++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:15:05.141920577 +0000
 @@ -3269,3 +3269,31 @@
  
  
