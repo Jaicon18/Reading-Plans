@@ -1,0 +1,79 @@
+diff -ruN v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v134/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v133/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:17:14.306408602 +0000
++++ v134/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 05:17:14.315129601 +0000
+@@ -8766,6 +8766,13 @@
+     "archivo": "take-off:tools/test_compuerta_entrega.py",
+     "token": "test_u196_leeme_y_mapa"
+    }
++  },
++  {
++   "id": "U-197",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, REGLA DE ORO #1, commit 55f4440): \"recuerda, todos los cambios y mejoras que estamos haciendo es para todos lo futuros proyectos y para todas las seciones, esa en una regla de oro numero 1\"",
++   "categoria": "conducta",
++   "texto_corto": "REGLA DE ORO #1: todo cambio o mejora es para TODOS los proyectos futuros y TODAS las sesiones: se une a la línea principal del skill (versión vigente), nunca queda como arreglo local de un proyecto ni en una rama aparte",
++   "motivo": "orden del usuario 13-nov: los arreglos de cada proyecto tienen que servir a todos"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN v133/take-off-metal-frame-drywall/SKILL.md v134/take-off-metal-frame-drywall/SKILL.md
+--- v133/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:17:14.313343840 +0000
++++ v134/take-off-metal-frame-drywall/SKILL.md	2026-11-13 05:17:14.319350952 +0000
+@@ -5,7 +5,13 @@
+ 
+ # Take-off de Metal Frame y Drywall
+ 
+-**VERSION: v81cf133** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**⭐ REGLA DE ORO #1 — TODO ES PARA TODOS (U-197, conducta, usuario 13-nov).**
++Texto literal del usuario: "recuerda, todos los cambios y mejoras que estamos haciendo es para todos lo futuros proyectos y para todas las
++seciones, esa en una regla de oro numero 1". Todo arreglo, regla o mejora que salga de un proyecto o de una sesión se une a la línea
++principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
++como arreglo local de un proyecto ni en una rama aparte.
++
++**VERSION: v81cf134** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/completitud.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/overlay.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc and v134/take-off-metal-frame-drywall/runner/__pycache__/reconcile.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/accesorios.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/auditoria_entrega.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/bitacora.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/board_caras.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/canon.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_biblioteca.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v71.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v72.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v73.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v75.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v76.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/chequeos_v77.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/comparar.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/comparar_alturas.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/compuerta_entrega.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/corridas.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/criterios.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/escala_pagina.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/esquinas.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/etapas.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/familias.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/headers.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/idioma_es.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/inventario.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/inventario_tags.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/markups_bluebeam.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/particion.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/partition_types.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/plantilla_excel.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/reglas.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/reglas_catalogo.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/reglas_clasificacion.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/revision_markups.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/revision_materiales.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/studs_nodos.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/subir_entrega.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/test_ciego_v69.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/trazabilidad.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/verificar_markups_excel.cpython-313.pyc differ
+Binary files v133/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v134/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
