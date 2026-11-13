@@ -1,0 +1,45 @@
+diff -ruN -x __pycache__ v138c/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138d/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138c/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 21:11:14.573196217 +0000
++++ v138d/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 22:02:14.452504295 +0000
+@@ -8900,6 +8900,22 @@
+     "archivo": "ordenes:test_verificar_version.py",
+     "token": "version_skill_be_xf19"
+    }
++  },
++  {
++   "id": "BE-CR46",
++   "origen": "BIBLIOTECA_ERRORES.md (CR rev19 / rev20d 13-nov, U-124, orden COORDINACIÓN; commit 7ef8b27)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "texto_corto": "los lectores ciegos de alturas (U-176) leen el HEAD DEL TYPE (A0.06 / A0.07) ANTES de la cota de muro; un head '6 in above (line of) ceiling' = C.H. del cuarto + 6\" con tope en estructura, nunca la B.O. de estructura; la resolución A/B cita ese head con su crop",
++   "motivo": "COORDINACIÓN 21:22: el chequeo CB_HEAD_TYPE (altura <= C.H. + offset del head del type cuando el head no llega a estructura; = arreglo de CE_ALTURAS_EXTREMO: regla del head del type + 'LINE OF CEILING') y el brief U-176 que cite el head entran en la próxima versión del skill (la 140); test de CR cache_proyectos/cr_city_hotel_castle_rock/scripts/tests/test_fw_head.py"
++  },
++  {
++   "id": "U-202",
++   "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 64b0e63): 'las reglas que te esté dando las tienes que ejecutar en ese mismo momento… si te esperas hasta el final del día… eso es lo que pasa'",
++   "categoria": "programa-pendiente",
++   "cuando": "publicación",
++   "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
++   "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138c/take-off-metal-frame-drywall/SKILL.md v138d/take-off-metal-frame-drywall/SKILL.md
+--- v138c/take-off-metal-frame-drywall/SKILL.md	2026-11-13 21:08:05.636383051 +0000
++++ v138d/take-off-metal-frame-drywall/SKILL.md	2026-11-13 22:02:14.463234013 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138c** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138d** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,3 +3592,5 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR45 (programa-pendiente, CR rev20d 13-nov; v81cf138b solo registro):** el cement board / tile de las duchas se aplica sobre el canon FINAL (después de toda cara cargada); NON-rated = el cement board reemplaza el board (queda la franja); rated = va encima; markup en la cara real del shower. Chequeo CB_DUCHA_CBU en la próxima versión del skill (la 140).
++- **BE-CR46 (programa-pendiente, CR rev19 / rev20d 13-nov; v81cf138d solo registro):** los lectores ciegos de alturas leen el HEAD DEL TYPE antes de la cota de muro; "6 in above (line of) ceiling" = C.H. + 6" con tope en estructura, nunca la B.O.; la resolución A/B cita el head con su crop. Chequeo CB_HEAD_TYPE en la próxima versión del skill (la 140).
++- **U-202 (usuario 13-nov):** las reglas se ejecutan EN ESE MOMENTO: cada chequeo + test se publica en cuanto pasa suite / banco / verificar_version, una versión por chequeo; nada queda como programa-pendiente más de 4 h.
