@@ -1,6 +1,6 @@
 diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:03:41.181928322 +0000
-+++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:03:41.205062332 +0000
++++ vB/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 06:06:13.444957739 +0000
 @@ -8779,12 +8779,13 @@
     "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"esta bien si lo pusiste cono alternate, pero tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa\")",
     "categoria": "programa",
@@ -47,7 +47,7 @@ diff -ruN vA/take-off-metal-frame-drywall/REGLAS_REGISTRO.json vB/take-off-metal
 \ No newline at end of file
 diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywall/SKILL.md
 --- vA/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:03:41.203021154 +0000
-+++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:03:41.210030345 +0000
++++ vB/take-off-metal-frame-drywall/SKILL.md	2026-11-13 06:06:13.449844046 +0000
 @@ -11,7 +11,7 @@
  principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
  como arreglo local de un proyecto ni en una rama aparte.
@@ -86,7 +86,7 @@ diff -ruN vA/take-off-metal-frame-drywall/SKILL.md vB/take-off-metal-frame-drywa
    sigue aceptando en entregas anteriores); (2) `compuerta_entrega.py leeme <carpeta de entrega>` escribe en la raíz
 diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:03:41.197504957 +0000
-+++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:03:41.209284358 +0000
++++ vB/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 06:06:13.449119758 +0000
 @@ -369,6 +369,16 @@
      return str(x) if x is not None else ""
  
@@ -845,7 +845,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  LEEME_NOMBRE = "00 LEEME PRIMERO - QUE ES CADA ARCHIVO.md"
  # U-196 (usuario 13-nov: "haz una descripcion para saber para que sirve cada cosa, por que como son tantas ya no sabe uno ni para que
  # sirven"): diccionario FIJO por patrón de nombre, en el ORDEN de revisión -> (QUÉ ES, PARA QUÉ SIRVE, CUÁNDO ABRIRLO)
-@@ -960,6 +1691,7 @@
+@@ -960,13 +1691,15 @@
  FECHA_V113 = "2026-11-12T06:45:00+00:00"      # v81cf113: U-192 (tasas de la proposal decididas por el usuario)
  FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
  FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
@@ -853,7 +853,16 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
  FECHA_V133 = "2026-11-13T05:00:00+00:00"   # v133 (U-196 LEEME): respaldo; manda la hora real del commit "Publica v81cf133" (fecha_publicacion)
  FECHA_V121 = "2026-11-12T22:44:35+00:00"      # v81cf121 (U-193: identidad declarada en la GUÍA); v123: commit de publicación 51ce837
  FECHAS_PUBLICACION = {"v81cf119": FECHA_V119, "v81cf120": FECHA_V120, "v81cf121": FECHA_V121,
-@@ -7523,6 +8255,17 @@
+                       "v81cf122": "2026-11-12T22:50:08+00:00", "v81cf123": "2026-11-12T22:54:07+00:00", "v81cf124": "2026-11-12T23:00:49+00:00",
+                       "v81cf125": "2026-11-12T23:04:48+00:00", "v81cf126": "2026-11-12T23:19:30+00:00", "v81cf127": "2026-11-12T23:24:15+00:00",
+                       "v81cf128": "2026-11-12T23:51:37+00:00", "v81cf129": "2026-11-13T00:17:36+00:00", "v81cf130": "2026-11-13T01:10:00+00:00",
+-                      "v81cf131": "2026-11-13T02:24:57+00:00"}   # v133: 9df76c7
++                      "v81cf131": "2026-11-13T02:24:57+00:00", "v81cf133": "2026-11-13T05:02:28+00:00", "v81cf134": "2026-11-13T05:49:57+00:00",
++                      "v81cf135": "2026-11-13T06:08:00+00:00"}   # v133: dfcf5e7 · v134: 59947ce · v135: commit de publicación (hora fijada justo antes del commit)
+ VERSIONES_CAMBIAN_CANTIDADES = set()   # v131 (U-180 (4)): versiones cuyo banco cambió cantidades; una entrega subida antes se re-abre   # v123 (COORDINACIÓN 12-nov 22:46): una
+ # regla aplica solo a revs que arrancaron DESPUÉS de la hora REAL del commit que publicó su versión (git log -1 --format=%cI <hash>)
+ FECHA_V114 = "2026-11-12T14:45:00+00:00"      # v81cf114: BE-AUD05..09 (auditoría U-138 del 12-nov: chequeos que pasaban en vacío)
+@@ -7523,6 +8256,17 @@
              print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
          print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
          return 0 if o["ok"] else 1
@@ -873,7 +882,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/compuerta_entrega.py vB/take-off
          ev = leeme_fallas(argv[2])
 diff -ruN vA/take-off-metal-frame-drywall/tools/plantilla_excel.py vB/take-off-metal-frame-drywall/tools/plantilla_excel.py
 --- vA/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:03:41.186646807 +0000
-+++ vB/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:03:41.206540885 +0000
++++ vB/take-off-metal-frame-drywall/tools/plantilla_excel.py	2026-11-13 06:06:13.446395677 +0000
 @@ -206,11 +206,14 @@
          if not isinstance(n, int) or n < 1 or n in ns:
              err.append(f"add_alternates[{i}]: 'n' entero >= 1 sin repetir (ALTERNATE #N)")
@@ -894,7 +903,7 @@ diff -ruN vA/take-off-metal-frame-drywall/tools/plantilla_excel.py vB/take-off-m
              if not all(q.get(k) not in (None, "") for k in ("material", "qty", "unit", "op")):
 diff -ruN vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- vA/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:03:41.184930468 +0000
-+++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:03:41.209185091 +0000
++++ vB/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 06:06:13.449015137 +0000
 @@ -3447,6 +3447,191 @@
  test_u196_leeme_y_mapa()
  

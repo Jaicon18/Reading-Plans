@@ -8779,12 +8779,13 @@
    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov: \"esta bien si lo pusiste cono alternate, pero tienes que mencioar la razon por lo que la pusiste ahi, para que mi clientes lo sepa\")",
    "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta",
+   "texto_corto": "todo ALTERNATE lleva 'REASON: …' con su N/HOJA (canon add_alternates[].razon; qué se ve, qué falta, 'excluded from the base bid and priced as an add alternate until clarified') en la Proposal (PROPOSAL + PDF), el Scope Checklist y README_REVIEW; CE_ALTERNATES = FAIL si falta ; v81cf135 (COORDINACIÓN 05:51): 'rfi' opcional si el alternate está IMPRESO en planos / specs ('impreso' = hoja o sección; la razón la cita)",
    "chequeos": [
     "take-off:tools/compuerta_entrega.py::alternates_fallas",
     "take-off:tools/compuerta_entrega.py::ce_alternates",
     "take-off:tools/plantilla_excel.py::razon_alternate",
-    "take-off:tools/plantilla_excel.py::add_alternates_err"
+    "take-off:tools/plantilla_excel.py::add_alternates_err",
+    "take-off:tools/compuerta_entrega.py::alternate_impreso"
    ],
    "test": {
     "archivo": "take-off:tools/test_compuerta_entrega.py",
@@ -8811,10 +8812,23 @@
   {
    "id": "U-199",
    "origen": "ORDENES_DEL_USUARIO.md / REGLAS_USUARIO_CLAUDE.md (usuario 13-nov: 'esto debe de estar blindado al 100000%')",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
-   "texto_corto": "REGLA INVIOLABLE: 13 controles contra elementos omitidos (cierre por cuarto, pisos gemelos, puertas, keynotes, área de cielo +-5 % por capa + mapa de cobertura con muros diagonales / cortos, rated lines, secciones, estructural / MEP, finish schedule, unidades típicas, specs locations, tercer lector, re-verificación de EXCLUDED); hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL",
-   "motivo": "el código (CE_U199_OMITIDOS + CE_COBERTURA_DIAG + tests) está en v81cf135 APARTADA (orden COORDINACIÓN 05:22: 'U-199 va en v135, apartada'); v81cf134 se publica antes por orden 05:22 'publica v134 YA'. Pasa a 'programa' al publicar v81cf135."
+   "texto_corto": "REGLA INVIOLABLE: 13 controles contra elementos omitidos (CE_U199_OMITIDOS: (1) cierre por cuarto, (2) pisos gemelos, (3) puertas, (4) keynotes, (5) área de cielo +-5 % por capa, (6) rated lines, (7) secciones, (8) estructural / MEP, (9) finish schedule, (10) unidades típicas, (11) specs locations, (12) tercer lector, (13) re-verificación de EXCLUDED) + (5b) CE_COBERTURA_DIAG muros diagonales y cortos (< 2 ft) del mapa de cobertura; hallazgo sin disposición o 0 evaluados donde el plano los tiene = FAIL (entregas anteriores a v81cf135: AMBER)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_u199_omitidos",
+    "take-off:tools/compuerta_entrega.py::u199_fallas",
+    "take-off:tools/compuerta_entrega.py::cierre_cuartos_fallas",
+    "take-off:tools/compuerta_entrega.py::pisos_gemelos_fallas",
+    "take-off:tools/compuerta_entrega.py::rated_fallas",
+    "take-off:tools/compuerta_entrega.py::reverificacion_excluded_fallas",
+    "take-off:tools/compuerta_entrega.py::ce_cobertura_diag",
+    "take-off:tools/compuerta_entrega.py::cob_diag_cortos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_u199_cierre_por_cuarto_mutacion"
+   }
   }
  ]
 }
