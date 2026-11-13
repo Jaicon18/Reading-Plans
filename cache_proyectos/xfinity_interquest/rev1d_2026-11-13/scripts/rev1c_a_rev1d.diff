@@ -1,0 +1,159 @@
+--- /root/xf/work_rev1c_bak/scripts/resolver.py	2026-11-11 06:35:33.792776130 +0000
++++ scripts/resolver.py	2026-11-13 16:33:12.497103353 +0000
+@@ -69,8 +69,14 @@
+ if not any(m['ref'] == 'STUD16-GF' for m in c['misc_items']):
+     c['misc_items'].append({"ref": "STUD16-GF", "familia": "3-5/8\" stud (todos los gauges)", "qty": 125.0, "unit": "LF",
+         "source": "8/A2.0 '16 GA. METAL STUD 16\" O.C. @ ALL BACKING STUD TRACKS'; A4.0 GF-14496 on W2",
+-        "op": "16 ga (54 mil) 3-5/8\" studs in the backing zone: W2-01 ROUNDUP(5.44/1.333)+1 = 6 + W2-02 ROUNDUP(4.0/1.333)+1 = 4 = 10 studs x 12.5 ft = 125.0 LF (conservative: the 20 ga studs of the same bays stay in the W2 row; delta -125.0 LF of 20 ga if replaced)",
++        "op": "16 ga (54 mil) 3-5/8\" studs in the backing zone: W2-01 ROUNDUP(5.44/1.333)+1 = 6 + W2-02 ROUNDUP(4.0/1.333)+1 = 4 = 10 studs x 12.5 ft = 125.0 LF REPLACE the 20 ga studs of the same bays (8/A2.0 prints the backing-zone studs AS 16 ga; rev1d, audit 13-nov E-1: deducted in STUD20-GF-REPLACED)",
+         "status": "DERIVADO", "gauge": "16 ga (54 mil)", "img": "/root/xf/work/revision_indep/R1/F07_8A2.0_backing_16ga.png"})
++if not any(m['ref'] == 'STUD20-GF-REPLACED' for m in c['misc_items']):   # rev1d (audit 13-nov E-1): the 16 ga studs REPLACE the 20 ga ones
++    c['misc_items'].append({"ref": "STUD20-GF-REPLACED", "familia": "3-5/8\" stud (todos los gauges)", "qty": -125.0, "unit": "LF",
++        "source": "2/A2.0 W2 stud 362S125-33; 8/A2.0 '16 GA. METAL STUD 16\" O.C. @ ALL BACKING STUD TRACKS'; A4.0 GF-14496 on W2",
++        "op": "[DERIVED] 362S125-33 deduction: the 10 W2 stud positions of the backing zone (W2-01 ROUNDUP(5.44/1.333)+1 = 6 + W2-02 ROUNDUP(4.0/1.333)+1 = 4) "
++              "are printed as 16 ga in 8/A2.0 and carried in STUD16-GF; they come out of the W2 20 ga row: -10 x 12.5 ft = -125.0 LF",
++        "status": "DERIVADO", "gauge": "20 ga (33 mil)", "img": "/root/xf/work/revision_indep/R1/F07_8A2.0_backing_16ga.png"})
+ for w_ in c['walls']:
+     if 'openings_note' in w_ and 'no backing' in str(w_['openings_note']):
+         w_['openings_note'] = str(w_['openings_note']).replace('no backing called', 'backing of the GF-14496 graphic frame carried in BK-GF14496 / STUD16-GF (A4.0 key note 1, 8/A2.0)')
+--- /root/xf/work_rev1c_bak/scripts/formato.py	2026-11-12 14:59:11.016040486 +0000
++++ scripts/formato.py	2026-11-13 16:37:01.690776199 +0000
+@@ -82,12 +82,17 @@
+ c = json.load(open(P))
+ w = next(x for x in c['walls'] if x['id'] == 'W2-01')
+ w['openings'] = [{"ref": "Door 101", "kind": "door", "ro_w_ft": 3.0, "head_ft": 7.167, "source": "A2.0 door schedule + plan '3'-0\" DOOR'; 7/A2.0",
+-                  "location": "Storage 101", "header": "metal", "pieces": 2, "pieces_source": "7/A2.0 '3-5/8\" METAL TRACK' + '3-5/8\" METAL STUD NESTED IN METAL TRACK' = 2 pieces",
++                  "location": "Storage 101", "header": "metal", "pieces": 1, "pieces_source": "7/A2.0 '3-5/8\" METAL TRACK' = 1 track piece (the '3-5/8\" METAL STUD NESTED IN METAL TRACK' of 7/A2.0 is a stud, carried in misc HDR-101-NESTED - rev1d, audit E-2)",
+                   "head_source": "A2.0 door schedule 7'-0\" + 2\" HM frame head (A0.3 hollow metal frames) - DERIVADO",
+                   "header_type": "TRACK HEADER", "piece": "track", "header_type_source": "7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM): '3-5/8\" METAL TRACK' + '3-5/8\" METAL STUD NESTED IN METAL TRACK'",
+                   "pieces_info": "7/A2.0 one track head with nested stud over the HM frame; F.R.T. wood blocking of the detail = Div. 06 EXCLUDED",
+                   "img": "/root/xf/work/etapas/2_lectura/A/img/door_schedule_A2.0.png"}]
+-c['misc_items'] = [m for m in c['misc_items'] if m['ref'] not in ('JAMB-101', 'HDR-101')]
++c['misc_items'] = [m for m in c['misc_items'] if m['ref'] not in ('JAMB-101', 'HDR-101', 'HDR-101-NESTED')]
++c['misc_items'].append({"ref": "HDR-101-NESTED", "familia": "3-5/8\" stud (todos los gauges)", "qty": 4.333, "unit": "LF", "pcs": 1,
++    "source": "7/A2.0 TYPICAL HEAD DETAIL (JAMB SIM) '3-5/8\" METAL STUD NESTED IN METAL TRACK'; door 101 R.O. 3'-0\" (A2.0 door schedule); 2/A2.0 W2 stud 362S125-33",
++    "op": "[DERIVED] 362S125-33 1 nested stud x (R.O. 3.0 + 1.333) = 4.333 LF (rev1d, audit 13-nov E-2: the 2nd piece of the head is a stud, not track)",
++    "status": "DERIVADO", "designation": "362S125-33", "designation_source": "W2 stud 362S125-33 (2/A2.0 + limiting heights); 7/A2.0 '3-5/8\" METAL STUD'",
++    "img": "/root/xf/work/etapas/2_lectura/A/img/door_schedule_A2.0.png"})
+ json.dump(c, open(P, 'w'), indent=1, ensure_ascii=False)
+ c = json.load(open(P))
+ for it in c.get('openings_extra') or []:
+@@ -306,6 +311,7 @@
+ _DES = {
+  "STUD16-GF": ("362S162-54", "[DERIVED] 16 ga = 54 mil from 8/A2.0 '16 GA. METAL STUD 16\" O.C. @ ALL BACKING STUD TRACKS'; 3-5/8\" = the W2 stud size (2/A2.0); "
+                "1-5/8\" flange (162) NOT printed - standard SSMA flange of a 16 ga stud, confirm at purchase"),
++ "STUD20-GF-REPLACED": ("362S125-33", "W2 stud per 2/A2.0 + A2.0 limiting heights (362S125-33 @ 16\" o.c.); the backing-zone positions are 16 ga per 8/A2.0 (rev1d, audit E-1)"),
+  "SOF-01-STUDS": ("362S125-33", "framed as type W2: 2/A2.0 + A2.0 limiting heights table (362S125-33 @ 16\" o.c.)"),
+  "SOF-01-TRACK": ("362T125-33", "framed as type W2: track = stud gauge per 4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)'"),
+  "BRACE-W2-01": ("362S125-33", "4/A2.0 'MATCH WALL STUD SIZE & GAUGE (3 5/8\" 20 GA. MIN.)' = W2 stud 362S125-33"),
+@@ -381,3 +387,28 @@
+             r['question'] = '[PENDING - user manual verification] ' + r['question']
+             r['pregunta'] = '[PENDING - user manual verification] ' + r['pregunta']
+ json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
++
++# --- rev1d (skill v81cf138): the fastener exclusion cites the sheets that print the fasteners (v81cf116 moved GA-216 to 'Listing:';
++#     a row citing only a listing came out 'N/SHEET: default (no sheet)' and plantilla_excel verificar R80w.48 stopped the chain)
++c = json.load(open(f'{K}/etapas/4_canon/takeoff_canon.json'))
++fx = c.get('fasteners_excluded')
++if isinstance(fx, dict) and not _re.search(r"\d/A\d", str(fx.get('source') or '')):
++    fx['source'] = "estimator order; fasteners printed in 3/A2.0, 4/A2.0, 8/A2.0"
++json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
++
++# --- rev1d (audit 13-nov I-1, independent review R_A3): every ceiling tag printed on the A3.0 RCP with its row or its reason (U-189)
++import csv as _csv
++c = json.load(open(f'{K}/etapas/4_canon/takeoff_canon.json'))
++_tg = []
++for _r in _csv.DictReader(open(f'{K}/revision_indep/R_A3/RCP_TAGS_A3.0.csv', encoding='utf-8')):
++    _e = {"sheet": _r["hoja"], "tag": " ".join(_r["tag_texto"].replace(" / ", " ").split()), "room": _r["cuarto"],
++          "height": _r["altura"].split(" [")[0], "xy": [float(_r["x_pt"]), float(_r["y_pt"])], "img": _r["img"],
++          "source": f"{_r['nhoja']} (independent review R_A3, revision_indep/R_A3/INFORME_R_A3.md)"}
++    if _r["disposicion"].startswith("CARGADO"):
++        _e["rows"] = ["SOF-01-TRACK", "SOF-01-STUDS", "SOF-01 board"]
++    else:
++        _e["rows"] = []
++        _e["none_reason"] = f"{_r['disposicion']} - {_r['nhoja']}"
++    _tg.append(_e)
++c['rcp_tags'] = _tg
++json.dump(c, open(f'{K}/etapas/4_canon/takeoff_canon.json', 'w'), indent=1, ensure_ascii=False)
+--- /root/xf/work_rev1c_bak/scripts/armar_entrega.sh	2026-11-12 15:01:44.127604048 +0000
++++ scripts/armar_entrega.sh	2026-11-13 16:37:01.743232093 +0000
+@@ -2,7 +2,7 @@
+ # Xfinity Interquest rev1 FINAL: delivery folder (structure O'Reilly rev10 / CR rev18, U-145; folder name U-165) + sub-gates + full gate.
+ set -e
+ source /root/xf/work/scripts/env.sh
+-PDFREV=${PDFREV:-rev1c}   # rev1c: SOF-01 en esperados_rcp (BE-AUD07)
++PDFREV=${PDFREV:-rev1d}   # rev1d: audit 13-nov E-1..E-4 (skill v81cf138); rev1c: SOF-01 en esperados_rcp (BE-AUD07)
+ D=$W/entrega; E="$D/rev1 FINAL PARA REVISAR"
+ SUB=$(mktemp -d); for f in SUBIDA_OK.json SUBIDA_PROGRESO.json; do [ -f "$D/$f" ] && cp "$D/$f" $SUB/; done   # rev1c: la subida previa (Drive ids, primera_subida) sobrevive
+ python3 -I $T/compuerta_entrega.py armar "$D" && mkdir -p "$E/Take-off"   # BE-CR43: nunca rm -rf (registro de la compuerta)
+@@ -24,6 +24,7 @@
+ cp $W/etapas/1_inventario/inventario.md $W/etapas/1_inventario/inventario.json "$E/Auditoria/barrido_tags/"; cp -a $W/etapas/1_inventario/recortes "$E/Auditoria/barrido_tags/"
+ cp $W/etapas/4_canon/img/*.png "$E/Auditoria/evidencia/"; cp -a $W/etapas/7_imagenes/planmark "$E/Auditoria/evidencia/"
+ [ -d $W/revision_indep ] && mkdir -p "$E/Auditoria/revision_independiente" && cp -a $W/revision_indep/. "$E/Auditoria/revision_independiente/"
++cp $W/revision_indep/R_A3/DOBLE_CIELO.csv "$E/Auditoria/DOBLE_CIELO.csv"   # rev1d: U-190 REGLA DE ORO #3 (independent review R_A3)
+ [ -d $W/Proposal ] && mkdir -p "$E/Proposal" && cp -a $W/Proposal/. "$E/Proposal/"
+ python3 -I $W/scripts/cobertura_lista.py > /dev/null; python3 $T/../runner/cobertura.py $W/etapas/12_cobertura/lista.json $W/etapas/4_canon/takeoff_canon.json $W/takeoff.json $W/etapas/12_cobertura > /dev/null; ls $W/etapas/12_cobertura
+ for f in $W/etapas/12_cobertura/cobertura.md; do [ -f $f ] && cp $f "$E/Auditoria/COBERTURA_PASO12.md"; done; [ -f $W/etapas/12_cobertura/cobertura.json ] && cp $W/etapas/12_cobertura/cobertura.json "$E/Auditoria/COBERTURA_PASO12.json"
+--- /root/xf/work_rev1c_bak/scripts/cadena.sh	2026-11-12 14:59:20.508871938 +0000
++++ scripts/cadena.sh	2026-11-13 16:37:01.747434305 +0000
+@@ -7,7 +7,7 @@
+ source /root/xf/work/scripts/env.sh
+ REV=${REV:-rev1}; export REV
+ cd $K; C4=$K/etapas/4_canon; M=$K/etapas/6_markups; X=$K/etapas/8_excel/XF_Takeoff_FINAL_${REV}.xlsx
+-PDFREV=${PDFREV:-rev1c}; FINAL="$K/etapas/8_excel/XF_markups_${PDFREV} - OPEN IN BLUEBEAM.pdf"  # BE-XF07: rev1b = leyenda con Subject LEGEND
++PDFREV=${PDFREV:-rev1d}; FINAL="$K/etapas/8_excel/XF_markups_${PDFREV} - OPEN IN BLUEBEAM.pdf"  # BE-XF07: rev1b = leyenda con Subject LEGEND
+ mkdir -p $C4/out $M $K/etapas/7_imagenes $K/etapas/8_excel
+ N=0; DESDE=${1:-0}
+ R() { N=$((N+1)); [ $N -lt $DESDE ] && return 0; python3 $T/bitacora.py run "$@" > $K/last.log 2>&1; rc=$?
+--- /root/xf/work_rev1c_bak/scripts/hacer_docs.py	2026-11-12 22:23:38.480610533 +0000
++++ scripts/hacer_docs.py	2026-11-13 16:37:07.324376374 +0000
+@@ -14,7 +14,7 @@
+ rf = [r for r in c["rfis"] if r["status"] == "open"]; cr = [r for r in c["rfis"] if r["status"] != "open"]
+ ud = [r for r in cr if "user decision" in str((r.get("resolved") or {}).get("by", ""))]
+ DLF = round(sum(m["lf"] for m in c["misc_items"] if m.get("element") == "demo" and m.get("lf")), 2)
+-PDF = "XF_markups_rev1c - OPEN IN BLUEBEAM.pdf"
++PDF = "XF_markups_rev1d - OPEN IN BLUEBEAM.pdf"
+ TIT = "Xfinity - Interquest, 1333 Interquest Pkwy, Lot 11, Colorado Springs, CO 80921 - Metal framing & drywall take-off, rev1 FINAL"
+ def fam(sub, unit=True):
+     v = [r for r in ms if sub.lower() in str(r[0]).lower() and r[2]]
+--- /root/xf/work_rev1c_bak/scripts/drive_viejos.py	2026-11-12 15:03:36.798741664 +0000
++++ scripts/drive_viejos.py	2026-11-13 16:41:02.484773429 +0000
+@@ -24,6 +24,8 @@
+             continue
+         if n.startswith(("zz ", "BORRAR (NO USAR) - ")):
+             continue
++        if n == "XF_markups_rev1c - OPEN IN BLUEBEAM.pdf" and TAG == "rev1d":           # rev1d: el PDF rev1c ya no es vigente
++            cambios.append((it["id"], os.path.relpath(pl, loc), SE.nombre_borrar(n, "XF_markups_rev1d - OPEN IN BLUEBEAM.pdf"))); continue
+         if n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and TAG == "rev1c":           # rev1c: el PDF rev1b ya no es vigente
+             cambios.append((it["id"], os.path.relpath(pl, loc), SE.nombre_borrar(n, "XF_markups_rev1c - OPEN IN BLUEBEAM.pdf"))); continue
+         if U174 and n == "XF_markups_rev1b - OPEN IN BLUEBEAM.pdf" and os.path.isfile(pl) and it.get("md5Checksum") != md5(pl):
+--- /root/xf/armar_proposal_rev1c_bak.py	2026-11-13 16:30:23.585754481 +0000
++++ proposal/armar_proposal.py	2026-11-13 16:30:23.603162251 +0000
+@@ -68,8 +68,7 @@
+  ("M", 'Framing labor 2-1/2" column furring (wall SF)', a250, "SF", None, "not in the template"),
+  ("M", 'Kicker braces, SOF-01 header framing, blocking / backing install', bk('Metal stud brace to structure'), "LF", None, "not in the template"),
+  ("D", 'Hanging 5/8" Type X board', board_total, "SF", 0.78, "Template 'Drywall finish' J8 5/8\" GYP BD X (0.78 / SF)"),
+- ("D", 'Level 4 finishing (joint tape + mud), all board', board_total, "SF", 0.5, "Template 'Drywall finish' J27 LABOUR FOR FINISHING (0.50 / SF)"),
+- ("F", 'Corner bead and L bead install', sf[cb] + sf[lb], "LF", None, "not in the template"),
++ ("D", 'Level 4 finishing (joint tape + mud), all board - INCLUDES corner bead and L bead install (user decision U-192 (3): no separate labor row)', board_total, "SF", 0.5, "Template 'Drywall finish' J27 LABOUR FOR FINISHING (0.50 / SF); corner bead / L bead labor included per U-192 (3)"),
+  ("X", 'Demolition of gypsum board and metal framing walls (A1.0 key note 7), SF of the element', sf[key('Demolition')], "SF", 1.25, "Template 'Demolition works' F23 wall demolition (1.25 / SF)"),
+ ]
+ stud_track_lf = sum(MS[k][2] for k in MS if re.search(r"stud|track|Header|brace|strapping|blocking", k, re.I) and MS[k][1] == "LF")
+@@ -155,7 +154,7 @@
+     B.append(list(ln))
+ pr = base + 13
+ B.append([]); B.append(["Total all sections", f"=SUM(B{pr}:E{pr})"]); tot = B.max_row
+-B.append(["Taxes 8.81% (template rate - [RATE TO CONFIRM] for Colorado Springs, CO)", f"=B{tot}*0.0881"]); tax = B.max_row
++B.append(["Taxes 8.81% (template rate, user decision U-192 (4))", f"=B{tot}*0.0881"]); tax = B.max_row
+ B.append(["Total including tax", f"=ROUND(B{tot}+B{tax},0)"]); gt = B.max_row
+ B.append([]); B.append(["NOT PRICED (0 in the totals until confirmed):"])
+ for x in missing_rate:
+@@ -268,7 +267,7 @@
+ for rr in range(77, 83):
+     P.row_dimensions[rr].hidden = True
+ put("D83", "Total all trades:", wrap=False); P["I84"].value = f"=PRICING!B{tot}"
+-put("D85", "Taxes (8.81% template rate - to confirm for Colorado Springs):", wrap=False); P["I86"].value = f"=PRICING!B{tax}"
++put("D85", "Taxes (8.81% template rate, U-192 (4)):", wrap=False); P["I86"].value = f"=PRICING!B{tax}"
+ put("D87", "Total including tax:", wrap=False); P["I88"].value = f"=PRICING!B{gt}"
+ for x in ("I84", "I86", "I88"):
+     P[x].number_format = '"$"#,##0'
