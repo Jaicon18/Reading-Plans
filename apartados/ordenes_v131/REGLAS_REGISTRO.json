@@ -8723,13 +8723,12 @@
    "cuando": "entrega",
    "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl",
    "chequeos": [
-    "take-off:tools/be_gk59.py::fallas"
+    "take-off:tools/compuerta_entrega.py::be_gk59_fallas"
    ],
    "test": {
-    "archivo": "take-off:tools/test_be_gk59.py",
-    "token": "test_be_gk59 OK"
-   },
-   "apartado": "apartados/be_gk59/ (para v131)"
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_gk59"
+   }
   }
  ]
 }

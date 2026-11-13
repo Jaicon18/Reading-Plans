@@ -1,6 +1,6 @@
 diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
 --- v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:13:41.126244866 +0000
-+++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 01:58:53.851093936 +0000
++++ v131/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-13 02:02:41.078574541 +0000
 @@ -7446,7 +7446,7 @@
    {
     "id": "U-177",
@@ -45,7 +45,7 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
     ],
     "test": {
      "archivo": "take-off:tools/test_compuerta_entrega.py",
-@@ -8683,6 +8686,35 @@
+@@ -8683,6 +8686,49 @@
     "categoria": "conducta",
     "texto_corto": "no pedir al usuario permisos que el flujo necesita sí o sí: dejarlos pre-autorizados; el sistema de permisos no deja que Claude se dé reglas de allow a sí mismo ni a otras sesiones (intento en .claude/settings.json bloqueado el 12-nov): la regla de allow para gdrive_fetch.py / subir_entrega.py la agrega el usuario UNA vez (o modo Auto) y no se vuelve a pedir",
     "motivo": "el usuario recibía pedidos de permiso repetidos para pasos obligatorios del flujo (Drive, subida)"
@@ -78,13 +78,27 @@ diff -ruN v130/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v131/take-off-m
 +   "categoria": "conducta",
 +   "texto_corto": "al publicar una versión, después del último fetch / rebase el REGLAS_REGISTRO.json se UNE por id (nunca cp encima de entradas que otra sesión subió) y verificar_version corre justo antes del commit de publicación: 'faltan' > 0 = no se publica",
 +   "motivo": "el cp del registro borró BE-GK57 / BE-GK58 que GK había subido 3 minutos antes; v130 quedó vigente con 2 reglas faltantes"
++  },
++  {
++   "id": "BE-GK59",
++   "origen": "BIBLIOTECA_ERRORES.md (Grand Kia rev3b, 13-nov; aprobada por COORDINACIÓN)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa) y, con SUBIDA_OK.json presente, ENTREGA_OK.json queda el de la corrida subida: una re-corrida posterior solo escribe el suyo; la re-corrida de rev3b con v81cf130 pisó el ENTREGA_OK del VERDE de v81cf129 ya subido y solo sobrevivió en compuerta_corridas.jsonl",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::be_gk59_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_gk59"
++   }
    }
   ]
  }
 \ No newline at end of file
 diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-drywall/SKILL.md
 --- v130/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:13:41.132532314 +0000
-+++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 01:58:53.855831855 +0000
++++ v131/take-off-metal-frame-drywall/SKILL.md	2026-11-13 02:02:41.084328800 +0000
 @@ -5,7 +5,7 @@
  
  # Take-off de Metal Frame y Drywall
@@ -94,7 +108,7 @@ diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-d
  
  **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
  
-@@ -363,6 +363,17 @@
+@@ -363,6 +363,19 @@
    (4) el arranque de una rev = la marca de tiempos.log con 'rev<N>' (escribir 'inicio rev<N>' en un log acumulado) o la primera después
    de las de otra rev; año imposible / marcas fuera de orden = FAIL; (5) BE-GK54 estructural: toda leaf paralela a <= 14 in excluida o
    dispuesta (cualquier texto) exige gap_proof con N/HOJA + gap medido 0.
@@ -103,6 +117,8 @@ diff -ruN v130/take-off-metal-frame-drywall/SKILL.md v131/take-off-metal-frame-d
 +  VERSIONES_CAMBIAN_CANTIDADES). --vigente / vigente_fallas acepta ese ENTREGA_OK si SUBIDA_OK es posterior a él y anterior a la
 +  publicación de la versión siguiente (FECHAS_PUBLICACION, hora real del commit) y los hashes de Drive coinciden. La re-corrida por
 +  cambio de versión después de un VERDE subido no cuenta para el tope de 2 corridas finales: CE_PROTOCOLO_3H AMBER con su causa.
++- **BE-GK59 (Grand Kia rev3b, unida en v81cf131):** la compuerta guarda ENTREGA_OK_<corrida>.json en cada corrida (nunca se pisa); con
++  SUBIDA_OK.json, una re-corrida NO verde no reescribe ENTREGA_OK.json (queda el de la corrida subida). CLI `compuerta_entrega.py be_gk59 <w>`.
 +- **BE-XF15 (conducta, 13-nov):** al publicar, después del último fetch / rebase el REGLAS_REGISTRO.json se une por id (nunca cp encima)
 +  y verificar_version corre justo antes del commit de publicación; 'faltan' > 0 = no se publica.
 +- **BE-GK57 / BE-GK58 (Grand Kia rev3b, unidas en v81cf131):** (57) copias, backups y entregas previas van FUERA del árbol de trabajo
@@ -157,7 +173,7 @@ Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/verificar_marku
 Binary files v130/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc and v131/take-off-metal-frame-drywall/tools/__pycache__/vigas_sobre_walls.cpython-313.pyc differ
 diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:13:41.130106587 +0000
-+++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 01:58:53.855205606 +0000
++++ v131/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-13 02:02:41.083279028 +0000
 @@ -757,7 +757,11 @@
  FECHA_V119 = "2026-11-12T21:21:52+00:00"      # v81cf119: U-193 (CE_COBERTURA); v123: hora REAL del commit de publicación fe675f8
  FECHA_V120 = "2026-11-12T22:01:18+00:00"      # v81cf120 (BE-GK54 límite en la GUÍA); v123: commit de publicación 1554ae1
@@ -335,10 +351,54 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
  RX_GK56_GAP = re.compile(r"(?i)\bgap\s*:?\s*(\d+(?:\.\d+)?)\s*(?:\"|in\b)")
  
  
-@@ -7120,6 +7235,10 @@
+@@ -6694,6 +6809,39 @@
+     return ev
+ 
+ 
++def be_gk59_fallas(w):
++    """BE-GK59 (Grand Kia rev3b, 13-nov; unido de apartados/be_gk59 en v81cf131): la compuerta reescribía ENTREGA_OK.json en CADA corrida:
++    una re-corrida ROJA con v130 pisó el VERDE de v129 ya subido (solo sobrevivió en compuerta_corridas.jsonl). Regla: cada corrida guarda
++    ENTREGA_OK_<corrida>.json (nunca se pisa) y, con SUBIDA_OK.json, ENTREGA_OK.json es el de la corrida subida (o un VERDE posterior para
++    re-subir); una re-corrida no verde después de la subida escribe solo el suyo. CLI: compuerta_entrega.py be_gk59 <workdir>."""
++    sp, ep, cp = (os.path.join(w, n) for n in ("SUBIDA_OK.json", "ENTREGA_OK.json", "compuerta_corridas.jsonl"))
++    if not os.path.isfile(sp):
++        return []
++    sub = _json(sp) or {}
++    t_sub = _iso(sub.get("primera_subida_iso") or sub.get("fecha_iso"))
++    fins = []
++    if os.path.isfile(cp):
++        for ln in open(cp, encoding="utf-8"):
++            try:
++                x = json.loads(ln)
++            except ValueError:
++                continue
++            if x.get("evento", "fin") == "fin":
++                fins.append(x)
++    subida = [f for f in fins if f.get("ok") and t_sub and _iso(f.get("ts")) and _iso(f.get("ts")) <= t_sub]
++    if not subida:
++        return ["SUBIDA_OK.json sin una corrida VERDE terminada antes de la subida en compuerta_corridas.jsonl (BE-GK59)"]
++    run = subida[-1]
++    ev = []
++    if not os.path.isfile(os.path.join(w, f"ENTREGA_OK_{run.get('corrida')}.json")):
++        ev.append(f"falta ENTREGA_OK_{run.get('corrida')}.json: el ENTREGA_OK de la corrida subida no está guardado por corrida (BE-GK59)")
++    ok = _json(ep) or {}
++    if not ok.get("ok"):
++        ev.append(f"ENTREGA_OK.json reescrito después de la subida por una corrida no verde ({ok.get('fecha_iso')}, {ok.get('skill_version')}): "
++                  f"el VERDE entregado es la corrida {run.get('corrida')} ({run.get('ts')}) (BE-GK59)")
++    return ev
++
++
+ def _gk55_clave(n):
+     if n.get("kind") == "T":
+         return ("T", n.get("branch"), n.get("through"))
+@@ -7120,6 +7268,14 @@
              print(f"  REGRESIÓN {r['proyecto']} {r['chequeo']}: {r['vigente']} -> FAIL {'(explicada: ' + r['explicacion'] + ')' if r['explicacion'] else 'SIN EXPLICACIÓN'}")
          print(f"PRUEBA_ABIERTOS {'OK' if o['ok'] else 'FALLA'} -> {argv[3]}")
          return 0 if o["ok"] else 1
++    if len(argv) > 2 and argv[1] == "be_gk59":                      # BE-GK59: ENTREGA_OK por corrida
++        ev = be_gk59_fallas(argv[2])
++        print("\n".join(ev) if ev else "BE-GK59 PASS: ENTREGA_OK.json es el de la corrida subida, guardado por corrida")
++        return 1 if ev else 0
 +    if len(argv) > 2 and argv[1] == "be_gk57":                      # BE-GK57: copias dentro del árbol de trabajo
 +        ev = be_gk57_fallas(argv[2], argv[3] if len(argv) > 3 else "")
 +        print("\n".join(ev[:40]) if ev else "BE-GK57 PASS: no copies / backups / previous deliveries inside the work tree")
@@ -346,8 +406,18 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
      if len(argv) > 2 and argv[1] == "be_gk56":                      # BE-GK56: destino 'same wall' medido
          ev = be_gk56_fallas(json.load(open(argv[2], encoding="utf-8")))
          print("\n".join(ev) if ev else "BE-GK56 PASS: every same-wall exclusion has its measured canon target")
-@@ -7197,7 +7316,7 @@
-     json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+@@ -7194,10 +7350,16 @@
+             print(f"aviso: alerta de presupuesto no medida: {e}")
+     out["corrida"], out["tipo"], out["paso"] = cid, tipo, paso
+     p = os.path.join(out["workdir"], "ENTREGA_OK.json" if tipo == "final" else "ENTREGA_RAPIDA.json")
+-    json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
++    if tipo == "final":                                 # BE-GK59 (v131): cada corrida guarda ENTREGA_OK_<corrida>.json (nunca se pisa);
++        json.dump(out, open(os.path.join(out["workdir"], f"ENTREGA_OK_{cid}.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
++        if os.path.isfile(os.path.join(out["workdir"], "SUBIDA_OK.json")) and not out["ok"]:
++            p = None                                    # con SUBIDA_OK, una re-corrida NO verde no pisa el ENTREGA_OK de la subida
++            print(f"BE-GK59: entrega ya subida; esta corrida no verde quedó solo en ENTREGA_OK_{cid}.json")
++    if p:
++        json.dump(out, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
      vg = out.get("vigentes") or {}                                     # U-184 (2)(7): registro de corridas de la compuerta
      with open(reg_p, "a", encoding="utf-8") as f:
 -        f.write(json.dumps({"evento": "fin", "corrida": cid, "tipo": tipo, "paso": paso, "ts": out["fecha_iso"],
@@ -357,7 +427,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/compuerta_entrega.py v131/take
                              "segundos": round(sum(r.get("segundos") or 0 for r in out["chequeos"]), 1)}) + "\n")
 diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off-metal-frame-drywall/tools/subir_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 01:13:41.129829766 +0000
-+++ v131/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 01:58:53.854982441 +0000
++++ v131/take-off-metal-frame-drywall/tools/subir_entrega.py	2026-11-13 02:02:41.082986119 +0000
 @@ -95,14 +95,14 @@
          q["pageToken"] = b["nextPageToken"]
  
@@ -389,7 +459,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/subir_entrega.py v131/take-off
      try:
 diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:13:41.127141891 +0000
-+++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 01:58:53.851897433 +0000
++++ v131/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-13 02:02:41.079477800 +0000
 @@ -3071,7 +3071,7 @@
      arrancada a las 19:49 UTC (v118 vigente) no queda sujeta a las reglas de v119 (AMBER con causa); una arrancada después de 21:21:52Z sí."""
      import datetime as _dt
@@ -399,7 +469,7 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
      assert CE.FECHA_V119 < CE.FECHA_V120 < CE.FECHA_V121
      tt = "| Paso | Inicio | Fin | Duración |\n|---|---|---|---|\n| 7 | 11-12 11:50 | 11-12 12:20 | 30 min |\n"
      for hora, esperado in (("11:49", "AMBER"), ("13:30", "FAIL")):          # PST: 19:49 UTC (antes de v119) / 21:30 UTC (después)
-@@ -3269,3 +3269,66 @@
+@@ -3269,3 +3269,90 @@
  
  
  test_v130_plausibilidad_subconteo()
@@ -466,3 +536,27 @@ diff -ruN v130/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v131
 +
 +
 +test_v131_verde_subido_version_anterior()
++
++
++def test_be_gk59():
++    """BE-GK59 (unido de apartados/be_gk59; caso de Grand Kia rev3b, corridas sintéticas): VERDE -> subida -> re-corrida ROJA que pisa
++    ENTREGA_OK.json = FAIL; guardado por corrida y el ENTREGA_OK de la subida vigente = PASS; sin ENTREGA_OK_<corrida> de la subida = FAIL."""
++    w = tempfile.mkdtemp(prefix="gk59_")
++    def wj(n, d):
++        json.dump(d, open(os.path.join(w, n), "w"))
++    open(os.path.join(w, "compuerta_corridas.jsonl"), "w").write(
++        json.dumps({"evento": "fin", "corrida": "c1aaaa", "ts": "2026-11-13T01:05:13+00:00", "ok": True}) + "\n" +
++        json.dumps({"evento": "fin", "corrida": "c2bbbb", "ts": "2026-11-13T01:47:38+00:00", "ok": False}) + "\n")
++    wj("SUBIDA_OK.json", {"primera_subida_iso": "2026-11-13T01:43:19+00:00"})
++    wj("ENTREGA_OK.json", {"ok": True, "fecha_iso": "2026-11-13T01:05:13+00:00", "skill_version": "v81cf129"})
++    wj("ENTREGA_OK_c1aaaa.json", {"ok": True})
++    assert not CE.be_gk59_fallas(w)
++    wj("ENTREGA_OK.json", {"ok": False, "fecha_iso": "2026-11-13T01:47:38+00:00", "skill_version": "v81cf130"})
++    assert CE.be_gk59_fallas(w), "re-corrida no verde que pisa ENTREGA_OK.json después de la subida = FAIL"
++    os.remove(os.path.join(w, "ENTREGA_OK_c1aaaa.json"))
++    wj("ENTREGA_OK.json", {"ok": True, "fecha_iso": "2026-11-13T01:05:13+00:00"})
++    assert CE.be_gk59_fallas(w), "sin ENTREGA_OK_<corrida> de la corrida subida = FAIL"
++    print("test_be_gk59 OK")
++
++
++test_be_gk59()
