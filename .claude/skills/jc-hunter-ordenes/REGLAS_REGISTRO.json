@@ -9080,11 +9080,17 @@
   {
    "id": "BE-CR0-02",
    "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
-   "pendiente_desde": "2026-11-14T03:40:38+00:00",
    "texto_corto": "con lectores en paralelo (un fragmento por lector), la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA escrito con textos de fuente distintos se unen (fuentes concatenadas); valores distintos = ERROR (nunca se elige en silencio): normalizar_fragmentos.py antes de etapas.py unir",
-   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
+   "motivo": "v81cf138r: etapas.py normalizar <fragmentos> <out> antes de unir (de la sesión CR DESDE CERO, integrado en etapas.py para no pasar de 199 archivos)",
+   "chequeos": [
+    "take-off:tools/etapas.py::normalizar_fragmentos"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr0_02_normalizar_fragmentos"
+   }
   },
   {
    "id": "BE-CR0-03",
