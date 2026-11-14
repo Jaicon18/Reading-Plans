@@ -9177,6 +9177,39 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_cr0_08_inventario_multi_pdf"
    }
+  },
+  {
+   "id": "BE-CR0-09",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
+   "cuando": "entrega",
+   "texto_corto": "markups_rcp: un cielo de N capas (> 1) escribe 'board = N layer(s) x drawn area' en su Contents (la vista Bluebeam cuadra Area x N = SF del Excel)",
+   "categoria": "programa",
+   "chequeos": [
+    "take-off:tools/markups_rcp.py::capas_txt",
+    "take-off:tools/markups_rcp.py::escribir"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr0_09_rcp_capas"
+   }
+  },
+  {
+   "id": "BE-CR0-10",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
+   "cuando": "entrega",
+   "texto_corto": "chequeos_biblioteca, wood framing: be_20 no pide track metálico a un soffit armado solo en madera (Div. 06 EXCLUDED); be_02 no juzga la membrana rated oculta 'above GYP-1' como el cielo expuesto del wet room",
+   "categoria": "programa-pendiente",
+   "pendiente_desde": "2026-11-14T07:17:51+00:00",
+   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
+  },
+  {
+   "id": "BE-CR0-11",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
+   "cuando": "entrega",
+   "texto_corto": "trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C)",
+   "categoria": "programa-pendiente",
+   "pendiente_desde": "2026-11-14T07:17:51+00:00",
+   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
   }
  ]
 }
