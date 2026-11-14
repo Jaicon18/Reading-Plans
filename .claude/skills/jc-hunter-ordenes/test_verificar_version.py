@@ -599,8 +599,54 @@ def pendientes_u202():
     print("pendientes_u202 OK")
 
 
+def bandeja_be_coord03():
+    """BE-COORD03: (1) el hook registrar_orden publica la línea en la rama de la bandeja desde OTRA rama (repo bare local) y no guarda avisos
+    automáticos; (2) verificar_version falla si la última orden registrada (posterior al corte) es > 24 h más nueva que el último mensaje real
+    del usuario en la bandeja; con un mensaje reciente = 0."""
+    import subprocess as sp
+    import tempfile
+    d = tempfile.mkdtemp(prefix="coord03_")
+    run = lambda *a, cwd=d, inp=None, env=None: sp.run(list(a), cwd=cwd, input=inp, capture_output=True, text=True, env=env)   # noqa: E731
+    run("git", "init", "-q", "--bare", "bare")
+    w = os.path.join(d, "work")
+    run("git", "clone", "-q", os.path.join(d, "bare"), w)
+    g = lambda *a: run("git", "-c", "user.name=t", "-c", "user.email=t@t", *a, cwd=w)   # noqa: E731
+    g("checkout", "-q", "-b", "claude/gifted-pasteur-x2sfzs")
+    os.makedirs(os.path.join(w, "cache_proyectos", "ORDENES_CRUDAS"))
+    os.makedirs(os.path.join(w, ".claude", "skills", "jc-hunter-ordenes"))
+    os.makedirs(os.path.join(w, ".claude", "hooks"))
+    hook = os.path.join(os.path.dirname(os.path.dirname(V.AQUI)), "hooks", "registrar_orden.py")
+    import shutil
+    shutil.copy(hook, os.path.join(w, ".claude", "hooks", "registrar_orden.py"))
+    open(os.path.join(w, "cache_proyectos", "ORDENES_CRUDAS", "_entrantes.jsonl"), "w").write(
+        json.dumps({"id": "a1", "ts_utc": "2026-11-11T21:39:00+00:00", "session": "c", "texto": "orden vieja"}) + "\n" +
+        json.dumps({"id": "a2", "ts_utc": "2026-11-13T00:55:21+00:00", "session": "c", "texto": "This session's worker process was restarted."}) + "\n")
+    open(os.path.join(w, ".claude", "skills", "jc-hunter-ordenes", "ORDENES_DEL_USUARIO.md"), "w").write("- [U-1] x\n")
+    g("add", "-A")
+    env = dict(os.environ, GIT_COMMITTER_DATE="2026-11-15T10:00:00+00:00", GIT_AUTHOR_DATE="2026-11-15T10:00:00+00:00")
+    run("git", "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "U-205", cwd=w, env=env)
+    g("push", "-q", "origin", "claude/gifted-pasteur-x2sfzs")
+    f = V.revisar_bandeja_u136(w)
+    assert f and "BE-COORD03" in f[0], f                 # el error original: el aviso de reinicio no cuenta, el último real es del 11-nov
+    g("checkout", "-q", "-b", "rama-coordinacion")       # (1) el hook publica desde OTRA rama
+    envh = dict(os.environ, U136_ORIGIN=os.path.join(d, "bare"), U136_CACHE=os.path.join(d, "cache"), U136_PENDIENTES=os.path.join(d, "pend"),
+                CLAUDE_PROJECT_DIR=w)
+    r = run(sys.executable, "-I", hook, inp=json.dumps({"prompt": "orden nueva del usuario", "session_id": "s"}), env=envh)
+    assert "publicado en la bandeja" in r.stdout, r.stdout + r.stderr
+    run(sys.executable, "-I", hook, inp=json.dumps({"prompt": "<cross-session-message from='x'>hola", "session_id": "s"}), env=envh)
+    remoto = run("git", "show", "claude/gifted-pasteur-x2sfzs:cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl", cwd=os.path.join(d, "bare")).stdout
+    assert "orden nueva del usuario" in remoto and "cross-session" not in remoto, remoto
+    g("checkout", "-q", "claude/gifted-pasteur-x2sfzs")
+    g("pull", "-q", "origin", "claude/gifted-pasteur-x2sfzs")
+    lineas = [json.loads(x) for x in open(os.path.join(w, "cache_proyectos", "ORDENES_CRUDAS", "_entrantes.jsonl")) if x.strip()]
+    lineas[-1]["ts_utc"] = "2026-11-15T09:00:00+00:00"   # el mensaje que originó la orden U-205
+    open(os.path.join(w, "cache_proyectos", "ORDENES_CRUDAS", "_entrantes.jsonl"), "w").write("".join(json.dumps(x) + "\n" for x in lineas))
+    assert V.revisar_bandeja_u136(w) == [], V.revisar_bandeja_u136(w)
+    print("bandeja_be_coord03 OK")
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17, version_skill_be_xf19, pendientes_u202):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17, version_skill_be_xf19, pendientes_u202, bandeja_be_coord03):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

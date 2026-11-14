@@ -921,6 +921,51 @@ def revisar_pendientes_u202(fuente, ahora=None, horas=HORAS_U202):
     return f
 
 
+CORTE_BE_COORD03 = "2026-11-14T04:00:00+00:00"     # órdenes registradas antes del arreglo del hook no se re-abren (no hay cómo recapturarlas)
+HORAS_BE_COORD03 = 24.0
+
+
+def revisar_bandeja_u136(repo, corte=CORTE_BE_COORD03, horas=HORAS_BE_COORD03):
+    """BE-COORD03 (COORDINACIÓN 14-nov): la bandeja U-136 (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl) dejó de recibir mensajes del
+    usuario desde el 11-nov (la rama de COORDINACIÓN no tenía el hook y las sesiones no subían la línea). Falta si la última orden
+    registrada en ORDENES_DEL_USUARIO.md (commit en git, posterior al corte) es más de 24 h más nueva que el último mensaje REAL del usuario
+    de la bandeja (los avisos automáticos no cuentan)."""
+    import datetime as _dt
+    import subprocess as _sp
+    bandeja = os.path.join(repo, "cache_proyectos", "ORDENES_CRUDAS", "_entrantes.jsonl")
+    try:
+        sys.path.insert(0, os.path.join(repo, ".claude", "hooks"))
+        import registrar_orden as _ro
+        es_usuario = _ro.es_del_usuario
+    except Exception:                                   # noqa: BLE001
+        es_usuario = lambda t: bool(t)                  # noqa: E731
+    ultimo = None
+    if os.path.isfile(bandeja):
+        for ln in open(bandeja, encoding="utf-8", errors="ignore"):
+            try:
+                x = json.loads(ln)
+                if es_usuario(str(x.get("texto") or "")):
+                    t = _dt.datetime.fromisoformat(str(x.get("ts_utc")).replace("Z", "+00:00"))
+                    ultimo = t if ultimo is None or t > ultimo else ultimo
+            except Exception:                           # noqa: BLE001
+                continue
+    try:
+        r = _sp.run(["git", "log", "-1", "--format=%cI", f"--since={corte}", "--", ".claude/skills/jc-hunter-ordenes/ORDENES_DEL_USUARIO.md"],
+                    cwd=repo, capture_output=True, text=True, timeout=30)
+        orden = _dt.datetime.fromisoformat(r.stdout.strip()) if r.stdout.strip() else None
+    except Exception:                                   # noqa: BLE001
+        return []
+    if orden is None:
+        return []
+    if ultimo is None:
+        return [f"BE-COORD03: orden del usuario registrada {orden.isoformat()} y la bandeja U-136 no tiene ningún mensaje real del usuario"]
+    h = (orden - ultimo).total_seconds() / 3600
+    if h > horas:
+        return [f"BE-COORD03: última orden registrada {orden.isoformat()} y último mensaje del usuario en la bandeja U-136 "
+                f"{ultimo.isoformat()} ({h:.0f} h): el hook registrar_orden no está capturando (rama sin .claude/settings.json o línea sin subir)"]
+    return []
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -956,11 +1001,13 @@ def main(argv):
     fp = revisar_fechas(Fuente(candidato), os.path.dirname(os.path.abspath(archivo)))
     vf = revisar_version_skill(candidato)
     pu = revisar_pendientes_u202(Fuente(candidato))
+    bu = revisar_bandeja_u136(os.path.dirname(os.path.abspath(archivo)))
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
                        ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa),
                        ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp), ("VERSION DEL SKILL.md (BE-XF19)", vf),
-                       ("PENDIENTES > 4 h (U-202)", pu)):
+                       ("PENDIENTES > 4 h (U-202)", pu),
+                       ("BANDEJA U-136 (BE-COORD03)", bu)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

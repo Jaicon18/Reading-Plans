@@ -9062,6 +9062,38 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_cr0_01_inventario_i1"
    }
+  },
+  {
+   "id": "BE-COORD03",
+   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 14-nov 03:45, U-202; bandeja U-136 sin mensajes del usuario desde el 11-nov)",
+   "categoria": "programa",
+   "cuando": "siempre",
+   "texto_corto": "el hook U-136 (registrar_orden.py) publica cada mensaje del usuario en la bandeja central (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl de claude/gifted-pasteur-x2sfzs) desde cualquier rama (clon propio en caché: fetch + append + commit + push; si falla, pendiente local y reintento); toda sesión que recibe mensajes del usuario (COORDINACIÓN incluida) tiene .claude/settings.json con el hook; verificar_version FALLA si la última orden registrada es > 24 h más nueva que el último mensaje real de la bandeja",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_bandeja_u136"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "bandeja_be_coord03"
+   }
+  },
+  {
+   "id": "BE-CR0-02",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
+   "categoria": "programa-pendiente",
+   "cuando": "entrega",
+   "pendiente_desde": "2026-11-14T03:40:38+00:00",
+   "texto_corto": "con lectores en paralelo (un fragmento por lector), la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA escrito con textos de fuente distintos se unen (fuentes concatenadas); valores distintos = ERROR (nunca se elige en silencio): normalizar_fragmentos.py antes de etapas.py unir",
+   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
+  },
+  {
+   "id": "BE-CR0-03",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
+   "categoria": "programa-pendiente",
+   "cuando": "entrega",
+   "pendiente_desde": "2026-11-14T03:41:39+00:00",
+   "texto_corto": "chequeos_v71.ids_canon (ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing (todo board-only) un tag descartado con owner = wall board-only no es 'owner no existe'",
+   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
   }
  ]
 }

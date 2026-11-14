@@ -1,0 +1,63 @@
+diff -ruN -x __pycache__ v138p/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138q/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138p/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 03:08:40.973906413 +0000
++++ v138q/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 03:49:11.840320781 +0000
+@@ -9062,6 +9062,38 @@
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_be_cr0_01_inventario_i1"
+    }
++  },
++  {
++   "id": "BE-COORD03",
++   "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 14-nov 03:45, U-202; bandeja U-136 sin mensajes del usuario desde el 11-nov)",
++   "categoria": "programa",
++   "cuando": "siempre",
++   "texto_corto": "el hook U-136 (registrar_orden.py) publica cada mensaje del usuario en la bandeja central (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl de claude/gifted-pasteur-x2sfzs) desde cualquier rama (clon propio en caché: fetch + append + commit + push; si falla, pendiente local y reintento); toda sesión que recibe mensajes del usuario (COORDINACIÓN incluida) tiene .claude/settings.json con el hook; verificar_version FALLA si la última orden registrada es > 24 h más nueva que el último mensaje real de la bandeja",
++   "chequeos": [
++    "ordenes:verificar_version.py::revisar_bandeja_u136"
++   ],
++   "test": {
++    "archivo": "ordenes:test_verificar_version.py",
++    "token": "bandeja_be_coord03"
++   }
++  },
++  {
++   "id": "BE-CR0-02",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "pendiente_desde": "2026-11-14T03:40:38+00:00",
++   "texto_corto": "con lectores en paralelo (un fragmento por lector), la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA escrito con textos de fuente distintos se unen (fuentes concatenadas); valores distintos = ERROR (nunca se elige en silencio): normalizar_fragmentos.py antes de etapas.py unir",
++   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
++  },
++  {
++   "id": "BE-CR0-03",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
++   "categoria": "programa-pendiente",
++   "cuando": "entrega",
++   "pendiente_desde": "2026-11-14T03:41:39+00:00",
++   "texto_corto": "chequeos_v71.ids_canon (ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing (todo board-only) un tag descartado con owner = wall board-only no es 'owner no existe'",
++   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138p/take-off-metal-frame-drywall/SKILL.md v138q/take-off-metal-frame-drywall/SKILL.md
+--- v138p/take-off-metal-frame-drywall/SKILL.md	2026-11-14 03:08:40.982729025 +0000
++++ v138q/take-off-metal-frame-drywall/SKILL.md	2026-11-14 03:47:46.753296611 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138p** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138q** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
++- **BE-COORD03 (programa desde v81cf138q, COORDINACIÓN 14-nov):** el hook U-136 (.claude/hooks/registrar_orden.py) publica cada mensaje del usuario en la bandeja central (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl de claude/gifted-pasteur-x2sfzs) desde CUALQUIER rama, con un clon propio en caché (fetch + append + commit + push; si falla queda pendiente y se reintenta); toda sesión que recibe mensajes del usuario tiene .claude/settings.json con el hook. verificar_version.revisar_bandeja_u136: la última orden registrada en ORDENES_DEL_USUARIO.md > 24 h más nueva que el último mensaje real de la bandeja = FALLA. Test bandeja_be_coord03.
+ - **BE-CR0-01 (programa desde v81cf138p, CR desde cero 13-nov):** inventario_tags.verificar_png compara el tag esperado con el texto bajo la marca con la MISMA normalización I -> 1 a los dos lados (coincide_tag); antes FI.2 / FI.6 / XI.2.7 salían 'PNG NO VERIFICADO' y el inventario daba rc 1. Test test_be_cr0_01_inventario_i1.
+ - **BE-CR48 (programa desde v81cf138o, CR rev20d 14-nov):** cuando el head del type baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (4/A4.03: FW.2-L3-06 9.8958 -> 8.875). Programa: U-199 (7) secciones_fallas + u199_disp_vieja: disposición con 'take-off <altura>' distinta de la vigente = FAIL. Test test_be_cr48_disposicion_vieja (caso real CR antes 2 / después 0).
+ - **U-202 (programa desde v81cf138m, usuario 13-nov):** toda regla nueva se ejecuta EN ESE MOMENTO: chequeo + test con el caso real y publicación en cuanto pasa suite / banco / verificar_version, una versión por chequeo. verificar_version.revisar_pendientes_u202: una regla 'programa-pendiente' sin 'pendiente_desde' o con más de 4 h = FALLA (bloquea arranque y publicación). Test pendientes_u202.
