@@ -1,0 +1,113 @@
+diff -ruN -x __pycache__ v138z/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v139/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138z/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 07:19:39.035077133 +0000
++++ v139/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 15:19:06.241880420 +0000
+@@ -9222,6 +9222,37 @@
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_be_cr0_11_traza_cielo"
+    }
++  },
++  {
++   "id": "BE-CR0-12",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 9781d49, U-202)",
++   "cuando": "entrega",
++   "texto_corto": "_walls_board_only: cada cara board-only lleva SU length_ft y be_cr27_stack multiplica cada cara por su largo (antes todas por el largo de la primera entrada del grupo: SF inflado vs mediana de los pisos típicos)",
++   "categoria": "programa",
++   "chequeos": [
++    "take-off:tools/chequeos_biblioteca.py::_walls_board_only",
++    "take-off:tools/chequeos_biblioteca.py::be_cr27_stack"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_12_stack_largo_por_cara"
++   }
++  },
++  {
++   "id": "BE-CR0-13",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 9781d49, U-202)",
++   "cuando": "entrega",
++   "texto_corto": "marcar_detalles usa entrega.json 'bidset_detalles' (PDF unido A + S) para circular las burbujas a hojas S; bidset_limpio sigue siendo el set A que comparan CE_COPIA_LIMPIA / CE_MARKUP_EN_WALL",
++   "categoria": "programa-pendiente",
++   "pendiente_desde": "2026-11-14T15:19:06+00:00",
++   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
++  },
++  {
++   "id": "CR0-C2",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 9781d49, U-202)",
++   "cuando": "siempre",
++   "texto_corto": "en la carpeta de parches solo van archivos {autor, ops}; cualquier otro archivo va fuera",
++   "categoria": "conducta"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138z/take-off-metal-frame-drywall/SKILL.md v139/take-off-metal-frame-drywall/SKILL.md
+--- v138z/take-off-metal-frame-drywall/SKILL.md	2026-11-14 07:19:39.043462620 +0000
++++ v139/take-off-metal-frame-drywall/SKILL.md	2026-11-14 15:19:39.494659195 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138z** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf139** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3595,6 +3595,7 @@
+ - **BE-CR0-09 (programa desde v81cf138x, CR desde cero 14-nov):** markups_rcp: un cielo de N capas (> 1) escribe 'board = N layer(s) x drawn area' en su Contents (la vista Bluebeam cuadra Area x N = SF del Excel). Test test_be_cr0_09_rcp_capas.
+ - **BE-CR0-10 (programa desde v81cf138y, CR desde cero 14-nov):** chequeos_biblioteca, wood framing: be_20 no pide track metálico a un soffit armado solo en madera (Div. 06 EXCLUDED); be_02 no juzga la membrana rated oculta 'above GYP-1' como el cielo expuesto del wet room. Test test_be_cr0_10_madera_y_membrana.
+ - **BE-CR0-11 (programa desde v81cf138z, CR desde cero 14-nov):** trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C). Test test_be_cr0_11_traza_cielo.
++- **BE-CR0-12 (programa desde v81cf139, CR desde cero 14-nov):** chequeos_biblioteca._walls_board_only: cada cara board-only lleva SU length_ft; be_cr27_stack multiplica cada cara por su largo (antes por el de la primera entrada del grupo: SF de pisos típicos inflado, FAIL falso).
+ - **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-07 (programa desde v81cf138v, CR desde cero 14-nov):** markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío. Test test_be_cr0_07_detail_board_only.
+diff -ruN -x __pycache__ v138z/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v139/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v138z/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-14 07:18:30.300690874 +0000
++++ v139/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-14 15:18:17.206854008 +0000
+@@ -407,6 +407,7 @@
+                     lado = "AB"[k] if k < 2 else chr(65 + k)
+                     k += 1
+                     f = {"side": lado, "board": e.get("board"), "boards": [e.get("board")], "layers": int(e.get("layers") or 1),
++                         "length_ft": e.get("length_ft"),     # BE-CR0-12: cada cara con SU largo (no el de la primera entrada del grupo)
+                          "height_ft": e.get("height_ft"), "height_status": e.get("height_status"), "room": cuarto, "img": e.get("img"),
+                          "height_img": e.get("height_img") or e.get("img"),
+                          "source": e.get("source"), "height_source": e.get("height_source"), "entry": e.get("id")}
+@@ -2815,7 +2816,7 @@
+             h = _n(f.get("height_ft")) or _n(w.get("height_ft")) or 0
+             if fam:
+                 sf.setdefault(fl, {}).setdefault(fam, 0.0)
+-                sf[fl][fam] += L * h * int(f.get("layers") or 1)
++                sf[fl][fam] += (_n(f.get("length_ft")) or L) * h * int(f.get("layers") or 1)   # BE-CR0-12
+             for m in re.finditer(r"\b(\d)(\d{2})[A-Z]?\b", str(f.get("room") or "")):
+                 if int(m.group(1)) == fl:
+                     cuartos.setdefault(fl, set()).add(m.group(2))
+diff -ruN -x __pycache__ v138z/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v139/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138z/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 07:19:03.264188659 +0000
++++ v139/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 15:18:08.987137568 +0000
+@@ -1496,3 +1496,27 @@
+ 
+ 
+ test_be_cr0_11_traza_cielo()
++
++
++def test_be_cr0_12_stack_largo_por_cara():
++    """BE-CR0-12 (CR desde cero 14-nov): _walls_board_only agrupa las entradas de un wall (caras A..Z) y be_cr27_stack multiplicaba TODAS
++    las caras por el length_ft de la primera entrada: un piso típico con caras de largo distinto salía inflado / desinflado contra la
++    mediana (FAIL falso). Ahora cada cara lleva SU length_ft."""
++    def ex(n, la, lb):
++        return [{"id": f"X9-L{n}-01 A", "sheet": f"X{n}.1", "length_ft": la, "height_ft": 10.0, "board": "5/8 type X", "layers": 1,
++                 "location": f"faces: ROOM {n}91", "type_id": "Z9-01", "decision": "wood framed, board only"},
++                {"id": f"X9-L{n}-01 B", "sheet": f"X{n}.1", "length_ft": lb, "height_ft": 10.0, "board": "5/8 type X", "layers": 1,
++                 "location": f"faces: ROOM {n}92", "type_id": "Z9-01", "decision": "wood framed, board only"}]
++    can = {"walls": [], "wood_excluded": True, "typical_floors": ["L7", "L8", "L9"],
++           "existing_walls": ex(7, 10.0, 10.0) + ex(8, 10.0, 10.0) + ex(9, 2.0, 18.0)}
++    b = B(canon=can)
++    caras = {f["entry"]: f.get("length_ft") for w in b._walls_board_only() for f in w["faces"]}
++    assert caras["X9-L9-01 A"] == 2.0 and caras["X9-L9-01 B"] == 18.0, caras
++    r = CB.be_cr27_stack(b)
++    assert r[0] == "PASS", r
++    malo = copy.deepcopy(can); malo["existing_walls"][-1]["length_ft"] = 30.0     # L9 de verdad más cargado: sigue FAIL
++    assert CB.be_cr27_stack(B(canon=malo))[0] == "FAIL"
++    print("test_be_cr0_12_stack_largo_por_cara OK")
++
++
++test_be_cr0_12_stack_largo_por_cara()

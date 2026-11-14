@@ -1,0 +1,97 @@
+diff -ruN -x __pycache__ v139/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v139a/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v139/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 15:19:06.241880420 +0000
++++ v139a/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 15:21:14.117888022 +0000
+@@ -9243,9 +9243,15 @@
+    "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 9781d49, U-202)",
+    "cuando": "entrega",
+    "texto_corto": "marcar_detalles usa entrega.json 'bidset_detalles' (PDF unido A + S) para circular las burbujas a hojas S; bidset_limpio sigue siendo el set A que comparan CE_COPIA_LIMPIA / CE_MARKUP_EN_WALL",
+-   "categoria": "programa-pendiente",
+-   "pendiente_desde": "2026-11-14T15:19:06+00:00",
+-   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
++   "categoria": "programa",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::bidset_de_detalles",
++    "take-off:tools/compuerta_entrega.py::marcar_detalles"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_cr0_13_bidset_detalles"
++   }
+   },
+   {
+    "id": "CR0-C2",
+diff -ruN -x __pycache__ v139/take-off-metal-frame-drywall/SKILL.md v139a/take-off-metal-frame-drywall/SKILL.md
+--- v139/take-off-metal-frame-drywall/SKILL.md	2026-11-14 15:19:39.494659195 +0000
++++ v139a/take-off-metal-frame-drywall/SKILL.md	2026-11-14 15:21:14.125888022 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf139** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf139a** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3596,6 +3596,7 @@
+ - **BE-CR0-10 (programa desde v81cf138y, CR desde cero 14-nov):** chequeos_biblioteca, wood framing: be_20 no pide track metálico a un soffit armado solo en madera (Div. 06 EXCLUDED); be_02 no juzga la membrana rated oculta 'above GYP-1' como el cielo expuesto del wet room. Test test_be_cr0_10_madera_y_membrana.
+ - **BE-CR0-11 (programa desde v81cf138z, CR desde cero 14-nov):** trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C). Test test_be_cr0_11_traza_cielo.
+ - **BE-CR0-12 (programa desde v81cf139, CR desde cero 14-nov):** chequeos_biblioteca._walls_board_only: cada cara board-only lleva SU length_ft; be_cr27_stack multiplica cada cara por su largo (antes por el de la primera entrada del grupo: SF de pisos típicos inflado, FAIL falso).
++- **BE-CR0-13 (programa desde v81cf139a, CR desde cero 14-nov):** compuerta_entrega.marcar_detalles circula las burbujas con entrega.json 'bidset_detalles' (PDF unido A + S, vía bidset_de_detalles); bidset_limpio sigue siendo el set A que comparan CE_COPIA_LIMPIA / CE_MARKUP_EN_WALL.
+ - **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-07 (programa desde v81cf138v, CR desde cero 14-nov):** markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío. Test test_be_cr0_07_detail_board_only.
+diff -ruN -x __pycache__ v139/take-off-metal-frame-drywall/tools/compuerta_entrega.py v139a/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v139/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:51:29.894122082 +0000
++++ v139a/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 15:20:07.033727526 +0000
+@@ -6608,6 +6608,14 @@
+     return best[0] if best else None
+ 
+ 
++def bidset_de_detalles(cfg, w):
++    """BE-CR0-13 (CR desde cero 14-nov): set_texto une A + S, así que las burbujas a hojas S necesitan un PDF con esas hojas.
++    entrega.json 'bidset_detalles' (PDF unido A + S) se usa SOLO para circular los detalles; bidset_limpio sigue siendo el set que
++    comparan CE_COPIA_LIMPIA / CE_MARKUP_EN_WALL página por página. Ruta relativa = relativa a la carpeta del proyecto."""
++    bs = cfg.get("bidset_detalles") or cfg.get("bidset_limpio") or cfg.get("bidset")
++    return bs if bs and os.path.isabs(bs) else (os.path.join(w, bs) if bs else None)
++
++
+ def marcar_detalles(workdir, entrega_json=None):
+     """-> (pdf, index_md, registros). Raises si no hay bidset o set_texto."""
+     import pymupdf
+@@ -6616,8 +6624,7 @@
+     regs = CB.cadena_detalles(b)
+     st = _json(c.set_p) or {}
+     labels = list((st.get("hojas") or {}).keys())
+-    bs = c.cfg.get("bidset_limpio") or c.cfg.get("bidset")
+-    bs = bs if bs and os.path.isabs(bs) else (os.path.join(c.w, bs) if bs else None)
++    bs = bidset_de_detalles(c.cfg, c.w)      # BE-CR0-13
+     if not (bs and os.path.isfile(bs)):
+         raise RuntimeError("entrega.json sin bidset_limpio / bidset (ruta del set) para marcar los detalles")
+     src = pymupdf.open(bs)
+diff -ruN -x __pycache__ v139/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v139a/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v139/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:51:06.395135515 +0000
++++ v139a/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 15:20:07.033884034 +0000
+@@ -4086,3 +4086,23 @@
+ 
+ 
+ test_be_cr48_disposicion_vieja()
++
++
++def test_be_cr0_13_bidset_detalles():
++    """BE-CR0-13 (CR desde cero 14-nov): set_texto une A + S y bidset_limpio es solo A: las burbujas a hojas S no tenían destino.
++    entrega.json 'bidset_detalles' (A + S) manda en marcar_detalles; sin él, bidset_limpio / bidset como antes. Las demás compuertas
++    (CE_COPIA_LIMPIA, CE_MARKUP_EN_WALL) siguen leyendo bidset_limpio."""
++    import inspect
++    w = "/x/proyecto"
++    assert CE.bidset_de_detalles({"bidset_limpio": "a.pdf", "bidset_detalles": "a_s.pdf"}, w) == "/x/proyecto/a_s.pdf"
++    assert CE.bidset_de_detalles({"bidset_limpio": "/abs/a.pdf"}, w) == "/abs/a.pdf"
++    assert CE.bidset_de_detalles({"bidset": "b.pdf"}, w) == "/x/proyecto/b.pdf"
++    assert CE.bidset_de_detalles({}, w) is None
++    assert "bidset_de_detalles(c.cfg, c.w)" in inspect.getsource(CE.marcar_detalles)
++    otras = [n for n, f in inspect.getmembers(CE, inspect.isfunction) if n != "bidset_de_detalles"
++             and f.__module__ == CE.__name__ and "bidset_detalles" in inspect.getsource(f)]
++    assert otras == [], otras                                   # solo marcar_detalles (vía la función) usa el PDF unido
++    print("test_be_cr0_13_bidset_detalles OK")
++
++
++test_be_cr0_13_bidset_detalles()
