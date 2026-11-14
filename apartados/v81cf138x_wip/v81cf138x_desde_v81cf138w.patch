@@ -1,0 +1,113 @@
+diff -ruN -x __pycache__ v138w/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138x/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138w/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 05:55:24.572365855 +0000
++++ v138x/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 07:19:39.007077131 +0000
+@@ -9177,6 +9177,39 @@
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_be_cr0_08_inventario_multi_pdf"
+    }
++  },
++  {
++   "id": "BE-CR0-09",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
++   "cuando": "entrega",
++   "texto_corto": "markups_rcp: un cielo de N capas (> 1) escribe 'board = N layer(s) x drawn area' en su Contents (la vista Bluebeam cuadra Area x N = SF del Excel)",
++   "categoria": "programa",
++   "chequeos": [
++    "take-off:tools/markups_rcp.py::capas_txt",
++    "take-off:tools/markups_rcp.py::escribir"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_09_rcp_capas"
++   }
++  },
++  {
++   "id": "BE-CR0-10",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
++   "cuando": "entrega",
++   "texto_corto": "chequeos_biblioteca, wood framing: be_20 no pide track metálico a un soffit armado solo en madera (Div. 06 EXCLUDED); be_02 no juzga la membrana rated oculta 'above GYP-1' como el cielo expuesto del wet room",
++   "categoria": "programa-pendiente",
++   "pendiente_desde": "2026-11-14T07:17:51+00:00",
++   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
++  },
++  {
++   "id": "BE-CR0-11",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
++   "cuando": "entrega",
++   "texto_corto": "trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C)",
++   "categoria": "programa-pendiente",
++   "pendiente_desde": "2026-11-14T07:17:51+00:00",
++   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138w/take-off-metal-frame-drywall/SKILL.md v138x/take-off-metal-frame-drywall/SKILL.md
+--- v138w/take-off-metal-frame-drywall/SKILL.md	2026-11-14 05:55:32.314607381 +0000
++++ v138x/take-off-metal-frame-drywall/SKILL.md	2026-11-14 07:19:39.014320812 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138w** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138x** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
++- **BE-CR0-09 (programa desde v81cf138x, CR desde cero 14-nov):** markups_rcp: un cielo de N capas (> 1) escribe 'board = N layer(s) x drawn area' en su Contents (la vista Bluebeam cuadra Area x N = SF del Excel). Test test_be_cr0_09_rcp_capas.
+ - **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-07 (programa desde v81cf138v, CR desde cero 14-nov):** markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío. Test test_be_cr0_07_detail_board_only.
+diff -ruN -x __pycache__ v138w/take-off-metal-frame-drywall/tools/markups_rcp.py v138x/take-off-metal-frame-drywall/tools/markups_rcp.py
+--- v138w/take-off-metal-frame-drywall/tools/markups_rcp.py	2026-11-13 06:13:40.431611082 +0000
++++ v138x/take-off-metal-frame-drywall/tools/markups_rcp.py	2026-11-14 07:18:30.263171590 +0000
+@@ -183,6 +183,18 @@
+         pass
+ 
+ 
++def capas_txt(c):
++    """BE-CR0-09 (CR desde cero 14-nov): un cielo de N capas (layers int o {value}) > 1 escribe 'board = N layer(s) x drawn area' en su
++    Contents; sin eso CE_VISTA_BLUEBEAM comparaba el Area dibujada (1 capa) contra el SF del Excel (N capas)."""
++    ly = c.get("layers")
++    ly = ly.get("value") if isinstance(ly, dict) else ly
++    try:
++        ly = int(float(ly or 1))
++    except (TypeError, ValueError):
++        ly = 1
++    return f"; board = {ly} layer(s) x drawn area" if ly > 1 else ""
++
++
+ def escribir(pdf_in, canon_p, polys_p, pdf_out, dir_png):
+     """R80f.13 (Chuze FINAL5): VARIAS hojas de RCP — la hoja de cada ceiling = ceilings[].sheet (o constants.rcp_sheet);
+     el polígono se busca por id (ceilings[].id) o por room; ID del Contents / NM = id si existe; Contents lleva el tag
+@@ -230,6 +242,7 @@
+         det = c.get("detail") or (c.get("system_callout") or {}).get("detail") or ""
+         h = float(c.get("height_ft") or 0)
+         cz = f" · cause: {causas[cid]}" if cid in causas else ""
++        cz += capas_txt(c)                                # BE-CR0-09: cielo de N capas -> Area x N = SF del Excel en la vista Bluebeam
+         tag = f" · GWB CEILING {c['ceiling_tag']}" if c.get("ceiling_tag") else ""
+         txt = f"{sub}{tag} · CEILING {room} · {sf:,.2f} SF · CLG {mb.ftin(h)}{cz} · {det} · {cid}"
+         if not c.get("hatch_check_cause") and not causas.get(cid):      # R80f.16: el polígono sigue al hatch
+diff -ruN -x __pycache__ v138w/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138x/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138w/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 05:54:48.051222238 +0000
++++ v138x/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 07:18:30.263790739 +0000
+@@ -1454,3 +1454,15 @@
+ 
+ 
+ test_be_cr0_08_inventario_multi_pdf()
++
++
++def test_be_cr0_09_rcp_capas():
++    """BE-CR0-09 (CR desde cero 14-nov): un cielo de 2 capas (RS-6) daba Area dibujada vs el doble de SF en el Excel (CE_VISTA_BLUEBEAM);
++    ahora su Contents dice 'board = 2 layer(s) x drawn area'; 1 capa = nada."""
++    import markups_rcp as MR
++    assert MR.capas_txt({"layers": 2}) == "; board = 2 layer(s) x drawn area"
++    assert MR.capas_txt({"layers": {"value": 3}}).startswith("; board = 3")
++    assert MR.capas_txt({"layers": 1}) == MR.capas_txt({}) == ""
++
++
++test_be_cr0_09_rcp_capas()

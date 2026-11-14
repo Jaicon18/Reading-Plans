@@ -1,0 +1,76 @@
+diff -ruN -x __pycache__ v138y/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138z/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138y/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 07:19:39.023077132 +0000
++++ v138z/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 07:19:39.035077133 +0000
+@@ -9213,9 +9213,15 @@
+    "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 0e8907c, U-202)",
+    "cuando": "entrega",
+    "texto_corto": "trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C)",
+-   "categoria": "programa-pendiente",
+-   "pendiente_desde": "2026-11-14T07:17:51+00:00",
+-   "motivo": "su arreglo de tool + test se publica en la versión siguiente (U-202, < 4 h)"
++   "categoria": "programa",
++   "chequeos": [
++    "take-off:tools/trazabilidad.py::_item",
++    "take-off:tools/trazabilidad.py::_src_item"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_11_traza_cielo"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138y/take-off-metal-frame-drywall/SKILL.md v138z/take-off-metal-frame-drywall/SKILL.md
+--- v138y/take-off-metal-frame-drywall/SKILL.md	2026-11-14 07:19:39.028389407 +0000
++++ v138z/take-off-metal-frame-drywall/SKILL.md	2026-11-14 07:19:39.043462620 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138y** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138z** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3594,6 +3594,7 @@
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
+ - **BE-CR0-09 (programa desde v81cf138x, CR desde cero 14-nov):** markups_rcp: un cielo de N capas (> 1) escribe 'board = N layer(s) x drawn area' en su Contents (la vista Bluebeam cuadra Area x N = SF del Excel). Test test_be_cr0_09_rcp_capas.
+ - **BE-CR0-10 (programa desde v81cf138y, CR desde cero 14-nov):** chequeos_biblioteca, wood framing: be_20 no pide track metálico a un soffit armado solo en madera (Div. 06 EXCLUDED); be_02 no juzga la membrana rated oculta 'above GYP-1' como el cielo expuesto del wet room. Test test_be_cr0_10_madera_y_membrana.
++- **BE-CR0-11 (programa desde v81cf138z, CR desde cero 14-nov):** trazabilidad._item encuentra los renglones de cielo del desglose ('ceiling <room>' / id / room) y cita su N/HOJA (antes 'N/SHEET: default (no sheet)' en la fila Type C). Test test_be_cr0_11_traza_cielo.
+ - **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-07 (programa desde v81cf138v, CR desde cero 14-nov):** markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío. Test test_be_cr0_07_detail_board_only.
+diff -ruN -x __pycache__ v138y/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138z/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138y/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 07:19:01.379074895 +0000
++++ v138z/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 07:19:03.264188659 +0000
+@@ -1483,3 +1483,16 @@
+ 
+ 
+ test_be_cr0_10_madera_y_membrana()
++
++
++def test_be_cr0_11_traza_cielo():
++    """BE-CR0-11 (CR desde cero 14-nov): trazabilidad._item no encontraba los renglones de cielo del desglose ('ceiling <room>' / id / room):
++    la fila Type C (solo cielos) salía 'N/SHEET: default (no sheet)'; ahora cita la fuente del cielo."""
++    import trazabilidad as TZ
++    can = {"ceilings": [{"room": "L9 909 RS-6", "source": "2/A9.00 RS-6 A0.98"}]}
++    assert TZ._src_item("ceiling L9 909 RS-6", can) == "2/A9.00 RS-6 A0.98"
++    assert TZ._src_item("L9 909 RS-6", can) == "2/A9.00 RS-6 A0.98"
++    assert TZ._src_item("nada", can) == ""
++
++
++test_be_cr0_11_traza_cielo()
+diff -ruN -x __pycache__ v138y/take-off-metal-frame-drywall/tools/trazabilidad.py v138z/take-off-metal-frame-drywall/tools/trazabilidad.py
+--- v138y/take-off-metal-frame-drywall/tools/trazabilidad.py	2026-11-13 06:13:40.430776196 +0000
++++ v138z/take-off-metal-frame-drywall/tools/trazabilidad.py	2026-11-14 07:19:03.264188659 +0000
+@@ -582,6 +582,9 @@
+         for x in can.get(k) or []:
+             if x.get("ref") == i:
+                 return x
++    for x in can.get("ceilings") or []:                 # BE-CR0-11: renglón de cielo del desglose ('ceiling <room>' / id / room)
++        if isinstance(x, dict) and i in {x.get("id"), x.get("room"), f"ceiling {x.get('room')}", f"ceiling {x.get('id')}"} - {None, "ceiling None"}:
++            return x
+     return None
+ 
+ 
