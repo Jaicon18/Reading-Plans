@@ -9035,11 +9035,18 @@
   {
    "id": "BE-CR48",
    "origen": "BIBLIOTECA_ERRORES.md (CR rev20d 14-nov 00:45 UTC; COORDINACIÓN 00:41, U-202)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
-   "pendiente_desde": "2026-11-14T00:37:38+00:00",
    "texto_corto": "cuando el head del type (BE-CR46) baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (caso 4/A4.03: FW.2-L3-06 9.8958 -> 8.875)",
-   "motivo": "su chequeo + test con el caso real de CR (fixture pedido a CR 14-nov 00:47) se publica en la versión siguiente, antes de las 04:37 UTC (U-202)"
+   "motivo": "v81cf138o (U-202): U-199 (7) secciones_fallas: una disposición que afirma 'take-off <altura>' distinta de la altura vigente del canon = vieja = FAIL (caso real CR rev20d antes 2 / después 0)",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::u199_disp_vieja",
+    "take-off:tools/compuerta_entrega.py::secciones_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_cr48_disposicion_vieja"
+   }
   }
  ]
 }
