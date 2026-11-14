@@ -14,3 +14,11 @@
 - PASO 5 (resolución) INICIO 19:40:38 — 5 resolvedores (L1, L2, L3, L4, CORES) + back-check ciego de cielos; criterios en 3_revision/CRITERIOS_RESOLUCION.md
 - tool fix BE-CR0-03 (chequeos_v71.ids_canon + existing_walls, R78.15 owner board-only): 19:41:39 dentro del Paso 5
 - 19:41:58 Xfinity publicó BE-CR0-01 en v81cf138p (vigente, e43b2f2); esta corrida sigue con v81cf138o + los mismos arreglos locales (equivalentes)
+- PASO 5 FIN 20:17:25 (5 resolvedores + back-check cielos + fix shaft N L4 + 59 ajustes de consistencia por programa; canon unido 1118 entradas board-only/shaft, 95 cielos)
+- PASO 6 (cálculo) INICIO 20:17:25 — lectura de accesorios/trims (P8b) en paralelo con validación canon.py
+- 20:25:03 cambio a skill VIGENTE v81cf138s (incluye BE-CR0-01/02/03); tools re-instaladas
+- PASO 6 FIN 20:28:01 (canon.py rc 0, accesorios + trims; familias en etapas/4_canon/out)
+- PASO 7 (Excel) INICIO 20:28:01
+- inventario_tags via bitacora (re-corrida idéntica para registro) 20:33:15
+- tool fix BE-CR0-04 (comparar.ambiguos + type_id de board-only): 20:37:38 Paso 7
+- PASO 7 FIN (Excel armado, reglas.py OK) 20:40:14

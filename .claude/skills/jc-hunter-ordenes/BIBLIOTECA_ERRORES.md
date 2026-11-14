@@ -728,3 +728,8 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 ## BE-CR0-03 — R78.15: owner a un wall board-only = "no existe en el canon" (CR PRUEBA DESDE CERO, 13-nov)
 - Error: chequeos_v71.ids_canon no incluía existing_walls; en un set wood-framed todo owner a un wall board-only fallaba.
 - Arreglo: + "existing_walls" en ids_canon (como BE-XF16 muros_canon). Prueba: test_be_cr0_03_owner_existing.py.
+
+## BE-CR0-04 — comparar.ambiguos: board-only con la designación en type_id (CR PRUEBA DESDE CERO, 13-nov)
+- Error: el cruce de tags ambiguos comparaba el type del tag solo con w.tag / w.type; los walls board-only traen 'XW.6.3-0' en
+  type_id y un texto largo en type -> "citado en tag_ids de un wall de otro type" con el tag bien asignado (PA0004/PA0005).
+- Arreglo: + type_id normalizado en `citado`. Prueba: test_be_cr0_04_ambiguo_type_id.py.
