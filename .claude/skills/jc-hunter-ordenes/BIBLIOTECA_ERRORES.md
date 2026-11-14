@@ -724,3 +724,7 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
   con textos de fuente distintos (mismo valor) → canon imposible de unir.
 - Arreglo: `normalizar_fragmentos.py` (constants / details a 00_comunes.json; iguales se unen, distintos = ERROR; la escala global es la
   de las plantas A2.x y otra escala vale solo con su hoja en plan_scale_by_sheet). Prueba: test_be_cr0_02_normalizar.py.
+
+## BE-CR0-03 — R78.15: owner a un wall board-only = "no existe en el canon" (CR PRUEBA DESDE CERO, 13-nov)
+- Error: chequeos_v71.ids_canon no incluía existing_walls; en un set wood-framed todo owner a un wall board-only fallaba.
+- Arreglo: + "existing_walls" en ids_canon (como BE-XF16 muros_canon). Prueba: test_be_cr0_03_owner_existing.py.

@@ -12,3 +12,5 @@
 - PASO 4 (comparación) INICIO 19:37:37
 - PASO 4 FIN 19:40:38 (comparar.py: metal 4 coinciden/3 difieren/8 solo A/1 solo B, 589 alertas; comparar_extra board-only: 196 tags, 171 difieren)
 - PASO 5 (resolución) INICIO 19:40:38 — 5 resolvedores (L1, L2, L3, L4, CORES) + back-check ciego de cielos; criterios en 3_revision/CRITERIOS_RESOLUCION.md
+- tool fix BE-CR0-03 (chequeos_v71.ids_canon + existing_walls, R78.15 owner board-only): 19:41:39 dentro del Paso 5
+- 19:41:58 Xfinity publicó BE-CR0-01 en v81cf138p (vigente, e43b2f2); esta corrida sigue con v81cf138o + los mismos arreglos locales (equivalentes)
