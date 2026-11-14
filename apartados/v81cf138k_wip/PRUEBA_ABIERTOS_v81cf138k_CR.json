@@ -1,0 +1,37 @@
+{
+ "version_candidata": "v81cf138k",
+ "proyectos": {
+  "cr_city_hotel_castle_rock": {
+   "vigente": {
+    "PASS": 236,
+    "AMBER": 8,
+    "FAIL": 1
+   },
+   "candidata": {
+    "PASS": 236,
+    "AMBER": 8,
+    "FAIL": 2
+   },
+   "regresiones": 1,
+   "sin_explicar": 0,
+   "workdir": "/root/cr/work/entrega",
+   "fecha_iso": "2026-11-14T01:54:18.532109+00:00",
+   "sha_tools": "29e1d84050a3e5e85ca1d9234523c726df04b23e9bef36bbd2bcb7698e3e98dc"
+  }
+ },
+ "regresiones": [
+  {
+   "proyecto": "cr_city_hotel_castle_rock",
+   "chequeo": "CE_VERSION_ENTREGA",
+   "vigente": "PASS",
+   "candidata": "FAIL",
+   "evidencia": [
+    "rev20d FINAL PARA REVISAR/README_REVIEW.md: declara v81cf138j y ENTREGA_OK / la compuerta corrió con v81cf138k: '- The delivery gate (skill v81cf138j) reports one FAIL: CE_PROTOCOLO_3H on the steps of the ORIGINAL revision '"
+   ],
+   "explicacion": "not CR data and not a tool fault: the rev20d delivery declares the version it was gated with (v81cf138j, README_REVIEW / TIEMPOS, VERSION_PROYECTO); run with the candidate k the check correctly finds the declared version is not the one running. When k is published and a delivery is gated with it, its texts declare k. Same case as the CE_VERSION_ENTREGA regression explained for v81cf138e (e2674ed)."
+  }
+ ],
+ "fecha_iso": "2026-11-14T01:54:18.532109+00:00",
+ "version_vigente": "v81cf138j",
+ "ok": false
+}
