@@ -1,0 +1,133 @@
+diff -ruN -x __pycache__ v138t/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138u/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138t/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 04:50:03.218767721 +0000
++++ v138u/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 05:55:24.540365853 +0000
+@@ -9121,6 +9121,34 @@
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_be_cr0_04_ambiguo_type_id"
+    }
++  },
++  {
++   "id": "BE-CR0-05",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 150b3c2, U-202)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura)",
++   "chequeos": [
++    "take-off:tools/comparar_alturas.py::alturas_revisadas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_comparar_alturas.py",
++    "token": "test_be_cr0_05_06_alturas_lista_larga"
++   }
++  },
++  {
++   "id": "BE-CR0-06",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 150b3c2, U-202)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado)",
++   "chequeos": [
++    "take-off:tools/comparar_alturas.py::alturas_revisadas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_comparar_alturas.py",
++    "token": "test_be_cr0_05_06_alturas_lista_larga"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138t/take-off-metal-frame-drywall/SKILL.md v138u/take-off-metal-frame-drywall/SKILL.md
+--- v138t/take-off-metal-frame-drywall/SKILL.md	2026-11-14 04:50:03.227174242 +0000
++++ v138u/take-off-metal-frame-drywall/SKILL.md	2026-11-14 05:55:24.548767554 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138t** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138u** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,8 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
++- **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
++- **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-04 (programa desde v81cf138t, CR desde cero 14-nov):** comparar.ambiguos_sin_disposicion compara el type de un tag ambiguo también con el type_id de los walls board-only (existing_walls 'XW.6.3-0' -> 'XW.6.3'). Test test_be_cr0_04_ambiguo_type_id.
+ - **BE-CR0-03 (programa desde v81cf138s, CR desde cero 14-nov):** chequeos_v71.ids_canon (los ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing un tag descartado con owner = wall board-only no es 'owner no existe'. Test test_be_cr0_03_owner_existing.
+ - **BE-CR0-02 (programa desde v81cf138r, CR desde cero 14-nov):** con lectores en paralelo, antes de `etapas.py unir` se corre `etapas.py normalizar <fragmentos> <out>`: la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA con fuentes distintas se unen (fuentes concatenadas, cada lector citado); valores distintos = ERROR (nunca se elige en silencio); la escala global = la de las plantas generales (A2.x). No toca números de walls / ceilings. Test test_be_cr0_02_normalizar_fragmentos.
+diff -ruN -x __pycache__ v138t/take-off-metal-frame-drywall/tools/comparar_alturas.py v138u/take-off-metal-frame-drywall/tools/comparar_alturas.py
+--- v138t/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-13 22:37:35.189298899 +0000
++++ v138u/take-off-metal-frame-drywall/tools/comparar_alturas.py	2026-11-14 05:53:41.309714682 +0000
+@@ -955,10 +955,11 @@
+     grupos = {}
+     for r in final:
+         grupos.setdefault(round(ftin(r["Printed H"]), 3), []).append(r)
+-    paginas = {}
++    paginas, labs = {}, []                     # BE-CR0-06: un Page Label por página creada (incluidas las de continuación)
+     for i, (h, rs) in enumerate(sorted(grupos.items())):
+         pg = doc.new_page(width=792, height=612)
+-        paginas[h] = i + 1
++        paginas[h] = len(doc)
++        labs.append(f"HEIGHT {h:.3f}")
+         ft, inch = int(h), (h - int(h)) * 12
+         pg.insert_text((36, 40), f"HEIGHT {h:.3f} ft ({ft}'-{inch:.2f}\")  -  {len(rs)} element(s)", fontsize=15, color=_color(i))
+         y = 62
+@@ -973,6 +974,11 @@
+         img = rs[0].get("Image") or ""
+         p = img if os.path.isabs(img) else os.path.join(entrega, img)
+         if os.path.isfile(p):
++            if y + 6 > 540:                    # BE-CR0-05: la lista de walls llenó la página -> imagen en página de continuación (U-187)
++                pg = doc.new_page(width=792, height=612)
++                pg.insert_text((36, 40), f"HEIGHT {h:.3f} ft (continued) - image", fontsize=12, color=_color(i))
++                labs.append(f"HEIGHT {h:.3f} (continued)")
++                y = 52
+             pg.insert_image(pymupdf.Rect(36, y + 6, 756, 590), filename=p, keep_proportion=True)
+     niveles = [(0.0, "FLOOR (F.F. 0'-0\")", (0, 0, 0))]
+     niveles += [(ch, f"C.H. {r} {ch:.3f}", (0.4, 0.4, 0.4)) for r, ch in sorted(((k, v) for k, v in cuartos.items() if v is not None), key=lambda x: x[1])]
+@@ -991,7 +997,10 @@
+     seccion_sin_encimar(doc, niveles, "SECTION - every loaded height drawn as a horizontal line (U-176 control 5)")
+     paginas["section"] = len(doc)
+     ndc = paginas_doble_cielo(doc, os.path.join(entrega, "Auditoria", "DOBLE_CIELO.csv"), paginas)   # U-190 REGLA DE ORO #3
+-    labs = [f"HEIGHT {h:.3f}" for h in sorted(grupos)] + ["SECTION"] + [f"DOUBLE CEILING {k + 1}" if ndc > 1 else "DOUBLE CEILING" for k in range(ndc)]
++    n_sec = paginas["section"] - len(labs)                                 # páginas de sección (seccion_sin_encimar puede usar varias)
++    labs += ["SECTION" if n_sec == 1 else f"SECTION {k + 1}" for k in range(n_sec)]
++    labs += [f"DOUBLE CEILING {k + 1}" if ndc > 1 else "DOUBLE CEILING" for k in range(ndc)]
++    assert len(labs) == len(doc), f"BE-CR0-06: {len(labs)} Page Labels para {len(doc)} páginas"
+     doc.set_page_labels([{"startpage": k, "prefix": lab, "style": "", "firstpagenum": 1} for k, lab in enumerate(labs)])   # Page Labels (U-151): una por página
+     doc.save(salida)
+     return paginas
+diff -ruN -x __pycache__ v138t/take-off-metal-frame-drywall/tools/test_comparar_alturas.py v138u/take-off-metal-frame-drywall/tools/test_comparar_alturas.py
+--- v138t/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-13 22:37:35.189592670 +0000
++++ v138u/take-off-metal-frame-drywall/tools/test_comparar_alturas.py	2026-11-14 05:54:48.026593571 +0000
+@@ -332,3 +332,28 @@
+ if __name__ == "__main__":
+     test_be_cr47_bano_propio_espacio()
+     print("test_be_cr47 OK")
++
++
++def test_be_cr0_05_06_alturas_lista_larga():
++    """BE-CR0-05 / 06 (CR desde cero 14-nov, test del proyecto test_be_cr0_06_07_08.py): con cientos de walls a la misma altura la lista llenaba la
++    página y la imagen iba a Rect(36, y+6, 756, 590) con y > 590 = 'rect must be finite and not empty' (CE_ALTURAS_EXTREMO se caía); ahora la
++    imagen va en una página de continuación y cada página creada lleva su Page Label (únicos, labels == páginas)."""
++    import tempfile
++    import pymupdf
++    import pypdf
++    d = tempfile.mkdtemp(prefix="becr005_")
++    img = os.path.join(d, "x.png")
++    pymupdf.Pixmap(pymupdf.csRGB, pymupdf.IRect(0, 0, 20, 20), 0).save(img)
++    final = [{"Printed H": "9'-3 1/2\"", "Wall ID": f"W.9-L9-{k:03d} {'A' * 40}", "Source": "x" * 400, "Operation": "", "Status": "DERIVED",
++              "Image": img} for k in range(600)]
++    out = os.path.join(d, "a.pdf")
++    CA.alturas_revisadas(final, d, out, None, {})
++    r = pypdf.PdfReader(out)
++    labs = [r.page_labels[i] for i in range(len(r.pages))]
++    assert len(set(labs)) == len(labs) == len(r.pages), labs
++    assert any("continued" in x for x in labs), labs
++
++
++if __name__ == "__main__":
++    test_be_cr0_05_06_alturas_lista_larga()
++    print("test_be_cr0_05_06 OK")

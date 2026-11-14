@@ -1,0 +1,77 @@
+diff -ruN -x __pycache__ v138u/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138v/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138u/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 05:55:24.540365853 +0000
++++ v138v/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 05:55:24.556365854 +0000
+@@ -9149,6 +9149,20 @@
+     "archivo": "take-off:tools/test_comparar_alturas.py",
+     "token": "test_be_cr0_05_06_alturas_lista_larga"
+    }
++  },
++  {
++   "id": "BE-CR0-07",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 150b3c2, U-202)",
++   "categoria": "programa",
++   "cuando": "entrega",
++   "texto_corto": "markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío",
++   "chequeos": [
++    "take-off:tools/markups_bluebeam.py::contenido"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_07_detail_board_only"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138u/take-off-metal-frame-drywall/SKILL.md v138v/take-off-metal-frame-drywall/SKILL.md
+--- v138u/take-off-metal-frame-drywall/SKILL.md	2026-11-14 05:55:24.548767554 +0000
++++ v138v/take-off-metal-frame-drywall/SKILL.md	2026-11-14 05:55:32.311039473 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138u** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138v** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3594,6 +3594,7 @@
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
+ - **BE-CR0-05 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura). Test test_be_cr0_05_06_alturas_lista_larga.
+ - **BE-CR0-06 (programa desde v81cf138u, CR desde cero 14-nov):** comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado). Test test_be_cr0_05_06_alturas_lista_larga.
++- **BE-CR0-07 (programa desde v81cf138v, CR desde cero 14-nov):** markups_bluebeam.contenido de un board-only sin keynote: DETAIL = su N/HOJA (cita del wall); antes DETAIL vacío. Test test_be_cr0_07_detail_board_only.
+ - **BE-CR0-04 (programa desde v81cf138t, CR desde cero 14-nov):** comparar.ambiguos_sin_disposicion compara el type de un tag ambiguo también con el type_id de los walls board-only (existing_walls 'XW.6.3-0' -> 'XW.6.3'). Test test_be_cr0_04_ambiguo_type_id.
+ - **BE-CR0-03 (programa desde v81cf138s, CR desde cero 14-nov):** chequeos_v71.ids_canon (los ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing un tag descartado con owner = wall board-only no es 'owner no existe'. Test test_be_cr0_03_owner_existing.
+ - **BE-CR0-02 (programa desde v81cf138r, CR desde cero 14-nov):** con lectores en paralelo, antes de `etapas.py unir` se corre `etapas.py normalizar <fragmentos> <out>`: la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA con fuentes distintas se unen (fuentes concatenadas, cada lector citado); valores distintos = ERROR (nunca se elige en silencio); la escala global = la de las plantas generales (A2.x). No toca números de walls / ceilings. Test test_be_cr0_02_normalizar_fragmentos.
+diff -ruN -x __pycache__ v138u/take-off-metal-frame-drywall/tools/markups_bluebeam.py v138v/take-off-metal-frame-drywall/tools/markups_bluebeam.py
+--- v138u/take-off-metal-frame-drywall/tools/markups_bluebeam.py	2026-11-13 06:13:40.432636427 +0000
++++ v138v/take-off-metal-frame-drywall/tools/markups_bluebeam.py	2026-11-14 05:53:41.319298111 +0000
+@@ -197,7 +197,7 @@
+         nf, ly = int(w.get("faces") or 1), int(w.get("layers") or 1)
+         bs = L * h * nf * ly if sf_board_t is None else sf_board_t
+         return (f"{tipo(w)} · {lfs} LF · H {ftin(h)} · {L * h:,.2f} {SF_WALL} · {nf} face(s) · {bs:,.2f} {SF_BOARD} · "
+-                f"{w.get('keynote') or ''} · {w['id']}")
++                f"{w.get('keynote') or cita(w)} · {w['id']}")      # BE-CR0-07: board-only sin keynote -> su N/HOJA (detail / source)
+     bs = board_sf(w)                                  # BE-117 (user 3-nov): SF = the board SF of the Excel row
+     if bs is None and w.get("id") in BOARD_SF:        # R80f.9 (Chuze): wall sin faces en el canon -> board_out.json
+         bs = BOARD_SF[w["id"]]
+diff -ruN -x __pycache__ v138u/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138v/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138u/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 04:49:56.540037015 +0000
++++ v138v/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 05:54:48.029722690 +0000
+@@ -1426,3 +1426,16 @@
+ 
+ 
+ test_be_cr0_04_ambiguo_type_id()
++
++
++def test_be_cr0_07_detail_board_only():
++    """BE-CR0-07 (CR desde cero 14-nov): markups_bluebeam.contenido de un board-only sin keynote dejaba DETAIL vacío (cientos de 'DETAIL sin
++    N/HOJA' en un edificio de wood framing); ahora DETAIL = su N/HOJA (cita del wall)."""
++    import markups_bluebeam as MB
++    w = {"element": MB.EXIST_EL, "id": "W.9-L9-05 A", "type_id": "W.9-0", "length_ft": 6.46, "height_ft": 9.292, "faces": 1, "layers": 1,
++         "source": "1/A9.02 | path", "sheet": "A9.02"}
++    c = MB.contenido(w)
++    assert "1/A9.02" in c.split("·")[-2], c
++
++
++test_be_cr0_07_detail_board_only()
