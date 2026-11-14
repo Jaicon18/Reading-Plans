@@ -47,29 +47,45 @@ diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/SKILL.md v138o/take-
  - **BE-CR47 (programa desde v81cf138i, CR rev20d 13-nov):** el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath'; '201 … - Room' = '201'. Antes los dos colapsaban en '201' (ganaba la última fila de ALTURAS_CUARTOS.csv) y la cara de baño salía 'por debajo del cielo' de la habitación. Sin fila propia del baño, toma la de la unidad. Test test_be_cr47_bano_propio_espacio (caso real CR).
 diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138o/take-off-metal-frame-drywall/tools/compuerta_entrega.py
 --- v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:42:29.713325268 +0000
-+++ v138o/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:46:27.386655474 +0000
-@@ -866,6 +866,20 @@
++++ v138o/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:51:29.894122082 +0000
+@@ -866,6 +866,36 @@
      return ev, n
  
  
-+RX_TAKEOFF_ALTURA = re.compile(r"(?i)take-?\s?off\s+(?:height\s+)?(\d+(?:\.\d+)?)\s*(?:ft\b)?")
++RX_TAKEOFF_ALTURA = re.compile(r"(?i)take-?\s?off\s+(?:height\s+)?(?:(\d+)\s*['’′]\s*-?\s*(\d+)?(?:\s+(\d+)/(\d+))?\s*[\"”″]?|(\d+(?:\.\d+)?)(?![\d.]))(?!\s*(?:LF|SF|EA|pcs|%)\b)")
 +
 +
-+def u199_disp_vieja(canon, hid, h, tol=0.02):
-+    """BE-CR48 (CR rev20d 14-nov): una disposición U-199 (7) que afirma 'take-off <altura>' distinta de la altura VIGENTE del canon quedó
-+    vieja (el head del type bajó la cara, BE-CR46): ya no dispone el hallazgo. -> la altura vieja que cita, o None."""
++def _takeoff_alturas(txt):
++    """alturas que la disposición afirma como 'take-off <altura>' (ft-in o decimal; una cantidad en LF / SF no es altura) -> [ft]."""
++    out = []
++    for m in RX_TAKEOFF_ALTURA.finditer(str(txt or "")):
++        if m.group(5) is not None:
++            out.append(float(m.group(5)))
++        elif m.group(1) is not None:
++            f = int(m.group(1)) + int(m.group(2) or 0) / 12
++            if m.group(3) and m.group(4) and int(m.group(4)):
++                f += int(m.group(3)) / int(m.group(4)) / 12
++            out.append(f)
++    return out
++
++
++def u199_disp_vieja(canon, hid, h, tol=0.05):
++    """BE-CR48 (CR rev20d 14-nov): las disposiciones U-199 (7) del hallazgo que afirman 'take-off <altura>' y NINGUNA coincide con la altura
++    VIGENTE del canon (el head del type bajó la cara, BE-CR46) = vieja: ya no dispone el hallazgo. Una disposición nueva con la altura vigente
++    (junto a la vieja o con 'reemplaza') lo dispone. -> la altura vieja que cita, o None."""
++    vistas = []
 +    for d in _u199(canon).get("disposiciones") or []:
-+        if str(d.get("control")) == "7" and norm_txt(d.get("id")) == norm_txt(hid):
-+            vs = [float(x) for x in RX_TAKEOFF_ALTURA.findall(str(d.get("motivo") or ""))]
-+            if vs and all(abs(v - h) > tol for v in vs):
-+                return vs[-1]
++        if isinstance(d, dict) and str(d.get("control")) == "7" and norm_txt(d.get("id")) == norm_txt(hid):
++            vistas += _takeoff_alturas(d.get("motivo"))
++    if vistas and all(abs(v - h) > tol for v in vistas):
++        return vistas[-1]
 +    return None
 +
 +
  def secciones_fallas(canon, tol_ft=0.5):
      """U-199 (7) SECCIONES / ELEVACIONES: cada muro / soffit / cielo cortado (canon.u199.secciones [{sheet, detalle, elemento, altura_ft}])
      existe en el canon con la misma altura (tolerancia tol_ft)."""
-@@ -884,8 +898,13 @@
+@@ -884,8 +914,13 @@
              hs = [f.get("height_ft") for f in _caras(w) if f.get("height_ft") is not None]
              h = max(hs) if hs else None
          try:
@@ -87,8 +103,8 @@ diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/compuerta_entr
      return ev, n
 diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138o/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
 --- v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:42:57.607628119 +0000
-+++ v138o/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:47:09.428824172 +0000
-@@ -4047,3 +4047,36 @@
++++ v138o/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:51:06.395135515 +0000
+@@ -4047,3 +4047,42 @@
  
  
  test_be_cr49_fuente_ch_ftin()
@@ -113,6 +129,12 @@ diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/test_compuerta
 +    can["u199"]["disposiciones"][0]["motivo"] = "head FW: 8'-4 1/2\" + 6\" = 8'-10 1/2\" -> take-off 8.875 ft"
 +    assert CE.secciones_fallas(can)[0] == []
 +    can["u199"]["disposiciones"][0]["motivo"] = "different zone (4/A9.05)"
++    assert CE.secciones_fallas(can)[0] == []
++    for m in ("8'-4 1/2\" + 6\" -> take-off 8'-10 1/2\" correct", "take-off 8.9 ft correct", "take-off 42 LF unaffected"):   # verificación o
++        can["u199"]["disposiciones"][0]["motivo"] = m
++        assert not [x for x in CE.secciones_fallas(can)[0] if "BE-CR48" in x], m
++    can["u199"]["disposiciones"] = [{"control": 7, "id": "9/A9.00:W9", "motivo": "take-off 9.8958 correct", "nhoja": "4/A9.05"},
++                                    {"control": 7, "id": "9/A9.00:W9", "motivo": "replaced: take-off 8.875 ft per 1/A9.23", "nhoja": "1/A9.23"}]
 +    assert CE.secciones_fallas(can)[0] == []
 +    if not D:
 +        print("AVISO test_be_cr48_disposicion_vieja: caso real de CR no encontrado; caso real saltado")
