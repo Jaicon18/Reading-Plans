@@ -766,3 +766,16 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 
 ## BE-CR0-11 — trazabilidad._item no encontraba renglones de cielo (CR PRUEBA DESDE CERO, 13-nov)
 - Error: el renglón Type C (solo cielos) salía 'N/SHEET: default (no sheet)'. Arreglo: _item busca en ceilings por 'ceiling <room>' / id / room.
+
+## BE-CR0-12 — CB_BE_CR27_STACK: cada cara board-only multiplicada por el largo de la PRIMERA entrada del grupo (CR PRUEBA DESDE CERO, 14-nov)
+- Error: _walls_board_only agrupa las entradas de un muro (A..Z) y be_cr27_stack usaba w.length_ft (la primera) para todas las caras ->
+  L3 Type X 69,260 SF 'vs mediana' cuando el canon da 20,969. Arreglo: la cara lleva su length_ft y el chequeo lo usa.
+
+## BE-CR0-13 — marcar_detalles: burbujas a hojas S sin destino (set_texto A + S, bidset_limpio solo A) (CR PRUEBA DESDE CERO, 14-nov)
+- Error: poner el PDF unido A + S en bidset_limpio rompía CE_COPIA_LIMPIA / CE_MARKUP_EN_WALL (comparan página a página con el PDF
+  de markups). Arreglo: entrega.json 'bidset_detalles' (PDF unido) solo para circular detalles. Regla: nunca cambiar bidset_limpio
+  por el set unido.
+
+## CONDUCTA CR0-C2 — archivo que no es parche dentro de la carpeta de parches (CR PRUEBA DESDE CERO, 14-nov)
+- Error: dejé rcp_polys_F.json (lista) en parches/: la cadena se cortó. Regla: en la carpeta de parches solo {autor, ops};
+  aplicar_parches.py ahora lo rechaza con mensaje claro.
