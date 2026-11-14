@@ -9095,11 +9095,18 @@
   {
    "id": "BE-CR0-03",
    "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
-   "pendiente_desde": "2026-11-14T03:41:39+00:00",
    "texto_corto": "chequeos_v71.ids_canon (ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing (todo board-only) un tag descartado con owner = wall board-only no es 'owner no existe'",
-   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
+   "motivo": "v81cf138s: ids_canon incluye existing_walls (de la sesión CR DESDE CERO)",
+   "chequeos": [
+    "take-off:tools/chequeos_v71.py::ids_canon",
+    "take-off:tools/chequeos_v71.py::r78_15"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr0_03_owner_existing"
+   }
   }
  ]
 }
