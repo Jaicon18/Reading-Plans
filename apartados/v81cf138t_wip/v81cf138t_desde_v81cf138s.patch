@@ -1,0 +1,79 @@
+diff -ruN -x __pycache__ v138s/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138t/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138s/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 03:51:38.328329489 +0000
++++ v138t/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 04:50:03.218767721 +0000
+@@ -9107,6 +9107,20 @@
+     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+     "token": "test_be_cr0_03_owner_existing"
+    }
++  },
++  {
++   "id": "BE-CR0-04",
++   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO 04:48 UTC, U-202)",
++   "categoria": "programa",
++   "cuando": "lectura",
++   "texto_corto": "comparar.ambiguos_sin_disposicion compara el type de un tag ambiguo también con el type_id de los walls board-only (existing_walls: 'XW.6.3-0' -> 'XW.6.3'); antes 'citado en tag_ids de un wall de otro type' con el tag bien asignado",
++   "chequeos": [
++    "take-off:tools/comparar.py::ambiguos_sin_disposicion"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_04_ambiguo_type_id"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138s/take-off-metal-frame-drywall/SKILL.md v138t/take-off-metal-frame-drywall/SKILL.md
+--- v138s/take-off-metal-frame-drywall/SKILL.md	2026-11-14 03:51:38.336358752 +0000
++++ v138t/take-off-metal-frame-drywall/SKILL.md	2026-11-14 04:50:03.227174242 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138s** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138t** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
++- **BE-CR0-04 (programa desde v81cf138t, CR desde cero 14-nov):** comparar.ambiguos_sin_disposicion compara el type de un tag ambiguo también con el type_id de los walls board-only (existing_walls 'XW.6.3-0' -> 'XW.6.3'). Test test_be_cr0_04_ambiguo_type_id.
+ - **BE-CR0-03 (programa desde v81cf138s, CR desde cero 14-nov):** chequeos_v71.ids_canon (los ids a los que puede apuntar un owner, R78.15 / R71.5) incluye existing_walls (como muros_canon, BE-XF16): en un set de wood framing un tag descartado con owner = wall board-only no es 'owner no existe'. Test test_be_cr0_03_owner_existing.
+ - **BE-CR0-02 (programa desde v81cf138r, CR desde cero 14-nov):** con lectores en paralelo, antes de `etapas.py unir` se corre `etapas.py normalizar <fragmentos> <out>`: la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA con fuentes distintas se unen (fuentes concatenadas, cada lector citado); valores distintos = ERROR (nunca se elige en silencio); la escala global = la de las plantas generales (A2.x). No toca números de walls / ceilings. Test test_be_cr0_02_normalizar_fragmentos.
+ - **BE-COORD03 (programa desde v81cf138q, COORDINACIÓN 14-nov):** el hook U-136 (.claude/hooks/registrar_orden.py) publica cada mensaje del usuario en la bandeja central (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl de claude/gifted-pasteur-x2sfzs) desde CUALQUIER rama, con un clon propio en caché (fetch + append + commit + push; si falla queda pendiente y se reintenta); toda sesión que recibe mensajes del usuario tiene .claude/settings.json con el hook. verificar_version.revisar_bandeja_u136: la última orden registrada en ORDENES_DEL_USUARIO.md > 24 h más nueva que el último mensaje real de la bandeja = FALLA. Test bandeja_be_coord03.
+diff -ruN -x __pycache__ v138s/take-off-metal-frame-drywall/tools/comparar.py v138t/take-off-metal-frame-drywall/tools/comparar.py
+--- v138s/take-off-metal-frame-drywall/tools/comparar.py	2026-11-13 06:19:19.023044329 +0000
++++ v138t/take-off-metal-frame-drywall/tools/comparar.py	2026-11-14 04:49:56.539411435 +0000
+@@ -140,6 +140,8 @@
+             for x in w.get("tag_ids") or []:
+                 if x:
+                     citado[str(x)].add(str(w.get("tag") or w.get("type")))
++                    if w.get("type_id"):   # BE-CR0-04: board-only (existing_walls) traen la designación en type_id ('XW.6.4-1')
++                        citado[str(x)].add(str(w["type_id"]).split("-")[0].split(" ")[0])
+         for t in c.get("tags_descartados") or []:
+             if not isinstance(t, dict):
+                 continue
+diff -ruN -x __pycache__ v138s/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138t/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138s/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 03:51:31.682076124 +0000
++++ v138t/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 04:49:56.540037015 +0000
+@@ -1411,3 +1411,18 @@
+ 
+ 
+ test_be_cr0_03_owner_existing()
++
++
++def test_be_cr0_04_ambiguo_type_id():
++    """BE-CR0-04 (CR desde cero, test del proyecto test_be_cr0_04_ambiguo_type_id.py): comparar.ambiguos_sin_disposicion comparaba el type
++    del tag ambiguo solo con w.tag / w.type; los walls board-only traen la designación en type_id y un texto largo en type -> 'citado en
++    tag_ids de un wall de otro type' aunque el tag estaba bien asignado. Un type distinto sigue fallando."""
++    import comparar as CP
++    inv = {"ocurrencias": {"partition_ambiguo": [{"id": "PA9004", "type": "XW.6.3", "sheet": "A9.01", "page": 17}]}}
++    can = {"existing_walls": [{"id": "XW.6.3-L9-01", "type_id": "XW.6.3-0", "type": "XW.6.3 (exterior 2x6 wood stud) non-rated", "tag_ids": ["PA9004"]}]}
++    assert CP.ambiguos_sin_disposicion(inv, [can]) == [], CP.ambiguos_sin_disposicion(inv, [can])
++    can["existing_walls"][0].update(type_id="XW.6.4-0", type="XW.6.4 (exterior) non-rated")
++    assert CP.ambiguos_sin_disposicion(inv, [can]), "otro type sigue fallando"
++
++
++test_be_cr0_04_ambiguo_type_id()
