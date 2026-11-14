@@ -8851,10 +8851,18 @@
   {
    "id": "BE-XF18",
    "origen": "BIBLIOTECA_ERRORES.md (COORDINACIÓN 13-nov 08:12: la compuerta de CR leyó 'MAPA DE COBERTURA - IMAGE ONLY.pdf' como PDF de markups)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
    "texto_corto": "el PDF de markups se elige por NOMBRE (entrega.json 'markups' o '… - OPEN IN BLUEBEAM.pdf' de la rev en curso), nunca por orden alfabético ni un PDF 'IMAGE ONLY' / mapa de cobertura; mientras tanto la entrega lleva entrega.json 'markups' (v137 lo respeta)",
-   "motivo": "COORDINACIÓN 13-nov 12:33: el programa (CE_PDF_MARKUPS_ELEGIDO) sale de v81cf138 y entra en v81cf139 con los arreglos (1) de la verificación 8 (un OPEN IN BLUEBEAM de otra rev no se lee en silencio; rev en curso = la más alta de los Excel); CR ya usa entrega.json 'markups'"
+   "motivo": "v81cf138k (U-202): Ctx elige el PDF de markups con elegir_markups (entrega.json 'markups' o el OPEN IN BLUEBEAM de la rev más alta; nunca IMAGE ONLY / cobertura); CE_PDF_MARKUPS_ELEGIDO = FAIL con la causa si no hay o es ambiguo",
+   "chequeos": [
+    "take-off:tools/compuerta_entrega.py::ce_pdf_markups_elegido",
+    "take-off:tools/compuerta_entrega.py::elegir_markups"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_compuerta_entrega.py",
+    "token": "test_be_xf18_markups_por_nombre"
+   }
   },
   {
    "id": "BE-CR44",
