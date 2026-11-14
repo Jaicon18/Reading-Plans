@@ -114,7 +114,7 @@ tk["spec_por_material"] = [
     [r"shaftliner", "09 21 16.23 'Gypsum Liner Panels: ASTM C 442'"],
     [r"exterior gypsum sheathing", "06 16 00 'Glass-Mat Gypsum Wall Sheathing: ASTM C 1177'"],
     [r"cement board", "09 30 00 'Cementitious Backer Units: ANSI A118.9'"],
-    [r"W\.R\.|water resistant", "09 29 00 'Moisture- and Mold-Resistant Type' (Core 5/8 inch, Type X)"],
+    [r"W\.R\.|water resistant", "09 29 00 water-resistant Type X board, mold-resistant core 5/8 inch Type X"],
     [r"Type C", "no spec section for Type C (09 29 00 lists Type X and moisture-resistant only): board per A0.08 FS-1 '5/8\" TYPE C GYPSUM BOARD CEILING'"],
     [r"Type X", "09 29 00 'Gypsum Board, Type X: ASTM C 1396'"],
     [r"gypsum board", "09 29 00 gypsum board ASTM C 1396 (section 09 29 00 Gypsum Board)"],

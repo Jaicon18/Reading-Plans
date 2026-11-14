@@ -49,7 +49,7 @@ for b, es in ids_base.items():
         s = e["id"].partition(" ")[2]
         if not s or s in LET:
             continue
-        nuevo = next((f"{bb} {x}" for bb in (b, b + ".2", b + ".3") for x in LET if f"{bb} {x}" not in todos), None)
+        nuevo = next((f"{bb} {x}" for bb in (b, b + "b", b + "c") for x in LET if f"{bb} {x}" not in todos), None)
         e["id_original_info"] = e["id"]; e["id"] = nuevo; todos.add(nuevo); log["id sufijo normalizado"] += 1
 assert len(todos) == len(c["existing_walls"]) or len({e["id"] for e in c["existing_walls"]}) == len(c["existing_walls"]), "ids duplicados"
 # type_id sin el dígito de rating: FW.4 / FW.6 solo tienen fila '0' en A0.06; CH.6 de 1/A7.50 y 3/A7.50 lleva tag 'CH.6 2'

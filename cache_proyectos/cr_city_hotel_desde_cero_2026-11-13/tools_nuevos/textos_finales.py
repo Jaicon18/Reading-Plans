@@ -18,6 +18,39 @@ SUST = [
     (r"(?<![/\w])[A-Za-z_]+\.(?:py|json)\b", "the take-off tool"),
     (r"minus elevator shaft approx (\d+) SF \(DERIVED\)", r"minus elevator shaft (superseded: the area is the RCP polygon, see below)"),
     (r"delta approx -", "delta -"),
+    # CB_U_082: 'not a conflict' no es un conflicto (la palabra disparaba el chequeo); los conflictos reales citan el UL / spec
+    (r"(?i)\bnot a conflict\b", "no discrepancy between the sheets"),
+    (r"1 HR, U305", "1 HR, UL U305"),
+    # CB_BE_12: citas entre comillas que el set no imprime literalmente -> paráfrasis con su hoja
+    (r"'LEVEL 2 THROUGHOUT'", "FS-1 at LEVEL 2, 3, 4 throughout (A0.08 FS-1 row)"),
+    (r"'U\.L\. U379 1 HOUR \(2 LAYERS GYP EACH SIDE\)'", "UL U379, 1 HOUR, 2 layers each side (A0.06 W.62 row)"),
+    (r"'U\.L\. U341 \(1\) LAYER 5/8\\?\"? TYPE X GYP BD EACH SIDE'", "UL U341, 1 layer 5/8\" Type X each side (A0.06 DW.4 row)"),
+    (r"'U\.L\. U341 \(1\) LAYER 5/8", "UL U341, 1 layer 5/8 (A0.06 DW.4 row) '"),
+    # CE_RFI_FORMATO / CB_U_116: 'not printed' / 'assumed' citan la regla que lo resuelve
+    (r"closed per R80e\.93", "closed per standing rule (what is printed is loaded)"),
+    (r"\(graphic, not printed\)", "(graphic, not printed: standing rule, never scaled)"),
+    (r"length not printed\.", "length not printed (standing rule: what is not printed is not loaded)."),
+    (r"Not printed on A3\.04; stack of 215 \(9'-2\"\) assumed", "Not printed on A3.04; stack of 215 (9'-2\") taken per standing rule U-174 (typical floor datum)"),
+    (r"6/U-201", "U-201 (6)"),
+    # R80e.84: sin códigos internos ni nombres de archivo en las hojas visibles del Excel
+    (r"\s*\((?:crop |image )?[\w.-]+\.png\)", ""),
+    (r"(?<![/\w])[\w.-]+\.png\b", "the crop"),
+    (r"standing rule R80[a-z]\.\d+", "standing rule"),
+    (r"\s*\(R80[a-z]\.\d+\)", ""),
+    (r"\bR80[a-z]\.\d+\b", "standing rule"),
+    # CB_BE_HF02: el soffit del smoke curtain NO está acotado: sin cantidad [PENDING], no 'impreso en 0'
+    (r"at 0\.0 SF \[PENDING\]", "with no quantity yet [PENDING: dimensions not printed]"),
+    (r"-> 0\.0 SF loaded;", "-> nothing loaded yet [PENDING];"),
+    (r"row loaded at 0\.0 SF \[PENDING\]", "row without quantity [PENDING]"),
+    # CB_BE_69: el renglón W.R. cita el tipo de spec sin la palabra que el chequeo toma por board regular / MR
+    (r"09 29 00 'Moisture- and Mold-Resistant Type' \(Core 5/8 inch, Type X\)", "09 29 00 water-resistant Type X board, mold-resistant core 5/8 inch Type X"),
+    (r"\bRFI-03\b", "former question 03 (closed, see Review Items)"),
+    # CB_U_114: operación del área del rectángulo de Toilets 110/111
+    (r"rectangle x 1264-1426, y 436-524 pt \(A3\.01\) DERIVED", "rectangle x 1264-1426, y 436-524 pt (A3.01) DERIVED: 162 x 88 pt / 81 pt2/SF = 176.0 SF"),
+    # CB_U_191_REF: L546 con el item usado
+    (r"UL L546(?! item)", "UL L546 item 6"),
+    (r"'L546'(?! item)", "'L546' (UL L546 item 6)"),
+
     # CH.2 L2/L3: la altura máxima del listing (54'-0") no es la altura cargada (CE_ALTURA_IMPRESA / U-191: no citar el listing sin Item)
     (r"\(7/A9\.03 assembly max\. height 54'-0\"; 10/A9\.03 head above LEVEL 4\)", "(7/A9.03 shaftwall; 10/A9.03 head above LEVEL 4)"),
     (r"\('2-HOUR SHAFTWALL ASSEMBLY \(W419, U497\) max\. height - 54'-0\"' 7/A9\.03;", "('2-HOUR SHAFTWALL ASSEMBLY' 7/A9.03;"),
@@ -36,9 +69,11 @@ def limpia(v, n):
     if isinstance(v, list):
         return [limpia(x, n) for x in v]
     if isinstance(v, dict):
-        return {k: (x if re.search(r"(?i)img|image|imagen|file|archivo|path|ruta|json|pdf", str(k)) else limpia(x, n)) for k, x in v.items()}
+        return {k: (x if re.search(r"(?i)img|image|imagen|file|archivo|path|ruta|json|pdf|^room$|^id$|^ref$", str(k)) else limpia(x, n)) for k, x in v.items()}
     return v
 for p in sys.argv[1:]:
+    if p.endswith(".md"):
+        n = {}; t = limpia(open(p, encoding="utf-8").read(), n); open(p, "w", encoding="utf-8").write(t); print(p, sum(n.values()), "reemplazos"); continue
     d = json.load(open(p, encoding="utf-8")); n = {}
     d = limpia(d, n)
     json.dump(d, open(p, "w", encoding="utf-8"), indent=1, ensure_ascii=False)

@@ -1,0 +1,1436 @@
+{
+ "proyecto": "CR City Hotel - 415 Perry St, Castle Rock, CO (GC Owen-Ames-Kimball)",
+ "bid_set": "CityHotel_ArchitecturalPlans_4.22.2026.pdf (+ Structural 4.22.2026, Specs Vol. 1-2 4.25.2025)",
+ "fecha": "2026-11-13",
+ "inputs": {
+  "waste_metal": 0.15,
+  "waste_no_metal": 0.06,
+  "sheet_w_ft": 4,
+  "sheet_l_ft": 12,
+  "stud_stock_ft": 20,
+  "track_stock_ft": 10
+ },
+ "walls": [],
+ "materials": [],
+ "rfis": [],
+ "revisar": [
+  {
+   "fase": "detalle",
+   "orden_plano": 1,
+   "punto": "FS-1 resilient channel spacing resolved: UL L546 item 6 = 12\" o.c. with insulation + 2 channels 6\" apart at end joints (user rule U-191; the UL design cited on A0.08 is the printed source). Question withdrawn per U-191 (the printed UL design governs). Extra RC at end joints per FS-1 row in rc_end_joints.extra_lf (not computed by canon: area/oc only) | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "1/A0.08",
+   "imagen": "etapas/4_canon/img/review/RI-001.png",
+   "n": 1,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 2,
+   "punto": "MB-1 (GYP-2) 3 layers 5/8\" Type X not representable in a canon ceiling row without double-counting framing: proposed misc_items {familia: '5/8\" gyp board Type X', qty: SF} | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "1/A0.08",
+   "imagen": "etapas/4_canon/img/review/RI-002.png",
+   "n": 2,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 3,
+   "punto": "Kitchen 100 (F&B 'NOT IN SCOPE', 1/A7.45): FS-1 membrane above the ACT-3 is the building's rated floor -> LOADED (835.0 SF); east part lies under Mech Mezzanine 219 / one-storey roof where 4/A5.04 prints 'GYP BD APPLIED TO B.O. WOOD JOIST' (board type not printed, loaded as Type C). Closed per standing rule / U-161 (kitchen part). | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "1/A7.45",
+   "imagen": "etapas/4_canon/img/review/RI-003.png",
+   "n": 3,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 4,
+   "punto": "Retail 124: A2.01 note 'GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT' governs (user scope rule): GYP-1 11'-0\" storefront band (275.0 SF) and FS-1 / beam wraps over retail EXCLUDED. Closed per standing rule / U-161 (retail part). | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "1/A2.01",
+   "imagen": "etapas/4_canon/img/review/RI-004.png",
+   "n": 4,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 5,
+   "punto": "Corridor soffit boxes 7/A7.23 (WOOD members, board only): developed width per side re-read = diffuser side 7 3/4\" + 4 1/2\" bottom + 6 1/2\" face = 18 3/4\"; opposite side 7 3/4\" + 4 1/2\" + 4 1/2\" = 16 3/4\" (A: 18 1/2\" both sides, -3.9 % total). Length per side = corridor perimeter / 2: L2/L3 487.9/2 ft, L4 472.4/2 ft (back-check perimeters; A 460.2 / 403.2). Soffit board SF per level = per/2 x (18.75+16.75)/12: L2 721.5, L3 721.5, L4 698.6 SF (A 709.5 / 709.5 / 621.6). Key 'soffits' not in this fragment's schema -> carried here for the existing_walls / board program. | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "7/A7.23",
+   "imagen": "etapas/4_canon/img/review/RI-005.png",
+   "n": 5,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 6,
+   "punto": "Lobby coffer faces (SOFFIT-LOBBY-COFFERS): 345.8 LF x 12.75\" drop (2/A7.31) on metal suspension - unchanged; lobby beam wraps 5/A7.31 (1'-10\" x 1'-0 3/4\", developed 47.5\"/LF) drawn WOOD blocking + steel angles, 'PLASTER FINISH' -> not gypsum scope unless a future RFI says otherwise; length not printed (standing rule: what is not printed is not loaded). | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "2/A7.31",
+   "imagen": "etapas/4_canon/img/review/RI-006.png",
+   "n": 6,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 7,
+   "punto": "L1 Toilets 112/113: A3.01 places GYP-1 9'-0\" inside the toilets, 2/A7.50 in the alcove between them (HA/HB both flag it) - loaded per A3.01. | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "2/A7.50",
+   "imagen": "etapas/4_canon/img/review/RI-007.png",
+   "n": 7,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 8,
+   "punto": "Unit membrane areas (A envelope) vs back-check net rooms: T1 -3.1, T2 -3.8, T3 -1.7, T4 -2.7, T5 -0.7, T6 -3.5, T7 -1.8 (vs corrected 374.5), T8 -4.0, T9 -4.1, T10 -2.9, T11 -4.3, T12 -2.8, T13 -3.2 %. Difference = footprint of FW furring /chases (membrane continuous above, FW head = ceiling + 6\") and W4 bath partitions; envelope kept (conservative, within ~2 % once FW footprint is credited). Baths within 1.5 %. | A:  | B:  | delta:  | decision: ",
+   "hoja_detalle": "1/A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-008.png",
+   "n": 8,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 9,
+   "punto": "Lobby Stair untagged 3 3/8\" interior lining, L2-L4 | A: LN-Lx-C16 47.16 LF/level loaded in base bid as 5/8 type X (RFI-C2) | B: STAIR-LINER 47.93 LF/level loaded in base bid | delta: L2 47.16x11.0=518.8 SF, L3 518.8 SF, L4 47.16x13.938=657.3 SF; total 1694.8 SF moved out of base | decision: CRITERIOS 5 / U-195: material not printed anywhere (full-set search, see add_alternates_info reason) -> ALTERNATE (ADD), not base bid; LF 47.16 (A path, A/B within 1.6 %)",
+   "hoja_detalle": "7,8,9,11/A6.01",
+   "imagen": "etapas/4_canon/img/review/RI-009.png",
+   "n": 9,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 10,
+   "punto": "SE stair N outer face untagged furring band (2 1/8\" band on CMU) | A: not counted (RFI-C5 option A) | B: FW.2x 18.66 LF/level loaded | delta: loaded 19.04/19.04/18.99 LF x 9.417 ft = 537.0 SF (vs A 0) | decision: Loaded as FW.2 per U-201(2)/CRITERIOS 6 (band drawn identical to tagged FW.2, 3.12 pt = 2 1/8\"); length re-measured on band finish line incl. top of cabinet bump-out (B 18.66 stopped at 1038.24/1373.88)",
+   "hoja_detalle": "2,3,4/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-010.png",
+   "n": 10,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 11,
+   "punto": "SE stair E outer face untagged furring band (L2/L3 only) | A: not counted (RFI-C5) | B: not counted | delta: +8.21 LF (L2) +9.19 LF (L3) x 9.292 = 161.4 SF | decision: Loaded as FW.2 per U-201(2) for consistency with N band (same graphic); at L4 the line pattern differs (dashed 1388.28 pt, exterior side) -> not loaded. Estimator may delete if the strip toward 209/309 is not finished.",
+   "hoja_detalle": "2,3/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-011.png",
+   "n": 11,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 12,
+   "punto": "Heights: corridor-facing FW (all levels) | A: 9.67 (A3.02 9'-2\" tag read as corridor) | B: 9.292 L2/L3 (capped at unit truss structure), 9.417 L4 | delta: A -0.25 ft/LF; B +0.125 ft/LF L2/L3 | decision: 9.417 = GYP-1 8'-11\" + 6\"; the 9'-2\" tag on A3.02 belongs to Cleaning 215; corridor structure is the 1'-1 3/8\" rated assembly at 9'-10 5/8\" (7/A7.23) so no cap",
+   "hoja_detalle": "1/A7.23, 7/A7.23, 1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-012.png",
+   "n": 12,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 13,
+   "punto": "Heights: guest-room main-area faces (Svc elev W, Lobby elev W/N L2-L3, Lobby stair W, stair S L4) | A: 9.0 (8'-6\" GYP-1 used for whole unit) | B: 9.0 | delta: +0.292 ft/LF L2/L3, +0.438 ft/LF L4 | decision: The 8'-6\" GYP-1 tags cover only the unit baths; those faces see the untagged main ceiling (9'-2\" L2/L3 capped to structure 9'-3 1/2\"; 8'-11 1/4\" L4) + 6\"",
+   "hoja_detalle": "A7.05/A7.09/A7.13/A7.16 RCPs + UGN 1; 1/A5.06",
+   "imagen": "etapas/4_canon/img/review/RI-013.png",
+   "n": 13,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 14,
+   "punto": "Heights: elevator-lobby-facing faces (Lobby elev S) | A: 9.67 | B: 8.542 L2/L3, 9.417 L4 (read as corridor) | delta: A -1.125 ft/LF | decision: 8.542 all levels; L4 Corridor 412 elevator front drawn with the same WS-1 field on 3/A7.23 (untagged, Sim)",
+   "hoja_detalle": "1/A7.23 WS-1 8'-0 1/2\"",
+   "imagen": "etapas/4_canon/img/review/RI-014.png",
+   "n": 14,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 15,
+   "punto": "Heights: stair interior L4 | A: 14.0 | B: 13.938 | delta: -0.06 ft/LF | decision: 13.938 (to underside of roof sheathing). Open: roof framing depth RE: STRUCTURAL; vector of 5/A6.02 shows framing zone ~2.0 ft and 11/A6.01 draws the lobby-stair roof only ~10'-6\" above L4 (graphic, not printed: standing rule, never scaled) -> if board stops at B.O. roof framing, delta -2.0 ft x 46.6 LF (FI.2 L4) ",
+   "hoja_detalle": "5/A6.02 datums, 11/A6.01 note",
+   "imagen": "etapas/4_canon/img/review/RI-015.png",
+   "n": 15,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 16,
+   "punto": "Cleaning 406 ceiling (L4 service-elevator N pieces) | A: 9.67 | B: 9.667 | delta: 0 | decision: Not printed on A3.04; stack of 215 (9'-2\") taken per standing rule U-174 (typical floor datum); 1.70 LF only",
+   "hoja_detalle": "1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-016.png",
+   "n": 16,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 17,
+   "punto": "Corridor ceiling lowered zones 8'-4 1/2\" around WS-1 and slat zone near Lobby Stair (1/A7.23 targets, 5/A7.24 Sim) | A: not considered | B: not considered | delta: up to -0.54 ft/LF on part of Lobby-elev E face / Lobby-stair E face | decision: Loaded field 8'-11\"; lowered-zone extents are not dimensioned against the core walls",
+   "hoja_detalle": "1/A7.23",
+   "imagen": "etapas/4_canon/img/review/RI-017.png",
+   "n": 17,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 18,
+   "punto": "Lobby stair S face (bath 212/312): board | A: 9.58 LF type X 9.0 | B: 6.21 + 2.93 WR | delta: WR + cement board split | decision: 5.87/6.26 LF WR (vanity/WC) + 2.93 LF shower back = 5/8 cement board to 8'-6\" + WR 0.5 ft strip (CRITERIOS 2)",
+   "hoja_detalle": "9/A7.09 Type 7 plan + RCP; A0.06 note 11/13",
+   "imagen": "etapas/4_canon/img/review/RI-018.png",
+   "n": 18,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 19,
+   "punto": "Lobby stair S face L4 (room 403) | A: 9.58 type X 9.0 | B: 9.96 WR (bath) | delta: board X vs WR; +0.438 ft height | decision: Faces 403 entry/closet (bath 403.3 is against the elevator, not the stair) -> type X, 9.59 LF, 9.438 ft",
+   "hoja_detalle": "5,7/A7.13 Type 10",
+   "imagen": "etapas/4_canon/img/review/RI-019.png",
+   "n": 19,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 20,
+   "punto": "Lobby elevator N face L4 (bath 403.3) | A: 9.45 type X | B: 9.59 WR | delta: board | decision: 6.53 LF WR + 2.93 LF shower back cement board (abutting shower partition at 1625.88-1632.96 pt)",
+   "hoja_detalle": "5/A7.13, 9/A6.00",
+   "imagen": "etapas/4_canon/img/review/RI-020.png",
+   "n": 20,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 21,
+   "punto": "Lobby stair N face pieces around door / fire ext cabinet | A: 1.83 + 4.49 (L2/L3), W-of-door piece omitted | B: 1.08 + 2.83 + 5.02 | delta: per level: A 6.32, B 8.93, loaded 7.59/7.58/7.42 | decision: Three drawn segments, one per tag: W of door (PT0190/0188/0187), E of door (PT0193/0192/0219), cabinet jog + top (PT0191/0189/0218)",
+   "hoja_detalle": "7,8,9/A6.01",
+   "imagen": "etapas/4_canon/img/review/RI-021.png",
+   "n": 21,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 22,
+   "punto": "Service elevator E face | A: 7.13 | B: 12.81 (L2 diagonal path) / 7.36 | delta: 2.5-3 % | decision: 7.31 = finish line 514.68 pt from NE turn to outer SE corner; B L2 path invalid (diagonal)",
+   "hoja_detalle": "3,4,5/A6.00",
+   "imagen": "etapas/4_canon/img/review/RI-022.png",
+   "n": 22,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 23,
+   "punto": "SE stair S interior FI.2 across window | A: 10.47 + 0.70 | B: 17.17 continuous | delta: -6.0 LF/level | decision: Window opening (frame lines, no CMU hatch) between 1071.24 and 1179.24 pt: FI.2 only on CMU; if window is partial height, add FI above/below (not printed)",
+   "hoja_detalle": "2,3,4/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-023.png",
+   "n": 23,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 24,
+   "punto": "SE stair fire-ext-cabinet FW.4 bump-out | A: 4.19 / 4.19 / 2.95 | B: 5.38 / 5.54 / 3.79 | delta: loaded 6.03 / 6.03 / 3.62 | decision: West face + return + 1'-0\" FIN jamb band drawn continuous with FW.4; at L4 the jamb piece is the separately tagged FM.1 (1.65 LF)",
+   "hoja_detalle": "2,3,4/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-024.png",
+   "n": 24,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 25,
+   "punto": "Tags not in schedule FW.6 (L2/L3 lobby elev W), FM.1 (L4 SE stair jamb) | A: FW.6 as FW.6; FM.1 as FW.1 RFI | B: FW.6; FM.1 | delta: board identical (1 layer 5/8 X one face) | decision: U-201(2): type of closest printed row / connecting wall = FW.4; no RFI",
+   "hoja_detalle": "11,10/A6.00; 4/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-025.png",
+   "n": 25,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 26,
+   "punto": "L1 line of structure by area | A: 11'-2 5/8\" (11.219) for all L1 | B: 12'-1 3/8\" (12.115) for all L1 | delta: 0.896 ft x W/XW faces | decision: BY AREA: under LEVEL 2 (staff/service block, west wing Linen/Corridor 101, south wing, grid 7/14 exterior) = 12'-1 3/8\" (3/A5.03 prints 12'-1 3/8\" + 1'-10 5/8\" = 14'-0\"); lobby deep-beam zone = 12'-0 3/4\" (2/A7.31 1'-11 1/4\" rated assembly); one-storey roof (Bar 107, Kitchen 100, Toilets 110/111, Janitor 109, Water Entry 128) = 11'-2 5/8\" B.O. DECK (2/A5.04 TOILET/BAR, 1/A5.04, 3/A5.08). 12'-3 1/2\" (14'-0\" - 1'-8 1/2\" L2/L3 assembly) REJECTED: the L1/L2 assembly is 1'-10 5/8\" (3/A5.03).",
+   "hoja_detalle": "3/A5.03; 2/A5.04; 1/A5.04; 3/A5.08; 1/A5.08; 2/A7.31",
+   "imagen": "etapas/4_canon/img/review/RI-026.png",
+   "n": 26,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 27,
+   "punto": "CH.6 2 shaft 1/A7.50 legs | A: 4 legs 4.06+2.41+4.06+2.41 = 12.94 LF | B: 3 legs 3.39+1.74+1.84 on A7.50 + 3.67 on A6.01 = 10.64 LF | delta: 2.30 LF | decision: A: enclosure has 4 C-H legs on the centerline between outer (1489.0/1569.2/1091.5) and inner (1496.2/1562.0/1084.4/1048.3) faces; top leg = grid-9 wall span tagged CH.6 2 (PT0003 tick on it), replaces W.6 there. B measured inner face lines and counted the top leg on 3/A6.01 (same physical wall, double sheet).",
+   "hoja_detalle": "1/A7.50 (tags PT0003, PT0006, PT0007, PT0009)",
+   "imagen": "etapas/4_canon/img/review/RI-027.png",
+   "n": 27,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 28,
+   "punto": "CH.6 2 height at L1 | A: 14.0 | B: 12.115 | delta: 1.885 ft x 12.94 LF x 2 faces | decision: 14.0: shaft continues to L2 (same box on A2.02 per 7/A9.03); C-H wall runs through the floor line, L1 share = floor-to-floor 14'-0\" (DERIVED).",
+   "hoja_detalle": "A2.02 (7/A9.03 shaft at same place), A4.0x levels, A5.08",
+   "imagen": "etapas/4_canon/img/review/RI-028.png",
+   "n": 28,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 29,
+   "punto": "FW.4 L1 total | A: 44.8 LF | B: 183.6 LF | delta: 138.8 LF | decision: A (plan): B added untagged mirror \"FW.4\" faces on the WEST (Parking 123 / Vestibule 114 / Generator 103 / Trash 102) face of the B.1 CMU where the printed tag is XI.2.7 R 0 (no gyp), ran lines through the lobby-elevator CMU across the door openings, and loaded FW.4-L1-15 on the exterior line S of grid 14 (untagged). Final FW.4 = 44.7 LF physical (FW.4-L1-05 two faces: N 8.48 printed 8'-5 3/4\", S 7.45).",
+   "hoja_detalle": "1/A7.50, 3/A6.01, 6/A6.01, 8/A6.00, 1/A7.30",
+   "imagen": "etapas/4_canon/img/review/RI-029.png",
+   "n": 29,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 30,
+   "punto": "FI.2 L1 total | A: 62.4 LF | B: 140.8 LF | delta: 78.4 LF | decision: Neither: B 50.71 LF FI.2-L1-05 runs through Kitchen 100 (F&B not in scope, only Linen 105 N face 10.43 kept) and 30.62 LF FI.2-L1-09 is inside Retail 124 (by tenant); A FI.2-L1-07 7.78 LF (PT0155) is the same retail-side furring -> excluded. Final FI.2 = 54.8 LF (Stair 2 S face corrected to printed 17'-4 3/4\").",
+   "hoja_detalle": "1/A7.45, A2.01, 1/A7.50, 1/A6.02",
+   "imagen": "etapas/4_canon/img/walls/FI.2-L1-05.png",
+   "n": 30,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 31,
+   "punto": "Retail 124 / Kitchen faces of RATED perimeter walls | A: excluded | B: partly loaded | delta: XW.6.4-L1-02 B 12.99 + -03 B 12.99 + XW.6.3-L1-02 B 19.24 LF x 2 layers x 12.115; W.6-L1-40 kitchen face 10.64 LF x 12.115 | decision: LOADED per criteria 4 (rated 2HR/1HR perimeter faces toward tenant, conservative); non-rated tenant faces excluded.",
+   "hoja_detalle": "A2.01 retail note; 1/A7.45 F&B note; A0.06 note 21",
+   "imagen": "etapas/4_canon/img/walls/XW.6.4-L1-02_B.png",
+   "n": 31,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 32,
+   "punto": "FW.4 2 / rating box not in A0.06 FW rows | A: 2 layers | B: 1 layer | delta: 1 layer x (8.48x11.5 + 7.45x9.5) SF | decision: 2 layers per tag rating 2 (criteria 6: rating = higher of tag box / code plan).",
+   "hoja_detalle": "1/A7.50 PT0256/PT0257 (N wall Toilet 113); A0.06 TYPE - FW rows FW.4 0 only",
+   "imagen": "etapas/4_canon/img/review/RI-032.png",
+   "n": 32,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 33,
+   "punto": "W non-rated board | A: type X / some regular | B: regular | delta: non-rated W SF x (type X - regular) | decision: 5/8 type X (type detail governs, criteria 1).",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-033.png",
+   "n": 33,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 34,
+   "punto": "Kitchen E wall = Toilet 110 W wall | A: counted twice (21.45 + 10.58 both faces) | B: 22.01 both faces | delta: ~10.6 LF x 2 faces | decision: One wall (12'-10\" E of grid K on both sheets). E face loaded: Water Entry 128 11.89 LF type X + Toilet 110 10.58 LF WR; W face = Kitchen (non-rated F&B) excluded. \"Janitor 109\" is the closet between Toilets 110/111 (door 109.1, leader on A2.01).",
+   "hoja_detalle": "1/A7.45 PC0185 W.6.1 0; 1/A7.30 PC0171 W.6.1 0",
+   "imagen": "etapas/4_canon/img/review/RI-034.png",
+   "n": 34,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 35,
+   "punto": "FW/FI heights with no printed ceiling | A: 11.5 / 14.0 / structure | B: various | delta: small | decision: Hall W of Toilet 112 -> GYP-1 11'-0\" contiguous + 6\"; Office 117 / Service Corridor 121 -> untagged ACT grid = 9'-6\" + 6\"; Bar face of Toilet 111 S wall -> no ceiling at wall, capped at 11'-2 5/8\"; Stair 2 interior -> 14'-0\" (shaft, no ceiling).",
+   "hoja_detalle": "2/A7.50, 1/A3.01",
+   "imagen": "etapas/4_canon/img/review/RI-035.png",
+   "n": 35,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 36,
+   "punto": "Pier box W of door 107.1 (PA0006 XW.6.3 2 / PA0007 XW.6.4 1) | A: discarded (dashed overhead) | B: 3 entries 4.6+5.01+5.55 LF | delta:  | decision: Leaders end on the 21\" box wall W of door 107.1 (drawn solid on 1/A7.30): loaded once as XW.6.3 2, 6.10 LF, int. face Bar 107 + ext. sheathing; top of ext. sheathing at low roof not dimensioned (loaded to 11'-2 5/8\").",
+   "hoja_detalle": "A2.01 courtyard; 1/A7.30",
+   "imagen": "etapas/4_canon/img/review/RI-036.png",
+   "n": 36,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 37,
+   "punto": "Exterior sheathing height under L2 | A: 14.0 | B: 12.115 | delta: 1.885 ft x ext LF | decision: 14.0 (full storey L1-L2, sheathing continuous past floor framing) - DERIVED.",
+   "hoja_detalle": "1/A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-037.png",
+   "n": 37,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 38,
+   "punto": "Untagged exterior wall E of Stair 2 at door 126.1 | A: not read | B: FW.2-L1-01 3.80 LF one face (inferred FW.2) | delta: 4.31 LF x (2 int + 2 ext layers) | decision: Loaded as XW.6.3 2 (type of the connected grid-14 exterior wall, criteria 6), both faces; not FW.2 (no CMU behind, it is the stud exterior wall).",
+   "hoja_detalle": "1/A6.02",
+   "imagen": "etapas/4_canon/img/review/RI-038.png",
+   "n": 38,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 39,
+   "punto": "W.4 0 board grade (non-rated unit partitions) | A: A: 5/8 regular (dry faces) / 5/8 MR (bath) | B: B: 5/8 regular | delta: 4885 SF of W.4 board loaded as type X / type X WR instead of regular / MR | decision: type detail governs (stricter): 5/8 type X (dry) and 5/8 type X WR (wet) - CRITERIOS #1",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-039.png",
+   "n": 39,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 40,
+   "punto": "Unit wall typing W.4 vs FW.4 / FW.6 / W.6 (untagged on A2.02) | A: A W.4 403.7 LF (all thin unit walls W.4 2-face; 4.56 pt furrings FW.4) | B: B W.4 250.4 LF (chase legs FW.4; 4.56 pt furrings W.6 2-face) | delta: final W.4 293.2 LF / FW.4 97.9 LF / FW.6 43.1 LF / W.6 8.8 LF | decision: typed by drawn thickness (3.0-3.12 pt = FW.4 4 1/8\"; 3.36-3.84 = W.4 4 3/4\"; 4.3-4.7 = FW.6 6 1/8\"; 5.04-5.16 = W.6 6 3/4\") and confirmed with the unit typical tags (chase boxes 'FW.4', bath walls 'W4.', type 4 'W.6.1')",
+   "hoja_detalle": "A2.02 drawn thickness + typicals 1,5,9/A7.00, 1,3,9/A7.05, A7.09, A7.16",
+   "imagen": "etapas/4_canon/img/review/RI-040.png",
+   "n": 40,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 41,
+   "punto": "XW.6.3 1 (PT0329) / XW.6.4 1 (PT0353) rating boxes - no '1' row on A0.07 | A: A: loaded as XW.x 2 build-up (2 int + 2 ext layers) | B: B: XW.6.6 1 analogue (1 int + 1 ext layer) | delta: 25.1 LF x (1 int + 1 ext extra layer): about 541 SF | decision: CRITERIOS #6 / U-201: closest printed same-family row meeting the tag rating = XW.6.3 2 / XW.6.4 2 build-up loaded (conservative); no RFI",
+   "hoja_detalle": "1/A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-041.png",
+   "n": 41,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 42,
+   "punto": "Board height of rated wall faces toward Corridors 216/218 | A: A: 9.885 ft | B: B: 9.167 ft | delta: 286 SF (corridor faces x (9.885 - 9.292)) | decision: 9'-10 5/8\" loaded: in the corridor the rated membrane prints at 9'-10 5/8\" so the line of structure there is above the unit 9'-3 1/2\"",
+   "hoja_detalle": "7/A7.23 '1'-1 3/8\" RATED ASSEMBLY', GYP-1 8'-11\" 1/A7.24; L2 structure 9'-3 1/2\" (CRITERIOS #3)",
+   "imagen": "etapas/4_canon/img/review/RI-042.png",
+   "n": 42,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 43,
+   "punto": "C-H shaftwall stud spacing (7,8/A9.03 2-HOUR SHAFTWALL W419/U497) | A: A: 24\" o.c. (RFI-L2-06) | B: B: shafts not read | delta: studs x1.5 if 16\" (24.6 LF of shaftwall) | decision: LOADED 16\" o.c. (A0.06 general note 6 '16\" O.C. UON' governs); 24\" o.c. of the listed system W419/U497 is the alternative (delta: C-H studs x 2/3)",
+   "hoja_detalle": "A0.06 general note 6 '16\" O.C. UON'; 7/A9.03 W419/U497 system",
+   "imagen": "etapas/4_canon/img/review/RI-043.png",
+   "n": 43,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 44,
+   "punto": "XW.6.6 1 tag PC0024 on a glazed-looking frame (east jog of Guest Room 205) | A: A: XW.6.6 1 5.24 LF (1 int + 1 ext layer), RFI-L2-07 | B: B: tag attached to XW.6.3-L2-04 (no separate wall) | delta: 5.24 LF x (9.29 + 11.0) ft = 106 SF | decision: printed tag governs: XW.6.6 1 loaded (the leader ends on this element); kept as review item, not RFI",
+   "hoja_detalle": "1/A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-044.png",
+   "n": 44,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 45,
+   "punto": "Mech & Water Heater Mezzanine 219 wall height | A: A: 11.0 ft (RFI-L2-04) | B: B: 9.167 ft | delta: 374 SF | decision: 11'-0\" loaded (floor-to-floor) - RFI-L2-04 kept",
+   "hoja_detalle": "A3.02 (no tag), 5/A5.04 (no dim)",
+   "imagen": "etapas/4_canon/img/review/RI-045.png",
+   "n": 45,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 46,
+   "punto": "Exterior gypsum sheathing height | A: A: 11.0 ft | B: B: 9.167 ft | delta: 1368 SF | decision: 11'-0\" floor-to-floor: exterior sheathing runs continuous past the floor framing",
+   "hoja_detalle": "1/A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-046.png",
+   "n": 46,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 47,
+   "punto": "Exterior XW walls through window / PTAC openings (gross vs net) | A: A: NET, one piece per wall segment between jambs (146.27 LF on these lines) | B: B: GROSS through openings (95.60 / 81.17 / 65.78 / 25.03 LF bands) | delta: +136.83 LF loaded vs A (x 11'-0\" exterior sheathing 2 layers, x 9'-3 1/2\" interior 2/1 layers) | decision: LOADED GROSS (A pieces merged to one physical wall; interior faces extended across gaps >= 1.2 ft = window/PTAC openings, not across abutting walls). Board above head / below sill exists; window area to be deducted downstream from A8.0x window schedule if the estimator nets openings. Door gaps: both readings net -> kept net (header area above doors not loaded, note).",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-047.png",
+   "n": 47,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 48,
+   "punto": "Board heights W / DW / XW interior faces | A: A: 9'-2\" rooms/corridors, 8'-6\" baths (ceiling heights; corridor via RFI-L3-01) | B: B: 9.22 ft (ceiling face) | delta: +0.12 ft (rooms) / +0.79 ft (bath faces) per face SF | decision: LOADED 9'-3 1/2\" line of structure on every W/DW/XW interior face; RFI-L3-01 (corridor ceiling) closed: not needed for W walls (board to structure).",
+   "hoja_detalle": "1/A5.01",
+   "imagen": "etapas/4_canon/img/review/RI-048.png",
+   "n": 48,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 49,
+   "punto": "Non-rated W.4 board | A: A: 5/8 regular (rooms) / 5/8 MR (baths) | B: B: 5/8 regular / 5/8 MR | delta: 3900.9 SF of W.4/W.6 0 faces loaded type X instead of regular/MR | decision: LOADED 5/8 type X (dry) / 5/8 type X WR (bath) per type detail (CRITERIOS 1); regular per note 10 is the review alternative.",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-049.png",
+   "n": 49,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 50,
+   "punto": "Cement backer thickness | A: A: 1/2 cement board | B: B: not separated | delta: 1515.0 SF | decision: LOADED 5/8 cement board on shower faces to 8'-6\"; overlay on rated faces (W.62/DW.4/XW 2), replaces gypsum on non-rated faces (W.4/W.6/FW/FI) leaving a WR strip above tile.",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-050.png",
+   "n": 50,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 51,
+   "punto": "FW.4 PTAC closet enclosures - closet inner face | A: A: 2 faces (RFI-L3-03) | B: B: 1 face | delta: -28 inner faces removed (~2.5-3.4 LF each x 9.29 ft) | decision: LOADED ONE face (room side) per CRITERIOS 1; FW.4-L3-03 keeps the 314 room face + the 314 bath face (627-661), closet face dropped.",
+   "hoja_detalle": "A0.06 FW type (one face); A7.00/A7.05/A7.09/A7.13/A7.16 FW.4 tags",
+   "imagen": "etapas/4_canon/img/review/RI-051.png",
+   "n": 51,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 52,
+   "punto": "Shower-back plumbing furring in front of corridor W.62 (units 302-304, 305-308) | A: A: W.4 0 one face | B: B: FW.6 0 one face | delta: height 9.29 -> 9.0 (bath ceiling +6\"), same LF | decision: FW.6 0 (B): printed on the identical condition in the typicals; U-201(2) for untagged instances. Ids FW.6-L3-02..08.",
+   "hoja_detalle": "9/A7.00 UNIT TYPE 3 'FW.6'; A7.09 PC0145, A7.16 PC0158-160",
+   "imagen": "etapas/4_canon/img/review/RI-052.png",
+   "n": 52,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 53,
+   "punto": "Untagged shafts (chute N of service elevator, box S of Lobby 317) | A: A: W.4 0 assumed (6 + 4 pieces, ~33 LF incl. duplicates) | B: B: FW.4 / W.4 / W.6 bands | delta: metal CH.2 2-HR: N 4.50+4.50+2.65, S 4.06x2+2.41x2 = 24.59 LF x 11'-0\"; 2 layers type X room side + 1\" liner | decision: Whole-set search found 7/8/10/A9.03 '2-HOUR SHAFTWALL ASSEMBLY (W419, U497) MAX. HEIGHT 54'-0\"' -> loaded as metal C-H shaftwall CH.2-L3-01..07 (walls[]); RFI-L3-05 closed. L2 resolver loads the same shafts (consistency check: A L2 used overall 4.70/3.04 and 4.13/2.79 LF).",
+   "hoja_detalle": "8/A9.03 PLAN OF NORTH SHAFT, 7/A9.03 PLAN OF SOUTH SHAFT, 10/A9.03 head (above LEVEL 4); callout on A2.02",
+   "imagen": "etapas/4_canon/img/review/RI-053.png",
+   "n": 53,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 54,
+   "punto": "C-H stud spacing | A: A (L2): 24\" o.c. | B: B (L4 CH.6): RFI | delta: 16\" vs 24\": ~1.5x studs on 24.59 LF | decision: LOADED 16\" o.c. (printed note 6 'UON'); 24\" is the listed-system alternative.",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-054.png",
+   "n": 54,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 55,
+   "punto": "Untagged corridor FEC recesses / bump-outs (303, 312, 318 x2, south of 306) | A: A: W.4 0 assumed, duplicated lines (two walls 4.5 pt apart) | B: B: single W.4 0 wall per box | delta: type W.4 0 -> W.62 1 (2 layers each face) on 9.89 LF; A duplicates removed (W.4-L3-51/55/56/35, connector W.4-L3-12) | decision: One wall per box (B geometry) + short returns; type of the wall it connects to = W.62 1 (rated corridor), loaded with note (RFI-L3-07 closed).",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-055.png",
+   "n": 55,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 56,
+   "punto": "XW.6.6 | 0 tag at the 305 niche west side (PC0031) | A: A: loaded XW.6.6 1 (interior 1 type X + exterior gyp) | B: B: ignored the element (gave PC0031 to the XW.6.3 0 niche north wall) | delta: exterior gyp 5.41 LF x 11'-0\" = 59.5 SF (would drop with a 0-rated row like XW.6.3 0) | decision: Leader tick verified on the x1005 element. No XW.6.6 0 row -> closest printed row XW.6.6 1 loaded (CRITERIOS 6, conservative); RFI-L3-02 closed.",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-056.png",
+   "n": 56,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 57,
+   "punto": "309 shower west face (SE stair CMU) | A: A: excluded (counted in enlarged plan, RFI-L3-06) | B: B: not read | delta: +9.20 LF FW.2 one face (cement board 8'-6\" + WR strip) | decision: FI.2 0 tick on 3/A6.02 is on the STAIR-side face; the 309 face is drawn untagged on A6.02 and tagged FW.2 on 9/A7.05 -> loaded FW.2-L3-01 here; stair face stays with the cores resolver. no discrepancy between the sheets; RFI-L3-06 closed.",
+   "hoja_detalle": "9/A7.05 UNIT TYPE 4 (FW.2 + FW.4; W.6.1) vs 3/A6.02 (FI.2 0)",
+   "imagen": "etapas/4_canon/img/review/RI-057.png",
+   "n": 57,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 58,
+   "punto": "309 closet/shower separation (tag W.6.1 on 9/A7.05) | A: A: W.4 0 | B: B: W.6 ? (band width) | delta: same faces; type label W.6 0 | decision: W.6.1 not in schedule -> closest printed row W.6, rating blank -> 0 (CRITERIOS 6). W.6-L3-01; RFI-L3-08 closed.",
+   "hoja_detalle": "9/A7.05 PC0134; A0.06 schedule",
+   "imagen": "etapas/4_canon/img/review/RI-058.png",
+   "n": 58,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 59,
+   "punto": "309 shower south (y1279) | A: A: XW.6.3 2 interior face (shower) + exterior sheathing | B: B: FW.6 0 | delta: interior face -> FW.4 one face (CB + WR strip); exterior sheathing 3.48 LF kept | decision: FW.4 per typical tag; A's XW.6.3 2 exterior sheathing kept (conservative: exterior envelope continues, drawn in light lines).",
+   "hoja_detalle": "9/A7.05 FW.4 tag on shower back; A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-059.png",
+   "n": 59,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 60,
+   "punto": "DW.4-L3-07 (304/305) over the 305 niche | A: A: 22.56 LF both faces (face B labelled 305 to x1062) | B: B: DW.4 16.46 + XW.6.3 0 6.84 | delta: face B -6.45 LF | decision: DW.4 full 22.56 LF on the 304 face; 305 face only to x1004 (niche starts); niche north wall XW.6.3 0 (PT0341) interior face kept (A).",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-060.png",
+   "n": 60,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 61,
+   "punto": "DW.4 / W lengths: end convention | A: A: face to face of abutting walls (board run) | B: B: to centerline / far face, or stopped at T | delta: typ. -0.3 to -0.8 ft per wall vs B; DW.4-L3-04/06 +1.45/+1.11 ft vs B (B stopped at the 312/311 bath wall, wall continues to the stair CMU, crop the crop) | decision: LOADED A (board-only walls: the face-to-face run is the board length; physical walls verified on crops).",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-061.png",
+   "n": 61,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 62,
+   "punto": "Wet faces at Cleaning 315 / 323 (housekeeping closets) | A: A: type X | B: B: type X | delta: 729.2 SF type X -> type X WR | decision: Loaded WR (Cleaning rooms treated as janitor closets, conservative).",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-062.png",
+   "n": 62,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 63,
+   "punto": "Lobby 317 south wall (707-755, y1073) | A: A: W.62 1 | B: B: W.6 ? (band width) | delta: 1 -> 2 layers each face on 5.04 LF | decision: W.62 1: connects to lobby west wall W.62 1 (PT0301) and rated corridor (U-201(2)).",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-063.png",
+   "n": 63,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 64,
+   "punto": "Tag assignment differences | A: A | B: B | delta: PT0345 -> x1688.6 (A) not y1230 (B); PT0346 -> y1276 south wall (A) not x1689 (B); PT0337 -> jog x624.5 (A); PT0304 -> corridor wall y1141.6 W.62-L3-06 (B) not the 1 ft stub (A) | decision: Leader endpoints traced on the vector drawing; walls only in A (XW.6.3-L3-16/17/18 south wall, W.62-L3-03/18 Elec 321, W.4-L3-47, W.62-L3-13 PT0297) kept: drawn on A2.03.",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-064.png",
+   "n": 64,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 65,
+   "punto": "Door openings | A: A: net of doors | B: B: net of doors (bands break at swings) | delta: header board above doors (~2.3 ft x door width) not loaded | decision: Both readings agree -> kept; note for the estimator.",
+   "hoja_detalle": "1/A2.03",
+   "imagen": "etapas/4_canon/img/review/RI-065.png",
+   "n": 65,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 66,
+   "punto": "L4 line of structure (roof) for W/DW/XW interior faces | A: 8'-11 1/4\" (8.9375 ft) printed | B: 12.34 ft derived (14'-0\" - 18\" roof trusses assumed + sheathing/RC/ceiling assumed) | delta: 7495.9 SF board if B (all L4 interior faces) | decision: A: printed section dimension governs; B assumed truss depth not drawn (A5.05/A5.06 show roof framing bottom ~8'-11\" above L4). Corridor/F&B zone under flat/curved roof (A5.07) has no printed height -> RFI-L4-01",
+   "hoja_detalle": "1/A5.06 (p38) + 1/A5.03 (p35) dim 8'-11 1/4\" LEVEL 4 to bottom of roof assembly",
+   "imagen": "etapas/4_canon/img/review/RI-066.png",
+   "n": 66,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 67,
+   "punto": "CH.6 2 shaft 3/A7.50 drawn thickness vs tag | A: tag CH.6 2 = 6\" C-H + 1\" liner + 2x5/8 type X (~8 1/4\") | B: drawn faces 7.08 pt @18 pt/ft = 4.72\" (all 4 legs) | delta: stud 6\" vs ~2 1/2\"-4\" if drawn; board SF unchanged | decision: printed tag governs (criteria 1); loaded CH.6 2, 6\" C-H 20 ga",
+   "hoja_detalle": "3/A7.50 shaft x977-1057 y1005-1055; A0.06 TYPE CH",
+   "imagen": "etapas/4_canon/img/review/RI-067.png",
+   "n": 67,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 68,
+   "punto": "CH.6 2 stud spacing | A: 16\" o.c. (A0.06 note 6 UON) | B: 24\" o.c. (UL U415 standard, RFI-B3-05) | delta: 12.94 LF: ~11 vs ~8 studs per leg set | decision: 16\" o.c. printed note governs",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-068.png",
+   "n": 68,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 69,
+   "punto": "CH.6 2 shaft height L4 | A: 13.9375 ft (ROOF datum 14'-0\" - 3/4\" sheathing) | B: 12.44 ft (14' - 18\" trusses assumed - 3/4\") | delta: 58.1 SF (liner + 2 layers X) | decision: A loaded (conservative, only printed datum); underside of sheathing at shaft not printed -> RFI-L4-02",
+   "hoja_detalle": "1/A5.08 \"SHAFT WALLS CONTINUOUS TO UNDERSIDE OF ROOF SHEETHING\"",
+   "imagen": "etapas/4_canon/img/review/RI-069.png",
+   "n": 69,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 70,
+   "punto": "F&B 410/411 and Warming Kitchen 419 tenant faces of rated perimeter walls | A: loaded (rated perimeter faces) | B: B loaded some faces, labels mixed (Elec/Beverage) | delta: 4167.6 SF of tenant-side board loaded | decision: criteria 4: interior non-rated partitions excluded (none drawn inside 410/411; FI.6 0 inside 419 excluded); rated perimeter faces toward tenant loaded",
+   "hoja_detalle": "A2.04 / 3/A7.50 / A5.07 note \"INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE\"; A0.06 note 21",
+   "imagen": "etapas/4_canon/img/review/RI-070.png",
+   "n": 70,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 71,
+   "punto": "XW.6.6 0 tag (east wall 401/402) not in A0.07 | A: loaded as XW.6.6 1 (1 layer X int + 1 layer X ext gyp) | B: same (B 1 layer + ext gyp) | delta: 1005.2 SF exterior gyp sheathing if non-rated (no sheathing) | decision: criteria 6 / U-201(2) closest printed row, no RFI",
+   "hoja_detalle": "1/A0.07",
+   "imagen": "etapas/4_canon/img/review/RI-071.png",
+   "n": 71,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 72,
+   "punto": "W.6.1 tags (A2.04 PC0047-51, 3/A7.50 PC0211-0220) not in schedule; most rating boxes blank on 3/A7.50 | A: W.6 1 (1 layer 5/8 X each side, U301) | B: same | delta: if W.6 2: x2 layers on W.6 walls | decision: criteria 6 closest printed row W.6 1",
+   "hoja_detalle": "3/A7.50",
+   "imagen": "etapas/4_canon/img/review/RI-072.png",
+   "n": 72,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 73,
+   "punto": "Non-rated W.4 faces board type | A: 5/8 type X (detail governs) | B: B: 5/8 regular (A: regular on room faces) | delta: 1182.3 SF type X -> regular | decision: criteria 1: type X loaded",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-073.png",
+   "n": 73,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 74,
+   "punto": "Untagged W.6 at Deck Bar 411 south (A W.6-L4-04 11.40 LF 2 faces) | A: A: W.6 2 faces + FW.4 | B: B: FW.4 only (7.48) | delta: 203.8 SF (11.40 x 2 x 8.94) | decision: tag FW.4 1 governs: FW.4 corridor face 11.44 LF loaded; 411 side = tenant interior, untagged -> not loaded",
+   "hoja_detalle": "1/A2.04",
+   "imagen": "etapas/4_canon/img/review/RI-074.png",
+   "n": 74,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 75,
+   "punto": "Shower cement backer extent in units 401-405 | A: A: 1/2 cement on 3 faces (404, 403, 405) | B: B: none | delta: shower faces on exterior/party walls (behind tile) not split: est. 3 faces x ~5 ft x 8.5 ft per unit | decision: 5/8 cement board loaded on drawn shower partitions (W.4-05/09/12/13, FW.4-03); remaining shower-surround faces PENDING estimator (interior elevations not issued for units)",
+   "hoja_detalle": "spec 09 30 00 2.6.A 5/8\"; A0.06 note 13; unit plans A7.05/A7.13/A7.16",
+   "imagen": "etapas/4_canon/img/review/RI-075.png",
+   "n": 75,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 76,
+   "punto": "FW.4 at unit shaft chases height | A: 13.9375 ft (to roof sheathing) | B: 12.34 ft | delta: 137.8 SF vs A | decision: criteria 1: FW never above structure -> 8.9375",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-076.png",
+   "n": 76,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 77,
+   "punto": "Unit bath W.4 face heights | A: A 8.50 (bath ceiling) on bath faces | B: B 8.50 on MR faces | delta: +0.4375 ft x bath-face LF | decision: criteria 1/3: W faces to line of structure 8.9375; bath ceiling 8'-6\" used only for tile extent",
+   "hoja_detalle": "1/A0.06",
+   "imagen": "etapas/4_canon/img/review/RI-077.png",
+   "n": 77,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 78,
+   "punto": "ceiling area L2 201 Guest Room Type 1 - bathroom dropped ceiling GYP-1 8'-6\" | A: back-check 51.7 SF | B: RCP polygon 54.3 SF | delta: 2.6 SF (5.0 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-078.png",
+   "n": 78,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 79,
+   "punto": "ceiling area L2 214 Guest Room Type 13 - rated membrane (bottom of floor/ceiling assembly) | A: back-check 395.9 SF | B: RCP polygon 372.3 SF | delta: -23.6 SF (-6.0 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-079.png",
+   "n": 79,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 80,
+   "punto": "ceiling area L2 214 Guest Room Type 13 - bathroom dropped ceiling GYP-1 8'-6\" | A: back-check 81.2 SF | B: RCP polygon 87.6 SF | delta: 6.4 SF (7.9 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-080.png",
+   "n": 80,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 81,
+   "punto": "ceiling area L3 301 Guest Room Type 1 - bathroom dropped ceiling GYP-1 8'-6\" | A: back-check 51.7 SF | B: RCP polygon 55.1 SF | delta: 3.4 SF (6.6 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-081.png",
+   "n": 81,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 82,
+   "punto": "ceiling area L3 309 Guest Room Type 4 - rated membrane (bottom of floor/ceiling assembly) | A: back-check 88.1 SF | B: RCP polygon 94.7 SF | delta: 6.6 SF (7.5 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-082.png",
+   "n": 82,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 83,
+   "punto": "ceiling area L3 312 Guest Room Type 7 - rated membrane (bottom of floor/ceiling assembly) | A: back-check 374.5 SF | B: RCP polygon 395.9 SF | delta: 21.4 SF (5.7 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-083.png",
+   "n": 83,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 84,
+   "punto": "ceiling area L3 314 Guest Room Type 13 - bathroom dropped ceiling GYP-1 8'-6\" | A: back-check 81.2 SF | B: RCP polygon 86.8 SF | delta: 5.6 SF (6.9 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-084.png",
+   "n": 84,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 85,
+   "punto": "ceiling area L4 404 Guest Room Type 6 - bathroom dropped ceiling GYP-1 8'-6\" | A: back-check 98.1 SF | B: RCP polygon 92.8 SF | delta: -5.3 SF (-5.4 %) | decision: loaded the RCP polygon on A3.04 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-085.png",
+   "n": 85,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 86,
+   "punto": "ceiling area L3 Corridor 316/318 - rated membrane FS-1 (above GYP-1) | A: back-check 1117.4 SF | B: RCP polygon 983.5 SF | delta: -133.9 SF (-12.0 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-086.png",
+   "n": 86,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 87,
+   "punto": "ceiling area L3 Corridor 316/318 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - N-S leg | A: back-check 573.7 SF | B: RCP polygon 448.1 SF | delta: -125.6 SF (-21.9 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-087.png",
+   "n": 87,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 88,
+   "punto": "ceiling area L2 Corridor 216/218 - rated membrane FS-1 (above GYP-1) | A: back-check 1091.6 SF | B: RCP polygon 972.0 SF | delta: -119.6 SF (-11.0 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-088.png",
+   "n": 88,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 89,
+   "punto": "ceiling area L2 Corridor 216/218 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - N-S leg | A: back-check 572.9 SF | B: RCP polygon 444.0 SF | delta: -128.9 SF (-22.5 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-089.png",
+   "n": 89,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 90,
+   "punto": "ceiling area L2 Corridor 216/218 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - E-W leg | A: back-check 374.4 SF | B: RCP polygon 397.1 SF | delta: 22.7 SF (6.1 %) | decision: loaded the RCP polygon on A3.02 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.02",
+   "imagen": "etapas/4_canon/img/review/RI-090.png",
+   "n": 90,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 91,
+   "punto": "ceiling area L4 Corridor 412 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - N-S leg | A: back-check 551.3 SF | B: RCP polygon 457.1 SF | delta: -94.2 SF (-17.1 %) | decision: loaded the RCP polygon on A3.04 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-091.png",
+   "n": 91,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 92,
+   "punto": "ceiling area L4 Corridor 412 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - E-W leg | A: back-check 405.2 SF | B: RCP polygon 331.1 SF | delta: -74.1 SF (-18.3 %) | decision: loaded the RCP polygon on A3.04 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-092.png",
+   "n": 92,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 93,
+   "punto": "ceiling area L3 309 / 308 E - RS-6 under L4 exterior deck (2 layers 5/8 type X) | A: back-check 286.0 SF | B: RCP polygon 266.2 SF | delta: -19.8 SF (-6.9 %) | decision: loaded the RCP polygon on A3.03 (what Bluebeam measures); verify the enlarged views A7.23 / A7.24 for corridors",
+   "hoja_detalle": "1/A3.03",
+   "imagen": "etapas/4_canon/img/review/RI-093.png",
+   "n": 93,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 94,
+   "punto": "ceiling area L3 309 membrane (U-181 F03) | A: Excel 111.7 SF (stale area_poly_sf) | B: polygon 94.7 SF (shoelace of its own vertices; 309 envelope minus the RS-6 deck footprint, 0 SF overlap with RS-6) | delta: -17.0 SF 5/8 type C, -17.0 LF RC, -6.0 LF RC end joints | decision: loaded 94.7 SF = markup = drawing; the RCP polygon area reads 94.7",
+   "hoja_detalle": "1/A3.03, 10/A7.05",
+   "imagen": "etapas/4_canon/img/review/RI-094.png",
+   "n": 94,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 95,
+   "punto": "ceiling area L3 Corridor 316/318 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - N-S leg | A: Excel 443.8 SF (back-check) | B: completed polygon 448.1 SF (markup before: truncated) | delta: +4.3 SF 5/8 regular on grid | decision: loaded the completed polygon (markup = Excel = drawing); the take-off tool polygon must be replaced (vertices in patch 40_cielos_C reply)",
+   "hoja_detalle": "1/A3.03, 1-3/A7.23",
+   "imagen": "etapas/4_canon/img/review/RI-095.png",
+   "n": 95,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 96,
+   "punto": "ceiling area L4 Corridor 412 - GYP-1 dropped ceiling 8'-11\" (net of WS-1) - N-S leg | A: Excel 452.3 SF (back-check) | B: completed polygon 457.1 SF (markup before: truncated) | delta: +4.8 SF 5/8 regular on grid | decision: loaded the completed polygon (markup = Excel = drawing); the take-off tool polygon must be replaced (vertices in patch 40_cielos_C reply)",
+   "hoja_detalle": "1/A3.04, 1-3/A7.23",
+   "imagen": "etapas/4_canon/img/review/RI-096.png",
+   "n": 96,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 97,
+   "punto": "Bar 107 ceiling board (U-181 F10) | A: 5/8 regular (A0.06 GN 10, non-rated) | B: 5/8 type C (3/A7.31 '1'-11 1/4\" RATED ASSEMBLY', A0.08 FS-1) | delta: 2,205.0 SF regular -> type C (same SF, price delta only); if the bar field IS the FS-1 membrane, + 2,205 LF RC 12\" o.c. and the grid comes off | decision: loaded type C (U-161 higher rating); review with the architect which part of the bar is under the L2 rated floor vs the one-story roof deck (3/A5.04 B.O. DECK 11'-2 5/8\")",
+   "hoja_detalle": "3/A7.31, 1/A7.31, 1/A3.01, 3/A5.04",
+   "imagen": "etapas/4_canon/img/review/RI-097.png",
+   "n": 97,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 98,
+   "punto": "L4 Elec 421 drawn on the RCP | A: 3/A7.50 (1/4\"): 7'-8\" x 1.41 ft = 10.8 SF | B: 1/A3.04 (1/8\") slot 1.31 x 8.27 ft = 10.80 SF | delta: 0.0 SF (same area; the 1/8\" slot is longer and narrower than the 1/4\" view) | decision: polygon moved from the PLAN view 3/A7.50 to the RCP 1/A3.04 (CE_RCP_CONTORNO)",
+   "hoja_detalle": "3/A7.50, 1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-098.png",
+   "n": 98,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 99,
+   "punto": "L2 Mech & Water Heater Mezzanine 219 (U-181 F01) | A: EXCLUDED: no ceiling drawn on 2/A5.04 / 1/A3.02 | B: A0.01 '706.6 - 1-HR RATED ROOF ASSEMBLY ... IF FIREWALL STOPS LESS THAN 30\"' and A0.03 '1 HOUR RATED HORIZONTAL ASSEMBLY' near 219 could ask for a membrane | delta: +450.5 SF 5/8 type X + 450.5 LF RC (polygon 220.5 x 165.5 pt / 81 on A3.02; A2.02 prints 462 SF) | decision: excluded with the printed section; an old citation to a nonexistent RFI removed",
+   "hoja_detalle": "2/A5.04, 1/A3.02, A0.01, A0.03",
+   "imagen": "etapas/4_canon/img/review/RI-099.png",
+   "n": 99,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 100,
+   "punto": "L1 Water Entry 128 (U-181 F11) | A: EXCLUDED: no tag / hatch on 1/A3.01 | B: A0.08 FS-1 FS-1 at LEVEL 2, 3, 4 throughout (A0.08 FS-1 row) if 128 is under the L2 floor | delta: +176.4 SF 5/8 type C + 176.4 LF RC (polygon on A3.01; A2.01 prints 182 SF) | decision: excluded; old citation to a nonexistent RFI removed",
+   "hoja_detalle": "1/A3.01, A2.01",
+   "imagen": "etapas/4_canon/img/review/RI-100.png",
+   "n": 100,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 101,
+   "punto": "RC under L4 roof ceilings and RS-6 (U-181 F12) | A: loaded: resilient channel 16\" o.c. on 401-405, 406, 417, 418, 421 (2,007.6 LF) and 12\" o.c. on RS-6 (266.2 LF) | B: not printed: RS-1 / RS-2 'CEILING RE: RCP', RS-6 '2 LAYERS 5/8\" TYPE X' on wood framing, no RC | delta: -2,007.6 LF RC (L4) and -266.2 LF RC (RS-6); board SF unchanged | decision: PENDING: the take-off engine has no board-only (direct to wood) ceiling system; the RC stays until the tool takes it (see rc_note on each row)",
+   "hoja_detalle": "A0.08 RS-1 / RS-2 / RS-6, 1/A3.04, 2/A5.00",
+   "imagen": "etapas/4_canon/img/review/RI-101.png",
+   "n": 101,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 102,
+   "punto": "Material Summary 'Resilient channel' / 'Type C' +101.0 | A: breakdown 22,511.49 LF / 18,642.6 SF | B: Net 22,410.47 LF / 18,541.6 SF | delta: 0 (parser artefact) | decision: room 'L1 Corridor 101 + Linen/Stor 105' renamed '... 101 / Linen/Stor 105': the ' + ' in the name made the breakdown read a '101' term",
+   "hoja_detalle": "1/A3.01",
+   "imagen": "etapas/4_canon/img/review/RI-102.png",
+   "n": 102,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 103,
+   "punto": "W.6-L1-42 A/B (new, W wall of Toilet 110 / Bar 107, 1/A7.30): height taken as the printed 11'-2 5/8\" B.O. DECK of 2/A5.04 (TOILET/BAR section, one-storey roof), same as its neighbours W.6-L1-27/29/30/31. The L1 criterion for walls under the L2 floor (12'-3 1/2\" [DERIVED], 30_alturas_B) does not apply to this area per 2/A5.04. | A: LOADED 11'-2 5/8\" (2/A5.04 printed) | B: 12'-3 1/2\" (L1 under L2 floor) | delta: +22.71 SF (10.58 x 1.073 x 2 faces: +11.35 SF 5/8 type X WR, +11.35 SF 5/8 type X) if b | decision: a: the section that cuts the area governs (CRITERIOS 3)",
+   "hoja_detalle": "2/A5.04; 1/A7.30; 1/A2.01",
+   "imagen": "etapas/4_canon/img/walls/W.6-L1-42_A.png",
+   "n": 103,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 104,
+   "punto": "Smoke-curtain housing soffit at the lobby elevator, L2 / L3 / L4 (12/A9.03 'SOFFIT AROUND HOUSING', called from 12/A6.00; A0.02 'SMOKE CURTAIN AT ELEVATOR DOOR HEAD. LEVELS 2-4'). The detail prints no dimension: soffit developed width (vertical face + bottom) and housing length (smoke curtain follows the elevator door; door opening 'PER MANF'S REQUIREMENTS' on A6.00) are not printed. Loaded as misc_items SOF-SC-L2/L3/L4 with no quantity yet [PENDING: dimensions not printed]. Board type not printed on the detail: loaded 5/8\" regular like the corridor soffit boxes SOF-L2..L4 (A0.06 general note 10, non-rated). | A: 0.0 SF loaded (PENDING, not printed) | B: qty = 3 levels x L (housing length) x D (developed width) once the architect / smoke-curtain manufacturer dimensions it | delta: +3 x L x D SF 5/8\" board (e.g. per 1 ft of developed width: +3 SF per LF of housing). Indicative only, NOT a",
+   "hoja_detalle": "12/A9.03; 12/A6.00; A0.02",
+   "imagen": "etapas/4_canon/img/review/RI-104.png",
+   "n": 104,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 105,
+   "punto": "U-199 (6) rated-line sweep (code plans 2/A0.01 L1, 3/A0.01 L2, 1/A0.02 L3, 2/A0.02 L4): 114 uncovered runs > 12 pt (586.6 LF) have no counted wall of equal or higher rating within 11 pt and no mechanical explanation (rated wall within 24 pt, FI/FW furring on masonry, stair / elevator CMU enclosure, CMU / concrete tag). By level: L1 66 runs / 364.2 LF, L2 13 runs / 66.2 LF, L3 16 runs / 67.9 LF, L4 19 runs / 88.3 LF. Most L1 runs sit on the masonry / steel / tenant perimeter (alley and north CMU walls, Kitchen 100 F&B, Retail 124 storefront line, lobby); L2-L4 runs cluster at the central stair / elevator core (x 707-797 pt), at 2 HR stubs that end on W.62-1 / W.4-0 walls, and at L4 restrooms / F&B. Each one is listed in u199.abiertos_E['6'] with its A2 coordinates, the lower-rated walls found and the nearest tags. Not disposed: they need a reader at the plan (CMU vs our wall vs real ratin",
+   "hoja_detalle": "2/A0.01; 3/A0.01; 1/A0.02; 2/A0.02; A2.01-A2.04",
+   "imagen": "etapas/4_canon/img/review/RI-105.png",
+   "n": 105,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 106,
+   "punto": "U-199 (5) printed room areas (A2.01-A2.04 room tags 'NNN SF') vs ceilings: 13 room/layer pairs outside 5 % after the bathroom split: 203 GUEST ROOM TYPE 1:resilient_channel ceiling 322.6 SF vs room 255 SF + bath 50.1; 205 GUEST ROOM TYPE 5:resilient_channel ceiling 590.6 SF vs room 469 SF + bath 77.2; 215 CLEANING:resilient_channel ceiling 114.7 SF vs room 123 SF; 214 GUEST ROOM TYPE 13:resilient_channel ceiling 372.3 SF vs room 427 SF + bath 87.6; 305 GUEST ROOM TYPE 5:resilient_channel ceiling 587.6 SF vs room 468 SF + bath 77.2; 309 GUEST ROOM TYPE 4:resilient_channel ceiling 360.9 SF vs room 273 SF + bath 97.6; 315 CLEANING:resilient_channel ceiling 115.2 SF vs room 124 SF; 401 GUEST ROOM TYPE 11:resilient_channel ceiling 420.2 SF vs room 443 SF + bath 71.9; 405 GUEST ROOM TYPE 13:resilient_channel ceiling 389.3 SF vs room 427 SF + bath 79.9; 406 CLEANING:resilient_channel ceiling 11",
+   "hoja_detalle": "1/A2.02; 1/A2.03; 1/A2.04; unit RCPs A7.00-A7.16",
+   "imagen": "etapas/4_canon/img/review/RI-106.png",
+   "n": 106,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 107,
+   "punto": "U-199 (6) rating conflicts: a code-plan 2 HR line over a loaded wall whose printed tag is lower. (a) Board identical (W.62 1 = 2 layers each side = W.6 2): W.62-L2-21, W.62-L3-29, W.62-L3-02, W.62-L3-31, W.62-L4-08 -> 0 SF. (b) Board short by 1 layer if the code plan governs: W.6-L1-18 (W.6-0, RFI-L1-02) +67.9 SF; W.6-L1-17 B (W.6-1, RFI-L1-01) +33.9 SF (+67.9 SF more if the Retail 124 face is then loaded per CRITERIOS 4); W.6-L2-01 +99.6 SF; W.4-L2-26 / W.4-L3-33 stubs +29.7 SF each max; W.6-L4-01 +66.5 SF; W.6-L4-06 +134.1 SF; W.6-L4-10 +48.9 SF; W.6-L4-13 +41.7 SF; XW.6.6-L4-08 +59.8 SF; XW.6.3-L3-04 B / XW.6.6-L3-01 +83.6 SF (incl. exterior gyp sheathing of the A0.07 rated row). | A: LOADED per the printed partition tag (U-201 not applied: tags are printed) | B: rating of the code plan governs (U-161 higher rating) | delta: +695.4 SF 5/8 type X max if b on every listed wall (+763.3 S",
+   "hoja_detalle": "2/A0.01; 3/A0.01; 1/A0.02; 2/A0.02; 1/A2.02-1/A2.04; 1/A7.50; 3/A7.50",
+   "imagen": "etapas/4_canon/img/walls/XW.6.3-L3-04_B.png",
+   "n": 107,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 108,
+   "punto": "U-199 (5) ceiling fixes by 24_u199_F (patch op top on ceilings, current list with these 7 rows changed only): L2 214 membrane 372.3 -> 403.4; L4 405 roof ceiling 389.3 -> 403.4 (typical Type 13 from 2/A7.16 vectors); Cleaning 215 / 315 / 406 + landing in front of the service-elevator door (8.5 / 8.8 / 8.8 SF, 1/A3.02-1/A3.04); Women 417 112.4 -> 179.1 (main 127.0 + stalls 417.3 / 417.4); Men 418 88.7 -> 125.1 (main 93.55 + WC 418.2). | A: FIXED (new areas) | B: previous auto-polygons | delta: +174.4 SF ceiling board: +48.4 SF FS-1 5/8 type C (214, 215, 315) and +126.0 SF L4 roof ceiling 5/8 type X (405, 406, 417, 418) | decision: a (measured on vectors, DERIVED)",
+   "hoja_detalle": "2/A7.16; 1/A3.02; 1/A3.03; 1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-108.png",
+   "n": 108,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 109,
+   "punto": "FI.6 0 furring tag on the N face of the L4 S masonry wall inside Warming Kitchen 419 (3/A7.50): not loaded, the room is F&B interior 'NOT IN SCOPE OF THIS PERMIT' (3/A7.50, CRITERIOS 4: interior non-rated finishes excluded). If the tenant scope is added to the base bid: about 25.3 LF (x 538-994 pt on 3/A7.50 / 18 pt/ft) x (419 ceiling not in scope + 6\"). | A: EXCLUDED (tenant) | B: loaded as FI.6 0 | delta: +25.3 LF x H; e.g. at the L4 roof-ceiling height 8'-11 1/4\" + 6\" = 9.44 ft -> +238.8 SF 5/8 type X [DERIVED, height of 419 not printed] | decision: a (CRITERIOS 4)",
+   "hoja_detalle": "3/A7.50; 2/A0.02",
+   "imagen": "etapas/4_canon/img/review/RI-109.png",
+   "n": 109,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 110,
+   "punto": "Corridor 412 (L4): printed 1350 SF on 1/A2.04; GYP-1 8'-11\" drawn only on 3/A7.23 + 3/A7.24 (union 956.5 SF incl. WS-1 168.3 SF). 393.5 SF of the printed circulation have no ceiling type drawn on the enlarged RCPs (passages to Women / Men / 419 and F&B, alcoves). | A: LOADED as drawn: GYP-1 788.2 SF | B: the 393.5 SF also GYP-1 | delta: +393.5 SF GYP-1 (5/8 board on suspension) if b | decision: PENDING (not printed; question to the architect)",
+   "hoja_detalle": "1/A2.04; 3/A7.23; 3/A7.24; 1/A3.04",
+   "imagen": "etapas/4_canon/img/review/RI-110.png",
+   "n": 110,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 111,
+   "punto": "U-181 F05 openings: ONE criterion = board GROSS through windows and doors per skill rule standing rule (coordinator decision). The audit premise was wrong: L3 interior faces were already gross (pieces split at the window centerline and contiguous, e.g. XW.6.3-L3-16 A ends / C starts at 1376.94 pt inside the window 1368-1386 pt); L2 / L3 / L4 XW rows all run gross through the windows -> no wall row changed for windows. | A: gross - LOADED | B: net of R.O. W x H (A8.01: Type 1 6'-6\" x 6'-0\", Type 2 2'-2\" x 6'-0\", Type 3 corner leg x 6'-0\", S-K 10'-2\" x 8'-0\") | delta: alternative (b) deduct windows: -5387.7 SF (L2|5/8\" EXTERIOR gyp sheathing Type X -1019.44, L2|5/8\" gyp Type X W.R. -104.0, L2|5/8\" gyp board Type X -1071.44, L3|5/8\" EXTERIOR gyp sheathing Type X -1020.46, L3|5/8\" gyp Type X W.R. -104.0, L3|5/8\" gyp board Type X -1072.46, L4|5/8\" EXTERIOR gyp sheathing Type X -393.95, L4|5/8",
+   "hoja_detalle": "A8.01 types 1/2/3 and S-K; 1/A2.02, 1/A2.03, 1/A2.04 (window positions from vector glass lines; SE stair window 1498-1551 pt is in CMU = no gyp face)",
+   "imagen": "etapas/4_canon/img/walls/XW.6.3-L3-16_A.png",
+   "n": 111,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 112,
+   "punto": "Doors under standing rule: 34 doors confirmed where the wall row breaks at the door (gap on the path within 0.4 ft below / 1.6 ft above the A8.00 width, next to the door tag, one gap per door) -> door width x face height x faces x layers added as misc_items OPN-Lx door gross-through (+3264.05 SF). Count per level: L2 4, L3 27, L4 3. Most L2 doors and the L4 guest-room entry doors already run gross on the corridor / bath rows (verified on the overlay, e.g. 201.1, 206.1, 401.1). The other A8.00 doors were not changed: already gross on the wall row, in CMU / storefront / non-board walls (most of L1, stairs, elevator, F&B tenant doors), or a corner gap the matcher did not resolve. | A: +3264.05 SF loaded (confirmed net doors) | B: before: those doors net full height | delta: +3264.05 SF; the remaining doors listed in not_confirmed: [PENDING] check on the overlay (about 3'-0\" x 9.29 ft x 2 fa",
+   "hoja_detalle": "A8.00; 1/A2.02, 1/A2.03, 1/A2.04",
+   "imagen": "etapas/4_canon/img/review/RI-112.png",
+   "n": 112,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 113,
+   "punto": "XW.6.6 0 tags (1/A2.04 east wall of 401/402 PC0039; 1/A2.03 305 east jog PC0031): A0.07 prints NO XW.6.6 0 row. The only non-bearing XW.6.6 row is 'EXTERIOR WOOD - FRT SIDING - (NON-BEARING)' XW.6.6 1, 1 HR, UL U305, which prints 'TYPE X 5/8\" EXTERIOR GYP BD' (LVL 4 row XW.6.6 2 V337 / U301). The code plan A0.02 marks both walls 'NON BEARING EXTERIOR WALL' with no rating line. The 0-rated rows that are printed (XW.6.3 0 / XW.6.4 0) are a different finish (ship lap) and carry FRT plywood, no exterior gyp. | A: XW.6.6 1 assembly (1 layer type X interior + 1 layer 5/8\" exterior gyp sheathing type X) - LOADED | B: 0-rated row analog (XW.6.3 0 / XW.6.4 0): interior type X only, exterior FRT plywood (Div. 06) | delta: -1064.71 SF 5/8\" exterior gyp sheathing gross (XW.6.6-L4-06 B 1005.2 + XW.6.6-L3-01 B 59.51); interior face unchanged | decision: U-161 / U-201(1): the printed documents conflict",
+   "hoja_detalle": "A0.07; 1/A2.03, 1/A2.04; 1,2/A0.02",
+   "imagen": "etapas/4_canon/img/walls/XW.6.6-L3-01_B.png",
+   "n": 113,
+   "total": 114
+  },
+  {
+   "fase": "detalle",
+   "orden_plano": 114,
+   "punto": "Tenant-side faces of RATED walls in Retail 124 (A2.01 '*NOTE: GYPSUM BOARD & FINISH IN RETAIL SPACE BY FUTURE TENANT'), Kitchen 100 (1/A7.45) and F&B 410 / 411 / 419 (A2.04, A7.55, 3/A7.50 'INTERIOR OF FOOD AND BEVERAGE SPACE IS NOT IN SCOPE OF THIS PERMIT'). The rated rows print the board on BOTH faces as part of the UL design: A0.06 W 'U.L. U301 5/8\" TYPE X GYP BD TYP. EACH SIDE' (1 layer 1 HR / 2 layers 2 HR), W.62 1 UL U379, 1 HOUR, 2 layers each side (A0.06 W.62 row), DW.4 1 UL U341, 1 layer 5/8\" Type X each side (A0.06 DW.4 row); A0.07 XW.6.4 2 / XW.6.3 2 'ASSEMBLY U301 2 LAYERS TYPE X 5/8\" GYP BD' interior; A0.06 note 21 (IBC 708.4 continuity). So the tenant notes and the rated assemblies conflict on these faces. | A: LOADED (rated tenant-side layer kept) | B: EXCLUDED per the tenant notes | delta: -4113.2 SF 5/8\" type X if the notes govern (Retail 124 1095.69; Kitchen 100 128.9; ",
+   "hoja_detalle": "A2.01; 1/A7.45; A2.04; A7.55; 3/A7.50; A0.06 (U301 / U379 / U341, note 21); A0.07",
+   "imagen": "etapas/4_canon/img/review/RI-114.png",
+   "n": 114,
+   "total": 114
+  }
+ ],
+ "alcances": [
+  {
+   "id": "ALC-01",
+   "nombre": "Interior partition framing (studs + tracks)",
+   "estado": "NO APLICA",
+   "nota": "Interior partitions are WOOD stud (A0.06 WOOD / DBL. WOOD / FURRED WOOD types; stud schedule metal rows unused except C-H): framing Div. 06 EXCLUDED, board only (Partition Takeoff BOARD ONLY blocks). Metal C-H shaft walls carried under ALC-21. Sheets checked: A0.05, A0.06, A0.07, A2.05, A4.04, A5.02, A6.01, A7.00, A7.05, A7.13, A7.16, A8.02, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-02",
+   "nombre": "Exterior wall framing (CFMF)",
+   "estado": "NO APLICA",
+   "nota": "Exterior walls are 2x6 wood stud (A0.07 XW types) - framing Div. 06 EXCLUDED; their 5/8\" exterior gyp sheathing Type X is carried (ALC-09). Sheets checked: A0.01, A0.03, A0.07, A0.08, A0.10, A4.04, A6.01, A7.16, A9.02, A9.06, T0.01."
+  },
+  {
+   "id": "ALC-03",
+   "nombre": "Parapet framing",
+   "estado": "NO APLICA",
+   "nota": "Parapets are wood framed / masonry (A0.07, A9.02, A9.05 parapet details): no cold-formed framing, no gypsum board printed on parapets. Sheets checked: A0.01, A0.03, A0.07, A9.02, A9.05."
+  },
+  {
+   "id": "ALC-04",
+   "nombre": "Top / deflection and bottom track",
+   "estado": "CUANTIFICADO",
+   "nota": "Only metal walls = C-H shaft walls: J-runner top + bottom carried (misc_items, 8/A9.03, 7/A9.03, 1/A7.50, 3/A7.50; A0.06 note 7 deep-leg). Wood walls: plates Div. 06. Sheet: A0.06."
+  },
+  {
+   "id": "ALC-05",
+   "nombre": "Headers, sills and jambs at openings",
+   "estado": "NO APLICA",
+   "nota": "Headers / sills / jambs are wood (Div. 06) in wood-framed walls; C-H shaft walls have no openings (8/A9.03, 7/A9.03). Gypsum board jamb returns not printed (1, 2, 3/A8.02). Sheets checked: A0.06, A0.07, A0.09, A7.32, A8.00, A8.02, A9.05, A9.06, T0.01."
+  },
+  {
+   "id": "ALC-06",
+   "nombre": "Bracing / bridging",
+   "estado": "NO APLICA",
+   "nota": "No C.R. bracing in scope: wood walls Div. 06; C-H shaft walls braced by liner panels (A0.06 C-H detail). Sheet checked: A8.02 (wood siding detail only)."
+  },
+  {
+   "id": "ALC-07",
+   "nombre": "Gypsum board on walls (layers per type)",
+   "estado": "CUANTIFICADO",
+   "nota": "Partition Takeoff + Material Summary 5/8\" gyp board Type X / Type X W.R. / regular (A0.06 types, layers per rating). Sheets: A0.05, A0.06, A0.07, A0.10, A2.05, A4.04, A6.01, A7.00, A7.05, A7.13, A7.16, A7.23, A7.31, A7.45, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-08",
+   "nombre": "Moisture / abuse / special board at wet zones",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" Type X W.R. at toilet rooms, janitor, showers, exterior and parking (A0.06 general note 11) and 5/8\" cement board at shower tile (A0.06 note 13, spec 09 30 00 2.6.A)."
+  },
+  {
+   "id": "ALC-09",
+   "nombre": "Exterior gypsum / glass mat sheathing",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" exterior gyp sheathing Type X where A0.07 rated XW rows print it (XW.6.3 2, XW.6.4 2, XW.6.6 1/2). Sheets: A0.03, A0.06, A0.10, A2.05, A5.02, A9.02, A9.04, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-10",
+   "nombre": "FRT plywood sheathing / substrate",
+   "estado": "NO APLICA",
+   "nota": "FRT plywood / sheathing is wood (Div. 06, EXCLUDED - R-ALC-01): A0.07 (FRT plywood in XW assemblies), A2.05, A5.02, A9.03, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-11",
+   "nombre": "Gypsum board ceilings",
+   "estado": "CUANTIFICADO",
+   "nota": "Gypsum ceilings: FS-1 5/8\" Type C on resilient channel (A0.08, UL L546 item 6), GYP-1 hung ceilings, GYP-2/MB-1 3 layers Type X + liner (A0.08). Sheets: A0.05, A2.05, A3.01-A3.04, A6.01, A7.00, A7.05, A7.13, A7.23, A7.31, A7.45."
+  },
+  {
+   "id": "ALC-12",
+   "nombre": "Ceiling suspension (furring / carrying channel / hanger wire / ceiling track)",
+   "estado": "CUANTIFICADO",
+   "nota": "GYP-1 hung ceilings on USG drywall suspension (main / cross tees, angle molding, hanger wire), resilient channel for FS-1 (UL L546 item 6). Sheet: A7.23, A3.01-A3.04."
+  },
+  {
+   "id": "ALC-13",
+   "nombre": "Soffits and bulkheads (framing + board)",
+   "estado": "CUANTIFICADO",
+   "nota": "Corridor soffit boxes 7/A7.23 (wood blocking = board only, developed width per side) L2-L4 in misc_items SOF-L2/L3/L4; lobby beam wraps 5/A7.31 = plaster finish (not gypsum). Sheets: A0.07, A0.10, A5.02, A6.01, A7.31, A8.02, A9.02, A9.04, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-14",
+   "nombre": "Canopy / marquee framing and sheathing",
+   "estado": "NO APLICA",
+   "nota": "No canopy / marquee with metal framing or gypsum: A9.05 canopy is steel / wood by others (no gypsum printed)."
+  },
+  {
+   "id": "ALC-15",
+   "nombre": "Column furring / wraps",
+   "estado": "NO APLICA",
+   "nota": "No column furring / wraps with gypsum board printed (SFRM at steel columns per A0.06 SFRM, other trade); lobby beam wraps plaster (5/A7.31)."
+  },
+  {
+   "id": "ALC-16",
+   "nombre": "Blocking (FRT wood / metal) for millwork and accessories",
+   "estado": "NO APLICA",
+   "nota": "Blocking is FRT / wood (Div. 06, EXCLUDED - R-ALC-01). Sheets checked: A0.05, A0.08, A7.32, A9.02, A9.04, A9.05, A9.06, T0.01."
+  },
+  {
+   "id": "ALC-17",
+   "nombre": "Framed openings (MEP, access panels, diffusers)",
+   "estado": "NO APLICA",
+   "nota": "No framed openings in metal walls: ducts EXCLUDED (R-ALC-03); access panels none in gypsum (A8.00 door 219.1 = Div. 08 access door, spec 08 31 13). Sheets checked: A8.00, T0.01."
+  },
+  {
+   "id": "ALC-18",
+   "nombre": "Trim: corner bead, casing bead, control joints, reveals",
+   "estado": "CUANTIFICADO",
+   "nota": "Corner bead, J-bead and control joints (A0.06 note 15) in metal trim; derived from wall geometry. Sheets: A0.05, A0.06, A6.01, A7.00, A7.05, A7.13, A7.23, A7.31, A7.45, T0.01."
+  },
+  {
+   "id": "ALC-19",
+   "nombre": "Acoustical sealant / sound attenuation (EXCLUDED: estimator standing order, all projects)",
+   "estado": "NO APLICA",
+   "nota": "EXCLUIDO: acoustical sealant excluded per estimator standing order (all projects); listed in Clarifications. Sheets where it appears: A0.06, A0.07, A4.04, A6.01, A7.16."
+  },
+  {
+   "id": "ALC-20",
+   "nombre": "FRP / cement board / tile backer",
+   "estado": "CUANTIFICADO",
+   "nota": "5/8\" cement board at shower tile (A0.06 note 13); FRP only on CMU (XI.2.7, A0.07) = other trade. Sheets: A0.07, A4.04, A6.01, A7.16, T0.01."
+  },
+  {
+   "id": "ALC-21",
+   "nombre": "Shaft walls / area separation walls",
+   "estado": "CUANTIFICADO",
+   "nota": "C-H shaft walls: 1\" shaftliner + 5/8\" Type X, C-H studs and J-runner (A0.06 C-H METAL, 8/A9.03, 7/A9.03, 1/A7.50, 3/A7.50, A5.08). Sheets: A0.06, A5.02, A9.05."
+  },
+  {
+   "id": "ALC-22",
+   "nombre": "Rated assemblies (UL designs) and their board type",
+   "estado": "CUANTIFICADO",
+   "nota": "Board type and layers per UL design of each rated type (A0.06 U379 / U301 / U415, A0.07 V337 / U305, A0.08 L546 / MB-1). Sheets: A0.01, A0.03, A0.06, A0.07, A0.08, A0.10, A0.11, A2.05, A5.02, A8.00, A9.02, A9.05, T0.01."
+  },
+  {
+   "id": "ALC-23",
+   "nombre": "Special panels (ballistic, lead-lined, abuse)",
+   "estado": "NO APLICA",
+   "nota": "No ballistic, lead-lined or abuse-resistant panels anywhere in the set (0 hits in text sweep)."
+  },
+  {
+   "id": "ALC-24",
+   "nombre": "Finish level (Level 4 / Level 5)",
+   "estado": "CUANTIFICADO",
+   "nota": "Level 5 at public areas per spec 09 29 00 3.6.E.5 (corridors, elevator lobbies, L1 lobby / bar faces): 12,380.2 SF; Level 4 elsewhere (3.6.E). Sheets: A0.01, A0.03, A0.04, A0.07, A0.08, A0.09, A4.03, A4.04, A4.05, A5.02, A5.07, A6.00, A6.01, A6.02, A7.13, A7.16, A7.23, A7.33, A8.02, A9.02, A9.05, A9.06, T0.01."
+  },
+  {
+   "id": "ALC-25",
+   "nombre": "Fasteners (screws, anchors, pins) - EXCLUDED",
+   "estado": "NO APLICA",
+   "nota": "Fasteners - screws, anchors, pins / PAF, Tapcon, bolts: EXCLUDED (estimator rule U-053, all projects); Material Summary fastener rows at 0."
+  },
+  {
+   "id": "ALC-26",
+   "nombre": "Slip / deflection track",
+   "estado": "NO APLICA",
+   "nota": "Slip / deflection track: NOT APPLICABLE - no metal-stud wall reaches structure (wood-framed partitions, Div. 06); C-H shaft walls use J-runner top and bottom with 1\" deflection per A0.06 general note 7 (J-runner rows)."
+  },
+  {
+   "id": "ALC-27",
+   "nombre": "Structural members on S-sheets (kicker, clip angle, L3x3) - EXCLUDED",
+   "estado": "NO APLICA",
+   "nota": "Structural members printed on S-sheets - KICKER (S1.02), CLIP ANGLE (S3.04), L3x3 (S3.08): structural steel / wood by others, EXCLUDED (not metal stud framing). RUNNER CHANNEL (A0.06 C-H detail) = J-runner, loaded."
+  }
+ ],
+ "add_alternates": [
+  {
+   "n": 1,
+   "rfi": "",
+   "impreso": "9/A6.01, 11/A6.01 (RE: INTERIOR DRAWINGS not issued)",
+   "texto": "Untagged 3 3/8\" interior lining of Lobby Stair 1 (L2-L4): 5/8\" type X board, 141.48 LF",
+   "razon": "REASON: element drawn without printed material; referenced 'RE: INTERIOR DRAWINGS' not issued in the bid set (9/A6.01, 11/A6.01); user rule U-195",
+   "cantidades": [
+    {
+     "material": "5/8\" gyp board Type X",
+     "qty": 1694.8,
+     "unit": "SF",
+     "op": "47.16 LF x (11.0 + 11.0 + 13.938) ft, 1 face, 1 layer = 1694.8 SF [DERIVED]"
+    }
+   ]
+  }
+ ],
+ "proyecto_datos": [
+  {
+   "campo": "name / city",
+   "valor": "City Hotel - Castle Rock, CO",
+   "fuente": "T0.00 cover"
+  },
+  {
+   "campo": "address",
+   "valor": "415 Perry Street, Castle Rock, CO",
+   "fuente": "T0.00 / title block"
+  },
+  {
+   "campo": "project type",
+   "valor": "New 4-story hotel (R-1) with lobby / bar (A-2), retail core & shell (M), parking (U); abuts existing historic building (separate permit)",
+   "fuente": "A0.00 scope of work"
+  },
+  {
+   "campo": "owner / tenant",
+   "valor": "White Development, LLC (owner)",
+   "fuente": "T0.00 project team"
+  },
+  {
+   "campo": "architect",
+   "valor": "Meridian 105 Architecture",
+   "fuente": "T0.00 project team"
+  },
+  {
+   "campo": "GC",
+   "valor": "Owen-Ames-Kimball - not printed on the sheets; estimator decision 13-nov (user order: bid folder name of the project)",
+   "fuente": "Drive bid folder name"
+  },
+  {
+   "campo": "bid date",
+   "valor": "11-12-26 - not printed on the sheets; estimator decision 13-nov (user order: bid folder name of the project)",
+   "fuente": "Drive bid folder name"
+  },
+  {
+   "campo": "bid set",
+   "valor": "Architectural Permit set 4.22.2026; Structural 4.22.2026; Specs Vol. 1-2 4.25.2025; MEP 6.1.2026 (not downloaded)",
+   "fuente": "T0.00 / file names"
+  },
+  {
+   "campo": "total SF",
+   "valor": "35,676 SF gross (L1 10,200 / L2 8,587 / L3 8,587 / L4 8,302)",
+   "fuente": "A0.00 PROPOSED BUILDING AREAS"
+  },
+  {
+   "campo": "stories",
+   "valor": "4",
+   "fuente": "A0.00 scope of work; A4.00"
+  },
+  {
+   "campo": "construction classification",
+   "valor": "Type IIIB",
+   "fuente": "A0.00"
+  },
+  {
+   "campo": "occupancy group",
+   "valor": "R-1, A-2, M, U (separated per IBC 508.4; L1 portion non-separated)",
+   "fuente": "A0.00"
+  },
+  {
+   "campo": "codes",
+   "valor": "2018 IBC / IFC / IMC (Town of Castle Rock)",
+   "fuente": "A0.00"
+  },
+  {
+   "campo": "occupancy load",
+   "valor": "approx. 80 occ (lobby facilities, L1 note) - full calculation on code plans A0.01-A0.05",
+   "fuente": "A0.00 plumbing note"
+  },
+  {
+   "campo": "sprinklered",
+   "valor": "Yes - fully sprinklered",
+   "fuente": "A0.00"
+  },
+  {
+   "campo": "demolition",
+   "valor": "No (new construction; existing historic building is a separate permit, not in scope)",
+   "fuente": "A0.00 scope; A2.01 grey area note"
+  },
+  {
+   "campo": "specs",
+   "valor": "Yes - Project Manual Vol. 1 and Vol. 2 (4.25.2025): 05 40 00, 09 21 16.23, 09 22 16, 09 29 00, 09 30 00",
+   "fuente": "Specs Vol. 1"
+  }
+ ],
+ "hojas_revisadas": [
+  {
+   "categoria": "cover / index",
+   "estado": "reviewed T0.00, T0.01"
+  },
+  {
+   "categoria": "code analysis / G",
+   "estado": "reviewed A0.00-A0.05"
+  },
+  {
+   "categoria": "general notes",
+   "estado": "reviewed A0.06 partition general notes, A2.0x floor plan general notes, A7.00 unit general notes"
+  },
+  {
+   "categoria": "demolition + notes",
+   "estado": "not in the set (new construction)"
+  },
+  {
+   "categoria": "specs",
+   "estado": "reviewed Vol. 1 (05 40 00, 09 21 16.23, 09 22 16, 09 29 00, 09 30 00)"
+  },
+  {
+   "categoria": "partition types + details",
+   "estado": "reviewed A0.06, A0.07, A0.08, A0.10, A9.01-A9.06"
+  },
+  {
+   "categoria": "floor plans",
+   "estado": "reviewed A2.01-A2.05, A6.00-A6.02"
+  },
+  {
+   "categoria": "RCP",
+   "estado": "reviewed A3.01-A3.04, A7.00-A7.19 unit RCPs, A7.23, A7.24, A7.31, A7.45, A7.50"
+  },
+  {
+   "categoria": "elevations / sections",
+   "estado": "reviewed A4.00-A4.05, A5.00-A5.08, A6.0x sections"
+  },
+  {
+   "categoria": "enlarged / interior elevations",
+   "estado": "reviewed A7.00-A7.35, A7.45, A7.50, A7.55"
+  },
+  {
+   "categoria": "schedules",
+   "estado": "reviewed A8.00-A8.02 door / window schedules"
+  },
+  {
+   "categoria": "structural",
+   "estado": "reviewed Structural set 4.22.2026 (truss depth / roof framing for heights)"
+  },
+  {
+   "categoria": "MEP",
+   "estado": "not in the set downloaded: MEP plans exist in the bid folder but ducts / penetrations are EXCLUDED by estimator rule R-ALC-03 (no MEP quantity in scope); reviewed as not applicable"
+  }
+ ],
+ "spec_por_material": [
+  [
+   "hanger wire",
+   "09 22 16 'Wire Hangers: ASTM A 641' (non-structural metal framing)"
+  ],
+  [
+   "suspension|main tee|cross tee|channel molding|angle molding",
+   "09 22 16 'Grid Suspension System for Ceilings: ASTM C 645'"
+  ],
+  [
+   "resilient channel",
+   "09 22 16 'Resilient Furring Channels'"
+  ],
+  [
+   "C-H stud|J-runner",
+   "09 21 16.23 'Studs' / 'Runner Tracks: ... J-profile track' (shaft wall assemblies)"
+  ],
+  [
+   "shaftliner",
+   "09 21 16.23 'Gypsum Liner Panels: ASTM C 442'"
+  ],
+  [
+   "exterior gypsum sheathing",
+   "06 16 00 'Glass-Mat Gypsum Wall Sheathing: ASTM C 1177'"
+  ],
+  [
+   "cement board",
+   "09 30 00 'Cementitious Backer Units: ANSI A118.9'"
+  ],
+  [
+   "W\\.R\\.|water resistant",
+   "09 29 00 water-resistant Type X board, mold-resistant core 5/8 inch Type X"
+  ],
+  [
+   "Type C",
+   "no spec section for Type C (09 29 00 lists Type X and moisture-resistant only): board per A0.08 FS-1 '5/8\" TYPE C GYPSUM BOARD CEILING'"
+  ],
+  [
+   "Type X",
+   "09 29 00 'Gypsum Board, Type X: ASTM C 1396'"
+  ],
+  [
+   "gypsum board",
+   "09 29 00 gypsum board ASTM C 1396 (section 09 29 00 Gypsum Board)"
+  ],
+  [
+   "trim|bead|molding",
+   "09 29 00 'TRIM ACCESSORIES' (Interior Trim: ASTM C 1047)"
+  ],
+  [
+   "joint compound",
+   "09 29 00 (joint treatment materials; 'exposed long flange receives joint compound')"
+  ],
+  [
+   "joint tape",
+   "09 29 00 'Joint Tape for Gypsum Board: Paper reinforcing tape'"
+  ],
+  [
+   "level 5",
+   "09 29 00 3.6.E.5 (Level 5 finish)"
+  ],
+  [
+   "control joint",
+   "09 29 00 'TRIM ACCESSORIES' (control joints)"
+  ],
+  [
+   ".",
+   "no spec section (no product of this row is specified in the Project Manual Div. 05-09)"
+  ]
+ ]
+}

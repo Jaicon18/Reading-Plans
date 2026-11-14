@@ -15,6 +15,8 @@ def main(cp, dp):
     log, err, borrados, avisos = [], [], set(), []
     for f in sorted(glob.glob(os.path.join(dp, "*.json"))):
         P = json.load(open(f, encoding="utf-8"))
+        if not isinstance(P, dict) or "ops" not in P:            # un archivo que no es parche no se aplica (y se avisa)
+            err.append(f"{os.path.basename(f)}: no es un parche {{autor, ops}} (sacarlo de la carpeta de parches)"); continue
         for o in P.get("ops", []):
             op, L = o.get("op"), o.get("list")
             if op in ("set", "del"):

@@ -9,15 +9,15 @@
 | 5 | resolución | 2026-11-13 19:40 PST | 2026-11-13 20:17 PST | 36 min |
 | 6 | cálculo (canon.py, accesorios, trims) | 2026-11-13 20:17 PST | 2026-11-13 20:28 PST | 10 min |
 | 7 | Excel | 2026-11-13 20:28 PST | 2026-11-13 20:40 PST | 12 min |
-| 8 | markups Bluebeam walls + RCP (fin = markups_rcp 05:08:15 UTC en bitacora.jsonl) | 2026-11-13 20:40 PST | 2026-11-13 21:08 PST | 28 min |
+| 8 | markups Bluebeam walls + RCP (fin = última corrida markups_rcp 21:08:15 PST, bitácora) | 2026-11-13 20:40 PST | 2026-11-13 21:08 PST | 28 min |
 | 9 | compuertas tempranas + arreglos + revisión independiente + compuerta final | 2026-11-13 21:08 PST | en curso | |
 | TOTAL | pasos 0-9 (sin la subida, paso 10) | | | 132 min |
 
 corridas de compuerta: 0
 
 - Lecturas (paso 2-3): A-L1, A-L2, A-L3, A-L4, A-CEIL/DET, B-L1L2, B-L3L4, H-A y H-B (alturas A / B) en paralelo, + CORES_L2L4 A/B
-- tool fixes (tiempo dentro del paso donde ocurrieron): BE-CR0-01 18:58–19:03 (P1), BE-CR0-02 (P2-3), BE-CR0-03 19:41 (P5), BE-CR0-04 20:37 (P7), BE-CR0-05 21:22 (P9), BE-CR0-06 21:50 (P9)
-- reinicio de contenedor: ninguno. Compactación de contexto 21:3x–21:40 (sin pérdida de trabajo; tiempo incluido en el paso 9)
+- tool fixes (tiempo dentro del paso donde ocurrieron): BE-CR0-01 18:58–19:03 (P1), BE-CR0-02 (P2-3), BE-CR0-03 19:41 (P5), BE-CR0-04 20:37 (P7), BE-CR0-05 21:22 (P9), BE-CR0-06/07/08 21:45–21:52 (P9)
+- reinicio de contenedor: ninguno. Compactación de contexto ~21:38–21:40 (sin pérdida de trabajo; tiempo incluido en el paso 9)
 
 ## Bitácora detallada
 - INICIO: 2026-11-13 18:41:49 PST (primera acción)
@@ -51,3 +51,5 @@ corridas de compuerta: 0
 - 22:48:05 cierre de textos/imágenes/spec/labels por programa; tool fixes BE-CR0-09 (capas en markups_rcp), BE-CR0-10 (BE-20 soffit madera / BE-02 membrana oculta), BE-CR0-11 (cita de cielos en trazabilidad); revisor E (faltantes + U199) en curso
 - 22:5x REINICIO DEL CONTENEDOR (tiempo perdido: cadena completa y revisor F cortados ~22:52-22:58; archivos intactos). Se relanza la cadena y se retoma F.
 - 23:17:21 cambio a skill VIGENTE v81cf138w (= t + BE-CR0-05..08 publicados) + arreglos locales BE-CR0-09/10/11 re-aplicados (pendientes de publicar)
+- 23:39:21 revisores E (faltantes, +237 SF W.6-L1-42) y F (U-199 (1)(5)(6)(7), +174 SF cielos) integrados; lote de cierre (textos, verificaciones en bitácora, burbujas S, schedules_ms); tool fixes BE-CR0-12 (largo por cara en stack) y BE-CR0-13 (bidset_detalles A+S); lectura B ciega de shafts en curso
+- 00:04:18 PAUSA por orden de COORDINACIÓN (límite semanal del usuario en allowed_warning): cadena terminada, nada lanzado; se retoma solo con su orden

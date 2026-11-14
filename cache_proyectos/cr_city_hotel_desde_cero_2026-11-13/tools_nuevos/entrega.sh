@@ -22,4 +22,16 @@ python3 -s $T/compuerta_entrega.py schedules $W | tail -1
 python3 -s $T/compuerta_entrega.py detalles $W | tail -1
 python3 -s $T/bitacora.py run $T/compuerta_entrega.py cobertura "$D" > etapas/cobertura.log 2>&1 || tail -3 etapas/cobertura.log
 python3 -s $T/checklist_revision.py "$X" "$MK" /root/cr0/bidset/CityHotel_ArchitecturalPlans_4.22.2026_SIN_MARKUPS.pdf etapas/4_canon/takeoff_canon.json "$D/CHECKLIST_REVISION.xlsx" --proy CR --b6 "$D/Auditoria/COBERTURA.csv" | tail -1 || true
+# verificaciones que reglas.py exige en la bitácora (con SUBAGENTE_ID): alcances / registro / framed openings / filtros, closer, planmark, ciego
+B="python3 -s $T/bitacora.py run"
+$B $T/alcances.py escanear /root/cr0/bidset/CityHotel_ArchitecturalPlans_4.22.2026_SIN_MARKUPS.pdf alcances.json > etapas/verif.log 2>&1 || true
+$B $T/framed_openings.py etapas/4_canon/fo_in.json etapas/4_canon/out/framed_openings_out.json >> etapas/verif.log 2>&1 || true
+$B $T/alcance_filtro.py etapas/4_canon/alcance_in.json etapas/4_canon/out/alcance_out.json >> etapas/verif.log 2>&1 || true
+$B $T/plantilla_excel.py validar takeoff.json >> etapas/verif.log 2>&1 || true
+$B $T/registro.py entregable registro.json >> etapas/verif.log 2>&1 || true
+$B $T/alcances.py compuerta registro.json alcances.json "$X" >> etapas/verif.log 2>&1 || true
+$B $T/test_closer_hoja3.py >> etapas/verif.log 2>&1 || true
+$B $T/test_smoke_ciego.py >> etapas/verif.log 2>&1 || true
+$B $T/test_ciego.py >> etapas/verif.log 2>&1 || true
+python3 -s $N/textos_finales.py "$D/README_REVIEW.md" "$D/PARA_REVISAR_EN_LA_MANANA.md" "$D/SEGUIMIENTO.md" "$D/GUIA_DE_REVISION_DEL_ESTIMADOR.md" "$D/RESUMEN_rev1.md"
 python3 -s $T/compuerta_entrega.py leeme "$D" | tail -1
