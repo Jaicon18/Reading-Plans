@@ -1,0 +1,30 @@
+{
+    "permissions": {
+    "allow": [
+      "Bash(python3 -I /opt/takeoff/gdrive_fetch.py:*)",
+      "Bash(python3 -I tools/subir_entrega.py:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/arranque_reglas.sh\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$CLAUDE_PROJECT_DIR/.claude/hooks/registrar_orden.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
