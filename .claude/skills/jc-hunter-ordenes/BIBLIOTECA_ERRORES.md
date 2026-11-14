@@ -718,3 +718,9 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Arreglo: la misma normalización a los dos lados (`esperado_n`). Prueba: `test_be_cr0_01_inv_I1.py` (repite el error: el tag sin
   normalizar no está en el texto leído normalizado). Tool y test en cache_proyectos/cr_city_hotel_desde_cero_2026-11-13/tools_nuevos/;
   unir a la línea principal (programa, compuerta del Paso 1: inventario rc 0).
+
+## BE-CR0-02 — lectores en paralelo: misma constante con fuentes distintas bloquea `etapas.py unir` (CR PRUEBA DESDE CERO, 13-nov)
+- Error: con un fragmento por lector, `unir` rechazaba plan_scale_by_sheet / plan_scale_pt_per_ft / details del mismo N/HOJA escritos
+  con textos de fuente distintos (mismo valor) → canon imposible de unir.
+- Arreglo: `normalizar_fragmentos.py` (constants / details a 00_comunes.json; iguales se unen, distintos = ERROR; la escala global es la
+  de las plantas A2.x y otra escala vale solo con su hoja en plan_scale_by_sheet). Prueba: test_be_cr0_02_normalizar.py.

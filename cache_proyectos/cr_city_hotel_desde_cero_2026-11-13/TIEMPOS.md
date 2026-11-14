@@ -6,3 +6,9 @@
 - PASO 1 (inventario) INICIO 18:56:35 (OCR 17 hojas terminado antes)
 - PASO 1 FIN 19:04:02 (inventario rc 0; 17 types; ~395 tags; BE-CR0-01 arreglado: I/1 en verificar_png)
 - PASO 2 (lectura A) + PASO 3 (lectura B) + H-A/H-B INICIO 19:05:53 — subagentes en paralelo: A-L1, A-L2, A-L3, A-L4, A-CEIL/DET, B-L1L2, B-L3L4, H-A, H-B
+- tool fix BE-CR0-01 (inventario I/1): 18:58–19:03 dentro del Paso 1; enviado a Xfinity 19:07:46
+- 19:23:20 hueco de cobertura detectado (cores escalera/elevador L2-L4 sin dueño) -> lecturas A/B CORES_L2L4 lanzadas
+- PASOS 2-3 FIN 19:37:37 (11 lecturas: A 7 fragmentos, B 5 fragmentos, H-A, H-B; tool fix BE-CR0-02 normalizar_fragmentos)
+- PASO 4 (comparación) INICIO 19:37:37
+- PASO 4 FIN 19:40:38 (comparar.py: metal 4 coinciden/3 difieren/8 solo A/1 solo B, 589 alertas; comparar_extra board-only: 196 tags, 171 difieren)
+- PASO 5 (resolución) INICIO 19:40:38 — 5 resolvedores (L1, L2, L3, L4, CORES) + back-check ciego de cielos; criterios en 3_revision/CRITERIOS_RESOLUCION.md
