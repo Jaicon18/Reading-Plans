@@ -9107,6 +9107,20 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_cr0_03_owner_existing"
    }
+  },
+  {
+   "id": "BE-CR0-04",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO 04:48 UTC, U-202)",
+   "categoria": "programa",
+   "cuando": "lectura",
+   "texto_corto": "comparar.ambiguos_sin_disposicion compara el type de un tag ambiguo también con el type_id de los walls board-only (existing_walls: 'XW.6.3-0' -> 'XW.6.3'); antes 'citado en tag_ids de un wall de otro type' con el tag bien asignado",
+   "chequeos": [
+    "take-off:tools/comparar.py::ambiguos_sin_disposicion"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr0_04_ambiguo_type_id"
+   }
   }
  ]
 }
