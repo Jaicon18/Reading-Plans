@@ -1,0 +1,150 @@
+diff -ruN -x __pycache__ v138q/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138r/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138q/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 03:49:11.840320781 +0000
++++ v138r/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 03:51:19.604328376 +0000
+@@ -9080,11 +9080,17 @@
+   {
+    "id": "BE-CR0-02",
+    "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, U-202)",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+-   "pendiente_desde": "2026-11-14T03:40:38+00:00",
+    "texto_corto": "con lectores en paralelo (un fragmento por lector), la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA escrito con textos de fuente distintos se unen (fuentes concatenadas); valores distintos = ERROR (nunca se elige en silencio): normalizar_fragmentos.py antes de etapas.py unir",
+-   "motivo": "el arreglo de tool + test llega de la sesión CR DESDE CERO en su próximo push; se publica en la versión siguiente antes de 4 h (U-202)"
++   "motivo": "v81cf138r: etapas.py normalizar <fragmentos> <out> antes de unir (de la sesión CR DESDE CERO, integrado en etapas.py para no pasar de 199 archivos)",
++   "chequeos": [
++    "take-off:tools/etapas.py::normalizar_fragmentos"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_be_cr0_02_normalizar_fragmentos"
++   }
+   },
+   {
+    "id": "BE-CR0-03",
+diff -ruN -x __pycache__ v138q/take-off-metal-frame-drywall/SKILL.md v138r/take-off-metal-frame-drywall/SKILL.md
+--- v138q/take-off-metal-frame-drywall/SKILL.md	2026-11-14 03:47:46.753296611 +0000
++++ v138r/take-off-metal-frame-drywall/SKILL.md	2026-11-14 03:51:19.613949459 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138q** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138r** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,6 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
++- **BE-CR0-02 (programa desde v81cf138r, CR desde cero 14-nov):** con lectores en paralelo, antes de `etapas.py unir` se corre `etapas.py normalizar <fragmentos> <out>`: la MISMA constante (plan_scale_by_sheet / plan_scale_pt_per_ft) o el MISMO detalle N/HOJA con fuentes distintas se unen (fuentes concatenadas, cada lector citado); valores distintos = ERROR (nunca se elige en silencio); la escala global = la de las plantas generales (A2.x). No toca números de walls / ceilings. Test test_be_cr0_02_normalizar_fragmentos.
+ - **BE-COORD03 (programa desde v81cf138q, COORDINACIÓN 14-nov):** el hook U-136 (.claude/hooks/registrar_orden.py) publica cada mensaje del usuario en la bandeja central (cache_proyectos/ORDENES_CRUDAS/_entrantes.jsonl de claude/gifted-pasteur-x2sfzs) desde CUALQUIER rama, con un clon propio en caché (fetch + append + commit + push; si falla queda pendiente y se reintenta); toda sesión que recibe mensajes del usuario tiene .claude/settings.json con el hook. verificar_version.revisar_bandeja_u136: la última orden registrada en ORDENES_DEL_USUARIO.md > 24 h más nueva que el último mensaje real de la bandeja = FALLA. Test bandeja_be_coord03.
+ - **BE-CR0-01 (programa desde v81cf138p, CR desde cero 13-nov):** inventario_tags.verificar_png compara el tag esperado con el texto bajo la marca con la MISMA normalización I -> 1 a los dos lados (coincide_tag); antes FI.2 / FI.6 / XI.2.7 salían 'PNG NO VERIFICADO' y el inventario daba rc 1. Test test_be_cr0_01_inventario_i1.
+ - **BE-CR48 (programa desde v81cf138o, CR rev20d 14-nov):** cuando el head del type baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (4/A4.03: FW.2-L3-06 9.8958 -> 8.875). Programa: U-199 (7) secciones_fallas + u199_disp_vieja: disposición con 'take-off <altura>' distinta de la vigente = FAIL. Test test_be_cr48_disposicion_vieja (caso real CR antes 2 / después 0).
+diff -ruN -x __pycache__ v138q/take-off-metal-frame-drywall/tools/etapas.py v138r/take-off-metal-frame-drywall/tools/etapas.py
+--- v138q/take-off-metal-frame-drywall/tools/etapas.py	2026-11-13 06:19:19.038824999 +0000
++++ v138r/take-off-metal-frame-drywall/tools/etapas.py	2026-11-14 03:51:04.420112221 +0000
+@@ -405,7 +405,69 @@
+     return out, errores
+ 
+ 
++def normalizar_fragmentos(src, out):
++    """BE-CR0-02 (CR desde cero 13-nov; sesión CR DESDE CERO): varios lectores en paralelo escriben la MISMA constante
++    (plan_scale_by_sheet, plan_scale_pt_per_ft) o el MISMO detalle con textos de fuente distintos y `unir` lo rechazaba como conflicto.
++    Copia los fragmentos a <out> y mueve constants / details a 00_comunes.json: valores IGUALES se unen (fuentes concatenadas); DISTINTOS
++    = ERROR (nunca se elige en silencio); plan_scale_pt_per_ft global = la escala de las plantas generales (A2.x), otra solo si su hoja la
++    declara en plan_scale_by_sheet; details del mismo N/HOJA: notas unidas citando a cada lector. No cambia ningún número de walls /
++    ceilings. -> rc (0 / 1)"""
++    os.makedirs(out, exist_ok=True)
++    comunes = {"constants": {}, "details": {}}
++    errores = []
++    pend = []
++    for f in sorted(x for x in os.listdir(src) if x.endswith(".json")):
++        d = json.load(open(os.path.join(src, f), encoding="utf-8"))
++        c = d.pop("constants", {}) or {}
++        for k, v in c.items():
++            if k == "plan_scale_by_sheet":
++                tgt = comunes["constants"].setdefault(k, {})
++                for sh, sv in v.items():
++                    if sh not in tgt:
++                        tgt[sh] = dict(sv) if isinstance(sv, dict) else {"value": sv, "source": f}
++                    else:
++                        a = tgt[sh]; vb = sv.get("value") if isinstance(sv, dict) else sv
++                        if float(a["value"]) != float(vb):
++                            errores.append(f"{k}.{sh}: {a['value']} vs {vb} ({f})")
++                        elif isinstance(sv, dict) and sv.get("source") not in a["source"]:
++                            a["source"] += " | " + str(sv.get("source"))
++            elif k == "plan_scale_pt_per_ft":     # global = escala de las plantas generales; otra escala vale solo si
++                pend.append((f, v, c.get("plan_scale_by_sheet") or {}))   # está declarada por hoja en plan_scale_by_sheet
++            elif isinstance(v, dict) and "value" in v:
++                if k not in comunes["constants"]:
++                    comunes["constants"][k] = dict(v)
++                elif comunes["constants"][k]["value"] != v["value"]:
++                    errores.append(f"{k}: {comunes['constants'][k]['value']} vs {v['value']} ({f})")
++                elif str(v.get("source")) not in str(comunes["constants"][k].get("source")):
++                    comunes["constants"][k]["source"] = f"{comunes['constants'][k].get('source')} | {v.get('source')}"
++            else:
++                comunes["constants"].setdefault(k, v)
++        for k, v in (d.pop("details", {}) or {}).items():
++            if k not in comunes["details"]:
++                comunes["details"][k] = dict(v, readers=[f])
++            else:
++                e = comunes["details"][k]
++                e["readers"].append(f)
++                if str(v.get("notes")) not in str(e.get("notes")):
++                    e["notes"] = f"{e.get('notes')} || [{f}] {v.get('notes')}"
++        json.dump(d, open(os.path.join(out, f), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
++    psb = comunes["constants"].get("plan_scale_by_sheet") or {}
++    gen = [(f, v) for f, v, _ in pend if any(sh.startswith("A2.") and float(psb[sh]["value"]) == float(v["value"]) for sh in psb)]
++    if gen:
++        comunes["constants"]["plan_scale_pt_per_ft"] = {"value": gen[0][1]["value"], "source": " | ".join(sorted({str(v.get("source")) for _, v in gen}))}
++    for f, v, propio in pend:
++        if float(v["value"]) != float(comunes["constants"].get("plan_scale_pt_per_ft", {}).get("value", v["value"])) and \
++                not any(float((x.get("value") if isinstance(x, dict) else x)) == float(v["value"]) for x in propio.values()):
++            errores.append(f"plan_scale_pt_per_ft {v['value']} ({f}) sin hoja en plan_scale_by_sheet")
++    json.dump(comunes, open(os.path.join(out, "00_comunes.json"), "w"), indent=1)
++    for e in errores:
++        print("ERROR:", e)
++    return 1 if errores else 0
++
++
+ def main(argv):
++    if len(argv) == 4 and argv[1] == "normalizar":            # BE-CR0-02
++        return normalizar_fragmentos(argv[2], argv[3])
+     if len(argv) >= 4 and argv[1] == "unir":
+         a = list(argv)
+         inv = None
+diff -ruN -x __pycache__ v138q/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138r/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138q/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 03:08:20.483011750 +0000
++++ v138r/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-14 03:51:04.420826077 +0000
+@@ -1371,3 +1371,29 @@
+ 
+ 
+ test_be_cr0_01_inventario_i1()
++
++
++def test_be_cr0_02_normalizar_fragmentos():
++    """BE-CR0-02 (CR desde cero, test del proyecto test_be_cr0_02_normalizar.py): dos lectores con la MISMA escala y textos de fuente
++    distintos = `unir` fallaba; etapas.normalizar_fragmentos los une (fuentes concatenadas, global = escala de A2.x); valores distintos = rc 1."""
++    import tempfile
++    import etapas as ET
++    def run(frags):
++        d, o = tempfile.mkdtemp(), tempfile.mkdtemp()
++        for n, f in frags.items():
++            json.dump(f, open(os.path.join(d, n), "w"))
++        rc = ET.normalizar_fragmentos(d, o)
++        p = os.path.join(o, "00_comunes.json")
++        return rc, (json.load(open(p)) if os.path.exists(p) else None)
++    rc, c = run({"a.json": {"constants": {"plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "x"}}, "plan_scale_pt_per_ft": {"value": 9.0, "source": "x"}}},
++                 "b.json": {"constants": {"plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "y"}, "A6.00": {"value": 18.0, "source": "z"}},
++                                          "plan_scale_pt_per_ft": {"value": 18.0, "source": "z"}}}})
++    assert rc == 0 and c["constants"]["plan_scale_by_sheet"]["A2.01"]["source"] == "x | y" and c["constants"]["plan_scale_pt_per_ft"]["value"] == 9.0, c
++    rc, _ = run({"a.json": {"constants": {"plan_scale_by_sheet": {"A2.01": {"value": 9.0, "source": "x"}}}},
++                 "b.json": {"constants": {"plan_scale_by_sheet": {"A2.01": {"value": 18.0, "source": "y"}}}}})
++    assert rc == 1
++    rc, c = run({"a.json": {"details": {"3/A9.01": {"notes": "head per A0.06"}}}, "b.json": {"details": {"3/A9.01": {"notes": "deflection track"}}}})
++    assert rc == 0 and c["details"]["3/A9.01"]["readers"] == ["a.json", "b.json"] and "deflection" in c["details"]["3/A9.01"]["notes"]
++
++
++test_be_cr0_02_normalizar_fragmentos()
