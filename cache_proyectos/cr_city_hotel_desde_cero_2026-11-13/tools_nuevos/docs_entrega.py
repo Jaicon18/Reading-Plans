@@ -19,7 +19,7 @@ if "OUT OF RANGE:" in bank:
 mat = "\n".join(f"| {m[0]} | {m[1]} | {m[2]:,.1f} |" for m in ms if m[2])
 excl = [r for r in wb["Scope Checklist"].iter_rows(min_row=2, values_only=True) if r and r[0] and "EXCLUDED" in " ".join(str(x or "") for x in r)]
 exc = "\n".join(f"- {r[1]} — {str(r[3] or '')[:220]}" for r in excl)
-readme = f"""# README_REVIEW — CR City Hotel, Castle Rock CO — take-off rev1 (PRUEBA DESDE CERO 13-nov)
+readme = f"""# README_REVIEW - CR City Hotel, Castle Rock CO - take-off rev1 (from-scratch test run, 13-nov)
 
 ## PROJECT DATA
 | Field | Value | Source |
@@ -110,3 +110,10 @@ Limits of this delivery:
 - Heights come only from printed datums (never scaled).
 """
 open(os.path.join(D, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "w").write(guia)
+guia_lim = """
+Limits of the coverage map (U-193, COORDINACIÓN 12-nov):
+- A wall with a single missing face is NOT shown in red by the coverage map; diagonal walls are NOT shown in red either (they are swept apart: CE_COBERTURA_DIAG, Auditoria/COBERTURA_DISPOSICION.csv).
+- Two leaves that the map merges into one covered wall are not shown in red (BE-GK54): a 'same wall' exclusion needs its gap proof with N/SHEET.
+- The identity of the reviewer / subagent is DECLARED (SUBAGENTE_ID / bitacora subagente), not verified by the program: the independent coverage reviewer is 'revcob_cr0_ind1' (role revisor_cobertura); the author of the chain is 'autor_cr0_orquestador'.
+"""
+open(os.path.join(D, "GUIA_DE_REVISION_DEL_ESTIMADOR.md"), "a").write(guia_lim)

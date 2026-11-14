@@ -67,8 +67,8 @@ tk["proyecto_datos"] = [
  {"campo": "project type", "valor": "New 4-story hotel (R-1) with lobby / bar (A-2), retail core & shell (M), parking (U); abuts existing historic building (separate permit)", "fuente": "A0.00 scope of work"},
  {"campo": "owner / tenant", "valor": "White Development, LLC (owner)", "fuente": "T0.00 project team"},
  {"campo": "architect", "valor": "Meridian 105 Architecture", "fuente": "T0.00 project team"},
- {"campo": "GC", "valor": "Owen-Ames-Kimball (bid folder name; not printed on the sheets) - the sheets do not print it; estimator decision: taken from the bid folder name", "fuente": "Drive bid folder name"},
- {"campo": "bid date", "valor": "11-12-26 (bid folder name) - the sheets do not print it; estimator decision: taken from the bid folder name", "fuente": "Drive bid folder name"},
+ {"campo": "GC", "valor": "Owen-Ames-Kimball - not printed on the sheets; estimator decision 13-nov (user order: bid folder name of the project)", "fuente": "Drive bid folder name"},
+ {"campo": "bid date", "valor": "11-12-26 - not printed on the sheets; estimator decision 13-nov (user order: bid folder name of the project)", "fuente": "Drive bid folder name"},
  {"campo": "bid set", "valor": "Architectural Permit set 4.22.2026; Structural 4.22.2026; Specs Vol. 1-2 4.25.2025; MEP 6.1.2026 (not downloaded)", "fuente": "T0.00 / file names"},
  {"campo": "total SF", "valor": "35,676 SF gross (L1 10,200 / L2 8,587 / L3 8,587 / L4 8,302)", "fuente": "A0.00 PROPOSED BUILDING AREAS"},
  {"campo": "stories", "valor": "4", "fuente": "A0.00 scope of work; A4.00"},
@@ -105,6 +105,26 @@ for r in tk["rfis"]:
         hs = sorted({h for h, v in hojas.items() if t.upper() in _txt(v).upper()})
         res.append(f"'{t}': {len(hs)} sheet(s) {hs[:12]}")
     r["barrido"] = {"hojas": "ALL", "terminos": terms, "grep": "set_texto.json (A + S sets, incl. SHX / OCR) -> " + "; ".join(res)}
+# BE-CF10: sección de spec por material (Project Manual 4.25.2025, encabezados impresos de cada sección; specs/*.txt)
+tk["spec_por_material"] = [
+    [r"hanger wire", "09 22 16 'Wire Hangers: ASTM A 641' (non-structural metal framing)"],
+    [r"suspension|main tee|cross tee|channel molding|angle molding", "09 22 16 'Grid Suspension System for Ceilings: ASTM C 645'"],
+    [r"resilient channel", "09 22 16 'Resilient Furring Channels'"],
+    [r"C-H stud|J-runner", "09 21 16.23 'Studs' / 'Runner Tracks: ... J-profile track' (shaft wall assemblies)"],
+    [r"shaftliner", "09 21 16.23 'Gypsum Liner Panels: ASTM C 442'"],
+    [r"exterior gypsum sheathing", "06 16 00 'Glass-Mat Gypsum Wall Sheathing: ASTM C 1177'"],
+    [r"cement board", "09 30 00 'Cementitious Backer Units: ANSI A118.9'"],
+    [r"W\.R\.|water resistant", "09 29 00 'Moisture- and Mold-Resistant Type' (Core 5/8 inch, Type X)"],
+    [r"Type C", "no spec section for Type C (09 29 00 lists Type X and moisture-resistant only): board per A0.08 FS-1 '5/8\" TYPE C GYPSUM BOARD CEILING'"],
+    [r"Type X", "09 29 00 'Gypsum Board, Type X: ASTM C 1396'"],
+    [r"gypsum board", "09 29 00 gypsum board ASTM C 1396 (section 09 29 00 Gypsum Board)"],
+    [r"trim|bead|molding", "09 29 00 'TRIM ACCESSORIES' (Interior Trim: ASTM C 1047)"],
+    [r"joint compound", "09 29 00 (joint treatment materials; 'exposed long flange receives joint compound')"],
+    [r"joint tape", "09 29 00 'Joint Tape for Gypsum Board: Paper reinforcing tape'"],
+    [r"level 5", "09 29 00 3.6.E.5 (Level 5 finish)"],
+    [r"control joint", "09 29 00 'TRIM ACCESSORIES' (control joints)"],
+    [r".", "no spec section (no product of this row is specified in the Project Manual Div. 05-09)"],
+]
 _t = json.dumps(tk, ensure_ascii=False)
 for a, b in (("6/U-201", "U-201 (6)"), ("RFI-01 withdrawn.", "Question withdrawn by estimator decision (printed UL design governs)."),
              ("Former RFI-08 (", "Closed by estimator decision ("), ("no existe en el set", "not in the set")):

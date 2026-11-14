@@ -755,3 +755,14 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Error: reporté a COORDINACIÓN "22:20 PST, 3h39m" sin consultar el reloj (real 21:00 PST / 2h18m); corregido por mensaje.
 - Regla (todos los proyectos): toda hora o duración que se reporte sale de `TZ=America/Los_Angeles date` en ese momento y de
   TIEMPOS.md; nunca estimada de memoria.
+
+## BE-CR0-09 — markups_rcp: cielo de 2 capas (RS-6) sin 'board = N layer(s) x drawn area' (CR PRUEBA DESDE CERO, 13-nov)
+- Error: la vista Bluebeam comparaba Area 266.2 contra 532.4 SF del Excel (2 capas). Arreglo: el Contents del cielo lleva el rótulo de capas
+  cuando layers (int o {value}) > 1. Prueba: test_be_cr0_09_10_11.py.
+
+## BE-CR0-10 — be_20 / be_02 falsos positivos en edificio de madera (CR PRUEBA DESDE CERO, 13-nov)
+- be_20: soffit armado solo en madera (Div. 06 EXCLUDED) pedía track metálico. be_02: la membrana FS-1 'above GYP-1' (oculta, doble cielo)
+  se juzgaba como cielo expuesto del wet room. Arreglo: exentos con el mismo criterio de BE-CR29 / BE-XF13. Prueba: test_be_cr0_09_10_11.py.
+
+## BE-CR0-11 — trazabilidad._item no encontraba renglones de cielo (CR PRUEBA DESDE CERO, 13-nov)
+- Error: el renglón Type C (solo cielos) salía 'N/SHEET: default (no sheet)'. Arreglo: _item busca en ceilings por 'ceiling <room>' / id / room.

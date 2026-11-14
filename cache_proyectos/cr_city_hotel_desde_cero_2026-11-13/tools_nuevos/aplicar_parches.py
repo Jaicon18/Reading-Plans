@@ -12,23 +12,26 @@ import glob, json, os, sys
 
 def main(cp, dp):
     c = json.load(open(cp, encoding="utf-8"))
-    log, err = [], []
+    log, err, borrados, avisos = [], [], set(), []
     for f in sorted(glob.glob(os.path.join(dp, "*.json"))):
         P = json.load(open(f, encoding="utf-8"))
         for o in P.get("ops", []):
             op, L = o.get("op"), o.get("list")
             if op in ("set", "del"):
                 lst = c.get(L) or []
-                hit = [e for e in lst if isinstance(e, dict) and e.get("id") == o["id"]]
+                kk = "id" if "id" in o else "ref"                 # misc_items / trims se identifican por 'ref'
+                hit = [e for e in lst if isinstance(e, dict) and e.get(kk) == o[kk]]
+                if not hit and o[kk] in borrados:
+                    avisos.append(f"{os.path.basename(f)}: {op} {L} '{o[kk]}' ya borrado por un parche anterior (se omite)"); continue
                 if not hit:
-                    err.append(f"{os.path.basename(f)}: {op} {L} id '{o['id']}' no existe"); continue
+                    err.append(f"{os.path.basename(f)}: {op} {L} {kk} '{o[kk]}' no existe"); continue
                 if op == "set":
                     for e in hit:
                         for k, v in o["fields"].items():
                             if v is None: e.pop(k, None)
                             else: e[k] = v
                 else:
-                    c[L] = [e for e in lst if not (isinstance(e, dict) and e.get("id") == o["id"])]
+                    c[L] = [e for e in lst if not (isinstance(e, dict) and e.get(kk) == o[kk])]; borrados.add(o[kk])
             elif op == "add":
                 c.setdefault(L, []).append(o["entry"])
             elif op == "top":
@@ -43,11 +46,13 @@ def main(cp, dp):
             else:
                 err.append(f"{os.path.basename(f)}: op desconocida {op}"); continue
             log.append({"file": os.path.basename(f), "autor": P.get("autor", ""), "op": op, "list": L or o.get("key"),
-                        "id": o.get("id") or (o.get("entry") or {}).get("id", ""), "reason": o.get("reason", "")})
+                        "id": o.get("id") or o.get("ref") or (o.get("entry") or {}).get("id", ""), "reason": o.get("reason", "")})
     c["parches_aplicados_info"] = log
-    json.dump(c, open(cp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     print(f"parches: {len(log)} ops aplicadas, {len(err)} errores")
     for e in err: print("  ERROR", e)
+    for e in avisos: print("  aviso", e)
+    c["parches_aplicados_info"].append({"avisos": avisos})
+    json.dump(c, open(cp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     return 1 if err else 0
 
 if __name__ == "__main__":

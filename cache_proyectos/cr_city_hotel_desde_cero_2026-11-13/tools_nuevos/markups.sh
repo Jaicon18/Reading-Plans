@@ -1,9 +1,10 @@
 #!/bin/bash
 # Paso 8 (programas): markups Bluebeam de walls (+ cielos si hay rcp_polys) -> PDF de entrega + imagen por hoja
 set -e
-W=/root/cr0/work; T=/root/cr0/skill_s/take-off-metal-frame-drywall/tools; N=/root/cr0/tools_nuevos
+W=/root/cr0/work; T=/root/cr0/skill_w/take-off-metal-frame-drywall/tools; N=/root/cr0/tools_nuevos
 D="$W/PRUEBA DESDE CERO 13-nov"; PM="$D/Planos marcados"; mkdir -p "$PM" $W/etapas/6_markups
 export BITACORA=$W/bitacora.jsonl
+export SUBAGENTE_ID=${SUBAGENTE_ID:-autor_cr0_orquestador}
 PDF=/root/cr0/bidset/CityHotel_ArchitecturalPlans_4.22.2026_SIN_MARKUPS.pdf
 cd $W
 python3 -s $T/bitacora.py run $T/markups_bluebeam.py $PDF etapas/4_canon/takeoff_canon.json etapas/6_markups/markups_walls.pdf --inventario etapas/1_inventario/inventario.json > etapas/6_markups/markups_walls.log 2>&1 || { tail -5 etapas/6_markups/markups_walls.log; exit 1; }

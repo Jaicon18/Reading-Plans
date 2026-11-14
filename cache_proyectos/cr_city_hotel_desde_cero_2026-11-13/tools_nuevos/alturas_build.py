@@ -423,7 +423,7 @@ def rooms_rows(path, lect):
     return sorted(out, key=lambda x: (x["Level"], re.search(r"\d{3}", x["Room"]).group(0), peso(x)))
 
 
-sys.path.insert(0, "/root/cr0/skill_s/take-off-metal-frame-drywall/tools")
+sys.path.insert(0, "/root/cr0/skill_w/take-off-metal-frame-drywall/tools")
 import comparar_alturas as T  # noqa: E402
 
 ra, rb = rooms_rows(f"{HA}/ALTURAS_ROOMS_A.csv", "H-A"), rooms_rows(f"{HB}/ALTURAS_ROOMS_B.csv", "H-B")

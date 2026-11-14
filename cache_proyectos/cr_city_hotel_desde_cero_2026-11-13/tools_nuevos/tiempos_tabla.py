@@ -10,7 +10,7 @@ F = [("0", "arranque (set_texto, OCR 17 hojas)", "18:45:22", "18:51:13"),
      ("5", "resolución", "19:40:38", "20:17:25"),
      ("6", "cálculo (canon.py, accesorios, trims)", "20:17:25", "20:28:01"),
      ("7", "Excel", "20:28:01", "20:40:14"),
-     ("8", "markups Bluebeam walls + RCP (fin = markups_rcp 05:08:15 UTC en bitacora.jsonl)", "20:40:14", "21:08:15"),
+     ("8", "markups Bluebeam walls + RCP (fin = última corrida markups_rcp 21:08:15 PST, bitácora)", "20:40:14", "21:08:15"),
      ("9", "compuertas tempranas + arreglos + revisión independiente + compuerta final", "21:08:15", None)]
 fin9 = sys.argv[1] if len(sys.argv) > 1 else None
 corr = sys.argv[2] if len(sys.argv) > 2 else "0"
@@ -31,8 +31,8 @@ head = ["# TIEMPOS — CR City Hotel PRUEBA DESDE CERO 13-nov (hora de Californi
         f"| TOTAL | pasos 0-9 (sin la subida, paso 10) | | | {tot} min |", "",
         f"corridas de compuerta: {corr}", "",
         "- Lecturas (paso 2-3): A-L1, A-L2, A-L3, A-L4, A-CEIL/DET, B-L1L2, B-L3L4, H-A y H-B (alturas A / B) en paralelo, + CORES_L2L4 A/B",
-        "- tool fixes (tiempo dentro del paso donde ocurrieron): BE-CR0-01 18:58–19:03 (P1), BE-CR0-02 (P2-3), BE-CR0-03 19:41 (P5), BE-CR0-04 20:37 (P7), BE-CR0-05 21:22 (P9), BE-CR0-06 21:50 (P9)",
-        "- reinicio de contenedor: ninguno. Compactación de contexto 21:3x–21:40 (sin pérdida de trabajo; tiempo incluido en el paso 9)", "",
+        "- tool fixes (tiempo dentro del paso donde ocurrieron): BE-CR0-01 18:58–19:03 (P1), BE-CR0-02 (P2-3), BE-CR0-03 19:41 (P5), BE-CR0-04 20:37 (P7), BE-CR0-05 21:22 (P9), BE-CR0-06/07/08 21:45–21:52 (P9)",
+        "- reinicio de contenedor: ninguno. Compactación de contexto ~21:38–21:40 (sin pérdida de trabajo; tiempo incluido en el paso 9)", "",
         "## Bitácora detallada", ""]
 txt = open(P).read()
 cuerpo = txt.split("## Bitácora detallada", 1)[1].lstrip("\n") if "## Bitácora detallada" in txt else "\n".join(txt.splitlines()[1:])

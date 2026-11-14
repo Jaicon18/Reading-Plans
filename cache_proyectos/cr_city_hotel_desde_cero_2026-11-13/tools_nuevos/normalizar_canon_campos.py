@@ -42,17 +42,16 @@ ids_base = collections.defaultdict(list)
 for e in c["existing_walls"]:
     b, _, s = e["id"].partition(" ")
     ids_base[b].append(e)
+LET = [chr(x) for x in range(65, 91) if chr(x) != "Y"]     # 'Y' fuera: CB_U_119 la lee como español ("y")
+todos = {e["id"] for e in c["existing_walls"]}
 for b, es in ids_base.items():
-    LET = [chr(x) for x in range(65, 91) if chr(x) != "Y"]     # 'Y' fuera: CB_U_119 la lee como español ("y")
-    usadas = {e["id"].partition(" ")[2] for e in es if e["id"].partition(" ")[2] in LET}
-    libres = [x for x in LET if x not in usadas]
     for e in es:
         s = e["id"].partition(" ")[2]
-        if s and s not in LET:
-            if not libres:                       # > 26 caras en un muro: segundo registro del mismo muro físico
-                b = b + ".2" if not b.endswith(".2") else b
-                libres = [x for x in LET if f"{b} {x}" not in {y["id"] for y in es}]
-            e["id_original_info"] = e["id"]; e["id"] = f"{b} {libres.pop(0)}"; log["id sufijo normalizado"] += 1
+        if not s or s in LET:
+            continue
+        nuevo = next((f"{bb} {x}" for bb in (b, b + ".2", b + ".3") for x in LET if f"{bb} {x}" not in todos), None)
+        e["id_original_info"] = e["id"]; e["id"] = nuevo; todos.add(nuevo); log["id sufijo normalizado"] += 1
+assert len(todos) == len(c["existing_walls"]) or len({e["id"] for e in c["existing_walls"]}) == len(c["existing_walls"]), "ids duplicados"
 # type_id sin el dígito de rating: FW.4 / FW.6 solo tienen fila '0' en A0.06; CH.6 de 1/A7.50 y 3/A7.50 lleva tag 'CH.6 2'
 FIX_T = {"FW.4": "FW.4-0", "FW.6": "FW.6-0", "CH.6": "CH.6-2", "CH.6 2": "CH.6-2"}
 for e in c["existing_walls"]:

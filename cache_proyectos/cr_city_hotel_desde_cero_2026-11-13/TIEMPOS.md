@@ -45,3 +45,9 @@ corridas de compuerta: 0
 - PASO 7 FIN (Excel armado, reglas.py OK) 20:40:14
 - tool fix BE-CR0-05 (comparar_alturas lista larga): 21:22:22 Paso 9
 - 21:40:07 reanudación tras compactación de contexto (Paso 9 cierre de compuerta)
+- 21:52:21 tool fixes BE-CR0-06/07/08 (labels continuación, DETAIL board-only, U-117 multi-PDF) 21:45–21:52 Paso 9; enviados a Xfinity; auditoría U-181: 16 hallazgos -> revisores D + C + B
+- 21:53:01 cambio a skill VIGENTE v81cf138t (= s + BE-CR0-04, ya local) + arreglos locales BE-CR0-05..08 re-aplicados
+- 22:07:47 parches de revisores A (walls 1025 ops), B (alturas 904), C (cielos), D (aberturas R80e.92) recibidos; pipeline con parches
+- 22:48:05 cierre de textos/imágenes/spec/labels por programa; tool fixes BE-CR0-09 (capas en markups_rcp), BE-CR0-10 (BE-20 soffit madera / BE-02 membrana oculta), BE-CR0-11 (cita de cielos en trazabilidad); revisor E (faltantes + U199) en curso
+- 22:5x REINICIO DEL CONTENEDOR (tiempo perdido: cadena completa y revisor F cortados ~22:52-22:58; archivos intactos). Se relanza la cadena y se retoma F.
+- 23:17:21 cambio a skill VIGENTE v81cf138w (= t + BE-CR0-05..08 publicados) + arreglos locales BE-CR0-09/10/11 re-aplicados (pendientes de publicar)
