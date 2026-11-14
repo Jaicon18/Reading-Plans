@@ -43,15 +43,22 @@ for e in c["existing_walls"]:
     b, _, s = e["id"].partition(" ")
     ids_base[b].append(e)
 for b, es in ids_base.items():
-    usadas = {e["id"].partition(" ")[2] for e in es if re.fullmatch(r"[A-Z]", e["id"].partition(" ")[2])}
-    libres = [chr(x) for x in range(65, 91) if chr(x) not in usadas]
+    LET = [chr(x) for x in range(65, 91) if chr(x) != "Y"]     # 'Y' fuera: CB_U_119 la lee como español ("y")
+    usadas = {e["id"].partition(" ")[2] for e in es if e["id"].partition(" ")[2] in LET}
+    libres = [x for x in LET if x not in usadas]
     for e in es:
         s = e["id"].partition(" ")[2]
-        if s and not re.fullmatch(r"[A-Z]", s):
+        if s and s not in LET:
             if not libres:                       # > 26 caras en un muro: segundo registro del mismo muro físico
                 b = b + ".2" if not b.endswith(".2") else b
-                libres = [chr(x) for x in range(65, 91) if f"{b} {chr(x)}" not in {y["id"] for y in es}]
+                libres = [x for x in LET if f"{b} {x}" not in {y["id"] for y in es}]
             e["id_original_info"] = e["id"]; e["id"] = f"{b} {libres.pop(0)}"; log["id sufijo normalizado"] += 1
+# type_id sin el dígito de rating: FW.4 / FW.6 solo tienen fila '0' en A0.06; CH.6 de 1/A7.50 y 3/A7.50 lleva tag 'CH.6 2'
+FIX_T = {"FW.4": "FW.4-0", "FW.6": "FW.6-0", "CH.6": "CH.6-2", "CH.6 2": "CH.6-2"}
+for e in c["existing_walls"]:
+    t = str(e.get("type_id") or "")
+    if t in FIX_T:
+        e["type_id"] = FIX_T[t]; log["type_id con rating"] += 1
 WET = re.compile(r"(?i)\b(bath|toilet|shower|janitor|restroom|women|men|wc)\b")
 for e in c["existing_walls"]:
     sh = e["sheet"]
@@ -76,8 +83,34 @@ for k in ("ceilings",):
     for x in c.get(k, []):
         if re.search(r"L4 (Cleaning 406|Women 417|Men 418)", str(x.get("room"))) and not NH.search(str(x.get("detail") or "")):
             x["detail"] = "1/A5.06"; x["detail_source"] = "1/A5.06 LEVEL 4 to bottom of roof assembly 8'-11 1/4\""; log["detalle cielo L4"] += 1
+# alturas: un solo valor por altura (9.29 = 9.292 = 9'-3 1/2"); caras de corredor sin el número de cuarto vecino;
+# franjas sobre cielo / tile y sheathing exterior con su razón de altura distinta (cruce por cuarto, comparar_alturas control 4)
+for e in c["existing_walls"]:
+    if abs(float(e.get("height_ft") or 0) - 9.2917) < 0.005:
+        e["height_ft"] = 9.292
+    loc = str(e.get("location") or "")
+    if re.search(r"(?i)corridor", loc) and re.search(r"/ ?(Guest Room )?209\b", loc):
+        e["location"] = re.sub(r"\s*/\s*(Guest Room )?209( entry)?\b", "", loc); log["location corredor"] += 1
+    if re.search(r"(?i)above (the )?(ceiling|tile)|strip above|band above", loc + " " + str(e.get("decision"))):
+        e["height_diff_reason"] = "board strip above the bath / tile ceiling (not a wall height): height = line of structure - ceiling (A0.06 W head; GYP-1 8'-6\" unit RCPs A7.xx)"
+    if e.get("board") == "5/8 exterior gyp sheathing type X":
+        e["height_diff_reason"] = "exterior gypsum sheathing is continuous floor-to-floor across the floor framing band (A0.07 XW assemblies; wall sections A5.00-A5.06): height = level datums A4.00, not the interior line of structure"
+    if str(e.get("type_id", "")).startswith("CH."):
+        e["top_track"] = "J-runner deep-leg at structure: 1\" deflection (A0.06 general note 7, C-H METAL head)"
+c["constants"]["deck_heights"] = {"value": {"L1": "12'-1 3/8\"", "L2": "9'-3 1/2\"", "L3": "9'-3 1/2\"", "L4": "8'-11 1/4\""},
+    "source": "L1 3/A5.03 (12'-1 3/8\" under L2; 11'-2 5/8\" B.O. deck one-story roof 1/A5.08); L2 / L3 11'-0\" - 1'-8 1/2\" floor assembly (A4.00, A5.06, S1.02); L4 1/A5.06 LEVEL 4 to bottom of roof assembly 8'-11 1/4\""}
 txt = json.dumps(c, ensure_ascii=False)
-for a, b in (("(hi-lo)", "(hi - low)"), ("no existe en el set", "not in the set"), ("6/U-201", "U-201 (6)"),
+# F14 auditoría U-181: un solo criterio de C-H (16" o.c. cargado) en todos los review items
+_f14 = ('24" o.c. loaded per the listed C-H system named on 7/A9.03; note 6 UON covered by the system reference; review only',
+        'LOADED 16" o.c. (A0.06 general note 6 \'16" O.C. UON\' governs); 24" o.c. of the listed system W419/U497 is the alternative (delta: C-H studs x 2/3)')
+txt = txt.replace(json.dumps(_f14[0])[1:-1], json.dumps(_f14[1])[1:-1])
+for _a, _b in (('A0.06 general note 6 16" o.c. UON governs over UL U415 24" (B) - review item)',
+                'A0.06 general note 6 16" o.c. UON governs; the 24" o.c. listed-system alternative is a review item)'),):
+    txt = txt.replace(json.dumps(_a)[1:-1], json.dumps(_b)[1:-1])
+for a, b in (("(hi-lo)", "(hi - low)"), ("no existe en el set", "not in the set"), ("6/U-201", "U-201 (6)"), ("RFI-01 withdrawn.", "Question withdrawn by estimator decision (printed UL design governs)."),
+             ("Former RFI-08 (", "Closed by estimator decision ("), ("noted, RFI-08)", "noted; estimator decision: excluded per the printed note)"),
+             (" (F&B interior not in permit: RFI-08)", " (F&B interior not in permit: printed note 1/A7.45; membrane = rated floor, loaded)"),
+             ("-> RFI-05 (no ceiling loaded)", "-> review item: no ceiling printed, none loaded"), ("-> RFI-05;", "-> review item: no ceiling printed;"), ("RFI-L1-07)", "closed by estimator decision: loaded as printed type, see Review Items)"),
              ("CONTINUOUS TO UNDERSIDE OF ROOF SHEATHING", "CONTINUOUS TO UNDERSIDE OF ROOF SHEETHING"), (".py", "")):
     n = txt.count(a); txt = txt.replace(a, b); log[f"texto {a}"] += n
 c = json.loads(txt)

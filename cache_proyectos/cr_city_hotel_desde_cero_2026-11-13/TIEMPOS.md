@@ -1,4 +1,25 @@
-# TIEMPOS — CR City Hotel PRUEBA DESDE CERO 13-nov (America/Los_Angeles)
+# TIEMPOS — CR City Hotel PRUEBA DESDE CERO 13-nov (hora de California, America/Los_Angeles, PST)
+
+| Paso | Qué | Inicio | Fin | Duración |
+|---|---|---|---|---|
+| 0 | arranque (set_texto, OCR 17 hojas) | 2026-11-13 18:45 PST | 2026-11-13 18:51 PST | 5 min |
+| 1 | inventario de tags | 2026-11-13 18:56 PST | 2026-11-13 19:04 PST | 7 min |
+| 2-3 | lecturas A y B en paralelo + H-A / H-B (alturas A / B) + CORES A/B | 2026-11-13 19:05 PST | 2026-11-13 19:37 PST | 31 min |
+| 4 | comparación A vs B | 2026-11-13 19:37 PST | 2026-11-13 19:40 PST | 3 min |
+| 5 | resolución | 2026-11-13 19:40 PST | 2026-11-13 20:17 PST | 36 min |
+| 6 | cálculo (canon.py, accesorios, trims) | 2026-11-13 20:17 PST | 2026-11-13 20:28 PST | 10 min |
+| 7 | Excel | 2026-11-13 20:28 PST | 2026-11-13 20:40 PST | 12 min |
+| 8 | markups Bluebeam walls + RCP (fin = markups_rcp 05:08:15 UTC en bitacora.jsonl) | 2026-11-13 20:40 PST | 2026-11-13 21:08 PST | 28 min |
+| 9 | compuertas tempranas + arreglos + revisión independiente + compuerta final | 2026-11-13 21:08 PST | en curso | |
+| TOTAL | pasos 0-9 (sin la subida, paso 10) | | | 132 min |
+
+corridas de compuerta: 0
+
+- Lecturas (paso 2-3): A-L1, A-L2, A-L3, A-L4, A-CEIL/DET, B-L1L2, B-L3L4, H-A y H-B (alturas A / B) en paralelo, + CORES_L2L4 A/B
+- tool fixes (tiempo dentro del paso donde ocurrieron): BE-CR0-01 18:58–19:03 (P1), BE-CR0-02 (P2-3), BE-CR0-03 19:41 (P5), BE-CR0-04 20:37 (P7), BE-CR0-05 21:22 (P9), BE-CR0-06 21:50 (P9)
+- reinicio de contenedor: ninguno. Compactación de contexto 21:3x–21:40 (sin pérdida de trabajo; tiempo incluido en el paso 9)
+
+## Bitácora detallada
 - INICIO: 2026-11-13 18:41:49 PST (primera acción)
 - 18:5x bid set descargado (5 PDFs A/S/specs) read-only, md5 en bidset/MD5_BIDSET.txt
 - PASO 0 (arranque) INICIO 18:45:22
@@ -22,3 +43,5 @@
 - inventario_tags via bitacora (re-corrida idéntica para registro) 20:33:15
 - tool fix BE-CR0-04 (comparar.ambiguos + type_id de board-only): 20:37:38 Paso 7
 - PASO 7 FIN (Excel armado, reglas.py OK) 20:40:14
+- tool fix BE-CR0-05 (comparar_alturas lista larga): 21:22:22 Paso 9
+- 21:40:07 reanudación tras compactación de contexto (Paso 9 cierre de compuerta)

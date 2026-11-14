@@ -21,6 +21,15 @@ for r in c.get("rfis", []) + c.get("rfis_cerrados_info", []):
          f"(B) Code / other printed: {B.get('texto')} ({B.get('cita')}) - delta: {B.get('delta')}. "
          f"(C) {o.get('C') or 'none'}. Loaded (conservative): {r.get('loaded')}.")
     rfis.append({"id": r["id"], "pregunta": r.get("question"), "delta": d})
+OVR = {"RFI-L2-04": "Loaded value kept: 11'-0\" (LEVEL 2 to LEVEL 3 datums, A4.00) per U-174 - a vector-scaled 9.21 ft is not a printed height (R80e.91), shown here as the delta (-1.79 ft/LF/face).",
+       "RFI-L4-02": "Loaded value kept: 13'-11 1/4\" (ROOF datum - 3/4\" sheathing, A4.00 / 1/A5.08) per U-174 - a vector-scaled 10.55 ft is not a printed height (R80e.91), shown here as the delta (-3.39 ft/LF).",
+       "RFI-10": "No XW.6.2 2 wall remains in the canon (L1 courtyard walls resolved as XW.6.4 2, A2.01): no quantity change."}
+for r in c.get("rfis_cerrados_info", []):
+    if r.get("id") in CERRADOS:
+        continue
+    revisar.append({"fase": "detalle", "orden_plano": len(revisar) + 1,
+                    "punto": f"{r['id']} CLOSED: {r.get('decision')} | value: {r.get('value')} | delta vs loaded: {r.get('delta_vs_loaded')} | {OVR.get(r['id'], '')}"[:1200],
+                    "hoja_detalle": str(r.get("source") or ""), "imagen": ""})
 for i, ri in enumerate(c.get("review_items_info", []), 1):
     t = ri.get("item") or ri.get("decision") or json.dumps(ri)[:300]
     revisar.append({"fase": "detalle", "orden_plano": len(revisar) + 1,
@@ -38,9 +47,13 @@ for i, r in enumerate(revisar, 1):
 ALC = json.load(open(sys.argv[3]))
 reg = json.load(open(f"{et}/../registro.json"))
 alc = []
+NOMBRES_EXTRA = {"ALC-25": "Fasteners (screws, anchors, pins) - EXCLUDED", "ALC-26": "Slip / deflection track", "ALC-27": "Structural members on S-sheets (kicker, clip angle, L3x3) - EXCLUDED"}
 for rr in reg.get("renglones", reg if isinstance(reg, list) else []):
     e, n = ALC[rr["id"]]
     alc.append({"id": rr["id"], "nombre": rr.get("ubicacion") or rr.get("tipo"), "estado": e, "nota": n})
+for k, nm in NOMBRES_EXTRA.items():
+    e, n = ALC[k]
+    alc.append({"id": k, "nombre": nm, "estado": e, "nota": n})
 tk = {"proyecto": "CR City Hotel - 415 Perry St, Castle Rock, CO (GC Owen-Ames-Kimball)",
       "bid_set": "CityHotel_ArchitecturalPlans_4.22.2026.pdf (+ Structural 4.22.2026, Specs Vol. 1-2 4.25.2025)", "fecha": "2026-11-13",
       "inputs": {"waste_metal": 0.15, "waste_no_metal": 0.06, "sheet_w_ft": 4, "sheet_l_ft": 12, "stud_stock_ft": 20, "track_stock_ft": 10},
@@ -54,8 +67,8 @@ tk["proyecto_datos"] = [
  {"campo": "project type", "valor": "New 4-story hotel (R-1) with lobby / bar (A-2), retail core & shell (M), parking (U); abuts existing historic building (separate permit)", "fuente": "A0.00 scope of work"},
  {"campo": "owner / tenant", "valor": "White Development, LLC (owner)", "fuente": "T0.00 project team"},
  {"campo": "architect", "valor": "Meridian 105 Architecture", "fuente": "T0.00 project team"},
- {"campo": "GC", "valor": "Owen-Ames-Kimball (bid folder name; not printed on the sheets) [PENDIENTE on sheets]", "fuente": "Drive bid folder name"},
- {"campo": "bid date", "valor": "11-12-26 (bid folder name) [PENDIENTE on sheets]", "fuente": "Drive bid folder name"},
+ {"campo": "GC", "valor": "Owen-Ames-Kimball (bid folder name; not printed on the sheets) - the sheets do not print it; estimator decision: taken from the bid folder name", "fuente": "Drive bid folder name"},
+ {"campo": "bid date", "valor": "11-12-26 (bid folder name) - the sheets do not print it; estimator decision: taken from the bid folder name", "fuente": "Drive bid folder name"},
  {"campo": "bid set", "valor": "Architectural Permit set 4.22.2026; Structural 4.22.2026; Specs Vol. 1-2 4.25.2025; MEP 6.1.2026 (not downloaded)", "fuente": "T0.00 / file names"},
  {"campo": "total SF", "valor": "35,676 SF gross (L1 10,200 / L2 8,587 / L3 8,587 / L4 8,302)", "fuente": "A0.00 PROPOSED BUILDING AREAS"},
  {"campo": "stories", "valor": "4", "fuente": "A0.00 scope of work; A4.00"},
@@ -70,7 +83,7 @@ tk["hojas_revisadas"] = [
  {"categoria": "cover / index", "estado": "reviewed T0.00, T0.01"},
  {"categoria": "code analysis / G", "estado": "reviewed A0.00-A0.05"},
  {"categoria": "general notes", "estado": "reviewed A0.06 partition general notes, A2.0x floor plan general notes, A7.00 unit general notes"},
- {"categoria": "demolition + notes", "estado": "no existe en el set (new construction)"},
+ {"categoria": "demolition + notes", "estado": "not in the set (new construction)"},
  {"categoria": "specs", "estado": "reviewed Vol. 1 (05 40 00, 09 21 16.23, 09 22 16, 09 29 00, 09 30 00)"},
  {"categoria": "partition types + details", "estado": "reviewed A0.06, A0.07, A0.08, A0.10, A9.01-A9.06"},
  {"categoria": "floor plans", "estado": "reviewed A2.01-A2.05, A6.00-A6.02"},
@@ -92,5 +105,10 @@ for r in tk["rfis"]:
         hs = sorted({h for h, v in hojas.items() if t.upper() in _txt(v).upper()})
         res.append(f"'{t}': {len(hs)} sheet(s) {hs[:12]}")
     r["barrido"] = {"hojas": "ALL", "terminos": terms, "grep": "set_texto.json (A + S sets, incl. SHX / OCR) -> " + "; ".join(res)}
+_t = json.dumps(tk, ensure_ascii=False)
+for a, b in (("6/U-201", "U-201 (6)"), ("RFI-01 withdrawn.", "Question withdrawn by estimator decision (printed UL design governs)."),
+             ("Former RFI-08 (", "Closed by estimator decision ("), ("no existe en el set", "not in the set")):
+    _t = _t.replace(a, b)
+tk = json.loads(_t)
 json.dump(tk, open(out, "w"), indent=1)
 print("rfis abiertos", len(rfis), "revisar", len(revisar), "alcances", len(alc))

@@ -733,3 +733,25 @@ Arreglo: encabezado corregido a v81cf57. Pendiente de compuerta en la próxima v
 - Error: el cruce de tags ambiguos comparaba el type del tag solo con w.tag / w.type; los walls board-only traen 'XW.6.3-0' en
   type_id y un texto largo en type -> "citado en tag_ids de un wall de otro type" con el tag bien asignado (PA0004/PA0005).
 - Arreglo: + type_id normalizado en `citado`. Prueba: test_be_cr0_04_ambiguo_type_id.py.
+
+## BE-CR0-05 — comparar_alturas.alturas_revisadas: lista larga de walls tapaba la imagen (CR PRUEBA DESDE CERO, 13-nov)
+- Error: con muchos walls en una altura la lista llenaba la página y la imagen circulada quedaba encimada / fuera (U-187).
+- Arreglo: si y + 6 > 540 la imagen va en una página de continuación. Prueba: test_be_cr0_05.
+
+## BE-CR0-06 — comparar_alturas: Page Labels desfasados por las páginas de continuación (CR PRUEBA DESDE CERO, 13-nov)
+- Error: la lista de labels se armaba por altura, no por página creada; con continuaciones quedaba 'DOUBLE CEILING 9' repetido (U-151).
+- Arreglo: un label por página creada ('HEIGHT h (continued)'), assert labels = páginas. Prueba: test_be_cr0_06_07_08.py.
+
+## BE-CR0-07 — markups_bluebeam: DETAIL vacío en walls board-only (CR PRUEBA DESDE CERO, 13-nov)
+- Error: el Contents de existing_board usaba solo `keynote` (pensado para demolición); en edificio de madera todo wall es board-only
+  -> 1,222 markups 'DETAIL sin N/HOJA' (BE-117).
+- Arreglo: keynote o cita(w) (detail / detail_source / source / hoja). Prueba: test_be_cr0_06_07_08.py.
+
+## BE-CR0-08 — CB_U_117: set de varios PDF (A + S) tomado como "inventario de otro set" (CR PRUEBA DESDE CERO, 13-nov)
+- Error: páginas del inventario (86, arquitectura) vs suma de fuentes de set_texto (86 + 26 estructural).
+- Arreglo: válido si = total o = páginas de UNO de los PDF fuente. Prueba: test_be_cr0_06_07_08.py.
+
+## CONDUCTA CR0-C1 — hora reportada sin leer el reloj (CR PRUEBA DESDE CERO, 13-nov)
+- Error: reporté a COORDINACIÓN "22:20 PST, 3h39m" sin consultar el reloj (real 21:00 PST / 2h18m); corregido por mensaje.
+- Regla (todos los proyectos): toda hora o duración que se reporte sale de `TZ=America/Los_Angeles date` en ese momento y de
+  TIEMPOS.md; nunca estimada de memoria.
