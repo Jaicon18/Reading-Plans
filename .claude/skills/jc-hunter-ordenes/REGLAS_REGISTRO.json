@@ -8874,10 +8874,19 @@
   {
    "id": "U-201",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, CR City Hotel, commit 59e2c4c)",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "entrega",
    "texto_corto": "decisiones del usuario 13-nov = regla: (1) rating mayor + DEDUCT; (2) sin tag = tipo del muro que conecta; (3) wrap con solo SFRM = gypsum + DEDUCT; (4) alternate de acabado contradictorio = [RATE TO CONFIRM]; (5) tasa que la plantilla no trae = [RATE TO CONFIRM]; (6) falla solo de proceso = subida con excepción autorizada por el usuario",
-   "motivo": "(6) programado en v81cf138a (subir_entrega.excepcion_usuario_fallas + test_v1381_excepcion_usuario_subida); (1)-(5) con sus chequeos van a v81cf140 (COORDINACIÓN 18:22)"
+   "motivo": "v81cf138l (U-202): CB_U201_DECISIONES = RFI abierto sobre (1) rating code plan vs tag, (2) elemento sin tag ni tipo, (3) wrap con solo SFRM = FAIL; (1) / (3) cerrados sin DEDUCT alternate con delta = FAIL (caso real CR rev20c 3 FAIL / rev20d 0); (4) / (5) [RATE TO CONFIRM] = U-192 / revisar_proposal; (6) = subir_entrega.excepcion_usuario_fallas (v81cf138a)",
+   "chequeos": [
+    "take-off:tools/chequeos_biblioteca.py::u201_decisiones",
+    "take-off:tools/chequeos_biblioteca.py::u201_fallas",
+    "take-off:tools/subir_entrega.py::excepcion_usuario_fallas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_u201_decisiones_regla"
+   }
   },
   {
    "id": "U-200",
