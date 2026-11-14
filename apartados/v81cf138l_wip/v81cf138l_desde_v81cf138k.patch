@@ -1,0 +1,168 @@
+diff -ruN -x __pycache__ v138k/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138l/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138k/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:40:14.458534175 +0000
++++ v138l/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:40:14.518788625 +0000
+@@ -8874,10 +8874,19 @@
+   {
+    "id": "U-201",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, CR City Hotel, commit 59e2c4c)",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+    "texto_corto": "decisiones del usuario 13-nov = regla: (1) rating mayor + DEDUCT; (2) sin tag = tipo del muro que conecta; (3) wrap con solo SFRM = gypsum + DEDUCT; (4) alternate de acabado contradictorio = [RATE TO CONFIRM]; (5) tasa que la plantilla no trae = [RATE TO CONFIRM]; (6) falla solo de proceso = subida con excepción autorizada por el usuario",
+-   "motivo": "(6) programado en v81cf138a (subir_entrega.excepcion_usuario_fallas + test_v1381_excepcion_usuario_subida); (1)-(5) con sus chequeos van a v81cf140 (COORDINACIÓN 18:22)"
++   "motivo": "v81cf138l (U-202): CB_U201_DECISIONES = RFI abierto sobre (1) rating code plan vs tag, (2) elemento sin tag ni tipo, (3) wrap con solo SFRM = FAIL; (1) / (3) cerrados sin DEDUCT alternate con delta = FAIL (caso real CR rev20c 3 FAIL / rev20d 0); (4) / (5) [RATE TO CONFIRM] = U-192 / revisar_proposal; (6) = subir_entrega.excepcion_usuario_fallas (v81cf138a)",
++   "chequeos": [
++    "take-off:tools/chequeos_biblioteca.py::u201_decisiones",
++    "take-off:tools/chequeos_biblioteca.py::u201_fallas",
++    "take-off:tools/subir_entrega.py::excepcion_usuario_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
++    "token": "test_u201_decisiones_regla"
++   }
+   },
+   {
+    "id": "U-200",
+diff -ruN -x __pycache__ v138k/take-off-metal-frame-drywall/SKILL.md v138l/take-off-metal-frame-drywall/SKILL.md
+--- v138k/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:40:14.292796316 +0000
++++ v138l/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:40:14.278534164 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138k** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138l** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3591,6 +3591,7 @@
+ Test: tools/test_compuerta_entrega.py::test_u153_vista_bluebeam (C 1/864 = FAIL x864; C 1 = PASS; Length que no cuadra = FAIL;
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
++- **U-201 (programa desde v81cf138l, usuario 13-nov):** las decisiones del usuario de RFI-32 / 33 / 34 son REGLA en todos los proyectos, sin RFI: (1) rating code plan vs tag = el MAYOR + DEDUCT con delta; (2) elemento sin tag ni tipo = tipo del muro con el que conecta, cargado; (3) wrap con solo SFRM = gypsum + DEDUCT con delta. CB_U201_DECISIONES: RFI abierto sobre esos temas = FAIL; (1) / (3) cerrados sin DEDUCT con delta = FAIL. (4) / (5) [RATE TO CONFIRM] = U-192; (6) excepción de subida = subir_entrega. Test test_u201_decisiones_regla (caso real CR rev20c 3 FAIL / rev20d 0).
+ - **BE-CR47 (programa desde v81cf138i, CR rev20d 13-nov):** el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath'; '201 … - Room' = '201'. Antes los dos colapsaban en '201' (ganaba la última fila de ALTURAS_CUARTOS.csv) y la cara de baño salía 'por debajo del cielo' de la habitación. Sin fila propia del baño, toma la de la unidad. Test test_be_cr47_bano_propio_espacio (caso real CR).
+ - **BE-XF18 (programa desde v81cf138k, COORDINACIÓN 13-nov 08:12):** el PDF de markups se elige por NOMBRE: entrega.json 'markups' o el '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' de la rev más alta; nunca un 'IMAGE ONLY' / mapa de cobertura ni el último por orden alfabético. Programa: Ctx usa elegir_markups; CE_PDF_MARKUPS_ELEGIDO = FAIL con la causa (sin candidato, dos de la misma rev, 'markups' apuntando a un mapa). Test test_be_xf18_markups_por_nombre.
+ - **BE-XF21 (programa desde v81cf138h, Xfinity rev1c E-2 13-nov):** el producto de CADA pieza de un head detail es el impreso: 'METAL STUD NESTED IN METAL TRACK' = 1 track + 1 stud con su fila de stud que cite la abertura; nunca 2 piezas de track. Programa: CB_HEAD_PIEZAS. Test test_be_xf21_head_piezas (canon real XF rev1c FAIL / rev1d PASS).
+diff -ruN -x __pycache__ v138k/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py v138l/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py
+--- v138k/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 22:28:07.851037436 +0000
++++ v138l/take-off-metal-frame-drywall/tools/chequeos_biblioteca.py	2026-11-13 23:02:39.293425012 +0000
+@@ -5036,6 +5036,61 @@
+     return R("FAIL", *f[:20]) if f else R("PASS", "0 heads con una pieza de stud impresa cargada como track")
+ 
+ 
++U201_TEMAS = {
++    1: ("rating distinto entre code plan y tag de planta = se carga el MAYOR + DEDUCT alternate con el delta del menor (RFI-32 'A', U-161)",
++        re.compile(r"(?i)(?:fire[- ]?)?rating (?:conflict|discrepanc)|code plan[^.]{0,250}\b(?:\d\s*HR|rat(?:ed|ing))|(?:life safety|code) plan shows \d\s*HR|"
++                   r"\b\d\s*HR\b[^.]{0,200}\btag(?:ged| shows| reads)\b|\b\d\s*HR\s+vs\.?\s+\d\s*HR\b")),
++    2: ("elemento dibujado sin tag ni tipo impreso = tipo del muro con el que conecta + rating del code plan, cargado (RFI-33 'A', U-178(2))",
++        re.compile(r"(?i)\buntagged (?:wall|element|lining|furring|partition|build-?out|chase)|\bwalls?\b[^.]{0,80}\b(?:untagged|not tagged|has no tag|carr(?:y|ies) no (?:wall )?(?:tag|type))|"
++                   r"carr(?:y|ies) no (?:wall )?type|(?:wall|partition) type (?:not shown|not printed|not indicated)|no (?:wall |partition )type (?:shown|printed|indicated)|"
++                   r"without (?:a )?(?:wall |partition )(?:tag|type)|sin tag")),
++    3: ("column wrap / beam wrap donde los detalles solo marcan SFRM = gypsum cargado (conservador) + DEDUCT alternate con el delta (RFI-34 'A')",
++        re.compile(r"(?i)(?:\bSFRM\b|spray(?:ed)?[- ]applied fire|spray(?:ed)? fire(?:proofing)?|sprayed fire-resistive)[^.]{0,200}\b(?:wrap|gyp|enclos|board)|"
++                   r"\b(?:wrap|gyp\w*|enclos\w*)\b[^.]{0,200}(?:\bSFRM\b|spray(?:ed)?[- ]applied fire|spray(?:ed)? fire)")),
++}
++U201_CON_DA = {1, 3}
++
++
++def u201_fallas(canon):
++    """U-201 (usuario 13-nov, CR, botones 'A' de RFI-32 / 33 / 34; TODOS los proyectos): las decisiones son REGLA, sin RFI de aquí en
++    adelante. (a) un RFI ABIERTO sobre uno de esos temas = FAIL (se aplica la regla y se cierra citando U-201 (n)); (b) un RFI cerrado
++    de los temas (1) / (3) lleva su DEDUCT alternate (rfi = el id, delta ≠ 0). (4) / (5) [RATE TO CONFIRM] los revisan U-192 /
++    revisar_proposal. -> [fallas]"""
++    lst = lambda v: list(v.values()) if isinstance(v, dict) else (v if isinstance(v, list) else [])      # noqa: E731
++    das = [x for x in lst(canon.get("deduct_alternates")) + lst(canon.get("decisiones_usuario_da")) if isinstance(x, dict)]
++    def delta(x):
++        m = re.search(r"-?\d[\d,]*(?:\.\d+)?", str(x.get("delta_sf") if x.get("delta_sf") is not None else x.get("delta") or ""))
++        return float(m.group(0).replace(",", "")) if m else 0.0
++    out = []
++    for r in lst(canon.get("rfis")):
++        if not isinstance(r, dict):
++            continue
++        txt = " ".join(str(r.get(k) or "") for k in ("question", "pregunta", "titulo", "title", "texto", "tema", "donde", "supuesto"))
++        temas = [n for n, (_d, rx) in U201_TEMAS.items() if rx.search(txt)]
++        if not temas:
++            continue
++        rid = str(r.get("id") or "")
++        abierto = not re.match(r"(?i)\s*(?:clos|cerr|resol|resuel|answer|respond|exclu|void|supersed|withdrawn|n/?a\b)", str(r.get("status") or "open"))
++        if abierto:
++            out.append(f"{rid}: RFI abierto sobre un tema que el usuario ya decidió (U-201 ({', '.join(map(str, temas))}): "
++                       f"{U201_TEMAS[temas[0]][0]}): se aplica la regla y se cierra citando U-201, sin RFI")
++            continue
++        for n in temas:
++            if n in U201_CON_DA and not any(rid and str(x.get("rfi") or "") == rid and abs(delta(x)) > 0 for x in das):
++                out.append(f"{rid}: U-201 ({n}) cerrado sin DEDUCT alternate con delta (rfi = {rid}): {U201_TEMAS[n][0]}")
++    return out
++
++
++@chk("U-201", desc="U-201 (usuario 13-nov, CR City Hotel; v81cf138k): las decisiones del usuario son REGLA en todos los proyectos: RFI abierto sobre "
++     "(1) rating code plan vs tag, (2) elemento sin tag ni tipo, (3) wrap con solo SFRM = FAIL; (1) / (3) cerrados sin DEDUCT alternate con delta = FAIL")
++def u201_decisiones(b):
++    f = u201_fallas(b.canon)
++    if f:
++        return R("FAIL", *f[:20])
++    n = sum(1 for r in b.canon.get("rfis") or [] if isinstance(r, dict))
++    return R("PASS", f"{n} RFI revisados: ninguno abierto sobre un tema decidido por el usuario (U-201 (1)-(3)); los cerrados (1) / (3) con su DEDUCT")
++
++
+ @chk("BE-CR25", "U-124", desc="BE-CR25 / U-124: canon con 0 walls (ni walls[] ni board-only de existing_walls) y Partition "
+      "Takeoff con > 0 filas = FAIL (la compuerta no puede pasar en vacío)")
+ def canon_no_vacio(b):
+diff -ruN -x __pycache__ v138k/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py v138l/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py
+--- v138k/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 22:32:46.095214765 +0000
++++ v138l/take-off-metal-frame-drywall/tools/test_chequeos_biblioteca.py	2026-11-13 23:02:56.817481782 +0000
+@@ -607,6 +607,10 @@
+                     {"canon": {"walls": [{"id": "W2-01", "openings": [{"ref": "Door 101", "pieces": 1, "piece": "track",
+                                           "header_type_source": "7/A2.0: '3-5/8\" METAL TRACK' + '3-5/8\" METAL STUD NESTED IN METAL TRACK'"}]}],
+                                "misc_items": [{"ref": "HDR-101-NESTED", "qty": 4.333, "designation": "362S125-33", "source": "7/A2.0 nested stud; door 101"}]}}),
++    # U-201 (usuario 13-nov): RFI abierto sobre un tema ya decidido (rating code plan vs tag) = FAIL; cerrado con su DEDUCT = PASS
++    "u201_decisiones": ({"canon": {"walls": [], "rfis": [{"id": "RFI-9", "status": "open", "question": "Rating conflict: the code plan draws 2 HR while the tag reads 1"}]}},
++                        {"canon": {"walls": [], "rfis": [{"id": "RFI-9", "status": "closed", "question": "Rating conflict: the code plan draws 2 HR while the tag reads 1"}],
++                                   "deduct_alternates": [{"id": "DA-9", "rfi": "RFI-9", "delta_sf": -100.0}]}}),
+ }
+ 
+ 
+@@ -1311,3 +1315,43 @@
+ 
+ 
+ test_be_xf21_head_piezas()
++
++
++def test_u201_decisiones_regla():
++    """U-201 (usuario 13-nov, CR, botones 'A'): caso real CR (fixture de CR, commit 474c2f8): rev20c con RFI-32 (rating code plan vs tag),
++    RFI-33 (elementos sin tag) y RFI-34 (wrap con solo SFRM) ABIERTOS = 3 fallas; rev20d (cerrados por la regla, DA-7 / DA-8 con delta) = 0;
++    (1) cerrado SIN su DEDUCT = FAIL."""
++    import json as _j
++    import chequeos_biblioteca as CB_
++    D = None
++    for raiz in (os.environ.get("TAKEOFF_REPO"), "/home/user/Reading-Plans", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")):
++        d = os.path.join(raiz or "", "cache_proyectos", "herramientas", "tests")
++        if raiz and os.path.isfile(os.path.join(d, "u201_cr_rev20c_rev20d.json")):
++            D = d
++            break
++    sint = {"rfis": [{"id": "RFI-1", "status": "closed", "question": "code plan 2 HR vs plan tag 1 HR"}], "deduct_alternates": []}
++    assert CB_.u201_fallas(sint) and "DEDUCT" in CB_.u201_fallas(sint)[0]
++    rx = {n: rx for n, (_d, rx) in CB_.U201_TEMAS.items()}                 # verificación k: redacciones y falsos positivos
++    for s in ("Wall type not shown at the niche", "No partition type indicated for the chase walls", "the east wall is not tagged"):
++        assert rx[2].search(s), s
++    for s in ("1 HR vs 2 HR fire rating discrepancy", "Life safety plan shows 2 HR but partition tag shows 1 HR"):
++        assert rx[1].search(s), s
++    assert rx[3].search("spray-applied fireproofing at the beam vs gypsum enclosure")
++    for s in ("SFRM is by others - confirm fireproofing excluded", "Room tag 904 on code plan differs from the finish plan", "Untagged ceiling: ACT or GWB?"):
++        assert not any(r.search(s) for r in rx.values()), s
++    assert CB_.u201_fallas({"rfis": [{"id": "R1", "status": "closed - code", "question": "the east wall is not tagged"}]}) == []
++    assert CB_.u201_fallas({"rfis": [{"id": "R1", "status": "closed", "question": "rating conflict, code plan 2 HR"}],
++                            "deduct_alternates": [{"rfi": "R1", "delta_sf": "-448.89 SF"}]}) == []
++    if not D:
++        print("AVISO test_u201_decisiones_regla: datos de CR no encontrados; caso real saltado")
++        return
++    fx = _j.load(open(os.path.join(D, "u201_cr_rev20c_rev20d.json")))
++    f = CB_.u201_fallas(fx["rev20c"])
++    assert sorted(x.split(":")[0] for x in f) == ["RFI-32", "RFI-33", "RFI-34"], f
++    assert CB_.u201_fallas(fx["rev20d"]) == []
++    sin_da = _j.loads(_j.dumps(fx["rev20d"]))
++    sin_da["deduct_alternates"] = [x for x in sin_da["deduct_alternates"] if x.get("rfi") != "RFI-32"]
++    assert [x for x in CB_.u201_fallas(sin_da) if x.startswith("RFI-32")]
++
++
++test_u201_decisiones_regla()

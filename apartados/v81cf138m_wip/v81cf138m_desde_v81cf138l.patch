@@ -1,0 +1,43 @@
+diff -ruN -x __pycache__ v138l/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138m/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138l/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:40:14.518788625 +0000
++++ v138m/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:40:14.582534182 +0000
+@@ -8945,10 +8945,17 @@
+   {
+    "id": "U-202",
+    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 64b0e63): 'las reglas que te esté dando las tienes que ejecutar en ese mismo momento… si te esperas hasta el final del día… eso es lo que pasa'",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "publicación",
+    "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
+-   "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
++   "motivo": "v81cf138m: verificar_version.revisar_pendientes_u202 = toda regla 'programa-pendiente' lleva 'pendiente_desde' (ISO con zona) y FALLA a las 4 h (bloquea arranque y publicación); en v81cf138m no queda ninguna programa-pendiente (BE-CR45/46, BE-XF18, U-201 programadas en e..k)",
++   "chequeos": [
++    "ordenes:verificar_version.py::revisar_pendientes_u202"
++   ],
++   "test": {
++    "archivo": "ordenes:test_verificar_version.py",
++    "token": "pendientes_u202"
++   }
+   },
+   {
+    "id": "BE-XF20",
+diff -ruN -x __pycache__ v138l/take-off-metal-frame-drywall/SKILL.md v138m/take-off-metal-frame-drywall/SKILL.md
+--- v138l/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:40:14.278534164 +0000
++++ v138m/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:40:14.222390382 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138l** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138m** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3591,6 +3591,7 @@
+ Test: tools/test_compuerta_entrega.py::test_u153_vista_bluebeam (C 1/864 = FAIL x864; C 1 = PASS; Length que no cuadra = FAIL;
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
++- **U-202 (programa desde v81cf138m, usuario 13-nov):** toda regla nueva se ejecuta EN ESE MOMENTO: chequeo + test con el caso real y publicación en cuanto pasa suite / banco / verificar_version, una versión por chequeo. verificar_version.revisar_pendientes_u202: una regla 'programa-pendiente' sin 'pendiente_desde' o con más de 4 h = FALLA (bloquea arranque y publicación). Test pendientes_u202.
+ - **U-201 (programa desde v81cf138l, usuario 13-nov):** las decisiones del usuario de RFI-32 / 33 / 34 son REGLA en todos los proyectos, sin RFI: (1) rating code plan vs tag = el MAYOR + DEDUCT con delta; (2) elemento sin tag ni tipo = tipo del muro con el que conecta, cargado; (3) wrap con solo SFRM = gypsum + DEDUCT con delta. CB_U201_DECISIONES: RFI abierto sobre esos temas = FAIL; (1) / (3) cerrados sin DEDUCT con delta = FAIL. (4) / (5) [RATE TO CONFIRM] = U-192; (6) excepción de subida = subir_entrega. Test test_u201_decisiones_regla (caso real CR rev20c 3 FAIL / rev20d 0).
+ - **BE-CR47 (programa desde v81cf138i, CR rev20d 13-nov):** el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath'; '201 … - Room' = '201'. Antes los dos colapsaban en '201' (ganaba la última fila de ALTURAS_CUARTOS.csv) y la cara de baño salía 'por debajo del cielo' de la habitación. Sin fila propia del baño, toma la de la unidad. Test test_be_cr47_bano_propio_espacio (caso real CR).
+ - **BE-XF18 (programa desde v81cf138k, COORDINACIÓN 13-nov 08:12):** el PDF de markups se elige por NOMBRE: entrega.json 'markups' o el '<X>_markups_revN - OPEN IN BLUEBEAM.pdf' de la rev más alta; nunca un 'IMAGE ONLY' / mapa de cobertura ni el último por orden alfabético. Programa: Ctx usa elegir_markups; CE_PDF_MARKUPS_ELEGIDO = FAIL con la causa (sin candidato, dos de la misma rev, 'markups' apuntando a un mapa). Test test_be_xf18_markups_por_nombre.
