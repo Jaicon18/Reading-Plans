@@ -1,0 +1,127 @@
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/REGLAS_REGISTRO.json v138o/take-off-metal-frame-drywall/REGLAS_REGISTRO.json
+--- v138n/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:43:17.938545082 +0000
++++ v138o/take-off-metal-frame-drywall/REGLAS_REGISTRO.json	2026-11-14 00:46:45.398557414 +0000
+@@ -9035,11 +9035,18 @@
+   {
+    "id": "BE-CR48",
+    "origen": "BIBLIOTECA_ERRORES.md (CR rev20d 14-nov 00:45 UTC; COORDINACIÓN 00:41, U-202)",
+-   "categoria": "programa-pendiente",
++   "categoria": "programa",
+    "cuando": "entrega",
+-   "pendiente_desde": "2026-11-14T00:37:38+00:00",
+    "texto_corto": "cuando el head del type (BE-CR46) baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (caso 4/A4.03: FW.2-L3-06 9.8958 -> 8.875)",
+-   "motivo": "su chequeo + test con el caso real de CR (fixture pedido a CR 14-nov 00:47) se publica en la versión siguiente, antes de las 04:37 UTC (U-202)"
++   "motivo": "v81cf138o (U-202): U-199 (7) secciones_fallas: una disposición que afirma 'take-off <altura>' distinta de la altura vigente del canon = vieja = FAIL (caso real CR rev20d antes 2 / después 0)",
++   "chequeos": [
++    "take-off:tools/compuerta_entrega.py::u199_disp_vieja",
++    "take-off:tools/compuerta_entrega.py::secciones_fallas"
++   ],
++   "test": {
++    "archivo": "take-off:tools/test_compuerta_entrega.py",
++    "token": "test_be_cr48_disposicion_vieja"
++   }
+   }
+  ]
+ }
+\ No newline at end of file
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/SKILL.md v138o/take-off-metal-frame-drywall/SKILL.md
+--- v138n/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:43:17.946593154 +0000
++++ v138o/take-off-metal-frame-drywall/SKILL.md	2026-11-14 00:46:45.453699033 +0000
+@@ -11,7 +11,7 @@
+ principal del skill (versión vigente de skills_archivo/INDICE.md) y aplica a TODOS los proyectos futuros y a TODAS las sesiones; nunca queda
+ como arreglo local de un proyecto ni en una rama aparte.
+ 
+-**VERSION: v81cf138n** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
++**VERSION: v81cf138o** (la lee compuerta_entrega._skill_version y va a ENTREGA_OK.json; se cambia en CADA versión, BE-AUD09)
+ 
+ **v81cf101 (12-nov-2026, Xfinity, orden COORDINACIÓN, antes de la rev20 de CR):** v81cf100 + BE-CR36b (parche de CR: markups_bluebeam.celda_legible ya no recorta nunca — el verificador de la leyenda necesita el type completo —; baja la letra hasta 3.5 pt).
+ 
+@@ -3592,7 +3592,7 @@
+ etiqueta sin SF wall = FAIL; sin PDF = FAIL; arreglar_sf_wall = PASS).
+ - **U-201 (6) (programa, usuario 13-nov; v81cf138a = v138.1):** una compuerta con UN FAIL SOLO de proceso (p. ej. CE_PROTOCOLO_3H de una rev anterior, sin efecto en cantidades) se sube únicamente con la excepción AUTORIZADA POR EL USUARIO escrita en ENTREGA_OK.json `excepcion_usuario` {check, texto, fecha, autorizado_por: "usuario" [, evidencia]} y en README_REVIEW.md, y solo si el ÚNICO FAIL es ese chequeo (nombre y, si la trae, evidencia). `ok` y los resultados no se tocan; SUBIDA_OK.json registra la excepción. Sin la autorización del usuario no se sube (subir_entrega.excepcion_usuario_fallas).
+ - **BE-CR49 (programa desde v81cf138n, CR rev20d 14-nov):** una altura derivada de la C.H. de un cuarto escribe su Source en ft-in con la hoja donde está impresa ("C.H. 8'-4 1/2\" printed on 1/A7.23: 8'-4 1/2\" + 6\" = 8'-10 1/2\""); en decimales CE_A2_ALTURAS no encuentra la cota. La cota tal cual la imprime el RCP ('"10-0 ACT-1"') vale. Programa: CE_CITA_ALTURA (cita_altura_fallas). Test test_be_cr49_fuente_ch_ftin.
+-- **BE-CR48 (programa-pendiente desde 14-nov 00:37 UTC, CR rev20d):** cuando el head del type baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (4/A4.03: FW.2-L3-06 9.8958 -> 8.875). Chequeo y test en la versión siguiente (U-202: antes de 4 h).
++- **BE-CR48 (programa desde v81cf138o, CR rev20d 14-nov):** cuando el head del type baja la altura de una cara, se reemplazan las disposiciones U-199 (7) que citaban la altura anterior (4/A4.03: FW.2-L3-06 9.8958 -> 8.875). Programa: U-199 (7) secciones_fallas + u199_disp_vieja: disposición con 'take-off <altura>' distinta de la vigente = FAIL. Test test_be_cr48_disposicion_vieja (caso real CR antes 2 / después 0).
+ - **U-202 (programa desde v81cf138m, usuario 13-nov):** toda regla nueva se ejecuta EN ESE MOMENTO: chequeo + test con el caso real y publicación en cuanto pasa suite / banco / verificar_version, una versión por chequeo. verificar_version.revisar_pendientes_u202: una regla 'programa-pendiente' sin 'pendiente_desde' o con más de 4 h = FALLA (bloquea arranque y publicación). Test pendientes_u202.
+ - **U-201 (programa desde v81cf138l, usuario 13-nov):** las decisiones del usuario de RFI-32 / 33 / 34 son REGLA en todos los proyectos, sin RFI: (1) rating code plan vs tag = el MAYOR + DEDUCT con delta; (2) elemento sin tag ni tipo = tipo del muro con el que conecta, cargado; (3) wrap con solo SFRM = gypsum + DEDUCT con delta. CB_U201_DECISIONES: RFI abierto sobre esos temas = FAIL; (1) / (3) cerrados sin DEDUCT con delta = FAIL. (4) / (5) [RATE TO CONFIRM] = U-192; (6) excepción de subida = subir_entrega. Test test_u201_decisiones_regla (caso real CR rev20c 3 FAIL / rev20d 0).
+ - **BE-CR47 (programa desde v81cf138i, CR rev20d 13-nov):** el baño de una unidad es su propio espacio con su C.H.: '201 … - Bath' / 'bath 201' / 'shower 201' / 'toilet 201' = llave '201-bath'; '201 … - Room' = '201'. Antes los dos colapsaban en '201' (ganaba la última fila de ALTURAS_CUARTOS.csv) y la cara de baño salía 'por debajo del cielo' de la habitación. Sin fila propia del baño, toma la de la unidad. Test test_be_cr47_bano_propio_espacio (caso real CR).
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py v138o/take-off-metal-frame-drywall/tools/compuerta_entrega.py
+--- v138n/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:42:29.713325268 +0000
++++ v138o/take-off-metal-frame-drywall/tools/compuerta_entrega.py	2026-11-14 00:46:27.386655474 +0000
+@@ -866,6 +866,20 @@
+     return ev, n
+ 
+ 
++RX_TAKEOFF_ALTURA = re.compile(r"(?i)take-?\s?off\s+(?:height\s+)?(\d+(?:\.\d+)?)\s*(?:ft\b)?")
++
++
++def u199_disp_vieja(canon, hid, h, tol=0.02):
++    """BE-CR48 (CR rev20d 14-nov): una disposición U-199 (7) que afirma 'take-off <altura>' distinta de la altura VIGENTE del canon quedó
++    vieja (el head del type bajó la cara, BE-CR46): ya no dispone el hallazgo. -> la altura vieja que cita, o None."""
++    for d in _u199(canon).get("disposiciones") or []:
++        if str(d.get("control")) == "7" and norm_txt(d.get("id")) == norm_txt(hid):
++            vs = [float(x) for x in RX_TAKEOFF_ALTURA.findall(str(d.get("motivo") or ""))]
++            if vs and all(abs(v - h) > tol for v in vs):
++                return vs[-1]
++    return None
++
++
+ def secciones_fallas(canon, tol_ft=0.5):
+     """U-199 (7) SECCIONES / ELEVACIONES: cada muro / soffit / cielo cortado (canon.u199.secciones [{sheet, detalle, elemento, altura_ft}])
+     existe en el canon con la misma altura (tolerancia tol_ft)."""
+@@ -884,8 +898,13 @@
+             hs = [f.get("height_ft") for f in _caras(w) if f.get("height_ft") is not None]
+             h = max(hs) if hs else None
+         try:
+-            if h is not None and s.get("altura_ft") is not None and abs(float(h) - float(s["altura_ft"])) > tol_ft and not u199_dispuesto(canon, 7, hid):
+-                ev.append(f"(7) {hid}: altura en la sección {s['altura_ft']} ft vs canon {h} ft — U-199")
++            if h is not None and s.get("altura_ft") is not None and abs(float(h) - float(s["altura_ft"])) > tol_ft:
++                vieja = u199_disp_vieja(canon, hid, float(h))
++                if vieja:
++                    ev.append(f"(7) {hid}: BE-CR48 la disposición dice 'take-off {vieja:g}' y el canon tiene {h} ft (el head del type bajó la "
++                              f"cara): se reemplaza por una disposición con la altura vigente y su N/HOJA ('reemplaza' = el texto viejo) — U-199")
++                elif not u199_dispuesto(canon, 7, hid):
++                    ev.append(f"(7) {hid}: altura en la sección {s['altura_ft']} ft vs canon {h} ft — U-199")
+         except (TypeError, ValueError):
+             pass
+     return ev, n
+diff -ruN -x __pycache__ v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py v138o/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py
+--- v138n/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:42:57.607628119 +0000
++++ v138o/take-off-metal-frame-drywall/tools/test_compuerta_entrega.py	2026-11-14 00:47:09.428824172 +0000
+@@ -4047,3 +4047,36 @@
+ 
+ 
+ test_be_cr49_fuente_ch_ftin()
++
++
++def test_be_cr48_disposicion_vieja():
++    """BE-CR48 (CR rev20d 14-nov): cuando el head del type (BE-CR46) baja una cara, la disposición U-199 (7) que decía la altura
++    correct' queda vieja = FAIL; reemplazada por una con la altura vigente y la N/HOJA de la C.H. = 0. Caso real CR
++    (fixture CR-main e82848a): antes 4/A4.03 sin disposición + 12/A6.00 vieja = 2 fallas; después 0. Sintético: disposición sin
++    'take-off N' = como antes (u199_dispuesto)."""
++    D = None
++    for raiz in (os.environ.get("TAKEOFF_REPO"), "/home/user/Reading-Plans", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")):
++        d = os.path.join(raiz or "", "cache_proyectos", "herramientas", "tests")
++        if raiz and os.path.isfile(os.path.join(d, "be_cr48_cr_rev20d.json")):
++            D = d
++            break
++    can = {"walls": [{"id": "W9", "height_ft": 8.875}],
++           "u199": {"secciones": [{"sheet": "A9.00", "detalle": "9", "elemento": "W9", "altura_ft": 9.8958}],
++                    "disposiciones": [{"control": 7, "id": "9/A9.00:W9", "motivo": "different zone, take-off 9.8958 correct", "nhoja": "4/A9.05"}]}}
++    f, _n = CE.secciones_fallas(can)
++    assert f and "BE-CR48" in f[0], f
++    can["u199"]["disposiciones"][0]["motivo"] = "head FW: 8'-4 1/2\" + 6\" = 8'-10 1/2\" -> take-off 8.875 ft"
++    assert CE.secciones_fallas(can)[0] == []
++    can["u199"]["disposiciones"][0]["motivo"] = "different zone (4/A9.05)"
++    assert CE.secciones_fallas(can)[0] == []
++    if not D:
++        print("AVISO test_be_cr48_disposicion_vieja: caso real de CR no encontrado; caso real saltado")
++        return
++    fx = json.load(open(os.path.join(D, "be_cr48_cr_rev20d.json")))
++    fa = CE.secciones_fallas(fx["antes"])[0]
++    assert len(fa) == 2 and any("BE-CR48" in x and "12/A6.00:FW.2-L2-06" in x for x in fa), fa
++    assert CE.secciones_fallas(fx["despues"])[0] == []
++    print("test_be_cr48_disposicion_vieja OK")
++
++
++test_be_cr48_disposicion_vieja()

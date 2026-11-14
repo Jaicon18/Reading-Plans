@@ -1,0 +1,171 @@
+{
+ "fuente": "CR rev20d (CR-main, commit e82848a, apartados/cr_fixtures_BE-CR48_49)",
+ "antes": {
+  "walls": [
+   {
+    "id": "FW.2-L3-06",
+    "type_id": "FW.2-0",
+    "floor": "L3",
+    "height_ft": 8.875,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '317 Lobby' C.H. 8.375 (ALTURAS_CUARTOS, blind readings A / B): 8.375 + 0.5 = 8.875",
+    "height_op": "8.375 + 0.5 = 8.875",
+    "height_diff_reason": "corridor shallow floor zone FJ-2 over this wall: 4/A5.05 printed 9'-10 3/4\" (S1.03 / S1.04 corridor strip), not the 1'-9 1/8\" room zone",
+    "location": "L3 Lobby elevator S face to lobby 317 (hoistway door) | faces: lobby 317"
+   },
+   {
+    "id": "FW.2-L2-06",
+    "type_id": "FW.2-0",
+    "floor": "L2",
+    "height_ft": 8.875,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '217 Lobby' C.H. 8.375 (ALTURAS_CUARTOS, blind readings A / B): 8.375 + 0.5 = 8.875",
+    "height_op": "8.375 + 0.5 = 8.875",
+    "height_diff_reason": null,
+    "location": "L2 Lobby elevator CMU south face (lobby 217), elevator door opening | faces: lobby 217"
+   },
+   {
+    "id": "FW.4-L1-03",
+    "type_id": "FW.4-0",
+    "floor": "L1",
+    "height_ft": 11.5,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room 'L1 Passage' C.H. 11.0 (ALTURAS_CUARTOS, blind readings A / B): 11.0 + 0.5 = 11.5",
+    "height_op": "11.0 + 0.5 = 11.5",
+    "height_diff_reason": null,
+    "location": "L1 Passage (door 114.1) north = lobby elevator shaft south CMU face | faces: L1 Passage (door 114.1, N of ELEVATOR CONTROLS)"
+   }
+  ],
+  "u199": {
+   "secciones": [
+    {
+     "sheet": "A4.03",
+     "detalle": "4",
+     "elemento": "FW.2-L3-06",
+     "altura_ft": 9.8958,
+     "nota": "lobby 317 elevator furring: section prints only '11' - 0\"' floor-to-floor; face stops at the lobby / corridor FS-1 membrane = 11'-0\" - 1'-1 1/4\" (4/A5.05) = 9'-10 3/4\"; different zone (hoistway CMU floor-to-floor is CM.8, not ours) - see disposition 12/A6.00:FW.2-L2-06"
+    },
+    {
+     "sheet": "A6.00",
+     "detalle": "6",
+     "elemento": "FW.2-L2-02",
+     "altura_ft": 9.8958,
+     "nota": "6/A6.00 SERVICE ELEVATOR section prints '11' - 0\"' floor-to-floor at the CMU hoistway (CM.8, not ours); FW.2 furring corridor face stops at 9'-10 3/4\" (4/A5.05) -> disposition 6/A6.00:FW.2-L2-02"
+    },
+    {
+     "sheet": "A6.00",
+     "detalle": "12",
+     "elemento": "FW.2-L2-06",
+     "altura_ft": 9.8958,
+     "nota": "12/A6.00 LOBBY ELEVATOR prints '11' - 0\"' / '12' - 7\"' / '16' - 9\"' at the CMU hoistway; FW.2 lobby-217 face stops at 9'-10 3/4\" -> disposition 12/A6.00:FW.2-L2-06"
+    }
+   ],
+   "disposiciones": [
+    {
+     "control": 7,
+     "id": "12/A6.00:FW.2-L2-06",
+     "motivo": "12/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 hoistway (CMU, other trade); the FW.2-0 furring face in lobby 217 stops at the FS-1 membrane under the '1' - 1 1/4\"' corridor/lobby framing zone = 9'-10 3/4\" printed on 4/A5.05 (A0.10 det. 3/4 walls stop at the rated assembly) - different zone, take-off 9.8958 correct",
+     "nhoja": "4/A5.05",
+     "img": "/root/cr/work/etapas/4_canon/img/u199/R5_secc_estr_7_12-A6.00_FW.2-L2-06.png",
+     "revisor": "R5_secc_estr"
+    },
+    {
+     "control": 7,
+     "id": "6/A6.00:FW.2-L2-02",
+     "motivo": "6/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 service hoistway; the FW.2-0 furring corridor-216 face stops at 9'-10 3/4\" (4/A5.05 '9' - 10 3/4\"' under '1' - 1 1/4\"') - different zone, take-off 9.8958 correct",
+     "nhoja": "4/A5.05",
+     "img": "/root/cr/work/etapas/4_canon/img/u199/R5_secc_estr_7_6-A6.00_FW.2-L2-02.png",
+     "revisor": "R5_secc_estr"
+    }
+   ]
+  }
+ },
+ "despues": {
+  "walls": [
+   {
+    "id": "FW.2-L3-06",
+    "type_id": "FW.2-0",
+    "floor": "L3",
+    "height_ft": 8.875,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '317 Lobby' C.H. 8'-4 1/2\" printed on 1/A7.23 (blind readings A / B, ALTURAS_CUARTOS): 8'-4 1/2\" + 6\" = 8'-10 1/2\"",
+    "height_op": "8.375 + 0.5 = 8.875",
+    "height_diff_reason": "FW furring head (A0.06 FURRED WOOD): board stops 6\" above the line of ceiling of 317 Lobby (C.H. 8.375, 1/A7.23), not at the structure",
+    "location": "L3 Lobby elevator S face to lobby 317 (hoistway door) | faces: lobby 317"
+   },
+   {
+    "id": "FW.2-L2-06",
+    "type_id": "FW.2-0",
+    "floor": "L2",
+    "height_ft": 8.875,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '217 Lobby' C.H. 8'-4 1/2\" printed on 1/A7.23 (blind readings A / B, ALTURAS_CUARTOS): 8'-4 1/2\" + 6\" = 8'-10 1/2\"",
+    "height_op": "8.375 + 0.5 = 8.875",
+    "height_diff_reason": "FW furring head (A0.06 FURRED WOOD): board stops 6\" above the line of ceiling of 217 Lobby (C.H. 8.375, 1/A7.23), not at the structure",
+    "location": "L2 Lobby elevator CMU south face (lobby 217), elevator door opening | faces: lobby 217"
+   },
+   {
+    "id": "FW.4-L1-03",
+    "type_id": "FW.4-0",
+    "floor": "L1",
+    "height_ft": 11.5,
+    "height_source": "A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room 'L1 Passage' C.H. 11'-0\" printed on A3.01 (blind readings A / B, ALTURAS_CUARTOS): 11'-0\" + 6\" = 11'-6\"",
+    "height_op": "11.0 + 0.5 = 11.5",
+    "height_diff_reason": "FW furring head (A0.06 FURRED WOOD): board stops 6\" above the line of ceiling of L1 Passage (C.H. 11.0, 2/A7.50), not at the structure",
+    "location": "L1 Passage (door 114.1) north = lobby elevator shaft south CMU face | faces: L1 Passage (door 114.1, N of ELEVATOR CONTROLS)"
+   }
+  ],
+  "u199": {
+   "secciones": [
+    {
+     "sheet": "A4.03",
+     "detalle": "4",
+     "elemento": "FW.2-L3-06",
+     "altura_ft": 9.8958,
+     "nota": "lobby 317 elevator furring: section prints only '11' - 0\"' floor-to-floor; face stops at the lobby / corridor FS-1 membrane = 11'-0\" - 1'-1 1/4\" (4/A5.05) = 9'-10 3/4\"; different zone (hoistway CMU floor-to-floor is CM.8, not ours) - see disposition 12/A6.00:FW.2-L2-06"
+    },
+    {
+     "sheet": "A6.00",
+     "detalle": "6",
+     "elemento": "FW.2-L2-02",
+     "altura_ft": 9.8958,
+     "nota": "6/A6.00 SERVICE ELEVATOR section prints '11' - 0\"' floor-to-floor at the CMU hoistway (CM.8, not ours); FW.2 furring corridor face stops at 9'-10 3/4\" (4/A5.05) -> disposition 6/A6.00:FW.2-L2-02"
+    },
+    {
+     "sheet": "A6.00",
+     "detalle": "12",
+     "elemento": "FW.2-L2-06",
+     "altura_ft": 9.8958,
+     "nota": "12/A6.00 LOBBY ELEVATOR prints '11' - 0\"' / '12' - 7\"' / '16' - 9\"' at the CMU hoistway; FW.2 lobby-217 face stops at 9'-10 3/4\" -> disposition 12/A6.00:FW.2-L2-06"
+    }
+   ],
+   "disposiciones": [
+    {
+     "control": 7,
+     "id": "4/A4.03:FW.2-L3-06",
+     "motivo": "4/A4.03 prints only the floor-to-floor dimension; the reviewer's 9.8958 ft was the line of structure of the wall types (4/A5.05). rev20d (COORDINACION 13-nov, A0.06 FURRED WOOD - HEAD): the FW board stops 6\" above the LINE OF CEILING: A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '317 Lobby' C.H. 8'-4 1/2\" printed on 1/A7.23 (blind readings A / B, ALTURAS_CUARTOS): 8'-4 1/2\" + 6\" = 8'-10 1/2\" -> take-off 8.875 ft.",
+     "nhoja": "1/A7.23",
+     "img": "/root/cr/work/auditoria_u181_rev20d/A0.06_FURRED_WOOD_HEAD_6in_above_ceiling.png",
+     "revisor": "rev20d_fw_head",
+     "rev20d_fw": true,
+     "reemplaza": ""
+    },
+    {
+     "control": 7,
+     "id": "6/A6.00:FW.2-L2-02",
+     "motivo": "6/A6.00 prints only the floor-to-floor dimension; the reviewer's 9.8958 ft was the line of structure of the wall types (4/A5.05). rev20d (COORDINACION 13-nov, A0.06 FURRED WOOD - HEAD): the FW board stops 6\" above the LINE OF CEILING: A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING (LINE OF STRUCTURE above it); 7/A7.23 CORRIDOR CEILING '8'- 11\" A.F.F.': 8'-11\" + 6\" = 9'-5\" -> take-off 9.4167 ft. Supersedes the rev20c disposition (R5_secc_estr: '6/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 service hoistway; the FW.2-0 furring corridor-216 face stops at 9'-10 3/4\" (4/A5.05 '9' - 10 3/4\"' under '1' - 1 1/4\"') - different zone, take-off 9.8958 correct').",
+     "nhoja": "7/A7.23",
+     "img": "/root/cr/work/auditoria_u181_rev20d/A0.06_FURRED_WOOD_HEAD_6in_above_ceiling.png",
+     "revisor": "rev20d_fw_head",
+     "rev20d_fw": true,
+     "reemplaza": "R5_secc_estr: '6/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 service hoistway; the FW.2-0 furring corridor-216 face stops at 9'-10 3/4\" (4/A5.05 '9' - 10 3/4\"' under '1' - 1 1/4\"') - different zone, take-off 9.8958 correct'"
+    },
+    {
+     "control": 7,
+     "id": "12/A6.00:FW.2-L2-06",
+     "motivo": "12/A6.00 prints only the floor-to-floor dimension; the reviewer's 9.8958 ft was the line of structure of the wall types (4/A5.05). rev20d (COORDINACION 13-nov, A0.06 FURRED WOOD - HEAD): the FW board stops 6\" above the LINE OF CEILING: A0.06 FURRED WOOD - HEAD: board to 6\" above the LINE OF CEILING; room '217 Lobby' C.H. 8'-4 1/2\" printed on 1/A7.23 (blind readings A / B, ALTURAS_CUARTOS): 8'-4 1/2\" + 6\" = 8'-10 1/2\" -> take-off 8.875 ft. Supersedes the rev20c disposition (R5_secc_estr: '12/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 hoistway (CMU, other trade); the FW.2-0 furring face in lobby 217 stops at the FS-1 membrane under the '1' - 1 1/4\"' corridor/lobby framing zone = 9'-10 3/4\" printed on 4/A5.05 (A0.10 det. 3/4 walls stop at the rated assembly) - different zone, take-off 9.8958 correct').",
+     "nhoja": "1/A7.23",
+     "img": "/root/cr/work/auditoria_u181_rev20d/A0.06_FURRED_WOOD_HEAD_6in_above_ceiling.png",
+     "revisor": "rev20d_fw_head",
+     "rev20d_fw": true,
+     "reemplaza": "R5_secc_estr: '12/A6.00 prints '11' - 0\"' floor-to-floor at the CM.8 hoistway (CMU, other trade); the FW.2-0 furring face in lobby 217 stops at the FS-1 membrane under the '1' - 1 1/4\"' corridor/lobby framing zone = 9'-10 3/4\" printed on 4/A5.05 (A0.10 det. 3/4 walls stop at the rated assembly) - different zone, take-off 9.8958 correct'"
+    }
+   ]
+  }
+ }
+}
