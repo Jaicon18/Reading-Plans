@@ -9047,6 +9047,21 @@
     "archivo": "take-off:tools/test_compuerta_entrega.py",
     "token": "test_be_cr48_disposicion_vieja"
    }
+  },
+  {
+   "id": "BE-CR0-01",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 13-nov; sesión CR DESDE CERO, commit e54ecfb; COORDINACIÓN 14-nov 03:04, U-202)",
+   "categoria": "programa",
+   "cuando": "inventario",
+   "texto_corto": "inventario_tags.verificar_png compara el tag esperado con el texto leído con la MISMA normalización I -> 1 a los dos lados (FI.2 / FI.6 / XI.2.7 salían 'PNG NO VERIFICADO')",
+   "chequeos": [
+    "take-off:tools/inventario_tags.py::coincide_tag",
+    "take-off:tools/inventario_tags.py::verificar_png"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_chequeos_biblioteca.py",
+    "token": "test_be_cr0_01_inventario_i1"
+   }
   }
  ]
 }
