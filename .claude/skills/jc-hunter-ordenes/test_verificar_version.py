@@ -581,8 +581,26 @@ def version_skill_be_xf19():
     print("version_skill_be_xf19 OK")
 
 
+def pendientes_u202():
+    """U-202: programa-pendiente > 4 h = falta; sin 'pendiente_desde' = falta; 3 h = 0; 'programa' / 'conducta' no cuentan."""
+    import datetime as _dt
+    import tempfile
+    d = tempfile.mkdtemp(prefix="u202_")
+    open(os.path.join(d, "SKILL.md"), "w").write("x")
+    ahora = _dt.datetime(2026, 11, 13, 22, 30, tzinfo=_dt.timezone.utc)
+    def corre(reglas):
+        json.dump({"reglas": reglas}, open(os.path.join(d, "REGLAS_REGISTRO.json"), "w"))
+        return V.revisar_pendientes_u202(V.Fuente(d), ahora)
+    assert corre([{"id": "BE-XF18", "categoria": "programa-pendiente", "motivo": "m", "pendiente_desde": "2026-11-13T12:33:00+00:00"}])
+    assert corre([{"id": "U-202", "categoria": "programa-pendiente", "motivo": "m", "pendiente_desde": "2026-11-13T22:01:18+00:00"}]) == []
+    assert corre([{"id": "U-9", "categoria": "programa-pendiente", "motivo": "m"}]), "sin pendiente_desde = falta"
+    assert corre([{"id": "U-9", "categoria": "programa-pendiente", "motivo": "m", "pendiente_desde": "2026-11-13 12:00"}]), "sin zona = falta"
+    assert corre([{"id": "U-8", "categoria": "conducta"}, {"id": "BE-1", "categoria": "programa"}]) == []
+    print("pendientes_u202 OK")
+
+
 def correr():
-    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17, version_skill_be_xf19):
+    for f in (revisar_registro, revisar_zip, revisar_indice, revisar_skill, revisar_banco, revisar_ordenes, hook_solo_usuario, versiones_unicas, indice_encabezado, zip_200_bexf08, postmortem_u185, tests_llamados, prueba_abiertos_be_pm04, adv4_postmortem, adv4_prueba_abiertos, adv5_v121, fechas_be_xf17, version_skill_be_xf19, pendientes_u202):
         f()
         print("ok", f.__name__)
     print("test_verificar_version OK")

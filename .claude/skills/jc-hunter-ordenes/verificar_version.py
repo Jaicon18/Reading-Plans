@@ -889,6 +889,38 @@ def revisar_version_skill(candidato):
     return [f"{x} (BE-XF19: version_fallas del candidato ≠ 0; en SKILL.md no va el literal de una versión futura)" for x in out]
 
 
+HORAS_U202 = 4.0
+
+
+def revisar_pendientes_u202(fuente, ahora=None, horas=HORAS_U202):
+    """U-202 (usuario 13-nov, COORDINACIÓN 22:01): ninguna regla queda 'programa-pendiente' más de 4 h. Cada entrada programa-pendiente del
+    registro del candidato lleva 'pendiente_desde' (ISO con zona); sin la fecha, fecha ilegible o más de 4 h = falta (bloquea)."""
+    import datetime as _dt
+    t = fuente.leer("REGLAS_REGISTRO.json")
+    if t is None:
+        return []
+    ahora = ahora or _dt.datetime.now(_dt.timezone.utc)
+    f = []
+    for e in json.loads(t).get("reglas") or []:
+        if e.get("categoria") != "programa-pendiente":
+            continue
+        d = str(e.get("pendiente_desde") or "").strip()
+        if not d:
+            f.append(f"{e['id']}: programa-pendiente sin 'pendiente_desde' (U-202: ISO de cuándo entró la regla)")
+            continue
+        try:
+            desde = _dt.datetime.fromisoformat(d.replace("Z", "+00:00"))
+            if desde.tzinfo is None:
+                raise ValueError("sin zona")
+        except ValueError:
+            f.append(f"{e['id']}: 'pendiente_desde' ilegible '{d}' (ISO con zona, U-202)")
+            continue
+        h = (ahora - desde).total_seconds() / 3600
+        if h > horas:
+            f.append(f"{e['id']}: programa-pendiente desde {d} = {h:.1f} h > {horas:g} h (U-202): su chequeo + test se escribe y publica ya")
+    return f
+
+
 def main(argv):
     if argv[1:] == ["--selftest"]:
         return selftest()
@@ -923,10 +955,12 @@ def main(argv):
     pa = revisar_prueba_abiertos(archivo, Fuente(candidato), cache=extra[0] if extra else None)
     fp = revisar_fechas(Fuente(candidato), os.path.dirname(os.path.abspath(archivo)))
     vf = revisar_version_skill(candidato)
+    pu = revisar_pendientes_u202(Fuente(candidato))
     for nombre, xs in (("REGISTRO (BE-121)", reg), ("ZIP (U-020)", zp), ("INDICE (U-027)", ix), ("SKILL (BE-87 / BE-VS-11)", sk),
                        ("BANCO (U-043)", bc), ("ORDENES (U-136)", od), ("VERSIONES (BE-144)", vu),
                        ("POSTMORTEM (U-185)", pm), ("TESTS SIN LLAMAR (BE-CR42)", tl), ("PRUEBA ABIERTOS (NO GUARD 3.1)", pa),
-                       ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp), ("VERSION DEL SKILL.md (BE-XF19)", vf)):
+                       ("FECHAS DE PUBLICACIÓN (BE-XF17)", fp), ("VERSION DEL SKILL.md (BE-XF19)", vf),
+                       ("PENDIENTES > 4 h (U-202)", pu)):
         if xs:
             malo = True
             print(f"{nombre}: {len(xs)} falta(s)")

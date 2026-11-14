@@ -8945,10 +8945,17 @@
   {
    "id": "U-202",
    "origen": "ORDENES_DEL_USUARIO.md (usuario 13-nov, commit 64b0e63): 'las reglas que te esté dando las tienes que ejecutar en ese mismo momento… si te esperas hasta el final del día… eso es lo que pasa'",
-   "categoria": "programa-pendiente",
+   "categoria": "programa",
    "cuando": "publicación",
    "texto_corto": "toda regla nueva se ejecuta EN ESE MOMENTO: su chequeo + test se escribe y se publica en cuanto pasa suite / banco / verificar_version (una versión por chequeo, sin juntar); nada queda 'programa-pendiente' más de 4 h",
-   "motivo": "el chequeo de U-202 (verificar_version FALLA si una regla lleva > 4 h como programa-pendiente) se escribe y publica en la siguiente versión de inmediato (COORDINACIÓN 22:01)"
+   "motivo": "v81cf138m: verificar_version.revisar_pendientes_u202 = toda regla 'programa-pendiente' lleva 'pendiente_desde' (ISO con zona) y FALLA a las 4 h (bloquea arranque y publicación); en v81cf138m no queda ninguna programa-pendiente (BE-CR45/46, BE-XF18, U-201 programadas en e..k)",
+   "chequeos": [
+    "ordenes:verificar_version.py::revisar_pendientes_u202"
+   ],
+   "test": {
+    "archivo": "ordenes:test_verificar_version.py",
+    "token": "pendientes_u202"
+   }
   },
   {
    "id": "U-203",
