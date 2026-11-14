@@ -9121,6 +9121,34 @@
     "archivo": "take-off:tools/test_chequeos_biblioteca.py",
     "token": "test_be_cr0_04_ambiguo_type_id"
    }
+  },
+  {
+   "id": "BE-CR0-05",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 150b3c2, U-202)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "comparar_alturas.alturas_revisadas: cuando la lista de walls de una altura llena la página (y + 6 > 540) la imagen va en una página de continuación (antes 'rect must be finite and not empty' y CE_ALTURAS_EXTREMO se caía con cientos de walls a la misma altura)",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::alturas_revisadas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr0_05_06_alturas_lista_larga"
+   }
+  },
+  {
+   "id": "BE-CR0-06",
+   "origen": "BIBLIOTECA_ERRORES.md (CR desde cero 14-nov; sesión CR DESDE CERO, commit 150b3c2, U-202)",
+   "categoria": "programa",
+   "cuando": "entrega",
+   "texto_corto": "comparar_alturas: un Page Label por página creada (continuaciones y secciones incluidas) y assert labels == páginas (antes 'DOUBLE CEILING 9' duplicado)",
+   "chequeos": [
+    "take-off:tools/comparar_alturas.py::alturas_revisadas"
+   ],
+   "test": {
+    "archivo": "take-off:tools/test_comparar_alturas.py",
+    "token": "test_be_cr0_05_06_alturas_lista_larga"
+   }
   }
  ]
 }
